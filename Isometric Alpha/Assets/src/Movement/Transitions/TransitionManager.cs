@@ -76,7 +76,8 @@ public class TransitionManager : MonoBehaviour
         {
             if (currentTransition.sharesHash(destinationTransition))
             {
-                PlayerMovement.getTransform().position = AreaManager.getMasterGrid().GetCellCenterWorld(destinationTransition.getOutPutCellCoords()); 
+                PlayerMovement.getTransform().position = AreaManager.getMasterGrid().GetCellCenterWorld(destinationTransition.getOutPutCellCoords());
+                State.playerFacing.setFacing(destinationTransition.playerSpawnDirection);
                 MovementManager.instance.addPlayerSprite(PlayerMovement.getTransform());
                 return;
             }

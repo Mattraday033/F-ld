@@ -112,7 +112,6 @@ namespace Ink.UnityIntegration {
 		void OnEnable () {
 			// Oh gosh Unity never unloads ScriptableObjects once created! We destroy these objects before we recompile so there's only ever one in memory at once.
 			AssemblyReloadEvents.beforeAssemblyReload += () => {
-                Debug.LogError("1 Destroying");
 				DestroyImmediate(this);
 			};
 			// Validate the includeFilesToCompileAsMasterFiles list.

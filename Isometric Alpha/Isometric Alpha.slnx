@@ -1,6 +1,7 @@
 ﻿<Solution>
   <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="RBG.Mulligan.csproj" />
   <Project Path="Ink-Libraries.csproj" />
   <Project Path="InkEditor.csproj" />
 </Solution>
