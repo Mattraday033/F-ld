@@ -1,0 +1,553 @@
+using System;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using TMPro;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityEngine;
+
+public class ShopUIManager : MonoBehaviour
+{
+	
+	private Shopkeeper currentShopkeeper;
+	private GameObject currentDescriptionPanel;
+
+	public DescriptionPanel useItemDescriptionPanel;
+	public DescriptionPanel armorDescriptionPanel;
+	public DescriptionPanel weaponDescriptionPanel;
+	public DescriptionPanel essentialAndTreasureItemDescriptionPanel;
+	
+	public GameObject junkDisclaimerAndSellAllParent;
+	public Button sellAllJunkButton;
+	public AmountPanel amountToBuyOrSellPanel;	
+	
+	private InventoryRow currentInventoryRow;
+	private Item itemBeingDescribed;
+	
+	public GameObject dialogueUI;
+	public GameObject OOCUI;
+	public GameObject shopCanvas;
+	
+	public GameObject costColumnTitle;
+	public GameObject worthColumnTitle;
+	
+	public Button[] buyTabs;
+	public Button[] sellTabs;
+	
+	public InventoryGrid inventoryGrid;
+	
+	public static ArrayList listOfInventoryPanels = new ArrayList();
+	
+	private bool escPressed = false;
+	public bool buyMode = true;
+	private string oldInput = "";
+	
+	public TextMeshProUGUI totalPlayerGold;
+	
+	public GameObject buyScreenLeftButtons;
+	public GameObject sellScreenLeftButtons;
+	
+	public Button topBuyButton;
+	public Button topSellButton;
+	
+	private static ShopUIManager instance;
+	
+	public bool inShopUI = false;
+	
+	public static GameObject[] escapableObjects = new GameObject[3];
+
+	private void Awake(){
+		if(instance != null){
+			Debug.LogWarning("Found more than one ShopUIManager in the scene.");
+		}
+		
+		instance = this;
+	}
+	
+	public void handleESCPress(){
+		
+		if(escapableObjects[0] != null)
+		{
+			for(int i = 2; i >= 0; i--){
+			
+				if(escapableObjects[i] != null)
+				{
+					escapableObjects[i].SetActive(false);
+					escapableObjects[i] = null;
+					
+					if(i == 0 && currentInventoryRow != null && escapableObjects[i] == null)
+					{
+						currentInventoryRow.enableButtons();
+						amountToBuyOrSellPanel.gameObject.SetActive(false);
+					}
+					break;
+				}
+			}
+		} else
+		{
+			leaveShopUI();
+		}
+	}
+	
+	
+	public static ShopUIManager getInstance()
+	{
+		return instance;
+	}
+	
+
+	public void enterShopUI(Shopkeeper shopkeeper)
+	{
+		currentShopkeeper = shopkeeper;
+		
+		dialogueUI.SetActive(false);
+		OOCUI.SetActive(false);
+		shopCanvas.SetActive(true);
+		
+		inShopUI = true;
+		
+		buyMode = true;
+		setTabToNonInteractable(0);
+		
+		buyMode = false;
+		setTabToNonInteractable(0);
+		
+		updateGold();
+		
+		revealBuyScreen();
+	}
+	
+	public void leaveShopUI()
+	{
+		updateGold();
+		
+		shopCanvas.SetActive(false);
+		dialogueUI.SetActive(true);
+		
+		OOCUI.SetActive(true);
+		
+		inShopUI = false;
+		
+		checkForQuestItems();
+	}
+
+	public void updateGold()
+	{
+		totalPlayerGold.text = "" + Purse.getCoinsInPurse();
+	}
+
+	public void setTabToNonInteractable(int targetTabIndex)
+	{
+		Button[] targetTabs;
+		
+		if(buyMode)
+		{
+			targetTabs = buyTabs;
+		} else
+		{
+			targetTabs = sellTabs;
+		}
+		
+		for(int tabIndex = 0; tabIndex < targetTabs.Length; tabIndex++)
+		{
+			if(tabIndex == targetTabIndex)
+			{
+				targetTabs[tabIndex].interactable = false;
+			} else 
+			{
+				targetTabs[tabIndex].interactable = true;
+			}
+		}
+	}
+
+	public void revealBuyScreen()
+	{
+		buyMode = true;
+		
+		topBuyButton.interactable = false;
+		topSellButton.interactable = true;
+		
+		sellScreenLeftButtons.SetActive(false);
+		buyScreenLeftButtons.SetActive(true);
+		
+		costColumnTitle.SetActive(true);
+		worthColumnTitle.SetActive(false);
+
+		amountToBuyOrSellPanel.placeInToMode();
+
+		hideCurrentDescriptionPanel();
+		
+		populateInventoryGrid();
+	}
+	
+	public void revealSellScreen()
+	{
+		buyMode = false;
+		
+		topSellButton.interactable = false;
+		topBuyButton.interactable = true;
+		
+		buyScreenLeftButtons.SetActive(false);
+		sellScreenLeftButtons.SetActive(true);
+		
+		costColumnTitle.SetActive(false);
+		worthColumnTitle.SetActive(true);
+		
+		amountToBuyOrSellPanel.placeInFromMode();
+		
+		hideCurrentDescriptionPanel();
+		
+		populateInventoryGrid();
+	}
+	
+	public void setCurrentInventoryRow(InventoryRow invRow)
+	{
+		if(currentInventoryRow != null)
+		{
+			currentInventoryRow.enableButtons();
+		}
+		currentInventoryRow = invRow;
+	}
+	
+	public void populateInventoryGrid()
+	{
+		hideCurrentDescriptionPanel();
+		
+		if(buyMode && (getCurrentTab().ToLower().Equals("item") || 
+					   getCurrentTab().ToLower().Equals("equip")))
+		{
+			inventoryGrid.showingShopkeeperInventory = true;
+		} else
+		{
+			inventoryGrid.showingShopkeeperInventory = false;
+		}
+		
+		inventoryGrid.populateItemPanels(getCurrentDisplayPocket());
+		
+		if(getCurrentTab().ToLower().Equals("junk"))
+		{
+			junkDisclaimerAndSellAllParent.SetActive(true);
+			
+			if(State.junkPocket.Count == 0)
+			{
+				sellAllJunkButton.interactable = false;
+			} else
+			{
+				sellAllJunkButton.interactable = true;
+			}	
+		} else
+		{
+			junkDisclaimerAndSellAllParent.SetActive(false);
+		}
+	}
+	
+	public string getCurrentTab(){
+		
+		if(buyMode)
+		{
+			if(!buyTabs[0].interactable){
+				return "Item";
+			} else if(!buyTabs[1].interactable){
+				return "Equip";
+			} else if(!buyTabs[2].interactable){
+				return "Buy Back";
+			} else {
+				throw new IOException("in buy mode but no buy tabs are noninteractable");
+			}
+			
+		} else
+		{
+			if(!sellTabs[0].interactable){
+				return "Item";
+			} else if(!sellTabs[1].interactable){
+				return "Equip";
+			} else if(!sellTabs[2].interactable){
+				return "Junk";
+			} else {
+				throw new IOException("in sell mode but no sell tabs are noninteractable");
+			}
+		}
+	}
+	
+	//gets current pocket, without running Inventory.getPocketForDisplay so the returned pocket won't be sorted
+	public Dictionary<string, Item> getCurrentPocket()
+	{
+		if(buyMode && getCurrentTab().ToLower().Equals("item"))
+		{
+			return currentShopkeeper.getInventory();	
+			
+		} else if(buyMode && getCurrentTab().ToLower().Equals("equip"))
+		{
+			return currentShopkeeper.getInventory();
+			
+		} else if(buyMode && getCurrentTab().ToLower().Equals("buy back"))
+		{
+			return currentShopkeeper.getBuyBackInventory();	
+			
+		} else if(getCurrentTab().ToLower().Equals("item"))
+		{
+			return State.inventory;
+			
+		} else if(getCurrentTab().ToLower().Equals("equip"))
+		{
+			return State.inventory;
+			
+		} else if(getCurrentTab().ToLower().Equals("junk"))
+		{
+			return State.junkPocket;
+		}
+		
+		throw new IOException("not able to tell what tab we're on.");
+	}
+
+	//gets you the current pocket already sorted for display purposes
+	public Dictionary<string, Item> getCurrentDisplayPocket()
+	{
+		if(buyMode && getCurrentTab().Equals("Item"))
+		{
+			return Inventory.getPocketForDisplay(currentShopkeeper.getInventory(), new string[]{"healing","quest","key"});	
+			
+		} else if(buyMode && getCurrentTab().Equals("Equip"))
+		{
+			return Inventory.getPocketForDisplay(currentShopkeeper.getInventory(), new string[]{"armor","weapon"});
+			
+		} else if(buyMode && getCurrentTab().Equals("Buy Back"))
+		{
+			return Inventory.getPocketForDisplay(currentShopkeeper.getBuyBackInventory(), new string[]{"healing","key","quest","armor","weapon"});
+			
+		} else if(getCurrentTab().Equals("Item"))
+		{
+			return Inventory.getPocketForDisplay(State.inventory, new string[]{"healing"});
+			
+		} else if(getCurrentTab().Equals("Equip"))
+		{
+			return Inventory.getPocketForDisplay(State.inventory, new string[]{"armor","weapon"});
+			
+		} else if(getCurrentTab().Equals("Junk"))
+		{
+			return Inventory.getPocketForDisplay(State.junkPocket, new string[]{"treasure","healing","key","quest","armor","weapon"});
+		}
+		
+		throw new IOException("not able to tell what tab we're on.");
+	}
+	
+	public void revealAndPopulateDescriptionPanel(){
+		
+		itemBeingDescribed = Inventory.getItem(currentInventoryRow.nameText.text, getCurrentPocket());
+
+		revealBuySellAmountPanel();
+
+		if(itemBeingDescribed.getType().ToLower().Equals("use"))
+		{
+			currentDescriptionPanel = useItemDescriptionPanel.gameObject;
+			currentDescriptionPanel.SetActive(true);
+			
+			useItemDescriptionPanel.setItemBeingDescribed(itemBeingDescribed);
+			useItemDescriptionPanel.populateDescriptionPanels();
+			
+		} else if(itemBeingDescribed.getSubtype().ToLower().Equals("armor"))
+		{
+			
+			currentDescriptionPanel = armorDescriptionPanel.gameObject;
+			currentDescriptionPanel.SetActive(true);
+			
+			armorDescriptionPanel.setItemBeingDescribed(itemBeingDescribed);
+			armorDescriptionPanel.populateDescriptionPanels();
+			
+		} else if(itemBeingDescribed.getSubtype().ToLower().Equals("weapon"))
+		{
+			currentDescriptionPanel = weaponDescriptionPanel.gameObject;
+			currentDescriptionPanel.SetActive(true);
+			
+			weaponDescriptionPanel.setItemBeingDescribed(itemBeingDescribed);
+			weaponDescriptionPanel.populateDescriptionPanels();
+			
+		} else
+		{
+			currentDescriptionPanel = essentialAndTreasureItemDescriptionPanel.gameObject;
+			currentDescriptionPanel.SetActive(true);
+			
+			essentialAndTreasureItemDescriptionPanel.setItemBeingDescribed(itemBeingDescribed);
+			essentialAndTreasureItemDescriptionPanel.populateDescriptionPanels();
+		}
+		
+		if(buyMode && (getCurrentTab().ToLower().Equals("item") || 
+					   getCurrentTab().ToLower().Equals("equip")))
+		{
+			currentDescriptionPanel.GetComponent<DescriptionPanel>().showingShopkeeperInventory = true;
+			currentDescriptionPanel.GetComponent<DescriptionPanel>().updateWorth();
+		} else
+		{
+			currentDescriptionPanel.GetComponent<DescriptionPanel>().showingShopkeeperInventory = false;
+			currentDescriptionPanel.GetComponent<DescriptionPanel>().updateWorth();
+		}
+		
+		escapableObjects[0] = currentDescriptionPanel;
+	}
+	
+	public void hideCurrentDescriptionPanel()
+	{
+		if(escapableObjects[0] != null)
+		{
+			handleESCPress();
+		}
+	}
+	
+	public void revealBuySellAmountPanel()
+	{
+		amountToBuyOrSellPanel.gameObject.SetActive(true);
+		
+		//amountToBuyOrSellPanel.itemBeingDescribed = itemBeingDescribed;
+		
+		if(buyMode)
+		{
+			amountToBuyOrSellPanel.placeInToMode();
+		} else
+		{
+			amountToBuyOrSellPanel.placeInFromMode();
+		}
+		
+		amountToBuyOrSellPanel.setMax(getMax());
+		
+		if(getMax() == 0)
+		{
+			amountToBuyOrSellPanel.setInputToMax();
+			amountToBuyOrSellPanel.disableAmountPanel();
+		} else 
+		{	
+			amountToBuyOrSellPanel.enableAmountPanel();
+			amountToBuyOrSellPanel.setInputToOne();
+		}
+		
+	}
+	
+	public Item getItemBeingDescribed()
+	{
+		return itemBeingDescribed;
+	}
+	
+	
+	private int getMax()
+	{
+		int max = 0;
+		
+		if(buyMode)
+		{
+			max = (int) (Purse.getCoinsInPurse() / (getItemBeingDescribed().getWorth() * State.playerStats.getCostCoefficient()));
+		
+			if(itemBeingDescribed.getQuantity() > max)
+			{	
+				return max;
+			} 
+		} 
+		
+		return getItemBeingDescribed().getQuantity();
+	}
+	
+	public void buyItem()
+	{
+		
+		Item itemsBeingBought = (Item) itemBeingDescribed.Clone();
+		
+		itemsBeingBought.setQuantity(amountToBuyOrSellPanel.getAmount());
+		
+		if(getCurrentTab().ToLower().Equals("buy back"))
+		{
+			Purse.removeCoins(amountToBuyOrSellPanel.getTotalWorth());
+		} else
+		{
+			Purse.removeCoins(amountToBuyOrSellPanel.getTotalCost());
+		}
+		
+		Inventory.removeItem(itemsBeingBought, itemsBeingBought.getQuantity(), getCurrentPocket());
+		
+		Inventory.addItem(itemsBeingBought, State.inventory);
+		
+		handleESCPress();
+		
+		updateGold();
+		
+		populateInventoryGrid();
+	}
+	
+	public void sellItem()
+	{
+		
+		Item itemsBeingSold = (Item) itemBeingDescribed.Clone();
+		
+		itemsBeingSold.setQuantity(amountToBuyOrSellPanel.getAmount());
+		
+		Purse.addCoins(amountToBuyOrSellPanel.getTotalWorth());
+		
+		Inventory.removeItem(itemsBeingSold, itemsBeingSold.getQuantity(), getCurrentPocket());
+		
+		if(!itemsBeingSold.getType().ToLower().Equals("treasure"))
+		{
+			Inventory.addItem(itemsBeingSold, currentShopkeeper.getBuyBackInventory());
+		}
+		
+		handleESCPress();
+		
+		updateGold();
+		
+		populateInventoryGrid();
+		
+	}
+	
+	private void sellItem(Item itemsBeingSold)
+	{
+		sellItem(itemsBeingSold, itemsBeingSold.getQuantity());
+		
+	}
+	
+	private void sellItem(Item itemsBeingSold, int quantity)
+	{
+		itemsBeingSold = (Item) itemsBeingSold.Clone();
+		
+		Purse.addCoins(itemsBeingSold.getWorth()*quantity);
+		
+		Inventory.removeItem(itemsBeingSold, quantity, getCurrentPocket());
+		
+		if(!itemsBeingSold.getType().ToLower().Equals("treasure"))
+		{
+			Inventory.addItem(itemsBeingSold, currentShopkeeper.getBuyBackInventory());
+		}
+	}
+	
+	public void sellAllJunk()
+	{
+		if(State.junkPocket.Count == 0)
+		{
+			return;
+		} 
+		
+		for(int junkItemIndex = (State.junkPocket.Count-1); junkItemIndex >= 0; junkItemIndex--)
+		{
+			sellItem(State.junkPocket[State.junkPocket.ElementAt(junkItemIndex).Value.getKey()]);
+		}			
+		
+		updateGold();
+		
+		populateInventoryGrid();
+	}
+	
+	private void checkForQuestItems()
+	{
+		Quest stockhouseStash = QuestList.getQuest("Stockhouse Stash");
+		
+		if(stockhouseStash.active)
+		{
+			if(!Inventory.pocketContainsItem("Iron Nugget", State.junkPocket))
+			{
+				stockhouseStash.active = true;
+				stockhouseStash.finished = true;
+				stockhouseStash.succeeded = true;
+				
+				stockhouseStash.steps[12].active = true;
+				stockhouseStash.currentStepIndex = 12;
+			}
+		}
+	}
+}

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba7ee2dbc650684ea56655081bcfe68, type: 3}
+  m_Name: Quadruple Horizontal
+  m_EditorClassIdentifier: 
+  name: Quadruple Horizontal
+  selfTargeting: 0
+  singleTile: 0
+  startUpperBounds: 2
+  startRightBounds: 3
+  startLeftBounds: 0
+  startLowerBounds: 2
+  upperBounds: 0
+  rightBounds: 0
+  leftBounds: 0
+  lowerBounds: 0
+  startRow: 2
+  startCol: 1
+  currentRow: 2
+  currentCol: 1
+  childTileAdjustments:
+  - row: 0
+    col: 1
+  - row: 0
+    col: -1
+  - row: 0
+    col: 2

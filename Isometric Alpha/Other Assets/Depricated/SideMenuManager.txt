@@ -1,0 +1,260 @@
+using System.Collections;
+using System.Collections.Generic;
+using Cinemachine;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+public class SideMenuManager : MonoBehaviour
+{
+	
+	public GameObject testButtons; //buttons that populate inventory and other things for testing
+	public GameObject statGrid;   //panelSet that holds all of the stats in the top left
+	public GameObject leftMenu;	  //panel that holds all the buttons
+	public GameObject allScreens; //game object that is the parent of all screens
+	
+	public GameObject[] screens; //each individual screen
+	public GameObject[] leftMenuButtons; //each individual button in the left menu
+	public GameObject[] canvases; // each canvas used in the side menu
+	
+	public SaveManager saveManager;
+	public InventoryUIManager inventoryUIManager;
+	public EquipmentManager equipmentManager;
+	public JournalManager journalManager;
+	public StatsManager statsManager;
+	
+	private static GameObject[] escapableObjects = new GameObject[4]; //list of GameObjects that hitting esc will deactivate
+	private static Button currentLeftMenuButton;
+	
+	public Camera mainCamera;
+	//public CinemachineVirtualCamera mainCM;
+	
+	private static SideMenuManager instance;
+	
+	private void Awake()
+	{
+		if(instance != null){
+			Debug.LogWarning("Found more than one SideMenuManager in the scene.");
+		}
+		
+		instance = this;
+	}
+	
+	public static SideMenuManager getInstance()
+	{
+		return instance;
+	}
+	
+	void Start()
+	{
+		setCameras();
+		
+		if(SceneManager.GetActiveScene().name.Contains("StartMenu"))
+		{
+			activateSaveScreenOnMainMenu();
+		}
+	}
+	
+	public static GameObject getEscapableObject(int index)
+	{
+		return escapableObjects[index];
+	}
+	
+	public static void setEscapableObject(int index, GameObject newEscapableObject)
+	{
+		for(int objectIndex = escapableObjects.Length-1; objectIndex >= index; objectIndex--)
+		{
+			if(escapableObjects[objectIndex] == null)
+			{
+				continue;
+			} else
+			{
+				handleESCPress();				
+			}
+		}
+		
+		escapableObjects[index] = newEscapableObject;
+		escapableObjects[index].SetActive(true);
+		
+		if(SecondaryStatDisplay.getInstance() != null && !(SecondaryStatDisplay.getInstance() is null))
+		{
+			SecondaryStatDisplay.getInstance().checkForDisplayPanelDeactivation();
+		}
+	}
+	
+	public static void handleESCPress()
+	{
+		
+		if(BookManager.readingBook)
+		{
+			BookManager.getInstance().deactivate();
+			return;
+		}
+		
+		if(escapableObjects[0] != null || 
+			escapableObjects[1] != null || 
+			escapableObjects[2] != null || 
+			escapableObjects[3] != null)
+		{
+			for(int i = 3; i >= 0; i--)
+			{
+			
+				if(escapableObjects[i] != null)
+				{
+					InventoryUIManager invUIManager = SideMenuManager.getInstance().inventoryUIManager;
+					JournalManager jManager = SideMenuManager.getInstance().journalManager;
+					EquipmentManager equipManager = SideMenuManager.getInstance().equipmentManager;
+					StatsManager statsManager = SideMenuManager.getInstance().statsManager;
+					
+					if(escapableObjects[i] == statsManager.secondaryStatDisplay.displayPanelParent)
+					{
+						statsManager.secondaryStatDisplay.deactivate();
+					}
+					
+					
+					if(escapableObjects[i] == invUIManager.currentDescriptionPanel)
+					{
+						invUIManager.itemDescisionPanel.gameObject.SetActive(false);
+						
+						if(invUIManager.currentInventoryRow != null)
+						{
+							invUIManager.currentInventoryRow.enableButtons();
+						}
+						
+					} else if(escapableObjects[i] == jManager.currentDescriptionPanel)
+					{
+						jManager.currentDescriptionPanel = null;
+						
+					} else if(escapableObjects[i] == jManager.categoryEntryParent)
+					{
+						if(jManager.getCurrentTabIndex() == 0)
+						{
+							JournalManager.currentQuest = null;
+						} else if(jManager.getCurrentTabIndex() == 1)
+						{
+							JournalManager.currentGlossaryCategory = null;
+						}
+					} else if(escapableObjects[i] == equipManager.abilityWheel)
+					{
+						equipManager.activateUnequipButtons();
+					}
+					
+					if(i == 1)
+					{
+						JournalManager.currentStatProgressionTable = null;
+					}
+					
+					escapableObjects[i].SetActive(false);
+					escapableObjects[i] = null;
+					break;
+				}
+			}
+			
+			if(escapableObjects[1] == null)
+			{
+				getInstance().equipmentManager.allEquipmentButtonsInteractable();
+			}
+
+			getInstance().saveManager.enableCurrentSaveFileRow();
+			
+			if(escapableObjects[0] == null && currentLeftMenuButton != null)
+			{
+				currentLeftMenuButton.interactable = true;
+				currentLeftMenuButton = null;
+			}
+		}
+	}
+	
+	//disable and then remove all items from escapableObjects
+	public void escapeAll()
+	{
+		for(int escapableObjectIndex = (escapableObjects.Length-1); escapableObjectIndex >= 0; escapableObjectIndex--)
+		{
+			handleESCPress();
+		}
+	}
+	
+	public void setActive()
+	{
+		statsManager.updateStatsScreen();
+		
+		testButtons.SetActive(true);
+		statGrid.SetActive(true);
+		leftMenu.SetActive(true);
+		allScreens.SetActive(true);
+		saveManager.deleteAllSaveFilePanels();
+	}
+	
+	public void setInactive()
+	{
+		deactivateAllScreens();
+		testButtons.SetActive(false);
+		statGrid.SetActive(false);
+		leftMenu.SetActive(false);
+		allScreens.SetActive(false);
+		escapeAll();
+	}
+	
+	public void activateSaveScreenOnMainMenu()
+	{
+		setInactive();
+		allScreens.SetActive(true);
+		changeScreen(4);
+		saveManager.populateSaveFilePanels();
+		saveManager.newSaveTitlePanel.SetActive(false);
+		saveManager.newSaveInputPanel.SetActive(false);
+		saveManager.saveNameField.gameObject.SetActive(false);
+		saveManager.createSaveButton.gameObject.SetActive(false);
+		
+		//DialogueManager.getInstance().disableCanvas();
+	}
+	
+	public void deactivateAllScreens()
+	{
+		
+		foreach(GameObject screen in screens)
+		{
+			screen.SetActive(false);
+		}
+		
+		escapeAll();
+	}
+	
+	public void changeScreen(int index)
+	{
+		escapeAll();
+		
+		if(saveManager.screenCanvas.worldCamera == null)
+		{
+			saveManager.screenCanvas.worldCamera = Camera.main;
+			
+			saveManager.screenCanvas.sortingLayerName = "DialogueBox";
+			saveManager.screenCanvas.sortingOrder = 1;
+		}
+		
+		foreach(GameObject screen in screens)
+		{
+			screen.SetActive(false);			
+		}
+		
+		screens[index].SetActive(true);
+
+		escapableObjects[0] = screens[index];
+		currentLeftMenuButton = leftMenuButtons[index].GetComponent<Button>();
+		currentLeftMenuButton.interactable = false;
+		
+	}
+	
+	public void setCameras(){
+		
+		mainCamera = Camera.main;
+
+		foreach(GameObject canvas in canvases){
+			
+			canvas.GetComponent<Canvas>().worldCamera = mainCamera;
+			
+		}
+
+	}
+	
+}

@@ -1,0 +1,235 @@
+using System;
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public static class ObservationManager
+{
+	
+	public static LayerMask[] layersToIgnore = new LayerMask[]{LayerAndTagManager.enemyBoundaryLayer, 
+															   LayerAndTagManager.terrainLayer, 
+															   LayerAndTagManager.trainLayer};
+	
+	public static ContactFilter2D filterCollider;
+	
+	public static bool playerIsObserving;
+	
+	public static PlayerMovement player;
+	
+	public static Vector2Int directionalModifierGrid;
+	
+	public static GameObject observeIndicator = Resources.Load<GameObject>("Observation Indicator");
+
+	public static int observeRange = 15;
+	public static int playerObserveCoords = (observeRange-1)/2; 	//is an int because x should always equal y. 
+																	//player is located at observeGrid[playerObserveCoords,playerObserveCoords]
+
+	public static GameObject[,] observeGrid = new GameObject[observeRange,observeRange];
+	
+	static ObservationManager()
+	{
+		filterCollider = new ContactFilter2D();
+		filterCollider.useTriggers = true;
+		filterCollider.SetLayerMask(LayerAndTagManager.colliderLayer);
+	}
+	
+	public static void createObservationRange()
+	{
+		OOCUIManager.getInstance().updateOOCUI();
+		
+		Vector3Int playerCoords = player.getMovementGridCoordsLocal();
+		
+		for(int row = 0; row < observeRange; row++)
+		{
+			for(int col = 0; col < observeRange; col++)
+			{
+				
+				if(gridTileIsInSight(row,col))
+				{
+					observeGrid[row,col] = GameObject.Instantiate(observeIndicator, player.gameObject.transform.parent, false);
+					observeGrid[row,col].transform.localPosition = player.movementManager.grid.GetCellCenterLocal(playerCoords + new Vector3Int(row-playerObserveCoords,col-playerObserveCoords,0));
+					Helpers.updateColliderPosition(observeGrid[row,col]);
+				}
+				
+				/*if(observeGrid[row,col] != null && 
+					((Helpers.hasCollision(observeGrid[row,col].GetComponent<Collider2D>()) && !Helpers.hasCollision(observeGrid[row,col].GetComponent<Collider2D>(), layersToIgnore)) 
+					|| (row == playerObserveCoords && col == playerObserveCoords)))
+				{
+					observeGrid[row,col].GetComponent<SpriteRenderer>().color = Color.cyan;
+				}*/
+				
+			}
+		}
+			
+		cullObservationRange();
+		observeWithinRange();
+	}
+	
+	public static bool gridTileIsInSight(int row, int col)
+	{	
+		
+		if(player.playerFacing.getFacing().Equals(Facing.NorthEast))
+		{                                        									
+			return (row >= playerObserveCoords && col >= (observeRange-(row+1)) && col <= (observeRange - (observeRange-row)));
+		}
+		
+		if(player.playerFacing.getFacing().Equals(Facing.NorthWest))
+		{
+			return ((col >= (observeRange - (row+1)) && row <= playerObserveCoords) || (col >= row && row >= playerObserveCoords));
+		}
+		
+		if(player.playerFacing.getFacing().Equals(Facing.SouthWest))
+		{
+			return (col >= row && col < (observeRange-row));
+		}
+		
+		if(player.playerFacing.getFacing().Equals(Facing.SouthEast))
+		{											
+			return (col <= playerObserveCoords && (col <= row && (col+row) < observeRange));
+		} 
+		
+		throw new IOException("Character isn't facing any direction");
+	}
+	
+	public static void cullObservationRange()
+	{
+		ArrayList snake;
+		ArrayList colliderIndicators = new ArrayList();
+		
+		for(int i = 0; i < observeRange; i++)
+		{
+			for(int j = 0; j < observeRange; j++)
+			{
+				if(i == 0 || i == (observeRange-1) || j == 0 ||  j == (observeRange-1))
+				{
+					snake = snakeTowardCenter(new Vector2Int(i,j));
+					colliderIndicators.AddRange(cullSnake(snake));
+					
+				}
+			}
+		}			
+		
+		foreach(Vector2Int coords in colliderIndicators)
+		{
+			if(observeGrid[coords.x,coords.y] != null)
+			{
+				GameObject.Destroy(observeGrid[coords.x,coords.y]);
+				observeGrid[coords.x,coords.y] = null;
+			}
+		}
+	}
+	
+	public static ArrayList snakeTowardCenter(Vector2Int start)
+	{
+		Vector2Int currentCoords = start;
+		
+		ArrayList snake = new ArrayList();
+		
+		while(currentCoords.x != playerObserveCoords || currentCoords.y != playerObserveCoords)
+		{
+			snake.Add(currentCoords);
+			
+			if(midpointDistance(currentCoords.x) != 0)
+			{
+				currentCoords.x = nextSquare(currentCoords.x);
+			} 
+			if(midpointDistance(currentCoords.y) != 0)
+			{
+				currentCoords.y = nextSquare(currentCoords.y);
+			}
+		}
+
+		return snake;
+	}
+	
+	public static ArrayList cullSnake(ArrayList snake)
+	{
+		bool foundCollider = false;
+		ArrayList colliderIndicators = new ArrayList();
+		
+		for(int i = (snake.Count-1); i >= 0; i--)
+		{
+			Vector2Int currentCoords = (Vector2Int) snake[i];
+			snake.Remove(i);			
+			
+			if(observeGrid[currentCoords.x,currentCoords.y] == null)
+			{
+				continue; //ignore the null
+				
+			} 
+			Collider2D currentCollider = observeGrid[currentCoords.x,currentCoords.y].GetComponent<Collider2D>();
+			
+			
+			if(	observeGrid[currentCoords.x,currentCoords.y] != null && 
+						Helpers.hasCollision(currentCollider, filterCollider) &&
+						!Helpers.getCollision(currentCollider).gameObject.CompareTag("Observable"))
+			{
+				foundCollider = true;
+				colliderIndicators.Add(currentCoords); 	// store the collider for later
+				
+			} else if(observeGrid[currentCoords.x,currentCoords.y] != null && 
+						Helpers.hasCollision(currentCollider) &&
+						Helpers.getCollision(currentCollider).gameObject.CompareTag("Observable"))
+			{
+			
+				foundCollider = true;
+			
+			}else if(!foundCollider && observeGrid[currentCoords.x,currentCoords.y] != null)
+			{
+				continue; //keep the indicator
+				
+			} else if(foundCollider && observeGrid[currentCoords.x,currentCoords.y] != null)
+			{
+				GameObject.Destroy(observeGrid[currentCoords.x,currentCoords.y]);
+				observeGrid[currentCoords.x,currentCoords.y] = null;	// destroy the indicator because it's on the other side of a wall
+			}
+		}
+		
+		return colliderIndicators;
+	}
+	
+	private static int nextSquare(int current)
+	{
+		if(current > playerObserveCoords)
+		{
+			return (current-1);
+		}
+		
+		if(current < playerObserveCoords)
+		{
+			return (current+1);
+		}
+		
+		return current;
+	}
+	
+	private static int midpointDistance(int current)
+	{
+		return Math.Abs(playerObserveCoords - current);
+	}
+	
+	public static void observeWithinRange()
+	{
+		foreach(GameObject tile in observeGrid)
+		{
+			if(tile == null || tile is null)
+			{
+				continue;
+			}
+			
+			tile.GetComponent<MarkObservableObject>().detectObservableObject();
+		}
+	}
+	
+	public static void destroyObservationRange()
+	{
+		OOCUIManager.getInstance().updateOOCUI();
+		
+		foreach(GameObject tile in observeGrid)
+		{
+			GameObject.Destroy(tile);
+		}
+	}
+	
+}

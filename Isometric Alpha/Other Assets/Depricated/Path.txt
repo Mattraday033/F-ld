@@ -1,0 +1,47 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public interface IComponent
+{
+	public GameObject getGameObject();
+}
+
+public class Path : MonoBehaviour, IComponent
+{
+	public LineRenderer lineRenderer;
+	public Transform[] points;
+
+	void Update() //here for Animation
+	{
+		setPoints();
+	}
+	
+	public void setPoints(Transform[] newPoints)
+	{
+		points = newPoints;
+		lineRenderer.positionCount = points.Length;
+		
+		setPoints();
+	}
+	
+	public void setPoints()
+	{
+		
+		for(int pointIndex = 0; pointIndex < points.Length; pointIndex++)
+		{
+			lineRenderer.SetPosition(pointIndex, points[pointIndex].position);
+		}
+	}
+
+	public GameObject getGameObject()
+	{
+		return gameObject;
+	}
+
+    internal static string GetExtension(string f)
+    {
+        throw new NotImplementedException();
+    }
+}

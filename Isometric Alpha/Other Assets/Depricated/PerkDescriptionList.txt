@@ -1,0 +1,101 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.IO;
+using Newtonsoft.Json;
+
+public static class PerkDescriptionList
+{
+
+	private static string pathToPerksFolder = "./Assets/Perks/";
+	
+	private static string statPerksFolderName = "StatPerks/";
+	private static string strengthPerksFolderName = "Strength/";
+	private static string dexterityPerksFolderName = "Dexterity/";
+	private static string wisdomPerksFolderName = "Wisdom/";
+	private static string charismaPerksFolderName = "Charisma/";
+	
+	private static string jsonFileExtension = ".json";
+
+	public static StatProgressionTable[] statProgressionTables = new StatProgressionTable[4];
+	private static int strengthTableIndex = 0;
+	private static int dexterityTableIndex = 1;
+	private static int wisdomTableIndex = 2;
+	private static int charismaTableIndex = 3;
+
+	static PerkDescriptionList()
+	{
+		instantiate();
+	}
+
+	public static void instantiate()
+	{
+		statProgressionTables[strengthTableIndex] = new StatProgressionTable("Strength Progression", pathToPerksFolder + statPerksFolderName + strengthPerksFolderName);
+		
+		statProgressionTables[dexterityTableIndex] = new StatProgressionTable("Dexterity Progression", pathToPerksFolder + statPerksFolderName + dexterityPerksFolderName);
+		
+		statProgressionTables[wisdomTableIndex] = new StatProgressionTable("Wisdom Progression", pathToPerksFolder + statPerksFolderName + wisdomPerksFolderName);
+		
+		statProgressionTables[charismaTableIndex] = new StatProgressionTable("Charisma Progression", pathToPerksFolder + statPerksFolderName + charismaPerksFolderName);
+	}
+
+	public static StatProgressionTable getStatProgressionTable(string statTableName)
+	{
+		if(statTableName.ToLower().Contains("str"))
+		{
+			return statProgressionTables[strengthTableIndex];
+		} else if(statTableName.ToLower().Contains("dex"))
+		{
+			return statProgressionTables[dexterityTableIndex];
+		} else if(statTableName.ToLower().Contains("wis"))
+		{
+			return statProgressionTables[wisdomTableIndex];
+		} else if(statTableName.ToLower().Contains("cha"))
+		{
+			return statProgressionTables[charismaTableIndex];
+		}
+		
+		throw new IOException("Unrecognized statTableName: " + statTableName);
+	}
+
+/*
+	public static GlossaryEntry getEntry(string category, string title)
+	{
+		foreach(GlossaryEntry glossaryEntry in listOfAllGlossaryEntries)
+		{
+			if(glossaryEntry.category.Equals(category) &&
+				glossaryEntry.title.Equals(title))
+			{
+				return glossaryEntry;
+			}
+		}
+		
+		throw new IOException("No such glossary entry matching (Category: " + category + ", Title: " + title + ").");
+	}
+
+	private static GlossaryEntry convertJsonToGlossaryEntry(string fileName){
+		
+		string category;
+		string journalDescription;
+		string weaponRangeName;
+		
+		string filePath = pathToGlossaryFolder + fileName + jsonFileExtension;
+		
+		string jsonString = File.ReadAllText(filePath);
+		
+		dynamic jsonDynamic = JsonConvert.DeserializeObject<dynamic>(jsonString);
+		
+		GlossaryEntry glossaryEntry = new GlossaryEntry();
+		
+		glossaryEntry.category = jsonDynamic["category"];
+		glossaryEntry.title = jsonDynamic["title"];
+		glossaryEntry.journalDescription = jsonDynamic["journalDescription"];
+		glossaryEntry.weaponRange = jsonDynamic["weaponRange"];
+		
+		glossaryEntry.displayAdjustmentX = jsonDynamic["displayAdjustmentX"];
+		glossaryEntry.displayAdjustmentY = jsonDynamic["displayAdjustmentY"];
+		
+		return glossaryEntry;
+	}
+*/
+}

@@ -1,0 +1,21 @@
+{
+	"title": "Find Guard Márcos",
+	"numberOfSteps": 3,
+	"steps": [
+		{
+			"stepName": "Find Guard Márcos",
+			"MapZone":"MineLvl_3","MapLocation":"MineLvl_3-MinerCamp","journalDescription": "Overseer Gáspár was none too happy that I rescued him and his subordinates on the third level of the mine. For my efforts, I was told to wander around in the dark until I stumbled on Guard Márcos and return him to Gáspár dead or alive. I wonder if Márcos will be any happier to see me than Gáspár was."
+		},
+		{
+			"stepName": "Márcos has been found.",
+			"MapZone":"MineLvl_3","MapLocation":"MineLvl_3-3b","journalDescription": "I found Guard Márcos. I should return to Overseer Gáspár, who has taken up a new post at the gate between the mine's second and third levels."
+		},
+		{
+			"stepName": "Returned to Gáspár.",
+			"MapZone":"","MapLocation":"","journalDescription": "I have informed Overseer Gáspár that I located Márcos."
+		}
+	],
+
+
+	"deathSteps": []
+}

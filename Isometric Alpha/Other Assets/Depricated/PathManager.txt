@@ -1,0 +1,124 @@
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PathManager : MonoBehaviour
+{
+//	private static PathManager instance;
+	
+	public MapManager mapManager;
+	public ArrayList paths;
+	
+	public void instantiatePaths(string zoneKey)
+	{
+		ArrayList allPointPairs = createPointPairs();
+		paths = new ArrayList();
+		
+		foreach(Transform[] pointPair in allPointPairs)
+		{
+			Path currentPath = Instantiate(Resources.Load<GameObject>("MapPath"), mapManager.mapPathParent).GetComponent<Path>();
+			
+			currentPath.setPoints(pointPair);
+			
+			paths.Add(currentPath);
+		}
+		
+	}
+	
+	private ArrayList createPointPairs()
+	{	
+		Grid mapBackgroundGrid = mapManager.getMapGrid();
+		ArrayList allPointPairs = new ArrayList();
+		ArrayList allMapObjects = mapManager.allMapObjects;
+		
+		foreach(GameObject mapGameObject in allMapObjects)
+		{
+			IMapObject mapObject = MapObjectList.getMapObject(mapGameObject.GetComponent<MapObjectManager>().sceneName);
+			
+			if(mapObject.getAdjacentMapObjects() == null)
+			{
+				continue;
+			}
+			
+			Transform[][] pointPairs = new Transform[mapObject.getAdjacentMapObjects().Length][];
+			
+			for(int pairIndex = 0; pairIndex < pointPairs.Length; pairIndex++)
+			{
+				pointPairs[pairIndex] = new Transform[2];
+				pointPairs[pairIndex][0] = mapGameObject.transform;
+				pointPairs[pairIndex][1] = mapManager.findTransformWithCoords(MapObjectList.getMapObject(mapObject.getAdjacentMapObjects()[pairIndex]).getCoords());
+			}
+			
+			foreach(Transform[] pointPair in pointPairs)
+			{
+				allPointPairs.Add(pointPair);
+			}
+		}
+		
+		allPointPairs = removeDuplicatePointPairs(allPointPairs);
+		
+		return allPointPairs;
+	}
+	
+	private ArrayList removeDuplicatePointPairs(ArrayList pointPairs)
+	{
+		ArrayList allUniquePointPairs = new ArrayList();
+		
+		int pointPairNumber = 1;
+		foreach(Transform[] pointPair in pointPairs)
+		{
+			if(!containsPointPair(pointPair, allUniquePointPairs))
+			{
+				allUniquePointPairs.Add(pointPair);
+			}
+			pointPairNumber++;
+		}
+		
+		return allUniquePointPairs;
+	}
+
+	private bool containsPointPair(Transform[] pointPair, ArrayList allUniquePointPairs)
+	{
+		if(allUniquePointPairs.Count == 0)
+		{
+			return false;
+		}
+		
+		foreach(Transform[] uniquePointPair in allUniquePointPairs)
+		{
+			if(pointPair[0].Equals(uniquePointPair[0]) && pointPair[1].Equals(uniquePointPair[1]))
+			{
+				return true;
+			}
+			
+			if(pointPair[0].Equals(uniquePointPair[1]) && pointPair[1].Equals(uniquePointPair[0]))
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	public void destroyPaths()
+	{
+		Helpers.destroyAllGameObjectsInList(paths, true);
+	}
+
+/*
+	public static PathManager getInstance()
+	{
+		return instance;
+	}
+
+	private void Awake()
+	{
+		if(instance != null)
+		{
+			throw new IOException("An instance of PathManager already exists");
+		}
+		
+		instance = this;
+	} */
+}

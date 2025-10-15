@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b56a6421802e639419ba85112b52f3f2, type: 3}
+  m_Name: StoneSaint
+  m_EditorClassIdentifier: 
+  combatSprite: {fileID: 3060634069565429253, guid: 1fe004e921b9a684fbb9214741fc0c9c,
+    type: 3}
+  combatSpriteName: StoneSaint
+  adjustment: {x: 0, y: -0.1, z: 0}
+  healthBar: {fileID: 4508956027060521164, guid: e341f6182d9fe9b4dad4a207648c8156,
+    type: 3}
+  healthBarManager: {fileID: 0}
+  position:
+    row: 0
+    col: 0
+  previousColor: {r: 0, g: 0, b: 0, a: 0}
+  name: Stone Saint
+  isDead: 0
+  traitNames:
+  - Master
+  - Saintly
+  currentHealth: 200
+  priorityAttacker: 0
+  lowPriorityAttacker: 1
+  armor: 150
+  spawnDetails:
+    hasSpawnDetails: 0
+    dontSpawnWhenSurprised: 0
+    allSpawnPositions: []
+    baseStatsPosition:
+      row: 0
+      col: 0
+    spritePosition:
+      row: 0
+      col: 0
+  totalHealth: 200
+  weaponIndex: 0
+  lastManStandingAbility: 0
+  chargedTraitKey: 
+  chargedActionKey: 
+  regularActionKey: Evolve
+  environmentalCombatActionKey: Scavenge Stones
+  environmentalTargetingTraitKey: EmptyGenerated3
+  spawnType: {fileID: 0}

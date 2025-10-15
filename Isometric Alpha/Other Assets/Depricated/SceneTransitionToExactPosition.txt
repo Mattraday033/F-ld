@@ -1,0 +1,103 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class SceneTransitionToExactPosition : MonoBehaviour
+{
+	public Collider2D collider;
+	
+	public FadeToBlackManager fadeToBlackManager;
+	public bool fadeToBlackOnTransition;
+	
+	public bool transitionFromLoad;
+	public bool dontLoadInPlayer;
+    public string sceneToLoad;
+	public CharacterFacing playerFacing;
+	
+    public TransitionPosition playerDestination; //where you want the player to go on the new scene
+    public TransitionPosition playerPositionObject; //the player movement scripts start position object
+	//the playerDestination TransitionPosition object in the player folder,
+	//which PlayerMovement uses in Start() to set what the players position will be when a scene loads in
+    
+	void Start()
+	{
+        if (playerFacing == null)
+        {
+            playerFacing = new CharacterFacing();
+        }
+
+        fadeToBlackManager = FadeToBlackManager.getInstance();
+		fadeToBlackOnTransition = true;
+	}
+	
+	public SceneTransitionToExactPosition(string sceneToLoad, TransitionPosition playerDestination, bool transitionFromLoad)
+	{
+		this.sceneToLoad = sceneToLoad;
+		this.playerDestination = playerDestination;
+		this.transitionFromLoad = transitionFromLoad;
+		this.playerFacing = new CharacterFacing();
+	}
+	
+	public SceneTransitionToExactPosition(string sceneToLoad, TransitionPosition playerDestination, bool transitionFromLoad, CharacterFacing playerFacing)
+	{
+		this.sceneToLoad = sceneToLoad;
+		this.playerDestination = playerDestination;
+		this.transitionFromLoad = transitionFromLoad;
+		this.playerFacing = playerFacing;
+	}
+	
+    void Update() //Depricated
+    {
+		if(this.collider == null)
+		{
+			this.collider = GetComponent<Collider2D>();
+		}
+
+        if (Helpers.hasCollision(collider, LayerAndTagManager.playerLayerMask))
+        {
+			
+			if(fadeToBlackOnTransition && !FadeToBlackManager.isBlack() && !fadeToBlackManager.currentlyFadingToBlack())
+			{
+				
+				fadeToBlackManager.setAndStartFadeToBlack();
+			
+			}
+			
+			if(!fadeToBlackOnTransition || (fadeToBlackOnTransition && FadeToBlackManager.isBlack()))
+			{
+				SceneTransitionPosition.hasPositionToUse = true;
+				SceneTransitionPosition.bankedPosition = playerDestination;
+				SceneTransitionPosition.characterFacing = playerFacing;
+				
+				//AllMonsterPackLists.setAllMonsterPackListsToReset();
+				State.currentMonsterPackList = null;
+				CunningManager.resetCunningsRemaining();
+				TrapAndButtonStateManager.removeAllActivatedTrapKeys();
+				PartyMemberPlacer.removeAllPlacedPartyMembers();
+				StepCountScriptManager.reset();
+
+                SceneChange.changeSceneToOverworld();
+			}
+        }
+    }
+	
+	//essentially the same thing as OnTriggerEnter2D but on button click (and possibly other methods)
+	public void changeScene()
+	{
+        SceneChange.changeSceneToOverworld();
+
+		SceneTransitionPosition.hasPositionToUse = transitionFromLoad;
+		SceneTransitionPosition.bankedPosition = playerDestination;
+		SceneTransitionPosition.characterFacing = playerFacing;
+	}
+	
+	
+	//when you want to add a scene (such as UI) on top of a scene that already exists
+	public void addScene(string sceneName)
+	{
+		SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+	}
+
+
+}

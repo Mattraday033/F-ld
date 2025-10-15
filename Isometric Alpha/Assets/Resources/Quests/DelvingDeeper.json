@@ -1,0 +1,15 @@
+{
+	"title": "Delving Deeper",
+	"numberOfSteps": 4,
+	"steps":[
+				{"stepName":"The first breadcrumb.","MapZone":"Manse-1F","MapLocation":"Manse-1F-3c","journalDescription":"I read a piece of Page's diary. It explains that she is the slave assigned to tutor the Director's kids, and had a hunch that there are hidden passages built into the Manse. Page thought there might be one within the Manse's library."},
+				{"stepName":"Passage Found.","MapZone":"Manse-1F","MapLocation":"","journalDescription":"I have found the hidden passage."},
+				{"stepName":"The first breadcrumb.","MapZone":"Manse-1F","MapLocation":"Manse-1F-3a","journalDescription":"I read another piece of Page's diary. This piece describes a passage way that will allow me to travel from the first floor meeting room directly into the Director's office, bypassing any defenses that the guards may have deployed. However, I will still need the key to the office to access the passageway."},
+				{"stepName":"Passage Found.","MapZone":"","MapLocation":"","journalDescription":"I have opened the hidden passage."}
+			],
+
+
+	"deathSteps":
+			[
+			]
+}

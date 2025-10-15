@@ -1,0 +1,499 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using TMPro;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityEngine;
+
+public class InventoryUIManager : MonoBehaviour
+{
+	public GameObject UIPanelPrefab;
+	
+	public ItemDescisionPanel itemDescisionPanel;
+	
+	public GameObject currentDescriptionPanel;
+	
+	//private InventoryRow currentInventoryRow;
+	
+	public Button[] inventoryTabs;
+	public static int junkTabIndex = 3;
+	
+	public GameObject inventoryGridGameObject; //panel that is parent of all elements in the inventory display grid (the scrollable part) and contains background panel
+	public InventoryGrid inventoryGrid;
+	
+	public PartyMemberSelectionScreen partyMemberHealingSelectionScreen;
+	public DescriptionPanel partyMemberHealingScreen;
+	
+	public DescriptionPanel useItemDescriptionPanel; 
+	public DescriptionPanel armorDescriptionPanel; 
+	public DescriptionPanel weaponDescriptionPanel; 
+	public DescriptionPanel essentialAndTreasureItemDescriptionPanel; 
+
+	public GameObject abilityMenuBackground;
+	public AbilityMenuManager abilityMenuManager;
+
+	public AmountPanel amountOfJunkWindow;
+
+	public EquipmentManager equipmentManager;
+	public StatsManager statsManager;
+
+	public static ArrayList listOfInventoryPanels = new ArrayList();
+	
+	public InventoryRow currentInventoryRow;
+	public Item itemBeingDescribed;
+	
+	private bool escPressed = false;
+	private string oldInput = "";
+	
+	private static InventoryUIManager instance;
+	
+	private void Awake()
+	{
+		if(instance != null){
+			Debug.LogWarning("Found more than one InventoryUIManager in the scene.");
+		}
+		
+		instance = this;
+	}
+	
+	public static InventoryUIManager getInstance()
+	{
+		return instance;
+	}
+	
+	private void closeDescriptionPanelIfItemDoesntExist()
+	{
+		if(itemBeingDescribed != null && !Inventory.pocketContainsItem(itemBeingDescribed.getKey(), getCurrentPocket()) &&
+			!abilityMenuManager.enabled)
+		{
+			itemBeingDescribed = null;
+			if(currentDescriptionPanel != null || !(currentDescriptionPanel is null))
+			{
+				SideMenuManager.handleESCPress();
+			}
+		} 
+	}
+	
+	public string getCurrentTab()
+	{
+		if(!inventoryTabs[0].interactable){
+			return "Use";
+		} else if(!inventoryTabs[1].interactable){
+			return "Equip";
+		} else if(!inventoryTabs[2].interactable){
+			return "Essential";
+		} else if(!inventoryTabs[3].interactable){
+			return "Junk";
+		}  else {
+			return null;
+		}
+		
+	}
+	
+	//gets you the current pocket already sorted for display purposes
+	public Dictionary<string, Item> getCurrentDisplayPocket()
+	{
+		if(getCurrentTab().Equals("Use"))
+		{
+			return Inventory.getPocketForDisplay(State.inventory, new string[]{"healing","restoration","book","skillreplenish"});
+			
+		} else if(getCurrentTab().Equals("Equip"))
+		{
+			return Inventory.getPocketForDisplay(State.inventory, new string[]{"armor","weapon"});
+			
+		} else if( getCurrentTab().Equals("Essential"))
+		{
+			return Inventory.getPocketForDisplay(State.inventory, new string[]{"quest","key"});
+			
+		} else if(getCurrentTab().Equals("Junk"))
+		{
+			return Inventory.getPocketForDisplay(State.junkPocket, new string[]{"treasure","healing","armor","weapon"});
+		} 
+		
+		throw new IOException("not able to tell what tab we're on.");
+	}
+	
+	//gets current pocket, without running Inventory.getPocketForDisplay so the returned pocket won't be sorted
+	public Dictionary<string, Item> getCurrentPocket()
+	{
+		if(getCurrentTab().ToLower().Equals("use"))
+		{
+			return  State.inventory;	
+			
+		} else if(getCurrentTab().ToLower().Equals("equip"))
+		{
+			return  State.inventory;
+			
+		} else if(getCurrentTab().ToLower().Equals("essential"))
+		{
+			return  State.inventory;	
+			
+		} else if(getCurrentTab().ToLower().Equals("junk"))
+		{
+			return State.junkPocket;
+		}
+		
+		throw new IOException("not able to tell what tab we're on.");
+	}
+	
+	public void populateItemPanels()
+	{
+		inventoryGrid.populateItemPanels(getCurrentDisplayPocket());
+		closeDescriptionPanelIfItemDoesntExist();
+	}
+	
+	//should check type and determine correct Description Panel Set to use then run the method needed to populate it's text fields
+	public void revealDescriptionPanelSet()
+	{
+		itemBeingDescribed = Inventory.getItem(currentInventoryRow.nameText.text, getCurrentPocket());
+
+		if(itemBeingDescribed.getType().ToLower().Equals("use"))
+		{
+			currentDescriptionPanel = useItemDescriptionPanel.gameObject;
+			currentDescriptionPanel.SetActive(true);
+			
+			useItemDescriptionPanel.setItemBeingDescribed(itemBeingDescribed);
+			useItemDescriptionPanel.populateDescriptionPanels();
+			
+			itemDescisionPanel.gameObject.SetActive(true);
+			
+		} else if(itemBeingDescribed.getSubtype().ToLower().Equals("armor"))
+		{
+			currentDescriptionPanel = armorDescriptionPanel.gameObject;
+			currentDescriptionPanel.SetActive(true);
+			
+			armorDescriptionPanel.setItemBeingDescribed(itemBeingDescribed);
+			armorDescriptionPanel.populateDescriptionPanels();
+			
+			itemDescisionPanel.gameObject.SetActive(true);
+			
+		} else if(itemBeingDescribed.getSubtype().ToLower().Equals("weapon"))
+		{
+			currentDescriptionPanel = weaponDescriptionPanel.gameObject;
+			currentDescriptionPanel.SetActive(true);
+			
+			weaponDescriptionPanel.setItemBeingDescribed(itemBeingDescribed);
+			weaponDescriptionPanel.populateDescriptionPanels();
+			
+			itemDescisionPanel.gameObject.SetActive(true);
+		} else
+		{
+			currentDescriptionPanel = essentialAndTreasureItemDescriptionPanel.gameObject;
+			currentDescriptionPanel.SetActive(true);
+			
+			essentialAndTreasureItemDescriptionPanel.setItemBeingDescribed(itemBeingDescribed);
+			essentialAndTreasureItemDescriptionPanel.populateDescriptionPanels();
+			
+			itemDescisionPanel.gameObject.SetActive(false);
+		}
+		
+		if(getCurrentTab().ToLower().Equals("junk"))
+		{
+			itemDescisionPanel.setCurrentMode(ToFromJunkMode.fromJunk);
+		} else
+		{
+			itemDescisionPanel.setCurrentMode(ToFromJunkMode.toJunk);
+		}
+		
+		itemDescisionPanel.updateEnabledButtons(itemBeingDescribed);
+		
+		SideMenuManager.setEscapableObject(1, currentDescriptionPanel);
+	}
+
+	public void handleEquipItemButtonPress()
+	{
+		string key = itemBeingDescribed.getKey();
+		
+		EquippableItem newItem = (EquippableItem) Inventory.getItem(key, getCurrentPocket());
+		
+		newItem.setQuantity(1);
+		
+		if(newItem.getSubtype().ToLower().Equals("weapon") && newItem.getSlotID() == 0)
+		{
+			activateAbilityWheel((Weapon) newItem);
+		} else
+		{
+			Inventory.removeItem(newItem, 1, getCurrentPocket());
+			
+			EquippableItem oldItem = equipmentManager.equipItem(newItem);
+			
+			if(oldItem != null)
+			{
+				Inventory.addItem(oldItem);
+			}
+		}
+		
+		populateItemPanels();
+	}
+
+	public void handleEquipFistButtonPress()
+	{
+		activateAbilityWheel(new FistAttack());
+	}
+
+	public void activateAbilityWheel(Weapon newWeapon)
+	{
+		activateAbilityWheel(new Attack(newWeapon));
+	}
+
+	public void activateAbilityWheel(CombatAction weaponAttack)
+	{
+		abilityMenuManager.updateNewCombatActionPosition(weaponAttack, 0);
+		
+		abilityMenuBackground.SetActive(true);
+		
+		if(SideMenuManager.getEscapableObject(2) != null)
+		{
+			SideMenuManager.handleESCPress();
+		}
+		
+		SideMenuManager.setEscapableObject(2, abilityMenuBackground);
+		
+		abilityMenuManager.enable();
+	}
+
+	public void selectInventoryTab(int tabIndex)
+	{
+		if(currentDescriptionPanel != null){
+			currentDescriptionPanel.SetActive(false);
+			currentDescriptionPanel = null;
+		}
+		
+		foreach(Button tab in inventoryTabs){
+			
+			tab.interactable = true;
+			
+		}
+		
+		inventoryTabs[tabIndex].interactable = false;
+	}
+
+	public int getCurrentTabIndex()
+	{
+		for(int tabIndex = 0; tabIndex < inventoryTabs.Length; tabIndex++)
+		{
+			if(!inventoryTabs[tabIndex].interactable){
+				return tabIndex;
+			}
+		}
+		
+		throw new IOException("All Inventory tabs are interactable");
+	}
+
+	public void useItemOnSelfButtonPress()
+	{		
+		UsableItem currentUsableItem = (UsableItem) Inventory.getItem(itemBeingDescribed.getKey());
+		
+		currentUsableItem.use(State.playerStats);
+		
+		if(!currentUsableItem.infiniteUses())
+		{
+			Inventory.removeItem(currentUsableItem, 1);
+		}
+		
+		if(currentUsableItem.getQuantity() < 1)
+		{
+			SideMenuManager.handleESCPress();
+		}
+		
+		updateCurrentDescriptionPanelItem(itemBeingDescribed);
+		itemDescisionPanel.updateEnabledButtons(itemBeingDescribed);
+		populateItemPanels();
+		statsManager.updateStatsScreen();
+	}
+	
+	public void populatePartyMemberHealingScreen()
+	{	
+		partyMemberHealingScreen.gameObject.SetActive(true);
+		SideMenuManager.setEscapableObject(3, partyMemberHealingScreen.gameObject);
+		
+		HealingItem healingItemBeingDescribed = (HealingItem) useItemDescriptionPanel.getItemBeingDescribed();
+		
+		partyMemberHealingScreen.nameText.text = "Use " + healingItemBeingDescribed.getKey() + " on a Party Member?";
+		partyMemberHealingScreen.hpText.text = healingItemBeingDescribed.getAmountToHeal() + " HP";
+		partyMemberHealingScreen.amountText.text = "x" + healingItemBeingDescribed.getQuantity();
+		partyMemberHealingSelectionScreen.populatePartyMemberButtons();
+		partyMemberHealingSelectionScreen.populatePartyMemberHPPanels();
+	}
+	
+	public void useItemOnCompanionButtonPress(int partyMemberIndex)
+	{		
+		bool healTarget = true;
+		
+		State.partyMembers[partyMemberIndex].stats.modifyCurrentHealth(((HealingItem) useItemDescriptionPanel.getItemBeingDescribed()).getAmountToHeal(), healTarget);
+	
+		if(!useItemDescriptionPanel.getItemBeingDescribed().infiniteUses())
+		{
+			Inventory.removeItem(useItemDescriptionPanel.getItemBeingDescribed(), 1);
+		}
+		
+		if(Inventory.inventoryContainsItem(useItemDescriptionPanel.getItemBeingDescribed().getKey()))
+		{
+			itemBeingDescribed = Inventory.getItem(useItemDescriptionPanel.getItemBeingDescribed().getKey());
+				
+			partyMemberHealingScreen.amountText.text = "x" + useItemDescriptionPanel.getItemBeingDescribed().getQuantity();
+		} else
+		{	
+			updateCurrentDescriptionPanelItem(itemBeingDescribed);
+			itemDescisionPanel.updateEnabledButtons(itemBeingDescribed);
+			
+			itemBeingDescribed = null;
+			partyMemberHealingScreen.amountText.text = "x0";
+		}
+
+		populateItemPanels();
+	}
+
+	private void updateCurrentDescriptionPanelItem(Item newItemBeingDescribed)
+	{
+		currentDescriptionPanel.GetComponent<DescriptionPanel>().setItemBeingDescribed(newItemBeingDescribed);
+	}
+
+	public void printAllItems()
+	{
+		if(State.inventory.Count == 0){
+			Debug.Log("State.inventory has no items");
+		} else{
+
+			Debug.Log("");
+			Debug.Log("State.inventory.Count() = " + State.inventory.Count);
+			Debug.Log("printAllItems() is running");
+		
+			foreach (KeyValuePair<string,Item> kvp in State.inventory)  
+			{  
+				Debug.Log(kvp.Key + " has " + kvp.Value.getQuantity());
+			}
+		}
+	}		
+
+	public void enableJunkPanel()
+	{
+		//if there's only one item, there is no need to open the junk panel to determine how many to send. just send it and return.
+		if(itemBeingDescribed.getQuantity() == 1)
+		{
+			if(getCurrentTabIndex() == 3)
+			{
+				
+				Inventory.removeItem(itemBeingDescribed, State.junkPocket);
+				Inventory.addItem(itemBeingDescribed, State.inventory);
+				
+				SideMenuManager.handleESCPress();
+				
+				populateItemPanels();
+				return;
+			} else
+			{
+
+				Inventory.removeItem(itemBeingDescribed, State.inventory);
+				Inventory.addItem(itemBeingDescribed, State.junkPocket);
+				
+				SideMenuManager.handleESCPress();
+				
+				populateItemPanels();
+				return;
+			}
+		} 
+		
+		if(getCurrentTabIndex() == 3)
+		{
+			amountOfJunkWindow.placeInFromMode();
+			amountOfJunkWindow.gameObject.SetActive(true);
+		} else
+		{
+			amountOfJunkWindow.placeInToMode();
+			amountOfJunkWindow.gameObject.SetActive(true);
+		}
+		
+		amountOfJunkWindow.setMax(itemBeingDescribed.getQuantity());
+		
+		SideMenuManager.setEscapableObject(2, amountOfJunkWindow.gameObject);
+	}
+	
+	public void sendInventoryToJunk()
+	{
+		int quantityToSend = amountOfJunkWindow.getAmount();
+		
+		Inventory.removeItem(itemBeingDescribed, quantityToSend, State.inventory);
+		
+		Item itemToBeAdded = (Item) itemBeingDescribed.Clone();
+		
+		itemToBeAdded.setQuantity(quantityToSend);
+		
+		Inventory.addItem(itemToBeAdded, State.junkPocket);
+		
+		populateItemPanels();
+		
+		SideMenuManager.handleESCPress();
+		
+		if(quantityToSend == itemBeingDescribed.getQuantity())
+		{
+			SideMenuManager.handleESCPress();
+		} else
+		{
+			itemBeingDescribed.removeQuantity(quantityToSend);
+		}
+	}
+	
+	public void sendJunkToInventory()
+	{
+		int quantityToSend = amountOfJunkWindow.getAmount();
+		
+		Inventory.removeItem(itemBeingDescribed, quantityToSend, State.junkPocket);
+		
+		Item itemToBeAdded = (Item) itemBeingDescribed.Clone();
+		
+		itemToBeAdded.setQuantity(quantityToSend);
+		
+		Inventory.addItem(itemToBeAdded, State.inventory);
+		
+		populateItemPanels();
+		
+		SideMenuManager.handleESCPress();
+		
+		if(quantityToSend == itemBeingDescribed.getQuantity())
+		{
+			SideMenuManager.handleESCPress();
+		} else
+		{
+			itemBeingDescribed.removeQuantity(quantityToSend);
+		}
+	}
+	
+	public void disableJunkPanel()
+	{
+		
+		SideMenuManager.handleESCPress();
+	}
+	
+	public void hideCurrentDescriptionPanel()
+	{
+		if(currentDescriptionPanel == null || currentDescriptionPanel is null)
+		{
+			return;
+		}
+		
+		if(SideMenuManager.getEscapableObject(2) != null)
+		{
+			SideMenuManager.handleESCPress();
+			return;
+		}
+		
+		if(SideMenuManager.getEscapableObject(1) != null)
+		{
+			SideMenuManager.handleESCPress();
+		}
+		
+	}
+	
+	public void setCurrentInventoryRow(InventoryRow invRow)
+	{
+		if(currentInventoryRow != null)
+		{
+			currentInventoryRow.enableButtons();
+		}
+		currentInventoryRow = invRow;
+	}
+
+}

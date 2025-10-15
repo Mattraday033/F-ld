@@ -1,0 +1,587 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System;
+using TMPro;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityEngine;
+
+public class EquipmentManager : MonoBehaviour {
+
+	public TextMeshProUGUI[] buttonTextObjects;
+	
+	public WeaponSlot[] mainHandWeaponSlots;
+
+	public bool debug;
+
+	public EquippableItem itemBeingDescribed;
+	public int currentMainHandWeaponSlotID;
+
+	public GameObject abilityWheel;
+	public AbilityMenuManager abilityMenuManager;
+
+	private GameObject currentDescriptionPanel;
+
+	public TextMeshProUGUI mainHandButtonText;	//slot ID 0 //artifact of previous design, never used
+	public TextMeshProUGUI offHandButtonText;	//slot ID 1
+	public TextMeshProUGUI headButtonText;		//slot ID 2
+	public TextMeshProUGUI bodyButtonText;		//slot ID 3
+	public TextMeshProUGUI handsButtonText;		//slot ID 4
+	public TextMeshProUGUI feetButtonText;		//slot ID 5
+	public TextMeshProUGUI trinketButtonText;	//slot ID 6
+	
+	public DescriptionPanel armorDescriptionPanelSet; 
+	
+	//set of panels that appears when clicking on an Armor item in the "Equippable" category. 
+	public TextMeshProUGUI armorNameDescriptionText;
+	public TextMeshProUGUI armorSubtypeDescriptionText; //This contains the "subtype" of an Armor object, i.e. "Armor" but contains the word "Type" in it's title text so that the user isn't confused
+	public TextMeshProUGUI armorSlotDescriptionText;
+	public TextMeshProUGUI armorBonusDescriptionText; 
+	public TextMeshProUGUI armorLoreDescriptionText;  
+	
+	public Button unequipArmorButton; //unused atm
+
+	public DescriptionPanel weaponDescriptionPanelSet; 
+	
+	//set of panels that appears when clicking on an Weapon item in the "Equippable" category. 
+	public TextMeshProUGUI weaponNameDescriptionText;
+	public TextMeshProUGUI weaponSubtypeDescriptionText; //This contains the "subtype" of an Weapon object, i.e. "Weapon", but contains the word "Type" in it's title text so that the user isn't confused
+	public TextMeshProUGUI weaponSlotDescriptionText;
+	public TextMeshProUGUI weaponDamDescriptionText; 
+	public TextMeshProUGUI weaponCritDescriptionText; 
+	public TextMeshProUGUI weaponLoreDescriptionText;  
+	
+	public Button unequipWeaponButton; //used when making uninteractable when you have fists equipped
+	
+	public InventoryUIManager inventoryUIManager;
+	public StatsManager statsManager;
+	
+	public EquippableItem getEquippedItem(int slotID)
+	{
+		printAll(10);
+		return State.equippedItems[slotID];
+	}
+	
+	public void populateEquipmentSlotText()
+	{
+		
+		for(int i = 0; i < mainHandWeaponSlots.Length; i++)
+		{
+			Weapon[] currentlyEquippedWeapons = getAllSavedWeaponCombatActions();
+			
+			switch(i)
+			{
+				case 0:
+				case 1:
+					populateWeaponEquipSlot(i, currentlyEquippedWeapons[i]);
+					break;
+				case 2:
+				
+					if(State.playerStats.getWeaponSlots() < 3)
+					{
+						
+						mainHandWeaponSlots[i].weaponButtonTextObject.text = "Unlocked At Str 2";
+					}
+					
+						populateWeaponEquipSlot(i, currentlyEquippedWeapons[i]);
+					break;
+				case 3:
+				
+					if(State.playerStats.getWeaponSlots() < 4)
+					{
+						mainHandWeaponSlots[i].weaponButtonTextObject.text = "Unlocked At Str 6";
+					} 
+					
+						populateWeaponEquipSlot(i, currentlyEquippedWeapons[i]);
+					break;
+				default:
+					throw new IOException("i < 0 || i > 3. Index out of bounds.");
+			} 
+		}
+		
+		for(int i = 1; i < State.equippedItems.Length; i++)
+		{
+					
+			if(i == 1 && State.equippedItems[i] == null)
+			{
+				
+				if(i == 1)
+				{	
+					equipItem(ItemList.getOffHandFist());
+				}
+				
+				
+				buttonTextObjects[i].text = State.equippedItems[i].getKey();
+				
+				buttonTextObjects[i].transform.parent.gameObject.GetComponent<Button>().enabled = true;
+				
+			} else if((i > 1) && State.equippedItems[i] == null){
+				
+				buttonTextObjects[i].text = "None";
+				
+				buttonTextObjects[i].transform.parent.gameObject.GetComponent<Button>().enabled = false;
+			} else {
+				
+				buttonTextObjects[i].text = State.equippedItems[i].getKey();
+				
+				buttonTextObjects[i].transform.parent.gameObject.GetComponent<Button>().enabled = true;
+			}
+			
+		}
+
+		if(currentDescriptionPanel != null && !(currentDescriptionPanel is null) && 
+			SideMenuManager.getEscapableObject(1) == currentDescriptionPanel)
+		{
+			SideMenuManager.handleESCPress();
+		}
+		
+		printAll(9);
+	}
+	
+	private void populateWeaponEquipSlot(int slotIndex, Weapon weaponToEquip)
+	{
+		
+		if(weaponToEquip == null)
+		{
+			mainHandWeaponSlots[slotIndex].weaponButton.enabled = false;
+			mainHandWeaponSlots[slotIndex].weaponButtonBackground.color = Color.gray;
+			mainHandWeaponSlots[slotIndex].weaponButtonIcon.sprite = null;
+			mainHandWeaponSlots[slotIndex].weaponButtonIcon.color = Color.clear;
+		} else
+		{
+			mainHandWeaponSlots[slotIndex].weaponButton.enabled  = true;
+			mainHandWeaponSlots[slotIndex].weaponButtonBackground.color = Color.white;
+			mainHandWeaponSlots[slotIndex].weaponButtonIcon.sprite = Resources.Load<Sprite>(weaponToEquip.getIconName());
+			mainHandWeaponSlots[slotIndex].weaponButtonIcon.color = Color.white;
+		}		
+	}							
+	
+	//takes item to equip, equips it to the slot held in it's slotID, and then returns the item it replaced
+	//or returns null if it didn't replace anything. Do not use to equip 2 handed weapons, that would need 
+	//to return both the main handed weapon and the off handed weapon. use equipTwoHandedWeapon() for that
+	public EquippableItem equipItem(EquippableItem itemToEquip){
+
+		EquippableItem oldItem;
+		
+		Weapon mainHandWeapon = (Weapon) State.equippedItems[0];
+
+		if(itemToEquip.getSlotID() == 1 && mainHandWeapon != null && mainHandWeapon.getIsTwoHanded() && !itemToEquip.getKey().ToLower().Equals("fist")){
+
+			oldItem = (EquippableItem) State.equippedItems[0].Clone();
+			State.equippedItems[0] = null;
+			
+		} else if(State.equippedItems[itemToEquip.getSlotID()] != null) {
+			
+			oldItem = (EquippableItem) State.equippedItems[itemToEquip.getSlotID()].Clone();
+			
+		} else {
+			
+			oldItem = null;
+		}		
+		
+		State.equippedItems[itemToEquip.getSlotID()] = (EquippableItem) itemToEquip.Clone();
+		
+		State.equippedItems[itemToEquip.getSlotID()].setQuantity(1);
+		
+		printAll(7);
+		
+		statsManager.updateStatsScreen();
+		
+		return oldItem; //might be null
+	}
+	
+	public EquippableItem[] equipTwoHandedWeapon(Weapon itemToEquip){
+		
+		EquippableItem[] oldItems = new EquippableItem[2];
+		
+		if(State.equippedItems[0] != null) {
+			
+			oldItems[0] = (EquippableItem) State.equippedItems[0].Clone();
+		} else {
+			
+			oldItems[0] = null;
+		}		
+		
+		if(State.equippedItems[1] != null) {
+			
+			oldItems[1] = (EquippableItem) State.equippedItems[1].Clone();
+		} else {
+			
+			oldItems[1] = null;
+		}		
+
+		itemToEquip.setQuantity(1);
+		
+		State.equippedItems[0] = (EquippableItem) itemToEquip.Clone(); //twoHandedWeapons must be equipped in the main hand slot
+		State.equippedItems[1] = null;
+		
+		State.equippedItems[0].setQuantity(1);
+		printAll(6);
+		
+		statsManager.updateStatsScreen();
+		
+		return oldItems; //either index slot might contain null
+	}
+	
+	public void unequip(string subtype){
+		
+		string itemName = itemBeingDescribed.getKey();
+		
+		if(itemBeingDescribed.getSlotID() == Weapon.mainHandSlotIndex)
+		{
+			unequipXthSavedWeaponCombatAction();
+		} else
+		{
+			
+			int i = 0;
+			int j = -1;
+			foreach(EquippableItem item in State.equippedItems){
+				
+				if(item != null && itemName.ToLower().Equals(item.getKey().ToLower())){
+					j = i;
+				}
+				i++;
+			}
+			
+			if(j == -1){
+				throw new IOException("No equipped item by that name found: " + itemName);
+			} else {
+				
+				if(State.equippedItems[j].getKey().Equals(ItemList.getMainHandFist().getKey()) ||
+				   State.equippedItems[j].getKey().Equals(ItemList.getOffHandFist().getKey())
+				  )
+				{
+					
+					//do nothing, don't put the fists in inventory
+				} else
+				{
+					Inventory.addItem((EquippableItem) State.equippedItems[j].Clone());
+				}
+				
+				State.equippedItems[j] = null;
+			}
+		}
+		
+		if(SideMenuManager.getEscapableObject(2) != null)
+		{
+			SideMenuManager.handleESCPress();
+		}
+		
+		SideMenuManager.handleESCPress();
+		
+		populateEquipmentSlotText(); //fists are added to equipped slots in populateEquipmentSlotText() 
+									 //so as not to interfere with the logic of unequipping/equipping items
+		printAll(5);
+		
+		statsManager.updateStatsScreen();
+	}
+	
+	public void allEquipmentButtonsInteractable()
+	{
+		
+		foreach(TextMeshProUGUI textObj in buttonTextObjects)
+		{
+			
+			if(textObj == null)
+			{
+				continue;
+			}
+			
+			textObj.transform.parent.gameObject.GetComponent<Button>().interactable = true;
+		}
+		
+	}
+	
+	public void revealMHWeaponDescriptionPanelSet(int slotID){
+		
+		currentMainHandWeaponSlotID = slotID;
+		Weapon currentWeapon = getXthSavedWeaponCombatAction(currentMainHandWeaponSlotID);
+		
+		allEquipmentButtonsInteractable();
+		
+		if(currentDescriptionPanel != null){
+			
+			if(currentDescriptionPanel.activeInHierarchy){
+				currentDescriptionPanel = null;
+				SideMenuManager.handleESCPress();
+			} else {
+				currentDescriptionPanel = null;
+			}
+		}
+		
+		printAll(4);
+		
+		revealEquippableItemDescriptionPanelSet(currentWeapon); 
+		
+	}
+	
+	public void revealDescriptionPanelSet(int slotID){
+		
+		allEquipmentButtonsInteractable();
+		
+		buttonTextObjects[slotID].transform.parent.gameObject.GetComponent<Button>().interactable = false;
+		
+		
+		if(currentDescriptionPanel != null){
+			
+			if(currentDescriptionPanel.activeInHierarchy){
+				currentDescriptionPanel = null;
+				SideMenuManager.handleESCPress();
+			} else {
+				currentDescriptionPanel = null;
+			}
+		}
+		
+		printAll(4);
+		
+		revealEquippableItemDescriptionPanelSet(State.equippedItems[slotID]); 
+		
+	}
+	
+	public void revealEquippableItemDescriptionPanelSet(EquippableItem item)
+	{
+		itemBeingDescribed = item;
+		
+		if(item.getSubtype().ToLower().Equals("armor")){
+			revealArmorItemDescriptionPanelSet((Armor) item);
+		} else if(item.getSubtype().ToLower().Equals("weapon")){
+			revealWeaponItemDescriptionPanelSet((Weapon) item);
+		} else {
+			throw new IOException("Unexpected EquippableItem subtype");
+		}
+		
+		SideMenuManager.setEscapableObject(1, currentDescriptionPanel);
+		printAll(3);
+	}
+	
+	public void revealArmorItemDescriptionPanelSet(Armor currentItem){
+		
+		currentDescriptionPanel = armorDescriptionPanelSet.gameObject;
+		currentDescriptionPanel.SetActive(true);
+		
+		armorDescriptionPanelSet.nameText.text = currentItem.getKey(); 
+		
+		armorDescriptionPanelSet.typeText.text = currentItem.getSubtype();
+		
+		armorDescriptionPanelSet.slotText.text = "SlotID = " + currentItem.getSlotID();
+		
+		armorDescriptionPanelSet.armorRatingText.text = "+" + currentItem.getArmorRating() + " Armor" ; 
+		
+		armorDescriptionPanelSet.loreDescriptionText.text = currentItem.getLoreDescription(); 
+		
+		printAll(2);
+	}
+	
+	public void revealWeaponItemDescriptionPanelSet(Weapon currentItem){
+		
+		currentDescriptionPanel = weaponDescriptionPanelSet.gameObject;
+		currentDescriptionPanel.SetActive(true);
+		
+		weaponDescriptionPanelSet.nameText.text = currentItem.getKey(); 
+		
+		weaponDescriptionPanelSet.typeText.text = currentItem.getSubtype();
+		
+		weaponDescriptionPanelSet.slotText.text = "SlotID = " + currentItem.getSlotID();
+		
+		weaponDescriptionPanelSet.damageText.text = currentItem.getDamageFormula();
+		
+		weaponDescriptionPanelSet.critRatingText.text = currentItem.getCritFormula(); 
+		
+		weaponDescriptionPanelSet.loreDescriptionText.text = currentItem.getLoreDescription(); 
+		
+		if(itemBeingDescribed.getSlotID() == Weapon.offHandSlotIndex &&
+			itemBeingDescribed.getKey().Equals(ItemList.getOffHandFist().getKey()))
+		{
+			unequipWeaponButton.interactable = false;
+		} else if(!unequipWeaponButton.interactable)
+		{
+			unequipWeaponButton.interactable = true;
+		}
+		
+		printAll(1);
+	}
+	
+	public void closeCurrentDescriptionPanelSet(){
+		
+		if(currentDescriptionPanel != null)
+		{
+			SideMenuManager.handleESCPress();
+		}
+
+	}
+
+	public static int getTotalArmorRating(){
+		
+		int totalArmor = 0;
+		//State.playerStats.;
+		foreach(EquippableItem equippedItem in State.equippedItems)
+		{
+			if(equippedItem != null && equippedItem.getSubtype().ToLower().Equals("armor"))
+			{
+				totalArmor += ((Armor) equippedItem).getArmorRating();
+			}
+		}
+		
+		return totalArmor;
+	}	
+	
+	public static Weapon[] getAllSavedWeaponCombatActions()
+	{
+		return getAllSavedWeaponCombatActions(State.equippedCombatActions);
+	}
+	
+	public static Weapon[] getAllSavedWeaponCombatActions(CombatAction[] actions)
+	{
+		Weapon[] currentlyEquippedWeapons = new Weapon[4];
+		
+		int weaponIndex = 0;
+		foreach(CombatAction action in actions)
+		{
+			if(action == null)
+			{
+				continue;
+			}
+			
+			if(action.takesAWeaponSlot())
+			{
+				if(weaponIndex >= State.playerStats.getWeaponSlots())
+				{
+					throw new IOException("Found Equipped Weapon Number " + (weaponIndex + 1) + ". Maximum limit on weapon currently is " + State.playerStats.getWeaponSlots());
+				}
+				currentlyEquippedWeapons[weaponIndex] = (Weapon) action.getSourceItem();
+				weaponIndex++;
+			}
+		}
+		
+		return currentlyEquippedWeapons;
+	}
+	
+	public Weapon getXthSavedWeaponCombatAction(int x)
+	{
+		
+		if(x <= 0 || x > State.playerStats.getWeaponSlots())
+		{
+			throw new IOException("Cannot retrieve the weapon in weapon slot " + x + " if player only has " + State.playerStats.getWeaponSlots() + " slots.");
+		}
+		
+		int currentWeaponSlot = 1;
+		foreach(CombatAction action in State.equippedCombatActions)
+		{
+			if(action == null)
+			{
+				continue;
+			}
+			
+			if(action.takesAWeaponSlot() && currentWeaponSlot == x)
+			{
+				return (Weapon) action.getSourceItem();
+			} else if(action.takesAWeaponSlot() && currentWeaponSlot != x)
+			{
+				currentWeaponSlot++;
+			}
+		}
+		
+		throw new IOException("There is no weapon in weapon slot #" + x);
+	}
+	
+	public void unequipXthSavedWeaponCombatAction()
+	{
+		
+		int currentWeaponSlot = 1;
+		for(int i = 0; i < State.equippedCombatActions.Length; i++)
+		{		
+			if(State.equippedCombatActions[i] == null || !State.equippedCombatActions[i].takesAWeaponSlot())
+			{
+				continue;
+			}
+			
+			if(State.equippedCombatActions[i].takesAWeaponSlot() && currentWeaponSlot == currentMainHandWeaponSlotID)
+			{
+				Inventory.addItem(((Attack) State.equippedCombatActions[i]).getSourceItem());
+				State.equippedCombatActions[i] = null;
+				return;
+				
+			} else if(State.equippedCombatActions[i].takesAWeaponSlot() && currentWeaponSlot != currentMainHandWeaponSlotID)
+			{
+				currentWeaponSlot++;
+			}
+		}
+		
+		throw new IOException("There is no weapon in weapon slot #" + currentMainHandWeaponSlotID);
+	}
+	
+	public static Weapon getOffHandWeapon()
+	{
+		if(State.equippedItems[Weapon.offHandSlotIndex] == null)
+		{
+			return ItemList.getOffHandFist();
+		} else if(State.equippedItems[Weapon.offHandSlotIndex].getSubtype().Equals(Weapon.subtype))
+		{
+			return (Weapon) State.equippedItems[Weapon.offHandSlotIndex];
+		} else
+		{
+			return new Weapon();
+		}
+	}
+	
+	public void activateUnequipButtons()
+	{
+		
+		if(itemBeingDescribed != null &&
+			itemBeingDescribed.getSlotID() == Weapon.offHandSlotIndex && 
+				itemBeingDescribed.getKey().Equals(ItemList.getOffHandFist().getKey()))
+		{
+			unequipWeaponButton.interactable = false;
+		} else
+		{
+			unequipWeaponButton.interactable = true;
+		}
+		
+		unequipArmorButton.interactable = true;
+	}
+	
+	public void deactivateUnequipButtons()
+	{
+		unequipWeaponButton.interactable = false;
+		unequipArmorButton.interactable = false;
+	}
+	
+	public void activateAbilityWheel()
+	{
+		abilityWheel.SetActive(true);
+		
+		abilityMenuManager.disable();
+		
+		abilityMenuManager.populateAbilityMenuFromCombatActionArray(State.equippedCombatActions);
+		
+		abilityMenuManager.deselectAllAbilityButtons();
+		
+		if(SideMenuManager.getEscapableObject(2) != null)
+		{
+			SideMenuManager.handleESCPress();
+		}
+		
+		SideMenuManager.setEscapableObject(2, abilityWheel);
+	}
+	
+	public void printAll(int methodID){
+		
+		if(debug){
+			
+			int i = 0;
+		
+			foreach(EquippableItem item in State.equippedItems){
+
+			
+				if(item == null){
+					Debug.Log("State.equippedItems[" + i + "] = " + null);
+				} else {
+					Debug.Log("State.equippedItems[" + i + "] = " + item.getKey());
+				}
+			
+				i++;
+			}
+		}
+	}
+}

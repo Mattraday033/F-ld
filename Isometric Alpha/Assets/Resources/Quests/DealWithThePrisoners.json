@@ -1,0 +1,103 @@
+{
+	"title": "Deal With the Prisoners",
+	"numberOfSteps": 23,
+	"steps": [
+		{
+			"stepName": "To the Mess Hall.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "It's over. We won. All that's left is to raid the Director's wine, dole out his bread, and deal with any prisoners the rioters took during the revolution. I should make my way to the yard attached to the mess hall in the southeastern part of the camp to decide their fate."
+		},
+		{
+			"stepName": "The precipice.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I spoke with Nándor and he has asked me to pass judgement on the prisoners. I must speak with each of them and then decide their fates. Once I am finished I should speak with Nándor again."
+		},
+		{
+			"stepName": "Recompense, finally.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I spoke with Nándor and he has asked me to pass judgement on the prisoners. There could be but one punishment fit to their crimes: death. With that, we can finally leave this cursed camp."
+		},
+		{
+			"stepName": "Márcos, free.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I set Márcos free. His contributions and demeanor speak of a man changed, and I thought him worthy of leaving this camp alive."
+		},
+		{
+			"stepName": "Márcos, punished.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I set Márcos free, with the caveat that he be dealt fifty lashes. While he did disobey his Overseer to save Nándor and Carter, he still was guilty of supporting the system that kept us in chains, and for that he deserved punishment. Márcos accepted his sentence with grace."
+		},
+		{
+			"stepName": "Márcos, executed.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I had Márcos executed. While he did disobey his Overseer to save Nándor and Carter, he still was guilty of supporting the system that kept us in chains, and that cannot be forgiven. He seemed to understand this, in his final moments."
+		},
+		{
+			"stepName": "Márcos, mobbed.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I allowed the crowd of freed slaves to carry out Márcos's sentence. They killed him in gruesome fashion."
+		},
+		{
+			"stepName": "András, free.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I set András free. Janos seems to think him worthy of forgiveness, and I did not disagree."
+		},
+		{
+			"stepName": "András, punished.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I set András free, with the caveat that he be dealt fifty lashes. Janos seems to think him worthy of forgiveness, but I could not in good conscience allow him to walk away without at least some form of punishment. May he take it as a lesson to reform his ways."
+		},
+		{
+			"stepName": "András, executed.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I had András executed. Janos protested to the end, but I could find no reason to let him live."
+		},
+		{
+			"stepName": "András, mobbed.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I allowed the crowd of freed slaves to carry out András's sentence. They killed him in gruesome fashion."
+		},		
+        {
+			"stepName": "Réka, free.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I set Réka free. Surrender must be rewarded, or it will lose it's usefulness. The other slaves were of mixed opinions regarding my choice."
+		},
+		{
+			"stepName": "Réka, punished.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I set Réka free, with the caveat that she be dealt fifty lashes. To slay those who surrender may keep others from doing the same, but simply letting Réka go without consequences may have set the wrong example."
+		},
+		{
+			"stepName": "Réka, executed.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I had Réka executed. Her surrender has no bearing on what justice demanded be done. I could not allow her to go free after her contributions to our captivity."
+		},
+		{
+			"stepName": "Réka, mobbed.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I allowed the crowd of freed slaves to carry out Réka's sentence. They killed her in gruesome fashion."
+		},        
+        {
+			"stepName": "Pázmán, free.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I set Pázmán free. Surrender must be rewarded, or it will lose it's usefulness. The other slaves were of mixed opinions regarding my choice."
+		},
+		{
+			"stepName": "Pázmán, punished.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I set Pázmán free, with the caveat that he be dealt fifty lashes. To slay those who surrender may keep others from doing the same, but simply letting Pázmán go without consequences may have set the wrong example."
+		},
+		{
+			"stepName": "Pázmán, executed.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I had Pázmán executed. His surrender has no bearing on what justice demanded be done. I could not allow him to go free after his contributions to our captivity."
+		},
+		{
+			"stepName": "Pázmán, mobbed.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I allowed the crowd of freed slaves to carry out Pázmán's sentence. They killed him in gruesome fashion."
+		},
+		{
+			"stepName": "That is that.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "The verdicts are finally over. I should speak with Nándor to discuss what comes next."
+		},
+		{
+			"stepName": "Nándor's fury.",
+			"MapZone":"","MapLocation":"","journalDescription": "Nándor did not agree with my decision to allow the freed slaves to take part in carrying out the prisoners sentences. Because of this, he has left my company for good."
+		},
+		{
+			"stepName": "Nándor's apprehension.",
+			"MapZone":"","MapLocation":"","journalDescription": "Nándor did not agree with my decision to allow the freed slaves to take part in carrying out the prisoners sentences. After some discussion, he decided to stay in my company despite what I did."
+		},
+		{
+			"stepName": "Delegation of duties.",
+			"MapZone":"","MapLocation":"","journalDescription": "Nándor decided each of the guards' fates, at my insistance. I should speak with him when I am able to discuss what comes next."
+		}
+	],
+
+
+	"deathSteps":
+			[
+			]
+}

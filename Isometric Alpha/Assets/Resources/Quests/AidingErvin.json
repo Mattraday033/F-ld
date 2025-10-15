@@ -1,0 +1,19 @@
+{
+	"title": "Aiding Ervin",
+	"numberOfSteps": 8,
+	"steps":[
+				{"stepName":"Hear Ervin's plan.","MapZone":"Camp","MapLocation":"5SlaveShack","journalDescription":"Kastor explained that the camp has two types of slaves, the branded and the unbranded. The branded are all here for hard labor; to be worked until we drop. The unbranded however do more menial tasks with a lighter sentence. I need to speak to the slave Kastor tasked with making contact with the unbranded, Ervin, and help him recruit them to our cause. Ervin should be in the hut directly across from Kastor's."},
+				{"stepName":"It can always be worse.","MapZone":"Camp","MapLocation":"ManseCamp","journalDescription":"I met Ervin as Kastor requested. He fought through the pain his brand causes him to explain exactly what I need to do. I need to find one of the nonbranded slaves and gauge their interest in helping us. The more of the other parts of the plan I tell them I have completed, the more likely they are to be convinced. Perhaps I should help Bálint and Janos before I seek out the unbranded. If the unbranded say no, Ervin cautioned me to kill them before they can squeal. I was told they take breaks in the alley on the west side of the guard barracks, near the Manse, west of the center of camp."},
+				{"stepName":"A convincing argument.","MapZone":"Camp","MapLocation":"5SlaveShack","journalDescription":"Imre and I discussed the plan and I was able to make him believe in it's feasibility. He told me he would convince the other brandless slaves to be ready when the time comes to take up arms against our captors. I need to return to Ervin and let him know what happened."},
+				{"stepName":"A convincing argument.","MapZone":"Camp","MapLocation":"5SlaveShack","journalDescription":"I leaned on the brandless slave Imre to convince his fellow brandless slaves to help with our escape plan. He said he would get them to help us when the time came. I should return to Ervin and tell him what happened."},			
+				{"stepName":"An unconvincing argument.","MapZone":"Camp","MapLocation":"5SlaveShack","journalDescription":"My words held no water with Imre, who told me flat out that he would not go along with my plan. I decided to let him live rather than end his life, something that Ervin will surely disapprove of. Let us hope it was the right decision."},	
+				{"stepName":"An unconvincing argument.","MapZone":"Camp","MapLocation":"5SlaveShack","journalDescription":"My words held no water with Imre, who told me flat out that he would not go along with my plan. Rather than give him the oppurtunity to betray us, I slew him. I should let Ervin know what has transpired."},	
+				{"stepName":"Return to Kastor.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"I have informed Ervin of what has happened, it's time to report back to Kastor."},
+				{"stepName":"Kastor has been told.","MapZone":"","MapLocation":"","journalDescription":"I told Kastor what happened with Imre and the brandless slaves."}
+			],
+			
+	
+	"deathSteps":
+			[
+			]	
+}

@@ -1,0 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu]
+public class PartyMemberSlotIndex : ScriptableObject
+{
+	//[SerializeField]
+    private int index;
+	
+	public int getIndex()
+	{
+		return index;
+	}
+}

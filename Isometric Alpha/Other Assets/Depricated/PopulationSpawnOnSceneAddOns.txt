@@ -1,0 +1,53 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PopulationSpawnOnSceneStartAddOns : MonoBehaviour
+{
+
+	public Population[] pops;
+	public string[] spawnFlags;
+	public string[] despawnFlags;
+
+	public string[] currentSpawnFlags;
+	public string[] currentDespawnFlags;
+	
+	// Start is called before the first frame update
+    void Start()
+    {
+		int i = 0;
+		
+		pops[i].depopulate(); //pops[0] is always the master list and should be used to deactivate all npc game objects before determining which ones should be left on the field.
+
+		
+		
+		foreach(string flag in spawnFlags){
+			if(flag.ToLower().Equals("masterlist")){
+				i++;
+			} else{
+				
+				currentSpawnFlags = spawnFlags[i].Split(' ');
+				currentDespawnFlags = despawnFlags[i].Split(' ');
+				
+				foreach(string flagS in currentSpawnFlags){
+					if(Flags.flags[flagS]){
+						pops[i].populate();
+						break;
+					}
+				}
+				
+				foreach(string flagD in currentDespawnFlags){
+					if(Flags.flags[flagD]){
+						pops[i].depopulate();
+						break;
+					}
+				}
+				
+				i++;
+			}
+			
+		}
+		
+    }
+
+}

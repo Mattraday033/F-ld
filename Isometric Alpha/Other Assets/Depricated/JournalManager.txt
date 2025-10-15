@@ -1,0 +1,753 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System;
+using TMPro;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityEngine;
+using Newtonsoft.Json;
+
+public class JournalManager : MonoBehaviour
+{
+	
+	private int highestImplementedTabIndex = 2;
+	
+	private int characterTab = 0;
+	private int questTab = 1;
+	private int glossaryTab = 2;
+	private int backgroundTab = 3;
+	private int perkTab = 4;
+	
+	public Sprite squarePanelBackground;
+	
+	public GameObject questNamePanelPrefab;
+	public GameObject questStepPanelPrefab;
+	
+	public GameObject categoryNamePanelPrefab;
+	public GameObject categoryEntryPanelPrefab;
+	
+	public GameObject statProgTableNamePanelPrefab;
+	public GameObject statProgTableEntryPanelSinglePrefab;
+	public GameObject statProgTableEntryPanelDoublePrefab;
+	public GameObject statProgTableEntryPanelTriplePrefab;
+	
+	public GameObject openAbilityWheelEditorButtonPrefab;
+	
+	public GameObject currentDescriptionPanel;
+	
+	public Button[] journalTabs;
+	
+	public GameObject questNameGrid; 				//panel that is parent of all elements in the quest name display grid (the scrollable part) and contains background panel
+	public GameObject questNameScrollContainter; 	//child of questNameGrid and contains all scroll elements, and the Scroll Rect component
+	public GameObject categoryNameScrollableArea; 		//child of questNameContainter, the actual area that the scroll bar traverses.
+													//parent of all quest name rows and categoryNamePanelPrefab
+	
+	public static ArrayList listOfCategoryNamePanels = new ArrayList();
+	
+	public GameObject categoryEntryParent; 							//the parent object that holds all of the quest step objects
+	public GameObject currentCategoryNameAboveEntryGrid; 			//the panel that holds the currently selected quest whose quest steps you're seeing
+	public TextMeshProUGUI currentCategoryNameAboveEntryGridText; 	//the text object displaying text inside the above game object
+	public GameObject categoryEntryGrid; 							//panel that is parent of all elements in the quest step display grid (the scrollable part) and contains background panel
+	public GameObject categoryEntryScrollContainer; 				//child of categoryEntryGrid and contains all scroll elements, and the Scroll Rect component
+	public GameObject categoryEntryScrollableArea; 					//child of questStepContainter, the actual area that the scroll bar traverses.
+																	//parent of all quest step rows and questStepPanelPrefab
+	
+	public static ArrayList listOfEntryPanels = new ArrayList();
+	
+	public DescriptionPanel questStepDescriptionPanelSet;
+	public DescriptionPanel glossaryEntryGameObjectDisplayDescriptionPanel;
+	public DescriptionPanel perkDescriptionPanelSet;
+	
+	public EditAbilityWheelScreenManager editAbilityWheelScreenManager;
+	
+	public static Quest currentQuest;
+	public static string currentGlossaryCategory;
+	public static StatProgressionTable currentStatProgressionTable;
+	
+	private static JournalManager instance;
+	
+	private void Awake()
+	{
+		if(instance != null)
+		{
+			Debug.LogWarning("Found more than one Journal Manager in the scene.");
+		}
+		
+		instance = this;
+	}
+	
+	public static JournalManager getInstance()
+	{
+		return instance;
+	}
+
+	private ArrayList getActiveQuests()
+	{
+		ArrayList activeQuests = new ArrayList();
+		
+		foreach(Quest quest in State.questList)
+		{
+			if(quest.active && !quest.finished)
+			{
+				activeQuests.Add(quest);
+			} 
+		}
+		
+		foreach(Quest quest in State.questList)
+		{
+			if(quest.active && quest.finished)
+			{
+				activeQuests.Add(quest);
+			} 
+		}
+		
+		return activeQuests;
+	}
+	
+	private void deleteAllCategoryPanels()
+	{
+		foreach(GameObject panel in listOfCategoryNamePanels)
+		{
+			Destroy(panel);
+		}
+		
+		listOfCategoryNamePanels = new ArrayList();
+	}
+
+	public void populateQuestNamePanels()
+	{
+		ArrayList activeQuests = getActiveQuests();
+		
+		if(activeQuests.Count == 0)
+		{
+			QuestList.initialize();
+			activeQuests = getActiveQuests();
+		}
+		
+		deleteAllCategoryPanels();
+		
+		for(int panelIndex = 0; panelIndex < activeQuests.Count; panelIndex++)
+		{
+			Vector3 prefabLocalPosition = questNamePanelPrefab.GetComponent<RectTransform>().localPosition; //RectTransform of disabled inventoryRow example
+		
+			GameObject current = Instantiate(questNamePanelPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+			current.name = "Quest_Name_Panel_" + panelIndex;
+		
+			current.transform.parent = categoryNameScrollableArea.transform;
+			RectTransform currentRectTransform = current.GetComponent<RectTransform>();
+		
+			current.GetComponent<RectTransform>().localPosition = new Vector3(prefabLocalPosition.x, prefabLocalPosition.y - (currentRectTransform.rect.height*(panelIndex)), 0f);
+			current.GetComponent<RectTransform>().localScale = new Vector3(1f,1f,1f);
+			current.SetActive(true);
+			
+			
+			if(((Quest) activeQuests[panelIndex]).finished)
+			{
+				current.transform.GetChild(0).GetComponent<Image>().color = Color.grey;
+			}
+
+			listOfCategoryNamePanels.Add(current);
+
+		}
+		
+		if(activeQuests.Count > 0)
+		{
+			int rowIndex = 0;
+			
+			GameObject current; 
+	
+			foreach (Quest quest in activeQuests)  
+			{  
+				current = (GameObject) listOfCategoryNamePanels[rowIndex];
+				
+				current.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = quest.title;
+				
+				rowIndex++;
+			}
+		}
+		
+		RectTransform categoryNameScrollableAreaRect = categoryNameScrollableArea.GetComponent<RectTransform>();
+		float rectWidth = categoryNameScrollableAreaRect.sizeDelta.x;
+		
+		categoryNameScrollableArea.GetComponent<RectTransform>().sizeDelta = 
+		new Vector2(rectWidth, (listOfCategoryNamePanels.Count+1)*questNamePanelPrefab.GetComponent<RectTransform>().rect.height);
+	}
+	
+	private ArrayList getActiveQuestSteps()
+	{
+		ArrayList activeQuestSteps = new ArrayList();
+		
+		foreach(QuestStep step in currentQuest.steps)
+		{
+			if(step.active)
+			{
+				activeQuestSteps.Add(step);
+				
+				foreach(DeathStep deathStep in currentQuest.deathSteps)
+				{
+					if(deathStep.active && deathStep.currentStepOnDeath == step.stepIndex)
+					{
+						activeQuestSteps.Add(deathStep);
+					}
+				}
+			}
+		}
+		
+		return activeQuestSteps;
+	}
+	
+	private void deleteAllEntryPanels()
+	{
+		foreach(GameObject panel in listOfEntryPanels)
+		{
+			
+			Destroy(panel);
+		}
+		
+		listOfEntryPanels = new ArrayList();
+	}
+	
+	public void setCurrentQuest(TextMeshProUGUI currentTMP)
+	{
+		string currentQuestTitle = currentTMP.text;
+		
+		currentCategoryNameAboveEntryGridText.text = currentTMP.text;
+		
+		foreach(Quest quest in State.questList)
+		{
+			if(quest.title.ToLower().Equals(currentQuestTitle.ToLower()))
+			{
+				currentQuest = quest;
+				return;
+			}
+		}
+		
+		throw new IOException("currentQuestTitle is not a valid quest title: " + currentQuestTitle);
+	}
+	
+	public void populateQuestStepPanels()
+	{
+		Debug.Log("populatingQuestStepPanels");
+		
+		categoryEntryParent.SetActive(true);
+		
+		ArrayList activeQuestSteps = getActiveQuestSteps();
+		
+		deleteAllEntryPanels();
+		
+		for(int panelIndex = 0; panelIndex < activeQuestSteps.Count; panelIndex++)
+		{
+			Vector3 prefabLocalPosition = questStepPanelPrefab.GetComponent<RectTransform>().localPosition; //RectTransform of disabled inventoryRow example
+		
+			GameObject current = Instantiate(questStepPanelPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+			current.name = "Quest_Step_Panel_" + panelIndex;
+		
+			current.transform.parent = categoryEntryScrollableArea.transform;
+			RectTransform currentRectTransform = current.GetComponent<RectTransform>();
+		
+			current.GetComponent<RectTransform>().localPosition = new Vector3(prefabLocalPosition.x, prefabLocalPosition.y - (currentRectTransform.rect.height*(panelIndex)), 0f);
+			current.GetComponent<RectTransform>().localScale = new Vector3(1f,1f,1f);
+			current.SetActive(true);
+
+			listOfEntryPanels.Add(current);
+	
+			if(panelIndex == (activeQuestSteps.Count-1))
+			{
+				if(currentQuest.finished)
+				{
+					current.transform.GetChild(0).GetComponent<Image>().color = Color.grey;
+				} else
+				{
+					current.transform.GetChild(0).GetComponent<Image>().color = Color.white;
+				}
+				
+			} else
+			{
+				current.transform.GetChild(0).GetComponent<Image>().color = Color.grey;
+			}
+		}
+		
+		if(activeQuestSteps.Count > 0)
+		{
+			int rowIndex = 0;
+			
+			GameObject current; 
+	
+			foreach (QuestStep step in activeQuestSteps)  
+			{  
+				current = (GameObject) listOfEntryPanels[rowIndex];
+
+				current.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = step.stepName;
+				
+				rowIndex++;
+			}
+		}
+		
+		RectTransform categoryEntryScrollableAreaRect = categoryEntryScrollableArea.GetComponent<RectTransform>();
+		float rectWidth = categoryEntryScrollableAreaRect.sizeDelta.x;
+		
+		categoryEntryScrollableArea.GetComponent<RectTransform>().sizeDelta = new Vector2(rectWidth, (listOfEntryPanels.Count+1)*questStepPanelPrefab.GetComponent<RectTransform>().rect.height);
+		
+		SideMenuManager.setEscapableObject(1, categoryEntryParent);
+	}
+	
+	public int getCurrentTabIndex()
+	{
+		for(int i = 0; i < journalTabs.Length; i++)
+		{
+			if(!journalTabs[i].interactable)
+			{
+				return i;
+			}
+		}
+		
+		throw new IOException("No journal tab is interactable");
+	}
+	
+	public void selectJournalTab(int tabIndex)
+	{
+		if(tabIndex > highestImplementedTabIndex)
+		{
+			throw new IOException("Unimplemented Tab selected: " + tabIndex);
+		}
+		
+		if(currentDescriptionPanel != null)
+		{
+			SideMenuManager.handleESCPress();
+		}
+		
+		foreach(Button tab in journalTabs)
+		{
+			tab.interactable = true;
+		}
+		
+		journalTabs[tabIndex].interactable = false;
+		
+		setJournalToCurrentJournalState();
+	}
+	
+	//should check type and determine correct Description Panel Set to use then run the method needed to populate it's text fields
+	public void revealDescriptionPanelSet(TextMeshProUGUI currentText)
+	{
+		int tabIndex = getCurrentTabIndex();
+		
+		string name = currentText.text;
+
+		if(name.Equals(""))
+		{
+			return;
+		}
+		
+		if(currentDescriptionPanel != null)
+		{
+			currentDescriptionPanel.SetActive(false);
+		}
+		
+		if(tabIndex ==  characterTab)
+		{
+			if(currentStatProgressionTable != null)
+			{
+				revealPerkDescriptionPanelSet();
+			}
+		} else if(tabIndex == questTab)
+		{
+			revealQuestStepDescriptionPanelSet(name);
+			
+		} else if(tabIndex == glossaryTab)
+		{
+			/*
+			GlossaryEntry entry = GlossaryCategoryList.getEntry(currentGlossaryCategory, currentText.text);
+			
+			if(entry.weaponRange)
+			{
+				revealGlossaryEntryDescriptionPanelSet(currentText.text);
+			} else
+			{
+				throw new IOException("non-weaponRange Glossary Entry displays have not implemented yet.");
+			}
+			*/
+		} else if(tabIndex == backgroundTab)
+		{
+			// not implemented yet
+		} else if(tabIndex == perkTab)
+		{
+			// not implemented yet
+		} else{
+			throw new IOException("tab index isn't an expected value");
+		}
+	}
+
+	public void revealPerkDescriptionPanelSet()
+	{
+		currentDescriptionPanel = perkDescriptionPanelSet.gameObject;
+		currentDescriptionPanel.SetActive(true);
+		SideMenuManager.setEscapableObject(2, currentDescriptionPanel);
+	}
+
+	public void revealQuestStepDescriptionPanelSet(string name)
+	{
+		currentDescriptionPanel = questStepDescriptionPanelSet.gameObject;
+		currentDescriptionPanel.SetActive(true);
+		
+		ArrayList activeQuestSteps = getActiveQuestSteps();
+		
+		foreach(QuestStep step in activeQuestSteps)
+		{
+			if(step.stepName.ToLower().Equals(name.ToLower()))
+			{
+				questStepDescriptionPanelSet.nameText.text = currentQuest.title;
+				questStepDescriptionPanelSet.typeText.text = step.stepName; 
+				questStepDescriptionPanelSet.loreDescriptionText.text = step.journalDescription;
+				
+				SideMenuManager.setEscapableObject(2, currentDescriptionPanel);
+				
+				return;
+			}
+		}
+	}
+	
+	public void hideDescriptionPanel()
+	{
+		if(SideMenuManager.getEscapableObject(2) != null && currentDescriptionPanel != null)
+		{
+			SideMenuManager.handleESCPress();
+		}
+	}
+	
+	public void setCurrentGlossaryCategory(TextMeshProUGUI currentTMP)
+	{
+		currentCategoryNameAboveEntryGridText.text = currentTMP.text;
+		/*
+		foreach(string categoryName in GlossaryCategoryList.glossaryCategoryNames)
+		{
+			if(categoryName.Equals(currentTMP.text))
+			{
+				currentGlossaryCategory = currentTMP.text;
+				return;
+			}
+		}
+		*/
+		throw new IOException("currentQuestTitle is not a valid quest title");
+	}
+	
+	public void populateGlossaryCategoryPanels()
+	{
+		/*
+		if(GlossaryCategoryList.glossaryCategoryNames == null || 
+		   GlossaryCategoryList.glossaryCategoryNames.Count == 0)
+		{
+			GlossaryCategoryList.instantiate();
+		}
+		
+		deleteAllCategoryPanels();
+		
+		for(int panelIndex = 0; panelIndex < GlossaryCategoryList.glossaryCategoryNames.Count; panelIndex++)
+		{
+			Vector3 prefabLocalPosition = categoryNamePanelPrefab.GetComponent<RectTransform>().localPosition; //RectTransform of disabled inventoryRow example
+		
+			GameObject current = Instantiate(categoryNamePanelPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+			current.name = "Glossary_Category_Panel_" + panelIndex;
+		
+			current.transform.parent = categoryNameScrollableArea.transform;
+			RectTransform currentRectTransform = current.GetComponent<RectTransform>();
+		
+			current.GetComponent<RectTransform>().localPosition = new Vector3(prefabLocalPosition.x, prefabLocalPosition.y - (currentRectTransform.rect.height*(panelIndex)), 0f);
+			current.GetComponent<RectTransform>().localScale = new Vector3(1f,1f,1f);
+			current.SetActive(true);
+			
+			listOfCategoryNamePanels.Add(current);
+		}
+		
+		int rowIndex = 0;
+		foreach (string categoryName in GlossaryCategoryList.glossaryCategoryNames)  
+		{  
+			GameObject current = (GameObject) listOfCategoryNamePanels[rowIndex];
+			
+			current.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = categoryName;
+			rowIndex++;
+		}
+		
+		RectTransform categoryNameScrollableAreaRect = categoryNameScrollableArea.GetComponent<RectTransform>();
+		float rectWidth = categoryNameScrollableAreaRect.sizeDelta.x;
+		
+		categoryNameScrollableArea.GetComponent<RectTransform>().sizeDelta = 
+		new Vector2(rectWidth, (listOfCategoryNamePanels.Count+1)*categoryNamePanelPrefab.GetComponent<RectTransform>().rect.height);
+		*/
+	}
+	
+	public void populateGlossaryEntryPanels()
+	{
+		categoryEntryParent.SetActive(true);
+		
+		deleteAllEntryPanels();
+		
+		ArrayList relaventGlossaryEntries = getRelaventGlossaryEntries();
+		
+		for(int panelIndex = 0; panelIndex < relaventGlossaryEntries.Count; panelIndex++)
+		{
+			Vector3 prefabLocalPosition = categoryEntryPanelPrefab.GetComponent<RectTransform>().localPosition; //RectTransform of disabled inventoryRow example
+		
+			GameObject current = Instantiate(questStepPanelPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+			current.name = "Glossary_Entry_Panel_" + panelIndex;
+		
+			current.transform.parent = categoryEntryScrollableArea.transform;
+			RectTransform currentRectTransform = current.GetComponent<RectTransform>();
+		
+			current.GetComponent<RectTransform>().localPosition = new Vector3(prefabLocalPosition.x, prefabLocalPosition.y - (currentRectTransform.rect.height*(panelIndex)), 0f);
+			current.GetComponent<RectTransform>().localScale = new Vector3(1f,1f,1f);
+			current.SetActive(true);
+
+			listOfEntryPanels.Add(current);
+		}
+		
+		if(relaventGlossaryEntries.Count > 0)
+		{
+			int rowIndex = 0;
+			
+			GameObject current; 
+	
+			foreach (GlossaryEntry glossaryEntry in relaventGlossaryEntries)  
+			{  
+				current = (GameObject) listOfEntryPanels[rowIndex];
+				current.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = glossaryEntry.title;
+				
+				rowIndex++;
+			}
+		}
+		
+		RectTransform categoryEntryScrollableAreaRect = categoryEntryScrollableArea.GetComponent<RectTransform>();
+		float rectWidth = categoryEntryScrollableAreaRect.sizeDelta.x;
+		
+		categoryEntryScrollableArea.GetComponent<RectTransform>().sizeDelta = new Vector2(rectWidth, (listOfEntryPanels.Count+1)*categoryNamePanelPrefab.GetComponent<RectTransform>().rect.height);
+		
+		SideMenuManager.setEscapableObject(1,  categoryEntryParent);
+	}
+	
+	private ArrayList getRelaventGlossaryEntries()
+	{
+		
+		ArrayList relaventGlossaryEntries = new ArrayList();
+		/*
+		foreach(GlossaryEntry glossaryEntry in GlossaryCategoryList.listOfAllGlossaryEntries)
+		{
+			if(glossaryEntry.category.Equals(currentGlossaryCategory))
+			{
+				relaventGlossaryEntries.Add(glossaryEntry);
+			} 
+		}
+		*/
+		return relaventGlossaryEntries;
+	}
+	
+	public void setJournalToCurrentJournalState()
+	{
+		
+		switch(getCurrentTabIndex())
+		{
+			case 0:
+				populateCharacterPanels();
+				
+				if(currentStatProgressionTable != null)
+				{
+					currentCategoryNameAboveEntryGridText.text = currentStatProgressionTable.title;
+					//populateGlossaryEntryPanels();
+				} else if(SideMenuManager.getEscapableObject(1) != null)
+				{
+					SideMenuManager.handleESCPress();
+				}
+				break;
+			case 1:
+				populateQuestNamePanels();
+				
+				Debug.Log("setJournalToCurrentJournalState() case 1");
+				
+				deactivateCurrentDescriptionPanel();
+				
+				if(currentQuest != null)
+				{
+					currentCategoryNameAboveEntryGridText.text = currentQuest.title;
+					populateQuestStepPanels();
+					Debug.Log("setJournalToCurrentJournalState() case 1 inside if");
+				} else if(SideMenuManager.getEscapableObject(1) != null)
+				{
+					SideMenuManager.handleESCPress();
+				}
+				
+				break;
+			
+			case 2:
+				populateGlossaryCategoryPanels();
+				
+				deactivateCurrentDescriptionPanel();
+				
+				if(currentGlossaryCategory != null)
+				{
+					currentCategoryNameAboveEntryGridText.text = currentGlossaryCategory;
+					populateGlossaryEntryPanels();
+				} else if(SideMenuManager.getEscapableObject(1) != null)
+				{
+					SideMenuManager.handleESCPress();
+				}
+				
+				break;
+			
+			default:
+				throw new IOException("Unknown journal tab index");
+		}
+	}
+	
+	private void deactivateCurrentDescriptionPanel()
+	{
+		if(currentDescriptionPanel != null)
+		{
+			SideMenuManager.handleESCPress();
+		}
+	}
+	
+	public void revealGlossaryEntryDescriptionPanelSet(string title)
+	{
+		
+		currentDescriptionPanel = glossaryEntryGameObjectDisplayDescriptionPanel.gameObject;
+		currentDescriptionPanel.SetActive(true);
+		/*
+		foreach(GlossaryEntry glossaryEntry in GlossaryCategoryList.listOfAllGlossaryEntries)
+		{
+			if(glossaryEntry.category.Equals(currentGlossaryCategory) && 
+				glossaryEntry.title.Equals(title))
+			{
+				glossaryEntryGameObjectDisplayDescriptionPanel.nameText.text = glossaryEntry.title;
+				//glossaryEntryGameObjectDisplayDescriptionPanel.loreDescriptionText.text = glossaryEntry.journalDescription;
+				//glossaryEntryGameObjectDisplayDescriptionPanel.displayAdjustmentCoords = new int[]{glossaryEntry.displayAdjustmentX,
+				//																			glossaryEntry.displayAdjustmentY};
+				
+				glossaryEntryGameObjectDisplayDescriptionPanel.instantiateDisplayObject();
+				
+				SideMenuManager.setEscapableObject(2, glossaryEntryGameObjectDisplayDescriptionPanel.gameObject);
+			} 
+		}
+		*/
+	}
+
+	public void populateCharacterPanels()
+	{
+		deleteAllCategoryPanels();
+		
+		populateAbilityWheelEditorButton();
+		
+		populateStatProgressionTableNamePanels();
+		
+		RectTransform categoryNameScrollableAreaRect = categoryNameScrollableArea.GetComponent<RectTransform>();
+		float rectWidth = categoryNameScrollableAreaRect.sizeDelta.x;
+		
+		categoryNameScrollableArea.GetComponent<RectTransform>().sizeDelta = new Vector2(rectWidth, (listOfCategoryNamePanels.Count+1)*statProgTableNamePanelPrefab.GetComponent<RectTransform>().rect.height);		
+	}
+	
+	public void populateAbilityWheelEditorButton()
+	{
+		Vector3 prefabLocalPosition = openAbilityWheelEditorButtonPrefab.GetComponent<RectTransform>().localPosition;
+	
+		GameObject current = Instantiate(openAbilityWheelEditorButtonPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+	
+		current.transform.parent = categoryNameScrollableArea.transform;
+		RectTransform currentRectTransform = current.GetComponent<RectTransform>();
+	
+		current.GetComponent<RectTransform>().localPosition = new Vector3(prefabLocalPosition.x, prefabLocalPosition.y - (currentRectTransform.rect.height*(0)), 0f);
+		current.GetComponent<RectTransform>().localScale = new Vector3(1f,1f,1f);
+		current.SetActive(true);
+
+		listOfCategoryNamePanels.Add(current);
+	}
+	
+	public void populateStatProgressionTableNamePanels()
+	{
+		
+		for(int panelIndex = 0; panelIndex < PerkDescriptionList.statProgressionTables.Length; panelIndex++)
+		{
+			if(PerkDescriptionList.statProgressionTables[panelIndex] == null)
+			{
+				continue;
+			}
+
+			string title = PerkDescriptionList.statProgressionTables[panelIndex].title;
+
+			Vector3 prefabLocalPosition = statProgTableNamePanelPrefab.GetComponent<RectTransform>().localPosition;
+		
+			GameObject current = Instantiate(statProgTableNamePanelPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+			current.name = title.Split(" ")[0] + "_Progression_Table_Panel";
+		
+			current.transform.parent = categoryNameScrollableArea.transform;
+			RectTransform currentRectTransform = current.GetComponent<RectTransform>();
+		
+			current.GetComponent<RectTransform>().localPosition = new Vector3(prefabLocalPosition.x, prefabLocalPosition.y - (currentRectTransform.rect.height*(panelIndex+1)), 0f);
+			current.GetComponent<RectTransform>().localScale = new Vector3(1f,1f,1f);
+			current.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = title;
+			current.SetActive(true);
+
+			listOfCategoryNamePanels.Add(current);
+		}
+	}
+	
+	public void populateStatProgressionTableEntryPanels()
+	{
+
+		categoryEntryParent.SetActive(true);
+		
+		deleteAllEntryPanels();
+		/*
+			public GameObject statProgTableEntryPanelSinglePrefab;
+			public GameObject statProgTableEntryPanelDoublePrefab;
+			public GameObject statProgTableEntryPanelTriplePrefab;
+		*/
+		
+		for(int panelIndex = 0; panelIndex < currentStatProgressionTable.perkDescriptions.Length; panelIndex++)
+		{
+			GameObject currentEntryPanelPrefab;
+			
+			if(currentStatProgressionTable.perkDescriptions[panelIndex].Length == 1)
+			{
+				currentEntryPanelPrefab = statProgTableEntryPanelSinglePrefab;
+			} else if(currentStatProgressionTable.perkDescriptions[panelIndex].Length == 2)
+			{
+				currentEntryPanelPrefab = statProgTableEntryPanelDoublePrefab;
+			} else if(currentStatProgressionTable.perkDescriptions[panelIndex].Length == 3)
+			{
+				currentEntryPanelPrefab = statProgTableEntryPanelTriplePrefab;
+			} else
+			{
+				throw new IOException("Unsupported number of perks per stat level: " + currentStatProgressionTable.perkDescriptions[panelIndex].Length);
+			}
+			
+			Vector3 prefabLocalPosition = currentEntryPanelPrefab.GetComponent<RectTransform>().localPosition;
+		
+			GameObject current = Instantiate(currentEntryPanelPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+			current.name = "Stat_Prog_Table_Row" + (panelIndex + 1);
+		
+			current.transform.parent = categoryEntryScrollableArea.transform;
+			RectTransform currentRectTransform = current.GetComponent<RectTransform>();
+		
+			current.GetComponent<RectTransform>().localPosition = new Vector3(prefabLocalPosition.x, prefabLocalPosition.y - (currentRectTransform.rect.height*(panelIndex)), 0f);
+			current.GetComponent<RectTransform>().localScale = new Vector3(1f,1f,1f);
+			current.SetActive(true);
+
+			StatProgressionTableEntryRow currentEntryRow = current.GetComponent<StatProgressionTableEntryRow>();
+			
+			currentEntryRow.perkDescriptions = currentStatProgressionTable.perkDescriptions[panelIndex];
+			currentEntryRow.displayAllPerkDescriptions();
+			currentEntryRow.statLevelTMP.text = "" + (panelIndex+1);	
+			
+			listOfEntryPanels.Add(current);
+		}
+
+		SideMenuManager.setEscapableObject(1, categoryEntryParent);
+	}
+	
+	public void setCurrentStatProgressionTable(TextMeshProUGUI currentTMP)
+	{
+		string currentStatProgressionTableTitle = currentTMP.text;
+		
+		currentCategoryNameAboveEntryGridText.text = currentTMP.text;
+		
+		currentStatProgressionTable = PerkDescriptionList.getStatProgressionTable(currentStatProgressionTableTitle);
+	}
+}

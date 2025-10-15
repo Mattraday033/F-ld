@@ -1,0 +1,76 @@
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Newtonsoft.Json;
+
+public class StatProgressionTable
+{
+	public string title;
+	
+	public PerkDescription[][] perkDescriptions = new PerkDescription[10][];
+
+	public StatProgressionTable(string title, string folderPath)
+	{
+		this.title = title;
+		
+		for(int i = 0; i < perkDescriptions.Length; i++)
+		{
+			perkDescriptions[i] = new PerkDescription[1];
+		}
+
+		foreach(string filePath in Directory.EnumerateFiles(folderPath, "*.*", SearchOption.AllDirectories))
+		{
+			if(filePath == null || !filePath.Contains(".json") || filePath.Contains(".meta"))
+			{
+				continue;
+			}
+			
+			dynamic jsonDynamic = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(filePath));
+			
+			PerkDescription currentPerkDescription = new PerkDescription();
+			
+			currentPerkDescription.title = jsonDynamic["title"];
+			currentPerkDescription.statLevel = jsonDynamic["statLevel"];
+			currentPerkDescription.type = jsonDynamic["type"];
+			currentPerkDescription.benefitDescription = jsonDynamic["benefitDescription"];
+			
+			int statLevelIndex = (currentPerkDescription.statLevel-1);
+			int currentPerkSlotIndex = (perkDescriptions[statLevelIndex].Length-1);
+			
+			if(perkDescriptions[statLevelIndex][currentPerkSlotIndex] == null)
+			{	
+				perkDescriptions[statLevelIndex][currentPerkSlotIndex] = currentPerkDescription;
+			} else
+			{
+				perkDescriptions[statLevelIndex] = Helpers.appendArray<PerkDescription>(perkDescriptions[statLevelIndex], currentPerkDescription);
+			}
+		}
+		
+		//printAllPerksInTable();
+	}
+	
+	public void printAllPerksInTable()
+	{
+		int level = 1;
+		foreach(PerkDescription[] perksAtLevel in perkDescriptions)
+		{
+			Debug.Log("Printing all perks at level: " + level);
+			
+			foreach(PerkDescription perk in perksAtLevel)
+			{
+				if(perk == null)
+				{
+					continue;
+				} else
+				{
+					Debug.Log("Current Perk = " + perk.title);
+					Debug.Log("Current Perk statlevel = " + perk.statLevel);
+					Debug.Log("Current Perk benefitDescription = " + perk.benefitDescription);
+				}
+			}
+			
+			level++;
+		}
+	}
+}

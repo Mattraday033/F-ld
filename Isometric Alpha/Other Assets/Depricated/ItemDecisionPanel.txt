@@ -1,0 +1,389 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
+
+//can be removed when old UI is removed
+public enum ToFromJunkMode {toJunk = 1, fromJunk = 2}
+
+public interface IDecisionPanel
+{
+	public GameObject getGameObject();
+
+	public void setObjectToBeDecidedOn(IDescribable describable);
+
+	public void setScrollableUIElement(ScrollableUIElement grid);
+
+	public void setCollectionIndex(int currentTabCollection);
+
+	public void updateEnabledButtons();
+
+	public string getDescribableRowKey();
+}
+
+public class ItemDecisionPanel : SingleEditAbilityWheelButton, IDecisionPanel
+{
+
+	public static UnityEvent OnEquip = new UnityEvent();
+
+	public LayoutElement parentLayoutElement;
+
+	//can be removed when old UI is removed
+	public ToFromJunkMode currentMode;
+
+	//private GameObject abilityWheel;
+	public AbilityMenuManager abilityMenuManager;
+
+	public Item itemBeingDescribed;
+
+	public ScrollableUIElement grid;
+
+	private int collectionIndex;
+
+	public GameObject useButtonsParent;
+
+	public Button useButton;
+	public Button usePartyButton;
+	public Button equipButton;
+	public Button unequipButton;
+	public Button toJunkButton;
+	public Button removeFromJunkButton;
+	public Button addToAbilityWheelButton;
+	public Button takeOffAbilityWheelButton;
+
+	public UseItemOnPartyMemberButton useItemOnPartyMemberButton;
+
+	private void Awake()
+	{
+		if (DescriptionPanelSlot.lastObjectToBeDescribed == null)
+		{
+			return;
+		}
+
+		updateEnabledButtons((Item)DescriptionPanelSlot.lastObjectToBeDescribed);
+	}
+
+	private void OnEnable()
+	{
+		OnEquip.AddListener(destroyIfNotEquipped);
+
+		parentLayoutElement = transform.parent.GetComponent<LayoutElement>();
+		parentLayoutElement.enabled = false;
+	}
+
+	private void OnDisable()
+	{
+		OnEquip.RemoveListener(destroyIfNotEquipped);
+		if (parentLayoutElement != null)
+		{
+			parentLayoutElement.enabled = true;
+		}
+	}
+
+	public GameObject getGameObject()
+	{
+		return gameObject;
+	}
+
+	//can be removed when old UI is removed
+	public void setCurrentMode(ToFromJunkMode newMode)
+	{
+		currentMode = newMode;
+	}
+
+	public void setCollectionIndex(int collectionIndex)
+	{
+		this.collectionIndex = collectionIndex;
+	}
+
+	public void setScreenCollectionIndex()
+	{
+		OverallUIManager.currentScreenManager.setCurrentTabCollection(collectionIndex);
+	}
+
+	public void setScrollableUIElement(ScrollableUIElement grid)
+	{
+		this.grid = grid;
+	}
+
+	public void setObjectToBeDecidedOn(IDescribable describable)
+	{
+		updateEnabledButtons((Item)describable);
+	}
+
+	public void updateEnabledButtons()
+	{
+		updateEnabledButtons(this.itemBeingDescribed);
+	}
+
+	public void updateEnabledButtons(Item itemBeingDescribed)
+	{
+		this.itemBeingDescribed = itemBeingDescribed;
+
+		Helpers.nullSafeSetActive(useButtonsParent, !itemBeingDescribed.isEquippable()); //if it's equippable, don't show use buttons and vice versa
+
+		Helpers.nullSafeSetActive(unequipButton, itemBeingDescribed.isEquipped());
+		Helpers.nullSafeSetActive(equipButton, !itemBeingDescribed.isEquipped());
+
+		Helpers.nullSafeSetInteractable(unequipButton, itemBeingDescribed.isUnequippable());
+
+		Helpers.nullSafeSetActive(takeOffAbilityWheelButton, itemBeingDescribed.isEquipped());
+		Helpers.nullSafeSetActive(addToAbilityWheelButton, !itemBeingDescribed.isEquipped());
+
+		Helpers.nullSafeSetInteractable(addToAbilityWheelButton, itemBeingDescribed.usableInCombat());
+
+		greyOutUseButtonCheck();
+		greyOutUsePartyButtonCheck();
+
+		Helpers.nullSafeSetActive(toJunkButton, !itemBeingDescribed.isJunk());
+		Helpers.nullSafeSetActive(removeFromJunkButton, itemBeingDescribed.isJunk());
+
+		Helpers.nullSafeSetInteractable(toJunkButton, itemBeingDescribed.canBeJunk());
+		Helpers.nullSafeSetInteractable(removeFromJunkButton, !itemBeingDescribed.mustBeJunk());
+
+		Helpers.nullSafeSetInteractable(addToAbilityWheelButton, itemBeingDescribed.usableInCombat());
+	}
+
+
+
+	public void useItemOnPartyButtonPress()
+	{
+		useItemOnPartyMemberButton.spawnPopUp((UsableItem)Inventory.getItem(itemBeingDescribed.getKey()));
+	}
+
+	public void useItemOnSelfButtonPress()
+	{
+		UsableItem currentUsableItem = (UsableItem)Inventory.getItem(itemBeingDescribed.getKey());
+
+		currentUsableItem.use(PartyManager.getPlayerStats());
+
+		if (!currentUsableItem.infiniteUses())
+		{
+			Inventory.removeItem(currentUsableItem, 1);
+			currentUsableItem.removeQuantity(1);
+		}
+
+		if (currentUsableItem.getQuantity() < 1)
+		{
+			OverallUIManager.currentScreenManager.hideCurrentDescriptionPanel();
+		}
+
+		updateEnabledButtons(itemBeingDescribed);
+		OverallUIManager.currentScreenManager.populateAllGrids();
+		OverallUIManager.currentScreenManager.updateAllStatsPanels();
+		grid.disableGridRowAndClick(itemBeingDescribed.getKey());
+	}
+
+	private void greyOutUseButtonCheck()
+	{
+		bool useButtonInteractable;
+
+		if (!(Inventory.inventoryContainsItem(itemBeingDescribed.getKey()) || Inventory.pocketContainsItem(itemBeingDescribed.getKey(), State.junkPocket)) ||
+				itemBeingDescribed.fitsUseCriteria(PartyManager.getPlayerStats()) ||
+				!itemBeingDescribed.usableOutOfCombat())
+		{
+			useButtonInteractable = false;
+		}
+		else
+		{
+			useButtonInteractable = true;
+		}
+
+		Helpers.nullSafeSetInteractable(useButton, useButtonInteractable);
+	}
+
+	private void greyOutUsePartyButtonCheck()
+	{
+		bool usePartyButtonInteractable;
+
+		if ((Inventory.inventoryContainsItem(itemBeingDescribed.getKey()) || Inventory.pocketContainsItem(itemBeingDescribed.getKey(), State.junkPocket)) &&
+			itemBeingDescribed.usableOutOfCombat() &&
+			PartyManager.hasJoinablePartyMembers() &&
+			itemBeingDescribed.usableOnParty())
+		{
+			usePartyButtonInteractable = true;
+		}
+		else
+		{
+			usePartyButtonInteractable = false;
+		}
+
+		Helpers.nullSafeSetInteractable(usePartyButton, usePartyButtonInteractable);
+	}
+
+	public void moveAllItemToJunk()
+	{
+		if (collectionIndex > 0)
+		{
+			unequipItem();
+		}
+
+		Inventory.removeItem(itemBeingDescribed, State.inventory);
+		Inventory.addItem(itemBeingDescribed, State.junkPocket);
+
+		OverallUIManager.currentScreenManager.hideCurrentDescriptionPanel();
+		OverallUIManager.currentScreenManager.populateAllGrids();
+		grid.disableGridRowAndClick(itemBeingDescribed.getKey());
+	}
+
+	public void moveAllItemFromJunk()
+	{
+		Inventory.removeItem(itemBeingDescribed, State.junkPocket);
+		Inventory.addItem(itemBeingDescribed, State.inventory);
+
+		OverallUIManager.currentScreenManager.hideCurrentDescriptionPanel();
+		OverallUIManager.currentScreenManager.populateAllGrids();
+		grid.disableGridRowAndClick(itemBeingDescribed.getKey());
+	}
+
+	public void equipItem()
+	{
+		if (itemBeingDescribed.getSlotID() == Weapon.mainHandSlotIndex ||
+			itemBeingDescribed.getSlotID() < Weapon.offHandSlotIndex) // if it's a main hand weapon or it's not equippable
+		{
+			spawnPopUp();
+			return;
+		}
+
+		Dictionary<string, Item> currentPocket;
+
+		if (itemBeingDescribed.isJunk())
+		{
+			currentPocket = State.junkPocket;
+		}
+		else
+		{
+			currentPocket = State.inventory;
+		}
+
+		if (State.equippedItems[itemBeingDescribed.getSlotID()] != null && State.equippedItems[itemBeingDescribed.getSlotID()].isJunk())
+		{
+			Inventory.addItem(State.equippedItems[itemBeingDescribed.getSlotID()], State.junkPocket);
+		}
+		else if (State.equippedItems[itemBeingDescribed.getSlotID()] != null)
+		{
+			Inventory.addItem(State.equippedItems[itemBeingDescribed.getSlotID()], State.inventory);
+		}
+
+		Item itemToEquip = Inventory.removeItem(itemBeingDescribed, 1, currentPocket);
+
+		State.equippedItems[itemBeingDescribed.getSlotID()] = (EquippableItem)itemToEquip;
+		OverallUIManager.currentScreenManager.populateAllGrids();
+		grid.disableGridRowAndClick(itemBeingDescribed.getKey());
+
+		if (!Inventory.pocketContainsItem(itemToEquip.getKey(), currentPocket))
+		{
+			OverallUIManager.currentScreenManager.hideCurrentDescriptionPanel();
+		}
+
+		OverallUIManager.currentScreenManager.updateAllDecisionPanels();
+		OverallUIManager.currentScreenManager.updateAllStatsPanels();
+	}
+
+	public void destroyIfNotEquipped()
+	{
+		if (!itemBeingDescribed.isEquipped())
+		{
+			setScreenCollectionIndex();
+			OverallUIManager.currentScreenManager.hideCurrentDescriptionPanel();
+		}
+	}
+
+	public void unequipItem()
+	{
+		if (itemBeingDescribed.getSlotID() == Weapon.mainHandSlotIndex ||
+			itemBeingDescribed.getSlotID() < Weapon.offHandSlotIndex)
+		{
+			// CombatActionArray.unequipCombatAction(itemBeingDescribed.getKey());
+		}
+		else
+		{
+			Dictionary<string, Item> currentPocket;
+
+			if (itemBeingDescribed.isJunk())
+			{
+				currentPocket = State.junkPocket;
+			}
+			else
+			{
+				currentPocket = State.inventory;
+			}
+
+			if (State.equippedItems[itemBeingDescribed.getSlotID()] != null)
+			{
+				Inventory.addItem(State.equippedItems[itemBeingDescribed.getSlotID()], currentPocket);
+			}
+
+			State.equippedItems[itemBeingDescribed.getSlotID()] = null;
+		}
+
+		OverallUIManager.currentScreenManager.populateAllGrids();
+
+		if (OverallUIManager.currentScreenManager.getCurrentTabCollection() > 0)
+		{
+			OverallUIManager.currentScreenManager.hideCurrentDescriptionPanel();
+		}
+
+		OverallUIManager.currentScreenManager.updateAllDecisionPanels();
+		OverallUIManager.currentScreenManager.updateAllStatsPanels();
+	}
+
+	public override void spawnPopUp()
+	{
+		CombatAction action = itemBeingDescribed.getCombatAction();
+
+		if (action == null)
+		{
+			return;
+		}
+
+		base.spawnPopUp();
+
+		SingleEditAbilityWheelPopUpWindow singleEditAbilityWheelPopUpWindow = (SingleEditAbilityWheelPopUpWindow)getPopUpWindow();
+
+		singleEditAbilityWheelPopUpWindow.itemDecisionPanel = this;
+		singleEditAbilityWheelPopUpWindow.setActionToBeAdded(action);
+
+		// abilityMenuManager = (AbilityMenuManager) getPopUpWindow();
+
+		// abilityMenuManager.enableAbilityButtonCanvas(); 
+		// abilityMenuManager.updateNewCombatActionPosition(action, 0);
+		// abilityMenuManager.itemDescisionPanel = this;
+	}
+
+	public override void destroyPopUp()
+	{
+		OverallUIManager.currentScreenManager.populateAllGrids();
+
+		Dictionary<string, Item> currentPocket;
+
+		if (itemBeingDescribed.isJunk())
+		{
+			currentPocket = State.junkPocket;
+		}
+		else
+		{
+			currentPocket = State.inventory;
+		}
+
+		if (!Inventory.pocketContainsItem(itemBeingDescribed.getKey(), currentPocket))
+		{
+			OverallUIManager.currentScreenManager.hideCurrentDescriptionPanel();
+		}
+
+		abilityMenuManager = null;
+		base.destroyPopUp();
+
+		if (!CombatStateManager.inCombat)
+		{
+			PlayerOOCStateManager.setCurrentActivity(OOCActivity.inUI);
+		}
+	}
+
+	public string getDescribableRowKey()
+	{
+		return itemBeingDescribed.getKey();
+	}
+}

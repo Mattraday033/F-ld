@@ -1,0 +1,31 @@
+{
+	"title": "Leave the Camp",
+	"numberOfSteps": 5,
+	"steps": [
+		{
+			"stepName": "Unfinished business.",
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "Page told me we need to discuss our next move, but said to finish any business I have in the camp first. I should pay Nándor a visit by the Mess Hall before returning to her by the camp gates."
+		},
+		{
+			"stepName": "Speak with the Masons.",
+			"MapZone":"Camp","MapLocation":"CenterCamp","journalDescription": "Nándor mentioned that Page and Carter are waiting for me by the camp's gates. They want to discuss how to get to the nearest Mason settlement."
+		},
+		{
+			"stepName": "Time to leave.",
+			"MapZone":"Camp","MapLocation":"CenterCamp","journalDescription": "I think it's about time the freed prisoners left this camp. Page mentioned she would be waiting for me by the camp's gates. She will want to discuss how to get to the nearest Mason settlement."
+		},
+		{
+			"stepName": "Return to Page.",
+			"MapZone":"Camp","MapLocation":"CenterCamp","journalDescription": "I have finished my business in the camp. I should now return to Page so we can talk about where to go from here."
+		},
+		{
+			"stepName": "Through the forest",
+			"MapZone":"Camp","MapLocation":"CenterCamp","journalDescription": "Page has explained how to get to the nearest town. I should rest up and collect anything I need from the camp before I begin my journey. (Leaving the camp will end this Demo)"
+		}
+	],
+
+
+	"deathSteps":
+			[
+			]
+}

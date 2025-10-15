@@ -1,0 +1,32 @@
+{
+	"title": "The Plan",
+	"numberOfSteps": 20,
+	"steps":[	
+				{"stepName":"I just got here!","MapZone":"","MapLocation":"","journalDescription":"Upon waking up for the first time at the work camp, I was approached by my fellow inmates to join a conspiracy to escape. I accepted, and now they are counting on me to be their messenger to other cells working on the same plan."},
+				{"stepName":"The death of Broglin.","MapZone":"","MapLocation":"","journalDescription":"I may have over done it a little when trying to convince a guard of my 'trustworthiness'. The guard took exception to the words I put in Broglin's mouth and executed him for it. A man is dead, and I am at least partly responsible. I will need to take more care in the future what I say and to whom."},
+				{"stepName":"Making an impression.","MapZone":"","MapLocation":"","journalDescription":"Guard László has seen fit to allow me to walk around outside during the camp's lockdown. He seemed impressed by the brown-nosing I performed earlier. This may be useful in the future."},
+				{"stepName":"Deemed trustworthy.","MapZone":"","MapLocation":"","journalDescription":"Guard László has seen fit to allow me to walk around outside during the camp's lockdown. This will be useful in executing the plan."},
+				{"stepName":"Make contact with Kastor.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"Garcha has informed me that a man named Kastor was the one who explained the plan to him and Broglin. I was told I could find him in the largest hut in the southeastern section of the camp; this hut rests against the southern wall. I was also given the passphrase 'which way is the wind blowing?'. Kastor and other members of our group will not speak to me about the plan without using this phrase."},
+				{"stepName":"Earn Kastor's trust.","MapZone":"Camp","MapLocation":"","journalDescription":"I have spoken to Kastor, who is still hesitant to trust me with other parts of the plan. He gave me a test I will need to complete before he will share more of the plan with me."},
+				{"stepName":"Help the cells.","MapZone":"","MapLocation":"","journalDescription":"Kastor has given me some tasks to complete before we can begin to make good on our escape. I should return to him when I am finished."},
+				{"stepName":"I told Kastor no.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"Kastor told me that the next step was to go into the mine in search of weapons and this Nándor fellow. I told him that it was too dangerous but he still thinks I'll come around."},
+				{"stepName":"Raid the armory.","MapZone":"MineLvl_2","MapLocation":"MineLvl_2-2b","journalDescription":"I have finished each task laid before me and now it is time to enter the mine in search of it's armory. Kastor told me that the armory should be somewhere on the mine's second level. I should gather any tools or weapons it contains."},
+				{"stepName":"Return to Kastor.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"I have found the tools in the armory and now must return them to Kastor."},
+				{"stepName":"Wait for now.","MapZone":"","MapLocation":"","journalDescription":"I have given Kastor the tools from the armory. All that is left to do is find Nándor, and the revolution can begin."},
+				{"stepName":"I told Kastor no.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"Kastor told me that the next step was to go into the mine in search of this Nándor fellow. I told him that it was too dangerous but he still thinks I'll come around."},
+				{"stepName":"Free the others.","MapZone":"Camp","MapLocation":"NECamp","journalDescription":"It is finally time. The revolution commences. I must now fight my way to the north east side of the camp and kill the Overseer in charge of that section. When that is done, we will have the breathing room to convince the other slaves to join us."},
+				{"stepName":"Take your revenge.","MapZone":"Manse-2F","MapLocation":"Manse-2F-Office","journalDescription":"I have gained the support of the other slaves, and can now utilize their anger against the guards at the Manse. I must now fight my way to the Director's Office on the Manse's second floor and defeat him, breaking the guards' hold over the camp."},
+				{"stepName":"Take your revenge.","MapZone":"Manse-2F","MapLocation":"Manse-2F-Office","journalDescription":"I have failed to gain the support of the other slaves. It will be tough, but if I want to free the camp's slaves I must now fight my way to the Director's Office on the Manse's second floor and defeat him, breaking the guards' hold over the camp."},
+				{"stepName":"Find the key to the Director's office.","MapZone":"Manse-2F","MapLocation":"","journalDescription":"It seems the Director has locked himself in his office, and split a single key among two of his underlings. I need to make my way to the northern and southern sides of the Manse's second floor and kill the officers there to claim each half of the key. Only then can I unlock the door to the Director's Office.'"},
+				{"stepName":"Found half a key.","MapZone":"Manse-2F","MapLocation":"","journalDescription":"I have one half of the key to the Director's office. I now need to find the other half."},
+				{"stepName":"Found both parts of the key.","MapZone":"Manse-2F","MapLocation":"Manse-2F-Office","journalDescription":"I have retrieved both halfs of the key to the Director's office. I should now make my way back to his office on the north side of the Manse's second floor and finally end this."},
+				{"stepName":"I killed the Director.","MapZone":"","MapLocation":"","journalDescription":"I broke into the Director's office, where I met the Director and his assistant Page. Page revealed that she was a Masonic Agent, and tried to convince me to take the Director alive, but I refused. The Director now stands before the Gods, and I am finally free."},
+				{"stepName":"I took the Director prisoner.","MapZone":"","MapLocation":"","journalDescription":"I broke into the Director's office, where I met the Director and his assistant Page. Page revealed that she was a Masonic Agent, and told me that the Director could be useful to the Kingdom of Masons if he was interrogated. I have decided to take the Director prisoner, and I am finally free."}
+	],
+			
+	
+	"deathSteps":
+			[
+			]
+	
+}

@@ -1,0 +1,24 @@
+{
+	"title": "Stockhouse Stash",
+	"numberOfSteps": 13,
+	"steps":[
+				{"stepName":"I found some iron","MapZone":"Camp","MapLocation":"Stockhouse","journalDescription":"I found an Iron Nugget behind a barrel in the stockhouse. Perhaps someone lost it?"},
+				{"stepName":"Uros is hiding something.","MapZone":"Camp","MapLocation":"Stockhouse","journalDescription":"I spoke with the branded slave Uros, who was looking for something in the camp's stockhouse. He wouldn't tell me what it was but he seemed frantic to find it so I suspect it is valuable. I should search the crates and barrels within the stockhouse to find what he has stashed."},
+				{"stepName":"The lump of iron.","MapZone":"Camp","MapLocation":"Stockhouse","journalDescription":"I convinced the branded slave Uros to tell me what he has stashed within the camp's stockhouse. It's a small lump of iron, which he believes is of no small value. If I search the crates and barrels within the stockhouse I should be able to find it."},
+				{"stepName":"The lump of iron.","MapZone":"Camp","MapLocation":"Stockhouse","journalDescription":"I intimidated the branded slave Uros into telling me what he has stashed within the camp's stockhouse. It's a small lump of iron, which he believes is of no small value. If I search the crates and barrels within the stockhouse I should be able to find it."},
+				{"stepName":"The lump of iron.","MapZone":"Camp","MapLocation":"Stockhouse","journalDescription":"Under threat of being turned into the quartermaster, the branded slave Uros told me what he has stashed within the camp's stockhouse. It's a small lump of iron, which he is convinced is of no small value. If I search the crates and barrels within the stockhouse I should be able to find it."},
+				{"stepName":"Uros was hiding something.","MapZone":"Camp","MapLocation":"Stockhouse","journalDescription":"I spoke with the branded slave Uros, who was looking for something in the camp's stockhouse. He wouldn't tell me what it was but he seemed frantic to find it so I suspect it is valuable. I told the quartermaster that he was stashing things in her stockhouse, and he has been punished with lashing for it. The quartermaster has told me that she will reward me if I find what Uros had hidden away."},
+				{"stepName":"Lost and found.","MapZone":"Camp","MapLocation":"Stockhouse","journalDescription":"I have found an Iron Nugget behind a barrel inside the stockhouse. I assume it must be what Uros was looking for."},
+				{"stepName":"Lost and found.","MapZone":"Camp","MapLocation":"Stockhouse","journalDescription":"I have found the Iron Nugget that Uros mentioned behind a barrel inside the stockhouse."},
+				{"stepName":"Lost and found.","MapZone":"Camp","MapLocation":"Stockhouse","journalDescription":"I have found an Iron Nugget behind a barrel inside the stockhouse. I assume it must be what Uros was looking for."},
+				{"stepName":"The nugget retrieved.","MapZone":"","MapLocation":"","journalDescription":"I returned the Iron Nugget to Uros, who was very grateful. He told me he would never forget my kindness."},
+				{"stepName":"The nugget retrieved.","MapZone":"","MapLocation":"","journalDescription":"I gave the Iron Nugget to Quartermaster Emese, who rewarded me with a nice pair of gloves to help with my work."},
+				{"stepName":"The nugget stolen.","MapZone":"","MapLocation":"","journalDescription":"I showed the Iron Nugget to Uros, but decided to keep it for myself instead of returning it. He told me he would never forget this betrayal."},
+				{"stepName":"The nugget sold.","MapZone":"","MapLocation":"","journalDescription":"I sold the Iron Nugget. It was worth a tidy sum."}
+			],
+			
+	
+	"deathSteps":
+			[
+			]
+}

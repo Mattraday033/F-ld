@@ -1,0 +1,35 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+
+public class FormationEditorButton : PopUpButton
+{
+	public FormationEditorButton():
+	base(PopUpType.FormationEditor)
+	{
+
+	}
+	
+	public override void spawnPopUp()
+	{
+		base.spawnPopUp();
+		
+		EditPartyWindow editPartyWindow = (EditPartyWindow) getPopUpWindow();
+		
+		editPartyWindow.readInCurrentFormation();
+		editPartyWindow.populateAllGrids();
+	}
+
+    public override GameObject getCurrentPopUpGameObject()
+    {
+        if (EditPartyWindow.getInstance() != null && !(EditPartyWindow.getInstance() is null))
+        {
+            return EditPartyWindow.getInstance().gameObject;
+        }
+        else
+        {
+            return null;
+        }
+    }
+}

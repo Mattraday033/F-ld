@@ -1,0 +1,17 @@
+{
+	"title": "Múzsa's Sweet Tooth",
+	"numberOfSteps": 7,
+	"steps":[
+				{"stepName":"Kende's candy.","MapZone":"Camp","MapLocation":"Messhall","journalDescription":"The guard in charge of watching the mine's barricade, Múzsa, wants me to find the mess hall in the southeastern part of the camp and ask the cook within for some candy. She even provided me with a little spending money for it. I guess she must be desparate."},
+				{"stepName":"Kende's candy.","MapZone":"Camp","MapLocation":"Messhall","journalDescription":"The guard in charge of watching the mine's barricade, Múzsa, was impressed with my entrapenurial spirit and has offered to let me inside the mine if I run a small errand for her. She wants me to find the mess hall in the southeastern part of the camp and ask the cook within for some candy. She even provided me with a little spending money for it. I guess she must be desparate."},
+				{"stepName": "A dead end.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription": "I met Guard Múzsa, who mans the barricade that blocks the mine entrance. When I mentioned that I wanted to enter the mine she blocked my path. Perhaps Kastor will know some way to convince her to let me through."},
+				{"stepName":"A way forward?","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"I spoke with Kastor and he informed me of Múzsa's infamous predilection for sweet things. I should see if the cook in the mess hall hut has any. Kastor said the mess hall was located in the southeastern part of the camp, just east of his hut."},
+				{"stepName":"Package received.","MapZone":"Camp","MapLocation":"MineEntranceCamp","journalDescription":"I met Kende the cook, and purchased the required candy from him. I should now return to Múzsa."},
+				{"stepName":"Candy handed over.","MapZone":"Camp","MapLocation":"MineEntranceCamp","journalDescription":"Múzsa has her candy. Perhaps she will be more inclined to allow me past the barricade now. I should speak to her about it."},
+				{"stepName":"The way is clear.","MapZone":"","MapLocation":"","journalDescription":"Múzsa has allowed me past the barricade."}
+	],
+	
+	"deathSteps":
+			[
+			]
+}

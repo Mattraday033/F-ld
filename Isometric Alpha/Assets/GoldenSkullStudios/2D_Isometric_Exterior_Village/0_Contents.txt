@@ -1,0 +1,72 @@
+CONTENTS of 2D Isometric Tile Village Pack
+by Golden Skull
+**************************
+OVERVIEW
+**************************
+
+***2D Tiles***			307 Sprite(s)
+**Walls**				169
+**Roofs**				102
+**Props**				 36
+**Misc**				  5
+
+***2.5D Conversion***	 77 Mesh(es)
+**Roof**				 38
+**Wall**				 27
+**Misc**				 11
+
+**************************
+CONTENTS
+**************************
+***Tiles***
+
+**Walls**			169
+*Wood*				 64
+*Stone*				 64
+*Misc*				 17
+*Overlays*			 24
+
+**Roofs**			102
+*Hay*				 52
+*Brown*				 16
+*Blue*				 18
+*Red*				 16
+
+**Props**			 36
+*Door*				  2
+*Windows*			  7
+*Chimney*			  2
+*Barrels&Crates*	  8
+*Foliage*			  3
+*Fence*				  1
+*Wells*				 10
+*Signs*				  3
+
+**Misc**
+*Template*			  1
+*Grass*				  2
+*Dirt*				  2
+
+**************************
+***2.5D meshes***	 77
+**Roof**			 38
+**Wall**			 27
+**Misc**			 11
+
+**Roof**			 38
+*Roof-hay*			  8
+*Roof-brown*		 10
+*Roof-blue*			 10
+*Roof-red*			 10
+
+**Wall**			 27
+*Wall-Stone*		 10
+*Wall-Wood*			 10
+*Wall-Wood-Raw*		  7
+
+**Misc**			 11
+*StoneFoundation*	  3
+*Timber-Frame*		  8
+*Door*				  1
+
+**************************

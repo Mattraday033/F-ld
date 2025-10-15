@@ -1,0 +1,1009 @@
+"filename", "language", "XML", "Properties", "HTML", "Ini", "JSON", "C#", "UnityShader", "Ink", "Markdown", "comment", "blank", "total"
+"c:\Users\mattr\Isometric Alpha\Assembly-CSharp-Editor.csproj", "XML", 1138, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1140
+"c:\Users\mattr\Isometric Alpha\Assembly-CSharp.csproj", "XML", 1602, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1604
+"c:\Users\mattr\Isometric Alpha\Assets\Free UI build package\Script\Slide.cs", "C#", 0, 0, 0, 0, 0, 14, 0, 0, 0, 2, 4, 20
+"c:\Users\mattr\Isometric Alpha\Assets\Free UI build package\Script\Togglescript.cs", "C#", 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 8, 31
+"c:\Users\mattr\Isometric Alpha\Assets\Glossary\DoubleHorizontal.json", "JSON", 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 8
+"c:\Users\mattr\Isometric Alpha\Assets\Glossary\DoubleVertical.json", "JSON", 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 8
+"c:\Users\mattr\Isometric Alpha\Assets\Glossary\QuadrupleBox.json", "JSON", 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 8
+"c:\Users\mattr\Isometric Alpha\Assets\Glossary\QuadrupleHorizontal.json", "JSON", 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 8
+"c:\Users\mattr\Isometric Alpha\Assets\Glossary\QuadrupleVertical.json", "JSON", 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 8
+"c:\Users\mattr\Isometric Alpha\Assets\Glossary\SingleTarget.json", "JSON", 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 8
+"c:\Users\mattr\Isometric Alpha\Assets\Glossary\TripleBackwardsHook.json", "JSON", 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 8
+"c:\Users\mattr\Isometric Alpha\Assets\Glossary\TripleHook.json", "JSON", 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 8
+"c:\Users\mattr\Isometric Alpha\Assets\Glossary\TripleHorizontal.json", "JSON", 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 8
+"c:\Users\mattr\Isometric Alpha\Assets\Glossary\TripleVertical.json", "JSON", 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 8
+"c:\Users\mattr\Isometric Alpha\Assets\GoldenSkullStudios\2D_Iso_Tileset_Ice-Dungeon\Bonus\Scripts\Editor\GoldenSkull_ColorLayersEditor.cs", "C#", 0, 0, 0, 0, 0, 18, 0, 0, 0, 1, 2, 21
+"c:\Users\mattr\Isometric Alpha\Assets\GoldenSkullStudios\2D_Iso_Tileset_Ice-Dungeon\Bonus\Scripts\Editor\GoldenSkull_CustomHandleEditor.cs", "C#", 0, 0, 0, 0, 0, 56, 0, 0, 0, 18, 14, 88
+"c:\Users\mattr\Isometric Alpha\Assets\GoldenSkullStudios\2D_Iso_Tileset_Ice-Dungeon\Bonus\Scripts\GoldenSkull_ColorLayers.cs", "C#", 0, 0, 0, 0, 0, 31, 0, 0, 0, 2, 8, 41
+"c:\Users\mattr\Isometric Alpha\Assets\GoldenSkullStudios\2D_Iso_Tileset_Ice-Dungeon\Bonus\Scripts\GoldenSkull_CustomHandle.cs", "C#", 0, 0, 0, 0, 0, 41, 0, 0, 0, 3, 9, 53
+"c:\Users\mattr\Isometric Alpha\Assets\GoldenSkullStudios\2D_Iso_Tileset_Ice-Dungeon\Bonus\Scripts\GoldenSkull_Simple_Door_Interaction.cs", "C#", 0, 0, 0, 0, 0, 39, 0, 0, 0, 2, 8, 49
+"c:\Users\mattr\Isometric Alpha\Assets\GoldenSkullStudios\2D_Iso_Tileset_Ice-Dungeon\Bonus\Scripts\GoldenSkull_TilemapClearer.cs", "C#", 0, 0, 0, 0, 0, 17, 0, 0, 0, 1, 6, 24
+"c:\Users\mattr\Isometric Alpha\Assets\GoldenSkullStudios\2D_Iso_Tileset_Ice-Dungeon\Bonus\Scripts\GoldenSkull_TilemapHelper.cs", "C#", 0, 0, 0, 0, 0, 22, 0, 0, 0, 2, 8, 32
+"c:\Users\mattr\Isometric Alpha\Assets\GoldenSkullStudios\2D_Iso_Tileset_Ice-Dungeon\Bonus\Scripts\Simple_Char_Move.cs", "C#", 0, 0, 0, 0, 0, 35, 0, 0, 0, 7, 10, 52
+"c:\Users\mattr\Isometric Alpha\Assets\GoldenSkullStudios\2D_Iso_Tileset_Ice-Dungeon\Bonus\Scripts\Simple_Door_Interaction.cs", "C#", 0, 0, 0, 0, 0, 39, 0, 0, 0, 2, 8, 49
+"c:\Users\mattr\Isometric Alpha\Assets\GoldenSkullStudios\2D_Iso_Tileset_Ice-Dungeon\Bonus\Scripts\Simple_Door_Script.cs", "C#", 0, 0, 0, 0, 0, 78, 0, 0, 0, 5, 12, 95
+"c:\Users\mattr\Isometric Alpha\Assets\GoldenSkullStudios\2D_Iso_Tileset_Ice-Dungeon\Bonus\Scripts\Simple_Door_Teleport.cs", "C#", 0, 0, 0, 0, 0, 55, 0, 0, 0, 8, 10, 73
+"c:\Users\mattr\Isometric Alpha\Assets\GoldenSkullStudios\Shared\Extras\Shaders\Sprite_Additive_Build-In.shader", "UnityShader", 0, 0, 0, 0, 0, 0, 65, 0, 0, 1, 12, 78
+"c:\Users\mattr\Isometric Alpha\Assets\GoldenSkullStudios\Shared\Extras\TestChar\Scripts\GoldenSkull_Animated_Character.cs", "C#", 0, 0, 0, 0, 0, 118, 0, 0, 0, 28, 23, 169
+"c:\Users\mattr\Isometric Alpha\Assets\GoldenSkullStudios\Shared\Extras\TestChar\TestChar_Old\Scripts\GoldenSkull_Simple_Char_Move.cs", "C#", 0, 0, 0, 0, 0, 52, 0, 0, 0, 16, 17, 85
+"c:\Users\mattr\Isometric Alpha\Assets\GoldenSkullStudios\Shared\URP\Shaders\URP-SpriteAdditive.shader", "UnityShader", 0, 0, 0, 0, 0, 0, 157, 0, 0, 1, 33, 191
+"c:\Users\mattr\Isometric Alpha\Assets\GoldenSkullStudios\Shared\URP\Shaders\URP-SpriteAdditive2.shader", "UnityShader", 0, 0, 0, 0, 0, 0, 214, 0, 0, 1, 48, 263
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\CHANGELOG.md", "Markdown", 0, 0, 0, 0, 0, 0, 0, 0, 89, 0, 19, 108
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Demos\Basic Demo\Ink\story.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 19
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Demos\Basic Demo\Ink\story.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Demos\Basic Demo\Scripts\BasicInkExample.cs", "C#", 0, 0, 0, 0, 0, 72, 0, 0, 0, 22, 17, 111
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Demos\Basic Demo\Scripts\Editor\BasicInkExampleEditor.cs", "C#", 0, 0, 0, 0, 0, 23, 0, 0, 0, 1, 3, 27
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Demos\Basic Demo\Scripts\QuitGameOnKeypress.cs", "C#", 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 3, 10
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\Core\Compiler\Auto Compiler\InkPostProcessor.cs", "C#", 0, 0, 0, 0, 0, 159, 0, 0, 0, 29, 24, 212
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\Core\Compiler\InkCompiler.cs", "C#", 0, 0, 0, 0, 0, 628, 0, 0, 0, 92, 102, 822
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\Core\Compiler\UnityInkFileHandler.cs", "C#", 0, 0, 0, 0, 0, 17, 0, 0, 0, 2, 4, 23
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\Core\Ink Library\InkCompilerLog.cs", "C#", 0, 0, 0, 0, 0, 56, 0, 0, 0, 0, 8, 64
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\Core\Ink Library\InkFile.cs", "C#", 0, 0, 0, 0, 0, 244, 0, 0, 0, 38, 51, 333
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\Core\Ink Library\InkLibrary.cs", "C#", 0, 0, 0, 0, 0, 410, 0, 0, 0, 90, 52, 552
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\Core\Ink Settings\InkSettings.cs", "C#", 0, 0, 0, 0, 0, 105, 0, 0, 0, 23, 17, 145
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\Core\Ink Settings\InkSettingsEditor.cs", "C#", 0, 0, 0, 0, 0, 112, 0, 0, 0, 10, 29, 151
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\Core\InkEditorUtils.cs", "C#", 0, 0, 0, 0, 0, 279, 0, 0, 0, 43, 50, 372
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\InkEditor.asmdef", "JSON", 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 16
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\Tools\Build Validation\InkPreBuildValidationCheck.cs", "C#", 0, 0, 0, 0, 0, 51, 0, 0, 0, 6, 5, 62
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\Tools\File Icons\InkBrowserIcons.cs", "C#", 0, 0, 0, 0, 0, 172, 0, 0, 0, 4, 13, 189
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\Tools\Ink Inspector\DefaultAssetEditor.cs", "C#", 0, 0, 0, 0, 0, 53, 0, 0, 0, 0, 7, 60
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\Tools\Ink Inspector\DefaultAssetInspector.cs", "C#", 0, 0, 0, 0, 0, 14, 0, 0, 0, 3, 2, 19
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\Tools\Ink Inspector\InkInspector.cs", "C#", 0, 0, 0, 0, 0, 380, 0, 0, 0, 28, 54, 462
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\Tools\Player Window\InkHistoryContentItem.cs", "C#", 0, 0, 0, 0, 0, 87, 0, 0, 0, 1, 5, 93
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\Tools\Player Window\InkPlayerWindow.cs", "C#", 0, 0, 0, 0, 0, 2442, 0, 0, 0, 184, 432, 3058
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\Editor\Tools\Startup Window\InkUnityIntegrationStartupWindow.cs", "C#", 0, 0, 0, 0, 0, 91, 0, 0, 0, 0, 20, 111
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\Ink-Libraries.asmdef", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\CharacterRange.cs", "C#", 0, 0, 0, 0, 0, 38, 0, 0, 0, 11, 6, 55
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\CharacterSet.cs", "C#", 0, 0, 0, 0, 0, 43, 0, 0, 0, 0, 11, 54
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\CommandLineInput.cs", "C#", 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 12
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\Compiler.cs", "C#", 0, 0, 0, 0, 0, 162, 0, 0, 0, 9, 42, 213
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\FileHandler.cs", "C#", 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 4, 25
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkParser\CommentEliminator.cs", "C#", 0, 0, 0, 0, 0, 63, 0, 0, 0, 12, 19, 94
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkParser\InkParser.cs", "C#", 0, 0, 0, 0, 0, 133, 0, 0, 0, 12, 38, 183
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkParser\InkParser_AuthorWarning.cs", "C#", 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 10, 29
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkParser\InkParser_CharacterRanges.cs", "C#", 0, 0, 0, 0, 0, 51, 0, 0, 0, 8, 6, 65
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkParser\InkParser_Choices.cs", "C#", 0, 0, 0, 0, 0, 144, 0, 0, 0, 23, 62, 229
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkParser\InkParser_CommandLineInput.cs", "C#", 0, 0, 0, 0, 0, 90, 0, 0, 0, 8, 32, 130
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkParser\InkParser_Conditional.cs", "C#", 0, 0, 0, 0, 0, 189, 0, 0, 0, 44, 56, 289
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkParser\InkParser_Content.cs", "C#", 0, 0, 0, 0, 0, 137, 0, 0, 0, 28, 46, 211
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkParser\InkParser_Divert.cs", "C#", 0, 0, 0, 0, 0, 126, 0, 0, 0, 33, 50, 209
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkParser\InkParser_Expressions.cs", "C#", 0, 0, 0, 0, 0, 344, 0, 0, 0, 46, 123, 513
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkParser\InkParser_Include.cs", "C#", 0, 0, 0, 0, 0, 54, 0, 0, 0, 5, 18, 77
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkParser\InkParser_Knot.cs", "C#", 0, 0, 0, 0, 0, 159, 0, 0, 0, 15, 66, 240
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkParser\InkParser_Logic.cs", "C#", 0, 0, 0, 0, 0, 272, 0, 0, 0, 65, 106, 443
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkParser\InkParser_Sequences.cs", "C#", 0, 0, 0, 0, 0, 167, 0, 0, 0, 11, 54, 232
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkParser\InkParser_Statements.cs", "C#", 0, 0, 0, 0, 0, 108, 0, 0, 0, 20, 36, 164
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkParser\InkParser_Tags.cs", "C#", 0, 0, 0, 0, 0, 47, 0, 0, 0, 3, 14, 64
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkParser\InkParser_Whitespace.cs", "C#", 0, 0, 0, 0, 0, 80, 0, 0, 0, 6, 27, 113
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\InkStringConversionExtensions.cs", "C#", 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 4, 19
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\AuthorWarning.cs", "C#", 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 5, 21
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Choice.cs", "C#", 0, 0, 0, 0, 0, 165, 0, 0, 0, 66, 60, 291
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Conditional.cs", "C#", 0, 0, 0, 0, 0, 48, 0, 0, 0, 8, 16, 72
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\ConditionalSingleBranch.cs", "C#", 0, 0, 0, 0, 0, 88, 0, 0, 0, 38, 33, 159
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\ConstantDeclaration.cs", "C#", 0, 0, 0, 0, 0, 32, 0, 0, 0, 5, 10, 47
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\ContentList.cs", "C#", 0, 0, 0, 0, 0, 64, 0, 0, 0, 1, 14, 79
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Divert.cs", "C#", 0, 0, 0, 0, 0, 270, 0, 0, 0, 60, 74, 404
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\DivertTarget.cs", "C#", 0, 0, 0, 0, 0, 117, 0, 0, 0, 28, 28, 173
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Expression.cs", "C#", 0, 0, 0, 0, 0, 210, 0, 0, 0, 37, 61, 308
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\ExternalDeclaration.cs", "C#", 0, 0, 0, 0, 0, 24, 0, 0, 0, 1, 6, 31
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\FlowBase.cs", "C#", 0, 0, 0, 0, 0, 307, 0, 0, 0, 47, 86, 440
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\FlowLevel.cs", "C#", 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 2, 12
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\FunctionCall.cs", "C#", 0, 0, 0, 0, 0, 176, 0, 0, 0, 13, 54, 243
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Gather.cs", "C#", 0, 0, 0, 0, 0, 39, 0, 0, 0, 1, 12, 52
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\INamedContent.cs", "C#", 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 3, 10
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\IWeavePoint.cs", "C#", 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 4, 16
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Identifier.cs", "C#", 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 3, 14
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\IncludedFile.cs", "C#", 0, 0, 0, 0, 0, 15, 0, 0, 0, 1, 5, 21
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Knot.cs", "C#", 0, 0, 0, 0, 0, 25, 0, 0, 0, 2, 9, 36
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\List.cs", "C#", 0, 0, 0, 0, 0, 45, 0, 0, 0, 0, 9, 54
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\ListDefinition.cs", "C#", 0, 0, 0, 0, 0, 111, 0, 0, 0, 1, 28, 140
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Number.cs", "C#", 0, 0, 0, 0, 0, 43, 0, 0, 0, 1, 10, 54
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Object.cs", "C#", 0, 0, 0, 0, 0, 279, 0, 0, 0, 16, 69, 364
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Path.cs", "C#", 0, 0, 0, 0, 0, 129, 0, 0, 0, 27, 37, 193
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Return.cs", "C#", 0, 0, 0, 0, 0, 27, 0, 0, 0, 5, 8, 40
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Sequence.cs", "C#", 0, 0, 0, 0, 0, 123, 0, 0, 0, 43, 41, 207
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Stitch.cs", "C#", 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 4, 15
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Story.cs", "C#", 0, 0, 0, 0, 0, 327, 0, 0, 0, 84, 98, 509
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\StringExpression.cs", "C#", 0, 0, 0, 0, 0, 54, 0, 0, 0, 3, 14, 71
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Tag.cs", "C#", 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 6, 28
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Text.cs", "C#", 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 6, 25
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\TunnelOnwards.cs", "C#", 0, 0, 0, 0, 0, 68, 0, 0, 0, 6, 19, 93
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\VariableAssignment.cs", "C#", 0, 0, 0, 0, 0, 89, 0, 0, 0, 10, 25, 124
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\VariableReference.cs", "C#", 0, 0, 0, 0, 0, 96, 0, 0, 0, 27, 30, 153
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Weave.cs", "C#", 0, 0, 0, 0, 0, 433, 0, 0, 0, 152, 146, 731
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\ParsedHierarchy\Wrap.cs", "C#", 0, 0, 0, 0, 0, 21, 0, 0, 0, 1, 7, 29
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\Plugins\Plugin.cs", "C#", 0, 0, 0, 0, 0, 10, 0, 0, 0, 6, 6, 22
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\Plugins\PluginManager.cs", "C#", 0, 0, 0, 0, 0, 55, 0, 0, 0, 0, 14, 69
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\Stats.cs", "C#", 0, 0, 0, 0, 0, 43, 0, 0, 0, 11, 14, 68
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\StringParser\StringParser.cs", "C#", 0, 0, 0, 0, 0, 502, 0, 0, 0, 53, 131, 686
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkCompiler\StringParser\StringParserState.cs", "C#", 0, 0, 0, 0, 0, 127, 0, 0, 0, 11, 34, 172
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\CallStack.cs", "C#", 0, 0, 0, 0, 0, 337, 0, 0, 0, 19, 88, 444
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\Choice.cs", "C#", 0, 0, 0, 0, 0, 26, 0, 0, 0, 21, 10, 57
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\ChoicePoint.cs", "C#", 0, 0, 0, 0, 0, 72, 0, 0, 0, 6, 12, 90
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\Container.cs", "C#", 0, 0, 0, 0, 0, 278, 0, 0, 0, 9, 80, 367
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\ControlCommand.cs", "C#", 0, 0, 0, 0, 0, 138, 0, 0, 0, 10, 35, 183
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\DebugMetadata.cs", "C#", 0, 0, 0, 0, 0, 61, 0, 0, 0, 4, 12, 77
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\Divert.cs", "C#", 0, 0, 0, 0, 0, 124, 0, 0, 0, 1, 25, 150
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\Error.cs", "C#", 0, 0, 0, 0, 0, 10, 0, 0, 0, 12, 3, 25
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\Flow.cs", "C#", 0, 0, 0, 0, 0, 73, 0, 0, 0, 5, 15, 93
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\Glue.cs", "C#", 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 3, 14
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\INamedContent.cs", "C#", 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 3, 11
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\InkList.cs", "C#", 0, 0, 0, 0, 0, 382, 0, 0, 0, 158, 75, 615
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\JsonSerialisation.cs", "C#", 0, 0, 0, 0, 0, 522, 0, 0, 0, 82, 119, 723
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\ListDefinition.cs", "C#", 0, 0, 0, 0, 0, 60, 0, 0, 0, 3, 13, 76
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\ListDefinitionsOrigin.cs", "C#", 0, 0, 0, 0, 0, 43, 0, 0, 0, 2, 9, 54
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\NativeFunctionCall.cs", "C#", 0, 0, 0, 0, 0, 365, 0, 0, 0, 40, 104, 509
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\Object.cs", "C#", 0, 0, 0, 0, 0, 178, 0, 0, 0, 26, 47, 251
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\Path.cs", "C#", 0, 0, 0, 0, 0, 225, 0, 0, 0, 8, 45, 278
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\Pointer.cs", "C#", 0, 0, 0, 0, 0, 50, 0, 0, 0, 8, 12, 70
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\Profiler.cs", "C#", 0, 0, 0, 0, 0, 262, 0, 0, 0, 64, 69, 395
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\PushPop.cs", "C#", 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 3, 14
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\SearchResult.cs", "C#", 0, 0, 0, 0, 0, 11, 0, 0, 0, 6, 2, 19
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\SimpleJson.cs", "C#", 0, 0, 0, 0, 0, 496, 0, 0, 0, 24, 128, 648
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\StatePatch.cs", "C#", 0, 0, 0, 0, 0, 56, 0, 0, 0, 0, 11, 67
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\Story.cs", "C#", 0, 0, 0, 0, 0, 1626, 0, 0, 0, 781, 512, 2919
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\StoryException.cs", "C#", 0, 0, 0, 0, 0, 9, 0, 0, 0, 12, 4, 25
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\StoryState.cs", "C#", 0, 0, 0, 0, 0, 921, 0, 0, 0, 178, 243, 1342
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\StringJoinExtension.cs", "C#", 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 8, 29
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\Tag.cs", "C#", 0, 0, 0, 0, 0, 15, 0, 0, 0, 8, 5, 28
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\Value.cs", "C#", 0, 0, 0, 0, 0, 308, 0, 0, 0, 21, 77, 406
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\VariableAssignment.cs", "C#", 0, 0, 0, 0, 0, 20, 0, 0, 0, 2, 6, 28
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\VariableReference.cs", "C#", 0, 0, 0, 0, 0, 40, 0, 0, 0, 3, 9, 52
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\VariablesState.cs", "C#", 0, 0, 0, 0, 0, 286, 0, 0, 0, 61, 71, 418
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\InkLibs\InkRuntime\Void.cs", "C#", 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 2, 11
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\LICENCE.md", "Markdown", 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 6, 13
+"c:\Users\mattr\Isometric Alpha\Assets\Ink\README.md", "Markdown", 0, 0, 0, 0, 0, 0, 0, 0, 92, 0, 73, 165
+"c:\Users\mattr\Isometric Alpha\Assets\InteriorManager.cs", "C#", 0, 0, 0, 0, 0, 57, 0, 0, 0, 0, 11, 68
+"c:\Users\mattr\Isometric Alpha\Assets\OOCUIDisabler.cs", "C#", 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 2, 12
+"c:\Users\mattr\Isometric Alpha\Assets\OutlineForSprites\Resources\Sprite-Outline.shader", "UnityShader", 0, 0, 0, 0, 0, 0, 170, 0, 0, 7, 37, 214
+"c:\Users\mattr\Isometric Alpha\Assets\OutlineForSprites\SpriteOutline.cs", "C#", 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 10, 57
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Charisma\Cult of Personality.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Charisma\Fight for the Fallen.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Charisma\Focus Fire.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Charisma\Greater Than Themselves.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Charisma\Lead by Example.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Charisma\No One Left Behind.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Charisma\Strength in Numbers.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Dexterity\Cripple.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Dexterity\Cunning.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Dexterity\Devastating Criticals.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Dexterity\Exit Strategy.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Dexterity\Flense.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Dexterity\Waylay.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Strength\Fourth Weapon Slot.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Strength\Ignore the Pain.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Strength\Intimidating Presence.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Strength\Major Regeneration.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Strength\Make It Bleed.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Strength\Minor Regeneration.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Strength\Onslaught.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Strength\Third Weapon Slot.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Wisdom\Divide and Conquer.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Wisdom\Eye for Detail.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Wisdom\Greater Strikes.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Wisdom\Improved Strikes.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Wisdom\Observation.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Wisdom\Ruinous Strikes.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Wisdom\Take Cover.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Perks\StatPerks\Wisdom\Throw.json", "JSON", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\DialogueListInkAssets\Resources\directorDefeatedConvo.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 219, 0, 0, 123, 342
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\DialogueListInkAssets\Resources\directorDefeatedConvo.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\DialogueListInkAssets\Resources\guardPunishmentStartConvo.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 110, 0, 0, 65, 175
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\DialogueListInkAssets\Resources\guardPunishmentStartConvo.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\DialogueListInkAssets\Resources\kendeUponEnteringKitchens.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 176, 0, 0, 99, 275
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\DialogueListInkAssets\Resources\kendeUponEnteringKitchens.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\DialogueListInkAssets\Resources\nandorAfterKillingGuardsMineLvl3.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 152, 0, 0, 75, 227
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\DialogueListInkAssets\Resources\nandorAfterKillingGuardsMineLvl3.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\DialogueListInkAssets\Resources\slavesAfterKillingOverseerCampNE.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 469, 0, 0, 191, 660
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\DialogueListInkAssets\Resources\slavesAfterKillingOverseerCampNE.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\DialogueListInkAssets\Resources\taborManse-2F-2b.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 353, 0, 0, 193, 546
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\DialogueListInkAssets\Resources\taborManse-2F-2b.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\Dialogue\Crate.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 79, 0, 0, 64, 143
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\Dialogue\Crate.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\Template.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 86, 0, 0, 67, 153
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\Template.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\VaultableDialogues\Vaultable Object.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 51, 0, 0, 22, 73
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\VaultableDialogues\Vaultable Object.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\VaultableObjects\Vaultable Object.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 51, 0, 0, 22, 73
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\VaultableObjects\Vaultable Object.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\VaultableObjects\Vaultable or Destroyable Object.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 112, 0, 0, 75, 187
+"c:\Users\mattr\Isometric Alpha\Assets\Prefabs\VaultableObjects\Vaultable or Destroyable Object.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\PrintPosition.cs", "C#", 0, 0, 0, 0, 0, 16, 0, 0, 0, 3, 5, 24
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\AidingBalint.json", "JSON", 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 2, 19
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\AidingErvin.json", "JSON", 0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 2, 26
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\AidingJanos.json", "JSON", 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 3, 28
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\AnUneasyTruce.json", "JSON", 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 2, 21
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\AssistTheNonbranded.json", "JSON", 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 2, 18
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\DealWithThePrisoners.json", "JSON", 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 2, 67
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\DelvingDeeper.json", "JSON", 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 2, 15
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\FindGuardMarcos.json", "JSON", 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 2, 21
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\FindNandor.json", "JSON", 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 3, 17
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\GuardKiller.json", "JSON", 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 3, 16
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\HiddenAway.json", "JSON", 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 2, 13
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\LeaveTheCamp.json", "JSON", 0, 0, 0, 0, 29, 0, 0, 0, 0, 0, 2, 31
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\MuzsasSweetTooth.json", "JSON", 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 1, 17
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\NoteWorthy.json", "JSON", 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 2, 18
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\RescueBroglin.json", "JSON", 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 3, 16
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\SealingTheBreach.json", "JSON", 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 4, 23
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\ShutUpTheGossip.json", "JSON", 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 3, 20
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\StockhouseStash.json", "JSON", 0, 0, 0, 0, 28, 0, 0, 0, 0, 0, 2, 30
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\Template.json", "JSON", 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 2, 15
+"c:\Users\mattr\Isometric Alpha\Assets\Quests\ThePlan.json", "JSON", 0, 0, 0, 0, 29, 0, 0, 0, 0, 0, 3, 32
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\ADF-RBG.Mulligan.asmdef", "JSON", 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 10
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\ExtensionsAndUtilities\AssetDatabaseUtility.cs", "C#", 0, 0, 0, 0, 0, 68, 0, 0, 0, 56, 11, 135
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\ExtensionsAndUtilities\ColorExtensions.cs", "C#", 0, 0, 0, 0, 0, 16, 0, 0, 0, 31, 3, 50
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\ExtensionsAndUtilities\EditorCoroutineUtility.cs", "C#", 0, 0, 0, 0, 0, 38, 0, 0, 0, 7, 5, 50
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\ExtensionsAndUtilities\GUIControlNameUtility.cs", "C#", 0, 0, 0, 0, 0, 35, 0, 0, 0, 45, 8, 88
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\ExtensionsAndUtilities\GameObjectExtensions.cs", "C#", 0, 0, 0, 0, 0, 31, 0, 0, 0, 39, 3, 73
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\ExtensionsAndUtilities\ListExtensions.cs", "C#", 0, 0, 0, 0, 0, 19, 0, 0, 0, 29, 3, 51
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\ExtensionsAndUtilities\MulliganEditorGUIUtilities.cs", "C#", 0, 0, 0, 0, 0, 129, 0, 0, 0, 34, 24, 187
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\ExtensionsAndUtilities\ObjectExtensions.cs", "C#", 0, 0, 0, 0, 0, 52, 0, 0, 0, 35, 4, 91
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\ExtensionsAndUtilities\RectExtensions.cs", "C#", 0, 0, 0, 0, 0, 110, 0, 0, 0, 73, 20, 203
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\ExtensionsAndUtilities\RenameResultUtilities.cs", "C#", 0, 0, 0, 0, 0, 99, 0, 0, 0, 25, 12, 136
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\ExtensionsAndUtilities\StringUtilities.cs", "C#", 0, 0, 0, 0, 0, 30, 0, 0, 0, 22, 6, 58
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\ExtensionsAndUtilities\UniqueList.cs", "C#", 0, 0, 0, 0, 0, 137, 0, 0, 0, 29, 26, 192
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\GUI\ManagePresetsWindow.cs", "C#", 0, 0, 0, 0, 0, 142, 0, 0, 0, 28, 20, 190
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\GUI\MulliganRenamerPreviewPanel.cs", "C#", 0, 0, 0, 0, 0, 1040, 0, 0, 0, 119, 264, 1423
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\GUI\MulliganRenamerWindow.cs", "C#", 0, 0, 0, 0, 0, 1001, 0, 0, 0, 88, 216, 1305
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\GUI\MulliganUserPreferencesWindow.cs", "C#", 0, 0, 0, 0, 0, 207, 0, 0, 0, 34, 40, 281
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\GUI\SavePresetWindow.cs", "C#", 0, 0, 0, 0, 0, 84, 0, 0, 0, 38, 17, 139
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Localization\Language.cs", "C#", 0, 0, 0, 0, 0, 53, 0, 0, 0, 32, 10, 95
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Localization\LanguageBookmarks.cs", "C#", 0, 0, 0, 0, 0, 19, 0, 0, 0, 27, 2, 48
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Localization\LanguageRetriever.cs", "C#", 0, 0, 0, 0, 0, 182, 0, 0, 0, 27, 30, 239
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Localization\LocalizationManager.cs", "C#", 0, 0, 0, 0, 0, 222, 0, 0, 0, 59, 44, 325
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Localization\LocalizedString.cs", "C#", 0, 0, 0, 0, 0, 28, 0, 0, 0, 27, 6, 61
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Networking\AsyncOp.cs", "C#", 0, 0, 0, 0, 0, 62, 0, 0, 0, 46, 18, 126
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Networking\AsyncStatus.cs", "C#", 0, 0, 0, 0, 0, 17, 0, 0, 0, 46, 8, 71
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Networking\IWebRequest.cs", "C#", 0, 0, 0, 0, 0, 15, 0, 0, 0, 26, 10, 51
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Networking\JSONRetrieverWeb.cs", "C#", 0, 0, 0, 0, 0, 70, 0, 0, 0, 31, 13, 114
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Networking\UnityWebRequestWrapper.cs", "C#", 0, 0, 0, 0, 0, 100, 0, 0, 0, 35, 14, 149
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\OperationDrawers\AddStringOperationDrawer.cs", "C#", 0, 0, 0, 0, 0, 53, 0, 0, 0, 47, 8, 108
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\OperationDrawers\AddStringSequenceOperationDrawer.cs", "C#", 0, 0, 0, 0, 0, 81, 0, 0, 0, 48, 15, 144
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\OperationDrawers\AdjustNumberingOperationDrawer.cs", "C#", 0, 0, 0, 0, 0, 48, 0, 0, 0, 47, 7, 102
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\OperationDrawers\ChangeCaseOperationDrawer.cs", "C#", 0, 0, 0, 0, 0, 64, 0, 0, 0, 47, 9, 120
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\OperationDrawers\CountByLetterOperationDrawer.cs", "C#", 0, 0, 0, 0, 0, 217, 0, 0, 0, 52, 40, 309
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\OperationDrawers\EnumerateOperationDrawer.cs", "C#", 0, 0, 0, 0, 0, 208, 0, 0, 0, 53, 31, 292
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\OperationDrawers\IRenameOperationDrawer.cs", "C#", 0, 0, 0, 0, 0, 17, 0, 0, 0, 48, 8, 73
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\OperationDrawers\RemoveCharactersOperationDrawer.cs", "C#", 0, 0, 0, 0, 0, 202, 0, 0, 0, 56, 29, 287
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\OperationDrawers\RenameOperationDrawer.cs", "C#", 0, 0, 0, 0, 0, 133, 0, 0, 0, 87, 32, 252
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\OperationDrawers\RenameOperationGUIOption.cs", "C#", 0, 0, 0, 0, 0, 9, 0, 0, 0, 39, 3, 51
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\OperationDrawers\RenameOperationSortingButtonEvent.cs", "C#", 0, 0, 0, 0, 0, 10, 0, 0, 0, 37, 4, 51
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\OperationDrawers\ReplaceNameOperationDrawer.cs", "C#", 0, 0, 0, 0, 0, 49, 0, 0, 0, 48, 8, 105
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\OperationDrawers\ReplaceStringOperationDrawer.cs", "C#", 0, 0, 0, 0, 0, 141, 0, 0, 0, 48, 22, 211
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\OperationDrawers\ToCamelCaseOperationDrawer.cs", "C#", 0, 0, 0, 0, 0, 63, 0, 0, 0, 47, 9, 119
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\OperationDrawers\TrimCharactersOperationDrawer.cs", "C#", 0, 0, 0, 0, 0, 55, 0, 0, 0, 47, 8, 110
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Operations\AddStringOperation.cs", "C#", 0, 0, 0, 0, 0, 95, 0, 0, 0, 59, 20, 174
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Operations\AddStringSequenceOperation.cs", "C#", 0, 0, 0, 0, 0, 16, 0, 0, 0, 40, 4, 60
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Operations\AdjustNumberingOperation.cs", "C#", 0, 0, 0, 0, 0, 84, 0, 0, 0, 50, 17, 151
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Operations\ChangeCaseOperation.cs", "C#", 0, 0, 0, 0, 0, 135, 0, 0, 0, 66, 25, 226
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Operations\CountByLetterOperation.cs", "C#", 0, 0, 0, 0, 0, 228, 0, 0, 0, 96, 43, 367
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Operations\EnumerateOperation.cs", "C#", 0, 0, 0, 0, 0, 205, 0, 0, 0, 86, 40, 331
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Operations\IRenameOperation.cs", "C#", 0, 0, 0, 0, 0, 10, 0, 0, 0, 39, 4, 53
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Operations\RemoveCharactersOperation.cs", "C#", 0, 0, 0, 0, 0, 226, 0, 0, 0, 75, 43, 344
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Operations\ReplaceNameOperation.cs", "C#", 0, 0, 0, 0, 0, 69, 0, 0, 0, 55, 16, 140
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Operations\ReplaceStringOperation.cs", "C#", 0, 0, 0, 0, 0, 215, 0, 0, 0, 91, 39, 345
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Operations\ToCamelCaseOperation.cs", "C#", 0, 0, 0, 0, 0, 147, 0, 0, 0, 53, 25, 225
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Operations\TrimCharactersOperation.cs", "C#", 0, 0, 0, 0, 0, 106, 0, 0, 0, 61, 22, 189
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\PreferencesAndSettings\MulliganRightClickItems.cs", "C#", 0, 0, 0, 0, 0, 13, 0, 0, 0, 22, 3, 38
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\PreferencesAndSettings\MulliganSettingsProvider.cs", "C#", 0, 0, 0, 0, 0, 42, 0, 0, 0, 29, 11, 82
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\PreferencesAndSettings\MulliganUserPreferences.cs", "C#", 0, 0, 0, 0, 0, 287, 0, 0, 0, 87, 62, 436
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\RBPackageSettings.cs", "C#", 0, 0, 0, 0, 0, 7, 0, 0, 0, 23, 1, 31
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Renaming\AssetCache.cs", "C#", 0, 0, 0, 0, 0, 56, 0, 0, 0, 42, 10, 108
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Renaming\AssetPostprocessorEvents.cs", "C#", 0, 0, 0, 0, 0, 12, 0, 0, 0, 28, 3, 43
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Renaming\AssetPostprocessorEventsDispatcher.cs", "C#", 0, 0, 0, 0, 0, 11, 0, 0, 0, 27, 2, 40
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Renaming\BulkRenamePreview.cs", "C#", 0, 0, 0, 0, 0, 131, 0, 0, 0, 70, 22, 223
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Renaming\BulkRenamer.cs", "C#", 0, 0, 0, 0, 0, 245, 0, 0, 0, 66, 42, 353
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Renaming\Diff.cs", "C#", 0, 0, 0, 0, 0, 48, 0, 0, 0, 53, 11, 112
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Renaming\DiffOperation.cs", "C#", 0, 0, 0, 0, 0, 9, 0, 0, 0, 34, 3, 46
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Renaming\ObjectNameDelta.cs", "C#", 0, 0, 0, 0, 0, 18, 0, 0, 0, 42, 6, 66
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Renaming\RenameOperationSequence.cs", "C#", 0, 0, 0, 0, 0, 226, 0, 0, 0, 121, 49, 396
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Renaming\RenamePreview.cs", "C#", 0, 0, 0, 0, 0, 74, 0, 0, 0, 60, 14, 148
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Renaming\RenameResult.cs", "C#", 0, 0, 0, 0, 0, 188, 0, 0, 0, 100, 34, 322
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Renaming\RenameResultSequence.cs", "C#", 0, 0, 0, 0, 0, 57, 0, 0, 0, 51, 10, 118
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Renaming\RenameSequencePreset.cs", "C#", 0, 0, 0, 0, 0, 74, 0, 0, 0, 23, 16, 113
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Renaming\SpritesheetRenamer.cs", "C#", 0, 0, 0, 0, 0, 124, 0, 0, 0, 49, 25, 198
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Resources\MulliganLanguages\en.json", "JSON", 0, 0, 0, 0, 679, 0, 0, 0, 0, 0, 0, 679
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Resources\MulliganLanguages\es.json", "JSON", 0, 0, 0, 0, 679, 0, 0, 0, 0, 0, 1, 680
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Resources\MulliganLanguages\pt.json", "JSON", 0, 0, 0, 0, 679, 0, 0, 0, 0, 0, 0, 679
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Resources\MulliganLanguages\zh_CN.json", "JSON", 0, 0, 0, 0, 679, 0, 0, 0, 0, 0, 1, 680
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Undo\AssetRenameUndoMoment.cs", "C#", 0, 0, 0, 0, 0, 64, 0, 0, 0, 41, 13, 118
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\Editor\Undo\AssetRenameUndoer.cs", "C#", 0, 0, 0, 0, 0, 53, 0, 0, 0, 35, 12, 100
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\README.md", "Markdown", 0, 0, 0, 0, 0, 0, 0, 0, 82, 0, 31, 113
+"c:\Users\mattr\Isometric Alpha\Assets\RedBlueGames\MulliganRenamer\package.json", "JSON", 0, 0, 0, 0, 18, 0, 0, 0, 0, 0, 1, 19
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\1SlaveShack\Dialogue\Balint.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 535, 0, 0, 255, 790
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\1SlaveShack\Dialogue\Balint.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\1SlaveShack\Dialogue\Seb.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 89, 0, 0, 53, 142
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\1SlaveShack\Dialogue\Seb.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\2SlaveShack\Dialogue\Garcha\Garcha.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 78, 0, 0, 48, 126
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\2SlaveShack\Dialogue\Garcha\Garcha.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\2SlaveShack\Dialogue\IntroDialogue\IntroDialogue.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 568, 0, 0, 372, 940
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\2SlaveShack\Dialogue\IntroDialogue\IntroDialogue.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\2SlaveShack\Dialogue\KastorDuringRevolution.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 91, 0, 0, 66, 157
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\2SlaveShack\Dialogue\KastorDuringRevolution.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\2SlaveShack\Dialogue\urosDuringRevolt.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 85, 0, 0, 65, 150
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\2SlaveShack\Dialogue\urosDuringRevolt.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\3SlaveShack\Dialogue\Andras.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 9, 24
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\3SlaveShack\Dialogue\Andras.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\3SlaveShack\Dialogue\Janos.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 478, 0, 0, 207, 685
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\3SlaveShack\Dialogue\Janos.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\4SlaveShack\Dialogue\KastorPlan.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 1568, 0, 0, 703, 2271
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\4SlaveShack\Dialogue\KastorPlan.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\5SlaveShack\Dialogue\Ervin.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 86, 341
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\5SlaveShack\Dialogue\Ervin.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\5SlaveShack\Dialogue\WallPatchJobCampSEThree.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 91, 0, 0, 69, 160
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\5SlaveShack\Dialogue\WallPatchJobCampSEThree.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\6SlaveShack\Dialogue\Thatch.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 274, 0, 0, 125, 399
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\6SlaveShack\Dialogue\Thatch.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\6SlaveShack\Dialogue\WallPatchJobCampSEOne.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 91, 0, 0, 69, 160
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\6SlaveShack\Dialogue\WallPatchJobCampSEOne.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\6SlaveShack\Dialogue\WallPatchJobCampSETwo.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 91, 0, 0, 69, 160
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\6SlaveShack\Dialogue\WallPatchJobCampSETwo.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\7SlaveShack\Dialogue\Clay.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 360, 0, 0, 141, 501
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\7SlaveShack\Dialogue\Clay.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Manse_Floor_1\Dialogue\BookshelvesWithHiddenPassage.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 92, 0, 0, 67, 159
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Manse_Floor_1\Dialogue\BookshelvesWithHiddenPassage.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Manse_Floor_1\Dialogue\DiningRoomDoors.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 80, 0, 0, 65, 145
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Manse_Floor_1\Dialogue\DiningRoomDoors.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Manse_Floor_1\Dialogue\LoyalImre.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 96, 0, 0, 68, 164
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Manse_Floor_1\Dialogue\LoyalImre.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Manse_Floor_1\Dialogue\MRSecretDoor.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 93, 0, 0, 67, 160
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Manse_Floor_1\Dialogue\MRSecretDoor.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Manse_Floor_1\Dialogue\Manse Gate Inside.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 35, 0, 0, 15, 50
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Manse_Floor_1\Dialogue\Manse Gate Inside.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Manse_Floor_2\Dialogue\Director\DirectorCombatConvo.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 179, 0, 0, 119, 298
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Manse_Floor_2\Dialogue\Director\DirectorCombatConvo.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Manse_Floor_2\Dialogue\OfficeDoor.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 95, 0, 0, 72, 167
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Manse_Floor_2\Dialogue\OfficeDoor.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Manse_Floor_2\Dialogue\OfficeSecretDoor.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 69, 169
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Manse_Floor_2\Dialogue\OfficeSecretDoor.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MessHall\Dialogue\KendeTheCook.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 187, 0, 0, 99, 286
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MessHall\Dialogue\KendeTheCook.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Interactable Terrain\1a\WallThatIsADoor.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 95, 0, 0, 70, 165
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Interactable Terrain\1a\WallThatIsADoor.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Interactable Terrain\7b\WallThatIsADoor.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 91, 0, 0, 67, 158
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Interactable Terrain\7b\WallThatIsADoor.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Interactable Terrain\SecretDoorNote.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 88, 0, 0, 66, 154
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Interactable Terrain\SecretDoorNote.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Level 3 Gate.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 80, 0, 0, 65, 145
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Level 3 Gate.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Liftable Gate.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 96, 0, 0, 71, 167
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Liftable Gate.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Mine Armory Gate.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 96, 0, 0, 71, 167
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Mine Armory Gate.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Movable Barrel.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 80, 0, 0, 65, 145
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Movable Barrel.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Portcullis Controls.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 105, 0, 0, 74, 179
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Portcullis Controls.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Puzzle Gate.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 78, 0, 0, 60, 138
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_2\Dialogue\Puzzle Gate.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Guards\GuardPazmanDialogue.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 105, 0, 0, 84, 189
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Guards\GuardPazmanDialogue.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Guards\GuardRekaDialogue.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 102, 0, 0, 84, 186
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Guards\GuardRekaDialogue.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Guards\GuardViragDialogue.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 102, 0, 0, 84, 186
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Guards\GuardViragDialogue.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Guards\GuardsCrate.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 344, 0, 0, 184, 528
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Guards\GuardsCrate.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Guards\Old\GuardPazmanDialogue.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 105, 0, 0, 84, 189
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Guards\Old\GuardPazmanDialogue.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Guards\Old\GuardsCrate.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 189, 0, 0, 123, 312
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Guards\Old\GuardsCrate.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Liftable Gate - 2b.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 96, 0, 0, 71, 167
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Liftable Gate - 2b.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Miners\CarterDialogue.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 92, 0, 0, 67, 159
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Miners\CarterDialogue.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Miners\GuardMarcosDialogue.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 133, 0, 0, 67, 200
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Miners\GuardMarcosDialogue.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Miners\MinersCrate.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 361, 0, 0, 149, 510
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Miners\MinersCrate.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Miners\NandorDialogue.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 92, 0, 0, 69, 161
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Miners\NandorDialogue.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\PocketRubble.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 546, 0, 0, 286, 832
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\PocketRubble.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Puzzle Gate.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 78, 0, 0, 60, 138
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\Puzzle Gate.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\WallThatIsADoor.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 93, 0, 0, 67, 160
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\MineLvl_3\Dialogue\WallThatIsADoor.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Pit\Dialogue\Broglin.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 99, 0, 0, 48, 147
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Pit\Dialogue\Broglin.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Pit\Dialogue\Pit Gate.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 93, 0, 0, 66, 159
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Pit\Dialogue\Pit Gate.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\BarricadeGuards\BarricadeGuards1-2.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 34, 0, 0, 13, 47
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\BarricadeGuards\BarricadeGuards1-2.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\BarricadeGuards\BarricadeGuards3AndUp.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 112, 0, 0, 54, 166
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\BarricadeGuards\BarricadeGuards3AndUp.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Camp Gate.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 27, 0, 0, 9, 36
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Camp Gate.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\CampSEPatchJobs\WallPatchJobCampSEOne.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 91, 0, 0, 69, 160
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\CampSEPatchJobs\WallPatchJobCampSEOne.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\CampSEPatchJobs\WallPatchJobCampSEThree.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 91, 0, 0, 69, 160
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\CampSEPatchJobs\WallPatchJobCampSEThree.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\CampSEPatchJobs\WallPatchJobCampSETwo.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 91, 0, 0, 69, 160
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\CampSEPatchJobs\WallPatchJobCampSETwo.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardMuzsa.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 268, 0, 0, 143, 411
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardMuzsa.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\Broglin.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 83, 0, 0, 69, 152
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\Broglin.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\Carter.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 83, 0, 0, 67, 150
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\Carter.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\ChiefTabor.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 766, 0, 0, 430, 1196
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\ChiefTabor.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\CrowdSlave.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 87, 0, 0, 69, 156
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\CrowdSlave.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\Garcha.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 8, 17
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\Garcha.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\GuardAndras.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 262, 0, 0, 136, 398
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\GuardAndras.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\GuardMarcos.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 225, 0, 0, 138, 363
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\GuardMarcos.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\Janos.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 95, 0, 0, 67, 162
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\Janos.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\Kastor.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 24, 0, 0, 9, 33
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\Kastor.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\Nandor.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 237, 0, 0, 125, 362
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\GuardPunishments\Nandor.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\HastilyBuiltBarricade.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 98, 0, 0, 73, 171
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\HastilyBuiltBarricade.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Imre.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 510, 0, 0, 134, 644
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Imre.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\LeafSamplePile.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 29, 0, 0, 19, 48
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\LeafSamplePile.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Manse Gate.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 21, 68
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Manse Gate.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Page\PageB4Leaving.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 101, 0, 0, 60, 161
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Page\PageB4Leaving.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\PartyMember\Red.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 95, 0, 0, 72, 167
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\PartyMember\Red.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Servants Entrance.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 15, 55
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Servants Entrance.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Tabor\Feher.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 31, 0, 0, 9, 40
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Tabor\Feher.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Tabor\GuardWatchingTabor.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 37, 0, 0, 8, 45
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Tabor\GuardWatchingTabor.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Tabor\SlavesWatchingTabor.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 31, 0, 0, 9, 40
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Tabor\SlavesWatchingTabor.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Tabor\Tabor.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 165, 0, 0, 123, 288
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Tabor\Tabor.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Temple.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 153, 0, 0, 83, 236
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\Temple.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\WallPatchJobCampCenter1.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 91, 0, 0, 69, 160
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\WallPatchJobCampCenter1.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\WallPatchJobCampCenter2.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 91, 0, 0, 69, 160
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Slave Camp\Dialogue\WallPatchJobCampCenter2.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Stables\Dialogue\Placeholder.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 87, 0, 0, 66, 153
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Stables\Dialogue\Placeholder.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Stockhouse\Dialogue\BarrelsWithNugget.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 62, 0, 0, 21, 83
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Stockhouse\Dialogue\BarrelsWithNugget.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Stockhouse\Dialogue\Dud Crate.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 34, 0, 0, 15, 49
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Stockhouse\Dialogue\Dud Crate.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Stockhouse\Dialogue\QuartermasterEmese.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 143, 0, 0, 80, 223
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Stockhouse\Dialogue\QuartermasterEmese.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Stockhouse\Dialogue\Uros.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 224, 0, 0, 99, 323
+"c:\Users\mattr\Isometric Alpha\Assets\Scenes\Stockhouse\Dialogue\Uros.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader", "UnityShader", 0, 0, 0, 0, 0, 0, 109, 0, 0, 2, 33, 144
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader", "UnityShader", 0, 0, 0, 0, 0, 0, 112, 0, 0, 3, 31, 146
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader", "UnityShader", 0, 0, 0, 0, 0, 0, 109, 0, 0, 2, 33, 144
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader", "UnityShader", 0, 0, 0, 0, 0, 0, 243, 0, 0, 4, 71, 318
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader", "UnityShader", 0, 0, 0, 0, 0, 0, 241, 0, 0, 4, 66, 311
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader", "UnityShader", 0, 0, 0, 0, 0, 0, 188, 0, 0, 10, 50, 248
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader", "UnityShader", 0, 0, 0, 0, 0, 0, 183, 0, 0, 8, 50, 241
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader", "UnityShader", 0, 0, 0, 0, 0, 0, 82, 0, 0, 4, 21, 107
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader", "UnityShader", 0, 0, 0, 0, 0, 0, 183, 0, 0, 8, 50, 241
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader", "UnityShader", 0, 0, 0, 0, 0, 0, 103, 0, 0, 8, 28, 139
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader", "UnityShader", 0, 0, 0, 0, 0, 0, 122, 0, 0, 4, 33, 159
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Shaders\TMP_SDF.shader", "UnityShader", 0, 0, 0, 0, 0, 0, 243, 0, 0, 4, 71, 318
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Shaders\TMP_Sprite.shader", "UnityShader", 0, 0, 0, 0, 0, 0, 93, 0, 0, 0, 22, 115
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Shaders\TMPro.cginc", "UnityShader", 0, 0, 0, 0, 0, 0, 63, 0, 0, 2, 20, 85
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc", "UnityShader", 0, 0, 0, 0, 0, 0, 122, 0, 0, 2, 34, 158
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc", "UnityShader", 0, 0, 0, 0, 0, 0, 62, 0, 0, 10, 14, 86
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc", "UnityShader", 0, 0, 0, 0, 0, 0, 76, 0, 0, 7, 19, 102
+"c:\Users\mattr\Isometric Alpha\Assets\TextMesh Pro\Sprites\EmojiOne.json", "JSON", 0, 0, 0, 0, 155, 0, 0, 0, 0, 0, 2, 157
+"c:\Users\mattr\Isometric Alpha\Assets\WanzyeeStudio\Scripts\Editor\Base\Extension\MenuExtension.cs", "C#", 0, 0, 0, 0, 0, 29, 0, 0, 0, 32, 12, 73
+"c:\Users\mattr\Isometric Alpha\Assets\WanzyeeStudio\Scripts\Editor\Base\Instance\AuxCursor.cs", "C#", 0, 0, 0, 0, 0, 85, 0, 0, 0, 67, 50, 202
+"c:\Users\mattr\Isometric Alpha\Assets\WanzyeeStudio\Scripts\Editor\Base\Utility\EditrixGUI.cs", "C#", 0, 0, 0, 0, 0, 104, 0, 0, 0, 126, 71, 301
+"c:\Users\mattr\Isometric Alpha\Assets\WanzyeeStudio\Scripts\Editor\Base\Utility\EditrixStyle.cs", "C#", 0, 0, 0, 0, 0, 282, 0, 0, 0, 125, 65, 472
+"c:\Users\mattr\Isometric Alpha\Assets\WanzyeeStudio\Scripts\Editor\Base\Utility\EditrixUtility.cs", "C#", 0, 0, 0, 0, 0, 110, 0, 0, 0, 104, 74, 288
+"c:\Users\mattr\Isometric Alpha\Assets\WanzyeeStudio\Scripts\Editor\Toolkit\Interim\Clipboard.Dragger.cs", "C#", 0, 0, 0, 0, 0, 149, 0, 0, 0, 111, 96, 356
+"c:\Users\mattr\Isometric Alpha\Assets\WanzyeeStudio\Scripts\Editor\Toolkit\Interim\Clipboard.Filer.cs", "C#", 0, 0, 0, 0, 0, 154, 0, 0, 0, 106, 106, 366
+"c:\Users\mattr\Isometric Alpha\Assets\WanzyeeStudio\Scripts\Editor\Toolkit\Interim\Clipboard.Group.cs", "C#", 0, 0, 0, 0, 0, 66, 0, 0, 0, 42, 43, 151
+"c:\Users\mattr\Isometric Alpha\Assets\WanzyeeStudio\Scripts\Editor\Toolkit\Interim\Clipboard.Item.cs", "C#", 0, 0, 0, 0, 0, 252, 0, 0, 0, 149, 165, 566
+"c:\Users\mattr\Isometric Alpha\Assets\WanzyeeStudio\Scripts\Editor\Toolkit\Interim\Clipboard.Manager.cs", "C#", 0, 0, 0, 0, 0, 288, 0, 0, 0, 228, 185, 701
+"c:\Users\mattr\Isometric Alpha\Assets\WanzyeeStudio\Scripts\Editor\Toolkit\Interim\Clipboard.cs", "C#", 0, 0, 0, 0, 0, 261, 0, 0, 0, 262, 154, 677
+"c:\Users\mattr\Isometric Alpha\Assets\WanzyeeStudio\Scripts\Editor\Toolkit\Interim\MaterialPropertyCopier.cs", "C#", 0, 0, 0, 0, 0, 41, 0, 0, 0, 41, 30, 112
+"c:\Users\mattr\Isometric Alpha\Assets\WanzyeeStudio\Scripts\Editor\WanzyeeStudio.Editor.asmdef", "JSON", 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 12
+"c:\Users\mattr\Isometric Alpha\Assets\WanzyeeStudio\Scripts\Runtime\Base\Extension\ComponentExtension.cs", "C#", 0, 0, 0, 0, 0, 56, 0, 0, 0, 43, 40, 139
+"c:\Users\mattr\Isometric Alpha\Assets\WanzyeeStudio\Scripts\Runtime\Base\Extension\TypeExtension.cs", "C#", 0, 0, 0, 0, 0, 140, 0, 0, 0, 121, 94, 355
+"c:\Users\mattr\Isometric Alpha\Assets\WanzyeeStudio\Scripts\Runtime\Base\Utility\IoUtility.cs", "C#", 0, 0, 0, 0, 0, 49, 0, 0, 0, 50, 33, 132
+"c:\Users\mattr\Isometric Alpha\Assets\WanzyeeStudio\Scripts\Runtime\WanzyeeStudio.Runtime.asmdef", "JSON", 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 8
+"c:\Users\mattr\Isometric Alpha\Assets\_Heathen Engineering\Assets\Common\Images\Heathen Corporate\HeathenLogoVectorized.svg", "XML", 428, 0, 0, 0, 0, 0, 0, 0, 0, 1, 10, 439
+"c:\Users\mattr\Isometric Alpha\Assets\_Heathen Engineering\Assets\UX\HeathenEngineering.UX.asmdef", "JSON", 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 17
+"c:\Users\mattr\Isometric Alpha\Assets\_Heathen Engineering\Assets\UX\Icons\Flat Icons [Free]\Source\Free Flat GUI.svg", "XML", 1167, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 1171
+"c:\Users\mattr\Isometric Alpha\Assets\_Heathen Engineering\Samples\UX Examples\Flat Icons [Free]\ToggleSetAnimatorBoolean.cs", "C#", 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 3, 16
+"c:\Users\mattr\Isometric Alpha\Assets\obj\x86\Debug\.NETFramework,Version=v4.0,Profile=Client.AssemblyAttributes.cs", "C#", 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 1, 5
+"c:\Users\mattr\Isometric Alpha\Assets\obj\x86\Release\.NETFramework,Version=v4.0,Profile=Client.AssemblyAttributes.cs", "C#", 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 1, 5
+"c:\Users\mattr\Isometric Alpha\Assets\src\Art\AdjustFramerate.cs", "C#", 0, 0, 0, 0, 0, 12, 0, 0, 0, 1, 3, 16
+"c:\Users\mattr\Isometric Alpha\Assets\src\Art\BackgroundManager.cs", "C#", 0, 0, 0, 0, 0, 94, 0, 0, 0, 58, 35, 187
+"c:\Users\mattr\Isometric Alpha\Assets\src\Art\CameraDefaultFollow.cs", "C#", 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 3, 18
+"c:\Users\mattr\Isometric Alpha\Assets\src\Art\StartingMonologueSkipScript.cs", "C#", 0, 0, 0, 0, 0, 14, 0, 0, 0, 2, 2, 18
+"c:\Users\mattr\Isometric Alpha\Assets\src\Art\TilemapDiagonal.cs", "C#", 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 5, 17
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\AbilityList.cs", "C#", 0, 0, 0, 0, 0, 468, 0, 0, 0, 10, 138, 616
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\AbilityMenuButton.cs", "C#", 0, 0, 0, 0, 0, 282, 0, 0, 0, 0, 74, 356
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\AbilityMenuManager.cs", "C#", 0, 0, 0, 0, 0, 596, 0, 0, 0, 5, 132, 733
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\Ability.cs", "C#", 0, 0, 0, 0, 0, 252, 0, 0, 0, 5, 71, 328
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\Activated Passives\ActivatedPassive.cs", "C#", 0, 0, 0, 0, 0, 90, 0, 0, 0, 1, 23, 114
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\Activated Passives\ExuberanceActivatedPassive.cs", "C#", 0, 0, 0, 0, 0, 44, 0, 0, 0, 0, 7, 51
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\Activated Passives\Stance.cs", "C#", 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 6, 29
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\BacklashAbility.cs", "C#", 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 7, 28
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\ChargeUpAbility.cs", "C#", 0, 0, 0, 0, 0, 96, 0, 0, 0, 8, 13, 117
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\DoubleStrikeAbility.cs", "C#", 0, 0, 0, 0, 0, 73, 0, 0, 0, 0, 21, 94
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\EstablishLinkAbility.cs", "C#", 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 6, 25
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\EvolveAbility.cs", "C#", 0, 0, 0, 0, 0, 85, 0, 0, 0, 6, 17, 108
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\GroundEffectAbility.cs", "C#", 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 6, 27
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\HealingAbilities\HealingAbility.cs", "C#", 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 9, 42
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\HealingAbilities\ReviveAbility.cs", "C#", 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 8, 38
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\HealingAbilities\StanceReapplicationAbility.cs", "C#", 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 6, 22
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\InterruptAbility.cs", "C#", 0, 0, 0, 0, 0, 87, 0, 0, 0, 1, 18, 106
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\LastManStandingAbility.cs", "C#", 0, 0, 0, 0, 0, 57, 0, 0, 0, 9, 11, 77
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\MissesArePunishedAbility.cs", "C#", 0, 0, 0, 0, 0, 66, 0, 0, 0, 0, 14, 80
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\PassiveAbility.cs", "C#", 0, 0, 0, 0, 0, 122, 0, 0, 0, 3, 31, 156
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\RepositionAbilities\RepositionAbility.cs", "C#", 0, 0, 0, 0, 0, 108, 0, 0, 0, 0, 34, 142
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\RepositionAbilities\RepositionAllyAbility.cs", "C#", 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 8, 39
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\RepositionAbilities\RepositionEnemyAbility.cs", "C#", 0, 0, 0, 0, 0, 58, 0, 0, 0, 4, 18, 80
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\RepositionAbilities\RepositionSelfAbility.cs", "C#", 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 8, 38
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\SquadAbility.cs", "C#", 0, 0, 0, 0, 0, 89, 0, 0, 0, 0, 27, 116
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\SuicideAbility.cs", "C#", 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 9, 30
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\SummonAbility.cs", "C#", 0, 0, 0, 0, 0, 118, 0, 0, 0, 0, 30, 148
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\TraitBasedDamageAbility.cs", "C#", 0, 0, 0, 0, 0, 43, 0, 0, 0, 4, 12, 59
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Abilities\VolleyAbility.cs", "C#", 0, 0, 0, 0, 0, 183, 0, 0, 0, 1, 37, 221
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Attack\Attack.cs", "C#", 0, 0, 0, 0, 0, 231, 0, 0, 0, 2, 58, 291
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Attack\CompanionAttack.cs", "C#", 0, 0, 0, 0, 0, 105, 0, 0, 0, 0, 21, 126
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Attack\FistAttack.cs", "C#", 0, 0, 0, 0, 0, 31, 0, 0, 0, 1, 10, 42
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\Attack\SuicideAttack.cs", "C#", 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 9, 29
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\CombatAction.cs", "C#", 0, 0, 0, 0, 0, 976, 0, 0, 0, 43, 232, 1251
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\CombatActionSettings.cs", "C#", 0, 0, 0, 0, 0, 276, 0, 0, 0, 6, 79, 361
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\ItemAction.cs", "C#", 0, 0, 0, 0, 0, 178, 0, 0, 0, 7, 43, 228
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Action\KnockBackAbility.cs", "C#", 0, 0, 0, 0, 0, 102, 0, 0, 0, 48, 29, 179
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\ActivatedPassiveTraitManager.cs", "C#", 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 11, 51
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Animation\CombatAnimationManager.cs", "C#", 0, 0, 0, 0, 0, 193, 0, 0, 0, 117, 63, 373
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Animation\Projectile.cs", "C#", 0, 0, 0, 0, 0, 107, 0, 0, 0, 1, 31, 139
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Animation\ProjectileAnimationFinisher.cs", "C#", 0, 0, 0, 0, 0, 20, 0, 0, 0, 16, 7, 43
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\AreaManager.cs", "C#", 0, 0, 0, 0, 0, 84, 0, 0, 0, 2, 21, 107
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\CombatActionManager\CombatActionManager.cs", "C#", 0, 0, 0, 0, 0, 278, 0, 0, 0, 5, 71, 354
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\CombatActionManager\EnemyCombatActionManager.cs", "C#", 0, 0, 0, 0, 0, 125, 0, 0, 0, 12, 33, 170
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\CombatActionManager\EnvironmentalActionManager.cs", "C#", 0, 0, 0, 0, 0, 79, 0, 0, 0, 1, 25, 105
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\CombatActionManager\PlayerCombatActionManager.cs", "C#", 0, 0, 0, 0, 0, 104, 0, 0, 0, 1, 36, 141
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\CombatActionManager\SummonsCombatActionManager.cs", "C#", 0, 0, 0, 0, 0, 75, 0, 0, 0, 3, 21, 99
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\CombatGrid.cs", "C#", 0, 0, 0, 0, 0, 482, 0, 0, 0, 18, 116, 616
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\CombatResultsManager.cs", "C#", 0, 0, 0, 0, 0, 96, 0, 0, 0, 0, 30, 126
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\CombatResultsUI.cs", "C#", 0, 0, 0, 0, 0, 82, 0, 0, 0, 0, 23, 105
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\CombatStateManager.cs", "C#", 0, 0, 0, 0, 0, 334, 0, 0, 0, 16, 97, 447
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\DamageCalculator.cs", "C#", 0, 0, 0, 0, 0, 224, 0, 0, 0, 40, 60, 324
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\DamageNumbers\DamageNumberPopup.cs", "C#", 0, 0, 0, 0, 0, 76, 0, 0, 0, 0, 21, 97
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\DamageNumbers\DamageNumberSpawner.cs", "C#", 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 3, 10
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\DamageNumbers\DamagePreviewManager.cs", "C#", 0, 0, 0, 0, 0, 73, 0, 0, 0, 0, 23, 96
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\DamageNumbers\HealthBarManager.cs", "C#", 0, 0, 0, 0, 0, 74, 0, 0, 0, 0, 17, 91
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\DeadCombatantManager.cs", "C#", 0, 0, 0, 0, 0, 68, 0, 0, 0, 2, 16, 86
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\GroundEffectManager.cs", "C#", 0, 0, 0, 0, 0, 116, 0, 0, 0, 0, 30, 146
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\HoverPanels\TraitHoverMouseListener.cs", "C#", 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 17, 65
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\PlayerCombatActionCounterManager.cs", "C#", 0, 0, 0, 0, 0, 58, 0, 0, 0, 0, 15, 73
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Range.cs", "C#", 0, 0, 0, 0, 0, 94, 0, 0, 0, 0, 12, 106
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Reposition\RepositionManager.cs", "C#", 0, 0, 0, 0, 0, 252, 0, 0, 0, 0, 66, 318
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Reposition\RepositionPlaceholderGenerator.cs", "C#", 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 8, 32
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Reposition\RepositionUIManager.cs", "C#", 0, 0, 0, 0, 0, 154, 0, 0, 0, 0, 39, 193
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Reposition\StatsRepositionObject.cs", "C#", 0, 0, 0, 0, 0, 27, 0, 0, 0, 0, 10, 37
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Selectors\MultiSelector.cs", "C#", 0, 0, 0, 0, 0, 62, 0, 0, 0, 8, 18, 88
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Selectors\SelectChoice.cs", "C#", 0, 0, 0, 0, 0, 0, 0, 0, 0, 95, 1, 96
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Selectors\Selector.cs", "C#", 0, 0, 0, 0, 0, 399, 0, 0, 0, 22, 105, 526
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Selectors\SelectorGenerator.cs", "C#", 0, 0, 0, 0, 0, 163, 0, 0, 0, 3, 51, 217
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Selectors\SelectorManager.cs", "C#", 0, 0, 0, 0, 0, 846, 0, 0, 0, 70, 223, 1139
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Spawners\EnemySpawner.cs", "C#", 0, 0, 0, 0, 0, 284, 0, 0, 0, 2, 74, 360
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Spawners\PartySpawner.cs", "C#", 0, 0, 0, 0, 0, 61, 0, 0, 0, 0, 18, 79
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Spawners\SummonSpawner.cs", "C#", 0, 0, 0, 0, 0, 44, 0, 0, 0, 0, 11, 55
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Tickers\Ticker.cs", "C#", 0, 0, 0, 0, 0, 63, 0, 0, 0, 0, 16, 79
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\ArmorShredTrait.cs", "C#", 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 4, 20
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\CrowdControl\BreakableCrowdControlTrait.cs", "C#", 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 5, 35
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\CrowdControl\CrowdControlTrait.cs", "C#", 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 7, 26
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\DamageBoostTrait.cs", "C#", 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 5, 26
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\DamageOnFutureTraitApplicationTrait.cs", "C#", 0, 0, 0, 0, 0, 59, 0, 0, 0, 0, 11, 70
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\DamageOverTimeTrait.cs", "C#", 0, 0, 0, 0, 0, 28, 0, 0, 0, 0, 6, 34
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\HiddenTraits\HiddenTrait.cs", "C#", 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 5, 21
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\LinkTrait.cs", "C#", 0, 0, 0, 0, 0, 35, 0, 0, 0, 0, 9, 44
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\MandatoryTargetTrait.cs", "C#", 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 7, 32
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\OnDeathEffects\OnDeathEffectTrait.cs", "C#", 0, 0, 0, 0, 0, 42, 0, 0, 0, 1, 10, 53
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\OnDeathEffects\SelfTargetAOEOnDeathTrait.cs", "C#", 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 5, 27
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\OnDeathEffects\SummonOnDeathTrait.cs", "C#", 0, 0, 0, 0, 0, 27, 0, 0, 0, 0, 6, 33
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\PositioningTrait.cs", "C#", 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 7, 40
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\RepetitionAbilities\RepetitionAbility.cs", "C#", 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 7, 36
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\RepetitionAbilities\RepetitionPerCompanionAbility.cs", "C#", 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 5, 23
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\ShieldTrait.cs", "C#", 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 5, 26
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\SlowingTrait.cs", "C#", 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 6, 24
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\StackableTraits\MultiStackTrait.cs", "C#", 0, 0, 0, 0, 0, 150, 0, 0, 0, 1, 37, 188
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\StackableTraits\StackOnKillTrait.cs", "C#", 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 7, 40
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\StackableTraits\StackableTrait.cs", "C#", 0, 0, 0, 0, 0, 160, 0, 0, 0, 6, 44, 210
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\TargetPriorityTraits\BlockerTrait.cs", "C#", 0, 0, 0, 0, 0, 27, 0, 0, 0, 0, 8, 35
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\TargetPriorityTraits\BombardmentTargetPriority.cs", "C#", 0, 0, 0, 0, 0, 104, 0, 0, 0, 0, 29, 133
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\TargetPriorityTraits\BufferTargetPriorityTrait.cs", "C#", 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 6, 26
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\TargetPriorityTraits\CatalystTargetPriorityTrait.cs", "C#", 0, 0, 0, 0, 0, 28, 0, 0, 0, 0, 7, 35
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\TargetPriorityTraits\ChaoticTargetPriorityTrait.cs", "C#", 0, 0, 0, 0, 0, 41, 0, 0, 0, 0, 13, 54
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\TargetPriorityTraits\ClockwiseTargetPriorityTrait.cs", "C#", 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 8, 37
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\TargetPriorityTraits\CloseRangedTargetPriorityTrait.cs", "C#", 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 11, 51
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\TargetPriorityTraits\EmptyTargetPriorityTrait.cs", "C#", 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 10, 42
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\TargetPriorityTraits\EmptyTargetSpecificPriorityTrait.cs", "C#", 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 8, 37
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\TargetPriorityTraits\GeneratedTargetPriorityTrait.cs", "C#", 0, 0, 0, 0, 0, 53, 0, 0, 0, 6, 14, 73
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\TargetPriorityTraits\PredatorTargetPriorityTrait.cs", "C#", 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 9, 40
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\TargetPriorityTraits\SpecificTargetPriorityTrait.cs", "C#", 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 7, 38
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\TargetPriorityTraits\TargetPriorityTrait.cs", "C#", 0, 0, 0, 0, 0, 58, 0, 0, 0, 0, 16, 74
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\TargetPriorityTraits\TerritorialTargetPriorityTrait.cs", "C#", 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 9, 40
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\Trait.cs", "C#", 0, 0, 0, 0, 0, 431, 0, 0, 0, 8, 109, 548
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\TraitList.cs", "C#", 0, 0, 0, 0, 0, 270, 0, 0, 0, 37, 77, 384
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\VulnerabilityTrait.cs", "C#", 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 5, 26
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\Traits\ZoneOfInfluenceTrait.cs", "C#", 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 4, 19
+"c:\Users\mattr\Isometric Alpha\Assets\src\Combat\ZoneOfInfluenceManager.cs", "C#", 0, 0, 0, 0, 0, 50, 0, 0, 0, 2, 18, 70
+"c:\Users\mattr\Isometric Alpha\Assets\src\Debug\Debug Square.cs", "C#", 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 4, 12
+"c:\Users\mattr\Isometric Alpha\Assets\src\Debug\Grid Debugger.cs", "C#", 0, 0, 0, 0, 0, 37, 0, 0, 0, 0, 10, 47
+"c:\Users\mattr\Isometric Alpha\Assets\src\Editor\CopyFilesToBuildDirectory.cs", "C#", 0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 9, 43
+"c:\Users\mattr\Isometric Alpha\Assets\src\Enemies\AllMonsterPackLists.cs", "C#", 0, 0, 0, 0, 0, 517, 0, 0, 0, 5, 132, 654
+"c:\Users\mattr\Isometric Alpha\Assets\src\Enemies\DropTable.cs", "C#", 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 10, 29
+"c:\Users\mattr\Isometric Alpha\Assets\src\Enemies\DropTableList.cs", "C#", 0, 0, 0, 0, 0, 38, 0, 0, 0, 0, 10, 48
+"c:\Users\mattr\Isometric Alpha\Assets\src\Enemies\EnemyDirectionIndicator.cs", "C#", 0, 0, 0, 0, 0, 39, 0, 0, 0, 0, 6, 45
+"c:\Users\mattr\Isometric Alpha\Assets\src\Enemies\EnemyInfo.cs", "C#", 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 9, 32
+"c:\Users\mattr\Isometric Alpha\Assets\src\Enemies\EnemyPackInfo.cs", "C#", 0, 0, 0, 0, 0, 97, 0, 0, 0, 1, 34, 132
+"c:\Users\mattr\Isometric Alpha\Assets\src\Enemies\EnemyPackInfoList.cs", "C#", 0, 0, 0, 0, 0, 47, 0, 0, 0, 4, 14, 65
+"c:\Users\mattr\Isometric Alpha\Assets\src\Enemies\EnemyStats.cs", "C#", 0, 0, 0, 0, 0, 292, 0, 0, 0, 17, 83, 392
+"c:\Users\mattr\Isometric Alpha\Assets\src\Enemies\EnemyStatsList.cs", "C#", 0, 0, 0, 0, 0, 30, 0, 0, 0, 1, 12, 43
+"c:\Users\mattr\Isometric Alpha\Assets\src\Enemies\EvolutionaryEnemyStats.cs", "C#", 0, 0, 0, 0, 0, 74, 0, 0, 0, 0, 19, 93
+"c:\Users\mattr\Isometric Alpha\Assets\src\Enemies\MasterStats.cs", "C#", 0, 0, 0, 0, 0, 12, 0, 0, 0, 1, 6, 19
+"c:\Users\mattr\Isometric Alpha\Assets\src\Enemies\MinionStats.cs", "C#", 0, 0, 0, 0, 0, 15, 0, 0, 0, 1, 8, 24
+"c:\Users\mattr\Isometric Alpha\Assets\src\Enemies\MonsterPackListManager.cs", "C#", 0, 0, 0, 0, 0, 137, 0, 0, 0, 3, 46, 186
+"c:\Users\mattr\Isometric Alpha\Assets\src\Enemies\SummonPackInfo.cs", "C#", 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 6, 17
+"c:\Users\mattr\Isometric Alpha\Assets\src\Enemies\SummonPackInfoList.cs", "C#", 0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 15, 49
+"c:\Users\mattr\Isometric Alpha\Assets\src\Enemies\SummonStats.cs", "C#", 0, 0, 0, 0, 0, 56, 0, 0, 0, 1, 13, 70
+"c:\Users\mattr\Isometric Alpha\Assets\src\Helpers.cs", "C#", 0, 0, 0, 0, 0, 327, 0, 0, 0, 30, 78, 435
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\BespokeFloorButtonScripts\IFloorButtonScript.cs", "C#", 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 4, 13
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\BespokeFloorButtonScripts\ManseDiningRoomPermButtonScript.cs", "C#", 0, 0, 0, 0, 0, 43, 0, 0, 0, 0, 15, 58
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\ButtonEvaluationScripts\Manse1F2cButtonEvaluationScript1.cs", "C#", 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 5, 20
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\ButtonEvaluationScripts\Manse2F3aButtonEvaluationScript.cs", "C#", 0, 0, 0, 0, 0, 56, 0, 0, 0, 6, 13, 75
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\ButtonEvaluationScripts\Manse2FStockroomButtonEvaluationScript.cs", "C#", 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 8, 39
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\ButtonEvaluationScripts\Pit2cButtonEvaluationScript.cs", "C#", 0, 0, 0, 0, 0, 45, 0, 0, 0, 0, 9, 54
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\ButtonEvaluator.cs", "C#", 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 7, 29
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\ButtonTarget.cs", "C#", 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 10, 32
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\Chest.cs", "C#", 0, 0, 0, 0, 0, 118, 0, 0, 0, 3, 30, 151
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\FloorButton.cs", "C#", 0, 0, 0, 0, 0, 46, 0, 0, 0, 0, 17, 63
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\FloorButtonPermanent.cs", "C#", 0, 0, 0, 0, 0, 72, 0, 0, 0, 0, 18, 90
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\FloorButtonTrueFalse.cs", "C#", 0, 0, 0, 0, 0, 41, 0, 0, 0, 0, 14, 55
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\FloorMultiInvertButton.cs", "C#", 0, 0, 0, 0, 0, 53, 0, 0, 0, 0, 13, 66
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\FloorMultibutton.cs", "C#", 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 9, 42
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\FloorMultibuttonTarget.cs", "C#", 0, 0, 0, 0, 0, 38, 0, 0, 0, 0, 6, 44
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\ForcedMove.cs", "C#", 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 7, 23
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\GateAndChestManager.cs", "C#", 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 6, 26
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\GateSpawnChecker.cs", "C#", 0, 0, 0, 0, 0, 38, 0, 0, 0, 1, 10, 49
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\ObjectSpawnChecker.cs", "C#", 0, 0, 0, 0, 0, 79, 0, 0, 0, 3, 16, 98
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\OpenableDoor.cs", "C#", 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 4, 16
+"c:\Users\mattr\Isometric Alpha\Assets\src\InteractableObjects\TrapAndButtonStateManager.cs", "C#", 0, 0, 0, 0, 0, 67, 0, 0, 0, 1, 16, 84
+"c:\Users\mattr\Isometric Alpha\Assets\src\Isometric Alpha.csproj", "XML", 1148, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1148
+"c:\Users\mattr\Isometric Alpha\Assets\src\Movement\ActivateColliders.cs", "C#", 0, 0, 0, 0, 0, 11, 0, 0, 0, 1, 4, 16
+"c:\Users\mattr\Isometric Alpha\Assets\src\Movement\CharacterFacing.cs", "C#", 0, 0, 0, 0, 0, 90, 0, 0, 0, 0, 16, 106
+"c:\Users\mattr\Isometric Alpha\Assets\src\Movement\EnemyMovement.cs", "C#", 0, 0, 0, 0, 0, 682, 0, 0, 0, 11, 165, 858
+"c:\Users\mattr\Isometric Alpha\Assets\src\Movement\MovementManager.cs", "C#", 0, 0, 0, 0, 0, 548, 0, 0, 0, 52, 139, 739
+"c:\Users\mattr\Isometric Alpha\Assets\src\Movement\NPCMovement.cs", "C#", 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 7, 29
+"c:\Users\mattr\Isometric Alpha\Assets\src\Movement\PartyMemberMovement.cs", "C#", 0, 0, 0, 0, 0, 93, 0, 0, 0, 0, 22, 115
+"c:\Users\mattr\Isometric Alpha\Assets\src\Movement\PlayerMovement.cs", "C#", 0, 0, 0, 0, 0, 912, 0, 0, 0, 21, 238, 1171
+"c:\Users\mattr\Isometric Alpha\Assets\src\Movement\Transitions\NewSceneTransition.cs", "C#", 0, 0, 0, 0, 0, 41, 0, 0, 0, 0, 11, 52
+"c:\Users\mattr\Isometric Alpha\Assets\src\Movement\Transitions\SceneTransitionPosition.cs", "C#", 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 2, 12
+"c:\Users\mattr\Isometric Alpha\Assets\src\Movement\Transitions\SceneTransitionToExactPosition.cs", "C#", 0, 0, 0, 0, 0, 78, 0, 0, 0, 6, 23, 107
+"c:\Users\mattr\Isometric Alpha\Assets\src\Movement\Transitions\TransitionManager.cs", "C#", 0, 0, 0, 0, 0, 158, 0, 0, 0, 2, 41, 201
+"c:\Users\mattr\Isometric Alpha\Assets\src\Movement\Transitions\TransitionPosition.cs", "C#", 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 4, 18
+"c:\Users\mattr\Isometric Alpha\Assets\src\NPCs\IndividualSpawnOnSceneStart.cs", "C#", 0, 0, 0, 0, 0, 37, 0, 0, 0, 1, 16, 54
+"c:\Users\mattr\Isometric Alpha\Assets\src\NPCs\NPCCombatInfo.cs", "C#", 0, 0, 0, 0, 0, 54, 0, 0, 0, 0, 14, 68
+"c:\Users\mattr\Isometric Alpha\Assets\src\NPCs\NPCGridAlign.cs", "C#", 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 8, 24
+"c:\Users\mattr\Isometric Alpha\Assets\src\NPCs\Population.cs", "C#", 0, 0, 0, 0, 0, 23, 0, 0, 0, 1, 8, 32
+"c:\Users\mattr\Isometric Alpha\Assets\src\NPCs\PopulationSpawnOnSceneAddOns.cs", "C#", 0, 0, 0, 0, 0, 37, 0, 0, 0, 1, 16, 54
+"c:\Users\mattr\Isometric Alpha\Assets\src\NPCs\PopulationSpawnOnSceneStart.cs", "C#", 0, 0, 0, 0, 0, 29, 0, 0, 0, 8, 14, 51
+"c:\Users\mattr\Isometric Alpha\Assets\src\NPCs\SortLayerManager.cs", "C#", 0, 0, 0, 0, 0, 12, 0, 0, 0, 1, 4, 17
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Dialogue\ChoiceDescription.cs", "C#", 0, 0, 0, 0, 0, 69, 0, 0, 0, 0, 19, 88
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Dialogue\ChoiceKey.cs", "C#", 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 10, 41
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Dialogue\ChoiceManager.cs", "C#", 0, 0, 0, 0, 0, 28, 0, 0, 0, 0, 7, 35
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Dialogue\Dialogue.cs", "C#", 0, 0, 0, 0, 0, 36, 0, 0, 0, 0, 9, 45
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Dialogue\DialogueChoice.cs", "C#", 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 7, 31
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Dialogue\DialogueList.cs", "C#", 0, 0, 0, 0, 0, 105, 0, 0, 0, 2, 31, 138
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Dialogue\DialogueManager.cs", "C#", 0, 0, 0, 0, 0, 856, 0, 0, 0, 39, 370, 1265
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Dialogue\DialogueTrigger.cs", "C#", 0, 0, 0, 0, 0, 27, 0, 0, 0, 0, 9, 36
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Dialogue\DialogueUponEntryTrigger.cs", "C#", 0, 0, 0, 0, 0, 70, 0, 0, 0, 0, 22, 92
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Dialogue\FadeToBlackManager.cs", "C#", 0, 0, 0, 0, 0, 147, 0, 0, 0, 0, 58, 205
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Dialogue\NPCParent.cs", "C#", 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 5, 25
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Dialogue\PageB4Leaving.ink", "Ink", 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Dialogue\PageB4Leaving.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Dialogue\VaultableObject.cs", "C#", 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 6, 15
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Combat\CombatActionOrderRow.cs", "C#", 0, 0, 0, 0, 0, 87, 0, 0, 0, 0, 26, 113
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Combat\CombatPopupParentDeclarer.cs", "C#", 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 4, 22
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Combat\CombatResultsPopUpButton.cs", "C#", 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 9, 40
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Combat\CombatUI.cs", "C#", 0, 0, 0, 0, 0, 103, 0, 0, 0, 2, 32, 137
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Combat\CurrentActionHoverPanelManager.cs", "C#", 0, 0, 0, 0, 0, 38, 0, 0, 0, 0, 15, 53
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Combat\ResolveTurnButton.cs", "C#", 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 4, 14
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Combat\RetreatUIManager.cs", "C#", 0, 0, 0, 0, 0, 83, 0, 0, 0, 0, 17, 100
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Combat\SelectorParentDeclarer.cs", "C#", 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 2, 12
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\DecisionPanels\BinaryDescisionPanel.cs", "C#", 0, 0, 0, 0, 0, 39, 0, 0, 0, 0, 13, 52
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\DecisionPanels\Decisions\DeleteSaveFile.cs", "C#", 0, 0, 0, 0, 0, 27, 0, 0, 0, 0, 10, 37
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\DecisionPanels\Decisions\IDecision.cs", "C#", 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 4, 14
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\DecisionPanels\Decisions\LoadSaveFile.cs", "C#", 0, 0, 0, 0, 0, 121, 0, 0, 0, 1, 44, 166
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\DecisionPanels\Decisions\OverwriteSaveFile.cs", "C#", 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 12, 41
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\DecisionPanels\Decisions\QuitToDesktop.cs", "C#", 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 8, 29
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\DecisionPanels\Decisions\Retreat.cs", "C#", 0, 0, 0, 0, 0, 83, 0, 0, 0, 0, 24, 107
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\DecisionPanels\Decisions\ReturnToMainMenu.cs", "C#", 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 9, 33
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\DecisionPanels\ItemDecisionPanel.cs", "C#", 0, 0, 0, 0, 0, 290, 0, 0, 0, 168, 75, 533
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\DecisionPanels\SaveLoadDecisionPanel.cs", "C#", 0, 0, 0, 0, 0, 26, 0, 0, 0, 1, 7, 34
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\DecisionPanels\UpgradePartyMemberDecisionPanel.cs", "C#", 0, 0, 0, 0, 0, 62, 0, 0, 0, 0, 16, 78
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Declarers\GridDeclarer.cs", "C#", 0, 0, 0, 0, 0, 17, 0, 0, 0, 4, 5, 26
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Declarers\PopupParentDeclarer.cs", "C#", 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 4, 23
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Declarers\ScreenBackgroundDeclarer.cs", "C#", 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 6, 24
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Declarers\UIParentDeclarer.cs", "C#", 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 5, 24
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\DescriptionPanel\DescriptionPanel.cs", "C#", 0, 0, 0, 0, 0, 177, 0, 0, 0, 103, 48, 328
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\DescriptionPanel\DialogueDescriptionPanel.cs", "C#", 0, 0, 0, 0, 0, 16, 0, 0, 0, 7, 8, 31
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\DescriptionPanel\MultiStackableTraitDescriptionPanel.cs", "C#", 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 6, 16
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Editor\InterfaceReferencePropertyDrawer.cs", "C#", 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 5, 38
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\EscapeStack.cs", "C#", 0, 0, 0, 0, 0, 49, 0, 0, 0, 0, 11, 60
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Glossary\GlossaryCategory.cs", "C#", 0, 0, 0, 0, 0, 71, 0, 0, 0, 0, 22, 93
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Glossary\GlossaryCategoryList.cs", "C#", 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 8, 26
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Glossary\GlossaryEntry.cs", "C#", 0, 0, 0, 0, 0, 59, 0, 0, 0, 0, 18, 77
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Glossary\GridGlossaryEntry.cs", "C#", 0, 0, 0, 0, 0, 45, 0, 0, 0, 0, 15, 60
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Glossary\WrittenGlossaryEntry.cs", "C#", 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 3, 15
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\GridRows\ChoiceGridRow.cs", "C#", 0, 0, 0, 0, 0, 16, 0, 0, 0, 1, 5, 22
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\GridRows\GridRow.cs", "C#", 0, 0, 0, 0, 0, 93, 0, 0, 0, 5, 27, 125
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\GridRows\ShopKeeperRow.cs", "C#", 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 2, 12
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\InputBars\AutoSelectInputBar.cs", "C#", 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 7, 25
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\InterfaceEditorSupport\InterfaceReference.cs", "C#", 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 2, 12
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\LoadingScreen\LoadingBarProgressTracker.cs", "C#", 0, 0, 0, 0, 0, 76, 0, 0, 0, 0, 23, 99
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\LoadingTipManager.cs", "C#", 0, 0, 0, 0, 0, 108, 0, 0, 0, 1, 31, 140
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Notifications\NotificationFader.cs", "C#", 0, 0, 0, 0, 0, 118, 0, 0, 0, 0, 28, 146
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Notifications\NotificationManager.cs", "C#", 0, 0, 0, 0, 0, 104, 0, 0, 0, 0, 29, 133
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\OverallUIManager.cs", "C#", 0, 0, 0, 0, 0, 94, 0, 0, 0, 0, 21, 115
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PartyMemberHealingScreen\UseItemOnPartyMemberButton.cs", "C#", 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 12, 44
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Perks\PerkCategory.cs", "C#", 0, 0, 0, 0, 0, 36, 0, 0, 0, 0, 15, 51
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Perks\PerkCategoryList.cs", "C#", 0, 0, 0, 0, 0, 25, 0, 0, 0, 3, 9, 37
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpButtons\BinaryPanelPopUpButton.cs", "C#", 0, 0, 0, 0, 0, 61, 0, 0, 0, 0, 13, 74
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpButtons\BookPopUpButton.cs", "C#", 0, 0, 0, 0, 0, 59, 0, 0, 0, 0, 18, 77
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpButtons\CharacterCreationPopUpButton.cs", "C#", 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 7, 36
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpButtons\DialogueTrackerButton.cs", "C#", 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 20, 88
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpButtons\EditAbilityWheelButton.cs", "C#", 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 4, 26
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpButtons\FormationEditorButton.cs", "C#", 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 7, 36
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpButtons\GameOverPopUpButton.cs", "C#", 0, 0, 0, 0, 0, 28, 0, 0, 0, 0, 7, 35
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpButtons\HoverPanelPopUpButton.cs", "C#", 0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 10, 44
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpButtons\LevelUpPopUpButton.cs", "C#", 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 12, 59
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpButtons\LoadScreenButton.cs", "C#", 0, 0, 0, 0, 0, 48, 0, 0, 0, 1, 15, 64
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpButtons\NotificationPopUpButton.cs", "C#", 0, 0, 0, 0, 0, 39, 0, 0, 0, 1, 13, 53
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpButtons\PopUpButton.cs", "C#", 0, 0, 0, 0, 0, 151, 0, 0, 0, 0, 37, 188
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpButtons\ShopPopUpButton.cs", "C#", 0, 0, 0, 0, 0, 42, 0, 0, 0, 0, 12, 54
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpButtons\TutorialPopUpButton.cs", "C#", 0, 0, 0, 0, 0, 128, 0, 0, 0, 1, 40, 169
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpWindows\BookPopUpWindow.cs", "C#", 0, 0, 0, 0, 0, 59, 0, 0, 0, 0, 15, 74
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpWindows\CharacterCreationPopUpWindow.cs", "C#", 0, 0, 0, 0, 0, 150, 0, 0, 0, 11, 43, 204
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpWindows\DialogueTracker\DialogueLine.cs", "C#", 0, 0, 0, 0, 0, 60, 0, 0, 0, 4, 16, 80
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpWindows\DialogueTracker\DialogueTrackerWindow.cs", "C#", 0, 0, 0, 0, 0, 50, 0, 0, 0, 10, 15, 75
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpWindows\FullEditAbilityWheelPopUpWindow.cs", "C#", 0, 0, 0, 0, 0, 147, 0, 0, 0, 1, 48, 196
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpWindows\EditPartyWindow.cs", "C#", 0, 0, 0, 0, 0, 157, 0, 0, 0, 0, 35, 192
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpWindows\GameOverPopUpWindow.cs", "C#", 0, 0, 0, 0, 0, 33, 0, 0, 0, 4, 10, 47
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpWindows\HoverPanel\HoverPanel.cs", "C#", 0, 0, 0, 0, 0, 40, 0, 0, 0, 7, 12, 59
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpWindows\HoverPanel\NestedDescriptionPanelMouseListener.cs", "C#", 0, 0, 0, 0, 0, 90, 0, 0, 0, 0, 31, 121
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpWindows\LevelUpWindow.cs", "C#", 0, 0, 0, 0, 0, 164, 0, 0, 0, 1, 41, 206
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpWindows\NotificationPopUpWindow.cs", "C#", 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 21, 86
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpWindows\PageReaderPopUpWindow.cs", "C#", 0, 0, 0, 0, 0, 115, 0, 0, 0, 0, 27, 142
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpWindows\PopUpWindow.cs", "C#", 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 8, 39
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpWindows\ShopPopUpWindow.cs", "C#", 0, 0, 0, 0, 0, 349, 0, 0, 0, 0, 100, 449
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\PopUps\PopUpWindows\TutorialPopUpWindow.cs", "C#", 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 12, 52
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\RowManager.cs", "C#", 0, 0, 0, 0, 0, 12, 0, 0, 0, 2, 5, 19
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\ScreenButtonManager.cs", "C#", 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 13, 61
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\ScreenButtonManager\SideScreenButtonManager.cs", "C#", 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 9, 39
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\ScreenManagers\FormationHandler.cs", "C#", 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 7, 30
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\ScreenManagers\JournalHandler.cs", "C#", 0, 0, 0, 0, 0, 202, 0, 0, 0, 0, 48, 250
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\ScreenManagers\SaveHandler.cs", "C#", 0, 0, 0, 0, 0, 240, 0, 0, 0, 4, 68, 312
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\ScreenManagers\ScreenManager.cs", "C#", 0, 0, 0, 0, 0, 381, 0, 0, 0, 26, 121, 528
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\ScreenState.cs", "C#", 0, 0, 0, 0, 0, 36, 0, 0, 0, 0, 11, 47
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\ScrollableTabList.cs", "C#", 0, 0, 0, 0, 0, 57, 0, 0, 0, 1, 15, 73
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\ScrollableUIElement.cs", "C#", 0, 0, 0, 0, 0, 394, 0, 0, 0, 8, 92, 494
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Sorting\ColumnHeader.cs", "C#", 0, 0, 0, 0, 0, 61, 0, 0, 0, 0, 14, 75
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Sorting\ColumnHeaderButton.cs", "C#", 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 5, 30
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Sorting\ComparerList.cs", "C#", 0, 0, 0, 0, 0, 161, 0, 0, 0, 0, 35, 196
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\StatsPanels\AffinityTracker.cs", "C#", 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 3, 15
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\StatsPanels\InventoryStatsPanel.cs", "C#", 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 11, 36
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\StatsPanels\PrimaryStatsPanel.cs", "C#", 0, 0, 0, 0, 0, 60, 0, 0, 0, 0, 14, 74
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\StatsPanels\SecondaryStatsPanel.cs", "C#", 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 11, 44
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\StatsPanels\SideStatsPanel.cs", "C#", 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 7, 30
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\TestGridSnap.cs", "C#", 0, 0, 0, 0, 0, 11, 0, 0, 0, 1, 3, 15
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Tutorials\Tutorial.cs", "C#", 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 5, 16
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Tutorials\TutorialMessageList.cs", "C#", 0, 0, 0, 0, 0, 50, 0, 0, 0, 8, 26, 84
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Generic UI\Tutorials\TutorialMessage.cs", "C#", 0, 0, 0, 0, 0, 71, 0, 0, 0, 1, 18, 90
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\AmountPanel.cs", "C#", 0, 0, 0, 0, 0, 193, 0, 0, 0, 0, 40, 233
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\Books\BookList.cs", "C#", 0, 0, 0, 0, 0, 142, 0, 0, 0, 0, 10, 152
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\Books\WorldBookInfo.cs", "C#", 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 6, 27
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\EquipWeaponAcceptButton.cs", "C#", 0, 0, 0, 0, 0, 26, 0, 0, 0, 3, 5, 34
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\EquipmentPropertiesList.cs", "C#", 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 9, 42
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\EquippedActions.cs", "C#", 0, 0, 0, 0, 0, 66, 0, 0, 0, 0, 19, 85
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\EquippedItems.cs", "C#", 0, 0, 0, 0, 0, 45, 0, 0, 0, 13, 13, 71
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\Inventory.cs", "C#", 0, 0, 0, 0, 0, 356, 0, 0, 0, 77, 101, 534
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\InventoryGrid.cs", "C#", 0, 0, 0, 0, 0, 55, 0, 0, 0, 5, 28, 88
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\InventoryRow.cs", "C#", 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 8, 38
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\ItemList.cs", "C#", 0, 0, 0, 0, 0, 264, 0, 0, 0, 7, 58, 329
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\ItemTypes\Armor.cs", "C#", 0, 0, 0, 0, 0, 122, 0, 0, 0, 0, 32, 154
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\ItemTypes\BookItem.cs", "C#", 0, 0, 0, 0, 0, 123, 0, 0, 0, 1, 35, 159
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\ItemTypes\EquippableItem.cs", "C#", 0, 0, 0, 0, 0, 110, 0, 0, 0, 0, 27, 137
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\ItemTypes\EssentialItem.cs", "C#", 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 13, 44
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\ItemTypes\HealingItem.cs", "C#", 0, 0, 0, 0, 0, 51, 0, 0, 0, 0, 14, 65
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\ItemTypes\Item.cs", "C#", 0, 0, 0, 0, 0, 330, 0, 0, 0, 12, 82, 424
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\ItemTypes\Key.cs", "C#", 0, 0, 0, 0, 0, 26, 0, 0, 0, 0, 7, 33
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\ItemTypes\OffHandFist.cs", "C#", 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 6, 28
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\ItemTypes\QuestItem.cs", "C#", 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 8, 37
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\ItemTypes\RestorationItem.cs", "C#", 0, 0, 0, 0, 0, 51, 0, 0, 0, 0, 12, 63
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\ItemTypes\Shield.cs", "C#", 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 1, 19
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\ItemTypes\SkillReplenishItem.cs", "C#", 0, 0, 0, 0, 0, 38, 0, 0, 0, 0, 12, 50
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\ItemTypes\TreasureItem.cs", "C#", 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 10, 35
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\ItemTypes\UseableItem.cs", "C#", 0, 0, 0, 0, 0, 92, 0, 0, 0, 0, 24, 116
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\ItemTypes\Weapon.cs", "C#", 0, 0, 0, 0, 0, 242, 0, 0, 0, 2, 50, 294
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\Purse.cs", "C#", 0, 0, 0, 0, 0, 55, 0, 0, 0, 1, 16, 72
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\Shops\Shopkeeper.cs", "C#", 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 8, 38
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\Shops\ShopkeeperInventoryList.cs", "C#", 0, 0, 0, 0, 0, 69, 0, 0, 0, 0, 22, 91
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Inventory\WeaponSlot.cs", "C#", 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 4, 16
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Journal\DragAndDropActionIcon.cs", "C#", 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 16, 56
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Journal\PerkDescription.cs", "C#", 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 6, 16
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Journal\PerkDescriptionList.cs", "C#", 0, 0, 0, 0, 0, 48, 0, 0, 0, 40, 14, 102
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Journal\PerkDescriptionSlotPanel.cs", "C#", 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 4, 15
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Journal\Quests\DeathStep.cs", "C#", 0, 0, 0, 0, 0, 28, 0, 0, 0, 0, 7, 35
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Journal\Quests\Quest.cs", "C#", 0, 0, 0, 0, 0, 170, 0, 0, 0, 4, 55, 229
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Journal\Quests\QuestList.cs", "C#", 0, 0, 0, 0, 0, 161, 0, 0, 0, 7, 41, 209
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Journal\Quests\QuestStep.cs", "C#", 0, 0, 0, 0, 0, 100, 0, 0, 0, 1, 24, 125
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Journal\Quests\StepDisplayFlag.cs", "C#", 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 4, 12
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Journal\StatProgressionTable.cs", "C#", 0, 0, 0, 0, 0, 61, 0, 0, 0, 1, 15, 77
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Journal\StatProgressionTableEntryRow.cs", "C#", 0, 0, 0, 0, 0, 41, 0, 0, 0, 0, 8, 49
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Journal\UnusedAbilityPanel.cs", "C#", 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 7, 28
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Lessons\LessonUIManager.cs", "C#", 0, 0, 0, 0, 0, 155, 0, 0, 0, 0, 40, 195
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\LevelUp\EnumButtonPasser.cs", "C#", 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 4, 11
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\LevelUp\NewAbilityFinder.cs", "C#", 0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 12, 46
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\MainMenu.cs", "C#", 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 5, 11
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Map\ChangeMapZoneButton.cs", "C#", 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 8, 41
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Map\FastTravelManager.cs", "C#", 0, 0, 0, 0, 0, 53, 0, 0, 0, 0, 17, 70
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Map\MapManager.cs", "C#", 0, 0, 0, 0, 0, 331, 0, 0, 0, 5, 105, 441
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Map\MapObjectList.cs", "C#", 0, 0, 0, 0, 0, 682, 0, 0, 0, 1, 246, 929
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Map\MapObjectManager.cs", "C#", 0, 0, 0, 0, 0, 57, 0, 0, 0, 0, 16, 73
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Map\MapPathCanvasSizeAdjuster.cs", "C#", 0, 0, 0, 0, 0, 21, 0, 0, 0, 1, 7, 29
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Map\Path.cs", "C#", 0, 0, 0, 0, 0, 38, 0, 0, 0, 0, 10, 48
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Map\PathManager.cs", "C#", 0, 0, 0, 0, 0, 84, 0, 0, 0, 16, 25, 125
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\OOCUIManager.cs", "C#", 0, 0, 0, 0, 0, 189, 0, 0, 0, 0, 35, 224
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\AdjustPartyRosterManager.cs", "C#", 0, 0, 0, 0, 0, 92, 0, 0, 0, 0, 31, 123
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\Affinity\AffinityManager.cs", "C#", 0, 0, 0, 0, 0, 32, 0, 0, 0, 1, 5, 38
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\Formation.cs", "C#", 0, 0, 0, 0, 0, 160, 0, 0, 0, 0, 39, 199
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\FormationDisplayUI.cs", "C#", 0, 0, 0, 0, 0, 41, 0, 0, 0, 0, 7, 48
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\Party Position Accept Button.cs", "C#", 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 5, 21
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\PartyManager.cs", "C#", 0, 0, 0, 0, 0, 110, 0, 0, 0, 1, 30, 141
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\PartyMemberButton.cs", "C#", 0, 0, 0, 0, 0, 45, 0, 0, 0, 0, 12, 57
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\PartyMemberHPPanel.cs", "C#", 0, 0, 0, 0, 0, 37, 0, 0, 0, 0, 6, 43
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\PartyMemberPlacer.cs", "C#", 0, 0, 0, 0, 0, 103, 0, 0, 0, 0, 29, 132
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\PartyMemberSelectionScreen.cs", "C#", 0, 0, 0, 0, 0, 101, 0, 0, 0, 0, 26, 127
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\PartyMember\PartyMember.cs", "C#", 0, 0, 0, 0, 0, 228, 0, 0, 0, 1, 60, 289
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\PartyMember\PartyMemberEquipmentManager.cs", "C#", 0, 0, 0, 0, 0, 121, 0, 0, 0, 0, 14, 135
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\PartyMember\PartyMemberList.cs", "C#", 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 5, 11
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\PartyMember\PartyMemberTrainPriority.cs", "C#", 0, 0, 0, 0, 0, 49, 0, 0, 0, 0, 14, 63
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\PartyPositionGridRow.cs", "C#", 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 4, 13
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\PartyPositionGridSquare.cs", "C#", 0, 0, 0, 0, 0, 37, 0, 0, 0, 1, 13, 51
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\PartySlotTracker.cs", "C#", 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 8, 29
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\UnassignedPartyMemberGridManager.cs", "C#", 0, 0, 0, 0, 0, 98, 0, 0, 0, 0, 37, 135
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Party\UnassignedPartyMemberRow.cs", "C#", 0, 0, 0, 0, 0, 41, 0, 0, 0, 3, 15, 59
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Quit\QuitManager.cs", "C#", 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 5, 16
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\RevealInteractables\NPCNameTag.cs", "C#", 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 3, 15
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\RevealInteractables\RevealManager.cs", "C#", 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 16, 63
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\SaveSystem\Resources\cleanSlateSave.json", "JSON", 0, 0, 0, 0, 90, 0, 0, 0, 0, 0, 0, 90
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\SaveSystem\SaveBlueprint.cs", "C#", 0, 0, 0, 0, 0, 545, 0, 0, 0, 9, 150, 704
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\SaveSystem\SaveRow.cs", "C#", 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 5, 25
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Skills\CunningManager.cs", "C#", 0, 0, 0, 0, 0, 278, 0, 0, 0, 1, 55, 334
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Skills\CunningObject.cs", "C#", 0, 0, 0, 0, 0, 109, 0, 0, 0, 1, 25, 135
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Skills\IntimidateManager.cs", "C#", 0, 0, 0, 0, 0, 82, 0, 0, 0, 0, 19, 101
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Skills\MarkObservableObject.cs", "C#", 0, 0, 0, 0, 0, 36, 0, 0, 0, 0, 15, 51
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Skills\ObservableObject.cs", "C#", 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 7, 26
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Skills\ObservationManager.cs", "C#", 0, 0, 0, 0, 0, 178, 0, 0, 0, 6, 43, 227
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Skills\SkillDescription.cs", "C#", 0, 0, 0, 0, 0, 110, 0, 0, 0, 1, 27, 138
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Skills\SkillManager.cs", "C#", 0, 0, 0, 0, 0, 113, 0, 0, 0, 8, 23, 144
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Stats\StatAdjustmentManager.cs", "C#", 0, 0, 0, 0, 0, 76, 0, 0, 0, 0, 26, 102
+"c:\Users\mattr\Isometric Alpha\Assets\src\PlayerActions\Test\TestScript.cs", "C#", 0, 0, 0, 0, 0, 13, 0, 0, 0, 22, 20, 55
+"c:\Users\mattr\Isometric Alpha\Assets\src\Player\Charisma.cs", "C#", 0, 0, 0, 0, 0, 52, 0, 0, 0, 10, 16, 78
+"c:\Users\mattr\Isometric Alpha\Assets\src\Player\Dexterity.cs", "C#", 0, 0, 0, 0, 0, 61, 0, 0, 0, 14, 21, 96
+"c:\Users\mattr\Isometric Alpha\Assets\src\Player\Lessons\LessonList.cs", "C#", 0, 0, 0, 0, 0, 55, 0, 0, 0, 6, 16, 77
+"c:\Users\mattr\Isometric Alpha\Assets\src\Player\Lessons\LessonManager.cs", "C#", 0, 0, 0, 0, 0, 73, 0, 0, 0, 1, 21, 95
+"c:\Users\mattr\Isometric Alpha\Assets\src\Player\Lessons\Lessons.cs", "C#", 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 9, 56
+"c:\Users\mattr\Isometric Alpha\Assets\src\Player\PartyMemberStats.cs", "C#", 0, 0, 0, 0, 0, 125, 0, 0, 0, 16, 37, 178
+"c:\Users\mattr\Isometric Alpha\Assets\src\Player\PlayerStats.cs", "C#", 0, 0, 0, 0, 0, 620, 0, 0, 0, 31, 146, 797
+"c:\Users\mattr\Isometric Alpha\Assets\src\Player\SecondaryStats\CharismaBoost.cs", "C#", 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 6, 36
+"c:\Users\mattr\Isometric Alpha\Assets\src\Player\SecondaryStats\DexterityBoost.cs", "C#", 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 9, 57
+"c:\Users\mattr\Isometric Alpha\Assets\src\Player\SecondaryStats\SecondaryStatBoost.cs", "C#", 0, 0, 0, 0, 0, 58, 0, 0, 0, 39, 14, 111
+"c:\Users\mattr\Isometric Alpha\Assets\src\Player\SecondaryStats\StatBoostList.cs", "C#", 0, 0, 0, 0, 0, 57, 0, 0, 0, 0, 11, 68
+"c:\Users\mattr\Isometric Alpha\Assets\src\Player\SecondaryStats\StatBoostManager.cs", "C#", 0, 0, 0, 0, 0, 103, 0, 0, 0, 0, 34, 137
+"c:\Users\mattr\Isometric Alpha\Assets\src\Player\SecondaryStats\StrengthBoost.cs", "C#", 0, 0, 0, 0, 0, 55, 0, 0, 0, 0, 15, 70
+"c:\Users\mattr\Isometric Alpha\Assets\src\Player\SecondaryStats\WisdomBoost.cs", "C#", 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 9, 57
+"c:\Users\mattr\Isometric Alpha\Assets\src\Player\Stats.cs", "C#", 0, 0, 0, 0, 0, 771, 0, 0, 0, 8, 198, 977
+"c:\Users\mattr\Isometric Alpha\Assets\src\Player\Strength.cs", "C#", 0, 0, 0, 0, 0, 99, 0, 0, 0, 11, 28, 138
+"c:\Users\mattr\Isometric Alpha\Assets\src\Player\Wisdom.cs", "C#", 0, 0, 0, 0, 0, 58, 0, 0, 0, 24, 19, 101
+"c:\Users\mattr\Isometric Alpha\Assets\src\Scripts\CustomObjectActivationScript\CampSE\NandorCarterGuardPunishmentScript.cs", "C#", 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 3, 22
+"c:\Users\mattr\Isometric Alpha\Assets\src\Scripts\CustomObjectActivationScript\CustomObjectActivationScript.cs", "C#", 0, 0, 0, 0, 0, 6, 0, 0, 0, 1, 2, 9
+"c:\Users\mattr\Isometric Alpha\Assets\src\Scripts\DialogueActivationScript\DialogueActivationScript.cs", "C#", 0, 0, 0, 0, 0, 9, 0, 0, 0, 1, 3, 13
+"c:\Users\mattr\Isometric Alpha\Assets\src\Scripts\DialogueActivationScript\Manse-2F\TaborDialogueActivationScriptOne.cs", "C#", 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 2, 19
+"c:\Users\mattr\Isometric Alpha\Assets\src\Scripts\DialogueActivationScript\Manse-2F\TaborDialogueActivationScriptTwo.cs", "C#", 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 2, 20
+"c:\Users\mattr\Isometric Alpha\Assets\src\Scripts\DialogueActivationScript\MessHall\GuardPunishmentConvoActivationScript.cs", "C#", 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 3, 22
+"c:\Users\mattr\Isometric Alpha\Assets\src\Scripts\MiscScripts\DisablePartyTrainScript.cs", "C#", 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 2, 13
+"c:\Users\mattr\Isometric Alpha\Assets\src\Scripts\MiscScripts\EnablePartyTrainScript.cs", "C#", 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 2, 13
+"c:\Users\mattr\Isometric Alpha\Assets\src\Scripts\PlayerInteractionScript.cs", "C#", 0, 0, 0, 0, 0, 66, 0, 0, 0, 4, 14, 84
+"c:\Users\mattr\Isometric Alpha\Assets\src\Scripts\QuestStepActivationScripts\Manse-1F\KendeFightQuestScript.cs", "C#", 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 8, 32
+"c:\Users\mattr\Isometric Alpha\Assets\src\Scripts\QuestStepActivationScripts\Manse-2F\KeyHalfScript.cs", "C#", 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 7, 32
+"c:\Users\mattr\Isometric Alpha\Assets\src\Scripts\QuestStepActivationScripts\QuestStepActivationScript.cs", "C#", 0, 0, 0, 0, 0, 9, 0, 0, 0, 1, 3, 13
+"c:\Users\mattr\Isometric Alpha\Assets\src\Scripts\SpeakAtStartScript\2SlaveShack\BeginningConversationScript.cs", "C#", 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 4, 18
+"c:\Users\mattr\Isometric Alpha\Assets\src\Scripts\SpeakAtStartScript\SpeakAtStartScript.cs", "C#", 0, 0, 0, 0, 0, 10, 0, 0, 0, 1, 5, 16
+"c:\Users\mattr\Isometric Alpha\Assets\src\State\AdjustState.cs", "C#", 0, 0, 0, 0, 0, 70, 0, 0, 0, 0, 25, 95
+"c:\Users\mattr\Isometric Alpha\Assets\src\State\AreaList.cs", "C#", 0, 0, 0, 0, 0, 360, 0, 0, 0, 48, 73, 481
+"c:\Users\mattr\Isometric Alpha\Assets\src\State\Constants.cs", "C#", 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 4, 10
+"c:\Users\mattr\Isometric Alpha\Assets\src\State\DeathFlagManager.cs", "C#", 0, 0, 0, 0, 0, 38, 0, 0, 0, 0, 9, 47
+"c:\Users\mattr\Isometric Alpha\Assets\src\State\Flags.cs", "C#", 0, 0, 0, 0, 0, 300, 0, 0, 0, 36, 61, 397
+"c:\Users\mattr\Isometric Alpha\Assets\src\State\HostilityManager.cs", "C#", 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 3, 11
+"c:\Users\mattr\Isometric Alpha\Assets\src\State\KeyPressManager.cs", "C#", 0, 0, 0, 0, 0, 76, 0, 0, 0, 0, 18, 94
+"c:\Users\mattr\Isometric Alpha\Assets\src\State\LayerAndTagManager.cs", "C#", 0, 0, 0, 0, 0, 36, 0, 0, 0, 0, 5, 41
+"c:\Users\mattr\Isometric Alpha\Assets\src\State\MetFlagManager.cs", "C#", 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 5, 24
+"c:\Users\mattr\Isometric Alpha\Assets\src\State\NPCSpawnChecker.cs", "C#", 0, 0, 0, 0, 0, 131, 0, 0, 0, 1, 30, 162
+"c:\Users\mattr\Isometric Alpha\Assets\src\State\PlayerOOCStateManager.cs", "C#", 0, 0, 0, 0, 0, 90, 0, 0, 0, 2, 11, 103
+"c:\Users\mattr\Isometric Alpha\Assets\src\State\PrefabNames.cs", "C#", 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 33, 133
+"c:\Users\mattr\Isometric Alpha\Assets\src\State\SceneNameList.cs", "C#", 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 4, 12
+"c:\Users\mattr\Isometric Alpha\Assets\src\State\StartingMenuManager.cs", "C#", 0, 0, 0, 0, 0, 73, 0, 0, 0, 0, 21, 94
+"c:\Users\mattr\Isometric Alpha\Assets\src\State\State.cs", "C#", 0, 0, 0, 0, 0, 32, 0, 0, 0, 1, 12, 45
+"c:\Users\mattr\Isometric Alpha\Assets\src\obj\x86\Debug\.NETFramework,Version=v4.0,Profile=Client.AssemblyAttributes.cs", "C#", 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 1, 5
+"c:\Users\mattr\Isometric Alpha\Assets\src\obj\x86\Release\.NETFramework,Version=v4.0,Profile=Client.AssemblyAttributes.cs", "C#", 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 1, 5
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\AidingBalint.json", "JSON", 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 2, 19
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\AidingErvin.json", "JSON", 0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 2, 26
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\AidingJanos.json", "JSON", 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 3, 28
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\AnUneasyTruce.json", "JSON", 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 2, 21
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\AssistTheNonbranded.json", "JSON", 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 2, 18
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\DealWithThePrisoners.json", "JSON", 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 2, 67
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\DelvingDeeper.json", "JSON", 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 2, 15
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\FindGuardMarcos.json", "JSON", 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 2, 21
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\FindNandor.json", "JSON", 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 3, 17
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\GuardKiller.json", "JSON", 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 3, 16
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\HiddenAway.json", "JSON", 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 2, 13
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\LeaveTheCamp.json", "JSON", 0, 0, 0, 0, 29, 0, 0, 0, 0, 0, 2, 31
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\MuzsasSweetTooth.json", "JSON", 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 1, 17
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\NoteWorthy.json", "JSON", 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 2, 18
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\RescueBroglin.json", "JSON", 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 3, 16
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\SealingTheBreach.json", "JSON", 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 4, 23
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\ShutUpTheGossip.json", "JSON", 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 3, 20
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\StockhouseStash.json", "JSON", 0, 0, 0, 0, 28, 0, 0, 0, 0, 0, 2, 30
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\Template.json", "JSON", 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 2, 15
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Assets\Quests\ThePlan.json", "JSON", 0, 0, 0, 0, 29, 0, 0, 0, 0, 0, 3, 32
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Isometric Alpha_Data\RuntimeInitializeOnLoads.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 2
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\Isometric Alpha_Data\ScriptingAssemblies.json", "JSON", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\MonoBleedingEdge\etc\mono\2.0\DefaultWsdlHelpGenerator.aspx", "HTML", 0, 0, 1594, 0, 0, 0, 0, 0, 0, 28, 280, 1902
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\MonoBleedingEdge\etc\mono\4.0\DefaultWsdlHelpGenerator.aspx", "HTML", 0, 0, 1594, 0, 0, 0, 0, 0, 0, 28, 280, 1902
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\MonoBleedingEdge\etc\mono\4.5\DefaultWsdlHelpGenerator.aspx", "HTML", 0, 0, 1594, 0, 0, 0, 0, 0, 0, 28, 280, 1902
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\MonoBleedingEdge\etc\mono\browscap.ini", "Ini", 0, 0, 0, 13255, 0, 0, 0, 0, 0, 274, 3451, 16980
+"c:\Users\mattr\Isometric Alpha\Builds\Windows\MonoBleedingEdge\etc\mono\mconfig\config.xml", "XML", 525, 0, 0, 0, 0, 0, 0, 0, 0, 30, 62, 617
+"c:\Users\mattr\Isometric Alpha\Ink-Libraries.csproj", "XML", 1056, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1058
+"c:\Users\mattr\Isometric Alpha\InkEditor.csproj", "XML", 993, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 995
+"c:\Users\mattr\Isometric Alpha\MonoBleedingEdge\etc\mono\2.0\DefaultWsdlHelpGenerator.aspx", "HTML", 0, 0, 1594, 0, 0, 0, 0, 0, 0, 28, 280, 1902
+"c:\Users\mattr\Isometric Alpha\MonoBleedingEdge\etc\mono\4.0\DefaultWsdlHelpGenerator.aspx", "HTML", 0, 0, 1594, 0, 0, 0, 0, 0, 0, 28, 280, 1902
+"c:\Users\mattr\Isometric Alpha\MonoBleedingEdge\etc\mono\4.5\DefaultWsdlHelpGenerator.aspx", "HTML", 0, 0, 1594, 0, 0, 0, 0, 0, 0, 28, 280, 1902
+"c:\Users\mattr\Isometric Alpha\MonoBleedingEdge\etc\mono\browscap.ini", "Ini", 0, 0, 0, 13255, 0, 0, 0, 0, 0, 274, 3451, 16980
+"c:\Users\mattr\Isometric Alpha\MonoBleedingEdge\etc\mono\mconfig\config.xml", "XML", 525, 0, 0, 0, 0, 0, 0, 0, 0, 30, 62, 617
+"c:\Users\mattr\Isometric Alpha\Packages\manifest.json", "JSON", 0, 0, 0, 0, 52, 0, 0, 0, 0, 0, 1, 53
+"c:\Users\mattr\Isometric Alpha\Packages\packages-lock.json", "JSON", 0, 0, 0, 0, 459, 0, 0, 0, 0, 0, 1, 460
+"c:\Users\mattr\Isometric Alpha\RBG.Mulligan.csproj", "XML", 1049, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1051
+"c:\Users\mattr\Isometric Alpha\UIElementsSchema\UIElements.xsd", "XML", 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18
+"c:\Users\mattr\Isometric Alpha\UIElementsSchema\Unity.Profiling.Editor.xsd", "XML", 123, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 123
+"c:\Users\mattr\Isometric Alpha\UIElementsSchema\Unity.UI.Builder.xsd", "XML", 975, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 975
+"c:\Users\mattr\Isometric Alpha\UIElementsSchema\UnityEditor.Experimental.GraphView.xsd", "XML", 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66
+"c:\Users\mattr\Isometric Alpha\UIElementsSchema\UnityEditor.Overlays.xsd", "XML", 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50
+"c:\Users\mattr\Isometric Alpha\UIElementsSchema\UnityEditor.PackageManager.UI.Internal.xsd", "XML", 558, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 558
+"c:\Users\mattr\Isometric Alpha\UIElementsSchema\UnityEditor.Search.xsd", "XML", 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28
+"c:\Users\mattr\Isometric Alpha\UIElementsSchema\UnityEditor.ShortcutManagement.xsd", "XML", 46, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 46
+"c:\Users\mattr\Isometric Alpha\UIElementsSchema\UnityEditor.Tilemaps.xsd", "XML", 220, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 220
+"c:\Users\mattr\Isometric Alpha\UIElementsSchema\UnityEditor.U2D.Animation.SpriteLibraryEditor.xsd", "XML", 159, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 159
+"c:\Users\mattr\Isometric Alpha\UIElementsSchema\UnityEditor.U2D.Animation.Upgrading.xsd", "XML", 27, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27
+"c:\Users\mattr\Isometric Alpha\UIElementsSchema\UnityEditor.U2D.Animation.xsd", "XML", 361, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 361
+"c:\Users\mattr\Isometric Alpha\UIElementsSchema\UnityEditor.U2D.Layout.xsd", "XML", 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65
+"c:\Users\mattr\Isometric Alpha\UIElementsSchema\UnityEditor.UIElements.Debugger.xsd", "XML", 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25
+"c:\Users\mattr\Isometric Alpha\UIElementsSchema\UnityEditor.UIElements.xsd", "XML", 565, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 565
+"c:\Users\mattr\Isometric Alpha\UIElementsSchema\UnityEngine.UIElements.xsd", "XML", 1460, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1460
+"c:\Users\mattr\Isometric Alpha\WanzyeeStudio.Editor.csproj", "XML", 987, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 989
+"c:\Users\mattr\Isometric Alpha\WanzyeeStudio.Runtime.csproj", "XML", 961, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 963
+"c:\Users\mattr\Isometric Alpha\ignore.conf", "Properties", 0, 58, 0, 0, 0, 0, 0, 0, 0, 0, 1, 59
+"Total", "-", 16325, 58, 9564, 26510, 4745, 69162, 2940, 15598, 270, 11315, 36935, 193422

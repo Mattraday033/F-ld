@@ -1,0 +1,53 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public static class NewAbilityFinder
+{
+    private static SkillDescription intimidateDescription = new SkillDescription("Intimidate", "Intimidate nearby enemies, keeping them from moving. Intimidated enemies cannot surprise or be surprised.", "Intimidate", StatType.Str, 2);
+    private static SkillDescription cunningDescription = new SkillDescription("Cunning", "Cunning can be used to manipulate enemies, leaving their back exposed to ambush. Cunning can also be used to activate objects or set off traps. Only usable a limited number of times per area.", "Cunning", StatType.Dex, 2);
+    private static SkillDescription observationDescription = new SkillDescription("Observation", "Observation can be used to find hidden doors. Look for discrepancies in the overworld that can give away hidden areas.", "Observation", StatType.Wis, 2);
+    private static SkillDescription leadershipDescription = new SkillDescription("Leadership", "Leadership allows you to direct your followers out of combat, telling them to stand on buttons or block doorways.", "Leadership", StatType.Cha, 2);
+    
+
+    public static ArrayList getListOfNewAbilities(PlayerStats oldStats, PlayerStats newStats)
+    {
+        ArrayList newAbilitiesList = new ArrayList();
+
+        if (oldStats.getStrength() < intimidateDescription.getRequiredStatLevel() &&
+            newStats.getStrength() >= intimidateDescription.getRequiredStatLevel())
+        {
+            newAbilitiesList.Add(intimidateDescription);
+        }
+
+        newAbilitiesList.AddRange(AbilityList.getAllAvailableAbilitiesOfStat(StatType.Str, oldStats.getStrength() + 1, newStats.getStrength()));
+
+        if (oldStats.getDexterity() < cunningDescription.getRequiredStatLevel() &&
+            newStats.getDexterity() >= cunningDescription.getRequiredStatLevel())
+        {
+            newAbilitiesList.Add(cunningDescription);
+        }
+
+        newAbilitiesList.AddRange(AbilityList.getAllAvailableAbilitiesOfStat(StatType.Dex, oldStats.getDexterity() + 1, newStats.getDexterity()));
+
+        if (oldStats.getWisdom() < observationDescription.getRequiredStatLevel() &&
+             newStats.getWisdom() >= observationDescription.getRequiredStatLevel())
+        {
+            newAbilitiesList.Add(observationDescription);
+        }
+
+        newAbilitiesList.AddRange(AbilityList.getAllAvailableAbilitiesOfStat(StatType.Wis, oldStats.getWisdom() + 1, newStats.getWisdom()));
+
+        if (oldStats.getCharisma() < leadershipDescription.getRequiredStatLevel() &&
+             newStats.getCharisma() >= leadershipDescription.getRequiredStatLevel())
+        {
+            newAbilitiesList.Add(leadershipDescription);
+        }
+
+        newAbilitiesList.AddRange(AbilityList.getAllAvailableAbilitiesOfStat(StatType.Cha, oldStats.getCharisma() + 1, newStats.getCharisma()));
+
+        return newAbilitiesList;
+    }
+
+}

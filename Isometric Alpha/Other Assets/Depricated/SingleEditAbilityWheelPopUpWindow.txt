@@ -1,0 +1,266 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.Events;
+
+public class SingleEditAbilityWheelPopUpWindow : EditAbilityWheelPopUpWindow, IHandlesAbilityWheelSelectionInput
+{
+
+	public ItemDecisionPanel itemDecisionPanel;
+
+	public CombatAction actionToBeAdded;
+
+	public Transform equipDescriptionPanelParent;
+	private DescriptionPanelBuilder equipDescriptionPanel;
+	public Transform replaceDescriptionPanelParent;
+	private DescriptionPanelBuilder replaceDescriptionPanel;
+
+	public Button[] buttonComponents;
+
+	void Update()
+	{
+
+		if (PlayerOOCStateManager.currentActivity != OOCActivity.inUI)
+		{
+			return;
+		}
+
+		KeyPressManager.updateKeyBools();
+
+		if (KeyPressManager.handlingPrimaryKeyPress)
+		{
+			return;
+		}
+
+		if (Input.GetKey(KeyCode.Alpha1))
+		{
+			chooseAbility(0);
+			KeyPressManager.handlingPrimaryKeyPress = true;
+			return;
+		}
+
+		if (Input.GetKey(KeyCode.Alpha2))
+		{
+			chooseAbility(1);
+			KeyPressManager.handlingPrimaryKeyPress = true;
+			return;
+		}
+
+		if (Input.GetKey(KeyCode.Alpha3))
+		{
+			chooseAbility(2);
+			KeyPressManager.handlingPrimaryKeyPress = true;
+			return;
+		}
+
+		if (Input.GetKey(KeyCode.Alpha4))
+		{
+			chooseAbility(3);
+			KeyPressManager.handlingPrimaryKeyPress = true;
+			return;
+		}
+
+		if (Input.GetKey(KeyCode.Alpha5))
+		{
+			chooseAbility(4);
+			KeyPressManager.handlingPrimaryKeyPress = true;
+			return;
+		}
+
+		if (Input.GetKey(KeyCode.Alpha6))
+		{
+			chooseAbility(5);
+			KeyPressManager.handlingPrimaryKeyPress = true;
+			return;
+		}
+
+		if (Input.GetKey(KeyCode.Alpha7))
+		{
+			chooseAbility(6);
+			KeyPressManager.handlingPrimaryKeyPress = true;
+			return;
+		}
+
+		if (Input.GetKey(KeyCode.Alpha8))
+		{
+			chooseAbility(7);
+			KeyPressManager.handlingPrimaryKeyPress = true;
+			return;
+		}
+
+		if (Input.GetKey(KeyBindingList.moveCounterClockwiseKey))
+		{
+			moveSelectedButtonCounterClockwise();
+			KeyPressManager.handlingPrimaryKeyPress = true;
+			return;
+		}
+
+		if (Input.GetKey(KeyBindingList.moveClockwiseKey))
+		{
+			moveSelectedButtonClockwise();
+			KeyPressManager.handlingPrimaryKeyPress = true;
+			return;
+		}
+
+		if (KeyBindingList.eitherBackoutKeyIsPressed())
+		{
+			closeButtonPress();
+
+			KeyPressManager.handlingPrimaryKeyPress = true;
+			return;
+		}
+
+		if (KeyBindingList.continueUIKeyIsPressed() && acceptButton.interactable)
+		{
+			acceptButtonPress();
+
+			KeyPressManager.handlingPrimaryKeyPress = true;
+			return;
+		}
+	}
+
+	public void updateButtonComponentInteractability()
+	{
+		foreach (Button button in buttonComponents)
+		{
+			button.interactable = true;
+		}
+
+		buttonComponents[abilityMenuManager.getCurrentlySelectedAbilityIndex()].interactable = false;
+	}
+
+	public void setActionToBeAdded(CombatAction actionToBeAdded)
+	{
+		this.actionToBeAdded = actionToBeAdded;
+		updateAbilityLocation();
+		setUpEquipActionDescriptionPanel();
+	}
+
+	private void setUpEquipActionDescriptionPanel()
+	{
+
+		if (equipDescriptionPanel != null)
+		{
+			Destroy(equipDescriptionPanel.gameObject);
+		}
+
+		equipDescriptionPanel = DescriptionPanelBuilder.getDescriptionPanelBuilder(equipDescriptionPanelParent).GetComponent<DescriptionPanelBuilder>();
+
+		List<DescriptionPanelBuildingBlock> buildingBlocks = actionToBeAdded.getDescriptionBuildingBlocks(); 
+
+		equipDescriptionPanel.buildDescriptionPanel(actionToBeAdded);
+	}
+
+	public override void overWriteCurrentCombatActionArray()
+	{
+		base.overWriteCurrentCombatActionArray();
+
+		// CombatActionArray.equipCombatAction(actionToBeAdded, getCurrentlySelectedAbilityIndex());
+
+		actionToBeAdded = null;
+	}
+
+	public override void handleEscapePress()
+	{
+		itemDecisionPanel.destroyPopUp();
+
+		base.handleEscapePress();
+	}
+
+	public override void acceptButtonPress()
+	{
+		base.acceptButtonPress();
+
+		ItemDecisionPanel.OnEquip.Invoke();
+	}
+
+	private void updateAbilityLocation()
+	{
+		setAbilityAtIndex(actionToBeAdded, getCurrentlySelectedAbilityIndex());
+		setUpReplaceActionDescriptionPanel();
+	}
+
+	private void setUpReplaceActionDescriptionPanel()
+	{
+		// if (replaceDescriptionPanel != null)
+		// {
+		// 	if(State.CombatActionArray[getCurrentlySelectedAbilityIndex()] != null &&
+		// 		State.CombatActionArray[getCurrentlySelectedAbilityIndex()].Equals(replaceDescriptionPanel.blockOrigin))
+		// 	{
+		// 		return;
+		// 	}
+
+		// 	Destroy(replaceDescriptionPanel.gameObject);
+		// }
+
+		// replaceDescriptionPanel = DescriptionPanelBuilder.getDescriptionPanelBuilder(replaceDescriptionPanelParent).GetComponent<DescriptionPanelBuilder>();
+
+		// if(State.CombatActionArray[getCurrentlySelectedAbilityIndex()] == null)
+		// {
+		// 	return;
+		// }
+
+		// List<DescriptionPanelBuildingBlock> buildingBlocks = State.CombatActionArray[getCurrentlySelectedAbilityIndex()].getDescriptionBuildingBlocks(); 
+
+		// replaceDescriptionPanel.buildDescriptionPanel(State.CombatActionArray[getCurrentlySelectedAbilityIndex()]);
+	}
+
+	//IHandlesAbilityWheelSelectionInput methods
+	public int getCurrentlySelectedAbilityIndex()
+	{
+		return abilityMenuManager.getCurrentlySelectedAbilityIndex();
+	}
+
+	public CombatAction getCurrentlySelectedAbility()
+	{
+		return abilityMenuManager.getCurrentlySelectedAbility();
+	}
+
+	public void moveSelectedButtonClockwise()
+	{
+		abilityMenuManager.moveSelectedButtonClockwise();
+		updateAbilityLocation();
+		updateAcceptButtonInteractability();
+		updateButtonComponentInteractability();
+	}
+
+	public void moveSelectedButtonCounterClockwise()
+	{
+		abilityMenuManager.moveSelectedButtonCounterClockwise();
+		updateAbilityLocation();
+		updateAcceptButtonInteractability();
+		updateButtonComponentInteractability();
+	}
+
+	public void chooseAbility(int abilityIndex)
+	{
+		if (abilityIndex == getCurrentlySelectedAbilityIndex())
+		{
+			return;
+		}
+
+		abilityMenuManager.setCurrentlySelectedAbilityIndex(abilityIndex);
+		updateAbilityLocation();
+		updateAcceptButtonInteractability();
+		updateButtonComponentInteractability();
+	}
+
+	public override void setAbilityAtIndex(CombatAction combatAction, int abilityIndex)
+	{
+		abilityMenuManager.setCurrentlySelectedAbilityIndex(abilityIndex);
+
+		abilityMenuManager.deselectAllAbilityButtons();
+
+		// abilityMenuManager.populateAbilityMenuFromCombatActionArray(State.CombatActionArray);
+
+		abilityMenuManager.setAbilityAtIndex(combatAction, abilityIndex, true);
+
+		calculateWeaponSlotsAndBonusDamage();
+
+		updateAcceptButtonInteractability();
+	}
+
+}

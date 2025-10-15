@@ -1,0 +1,20 @@
+{
+	"title": "Food Shortage",
+	"numberOfSteps": 7,
+	"steps":[
+				{"stepName":"Discuss with Kastor.","MapZone":"Camp","MapLocation":"SECamp","journalDescription":"Nándor no longer will travel with me. At the end of our final conversation, he told me Kastor could explain to me what needs to be done before the freed slaves can leave the camp. Kastor should still be in the Mess Hall's yard, in the southeastern corner of the camp."},
+				{"stepName":"I kept my word.","MapZone":"","MapLocation":"","journalDescription":"I was asked to break my oath and allow the horses to feed the starving slaves, but I stuck to my word. The horses' bodies have been burned and the Gods' wrath has been averted."},
+				{"stepName":"I broke my word.","MapZone":"","MapLocation":"","journalDescription":"I made an oath to keep the Director's horses from being eaten by the freed slaves, but when asked to break it, I did."},
+				{"stepName":"Horsemeat for all.","MapZone":"","MapLocation":"","journalDescription":"I added the butchered horses to our rations, providing much needed meat to our stores. All of the freed prisoners will get an equal share."},
+				{"stepName":"Uneven portions.","MapZone":"","MapLocation":"","journalDescription":"I added the butchered horses to our rations, providing much needed meat to our stores. I had the meat from the largest carcass saved for my party."},
+				{"stepName":"Feast amidst famine.","MapZone":"","MapLocation":"","journalDescription":"I had the freed slaves prepare a feast from the slain horses' bodies. They will still get to celebrate their newly acquired freedom."},
+				{"stepName":"They shall go hungry.","MapZone":"","MapLocation":"","journalDescription":"I had the horses' bodies butchered, but in secret. Only my party will be able to partake."},
+				{"stepName":"May the Gods be kind.","MapZone":"","MapLocation":"","journalDescription":"I made an oath to keep the Director's horses from being eaten by the freed slaves, but I didn't make any effort to prevent it from happening. I doubt the freed slaves left their bodies alone in my absence. May the Gods forgive my negligence."}
+				
+			],
+
+
+	"deathSteps":
+			[
+			]
+}

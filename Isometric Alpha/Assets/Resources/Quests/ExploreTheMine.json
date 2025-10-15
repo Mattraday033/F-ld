@@ -1,0 +1,17 @@
+{
+	"title": "Explore the Mine",
+	"numberOfSteps": 6,
+	"steps":[
+				{"stepName":"Enter the mine.","MapZone":"Camp","MapLocation":"MineEntranceCamp","journalDescription":"For the good of the plan, I must gain access to the camp's mine. Kastor said the mine was located in the southwestern portion of the camp, west of his hut."},
+				{"stepName":"Find the second floor.","MapZone":"MineLvl_1","MapLocation":"MineLvl_1-1b","journalDescription":"I have gained access to the mine. Now I must find my way deeper inside it."},
+				{"stepName":"Find the third floor.","MapZone":"MineLvl_2","MapLocation":"MineLvl_2-2a","journalDescription":"I made it to the second floor. Somewhere on this level there is an entrance to the third floor."},
+				{"stepName":"The way is blocked.","MapZone":"MineLvl_2","MapLocation":"MineLvl_2-7b","journalDescription":"The way to the third floor is blocked. I should explore this level more to see if there is another way forward."},
+				{"stepName":"A winch in the plan.","MapZone":"MineLvl_2","MapLocation":"MineLvl_2-2a","journalDescription":"I found a winch. I should be able to use this to open the gate to the third floor."},
+				{"stepName":"Made my way.","MapZone":"","MapLocation":"","journalDescription":"I have finally made it to the third floor of the mine."}
+			],
+
+
+	"deathSteps":
+			[
+			]
+}

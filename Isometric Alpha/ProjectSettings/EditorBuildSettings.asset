@@ -1,0 +1,286 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/StartMenu/OpeningCutscene.unity
+    guid: 20d2b8a210cd6ac479e028a879dc87e9
+  - enabled: 1
+    path: Assets/Scenes/StartMenu/StartMenu.unity
+    guid: 25f712fe4a6af2846813a83f18b34bbd
+  - enabled: 1
+    path: Assets/Scenes/Combat/Combat.unity
+    guid: fcb349a299eb8464a92a3fc121c20c1e
+  - enabled: 1
+    path: Assets/Scenes/1SlaveShack/1SlaveShack.unity
+    guid: d385c217e5319e54d9873a04696fdffb
+  - enabled: 1
+    path: Assets/Scenes/GuardShack/GuardShack.unity
+    guid: 9a6268c72e69fb74cb0a716800ac3614
+  - enabled: 1
+    path: Assets/Scenes/3SlaveShack/3SlaveShack.unity
+    guid: 6251f059a87561941853813685b7b768
+  - enabled: 1
+    path: Assets/Scenes/4SlaveShack/4SlaveShack.unity
+    guid: 10e6c4e842b53b247974cb6eca3f2ccf
+  - enabled: 1
+    path: Assets/Scenes/5SlaveShack/5SlaveShack.unity
+    guid: f3acd41dd211685439d0fd2be3b927dc
+  - enabled: 1
+    path: Assets/Scenes/Stockhouse/Stockhouse.unity
+    guid: 6af281a62f044c04ea93b629b9f5ba62
+  - enabled: 1
+    path: Assets/Scenes/MessHall/MessHall.unity
+    guid: b260211ff1d0941409811214329bd9a0
+  - enabled: 1
+    path: Assets/Scenes/2SlaveShack/2SlaveShack.unity
+    guid: 42f4f7fa99df92944b96edb77b3e4353
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_2/MineLvl_2-1a.unity
+    guid: 5e27fc3d808be6f4eb8799bce3b1944c
+  - enabled: 1
+    path: Assets/Scenes/Stables/Stables.unity
+    guid: 9ef19d72d49ab244297f8df08c116459
+  - enabled: 1
+    path: Assets/Scenes/Old Scenes/MineLvl_1/MineLvl_1-4b.unity
+    guid: 71257a818f438624bbaf1e7220a2e573
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_1/MineLvl_1-1a.unity
+    guid: d1465bb2c6cd45a48ae498495b54abec
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_2/MineLvl_2-7b.unity
+    guid: c4c97c213d534a141b4f6ab92390b5b9
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_2/MineLvl_2-7a.unity
+    guid: cda0cd2dfdf312844aa6a6a0c53460fb
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_2/MineLvl_2-1b.unity
+    guid: 10ea5bd8d75a0ac4290a5fe3ec08c9b7
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_2/MineLvl_2-1c.unity
+    guid: a495fe4cae585a848badbda71e43ac60
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_2/MineLvl_2-2a.unity
+    guid: 2ef2050a72fa63a448afebd46f775560
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_2/MineLvl_2-2b.unity
+    guid: 8f546f4e81d8e254aae31eee86c493b9
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_2/MineLvl_2-3a.unity
+    guid: d2db9cf2c4ac26c42968f2ff735a1ae1
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_2/MineLvl_2-3b.unity
+    guid: 5e0662f22c86232429c54f7c52bc6093
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_2/MineLvl_2-4.unity
+    guid: 9a4ffbf7d9581d841bc3dced0fd0b8af
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_2/MineLvl_2-5a.unity
+    guid: 1dc259786c309d0488031c353a9e3fcd
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_2/MineLvl_2-5b.unity
+    guid: 2e53221e2e849eb4d9b49a525f397c58
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_2/MineLvl_2-6.unity
+    guid: 539e0e1db2c9fc64ca0751aa14320e28
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_3/MineLvl_3-1a.unity
+    guid: 1e2f04b0f0f61794e9bb0102387b132d
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_3/MineLvl_3-1b.unity
+    guid: 7a0d5e7a0d5cd1f4ead5f73e426b9e38
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_3/MineLvl_3-2a.unity
+    guid: 348e1a5e608971f4291b4c0248bc8e96
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_3/MineLvl_3-2b.unity
+    guid: e0c3adc30e63bb641baf4988261ff7b0
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_3/MineLvl_3-3a.unity
+    guid: 53bb4e73208121a4bb915b559f0bc78b
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_3/MineLvl_3-3b.unity
+    guid: ad6c1c358ddd5f94ca199ad198f69dcd
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_3/MineLvl_3-4a.unity
+    guid: bdcb842ab35868e4795e529eb0591bdc
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_3/MineLvl_3-4b.unity
+    guid: 458b69a31b948c04491001b3452f5591
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_3/MineLvl_3-5.unity
+    guid: 541be73cc9e2e5a44bf15394077c87c1
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_3/MineLvl_3-MinerCamp.unity
+    guid: c7e916d55ef6e134eb1ddf95861e1bb2
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_3/MineLvl_3-6a.unity
+    guid: ab05183e098a25449aeccb65313c5d1b
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_3/MineLvl_3-7.unity
+    guid: e0afd5901b4dca446988a79f0e9fc53e
+  - enabled: 1
+    path: Assets/Scenes/Slave Camp/NECamp.unity
+    guid: f2cbc2759129bff489275ec7fd9437ef
+  - enabled: 1
+    path: Assets/Scenes/Slave Camp/CenterCamp.unity
+    guid: fa306531821b672498c734eb6631c394
+  - enabled: 1
+    path: Assets/Scenes/Slave Camp/ManseCamp.unity
+    guid: 792b94a9b7dac284287ee02dcb45106a
+  - enabled: 1
+    path: Assets/Scenes/Slave Camp/MineEntranceCamp.unity
+    guid: 806eedaa85aed684ca5fb23db826d4fb
+  - enabled: 1
+    path: Assets/Scenes/Slave Camp/SECamp.unity
+    guid: 3ee7c7b51f76b7a4aac3ca6b4646a52d
+  - enabled: 1
+    path: Assets/Scenes/6SlaveShack/6SlaveShack.unity
+    guid: e8ad136823564f447ac54d5bf0d420c6
+  - enabled: 1
+    path: Assets/Scenes/Temple/Temple.unity
+    guid: 6314aa31c12847145b93d76ea2644a11
+  - enabled: 1
+    path: Assets/Scenes/7SlaveShack/7SlaveShack.unity
+    guid: c94d1ced06c1386468f7a4b5092de0c5
+  - enabled: 1
+    path: Assets/Scenes/8SlaveShack/8SlaveShack.unity
+    guid: b179245b9dec0784e865624ebc0b98b8
+  - enabled: 1
+    path: Assets/Scenes/9SlaveShack/9SlaveShack.unity
+    guid: 98fc02c3d76661e4f8441978fdbea6b0
+  - enabled: 1
+    path: Assets/Scenes/GuardHouse/GuardHouseNE.unity
+    guid: 34421f9ff71874844901f45f74013616
+  - enabled: 1
+    path: Assets/Scenes/GuardHouse/GuardHouseSW.unity
+    guid: e816382b2d0de98459b46d652d7cb169
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_1/Manse-1F-Kitchens.unity
+    guid: 648845aad43f95144a73c98575f4e6e8
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_1/Manse-1F-1c.unity
+    guid: d927fc0a9f7d22242addad7e06c96c8a
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_1/Manse-1F-1a.unity
+    guid: c63277f2ad9598b4f8b7ddd13f7287a0
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_1/Manse-1F-1b.unity
+    guid: 84aa108f75e56ff43b3014a524ec7cb8
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_1/Manse-1F-Dining Room.unity
+    guid: edf2077edb742fd42aa5b8821a9c2e44
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_1/Manse-1F-2a.unity
+    guid: 5e37659e92605c44da4e5cf3395d7dfd
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_1/Manse-1F-2b.unity
+    guid: 6135c6aa6fabebb4ca3e29e9f610c478
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_2/Manse-2F-2b.unity
+    guid: bd3f7465eb01269409d5e64fb2c7dd2d
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_1/Manse-1F-2c.unity
+    guid: b65f003d2ae5bfc4ebad236bc77072c6
+  - enabled: 1
+    path: Assets/Scenes/Pit/Pit-1a.unity
+    guid: f37ee892503b9ba4086cbcaf52ad21b8
+  - enabled: 1
+    path: Assets/Scenes/Pit/Pit-1b.unity
+    guid: 8008b69e737d4284480c0d77674fc04e
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_1/Manse-1F-3a.unity
+    guid: 9c48b1e206c22fa4a989ea8b223203b8
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_1/Manse-1F-3b.unity
+    guid: 948f6bce10fa57a4389daebeac398049
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_1/Manse-1F-3d.unity
+    guid: bd7a223bfe9e7204d963f2813914fdd4
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_1/Manse-1F-3c.unity
+    guid: 8d7ac07132d5b824b9cab8d8a396e0a1
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_1/Manse-1F-3e.unity
+    guid: 81ed21fe30c94674bafea2febeb2636d
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_2/Manse-2F-1a.unity
+    guid: 07611d8cc27ac894292f0498714dfbe6
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_2/Manse-2F-1b.unity
+    guid: e549684d7e7467742914d6f9c15011e2
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_2/Manse-2F-1c.unity
+    guid: 63b2b444c9d8b8744b5d13d90267b5c0
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_2/Manse-2F-2a.unity
+    guid: a3e26f151eee3084481ed8de6adf4221
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_2/Manse-2F-2c.unity
+    guid: 248797ae8ae721e47a3fd80346b91368
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_2/Manse-2F-2d.unity
+    guid: 8cef7d4bd43274244b264fc93ffe3e73
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_2/Manse-2F-3a.unity
+    guid: dbc4bfbffb46c1c4bb2c41a69b4db545
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_2/Manse-2F-3b.unity
+    guid: caee07752c8f3f742b4bd0f6fb32b72a
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_2/Manse-2F-3c.unity
+    guid: aabfa0ec34be6a7459f67cb6b2be9c71
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_2/Manse-2F-3c.unity
+    guid: aabfa0ec34be6a7459f67cb6b2be9c71
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_2/Manse-2F-Office.unity
+    guid: f634d37d0d3fef840a1018731b677088
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_2/Manse-2F-Stockroom.unity
+    guid: ad7b76d9468887046a4e8617942300ed
+  - enabled: 1
+    path: Assets/Scenes/Pit/Pit-2a.unity
+    guid: 71412b3c2dff26540a05f7145c07e3bb
+  - enabled: 1
+    path: Assets/Scenes/Pit/Pit-2b.unity
+    guid: 47d16a1b5d65649418bd1eae7b785873
+  - enabled: 1
+    path: Assets/Scenes/Pit/Pit-2c.unity
+    guid: 283a036387d72e0438b1462494d6cf7c
+  - enabled: 1
+    path: Assets/Scenes/Pit/Pit-2d.unity
+    guid: 4e22f8166e1f67c4899650c9e6e82bb1
+  - enabled: 1
+    path: Assets/Scenes/GuardHouse/GuardHouseTopFloor.unity
+    guid: 082741bad4805a841b4662723db3f196
+  - enabled: 1
+    path: Assets/Scenes/UI/OOC UI.unity
+    guid: 80157c6102e574047b692e9d34ac530c
+  - enabled: 1
+    path: Assets/Scenes/Combat/Combat UI.unity
+    guid: d132c9f317f270c49b9f29a358d40b8e
+  - enabled: 1
+    path: Assets/Scenes/UI/Loading Screen.unity
+    guid: ac9ae9390c493a84fabdd62dbb88da3b
+  - enabled: 1
+    path: Assets/Scenes/StartMenu/EndOfDemo.unity
+    guid: 81a200ac839b79141aaccef082d864d9
+  - enabled: 1
+    path: Assets/Scenes/Manse_Floor_1/Manse-1F-StairsToPit.unity
+    guid: 3078a27be71f23242b34d3517a10d50f
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_1/MineLvl_1-1b.unity
+    guid: 64df8cf62536160478800f4162504347
+  - enabled: 1
+    path: Assets/Scenes/MineLvl_1/MineLvl_1-1c.unity
+    guid: dc75548794da77545a23ef3faffaf11a
+  - enabled: 1
+    path: Assets/Scenes/Overworld/Overworld.unity
+    guid: c4c60f184b818c3479b0508c69aad42c
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: a9a74e7783bd2f14799402861b2a8c52,
+      type: 2}

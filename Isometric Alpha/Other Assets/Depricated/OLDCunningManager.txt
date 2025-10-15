@@ -1,0 +1,340 @@
+using System;
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public static class CunningManager
+{
+	
+	public static bool playerIsCunninging;
+	
+	public static PlayerMovement player;
+	
+	public static Vector2Int directionalModifierGrid;
+	
+	public static GameObject cunningIndicator = Resources.Load<GameObject>("Cunning Indicator");
+
+	public const int cunningRange = 9;
+	public static int playerCunningCoords = (cunningRange-1)/2; 	//is an int because x should always equal y. 
+																	//player is located at cunningGrid[playerCunningCoords,playerCunningCoords]
+	public static Vector2Int selectorPosition;
+	public static Color oldColor;
+
+	public static GameObject[,] cunningGrid = new GameObject[cunningRange,cunningRange];
+	
+	public static void createCunningRange()
+	{
+		Vector3Int playerCoords = player.getMovementGridCoordsLocal();
+		
+		for(int row = 0; row < cunningRange; row++)
+		{
+			for(int col = 0; col < cunningRange; col++)
+			{
+				if((Math.Abs(row - playerCunningCoords) + Math.Abs(col - playerCunningCoords)) <= playerCunningCoords)
+				{
+					cunningGrid[row,col] = GameObject.Instantiate(cunningIndicator, player.gameObject.transform.parent, false);
+					cunningGrid[row,col].transform.localPosition = player.movementManager.grid.GetCellCenterLocal(playerCoords + new Vector3Int(row-playerCunningCoords,col-playerCunningCoords,0));
+					Helpers.updateColliderPosition(cunningGrid[row,col]);
+				} else
+				{
+					continue;
+				}
+				
+				if(!Helpers.hasCollision(cunningGrid[row,col].GetComponent<Collider2D>()))
+				{
+					cunningGrid[row,col].GetComponent<SpriteRenderer>().color = Color.yellow;
+				} else
+				{
+					EnemyMovement enemy = Helpers.getCollision(cunningGrid[row,col].GetComponent<Collider2D>()).gameObject.GetComponent<EnemyMovement>();
+					if(enemy != null)
+					{
+						cunningGrid[row,col].GetComponent<SpriteRenderer>().color = Color.red;
+					}
+				}
+			}
+		}
+			
+		cullCunningRange();
+		setSelectorOriginTile();
+	}
+	
+	public static void cullCunningRange()
+	{
+		ArrayList snake;
+		ArrayList colliderIndicators = new ArrayList();
+		
+		for(int i = 0; i < cunningRange; i++)
+		{
+			for(int j = 0; j < cunningRange; j++)
+			{
+				if(i == 0 || i == (cunningRange-1) || j == 0 ||  j == (cunningRange-1))
+				{
+					snake = snakeTowardCenter(new Vector2Int(i,j));
+					colliderIndicators.AddRange(cullSnake(snake));
+					
+				}
+			}
+		}			
+		
+		foreach(Vector2Int coords in colliderIndicators)
+		{
+			if(cunningGrid[coords.x,coords.y] != null)
+			{
+				GameObject.Destroy(cunningGrid[coords.x,coords.y]);
+				cunningGrid[coords.x,coords.y] = null;
+			}
+		}
+	}
+	
+	public static ArrayList snakeTowardCenter(Vector2Int start)
+	{
+		Vector2Int currentCoords = start;
+		
+		ArrayList snake = new ArrayList();
+		
+		while(currentCoords.x != playerCunningCoords || currentCoords.y != playerCunningCoords)
+		{
+			snake.Add(currentCoords);
+			
+			if(midpointDistance(currentCoords.x) != 0)
+			{
+				currentCoords.x = nextSquare(currentCoords.x);
+			} 
+			if(midpointDistance(currentCoords.y) != 0)
+			{
+				currentCoords.y = nextSquare(currentCoords.y);
+			}
+		}
+
+		return snake;
+	}
+	
+	public static ArrayList cullSnake(ArrayList snake)
+	{
+		bool foundCollider = false;
+		ArrayList colliderIndicators = new ArrayList();
+		
+		for(int i = (snake.Count-1); i >= 0; i--)
+		{
+			Vector2Int currentCoords = (Vector2Int) snake[i];
+			snake.Remove(i);			
+			
+			if(cunningGrid[currentCoords.x,currentCoords.y] == null)
+			{
+				continue; //ignore the null
+				
+			} 
+			Collider2D currentCollider = cunningGrid[currentCoords.x,currentCoords.y].GetComponent<Collider2D>();
+			
+			
+			if(	cunningGrid[currentCoords.x,currentCoords.y] != null && 
+						Helpers.hasCollision(currentCollider) &&
+						Helpers.getCollision(currentCollider).gameObject.layer == LayerMask.NameToLayer("Collider"))
+			{
+				foundCollider = true;
+				//Debug.Log("Collider Found at " + getGridCellCoords(currentCoords));
+				colliderIndicators.Add(currentCoords); 	// store the collider for later
+				
+			} else if(!foundCollider && cunningGrid[currentCoords.x,currentCoords.y] != null)
+			{
+				continue; //keep the indicator
+				
+			} else if(foundCollider && cunningGrid[currentCoords.x,currentCoords.y] != null)
+			{
+				GameObject.Destroy(cunningGrid[currentCoords.x,currentCoords.y]);
+				cunningGrid[currentCoords.x,currentCoords.y] = null;	// destroy the indicator because it's on the other side of a wall
+			}
+		}
+		
+		return colliderIndicators;
+	}
+	
+	private static string getGridCellCoords(Vector2Int currentCoords)
+	{
+		Vector3Int gridCellCoords = player.getMovementGridCoordsLocal();
+		
+		return "(" + ((currentCoords.x + gridCellCoords.x)-playerCunningCoords) + "," + ((currentCoords.y + gridCellCoords.y)-playerCunningCoords) + ")";
+	}
+	
+	private static int nextSquare(int current)
+	{
+		if(current > playerCunningCoords)
+		{
+			return (current-1);
+		}
+		
+		if(current < playerCunningCoords)
+		{
+			return (current+1);
+		}
+		
+		return current;
+	}
+	
+	private static int midpointDistance(int current)
+	{
+		return Math.Abs(playerCunningCoords - current);
+	}
+	
+	public static void handleWASDMovement()
+	{
+		if(Input.GetKey(KeyCode.W))
+		{
+			directionalModifierGrid = (Vector2Int) MovementManager.distance1TileNorthEastGrid;
+		} else if(Input.GetKey(KeyCode.A))
+		{
+			directionalModifierGrid = (Vector2Int) MovementManager.distance1TileNorthWestGrid;
+			
+		} else if(Input.GetKey(KeyCode.S))
+		{
+			directionalModifierGrid = (Vector2Int) MovementManager.distance1TileSouthWestGrid;
+		} else if(Input.GetKey(KeyCode.D))
+		{
+			directionalModifierGrid = (Vector2Int) MovementManager.distance1TileSouthEastGrid;
+		}
+
+		moveCunningSelector();
+	}
+	
+	public static void moveCunningSelector()
+	{
+		
+		if(	selectorPosition.x + directionalModifierGrid.x < 0				|| 
+			selectorPosition.x + directionalModifierGrid.x >= cunningRange ||
+			selectorPosition.y + directionalModifierGrid.y < 0 				||
+			selectorPosition.y + directionalModifierGrid.y >= cunningRange)
+		{
+			return;
+		}
+		
+		if(cunningGrid[selectorPosition.x + directionalModifierGrid.x, selectorPosition.y + directionalModifierGrid.y] == null)
+		{
+			return;
+		}
+		
+		cunningGrid[selectorPosition.x, selectorPosition.y].GetComponent<SpriteRenderer>().color = oldColor;
+		
+		selectorPosition = selectorPosition + directionalModifierGrid;
+		
+		oldColor = cunningGrid[selectorPosition.x, selectorPosition.y].GetComponent<SpriteRenderer>().color;
+		
+		cunningGrid[selectorPosition.x, selectorPosition.y].GetComponent<SpriteRenderer>().color = Color.green;
+	}
+	
+	public static void setSelectorOriginTile()
+	{
+		Facing direction = player.playerFacing.getFacing();
+		
+		for(int i = 0; i < 4; i++)
+		{
+			switch(direction)
+			{	
+				case Facing.NorthEast:
+					if(cunningGrid[playerCunningCoords+1,playerCunningCoords] != null)
+					{
+						oldColor = cunningGrid[playerCunningCoords+1,playerCunningCoords].GetComponent<SpriteRenderer>().color;
+						cunningGrid[playerCunningCoords+1,playerCunningCoords].GetComponent<SpriteRenderer>().color = Color.green;
+						selectorPosition = new Vector2Int(playerCunningCoords+1,playerCunningCoords);
+						return;
+					} else
+					{
+						direction = Facing.NorthWest;
+					}
+					break;
+				case Facing.NorthWest:
+					if(cunningGrid[playerCunningCoords,playerCunningCoords+1] != null)
+					{
+						oldColor = cunningGrid[playerCunningCoords,playerCunningCoords+1].GetComponent<SpriteRenderer>().color;
+						cunningGrid[playerCunningCoords,playerCunningCoords+1].GetComponent<SpriteRenderer>().color = Color.green;
+						selectorPosition = new Vector2Int(playerCunningCoords,playerCunningCoords+1);
+						return;
+					} else
+					{
+						direction = Facing.SouthWest;
+					}
+					break;
+				case Facing.SouthWest:
+					if(cunningGrid[playerCunningCoords-1,playerCunningCoords] != null)
+					{
+						oldColor = cunningGrid[playerCunningCoords-1,playerCunningCoords].GetComponent<SpriteRenderer>().color;
+						cunningGrid[playerCunningCoords-1,playerCunningCoords].GetComponent<SpriteRenderer>().color = Color.green;
+						selectorPosition = new Vector2Int(playerCunningCoords-1,playerCunningCoords);
+						return;
+					} else
+					{
+						direction = Facing.SouthEast;
+					}
+					break;
+				case Facing.SouthEast:
+					if(cunningGrid[playerCunningCoords,playerCunningCoords-1] != null)
+					{
+						oldColor = cunningGrid[playerCunningCoords,playerCunningCoords-1].GetComponent<SpriteRenderer>().color;
+						cunningGrid[playerCunningCoords,playerCunningCoords-1].GetComponent<SpriteRenderer>().color = Color.green;
+						selectorPosition = new Vector2Int(playerCunningCoords,playerCunningCoords-1);
+						return;
+					} else
+					{
+						direction = Facing.NorthEast;
+					}
+					break;
+				default:
+					throw new IOException("Player isn't facing anywhere?");
+			}
+		}
+		
+		throw new IOException("Player is surrounded by null tiles?");
+	}
+	
+	public static void destroyCunningRange()
+	{
+		foreach(GameObject tile in cunningGrid)
+		{
+			GameObject.Destroy(tile);
+		}
+	}
+	
+	public static bool cunning()
+	{
+		Collider2D selectorCollider = cunningGrid[selectorPosition.x,selectorPosition.y].GetComponent<Collider2D>();
+		
+		if(!Helpers.hasCollision(selectorCollider))
+		{
+			Debug.Log("Cunning target not found");
+			
+			return false;
+		} else 
+		{
+		
+			Debug.Log("Cunning target found");
+			Collider2D[] allCollisions = Helpers.getCollisions(selectorCollider);
+			ISkillTarget cunningTarget = null;
+			
+			foreach(Collider2D collision in allCollisions)
+			{
+				if(collision != null && !(collision is null))
+				{
+					cunningTarget = collision.gameObject.GetComponent<ISkillTarget>();
+					
+					if(cunningTarget != null && !(cunningTarget is null))
+					{
+						break;
+					}
+				}
+			}
+					
+			if(cunningTarget != null)
+			{
+				cunningTarget.cunning();
+				State.playerStats.decrementCunningsRemaining();
+				destroyCunningRange();
+				playerIsCunninging = false;
+				return true;
+			} else
+			{
+				return false;
+			}
+		}
+	}
+	
+}

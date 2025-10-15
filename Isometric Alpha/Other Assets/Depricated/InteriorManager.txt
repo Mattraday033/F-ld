@@ -1,0 +1,67 @@
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+
+public class InteriorManager : MonoBehaviour
+{
+	private static float outlineSize = 1.5f;
+	public GameObject[] interiors;
+	public Transform interiorsParent;
+	public MapObjectManager mapObjectManager;
+
+	public void spawnInteriors(int interiorsToSpawn)
+	{
+		if(interiorsToSpawn < 0)
+		{
+			return;
+		}
+		
+		interiors = new GameObject[interiorsToSpawn];
+		GameObject interiorObjectTemplate = Resources.Load<GameObject>("MapInterior");
+		
+		for(int interiorIndex = 0; interiorIndex < interiors.Length; interiorIndex++)
+		{
+			interiors[interiorIndex] = Instantiate(interiorObjectTemplate, interiorsParent);
+			
+			interiors[interiorIndex].transform.localPosition = getInteriorWorldPosition(interiorIndex);
+			
+			Helpers.updateGameObjectPosition(interiors[interiorIndex]);
+		}
+	}
+	
+	public Vector3 getInteriorWorldPosition(int interiorIndex)
+	{
+		Vector3 outputPosition = new Vector3(0f,0f,0f);
+		RectTransform foregroundRectTransform = mapObjectManager.getForegroundRectTransform();
+		
+		float width = foregroundRectTransform.rect.width;
+		float height = foregroundRectTransform.rect.height;
+		
+		switch(interiorIndex)
+		{
+			case 0:
+				outputPosition.x = width*0.7f;
+				break;
+			case 1:
+				outputPosition.x = width*0.4f;
+				outputPosition.y = height*-0.75f;
+				break;
+			case 2:
+				outputPosition.y = -1f*height;
+				break;
+			case 3:
+				outputPosition.x = width*-0.4f;
+				outputPosition.y = height*-0.75f;
+				break;
+			case 4:
+				outputPosition.x = width*-0.7f;
+				break;
+			default:
+				throw new IOException("Invalid interiorIndex. interiorIndex = " + interiorIndex);
+		}
+		return outputPosition;
+	}
+	
+}

@@ -1,0 +1,388 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using TMPro;
+using Cinemachine;
+using System.IO;
+using System.Text.RegularExpressions;
+using Newtonsoft.Json;
+
+//[System.Serializable]
+public class SaveManager : MonoBehaviour
+{	
+	
+	private static readonly Regex sWhitespace = new Regex(@"\s+");
+	
+	public static string ReplaceWhitespace(string input, string replacement) 
+	{
+		return sWhitespace.Replace(input, replacement);
+	}
+	
+	//[SerializeField] public TMP_InputField saveNameField;
+	//[SerializeField] public GameObject saveUI;
+	//[SerializeField] public Canvas screenCanvas;
+	//[SerializeField] public GameObject newSaveTitlePanel;
+	//[SerializeField] public GameObject newSaveInputPanel; //panel behind saveNameField
+	
+	
+	public GameObject saveFileDescriptionPanelSet;
+	
+	public GameObject saveFileGrid; //panel that is parent of all elements in the save file display grid (the scrollable part) and contains background panel
+	public GameObject scrollContainer; //child of saveFileGrid and contains all scroll elements, and the Scroll Rect component
+	public GameObject scrollableArea; //child of scrollContainer, the actual area that the scroll bar traverses.
+									  //parent of all save file rows and UIPanelPrefab
+	
+	public static ArrayList listOfSaveFilePanels = new ArrayList();
+	
+	public Button createSaveButton;
+	
+	public GameObject UIPanelPrefab;
+	
+	private static string fileExtension = ".json";
+	private static string fileExtensionWithoutPeriod = "json";
+	
+	
+	public static bool needsUpdate = true;
+	
+	public Camera mainCamera;
+	public CinemachineVirtualCamera mainCM;
+	
+	public TextMeshProUGUI saveNameDescriptionText;
+	public TextMeshProUGUI characterNameDescriptionText;
+	public TextMeshProUGUI dateDescriptionText;
+	public TextMeshProUGUI chapterDescriptionText;
+	public TextMeshProUGUI levelDescriptionText;
+	public TextMeshProUGUI hpDescriptionText;
+	public TextMeshProUGUI partyDescriptionText;
+	public TextMeshProUGUI xpDescriptionText;
+	public TextMeshProUGUI gpDescriptionText;
+	public TextMeshProUGUI strDescriptionText;
+	public TextMeshProUGUI wisDescriptionText;
+	public TextMeshProUGUI dexDescriptionText;
+	public TextMeshProUGUI chaDescriptionText;
+	
+	private Button[] currentSaveRow; //current save row that is clicked on
+	
+	private static SaveManager instance;
+	
+	private void Awake()
+	{
+		if(instance != null)
+		{
+			Debug.LogWarning("Found more than one Save Manager in the scene.");
+		}
+		
+		instance = this;
+	}
+	
+	public void checkForEmptyNameField()
+	{
+		if(createSaveButton.interactable)
+		{
+			if(ReplaceWhitespace(saveNameField.text, "").Equals(""))
+			{
+				createSaveButton.interactable = false;
+			}
+		} else
+		{
+			if(!ReplaceWhitespace(saveNameField.text, "").Equals("")){
+				createSaveButton.interactable = true;
+			}
+		}
+	}
+	
+	public void setActive()
+	{
+		saveUI.SetActive(true);
+		populateSaveFilePanels();
+	}
+	
+	public void setInactive()
+	{
+		saveUI.SetActive(false);
+	}
+
+	public void save()
+	{
+		string saveName = saveNameField.text;
+		ArrayList saveBlueprints = createListOfBlueprints();
+		int saveNumber;
+		
+		if(saveBlueprints.Count == 0)
+		{
+			saveNumber = 1;
+		} else
+		{
+			saveNumber = ((SaveBlueprint) saveBlueprints[saveBlueprints.Count-1]).saveNumber + 1;
+		}
+		
+		//Flags.printAll();
+		
+		SaveBlueprint blueprint = new SaveBlueprint(GameObject.FindWithTag(LayerAndTagManager.playerTag), State.playerStats, saveNumber, SceneManager.GetActiveScene().name, saveName, State.onLeftFoot, Flags.getFlagsForSave());
+		
+		createSave(blueprint);
+		
+		saveNameField.text = "";
+	}
+
+	public void load()
+	{
+		string saveName = saveNameDescriptionText.text;
+		
+		ChoiceManager.resetChoices();
+		QuestList.resetQuestList();
+		
+		SaveBlueprint saveBlueprint = getDataFromSaveFile(saveName);
+		MovementManager.setFooting(saveBlueprint.onLeftFoot);
+		
+		CharacterFacing playerFacing = new CharacterFacing();
+		playerFacing.setFacing((Facing) saveBlueprint.playerFacing);
+		
+		SceneTransitionToExactPosition st = new SceneTransitionToExactPosition(saveBlueprint.currentScene, new TransitionPosition(saveBlueprint.playerPosition[0],saveBlueprint.playerPosition[1],saveBlueprint.playerPosition[2]), true, playerFacing);
+		
+		State.terrainHidden = saveBlueprint.terrainHidden;
+		State.playerStats = new PlayerStats("",0,0,0,0,0,0,0,0);
+		
+		State.playerStats.combatSpriteName = saveBlueprint.combatSpriteName;
+		State.playerStats.combatSprite = Resources.Load<GameObject>(State.playerStats.combatSpriteName);
+		
+		State.playerStats.getName() = saveBlueprint.playerName;
+		State.playerStats.getStrength() = saveBlueprint.strength;
+		State.playerStats.getDexterity() = saveBlueprint.dexterity;
+		State.playerStats.getWisdom() = saveBlueprint.wisdom;
+		State.playerStats.getCharisma() = saveBlueprint.charisma;
+		State.playerStats.setLevel(saveBlueprint.level);
+		State.playerStats.xp = saveBlueprint.xp;
+		State.playerStats.currentHealth = saveBlueprint.currentHealth;
+		State.playerStats.setCunningsRemaining(saveBlueprint.cunningsRemaining);
+		
+		State.inventory = saveBlueprint.extractInventoryItemsFromJson(saveBlueprint.currentInventory);
+		State.junkPocket = saveBlueprint.extractInventoryItemsFromJson(saveBlueprint.currentJunk);
+		State.equippedItems = saveBlueprint.extractEquippedItemsFromJson();
+		State.equippedCombatActions = saveBlueprint.extractCombatActionsFromJson();
+		State.lessonsLearned = saveBlueprint.extractAllLessonKeysFromJson();
+		
+		ChoiceManager.choices = saveBlueprint.extractChoicesFromJson();
+		DeathFlagManager.deadNames = saveBlueprint.extractArrayListOfStringsFromJson(saveBlueprint.currentDeathFlags);
+		MetFlagManager.metNames = saveBlueprint.extractArrayListOfStringsFromJson(saveBlueprint.currentMetFlags);
+		GateAndChestManager.openedGatesAndChests = saveBlueprint.extractArrayListOfStringsFromJson(saveBlueprint.currentChestFlags);
+		TrapAndButtonStateManager.allActivatedTrapKeys = saveBlueprint.extractArrayListOfStringsFromJson(saveBlueprint.currentActivatedTrapsAndButtons);
+		
+		ShopkeeperInventoryList.shopkeeperInventories = saveBlueprint.extractShopkeeperInventoriesFromJson();
+		ShopkeeperInventoryList.buyBackInventories = saveBlueprint.extractBuyBackInventoriesFromJson();
+		
+		State.currentMonsterPackList = saveBlueprint.extractMonsterPackListFromJson();
+		
+		State.questList = saveBlueprint.extractQuestListFromJson();
+		State.allKnownMapData = saveBlueprint.extractAllKnownMapDataFromJson();
+		saveBlueprint.extractAllAreaHostilitiesFromJson();
+
+		Purse.setCoinsInPurse(saveBlueprint.gold);
+		AffinityManager.setAffinity(saveBlueprint.affinity);
+		
+		PartyManager.setAllPartyMemberLevels(saveBlueprint.partyMemberLvls);
+		PartyManager.setAllPartyMemberHealths(saveBlueprint.partyMemberHealths);
+		PartyManager.setAllPartyMemberJoinabilities(saveBlueprint.partyMemberJoinabilities);
+		PartyManager.setAllPartyMemberPlaced(saveBlueprint.partyMemberPlaced);
+		PartyManager.setAllPartyMemberPlacedPositions(saveBlueprint.partyMemberPlacedPositions);
+		
+		Formation newFormation = new Formation();
+		newFormation.implementGridFromCoordSet(saveBlueprint.partyMemberFormationCoords);
+		newFormation.setGridCoords(saveBlueprint.playerFormationPosition, State.playerStats);
+		State.formation = newFormation;
+
+		Flags.resetAllFlags();
+		Flags.overwriteFlags(saveBlueprint.currentFlags);
+		
+		//Flags.printAll();
+		
+		MonsterPackListManager.justLoaded = true;
+		
+		//DialogueManager.resetDialogueTracker();
+		
+		st.transitionFromLoad = true;
+		st.changeScene();
+		
+		JournalManager.currentQuest = null;
+		
+		TestScript.addTestVariables();
+	}
+	
+	public void setInputFieldToSaveName(TextMeshProUGUI saveNameText)
+	{
+		saveNameField.text = saveNameText.text;
+	}
+	
+	private ArrayList createListOfBlueprints()
+	{
+		string[] saveFiles = Directory.GetFiles(Application.persistentDataPath + "/");
+		ArrayList listOfBlueprints = new ArrayList();
+		
+		foreach(string saveFilePath in saveFiles)
+		{
+			if(!saveFilePath.Split(".")[1].ToLower().Equals(fileExtensionWithoutPeriod))
+			{
+				continue;
+			}
+			
+			string[] saveFilePathParts = saveFilePath.Split("/");
+			string saveFileName = saveFilePathParts[saveFilePathParts.Length-1];
+			
+			SaveBlueprint blueprint = getDataFromSaveFile(saveFileName.Split(".")[0]);
+
+			int blueprintIndex;
+			
+			for(blueprintIndex = 0; blueprintIndex < listOfBlueprints.Count; blueprintIndex++)
+			{
+				SaveBlueprint currentListedBlueprint = (SaveBlueprint) listOfBlueprints[blueprintIndex];
+				
+				if(blueprint.saveNumber < currentListedBlueprint.saveNumber)
+				{
+					break;
+				}
+			}
+			
+			listOfBlueprints.Insert(blueprintIndex, blueprint);
+		}
+		
+		return listOfBlueprints;
+	}
+	
+	public void populateSaveFilePanels()
+	{
+		string[] saveFiles = Directory.GetFiles(Application.persistentDataPath + "/");
+
+		ArrayList saveBlueprints = createListOfBlueprints();
+
+		deleteAllSaveFilePanels();
+		createListOfSaveRowPanelObjects(saveBlueprints.Count);
+		
+		int rowIndex = 0;
+		for(int blueprintIndex = saveBlueprints.Count-1; blueprintIndex >= 0 && rowIndex < listOfSaveFilePanels.Count; blueprintIndex--, rowIndex++)
+		{
+			GameObject saveRowObj = (GameObject) listOfSaveFilePanels[rowIndex];
+			SaveRow saveRow = saveRowObj.GetComponent<SaveRow>();
+			SaveBlueprint saveBlueprint = (SaveBlueprint) saveBlueprints[blueprintIndex];
+			string[] date = (new FileInfo(Application.persistentDataPath + "/" + saveBlueprint.saveName + fileExtension)).CreationTime.ToString().Split(" ");
+			
+			saveRow.setSaveBlueprint(saveBlueprint);
+			saveRow.saveNameText.text = saveBlueprint.saveName;
+			saveRow.saveDateText.text = date[1] + " " + date[2] + "\n" + date[0];
+			saveRow.saveNumberText.text = "" + saveBlueprint.saveNumber;
+		}
+		
+		//resize scrollable area to be size of all inventory rows combined
+		scrollableArea.GetComponent<RectTransform>().sizeDelta = new Vector2(750, (listOfSaveFilePanels.Count+1)*UIPanelPrefab.GetComponent<RectTransform>().rect.height);
+	}
+	
+	private void createListOfSaveRowPanelObjects(int numberOfPanels)
+	{
+		for(int panelIndex = 0; panelIndex < numberOfPanels; panelIndex++)
+		{
+			Vector3 prefabLocalPosition = UIPanelPrefab.GetComponent<RectTransform>().localPosition; //RectTransform of disabled inventoryRow example
+		
+			GameObject current = Instantiate(UIPanelPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+			current.name = "Save_File_Panel_" + panelIndex;
+		
+			current.transform.parent = saveFileGrid.transform.GetChild(0).GetChild(1);
+			RectTransform currentRectTransform = current.GetComponent<RectTransform>();
+		
+			current.GetComponent<RectTransform>().localPosition = new Vector3(prefabLocalPosition.x, prefabLocalPosition.y - (currentRectTransform.rect.height*(panelIndex)), 0f);
+			current.GetComponent<RectTransform>().localScale = new Vector3(1f,1f,1f);
+			current.SetActive(true);
+
+			listOfSaveFilePanels.Add(current);
+		}
+	}
+	
+	public void deleteAllSaveFilePanels()
+	{
+		if(listOfSaveFilePanels.Count != 0){
+		
+			foreach(GameObject panel in listOfSaveFilePanels){
+				Destroy(panel);	
+			}
+
+			listOfSaveFilePanels = new ArrayList();
+		}
+	}
+	
+	public void disableCurrentSaveFileRow()
+	{
+		if(currentSaveRow != null && currentSaveRow[0] != null){
+			enableCurrentSaveFileRow();
+		}
+		
+		GameObject currentButton = EventSystem.current.currentSelectedGameObject;
+
+		currentSaveRow = new Button[3];
+		
+		for(int i = 0; i < 3; i++){
+			
+			currentSaveRow[i] = currentButton.transform.parent.GetChild(i).GetComponent<Button>();
+			currentSaveRow[i].interactable = false;
+		}
+	}
+	
+	public void enableCurrentSaveFileRow()
+	{
+		if(currentSaveRow != null && currentSaveRow[0] != null){
+			
+			for(int i = 0; i < 3; i++){
+				currentSaveRow[i].interactable = true;
+			}
+		}
+	}
+
+	public void revealSaveFileDescriptionPanelSet()
+	{
+		string saveName = currentSaveRow[0].gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text;
+		
+		SaveBlueprint saveBlueprint = getDataFromSaveFile(saveName);
+		string[] lessonKeys = saveBlueprint.extractAllLessonKeysFromJson();
+		
+		
+		saveNameDescriptionText.text = saveName;
+		characterNameDescriptionText.text = saveBlueprint.playerName;
+		dateDescriptionText.text = currentSaveRow[1].gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text;
+		chapterDescriptionText.text = "1"; //not implemented
+		levelDescriptionText.text = "" + saveBlueprint.level; 
+		hpDescriptionText.text = saveBlueprint.currentHealth + "/" + PlayerStats.calculateTotalHealth(saveBlueprint.level, saveBlueprint.strength, StatBoostList.getAllStatBoosts(lessonKeys));
+		partyDescriptionText.text = "1/3";// not implemented
+		xpDescriptionText.text = "" + saveBlueprint.xp;
+		gpDescriptionText.text =  "" + saveBlueprint.gold;
+		strDescriptionText.text = "" + saveBlueprint.strength;
+		wisDescriptionText.text = "" + saveBlueprint.wisdom;
+		dexDescriptionText.text = "" + saveBlueprint.dexterity;
+		chaDescriptionText.text = "" + saveBlueprint.charisma;
+		
+		SideMenuManager.setEscapableObject(1, saveFileDescriptionPanelSet);
+	}
+	
+	public static void createSave(SaveBlueprint blueprint)
+	{
+		string json = JsonConvert.SerializeObject(blueprint);
+		
+		System.IO.File.WriteAllText(Application.persistentDataPath + "/" + blueprint.saveName + fileExtension, json);
+	}
+	
+	
+	public static SaveBlueprint getDataFromSaveFile(string saveName)
+	{
+		if(File.Exists(Application.persistentDataPath + "/" + saveName + fileExtension))
+		{
+			string jsonString = File.ReadAllText(Application.persistentDataPath + "/" + saveName + fileExtension);
+			
+			
+			return JsonConvert.DeserializeObject<SaveBlueprint>(jsonString);
+		
+		} else {
+			Debug.LogError("Save File not found: " + Application.persistentDataPath + "/" + saveName + fileExtension);
+			return null;
+		}
+	}
+	
+}

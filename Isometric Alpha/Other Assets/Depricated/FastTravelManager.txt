@@ -1,0 +1,68 @@
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class FastTravelManager : MonoBehaviour
+{
+	private const string confirmationMessagePrefix = "Fast travel to ";
+	private const string confirmationMessagePunctuation = "?";
+	private const string fastTravelHash = "FT";
+	private const int firstTransitionIndex = 0;
+	
+	private static FastTravelManager instance;
+	
+	public string targetSceneName;
+	public bool active = false;
+	
+	public GameObject fastTravelConfirmationWindow;
+	public TextMeshProUGUI fastTravelConfirmationMessageText;
+	
+	void Update() //here for Key Input
+	{
+		if(Input.GetKey(KeyCode.Escape) && !KeyPressManager.handlingPrimaryKeyPress)
+		{
+			cancelFastTravelRequest();
+			KeyPressManager.handlingPrimaryKeyPress = true;
+		}
+	}
+	
+
+	public void setConfirmationMessage()
+	{
+		string displayName = MapObjectList.getMapObject(targetSceneName).getMapUIDisplayName();	
+		
+		fastTravelConfirmationMessageText.text = confirmationMessagePrefix + displayName + confirmationMessagePunctuation;
+	}
+	
+
+	public void handleFastTravelRequest()
+	{
+		TransitionManager.getInstance().fastTravel(new TransitionInfo(fastTravelHash,targetSceneName));
+	}
+	
+
+	public void cancelFastTravelRequest()
+	{
+		active = false;
+		fastTravelConfirmationWindow.SetActive(false);
+	}
+	
+	public static FastTravelManager getInstance()
+	{
+		return instance;
+	}
+	
+	private void Awake()
+	{
+		if(instance != null)
+		{
+			throw new IOException("An instance of FastTravelManager already exists");
+		}
+		
+		instance = this;
+	}
+
+}

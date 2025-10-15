@@ -1,0 +1,18 @@
+{
+	"title": "Assist the Nonbranded",
+	"numberOfSteps": 7,
+	"steps":[
+				{"stepName":"Convinced Imre.","MapZone":"","MapLocation":"","journalDescription":"I spoke with Imre and convinced him to get the nonbranded slaves in on the escape plan. For now, I should wait until the revolution begins in earnest, then go and find him."},
+				{"stepName":"Terrified Imre.","MapZone":"","MapLocation":"","journalDescription":"I spoke with Imre and intimidated him into joining our conspiracy. It'll be up to him to convince the other nonbranded slaves to help us. I can only hope he doesn't screw it up."},
+				{"stepName":"Find Imre.","MapZone":"Camp","MapLocation":"ManseCamp","journalDescription":"The time has come to put our plan into action. Imre will be waiting for me somewhere near the Manse; I need to link up with him and discuss our next move."},
+				{"stepName":"To the kitchens.","MapZone":"Manse-1F","MapLocation":"Manse-1F-Kitchens","journalDescription":"Imre has told me that the guards are holding the other nonbranded slaves in the kitchens, but he has unbarred the kitchen's servants entrance. I should enter the kitchens and liberate the nonbranded."},
+				{"stepName":"The nonbranded are free.","MapZone":"","MapLocation":"","journalDescription":"I have entered the kitchens and killed Kende, the cook. Now I have a way inside the Manse that avoids the guards' barricades. I should speak to Imre now that he is free to speak to see if he has any more aid to offer."},
+				{"stepName":"Betrayal!","MapZone":"","MapLocation":"","journalDescription":"Imre has betrayed me to the guards. I was forced to slay the nonbranded alongside their captors."},
+				{"stepName":"Left to their fate.","MapZone":"","MapLocation":"","journalDescription":"I never helped free Imre from his captors. I wonder what happened to them..."}
+	],
+
+
+	"deathSteps":
+			[
+			]
+}

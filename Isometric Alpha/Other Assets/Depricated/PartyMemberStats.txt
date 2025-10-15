@@ -1,0 +1,371 @@
+using System;	
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PartyMemberStats : Stats
+{
+
+	private const string ZOIIconBackgroundName = "-ZOI-Icon";
+
+	public const string ZOIStatBoostKey = "PartyMemberBoost";
+	public const string nandorPersistentInfluenceStatBoostKey = "nandorPersistentInfluence";
+	public const string redStalwartInfluenceStatBoostKey = "redStalwartInfluence";
+	public const string carterCleverInfluenceStatBoostKey = "carterCleverInfluence";
+
+	private const string combatantTypeDescription = "Party Member";
+
+	public Color spriteColor;
+
+	public const int partyMemberLevelMaximum = 5;
+	public const int partyMemberActionWheelLength = 5;
+	public int baseHealth;
+	public int healthPerLevelAboveOne;
+
+	private int level;
+
+	public PartyMemberStats() : base("")
+	{
+
+	}
+
+	public PartyMemberStats(GameObject combatSprite, string combatSpriteName, string name, int cHP, int level) :
+	base(combatSprite, combatSpriteName, name, cHP)
+	{
+		this.baseHealth = 90;
+		this.healthPerLevelAboveOne = 10;
+		this.level = level;
+		this.spriteColor = Color.white;
+	}
+
+	public PartyMemberStats(GameObject combatSprite, string combatSpriteName, string name, int cHP, int baseHealth, int healthPerLevelAboveOne, int level, Color color) :
+	base(combatSprite, combatSpriteName, name, cHP)
+	{
+		this.baseHealth = baseHealth;
+		this.healthPerLevelAboveOne = healthPerLevelAboveOne;
+		this.level = level;
+		this.spriteColor = color;
+	}
+
+	public override GameObject instantiateCombatSprite()
+	{
+		base.instantiateCombatSprite();
+
+		// Debug.LogError(getName() + " is now " + spriteColor.ToString());
+
+		combatSprite.GetComponent<SpriteRenderer>().color = getSpriteColor();
+
+		combatSprite.GetComponent<AbilityMenuManager>().actionArraySource = this;
+
+		Helpers.updateGameObjectPosition(combatSprite);
+
+		return combatSprite;
+	}
+
+	public override AbilityMenuManager getAbilityMenuManager()
+	{
+		return combatSprite.GetComponent<AbilityMenuManager>();
+	}
+
+	public override int getLevel()
+	{
+		return level;
+	}
+
+	public override void setLevel(int newLevel)
+	{
+		this.level = newLevel;
+	}
+
+	public override void incrementLevel()
+	{
+		level++;
+	}
+
+	public override int getTotalHealth()
+	{
+		int healthFromLevel = baseHealth + (healthPerLevelAboveOne * (level - 1));
+
+		return healthFromLevel;
+	}
+
+	public override int getTotalArmorRating()
+	{
+		return (int)((double)(PartyMemberEquipmentManager.getArmor(getName(), level) + StatBoostManager.getTotalExtraArmor(getAllStatBoostsFromTraits())) * getCurrentTotalArmorPercentage());
+	}
+
+	public Weapon getCurrentWeapon()
+	{
+		return PartyMemberEquipmentManager.getWeapon(getName(), level);
+	}
+
+	public override Color getSpriteColor()
+	{
+		return spriteColor;
+	}
+    
+    public override int getPassiveSlotsUnlocked()
+	{
+		return getLevel(); 
+	}
+
+	public override SecondaryStatBoost[] getAllStatBoostsFromTraits()
+    {
+        return Helpers.appendArray<SecondaryStatBoost>(base.getAllStatBoostsFromTraits(), getZoneOfInfluenceTrait().getStatBoosts());
+    }
+
+	public override Trait getZoneOfInfluenceTrait()
+	{
+		string[] allStatBoostKeys = Stats.getAllZoneOfInfluenceBoostKeys(Helpers.appendArray<string>(getAllStatBoostKeysFromTraits(), getName() + ZOIStatBoostKey));
+		string[] zoiStatBoostKeys = new string[0];
+
+		foreach (string statBoostKey in allStatBoostKeys)
+		{
+			SecondaryStatBoost boost = StatBoostList.getStatBoost(statBoostKey);
+
+			if (boost.affectsZone && boost.sourceName.Equals(getName()))
+			{
+				zoiStatBoostKeys = Helpers.appendArray<string>(zoiStatBoostKeys, statBoostKey);
+			}
+		}
+
+		return new ZoneOfInfluenceTrait(getName() + zoiTraitName, getZOITraitDescription(), getName() + ZOIIconBackgroundName, zoiStatBoostKeys);
+
+	}
+
+	public string getZOITraitDescription()
+	{
+		switch (getName())
+		{
+			case NPCNameList.thatch:
+				return "Creature's in this companion's Zone of Influence gain 30 extra armor. This increases to 60 if the companion is at least level 4.";
+			case NPCNameList.carter:
+				return "Creature's in this companion's Zone of Influence deal 10% extra damage during a surprise round. This increases to 20% if the companion is at least level 4.";
+			case NPCNameList.nandor:
+				return "Creature's in this companion's Zone of Influence gain 20% extra Mental Resistance. This increases to 40% if the companion is at least level 4.";
+			default:
+				return zoiTraitDescription;
+		}
+	}
+
+	public override void addEquippedPassiveTraits()
+	{
+		// CombatAction[] actions = PartyManager.getPartyMember(getName()).getUnlockedCombatActions();
+
+		// foreach (CombatAction action in actions)
+		// {
+		// 	if (action != null && action.autoApply())
+		// 	{
+		// 		addTrait(action.getAppliedTrait());
+		// 	}
+		// }
+	}
+
+	public override int getExtraArmorFromDexterity()
+	{
+		return (getDexterity() * Dexterity.extraArmorMultiplier);
+	}
+
+    public override bool costsPartyCombatActions()
+    {
+        return true;
+    }
+
+	public virtual int getBaseHealth()
+	{
+		return baseHealth;
+	}
+
+	public virtual int getHealthPerLevelAboveOne()
+	{
+		return healthPerLevelAboveOne;
+	}
+
+	public virtual int getLevelMaximum()
+	{
+		return partyMemberLevelMaximum;
+	}
+
+    public override int getSynergyCoefficient()
+    {
+        return Charisma.partyMemberSynergyModifierCoefficient;
+    }
+
+    public string getSynergyCoefficientForDisplay()
+    {
+        return (getCharisma() * getSynergyCoefficient() + EquipmentPropertiesList.getArmorSynergyBonuses()) + "";
+    }
+
+    public override void removeActivatedPassiveTraits()
+    {
+        // CombatAction[] actions = PartyManager.getPartyMember(getName()).getUnlockedCombatActions();
+
+        // foreach (CombatAction action in actions)
+        // {
+        //     if (action == null)
+        //     {
+        //         continue;
+        //     }
+
+        //     if (action.autoApply())
+        //     {
+        //         Trait[] newTraits = new Trait[0];
+
+        //         for (int traitIndex = 0; traitIndex < traits.Length; traitIndex++)
+        //         {
+        //             if (!action.getAppliedTrait().Equals(traits[traitIndex]))
+        //             {
+        //                 newTraits = Helpers.appendArray<Trait>(newTraits, traits[traitIndex]);
+        //             }
+        //         }
+
+        //         traits = newTraits;
+        //     }
+        // }
+    }
+
+	public override IDescribable getHoverPanelDescribable()
+	{
+		return getZoneOfInfluenceTrait();
+	}
+
+	//IDescribable methods
+
+	public override void describeSelfFull(DescriptionPanel panel)
+	{
+		base.describeSelfFull(panel);
+
+		DescriptionPanel.setText(panel.typeText, combatantTypeDescription);
+	}
+
+	public override List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
+	{
+
+		List<DescriptionPanelBuildingBlock> buildingBlocks = base.getDescriptionBuildingBlocks();
+
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getLevelBlock(getLevel().ToString()));
+
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getStrengthBlock(getStrength().ToString()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDexterityBlock(getDexterity().ToString()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getWisdomBlock(getWisdom().ToString()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getCharismaBlock(getCharisma().ToString()));
+
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getCriticalHitDamageBlock(getExtraCritDamageForDisplay().ToString()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getPhysicalResistBlock(getPhysicalResistanceForDisplay().ToString()));
+
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getSurpriseRoundDamageMultiplierBlock(getSurpriseDamageMultiplierForDisplay()));
+
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorPenetrationBlock(getArmorPenetrationForDisplay()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getMentalResistBlock(getMentalResistanceForDisplay()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusHealthBlock(Strength.getHealthFromStrength(getStrength()).ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getExtraArmorBlock(getExtraArmorFromDexterity().ToString()));
+
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getSynergyBlock(getSynergyCoefficientForDisplay()));
+
+        // buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getZoneOfInfluenceTrait().getIconName()));
+
+        return buildingBlocks;
+	}
+
+	public override CombatActionArray getActionArray()
+	{
+		return PartyManager.getPartyMember(getName()).getUnlockedCombatActions();
+	}
+
+	public override int getStrength()
+	{
+		return Strength.getPartyMemberStrengthAtLevel(getName(), getLevel());
+	}
+
+	public override double getCritDamageMultiplier()
+	{
+		return (DamageCalculator.baseCriticalDamage + (.05 * ((double)getStrength()))) + StatBoostManager.getTotalCritDamageMultiplier() + EquipmentPropertiesList.getArmorCriticalDamageMultiplierBonuses();
+	}
+
+	public string getExtraCritDamageForDisplay()
+	{
+		return (getStrength() * 5) + (int)StatBoostManager.getTotalCritDamageMultiplier() + (int)(100.0 * (DamageCalculator.baseCriticalDamage + EquipmentPropertiesList.getArmorCriticalDamageMultiplierBonuses())) + "%";
+	}
+
+	public double getPhysicalResistance()
+	{
+		return ((.1 + (((double) getStrength()) * .02)) + StatBoostManager.getTotalPhysicalResistance() + ((double) EquipmentPropertiesList.getArmorPhysicalResistanceBonuses()) / 100.0);
+	}
+
+	public string getPhysicalResistanceForDisplay()
+	{
+		return ((10 + (getStrength() * 2)) + (int)StatBoostManager.getTotalPhysicalResistance() + EquipmentPropertiesList.getArmorPhysicalResistanceBonuses()) + "%";
+	}
+
+	public override int getDexterity()
+	{
+		return Dexterity.getPartyMemberDexterityAtLevel(getName(), getLevel());
+	}
+
+	public override float getSurpriseDamageMultiplier()
+	{
+		return 1f + (((float)getDexterity()) * .1f) + StatBoostManager.getTotalSurpriseDamageMultiplier() + ((float) EquipmentPropertiesList.getArmorSurpriseRoundDamageBonuses() / 100f);
+	}
+
+	public string getSurpriseDamageMultiplierForDisplay()
+	{
+		return (((((float)getDexterity()) * .1f) + StatBoostManager.getTotalSurpriseDamageMultiplier()) * 100f) + EquipmentPropertiesList.getArmorSurpriseRoundDamageBonuses() + "%";
+	}
+
+	public override int getWisdom()
+	{
+		return Wisdom.getPartyMemberWisdomAtLevel(getName(), getLevel());
+	}
+
+	public float getArmorPenetration()
+	{
+		float baseArmorPen = 0;
+
+		if (getWisdom() < Wisdom.minorArmorPenetrationLevel)
+		{
+			baseArmorPen = 0;
+		}
+		else if (getWisdom() < Wisdom.lesserArmorPenetrationLevel)
+		{
+			baseArmorPen = .05f;
+		}
+		else if (getWisdom() < Wisdom.improvedArmorPenetrationLevel)
+		{
+			baseArmorPen = .10f;
+		}
+		else if (getWisdom() < Wisdom.greaterArmorPenetrationLevel)
+		{
+			baseArmorPen = .15f;
+		}
+		else if (getWisdom() < Wisdom.majorArmorPenetrationLevel)
+		{
+			baseArmorPen = .20f;
+		}
+		else
+		{
+			baseArmorPen = .25f;
+		}
+
+		return (baseArmorPen + StatBoostManager.getTotalArmorPenetration() + ((float) EquipmentPropertiesList.getArmorArmorPenetrationBonuses())/100f);
+	}
+
+	public string getArmorPenetrationForDisplay()
+	{
+		return Math.Round((getArmorPenetration() + StatBoostManager.getTotalArmorPenetration() + EquipmentPropertiesList.getArmorArmorPenetrationBonuses()) * 100f) + "%";
+	}
+
+	public double getMentalResistance()
+	{
+		return ((.1 + (((double) getWisdom()) * .02)) + StatBoostManager.getTotalMentalResistance() + ((double) EquipmentPropertiesList.getArmorMentalResistanceBonuses()) / 100.0);
+	}
+
+	public string getMentalResistanceForDisplay()
+	{
+		return ((10 + (getWisdom() * 2)) + (int)StatBoostManager.getTotalMentalResistance()) + EquipmentPropertiesList.getArmorMentalResistanceBonuses() +  "%";
+	}
+
+	public override int getCharisma()
+	{
+		return Charisma.getPartyMemberCharismaAtLevel(getName(), getLevel());
+	}
+}

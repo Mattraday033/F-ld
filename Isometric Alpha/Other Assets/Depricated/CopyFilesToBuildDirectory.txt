@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.Remoting.Lifetime;
+using UnityEditor;
+using UnityEditor.Build;
+using UnityEditor.Build.Reporting;
+using UnityEngine;
+
+
+public class CopyFilesToBuildDirectory : IPostprocessBuildWithReport
+{
+    private static string assetsFolderPath = "Assets/";
+    private static string windowsBuildsAssetsFolderPath = "Builds/Windows/Assets/";
+
+    public int callbackOrder => 0;
+
+    public void OnPostprocessBuild(BuildReport report)
+    {
+        string folderName = "Quests/";
+        string[] allNewQuestFiles = Directory.EnumerateFiles(assetsFolderPath + folderName, "*.json").ToArray();
+        string[] allOldQuestFiles = Directory.EnumerateFiles(windowsBuildsAssetsFolderPath + folderName, "*.json").ToArray();
+
+        if (!Directory.Exists(windowsBuildsAssetsFolderPath + folderName))
+        {
+            Directory.CreateDirectory(windowsBuildsAssetsFolderPath + folderName);
+        }
+
+        foreach (string fileName in allOldQuestFiles)
+        {
+            File.Delete(fileName);
+        }
+
+        foreach (string fileName in allNewQuestFiles)
+        {
+            string fileNameOnly = fileName.Split("/")[fileName.Split("/").Length-1];
+
+            File.Copy(assetsFolderPath + folderName + fileNameOnly, windowsBuildsAssetsFolderPath + folderName + fileNameOnly);
+        }
+    }
+}

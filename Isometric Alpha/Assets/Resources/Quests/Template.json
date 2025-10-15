@@ -1,0 +1,15 @@
+{
+	"title": "Place Holder",
+	"numberOfSteps": 2,
+	"steps":[
+				{"stepName":"","MapZone":"","MapLocation":"","journalDescription":""},
+				{"stepName":"","MapZone":"","MapLocation":"","journalDescription":""}
+			],
+
+
+	"deathSteps":
+			[
+				{"deadName":"Guy 1","firstStep":1,"lastStep":1,"stepName":"Dude's dead.","journalDescription":"I killed a guy."},
+				{"deadName":"Guy 2","firstStep":2,"lastStep":4,"stepName":"Other Dude's Dead.","journalDescription":"I killed a different guy."}
+			]
+}

@@ -1,0 +1,123 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using TMPro;
+using UnityEngine;
+
+public class SecondaryStatDisplay : MonoBehaviour
+{
+	private static SecondaryStatDisplay instance;
+	
+	public GameObject displayPanelParent;
+	
+	public bool active = false;
+	public bool levelUpStatDisplay = false;
+	
+	private GameObject oldEscapableObject;
+	
+	public static int titlesIndex = 0;
+	public static int statsIndex = 1;
+	
+	public TextMeshProUGUI[] titlePanels;
+	public TextMeshProUGUI[] displayPanels;
+	
+	public static SecondaryStatDisplay getInstance()
+	{
+		return instance;
+	}
+	
+	private void Awake()
+	{
+		if(levelUpStatDisplay)
+		{
+			return;
+		}
+	
+		if(instance != null || !(instance is null))
+		{
+			throw new IOException("Duplicate instances of SecondaryStatDisplay exist");
+		}
+		
+		instance = this;
+	}
+	
+	public void activate()
+	{
+		
+		displayPanelParent.SetActive(true);
+		
+		if((SideMenuManager.getEscapableObject(1) != null && SideMenuManager.getEscapableObject(1).GetComponent<DescriptionPanel>() != null ) ||
+			(SideMenuManager.getEscapableObject(2) != null && SideMenuManager.getEscapableObject(2).GetComponent<DescriptionPanel>() != null))
+		{
+			SideMenuManager.handleESCPress();
+		}
+		
+		SideMenuManager.setEscapableObject(2, displayPanelParent);
+		
+		active = true;
+	}
+	
+	public void deactivate()
+	{
+		displayPanelParent.SetActive(false);
+		
+		if(oldEscapableObject != null)
+		{
+			SideMenuManager.setEscapableObject(2, oldEscapableObject);
+		}
+		
+		active = false;
+	}
+	
+	public void cleanAllPanels()
+	{
+		for(int panelIndex = 0; panelIndex < titlePanels.Length && panelIndex < displayPanels.Length; panelIndex++)
+		{
+			titlePanels[panelIndex].text = "";
+			displayPanels[panelIndex].text = "";
+		}
+	}
+	
+	public void populatePanels(string[] titles, string[] stats)
+	{
+		cleanAllPanels();
+		
+		for(int panelIndex = 0; panelIndex < titles.Length && panelIndex < stats.Length; panelIndex++)
+		{
+			titlePanels[panelIndex].text = titles[panelIndex];
+			displayPanels[panelIndex].text = stats[panelIndex];
+		}
+	}
+	
+	public void checkForDisplayPanelDeactivation()
+	{
+		if(active && SideMenuManager.getEscapableObject(2) != displayPanelParent)
+		{
+			deactivate();
+		}
+	}
+	
+	public void updatePanels(string[] titles, string[] stats)
+	{
+		for(int panelIndex = 0; panelIndex < titles.Length && panelIndex < stats.Length; panelIndex++)
+		{
+			if(displayPanels[panelIndex].text.Equals("") || stats[panelIndex].Equals(""))
+			{
+				continue;
+			}
+			
+			int oldStat = int.Parse(displayPanels[panelIndex].text.Replace(".","").Replace("%","").Replace(",","").Replace("+",""));
+			int newStat = int.Parse(stats[panelIndex].Replace(".","").Replace("%","").Replace(",","").Replace("+",""));
+			
+			if(newStat > oldStat)
+			{
+				displayPanels[panelIndex].faceColor = new Color32(0,255,0,255);
+			} else
+			{
+				displayPanels[panelIndex].faceColor = new Color32(0,0,0,255);
+			}
+			
+			displayPanels[panelIndex].text = stats[panelIndex];
+		}
+	}
+}

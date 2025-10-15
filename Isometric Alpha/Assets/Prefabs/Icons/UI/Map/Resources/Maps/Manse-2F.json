@@ -1,0 +1,227 @@
+{
+	"Key": "Manse-2F",
+	"FlipDefaultMapIcon": false,
+	"DefaultFloorImage": "Red_Dirt",
+	"DefaultMapIcon": "GreyMountains",
+	"Tiles": [
+		{
+			"locationName": "",
+			"row": "2",
+			"col": "7",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "2",
+			"col": "6",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "2",
+			"col": "5",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},{
+			"locationName": "Manse-2F-1a",
+			"row": "2",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "House 3",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "Manse-2F-Office",
+			"row": "1",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mine 2",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "2",
+			"col": "3",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "2",
+			"col": "2",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "Manse-2F-2a",
+			"row": "2",
+			"col": "1",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "House 5",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "2",
+			"col": "0",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "Manse-2F-2b",
+			"row": "3",
+			"col": "1",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "GratedWell",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "Manse-2F-3a",
+			"row": "4",
+			"col": "1",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "House 2",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},	
+		{
+			"locationName": "",
+			"row": "5",
+			"col": "1",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": true,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "Manse-2F-3b",
+			"row": "6",
+			"col": "1",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "SquareTower 2",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},		
+		{
+			"locationName": "",
+			"row": "6",
+			"col": "2",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},		
+		{
+			"locationName": "",
+			"row": "6",
+			"col": "3",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "Manse-2F-Stockroom",
+			"row": "6",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Supplies 1",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "7",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": true,
+			"flipMapIcon": false
+		},		
+		{
+			"locationName": "",
+			"row": "5",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": true,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "Manse-2F-3c",
+			"row": "4",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "House 4",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "4",
+			"col": "3",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "4",
+			"col": "2",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},		
+		{
+			"locationName": "",
+			"row": "3",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": true,
+			"flipMapIcon": false
+		}
+	]
+}

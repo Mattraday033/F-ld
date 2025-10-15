@@ -1,0 +1,72 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class MapObjectManager : MonoBehaviour
+{
+	private static Color fastTravelEnabledColor = Color.green;
+	private static Color fastTravelDisabledFromHostilityColor = Color.red;
+	
+	public GameObject fastTravelConfirmationWindow;
+	
+	public string sceneName;
+	
+	public Transform foregroundTransform;
+	public RectTransform foregroundRectTransform;
+	
+	public Image foregroundImage;
+	public Button foregroundButton;
+	public TextMeshProUGUI label;
+	
+	public void setAsFastTravelDestination()
+	{
+		if(AreaList.areaIsHostile(sceneName) && !AreaList.areaAlwaysAllowsFastTravel(sceneName))
+		{
+			foregroundButton.enabled = false;
+			foregroundImage.color = fastTravelDisabledFromHostilityColor;
+		} else
+		{
+			foregroundButton.enabled = true;
+			foregroundImage.color = fastTravelEnabledColor;
+		}
+
+	}
+	
+	public void askForConfirmationOnFastTravel()
+	{
+		if(fastTravelConfirmationWindow == null || fastTravelConfirmationWindow is null)
+		{
+			//fastTravelConfirmationWindow = Instantiate(Resources.Load<GameObject>("FastTravelConfirmationPanel"), MapManager.getInstance().fastTravelWindowParent);
+		}
+		
+		fastTravelConfirmationWindow.SetActive(true);
+		
+		//FastTravelManager fastTravelManager = fastTravelConfirmationWindow.GetComponent<FastTravelManager>();
+		
+		//fastTravelManager.targetSceneName = sceneName;
+		//fastTravelManager.setConfirmationMessage();
+		//fastTravelManager.active = true;
+	}
+	
+	public RectTransform getForegroundRectTransform()
+	{
+		return foregroundRectTransform;
+	}
+	
+	public void setForegroundColor(Color newColor)
+	{
+		foregroundImage.color = newColor;
+	}
+	
+	public void setLabel(string labelText)
+	{
+		label.text = labelText;
+	}
+	
+	public IMapObject getMapObject()
+	{
+		return MapObjectList.getMapObject(sceneName);
+	}
+}

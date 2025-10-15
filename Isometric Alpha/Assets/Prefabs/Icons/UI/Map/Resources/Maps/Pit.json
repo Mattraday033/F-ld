@@ -1,0 +1,139 @@
+{
+	"Key": "Pit",
+	"FlipDefaultMapIcon": false,
+	"DefaultFloorImage": "Dark_Dirt",
+	"DefaultMapIcon": "DarkMountains",
+	"Tiles": [
+		{
+			"locationName": "",
+			"row": "1",
+			"col": "0",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},			
+		{
+			"locationName": "Pit-1a",
+			"row": "1",
+			"col": "1",
+			"floorImage": "Red_Dirt",
+			"mapIcon": "GratedWell",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "5",
+			"col": "0",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "5",
+			"col": "1",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "5",
+			"col": "2",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "5",
+			"col": "3",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "Pit-1b",
+			"row": "5",
+			"col": "4",
+			"floorImage": "Red_Dirt",
+			"mapIcon": "GratedWell",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "4",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": true,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "Pit-2a",
+			"row": "3",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "CaveClearing",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},		
+		{
+			"locationName": "",
+			"row": "2",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": true,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "Pit-2b",
+			"row": "1",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mine 2",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "3",
+			"col": "3",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "Pit-2c",
+			"row": "3",
+			"col": "2",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mine 2",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": true
+		}
+
+	]
+}

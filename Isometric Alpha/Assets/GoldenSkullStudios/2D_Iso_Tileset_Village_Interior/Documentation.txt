@@ -1,0 +1,58 @@
+Hello
+
+##Thank you##
+Thank you so much for puchasing my tileset!
+Your support is highly valuable to enable me to create more tilesets and other content.
+There are many, many plans and ideas but not enough time (money) to work on all of them.
+With the purchase of this asset, you contribute to making future updates, tilesets, character packs etc. become a reality.
+
+##Updates##
+All updates are free of charge, forever.
+
+##Commercial License##
+You can use this tileset in commercial projects, no strings attached.
+If you do become rich with a project, I'd appreciate some donations! ;D
+You cannot, however, re-distribute the contents of this asset packages in any way, without my consent. 
+If you have built a tool and wish to include my assets, please contact me.
+
+##Support##
+https://discord.gg/CZmeWyFQnF
+
+##Set-Up Documentation##
+https://golden-skull-studios.notion.site/Unity-2D-Tilemaps-2D-Tilemap-Extras-Project-Setup-Guide-cae28239be344ce8bd20d9624d7ac23f
+
+##Reviews##
+Reviews can help build trust with new customers and are tremendously important.
+Negative reviews can have a very strong impact on this fragile trust.
+If you feel frustrated with the package, try claiming a refund or get in touch via Discord for further help.
+I am very active there and try to give the best support possible and go out of my way to help people get started with my tilesets.
+A positive review would mean the world to me, so please consider writing a review if you have it in you!
+
+
+##GraphicSorting##
+All these information are in the above documentation guide as well, with better overview and images to help guide you.
+If your isometric tiles look strange, the culprit is in 99% of the case either the TransparencySortingAxis or TilemapRendererMode.
+If you are using the Built-In RP:
+In the Project Settings, go to ‘Graphics’ in the left hand menu, 
+change Camera Settings → Transparency Sort Mode from ‘Default’ to ‘Custom Axis’ 
+and change the Axis’ values to: x=0;y=2;z=-0.46 (I am using these values for my art, y=1 also works but I find it to work better when it's set to 2). 
+If you are using URP:
+You'll have to Set the Transparency SortMode in the Renderer2DData (Create-Rendering-URP 2D Renderer) and assign that into your Universal Render Pipeline Asset, 
+which you need to assign in your Graphics Settings - Scriptable Render Pipeline Settings. 
+In your Renderer2DData asset, you also have to set the transparency sort axis to x=0;y=2;z=-0.46. 
+You can find all these settings in Assets/GoldenSkullStudios/Shared/URP as well for a quick-start.
+If your sorting still looks wrong, you'll have to set your Tilemap Renderer's mode to "Individual" instead of "Chunk".
+In 99% of the cases, it's either the transparency sort mode or the tilemap renderer's mode.
+
+##Disclaimer##
+If any of these links stop working or certain content seems faulty, please contact me and I'll fix it immediately. 
+Unity and the internet change so frequently, it is hard to keep up with everything sometimes.
+
+##URP Compatibility##
+The project is compatible with URP and has been tested.
+I included URP settings, shaders and materials as well as an example scene with a few maps set-up in URP.
+
+##Built-In Compatibility##
+All assets have been created and tested with the Built-In Legacy Render Pipeline and are compatible with it. 
+As most users are using URP, I will focus future compatibility almost entirely on URP. 
+Backwards compatibility cannot be always ensured with all features, like 2DLights etc.

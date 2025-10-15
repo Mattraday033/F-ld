@@ -1,0 +1,48 @@
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class StatProgressionTableEntryRow : MonoBehaviour
+{
+	public DescriptionPanel descriptionPanel;
+	
+	public TextMeshProUGUI statLevelTMP;
+	
+	public TextMeshProUGUI[] perkDescriptionPanelSlots;
+	
+	public PerkDescription[] perkDescriptions;
+	
+	public void displayPerkDescription(int perkIndex)
+	{		
+		descriptionPanel.nameText.text = perkDescriptions[perkIndex].title;
+		descriptionPanel.useDescriptionText.text = perkDescriptions[perkIndex].benefitDescription;
+		descriptionPanel.typeText.text = "" + perkDescriptions[perkIndex].type;
+	}
+
+	public void displayAllPerkDescriptions()
+	{
+		if(perkDescriptions == null)
+		{
+			for(int perkIndex = 0; perkIndex < perkDescriptions.Length; perkIndex++)
+			{
+				perkDescriptionPanelSlots[perkIndex].text = "";
+			}
+		} else
+		{
+			for(int perkIndex = 0; perkIndex < perkDescriptions.Length; perkIndex++)
+			{	
+				if(perkDescriptions[perkIndex] == null)
+				{
+					perkDescriptionPanelSlots[perkIndex].text = "";
+				} else
+				{
+					perkDescriptionPanelSlots[perkIndex].text = perkDescriptions[perkIndex].title;
+				}
+			}
+		}
+	}
+
+}

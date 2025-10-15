@@ -1,0 +1,203 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System;
+
+
+[Serializable] public enum StatType {Str = 1, Dex = 2, Wis = 3, Cha = 4}
+
+public class LevelUpWindow : PopUpWindow
+{
+    public AllyStats currentStats;
+
+    public Button[] incrementButtons;
+    public Button[] decrementButtons;
+
+    public int pointsToSpend;
+    public int pointsSpent;
+
+    public TextMeshProUGUI pointsToSpendDisplay;
+    public TextMeshProUGUI oldLevelDisplay;
+    public TextMeshProUGUI newLevelDisplay;
+
+    public PrimaryStatsPanel primaryStatsPanel;
+    public SecondaryStatsPanel secondaryStatsPanel;
+
+    public ScrollableUIElement newAbilityGrid;
+
+    private static LevelUpWindow instance;
+
+    public static LevelUpWindow getInstance()
+    {
+        return instance;
+    }
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            throw new IOException("Duplicate instances of LevelUpWindow exist");
+        }
+
+        instance = this;
+
+        currentStats = (AllyStats) PartyManager.getPlayerStats().clone();
+
+        pointsToSpend = currentStats.getLevelUpsAvailable();
+        pointsSpent = 0;
+
+        currentStats.removeXPFromLevelUp(); 
+
+        currentStats.setLevel(currentStats.getLevel() + pointsToSpend);
+
+        oldLevelDisplay.text = "" + PartyManager.getPlayerStats().getLevel();
+        newLevelDisplay.text = "" + currentStats.getLevel();
+
+        populate();
+    }
+
+    public virtual void populate()
+    {
+        primaryStatsPanel.updateStatsPanel(currentStats);
+        secondaryStatsPanel.updateStatsPanel(currentStats);
+        setAcceptButtonInteractability();
+
+        setInteractability();
+
+        pointsToSpendDisplay.text = "" + pointsToSpend;
+
+        //newAbilityGrid.populatePanels(NewAbilityFinder.getListOfNewAbilities(PartyManager.getPlayerStats(), currentStats));
+    }
+
+    public virtual void setInteractability()
+    {
+        for(int buttonIndex = 0; buttonIndex < incrementButtons.Length && buttonIndex < decrementButtons.Length; buttonIndex++)
+        {
+            if (pointsToSpend > 0)
+            {
+                incrementButtons[buttonIndex].interactable = true;
+            } else
+            {
+                incrementButtons[buttonIndex].interactable = false;
+            }
+
+            switch ((StatType) buttonIndex+1)
+            {
+                case StatType.Str:
+                    decrementButtons[buttonIndex].interactable = currentStats.getStrength() > getOldStats().getStrength();
+                     break;
+                case StatType.Dex:
+                    decrementButtons[buttonIndex].interactable = currentStats.getDexterity() > getOldStats().getDexterity();
+                    break;
+                case StatType.Wis:
+                    decrementButtons[buttonIndex].interactable = currentStats.getWisdom() > getOldStats().getWisdom();
+                    break;
+                case StatType.Cha:
+                    decrementButtons[buttonIndex].interactable = currentStats.getCharisma() > getOldStats().getCharisma();
+                    break;
+            }
+
+        }
+    }
+
+    public void incrementStat(EnumButtonPasser passer)
+    {
+        pointsToSpend--;
+        pointsSpent++;
+
+        switch (passer.statType)
+        {
+            case StatType.Str:
+                currentStats.strength = currentStats.getStrength() + 1;
+                break;
+            case StatType.Dex:
+                currentStats.dexterity = currentStats.getDexterity() + 1;
+                break;
+            case StatType.Wis:
+                currentStats.wisdom = currentStats.getWisdom() + 1;
+                break;
+            case StatType.Cha:
+                currentStats.charisma = currentStats.getCharisma() + 1;
+                break;
+            default:
+                throw new IOException("Unknown StatType: " + passer.statType.ToString());
+        }
+
+        populate();
+    }
+
+    public void decrementStat(EnumButtonPasser passer)
+    {
+        pointsToSpend++;
+        pointsSpent--;
+
+        switch (passer.statType)
+        {
+            case StatType.Str:
+                currentStats.strength = currentStats.getStrength() - 1;
+                Debug.LogError("currentStats.strength = " + currentStats.getStrength());
+                break;
+            case StatType.Dex:
+                currentStats.dexterity = currentStats.getDexterity() - 1;
+                Debug.LogError("currentStats.dexterity = " + currentStats.getDexterity());
+                break;
+            case StatType.Wis:
+                currentStats.wisdom = currentStats.getWisdom() - 1;
+                Debug.LogError("currentStats.wisdom = " + currentStats.getWisdom());
+                break;
+            case StatType.Cha:
+                currentStats.charisma = currentStats.getCharisma() - 1;
+                Debug.LogError("currentStats.charisma = " + currentStats.getCharisma());
+                break;
+            default:
+                throw new IOException("Unknown StatType: " + passer.statType.ToString());
+        }
+
+        populate();
+    }
+
+    public void setAcceptButtonInteractability()
+    {
+        if (pointsToSpend == 0)
+        {
+            acceptButton.interactable = true;
+        } else
+        {
+            acceptButton.interactable = false;
+        }
+    }
+    public override void acceptButtonPress()
+    {
+        PartyManager.getPlayerStats().strength = currentStats.getStrength();
+        PartyManager.getPlayerStats().dexterity = currentStats.getDexterity();
+        PartyManager.getPlayerStats().wisdom = currentStats.getWisdom();
+        PartyManager.getPlayerStats().charisma = currentStats.getCharisma();
+
+        PartyManager.getPlayerStats().setLevel(currentStats.getLevel());
+        PartyManager.getPlayerStats().xp = currentStats.xp;
+
+        PartyManager.getPlayerStats().fullHeal();
+
+        destroyWindow();
+
+        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+
+        if (!Flags.flags[TutorialSequenceList.addingAbilitiesTutorialSeenFlag])
+        {
+            TutorialSequence.startTutorialSequence(TutorialSequenceList.addingAbilitiesTutorialSequenceKey);
+        }
+    }
+
+    public virtual PlayerStats getOldStats()
+    {
+        return null;
+    }
+
+    public override void handleEscapePress()
+    {
+        //empty on purpose
+    }
+}

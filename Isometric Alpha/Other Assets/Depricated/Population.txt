@@ -1,0 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+//[CreateAssetMenu(fileName = "Population", menuName = "ScriptableObjects/Population", order = 2)]
+//[System.Serializable]
+public class Population
+{
+	public GameObject[] NPCs;
+	public bool[] shouldPopulate;
+
+	public void populate(){
+		
+		int index = 0;
+		foreach(GameObject NPC in NPCs){
+			if(shouldPopulate[index]){
+				NPC.SetActive(true);
+			}
+			index++;
+		}
+		
+	}
+	
+	public void depopulate(){
+		
+		foreach(GameObject NPC in NPCs){
+			NPC.SetActive(false);
+		}
+		
+	}
+}

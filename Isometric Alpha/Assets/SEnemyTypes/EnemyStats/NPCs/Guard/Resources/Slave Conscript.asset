@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b56a6421802e639419ba85112b52f3f2, type: 3}
+  m_Name: Slave Conscript
+  m_EditorClassIdentifier: 
+  combatSprite: {fileID: 3060634069565429253, guid: 0659543266dc9154ca3e3ec510df91f9,
+    type: 3}
+  combatSpriteName: 
+  adjustment: {x: 0, y: 0.05, z: 0}
+  healthBar: {fileID: 4508956027060521164, guid: e341f6182d9fe9b4dad4a207648c8156,
+    type: 3}
+  healthBarFill: {fileID: 0}
+  position:
+    row: 0
+    col: 0
+  previousColor: {r: 0, g: 0, b: 0, a: 0}
+  name: Slave Conscript
+  isDead: 0
+  traitNames:
+  - Minion
+  - Blocker
+  - Front Line
+  currentHealth: 5
+  armor: 0
+  spawnDetails:
+    hasSpawnDetails: 0
+    allSpawnPositions: []
+    baseStatsPosition:
+      row: 0
+      col: 0
+    spritePosition:
+      row: 0
+      col: 0
+  totalHealth: 5
+  weaponIndex: 7
+  lastManStandingAbility: 0
+  chargedTraitKey: 
+  chargedActionKey: 
+  regularActionKey: 
+  spawnType: {fileID: 0}

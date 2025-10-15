@@ -1,0 +1,40 @@
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TraitPanelManager : MonoBehaviour
+{
+
+	public TraitHoverMouseListener[] traitPanels;
+
+	public void populateTraitPanels(Trait[] traitList)
+	{
+		deactivateTraitPanels();
+		
+		if(traitList.Length > traitPanels.Length)
+		{
+			throw new IOException("Too many traits, too few trait panels. Trait: " + traitList.Length + " is more than Trait Panels: " + traitPanels.Length);
+		}
+		
+		for(int traitIndex = 0; traitIndex < traitList.Length; traitIndex++)
+		{
+			if(traitList[traitIndex] != null)
+			{	
+				traitPanels[traitIndex].gameObject.SetActive(true);
+				traitPanels[traitIndex].currentTrait = traitList[traitIndex];
+				traitPanels[traitIndex].updateTraitIcon();
+				Helpers.updateColliderPosition(traitPanels[traitIndex].gameObject);
+			} 
+		}
+	}
+	
+	public void deactivateTraitPanels()
+	{
+		foreach(TraitHoverMouseListener traitPanel in traitPanels)
+		{
+			traitPanel.gameObject.SetActive(false);
+		}
+	}
+
+}

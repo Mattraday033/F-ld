@@ -1,0 +1,53 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class IndividualSpawnOnSceneStart : MonoBehaviour
+{
+	public Population pop;
+
+	public GameObject[] NPCs;
+	public string[] flags; 
+	
+	// Start is called before the first frame update
+    void Start()
+    {
+		int i = 0;
+		
+		pop.depopulate(); //pop is the master list and should be used to deactivate all npc game objects before determining which ones should be left on the field.
+
+		foreach(GameObject NPC in NPCs){
+
+			if(flags[i] == null || flags[i].Equals(""))
+			{
+				NPC.SetActive(true);
+			} else if(flags[i].Contains("!")){
+				
+				if(!Flags.flags[flags[i].Substring(1,flags[i].Length-1)])
+				{
+					NPC.SetActive(true);
+				}
+				
+				
+			} else if(flags[i].Contains("#")){
+				
+				if(Flags.flags[flags[i].Substring(1,flags[i].Length-1)])
+				{
+					NPC.SetActive(false);
+				}
+				
+			} else if(!flags[i].Contains("!"))
+			{
+				
+				if(Flags.flags[flags[i]])
+				{
+					NPC.SetActive(true);
+				}
+			}
+			
+			i++;
+		}
+		
+    }
+
+}

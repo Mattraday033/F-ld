@@ -1,0 +1,82 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+using TMPro;
+
+public class BookManager : MonoBehaviour
+{
+	private static BookManager instance;
+	public static bool readingBook;
+	public static bool giveCopyOnExit;
+	public Canvas bookUICanvas;
+	
+	public GameObject bookGameObject;
+	public BookItem currentBook;
+
+	public TextMeshProUGUI bookTMP;
+
+	public void readBook(int bookIndex)
+	{
+		readBook(bookIndex, false);
+	}
+
+	public void readBook(int bookIndex, bool shouldGiveCopyOnExit)
+	{
+		readingBook = true;
+		
+		currentBook = getBook(bookIndex);
+		
+		currentBook.setAllReadFlags();
+		
+		currentBook.setQuestStepOnRead();
+		
+		giveCopyOnExit = shouldGiveCopyOnExit;
+		
+		bookTMP.text = BookList.getBookContents(currentBook.getKey());
+		bookUICanvas.gameObject.SetActive(true);
+	}
+	
+	public void deactivate()
+	{
+		if(giveCopyOnExit)
+		{
+			Inventory.addItem(currentBook.clone());
+		}
+		
+		if(bookGameObject != null && !(bookGameObject is null))
+		{
+			bookGameObject.SetActive(false);
+		}
+		
+		bookGameObject = null;
+		currentBook = null;
+		bookUICanvas.gameObject.SetActive(false);
+		readingBook = false;
+	}
+	
+	private BookItem getBook(int bookIndex)
+	{
+		return (BookItem) ItemList.getItem(ItemList.bookListIndex, bookIndex, 1);
+	}
+	
+	public void setBookGameObject(GameObject bookGameObject)
+	{
+		this.bookGameObject = bookGameObject;
+	}
+	
+	public static BookManager getInstance()
+	{
+		return instance;
+	}
+	
+	private void Awake()
+	{
+		if(instance != null)
+		{
+			throw new IOException("Another instance of BookManager exists");
+		}
+		
+		instance = this;
+	}
+}

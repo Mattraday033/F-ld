@@ -1,0 +1,50 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PopulationSpawnOnSceneStart : MonoBehaviour
+{
+
+	public Population[] pops;
+	public string[] flags; //Order of flags matters
+	// the flags in this array that determine different spawned 
+	//populations should be chosen so that the most pressing ones
+	//are placed earlier in the array, because the first one that
+	//is true will determine the population spawned. Each string in
+	//flags is the name of a flag in Flags.flags
+	//flags[0] should always be null and skipped because pops[0] is
+	//the master list of all NPCs
+	
+	// Start is called before the first frame update
+    void Start()
+    {
+		int i = 0;
+		
+		pops[i].depopulate(); //pops[0] is always the master list and should be used to deactivate all npc game objects before determining which ones should be left on the field.
+
+		
+		
+		foreach(string flag in flags){
+
+			if(flag.ToLower().Equals("masterlist")){
+				i++;
+			} else if(!flag.Equals("") && flag.Substring(0,1).Equals("!") && !Flags.flags[flag.Substring(1,flag.Length-1)]){
+				pops[i].populate();
+				return;
+			} else if(!flag.Equals("") && !flag.Substring(0,1).Equals("!") && (flag.Equals("") || Flags.flags[flag])){
+				
+				pops[i].populate();
+				return;
+			} else if(flag.Equals("")){
+				
+				pops[i].populate();
+				return;
+			} else{
+				i++;
+			}
+			
+		}
+		
+    }
+
+}

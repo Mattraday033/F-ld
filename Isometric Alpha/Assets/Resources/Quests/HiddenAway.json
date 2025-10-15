@@ -1,0 +1,13 @@
+{
+	"title": "Hidden Away",
+	"numberOfSteps": 2,
+	"steps":[
+				{"stepName":"The Hidden Passage.","MapZone":"MineLvl_2","MapLocation":"MineLvl_2-1a","journalDescription":"I've read the journal of a guard that was left behind when the mine was abandoned. It mentions another guard disappearing somewhere before reaching the first level of the mine. Perhaps there's a hidden passage somewhere on the second floor near the exit?"},
+				{"stepName":"Passage Found.","MapZone":"","MapLocation":"","journalDescription":"I have found the hidden passage."}
+			],
+
+
+	"deathSteps":
+			[
+			]
+}

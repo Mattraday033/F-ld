@@ -1,0 +1,16 @@
+{
+	"title": "Aiding Bálint",
+	"numberOfSteps": 5,
+	"steps":[
+				{"stepName":"Speak to Bálint.","MapZone":"Camp","MapLocation":"1SlaveShack","journalDescription":"Kastor has laid bare his plan. The first step is to learn where the camp is located. The guards never speak of our whereabouts or leave the camp, so none of the slaves know where we are. I need to find Bálint in the hut just to the north of the camp's gate, in the center of camp, and assist him in learning our location."},
+				{"stepName":"Obtaining Samples.","MapZone":"Camp","MapLocation":"NECamp","journalDescription":"The elderly Bálint believes he has a method to find out where this camp lies on the map. He wants me to gather some leaves that have blown over the camp's northen wall and return to him with them. I'm not sure if he'll be able to learn anything from it, but Kastor described him as a sage of some kind so maybe he knows something I don't."},
+				{"stepName":"Back to Bálint.","MapZone":"Camp","MapLocation":"1SlaveShack","journalDescription":"I have the samples. I must return to Bálint as soon as I am able."},
+				{"stepName":"Kastor must be told.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"Bálint has read the leaves and learned our location. It seems that this camp rests outside the Confederation's borders, south of the Waking Mountains in the Kingdom of Masons. I must tell Kastor so he can adjust our plans accordingly."},
+				{"stepName":"Returned to Kastor.","MapZone":"","MapLocation":"","journalDescription":"Kastor has been informed of where the location of the camp lies. We can now consider Bálint's part of the plan complete."}
+			],
+			
+	
+	"deathSteps":
+			[
+			]	
+}

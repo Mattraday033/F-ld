@@ -1,0 +1,198 @@
+{
+	"Key": "MineLvl_3",
+	"FlipDefaultMapIcon": true,
+	"DefaultFloorImage": "Dark_Dirt",
+	"DefaultMapIcon": "DarkMountains",
+	"Tiles": [
+		{
+			"locationName": "",
+			"row": "0",
+			"col": "6",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": true,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "MineLvl_3-1a",
+			"row": "1",
+			"col": "6",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Stairs Up",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "2",
+			"col": "6",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": true,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "MineLvl_3-2a",
+			"row": "3",
+			"col": "6",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "CaveClearing",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "3",
+			"col": "5",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "MineLvl_3-2b",
+			"row": "3",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Cave 1",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "3",
+			"col": "3",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "MineLvl_3-3a",
+			"row": "3",
+			"col": "2",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Bridge NESW",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "4",
+			"col": "2",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": true,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "MineLvl_3-7",
+			"row": "5",
+			"col": "2",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Nest",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "3",
+			"col": "1",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "MineLvl_3-6a",
+			"row": "3",
+			"col": "0",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Waterfall",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "2",
+			"col": "0",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": true,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "MineLvl_3-5",
+			"row": "1",
+			"col": "0",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "LargeDarkRock",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "1",
+			"col": "1",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "MineLvl_3-4b",
+			"row": "1",
+			"col": "2",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Lake 1",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "1",
+			"col": "3",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "MineLvl_3-4a",
+			"row": "1",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "RoundTower 1",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "1",
+			"col": "5",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		}
+	]
+}

@@ -1,0 +1,272 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class PartyUIManager : MonoBehaviour
+{
+	private const string upgradeTitleWord = "Upgrade";
+	private const string affinityTitleWord = "Affinity";
+	private const string maxLevelTitleWords = "Max Level";
+
+	private Sprite backgroundImage;
+
+	public Image[] allImages;
+	public GameObject[] partyScreens;
+	public PartyMemberButton[] partyMemberButtons;
+	public Button[] partyTabs;
+
+	public AdjustPartyRosterManager adjustPartyRosterManager;
+
+	public FormationDisplayUI formationDisplayUI;
+
+	public TextMeshProUGUI partyMemberNameText;
+	public TextMeshProUGUI partyMemberLevelText;
+	public TextMeshProUGUI partyMemberHPText;
+	public TextMeshProUGUI partyMemberArmorText;
+	public TextMeshProUGUI partyMemberCritText;
+	public TextMeshProUGUI partyMemberWeaponText;
+	public TextMeshProUGUI partyMemberZOIText;
+	public TextMeshProUGUI partyMemberFirstAbilityText;
+	public TextMeshProUGUI partyMemberSecondAbilityText;
+	public TextMeshProUGUI partyMemberThirdAbilityText;
+	public TextMeshProUGUI partyMemberFourthAbilityText;
+	
+	public Image partyMemberWeaponImage;
+	public Image partyMemberZOITraitImage;
+	public Image partyMemberFirstAbilityImage;
+	public Image partyMemberSecondAbilityImage;
+	public Image partyMemberThirdAbilityImage;
+	public Image partyMemberFourthAbilityImage;
+
+	public Image partyMemberWeaponIconImage;
+	public Image partyMemberZOITraitIconImage;
+	public Image partyMemberFirstAbilityIconImage;
+	public Image partyMemberSecondAbilityIconImage;
+	public Image partyMemberThirdAbilityIconImage;
+	public Image partyMemberFourthAbilityIconImage;
+	
+	public Image partyMemberPortraitImage;
+
+	public Button upgradePartyMemberButton;
+	public TextMeshProUGUI upgradePartyMemberButtonText;
+	
+	public static PartyMember currentPartyMember;
+	public static PartyMemberStats currentPartyMemberStats;
+	public static Weapon currentWeapon;
+	public static int currentPartyMemberStatsIndex;
+	public static PartyUIManager instance;
+	
+	private void Awake(){
+		if(instance != null){
+			Debug.LogWarning("Found more than one Selector Manager in the scene.");
+		}
+		
+		instance = this;
+		backgroundImage = Resources.Load<Sprite>("UISquare");
+	}
+	
+	public static PartyUIManager getInstance()
+	{
+		return instance;
+	}
+	
+	public void selectPartyTab(int tabIndex)
+	{
+		
+		foreach(Button tab in partyTabs)
+		{
+			
+			tab.interactable = true;
+			
+		}
+		
+		partyTabs[tabIndex].interactable = false;
+	}
+	
+	public void activatePartyScreen(int screenIndex)
+	{
+		foreach(GameObject screen in partyScreens)
+		{
+			screen.SetActive(false);
+		}
+		
+		partyScreens[screenIndex].SetActive(true);
+	}
+	
+	public void populatePartyMemberButtons()
+	{
+		int partyMemberIndex = 0;
+		foreach(PartyMember partyMember in State.partyMembers)
+		{
+			partyMemberButtons[partyMemberIndex].setPartyMemberIndex(partyMemberIndex);
+			partyMemberIndex++;
+		}
+	}
+	
+	public void setAllPopulatedPartyMemberButtonsToInteractable()
+	{
+		foreach(PartyMemberButton partyMemberButton in partyMemberButtons)
+		{
+			if(partyMemberButton.getPartyMemberIndex() >= 0)
+			{
+				partyMemberButton.button.interactable = true;
+			} 
+		}
+	}
+	
+	public void removeAllPartyMembersFromCurrentPartyAndDisplay()
+	{
+		PartyManager.removeAllPartyMembersFromCurrentParty();
+		
+		formationDisplayUI.populate(State.formation);
+	}
+	
+	public void populateFormationUIDisplay()
+	{		
+		formationDisplayUI.setToReadOnly();
+		
+		formationDisplayUI.populate(State.formation);
+	}
+	
+	public void populatePartyMemberScreen(int partyMemberIndex)
+	{
+		setAllImagesToColor(Color.white);
+		
+		currentPartyMemberStatsIndex = partyMemberIndex;
+		currentPartyMember = State.partyMembers[partyMemberIndex];
+		currentPartyMemberStats = (PartyMemberStats) currentPartyMember.stats;
+		currentWeapon = PartyMemberEquipmentManager.getWeapon(currentPartyMemberstats.getName(),  currentPartyMemberStats.getLevel());
+		
+		partyMemberNameText.text = currentPartyMemberstats.getName();
+		partyMemberHPText.text = currentPartyMemberStats.currentHealth + "/" + currentPartyMemberStats.getTotalHealth();
+		partyMemberArmorText.text = "" + currentPartyMemberStats.getTotalArmorRating();
+		partyMemberCritText.text = currentWeapon.getCritFormula()+"%";
+		partyMemberLevelText.text = "" + currentPartyMemberStats.getLevel();
+		
+		populateAbilityPanels();
+
+		int currentUpgradeCost = PartyMember.getNextUpgradeCost(currentPartyMemberStats.getLevel());
+		if(currentUpgradeCost  > 0)
+		{
+			upgradePartyMemberButtonText.text = upgradeTitleWord + ": " + currentUpgradeCost + " " + affinityTitleWord;
+		} else
+		{
+			upgradePartyMemberButtonText.text = maxLevelTitleWords;
+		}
+		
+		if(((PartyMemberStats) currentPartyMemberStats).getLevel() >= PartyMemberStats.levelMaximum || 
+				AffinityManager.getTotalAffinity() < PartyMember.getNextUpgradeCost(currentPartyMemberStats.getLevel()))
+		{
+			upgradePartyMemberButton.interactable = false;
+		} else
+		{
+			upgradePartyMemberButton.interactable = true;
+		}
+		//eventually will need to be set to true
+		
+	}
+	
+	public void greyOutPartyMembersScreenUI()
+	{
+		partyMemberLevelText.text = "";
+		partyMemberNameText.text = "";
+		partyMemberHPText.text = "";
+		partyMemberArmorText.text = "";
+		partyMemberCritText.text = "";
+		partyMemberWeaponText.text = "";
+		partyMemberFirstAbilityText.text = "";
+		partyMemberSecondAbilityText.text = "";
+		partyMemberThirdAbilityText.text = "";
+		partyMemberFourthAbilityText.text = "";
+		
+		partyMemberWeaponIconImage.sprite = backgroundImage;
+		//partyMemberZOITraitImage.sprite = backgroundImage;
+		partyMemberFirstAbilityIconImage.sprite = backgroundImage;
+		partyMemberSecondAbilityIconImage.sprite = backgroundImage;
+		partyMemberThirdAbilityIconImage.sprite = backgroundImage;
+		partyMemberFourthAbilityIconImage.sprite = backgroundImage;
+		
+		upgradePartyMemberButton.interactable = false;
+		
+		setAllImagesToColor(Color.grey);
+	}
+	
+	public void setAllImagesToColor(Color color)
+	{
+		foreach(Image image in allImages)
+		{
+			image.color = color;
+		}
+	}
+	
+	public void populateAbilityPanels()
+	{
+		CombatAction[] actions = currentPartyMember.getCombatActions();
+		
+		partyMemberWeaponText.text = currentWeapon.getKey();
+		partyMemberFirstAbilityText.text = actions[1].getName();
+		partyMemberSecondAbilityText.text = actions[2].getName();
+		partyMemberThirdAbilityText.text = actions[3].getName();
+		partyMemberFourthAbilityText.text = actions[4].getName();
+		
+		partyMemberWeaponImage.color = Color.white;
+		partyMemberWeaponIconImage.color = Color.white;
+		partyMemberZOITraitImage.color = Color.white;
+		partyMemberZOITraitIconImage.color = Color.white;
+		
+		if(currentPartyMemberStats.getLevel() == 1)
+		{	
+			partyMemberFirstAbilityImage.color = Color.grey;
+			partyMemberSecondAbilityImage.color = Color.grey;
+			partyMemberThirdAbilityImage.color = Color.grey;
+			partyMemberFourthAbilityImage.color = Color.grey;
+		} else if(currentPartyMemberStats.getLevel() == 2)
+		{
+			partyMemberFirstAbilityImage.color = Color.white;
+			partyMemberSecondAbilityImage.color = Color.grey;
+			partyMemberThirdAbilityImage.color = Color.grey;
+			partyMemberFourthAbilityImage.color = Color.grey;
+		} else if(currentPartyMemberStats.getLevel() == 3)
+		{
+			partyMemberFirstAbilityImage.color = Color.white;
+			partyMemberSecondAbilityImage.color = Color.white;
+			partyMemberThirdAbilityImage.color = Color.grey;
+			partyMemberFourthAbilityImage.color = Color.grey;
+		} else if(currentPartyMemberStats.getLevel() == 4)
+		{
+			partyMemberFirstAbilityImage.color = Color.white;
+			partyMemberSecondAbilityImage.color = Color.white;
+			partyMemberThirdAbilityImage.color = Color.white;
+			partyMemberFourthAbilityImage.color = Color.grey;
+		} else if(currentPartyMemberStats.getLevel() == 5)
+		{
+			partyMemberFirstAbilityImage.color = Color.white;
+			partyMemberSecondAbilityImage.color = Color.white;
+			partyMemberThirdAbilityImage.color = Color.white;
+			partyMemberFourthAbilityImage.color = Color.white;
+		}
+		
+		partyMemberWeaponIconImage.sprite = Resources.Load<Sprite>(currentWeapon.getIconName());
+		//partyMemberZOITraitImage.sprite = Resources.Load<Sprite>(actions[0].getIconName());
+		partyMemberFirstAbilityIconImage.sprite = Resources.Load<Sprite>(actions[1].getIconName());
+		partyMemberSecondAbilityIconImage.sprite = Resources.Load<Sprite>(actions[2].getIconName());
+		partyMemberThirdAbilityIconImage.sprite = Resources.Load<Sprite>(actions[3].getIconName());
+		partyMemberFourthAbilityIconImage.sprite = Resources.Load<Sprite>(actions[4].getIconName());
+	}
+	
+	public void levelUpCurrentPartyMember()
+	{
+		if(currentPartyMemberStats.getLevel() < PartyMemberStats.levelMaximum && 
+			AffinityManager.getTotalAffinity() >= PartyMember.getNextUpgradeCost(currentPartyMemberStats.getLevel()))
+		{
+			AffinityManager.addAffinity(-PartyMember.getNextUpgradeCost(currentPartyMemberStats.getLevel()));
+			currentPartyMemberStats.incrementLevel();
+			currentPartyMemberStats.currentHealth = currentPartyMemberStats.getTotalHealth();
+			populatePartyMemberScreen(currentPartyMemberStatsIndex);
+		}
+		
+		StatsManager.getInstance().updateStatsScreen();
+	}
+}

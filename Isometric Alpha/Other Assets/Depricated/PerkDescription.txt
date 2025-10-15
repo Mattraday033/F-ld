@@ -1,0 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PerkDescription
+{
+	public string title;
+	
+	public int statLevel;
+	
+	public string type;
+	
+	public string benefitDescription;
+
+}

@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba7ee2dbc650684ea56655081bcfe68, type: 3}
+  m_Name: Nontuple Box
+  m_EditorClassIdentifier: 
+  name: Nontuple Box
+  selfTargeting: 0
+  onEnemySide: 1
+  singleTile: 0
+  startUpperBounds: 1
+  startRightBounds: 3
+  startLeftBounds: 1
+  startLowerBounds: 3
+  upperBounds: 1
+  rightBounds: 3
+  leftBounds: 1
+  lowerBounds: 3
+  startRow: 2
+  startCol: 2
+  currentRow: 2
+  currentCol: 2
+  childTileAdjustments:
+  - row: -1
+    col: -1
+  - row: -1
+    col: 0
+  - row: -1
+    col: 1
+  - row: 0
+    col: -1
+  - row: 0
+    col: 1
+  - row: 1
+    col: -1
+  - row: 1
+    col: 0
+  - row: 1
+    col: 1

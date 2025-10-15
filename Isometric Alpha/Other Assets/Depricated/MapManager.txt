@@ -1,0 +1,381 @@
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using TMPro;
+
+public class MapManager : MonoBehaviour
+{
+	public static MapManager instance;
+	
+	public GameObject worldMapButton;
+	
+	public TextMeshProUGUI zoneLabel;
+	public TextMeshProUGUI currentLocationLabel;
+	
+	public ArrayList allMapObjects = new ArrayList(); // all visited map locations (white foregrounds)
+	public ArrayList undiscoveredMapLocationObjects = new ArrayList(); //all map locations only see through adjacency
+	public ArrayList mapZoneChangeButtons = new ArrayList(); //all buttons to change map zone
+	
+	public GameObject mapUIParent;
+	public GameObject mapBackgroundPanel;
+	public Transform mapPathParent;
+	public Transform mapLocationParent;
+	public Transform fastTravelWindowParent;
+
+	public Grid mapGrid;
+	
+	public MapLocation currentMapObject;
+	public GameObject playerLocationIndicator;
+	
+	private static bool active = false;
+	private const string mapIndicatorGameObjName = "MapIndicator";
+	private const string worldMapZoneLabel = "World Map";
+
+
+	
+	private void setZoneLabel(string newZoneLabel)
+	{
+		zoneLabel.text = newZoneLabel;
+	}
+	
+	private void setCurrentLocationLabel(string newCurrentLocationLabel)
+	{
+		currentLocationLabel.text = newCurrentLocationLabel;
+	}
+	
+	private void instantiateAllKnownMapData(string mapObjectName)
+	{
+		IEnumerable listOfMapObjectNames = null;
+		
+		if(MapZone.hasBeenDiscovered(mapObjectName))
+		{
+			listOfMapObjectNames = MapObjectList.getAllDiscoveredZones();
+		} else
+		{
+			listOfMapObjectNames = State.allKnownMapData[MapObjectList.getMapObject(mapObjectName).getZoneKey()];
+		}
+		
+		foreach(string sceneName in listOfMapObjectNames)
+		{
+			IMapObject mapObject = MapObjectList.getMapObject(sceneName);
+			
+			if(!mapObject.isInterior() || hasUniqueLocationName(currentMapObject.getZoneKey(), mapObject.getMapUIDisplayName()))
+			{
+				GameObject newMapGameObject = instantiateMapGameObject(mapObject);
+				
+				InteriorManager interiorManager = newMapGameObject.GetComponent<InteriorManager>();
+				ChangeMapZoneButton changeMapZoneButton = newMapGameObject.GetComponent<ChangeMapZoneButton>();
+				
+				if(interiorManager != null)
+				{
+					interiorManager.spawnInteriors(mapObject.getInteriors());
+				} 
+				
+				if(changeMapZoneButton != null)
+				{
+					changeMapZoneButton.setZoneKey(MapObjectList.getMapObject(sceneName).getZoneKey());
+					//changeMapZoneButton.setInteractability();
+				}
+				
+				allMapObjects.Add(newMapGameObject);
+			}
+		}
+	}
+	
+	private void instantiateUndiscoveredAdjacentMapLocations()
+	{
+		foreach(GameObject mapGameObject in allMapObjects)
+		{
+			MapObjectManager mapObjectManager = mapGameObject.GetComponent<MapObjectManager>();
+			IMapObject mapObject = MapObjectList.getMapObject(mapObjectManager.sceneName);
+			string[] adjacentMapObjects = mapObject.getAdjacentMapObjects();
+			
+			if(adjacentMapObjects == null)
+			{
+				continue;
+			}
+			
+			foreach(string adjacentMapObjectName in adjacentMapObjects)
+			{
+				IMapObject adjacentMapObject = MapObjectList.getMapObject(adjacentMapObjectName);
+				
+				if(!adjacentMapObject.hasBeenDiscovered())
+				{
+					GameObject adjacentMapGameObject = instantiateMapGameObject(adjacentMapObject);
+					
+					adjacentMapGameObject.GetComponent<MapObjectManager>().setForegroundColor(Color.black);
+					
+					undiscoveredMapLocationObjects.Add(adjacentMapGameObject);
+				}
+			}
+		}
+	}
+
+	private void instantiateMapZoneChangeButtons()
+	{
+		foreach(GameObject mapGameObject in allMapObjects)
+		{
+			MapObjectManager mapObjectManager = mapGameObject.GetComponent<MapObjectManager>();
+			IMapObject mapObject = MapObjectList.getMapObject(mapObjectManager.sceneName);
+			ZoneButtonInfo[] zoneButtons = mapObject.getZoneButtons();
+			
+			if(zoneButtons == null)
+			{
+				continue;
+			}
+			
+			foreach(ZoneButtonInfo zoneButtonInfo in zoneButtons)
+			{
+				IMapObject zoneButtonMapObject = MapObjectList.getMapObject(zoneButtonInfo.zoneKey);
+				
+				GameObject zoneButtonGameObject = instantiateMapGameObject(zoneButtonMapObject, MapZone.getBoxGameObjectName(), zoneButtonMapObject.getCoords(zoneButtonInfo.buttonIndex));
+				
+				zoneButtonGameObject.GetComponent<MapObjectManager>().setLabel("To " + zoneButtonMapObject.getMapUIDisplayName());
+				
+				ChangeMapZoneButton changeMapZoneButton = zoneButtonGameObject.GetComponent<ChangeMapZoneButton>();
+				
+				changeMapZoneButton.setZoneKey(zoneButtonInfo.zoneKey);
+				
+				//changeMapZoneButton.setInteractability();
+				
+				mapZoneChangeButtons.Add(zoneButtonGameObject);
+			}
+		}
+	}
+	
+	public GameObject instantiateMapGameObject(IMapObject mapObject)
+	{	
+		return instantiateMapGameObject(mapObject, mapObject.getGameObjectType(), mapObject.getCoords());
+	}
+	
+	public GameObject instantiateMapGameObject(IMapObject mapObject, string gameObjectType, GridCoords coords)
+	{
+		GameObject newMapGameObject = Instantiate(Resources.Load<GameObject>(gameObjectType), mapLocationParent);
+		
+		newMapGameObject.transform.position = mapGrid.GetCellCenterWorld(coords.toVector3Int());
+		
+		MapObjectManager mapObjectManager = newMapGameObject.GetComponent<MapObjectManager>();
+		
+		mapObjectManager.setLabel(mapObject.getMapUIDisplayName());
+		
+		mapObjectManager.sceneName = mapObject.getSceneName();
+		
+		if(mapObject.getIsFastTravelDestination())
+		{
+			mapObjectManager.setAsFastTravelDestination();
+		}
+		
+		Helpers.updateGameObjectPosition(newMapGameObject);
+	
+		return newMapGameObject;
+	}
+	
+	private bool hasUniqueLocationName(string zoneKey, string displayName)
+	{
+		int nameCount = 0;
+		
+		foreach(string sceneName in State.allKnownMapData[currentMapObject.getZoneKey()])
+		{
+			IMapObject mapObject = MapObjectList.getMapObject(sceneName);
+			
+			if(mapObject.getMapUIDisplayName().Equals(displayName))
+			{
+				nameCount++;
+			}
+			
+			if(nameCount > 1)
+			{
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	public Transform findTransformWithCoords(GridCoords coords)
+	{
+		foreach(GameObject gameObject in allMapObjects)
+		{
+			string sceneName = gameObject.GetComponent<MapObjectManager>().sceneName;
+			
+			if(MapObjectList.getMapObject(sceneName).getCoords().Equals(coords))
+			{
+				return gameObject.transform;
+			}
+		}
+		
+		foreach(GameObject undiscoveredGameObject in undiscoveredMapLocationObjects)
+		{
+			string sceneName = undiscoveredGameObject.GetComponent<MapObjectManager>().sceneName;
+			
+			if(MapObjectList.getMapObject(sceneName).getCoords().Equals(coords))
+			{
+				return undiscoveredGameObject.transform;
+			}
+		}
+		
+		throw new IOException("No such Map Data Game Object exists at " + coords.ToString());
+	}
+	
+	public void activateMap()
+	{
+		active = true;
+		
+		mapUIParent.SetActive(true);
+		
+		if(allMapObjects.Count == 0)
+		{
+			setToZoneMap(currentMapObject.getZoneKey());
+		}
+		
+		//dialogueManager.disableCanvas();
+	}
+	
+	//returns true if it placed an indicator game object on the map
+	private bool placeMapIndictator()
+	{
+		playerLocationIndicator = Instantiate(Resources.Load<GameObject>(mapIndicatorGameObjName), mapLocationParent);
+		GameObject currentLocationObject = null;
+		
+		foreach(GameObject mapLocationObject in allMapObjects)
+		{
+			MapObjectManager mapObjectManager = mapLocationObject.GetComponent<MapObjectManager>();
+			
+			if(mapObjectManager == null)
+			{
+				continue;
+			}
+			
+			if(currentMapObject.isInterior() && mapObjectManager.getMapObject().getMapUIDisplayName().Equals(currentMapObject.getMapUIDisplayName()))
+			{
+				currentLocationObject = mapLocationObject;
+				break;
+				
+			} else if(mapObjectManager != null && mapObjectManager.sceneName.Equals(currentMapObject.getSceneName()))
+			{
+				currentLocationObject = mapLocationObject;
+				break;
+			}
+		}
+		
+		if(currentLocationObject != null)
+		{
+			playerLocationIndicator.transform.position = currentLocationObject.transform.position;
+			Helpers.updateGameObjectPosition(playerLocationIndicator);
+			return true;
+		} else
+		{
+			GameObject.Destroy(playerLocationIndicator);
+			playerLocationIndicator = null;
+			return false;
+		}
+		
+	}
+	
+	public void deactivateMap()
+	{
+		active = false;
+		
+		mapUIParent.SetActive(false);
+		
+		//dialogueManager.enableCanvas();
+	}
+	
+	public IMapObject checkForNewMapData()
+	{
+		ArrayList knownLocationsInZone;
+		IMapObject mapObject;
+		
+		GameObject areaManagerObject = GameObject.FindWithTag(LayerAndTagManager.areaManagerTag);
+		
+		if(areaManagerObject == null)
+		{	
+			throw new IOException("No areaManagerObject was found in scene (" + SceneManager.GetActiveScene().name + ")");
+		} else
+		{
+			AreaManager areaManager = areaManagerObject.GetComponent<AreaManager>();
+			
+			if(areaManager == null)
+			{	
+				throw new IOException("areaManagerObject was found without any AreaManager component in scene (" + SceneManager.GetActiveScene().name + ")");
+			} else
+			{
+				mapObject = areaManager.getMapData();
+			}
+		}
+		
+		try
+		{
+			knownLocationsInZone = State.allKnownMapData[mapObject.getZoneKey()];
+			
+		} catch(KeyNotFoundException e)
+		{
+			knownLocationsInZone = new ArrayList();
+		}			
+		
+		if(!knownLocationsInZone.Contains(mapObject.getSceneName()))
+		{
+			knownLocationsInZone.Add(mapObject.getSceneName());
+		}
+		
+		State.allKnownMapData[mapObject.getZoneKey()] = knownLocationsInZone;
+		
+		return mapObject;
+	}
+	
+	public void setToWorldMap()
+	{
+		active = true;
+		
+		mapUIParent.SetActive(true);
+		
+		worldMapButton.SetActive(false);
+		
+		instantiateAllKnownMapData(currentMapObject.getZoneKey());
+		instantiateUndiscoveredAdjacentMapLocations();
+		bool isInAVisibleZone = placeMapIndictator();
+		
+		//dialogueManager.disableCanvas();
+		
+		setZoneLabel(worldMapZoneLabel);
+		
+		if(isInAVisibleZone)
+		{
+			setCurrentLocationLabel(MapObjectList.getMapObject(currentMapObject.getZoneKey()).getMapUIDisplayName());
+		} else
+		{
+			setCurrentLocationLabel("");	
+		}
+	}
+	
+	public void setToZoneMap(string zoneKey)
+	{
+		active = true;
+	
+		mapUIParent.SetActive(true);
+		worldMapButton.SetActive(true);
+
+		instantiateAllKnownMapData((string) State.allKnownMapData[zoneKey][0]);
+		instantiateUndiscoveredAdjacentMapLocations();
+		instantiateMapZoneChangeButtons();
+		bool isInThisZone = placeMapIndictator();
+		
+		//dialogueManager.disableCanvas();
+		
+		setZoneLabel(MapObjectList.getMapObject(zoneKey).getMapUIDisplayName());
+		
+		if(isInThisZone)
+		{
+			setCurrentLocationLabel(MapObjectList.getMapObject(currentMapObject.getSceneName()).getMapUIDisplayName());
+		} else
+		{
+			setCurrentLocationLabel("");	
+		}
+	}
+	
+
+	
+}

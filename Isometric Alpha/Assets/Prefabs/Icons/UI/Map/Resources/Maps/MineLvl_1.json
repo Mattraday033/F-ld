@@ -1,0 +1,108 @@
+{
+	"Key": "MineLvl_1",
+	"FlipDefaultMapIcon": false,
+	"DefaultFloorImage": "Sand",
+	"DefaultMapIcon": "YellowMountains",
+	"Tiles": [
+		{
+			"locationName": "",
+			"row": "4",
+			"col": "7",
+			"floorImage": "Sand",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "4",
+			"col": "6",
+			"floorImage": "Sand",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "MineLvl_1-1a",
+			"row": "4",
+			"col": "5",
+			"floorImage": "Sand",
+			"mapIcon": "Mine 1",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": true
+		},
+		{
+			"locationName": "",
+			"row": "4",
+			"col": "4",
+			"floorImage": "Sand",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon":false
+		},
+		{
+			"locationName": "",
+			"row": "4",
+			"col": "3",
+			"floorImage": "Sand",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon":false
+		},
+		{
+			"locationName": "MineLvl_1-1b",
+			"row": "4",
+			"col": "2",
+			"floorImage": "Sand",
+			"mapIcon": "Mine 2",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon":true
+		},
+		{
+			"locationName": "",
+			"row": "3",
+			"col": "2",
+			"floorImage": "Sand",
+			"mapIcon": "",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": true,
+			"flipMapIcon":false
+		},
+		{
+			"locationName": "MineLvl_1-1c",
+			"row": "2",
+			"col": "2",
+			"floorImage": "Sand",
+			"mapIcon": "RoundTower 1",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon":true
+		},
+		{
+			"locationName": "",
+			"row": "4",
+			"col": "1",
+			"floorImage": "Sand",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "4",
+			"col": "0",
+			"floorImage": "Sand",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		}
+	]
+}

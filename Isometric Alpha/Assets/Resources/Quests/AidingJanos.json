@@ -1,0 +1,25 @@
+{
+	"title": "Aiding Janos",
+	"numberOfSteps": 13,
+	"steps":[
+				{"stepName":"Change of plans.","MapZone":"Camp","MapLocation":"3SlaveShack","journalDescription":"The revolt won't get far without weapons. Kastor has tasked another slave named Janos with obtaining the key to the guard post's armory. However, with the mine's closing he now believes it will be less risky if we raid the armory within the mine itself. I need to find Janos in the hut to the west of Garcha's and inform him of the change in plans."},
+				{"stepName":"An obvious trap.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"Janos has devised a plan to obtain the key to the mine's armory: just ask for it! He is delusional at best and actively working against us at worst. I will need to find another way of obtaining the key. I should return to Kastor and see what he has to say."},
+				{"stepName":"Return to Janos.","MapZone":"Camp","MapLocation":"3SlaveShack","journalDescription":"Janos has devised a plan to obtain the key to the mine's armory by arranging a meeting with the guard who carries it. He has explained that the guard is sympathetic to our cause and wishes for me to peacefully convince the guard to hand the key over. I told Janos I need more time as this meeting will certainly be risky."},
+				{"stepName":"Another way.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"Janos's idea of letting a guard in on our scheme is too risky. I should return to Kastor and see if he has any advice on how to proceed."},
+				{"stepName":"A riskier path.","MapZone":"Camp","MapLocation":"GuardHouseTopFloor","journalDescription":"Kastor has told me his back up plan: breaking into the top floor of the guardhouse and searching for another copy of the key to the mine's armory. He told me that the guards might not accost a slave running an errand on the first floor of the guardhouse, but will certainly get suspicious if I am seen on the second floor."},
+				{"stepName":"Key obtained.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"I snuck into the guardhouse and have obtained the key. I should return to Kastor."},
+				{"stepName":"The guard turned on us.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"I went to the meeting with Janos's guard lover, but things went south and I could not convince the guard to relinquish the key. What's worse, the guard attacked me and I was forced to defend myself. I have the key, but I hope the guard won't be missed. I should return to Kastor immediately."},
+				{"stepName":"András saw the light.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"I managed to convince the guard to hand over the key without a fight. What's more, he seems to be willing to stay out of the fighting to come. I should hurry and bring the key to Kastor before someone comes around looking for it or me."},
+				{"stepName":"Put down like a dog.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"I took no chances and slew the guard at the meeting that Janos arranged. Janos was mortified, but better he weep than we all die. Perhaps next time he will think twice before trusting a slaver. I must now return the key to Kastor before someone comes looking for the body."},
+				{"stepName":"Kastor was informed.","MapZone":"","MapLocation":"","journalDescription":"I told Kastor what transpired at the meeting between the guard and Janos. I told Kastor that Janos was a traitor, but now we have the key."},
+				{"stepName":"Kastor was informed.","MapZone":"","MapLocation":"","journalDescription":"I told Kastor what transpired at the meeting between the guard and Janos, but I kept Janos's affair with the guard a secret. Best not to risk their safety by disclosing that to anyone."},
+				{"stepName":"Kastor was informed.","MapZone":"","MapLocation":"","journalDescription":"I told Kastor what transpired at the meeting between the guard and Janos, but did my best to explain to him that Janos was not a traitor. I hope I was convincing."},
+				{"stepName":"Kastor was informed.","MapZone":"","MapLocation":"","journalDescription":"I obtained the key to the armory for Kastor."}
+			
+			],
+			
+	"deathSteps":
+			[
+			]
+	
+}

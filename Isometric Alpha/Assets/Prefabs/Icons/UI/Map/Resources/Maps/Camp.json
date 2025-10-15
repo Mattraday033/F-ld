@@ -1,0 +1,288 @@
+{
+	"Key": "Camp",
+	"FlipDefaultMapIcon": false,
+	"DefaultFloorImage": "Grass",
+	"DefaultMapIcon": "Forest 1",
+	"Tiles": [
+		{
+			"locationName": "NECamp",
+			"row": "2",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Camp 1",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "3",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": true,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "CenterCamp",
+			"row": "4",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Camp 1",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "5",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": true,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "SECamp",
+			"row": "6",
+			"col": "4",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Camp 1",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "6",
+			"col": "3",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "MineEntranceCamp",
+			"row": "6",
+			"col": "2",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mine 1",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": true
+		},
+		{
+			"locationName": "",
+			"row": "4",
+			"col": "3",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "ManseCamp",
+			"row": "4",
+			"col": "2",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "House 1",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "4",
+			"col": "5",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "4",
+			"col": "6",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "4",
+			"col": "7",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "",
+			"northWestSouthEastMarker": true,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "0",
+			"col": "0",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mountain_With_Trees",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "0",
+			"col": "1",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mountain_With_Trees",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "1",
+			"col": "0",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mountain_With_Trees",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "1",
+			"col": "1",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mountain_With_Trees",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "2",
+			"col": "0",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mountain_With_Trees",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "2",
+			"col": "1",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mountain_With_Trees",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "3",
+			"col": "0",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mountain_With_Trees",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "3",
+			"col": "1",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mountain_With_Trees",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "4",
+			"col": "0",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mountain_With_Trees",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "4",
+			"col": "1",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mountain_With_Trees",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "5",
+			"col": "0",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mountain_With_Trees",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "5",
+			"col": "1",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mountain_With_Trees",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "6",
+			"col": "0",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mountain_With_Trees",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "6",
+			"col": "1",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mountain_With_Trees",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "7",
+			"col": "0",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mountain_With_Trees",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
+			"row": "7",
+			"col": "1",
+			"floorImage": "Dark_Dirt",
+			"mapIcon": "Mountain_With_Trees",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		}
+	]
+}

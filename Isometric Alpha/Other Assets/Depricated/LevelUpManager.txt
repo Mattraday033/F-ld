@@ -1,0 +1,139 @@
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using Cinemachine;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class LevelUpManager : MonoBehaviour
+{
+	public DialogueManager dialogueManager;
+	
+	public static bool levelingUp = false;
+	
+	public GameObject levelUpScreen;
+	
+	public TextMeshProUGUI newLevelText;
+	
+	public Button acceptButton;
+	
+	public PrimaryStatDisplay primaryStatDisplay;
+	
+	public SecondaryStatDisplay strStatsDisplay;
+	public SecondaryStatDisplay dexStatsDisplay;
+	public SecondaryStatDisplay wisStatsDisplay;
+	public SecondaryStatDisplay chaStatsDisplay;
+	
+	public static Coroutine levelUpCoroutine;
+	private static LevelUpManager instance;
+	
+	private void Awake()
+	{
+		if(instance != null)
+		{
+			Debug.LogWarning("Found more than one Level Up Manager in the scene.");
+		}
+		
+		instance = this;
+	}
+	
+	void Start()
+	{
+		dialogueManager = DialogueManager.getInstance();
+	}
+	
+	public static LevelUpManager getInstance()
+	{
+		return instance;
+	}
+
+	public static void levelUp()
+	{
+		if(levelUpCoroutine != null && !(levelUpCoroutine is null))
+		{
+			throw new IOException("Still waiting on an old levelUpCoroutine");
+		}
+		
+		LevelUpManager levelUpManager = getInstance();
+		
+		levelUpCoroutine = levelUpManager.StartCoroutine(levelUpManager.waitForChanceToLevelUp());
+	}
+	
+	public IEnumerator waitForChanceToLevelUp()
+	{
+		while(PlayerOOCStateManager.currentActivity == OOCActivity.inDialogue || CombatStateManager.inCombat)
+		{
+			yield return null;
+		}
+		
+		levelUpScreen.SetActive(true);
+		
+		State.playerStats.incrementLevel();
+		
+		newLevelText.text = "You are now Level " + State.playerStats.getLevel() + "!";
+		
+		primaryStatDisplay.addPoint();
+		
+		primaryStatDisplay.hidePerkWindows();
+		
+		populateAllPanels();
+		
+		levelUpCoroutine = null;
+		
+		levelingUp = true;
+		
+		yield break;
+	}
+	
+	public void populateAllPanels()
+	{/*
+		string[][] strSecondaryStatInfo = Strength.getAllSecondaryStatsForDisplay();
+		string[][] dexSecondaryStatInfo = Dexterity.getAllSecondaryStatsForDisplay();
+		string[][] wisSecondaryStatInfo = Wisdom.getAllSecondaryStatsForDisplay();
+		string[][] chaSecondaryStatInfo = Charisma.getAllSecondaryStatsForDisplay();
+		
+		strStatsDisplay.populatePanels(strSecondaryStatInfo[SecondaryStatDisplay.titlesIndex], strSecondaryStatInfo[SecondaryStatDisplay.statsIndex]);
+		dexStatsDisplay.populatePanels(dexSecondaryStatInfo[SecondaryStatDisplay.titlesIndex], dexSecondaryStatInfo[SecondaryStatDisplay.statsIndex]);
+		wisStatsDisplay.populatePanels(wisSecondaryStatInfo[SecondaryStatDisplay.titlesIndex], wisSecondaryStatInfo[SecondaryStatDisplay.statsIndex]);
+		chaStatsDisplay.populatePanels(chaSecondaryStatInfo[SecondaryStatDisplay.titlesIndex], chaSecondaryStatInfo[SecondaryStatDisplay.statsIndex]);
+		
+		primaryStatDisplay.setAllDecrementButtonsToUninteractable();
+		primaryStatDisplay.setAllIncrementButtonsToInteractable();
+		primaryStatDisplay.getAndDisplayCurrentStats();*/
+	}
+	
+	public void updateAllSecondaryStatDisplays()
+	{
+		/*
+		int[] stats = primaryStatDisplay.stats;
+		
+		string[][] strSecondaryStatInfo = Strength.getAllSecondaryStatsForDisplay(stats[PrimaryStatDisplay.strIndex]);
+		string[][] dexSecondaryStatInfo = Dexterity.getAllSecondaryStatsForDisplay(stats[PrimaryStatDisplay.dexIndex]);
+		string[][] wisSecondaryStatInfo = Wisdom.getAllSecondaryStatsForDisplay(stats[PrimaryStatDisplay.wisIndex]);
+		string[][] chaSecondaryStatInfo = Charisma.getAllSecondaryStatsForDisplay(stats[PrimaryStatDisplay.chaIndex]);
+		
+		strStatsDisplay.updatePanels(strSecondaryStatInfo[SecondaryStatDisplay.titlesIndex], strSecondaryStatInfo[SecondaryStatDisplay.statsIndex]);
+		dexStatsDisplay.updatePanels(dexSecondaryStatInfo[SecondaryStatDisplay.titlesIndex], dexSecondaryStatInfo[SecondaryStatDisplay.statsIndex]);
+		wisStatsDisplay.updatePanels(wisSecondaryStatInfo[SecondaryStatDisplay.titlesIndex], wisSecondaryStatInfo[SecondaryStatDisplay.statsIndex]);
+		chaStatsDisplay.updatePanels(chaSecondaryStatInfo[SecondaryStatDisplay.titlesIndex], chaSecondaryStatInfo[SecondaryStatDisplay.statsIndex]);
+		*/
+	}
+	
+	public void acceptLevelUp()
+	{
+		primaryStatDisplay.implementNewStats();
+		
+		levelUpScreen.SetActive(false);
+		
+		State.playerStats.xp = (State.playerStats.xp - PlayerStats.xpNeededToLevelUp);
+		
+		StatsManager.getInstance().updateStatsScreen();
+		
+		State.playerStats.modifyCurrentHealth(State.playerStats.getTotalHealth(), true); //heals character up to full
+		
+		levelingUp = false;
+	}
+	
+	
+}

@@ -1,0 +1,23 @@
+{
+	"title": "Sealing the Breach",
+	"numberOfSteps": 10,
+	"steps":[
+				{"stepName":"Convince the Guards.","MapZone":"MineLvl_3","MapLocation":"MineLvl_3-3b","journalDescription":"Nándor and Guard Márcos have explained that the best way to seal the breach is convincing the guards stuck on the mine's third level to use their blasting jelly to seal the breach. If they are uncooperative, then we will instead need to kill them and take their blasting jelly for ourselves."},
+				{"stepName":"The Guards Will Help.","MapZone":"MineLvl_3","MapLocation":"MineLvl_3-7","journalDescription":"I have convinced Overseer Gáspár and his guards to help close the tunnel that the worms are coming through. I should proceed to the deepest part of the mine to the south and with their help, finish this."},
+				{"stepName":"The Guards Are Dead.","MapZone":"MineLvl_3","MapLocation":"MineLvl_3-MinerCamp","journalDescription":"I have slain Overseer Gáspár and his guards, and taken their blasting jelly. Now I should return to Guard Márcos and have him prepare the jelly for use."},
+				{"stepName":"The Jelly's Secrets.","MapZone":"MineLvl_3","MapLocation":"MineLvl_3-7","journalDescription":"Guard Márcos has explained how to prepare and use the blasting jelly. I should proceed to the deepest part of the mine to the south and finish this."},
+				{"stepName":"Márcos Will Help.","MapZone":"MineLvl_3","MapLocation":"MineLvl_3-7","journalDescription":"Guard Márcos is the only one with the will and knowledge to close the pocket that the worms came from. I should proceed to the deepest part of the mine to the south and finish this."},
+				{"stepName":"Sided With the Guards.","MapZone":"","MapLocation":"","journalDescription":"I fought my way to the tunnel the worms were coming from and, with the guards help, closed the tunnel for good. Afterwards, I sided with the guards after the other slaves attempted to escape their custody."},
+				{"stepName":"Sealed the Breach Myself.","MapZone":"","MapLocation":"","journalDescription":"I fought my way to the tunnel the worms were coming from and, using my wits and a little blasting jelly, closed the tunnel for good."},
+				{"stepName":"Márcos Sealed the Breach.","MapZone":"","MapLocation":"","journalDescription":"I fought my way to the tunnel the worms were coming from. Once there, Guard Márcos used the blasting jelly to close the tunnel for good, but died in the process."},
+				{"stepName":"Some Guards Surrendered.","MapZone":"","MapLocation":"","journalDescription":"I fought my way to the tunnel the worms were coming from and, with the guards help, closed the tunnel for good. Afterwards, I attempted to force the guards to surrender to me without a fight, but only two of them took my offer. I was forced to kill the rest."},
+				{"stepName":"The Guards Are Dead.","MapZone":"","MapLocation":"","journalDescription":"I fought my way to the tunnel the worms were coming from and, with the guards help, closed the tunnel for good. Afterwards, I slew the guards when they attempted to apprehend me."}
+			],
+
+
+	"deathSteps":
+			[
+				
+				
+			]
+}

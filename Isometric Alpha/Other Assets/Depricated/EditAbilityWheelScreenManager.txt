@@ -1,0 +1,209 @@
+using System.IO;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class EditAbilityWheelScreenManager : MonoBehaviour
+{
+	public ArrayList listOfAvailableAbilityPanels;
+	
+	public GameObject editAbilityWheelScreenCanvas;
+	
+	public GameObject availableAbilityGridScrollArea;
+	public GameObject availableAbilityPanelPrefab;
+
+	public TextMeshProUGUI weaponSlotTracker;
+
+	public AbilityMenuManager abilityMenuManager;
+	
+	public Dictionary<string,Item> interimPocket;
+	
+	public CombatAction[] interimCombatActions;
+
+	public void populateInterimData()
+	{
+		interimCombatActions = new CombatAction[AbilityMenuManager.playerMaxCombatActionCount];
+		
+		for(int actionIndex = 0; actionIndex < State.equippedCombatActions.Length; actionIndex++)
+		{	
+			if(State.equippedCombatActions[actionIndex] != null)
+			{
+				interimCombatActions[actionIndex] = State.equippedCombatActions[actionIndex].clone();
+			}	
+		}
+		
+		//interimPocket = new Dictionary<string,Item>(State.inventory);
+		
+		interimPocket = State.inventory.ToDictionary(entry => entry.Key, 
+                                               entry => (Item) entry.Value.Clone());
+	}	
+	
+	public void populateAbilityWheelEditor()
+	{
+		abilityMenuManager.populateAbilityMenuFromCombatActionArray(interimCombatActions);
+		
+		weaponSlotTracker.text = Attack.getAmountOfWeaponCombatActions(interimCombatActions) + "/" + State.playerStats.getWeaponSlots();
+		
+		populateUnusedAbilityWindow();
+	}
+	
+	public void populateUnusedAbilityWindow()
+	{	
+		ArrayList availableWeapons = new ArrayList();
+		ArrayList availableAbilities = new ArrayList();
+		ArrayList availableUsableItems = new ArrayList();
+		
+		availableWeapons.Add(ItemList.getMainHandFist());
+//		availableWeapons.AddRange(Inventory.getAllMainHandWeaponsInPocket(interimPocket));
+		
+		availableAbilities.AddRange(AbilityList.getAllAvailableStrengthAbilities());
+		availableAbilities.AddRange(AbilityList.getAllAvailableDexterityAbilities());
+		availableAbilities.AddRange(AbilityList.getAllAvailableWisdomAbilities());
+		availableAbilities.AddRange(AbilityList.getAllAvailableCharismaAbilities());
+		
+		availableAbilities.AddRange(LessonManager.getAllAbilities());
+		
+		availableUsableItems = Inventory.getAllItemsOfTypeInPocket(interimPocket, UsableItem.type);
+		
+		destroyAllAvailableAbilityPanels();
+		
+		foreach(Weapon weapon in availableWeapons)
+		{
+			Attack attack = new Attack(weapon);
+			
+			GameObject currentPanel = Instantiate(availableAbilityPanelPrefab, availableAbilityGridScrollArea.transform);
+			
+			UnusedAbilityPanel unusedAbilityPanel = currentPanel.GetComponent<UnusedAbilityPanel>();
+			
+		//	unusedAbilityPanel.populate(attack);
+			
+			currentPanel.SetActive(true);
+			
+			listOfAvailableAbilityPanels.Add(currentPanel);
+		}
+		
+		foreach(Ability ability in availableAbilities)
+		{			
+			GameObject currentPanel = Instantiate(availableAbilityPanelPrefab, availableAbilityGridScrollArea.transform);
+			
+			UnusedAbilityPanel unusedAbilityPanel = currentPanel.GetComponent<UnusedAbilityPanel>();
+			
+		//	unusedAbilityPanel.populate(ability);
+			
+			currentPanel.SetActive(true);
+			
+			listOfAvailableAbilityPanels.Add(currentPanel);
+		}
+		
+		foreach(Item item in availableUsableItems)
+		{			
+			ItemCombatAction itemCombatAction = new ItemCombatAction((UsableItem) item);
+			
+			GameObject currentPanel = Instantiate(availableAbilityPanelPrefab, availableAbilityGridScrollArea.transform);
+			
+			UnusedAbilityPanel unusedAbilityPanel = currentPanel.GetComponent<UnusedAbilityPanel>();
+			
+		//	unusedAbilityPanel.populate(itemCombatAction);
+			
+			currentPanel.SetActive(true);
+			
+			listOfAvailableAbilityPanels.Add(currentPanel);
+		}
+		
+	}
+	
+	public void destroyAllAvailableAbilityPanels()
+	{
+		if(listOfAvailableAbilityPanels == null)
+		{
+			listOfAvailableAbilityPanels = new ArrayList();
+			return;
+		}
+		
+		foreach(GameObject obj in listOfAvailableAbilityPanels)
+		{
+			GameObject.Destroy(obj);
+		}
+		
+		listOfAvailableAbilityPanels = new ArrayList();
+	}
+	
+	public void openAbilityWheelEditor()
+	{
+		
+		if(SideMenuManager.getEscapableObject(2) != null || !(SideMenuManager.getEscapableObject(2) is null))
+		{
+			SideMenuManager.handleESCPress();
+		}
+		
+		SideMenuManager.setEscapableObject(2, editAbilityWheelScreenCanvas);
+		editAbilityWheelScreenCanvas.SetActive(true);
+		
+		populateInterimData();
+		
+		populateAbilityWheelEditor();
+	}
+	
+	
+	public void closeEditAbilityWheelScreen()
+	{
+		if(SideMenuManager.getEscapableObject(2) == gameObject)
+		{
+			SideMenuManager.handleESCPress();
+		} else
+		{
+			editAbilityWheelScreenCanvas.SetActive(false);
+		}
+	}
+	
+	public void addCombatActionToAbilityWheel(CombatAction newCombatAction, int abilityIndex)
+	{
+		
+		if(newCombatAction != null)
+		{
+			if(!newCombatAction.hasAvailableSlots(interimCombatActions))
+			{
+				Debug.Log("No Available Slots");
+				return;
+			}
+			
+			if(newCombatAction.getSourceItem() != null)
+			{
+				Item sourceItem = newCombatAction.getSourceItem();
+				
+				newCombatAction.setSourceItem(sourceItem.clone());
+				
+				if(sourceItem.removeFromInventoryWhenCreatingCombatAction())
+				{
+					Inventory.removeItem(sourceItem, sourceItem.getQuantity(), interimPocket);
+				}
+			} 
+		}
+		
+		if(interimCombatActions[abilityIndex] != null && interimCombatActions[abilityIndex].getSourceItem() != null &&
+			interimCombatActions[abilityIndex].getSourceItem().removeFromInventoryWhenCreatingCombatAction())
+		{
+			Item sourceItem = interimCombatActions[abilityIndex].getSourceItem();
+			
+			Inventory.addItem(sourceItem, interimPocket);
+		}
+		
+		interimCombatActions[abilityIndex] = newCombatAction;
+		
+		populateAbilityWheelEditor();
+	}
+	
+	public void removeAbility(int abilityIndex)
+	{
+		addCombatActionToAbilityWheel(null, abilityIndex);
+	}
+	
+	public void useInterimCombatActions()
+	{		
+		State.equippedCombatActions = interimCombatActions;
+		State.inventory = interimPocket;
+	}	
+}

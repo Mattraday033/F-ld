@@ -1,0 +1,23 @@
+{
+	"title": "An Uneasy Truce",
+	"numberOfSteps": 12,
+	"steps":[
+				{"stepName":"The truce is made.","MapZone":"Manse-2F","MapLocation":"","journalDescription":"I came across Chief Tabor within the Manse. He was protecting an escape hatch, which the Director's children and their bodyguards used to escape the riot. I spoke with him, and convinced him that we meant no harm to the children. I proposed a deal where I would keep the rioters away from the hatch, and in exchange he would not impede our progress. I should return after the Director is defeated to see if he will surrender."},
+				{"stepName":"The hostilities never cease.","MapZone":"","MapLocation":"","journalDescription":"I came across Chief Tabor within the Manse. He was protecting an escape hatch, which the Director's children and their bodyguards used to escape the riot. I took my revenge on him, and he will never harm another of the branded."},
+				{"stepName":"Back to Tabor.","MapZone":"Manse-2F","MapLocation":"Manse-2F-2c","journalDescription":"I have defeated the Director, and the riots are over. Now I must return to Tabor on the second floor of the northern wing of the Manse and see if he will surrender."},
+				{"stepName":"The hostilities never cease.","MapZone":"","MapLocation":"","journalDescription":"I slew Tabor, despite my promise of safe conduct. His crusade against the branded has finally come to an end."},
+				{"stepName":"Relinquish the power.","MapZone":"Camp","MapLocation":"SECamp","journalDescription":"I managed to convince Tabor to surrender, rather than go down fighting. If I wish to keep him alive, I must now find a way to convince the other prisoners to leave him be. The perfect time to do that would be during the gathering at the Mess Hall."},
+				{"stepName":"Decide Tabor's fate.","MapZone":"Camp","MapLocation":"SECamp","journalDescription":"I must now decide what will become of Tabor."},
+				{"stepName":"Decide Tabor's fate.","MapZone":"Camp","MapLocation":"SECamp","journalDescription":"I forgot to go back and speak with Tabor. However, he tried to make it out of the Manse on his own, and was attacked by some of the other rioters. Nándor managed to save him, and he has been lined up with the other prisoners. I must now decide what will become of Tabor."},
+				{"stepName":"Under my guidance.","MapZone":"","MapLocation":"","journalDescription":"I decided to spare Tabor. The other slaves didn't like it, but I convinced them not to fight my decision. Tabor and I have come to a mutual understanding, if a shaky one. It has yet to be seen if he can unlearn what the Confederation has taught him."},
+				{"stepName":"Tabor's end.","MapZone":"","MapLocation":"","journalDescription":"I could not justify letting Tabor live. He was the architect and administrator of all the suffering the branded endured. If anyone, save the Director, deserved to be punished for what went on here, it was he."},
+				{"stepName":"Communal revenge.","MapZone":"","MapLocation":"","journalDescription":"I could not justify letting Tabor live. He was the architect and administrator of all the suffering the branded endured. If anyone, save the Director, deserved to be punished for what went on here, it was he. I gave him to a crowd of the very slaves he tormented. A fitting end for someone so vile."},
+				{"stepName":"Nándor's decision.","MapZone":"","MapLocation":"","journalDescription":"I refused Nándor's request for me to judge the prisoners, and made him decide their sentences instead. For Tabor, Nándor chose a quick execution."},
+				{"stepName":"Riot Control.","MapZone":"","MapLocation":"","journalDescription":"I attempted to convince the other slaves to let Tabor live, but they weren't having it. They gave me an ultimatum: kill Tabor, or they would. I was forced to fight for Tabor's life, and after killing the ring leader, the other slaves dispersed. I started today fighting the guards, and ended it fighting my fellow slaves. Life is funny that way."}
+			],
+
+
+	"deathSteps":
+			[
+			]
+}

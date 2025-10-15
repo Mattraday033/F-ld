@@ -1,0 +1,19 @@
+{
+	"title": "Rescue Broglin",
+	"numberOfSteps": 7,
+	"steps":[	
+				{"stepName":"Finding the Pit.","MapZone":"","MapLocation":"","journalDescription":"The guards have taken Broglin to somewhere called 'the Pit'. I must locate where this is and find a way to free him."},
+				{"stepName":"Beneath the Manse.","MapZone":"Manse-1F","MapLocation":"","journalDescription":"The guards have taken Broglin to somewhere called 'the Pit'. I must locate where this is and find a way to free him. Kastor has said that the other slaves speculate that the Pit lies somewhere beneath the Manse. This will make it more difficult to get Broglin out, but not impossible."},
+				{"stepName":"The way is blocked.","MapZone":"Manse-1F","MapLocation":"","journalDescription":"I have found the Pit, but the guards have blocked the way. I will need to find another entrance."},	
+				{"stepName":"A clue.","MapZone":"Manse-2F","MapLocation":"Manse-2F-2b","journalDescription":"I picked up a note left by one of the guards. It seems that there is another way to get inside the Pit: falling between the floorboards in the unfinished part of the Manse. I think I will need to begin my fall from the Manse's second floor."},	
+				{"stepName":"Entered the Pit.","MapZone":"Pit","MapLocation":"","journalDescription":"I have made my way into the Pit! Now to find Broglin."},	
+				{"stepName":"Found Broglin.","MapZone":"Pit","MapLocation":"Pit-2d","journalDescription":"I have Broglin, but the door to his cell is locked. Broglin has said that he saw the warden throw the key into the garbage pit. I guess I'm going down there if I want to get Broglin out."},	
+				{"stepName":"Broglin is Free.","MapZone":"","MapLocation":"","journalDescription":"I have freed Broglin from the Pit."}
+			],
+			
+	
+	"deathSteps":
+			[
+			]
+	
+}

@@ -1,0 +1,122 @@
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CombatActionOrderUIManager : MonoBehaviour
+{
+	public static ArrayList listOfCombatActionPanels = new ArrayList();
+	
+	public PlayerCombatActionCounterManager playerCombatActionCounterManager;
+	
+	public GameObject UIPanelPrefab;
+	
+	public GameObject actionGrid; 	//panel that is parent of all elements in the inventory display grid (the scrollable part) and contains background panel
+	public GameObject scrollContainer; 	//child of actionGrid and contains all scroll elements, and the Scroll Rect component
+	public GameObject scrollableArea; 	//child of scrollContainer, the actual area that the scroll bar traverses.
+										//parent of all inventory rows and UIPanelPrefab
+	
+	public DescriptionPanel actionEffectDescriptionPanel;
+	public DescriptionPanel traitEffectDescriptionPanel;
+	
+	private static CombatActionOrderUIManager instance;
+	
+	public static CombatActionOrderUIManager getInstance()
+	{
+		return instance;
+	}
+	
+	private void Awake()
+	{
+		if(instance != null)
+		{
+			throw new IOException("there is already an instance of CombatActionOrderUIManager");
+		}
+		
+		instance = this;
+	}
+	/*
+	public void populateCombatActionPanels()
+	{
+		deleteAllCombatActionPanels();
+		
+		ArrayList actions = CombatActionManager.getCombatActionOrder();
+
+		int actionIndex = 0;
+		foreach(CombatAction action in actions)
+		{
+			Vector3 prefabLocalPosition = UIPanelPrefab.GetComponent<RectTransform>().localPosition; //RectTransform of disabled inventoryRow example
+
+			GameObject current = Instantiate(UIPanelPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+			current.name = "CombatAction_Panel_" + actionIndex;
+		
+			current.transform.parent = scrollableArea.transform;
+			RectTransform currentRectTransform = current.GetComponent<RectTransform>();
+		
+			current.GetComponent<RectTransform>().localPosition = new Vector3(prefabLocalPosition.x, prefabLocalPosition.y - (currentRectTransform.rect.height*(actionIndex)), 0f);
+			current.GetComponent<RectTransform>().localScale = new Vector3(1f,1f,1f);
+			current.SetActive(true);
+
+			CombatActionOrderRow currentRow = current.GetComponent<CombatActionOrderRow>();
+			
+			//currentRow.populate(action);
+			
+			listOfCombatActionPanels.Add(current);
+			actionIndex++;
+		}
+		
+		if(CombatStateManager.whoseTurn == WhoseTurn.Player)
+		{	
+			playerCombatActionCounterManager.updateCombatActionCounterPanels(actions);
+		}
+	} 
+	*/
+	public void deleteAllCombatActionPanels()
+	{
+		if(listOfCombatActionPanels.Count != 0)
+		{
+			foreach(GameObject panel in listOfCombatActionPanels)
+			{	
+				if(panel != null)
+				{
+					panel.GetComponent<CombatActionOrderRow>().OnPointerExit(null);
+					Destroy(panel);	
+				}
+			}
+
+			listOfCombatActionPanels = new ArrayList();
+		}
+	}
+	
+	public void populateCombatActionDescriptionPanel(CombatAction action)
+	{
+		actionEffectDescriptionPanel.gameObject.SetActive(true);
+		
+		actionEffectDescriptionPanel.nameText.text = action.getName();
+		actionEffectDescriptionPanel.iconPanel.sprite = Resources.Load<Sprite>(action.getIconName());
+		actionEffectDescriptionPanel.useDescriptionText.text = action.getUseDescription();
+	}
+	
+	public void populateTraitDescriptionPanel(Trait trait)
+	{
+		traitEffectDescriptionPanel.gameObject.SetActive(true);
+		
+		traitEffectDescriptionPanel.nameText.text = trait.getName();
+		traitEffectDescriptionPanel.typeText.text = trait.traitType;
+		traitEffectDescriptionPanel.useDescriptionText.text = trait.traitDescription;
+		
+		if(trait.isPermanent())
+		{
+			traitEffectDescriptionPanel.timerText.text = "Permanent";
+		} else
+		{
+			traitEffectDescriptionPanel.timerText.text = trait.getMaxRounds() + " Rounds";
+		}
+	}
+
+	public void closeCombatActionAndTraitDescriptionPanels()
+	{
+		actionEffectDescriptionPanel.gameObject.SetActive(false);
+		traitEffectDescriptionPanel.gameObject.SetActive(false);
+	}
+}

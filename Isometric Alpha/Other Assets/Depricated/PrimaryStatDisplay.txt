@@ -1,0 +1,215 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class PrimaryStatDisplay : MonoBehaviour
+{
+	public GameObject displayPanelParent;
+	
+	public TextMeshProUGUI pointsToSpendText;
+	
+	public TextMeshProUGUI[] displayPanels;
+	
+	public Button[] incrementButtons;
+	public Button[] decrementButtons;
+	
+	public DescriptionPanel firstPerkWindow;
+	public GameObject firstPerkPanelParent; //set to inactive to hide perk windows but not the outline
+	
+	public DescriptionPanel secondPerkWindow;
+	public GameObject secondPerkPanelParent; //set to inactive to hide perk windows but not the outline
+	
+	public int pointsToSpend = 0;
+	
+	private const int noExemptions = -1;
+	public const int strIndex = 0;
+	public const int dexIndex = 1;
+	public const int wisIndex = 2;
+	public const int chaIndex = 3;
+	
+	public int[] stats = new int[4]; //stats that may or may not have been adjusted by player during leveling up.
+									 //if you need the original stats for any reason, get them from State.playerStats
+	
+	public void cleanAllPanels()
+	{
+		for(int panelIndex = 0; panelIndex < displayPanels.Length; panelIndex++)
+		{
+			displayPanels[panelIndex].text = "";
+		}
+	}
+	
+	public void incrementStat(int statIndex)
+	{
+		stats[statIndex]++;
+		spendPoint();
+		
+		updatePanelValues();
+	}
+	
+	public void decrementStat(int statIndex)
+	{
+		stats[statIndex]--;
+		addPoint();
+		
+		updatePanelValues();
+	}
+	
+	public void spendPoint()
+	{
+		pointsToSpend--;
+		
+		if(pointsToSpend <= 0)
+		{
+			LevelUpManager.getInstance().acceptButton.interactable = true;
+		}
+	}
+	
+	public void addPoint()
+	{
+		Debug.Log("b4 pointsToSpend = " + pointsToSpend);
+		
+		pointsToSpend++;
+		
+		Debug.Log("after pointsToSpend = " + pointsToSpend);
+		
+		if(pointsToSpend > 0)
+		{
+			LevelUpManager.getInstance().acceptButton.interactable = false;
+		}
+	}
+	
+	public void updatePanelValues()
+	{
+		displayPanels[strIndex].text = "" + stats[strIndex];
+		displayPanels[dexIndex].text = "" + stats[dexIndex];
+		displayPanels[wisIndex].text = "" + stats[wisIndex];
+		displayPanels[chaIndex].text = "" + stats[chaIndex];
+		
+		pointsToSpendText.text = "" + pointsToSpend;
+	}
+	
+	public void getAndDisplayCurrentStats()
+	{
+		PlayerStats playerStats = State.playerStats;
+		
+		stats[strIndex] = playerStats.strength;
+		stats[dexIndex] = playerStats.dexterity;
+		stats[wisIndex] = playerStats.wisdom;
+		stats[chaIndex] = playerStats.charisma;
+		
+		cleanAllPanels();
+		
+		updatePanelValues();
+	}
+	
+	public void implementNewStats()
+	{
+		State.playerStats.implementNewStats(stats);
+	}
+	
+	public void setAllDecrementButtonsToUninteractable()
+	{
+		setAllDecrementButtonsToUninteractable(noExemptions);
+	}
+	
+	public void setAllDecrementButtonsToUninteractable(int exemptionIndex)
+	{
+		for(int buttonIndex = 0; buttonIndex < decrementButtons.Length; buttonIndex++)
+		{
+			if(buttonIndex == exemptionIndex)
+			{
+				decrementButtons[buttonIndex].interactable = true;
+			} else
+			{
+				decrementButtons[buttonIndex].interactable = false;
+			}
+		}
+	}
+	
+	//update stats before running setAllIncrementButtonsToInteractable()
+	public void setAllIncrementButtonsToInteractable()
+	{
+		for(int buttonIndex = 0; buttonIndex < incrementButtons.Length; buttonIndex++)
+		{
+			if(stats[buttonIndex] >= PlayerStats.statMaximum)
+			{
+				incrementButtons[buttonIndex].interactable = false;
+			} else
+			{
+				incrementButtons[buttonIndex].interactable = true;
+			}
+		}
+	}
+	
+	public void setAllIncrementButtonsToUninteractable()
+	{
+		for(int buttonIndex = 0; buttonIndex < incrementButtons.Length; buttonIndex++)
+		{
+			incrementButtons[buttonIndex].interactable = false;
+		}
+	}
+	
+	public void populatePerkWindows()
+	{
+		
+		int firstPerkIndex = 0;
+		int secondPerkIndex = 1;
+		int statIndex = determineIncreasedStat();
+		
+		if(statIndex < 0)
+		{
+			return;
+		}
+		
+		firstPerkPanelParent.SetActive(true);
+		secondPerkPanelParent.SetActive(true);
+		
+		StatProgressionTable statProgressionTable = PerkDescriptionList.statProgressionTables[statIndex];
+		
+		PerkDescription firstPerk = statProgressionTable.perkDescriptions[(stats[statIndex]-1)][firstPerkIndex];
+		PerkDescription secondPerk = statProgressionTable.perkDescriptions[(stats[statIndex]-1)][secondPerkIndex];
+		
+		firstPerkWindow.nameText.text = firstPerk.title;
+		firstPerkWindow.typeText.text = firstPerk.type;
+		firstPerkWindow.useDescriptionText.text = firstPerk.benefitDescription;
+		
+		secondPerkWindow.nameText.text = secondPerk.title;
+		secondPerkWindow.typeText.text = secondPerk.type;
+		secondPerkWindow.useDescriptionText.text = secondPerk.benefitDescription;
+	}
+	
+	public void hidePerkWindows()
+	{
+		firstPerkPanelParent.SetActive(false);
+		secondPerkPanelParent.SetActive(false);
+	}
+	
+	public int determineIncreasedStat()
+	{
+		PlayerStats playerStats = State.playerStats;
+		
+		if(stats[strIndex] > playerStats.strength)
+		{
+			return strIndex;
+		}
+		
+		if(stats[dexIndex] > playerStats.dexterity)
+		{
+			return dexIndex;
+		}
+		
+		if(stats[wisIndex] > playerStats.wisdom)
+		{
+			return wisIndex;
+		}
+		
+		if(stats[chaIndex] > playerStats.charisma)
+		{
+			return chaIndex;
+		}
+		
+		return -1;
+	}
+}

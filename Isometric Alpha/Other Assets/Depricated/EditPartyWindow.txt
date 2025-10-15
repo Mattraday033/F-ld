@@ -1,0 +1,216 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System.IO;
+
+public interface IPartyEditor
+{
+	public void updateSlotTracker();
+	public void populateFormationGrid(); //populates Formation UI
+
+	public void readInCurrentFormation(); //Reads Formation info from State.formation, incase an interim formation is used
+	public void writeFormation();   //Writes from interirm formation to State.formation
+
+	public void addCharacterToFormation(Stats characterToAdd, int row, int col);
+	public void removeCharacter(Stats characterToRemove);
+
+	public Stats getSelectedPartyMember();
+
+	public Formation getFormation();
+}
+
+public class EditPartyWindow : PopUpWindow, IEscapable, IPartyEditor
+{
+	public TextMeshProUGUI slotTracker;
+	public FormationDisplayUI formationDisplayUI;
+	public static Formation interimFormation = new Formation();
+
+	public ScrollableUIElement unassignedPartyMemberGrid;
+
+	private static EditPartyWindow instance;
+
+	public static EditPartyWindow getInstance()
+	{
+		return instance;
+	}
+
+	private void Awake()
+	{
+		if (instance != null)
+		{
+			throw new IOException("Duplicate instances of EditPartyWindow exist");
+		}
+
+		instance = this;
+	}
+
+	void Update()
+	{
+		if (PlayerOOCStateManager.currentActivity != OOCActivity.inUI)
+		{
+			return;
+		}
+
+		if (KeyBindingList.continueUIKeyIsPressed() && acceptButton.interactable && !KeyPressManager.handlingPrimaryKeyPress)
+		{
+			KeyPressManager.handlingPrimaryKeyPress = true;
+			writeFormation();
+		}
+	}
+
+	private void setAcceptButtonInteractability()
+	{
+		acceptButton.interactable = interimFormation.contains(PartyManager.getPlayerStats());
+	}
+
+	public void updateSlotTracker()
+	{
+		slotTracker.text = interimFormation.getSizeOfFormation() + " / " + PartyStats.getPartySizeMaximum();
+	}
+
+	public void readInCurrentFormation()
+	{
+		interimFormation = State.formation.clone();
+	}
+
+	public void removeCharacter(Stats characterToRemove)
+	{
+		interimFormation.removeCharacter(characterToRemove);
+
+		populateAllGrids();
+	}
+
+	public void addCharacterToFormation(Stats characterToAdd, int row, int col)
+	{
+		if (interimFormation.canWriteToSlot(row, col))
+		{
+			interimFormation.getGrid()[row][col] = characterToAdd;
+		}
+
+		populateAllGrids();
+	}
+
+	public void populateAllGrids()
+	{
+		populateUnassignedPartyMemberGrid();
+		populateFormationGrid();
+		setAcceptButtonInteractability();
+	}
+
+	public void populateUnassignedPartyMemberGrid()
+	{
+		List<PartyMember> allPartyMembers = PartyManager.getAllPartyMembers();
+		ArrayList listOfUnusedPartyMembers = new ArrayList();
+
+		if (!interimFormation.contains(PartyManager.getPlayerStats()))
+		{
+			listOfUnusedPartyMembers.Add(new PartyMember(PartyManager.getPlayerStats()));
+		}
+
+		foreach (PartyMember partyMember in allPartyMembers)
+		{
+			if (partyMember.canJoinParty && !interimFormation.contains(partyMember.stats))
+			{
+				listOfUnusedPartyMembers.Add(partyMember);
+			}
+		}
+
+		unassignedPartyMemberGrid.populatePanels(listOfUnusedPartyMembers);
+	}
+
+	public void populateFormationGrid()
+	{
+		formationDisplayUI.populate(interimFormation);
+		updateSlotTracker();
+		updateEmptySquares();
+	}
+
+	public void writeFormation()
+	{
+		if (!interimFormation.contains(PartyManager.getPlayerStats()))
+		{
+			return;
+		}
+
+		State.formation.setGrid(interimFormation.getGrid());
+
+		if (OverallUIManager.currentScreenManager != null)
+		{
+			OverallUIManager.currentScreenManager.populateAllGrids();
+		}
+		else if (!TutorialSequence.currentlyInTutorialSequence())
+		{
+			PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+		}
+
+		OOCUIManager.updatePartyMemberUpgradeCounter();
+
+		EscapeStack.escapeAll();
+	}
+
+	public Formation getFormation()
+	{
+		return interimFormation;
+	}
+
+	public bool hasSelectedPartyMember()
+	{
+		Stats selectedPartyMember = getSelectedPartyMember();
+
+		if (selectedPartyMember != null && !(selectedPartyMember is null))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public Stats getSelectedPartyMember()
+	{
+		PartyMember selectedPartyMember = (PartyMember)unassignedPartyMemberGrid.getDisabledRowDescribable();
+
+		if (selectedPartyMember != null && !(selectedPartyMember is null))
+		{
+			return selectedPartyMember.stats;
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	public void updateEmptySquares()
+	{
+		if (interimFormation.isFull())
+		{
+			formationDisplayUI.setEmptySquaresToUninteractable(interimFormation);
+		}
+		else
+		{
+			formationDisplayUI.setEmptySquaresToInteractable(interimFormation);
+		}
+	}
+
+	public override void closeButtonPress()
+	{
+		unassignedPartyMemberGrid.enableAllGridRows();
+
+		base.closeButtonPress();
+	}
+
+	public override void handleEscapePress()
+	{
+		if (hasSelectedPartyMember())
+		{
+			unassignedPartyMemberGrid.enableAllGridRows();
+		}
+		else
+		{
+			base.handleEscapePress();
+		}
+	}
+}

@@ -1,0 +1,25 @@
+{
+	"title": "Look for Thatch",
+	"numberOfSteps": 7,
+	"steps":[
+				{"stepName":"Cross the road.","MapZone":"Camp","MapLocation":"6SlaveShack","journalDescription":"Kastor needs a little more convincing before he entrusts me with the knowledge of his plans and comrades. He has tasked me with investigating the shack just northeast of his. He said he heard some screams coming from that direction last night and wishes to learn what happened."},
+				
+				{"stepName":"Slate's fate.","MapZone":"Camp","MapLocation":"6SlaveShack","journalDescription":"Thatch, one of the hut's denizens, wants me to help him stop some guards from hurting his friend. I need to make my way to the back of his hut and check on Slate."},
+
+				{"stepName":"Return to Kastor","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"Thatch, one of the hut's denizens, wanted me to help him find his friend Slate. I had already found Slate, who had died from punishments the guards had given him. I should return to Kastor to explain what has happened."},
+				
+				{"stepName":"Return to Kastor.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"Slate was dead when we arrived. He expired from the guard's punishment. Thatch and I killed Vazul, one of the guards responsible for Slate's death, as retribution. I should make my way back to Kastor and tell him what happened."},
+
+				{"stepName":"Return to Kastor.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"Slate was dead when we arrived. He expired from the guard's punishment. I kept Thatch from killing Vazul, one of the guards responsible for Slate's death. I should make my way back to Kastor and tell him what happened."},
+	
+				{"stepName":"Return to Kastor.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"Slate was dead when we arrived. He expired from the guard's punishment. I kept Thatch from killing Vazul, one of the guards responsible for Slate's death. Vazul is gagged, bound, and buried within the shack he killed Slate in. I should make my way back to Kastor and tell him what happened."},
+
+				{"stepName":"Kastor has been told.","MapZone":"","MapLocation":"","journalDescription":"I informed Kastor of what became of Slate. He seemed impressed with how I handled the situation and now trusts me enough to disclose more parts of the plan."}
+				
+			],
+
+
+	"deathSteps":
+			[
+			]
+}
