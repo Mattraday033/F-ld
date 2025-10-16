@@ -10,7 +10,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
-// [System.Serializable]
+[System.Serializable]
 public class JournalHandler : ScreenManager
 {
     private const int questTabIndex = 0;

@@ -38,7 +38,7 @@ public static class ObservationManager
 	{
 		OOCUIManager.getInstance().updateOOCUI();
 		
-		Vector3Int playerCoords = player.getMovementGridCoordsLocal();
+		Vector3Int playerCoords = player.getMovementGridCoords();
 		
 		for(int row = 0; row < observeRange; row++)
 		{

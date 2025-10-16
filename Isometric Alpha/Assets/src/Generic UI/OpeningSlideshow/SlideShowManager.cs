@@ -6,7 +6,7 @@ using TMPro;
 
 public enum SlidePanel { Default = 0, Large1 = 1 }
 
-// [System.Serializable]
+[System.Serializable]
 public struct SlideShowCoroutineDetails
 {
 

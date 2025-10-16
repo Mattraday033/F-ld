@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//[System.Serializable]
+[System.Serializable]
 public class QuestStep : IDescribable, IDescribableInBlocks
 {
 	private const string questCompletedPrefix = "Quest Complete: ";

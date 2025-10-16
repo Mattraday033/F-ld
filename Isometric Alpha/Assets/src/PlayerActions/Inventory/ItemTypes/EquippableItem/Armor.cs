@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
 
-//[System.Serializable]
+[System.Serializable]
 public class Armor : EquippableItem, IJSONConvertable
 {
 	public const string typeIconName = "Armor";

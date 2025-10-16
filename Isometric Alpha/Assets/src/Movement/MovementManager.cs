@@ -579,9 +579,9 @@ public class MovementManager : MonoBehaviour
 		return false;
 	}
 
-	public Vector3Int getPlayerPosition()
+	public static Vector3Int getPlayerGridCell()
 	{
-		return PlayerMovement.getInstance().getMovementGridCoordsLocal();
+		return PlayerMovement.getMovementGridCoords();
 	}
 
 	public static SurpriseState determineSurprisedParty()

@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-// [System.Serializable]
+[System.Serializable]
 public struct SpawnDetails
 {
 	public bool hasSpawnDetails;
@@ -29,9 +29,9 @@ public struct SpawnDetails
 
 public class EnemyStats : Stats
 {
-	// [SerializeField]
+	[SerializeField]
 	private bool priorityAttacker;
-	// [SerializeField]
+	[SerializeField]
 	private bool lowPriorityAttacker;
 
 	public int armor;
@@ -41,25 +41,25 @@ public class EnemyStats : Stats
 	public static UnityEvent OnMinionSummonDeath = new UnityEvent();
 	public static UnityEvent OnEnemyDeath = new UnityEvent();
 
-	// [SerializeField]
+	[SerializeField]
 	private int totalHealth;
-	// [SerializeField]
+	[SerializeField]
 	private int weaponIndex = -1;
 
 	private CombatAction combatAction;
-	// [SerializeField]
+	[SerializeField]
 	private bool lastManStandingAbility;
-	// [SerializeField]
+	[SerializeField]
 	private string chargedTraitKey;
-	// [SerializeField]
+	[SerializeField]
 	private string chargedActionKey;
-	// [SerializeField]
+	[SerializeField]
 	private string regularActionKey;
-	// [SerializeField]
+	[SerializeField]
 	private string environmentalCombatActionKey;
-	// [SerializeField]
+	[SerializeField]
 	private string environmentalTargetingTraitKey;
-	// [SerializeField]
+	[SerializeField]
 	private EnemyStats spawnType;
 
 	public EnemyStats() : base(null, "", "", 0)

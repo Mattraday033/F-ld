@@ -17,10 +17,11 @@ public class MonsterPackListManager : MonoBehaviour
 	
     void Start()
     {
-		if(!AreaList.currentSceneIsHostile() || shouldShutOffSpawning() || State.debugStopMonsterSpawning)
-		{
+        // if(!AreaList.currentSceneIsHostile() || shouldShutOffSpawning() || State.debugStopMonsterSpawning)
+        // {
+        Debug.LogError("MonsterPackListManager taken offline");
 			return;
-		}
+		// }
 		
 		if(State.currentMonsterPackList == null) //|| State.currentMonsterPackList.shouldReset
 		{

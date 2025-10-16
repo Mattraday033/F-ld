@@ -25,7 +25,7 @@ public static class CunningManager
 	
 	public static void createCunningRange()
 	{
-		Vector3Int playerCoords = player.getMovementGridCoordsLocal();
+		Vector3Int playerCoords = player.getMovementGridCoords();
 		
 		for(int row = 0; row < cunningRange; row++)
 		{
@@ -152,7 +152,7 @@ public static class CunningManager
 	
 	private static string getGridCellCoords(Vector2Int currentCoords)
 	{
-		Vector3Int gridCellCoords = player.getMovementGridCoordsLocal();
+		Vector3Int gridCellCoords = player.getMovementGridCoords();
 		
 		return "(" + ((currentCoords.x + gridCellCoords.x)-playerCunningCoords) + "," + ((currentCoords.y + gridCellCoords.y)-playerCunningCoords) + ")";
 	}

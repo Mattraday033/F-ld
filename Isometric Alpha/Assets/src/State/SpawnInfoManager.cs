@@ -58,6 +58,8 @@ public static class SpawnInfoManager
     {
         List<GameObject> spawnedObjects = new List<GameObject>();
 
+        Debug.LogError("AreaManager.locationName = " + AreaManager.locationName);
+
         GameObject background = GameObject.Instantiate(Resources.Load<GameObject>(AreaManager.locationName), AreaManager.getGridParent());
         spawnedObjects.Add(background);
 
@@ -143,7 +145,7 @@ public static class SpawnInfoManager
                 GameObject transitionGameObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.transitionSpace), AreaManager.getTransitionParent());
                 TransitionSpace transitionSpace = transitionGameObject.GetComponent<TransitionSpace>();
 
-                transitionSpace.transition = transition;
+                transitionSpace.setTransition(transition);
 
                 transitionGameObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(transition.cellCoords);
 

@@ -39,7 +39,7 @@ public class LoadingBarProgressTracker : MonoBehaviour
 
 	void Update()
 	{
-		if(canChangeScene && KeyBindingList.continueUIKeyIsPressed())
+		if((canChangeScene && KeyBindingList.continueUIKeyIsPressed()) || Application.isEditor)
 		{
             garbageCollectionHasOccured = false;
             canChangeScene = false;

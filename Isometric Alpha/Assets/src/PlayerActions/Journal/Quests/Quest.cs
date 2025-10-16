@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using UnityEngine;
 
-//[System.Serializable]
+[System.Serializable]
 public class Quest: IJSONConvertable, IDescribable, IJournalCategory
 {
 	public string title;

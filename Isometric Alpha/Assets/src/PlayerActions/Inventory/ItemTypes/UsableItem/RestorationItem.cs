@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-//[System.Serializable]
+[System.Serializable]
 public class RestorationItem : CombatItem, IJSONConvertable
 {
     private const string subtype = "Restoration";

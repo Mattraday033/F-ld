@@ -7,7 +7,7 @@ using UnityEngine;
 public interface IMapObject
 {
 	public string getZoneKey();
-	public string getSceneName();
+	public string getLocationName();
 	public string getMapUIDisplayName();
 
 	public string getMapUIDisplayNameWithoutZoneName();
@@ -58,7 +58,12 @@ public static class MapObjectList
 	
 	
 	public static IMapObject getMapObject(string name)
-	{		
+    {		
+        if(name == null)
+        {
+            name = AreaNameList.campNorthEast;
+        }
+
 		string zoneKey = name;
 		
 		switch(zoneKey)

@@ -88,7 +88,7 @@ public class LoadSaveFile : IDecision
             State.playerFacing = new CharacterFacing();
             State.playerFacing.setFacing((Facing)saveBlueprint.playerFacing);
 
-            AreaManager.locationName = saveBlueprint.currentScene;
+            AreaManager.locationName = saveBlueprint.currentLocation;
 
             State.terrainHidden = saveBlueprint.terrainHidden;
 

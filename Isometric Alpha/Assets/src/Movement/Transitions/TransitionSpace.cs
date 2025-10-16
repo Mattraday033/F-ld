@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using TMPro;
 
 public class Transition
 {
@@ -17,25 +16,34 @@ public class Transition
     public Vector3Int cellCoords;
 
     public int outputMultiplier;
+    public bool usableForFastTravel;
 
-    public Transition(string currentAreaName, string destinationAreaName, Vector3Int cellCoords, int index, Facing playerSpawnDirection)
+    //used in fast travelling
+    public Transition(string currentAreaName, string destinationAreaName)
     {
         this.currentAreaName = currentAreaName;
         this.destinationAreaName = destinationAreaName;
-        this.cellCoords = cellCoords;
-        this.index = index;
-        this.playerSpawnDirection = playerSpawnDirection;
-        
+        this.usableForFastTravel = true;
+
+        this.cellCoords = PlayerMovement.getMovementGridCoords();
+
+        this.index = 0;
+        this.playerSpawnDirection = CharacterFacing.getOpposingFacing(State.playerFacing.getFacing());
         this.outputMultiplier = 1;
     }
 
-    public Transition(string currentAreaName, string destinationAreaName, Vector3Int cellCoords, int index, Facing playerSpawnDirection, int outputMultiplier)
+    public Transition(string currentAreaName, string destinationAreaName, Vector3Int cellCoords, int index, Facing playerSpawnDirection, bool usableForFastTravel, int outputMultiplier)
     {
         this.currentAreaName = currentAreaName;
         this.destinationAreaName = destinationAreaName;
+
         this.cellCoords = cellCoords;
         this.index = index;
+
         this.playerSpawnDirection = playerSpawnDirection;
+
+        this.usableForFastTravel = usableForFastTravel;
+
         this.outputMultiplier = outputMultiplier;
     }
 
@@ -47,9 +55,14 @@ public class Transition
             transition.index == index;
     }
 
+    public virtual bool fastTravelCapable()
+    {
+        return usableForFastTravel;
+    }
+
     public Vector3Int getOutPutCellCoords()
     {
-        switch(playerSpawnDirection)
+        switch (playerSpawnDirection)
         {
             case Facing.NorthEast:
                 return cellCoords + MovementManager.distance1TileNorthEastGrid * outputMultiplier;
@@ -67,7 +80,24 @@ public class Transition
 public class TransitionSpace : MonoBehaviour, ICounter
 {
 
-    public Transition transition;
+    [SerializeField]
+    private Transition transition;
+    public Collider2D collider;
+
+    public Transition getTransition()
+    {
+        return transition;
+    }
+
+    public void setTransition(Transition transition)
+    {
+        this.transition = transition;
+
+        if (transition.fastTravelCapable())
+        {
+            collider.enabled = false;
+        }
+    }
 
 
     private void OnEnable()

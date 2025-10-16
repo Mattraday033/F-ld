@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ink.Runtime;
 
-//[System.Serializable]
+[System.Serializable]
 public class Dialogue : ICloneable
 {
     public static string[] stringArrayWithPlayerSpace = new string[] { "" };

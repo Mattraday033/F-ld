@@ -37,7 +37,7 @@ public enum DescribableList
     ShopKeeperEssentialItems = 25
 }
 
-// [System.Serializable]
+[System.Serializable]
 public struct TabCollection
 {
 	public bool statTabs;
@@ -122,7 +122,7 @@ public struct TabCollection
 	}
 }
 
-// [System.Serializable]
+[System.Serializable]
 public struct Tab
 {
 	public Button button;

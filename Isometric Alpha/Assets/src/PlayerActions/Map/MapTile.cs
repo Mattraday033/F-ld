@@ -102,7 +102,7 @@ public class MapTile : MonoBehaviour, IQuestListSource
 
         IMapObject currentSceneMapObject = MapObjectList.getMapObject(SceneManager.GetActiveScene().name);
 
-        if (mapObject != null && currentSceneMapObject.isInterior() && currentSceneMapObject.getExteriorSceneName().Equals(mapObject.getSceneName()))
+        if (mapObject != null && currentSceneMapObject.isInterior() && currentSceneMapObject.getExteriorSceneName().Equals(mapObject.getLocationName()))
         {
             playerIndicator.gameObject.SetActive(true);
             return;
@@ -125,7 +125,7 @@ public class MapTile : MonoBehaviour, IQuestListSource
     private void setButtonInteractability()
     {
 
-        if (mapObject != null && mapObject.hasBeenDiscovered() && mapObject.getIsFastTravelDestination() && !AreaList.areaOutsideAllowedFastTravelAreas(mapObject.getSceneName()))
+        if (mapObject != null && mapObject.hasBeenDiscovered() && mapObject.getIsFastTravelDestination() && !AreaList.areaOutsideAllowedFastTravelAreas(mapObject.getLocationName()))
         {
             multiTargetButton.enabled = true;
         }

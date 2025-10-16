@@ -8,8 +8,6 @@ public class FastTravel : IDecision
 	private const string fastTravelMessageStart = "Would you like to fast travel to ";
     private const string fastTravelMessageEnd = "?";
 
-	private const string fastTravelHash = "FT";
-
     public IMapObject targetMapObject;
 
     public FastTravel(IMapObject targetMapObject)
@@ -27,7 +25,7 @@ public class FastTravel : IDecision
         MapPopUpWindow.fastTravelPanelCloseButtonPress();
         PlayerMovement.getInstance().mapPopUpButton.destroyPopUp();
 
-		TransitionManager.getInstance().fastTravel(new TransitionInfo(fastTravelHash,targetMapObject.getSceneName()));
+		TransitionManager.fastTravel(targetMapObject.getLocationName());
     }
     
     public void backOut()

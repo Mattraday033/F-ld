@@ -34,13 +34,13 @@ public class InteriorDisplayStatRequirements
 	}
 }
 
-//[System.Serializable]
+[System.Serializable]
 public class MapLocation : IMapObject
 {
 
 	private string displayName;
 	private string zoneKey;
-	public string sceneName;
+	public string locationName;
 	
 	private bool isFastTravelDestination;
 	
@@ -51,10 +51,10 @@ public class MapLocation : IMapObject
 
 	public InteriorDisplayStatRequirements[] interiorDisplayStatRequirements;
 
-    public MapLocation(string zoneKey, string sceneName, string displayName, bool isFastTravelDestination, int interiors, string[] adjacentLocations)
+    public MapLocation(string zoneKey, string locationName, string displayName, bool isFastTravelDestination, int interiors, string[] adjacentLocations)
     {
         this.zoneKey = zoneKey;
-        this.sceneName = sceneName;
+        this.locationName = locationName;
         this.displayName = displayName;
 
         this.isFastTravelDestination = isFastTravelDestination;
@@ -67,10 +67,10 @@ public class MapLocation : IMapObject
 		this.interiorDisplayStatRequirements = new InteriorDisplayStatRequirements[0];
     }
 
-	public MapLocation(string zoneKey, string sceneName, string displayName, bool isFastTravelDestination, int interiors, string[] adjacentLocations, ZoneButtonInfo[] zoneButtons)
+	public MapLocation(string zoneKey, string locationName, string displayName, bool isFastTravelDestination, int interiors, string[] adjacentLocations, ZoneButtonInfo[] zoneButtons)
 	{
 		this.zoneKey = zoneKey;
-		this.sceneName = sceneName;
+		this.locationName = locationName;
 		this.displayName = displayName;
 		
 		this.isFastTravelDestination = isFastTravelDestination;
@@ -83,10 +83,10 @@ public class MapLocation : IMapObject
 		this.interiorDisplayStatRequirements = new InteriorDisplayStatRequirements[0];
 	} 
 
-	public MapLocation(string zoneKey, string sceneName, string displayName, bool isFastTravelDestination, int interiors, string[] adjacentLocations, ZoneButtonInfo[] zoneButtons, InteriorDisplayStatRequirements[] interiorDisplayStatRequirements)
+	public MapLocation(string zoneKey, string locationName, string displayName, bool isFastTravelDestination, int interiors, string[] adjacentLocations, ZoneButtonInfo[] zoneButtons, InteriorDisplayStatRequirements[] interiorDisplayStatRequirements)
 	{
 		this.zoneKey = zoneKey;
-		this.sceneName = sceneName;
+		this.locationName = locationName;
 		this.displayName = displayName;
 		
 		this.isFastTravelDestination = isFastTravelDestination;
@@ -106,22 +106,22 @@ public class MapLocation : IMapObject
 			return true;
 		}
 
-		return hasBeenDiscovered(zoneKey, sceneName);
+		return hasBeenDiscovered(zoneKey, locationName);
 	}
 	
-	public static bool hasBeenDiscovered(string zoneKey, string sceneName)
+	public static bool hasBeenDiscovered(string zoneKey, string locationName)
 	{
 		try
 		{
-			ArrayList listOfSceneNames = null;
+			ArrayList listOfLocationNames = null;
 			
-			if (State.allKnownMapData.TryGetValue(zoneKey, out listOfSceneNames))
+			if (State.allKnownMapData.TryGetValue(zoneKey, out listOfLocationNames))
 			{
 				if(State.allKnownMapData[zoneKey].Count > 0)
 				{
 					foreach(string listSceneName in State.allKnownMapData[zoneKey])
 					{
-						if(listSceneName.Equals(sceneName))
+						if(listSceneName.Equals(locationName))
 						{
 							return true;
 						}
@@ -169,10 +169,10 @@ public class MapLocation : IMapObject
 	
 	public virtual bool getIsFastTravelDestination()
 	{
-		if (State.debugDiscoverAllLocations)
-		{
-			return true;
-		}
+		// if (State.debugDiscoverAllLocations)
+		// {
+		// 	return true;
+		// }
 
 		return isFastTravelDestination;
 	}
@@ -191,7 +191,7 @@ public class MapLocation : IMapObject
 
 		if(combinedInteriorDifference > interiors && interiors > 0)
 		{
-			Debug.LogError("combinedInteriorDifference > interiors for " + sceneName);
+			Debug.LogError("combinedInteriorDifference > interiors for " + locationName);
 		}
 
 		return interiors - combinedInteriorDifference;
@@ -216,7 +216,7 @@ public class MapLocation : IMapObject
 
 	public virtual ArrayList getAllQuestsInLocation()
 	{
-		ArrayList allQuestsInLocation = QuestList.getActiveQuestsWithObjectivesInScene(sceneName);
+		ArrayList allQuestsInLocation = QuestList.getActiveQuestsWithObjectivesInScene(locationName);
 
 		foreach (string adjacentSceneName in adjacentLocations)
 		{
@@ -231,9 +231,9 @@ public class MapLocation : IMapObject
 		return allQuestsInLocation;
 	}
 
-	public string getSceneName()
+	public string getLocationName()
 	{
-		return sceneName;
+		return locationName;
 	}
 	
 	public string getZoneKey()

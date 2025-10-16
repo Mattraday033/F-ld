@@ -394,7 +394,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 	{
 		dictionaryOfSegments = new Dictionary<Vector3Int, bool>();
 		ArrayList listOfPaths = new ArrayList();
-		Vector3Int playerCoords = PlayerMovement.getInstance().getMovementGridCoordsLocal();
+		Vector3Int playerCoords = PlayerMovement.getMovementGridCoords();
 		PathSegment firstPathSegment = new PathSegment(movementManager.grid.WorldToCell(transform.position));
 		dictionaryOfSegments.Add(firstPathSegment.coords, true);
 		PathToPlayer firstPathToPlayer = new PathToPlayer(firstPathSegment);

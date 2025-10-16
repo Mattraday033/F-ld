@@ -30,6 +30,8 @@ public class AreaManager : MonoBehaviour
 
     public static void changeArea(string newArea)
     {
+        Debug.LogError("newArea = " + newArea);
+
         locationName = newArea;
 
         instance.Awake();
@@ -76,9 +78,9 @@ public class AreaManager : MonoBehaviour
             knownLocationsInZone = new ArrayList();
         }
 
-        if (!knownLocationsInZone.Contains(mapObject.getSceneName()))
+        if (!knownLocationsInZone.Contains(mapObject.getLocationName()))
         {
-            knownLocationsInZone.Add(mapObject.getSceneName());
+            knownLocationsInZone.Add(mapObject.getLocationName());
         }
 
         State.allKnownMapData[mapObject.getZoneKey()] = knownLocationsInZone;

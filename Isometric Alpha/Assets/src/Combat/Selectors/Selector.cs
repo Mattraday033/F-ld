@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-// [System.Serializable]
+[System.Serializable]
 public class Selector : ScriptableObject, ICloneable
 {
 	private const bool shouldIncludeIllegalCoords = true;

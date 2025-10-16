@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
 
-// [System.Serializable]
+[System.Serializable]
 public class MonsterPackList: ICloneable
 {
 	public string sceneName;
@@ -99,7 +99,7 @@ public class MonsterPackList: ICloneable
 
 }
 
-// [System.Serializable]
+[System.Serializable]
 public struct MonsterPack : IJSONConvertable
 {
 

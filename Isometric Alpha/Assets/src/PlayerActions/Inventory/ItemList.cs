@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[System.Serializable]
+[System.Serializable]
 public struct ItemListID
 {
 	public const string listIndexElementName = "listIndex";

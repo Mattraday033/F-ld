@@ -5,7 +5,7 @@ using UnityEngine;
 using System;
 using Newtonsoft.Json;
 
-//[System.Serializable]
+[System.Serializable]
 public class Item : ICloneable, IJSONConvertable, IDescribable, ISortable, IDescribableInBlocks
 {
 	private ItemListID listID;

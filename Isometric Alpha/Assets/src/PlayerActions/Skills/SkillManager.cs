@@ -163,7 +163,7 @@ public class SkillManager
     /*
     private string getGridCellCoords(Vector2Int currentCoords)
     {
-        Vector3Int gridCellCoords = PlayerMovement.getInstance().getMovementGridCoordsLocal();
+        Vector3Int gridCellCoords = PlayerMovement.getMovementGridCoords();
 
         return "(" + ((currentCoords.x + gridCellCoords.x) - playerCunningCoords) + "," + ((currentCoords.y + gridCellCoords.y) - playerCunningCoords) + ")";
     }

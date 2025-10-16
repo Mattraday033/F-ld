@@ -953,7 +953,7 @@ public class DialogueManager : MonoBehaviour
 
                     PlayerMovement player = PlayerMovement.getInstance();
 
-                    Vector3Int newPlayerGridSquare = player.getMovementGridCoordsLocal() + gridSquareAdjustment;
+                    Vector3Int newPlayerGridSquare = PlayerMovement.getMovementGridCoords() + gridSquareAdjustment;
 
                     player.gameObject.transform.localPosition = player.convertGridCoordsToLocalPos(newPlayerGridSquare);
 

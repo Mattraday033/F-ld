@@ -12,7 +12,7 @@ public static class TestScript
         }
 
         // State.debugStopMonsterSpawning = true;
-        // State.debugDiscoverAllLocations = true;
+        State.debugDiscoverAllLocations = true;
         // State.debugRetreatAutoSucceed = true;
 
         // AffinityManager.addAffinity(200000);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-//[System.Serializable]
+[System.Serializable]
 public class Key: EssentialItem, IJSONConvertable
 {
 	public const string typeIconName = "KeyItem";

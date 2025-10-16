@@ -192,8 +192,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da9c36aa3229241488ba31d394c7daad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  neverUseBlocks: 0
+  neverAllowDecisionPanels: 0
+  addToScreenOnCreation: 0
+  handlesRelatedDescribables: 0
+  prebuiltBuilder: {fileID: 0}
+  builderType: 0
+  whiteList: 
+  additionalSlots: []
   collectionTabIndex: 0
   panelType: 1
+  formatType: 0
   descriptionPanelParent: {fileID: 3690555007693099624}
   decisionPanelParent: {fileID: 4037687853469856683}
   grid: {fileID: 6005758709957577854}
@@ -252,7 +261,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allStatsPanels: []
-  hasGeneratedTabs: 0
   alternateWayOfSettingDefaultState: 0
   tabCollections:
   - statTabs: 0
@@ -262,12 +270,13 @@ MonoBehaviour:
       grid: {fileID: 6005758709957577854}
       list: 8
       tabCollectionIndex: 0
+      usePartyMemberName: 0
       partyMemberName: 
   grids:
   - {fileID: 6005758709957577854}
+  currentTabCollection: 0
   descriptionPanelSlots:
   - {fileID: 4397102085792949117}
-  screenType: 0
   saveNameField: {fileID: 3663321465971817}
   newSaveInputPanel: {fileID: 5570539854505573528}
   saveButton: {fileID: 1244599659773969725}
@@ -1706,7 +1715,7 @@ PrefabInstance:
     - target: {fileID: 4417370709791670602, guid: c700b6769b786404ebd653bfa6decec9,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4417370709791670602, guid: c700b6769b786404ebd653bfa6decec9,
         type: 3}
@@ -1726,12 +1735,12 @@ PrefabInstance:
     - target: {fileID: 4417370709791670602, guid: c700b6769b786404ebd653bfa6decec9,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 761.1777
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4417370709791670602, guid: c700b6769b786404ebd653bfa6decec9,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 380.58884
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4417370709791670602, guid: c700b6769b786404ebd653bfa6decec9,
         type: 3}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-//[System.Serializable]
+[System.Serializable]
 public class SkillReplenishItem: UsableItem, IJSONConvertable
 {
 	public SkillReplenishItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth): base(listId, key, loreDescription, useDescription, "SkillReplenish", iconName, worth) 

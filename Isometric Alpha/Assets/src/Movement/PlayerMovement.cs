@@ -117,57 +117,7 @@ public class PlayerMovement : MonoBehaviour
 
 	void Start()
 	{
-        // if (TransitionManager.hasASourceTransition())
-        // {
-        // 	transform.position = translateTransitionDestinationToWorldPosition();
-
-        // 	if (playerSpriteRenderer != null && TransitionManager.hasASortingLayer())
-        // 	{
-        // 		playerSpriteRenderer.sortingLayerName = State.currentSourceTransitionInfo.sortingLayerName;
-        // 	}
-
-        // 	TransitionManager.resetCurrentSourceTransition();
-        // }
-        // else
-        // {
-        // 	loadingStartLocationFromTransition = SceneTransitionPosition.hasPositionToUse;
-
-
-        // 	if (loadingStartLocationFromTransition)
-        // 	{
-        // 		transform.position = SceneTransitionPosition.bankedPosition.oldPosition;
-
-        // 		if (SceneTransitionPosition.sortingLayer != null && SceneTransitionPosition.sortingLayer.Length > 0)
-        // 		{
-        // 			playerSpriteRenderer.sortingLayerName = SceneTransitionPosition.sortingLayer;
-        // 			SceneTransitionPosition.sortingLayer = null;
-        // 		}
-
-        // 		//if(SceneTransitionPosition.characterFacing != null) //commented out when removing CharacterFacing scriptable object and transitioning to soley
-        // 		//{													  //using State.playerFacing because this set the facing to something random
-        // 		//	State.playerFacing.setFacing(SceneTransitionPosition.characterFacing.getFacing());
-        // 		//}
-
-        // 	}
-        // 	else if (Flags.flags["newGame"])
-        // 	{
-        // 		useMapStartLocation = true;
-        // 	}
-        // 	else if (!useMapStartLocation && !loadingStartLocationFromTransition)
-        // 	{
-        // 		transform.localPosition = startingPosition.oldPosition;
-        // 	}
-        // 	else
-        // 	{
-        // 		useMapStartLocation = false;
-        // 	}
-        // }
-
-        // loadingStartLocationFromTransition = false;
-
         MovementManager.getInstance().addPlayerSprite(transform);
-
-		// transform.localPosition = MovementManager.getInstance().grid.GetCellCenterLocal(MovementManager.getInstance().grid.LocalToCell(transform.localPosition));
 
 		if (dialogueManager == null)
 		{
@@ -915,7 +865,7 @@ public class PlayerMovement : MonoBehaviour
 			runOrIdle = "Idle";
 		}
 
-		string newStateName = animationStatePrefix + runOrIdle + direction;
+        string newStateName = animationStatePrefix + runOrIdle + direction;
 
 		if (!animator.GetCurrentAnimatorStateInfo(animator.GetLayerIndex("Base Layer")).IsName(newStateName))
 		{
@@ -1266,7 +1216,7 @@ public class PlayerMovement : MonoBehaviour
                 // NewSceneTransition transition = Helpers.getCollision(transitionCollider, LayerAndTagManager.transitionLayerMask).transform.parent.GetComponent<NewSceneTransition>();
                 // TransitionManager.changeScene(transition.getTransitionInfo());
 
-                Transition transition = Helpers.getCollision(transitionCollider, LayerAndTagManager.transitionLayerMask).transform.GetComponent<TransitionSpace>().transition;
+                Transition transition = Helpers.getCollision(transitionCollider, LayerAndTagManager.transitionLayerMask).transform.GetComponent<TransitionSpace>().getTransition();
                 TransitionManager.changeScene(transition);
                 return true;
             }
@@ -1446,20 +1396,15 @@ public class PlayerMovement : MonoBehaviour
 		return MovementManager.getInstance().grid.GetCellCenterWorld(MovementManager.getInstance().grid.WorldToCell(transform.position) + (directionalModifierGrid) * multiplier) - new Vector3(0f, .2f, 0);
 	}
 
-	public Vector3Int getMovementGridCoordsLocal()
+	public static Vector3Int getMovementGridCoords()
 	{
-		return MovementManager.getInstance().grid.LocalToCell(transform.localPosition);
+		return MovementManager.getInstance().grid.LocalToCell(getTransform().localPosition);
 	}
 
     public Vector3 convertGridCoordsToLocalPos(Vector3Int gridSquareCoords)
     {
         return MovementManager.getInstance().grid.GetCellCenterLocal(gridSquareCoords);
     }
-    
-    // public Vector3 convertGridCoordsToWorldPos(Vector3Int gridSquareCoords)
-	// {
-	// 	return MovementManager.getInstance().grid.GetCellCenterWorld(gridSquareCoords);
-	// }
 
 	private void showFormulaToggleCheck()
 	{

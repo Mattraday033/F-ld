@@ -33,6 +33,8 @@ public static class TransitionSpawnInfoList
     {
         transitionSpawnInfoDict = new Dictionary<string, List<TransitionSpawnInfo>>();
 
+        #region Camp Interiors
+
         #region Slave Shack 
 
         list = new List<TransitionSpawnInfo>();
@@ -217,6 +219,10 @@ public static class TransitionSpawnInfoList
 
         #endregion
 
+        #endregion
+
+        #region Camp Exteriors
+
         #region NECamp
 
         list = new List<TransitionSpawnInfo>();
@@ -228,6 +234,8 @@ public static class TransitionSpawnInfoList
         list.Add(new TransitionSpawnInfo(AreaNameList.campNorthEast, AreaNameList.slaveShackSeven, new Vector3Int(3, -5), Facing.NorthWest, twoSpaceMultiplier));
 
         list.Add(new TransitionSpawnInfo(AreaNameList.campNorthEast, AreaNameList.campCenter, new Vector3Int(-17, 1), Facing.NorthEast, sizeThree, Axis.DescendingY));
+
+        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(-2, -1), Facing.SouthWest));
 
         transitionSpawnInfoDict.Add(AreaNameList.campNorthEast, list);
 
@@ -274,15 +282,15 @@ public static class TransitionSpawnInfoList
         list.Add(new TransitionSpawnInfoWithCorner(startingIndexOne, AreaNameList.campSouthEast, AreaNameList.slaveShackSix, new Vector3Int(10, 6), Facing.SouthWest, twoSpaceMultiplier));
         list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, AreaNameList.campSouthEast, AreaNameList.slaveShackSix, new Vector3Int(16, 4), Facing.SouthEast, twoSpaceMultiplier, sizeTwo, Axis.DescendingX));
 
+        list.Add(new TransitionSpawnInfo(AreaNameList.campSouthEast, AreaNameList.messHall, new Vector3Int(14, -6), Facing.NorthWest, twoSpaceMultiplier));
+        list.Add(new TransitionSpawnInfoWithCorner(startingIndexOne, AreaNameList.campSouthEast, AreaNameList.messHall, new Vector3Int(8, -5), Facing.NorthWest, twoSpaceMultiplier));
+        list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, AreaNameList.campSouthEast, AreaNameList.messHall, new Vector3Int(5, -9), Facing.SouthWest, twoSpaceMultiplier, sizeTwo, Axis.DescendingY));
 
-        list.Add(new TransitionSpawnInfo(AreaNameList.campSouthEast, AreaNameList.messHall, new Vector3Int(6, 14), Facing.SouthEast));
-        list.Add(new TransitionSpawnInfoWithCorner(startingIndexOne, AreaNameList.campSouthEast, AreaNameList.messHall, new Vector3Int(0, 14), Facing.SouthEast));
-        list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, AreaNameList.campSouthEast, AreaNameList.messHall, new Vector3Int(-3, 9), Facing.NorthEast, sizeTwo, Axis.DescendingY));
-
-
-        list.Add(new TransitionSpawnInfo(AreaNameList.campSouthEast, AreaNameList.campCenter, new Vector3Int(18, 1), Facing.SouthWest, sizeThree, Axis.DescendingY));
+        list.Add(new TransitionSpawnInfo(AreaNameList.campSouthEast, AreaNameList.campCenter, new Vector3Int(19, 1), Facing.SouthWest, sizeThree, Axis.DescendingY));
 
         list.Add(new TransitionSpawnInfo(AreaNameList.campSouthEast, AreaNameList.campMineEntrance, new Vector3Int(6, 22), Facing.SouthEast, sizeThree, Axis.DescendingX));
+
+        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(8, 2), Facing.SouthEast));
 
         transitionSpawnInfoDict.Add(AreaNameList.campSouthEast, list);
 
@@ -327,6 +335,415 @@ public static class TransitionSpawnInfoList
 
         #endregion
 
+        #endregion
+
+        #region Manse + Pit
+
+        #region Manse-1F
+
+        #region Manse-1F-1a
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section1a, AreaNameList.campManse, new Vector3Int(1, -9), Facing.NorthWest, sizeTwo, Axis.DescendingX));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section1a, AreaNameList.manseFirstFloor + AreaNameList.section1b, new Vector3Int(-5, 0), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section1a, AreaNameList.manseSecondFloor + AreaNameList.section1a, new Vector3Int(-1, 3), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+        list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, AreaNameList.manseFirstFloor + AreaNameList.section1a, AreaNameList.manseSecondFloor + AreaNameList.section1a, new Vector3Int(2, 3), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section1a, AreaNameList.manseFirstFloor + AreaNameList.section3a, new Vector3Int(6, 0), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseFirstFloor + AreaNameList.section1a, list);
+
+        #endregion
+        #region Manse-1F-1b
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section1b, AreaNameList.manseFirstFloor + AreaNameList.section1a, new Vector3Int(8, 1), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section1b, AreaNameList.manseFirstFloor + AreaNameList.diningRoom, new Vector3Int(-14, 1), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section1b, AreaNameList.manseFirstFloor + AreaNameList.section1c, new Vector3Int(-8, -2), Facing.NorthWest, sizeTwo, Axis.DescendingX));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseFirstFloor + AreaNameList.section1b, list);
+
+        #endregion
+        #region Manse-1F-1c
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section1c, AreaNameList.manseFirstFloor + AreaNameList.section1b, new Vector3Int(8, 2), Facing.SouthEast, sizeTwo, Axis.DescendingX));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section1c, AreaNameList.manseFirstFloor + AreaNameList.kitchens, new Vector3Int(3, -10), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseFirstFloor + AreaNameList.section1c, list);
+
+        #endregion
+        #region Manse-1F-Kitchens
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.kitchens, AreaNameList.campManse, new Vector3Int(-2, -7), Facing.NorthWest, sizeTwo, Axis.DescendingX));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.kitchens, AreaNameList.manseFirstFloor + AreaNameList.section1c, new Vector3Int(2, -1), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.kitchens, AreaNameList.manseFirstFloor + AreaNameList.diningRoom, new Vector3Int(-2, 6), Facing.SouthEast, sizeTwo, Axis.DescendingX));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.kitchens, AreaNameList.manseSecondFloor + AreaNameList.stockroom, new Vector3Int(1, 4), Facing.SouthWest));
+
+        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(0, 0), Facing.SouthWest));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseFirstFloor + AreaNameList.kitchens, list);
+
+        #endregion
+        #region Manse-1F-Dining Room
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.diningRoom, AreaNameList.manseFirstFloor + AreaNameList.section2a, new Vector3Int(-1, 7), Facing.SouthEast, twoSpaceMultiplier, sizeTwo, Axis.DescendingX));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.diningRoom, AreaNameList.manseFirstFloor + AreaNameList.section1b, new Vector3Int(3, -1), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.diningRoom, AreaNameList.manseFirstFloor + AreaNameList.kitchens, new Vector3Int(-1, -9), Facing.NorthWest, sizeTwo, Axis.DescendingX));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseFirstFloor + AreaNameList.diningRoom, list);
+
+        #endregion
+        #region Manse-1F-2a
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section2a, AreaNameList.manseFirstFloor + AreaNameList.diningRoom, new Vector3Int(2, -4), Facing.NorthWest, sizeTwo, Axis.DescendingX));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section2a, AreaNameList.manseFirstFloor + AreaNameList.section2b, new Vector3Int(9, 6), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseFirstFloor + AreaNameList.section2a, list);
+
+        #endregion
+        #region Manse-1F-2b
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section2b, AreaNameList.manseFirstFloor + AreaNameList.section2a, new Vector3Int(-9, 2), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section2b, AreaNameList.manseFirstFloor + AreaNameList.section3c, new Vector3Int(14, 2), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section2b, AreaNameList.manseFirstFloor + AreaNameList.stairsToPit, new Vector3Int(3, 4), Facing.SouthEast, sizeTwo, Axis.DescendingX));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section2b, AreaNameList.manseFirstFloor + AreaNameList.section2c, new Vector3Int(3, -1), Facing.NorthWest, sizeTwo, Axis.DescendingX));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section2b, AreaNameList.pit + AreaNameList.section1b, new Vector3Int(-4, -6), Facing.SouthWest));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseFirstFloor + AreaNameList.section2b, list);
+
+        #endregion
+        #region Manse-1F-2c
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section2c, AreaNameList.manseFirstFloor + AreaNameList.section2b, new Vector3Int(0, 4), Facing.SouthEast, sizeTwo, Axis.DescendingX));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseFirstFloor + AreaNameList.section2c, list);
+
+        #endregion
+        #region Manse-1F-StairsToPit
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.stairsToPit, AreaNameList.manseFirstFloor + AreaNameList.section2b, new Vector3Int(6, 1), Facing.NorthWest, sizeTwo, Axis.DescendingX));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.stairsToPit, AreaNameList.pit + AreaNameList.section1a, new Vector3Int(1, 2), Facing.NorthWest, sizeTwo, Axis.DescendingX));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.stairsToPit, AreaNameList.pit + AreaNameList.section1b, new Vector3Int(-4, 1), Facing.NorthWest, sizeTwo, Axis.DescendingX));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseFirstFloor + AreaNameList.stairsToPit, list);
+
+        #endregion
+        #region Manse-1F-3a
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section3a, AreaNameList.manseFirstFloor + AreaNameList.section1a, new Vector3Int(-5, 0), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+        
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section3a, AreaNameList.manseSecondFloor + AreaNameList.office, new Vector3Int(11, -1), Facing.SouthEast, sizeTwo, Axis.DescendingX));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section3a, AreaNameList.manseFirstFloor + AreaNameList.section3b, new Vector3Int(6, 5), Facing.SouthEast, sizeTwo, Axis.DescendingX));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseFirstFloor + AreaNameList.section3a, list);
+
+        #endregion
+        #region Manse-1F-3b
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section3b, AreaNameList.manseFirstFloor + AreaNameList.section3a, new Vector3Int(5, -5), Facing.NorthWest, sizeTwo, Axis.DescendingX));
+        
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section3b, AreaNameList.manseFirstFloor + AreaNameList.section3d, new Vector3Int(1, 1), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section3b, AreaNameList.manseFirstFloor + AreaNameList.section3c, new Vector3Int(-1, 10), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseFirstFloor + AreaNameList.section3b, list);
+
+        #endregion
+        #region Manse-1F-3c
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section3c, AreaNameList.manseFirstFloor + AreaNameList.section2b, new Vector3Int(0, 6), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+        
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section3c, AreaNameList.manseFirstFloor + AreaNameList.section3e, new Vector3Int(3, -1), Facing.NorthWest, sizeTwo, Axis.DescendingX));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section3c, AreaNameList.manseFirstFloor + AreaNameList.section3b, new Vector3Int(9, 6), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section3c, AreaNameList.manseSecondFloor + AreaNameList.section2a, new Vector3Int(8,8), Facing.SouthEast, sizeTwo, Axis.DescendingX));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseFirstFloor + AreaNameList.section3c, list);
+
+        #endregion
+        #region Manse-1F-3d
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section3d, AreaNameList.manseFirstFloor + AreaNameList.section3b, new Vector3Int(4, 4), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+        
+        transitionSpawnInfoDict.Add(AreaNameList.manseFirstFloor + AreaNameList.section3d, list);
+
+        #endregion
+        #region Manse-1F-3e
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseFirstFloor + AreaNameList.section3e, AreaNameList.manseFirstFloor + AreaNameList.section3c, new Vector3Int(4, 3), Facing.SouthEast, sizeTwo, Axis.DescendingX));
+        
+        transitionSpawnInfoDict.Add(AreaNameList.manseFirstFloor + AreaNameList.section3e, list);
+
+        #endregion
+
+        #endregion
+
+        #region Manse-2F
+
+        #region Manse-2F-1a
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section1a, AreaNameList.manseSecondFloor + AreaNameList.section2a, new Vector3Int(4, 8), Facing.SouthEast, sizeTwo, Axis.DescendingX));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section1a, AreaNameList.manseSecondFloor + AreaNameList.section1b, new Vector3Int(10, 5), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+        
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section1a, AreaNameList.manseSecondFloor + AreaNameList.office, new Vector3Int(10, -2), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section1a, AreaNameList.manseFirstFloor + AreaNameList.section1a, new Vector3Int(-1, 3), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+        list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, AreaNameList.manseSecondFloor + AreaNameList.section1a, AreaNameList.manseFirstFloor + AreaNameList.section1a, new Vector3Int(6, 3), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section1a, AreaNameList.manseSecondFloor + AreaNameList.section1c, new Vector3Int(-5, -2), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+        
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section1a, AreaNameList.manseSecondFloor + AreaNameList.section3c, new Vector3Int(-5, 6), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+                                
+        transitionSpawnInfoDict.Add(AreaNameList.manseSecondFloor + AreaNameList.section1a, list);
+
+        #endregion
+        #region Manse-2F-1b
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section1b, AreaNameList.manseSecondFloor + AreaNameList.section1a, new Vector3Int(-2, -1), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseSecondFloor + AreaNameList.section1b, list);
+
+        #endregion
+        #region Manse-2F-Office
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.office, AreaNameList.manseSecondFloor + AreaNameList.section1a, new Vector3Int(-9, -1), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+        
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.office, AreaNameList.manseFirstFloor + AreaNameList.section3a, new Vector3Int(7, -2), Facing.NorthWest, sizeTwo, Axis.DescendingX));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseSecondFloor + AreaNameList.office, list);
+
+        #endregion
+        #region Manse-2F-1c
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section1c, AreaNameList.manseSecondFloor + AreaNameList.section1a, new Vector3Int(-1, 0), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseSecondFloor + AreaNameList.section1c, list);
+
+        #endregion
+        #region Manse-2F-2a
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section2a, AreaNameList.manseFirstFloor + AreaNameList.section3c, new Vector3Int(8, 9), Facing.SouthEast, sizeTwo, Axis.DescendingX));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section2a, AreaNameList.manseSecondFloor + AreaNameList.section2c, new Vector3Int(10, 7), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+        
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section2a, AreaNameList.manseSecondFloor + AreaNameList.section2d, new Vector3Int(10, -2), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section2a, AreaNameList.manseSecondFloor + AreaNameList.section2b, new Vector3Int(-6, 7), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+        
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section2a, AreaNameList.manseSecondFloor + AreaNameList.section1a, new Vector3Int(1, -5), Facing.NorthWest, sizeTwo, Axis.DescendingX));
+                                
+        transitionSpawnInfoDict.Add(AreaNameList.manseSecondFloor + AreaNameList.section2a, list);
+
+        #endregion
+        #region Manse-2F-2b
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section2b, AreaNameList.manseSecondFloor + AreaNameList.section2a, new Vector3Int(6, 10), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section2b, AreaNameList.manseSecondFloor + AreaNameList.section3a, new Vector3Int(-3, 10), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+        
+        transitionSpawnInfoDict.Add(AreaNameList.manseSecondFloor + AreaNameList.section2b, list);
+
+        #endregion
+        #region Manse-2F-2c
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section2c, AreaNameList.manseSecondFloor + AreaNameList.section2a, new Vector3Int(-4, -1), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+                                
+        transitionSpawnInfoDict.Add(AreaNameList.manseSecondFloor + AreaNameList.section2c, list);
+
+        #endregion
+        #region Manse-2F-2d
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section2d, AreaNameList.manseSecondFloor + AreaNameList.section2a, new Vector3Int(-6, -4), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+                                
+        transitionSpawnInfoDict.Add(AreaNameList.manseSecondFloor + AreaNameList.section2d, list);
+
+        #endregion
+        #region Manse-2F-3a
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section3a, AreaNameList.manseFirstFloor + AreaNameList.section2b, new Vector3Int(9, 10), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section3a, AreaNameList.manseSecondFloor + AreaNameList.section3b, new Vector3Int(-12, 10), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+        
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section3a, AreaNameList.manseSecondFloor + AreaNameList.section3c, new Vector3Int(-8, -5), Facing.NorthWest, sizeTwo, Axis.DescendingX));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseSecondFloor + AreaNameList.section3a, list);
+
+        #endregion
+        #region Manse-2F-3b
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section3b, AreaNameList.manseFirstFloor + AreaNameList.section3a, new Vector3Int(1, 4), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section3b, AreaNameList.manseSecondFloor + AreaNameList.stockroom, new Vector3Int(-4, -7), Facing.NorthWest, sizeTwo, Axis.DescendingX));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseSecondFloor + AreaNameList.section3b, list);
+
+        #endregion
+        #region Manse-2F-3c
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section3c, AreaNameList.manseSecondFloor + AreaNameList.section3a, new Vector3Int(-4, 1), Facing.SouthEast, sizeTwo, Axis.DescendingX));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section3c, AreaNameList.manseSecondFloor + AreaNameList.section1a, new Vector3Int(8, -1), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.section3c, AreaNameList.manseSecondFloor + AreaNameList.stockroom, new Vector3Int(-11, -1), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseSecondFloor + AreaNameList.section3c, list);
+
+        #endregion
+        #region Manse-2F-Stockroom
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.stockroom, AreaNameList.manseSecondFloor + AreaNameList.section3b, new Vector3Int(-2, 8), Facing.SouthEast, sizeTwo, Axis.DescendingX));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.stockroom, AreaNameList.manseSecondFloor + AreaNameList.section3c, new Vector3Int(2, 4), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+        
+        list.Add(new TransitionSpawnInfo(AreaNameList.manseSecondFloor + AreaNameList.stockroom, AreaNameList.manseSecondFloor + AreaNameList.kitchens, new Vector3Int(0, -2), Facing.SouthWest));
+
+        transitionSpawnInfoDict.Add(AreaNameList.manseSecondFloor + AreaNameList.stockroom, list);
+
+        #endregion
+        #endregion
+
+        #region Pit
+
+        #region Pit-1a
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.pit + AreaNameList.section1a, AreaNameList.manseFirstFloor + AreaNameList.stairsToPit, new Vector3Int(-1, 3), Facing.SouthEast, sizeTwo, Axis.DescendingX));
+
+        transitionSpawnInfoDict.Add(AreaNameList.pit + AreaNameList.section1a, list);
+
+        #endregion
+        #region Pit-1b
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.pit + AreaNameList.section1b, AreaNameList.manseFirstFloor + AreaNameList.stairsToPit, new Vector3Int(-2, 3), Facing.SouthEast, sizeTwo, Axis.DescendingX));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.pit + AreaNameList.section1b, AreaNameList.pit + AreaNameList.section2a, new Vector3Int(2, -4), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.pit + AreaNameList.section1b, AreaNameList.manseFirstFloor + AreaNameList.section2b, new Vector3Int(-7, -4), Facing.NorthEast));
+
+        transitionSpawnInfoDict.Add(AreaNameList.pit + AreaNameList.section1b, list);
+
+        #endregion
+        #region Pit-2a
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.pit + AreaNameList.section2a, AreaNameList.pit + AreaNameList.section1b, new Vector3Int(-6, -1), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.pit + AreaNameList.section2a, AreaNameList.pit + AreaNameList.section2b, new Vector3Int(8, -5), Facing.SouthWest, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.pit + AreaNameList.section2a, AreaNameList.pit + AreaNameList.section2c, new Vector3Int(6, 6), Facing.SouthEast, sizeTwo, Axis.DescendingX));
+
+        transitionSpawnInfoDict.Add(AreaNameList.pit + AreaNameList.section2a, list);
+
+        #endregion
+        #region Pit-2b
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.pit + AreaNameList.section2b, AreaNameList.pit + AreaNameList.section2a, new Vector3Int(-8, -3), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.pit + AreaNameList.section2b, AreaNameList.pit + AreaNameList.section2d, new Vector3Int(-3, -1), Facing.SouthEast));
+
+        transitionSpawnInfoDict.Add(AreaNameList.pit + AreaNameList.section2b, list);
+
+        #endregion
+        #region Pit-2c
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.pit + AreaNameList.section2c, AreaNameList.pit + AreaNameList.section2a, new Vector3Int(4, -18), Facing.NorthWest, sizeTwo, Axis.DescendingX));
+
+        transitionSpawnInfoDict.Add(AreaNameList.pit + AreaNameList.section2c, list);
+
+        #endregion
+        #region Pit-2d
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(AreaNameList.pit + AreaNameList.section2d, AreaNameList.pit + AreaNameList.section2b, new Vector3Int(-6, -6), Facing.NorthWest));
+
+        transitionSpawnInfoDict.Add(AreaNameList.pit + AreaNameList.section2d, list);
+
+        #endregion
+        #endregion
+
+        #endregion
+
+        #region Mine Levels 1-3
+
         #region MineLvl_1-1a
 
         list = new List<TransitionSpawnInfo>();
@@ -334,6 +751,8 @@ public static class TransitionSpawnInfoList
         list.Add(new TransitionSpawnInfo(AreaNameList.mineLvl1 + AreaNameList.section1a, AreaNameList.campMineEntrance, new Vector3Int(6, 0), Facing.NorthWest, sizeFive, Axis.DescendingX));
 
         list.Add(new TransitionSpawnInfo(AreaNameList.mineLvl1 + AreaNameList.section1a, AreaNameList.mineLvl1 + AreaNameList.section1b, new Vector3Int(5, 14), Facing.SouthEast, sizeThree, Axis.DescendingX));
+
+        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(4, 5), Facing.NorthWest));
 
         transitionSpawnInfoDict.Add(AreaNameList.mineLvl1 + AreaNameList.section1a, list);
 
@@ -370,6 +789,8 @@ public static class TransitionSpawnInfoList
         list.Add(new TransitionSpawnInfo(AreaNameList.mineLvl2 + AreaNameList.section1a, AreaNameList.mineLvl2 + AreaNameList.section6, new Vector3Int(8, 7), Facing.SouthEast));
 
         list.Add(new TransitionSpawnInfo(AreaNameList.mineLvl2 + AreaNameList.section1a, AreaNameList.mineLvl2 + AreaNameList.section1b, new Vector3Int(2, 18), Facing.SouthEast, sizeThree, Axis.DescendingX));
+
+        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(1, -1), Facing.NorthWest));
 
         transitionSpawnInfoDict.Add(AreaNameList.mineLvl2 + AreaNameList.section1a, list);
 
@@ -548,6 +969,7 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(AreaNameList.mineLvl3 + AreaNameList.section1a, AreaNameList.mineLvl3 + AreaNameList.section4a, new Vector3Int(-8, 21), Facing.SouthEast, sizeTwo, Axis.DescendingX));
 
+        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(5, 12), Facing.SouthWest));
 
         transitionSpawnInfoDict.Add(AreaNameList.mineLvl3 + AreaNameList.section1a, list);
 
@@ -579,7 +1001,7 @@ public static class TransitionSpawnInfoList
         list.Add(new TransitionSpawnInfo(AreaNameList.mineLvl3 + AreaNameList.section2b, AreaNameList.mineLvl3 + AreaNameList.section2a, new Vector3Int(4, -8), Facing.NorthWest, sizeTwo, Axis.DescendingX));
 
         list.Add(new TransitionSpawnInfo(AreaNameList.mineLvl3 + AreaNameList.section2b, AreaNameList.mineLvl3 + AreaNameList.section3a, new Vector3Int(3, 12), Facing.SouthEast, sizeTwo, Axis.DescendingX));
-        
+
         list.Add(new TransitionSpawnInfo(AreaNameList.mineLvl3 + AreaNameList.section2b, AreaNameList.mineLvl3 + AreaNameList.section3b, new Vector3Int(-7, 2), Facing.NorthEast, sizeTwo, Axis.DescendingY));
 
         transitionSpawnInfoDict.Add(AreaNameList.mineLvl3 + AreaNameList.section2b, list);
@@ -596,6 +1018,8 @@ public static class TransitionSpawnInfoList
         list.Add(new TransitionSpawnInfo(AreaNameList.mineLvl3 + AreaNameList.section3a, AreaNameList.mineLvl3 + AreaNameList.section3b, new Vector3Int(3, 1), Facing.NorthWest, sizeTwo, Axis.DescendingX));
 
         list.Add(new TransitionSpawnInfo(AreaNameList.mineLvl3 + AreaNameList.section3a, AreaNameList.mineLvl3 + AreaNameList.section7, new Vector3Int(-20, 7), Facing.NorthEast, sizeTwo, Axis.DescendingY));
+
+        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(3, 5), Facing.SouthWest));
 
         transitionSpawnInfoDict.Add(AreaNameList.mineLvl3 + AreaNameList.section3a, list);
 
@@ -643,6 +1067,8 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(AreaNameList.mineLvl3 + AreaNameList.section5, AreaNameList.mineLvl3 + AreaNameList.section6a, new Vector3Int(-13, 2), Facing.NorthEast, sizeTwo, Axis.DescendingY));
 
+        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(-7, 2), Facing.SouthWest));
+
         transitionSpawnInfoDict.Add(AreaNameList.mineLvl3 + AreaNameList.section5, list);
 
         #endregion
@@ -675,6 +1101,10 @@ public static class TransitionSpawnInfoList
         transitionSpawnInfoDict.Add(AreaNameList.mineLvl3 + AreaNameList.section7, list);
 
         #endregion
+    
+        #endregion
+    
+    
     }
 
 
@@ -754,6 +1184,16 @@ public class TransitionSpawnInfo
         return 0;
     }
 
+    public virtual bool fastTravelCapable()
+    {
+        return false;
+    }
+
+    public virtual int getOutputMultiplier()
+    {
+        return outputMultiplier;
+    }
+
     public List<Transition> getTransitions()
     {
         List<Transition> list = new List<Transition>();
@@ -771,7 +1211,7 @@ public class TransitionSpawnInfo
                 currentCell.y -= index;
             }
 
-            list.Add(new Transition(currentArea, destinationArea, currentCell, index + getStartIndex(), playerSpawnDirection, outputMultiplier));
+            list.Add(new Transition(currentArea, destinationArea, currentCell, index + getStartIndex(), playerSpawnDirection, fastTravelCapable(), getOutputMultiplier()));
         }
 
         return list;
@@ -811,6 +1251,33 @@ public class TransitionSpawnInfoWithCorner : TransitionSpawnInfo
     public override int getStartIndex()
     {
         return startIndex;
+    }
+
+}
+
+public class FastTravelTransitionSpawnInfo : TransitionSpawnInfo
+{
+
+    public FastTravelTransitionSpawnInfo(Vector3Int startCell, Facing playerSpawnDirection) :
+    base(null, null, startCell, playerSpawnDirection)
+    {
+
+    }
+
+    // public FastTravelTransitionSpawnInfo(string destinationArea) :
+    // base(AreaManager.locationName, destinationArea, MovementManager.getPlayerGridCell(), State.playerFacing.getFacing())
+    // {
+
+    // }
+
+    public override bool fastTravelCapable()
+    {
+        return true;
+    }
+
+    public override int getOutputMultiplier()
+    {
+        return 0;
     }
 
 }

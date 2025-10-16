@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41190d23839383540ba47fc6cb67db0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collider: {fileID: 4332130710266179945}
 --- !u!1839735485 &7719840440346060827
 Tilemap:
   m_ObjectHideFlags: 0

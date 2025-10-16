@@ -50,13 +50,18 @@ public class TransitionManager : MonoBehaviour
         currentTransitions.Add(transition);
     }
 
+    public static void fastTravel(string targetLocationName)
+	{
+        changeScene(new Transition(AreaManager.locationName, targetLocationName));
+	}
+
     private IEnumerator waitForBlackScreenThenTransition(Transition transition)
     {
         while (fadeToBlackManager.currentlyFadingToBlack())
         {
             yield return null;
         }
-        
+
         SaveHandler.autosave(transition);
 
         AreaManager.changeArea(transition.destinationAreaName);
@@ -64,26 +69,35 @@ public class TransitionManager : MonoBehaviour
         currentTransitions = new List<Transition>();
 
         OnTransitionUpdate.Invoke();
-        
-        movePlayerToTargetTransition(transition);
+
+        moveToMatchingTransition(transition);
 
         currentCoroutine = null;
     }
 
-    public void movePlayerToTargetTransition(Transition currentTransition)
+    private void moveToMatchingTransition(Transition currentTransition)
     {
         foreach (Transition destinationTransition in currentTransitions)
         {
-            if (currentTransition.sharesHash(destinationTransition))
+            if(currentTransition.fastTravelCapable() && !destinationTransition.fastTravelCapable())
             {
-                PlayerMovement.getTransform().position = AreaManager.getMasterGrid().GetCellCenterWorld(destinationTransition.getOutPutCellCoords());
-                State.playerFacing.setFacing(destinationTransition.playerSpawnDirection);
-                MovementManager.instance.addPlayerSprite(PlayerMovement.getTransform());
+                continue;
+            } else if((currentTransition.fastTravelCapable() && destinationTransition.fastTravelCapable()) ||
+                        currentTransition.sharesHash(destinationTransition))
+            {
+                moveToTargetTransition(destinationTransition);
                 return;
             }
         }
 
-        Debug.LogError("No destinationTransition found");
+        moveToTargetTransition(currentTransitions[0]);
+    }
+
+    private void moveToTargetTransition(Transition destinationTransition)
+    {
+        PlayerMovement.getTransform().position = AreaManager.getMasterGrid().GetCellCenterWorld(destinationTransition.getOutPutCellCoords());
+        State.playerFacing.setFacing(destinationTransition.playerSpawnDirection);
+        MovementManager.instance.addPlayerSprite(PlayerMovement.getTransform());
     }
 
     private static void makeAutosave(Vector3 autosavePos)
@@ -178,45 +192,6 @@ public class TransitionManager : MonoBehaviour
 
 		changeScene(sourceTransitionInfo);
 	}
-
-	public void fastTravel(TransitionInfo sourceTransitionInfo)
-	{
-		State.currentSourceTransitionInfo = sourceTransitionInfo.clone();
-
-		Flags.allowPartyTrainSpawning();
-
-		try
-		{
-			// SaveHandler.autosave(PlayerMovement.getTransform().position);
-		}
-		catch (Exception e)
-		{
-			Debug.LogError("An autosave was attempted but failed");
-			Debug.LogError(e.StackTrace);
-		}
-
-		if (fadeToBlackOnTransition && !FadeToBlackManager.isBlack() && !fadeToBlackManager.currentlyFadingToBlack())
-		{
-			fadeToBlackManager.setAndStartFadeToBlack();
-		}
-
-		StartCoroutine(waitForBlackScreenThenTransition());
-	}
-	
-	private IEnumerator waitForBlackScreenThenTransition()
-    {
-        while (!FadeToBlackManager.isBlack())
-        {
-            yield return null;
-        }
-		
-		StepCountScriptManager.reset();
-		resetRelevantDataOnSceneTransitionToExactPosition();
-
-		SceneChange.changeSceneToOverworld();
-		
-		yield break;
-    }
 	
 	public Vector3 getCurrentDestinationWorldPosition()
 	{

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//[System.Serializable]
+[System.Serializable]
 public class DeathStep: QuestStep {
 
 	public string deadName;

@@ -5,7 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System;
 
-//[System.Serializable]
+[System.Serializable]
 public class EquippableItem : Item, IJSONConvertable, IStatBoostSource 
 {
     public const string offHandSlotText = "Off Hand";

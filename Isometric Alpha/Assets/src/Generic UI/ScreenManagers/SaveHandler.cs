@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using System.Linq;
 
-// [System.Serializable]
+[System.Serializable]
 public class SaveHandler : ScreenManager, IEscapable
 {
 	private static Dictionary<string, SaveBlueprint> saveGameList;

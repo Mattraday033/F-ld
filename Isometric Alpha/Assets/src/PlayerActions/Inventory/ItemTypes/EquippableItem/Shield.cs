@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
 
-//[System.Serializable]
+[System.Serializable]
 public class Shield : Armor
 {
 	public Shield(ItemListID listID, string key, string loreDescription, int armorRating, int slotID) :

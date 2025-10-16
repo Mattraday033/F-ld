@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-//[System.Serializable]
+[System.Serializable]
 public class EssentialItem : Item, IJSONConvertable
 {
     private bool canBeRemoved = false;

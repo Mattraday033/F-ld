@@ -75,11 +75,11 @@ public class TransitionInfo : ICloneable
 		return this.MemberwiseClone();
 	}
 
-	public string getTargetSceneName()
+	public string getTargetLocationName()
 	{
 		if (transitionHash != null)
 		{
-			// Debug.LogError("getTargetSceneName() is returning: " + transitionHash.targetSceneName);
+			// Debug.LogError("getTargetLocationName() is returning: " + transitionHash.targetSceneName);
 			return transitionHash.targetSceneName;
 		}
 		else

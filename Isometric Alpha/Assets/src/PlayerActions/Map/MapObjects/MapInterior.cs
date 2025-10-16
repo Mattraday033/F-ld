@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//[System.Serializable]
+[System.Serializable]
 public class MapInterior : MapLocation
 {
     private string exteriorSceneName;
@@ -48,7 +48,7 @@ public class MapInterior : MapLocation
 
 	public override ArrayList getAllQuestsInLocation()
 	{
-		return QuestList.getActiveQuestsWithObjectivesInScene(sceneName);
+		return QuestList.getActiveQuestsWithObjectivesInScene(locationName);
 	}
 
 }

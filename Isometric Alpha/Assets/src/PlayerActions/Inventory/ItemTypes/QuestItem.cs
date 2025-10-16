@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-//[System.Serializable]
+[System.Serializable]
 public class QuestItem: EssentialItem,IJSONConvertable
 {
 	public const string typeIconName = "QuestItem";

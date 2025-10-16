@@ -7,14 +7,14 @@ using UnityEngine;
 using Newtonsoft.Json;
 using UnityEngine.SceneManagement;
 
-//[System.Serializable]
+[System.Serializable]
 public struct InventoryWrapper
 {
     public string key;
     public string[] inventory;
 }
 
-//[System.Serializable]
+[System.Serializable]
 public struct StatsWrapper
 {
     public string key;
@@ -74,14 +74,14 @@ public interface IJSONConvertable
     //public static T extractFromJson(string json);
 }
 
-//[System.Serializable]
+[System.Serializable]
 public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 {
 	private const string dividerCharacter = "~";
 
 	public int saveNumber;
 
-	public string currentScene;
+	public string currentLocation;
 	public float[] playerPosition;
 
 	public bool terrainHidden;
@@ -156,7 +156,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		saveBlueprint.currentMetFlags = Helpers.arrayListToStrings(MetFlagManager.metNames);
 		saveBlueprint.currentChestFlags = GateAndChestManager.getSaveData();
 		saveBlueprint.currentActivatedTrapsAndButtons = Helpers.arrayListToStrings(TrapAndButtonStateManager.allActivatedTrapKeys);
-		saveBlueprint.currentScene = AreaManager.locationName;
+		saveBlueprint.currentLocation = AreaManager.locationName;
 		saveBlueprint.saveName = saveName;
 
 		// saveBlueprint.playerFormationPosition = State.formation.findLocationOfStats(State.playerStats);
@@ -199,7 +199,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		this.saveName = GetFromJson.getElementFromJson(SaveDefaultValues.badSaveName, nameof(saveName), jsonDynamic, SaveDefaultValues.badSaveName);
 		this.saveNumber = GetFromJson.getElementFromJson(this.saveName, nameof(saveNumber), jsonDynamic, SaveDefaultValues.badSaveNumber);
 
-		this.currentScene = GetFromJson.getElementFromJson(this.saveName, nameof(currentScene), jsonDynamic, SaveDefaultValues.defaultSceneName);
+		this.currentLocation = GetFromJson.getElementFromJson(this.saveName, nameof(currentLocation), jsonDynamic, SaveDefaultValues.defaultSceneName);
 		this.playerPosition = GetFromJson.getElementFromJson(this.saveName, nameof(playerPosition), jsonDynamic, SaveDefaultValues.defaultPlayerPosition);
 		this.terrainHidden = GetFromJson.getElementFromJson(this.saveName, nameof(terrainHidden), jsonDynamic, SaveDefaultValues.defaultBoolFalse);
 
@@ -393,7 +393,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 			i++;
 		}
 
-		MonsterPackList newMonsterPackList = new MonsterPackList(currentScene, monsterPacks);
+		MonsterPackList newMonsterPackList = new MonsterPackList(currentLocation, monsterPacks);
 		//newMonsterPackList.shouldReset = false;
 
 		return newMonsterPackList;
@@ -679,7 +679,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 
 	private string getLocationUIDisplayName()
 	{
-		return MapObjectList.getMapObject(currentScene).getNotificationDisplayName();
+		return MapObjectList.getMapObject(currentLocation).getNotificationDisplayName();
 	}
 
 	//public const string autoSave1Name = "Autosave 1";

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//[System.Serializable]
+[System.Serializable]
 public class MapZone : IMapObject
 {
 	public const int worldMapCoordsIndex = 0;
@@ -69,7 +69,7 @@ public class MapZone : IMapObject
 		return new ZoneButtonInfo[]{};
 	}
 	
-	public string getSceneName()
+	public string getLocationName()
 	{
 		return zoneKey;
 	}

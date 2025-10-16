@@ -161,7 +161,7 @@ public class MapManager : MonoBehaviour
 		
 		mapObjectManager.setLabel(mapObject.getMapUIDisplayName());
 		
-		mapObjectManager.sceneName = mapObject.getSceneName();
+		mapObjectManager.sceneName = mapObject.getLocationName();
 		
 		if(mapObject.getIsFastTravelDestination())
 		{
@@ -254,7 +254,7 @@ public class MapManager : MonoBehaviour
 				currentLocationObject = mapLocationObject;
 				break;
 				
-			} else if(mapObjectManager != null && mapObjectManager.sceneName.Equals(currentMapObject.getSceneName()))
+			} else if(mapObjectManager != null && mapObjectManager.sceneName.Equals(currentMapObject.getLocationName()))
 			{
 				currentLocationObject = mapLocationObject;
 				break;
@@ -316,9 +316,9 @@ public class MapManager : MonoBehaviour
 			knownLocationsInZone = new ArrayList();
 		}			
 		
-		if(!knownLocationsInZone.Contains(mapObject.getSceneName()))
+		if(!knownLocationsInZone.Contains(mapObject.getLocationName()))
 		{
-			knownLocationsInZone.Add(mapObject.getSceneName());
+			knownLocationsInZone.Add(mapObject.getLocationName());
 		}
 		
 		State.allKnownMapData[mapObject.getZoneKey()] = knownLocationsInZone;
@@ -369,7 +369,7 @@ public class MapManager : MonoBehaviour
 		
 		if(isInThisZone)
 		{
-			setCurrentLocationLabel(MapObjectList.getMapObject(currentMapObject.getSceneName()).getMapUIDisplayName());
+			setCurrentLocationLabel(MapObjectList.getMapObject(currentMapObject.getLocationName()).getMapUIDisplayName());
 		} else
 		{
 			setCurrentLocationLabel("");	
