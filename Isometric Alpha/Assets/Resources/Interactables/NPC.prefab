@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: -4968793318184311776}
   - component: {fileID: 517585897779863325}
   - component: {fileID: -5299874797357560549}
-  - component: {fileID: 3318654217433158181}
   - component: {fileID: 6576346719778344862}
   - component: {fileID: 8761656224251614378}
   - component: {fileID: 3876896030663513859}
@@ -61,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7cfb8b82b7044802b656cb356f2a075, type: 2}
+  - {fileID: 2100000, guid: 2994f963bb69eb245bc96baa79169765, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -161,21 +160,6 @@ MonoBehaviour:
   nameTag: {fileID: 0}
   scripts: []
   targetCanvas: {fileID: 0}
---- !u!114 &3318654217433158181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5555899077454664655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a72247d5aa84112962198463a3c864, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
-  _spriteRenderer: {fileID: -4968793318184311776}
-  _outlineSize: 2
 --- !u!114 &6576346719778344862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,9 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5bfca2556fa7a04aa1bc59ef2040de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fightable: 1
   ignoreDeathFlags: 0
-  enemyPackInfo: []
   deadNameList: []
   isRestNPC: 0
   isCompanion: 0

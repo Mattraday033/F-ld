@@ -58,7 +58,7 @@ public class MovementManager : MonoBehaviour
 
     public static Grid getGrid()
     {
-        return instance.grid;
+        return AreaManager.getMasterGrid();
     }
 
 	private void Awake()
@@ -92,10 +92,10 @@ public class MovementManager : MonoBehaviour
 			return false;
 		}
 
-		return (allSpritesToMove[spriteID].localPosition.x < startingPositions[spriteID].x && allSpritesToMove[spriteID].localPosition.x > endingPositions[spriteID].x) ||
-				(allSpritesToMove[spriteID].localPosition.x > startingPositions[spriteID].x && allSpritesToMove[spriteID].localPosition.x < endingPositions[spriteID].x) ||
-				(allSpritesToMove[spriteID].localPosition.y < startingPositions[spriteID].y && allSpritesToMove[spriteID].localPosition.y > endingPositions[spriteID].y) ||
-				(allSpritesToMove[spriteID].localPosition.y > startingPositions[spriteID].y && allSpritesToMove[spriteID].localPosition.y < endingPositions[spriteID].y) ||
+		return (allSpritesToMove[spriteID].position.x < startingPositions[spriteID].x && allSpritesToMove[spriteID].position.x > endingPositions[spriteID].x) ||
+				(allSpritesToMove[spriteID].position.x > startingPositions[spriteID].x && allSpritesToMove[spriteID].position.x < endingPositions[spriteID].x) ||
+				(allSpritesToMove[spriteID].position.y < startingPositions[spriteID].y && allSpritesToMove[spriteID].position.y > endingPositions[spriteID].y) ||
+				(allSpritesToMove[spriteID].position.y > startingPositions[spriteID].y && allSpritesToMove[spriteID].position.y < endingPositions[spriteID].y) ||
 				 isMoving.Contains(true);
 
 	}
@@ -130,9 +130,9 @@ public class MovementManager : MonoBehaviour
 				continue;
 			}
 
-			Vector3 newLocalPosition = sprite.localPosition;
-			newLocalPosition.z = 0;
-			sprite.localPosition = newLocalPosition;
+			Vector3 newposition = sprite.position;
+			newposition.z = 0;
+			sprite.position = newposition;
 		}
 	}
 
@@ -154,14 +154,14 @@ public class MovementManager : MonoBehaviour
 				continue;
 			}
 
-			Vector3Int coords = grid.LocalToCell(allSpritesToMove[i].localPosition);
+			Vector3Int coords = grid.WorldToCell(allSpritesToMove[i].position);
 
 			if (!isMoving[i])
 			{
 				directionMod[i] = determineDirection(i, coords);
 
-				startingPositions[i] = allSpritesToMove[i].localPosition;
-				endingPositions[i] = grid.GetCellCenterLocal(coords + directionMod[i]);
+				startingPositions[i] = allSpritesToMove[i].position;
+				endingPositions[i] = grid.GetCellCenterWorld(coords + directionMod[i]);
 			}
 		}
 
@@ -201,7 +201,7 @@ public class MovementManager : MonoBehaviour
 				if (!playerDirection.Equals(Vector3Int.zero))
 				{
 					PartyMemberMovement.showAllPartyMembers();
-					movePartyMembers(0, grid.CellToLocal(getFirstPartyMemberEndingPosition()));
+					movePartyMembers(0, grid.CellToWorld(getFirstPartyMemberEndingPosition()));
 				}
 			}
 		}
@@ -267,7 +267,7 @@ public class MovementManager : MonoBehaviour
 		if (spriteIndex > 0)
 		{
 			if (allSpritesToMove[spriteIndex].GetComponent<EnemyMovement>().moveableObject &&
-				  (grid.LocalToCell(endingPositions[0]) == coords))
+				  (grid.WorldToCell(endingPositions[0]) == coords))
 			{
 				return directionMod[playerSpriteIndex];
 			}
@@ -288,37 +288,49 @@ public class MovementManager : MonoBehaviour
 		}
 	}
 
-	private void setEnemyFacing(Vector3Int directionMod, EnemyMovement enemyMovement)
-	{
-		if (directionMod.Equals(Vector3Int.zero))
-		{
-			return;
-		}
+    public static bool colliderInCell(Vector3Int cellCoords, LayerMask layerMask)
+    {
+        Vector3 worldPosition = AreaManager.getMasterGrid().CellToWorld(cellCoords);
 
-		if (directionMod.Equals(distance1TileNorthEastGrid))
-		{
-			enemyMovement.setEnemyFacing(Facing.NorthEast);
+        return Physics2D.OverlapCircle(worldPosition, .05f, layerMask);
+    }
 
-		}
-		else if (directionMod.Equals(distance1TileSouthEastGrid))
-		{
-			enemyMovement.setEnemyFacing(Facing.SouthEast);
+    public static Vector3 getColliderInCellPosition(Vector3Int cellCoords)
+    {
+        return AreaManager.getMasterGrid().CellToWorld(cellCoords);
+    }
 
-		}
-		else if (directionMod.Equals(distance1TileSouthWestGrid))
-		{
-			enemyMovement.setEnemyFacing(Facing.SouthWest);
+    private void setEnemyFacing(Vector3Int directionMod, EnemyMovement enemyMovement)
+    {
+        if (directionMod.Equals(Vector3Int.zero))
+        {
+            return;
+        }
 
-		}
-		else if (directionMod.Equals(distance1TileNorthWestGrid))
-		{
-			enemyMovement.setEnemyFacing(Facing.NorthWest);
-		}
-		else
-		{
-			throw new IOException("Illegal directionMod: " + directionMod.ToString());
-		}
-	}
+        if (directionMod.Equals(distance1TileNorthEastGrid))
+        {
+            enemyMovement.setEnemyFacing(Facing.NorthEast);
+
+        }
+        else if (directionMod.Equals(distance1TileSouthEastGrid))
+        {
+            enemyMovement.setEnemyFacing(Facing.SouthEast);
+
+        }
+        else if (directionMod.Equals(distance1TileSouthWestGrid))
+        {
+            enemyMovement.setEnemyFacing(Facing.SouthWest);
+
+        }
+        else if (directionMod.Equals(distance1TileNorthWestGrid))
+        {
+            enemyMovement.setEnemyFacing(Facing.NorthWest);
+        }
+        else
+        {
+            throw new IOException("Illegal directionMod: " + directionMod.ToString());
+        }
+    }
 
     public void addPlayerSprite(Transform player)
     {
@@ -378,7 +390,7 @@ public class MovementManager : MonoBehaviour
 
 		while (elapsedTime <= timeToMove)
 		{
-			allSpritesToMove[spriteID].localPosition = Vector3.Lerp(startingPositions[spriteID], endingPositions[spriteID], (elapsedTime / timeToMove));
+			allSpritesToMove[spriteID].position = Vector3.Lerp(startingPositions[spriteID], endingPositions[spriteID], (elapsedTime / timeToMove));
 			elapsedTime += Time.deltaTime;
 			//Helpers.updateGameObjectPosition(allSpritesToMove[spriteID]);
 			yield return null;
@@ -386,8 +398,8 @@ public class MovementManager : MonoBehaviour
 
 		if (allSpritesToMove[spriteID] != null)
 		{
-			allSpritesToMove[spriteID].localPosition = endingPositions[spriteID];
-			startingPositions[spriteID] = allSpritesToMove[spriteID].localPosition;
+			allSpritesToMove[spriteID].position = endingPositions[spriteID];
+			startingPositions[spriteID] = allSpritesToMove[spriteID].position;
 		}
 
 		//Helpers.updateColliderPosition(allSpritesToMove[spriteID]);
@@ -413,7 +425,7 @@ public class MovementManager : MonoBehaviour
 
 		while (elapsedTime <= timeToMove)
 		{
-			spriteToMove.localPosition = Vector3.Lerp(startingPosition, endingPosition, (elapsedTime / timeToMove));
+			spriteToMove.position = Vector3.Lerp(startingPosition, endingPosition, (elapsedTime / timeToMove));
 			elapsedTime += Time.deltaTime;
 			yield return null;
 		}
@@ -422,7 +434,7 @@ public class MovementManager : MonoBehaviour
 
 		if (spriteToMove != null)
 		{
-			spriteToMove.localPosition = endingPosition;
+			spriteToMove.position = endingPosition;
 		}
 
 		evaluateAllButtonScripts();
@@ -446,8 +458,8 @@ public class MovementManager : MonoBehaviour
 
 			if (allSpritesToMove[i] != null)
 			{
-				startingPositions[i] = allSpritesToMove[i].localPosition;
-				endingPositions[i] = allSpritesToMove[i].localPosition;
+				startingPositions[i] = allSpritesToMove[i].position;
+				endingPositions[i] = allSpritesToMove[i].position;
 			}
 
 			isMoving[i] = false;
@@ -474,7 +486,7 @@ public class MovementManager : MonoBehaviour
 				continue;
 			}
 
-			Vector3Int currentMonstersCellCoords = grid.LocalToCell(new Vector3(endingPositions[i].x, endingPositions[i].y, 0f));
+			Vector3Int currentMonstersCellCoords = grid.WorldToCell(new Vector3(endingPositions[i].x, endingPositions[i].y, 0f));
 
 			for (int j = (i - 1); j >= 0; j--)
 			{
@@ -483,7 +495,7 @@ public class MovementManager : MonoBehaviour
 					continue;
 				}
 
-				Vector3Int previousMonstersCellCoords = grid.LocalToCell(new Vector3(endingPositions[j].x, endingPositions[j].y, 0f));
+				Vector3Int previousMonstersCellCoords = grid.WorldToCell(new Vector3(endingPositions[j].x, endingPositions[j].y, 0f));
 
 				if (currentMonstersCellCoords.Equals(previousMonstersCellCoords) &&
 					(endingPositions[i].x != startingPositions[i].x &&
@@ -498,7 +510,7 @@ public class MovementManager : MonoBehaviour
 
 	private Vector3Int getFirstPartyMemberEndingPosition()
 	{
-		return grid.LocalToCell(startingPositions[playerSpriteIndex]);
+		return grid.WorldToCell(startingPositions[playerSpriteIndex]);
 	}
 
 	public void movePartyMembers(int partyMemberIndex, Vector3 endingPosition)
@@ -512,7 +524,7 @@ public class MovementManager : MonoBehaviour
 		if (partyMemberIndex < PartyMemberMovement.partyMemberTrain.Length &&
 			partyMemberIndex < (PartyMemberMovement.stepCounter))
 		{
-			Vector3 startingPosition = PartyMemberMovement.partyMemberTrain[partyMemberIndex].localPosition;
+			Vector3 startingPosition = PartyMemberMovement.partyMemberTrain[partyMemberIndex].position;
 
 			StartCoroutine(moveSprite(PartyMemberMovement.partyMemberTrain[partyMemberIndex], startingPosition, endingPosition));
 
@@ -560,8 +572,8 @@ public class MovementManager : MonoBehaviour
 		first.z = 0f;
 		second.z = 0f;
 
-		Vector3Int firstCellPosition = getCellLocal(first);
-		Vector3Int secondCellPosition = getCellLocal(second);
+		Vector3Int firstCellPosition = getCellWorld(first);
+		Vector3Int secondCellPosition = getCellWorld(second);
 
 		int xDistance = firstCellPosition.x - secondCellPosition.x;
 		int yDistance = firstCellPosition.y - secondCellPosition.y;
@@ -579,185 +591,172 @@ public class MovementManager : MonoBehaviour
 		return false;
 	}
 
-	public static Vector3Int getPlayerGridCell()
-	{
-		return PlayerMovement.getMovementGridCoords();
-	}
+    public static PositionWrapper[] getAllMonsterLocations()
+    {
+        PositionWrapper[] positions = new PositionWrapper[startingPositions.Length - 1];
+        
+        for(int positionIndex = 0; positionIndex < positions.Length; positionIndex++)
+        {
+            positions[positionIndex] = new PositionWrapper(startingPositions[positionIndex + 1]);
+        }
 
-	public static SurpriseState determineSurprisedParty()
-	{
-		MovementManager movementManager = MovementManager.getInstance();
-		Grid grid = MovementManager.getInstance().grid;
+        return positions;
+    }
 
-		Vector3Int playerCell = grid.WorldToCell(new Vector3(State.playerPosition.x, State.playerPosition.y, 0f));
-		Vector3Int enemyCell = grid.LocalToCell(new Vector3(State.enemyPosition.x, State.enemyPosition.y, 0f));
 
-		PlayerDirectionFromEnemy playerDirectionFromEnemy;
-		SurpriseState surpriseState;
 
-		//Debug.LogError("playerCell = " + playerCell);
-		//Debug.LogError("enemyCell = " + enemyCell);
+    public static SurpriseState determineSurprisedParty(Vector3 playerPosition, Vector3 enemyPosition, Facing enemyFacing)
+    {
+        Grid grid = AreaManager.getMasterGrid();
 
-		if (playerCell.x > enemyCell.x && playerCell.y == enemyCell.y)
-		{
-			playerDirectionFromEnemy = PlayerDirectionFromEnemy.NorthEast;
+        Vector3Int playerCell = grid.WorldToCell(new Vector3(playerPosition.x, playerPosition.y, 0f));
+        Vector3Int enemyCell = grid.WorldToCell(new Vector3(enemyPosition.x, enemyPosition.y, 0f));
 
-		}
-		else if (playerCell.x == enemyCell.x && playerCell.y > enemyCell.y)
-		{
-			playerDirectionFromEnemy = PlayerDirectionFromEnemy.NorthWest;
+        PlayerDirectionFromEnemy playerDirectionFromEnemy;
+        SurpriseState surpriseState;
 
-		}
-		else if (playerCell.x == enemyCell.x && playerCell.y < enemyCell.y)
-		{
-			playerDirectionFromEnemy = PlayerDirectionFromEnemy.SouthEast;
-		}
-		else if (playerCell.x < enemyCell.x && playerCell.y == enemyCell.y)
-		{
-			playerDirectionFromEnemy = PlayerDirectionFromEnemy.SouthWest;
-		}
-		else
-		{
-			Debug.LogError("Could not determine PlayerDirectionFromEnemy:");
-			Debug.LogError("playerCell = " + playerCell);
-			Debug.LogError("enemyCell = " + enemyCell);
+        //Debug.LogError("playerCell = " + playerCell);
+        //Debug.LogError("enemyCell = " + enemyCell);
 
-			return SurpriseState.NoOneSurprised;
-		}
+        if (playerCell.x > enemyCell.x && playerCell.y == enemyCell.y)
+        {
+            playerDirectionFromEnemy = PlayerDirectionFromEnemy.NorthEast;
 
-		/*
-		Debug.LogError("playerDirectionFromEnemy = " + Helpers.enumToString(playerDirectionFromEnemy));
+        }
+        else if (playerCell.x == enemyCell.x && playerCell.y > enemyCell.y)
+        {
+            playerDirectionFromEnemy = PlayerDirectionFromEnemy.NorthWest;
 
-		Debug.LogError("Player is facing " + Helpers.enumToString(State.playerFacing.getFacing()));
-		Debug.LogError("Enemy is facing " + Helpers.enumToString(State.enemyFacing.getFacing()));
+        }
+        else if (playerCell.x == enemyCell.x && playerCell.y < enemyCell.y)
+        {
+            playerDirectionFromEnemy = PlayerDirectionFromEnemy.SouthEast;
+        }
+        else if (playerCell.x < enemyCell.x && playerCell.y == enemyCell.y)
+        {
+            playerDirectionFromEnemy = PlayerDirectionFromEnemy.SouthWest;
+        }
+        else
+        {
+            Debug.LogError("Could not determine PlayerDirectionFromEnemy:");
+            Debug.LogError("playerCell = " + playerCell);
+            Debug.LogError("enemyCell = " + enemyCell);
 
-		Debug.LogError("State.playerFacing.getFacing() == Facing.NorthWest = " + State.playerFacing.getFacing() == Facing.NorthWest);
-		Debug.LogError("State.playerFacing.getFacing() == Facing.SouthWest = " + State.playerFacing.getFacing() == Facing.SouthWest);
-		Debug.LogError("State.playerFacing.getFacing() == Facing.NorthEast = " + State.playerFacing.getFacing() == Facing.NorthEast);
-		Debug.LogError("State.playerFacing.getFacing() == Facing.SouthEast = " + State.playerFacing.getFacing() == Facing.SouthEast);
+            return SurpriseState.NoOneSurprised;
+        }
 
-		Debug.LogError("State.enemyFacing.getFacing() == Facing.NorthWest = " + State.enemyFacing.getFacing() == Facing.NorthWest);
-		Debug.LogError("State.enemyFacing.getFacing() == Facing.SouthWest = " + State.enemyFacing.getFacing() == Facing.SouthWest);
-		Debug.LogError("State.enemyFacing.getFacing() == Facing.NorthEast = " + State.enemyFacing.getFacing() == Facing.NorthEast);
-		Debug.LogError("State.enemyFacing.getFacing() == Facing.SouthEast = " + State.enemyFacing.getFacing() == Facing.SouthEast);
-		*/
-		if (playerDirectionFromEnemy == PlayerDirectionFromEnemy.NorthEast)
-		{
-			if ((State.playerFacing.getFacing() == Facing.SouthWest && State.enemyFacing.getFacing() == Facing.SouthWest) ||
-			   (State.playerFacing.getFacing() == Facing.SouthWest && State.enemyFacing.getFacing() == Facing.SouthEast) ||
-			   (State.playerFacing.getFacing() == Facing.SouthWest && State.enemyFacing.getFacing() == Facing.NorthWest) ||
-			   (State.playerFacing.getFacing() == Facing.NorthWest && State.enemyFacing.getFacing() == Facing.SouthWest) ||
-			   (State.playerFacing.getFacing() == Facing.SouthEast && State.enemyFacing.getFacing() == Facing.SouthWest))
-			{
-				surpriseState = SurpriseState.EnemySurprised;
+        if (playerDirectionFromEnemy == PlayerDirectionFromEnemy.NorthEast)
+        {
+            if ((State.playerFacing.getFacing() == Facing.SouthWest && enemyFacing == Facing.SouthWest) ||
+               (State.playerFacing.getFacing() == Facing.SouthWest && enemyFacing == Facing.SouthEast) ||
+               (State.playerFacing.getFacing() == Facing.SouthWest && enemyFacing == Facing.NorthWest) ||
+               (State.playerFacing.getFacing() == Facing.NorthWest && enemyFacing == Facing.SouthWest) ||
+               (State.playerFacing.getFacing() == Facing.SouthEast && enemyFacing == Facing.SouthWest))
+            {
+                surpriseState = SurpriseState.EnemySurprised;
 
-			}
-			else if ((State.playerFacing.getFacing() == Facing.NorthEast && State.enemyFacing.getFacing() == Facing.NorthEast) ||
-					  (State.playerFacing.getFacing() == Facing.NorthEast && State.enemyFacing.getFacing() == Facing.NorthWest) ||
-					  (State.playerFacing.getFacing() == Facing.NorthEast && State.enemyFacing.getFacing() == Facing.SouthWest) ||
-					  (State.playerFacing.getFacing() == Facing.NorthWest && State.enemyFacing.getFacing() == Facing.NorthEast) ||
-					  (State.playerFacing.getFacing() == Facing.SouthEast && State.enemyFacing.getFacing() == Facing.NorthEast))
-			{
-				surpriseState = SurpriseState.PlayerSurprised;
+            }
+            else if ((State.playerFacing.getFacing() == Facing.NorthEast && enemyFacing == Facing.NorthEast) ||
+                      (State.playerFacing.getFacing() == Facing.NorthEast && enemyFacing == Facing.NorthWest) ||
+                      (State.playerFacing.getFacing() == Facing.NorthEast && enemyFacing == Facing.SouthWest) ||
+                      (State.playerFacing.getFacing() == Facing.NorthWest && enemyFacing == Facing.NorthEast) ||
+                      (State.playerFacing.getFacing() == Facing.SouthEast && enemyFacing == Facing.NorthEast))
+            {
+                surpriseState = SurpriseState.PlayerSurprised;
 
-			}
-			else
-			{
-				surpriseState = SurpriseState.NoOneSurprised;
-			}
-		}
-		else if (playerDirectionFromEnemy == PlayerDirectionFromEnemy.NorthWest)
-		{
-			if ((State.playerFacing.getFacing() == Facing.SouthEast && State.enemyFacing.getFacing() == Facing.SouthEast) ||
-				(State.playerFacing.getFacing() == Facing.SouthEast && State.enemyFacing.getFacing() == Facing.NorthEast) ||
-				(State.playerFacing.getFacing() == Facing.SouthEast && State.enemyFacing.getFacing() == Facing.SouthWest) ||
-				(State.playerFacing.getFacing() == Facing.NorthEast && State.enemyFacing.getFacing() == Facing.SouthEast) ||
-				(State.playerFacing.getFacing() == Facing.SouthWest && State.enemyFacing.getFacing() == Facing.SouthEast))
-			{
-				surpriseState = SurpriseState.EnemySurprised;
+            }
+            else
+            {
+                surpriseState = SurpriseState.NoOneSurprised;
+            }
+        }
+        else if (playerDirectionFromEnemy == PlayerDirectionFromEnemy.NorthWest)
+        {
+            if ((State.playerFacing.getFacing() == Facing.SouthEast && enemyFacing == Facing.SouthEast) ||
+                (State.playerFacing.getFacing() == Facing.SouthEast && enemyFacing == Facing.NorthEast) ||
+                (State.playerFacing.getFacing() == Facing.SouthEast && enemyFacing == Facing.SouthWest) ||
+                (State.playerFacing.getFacing() == Facing.NorthEast && enemyFacing == Facing.SouthEast) ||
+                (State.playerFacing.getFacing() == Facing.SouthWest && enemyFacing == Facing.SouthEast))
+            {
+                surpriseState = SurpriseState.EnemySurprised;
 
-			}
-			else if ((State.playerFacing.getFacing() == Facing.NorthWest && State.enemyFacing.getFacing() == Facing.NorthWest) ||
-					 (State.playerFacing.getFacing() == Facing.NorthWest && State.enemyFacing.getFacing() == Facing.NorthEast) ||
-					 (State.playerFacing.getFacing() == Facing.NorthWest && State.enemyFacing.getFacing() == Facing.SouthWest) ||
-					 (State.playerFacing.getFacing() == Facing.NorthEast && State.enemyFacing.getFacing() == Facing.NorthWest) ||
-					 (State.playerFacing.getFacing() == Facing.SouthWest && State.enemyFacing.getFacing() == Facing.NorthWest))
-			{
-				surpriseState = SurpriseState.PlayerSurprised;
-			}
-			else
-			{
-				surpriseState = SurpriseState.NoOneSurprised;
-			}
-		}
-		else if (playerDirectionFromEnemy == PlayerDirectionFromEnemy.SouthWest)
-		{
-			if ((State.playerFacing.getFacing() == Facing.NorthEast && State.enemyFacing.getFacing() == Facing.NorthEast) ||
-				(State.playerFacing.getFacing() == Facing.NorthEast && State.enemyFacing.getFacing() == Facing.NorthWest) ||
-				(State.playerFacing.getFacing() == Facing.NorthEast && State.enemyFacing.getFacing() == Facing.SouthEast) ||
-				(State.playerFacing.getFacing() == Facing.NorthWest && State.enemyFacing.getFacing() == Facing.NorthEast) ||
-				(State.playerFacing.getFacing() == Facing.SouthEast && State.enemyFacing.getFacing() == Facing.NorthEast))
-			{
-				surpriseState = SurpriseState.EnemySurprised;
+            }
+            else if ((State.playerFacing.getFacing() == Facing.NorthWest && enemyFacing == Facing.NorthWest) ||
+                     (State.playerFacing.getFacing() == Facing.NorthWest && enemyFacing == Facing.NorthEast) ||
+                     (State.playerFacing.getFacing() == Facing.NorthWest && enemyFacing == Facing.SouthWest) ||
+                     (State.playerFacing.getFacing() == Facing.NorthEast && enemyFacing == Facing.NorthWest) ||
+                     (State.playerFacing.getFacing() == Facing.SouthWest && enemyFacing == Facing.NorthWest))
+            {
+                surpriseState = SurpriseState.PlayerSurprised;
+            }
+            else
+            {
+                surpriseState = SurpriseState.NoOneSurprised;
+            }
+        }
+        else if (playerDirectionFromEnemy == PlayerDirectionFromEnemy.SouthWest)
+        {
+            if ((State.playerFacing.getFacing() == Facing.NorthEast && enemyFacing == Facing.NorthEast) ||
+                (State.playerFacing.getFacing() == Facing.NorthEast && enemyFacing == Facing.NorthWest) ||
+                (State.playerFacing.getFacing() == Facing.NorthEast && enemyFacing == Facing.SouthEast) ||
+                (State.playerFacing.getFacing() == Facing.NorthWest && enemyFacing == Facing.NorthEast) ||
+                (State.playerFacing.getFacing() == Facing.SouthEast && enemyFacing == Facing.NorthEast))
+            {
+                surpriseState = SurpriseState.EnemySurprised;
 
-			}
-			else if ((State.playerFacing.getFacing() == Facing.SouthWest && State.enemyFacing.getFacing() == Facing.SouthWest) ||
-					 (State.playerFacing.getFacing() == Facing.SouthWest && State.enemyFacing.getFacing() == Facing.NorthWest) ||
-					 (State.playerFacing.getFacing() == Facing.SouthWest && State.enemyFacing.getFacing() == Facing.SouthEast) ||
-					 (State.playerFacing.getFacing() == Facing.NorthWest && State.enemyFacing.getFacing() == Facing.SouthWest) ||
-					 (State.playerFacing.getFacing() == Facing.SouthEast && State.enemyFacing.getFacing() == Facing.SouthWest))
-			{
-				surpriseState = SurpriseState.PlayerSurprised;
+            }
+            else if ((State.playerFacing.getFacing() == Facing.SouthWest && enemyFacing == Facing.SouthWest) ||
+                     (State.playerFacing.getFacing() == Facing.SouthWest && enemyFacing == Facing.NorthWest) ||
+                     (State.playerFacing.getFacing() == Facing.SouthWest && enemyFacing == Facing.SouthEast) ||
+                     (State.playerFacing.getFacing() == Facing.NorthWest && enemyFacing == Facing.SouthWest) ||
+                     (State.playerFacing.getFacing() == Facing.SouthEast && enemyFacing == Facing.SouthWest))
+            {
+                surpriseState = SurpriseState.PlayerSurprised;
 
-			}
-			else
-			{
-				surpriseState = SurpriseState.NoOneSurprised;
-			}
-		}
-		else if (playerDirectionFromEnemy == PlayerDirectionFromEnemy.SouthEast)
-		{
-			if ((State.playerFacing.getFacing() == Facing.NorthWest && State.enemyFacing.getFacing() == Facing.NorthWest) ||
-				(State.playerFacing.getFacing() == Facing.NorthWest && State.enemyFacing.getFacing() == Facing.NorthEast) ||
-				(State.playerFacing.getFacing() == Facing.NorthWest && State.enemyFacing.getFacing() == Facing.SouthWest) ||
-				(State.playerFacing.getFacing() == Facing.NorthEast && State.enemyFacing.getFacing() == Facing.NorthWest) ||
-				(State.playerFacing.getFacing() == Facing.SouthWest && State.enemyFacing.getFacing() == Facing.NorthWest))
-			{
-				surpriseState = SurpriseState.EnemySurprised;
+            }
+            else
+            {
+                surpriseState = SurpriseState.NoOneSurprised;
+            }
+        }
+        else if (playerDirectionFromEnemy == PlayerDirectionFromEnemy.SouthEast)
+        {
+            if ((State.playerFacing.getFacing() == Facing.NorthWest && enemyFacing == Facing.NorthWest) ||
+                (State.playerFacing.getFacing() == Facing.NorthWest && enemyFacing == Facing.NorthEast) ||
+                (State.playerFacing.getFacing() == Facing.NorthWest && enemyFacing == Facing.SouthWest) ||
+                (State.playerFacing.getFacing() == Facing.NorthEast && enemyFacing == Facing.NorthWest) ||
+                (State.playerFacing.getFacing() == Facing.SouthWest && enemyFacing == Facing.NorthWest))
+            {
+                surpriseState = SurpriseState.EnemySurprised;
 
-			}
-			else if ((State.playerFacing.getFacing() == Facing.SouthEast && State.enemyFacing.getFacing() == Facing.SouthEast) ||
-					 (State.playerFacing.getFacing() == Facing.SouthEast && State.enemyFacing.getFacing() == Facing.NorthEast) ||
-					 (State.playerFacing.getFacing() == Facing.SouthEast && State.enemyFacing.getFacing() == Facing.SouthWest) ||
-					 (State.playerFacing.getFacing() == Facing.NorthEast && State.enemyFacing.getFacing() == Facing.SouthEast) ||
-					 (State.playerFacing.getFacing() == Facing.SouthWest && State.enemyFacing.getFacing() == Facing.SouthEast))
-			{
-				surpriseState = SurpriseState.PlayerSurprised;
+            }
+            else if ((State.playerFacing.getFacing() == Facing.SouthEast && enemyFacing == Facing.SouthEast) ||
+                     (State.playerFacing.getFacing() == Facing.SouthEast && enemyFacing == Facing.NorthEast) ||
+                     (State.playerFacing.getFacing() == Facing.SouthEast && enemyFacing == Facing.SouthWest) ||
+                     (State.playerFacing.getFacing() == Facing.NorthEast && enemyFacing == Facing.SouthEast) ||
+                     (State.playerFacing.getFacing() == Facing.SouthWest && enemyFacing == Facing.SouthEast))
+            {
+                surpriseState = SurpriseState.PlayerSurprised;
 
-			}
-			else
-			{
-				surpriseState = SurpriseState.NoOneSurprised;
-			}
-		}
-		else
-		{
-			throw new IOException("Unable to determine who is surprised.");
-		}
+            }
+            else
+            {
+                surpriseState = SurpriseState.NoOneSurprised;
+            }
+        }
+        else
+        {
+            throw new IOException("Unable to determine who is surprised.");
+        }
 
-		//Debug.LogError("surpriseState = " + Helpers.enumToString(surpriseState));
+        //Debug.LogError("surpriseState = " + Helpers.enumToString(surpriseState));
 
-		return surpriseState;
-	}
+        return surpriseState;
+    }
 
 	public static Vector3Int getCellWorld(Vector3 position)
 	{
 		return getInstance().grid.WorldToCell(position);
-	}
-
-	public static Vector3Int getCellLocal(Vector3 localPosition)
-	{
-		return getInstance().grid.LocalToCell(localPosition);
 	}
 
 	public static List<Vector3Int> getAllCurrentSpriteCells()
@@ -768,7 +767,7 @@ public class MovementManager : MonoBehaviour
 		{
 			if(allSpritesToMove[i] != null)
 			{
-				currentSpriteCells.Add(instance.grid.LocalToCell(endingPositions[i]));
+				currentSpriteCells.Add(instance.grid.WorldToCell(endingPositions[i]));
 			}
 		}
 		

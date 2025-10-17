@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
 public class EvolutionaryEnemyStats : EnemyStats
 {
 	private const bool willEvolveOrDevolve = true;
@@ -13,21 +12,21 @@ public class EvolutionaryEnemyStats : EnemyStats
 	//[SerializeField]
 	private EnemyStats devolutionEnemyType;
 
-	public EvolutionaryEnemyStats(GameObject combatSprite, string combatSpriteName, string name, int armor, int tHP): 
-	base(combatSprite, combatSpriteName, name, armor, tHP)
+	public EvolutionaryEnemyStats(string name, int armor, int tHP): 
+	base(name, armor, tHP)
 	{
 		
 	}
 
-	public EvolutionaryEnemyStats(GameObject combatSprite, string combatSpriteName, string name, int armor, int tHP, string evolutionEnemyType): 
-	base(combatSprite, combatSpriteName, name, armor, tHP)
+	public EvolutionaryEnemyStats(string name, int armor, int tHP, string evolutionEnemyType): 
+	base(name, armor, tHP)
 	{
 		this.evolutionEnemyType = Resources.Load<EnemyStats>(evolutionEnemyType);
 		this.devolutionEnemyType = null;
 	}
 	
-	public EvolutionaryEnemyStats(GameObject combatSprite, string combatSpriteName, string name, int armor, int tHP, string evolutionEnemyType, string devolutionEnemyType): 
-	base(combatSprite, combatSpriteName, name, armor, tHP)
+	public EvolutionaryEnemyStats(string name, int armor, int tHP, string evolutionEnemyType, string devolutionEnemyType): 
+	base(name, armor, tHP)
 	{
 		this.evolutionEnemyType = Resources.Load<EnemyStats>(evolutionEnemyType);
 		this.devolutionEnemyType = Resources.Load<EnemyStats>(devolutionEnemyType);

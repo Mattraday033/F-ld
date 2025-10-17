@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu] //info about a pack of enemies on the overworld, such as how many of them there are and of what type. Stored in State
 public class EnemyInfo : ScriptableObject
 {
 

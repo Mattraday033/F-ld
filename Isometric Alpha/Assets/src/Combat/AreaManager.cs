@@ -19,6 +19,7 @@ public class AreaManager : MonoBehaviour
     public Transform playerParent;
     public Transform npcParent;
     public Transform transitionParent;
+    public Transform monsterParent;
     #endregion
 
     public QuestStepActivationScript[] scripts;
@@ -30,8 +31,6 @@ public class AreaManager : MonoBehaviour
 
     public static void changeArea(string newArea)
     {
-        Debug.LogError("newArea = " + newArea);
-
         locationName = newArea;
 
         instance.Awake();
@@ -114,6 +113,11 @@ public class AreaManager : MonoBehaviour
     public static Transform getTransitionParent()
     {
         return instance.transitionParent;
+    }
+
+    public static Transform getMonsterParent()
+    {
+        return instance.monsterParent;
     }
 }
 

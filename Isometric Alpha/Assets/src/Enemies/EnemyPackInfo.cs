@@ -4,164 +4,146 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+public struct EnemyAmount
+{
+    public int amount;
+    public EnemyStats enemyStats;
+
+    public EnemyAmount(int amount, EnemyStats enemyStats)
+    {
+        this.amount = amount;
+
+        this.enemyStats = enemyStats;
+    }
+}
+
 //info about a pack of enemies on the overworld, such as how many of them there are and of what type. Stored in State
 public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
 {
 
-	public int[] enemyMinimum;
-	public int[] enemyMaximum;
+    //[SerializeField]
+    private string[] flagsToCheckForAllies;
 
-	//[SerializeField]
-	private string[] flagsToCheckForAllies;
+    public string tutorialSequenceKey;
 
-	public string tutorialSequenceKey;
+    public EnemyAmount[] enemyTypes;
 
-	public EnemyStats[] enemyTypes;
+    public string dropTableName;
 
-	public string dropTableName;
+    public string killFlagKey;
 
-	public string killFlagKey;
+    public string dialogueUponSceneLoadKey;
 
-	public string dialogueUponSceneLoadKey;
+    //[SerializeField]
+    public ItemListID[] guaranteedDrops;
 
-	//[SerializeField]
-	public ItemListID[] guaranteedDrops;
+    public int numberOfDrops = 1;
+    public int xpDrop = -1;
 
-	public int numberOfDrops = 1;
-	public int xpDrop = -1;
+    public bool isBossMonster = false;
 
-	public bool isBossMonster = false;
+    public string questName;
+    public int questStep;
 
-	public string questName;
-	public int questStep;
+    public QuestStepActivationScript script;
 
-	public QuestStepActivationScript script;
+    public EnemyPackInfo(EnemyAmount[] enemyTypes, string dropTableName)
+    {
+        this.enemyTypes = enemyTypes;
 
-	public EnemyPackInfo(int[] enemyMinimum, int[] enemyMaximum, EnemyStats[] enemyTypes, string dropTableName)
-	{
-		this.enemyMinimum = enemyMinimum;
-		this.enemyMaximum = enemyMaximum;
+        this.dropTableName = dropTableName;
+    }
 
-		this.enemyTypes = enemyTypes;
+    public EnemyPackInfo(EnemyAmount[] enemyTypes, string[] flagsToCheckForAllies, string dropTableName)
+    {
+        this.enemyTypes = enemyTypes;
 
-		this.dropTableName = dropTableName;
-	}
+        this.flagsToCheckForAllies = flagsToCheckForAllies;
 
-	public EnemyPackInfo(int[] enemyMinimum, int[] enemyMaximum, EnemyStats[] enemyTypes, string[] flagsToCheckForAllies, string dropTableName)
-	{
-		this.enemyMinimum = enemyMinimum;
-		this.enemyMaximum = enemyMaximum;
+        this.dropTableName = dropTableName;
+    }
 
-		this.enemyTypes = enemyTypes;
+    public EnemyPackInfo(EnemyAmount[] enemyTypes, string[] flagsToCheckForAllies, string dropTableName, QuestStepActivationScript script)
+    {
+        this.enemyTypes = enemyTypes;
 
-		this.flagsToCheckForAllies = flagsToCheckForAllies;
+        this.flagsToCheckForAllies = flagsToCheckForAllies;
 
-		this.dropTableName = dropTableName;
-	}
+        this.dropTableName = dropTableName;
 
-	public EnemyPackInfo(int[] enemyMinimum, int[] enemyMaximum, EnemyStats[] enemyTypes, string[] flagsToCheckForAllies, string dropTableName, QuestStepActivationScript script)
-	{
-		this.enemyMinimum = enemyMinimum;
-		this.enemyMaximum = enemyMaximum;
+        this.script = script;
+    }
 
-		this.enemyTypes = enemyTypes;
+    public void markBossAsKilled()
+    {
+        if (isBossMonster)
+        {
+            Flags.setFlag(killFlagKey, true);
+        }
+    }
 
-		this.flagsToCheckForAllies = flagsToCheckForAllies;
+    public int determineEnemyCount(int index)
+    {
+        return enemyTypes[index].amount;
+    }
 
-		this.dropTableName = dropTableName;
+    public bool hasSummonsToSpawn()
+    {
 
-		this.script = script;
-	}
+        if (flagsToCheckForAllies == null || flagsToCheckForAllies is null || flagsToCheckForAllies.Length == 0)
+        {
+            return false;
+        }
 
-	public void markBossAsKilled()
-	{
-		if (isBossMonster)
-		{
-			Flags.setFlag(killFlagKey, true);
-		}
-	}
+        foreach (string flag in flagsToCheckForAllies)
+        {
+            if (flag == null || flag is null || flag.Length == 0)
+            {
+                continue;
+            }
+            else
+            {
+                if (Flags.getFlag(flag))
+                {
+                    return true;
+                }
+            }
+        }
 
-	public int determineEnemyCount(int index)
-	{
-		if (enemyMinimum[index] == enemyMaximum[index])
-		{
-			return enemyMinimum[index];
-		}
-		else
-		{
-			return UnityEngine.Random.Range(enemyMinimum[index], enemyMaximum[index]);
-		}
-	}
+        return false;
+    }
 
-	public bool hasSummonsToSpawn()
-	{
+    public string getAllyGroupingKey()
+    {
+        for (int keyIndex = 0; keyIndex < flagsToCheckForAllies.Length; keyIndex++)
+        {
+            if (Flags.getFlag(flagsToCheckForAllies[keyIndex]))
+            {
+                return flagsToCheckForAllies[keyIndex];
+            }
+        }
 
-		if (flagsToCheckForAllies == null || flagsToCheckForAllies is null || flagsToCheckForAllies.Length == 0)
-		{
-			return false;
-		}
-
-		foreach (string flag in flagsToCheckForAllies)
-		{
-			if (flag == null || flag is null || flag.Length == 0)
-			{
-				continue;
-			}
-			else
-			{
-				if (Flags.getFlag(flag))
-				{
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	public string getAllyGroupingKey()
-	{
-		for (int keyIndex = 0; keyIndex < flagsToCheckForAllies.Length; keyIndex++)
-		{
-			if (Flags.getFlag(flagsToCheckForAllies[keyIndex]))
-			{
-				return flagsToCheckForAllies[keyIndex];
-			}
-		}
-
-		throw new IOException("No key to use");
-	}
+        throw new IOException("No key to use");
+    }
 
 
-	//IDescribableInBlocks methods
-	public string getName()
-	{
-		return "";
-	}
+    //IDescribableInBlocks methods
+    public string getName()
+    {
+        return "";
+    }
 
-	public List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
-	{
-		List<DescriptionPanelBuildingBlock> blocks = new List<DescriptionPanelBuildingBlock>();
+    public List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
+    {
+        List<DescriptionPanelBuildingBlock> blocks = new List<DescriptionPanelBuildingBlock>();
 
-		for (int enemyIndex = 0; enemyIndex < enemyTypes.Length &&
-								  enemyIndex < enemyMinimum.Length &&
-								  enemyIndex < enemyMaximum.Length;
-			enemyIndex++)
-		{
-			string enemyNumber = "";
+        for (int enemyIndex = 0; enemyIndex < enemyTypes.Length; enemyIndex++)
+        {
+            string enemyNumber = enemyTypes[enemyIndex].amount.ToString();
 
-			if (enemyMinimum[enemyIndex] == enemyMaximum[enemyIndex])
-			{
-				enemyNumber = enemyMaximum[enemyIndex].ToString();
-			}
-			else
-			{
-				enemyNumber = enemyMinimum[enemyIndex] + " - " + enemyMaximum[enemyIndex];
-			}
+            blocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, enemyNumber + "   " + enemyTypes[enemyIndex].enemyStats.getName()));
+        }
 
-			blocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, enemyNumber + "   " + enemyTypes[enemyIndex].getName()));
-		}
-
-		return blocks;
-	}
+        return blocks;
+    }
 }

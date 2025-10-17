@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5958077871612339172}
   - component: {fileID: 6660733450008172774}
   - component: {fileID: 1361010424523482839}
-  - component: {fileID: 5125184159054840158}
   - component: {fileID: 252820351671257986}
   - component: {fileID: 7450099372692967583}
   - component: {fileID: 7969805419722209152}
@@ -58,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7cfb8b82b7044802b656cb356f2a075, type: 2}
+  - {fileID: 2100000, guid: 2994f963bb69eb245bc96baa79169765, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -119,21 +118,6 @@ MonoBehaviour:
   flagOnPickUp: 
   scripts: []
   targetCanvas: {fileID: 0}
---- !u!114 &5125184159054840158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6199324058133591741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a72247d5aa84112962198463a3c864, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
-  _spriteRenderer: {fileID: 6660733450008172774}
-  _outlineSize: 2
 --- !u!1839735485 &252820351671257986
 Tilemap:
   m_ObjectHideFlags: 0

@@ -79,7 +79,7 @@ public class CharacterFacing
 
     public static Facing getRandomFacing()
 	{
-		return (Facing) UnityEngine.Random.Range((int) Facing.NorthEast, (int) Facing.SouthEast+1);
+		return (Facing) (new System.Random()).Next((int) Facing.NorthEast, (int) Facing.SouthEast+1);
 	}
 	
 	public static Facing getOpposingFacing(int facing)

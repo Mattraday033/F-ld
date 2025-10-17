@@ -5,97 +5,130 @@ using Newtonsoft.Json;
 using UnityEngine;
 
 [System.Serializable]
-public class MonsterPackList: ICloneable
+public class MonsterPackList : ICloneable, IEnumerable
 {
-	public string sceneName;
+    public string sceneName;
 
-	public MonsterPack[] monsterPacks;
+    public MonsterPack[] monsterPacks;
 
-	public MonsterSpawnScript[] monsterSpawnScripts;
-	public MonsterPack[][] alternateMonsterPacks;
+    public MonsterSpawnScript[] monsterSpawnScripts;
+    public MonsterPack[][] alternateMonsterPacks;
 
-	public MonsterPackList(string sceneName)
-	{
-		this.sceneName = sceneName;
-		this.monsterPacks = new MonsterPack[0];
+    public MonsterPackList(string sceneName)
+    {
+        this.sceneName = sceneName;
+        this.monsterPacks = new MonsterPack[0];
 
-		this.monsterSpawnScripts = null;
-		this.alternateMonsterPacks = new MonsterPack[0][];
-	}
+        this.monsterSpawnScripts = null;
+        this.alternateMonsterPacks = new MonsterPack[0][];
+    }
 
-	public MonsterPackList(string sceneName, MonsterPack[] mP)
-	{
-		this.sceneName = sceneName;
-		this.monsterPacks = mP;
+    public MonsterPackList(string sceneName, MonsterPack[] mP)
+    {
+        this.sceneName = sceneName;
+        this.monsterPacks = mP;
 
-		this.monsterSpawnScripts = null;
-		this.alternateMonsterPacks = new MonsterPack[0][];
-	}
-	
-	public MonsterPackList(string sceneName, MonsterPack[] mP, MonsterSpawnScript monsterSpawnScript, MonsterPack[] alternateMonsterPacks)
-	{
-		this.sceneName = sceneName;
-		monsterPacks = mP;
+        this.monsterSpawnScripts = null;
+        this.alternateMonsterPacks = new MonsterPack[0][];
+    }
 
-		this.monsterSpawnScripts = new MonsterSpawnScript[1] { monsterSpawnScript };
-		this.alternateMonsterPacks = new MonsterPack[1][] { alternateMonsterPacks };
-	}
+    public MonsterPackList(string sceneName, MonsterPack[] mP, MonsterSpawnScript monsterSpawnScript, MonsterPack[] alternateMonsterPacks)
+    {
+        this.sceneName = sceneName;
+        monsterPacks = mP;
 
-	public MonsterPackList(string sceneName, MonsterPack[] mP, MonsterSpawnScript[] monsterSpawnScripts, MonsterPack[][] alternateMonsterPacks)
-	{
-		this.sceneName = sceneName;
-		monsterPacks = mP;
+        this.monsterSpawnScripts = new MonsterSpawnScript[1] { monsterSpawnScript };
+        this.alternateMonsterPacks = new MonsterPack[1][] { alternateMonsterPacks };
+    }
 
-		this.monsterSpawnScripts = monsterSpawnScripts;
-		this.alternateMonsterPacks = alternateMonsterPacks;
-	}
+    public MonsterPackList(string sceneName, MonsterPack[] mP, MonsterSpawnScript[] monsterSpawnScripts, MonsterPack[][] alternateMonsterPacks)
+    {
+        this.sceneName = sceneName;
+        monsterPacks = mP;
 
-	public void setMonsterPackList()
-	{
+        this.monsterSpawnScripts = monsterSpawnScripts;
+        this.alternateMonsterPacks = alternateMonsterPacks;
+    }
 
-		if (monsterSpawnScripts == null || alternateMonsterPacks == null ||
-			monsterSpawnScripts.Length <= 0 || alternateMonsterPacks.Length <= 0)
-		{
-			return;
-		}
+    public void setMonsterPackList()
+    {
 
-		int indexToUse = PlayerInteractionScript.getIndexOfFirstScriptToEvaluate(monsterSpawnScripts);
+        if (monsterSpawnScripts == null || alternateMonsterPacks == null ||
+            monsterSpawnScripts.Length <= 0 || alternateMonsterPacks.Length <= 0)
+        {
+            return;
+        }
 
-		if (indexToUse >= 0 && indexToUse < alternateMonsterPacks.Length)
-		{
-			monsterPacks = alternateMonsterPacks[indexToUse];
-		}
-	}
+        int indexToUse = PlayerInteractionScript.getIndexOfFirstScriptToEvaluate(monsterSpawnScripts);
 
-	public object Clone()
-	{
-		return this.MemberwiseClone();
-	}
-	
-	public MonsterPackList clone()
-	{
-		MonsterPack[] monsterPackClones = new MonsterPack[monsterPacks.Length];
-		
-		for(int packIndex = 0; packIndex < monsterPacks.Length; packIndex++)
-		{
-			monsterPackClones[packIndex] = new MonsterPack(monsterPacks[packIndex]);
-		}
+        if (indexToUse >= 0 && indexToUse < alternateMonsterPacks.Length)
+        {
+            monsterPacks = alternateMonsterPacks[indexToUse];
+        }
+    }
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
+
+    public MonsterPackList clone()
+    {
+        MonsterPack[] monsterPackClones = new MonsterPack[monsterPacks.Length];
+
+        for (int packIndex = 0; packIndex < monsterPacks.Length; packIndex++)
+        {
+            monsterPackClones[packIndex] = new MonsterPack(monsterPacks[packIndex]);
+        }
 
 
-		MonsterPack[][] alternateMonsterPackClones = new MonsterPack[alternateMonsterPacks.Length][];
+        MonsterPack[][] alternateMonsterPackClones = new MonsterPack[alternateMonsterPacks.Length][];
 
-		for (int listIndex = 0; listIndex < alternateMonsterPacks.Length; listIndex++)
-		{
-			alternateMonsterPackClones[listIndex] = new MonsterPack[alternateMonsterPacks[listIndex].Length];
-			
-			for(int packIndex = 0; packIndex < alternateMonsterPacks[listIndex].Length; packIndex++)
-			{
-				alternateMonsterPackClones[listIndex][packIndex] = new MonsterPack(alternateMonsterPacks[listIndex][packIndex]);
-			}
-		}
-		
-		return new MonsterPackList(sceneName, monsterPackClones, monsterSpawnScripts, alternateMonsterPackClones);
-	}
+        for (int listIndex = 0; listIndex < alternateMonsterPacks.Length; listIndex++)
+        {
+            alternateMonsterPackClones[listIndex] = new MonsterPack[alternateMonsterPacks[listIndex].Length];
+
+            for (int packIndex = 0; packIndex < alternateMonsterPacks[listIndex].Length; packIndex++)
+            {
+                alternateMonsterPackClones[listIndex][packIndex] = new MonsterPack(alternateMonsterPacks[listIndex][packIndex]);
+            }
+        }
+
+        return new MonsterPackList(sceneName, monsterPackClones, monsterSpawnScripts, alternateMonsterPackClones);
+    }
+
+    public List<GameObject> getAllMonsterSprites()
+    {
+        List<GameObject> spawnedObjects = new List<GameObject>();
+
+        foreach (MonsterPack monsterPack in monsterPacks)
+        {
+            spawnedObjects.Add(monsterPack.monsterSprite);
+        }
+
+        return spawnedObjects;
+    }
+
+    public IEnumerator GetEnumerator()
+    {
+        if (monsterSpawnScripts == null)
+        {
+            return monsterPacks.GetEnumerator();
+        }
+
+        int index = 0;
+        foreach (MonsterSpawnScript monsterSpawnScript in monsterSpawnScripts)
+        {
+            if (monsterSpawnScript.evaluateScript())
+            {
+                return alternateMonsterPacks[index].GetEnumerator();
+            }
+
+            index++;
+        }
+
+        return monsterPacks.GetEnumerator();
+    }
 
 }
 
@@ -195,11 +228,6 @@ public struct MonsterPack : IJSONConvertable
 	private string getSpriteNameAndIndex()
 	{
 		return spriteName + "-" + index;
-	}
-
-	public void setMovementManager(MovementManager mM)
-	{
-		monsterSprite.GetComponent<EnemyMovement>().movementManager = mM;
 	}
 	
 	public string convertToJson()
@@ -350,384 +378,387 @@ public static class AllMonsterPackLists
 	static AllMonsterPackLists()
 	{
 		instantiateCamp();
-		instantiateManseFirstFloor();
-		instantiateManseSecondFloor();
-		instantiatePit();
-		instantiateMineLvl_1();
-		instantiateMineLvl_2();
-		instantiateMineLvl_3();
+		// instantiateManseFirstFloor();
+		// instantiateManseSecondFloor();
+		// instantiatePit();
+		// instantiateMineLvl_1();
+		// instantiateMineLvl_2();
+		// instantiateMineLvl_3();
 	}
 
 	private static void instantiateCamp()
 	{
-		MonsterPackList slaveShack6 = new MonsterPackList("6SlaveShack", 	new MonsterPack[]{	new MonsterPack(0, tutorialBat2Master2Minions1, Facing.SouthEast),
-																								new MonsterPack(1, tutorialBat2Master2Minions2, Facing.NorthEast)
-																						 	},
-																new TutorialGuardSpawn(),
-																new MonsterPack[]			{
-																								new MonsterPack(0, tutorialBat2Master2Minions1, Facing.SouthEast)
-																							}
-																							);
+        MonsterPackList slaveShack6 = new MonsterPackList("6SlaveShack", new MonsterPack[]{  new MonsterPack(0, tutorialBat2Master2Minions1, Facing.SouthEast),
+                                                                                                new MonsterPack(1, tutorialBat2Master2Minions2, Facing.NorthEast)
+                                                                                             },
+                                                                new TutorialMonsterSpawn(),
+                                                                new MonsterPack[]           {
+                                                                                                new MonsterPack(0, tutorialBat2Master2Minions1, Facing.SouthEast)
+                                                                                            }
+                                                                                            );
 
-		MonsterPackList neCamp = new MonsterPackList("NECamp", 	new MonsterPack[]{	new MonsterPack(0, guards2Spear1Axe2Slinger),
-																					new MonsterPack(1, guards1Axe2Slinger1Overseer),
-																					new MonsterPack(2, guards1Axe2Spear1Overseer1Captain1Signalier),
-																					new MonsterPack(3, guards2Spear1Axe1Signalier1Overseer),
-																					new MonsterPack(4, guardsCampNEOverseerBoss, Facing.SouthWest)
-																				 });
+        allMonsterPackLists.Add(slaveShack6.sceneName, slaveShack6);
+
+
+        // MonsterPackList neCamp = new MonsterPackList("NECamp", 	new MonsterPack[]{	new MonsterPack(0, guards2Spear1Axe2Slinger),
+		// 																			new MonsterPack(1, guards1Axe2Slinger1Overseer),
+		// 																			new MonsterPack(2, guards1Axe2Spear1Overseer1Captain1Signalier),
+		// 																			new MonsterPack(3, guards2Spear1Axe1Signalier1Overseer),
+		// 																			new MonsterPack(4, guardsCampNEOverseerBoss, Facing.SouthWest)
+		// 																		 });
 		
-		MonsterPackList centerCamp = new MonsterPackList("CenterCamp", 	new MonsterPack[]{	new MonsterPack(0, guards1Axe2Slinger1Overseer),
-																							new MonsterPack(1, guards2Spear1Axe2Slinger),
-																							new MonsterPack(2, guards2Spear1Axe2Slinger1Overseer1Captain),
-																							new MonsterPack(3, guards2Spear1Axe1Signalier1Overseer),
-																							new MonsterPack(4, guards2Spear1Axe2Slinger1Overseer1Captain )
-																						 });
+		// MonsterPackList centerCamp = new MonsterPackList("CenterCamp", 	new MonsterPack[]{	new MonsterPack(0, guards1Axe2Slinger1Overseer),
+		// 																					new MonsterPack(1, guards2Spear1Axe2Slinger),
+		// 																					new MonsterPack(2, guards2Spear1Axe2Slinger1Overseer1Captain),
+		// 																					new MonsterPack(3, guards2Spear1Axe1Signalier1Overseer),
+		// 																					new MonsterPack(4, guards2Spear1Axe2Slinger1Overseer1Captain )
+		// 																				 });
 		
-		MonsterPackList mineEntranceCamp = new MonsterPackList("MineEntranceCamp", 	new MonsterPack[]{	new MonsterPack(0, guards2Spear1Axe2Slinger),
-																										new MonsterPack(1, guards2Spear1Axe2Slinger)
-																									 },
-																new CampRevoltWormSpawn(),
-																new MonsterPack[]			{
-																								new MonsterPack(0, worm2BigMaster3Master1Spawner1Restorative),
-																								new MonsterPack(1, worm2BigMaster3Master1Spawner1Restorative)
-																							});
+		// MonsterPackList mineEntranceCamp = new MonsterPackList("MineEntranceCamp", 	new MonsterPack[]{	new MonsterPack(0, guards2Spear1Axe2Slinger),
+		// 																								new MonsterPack(1, guards2Spear1Axe2Slinger)
+		// 																							 },
+		// 														new CampRevoltWormSpawn(),
+		// 														new MonsterPack[]			{
+		// 																						new MonsterPack(0, worm2BigMaster3Master1Spawner1Restorative),
+		// 																						new MonsterPack(1, worm2BigMaster3Master1Spawner1Restorative)
+		// 																					});
 
 		
-		MonsterPackList manseCamp = new MonsterPackList("ManseCamp", 	new MonsterPack[]{	new MonsterPack(0, guards2Spear1Axe2Slinger),
-																							new MonsterPack(1, guards2Spear1Axe2Slinger)
-																						 });
+		// MonsterPackList manseCamp = new MonsterPackList("ManseCamp", 	new MonsterPack[]{	new MonsterPack(0, guards2Spear1Axe2Slinger),
+		// 																					new MonsterPack(1, guards2Spear1Axe2Slinger)
+		// 																				 });
 		
-		MonsterPackList guardHouseTopFloor = new MonsterPackList("GuardHouseTopFloor", 	new MonsterPack[]{	new MonsterPack(0, tutorialCrate),
-																											new MonsterPack(1, crate),
-																											new MonsterPack(2, crate),
-																											new MonsterPack(3, crate),
-																											new MonsterPack(4, crate),
-																											new MonsterPack(5, crate),
-																											new MonsterPack(6, guards3CampGuards),
-																											new MonsterPack(7, guards3CampGuards),
-																											new MonsterPack(8, guardsChiefIren2CampGuards, Facing.SouthWest)
-																										 });
+		// MonsterPackList guardHouseTopFloor = new MonsterPackList("GuardHouseTopFloor", 	new MonsterPack[]{	new MonsterPack(0, tutorialCrate),
+		// 																									new MonsterPack(1, crate),
+		// 																									new MonsterPack(2, crate),
+		// 																									new MonsterPack(3, crate),
+		// 																									new MonsterPack(4, crate),
+		// 																									new MonsterPack(5, crate),
+		// 																									new MonsterPack(6, guards3CampGuards),
+		// 																									new MonsterPack(7, guards3CampGuards),
+		// 																									new MonsterPack(8, guardsChiefIren2CampGuards, Facing.SouthWest)
+		// 																								 });
 
-		MonsterPackList seCamp = new MonsterPackList("SECamp", new MonsterPack[]{   new MonsterPack(0, guards2Spear1Axe2Slinger),
-																					new MonsterPack(1, guards1Axe2Slinger1Overseer),
-																					new MonsterPack(2, guards2Spear1Axe2Slinger),
-																					new MonsterPack(3, guards1Axe2Slinger1Overseer),
-																					new MonsterPack(4, guards2Spear1Axe2Slinger),
-																					new MonsterPack(5, guards2Spear1Axe2Slinger1Overseer1Captain)
-																				 },
-													new CampRevoltWormSpawn(),
-													new MonsterPack[]			{
-																					new MonsterPack(0, worm2BigMaster3Master1Spawner1Restorative),
-																					new MonsterPack(1, worm2BigMaster3Master1Spawner1Restorative),
-																					new MonsterPack(2, worm2BigMaster3Master1Spawner1Restorative),
-																					new MonsterPack(3, worm2BigMaster3Master1Spawner1Restorative),
-																					new MonsterPack(4, worm2BigMaster3Master1Spawner1Restorative),
-																					new MonsterPack(5, worm2BigMaster3Master1Spawner1Restorative)
-																				 }
-													);
+		// MonsterPackList seCamp = new MonsterPackList("SECamp", new MonsterPack[]{   new MonsterPack(0, guards2Spear1Axe2Slinger),
+		// 																			new MonsterPack(1, guards1Axe2Slinger1Overseer),
+		// 																			new MonsterPack(2, guards2Spear1Axe2Slinger),
+		// 																			new MonsterPack(3, guards1Axe2Slinger1Overseer),
+		// 																			new MonsterPack(4, guards2Spear1Axe2Slinger),
+		// 																			new MonsterPack(5, guards2Spear1Axe2Slinger1Overseer1Captain)
+		// 																		 },
+		// 											new CampRevoltWormSpawn(),
+		// 											new MonsterPack[]			{
+		// 																			new MonsterPack(0, worm2BigMaster3Master1Spawner1Restorative),
+		// 																			new MonsterPack(1, worm2BigMaster3Master1Spawner1Restorative),
+		// 																			new MonsterPack(2, worm2BigMaster3Master1Spawner1Restorative),
+		// 																			new MonsterPack(3, worm2BigMaster3Master1Spawner1Restorative),
+		// 																			new MonsterPack(4, worm2BigMaster3Master1Spawner1Restorative),
+		// 																			new MonsterPack(5, worm2BigMaster3Master1Spawner1Restorative)
+		// 																		 }
+		// 											);
 
-		allMonsterPackLists.Add(slaveShack6.sceneName, slaveShack6);			
-		allMonsterPackLists.Add(neCamp.sceneName, neCamp);		
-		allMonsterPackLists.Add(centerCamp.sceneName, centerCamp);
-		allMonsterPackLists.Add(seCamp.sceneName, seCamp);	
-		allMonsterPackLists.Add(manseCamp.sceneName, manseCamp);
-		allMonsterPackLists.Add(guardHouseTopFloor.sceneName, guardHouseTopFloor);	
-		allMonsterPackLists.Add(mineEntranceCamp.sceneName, mineEntranceCamp);
+	
+		// allMonsterPackLists.Add(neCamp.sceneName, neCamp);		
+		// allMonsterPackLists.Add(centerCamp.sceneName, centerCamp);
+		// allMonsterPackLists.Add(seCamp.sceneName, seCamp);	
+		// allMonsterPackLists.Add(manseCamp.sceneName, manseCamp);
+		// allMonsterPackLists.Add(guardHouseTopFloor.sceneName, guardHouseTopFloor);	
+		// allMonsterPackLists.Add(mineEntranceCamp.sceneName, mineEntranceCamp);
 	}
 
-	private static void instantiateManseFirstFloor()
-	{
+	// private static void instantiateManseFirstFloor()
+	// {
 		
-		MonsterPackList manse_1F_1b = new MonsterPackList("Manse-1F-1b", new MonsterPack[]{	new MonsterPack(0, guards1Spear1Axe1Captain1Overseer1Linebreaker),
-																							new MonsterPack(1, guards1Spear1Axe2Overseer1Lancer),
-																							new MonsterPack(2, guards2Spear1Axe1Captain1Lieutenant)
-																						  });	
+	// 	MonsterPackList manse_1F_1b = new MonsterPackList("Manse-1F-1b", new MonsterPack[]{	new MonsterPack(0, guards1Spear1Axe1Captain1Overseer1Linebreaker),
+	// 																						new MonsterPack(1, guards1Spear1Axe2Overseer1Lancer),
+	// 																						new MonsterPack(2, guards2Spear1Axe1Captain1Lieutenant)
+	// 																					  });	
 		
-		MonsterPackList manse_1F_1c = new MonsterPackList("Manse-1F-1c", new MonsterPack[]{	new MonsterPack(0, crate),
-																							new MonsterPack(1, guards2Spear1Axe1Linebreaker),
-																							new MonsterPack(2, guards1Spear1Axe1Captain1Overseer1Linebreaker)
-																						  });	
+	// 	MonsterPackList manse_1F_1c = new MonsterPackList("Manse-1F-1c", new MonsterPack[]{	new MonsterPack(0, crate),
+	// 																						new MonsterPack(1, guards2Spear1Axe1Linebreaker),
+	// 																						new MonsterPack(2, guards1Spear1Axe1Captain1Overseer1Linebreaker)
+	// 																					  });	
 		
-		MonsterPackList manse_1F_Dining_Room= new MonsterPackList("Manse-1F-Dining Room", new MonsterPack[]{ new MonsterPack(0, crate),
-																											 new MonsterPack(1, guards2Spear2Slinger1Lancer)
-																										   });	
+	// 	MonsterPackList manse_1F_Dining_Room= new MonsterPackList("Manse-1F-Dining Room", new MonsterPack[]{ new MonsterPack(0, crate),
+	// 																										 new MonsterPack(1, guards2Spear2Slinger1Lancer)
+	// 																									   });	
 		
-		MonsterPackList manse_1F_2a = new MonsterPackList("Manse-1F-2a", new MonsterPack[]{new MonsterPack(0, crate),
-																						   new MonsterPack(1, crate),
-																						   new MonsterPack(2, crate),
-																						   new MonsterPack(3, guards2Spear1Axe1Linebreaker),
-																						   new MonsterPack(4, guards1Spear1Axe1Captain1Overseer1Linebreaker),
-																						   new MonsterPack(5, guards2Spear1Axe1Captain1Lieutenant),
-																						   new MonsterPack(6, guards1Spear1Axe2Overseer1Lancer)
-																						  });	
+	// 	MonsterPackList manse_1F_2a = new MonsterPackList("Manse-1F-2a", new MonsterPack[]{new MonsterPack(0, crate),
+	// 																					   new MonsterPack(1, crate),
+	// 																					   new MonsterPack(2, crate),
+	// 																					   new MonsterPack(3, guards2Spear1Axe1Linebreaker),
+	// 																					   new MonsterPack(4, guards1Spear1Axe1Captain1Overseer1Linebreaker),
+	// 																					   new MonsterPack(5, guards2Spear1Axe1Captain1Lieutenant),
+	// 																					   new MonsterPack(6, guards1Spear1Axe2Overseer1Lancer)
+	// 																					  });	
 																				 
-		MonsterPackList manse_1F_2b = new MonsterPackList("Manse-1F-2b", new MonsterPack[]{new MonsterPack(0, crate),
-																						   new MonsterPack(1, crate),
-																						   new MonsterPack(2, crate),
-																						   new MonsterPack(3, crate),
-																						   new MonsterPack(4, crate),
-																						   new MonsterPack(5, crate),
-																						   new MonsterPack(6, crate),
-																						   new MonsterPack(7, crate),
-																						   new MonsterPack(8, guards2Spear2Slinger1Lancer, Facing.NorthWest),
-																						   new MonsterPack(9, guards1Spear1Axe2Overseer1Lancer, Facing.SouthEast),
-																						   new MonsterPack(10, guards2Spear1Axe1Bloodletter1Captain, Facing.NorthWest),
-																						   new MonsterPack(11, guards1Spear1Axe1Captain1Overseer1Linebreaker, Facing.SouthEast)
-																						  });	
+	// 	MonsterPackList manse_1F_2b = new MonsterPackList("Manse-1F-2b", new MonsterPack[]{new MonsterPack(0, crate),
+	// 																					   new MonsterPack(1, crate),
+	// 																					   new MonsterPack(2, crate),
+	// 																					   new MonsterPack(3, crate),
+	// 																					   new MonsterPack(4, crate),
+	// 																					   new MonsterPack(5, crate),
+	// 																					   new MonsterPack(6, crate),
+	// 																					   new MonsterPack(7, crate),
+	// 																					   new MonsterPack(8, guards2Spear2Slinger1Lancer, Facing.NorthWest),
+	// 																					   new MonsterPack(9, guards1Spear1Axe2Overseer1Lancer, Facing.SouthEast),
+	// 																					   new MonsterPack(10, guards2Spear1Axe1Bloodletter1Captain, Facing.NorthWest),
+	// 																					   new MonsterPack(11, guards1Spear1Axe1Captain1Overseer1Linebreaker, Facing.SouthEast)
+	// 																					  });	
 																						  
-		MonsterPackList manse_1F_3a = new MonsterPackList("Manse-1F-3a", new MonsterPack[]{new MonsterPack(0, crate),
-																						   new MonsterPack(1, guards2Spear1Axe1Linebreaker),
-																					       new MonsterPack(2, guards2Spear1Axe1Bloodletter1Captain)
-																						  });
+	// 	MonsterPackList manse_1F_3a = new MonsterPackList("Manse-1F-3a", new MonsterPack[]{new MonsterPack(0, crate),
+	// 																					   new MonsterPack(1, guards2Spear1Axe1Linebreaker),
+	// 																				       new MonsterPack(2, guards2Spear1Axe1Bloodletter1Captain)
+	// 																					  });
 		
-		// MonsterPackList manse_1F_3b = new MonsterPackList("Manse-1F-3b", new MonsterPack[]{new MonsterPack(0, guards2Spear1Axe1Bloodletter1Captain),
-		// 																				   new MonsterPack(1, guards2Spear1Axe1Captain1Lieutenant),
-		// 																			       new MonsterPack(2, guards1Spear1Axe1Captain1Overseer1Linebreaker),
-		// 																			       new MonsterPack(3, guards3Overseers1Lieutenant)
-		// 																				  });	
+	// 	// MonsterPackList manse_1F_3b = new MonsterPackList("Manse-1F-3b", new MonsterPack[]{new MonsterPack(0, guards2Spear1Axe1Bloodletter1Captain),
+	// 	// 																				   new MonsterPack(1, guards2Spear1Axe1Captain1Lieutenant),
+	// 	// 																			       new MonsterPack(2, guards1Spear1Axe1Captain1Overseer1Linebreaker),
+	// 	// 																			       new MonsterPack(3, guards3Overseers1Lieutenant)
+	// 	// 																				  });	
 																						  
-		allMonsterPackLists.Add(manse_1F_1b.sceneName, manse_1F_1b);
+	// 	allMonsterPackLists.Add(manse_1F_1b.sceneName, manse_1F_1b);
 		
-		allMonsterPackLists.Add(manse_1F_1c.sceneName, manse_1F_1c);
+	// 	allMonsterPackLists.Add(manse_1F_1c.sceneName, manse_1F_1c);
 		
-		allMonsterPackLists.Add(manse_1F_Dining_Room.sceneName, manse_1F_Dining_Room);
+	// 	allMonsterPackLists.Add(manse_1F_Dining_Room.sceneName, manse_1F_Dining_Room);
 		
-		allMonsterPackLists.Add(manse_1F_2a.sceneName, manse_1F_2a);
+	// 	allMonsterPackLists.Add(manse_1F_2a.sceneName, manse_1F_2a);
 		
-		allMonsterPackLists.Add(manse_1F_2b.sceneName, manse_1F_2b);
+	// 	allMonsterPackLists.Add(manse_1F_2b.sceneName, manse_1F_2b);
 		
-		allMonsterPackLists.Add(manse_1F_3a.sceneName, manse_1F_3a);
+	// 	allMonsterPackLists.Add(manse_1F_3a.sceneName, manse_1F_3a);
 		
-		// allMonsterPackLists.Add(manse_1F_3b.sceneName, manse_1F_3b);
-	}
+	// 	// allMonsterPackLists.Add(manse_1F_3b.sceneName, manse_1F_3b);
+	// }
 	
-	private static void instantiateManseSecondFloor()
-	{
-		MonsterPackList manse_2F_2a = new MonsterPackList("Manse-2F-2a", new MonsterPack[]{	new MonsterPack(0, crate),
-																							new MonsterPack(1, crate),
-																							new MonsterPack(2, honorguards1Bloodletter1Lancer1Executioner),
-																							new MonsterPack(3, honorguards1Bloodletter1Lancer1Linebreaker),
-																							new MonsterPack(4, honorguards1Bloodletter1Executioner1Linebreaker)
-																						  });	
-		MonsterPackList manse_2F_3a = new MonsterPackList("Manse-2F-3a", new MonsterPack[]{	new MonsterPack(0, crate),
-																							new MonsterPack(1, crate),
-																							new MonsterPack(2, crate),
-																							new MonsterPack(3, crate),
-																							new MonsterPack(4, honorguards1Bloodletter1Executioner1Linebreaker),
-																							new MonsterPack(5, honorguards1Lancer1Executioner1Linebreaker)
-																						  });	
+	// private static void instantiateManseSecondFloor()
+	// {
+	// 	MonsterPackList manse_2F_2a = new MonsterPackList("Manse-2F-2a", new MonsterPack[]{	new MonsterPack(0, crate),
+	// 																						new MonsterPack(1, crate),
+	// 																						new MonsterPack(2, honorguards1Bloodletter1Lancer1Executioner),
+	// 																						new MonsterPack(3, honorguards1Bloodletter1Lancer1Linebreaker),
+	// 																						new MonsterPack(4, honorguards1Bloodletter1Executioner1Linebreaker)
+	// 																					  });	
+	// 	MonsterPackList manse_2F_3a = new MonsterPackList("Manse-2F-3a", new MonsterPack[]{	new MonsterPack(0, crate),
+	// 																						new MonsterPack(1, crate),
+	// 																						new MonsterPack(2, crate),
+	// 																						new MonsterPack(3, crate),
+	// 																						new MonsterPack(4, honorguards1Bloodletter1Executioner1Linebreaker),
+	// 																						new MonsterPack(5, honorguards1Lancer1Executioner1Linebreaker)
+	// 																					  });	
 
-		MonsterPackList manse_2F_3b = new MonsterPackList("Manse-2F-3b", new MonsterPack[]{	new MonsterPack(0, honorguards1Bloodletter1Lancer1Executioner),
-																							new MonsterPack(1, honorguards1Bloodletter1Lancer1Linebreaker),
-																							new MonsterPack(2, honorguardsHGCaptain, Facing.NorthEast)
-																						  });	
+	// 	MonsterPackList manse_2F_3b = new MonsterPackList("Manse-2F-3b", new MonsterPack[]{	new MonsterPack(0, honorguards1Bloodletter1Lancer1Executioner),
+	// 																						new MonsterPack(1, honorguards1Bloodletter1Lancer1Linebreaker),
+	// 																						new MonsterPack(2, honorguardsHGCaptain, Facing.NorthEast)
+	// 																					  });	
 		
-		MonsterPackList manse_2F_3c = new MonsterPackList("Manse-2F-3c", new MonsterPack[]{	new MonsterPack(0, honorguards1Bloodletter1Lancer1Executioner),
-																							new MonsterPack(1, honorguards1Bloodletter1Lancer1Linebreaker)
-																						  });	
+	// 	MonsterPackList manse_2F_3c = new MonsterPackList("Manse-2F-3c", new MonsterPack[]{	new MonsterPack(0, honorguards1Bloodletter1Lancer1Executioner),
+	// 																						new MonsterPack(1, honorguards1Bloodletter1Lancer1Linebreaker)
+	// 																					  });	
 		
-		MonsterPackList manse_2F_Stockroom = new MonsterPackList("Manse-2F-Stockroom", new MonsterPack[]{	new MonsterPack(0, crate),
-																											new MonsterPack(1, crate),
-																											new MonsterPack(2, crate),
-																											new MonsterPack(3, crate),
-																											new MonsterPack(4, honorguards1Bloodletter1Executioner1Linebreaker),
-																											new MonsterPack(5, honorguards1Bloodletter1Lancer1Linebreaker)
-																										});	
+	// 	MonsterPackList manse_2F_Stockroom = new MonsterPackList("Manse-2F-Stockroom", new MonsterPack[]{	new MonsterPack(0, crate),
+	// 																										new MonsterPack(1, crate),
+	// 																										new MonsterPack(2, crate),
+	// 																										new MonsterPack(3, crate),
+	// 																										new MonsterPack(4, honorguards1Bloodletter1Executioner1Linebreaker),
+	// 																										new MonsterPack(5, honorguards1Bloodletter1Lancer1Linebreaker)
+	// 																									});	
 																						  
-		allMonsterPackLists.Add(manse_2F_2a.sceneName, manse_2F_2a);
+	// 	allMonsterPackLists.Add(manse_2F_2a.sceneName, manse_2F_2a);
 
-		allMonsterPackLists.Add(manse_2F_3a.sceneName, manse_2F_3a);
+	// 	allMonsterPackLists.Add(manse_2F_3a.sceneName, manse_2F_3a);
 		
-		allMonsterPackLists.Add(manse_2F_3b.sceneName, manse_2F_3b);
+	// 	allMonsterPackLists.Add(manse_2F_3b.sceneName, manse_2F_3b);
 		
-		allMonsterPackLists.Add(manse_2F_3c.sceneName, manse_2F_3c);
+	// 	allMonsterPackLists.Add(manse_2F_3c.sceneName, manse_2F_3c);
 		
-		allMonsterPackLists.Add(manse_2F_Stockroom.sceneName, manse_2F_Stockroom);
-	}
+	// 	allMonsterPackLists.Add(manse_2F_Stockroom.sceneName, manse_2F_Stockroom);
+	// }
 	
-	private static void instantiatePit()
-	{
-		MonsterPackList pit_1b = new MonsterPackList("Pit-1b", new MonsterPack[]{	new MonsterPack(0, guards1Axe2Slinger1Overseer)
-																				});	
+	// private static void instantiatePit()
+	// {
+	// 	MonsterPackList pit_1b = new MonsterPackList("Pit-1b", new MonsterPack[]{	new MonsterPack(0, guards1Axe2Slinger1Overseer)
+	// 																			});	
 		
-		MonsterPackList pit_2c = new MonsterPackList("Pit-2c", new MonsterPack[]{	new MonsterPack(0, crate),
-																					new MonsterPack(1, crate),
-																					new MonsterPack(2, crate),
-																					new MonsterPack(3, crate)
-																				});	
+	// 	MonsterPackList pit_2c = new MonsterPackList("Pit-2c", new MonsterPack[]{	new MonsterPack(0, crate),
+	// 																				new MonsterPack(1, crate),
+	// 																				new MonsterPack(2, crate),
+	// 																				new MonsterPack(3, crate)
+	// 																			});	
 		
-		MonsterPackList pit_2d = new MonsterPackList("Pit-2d", new MonsterPack[]{	new MonsterPack(0, stoneSaint, Facing.SouthEast)
-																				});	
+	// 	MonsterPackList pit_2d = new MonsterPackList("Pit-2d", new MonsterPack[]{	new MonsterPack(0, stoneSaint, Facing.SouthEast)
+	// 																			});	
 		
-		allMonsterPackLists.Add(pit_1b.sceneName, pit_1b);
+	// 	allMonsterPackLists.Add(pit_1b.sceneName, pit_1b);
 
-		allMonsterPackLists.Add(pit_2c.sceneName, pit_2c);
+	// 	allMonsterPackLists.Add(pit_2c.sceneName, pit_2c);
 		
-		allMonsterPackLists.Add(pit_2d.sceneName, pit_2d);
-	}
+	// 	allMonsterPackLists.Add(pit_2d.sceneName, pit_2d);
+	// }
 
-	private static void instantiateMineLvl_1()
-	{
-		MonsterPackList mineLvl_1_1b = new MonsterPackList("MineLvl_1-1b", new MonsterPack[]{	new MonsterPack(0, bat1Master1Spawner2ExplosiveMinions),
-																								new MonsterPack(1, bat1Charged1Master2Minions)
-																							});
+	// private static void instantiateMineLvl_1()
+	// {
+	// 	MonsterPackList mineLvl_1_1b = new MonsterPackList("MineLvl_1-1b", new MonsterPack[]{	new MonsterPack(0, bat1Master1Spawner2ExplosiveMinions),
+	// 																							new MonsterPack(1, bat1Charged1Master2Minions)
+	// 																						});
 																							
-		MonsterPackList mineLvl_1_2a = new MonsterPackList("MineLvl_1-2a", new MonsterPack[]{	new MonsterPack(0, bat1Master2Minions),
-																								new MonsterPack(1, bat1Master2Minions),
-																								new MonsterPack(2, bat1Master2Minions)
-																								});
+	// 	MonsterPackList mineLvl_1_2a = new MonsterPackList("MineLvl_1-2a", new MonsterPack[]{	new MonsterPack(0, bat1Master2Minions),
+	// 																							new MonsterPack(1, bat1Master2Minions),
+	// 																							new MonsterPack(2, bat1Master2Minions)
+	// 																							});
 		
-		MonsterPackList mineLvl_1_2b = new MonsterPackList("MineLvl_1-2b", new MonsterPack[]{	new MonsterPack(0, bat2Master2Minions),
-																								new MonsterPack(1, bat2Master2Minions),
-																								new MonsterPack(2, bat2Master2Minions)
-																							});
+	// 	MonsterPackList mineLvl_1_2b = new MonsterPackList("MineLvl_1-2b", new MonsterPack[]{	new MonsterPack(0, bat2Master2Minions),
+	// 																							new MonsterPack(1, bat2Master2Minions),
+	// 																							new MonsterPack(2, bat2Master2Minions)
+	// 																						});
 		
-		MonsterPackList mineLvl_1_3a = new MonsterPackList("MineLvl_1-3a", new MonsterPack[]{	new MonsterPack(0, bat1Charged1Master2Minions),
-																								new MonsterPack(1, bat1Charged1Master2Minions)
-																								});
+	// 	MonsterPackList mineLvl_1_3a = new MonsterPackList("MineLvl_1-3a", new MonsterPack[]{	new MonsterPack(0, bat1Charged1Master2Minions),
+	// 																							new MonsterPack(1, bat1Charged1Master2Minions)
+	// 																							});
 		
-		MonsterPackList mineLvl_1_4a = new MonsterPackList("MineLvl_1-4a", new MonsterPack[]{	new MonsterPack(0, bat1Master1Spawner2ExplosiveMinions),
-																								new MonsterPack(1, bat1Master1Spawner2ExplosiveMinions),
-																								new MonsterPack(2, bat1Master1Spawner2ExplosiveMinions)
-																							});
+	// 	MonsterPackList mineLvl_1_4a = new MonsterPackList("MineLvl_1-4a", new MonsterPack[]{	new MonsterPack(0, bat1Master1Spawner2ExplosiveMinions),
+	// 																							new MonsterPack(1, bat1Master1Spawner2ExplosiveMinions),
+	// 																							new MonsterPack(2, bat1Master1Spawner2ExplosiveMinions)
+	// 																						});
 		
-		allMonsterPackLists.Add(mineLvl_1_1b.sceneName, mineLvl_1_1b);
-		allMonsterPackLists.Add(mineLvl_1_2a.sceneName, mineLvl_1_2a);
+	// 	allMonsterPackLists.Add(mineLvl_1_1b.sceneName, mineLvl_1_1b);
+	// 	allMonsterPackLists.Add(mineLvl_1_2a.sceneName, mineLvl_1_2a);
 		
-		allMonsterPackLists.Add(mineLvl_1_2b.sceneName, mineLvl_1_2b);
+	// 	allMonsterPackLists.Add(mineLvl_1_2b.sceneName, mineLvl_1_2b);
 
-		allMonsterPackLists.Add(mineLvl_1_3a.sceneName, mineLvl_1_3a);
+	// 	allMonsterPackLists.Add(mineLvl_1_3a.sceneName, mineLvl_1_3a);
 		
-		allMonsterPackLists.Add(mineLvl_1_4a.sceneName, mineLvl_1_4a);
-	}
+	// 	allMonsterPackLists.Add(mineLvl_1_4a.sceneName, mineLvl_1_4a);
+	// }
 
-	private static void instantiateMineLvl_2()
-	{
-		MonsterPackList mineLvl_2_1a = new MonsterPackList("MineLvl_2-1a", new MonsterPack[]{	new MonsterPack(0, tutorialCrate),
-																								new MonsterPack(1, crate),
-																								new MonsterPack(2, crate)
-																							});
+	// private static void instantiateMineLvl_2()
+	// {
+	// 	MonsterPackList mineLvl_2_1a = new MonsterPackList("MineLvl_2-1a", new MonsterPack[]{	new MonsterPack(0, tutorialCrate),
+	// 																							new MonsterPack(1, crate),
+	// 																							new MonsterPack(2, crate)
+	// 																						});
 																							
-		MonsterPackList mineLvl_2_1b = new MonsterPackList("MineLvl_2-1b", new MonsterPack[]{	new MonsterPack(0, bat2Armored2Minions),
-																								new MonsterPack(1, bat1Spawner1Charged2ExplosiveMinions),
-																								new MonsterPack(2, bat1Spawner1Charged2ExplosiveMinions)
-																							});
+	// 	MonsterPackList mineLvl_2_1b = new MonsterPackList("MineLvl_2-1b", new MonsterPack[]{	new MonsterPack(0, bat2Armored2Minions),
+	// 																							new MonsterPack(1, bat1Spawner1Charged2ExplosiveMinions),
+	// 																							new MonsterPack(2, bat1Spawner1Charged2ExplosiveMinions)
+	// 																						});
 																							
-		MonsterPackList mineLvl_2_1c = new MonsterPackList("MineLvl_2-1c", new MonsterPack[]{	new MonsterPack(0, bat1Spawner1Charged2ExplosiveMinions),
-																								new MonsterPack(1, bat2Armored2Minions),
-																								new MonsterPack(2, bat1Spawner1Charged2ExplosiveMinions),
-																								new MonsterPack(3, bat1Spawner1Charged2ExplosiveMinions)
-																							});
+	// 	MonsterPackList mineLvl_2_1c = new MonsterPackList("MineLvl_2-1c", new MonsterPack[]{	new MonsterPack(0, bat1Spawner1Charged2ExplosiveMinions),
+	// 																							new MonsterPack(1, bat2Armored2Minions),
+	// 																							new MonsterPack(2, bat1Spawner1Charged2ExplosiveMinions),
+	// 																							new MonsterPack(3, bat1Spawner1Charged2ExplosiveMinions)
+	// 																						});
 		
-		MonsterPackList mineLvl_2_2b = new MonsterPackList("MineLvl_2-2b", new MonsterPack[]{	new MonsterPack(0, bat2Armored2Minions),
-																								new MonsterPack(1, bat2Charged2Minions)
-																							});
+	// 	MonsterPackList mineLvl_2_2b = new MonsterPackList("MineLvl_2-2b", new MonsterPack[]{	new MonsterPack(0, bat2Armored2Minions),
+	// 																							new MonsterPack(1, bat2Charged2Minions)
+	// 																						});
 
-		MonsterPackList mineLvl_2_3a = new MonsterPackList("MineLvl_2-3a", new MonsterPack[]{	new MonsterPack(0, bat1Spawner1Armored1Master1ExplosiveMinion),
-																								new MonsterPack(1, bat1Armored1Charged1Minion)
-																							});
+	// 	MonsterPackList mineLvl_2_3a = new MonsterPackList("MineLvl_2-3a", new MonsterPack[]{	new MonsterPack(0, bat1Spawner1Armored1Master1ExplosiveMinion),
+	// 																							new MonsterPack(1, bat1Armored1Charged1Minion)
+	// 																						});
 		
-		MonsterPackList mineLvl_2_3b = new MonsterPackList("MineLvl_2-3b", new MonsterPack[]{	new MonsterPack(0, crate),
-																								new MonsterPack(1, crate),
-																								new MonsterPack(2, crate)
-																							});
+	// 	MonsterPackList mineLvl_2_3b = new MonsterPackList("MineLvl_2-3b", new MonsterPack[]{	new MonsterPack(0, crate),
+	// 																							new MonsterPack(1, crate),
+	// 																							new MonsterPack(2, crate)
+	// 																						});
 																							
-		MonsterPackList mineLvl_2_4 = new MonsterPackList("MineLvl_2-4",   new MonsterPack[]{	new MonsterPack(0, worm1Spawner1Linked2Minions),
-																								new MonsterPack(1, worm1Spawner1Linked4Minions),
-																								new MonsterPack(2, wormBoss2Spawner1Linked4Minions, Facing.NorthWest)
-																							});
+	// 	MonsterPackList mineLvl_2_4 = new MonsterPackList("MineLvl_2-4",   new MonsterPack[]{	new MonsterPack(0, worm1Spawner1Linked2Minions),
+	// 																							new MonsterPack(1, worm1Spawner1Linked4Minions),
+	// 																							new MonsterPack(2, wormBoss2Spawner1Linked4Minions, Facing.NorthWest)
+	// 																						});
 																							
-		MonsterPackList mineLvl_2_6 = new MonsterPackList("MineLvl_2-6",   new MonsterPack[]{	new MonsterPack(0, bat2Master2Minions)
-																							}); // Wisdom
+	// 	MonsterPackList mineLvl_2_6 = new MonsterPackList("MineLvl_2-6",   new MonsterPack[]{	new MonsterPack(0, bat2Master2Minions)
+	// 																						}); // Wisdom
 																							
-		MonsterPackList mineLvl_2_7b = new MonsterPackList("MineLvl_2-7b", new MonsterPack[]{	
-																								new MonsterPack(0, bat1Spawner1Charged2ExplosiveMinions),
-																								new MonsterPack(1, bat2Armored2Minions),
-																								new MonsterPack(2, bat1Armored1Charged1Minion),
-																								new MonsterPack(3, bat1Master1Spawner2ExplosiveMinions),
-																								new MonsterPack(4, bat2Charged2Minions),
-																								new MonsterPack(5, bat3Master1Armored2Minions),
-																								new MonsterPack(6, batArmoredBoss, Facing.SouthWest) //boss
-																							});
+	// 	MonsterPackList mineLvl_2_7b = new MonsterPackList("MineLvl_2-7b", new MonsterPack[]{	
+	// 																							new MonsterPack(0, bat1Spawner1Charged2ExplosiveMinions),
+	// 																							new MonsterPack(1, bat2Armored2Minions),
+	// 																							new MonsterPack(2, bat1Armored1Charged1Minion),
+	// 																							new MonsterPack(3, bat1Master1Spawner2ExplosiveMinions),
+	// 																							new MonsterPack(4, bat2Charged2Minions),
+	// 																							new MonsterPack(5, bat3Master1Armored2Minions),
+	// 																							new MonsterPack(6, batArmoredBoss, Facing.SouthWest) //boss
+	// 																						});
 		
-		allMonsterPackLists.Add(mineLvl_2_1a.sceneName, mineLvl_2_1a);
-		allMonsterPackLists.Add(mineLvl_2_1b.sceneName, mineLvl_2_1b);
-		allMonsterPackLists.Add(mineLvl_2_1c.sceneName, mineLvl_2_1c);
+	// 	allMonsterPackLists.Add(mineLvl_2_1a.sceneName, mineLvl_2_1a);
+	// 	allMonsterPackLists.Add(mineLvl_2_1b.sceneName, mineLvl_2_1b);
+	// 	allMonsterPackLists.Add(mineLvl_2_1c.sceneName, mineLvl_2_1c);
 		
-		allMonsterPackLists.Add(mineLvl_2_2b.sceneName, mineLvl_2_2b);
+	// 	allMonsterPackLists.Add(mineLvl_2_2b.sceneName, mineLvl_2_2b);
 		
-		allMonsterPackLists.Add(mineLvl_2_3a.sceneName, mineLvl_2_3a);
-		allMonsterPackLists.Add(mineLvl_2_3b.sceneName, mineLvl_2_3b);
+	// 	allMonsterPackLists.Add(mineLvl_2_3a.sceneName, mineLvl_2_3a);
+	// 	allMonsterPackLists.Add(mineLvl_2_3b.sceneName, mineLvl_2_3b);
 		
-		allMonsterPackLists.Add(mineLvl_2_4.sceneName, mineLvl_2_4);
+	// 	allMonsterPackLists.Add(mineLvl_2_4.sceneName, mineLvl_2_4);
 		
-		allMonsterPackLists.Add(mineLvl_2_6.sceneName, mineLvl_2_6);
+	// 	allMonsterPackLists.Add(mineLvl_2_6.sceneName, mineLvl_2_6);
 		
-		allMonsterPackLists.Add(mineLvl_2_7b.sceneName, mineLvl_2_7b);
-	}
+	// 	allMonsterPackLists.Add(mineLvl_2_7b.sceneName, mineLvl_2_7b);
+	// }
 	
-	private static void instantiateMineLvl_3()
-	{
-		MonsterPackList mineLvl_3_1a = new MonsterPackList("MineLvl_3-1a", new MonsterPack[]{	new MonsterPack(0, worm4Master1Carapace),
-																								new MonsterPack(1, worm4Master1Carapace),
-																								new MonsterPack(2, worm4Master1Carapace)
-																							});	
-		MonsterPackList mineLvl_3_1b = new MonsterPackList("MineLvl_3-1b", new MonsterPack[]{
-																							});	
+	// private static void instantiateMineLvl_3()
+	// {
+	// 	MonsterPackList mineLvl_3_1a = new MonsterPackList("MineLvl_3-1a", new MonsterPack[]{	new MonsterPack(0, worm4Master1Carapace),
+	// 																							new MonsterPack(1, worm4Master1Carapace),
+	// 																							new MonsterPack(2, worm4Master1Carapace)
+	// 																						});	
+	// 	MonsterPackList mineLvl_3_1b = new MonsterPackList("MineLvl_3-1b", new MonsterPack[]{
+	// 																						});	
 		
-		MonsterPackList mineLvl_3_2a = new MonsterPackList("MineLvl_3-2a", new MonsterPack[]{	new MonsterPack(0, worm4Masters2Spawner),
-																								new MonsterPack(1, worm4Masters2Spawner)
-																							});	
+	// 	MonsterPackList mineLvl_3_2a = new MonsterPackList("MineLvl_3-2a", new MonsterPack[]{	new MonsterPack(0, worm4Masters2Spawner),
+	// 																							new MonsterPack(1, worm4Masters2Spawner)
+	// 																						});	
 		
-		MonsterPackList mineLvl_3_2b = new MonsterPackList("MineLvl_3-2b", new MonsterPack[]{	new MonsterPack(0, crate),
-																								new MonsterPack(1, crate),
-																								new MonsterPack(2, crate),
-																								new MonsterPack(3, crate),
-																								new MonsterPack(4, worm3Master1Spawner2Linked),
-																								new MonsterPack(5, worm3Master1Spawner2Linked),
-																								new MonsterPack(6, worm3Master1Spawner2Linked),
-																								new MonsterPack(7, worm3Master1Spawner2Linked)
-																							});		
+	// 	MonsterPackList mineLvl_3_2b = new MonsterPackList("MineLvl_3-2b", new MonsterPack[]{	new MonsterPack(0, crate),
+	// 																							new MonsterPack(1, crate),
+	// 																							new MonsterPack(2, crate),
+	// 																							new MonsterPack(3, crate),
+	// 																							new MonsterPack(4, worm3Master1Spawner2Linked),
+	// 																							new MonsterPack(5, worm3Master1Spawner2Linked),
+	// 																							new MonsterPack(6, worm3Master1Spawner2Linked),
+	// 																							new MonsterPack(7, worm3Master1Spawner2Linked)
+	// 																						});		
 		
-		//MonsterPackList mineLvl_3_3a = new MonsterPackList("MineLvl_3-3a", new MonsterPack[]{	new MonsterPack(0, bat1Master2Minions),
-		//																						new MonsterPack(1, bat1Master2Minions)
-		//																					});		
+	// 	//MonsterPackList mineLvl_3_3a = new MonsterPackList("MineLvl_3-3a", new MonsterPack[]{	new MonsterPack(0, bat1Master2Minions),
+	// 	//																						new MonsterPack(1, bat1Master2Minions)
+	// 	//																					});		
 		
-		MonsterPackList mineLvl_3_4a = new MonsterPackList("MineLvl_3-4a", new MonsterPack[]{	new MonsterPack(0, crate),
-																								new MonsterPack(1, worm1BigMaster),
-																								new MonsterPack(2, worm1BigMaster),
-																								new MonsterPack(3, worm1BigMaster)
-																							});
+	// 	MonsterPackList mineLvl_3_4a = new MonsterPackList("MineLvl_3-4a", new MonsterPack[]{	new MonsterPack(0, crate),
+	// 																							new MonsterPack(1, worm1BigMaster),
+	// 																							new MonsterPack(2, worm1BigMaster),
+	// 																							new MonsterPack(3, worm1BigMaster)
+	// 																						});
 																							
-		MonsterPackList mineLvl_3_4b = new MonsterPackList("MineLvl_3-4b", new MonsterPack[]{	new MonsterPack(0, worm3Masters2Fumes1Restorative),
-																								new MonsterPack(1, worm3Masters2Fumes1Restorative),
-																								new MonsterPack(2, worm3Masters2Fumes1Restorative)
-																							});
+	// 	MonsterPackList mineLvl_3_4b = new MonsterPackList("MineLvl_3-4b", new MonsterPack[]{	new MonsterPack(0, worm3Masters2Fumes1Restorative),
+	// 																							new MonsterPack(1, worm3Masters2Fumes1Restorative),
+	// 																							new MonsterPack(2, worm3Masters2Fumes1Restorative)
+	// 																						});
 																							
-		MonsterPackList mineLvl_3_5a = new MonsterPackList("MineLvl_3-5", new MonsterPack[]{	new MonsterPack(0, worm3Masters2Fumes1Restorative)
-																							});
+	// 	MonsterPackList mineLvl_3_5a = new MonsterPackList("MineLvl_3-5", new MonsterPack[]{	new MonsterPack(0, worm3Masters2Fumes1Restorative)
+	// 																						});
 		
-		MonsterPackList mineLvl_3_6a = new MonsterPackList("MineLvl_3-6a", new MonsterPack[]{	new MonsterPack(0, worm1BigMaster2Master2Fumes),
-																								new MonsterPack(1, worm1BigMaster2Master2Fumes)
-																							});	
+	// 	MonsterPackList mineLvl_3_6a = new MonsterPackList("MineLvl_3-6a", new MonsterPack[]{	new MonsterPack(0, worm1BigMaster2Master2Fumes),
+	// 																							new MonsterPack(1, worm1BigMaster2Master2Fumes)
+	// 																						});	
 																							
-		MonsterPackList mineLvl_3_7 = new MonsterPackList("MineLvl_3-7", new MonsterPack[]{		new MonsterPack(0, worm1BigMaster2Master2Spawner2Restorative),
-																								new MonsterPack(1, worm1BigMaster2Master2Spawner2Restorative),
-																								new MonsterPack(2, worm1BigMaster2Master2Spawner2Restorative),
-																								new MonsterPack(3, wormMine3Boss, Facing.SouthEast)
-																							});	
+	// 	MonsterPackList mineLvl_3_7 = new MonsterPackList("MineLvl_3-7", new MonsterPack[]{		new MonsterPack(0, worm1BigMaster2Master2Spawner2Restorative),
+	// 																							new MonsterPack(1, worm1BigMaster2Master2Spawner2Restorative),
+	// 																							new MonsterPack(2, worm1BigMaster2Master2Spawner2Restorative),
+	// 																							new MonsterPack(3, wormMine3Boss, Facing.SouthEast)
+	// 																						});	
 		
-		allMonsterPackLists.Add(mineLvl_3_1a.sceneName, mineLvl_3_1a);
-		allMonsterPackLists.Add(mineLvl_3_1b.sceneName, mineLvl_3_1b);					
-		allMonsterPackLists.Add(mineLvl_3_2a.sceneName, mineLvl_3_2a);
-		allMonsterPackLists.Add(mineLvl_3_2b.sceneName, mineLvl_3_2b);
-		//allMonsterPackLists.Add(mineLvl_3_3a.sceneName, mineLvl_3_3a);						
-		allMonsterPackLists.Add(mineLvl_3_4a.sceneName, mineLvl_3_4a);
-		allMonsterPackLists.Add(mineLvl_3_4b.sceneName, mineLvl_3_4b);
-		allMonsterPackLists.Add(mineLvl_3_5a.sceneName, mineLvl_3_5a);
-		allMonsterPackLists.Add(mineLvl_3_6a.sceneName, mineLvl_3_6a);
-		allMonsterPackLists.Add(mineLvl_3_7.sceneName, mineLvl_3_7);
-	}
+	// 	allMonsterPackLists.Add(mineLvl_3_1a.sceneName, mineLvl_3_1a);
+	// 	allMonsterPackLists.Add(mineLvl_3_1b.sceneName, mineLvl_3_1b);					
+	// 	allMonsterPackLists.Add(mineLvl_3_2a.sceneName, mineLvl_3_2a);
+	// 	allMonsterPackLists.Add(mineLvl_3_2b.sceneName, mineLvl_3_2b);
+	// 	//allMonsterPackLists.Add(mineLvl_3_3a.sceneName, mineLvl_3_3a);						
+	// 	allMonsterPackLists.Add(mineLvl_3_4a.sceneName, mineLvl_3_4a);
+	// 	allMonsterPackLists.Add(mineLvl_3_4b.sceneName, mineLvl_3_4b);
+	// 	allMonsterPackLists.Add(mineLvl_3_5a.sceneName, mineLvl_3_5a);
+	// 	allMonsterPackLists.Add(mineLvl_3_6a.sceneName, mineLvl_3_6a);
+	// 	allMonsterPackLists.Add(mineLvl_3_7.sceneName, mineLvl_3_7);
+	// }
 
 	/*
 	public static void setAllMonsterPackListsToReset()

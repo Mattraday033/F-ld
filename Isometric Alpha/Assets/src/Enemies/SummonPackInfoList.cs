@@ -18,26 +18,26 @@ public static class SummonPackInfoList
 	{	
 		allSummonPackInfo = new Dictionary<string, SummonStats[]>();
 		
-		SummonStats overseerGaspar = new SummonStats(Resources.Load<GameObject>(guardOverseerGameObjectKey), 
-													 guardOverseerGameObjectKey, "Overseer Gáspár", 20, 65, AbilityList.summonsWhipAttackKey, TraitList.predatory.getName());
+		// SummonStats overseerGaspar = new SummonStats(Resources.Load<GameObject>(guardOverseerGameObjectKey), 
+		// 											 guardOverseerGameObjectKey, "Overseer Gáspár", 20, 65, AbilityList.summonsWhipAttackKey, TraitList.predatory.getName());
 		
-		SummonStats guardReka = new SummonStats(Resources.Load<GameObject>(guardsGameObjectKey), 
-												guardsGameObjectKey, "Guard Réka", 20, 40, true);
+		// SummonStats guardReka = new SummonStats(Resources.Load<GameObject>(guardsGameObjectKey), 
+		// 										guardsGameObjectKey, "Guard Réka", 20, 40, true);
 		
-		SummonStats guardVirag = new SummonStats(Resources.Load<GameObject>(guardsGameObjectKey), 
-												 guardsGameObjectKey, "Guard Virág", 20, 40, true);
+		// SummonStats guardVirag = new SummonStats(Resources.Load<GameObject>(guardsGameObjectKey), 
+		// 										 guardsGameObjectKey, "Guard Virág", 20, 40, true);
 												 
-		allSummonPackInfo.Add(guardsMineLvl3Key, new SummonStats[]{overseerGaspar, guardReka, guardVirag});
+		// allSummonPackInfo.Add(guardsMineLvl3Key, new SummonStats[]{overseerGaspar, guardReka, guardVirag});
 		
-		SummonStats slaveRioter = new SummonStats(Resources.Load<GameObject>(guardsGameObjectKey), 
-												  guardsGameObjectKey, "Slave Rioter", 5, 5, true);
+		// SummonStats slaveRioter = new SummonStats(Resources.Load<GameObject>(guardsGameObjectKey), 
+		// 										  guardsGameObjectKey, "Slave Rioter", 5, 5, true);
 		
-		allSummonPackInfo.Add(smallSlaveRiotKey, new SummonStats[]{slaveRioter, slaveRioter, slaveRioter, slaveRioter});
+		// allSummonPackInfo.Add(smallSlaveRiotKey, new SummonStats[]{slaveRioter, slaveRioter, slaveRioter, slaveRioter});
 		
-		allSummonPackInfo.Add(largeSlaveRiotKey, new SummonStats[]{slaveRioter, slaveRioter, slaveRioter, slaveRioter,
-																   slaveRioter, slaveRioter, slaveRioter, slaveRioter,
-																   slaveRioter, slaveRioter, slaveRioter, slaveRioter,
-																   slaveRioter, slaveRioter, slaveRioter, slaveRioter});
+		// allSummonPackInfo.Add(largeSlaveRiotKey, new SummonStats[]{slaveRioter, slaveRioter, slaveRioter, slaveRioter,
+		// 														   slaveRioter, slaveRioter, slaveRioter, slaveRioter,
+		// 														   slaveRioter, slaveRioter, slaveRioter, slaveRioter,
+		// 														   slaveRioter, slaveRioter, slaveRioter, slaveRioter});
 	}
 	
 	public static SummonStats[] getSummonsToSpawn(string key)

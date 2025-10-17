@@ -43,108 +43,46 @@ public class EnemyStats : Stats
 
 	[SerializeField]
 	private int totalHealth;
-	[SerializeField]
-	private int weaponIndex = -1;
 
 	private CombatAction combatAction;
-	[SerializeField]
-	private bool lastManStandingAbility;
-	[SerializeField]
-	private string chargedTraitKey;
-	[SerializeField]
-	private string chargedActionKey;
-	[SerializeField]
-	private string regularActionKey;
-	[SerializeField]
-	private string environmentalCombatActionKey;
-	[SerializeField]
-	private string environmentalTargetingTraitKey;
-	[SerializeField]
-	private EnemyStats spawnType;
 
-	public EnemyStats() : base(null, "", "", 0)
-	{
-
-	}
-
-	public EnemyStats(GameObject combatSprite, string combatSpriteName, string name, int armor, int tHP) : base(combatSprite, combatSpriteName, name, tHP)
-	{
-		this.armor = armor;
+    public EnemyStats(string key, int armor, int tHP):
+    base(key)
+    {
+        this.armor = armor;
 
 		this.totalHealth = tHP;
+    }
 
-		traits = TraitList.getListOfTraits(traitNames);
+    public EnemyStats(string key, int armor, int tHP, CombatAction combatAction, Trait[] traits) :
+    base(key)
+    {
+        this.armor = armor;
 
-		instantiateCombatAction();
-	}
+        this.totalHealth = tHP;
 
-	public EnemyStats(GameObject combatSprite, string combatSpriteName, string name, int armor, int tHP, int weaponIndex) : base(combatSprite, combatSpriteName, name, tHP)
-	{
-		this.armor = armor;
+        this.combatAction = combatAction.clone();
 
-		this.totalHealth = tHP;
+        foreach (Trait trait in traits)
+        {
+            addTrait(trait);
+        }
+    }
 
-		this.weaponIndex = weaponIndex;
+    public override GameObject instantiateCombatSprite()
+    {
+        combatSprite = Instantiate(Resources.Load<GameObject>(PrefabNames.enemySprite));
 
-		traits = TraitList.getListOfTraits(traitNames);
+        combatSprite.transform.localScale = new Vector3(1f, 1f, 1f);
 
-		instantiateCombatAction();
-	}
+        Helpers.updateGameObjectPosition(combatSprite);
 
-	public EnemyStats(GameObject combatSprite, string combatSpriteName, string name, int armor, int tHP, string regularActionKey, string[] traitNames) : base(combatSprite, combatSpriteName, name, tHP)
-	{
-		this.armor = armor;
+        // EnemyStatsHover statsHover = combatSprite.AddComponent<EnemyStatsHover>();
 
-		this.totalHealth = tHP;
+        // statsHover.stats = this;
 
-		this.regularActionKey = regularActionKey;
-
-		this.traitNames = traitNames;
-
-		this.traits = TraitList.getListOfTraits(traitNames);
-
-		instantiateCombatAction();
-	}
-
-	public EnemyStats(GameObject combatSprite, string combatSpriteName, string name, int armor, int tHP, int weaponIndex, string[] traitNames) : base(combatSprite, combatSpriteName, name, tHP)
-	{
-		this.armor = armor;
-
-		this.totalHealth = tHP;
-
-		this.weaponIndex = weaponIndex;
-
-		this.traitNames = traitNames;
-
-		this.traits = TraitList.getListOfTraits(traitNames);
-
-		instantiateCombatAction();
-	}
-
-	public EnemyStats(string name, int armor, int tHP) : base(name, tHP)
-	{
-		this.armor = armor;
-		this.totalHealth = tHP;
-
-		traits = TraitList.getListOfTraits(traitNames);
-
-		instantiateCombatAction();
-	}
-
-	public override GameObject instantiateCombatSprite()
-	{
-		combatSprite = Instantiate(combatSprite);
-
-		combatSprite.transform.localScale = new Vector3(1f, 1f, 1f);
-
-		Helpers.updateGameObjectPosition(combatSprite);
-
-		// EnemyStatsHover statsHover = combatSprite.AddComponent<EnemyStatsHover>();
-
-		// statsHover.stats = this;
-
-		return combatSprite;
-	}
+        return combatSprite;
+    }
 
 	public override int getTotalArmorRating()
 	{
@@ -164,21 +102,15 @@ public class EnemyStats : Stats
 	public virtual void spawningCombatAction()
 	{
 		traits = TraitList.getListOfTraits(traitNames);
-		instantiateCombatAction();
 	}
 
 	public void instateEnvironmentalCombatAction()
 	{
-		EnvironmentalCombatActionManager.getInstance().instateEnvironmentalCombatAction(environmentalCombatActionKey, environmentalTargetingTraitKey, CombatGrid.getCombatantAtCoords(position));
+		// EnvironmentalCombatActionManager.getInstance().instateEnvironmentalCombatAction(environmentalCombatActionKey, environmentalTargetingTraitKey, CombatGrid.getCombatantAtCoords(position));
 	}
 
 	public CombatAction getCombatAction()
 	{
-		if (combatAction == null)
-		{
-			instantiateCombatAction();
-		}
-
 		if (combatAction == null || combatAction is null)
 		{
 			return null;
@@ -191,8 +123,9 @@ public class EnemyStats : Stats
 	}
 
 	public EnemyStats getSpawnType()
-	{
-		return spawnType;
+    {
+        Debug.LogError("getSpawnType Not Implemented");
+		return null;
 	}
 
 	public override bool isPriorityAttacker()
@@ -203,43 +136,6 @@ public class EnemyStats : Stats
 	public override bool isLowPriorityAttacker()
 	{
 		return lowPriorityAttacker;
-	}
-
-	public virtual void instantiateCombatAction()
-	{
-		checkForMissingTraitList();
-
-		if (chargedActionKey != null && chargedTraitKey != null && !chargedActionKey.Equals("") && !chargedTraitKey.Equals(""))
-		{
-			if (lastManStandingAbility)
-			{
-				combatAction = new LastManStandingAbility(TraitList.getTrait(chargedTraitKey), AbilityList.enemyAbilityDictionary[chargedActionKey]);
-
-			}
-			else
-			{
-				combatAction = new ChargeUpAbility(TraitList.getTrait(chargedTraitKey), AbilityList.enemyAbilityDictionary[chargedActionKey]);
-			}
-
-		}
-		else if (regularActionKey != null && !regularActionKey.Equals(""))
-		{
-			combatAction = AbilityList.getAbility(regularActionKey);
-
-		}
-		else if (hasTrait(TraitList.spawner) >= 0 && spawnType != null)
-		{
-			combatAction = new SummonAbility(CombatActionSettings.build(DescriptionParams.build("Spawn", "Uses Spawntype")), spawnType);
-		}
-
-		if (combatAction != null)
-		{
-			combatAction.setActor(this);
-		}
-		else
-		{
-			// Debug.LogError("No combatAction found for " + getName());
-		}
 	}
 
 	private void checkForMissingTraitList()
@@ -362,31 +258,6 @@ public class EnemyStats : Stats
 	public void setCombatAction(CombatAction combatAction)
 	{
 		this.combatAction = combatAction;
-	}
-
-	public void setLastManStandingAbility(bool lastManStandingAbility)
-	{
-		this.lastManStandingAbility = lastManStandingAbility;
-	}
-
-	public void setChargedTraitKey(string chargedTraitKey)
-	{
-		this.chargedTraitKey = chargedTraitKey;
-	}
-
-	public void setChargedActionKey(string chargedActionKey)
-	{
-		this.chargedActionKey = chargedActionKey;
-	}
-
-	public void setRegularActionKey(string regularActionKey)
-	{
-		this.regularActionKey = regularActionKey;
-	}
-
-	public void setWeaponIndex(int weaponIndex)
-	{
-		this.weaponIndex = weaponIndex;
 	}
 
 	public override IDescribable getHoverPanelDescribable()

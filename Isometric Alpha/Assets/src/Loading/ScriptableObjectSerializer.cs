@@ -7,7 +7,7 @@ public class ScriptableObjectSerializer : MonoBehaviour
 
     private void Awake()
     {
-        PartyManager.initialize(); 
+        // PartyManager.initialize(); 
     }
 
 }

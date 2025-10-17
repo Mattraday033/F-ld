@@ -157,8 +157,8 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 
 	public const int pathIndexHardCutoff = 1000;
 
-	//[SerializeField]
-	private int monsterPackIndex; //private so it can only set by using setMonsterPackIndex()
+    //[SerializeField]
+    private int monsterPackIndex; //private so it can only set by using setMonsterPackIndex()
 
 	public string tutorialHash;
 	public string packName = "???"; //Worms
@@ -175,23 +175,14 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 	public int retreatStunnedCounter = 0;
 
 	public Facing startingFacing; //if monster is starting with the wrong startingFacing, check it's AllMonsterPackLists entry first
-	public CharacterFacing enemyFacing;
+	public CharacterFacing enemyFacing = new CharacterFacing();
 
-	public TextMeshProUGUI directionDebugText;
-	public Vector3Int directionalModifierGrid;
-
-	public EnemyPackInfo enemyPackInfo;
-	private int numberOfPasses = 0;
 	private const int moveThreshold = 7;
 
-	public float detectionSize = .05f;
-	public Vector3 colliderAdjustment = Vector3.zero;
+	private float detectionSize = .05f;
 
-	public MovementManager movementManager;
-	public Dictionary<Vector3Int, bool> dictionaryOfSegments;
+	public Dictionary<Vector3Int, bool> dictionaryOfSegments = new Dictionary<Vector3Int, bool>();
 	public ArrayList gizmosToDraw = new ArrayList();
-
-	public TutorialPopUpButton tutorialPopUpButton;
 
 	public GameObject hoverTarget;
 
@@ -200,107 +191,49 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 		spawnTargetCanvas();
 	}
 
+    public MovementManager getMovementManager()
+    {
+        return MovementManager.getInstance();
+    }
 
-	// Start is called before the first frame update
-	void Start()
-	{
-		if (enemyFacing == null)
-		{
-			enemyFacing = new CharacterFacing();
-		}
+    public EnemyPackInfo getEnemyPackInfo()
+    {
+        return EnemyPackInfoList.getEnemyPackInfo(AreaManager.locationName, monsterPackIndex);
+    }
 
-		transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0);
+    private void OnDrawGizmos()
+    {
 
-		transform.localPosition = movementManager.grid.GetCellCenterLocal(movementManager.grid.LocalToCell(transform.localPosition));
+        if (followsPlayer)
+        {
 
-		Helpers.updateGameObjectPosition(gameObject);
+            int coordsIndex = 0;
+            foreach (Vector3Int coords in gizmosToDraw)
+            {
+                if (coordsIndex == 0)
+                {
+                    Gizmos.color = Color.green;
+                }
+                else
+                {
+                    Gizmos.color = Color.red;
+                }
 
-		movementManager = MovementManager.getInstance();
+                Gizmos.DrawWireSphere(AreaManager.getMasterGrid().CellToWorld(coords), detectionSize);
+                coordsIndex++;
+            }
+        }
+        else
+        {
+            Gizmos.color = Color.red;
 
-		if (shouldNotSpawn())
-		{
-			gameObject.SetActive(false);
-		}
-		else
-		{
-			movementManager.addEnemySprite(transform, monsterPackIndex + 1);
-			enemyFacing = new CharacterFacing();
+            foreach (Vector3Int direction in MovementManager.allDirectionVectors)
+            {
+                Gizmos.DrawWireSphere(MovementManager.getColliderInCellPosition(getCurrentCell() + direction), detectionSize);
+            }
+        }
 
-			if (CharacterFacing.withinRange(startingFacing))
-			{
-				setEnemyFacing(startingFacing);
-			}
-			else
-			{
-				setEnemyFacing(Facing.Random);
-			}
-		}
-
-		if (followsPlayer)
-		{
-			dictionaryOfSegments = new Dictionary<Vector3Int, bool>();
-		}
-
-		// if (hostilityTutorialShouldSpawnAtStart())
-		// {
-		// 	tutorialPopUpButton = TutorialPopUpButton.instantiateButton(transform);
-
-		// 	tutorialPopUpButton.spawnHostilityTutorialPopUp();
-		// }
-
-		// if (movableObjectTutorialShouldSpawnAtStart())
-		// {
-		// 	tutorialPopUpButton = TutorialPopUpButton.instantiateButton(transform);
-
-		// 	tutorialPopUpButton.spawnMovableObjectTutorialPopUp();
-		// }
-	}
-
-	//if killed already, do not spawn
-	private bool shouldNotSpawn()
-	{
-		if (enemyPackInfo != null && !string.IsNullOrEmpty(enemyPackInfo.killFlagKey) &&
-			Flags.getFlag(enemyPackInfo.killFlagKey))
-		{
-			return true;
-		}
-
-		return false;
-	}
-
-	private void OnDrawGizmos()
-	{
-
-		if (followsPlayer)
-		{
-
-			int coordsIndex = 0;
-			foreach (Vector3Int coords in gizmosToDraw)
-			{
-				if (coordsIndex == 0)
-				{
-					Gizmos.color = Color.green;
-				}
-				else
-				{
-					Gizmos.color = Color.red;
-				}
-
-				Gizmos.DrawWireSphere(movementManager.grid.CellToWorld(coords), detectionSize);
-				coordsIndex++;
-			}
-		}
-		else
-		{
-			Gizmos.color = Color.red;
-
-			foreach (Vector3Int direction in MovementManager.allDirectionVectors)
-			{
-				Gizmos.DrawWireSphere(colliderWorldPosition(direction), detectionSize);
-			}
-		}
-
-	}
+    }
 
 	public bool checkForPlayer(int monsterTransformIndex)
 	{
@@ -311,11 +244,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 
 		foreach (Vector3Int distanceModifier in distanceModifiers)
 		{
-			Collider2D currentCollider = Physics2D.OverlapCircle(colliderWorldPosition(distanceModifier), detectionSize, LayerAndTagManager.playerLayerMask);
-
-			if (currentCollider != null &&
-				currentCollider.isTrigger &&
-				currentCollider.tag == LayerAndTagManager.playerTag)
+			if (MovementManager.colliderInCell(getCurrentCell() + distanceModifier, LayerAndTagManager.playerLayerMask))
 			{
 				if (!moveableObject && !stunnedFromRetreating())
 				{
@@ -331,10 +260,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 
 	public void prepCombat(int monsterTransformIndex)
 	{
-		State.playerPosition = PlayerMovement.getInstance().transform.position;
-		State.enemyPosition = transform.localPosition;
-		State.enemyPackInfo = enemyPackInfo;
-		State.enemyFacing = enemyFacing;
+		State.enemyPackInfo = getEnemyPackInfo();
 		CombatStateManager.currentMonsterPack = getMonsterPack();
         CombatStateManager.locationBeforeCombat = AreaManager.locationName;
 
@@ -345,7 +271,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 		else
 		{
 			// CombatStateManager.whoIsSurprised = SurpriseState.PlayerSurprised;
-			CombatStateManager.whoIsSurprised = MovementManager.determineSurprisedParty();
+			CombatStateManager.whoIsSurprised = MovementManager.determineSurprisedParty(PlayerMovement.getInstance().transform.position, transform.position, Facing.SouthEast);
 		}
 
         SceneChange.changeSceneToCombat();
@@ -354,11 +280,6 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 
 	public Vector3Int findDirection()
 	{
-		if (movementManager == null)
-		{
-			movementManager = MovementManager.getInstance();
-		}
-
 		decrementSkillCounters();
 
 		if (stunnedFromCunning() || stunnedFromRetreating())
@@ -385,7 +306,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 			}
 			else
 			{
-				return pathToPlayer.getDirection(movementManager.grid.WorldToCell(transform.position));
+				return pathToPlayer.getDirection(AreaManager.getMasterGrid().WorldToCell(transform.position));
 			}
 		}
 	}
@@ -395,7 +316,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 		dictionaryOfSegments = new Dictionary<Vector3Int, bool>();
 		ArrayList listOfPaths = new ArrayList();
 		Vector3Int playerCoords = PlayerMovement.getMovementGridCoords();
-		PathSegment firstPathSegment = new PathSegment(movementManager.grid.WorldToCell(transform.position));
+		PathSegment firstPathSegment = new PathSegment(AreaManager.getMasterGrid().WorldToCell(transform.position));
 		dictionaryOfSegments.Add(firstPathSegment.coords, true);
 		PathToPlayer firstPathToPlayer = new PathToPlayer(firstPathSegment);
 		gizmosToDraw = new ArrayList();
@@ -420,7 +341,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 				outputPathToPlayer = currentPath;
 				break;
 			}
-			else if (canMoveToSpace(currentPath.lastSegment.coords))
+			else if (thisMoveIsLegal(currentPath.lastSegment.coords))
 			{
 				Vector3Int[] directions = new Vector3Int[4];
 				directions[0] = findClosestVectorToPlayer(currentPath.firstSegment.coords, playerCoords);
@@ -509,22 +430,6 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 		}
 	}
 
-	private bool canMoveToSpace(Vector3Int cellCoords)
-	{
-		Vector3 cellPosition = movementManager.grid.CellToWorld(cellCoords);
-
-		Collider2D impassibleCollider = Physics2D.OverlapCircle(cellPosition, detectionSize, LayerAndTagManager.layersImpassibleToEnemies);
-
-		if (impassibleCollider != null)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-	}
-
 	public ArrayList getAllLegalMoves()
 	{
 		ArrayList legalMoves = new ArrayList();
@@ -571,8 +476,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 
 	public bool thisMoveIsLegal(Vector3Int directionalModifier)
 	{
-
-		return !Physics2D.OverlapCircle(colliderWorldPosition(directionalModifier), detectionSize, LayerAndTagManager.blocksEnemyMovementLayerMask);
+        return !MovementManager.colliderInCell(getCurrentCell() + directionalModifier, LayerAndTagManager.blocksEnemyMovementLayerMask);
 	}
 
 	public void setMonsterPackIndex(int i)
@@ -580,31 +484,16 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 		monsterPackIndex = i;
 	}
 
-	private Vector3 colliderWorldPosition() //world used for checking for colliders and drawing gizmos
+	public int getMonsterPackIndex()
 	{
-		return movementManager.grid.GetCellCenterWorld(movementManager.grid.WorldToCell(transform.position) + directionalModifierGrid) + colliderAdjustment;
+		return monsterPackIndex;
 	}
 
-	private Vector3 colliderWorldPosition(Vector3Int dirModGrid) //world used for checking for colliders and drawing gizmos
-	{
-		if (movementManager == null)
-		{
-			if (!Flags.getFlag(FlagNameList.newGameFlagName))
-			{
-				throw new NullReferenceException("movementManager == null");
-			}
-			return Vector3.zero; //code because entering the prefab menu keeps throwing NullReferenceExceptions
-		}
-
-		return movementManager.grid.GetCellCenterWorld(movementManager.grid.WorldToCell(transform.position) + dirModGrid) + colliderAdjustment;
-	}
-
-	public Vector3Int getMovementGridCoordsWorld()
-	{
-		Vector3 positionWithAdjustment = new Vector3(transform.position.x, transform.position.y, 0);
-		return movementManager.grid.WorldToCell(positionWithAdjustment);
-	}
-
+    private Vector3Int getCurrentCell() //world used for checking for colliders and drawing gizmos
+    {
+        return AreaManager.getMasterGrid().WorldToCell(transform.position);
+    }
+    
 	public void putBackToStartingPosition()
 	{
 		if (!canBePutBackToStartingPosition())
@@ -613,13 +502,13 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 		}
 
 		Vector3 startPosition = getMonsterPack().startPosition;
-		transform.position = movementManager.grid.GetCellCenterWorld(movementManager.grid.WorldToCell(startPosition));
+		transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(AreaManager.getMasterGrid().WorldToCell(startPosition));
 
 		State.currentMonsterPackList.monsterPacks[monsterPackIndex].currentPosition = transform.position;
 
 		Helpers.updateGameObjectPosition(gameObject);
 
-		movementManager.updateArrays();
+		getMovementManager().updateArrays();
 	}
 
 	public bool canBePutBackToStartingPosition()
@@ -628,7 +517,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 
 		startPosition.z = 0f;
 
-		Vector3Int startPositionGridSquare = movementManager.grid.WorldToCell(startPosition);
+		Vector3Int startPositionGridSquare = AreaManager.getMasterGrid().WorldToCell(startPosition);
 		List<Vector3Int> allCurrentCells = MovementManager.getAllCurrentSpriteCells();
 
 		foreach (Vector3Int cellPos in allCurrentCells)
@@ -642,11 +531,6 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 		return true;
 	}
 
-	public void setEnemyFacing(int newFacing)
-	{
-		setEnemyFacing((Facing)newFacing);
-	}
-
 	public void setEnemyFacing(Facing newFacing)
 	{
 		enemyFacing.setFacing(newFacing);
@@ -655,8 +539,6 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 		{
 			enemyDirectionIndicator.setArrowDirection(enemyFacing);
 		}
-
-		State.currentMonsterPackList.monsterPacks[monsterPackIndex].facingDirection = enemyFacing.getFacing();
 	}
 
 	public void cunning()
@@ -825,19 +707,19 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 	
 	public void spawnTargetCanvas()
 	{
-		if (hoverTarget == null)
-		{
-			gameObject.AddComponent<RectTransform>();
+		// if (hoverTarget == null)
+		// {
+		// 	gameObject.AddComponent<RectTransform>();
 
-			if (moveableObject)
-			{
-				hoverTarget = Instantiate(Resources.Load<GameObject>(PrefabNames.targetBox), transform);
-			}
-			else
-			{
-				hoverTarget = Instantiate(Resources.Load<GameObject>(PrefabNames.targetBox), transform);
-			}
-		}
+		// 	if (moveableObject)
+		// 	{
+		// 		hoverTarget = Instantiate(Resources.Load<GameObject>(PrefabNames.targetBox), transform);
+		// 	}
+		// 	else
+		// 	{
+		// 		hoverTarget = Instantiate(Resources.Load<GameObject>(PrefabNames.targetBox), transform);
+		// 	}
+		// }
 	}
 
 	public void createHoverTag()
@@ -885,10 +767,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 
 		blocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
 
-		if (enemyPackInfo != null)
-		{
-			blocks.AddRange(enemyPackInfo.getDescriptionBuildingBlocks());
-		}
+        blocks.AddRange(getEnemyPackInfo().getDescriptionBuildingBlocks());
 
 		return blocks;
 	}

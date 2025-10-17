@@ -86,12 +86,12 @@ public static class TransitionSpawnInfoList
 
         list = new List<TransitionSpawnInfo>();
 
-
         list.Add(new TransitionSpawnInfo(AreaNameList.slaveShackSix, AreaNameList.campSouthEast, new Vector3Int(5, 3), Facing.SouthEast, twoSpaceMultiplier, sizeTwo, Axis.DescendingX));
 
         list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, AreaNameList.slaveShackSix, AreaNameList.campSouthEast, new Vector3Int(-3, -2), Facing.NorthEast));
 
         list.Add(new TransitionSpawnInfoWithCorner(startingIndexThree, AreaNameList.slaveShackSix, AreaNameList.campSouthEast, new Vector3Int(8, -7), Facing.NorthWest, twoSpaceMultiplier, sizeTwo, Axis.DescendingX));
+        
         transitionSpawnInfoDict.Add(AreaNameList.slaveShackSix, list);
 
         #endregion
@@ -279,8 +279,8 @@ public static class TransitionSpawnInfoList
         list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, AreaNameList.campSouthEast, AreaNameList.slaveShackFive, new Vector3Int(10, 16), Facing.SouthWest, twoSpaceMultiplier));
 
         list.Add(new TransitionSpawnInfo(AreaNameList.campSouthEast, AreaNameList.slaveShackSix, new Vector3Int(15, 8), Facing.NorthWest, twoSpaceMultiplier, sizeTwo, Axis.DescendingX));
-        list.Add(new TransitionSpawnInfoWithCorner(startingIndexOne, AreaNameList.campSouthEast, AreaNameList.slaveShackSix, new Vector3Int(10, 6), Facing.SouthWest, twoSpaceMultiplier));
-        list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, AreaNameList.campSouthEast, AreaNameList.slaveShackSix, new Vector3Int(16, 4), Facing.SouthEast, twoSpaceMultiplier, sizeTwo, Axis.DescendingX));
+        list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, AreaNameList.campSouthEast, AreaNameList.slaveShackSix, new Vector3Int(10, 6), Facing.SouthWest, twoSpaceMultiplier));
+        list.Add(new TransitionSpawnInfoWithCorner(startingIndexThree, AreaNameList.campSouthEast, AreaNameList.slaveShackSix, new Vector3Int(16, 4), Facing.SouthEast, twoSpaceMultiplier, sizeTwo, Axis.DescendingX));
 
         list.Add(new TransitionSpawnInfo(AreaNameList.campSouthEast, AreaNameList.messHall, new Vector3Int(14, -6), Facing.NorthWest, twoSpaceMultiplier));
         list.Add(new TransitionSpawnInfoWithCorner(startingIndexOne, AreaNameList.campSouthEast, AreaNameList.messHall, new Vector3Int(8, -5), Facing.NorthWest, twoSpaceMultiplier));

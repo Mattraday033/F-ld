@@ -119,7 +119,7 @@ public class LoadSaveFile : IDecision
 
             ShopkeeperInventoryList.setShopkeeperInventoryList(newShopkeeperInventories, newBuyBackInventories);
 
-            State.currentMonsterPackList = saveBlueprint.extractMonsterPackListFromJson();
+            // State.currentMonsterPackList = saveBlueprint.extractMonsterPackListFromJson();
 
             SaveBlueprint.resetAndOverwriteQuestDictionary(saveBlueprint.extractQuestListFromJson());
             State.allKnownMapData = saveBlueprint.extractAllKnownMapDataFromJson();
@@ -149,6 +149,8 @@ public class LoadSaveFile : IDecision
             }
 
             skipTutorials();
+
+            SpawnInfoManager.lastSaveBlueprint = saveBlueprint;
 
             SceneChange.changeSceneToOverworld();
 

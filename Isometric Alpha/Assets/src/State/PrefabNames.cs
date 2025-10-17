@@ -186,6 +186,16 @@ public static class PrefabNames
     public const string transitionSpace = interactablesFolder + "Transition Space";
     public const string vaultableObject = interactablesFolder + "VaultableObject";
     public const string chest = interactablesFolder + "Chest";
+    public const string oocMonster = interactablesFolder + "OOC Monster";
+
+    #endregion
+
+    #region Combat
+
+    public const string combatFolder = "Combat/";
+
+    public const string enemySprite = combatFolder + "Enemy Sprite";
+    public const string healthBar = combatFolder + "Health Bar";
 
     #endregion
 

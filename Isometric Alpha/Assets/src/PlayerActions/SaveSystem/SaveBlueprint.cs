@@ -14,6 +14,27 @@ public struct InventoryWrapper
     public string[] inventory;
 }
 
+
+[System.Serializable]
+public struct PositionWrapper
+{
+    public float x;
+    public float y;
+    public float z;
+
+    public PositionWrapper(Vector3 position)
+    {
+        x = position.x;
+        y = position.y;
+        z = position.z;
+    }
+
+    public Vector3 getPosition()
+    {
+        return new Vector3(x, y, z);
+    }
+}
+
 [System.Serializable]
 public struct StatsWrapper
 {
@@ -117,7 +138,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 	public InventoryWrapper[] currentShopkeeperInventories;
 	public InventoryWrapper[] currentBuyBackInventories;
 
-	public string[] monsterPackList;
+    public PositionWrapper[] monsterLocations;
 	public string[] currentMonsterDefeatKeys = new string[State.monsterDefeatKeys.Count];
 
 	public static SaveBlueprint build(string saveName, int saveNumber)
@@ -168,10 +189,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		saveBlueprint.currentShopkeeperInventories = convertShopkeeperInventoriesToJson(ShopkeeperInventoryList.shopkeeperInventories);
 		saveBlueprint.currentBuyBackInventories = convertShopkeeperInventoriesToJson(ShopkeeperInventoryList.buyBackInventories);
 
-		if (State.currentMonsterPackList != null)
-		{
-			saveBlueprint.monsterPackList = convertToJson(Array.ConvertAll(State.currentMonsterPackList.monsterPacks, item => (IJSONConvertable)item));
-		}
+        saveBlueprint.monsterLocations = MovementManager.getAllMonsterLocations();
 
 		return saveBlueprint;
 	}
@@ -234,7 +252,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		this.currentBuyBackInventories = GetFromJson.getElementFromJson(this.saveName, nameof(currentBuyBackInventories), jsonDynamic, SaveDefaultValues.defaultEmptyInventoryWrapperArray);
 
 
-		this.monsterPackList = GetFromJson.getElementFromJson(this.saveName, nameof(monsterPackList), jsonDynamic, null);
+		this.monsterLocations = GetFromJson.getElementFromJson(this.saveName, nameof(monsterLocations), jsonDynamic, null);
 		this.currentMonsterDefeatKeys = GetFromJson.getElementFromJson(this.saveName, nameof(currentMonsterDefeatKeys), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
 	}
 
@@ -372,31 +390,6 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		{
 			return ItemList.getItem(itemListID);
 		}
-	}
-
-	public MonsterPackList extractMonsterPackListFromJson()
-	{
-		if (monsterPackList == null)
-		{
-			return default(MonsterPackList);
-		}
-
-		MonsterPack[] monsterPacks = new MonsterPack[monsterPackList.Length];
-
-		int i = 0;
-		foreach (string json in monsterPackList)
-		{
-			MonsterPack monsterPack = MonsterPack.extractFromJson(json);
-
-			monsterPacks[i] = monsterPack;
-
-			i++;
-		}
-
-		MonsterPackList newMonsterPackList = new MonsterPackList(currentLocation, monsterPacks);
-		//newMonsterPackList.shouldReset = false;
-
-		return newMonsterPackList;
 	}
 
 	public static void resetAndOverwriteQuestDictionary(Dictionary<string, Quest> newQuestDictionary)

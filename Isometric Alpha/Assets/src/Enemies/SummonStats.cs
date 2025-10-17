@@ -6,7 +6,6 @@ using System.Linq;
 using UnityEngine.UI;
 using UnityEngine;
 
-[CreateAssetMenu] 
 public class SummonStats : EnemyStats
 {
 	private const string summonedTraitName = "Summoned";
@@ -14,15 +13,10 @@ public class SummonStats : EnemyStats
 	
 	//[SerializeField]
 	private bool volleys;
+
 	
-	public SummonStats(GameObject combatSprite, string combatSpriteName, string name, int armor, int tHP, bool volleys): 
-		base(combatSprite, combatSpriteName, name, armor, tHP, testWeaponIndex, new string[]{summonedTraitName, TraitList.chaotic.getName()})
-	{
-		this.volleys = volleys;
-	}
-	
-	public SummonStats(GameObject combatSprite, string combatSpriteName, string name, int armor, int tHP, string actionKey, string targetPriorityTraitName): 
-		base(combatSprite, combatSpriteName, name, armor, tHP, actionKey, new string[]{summonedTraitName, targetPriorityTraitName})
+	public SummonStats(string name, int armor, int tHP): 
+		base(name, armor, tHP)
 	{
 		this.volleys = false;
 	}

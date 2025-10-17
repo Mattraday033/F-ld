@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
 public class EnteredMineLvl2_2a : QuestStepActivationScript
 {
     private const string questName = "Explore the Mine";

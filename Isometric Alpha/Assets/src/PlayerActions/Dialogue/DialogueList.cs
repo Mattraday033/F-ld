@@ -15,39 +15,39 @@ public static class DialogueList
     static DialogueList()
     {
         #region Dialogues not attached to NPC's
-        addDialogueToList(DialogueNameList.nandorAfterKillingGuardsMineLvl3Key,
-                         new Dialogue(new string[] { "", "Nándor", "Carter", "Guard Márcos", "Guard Pázmán", "Guard Réka" }, new GameObject[6], Resources.Load<TextAsset>(DialogueNameList.nandorAfterKillingGuardsMineLvl3Key)));
+        // addDialogueToList(DialogueNameList.nandorAfterKillingGuardsMineLvl3Key,
+        //                  new Dialogue(new string[] { "", "Nándor", "Carter", "Guard Márcos", "Guard Pázmán", "Guard Réka" }, new GameObject[6], Resources.Load<TextAsset>(DialogueNameList.nandorAfterKillingGuardsMineLvl3Key)));
 
-        addDialogueToList(DialogueNameList.slavesAfterKillingOverseerCampNEKey,
-                         new Dialogue(new string[] { "", "Nándor", "Carter", "Garcha", "Janos", "Clay", "Slave 1", "Slave 2", "Slave 3", "Slave 4", "The Crowd", "AfterOverseerParent" }, new GameObject[12], Resources.Load<TextAsset>(DialogueNameList.slavesAfterKillingOverseerCampNEKey)));
+        // addDialogueToList(DialogueNameList.slavesAfterKillingOverseerCampNEKey,
+        //                  new Dialogue(new string[] { "", "Nándor", "Carter", "Garcha", "Janos", "Clay", "Slave 1", "Slave 2", "Slave 3", "Slave 4", "The Crowd", "AfterOverseerParent" }, new GameObject[12], Resources.Load<TextAsset>(DialogueNameList.slavesAfterKillingOverseerCampNEKey)));
 
-        addDialogueToList(DialogueNameList.kendeUponEnteringKitchensKey,
-                         new Dialogue(new string[] { "", "Kende", "Imre 1", "Imre 2", "Pan", "Guard", "Slave" }, new GameObject[7], Resources.Load<TextAsset>(DialogueNameList.kendeUponEnteringKitchensKey), new NPCCombatInfo(new EnemyPackInfo[]{     EnemyPackInfoList.halfSlavesNoGuardFight,
-                                                                                                                                                                                                                                        EnemyPackInfoList.halfSlavesFight,
-                                                                                                                                                                                                                                        EnemyPackInfoList.fullSlavesNoGuardFight,
-		/*Dont delete this white space*/																																																EnemyPackInfoList.fullSlavesFight},
-                                                                                                                                                                                                                     new DeadNameList[]{new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre}),
-                                                                                                                                                                                                                                        new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre}),
-                                                                                                                                                                                                                                        new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre}),
-                                                                                                                                                                                                                                        new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre})})));
+        // addDialogueToList(DialogueNameList.kendeUponEnteringKitchensKey,
+        //                  new Dialogue(new string[] { "", "Kende", "Imre 1", "Imre 2", "Pan", "Guard", "Slave" }, new GameObject[7], Resources.Load<TextAsset>(DialogueNameList.kendeUponEnteringKitchensKey), new NPCCombatInfo(new EnemyPackInfo[]{     EnemyPackInfoList.halfSlavesNoGuardFight,
+        //                                                                                                                                                                                                                                 EnemyPackInfoList.halfSlavesFight,
+        //                                                                                                                                                                                                                                 EnemyPackInfoList.fullSlavesNoGuardFight,
+		// /*Dont delete this white space*/																																																EnemyPackInfoList.fullSlavesFight},
+        //                                                                                                                                                                                                              new DeadNameList[]{new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre}),
+        //                                                                                                                                                                                                                                 new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre}),
+        //                                                                                                                                                                                                                                 new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre}),
+        //                                                                                                                                                                                                                                 new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre})})));
 
-        addDialogueToList(DialogueNameList.taborManse2F2BKey,
-                         new Dialogue(new string[] { "", "Chief Tabor" }, new GameObject[2], Resources.Load<TextAsset>(DialogueNameList.taborManse2F2BKey), new NPCCombatInfo(new EnemyPackInfo[] { EnemyPackInfoList.taborFight },
-                                                                                                                                                               new DeadNameList[] { new DeadNameList(new string[] { NPCNameList.chiefTabor }) })));
+        // addDialogueToList(DialogueNameList.taborManse2F2BKey,
+        //                  new Dialogue(new string[] { "", "Chief Tabor" }, new GameObject[2], Resources.Load<TextAsset>(DialogueNameList.taborManse2F2BKey), new NPCCombatInfo(new EnemyPackInfo[] { EnemyPackInfoList.taborFight },
+        //                                                                                                                                                        new DeadNameList[] { new DeadNameList(new string[] { NPCNameList.chiefTabor }) })));
 
-        addDialogueToList(DialogueNameList.directorDefeatedConvoKey,
-                         new Dialogue(new string[] { "", "Director", "Page", "Carter", "Nándor" }, new GameObject[5], Resources.Load<TextAsset>(DialogueNameList.directorDefeatedConvoKey)));
-
-
-        addDialogueToList(DialogueNameList.guardPunishmentConvoKey,
-                         new Dialogue(new string[] { "", "Nándor", "Carter", "Kastor", "Janos", "Broglin", "Garcha", "Slave 1", "Slave 2", "Slave 3", "The Crowd", "Chief Tabor", "Guard Márcos", "Guard András", "Guard Réka", "Guard Pázmán", "Ervin", "Clay" }, new GameObject[18], Resources.Load<TextAsset>(DialogueNameList.guardPunishmentConvoKey)));
+        // addDialogueToList(DialogueNameList.directorDefeatedConvoKey,
+        //                  new Dialogue(new string[] { "", "Director", "Page", "Carter", "Nándor" }, new GameObject[5], Resources.Load<TextAsset>(DialogueNameList.directorDefeatedConvoKey)));
 
 
-        addDialogueToList(DialogueNameList.afterKillingAndrasConvoKey, new Dialogue(new string[] { "", "Janos" }, new GameObject[2], Resources.Load<TextAsset>(DialogueNameList.afterKillingAndrasConvoKey)));
+        // addDialogueToList(DialogueNameList.guardPunishmentConvoKey,
+        //                  new Dialogue(new string[] { "", "Nándor", "Carter", "Kastor", "Janos", "Broglin", "Garcha", "Slave 1", "Slave 2", "Slave 3", "The Crowd", "Chief Tabor", "Guard Márcos", "Guard András", "Guard Réka", "Guard Pázmán", "Ervin", "Clay" }, new GameObject[18], Resources.Load<TextAsset>(DialogueNameList.guardPunishmentConvoKey)));
 
-        addDialogueToList(DialogueNameList.vazulKey, new Dialogue(new string[] { "", "Thatch 1", "Slate", "Thatch 1" }, new GameObject[4], Resources.Load<TextAsset>(DialogueNameList.vazulKey)));
 
-        addDialogueToList(DialogueNameList.taborAfterClayFightKey, new Dialogue(new string[] { "", "Chief Tabor" }, new GameObject[2], Resources.Load<TextAsset>(DialogueNameList.taborAfterClayFightKey), new TextAsset[] { Resources.Load<TextAsset>(DialogueNameList.chiefTaborPunishmentDialogueKey) }));
+        // addDialogueToList(DialogueNameList.afterKillingAndrasConvoKey, new Dialogue(new string[] { "", "Janos" }, new GameObject[2], Resources.Load<TextAsset>(DialogueNameList.afterKillingAndrasConvoKey)));
+
+        // addDialogueToList(DialogueNameList.vazulKey, new Dialogue(new string[] { "", "Thatch 1", "Slate", "Thatch 1" }, new GameObject[4], Resources.Load<TextAsset>(DialogueNameList.vazulKey)));
+
+        // addDialogueToList(DialogueNameList.taborAfterClayFightKey, new Dialogue(new string[] { "", "Chief Tabor" }, new GameObject[2], Resources.Load<TextAsset>(DialogueNameList.taborAfterClayFightKey), new TextAsset[] { Resources.Load<TextAsset>(DialogueNameList.chiefTaborPunishmentDialogueKey) }));
 
         #endregion
 

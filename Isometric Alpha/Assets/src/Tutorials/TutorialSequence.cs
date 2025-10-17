@@ -1118,6 +1118,11 @@ public class TutorialSequence
 
     public static bool shouldSkipTutorialSequence(TutorialSequence tutorialSequence)
     {
+        if(tutorialSequence == null)
+        {
+            return true;
+        }
+
         string tutorialSeenFlagName = tutorialSequence.tutorialSeenFlagName;
 
         switch (tutorialSeenFlagName)

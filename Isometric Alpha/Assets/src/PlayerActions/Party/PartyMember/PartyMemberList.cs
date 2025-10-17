@@ -18,6 +18,7 @@ public static class PartyMemberList
 
     public static PartyMember getResetPartyMember(string allyName)
     {
+        AbilityList.initialize();
 
         switch (allyName)
         {

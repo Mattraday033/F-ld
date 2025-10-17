@@ -85,7 +85,7 @@ public static class AbilityList
 	public const string versatileName = "Versatile";
 
     public const string batClawName = "Bat Claw";
-	public static DescriptionParams batClawDescription = DescriptionParams.build(batClawName, "The sharp talons of a bat", "Claw");
+	public readonly static DescriptionParams batClawDescription = DescriptionParams.build(batClawName, "The sharp talons of a bat", "Claw");
 
     public const string harmlessKey = "Harmless";
 
@@ -140,7 +140,7 @@ public static class AbilityList
 	public const string stompKey = "Stomp";
 	public const string feedKey = "Feed";
 
-	public static DescriptionParams boulderRollDescription = DescriptionParams.build(boulderRollKey, "A massive rock tumbling quickly towards you.", "BoulderRoll");
+	public readonly static DescriptionParams boulderRollDescription = DescriptionParams.build(boulderRollKey, "A massive rock tumbling quickly towards you.", "BoulderRoll");
     public const string evolveKey = "Evolve";
 	public const string boulderRollKey = "Boulder Roll";
 	public const string lesserBoulderRollKey = "Lesser Boulder Roll";
@@ -155,7 +155,7 @@ public static class AbilityList
       
 
 	public const string wormFumesIndicatorName = "WormFumesIndicator";
-	public static GroundEffect wormFumesGroundEffect = new GroundEffect("6", 4, GridCoords.getDefaultCoords(), Resources.Load<GameObject>(wormFumesIndicatorName));
+	public readonly static GroundEffect wormFumesGroundEffect = new GroundEffect("6", 4, GridCoords.getDefaultCoords(), Resources.Load<GameObject>(wormFumesIndicatorName));
 	
 	public static Dictionary<string,Ability> statAbilityDictionary;
 	public static Dictionary<string,Ability> lessonAbilityDictionary;
@@ -165,9 +165,19 @@ public static class AbilityList
 	
 	public static Dictionary<string,ArrayList> companionAbilityDictionary;
 	
-	static AbilityList()
-	{
-		instantiateStatAbilities();
+    public static void initialize()
+    {
+        if(statAbilityDictionary != null &&
+            lessonAbilityDictionary != null &&
+            summonAbilityDictionary != null &&
+            enemyAbilityDictionary != null &&
+            miscAbilityDictionary != null &&
+            companionAbilityDictionary != null)
+        {
+            return;
+        }
+
+        instantiateStatAbilities();
 	
 		instantiateLessonAbilities();
 
@@ -178,7 +188,7 @@ public static class AbilityList
 		instantiateEnemyAbilities();
 		
 		instantiateMiscAbilities();
-	}
+    }
 	
 	private static void instantiateEnemyAbilities()
 	{
@@ -522,7 +532,9 @@ public static class AbilityList
 	}
 	
 	public static CombatAction getAbility(string key)
-	{
+    {
+        initialize();
+
 		Ability ability = null;
 			
 		statAbilityDictionary.TryGetValue(key, out ability);

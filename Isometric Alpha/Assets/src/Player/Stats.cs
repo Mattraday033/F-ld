@@ -8,7 +8,6 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 
-[CreateAssetMenu]
 public class Stats : ScriptableObject, ICloneable, IDescribable, IDescribableInBlocks
 {
     public static UnityEvent OnHealthChange = new UnityEvent();

@@ -29,9 +29,6 @@ public static class State
 
 	public static EnemyPackInfo enemyPackInfo;
 	public static CharacterFacing playerFacing;
-	public static CharacterFacing enemyFacing;
-	public static Vector3 playerPosition;
-	public static Vector3 enemyPosition;
 	public static bool onLeftFoot;
 
     public static TransitionInfo currentSourceTransitionInfo;

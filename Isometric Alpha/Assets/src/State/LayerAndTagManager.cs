@@ -61,23 +61,10 @@ public static class LayerAndTagManager
 
 	public readonly static LayerMask blocksObservationLayerMask = initializeBlocksObservationLayerMask();
 
-	public readonly static LayerMask layersImpassibleToEnemies = initializeLayersImpassibleToEnemies();
 	public readonly static LayerMask pressesButtonsLayerMask = initializePressesButtonsLayerMask();
 
 	public readonly static LayerMask cameraInputLayerMask = initializeUICameraLayerMask();
 
-
-	private static LayerMask initializeLayersImpassibleToEnemies()
-	{
-		LayerMask layersImpassibleToEnemies = new LayerMask();
-		layersImpassibleToEnemies |= (1 << enemyBoundaryLayer);
-		layersImpassibleToEnemies |= (1 << movableObjectLayer);
-		layersImpassibleToEnemies |= (1 << npcLayer);
-		layersImpassibleToEnemies |= (1 << chestLayer);
-        layersImpassibleToEnemies |= (1 << colliderLayer);
-
-        return layersImpassibleToEnemies;
-	}
 
 	private static LayerMask initializePlayerLayerMask()
 	{

@@ -94,7 +94,9 @@ public static class Strength
 	}
 
 	public static CombatAction[] getStartingActions()
-	{
+    {
+        AbilityList.initialize();
+        
 		return new CombatAction[] { new FistAttack(), AbilityList.getAbility("s-2-1"), AbilityList.getAbility("s-2-1"), null, null, null, null, null, null, null, null, null };
 	}
 

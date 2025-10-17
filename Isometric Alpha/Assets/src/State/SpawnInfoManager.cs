@@ -5,9 +5,10 @@ using UnityEngine;
 public static class SpawnInfoManager
 {
 
+    public static SaveBlueprint lastSaveBlueprint;
     public static List<GameObject> allSpawnedObjects;
     private const string playerPrefab = "PlayerOOC";
-    public static Vector3Int defaultCell = new Vector3Int(7,1);
+    public static Vector3Int defaultCell = new Vector3Int(7, 1);
 
     static SpawnInfoManager()
     {
@@ -16,7 +17,7 @@ public static class SpawnInfoManager
 
     public static void initialize()
     {
-        
+
     }
 
     private static void wipeSlate()
@@ -51,14 +52,15 @@ public static class SpawnInfoManager
 
         spawnedObjects.AddRange(spawnAllTransitions());
 
+        spawnedObjects.AddRange(spawnAllMonsters());
+
         allSpawnedObjects = spawnedObjects;
+        lastSaveBlueprint = null;
     }
 
     private static List<GameObject> spawnBackground()
     {
         List<GameObject> spawnedObjects = new List<GameObject>();
-
-        Debug.LogError("AreaManager.locationName = " + AreaManager.locationName);
 
         GameObject background = GameObject.Instantiate(Resources.Load<GameObject>(AreaManager.locationName), AreaManager.getGridParent());
         spawnedObjects.Add(background);
@@ -72,17 +74,16 @@ public static class SpawnInfoManager
 
         Transform player = GameObject.Instantiate(Resources.Load<GameObject>(playerPrefab), AreaManager.getPlayerParent()).transform;
 
-        if(AreaManager.saveBlueprint != null)
+        if (AreaManager.saveBlueprint != null)
         {
-            Debug.LogError("1");
             float[] savePos = AreaManager.saveBlueprint.playerPosition;
             player.position = new Vector3(savePos[0], savePos[1]);
             AreaManager.saveBlueprint = null;
-        } else
+        }
+        else
         {
-            Debug.LogError("2");
             player.position = AreaManager.getMasterGrid().GetCellCenterWorld(defaultCell);
-        }        
+        }
 
         Helpers.updateGameObjectPosition(player);
 
@@ -93,7 +94,7 @@ public static class SpawnInfoManager
 
     private static List<GameObject> spawnAllInteractables()
     {
-        List<OOCSpawnDetails> oocSpawnDetailsList = OOCSpawnInfoList.getOOCSpawnDetails(AreaManager.locationName); 
+        List<OOCSpawnDetails> oocSpawnDetailsList = OOCSpawnInfoList.getOOCSpawnDetails(AreaManager.locationName);
         List<GameObject> spawnedObjects = new List<GameObject>();
 
         foreach (OOCSpawnDetails details in oocSpawnDetailsList)
@@ -127,10 +128,10 @@ public static class SpawnInfoManager
         details.spawnActions(interactable);
 
         details.setGameObjectName(interactable);
-        
+
         return interactable;
     }
-    
+
     private static List<GameObject> spawnAllTransitions()
     {
         List<TransitionSpawnInfo> transitionSpawnInfoList = TransitionSpawnInfoList.getTransitionSpawnInfo(AreaManager.locationName);
@@ -156,5 +157,36 @@ public static class SpawnInfoManager
         return spawnedObjects;
     }
 
+    private static List<GameObject> spawnAllMonsters()
+    {
+        List<MonsterSpawnDetails> monsterDetailsList = MonsterSpawnDetailsList.getMonsterSpawnDetails(AreaManager.locationName);
+        List<GameObject> spawnedObjects = new List<GameObject>();
+
+        int index = 0;
+        foreach (MonsterSpawnDetails details in monsterDetailsList)
+        {
+            GameObject monsterGameObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.oocMonster), AreaManager.getMonsterParent());
+            EnemyMovement monsterMovement = monsterGameObject.GetComponent<EnemyMovement>();
+
+            monsterMovement.setMonsterPackIndex(index);
+
+            if(lastSaveBlueprint != null)
+            {
+                monsterGameObject.transform.position = lastSaveBlueprint.monsterLocations[index].getPosition();
+            } else
+            {
+                monsterGameObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(details.cellCoords);
+            }
+
+            spawnedObjects.Add(monsterGameObject);
+
+            details.spawnActions(monsterMovement);
+            details.spawnActions(monsterGameObject);
+
+            index++;
+        }
+
+        return spawnedObjects;
+    }
 
 }

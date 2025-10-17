@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialGuardSpawn : MonsterSpawnScript
+public class TutorialMonsterSpawn : MonsterSpawnScript
 {
 
     public override bool evaluateScript() //if true, use alternate monster pack list

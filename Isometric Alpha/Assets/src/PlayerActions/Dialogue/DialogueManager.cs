@@ -955,7 +955,7 @@ public class DialogueManager : MonoBehaviour
 
                     Vector3Int newPlayerGridSquare = PlayerMovement.getMovementGridCoords() + gridSquareAdjustment;
 
-                    player.gameObject.transform.localPosition = player.convertGridCoordsToLocalPos(newPlayerGridSquare);
+                    player.gameObject.transform.position = player.convertGridCoordsToWorldPos(newPlayerGridSquare);
 
                     Helpers.updateColliderPosition(player.gameObject.transform);
 

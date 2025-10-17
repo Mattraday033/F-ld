@@ -95,7 +95,7 @@ public class EnemySpawner : MonoBehaviour
 			
 			for(int currentEnemyNumber = 1; currentEnemyNumber <= enemyCount; currentEnemyNumber++)
 			{
-				EnemyStats currentEnemyStats = (EnemyStats) State.enemyPackInfo.enemyTypes[enemyTypeIndex].Clone();
+				EnemyStats currentEnemyStats = (EnemyStats) State.enemyPackInfo.enemyTypes[enemyTypeIndex].enemyStats.Clone();
 				currentEnemyStats.spawningCombatAction();//added to be able to tell traits when sorting spawn queue
 												   //should be both here and in spawnEnemy()
 				
@@ -289,7 +289,7 @@ public class EnemySpawner : MonoBehaviour
 			
 			((EnemyStats)CombatGrid.getCombatantAtCoords(row, col)).setUpHealthBar
 			(
-				Instantiate(CombatGrid.getCombatantAtCoords(row,col).healthBar,
+				Instantiate(Resources.Load<GameObject>(PrefabNames.healthBar),
 							CombatGrid.fullCombatGrid[row][col] + Stats.healthBarAdjustment,
 							Quaternion.identity, 
 							combatantInfoCanvas.gameObject.transform

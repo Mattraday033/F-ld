@@ -56,14 +56,15 @@ public class GeneratedTargetPriorityTrait : TargetPriorityTrait
 			{
 				GridCoords currentCoords = selector.getCoords();
 				placeHolderGridCoords.Add(currentCoords);
-				
-				if(CombatGrid.getCombatantAtCoords(currentCoords) != null && 
-					!(CombatGrid.getCombatantAtCoords(currentCoords) is null))
-				{
-					Debug.LogError("Setting placeholder would overwrite an existing combatant");
-				}
-				
-				CombatGrid.setCombatantAtCoords(currentCoords, new EnemyStats());
+
+                if (CombatGrid.getCombatantAtCoords(currentCoords) != null &&
+                    !(CombatGrid.getCombatantAtCoords(currentCoords) is null))
+                {
+                    Debug.LogError("Setting placeholder would overwrite an existing combatant");
+                }
+
+                Debug.LogError("Setting Combatant At Coords : "+currentCoords.ToString()+" disallowed because EnemyStats constructors have changed");
+				// CombatGrid.setCombatantAtCoords(currentCoords, new EnemyStats());
 			}
 		}
 		

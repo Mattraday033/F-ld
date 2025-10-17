@@ -43,7 +43,6 @@ public class PlayerMovement : MonoBehaviour
 	public Chest currentChest;
 	public Collider2D transitionCollider;
 
-	private bool enteredCombat = false;
 	private NPCCombatInfo npcCombatInfo = null;
 	private static PlayerMovement instance;
 
@@ -169,10 +168,10 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-		if (enteredCombat && FadeToBlackManager.isBlack())
-		{
-			prepCombat();
-		}
+		// if (enteredCombat && FadeToBlackManager.isBlack())
+		// {
+		// 	prepCombat();
+		// }
 
 		if ((KeyPressManager.handlingPrimaryKeyPress && PlayerOOCStateManager.currentActivity != OOCActivity.inChestUI &&
 												PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence)
@@ -354,17 +353,7 @@ public class PlayerMovement : MonoBehaviour
 				}
 				else
 				{
-					return; //took out "fight anyone" so this code doesn't need to be run. keeping it here in case it's needed again
-
-					npcCombatInfo = npcGameObject.GetComponent<NPCCombatInfo>();
-
-					if (npcCombatInfo == null || !npcCombatInfo.canBeFought())
-					{
-						return;
-					}
-
-					FadeToBlackManager.getInstance().setAndStartFadeToBlack();
-					enteredCombat = true;
+                    return; 
 				}
 
 			}
@@ -1235,31 +1224,6 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
-    public void prepCombat()
-    {
-        State.playerPosition = transform.position;
-
-        State.enemyPackInfo = npcCombatInfo.getEnemyInfo(0);
-
-        if (!npcCombatInfo.hasDeadNames())
-        {
-            Dialogue dialogue = npcCombatInfo.gameObject.GetComponent<DialogueTrigger>().dialogue;
-            npcCombatInfo.deadNameList = new DeadNameList[1];
-            npcCombatInfo.deadNameList[0] = new DeadNameList(new string[] { dialogue.names[1] });
-        }
-
-        npcCombatInfo.addAllDeadNames(0);
-
-        QuestList.checkForDeadNames();
-
-        AreaList.addHostility();
-
-        State.enemyFacing = npcCombatInfo.gameObject.GetComponent<NPCMovement>().getFacing();
-        CombatStateManager.locationBeforeCombat = AreaManager.locationName;
-
-        SceneChange.changeSceneToCombat();
-    }
-
 	private void findTerrainObjects()
     {
 		GameObject[] terrainObjects = GameObject.FindGameObjectsWithTag(LayerAndTagManager.terrainTag);
@@ -1398,12 +1362,12 @@ public class PlayerMovement : MonoBehaviour
 
 	public static Vector3Int getMovementGridCoords()
 	{
-		return MovementManager.getInstance().grid.LocalToCell(getTransform().localPosition);
+		return MovementManager.getInstance().grid.WorldToCell(getTransform().position);
 	}
 
-    public Vector3 convertGridCoordsToLocalPos(Vector3Int gridSquareCoords)
+    public Vector3 convertGridCoordsToWorldPos(Vector3Int gridSquareCoords)
     {
-        return MovementManager.getInstance().grid.GetCellCenterLocal(gridSquareCoords);
+        return MovementManager.getInstance().grid.GetCellCenterWorld(gridSquareCoords);
     }
 
 	private void showFormulaToggleCheck()
