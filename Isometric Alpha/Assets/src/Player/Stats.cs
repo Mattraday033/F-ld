@@ -45,8 +45,6 @@ public class Stats : ScriptableObject, ICloneable, IDescribable, IDescribableInB
 	public Trait[] traits = new Trait[0];
 	public Trait[] hiddenTraits = new Trait[0];
 
-	public string[] traitNames;
-
 	public int currentHealth;
 
 	public Stats(string name)
@@ -358,12 +356,6 @@ public class Stats : ScriptableObject, ICloneable, IDescribable, IDescribableInB
 		newTrait.onApplication();
 		newTrait.setTraitHolder(this);
 
-
-		if (traits == null || traits is null)
-		{
-			traits = TraitList.getListOfTraits(traitNames);
-		}
-
 		dealTraitApplicationDamage(newTrait);
 
 		if (hasTrait(newTrait) >= 0)
@@ -422,11 +414,6 @@ public class Stats : ScriptableObject, ICloneable, IDescribable, IDescribableInB
 
 	public Trait[] getTraits()
 	{
-		if (traits == null || traits is null)
-		{
-			traits = TraitList.getListOfTraits(traitNames);
-		}
-
 		return traits;
 	}
 
@@ -812,33 +799,13 @@ public class Stats : ScriptableObject, ICloneable, IDescribable, IDescribableInB
 		setPreviousColor(combatSprite.GetComponent<SpriteRenderer>().color);
 		combatSprite.GetComponent<SpriteRenderer>().color = Color.black;
 
-		if (combatSprite.GetComponent<Collider2D>() != null)
-		{
-			combatSprite.GetComponent<Collider2D>().enabled = false;
-		}
-		else
-		{
-			combatSprite.transform.GetChild(0).GetComponent<Collider2D>().enabled = false;
-		}
-
 		healthBar.SetActive(false);
 		isDead = true;
 	}
 
 	public virtual void bringBackFromDeath()
 	{
-		Debug.LogError("bringBackFromDeath()");
-
 		combatSprite.GetComponent<SpriteRenderer>().color = Helpers.cloneColor(previousColor);
-
-		if (combatSprite.GetComponent<Collider2D>() != null)
-		{
-			combatSprite.GetComponent<Collider2D>().enabled = true;
-		}
-		else
-		{
-			combatSprite.transform.GetChild(0).GetComponent<Collider2D>().enabled = true;
-		}
 
 		healthBar.SetActive(true);
 		isDead = false;

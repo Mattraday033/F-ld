@@ -261,7 +261,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 	public void prepCombat(int monsterTransformIndex)
 	{
 		State.enemyPackInfo = getEnemyPackInfo();
-		CombatStateManager.currentMonsterPack = getMonsterPack();
+		CombatStateManager.currentDefeatKey = AreaManager.locationName + "-" + monsterPackIndex;
         CombatStateManager.locationBeforeCombat = AreaManager.locationName;
 
 		if (intimidated())
@@ -494,6 +494,13 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
         return AreaManager.getMasterGrid().WorldToCell(transform.position);
     }
     
+    private Vector3Int getStartingCell()
+    {
+        List<MonsterSpawnDetails> list = MonsterSpawnDetailsList.getMonsterSpawnDetails();
+
+        return list[monsterPackIndex].cellCoords;
+    }
+
 	public void putBackToStartingPosition()
 	{
 		if (!canBePutBackToStartingPosition())
@@ -501,35 +508,30 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 			return;
 		}
 
-		Vector3 startPosition = getMonsterPack().startPosition;
-		transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(AreaManager.getMasterGrid().WorldToCell(startPosition));
+        List<MonsterSpawnDetails> list = MonsterSpawnDetailsList.getMonsterSpawnDetails();
 
-		State.currentMonsterPackList.monsterPacks[monsterPackIndex].currentPosition = transform.position;
+        Transform newMonster = SpawnInfoManager.spawnMonster(list[monsterPackIndex], monsterPackIndex);
 
-		Helpers.updateGameObjectPosition(gameObject);
-
-		getMovementManager().updateArrays();
+        getMovementManager().addEnemySprite(newMonster, monsterPackIndex+1);
+        
+        DestroyImmediate(gameObject);
 	}
 
-	public bool canBePutBackToStartingPosition()
-	{
-		Vector3 startPosition = getMonsterPack().startPosition;
+    public bool canBePutBackToStartingPosition()
+    {
+        Vector3Int startPositionGridSquare = getStartingCell();
+        List<Vector3Int> allCurrentCells = MovementManager.getAllCurrentSpriteCells();
 
-		startPosition.z = 0f;
+        foreach (Vector3Int cellPos in allCurrentCells)
+        {
+            if (startPositionGridSquare.x == cellPos.x && startPositionGridSquare.y == cellPos.y)
+            {
+                return false;
+            }
+        }
 
-		Vector3Int startPositionGridSquare = AreaManager.getMasterGrid().WorldToCell(startPosition);
-		List<Vector3Int> allCurrentCells = MovementManager.getAllCurrentSpriteCells();
-
-		foreach (Vector3Int cellPos in allCurrentCells)
-		{
-			if (startPositionGridSquare.x == cellPos.x && startPositionGridSquare.y == cellPos.y)
-			{
-				return false;
-			}
-		}
-
-		return true;
-	}
+        return true;
+    }
 
 	public void setEnemyFacing(Facing newFacing)
 	{
@@ -559,7 +561,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 			enemyDirectionIndicator.setColors(cunningStunnedColor);
 		}
 
-		State.currentMonsterPackList.monsterPacks[monsterPackIndex].cunningCounter = cunningStunCounter;
+		// State.currentMonsterPackList.monsterPacks[monsterPackIndex].cunningCounter = cunningStunCounter;
 	}
 
 	public void intimidate()
@@ -578,7 +580,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 			enemyDirectionIndicator.setColors(intimidatedColor);
 		}
 
-		State.currentMonsterPackList.monsterPacks[monsterPackIndex].intimidateCounter = intimidateCounter;
+		// State.currentMonsterPackList.monsterPacks[monsterPackIndex].intimidateCounter = intimidateCounter;
 	}
 
 	public void retreatStun()
@@ -597,7 +599,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 			enemyDirectionIndicator.setColors(retreatStunnedColor);
 		}
 
-		State.currentMonsterPackList.monsterPacks[monsterPackIndex].retreatCounter = retreatStunnedCounter;
+		// State.currentMonsterPackList.monsterPacks[monsterPackIndex].retreatCounter = retreatStunnedCounter;
 	}
 
 	public bool stunnedFromCunning()
@@ -657,11 +659,6 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 				enemyDirectionIndicator.setColors(Color.white);
 				return;
 		}
-	}
-
-	private MonsterPack getMonsterPack()
-	{
-		return State.currentMonsterPackList.monsterPacks[monsterPackIndex];
 	}
 
 	private void OnEnable()

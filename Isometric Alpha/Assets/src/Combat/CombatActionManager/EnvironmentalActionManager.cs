@@ -73,7 +73,7 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 			return;
 		} else
 		{
-			CombatAction envCombatAction = AbilityList.getAbility(environmentalCombatActionKey);
+			CombatAction envCombatAction = AbilityList.getAbility(actorStats, environmentalCombatActionKey);
 			envCombatAction.setActor(actorStats);
 			
 			Trait targetingTrait = TraitList.getTrait(environmentalTargetingTraitKey);

@@ -20,6 +20,7 @@ public class AreaManager : MonoBehaviour
     public Transform npcParent;
     public Transform transitionParent;
     public Transform monsterParent;
+    public Transform movableObjectParent;
     #endregion
 
     public QuestStepActivationScript[] scripts;
@@ -118,6 +119,11 @@ public class AreaManager : MonoBehaviour
     public static Transform getMonsterParent()
     {
         return instance.monsterParent;
+    }
+
+    public static Transform getMovableObjectParent()
+    {
+        return instance.movableObjectParent;
     }
 }
 

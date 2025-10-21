@@ -295,7 +295,7 @@ public class Item : ICloneable, IJSONConvertable, IDescribable, ISortable, IDesc
 		return DamageCalculator.calculateFormula(getCritFormula(), null) + "%";
 	}
 
-	public virtual CombatAction getCombatAction()
+	public virtual CombatAction getCombatAction(AllyStats stats)
 	{
 		return null;
 	}

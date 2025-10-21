@@ -531,7 +531,7 @@ public static class AbilityList
 		}
 	}
 	
-	public static CombatAction getAbility(string key)
+	public static CombatAction getAbility(Stats statSource, string key)
     {
         initialize();
 
@@ -541,40 +541,40 @@ public static class AbilityList
 		
 		if(ability != null)
 		{
-			return ability.clone();
+			return ability.clone(statSource);
 		}
 		
 		lessonAbilityDictionary.TryGetValue(key, out ability);
 		
 		if(ability != null)
 		{
-			return ability.clone();
+			return ability.clone(statSource);
 		}
 		
 		enemyAbilityDictionary.TryGetValue(key, out ability);
 		
 		if(ability != null)
 		{
-			return ability.clone();
+			return ability.clone(statSource);
 		}
 		
 		summonAbilityDictionary.TryGetValue(key, out ability);
 		
 		if(ability != null)
 		{
-			return ability.clone();
+			return ability.clone(statSource);
 		}
 		
 		miscAbilityDictionary.TryGetValue(key, out ability);
 		
 		if(ability != null)
 		{
-			return ability.clone();
+			return ability.clone(statSource);
 		}
 		
 		if(key.Contains(ItemList.fistKey))
 		{
-			return new FistAttack();
+			return new FistAttack(statSource);
 		}
 		
 		throw new IOException("The key '"+key+"' does not exist."); 

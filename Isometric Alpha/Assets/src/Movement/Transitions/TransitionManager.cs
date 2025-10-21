@@ -273,7 +273,6 @@ public class TransitionManager : MonoBehaviour
     private static void resetRelevantDataOnSceneTransitionToExactPosition()
 	{
 		//AllMonsterPackLists.setAllMonsterPackListsToReset();
-		State.currentMonsterPackList = null;
 		CunningManager.resetCunningsRemaining();
 		IntimidateManager.resetIntimidatesRemaining();
 		TrapAndButtonStateManager.removeAllActivatedTrapKeys();

@@ -113,13 +113,13 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 	
 	public void startSingleAllyReposition()
 	{
-		CombatStateManager.setCurrentActivity(CurrentActivity.Repositioning);
-		currentRepositionType = CurrentRepositionType.SingleAlly;
-		currentRepositionActivity = CurrentRepositionActivity.ChoosingRepositionTarget;
+		// CombatStateManager.setCurrentActivity(CurrentActivity.Repositioning);
+		// currentRepositionType = CurrentRepositionType.SingleAlly;
+		// currentRepositionActivity = CurrentRepositionActivity.ChoosingRepositionTarget;
 		
-		repositionUIManager.updateOnStateChange();
+		// repositionUIManager.updateOnStateChange();
 		
-		currentSingleTargetRepositionCombatAction = AbilityList.getAbility(AbilityList.moveAllyAbilityKey);
+		// currentSingleTargetRepositionCombatAction = AbilityList.getAbility(AbilityList.moveAllyAbilityKey);
 	}
 	
 	public void startAllyFormationReposition()

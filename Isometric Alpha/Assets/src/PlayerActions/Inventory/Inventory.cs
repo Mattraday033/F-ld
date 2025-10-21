@@ -461,7 +461,7 @@ public static class Inventory
 
             if (item.getType().Equals(UsableItem.type) && item.usableInCombat())
             {
-                allUsableItemCombatActions.Add(new ItemCombatAction((UsableItem)item));
+                allUsableItemCombatActions.Add(new ItemCombatAction(OverallUIManager.getCurrentPartyMember(), (UsableItem)item));
             }
         }
 
@@ -513,7 +513,7 @@ public static class Inventory
         ArrayList allWeapons = getAllItemsOfSubtypeInPocket(pocket, Weapon.subtype);
         ArrayList allMainHandWeaponsAsCombatActions = new ArrayList();
 
-        allMainHandWeaponsAsCombatActions.Add(new FistAttack());
+        allMainHandWeaponsAsCombatActions.Add(new FistAttack(OverallUIManager.getCurrentPartyMember()));
 
         foreach (Item item in allWeapons)
         {
@@ -521,7 +521,7 @@ public static class Inventory
 
             if (weapon.getSlotID() == Weapon.mainHandSlotIndex)
             {
-                allMainHandWeaponsAsCombatActions.Add(new Attack(weapon));
+                allMainHandWeaponsAsCombatActions.Add(new Attack(OverallUIManager.getCurrentPartyMember(), weapon));
             }
         }
 
@@ -555,7 +555,7 @@ public static class Inventory
         {
             if (item.usableInCombat())
             {
-                allCombatUsableItems.Add(new ItemCombatAction(item));
+                allCombatUsableItems.Add(new ItemCombatAction(OverallUIManager.getCurrentPartyMember(), item));
             }
         }
 

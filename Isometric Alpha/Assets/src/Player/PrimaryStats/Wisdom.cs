@@ -79,9 +79,9 @@ public static class Wisdom
         return startingDescription + combatDescription + dialogueDescription + movementDescription + skillDescription;
     }
 
-	public static CombatAction[] getStartingActions()
+	public static CombatAction[] getStartingActions(AllyStats statSource)
 	{
-		return new CombatAction[] { new FistAttack(), AbilityList.getAbility("w-2-2"), AbilityList.getAbility("w-2-2"), null, null, null, null, null, AbilityList.getAbility("w-2-1"), null, null, null, };
+		return new CombatAction[] { new FistAttack(statSource), AbilityList.getAbility(statSource,"w-2-2"), AbilityList.getAbility(statSource,"w-2-2"), null, null, null, null, null, AbilityList.getAbility(statSource,"w-2-1"), null, null, null, };
 	}
 	
 	public static int getPartyMemberWisdomAtLevel(string partyMemberName, int level)

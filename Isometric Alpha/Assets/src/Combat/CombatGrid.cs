@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Unity.Collections.LowLevel.Unsafe;
 
@@ -225,25 +226,28 @@ public static class CombatGrid
 	
 	public static int getEnemyMasterCount()
 	{
-		return getEnemyTypeCount("Master");
+		return getEnemyTypeCount(TraitList.master);
 	}
 	
 	public static int getEnemyMinionCount()
 	{
-		return getEnemyTypeCount("Minion");
+		return getEnemyTypeCount(TraitList.minion);
 	}
 	
-	public static int getEnemyTypeCount(string type)
+	public static int getEnemyTypeCount(Trait typeTrait)
 	{
 		ArrayList listOfEnemies = getAllAliveEnemyCombatants();
 		int enemyTypeCount = 0;
 		
 		foreach(Stats enemy in listOfEnemies)
 		{
-			if(enemy.traitNames[0].Equals(type))
-			{
-				enemyTypeCount++;
-			}
+            foreach(Trait trait in enemy.traits)
+            {
+                if(trait.getName().Equals(typeTrait.getName()))
+                {
+   				    enemyTypeCount++;                 
+                }
+            }
 		}
 		
 		return enemyTypeCount;

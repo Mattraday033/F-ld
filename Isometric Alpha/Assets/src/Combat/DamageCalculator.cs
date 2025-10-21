@@ -293,7 +293,6 @@ public static class DamageCalculator
 				
 					return output;
 				}
-
 				
 			} else if(formulaSection.Contains(dexChar))
 			{
@@ -420,7 +419,7 @@ public static class DamageCalculator
         {
             case AbilityList.crippleName:
 
-				CombatAction fear = AbilityList.getAbility(AbilityList.fearName);
+				CombatAction fear = AbilityList.getAbility(currentStatSource, AbilityList.fearName);
 
 				Selector targetSelector = TraitList.chaotic.findTargetLocation(SelectorManager.getInstance().selectors[fear.getRangeIndex()].clone(), CombatGrid.getAllAliveEnemyCombatants());
 

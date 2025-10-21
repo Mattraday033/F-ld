@@ -7,7 +7,6 @@ using UnityEngine;
 
 public static class DialogueList
 {
-    private const string dialogueResourcesPathName = "Dialogue/";
 
     public static Dictionary<string, Dialogue> dialogueList = new Dictionary<string, Dialogue>();
 
@@ -25,7 +24,7 @@ public static class DialogueList
         //                  new Dialogue(new string[] { "", "Kende", "Imre 1", "Imre 2", "Pan", "Guard", "Slave" }, new GameObject[7], Resources.Load<TextAsset>(DialogueNameList.kendeUponEnteringKitchensKey), new NPCCombatInfo(new EnemyPackInfo[]{     EnemyPackInfoList.halfSlavesNoGuardFight,
         //                                                                                                                                                                                                                                 EnemyPackInfoList.halfSlavesFight,
         //                                                                                                                                                                                                                                 EnemyPackInfoList.fullSlavesNoGuardFight,
-		// /*Dont delete this white space*/																																																EnemyPackInfoList.fullSlavesFight},
+        // /*Dont delete this white space*/																																																EnemyPackInfoList.fullSlavesFight},
         //                                                                                                                                                                                                              new DeadNameList[]{new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre}),
         //                                                                                                                                                                                                                                 new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre}),
         //                                                                                                                                                                                                                                 new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre}),
@@ -45,7 +44,7 @@ public static class DialogueList
 
         // addDialogueToList(DialogueNameList.afterKillingAndrasConvoKey, new Dialogue(new string[] { "", "Janos" }, new GameObject[2], Resources.Load<TextAsset>(DialogueNameList.afterKillingAndrasConvoKey)));
 
-        // addDialogueToList(DialogueNameList.vazulKey, new Dialogue(new string[] { "", "Thatch 1", "Slate", "Thatch 1" }, new GameObject[4], Resources.Load<TextAsset>(DialogueNameList.vazulKey)));
+        addDialogueToList(DialogueNameList.vazulKey, new Dialogue(new string[] { "", "Thatch1", "Slate", "Thatch1" }, Resources.Load<TextAsset>(DialogueNameList.vazulKey)));
 
         // addDialogueToList(DialogueNameList.taborAfterClayFightKey, new Dialogue(new string[] { "", "Chief Tabor" }, new GameObject[2], Resources.Load<TextAsset>(DialogueNameList.taborAfterClayFightKey), new TextAsset[] { Resources.Load<TextAsset>(DialogueNameList.chiefTaborPunishmentDialogueKey) }));
 
@@ -55,28 +54,62 @@ public static class DialogueList
 
         addDialogueToList(NPCNameList.vaultableBarrels,
                             new Dialogue(new string[] { NPCNameList.vaultableBarrels },
-                            Resources.Load<TextAsset>(dialogueResourcesPathName + PrefabNames.vaultableObject)));
+                            Resources.Load<TextAsset>(DialogueNameList.dialogueResourcesPathName + PrefabNames.vaultableObject)));
 
         #endregion
-   
 
-        #region TestRoom
+        #region Slave Shack 2
+
+        Debug.LogError("Adding broglin dialogue");
 
         addDialogueToList(AreaNameList.slaveShackTwo, NPCNameList.broglin,
                             new Dialogue(new string[] { NPCNameList.broglin, NPCNameList.garcha, NPCNameList.guardLaszlo, NPCNameList.guardLaszlo + 1, NPCNameList.garcha + 1 },
-                            Resources.Load<TextAsset>(dialogueResourcesPathName + AreaNameList.slaveShackTwo + Path.DirectorySeparatorChar + DialogueNameList.introDialogueKey)));
+                            Resources.Load<TextAsset>(DialogueNameList.introDialogueKey)));
 
         addDialogueToList(AreaNameList.slaveShackTwo, NPCNameList.garcha,
                             new Dialogue(new string[] { NPCNameList.garcha },
-                            Resources.Load<TextAsset>(dialogueResourcesPathName + AreaNameList.slaveShackTwo + Path.DirectorySeparatorChar + NPCNameList.garcha)));
+                            Resources.Load<TextAsset>(DialogueNameList.garchaKey)));
 
         #endregion
+        #region Slave Shack 4
 
+        addDialogueToList(AreaNameList.slaveShackFour, NPCNameList.kastor,
+                            new Dialogue(new string[] { NPCNameList.kastor, NPCNameList.nandor, NPCNameList.carter, NPCNameList.guardMarcos},
+                            Resources.Load<TextAsset>(DialogueNameList.kastorPlanKey)));
+
+        addDialogueToList(AreaNameList.slaveShackFour, NPCNameList.guardMarcos,
+                            new Dialogue(new string[] { NPCNameList.guardMarcos},
+                            Resources.Load<TextAsset>(DialogueNameList.guardMarcosSS4Key)));
+
+        addPartyMemberDialogue(AreaNameList.slaveShackFour, NPCNameList.nandor);
+        addPartyMemberDialogue(AreaNameList.slaveShackFour, NPCNameList.carter);
+
+        #endregion
+        #region Slave Shack 6
+
+        addDialogueToList(AreaNameList.slaveShackSix, NPCNameList.thatch,
+                            new Dialogue(new string[] { NPCNameList.thatch, NPCNameList.rubble},
+                            Resources.Load<TextAsset>(DialogueNameList.thatchKey)));
+
+        addDialogueToList(AreaNameList.slaveShackSix, NPCNameList.slate,
+                            new Dialogue(new string[] { NPCNameList.slate },
+                            Resources.Load<TextAsset>(DialogueNameList.slateKey)));
+
+        addDialogueToList(AreaNameList.slaveShackSix, NPCNameList.guardVazul,
+                            new Dialogue(new string[] { "", NPCNameList.guardVazul, NPCNameList.slate, NPCNameList.thatch + 1 },
+                            Resources.Load<TextAsset>(DialogueNameList.vazulKey),
+                            DialogueCombatInfoList.vazulCombatInfo));
+
+        addDialogueToList(AreaNameList.slaveShackSix, NPCNameList.rubble,
+                            new Dialogue(new string[] { NPCNameList.rubble},
+                            Resources.Load<TextAsset>(DialogueNameList.immovableRubbleKey)));
+
+        #endregion
         #region NECamp
 
         addDialogueToList(AreaNameList.campNorthEast, NPCNameList.leafPile,
                             new Dialogue(new string[] { NPCNameList.leafPile},
-                            Resources.Load<TextAsset>(dialogueResourcesPathName + AreaNameList.campNorthEast + Path.DirectorySeparatorChar + NPCNameList.leafPile.Replace(" ", ""))));
+                            Resources.Load<TextAsset>(DialogueNameList.dialogueResourcesPathName + AreaNameList.campNorthEast + Path.DirectorySeparatorChar + NPCNameList.leafPile.Replace(" ", ""))));
 
         #endregion
     }
@@ -91,6 +124,13 @@ public static class DialogueList
         dialogueList.Add(key.Replace(" ", ""), dialogue);
     }
     
+    public static void addPartyMemberDialogue(string areaName, string partyMemberName)
+    {
+        addDialogueToList(areaName, partyMemberName,
+                    new Dialogue(new string[] { partyMemberName},
+                    Resources.Load<TextAsset>(DialogueNameList.partyMemberFolderPathName + partyMemberName)));
+    }
+
     public static void addDialogueToList(string areaName, string npcName, Dialogue dialogue)
 	{
 		addDialogueToList(areaName + npcName, dialogue);
@@ -121,6 +161,7 @@ public static class DialogueList
 
     public static Dialogue getDialogue(string key)
     {
+        Debug.LogError("key = " + key);
         key = key.Replace(" ", "");
         if(!dialogueList.ContainsKey(key))
         {

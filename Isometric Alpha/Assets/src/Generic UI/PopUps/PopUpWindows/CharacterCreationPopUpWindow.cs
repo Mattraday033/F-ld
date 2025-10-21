@@ -289,15 +289,15 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         switch (chosenStat)
         {
             case PrimaryStat.Strength:
-                return Strength.getStartingActions();
+                return Strength.getStartingActions(stats);
             case PrimaryStat.Dexterity:
-                return Dexterity.getStartingActions();
+                return Dexterity.getStartingActions(stats);
             case PrimaryStat.Wisdom:
-                return Wisdom.getStartingActions();
+                return Wisdom.getStartingActions(stats);
             case PrimaryStat.Charisma:
-                return Charisma.getStartingActions();
+                return Charisma.getStartingActions(stats);
             default:
-                return new CombatAction[] { new FistAttack(), null, null, null, null, null, null, null, null, null, null, null };
+                return new CombatAction[] { new FistAttack(stats), null, null, null, null, null, null, null, null, null, null, null };
         }
     }
     public override void handleEscapePress()

@@ -8,7 +8,6 @@ public static class SpawnInfoManager
     public static SaveBlueprint lastSaveBlueprint;
     public static List<GameObject> allSpawnedObjects;
     private const string playerPrefab = "PlayerOOC";
-    public static Vector3Int defaultCell = new Vector3Int(7, 1);
 
     static SpawnInfoManager()
     {
@@ -18,6 +17,17 @@ public static class SpawnInfoManager
     public static void initialize()
     {
 
+    }
+
+    public static Vector3Int getDefaultCell()
+    {
+        if(CombatStateManager.hasReturnCell)
+        {
+            return CombatStateManager.useReturnCell();
+        } else
+        {
+            return new Vector3Int(7, 1);
+        }
     }
 
     private static void wipeSlate()
@@ -52,10 +62,16 @@ public static class SpawnInfoManager
 
         spawnedObjects.AddRange(spawnAllTransitions());
 
-        spawnedObjects.AddRange(spawnAllMonsters());
-
         allSpawnedObjects = spawnedObjects;
+
+        spawnAllMonsters();
+
         lastSaveBlueprint = null;
+    }
+
+    public static void addGameObject(GameObject spawnedObject)
+    {
+        allSpawnedObjects.Add(spawnedObject);
     }
 
     private static List<GameObject> spawnBackground()
@@ -82,7 +98,7 @@ public static class SpawnInfoManager
         }
         else
         {
-            player.position = AreaManager.getMasterGrid().GetCellCenterWorld(defaultCell);
+            player.position = AreaManager.getMasterGrid().GetCellCenterWorld(getDefaultCell());
         }
 
         Helpers.updateGameObjectPosition(player);
@@ -94,7 +110,7 @@ public static class SpawnInfoManager
 
     private static List<GameObject> spawnAllInteractables()
     {
-        List<OOCSpawnDetails> oocSpawnDetailsList = OOCSpawnInfoList.getOOCSpawnDetails(AreaManager.locationName);
+        List<OOCSpawnDetails> oocSpawnDetailsList = OOCSpawnDetailsList.getOOCSpawnDetails(AreaManager.locationName);
         List<GameObject> spawnedObjects = new List<GameObject>();
 
         foreach (OOCSpawnDetails details in oocSpawnDetailsList)
@@ -157,36 +173,41 @@ public static class SpawnInfoManager
         return spawnedObjects;
     }
 
-    private static List<GameObject> spawnAllMonsters()
+    private static void spawnAllMonsters()
     {
-        List<MonsterSpawnDetails> monsterDetailsList = MonsterSpawnDetailsList.getMonsterSpawnDetails(AreaManager.locationName);
-        List<GameObject> spawnedObjects = new List<GameObject>();
+        List<MonsterSpawnDetails> monsterDetailsList = MonsterSpawnDetailsList.getMonsterSpawnDetails();
 
         int index = 0;
         foreach (MonsterSpawnDetails details in monsterDetailsList)
         {
-            GameObject monsterGameObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.oocMonster), AreaManager.getMonsterParent());
-            EnemyMovement monsterMovement = monsterGameObject.GetComponent<EnemyMovement>();
-
-            monsterMovement.setMonsterPackIndex(index);
-
-            if(lastSaveBlueprint != null)
-            {
-                monsterGameObject.transform.position = lastSaveBlueprint.monsterLocations[index].getPosition();
-            } else
-            {
-                monsterGameObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(details.cellCoords);
-            }
-
-            spawnedObjects.Add(monsterGameObject);
-
-            details.spawnActions(monsterMovement);
-            details.spawnActions(monsterGameObject);
+            spawnMonster(details, index);
 
             index++;
         }
+    }
 
-        return spawnedObjects;
+    public static Transform spawnMonster(MonsterSpawnDetails details, int index)
+    {
+        GameObject monsterGameObject = GameObject.Instantiate(Resources.Load<GameObject>(details.getPrefabName()), details.getParent());
+        EnemyMovement monsterMovement = monsterGameObject.GetComponent<EnemyMovement>();
+
+        monsterMovement.setMonsterPackIndex(index);
+
+        if (lastSaveBlueprint != null)
+        {
+            monsterGameObject.transform.position = lastSaveBlueprint.monsterLocations[index].getPosition();
+        }
+        else
+        {
+            monsterGameObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(details.cellCoords);
+        }
+
+        details.spawnActions(monsterMovement);
+        details.spawnActions(monsterGameObject);
+
+        addGameObject(monsterGameObject);
+
+        return monsterGameObject.transform;
     }
 
 }

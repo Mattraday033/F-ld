@@ -72,7 +72,9 @@ public static class FlagNameList
         public const string kastorExplainedWhereToFindAnotherKey = "kastorExplainedWhereToFindAnotherKey"; //kastor told player about the guardhouse armory key
 
         //Revolt flags
+        public const string revoltStarted = "revoltStarted";
         public const string spawnWormsInsteadOfGuards = "spawnWormsInsteadOfGuards"; //if the revolt has started and you opened the way to the third level of the mine, but didn't seal the breach
+
 
         //Nándor Flags
         public const string spokeWithNandorAfterPrisoners = "spokeWithNandorAfterPrisoners"; //finished prisoner punishments and ready to leave camp

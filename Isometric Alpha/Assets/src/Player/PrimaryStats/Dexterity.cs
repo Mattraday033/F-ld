@@ -88,9 +88,9 @@ public static class Dexterity
 		return startingDescription + combatDescription + dialogueDescription + movementDescription + skillDescription;
 	}
 
-	public static CombatAction[] getStartingActions()
+	public static CombatAction[] getStartingActions(AllyStats statSource)
 	{
-		return new CombatAction[] { new FistAttack(), AbilityList.getAbility("d-2-1"), null, null, null, null, null, null, AbilityList.getAbility("d-2-2"), null, null, null, };
+		return new CombatAction[] { new FistAttack(statSource), AbilityList.getAbility(statSource, "d-2-1"), null, null, null, null, null, null, AbilityList.getAbility(statSource, "d-2-2"), null, null, null, };
 	}
 
 	public static int getPartyMemberDexterityAtLevel(string partyMemberName, int level)

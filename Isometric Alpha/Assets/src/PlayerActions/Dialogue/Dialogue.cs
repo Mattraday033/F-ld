@@ -36,46 +36,46 @@ public class Dialogue : ICloneable
 
     public Dialogue(string[] names, TextAsset inkJSON)
     {
-        if (names[0].Length > 0)
-        {
-            this.names = Helpers.appendArray<string>(stringArrayWithPlayerSpace, names);
-        }
-        else
-        {
-            this.names = names;
-        }
+        this.names = createNameArray(names);
 
         this.cameraFoci = new GameObject[this.names.Length];
         this.inkJSON = inkJSON;
     }
 
-    public Dialogue(string[] names, GameObject[] cameraFoci, TextAsset inkJSON)
-    {
-        this.names = names;
-        this.cameraFoci = cameraFoci;
-        this.inkJSON = inkJSON;
-    }
-
 	public Dialogue(string[] names, GameObject[] cameraFoci, TextAsset inkJSON, TextAsset[] secondaryInkJSONs)
 	{
-		this.names = names;
+        this.names = createNameArray(names);
+
 		this.cameraFoci = cameraFoci;
 		this.inkJSON = inkJSON;
 		this.secondaryInkJSONs = secondaryInkJSONs;
 	}
 
-	public Dialogue(string[] names, GameObject[] cameraFoci, TextAsset inkJSON, NPCCombatInfo npcCombatInfo)
+	public Dialogue(string[] names, TextAsset inkJSON, NPCCombatInfo npcCombatInfo)
 	{
-		this.names = names;
-		this.cameraFoci = cameraFoci;
+        this.names = createNameArray(names);
+
+        this.cameraFoci = new GameObject[this.names.Length];
 		this.inkJSON = inkJSON;
 		this.npcCombatInfo = npcCombatInfo;
 	}
 
-	public string getMainNPCName()
-	{
-		return names[1];
-	}
+    private string[] createNameArray(string[] npcNames)
+    {
+        if (npcNames[0] == null || npcNames[0].Length > 0)
+        {
+            return Helpers.appendArray<string>(stringArrayWithPlayerSpace, npcNames);
+        }
+        else
+        {
+            return npcNames;
+        }
+    }
+
+    public string getMainNPCName()
+    {
+        return names[1];
+    }
 
 	public TutorialSequenceListTrigger GetTutorialSequenceListTrigger()
 	{
@@ -91,18 +91,27 @@ public class Dialogue : ICloneable
 	{
 		return this.MemberwiseClone();
 	}
-	
-	public Dialogue clone()
+
+    public Dialogue clone()
     {
-		Dialogue clone = new Dialogue(new string[names.Length], new GameObject[cameraFoci.Length], inkJSON);
+        Dialogue clone = new Dialogue(new string[names.Length], new GameObject[cameraFoci.Length], inkJSON);
 
-		for (int index = 0; index < clone.names.Length; index++)
-		{
-			clone.names[index] = names[index];
-		}
+        for (int index = 0; index < clone.names.Length; index++)
+        {
+            clone.names[index] = names[index];
+        }
 
-		clone.npcCombatInfo = npcCombatInfo;
+        clone.npcCombatInfo = npcCombatInfo;
 
-		return clone;
+        return clone;
+    }
+    
+    //Clone Constructor
+    public Dialogue(string[] names, GameObject[] cameraFoci, TextAsset inkJSON)
+    {
+        this.names = names;
+
+        this.cameraFoci = cameraFoci;
+        this.inkJSON = inkJSON;
     }
 }

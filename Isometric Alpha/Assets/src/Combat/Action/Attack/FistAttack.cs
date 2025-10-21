@@ -5,9 +5,11 @@ using UnityEngine.Events;
 
 public class FistAttack : Attack, IJSONConvertable
 {
-    public FistAttack()
+    public FistAttack(Stats statSource):
+    base(statSource, ItemList.getMainHandFist(statSource as AllyStats))
 	{
-
+        
+        
 	}
 	
 	public override int getSaveType()

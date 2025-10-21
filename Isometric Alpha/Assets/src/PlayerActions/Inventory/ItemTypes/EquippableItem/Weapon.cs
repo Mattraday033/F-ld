@@ -132,9 +132,9 @@ public class Weapon : EquippableItem, IJSONConvertable, IFormulaSource
 		return true;
 	}
 
-	public override CombatAction getCombatAction()
+	public override CombatAction getCombatAction(AllyStats stats)
 	{
-		return new Attack(this);
+		return new Attack(stats, this);
 	}
 
 	public override GameObject getRowType(RowType rowType)

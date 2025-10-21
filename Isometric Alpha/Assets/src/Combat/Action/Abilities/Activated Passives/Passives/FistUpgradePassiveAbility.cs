@@ -12,6 +12,6 @@ public class FistUpgradePassiveAbility : PassiveAbility //passives are (currentl
 
     public override CombatAction alternateActionWhenPlacedInActionSlot()
     {
-        return new FistAttack();
+        return new FistAttack(getActorStats());
     }
 }

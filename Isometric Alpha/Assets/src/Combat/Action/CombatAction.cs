@@ -973,7 +973,7 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
         throw new IOException("The base class version of convertToJson() was called extraneously");
     }
 
-    public static CombatAction extractFromJson(string json)
+    public static CombatAction extractFromJson(Stats statsSource, string json)
     {
         if (json == null || json.ToLower().Equals("null"))
         {
@@ -990,11 +990,11 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
         switch (saveType)
         {
             case (int)CombatActionSaveType.Attack:
-                return (CombatAction)new Attack((Weapon)SaveBlueprint.convertJsonToItem(json));
+                return (CombatAction)new Attack(statsSource, (Weapon)SaveBlueprint.convertJsonToItem(json));
             case (int)CombatActionSaveType.Ability:
-                return (CombatAction)AbilityList.getAbility(kvps[0].Split(":")[1]);
+                return AbilityList.getAbility(statsSource, kvps[0].Split(":")[1]);
             case (int)CombatActionSaveType.ItemCombatAction:
-                return (CombatAction)new ItemCombatAction((UsableItem)SaveBlueprint.convertJsonToItem(json));
+                return (CombatAction)new ItemCombatAction(statsSource, (UsableItem)SaveBlueprint.convertJsonToItem(json));
             default:
                 return null;
         }
@@ -1068,18 +1068,20 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
 
     public virtual void removeHighlightFromActorSprites()
     {
-        Stats actorStats = getActorStats();
+        Debug.LogError("Outlines not implemented");
 
-        if (actorStats != null)
-        {
-            GameObject combatSprite = actorStats.combatSprite;
+        // Stats actorStats = getActorStats();
 
-            if (combatSprite != null && !(combatSprite is null))
-            {
-                combatSprite.GetComponent<SpriteOutline>().color = RevealManager.defaultWhenNotRevealed;
-                Helpers.updateColliderPosition(combatSprite);
-            }
-        }
+        // if (actorStats != null)
+        // {
+        //     GameObject combatSprite = actorStats.combatSprite;
+
+        //     if (combatSprite != null && !(combatSprite is null))
+        //     {
+        //         combatSprite.GetComponent<SpriteOutline>().color = RevealManager.defaultWhenNotRevealed;
+        //         Helpers.updateColliderPosition(combatSprite);
+        //     }
+        // }
     }
 
     public virtual int getRedStacksAtStart()
@@ -1182,6 +1184,15 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
         }
 
         return clone;
+    }
+
+    public CombatAction clone(Stats statsSource)
+    {
+        CombatAction actionClone = clone();
+
+        actionClone.setActor(statsSource);
+
+        return actionClone;
     }
 
     //IDescribable methods

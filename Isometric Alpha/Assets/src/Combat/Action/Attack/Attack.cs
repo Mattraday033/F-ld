@@ -14,19 +14,13 @@ public class Attack : CombatAction, IJSONConvertable
 
 	}
 
-    public Attack(Weapon mainHandWeapon) :
-    base(null, null)
-    {
-        this.mainHandWeapon = (Weapon) mainHandWeapon.clone();
-        mainHandWeapon.setQuantity(1);
-    }
-
-    public Attack(Stats actor, Selector selector, Weapon mainHandWeapon) : base(actor, selector)
+    public Attack(Stats actor, Weapon mainHandWeapon) :
+    base(actor, null)
     {
         this.mainHandWeapon = (Weapon) mainHandWeapon.clone();
         mainHandWeapon.setQuantity(1);
         this.mainHandWeapon.equipTarget = actor;
-	}
+    }
 
 	public override void performCombatAction(ArrayList targets)
 	{

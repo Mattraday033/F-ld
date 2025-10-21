@@ -32,6 +32,11 @@ public class OOCSpawnDetails
         return true;
     }
 
+    public virtual Transform getParent()
+    {
+        return null;
+    }
+
     public virtual void setGameObjectName(GameObject gameObject)
     {
         if (npcName.Length > 0)
@@ -109,6 +114,11 @@ public class NPCSpawnDetails : OOCSpawnDetails
     public override string getPrefabName()
     {
         return PrefabNames.NPC;
+    }
+
+    public override Transform getParent()
+    {
+        return AreaManager.getNPCParent();
     }
 
     public override void spawnActions(GameObject npc)

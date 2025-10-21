@@ -7,8 +7,8 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 {
 	private UsableItem sourceItem;
 
-	public ItemCombatAction(UsableItem sourceItem):
-    base(null, null)
+	public ItemCombatAction(Stats actor, UsableItem sourceItem):
+    base(actor, null)
 	{
 		this.sourceItem = sourceItem;
 	}

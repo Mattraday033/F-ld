@@ -403,26 +403,32 @@ public static class ItemList
 	}
 	
 	public static Weapon getMainHandFist(AllyStats targetStats)
-	{
-		if (targetStats == null || targetStats.getWisdomWithoutBoosts() < Wisdom.improvedStrikesLevel)
-		{
-			return (Weapon)getItem(weaponsListIndex, mainHandFistIndex, 1);
+    {
+        Weapon fist;
 
-		}
-		else if (targetStats.getWisdomWithoutBoosts() >= Wisdom.improvedStrikesLevel && targetStats.getWisdomWithoutBoosts() < Wisdom.greaterStrikesLevel)
-		{
-			return (Weapon)getItem(weaponsListIndex, improvedMainHandFistIndex, 1);
+        if (targetStats == null || targetStats.getWisdomWithoutBoosts() < Wisdom.improvedStrikesLevel)
+        {
+            fist = (Weapon)getItem(weaponsListIndex, mainHandFistIndex, 1);
 
-		}
-		else if (targetStats.getWisdomWithoutBoosts() >= Wisdom.greaterStrikesLevel && targetStats.getWisdomWithoutBoosts() < Wisdom.ruinousStrikesLevel)
-		{
-			return (Weapon)getItem(weaponsListIndex, greaterMainHandFistIndex, 1);
+        }
+        else if (targetStats.getWisdomWithoutBoosts() >= Wisdom.improvedStrikesLevel && targetStats.getWisdomWithoutBoosts() < Wisdom.greaterStrikesLevel)
+        {
+            fist = (Weapon)getItem(weaponsListIndex, improvedMainHandFistIndex, 1);
 
-		}
-		else
-		{
-			return (Weapon)getItem(weaponsListIndex, ruinousMainHandFistIndex, 1);
-		}
+        }
+        else if (targetStats.getWisdomWithoutBoosts() >= Wisdom.greaterStrikesLevel && targetStats.getWisdomWithoutBoosts() < Wisdom.ruinousStrikesLevel)
+        {
+            fist = (Weapon)getItem(weaponsListIndex, greaterMainHandFistIndex, 1);
+
+        }
+        else
+        {
+            fist = (Weapon)getItem(weaponsListIndex, ruinousMainHandFistIndex, 1);
+        }
+
+        fist.equipTarget = targetStats;
+
+        return fist;
 	}
 	
 	public static Weapon getOffHandFist()

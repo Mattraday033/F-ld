@@ -77,8 +77,8 @@ public class FullEditAbilityWheelPopUpWindow : EditAbilityWheelPopUpWindow, IEsc
 	{
 		ArrayList availableCombatActions = new ArrayList();
 
-		availableCombatActions.Add(new FistAttack());
-		availableCombatActions.AddRange(Inventory.getAllMainHandWeaponsInPocketAsCombatActions(interimPocket));
+		// availableCombatActions.Add(new FistAttack());
+		// availableCombatActions.AddRange(Inventory.getAllMainHandWeaponsInPocketAsCombatActions(interimPocket));
 
 		// availableCombatActions.AddRange(AbilityList.getAllAvailableStrengthAbilities());
 		// availableCombatActions.AddRange(AbilityList.getAllAvailableDexterityAbilities());

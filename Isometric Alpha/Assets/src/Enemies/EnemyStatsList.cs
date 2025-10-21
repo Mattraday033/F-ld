@@ -97,11 +97,21 @@ public static class EnemyStatsList
     {
         enemyStatsDict = new Dictionary<string, EnemyStats>();
 
+        #region NPCs
+        enemyStatsDict.Add(NPCNameList.guardVazul, new EnemyStats(NPCNameList.guardVazul,
+                                                                                    fiftyArmor,
+                                                                                            50,
+new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.bladeBlitzKey) as Ability),
+                                                                new Trait[] { TraitList.master,
+                                                                          TraitList.territorial
+                                                                            }));
+        #endregion
+
         #region Giant Bat
         enemyStatsDict.Add(MonsterNameList.giantBat, new EnemyStats(MonsterNameList.giantBat,
                                                                                       tenArmor,
                                                                                             25,
-                                               AbilityList.getAbility(AbilityList.strongBatClawKey),
+                                               AbilityList.getAbility(null, AbilityList.strongBatClawKey),
                                                                 new Trait[] { TraitList.master,
                                                                              TraitList.chaotic
                                                                             }));
@@ -110,7 +120,7 @@ public static class EnemyStatsList
         enemyStatsDict.Add(MonsterNameList.batSwarm, new EnemyStats(MonsterNameList.batSwarm,
                                                                                       zeroArmor,
                                                                                             5,
-                                               AbilityList.getAbility(AbilityList.weakBatClawKey),
+                                               AbilityList.getAbility(null, AbilityList.weakBatClawKey),
                                                                 new Trait[] { TraitList.minion,
                                                                              TraitList.chaotic
                                                                             }));
@@ -119,7 +129,7 @@ public static class EnemyStatsList
         enemyStatsDict.Add(MonsterNameList.screecher, new EnemyStats(   MonsterNameList.screecher,
                                                                                       twentyArmor,
                                                                                             35,
-  new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(AbilityList.flurryKey) as Ability),
+  new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.flurryKey) as Ability),
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.territorial
                                                                                 }));

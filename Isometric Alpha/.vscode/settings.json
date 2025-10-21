@@ -50,6 +50,8 @@
         "obj/": true,
         "Obj/": true,
         "ProjectSettings/": true,
+        "library/": true,
+        "Library/": true,
         "temp/": true,
         "Temp/": true,
         "UserSettings/": true

@@ -13,6 +13,9 @@ public static class EnemyPackInfoList
 
     public readonly static string[] flagsToCheckForSlaveAllies = new string[] { "convincedSlavesToHelpYou", "kastorStartedRevolt" };
 
+    public readonly static EnemyPackInfo guardVazulFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.guardVazul }, DropTableList.slaveMineDT1Name);
+                              
+
     // //used in the dialogue started upon entering the Manse kitchens
     // public readonly static EnemyPackInfo halfSlavesNoGuardFight = new EnemyPackInfo(new int[] { 1, 6 }, new int[] { 1, 6 }, new EnemyStats[]{loadEnemyStatsFromResources(kendeTheCookWithoutSummon),
     //                                                                                                                         loadEnemyStatsFromResources(slaveWarrior)

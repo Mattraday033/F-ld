@@ -17,52 +17,6 @@ public class EnemyCombatActionManager : MonoBehaviour
 
     public SelectorManager selectorManager;
 	
-	public static int actualEnemyMasterCombatActionCount()
-	{
-		int masterCombatActionCount = 0;
-		
-		foreach(CombatAction action in enemyCombatActionQueue)
-		{
-			EnemyStats enemyStats = (EnemyStats) action.getActorStats();
-			
-			if(enemyStats == null)
-			{
-				continue;
-			}
-			string traitName = enemyStats.traitNames[0];
-	
-	
-			if(traitName.Equals("Master"))
-			{
-				masterCombatActionCount++;
-			}
-		}
-
-        foreach (CombatAction action in slowedEnemyCombatActionQueue)
-        {
-            EnemyStats enemyStats = (EnemyStats) action.getActorStats();
-
-            if (enemyStats == null)
-            {
-                continue;
-            }
-            string traitName = enemyStats.traitNames[0];
-
-
-            if (traitName.Equals("Master"))
-            {
-                masterCombatActionCount++;
-            }
-        }
-
-        return masterCombatActionCount;
-	}
-	
-	public static int getTotalAliveEnemyCount()
-	{
-		return CombatGrid.getAllAliveEnemyCombatants().Count;
-	}
-	
 	//method to populate CombatStateManager.EnemyCombatActionQueue
 	//runs through all enemies in listOfEnemies and assigns them actions
 	//eventually will need to only provide actions for the amount of enemies based on

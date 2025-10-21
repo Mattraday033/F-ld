@@ -64,9 +64,9 @@ public static class Charisma
         return startingDescription + combatDescription + dialogueDescription + movementDescription + skillDescription;
     }
 
-	public static CombatAction[] getStartingActions()
+	public static CombatAction[] getStartingActions(AllyStats statSource)
 	{
-		return new CombatAction[] { new FistAttack(), AbilityList.getAbility("c-2-3"), AbilityList.getAbility("c-2-3"), null, null, null, null, null, AbilityList.getAbility("c-2-2"), null, null, null, };
+		return new CombatAction[] { new FistAttack(statSource), AbilityList.getAbility(statSource,"c-2-3"), AbilityList.getAbility(statSource,"c-2-3"), null, null, null, null, null, AbilityList.getAbility(statSource,"c-2-2"), null, null, null, };
 	}
 	
 	public static int getPartyMemberCharismaAtLevel(string partyMemberName, int level)

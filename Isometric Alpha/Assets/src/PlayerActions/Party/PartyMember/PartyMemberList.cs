@@ -26,8 +26,8 @@ public static class PartyMemberList
 
                 PartyMember thatch = new PartyMember(new AllyStats(NPCNameList.thatch, higherStrength, normalStat, normalStat, normalStat));
 
-                thatch.stats.combatActionArray = new CombatActionArray(thatch.stats, Strength.getStartingActions());
-                thatch.stats.combatActionArray.equipCombatAction(new Attack(ItemList.getItem(ItemList.weaponsListIndex, ItemList.cudgelIndex) as Weapon), 0);
+                thatch.stats.combatActionArray = new CombatActionArray(thatch.stats, Strength.getStartingActions(thatch.stats));
+                thatch.stats.combatActionArray.equipCombatAction(new Attack(thatch.stats, ItemList.getItem(ItemList.weaponsListIndex, ItemList.cudgelIndex) as Weapon), 0);
                 thatch.stats.equippedItems = new EquippedItems(thatch.stats);
 
                 return thatch;
@@ -35,7 +35,7 @@ public static class PartyMemberList
 
                 PartyMember nandor = new PartyMember(new AllyStats(NPCNameList.nandor, normalStat, normalStat, higherWisdom, normalStat));
 
-                nandor.stats.combatActionArray = new CombatActionArray(nandor.stats, Wisdom.getStartingActions());
+                nandor.stats.combatActionArray = new CombatActionArray(nandor.stats, Wisdom.getStartingActions(nandor.stats));
                 nandor.stats.equippedItems = new EquippedItems(nandor.stats);
 
                 return nandor;
@@ -43,8 +43,8 @@ public static class PartyMemberList
 
                 PartyMember carter =  new PartyMember(new AllyStats(NPCNameList.carter, normalStat, higherDexterity, normalStat, normalStat));
 
-                carter.stats.combatActionArray = new CombatActionArray(carter.stats, Dexterity.getStartingActions());
-                carter.stats.combatActionArray.equipCombatAction(new Attack(ItemList.getItem(ItemList.weaponsListIndex, ItemList.lightPickIndex) as Weapon), 0);
+                carter.stats.combatActionArray = new CombatActionArray(carter.stats, Dexterity.getStartingActions(carter.stats));
+                carter.stats.combatActionArray.equipCombatAction(new Attack(carter.stats, ItemList.getItem(ItemList.weaponsListIndex, ItemList.lightPickIndex) as Weapon), 0);
                 carter.stats.equippedItems = new EquippedItems(carter.stats);
 
                 return carter;

@@ -118,7 +118,7 @@ public class AllyStats : Stats
         this.xp = wrapper.xp;
         this.currentHealth = wrapper.currentHealth;
 
-        combatActionArray = new CombatActionArray(this, SaveBlueprint.extractCombatActionsFromJson(wrapper.combatActions));
+        combatActionArray = new CombatActionArray(this, SaveBlueprint.extractCombatActionsFromJson(this, wrapper.combatActions));
         equippedItems = new EquippedItems(this, SaveBlueprint.extractEquippedItemsFromJson(wrapper.currentEquipment));
     }
 

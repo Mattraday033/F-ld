@@ -122,9 +122,9 @@ public class UsableItem : Item, IJSONConvertable
         return useDescriptionAdditions[0] + useDescriptionAdditions[1] + useDescriptionAdditions[2];
     }
 
-    public override CombatAction getCombatAction()
+    public override CombatAction getCombatAction(AllyStats stats)
     {
-        return new ItemCombatAction(this);
+        return new ItemCombatAction(stats, this);
     }
 
     public override GameObject getDescriptionPanelFull(PanelType panelType)

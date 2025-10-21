@@ -51,7 +51,8 @@ public class EnemyStats : Stats
     {
         this.armor = armor;
 
-		this.totalHealth = tHP;
+        this.totalHealth = tHP;
+        this.currentHealth = totalHealth;
     }
 
     public EnemyStats(string key, int armor, int tHP, CombatAction combatAction, Trait[] traits) :
@@ -60,8 +61,9 @@ public class EnemyStats : Stats
         this.armor = armor;
 
         this.totalHealth = tHP;
+        this.currentHealth = totalHealth;
 
-        this.combatAction = combatAction.clone();
+        this.combatAction = combatAction.clone(this);
 
         foreach (Trait trait in traits)
         {
@@ -100,9 +102,9 @@ public class EnemyStats : Stats
 	}
 
 	public virtual void spawningCombatAction()
-	{
-		traits = TraitList.getListOfTraits(traitNames);
-	}
+       {
+        
+    }
 
 	public void instateEnvironmentalCombatAction()
 	{
@@ -136,14 +138,6 @@ public class EnemyStats : Stats
 	public override bool isLowPriorityAttacker()
 	{
 		return lowPriorityAttacker;
-	}
-
-	private void checkForMissingTraitList()
-	{
-		if (traits == null || traits.Length == 0)
-		{
-			traits = TraitList.getListOfTraits(traitNames);
-		}
 	}
 
 	public override GridCoords getPositionToHit(Selector selector, int skips)
@@ -274,7 +268,7 @@ public class EnemyStats : Stats
 		}
 		else
 		{
-			return AbilityList.getAbility(AbilityList.harmlessKey);
+			return AbilityList.getAbility(this, AbilityList.harmlessKey);
 		}
 	}
 

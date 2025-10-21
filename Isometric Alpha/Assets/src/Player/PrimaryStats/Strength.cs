@@ -93,11 +93,11 @@ public static class Strength
 		return startingDescription + combatDescription + dialogueDescription + movementDescription + skillDescription;
 	}
 
-	public static CombatAction[] getStartingActions()
+	public static CombatAction[] getStartingActions(AllyStats statSource)
     {
         AbilityList.initialize();
         
-		return new CombatAction[] { new FistAttack(), AbilityList.getAbility("s-2-1"), AbilityList.getAbility("s-2-1"), null, null, null, null, null, null, null, null, null };
+		return new CombatAction[] { new FistAttack(statSource), AbilityList.getAbility(statSource,"s-2-1"), AbilityList.getAbility(statSource,"s-2-1"), null, null, null, null, null, null, null, null, null };
 	}
 
 	public static int getPartyMemberStrengthAtLevel(string partyMemberName, int level)

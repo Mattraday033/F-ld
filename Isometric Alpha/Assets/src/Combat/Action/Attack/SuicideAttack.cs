@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SuicideAttack : Attack	
 {
-	public SuicideAttack(Weapon mainHandWeapon): base(mainHandWeapon)
+	public SuicideAttack(Stats actor, Weapon mainHandWeapon): base(actor, mainHandWeapon)
 	{
 
 	}

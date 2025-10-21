@@ -77,7 +77,7 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
         }
         else if (item.getSlotID() == Weapon.mainHandSlotIndex)
         {
-            int currentAttackIndex = OverallUIManager.getCurrentActionArray().getActionIndex(new Attack(item as Weapon));
+            int currentAttackIndex = OverallUIManager.getCurrentActionArray().getActionIndex(new Attack(OverallUIManager.getCurrentPartyMember(), item as Weapon));
 
             if (currentAttackIndex >= 0 && currentAttackIndex < CombatActionArray.numberOfActivatablePlayerCombatActions)
             {

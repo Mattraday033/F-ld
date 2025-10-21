@@ -80,10 +80,15 @@ public class MovementManager : MonoBehaviour
 		StartCoroutine(checkButtonsAfterStartMethods());
 	}
 
-	public void addFloorButton(IFloorButton button)
-	{
-		floorButtons.Add(button);
-	}
+    public static Vector3Int getPlayerCell()
+    {
+        return getAllCurrentSpriteCells()[playerSpriteIndex];
+    }
+
+    public void addFloorButton(IFloorButton button)
+    {
+        floorButtons.Add(button);
+    }
 
 	public bool isBetweenTiles(int spriteID)
 	{
@@ -98,25 +103,6 @@ public class MovementManager : MonoBehaviour
 				(allSpritesToMove[spriteID].position.y > startingPositions[spriteID].y && allSpritesToMove[spriteID].position.y < endingPositions[spriteID].y) ||
 				 isMoving.Contains(true);
 
-	}
-
-	private void updateAllMonsterPackCurrentPositions()
-	{
-		if (State.currentMonsterPackList == null)
-		{
-			return;
-		}
-
-		MonsterPack[] monsterPacks = State.currentMonsterPackList.monsterPacks;
-
-		int endingPositionIndex = firstEnemyIndex;
-		for (int monsterPackIndex = (endingPositionIndex - 1);
-			monsterPackIndex < monsterPacks.Length && endingPositionIndex < endingPositions.Length;
-			monsterPackIndex++)
-		{
-			monsterPacks[monsterPackIndex].currentPosition = endingPositions[endingPositionIndex];
-			endingPositionIndex++;
-		}
 	}
 
 	//something keeps setting sprites' Z position to 25.5 and this messes with positioning. 
@@ -211,7 +197,6 @@ public class MovementManager : MonoBehaviour
 			StartCoroutine(prepCombatAfterMovesFinish());
 		}
 
-		updateAllMonsterPackCurrentPositions();
 		smallWaitAfterMoving = true;
 
 		changeFooting();
@@ -595,6 +580,11 @@ public class MovementManager : MonoBehaviour
     {
         PositionWrapper[] positions = new PositionWrapper[startingPositions.Length - 1];
         
+        if(positions.Length <= 0)
+        {
+            Debug.LogError("positions.Length = " + positions.Length);
+        }
+
         for(int positionIndex = 0; positionIndex < positions.Length; positionIndex++)
         {
             positions[positionIndex] = new PositionWrapper(startingPositions[positionIndex + 1]);

@@ -15,9 +15,9 @@ public class Fist : Weapon
 		return false;
 	}
 
-	public override CombatAction getCombatAction()
+	public override CombatAction getCombatAction(AllyStats stats)
 	{
-		return new FistAttack();
+		return new FistAttack(stats);
 	}
 	
 	public override bool appliesStanceStacks()

@@ -30,12 +30,14 @@ public class CombatStateManager : MonoBehaviour
 
 	public Transform combatBackgroundGrid;
 
-	public static FadeToBlackManager fadeToBlackManager;
+    public static bool hasReturnCell = false;
+    public static Vector3Int returnCell;
+
+    public static FadeToBlackManager fadeToBlackManager;
 	public static ArrayList allQueuedSummonLocations = new ArrayList();
 
 	public static bool inCombat = false;
 
-	public static MonsterPack currentMonsterPack;
 	//which turn it is, or N+1 where N is the amount of WhoseTurn.Resolving the combat has passed through
 	public static int turnNumber = 1;
 
@@ -48,7 +50,9 @@ public class CombatStateManager : MonoBehaviour
 	public static WhoseTurn whoseTurn;
 	public static CurrentActivity currentActivity { get; private set; }
 
-	public EnemySpawner enemySpawner;
+    public static string currentDefeatKey = "";
+
+    public EnemySpawner enemySpawner;
 	public PartySpawner partySpawner;
 	public SummonSpawner summonSpawner;
 
@@ -77,7 +81,7 @@ public class CombatStateManager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		inCombat = true;
+        inCombat = true;
 		initializeListOfObjectToUpdate();
 
 		fadeToBlackManager = FadeToBlackManager.getInstance();
@@ -145,7 +149,19 @@ public class CombatStateManager : MonoBehaviour
 		}
 	}
 
-	void Update()
+    public static void setReturnCell(Vector3Int newReturnCell)
+    {
+        hasReturnCell = true;
+        returnCell = newReturnCell;
+    }
+
+    public static Vector3Int useReturnCell()
+    {
+        hasReturnCell = false;
+        return returnCell;
+    }
+
+    void Update()
 	{
 		if (Input.GetKey(KeyBindingList.resolveTurnKey) && canResolveTurn() && !KeyPressManager.handlingPrimaryKeyPress)
 		{
@@ -400,20 +416,20 @@ public class CombatStateManager : MonoBehaviour
 
 	public static void returnToOverworld(bool defeatedEnemy)
 	{
-		if (State.currentMonsterPackList != null &&
-			(currentMonsterPack.index < State.currentMonsterPackList.monsterPacks.Length && currentMonsterPack.index >= 0))
-		{
-			if (!defeatedEnemy)
-			{
-				State.currentMonsterPackList.monsterPacks[currentMonsterPack.index].retreatCounter = 1;
-			}
+		// if (State.currentMonsterPackList != null &&
+		// 	(currentMonsterPack.index < State.currentMonsterPackList.monsterPacks.Length && currentMonsterPack.index >= 0))
+		// {
+		// 	if (!defeatedEnemy)
+		// 	{
+		// 		State.currentMonsterPackList.monsterPacks[currentMonsterPack.index].retreatCounter = 1;
+		// 	}
 
-			//State.currentMonsterPackList.shouldReset = false;
-		}
+		// 	//State.currentMonsterPackList.shouldReset = false;
+		// }
 
 		if (!State.enteredCombatFromDialogue && defeatedEnemy)
 		{
-			setDefeatKey(currentMonsterPack.index, defeatedEnemy);
+			setDefeatKey(defeatedEnemy);
 		}
 
 		if (!(State.enemyPackInfo is null) && defeatedEnemy)
@@ -447,22 +463,21 @@ public class CombatStateManager : MonoBehaviour
 
         inCombat = false;
 
-        Debug.LogError("Return to Overworld Location not implemented");
-        // sceneBeforeCombat.changeScene();
+        SceneChange.changeSceneToOverworld();
 	}
 
-	private static void setDefeatKey(int index, bool defeated)
+	private static void setDefeatKey(bool defeated)
     {
-        Debug.LogError("setDefeatKey(int, bool) not implemented");
+        if (State.monsterDefeatKeys.ContainsKey(currentDefeatKey))
+        {
+            State.monsterDefeatKeys[currentDefeatKey] = defeated;
+        }
+        else
+        {
+            State.monsterDefeatKeys.Add(currentDefeatKey, defeated);
+        }
 
-		// if (State.monsterDefeatKeys.ContainsKey(sceneBeforeCombat.sceneToLoad + "-" + index))
-		// {
-		// 	State.monsterDefeatKeys[sceneBeforeCombat.sceneToLoad + "-" + index] = defeated;
-		// }
-		// else
-		// {
-		// 	State.monsterDefeatKeys.Add(sceneBeforeCombat.sceneToLoad + "-" + index, defeated);
-		// }
+        currentDefeatKey = "";
 	}
 
 	public static bool isPlayerSurpriseRound()

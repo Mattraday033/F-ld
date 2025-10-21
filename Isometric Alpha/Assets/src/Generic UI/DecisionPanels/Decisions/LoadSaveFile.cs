@@ -130,7 +130,6 @@ public class LoadSaveFile : IDecision
 
             saveBlueprint.extractAllMonsterDefeatKeysToJson();
 
-            MonsterPackListManager.justLoaded = true;
             CombatStateManager.inCombat = false;
 
             SpeechLog.cleanSpeechLog();

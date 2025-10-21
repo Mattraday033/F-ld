@@ -76,7 +76,7 @@ public class DialogueManager : MonoBehaviour
 
 		if (State.dialogueUponSceneLoadKey != null && State.dialogueUponSceneLoadKey.Length > 0)
 		{
-			npcParent = NPCParent.getInstance().transform;
+			npcParent = AreaManager.getNPCParent();
 			dialogueTrackerButton = new DialogueTrackerButton(true);
 
 			startDialogue(DialogueList.getDialogue(State.dialogueUponSceneLoadKey));
@@ -396,6 +396,9 @@ public class DialogueManager : MonoBehaviour
     {
         DialogueTrigger npcDialogueTrigger;
         Dialogue npcDialogue;
+
+        Helpers.debugNullCheck("currentDialogue", currentDialogue);
+        Helpers.debugNullCheck("PartyManager.getPlayerStats()", PartyManager.getPlayerStats());
 
         currentDialogue.names[0] = PartyManager.getPlayerStats().getName();
         currentDialogue.cameraFoci[0] = PlayerMovement.getInstance().gameObject;

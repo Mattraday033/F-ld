@@ -450,14 +450,14 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		return listOfStrings;
 	}
 
-	public static CombatAction[] extractCombatActionsFromJson(string[] combatActionJSON)
+	public static CombatAction[] extractCombatActionsFromJson(Stats statsSource, string[] combatActionJSON)
 	{
 		CombatAction[] newCombatActions = new CombatAction[CombatActionArray.maxPlayerCombatActions];
 
 		int index = 0;
 		foreach (string actionString in combatActionJSON)
 		{
-			newCombatActions[index] = CombatAction.extractFromJson(actionString);
+			newCombatActions[index] = CombatAction.extractFromJson(statsSource, actionString);
 
 			index++;
 		}

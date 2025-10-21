@@ -26,6 +26,8 @@ public static class SceneChange
 
     public static void changeSceneToCombat()
     {
+        CombatStateManager.setReturnCell(MovementManager.getPlayerCell());
+
         SceneManager.LoadScene(SceneNameList.combat);
         SceneManager.LoadScene(SceneNameList.combatUI, LoadSceneMode.Additive);
     }

@@ -7,7 +7,7 @@ public class ManseDiningRoomPermButtonScript : MonoBehaviour, IFloorButtonScript
 	public GameObject northWestDiningRoomDoors;
 	public const string gateKey = "ManseDiningRoomDoors";
 	private const string activatedFlag = "manseDiningRoomPermButtonScriptActivated";
-	public MonsterPack monsterToSpawn;
+	// public MonsterPack monsterToSpawn;
 
 	private void Awake()
 	{
@@ -33,20 +33,20 @@ public class ManseDiningRoomPermButtonScript : MonoBehaviour, IFloorButtonScript
 	
 	private IEnumerator handleCombatActionsAfterScreenIsBlack()
 	{
-		while(!FadeToBlackManager.isBlack())
-        {
+		// while(!FadeToBlackManager.isBlack())
+        // {
             yield return null;
-        }
+        // }
 		
-		GateAndChestManager.addKey(gateKey);
-		northWestDiningRoomDoors.SetActive(false);
+		// GateAndChestManager.addKey(gateKey);
+		// northWestDiningRoomDoors.SetActive(false);
 		
 
-		monsterToSpawn = MonsterPackListManager.getInstance().instantiateMonsterSprite(monsterToSpawn.index, monsterToSpawn);
+		// monsterToSpawn = MonsterPackListManager.getInstance().instantiateMonsterSprite(monsterToSpawn.index, monsterToSpawn);
 
-		MovementManager.getInstance().addEnemySprite(monsterToSpawn.monsterSprite.transform, monsterToSpawn.index+1);
+		// MovementManager.getInstance().addEnemySprite(monsterToSpawn.monsterSprite.transform, monsterToSpawn.index+1);
 		
-		FadeToBlackManager.getInstance().setAndStartFadeBackIn();
+		// FadeToBlackManager.getInstance().setAndStartFadeBackIn();
 	}
 	
 	public bool hasBeenActivated()

@@ -11,7 +11,6 @@ public static class State
 	public static bool debugDiscoverAllLocations = false;
 	public static bool debugRetreatAutoSucceed = false;
 
-	public static MonsterPackList currentMonsterPackList;
 	public static Dictionary<string, bool> monsterDefeatKeys = new Dictionary<string, bool>();
 
 	public static OOCUIManager oocUIManager;

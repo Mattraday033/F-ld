@@ -25,7 +25,7 @@ public class OffHandFist : Fist
 		return false;
 	}
 	
-	public override CombatAction getCombatAction()
+	public override CombatAction getCombatAction(AllyStats stats)
 	{
 		return null;
 	}

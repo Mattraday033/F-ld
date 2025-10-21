@@ -8,6 +8,11 @@ public static class EnemyAmountList
     private const int twoEnemies = 2;
     private const int threeEnemies = 3;
 
+    #region NPCs
+    public readonly static EnemyAmount guardVazul = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.guardVazul));
+
+    #endregion
+
     public readonly static EnemyAmount oneBatSwarm = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.batSwarm));
     public readonly static EnemyAmount twoBatSwarms = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.batSwarm));
     public readonly static EnemyAmount threeBatSwarms = new EnemyAmount(threeEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.batSwarm));

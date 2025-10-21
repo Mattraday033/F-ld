@@ -25,7 +25,7 @@ public class ListenerButtonManager : MonoBehaviour
     public GameObject bridge;
     public GameObject water;
 
-    public MonsterPack monsterToSpawn;
+    // public MonsterPack monsterToSpawn;
 
     public static bool correctWallType(WallType wallType)
     {
@@ -217,22 +217,22 @@ public class ListenerButtonManager : MonoBehaviour
 
     public void spawnMonster()
     {
-        if (monsterToSpawn.monsterSprite != null && monsterToSpawn.monsterSprite.activeSelf)
-        {
-            return;
-        }
-        else if (monsterToSpawn.monsterSprite != null && !monsterToSpawn.monsterSprite.activeSelf)
-        {
-            DestroyImmediate(monsterToSpawn.monsterSprite);
-        }
+        // if (monsterToSpawn.monsterSprite != null && monsterToSpawn.monsterSprite.activeSelf)
+        // {
+        //     return;
+        // }
+        // else if (monsterToSpawn.monsterSprite != null && !monsterToSpawn.monsterSprite.activeSelf)
+        // {
+        //     DestroyImmediate(monsterToSpawn.monsterSprite);
+        // }
         
-        monsterToSpawn.facingDirection = Facing.NorthEast;
+        // monsterToSpawn.facingDirection = Facing.NorthEast;
 
-        monsterToSpawn = MonsterPackListManager.getInstance().instantiateMonsterSpriteAtStartingPosition(monsterToSpawn.index, monsterToSpawn);
+        // monsterToSpawn = MonsterPackListManager.getInstance().instantiateMonsterSpriteAtStartingPosition(monsterToSpawn.index, monsterToSpawn);
 
-        MovementManager.getInstance().addEnemySprite(monsterToSpawn.monsterSprite.transform, monsterToSpawn.index + 1);
+        // MovementManager.getInstance().addEnemySprite(monsterToSpawn.monsterSprite.transform, monsterToSpawn.index + 1);
 
-        FadeToBlackManager.getInstance().setAndStartFadeBackIn();
+        // FadeToBlackManager.getInstance().setAndStartFadeBackIn();
     }
 
     private void Awake()
@@ -257,10 +257,10 @@ public class ListenerButtonManager : MonoBehaviour
 
     void Start()
     {
-        if (State.currentMonsterPackList != null && State.currentMonsterPackList.monsterPacks != null && State.currentMonsterPackList.monsterPacks.Length > 0)
-        {
-            monsterToSpawn = State.currentMonsterPackList.monsterPacks[0];
-        }
+        // if (State.currentMonsterPackList != null && State.currentMonsterPackList.monsterPacks != null && State.currentMonsterPackList.monsterPacks.Length > 0)
+        // {
+        //     monsterToSpawn = State.currentMonsterPackList.monsterPacks[0];
+        // }
         
         getPreviousWallTypeFromFlags();
     }

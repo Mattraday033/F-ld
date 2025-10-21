@@ -18,6 +18,7 @@ public static class NPCNameList
     public const string janos = "Janos";
     public const string balint = "Bálint";
     public const string uros = "Uros";
+    public const string slate = "Slate";
 
     #endregion
 
@@ -39,6 +40,8 @@ public static class NPCNameList
     public const string guardPazman = "Guard Pázmán";
     public const string pazman = "Pázmán";
     public const string guardVirag = "Virág";
+
+    public const string guardVazul = "Guard Vazul";
 
     public const string guardLaszlo = "Guard László";
 
@@ -69,6 +72,7 @@ public static class NPCNameList
 
     public const string leafPile = "Leaf Pile";
     public const string vaultableBarrels = "Vaultable Barrels";
+    public const string rubble = "Rubble";
     public const string chest = "Chest";
 
     #endregion

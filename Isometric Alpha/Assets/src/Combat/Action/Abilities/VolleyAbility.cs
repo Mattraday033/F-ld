@@ -156,20 +156,22 @@ public class VolleyAbility : Ability
 	}
 	
 	public override void removeHighlightFromActorSprites()
-	{
-        foreach (Stats actorStats in allActors)
-        {
-			if(actorStats != null)
-			{	
-				GameObject combatSprite = actorStats.combatSprite;
+    {
+        base.removeHighlightFromActorSprites();
+
+        // foreach (Stats actorStats in allActors)
+        // {
+		// 	if(actorStats != null)
+		// 	{	
+		// 		GameObject combatSprite = actorStats.combatSprite;
 				
-				if(combatSprite != null && !(combatSprite is null))
-				{
-					combatSprite.GetComponent<SpriteOutline>().color = RevealManager.defaultWhenNotRevealed;
-					Helpers.updateColliderPosition(combatSprite);
-				}
-			}
-		}
+		// 		if(combatSprite != null && !(combatSprite is null))
+		// 		{
+		// 			combatSprite.GetComponent<SpriteOutline>().color = RevealManager.defaultWhenNotRevealed;
+		// 			Helpers.updateColliderPosition(combatSprite);
+		// 		}
+		// 	}
+		// }
 	}
 	
 	public void findAllVolleyActorCoords(bool alliedSide)

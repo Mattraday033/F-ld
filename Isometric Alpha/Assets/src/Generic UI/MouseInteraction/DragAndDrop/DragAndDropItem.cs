@@ -86,7 +86,7 @@ public class DragAndDropItem : DragAndDropUIObject
                 equippableItem.getSlotID() == Weapon.mainHandSlotIndex)
         {
             equipmentSlot.unequipInCurrentSlot();
-            OverallUIManager.getCurrentActionArray().equipCombatAction(equippableItem.getCombatAction());
+            OverallUIManager.getCurrentActionArray().equipCombatAction(equippableItem.getCombatAction(OverallUIManager.getCurrentPartyMember()));
         }
         else if (equippableItem.getSlotID() == equipmentSlot.slotIndex)
         {

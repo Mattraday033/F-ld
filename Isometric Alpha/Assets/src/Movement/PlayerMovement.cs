@@ -845,7 +845,7 @@ public class PlayerMovement : MonoBehaviour
 
 		setButtonPromptVisibility();
 
-		if (currentMovementKeyCode != KeyCode.None && !animator.GetBool("playWalkCycle") && FadeToBlackManager.isTransparent())
+		if (currentMovementKeyCode != KeyCode.None && FadeToBlackManager.isTransparent())
 		{
 			runOrIdle = "Run";
 		}

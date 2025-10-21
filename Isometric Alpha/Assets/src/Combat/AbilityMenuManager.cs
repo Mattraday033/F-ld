@@ -437,7 +437,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
         if (!hasAtLeastOneActivatableAction)
         {
-            actions[0] = new FistAttack();
+            actions[0] = new FistAttack(actionArraySource);
         }
 
         int index = 0;
