@@ -173,14 +173,20 @@ public class FadeToBlackManager : MonoBehaviour
 		frameCount = maxOpacity;
 		updateFadeToBlackImageOpacity();
 
-		GC.Collect();
-		
-		yield break;
+        GC.Collect();
+
+        DialogueManager.setCameraToFadeSpeed();
+
     }
 	
 	private IEnumerator fadeBackIn()
     {
         float timeWaited = 0f;
+
+        yield return null;
+        yield return null; //2 frames of instant camera speed
+
+        DialogueManager.setCameraToFadeSpeed();
 
         while (!isTransparent())
         {

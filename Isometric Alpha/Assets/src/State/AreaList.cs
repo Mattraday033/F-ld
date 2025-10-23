@@ -164,7 +164,7 @@ public static class AreaList
             AreaNameList.messHall,
             AreaNameList.stables,
             AreaNameList.temple,
-            AreaNameList.slaveShackTwo
+            AreaNameList.stockhouse
         };
 
         string[] areasSharingHostilityWithCampInterior = new string[]

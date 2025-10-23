@@ -285,16 +285,9 @@ public class EnemySpawner : MonoBehaviour
 			
 			cloneOfEnemyType.instantiateCombatSprite();
 
-			cloneOfEnemyType.combatSprite.transform.position = CombatGrid.fullCombatGrid[row][col] + cloneOfEnemyType.adjustment;
-			
-			((EnemyStats)CombatGrid.getCombatantAtCoords(row, col)).setUpHealthBar
-			(
-				Instantiate(Resources.Load<GameObject>(PrefabNames.healthBar),
-							CombatGrid.fullCombatGrid[row][col] + Stats.healthBarAdjustment,
-							Quaternion.identity, 
-							combatantInfoCanvas.gameObject.transform
-							)
-			);
+            Debug.Log("Placing " + cloneOfEnemyType.getName() + " at " + row + ", " + col);
+
+            cloneOfEnemyType.combatSprite.transform.position = CombatGrid.getPositionAt(row, col);
 			
 			if(CombatStateManager.whoseTurn == WhoseTurn.Start)
 			{
@@ -324,16 +317,7 @@ public class EnemySpawner : MonoBehaviour
 			
 			CombatGrid.combatantStatsGrid[cloneOfEnemyType.position.row].setCol(cloneOfEnemyType.position.col, cloneOfEnemyType);
 			
-			cloneOfEnemyType.combatSprite = Instantiate(cloneOfEnemyType.combatSprite, CombatGrid.fullCombatGrid[spriteRow][spriteCol] + cloneOfEnemyType.adjustment, Quaternion.identity);
-			
-			((EnemyStats) CombatGrid.getCombatantAtCoords(cloneOfEnemyType.position.row,cloneOfEnemyType.position.col)).setUpHealthBar
-			(
-				Instantiate(cloneOfEnemyType.healthBar,
-							findAverageOfSpawnPositions(spawnDetails.allSpawnPositions) + Stats.healthBarAdjustment,
-							Quaternion.identity,
-							combatantInfoCanvas.gameObject.transform
-							)
-			);
+			cloneOfEnemyType.combatSprite = Instantiate(cloneOfEnemyType.combatSprite, CombatGrid.getPositionAt(spriteRow, spriteCol), Quaternion.identity);
 			
 			foreach(GridCoords coords in spawnDetails.allSpawnPositions)
 			{
@@ -348,7 +332,7 @@ public class EnemySpawner : MonoBehaviour
 		
 		foreach(GridCoords coords in allSpawnPositions)
 		{
-			sumOfAllSpawnPositions += CombatGrid.fullCombatGrid[coords.row][coords.col];
+			sumOfAllSpawnPositions += CombatGrid.getPositionAt(coords);
 		}
 		
 		Vector3 averageOfAllSpawnPositions = new Vector3(sumOfAllSpawnPositions.x / (float) allSpawnPositions.Length,

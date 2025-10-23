@@ -32,7 +32,7 @@ public class DoubleStrikeAbility : Ability
             Debug.LogError("tertiary Coords never set. Are you sure that this action has a tertiary yet?");
         }
 
-        return CombatGrid.fullCombatGrid[tertiaryCoords.row][tertiaryCoords.col];
+        return CombatGrid.getPositionAt(tertiaryCoords);
     }
 
     public override void setTertiaryCoords(GridCoords coords)

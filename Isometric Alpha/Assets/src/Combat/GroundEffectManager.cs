@@ -32,7 +32,7 @@ public struct GroundEffect
 	{
 		indicator = GameObject.Instantiate(indicator, GroundEffectManager.getInstance().indicatorParent);
 		
-		indicator.transform.position = CombatGrid.fullCombatGrid[position.row][position.col];
+		indicator.transform.position = CombatGrid.getPositionAt(position);
 		
 		Helpers.updateGameObjectPosition(indicator);
 	}

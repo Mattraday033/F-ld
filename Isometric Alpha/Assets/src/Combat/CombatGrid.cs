@@ -26,8 +26,11 @@ public static class CombatGrid
 	public const int rowLowerBounds = 7;
 	public const int colLeftBounds = 0;
 	public const int rowUpperBounds = 0;
-	public const int colRightBounds = 3;
-	
+    public const int colRightBounds = 3;
+
+    public const int firstNoMansLandRow = 4;
+    public const int noMansLandWidth = 2;
+
 	public const int allyRowLowerBounds = 7;
 	public const int allyRowUpperBounds = 4;
 	public const int enemyRowLowerBounds = 3;
@@ -35,86 +38,36 @@ public static class CombatGrid
 	
 	public const int maximumNumberOfSpaces = 16;
 	
-	public const float gridSpaceIncrementX = 0.5062f;
-	public const float gridSpaceIncrementY = 0.2160031f;
-	
-
-	public static Vector3 playerSideRow4Col1 = new Vector3(4.53f+(-6f*gridSpaceIncrementX),-1.87f+(-6f*gridSpaceIncrementY),0f); //top left corner of player side
-    public static Vector3 playerSideRow4Col2 = new Vector3(4.53f+(-5f*gridSpaceIncrementX),-1.87f+(-7f*gridSpaceIncrementY),0f);
-    public static Vector3 playerSideRow4Col3 = new Vector3(4.53f+(-4f*gridSpaceIncrementX),-1.87f+(-8f*gridSpaceIncrementY),0f);
-    public static Vector3 playerSideRow4Col4 = new Vector3(4.53f+(-3f*gridSpaceIncrementX),-1.87f+(-9f*gridSpaceIncrementY),0f);
-    
-	public static Vector3 playerSideRow3Col1 = new Vector3(4.53f+(-7f*gridSpaceIncrementX),-1.87f+(-7f*gridSpaceIncrementY),0f);
-    public static Vector3 playerSideRow3Col2 = new Vector3(4.53f+(-6f*gridSpaceIncrementX),-1.87f+(-8f*gridSpaceIncrementY),0f);
-    public static Vector3 playerSideRow3Col3 = new Vector3(4.53f+(-5f*gridSpaceIncrementX),-1.87f+(-9f*gridSpaceIncrementY),0f);
-    public static Vector3 playerSideRow3Col4 = new Vector3(4.53f+(-4f*gridSpaceIncrementX),-1.87f+(-10f*gridSpaceIncrementY),0f);
-	
-	public static Vector3 playerSideRow2Col1 = new Vector3(4.53f+(-8f*gridSpaceIncrementX),-1.87f+(-8f*gridSpaceIncrementY),0f);
-    public static Vector3 playerSideRow2Col2 = new Vector3(4.53f+(-7f*gridSpaceIncrementX),-1.87f+(-9f*gridSpaceIncrementY),0f);
-    public static Vector3 playerSideRow2Col3 = new Vector3(4.53f+(-6f*gridSpaceIncrementX),-1.87f+(-10f*gridSpaceIncrementY),0f);
-    public static Vector3 playerSideRow2Col4 = new Vector3(4.53f+(-5f*gridSpaceIncrementX),-1.87f+(-11f*gridSpaceIncrementY),0f);
-	
-    public static Vector3 playerSideRow1Col1 = new Vector3(4.53f+(-9f*gridSpaceIncrementX),-1.87f+(-9f*gridSpaceIncrementY),0f); 
-    public static Vector3 playerSideRow1Col2 = new Vector3(4.53f+(-8f*gridSpaceIncrementX),-1.87f+(-10f*gridSpaceIncrementY),0f);
-    public static Vector3 playerSideRow1Col3 = new Vector3(4.53f+(-7f*gridSpaceIncrementX),-1.87f+(-11f*gridSpaceIncrementY),0f);
-    public static Vector3 playerSideRow1Col4 = new Vector3(4.53f+(-6f*gridSpaceIncrementX),-1.87f+(-12f*gridSpaceIncrementY),0f);
-
-
-	public static Vector3 enemySideRow4Col1 = new Vector3(4.53f+(0f*gridSpaceIncrementX),-1.87f+(0f*gridSpaceIncrementY),0f);  // top left corner of enemy side
-    public static Vector3 enemySideRow4Col2 = new Vector3(4.53f+(1f*gridSpaceIncrementX),-1.87f+(-1f*gridSpaceIncrementY),0f);
-    public static Vector3 enemySideRow4Col3 = new Vector3(4.53f+(2f*gridSpaceIncrementX),-1.87f+(-2f*gridSpaceIncrementY),0f);
-    public static Vector3 enemySideRow4Col4 = new Vector3(4.53f+(3f*gridSpaceIncrementX),-1.87f+(-3f*gridSpaceIncrementY),0f);
-
-    public static Vector3 enemySideRow3Col1 = new Vector3(4.53f+(-1f*gridSpaceIncrementX),-1.87f+(-1f*gridSpaceIncrementY),0f);
-    public static Vector3 enemySideRow3Col2 = new Vector3(4.53f+(0f*gridSpaceIncrementX),-1.87f+(-2f*gridSpaceIncrementY),0f);
-    public static Vector3 enemySideRow3Col3 = new Vector3(4.53f+(1f*gridSpaceIncrementX),-1.87f+(-3f*gridSpaceIncrementY),0f);
-    public static Vector3 enemySideRow3Col4 = new Vector3(4.53f+(2f*gridSpaceIncrementX),-1.87f+(-4f*gridSpaceIncrementY),0f);
-
-    public static Vector3 enemySideRow2Col1 = new Vector3(4.53f+(-2f*gridSpaceIncrementX),-1.87f+(-2f*gridSpaceIncrementY),0f);
-    public static Vector3 enemySideRow2Col2 = new Vector3(4.53f+(-1f*gridSpaceIncrementX),-1.87f+(-3f*gridSpaceIncrementY),0f);
-    public static Vector3 enemySideRow2Col3 = new Vector3(4.53f+(-0f*gridSpaceIncrementX),-1.87f+(-4f*gridSpaceIncrementY),0f);
-    public static Vector3 enemySideRow2Col4 = new Vector3(4.53f+(1f*gridSpaceIncrementX),-1.87f+(-5f*gridSpaceIncrementY),0f);
-            
-	public static Vector3 enemySideRow1Col1 = new Vector3(4.53f+(-3f*gridSpaceIncrementX),-1.87f+(-3f*gridSpaceIncrementY),0f); 
-    public static Vector3 enemySideRow1Col2 = new Vector3(4.53f+(-2f*gridSpaceIncrementX),-1.87f+(-4f*gridSpaceIncrementY),0f);
-    public static Vector3 enemySideRow1Col3 = new Vector3(4.53f+(-1f*gridSpaceIncrementX),-1.87f+(-5f*gridSpaceIncrementY),0f);
-    public static Vector3 enemySideRow1Col4 = new Vector3(4.53f+(-0f*gridSpaceIncrementX),-1.87f+(-6f*gridSpaceIncrementY),0f);
-	
-	
-	
-	
-    public static Vector3[][] fullCombatGrid = new Vector3[][]{new Vector3[]{enemySideRow4Col1 , enemySideRow4Col2 , enemySideRow4Col3 , enemySideRow4Col4 },
-															   new Vector3[]{enemySideRow3Col1 , enemySideRow3Col2 , enemySideRow3Col3 , enemySideRow3Col4 },
-                                                               new Vector3[]{enemySideRow2Col1 , enemySideRow2Col2 , enemySideRow2Col3 , enemySideRow2Col4 }, 
-                                                               new Vector3[]{enemySideRow1Col1 , enemySideRow1Col2 , enemySideRow1Col3 , enemySideRow1Col4 },
-															   new Vector3[]{playerSideRow4Col1, playerSideRow4Col2, playerSideRow4Col3, playerSideRow4Col4},
-                                                               new Vector3[]{playerSideRow3Col1, playerSideRow3Col2, playerSideRow3Col3, playerSideRow3Col4},
-                                                               new Vector3[]{playerSideRow2Col1, playerSideRow2Col2, playerSideRow2Col3, playerSideRow2Col4},
-															   new Vector3[]{playerSideRow1Col1, playerSideRow1Col2, playerSideRow1Col3, playerSideRow1Col4}};
-	
 	public static RowOfCombatants[] combatantStatsGrid = new RowOfCombatants[8];
-	
-	//resets combat grid
-	public static void cleanCombatGrid()
-	{
-		combatantStatsGrid = new RowOfCombatants[8];
-		
-		for(int i = 0; i < combatantStatsGrid.Length; i++)
-		{
-			combatantStatsGrid[i].row = new Stats[4];
-		}
-	}
-	
-	public static Vector3 getPositionAt(int row, int col)
-	{
-		return fullCombatGrid[row][col];
-	}
-	
+
+    //resets combat grid
+    public static void cleanCombatGrid()
+    {
+        combatantStatsGrid = new RowOfCombatants[8];
+
+        for (int i = 0; i < combatantStatsGrid.Length; i++)
+        {
+            combatantStatsGrid[i].row = new Stats[4];
+        }
+    }
+
 	public static Vector3 getPositionAt(GridCoords coords)
-	{
-		return fullCombatGrid[coords.row][coords.col];
+    {
+        return getPositionAt(coords.row, coords.col);
 	}
-	
+
+    public static Vector3 getPositionAt(int row, int col)
+    {
+        Grid creatureGrid = CombatStateManager.getCreatureGrid();
+
+        if(row >= firstNoMansLandRow)
+        {
+            row += noMansLandWidth;
+        }
+
+        return creatureGrid.GetCellCenterWorld(new Vector3Int(-1 * row, -1 * col));
+    }
+
 	public static bool positionIsOnAlliedSide(GridCoords coords)
 	{
 		return (coords.row >= allyRowUpperBounds && coords.row <= allyRowLowerBounds);
@@ -152,10 +105,8 @@ public static class CombatGrid
 			return;
 		}
 		
-		combatant.combatSprite.transform.position = fullCombatGrid[newCoords.row][newCoords.col] + combatant.adjustment;
-		combatant.healthBar.transform.position = fullCombatGrid[newCoords.row][newCoords.col] + Stats.healthBarAdjustment;
+		combatant.combatSprite.transform.position = getPositionAt(newCoords.row, newCoords.col);
 		Helpers.updateGameObjectPosition(combatant.combatSprite);
-		Helpers.updateGameObjectPosition(combatant.healthBar);
 	}
 	
 	//careful when using, if there is already something in the given grid space

@@ -74,6 +74,8 @@ public static class NPCNameList
     public const string vaultableBarrels = "Vaultable Barrels";
     public const string rubble = "Rubble";
     public const string chest = "Chest";
+    public const string crate = "Crate";
+    public const string barricade = "Barricade";
 
     #endregion
 

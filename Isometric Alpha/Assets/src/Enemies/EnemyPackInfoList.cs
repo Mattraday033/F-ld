@@ -4,6 +4,10 @@ using UnityEngine;
 
 public static class EnemyPackInfoList
 {
+    private const int quantityOfTwo = 2;
+    private const int quantityOfThree = 3;
+    private const int quantityOfFour = 4;
+
     public const string kendeTheCook = "KendeTheCook";
     public const string kendeTheCookWithoutSummon = "KendeTheCookWithoutSummon";
     public const string slaveWarrior = "Slave Warrior";
@@ -13,8 +17,17 @@ public static class EnemyPackInfoList
 
     public readonly static string[] flagsToCheckForSlaveAllies = new string[] { "convincedSlavesToHelpYou", "kastorStartedRevolt" };
 
-    public readonly static EnemyPackInfo guardVazulFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.guardVazul }, DropTableList.slaveMineDT1Name);
-                              
+    public readonly static EnemyPackInfo guardVazulFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.guardVazul }, DropTableList.slaveMineDT1Name,
+                                                                                    new ItemListID[]  {new ItemListID(ItemList.usableItemListIndex, ItemList.chewIndex, quantityOfThree),
+                                                                                                        new ItemListID(ItemList.weaponsListIndex, ItemList.bronzeDirkIndex)});
+
+    public readonly static EnemyPackInfo guardAndrasWithKeyFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.guardAndras }, DropTableList.slaveMineDT1Name,
+                                                                                    new ItemListID[]  {new ItemListID(ItemList.armorListIndex, ItemList.andrasLuckyTalismanIndex),
+                                                                                                        new ItemListID(ItemList.keyItemListIndex, ItemList.mineArmoryKeyIndex)});
+    public readonly static EnemyPackInfo guardAndrasWithOutKeyFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.guardAndras }, DropTableList.slaveMineDT1Name,
+                                                                                        new ItemListID[] { new ItemListID(ItemList.armorListIndex, ItemList.andrasLuckyTalismanIndex) });
+    public readonly static EnemyPackInfo imreFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.imre }, DropTableList.slaveMineDT1Name);
+
 
     // //used in the dialogue started upon entering the Manse kitchens
     // public readonly static EnemyPackInfo halfSlavesNoGuardFight = new EnemyPackInfo(new int[] { 1, 6 }, new int[] { 1, 6 }, new EnemyStats[]{loadEnemyStatsFromResources(kendeTheCookWithoutSummon),
@@ -54,7 +67,7 @@ public static class EnemyPackInfoList
 
 
     private static Dictionary<string, List<EnemyPackInfo>> enemyPackInfoDict;
-    private static List<EnemyPackInfo> list;
+
     private readonly static EnemyPackInfo twoGiantBatsTwoBatSwarms = new EnemyPackInfo(new EnemyAmount[] {  EnemyAmountList.twoBatSwarms,
                                                                                                             EnemyAmountList.twoGiantBats},
                                                                                                           DropTableList.slaveMineDT1Name);
@@ -62,14 +75,15 @@ public static class EnemyPackInfoList
                                                                                                                             EnemyAmountList.twoGiantBats,
                                                                                                                         EnemyAmountList.oneScreecherBat},
                                                                                                                     DropTableList.slaveMineDT1Name);
-    
+
     public static EnemyPackInfo getEnemyPackInfo(string areaName, int index)
     {
         return enemyPackInfoDict[areaName][index];
     }
-    
+
     static EnemyPackInfoList()
     {
+        List<EnemyPackInfo> list;
         enemyPackInfoDict = new Dictionary<string, List<EnemyPackInfo>>();
 
 
@@ -81,7 +95,7 @@ public static class EnemyPackInfoList
 
         enemyPackInfoDict.Add(AreaNameList.slaveShackSix, list);
         #endregion
-    
+
         #region MineLvl_1-1b
         list = new List<EnemyPackInfo>();
 

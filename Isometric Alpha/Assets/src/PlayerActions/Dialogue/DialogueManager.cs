@@ -53,8 +53,8 @@ public class DialogueManager : MonoBehaviour
 	private const float defaultYDamping = .5f;
 	private const float dialogueXDamping = 1f;
 	private const float dialogueYDamping = 1f;
-	private const float fadeXDamping = 0f;
-	private const float fadeYDamping = 0f;
+	public const float fadeXDamping = 0f;
+	public const float fadeYDamping = 0f;
 	private int frames = 60;
 	private int framesToWait = 60;
 
@@ -79,7 +79,9 @@ public class DialogueManager : MonoBehaviour
 			npcParent = AreaManager.getNPCParent();
 			dialogueTrackerButton = new DialogueTrackerButton(true);
 
-			startDialogue(DialogueList.getDialogue(State.dialogueUponSceneLoadKey));
+            // Debug.LogError("State.dialogueUponSceneLoadKey = " + State.dialogueUponSceneLoadKey);
+
+            startDialogue(DialogueList.getDialogue(State.dialogueUponSceneLoadKey));
 			State.dialogueUponSceneLoadKey = null;
 			return;
 		}
@@ -367,22 +369,22 @@ public class DialogueManager : MonoBehaviour
 			dialogueCanvas.gameObject.SetActive(true);
 		}
 	*/
-	private void setCameraToDefaultSpeed()
+	public static void setCameraToDefaultSpeed()
 	{
-		framingTransposer.m_XDamping = defaultXDamping;
-		framingTransposer.m_YDamping = defaultYDamping;
+		instance.framingTransposer.m_XDamping = defaultXDamping;
+		instance.framingTransposer.m_YDamping = defaultYDamping;
 	}
 
-	private void setCameraToDialogueSpeed()
+	public static void setCameraToDialogueSpeed()
 	{
-		framingTransposer.m_XDamping = dialogueXDamping;
-		framingTransposer.m_YDamping = dialogueYDamping;
+		instance.framingTransposer.m_XDamping = dialogueXDamping;
+		instance.framingTransposer.m_YDamping = dialogueYDamping;
 	}
 
-	private void setCameraToFadeSpeed()
+	public static void setCameraToFadeSpeed()
 	{
-		framingTransposer.m_XDamping = fadeXDamping;
-		framingTransposer.m_YDamping = fadeYDamping;
+		instance.framingTransposer.m_XDamping = fadeXDamping;
+		instance.framingTransposer.m_YDamping = fadeYDamping;
 	}
 
 	public void spawnDialogueTrackerWindowWithoutChoices()
@@ -396,9 +398,6 @@ public class DialogueManager : MonoBehaviour
     {
         DialogueTrigger npcDialogueTrigger;
         Dialogue npcDialogue;
-
-        Helpers.debugNullCheck("currentDialogue", currentDialogue);
-        Helpers.debugNullCheck("PartyManager.getPlayerStats()", PartyManager.getPlayerStats());
 
         currentDialogue.names[0] = PartyManager.getPlayerStats().getName();
         currentDialogue.cameraFoci[0] = PlayerMovement.getInstance().gameObject;

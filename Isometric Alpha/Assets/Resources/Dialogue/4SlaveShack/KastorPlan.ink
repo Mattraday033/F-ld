@@ -1264,7 +1264,7 @@ addXP(250)
 
 === 3i ===
 
-That is certainly bad news, but if I'm being honest I expected that we would have to kill a guard eventually. Were you able to remain discreet?
+That is certainly bad news, but I expected that we would have to kill a guard eventually. Were you able to remain discreet?
 
 {
 -killedChiefIren and gotArmoryKeyFromGuardHouse:

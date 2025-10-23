@@ -13,8 +13,10 @@ public class VaultableObject : MonoBehaviour, IStoryVariableSource
     public const bool isPlural = true;
     public const string barrelName = "barrels";
     public const int oneTile = 1;
+    public const int twoTiles = 2;
 
-    public static VaultableObject vaultableBarrels = new VaultableObject(VaultableObject.oneTile, VaultableObject.isPlural, VaultableObject.barrelName);
+    public readonly static VaultableObject vaultableBarrelsOneTile = new VaultableObject(VaultableObject.oneTile, VaultableObject.isPlural, VaultableObject.barrelName);
+    public readonly static VaultableObject vaultableBarrelsTwoTiles = new VaultableObject(VaultableObject.twoTiles, VaultableObject.isPlural, VaultableObject.barrelName);
 
     public int size;
 

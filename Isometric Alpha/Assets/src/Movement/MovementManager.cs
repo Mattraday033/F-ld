@@ -580,10 +580,10 @@ public class MovementManager : MonoBehaviour
     {
         PositionWrapper[] positions = new PositionWrapper[startingPositions.Length - 1];
         
-        if(positions.Length <= 0)
-        {
-            Debug.LogError("positions.Length = " + positions.Length);
-        }
+        // if(positions.Length <= 0)
+        // {
+        //     Debug.LogError("positions.Length = " + positions.Length);
+        // }
 
         for(int positionIndex = 0; positionIndex < positions.Length; positionIndex++)
         {

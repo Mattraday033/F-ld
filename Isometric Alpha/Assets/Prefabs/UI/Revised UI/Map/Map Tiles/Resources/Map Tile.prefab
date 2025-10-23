@@ -354,10 +354,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6397870399606844475}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 60.84, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 60.84, y: -14}
+  m_SizeDelta: {x: 105.68, y: 18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3246261102757104784
 CanvasRenderer:
@@ -2452,10 +2452,10 @@ RectTransform:
   - {fileID: 2949480133558712555}
   m_Father: {fileID: 2198356461415394267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 60.84, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 60.84, y: -14}
+  m_SizeDelta: {x: 121.68, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8898881044191731594
 CanvasRenderer:
@@ -3746,6 +3746,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2198356461415394267}
     m_Modifications:
+    - target: {fileID: 2117378501433223186, guid: 18eb8e657bf536841bcd78a4b9da15c5,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d823facce54f4e34faf41ea2dede2703,
+        type: 3}
     - target: {fileID: 2295644504403190058, guid: 18eb8e657bf536841bcd78a4b9da15c5,
         type: 3}
       propertyPath: m_Name

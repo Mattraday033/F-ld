@@ -237,7 +237,6 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 		foreach(Stats combatant in combatants)
 		{
 			combatant.combatSprite.SetActive(activateSprites);
-			combatant.healthBar.SetActive(activateSprites);
 		}
 	}
 	

@@ -285,9 +285,11 @@ public class SelectorManager : MonoBehaviour
 			return;
 		}
 
-		Stats currentCombatant = CombatGrid.getCombatantAtCoords(currentSelector.getCoords());
+        Debug.LogError("currentSelector.getCoords() = " + currentSelector.getCoords().ToString());
 
-		if (currentCombatant != null) //
+        Stats currentCombatant = CombatGrid.getCombatantAtCoords(currentSelector.getCoords());
+
+		if (currentCombatant != null)
 		{
 			if (instance.previousHoverTarget == currentCombatant)
 			{
@@ -321,7 +323,10 @@ public class SelectorManager : MonoBehaviour
 		{
 			instance.previousHoverTarget = stats;
 			instance.hoverPanelPopUpButton.spawnPopUp(stats);
-		}
+		} else if(stats == null && instance != null)
+        {
+            displayHoverUIForCurrentSelectorTarget();
+        }
 	}
 
 	public static void createPressEPrompt()
@@ -1074,12 +1079,12 @@ public class SelectorManager : MonoBehaviour
 			return true;
 		}
 
-		if (currentSelector.lowerBounds < (CombatGrid.fullCombatGrid.Length - 1) && currentSelector.onAllySide())
+		if (currentSelector.lowerBounds < CombatGrid.rowLowerBounds && currentSelector.onAllySide())
 		{
 			return true;
 		}
 
-		if (currentSelector.lowerBounds < (CombatGrid.fullCombatGrid.Length - 1) && currentSelector.onEnemySide() &&
+		if (currentSelector.lowerBounds < CombatGrid.rowLowerBounds && currentSelector.onEnemySide() &&
 			CombatStateManager.currentActivity == CurrentActivity.ChoosingActor)
 		{
 			return true;
@@ -1097,7 +1102,7 @@ public class SelectorManager : MonoBehaviour
 
 	private bool canMoveRight()
 	{
-		return currentSelector.rightBounds < (CombatGrid.fullCombatGrid[0].Length - 1);
+		return currentSelector.rightBounds < CombatGrid.colRightBounds;
 	}
 
 	public bool moveWouldLeaveMandatoryTarget()
@@ -1162,7 +1167,7 @@ public class SelectorManager : MonoBehaviour
 
 	public void updateCurrentSelectorPosition()
 	{
-		currentSelector.getSelectorObject().transform.position = CombatGrid.fullCombatGrid[currentSelector.currentRow][currentSelector.currentCol];
+		currentSelector.getSelectorObject().transform.position = CombatGrid.getPositionAt(currentSelector.currentRow, currentSelector.currentCol);
 		Helpers.updateGameObjectPosition(currentSelector.getSelectorObject());
 	}
 

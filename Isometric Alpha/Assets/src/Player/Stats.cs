@@ -22,12 +22,10 @@ public class Stats : ScriptableObject, ICloneable, IDescribable, IDescribableInB
 
 	public static UnityEvent PredationProc = new UnityEvent();
 
-	public GameObject combatSprite;
-	public string combatSpriteName;
-	public Vector3 adjustment;
+    public GameObject combatSprite;
 
-	public static Vector3 healthBarAdjustment = new Vector3(0, CombatGrid.gridSpaceIncrementY * 3.5f, 0);
-	public GameObject healthBar;
+	public string combatSpriteName;
+
 	public HealthBarManager healthBarManager;
 
 	public GridCoords position;
@@ -129,12 +127,20 @@ public class Stats : ScriptableObject, ICloneable, IDescribable, IDescribableInB
     {
         return combatSpriteName;
     }
-    
+
     public virtual GameObject instantiateCombatSprite()
     {
-        combatSprite = Instantiate(Resources.Load<GameObject>(getCombatSpriteName()));
+        combatSprite = Instantiate(Resources.Load<GameObject>(getCombatSpriteName()), CombatStateManager.getCreatureParent());
+
+        setUpComponents(combatSprite.GetComponent<ComponentList>());
 
         return combatSprite;
+    }
+    
+    public virtual void setUpComponents(ComponentList list)
+    {
+        healthBarManager = list.healthBarManager;
+        updateHealthBar();
     }
 
 	public int modifyIncomingDamage(int baseDamage)
@@ -452,14 +458,6 @@ public class Stats : ScriptableObject, ICloneable, IDescribable, IDescribableInB
 		traits = newTraits.Where(t => t != null).ToArray();
 	}
 
-	public void setUpHealthBar(GameObject healthBar)
-	{
-		this.healthBar = healthBar;
-		this.healthBarManager = healthBar.GetComponent<HealthBarManager>();
-
-		updateHealthBar();
-	}
-
 	public void updateHealthBar(int missingHealth)
 	{
 		updateHealthBar(missingHealth, 0);
@@ -467,8 +465,7 @@ public class Stats : ScriptableObject, ICloneable, IDescribable, IDescribableInB
 
 	public void updateHealthBar(int missingHealth, int incomingDamage)
 	{
-		if (healthBar == null || healthBar is null ||
-		   healthBarManager == null || healthBarManager is null)
+		if (healthBarManager == null || healthBarManager is null)
 		{
 			return;
 		}
@@ -480,8 +477,7 @@ public class Stats : ScriptableObject, ICloneable, IDescribable, IDescribableInB
 
 	public void updateHealthBar()
 	{
-		if (healthBar == null || healthBar is null ||
-		   healthBarManager == null || healthBarManager is null)
+		if (healthBarManager == null || healthBarManager is null)
 		{
 			return;
 		}
@@ -799,7 +795,6 @@ public class Stats : ScriptableObject, ICloneable, IDescribable, IDescribableInB
 		setPreviousColor(combatSprite.GetComponent<SpriteRenderer>().color);
 		combatSprite.GetComponent<SpriteRenderer>().color = Color.black;
 
-		healthBar.SetActive(false);
 		isDead = true;
 	}
 
@@ -807,7 +802,6 @@ public class Stats : ScriptableObject, ICloneable, IDescribable, IDescribableInB
 	{
 		combatSprite.GetComponent<SpriteRenderer>().color = Helpers.cloneColor(previousColor);
 
-		healthBar.SetActive(true);
 		isDead = false;
 	}
 

@@ -48,7 +48,7 @@ public class Selector : ScriptableObject, ICloneable
 	{
 		if(selectorObject == null)
 		{
-			selectorObject = Instantiate(Resources.Load<GameObject>(name), CombatGrid.fullCombatGrid[startRow][startCol], Quaternion.identity);
+			selectorObject = Instantiate(Resources.Load<GameObject>(name), CombatGrid.getPositionAt(startRow, startCol), Quaternion.identity);
 		}
 		
 		return selectorObject;
@@ -175,7 +175,7 @@ public class Selector : ScriptableObject, ICloneable
 	{
 		if(selectorObject == null)
 		{ //Instantiate(CombatGrid.getCombatantAtCoords(x,y).combatSprite, CombatGrid.fullCombatGrid[x][y] + CombatGrid.getCombatantAtCoords(x,y).adjustment, Quaternion.identity);
-			selectorObject = Instantiate(Resources.Load<GameObject>(name), CombatGrid.fullCombatGrid[startRow][startCol],Quaternion.identity);
+			selectorObject = Instantiate(Resources.Load<GameObject>(name), CombatGrid.getPositionAt(startRow, startCol),Quaternion.identity);
 			collider = selectorObject.GetComponent<CapsuleCollider2D>();
 		} else if(collider == null)
 		{
@@ -231,7 +231,7 @@ public class Selector : ScriptableObject, ICloneable
 			lowerBounds = startRow;
 		}
 
-		getSelectorObject().transform.position = CombatGrid.fullCombatGrid[currentRow][currentCol];
+		getSelectorObject().transform.position = CombatGrid.getPositionAt(currentRow, currentCol);
 	}
 
 	public void setToClosestLegalLocation(GridCoords coords)
@@ -270,7 +270,7 @@ public class Selector : ScriptableObject, ICloneable
 
 		if (moveGameObject)
 		{
-			getSelectorObject().transform.position = CombatGrid.fullCombatGrid[currentRow][currentCol];
+			getSelectorObject().transform.position = CombatGrid.getPositionAt(currentRow, currentCol);
 
 			if (this == SelectorManager.getCurrentSelector())
 			{
@@ -299,7 +299,7 @@ public class Selector : ScriptableObject, ICloneable
 	{
 		if(selectorObject == null)
 		{
-			selectorObject = Instantiate(Resources.Load<GameObject>(name), CombatGrid.fullCombatGrid[startRow][startCol],Quaternion.identity);
+			selectorObject = Instantiate(Resources.Load<GameObject>(name), CombatGrid.getPositionAt(startRow, startCol),Quaternion.identity);
 			collider = selectorObject.GetComponent<CapsuleCollider2D>();
 		} 
 		

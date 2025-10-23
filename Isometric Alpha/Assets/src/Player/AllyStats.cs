@@ -15,8 +15,6 @@ public class AllyStats : Stats
 
     public const int xpNeededToLevelUp = 1000;
 
-    public const string playerCombatSpriteName = "PlayerSprite";
-
     private const int baseNumberOfPartyMembers = 2;
     private const int maxNumberOfPartyMembers = 16;
     private const int baseNumberOfPartyCombatActionPoints = 5;
@@ -55,6 +53,8 @@ public class AllyStats : Stats
     public int xp;
 
     private int currentlyPlacedPartyMembers = -1;
+
+    public AbilityMenuManager lastCombatAbilityMenuManager;
 
     public CombatActionArray combatActionArray;
     public EquippedItems equippedItems;
@@ -144,7 +144,7 @@ public class AllyStats : Stats
 
     public override string getCombatSpriteName()
     {
-        return playerCombatSpriteName;
+        return PrefabNames.allyCombatSpriteName;
     }
 
     public override GameObject instantiateCombatSprite()
@@ -158,8 +158,16 @@ public class AllyStats : Stats
         combatSprite.GetComponent<AbilityMenuManager>().actionArraySource = this;
 
         Helpers.updateGameObjectPosition(combatSprite);
+        setUpComponents(combatSprite.GetComponent<ComponentList>());
 
         return combatSprite;
+    }
+    
+    public override void setUpComponents(ComponentList list)
+    {
+        base.setUpComponents(list);
+
+        lastCombatAbilityMenuManager = list.abilityMenuManager;
     }
 
     #endregion
@@ -641,7 +649,7 @@ public class AllyStats : Stats
 
     public override AbilityMenuManager getAbilityMenuManager()
     {
-        return combatSprite.GetComponent<AbilityMenuManager>();
+        return lastCombatAbilityMenuManager;
     }
 
     public override CombatActionArray getActionArray()

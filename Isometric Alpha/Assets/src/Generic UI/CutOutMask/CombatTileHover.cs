@@ -210,21 +210,7 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
                     break;
             }
 
-
-            // if (CombatStateManager.currentActivity == CurrentActivity.ChoosingActor || CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation)
-            // {
-            //     moveSelectorToTarget();
-            // }
-            // else if (CombatStateManager.currentActivity == CurrentActivity.ChoosingAbility && tileHasTarget() && !onEnemySide)
-            // {
-            //     SelectorManager.deselectCurrentAlly();
-            //     moveSelectorToTarget();
-
-            //     if (SelectorManager.currentSelector.getCoords().Equals(targetCoords))
-            //     {
-            //         SelectorManager.handleAllySelection();
-            //     }
-            // }
+            createHoverTag();
         }
     }
 

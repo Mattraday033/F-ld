@@ -30,7 +30,7 @@ public class MultiSelector : ScriptableObject
 	{
 		if(selector == null)
 		{
-			selector = Instantiate(Resources.Load<GameObject>(name), CombatGrid.fullCombatGrid[startRow][startCol],Quaternion.identity);
+			selector = Instantiate(Resources.Load<GameObject>(name), CombatGrid.getPositionAt(startRow, startCol),Quaternion.identity);
 		}
 		
 		return selector;
@@ -40,7 +40,7 @@ public class MultiSelector : ScriptableObject
 	{
 		if(selector == null)
 		{ //Instantiate(CombatGrid.getCombatantAtCoords(x,y).combatSprite, CombatGrid.fullCombatGrid[x][y] + CombatGrid.getCombatantAtCoords(x,y).adjustment, Quaternion.identity);
-			selector = Instantiate(Resources.Load<GameObject>(name), CombatGrid.fullCombatGrid[startRow][startCol],Quaternion.identity);
+			selector = Instantiate(Resources.Load<GameObject>(name), CombatGrid.getPositionAt(startRow, startCol),Quaternion.identity);
 			collider = selector.GetComponent<CapsuleCollider2D>();
 		} else if(collider == null)
 		{
@@ -56,7 +56,7 @@ public class MultiSelector : ScriptableObject
 		currentRow = startRow;
 		currentCol = startCol;
 		
-		selector.transform.position = CombatGrid.fullCombatGrid[currentRow][currentCol];
+		selector.transform.position = CombatGrid.getPositionAt(currentRow, currentCol);
 	}
 	
 	//always returns lowercase for easier comparisons
@@ -69,7 +69,7 @@ public class MultiSelector : ScriptableObject
 	{
 		if(selector == null)
 		{
-			selector = Instantiate(Resources.Load<GameObject>(name), CombatGrid.fullCombatGrid[startRow][startCol],Quaternion.identity);
+			selector = Instantiate(Resources.Load<GameObject>(name), CombatGrid.getPositionAt(startRow, startCol),Quaternion.identity);
 			collider = selector.GetComponent<CapsuleCollider2D>();
 		} 
 		

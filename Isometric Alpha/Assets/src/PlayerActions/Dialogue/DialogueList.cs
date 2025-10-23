@@ -44,7 +44,7 @@ public static class DialogueList
 
         // addDialogueToList(DialogueNameList.afterKillingAndrasConvoKey, new Dialogue(new string[] { "", "Janos" }, new GameObject[2], Resources.Load<TextAsset>(DialogueNameList.afterKillingAndrasConvoKey)));
 
-        addDialogueToList(DialogueNameList.vazulKey, new Dialogue(new string[] { "", "Thatch1", "Slate", "Thatch1" }, Resources.Load<TextAsset>(DialogueNameList.vazulKey)));
+        addDialogueToList(DialogueNameList.vazulPath, new Dialogue(new string[] { "", NPCNameList.thatch + 1, NPCNameList.slate, NPCNameList.thatch + 1 }, Resources.Load<TextAsset>(DialogueNameList.vazulPath)));
 
         // addDialogueToList(DialogueNameList.taborAfterClayFightKey, new Dialogue(new string[] { "", "Chief Tabor" }, new GameObject[2], Resources.Load<TextAsset>(DialogueNameList.taborAfterClayFightKey), new TextAsset[] { Resources.Load<TextAsset>(DialogueNameList.chiefTaborPunishmentDialogueKey) }));
 
@@ -58,58 +58,115 @@ public static class DialogueList
 
         #endregion
 
-        #region Slave Shack 2
+        #region Slave Shack 1
 
-        Debug.LogError("Adding broglin dialogue");
+        addDialogueToList(AreaNameList.slaveShackOne, NPCNameList.seb,
+                            new Dialogue(new string[] { NPCNameList.seb },
+                            Resources.Load<TextAsset>(DialogueNameList.sebPath)));
+
+        addDialogueToList(AreaNameList.slaveShackOne, NPCNameList.balint,
+                            new Dialogue(new string[] { NPCNameList.balint },
+                            Resources.Load<TextAsset>(DialogueNameList.balintPath)));
+
+        #endregion
+        #region Slave Shack 2
 
         addDialogueToList(AreaNameList.slaveShackTwo, NPCNameList.broglin,
                             new Dialogue(new string[] { NPCNameList.broglin, NPCNameList.garcha, NPCNameList.guardLaszlo, NPCNameList.guardLaszlo + 1, NPCNameList.garcha + 1 },
-                            Resources.Load<TextAsset>(DialogueNameList.introDialogueKey)));
+                            Resources.Load<TextAsset>(DialogueNameList.introDialoguePath)));
 
         addDialogueToList(AreaNameList.slaveShackTwo, NPCNameList.garcha,
                             new Dialogue(new string[] { NPCNameList.garcha },
-                            Resources.Load<TextAsset>(DialogueNameList.garchaKey)));
+                            Resources.Load<TextAsset>(DialogueNameList.garchaPath)));
+
+        #endregion
+        #region Slave Shack 3
+
+        addDialogueToList(AreaNameList.slaveShackThree, NPCNameList.janos,
+                            new Dialogue(new string[] { NPCNameList.janos, NPCNameList.guardAndras, NPCNameList.guardAndras + 1 },
+                            Resources.Load<TextAsset>(DialogueNameList.janosPath),
+                            DialogueCombatInfoList.andrasCombatInfo));
+
+        addDialogueToList(AreaNameList.slaveShackThree, NPCNameList.guardAndras + 1,
+                            new Dialogue(new string[] { NPCNameList.guardAndras + 1 },
+                            Resources.Load<TextAsset>(DialogueNameList.andrasPath)));
+
+        addDialogueToList(AreaNameList.slaveShackThree, NPCNameList.guardAndras + 2,
+                            new Dialogue(new string[] { NPCNameList.guardAndras + 2 },
+                            Resources.Load<TextAsset>(DialogueNameList.andrasPath)));
+
+        addDialogueToList(DialogueNameList.janosAfterKillingAndrasKey,
+                            new Dialogue(new string[] { NPCNameList.janos },
+                            Resources.Load<TextAsset>(DialogueNameList.janosAfterKillingAndrasPath)));
 
         #endregion
         #region Slave Shack 4
 
         addDialogueToList(AreaNameList.slaveShackFour, NPCNameList.kastor,
-                            new Dialogue(new string[] { NPCNameList.kastor, NPCNameList.nandor, NPCNameList.carter, NPCNameList.guardMarcos},
-                            Resources.Load<TextAsset>(DialogueNameList.kastorPlanKey)));
+                            new Dialogue(new string[] { NPCNameList.kastor, NPCNameList.nandor, NPCNameList.carter, NPCNameList.guardMarcos },
+                            Resources.Load<TextAsset>(DialogueNameList.kastorPlanPath)));
 
         addDialogueToList(AreaNameList.slaveShackFour, NPCNameList.guardMarcos,
-                            new Dialogue(new string[] { NPCNameList.guardMarcos},
-                            Resources.Load<TextAsset>(DialogueNameList.guardMarcosSS4Key)));
+                            new Dialogue(new string[] { NPCNameList.guardMarcos },
+                            Resources.Load<TextAsset>(DialogueNameList.guardMarcosSS4Path)));
 
         addPartyMemberDialogue(AreaNameList.slaveShackFour, NPCNameList.nandor);
         addPartyMemberDialogue(AreaNameList.slaveShackFour, NPCNameList.carter);
 
         #endregion
+        #region Slave Shack 5
+
+        addDialogueToList(AreaNameList.slaveShackFive, NPCNameList.ervin,
+                            new Dialogue(new string[] { NPCNameList.ervin },
+                            Resources.Load<TextAsset>(DialogueNameList.ervinPath)));
+
+        #endregion
         #region Slave Shack 6
 
         addDialogueToList(AreaNameList.slaveShackSix, NPCNameList.thatch,
-                            new Dialogue(new string[] { NPCNameList.thatch, NPCNameList.rubble},
-                            Resources.Load<TextAsset>(DialogueNameList.thatchKey)));
+                            new Dialogue(new string[] { NPCNameList.thatch, NPCNameList.rubble },
+                            Resources.Load<TextAsset>(DialogueNameList.thatchPath)));
 
         addDialogueToList(AreaNameList.slaveShackSix, NPCNameList.slate,
                             new Dialogue(new string[] { NPCNameList.slate },
-                            Resources.Load<TextAsset>(DialogueNameList.slateKey)));
+                            Resources.Load<TextAsset>(DialogueNameList.slatePath)));
 
         addDialogueToList(AreaNameList.slaveShackSix, NPCNameList.guardVazul,
                             new Dialogue(new string[] { "", NPCNameList.guardVazul, NPCNameList.slate, NPCNameList.thatch + 1 },
-                            Resources.Load<TextAsset>(DialogueNameList.vazulKey),
+                            Resources.Load<TextAsset>(DialogueNameList.vazulPath),
                             DialogueCombatInfoList.vazulCombatInfo));
 
         addDialogueToList(AreaNameList.slaveShackSix, NPCNameList.rubble,
-                            new Dialogue(new string[] { NPCNameList.rubble},
-                            Resources.Load<TextAsset>(DialogueNameList.immovableRubbleKey)));
+                            new Dialogue(new string[] { NPCNameList.rubble },
+                            Resources.Load<TextAsset>(DialogueNameList.immovableRubblePath)));
 
         #endregion
         #region NECamp
 
         addDialogueToList(AreaNameList.campNorthEast, NPCNameList.leafPile,
-                            new Dialogue(new string[] { NPCNameList.leafPile},
-                            Resources.Load<TextAsset>(DialogueNameList.dialogueResourcesPathName + AreaNameList.campNorthEast + Path.DirectorySeparatorChar + NPCNameList.leafPile.Replace(" ", ""))));
+                            new Dialogue(new string[] { NPCNameList.leafPile },
+                            Resources.Load<TextAsset>(DialogueNameList.leafPilePath)));
+
+        #endregion
+        #region MineEntranceCamp
+
+        addDialogueToList(AreaNameList.campMineEntrance, NPCNameList.guardMuzsa,
+                            new Dialogue(new string[] { NPCNameList.guardMuzsa, NPCNameList.barricade, NPCNameList.guardMuzsa + 1 },
+                            Resources.Load<TextAsset>(DialogueNameList.muszaPath)));
+        addDialogueToList(AreaNameList.campMineEntrance, NPCNameList.guardMuzsa+1,
+                            new Dialogue(new string[] { NPCNameList.guardMuzsa, NPCNameList.barricade, NPCNameList.guardMuzsa + 1 },
+                            Resources.Load<TextAsset>(DialogueNameList.muszaPath)));
+        addDialogueToList(AreaNameList.campMineEntrance, NPCNameList.guardMuzsa+2,
+                            new Dialogue(new string[] { NPCNameList.guardMuzsa+2},
+                            Resources.Load<TextAsset>(DialogueNameList.muszaPath)));
+
+        #endregion
+        #region ManseCamp
+
+        addDialogueToList(AreaNameList.campManse, NPCNameList.imre,
+                            new Dialogue(new string[] { NPCNameList.imre },
+                            Resources.Load<TextAsset>(DialogueNameList.imrePath),
+                            DialogueCombatInfoList.imreCombatInfo));
 
         #endregion
     }
@@ -161,7 +218,6 @@ public static class DialogueList
 
     public static Dialogue getDialogue(string key)
     {
-        Debug.LogError("key = " + key);
         key = key.Replace(" ", "");
         if(!dialogueList.ContainsKey(key))
         {

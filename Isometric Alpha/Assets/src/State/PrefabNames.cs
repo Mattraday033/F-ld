@@ -187,6 +187,7 @@ public static class PrefabNames
     public const string vaultableObject = interactablesFolder + "VaultableObject";
     public const string chest = interactablesFolder + "Chest";
     public const string oocMonster = interactablesFolder + "OOC Monster";
+    public const string oocObstacle = interactablesFolder + "OOC Obstacle";
     public const string movableObject = interactablesFolder + "Movable Object";
 
     #endregion
@@ -198,6 +199,10 @@ public static class PrefabNames
     public const string enemySprite = combatFolder + "Enemy Sprite";
     public const string healthBar = combatFolder + "Health Bar";
 
+    public const string allyCombatSpriteName = combatFolder + "AllySprite";
+
+    public const string projectile = combatFolder + "Projectile";
+
     #endregion
 
     #region Sprites
@@ -206,6 +211,9 @@ public static class PrefabNames
     public const string charactersFolder = "Characters/";
     public const string humansFolder = "Humans/";
     public const string defaultNPCSprite = spriteFolder + charactersFolder + humansFolder + "NPC Sprite";
+
+    public const string cratesFolder = "Crates/";
+    public const string squareCratesSmall = spriteFolder + cratesFolder + "Square Crates Small";
 
     public const string barrelsFolder = "Barrels/";
     public const string vaultableBarrels = spriteFolder + barrelsFolder + "VaultableBarrels";

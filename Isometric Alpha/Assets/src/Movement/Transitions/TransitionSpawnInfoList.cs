@@ -204,7 +204,7 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, AreaNameList.guardHouseSouthWest, AreaNameList.guardHouseTopFloor, new Vector3Int(-10, 0), Facing.SouthEast, sizeTwo, Axis.DescendingX));
 
-        list.Add(new TransitionSpawnInfoWithCorner(startingIndexFour, AreaNameList.guardHouseSouthWest, AreaNameList.guardHouseNorthEast, new Vector3Int(-5, -1), Facing.SouthWest, sizeTwo, Axis.DescendingX));
+        list.Add(new TransitionSpawnInfoWithCorner(startingIndexFour, AreaNameList.guardHouseSouthWest, AreaNameList.guardHouseNorthEast, new Vector3Int(-5, -1), Facing.SouthWest, sizeTwo, Axis.DescendingY));
 
         transitionSpawnInfoDict.Add(AreaNameList.guardHouseSouthWest, list);
 

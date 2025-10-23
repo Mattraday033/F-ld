@@ -37,7 +37,7 @@ public struct GridCoords
 
 	public Vector3 toVector3()
 	{
-		return CombatGrid.fullCombatGrid[row][col];
+        return CombatGrid.getPositionAt(row, col);
 	}
 
 	public Vector3Int toVector3Int()
@@ -1034,7 +1034,7 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
             throw new IOException("Actor Coords never set. Are you sure that this action has an actor yet?");
         }
 
-        return CombatGrid.fullCombatGrid[getActorCoords().row][getActorCoords().col];
+        return CombatGrid.getPositionAt(getActorCoords());
     }
 
     public Vector3 getTargetPosition()
@@ -1044,7 +1044,7 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
             throw new IOException("Target Coords never set. Are you sure that this action has a target yet?");
         }
 
-        return CombatGrid.fullCombatGrid[getTargetCoords().row][getTargetCoords().col];
+        return CombatGrid.getPositionAt(getTargetCoords());
     }
 
     public virtual Vector3 getTertiaryPosition()
@@ -1061,7 +1061,8 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
 
         if (combatSprite != null && !(combatSprite is null))
         {
-            combatSprite.GetComponent<SpriteOutline>().color = actorStats.getOutlineColor();
+            Debug.LogError("Outlines not implemented");
+            // combatSprite.GetComponent<SpriteOutline>().color = actorStats.getOutlineColor();
             Helpers.updateColliderPosition(combatSprite);
         }
     }

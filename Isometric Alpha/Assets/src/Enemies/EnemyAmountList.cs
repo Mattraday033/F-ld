@@ -10,6 +10,8 @@ public static class EnemyAmountList
 
     #region NPCs
     public readonly static EnemyAmount guardVazul = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.guardVazul));
+    public readonly static EnemyAmount guardAndras = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.guardAndras));
+    public readonly static EnemyAmount imre = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.imre));
 
     #endregion
 

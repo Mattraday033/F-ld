@@ -54,6 +54,15 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
         this.dropTableName = dropTableName;
     }
 
+    public EnemyPackInfo(EnemyAmount[] enemyTypes, string dropTableName, ItemListID[] guaranteedDrops)
+    {
+        this.enemyTypes = enemyTypes;
+
+        this.dropTableName = dropTableName;
+
+        this.guaranteedDrops = guaranteedDrops;
+    }
+
     public EnemyPackInfo(EnemyAmount[] enemyTypes, string[] flagsToCheckForAllies, string dropTableName)
     {
         this.enemyTypes = enemyTypes;

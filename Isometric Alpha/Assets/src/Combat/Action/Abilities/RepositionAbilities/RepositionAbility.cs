@@ -112,7 +112,7 @@ public class RepositionAbility : Ability, IJSONConvertable
 
     public override Vector3 getTertiaryPosition()
 	{
-		return CombatGrid.fullCombatGrid[tertiaryCoords.row][tertiaryCoords.col]; 
+		return CombatGrid.getPositionAt(tertiaryCoords); 
 	}
 
 	public override void setSecondaryCoords(GridCoords coords)

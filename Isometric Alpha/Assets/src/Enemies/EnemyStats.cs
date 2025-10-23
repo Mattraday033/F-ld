@@ -73,7 +73,8 @@ public class EnemyStats : Stats
 
     public override GameObject instantiateCombatSprite()
     {
-        combatSprite = Instantiate(Resources.Load<GameObject>(PrefabNames.enemySprite));
+        combatSprite = Instantiate(Resources.Load<GameObject>(PrefabNames.enemySprite), CombatStateManager.getCreatureParent());
+        setUpComponents(combatSprite.GetComponent<ComponentList>());
 
         combatSprite.transform.localScale = new Vector3(1f, 1f, 1f);
 
@@ -86,10 +87,15 @@ public class EnemyStats : Stats
         return combatSprite;
     }
 
-	public override int getTotalArmorRating()
-	{
-		return (int)((double)armor * getCurrentTotalArmorPercentage());
-	}
+    public override void setUpComponents(ComponentList list)
+    {
+        base.setUpComponents(list);
+    }
+
+    public override int getTotalArmorRating()
+    {
+        return (int)((double)armor * getCurrentTotalArmorPercentage());
+    }
 
 	public override int getTotalHealth()
 	{
@@ -197,7 +203,6 @@ public class EnemyStats : Stats
 		if (isMinion() || wasSummoned())
 		{
 			Destroy(combatSprite);
-			Destroy(healthBar);
 
 			if (isLarge())
 			{
@@ -215,7 +220,6 @@ public class EnemyStats : Stats
 		else if (cantBeResurrected())
 		{
 			Destroy(combatSprite);
-			Destroy(healthBar);
 			isDead = true;
 		}
 		else

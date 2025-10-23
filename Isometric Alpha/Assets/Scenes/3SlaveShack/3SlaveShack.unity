@@ -669,7 +669,7 @@ PrefabInstance:
         type: 3}
       propertyPath: dialogue.inkJSON
       value: 
-      objectReference: {fileID: 4900000, guid: 03e94c823223cbf4aa604d506d194733, type: 3}
+      objectReference: {fileID: 4900000, guid: 9e0f764c12b5ace4bbf2b87cdf92b73b, type: 3}
     - target: {fileID: 517585897779863325, guid: 043c4c1bc369a1c4ab9e55576a2e078b,
         type: 3}
       propertyPath: dialogue.names.Array.size

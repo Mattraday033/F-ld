@@ -57,6 +57,45 @@ public class OOCSpawnDetails
 
 }
 
+public class ObstacleSpawnDetails : OOCSpawnDetails
+{
+
+    private string spriteName;
+
+    public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName) :
+    base(npcName, cellCoords)
+    {
+        this.spriteName = spriteName;
+    }
+
+    public override string getSpriteName()
+    {
+        return spriteName;
+    }
+
+    public override string getPrefabName()
+    {
+        return PrefabNames.oocObstacle;
+    }
+
+    public override bool determineSpriteAtSpawn()
+    {
+        return true;
+    }
+
+    public override Transform getParent()
+    {
+        return AreaManager.getNPCParent();
+    }
+
+    public virtual void spawnActions(GameObject interactable)
+    {
+        SpriteRenderer spriteRenderer = interactable.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = Helpers.loadSpriteFromResources(getSpriteName());
+    }
+
+}
+
 public class NPCSpawnDetails : OOCSpawnDetails
 {
 
@@ -99,6 +138,13 @@ public class NPCSpawnDetails : OOCSpawnDetails
     {
         this.activated = activated;
         this.dialogue = dialogue;
+    }
+
+    public NPCSpawnDetails(string npcName, Vector3Int cellCoords, bool activated, string areaName) :
+    base(npcName, cellCoords)
+    {
+        this.activated = activated;
+        this.dialogue = DialogueList.getDialogue(npcName, areaName);
     }
 
     public bool interactable()

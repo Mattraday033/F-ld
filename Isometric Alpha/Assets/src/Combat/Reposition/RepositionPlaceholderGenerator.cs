@@ -21,7 +21,7 @@ public static class RepositionPlaceholderGenerator
 		placeHolderColor.a = placeHolderSpriteOpaqueness;
 		placeHolderSprite.color = placeHolderColor;
 		
-		placeHolderObject.transform.position = CombatGrid.fullCombatGrid[placeHolderPosition.row][placeHolderPosition.col] + combatantToBeMoved.adjustment;
+		placeHolderObject.transform.position = CombatGrid.getPositionAt(placeHolderPosition);
 		placeHolderObject.transform.localScale = combatantToBeMoved.combatSprite.transform.localScale;
 		Helpers.updateGameObjectPosition(placeHolderObject);
 		

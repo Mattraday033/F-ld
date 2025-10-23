@@ -81,7 +81,7 @@ public class CombatAnimationManager : MonoBehaviour
 	{
 		int key = getCurrentKey();
 
-		Projectile currentProjectile = Instantiate(Resources.Load<GameObject>("ProjectileTestPrefab")).GetComponent<Projectile>();
+		Projectile currentProjectile = Instantiate(Resources.Load<GameObject>(PrefabNames.projectile)).GetComponent<Projectile>();
 
 		currentProjectile.key = key;
 

@@ -98,6 +98,7 @@ public static class EnemyStatsList
         enemyStatsDict = new Dictionary<string, EnemyStats>();
 
         #region NPCs
+        #region Lovashi Guards
         enemyStatsDict.Add(NPCNameList.guardVazul, new EnemyStats(NPCNameList.guardVazul,
                                                                                     fiftyArmor,
                                                                                             50,
@@ -105,7 +106,28 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                 new Trait[] { TraitList.master,
                                                                           TraitList.territorial
                                                                             }));
+
+        enemyStatsDict.Add(NPCNameList.guardAndras, new EnemyStats(NPCNameList.guardAndras,
+                                                                                    thirtyArmor,
+                                                                                            40,
+                                    AbilityList.getAbility(null, AbilityList.slashKey) as Ability,
+                                                                new Trait[] { TraitList.master,
+                                                                          TraitList.chaotic
+                                                                            }));
+
         #endregion
+
+        #region Brandless Slaves
+        enemyStatsDict.Add(NPCNameList.imre, new EnemyStats(        NPCNameList.imre,
+                                                                            zeroArmor,
+                                                                                    50,
+                    AbilityList.getAbility(null, AbilityList.punchKey) as Ability,
+                                                        new Trait[] { TraitList.master,
+                                                                      TraitList.chaotic
+                                                                            }));
+        #endregion
+        #endregion
+
 
         #region Giant Bat
         enemyStatsDict.Add(MonsterNameList.giantBat, new EnemyStats(MonsterNameList.giantBat,

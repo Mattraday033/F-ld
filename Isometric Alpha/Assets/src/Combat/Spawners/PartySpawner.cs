@@ -55,18 +55,9 @@ public class PartySpawner : MonoBehaviour
 		
 		partyMember.instantiateCombatSprite();
 
-		partyMember.setUpHealthBar(Resources.Load<GameObject>("Health Bar"));
-		
-		partyMember.combatSprite.transform.position = CombatGrid.fullCombatGrid[row][col] + partyMember.adjustment;
+        Debug.Log("Placing " + partyMember.getName() + " at " + row + ", " + col);
 
-		CombatGrid.getCombatantAtCoords(row,col).setUpHealthBar
-		(
-			Instantiate(partyMember.healthBar,
-						CombatGrid.fullCombatGrid[row][col] + new Vector3(0,CombatGrid.gridSpaceIncrementY*3.5f,0),
-						Quaternion.identity, 
-						combatantInfoCanvas.gameObject.transform
-						)
-		);
+		partyMember.combatSprite.transform.position = CombatGrid.getPositionAt(row, col);
 		
 		if(partyMember.currentHealth <= 0)
 		{

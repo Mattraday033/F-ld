@@ -52,6 +52,9 @@ public class CombatStateManager : MonoBehaviour
 
     public static string currentDefeatKey = "";
 
+    public Transform creatureParent;
+    public Grid creatureGrid;
+
     public EnemySpawner enemySpawner;
 	public PartySpawner partySpawner;
 	public SummonSpawner summonSpawner;
@@ -559,9 +562,19 @@ public class CombatStateManager : MonoBehaviour
 
 		return null;
 	}
-	
-	public static bool stateAllowsDamagePreviews()
-	{
-		return currentActivity == CurrentActivity.ChoosingLocation || currentActivity == CurrentActivity.ChoosingTertiary;
-	}
+
+    public static bool stateAllowsDamagePreviews()
+    {
+        return currentActivity == CurrentActivity.ChoosingLocation || currentActivity == CurrentActivity.ChoosingTertiary;
+    }
+
+    public static Transform getCreatureParent()
+    {
+        return instance.creatureParent;
+    }
+    
+    public static Grid getCreatureGrid()
+    {
+        return instance.creatureGrid;
+    }
 }

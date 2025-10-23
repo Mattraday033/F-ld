@@ -345,7 +345,7 @@ public class EquippableItem : Item, IJSONConvertable, IStatBoostSource
 
     public Stats getStatSource()
     {
-        Helpers.debugNullCheck("equipTarget", equipTarget);
+        // Helpers.debugNullCheck("equipTarget", equipTarget);
 
         if (equipTarget == null && !CombatStateManager.inCombat && OverallUIManager.getCurrentPartyMember() != null)
         {
