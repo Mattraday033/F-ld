@@ -79,7 +79,7 @@ VAR nandorDialogueFileIndex = 1
     deactivate({pazmanIndex})
 }
 
-moveLocalPosition(-29.5,-21.35)
+movePosition(-29.5,-21.35)
 setfacing(NW)
 
 ->1a

@@ -8,7 +8,7 @@ public static class LayerAndTagManager
 	private static readonly int playerLayer = LayerMask.NameToLayer("Player");
 	private static readonly int colliderLayer = LayerMask.NameToLayer("Collider");
 	private static readonly int enemyBoundaryLayer = LayerMask.NameToLayer("EnemyBoundary");
-	private static readonly int npcLayer = LayerMask.NameToLayer("NPC");
+	public static readonly int npcLayer = LayerMask.NameToLayer("NPC");
 	private static readonly int objectLayer = LayerMask.NameToLayer("Object");
 	private static readonly int movableObjectLayer = LayerMask.NameToLayer("MovableObject");
 	private static readonly int enemyLayer = LayerMask.NameToLayer("Enemy");
@@ -20,7 +20,8 @@ public static class LayerAndTagManager
 	private static readonly int transitionLayer = LayerMask.NameToLayer("Transition");
 	private static readonly int tutorialLayer = LayerMask.NameToLayer("Tutorial");
 	private static readonly int movableObjectBlockerLayer = LayerMask.NameToLayer("MovableObjectBlocker");
-	private static readonly int UILayer = LayerMask.NameToLayer("UI");
+    private static readonly int UILayer = LayerMask.NameToLayer("UI");
+	private static readonly int observableLayer = LayerMask.NameToLayer("Observable");
 
 	public const string firstSortingLayerName = "First";
 	public const string thirdSortingLayerName = "Third";
@@ -59,7 +60,9 @@ public static class LayerAndTagManager
 	public readonly static LayerMask blocksMovableObjectLayerMask = initializeBlocksMovableObjectLayerMask();
 	public readonly static LayerMask blocksEnemyMovementLayerMask = initializeBlocksEnemyMovementLayerMask();
 
-	public readonly static LayerMask blocksObservationLayerMask = initializeBlocksObservationLayerMask();
+    public readonly static LayerMask observableLayerMask = initializeObservableLayerMask();
+    public readonly static LayerMask blocksObservationLayerMask = initializeBlocksObservationLayerMask();
+	public readonly static LayerMask blocksSkillsLayerMask = initializeBlocksSkillsLayerMask();
 
 	public readonly static LayerMask pressesButtonsLayerMask = initializePressesButtonsLayerMask();
 
@@ -139,6 +142,7 @@ public static class LayerAndTagManager
 		blocksPlayerMovementLayerMask |= (1 << cunningableObjectLayer);
 		blocksPlayerMovementLayerMask |= (1 << openableDoorLayer);
         blocksPlayerMovementLayerMask |= (1 << chestLayer);
+        blocksPlayerMovementLayerMask |= (1 << observableLayer);
 
         return blocksPlayerMovementLayerMask;
 	}
@@ -154,6 +158,7 @@ public static class LayerAndTagManager
 		blocksEnemyMovementLayerMask |= (1 << openableDoorLayer);
 		blocksEnemyMovementLayerMask |= (1 << chestLayer);
         blocksEnemyMovementLayerMask |= (1 << enemyBoundaryLayer);
+        blocksEnemyMovementLayerMask |= (1 << observableLayer);
 
         return blocksEnemyMovementLayerMask;
 	}
@@ -171,19 +176,38 @@ public static class LayerAndTagManager
 		blocksMovableObjectLayerMask |= (1 << openableDoorLayer);
 		blocksMovableObjectLayerMask |= (1 << chestLayer);
         blocksMovableObjectLayerMask |= (1 << movableObjectBlockerLayer);
+        blocksMovableObjectLayerMask |= (1 << observableLayer);
 
         return blocksMovableObjectLayerMask;
 	}
 
-	private static LayerMask initializeBlocksObservationLayerMask()
+	private static LayerMask initializeBlocksSkillsLayerMask()
 	{
-		LayerMask blocksObservationLayerMask = new LayerMask();
-		blocksObservationLayerMask |= (1 << colliderLayer);
-		blocksObservationLayerMask |= (1 << objectLayer);
-		blocksObservationLayerMask |= (1 << cunningableObjectLayer);
-		blocksObservationLayerMask |= (1 << openableDoorLayer);
-        return blocksObservationLayerMask;
+		LayerMask blocksSkillLayerMask = new LayerMask();
+		blocksSkillLayerMask |= (1 << colliderLayer);
+		blocksSkillLayerMask |= (1 << objectLayer);
+		blocksSkillLayerMask |= (1 << cunningableObjectLayer);
+        blocksSkillLayerMask |= (1 << openableDoorLayer);
+        blocksSkillLayerMask |= (1 << observableLayer);
+        return blocksSkillLayerMask;
 	}
+
+    private static LayerMask initializeObservableLayerMask()
+    {
+        LayerMask observationLayerMask = new LayerMask();
+        observationLayerMask |= (1 << observableLayer);
+        return observationLayerMask;
+    }
+
+    private static LayerMask initializeBlocksObservationLayerMask()
+    {
+        LayerMask blocksObservationLayerMask = new LayerMask();
+        blocksObservationLayerMask |= (1 << colliderLayer);
+        blocksObservationLayerMask |= (1 << objectLayer);
+        blocksObservationLayerMask |= (1 << cunningableObjectLayer);
+        blocksObservationLayerMask |= (1 << openableDoorLayer);
+        return blocksObservationLayerMask;
+    }
 
 	private static LayerMask initializePressesButtonsLayerMask()
 	{

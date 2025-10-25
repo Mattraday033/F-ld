@@ -30,9 +30,9 @@ VAR playerName = ""
 //searchInventoryFor(string nameOfVarSetToTrueInsideInkFile,string itemNameToSearchFor)
 //fadeToBlack()
 //fadeBackIn(int numberOfFramesToWaitBeforeFadingBackIn)
-//moveToLocalPos(float xCoord,float yCoord)
+//moveToPos(float xCoord,float yCoord)
 
-searchJunkFor(hasIronNugget,Iron Nugget)
+searchInventoryFor(hasIronNugget,Iron Nugget)
 
 {
 -gaveUrosTheNugget:
@@ -248,7 +248,7 @@ prepForItem()
 
 You're alright. I won't forget this. Ever!
 
-takeJunk(Iron Nugget, 1)&
+takeItem(Iron Nugget, 1)&
 addXP(200)
 
 ->Close

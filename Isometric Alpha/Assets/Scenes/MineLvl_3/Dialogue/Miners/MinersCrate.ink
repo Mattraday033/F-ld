@@ -110,7 +110,7 @@ setToTrue(mineLvl3ClearedCratesToMiners)
 changeCamTarget({nandorIndex})
 deactivate({cratesIndex})
 activate({carterIndex})
-moveToLocalPos(-44.5,14.15)
+moveToPos(-44.5,14.15)
 fadeBackIn(60)
 
 {

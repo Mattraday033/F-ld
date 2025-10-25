@@ -183,12 +183,14 @@ public static class PrefabNames
     #region Interactable Game Objects
     public const string interactablesFolder = "Interactables/";
     public const string NPC = interactablesFolder + "NPC";
+    public const string npcExtraSpace = interactablesFolder + "NPC Extra Space";
     public const string transitionSpace = interactablesFolder + "Transition Space";
     public const string vaultableObject = interactablesFolder + "VaultableObject";
     public const string chest = interactablesFolder + "Chest";
     public const string oocMonster = interactablesFolder + "OOC Monster";
     public const string oocObstacle = interactablesFolder + "OOC Obstacle";
     public const string movableObject = interactablesFolder + "Movable Object";
+    public const string secretDoor = interactablesFolder + "Secret Door";
 
     #endregion
 

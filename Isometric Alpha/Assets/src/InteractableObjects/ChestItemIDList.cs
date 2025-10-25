@@ -18,7 +18,7 @@ public static class ChestItemIDList
 
         list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rationsIndex, 3));
     
-        chestItemIDList.Add(AreaNameList.campNorthEast, list);
+        chestItemIDList.Add(LocationNameList.campNorthEast, list);
 
         #endregion
 

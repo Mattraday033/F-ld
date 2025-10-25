@@ -1,0 +1,25 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Obstacle : MonoBehaviour, IDialogueParticipant
+{
+
+    public string obstacleName;
+
+    public void setObstacleName(string obstacleName)
+    {
+        this.obstacleName = obstacleName;
+    }
+
+    public string getMainNPCName()
+    {
+        return obstacleName;
+    }
+
+    public Dialogue getDialogue()
+    {
+        return null;
+    }
+
+}

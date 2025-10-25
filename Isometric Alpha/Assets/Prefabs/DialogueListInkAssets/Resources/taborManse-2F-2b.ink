@@ -33,7 +33,7 @@ VAR playerName = ""
 //searchInventoryFor(string nameOfVarSetToTrueInsideInkFile,string itemNameToSearchFor)
 //fadeToBlack()
 //fadeBackIn(int numberOfFramesToWaitBeforeFadingBackIn)
-//moveToLocalPos(float xCoord,float yCoord)
+//moveToPos(float xCoord,float yCoord)
 
 {
 -directorDefeated:
@@ -440,7 +440,7 @@ Of course I have. But your people have proven that there isn't.
 
 fadeToBlack()
 
-moveToLocalPos(1.5,27.125)
+moveToPos(1.5,27.125)
 changeCamTarget({taborIndex})
 setFacing(NorthEast)
 

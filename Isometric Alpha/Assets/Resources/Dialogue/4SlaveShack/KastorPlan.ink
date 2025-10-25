@@ -882,7 +882,7 @@ I see. I've never spoken with her, but I've overheard some of the guards say she
 
 prepForItem()
 
-The cook in the mess hall may have some in stock, or know how to get some. I'm not sure how you'll convince him to help you, so you may have to barter. I don't have much money, but I managed to swipe some gold a long time ago when I was sent to work inside the guard barracks for a day. Take it with you, it could be useful.
+The cook in the mess hall may have some in stock, or know how to get some. I'm not sure how you'll convince him to help you, so you may have to barter. I don't have much money, but I managed to swipe some gold a long time ago when I was sent to work in the guard barracks for a day. Take it with you, it could be useful.
 
 giveCoins(30)
 

@@ -96,7 +96,7 @@ changeCamTarget({introducerIndex})
     -mineLvl3SpeakingFromBrokenGate:
         changeCamTarget({playerIndex})
         fadeToBlack()
-        moveToLocalPos(-40.5,-1.35)
+        moveToPos(-40.5,-1.35)
         setFacing(SW)
         fadeBackIn(60)
         changeCamTarget({introducerIndex})
@@ -250,7 +250,7 @@ fadeToBlack(true, false)
     activate({pazmanIndex})
 }
 
-moveToLocalPos(-41.5,-1.35)
+moveToPos(-41.5,-1.35)
 
 setFacing(NE)
 

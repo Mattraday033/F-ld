@@ -9,8 +9,6 @@ public class ObservationManager : SkillManager
     public const int observeRange = 15;
     public const int playerObserveCoords = (observeRange - 1) / 2;
 
-    public ContactFilter2D filterCollider;
-
     public static ObservationManager getInstance()
     {
         return PlayerMovement.getInstance().observationManager;
@@ -29,7 +27,7 @@ public class ObservationManager : SkillManager
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
     }
 
-    public ObservationManager()
+    public override void setCollisionFilter()
     {
         filterCollider = new ContactFilter2D();
         filterCollider.useTriggers = true;

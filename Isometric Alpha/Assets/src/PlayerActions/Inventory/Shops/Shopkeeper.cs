@@ -12,7 +12,7 @@ public class Shopkeeper : MonoBehaviour
 
     public virtual float getDiscount()
     {
-        return 1f;
+        return DiscountList.getDiscount(shopkeeperInventoryKey);
     }
 
     public Dictionary<string, Item> getInventory()

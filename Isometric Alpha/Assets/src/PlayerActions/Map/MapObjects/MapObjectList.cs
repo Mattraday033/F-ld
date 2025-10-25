@@ -61,327 +61,327 @@ public static class MapObjectList
     {		
         if(name == null)
         {
-            name = AreaNameList.campNorthEast;
+            name = LocationNameList.campNorthEast;
         }
 
 		string zoneKey = name;
 		
 		switch(zoneKey)
 		{
-			case AreaNameList.camp:
+			case LocationNameList.camp:
 				
-				return new MapZone(AreaNameList.camp, "Camp", new string[]{AreaNameList.forest});
+				return new MapZone(LocationNameList.camp, "Camp", new string[]{LocationNameList.forest});
 			
-			case AreaNameList.mineLvl1:
+			case LocationNameList.mineLvl1:
 				
-				return new MapZone(AreaNameList.mineLvl1, "Mine Level 1", null);
+				return new MapZone(LocationNameList.mineLvl1, "Mine Level 1", null);
 			
-			case AreaNameList.mineLvl2:
+			case LocationNameList.mineLvl2:
 				
-				return new MapZone(AreaNameList.mineLvl1, "Mine Level 2", null);
+				return new MapZone(LocationNameList.mineLvl1, "Mine Level 2", null);
 			
-			case AreaNameList.mineLvl3:
+			case LocationNameList.mineLvl3:
 				
-				return new MapZone(AreaNameList.mineLvl1, "Mine Level 3", null);
+				return new MapZone(LocationNameList.mineLvl1, "Mine Level 3", null);
 			
-			case AreaNameList.manseFirstFloor:
+			case LocationNameList.manseFirstFloor:
 				
-				return new MapZone(AreaNameList.manseFirstFloor, "Manse-1F", null);
+				return new MapZone(LocationNameList.manseFirstFloor, "Manse-1F", null);
 	
-			case AreaNameList.manseSecondFloor:
+			case LocationNameList.manseSecondFloor:
 				
-				return new MapZone(AreaNameList.manseSecondFloor, "Manse-2F", null);
+				return new MapZone(LocationNameList.manseSecondFloor, "Manse-2F", null);
 	
-			case AreaNameList.pit:
+			case LocationNameList.pit:
 				
-				return new MapZone(AreaNameList.pit, "The Pit", null);
+				return new MapZone(LocationNameList.pit, "The Pit", null);
 			
-			case AreaNameList.forest:
+			case LocationNameList.forest:
 				
-				return new MapZone(AreaNameList.forest, "Forest", new string[]{AreaNameList.camp});
+				return new MapZone(LocationNameList.forest, "Forest", new string[]{LocationNameList.camp});
 		}
 		
 		string campSceneName = name;
 		switch (campSceneName)
 		{
-			case AreaNameList.campNorthEast:
+			case LocationNameList.campNorthEast:
 
-				return new MapLocation(AreaNameList.camp, AreaNameList.campNorthEast, "Camp - North East", fastTravelAccessible, threeInteriors, new string[] { AreaNameList.campCenter, AreaNameList.slaveShackTwo, AreaNameList.slaveShackThree, AreaNameList.slaveShackSeven });
+				return new MapLocation(LocationNameList.camp, LocationNameList.campNorthEast, "Camp - North East", fastTravelAccessible, threeInteriors, new string[] { LocationNameList.campCenter, LocationNameList.slaveShackTwo, LocationNameList.slaveShackThree, LocationNameList.slaveShackSeven });
 
-			case AreaNameList.slaveShackTwo:
+			case LocationNameList.slaveShackTwo:
 
-				return new MapInterior(AreaNameList.camp, AreaNameList.slaveShackTwo, "Garcha's Shack", interiorIndexZero, AreaNameList.campNorthEast);
+				return new MapInterior(LocationNameList.camp, LocationNameList.slaveShackTwo, "Garcha's Shack", interiorIndexZero, LocationNameList.campNorthEast);
 
-			case AreaNameList.slaveShackThree:
+			case LocationNameList.slaveShackThree:
 
-				return new MapInterior(AreaNameList.camp, AreaNameList.slaveShackThree, "Janos's Shack", interiorIndexOne, AreaNameList.campNorthEast);
+				return new MapInterior(LocationNameList.camp, LocationNameList.slaveShackThree, "Janos's Shack", interiorIndexOne, LocationNameList.campNorthEast);
 
-			case AreaNameList.slaveShackSeven:
+			case LocationNameList.slaveShackSeven:
 
-				return new MapInterior(AreaNameList.camp, AreaNameList.slaveShackSeven, "Clay's Shack", interiorIndexTwo, AreaNameList.campNorthEast);
+				return new MapInterior(LocationNameList.camp, LocationNameList.slaveShackSeven, "Clay's Shack", interiorIndexTwo, LocationNameList.campNorthEast);
 
-			case AreaNameList.campCenter:
+			case LocationNameList.campCenter:
 
-				return new MapLocation(AreaNameList.camp, AreaNameList.campCenter, "Camp - Center", notFastTravelAccessible, fourInteriors, new string[] { AreaNameList.campNorthEast, AreaNameList.campManse, AreaNameList.campSouthEast, AreaNameList.slaveShackOne, AreaNameList.stables, AreaNameList.temple, AreaNameList.guardShack }, new ZoneButtonInfo[] { new ZoneButtonInfo(AreaNameList.forest, MapPopUpWindow.eastButtonIndex) });
+				return new MapLocation(LocationNameList.camp, LocationNameList.campCenter, "Camp - Center", notFastTravelAccessible, fourInteriors, new string[] { LocationNameList.campNorthEast, LocationNameList.campManse, LocationNameList.campSouthEast, LocationNameList.slaveShackOne, LocationNameList.stables, LocationNameList.temple, LocationNameList.guardShack }, new ZoneButtonInfo[] { new ZoneButtonInfo(LocationNameList.forest, MapPopUpWindow.eastButtonIndex) });
 
-			case AreaNameList.slaveShackOne:
+			case LocationNameList.slaveShackOne:
 
-				return new MapInterior(AreaNameList.camp, AreaNameList.slaveShackOne, "Bálint's Shack", interiorIndexZero, AreaNameList.campCenter);
+				return new MapInterior(LocationNameList.camp, LocationNameList.slaveShackOne, "Bálint's Shack", interiorIndexZero, LocationNameList.campCenter);
 
-			case AreaNameList.stables:
+			case LocationNameList.stables:
 
-				return new MapInterior(AreaNameList.camp, AreaNameList.stables, "Stables", interiorIndexOne, AreaNameList.campCenter);
+				return new MapInterior(LocationNameList.camp, LocationNameList.stables, "Stables", interiorIndexOne, LocationNameList.campCenter);
 
-			case AreaNameList.temple:
+			case LocationNameList.temple:
 
-				return new MapInterior(AreaNameList.camp, AreaNameList.temple, "Temple", interiorIndexTwo, AreaNameList.campCenter);
+				return new MapInterior(LocationNameList.camp, LocationNameList.temple, "Temple", interiorIndexTwo, LocationNameList.campCenter);
 
-			case AreaNameList.guardShack:
+			case LocationNameList.guardShack:
 
-				return new MapInterior(AreaNameList.camp, AreaNameList.guardShack, "Gate Guardhouse", interiorIndexThree, AreaNameList.campCenter);
+				return new MapInterior(LocationNameList.camp, LocationNameList.guardShack, "Gate Guardhouse", interiorIndexThree, LocationNameList.campCenter);
 
-			case AreaNameList.campManse:
+			case LocationNameList.campManse:
 
-				return new MapLocation(AreaNameList.camp, AreaNameList.campManse, "Camp - Manse", notFastTravelAccessible, fourInteriors, new string[] { AreaNameList.campCenter, AreaNameList.guardHouseTopFloor, AreaNameList.guardHouseNorthEast, AreaNameList.slaveShackEight, AreaNameList.slaveShackNine}, new ZoneButtonInfo[] { new ZoneButtonInfo(AreaNameList.manseFirstFloor, MapPopUpWindow.westButtonIndex) });
+				return new MapLocation(LocationNameList.camp, LocationNameList.campManse, "Camp - Manse", notFastTravelAccessible, fourInteriors, new string[] { LocationNameList.campCenter, LocationNameList.guardHouseTopFloor, LocationNameList.guardHouseNorthEast, LocationNameList.slaveShackEight, LocationNameList.slaveShackNine}, new ZoneButtonInfo[] { new ZoneButtonInfo(LocationNameList.manseFirstFloor, MapPopUpWindow.westButtonIndex) });
 
-			case AreaNameList.slaveShackEight:
+			case LocationNameList.slaveShackEight:
 
-				return new MapInterior(AreaNameList.camp, AreaNameList.slaveShackEight, "Sampson's Shack", interiorIndexZero, AreaNameList.campManse);
+				return new MapInterior(LocationNameList.camp, LocationNameList.slaveShackEight, "Sampson's Shack", interiorIndexZero, LocationNameList.campManse);
 
-			case AreaNameList.slaveShackNine:
+			case LocationNameList.slaveShackNine:
 
-				return new MapInterior(AreaNameList.camp, AreaNameList.slaveShackNine, "Manse Slave Shack", interiorIndexOne, AreaNameList.campManse);
+				return new MapInterior(LocationNameList.camp, LocationNameList.slaveShackNine, "Manse Slave Shack", interiorIndexOne, LocationNameList.campManse);
 
-			case AreaNameList.guardHouseNorthEast:
+			case LocationNameList.guardHouseNorthEast:
 
-				return new MapInterior(AreaNameList.camp, AreaNameList.guardHouseNorthEast, "Guardhouse 1F - North East", interiorIndexTwo, AreaNameList.campManse);
+				return new MapInterior(LocationNameList.camp, LocationNameList.guardHouseNorthEast, "Guardhouse 1F - North East", interiorIndexTwo, LocationNameList.campManse);
 
-			case AreaNameList.campSouthEast:
+			case LocationNameList.campSouthEast:
 
-				return new MapLocation(AreaNameList.camp, AreaNameList.campSouthEast, "Camp - South East", fastTravelAccessible, fourInteriors, new string[] { AreaNameList.campCenter, AreaNameList.campMineEntrance, AreaNameList.messHall, AreaNameList.slaveShackFour, AreaNameList.slaveShackFive, AreaNameList.slaveShackSix});
+				return new MapLocation(LocationNameList.camp, LocationNameList.campSouthEast, "Camp - South East", fastTravelAccessible, fourInteriors, new string[] { LocationNameList.campCenter, LocationNameList.campMineEntrance, LocationNameList.messHall, LocationNameList.slaveShackFour, LocationNameList.slaveShackFive, LocationNameList.slaveShackSix});
 
-			case AreaNameList.messHall:
+			case LocationNameList.messHall:
 
-				return new MapInterior(AreaNameList.camp, AreaNameList.messHall, "Mess Hall", interiorIndexZero, AreaNameList.campSouthEast);
+				return new MapInterior(LocationNameList.camp, LocationNameList.messHall, "Mess Hall", interiorIndexZero, LocationNameList.campSouthEast);
 
-			case AreaNameList.slaveShackFour:
+			case LocationNameList.slaveShackFour:
 
-				return new MapInterior(AreaNameList.camp, AreaNameList.slaveShackFour, "Kastor's Shack", interiorIndexOne, AreaNameList.campSouthEast);
+				return new MapInterior(LocationNameList.camp, LocationNameList.slaveShackFour, "Kastor's Shack", interiorIndexOne, LocationNameList.campSouthEast);
 
-			case AreaNameList.slaveShackFive:
+			case LocationNameList.slaveShackFive:
 
-				return new MapInterior(AreaNameList.camp, AreaNameList.slaveShackFive, "Ervin's Shack", interiorIndexTwo, AreaNameList.campSouthEast);
+				return new MapInterior(LocationNameList.camp, LocationNameList.slaveShackFive, "Ervin's Shack", interiorIndexTwo, LocationNameList.campSouthEast);
 
-			case AreaNameList.slaveShackSix:
+			case LocationNameList.slaveShackSix:
 
-				return new MapInterior(AreaNameList.camp, AreaNameList.slaveShackSix, "Thatch's Shack", interiorIndexThree, AreaNameList.campSouthEast);
+				return new MapInterior(LocationNameList.camp, LocationNameList.slaveShackSix, "Thatch's Shack", interiorIndexThree, LocationNameList.campSouthEast);
 
-			case AreaNameList.campMineEntrance:
+			case LocationNameList.campMineEntrance:
 
-				return new MapLocation(AreaNameList.camp, AreaNameList.campMineEntrance, "Camp - Mine Entrance", notFastTravelAccessible, twoInteriors, new string[] { AreaNameList.campSouthEast, AreaNameList.stockhouse, AreaNameList.guardHouseSouthWest}, new ZoneButtonInfo[] { new ZoneButtonInfo(AreaNameList.mineLvl1, MapPopUpWindow.westNorthButtonIndex) });
+				return new MapLocation(LocationNameList.camp, LocationNameList.campMineEntrance, "Camp - Mine Entrance", notFastTravelAccessible, twoInteriors, new string[] { LocationNameList.campSouthEast, LocationNameList.stockhouse, LocationNameList.guardHouseSouthWest}, new ZoneButtonInfo[] { new ZoneButtonInfo(LocationNameList.mineLvl1, MapPopUpWindow.westNorthButtonIndex) });
 
-			case AreaNameList.stockhouse:
+			case LocationNameList.stockhouse:
 
-				return new MapInterior(AreaNameList.camp, AreaNameList.stockhouse, AreaNameList.stockhouse, interiorIndexZero, AreaNameList.campMineEntrance);
+				return new MapInterior(LocationNameList.camp, LocationNameList.stockhouse, LocationNameList.stockhouse, interiorIndexZero, LocationNameList.campMineEntrance);
 
-			case AreaNameList.guardHouseSouthWest:
+			case LocationNameList.guardHouseSouthWest:
 			
-				return new MapInterior(AreaNameList.camp, AreaNameList.guardHouseSouthWest, "Guardhouse 1F - South West", interiorIndexOne, AreaNameList.campMineEntrance);
+				return new MapInterior(LocationNameList.camp, LocationNameList.guardHouseSouthWest, "Guardhouse 1F - South West", interiorIndexOne, LocationNameList.campMineEntrance);
 			
-			case AreaNameList.guardHouseTopFloor:
+			case LocationNameList.guardHouseTopFloor:
 			
-				return new MapInterior(AreaNameList.camp, AreaNameList.guardHouseTopFloor, "Guardhouse 2F", interiorIndexTwo, AreaNameList.campManse);
+				return new MapInterior(LocationNameList.camp, LocationNameList.guardHouseTopFloor, "Guardhouse 2F", interiorIndexTwo, LocationNameList.campManse);
 		}
 
         string mineLvl1SceneName = name;
-		switch(mineLvl1SceneName.Replace(AreaNameList.mineLvl1,""))
+		switch(mineLvl1SceneName.Replace(LocationNameList.mineLvl1,""))
 		{
-			case AreaNameList.section1a:
+			case LocationNameList.section1a:
 				
-				return new MapLocation(AreaNameList.mineLvl1, AreaNameList.mineLvl1+AreaNameList.section1a, "1a - Entrance", fastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl1+AreaNameList.section1b}, new ZoneButtonInfo[]{new ZoneButtonInfo(AreaNameList.camp, MapPopUpWindow.eastButtonIndex)});
+				return new MapLocation(LocationNameList.mineLvl1, LocationNameList.mineLvl1+LocationNameList.section1a, "1a - Entrance", fastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl1+LocationNameList.section1b}, new ZoneButtonInfo[]{new ZoneButtonInfo(LocationNameList.camp, MapPopUpWindow.eastButtonIndex)});
 			
-			case AreaNameList.section1b:
+			case LocationNameList.section1b:
 				
-				return new MapLocation(AreaNameList.mineLvl1, AreaNameList.mineLvl1+AreaNameList.section1b, "1b", notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl1+AreaNameList.section1a}, new ZoneButtonInfo[]{new ZoneButtonInfo(AreaNameList.mineLvl2,MapPopUpWindow.westButtonIndex)});
+				return new MapLocation(LocationNameList.mineLvl1, LocationNameList.mineLvl1+LocationNameList.section1b, "1b", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl1+LocationNameList.section1a}, new ZoneButtonInfo[]{new ZoneButtonInfo(LocationNameList.mineLvl2,MapPopUpWindow.westButtonIndex)});
 			
-			case AreaNameList.section1c:
+			case LocationNameList.section1c:
 				
-				return new MapLocation(AreaNameList.mineLvl1, AreaNameList.mineLvl1+AreaNameList.section1c, "1c", notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl1+AreaNameList.section1b});
+				return new MapLocation(LocationNameList.mineLvl1, LocationNameList.mineLvl1+LocationNameList.section1c, "1c", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl1+LocationNameList.section1b});
 		}
 		
 		string mineLvl2SceneName = name;
-		switch(mineLvl2SceneName.Replace(AreaNameList.mineLvl2,""))
+		switch(mineLvl2SceneName.Replace(LocationNameList.mineLvl2,""))
 		{
-			case AreaNameList.section1a:
-				return new MapLocation(AreaNameList.mineLvl2, AreaNameList.mineLvl2+AreaNameList.section1a, "1a - Stairs", fastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl2+AreaNameList.section1b, AreaNameList.mineLvl2+AreaNameList.section6}, new ZoneButtonInfo[]{new ZoneButtonInfo(AreaNameList.mineLvl1, MapPopUpWindow.southEastButtonIndex)});
-			case AreaNameList.section1b:
-				return new MapLocation(AreaNameList.mineLvl2, AreaNameList.mineLvl2+AreaNameList.section1b, "1b - Ruined Inn", notFastTravelAccessible, oneInterior, new string[]{AreaNameList.mineLvl2+AreaNameList.section1a, AreaNameList.mineLvl2+AreaNameList.section2a, AreaNameList.mineLvl2+AreaNameList.section1c});
-			case AreaNameList.section1c:
-				return new MapInterior(AreaNameList.mineLvl2, AreaNameList.mineLvl2+AreaNameList.section1c, "1c - Ruined Bar", interiorIndexOne, AreaNameList.mineLvl2+AreaNameList.section1b);
+			case LocationNameList.section1a:
+				return new MapLocation(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section1a, "1a - Stairs", fastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl2+LocationNameList.section1b, LocationNameList.mineLvl2+LocationNameList.section6}, new ZoneButtonInfo[]{new ZoneButtonInfo(LocationNameList.mineLvl1, MapPopUpWindow.southEastButtonIndex)});
+			case LocationNameList.section1b:
+				return new MapLocation(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section1b, "1b - Ruined Inn", notFastTravelAccessible, oneInterior, new string[]{LocationNameList.mineLvl2+LocationNameList.section1a, LocationNameList.mineLvl2+LocationNameList.section2a, LocationNameList.mineLvl2+LocationNameList.section1c});
+			case LocationNameList.section1c:
+				return new MapInterior(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section1c, "1c - Ruined Bar", interiorIndexOne, LocationNameList.mineLvl2+LocationNameList.section1b);
 			
-			case AreaNameList.section2a:
-				return new MapLocation(AreaNameList.mineLvl2, AreaNameList.mineLvl2+AreaNameList.section2a, "2a - Stairs", notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl2+AreaNameList.section1b, AreaNameList.mineLvl2+AreaNameList.section1c, AreaNameList.mineLvl2+AreaNameList.section2b}, new ZoneButtonInfo[]{new ZoneButtonInfo(AreaNameList.mineLvl3, MapPopUpWindow.westSouthButtonIndex)});
-			case AreaNameList.section2b:
-				return new MapLocation(AreaNameList.mineLvl2, AreaNameList.mineLvl2+AreaNameList.section2b, "2b - Armory", notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl2+AreaNameList.section2a, AreaNameList.mineLvl2+AreaNameList.section3a});
+			case LocationNameList.section2a:
+				return new MapLocation(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section2a, "2a - Stairs", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl2+LocationNameList.section1b, LocationNameList.mineLvl2+LocationNameList.section1c, LocationNameList.mineLvl2+LocationNameList.section2b}, new ZoneButtonInfo[]{new ZoneButtonInfo(LocationNameList.mineLvl3, MapPopUpWindow.westSouthButtonIndex)});
+			case LocationNameList.section2b:
+				return new MapLocation(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section2b, "2b - Armory", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl2+LocationNameList.section2a, LocationNameList.mineLvl2+LocationNameList.section3a});
 			
-			case AreaNameList.section3a:
-				return new MapLocation(AreaNameList.mineLvl2, AreaNameList.mineLvl2+AreaNameList.section3a, "3a", notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl2+AreaNameList.section2b, AreaNameList.mineLvl2+AreaNameList.section3b});
-			case AreaNameList.section3b:
-				return new MapLocation(AreaNameList.mineLvl2, AreaNameList.mineLvl2+AreaNameList.section3b, "3b", notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl2+AreaNameList.section3a, AreaNameList.mineLvl2+AreaNameList.section4, AreaNameList.mineLvl2+AreaNameList.section7a});
+			case LocationNameList.section3a:
+				return new MapLocation(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section3a, "3a", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl2+LocationNameList.section2b, LocationNameList.mineLvl2+LocationNameList.section3b});
+			case LocationNameList.section3b:
+				return new MapLocation(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section3b, "3b", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl2+LocationNameList.section3a, LocationNameList.mineLvl2+LocationNameList.section4, LocationNameList.mineLvl2+LocationNameList.section7a});
 			
-			case AreaNameList.section4:
-				return new MapLocation(AreaNameList.mineLvl2, AreaNameList.mineLvl2+AreaNameList.section4, "4", notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl2+AreaNameList.section3b, AreaNameList.mineLvl2+AreaNameList.section7a});
+			case LocationNameList.section4:
+				return new MapLocation(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section4, "4", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl2+LocationNameList.section3b, LocationNameList.mineLvl2+LocationNameList.section7a});
 			
-			case AreaNameList.section5a:
-				return new MapLocation(AreaNameList.mineLvl2, AreaNameList.mineLvl2+AreaNameList.section5a, "5a - Collapsed Vault", notFastTravelAccessible, oneInterior, new string[]{AreaNameList.mineLvl2+AreaNameList.section3a, AreaNameList.mineLvl2+AreaNameList.section5b, AreaNameList.mineLvl2+AreaNameList.section7a});
-			case AreaNameList.section5b:
-				return new MapInterior(AreaNameList.mineLvl2, AreaNameList.mineLvl2+AreaNameList.section5b, "5b - Below", interiorIndexZero, AreaNameList.mineLvl2+AreaNameList.section5a);
+			case LocationNameList.section5a:
+				return new MapLocation(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section5a, "5a - Collapsed Vault", notFastTravelAccessible, oneInterior, new string[]{LocationNameList.mineLvl2+LocationNameList.section3a, LocationNameList.mineLvl2+LocationNameList.section5b, LocationNameList.mineLvl2+LocationNameList.section7a});
+			case LocationNameList.section5b:
+				return new MapInterior(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section5b, "5b - Below", interiorIndexZero, LocationNameList.mineLvl2+LocationNameList.section5a);
 
-			case AreaNameList.section6:
-				return new MapLocation(AreaNameList.mineLvl2, AreaNameList.mineLvl2+AreaNameList.section6, "6", notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl2+AreaNameList.section1a, AreaNameList.mineLvl2+AreaNameList.section7a});
+			case LocationNameList.section6:
+				return new MapLocation(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section6, "6", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl2+LocationNameList.section1a, LocationNameList.mineLvl2+LocationNameList.section7a});
 			
-			case AreaNameList.section7a:
-				return new MapLocation(AreaNameList.mineLvl2, AreaNameList.mineLvl2+AreaNameList.section7a, "7a", notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl2+AreaNameList.section3b, AreaNameList.mineLvl2+AreaNameList.section4, AreaNameList.mineLvl2+AreaNameList.section6, AreaNameList.mineLvl2+AreaNameList.section7b});
-			case AreaNameList.section7b:
-				return new MapLocation(AreaNameList.mineLvl2, AreaNameList.mineLvl2+AreaNameList.section7b, "7b", notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl2+AreaNameList.section2b, AreaNameList.mineLvl2+AreaNameList.section7a});
+			case LocationNameList.section7a:
+				return new MapLocation(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section7a, "7a", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl2+LocationNameList.section3b, LocationNameList.mineLvl2+LocationNameList.section4, LocationNameList.mineLvl2+LocationNameList.section6, LocationNameList.mineLvl2+LocationNameList.section7b});
+			case LocationNameList.section7b:
+				return new MapLocation(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section7b, "7b", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl2+LocationNameList.section2b, LocationNameList.mineLvl2+LocationNameList.section7a});
 			default:
 				break;
 		}
 		
 		string mineLvl3SceneName = name;
-		switch(mineLvl3SceneName.Replace(AreaNameList.mineLvl3,""))
+		switch(mineLvl3SceneName.Replace(LocationNameList.mineLvl3,""))
 		{
-			case AreaNameList.section1a:
+			case LocationNameList.section1a:
 				
-				return new MapLocation(AreaNameList.mineLvl3, AreaNameList.mineLvl3+AreaNameList.section1a, "1a - Stairs", fastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl3+AreaNameList.section1b, AreaNameList.mineLvl3+AreaNameList.section2a, AreaNameList.mineLvl3+AreaNameList.section4a}, new ZoneButtonInfo[]{new ZoneButtonInfo(AreaNameList.mineLvl2, MapPopUpWindow.eastNorthButtonIndex)});
+				return new MapLocation(LocationNameList.mineLvl3, LocationNameList.mineLvl3+LocationNameList.section1a, "1a - Stairs", fastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl3+LocationNameList.section1b, LocationNameList.mineLvl3+LocationNameList.section2a, LocationNameList.mineLvl3+LocationNameList.section4a}, new ZoneButtonInfo[]{new ZoneButtonInfo(LocationNameList.mineLvl2, MapPopUpWindow.eastNorthButtonIndex)});
 			
-			case AreaNameList.section1b:
+			case LocationNameList.section1b:
 				
-				return new MapLocation(AreaNameList.mineLvl3, AreaNameList.mineLvl3+AreaNameList.section1b, "1b", notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl3+AreaNameList.section1a});
+				return new MapLocation(LocationNameList.mineLvl3, LocationNameList.mineLvl3+LocationNameList.section1b, "1b", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl3+LocationNameList.section1a});
 			
-			case AreaNameList.section2a:
+			case LocationNameList.section2a:
 				
-				return new MapLocation(AreaNameList.mineLvl3, AreaNameList.mineLvl3+AreaNameList.section2a, "2a", notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl3+AreaNameList.section1a, AreaNameList.mineLvl3+AreaNameList.section2b});
+				return new MapLocation(LocationNameList.mineLvl3, LocationNameList.mineLvl3+LocationNameList.section2a, "2a", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl3+LocationNameList.section1a, LocationNameList.mineLvl3+LocationNameList.section2b});
 			
-			case AreaNameList.section2b:
+			case LocationNameList.section2b:
 				
-				return new MapLocation(AreaNameList.mineLvl3, AreaNameList.mineLvl3+AreaNameList.section2b, "2b", notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl3+AreaNameList.section2a, AreaNameList.mineLvl3+AreaNameList.section3a});
+				return new MapLocation(LocationNameList.mineLvl3, LocationNameList.mineLvl3+LocationNameList.section2b, "2b", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl3+LocationNameList.section2a, LocationNameList.mineLvl3+LocationNameList.section3a});
 			
-			case AreaNameList.section3a:
+			case LocationNameList.section3a:
 				
-				return new MapLocation(AreaNameList.mineLvl3, AreaNameList.mineLvl3+AreaNameList.section3a, "3a", fastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl3+AreaNameList.section2b, AreaNameList.mineLvl3+AreaNameList.section3b, AreaNameList.mineLvl3+AreaNameList.section6a, AreaNameList.mineLvl3+AreaNameList.section7});
+				return new MapLocation(LocationNameList.mineLvl3, LocationNameList.mineLvl3+LocationNameList.section3a, "3a", fastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl3+LocationNameList.section2b, LocationNameList.mineLvl3+LocationNameList.section3b, LocationNameList.mineLvl3+LocationNameList.section6a, LocationNameList.mineLvl3+LocationNameList.section7});
 			
-			case AreaNameList.section3b:
+			case LocationNameList.section3b:
 				
-				return new MapInterior(AreaNameList.mineLvl3, AreaNameList.mineLvl3+AreaNameList.section3b, "3b - Stockroom", interiorIndexOne, AreaNameList.mineLvl3+AreaNameList.section3a);
+				return new MapInterior(LocationNameList.mineLvl3, LocationNameList.mineLvl3+LocationNameList.section3b, "3b - Stockroom", interiorIndexOne, LocationNameList.mineLvl3+LocationNameList.section3a);
 			
-			case AreaNameList.section4a:
+			case LocationNameList.section4a:
 				
-				return new MapLocation(AreaNameList.mineLvl3, AreaNameList.mineLvl3+AreaNameList.section4a, "4a", notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl3+AreaNameList.section1a, AreaNameList.mineLvl3+AreaNameList.section4b});
+				return new MapLocation(LocationNameList.mineLvl3, LocationNameList.mineLvl3+LocationNameList.section4a, "4a", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl3+LocationNameList.section1a, LocationNameList.mineLvl3+LocationNameList.section4b});
 			
-			case AreaNameList.section4b:
+			case LocationNameList.section4b:
 				
-				return new MapLocation(AreaNameList.mineLvl3, AreaNameList.mineLvl3+AreaNameList.section4b, "4b - River Source", notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl3+AreaNameList.section4a, AreaNameList.mineLvl3+AreaNameList.section5});
+				return new MapLocation(LocationNameList.mineLvl3, LocationNameList.mineLvl3+LocationNameList.section4b, "4b - River Source", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl3+LocationNameList.section4a, LocationNameList.mineLvl3+LocationNameList.section5});
 			
-			case AreaNameList.section5:
+			case LocationNameList.section5:
 				
-				return new MapLocation(AreaNameList.mineLvl3, AreaNameList.mineLvl3+AreaNameList.section5, "5", fastTravelAccessible, oneInterior, new string[]{AreaNameList.mineLvl3+AreaNameList.section4b, AreaNameList.mineLvl3+AreaNameList.minerCamp, AreaNameList.mineLvl3+AreaNameList.section6a});
+				return new MapLocation(LocationNameList.mineLvl3, LocationNameList.mineLvl3+LocationNameList.section5, "5", fastTravelAccessible, oneInterior, new string[]{LocationNameList.mineLvl3+LocationNameList.section4b, LocationNameList.mineLvl3+LocationNameList.minerCamp, LocationNameList.mineLvl3+LocationNameList.section6a});
 			
-			case AreaNameList.minerCamp:
+			case LocationNameList.minerCamp:
 
-				return new MapInterior(AreaNameList.mineLvl3, AreaNameList.mineLvl3+AreaNameList.minerCamp, "Miner Camp", interiorIndexZero, AreaNameList.mineLvl3+AreaNameList.section5);
+				return new MapInterior(LocationNameList.mineLvl3, LocationNameList.mineLvl3+LocationNameList.minerCamp, "Miner Camp", interiorIndexZero, LocationNameList.mineLvl3+LocationNameList.section5);
 				
-			case AreaNameList.section6a:
+			case LocationNameList.section6a:
 				
-				return new MapLocation(AreaNameList.mineLvl3, AreaNameList.mineLvl3+AreaNameList.section6a, "6a", notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl3+AreaNameList.section3a, AreaNameList.mineLvl3+AreaNameList.section5});
+				return new MapLocation(LocationNameList.mineLvl3, LocationNameList.mineLvl3+LocationNameList.section6a, "6a", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl3+LocationNameList.section3a, LocationNameList.mineLvl3+LocationNameList.section5});
 			
-			case AreaNameList.section7:
+			case LocationNameList.section7:
 				
-				return new MapLocation(AreaNameList.mineLvl3, AreaNameList.mineLvl3+AreaNameList.section7, "7 - Final Tunnel", notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.mineLvl3+AreaNameList.section3a});
+				return new MapLocation(LocationNameList.mineLvl3, LocationNameList.mineLvl3+LocationNameList.section7, "7 - Final Tunnel", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl3+LocationNameList.section3a});
 		}
 		
 		string manseFirstFloorSceneName = name;
-		switch(manseFirstFloorSceneName.Replace(AreaNameList.manseFirstFloor,""))
+		switch(manseFirstFloorSceneName.Replace(LocationNameList.manseFirstFloor,""))
 		{
-			case AreaNameList.section1a:
-				return new MapLocation(AreaNameList.manseFirstFloor, AreaNameList.manseFirstFloor+AreaNameList.section1a, AreaNameList.section1a, fastTravelAccessible, zeroInteriors, new string[]{AreaNameList.manseFirstFloor+AreaNameList.section1b}, new ZoneButtonInfo[]{new ZoneButtonInfo(AreaNameList.camp, MapPopUpWindow.eastSouthButtonIndex)} );
-			case AreaNameList.section1b:
-				return new MapLocation(AreaNameList.manseFirstFloor, AreaNameList.manseFirstFloor+AreaNameList.section1b, AreaNameList.section1b, notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.manseFirstFloor+AreaNameList.section1a, AreaNameList.manseFirstFloor+AreaNameList.section1c});
-			case AreaNameList.section1c:
-				return new MapLocation(AreaNameList.manseFirstFloor, AreaNameList.manseFirstFloor+AreaNameList.section1c, AreaNameList.section1c, notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.manseFirstFloor+AreaNameList.kitchens, AreaNameList.manseFirstFloor+AreaNameList.section1b});
-			case AreaNameList.kitchens:
-				return new MapLocation(AreaNameList.manseFirstFloor, AreaNameList.manseFirstFloor+AreaNameList.kitchens, AreaNameList.kitchens, fastTravelAccessible, zeroInteriors, new string[]{AreaNameList.manseFirstFloor+AreaNameList.section1c}, new ZoneButtonInfo[]{new ZoneButtonInfo(AreaNameList.camp, MapPopUpWindow.southEastButtonIndex), new ZoneButtonInfo(AreaNameList.manseSecondFloor, MapPopUpWindow.southWestButtonIndex)});
+			case LocationNameList.section1a:
+				return new MapLocation(LocationNameList.manseFirstFloor, LocationNameList.manseFirstFloor+LocationNameList.section1a, LocationNameList.section1a, fastTravelAccessible, zeroInteriors, new string[]{LocationNameList.manseFirstFloor+LocationNameList.section1b}, new ZoneButtonInfo[]{new ZoneButtonInfo(LocationNameList.camp, MapPopUpWindow.eastSouthButtonIndex)} );
+			case LocationNameList.section1b:
+				return new MapLocation(LocationNameList.manseFirstFloor, LocationNameList.manseFirstFloor+LocationNameList.section1b, LocationNameList.section1b, notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.manseFirstFloor+LocationNameList.section1a, LocationNameList.manseFirstFloor+LocationNameList.section1c});
+			case LocationNameList.section1c:
+				return new MapLocation(LocationNameList.manseFirstFloor, LocationNameList.manseFirstFloor+LocationNameList.section1c, LocationNameList.section1c, notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.manseFirstFloor+LocationNameList.kitchens, LocationNameList.manseFirstFloor+LocationNameList.section1b});
+			case LocationNameList.kitchens:
+				return new MapLocation(LocationNameList.manseFirstFloor, LocationNameList.manseFirstFloor+LocationNameList.kitchens, LocationNameList.kitchens, fastTravelAccessible, zeroInteriors, new string[]{LocationNameList.manseFirstFloor+LocationNameList.section1c}, new ZoneButtonInfo[]{new ZoneButtonInfo(LocationNameList.camp, MapPopUpWindow.southEastButtonIndex), new ZoneButtonInfo(LocationNameList.manseSecondFloor, MapPopUpWindow.southWestButtonIndex)});
 
-			case AreaNameList.section2a:
-				return new MapLocation(AreaNameList.manseFirstFloor, AreaNameList.manseFirstFloor+AreaNameList.section2a, AreaNameList.section2a, notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.manseFirstFloor+AreaNameList.diningRoom, AreaNameList.manseFirstFloor+AreaNameList.section2b});
-			case AreaNameList.section2b:
-				return new MapLocation(AreaNameList.manseFirstFloor, AreaNameList.manseFirstFloor+AreaNameList.section2b, AreaNameList.section2b, notFastTravelAccessible, oneInterior, new string[] { AreaNameList.manseFirstFloor + AreaNameList.section2a, AreaNameList.manseFirstFloor + AreaNameList.section2c, AreaNameList.manseFirstFloor + AreaNameList.section3c, AreaNameList.manseFirstFloor + AreaNameList.stairsToPit}, new ZoneButtonInfo[] { new ZoneButtonInfo(AreaNameList.pit, MapPopUpWindow.westNorthButtonIndex) });
-			case AreaNameList.section2c:
-				return new MapLocation(AreaNameList.manseFirstFloor, AreaNameList.manseFirstFloor+AreaNameList.section2c, AreaNameList.section2c, notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.manseFirstFloor+AreaNameList.section2b, AreaNameList.manseFirstFloor+AreaNameList.stairsToPit}, new ZoneButtonInfo[]{new ZoneButtonInfo(AreaNameList.pit, MapPopUpWindow.westNorthButtonIndex)});
-			case AreaNameList.stairsToPit:
-				return new MapInterior(AreaNameList.manseFirstFloor, AreaNameList.manseFirstFloor+AreaNameList.stairsToPit, "Stairs to Pit", interiorIndexZero, AreaNameList.manseFirstFloor+AreaNameList.section2b);
-			case AreaNameList.diningRoom:
-				return new MapLocation(AreaNameList.manseFirstFloor, AreaNameList.manseFirstFloor+AreaNameList.diningRoom, AreaNameList.diningRoom, notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.manseFirstFloor+AreaNameList.kitchens,AreaNameList.manseFirstFloor+AreaNameList.section1b});
+			case LocationNameList.section2a:
+				return new MapLocation(LocationNameList.manseFirstFloor, LocationNameList.manseFirstFloor+LocationNameList.section2a, LocationNameList.section2a, notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.manseFirstFloor+LocationNameList.diningRoom, LocationNameList.manseFirstFloor+LocationNameList.section2b});
+			case LocationNameList.section2b:
+				return new MapLocation(LocationNameList.manseFirstFloor, LocationNameList.manseFirstFloor+LocationNameList.section2b, LocationNameList.section2b, notFastTravelAccessible, oneInterior, new string[] { LocationNameList.manseFirstFloor + LocationNameList.section2a, LocationNameList.manseFirstFloor + LocationNameList.section2c, LocationNameList.manseFirstFloor + LocationNameList.section3c, LocationNameList.manseFirstFloor + LocationNameList.stairsToPit}, new ZoneButtonInfo[] { new ZoneButtonInfo(LocationNameList.pit, MapPopUpWindow.westNorthButtonIndex) });
+			case LocationNameList.section2c:
+				return new MapLocation(LocationNameList.manseFirstFloor, LocationNameList.manseFirstFloor+LocationNameList.section2c, LocationNameList.section2c, notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.manseFirstFloor+LocationNameList.section2b, LocationNameList.manseFirstFloor+LocationNameList.stairsToPit}, new ZoneButtonInfo[]{new ZoneButtonInfo(LocationNameList.pit, MapPopUpWindow.westNorthButtonIndex)});
+			case LocationNameList.stairsToPit:
+				return new MapInterior(LocationNameList.manseFirstFloor, LocationNameList.manseFirstFloor+LocationNameList.stairsToPit, "Stairs to Pit", interiorIndexZero, LocationNameList.manseFirstFloor+LocationNameList.section2b);
+			case LocationNameList.diningRoom:
+				return new MapLocation(LocationNameList.manseFirstFloor, LocationNameList.manseFirstFloor+LocationNameList.diningRoom, LocationNameList.diningRoom, notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.manseFirstFloor+LocationNameList.kitchens,LocationNameList.manseFirstFloor+LocationNameList.section1b});
 
-			case AreaNameList.section3a:
-				return new MapLocation(AreaNameList.manseFirstFloor, AreaNameList.manseFirstFloor+AreaNameList.section3a, AreaNameList.section3a, notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.manseFirstFloor+AreaNameList.section1a, AreaNameList.manseFirstFloor+AreaNameList.section3b});
-			case AreaNameList.section3b:
-				return new MapLocation(AreaNameList.manseFirstFloor, AreaNameList.manseFirstFloor+AreaNameList.section3b, AreaNameList.section3b, notFastTravelAccessible, oneInterior, new string[]{AreaNameList.manseFirstFloor+AreaNameList.section3a,AreaNameList.manseFirstFloor+AreaNameList.section3c,AreaNameList.manseFirstFloor+AreaNameList.section3d});
-			case AreaNameList.section3c:
-				return new MapLocation(AreaNameList.manseFirstFloor, AreaNameList.manseFirstFloor+AreaNameList.section3c, AreaNameList.section3c + " - Library", notFastTravelAccessible, oneInterior, new string[]{AreaNameList.manseFirstFloor+AreaNameList.section2b, AreaNameList.manseFirstFloor+AreaNameList.section3b}, new ZoneButtonInfo[]{new ZoneButtonInfo(AreaNameList.manseSecondFloor, MapPopUpWindow.westButtonIndex)}, new InteriorDisplayStatRequirements[] { new InteriorDisplayStatRequirements(PrimaryStat.Wisdom, 3)});
-			case AreaNameList.section3d:
-				return new MapInterior(AreaNameList.manseFirstFloor, AreaNameList.manseFirstFloor+AreaNameList.section3e, "Page's Room", interiorIndexZero, AreaNameList.manseFirstFloor+AreaNameList.section3b);
-			case AreaNameList.section3e:
-				return new MapInterior(AreaNameList.manseFirstFloor, AreaNameList.manseFirstFloor+AreaNameList.section3e, "Secret Room", interiorIndexZero, AreaNameList.manseFirstFloor+AreaNameList.section3c);
+			case LocationNameList.section3a:
+				return new MapLocation(LocationNameList.manseFirstFloor, LocationNameList.manseFirstFloor+LocationNameList.section3a, LocationNameList.section3a, notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.manseFirstFloor+LocationNameList.section1a, LocationNameList.manseFirstFloor+LocationNameList.section3b});
+			case LocationNameList.section3b:
+				return new MapLocation(LocationNameList.manseFirstFloor, LocationNameList.manseFirstFloor+LocationNameList.section3b, LocationNameList.section3b, notFastTravelAccessible, oneInterior, new string[]{LocationNameList.manseFirstFloor+LocationNameList.section3a,LocationNameList.manseFirstFloor+LocationNameList.section3c,LocationNameList.manseFirstFloor+LocationNameList.section3d});
+			case LocationNameList.section3c:
+				return new MapLocation(LocationNameList.manseFirstFloor, LocationNameList.manseFirstFloor+LocationNameList.section3c, LocationNameList.section3c + " - Library", notFastTravelAccessible, oneInterior, new string[]{LocationNameList.manseFirstFloor+LocationNameList.section2b, LocationNameList.manseFirstFloor+LocationNameList.section3b}, new ZoneButtonInfo[]{new ZoneButtonInfo(LocationNameList.manseSecondFloor, MapPopUpWindow.westButtonIndex)}, new InteriorDisplayStatRequirements[] { new InteriorDisplayStatRequirements(PrimaryStat.Wisdom, 3)});
+			case LocationNameList.section3d:
+				return new MapInterior(LocationNameList.manseFirstFloor, LocationNameList.manseFirstFloor+LocationNameList.section3e, "Page's Room", interiorIndexZero, LocationNameList.manseFirstFloor+LocationNameList.section3b);
+			case LocationNameList.section3e:
+				return new MapInterior(LocationNameList.manseFirstFloor, LocationNameList.manseFirstFloor+LocationNameList.section3e, "Secret Room", interiorIndexZero, LocationNameList.manseFirstFloor+LocationNameList.section3c);
 		}
 		
 		string manseSecondFloorSceneName = name;
-		switch(manseSecondFloorSceneName.Replace(AreaNameList.manseSecondFloor,""))
+		switch(manseSecondFloorSceneName.Replace(LocationNameList.manseSecondFloor,""))
 		{
-			case AreaNameList.section1a:
-				return new MapLocation(AreaNameList.manseSecondFloor, AreaNameList.manseSecondFloor+AreaNameList.section1a, AreaNameList.section1a, notFastTravelAccessible, twoInteriors, new string[]{AreaNameList.manseSecondFloor+AreaNameList.section1b, AreaNameList.manseSecondFloor+AreaNameList.section1c, AreaNameList.manseSecondFloor+AreaNameList.office, AreaNameList.manseSecondFloor+AreaNameList.section2a, AreaNameList.manseSecondFloor+AreaNameList.section3c}, new ZoneButtonInfo[]{new ZoneButtonInfo(AreaNameList.manseFirstFloor, MapPopUpWindow.eastSouthButtonIndex)});
-			case AreaNameList.section1b:
-				return new MapInterior(AreaNameList.manseSecondFloor, AreaNameList.manseSecondFloor + AreaNameList.section1b, "Director's Room", interiorIndexZero, AreaNameList.manseSecondFloor + AreaNameList.section1a);
-			case AreaNameList.section1c:
-				return new MapInterior(AreaNameList.manseSecondFloor, AreaNameList.manseSecondFloor + AreaNameList.section1b, "Tabor's Room", interiorIndexOne, AreaNameList.manseSecondFloor + AreaNameList.section1a);
-			case AreaNameList.office:
-				return new MapLocation(AreaNameList.manseSecondFloor, AreaNameList.manseSecondFloor+AreaNameList.office, AreaNameList.office, notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.manseSecondFloor+AreaNameList.section1a});
+			case LocationNameList.section1a:
+				return new MapLocation(LocationNameList.manseSecondFloor, LocationNameList.manseSecondFloor+LocationNameList.section1a, LocationNameList.section1a, notFastTravelAccessible, twoInteriors, new string[]{LocationNameList.manseSecondFloor+LocationNameList.section1b, LocationNameList.manseSecondFloor+LocationNameList.section1c, LocationNameList.manseSecondFloor+LocationNameList.office, LocationNameList.manseSecondFloor+LocationNameList.section2a, LocationNameList.manseSecondFloor+LocationNameList.section3c}, new ZoneButtonInfo[]{new ZoneButtonInfo(LocationNameList.manseFirstFloor, MapPopUpWindow.eastSouthButtonIndex)});
+			case LocationNameList.section1b:
+				return new MapInterior(LocationNameList.manseSecondFloor, LocationNameList.manseSecondFloor + LocationNameList.section1b, "Director's Room", interiorIndexZero, LocationNameList.manseSecondFloor + LocationNameList.section1a);
+			case LocationNameList.section1c:
+				return new MapInterior(LocationNameList.manseSecondFloor, LocationNameList.manseSecondFloor + LocationNameList.section1b, "Tabor's Room", interiorIndexOne, LocationNameList.manseSecondFloor + LocationNameList.section1a);
+			case LocationNameList.office:
+				return new MapLocation(LocationNameList.manseSecondFloor, LocationNameList.manseSecondFloor+LocationNameList.office, LocationNameList.office, notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.manseSecondFloor+LocationNameList.section1a});
 			
 			
-			case AreaNameList.section2a:
-				return new MapLocation(AreaNameList.manseSecondFloor, AreaNameList.manseSecondFloor+AreaNameList.section2a, AreaNameList.section2a, notFastTravelAccessible, twoInteriors, new string[]{AreaNameList.manseSecondFloor+AreaNameList.section1a, AreaNameList.manseSecondFloor+AreaNameList.section2b, AreaNameList.manseSecondFloor+AreaNameList.section2c, AreaNameList.manseSecondFloor+AreaNameList.section2d}, new ZoneButtonInfo[]{new ZoneButtonInfo(AreaNameList.manseFirstFloor, MapPopUpWindow.northWestButtonIndex)});
-			case AreaNameList.section2b:
-				return new MapLocation(AreaNameList.manseSecondFloor, AreaNameList.manseSecondFloor+AreaNameList.section2b, AreaNameList.section2b, fastTravelAccessible, zeroInteriors, new string[]{AreaNameList.manseSecondFloor+AreaNameList.section2a, AreaNameList.manseSecondFloor+AreaNameList.section3a});//, new ZoneButtonInfo[]{new ZoneButtonInfo(AreaNameList.manseFirstFloor, MapPopUpWindow.northButtonIndex)});
-			case AreaNameList.section2c:
-				return new MapInterior(AreaNameList.manseSecondFloor, AreaNameList.manseSecondFloor + AreaNameList.section2c, "Child's Room 1", interiorIndexZero, AreaNameList.manseSecondFloor + AreaNameList.section2a);
-			case AreaNameList.section2d:
-				return new MapInterior(AreaNameList.manseSecondFloor, AreaNameList.manseSecondFloor + AreaNameList.section2d, "Child's Room 2", interiorIndexOne, AreaNameList.manseSecondFloor + AreaNameList.section2a);
+			case LocationNameList.section2a:
+				return new MapLocation(LocationNameList.manseSecondFloor, LocationNameList.manseSecondFloor+LocationNameList.section2a, LocationNameList.section2a, notFastTravelAccessible, twoInteriors, new string[]{LocationNameList.manseSecondFloor+LocationNameList.section1a, LocationNameList.manseSecondFloor+LocationNameList.section2b, LocationNameList.manseSecondFloor+LocationNameList.section2c, LocationNameList.manseSecondFloor+LocationNameList.section2d}, new ZoneButtonInfo[]{new ZoneButtonInfo(LocationNameList.manseFirstFloor, MapPopUpWindow.northWestButtonIndex)});
+			case LocationNameList.section2b:
+				return new MapLocation(LocationNameList.manseSecondFloor, LocationNameList.manseSecondFloor+LocationNameList.section2b, LocationNameList.section2b, fastTravelAccessible, zeroInteriors, new string[]{LocationNameList.manseSecondFloor+LocationNameList.section2a, LocationNameList.manseSecondFloor+LocationNameList.section3a});//, new ZoneButtonInfo[]{new ZoneButtonInfo(LocationNameList.manseFirstFloor, MapPopUpWindow.northButtonIndex)});
+			case LocationNameList.section2c:
+				return new MapInterior(LocationNameList.manseSecondFloor, LocationNameList.manseSecondFloor + LocationNameList.section2c, "Child's Room 1", interiorIndexZero, LocationNameList.manseSecondFloor + LocationNameList.section2a);
+			case LocationNameList.section2d:
+				return new MapInterior(LocationNameList.manseSecondFloor, LocationNameList.manseSecondFloor + LocationNameList.section2d, "Child's Room 2", interiorIndexOne, LocationNameList.manseSecondFloor + LocationNameList.section2a);
 			
-			case AreaNameList.section3a:
-				return new MapLocation(AreaNameList.manseSecondFloor, AreaNameList.manseSecondFloor+AreaNameList.section3a, AreaNameList.section3a, notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.manseSecondFloor+AreaNameList.section2b, AreaNameList.manseSecondFloor+AreaNameList.section3b, AreaNameList.manseSecondFloor+AreaNameList.section3c});
-			case AreaNameList.section3b:
-				return new MapLocation(AreaNameList.manseSecondFloor, AreaNameList.manseSecondFloor+AreaNameList.section3b, AreaNameList.section3b, notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.manseSecondFloor+AreaNameList.section3a, AreaNameList.manseSecondFloor+AreaNameList.stockroom});
-			case AreaNameList.section3c:
-				return new MapLocation(AreaNameList.manseSecondFloor, AreaNameList.manseSecondFloor+AreaNameList.section3c, AreaNameList.section3c, notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.manseSecondFloor+AreaNameList.section3a, AreaNameList.manseSecondFloor+AreaNameList.stockroom, AreaNameList.manseSecondFloor+AreaNameList.section1a});
-			case AreaNameList.stockroom:
-				return new MapLocation(AreaNameList.manseSecondFloor, AreaNameList.manseSecondFloor+AreaNameList.stockroom, AreaNameList.stockroom, notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.manseSecondFloor+AreaNameList.section3b, AreaNameList.manseSecondFloor+AreaNameList.section3c}, new ZoneButtonInfo[]{new ZoneButtonInfo(AreaNameList.manseFirstFloor, MapPopUpWindow.southButtonIndex)});
+			case LocationNameList.section3a:
+				return new MapLocation(LocationNameList.manseSecondFloor, LocationNameList.manseSecondFloor+LocationNameList.section3a, LocationNameList.section3a, notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.manseSecondFloor+LocationNameList.section2b, LocationNameList.manseSecondFloor+LocationNameList.section3b, LocationNameList.manseSecondFloor+LocationNameList.section3c});
+			case LocationNameList.section3b:
+				return new MapLocation(LocationNameList.manseSecondFloor, LocationNameList.manseSecondFloor+LocationNameList.section3b, LocationNameList.section3b, notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.manseSecondFloor+LocationNameList.section3a, LocationNameList.manseSecondFloor+LocationNameList.stockroom});
+			case LocationNameList.section3c:
+				return new MapLocation(LocationNameList.manseSecondFloor, LocationNameList.manseSecondFloor+LocationNameList.section3c, LocationNameList.section3c, notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.manseSecondFloor+LocationNameList.section3a, LocationNameList.manseSecondFloor+LocationNameList.stockroom, LocationNameList.manseSecondFloor+LocationNameList.section1a});
+			case LocationNameList.stockroom:
+				return new MapLocation(LocationNameList.manseSecondFloor, LocationNameList.manseSecondFloor+LocationNameList.stockroom, LocationNameList.stockroom, notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.manseSecondFloor+LocationNameList.section3b, LocationNameList.manseSecondFloor+LocationNameList.section3c}, new ZoneButtonInfo[]{new ZoneButtonInfo(LocationNameList.manseFirstFloor, MapPopUpWindow.southButtonIndex)});
 		}
 		
 		string pitSceneName = name;
-		switch(pitSceneName.Replace(AreaNameList.pit,""))
+		switch(pitSceneName.Replace(LocationNameList.pit,""))
 		{
-			case AreaNameList.section1a:
-				return new MapLocation(AreaNameList.pit, AreaNameList.pit+AreaNameList.section1a, AreaNameList.section1a, notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.pit+AreaNameList.section1b}, new ZoneButtonInfo[]{new ZoneButtonInfo(AreaNameList.manseFirstFloor, MapPopUpWindow.northWestButtonIndex)});
-			case AreaNameList.section1b:
-				return new MapLocation(AreaNameList.pit, AreaNameList.pit+AreaNameList.section1b, AreaNameList.section1b, notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.pit+AreaNameList.section1a}, new ZoneButtonInfo[]{new ZoneButtonInfo(AreaNameList.manseFirstFloor, MapPopUpWindow.westNorthButtonIndex)});
-			case AreaNameList.section2a:
-				return new MapLocation(AreaNameList.pit, AreaNameList.pit+AreaNameList.section2a, AreaNameList.section2a, notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.pit+AreaNameList.section1b,AreaNameList.pit+AreaNameList.section2b,AreaNameList.pit+AreaNameList.section2c});
-			case AreaNameList.section2b:
-				return new MapLocation(AreaNameList.pit, AreaNameList.pit+AreaNameList.section2b, AreaNameList.section2b, notFastTravelAccessible, oneInterior, new string[]{AreaNameList.pit+AreaNameList.section2a, AreaNameList.pit+AreaNameList.section2d});
-			case AreaNameList.section2c:
-				return new MapLocation(AreaNameList.pit, AreaNameList.pit+AreaNameList.section2c, AreaNameList.section2c, notFastTravelAccessible, zeroInteriors, new string[]{AreaNameList.pit+AreaNameList.section2a});
-			case AreaNameList.section2d:
-				return new MapInterior(AreaNameList.pit, AreaNameList.pit+AreaNameList.section2d, "Trash Chute", interiorIndexZero, AreaNameList.pit+AreaNameList.section2b);
+			case LocationNameList.section1a:
+				return new MapLocation(LocationNameList.pit, LocationNameList.pit+LocationNameList.section1a, LocationNameList.section1a, notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.pit+LocationNameList.section1b}, new ZoneButtonInfo[]{new ZoneButtonInfo(LocationNameList.manseFirstFloor, MapPopUpWindow.northWestButtonIndex)});
+			case LocationNameList.section1b:
+				return new MapLocation(LocationNameList.pit, LocationNameList.pit+LocationNameList.section1b, LocationNameList.section1b, notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.pit+LocationNameList.section1a}, new ZoneButtonInfo[]{new ZoneButtonInfo(LocationNameList.manseFirstFloor, MapPopUpWindow.westNorthButtonIndex)});
+			case LocationNameList.section2a:
+				return new MapLocation(LocationNameList.pit, LocationNameList.pit+LocationNameList.section2a, LocationNameList.section2a, notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.pit+LocationNameList.section1b,LocationNameList.pit+LocationNameList.section2b,LocationNameList.pit+LocationNameList.section2c});
+			case LocationNameList.section2b:
+				return new MapLocation(LocationNameList.pit, LocationNameList.pit+LocationNameList.section2b, LocationNameList.section2b, notFastTravelAccessible, oneInterior, new string[]{LocationNameList.pit+LocationNameList.section2a, LocationNameList.pit+LocationNameList.section2d});
+			case LocationNameList.section2c:
+				return new MapLocation(LocationNameList.pit, LocationNameList.pit+LocationNameList.section2c, LocationNameList.section2c, notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.pit+LocationNameList.section2a});
+			case LocationNameList.section2d:
+				return new MapInterior(LocationNameList.pit, LocationNameList.pit+LocationNameList.section2d, "Trash Chute", interiorIndexZero, LocationNameList.pit+LocationNameList.section2b);
 			
 			default:
 				return new MapLocation(name, name, name, notFastTravelAccessible, zeroInteriors, new string[0]);
@@ -393,9 +393,9 @@ public static class MapObjectList
 	{
 		ArrayList discoveredZones = new ArrayList();
 		
-		if(MapZone.hasBeenDiscovered(AreaNameList.camp))
+		if(MapZone.hasBeenDiscovered(LocationNameList.camp))
 		{
-			discoveredZones.Add(AreaNameList.camp);
+			discoveredZones.Add(LocationNameList.camp);
 		}
 		
 		return discoveredZones;

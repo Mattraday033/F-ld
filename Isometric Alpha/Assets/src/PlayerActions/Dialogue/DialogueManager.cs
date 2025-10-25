@@ -9,10 +9,14 @@ using System.Linq;
 
 public class DialogueManager : MonoBehaviour
 {
-	private const int activateQuestStepHaltNotificationBoolIndex = 2;
-	private const int finishQuestHaltNotificationBoolIndex = 3;
+    private const int firstArgIndex = 0;
+    private const int secondArgIndex = 1;
+    private const int thirdArgIndex = 2;
+    private const int fourthArgIndex = 3;
 
-	private List<Choice> currentChoiceInkObjects;
+    private string quantitySymbol = " x";
+
+    private List<Choice> currentChoiceInkObjects;
 
     [Header("Cameras")]
 
@@ -156,6 +160,14 @@ public class DialogueManager : MonoBehaviour
 	{
 		//Flags.printAll();
 
+        if(dialogue == null)
+        {
+            Debug.LogError("dialogue == null");
+        } else if(dialogue.inkJSON == null)
+        {
+            Debug.LogError("dialogue.inkJSON == null");
+        }
+
 		if (RevealManager.currentlyRevealed)
 		{
 			returnToRevealAfterDialogue = true;
@@ -176,7 +188,7 @@ public class DialogueManager : MonoBehaviour
 
         NPCCombatInfo combatInfo = currentDialogue.npcCombatInfo;
 
-		nameText = DialogueList.scrubNameOfEndNumbers(currentDialogue.names[1]) + ":";
+		nameText = DialogueList.scrubNameOfEndNumbers(currentDialogue.names[Dialogue.mainNPCIndex]) + ":";
 		currentStory = addAllVariables(new Story(dialogue.inkJSON.text), dialogue.variableSources);
 
 		storyName = dialogue.inkJSON.name;
@@ -184,7 +196,7 @@ public class DialogueManager : MonoBehaviour
 
         if (currentDialogue.isVaultable)
         {
-            VaultableObject vaultableObject = currentDialogue.cameraFoci[1].GetComponent<VaultableObject>();
+            VaultableObject vaultableObject = currentDialogue.cameraFoci[Dialogue.mainNPCIndex].GetComponent<VaultableObject>();
 
             if (currentStory.variablesState["objectName"] != null)
             {
@@ -298,29 +310,6 @@ public class DialogueManager : MonoBehaviour
 		}
 	}
 
-	private IEnumerator waitToSpawnPopUp(PopUpButton popUpButton)
-	{
-		if (hasQueuedPopUpCoroutine)
-		{
-			yield break;
-		}
-		else
-		{
-			hasQueuedPopUpCoroutine = true;
-		}
-
-		while (PlayerOOCStateManager.currentActivity != OOCActivity.walking)
-		{
-			yield return null;
-		}
-
-		popUpButton.spawnPopUp();
-
-		PlayerOOCStateManager.setCurrentActivity(OOCActivity.inUI);
-
-		hasQueuedPopUpCoroutine = false;
-	}
-
 	public void makeChoice(int choiceIndex)
 	{
 		if (currentChoiceInkObjects == null || choiceIndex >= currentChoiceInkObjects.Count)
@@ -396,8 +385,7 @@ public class DialogueManager : MonoBehaviour
 
     public void findNPCGameObject()
     {
-        DialogueTrigger npcDialogueTrigger;
-        Dialogue npcDialogue;
+        IDialogueParticipant npcDialogueTrigger;
 
         currentDialogue.names[0] = PartyManager.getPlayerStats().getName();
         currentDialogue.cameraFoci[0] = PlayerMovement.getInstance().gameObject;
@@ -406,13 +394,16 @@ public class DialogueManager : MonoBehaviour
         {
             foreach (Transform child in AreaManager.getNPCParent())
             {
-                npcDialogueTrigger = child.GetComponent<DialogueTrigger>();
+                if(child.gameObject.name.Contains(NPCSpawnDetails.extraSpaceNameSuffix))
+                {
+                    continue;
+                }
+
+                npcDialogueTrigger = child.GetComponent<IDialogueParticipant>();
 
                 if (npcDialogueTrigger != null)
                 {
-                    npcDialogue = npcDialogueTrigger.dialogue;
-
-                    if (npcDialogue != null && currentDialogue.names[nameIndex].Equals(npcDialogue.getMainNPCName()))
+                    if (currentDialogue.names[nameIndex].Equals(npcDialogueTrigger.getMainNPCName()))
                     {
                         currentDialogue.names[nameIndex] = currentDialogue.names[nameIndex];
                         currentDialogue.cameraFoci[nameIndex] = child.gameObject;
@@ -431,7 +422,6 @@ public class DialogueManager : MonoBehaviour
     {
 
         string newLine;
-        string[] args = new string[0];
         Item itemToGive;
         string partyMemberName = "";
         string tutorialKey = "";
@@ -471,9 +461,7 @@ public class DialogueManager : MonoBehaviour
 
                 case "deactivate":
 
-                    buffer = buffer.ToLower().Replace("deactivate(", "").Replace(")", "").Replace(" ", "").Replace("\n", "").Replace("\r", "");
-
-                    int i = int.Parse(buffer);
+                    int i = getArgumentInt(buffer, firstArgIndex);
 
                     currentDialogue.cameraFoci[i].SetActive(false);
 
@@ -485,12 +473,10 @@ public class DialogueManager : MonoBehaviour
 
                     //activateQuestStep(string questTitle, int questStepIndex)
                     //activateQuestStep(string questTitle, int questStepIndex, bool haltNotificationQueue)
-                    args = buffer.Split("(")[1].Split(")")[0].Split(",");
+                    string questTitle3 = getArgument(buffer);
+                    int questStepIndex3 = getArgumentInt(buffer, secondArgIndex);
 
-                    string questTitle3 = args[0];
-                    int questStepIndex3 = int.Parse(args[1]);
-
-                    checkForHaltNotificationBoolArg(args, activateQuestStepHaltNotificationBoolIndex);
+                    checkForHaltNotificationBoolArg(buffer, thirdArgIndex);
 
                     QuestList.activateQuestStep(questTitle3, questStepIndex3);
 
@@ -505,13 +491,12 @@ public class DialogueManager : MonoBehaviour
 
                     //finishQuest(string questTitle, bool succeeded, int questStepIndex) if you're activating a quest step
                     //finishQuest(string questTitle, bool succeeded, int questStepIndex, bool haltNotificationQueue)
-                    args = buffer.Split("(")[1].Split(")")[0].Split(",");
 
-                    string questTitle = args[0];
-                    bool questSuccessful = bool.Parse(args[1]);
-                    int finalQuestStep = int.Parse(args[2]);
+                    string questTitle = getArgument(buffer);
+                    bool questSuccessful = getArgumentBool(buffer, secondArgIndex);
+                    int finalQuestStep = getArgumentInt(buffer, thirdArgIndex);
 
-                    checkForHaltNotificationBoolArg(args, finishQuestHaltNotificationBoolIndex);
+                    checkForHaltNotificationBoolArg(buffer, fourthArgIndex);
 
                     QuestList.finishQuest(questTitle, finalQuestStep, questSuccessful);
 
@@ -523,9 +508,7 @@ public class DialogueManager : MonoBehaviour
 
                 case "activate":
 
-                    buffer = buffer.ToLower().Replace("activate(", "").Replace(")", "").Replace(" ", "");
-
-                    int j = int.Parse(buffer);
+                    int j = getArgumentInt(buffer, firstArgIndex);
 
                     NPCSpawnChecker npcSpawnChecker = currentDialogue.cameraFoci[j].GetComponent<NPCSpawnChecker>();
 
@@ -543,9 +526,7 @@ public class DialogueManager : MonoBehaviour
                 case "changecamtarget":
                 case "changecameratarget":
 
-                    buffer = buffer.ToLower().Replace("changecamtarget(", "").Replace(")", "").Replace(" ", "");
-
-                    int k = int.Parse(buffer);
+                    int k = getArgumentInt(buffer, firstArgIndex);
 
                     if (k == 0)
                     {
@@ -562,7 +543,7 @@ public class DialogueManager : MonoBehaviour
 
                 case "settotrue":
 
-                    buffer = buffer.Replace("setToTrue(", "").Replace(")", "").Replace(" ", "").Replace("\n", "");
+                    buffer = getArgument(buffer);
 
                     Flags.setFlag(buffer, true);
 
@@ -577,9 +558,23 @@ public class DialogueManager : MonoBehaviour
 
                 case "settofalse":
 
-                    buffer = buffer.Replace("setToFalse(", "").Replace(")", "").Replace(" ", "").Replace("\n", "");
+                    buffer = getArgument(buffer);
 
                     Flags.setFlag(buffer, false);
+
+                    if (currentStory.variablesState.Contains(buffer))
+                    {
+                        currentStory.variablesState[buffer] = false;
+                    }
+                    continueStory();
+
+                    break;
+
+                case "disablesecretdoor":
+
+                    string secretDoorKey = getArgument(buffer);
+
+                    SecretDoorFlags.addSecretDoorFlag(secretDoorKey);
 
                     continueStory();
 
@@ -607,7 +602,7 @@ public class DialogueManager : MonoBehaviour
                 case "givecoin":
                 case "givecoins":
 
-                    string coinsToGive = buffer.Split("(")[1].Split(")")[0];
+                    string coinsToGive = getArgument(buffer);
 
                     Purse.addCoins(coinsToGive);
 
@@ -620,7 +615,7 @@ public class DialogueManager : MonoBehaviour
                 case "takecoin":
                 case "takecoins":
 
-                    string coinsToTake = buffer.Split("(")[1].Split(")")[0];
+                    string coinsToTake = getArgument(buffer);
 
                     Purse.removeCoins(coinsToTake);
 
@@ -632,56 +627,27 @@ public class DialogueManager : MonoBehaviour
 
                 case "giveitem":
 
-                    args = buffer.Split("(")[1].Split(")")[0].Split(",");
-
-                    itemToGive = ItemList.getItem(args[0], args[1], args[2]);
-
-                    Inventory.addItem(itemToGive);
-
-                    newLine = itemToGive.getKey() + " x" + itemToGive.getQuantity();
-
-                    currentConversation.addObtainedLine(newLine);
+                    givePlayerItemFromDialogue(buffer);
 
                     break;
 
                 case "giveitems":
 
-                    string[] argGroups = buffer.Split("(")[1].Split(")")[0].Split("|");
+                    string[] argGroups = getAllArgumentGroups(buffer);
 
                     foreach (string argGroup in argGroups)
                     {
-
-                        args = argGroup.Split(",");
-
-                        itemToGive = ItemList.getItem(args[0], args[1], args[2]);
-
-                        Inventory.addItem(itemToGive);
-
-                        newLine = itemToGive.getKey() + " x" + itemToGive.getQuantity();
-
-                        currentConversation.addObtainedLine(newLine);
+                        givePlayerItemFromDialogue(argGroup);
                     }
-
-                    //commented out to test if the \n in the loop was sufficient
-                    //dialogueText.text += "\n"; // '\n' at end to simulate coming from ink. Ink has \n at the end of all dialogue 
 
                     break;
 
                 case "takeallofitem":
 
-                    string itemName14 = buffer.Split("(")[1].Split(")")[0];
+                    string itemName = getArgument(buffer);
                     //Item(string key, string loreDescription, string type, string subtype)
 
-                    int quantity = 0;
-
-                    try
-                    {
-                        quantity += Inventory.removeItem(itemName14).getQuantity();
-                    }
-                    catch (IOException e)
-                    {
-
-                    }
+                    int quantity = Inventory.removeItem(itemName).getQuantity();
 
                     List<PartyMember> partyMembers = PartyManager.getAllPartyMembers();
 
@@ -691,7 +657,7 @@ public class DialogueManager : MonoBehaviour
 
                         for (int index = 0; index < EquippedItems.totalEquipmentSlots; index++)
                         {
-                            if (equippedItems.getItemInSlot(index) != null && equippedItems.getItemInSlot(index).getKey().Equals(itemName14))
+                            if (equippedItems.getItemInSlot(index) != null && equippedItems.getItemInSlot(index).getKey().Equals(itemName))
                             {
                                 equippedItems.unequipItem(index);
                                 quantity++;
@@ -699,21 +665,21 @@ public class DialogueManager : MonoBehaviour
                         }
                     }
 
-                    newLine = itemName14 + " x" + quantity;
+                    newLine = itemName + quantitySymbol + quantity;
 
                     currentConversation.addRemovedLine(newLine);
 
                     break;
 
-                case "takejunk":
-
-
-                    args = buffer.Split("(")[1].Split(")")[0].Split(",");
+                case "takeitem":
                     //Item(string key, string loreDescription, string type, string subtype)
 
-                    Inventory.removeItem(args[0], int.Parse(args[1]), State.junkPocket);
+                    string itemKey = getArgument(buffer);
+                    int itemQuantity = getArgumentInt(buffer, secondArgIndex);
 
-                    newLine = args[0] + " x" + int.Parse(args[1]);
+                    Inventory.removeItem(itemKey, itemQuantity);
+
+                    newLine = itemKey + quantitySymbol + itemQuantity;
 
                     currentConversation.addRemovedLine(newLine);
 
@@ -721,7 +687,7 @@ public class DialogueManager : MonoBehaviour
 
                 case "addxp":
 
-                    string earnedXP = buffer.Split("(")[1].Split(")")[0];
+                    string earnedXP = getArgument(buffer);
 
                     PartyManager.addXP(earnedXP);
                     LessonUIManager.lastEarnedXPBonus = int.Parse(earnedXP);
@@ -734,57 +700,14 @@ public class DialogueManager : MonoBehaviour
 
                 case "searchinventoryfor":
 
-                    args = buffer.Split("(")[1].Split(")")[0].Split(",");
-
-                    //args needs to include case sensitive name of flag in dialogue file to update 
-                    //so it knows whether the player has the item you're searching for or not
-                    //args should be in order: string flagName, string key || or || string flagName, string subtype, int ID
-
-                    if (args.Length == 2)
-                    {
-
-
-
-                        bool flagStatus = Inventory.inventoryContainsItem(args[1]) ||
-                                                                 Inventory.equipmentContainsItem(args[1]);
-                        Flags.setFlag(args[0], flagStatus);
-                        currentStory.variablesState[args[0]] = flagStatus;
-                    }
-                    else if (args.Length == 3)
-                    {
-                        bool flagStatus = Inventory.inventoryContainsItem(args[1], int.Parse(args[2]));
-                        Flags.setFlag(args[0], flagStatus);
-                        currentStory.variablesState[args[0]] = flagStatus;
-                        //only for keys/questitems which aren't equippable
-                        //so don't need to check equipmentContainsItem()
-                    }
-
-                    continueStory();
-
-                    break;
-
-                case "searchjunkfor":
-
-
-                    args = buffer.Split("(")[1].Split(")")[0].Split(",");
-
-                    //args needs to include case sensitive name of flag in dialogue file to update 
-                    //so it knows whether the player has the item you're searching for or not
-                    //args should be in order: string flagName, string key || or  || string flagName, string subtype, int ID
-                    if (args.Length == 2)
-                    {
-                        currentStory.variablesState[args[0]] = Inventory.pocketContainsItem(args[1], State.junkPocket);
-                    }
-                    else if (args.Length == 3)
-                    {
-                        currentStory.variablesState[args[0]] = Inventory.pocketContainsItem(args[1], int.Parse(args[2]), State.junkPocket);
-                    }
+                    playerHasItem(buffer);
 
                     continueStory();
 
                     break;
 
                 case "healparty":
+
                     PartyManager.healFullAllPartyMembers();
 
                     continueStory();
@@ -811,19 +734,19 @@ public class DialogueManager : MonoBehaviour
                     return;
 
                 case "fadetoblack":
-                    args = buffer.Split("(")[1].Split(")")[0].Split(",");
+                    string[] fadeToBlackArgs = getAllArgs(buffer);
 
                     bool setDialogueUIActiveAfterFadeIn = true;
                     continueAfterTransparent = true;
 
-                    if (args.Length > 0 && args[0].Length > 0)
+                    if (fadeToBlackArgs.Length > 0 && fadeToBlackArgs[firstArgIndex].Length > 0)
                     {
-                        setDialogueUIActiveAfterFadeIn = bool.Parse(args[0]);
+                        setDialogueUIActiveAfterFadeIn = bool.Parse(fadeToBlackArgs[firstArgIndex]);
                     }
 
-                    if (args.Length > 1 && args[1].Length > 1)
+                    if (fadeToBlackArgs.Length > 1 && fadeToBlackArgs[secondArgIndex].Length > 1)
                     {
-                        continueAfterTransparent = bool.Parse(args[1]);
+                        continueAfterTransparent = bool.Parse(fadeToBlackArgs[secondArgIndex]);
                     }
 
                     setCameraToFadeSpeed();
@@ -836,27 +759,28 @@ public class DialogueManager : MonoBehaviour
                     StartCoroutine(handleDialogueUIDuringFadeOut(setDialogueUIActiveAfterFadeIn, continueAfterTransparent));
 
                     return;
-                case "fadebackin": //fadeBackIn(int framesToWait), fadeBackIn(int framesToWait, bool continueAfterTransparent)
+                case "fadebackin": //fadeBackIn(int framesToWait), 
+                                   //fadeBackIn(int framesToWait, bool continueAfterTransparent)
 
-                    args = buffer.Split("(")[1].Split(")")[0].Split(",");
+                    string[] fadeBackInArgs = getAllArgs(buffer);
 
 
-                    if (args.Length == 0 || args[0] == "")
+                    if (fadeBackInArgs.Length == 0 || fadeBackInArgs[firstArgIndex] == "")
                     {
                         framesToWait = 0;
                     }
                     else
                     {
-                        framesToWait = int.Parse(args[0]);
+                        framesToWait = int.Parse(fadeBackInArgs[firstArgIndex]);
                     }
 
                     frames = 0;
 
                     continueAfterTransparent = false;
 
-                    if (args.Length > 1)
+                    if (fadeBackInArgs.Length > 1)
                     {
-                        continueAfterTransparent = bool.Parse(args[1]);
+                        continueAfterTransparent = bool.Parse(fadeBackInArgs[secondArgIndex]);
                     }
 
                     StartCoroutine(fadeBackIn(continueAfterTransparent));
@@ -868,22 +792,19 @@ public class DialogueManager : MonoBehaviour
                 case "moveplayer":
                 case "moveplayerpos":
                 case "moveplayerposition":
-                case "movelocalpos":
-                case "movelocalposition":
-                case "movetolocalpos":
-                case "movetolocalposition":
                 case "changepos":
                 case "changeposition":
                 case "changeplayerpos":
                 case "changeplayerposition":
-                case "changelocalpos":
-                case "changelocalposition":
 
-                    args = buffer.Split("(")[1].Split(")")[0].Split(",");
+                    Debug.LogError("changePosition section changed to use cells and not floats");
 
-                    Vector3 newLocalPos = new Vector3(float.Parse(args[0].Replace("f", "")), float.Parse(args[1].Replace("f", "")), 0);
+                    int xPos = getArgumentInt(buffer, firstArgIndex);
+                    int yPos = getArgumentInt(buffer, secondArgIndex);
 
-                    PlayerMovement.getInstance().gameObject.transform.localPosition = newLocalPos;
+                    Vector3Int targetCellCoords = new Vector3Int(xPos, yPos);
+
+                    PlayerMovement.getInstance().gameObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(targetCellCoords);
 
                     Helpers.updateColliderPosition(PlayerMovement.getInstance().gameObject.transform);
 
@@ -897,7 +818,7 @@ public class DialogueManager : MonoBehaviour
                 case "changefacing":
                 case "changeplayerfacing":
 
-                    string facingArgs = buffer.Split("(")[1].Split(")")[0];
+                    string facingArgs = getArgument(buffer);
 
                     switch (facingArgs.ToLower())
                     {
@@ -927,10 +848,8 @@ public class DialogueManager : MonoBehaviour
 
                 case "adjustgridsquare":
 
-                    args = buffer.Split("(")[1].Split(")")[0].Split(",");
-
                     Facing facingDirection = State.playerFacing.getFacing();
-                    int adjustmentMagnitude = int.Parse(args[0]) + 1;
+                    int adjustmentMagnitude = getArgumentInt(buffer, firstArgIndex) + 1;
                     Vector3Int gridSquareAdjustment = Vector3Int.zero;
 
                     if (facingDirection == Facing.NorthEast)
@@ -991,7 +910,7 @@ public class DialogueManager : MonoBehaviour
                     EscapeStack.escapeAll();
 
                     ShopPopUpButton shopPopUpButton = new ShopPopUpButton();
-                    Shopkeeper shopkeeper = currentDialogue.cameraFoci[1].GetComponent<Shopkeeper>();
+                    Shopkeeper shopkeeper = currentDialogue.cameraFoci[Dialogue.mainNPCIndex].GetComponent<Shopkeeper>();
 
                     endDialogue();
 
@@ -1002,7 +921,7 @@ public class DialogueManager : MonoBehaviour
 
                 case "kill":
 
-                    int deadNameIndex = int.Parse(buffer.Split("(")[1].Split(")")[0]);
+                    int deadNameIndex = getArgumentInt(buffer, firstArgIndex);
 
                     DeathFlagManager.addName(currentDialogue.names[deadNameIndex]);
 
@@ -1014,7 +933,7 @@ public class DialogueManager : MonoBehaviour
 
                 case "adddeathflag":
 
-                    string deadName = buffer.Split("(")[1].Split(")")[0];
+                    string deadName = getArgument(buffer);
 
                     DeathFlagManager.addName(deadName);
 
@@ -1037,13 +956,9 @@ public class DialogueManager : MonoBehaviour
 
                 // break;
 
-                case "addtopartywithoutpopup":
+                case "addtopartywithoutpopup":          
 
-                    args = buffer.Split("(")[1].Split(")")[0].Split(",");           //use to be index of party member in the partyMember arrayList in State
-                                                                                    //but after swapping to a dictionary that is depricated. Now uses same index
-                                                                                    //as changeCamTarget
-
-                    partyMemberName = currentDialogue.names[int.Parse(args[0])];
+                    partyMemberName = currentDialogue.names[getArgumentInt(buffer, firstArgIndex)];
 
                     PartyManager.getPartyMember(partyMemberName).canJoinParty = true;
 
@@ -1069,7 +984,7 @@ public class DialogueManager : MonoBehaviour
 
                 case "removefromparty":
 
-                    int nameIndex2 = int.Parse(buffer.Split("(")[1].Split(")")[0]);
+                    int nameIndex2 = getArgumentInt(buffer, firstArgIndex);
 
                     partyMemberName = currentDialogue.names[nameIndex2];
 
@@ -1087,7 +1002,7 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case "opengate":
 
-                    string gateKey = buffer.Split("(")[1].Split(")")[0].Split(",")[0];
+                    string gateKey = getArgument(buffer);
 
                     if (gateKey.Length <= 0)
                     {
@@ -1103,22 +1018,14 @@ public class DialogueManager : MonoBehaviour
                 case "swapinkfile": //swapInkFiles(int secondaryInkFileIndex, string startingBoolName)
                 case "swapinkfiles": //swapInkFiles(int secondaryInkFileIndex, string startingBoolName, bool safeToSwapDialogueObjects)
 
-                    args = buffer.Split("(")[1].Split(")")[0].Split(",");
-
-                    int secondaryInkFileIndex = int.Parse(args[0]);
-                    string startingBoolName = args[1]; //if you want to start at the correct knot, 
+                    int secondaryInkFileIndex = getArgumentInt(buffer, firstArgIndex);
+                    string startingBoolName = getArgument(buffer, secondArgIndex);
+                                                      //if you want to start at the correct knot, 
                                                        //you need to create/give a bool that tells 
                                                        //the dialogue at the start to move to that 
                                                        //knot. see the transition between MinersDialogue
                                                        // and MarcosDialoge in MineLvl_3-Miners Camp
-                    bool safeToSwapDialogueObjects = false;
-
-                    if (args.Length == 3)
-                    {
-                        safeToSwapDialogueObjects = bool.Parse(buffer.Split("(")[1].Split(")")[0].Split(",")[2]);
-                    }
-
-
+                    bool safeToSwapDialogueObjects = getArgumentBool(buffer, thirdArgIndex);
 
                     currentStory = new Story(getSecondaryStoryJSON(secondaryInkFileIndex).text);
 
@@ -1150,8 +1057,7 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case "entercombat":
 
-                    args = buffer.Split("(")[1].Split(")")[0].Split(",");
-                    int enemyPackInfoIndex = int.Parse(args[0]);
+                    int enemyPackInfoIndex = getArgumentInt(buffer, firstArgIndex);
 
                     NPCCombatInfo npcCombatInfo = currentDialogue.npcCombatInfo;
 
@@ -1179,9 +1085,9 @@ public class DialogueManager : MonoBehaviour
 
                     endDialogue();
 
-                    if (args.Length > 1)
+                    if (getAllArgs(buffer).Length > 1)
                     {
-                        State.dialogueUponSceneLoadKey = args[1];
+                        State.dialogueUponSceneLoadKey = getArgument(buffer, secondArgIndex);
                     }
 
                     State.enteredCombatFromDialogue = true;
@@ -1190,7 +1096,7 @@ public class DialogueManager : MonoBehaviour
                     break;
 
                 case "setareatohostile":
-                    string sceneToBecomeHostile = buffer.Split("(")[1].Split(")")[0].Split(",")[0];
+                    string sceneToBecomeHostile = getArgument(buffer);
 
                     AreaList.setAreaToHostile(sceneToBecomeHostile);
 
@@ -1198,7 +1104,7 @@ public class DialogueManager : MonoBehaviour
                     break;
 
                 case "setareatopassive":
-                    string sceneToBecomePassive = buffer.Split("(")[1].Split(")")[0].Split(",")[0];
+                    string sceneToBecomePassive = getArgument(buffer);
 
                     AreaList.setAreaToPassive(sceneToBecomePassive);
 
@@ -1214,7 +1120,7 @@ public class DialogueManager : MonoBehaviour
 
                 case "starttutorial":
 
-                    tutorialKey = buffer.Split("(")[1].Split(")")[0];
+                    tutorialKey = getArgument(buffer);
 
                     if (tutorialWaitCoroutine != null)
                     {
@@ -1231,7 +1137,7 @@ public class DialogueManager : MonoBehaviour
 
                 case "startuitutorial": //start UI tutorial
 
-                    tutorialKey = buffer.Split("(")[1].Split(")")[0];
+                    tutorialKey = getArgument(buffer);
 
                     if (tutorialWaitCoroutine != null)
                     {
@@ -1253,7 +1159,7 @@ public class DialogueManager : MonoBehaviour
                 case "setpromptmessage":
                 case "createpromptmessage":
 
-                    string promptMessage = buffer.Split("(")[1].Split(")")[0];
+                    string promptMessage = getArgument(buffer);
 
                     PlayerMovement.createCustomButtonPrompt(promptMessage);
                     WASDPromptStepCounter.createStepCounter();
@@ -1303,32 +1209,133 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-	private TextAsset getSecondaryStoryJSON(int secondaryInkFileIndex)
-	{
-		if (currentDialogue.secondaryInkJSONs == null || currentDialogue.secondaryInkJSONs.Length <= secondaryInkFileIndex || currentDialogue.secondaryInkJSONs[secondaryInkFileIndex] == null)
-		{
-			GameObject tabor = currentDialogue.cameraFoci[1];
-			DialogueTrigger trigger = tabor.GetComponent<DialogueTrigger>();
-			Dialogue dialogue = trigger.getDialogue();
-			TextAsset[] secondaryInkJSONs = dialogue.secondaryInkJSONs;
+    private void playerHasItem(string buffer)
+    {
+        string[] args = getAllArgs(buffer);
 
-			return secondaryInkJSONs[secondaryInkFileIndex];
-		}
-		else
-		{
-			return currentDialogue.secondaryInkJSONs[secondaryInkFileIndex];
-		}
-	}
+        bool flagStatus = false;
 
-	private void checkForHaltNotificationBoolArg(string[] args, int boolIndex)
+        if (args.Length == 2)
+        {
+            string itemName = args[secondArgIndex];
+            flagStatus = Inventory.inventoryContainsItem(itemName) ||
+                         Inventory.equipmentContainsItem(itemName) ||
+                         Inventory.junkContainsItem(itemName);
+        }
+        else if (args.Length == 3)
+        {
+            string itemSubtype = args[secondArgIndex];
+            string itemID = args[thirdArgIndex];
+            flagStatus = Inventory.inventoryContainsItem(itemSubtype, int.Parse(itemID));
+        }
+
+        string flagName = args[firstArgIndex];
+
+        Flags.setFlag(flagName, flagStatus);
+        currentStory.variablesState[flagName] = flagStatus;
+    }
+
+    private void searchInventoryFor(string[] args, int itemNameIndex, int equipmentNameIndex)
+    {
+        bool flagStatus = Inventory.inventoryContainsItem(args[secondArgIndex]) ||
+                                                    Inventory.equipmentContainsItem(args[secondArgIndex]);
+        Flags.setFlag(args[firstArgIndex], flagStatus);
+        currentStory.variablesState[args[firstArgIndex]] = flagStatus;
+    }
+
+    private Item getItemFromArgs(string[] args)
+    {
+        return ItemList.getItem(int.Parse(args[firstArgIndex]),
+                                int.Parse(args[secondArgIndex]),
+                                int.Parse(args[thirdArgIndex]));
+    }
+
+    private void givePlayerItemFromDialogue(string buffer)
+    {
+        givePlayerItemFromDialogue(getAllArgs(buffer));
+    }
+
+    private void givePlayerItemFromDialogue(string[] args)
+    {
+        Item itemToGive = getItemFromArgs(args);
+
+        Inventory.addItem(itemToGive);
+
+        string newLine = itemToGive.getKey() + quantitySymbol + itemToGive.getQuantity();
+
+        currentConversation.addObtainedLine(newLine);
+    }
+
+    private string[] getAllArgs(string buffer)
+    {
+        return buffer.Split("(")[1].Split(")")[0].Split(",");
+    }
+
+    private string getArgument(string buffer)
+    {
+        return getArgument(buffer, firstArgIndex);
+    }
+
+    private string getArgument(string buffer, int argIndex)
+    {
+        return getAllArgs(buffer)[argIndex];
+    }
+
+    private int getArgumentInt(string buffer, int argIndex)
+    {
+        return int.Parse(getAllArgs(buffer)[argIndex]);
+    }
+
+    private bool getArgumentBool(string buffer, int argIndex)
+    {
+        string[] args = getAllArgs(buffer);
+
+        if(args.Length >= argIndex)
+        {
+            return false;
+        }
+
+        return bool.Parse(args[argIndex]);
+    }
+
+    private string[] getAllArgumentGroups(string buffer)
+    {
+        return buffer.Split("(")[1].Split(")")[0].Split("|");
+    }
+
+    // private string getArgument(string buffer, int argIndex)
+    // {
+    //     return buffer.Split("(")[1].Split(")")[0].Split(",")[argIndex];
+    // }
+
+    // private string getArgument(string buffer, int argIndex)
+    // {
+    //     return buffer.Split("(")[1].Split(")")[0].Split(",")[argIndex];
+    // }
+
+    private TextAsset getSecondaryStoryJSON(int secondaryInkFileIndex)
+    {
+        if (currentDialogue.secondaryInkJSONs == null || currentDialogue.secondaryInkJSONs.Length <= secondaryInkFileIndex || currentDialogue.secondaryInkJSONs[secondaryInkFileIndex] == null)
+        {
+            GameObject tabor = currentDialogue.cameraFoci[1];
+            DialogueTrigger trigger = tabor.GetComponent<DialogueTrigger>();
+            Dialogue dialogue = trigger.getDialogue();
+            TextAsset[] secondaryInkJSONs = dialogue.secondaryInkJSONs;
+
+            return secondaryInkJSONs[secondaryInkFileIndex];
+        }
+        else
+        {
+            return currentDialogue.secondaryInkJSONs[secondaryInkFileIndex];
+        }
+    }
+
+	private void checkForHaltNotificationBoolArg(string buffer, int boolIndex)
 	{
-		if (args.Length > boolIndex)
-		{
-			if (bool.Parse(args[boolIndex]))
-			{
-				NotificationManager.skipNextNotificationSpawn();
-			}
-		}
+        if (getArgumentBool(buffer, boolIndex))
+        {
+            NotificationManager.skipNextNotificationSpawn();
+        }
 	}
 
 	private IEnumerator startTutorialAtDialogueEnd(string tutorialSequenceKey, OOCActivity stateToWaitFor)

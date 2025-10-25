@@ -133,6 +133,8 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 	public string[] currentKnownMapData = new string[State.allKnownMapData.Count];
 	public string[] currentAreaHostilities = new string[AreaList.allAreas.Count];
 
+    public string[] secretDoors = new string[0];
+
     public StatsWrapper[] partyMemberStats = new StatsWrapper[PartyManager.getNumberOfPartyMembersTotal()];
 
 	public InventoryWrapper[] currentShopkeeperInventories;
@@ -180,14 +182,16 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		saveBlueprint.currentLocation = AreaManager.locationName;
 		saveBlueprint.saveName = saveName;
 
+		saveBlueprint.secretDoors = SecretDoorFlags.getSecretDoorKeys();
+
 		// saveBlueprint.playerFormationPosition = State.formation.findLocationOfStats(State.playerStats);
 
 		saveBlueprint.setPartyMemberDetails();
 
 		saveBlueprint.currentMonsterDefeatKeys = convertAllMonsterDefeatKeysToJson();
 
-		saveBlueprint.currentShopkeeperInventories = convertShopkeeperInventoriesToJson(ShopkeeperInventoryList.shopkeeperInventories);
-		saveBlueprint.currentBuyBackInventories = convertShopkeeperInventoriesToJson(ShopkeeperInventoryList.buyBackInventories);
+		saveBlueprint.currentShopkeeperInventories = ShopkeeperInventoryList.convertShopkeeperInventoriesToJson();
+		saveBlueprint.currentBuyBackInventories = ShopkeeperInventoryList.convertBuyBackInventoriesToJson();
 
         saveBlueprint.monsterLocations = MovementManager.getAllMonsterLocations();
 
@@ -245,6 +249,8 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		this.currentQuestList = GetFromJson.getElementFromJson(this.saveName, nameof(currentQuestList), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
 		this.currentKnownMapData = GetFromJson.getElementFromJson(this.saveName, nameof(currentKnownMapData), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray).ToObject<string[]>();
 		this.currentAreaHostilities = GetFromJson.getElementFromJson(this.saveName, nameof(currentAreaHostilities), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
+
+        this.secretDoors = GetFromJson.getElementFromJson(this.saveName, nameof(secretDoors), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
 
         this.partyMemberStats = GetFromJson.getElementFromJson(this.saveName, nameof(partyMemberStats), jsonDynamic, SaveDefaultValues.defaultEmptyStatsWrapperArray);
 
@@ -306,23 +312,6 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		}
 
 		return json;
-	}
-
-	public static InventoryWrapper[] convertShopkeeperInventoriesToJson(Dictionary<string, Dictionary<string, Item>> dictOfInventories)
-	{
-		InventoryWrapper[] wrapperOfShopkeeperInventories = new InventoryWrapper[dictOfInventories.Count];
-
-		int inventoryIndex = 0;
-		foreach (KeyValuePair<string, Dictionary<string, Item>> kvp in dictOfInventories)
-		{
-			Dictionary<string, Item> inventory = kvp.Value;
-
-			wrapperOfShopkeeperInventories[inventoryIndex].key = kvp.Key;
-			wrapperOfShopkeeperInventories[inventoryIndex].inventory = convertToJson(inventory);
-			inventoryIndex++;
-		}
-
-		return wrapperOfShopkeeperInventories;
 	}
 
 	public static Dictionary<string, Dictionary<string, Item>> extractShopkeeperInventoriesFromJson(InventoryWrapper[] wrapperOfInventories)

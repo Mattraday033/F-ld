@@ -807,7 +807,7 @@ public class PlayerMovement : MonoBehaviour
 
 		dialogueManager = DialogueManager.getInstance();
 
-		dialogueTrigger.TriggerDialogue();
+		dialogueTrigger.triggerDialogue();
 	}
 
 	private bool canMove()

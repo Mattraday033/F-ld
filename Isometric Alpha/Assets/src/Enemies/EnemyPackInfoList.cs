@@ -93,7 +93,7 @@ public static class EnemyPackInfoList
         list.Add(twoGiantBatsTwoBatSwarms);
         list.Add(twoGiantBatsTwoBatSwarms);
 
-        enemyPackInfoDict.Add(AreaNameList.slaveShackSix, list);
+        enemyPackInfoDict.Add(LocationNameList.slaveShackSix, list);
         #endregion
 
         #region MineLvl_1-1b
@@ -101,7 +101,7 @@ public static class EnemyPackInfoList
 
         list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
 
-        enemyPackInfoDict.Add(AreaNameList.mineLvl1 + AreaNameList.section1b, list);
+        enemyPackInfoDict.Add(LocationNameList.mineLvl1 + LocationNameList.section1b, list);
         #endregion
     }
 

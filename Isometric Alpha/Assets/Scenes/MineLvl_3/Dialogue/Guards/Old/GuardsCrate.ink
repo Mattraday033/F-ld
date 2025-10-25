@@ -145,7 +145,7 @@ fadeToBlack()
 
 deactivate(1)
 activate(2)
-moveToLocalPos(-41.5,-1.35)
+moveToPos(-41.5,-1.35)
 changeCamTarget(3)
 setToTrue(mineLvl3ClearedCratesToGuards)
 fadeBackIn(60)

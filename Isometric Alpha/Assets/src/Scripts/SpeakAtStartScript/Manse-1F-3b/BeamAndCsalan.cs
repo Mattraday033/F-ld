@@ -9,7 +9,7 @@ public class BeamAndCsalan: SpeakAtStartScript
     {
         if (!DeathFlagManager.isDead("Beam"))
         {
-            dialogueTrigger.TriggerDialogue();
+            dialogueTrigger.triggerDialogue();
         }
     }
 

@@ -16,9 +16,23 @@ public class SkillManager
     public Color oldColor;
     public GameObject[,] skillGrid;
 
+    public ContactFilter2D filterCollider;
+
     public const int skillUnlockLevel = 2;
     public const int skillImprovedLevel = 5;
     public const int skillExtraordinaryLevel = 8;
+
+    public SkillManager()
+    {
+        setCollisionFilter();
+    }
+
+    public virtual void setCollisionFilter()
+    {
+        filterCollider = new ContactFilter2D();
+        filterCollider.useTriggers = true;
+        filterCollider.SetLayerMask(LayerAndTagManager.blocksSkillsLayerMask);
+    }
 
     public virtual void createSkillArea()
     {
@@ -53,7 +67,7 @@ public class SkillManager
 
     public static Vector3Int getPlayerCoords()
     {
-        return MovementManager.getInstance().grid.LocalToCell(MovementManager.endingPositions[MovementManager.playerSpriteIndex]);
+        return AreaManager.getMasterGrid().WorldToCell(MovementManager.endingPositions[MovementManager.playerSpriteIndex]);
     }
 
     private bool coordsWithinRange(int row, int col)
@@ -93,36 +107,29 @@ public class SkillManager
 
     public virtual bool collidedWithTarget(GameObject tile)
     {
-        if (!Helpers.hasCollision(tile.GetComponent<Collider2D>()))
-        {
-            return false;
-        }
-        else
-        {
-            Collider2D[] collisions = Helpers.getCollisions(tile.GetComponent<Collider2D>());
+        Collider2D[] collisions = Helpers.getCollisions(tile.GetComponent<Collider2D>(), filterCollider);
 
-            foreach (Collider2D collision in collisions)
+        foreach (Collider2D collision in collisions)
+        {
+            if (collision == null || collision is null)
             {
-                if (collision == null || collision is null)
-                {
-                    continue;
-                }
-
-                if (collision.GetComponent<ISkillTarget>() != null)
-                {
-                    return true;
-                }
+                continue;
             }
 
-            return false;
+            if (collision.GetComponent<ISkillTarget>() != null)
+            {
+                return true;
+            }
         }
+
+        return false;
     }
 
     public GameObject instantiateTile(Vector3Int playerCoords, int skillGridRow, int skillGridCol)
     {
         GameObject tile = GameObject.Instantiate(Resources.Load<GameObject>(getTilePrefabName()), getTileParent(), false);
 
-        tile.transform.localPosition = MovementManager.getGrid().GetCellCenterLocal(playerCoords + new Vector3Int(skillGridRow - getCurrentPlayerSkillGridCoords().row, skillGridCol - getCurrentPlayerSkillGridCoords().col, 0));
+        tile.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(playerCoords + new Vector3Int(skillGridRow - getCurrentPlayerSkillGridCoords().row, skillGridCol - getCurrentPlayerSkillGridCoords().col));
 
         return tile;
     }

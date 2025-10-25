@@ -8,16 +8,13 @@ public static class SaveDefaultValues
     public const string defaultStatRequirementType = "None";
 
     public const string badSaveName = "Bad Save";
-    public const string badMPName = "Bad MonsterPack";
     public const int badSaveNumber = 0;
 
-    public const string missingSpriteName = "MissingSprite";
     //    public const string defaultSceneName = "2SlaveShack";
-    public const string defaultSceneName = AreaNameList.slaveShackTwo;
+    public const string defaultSceneName = LocationNameList.slaveShackTwo;
     public const bool defaultBoolFalse = false;
     public const bool defaultBoolTrue = true;
 
-    public const string defaultCombatSpriteName = "PlayerSprite";
     public const string defaultOverworldSpriteSortingLayer = "First";
     public const string defaultPlayerName = "Brandon";
 

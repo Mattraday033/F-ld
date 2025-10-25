@@ -33,7 +33,7 @@ VAR playerName = ""
 //searchInventoryFor(string nameOfVarSetToTrueInsideInkFile,string itemNameToSearchFor)
 //fadeToBlack()
 //fadeBackIn(int numberOfFramesToWaitBeforeFadingBackIn)
-//moveToLocalPos(float xCoord,float yCoord)
+//moveToPos(float xCoord,float yCoord)
 
 searchInventoryFor(hasPitCellKey,Key,{pitCellKeyIndex})
 

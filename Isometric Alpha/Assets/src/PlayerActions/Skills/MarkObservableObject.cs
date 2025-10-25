@@ -10,10 +10,10 @@ public class MarkObservableObject : MonoBehaviour
 
 	public void detectObservableObject()
     {
-		if(Helpers.hasCollision(collider))
+		if(Helpers.hasCollision(collider, LayerAndTagManager.observableLayerMask))
 		{
-			GameObject observedObj = Helpers.getCollision(collider).gameObject;
-			
+            GameObject observedObj = Helpers.getCollision(collider, LayerAndTagManager.observableLayerMask).gameObject;
+
 			if(observedObj.CompareTag("Observable"))
 			{
 				observedObj.GetComponent<ObservableObject>().markAsObserved();

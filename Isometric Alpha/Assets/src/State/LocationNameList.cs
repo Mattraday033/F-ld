@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class AreaNameList
+public static class LocationNameList
 {
 
     #region Suffixes
@@ -90,7 +90,7 @@ public static class AreaNameList
     public const string guardHouseSouthWest = "GuardHouseSW";
     public const string guardHouseTopFloor = "GuardHouseTopFloor";
     public const string guardShack = "GuardShack";
-    public const string messHall = "MessHall";
+    public const string messHall = "Mess Hall";
     public const string stables = "Stables";
     public const string stockhouse = "Stockhouse";
     public const string temple = "Temple";

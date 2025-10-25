@@ -144,8 +144,15 @@ public class Item : ICloneable, IJSONConvertable, IDescribable, ISortable, IDesc
 	{
 		switch (shopMode)
 		{
-			case ShopMode.Buy:
-				return (int)((worth) * PartyStats.getDiscountMultiplier() * ShopPopUpWindow.getCurrentShopkeeper().getDiscount());
+            case ShopMode.Buy:
+
+                int price = (int)(((float) worth) * PartyStats.getDiscountMultiplier() * ShopPopUpWindow.getCurrentShopkeeper().getDiscount());
+                
+                if(price < 1)
+                {
+                    return 1;
+                }
+                return price;
 			default:
 				return worth;
 		}

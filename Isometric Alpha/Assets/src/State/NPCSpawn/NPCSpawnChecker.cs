@@ -68,7 +68,6 @@ public class NPCSpawnChecker : MonoBehaviour, IRevealable
 
 	public void spawnCheck()
 	{
-		AreaList.setCurrentArea();
 
 		if (PlayerInteractionScript.evaluateAnyScript(scripts))
 		{

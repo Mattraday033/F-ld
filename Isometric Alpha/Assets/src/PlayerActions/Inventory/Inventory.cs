@@ -106,23 +106,20 @@ public static class Inventory
             return null;
         }
 
-        Item oldItem;
-
-        if (pocket.TryGetValue(key, out oldItem))
-        {
-
-            oldItem = oldItem.clone();
-
-            pocket.Remove(key);
-
-            EquippedItems.OnEquipmentChange.Invoke();
-
-            return oldItem.clone();
-        }
-        else
+        if(!pocket.ContainsKey(key))
         {
             return null;
         }
+
+        Item oldItem = pocket[key];
+
+        oldItem = oldItem.clone();
+
+        pocket.Remove(key);
+
+        EquippedItems.OnEquipmentChange.Invoke();
+
+        return oldItem.clone();
     }
 
     public static Item removeItem(Item item, int amount)

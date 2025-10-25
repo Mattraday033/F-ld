@@ -88,8 +88,11 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
         return AreaManager.getNPCParent();
     }
 
-    public virtual void spawnActions(GameObject interactable)
+    public override void spawnActions(GameObject interactable)
     {
+        Obstacle obstacle = interactable.GetComponent<Obstacle>();
+        obstacle.setObstacleName(npcName);
+
         SpriteRenderer spriteRenderer = interactable.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = Helpers.loadSpriteFromResources(getSpriteName());
     }
@@ -99,7 +102,10 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
 public class NPCSpawnDetails : OOCSpawnDetails
 {
 
+    public const string extraSpaceNameSuffix = "'s Extra Space GameObject";
+
     public bool activated;
+    public Vector3Int[] extraSpaces = new Vector3Int[0];
     public Dialogue dialogue;
     public SpeakAtStartScript speakAtStartScript;
 
@@ -116,6 +122,15 @@ public class NPCSpawnDetails : OOCSpawnDetails
     {
         this.activated = true;
         this.dialogue = DialogueList.getDialogue(npcName, areaName);
+    }
+
+    public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, Vector3Int[] extraSpaces) :
+    base(npcName, cellCoords)
+    {
+        this.activated = true;
+        this.dialogue = DialogueList.getDialogue(npcName, areaName);
+
+        this.extraSpaces = extraSpaces;
     }
 
     public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, SpeakAtStartScript speakAtStartScript) :
@@ -147,7 +162,7 @@ public class NPCSpawnDetails : OOCSpawnDetails
         this.dialogue = DialogueList.getDialogue(npcName, areaName);
     }
 
-    public bool interactable()
+    public virtual bool interactable()
     {
         return dialogue != null;
     }
@@ -185,12 +200,111 @@ public class NPCSpawnDetails : OOCSpawnDetails
             dialogueTrigger.dialogue = new Dialogue(npcName, npc);
         }
 
-        spawnActions(dialogueTrigger.dialogue);
+        spawnActions(dialogueTrigger);
     }
 
-    public virtual void spawnActions(Dialogue dialogue)
+    public virtual void spawnActions(DialogueTrigger mainTrigger)
     {
-        //empty on purpose
+        int index = 0;
+        foreach (Vector3Int extraSpace in extraSpaces)
+        {
+            GameObject extraSpaceGameObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.npcExtraSpace), getParent());
+
+            extraSpaceGameObject.name = npcName + extraSpaceNameSuffix + " #" + (index+1);
+
+            DialogueTriggerLink linkTrigger = extraSpaceGameObject.GetComponent<DialogueTriggerLink>();
+
+            linkTrigger.linkedDialogue = mainTrigger;
+
+            extraSpaceGameObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(extraSpace);
+
+            Helpers.updateColliderPosition(extraSpaceGameObject);
+
+            SpawnInfoManager.addGameObject(extraSpaceGameObject);
+
+            index++;
+        }
+    }
+}
+
+public class ShopkeeperSpawnDetails : NPCSpawnDetails
+{
+
+    public ShopkeeperSpawnDetails(string npcName, Vector3Int cellCoords, string areaName) :
+    base(npcName, cellCoords, areaName)
+    {
+        
+    }
+
+    public ShopkeeperSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, Vector3Int[] extraSpaces) :
+    base(npcName, cellCoords, areaName, extraSpaces)
+    {
+        
+    }
+
+    public override bool interactable()
+    {
+        return true;
+    }
+
+    public override void spawnActions(GameObject npc)
+    {
+        base.spawnActions(npc);
+
+        Shopkeeper shopkeeper = npc.AddComponent<Shopkeeper>();
+
+        shopkeeper.shopkeeperInventoryKey = npcName;
+    }
+}
+
+public class SecretDoorSpawnDetails : NPCSpawnDetails
+{
+    private SecretDoorInfo secretDoorInfo;
+
+    public SecretDoorSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, SecretDoorInfo secretDoorInfo) :
+    base(npcName, cellCoords, areaName)
+    {
+        this.secretDoorInfo = secretDoorInfo;
+    }
+    public override bool interactable()
+    {
+        return true;
+    }
+
+    public override string getSpriteName()
+    {
+        return PrefabNames.defaultNPCSprite;
+    }
+
+    public override string getPrefabName()
+    {
+        return PrefabNames.secretDoor;
+    }
+
+    public override Transform getParent()
+    {
+        return AreaManager.getNPCParent();
+    }
+
+    public override void spawnActions(GameObject secretDoor)
+    {
+        if(secretDoorInfo.hasBeenDiscovered())
+        {
+            GameObject.DestroyImmediate(secretDoor);
+        }
+
+        base.spawnActions(secretDoor);
+
+        ObservableObject observableObject = secretDoor.GetComponent<ObservableObject>();
+
+        observableObject.secretDoorKey = secretDoorInfo.secretDoorKey;
+    }
+
+    public override void spawnActions(DialogueTrigger dialogueTrigger)
+    {
+        Dialogue dialogue = dialogueTrigger.dialogue;
+
+        dialogue.variableSources.Add(secretDoorInfo);
     }
 }
 
@@ -198,7 +312,7 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
 {
 
     public VaultableObject vaultableObject;
-    
+
 
     public VaultableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableObject vaultableObject) :
     base(npcName, cellCoords)
@@ -209,7 +323,7 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
 
     public override string getSpriteName()
     {
-        switch(vaultableObject.objectName)
+        switch (vaultableObject.objectName)
         {
             case VaultableObject.barrelName:
                 return PrefabNames.vaultableBarrels;
@@ -224,9 +338,9 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
         return PrefabNames.vaultableObject;
     }
 
-    public override void spawnActions(Dialogue dialogue)
+    public override void spawnActions(DialogueTrigger dialogueTrigger)
     {
-        dialogue.variableSources.Add(vaultableObject);
+        dialogueTrigger.dialogue.variableSources.Add(vaultableObject);
     }
 
 }

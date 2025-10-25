@@ -7,6 +7,7 @@ using Ink.Runtime;
 [System.Serializable]
 public class Dialogue : ICloneable
 {
+    public const int mainNPCIndex = 1;
     public static string[] stringArrayWithPlayerSpace = new string[] { "" };
 
 	public string[] names; //to keep names[] index the same as cameraFoci index, names[0] will always be blank
@@ -74,18 +75,8 @@ public class Dialogue : ICloneable
 
     public string getMainNPCName()
     {
-        return names[1];
+        return names[mainNPCIndex];
     }
-
-	public TutorialSequenceListTrigger GetTutorialSequenceListTrigger()
-	{
-		if (cameraFoci == null || cameraFoci.Length < 2 || cameraFoci[1] == null)
-		{
-			return null;
-		}
-
-		return cameraFoci[1].GetComponent<TutorialSequenceListTrigger>();
-	}
 
 	public object Clone()
 	{

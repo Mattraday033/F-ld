@@ -233,7 +233,7 @@ takeAllOfItem(Candy)
 
 setToTrue(metMuzsa)
 
-You're the first slave I've ever met who wanted to go inside the mine. Especially now that it's crawling with bats and worms and who knows what else. Why the blazes do you want to look in there?
+You're the first slave I've ever met who wanted to go <i>inside</i> the mine. Especially now that it's crawling with bats and worms and who knows what else. Why the blazes do you want to look in there?
 
 {
 -knowsAboutTheMine:

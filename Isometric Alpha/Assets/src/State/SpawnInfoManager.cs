@@ -14,9 +14,10 @@ public static class SpawnInfoManager
         AreaManager.OnAreaSpawn.AddListener(spawnDetails);
     }
 
+    [RuntimeInitializeOnLoadMethod]
     public static void initialize()
     {
-
+        
     }
 
     public static Vector3Int getDefaultCell()
@@ -61,6 +62,8 @@ public static class SpawnInfoManager
         spawnedObjects.AddRange(spawnAllInteractables());
 
         spawnedObjects.AddRange(spawnAllTransitions());
+
+        spawnedObjects.AddRange(spawnAllSecretDoors());
 
         allSpawnedObjects = spawnedObjects;
 
@@ -167,6 +170,29 @@ public static class SpawnInfoManager
                 transitionGameObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(transition.cellCoords);
 
                 spawnedObjects.Add(transitionGameObject);
+            }
+        }
+
+        return spawnedObjects;
+    }
+
+    private static List<GameObject> spawnAllSecretDoors()
+    {
+        List<SecretDoorSpawnInfo> secretDoorSpawnInfoList = SecretDoorSpawnInfoList.getSecretDoorSpawnDetails(AreaManager.locationName);
+        List<GameObject> spawnedObjects = new List<GameObject>();
+
+        foreach (SecretDoorSpawnInfo spawnInfo in secretDoorSpawnInfoList)
+        {
+            if(!spawnInfo.shouldSpawn())
+            {
+                continue;
+            }
+
+            List<SecretDoorSpawnDetails> secretDoorList = spawnInfo.getSecretDoors();
+
+            foreach (SecretDoorSpawnDetails secretDoor in secretDoorList)
+            {
+                spawnedObjects.Add(spawnInteractable(secretDoor));
             }
         }
 

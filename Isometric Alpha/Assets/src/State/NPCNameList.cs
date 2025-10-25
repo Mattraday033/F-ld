@@ -72,9 +72,11 @@ public static class NPCNameList
 
     public const string leafPile = "Leaf Pile";
     public const string vaultableBarrels = "Vaultable Barrels";
+    public const string wallPatch = "Wall Patch";
     public const string rubble = "Rubble";
     public const string chest = "Chest";
     public const string crate = "Crate";
+    public const string barrels = "Barrels";
     public const string barricade = "Barricade";
 
     #endregion

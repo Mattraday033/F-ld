@@ -61,7 +61,7 @@ TagManager:
   - Transition
   - MovableObjectBlocker
   - SecondCam
-  - 
+  - Observable
   m_SortingLayers:
   - name: Default
     uniqueID: 0

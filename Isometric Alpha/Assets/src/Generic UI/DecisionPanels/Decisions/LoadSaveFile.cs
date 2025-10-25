@@ -125,6 +125,8 @@ public class LoadSaveFile : IDecision
             State.allKnownMapData = saveBlueprint.extractAllKnownMapDataFromJson();
             saveBlueprint.extractAllAreaHostilitiesFromJson();
 
+            SecretDoorFlags.setFromSaveData(saveBlueprint.secretDoors);
+
             Purse.setCoinsInPurse(saveBlueprint.gold);
             AffinityManager.setAffinity(saveBlueprint.affinity);
 

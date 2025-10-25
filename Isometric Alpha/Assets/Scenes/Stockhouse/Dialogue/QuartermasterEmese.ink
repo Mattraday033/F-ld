@@ -26,7 +26,7 @@ VAR playerName = ""
 //searchInventoryFor(string nameOfVarSetToTrueInsideInkFile,string itemNameToSearchFor)
 //fadeToBlack()
 //fadeBackIn(int numberOfFramesToWaitBeforeFadingBackIn)
-//moveToLocalPos(float xCoord,float yCoord)
+//moveToPos(float xCoord,float yCoord)
 
 {
 -snitchedOnUros and not gaveIronNuggetToEmese:
@@ -83,7 +83,7 @@ You're back. Did you need something?
     ->1c
 
 === 1e ===
-searchJunkFor(hasIronNugget,Iron Nugget)
+searchInventoryFor(hasIronNugget,Iron Nugget)
 
 Did you find whatever Uros hid in here?
 
@@ -110,7 +110,7 @@ prepForItem()
 
 \*Quartermaster Emese examines the Iron Nugget.* Iron? Very interesting. When I tell the Director about this, Uros will be interogated to the fullest extent to find where he got it and if there's any more where it came from. You've done an excellent job.
 
-takeJunk(Iron Nugget, 1)&
+takeItem(Iron Nugget, 1)&
 addXP(100)
 
 \*Quartermaster Emese rummages around in a crate she keeps below her desk.*

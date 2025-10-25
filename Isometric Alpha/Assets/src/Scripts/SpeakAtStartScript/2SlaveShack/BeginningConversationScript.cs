@@ -9,7 +9,7 @@ public class BeginningConversationScript: SpeakAtStartScript
     {
         if (!Flags.getFlag(FlagNameList.finishedFirstDialogue))
         {
-            dialogueTrigger.TriggerDialogue();
+            dialogueTrigger.triggerDialogue();
         }
     }
 

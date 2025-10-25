@@ -60,7 +60,7 @@ fadeToBlack()
 changeCamTarget({pageIndex})
 activate({carterIndex})
 
-moveToLocalPos(-11,-10.65)
+moveToPos(-11,-10.65)
 setFacing(NorthWest)
 
 fadeBackIn(60)

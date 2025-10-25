@@ -138,7 +138,7 @@ fadeToBlack(true, false)
 
 activate({blastRubbleIndex})
 
-moveToLocalPos(-72,-9.65)
+moveToPos(-72,-9.65)
 
 {
 -mineLvl3GuardsInParty:

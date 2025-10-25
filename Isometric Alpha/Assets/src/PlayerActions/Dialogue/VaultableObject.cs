@@ -8,7 +8,7 @@ public interface IStoryVariableSource
     public Story addVariables(Story story);
 }
 
-public class VaultableObject : MonoBehaviour, IStoryVariableSource
+public class VaultableObject : IStoryVariableSource
 {
     public const bool isPlural = true;
     public const string barrelName = "barrels";

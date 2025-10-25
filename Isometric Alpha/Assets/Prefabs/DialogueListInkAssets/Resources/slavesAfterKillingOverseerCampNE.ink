@@ -75,13 +75,13 @@ VAR thatchIndex = 11
 //searchInventoryFor(string nameOfVarSetToTrueInsideInkFile,string itemNameToSearchFor)
 //fadeToBlack()
 //fadeBackIn(int numberOfFramesToWaitBeforeFadingBackIn)
-//moveToLocalPos(float xCoord,float yCoord)
+//moveToPos(float xCoord,float yCoord)
 
 ->1a
 
 === 1a ===
 
-moveToLocalPos(2,2.4)
+moveToPos(2,2.4)
 
 changeCamTarget({nandorIndex})
 
