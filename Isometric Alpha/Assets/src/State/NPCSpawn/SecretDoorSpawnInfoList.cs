@@ -42,13 +42,41 @@ public static class SecretDoorSpawnInfoList
         secretDoorSpawnDetailsDict.Add(LocationNameList.slaveShackSix, list);
         #endregion
 
+        #region Stables
+        list = new List<SecretDoorSpawnInfo>();
+
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.stables, NPCNameList.wallPatch, new Vector3Int(9, -4), 
+                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchOne), Constants.sizeTwo, Axis.DescendingX));
+
+        secretDoorSpawnDetailsDict.Add(LocationNameList.stables, list);
+        #endregion
+        #region Temple
+        list = new List<SecretDoorSpawnInfo>();
+
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.temple, NPCNameList.wallPatch, new Vector3Int(11, 4), 
+                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchTwo), Constants.sizeTwo, Axis.DescendingY));
+
+        secretDoorSpawnDetailsDict.Add(LocationNameList.temple, list);
+        #endregion
+
+        #region CenterCamp
+        list = new List<SecretDoorSpawnInfo>();
+
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.campCenter, NPCNameList.wallPatch, new Vector3Int(8, 8), 
+                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchOne), Constants.sizeTwo, Axis.DescendingX));
+
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.campCenter, NPCNameList.wallPatch, new Vector3Int(-5, 14), 
+                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchTwo), Constants.sizeTwo, Axis.DescendingY));
+
+        secretDoorSpawnDetailsDict.Add(LocationNameList.campCenter, list);
+        #endregion
         #region SECamp
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, new Vector3Int(12, 12), 
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.campSouthEast, NPCNameList.wallPatch, new Vector3Int(12, 12), 
                                             new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchThree), Constants.sizeTwo, Axis.DescendingX));
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, new Vector3Int(15, 9), 
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.campSouthEast, NPCNameList.wallPatch, new Vector3Int(15, 9), 
                                             new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchTwo), Constants.sizeTwo, Axis.DescendingX));
 
         list.Add(new SecretDoorSpawnInfo(LocationNameList.campSouthEast, NPCNameList.wallPatch, new Vector3Int(16, 3), 

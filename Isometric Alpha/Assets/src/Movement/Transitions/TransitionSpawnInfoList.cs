@@ -139,7 +139,7 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(LocationNameList.stables, LocationNameList.campCenter, new Vector3Int(1, 4), Facing.NorthEast, Constants.sizeTwo, Axis.DescendingY));
 
-        list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, LocationNameList.stables, LocationNameList.campCenter, new Vector3Int(9, -5), Facing.NorthWest, Constants.sizeTwo, Axis.DescendingX));
+        list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, LocationNameList.stables, LocationNameList.campCenter, new Vector3Int(9, -5), Facing.NorthWest, twoSpaceMultiplier, Constants.sizeTwo, Axis.DescendingX));
 
         list.Add(new TransitionSpawnInfoWithCorner(startingIndexFour, LocationNameList.stables, LocationNameList.campCenter, new Vector3Int(14, 4), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingY));
 
@@ -246,11 +246,9 @@ public static class TransitionSpawnInfoList
         list.Add(new TransitionSpawnInfo(LocationNameList.campCenter, LocationNameList.temple, new Vector3Int(-9, 9), Facing.SouthEast, twoSpaceMultiplier));
         list.Add(new TransitionSpawnInfoWithCorner(startingIndexOne, LocationNameList.campCenter, LocationNameList.temple, new Vector3Int(-6, 14), Facing.NorthEast, twoSpaceMultiplier, Constants.sizeTwo, Axis.DescendingY));
 
-        list.Add(new TransitionSpawnInfo(LocationNameList.campCenter, LocationNameList.stables, new Vector3Int(4, 14), Facing.NorthEast, twoSpaceMultiplier, Constants.sizeTwo, Axis.DescendingY));
-
-        list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, LocationNameList.campCenter, LocationNameList.stables, new Vector3Int(8, 9), Facing.NorthWest, twoSpaceMultiplier, Constants.sizeTwo, Axis.DescendingX));
-
-        list.Add(new TransitionSpawnInfoWithCorner(startingIndexFour, LocationNameList.campCenter, LocationNameList.stables, new Vector3Int(9, 14), Facing.SouthWest, twoSpaceMultiplier, Constants.sizeTwo, Axis.DescendingY));
+        list.Add(new TransitionSpawnInfo(LocationNameList.campCenter, LocationNameList.stables, new Vector3Int(4, 14), Facing.SouthWest, twoSpaceMultiplier, Constants.sizeTwo, Axis.DescendingY));
+        list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, LocationNameList.campCenter, LocationNameList.stables, new Vector3Int(8, 9), Facing.SouthEast, twoSpaceMultiplier, Constants.sizeTwo, Axis.DescendingX));
+        list.Add(new TransitionSpawnInfoWithCorner(startingIndexFour, LocationNameList.campCenter, LocationNameList.stables, new Vector3Int(9, 14), Facing.NorthEast, twoSpaceMultiplier, Constants.sizeTwo, Axis.DescendingY));
 
         list.Add(new TransitionSpawnInfo(LocationNameList.campCenter, LocationNameList.campNorthEast, new Vector3Int(18, 8), Facing.SouthWest, Constants.sizeThree, Axis.DescendingY));
 

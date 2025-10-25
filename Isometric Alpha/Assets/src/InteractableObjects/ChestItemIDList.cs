@@ -17,11 +17,20 @@ public static class ChestItemIDList
         list = new List<ItemListID>();
 
         list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rationsIndex, 3));
-    
+
         chestItemIDList.Add(LocationNameList.campNorthEast, list);
 
         #endregion
 
+        #region SECamp
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.bandagesIndex, 4));
+    
+        chestItemIDList.Add(LocationNameList.campSouthEast, list);
+
+        #endregion
 
     }
 

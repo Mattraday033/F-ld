@@ -6,7 +6,13 @@ public static class SecretDoorKeyList
 {
     #region Camp
 
-    #region South East Camp
+    #region CenterCamp
+
+    public const string centerCampWallPatchOne = LocationNameList.campCenter + NPCNameList.wallPatch + "1";
+    public const string centerCampWallPatchTwo = LocationNameList.campCenter + NPCNameList.wallPatch + "2";
+
+    #endregion
+    #region SECamp
 
     public const string southEastCampWallPatchOne = LocationNameList.campSouthEast + NPCNameList.wallPatch + "1";
     public const string southEastCampWallPatchTwo = LocationNameList.campSouthEast + NPCNameList.wallPatch + "2";

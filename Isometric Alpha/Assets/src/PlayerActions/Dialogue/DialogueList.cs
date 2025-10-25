@@ -170,12 +170,21 @@ public static class DialogueList
         addDialogueToList(LocationNameList.stockhouse, NPCNameList.crate+2,
                             new Dialogue(new string[] { NPCNameList.crate+2 },
                             Resources.Load<TextAsset>(DialogueNameList.dudCratePath)));
-    
+
         addDialogueToList(LocationNameList.stockhouse, NPCNameList.barrels,
-                            new Dialogue(new string[] { NPCNameList.barrels},
+                            new Dialogue(new string[] { NPCNameList.barrels },
                             Resources.Load<TextAsset>(DialogueNameList.barrelsWithNuggetPath)));
         #endregion
+        #region Stables
 
+        addDialogueToList(LocationNameList.stables, NPCNameList.wallPatch, wallPatchDialogue);
+
+        #endregion
+        #region Temple
+
+        addDialogueToList(LocationNameList.temple, NPCNameList.wallPatch, wallPatchDialogue);
+
+        #endregion
         #region Mess Hall
 
         addDialogueToList(LocationNameList.messHall, NPCNameList.kende,
@@ -188,6 +197,11 @@ public static class DialogueList
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.leafPile,
                             new Dialogue(new string[] { NPCNameList.leafPile },
                             Resources.Load<TextAsset>(DialogueNameList.leafPilePath)));
+
+        #endregion
+        #region CenterCamp
+
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.wallPatch, wallPatchDialogue);
 
         #endregion
         #region SECamp

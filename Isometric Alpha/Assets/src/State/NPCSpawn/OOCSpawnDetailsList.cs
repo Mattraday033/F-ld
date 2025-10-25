@@ -122,6 +122,24 @@ public static class OOCSpawnDetailsList
 
         oocSpawnDetailsDict.Add(LocationNameList.campNorthEast, list);
         #endregion
+        #region CenterCamp
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-4, -7), VaultableObject.vaultableBarrelsOneTile));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-11, 0), VaultableObject.vaultableBarrelsOneTile));
+
+        oocSpawnDetailsDict.Add(LocationNameList.campCenter, list);
+        #endregion
+        #region SECamp
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-4, -7), VaultableObject.vaultableBarrelsOneTile));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-11, 0), VaultableObject.vaultableBarrelsOneTile));
+
+        list.Add(new ChestSpawnDetails(0, new Vector3Int(13, 11), Facing.SouthEast));
+
+        oocSpawnDetailsDict.Add(LocationNameList.campSouthEast, list);
+        #endregion
         #region MineEntranceCamp
         list = new List<OOCSpawnDetails>();
 

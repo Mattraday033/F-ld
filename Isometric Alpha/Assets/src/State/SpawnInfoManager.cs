@@ -221,7 +221,10 @@ public static class SpawnInfoManager
 
         if (lastSaveBlueprint != null)
         {
-            monsterGameObject.transform.position = lastSaveBlueprint.monsterLocations[index].getPosition();
+            if(lastSaveBlueprint.monsterLocations.Length > index)
+            {
+                monsterGameObject.transform.position = lastSaveBlueprint.monsterLocations[index].getPosition();
+            }
         }
         else
         {
