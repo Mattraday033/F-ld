@@ -11,6 +11,11 @@ public class OOCSpawnDetails
     public string npcName = "";
     public Vector3Int cellCoords;
 
+    public OOCSpawnDetails(Vector3Int cellCoords)
+    {
+        this.cellCoords = cellCoords;
+    }
+
     public OOCSpawnDetails(string npcName, Vector3Int cellCoords)
     {
         this.npcName = npcName;
@@ -57,15 +62,132 @@ public class OOCSpawnDetails
 
 }
 
+public class TutorialColliderSpawnDetails : OOCSpawnDetails
+{
+
+    public string tutorialKey;
+    public string seenFlagName;
+    public string previousTutorialSeenFlagName;
+    public int monsterDefeatKeyIndex;
+
+    public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName) :
+    base(cellCoords)
+    {
+        this.tutorialKey = tutorialKey;
+        this.seenFlagName = seenFlagName;
+        this.previousTutorialSeenFlagName = null;
+        this.monsterDefeatKeyIndex = -1;
+    }
+
+    public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName, string previousTutorialSeenFlagName) :
+    base(cellCoords)
+    {
+        this.tutorialKey = tutorialKey;
+        this.seenFlagName = seenFlagName;
+        this.previousTutorialSeenFlagName = previousTutorialSeenFlagName;
+        this.monsterDefeatKeyIndex = -1;
+    }
+
+    public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName, string previousTutorialSeenFlagName, int monsterDefeatKeyIndex) :
+    base(cellCoords)
+    {
+        this.tutorialKey = tutorialKey;
+        this.seenFlagName = seenFlagName;
+        this.previousTutorialSeenFlagName = previousTutorialSeenFlagName;
+        this.monsterDefeatKeyIndex = monsterDefeatKeyIndex;
+    }
+
+
+    public override string getSpriteName()
+    {
+        return PrefabNames.defaultNPCSprite;
+    }
+
+    public override string getPrefabName()
+    {
+        return PrefabNames.tutorialCollider;
+    }
+
+    public override Transform getParent()
+    {
+        return AreaManager.getNonTransitionColliderParent();
+    }
+
+    public override void spawnActions(GameObject tutorialColliderGameObject)
+    {
+        if (shouldNotSpawn())
+        {
+            GameObject.DestroyImmediate(tutorialColliderGameObject);
+            return;
+        }
+
+        TutorialTriggerCollider tutorialCollider = tutorialColliderGameObject.GetComponent<TutorialTriggerCollider>();
+        tutorialCollider.tutorialSequenceKey = tutorialKey;
+    }
+
+    private bool shouldNotSpawn()
+    {
+        return Flags.getFlag(seenFlagName) ||
+                (previousTutorialSeenFlagName != null && !Flags.getFlag(previousTutorialSeenFlagName))
+                || (monsterDefeatKeyIndex >= 0 && MonsterSpawnDetails.monsterDefeatKeyExists(monsterDefeatKeyIndex));
+    }
+
+}
+
+public class DistractableObjectSpawnDetails : OOCSpawnDetails
+{
+    private Facing facing;
+
+    public DistractableObjectSpawnDetails(Vector3Int cellCoords, Facing facing) :
+    base(cellCoords)
+    {
+        this.facing = facing;
+    }
+
+
+    public override string getSpriteName()
+    {
+        return PrefabNames.defaultNPCSprite;
+    }
+
+    public override string getPrefabName()
+    {
+        return PrefabNames.cunningObject;
+    }
+
+    public override Transform getParent()
+    {
+        return AreaManager.getNonTransitionColliderParent();
+    }
+
+    public override void spawnActions(GameObject gameObject)
+    {
+        CunningObject cunningObject = gameObject.GetComponent<CunningObject>();
+
+        // cunningObject.setFacing(facing);
+        
+    }
+
+}
+
 public class ObstacleSpawnDetails : OOCSpawnDetails
 {
 
     private string spriteName;
+    private Color tint;
 
     public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName) :
     base(npcName, cellCoords)
     {
         this.spriteName = spriteName;
+        this.tint = Color.white;
+    }
+
+    public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, Color tint) :
+    base(npcName, cellCoords)
+    {
+        this.spriteName = spriteName;
+        this.tint = tint;
     }
 
     public override string getSpriteName()
@@ -95,6 +217,7 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
 
         SpriteRenderer spriteRenderer = interactable.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = Helpers.loadSpriteFromResources(getSpriteName());
+        spriteRenderer.color = tint;
     }
 
 }
@@ -312,13 +435,20 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
 {
 
     public VaultableObject vaultableObject;
-
+    public string tutorialTargetHash;
 
     public VaultableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableObject vaultableObject) :
     base(npcName, cellCoords)
     {
         this.vaultableObject = vaultableObject;
+        this.tutorialTargetHash = "";
+    }
 
+    public VaultableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableObject vaultableObject, string tutorialTargetHash) :
+    base(npcName, cellCoords)
+    {
+        this.vaultableObject = vaultableObject;
+        this.tutorialTargetHash = tutorialTargetHash;
     }
 
     public override string getSpriteName()
@@ -336,6 +466,20 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
     public override string getPrefabName()
     {
         return PrefabNames.vaultableObject;
+    }
+
+    public override void spawnActions(GameObject gameObject)
+    {
+        base.spawnActions(gameObject);
+
+        if (tutorialTargetHash.Length > 0)
+        {
+            gameObject.AddComponent<RectTransform>();
+
+            TutorialSequenceStepTargetSprite targetObject = gameObject.AddComponent<TutorialSequenceStepTargetSprite>();
+            targetObject.tutorialHash = tutorialTargetHash;
+        }
+
     }
 
     public override void spawnActions(DialogueTrigger dialogueTrigger)

@@ -20,8 +20,6 @@ public class MovementManager : MonoBehaviour
 
 	public static Vector3Int[] directionMod;
 
-	public static MovementManager instance;
-
 	private ArrayList floorButtons = new ArrayList();
 	public Dictionary<IButtonEvaluationScript, FloorButtonTrueFalse[]> buttonEvaluators = new Dictionary<IButtonEvaluationScript, FloorButtonTrueFalse[]>();
 
@@ -51,25 +49,10 @@ public class MovementManager : MonoBehaviour
 
 	public const int playerSpriteIndex = 0;
 
-	public static MovementManager getInstance()
-	{
-		return instance;
-	}
-
     public static Grid getGrid()
     {
         return AreaManager.getMasterGrid();
     }
-
-	private void Awake()
-	{
-		if (instance != null)
-		{
-			throw new IOException("There is more than 1 instance of MovementManager");
-		}
-
-		instance = this;
-	}
 
 	void Start()
 	{
@@ -746,7 +729,7 @@ public class MovementManager : MonoBehaviour
 
 	public static Vector3Int getCellWorld(Vector3 position)
 	{
-		return getInstance().grid.WorldToCell(position);
+		return AreaManager.getMasterGrid().WorldToCell(position);
 	}
 
 	public static List<Vector3Int> getAllCurrentSpriteCells()
@@ -757,7 +740,7 @@ public class MovementManager : MonoBehaviour
 		{
 			if(allSpritesToMove[i] != null)
 			{
-				currentSpriteCells.Add(instance.grid.WorldToCell(endingPositions[i]));
+				currentSpriteCells.Add(AreaManager.getMasterGrid().WorldToCell(endingPositions[i]));
 			}
 		}
 		

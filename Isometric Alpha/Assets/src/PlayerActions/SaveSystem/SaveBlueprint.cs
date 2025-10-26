@@ -36,6 +36,27 @@ public struct PositionWrapper
 }
 
 [System.Serializable]
+public struct FlagWrapper
+{
+
+    public string flagName;
+    public bool flagStatus;
+
+    public FlagWrapper(string flagName, bool flagStatus)
+    {
+        this.flagName = flagName;
+        this.flagStatus = flagStatus;
+    }
+
+    public FlagWrapper(KeyValuePair<string, bool> kvp)
+    {
+        this.flagName = kvp.Key;
+        this.flagStatus = kvp.Value;
+    }
+
+}
+
+[System.Serializable]
 public struct StatsWrapper
 {
     public string key;
@@ -124,7 +145,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 	public string[] currentDeathFlags = new string[DeathFlagManager.deadNames.Count];
 	public string[] currentMetFlags = new string[MetFlagManager.metNames.Count];
 	public string[] currentChestFlags = new string[GateAndChestManager.getKeyCount()];
-	public string[] currentActivatedTrapsAndButtons = new string[TrapAndButtonStateManager.allActivatedTrapKeys.Count];
+	public FlagWrapper[] currentActivatedTrapsAndButtons = new FlagWrapper[TrapAndButtonStateManager.allActivatedTrapKeys.Count];
 
 	public string[] currentInventory = new string[State.inventory.Count];
 	public string[] currentJunk = new string[State.junkPocket.Count];
@@ -178,7 +199,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		saveBlueprint.currentDeathFlags = Helpers.arrayListToStrings(DeathFlagManager.deadNames);
 		saveBlueprint.currentMetFlags = Helpers.arrayListToStrings(MetFlagManager.metNames);
 		saveBlueprint.currentChestFlags = GateAndChestManager.getSaveData();
-		saveBlueprint.currentActivatedTrapsAndButtons = Helpers.arrayListToStrings(TrapAndButtonStateManager.allActivatedTrapKeys);
+		saveBlueprint.currentActivatedTrapsAndButtons = TrapAndButtonStateManager.getAllWrappers();
 		saveBlueprint.currentLocation = AreaManager.locationName;
 		saveBlueprint.saveName = saveName;
 

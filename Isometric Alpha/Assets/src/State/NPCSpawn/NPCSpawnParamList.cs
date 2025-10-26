@@ -5,7 +5,7 @@ using UnityEngine;
 public static class NPCSpawnParamList
 {
     private const bool spawnWhileHostile = true;
-    private static NPCSpawnParams noNameParams = new NPCSpawnParams(new StartSpawningFlagList(), new StopSpawningFlagList(), true, false);
+    private readonly static NPCSpawnParams noNameParams = new NPCSpawnParams(new StartSpawningFlagList(), new StopSpawningFlagList(), spawnWhileHostile);
 
     private static Dictionary<KeyValuePair<string, string>, NPCSpawnParams> npcSpawnParamsDict;
 
@@ -13,6 +13,8 @@ public static class NPCSpawnParamList
 
     private readonly static StopSpawningFlagList directorDefeatedStopSpawning = new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated });
     private readonly static StopSpawningFlagList revoltStartedStopSpawning = new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated });
+
+    private readonly static NPCSpawnParams dexTutorial = new NPCSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.choseDexterityAtStart }),spawnWhileHostile);
 
     #endregion
 
@@ -33,7 +35,8 @@ public static class NPCSpawnParamList
         return npcSpawnParamsDict[kvp];
     }
 
-    static NPCSpawnParamList()
+    [RuntimeInitializeOnLoadMethod]
+    private static void instantiateNPCSpawnParamList()
     {
         //npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList., NPCNameList.), new NPCSpawnParams(new string[]{}, new string[]{}));
 
@@ -95,7 +98,7 @@ public static class NPCSpawnParamList
         #region Slave Shack 6
 
         npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.thatch),
-                               new NPCSpawnParams(new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }), spawnWhileHostile));
+                               new PartyMemberNPCSpawnParams(new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }), spawnWhileHostile));
 
         npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.slate), new NPCSpawnParams(directorDefeatedStopSpawning, spawnWhileHostile));
 
@@ -108,6 +111,57 @@ public static class NPCSpawnParamList
         npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.thatch + 1),
                                new NPCSpawnParams(spawnWhileHostile));
 
+        #region Str Tutorial
+
+        #endregion
+        #region Dex Tutorial
+
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.halfWall + Constants.DEXDesignator), dexTutorial);
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.rubble + Constants.DEXDesignator), dexTutorial);
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.vaultableBarrels), dexTutorial);
+
+        #endregion
+        #region Wis Tutorial
+
+        #endregion
+        #region Cha Tutorial
+
+        #endregion
+
+
+        #endregion
+
+        #region Stables
+
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.stables, NPCNameList.beam),
+                                new NPCSpawnParams(revoltStartedStopSpawning));
+
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.stables, NPCNameList.horse),
+                                new NPCSpawnParams(revoltStartedStopSpawning));
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.stables, NPCNameList.horse + 1),
+                                new NPCSpawnParams(revoltStartedStopSpawning));
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.stables, NPCNameList.horse + 2),
+                                new NPCSpawnParams(revoltStartedStopSpawning));
+
+        #endregion
+
+        #region Camp Center
+
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.csalan),
+                               new NPCSpawnParams(revoltStartedStopSpawning));
+
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.chiefTabor),
+                               new NPCSpawnParams(new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted,
+                                                                                          FlagNameList.directorDefeated,
+                                                                                          FlagNameList.heardTaborsLesson })));
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.branded),
+                               new NPCSpawnParams(new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted,
+                                                                                          FlagNameList.directorDefeated,
+                                                                                          FlagNameList.heardTaborsLesson })));
+
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.feher),
+                               new NPCSpawnParams(revoltStartedStopSpawning));
+
         #endregion
 
         #region Camp Mine Entrance
@@ -118,7 +172,7 @@ public static class NPCSpawnParamList
         npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.barricade),
                                new NPCSpawnParams(new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.mineCratesCleared })));
 
-        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.guardMuzsa+2),
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.guardMuzsa + 2),
                                new NPCSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.mineCratesCleared }),
                                             new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated })));
 

@@ -193,7 +193,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 
     public MovementManager getMovementManager()
     {
-        return MovementManager.getInstance();
+        return AreaManager.getMovementManager();
     }
 
     public EnemyPackInfo getEnemyPackInfo()

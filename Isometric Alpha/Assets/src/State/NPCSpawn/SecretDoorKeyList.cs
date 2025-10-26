@@ -6,6 +6,12 @@ public static class SecretDoorKeyList
 {
     #region Camp
 
+    #region 6SlaveShack
+
+    public const string wisTutorialSecretDoor = LocationNameList.slaveShackSix + NPCNameList.wallPatch;
+
+    #endregion
+
     #region CenterCamp
 
     public const string centerCampWallPatchOne = LocationNameList.campCenter + NPCNameList.wallPatch + "1";

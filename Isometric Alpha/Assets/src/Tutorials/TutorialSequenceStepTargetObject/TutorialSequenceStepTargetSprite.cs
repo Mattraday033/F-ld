@@ -7,16 +7,18 @@ public class TutorialSequenceStepTargetSprite : TutorialSequenceStepTargetObject
 	public SpriteRenderer spriteRenderer;
 	public Color previousColor = Color.white;
 
-	public override void highlight(bool skip)
-	{
-		if(skip)
-		{
-			return;
-		}
-		
-		previousColor = spriteRenderer.color;
-		spriteRenderer.color = RevealManager.tutorialDefault;
-	}
+    public override void highlight(bool skip)
+    {
+        if (skip)
+        {
+            return;
+        }
+
+        Debug.LogError("Outlines temporarily disabled");
+
+        // previousColor = spriteRenderer.color;
+        // spriteRenderer.color = RevealManager.tutorialDefault;
+    }
 	
     public override void unhighlight(bool skip)
 	{
@@ -25,6 +27,8 @@ public class TutorialSequenceStepTargetSprite : TutorialSequenceStepTargetObject
 			return;
 		}
 
-		spriteRenderer.color = previousColor;
+        Debug.LogError("Outlines temporarily disabled");
+
+        // spriteRenderer.color = previousColor;
 	}
 }

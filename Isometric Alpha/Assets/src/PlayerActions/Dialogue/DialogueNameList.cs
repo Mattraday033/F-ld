@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public static class DialogueNameList
@@ -19,7 +20,12 @@ public static class DialogueNameList
     public const string chiefTaborPunishmentDialogueKey = "ChiefTabor";
     #endregion
 
-    public const string dialogueResourcesPathName = "Dialogue/";
+    public const string seperatorChar = "/";
+    public const string dialogueResourcesPathName = "Dialogue" + seperatorChar;
+
+    public const string campPathName = dialogueResourcesPathName + LocationNameList.camp + seperatorChar;
+    public const string campInteriorPathName = campPathName + LocationNameList.campInterior + seperatorChar;
+    public const string campExteriorPathName = campPathName + LocationNameList.campExterior + seperatorChar;
 
     #region PartyMembers
 
@@ -29,58 +35,72 @@ public static class DialogueNameList
     #endregion
 
     #region Camp
-    public const string wallPatchPath = dialogueResourcesPathName + LocationNameList.camp + "/WallPatch";
+    public const string wallPatchPath = campPathName + "WallPatch";
 
     #region Slave Shack 1
-    public const string sebPath = dialogueResourcesPathName + LocationNameList.slaveShackOne + "/Seb";
-    public const string balintPath = dialogueResourcesPathName + LocationNameList.slaveShackOne + "/Balint";
+    public const string sebPath = campInteriorPathName + LocationNameList.slaveShackOne + seperatorChar + NPCNameList.seb;
+    public const string balintPath = campInteriorPathName + LocationNameList.slaveShackOne + seperatorChar + "Balint";
     #endregion
     #region Slave Shack 2
-    public const string introDialoguePath = dialogueResourcesPathName + LocationNameList.slaveShackTwo + "/IntroDialogue";
-    public const string garchaPath = dialogueResourcesPathName + LocationNameList.slaveShackTwo + "/Garcha";
+    public const string introDialoguePath = campInteriorPathName + LocationNameList.slaveShackTwo + seperatorChar + "IntroDialogue";
+    public const string garchaPath = campInteriorPathName + LocationNameList.slaveShackTwo + seperatorChar + NPCNameList.garcha;
     #endregion
     #region Slave Shack 3
-    public const string janosPath = dialogueResourcesPathName + LocationNameList.slaveShackThree + "/Janos";
-    public const string janosAfterKillingAndrasPath = dialogueResourcesPathName + LocationNameList.slaveShackThree + "/JanosAfterKillingAndras";
+    public const string janosPath = campInteriorPathName + LocationNameList.slaveShackThree + seperatorChar + NPCNameList.janos;
+    public const string janosAfterKillingAndrasPath = campInteriorPathName + LocationNameList.slaveShackThree + seperatorChar + "JanosAfterKillingAndras";
     public const string janosAfterKillingAndrasKey = "JanosAfterKillingAndras";
-    public const string andrasPath = dialogueResourcesPathName + LocationNameList.slaveShackThree + "/Andras";
+    public const string andrasPath = campInteriorPathName + LocationNameList.slaveShackThree + seperatorChar + "Andras";
     #endregion
     #region Slave Shack 4
-    public const string kastorPlanPath = dialogueResourcesPathName + LocationNameList.slaveShackFour + "/KastorPlan";
-    public const string guardMarcosSS4Path = dialogueResourcesPathName + LocationNameList.slaveShackFour + "/GuardMarcos";
+    public const string kastorPlanPath = campInteriorPathName + LocationNameList.slaveShackFour + seperatorChar + "KastorPlan";
+    public const string guardMarcosSS4Path = campInteriorPathName + LocationNameList.slaveShackFour + seperatorChar + "GuardMarcos";
     #endregion
     #region Slave Shack 5
-    public const string ervinPath = dialogueResourcesPathName + LocationNameList.slaveShackFive + "/Ervin";
+    public const string ervinPath = campInteriorPathName + LocationNameList.slaveShackFive + seperatorChar + NPCNameList.ervin;
     #endregion
     #region Slave Shack 6
-    public const string thatchPath = dialogueResourcesPathName + LocationNameList.slaveShackSix + "/Thatch";
-    public const string slatePath = dialogueResourcesPathName + LocationNameList.slaveShackSix + "/Slate";
-    public const string vazulPath = dialogueResourcesPathName + LocationNameList.slaveShackSix + "/Vazul";
-    public const string immovableRubblePath = dialogueResourcesPathName + LocationNameList.slaveShackSix + "/ImmovableRubble";
+    public const string thatchPath = campInteriorPathName + LocationNameList.slaveShackSix + seperatorChar + NPCNameList.thatch;
+    public const string slatePath = campInteriorPathName + LocationNameList.slaveShackSix + seperatorChar + NPCNameList.slate;
+    public const string vazulPath = campInteriorPathName + LocationNameList.slaveShackSix + seperatorChar + "Vazul";
+    public const string immovableRubblePath = campInteriorPathName + LocationNameList.slaveShackSix + seperatorChar + "ImmovableRubble";
     #endregion
 
     #region Mess Hall
-    public const string kendePath = dialogueResourcesPathName + LocationNameList.messHall + "/Kende";
+    public const string kendePath = campInteriorPathName + LocationNameList.messHall + seperatorChar + NPCNameList.kende;
+    #endregion
+
+
+    #region Stables
+    public const string horsePath = campInteriorPathName + LocationNameList.stables + seperatorChar + NPCNameList.horse;
+    public const string beamPath = campInteriorPathName + LocationNameList.stables + seperatorChar + NPCNameList.beam;
     #endregion
 
     #region Stockhouse
-    public const string urosPath = dialogueResourcesPathName + LocationNameList.stockhouse + "/Uros";
-    public const string emesePath = dialogueResourcesPathName + LocationNameList.stockhouse + "/Emese";
-    public const string dudCratePath = dialogueResourcesPathName + LocationNameList.stockhouse + "/DudCrate";
-    public const string barrelsWithNuggetPath = dialogueResourcesPathName + LocationNameList.stockhouse + "/BarrelsWithNugget";
+    public const string urosPath = campInteriorPathName + LocationNameList.stockhouse + seperatorChar + NPCNameList.uros;
+    public const string emesePath = campInteriorPathName + LocationNameList.stockhouse + seperatorChar + "Emese";
+    public const string dudCratePath = campInteriorPathName + LocationNameList.stockhouse + seperatorChar + "DudCrate";
+    public const string barrelsWithNuggetPath = campInteriorPathName + LocationNameList.stockhouse + seperatorChar + "BarrelsWithNugget";
 
     #endregion
 
     #region Camp North East
-    public const string leafPilePath = dialogueResourcesPathName + LocationNameList.campNorthEast + "/LeafPile";
+    public const string leafPilePath = campExteriorPathName + LocationNameList.campNorthEast + seperatorChar + "LeafPile";
+    #endregion
+    #region Camp Center
+    public const string csalanPath = campExteriorPathName + LocationNameList.campCenter + seperatorChar + NPCNameList.csalan;
+    public const string taborPath = campExteriorPathName + LocationNameList.campCenter + seperatorChar + NPCNameList.tabor;
+    public const string feherPath = campExteriorPathName + LocationNameList.campCenter + seperatorChar + NPCNameList.feher;
+    public const string slavesWatchingTaborPath = campExteriorPathName + LocationNameList.campCenter + seperatorChar + "SlavesWatchingTabor";
+    public const string guardWatchingTaborPath = campExteriorPathName + LocationNameList.campCenter + seperatorChar + "GuardWatchingTabor";
+    public const string templePath = campExteriorPathName + LocationNameList.campCenter + seperatorChar + NPCNameList.temple;
     #endregion
 
     #region Camp Mine Entrance
-    public const string muszaPath = dialogueResourcesPathName + LocationNameList.campMineEntrance + "/GuardMuzsa";
+    public const string muszaPath = campExteriorPathName + LocationNameList.campMineEntrance + seperatorChar + "GuardMuzsa";
     #endregion
 
     #region Camp Manse
-    public const string imrePath = dialogueResourcesPathName + LocationNameList.campManse + "/Imre";
+    public const string imrePath = campExteriorPathName + LocationNameList.campManse + seperatorChar + NPCNameList.imre;
     #endregion
 
     #endregion

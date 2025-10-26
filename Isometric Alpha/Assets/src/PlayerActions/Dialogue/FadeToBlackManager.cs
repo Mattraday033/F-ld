@@ -186,7 +186,13 @@ public class FadeToBlackManager : MonoBehaviour
         yield return null;
         yield return null; //2 frames of instant camera speed
 
-        DialogueManager.setCameraToFadeSpeed();
+        if(PlayerOOCStateManager.currentActivity == OOCActivity.inDialogue)
+        {
+            DialogueManager.setCameraToDialogueSpeed();
+        } else
+        {
+            DialogueManager.setCameraToDefaultSpeed();
+        }        
 
         while (!isTransparent())
         {

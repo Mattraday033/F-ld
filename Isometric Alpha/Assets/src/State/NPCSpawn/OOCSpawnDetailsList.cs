@@ -81,6 +81,43 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCSpawnDetails(NPCNameList.thatch + 1, new Vector3Int(6, -2), notActivated));
 
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -3), TutorialSequenceList.firstHostilityTutorialSequenceKey, TutorialSequenceList.firstHostitilityTutorialSeenFlag));
+
+        #region Str Tutorial
+
+        #endregion
+        #region Dex Tutorial
+        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(3, -3), PrefabNames.shackWallHalf));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(4, -3), PrefabNames.shackWallHalf));
+        // list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(6, -2), PrefabNames.shackWallHalf));
+
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -4), TutorialSequenceList.interactableObjectTutorialSequenceKey,
+                                                                          TutorialSequenceList.interactableObjectTutorialSeenFlag,
+                                                                          TutorialSequenceList.firstHostitilityTutorialSeenFlag,
+                                                                          Constants.indexOne));
+
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -3), TutorialSequenceList.firstCunningTutorialSequenceKey,
+                                                                          TutorialSequenceList.cunningTutorialSeenFlag));
+
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -2), TutorialSequenceList.secondCunningTutorialSequenceKey,
+                                                                          TutorialSequenceList.secondCunningTutorialSeenFlag,
+                                                                          TutorialSequenceList.cunningTutorialSeenFlag,
+                                                                          Constants.indexTwo));
+
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(0, -4), VaultableObject.vaultableBarrelsOneTile, TutorialSequenceList.vaultableBarrelsTargetHash));
+
+        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(0, -6), PrefabNames.southDescendingRubble, Constants.shackRubbleColor));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(1, -6), PrefabNames.blockRubble, Constants.shackRubbleColor));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(0, -5), PrefabNames.northWestDescendingRubble, Constants.shackRubbleColor));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(1, -5), PrefabNames.northWestDescendingRubble, Constants.shackRubbleColor));
+        #endregion
+        #region Wis Tutorial
+
+        #endregion
+        #region Cha Tutorial
+
+        #endregion
+
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackSix, list);
         #endregion
 
@@ -91,7 +128,17 @@ public static class OOCSpawnDetailsList
 
         oocSpawnDetailsDict.Add(LocationNameList.messHall, list);
         #endregion
+        #region Stables
+        list = new List<OOCSpawnDetails>();
 
+        list.Add(new NPCSpawnDetails(NPCNameList.beam, new Vector3Int(5,5), LocationNameList.stables));
+
+        list.Add(new NPCSpawnDetails(NPCNameList.horse, new Vector3Int(3, -1), LocationNameList.stables));
+        list.Add(new NPCSpawnDetails(NPCNameList.horse + 1, new Vector3Int(12, 9), LocationNameList.stables));
+        list.Add(new NPCSpawnDetails(NPCNameList.horse + 2, new Vector3Int(3, 8), LocationNameList.stables));
+
+        oocSpawnDetailsDict.Add(LocationNameList.stables, list);
+        #endregion
         #region Stockhouse
         list = new List<OOCSpawnDetails>();
 
@@ -125,6 +172,18 @@ public static class OOCSpawnDetailsList
         #region CenterCamp
         list = new List<OOCSpawnDetails>();
 
+        list.Add(new NPCSpawnDetails(NPCNameList.csalan, new Vector3Int(16, 14), LocationNameList.campCenter));
+
+        list.Add(new NPCSpawnDetails(NPCNameList.temple, new Vector3Int(6, 7), LocationNameList.campCenter));
+
+        list.Add(new NPCSpawnDetails(NPCNameList.guard+1, new Vector3Int(5, 3), LocationNameList.campCenter));
+
+        list.Add(new NPCSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(3, 2), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.branded, new Vector3Int(1, 0), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.branded, new Vector3Int(1, 1), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.branded, new Vector3Int(1, 3), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.feher, new Vector3Int(3, 1), LocationNameList.campCenter));
+
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-4, -7), VaultableObject.vaultableBarrelsOneTile));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-11, 0), VaultableObject.vaultableBarrelsOneTile));
 
@@ -132,9 +191,6 @@ public static class OOCSpawnDetailsList
         #endregion
         #region SECamp
         list = new List<OOCSpawnDetails>();
-
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-4, -7), VaultableObject.vaultableBarrelsOneTile));
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-11, 0), VaultableObject.vaultableBarrelsOneTile));
 
         list.Add(new ChestSpawnDetails(0, new Vector3Int(13, 11), Facing.SouthEast));
 

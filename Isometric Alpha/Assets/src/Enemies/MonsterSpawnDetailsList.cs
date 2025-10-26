@@ -6,7 +6,6 @@ public static class MonsterSpawnDetailsList
 {
 
     private static Dictionary<string, List<MonsterSpawnDetails>> monsterSpawnDetailsDict;
-    private static List<MonsterSpawnDetails> list;
 
 
     public static List<MonsterSpawnDetails> getMonsterSpawnDetails()
@@ -21,17 +20,19 @@ public static class MonsterSpawnDetailsList
         return monsterSpawnDetailsDict[key];
     }
 
-    static MonsterSpawnDetailsList()
+    [RuntimeInitializeOnLoadMethod]
+    private static void instantiateMonsterSpawnDetailsList()
     {
         monsterSpawnDetailsDict = new Dictionary<string, List<MonsterSpawnDetails>>();
+        List<MonsterSpawnDetails> list;
 
         #region Camp
 
         #region 6SlaveShack
         list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(-1, -5), Facing.SouthEast));
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(4, -2), Facing.NorthEast));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(-1, -5), Facing.SouthEast, TutorialSequenceList.firstTutorialEnemyTargetHash));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(4, -2), Facing.NorthEast, TutorialSequenceList.secondTutorialEnemyTargetHash));
 
         monsterSpawnDetailsDict.Add(LocationNameList.slaveShackSix, list);
         #endregion

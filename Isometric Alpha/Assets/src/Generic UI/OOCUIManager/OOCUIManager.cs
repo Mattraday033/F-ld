@@ -43,30 +43,6 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
     public PartyMemberUpgradeCounter partyMemberUpgradeCounter;
     public CharacterLevelCounter characterLevelCounter;
 
-    void Start()
-    {
-        State.oocUIManager = this;
-
-
-        updateOOCUI();
-        updateFooting();
-        updateCounters();
-    }
-
-    public static void updateCounters()
-    {
-
-        if(Flags.isInNewGameMode())
-        {
-            return;
-        }
-
-        updateQuestCounter();
-
-        updatePartyMemberUpgradeCounter();
-        updateCharacterLevelUpCounter();
-    }
-
     public static void updateCharacterLevelUpCounter()
     {
         if (instance != null && instance.characterLevelCounter != null)
@@ -115,6 +91,14 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
         updateObservationText();
 
         updateLeadershipText();
+
+        updateFooting();
+        setUpHostilityBars();        
+        
+        updateQuestCounter();
+
+        updatePartyMemberUpgradeCounter();
+        updateCharacterLevelUpCounter();
     }
 
     private void updateIntimidateText()
@@ -240,7 +224,7 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
         PartyManager.addXP(AllyStats.xpNeededToLevelUp);
     }
 
-    private void setupHostilityBars()
+    private void setUpHostilityBars()
     {
         int lowestGreenIndex = AreaList.getCurrentAreaHostility();
 
@@ -300,11 +284,7 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
         }
 
         instance = this;
-
-        if (!SceneManager.GetActiveScene().name.Equals(SceneNameList.startMenu))
-        {
-            setupHostilityBars();
-        }
+        State.oocUIManager = this;
     }
 
     public static void disableAllOOCUIButtons()
@@ -390,7 +370,7 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
 
     public void updateCounter()
     {
-        updateCounters();
+        updateUI();
     }
     public List<UnityEvent> getUpdateEvents()
     {
@@ -399,6 +379,7 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
         listOfEvents.Add(CombatActionArray.OnCombatActionArrayChange);
         listOfEvents.Add(Stats.OnStatsChange);
         listOfEvents.Add(UpgradePartyMemberDecisionPanel.OnPartyMemberUpgraded);
+        listOfEvents.Add(AreaManager.OnAreaSpawn);
 
         return listOfEvents;
     }

@@ -21,6 +21,7 @@ public class AreaManager : MonoBehaviour
     public Transform transitionParent;
     public Transform monsterParent;
     public Transform movableObjectParent;
+    public Transform nonTransitionColliderParent;
     #endregion
 
     public QuestStepActivationScript[] scripts;
@@ -41,7 +42,7 @@ public class AreaManager : MonoBehaviour
     {
         instance = this;
 
-        SpawnInfoManager.initialize();
+        runAllScriptsOnLocationEntry();
 
         addMapData();
 
@@ -51,6 +52,16 @@ public class AreaManager : MonoBehaviour
         }
 
         OnAreaSpawn.Invoke();
+    }
+
+    private static void runAllScriptsOnLocationEntry()
+    {
+        List<PlayerInteractionScript> listOfScripts = ScriptOnLocationEntryList.getScriptsOnLocationEntry();
+
+        foreach(PlayerInteractionScript script in listOfScripts)
+        {
+            script.runScript();
+        }
     }
 
     public IMapObject getMapData()
@@ -124,6 +135,11 @@ public class AreaManager : MonoBehaviour
     public static Transform getMovableObjectParent()
     {
         return instance.movableObjectParent;
+    }
+
+    public static Transform getNonTransitionColliderParent()
+    {
+        return instance.nonTransitionColliderParent;
     }
 }
 

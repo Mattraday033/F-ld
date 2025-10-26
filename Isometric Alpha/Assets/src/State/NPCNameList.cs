@@ -8,17 +8,21 @@ public static class NPCNameList
 
     #region Branded
 
+    public const string branded = "Branded";
+
+    public const string balint = "Bálint";
     public const string broglin = "Broglin";
-    public const string garcha = "Garcha";
-    public const string kastor = "Kastor";
-    public const string ervin = "Ervin";
     public const string clay = "Clay";
+    public const string ervin = "Ervin";
+    public const string feher = "Feher";
+    public const string garcha = "Garcha";
+    public const string janos = "Janos";
+    public const string kastor = "Kastor";
     public const string sampson = "Sampson";
     public const string seb = "Seb";
-    public const string janos = "Janos";
-    public const string balint = "Bálint";
-    public const string uros = "Uros";
     public const string slate = "Slate";
+    public const string temple = "Temple";
+    public const string uros = "Uros";
 
     #endregion
 
@@ -29,9 +33,16 @@ public static class NPCNameList
 
     #endregion
 
+    #region Servants
+    public const string beam = "Beam";
+
+    #endregion
+
     #region Lovashi Guards
 
-    public const string guardMuzsa = "Múzsa";
+    public const string guard = "Guard";
+
+    public const string guardMuzsa = "Guard Múzsa";
 
 
     public const string overseerGaspar = "Overseer Gáspár";
@@ -63,8 +74,9 @@ public static class NPCNameList
 
     #endregion
 
-    #region Horses
+    #region Horses    
     public const string csalan = "Csalan";
+    public const string horse = "Horse";
 
     #endregion
 
@@ -78,6 +90,7 @@ public static class NPCNameList
     public const string crate = "Crate";
     public const string barrels = "Barrels";
     public const string barricade = "Barricade";
+    public const string halfWall = "Half Wall";
 
     #endregion
 

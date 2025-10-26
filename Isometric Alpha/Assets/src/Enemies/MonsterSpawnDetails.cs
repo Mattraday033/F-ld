@@ -9,6 +9,8 @@ public class MonsterSpawnDetails : OOCSpawnDetails
     public Facing facing;
     public bool chasesPlayer;
 
+    private string tutorialTargetHash = "";
+
     public MonsterSpawnDetails(string npcName, Vector3Int cellCoords) :
     base(npcName, cellCoords)
     {
@@ -21,6 +23,14 @@ public class MonsterSpawnDetails : OOCSpawnDetails
     {
         this.facing = facing;
         this.chasesPlayer = false;
+    }
+
+    public MonsterSpawnDetails(string npcName, Vector3Int cellCoords, Facing facing, string tutorialTargetHash) :
+    base(npcName, cellCoords)
+    {
+        this.facing = facing;
+        this.chasesPlayer = false;
+        this.tutorialTargetHash = tutorialTargetHash;
     }
 
     public MonsterSpawnDetails(string npcName, Vector3Int cellCoords, bool chasesPlayer) :
@@ -59,6 +69,13 @@ public class MonsterSpawnDetails : OOCSpawnDetails
 
     public virtual void spawnActions(EnemyMovement enemyMovement)
     {
+        if(tutorialTargetHash .Length > 0)
+        {
+            enemyMovement.tutorialHash = tutorialTargetHash;
+            enemyMovement.gameObject.AddComponent<RectTransform>();        
+        }
+
+
         if (monsterDefeatKeyExists(enemyMovement.getMonsterPackIndex()))
         {
             enemyMovement.gameObject.SetActive(false);
@@ -67,7 +84,7 @@ public class MonsterSpawnDetails : OOCSpawnDetails
         {
             enemyMovement.setEnemyFacing(facing);
             enemyMovement.followsPlayer = chasesPlayer;
-            MovementManager.getInstance().addEnemySprite(enemyMovement.transform, enemyMovement.getMonsterPackIndex() + 1);
+            AreaManager.getMovementManager().addEnemySprite(enemyMovement.transform, enemyMovement.getMonsterPackIndex() + 1);
         }
     }
 
@@ -78,7 +95,7 @@ public class MonsterSpawnDetails : OOCSpawnDetails
         
     }
 
-    private bool monsterDefeatKeyExists(int index)
+    public static bool monsterDefeatKeyExists(int index)
     {
         if (State.monsterDefeatKeys.ContainsKey(getMonsterDefeatKey(index)))
         {
@@ -90,7 +107,7 @@ public class MonsterSpawnDetails : OOCSpawnDetails
         }
     }
 
-    private string getMonsterDefeatKey(int index)
+    public static string getMonsterDefeatKey(int index)
     {
         return AreaManager.locationName + "-" + index;
     }

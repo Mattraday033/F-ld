@@ -39,6 +39,14 @@ public class NPCSpawnParams
         this.stopSpawningFlagList = stopSpawningFlagList;
     }
 
+    public NPCSpawnParams(StartSpawningFlagList startSpawningFlagList, bool spawnWhileHostile)
+    {
+        this.startSpawningFlagList = startSpawningFlagList;
+        this.stopSpawningFlagList = new StopSpawningFlagList();
+        this.spawnWhileHostile = spawnWhileHostile;
+        this.onlySpawnWhileHostile = false;
+    }
+
     public NPCSpawnParams(StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile)
     {
         this.startSpawningFlagList = new StartSpawningFlagList();
@@ -51,6 +59,14 @@ public class NPCSpawnParams
     {
         this.startSpawningFlagList = startSpawningFlagList;
         this.stopSpawningFlagList = stopSpawningFlagList;
+    }
+
+    public NPCSpawnParams(StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile)
+    {
+        this.startSpawningFlagList = startSpawningFlagList;
+        this.stopSpawningFlagList = stopSpawningFlagList;
+        this.spawnWhileHostile = spawnWhileHostile;
+        this.onlySpawnWhileHostile = false;
     }
 
     public NPCSpawnParams(StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile, bool onlySpawnWhileHostile)

@@ -6,9 +6,8 @@ using UnityEngine;
 [Serializable]
 public class TutorialTriggerCollider : MonoBehaviour
 {
-    //[SerializeField]
-    private string tutorialSequenceKey;
-    //[SerializeField]
+    public string tutorialSequenceKey;
+    [SerializeField]
     private TutorialSequence tutorialSequence;
 
     public TutorialSequence getTutorialSequence()

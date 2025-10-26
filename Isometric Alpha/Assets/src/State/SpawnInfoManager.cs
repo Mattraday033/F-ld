@@ -136,7 +136,7 @@ public static class SpawnInfoManager
 
     private static GameObject spawnInteractable(OOCSpawnDetails details)
     {
-        GameObject interactable = GameObject.Instantiate(Resources.Load<GameObject>(details.getPrefabName()), AreaManager.getNPCParent());
+        GameObject interactable = GameObject.Instantiate(Resources.Load<GameObject>(details.getPrefabName()), details.getParent());
 
         Transform transform = interactable.transform;
 
@@ -144,9 +144,9 @@ public static class SpawnInfoManager
 
         Helpers.updateGameObjectPosition(interactable);
 
-        details.spawnActions(interactable);
-
         details.setGameObjectName(interactable);
+
+        details.spawnActions(interactable);
 
         return interactable;
     }

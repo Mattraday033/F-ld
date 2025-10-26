@@ -112,7 +112,7 @@ public class LoadSaveFile : IDecision
             DeathFlagManager.deadNames = saveBlueprint.extractArrayListOfStringsFromJson(saveBlueprint.currentDeathFlags);
             MetFlagManager.metNames = saveBlueprint.extractArrayListOfStringsFromJson(saveBlueprint.currentMetFlags);
             GateAndChestManager.addKeys(saveBlueprint.extractArrayListOfStringsFromJson(saveBlueprint.currentChestFlags), GateAndChestManager.resetDictionary);
-            TrapAndButtonStateManager.allActivatedTrapKeys = saveBlueprint.extractArrayListOfStringsFromJson(saveBlueprint.currentActivatedTrapsAndButtons);
+            TrapAndButtonStateManager.resetTrapKeys(saveBlueprint.currentActivatedTrapsAndButtons);
 
             Dictionary<string, Dictionary<string, Item>> newShopkeeperInventories = SaveBlueprint.extractShopkeeperInventoriesFromJson(saveBlueprint.currentShopkeeperInventories);
             Dictionary<string, Dictionary<string, Item>> newBuyBackInventories = SaveBlueprint.extractShopkeeperInventoriesFromJson(saveBlueprint.currentBuyBackInventories);

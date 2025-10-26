@@ -97,7 +97,7 @@ public class TransitionManager : MonoBehaviour
     {
         PlayerMovement.getTransform().position = AreaManager.getMasterGrid().GetCellCenterWorld(destinationTransition.getOutPutCellCoords());
         State.playerFacing.setFacing(destinationTransition.playerSpawnDirection);
-        MovementManager.instance.addPlayerSprite(PlayerMovement.getTransform());
+        AreaManager.getMovementManager().addPlayerSprite(PlayerMovement.getTransform());
     }
 
     private static void makeAutosave(Vector3 autosavePos)
@@ -275,7 +275,7 @@ public class TransitionManager : MonoBehaviour
 		//AllMonsterPackLists.setAllMonsterPackListsToReset();
 		CunningManager.resetCunningsRemaining();
 		IntimidateManager.resetIntimidatesRemaining();
-		TrapAndButtonStateManager.removeAllActivatedTrapKeys();
+		TrapAndButtonStateManager.resetTrapKeys();
 		PartyMemberPlacer.removeAllPlacedPartyMembers();
 	}
 	

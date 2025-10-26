@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &425734422
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 425734423}
+  m_Layer: 0
+  m_Name: NonTransition Collider Spaces
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &425734423
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425734422}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1465001915}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &528484023
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,6 +631,7 @@ Transform:
   m_Children:
   - {fileID: 948302870}
   - {fileID: 2013524992}
+  - {fileID: 425734423}
   - {fileID: 713534941}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -980,6 +1012,11 @@ PrefabInstance:
       propertyPath: movableObjectParent
       value: 
       objectReference: {fileID: 2013524992}
+    - target: {fileID: 2876968422741500667, guid: f0980f206fad0fb47aa2b38adc3638d6,
+        type: 3}
+      propertyPath: nonTransitionColliderParent
+      value: 
+      objectReference: {fileID: 425734423}
     - target: {fileID: 4474347576440938782, guid: f0980f206fad0fb47aa2b38adc3638d6,
         type: 3}
       propertyPath: m_Name

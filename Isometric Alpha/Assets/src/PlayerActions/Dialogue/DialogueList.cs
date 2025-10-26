@@ -179,6 +179,20 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.stables, NPCNameList.wallPatch, wallPatchDialogue);
 
+        addDialogueToList(LocationNameList.stables, NPCNameList.beam,
+                            new Dialogue(new string[] { NPCNameList.beam },
+                            Resources.Load<TextAsset>(DialogueNameList.beamPath)));
+
+        addDialogueToList(LocationNameList.stables, NPCNameList.horse,
+                            new Dialogue(new string[] { NPCNameList.horse },
+                            Resources.Load<TextAsset>(DialogueNameList.horsePath)));
+        addDialogueToList(LocationNameList.stables, NPCNameList.horse+1,
+                            new Dialogue(new string[] { NPCNameList.horse+1 },
+                            Resources.Load<TextAsset>(DialogueNameList.horsePath)));
+        addDialogueToList(LocationNameList.stables, NPCNameList.horse+2,
+                            new Dialogue(new string[] { NPCNameList.horse+2 },
+                            Resources.Load<TextAsset>(DialogueNameList.horsePath)));
+
         #endregion
         #region Temple
 
@@ -200,6 +214,36 @@ public static class DialogueList
 
         #endregion
         #region CenterCamp
+
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.csalan,
+                            new Dialogue(new string[] { NPCNameList.csalan },
+                            Resources.Load<TextAsset>(DialogueNameList.csalanPath)));
+
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.guard+1,
+                            new Dialogue(new string[] { NPCNameList.guard+1},
+                            Resources.Load<TextAsset>(DialogueNameList.guardWatchingTaborPath)));
+
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.temple,
+                            new Dialogue(new string[] { NPCNameList.temple},
+                            Resources.Load<TextAsset>(DialogueNameList.templePath)));
+
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.chiefTabor,
+                            new Dialogue(new string[] { NPCNameList.chiefTabor,
+                                                        NPCNameList.feher,
+                                                        NPCNameList.branded},
+                            Resources.Load<TextAsset>(DialogueNameList.taborPath)));
+
+        // Dialogue slavesWatchingTaborDialogue = new Dialogue(new string[] { NPCNameList.branded }, Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath));
+        
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.feher,
+                            new Dialogue(new string[] { NPCNameList.feher },
+                            Resources.Load<TextAsset>(DialogueNameList.feherPath)));
+
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.branded,
+                            new Dialogue(new string[] { NPCNameList.branded },
+                            Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
+        // addDialogueToList(LocationNameList.campCenter, NPCNameList.branded+1, slavesWatchingTaborDialogue);
+        // addDialogueToList(LocationNameList.campCenter, NPCNameList.branded+2, slavesWatchingTaborDialogue);
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.wallPatch, wallPatchDialogue);
 

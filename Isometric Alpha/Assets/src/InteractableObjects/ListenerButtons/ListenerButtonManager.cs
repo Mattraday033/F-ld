@@ -230,7 +230,7 @@ public class ListenerButtonManager : MonoBehaviour
 
         // monsterToSpawn = MonsterPackListManager.getInstance().instantiateMonsterSpriteAtStartingPosition(monsterToSpawn.index, monsterToSpawn);
 
-        // MovementManager.getInstance().addEnemySprite(monsterToSpawn.monsterSprite.transform, monsterToSpawn.index + 1);
+        // AreaManager.getMovementManager().addEnemySprite(monsterToSpawn.monsterSprite.transform, monsterToSpawn.index + 1);
 
         // FadeToBlackManager.getInstance().setAndStartFadeBackIn();
     }

@@ -328,7 +328,7 @@ public static class AreaList
 	
 	public static bool currentSceneIsHostile()
 	{
-		if(sceneAlwaysHostile(AreaManager.locationName))
+		if(locationAlwaysHostile(AreaManager.locationName))
 		{
 			return true;
 		}
@@ -338,7 +338,7 @@ public static class AreaList
 
 	public static int getCurrentAreaHostility()
 	{
-		if (sceneAlwaysHostile(SceneManager.GetActiveScene().name))
+		if (locationAlwaysHostile(AreaManager.locationName))
 		{
 			return Area.hostilityThreshold;
 		}
@@ -373,7 +373,7 @@ public static class AreaList
 
     public static bool areaIsHostile(string sceneName)
 	{
-		if(sceneAlwaysHostile(sceneName))
+		if(locationAlwaysHostile(sceneName))
 		{
 			return true;
 		}
@@ -420,7 +420,7 @@ public static class AreaList
 		return areaOne.areaKey.Equals(areaTwo.areaKey);
 	}
 
-	private static bool sceneAlwaysHostile(string sceneName)
+	private static bool locationAlwaysHostile(string sceneName)
 	{
 		switch(sceneName)
 		{

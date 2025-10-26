@@ -37,8 +37,8 @@ changeCamTarget({broglinIndex})
 
 Great Mother, my aching head. I sleep worse and worse every night I swear.
 
-+Skip Dialogue
-    ->Close
+//+Skip Dialogue
+//    ->Close
 
 changeCamTarget({garchaIndex})
 

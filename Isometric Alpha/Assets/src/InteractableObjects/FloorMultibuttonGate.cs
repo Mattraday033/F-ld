@@ -36,6 +36,6 @@ public class FloorMultibuttonGate: MonoBehaviour, IFloorButton
 	
 	public void declareButton()
 	{
-		MovementManager.getInstance().addFloorButton(this);
+		AreaManager.getMovementManager().addFloorButton(this);
 	}
 }

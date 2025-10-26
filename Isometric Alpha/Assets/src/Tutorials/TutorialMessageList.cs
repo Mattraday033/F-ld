@@ -4,13 +4,13 @@ using UnityEngine;
 
 public static class TutorialMessageList
 {
-    private const string hostileTargetTutorialMessagePrefix = "Hostile Target Tutorial Message ";
-    private const string intimidateTutorialMessagePrefix = "Intimidate Tutorial Message ";
-    private const string interactableObjectTutorialMessagePrefix = "Interactable Object Tutorial Message ";
+    public const string hostileTargetTutorialMessagePrefix = "Hostile Target Tutorial Message ";
+    public const string intimidateTutorialMessagePrefix = "Intimidate Tutorial Message ";
+    public const string interactableObjectTutorialMessagePrefix = "Interactable Object Tutorial Message ";
 
-    private const string cunningTutorialMessagePrefix = "Cunning Tutorial Message ";
-    private const string observationTutorialMessagePrefix = "Observation Tutorial Message ";
-    private const string leadershipTutorialMessagePrefix = "Leadership Tutorial Message ";
+    public const string cunningTutorialMessagePrefix = "Cunning Tutorial Message ";
+    public const string observationTutorialMessagePrefix = "Observation Tutorial Message ";
+    public const string leadershipTutorialMessagePrefix = "Leadership Tutorial Message ";
 
     public const string equippableItemTutorialMessagePrefix = "Equippable Item Tutorial Message ";
     public const string formationPopUpTutorialMessagePrefix = "Formation PopUp Tutorial Message ";
@@ -32,10 +32,13 @@ public static class TutorialMessageList
 
     public const string partyMemberUpgradeTutorialMessagePrefix = "Party Member Upgrade Tutorial Message ";
 
-    private static Dictionary<string, string> tutorialDictionary = new Dictionary<string, string>();
+    private static Dictionary<string, string> tutorialDictionary;
 
-    static TutorialMessageList()
+    [RuntimeInitializeOnLoadMethod]
+    private static void instantiateTutorialMessageList()
     {
+        tutorialDictionary = new Dictionary<string, string>();
+
         tutorialDictionary.Add(hostileTargetTutorialMessagePrefix + 1, "There is a creature in your path. Press 'Shift' to highlight it.");
         tutorialDictionary.Add(hostileTargetTutorialMessagePrefix + 2, "The creature is highlighted in red. This means it is a hostile creature. Press 'Shift' again to remove the highlight.");
         tutorialDictionary.Add(hostileTargetTutorialMessagePrefix + 3, "The hostility tracker is red, so you can be attacked in this location. When you are safe, it will be green.");
@@ -53,7 +56,7 @@ public static class TutorialMessageList
 
 
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 1, "This creature is hiding around a blind corner. This is a good opportunity to use the Cunning skill. Press '2' to begin to activate the Cunning Skill.");
-        tutorialDictionary.Add(cunningTutorialMessagePrefix + 2, "The yellow tiles show the Cunning skill's range. A red tile shows a target. You are currently targeting the green tile. The 'WASD' keys to change the tile you are targeting. Press 'S' to target the creature.");
+        tutorialDictionary.Add(cunningTutorialMessagePrefix + 2, "The yellow tiles show the Cunning skill's range. A red tile shows a target. You are currently targeting the green tile. Use the 'WASD' keys to change the tile you are targeting. Press 'S' to target the creature.");
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 3, "You are now targeting the creature. Press 'E' to use Cunning on the creature.");
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 4, "The creature's arrow has turned red. This means that it has been distracted. It also has been turned around, and can't move. Press 'A' to start combat.");
 

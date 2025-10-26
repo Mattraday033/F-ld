@@ -36,8 +36,11 @@ public static class SecretDoorSpawnInfoList
         list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, new Vector3Int(5, 2), 
                                             new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchTwo), Constants.sizeTwo, Axis.DescendingX));
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, new Vector3Int(8, -6), 
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, new Vector3Int(8, -6),
                                             new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchOne), Constants.sizeTwo, Axis.DescendingX));
+                                            
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, new Vector3Int(2, -4), 
+                                            new SecretDoorInfo(SecretDoorKeyList.wisTutorialSecretDoor), Constants.sizeTwo, Axis.DescendingY));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.slaveShackSix, list);
         #endregion

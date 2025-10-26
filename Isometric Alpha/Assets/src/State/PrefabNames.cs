@@ -191,6 +191,8 @@ public static class PrefabNames
     public const string oocObstacle = interactablesFolder + "OOC Obstacle";
     public const string movableObject = interactablesFolder + "Movable Object";
     public const string secretDoor = interactablesFolder + "Secret Door";
+    public const string tutorialCollider = interactablesFolder + "Tutorial Collider";
+    public const string cunningObject = interactablesFolder + "Cunning Object";
 
     #endregion
 
@@ -210,24 +212,32 @@ public static class PrefabNames
     #region Sprites
     public const string spriteFolder = "Sprites/";
 
-    public const string charactersFolder = "Characters/";
-    public const string humansFolder = "Humans/";
-    public const string defaultNPCSprite = spriteFolder + charactersFolder + humansFolder + "NPC Sprite";
+    public const string barrelsFolder = spriteFolder + "Barrels/";
+    public const string vaultableBarrels = barrelsFolder + "VaultableBarrels";
 
-    public const string cratesFolder = "Crates/";
-    public const string squareCratesSmall = spriteFolder + cratesFolder + "Square Crates Small";
+    public const string charactersFolder = spriteFolder + "Characters/";
+    public const string humansFolder = charactersFolder + "Humans/";
+    public const string defaultNPCSprite = humansFolder + "NPC Sprite";
 
-    public const string barrelsFolder = "Barrels/";
-    public const string vaultableBarrels = spriteFolder + barrelsFolder + "VaultableBarrels";
+    public const string chestsFolder = spriteFolder + "Chests/";
+    public const string chestBackClosed =  chestsFolder + "Chest_Back_Closed";
+    public const string chestBackOpenFilled = chestsFolder + "Chest_Back_Opened_Filled";
+    public const string chestBackOpenEmpty = chestsFolder + "Chest_Back_Opened_Empty";
+    public const string chestFrontClosed = chestsFolder + "Chest_Front_Closed";
+    public const string chestFrontOpenFilled = chestsFolder + "Chest_Front_Opened_Filled";
+    public const string chestFrontOpenEmpty = chestsFolder + "Chest_Front_Opened_Empty";
 
-    public const string chestsFolder = "Chests/";
+    public const string cratesFolder = spriteFolder + "Crates/";
+    public const string squareCratesSmall = cratesFolder + "Square Crates Small";
 
-    public const string chestBackClosed = spriteFolder + chestsFolder + "Chest_Back_Closed";
-    public const string chestBackOpenFilled = spriteFolder + chestsFolder + "Chest_Back_Opened_Filled";
-    public const string chestBackOpenEmpty = spriteFolder + chestsFolder + "Chest_Back_Opened_Empty";
-    public const string chestFrontClosed = spriteFolder + chestsFolder + "Chest_Front_Closed";
-    public const string chestFrontOpenFilled = spriteFolder + chestsFolder + "Chest_Front_Opened_Filled";
-    public const string chestFrontOpenEmpty = spriteFolder + chestsFolder + "Chest_Front_Opened_Empty";
+    public const string halfWallsFolder = spriteFolder + "Half Walls/";
+    public const string shackWallHalf = halfWallsFolder + "Shack Wall Half";
+
+    public const string rubbleFolder = spriteFolder + "Rubble/";
+    public const string southDescendingRubble = rubbleFolder + "South Descending Rubble";
+    public const string northWestDescendingRubble = rubbleFolder + "NW Descending Rubble";
+    public const string blockRubble = rubbleFolder + "Block Rubble";
+
 
     #endregion
 }

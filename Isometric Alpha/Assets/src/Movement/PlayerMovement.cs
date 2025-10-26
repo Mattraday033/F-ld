@@ -116,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
 
 	void Start()
 	{
-        MovementManager.getInstance().addPlayerSprite(transform);
+        AreaManager.getMovementManager().addPlayerSprite(transform);
 
 		if (dialogueManager == null)
 		{
@@ -362,7 +362,7 @@ public class PlayerMovement : MonoBehaviour
 				GameObject movableObject = Physics2D.OverlapCircle(colliderWorldPosition(), detectionSize, LayerAndTagManager.movableObjectLayerMask).gameObject;
 				EnemyMovement enemyMovement = movableObject.GetComponent<EnemyMovement>();
 				enemyMovement.putBackToStartingPosition();
-				MovementManager.getInstance().evaluateAllButtonScripts();
+				AreaManager.getMovementManager().evaluateAllButtonScripts();
 			}
 
 			OOCUIManager.updateOOCUI();
@@ -924,7 +924,7 @@ public class PlayerMovement : MonoBehaviour
 				return false;
 		}
 
-		if (currentMovementKeyCode != KeyCode.None && Input.GetKey(currentMovementKeyCode) && !MovementManager.getInstance().isBetweenTiles(0))
+		if (currentMovementKeyCode != KeyCode.None && Input.GetKey(currentMovementKeyCode) && !AreaManager.getMovementManager().isBetweenTiles(0))
 		{
 			switch (currentMovementKeyCode)
 			{
@@ -954,21 +954,21 @@ public class PlayerMovement : MonoBehaviour
 
 				if (!Helpers.checkPositionForColliders(colliderWorldPosition(2), detectionSize, LayerAndTagManager.blocksMovableObjectLayerMask))
 				{
-					MovementManager.getInstance().moveAllSprites(directionalModifierGrid);
+					AreaManager.getMovementManager().moveAllSprites(directionalModifierGrid);
 				}
 				else
 				{
-					MovementManager.getInstance().moveAllSprites(new Vector3Int(0, 0, 0));
+					AreaManager.getMovementManager().moveAllSprites(new Vector3Int(0, 0, 0));
 				}
 
 			}
 			else if (!Helpers.checkPositionForColliders(colliderWorldPosition(), detectionSize, LayerAndTagManager.blocksPlayerMovementLayerMask))
 			{
-				MovementManager.getInstance().moveAllSprites(directionalModifierGrid);
+				AreaManager.getMovementManager().moveAllSprites(directionalModifierGrid);
 			}
 			else
 			{
-				MovementManager.getInstance().moveAllSprites(new Vector3Int(0, 0, 0));
+				AreaManager.getMovementManager().moveAllSprites(new Vector3Int(0, 0, 0));
 			}
 
 			return true;
@@ -1097,7 +1097,7 @@ public class PlayerMovement : MonoBehaviour
 	private void OnDrawGizmos()
 	{
 
-		if (MovementManager.getInstance() == null)
+		if (AreaManager.getMovementManager() == null)
 		{
 			return;
 		}
@@ -1352,22 +1352,22 @@ public class PlayerMovement : MonoBehaviour
 
 	private Vector3 colliderWorldPosition() //world used for checking for colliders and drawing gizmos
 	{
-		return MovementManager.getInstance().grid.GetCellCenterWorld(MovementManager.getInstance().grid.WorldToCell(transform.position) + directionalModifierGrid) - new Vector3(0f, .2f, 0);
+		return AreaManager.getMovementManager().grid.GetCellCenterWorld(AreaManager.getMovementManager().grid.WorldToCell(transform.position) + directionalModifierGrid) - new Vector3(0f, .2f, 0);
 	}
 
 	private Vector3 colliderWorldPosition(int multiplier) //world used for checking for colliders and drawing gizmos, with multiplier
 	{
-		return MovementManager.getInstance().grid.GetCellCenterWorld(MovementManager.getInstance().grid.WorldToCell(transform.position) + (directionalModifierGrid) * multiplier) - new Vector3(0f, .2f, 0);
+		return AreaManager.getMovementManager().grid.GetCellCenterWorld(AreaManager.getMovementManager().grid.WorldToCell(transform.position) + (directionalModifierGrid) * multiplier) - new Vector3(0f, .2f, 0);
 	}
 
 	public static Vector3Int getMovementGridCoords()
 	{
-		return MovementManager.getInstance().grid.WorldToCell(getTransform().position);
+		return AreaManager.getMovementManager().grid.WorldToCell(getTransform().position);
 	}
 
     public Vector3 convertGridCoordsToWorldPos(Vector3Int gridSquareCoords)
     {
-        return MovementManager.getInstance().grid.GetCellCenterWorld(gridSquareCoords);
+        return AreaManager.getMovementManager().grid.GetCellCenterWorld(gridSquareCoords);
     }
 
 	private void showFormulaToggleCheck()

@@ -55,8 +55,8 @@ public class DialogueManager : MonoBehaviour
 
 	private const float defaultXDamping = .5f;
 	private const float defaultYDamping = .5f;
-	private const float dialogueXDamping = 1f;
-	private const float dialogueYDamping = 1f;
+	private const float dialogueXDamping = 1.25f;
+	private const float dialogueYDamping = 1.25f;
 	public const float fadeXDamping = 0f;
 	public const float fadeYDamping = 0f;
 	private int frames = 60;
@@ -179,7 +179,9 @@ public class DialogueManager : MonoBehaviour
 			Start();
 		}
 
-		setCameraToDialogueSpeed();
+		PlayerOOCStateManager.setCurrentActivity(OOCActivity.inDialogue);
+
+        setCameraToDialogueSpeed();
 		oocUIManager.disableOOCUI();
 
 		currentDialogue = dialogue;
@@ -229,8 +231,6 @@ public class DialogueManager : MonoBehaviour
 		continueStory();
 
 		PlayerOOCStateManager.OnStateChangeToWalking.AddListener(onStateChangeToWalkingEvent);
-
-		PlayerOOCStateManager.setCurrentActivity(OOCActivity.inDialogue);
 	}
 
 	public void endDialogue()
@@ -789,6 +789,8 @@ public class DialogueManager : MonoBehaviour
 
                 case "movepos":
                 case "moveposition":
+                case "movetopos":
+                case "movetoposition":
                 case "moveplayer":
                 case "moveplayerpos":
                 case "moveplayerposition":
