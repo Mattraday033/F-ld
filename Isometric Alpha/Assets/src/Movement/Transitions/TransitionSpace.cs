@@ -138,7 +138,7 @@ public class TransitionSpace : MonoBehaviour, ICounter
     {
         List<UnityEvent> listOfEvents = new List<UnityEvent>();
 
-        listOfEvents.Add(TransitionManager.OnTransitionUpdate);
+        listOfEvents.Add(TransitionManager.AfterTransition);
 
         return listOfEvents;
     }

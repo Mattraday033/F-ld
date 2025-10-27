@@ -345,7 +345,7 @@ public class MovementManager : MonoBehaviour
 
 		if (allSpritesToMove[adjacentMonsterIndex] != null)
 		{
-			allSpritesToMove[adjacentMonsterIndex].GetComponent<EnemyMovement>().prepCombat(adjacentMonsterIndex);
+			allSpritesToMove[adjacentMonsterIndex].GetComponent<EnemyMovement>().prepCombat();
 		}
 
 

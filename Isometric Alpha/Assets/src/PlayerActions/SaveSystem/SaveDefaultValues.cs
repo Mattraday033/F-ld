@@ -30,17 +30,18 @@ public static class SaveDefaultValues
     public const string defaultCurrentFlags = "{\"newGame\": true}";
 
 
-    public static float[] defaultPlayerPosition = new float[] { 3.46f, -1.48f, 0.5f };
-    public static string[] defaultEmptyStringArray = new string[0];
-    public static int[] defaultEmptyIntArray = new int[0];
-    public static bool[] defaultEmptyBoolArray = new bool[0];
-    public static GridCoords[] defaultEmptyGridCoordsArray = new GridCoords[0];
-    public static GridCoords defaultPlayerFormationPosition = new GridCoords(0,1);
-    public static InventoryWrapper[] defaultEmptyInventoryWrapperArray = new InventoryWrapper[0];
-    public static StatsWrapper[] defaultEmptyStatsWrapperArray = new StatsWrapper[0];
-    public static string[] defaultEmptyMonsterPackList = new string[0];
+    public readonly static float[] defaultPlayerPosition = new float[] { 3.46f, -1.48f, 0.5f };
+    public readonly static string[] defaultEmptyStringArray = new string[0];
+    public readonly static int[] defaultEmptyIntArray = new int[0];
+    public readonly static bool[] defaultEmptyBoolArray = new bool[0];
+    public readonly static GridCoords[] defaultEmptyGridCoordsArray = new GridCoords[0];
+    public readonly static GridCoords defaultPlayerFormationPosition = new GridCoords(0,1);
+    public readonly static InventoryWrapper[] defaultEmptyInventoryWrapperArray = new InventoryWrapper[0];
+    public readonly static StatsWrapper[] defaultEmptyStatsWrapperArray = new StatsWrapper[0];
+    public readonly static FlagWrapper[] defaultEmptyFlagWrapperArray = new FlagWrapper[0];
+    public readonly static string[] defaultEmptyMonsterPackList = new string[0];
 
-    public static string[] defaultEmptyEquimentArray = new string[6] {
+    public readonly static string[] defaultEmptyEquimentArray = new string[6] {
                                                                         null,
                                                                         null,
                                                                         "{\"listIndex\":\"2\",\"itemIndex\":\"0\",\"quantity\":\"1\"}",
@@ -48,7 +49,7 @@ public static class SaveDefaultValues
                                                                         null,
                                                                         null
                                                                      };
-    public static string[] defaultEmptyCombatActionArray = new string[8] {
+    public readonly static string[] defaultEmptyCombatActionArray = new string[8] {
                                                                             null,
                                                                             null,
                                                                             null,

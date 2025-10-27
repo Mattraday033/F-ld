@@ -93,23 +93,17 @@ public static class SecretDoorSpawnInfoList
 public enum Axis { DescendingX = 0, DescendingY = 1}
 
 
-public class SecretDoorSpawnInfo
+public abstract class AxisSpawnInfo
 {
-    private string currentArea;
+    public string currentArea;
 
-    private Vector3Int startCell;
-    private int size;
-    private Axis axis;
+    public Vector3Int startCell;
+    public int size;
+    public Axis axis;
 
-    private string secretDoorName;
-    private SecretDoorInfo secretDoorInfo;
-
-    public SecretDoorSpawnInfo(string currentArea, string secretDoorName, Vector3Int startCell, SecretDoorInfo secretDoorInfo)
+    public AxisSpawnInfo(string currentArea, Vector3Int startCell)
     {
         this.currentArea = currentArea;
-
-        this.secretDoorName = secretDoorName;
-        this.secretDoorInfo = secretDoorInfo;
 
         this.startCell = startCell;
 
@@ -117,26 +111,50 @@ public class SecretDoorSpawnInfo
         this.axis = Axis.DescendingX;
     }
 
-    public SecretDoorSpawnInfo(string currentArea, string secretDoorName, Vector3Int startCell, SecretDoorInfo secretDoorInfo,  int size, Axis axis)
+    public AxisSpawnInfo(string currentArea, Vector3Int startCell,  int size, Axis axis)
     {
         this.currentArea = currentArea;
-
-        this.secretDoorName = secretDoorName;
-        this.secretDoorInfo = secretDoorInfo;
 
         this.startCell = startCell;
         this.size = size;
         this.axis = axis;
     }
 
-    public bool shouldSpawn()
+    public abstract bool shouldSpawn();
+
+    public abstract List<OOCSpawnDetails> getSpawnDetails();
+
+}
+
+
+public class SecretDoorSpawnInfo : AxisSpawnInfo
+{
+    private string secretDoorName;
+    private SecretDoorInfo secretDoorInfo;
+
+    public SecretDoorSpawnInfo(string currentArea, string secretDoorName, Vector3Int startCell, SecretDoorInfo secretDoorInfo):
+    base(currentArea, startCell)
+    {
+        this.secretDoorName = secretDoorName;
+        this.secretDoorInfo = secretDoorInfo;
+
+    }
+
+    public SecretDoorSpawnInfo(string currentArea, string secretDoorName, Vector3Int startCell, SecretDoorInfo secretDoorInfo, int size, Axis axis):
+    base(currentArea, startCell, size, axis)
+    {
+        this.secretDoorName = secretDoorName;
+        this.secretDoorInfo = secretDoorInfo;
+    }
+
+    public override bool shouldSpawn()
     {
         return !secretDoorInfo.hasBeenDiscovered();
     }
 
-    public List<SecretDoorSpawnDetails> getSecretDoors()
+    public override List<OOCSpawnDetails> getSpawnDetails()
     {
-        List<SecretDoorSpawnDetails> list = new List<SecretDoorSpawnDetails>();
+        List<OOCSpawnDetails> list = new List<OOCSpawnDetails>();
 
         for (int index = 0; index < size; index++)
         {

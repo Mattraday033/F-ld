@@ -8,30 +8,28 @@ public static class GateAndChestManager
 {
 	public const bool resetDictionary = true;
 
-	private static Dictionary<string, bool> openedGatesAndChests = new Dictionary<string, bool>();
+    private static Dictionary<string, bool> openedGatesAndChests;
 
-	public static void addKey(string key)
-	{
-		if (key == null || key.Length == 0)
-		{
-			return;
-		}
+    [RuntimeInitializeOnLoadMethod]
+    public static void resetGatesAndChests()
+    {
+        openedGatesAndChests = new Dictionary<string, bool>();
+    }
 
-		openedGatesAndChests = Helpers.addToDictionary<string>(openedGatesAndChests, key);
-	}
+    public static void resetGatesAndChests(Dictionary<string, bool> newDict)
+    {
+        openedGatesAndChests = newDict;
+    }
 
-	public static void addKeys(ArrayList keys, bool resetFirst)
-	{
-		if (resetFirst)
-		{
-			resetGatesAndChests();
-		}
+    public static void addKey(string key)
+    {
+        if (key == null || key.Length == 0)
+        {
+            return;
+        }
 
-		foreach (string key in keys)
-		{
-			addKey(key);
-		}
-	}
+        openedGatesAndChests[key] = true;
+    }
 
 	public static bool hasBeenOpened(string key)
 	{
@@ -43,14 +41,9 @@ public static class GateAndChestManager
         return openedGatesAndChests.Count;    
     }
 
-    public static string[] getSaveData()
+    public static FlagWrapper[] getAllGateAndChestFlagWrappers()
     {
-        return Helpers.getAllKeys<bool>(GateAndChestManager.openedGatesAndChests);
-    }
-
-    public static void resetGatesAndChests()
-    {
-        openedGatesAndChests = new Dictionary<string, bool>();
+        return FlagWrapper.getAllFlagsInDictionary(openedGatesAndChests);
     }
 
 	public static Story addAllVariables(Story story)

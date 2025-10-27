@@ -21,7 +21,7 @@ VAR vazulMentionedSlatesFate = false
 
 VAR deathFlagGuardVazul = false
 VAR vazulFightIndex = 0
-VAR vazulAfterFightConvoKey = "Dialogue/6SlaveShack/Vazul"
+VAR vazulAfterFightConvoKey = "Guard Vazul"
 
 
 VAR vazulIndex = 1

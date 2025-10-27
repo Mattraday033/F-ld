@@ -111,8 +111,11 @@ public class LoadSaveFile : IDecision
             ChoiceManager.choices = saveBlueprint.extractChoicesFromJson();
             DeathFlagManager.deadNames = saveBlueprint.extractArrayListOfStringsFromJson(saveBlueprint.currentDeathFlags);
             MetFlagManager.metNames = saveBlueprint.extractArrayListOfStringsFromJson(saveBlueprint.currentMetFlags);
-            GateAndChestManager.addKeys(saveBlueprint.extractArrayListOfStringsFromJson(saveBlueprint.currentChestFlags), GateAndChestManager.resetDictionary);
+            GateAndChestManager.resetGatesAndChests(FlagWrapper.convertFlagWrapperListToDictionary(saveBlueprint.currentChestAndGateFlags));
             TrapAndButtonStateManager.resetTrapKeys(saveBlueprint.currentActivatedTrapsAndButtons);
+
+            IntimidateManager.setIntimidatesRemaining(saveBlueprint.intimidatesRemaining);
+            CunningManager.setCunningsRemaining(saveBlueprint.cunningsRemaining);
 
             Dictionary<string, Dictionary<string, Item>> newShopkeeperInventories = SaveBlueprint.extractShopkeeperInventoriesFromJson(saveBlueprint.currentShopkeeperInventories);
             Dictionary<string, Dictionary<string, Item>> newBuyBackInventories = SaveBlueprint.extractShopkeeperInventoriesFromJson(saveBlueprint.currentBuyBackInventories);
@@ -130,7 +133,7 @@ public class LoadSaveFile : IDecision
             Purse.setCoinsInPurse(saveBlueprint.gold);
             AffinityManager.setAffinity(saveBlueprint.affinity);
 
-            saveBlueprint.extractAllMonsterDefeatKeysToJson();
+            MonsterDefeatKeysList.extractAllMonsterDefeatKeys(saveBlueprint);
 
             CombatStateManager.inCombat = false;
 

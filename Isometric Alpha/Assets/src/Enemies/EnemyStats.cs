@@ -108,7 +108,7 @@ public class EnemyStats : Stats
 	}
 
 	public virtual void spawningCombatAction()
-       {
+    {
         
     }
 

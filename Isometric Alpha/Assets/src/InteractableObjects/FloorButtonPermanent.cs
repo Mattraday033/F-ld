@@ -75,7 +75,7 @@ public class FloorButtonPermanent : MonoBehaviour, IFloorButton
 		
 		if(!skipKeyHandling)
 		{
-			TrapAndButtonStateManager.addKey(getKey());
+			TrapAndButtonStateManager.setKey(getKey(), true);
 		}
 	}
 	

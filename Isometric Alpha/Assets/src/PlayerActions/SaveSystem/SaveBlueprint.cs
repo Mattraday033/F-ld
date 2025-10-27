@@ -54,6 +54,30 @@ public struct FlagWrapper
         this.flagStatus = kvp.Value;
     }
 
+    public static FlagWrapper[] getAllFlagsInDictionary(Dictionary<string, bool> dict)
+    {
+        List<FlagWrapper> flagWrappers = new List<FlagWrapper>();
+
+        foreach (KeyValuePair<string, bool> kvp in dict)
+        {
+            flagWrappers.Add(new FlagWrapper(kvp));
+        }
+
+        return flagWrappers.ToArray();
+    }
+
+    public static Dictionary<string, bool> convertFlagWrapperListToDictionary(FlagWrapper[] flagWrappers)
+    {
+        Dictionary<string, bool> dict = new Dictionary<string, bool>();
+
+        foreach (FlagWrapper wrapper in flagWrappers)
+        {
+            dict[wrapper.flagName] = wrapper.flagStatus;
+        }
+
+        return dict;
+    }
+
 }
 
 [System.Serializable]
@@ -144,7 +168,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 	public string[] currentChoices = new string[ChoiceManager.choices.Count];
 	public string[] currentDeathFlags = new string[DeathFlagManager.deadNames.Count];
 	public string[] currentMetFlags = new string[MetFlagManager.metNames.Count];
-	public string[] currentChestFlags = new string[GateAndChestManager.getKeyCount()];
+	public FlagWrapper[] currentChestAndGateFlags = new FlagWrapper[GateAndChestManager.getKeyCount()];
 	public FlagWrapper[] currentActivatedTrapsAndButtons = new FlagWrapper[TrapAndButtonStateManager.allActivatedTrapKeys.Count];
 
 	public string[] currentInventory = new string[State.inventory.Count];
@@ -162,7 +186,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 	public InventoryWrapper[] currentBuyBackInventories;
 
     public PositionWrapper[] monsterLocations;
-	public string[] currentMonsterDefeatKeys = new string[State.monsterDefeatKeys.Count];
+	public FlagWrapper[] currentMonsterDefeatKeys;
 
 	public static SaveBlueprint build(string saveName, int saveNumber)
 	{
@@ -198,7 +222,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		saveBlueprint.currentChoices = convertToJson<ChoiceKey>(ChoiceManager.choices);
 		saveBlueprint.currentDeathFlags = Helpers.arrayListToStrings(DeathFlagManager.deadNames);
 		saveBlueprint.currentMetFlags = Helpers.arrayListToStrings(MetFlagManager.metNames);
-		saveBlueprint.currentChestFlags = GateAndChestManager.getSaveData();
+		saveBlueprint.currentChestAndGateFlags = GateAndChestManager.getAllGateAndChestFlagWrappers();
 		saveBlueprint.currentActivatedTrapsAndButtons = TrapAndButtonStateManager.getAllWrappers();
 		saveBlueprint.currentLocation = AreaManager.locationName;
 		saveBlueprint.saveName = saveName;
@@ -209,7 +233,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 
 		saveBlueprint.setPartyMemberDetails();
 
-		saveBlueprint.currentMonsterDefeatKeys = convertAllMonsterDefeatKeysToJson();
+		saveBlueprint.currentMonsterDefeatKeys = MonsterDefeatKeysList.getAllMonsterDefeatKeyWrappers();
 
 		saveBlueprint.currentShopkeeperInventories = ShopkeeperInventoryList.convertShopkeeperInventoriesToJson();
 		saveBlueprint.currentBuyBackInventories = ShopkeeperInventoryList.convertBuyBackInventoriesToJson();
@@ -261,7 +285,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		this.currentChoices = GetFromJson.getElementFromJson(this.saveName, nameof(currentChoices), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
 		this.currentDeathFlags = GetFromJson.getElementFromJson(this.saveName, nameof(currentDeathFlags), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
 		this.currentMetFlags = GetFromJson.getElementFromJson(this.saveName, nameof(currentMetFlags), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
-		this.currentChestFlags = GetFromJson.getElementFromJson(this.saveName, nameof(currentChestFlags), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
+		this.currentChestAndGateFlags = GetFromJson.getElementFromJson(this.saveName, nameof(currentChestAndGateFlags), jsonDynamic, SaveDefaultValues.defaultEmptyFlagWrapperArray);
 
 		this.currentInventory = GetFromJson.getElementFromJson(this.saveName, nameof(currentInventory), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
 		this.currentJunk = GetFromJson.getElementFromJson(this.saveName, nameof(currentJunk), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
@@ -280,7 +304,8 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 
 
 		this.monsterLocations = GetFromJson.getElementFromJson(this.saveName, nameof(monsterLocations), jsonDynamic, null);
-		this.currentMonsterDefeatKeys = GetFromJson.getElementFromJson(this.saveName, nameof(currentMonsterDefeatKeys), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
+        this.currentMonsterDefeatKeys = GetFromJson.getElementFromJson(this.saveName, nameof(currentMonsterDefeatKeys), jsonDynamic, SaveDefaultValues.defaultEmptyFlagWrapperArray);
+        this.currentActivatedTrapsAndButtons =  GetFromJson.getElementFromJson(this.saveName, nameof(currentActivatedTrapsAndButtons), jsonDynamic, SaveDefaultValues.defaultEmptyFlagWrapperArray);
 	}
 
 	public static string[] convertToJson(IJSONConvertable[] arrayOfJSONConvertableObjects)
@@ -567,33 +592,6 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		}
 
 		return allKnownSceneNames;
-	}
-
-	public static string[] convertAllMonsterDefeatKeysToJson()
-	{
-		string[] allMonsterDefeatKeys = new string[State.monsterDefeatKeys.Count];
-
-		int index = 0;
-		foreach (KeyValuePair<string, bool> kvp in State.monsterDefeatKeys)
-		{
-			allMonsterDefeatKeys[index] = kvp.Key + dividerCharacter + kvp.Value;
-			index++;
-		}
-
-		return allMonsterDefeatKeys;
-	}
-
-	public void extractAllMonsterDefeatKeysToJson()
-	{
-		State.monsterDefeatKeys = new Dictionary<string, bool>();
-
-		foreach (string kvpString in currentMonsterDefeatKeys)
-		{
-			string monsterKey = kvpString.Split(dividerCharacter)[0];
-			bool defeated = bool.Parse(kvpString.Split(dividerCharacter)[1]);
-
-			State.monsterDefeatKeys[monsterKey] = defeated;
-		}
 	}
 
 	public Dictionary<string, ArrayList> extractAllKnownMapDataFromJson()

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 
-public class Stats : ScriptableObject, ICloneable, IDescribable, IDescribableInBlocks
+public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescribableInBlocks
 {
     public static UnityEvent OnHealthChange = new UnityEvent();
     public static UnityEvent OnStatsChange = new UnityEvent();

@@ -8,7 +8,9 @@ using UnityEngine.SceneManagement;
 
 public class TransitionManager : MonoBehaviour
 {
-    public static UnityEvent OnTransitionUpdate = new UnityEvent();
+    public static UnityEvent BeforeTransition = new UnityEvent();
+
+    public static UnityEvent AfterTransition = new UnityEvent();
 	public static TransitionManager instance;
 
     public static bool autosaveMade = false;
@@ -64,11 +66,13 @@ public class TransitionManager : MonoBehaviour
 
         SaveHandler.autosave(transition);
 
+        BeforeTransition.Invoke();
+
         AreaManager.changeArea(transition.destinationAreaName);
 
         currentTransitions = new List<Transition>();
 
-        OnTransitionUpdate.Invoke();
+        AfterTransition.Invoke();
 
         moveToMatchingTransition(transition);
 

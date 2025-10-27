@@ -67,7 +67,7 @@ public class TutorialColliderSpawnDetails : OOCSpawnDetails
 
     public string tutorialKey;
     public string seenFlagName;
-    public string previousTutorialSeenFlagName;
+    public StartSpawningAllTrueFlagList startSpawningFlagList;
     public int monsterDefeatKeyIndex;
 
     public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName) :
@@ -75,25 +75,25 @@ public class TutorialColliderSpawnDetails : OOCSpawnDetails
     {
         this.tutorialKey = tutorialKey;
         this.seenFlagName = seenFlagName;
-        this.previousTutorialSeenFlagName = null;
+        this.startSpawningFlagList = new StartSpawningAllTrueFlagList();
         this.monsterDefeatKeyIndex = -1;
     }
 
-    public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName, string previousTutorialSeenFlagName) :
+    public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName, StartSpawningAllTrueFlagList startSpawningFlagList) :
     base(cellCoords)
     {
         this.tutorialKey = tutorialKey;
         this.seenFlagName = seenFlagName;
-        this.previousTutorialSeenFlagName = previousTutorialSeenFlagName;
+        this.startSpawningFlagList = startSpawningFlagList;
         this.monsterDefeatKeyIndex = -1;
     }
 
-    public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName, string previousTutorialSeenFlagName, int monsterDefeatKeyIndex) :
+    public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName, StartSpawningAllTrueFlagList startSpawningFlagList, int monsterDefeatKeyIndex) :
     base(cellCoords)
     {
         this.tutorialKey = tutorialKey;
         this.seenFlagName = seenFlagName;
-        this.previousTutorialSeenFlagName = previousTutorialSeenFlagName;
+        this.startSpawningFlagList = startSpawningFlagList;
         this.monsterDefeatKeyIndex = monsterDefeatKeyIndex;
     }
 
@@ -128,46 +128,128 @@ public class TutorialColliderSpawnDetails : OOCSpawnDetails
     private bool shouldNotSpawn()
     {
         return Flags.getFlag(seenFlagName) ||
-                (previousTutorialSeenFlagName != null && !Flags.getFlag(previousTutorialSeenFlagName))
-                || (monsterDefeatKeyIndex >= 0 && MonsterSpawnDetails.monsterDefeatKeyExists(monsterDefeatKeyIndex));
+                (startSpawningFlagList != null && !startSpawningFlagList.evaluateFlags())
+                || (monsterDefeatKeyIndex >= 0 && !MonsterDefeatKeysList.monsterIsDefeated(monsterDefeatKeyIndex));
     }
 
 }
 
-public class DistractableObjectSpawnDetails : OOCSpawnDetails
+public abstract class CunningObjectSpawnDetails : OOCSpawnDetails
 {
-    private Facing facing;
+    public Facing startFacing;
+    public Facing endFacing;
+    public CunningObjectSpriteCategory category;
 
-    public DistractableObjectSpawnDetails(Vector3Int cellCoords, Facing facing) :
-    base(cellCoords)
+    public CunningObjectSpawnDetails(Vector3Int cellCoords, Facing facing, CunningObjectSpriteCategory category) :
+    base(category.ToString(), cellCoords)
     {
-        this.facing = facing;
+        this.startFacing = facing;
+        this.endFacing = facing;
+
+        this.category = category;
     }
 
-
-    public override string getSpriteName()
+    public CunningObjectSpawnDetails(Vector3Int cellCoords, Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category) :
+    base(category.ToString(), cellCoords)
     {
-        return PrefabNames.defaultNPCSprite;
-    }
+        this.startFacing = startFacing;
+        this.endFacing = endFacing;
 
-    public override string getPrefabName()
-    {
-        return PrefabNames.cunningObject;
+        this.category = category;
     }
 
     public override Transform getParent()
     {
-        return AreaManager.getNonTransitionColliderParent();
+        return AreaManager.getNPCParent();
     }
 
     public override void spawnActions(GameObject gameObject)
     {
         CunningObject cunningObject = gameObject.GetComponent<CunningObject>();
 
-        // cunningObject.setFacing(facing);
-        
+        spawnActions(cunningObject);
     }
 
+    public abstract void spawnActions(CunningObject cunningObject);
+
+}
+
+public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
+{
+
+    private ObstacleSpawnDetails blockerSpawnDetails;
+
+    private string tutorialTargetHash = "";
+
+    public CunningBlockerSpawnDetails(Vector3Int cellCoords, Facing facing, CunningObjectSpriteCategory category, ObstacleSpawnDetails blockerSpawnDetails) :
+    base(cellCoords, facing, category)
+    {
+        this.blockerSpawnDetails = blockerSpawnDetails;
+    }
+
+    public CunningBlockerSpawnDetails(Vector3Int cellCoords, Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category, ObstacleSpawnDetails blockerSpawnDetails) :
+    base(cellCoords, startFacing, endFacing, category)
+    {
+        this.blockerSpawnDetails = blockerSpawnDetails;
+    }
+
+    public CunningBlockerSpawnDetails(Vector3Int cellCoords, Facing facing, CunningObjectSpriteCategory category, ObstacleSpawnDetails blockerSpawnDetails, string tutorialTargetHash) :
+    base(cellCoords, facing, category)
+    {
+        this.blockerSpawnDetails = blockerSpawnDetails;
+        this.tutorialTargetHash = tutorialTargetHash;
+    }
+
+    public CunningBlockerSpawnDetails(Vector3Int cellCoords, Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category, ObstacleSpawnDetails blockerSpawnDetails, string tutorialTargetHash) :
+    base(cellCoords, startFacing, endFacing, category)
+    {
+        this.blockerSpawnDetails = blockerSpawnDetails;
+        this.tutorialTargetHash = tutorialTargetHash;
+    }
+
+    public override string getPrefabName()
+    {
+        return PrefabNames.cunningBlocker;
+    }
+
+    // public override void spawnActions(GameObject cunningBlocker)
+    // {
+    //     base.spawnActions(cunningBlocker);
+
+
+    // }
+
+    public override void spawnActions(CunningObject cunningObject)
+    {
+        CunningBlocker cunningBlocker = cunningObject as CunningBlocker;
+        GameObject blocker = SpawnInfoManager.spawnInteractable(blockerSpawnDetails);
+
+        cunningBlocker.build(startFacing, endFacing, category, blocker);
+        SpawnInfoManager.addGameObject(blocker);
+
+        if(tutorialTargetHash .Length > 0)
+        {
+            cunningBlocker.gameObject.AddComponent<RectTransform>();
+
+            GameObject targetRect = GameObject.Instantiate(new GameObject("Target Rect"), cunningBlocker.transform);
+
+            RectTransform rectTransform = targetRect.AddComponent<RectTransform>();
+
+            rectTransform.anchorMin = Vector2Int.zero;
+            rectTransform.anchorMax = Vector2Int.one;
+            rectTransform.pivot = new Vector2(.5f, .5f);
+
+            rectTransform.offsetMin = Vector2Int.zero;
+            rectTransform.offsetMax = Vector2Int.zero;
+
+            Helpers.updateColliderPosition(targetRect);
+
+            TutorialSequenceStepTargetSprite targetSprite = targetRect.AddComponent<TutorialSequenceStepTargetSprite>();
+            targetSprite.tutorialHash = tutorialTargetHash;
+
+            targetSprite.spriteRenderer = cunningObject.spriteRenderer;
+        }
+    }
 }
 
 public class ObstacleSpawnDetails : OOCSpawnDetails

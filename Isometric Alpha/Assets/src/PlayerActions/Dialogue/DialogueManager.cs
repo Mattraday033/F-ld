@@ -85,7 +85,7 @@ public class DialogueManager : MonoBehaviour
 
             // Debug.LogError("State.dialogueUponSceneLoadKey = " + State.dialogueUponSceneLoadKey);
 
-            startDialogue(DialogueList.getDialogue(State.dialogueUponSceneLoadKey));
+            startDialogue(DialogueList.getDialogue(AreaManager.locationName, State.dialogueUponSceneLoadKey));
 			State.dialogueUponSceneLoadKey = null;
 			return;
 		}

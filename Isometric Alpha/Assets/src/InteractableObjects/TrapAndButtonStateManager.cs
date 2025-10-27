@@ -6,9 +6,77 @@ using UnityEngine.Events;
 
 public class TrapAndButtonStateManager : MonoBehaviour
 {
-    private static bool skipKeyHandling = true;
+    public static UnityEvent<string, bool> OnSetTraps;
 
     public static Dictionary<string, bool> allActivatedTrapKeys;
+
+    public static bool contains(string key)
+    {
+        if (!allActivatedTrapKeys.ContainsKey(key))
+        {
+            return false;
+        }
+
+        return allActivatedTrapKeys[key];
+    }
+
+    public static void setKey(string key, bool status)
+    {
+        allActivatedTrapKeys[key] = status;
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    public static void resetTrapKeys()
+    {
+        allActivatedTrapKeys = new Dictionary<string, bool>();
+
+        if (OnSetTraps == null)
+        {
+            OnSetTraps = new UnityEvent<string, bool>();
+        }
+    }
+
+    public static void setTrapsAndButtons()
+    {
+        foreach (KeyValuePair<string, bool> kvp in allActivatedTrapKeys)
+        {
+            OnSetTraps.Invoke(kvp.Key, kvp.Value);
+        }
+    }
+
+    public static void resetTrapKeys(FlagWrapper[] wrappers)
+    {
+        resetTrapKeys();
+
+        foreach (FlagWrapper wrapper in wrappers)
+        {
+            allActivatedTrapKeys[wrapper.flagName] = wrapper.flagStatus;
+        }
+    }
+
+    public static FlagWrapper[] getAllWrappers()
+    {
+        List<FlagWrapper> wrappers = new List<FlagWrapper>();
+
+        foreach (KeyValuePair<string, bool> kvp in allActivatedTrapKeys)
+        {
+            wrappers.Add(new FlagWrapper(kvp));
+        }
+
+        return wrappers.ToArray();
+    }
+
+    private void OnEnable()
+    {
+        TransitionManager.BeforeTransition.AddListener(resetTrapKeys);
+    }
+    
+    private void OnDisable()
+    {
+        TransitionManager.BeforeTransition.RemoveListener(resetTrapKeys);
+    }
+}
+
 
     // void Start()
     // {
@@ -42,58 +110,3 @@ public class TrapAndButtonStateManager : MonoBehaviour
     // 		allActivatedTrapKeys = new ArrayList();
     // 	}
     // }
-
-    public static void addKey(string key)
-    {
-        allActivatedTrapKeys.Add(key, true);
-        //printAllKeys();
-    }
-
-    public static bool contains(string key)
-    {
-        if (!allActivatedTrapKeys.ContainsKey(key))
-        {
-            return false;
-        }
-
-        return allActivatedTrapKeys[key];
-    }
-
-    public static void removeKey(string key)
-    {
-        if (!allActivatedTrapKeys.ContainsKey(key))
-        {
-            return;
-        }
-
-        allActivatedTrapKeys[key] = false;
-    }
-
-    [RuntimeInitializeOnLoadMethod]
-    public static void resetTrapKeys()
-    {
-        allActivatedTrapKeys = new Dictionary<string, bool>();
-    }
-
-   public static void resetTrapKeys(FlagWrapper[] wrappers)
-    {
-        resetTrapKeys();
-
-        foreach(FlagWrapper wrapper in wrappers)
-        {
-            allActivatedTrapKeys[wrapper.flagName] = wrapper.flagStatus;
-        }
-    }
-
-    public static FlagWrapper[] getAllWrappers()
-    {
-        List<FlagWrapper> wrappers = new List<FlagWrapper>();
-
-        foreach (KeyValuePair<string, bool> kvp in allActivatedTrapKeys)
-        {
-            wrappers.Add(new FlagWrapper(kvp));
-        }
-
-        return wrappers.ToArray();
-    }
-}

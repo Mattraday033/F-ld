@@ -10,20 +10,19 @@ public enum ChestState {Closed, OpenFilled, OpenEmpty }
 public class Chest : MonoBehaviour, IRevealable
 {
 
-    private static Dictionary<KeyValuePair<Facing, ChestState>, string> chestSprites;
-
     private const string tagText = "Chest";
 
-    private static Vector2 mouseHoverOffsetNE = new Vector2(0.11f, -0.025f);
-    private static Vector2 mouseHoverOffsetNW = new Vector2(-0.11f,-0.025f);
-    private static Vector2 mouseHoverOffsetSE = new Vector2(-0.075f,0.075f);
-    private static Vector2 mouseHoverOffsetSW = new Vector2(0.075f,0.075f);
+    private readonly static Vector2 mouseHoverOffsetNE = new Vector2(0.11f, -0.025f);
+    private readonly static Vector2 mouseHoverOffsetNW = new Vector2(-0.11f,-0.025f);
+    private readonly static Vector2 mouseHoverOffsetSE = new Vector2(-0.075f,0.075f);
+    private readonly static Vector2 mouseHoverOffsetSW = new Vector2(0.075f,0.075f);
 
-    static Chest()
+    private static Dictionary<KeyValuePair<Facing, ChestState>, string> chestSprites;
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void instantiateChestSprites()
     {
         chestSprites = new Dictionary<KeyValuePair<Facing, ChestState>, string>();
-
-
 
         chestSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.NorthEast, ChestState.Closed), PrefabNames.chestBackClosed);
         chestSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.NorthEast, ChestState.OpenFilled), PrefabNames.chestBackOpenFilled);
@@ -52,7 +51,6 @@ public class Chest : MonoBehaviour, IRevealable
     public ChestState chestState = ChestState.Closed;
 
     public SpriteRenderer spriteRenderer;
-    public Collider2D collider;
 
     public int chestIndex;
     //public bool FooBar { get; protected set; }

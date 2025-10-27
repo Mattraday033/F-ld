@@ -235,30 +235,30 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 
     }
 
-	public bool checkForPlayer(int monsterTransformIndex)
-	{
-		Vector3Int[] distanceModifiers = new Vector3Int[]{  MovementManager.distance1TileNorthEastGrid,
-															MovementManager.distance1TileNorthWestGrid,
-															MovementManager.distance1TileSouthWestGrid,
-															MovementManager.distance1TileSouthEastGrid};
+	// public bool checkForPlayer(int monsterTransformIndex)
+	// {
+	// 	Vector3Int[] distanceModifiers = new Vector3Int[]{  MovementManager.distance1TileNorthEastGrid,
+	// 														MovementManager.distance1TileNorthWestGrid,
+	// 														MovementManager.distance1TileSouthWestGrid,
+	// 														MovementManager.distance1TileSouthEastGrid};
 
-		foreach (Vector3Int distanceModifier in distanceModifiers)
-		{
-			if (MovementManager.colliderInCell(getCurrentCell() + distanceModifier, LayerAndTagManager.playerLayerMask))
-			{
-				if (!moveableObject && !stunnedFromRetreating())
-				{
-					prepCombat(monsterTransformIndex);
-				}
+	// 	foreach (Vector3Int distanceModifier in distanceModifiers)
+	// 	{
+	// 		if (MovementManager.colliderInCell(getCurrentCell() + distanceModifier, LayerAndTagManager.playerLayerMask))
+	// 		{
+	// 			if (!moveableObject && !stunnedFromRetreating())
+	// 			{
+	// 				prepCombat(monsterTransformIndex);
+	// 			}
 
-				return true;
-			}
-		}
+	// 			return true;
+	// 		}
+	// 	}
 
-		return false;
-	}
+	// 	return false;
+	// }
 
-	public void prepCombat(int monsterTransformIndex)
+	public void prepCombat()
 	{
 		State.enemyPackInfo = getEnemyPackInfo();
 		CombatStateManager.currentDefeatKey = AreaManager.locationName + "-" + monsterPackIndex;

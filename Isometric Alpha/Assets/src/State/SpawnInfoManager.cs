@@ -9,15 +9,12 @@ public static class SpawnInfoManager
     public static List<GameObject> allSpawnedObjects;
     private const string playerPrefab = "PlayerOOC";
 
-    static SpawnInfoManager()
-    {
-        AreaManager.OnAreaSpawn.AddListener(spawnDetails);
-    }
-
     [RuntimeInitializeOnLoadMethod]
-    public static void initialize()
+    private static void initializeSpawnInfoManager()
     {
-        
+        lastSaveBlueprint = null;
+        allSpawnedObjects = null;
+        AreaManager.OnAreaSpawn.AddListener(spawnDetails);
     }
 
     public static Vector3Int getDefaultCell()
@@ -53,21 +50,21 @@ public static class SpawnInfoManager
     {
         wipeSlate();
 
-        List<GameObject> spawnedObjects = new List<GameObject>();
+        allSpawnedObjects = new List<GameObject>();
 
-        spawnedObjects.AddRange(spawnBackground());
+        allSpawnedObjects.AddRange(spawnBackground());
 
-        spawnedObjects.AddRange(spawnPlayer());
+        allSpawnedObjects.AddRange(spawnPlayer());
 
-        spawnedObjects.AddRange(spawnAllInteractables());
+        allSpawnedObjects.AddRange(spawnAllInteractables());
 
-        spawnedObjects.AddRange(spawnAllTransitions());
+        allSpawnedObjects.AddRange(spawnAllTransitions());
 
-        spawnedObjects.AddRange(spawnAllSecretDoors());
-
-        allSpawnedObjects = spawnedObjects;
+        allSpawnedObjects.AddRange(instantiateAllAxisSpawnDetails());
 
         spawnAllMonsters();
+
+        TrapAndButtonStateManager.setTrapsAndButtons();
 
         lastSaveBlueprint = null;
     }
@@ -134,7 +131,7 @@ public static class SpawnInfoManager
         return spawnedObjects;
     }
 
-    private static GameObject spawnInteractable(OOCSpawnDetails details)
+    public static GameObject spawnInteractable(OOCSpawnDetails details)
     {
         GameObject interactable = GameObject.Instantiate(Resources.Load<GameObject>(details.getPrefabName()), details.getParent());
 
@@ -176,23 +173,27 @@ public static class SpawnInfoManager
         return spawnedObjects;
     }
 
-    private static List<GameObject> spawnAllSecretDoors()
+    private static List<GameObject> instantiateAllAxisSpawnDetails()
     {
-        List<SecretDoorSpawnInfo> secretDoorSpawnInfoList = SecretDoorSpawnInfoList.getSecretDoorSpawnDetails(AreaManager.locationName);
+        List<AxisSpawnInfo> listOfSpawnInfo = new List<AxisSpawnInfo>();
+
+        listOfSpawnInfo.AddRange(GateSpawnInfoList.getGateSpawnInfo(AreaManager.locationName));
+        listOfSpawnInfo.AddRange(SecretDoorSpawnInfoList.getSecretDoorSpawnDetails(AreaManager.locationName));
+
         List<GameObject> spawnedObjects = new List<GameObject>();
 
-        foreach (SecretDoorSpawnInfo spawnInfo in secretDoorSpawnInfoList)
+        foreach (AxisSpawnInfo spawnInfo in listOfSpawnInfo)
         {
             if(!spawnInfo.shouldSpawn())
             {
                 continue;
             }
 
-            List<SecretDoorSpawnDetails> secretDoorList = spawnInfo.getSecretDoors();
+            List<OOCSpawnDetails> allSpawnsAlongAxis = spawnInfo.getSpawnDetails();
 
-            foreach (SecretDoorSpawnDetails secretDoor in secretDoorList)
+            foreach (OOCSpawnDetails spawnDetails in allSpawnsAlongAxis)
             {
-                spawnedObjects.Add(spawnInteractable(secretDoor));
+                spawnedObjects.Add(spawnInteractable(spawnDetails));
             }
         }
 

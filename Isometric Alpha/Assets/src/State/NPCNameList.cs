@@ -91,7 +91,10 @@ public static class NPCNameList
     public const string barrels = "Barrels";
     public const string barricade = "Barricade";
     public const string halfWall = "Half Wall";
-
+    public const string liftablePrefix = "Liftable ";
+    public const string gate = "Gate";
+    public const string liftableGate = liftablePrefix + gate;
+    public const string liftableRubble = liftablePrefix + rubble;
     #endregion
 
     #region Party Member Names

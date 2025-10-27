@@ -275,6 +275,18 @@ public static class PartyStats
 
     #region Skills
 
+    [RuntimeInitializeOnLoadMethod]
+    public static void OnStartUp()
+    {
+        TransitionManager.BeforeTransition.AddListener(resetAllSkills);
+    }
+
+    public static void resetAllSkills()
+    {
+        IntimidateManager.resetIntimidatesRemaining();
+        CunningManager.resetCunningsRemaining();
+    }
+
     public static int getMaxIntimidateCount()
     {
         int playerStrength = PartyManager.getPlayerStats().getStrength();

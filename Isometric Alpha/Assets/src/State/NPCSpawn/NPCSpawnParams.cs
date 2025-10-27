@@ -128,25 +128,38 @@ public class PartyMemberNPCSpawnParams : NPCSpawnParams
 
     private bool ignoreInParty;
     
-    public PartyMemberNPCSpawnParams(StartSpawningFlagList startSpawningFlagList, bool ignoreInParty):
+    public PartyMemberNPCSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList):
     base(startSpawningFlagList)
     {
-        
+        this.ignoreInParty = ignoreInParty;
     }
 
-    public PartyMemberNPCSpawnParams(StopSpawningFlagList stopSpawningFlagList, bool ignoreInParty):
-    base(stopSpawningFlagList)
+    public PartyMemberNPCSpawnParams(StartSpawningFlagList startSpawningFlagList, bool spawnWhileHostile):
+    base(startSpawningFlagList, spawnWhileHostile)
     {
-        
+        this.ignoreInParty = false;
     }
 
-    public PartyMemberNPCSpawnParams(StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList, bool ignoreInParty):
+    public PartyMemberNPCSpawnParams(StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile):
+    base(stopSpawningFlagList, spawnWhileHostile)
+    {
+        this.ignoreInParty = false;
+    }
+
+
+    public PartyMemberNPCSpawnParams(bool ignoreInParty, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile) :
+    base(stopSpawningFlagList, spawnWhileHostile)
+    {
+        this.ignoreInParty = ignoreInParty;
+    }
+
+    public PartyMemberNPCSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList):
     base(startSpawningFlagList, stopSpawningFlagList)
     {
         this.ignoreInParty = ignoreInParty;
     }
 
-    public PartyMemberNPCSpawnParams(StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile, bool onlySpawnWhileHostile, bool ignoreInParty):
+    public PartyMemberNPCSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile, bool onlySpawnWhileHostile):
     base(startSpawningFlagList, stopSpawningFlagList, spawnWhileHostile, onlySpawnWhileHostile)
     {
         this.ignoreInParty = ignoreInParty;
@@ -210,13 +223,38 @@ public class StopSpawningFlagList : FlagList
 
 public class StartSpawningFlagList : FlagList
 {
-    public StartSpawningFlagList():
+    public StartSpawningFlagList() :
+    base()
+    {
+
+    }
+
+    public StartSpawningFlagList(string[] flags) :
+    base(flags)
+    {
+    }
+
+    public override bool evaluateFlags()
+    {
+        if (flags.Length <= 0)
+        {
+            return true;
+        }
+
+        return base.evaluateFlags();
+    }
+
+}
+
+public class StartSpawningAllTrueFlagList : FlagList
+{
+    public StartSpawningAllTrueFlagList():
     base()
     {
         
     }
 
-    public StartSpawningFlagList(string[] flags) :
+    public StartSpawningAllTrueFlagList(string[] flags) :
     base(flags)
     {
     }
@@ -228,7 +266,15 @@ public class StartSpawningFlagList : FlagList
             return true;
         }
         
-        return base.evaluateFlags();
+        foreach (string flag in this)
+        {
+            if (!Flags.getFlag(flag))
+            {
+                return false;
+            }
+        }
+        
+        return true;
     }
     
 }

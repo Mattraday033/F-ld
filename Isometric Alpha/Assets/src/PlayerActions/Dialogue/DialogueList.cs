@@ -49,7 +49,7 @@ public static class DialogueList
 
         // addDialogueToList(DialogueNameList.afterKillingAndrasConvoKey, new Dialogue(new string[] { "", "Janos" }, new GameObject[2], Resources.Load<TextAsset>(DialogueNameList.afterKillingAndrasConvoKey)));
 
-        addDialogueToList(DialogueNameList.vazulPath, new Dialogue(new string[] { "", NPCNameList.thatch + 1, NPCNameList.slate, NPCNameList.thatch + 1 }, Resources.Load<TextAsset>(DialogueNameList.vazulPath)));
+        // addDialogueToList(DialogueNameList.vazulPath, new Dialogue(new string[] { "", NPCNameList.thatch + 1, NPCNameList.slate, NPCNameList.thatch + 1 }, Resources.Load<TextAsset>(DialogueNameList.vazulPath)));
 
         // addDialogueToList(DialogueNameList.taborAfterClayFightKey, new Dialogue(new string[] { "", "Chief Tabor" }, new GameObject[2], Resources.Load<TextAsset>(DialogueNameList.taborAfterClayFightKey), new TextAsset[] { Resources.Load<TextAsset>(DialogueNameList.chiefTaborPunishmentDialogueKey) }));
 
@@ -148,6 +148,10 @@ public static class DialogueList
                             Resources.Load<TextAsset>(DialogueNameList.immovableRubblePath)));
 
         addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.wallPatch, wallPatchDialogue);
+
+        addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.liftableRubble,
+                            new Dialogue(new string[] { NPCNameList.liftableRubble },
+                            Resources.Load<TextAsset>(DialogueNameList.liftableRubblePath)));
 
         #endregion
 
@@ -281,6 +285,11 @@ public static class DialogueList
 		
 	}
 
+    public static void addDialogueToList(string areaName, string npcName, Dialogue dialogue)
+	{
+		addDialogueToList(areaName + npcName, dialogue);
+	}
+
     public static void addDialogueToList(string key, Dialogue dialogue)
     {
         dialogueList.Add(key.Replace(" ", ""), dialogue);
@@ -292,11 +301,6 @@ public static class DialogueList
                     new Dialogue(new string[] { partyMemberName},
                     Resources.Load<TextAsset>(DialogueNameList.partyMemberFolderPathName + partyMemberName)));
     }
-
-    public static void addDialogueToList(string areaName, string npcName, Dialogue dialogue)
-	{
-		addDialogueToList(areaName + npcName, dialogue);
-	}
 
     public static Dialogue getDialogue(string areaName, string npcName)
     {
@@ -313,7 +317,7 @@ public static class DialogueList
 
             if(dialogue == null)
             {
-                Debug.LogError("Dialogue does not exist for areaName + npcName combo: " + areaName + "/" + npcName);
+                Debug.LogError("Dialogue does not exist for areaName + npcName combo: " + key);
                 return null;
             }
         }

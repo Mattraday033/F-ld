@@ -192,7 +192,7 @@ public static class PrefabNames
     public const string movableObject = interactablesFolder + "Movable Object";
     public const string secretDoor = interactablesFolder + "Secret Door";
     public const string tutorialCollider = interactablesFolder + "Tutorial Collider";
-    public const string cunningObject = interactablesFolder + "Cunning Object";
+    public const string cunningBlocker = interactablesFolder + "Cunning Blocker";
 
     #endregion
 
@@ -226,6 +226,10 @@ public static class PrefabNames
     public const string chestFrontClosed = chestsFolder + "Chest_Front_Closed";
     public const string chestFrontOpenFilled = chestsFolder + "Chest_Front_Opened_Filled";
     public const string chestFrontOpenEmpty = chestsFolder + "Chest_Front_Opened_Empty";
+
+    public const string cunningObjectsFolder = spriteFolder + "CunningObjects/";
+    public const string statueBack =  cunningObjectsFolder + "Statue Back";
+    public const string statueFront = cunningObjectsFolder + "Statue Front";
 
     public const string cratesFolder = spriteFolder + "Crates/";
     public const string squareCratesSmall = cratesFolder + "Square Crates Small";

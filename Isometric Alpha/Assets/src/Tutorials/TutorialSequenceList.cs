@@ -176,9 +176,9 @@ public static class TutorialSequenceList
 
     public static void initializeSecondCunningTutorial()
     {
-        TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 5, tutorialCunningObjectTargetHash, noScript, new ShowCunningRangeScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.Alpha2 }, highlight, unhighlight, createPopUpScreenBlocker);
-        TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 6, cunningUIPanelTargetHash, noScript, new MoveCunningTargetSouthWestScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.W }, highlight, unhighlight, createPopUpScreenBlocker);
-        TutorialSequenceStep stepThree = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 7, tutorialCunningObjectTargetHash, new ReplenishCunningChargesScript(), new ActivateCunningScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.E }, highlight, unhighlight, createPopUpScreenBlocker);
+        TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 5, tutorialCunningObjectTargetHash, noScript, new ShowCunningRangeScript(), ArrowDirection.Left, new KeyCode[] { KeyCode.Alpha2 }, highlight, unhighlight, createPopUpScreenBlocker);
+        TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 6, cunningUIPanelTargetHash, noScript, new MoveCunningTargetNorthEastScript(), ArrowDirection.Left, new KeyCode[] { KeyCode.W }, highlight, unhighlight, createPopUpScreenBlocker);
+        TutorialSequenceStep stepThree = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 7, tutorialCunningObjectTargetHash, new ReplenishCunningChargesScript(), new ActivateCunningScript(), ArrowDirection.Left, new KeyCode[] { KeyCode.E });
 
         TutorialSequence secondCunningTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, secondCunningTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree });
 

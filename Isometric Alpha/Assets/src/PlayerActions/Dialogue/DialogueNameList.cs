@@ -63,6 +63,7 @@ public static class DialogueNameList
     public const string slatePath = campInteriorPathName + LocationNameList.slaveShackSix + seperatorChar + NPCNameList.slate;
     public const string vazulPath = campInteriorPathName + LocationNameList.slaveShackSix + seperatorChar + "Vazul";
     public const string immovableRubblePath = campInteriorPathName + LocationNameList.slaveShackSix + seperatorChar + "ImmovableRubble";
+    public const string liftableRubblePath = campInteriorPathName + LocationNameList.slaveShackSix + seperatorChar + "LiftableRubble";
     #endregion
 
     #region Mess Hall

@@ -69,14 +69,15 @@ public class MonsterSpawnDetails : OOCSpawnDetails
 
     public virtual void spawnActions(EnemyMovement enemyMovement)
     {
-        if(tutorialTargetHash .Length > 0)
+        if (tutorialTargetHash.Length > 0)
         {
             enemyMovement.tutorialHash = tutorialTargetHash;
-            enemyMovement.gameObject.AddComponent<RectTransform>();        
+            enemyMovement.gameObject.AddComponent<RectTransform>();
         }
 
+        string key = MonsterDefeatKeysList.generateMonsterDefeatKey(enemyMovement.getMonsterPackIndex());
 
-        if (monsterDefeatKeyExists(enemyMovement.getMonsterPackIndex()))
+        if (MonsterDefeatKeysList.monsterIsDefeated(key))
         {
             enemyMovement.gameObject.SetActive(false);
         }
@@ -94,24 +95,6 @@ public class MonsterSpawnDetails : OOCSpawnDetails
         // base.spawnActions(interactable);
         
     }
-
-    public static bool monsterDefeatKeyExists(int index)
-    {
-        if (State.monsterDefeatKeys.ContainsKey(getMonsterDefeatKey(index)))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    public static string getMonsterDefeatKey(int index)
-    {
-        return AreaManager.locationName + "-" + index;
-    }
-
 }
 
 public class MovableObjectSpawnDetails: MonsterSpawnDetails
@@ -151,22 +134,4 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
         // base.spawnActions(interactable);
         
     }
-
-    private bool monsterDefeatKeyExists(int index)
-    {
-        if (State.monsterDefeatKeys.ContainsKey(getMonsterDefeatKey(index)))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    private string getMonsterDefeatKey(int index)
-    {
-        return AreaManager.locationName + "-" + index;
-    }
-
 }

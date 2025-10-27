@@ -76,35 +76,45 @@ public static class OOCSpawnDetailsList
         list = new List<OOCSpawnDetails>();
         list.Add(new NPCSpawnDetails(NPCNameList.thatch, new Vector3Int(-1, 1), LocationNameList.slaveShackSix));
         list.Add(new NPCSpawnDetails(NPCNameList.slate, new Vector3Int(9, 1), LocationNameList.slaveShackSix));
-        list.Add(new NPCSpawnDetails(NPCNameList.guardVazul, new Vector3Int(8, -1), LocationNameList.slaveShackSix));
+        list.Add(new NPCSpawnDetails(NPCNameList.guardVazul, new Vector3Int(9, 0), LocationNameList.slaveShackSix));
         list.Add(new NPCSpawnDetails(NPCNameList.rubble, new Vector3Int(-1, -3), LocationNameList.slaveShackSix));
 
         list.Add(new NPCSpawnDetails(NPCNameList.thatch + 1, new Vector3Int(6, -2), notActivated));
 
-        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -3), TutorialSequenceList.firstHostilityTutorialSequenceKey, TutorialSequenceList.firstHostitilityTutorialSeenFlag));
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -3), TutorialSequenceList.firstHostilityTutorialSequenceKey,
+                                                                          TutorialSequenceList.firstHostitilityTutorialSeenFlag));
 
         #region Str Tutorial
 
         #endregion
         #region Dex Tutorial
-        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(3, -3), PrefabNames.shackWallHalf));
-        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(4, -3), PrefabNames.shackWallHalf));
+
         // list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(6, -2), PrefabNames.shackWallHalf));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -4), TutorialSequenceList.interactableObjectTutorialSequenceKey,
                                                                           TutorialSequenceList.interactableObjectTutorialSeenFlag,
-                                                                          TutorialSequenceList.firstHostitilityTutorialSeenFlag,
-                                                                          Constants.indexOne));
+                                new StartSpawningAllTrueFlagList(new string[] {  FlagNameList.choseDexterityAtStart,
+                                                                          TutorialSequenceList.firstHostitilityTutorialSeenFlag}),
+                                                                          Constants.indexZero));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -3), TutorialSequenceList.firstCunningTutorialSequenceKey,
-                                                                          TutorialSequenceList.cunningTutorialSeenFlag));
+                                                                          TutorialSequenceList.cunningTutorialSeenFlag,
+                                new StartSpawningAllTrueFlagList(new string[] { FlagNameList.choseDexterityAtStart })));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -2), TutorialSequenceList.secondCunningTutorialSequenceKey,
                                                                           TutorialSequenceList.secondCunningTutorialSeenFlag,
-                                                                          TutorialSequenceList.cunningTutorialSeenFlag,
-                                                                          Constants.indexTwo));
+                                new StartSpawningAllTrueFlagList(new string[] { TutorialSequenceList.cunningTutorialSeenFlag }),
+                                                                          Constants.indexOne));
+
+        list.Add(new CunningBlockerSpawnDetails(new Vector3Int(6, -1), Facing.SouthEast, Facing.NorthEast, CunningObjectSpriteCategory.Statue,
+                 new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(6, -2), PrefabNames.shackWallHalf),
+                 TutorialSequenceList.tutorialCunningObjectTargetHash));
+
 
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(0, -4), VaultableObject.vaultableBarrelsOneTile, TutorialSequenceList.vaultableBarrelsTargetHash));
+
+        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(3, -3), PrefabNames.shackWallHalf));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(4, -3), PrefabNames.shackWallHalf));
 
         list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(0, -6), PrefabNames.southDescendingRubble, Constants.shackRubbleColor));
         list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(1, -6), PrefabNames.blockRubble, Constants.shackRubbleColor));

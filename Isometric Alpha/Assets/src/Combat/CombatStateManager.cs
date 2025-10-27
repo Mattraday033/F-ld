@@ -432,7 +432,7 @@ public class CombatStateManager : MonoBehaviour
 
 		if (!State.enteredCombatFromDialogue && defeatedEnemy)
 		{
-			setDefeatKey(defeatedEnemy);
+			MonsterDefeatKeysList.setDefeatKey(currentDefeatKey, defeatedEnemy);
 		}
 
 		if (!(State.enemyPackInfo is null) && defeatedEnemy)
@@ -467,20 +467,6 @@ public class CombatStateManager : MonoBehaviour
         inCombat = false;
 
         SceneChange.changeSceneToOverworld();
-	}
-
-	private static void setDefeatKey(bool defeated)
-    {
-        if (State.monsterDefeatKeys.ContainsKey(currentDefeatKey))
-        {
-            State.monsterDefeatKeys[currentDefeatKey] = defeated;
-        }
-        else
-        {
-            State.monsterDefeatKeys.Add(currentDefeatKey, defeated);
-        }
-
-        currentDefeatKey = "";
 	}
 
 	public static bool isPlayerSurpriseRound()
