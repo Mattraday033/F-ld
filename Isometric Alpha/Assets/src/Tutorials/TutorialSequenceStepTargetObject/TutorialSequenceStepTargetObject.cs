@@ -103,6 +103,11 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
 		return tutorialHash;
 	}
 
+	public void setTutorialHash(string tutorialHash)
+	{
+		this.tutorialHash = tutorialHash;
+	}
+
 	public virtual void assignToTutorialSequence(TutorialSequenceStep tutorialSequenceStep)
 	{
 		if (tutorialSequenceStep.isTutorialTarget(getTutorialHash()))

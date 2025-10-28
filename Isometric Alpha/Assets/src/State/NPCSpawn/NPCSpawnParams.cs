@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class NPCSpawnParams
 {
-    private const bool doNotSpawn = false;
-    private const bool doSpawn = true;
+    public const bool doNotSpawn = false;
+    public const bool doSpawn = true;
 
     public StartSpawningFlagList startSpawningFlagList;
     public StopSpawningFlagList stopSpawningFlagList;
@@ -77,7 +77,7 @@ public class NPCSpawnParams
         this.onlySpawnWhileHostile = onlySpawnWhileHostile;
     }
 
-    public bool canSpawn(string npcName)
+    public virtual bool canSpawn(string npcName)
     {
         if (DeathFlagManager.isDead(npcName))
         {
@@ -123,24 +123,75 @@ public class NPCSpawnParams
     }
 }
 
+public class MonsterSpawnParams : NPCSpawnParams
+{
+    public MonsterSpawnParams():
+    base()
+    {
+        spawnWhileHostile = true;
+        onlySpawnWhileHostile = true;
+    }
+
+    public MonsterSpawnParams(StartSpawningFlagList startSpawningFlagList):
+    base(startSpawningFlagList)
+    {
+        spawnWhileHostile = true;
+        onlySpawnWhileHostile = true;
+    }
+
+    public MonsterSpawnParams(StopSpawningFlagList stopSpawningFlagList):
+    base(stopSpawningFlagList)
+    {
+        spawnWhileHostile = true;
+        onlySpawnWhileHostile = true;
+    }
+
+    public MonsterSpawnParams(StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList):
+    base(startSpawningFlagList, stopSpawningFlagList)
+    {
+        spawnWhileHostile = true;
+        onlySpawnWhileHostile = true;
+    }
+
+    public override bool canSpawn(string monsterDefeatKey)
+    {
+        if (MonsterDefeatKeysList.monsterIsDefeated(monsterDefeatKey))
+        {
+            return doNotSpawn;
+        }
+
+        if (!startSpawningFlagList.evaluateFlags())
+        {
+            return doNotSpawn;
+        }
+
+        if (!startSpawningFlagList.evaluateFlags())
+        {
+            return doNotSpawn;
+        }
+
+        return doSpawn;
+    }
+}
+
 public class PartyMemberNPCSpawnParams : NPCSpawnParams
 {
 
     private bool ignoreInParty;
-    
-    public PartyMemberNPCSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList):
+
+    public PartyMemberNPCSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList) :
     base(startSpawningFlagList)
     {
         this.ignoreInParty = ignoreInParty;
     }
 
-    public PartyMemberNPCSpawnParams(StartSpawningFlagList startSpawningFlagList, bool spawnWhileHostile):
+    public PartyMemberNPCSpawnParams(StartSpawningFlagList startSpawningFlagList, bool spawnWhileHostile) :
     base(startSpawningFlagList, spawnWhileHostile)
     {
         this.ignoreInParty = false;
     }
 
-    public PartyMemberNPCSpawnParams(StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile):
+    public PartyMemberNPCSpawnParams(StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile) :
     base(stopSpawningFlagList, spawnWhileHostile)
     {
         this.ignoreInParty = false;
@@ -153,18 +204,18 @@ public class PartyMemberNPCSpawnParams : NPCSpawnParams
         this.ignoreInParty = ignoreInParty;
     }
 
-    public PartyMemberNPCSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList):
+    public PartyMemberNPCSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList) :
     base(startSpawningFlagList, stopSpawningFlagList)
     {
         this.ignoreInParty = ignoreInParty;
     }
 
-    public PartyMemberNPCSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile, bool onlySpawnWhileHostile):
+    public PartyMemberNPCSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile, bool onlySpawnWhileHostile) :
     base(startSpawningFlagList, stopSpawningFlagList, spawnWhileHostile, onlySpawnWhileHostile)
     {
         this.ignoreInParty = ignoreInParty;
     }
-    
+
     public override bool ignoreInPartyForSpawning()
     {
         return ignoreInParty;

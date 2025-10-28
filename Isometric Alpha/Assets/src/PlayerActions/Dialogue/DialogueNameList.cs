@@ -27,6 +27,13 @@ public static class DialogueNameList
     public const string campInteriorPathName = campPathName + LocationNameList.campInterior + seperatorChar;
     public const string campExteriorPathName = campPathName + LocationNameList.campExterior + seperatorChar;
 
+    #region Gates
+    public const string interactablesPath = dialogueResourcesPathName + "Interactables" + seperatorChar;
+    public const string gatesPath = interactablesPath + "Gates" + seperatorChar;
+    public const string liftableRubblePath = gatesPath + "LiftableRubble";
+    public const string fallenBeamPath = gatesPath + "FallenBeam";
+    #endregion
+
     #region PartyMembers
 
     public const string partyMemberFolderPathName = dialogueResourcesPathName + "PartyMembers/";
@@ -63,7 +70,7 @@ public static class DialogueNameList
     public const string slatePath = campInteriorPathName + LocationNameList.slaveShackSix + seperatorChar + NPCNameList.slate;
     public const string vazulPath = campInteriorPathName + LocationNameList.slaveShackSix + seperatorChar + "Vazul";
     public const string immovableRubblePath = campInteriorPathName + LocationNameList.slaveShackSix + seperatorChar + "ImmovableRubble";
-    public const string liftableRubblePath = campInteriorPathName + LocationNameList.slaveShackSix + seperatorChar + "LiftableRubble";
+
     #endregion
 
     #region Mess Hall

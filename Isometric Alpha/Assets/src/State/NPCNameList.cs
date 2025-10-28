@@ -95,6 +95,8 @@ public static class NPCNameList
     public const string gate = "Gate";
     public const string liftableGate = liftablePrefix + gate;
     public const string liftableRubble = liftablePrefix + rubble;
+    public const string fallenBeam = "Fallen Beam";
+    public const string floorButton = "Floor Button";
     #endregion
 
     #region Party Member Names

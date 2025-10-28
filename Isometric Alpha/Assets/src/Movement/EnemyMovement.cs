@@ -785,6 +785,11 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 		return tutorialHash;
 	}
 
+	public void setTutorialHash(string tutorialHash)
+	{
+		this.tutorialHash = tutorialHash;
+	}
+
 	public void assignToTutorialSequence(TutorialSequenceStep tutorialSequenceStep)
 	{
 		if (tutorialSequenceStep.isTutorialTarget(getTutorialHash()))

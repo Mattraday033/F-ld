@@ -20,10 +20,12 @@ public class MovementManager : MonoBehaviour
 
 	public static Vector3Int[] directionMod;
 
-	private ArrayList floorButtons = new ArrayList();
-	public Dictionary<IButtonEvaluationScript, FloorButtonTrueFalse[]> buttonEvaluators = new Dictionary<IButtonEvaluationScript, FloorButtonTrueFalse[]>();
+    // private ArrayList floorButtons = new ArrayList();
+    // public Dictionary<IButtonEvaluationScript, FloorButtonTrueFalse[]> buttonEvaluators = new Dictionary<IButtonEvaluationScript, FloorButtonTrueFalse[]>();
 
-	public Grid grid;
+    public static UnityEvent OnMoveFinished = new UnityEvent();
+
+    public Grid grid;
 
 	//public bool isMoving = false;
 	public bool smallWaitAfterMoving = false;
@@ -70,7 +72,7 @@ public class MovementManager : MonoBehaviour
 
     public void addFloorButton(IFloorButton button)
     {
-        floorButtons.Add(button);
+        // floorButtons.Add(button);
     }
 
 	public bool isBetweenTiles(int spriteID)
@@ -212,22 +214,9 @@ public class MovementManager : MonoBehaviour
 	{
 		yield return null;
 
-		evaluateAllButtonScripts();
+		OnMoveFinished.Invoke();
 
 		yield break;
-	}
-
-	public void evaluateAllButtonScripts()
-	{
-		foreach (IFloorButton button in floorButtons)
-		{
-			button.evaluate();
-		}
-
-		foreach (KeyValuePair<IButtonEvaluationScript, FloorButtonTrueFalse[]> kvp in buttonEvaluators)
-		{
-			kvp.Key.evaluate(kvp.Value);
-		}
 	}
 
 	private Vector3Int determineDirection(int spriteIndex, Vector3Int coords)
@@ -329,12 +318,12 @@ public class MovementManager : MonoBehaviour
 		updateArrays();
 	}
 
-	public static void removeEnemySprite(int indexToRemove)
-	{
+    public static void removeEnemySprite(int indexToRemove)
+    {
 
-		allSpritesToMove[indexToRemove] = null;
+        allSpritesToMove[indexToRemove] = null;
 
-	}
+    }
 
 	private IEnumerator prepCombatAfterMovesFinish()
 	{
@@ -383,7 +372,7 @@ public class MovementManager : MonoBehaviour
 				yield break;
 			}
 		}*/
-		evaluateAllButtonScripts();
+		OnMoveFinished.Invoke();
 		yield break;
 	}
 
@@ -405,7 +394,7 @@ public class MovementManager : MonoBehaviour
 			spriteToMove.position = endingPosition;
 		}
 
-		evaluateAllButtonScripts();
+		OnMoveFinished.Invoke();
 
 		yield break;
 		//Helpers.updateColliderPosition(allSpritesToMove[spriteID]);

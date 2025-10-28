@@ -86,12 +86,23 @@ public static class OOCSpawnDetailsList
 
         #region Str Tutorial
 
+        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.STRDesignator, new Vector3Int(3, -3), PrefabNames.shackWallHalf));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.STRDesignator, new Vector3Int(4, -3), PrefabNames.shackWallHalf));
+
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -3), TutorialSequenceList.intimidateTutorialSequenceKey,
+                                                                          TutorialSequenceList.intimidateTutorialSeenFlag,
+                         new StartSpawningAllTrueFlagList(new string[] { FlagNameList.choseStrengthAtStart })));
+
+
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -2), TutorialSequenceList.interactableRubbleTutorialSequenceKey,
+                                                                          TutorialSequenceList.interactableObjectTutorialSeenFlag,
+                        new StartSpawningAllTrueFlagList(new string[] {  FlagNameList.choseStrengthAtStart,
+                                                                          TutorialSequenceList.intimidateTutorialSeenFlag}),
+                                                                          Constants.indexOne));
         #endregion
         #region Dex Tutorial
 
-        // list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(6, -2), PrefabNames.shackWallHalf));
-
-        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -4), TutorialSequenceList.interactableObjectTutorialSequenceKey,
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -4), TutorialSequenceList.vaultableObjectTutorialSequenceKey,
                                                                           TutorialSequenceList.interactableObjectTutorialSeenFlag,
                                 new StartSpawningAllTrueFlagList(new string[] {  FlagNameList.choseDexterityAtStart,
                                                                           TutorialSequenceList.firstHostitilityTutorialSeenFlag}),
@@ -123,8 +134,32 @@ public static class OOCSpawnDetailsList
         #endregion
         #region Wis Tutorial
 
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -4), TutorialSequenceList.observationTutorialSequenceKey,
+                                                                          TutorialSequenceList.observationTutorialSeenFlag,
+                        new StartSpawningAllTrueFlagList(new string[] {   FlagNameList.choseWisdomAtStart,
+                                                                          TutorialSequenceList.firstHostitilityTutorialSeenFlag}),
+                                                                          Constants.indexZero));
         #endregion
         #region Cha Tutorial
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(3, -3), TutorialSequenceList.tutorialButtonOneTargetHash));
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(5, -3), TutorialSequenceList.tutorialButtonTwoTargetHash));
+
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(3, -4), TutorialSequenceList.leadershipTutorialSequenceKey,
+                                                                          TutorialSequenceList.leadershipTutorialSeenFlag,
+                        new StartSpawningAllTrueFlagList(new string[] {   FlagNameList.choseCharismaAtStart,
+                                                                          TutorialSequenceList.firstHostitilityTutorialSeenFlag}),
+                                                                          Constants.indexZero));
+
+        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(0, -6), PrefabNames.southDescendingRubble, Constants.shackRubbleColor));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(1, -6), PrefabNames.blockRubble, Constants.shackRubbleColor));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(0, -5), PrefabNames.northWestDescendingRubble, Constants.shackRubbleColor));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(1, -5), PrefabNames.northWestDescendingRubble, Constants.shackRubbleColor));
+
+        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(3, -5), PrefabNames.southWestDescendingRubble, Constants.shackRubbleColor));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(5, -5), PrefabNames.blockRubble, Constants.shackRubbleColor));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(4, -5), PrefabNames.blockRubble, Constants.shackRubbleColor));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(5, -4), PrefabNames.northWestDescendingRubble, Constants.shackRubbleColor));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(4, -4), PrefabNames.northWestDescendingRubble, Constants.shackRubbleColor));
 
         #endregion
 

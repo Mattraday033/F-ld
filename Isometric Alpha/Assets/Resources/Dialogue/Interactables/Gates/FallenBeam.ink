@@ -2,46 +2,30 @@ VAR strength = 0
 VAR dexterity = 0
 VAR wisdom = 0
 VAR charisma = 0
+VAR mineLvl2BrokenGateLifted = false
 VAR playerName = ""
 
-VAR rubbleIndex = 1 
-VAR tutorialColliderIndex = 2 
-VAR rubbleIndex2 = 3 
-
-deactivate({tutorialColliderIndex})
+//changeCamTarget(int targetIndex)
+//keepDialogue()
+//setToTrue(string flagName)
+//setToFalse(string flagName)
+//activate(int index of gameobject you're activating)
+//deactivate(int index of gameobject you're deactivating)
+//activateQuestStep(string questTitle, int questStepIndex)
+//giveItem(int listIndex, int itemIndex, int quantity)
+//giveItems(int listIndex1, int itemIndex1, int quantity1 |
+//          int listIndex2, int itemIndex2, int quantity2 |
+//          ... etc)
+//takeAllOfItem(string itemName)
 
 ->1a
 
 === 1a ===
 
-This rubble blocks your path, but with enough strength and effort it can be moved.
+These beams have fallen from the ceiling, blocking your path. It looks like a two person job to clear them.
 
-{
--strength >= 2:
-    +Remove the rubble. <Str {strength}/2>
-        ->1b
-}
-    +Leave the rubble alone.
+    +\*Leave.*
         ->Close
-
-=== 1b ===
-
-fadeToBlack()
-
-deactivate({rubbleIndex})
-deactivate({rubbleIndex2})
-
-fadeBackIn(60)
-
-openGate()
-
-You move the rubble. The path is now clear.
-    ->Close
-
-
-=== 1c ===
-
-->Close
 
 === 1d ===
 

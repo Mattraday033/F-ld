@@ -8,6 +8,8 @@ public class OOCSpawnDetails
     private const string gameObjectNameSuffix = "'s GameObject";
     private const string gameObjectPlaceHolderName = "PlaceHolder GameObject";
 
+    public string tutorialTargetHash = "";
+
     public string npcName = "";
     public Vector3Int cellCoords;
 
@@ -42,6 +44,11 @@ public class OOCSpawnDetails
         return null;
     }
 
+    public bool hasTutorialTargetHash()
+    {
+        return tutorialTargetHash != null && tutorialTargetHash.Length > 0;
+    }
+
     public virtual void setGameObjectName(GameObject gameObject)
     {
         if (npcName.Length > 0)
@@ -58,6 +65,43 @@ public class OOCSpawnDetails
     {
         SpriteRenderer spriteRenderer = interactable.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = Helpers.loadSpriteFromResources(getSpriteName());
+    }
+
+    public static void addTutorialTargetComponent(GameObject gameObject, string tutorialTargetHash)
+    {
+        SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        addTutorialTargetComponent(gameObject, spriteRenderer, tutorialTargetHash);
+    }
+
+    public static void addTutorialTargetComponent(GameObject gameObject, SpriteRenderer spriteRenderer, string tutorialTargetHash)
+    {
+        gameObject.AddComponent<RectTransform>();
+
+        Helpers.debugNullCheck("gameObject.transform", gameObject.transform);
+
+        GameObject targetRect = GameObject.Instantiate(new GameObject("Target Rect"), gameObject.transform);
+
+        RectTransform rectTransform = targetRect.AddComponent<RectTransform>();
+
+        rectTransform.anchorMin = Vector2Int.zero;
+        rectTransform.anchorMax = Vector2Int.one;
+        rectTransform.pivot = new Vector2(.5f, .5f);
+
+        rectTransform.offsetMin = Vector2Int.zero;
+        rectTransform.offsetMax = Vector2Int.zero;
+
+        Helpers.updateColliderPosition(targetRect);
+
+        TutorialSequenceStepTargetSprite targetSprite = targetRect.AddComponent<TutorialSequenceStepTargetSprite>();
+        targetSprite.tutorialHash = tutorialTargetHash;
+
+        targetSprite.spriteRenderer = spriteRenderer;
+    }
+
+    public static void addTutorialTargetComponent(ITutorialSequenceTarget target, string tutorialTargetHash)
+    {
+        target.setTutorialHash(tutorialTargetHash);
+        target.getGameObject().AddComponent<RectTransform>();
     }
 
 }
@@ -179,8 +223,6 @@ public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
 
     private ObstacleSpawnDetails blockerSpawnDetails;
 
-    private string tutorialTargetHash = "";
-
     public CunningBlockerSpawnDetails(Vector3Int cellCoords, Facing facing, CunningObjectSpriteCategory category, ObstacleSpawnDetails blockerSpawnDetails) :
     base(cellCoords, facing, category)
     {
@@ -227,27 +269,9 @@ public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
         cunningBlocker.build(startFacing, endFacing, category, blocker);
         SpawnInfoManager.addGameObject(blocker);
 
-        if(tutorialTargetHash .Length > 0)
+        if(hasTutorialTargetHash())
         {
-            cunningBlocker.gameObject.AddComponent<RectTransform>();
-
-            GameObject targetRect = GameObject.Instantiate(new GameObject("Target Rect"), cunningBlocker.transform);
-
-            RectTransform rectTransform = targetRect.AddComponent<RectTransform>();
-
-            rectTransform.anchorMin = Vector2Int.zero;
-            rectTransform.anchorMax = Vector2Int.one;
-            rectTransform.pivot = new Vector2(.5f, .5f);
-
-            rectTransform.offsetMin = Vector2Int.zero;
-            rectTransform.offsetMax = Vector2Int.zero;
-
-            Helpers.updateColliderPosition(targetRect);
-
-            TutorialSequenceStepTargetSprite targetSprite = targetRect.AddComponent<TutorialSequenceStepTargetSprite>();
-            targetSprite.tutorialHash = tutorialTargetHash;
-
-            targetSprite.spriteRenderer = cunningObject.spriteRenderer;
+            addTutorialTargetComponent(cunningBlocker.gameObject, cunningBlocker.spriteRenderer, tutorialTargetHash);
         }
     }
 }
@@ -304,6 +328,49 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
 
 }
 
+public class ButtonSpawnDetails : OOCSpawnDetails
+{
+
+    private int index;
+
+    public ButtonSpawnDetails(string npcName, Vector3Int cellCoords) :
+    base(npcName, cellCoords)
+    {
+        this.index = 0;
+    }
+
+    public ButtonSpawnDetails(string npcName, Vector3Int cellCoords, string tutorialTargetHash) :
+    base(npcName, cellCoords)
+    {
+        this.tutorialTargetHash = tutorialTargetHash;   
+        this.index = 0;   
+    }
+
+    public override string getPrefabName()
+    {
+        return PrefabNames.floorButton;
+    }
+
+    public override Transform getParent()
+    {
+        return AreaManager.getNPCParent();
+    }
+
+    public override void spawnActions(GameObject button)
+    {
+        if (hasTutorialTargetHash())
+        {
+            SpriteRenderer spriteRenderer = button.GetComponent<SpriteRenderer>();
+
+            addTutorialTargetComponent(button, spriteRenderer, tutorialTargetHash);
+        }
+
+        FloorButton floorButton = button.GetComponent<FloorButton>();
+        floorButton.index = index;
+    }
+
+}
+
 public class NPCSpawnDetails : OOCSpawnDetails
 {
 
@@ -351,13 +418,6 @@ public class NPCSpawnDetails : OOCSpawnDetails
     {
         this.activated = activated;
         this.dialogue = null;
-    }
-
-    public NPCSpawnDetails(string npcName, Vector3Int cellCoords, bool activated, Dialogue dialogue) :
-    base(npcName, cellCoords)
-    {
-        this.activated = activated;
-        this.dialogue = dialogue;
     }
 
     public NPCSpawnDetails(string npcName, Vector3Int cellCoords, bool activated, string areaName) :
@@ -410,12 +470,14 @@ public class NPCSpawnDetails : OOCSpawnDetails
 
     public virtual void spawnActions(DialogueTrigger mainTrigger)
     {
+        List<GameObject> listOfExtraSpaces = new List<GameObject>();
+
         int index = 0;
         foreach (Vector3Int extraSpace in extraSpaces)
         {
             GameObject extraSpaceGameObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.npcExtraSpace), getParent());
 
-            extraSpaceGameObject.name = npcName + extraSpaceNameSuffix + " #" + (index+1);
+            extraSpaceGameObject.name = npcName + extraSpaceNameSuffix + " #" + (index + 1);
 
             DialogueTriggerLink linkTrigger = extraSpaceGameObject.GetComponent<DialogueTriggerLink>();
 
@@ -427,7 +489,43 @@ public class NPCSpawnDetails : OOCSpawnDetails
 
             SpawnInfoManager.addGameObject(extraSpaceGameObject);
 
+            listOfExtraSpaces.Add(extraSpaceGameObject);
+
             index++;
+        }
+
+        mainTrigger.extraSpaces = listOfExtraSpaces.ToArray();
+    }
+}
+
+public class GateSpawnDetails : NPCSpawnDetails
+{
+    private Sprite sprite;
+
+    public GateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName) :
+    base(npcName, cellCoords, currentArea)
+    {
+        this.sprite = Helpers.loadSpriteFromResources(spriteName);
+    }
+
+    public GateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, Vector3Int[] extraSpaces, string tutorialTargetHash) :
+    base(npcName, cellCoords, currentArea, extraSpaces)
+    {
+        this.sprite = Helpers.loadSpriteFromResources(spriteName);
+        this.tutorialTargetHash = tutorialTargetHash;
+    }
+
+    public override void spawnActions(GameObject gateGameObject)
+    {
+        base.spawnActions(gateGameObject);
+
+        Gate gate = gateGameObject.AddComponent<Gate>();
+        gate.setKey(npcName);
+        gate.spriteRenderer.sprite = sprite;
+
+        if(hasTutorialTargetHash())
+        {
+            addTutorialTargetComponent(gateGameObject, gate.spriteRenderer, tutorialTargetHash);
         }
     }
 }
@@ -438,13 +536,13 @@ public class ShopkeeperSpawnDetails : NPCSpawnDetails
     public ShopkeeperSpawnDetails(string npcName, Vector3Int cellCoords, string areaName) :
     base(npcName, cellCoords, areaName)
     {
-        
+
     }
 
     public ShopkeeperSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, Vector3Int[] extraSpaces) :
     base(npcName, cellCoords, areaName, extraSpaces)
     {
-        
+
     }
 
     public override bool interactable()
@@ -466,11 +564,14 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
 {
     private SecretDoorInfo secretDoorInfo;
 
-    public SecretDoorSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, SecretDoorInfo secretDoorInfo) :
+    public SecretDoorSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, SecretDoorInfo secretDoorInfo, string tutorialTargetHash) :
     base(npcName, cellCoords, areaName)
     {
         this.secretDoorInfo = secretDoorInfo;
+
+        this.tutorialTargetHash = tutorialTargetHash;
     }
+    
     public override bool interactable()
     {
         return true;
@@ -503,6 +604,12 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
         ObservableObject observableObject = secretDoor.GetComponent<ObservableObject>();
 
         observableObject.secretDoorKey = secretDoorInfo.secretDoorKey;
+
+        if(hasTutorialTargetHash())
+        {
+            SpriteRenderer spriteRenderer = secretDoor.GetComponent<SpriteRenderer>();
+            addTutorialTargetComponent(secretDoor, spriteRenderer, tutorialTargetHash);
+        }
     }
 
     public override void spawnActions(DialogueTrigger dialogueTrigger)
@@ -517,13 +624,11 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
 {
 
     public VaultableObject vaultableObject;
-    public string tutorialTargetHash;
 
     public VaultableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableObject vaultableObject) :
     base(npcName, cellCoords)
     {
         this.vaultableObject = vaultableObject;
-        this.tutorialTargetHash = "";
     }
 
     public VaultableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableObject vaultableObject, string tutorialTargetHash) :
@@ -554,14 +659,11 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
     {
         base.spawnActions(gameObject);
 
-        if (tutorialTargetHash.Length > 0)
+        if (hasTutorialTargetHash())
         {
-            gameObject.AddComponent<RectTransform>();
-
-            TutorialSequenceStepTargetSprite targetObject = gameObject.AddComponent<TutorialSequenceStepTargetSprite>();
-            targetObject.tutorialHash = tutorialTargetHash;
+            SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+            addTutorialTargetComponent(gameObject, spriteRenderer, tutorialTargetHash);
         }
-
     }
 
     public override void spawnActions(DialogueTrigger dialogueTrigger)

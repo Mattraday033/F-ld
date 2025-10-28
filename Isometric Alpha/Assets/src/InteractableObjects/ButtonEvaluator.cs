@@ -23,6 +23,6 @@ public class ButtonEvaluator : MonoBehaviour
 	
 	private void declareButton()
 	{
-		AreaManager.getMovementManager().buttonEvaluators.Add(script,buttons);
+		// AreaManager.getMovementManager().buttonEvaluators.Add(script,buttons);
 	}
 }

@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 8761656224251614378}
   - component: {fileID: 3876896030663513859}
   - component: {fileID: 2738034900309326918}
-  - component: {fileID: 4057430109917817534}
   m_Layer: 16
   m_Name: NPC
   m_TagString: NPC
@@ -125,6 +124,7 @@ MonoBehaviour:
     secondaryInkJSONs: []
     npcCombatInfo: {fileID: 6576346719778344862}
   speakAtStartScript: {fileID: 0}
+  extraSpaces: []
 --- !u!114 &-5299874797357560549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,18 +297,6 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
---- !u!156049354 &4057430109917817534
-Grid:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5555899077454664655}
-  m_Enabled: 1
-  m_CellSize: {x: 1, y: 0.5, z: 1}
-  m_CellGap: {x: 0, y: 0, z: 0}
-  m_CellLayout: 2
-  m_CellSwizzle: 0
 --- !u!1001 &2344614687612598003
 PrefabInstance:
   m_ObjectHideFlags: 0

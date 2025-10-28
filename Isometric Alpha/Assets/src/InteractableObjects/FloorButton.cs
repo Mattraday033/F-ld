@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public interface IFloorButton
 {
@@ -10,53 +11,49 @@ public interface IFloorButton
 	
 }
 
-public class FloorButton : MonoBehaviour, IFloorButton
+public class FloorButton : MonoBehaviour
 {
 
-	private CapsuleCollider2D collider;
-	
-	public bool deactivateTargetOnPress;
-	
-	public ContactFilter2D filterPlayer;
-	public ContactFilter2D filterMovableObject;
-	public ContactFilter2D filterNPC;
-	
-	public GameObject target;
-	
-	void Start()
-	{
-		collider = gameObject.GetComponent<CapsuleCollider2D>();
-		gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-		
-		declareButton();
-	}
+	public Collider2D collider;
+    public SpriteRenderer spriteRenderer;
 
-	public void declareButton()
-	{
-		AreaManager.getMovementManager().addFloorButton(this);
-	}
+    public int index;
 
-    public void evaluate()
+    public string getKey()
     {
-		if(Helpers.hasCollision(collider, filterPlayer) || Helpers.hasCollision(collider, filterMovableObject) ||
-			Helpers.hasCollision(collider, filterNPC))
-		{
-			gameObject.GetComponent<SpriteRenderer>().color = Color.green;
-			
-			if(deactivateTargetOnPress)
-			{
-				target.GetComponent<ButtonTarget>().deactivate();
-			}
-			
-		} else if(gameObject.GetComponent<SpriteRenderer>().color != Color.white)
-		{
-			gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-			
-			if(deactivateTargetOnPress)
-			{
-				target.GetComponent<ButtonTarget>().activate();
-			}
-		}
+        return AreaManager.locationName + index;
     }
-	
+
+    public void giveData(ButtonLogicScript buttonLogicScript)
+    {
+        buttonLogicScript.getFloorButtonStatus(this);
+    }
+
+    public bool isPressed()
+    {
+        return Helpers.hasCollision(collider, LayerAndTagManager.pressesButtonsLayerMask); 
+    }
+
+    private void setSprite()
+    {
+        if(isPressed())
+        {
+            spriteRenderer.color = Color.green;
+        } else
+        {
+            spriteRenderer.color = Color.white;            
+        }
+    }
+
+    private void OnEnable()
+    {
+        ButtonLogicScript.OnButtonDataRequest.AddListener(giveData);
+        MovementManager.OnMoveFinished.AddListener(setSprite);        
+    }
+
+    private void OnDisable()
+    {
+        ButtonLogicScript.OnButtonDataRequest.RemoveListener(giveData);
+        MovementManager.OnMoveFinished.RemoveListener(setSprite); 
+    }
 }

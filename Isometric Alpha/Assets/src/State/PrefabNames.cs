@@ -183,12 +183,14 @@ public static class PrefabNames
     #region Interactable Game Objects
     public const string interactablesFolder = "Interactables/";
     public const string NPC = interactablesFolder + "NPC";
+    public const string PartyMember = interactablesFolder + "PartyMember";
     public const string npcExtraSpace = interactablesFolder + "NPC Extra Space";
     public const string transitionSpace = interactablesFolder + "Transition Space";
     public const string vaultableObject = interactablesFolder + "VaultableObject";
     public const string chest = interactablesFolder + "Chest";
     public const string oocMonster = interactablesFolder + "OOC Monster";
     public const string oocObstacle = interactablesFolder + "OOC Obstacle";
+    public const string floorButton = interactablesFolder + "Floor Button";
     public const string movableObject = interactablesFolder + "Movable Object";
     public const string secretDoor = interactablesFolder + "Secret Door";
     public const string tutorialCollider = interactablesFolder + "Tutorial Collider";
@@ -240,6 +242,7 @@ public static class PrefabNames
     public const string rubbleFolder = spriteFolder + "Rubble/";
     public const string southDescendingRubble = rubbleFolder + "South Descending Rubble";
     public const string northWestDescendingRubble = rubbleFolder + "NW Descending Rubble";
+    public const string southWestDescendingRubble = rubbleFolder + "SW Descending Rubble";
     public const string blockRubble = rubbleFolder + "Block Rubble";
 
 

@@ -3,10 +3,12 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public static class GateAndChestManager
 {
-	public const bool resetDictionary = true;
+    public const bool resetDictionary = true;
+    public static UnityEvent OnGateKeyAdd;
 
     private static Dictionary<string, bool> openedGatesAndChests;
 
@@ -14,6 +16,7 @@ public static class GateAndChestManager
     public static void resetGatesAndChests()
     {
         openedGatesAndChests = new Dictionary<string, bool>();
+        OnGateKeyAdd = new UnityEvent();
     }
 
     public static void resetGatesAndChests(Dictionary<string, bool> newDict)
@@ -23,12 +26,13 @@ public static class GateAndChestManager
 
     public static void addKey(string key)
     {
-        if (key == null || key.Length == 0)
+        if (openedGatesAndChests.ContainsKey(key))
         {
             return;
         }
 
         openedGatesAndChests[key] = true;
+        OnGateKeyAdd.Invoke();
     }
 
 	public static bool hasBeenOpened(string key)

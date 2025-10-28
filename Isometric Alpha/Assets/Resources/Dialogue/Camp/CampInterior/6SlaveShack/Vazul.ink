@@ -52,12 +52,6 @@ fadeBackIn(60)
 \*The guard turns to regard you as you approach. He chews something, but spits before speaking.* I know Thatch should be here, but I don't know who you are. Why are you out of your hut during lockdown?
 
 {
--strength >= 2:
-    +Keep asking stupid questions and you'll wind up dead like your friends. <Str {strength}/2>
-        ->4a
-}
-
-{
 -wisdom >= 2:
     +\*Yawn*. I'm a new slave. Arrived last night, but they've had me working with Thatch until now. <Wis {wisdom}/2>
         Your luck must be awful if you've been selected to be this lout's hutmate. Don't expect to get much rest in the future. *Vazul chuckles.*

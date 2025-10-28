@@ -362,7 +362,7 @@ public class PlayerMovement : MonoBehaviour
 				GameObject movableObject = Physics2D.OverlapCircle(colliderWorldPosition(), detectionSize, LayerAndTagManager.movableObjectLayerMask).gameObject;
 				EnemyMovement enemyMovement = movableObject.GetComponent<EnemyMovement>();
 				enemyMovement.putBackToStartingPosition();
-				AreaManager.getMovementManager().evaluateAllButtonScripts();
+				MovementManager.OnMoveFinished.Invoke();
 			}
 
 			OOCUIManager.updateOOCUI();

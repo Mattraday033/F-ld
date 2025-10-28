@@ -1004,12 +1004,7 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case "opengate":
 
-                    string gateKey = getArgument(buffer);
-
-                    if (gateKey.Length <= 0)
-                    {
-                        gateKey = PlayerMovement.getInstance().dialogueTrigger.gameObject.GetComponent<GateSpawnChecker>().gateKey;
-                    }
+                    string gateKey = currentDialogue.cameraFoci[Constants.indexOne].GetComponent<Gate>().getGateKey();
 
                     GateAndChestManager.addKey(gateKey);
 

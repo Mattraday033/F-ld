@@ -12,7 +12,7 @@ public class SecretDoorInfo : IStoryVariableSource
         this.secretDoorKey = secretDoorKey;
     }
 
-    public bool hasBeenDiscovered()
+    public virtual bool hasBeenDiscovered()
     {
         return SecretDoorFlags.secretDoorHasBeenDiscovered(secretDoorKey);
     }
@@ -27,6 +27,22 @@ public class SecretDoorInfo : IStoryVariableSource
         return story;
     }
 
+}
+
+public class TutorialSecretDoorInfo : SecretDoorInfo
+{
+    private StartSpawningAllTrueFlagList tutorialFlagList;
+
+    public TutorialSecretDoorInfo(string secretDoorKey, StartSpawningAllTrueFlagList tutorialFlagList) :
+    base(secretDoorKey)
+    {
+        this.tutorialFlagList = tutorialFlagList;
+    }
+
+    public override bool hasBeenDiscovered()
+    {
+        return !tutorialFlagList.evaluateFlags() || base.hasBeenDiscovered();
+    }
 }
 
 public class ObservableObject : MonoBehaviour

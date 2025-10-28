@@ -510,7 +510,6 @@ GameObject:
   - component: {fileID: 1709527145451046922}
   - component: {fileID: 4716450651019708021}
   - component: {fileID: 791216538515521906}
-  - component: {fileID: 1054420056176566779}
   - component: {fileID: 102991554303958347}
   m_Layer: 25
   m_Name: TutorialDistractableObject
@@ -754,27 +753,6 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 2
   m_CellSwizzle: 0
---- !u!114 &1054420056176566779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2882869322276111766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7b29133a12ecaf41be1fc5083773d2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 6229520682519139427}
-  flipScale: 0
-  lookingUp: 0
-  lookingUpSprite: {fileID: 21300000, guid: 103ff65531694eb4681b8a3098265162, type: 3}
-  lookingDownSprite: {fileID: 21300000, guid: e3da069ea2d1e154da4fcdcab8d0b887, type: 3}
-  movePointActive: 1
-  movePoint: {fileID: 0}
-  blockToDelete: {fileID: 3164322380282523948}
-  targetCanvas: {fileID: 0}
 --- !u!114 &102991554303958347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1214,6 +1192,7 @@ MonoBehaviour:
     secondaryInkJSONs: []
     npcCombatInfo: {fileID: 6912434748428064009}
   speakAtStartScript: {fileID: 0}
+  extraSpaces: []
 --- !u!114 &6912434748428064009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2053,6 +2032,7 @@ MonoBehaviour:
     secondaryInkJSONs: []
     npcCombatInfo: {fileID: 0}
   speakAtStartScript: {fileID: 0}
+  extraSpaces: []
 --- !u!114 &1578060468231930260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14901,12 +14881,6 @@ PrefabInstance:
 --- !u!4 &1944029010400238367 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3710671525307810216, guid: 55c1e1aea0695b644bf5ccea2460dd51,
-    type: 3}
-  m_PrefabInstance: {fileID: 2991621615895501495}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3164322380282523948 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 174952584612293531, guid: 55c1e1aea0695b644bf5ccea2460dd51,
     type: 3}
   m_PrefabInstance: {fileID: 2991621615895501495}
   m_PrefabAsset: {fileID: 0}

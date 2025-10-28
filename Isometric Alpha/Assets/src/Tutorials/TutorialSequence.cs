@@ -10,6 +10,7 @@ public interface ITutorialSequenceTarget
     public bool isUI();
 
     public string getTutorialHash();
+    public void setTutorialHash(string tutorialHash);
     public GameObject getGameObject();
     public Transform getTransform();
     public RectTransform getRectTransform();

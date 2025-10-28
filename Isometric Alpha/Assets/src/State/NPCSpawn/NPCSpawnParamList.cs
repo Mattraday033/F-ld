@@ -5,7 +5,7 @@ using UnityEngine;
 public static class NPCSpawnParamList
 {
     private const bool spawnWhileHostile = true;
-    private readonly static NPCSpawnParams noNameParams = new NPCSpawnParams(new StartSpawningFlagList(), new StopSpawningFlagList(), spawnWhileHostile);
+    private readonly static NPCSpawnParams noNameParams = new NPCSpawnParams(spawnWhileHostile);
 
     private static Dictionary<KeyValuePair<string, string>, NPCSpawnParams> npcSpawnParamsDict;
 
@@ -14,7 +14,9 @@ public static class NPCSpawnParamList
     private readonly static StopSpawningFlagList directorDefeatedStopSpawning = new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated });
     private readonly static StopSpawningFlagList revoltStartedStopSpawning = new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated });
 
-    private readonly static NPCSpawnParams dexTutorial = new NPCSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.choseDexterityAtStart }),spawnWhileHostile);
+    private readonly static NPCSpawnParams strTutorial = new NPCSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.choseStrengthAtStart }), spawnWhileHostile);
+    private readonly static NPCSpawnParams dexTutorial = new NPCSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.choseDexterityAtStart }), spawnWhileHostile);
+    private readonly static NPCSpawnParams chaTutorial = new NPCSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.choseCharismaAtStart }), spawnWhileHostile);
 
     #endregion
 
@@ -30,6 +32,18 @@ public static class NPCSpawnParamList
         if (!npcSpawnParamsDict.ContainsKey(kvp))
         {
             return new NPCSpawnParams();
+        }
+
+        return npcSpawnParamsDict[kvp];
+    }
+
+    public static NPCSpawnParams getMonsterSpawnParams(string areaName, string npcName)
+    {
+        KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(areaName, npcName);
+
+        if (!npcSpawnParamsDict.ContainsKey(kvp))
+        {
+            return new MonsterSpawnParams();
         }
 
         return npcSpawnParamsDict[kvp];
@@ -111,10 +125,14 @@ public static class NPCSpawnParamList
         npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.thatch + 1),
                                new NPCSpawnParams(spawnWhileHostile));
 
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, Constants.indexOne.ToString()),
+                               new MonsterSpawnParams(new StartSpawningFlagList(new string[] {FlagNameList.choseStrengthAtStart, FlagNameList.choseDexterityAtStart })));
+
         #region Str Tutorial
 
-        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.liftableRubble),
-                               new NPCSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.choseStrengthAtStart }), spawnWhileHostile));
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.halfWall + Constants.STRDesignator), strTutorial);
+
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.liftableRubble), strTutorial);
 
         #endregion
         #region Dex Tutorial
@@ -125,11 +143,13 @@ public static class NPCSpawnParamList
         npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, CunningObjectSpriteCategory.Statue.ToString()), dexTutorial);
 
         #endregion
-        #region Wis Tutorial
-
+        #region Wis Tutorial (Empty)
         #endregion
         #region Cha Tutorial
 
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.fallenBeam), chaTutorial);
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.floorButton), chaTutorial);
+        npcSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.rubble + Constants.CHADesignator), chaTutorial);
         #endregion
 
 

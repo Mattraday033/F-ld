@@ -17,26 +17,17 @@ public class PartyMemberPlacer : MonoBehaviour
 		instance = this;
 	}
 
-	void Start()
+	public static void placeAllPartyMembers()
 	{
 		placedPartyMemberObjects = new ArrayList();
-
-		Transform playerTransform = PlayerMovement.getInstance().gameObject.transform;
 
 		List<PartyMember> allPartyMembers = PartyManager.getAllPartyMembers();
 
 		foreach (PartyMember partyMember in allPartyMembers)
 		{
 			if (partyMember.placed)
-			{
-				GameObject partyMemberObject = Instantiate(Resources.Load<GameObject>(partyMember.overWorldGameObjectName),
-												playerTransform.parent);
-
-				partyMemberObject.transform.localPosition = partyMember.placedPosition;
-
-				Helpers.updateGameObjectPosition(partyMemberObject);
-
-				placedPartyMemberObjects.Add(partyMemberObject);
+            {
+                placeNextPartyMember(partyMember.getName());
 			}
 		}
 	}
@@ -48,46 +39,55 @@ public class PartyMemberPlacer : MonoBehaviour
 
 	public static void placeNextPartyMember()
 	{
-		string nameOfPartyMember = findNextPlaceablePartyMember();
-		Transform playerTransform = PlayerMovement.getInstance().gameObject.transform;
+        string nameOfPartyMember = findNextPlaceablePartyMember();
 
+        placeNextPartyMember(nameOfPartyMember);
+	}
+
+	public static void placeNextPartyMember(string nameOfPartyMember)
+	{
 		if (nameOfPartyMember == null)
 		{
 			return;
 		}
 
-		GameObject placedPartyMember = GameObject.Instantiate(Resources.Load<GameObject>(PartyManager.getPartyMember(nameOfPartyMember).overWorldGameObjectName),
-																playerTransform.parent);
-		placedPartyMember.transform.position = MovementManager.getGrid().CellToWorld(SkillManager.getPlayerCoords());
-		Helpers.updateGameObjectPosition(placedPartyMember);
+        GameObject placedPartyMember = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.PartyMember), AreaManager.getNPCParent());
 
-		PartyManager.getPartyMember(nameOfPartyMember).placed = true;
-		PartyManager.getPartyMember(nameOfPartyMember).placedPosition = placedPartyMember.transform.localPosition;
+        PartyMemberTrainPriority trainPriority = placedPartyMember.GetComponent<PartyMemberTrainPriority>();
+        trainPriority.partyMemberName = nameOfPartyMember;
+
+        OOCSpawnDetails.addTutorialTargetComponent(placedPartyMember, TutorialSequenceList.placedCharacterTargetHash);
+
+		placedPartyMember.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(SkillManager.getPlayerCoords());
+        Helpers.updateGameObjectPosition(placedPartyMember);
+
+        PartyManager.getPartyMember(nameOfPartyMember).placed = true;
+		PartyManager.getPartyMember(nameOfPartyMember).placedPosition = placedPartyMember.transform.position;
 
 		placedPartyMemberObjects.Add(placedPartyMember);
 		OOCUIManager.updateOOCUI();
 	}
 
-	private static string findNextPlaceablePartyMember()
-	{
-		int skippedPartyMembers = 0;
+    private static string findNextPlaceablePartyMember()
+    {
+        int skippedPartyMembers = 0;
 
-		List<PartyMember> allPartyMembers = PartyManager.getAllPartyMembers();
+        List<PartyMember> allPartyMembers = PartyManager.getAllPartyMembers();
 
-		foreach (PartyMember partyMember in allPartyMembers)
-		{
-			if (partyMember.isInParty() && skippedPartyMembers == placedPartyMemberObjects.Count)
-			{
-				return partyMember.getName();
-			}
-			else if (partyMember.isInParty() && skippedPartyMembers != placedPartyMemberObjects.Count)
-			{
-				skippedPartyMembers++;
-			}
-		}
+        foreach (PartyMember partyMember in allPartyMembers)
+        {
+            if (partyMember.isInParty() && skippedPartyMembers == placedPartyMemberObjects.Count)
+            {
+                return partyMember.getName();
+            }
+            else if (partyMember.isInParty() && skippedPartyMembers != placedPartyMemberObjects.Count)
+            {
+                skippedPartyMembers++;
+            }
+        }
 
-		return null;
-	}
+        return null;
+    }
 
 	public static void removePlacedPartyMember(string targetPartyMemberName)
 	{
@@ -101,28 +101,38 @@ public class PartyMemberPlacer : MonoBehaviour
 			if (currentPartyMember.GetComponent<PartyMemberTrainPriority>().partyMemberName.Equals(targetPartyMemberName))
 			{
 				GameObject.Destroy(currentPartyMember);
-				placedPartyMemberObjects.RemoveAt(partyMemberIndex);
+                placedPartyMemberObjects.RemoveAt(partyMemberIndex);
+                MovementManager.OnMoveFinished.Invoke();
 			}
 		}
 	}
 
-	public static void removeAllPlacedPartyMembers()
-	{
-		List<PartyMember> allPartyMembers = PartyManager.getAllPartyMembers();
+    [RuntimeInitializeOnLoadMethod]
+    private static void addListener()
+    {
+        TransitionManager.BeforeTransition.AddListener(removeAllPlacedPartyMembers);
+        TransitionManager.AfterTransition.AddListener(placeAllPartyMembers);
+    }
 
-		foreach (PartyMember partyMember in allPartyMembers)
-		{
-			partyMember.placed = false;
-			partyMember.placedPosition = Vector3.zero;
-		}
+    public static void removeAllPlacedPartyMembers()
+    {
+        List<PartyMember> allPartyMembers = PartyManager.getAllPartyMembers();
 
-		DestroyAllFollowersEvent.Invoke();
+        foreach (PartyMember partyMember in allPartyMembers)
+        {
+            partyMember.placed = false;
+            partyMember.placedPosition = Vector3.zero;
+        }
 
-		placedPartyMemberObjects = new ArrayList();
-	}
+        DestroyAllFollowersEvent.Invoke();
+        MovementManager.OnMoveFinished.Invoke();
+
+        placedPartyMemberObjects = new ArrayList();
+    }
 
 	public static int getPlacedPartyMemberCount()
 	{
 		return placedPartyMemberObjects.Count;
 	}
+    
 }

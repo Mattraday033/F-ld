@@ -39,8 +39,11 @@ public static class SecretDoorSpawnInfoList
         list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, new Vector3Int(8, -6),
                                             new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchOne), Constants.sizeTwo, Axis.DescendingX));
                                             
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, new Vector3Int(2, -4), 
-                                            new SecretDoorInfo(SecretDoorKeyList.wisTutorialSecretDoor), Constants.sizeTwo, Axis.DescendingY));
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, new Vector3Int(2, -4),
+                                            new TutorialSecretDoorInfo(SecretDoorKeyList.wisTutorialSecretDoor,
+                                            new StartSpawningAllTrueFlagList(new string[] { FlagNameList.choseWisdomAtStart })),
+                                            Constants.sizeTwo, Axis.DescendingY,
+                                            TutorialSequenceList.secretDoorTargetHash));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.slaveShackSix, list);
         #endregion
@@ -101,6 +104,8 @@ public abstract class AxisSpawnInfo
     public int size;
     public Axis axis;
 
+    public string tutorialTargetHash = "";
+
     public AxisSpawnInfo(string currentArea, Vector3Int startCell)
     {
         this.currentArea = currentArea;
@@ -140,12 +145,22 @@ public class SecretDoorSpawnInfo : AxisSpawnInfo
 
     }
 
-    public SecretDoorSpawnInfo(string currentArea, string secretDoorName, Vector3Int startCell, SecretDoorInfo secretDoorInfo, int size, Axis axis):
+    public SecretDoorSpawnInfo(string currentArea, string secretDoorName, Vector3Int startCell, SecretDoorInfo secretDoorInfo, int size, Axis axis) :
     base(currentArea, startCell, size, axis)
     {
         this.secretDoorName = secretDoorName;
         this.secretDoorInfo = secretDoorInfo;
     }
+    
+    public SecretDoorSpawnInfo(string currentArea, string secretDoorName, Vector3Int startCell, SecretDoorInfo secretDoorInfo, int size, Axis axis, string tutorialTargetHash) :
+    base(currentArea, startCell, size, axis)
+    {
+        this.secretDoorName = secretDoorName;
+        this.secretDoorInfo = secretDoorInfo;
+
+        this.tutorialTargetHash = tutorialTargetHash;
+    }
+    
 
     public override bool shouldSpawn()
     {
@@ -169,7 +184,7 @@ public class SecretDoorSpawnInfo : AxisSpawnInfo
                 currentCell.y -= index;
             }
 
-            list.Add(new SecretDoorSpawnDetails(secretDoorName, currentCell, currentArea, secretDoorInfo));
+            list.Add(new SecretDoorSpawnDetails(secretDoorName, currentCell, currentArea, secretDoorInfo, tutorialTargetHash));
         }
 
         return list;

@@ -9,8 +9,6 @@ public class MonsterSpawnDetails : OOCSpawnDetails
     public Facing facing;
     public bool chasesPlayer;
 
-    private string tutorialTargetHash = "";
-
     public MonsterSpawnDetails(string npcName, Vector3Int cellCoords) :
     base(npcName, cellCoords)
     {
@@ -69,30 +67,20 @@ public class MonsterSpawnDetails : OOCSpawnDetails
 
     public virtual void spawnActions(EnemyMovement enemyMovement)
     {
-        if (tutorialTargetHash.Length > 0)
+        if (hasTutorialTargetHash())
         {
-            enemyMovement.tutorialHash = tutorialTargetHash;
-            enemyMovement.gameObject.AddComponent<RectTransform>();
+            addTutorialTargetComponent(enemyMovement, tutorialTargetHash);
         }
 
-        string key = MonsterDefeatKeysList.generateMonsterDefeatKey(enemyMovement.getMonsterPackIndex());
-
-        if (MonsterDefeatKeysList.monsterIsDefeated(key))
-        {
-            enemyMovement.gameObject.SetActive(false);
-        }
-        else
-        {
-            enemyMovement.setEnemyFacing(facing);
-            enemyMovement.followsPlayer = chasesPlayer;
-            AreaManager.getMovementManager().addEnemySprite(enemyMovement.transform, enemyMovement.getMonsterPackIndex() + 1);
-        }
+        enemyMovement.setEnemyFacing(facing);
+        enemyMovement.followsPlayer = chasesPlayer;
+        AreaManager.getMovementManager().addEnemySprite(enemyMovement.transform, enemyMovement.getMonsterPackIndex() + 1);
     }
 
 
     public override void spawnActions(GameObject interactable)
     {
-        // base.spawnActions(interactable);
+        // base.spawnActions(interactable); commented out until animations are implemented
         
     }
 }

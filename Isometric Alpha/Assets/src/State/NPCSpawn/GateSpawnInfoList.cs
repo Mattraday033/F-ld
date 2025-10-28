@@ -27,7 +27,24 @@ public static class GateSpawnInfoList
 
         list = new List<GateSpawnInfo>();
 
-        list.Add(new GateSpawnInfo(Constants.indexZero, NPCNameList.liftableRubble, LocationNameList.slaveShackSix, new Vector3Int(6, -1), Constants.sizeTwo, Axis.DescendingY));
+        list.Add(new GateSpawnInfo(Constants.indexZero,
+                                    NPCNameList.liftableRubble,
+                                    LocationNameList.slaveShackSix,
+                                    PrefabNames.blockRubble,
+                                    new Vector3Int(6, -1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY,
+                                    TutorialSequenceList.interactableRubbleTargetHash));
+        
+
+        list.Add(new GateSpawnInfo( Constants.indexZero,
+                                    NPCNameList.fallenBeam,
+                                    LocationNameList.slaveShackSix,
+                                    PrefabNames.blockRubble,
+                                    new Vector3Int(6, -1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY,
+                                    TutorialSequenceList.fallenBeamTargetHash));
 
         gateSpawnInfoDict.Add(LocationNameList.slaveShackSix, list);
 
@@ -40,28 +57,43 @@ public class GateSpawnInfo : AxisSpawnInfo
 {
     private int gateIndex;
     private string npcName;
+    private string spriteName;
+    private string tutorialTargetHash;
 
-    public GateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell):
+    public GateSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell):
     base(currentArea, startCell)
     {
         this.gateIndex = gateIndex;
         this.npcName = npcName;
+        this.spriteName = spriteName;
+        this.tutorialTargetHash = "";
     }
 
-
-    public GateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell, int size, Axis axis):
-    base(currentArea, startCell, size, axis)
+    public GateSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, int size, Axis axis):
+    base(currentArea, startCell, size, axis) 
     {
         this.gateIndex = gateIndex;
         this.npcName = npcName;
+        this.spriteName = spriteName;
+        this.tutorialTargetHash = "";
+    }
+
+    public GateSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, int size, Axis axis, string tutorialTargetHash):
+    base(currentArea, startCell, size, axis) 
+    {
+        this.gateIndex = gateIndex;
+        this.npcName = npcName;
+        this.spriteName = spriteName;
+        this.tutorialTargetHash = tutorialTargetHash;
     }
 
     private string getGateName()
     {
-        if(gateIndex == 0)
+        if (gateIndex == 0)
         {
             return npcName;
-        } else
+        }
+        else
         {
             return npcName + gateIndex;
         }
@@ -93,9 +125,7 @@ public class GateSpawnInfo : AxisSpawnInfo
             extraSpaces.Add(currentCell);
         }
 
-        NPCSpawnDetails gateSpawnDetails = new NPCSpawnDetails(getGateName(), startCell, currentArea, extraSpaces.ToArray());
-
-
+        GateSpawnDetails gateSpawnDetails = new GateSpawnDetails(getGateName(), startCell, currentArea, spriteName, extraSpaces.ToArray(), tutorialTargetHash);
 
         list.Add(gateSpawnDetails);
 

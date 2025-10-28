@@ -14,6 +14,8 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
     public Dialogue dialogue;
     public SpeakAtStartScript speakAtStartScript;
 
+    public GameObject[] extraSpaces;
+
     public virtual void Start()
     {
         if (speakAtStartScript != null)
@@ -36,6 +38,29 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
     public string getMainNPCName()
     {
         return getDialogue().getMainNPCName();
+    }
+
+    private void OnEnable()
+    {
+        setExtraSpacesActive(true);
+    }
+
+    private void OnDisable()
+    {
+        setExtraSpacesActive(false);
+    }
+
+    private void setExtraSpacesActive(bool status)
+    {
+        foreach(GameObject extraSpace in extraSpaces)
+        {
+            if(extraSpace == null)
+            {
+                continue;
+            }
+
+            extraSpace.SetActive(status);
+        }
     }
 
 }

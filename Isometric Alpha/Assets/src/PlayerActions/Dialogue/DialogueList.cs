@@ -153,6 +153,10 @@ public static class DialogueList
                             new Dialogue(new string[] { NPCNameList.liftableRubble },
                             Resources.Load<TextAsset>(DialogueNameList.liftableRubblePath)));
 
+        addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.fallenBeam,
+                            new Dialogue(new string[] { NPCNameList.fallenBeam },
+                            Resources.Load<TextAsset>(DialogueNameList.fallenBeamPath)));
+
         #endregion
 
         #region Stockhouse
