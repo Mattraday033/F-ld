@@ -8,19 +8,13 @@ public static class PartyManager
 {
     private static Dictionary<string, PartyMember> partyMemberDict;
 
-    static PartyManager()
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializePartyManager()
     {
-        if (partyMemberDict == null)
-        {
-            resetPartyMembers();
-        }
+        partyMemberDict = null;
+        resetPartyMembers();
     }
-
-    public static void initialize()
-    {
-        //empty on purpose
-    }
-
+    
     public static int getNumberOfPartyMembersTotal()
     {
         return partyMemberDict.Count;

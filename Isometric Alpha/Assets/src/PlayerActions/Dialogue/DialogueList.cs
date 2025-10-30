@@ -100,7 +100,7 @@ public static class DialogueList
                             new Dialogue(new string[] { NPCNameList.guardAndras + 2 },
                             Resources.Load<TextAsset>(DialogueNameList.andrasPath)));
 
-        addDialogueToList(DialogueNameList.janosAfterKillingAndrasKey,
+        addDialogueToList(LocationNameList.slaveShackThree, DialogueNameList.janosAfterKillingAndrasKey,
                             new Dialogue(new string[] { NPCNameList.janos },
                             Resources.Load<TextAsset>(DialogueNameList.janosAfterKillingAndrasPath)));
 
@@ -172,11 +172,11 @@ public static class DialogueList
         addDialogueToList(LocationNameList.stockhouse, NPCNameList.crate,
                             new Dialogue(new string[] { NPCNameList.crate },
                             Resources.Load<TextAsset>(DialogueNameList.dudCratePath)));
-        addDialogueToList(LocationNameList.stockhouse, NPCNameList.crate+1,
-                            new Dialogue(new string[] { NPCNameList.crate+1 },
+        addDialogueToList(LocationNameList.stockhouse, NPCNameList.crate + 1,
+                            new Dialogue(new string[] { NPCNameList.crate + 1 },
                             Resources.Load<TextAsset>(DialogueNameList.dudCratePath)));
-        addDialogueToList(LocationNameList.stockhouse, NPCNameList.crate+2,
-                            new Dialogue(new string[] { NPCNameList.crate+2 },
+        addDialogueToList(LocationNameList.stockhouse, NPCNameList.crate + 2,
+                            new Dialogue(new string[] { NPCNameList.crate + 2 },
                             Resources.Load<TextAsset>(DialogueNameList.dudCratePath)));
 
         addDialogueToList(LocationNameList.stockhouse, NPCNameList.barrels,
@@ -194,11 +194,11 @@ public static class DialogueList
         addDialogueToList(LocationNameList.stables, NPCNameList.horse,
                             new Dialogue(new string[] { NPCNameList.horse },
                             Resources.Load<TextAsset>(DialogueNameList.horsePath)));
-        addDialogueToList(LocationNameList.stables, NPCNameList.horse+1,
-                            new Dialogue(new string[] { NPCNameList.horse+1 },
+        addDialogueToList(LocationNameList.stables, NPCNameList.horse + 1,
+                            new Dialogue(new string[] { NPCNameList.horse + 1 },
                             Resources.Load<TextAsset>(DialogueNameList.horsePath)));
-        addDialogueToList(LocationNameList.stables, NPCNameList.horse+2,
-                            new Dialogue(new string[] { NPCNameList.horse+2 },
+        addDialogueToList(LocationNameList.stables, NPCNameList.horse + 2,
+                            new Dialogue(new string[] { NPCNameList.horse + 2 },
                             Resources.Load<TextAsset>(DialogueNameList.horsePath)));
 
         #endregion
@@ -210,7 +210,7 @@ public static class DialogueList
         #region Mess Hall
 
         addDialogueToList(LocationNameList.messHall, NPCNameList.kende,
-                            new Dialogue(new string[] { NPCNameList.kende},
+                            new Dialogue(new string[] { NPCNameList.kende },
                             Resources.Load<TextAsset>(DialogueNameList.kendePath)));
         #endregion
 
@@ -227,12 +227,12 @@ public static class DialogueList
                             new Dialogue(new string[] { NPCNameList.csalan },
                             Resources.Load<TextAsset>(DialogueNameList.csalanPath)));
 
-        addDialogueToList(LocationNameList.campCenter, NPCNameList.guard+1,
-                            new Dialogue(new string[] { NPCNameList.guard+1},
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.guard + 1,
+                            new Dialogue(new string[] { NPCNameList.guard + 1 },
                             Resources.Load<TextAsset>(DialogueNameList.guardWatchingTaborPath)));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.temple,
-                            new Dialogue(new string[] { NPCNameList.temple},
+                            new Dialogue(new string[] { NPCNameList.temple },
                             Resources.Load<TextAsset>(DialogueNameList.templePath)));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.chiefTabor,
@@ -242,7 +242,7 @@ public static class DialogueList
                             Resources.Load<TextAsset>(DialogueNameList.taborPath)));
 
         // Dialogue slavesWatchingTaborDialogue = new Dialogue(new string[] { NPCNameList.branded }, Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath));
-        
+
         addDialogueToList(LocationNameList.campCenter, NPCNameList.feher,
                             new Dialogue(new string[] { NPCNameList.feher },
                             Resources.Load<TextAsset>(DialogueNameList.feherPath)));
@@ -266,11 +266,11 @@ public static class DialogueList
         addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.guardMuzsa,
                             new Dialogue(new string[] { NPCNameList.guardMuzsa, NPCNameList.barricade, NPCNameList.guardMuzsa + 1 },
                             Resources.Load<TextAsset>(DialogueNameList.muszaPath)));
-        addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.guardMuzsa+1,
-                            new Dialogue(new string[] { NPCNameList.guardMuzsa+1, NPCNameList.barricade, NPCNameList.guardMuzsa + 1 },
+        addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.guardMuzsa + 1,
+                            new Dialogue(new string[] { NPCNameList.guardMuzsa + 1, NPCNameList.barricade, NPCNameList.guardMuzsa + 1 },
                             Resources.Load<TextAsset>(DialogueNameList.muszaPath)));
-        addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.guardMuzsa+2,
-                            new Dialogue(new string[] { NPCNameList.guardMuzsa+2},
+        addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.guardMuzsa + 2,
+                            new Dialogue(new string[] { NPCNameList.guardMuzsa + 2 },
                             Resources.Load<TextAsset>(DialogueNameList.muszaPath)));
 
         #endregion
@@ -280,6 +280,14 @@ public static class DialogueList
                             new Dialogue(new string[] { NPCNameList.imre },
                             Resources.Load<TextAsset>(DialogueNameList.imrePath),
                             DialogueCombatInfoList.imreCombatInfo));
+
+        addDialogueToList(LocationNameList.campManse, NPCNameList.manseFrontDoor,
+                            new Dialogue(new string[] { NPCNameList.manseFrontDoor },
+                            Resources.Load<TextAsset>(DialogueNameList.manseFrontDoorPath)));
+
+        addDialogueToList(LocationNameList.campManse, NPCNameList.manseServiceEntrance+1,
+                            new Dialogue(new string[] { NPCNameList.manseServiceEntrance },
+                            Resources.Load<TextAsset>(DialogueNameList.manseServiceEntrancePath)));
 
         #endregion
     }

@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5929,6 +5928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counterText: {fileID: 1137893062}
+  panel: {fileID: 0}
 --- !u!1 &1144867985
 GameObject:
   m_ObjectHideFlags: 0
@@ -7161,7 +7161,7 @@ GameObject:
   - component: {fileID: 1345988664}
   - component: {fileID: 1345988667}
   - component: {fileID: 1345988666}
-  - component: {fileID: 1345988665}
+  - component: {fileID: 1345988668}
   m_Layer: 0
   m_Name: NotificationParent
   m_TagString: Untagged
@@ -7188,18 +7188,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1345988665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1345988663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 735cb357f9f9754499d2757280ea2f26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1345988666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7240,6 +7228,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &1345988668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345988663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3d086c35e6200c40bcf33088160d305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1363331017
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8613,10 +8613,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 547008109}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 779.66, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 779.66, y: -17.5}
+  m_SizeDelta: {x: 1529.32, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1636446866
 MonoBehaviour:

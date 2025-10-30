@@ -29,7 +29,7 @@ public class Transition
 
         this.index = 0;
         this.playerSpawnDirection = CharacterFacing.getOpposingFacing(State.playerFacing.getFacing());
-        this.outputMultiplier = 1;
+        this.outputMultiplier = 0; //to prevent autosave from moving player
     }
 
     public Transition(string currentAreaName, string destinationAreaName, Vector3Int cellCoords, int index, Facing playerSpawnDirection, bool usableForFastTravel, int outputMultiplier)

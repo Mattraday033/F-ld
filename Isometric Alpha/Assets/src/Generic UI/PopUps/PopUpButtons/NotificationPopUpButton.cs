@@ -25,7 +25,7 @@ public class NotificationPopUpButton : PopUpButton
 
     public override void spawnPopUp()
     {
-        GameObject notificationPopUpGameObject = Instantiate(Resources.Load<GameObject>(getPopUpPrefabName(type)), NotificationManager.getInstance().transform);
+        GameObject notificationPopUpGameObject = Instantiate(Resources.Load<GameObject>(getPopUpPrefabName(type)), OverallUIManager.notificationParent);
 
         if(notificationPopUpGameObject == null || getCurrentPopUpGameObject() == null)
         {

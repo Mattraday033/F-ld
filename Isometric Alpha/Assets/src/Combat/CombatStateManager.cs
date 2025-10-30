@@ -239,7 +239,7 @@ public class CombatStateManager : MonoBehaviour
 			AbilityMenuManager.getInstance().disableAbilityButtonCanvas();
 		}
 
-		PopUpBlocker.destroyPopUpScreenBlocker();
+		PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
 
 		SelectorManager.displayHoverUIForCurrentSelectorTarget();
 

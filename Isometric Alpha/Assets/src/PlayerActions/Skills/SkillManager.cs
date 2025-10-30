@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Events;
 
 public interface ISkillTarget
 {
@@ -12,6 +13,8 @@ public interface ISkillTarget
 }
 public class SkillManager
 {
+    public static UnityEvent OnSkillUse;
+
     public Vector2Int selectorPosition;
     public Color oldColor;
     public GameObject[,] skillGrid;
@@ -21,6 +24,12 @@ public class SkillManager
     public const int skillUnlockLevel = 2;
     public const int skillImprovedLevel = 5;
     public const int skillExtraordinaryLevel = 8;
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeSkillManager()
+    {
+        OnSkillUse = new UnityEvent();
+    }
 
     public SkillManager()
     {

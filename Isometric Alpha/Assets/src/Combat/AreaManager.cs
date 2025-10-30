@@ -6,13 +6,12 @@ using UnityEngine.Events;
 
 public class AreaManager : MonoBehaviour
 {
-    public static UnityEvent OnAreaSpawn = new UnityEvent();
+    public static UnityEvent OnAreaSpawn;
 
     public static string locationName;
     private static AreaManager instance;
 
     public static SaveBlueprint saveBlueprint;
-
 
     #region Parent Transforms
     public Transform gridParent;
@@ -24,7 +23,21 @@ public class AreaManager : MonoBehaviour
     public Transform nonTransitionColliderParent;
     #endregion
 
+    public NotificationManager notificationManager;
+
     public QuestStepActivationScript[] scripts;
+
+    [SerializeField]
+    public List<PlayerInteractionScript> onEntryScripts;
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void instantiateAreaManager()
+    {
+        OnAreaSpawn = new UnityEvent();
+        locationName = null;
+        instance = null;
+        saveBlueprint = null;
+    }
 
     public static AreaManager getInstance()
     {
@@ -41,15 +54,13 @@ public class AreaManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-
+        notificationManager.Awake();
+        
         runAllScriptsOnLocationEntry();
 
         addMapData();
 
-        foreach (QuestStepActivationScript script in scripts)
-        {
-            script.runScript();
-        }
+        Debug.LogError("OnAreaSpawn.Invoke()");
 
         OnAreaSpawn.Invoke();
     }
@@ -79,15 +90,14 @@ public class AreaManager : MonoBehaviour
         ArrayList knownLocationsInZone;
         IMapObject mapObject = getMapData();
 
-        try
+        if (State.allKnownMapData.ContainsKey(mapObject.getZoneKey()))
         {
             knownLocationsInZone = State.allKnownMapData[mapObject.getZoneKey()];
-
         }
-        catch (KeyNotFoundException e)
+        else
         {
             knownLocationsInZone = new ArrayList();
-        }
+        }        
 
         if (!knownLocationsInZone.Contains(mapObject.getLocationName()))
         {

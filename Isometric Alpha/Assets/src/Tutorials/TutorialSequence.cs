@@ -389,11 +389,11 @@ public struct TutorialSequenceStep : IDescribable
     {
         if (createPopUpScreenBlocker)
         {
-            PopUpBlocker.spawnPopUpScreenBlocker();
+            PopUpScreenBlockerManager.spawnPopUpScreenBlocker();
         }
         else if (EscapeStack.getEscapableObjectsCount() <= 0)
         {
-            PopUpBlocker.destroyPopUpScreenBlocker();
+            PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
         }
     }
 
@@ -870,7 +870,7 @@ public class TutorialSequence
 
             if (EscapeStack.getEscapableObjectsCount() <= 0)
             {
-                PopUpBlocker.destroyPopUpScreenBlocker();
+                PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
             }
 
             OOCUIManager.enableAllOOCUIButtons();

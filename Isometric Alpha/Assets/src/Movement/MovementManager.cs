@@ -607,6 +607,10 @@ public class MovementManager : MonoBehaviour
             return SurpriseState.NoOneSurprised;
         }
 
+        Debug.LogError("playerDirectionFromEnemy = " + playerDirectionFromEnemy.ToString());
+        Debug.LogError("EnemyFacing = " + enemyFacing.ToString());
+        Debug.LogError("State.playerFacing = " + State.playerFacing.getFacing().ToString());
+
         if (playerDirectionFromEnemy == PlayerDirectionFromEnemy.NorthEast)
         {
             if ((State.playerFacing.getFacing() == Facing.SouthWest && enemyFacing == Facing.SouthWest) ||

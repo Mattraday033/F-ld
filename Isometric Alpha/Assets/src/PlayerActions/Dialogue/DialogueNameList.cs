@@ -109,6 +109,8 @@ public static class DialogueNameList
 
     #region Camp Manse
     public const string imrePath = campExteriorPathName + LocationNameList.campManse + seperatorChar + NPCNameList.imre;
+    public const string manseFrontDoorPath = campExteriorPathName + LocationNameList.campManse + seperatorChar + "ManseFrontDoor";
+    public const string manseServiceEntrancePath = campExteriorPathName + LocationNameList.campManse + seperatorChar + "ManseServiceEntrance";
     #endregion
 
     #endregion

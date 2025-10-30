@@ -13,7 +13,7 @@ public class SkipMapTutorialScript : SkipTutorialScript
         }
         else
         {
-            PopUpBlocker.destroyPopUpScreenBlocker();
+            PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
             TutorialSequence.endCurrentTutorialSequence();
             PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
         }

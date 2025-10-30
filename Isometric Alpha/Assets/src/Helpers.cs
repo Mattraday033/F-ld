@@ -453,6 +453,11 @@ public static class Helpers
             spriteName = IconList.typeIconName;
         }
 
+        if(spriteName.Contains("Door"))
+        {
+            Debug.LogError("spriteName = " + spriteName);
+        }
+
         Sprite sprite = Resources.Load<Sprite>(spriteName);
 
         if (sprite != null)

@@ -25,7 +25,7 @@ public static class SecretDoorSpawnInfoList
         #region 5SlaveShack
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackFive, NPCNameList.wallPatch, new Vector3Int(16, 3), 
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackFive, NPCNameList.wallPatch, new Vector3Int(2, -6), 
                                             new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchThree), Constants.sizeTwo, Axis.DescendingX));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.slaveShackFive, list);

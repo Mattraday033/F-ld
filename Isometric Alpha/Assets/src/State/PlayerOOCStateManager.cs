@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public enum OOCActivity {
+							nothing 	 = 0, 
 							walking 	 = 1, 
 							inDialogue 	 = 2, 
 							inUI 		 = 3, 
@@ -25,25 +26,33 @@ public static class PlayerOOCStateManager
     public static OOCActivity currentActivity { get; private set; }
     public static OOCActivity previousActivity { get; private set; }
 
-    public static UnityEvent OnStateChangeToWalking = new UnityEvent();
-    public static UnityEvent OnStateChangeFromWalking = new UnityEvent();
+    public readonly static UnityEvent OnStateChangeToWalking = new UnityEvent();
+    public readonly static UnityEvent OnStateChangeFromWalking = new UnityEvent();
 
     
-    public static UnityEvent OnStateChangeToInDialogue = new UnityEvent();
+    public readonly static UnityEvent OnStateChangeToInDialogue = new UnityEvent();
 
-    public static UnityEvent OnStateChangeToInUI = new UnityEvent();
-    public static UnityEvent OnStateChangeFromInUI = new UnityEvent();
+    public readonly static UnityEvent OnStateChangeToInUI = new UnityEvent();
+    public readonly static UnityEvent OnStateChangeFromInUI = new UnityEvent();
 
-    public static UnityEvent OnStateChangeToInMap = new UnityEvent();
-    public static UnityEvent OnStateChangeToSkill = new UnityEvent();
-    public static UnityEvent OnStateChangeToInChestUI = new UnityEvent();
-    public static UnityEvent OnStateChangeToInBookUI = new UnityEvent();
-    public static UnityEvent OnStateChangeToInShopUI = new UnityEvent();
-    public static UnityEvent OnStateChangeToInDialoguePopUp = new UnityEvent();
-    public static UnityEvent OnStateChangeToInLevelUpPopUp = new UnityEvent();
-    public static UnityEvent OnStateChangeToInTutorialSequence = new UnityEvent();
+    public readonly static UnityEvent OnStateChangeToInMap = new UnityEvent();
+    public readonly static UnityEvent OnStateChangeToSkill = new UnityEvent();
+    public readonly static UnityEvent OnStateChangeToInChestUI = new UnityEvent();
+    public readonly static UnityEvent OnStateChangeToInBookUI = new UnityEvent();
+    public readonly static UnityEvent OnStateChangeToInShopUI = new UnityEvent();
+    public readonly static UnityEvent OnStateChangeToInDialoguePopUp = new UnityEvent();
+    public readonly static UnityEvent OnStateChangeToInLevelUpPopUp = new UnityEvent();
+    public readonly static UnityEvent OnStateChangeToInTutorialSequence = new UnityEvent();
 
-    public static UnityEvent OnLeavingTutorialSequenceState = new UnityEvent();
+    public readonly static UnityEvent OnLeavingTutorialSequenceState = new UnityEvent();
+    
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializePlayerOOCStateManager()
+    {
+        currentActivity = OOCActivity.walking;
+        previousActivity = OOCActivity.nothing;
+    }
 
     public static void returnToPreviousActivity()
     {

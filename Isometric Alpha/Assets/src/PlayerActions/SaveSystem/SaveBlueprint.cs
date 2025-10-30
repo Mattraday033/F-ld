@@ -229,8 +229,6 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 
 		saveBlueprint.secretDoors = SecretDoorFlags.getSecretDoorKeys();
 
-		// saveBlueprint.playerFormationPosition = State.formation.findLocationOfStats(State.playerStats);
-
 		saveBlueprint.setPartyMemberDetails();
 
 		saveBlueprint.currentMonsterDefeatKeys = MonsterDefeatKeysList.getAllMonsterDefeatKeyWrappers();
@@ -547,6 +545,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
             AllyStats partyMemberStats = new AllyStats(partyMemberStatsWrapper);
             PartyMember partyMember = new PartyMember(partyMemberStats);
 
+            partyMemberStats.xp = partyMemberStatsWrapper.xp;
             partyMember.canJoinParty = this.partyMemberStats[partyMemberIndex].canJoinParty;
             partyMember.placed = this.partyMemberStats[partyMemberIndex].placed;
 
@@ -555,7 +554,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
                                                      float.Parse(placedPosition[1]),
                                                      float.Parse(placedPosition[2]));
 
-            ((AllyStats) partyMember.stats).equippedItems = new EquippedItems(((AllyStats) partyMember.stats), extractEquippedItemsFromJson(partyMemberStatsWrapper.currentEquipment));
+            ((AllyStats)partyMember.stats).equippedItems = new EquippedItems(((AllyStats) partyMember.stats), extractEquippedItemsFromJson(partyMemberStatsWrapper.currentEquipment));
 
             partyMemberDict.Add(partyMemberName, partyMember);
 

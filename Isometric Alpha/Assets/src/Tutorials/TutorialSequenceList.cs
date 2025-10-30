@@ -90,6 +90,10 @@ public static class TutorialSequenceList
     public const string leadershipUIPanel = "Leadership UI Panel";
     public const string placedCharacterTargetHash = "Placed Character";
 
+    public const string questCounterUIPanel = "OOCUI Quest Counter";
+    public const string mapPopUpWindow = "Map PopUp Window";
+    public const string mapTileQuestCounter = "Map Tile Quest Counter";
+
     private const string combatUIParentTargetHash = "Combat UI Parent";
     private const string playerCombatSpriteTargetHash = "Player Combat";
     private const string allyZoneTargetHash = "Ally Zone";
@@ -121,6 +125,8 @@ public static class TutorialSequenceList
     public const string secondCunningTutorialSequenceKey = "Second Cunning Tutorial";
     public const string observationTutorialSequenceKey = "Observation Tutorial";
     public const string leadershipTutorialSequenceKey = "Leadership Tutorial";
+    public const string questCounterTutorialSequenceKey = "Quest Counter Tutorial";
+    public const string hiddenObjectTutorialSequenceKey = "Hidden Object Tutorial";
     public const string partyMemberUpgradeTutorialSequenceKey = "Party Member Upgrade Tutorial";
     public const string partyMemberUpgradeTutorialSeenFlag = "partyMemberUpgradeTutorialSequenceEntered";
     public const string playerLevelUpTutorialSequenceKey = "Player Level Up Tutorial";
@@ -151,6 +157,10 @@ public static class TutorialSequenceList
         initializeObservationTutorial();
 
         initializeLeadershipTutorial();
+
+        initializeQuestSymbolTutorial();
+
+        initializeHiddenObjectTutorial();
 
         initializeEquippableItemTutorial();
         initializeFormationPopUpItemTutorial();
@@ -263,6 +273,31 @@ public static class TutorialSequenceList
 
         leadershipTutorialSequence.setSkipScript(new SkipTutorialScript());
         tutorialSequenceDictionary.Add(leadershipTutorialSequenceKey, leadershipTutorialSequence);
+    }
+
+    public static void initializeQuestSymbolTutorial()
+    {
+        TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.questCounterTutorialMessagePrefix + 1, questCounterUIPanel, noScript, noScript, ArrowDirection.BottomLeft, new KeyCode[] { KeyCode.Space }, highlight, unhighlight, createPopUpScreenBlocker);
+        TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.questCounterTutorialMessagePrefix + 2, questCounterUIPanel, noScript, new OpenMap(), ArrowDirection.BottomLeft, new KeyCode[] { KeyCode.M }, highlight, unhighlight, createPopUpScreenBlocker);
+        TutorialSequenceStep stepThree = new TutorialSequenceStep(TutorialMessageList.questCounterTutorialMessagePrefix + 3, mapPopUpWindow, noScript, noScript, ArrowDirection.TopRight, new KeyCode[] { KeyCode.Space }, skipHighlight, skipUnhighlight, createPopUpScreenBlocker);
+        stepThree.blockInternalRaycastsOnCutOutMask = true;
+        TutorialSequenceStep stepFour = new TutorialSequenceStep(TutorialMessageList.questCounterTutorialMessagePrefix + 4, mapTileQuestCounter, noScript, noScript, ArrowDirection.Top, new KeyCode[] { KeyCode.Space }, highlight, unhighlight, createPopUpScreenBlocker);
+        stepFour.blockInternalRaycastsOnCutOutMask = true;
+
+        TutorialSequence questCounterTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, questCounterTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree, stepFour});
+
+        questCounterTutorialSequence.setSkipScript(new SkipMapTutorialScript());
+        tutorialSequenceDictionary.Add(questCounterTutorialSequenceKey, questCounterTutorialSequence);
+    }
+
+    public static void initializeHiddenObjectTutorial()
+    {
+        TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.hiddenObjectTutorialMessagePrefix + 1, playerSpriteOOCTargetHash, noScript, new HideTerrain(), ArrowDirection.Top, new KeyCode[] { KeyCode.F }, skipHighlight, skipUnhighlight, createPopUpScreenBlocker);
+
+        TutorialSequence hiddenObjectsTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, hiddenObjectsTutorialSeenFlag, new TutorialSequenceStep[] { stepOne});
+
+        hiddenObjectsTutorialSequence.setSkipScript(new SkipTutorialScript());
+        tutorialSequenceDictionary.Add(hiddenObjectTutorialSequenceKey, hiddenObjectsTutorialSequence);
     }
 
     public static void initializePartyMemberUpgradeTutorial()

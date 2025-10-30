@@ -92,7 +92,6 @@ public static class PrefabNames
     public const string areaNameDescriptionPanel = "Area Name Description Panel";
     public const string notificationDescriptionPanel = "Notification Description Panel";
     public const string questStepNotificationDescriptionPanel = "Quest Step Notification Description Panel";
-    public const string questStepNotificationDescriptionPanelNoFadeIn = "Quest Step Notification Description Panel No Fade In";
 
     public const string hoverPanelPopUpWindow = "Combatant Hover Panel";
     public const string statsDescriptionPanel = "Stats Description Panel";
@@ -222,7 +221,7 @@ public static class PrefabNames
     public const string defaultNPCSprite = humansFolder + "NPC Sprite";
 
     public const string chestsFolder = spriteFolder + "Chests/";
-    public const string chestBackClosed =  chestsFolder + "Chest_Back_Closed";
+    public const string chestBackClosed = chestsFolder + "Chest_Back_Closed";
     public const string chestBackOpenFilled = chestsFolder + "Chest_Back_Opened_Filled";
     public const string chestBackOpenEmpty = chestsFolder + "Chest_Back_Opened_Empty";
     public const string chestFrontClosed = chestsFolder + "Chest_Front_Closed";
@@ -230,7 +229,7 @@ public static class PrefabNames
     public const string chestFrontOpenEmpty = chestsFolder + "Chest_Front_Opened_Empty";
 
     public const string cunningObjectsFolder = spriteFolder + "CunningObjects/";
-    public const string statueBack =  cunningObjectsFolder + "Statue Back";
+    public const string statueBack = cunningObjectsFolder + "Statue Back";
     public const string statueFront = cunningObjectsFolder + "Statue Front";
 
     public const string cratesFolder = spriteFolder + "Crates/";
@@ -245,6 +244,9 @@ public static class PrefabNames
     public const string southWestDescendingRubble = rubbleFolder + "SW Descending Rubble";
     public const string blockRubble = rubbleFolder + "Block Rubble";
 
+    public const string doorsFolder =  spriteFolder + "Doors/";
+    public const string XAxisDoor = doorsFolder + "XAxisDoor";
+    public const string YAxisDoor = doorsFolder + "YAxisDoor";
 
     #endregion
 }

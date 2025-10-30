@@ -28,9 +28,15 @@ public static class ScriptOnLocationEntryList
     public static void initialize()
     {
         scriptOnAreaEntryDict = new Dictionary<string, List<PlayerInteractionScript>>();
-        // List<PlayerInteractionScript> list;
+        List<PlayerInteractionScript> list;
 
+        #region Mine_Lvl_1
+        list = new List<PlayerInteractionScript>();
 
+        list.Add(new EnteredMineLvl1());
+
+        scriptOnAreaEntryDict.Add(LocationNameList.mineLvl1 + LocationNameList.section1a, list);
+        #endregion
     }
 
 }

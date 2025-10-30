@@ -14,7 +14,7 @@ public class SkipTutorialScript : ScriptableObject
 
         TutorialSequence.endCurrentTutorialSequence();
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
-        PopUpBlocker.destroyPopUpScreenBlocker();
+        PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
     }
 
 }
@@ -28,14 +28,14 @@ public class SkipUpgradingPartyMemberTutorialScript : SkipTutorialScript
             TutorialSequence.endCurrentTutorialSequence();
             PlayerOOCStateManager.setCurrentActivity(OOCActivity.inUI);
 
-            PopUpBlocker.destroyPopUpScreenBlocker();
+            PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
         }
         else
         {
             TutorialSequence.endCurrentTutorialSequence();
             PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
 
-            PopUpBlocker.destroyPopUpScreenBlocker();
+            PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
         }
     }
 }
@@ -51,7 +51,7 @@ public class SkipAddingAbilitiesTutorialScript : SkipTutorialScript
 
             if (FullEditAbilityWheelPopUpWindow.getInstance() == null)
             {
-                PopUpBlocker.destroyPopUpScreenBlocker();
+                PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
             }
         }
         else
@@ -83,7 +83,7 @@ public class SkipFormationTutorialScript : SkipTutorialScript
 {
     public override void runScript()
     {
-        PopUpBlocker.destroyPopUpScreenBlocker();
+        PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
         TutorialSequence.endCurrentTutorialSequence();
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.inUI);
     }

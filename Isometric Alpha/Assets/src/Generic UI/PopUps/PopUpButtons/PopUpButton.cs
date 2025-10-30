@@ -52,8 +52,8 @@ public class PopUpButton : MonoBehaviour
 
     public virtual void spawnPopUp()
 	{
-		PopUpBlocker.spawnPopUpScreenBlocker();
-		Instantiate(Resources.Load<GameObject>(getPopUpPrefabName(type)), PopUpBlocker.getPopUpParent());
+		PopUpScreenBlockerManager.spawnPopUpScreenBlocker();
+		Instantiate(Resources.Load<GameObject>(getPopUpPrefabName(type)), PopUpScreenBlockerManager.getPopUpParent());
 
 		popUpWindow = getCurrentPopUpGameObject().GetComponent<PopUpWindow>(); 
 		
@@ -76,7 +76,7 @@ public class PopUpButton : MonoBehaviour
 			EscapeStack.removeAllNullObjectsFromStack();
 		}
 
-		PopUpBlocker.destroyPopUpScreenBlocker();
+		PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
 
 		if(shouldReturnToWalkingMode())
 		{

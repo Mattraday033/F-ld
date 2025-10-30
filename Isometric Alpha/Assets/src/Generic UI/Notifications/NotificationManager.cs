@@ -8,17 +8,17 @@ using UnityEngine.SceneManagement;
 
 public class NotificationManager : MonoBehaviour  
 {
-    public static ArrayList notificationQueue = new ArrayList();
+    public static ArrayList notificationQueue;
     private static NotificationManager instance;
 
-    public static UnityEvent OnDeleteAllNotifications = new UnityEvent();
+    public static UnityEvent OnDeleteAllNotifications;
 
-    private static bool skipNextSpawn = false;
+    private static bool skipNextSpawn;
 
     private const float timeBetweenNotifications = 1f;
     private float elapsedTime = 0f;
 
-    private NotificationPopUpButton notificationPopUpButton;
+    private static NotificationPopUpButton notificationPopUpButton;
 
     public static NotificationManager getInstance()
     {
@@ -44,13 +44,11 @@ public class NotificationManager : MonoBehaviour
     {
         addToNotificationQueue(notification);
 
-        instance.startSpawningNotifications();
+        startSpawningNotifications();
     }
 
-    private void startSpawningNotifications()
+    private static void startSpawningNotifications()
     {
-        // Debug.LogError("spawning Notifications");
-
         if (notificationQueue.Count == 0 || skipNextSpawn)
         {
             skipNextSpawn = false;
@@ -59,7 +57,7 @@ public class NotificationManager : MonoBehaviour
 
         if (notificationPopUpButton == null || notificationPopUpButton is null)
         {
-            notificationPopUpButton = Instantiate(Resources.Load<GameObject>(PrefabNames.notificationPopUpButton), transform.parent).GetComponent<NotificationPopUpButton>();
+            notificationPopUpButton = Instantiate(Resources.Load<GameObject>(PrefabNames.notificationPopUpButton), instance.transform).GetComponent<NotificationPopUpButton>();
         }
 
         for (int index = 0; index < notificationQueue.Count; index++)
@@ -71,7 +69,7 @@ public class NotificationManager : MonoBehaviour
             {
                 if (PlayerOOCStateManager.currentActivity == OOCActivity.walking && !State.hasLoadedDialogueKey())
                 {
-                    StartCoroutine(spawnNotification(describable));
+                    instance.StartCoroutine(instance.spawnNotification(describable));
                 }
 
                 notificationQueue.RemoveAt(index);
@@ -98,7 +96,7 @@ public class NotificationManager : MonoBehaviour
     
     private static void describeNotification(IDescribable notification)
     {
-        DescriptionPanel descriptionPanel = GameObject.Instantiate(notification.getDescriptionPanelFull(PanelType.Notification), getInstance().transform).GetComponent<DescriptionPanel>();
+        DescriptionPanel descriptionPanel = GameObject.Instantiate(notification.getDescriptionPanelFull(PanelType.Notification), OverallUIManager.notificationParent).GetComponent<DescriptionPanel>();
 
         descriptionPanel.transform.SetAsFirstSibling();
 
@@ -110,39 +108,23 @@ public class NotificationManager : MonoBehaviour
         getInstance().elapsedTime += timeBetweenNotifications;
     }
 
-    private void OnDestroy()
-    {
-        PlayerOOCStateManager.OnStateChangeToWalking.RemoveListener(startSpawningNotifications);
-        PlayerOOCStateManager.OnLeavingTutorialSequenceState.RemoveListener(startSpawningNotifications);
-    }
-
     public static void purgeNotifications()
     {
-        // Debug.LogError("purging notifications");
         notificationQueue = new ArrayList();
     }
 
     public static GameObject getCurrentNotificationPopUpWindowGameObject()
     {
-        if (getInstance().notificationPopUpButton == null)
+        if (notificationPopUpButton == null)
         {
             return null;
         }
 
-        return getInstance().notificationPopUpButton.getCurrentPopUpGameObject();
+        return notificationPopUpButton.getCurrentPopUpGameObject();
     }
 
-    private void Awake()
+    private static void spawnNotificationsOnAreaChange()
     {
-        if (instance != null)
-        {
-            Debug.LogError("Duplicate instances of NotificationManager exist erroneously.");
-        }
-
-        instance = this;
-        PlayerOOCStateManager.OnStateChangeToWalking.AddListener(startSpawningNotifications);
-        PlayerOOCStateManager.OnLeavingTutorialSequenceState.AddListener(startSpawningNotifications);
-
         if (!skipNextSpawn)
         {
             //purgeNotifications();
@@ -152,12 +134,35 @@ public class NotificationManager : MonoBehaviour
             skipNextSpawn = false;
         }
 
-        if (AreaManager.getInstance() != null)
-        {
-            addToNotificationQueue(AreaManager.getInstance().getAreaDescription(), 0);
+        // if (AreaManager.getInstance() != null)
+        // {
+        addToNotificationQueue(AreaManager.getInstance().getAreaDescription(), 0);
 
-            startSpawningNotifications();
-        }
+        Debug.LogError("notificationQueue.Count = " + notificationQueue.Count);
+
+        startSpawningNotifications();
+        // }
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeNotificationManager()
+    {
+        OnDeleteAllNotifications = new UnityEvent();
+
+        PlayerOOCStateManager.OnStateChangeToWalking.AddListener(startSpawningNotifications);
+        PlayerOOCStateManager.OnLeavingTutorialSequenceState.AddListener(startSpawningNotifications);
+        AreaManager.OnAreaSpawn.AddListener(spawnNotificationsOnAreaChange);
+
+        notificationQueue = new ArrayList();
+        
+        notificationPopUpButton = null;
+        instance = null;
+        skipNextSpawn = false;
+    }
+
+    public void Awake()
+    {
+        instance = this;
     }
 
 }

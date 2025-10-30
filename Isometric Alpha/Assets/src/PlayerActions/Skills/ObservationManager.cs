@@ -19,12 +19,14 @@ public class ObservationManager : SkillManager
         SkillManager.destroyAllSkillGrids();
         getInstance().createSkillArea();
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.observing);
+        OnSkillUse.Invoke();
     }
 
     public static void leaveObservationMode()
     {
         getInstance().destroySkillArea();
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        OnSkillUse.Invoke();
     }
 
     public override void setCollisionFilter()

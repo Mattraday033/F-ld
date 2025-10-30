@@ -60,7 +60,7 @@ public class TutorialSequenceStepTargetButton : TutorialSequenceStepTargetUIObje
 		{
 			if (EscapeStack.getEscapableObjectsCount() <= 0)
 			{
-				PopUpBlocker.destroyPopUpScreenBlocker();
+				PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
 			}
 
 			addToHashDictionary(this);

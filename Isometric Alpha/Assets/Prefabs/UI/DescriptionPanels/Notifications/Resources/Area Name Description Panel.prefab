@@ -34,9 +34,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4568783128665370086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 295, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 295, y: -22.88}
   m_SizeDelta: {x: 580, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3343017560409782896
@@ -206,9 +206,9 @@ RectTransform:
   - {fileID: 226329797786056132}
   m_Father: {fileID: 2740317118610411338}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 300, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: -27.88}
   m_SizeDelta: {x: 590, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6486346099820957826
@@ -402,6 +402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc2e7e94585c2a4f9960856fa0b6567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amountPrefix: 
+  additionalSlots: []
   showingShopkeeperInventory: 0
   iconBackgroundPanel: {fileID: 0}
   iconPanel: {fileID: 0}
@@ -421,7 +423,6 @@ MonoBehaviour:
   loreDescriptionText: {fileID: 0}
   useDescriptionText: {fileID: 0}
   contentsText: {fileID: 0}
-  worthTitleText: {fileID: 0}
   worthText: {fileID: 0}
   slotText: {fileID: 0}
   weaponNameText: {fileID: 0}

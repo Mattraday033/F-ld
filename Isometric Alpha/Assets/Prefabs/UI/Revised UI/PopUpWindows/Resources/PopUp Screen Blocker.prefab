@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4809000853071877002}
   - component: {fileID: 6878501049018552199}
   - component: {fileID: 7683420297783622177}
+  - component: {fileID: 3950221570393702231}
   m_Layer: 30
   m_Name: PopUp Screen Blocker
   m_TagString: Untagged
@@ -75,3 +76,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3950221570393702231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4390692888311809858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f567acb77848e3947bcb975e124fbe2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

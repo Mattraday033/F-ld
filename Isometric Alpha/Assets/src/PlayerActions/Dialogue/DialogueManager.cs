@@ -186,6 +186,8 @@ public class DialogueManager : MonoBehaviour
 
 		currentDialogue = dialogue;
 
+        PartyMemberPlacer.DestroyAllFollowers.Invoke();
+        
         findNPCGameObject();
 
         NPCCombatInfo combatInfo = currentDialogue.npcCombatInfo;
@@ -244,7 +246,7 @@ public class DialogueManager : MonoBehaviour
 		currentDialogue = null;
 		currentChoiceInkObjects = null;
 
-		nameText = "";
+        nameText = "";
 
 		currentConversation.addEndOfDialogueLine();
 

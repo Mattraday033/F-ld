@@ -68,15 +68,7 @@ public class QuestStep : IDescribable, IDescribableInBlocks
 		switch (type)
 		{
 			case PanelType.Notification:
-				if (NotificationPopUpWindow.pagesFadeIn)
-				{
-					panelTypeName = PrefabNames.questStepNotificationDescriptionPanel;
-				}
-				else
-				{
-					panelTypeName = PrefabNames.questStepNotificationDescriptionPanelNoFadeIn;
-				}
-
+                panelTypeName = PrefabNames.questStepNotificationDescriptionPanel;
 				break;
 			default:
 				panelTypeName = PrefabNames.writtenGlossaryEntryFull;

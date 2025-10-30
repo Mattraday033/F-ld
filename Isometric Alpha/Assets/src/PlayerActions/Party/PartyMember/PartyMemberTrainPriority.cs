@@ -57,16 +57,17 @@ public class PartyMemberTrainPriority : MonoBehaviour
     
     private void OnEnable()
     {
-        PartyMemberPlacer.DestroyAllFollowersEvent.AddListener(destroySelf);
+        PartyMemberPlacer.DestroyAllFollowers.AddListener(destroySelf);
     }
 
     private void OnDisable()
     {
-        PartyMemberPlacer.DestroyAllFollowersEvent.RemoveListener(destroySelf);
+        PartyMemberPlacer.DestroyAllFollowers.RemoveListener(destroySelf);
     }
 
     private void destroySelf()
     {
         DestroyImmediate(gameObject);
+        SkillManager.OnSkillUse.Invoke();
     }
 }

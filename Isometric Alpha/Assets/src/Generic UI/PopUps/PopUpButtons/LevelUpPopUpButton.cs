@@ -34,9 +34,9 @@ public class LevelUpPopUpButton : PopUpButton
             yield return null;
         }
         
-        PopUpBlocker.spawnPopUpScreenBlocker();
+        PopUpScreenBlockerManager.spawnPopUpScreenBlocker();
 
-        Instantiate(Resources.Load<GameObject>(getPopUpPrefabName(type)), PopUpBlocker.getPopUpParent());
+        Instantiate(Resources.Load<GameObject>(getPopUpPrefabName(type)), PopUpScreenBlockerManager.getPopUpParent());
 
         setPopUpWindow(getCurrentPopUpGameObject().GetComponent<PopUpWindow>());
 

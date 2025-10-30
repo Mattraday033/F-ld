@@ -8,17 +8,28 @@ public class PartyMemberPlacer : MonoBehaviour
 {
 	public static ArrayList placedPartyMemberObjects = new ArrayList();
 
-	public static UnityEvent DestroyAllFollowersEvent = new UnityEvent();
+	public static UnityEvent DestroyAllFollowers = new UnityEvent();
 
 	public static PartyMemberPlacer instance;
 
-	private void Awake()
-	{
-		instance = this;
-	}
+    [RuntimeInitializeOnLoadMethod]
+    private static void instantiatePartyMemberPlacer()
+    {
+        placedPartyMemberObjects = new ArrayList();
+
+        DestroyAllFollowers = new UnityEvent();
+
+        instance = null;
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
 	public static void placeAllPartyMembers()
-	{
+    {
+        DestroyAllFollowers.Invoke();
 		placedPartyMemberObjects = new ArrayList();
 
 		List<PartyMember> allPartyMembers = PartyManager.getAllPartyMembers();
@@ -58,14 +69,23 @@ public class PartyMemberPlacer : MonoBehaviour
 
         OOCSpawnDetails.addTutorialTargetComponent(placedPartyMember, TutorialSequenceList.placedCharacterTargetHash);
 
-		placedPartyMember.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(SkillManager.getPlayerCoords());
-        Helpers.updateGameObjectPosition(placedPartyMember);
+        if (PartyManager.getPartyMember(nameOfPartyMember).placed)
+        {
+            placedPartyMember.transform.position = PartyManager.getPartyMember(nameOfPartyMember).placedPosition;
+            Helpers.updateGameObjectPosition(placedPartyMember);
+        }
+        else
+        {
+            placedPartyMember.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(SkillManager.getPlayerCoords());
+            Helpers.updateGameObjectPosition(placedPartyMember);
 
-        PartyManager.getPartyMember(nameOfPartyMember).placed = true;
-		PartyManager.getPartyMember(nameOfPartyMember).placedPosition = placedPartyMember.transform.position;
+            PartyManager.getPartyMember(nameOfPartyMember).placed = true;
+            PartyManager.getPartyMember(nameOfPartyMember).placedPosition = placedPartyMember.transform.position;
+        }        
 
-		placedPartyMemberObjects.Add(placedPartyMember);
-		OOCUIManager.updateOOCUI();
+        placedPartyMemberObjects.Add(placedPartyMember);
+        
+        SkillManager.OnSkillUse.Invoke();
 	}
 
     private static string findNextPlaceablePartyMember()
@@ -124,7 +144,7 @@ public class PartyMemberPlacer : MonoBehaviour
             partyMember.placedPosition = Vector3.zero;
         }
 
-        DestroyAllFollowersEvent.Invoke();
+        DestroyAllFollowers.Invoke();
         MovementManager.OnMoveFinished.Invoke();
 
         placedPartyMemberObjects = new ArrayList();

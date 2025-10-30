@@ -16,6 +16,7 @@ public static class OverallUIManager
 
     public static Transform screenBackground; //parent of everything described in a screen manager
     public static GameObject UIParentPanel;
+    public static Transform notificationParent;
 
     public static LevelUpPopUpButton levelUpPopUpButton { get; private set; }
 

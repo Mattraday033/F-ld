@@ -183,7 +183,7 @@ public static class TransitionSpawnInfoList
 
         list = new List<TransitionSpawnInfo>();
 
-        list.Add(new TransitionSpawnInfo(LocationNameList.guardHouseNorthEast, LocationNameList.campManse, new Vector3Int(7, -2), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingY));
+        list.Add(new TransitionSpawnInfo(LocationNameList.guardHouseNorthEast, LocationNameList.campManse, new Vector3Int(7, -1), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingY));
 
         list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, LocationNameList.guardHouseNorthEast, LocationNameList.campManse, new Vector3Int(0, 4), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX));
 

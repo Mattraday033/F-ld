@@ -16,6 +16,6 @@ public class CombatHoverParentDeclarer : MonoBehaviour
 
 	private void declareUICanvas()
 	{
-		PopUpBlocker.declarePopUpParent(transform);
+		PopUpScreenBlockerManager.declarePopUpParent(transform);
 	}
 }

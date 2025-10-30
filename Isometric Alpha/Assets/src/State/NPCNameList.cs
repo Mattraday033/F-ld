@@ -97,6 +97,8 @@ public static class NPCNameList
     public const string liftableRubble = liftablePrefix + rubble;
     public const string fallenBeam = "Fallen Beam";
     public const string floorButton = "Floor Button";
+    public const string manseFrontDoor = "Manse Front Door";
+    public const string manseServiceEntrance = "Service Entrance";
     #endregion
 
     #region Party Member Names

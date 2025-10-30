@@ -10,8 +10,10 @@ public class EnteredMineLvl1 : QuestStepActivationScript
 
     public override void runScript()
     {
+        Debug.LogError("B4 IF");
         if (!Flags.getFlag(FlagNameList.enteredMineLvl1))
         {
+            Debug.LogError("Inside IF");
             QuestList.activateQuestStep(questName, nextQuestStepIndex);
             Flags.setFlag(FlagNameList.enteredMineLvl1, true);
         }

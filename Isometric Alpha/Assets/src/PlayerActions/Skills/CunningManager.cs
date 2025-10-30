@@ -4,13 +4,20 @@ using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CunningManager : SkillManager
 {
     public const int cunningRange = 9;
     public const int playerCunningCoords = (cunningRange - 1) / 2;
 
-    public static int cunningsRemaining = -1;
+    public static int cunningsRemaining;
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeCunningManager()
+    {
+        cunningsRemaining = -1;
+    }
 
     public static int getCunningsRemaining()
     {
@@ -381,6 +388,7 @@ public class CunningManager : SkillManager
             cunningTarget.cunning();
             decrementCunningsRemaining();
             destroySkillArea();
+            OnSkillUse.Invoke();
             return true;
         }
         else

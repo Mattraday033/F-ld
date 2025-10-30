@@ -271,7 +271,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 		else
 		{
 			// CombatStateManager.whoIsSurprised = SurpriseState.PlayerSurprised;
-			CombatStateManager.whoIsSurprised = MovementManager.determineSurprisedParty(PlayerMovement.getInstance().transform.position, transform.position, Facing.SouthEast);
+			CombatStateManager.whoIsSurprised = MovementManager.determineSurprisedParty(PlayerMovement.getInstance().transform.position, transform.position, enemyFacing.getFacing());
 		}
 
         SceneChange.changeSceneToCombat();

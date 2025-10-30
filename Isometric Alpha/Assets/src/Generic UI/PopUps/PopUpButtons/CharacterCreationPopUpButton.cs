@@ -12,7 +12,7 @@ public class CharacterCreationPopUpButton : PopUpButton
 
     public override void spawnPopUp()
     {
-        Instantiate(Resources.Load<GameObject>(getPopUpPrefabName(type)), PopUpBlocker.getPopUpParent());
+        Instantiate(Resources.Load<GameObject>(getPopUpPrefabName(type)), PopUpScreenBlockerManager.getPopUpParent());
 
         setPopUpWindow(getCurrentPopUpGameObject().GetComponent<CharacterCreationPopUpWindow>());
 

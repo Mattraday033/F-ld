@@ -17,6 +17,6 @@ public class PopupParentDeclarer : MonoBehaviour
 
 	private void declareUICanvas()
 	{
-		PopUpBlocker.declarePopUpParent(transform);
+		PopUpScreenBlockerManager.declarePopUpParent(transform);
 	}
 }

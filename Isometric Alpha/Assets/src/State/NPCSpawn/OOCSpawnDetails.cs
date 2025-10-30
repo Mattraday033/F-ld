@@ -77,8 +77,6 @@ public class OOCSpawnDetails
     {
         gameObject.AddComponent<RectTransform>();
 
-        Helpers.debugNullCheck("gameObject.transform", gameObject.transform);
-
         GameObject targetRect = GameObject.Instantiate(new GameObject("Target Rect"), gameObject.transform);
 
         RectTransform rectTransform = targetRect.AddComponent<RectTransform>();
@@ -501,18 +499,25 @@ public class NPCSpawnDetails : OOCSpawnDetails
 public class GateSpawnDetails : NPCSpawnDetails
 {
     private Sprite sprite;
+    private bool skewed;
 
-    public GateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName) :
+    public GateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed) :
     base(npcName, cellCoords, currentArea)
     {
         this.sprite = Helpers.loadSpriteFromResources(spriteName);
+        this.tutorialTargetHash = tutorialTargetHash;
+        this.skewed = skewed;
     }
 
-    public GateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, Vector3Int[] extraSpaces, string tutorialTargetHash) :
-    base(npcName, cellCoords, currentArea, extraSpaces)
+    public override Transform getParent()
     {
-        this.sprite = Helpers.loadSpriteFromResources(spriteName);
-        this.tutorialTargetHash = tutorialTargetHash;
+        if (skewed)
+        {
+            return base.getParent();
+        } else
+        {
+            return null;
+        }
     }
 
     public override void spawnActions(GameObject gateGameObject)
@@ -523,7 +528,7 @@ public class GateSpawnDetails : NPCSpawnDetails
         gate.setKey(npcName);
         gate.spriteRenderer.sprite = sprite;
 
-        if(hasTutorialTargetHash())
+        if (hasTutorialTargetHash())
         {
             addTutorialTargetComponent(gateGameObject, gate.spriteRenderer, tutorialTargetHash);
         }
@@ -694,6 +699,11 @@ public class ChestSpawnDetails : OOCSpawnDetails
     private static string generateName(int index)
     {
         return NPCNameList.chest + "-" + index;
+    }
+
+    public override Transform getParent()
+    {
+        return AreaManager.getNPCParent();
     }
 
     public override bool determineSpriteAtSpawn()

@@ -113,7 +113,7 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
 		if (tutorialSequenceStep.isTutorialTarget(getTutorialHash()))
 		{
 			addToHashDictionary(this); 
-			PopUpBlocker.spawnPopUpScreenBlocker();
+			PopUpScreenBlockerManager.spawnPopUpScreenBlocker();
 			tutorialSequenceStep.createMessageWindowAndRunScript(getTutorialHash(), useUltraWideTutorialWindow, disableArrow);
 		}
 	}

@@ -479,7 +479,7 @@ fadeBackIn()
 
 changeCamTarget({thatchIndex})
 
-Why? Of all the guards, I can think of none more vile than that one.
+Why stop me? Of all the guards, I can think of none more vile than that one.
 
 {
 -givenAdviceFromBalint:
@@ -493,12 +493,18 @@ Why? Of all the guards, I can think of none more vile than that one.
 }
 
     +If we let him go, he may tell others we've been seen working together. It'll make it less suspicious if we're seen outside.
-        I think it could just as easily draw more attention to us. But it does not matter now. Slate is dead. I will have to take my revenge on his killer later.
-            ->6b
+            ->6aa
 
     +The fewer guards we kill, the less questions will be asked about their whereabouts.
-        Right. I must focus on the plan now. I will have to take my revenge on Slate's killer later.
-            ->6b
+            ->6aa
+
+=== 6aa ===
+
+But he was right here! He was within our grasp, and to let him slip away unhurt... *Thatch shakes his head, smacking his temple a few times for clarity.* No, you're right. You're right! As little as I like it, I must focus on the plan now. I will have to take my revenge on Slate's killer later.
+
+    +Are you alright?
+        Yes, it's the fatigue. This fog will pass. I can follow you now.
+        ->6b
 
 === 6b ===
 

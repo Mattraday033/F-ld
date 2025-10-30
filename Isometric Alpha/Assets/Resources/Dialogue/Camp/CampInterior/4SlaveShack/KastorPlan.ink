@@ -1280,7 +1280,7 @@ That is certainly bad news, but I expected that we would have to kill a guard ev
             ->3c
 
 -deathFlagAndrás:
-    +I killed him during a private meeting with Janos, and Janos hid the body. No one will miss him for some time.
+    +I killed him during a private meeting with Janos, and I hid the body. No one will miss him for some time.
         keepDialogue()
         At least we have that going for us. It does mean however that we'll need to move quicker than I would have liked. But it can't be helped now. Anything else?  
             ->3c

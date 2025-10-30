@@ -10,7 +10,13 @@ public class IntimidateManager : CunningManager
     public const int intimidateRange = 11;
     public const int playerIntimidateCoords = (intimidateRange - 1) / 2;
 
-    public static int intimidatesRemaining = -1;
+    public static int intimidatesRemaining;
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeInimidateManager()
+    {
+        intimidatesRemaining = -1;
+    }
 
     public static int getIntimidatesRemaining()
     {
@@ -157,6 +163,8 @@ public class IntimidateManager : CunningManager
 
             destroySkillArea();
             decrementIntimidatesRemaining();
+
+            OnSkillUse.Invoke();
 
             return true;
         }

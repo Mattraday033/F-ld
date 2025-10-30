@@ -66,7 +66,11 @@ public static class SpawnInfoManager
 
         TrapAndButtonStateManager.setTrapsAndButtons();
 
-        lastSaveBlueprint = null;
+        if(lastSaveBlueprint != null)
+        {
+            PartyMemberPlacer.placeAllPartyMembers();
+            lastSaveBlueprint = null;
+        }
     }
 
     public static void addGameObject(GameObject spawnedObject)
@@ -179,6 +183,7 @@ public static class SpawnInfoManager
 
         listOfSpawnInfo.AddRange(GateSpawnInfoList.getGateSpawnInfo(AreaManager.locationName));
         listOfSpawnInfo.AddRange(SecretDoorSpawnInfoList.getSecretDoorSpawnDetails(AreaManager.locationName));
+        listOfSpawnInfo.AddRange(TutorialColliderSpawnDetailsList.getTutorialColliderSpawnDetails(AreaManager.locationName));
 
         List<GameObject> spawnedObjects = new List<GameObject>();
 

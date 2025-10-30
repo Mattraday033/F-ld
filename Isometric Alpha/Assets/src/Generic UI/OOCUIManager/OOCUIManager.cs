@@ -27,7 +27,7 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
     public GameObject cunningParent;
     public Image cunningCountImage;
 
-    private static bool manuallySetObservationPanelColor = false;
+    private static bool manuallySetObservationPanelColor;
     public GameObject observationParent;
     public Image observationToggleImage;
 
@@ -42,6 +42,13 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
     public QuestCounter questCounter;
     public PartyMemberUpgradeCounter partyMemberUpgradeCounter;
     public CharacterLevelCounter characterLevelCounter;
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeOOCUIManager()
+    {
+        manuallySetObservationPanelColor = false;
+        instance = null;
+    }
 
     public static void updateCharacterLevelUpCounter()
     {
@@ -378,6 +385,7 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
 
         listOfEvents.Add(CombatActionArray.OnCombatActionArrayChange);
         listOfEvents.Add(Stats.OnStatsChange);
+        listOfEvents.Add(SkillManager.OnSkillUse);
         listOfEvents.Add(UpgradePartyMemberDecisionPanel.OnPartyMemberUpgraded);
         listOfEvents.Add(AreaManager.OnAreaSpawn);
 

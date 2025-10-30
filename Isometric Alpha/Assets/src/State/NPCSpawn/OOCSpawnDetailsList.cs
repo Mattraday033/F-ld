@@ -237,6 +237,7 @@ public static class OOCSpawnDetailsList
         #region SECamp
         list = new List<OOCSpawnDetails>();
 
+
         list.Add(new ChestSpawnDetails(0, new Vector3Int(13, 11), Facing.SouthEast));
 
         oocSpawnDetailsDict.Add(LocationNameList.campSouthEast, list);
@@ -261,7 +262,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCSpawnDetails(NPCNameList.imre, new Vector3Int(-7, -11), LocationNameList.campManse));
 
-        oocSpawnDetailsDict.Add(LocationNameList.campManse, list);
+        oocSpawnDetailsDict.Add(LocationNameList.campManse, list); //3,9 / kitchen -6,5
         #endregion
     }
 

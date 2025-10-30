@@ -50,7 +50,7 @@ public class TutorialSequenceStepTargetMultiButton : TutorialSequenceStepTargetU
 	{
 		if (tutorialSequenceStep.isTutorialTarget(getTutorialHash()))
 		{
-			PopUpBlocker.destroyPopUpScreenBlocker();
+			PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
 			addToHashDictionary(this);
 			tutorialSequenceStep.createMessageWindowAndRunScript(getTutorialHash(), useUltraWideTutorialWindow, disableArrow);
 		}

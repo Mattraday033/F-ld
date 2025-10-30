@@ -614,7 +614,7 @@ Must I cut myself off from all support simply because it comes from a strange pl
 
 === 8b === 
 
-You think my feelings are born from my desperation? *Janos raises his voice in anger, but then hesitates.* I see. How could you not ask me that? And if I were in your place, I should hope I would ask the same thing. The thought unsettles me, not because I couldn't handle the discovery that my love for him was built on such a foundation, but because I am afraid to scrutinize <i>his</i> feelings too closely. I don't think I could handle it all being some impish game.
+You think my feelings are born from my desperation? *Janos hesitates.* I see. How could you not ask me that? And if I were in your place, I should hope I would ask the same thing. The thought unsettles me, not because I couldn't handle the discovery that my love for him was built on such a foundation, but because I am afraid to scrutinize <i>his</i> feelings too closely. I don't think I could handle it all being some impish game.
 
 {
 -wisdom >= 2:
@@ -634,7 +634,7 @@ Your logic is sound. Perhaps I did not know the depths of my own desperation. I 
 
     +Should you find his love lacking, you are not alone. You have Kastor, and you have myself. Do not look to the guards for support, but to your fellow prisoners.
 
-        Thank you. Your advice is sound. *Janos chuckles.* I feel ridiculous. Here we are, conspiring to overthrow the guards, and yet I'm more worried for my heart than my health.
+        Thank you for saying so. *Janos chuckles.* I feel ridiculous. Here we are, conspiring to overthrow the guards, and yet I'm more worried for my heart than my health.
 
         ->gaveJanosCourageToAsk
 

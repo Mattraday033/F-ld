@@ -149,7 +149,7 @@ public class Chest : MonoBehaviour, IRevealable
 
     public void playerOpensChest()
     {
-        PopUpBlocker.spawnPopUpScreenBlocker();
+        PopUpScreenBlockerManager.spawnPopUpScreenBlocker();
 
         NotificationManager.OnDeleteAllNotifications.Invoke();
 
@@ -184,7 +184,7 @@ public class Chest : MonoBehaviour, IRevealable
     public void destroyUI()
     {
         DestroyImmediate(chestItemDescriptionPanel.gameObject);
-        PopUpBlocker.destroyPopUpScreenBlocker();
+        PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
     }
 
     private void setSpriteToClosed()
