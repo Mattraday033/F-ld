@@ -55,8 +55,6 @@ public class PartySpawner : MonoBehaviour
 		
 		partyMember.instantiateCombatSprite();
 
-        Debug.Log("Placing " + partyMember.getName() + " at " + row + ", " + col);
-
 		partyMember.combatSprite.transform.position = CombatGrid.getPositionAt(row, col);
 		
 		if(partyMember.currentHealth <= 0)

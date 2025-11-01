@@ -202,6 +202,9 @@ public static class PrefabNames
     public const string combatFolder = "Combat/";
 
     public const string enemySprite = combatFolder + "Enemy Sprite";
+
+    // public const string enemyWithAnimations = charactersFolder + "Single_Tile_Enemy";
+
     public const string healthBar = combatFolder + "Health Bar";
 
     public const string allyCombatSpriteName = combatFolder + "AllySprite";

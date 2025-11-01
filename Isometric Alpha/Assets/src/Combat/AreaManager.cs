@@ -60,8 +60,6 @@ public class AreaManager : MonoBehaviour
 
         addMapData();
 
-        Debug.LogError("OnAreaSpawn.Invoke()");
-
         OnAreaSpawn.Invoke();
     }
 

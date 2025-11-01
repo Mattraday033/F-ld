@@ -41,7 +41,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
     public const int playerMaxCombatActionCount = 8;
     public const int partyMemberMaxCombatActionCount = 5;
 
-    public static UnityEvent OnAbilityWheelUpdate = new UnityEvent();
+    public readonly static UnityEvent OnAbilityWheelUpdate = new UnityEvent();
 
     public DescriptionPanel parentDescriptionPanel;
     public Stats actionArraySource;

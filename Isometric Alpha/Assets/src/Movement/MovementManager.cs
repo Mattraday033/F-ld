@@ -8,46 +8,40 @@ using UnityEngine.Events;
 
 public class MovementManager : MonoBehaviour
 {
-	public static Vector3Int distance1TileNorthEastGrid = new Vector3Int(1, 0, 0);
-	public static Vector3Int distance1TileNorthWestGrid = new Vector3Int(0, 1, 0);
-	public static Vector3Int distance1TileSouthWestGrid = new Vector3Int(-1, 0, 0);
-	public static Vector3Int distance1TileSouthEastGrid = new Vector3Int(0, -1, 0);
+	public readonly static Vector3Int distance1TileNorthEastGrid = new Vector3Int(1, 0, 0);
+	public readonly static Vector3Int distance1TileNorthWestGrid = new Vector3Int(0, 1, 0);
+	public readonly static Vector3Int distance1TileSouthWestGrid = new Vector3Int(-1, 0, 0);
+	public readonly static Vector3Int distance1TileSouthEastGrid = new Vector3Int(0, -1, 0);
 
-	public static Vector3Int[] allDirectionVectors = new Vector3Int[]{distance1TileNorthEastGrid,
-																	  distance1TileNorthWestGrid,
-																	  distance1TileSouthWestGrid,
-																	  distance1TileSouthEastGrid};
+	public readonly static Vector3Int[] allDirectionVectors = new Vector3Int[]{distance1TileNorthEastGrid,
+                                                                                distance1TileNorthWestGrid,
+                                                                                distance1TileSouthWestGrid,
+                                                                                distance1TileSouthEastGrid};
 
 	public static Vector3Int[] directionMod;
 
     // private ArrayList floorButtons = new ArrayList();
     // public Dictionary<IButtonEvaluationScript, FloorButtonTrueFalse[]> buttonEvaluators = new Dictionary<IButtonEvaluationScript, FloorButtonTrueFalse[]>();
 
-    public static UnityEvent OnMoveFinished = new UnityEvent();
+    public readonly static UnityEvent OnMoveFinished = new UnityEvent();
 
     public Grid grid;
 
 	//public bool isMoving = false;
 	public bool smallWaitAfterMoving = false;
 
-	public static int firstEnemyIndex = 1;
-	public static int framesWaited = 0;
-	public static float framesToWait = 15;
+    public static Transform[] allSpritesToMove;
+    public static bool[] isSpriteMoveableObject;
 
-	public static Transform[] allSpritesToMove = new Transform[1];
-	public static bool[] isSpriteMoveableObject = new bool[1];
-	//An array may be faster, which might be important later when worried about
-	//performance and animation/sprites. Call also adjust timeToMove
-
-	public static Vector3[] startingPositions = new Vector3[1];
-	public static Vector3[] endingPositions = new Vector3[1];
-	public static bool[] isMoving = new bool[1];
+    public static Vector3[] startingPositions;
+    public static Vector3[] endingPositions;
+    public static bool[] isMoving;
 
 	public int adjacentMonsterIndex = -1;
 
 	private bool neverMoved = true;
 
-	private float timeToMove = .2f;
+	private const float timeToMove = .2f;
 
 	public const int playerSpriteIndex = 0;
 
@@ -56,14 +50,26 @@ public class MovementManager : MonoBehaviour
         return AreaManager.getMasterGrid();
     }
 
-	void Start()
+	void Awake()
 	{
-		updateArrays();
-
-		PartyMemberMovement.instantiatePartyMemberTrain();
-
-		StartCoroutine(checkButtonsAfterStartMethods());
+        TransitionManager.BeforeTransition.AddListener(intializeMovementManager);
 	}
+
+    private void OnDestroy()
+    {
+        TransitionManager.BeforeTransition.RemoveListener(intializeMovementManager);
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void intializeMovementManager()
+    {
+        allSpritesToMove = new Transform[1];
+        isSpriteMoveableObject = new bool[1];
+
+        startingPositions = new Vector3[1];
+        endingPositions = new Vector3[1];
+        isMoving = new bool[1];
+    }
 
     public static Vector3Int getPlayerCell()
     {
@@ -210,15 +216,6 @@ public class MovementManager : MonoBehaviour
 		}
 	}
 
-	private IEnumerator checkButtonsAfterStartMethods()
-	{
-		yield return null;
-
-		OnMoveFinished.Invoke();
-
-		yield break;
-	}
-
 	private Vector3Int determineDirection(int spriteIndex, Vector3Int coords)
 	{
 		if (spriteIndex > 0)
@@ -296,24 +293,30 @@ public class MovementManager : MonoBehaviour
 	}
 
 	public void addEnemySprite(Transform enemy, int index)
-	{
-		if (index >= allSpritesToMove.Length)
-		{
-			Transform[] newAllSpritesToMove = new Transform[index + 1];
+    {
+        if(enemy == null)
+        {
+            Debug.LogError("Enemy #" + index + " == null");
+        }
 
-			for (int i = 0; i < allSpritesToMove.Length; i++)
-			{
-				newAllSpritesToMove[i] = allSpritesToMove[i];
-			}
+        if(enemy.gameObject == null)
+        {
+            Debug.LogError("enemy.gameObject #" + index + " == null");
+        }
 
-			newAllSpritesToMove[index] = enemy;
+        enemy.GetComponent<EnemyMovement>();
 
-			allSpritesToMove = newAllSpritesToMove;
-		}
-		else
-		{
-			allSpritesToMove[index] = enemy;
-		}
+        if (index >= allSpritesToMove.Length)
+        {
+            List<Transform> enemyTransforms = new List<Transform>(allSpritesToMove);
+            enemyTransforms.Add(enemy);
+
+            allSpritesToMove = enemyTransforms.ToArray();
+        }
+        else
+        {
+            allSpritesToMove[index] = enemy;
+        }
 
 		updateArrays();
 	}
@@ -342,7 +345,13 @@ public class MovementManager : MonoBehaviour
 	}
 
 	private IEnumerator moveSprite(int spriteID)
-	{
+    {
+        if(spriteID != playerSpriteIndex && MonsterDefeatKeysList.monsterIsDefeated(spriteID-1))
+        {
+            isMoving[spriteID] = false;
+            yield break;
+        }
+
 		float elapsedTime = 0;
 
 		while (elapsedTime <= timeToMove)
@@ -515,7 +524,8 @@ public class MovementManager : MonoBehaviour
 				continue;
 			}
 
-			if (cellsAreAdjacent(endingPositions[playerSpriteIndex], positions[positionIndex]))
+			if (cellsAreAdjacent(endingPositions[playerSpriteIndex], positions[positionIndex]) && 
+                !MonsterDefeatKeysList.monsterIsDefeated(positionIndex-1))
 			{
 				return positionIndex;
 			}
@@ -548,21 +558,22 @@ public class MovementManager : MonoBehaviour
 		return false;
 	}
 
-    public static PositionWrapper[] getAllMonsterLocations()
+    public static EnemyStatWrapper[] getAllMonsterStats()
     {
-        PositionWrapper[] positions = new PositionWrapper[startingPositions.Length - 1];
+        EnemyStatWrapper[] statWrappers = new EnemyStatWrapper[startingPositions.Length - 1];
         
-        // if(positions.Length <= 0)
-        // {
-        //     Debug.LogError("positions.Length = " + positions.Length);
-        // }
-
-        for(int positionIndex = 0; positionIndex < positions.Length; positionIndex++)
+        for(int index = 0; index < statWrappers.Length; index++)
         {
-            positions[positionIndex] = new PositionWrapper(startingPositions[positionIndex + 1]);
+            EnemyMovement enemyMovement = allSpritesToMove[index + 1].GetComponent<EnemyMovement>();
+
+            statWrappers[index] = new EnemyStatWrapper(startingPositions[index + 1],
+                                                        enemyMovement.enemyFacing.getFacing(),
+                                                        enemyMovement.intimidateCounter,
+                                                        enemyMovement.cunningStunCounter,
+                                                        enemyMovement.retreatStunnedCounter); 
         }
 
-        return positions;
+        return statWrappers;
     }
 
 
@@ -576,9 +587,6 @@ public class MovementManager : MonoBehaviour
 
         PlayerDirectionFromEnemy playerDirectionFromEnemy;
         SurpriseState surpriseState;
-
-        //Debug.LogError("playerCell = " + playerCell);
-        //Debug.LogError("enemyCell = " + enemyCell);
 
         if (playerCell.x > enemyCell.x && playerCell.y == enemyCell.y)
         {
@@ -606,10 +614,6 @@ public class MovementManager : MonoBehaviour
 
             return SurpriseState.NoOneSurprised;
         }
-
-        Debug.LogError("playerDirectionFromEnemy = " + playerDirectionFromEnemy.ToString());
-        Debug.LogError("EnemyFacing = " + enemyFacing.ToString());
-        Debug.LogError("State.playerFacing = " + State.playerFacing.getFacing().ToString());
 
         if (playerDirectionFromEnemy == PlayerDirectionFromEnemy.NorthEast)
         {

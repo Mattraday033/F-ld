@@ -285,8 +285,6 @@ public class EnemySpawner : MonoBehaviour
 			
 			cloneOfEnemyType.instantiateCombatSprite();
 
-            Debug.Log("Placing " + cloneOfEnemyType.getName() + " at " + row + ", " + col);
-
             cloneOfEnemyType.combatSprite.transform.position = CombatGrid.getPositionAt(row, col);
 			
 			if(CombatStateManager.whoseTurn == WhoseTurn.Start)

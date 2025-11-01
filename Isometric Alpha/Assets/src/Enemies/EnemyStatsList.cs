@@ -148,8 +148,17 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             }));
         #endregion
         #region Screecher
-        enemyStatsDict.Add(MonsterNameList.screecher, new EnemyStats(   MonsterNameList.screecher,
+        enemyStatsDict.Add(MonsterNameList.screecher, new EnemyStats(MonsterNameList.screecher,
                                                                                       twentyArmor,
+                                                                                            35,
+  new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.flurryKey) as Ability),
+                                                                    new Trait[] { TraitList.master,
+                                                                                  TraitList.territorial
+                                                                                }));
+        #endregion
+        #region Armored Bat
+        enemyStatsDict.Add(MonsterNameList.armoredBat, new EnemyStats(   MonsterNameList.armoredBat,
+                                                                                      thirtyArmor,
                                                                                             35,
   new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.flurryKey) as Ability),
                                                                     new Trait[] { TraitList.master,

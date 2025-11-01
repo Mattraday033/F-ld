@@ -245,6 +245,8 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         DamagePreviewManager.getInstance().setupDamagePreviews(loadedCombatAction);
 
         loadedCombatAction.getSelectorObject().SetActive(true);
+
+        SelectorManager.displayHoverUIForCurrentSelectorTarget();
     }
 
     private CombatAction setCombatActionSelectorStartingPosition(CombatAction action)

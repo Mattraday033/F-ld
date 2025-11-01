@@ -3,5 +3,8 @@
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="RBG.Mulligan.csproj" />
   <Project Path="Ink-Libraries.csproj" />
+  <Project Path="Kybernetik.Animancer.csproj" />
+  <Project Path="Kybernetik.Animancer.Editor.csproj" />
   <Project Path="InkEditor.csproj" />
+  <Project Path="Kybernetik.Animancer.FSM.csproj" />
 </Solution>

@@ -137,11 +137,6 @@ public static class KeyBindingList
                 Input.GetKey(KeyCode.Return);
     }
 
-    static KeyBindingList()
-    {
-        buildKeyToScreenDictionary();
-    }
-
     public static ScreenType getScreenType(KeyCode keyCode)
     {
         if (keyToScreenDictionary.ContainsKey(keyCode))
@@ -152,6 +147,7 @@ public static class KeyBindingList
         return ScreenType.Inventory;
     }
 
+    [RuntimeInitializeOnLoadMethod]
     public static void buildKeyToScreenDictionary()
     {
         keyToScreenDictionary = new Dictionary<KeyCode, ScreenType>()

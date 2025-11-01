@@ -225,18 +225,6 @@ public static class SpawnInfoManager
 
         monsterMovement.setMonsterPackIndex(index);
 
-        if (lastSaveBlueprint != null)
-        {
-            if (lastSaveBlueprint.monsterLocations.Length > index)
-            {
-                monsterGameObject.transform.position = lastSaveBlueprint.monsterLocations[index].getPosition();
-            }
-        }
-        else
-        {
-            monsterGameObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(details.cellCoords);
-        }
-
         details.spawnActions(monsterGameObject);
 
         NPCSpawnParams spawnParams = NPCSpawnParamList.getMonsterSpawnParams(AreaManager.locationName, index.ToString());
@@ -246,9 +234,20 @@ public static class SpawnInfoManager
         if (!spawnParams.canSpawn(key))
         {
             monsterGameObject.SetActive(false);
-        } else
+        } 
+
+        details.spawnActions(monsterMovement);
+
+        if (lastSaveBlueprint != null)
         {
-            details.spawnActions(monsterMovement);
+            if (lastSaveBlueprint.monsterLocations.Length > index)
+            {
+                monsterMovement.setFromWrapper(lastSaveBlueprint.monsterLocations[index]);
+            }
+        }
+        else
+        {
+            monsterGameObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(details.cellCoords);
         }
 
         addGameObject(monsterGameObject);

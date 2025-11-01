@@ -37,6 +37,7 @@ public static class SaveDefaultValues
     public readonly static GridCoords[] defaultEmptyGridCoordsArray = new GridCoords[0];
     public readonly static GridCoords defaultPlayerFormationPosition = new GridCoords(0,1);
     public readonly static InventoryWrapper[] defaultEmptyInventoryWrapperArray = new InventoryWrapper[0];
+    public readonly static EnemyStatWrapper[] defaultEmptyEnemyStatsWrapperArray = new EnemyStatWrapper[0];
     public readonly static StatsWrapper[] defaultEmptyStatsWrapperArray = new StatsWrapper[0];
     public readonly static FlagWrapper[] defaultEmptyFlagWrapperArray = new FlagWrapper[0];
     public readonly static string[] defaultEmptyMonsterPackList = new string[0];

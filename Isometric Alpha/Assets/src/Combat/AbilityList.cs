@@ -310,8 +310,8 @@ public static class AbilityList
         statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build(flenseName, "Deal 4D + 2S damage to a target. That target takes 4D damage at the end of the round for the rest of combat."), DamageParams.build("4D + 2S", "2D"), FrequencyParams.build(twoSlotMax, fourRoundCooldown), TraitList.flensed)));
 		statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
-        currentKey = "d-"+Dexterity.exitStrategy2RoundLevel+"-3";
-        statAbilityDictionary.Add(currentKey, new PassiveAbility(currentKey, TraitList.exitStrategy2Round));
+        currentKey = "d-"+Dexterity.exitStrategyLevel+"-3";
+        statAbilityDictionary.Add(currentKey, new PassiveAbility(currentKey, TraitList.exitStrategy));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(dexterityKeyChar);

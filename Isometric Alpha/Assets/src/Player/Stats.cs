@@ -20,19 +20,16 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 	private const bool doesNotHealTarget = false;
 	private const bool isNotACrit = false;
 
-	public static UnityEvent PredationProc = new UnityEvent();
+	public readonly static UnityEvent PredationProc = new UnityEvent();
 
     public GameObject combatSprite;
 
 	public string combatSpriteName;
 
 	public HealthBarManager healthBarManager;
+    public AnimationManager animationManager;
 
-	public GridCoords position;
-
-	public static Color32 green = new Color32(0, 175, 55, 255); //standard health bar Color's in hex
-	public static Color32 yellow = new Color32(240, 240, 0, 255);
-	public static Color32 red = new Color32(200, 10, 0, 255);
+    public GridCoords position;
 
 	public Color previousColor = Color.clear;
 
@@ -141,6 +138,8 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     {
         healthBarManager = list.healthBarManager;
         updateHealthBar();
+
+        animationManager = list.animationManager;
     }
 
 	public int modifyIncomingDamage(int baseDamage)

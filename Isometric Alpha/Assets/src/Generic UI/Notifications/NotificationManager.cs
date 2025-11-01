@@ -138,8 +138,6 @@ public class NotificationManager : MonoBehaviour
         // {
         addToNotificationQueue(AreaManager.getInstance().getAreaDescription(), 0);
 
-        Debug.LogError("notificationQueue.Count = " + notificationQueue.Count);
-
         startSpawningNotifications();
         // }
     }

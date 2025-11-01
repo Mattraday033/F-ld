@@ -11,12 +11,11 @@ public static class Dexterity
 	public const int extraArmorMultiplier = 4;
 
     public const float surpriseDamMultCoefficient = .1f; 
-    public const float surpriseDamMultBase = 1f; 
+    public const float surpriseDamMultBase = 1f;
+
+    public const float exitStrategyLevel = 3;
 
     public const int devastatingCriticalLevel = 3;
-
-	public const int exitStrategy2RoundLevel = 3;
-	public const int exitStrategy3RoundLevel = 10;
 
 	public const int retreatChancePerDexterity = 5;
 	public const float baseRetreatChance = .45f;
@@ -26,43 +25,57 @@ public static class Dexterity
     //     return getAllSecondaryStatsForDisplay(PartyManager.getPlayerStats().getDexterity());
     // }
 
-	// public static string[] getAllSecondaryStatsForDisplay(int stat)
-	// {
-	// 	PlayerStats stats = new PlayerStats();
+    // public static string[] getAllSecondaryStatsForDisplay(int stat)
+    // {
+    // 	PlayerStats stats = new PlayerStats();
 
-	// 	stats.dexterity = stat;
+    // 	stats.dexterity = stat;
 
-	// 	string[] displayStats = {  stats.getMaxCunningCount() + "",
-	// 							   stats.getExtraArmorFromDexterity() + "",
-	// 							   stats.getSurpriseDamageMultiplierForDisplay(),
-	// 							   stats.getNumberOfSurpriseRounds() + ""
-	// 							   };
+    // 	string[] displayStats = {  stats.getMaxCunningCount() + "",
+    // 							   stats.getExtraArmorFromDexterity() + "",
+    // 							   stats.getSurpriseDamageMultiplierForDisplay(),
+    // 							   stats.getNumberOfSurpriseRounds() + ""
+    // 							   };
 
-	// 	return displayStats;
-	// }
+    // 	return displayStats;
+    // }
 
-	public static void addExitStrategy(Stats target)
-	{
-        
-        Debug.LogError("Dexterity.addExitStrategy() not implemented");
-        return;
+    public static void addExitStrategy(Stats target)
+    {
 
-		if (!CombatStateManager.isPlayerSurpriseRound() || CombatStateManager.whoIsSurprised != SurpriseState.EnemySurprised)
+        if (!CombatStateManager.isPlayerSurpriseRound() || CombatStateManager.whoIsSurprised != SurpriseState.EnemySurprised)
         {
             return;
         }
 
-        Debug.LogError("Dexterity.addExitStrategy(Stats) does not check all characters");
+        bool hasExitStrategy = false;
 
-        if (PartyManager.getPlayerStats().getDexterity() >= Dexterity.exitStrategy3RoundLevel)
+        //getPartySurpriseRounds()
+
+        foreach (AllyStats allyStats in State.formation)
         {
-            target.addTrait(TraitList.exitStrategy3Round);
+            if (allyStats == null || allyStats.isDead)
+            {
+                continue;
+            }
+
+
+            if (allyStats.getDexterity() >= exitStrategyLevel)
+            {
+                hasExitStrategy = true;
+                break;
+            }
         }
-        else if (PartyManager.getPlayerStats().getDexterity() >= Dexterity.exitStrategy2RoundLevel)
+
+        if(hasExitStrategy)
         {
-            target.addTrait(TraitList.exitStrategy2Round);
+            Trait exitStrategy = TraitList.exitStrategy.clone();
+
+            exitStrategy.setRoundsLeft(PartyStats.getPartySurpriseRounds() + 1);
+
+            target.addTrait(exitStrategy);  
         }
-	}
+    }
 
 	public static string getDescription()
 	{

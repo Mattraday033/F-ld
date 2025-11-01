@@ -76,12 +76,16 @@ public static class EnemyPackInfoList
                                                                                                                         EnemyAmountList.oneScreecherBat},
                                                                                                                     DropTableList.slaveMineDT1Name);
 
+    private readonly static EnemyPackInfo oneArmoredBat = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.oneArmoredBat},
+                                                                                            DropTableList.slaveMineDT1Name);
+
     public static EnemyPackInfo getEnemyPackInfo(string areaName, int index)
     {
         return enemyPackInfoDict[areaName][index];
     }
 
-    static EnemyPackInfoList()
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeEnemyPackInfoList()
     {
         List<EnemyPackInfo> list;
         enemyPackInfoDict = new Dictionary<string, List<EnemyPackInfo>>();
@@ -90,8 +94,11 @@ public static class EnemyPackInfoList
         #region Slave Shack Six
         list = new List<EnemyPackInfo>();
 
-        list.Add(twoGiantBatsTwoBatSwarms);
-        list.Add(twoGiantBatsTwoBatSwarms);
+        // list.Add(twoGiantBatsTwoBatSwarms);
+        // list.Add(twoGiantBatsTwoBatSwarms);
+
+        list.Add(oneArmoredBat);
+        list.Add(oneArmoredBat);
 
         enemyPackInfoDict.Add(LocationNameList.slaveShackSix, list);
         #endregion

@@ -7,17 +7,17 @@ using TMPro;
 
 public class SelectorManager : MonoBehaviour 
 {
-	public static string[] allyTagCriteria = new string[]{LayerAndTagManager.playerTag,
-															LayerAndTagManager.npcTag};
+	public readonly static string[] allyTagCriteria = new string[]{LayerAndTagManager.playerTag,
+                                                                    LayerAndTagManager.npcTag};
 
-	public static string[] enemyTagCriteria = new string[]{LayerAndTagManager.playerTag,
-															LayerAndTagManager.enemyTag,
-															LayerAndTagManager.npcTag};
+	public readonly static string[] enemyTagCriteria = new string[]{LayerAndTagManager.playerTag,
+                                                                    LayerAndTagManager.enemyTag,
+                                                                    LayerAndTagManager.npcTag};
 
-	public static string[] allyAndEnemyTagCriteria = new string[]{LayerAndTagManager.playerTag,
-														  			LayerAndTagManager.enemyTag,
-														  			LayerAndTagManager.npcTag,
-														  			LayerAndTagManager.placeHolderTag};
+	public readonly static string[] allyAndEnemyTagCriteria = new string[]{LayerAndTagManager.playerTag,
+                                                                            LayerAndTagManager.enemyTag,
+                                                                            LayerAndTagManager.npcTag,
+                                                                            LayerAndTagManager.placeHolderTag};
 
 	private GameObject pressEPrompt;
 
@@ -25,15 +25,10 @@ public class SelectorManager : MonoBehaviour
 	public Selector[] selectors;
 
 	public PlayerCombatActionManager playerCombatActionManager;
-	public CombatActionManager combatActionManager;
-
-	public CombatStateManager combatStateManager;
 
 	public int frameCount = 0;
 
 	public bool isMoving = false;
-
-	public GameObject exampleSelector; //testing tool to see current selector
 
 	public static Selector currentSelector; //selector that is currently being used. Left null in the unity inspector
 	public static AbilityMenuManager currentAbilityManager; //circle of circles that shows abilities
@@ -45,10 +40,10 @@ public class SelectorManager : MonoBehaviour
 
 	public Selector testSelector;
 
-	private static RowColumnChangeDelegate rowDecrement = (r => r - 1);
-	private static RowColumnChangeDelegate rowIncrement = (r => r + 1);
-	private static RowColumnChangeDelegate colDecrement = (c => c - 1);
-	private static RowColumnChangeDelegate colIncrement = (c => c + 1);
+	private readonly static RowColumnChangeDelegate rowDecrement = (r => r - 1);
+	private readonly static RowColumnChangeDelegate rowIncrement = (r => r + 1);
+	private readonly static RowColumnChangeDelegate colDecrement = (c => c - 1);
+	private readonly static RowColumnChangeDelegate colIncrement = (c => c + 1);
 
 	private static bool verticalPriority = true;
 
@@ -284,8 +279,6 @@ public class SelectorManager : MonoBehaviour
 			instance.hoverPanelPopUpButton.destroyPopUp();
 			return;
 		}
-
-        Debug.LogError("currentSelector.getCoords() = " + currentSelector.getCoords().ToString());
 
         Stats currentCombatant = CombatGrid.getCombatantAtCoords(currentSelector.getCoords());
 
@@ -834,17 +827,7 @@ public class SelectorManager : MonoBehaviour
 
 		int startIndex = loopIndex;
 		int searchesRan = 0;
-		int maxSearches;
 		bool wrap = false;
-
-		if (verticalPriority && currentSelector == selectors[0])
-		{
-			maxSearches = CombatGrid.colRightBounds;
-		}
-		else
-		{
-			maxSearches = CombatGrid.rowLowerBounds;
-		}
 
 		for (loopIndex = loopChange(loopIndex); searchesRan <= CombatGrid.colRightBounds; loopIndex = loopChange(loopIndex))
 		{
@@ -988,67 +971,6 @@ public class SelectorManager : MonoBehaviour
 		}
 
 		return rowIndex;
-	}
-
-	//private delegate int RowColumnChangeDelegate(int rowOrColumn);
-
-	private Stats findNextSingleTileTarget(RowColumnChangeDelegate rowChange, RowColumnChangeDelegate colChange,
-											int rowFirstIndex, int rowLastIndex, int colFirstIndex, int colLastIndex, bool verticalPriority)
-	{
-		int currentRow = 0;
-		int currentCol = 0;
-
-		if (verticalPriority)
-		{
-			currentRow = rowChange(currentSelector.currentRow);
-			currentCol = currentSelector.currentCol;
-		}
-		else
-		{
-			currentRow = currentSelector.currentRow;
-			currentCol = colChange(currentSelector.currentCol);
-		}
-
-		for (currentRow = rowChange(currentSelector.currentRow);
-			currentRow != currentSelector.currentRow && currentCol != currentSelector.currentCol;
-			currentRow = rowChange(currentRow))
-		{
-			for (currentCol = colChange(currentSelector.currentCol);
-				currentRow != currentSelector.currentRow && currentCol != currentSelector.currentCol;
-				currentCol = colChange(currentCol))
-			{
-				if (currentRow < rowFirstIndex)
-				{
-					currentRow = rowLastIndex;
-				}
-				else if (currentRow > rowLastIndex)
-				{
-					currentRow = rowFirstIndex;
-				}
-
-				if (currentCol < colFirstIndex)
-				{
-					currentCol = colLastIndex;
-				}
-				else if (currentCol > colLastIndex)
-				{
-					currentCol = colFirstIndex;
-				}
-
-				if (CombatGrid.getCombatantAtCoords(currentRow, currentCol) != null)
-				{
-					return CombatGrid.getCombatantAtCoords(currentRow, currentCol);
-				}
-
-				if (verticalPriority && currentRow != rowLastIndex)
-				{
-					break;
-				}
-			}
-		}
-
-		//if you don't find a new combatant, the selector shouldn't move
-		return CombatGrid.getCombatantAtCoords(currentSelector.currentRow, currentSelector.currentCol);
 	}
 
 	private bool canMoveUp()

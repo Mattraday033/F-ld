@@ -151,9 +151,9 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 	public const string seDebugText = "SOUTHEAST";
 	public const string swDebugText = "SOUTHWEST";
 
-	private static Color cunningStunnedColor = Color.red;
-	private static Color intimidatedColor = Color.magenta;
-	private static Color retreatStunnedColor = Color.cyan;
+	private readonly static Color cunningStunnedColor = Color.red;
+	private readonly static Color intimidatedColor = Color.magenta;
+	private readonly static Color retreatStunnedColor = Color.cyan;
 
 	public const int pathIndexHardCutoff = 1000;
 
@@ -671,13 +671,38 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 		destroyListeners();
 	}
 
-	//IRevealable interface methods
+    public void setFromWrapper(EnemyStatWrapper statsWrapper)
+    {
+        transform.position = statsWrapper.getPosition();
 
-	public void createListeners()
-	{
-		RevealManager.OnReveal.AddListener(onReveal);
-		TutorialSequence.TutorialSequenceTargetFinder.AddListener(assignToTutorialSequence);
-	}
+        if (statsWrapper.intimidateCounter > 0)
+        {
+            intimidate();
+            intimidateCounter = statsWrapper.intimidateCounter;
+        }
+
+        if (statsWrapper.cunningCounter > 0)
+        {
+            cunning();
+            cunningStunCounter = statsWrapper.cunningCounter;
+        }
+
+        if (statsWrapper.retreatCounter > 0)
+        {
+            retreatStun();
+            retreatStunnedCounter = statsWrapper.retreatCounter;
+        }
+
+        setEnemyFacing(statsWrapper.facing);
+    }
+
+    //IRevealable interface methods
+
+    public void createListeners()
+    {
+        RevealManager.OnReveal.AddListener(onReveal);
+        TutorialSequence.TutorialSequenceTargetFinder.AddListener(assignToTutorialSequence);
+    }
 
 	public void destroyListeners()
 	{

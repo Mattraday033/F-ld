@@ -27,5 +27,7 @@ public static class EnemyAmountList
 
     public readonly static EnemyAmount oneScreecherBat = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.screecher));
 
+    public readonly static EnemyAmount oneArmoredBat = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.armoredBat));
+
 
 }

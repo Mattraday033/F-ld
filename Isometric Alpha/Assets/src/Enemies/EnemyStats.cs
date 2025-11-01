@@ -90,6 +90,8 @@ public class EnemyStats : Stats
     public override void setUpComponents(ComponentList list)
     {
         base.setUpComponents(list);
+
+        animationManager.setAnimations(getName());
     }
 
     public override int getTotalArmorRating()

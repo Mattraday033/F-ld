@@ -36,6 +36,32 @@ public struct PositionWrapper
 }
 
 [System.Serializable]
+public struct EnemyStatWrapper
+{
+    public PositionWrapper positionWrapper;
+
+    public Facing facing;
+
+    public int intimidateCounter;
+    public int cunningCounter;
+    public int retreatCounter;
+
+    public EnemyStatWrapper(Vector3 position, Facing facing, int intimidateCounter, int cunningCounter, int retreatCounter)
+    {
+        positionWrapper = new PositionWrapper(position);
+        this.facing = facing;
+        this.intimidateCounter = intimidateCounter;
+        this.cunningCounter = cunningCounter;
+        this.retreatCounter = retreatCounter;
+    }
+
+    public Vector3 getPosition()
+    {
+        return positionWrapper.getPosition();
+    }
+}
+
+[System.Serializable]
 public struct FlagWrapper
 {
 
@@ -185,7 +211,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 	public InventoryWrapper[] currentShopkeeperInventories;
 	public InventoryWrapper[] currentBuyBackInventories;
 
-    public PositionWrapper[] monsterLocations;
+    public EnemyStatWrapper[] monsterLocations;
 	public FlagWrapper[] currentMonsterDefeatKeys;
 
 	public static SaveBlueprint build(string saveName, int saveNumber)
@@ -236,7 +262,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		saveBlueprint.currentShopkeeperInventories = ShopkeeperInventoryList.convertShopkeeperInventoriesToJson();
 		saveBlueprint.currentBuyBackInventories = ShopkeeperInventoryList.convertBuyBackInventoriesToJson();
 
-        saveBlueprint.monsterLocations = MovementManager.getAllMonsterLocations();
+        saveBlueprint.monsterLocations = MovementManager.getAllMonsterStats();
 
 		return saveBlueprint;
 	}
@@ -301,7 +327,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		this.currentBuyBackInventories = GetFromJson.getElementFromJson(this.saveName, nameof(currentBuyBackInventories), jsonDynamic, SaveDefaultValues.defaultEmptyInventoryWrapperArray);
 
 
-		this.monsterLocations = GetFromJson.getElementFromJson(this.saveName, nameof(monsterLocations), jsonDynamic, null);
+		this.monsterLocations = GetFromJson.getElementFromJson(this.saveName, nameof(monsterLocations), jsonDynamic, SaveDefaultValues.defaultEmptyEnemyStatsWrapperArray);
         this.currentMonsterDefeatKeys = GetFromJson.getElementFromJson(this.saveName, nameof(currentMonsterDefeatKeys), jsonDynamic, SaveDefaultValues.defaultEmptyFlagWrapperArray);
         this.currentActivatedTrapsAndButtons =  GetFromJson.getElementFromJson(this.saveName, nameof(currentActivatedTrapsAndButtons), jsonDynamic, SaveDefaultValues.defaultEmptyFlagWrapperArray);
 	}

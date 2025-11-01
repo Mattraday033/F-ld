@@ -7,6 +7,8 @@ public class ComponentList : MonoBehaviour
 
     public HealthBarManager healthBarManager;
 
+    public AnimationManager animationManager;
+
     public AbilityMenuManager abilityMenuManager;
 
 }
