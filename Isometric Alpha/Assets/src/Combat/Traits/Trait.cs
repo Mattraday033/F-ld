@@ -387,7 +387,7 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
 
     public virtual void dealTickDownDamage()
     {
-        if (getTraitHolder() == null || getTraitHolder().isDead)
+        if (getTraitHolder() == null || getTraitHolder().isDead())
         {
             return;
         }

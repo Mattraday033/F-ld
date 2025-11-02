@@ -4,12 +4,11 @@ using UnityEngine;
 
 public static class RepositionPlaceholderGenerator
 {
-	public const string placeHolderObjectGOName = "RepositionPlaceholder";
 	public const float placeHolderSpriteOpaqueness = .4f;
 
 	public static GameObject generatePlaceholderObject(Stats combatantToBeMoved, GridCoords placeHolderPosition)
 	{
-		GameObject placeHolderObject = GameObject.Instantiate(Resources.Load<GameObject>(placeHolderObjectGOName));
+		GameObject placeHolderObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.placeHolderObject));
 		
 		SpriteRenderer placeHolderSprite = placeHolderObject.GetComponent<SpriteRenderer>();
 		SpriteRenderer combatantToBeMovedSprite = combatantToBeMoved.combatSprite.GetComponent<SpriteRenderer>();

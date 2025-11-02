@@ -26,7 +26,7 @@ public class DeadCombatantManager : MonoBehaviour
 		{
 			Stats currentCombatant = (Stats) listOfCombatants[i];
 			
-			if(currentCombatant.currentHealth <= 0 && !currentCombatant.isDead)
+			if(currentCombatant.currentHealth <= 0 && !currentCombatant.isDead())
 			{
 				int row = currentCombatant.position.row;
 				int col = currentCombatant.position.col;

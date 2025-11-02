@@ -210,11 +210,21 @@ public static class PrefabNames
     public const string allyCombatSpriteName = combatFolder + "AllySprite";
 
     public const string projectile = combatFolder + "Projectile";
+    public const string effect = combatFolder + "Effect";
+
+	public const string placeHolderObject = combatFolder + "RepositionPlaceholder";
 
     #endregion
 
     #region Sprites
     public const string spriteFolder = "Sprites/";
+
+    public const string abilityEffectFolderPath = spriteFolder + "Ability Effects/";
+    public const string damagingEffectFolderPath = abilityEffectFolderPath + "Damaging Effect";
+    public const string negativeEffectFolderPath = abilityEffectFolderPath + "Negative Effect";
+    public const string positiveEffectFolderPath = abilityEffectFolderPath + "Positive Effect";
+    public const string healingEffectFolderPath = abilityEffectFolderPath + "Healing Effect";
+                    
 
     public const string barrelsFolder = spriteFolder + "Barrels/";
     public const string vaultableBarrels = barrelsFolder + "VaultableBarrels";

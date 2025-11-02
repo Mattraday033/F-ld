@@ -76,7 +76,7 @@ public static class EnemyPackInfoList
                                                                                                                         EnemyAmountList.oneScreecherBat},
                                                                                                                     DropTableList.slaveMineDT1Name);
 
-    private readonly static EnemyPackInfo oneArmoredBat = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.oneArmoredBat},
+    private readonly static EnemyPackInfo twoArmoredBats = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.twoArmoredBats},
                                                                                             DropTableList.slaveMineDT1Name);
 
     public static EnemyPackInfo getEnemyPackInfo(string areaName, int index)
@@ -97,8 +97,8 @@ public static class EnemyPackInfoList
         // list.Add(twoGiantBatsTwoBatSwarms);
         // list.Add(twoGiantBatsTwoBatSwarms);
 
-        list.Add(oneArmoredBat);
-        list.Add(oneArmoredBat);
+        list.Add(twoArmoredBats);
+        list.Add(twoArmoredBats);
 
         enemyPackInfoDict.Add(LocationNameList.slaveShackSix, list);
         #endregion

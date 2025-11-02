@@ -11,7 +11,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
     private const int colCount = 4;
     private const bool isHealing = true;
 
-    public static UnityEvent OnFormationChange = new UnityEvent();
+    public readonly static UnityEvent OnFormationChange = new UnityEvent();
 
     private AllyStats[][] grid;
 
@@ -79,17 +79,17 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
         OnFormationChange.Invoke();
     }
 
-    public Stats getStatsAtCoords(int row, int col)
+    public AllyStats getStatsAtCoords(int row, int col)
     {
         return grid[row][col];
     }
 
-    public Stats getStatsAtCoords(GridCoords coords)
+    public AllyStats getStatsAtCoords(GridCoords coords)
     {
         return grid[coords.row][coords.col];
     }
 
-    public GridCoords findLocationOfStats(Stats partyMember)
+    public GridCoords findLocationOfStats(AllyStats partyMember)
     {
         GridCoords partyMemberLocation = new GridCoords(-1, -1);
 
@@ -98,7 +98,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
             for (int col = 0; col < State.formation.getGrid()[row].Length; col++)
             {
                 partyMemberLocation = new GridCoords(row, col);
-                Stats statsAtLocation = State.formation.getStatsAtCoords(partyMemberLocation);
+                AllyStats statsAtLocation = State.formation.getStatsAtCoords(partyMemberLocation);
 
                 if (statsAtLocation != null && partyMember != null && statsAtLocation.getName().Equals(partyMember.getName()))
                 {
@@ -143,7 +143,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
         PartyMemberMovement.instantiatePartyMemberTrain();
     }
 
-    public void removeCharacter(Stats characterToRemove)
+    public void removeCharacter(AllyStats characterToRemove)
     {
         for (int rowIndex = 0; rowIndex < getGrid().Length; rowIndex++)
         {
@@ -199,7 +199,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
 
     public bool contains(string name)
     {
-        foreach (Stats ally in this)
+        foreach (AllyStats ally in this)
         {
             if(ally != null && ally.getName().Equals(name))
             {
@@ -210,9 +210,9 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
         return false;
     }
 
-    public bool contains(Stats stats)
+    public bool contains(AllyStats stats)
     {
-        foreach (Stats ally in this)
+        foreach (AllyStats ally in this)
         {
             if(ally == stats)
             {
@@ -308,9 +308,9 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
     {
         int total = 0;
 
-        foreach (Stats[] row in grid)
+        foreach (AllyStats[] row in grid)
         {
-            total += Helpers.sum<Stats>(row, t => t.getStrength());
+            total += Helpers.sum<AllyStats>(row, t => t.getStrength());
         }
 
         return total;
@@ -320,9 +320,9 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
     {
         int total = 0;
 
-        foreach (Stats[] row in grid)
+        foreach (AllyStats[] row in grid)
         {
-            total += Helpers.sum<Stats>(row, t => t.getDexterity());
+            total += Helpers.sum<AllyStats>(row, t => t.getDexterity());
         }
 
         return total;
@@ -332,9 +332,9 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
     {
         int total = 0;
 
-        foreach (Stats[] row in grid)
+        foreach (AllyStats[] row in grid)
         {
-            total += Helpers.sum<Stats>(row, t => t.getWisdom());
+            total += Helpers.sum<AllyStats>(row, t => t.getWisdom());
         }
 
         return total;
@@ -344,9 +344,9 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
     {
         int total = 0;
 
-        foreach (Stats[] row in grid)
+        foreach (AllyStats[] row in grid)
         {
-            total += Helpers.sum<Stats>(row, t => t.getCharisma());
+            total += Helpers.sum<AllyStats>(row, t => t.getCharisma());
         }
 
         return total;
@@ -356,7 +356,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
     {
         int highest = 0;
 
-        foreach (Stats stats in this)
+        foreach (AllyStats stats in this)
         {
             if (stats != null && stats.getLevel() > highest)
             {

@@ -200,7 +200,7 @@ public static class AbilityList
 		enemyAbilityDictionary.Add(swapKey, new SwapAbility(CombatActionSettings.build(DescriptionParams.build(swapKey, "The creature swaps places with it's target. If successful, the creature heals itself.", swapKey), DamageParams.build("25"))));
 
 		//bat abilities
-		enemyAbilityDictionary.Add(flurryKey, new Ability(CombatActionSettings.build(DescriptionParams.build(flurryKey, "A devastating surge of claws and jaws."), DamageParams.build("10", "5"))));
+		enemyAbilityDictionary.Add(flurryKey, new Ability(CombatActionSettings.build(DescriptionParams.build(flurryKey, "A devastating surge of claws and jaws."), DamageParams.build("10", "5"), AnimationParams.build(CombatAnimationType.Effect))));
         enemyAbilityDictionary.Add(colonyCrushKey, new Ability(CombatActionSettings.build(DescriptionParams.build(colonyCrushKey, "A torrent of tiny bats is launched at the target."), DamageParams.build("5", "1"), TargetParams.build(Range.quadrupleBoxIndex))));
         enemyAbilityDictionary.Add(spawnPupsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(spawnPupsKey, "The bat calls forth it's pups to fight for it.")), EnemyStatsList.pupSpawnCombos));
         enemyAbilityDictionary.Add(weakBatClawKey, new Ability(CombatActionSettings.build(weakBatClawKey, batClawDescription, DamageParams.build("3", "2"))));

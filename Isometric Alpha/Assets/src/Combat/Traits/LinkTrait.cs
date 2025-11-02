@@ -34,7 +34,7 @@ public class LinkTrait : Trait
 
         foreach (Stats target in linkedTargets)
         {
-            if(target != null && !target.isDead)
+            if(target != null && !target.isDead())
             {
                 projectileNumber += linkAction.sendProjectileAt(target.position, target, projectileNumber, getDamageToDeal(incomingDamage), false);
             }

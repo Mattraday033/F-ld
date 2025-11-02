@@ -104,6 +104,8 @@ public interface IFormulaSource
     public string getCritFormula();
 }
 
+public enum CombatAnimationType{ Projectile, Effect }
+
 //a single thing that the player has selected themself or a party member to do during combat
 //Or a single thing the enemy has elected to do during their turn, typically based on logic explained in their trait descriptions
 [System.Serializable]
@@ -236,6 +238,11 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
     {
         setCooldownRemaining(1);
 
+    }
+
+    public virtual CombatAnimationType getCombatAnimationType()
+    {
+        return CombatAnimationType.Projectile;
     }
 
     public void setCooldownRemaining(int cooldownRemaining)
@@ -730,13 +737,36 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
                         Exuberances.addExuberance(MultiStackProcType.GreenLeaf, singleExuberanceStack);
                     }
 
-                    CombatAnimationManager.getInstance().loadProjectile(getActorCoords(), coords, crit, finalDamage, (projectileNumber) * framesToWaitPerProjectile, healsTarget(), targetMustBeDead());
+                    createEffectAnimation(coords, crit, finalDamage);
                 }
                 return 1;
             }
         }
 
         return 0;
+    }
+
+    public void createEffectAnimation(GridCoords targetCoords)
+    {
+        createEffectAnimation(targetCoords, false, noDamage, healsTarget(), targetMustBeDead());
+    }
+
+    public void createEffectAnimation(GridCoords targetCoords, bool crit, int damageNumber)
+    {
+        createEffectAnimation(targetCoords, crit, damageNumber, healsTarget(), targetMustBeDead());
+    }
+
+    public void createEffectAnimation(GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
+    {
+        switch (getCombatAnimationType())
+        {
+            case CombatAnimationType.Projectile:
+                CombatAnimationManager.loadProjectile(getActorCoords(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
+                break;
+            case CombatAnimationType.Effect:
+                CombatAnimationManager.loadInstantEffect(getName(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
+                break;
+        }
     }
 
     public int sendProjectileAt(GridCoords coords, Stats targetCombatant, int projectileNumber, bool noDamage)
@@ -763,7 +793,7 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
                         Exuberances.addExuberance(MultiStackProcType.GreenLeaf, singleExuberanceStack);
                     }
 
-                    CombatAnimationManager.getInstance().loadProjectile(getActorCoords(), coords, crit, CombatAction.noDamage, (projectileNumber) * framesToWaitPerProjectile, healsTarget(), targetMustBeDead());
+                    createEffectAnimation(coords, crit, finalDamage);
                 }
 
                 return 1;
@@ -781,8 +811,8 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
                     {
                         Exuberances.addExuberance(MultiStackProcType.GreenLeaf, singleExuberanceStack);
                     }
-
-                    CombatAnimationManager.getInstance().loadProjectile(getActorCoords(), coords, crit, finalDamage, (projectileNumber) * framesToWaitPerProjectile, healsTarget(), targetMustBeDead());
+                    
+                    createEffectAnimation(coords, crit, finalDamage);
                 }
 
                 return 1;
@@ -796,7 +826,7 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
     {
         if (!inPreviewMode)
         {
-            CombatAnimationManager.getInstance().loadProjectile(getActorCoords(), coords, false, CombatAction.noDamage, (projectileNumber) * framesToWaitPerProjectile, false, false);
+            createEffectAnimation(coords);
         }
 
         return 1;
@@ -821,7 +851,7 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
                     Exuberances.addExuberance(MultiStackProcType.GreenLeaf, singleExuberanceStack);
                 }
 
-                CombatAnimationManager.getInstance().loadProjectile(getActorCoords(), coords, predeterminedCrit, predeterminedDamage, (projectileNumber) * framesToWaitPerProjectile, healsTarget(), targetMustBeDead());
+                createEffectAnimation(coords, predeterminedCrit, predeterminedDamage);
                 return 1;
             }
         }

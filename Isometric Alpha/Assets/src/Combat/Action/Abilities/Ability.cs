@@ -37,11 +37,13 @@ public class Ability: CombatAction, IJSONConvertable
 	private ActionCostType[] costTypes = new ActionCostType[] { ActionCostType.None };
     private int[] actionCosts = new int[] { 0 };
 
-    public Ability(CombatActionSettings settings):
+    private CombatAnimationType animationType;
+
+    public Ability(CombatActionSettings settings) :
     base(null, null)
-	{
-		applySettings(settings);
-	}
+    {
+        applySettings(settings);
+    }
 
 	public override void applySettings(CombatActionSettings settings)
 	{
@@ -66,7 +68,9 @@ public class Ability: CombatAction, IJSONConvertable
 		costTypes = settings.costParams.costTypes;
 		actionCosts = settings.costParams.actionCosts;
 
-		appliedTrait = settings.appliedTrait;
+        animationType = settings.animationParams.animationType;
+
+        appliedTrait = settings.appliedTrait;
     }
 
 
@@ -117,10 +121,15 @@ public class Ability: CombatAction, IJSONConvertable
 
     //convertToJson is for save files, you will never need to save an actions coords so actor/target coords are not saved
     public override string convertToJson()
-	{		
-		return "{sourceAbility\":\"" + getKey() +  "\",\"CombatActionSaveType\":\"" + getSaveType() + "}";
-	}
+    {
+        return "{sourceAbility\":\"" + getKey() + "\",\"CombatActionSaveType\":\"" + getSaveType() + "}";
+    }
 	
+    public override CombatAnimationType getCombatAnimationType()
+    {
+        return animationType;
+    }
+
 	public override string getDamageFormula()
 	{
 		if(cannotDealDamage)

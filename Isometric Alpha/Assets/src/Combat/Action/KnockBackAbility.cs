@@ -5,21 +5,17 @@ using UnityEngine;
 
 public class KnockBackAbility: RepositionEnemyAbility
 {
-    private static int targetCombatantIndex = 0;
-    private static int landingCombatantIndex = 1;
+    private readonly static int targetCombatantIndex = 0;
+    private readonly static int landingCombatantIndex = 1;
 
     private double damageMultiplierPerSquareMoved;
 
-	public KnockBackAbility(CombatActionSettings settings, double damageMultiplierPerSquareMoved): 
-	base(settings)
-	{
-		this.damageMultiplierPerSquareMoved = damageMultiplierPerSquareMoved;
-	}
-	private double calculateFinalDamageMultiplier(GridCoords startCoords, GridCoords landingCoords)
-	{
-		return (double) (1 + ((startCoords.row - landingCoords.row) * damageMultiplierPerSquareMoved));
-	}
-
+    public KnockBackAbility(CombatActionSettings settings, double damageMultiplierPerSquareMoved) :
+    base(settings)
+    {
+        this.damageMultiplierPerSquareMoved = damageMultiplierPerSquareMoved;
+    }
+    
     public override Stats getCombatantToBeMoved()
     {
         return CombatGrid.getCombatantAtCoords(getTargetCoords());

@@ -38,8 +38,8 @@ public class EnemyStats : Stats
 
 	public SpawnDetails spawnDetails;
 
-	public static UnityEvent OnMinionSummonDeath = new UnityEvent();
-	public static UnityEvent OnEnemyDeath = new UnityEvent();
+	public readonly static UnityEvent OnMinionSummonDeath = new UnityEvent();
+	public readonly static UnityEvent OnEnemyDeath = new UnityEvent();
 
 	[SerializeField]
 	private int totalHealth;
@@ -178,10 +178,10 @@ public class EnemyStats : Stats
 		}
 	}
 
-	public bool isMinion()
-	{
-		return traits.Contains(TraitList.minion);
-	}
+    public bool isMinion()
+    {
+        return traits.Contains(TraitList.minion);
+    }
 
 	public bool isLarge()
 	{
@@ -215,19 +215,16 @@ public class EnemyStats : Stats
 				CombatGrid.setCombatantAtCoords(position, null);
 			}
 
-			isDead = true;
 			OnMinionSummonDeath.Invoke();
 
 		}
 		else if (cantBeResurrected())
 		{
 			Destroy(combatSprite);
-			isDead = true;
 		}
 		else
 		{
 			base.setToDeadSprite();
-			isDead = true;
 		}
 
 		OnEnemyDeath.Invoke();

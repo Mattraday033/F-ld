@@ -193,17 +193,17 @@ public class AllyStats : Stats
         return xp / xpNeededToLevelUp;
     }
 
-    public override int getLevel()
+    public int getLevel()
     {
         return level;
     }
 
-    public override void setLevel(int newLevel)
+    public void setLevel(int newLevel)
     {
         this.level = newLevel;
     }
 
-    public override void incrementLevel()
+    public void incrementLevel()
     {
         level++;
     }
@@ -640,7 +640,7 @@ public class AllyStats : Stats
 
     #endregion
 
-    #region Combat And Action Array
+    #region Combat and Action Array
 
     public override int getBonusAbilityDamage()
     {
@@ -687,20 +687,6 @@ public class AllyStats : Stats
         }
     }
 
-    // public override SecondaryStatBoost[] getAllStatBoostsFromTraits()
-    // {
-    //     return Helpers.appendArray<SecondaryStatBoost>(base.getAllStatBoostsFromTraits(), getZoneOfInfluenceTrait().getStatBoosts());
-    // }
-
-    // public override string[] getAllStatBoostKeysFromTraits()
-    // {
-    //     string[] statBoostKeys = base.getAllStatBoostKeysFromTraits();
-
-    //     return Helpers.appendArray<string>(statBoostKeys, getName() + ZOIStatBoostKey);
-    // }
-
-    #endregion
-
     #region Zone of Influence
 
     public override Trait getZoneOfInfluenceTrait()
@@ -736,6 +722,8 @@ public class AllyStats : Stats
         }
     }
     
+    #endregion
+
     #endregion
 
     #region Equipment
@@ -849,14 +837,19 @@ public class AllyStats : Stats
         }
     }
 
+	public override IDescribable getHoverPanelDescribable()
+	{
+        return getZoneOfInfluenceTrait();
+	}
+
     #endregion
 
     #region IDescribable
 
-	public override GameObject getRowType(RowType rowType)
-	{
-		return Resources.Load<GameObject>(PrefabNames.party2x3GridSection);
-	}
+    public override GameObject getRowType(RowType rowType)
+    {
+        return Resources.Load<GameObject>(PrefabNames.party2x3GridSection);
+    }
 
     public override void describeSelfFull(DescriptionPanel panel)
     {

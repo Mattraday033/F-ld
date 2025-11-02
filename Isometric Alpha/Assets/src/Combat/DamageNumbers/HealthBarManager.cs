@@ -7,22 +7,32 @@ using UnityEngine.UI;
 
 public class HealthBarManager : MonoBehaviour
 {
-	private static Color previewSliderOrange = new Color(255f,140f,0f,255f);
+	private readonly static Color previewSliderOrange = new Color(255f,140f,0f,255f);
 
 	public Slider previewSlider;
 	public Image previewImage;
 	
 	public Slider emptySlider;
-	public Image emptyImage;
+    public Image emptyImage;
 	
-	public void setTotalHealth(int totalHealth)
-	{
-		emptySlider.maxValue = totalHealth;
-		previewSlider.maxValue = totalHealth;
-		
-		Helpers.updateGameObjectPosition(previewImage.gameObject);
-		Helpers.updateGameObjectPosition(emptyImage.gameObject);
-	}
+    public void hide()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void show()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void setTotalHealth(int totalHealth)
+    {
+        emptySlider.maxValue = totalHealth;
+        previewSlider.maxValue = totalHealth;
+
+        Helpers.updateGameObjectPosition(previewImage.gameObject);
+        Helpers.updateGameObjectPosition(emptyImage.gameObject);
+    }
 
 	public int getTotalHealth()
 	{

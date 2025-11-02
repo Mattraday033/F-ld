@@ -13,10 +13,19 @@ public class DamagePreviewManager : MonoBehaviour
 	public static Dictionary<GridCoords, HealthBarManager> hoverDamagePreviewHealthBarContainer = new Dictionary<GridCoords, HealthBarManager>();
 	public static CombatAction actionToPreview;
 
-	public static DamagePreviewManager getInstance()
-	{
-		return instance;
-	}
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeDamagePreviewManager()
+    {
+        damagePreviewHealthBarContainer = new Dictionary<GridCoords, HealthBarManager>();
+        hoverDamagePreviewHealthBarContainer = new Dictionary<GridCoords, HealthBarManager>();
+        instance = null;
+        actionToPreview = null;
+    }
+
+    public static DamagePreviewManager getInstance()
+    {
+        return instance;
+    }
 
 	private void Awake()
 	{
@@ -108,7 +117,7 @@ public class DamagePreviewManager : MonoBehaviour
 	private static void addDamagePreviewToHealthBar(Stats actualTarget, Stats cloneTarget, bool isHoverPreview)
 	{
 		if (actualTarget == null || cloneTarget == null ||
-			actualTarget.isDead || cloneTarget.isDead)
+			actualTarget.isDead())
 		{
 			return;
 		}
@@ -167,18 +176,18 @@ public class DamagePreviewManager : MonoBehaviour
 	public static void removeAllHoverPreviews()
 	{
 		foreach (KeyValuePair<GridCoords, HealthBarManager> kvp in hoverDamagePreviewHealthBarContainer)
-		{
-			if (SelectorManager.currentSelector.getAllSelectorCoords().Contains(kvp.Key))
-			{
-				damagePreviewHealthBarContainer[kvp.Key] = hoverDamagePreviewHealthBarContainer[kvp.Key];
-			}
-			else if (!hasPreviewAtCoords(kvp.Key))
-			{
-				CombatGrid.getCombatantAtCoords(kvp.Key).updateHealthBar();
-			}
+        {
+            if (SelectorManager.currentSelector.getAllSelectorCoords().Contains(kvp.Key))
+            {
+                damagePreviewHealthBarContainer[kvp.Key] = hoverDamagePreviewHealthBarContainer[kvp.Key];
+            }
+            else if (!hasPreviewAtCoords(kvp.Key))
+            {
+                CombatGrid.getCombatantAtCoords(kvp.Key).updateHealthBar();
+            }
 		}
 
-		hoverDamagePreviewHealthBarContainer = new Dictionary<GridCoords, HealthBarManager>();
+        hoverDamagePreviewHealthBarContainer = new Dictionary<GridCoords, HealthBarManager>();
 	}
 
 	public static void resetAllDamagePreviews()
@@ -187,18 +196,18 @@ public class DamagePreviewManager : MonoBehaviour
 		{
 			Stats hoverTarget = CombatGrid.getCombatantAtCoords(CombatTileHover.previousGridCoords);
 
-			if (kvp.Key.Equals(CombatTileHover.previousGridCoords) ||
-				(hoverTarget != null && kvp.Value == hoverTarget.healthBarManager))
-			{
-				hoverDamagePreviewHealthBarContainer[kvp.Key] = damagePreviewHealthBarContainer[kvp.Key];
-			}
-			else
-			{
-				CombatGrid.getCombatantAtCoords(kvp.Key).updateHealthBar();
-			}
+            if (((hoverTarget != null && kvp.Value == hoverTarget.healthBarManager) || 
+                kvp.Key.Equals(CombatTileHover.previousGridCoords)) && !improperTargetForAction(hoverTarget))
+            {
+                hoverDamagePreviewHealthBarContainer[kvp.Key] = damagePreviewHealthBarContainer[kvp.Key];
+            }
+            else
+            {
+                CombatGrid.getCombatantAtCoords(kvp.Key).updateHealthBar();
+            }
 		}
 
-		damagePreviewHealthBarContainer = new Dictionary<GridCoords, HealthBarManager>();
+        damagePreviewHealthBarContainer = new Dictionary<GridCoords, HealthBarManager>();
 	}
 
 	public static void resetAllDamagePreviewsOnStateChange()
@@ -220,7 +229,9 @@ public class DamagePreviewManager : MonoBehaviour
 	}
 
 	public static bool healthBarAlreadyHasPreview(HealthBarManager healthBar)
-	{
+    {
+        
+
 		return damagePreviewHealthBarContainer.ContainsValue(healthBar);
 	}
 
@@ -236,7 +247,8 @@ public class DamagePreviewManager : MonoBehaviour
 	private static bool improperTargetForAction(Stats actualTarget)
 	{
 		if ((actionToPreview.targetsAllySection() && CombatGrid.positionIsOnEnemySide(actualTarget.position)) ||
-			(!actionToPreview.targetsAllySection() && CombatGrid.positionIsOnAlliedSide(actualTarget.position)))
+            (!actionToPreview.targetsAllySection() && CombatGrid.positionIsOnAlliedSide(actualTarget.position)) ||
+                actualTarget.queuedToMove())
 		{
 			return true;
 		}

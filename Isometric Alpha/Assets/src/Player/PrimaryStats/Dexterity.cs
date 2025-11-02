@@ -54,7 +54,7 @@ public static class Dexterity
 
         foreach (AllyStats allyStats in State.formation)
         {
-            if (allyStats == null || allyStats.isDead)
+            if (allyStats == null || allyStats.isDead())
             {
                 continue;
             }

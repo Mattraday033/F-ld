@@ -17,19 +17,19 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
     private const float maximumAlpha = 1f;
     private const float greyedOutAlpha = .3f;
-    private static Color greyedOutIconColor = new Color(maximumAlpha, maximumAlpha, maximumAlpha, greyedOutAlpha);
-    private static Color greyedOutBackgroundColor = new Color(greyedOutAlpha, greyedOutAlpha, greyedOutAlpha, maximumAlpha);
+    private readonly static Color greyedOutIconColor = new Color(maximumAlpha, maximumAlpha, maximumAlpha, greyedOutAlpha);
+    private readonly static Color greyedOutBackgroundColor = new Color(greyedOutAlpha, greyedOutAlpha, greyedOutAlpha, maximumAlpha);
 
-    private static Color lockedBackgroundColor = new Color32(55, 55, 55, 255);
+    private readonly static Color lockedBackgroundColor = new Color32(55, 55, 55, 255);
 
-    private static Color costPayableColor = Color.green;
-    private static Color costNotPayableColor = Color.red;
-    private static Color cooldownColor = Color.yellow;
+    private readonly static Color costPayableColor = Color.green;
+    private readonly static Color costNotPayableColor = Color.red;
+    private readonly static Color cooldownColor = Color.yellow;
 
     public int index;
     public bool greyedOut = false;
 
-    //[SerializeField]
+    [SerializeField]
     public AbilityMenuManager abilityMenuManager;
 
     public TextMeshProUGUI cooldownCostText;
@@ -49,11 +49,6 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
     public CombatAction loadedCombatAction;
     public GameObject previewSelectorObject;
-
-    // private void Awake()
-    // {
-    //     loadedCombatAction = null;
-    // }
 
     public void handleCombatMouseClick()
     {

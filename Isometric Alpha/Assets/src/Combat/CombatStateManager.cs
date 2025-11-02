@@ -270,7 +270,7 @@ public class CombatStateManager : MonoBehaviour
 
 		whoseTurn = wT;
 
-		// Debug.LogError("whoseTurn = " + whoseTurn.ToString());
+		Debug.LogError("whoseTurn = " + whoseTurn.ToString());
 
 		CombatUI.setTurnInfoText(whoseTurn);
 		getInstance().updateAllObjectsAfterStateChange();
@@ -292,31 +292,45 @@ public class CombatStateManager : MonoBehaviour
 		CombatActionManager.lockInCombatActionOrder();
 		selectorManager.deactivateCombatantInfoUIHoverPanel();
 		setCurrentActivity(CurrentActivity.Waiting);
-		CombatActionManager.getInstance().resolveACombatAction();
+        StartCoroutine(waitBeforeFirstResolve());
 	}
 
-	public void endResolvingPhase()
-	{
-		turnNumber++;
-		resetAllQueuedSummonLocations();
-		combatActionManager.decideAndShowEnemyCombatActions();
-		combatActionManager.decideAndShowSummonedCombatActions();
-		CombatUI.setCombatActionCounterPanelsToDefault();
-		updateTurnState(WhoseTurn.Player);
+    private IEnumerator waitBeforeFirstResolve()
+    {
+        float timeElapsed = 0;
 
-		if (resolvingTurnDuringTutorial)
-		{
-			setCurrentActivity(CurrentActivity.Tutorial);
-			resolvingTurnDuringTutorial = false;
-			TutorialSequence.spawnCurrentTutorialPopUp();
-		}
-		else
-		{
-			setCurrentActivity(CurrentActivity.ChoosingActor);
-		}
+        while (timeElapsed < CombatActionManager.waitBetweenCombatActions)
+        {
+            yield return null;
 
-		OnNewTurn.Invoke();
-	}
+            timeElapsed += Time.deltaTime;
+        }
+
+        CombatActionManager.getInstance().resolveACombatAction();
+    }
+
+    public void endResolvingPhase()
+    {
+        turnNumber++;
+        resetAllQueuedSummonLocations();
+        combatActionManager.decideAndShowEnemyCombatActions();
+        combatActionManager.decideAndShowSummonedCombatActions();
+        CombatUI.setCombatActionCounterPanelsToDefault();
+        updateTurnState(WhoseTurn.Player);
+
+        if (resolvingTurnDuringTutorial)
+        {
+            setCurrentActivity(CurrentActivity.Tutorial);
+            resolvingTurnDuringTutorial = false;
+            TutorialSequence.spawnCurrentTutorialPopUp();
+        }
+        else
+        {
+            setCurrentActivity(CurrentActivity.ChoosingActor);
+        }
+
+        OnNewTurn.Invoke();
+    }
 
 	public static bool canResolveTurn()
 	{

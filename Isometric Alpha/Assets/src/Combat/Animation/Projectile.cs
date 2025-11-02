@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IAnimationTracker
 {
     public int key;
 
@@ -51,7 +51,7 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            destroyProjectile();
+            destroyAnimation();
             return;
         }
 
@@ -76,7 +76,7 @@ public class Projectile : MonoBehaviour
 
         if (animator.GetBool("finished"))
         {
-            destroyProjectile();
+            destroyAnimation();
         }
     }
 
@@ -84,7 +84,7 @@ public class Projectile : MonoBehaviour
     {
         Stats target = CombatGrid.getCombatantAtCoords(targetCoords);
 
-        if (damage >= 0 && (target != null && (!target.isDead || (healsTarget && affectsDeadTargets))))
+        if (damage >= 0 && target != null && (!target.isDead() || (healsTarget && affectsDeadTargets)))
         {
             return true;
         }
@@ -100,30 +100,11 @@ public class Projectile : MonoBehaviour
         elapsedTime = 0f;
     }
 
-    private float getTravelMaxTime()
-    {
-        return maxTime;
-    }
-
-    private float getLandingMaxTime()
-    {
-        return maxTime/2f;
-    }
-
     public void moveTo(Vector3 newPosition)
     {
         transform.position = newPosition;
 
         Helpers.updateColliderPosition(gameObject);
-    }
-
-    private void destroyProjectile()
-    {
-        CombatAnimationManager.currentProjectiles.Remove(key);
-        
-        Destroy(gameObject);
-
-        CombatAnimationManager.animationFinishedCombatActions();
     }
 
     private static int getCurrentFrameIndex(float elapsedTime, float maxTime, int numberOfPointsAlongTrajectory)
@@ -133,6 +114,25 @@ public class Projectile : MonoBehaviour
             return numberOfPointsAlongTrajectory;
         }
 
-        return (int)((elapsedTime / maxTime) * (float) numberOfPointsAlongTrajectory);
+        return (int)((elapsedTime / maxTime) * (float)numberOfPointsAlongTrajectory);
+    }
+    
+    public static Projectile instantiatePrefab()
+    {
+        return Instantiate(Resources.Load<GameObject>(PrefabNames.projectile)).GetComponent<Projectile>();
+    }
+
+    public void destroyAnimation()
+    {
+        CombatAnimationManager.currentAnimations.Remove(key);
+        
+        DestroyImmediate(gameObject);
+
+        CombatAnimationManager.checkAllAnimationsFinished();
+    }
+
+    public GameObject getGameObject()
+    {
+        return gameObject;
     }
 }

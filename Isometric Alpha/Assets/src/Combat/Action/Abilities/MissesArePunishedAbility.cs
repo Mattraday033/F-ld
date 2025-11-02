@@ -19,7 +19,7 @@ public class MissesArePunishedAbility : Ability
 
         foreach (Stats targetCombatant in targets)
         {
-            if (targetCombatant != null && !targetCombatant.isDead)
+            if (targetCombatant != null && !targetCombatant.isDead())
             {
                 hasTargets = true;
                 break;

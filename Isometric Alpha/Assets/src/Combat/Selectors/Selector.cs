@@ -314,7 +314,7 @@ public class Selector : ScriptableObject, ICloneable
 		{
 			GameObject combatSprite = stats.combatSprite;
 
-			if (Helpers.tagMatchesCriteria(combatSprite, tagCriteria))
+			if (Helpers.tagMatchesCriteria(combatSprite, tagCriteria) && !stats.queuedToMove())
 			{
 				return true;
 			}
@@ -329,19 +329,16 @@ public class Selector : ScriptableObject, ICloneable
 
 		foreach (Stats stats in allTargets)
 		{
-			if (stats.isDead)
+			if (stats.isDead())
 			{
 				continue;
 			}
 
 			GameObject combatSprite = stats.combatSprite;
 
-			foreach (string tag in tagCriteria)
+			if (Helpers.tagMatchesCriteria(combatSprite, tagCriteria) && !stats.queuedToMove())
 			{
-				if (combatSprite.gameObject.tag.Equals(tag))
-				{
-					return true;
-				}
+				return true;
 			}
 		}
 
@@ -356,7 +353,8 @@ public class Selector : ScriptableObject, ICloneable
 		{
 			Stats targetCombatant = CombatGrid.getCombatantAtCoords(targetTileCoord);
 
-			if (targetCombatant != null && Helpers.hasQuality<Trait>(targetCombatant.traits, t => t.isMandatoryTarget()))
+			if (targetCombatant != null && Helpers.hasQuality<Trait>(targetCombatant.traits, t => t.isMandatoryTarget())
+                    && !targetCombatant.queuedToMove())
 			{
 				return true;
 			}

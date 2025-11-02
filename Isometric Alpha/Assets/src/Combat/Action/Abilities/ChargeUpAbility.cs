@@ -6,7 +6,7 @@ public class ChargeUpAbility : Ability
 {
 	public CombatAction actionWhenCharged { get; private set; }
 	public Trait chargeUpTrait { get; private set; }
-	private const string chargingUpName = "Charging Up";
+	public const string chargingUpName = "Charging Up";
 
 	public ChargeUpAbility(Trait chargeUpTrait, Ability actionWhenCharged) :
 		base(CombatActionSettings.build(actionWhenCharged.getKey(), DescriptionParams.build(actionWhenCharged.getName(), actionWhenCharged.getUseDescription(), actionWhenCharged.getIconName()),
@@ -42,8 +42,9 @@ public class ChargeUpAbility : Ability
 	public override void performCombatAction(ArrayList targets)
 	{
 		if (!isCharged())
-		{
-			getActorStats().addTrait(chargeUpTrait);
+        {
+            createEffectAnimation(getActorCoords());
+            getActorStats().addTrait(chargeUpTrait);
 		}
 		else
 		{
@@ -89,29 +90,34 @@ public class ChargeUpAbility : Ability
 		}
 	}
 
-	public override string getName()
-	{
-		if (isCharged())
-		{
-			return base.getName();
-		}
-		else
-		{
-			return chargingUpName;
-		}
-	}
+    public override string getName()
+    {
+        if (isCharged())
+        {
+            return base.getName();
+        }
+        else
+        {
+            return chargingUpName;
+        }
+    }
+    
+    public override CombatAnimationType getCombatAnimationType()
+    {
+        return CombatAnimationType.Effect;
+    }
 
-	public override string getIconName()
-	{
-		if (isCharged())
-		{
-			return actionWhenCharged.getIconName();
-		}
-		else
-		{
-			return chargeUpTrait.getIconName();
-		}
-	}
+    public override string getIconName()
+    {
+        if (isCharged())
+        {
+            return actionWhenCharged.getIconName();
+        }
+        else
+        {
+            return chargeUpTrait.getIconName();
+        }
+    }
 
 	public virtual bool isCharged()
 	{

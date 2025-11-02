@@ -170,6 +170,26 @@ public class CostParams
     }
 }
 
+public class AnimationParams
+{
+    public CombatAnimationType animationType;
+
+
+    public static AnimationParams build()
+    {
+        return build(CombatAnimationType.Projectile);
+    }
+
+    public static AnimationParams build(CombatAnimationType animationType)
+    {
+        AnimationParams animationParams = new AnimationParams();
+
+        animationParams.animationType = animationType;
+
+        return animationParams;
+    }
+}
+
 public class CombatActionSettings
 {
     public string key;
@@ -179,6 +199,7 @@ public class CombatActionSettings
     public TargetParams targetParams;
     public FrequencyParams frequencyParams;
     public CostParams costParams;
+    public AnimationParams animationParams;
 
     public Trait appliedTrait;
 
@@ -188,164 +209,170 @@ public class CombatActionSettings
 
     public static CombatActionSettings build(string key)
     {
-        return CombatActionSettings.build(key, DescriptionParams.build(), DamageParams.build(), TargetParams.build(), FrequencyParams.build(), CostParams.build(), null, null);
+        return CombatActionSettings.build(key, DescriptionParams.build(), DamageParams.build(), TargetParams.build(), FrequencyParams.build(), CostParams.build(), AnimationParams.build(), null, null);
     }
 
     public static CombatActionSettings build(string key, Trait appliedTrait)
     {
-        return CombatActionSettings.build(key, DescriptionParams.build(), DamageParams.build(), TargetParams.build(), FrequencyParams.build(), CostParams.build(), appliedTrait, null);
+        return CombatActionSettings.build(key, DescriptionParams.build(), DamageParams.build(), TargetParams.build(), FrequencyParams.build(), CostParams.build(), AnimationParams.build(), appliedTrait, null);
     }
 
     public static CombatActionSettings build(string key, Trait appliedTrait, Trait[] relatedTraits)
     {
-        return CombatActionSettings.build(key, DescriptionParams.build(), DamageParams.build(), TargetParams.build(), FrequencyParams.build(), CostParams.build(), appliedTrait, null);
+        return CombatActionSettings.build(key, DescriptionParams.build(), DamageParams.build(), TargetParams.build(), FrequencyParams.build(), CostParams.build(), AnimationParams.build(), appliedTrait, null);
     }
 
     // 1 Param Builds
     public static CombatActionSettings build(DescriptionParams descriptionParams)
     {
-        return CombatActionSettings.build(descriptionParams.name, descriptionParams, DamageParams.build(), TargetParams.build(), FrequencyParams.build(), CostParams.build(), null, null);
+        return CombatActionSettings.build(descriptionParams.name, descriptionParams, DamageParams.build(), TargetParams.build(), FrequencyParams.build(), CostParams.build(), AnimationParams.build(), null, null);
     }
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams)
     {
-        return CombatActionSettings.build(key, descriptionParams, DamageParams.build(), TargetParams.build(), FrequencyParams.build(), CostParams.build(), null, null);
+        return CombatActionSettings.build(key, descriptionParams, DamageParams.build(), TargetParams.build(), FrequencyParams.build(), CostParams.build(), AnimationParams.build(), null, null);
     }
 
     public static CombatActionSettings build(DescriptionParams descriptionParams, Trait appliedTrait)
     {
-        return CombatActionSettings.build(descriptionParams.name, descriptionParams, DamageParams.build(), TargetParams.build(), FrequencyParams.build(), CostParams.build(), appliedTrait, null);
+        return CombatActionSettings.build(descriptionParams.name, descriptionParams, DamageParams.build(), TargetParams.build(), FrequencyParams.build(), CostParams.build(), AnimationParams.build(), appliedTrait, null);
     }
 
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, Trait appliedTrait)
     {
-        return CombatActionSettings.build(key, descriptionParams, DamageParams.build(), TargetParams.build(), FrequencyParams.build(), CostParams.build(), appliedTrait, null);
+        return CombatActionSettings.build(key, descriptionParams, DamageParams.build(), TargetParams.build(), FrequencyParams.build(), CostParams.build(), AnimationParams.build(), appliedTrait, null);
     }
 
     public static CombatActionSettings build(string key, CostParams costParams, Trait appliedTrait)
     {
-        return CombatActionSettings.build(key, DescriptionParams.build(), DamageParams.build(), TargetParams.build(), FrequencyParams.build(), costParams, appliedTrait, null);
+        return CombatActionSettings.build(key, DescriptionParams.build(), DamageParams.build(), TargetParams.build(), FrequencyParams.build(), costParams, AnimationParams.build(), appliedTrait, null);
     }
 
     // 2 Param Builds
     public static CombatActionSettings build(DescriptionParams descriptionParams, TargetParams targetParams)
     {
-        return CombatActionSettings.build(descriptionParams.name, descriptionParams, DamageParams.build(), targetParams, FrequencyParams.build(), CostParams.build(), null, null);
+        return CombatActionSettings.build(descriptionParams.name, descriptionParams, DamageParams.build(), targetParams, FrequencyParams.build(), CostParams.build(), AnimationParams.build(), null, null);
     }
 
     public static CombatActionSettings build(DescriptionParams descriptionParams, DamageParams damageParams, Trait appliedTrait)
     {
-        return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, TargetParams.build(), FrequencyParams.build(), CostParams.build(), appliedTrait, null);
+        return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, TargetParams.build(), FrequencyParams.build(), CostParams.build(), AnimationParams.build(), appliedTrait, null);
     }
 
     public static CombatActionSettings build(DescriptionParams descriptionParams, DamageParams damageParams)
     {
-        return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, TargetParams.build(), FrequencyParams.build(), CostParams.build(), null);
+        return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, TargetParams.build(), FrequencyParams.build(), CostParams.build(), AnimationParams.build(), null, null);
     }
 
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams)
     {
-        return CombatActionSettings.build(key, descriptionParams, damageParams, TargetParams.build(), FrequencyParams.build(), CostParams.build(), null, null);
+        return CombatActionSettings.build(key, descriptionParams, damageParams, TargetParams.build(), FrequencyParams.build(), CostParams.build(), AnimationParams.build(), null, null);
     }
 
     public static CombatActionSettings build(DescriptionParams descriptionParams, TargetParams TargetParams, Trait appliedTrait)
     {
-        return CombatActionSettings.build(descriptionParams.name, descriptionParams, DamageParams.build(), TargetParams, FrequencyParams.build(), CostParams.build(), appliedTrait, null);
+        return CombatActionSettings.build(descriptionParams.name, descriptionParams, DamageParams.build(), TargetParams, FrequencyParams.build(), CostParams.build(), AnimationParams.build(), appliedTrait, null);
     }
 
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, TargetParams targetParams, Trait appliedTrait)
     {
-        return CombatActionSettings.build(key, descriptionParams, DamageParams.build(), targetParams, FrequencyParams.build(), CostParams.build(), appliedTrait, null);
+        return CombatActionSettings.build(key, descriptionParams, DamageParams.build(), targetParams, FrequencyParams.build(), CostParams.build(), AnimationParams.build(), appliedTrait, null);
     }
 
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, FrequencyParams frequencyParams)
     {
-        return CombatActionSettings.build(key, descriptionParams, DamageParams.build(), TargetParams.build(), frequencyParams, CostParams.build(), null, null);
+        return CombatActionSettings.build(key, descriptionParams, DamageParams.build(), TargetParams.build(), frequencyParams, CostParams.build(), AnimationParams.build(), null, null);
     }
 
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, FrequencyParams frequencyParams, Trait appliedTrait)
     {
-        return CombatActionSettings.build(key, descriptionParams, DamageParams.build(), TargetParams.build(), frequencyParams, CostParams.build(), appliedTrait, null);
+        return CombatActionSettings.build(key, descriptionParams, DamageParams.build(), TargetParams.build(), frequencyParams, CostParams.build(), AnimationParams.build(), appliedTrait, null);
     }
 
     //3 Param Builds
+
+    public static CombatActionSettings build(DescriptionParams descriptionParams, DamageParams damageParams, AnimationParams animationParams)
+    {
+        return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, TargetParams.build(), FrequencyParams.build(), CostParams.build(), animationParams, null, null);
+    }
+
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, FrequencyParams frequencyParams)
     {
-        return CombatActionSettings.build(key, descriptionParams, damageParams, TargetParams.build(), frequencyParams, CostParams.build(), null, null);
+        return CombatActionSettings.build(key, descriptionParams, damageParams, TargetParams.build(), frequencyParams, CostParams.build(), AnimationParams.build(), null, null);
     }
 
     public static CombatActionSettings build(DescriptionParams descriptionParams, DamageParams damageParams, FrequencyParams frequencyParams)
     {
-        return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, TargetParams.build(), frequencyParams, CostParams.build(), null, null);
+        return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, TargetParams.build(), frequencyParams, CostParams.build(), AnimationParams.build(), null, null);
     }
 
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, TargetParams targetParams)
     {
-        return CombatActionSettings.build(key, descriptionParams, damageParams, targetParams, FrequencyParams.build(), CostParams.build(), null, null);
+        return CombatActionSettings.build(key, descriptionParams, damageParams, targetParams, FrequencyParams.build(), CostParams.build(), AnimationParams.build(), null, null);
     }
 
     public static CombatActionSettings build(DescriptionParams descriptionParams, DamageParams damageParams, TargetParams targetParams)
     {
-        return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, targetParams, FrequencyParams.build(), CostParams.build(), null, null);
+        return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, targetParams, FrequencyParams.build(), CostParams.build(), AnimationParams.build(), null, null);
     }
 
     public static CombatActionSettings build(DescriptionParams descriptionParams, DamageParams damageParams, TargetParams targetParams, Trait appliedTrait)
     {
-        return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, targetParams, FrequencyParams.build(), CostParams.build(), appliedTrait, null);
+        return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, targetParams, FrequencyParams.build(), CostParams.build(), AnimationParams.build(), appliedTrait, null);
     }
 
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, FrequencyParams frequencyParams, Trait appliedTrait)
     {
-        return CombatActionSettings.build(key, descriptionParams, damageParams, TargetParams.build(), frequencyParams, CostParams.build(), appliedTrait, null);
+        return CombatActionSettings.build(key, descriptionParams, damageParams, TargetParams.build(), frequencyParams, CostParams.build(), AnimationParams.build(), appliedTrait, null);
     }
 
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, TargetParams targetParams, FrequencyParams frequencyParams, Trait appliedTrait)
     {
-        return CombatActionSettings.build(key, descriptionParams, DamageParams.build(), targetParams, frequencyParams, CostParams.build(), appliedTrait, null);
+        return CombatActionSettings.build(key, descriptionParams, DamageParams.build(), targetParams, frequencyParams, CostParams.build(), AnimationParams.build(), appliedTrait, null);
     }
 
     //4 Param Builds
     public static CombatActionSettings build(DescriptionParams descriptionParams, DamageParams damageParams, TargetParams targetParams, FrequencyParams frequencyParams)
     {
-        return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, targetParams, frequencyParams, CostParams.build(), null, null);
+        return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, targetParams, frequencyParams, CostParams.build(), AnimationParams.build(), null, null);
     }
 
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, TargetParams targetParams, FrequencyParams frequencyParams)
     {
-        return CombatActionSettings.build(key, descriptionParams, damageParams, targetParams, frequencyParams, CostParams.build(), null, null);
+        return CombatActionSettings.build(key, descriptionParams, damageParams, targetParams, frequencyParams, CostParams.build(), AnimationParams.build(), null, null);
     }
 
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, TargetParams targetParams, FrequencyParams frequencyParams, Trait appliedTrait)
     {
-        return CombatActionSettings.build(key, descriptionParams, damageParams, targetParams, frequencyParams, CostParams.build(), appliedTrait, null);
+        return CombatActionSettings.build(key, descriptionParams, damageParams, targetParams, frequencyParams, CostParams.build(), AnimationParams.build(), appliedTrait, null);
     }
 
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, FrequencyParams frequencyParams, CostParams costParams)
     {
-        return CombatActionSettings.build(key, descriptionParams, damageParams, TargetParams.build(), frequencyParams, costParams, null, null);
+        return CombatActionSettings.build(key, descriptionParams, damageParams, TargetParams.build(), frequencyParams, costParams, AnimationParams.build(), null, null);
     }
 
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, FrequencyParams frequencyParams, CostParams costParams, Trait appliedTrait)
     {
-        return CombatActionSettings.build(key, descriptionParams, damageParams, TargetParams.build(), frequencyParams, costParams, appliedTrait, null);
+        return CombatActionSettings.build(key, descriptionParams, damageParams, TargetParams.build(), frequencyParams, costParams, AnimationParams.build(), appliedTrait, null);
     }
 
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, TargetParams targetParams, FrequencyParams frequencyParams, CostParams costParams, Trait appliedTrait)
     {
-        return CombatActionSettings.build(key, descriptionParams, DamageParams.build(), targetParams, frequencyParams, costParams, appliedTrait, null);
+        return CombatActionSettings.build(key, descriptionParams, DamageParams.build(), targetParams, frequencyParams, costParams, AnimationParams.build(), appliedTrait, null);
     }
 
     //5 Param Builds
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, TargetParams targetParams, FrequencyParams frequencyParams, CostParams costParams)
     {
-        return CombatActionSettings.build(key, descriptionParams, damageParams, targetParams, frequencyParams, costParams, null, null);
+        return CombatActionSettings.build(key, descriptionParams, damageParams, targetParams, frequencyParams, costParams, AnimationParams.build(), null, null);
     }
 
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, TargetParams targetParams, FrequencyParams frequencyParams, CostParams costParams, Trait appliedTrait)
     {
-        return CombatActionSettings.build(key, descriptionParams, damageParams, targetParams, frequencyParams, costParams, appliedTrait, null);
+        return CombatActionSettings.build(key, descriptionParams, damageParams, targetParams, frequencyParams, costParams, AnimationParams.build(), appliedTrait, null);
     }
 
-    public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, TargetParams targetParams, FrequencyParams frequencyParams, CostParams costParams, Trait appliedTrait, Trait[] relatedTraits)
+    public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, TargetParams targetParams, FrequencyParams frequencyParams, CostParams costParams, AnimationParams animationParams, Trait appliedTrait, Trait[] relatedTraits)
     {
         CombatActionSettings parameters = new CombatActionSettings();
 
@@ -356,6 +383,7 @@ public class CombatActionSettings
         parameters.targetParams = targetParams;
         parameters.frequencyParams = frequencyParams;
         parameters.costParams = costParams;
+        parameters.animationParams = animationParams;
 
         parameters.appliedTrait = appliedTrait;
         parameters.relatedTraits = relatedTraits;

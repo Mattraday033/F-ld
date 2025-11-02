@@ -2,75 +2,144 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Animancer;
-
-public enum CharacterAnimationType { Idle_Front, Idle_Back, Run_Front, Run_Back, Wound, Death, Attack }
+using Animancer.FSM;
+public enum CharacterAnimationType { Idle_Front, Idle_Back, Run_Front, Run_Back, Wounded, Death, Attack }
 
 public class AnimationManager : MonoBehaviour
 {
+    public readonly static CharacterAnimationType[] idleAnimationsTypes = new CharacterAnimationType[] 
+                                { CharacterAnimationType.Idle_Front, CharacterAnimationType.Idle_Back};
 
-    public readonly static CharacterAnimationType[] animationTypes = new CharacterAnimationType[] { CharacterAnimationType.Idle_Front,
-    CharacterAnimationType.Idle_Back, CharacterAnimationType.Run_Front, CharacterAnimationType.Run_Back,  CharacterAnimationType.Wound, CharacterAnimationType.Death};
+
+    public readonly static CharacterAnimationType[] tempAnimationTypes = new CharacterAnimationType[] 
+    { CharacterAnimationType.Run_Front, CharacterAnimationType.Run_Back,  CharacterAnimationType.Wounded, CharacterAnimationType.Death};
+
+    public Dictionary<CharacterAnimationType, AnimationClip> animationDict;
 
     private const int maxAttackAnimationNumber = 10;
 
     public NamedAnimancerComponent animancer;
 
     //MonsterNameList.armoredBat
-    public void setAnimations(string monsterName)
+    public virtual void setAnimations(string monsterName)
     {
-        animancer.Animations = getAllAnimations(EnemyTypeFolderPathList.getEnemyTypeFolderPath(monsterName));
+        string folderPath = EnemyTypeFolderPathList.getEnemyTypeFolderPath(monsterName);
+        animationDict = getTempAnimations(folderPath);
 
-        playAnimation(CharacterAnimationType.Idle_Front);
+        animancer.Animations = getIdleAnimations(folderPath);
     }
 
-    private static AnimationClip[] getAllAnimations(string folderPath)
+    private static AnimationClip[] getIdleAnimations(string folderPath)
     {
-        List<AnimationClip> animationList = new List<AnimationClip>();
+        List<AnimationClip> animationDict = new List<AnimationClip>();
 
-        animationList.AddRange(getNonAttackAnimations(folderPath));
-        animationList.AddRange(getAttackAnimations(folderPath));
-
-        return animationList.ToArray();
-    }
-
-    private static List<AnimationClip> getNonAttackAnimations(string folderPath)
-    {
-        List<AnimationClip> animationList = new List<AnimationClip>();
-
-        foreach (CharacterAnimationType type in animationTypes)
+        foreach (CharacterAnimationType type in idleAnimationsTypes)
         {
             AnimationClip animClip = Resources.Load<AnimationClip>(folderPath + type.ToString());
 
-            animationList.Add(animClip);
+            animationDict.Add(animClip);
         }
 
-        return animationList;
+        return animationDict.ToArray();
     }
 
-    private static List<AnimationClip> getAttackAnimations(string folderPath)
+    private static Dictionary<CharacterAnimationType, AnimationClip> getTempAnimations(string folderPath)
     {
-        List<AnimationClip> animationList = new List<AnimationClip>();
+        Dictionary<CharacterAnimationType, AnimationClip> animationDict = new Dictionary<CharacterAnimationType, AnimationClip>();
 
-        for (int index = 1; index <= maxAttackAnimationNumber; index++)
+        foreach (CharacterAnimationType type in tempAnimationTypes)
         {
-            AnimationClip animationClip = Resources.Load<AnimationClip>(folderPath + CharacterAnimationType.Attack.ToString() + "_" + index);
+            AnimationClip animClip = Resources.Load<AnimationClip>(folderPath + type.ToString());
 
-            if (animationClip == null)
-            {
-                break;
-            }
-            else
-            {
-                animationList.Add(animationClip);
-            }
+            animationDict.Add(type, animClip);
         }
 
-        return animationList;
+        return animationDict;
     }
 
-
-    public void playAnimation(CharacterAnimationType animationType)
+    public void playRunBackAnimation()
     {
+        playAnimation(CharacterAnimationType.Run_Back);
+    }
+
+    public void playRunFrontAnimation()
+    {
+        playAnimation(CharacterAnimationType.Run_Front);
+    }
+
+    public void playIdleBackAnimation()
+    {
+        playAnimation(CharacterAnimationType.Idle_Back);
+    }
+
+    public void playIdleFrontAnimation()
+    {
+        playAnimation(CharacterAnimationType.Idle_Front);
+    }
+
+    public void playDeathAnimation()
+    {
+        playAnimation(createClipTransitionToDeath());
+    }
+
+    // public void playAttackAnimation(int attackIndex)
+    // {
+    //    playAnimation(CharacterAnimationType.Attack.ToString() + "_" + attackIndex);
+    // }
+
+    // public void playAttackAnimation()
+    // {
+    //    playAnimation(CharacterAnimationType.Attack.ToString() + "_" + Constants.indexOne);
+    // }
+
+
+    public void playWoundedAnimation()
+    {
+        playAnimation(createClipTransitionToIdle(CharacterAnimationType.Wounded));
+    }
+
+    private ClipTransition createClipTransitionToIdle(CharacterAnimationType type)
+    {
+        ClipTransition clipTransition = new ClipTransition();
+        clipTransition.Clip = animationDict[type];
+        clipTransition.Events.OnEnd = () => playIdleFrontAnimation();
+
+        return clipTransition;
+    }
+
+    private ClipTransition createClipTransitionToDeath()
+    {
+        ClipTransition clipTransition = new ClipTransition();
+        clipTransition.Clip = animationDict[CharacterAnimationType.Death];
+        clipTransition.Events.OnEnd = () => haltAllAnimations();
+
+        return clipTransition;
+    }
+
+    public void startUpAnimations()
+    {
+        animancer.enabled = true;
+    }
+
+    private void haltAllAnimations()
+    {
+        animancer.enabled = false;
+    }
+
+    private void playAnimation(ClipTransition clipTransition)
+    {
+        animancer.Stop();
+        AnimancerState state = animancer.Play(clipTransition);
+
+        if (state == null)
+        {
+            Debug.LogError("No such animation for type: " + clipTransition);
+        }
+    }
+
+    private void playAnimation(CharacterAnimationType animationType)
+    {
+        animancer.Stop();
         AnimancerState state = animancer.TryPlay(animationType.ToString());
 
         if (state == null)
@@ -79,14 +148,71 @@ public class AnimationManager : MonoBehaviour
         }
     }
 
-    public void playAttackAnimation(CharacterAnimationType animationType, int attackIndex)
-    {
-        AnimancerState state = animancer.TryPlay(animationType.ToString() + "_" + attackIndex);
-
-        if(state == null)
-        {
-            Debug.LogError("No such animation for type: " + animationType.ToString() + "_" + attackIndex);
-        }
-    }
-
 }
+
+
+    // private static List<AnimationClip> getAttackAnimations(string folderPath)
+    // {
+    //     List<AnimationClip> animationList = new List<AnimationClip>();
+
+    //     for (int index = 1; index <= maxAttackAnimationNumber; index++)
+    //     {
+    //         AnimationClip animationClip = Resources.Load<AnimationClip>(folderPath + CharacterAnimationType.Attack.ToString() + "_" + index);
+
+    //         if (animationClip == null)
+    //         {
+    //             break;
+    //         }
+    //         else
+    //         {
+    //             animationList.Add(animationClip);
+    //         }
+    //     }
+
+    //     return animationList;
+    // }
+
+    // private static AnimationClip[] getAllAnimations(string folderPath)
+    // {
+    //     List<AnimationClip> animationList = new List<AnimationClip>();
+
+    //     animationList.AddRange(getTempAnimations(folderPath));
+    //     animationList.AddRange(getAttackAnimations(folderPath));
+
+    //     return animationList.ToArray();
+    // }
+
+    // private static List<AnimationClip> getTempAnimations(string folderPath)
+    // {
+    //     List<AnimationClip> animationList = new List<AnimationClip>();
+
+    //     foreach (CharacterAnimationType type in animationTypes)
+    //     {
+    //         AnimationClip animClip = Resources.Load<AnimationClip>(folderPath + type.ToString());
+
+    //         animationList.Add(animClip);
+    //     }
+
+    //     return animationList;
+    // }
+
+    // private static List<AnimationClip> getAttackAnimations(string folderPath)
+    // {
+    //     List<AnimationClip> animationList = new List<AnimationClip>();
+
+    //     for (int index = 1; index <= maxAttackAnimationNumber; index++)
+    //     {
+    //         AnimationClip animationClip = Resources.Load<AnimationClip>(folderPath + CharacterAnimationType.Attack.ToString() + "_" + index);
+
+    //         if (animationClip == null)
+    //         {
+    //             break;
+    //         }
+    //         else
+    //         {
+    //             animationList.Add(animationClip);
+    //         }
+    //     }
+
+    //     return animationList;
+    // }

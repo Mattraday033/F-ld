@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CombatActionManager : MonoBehaviour
 {
+    public const float waitBetweenCombatActions = .5f;
+
 	public static CombatActionManager instance;
 	
 	public EnemyCombatActionManager enemyCombatActionManager;
@@ -85,9 +87,18 @@ public class CombatActionManager : MonoBehaviour
         do{
             yield return null;
         }while(CombatAnimationManager.getInstance().hasOngoingAnimations());
-		
-		currentWait = null;
-		
+
+        currentWait = null;
+
+        float timeElapsed = 0;
+
+        while(timeElapsed < waitBetweenCombatActions)
+        {
+            yield return null;
+
+            timeElapsed += Time.deltaTime;
+        }
+
 		CombatUI.populateCombatActionPanels();
 		
 		if(CombatStateManager.whoseTurn == WhoseTurn.Resolving)
@@ -137,7 +148,7 @@ public class CombatActionManager : MonoBehaviour
 		{
 			Stats currentActor = ((CombatAction) onDeathCombatActionQueue[actionIndex]).getActorStats();
 			
-			if(currentActor == null || currentActor is null || !currentActor.isDead)
+			if(currentActor == null || currentActor is null || !currentActor.isDead())
 			{
 				onDeathCombatActionQueue.RemoveAt(actionIndex);
 			}

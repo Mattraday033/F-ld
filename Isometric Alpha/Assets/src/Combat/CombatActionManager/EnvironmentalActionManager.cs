@@ -32,7 +32,7 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 			CombatAction envCombatAction = kvp.Key.clone();
 			
 			if(CombatGrid.getCombatantAtCoords(envCombatAction.getActorCoords()) == null || 
-				CombatGrid.getCombatantAtCoords(envCombatAction.getActorCoords()).isDead)
+				CombatGrid.getCombatantAtCoords(envCombatAction.getActorCoords()).isDead())
 			{
 				continue;
 			}

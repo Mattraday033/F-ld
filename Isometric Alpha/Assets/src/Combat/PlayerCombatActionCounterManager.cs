@@ -28,7 +28,7 @@ public class PlayerCombatActionCounterManager : MonoBehaviour
 		{
 			Stats combatant = CombatGrid.getCombatantAtCoords(action.getActorCoords());
 
-			if (combatant == null || combatant.isDead)
+			if (combatant == null || combatant.isDead())
 			{
 				deadActorFound = true;
 			}

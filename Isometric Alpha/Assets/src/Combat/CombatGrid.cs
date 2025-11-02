@@ -559,7 +559,7 @@ public static class CombatGrid
 			{
 				Stats currentCombatant = CombatGrid.getCombatantAtCoords(rowIndex, colIndex);
 
-				if (currentCombatant != null && currentCombatant.isDead &&
+				if (currentCombatant != null && currentCombatant.isDead() &&
 					Helpers.hasQuality<Trait>(currentCombatant.traits, t => t.deleteIfDead()))
 				{
 					CombatGrid.setCombatantAtCoords(rowIndex, colIndex, null);

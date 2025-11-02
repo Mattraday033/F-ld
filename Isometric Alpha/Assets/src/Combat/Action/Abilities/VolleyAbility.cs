@@ -49,7 +49,7 @@ public class VolleyAbility : Ability
 			{
 				continue;
 			}
-			else if (actor.isDead)
+			else if (actor.isDead())
 			{
 				deadActors.Add(actor);
 			}
@@ -87,7 +87,7 @@ public class VolleyAbility : Ability
 		
 		foreach(Stats actor in allActors)
 		{
-			if(actor == null || actor.isDead || actor.isStunned())
+			if(actor == null || actor.isDead() || actor.isStunned())
 			{
 				continue;
 			}
@@ -108,7 +108,7 @@ public class VolleyAbility : Ability
 				finalDamage = -1;
 			}
 
-			CombatAnimationManager.getInstance().loadProjectile(actor.position, targetTileCoords[targetCoordsIndex], crit, finalDamage, (projectileNumber)*framesToWaitPerProjectile, healsTarget(), targetMustBeDead());
+			CombatAnimationManager.loadProjectile(actor.position, targetTileCoords[targetCoordsIndex], crit, finalDamage, healsTarget(), targetMustBeDead());
 			projectileNumber++;
 			
 			applyTrait(targetCombatant);

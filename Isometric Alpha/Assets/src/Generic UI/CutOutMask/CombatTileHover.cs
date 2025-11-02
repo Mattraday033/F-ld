@@ -134,7 +134,7 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
         }
     }
 
-    public override void OnPointerExit(PointerEventData eventData)
+    public override void OnPointerExit(PointerEventData eventData) 
     {
 
         purgeHoverCoords();
@@ -151,6 +151,7 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
             if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation && tileHasTarget())
             {
                 DamagePreviewManager.removeAllHoverPreviews();
+                DamagePreviewManager.setUpDamagePreviews();
             }
         }
     }
