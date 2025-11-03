@@ -29,24 +29,30 @@ public struct SpawnDetails
 
 public class EnemyStats : Stats
 {
-	[SerializeField]
-	private bool priorityAttacker;
-	[SerializeField]
-	private bool lowPriorityAttacker;
+    #region Unity Events
+    public readonly static UnityEvent OnMinionSummonDeath = new UnityEvent();
+    public readonly static UnityEvent OnEnemyDeath = new UnityEvent();
 
-	public int armor;
+    #endregion
 
-	public SpawnDetails spawnDetails;
+    #region Global Variables
 
-	public readonly static UnityEvent OnMinionSummonDeath = new UnityEvent();
-	public readonly static UnityEvent OnEnemyDeath = new UnityEvent();
+    [SerializeField]
+    private int totalHealth;
+    [SerializeField]
+    private bool priorityAttacker;
+    [SerializeField]
+    private bool lowPriorityAttacker;
+    public int armor;
 
-	[SerializeField]
-	private int totalHealth;
+    public SpawnDetails spawnDetails;
+    private CombatAction combatAction;
 
-	private CombatAction combatAction;
+    #endregion
 
-    public EnemyStats(string key, int armor, int tHP):
+    #region Constructors
+
+    public EnemyStats(string key, int armor, int tHP) :
     base(key)
     {
         this.armor = armor;
@@ -71,6 +77,10 @@ public class EnemyStats : Stats
         }
     }
 
+    #endregion
+
+    #region Sprite and GameObject
+
     public override GameObject instantiateCombatSprite()
     {
         combatSprite = Instantiate(Resources.Load<GameObject>(PrefabNames.enemySprite), CombatStateManager.getCreatureParent());
@@ -87,240 +97,234 @@ public class EnemyStats : Stats
         return combatSprite;
     }
 
-    public override void setUpComponents(ComponentList list)
+    public override Color getOutlineColor()
     {
-        base.setUpComponents(list);
-
-        animationManager.setAnimations(getName());
+        return RevealManager.attacksOnSight;
     }
+
+    public override GridCoords getPositionToHit(Selector selector, int skips)
+    {
+
+        if (spawnDetails.allSpawnPositions == null || spawnDetails.allSpawnPositions.Length <= 1)
+        {
+            return position.clone();
+        }
+
+        GridCoords[] allSelectorCoords = selector.getAllSelectorCoords();
+        List<GridCoords> allCompatabilePositions = new List<GridCoords>();
+
+
+        foreach (GridCoords coords in allSelectorCoords)
+        {
+            if (spawnDetails.allSpawnPositions.Contains(coords))
+            {
+                allCompatabilePositions.Add(coords);
+            }
+        }
+
+        if (allCompatabilePositions.Count == 0 || skips >= allCompatabilePositions.Count)
+        {
+            return position.clone();
+        }
+        else
+        {
+            return allCompatabilePositions[skips];
+        }
+    }
+
+    public override void setToDeadSprite()
+    {
+        if (CombatStateManager.whoseTurn != WhoseTurn.Resolving)
+        {
+            return;
+        }
+
+        CombatStateManager.deadMonsterCount++;
+
+        if (isMinion() || wasSummoned())
+        {
+            Destroy(combatSprite);
+
+            if (isLarge())
+            {
+                destroyAllSpawnPositions();
+            }
+            else
+            {
+                CombatGrid.setCombatantAtCoords(position, null);
+            }
+
+            OnMinionSummonDeath.Invoke();
+
+        }
+        else if (notResurrectable())
+        {
+            Destroy(combatSprite);
+        }
+        else
+        {
+            base.setToDeadSprite();
+        }
+
+        OnEnemyDeath.Invoke();
+
+        prepareOnDeathEffects();
+    }
+
+    public override void bringBackFromDeath()
+    {
+        if (Helpers.hasQuality<Trait>(traits, t => t.preventsResurrection()))
+        {
+            return;
+        }
+
+        CombatStateManager.deadMonsterCount--;
+
+        base.bringBackFromDeath();
+    }
+
+    #endregion
+
+    #region Health
+
+    public override int getTotalHealth()
+    {
+        return totalHealth;
+    }
+
+    #endregion
+
+    #region Combat and Actions
 
     public override int getTotalArmorRating()
     {
         return (int)((double)armor * getCurrentTotalArmorPercentage());
     }
 
-	public override int getTotalHealth()
-	{
-		return totalHealth;
-	}
 
-	public override Color getOutlineColor()
-	{
-		return RevealManager.attacksOnSight;
-	}
-
-	public virtual void spawningCombatAction()
+    public virtual void spawningCombatAction()
     {
-        
+        //Empty On Purpose
     }
 
-	public void instateEnvironmentalCombatAction()
-	{
-		// EnvironmentalCombatActionManager.getInstance().instateEnvironmentalCombatAction(environmentalCombatActionKey, environmentalTargetingTraitKey, CombatGrid.getCombatantAtCoords(position));
-	}
-
-	public CombatAction getCombatAction()
-	{
-		if (combatAction == null || combatAction is null)
-		{
-			return null;
-		}
-
-		CombatAction combatActionClone = combatAction.clone();
-		combatActionClone.setActorCoords(position);
-
-		return combatActionClone;
-	}
-
-	public EnemyStats getSpawnType()
+    public void instateEnvironmentalCombatAction()
     {
-        Debug.LogError("getSpawnType Not Implemented");
-		return null;
-	}
+        // EnvironmentalCombatActionManager.getInstance().instateEnvironmentalCombatAction(environmentalCombatActionKey, environmentalTargetingTraitKey, CombatGrid.getCombatantAtCoords(position));
+    }
 
-	public override bool isPriorityAttacker()
-	{
-		return priorityAttacker;
-	}
+    public CombatAction getCombatAction()
+    {
+        if (combatAction == null || combatAction is null)
+        {
+            return null;
+        }
 
-	public override bool isLowPriorityAttacker()
-	{
-		return lowPriorityAttacker;
-	}
+        CombatAction combatActionClone = combatAction.clone();
+        combatActionClone.setActorCoords(position);
 
-	public override GridCoords getPositionToHit(Selector selector, int skips)
-	{
+        return combatActionClone;
+    }
 
-		if (spawnDetails.allSpawnPositions == null || spawnDetails.allSpawnPositions.Length <= 1)
-		{
-			return position.clone();
-		}
+    public override bool isPriorityAttacker()
+    {
+        return priorityAttacker;
+    }
 
-		GridCoords[] allSelectorCoords = selector.getAllSelectorCoords();
-		List<GridCoords> allCompatabilePositions = new List<GridCoords>();
+    public override bool isLowPriorityAttacker()
+    {
+        return lowPriorityAttacker;
+    }
 
+    public virtual bool notResurrectable()
+    {
+        return Helpers.hasQuality<Trait>(traits, (t => t.preventsResurrection()));
+    }
 
-		foreach (GridCoords coords in allSelectorCoords)
-		{
-			if (spawnDetails.allSpawnPositions.Contains(coords))
-			{
-				allCompatabilePositions.Add(coords);
-			}
-		}
+    #endregion
 
-		if (allCompatabilePositions.Count == 0 || skips >= allCompatabilePositions.Count)
-		{
-			return position.clone();
-		}
-		else
-		{
-			return allCompatabilePositions[skips];
-		}
-	}
+    #region Traits
 
     public bool isMinion()
     {
-        return traits.Contains(TraitList.minion);
+        return hasTrait(TraitList.minion);
     }
 
-	public bool isLarge()
-	{
-		return traits.Contains(TraitList.large);
-	}
+    public bool isLarge()
+    {
+        return hasTrait(TraitList.large);
+    }
+    
+    #endregion
 
-	public virtual bool cantBeResurrected()
-	{
-		return Helpers.hasQuality<Trait>(traits, (t => t.preventsResurrection()));
-	}
+    #region Miscellaneous
 
-	public override void setToDeadSprite()
-	{
-		if (CombatStateManager.whoseTurn != WhoseTurn.Resolving)
-		{
-			return;
-		}
+    private void destroyAllSpawnPositions()
+    {
+        foreach (GridCoords coords in spawnDetails.allSpawnPositions)
+        {
+            CombatGrid.setCombatantAtCoords(coords, null);
+        }
+    }
 
-		CombatStateManager.deadMonsterCount++;
+    public override IDescribable getHoverPanelDescribable()
+    {
+        IDescribable hoverPanelDescribable = getCombatAction();
 
-		if (isMinion() || wasSummoned())
-		{
-			Destroy(combatSprite);
+        if (hoverPanelDescribable != null)
+        {
+            return hoverPanelDescribable;
+        }
+        else if (hoverPanelDescribable == null && isPartOfVolley())
+        {
+            return new VolleyAbility(true);
+        }
+        else
+        {
+            return AbilityList.getAbility(this, AbilityList.harmlessKey);
+        }
+    }
+    #endregion
 
-			if (isLarge())
-			{
-				destroyAllSpawnPositions();
-			}
-			else
-			{
-				CombatGrid.setCombatantAtCoords(position, null);
-			}
+    #region IDescribable
 
-			OnMinionSummonDeath.Invoke();
+    public override void describeSelfFull(DescriptionPanel panel)
+    {
+        base.describeSelfFull(panel);
 
-		}
-		else if (cantBeResurrected())
-		{
-			Destroy(combatSprite);
-		}
-		else
-		{
-			base.setToDeadSprite();
-		}
+        if (isMinion())
+        {
+            DescriptionPanel.setText(panel.typeText, TraitList.minion.getName());
+        }
+        else if (wasSummoned())
+        {
+            DescriptionPanel.setText(panel.typeText, TraitList.summoned.getName());
+        }
+        else
+        {
+            DescriptionPanel.setText(panel.typeText, TraitList.master.getName());
+        }
+    }
 
-		OnEnemyDeath.Invoke();
 
-		prepareOnDeathEffects();
-	}
+    #endregion
 
-	public override void bringBackFromDeath()
-	{
-		if (Helpers.hasQuality<Trait>(traits, t => t.preventsResurrection()))
-		{
-			return;
-		}
+    #region IDescribableInBlocks
 
-		CombatStateManager.deadMonsterCount--;
+    public override List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
+    {
+        List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-		base.bringBackFromDeath();
-	}
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
 
-	private void destroyAllSpawnPositions()
-	{
-		foreach (GridCoords coords in spawnDetails.allSpawnPositions)
-		{
-			CombatGrid.setCombatantAtCoords(coords, null);
-		}
-	}
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(currentHealth + " / " + getTotalHealth()));
 
-	public void setCombatAction(CombatAction combatAction)
-	{
-		this.combatAction = combatAction;
-	}
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getTotalArmorRatingForDisplay()));
 
-	public override IDescribable getHoverPanelDescribable()
-	{
-		IDescribable hoverPanelDescribable = getCombatAction();
+        return buildingBlocks;
+    }
 
-		if (hoverPanelDescribable != null)
-		{
-			return hoverPanelDescribable;
-		}
-		else if (hoverPanelDescribable == null && isPartOfVolley())
-		{
-			return new VolleyAbility(true);
-		}
-		else
-		{
-			return AbilityList.getAbility(this, AbilityList.harmlessKey);
-		}
-	}
+    #endregion
 
-	//IDescribable methods
 
-	public override void describeSelfFull(DescriptionPanel panel)
-	{
-		base.describeSelfFull(panel);
 
-		if (isMinion())
-		{
-			DescriptionPanel.setText(panel.typeText, TraitList.minion.getName());
-		}
-		else if (wasSummoned())
-		{
-			DescriptionPanel.setText(panel.typeText, TraitList.summoned.getName());
-		}
-		else
-		{
-			DescriptionPanel.setText(panel.typeText, TraitList.master.getName());
-		}
-	} 
-
-	public override List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
-	{
-		List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
-
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
-
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(currentHealth + " / " + getTotalHealth()));
-
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getTotalArmorRatingForDisplay()));
-
-		return buildingBlocks;
-	}
-
-	/*
-	
-	public override void describeStats(HoverPanel hoverPanel)
-	{
-		DescriptionPanel descriptionPanel = hoverPanel.descriptionPanels[descriptionPanelIndex];
-		
-		descriptionPanel.gameObject.SetActive(true);
-		
-		descriptionPanel.nameText.text = name;
-		descriptionPanel.hpText.text = currentHealth + " / " + getTotalHealth();
-		descriptionPanel.armorRatingText.text = "" + getTotalArmorRating();
-		descriptionPanel.typeText.text = traitNames[0];
-	}
-	
-	*/
 }

@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Armored_Bat_Wounded_0
+      name: Wounded_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af50301b22c7b7a4c8bd2db90599f142
-      internalID: 2081638524
+      spriteID: 44c832125372ae84dbcc6127b9c733a7
+      internalID: 220048171
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Wounded_1
+      name: Wounded_1
       rect:
         serializedVersion: 2
         x: 512
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0aa0a2a23d88794483ab9c5751f9933
-      internalID: -1529123512
+      spriteID: 2dbe4064ea986e541a97e6f92956ecfa
+      internalID: 1038020739
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Wounded_2
+      name: Wounded_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d925561e4c280f48940c3aba624faec
-      internalID: -694467597
+      spriteID: 201228a7acda9c44896ee84010ff573d
+      internalID: -192169367
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Wounded_3
+      name: Wounded_3
       rect:
         serializedVersion: 2
         x: 1536
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32e865d4f5790844d9b7a52811d02bc0
-      internalID: -1161289744
+      spriteID: 646ae91bbe9236e45b51160afc5196cb
+      internalID: -1007462197
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Wounded_4
+      name: Wounded_4
       rect:
         serializedVersion: 2
         x: 2048
@@ -195,29 +195,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d1d56a75593f0247ae7e3a0e4658943
-      internalID: -1204473737
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Armored_Bat_Wounded_5
-      rect:
-        serializedVersion: 2
-        x: 2560
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2524e4346eebc6e4f8f83895f6e94b54
-      internalID: 956744024
+      spriteID: a0d50683870fc1d4fbdd630d9aa7e94e
+      internalID: 643504256
       vertices: []
       indices: 
       edges: []
@@ -233,12 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Armored_Bat_Wounded_0: 2081638524
-      Armored_Bat_Wounded_1: -1529123512
-      Armored_Bat_Wounded_2: -694467597
-      Armored_Bat_Wounded_3: -1161289744
-      Armored_Bat_Wounded_4: -1204473737
-      Armored_Bat_Wounded_5: 956744024
+      Wounded_0: 220048171
+      Wounded_1: 1038020739
+      Wounded_2: -192169367
+      Wounded_3: -1007462197
+      Wounded_4: 643504256
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -783,7 +783,7 @@ public class PlayerStats : PartyMemberStats
 
 	public override float getDevastatingCriticalPercentage()
 	{
-		if (hasTrait(TraitList.devastatingCriticals) < 0)
+		if (hasTraitAtIndex(TraitList.devastatingCriticals) < 0)
 		{
 			return 0f;
 		}

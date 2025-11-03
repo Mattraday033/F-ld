@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 7869856070068566400}
   - component: {fileID: 5795555889662786569}
   - component: {fileID: 158998442895171975}
+  - component: {fileID: 931909941065032088}
+  - component: {fileID: 3500790127400912763}
+  - component: {fileID: 5944877636362453919}
   m_Layer: 26
   m_Name: OOC Monster
   m_TagString: Enemy
@@ -107,10 +110,10 @@ MonoBehaviour:
   movesEveryTurn: 0
   neverMoves: 0
   enemyDirectionIndicator: {fileID: 3316192889476500395}
+  animationManager: {fileID: 931909941065032088}
   cunningStunCounter: 0
   intimidateCounter: 0
   retreatStunnedCounter: 0
-  startingFacing: 0
   hoverTarget: {fileID: 0}
 --- !u!1839735485 &5795555889662786569
 Tilemap:
@@ -220,6 +223,58 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &931909941065032088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187361839520295263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de3584462627e7c4ba6323639e9738e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 187361839520295260}
+  animancer: {fileID: 3500790127400912763}
+--- !u!114 &3500790127400912763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187361839520295263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c75c0dcb6d50eb64abd727a90406ca2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Animator: {fileID: 5944877636362453919}
+  _Transitions: {fileID: 0}
+  _ActionOnDisable: 0
+  _PlayAutomatically: 1
+  _Animations: []
+--- !u!95 &5944877636362453919
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187361839520295263}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1666292999491977728
 GameObject:
   m_ObjectHideFlags: 0

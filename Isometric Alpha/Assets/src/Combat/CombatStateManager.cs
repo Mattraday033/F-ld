@@ -270,7 +270,7 @@ public class CombatStateManager : MonoBehaviour
 
 		whoseTurn = wT;
 
-		Debug.LogError("whoseTurn = " + whoseTurn.ToString());
+		// Debug.LogError("whoseTurn = " + whoseTurn.ToString());
 
 		CombatUI.setTurnInfoText(whoseTurn);
 		getInstance().updateAllObjectsAfterStateChange();

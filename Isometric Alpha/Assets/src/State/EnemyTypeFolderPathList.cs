@@ -11,6 +11,11 @@ public static class EnemyTypeFolderPathList
 
     public static string getEnemyTypeFolderPath(string enemyType)
     {
+        if(!folderPathDict.ContainsKey(enemyType))
+        {
+            return null;
+        }
+
         return folderPathDict[enemyType];
     }
 
@@ -21,8 +26,10 @@ public static class EnemyTypeFolderPathList
 
 
         #region Bats
-
+        folderPathDict.Add(MonsterNameList.batSwarm, batsFolderPath + MonsterNameList.batSwarm + "/");
+        folderPathDict.Add(MonsterNameList.giantBat, batsFolderPath + MonsterNameList.giantBat + "/");
         folderPathDict.Add(MonsterNameList.armoredBat, batsFolderPath + MonsterNameList.armoredBat + "/");
+
 
         #endregion
 

@@ -52,8 +52,6 @@ public class AllyStats : Stats
     private int level;
     public int xp;
 
-    private int currentlyPlacedPartyMembers = -1;
-
     public AbilityMenuManager lastCombatAbilityMenuManager;
 
     public CombatActionArray combatActionArray;
@@ -153,21 +151,29 @@ public class AllyStats : Stats
 
         // Debug.LogError(getName() + " is now " + spriteColor.ToString());
 
-        combatSprite.GetComponent<SpriteRenderer>().color = getSpriteColor();
-
-        combatSprite.GetComponent<AbilityMenuManager>().actionArraySource = this;
-
         Helpers.updateGameObjectPosition(combatSprite);
         setUpComponents(combatSprite.GetComponent<ComponentList>());
 
         return combatSprite;
     }
-    
+
     public override void setUpComponents(ComponentList list)
     {
         base.setUpComponents(list);
 
+        spriteRenderer.color = getSpriteColor();
+
         lastCombatAbilityMenuManager = list.abilityMenuManager;
+        lastCombatAbilityMenuManager.actionArraySource = this;
+    }
+
+    #endregion
+
+    #region Animation Manager
+    
+    public override void playAnimationOnDamage()
+    {
+        //Empty on purpose for now
     }
 
     #endregion
@@ -778,7 +784,7 @@ public class AllyStats : Stats
 
     public override float getDevastatingCriticalPercentage()
     {
-        if (hasTrait(TraitList.devastatingCriticals) < 0)
+        if (hasTraitAtIndex(TraitList.devastatingCriticals) < 0)
         {
             return 0f;
         }

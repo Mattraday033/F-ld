@@ -105,13 +105,13 @@ public class EnemyCombatActionManager : MonoBehaviour
 		{
 			double linkedPercentage = 0.0;
 			
-			if(enemy.hasTrait(TraitList.mobLinked) >= 0)
+			if(enemy.hasTraitAtIndex(TraitList.mobLinked) >= 0)
 			{
-				linkedPercentage = enemy.getTraits()[enemy.hasTrait(TraitList.mobLinked)].getLinkedPercentage();
+				linkedPercentage = enemy.getTraits()[enemy.hasTraitAtIndex(TraitList.mobLinked)].getLinkedPercentage();
 				
-			} else if(enemy.hasTrait(TraitList.bossLinked) >= 0)
+			} else if(enemy.hasTraitAtIndex(TraitList.bossLinked) >= 0)
 			{
-				linkedPercentage = enemy.getTraits()[enemy.hasTrait(TraitList.bossLinked)].getLinkedPercentage();
+				linkedPercentage = enemy.getTraits()[enemy.hasTraitAtIndex(TraitList.bossLinked)].getLinkedPercentage();
 			}
 			
 			if(linkedPercentage > 0.0)

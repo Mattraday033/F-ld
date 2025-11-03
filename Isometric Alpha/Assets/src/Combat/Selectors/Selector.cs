@@ -379,14 +379,14 @@ public class Selector : ScriptableObject, ICloneable
 		return allActionTargets;
     }
 
-    public ArrayList getAllTargetClones()
+    public ArrayList getAllPreviewTargetClones()
     {
         ArrayList allActionTargets = getAllTargets();
 		ArrayList cloneTargets = new ArrayList();
 
         foreach (Stats target in allActionTargets)
         {
-			cloneTargets.Add(target.clone());
+			cloneTargets.Add(target.getPreviewClone());
         }
 
         return cloneTargets;

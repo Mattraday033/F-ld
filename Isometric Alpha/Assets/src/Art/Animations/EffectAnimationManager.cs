@@ -7,6 +7,8 @@ public class EffectAnimationManager : AnimationManager, IAnimationTracker
 {
     public int key;
 
+    public GridCoords targetCoords;
+
     public int damage;
     public bool crit;
     public bool healsTarget;
@@ -17,13 +19,13 @@ public class EffectAnimationManager : AnimationManager, IAnimationTracker
     {
         string folderPath = EffectPathList.getEffectFolderPath(abilityName);
 
-        Debug.LogError("folderPath = " + folderPath);
+        // Debug.LogError("folderPath = " + folderPath);
 
         AnimationClip animationClip = Resources.Load<AnimationClip>(folderPath);
 
-        spawnDamageNumbersTime = animationClip.length / 2f;
+        spawnDamageNumbersTime = animationClip.length * (3f/4f);
 
-        Helpers.debugNullCheck("animationClip", animationClip);
+        // Helpers.debugNullCheck("animationClip", animationClip);
 
         animancer.Play(createClipTransitionTheDelete(animationClip));
     }
@@ -38,8 +40,15 @@ public class EffectAnimationManager : AnimationManager, IAnimationTracker
 
             elapsedTime += Time.deltaTime;
         }
-        
+
         DamageNumberPopup.create(damage, transform.position, CombatAnimationManager.getInstance().damageNumberCanvas, crit, healsTarget);
+
+        Stats target = CombatGrid.getCombatantAtCoords(targetCoords);
+
+        if (target != null)
+        {
+            target.playAnimationOnDamage();
+        }
     }
 
     private ClipTransition createClipTransitionTheDelete(AnimationClip clip)

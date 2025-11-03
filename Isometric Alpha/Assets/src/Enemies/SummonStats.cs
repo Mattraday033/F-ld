@@ -26,11 +26,6 @@ public class SummonStats : EnemyStats
 		return volleys;
 	}
 	
-	public override bool wasSummoned()
-	{
-		return true;
-	}
-	
 	public override Color getOutlineColor()
 	{
 		return RevealManager.canBeInteractedWith;

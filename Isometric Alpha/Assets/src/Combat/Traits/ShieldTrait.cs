@@ -22,4 +22,33 @@ public class ShieldTrait : Trait
     {
         return percentageDamageReduction;
     }
+
+    public override CharacterAnimationType getAnimationOnApplication()
+    {
+        return CharacterAnimationType.Secondary_Idle;
+    }
+
+    public override CharacterAnimationType getAnimationOnRemoval()
+    {
+        return CharacterAnimationType.Idle_Front;
+    }
+}
+
+public class HiddenShieldTrait : ShieldTrait
+{
+
+    public HiddenShieldTrait(string traitName, string traitType, string traitDescription, string traitIconName, Color traitIconBackgroundColor, double percentageDamageReduction) :
+    base(traitName, traitType, traitDescription, traitIconName, traitIconBackgroundColor, percentageDamageReduction)
+    {
+    }
+
+    public override CharacterAnimationType getAnimationOnApplication()
+    {
+        return CharacterAnimationType.None;
+    }
+
+    public override CharacterAnimationType getAnimationOnRemoval()
+    {
+        return CharacterAnimationType.None;
+    }
 }

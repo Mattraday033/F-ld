@@ -83,7 +83,7 @@ public class EvolutionaryEnemyStats : EnemyStats
 		EnemySpawner.getInstance().spawnEnemy(devolutionEnemyType, position);
 	}
 
-	public override bool cantBeResurrected()
+	public override bool notResurrectable()
 	{
 		return true;
 	}

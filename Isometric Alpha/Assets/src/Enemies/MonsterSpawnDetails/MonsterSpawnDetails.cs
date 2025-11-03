@@ -72,16 +72,16 @@ public class MonsterSpawnDetails : OOCSpawnDetails
             addTutorialTargetComponent(enemyMovement, tutorialTargetHash);
         }
 
+        AreaManager.getMovementManager().addEnemySprite(enemyMovement.transform, enemyMovement.getMonsterPackIndex() + 1);
+        enemyMovement.initializeAnimationManager();
         enemyMovement.setEnemyFacing(facing);
         enemyMovement.followsPlayer = chasesPlayer;
-        AreaManager.getMovementManager().addEnemySprite(enemyMovement.transform, enemyMovement.getMonsterPackIndex() + 1);
     }
 
 
     public override void spawnActions(GameObject interactable)
     {
         // base.spawnActions(interactable); commented out until animations are implemented
-        
     }
 }
 

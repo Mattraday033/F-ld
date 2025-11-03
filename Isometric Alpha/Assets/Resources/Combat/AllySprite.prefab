@@ -266,9 +266,11 @@ GameObject:
   - component: {fileID: 6719318034856921408}
   - component: {fileID: 7432399768710452294}
   - component: {fileID: 3150885771972809086}
-  - component: {fileID: 9068213837907479874}
+  - component: {fileID: 3078529910110078376}
   - component: {fileID: 3747119089071417702}
   - component: {fileID: 4340910446031474860}
+  - component: {fileID: 8916102299711102281}
+  - component: {fileID: 3503089699390116283}
   m_Layer: 0
   m_Name: AllySprite
   m_TagString: Player
@@ -310,7 +312,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14a1213ab7fe954bafa44dc9c89d997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 3150885771972809086}
   healthBarManager: {fileID: 8078166988179091261}
+  animationManager: {fileID: 3078529910110078376}
   abilityMenuManager: {fileID: 3747119089071417702}
 --- !u!212 &3150885771972809086
 SpriteRenderer:
@@ -364,41 +368,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &9068213837907479874
-CapsuleCollider2D:
+--- !u!114 &3078529910110078376
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8896020149940805468}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.25}
-  m_Size: {x: 0.15, y: 0.15}
-  m_Direction: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de3584462627e7c4ba6323639e9738e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animancer: {fileID: 8916102299711102281}
 --- !u!114 &3747119089071417702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,6 +426,44 @@ MonoBehaviour:
   tutorialHash: Player Combat
   useUIScale: 0
   disableArrow: 1
+--- !u!114 &8916102299711102281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8896020149940805468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c75c0dcb6d50eb64abd727a90406ca2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Animator: {fileID: 3503089699390116283}
+  _Transitions: {fileID: 0}
+  _ActionOnDisable: 0
+  _PlayAutomatically: 1
+  _Animations: []
+--- !u!95 &3503089699390116283
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8896020149940805468}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &5283087024834251443
 PrefabInstance:
   m_ObjectHideFlags: 0

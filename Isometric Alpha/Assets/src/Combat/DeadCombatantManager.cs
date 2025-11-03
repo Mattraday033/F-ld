@@ -18,34 +18,35 @@ public class DeadCombatantManager : MonoBehaviour
 	}
 	
 	public void cleanUpAllDeadCombatants()
-	{
+    {
+        Debug.LogError("1 cleanUpAllDeadCombatants()");
+
 		ArrayList deadCombatantList = new ArrayList();
 		ArrayList listOfCombatants = CombatGrid.getAllCombatants();
+
+        for (int i = 0; i < listOfCombatants.Count; i++)
+        {
+            Stats currentCombatant = (Stats)listOfCombatants[i];
+
+            if (currentCombatant.isDead())
+            {
+                int row = currentCombatant.position.row;
+                int col = currentCombatant.position.col;
+
+                deadCombatantList.Add(currentCombatant);
+
+                if (currentCombatant.traits != null &&
+                    currentCombatant.traits.Contains(TraitList.minion))
+                {
+                    EnemyCombatActionManager.applyLinkDamage();
+                }
+            }
+        }
 		
-		for(int i = 0; i < listOfCombatants.Count; i++)
-		{
-			Stats currentCombatant = (Stats) listOfCombatants[i];
-			
-			if(currentCombatant.currentHealth <= 0 && !currentCombatant.isDead())
-			{
-				int row = currentCombatant.position.row;
-				int col = currentCombatant.position.col;
-				
-				deadCombatantList.Add(currentCombatant);
-				
-				if(currentCombatant.traits != null && 
-					currentCombatant.traits.Contains(TraitList.minion))
-				{
-					EnemyCombatActionManager.applyLinkDamage();
-				}
-			}
-		}
-		
+        Debug.LogError("2 cleanUpAllDeadCombatants()");
+        
 		foreach(Stats deadCombatant in deadCombatantList)
-		{
-			//Death animation. This will only run once per action so anything in this list should get their death animation
-			//at the same time and then be removed before this method runs again
-			
+		{			
 			deadCombatant.setToDeadSprite();
 		}
 		

@@ -476,6 +476,15 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
         return allTraitTypesGlossaryEntries;
     }
 
+    public virtual CharacterAnimationType getAnimationOnApplication()
+    {
+        return CharacterAnimationType.None;
+    }
+
+    public virtual CharacterAnimationType getAnimationOnRemoval()
+    {
+        return CharacterAnimationType.None;
+    }
 
     //ICloneable methods
     public object Clone()

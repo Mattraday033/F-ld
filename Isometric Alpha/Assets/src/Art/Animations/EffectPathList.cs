@@ -23,8 +23,13 @@ public static class EffectPathList
     {
         effectByActionNameDict = new Dictionary<string, string>();
 
+        //Positive Effects
         effectByActionNameDict.Add(ChargeUpAbility.chargingUpName, PrefabNames.positiveEffectFolderPath);
+        
+        //Damaging Effects
+        effectByActionNameDict.Add(AbilityList.batClawName, PrefabNames.damagingEffectFolderPath);
         effectByActionNameDict.Add(AbilityList.flurryKey, PrefabNames.damagingEffectFolderPath);
+        effectByActionNameDict.Add(AbilityList.godSpellAbilityKey, PrefabNames.damagingEffectFolderPath);
 
     }
 

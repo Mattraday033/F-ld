@@ -68,12 +68,17 @@ public static class EnemyPackInfoList
 
     private static Dictionary<string, List<EnemyPackInfo>> enemyPackInfoDict;
 
-    private readonly static EnemyPackInfo twoGiantBatsTwoBatSwarms = new EnemyPackInfo(new EnemyAmount[] {  EnemyAmountList.twoBatSwarms,
-                                                                                                            EnemyAmountList.twoGiantBats},
+    private readonly static EnemyPackInfo twoGiantBats = new EnemyPackInfo(new EnemyAmount[] {  EnemyAmountList.twoGiantBats},
+                                                                                                DropTableList.slaveMineDT1Name);
+
+    private readonly static EnemyPackInfo twoGiantBatsTwoBatSwarms = new EnemyPackInfo(new EnemyAmount[] {  EnemyAmountList.twoGiantBats,
+                                                                                                            EnemyAmountList.twoBatSwarms
+                                                                                                            },
                                                                                                           DropTableList.slaveMineDT1Name);
-    private readonly static EnemyPackInfo twoGiantBatsThreeBatSwarmsOneScreecher = new EnemyPackInfo(new EnemyAmount[] {  EnemyAmountList.threeBatSwarms,
-                                                                                                                            EnemyAmountList.twoGiantBats,
-                                                                                                                        EnemyAmountList.oneScreecherBat},
+    private readonly static EnemyPackInfo twoGiantBatsThreeBatSwarmsOneScreecher = new EnemyPackInfo(new EnemyAmount[] {  EnemyAmountList.twoGiantBats,
+                                                                                                                            EnemyAmountList.oneScreecherBat,
+                                                                                                                            EnemyAmountList.threeBatSwarms
+                                                                                                                            },
                                                                                                                     DropTableList.slaveMineDT1Name);
 
     private readonly static EnemyPackInfo twoArmoredBats = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.twoArmoredBats},
@@ -94,11 +99,11 @@ public static class EnemyPackInfoList
         #region Slave Shack Six
         list = new List<EnemyPackInfo>();
 
-        // list.Add(twoGiantBatsTwoBatSwarms);
-        // list.Add(twoGiantBatsTwoBatSwarms);
+        list.Add(twoGiantBatsTwoBatSwarms);
+        list.Add(twoGiantBatsTwoBatSwarms);
 
-        list.Add(twoArmoredBats);
-        list.Add(twoArmoredBats);
+        // list.Add(twoArmoredBats);
+        // list.Add(twoArmoredBats);
 
         enemyPackInfoDict.Add(LocationNameList.slaveShackSix, list);
         #endregion

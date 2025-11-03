@@ -14,7 +14,7 @@ public class TutorialSequenceStepTargetSprite : TutorialSequenceStepTargetObject
             return;
         }
 
-        Debug.LogError("Outlines temporarily disabled");
+        //        Debug.LogError("Outlines temporarily disabled");
 
         // previousColor = spriteRenderer.color;
         // spriteRenderer.color = RevealManager.tutorialDefault;
@@ -27,7 +27,7 @@ public class TutorialSequenceStepTargetSprite : TutorialSequenceStepTargetObject
 			return;
 		}
 
-        Debug.LogError("Outlines temporarily disabled");
+        //        Debug.LogError("Outlines temporarily disabled");
 
         // spriteRenderer.color = previousColor;
 	}

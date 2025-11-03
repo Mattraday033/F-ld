@@ -104,7 +104,7 @@ public interface IFormulaSource
     public string getCritFormula();
 }
 
-public enum CombatAnimationType{ Projectile, Effect }
+public enum CombatAnimationType{ None, Projectile, Effect }
 
 //a single thing that the player has selected themself or a party member to do during combat
 //Or a single thing the enemy has elected to do during their turn, typically based on logic explained in their trait descriptions
@@ -676,6 +676,11 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
         return new int[] { finalDamage };
     }
 
+    public virtual ScriptOnLanding getLandingScript()
+    {
+        return null;
+    }
+
     public virtual void performCombatAction() //virtual because some abilities target the ground below their targets, such as GroundEffectAbility
     {
         if (getTargetCoords().Equals(GridCoords.getDefaultCoords()))
@@ -683,6 +688,8 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
             Debug.LogError("getTargetCoords() = " + getTargetCoords().ToString());
             return;
         }
+
+        playActivationAnimation();
 
         performCombatAction(getSelector().getAllTargets());
     }
@@ -723,8 +730,6 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
 
             if (finalDamage >= 0)
             {
-                targetCombatant.modifyCurrentHealth(finalDamage, healsTarget());
-
                 if (!inPreviewMode)
                 {
                     if (crit && actorIsAlly())
@@ -739,6 +744,42 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
 
                     createEffectAnimation(coords, crit, finalDamage);
                 }
+                targetCombatant.modifyCurrentHealth(finalDamage, healsTarget());
+
+                return 1;
+            }
+        }
+
+        return 0;
+    }
+
+    public virtual int sendSecondaryProjectileAt(GridCoords coords, Stats targetCombatant, int projectileNumber)
+    {
+        if (targetCombatant != null && getDamageFormula() != null &&
+            ((!targetMustBeDead() && targetCombatant.isAlive()) || (targetMustBeDead() && !targetCombatant.isAlive())))
+        {
+            bool crit = DamageCalculator.isACrit(getCritFormula(), getName());
+            int finalDamage = findFinalDamage(targetCombatant, crit)[0];
+
+            if (finalDamage >= 0)
+            {
+                if (!inPreviewMode)
+                {
+                    if (crit && actorIsAlly())
+                    {
+                        Exuberances.addExuberance(MultiStackProcType.YellowThorn, singleExuberanceStack);
+                    }
+
+                    if (healsTarget() && actorIsAlly())
+                    {
+                        Exuberances.addExuberance(MultiStackProcType.GreenLeaf, singleExuberanceStack);
+                    }
+
+                    createEffectAnimation(coords, crit, finalDamage);
+                }
+
+                targetCombatant.modifyCurrentHealth(finalDamage, healsTarget());
+                
                 return 1;
             }
         }
@@ -760,8 +801,11 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
     {
         switch (getCombatAnimationType())
         {
+            case CombatAnimationType.None:
+                CombatAnimationManager.loadInvisibleProjectile(getActorCoords(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
+                break;
             case CombatAnimationType.Projectile:
-                CombatAnimationManager.loadProjectile(getActorCoords(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
+                CombatAnimationManager.loadProjectile(getActorCoords(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead, getLandingScript());
                 break;
             case CombatAnimationType.Effect:
                 CombatAnimationManager.loadInstantEffect(getName(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
@@ -886,6 +930,11 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
         }
 
         target.addTrait(traitToApply);
+    }
+
+    public virtual void playActivationAnimation()
+    {
+        getActorStats().playAttackAnimation();
     }
 
     public bool actorIsAlly()
@@ -1091,7 +1140,7 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
 
         if (combatSprite != null && !(combatSprite is null))
         {
-            Debug.LogError("Outlines not implemented");
+            // Debug.LogError("Outlines not implemented");
             // combatSprite.GetComponent<SpriteOutline>().color = actorStats.getOutlineColor();
             Helpers.updateColliderPosition(combatSprite);
         }
@@ -1099,7 +1148,7 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
 
     public virtual void removeHighlightFromActorSprites()
     {
-        Debug.LogError("Outlines not implemented");
+        // Debug.LogError("Outlines not implemented");
 
         // Stats actorStats = getActorStats();
 

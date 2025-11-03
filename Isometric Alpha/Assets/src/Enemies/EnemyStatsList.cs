@@ -93,6 +93,7 @@ public static class EnemyStatsList
 
     }
 
+    [RuntimeInitializeOnLoadMethod]
     private static void initialize()
     {
         enemyStatsDict = new Dictionary<string, EnemyStats>();
@@ -118,7 +119,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #endregion
 
         #region Brandless Slaves
-        enemyStatsDict.Add(NPCNameList.imre, new EnemyStats(        NPCNameList.imre,
+        enemyStatsDict.Add(NPCNameList.imre, new EnemyStats(NPCNameList.imre,
                                                                             zeroArmor,
                                                                                     50,
                     AbilityList.getAbility(null, AbilityList.punchKey) as Ability,
@@ -157,10 +158,10 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                                 }));
         #endregion
         #region Armored Bat
-        enemyStatsDict.Add(MonsterNameList.armoredBat, new EnemyStats(   MonsterNameList.armoredBat,
+        enemyStatsDict.Add(MonsterNameList.armoredBat, new EnemyStats(MonsterNameList.armoredBat,
                                                                                       thirtyArmor,
                                                                                             35,
-  new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.flurryKey) as Ability),
+  new ChargeUpAbility(TraitList.shielded, AbilityList.getAbility(null, AbilityList.flurryKey) as Ability),
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.territorial
                                                                                 }));

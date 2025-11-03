@@ -118,6 +118,7 @@ public struct StatsWrapper
 
     public int level;
     public int xp;
+    public int totalHealth;
     public int currentHealth;
 
     public bool canJoinParty;
@@ -142,7 +143,7 @@ public struct StatsWrapper
         buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Name, key));
 
         buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Level: " + level));
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Health: " + currentHealth));
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Health: " + currentHealth + "/" + totalHealth));
         buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Experience: " + xp));
 
         buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, ""));
@@ -536,6 +537,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 
             partyMemberStats.level = partyMember.stats.getLevel();
             partyMemberStats.currentHealth = partyMember.stats.currentHealth;
+            partyMemberStats.totalHealth = partyMember.stats.getTotalHealth();
             partyMemberStats.canJoinParty = partyMember.canJoinParty;
 
             partyMemberStats.strength = partyMember.stats.getStrengthWithoutBoosts();
@@ -829,9 +831,9 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, ""));
         buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, ""));
 
-        foreach (StatsWrapper partyMember in partyMemberStats)
+        for(int index = partyMemberStats.Length-1; index >= 0; index--)
         {
-            buildingBlocks.AddRange(partyMember.getDescriptionBuildingBlocks());
+            buildingBlocks.AddRange(partyMemberStats[index].getDescriptionBuildingBlocks());
         }
 
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, ""));

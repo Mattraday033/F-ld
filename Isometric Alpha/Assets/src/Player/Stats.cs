@@ -38,6 +38,8 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public Color previousColor = Color.clear;
 
+    public bool inPreviewMode = false;
+
     public GameObject combatSprite;
     public Stats repositionClone;
     //used to track if Reposition Ability
@@ -63,6 +65,8 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     #region Sprite and GameObject
 
+    public SpriteRenderer spriteRenderer;
+
     public virtual Color getSpriteColor()
     {
         return Color.white;
@@ -83,13 +87,12 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual void setToDeadSprite()
     {
-        setPreviousColor(combatSprite.GetComponent<SpriteRenderer>().color);
-        combatSprite.GetComponent<SpriteRenderer>().color = Color.black;
+        
     }
 
     public virtual void bringBackFromDeath()
     {
-        combatSprite.GetComponent<SpriteRenderer>().color = Helpers.cloneColor(previousColor);
+        
     }
 
     public virtual GridCoords getPositionToHit(Selector selector, int skips)
@@ -118,10 +121,12 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
         animationManager = list.animationManager;
 
-        if(animationManager != null)
+        if (animationManager != null)
         {
             animationManager.setAnimations(getName());
         }
+        
+        spriteRenderer = list.spriteRenderer;
     }
 
     public virtual AbilityMenuManager getAbilityMenuManager()
@@ -152,14 +157,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     #region AnimationManager
     public AnimationManager animationManager;
 
-    public void playAnimationOnDamage()
+    public virtual void playAnimationOnDamage()
     {
-        if(animationManager == null)
-        {
-            return;
-        }
+        Debug.LogError("playAnimationOnDamage()");
 
-        if(isDead())
+        if (isDead())
         {
             animationManager.playDeathAnimation();
             healthBarManager.hide();
@@ -169,15 +171,25 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         }
     }
 
-    // public void playAnimationOnAttack()
-    // {
-    //     if(animationManager == null)
-    //     {
-    //         return;
-    //     }
+    public void playAttackAnimation()
+    {
+        animationManager.playAttackAnimation();
+    }
 
-    //     animationManager.playAttackAnimation();
-    // }
+    public void playAttackIntoFrontIdleAnimation()
+    {
+        animationManager.playAttackIntoFrontIdleAnimation();
+    }
+
+    public void playAttackIntoSecondaryIdleAnimation()
+    {
+        animationManager.playAttackIntoSecondaryIdleAnimation();
+    }
+
+    public void playSpecialAttackAnimation()
+    {
+        animationManager.playSpecialAttackAnimation();
+    }
 
     #endregion
 
@@ -225,7 +237,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     {
         int totalHealth = getTotalHealth();
 
-        if (changeInHealth >= getTotalHealth() && !healing && hasTrait(TraitList.master) >= 0)
+        if (changeInHealth >= getTotalHealth() && !healing && hasTraitAtIndex(TraitList.master) >= 0)
         {
             PredationProc.Invoke();
         }
@@ -263,21 +275,18 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
             }
         }
 
-        if (CombatStateManager.inCombat && CombatStateManager.whoseTurn == WhoseTurn.Resolving)
+        if (CombatStateManager.inCombat && !inPreviewMode)
         {
-            updateHealthBar();
-
             if (!healing && PartyManager.getPlayerStats().currentHealth > 0)
             {
                 harmAllLinkedTargets(changeInHealth);
             }
 
-            playAnimationOnDamage();
-        }
+            updateHealthBar();
+        } 
 
         OnHealthChange.Invoke();
     }
-
 
     #endregion
 
@@ -517,9 +526,9 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return modifiedDamage;
     }
 
-    public virtual bool wasSummoned()
+    public bool wasSummoned()
     {
-        return false;
+        return hasTrait(TraitList.summoned);
     }
 
     public virtual bool costsPartyCombatActions()
@@ -634,11 +643,16 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         newTrait.onApplication();
         newTrait.setTraitHolder(this);
 
+        // if (CombatStateManager.inCombat)
+        // {
+        //     animationManager.playAnimation(newTrait.getAnimationOnApplication());
+        // }
+        
         dealTraitApplicationDamage(newTrait);
 
-        if (hasTrait(newTrait) >= 0)
+        if (hasTraitAtIndex(newTrait) >= 0)
         {
-            traits[hasTrait(newTrait)].reapply();
+            traits[hasTraitAtIndex(newTrait)].reapply();
         }
         else
         {
@@ -697,17 +711,48 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public void removeTrait(Trait traitToRemove)
     {
-        Trait[] newTraits = new Trait[0];
+        List<Trait> newTraits = new List<Trait>();
+        Trait removedTrait = null;
 
         foreach (Trait trait in traits)
         {
             if (!trait.getName().Equals(traitToRemove.getName()))
             {
-                newTraits = Helpers.appendArray<Trait>(newTraits, trait);
+                newTraits.Add(trait);
+            }
+            else
+            {
+                removedTrait = trait;
             }
         }
 
-        traits = newTraits;
+        traits = newTraits.ToArray();
+
+        // if(removedTrait != null)
+        // {
+        //     CharacterAnimationType nextIdleAnimation = getOtherAnimationsFromTraits();
+
+        //     if(nextIdleAnimation != CharacterAnimationType.None)
+        //     {
+        //         animationManager.playAnimation(nextIdleAnimation);
+        //     } else
+        //     {
+        //         animationManager.playAnimation(removedTrait.getAnimationOnRemoval());
+        //     }
+        // }
+    }
+
+    private CharacterAnimationType getOtherAnimationsFromTraits()
+    {
+        foreach (Trait trait in traits)
+        {
+            if (trait.getAnimationOnApplication() != CharacterAnimationType.None)
+            {
+                return trait.getAnimationOnApplication();
+            }
+        }
+
+        return CharacterAnimationType.None;
     }
 
     public void removeAllTraits()
@@ -801,7 +846,12 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         }
     }
 
-    public int hasTrait(Trait traitToCheck)
+    public bool hasTrait(Trait trait)
+    {
+        return Helpers.hasQuality<Trait>(traits, t => t.getName().Equals(trait.getName()));
+    }
+
+    public int hasTraitAtIndex(Trait traitToCheck)
     {
         Trait[] traitList = getTraits();
 
@@ -1028,6 +1078,15 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         }
 
         return clone;
+    }
+
+    public Stats getPreviewClone()
+    {
+        Stats previewClone = clone();
+
+        previewClone.inPreviewMode = true;
+
+        return previewClone;
     }
 
     #endregion

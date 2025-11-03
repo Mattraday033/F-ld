@@ -95,6 +95,8 @@ public class CombatAnimationManager : MonoBehaviour
         currentEffect.crit = crit;
         currentEffect.healsTarget = healsTarget;
 
+        currentEffect.targetCoords = targetCoords;
+
         currentEffect.transform.position = CombatGrid.getPositionAt(targetCoords);
 
         currentAnimations.Add(key, currentEffect);
@@ -102,8 +104,12 @@ public class CombatAnimationManager : MonoBehaviour
         currentEffect.setAnimations(abilityName);
     }
 
+    public static Projectile loadProjectile(GridCoords actorCoords, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
+    {
+        return loadProjectile(actorCoords, targetCoords, crit, damageNumber, healsTarget, targetCanBeDead, null);
+    }
 
-    public static void loadProjectile(GridCoords actorCoords, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
+    public static Projectile loadProjectile(GridCoords actorCoords, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead, ScriptOnLanding script)
     {
         int key = getCurrentKey();
 
@@ -111,11 +117,13 @@ public class CombatAnimationManager : MonoBehaviour
 
         currentProjectile.key = key;
 
+        currentProjectile.scriptOnLanding = script;
+
         currentProjectile.damage = damageNumber;
         currentProjectile.crit = crit;
         currentProjectile.healsTarget = healsTarget;
 
-        currentProjectile.targetCoords = targetCoords;
+        currentProjectile.setTargetCoords(targetCoords);
         currentProjectile.affectsDeadTargets = targetCanBeDead;
 
         currentProjectile.maxTime = defaultMaxTime;
@@ -131,6 +139,7 @@ public class CombatAnimationManager : MonoBehaviour
             currentProjectile.pointsBetweenActorAndTarget = new float[1] { endPosition.x };
 
             currentProjectile.moveTo(targetCoords.toVector3());
+            return currentProjectile;
         }
         else
         {
@@ -154,15 +163,23 @@ public class CombatAnimationManager : MonoBehaviour
             try
             {
                 currentProjectile.moveTo(actorCoords.toVector3());
+                return currentProjectile;
             }
             catch (IndexOutOfRangeException e)
             {
                 Debug.LogError("Caught IndexOutOfRangeException: actorCoords = " + actorCoords.ToString());
                 Destroy(currentProjectile.gameObject);
+                return null;
             }
         }
     }
 
+    public static void loadInvisibleProjectile(GridCoords actorCoords, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
+    {
+        Projectile projectile = loadProjectile(actorCoords, targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
+
+        projectile.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+    }
 
     public static float[] findEquidistantPointsBetweenTwoPoints(int amountOfPoints, float leftMostPoint, float rightMostPoint)
     {

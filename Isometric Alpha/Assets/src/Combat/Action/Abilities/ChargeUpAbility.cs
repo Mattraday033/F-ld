@@ -32,27 +32,40 @@ public class ChargeUpAbility : Ability
 		base.setActor(actor);
 		actionWhenCharged.setActor(actor);
 	}
-	/*
+    /*
 	public override void setTargetCoords(GridCoords newTargetCoords)
 	{
 		base.setTargetCoords(newTargetCoords);
 		actionWhenCharged.setTargetCoords(newTargetCoords);
 	}
 	*/
-	public override void performCombatAction(ArrayList targets)
-	{
-		if (!isCharged())
+    public override void performCombatAction(ArrayList targets)
+    {
+        if (!isCharged())
         {
             createEffectAnimation(getActorCoords());
             getActorStats().addTrait(chargeUpTrait);
-		}
-		else
-		{
-			getActorStats().removeTrait(chargeUpTrait);
-			//actionWhenCharged.setSelector(getSelector());
-			actionWhenCharged.performCombatAction(targets);
-		}
-	}
+        }
+        else
+        {
+            getActorStats().removeTrait(chargeUpTrait);
+            //actionWhenCharged.setSelector(getSelector());
+            actionWhenCharged.performCombatAction(targets);
+        }
+    }
+    
+    public override void playActivationAnimation()
+    {
+        if (!isCharged())
+        {
+            getActorStats().playAttackIntoSecondaryIdleAnimation();
+        }
+        else
+        {
+            getActorStats().playAttackIntoFrontIdleAnimation();
+        }
+        
+    }
 
 	public override bool isSelfTargeting()
 	{
@@ -121,7 +134,7 @@ public class ChargeUpAbility : Ability
 
 	public virtual bool isCharged()
 	{
-		return getActorStats().hasTrait(chargeUpTrait) >= 0;
+		return getActorStats().hasTraitAtIndex(chargeUpTrait) >= 0;
 	}
 	
 	public override CombatAction clone()

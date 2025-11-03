@@ -170,11 +170,12 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 
 	public EnemyDirectionIndicator enemyDirectionIndicator;
 
-	public int cunningStunCounter = 0;
+    public AnimationManager animationManager;
+
+    public int cunningStunCounter = 0;
 	public int intimidateCounter = 0;
 	public int retreatStunnedCounter = 0;
 
-	public Facing startingFacing; //if monster is starting with the wrong startingFacing, check it's AllMonsterPackLists entry first
 	public CharacterFacing enemyFacing = new CharacterFacing();
 
 	private const int moveThreshold = 7;
@@ -533,16 +534,6 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
         return true;
     }
 
-	public void setEnemyFacing(Facing newFacing)
-	{
-		enemyFacing.setFacing(newFacing);
-
-		if (enemyDirectionIndicator != null)
-		{
-			enemyDirectionIndicator.setArrowDirection(enemyFacing);
-		}
-	}
-
 	public void cunning()
 	{
 		setCunningCounter(CunningManager.cunningRange / 2);
@@ -694,6 +685,81 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
         }
 
         setEnemyFacing(statsWrapper.facing);
+    }
+
+    public void initializeAnimationManager()
+    {
+        EnemyPackInfo enemyPackInfo = getEnemyPackInfo();
+
+        animationManager.setAnimations(enemyPackInfo.enemyTypes[0].enemyStats.getName());
+
+        updateIdleDirection();
+    }
+
+	public void setEnemyFacing(Facing newFacing)
+	{
+		enemyFacing.setFacing(newFacing);
+
+        updateAnimationDirection();
+
+        if (enemyDirectionIndicator != null)
+        {
+            enemyDirectionIndicator.setArrowDirection(enemyFacing);
+        }
+	}
+
+    public void updateAnimationDirection()
+    {
+        if(isMoving())
+        {
+            updateRunDirection();
+        } else
+        {
+            updateIdleDirection();
+        }
+    }
+
+    private bool isMoving()
+    {
+        return MovementManager.isMoving[monsterPackIndex + 1];
+    }
+
+    public void updateIdleDirection()
+    {
+        switch (enemyFacing.getFacing())
+        {
+            case Facing.NorthEast:
+                animationManager.playNorthEastIdle();
+                break;
+            case Facing.NorthWest:
+                animationManager.playNorthWestIdle();
+                break;
+            case Facing.SouthEast:
+                animationManager.playSouthEastIdle();
+                break;
+            default:
+                animationManager.playSouthWestIdle();
+                break;
+        }
+    }
+
+    public void updateRunDirection()
+    {
+        switch (enemyFacing.getFacing())
+        {
+            case Facing.NorthEast:
+                animationManager.playNorthEastRun();
+                break;
+            case Facing.NorthWest:
+                animationManager.playNorthWestRun();
+                break;
+            case Facing.SouthEast:
+                animationManager.playSouthEastRun();
+                break;
+            default:
+                animationManager.playSouthWestRun();
+                break;
+        }
     }
 
     //IRevealable interface methods

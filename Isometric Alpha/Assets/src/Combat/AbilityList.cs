@@ -62,7 +62,7 @@ public static class AbilityList
 	private const bool isSelfTargeting = true;
 	private const bool targetsEnemy = true;
 
-    public const string GodSpellAbilityKey = "God Spell";
+    public const string godSpellAbilityKey = "God Spell";
 	public const string moveAllyAbilityKey = "Master Move Ally Ability";
 
     public const string minorRegenerationName = "Minor Regeneration";
@@ -457,7 +457,7 @@ public static class AbilityList
 	{
 		miscAbilityDictionary = new Dictionary<string,Ability>();
 
-        miscAbilityDictionary.Add(GodSpellAbilityKey, new Ability(CombatActionSettings.build(GodSpellAbilityKey, DescriptionParams.build("God Spell", "Kills everything on the enemy side of the board.", "Explosion"), DamageParams.build("99S + 99D + 99W + 99C + 1000", "100"), TargetParams.build(Range.hexadecupleBoxIndex))));
+        miscAbilityDictionary.Add(godSpellAbilityKey, new Ability(CombatActionSettings.build(godSpellAbilityKey, DescriptionParams.build("God Spell", "Kills everything on the enemy side of the board.", "Explosion"), DamageParams.build("99S + 99D + 99W + 99C + 1000", "100"), TargetParams.build(Range.hexadecupleBoxIndex), AnimationParams.build(CombatAnimationType.Effect))));
         miscAbilityDictionary.Add(moveAllyAbilityKey, new RepositionAllyAbility(CombatActionSettings.build(moveAllyAbilityKey, DescriptionParams.build("Move", "The character hoofs it to the desired space.", "HoofIt"), DamageParams.build("99S + 99D + 99W + 99C + 1000", "100"))));
         miscAbilityDictionary.Add(fearName, new Ability(CombatActionSettings.build(DescriptionParams.build(fearName, "Puts the fear of the Gods in the target, setting their limbs to trembling and turning their bowels to ice water. This renders them stunned and vulnerable.", TraitList.afraid.getIconName()), TraitList.afraid)));
 	}

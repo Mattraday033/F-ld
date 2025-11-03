@@ -64,7 +64,7 @@ public class DamagePreviewManager : MonoBehaviour
 			actionClone.setToPreviewMode();
 
 			ArrayList actualTargets = SelectorManager.currentSelector.getAllTargets();
-			ArrayList cloneTargets = SelectorManager.currentSelector.getAllTargetClones();
+			ArrayList cloneTargets = SelectorManager.currentSelector.getAllPreviewTargetClones();
 
 			actionClone.performCombatAction(cloneTargets);
 

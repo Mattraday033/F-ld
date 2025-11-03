@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KnockBackAbility: RepositionEnemyAbility
+public class KnockBackAbility : RepositionEnemyAbility
 {
     private readonly static int targetCombatantIndex = 0;
     private readonly static int landingCombatantIndex = 1;
@@ -15,7 +15,7 @@ public class KnockBackAbility: RepositionEnemyAbility
     {
         this.damageMultiplierPerSquareMoved = damageMultiplierPerSquareMoved;
     }
-    
+
     public override Stats getCombatantToBeMoved()
     {
         return CombatGrid.getCombatantAtCoords(getTargetCoords());
@@ -29,20 +29,20 @@ public class KnockBackAbility: RepositionEnemyAbility
     private GridCoords determineDestinationCoords()
     {
         GridCoords landingCoords = getTargetCoords().clone();
-		Stats combatantHit = null;
-		
-		for(landingCoords.row = landingCoords.row; landingCoords.row > 0; landingCoords.row--)
-		{
-			combatantHit = CombatGrid.getCombatantAtCoords(landingCoords.row-1, landingCoords.col);
-			
-			if(combatantHit != null)
-			{
-				break;
-			}
-		}
-		
-		return landingCoords;
-	}
+        Stats combatantHit = null;
+
+        for (landingCoords.row = landingCoords.row; landingCoords.row > 0; landingCoords.row--)
+        {
+            combatantHit = CombatGrid.getCombatantAtCoords(landingCoords.row - 1, landingCoords.col);
+
+            if (combatantHit != null)
+            {
+                break;
+            }
+        }
+
+        return landingCoords;
+    }
 
     private double getTotalDamageMultiplier()
     {
@@ -70,55 +70,81 @@ public class KnockBackAbility: RepositionEnemyAbility
 
     public override void performCombatAction()
     {
-		ArrayList targets = new ArrayList();
+        ArrayList targets = new ArrayList();
 
-		targets.Add(CombatGrid.getCombatantAtCoords(getTargetCoords()));
+        targets.Add(CombatGrid.getCombatantAtCoords(getTargetCoords()));
 
-		if(getDestinationCoords().row > CombatGrid.rowUpperBounds) 
-		{
-			GridCoords secondTargetCoords = getDestinationCoords();
-			secondTargetCoords.row--;
+        if (getDestinationCoords().row > CombatGrid.rowUpperBounds)
+        {
+            GridCoords secondTargetCoords = getDestinationCoords();
+            secondTargetCoords.row--;
 
-			if(CombatGrid.getCombatantAtCoords(secondTargetCoords) != null)
-			{
+            if (CombatGrid.getCombatantAtCoords(secondTargetCoords) != null)
+            {
                 targets.Add(CombatGrid.getCombatantAtCoords(secondTargetCoords));
             }
         }
 
-		performCombatAction(targets);
+        performCombatAction(targets);
     }
 
     public override void performCombatAction(ArrayList targets)
-	{
-        if(targets.Count < 1)
+    {
+        if (targets.Count < 1)
         {
             return;
         }
 
-        Stats combatantToBeMoved = (Stats) targets[targetCombatantIndex];
+        Stats combatantToBeMoved = (Stats)targets[targetCombatantIndex];
         Stats combatantLandedOn = null;
 
-        if(targets.Count > 1)
+        if (targets.Count > 1)
         {
-            combatantLandedOn = (Stats) targets[landingCombatantIndex];
+            combatantLandedOn = (Stats)targets[landingCombatantIndex];
         }
 
 
         if (combatantToBeMoved != null)
         {
-            if (!inPreviewMode)
-            {
-                combatantToBeMoved.moveTo(getDestinationCoords());
-            }
-            
+            GridCoords projectileTargetCoords = combatantToBeMoved.position;
+
             applyTrait(combatantToBeMoved);
-            sendProjectileAt(combatantToBeMoved.position, combatantToBeMoved, 0);
-            
-            if(combatantLandedOn != null)
+            // sendProjectileAt(combatantToBeMoved.position, combatantToBeMoved, 0);
+            sendProjectileAt(projectileTargetCoords, combatantToBeMoved, 0);
+
+            if (combatantLandedOn != null)
             {
+
                 applyTrait(combatantLandedOn);
                 sendProjectileAt(combatantLandedOn.position, combatantLandedOn, 1);
             }
+            projectileCount = 0;
+        }
+    }
+
+    public override ScriptOnLanding getLandingScript()
+    {
+        if (!inPreviewMode)
+        {
+            GridCoords secondTargetCoords = getDestinationCoords();
+            secondTargetCoords.row--;
+            return new KnockBackOnLanding(getTargetCoords(), getDestinationCoords(), secondTargetCoords);
+        } else
+        {
+            return null;
+        }
+    }
+
+    private static int projectileCount = 0;
+    public override CombatAnimationType getCombatAnimationType()
+    {
+        projectileCount++;
+        if(projectileCount % 2 == 0)
+        {
+            return CombatAnimationType.None;
+        } else
+        {
+            return CombatAnimationType.Projectile;   
         }
     }
 
