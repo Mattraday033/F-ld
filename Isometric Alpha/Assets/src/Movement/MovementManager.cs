@@ -8,72 +8,56 @@ using UnityEngine.Events;
 
 public class MovementManager : MonoBehaviour
 {
-	public readonly static Vector3Int distance1TileNorthEastGrid = new Vector3Int(1, 0, 0);
-	public readonly static Vector3Int distance1TileNorthWestGrid = new Vector3Int(0, 1, 0);
-	public readonly static Vector3Int distance1TileSouthWestGrid = new Vector3Int(-1, 0, 0);
-	public readonly static Vector3Int distance1TileSouthEastGrid = new Vector3Int(0, -1, 0);
+    public readonly static Vector3Int distance1TileNorthEastGrid = new Vector3Int(1, 0, 0);
+    public readonly static Vector3Int distance1TileNorthWestGrid = new Vector3Int(0, 1, 0);
+    public readonly static Vector3Int distance1TileSouthWestGrid = new Vector3Int(-1, 0, 0);
+    public readonly static Vector3Int distance1TileSouthEastGrid = new Vector3Int(0, -1, 0);
 
-	public readonly static Vector3Int[] allDirectionVectors = new Vector3Int[]{distance1TileNorthEastGrid,
+    public readonly static Vector3Int[] allDirectionVectors = new Vector3Int[]{distance1TileNorthEastGrid,
                                                                                 distance1TileNorthWestGrid,
                                                                                 distance1TileSouthWestGrid,
                                                                                 distance1TileSouthEastGrid};
-
-	public static Vector3Int[] directionMod;
-
-    // private ArrayList floorButtons = new ArrayList();
-    // public Dictionary<IButtonEvaluationScript, FloorButtonTrueFalse[]> buttonEvaluators = new Dictionary<IButtonEvaluationScript, FloorButtonTrueFalse[]>();
 
     public readonly static UnityEvent OnMoveFinished = new UnityEvent();
 
     public Grid grid;
 
-	//public bool isMoving = false;
-	public bool smallWaitAfterMoving = false;
+    public bool smallWaitAfterMoving = false;
 
-    public static Transform[] allSpritesToMove;
-    public static bool[] isSpriteMoveableObject;
+    public static List<MovementTracker> allMovementTrackers;
+    public static Dictionary<MovementTracker, Coroutine> currentMovements;
 
-    public static Vector3[] startingPositions;
-    public static Vector3[] endingPositions;
-    public static bool[] isMoving;
+    private bool neverMoved = true;
 
-	public int adjacentMonsterIndex = -1;
+    private const float timeToMove = .2f;
 
-	private bool neverMoved = true;
-
-	private const float timeToMove = .2f;
-
-	public const int playerSpriteIndex = 0;
+    public const int playerSpriteIndex = 0;
 
     public static Grid getGrid()
     {
         return AreaManager.getMasterGrid();
     }
 
-	void Awake()
-	{
-        TransitionManager.BeforeTransition.AddListener(intializeMovementManager);
-	}
+    void Awake()
+    {
+        TransitionManager.BeforeTransition.AddListener(initializeMovementManager);
+    }
 
     private void OnDestroy()
     {
-        TransitionManager.BeforeTransition.RemoveListener(intializeMovementManager);
+        TransitionManager.BeforeTransition.RemoveListener(initializeMovementManager);
     }
 
     [RuntimeInitializeOnLoadMethod]
-    private static void intializeMovementManager()
+    public static void initializeMovementManager()
     {
-        allSpritesToMove = new Transform[1];
-        isSpriteMoveableObject = new bool[1];
-
-        startingPositions = new Vector3[1];
-        endingPositions = new Vector3[1];
-        isMoving = new bool[1];
+        allMovementTrackers = new List<MovementTracker>();
+        currentMovements = new Dictionary<MovementTracker, Coroutine>();
     }
 
     public static Vector3Int getPlayerCell()
     {
-        return getAllCurrentSpriteCells()[playerSpriteIndex];
+        return MovementTracker.getCurrentCell(PlayerMovement.getInstance());
     }
 
     public void addFloorButton(IFloorButton button)
@@ -81,166 +65,97 @@ public class MovementManager : MonoBehaviour
         // floorButtons.Add(button);
     }
 
-	public bool isBetweenTiles(int spriteID)
-	{
-		if (neverMoved)
-		{
-			return false;
-		}
+    //something keeps setting sprites' Z position to 25.5 and this messes with positioning. 
+    //this sets them all back to 0 before doing movement stuff
+    private void setAllZPositionsToZero()
+    {
+        foreach (MovementTracker movement in allMovementTrackers)
+        {
+            if (movement == null || movement.getTransform() == null)
+            {
+                continue;
+            }
 
-		return (allSpritesToMove[spriteID].position.x < startingPositions[spriteID].x && allSpritesToMove[spriteID].position.x > endingPositions[spriteID].x) ||
-				(allSpritesToMove[spriteID].position.x > startingPositions[spriteID].x && allSpritesToMove[spriteID].position.x < endingPositions[spriteID].x) ||
-				(allSpritesToMove[spriteID].position.y < startingPositions[spriteID].y && allSpritesToMove[spriteID].position.y > endingPositions[spriteID].y) ||
-				(allSpritesToMove[spriteID].position.y > startingPositions[spriteID].y && allSpritesToMove[spriteID].position.y < endingPositions[spriteID].y) ||
-				 isMoving.Contains(true);
+            Vector3 newposition = movement.getWorldPosition();
+            newposition.z = 0;
+            movement.getTransform().position = newposition;
+        }
+    }
 
-	}
+    public void moveAllSprites()
+    {
+        setAllZPositionsToZero();
 
-	//something keeps setting sprites' Z position to 25.5 and this messes with positioning. 
-	//this sets them all back to 0 before doing movement stuff
-	private void setAllZPositionsToZero()
-	{
-		foreach (Transform sprite in allSpritesToMove)
-		{
-			if (sprite == null || sprite is null)
-			{
-				continue;
-			}
+        if (PlayerMovement.getInstance().isMoving())
+        {
+            return;
+        }
 
-			Vector3 newposition = sprite.position;
-			newposition.z = 0;
-			sprite.position = newposition;
-		}
-	}
+        foreach (MovementTracker movement in allMovementTrackers)
+        {
+            if (movement == null) { continue; }
 
-	public void moveAllSprites(Vector3Int playerDirection)
-	{
-		setAllZPositionsToZero();
+            Vector3Int coords = MovementTracker.getCurrentCell(movement);
 
-		directionMod[playerSpriteIndex] = playerDirection;
+            if (!movement.isMoving())
+            {
+                movement.determineDirection();
+            }
+        }
 
-		if (isBetweenTiles(playerSpriteIndex))
-		{
-			return;
-		}
+        preventCollidingEndingPositions();
 
-		for (int i = 0; i < allSpritesToMove.Length; i++)
-		{
-			if (allSpritesToMove[i] == null)
-			{
-				continue;
-			}
+        preventMonstersFromMovingAwayFromPlayer();
 
-			Vector3Int coords = grid.WorldToCell(allSpritesToMove[i].position);
+        //movement loop
 
-			if (!isMoving[i])
-			{
-				directionMod[i] = determineDirection(i, coords);
+        foreach (MovementTracker movement in allMovementTrackers)
+        {
+            if (movement == null) { continue; }
 
-				startingPositions[i] = allSpritesToMove[i].position;
-				endingPositions[i] = grid.GetCellCenterWorld(coords + directionMod[i]);
-			}
-		}
+            if (!movement.isMoving())
+            {
+                neverMoved = false;
 
-		preventCollidingEndingPositions();
+                movement.updateFacing();
 
-		adjacentMonsterIndex = checkIfPlayerEndsAdjacentToAnyMonsterStart();
+                currentMovements.Add(movement, StartCoroutine(moveSprite(movement)));
 
-		if (adjacentMonsterIndex >= 0)
-		{
-			endingPositions[adjacentMonsterIndex] = startingPositions[adjacentMonsterIndex];
-		}
-		else
-		{
-			adjacentMonsterIndex = checkIfPlayerAndMonstersEndAdjacent();
-		}
+                if (!PlayerMovement.getInstance().directionMod.Equals(Vector3Int.zero))
+                {
+                    PartyMemberMovement.showAllPartyMembers();
+                    movePartyMembers(0, grid.CellToWorld(getFirstPartyMemberEndingPosition()));
+                }
+            }
+        }
 
-		//movement loop
-		for (int i = 0; i < allSpritesToMove.Length; i++)
-		{
-			if (allSpritesToMove[i] == null)
-			{
-				continue;
-			}
+        smallWaitAfterMoving = true;
 
-			if (!isMoving[i])
-			{
-				isMoving[i] = true;
-				neverMoved = false;
+        changeFooting();
+    }
 
-				if (i > playerSpriteIndex && endingPositions[i] != startingPositions[i])
-				{
-					setEnemyFacing(directionMod[i], allSpritesToMove[i].GetComponent<EnemyMovement>());
-				}
+    public static bool onLeftFoot()
+    {
+        return State.onLeftFoot;
+    }
 
-				StartCoroutine(moveSprite(i));
+    public static void changeFooting()
+    {
+        StepCountScriptManager.incrementStepCount();
 
-				if (!playerDirection.Equals(Vector3Int.zero))
-				{
-					PartyMemberMovement.showAllPartyMembers();
-					movePartyMembers(0, grid.CellToWorld(getFirstPartyMemberEndingPosition()));
-				}
-			}
-		}
+        State.onLeftFoot = !State.onLeftFoot;
+        OOCUIManager.getInstance().updateFooting();
+    }
 
-		if (adjacentMonsterIndex >= 0)
-		{
-			StartCoroutine(prepCombatAfterMovesFinish());
-		}
+    public static void setFooting(bool onLeftFoot)
+    {
+        State.onLeftFoot = onLeftFoot;
 
-		smallWaitAfterMoving = true;
-
-		changeFooting();
-	}
-
-	public static bool onLeftFoot()
-	{
-		return State.onLeftFoot;
-	}
-
-	public static void changeFooting()
-	{
-		StepCountScriptManager.incrementStepCount();
-
-		State.onLeftFoot = !State.onLeftFoot;
-		OOCUIManager.getInstance().updateFooting();
-	}
-
-	public static void setFooting(bool onLeftFoot)
-	{
-		State.onLeftFoot = onLeftFoot;
-
-		if (OOCUIManager.getInstance() != null)
-		{
-			OOCUIManager.getInstance().updateFooting();
-		}
-	}
-
-	private Vector3Int determineDirection(int spriteIndex, Vector3Int coords)
-	{
-		if (spriteIndex > 0)
-		{
-			if (allSpritesToMove[spriteIndex].GetComponent<EnemyMovement>().moveableObject &&
-				  (grid.WorldToCell(endingPositions[0]) == coords))
-			{
-				return directionMod[playerSpriteIndex];
-			}
-			else if (allSpritesToMove[spriteIndex].GetComponent<EnemyMovement>().moveableObject)
-			{
-				return Vector3Int.zero;
-			}
-			else
-			{
-				EnemyMovement enemyMovement = allSpritesToMove[spriteIndex].GetComponent<EnemyMovement>();
-				Vector3Int enemyDirection = enemyMovement.findDirection();
-				return enemyDirection;
-			}
-		}
-		else
-		{
-			return directionMod[playerSpriteIndex];
-		}
-	}
+        if (OOCUIManager.getInstance() != null)
+        {
+            OOCUIManager.getInstance().updateFooting();
+        }
+    }
 
     public static bool colliderInCell(Vector3Int cellCoords, LayerMask layerMask)
     {
@@ -254,323 +169,200 @@ public class MovementManager : MonoBehaviour
         return AreaManager.getMasterGrid().CellToWorld(cellCoords);
     }
 
-    private void setEnemyFacing(Vector3Int directionMod, EnemyMovement enemyMovement)
+    public static void addMovementTracker(MovementTracker movement)
     {
-        if (directionMod.Equals(Vector3Int.zero))
-        {
-            return;
-        }
+        movement.startingPosition = movement.getWorldPosition();
+        movement.endingPosition = movement.startingPosition;
 
-        if (directionMod.Equals(distance1TileNorthEastGrid))
-        {
-            enemyMovement.setEnemyFacing(Facing.NorthEast);
+        Debug.LogError("movement index = " + movement.getMovementIndex());
 
-        }
-        else if (directionMod.Equals(distance1TileSouthEastGrid))
+        if (allMovementTrackers.Count == movement.getMovementIndex())
         {
-            enemyMovement.setEnemyFacing(Facing.SouthEast);
-
+            allMovementTrackers.Add(movement);
         }
-        else if (directionMod.Equals(distance1TileSouthWestGrid))
+        else if (allMovementTrackers.Count > movement.getMovementIndex())
         {
-            enemyMovement.setEnemyFacing(Facing.SouthWest);
-
-        }
-        else if (directionMod.Equals(distance1TileNorthWestGrid))
-        {
-            enemyMovement.setEnemyFacing(Facing.NorthWest);
+            if (allMovementTrackers[movement.getMovementIndex()] == null)
+            {
+                allMovementTrackers[movement.getMovementIndex()] = movement;
+            }
         }
         else
         {
-            throw new IOException("Illegal directionMod: " + directionMod.ToString());
+            MovementTracker[] movements = new MovementTracker[movement.getMovementIndex() - allMovementTrackers.Count + 1];
+
+            movements[movements.Length - 1] = movement;
+
+            allMovementTrackers.AddRange(movements);
+        }      
+    }
+
+    private IEnumerator prepCombatAfterMovesFinish(MovementTracker movement)
+    {
+        do
+        {
+            yield return null;
+        } while (PlayerMovement.getInstance().isMoving());
+
+        EnemyMovement enemyMovement = movement as EnemyMovement;
+
+        if (enemyMovement != null)
+        {
+            enemyMovement.prepCombat();
         }
     }
 
-    public void addPlayerSprite(Transform player)
+    private IEnumerator moveSprite(MovementTracker movement)
     {
-        allSpritesToMove[0] = player;
-        updateArrays();
-	}
-
-	public void addEnemySprite(Transform enemy, int index)
-    {
-        if(enemy == null)
+        if (movement.getMovementIndex() != playerSpriteIndex && MonsterDefeatKeysList.monsterIsDefeated(movement.getMovementIndex() - 1))
         {
-            Debug.LogError("Enemy #" + index + " == null");
-        }
-
-        if(enemy.gameObject == null)
-        {
-            Debug.LogError("enemy.gameObject #" + index + " == null");
-        }
-
-        enemy.GetComponent<EnemyMovement>();
-
-        if (index >= allSpritesToMove.Length)
-        {
-            List<Transform> enemyTransforms = new List<Transform>(allSpritesToMove);
-            enemyTransforms.Add(enemy);
-
-            allSpritesToMove = enemyTransforms.ToArray();
-        }
-        else
-        {
-            allSpritesToMove[index] = enemy;
-        }
-
-		updateArrays();
-	}
-
-    public static void removeEnemySprite(int indexToRemove)
-    {
-
-        allSpritesToMove[indexToRemove] = null;
-
-    }
-
-	private IEnumerator prepCombatAfterMovesFinish()
-	{
-		while (isMoving[playerSpriteIndex])
-		{
-			yield return null;
-		}
-
-		if (allSpritesToMove[adjacentMonsterIndex] != null)
-		{
-			allSpritesToMove[adjacentMonsterIndex].GetComponent<EnemyMovement>().prepCombat();
-		}
-
-
-		yield break;
-	}
-
-	private IEnumerator moveSprite(int spriteID)
-    {
-        if(spriteID != playerSpriteIndex && MonsterDefeatKeysList.monsterIsDefeated(spriteID-1))
-        {
-            isMoving[spriteID] = false;
+            yield return null;
+            currentMovements.Remove(movement);
             yield break;
         }
 
-		float elapsedTime = 0;
+        float elapsedTime = 0;
 
-		while (elapsedTime <= timeToMove)
-		{
-			allSpritesToMove[spriteID].position = Vector3.Lerp(startingPositions[spriteID], endingPositions[spriteID], (elapsedTime / timeToMove));
-			elapsedTime += Time.deltaTime;
-			//Helpers.updateGameObjectPosition(allSpritesToMove[spriteID]);
-			yield return null;
-		}
+        while (elapsedTime <= timeToMove)
+        {
+            movement.getTransform().position = Vector3.Lerp(movement.startingPosition, movement.endingPosition, (elapsedTime / timeToMove));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
 
-		if (allSpritesToMove[spriteID] != null)
-		{
-			allSpritesToMove[spriteID].position = endingPositions[spriteID];
-			startingPositions[spriteID] = allSpritesToMove[spriteID].position;
-		}
+        movement.getTransform().position = movement.endingPosition;
+        movement.startingPosition = movement.getTransform().position;
 
-		//Helpers.updateColliderPosition(allSpritesToMove[spriteID]);
+        PartyMemberMovement.hideOverlappingPartyMembers();
 
-		PartyMemberMovement.hideOverlappingPartyMembers();
+        currentMovements.Remove(movement);
 
-		isMoving[spriteID] = false;
-		/*
-		for(int j = 1; j < allSpritesToMove.Length; j++)
-		{
-			if(allSpritesToMove[j] != null && !allSpritesToMove[j].GetComponent<EnemyMovement>().moveableObject && allSpritesToMove[j].GetComponent<EnemyMovement>().checkForPlayer(j) )
-			{
-				yield break;
-			}
-		}*/
-		OnMoveFinished.Invoke();
-		yield break;
-	}
+        OnMoveFinished.Invoke();
+    }
 
-	private IEnumerator moveSprite(Transform spriteToMove, Vector3 startingPosition, Vector3 endingPosition)
-	{
-		float elapsedTime = 0;
+    private void preventCollidingEndingPositions()
+    {
 
-		while (elapsedTime <= timeToMove)
-		{
-			spriteToMove.position = Vector3.Lerp(startingPosition, endingPosition, (elapsedTime / timeToMove));
-			elapsedTime += Time.deltaTime;
-			yield return null;
-		}
+        List<MovementTracker> previousMovements = new List<MovementTracker>();
 
-		PartyMemberMovement.hideOverlappingPartyMembers();
+        foreach (MovementTracker movement in allMovementTrackers)
+        {
+            if (previousMovements.Count <= 0 && movement != null)
+            {
+                previousMovements.Add(movement);
+                continue;
+            }
+            if (movement == null)
+            {
+                continue;
+            }
 
-		if (spriteToMove != null)
-		{
-			spriteToMove.position = endingPosition;
-		}
+            Vector3Int currentMonstersCellCoords = MovementTracker.getCurrentCell(movement);
 
-		OnMoveFinished.Invoke();
+            foreach (MovementTracker previousMovement in previousMovements)
+            {
+                Vector3Int previousMonstersCellCoords = MovementTracker.getCurrentCell(previousMovement);
 
-		yield break;
-		//Helpers.updateColliderPosition(allSpritesToMove[spriteID]);
+                if (previousMonstersCellCoords.Equals(currentMonstersCellCoords))
+                {
+                    movement.cancelMovement();
+                }
+            }
 
-	}
+            previousMovements.Add(movement);
+        }
 
-	public void updateArrays()
-	{
-		directionMod = new Vector3Int[allSpritesToMove.Length];
-		startingPositions = new Vector3[allSpritesToMove.Length];
-		endingPositions = new Vector3[allSpritesToMove.Length];
-		isSpriteMoveableObject = new bool[allSpritesToMove.Length];
-		isMoving = new bool[allSpritesToMove.Length];
+    }
 
-		for (int i = 0; i < allSpritesToMove.Length; i++)
-		{
-			directionMod[i] = new Vector3Int(0, 0, 0);
+    private Vector3Int getFirstPartyMemberEndingPosition()
+    {
+        return grid.WorldToCell(PlayerMovement.getInstance().startingPosition);
+    }
 
-			if (allSpritesToMove[i] != null)
-			{
-				startingPositions[i] = allSpritesToMove[i].position;
-				endingPositions[i] = allSpritesToMove[i].position;
-			}
+    public void movePartyMembers(int partyMemberIndex, Vector3 endingPosition)
+    {
 
-			isMoving[i] = false;
+        // if (PartyMemberMovement.partyMemberTrain == null)
+        // {
+        //     return;
+        // }
 
-			if (i == playerSpriteIndex || allSpritesToMove[i] == null || allSpritesToMove[i] is null)
-			{
-				continue;
-			}
-			else
-			{
-				isSpriteMoveableObject[i] = allSpritesToMove[i].GetComponent<EnemyMovement>().moveableObject;
-			}
-		}
-	}
+        // if (partyMemberIndex < PartyMemberMovement.partyMemberTrain.Length &&
+        //     partyMemberIndex < (PartyMemberMovement.stepCounter))
+        // {
+        //     Vector3 startingPosition = PartyMemberMovement.partyMemberTrain[partyMemberIndex].position;
 
-	private void preventCollidingEndingPositions()
-	{
+        //     StartCoroutine(moveSprite(PartyMemberMovement.partyMemberTrain[partyMemberIndex]));
 
-		for (int i = playerSpriteIndex + 1; i < endingPositions.Length; i++)
-		{
+        //     endingPosition = startingPosition;
 
-			if (allSpritesToMove[i] == null)
-			{
-				continue;
-			}
+        //     movePartyMembers(partyMemberIndex + 1, endingPosition);
+        // }
+        // else
+        // {
+        //     PartyMemberMovement.stepCounter++;
+        //     return;
+        // }
+    }
 
-			Vector3Int currentMonstersCellCoords = grid.WorldToCell(new Vector3(endingPositions[i].x, endingPositions[i].y, 0f));
+    private void preventMonstersFromMovingAwayFromPlayer()
+    {
+        for (int positionIndex = 1; positionIndex < allMovementTrackers.Count; positionIndex++)
+        {
+            if (allMovementTrackers[positionIndex].movableObject)
+            {
+                continue;
+            }
 
-			for (int j = (i - 1); j >= 0; j--)
-			{
-				if (allSpritesToMove[j] == null)
-				{
-					continue;
-				}
+            if (cellsAreAdjacent(PlayerMovement.getInstance().endingPosition, allMovementTrackers[positionIndex].startingPosition))
+            {
+                allMovementTrackers[positionIndex].cancelMovement();
+            }
 
-				Vector3Int previousMonstersCellCoords = grid.WorldToCell(new Vector3(endingPositions[j].x, endingPositions[j].y, 0f));
+            if (cellsAreAdjacent(PlayerMovement.getInstance().endingPosition, allMovementTrackers[positionIndex].endingPosition))
+            {
+                StartCoroutine(prepCombatAfterMovesFinish(allMovementTrackers[positionIndex]));
+            }
+        }
+    }
 
-				if (currentMonstersCellCoords.Equals(previousMonstersCellCoords) &&
-					(endingPositions[i].x != startingPositions[i].x &&
-						endingPositions[i].y != startingPositions[i].y))
-				{
-					endingPositions[i] = startingPositions[i];
-					i = playerSpriteIndex;  //restart loop
-				}
-			}
-		}
-	}
+    public bool cellsAreAdjacent(Vector3 first, Vector3 second)
+    {
+        first.z = 0f;
+        second.z = 0f;
 
-	private Vector3Int getFirstPartyMemberEndingPosition()
-	{
-		return grid.WorldToCell(startingPositions[playerSpriteIndex]);
-	}
+        Vector3Int firstCellPosition = getCellWorld(first);
+        Vector3Int secondCellPosition = getCellWorld(second);
 
-	public void movePartyMembers(int partyMemberIndex, Vector3 endingPosition)
-	{
+        int xDistance = firstCellPosition.x - secondCellPosition.x;
+        int yDistance = firstCellPosition.y - secondCellPosition.y;
 
-		if (PartyMemberMovement.partyMemberTrain == null)
-		{
-			return;
-		}
+        if (xDistance <= 1 && xDistance >= -1 && yDistance == 0)
+        {
+            return true;
+        }
 
-		if (partyMemberIndex < PartyMemberMovement.partyMemberTrain.Length &&
-			partyMemberIndex < (PartyMemberMovement.stepCounter))
-		{
-			Vector3 startingPosition = PartyMemberMovement.partyMemberTrain[partyMemberIndex].position;
+        if (yDistance <= 1 && yDistance >= -1 && xDistance == 0)
+        {
+            return true;
+        }
 
-			StartCoroutine(moveSprite(PartyMemberMovement.partyMemberTrain[partyMemberIndex], startingPosition, endingPosition));
-
-			endingPosition = startingPosition;
-
-			movePartyMembers(partyMemberIndex + 1, endingPosition);
-		}
-		else
-		{
-			PartyMemberMovement.stepCounter++;
-			return;
-		}
-	}
-
-	private int checkIfPlayerEndsAdjacentToAnyMonsterStart()
-	{
-		return checkForPlayerAdjacentPositions(startingPositions);
-	}
-
-	private int checkIfPlayerAndMonstersEndAdjacent()
-	{
-		return checkForPlayerAdjacentPositions(endingPositions);
-	}
-
-	private int checkForPlayerAdjacentPositions(Vector3[] positions)
-	{
-		for (int positionIndex = 1; positionIndex < positions.Length; positionIndex++)
-		{
-			if (isSpriteMoveableObject[positionIndex])
-			{
-				continue;
-			}
-
-			if (cellsAreAdjacent(endingPositions[playerSpriteIndex], positions[positionIndex]) && 
-                !MonsterDefeatKeysList.monsterIsDefeated(positionIndex-1))
-			{
-				return positionIndex;
-			}
-		}
-
-		return -1;
-	}
-
-	public bool cellsAreAdjacent(Vector3 first, Vector3 second)
-	{
-		first.z = 0f;
-		second.z = 0f;
-
-		Vector3Int firstCellPosition = getCellWorld(first);
-		Vector3Int secondCellPosition = getCellWorld(second);
-
-		int xDistance = firstCellPosition.x - secondCellPosition.x;
-		int yDistance = firstCellPosition.y - secondCellPosition.y;
-
-		if (xDistance <= 1 && xDistance >= -1 && yDistance == 0)
-		{
-			return true;
-		}
-
-		if (yDistance <= 1 && yDistance >= -1 && xDistance == 0)
-		{
-			return true;
-		}
-
-		return false;
-	}
+        return false;
+    }
 
     public static EnemyStatWrapper[] getAllMonsterStats()
     {
-        EnemyStatWrapper[] statWrappers = new EnemyStatWrapper[startingPositions.Length - 1];
-        
-        for(int index = 0; index < statWrappers.Length; index++)
-        {
-            EnemyMovement enemyMovement = allSpritesToMove[index + 1].GetComponent<EnemyMovement>();
+        EnemyStatWrapper[] statWrappers = new EnemyStatWrapper[allMovementTrackers.Count - 1];
 
-            statWrappers[index] = new EnemyStatWrapper(startingPositions[index + 1],
+        for (int index = 0; index < statWrappers.Length; index++)
+        {
+            EnemyMovement enemyMovement = allMovementTrackers[index + 1] as EnemyMovement;
+
+            statWrappers[index] = new EnemyStatWrapper(enemyMovement.startingPosition,
                                                         enemyMovement.enemyFacing.getFacing(),
                                                         enemyMovement.intimidateCounter,
                                                         enemyMovement.cunningStunCounter,
-                                                        enemyMovement.retreatStunnedCounter); 
+                                                        enemyMovement.retreatStunnedCounter);
         }
 
         return statWrappers;
@@ -724,23 +516,123 @@ public class MovementManager : MonoBehaviour
         return surpriseState;
     }
 
-	public static Vector3Int getCellWorld(Vector3 position)
-	{
-		return AreaManager.getMasterGrid().WorldToCell(position);
-	}
-
-	public static List<Vector3Int> getAllCurrentSpriteCells()
-	{
-		List<Vector3Int> currentSpriteCells = new List<Vector3Int>();		
-		
-		for(int i = 0; i < allSpritesToMove.Length; i++)
-		{
-			if(allSpritesToMove[i] != null)
-			{
-				currentSpriteCells.Add(AreaManager.getMasterGrid().WorldToCell(endingPositions[i]));
-			}
-		}
-		
-		return currentSpriteCells;
-	}
+    public static Vector3Int getCellWorld(Vector3 position)
+    {
+        return AreaManager.getMasterGrid().WorldToCell(position);
+    }
 }
+
+    // public static Vector3Int[] directionMod;
+
+    // public static Transform[] allSpritesToMove;
+    // public static bool[] isSpritemovableObject;
+
+    // public static Vector3[] startingPositions;
+    // public static Vector3[] endingPositions;
+    // public static bool[] isMoving;
+
+        // return (allSpritesToMove[spriteID].position.x < startingPositions[spriteID].x && allSpritesToMove[spriteID].position.x > endingPositions[spriteID].x) ||
+        //         (allSpritesToMove[spriteID].position.x > startingPositions[spriteID].x && allSpritesToMove[spriteID].position.x < endingPositions[spriteID].x) ||
+        //         (allSpritesToMove[spriteID].position.y < startingPositions[spriteID].y && allSpritesToMove[spriteID].position.y > endingPositions[spriteID].y) ||
+        //         (allSpritesToMove[spriteID].position.y > startingPositions[spriteID].y && allSpritesToMove[spriteID].position.y < endingPositions[spriteID].y) ||
+        //          isMoving.Contains(true);
+
+        // foreach (Transform sprite in allSpritesToMove)
+        // {
+        //     if (sprite == null || sprite is null)
+        //     {
+        //         continue;
+        //     }
+
+        //     Vector3 newposition = sprite.position;
+        //     newposition.z = 0;
+        //     sprite.position = newposition;
+        // }
+
+        // for (int i = 0; i < allSpritesToMove.Length; i++)
+        // {
+        //     if (allSpritesToMove[i] == null)
+        //     {
+        //         continue;
+        //     }
+
+        //     Vector3Int coords = grid.WorldToCell(allSpritesToMove[i].position);
+
+        //     if (!isMoving[i])
+        //     {
+        //         directionMod[i] = determineDirection(i, coords);
+
+        //         startingPositions[i] = allSpritesToMove[i].position;
+        //         endingPositions[i] = grid.GetCellCenterWorld(coords + directionMod[i]);
+        //     }
+        // }
+
+        // for (int i = playerSpriteIndex + 1; i < endingPositions.Length; i++)
+        // {
+
+        //     if (allSpritesToMove[i] == null)
+        //     {
+        //         continue;
+        //     }
+
+        //     Vector3Int currentMonstersCellCoords = grid.WorldToCell(new Vector3(endingPositions[i].x, endingPositions[i].y, 0f));
+
+        //     for (int j = (i - 1); j >= 0; j--)
+        //     {
+        //         if (allSpritesToMove[j] == null)
+        //         {
+        //             continue;
+        //         }
+
+        //         Vector3Int previousMonstersCellCoords = grid.WorldToCell(new Vector3(endingPositions[j].x, endingPositions[j].y, 0f));
+
+        //         if (currentMonstersCellCoords.Equals(previousMonstersCellCoords) &&
+        //             (endingPositions[i].x != startingPositions[i].x &&
+        //                 endingPositions[i].y != startingPositions[i].y))
+        //         {
+        //             endingPositions[i] = startingPositions[i];
+        //             i = playerSpriteIndex;  //restart loop
+        //         }
+        //     }
+        // }
+        
+        // for (int positionIndex = 1; positionIndex < positions.Length; positionIndex++)
+        // {
+        //     if (isSpritemovableObject[positionIndex])
+        //     {
+        //         continue;
+        //     }
+
+        //     if (cellsAreAdjacent(endingPositions[playerSpriteIndex], positions[positionIndex]) &&
+        //         !MonsterDefeatKeysList.monsterIsDefeated(positionIndex - 1))
+        //     {
+        //         return positionIndex;
+        //     }
+        // }
+
+        // for (int i = 0; i < allSpritesToMove.Length; i++)
+        // {
+        //     if (allSpritesToMove[i] == null)
+        //     {
+        //         continue;
+        //     }
+
+        //     if (!isMoving[i])
+        //     {
+        //         isMoving[i] = true;
+        //         neverMoved = false;
+
+        //         if (i > playerSpriteIndex && endingPositions[i] != startingPositions[i])
+        //         {
+        //             setEnemyFacing(directionMod[i], allSpritesToMove[i].GetComponent<EnemyMovement>());
+        //         }
+
+        //         StartCoroutine(moveSprite(i));
+
+        //         if (!playerDirection.Equals(Vector3Int.zero))
+        //         {
+        //             PartyMemberMovement.showAllPartyMembers();
+        //             movePartyMembers(0, grid.CellToWorld(getFirstPartyMemberEndingPosition()));
+        //         }
+        //     }
+        // }

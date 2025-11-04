@@ -4,25 +4,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 public class TransitionManager : MonoBehaviour
 {
-    public static UnityEvent BeforeTransition = new UnityEvent();
+    public readonly static UnityEvent BeforeTransition = new UnityEvent();
 
-    public static UnityEvent AfterTransition = new UnityEvent();
+    public readonly static UnityEvent AfterTransition = new UnityEvent();
 	public static TransitionManager instance;
 
-    public static bool autosaveMade = false;
+    public static bool autosaveMade;
 	
 	public static FadeToBlackManager fadeToBlackManager;
     public static bool fadeToBlackOnTransition;
 
-    public static List<Transition> currentTransitions = new List<Transition>();
-
-    private NewSceneTransition[] transitions;
+    public static List<Transition> currentTransitions;
 
     private static Coroutine currentCoroutine;
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeTransitionManager()
+    {
+        instance = null;
+        autosaveMade = false;
+        fadeToBlackManager = null;
+        fadeToBlackOnTransition = false;
+        currentCoroutine = null;
+        currentTransitions = new List<Transition>();
+    }
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            throw new IOException("There is already an instance of TransitionManager");
+        }
+
+        instance = this;
+        // transitions = getAllTransitionObjects();
+    }
+	
+	public static TransitionManager getInstance()
+	{
+		return instance;
+	}
 
     void Start()
     {
@@ -99,9 +123,9 @@ public class TransitionManager : MonoBehaviour
 
     private void moveToTargetTransition(Transition destinationTransition)
     {
-        PlayerMovement.getTransform().position = AreaManager.getMasterGrid().GetCellCenterWorld(destinationTransition.getOutPutCellCoords());
+        PlayerMovement.getInstanceTransform().position = AreaManager.getMasterGrid().GetCellCenterWorld(destinationTransition.getOutPutCellCoords());
         State.playerFacing.setFacing(destinationTransition.playerSpawnDirection);
-        AreaManager.getMovementManager().addPlayerSprite(PlayerMovement.getTransform());
+        MovementManager.addMovementTracker(PlayerMovement.getInstance());
     }
 
     private static void makeAutosave(Vector3 autosavePos)
@@ -136,187 +160,171 @@ public class TransitionManager : MonoBehaviour
 
 
 
-    public static void changeScene(TransitionInfo sourceTransitionInfo)
-    {
-        if (fadeToBlackOnTransition && !FadeToBlackManager.isBlack() && !fadeToBlackManager.currentlyFadingToBlack())
-        {
-            fadeToBlackManager.setAndStartFadeToBlack();
-        }
+    // public static void changeScene(TransitionInfo sourceTransitionInfo)
+    // {
+    //     if (fadeToBlackOnTransition && !FadeToBlackManager.isBlack() && !fadeToBlackManager.currentlyFadingToBlack())
+    //     {
+    //         fadeToBlackManager.setAndStartFadeToBlack();
+    //     }
 
-        if (!fadeToBlackOnTransition || (fadeToBlackOnTransition && FadeToBlackManager.isBlack()))
-        {
-            State.currentSourceTransitionInfo = sourceTransitionInfo.clone();
+    //     if (!fadeToBlackOnTransition || (fadeToBlackOnTransition && FadeToBlackManager.isBlack()))
+    //     {
+    //         State.currentSourceTransitionInfo = sourceTransitionInfo.clone();
 
-            if (!State.currentSourceTransitionInfo.skipAutoSave)
-            {
-                try
-                {
-                    if (!autosaveMade)
-                    {
-                        // SaveHandler.autosave(getInstance().getCurrentDestinationWorldPosition());
-                        autosaveMade = true;
-                    }
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError("An autosave was attempted but failed");
-                    Debug.LogError(e.StackTrace);
-                }
-            }
+    //         if (!State.currentSourceTransitionInfo.skipAutoSave)
+    //         {
+    //             try
+    //             {
+    //                 if (!autosaveMade)
+    //                 {
+    //                     // SaveHandler.autosave(getInstance().getCurrentDestinationWorldPosition());
+    //                     autosaveMade = true;
+    //                 }
+    //             }
+    //             catch (Exception e)
+    //             {
+    //                 Debug.LogError("An autosave was attempted but failed");
+    //                 Debug.LogError(e.StackTrace);
+    //             }
+    //         }
 
-            resetRelevantDataOnSceneTransitionToExactPosition();
+    //         resetRelevantDataOnSceneTransitionToExactPosition();
 
-            autosaveMade = false;
+    //         autosaveMade = false;
 
-            StepCountScriptManager.reset();
-            PlayerInteractionScript.runAllScripts(State.currentSourceTransitionInfo.scripts);
+    //         StepCountScriptManager.reset();
+    //         PlayerInteractionScript.runAllScripts(State.currentSourceTransitionInfo.scripts);
 
-            if (State.currentSourceTransitionInfo.flipFacing)
-            {
-                State.playerFacing.setToOpposingFacing();
-            }
+    //         if (State.currentSourceTransitionInfo.flipFacing)
+    //         {
+    //             State.playerFacing.setToOpposingFacing();
+    //         }
 
-            SceneChange.changeSceneToOverworld();
-        }
-    }
+    //         SceneChange.changeSceneToOverworld();
+    //     }
+    // }
 
-	public void changeSceneWithoutTrigger(TransitionInfo sourceTransitionInfo)
-	{
-		changeScene(sourceTransitionInfo);
+	// public void changeSceneWithoutTrigger(TransitionInfo sourceTransitionInfo)
+	// {
+	// 	changeScene(sourceTransitionInfo);
 
-		StartCoroutine(getInstance().waitForBlackScreenThenTransition(sourceTransitionInfo));
-	}
+	// 	StartCoroutine(getInstance().waitForBlackScreenThenTransition(sourceTransitionInfo));
+	// }
 
-	private IEnumerator waitForBlackScreenThenTransition(TransitionInfo sourceTransitionInfo)
-	{
-		while (!FadeToBlackManager.isBlack())
-		{
-			yield return null;
-		}
+	// private IEnumerator waitForBlackScreenThenTransition(TransitionInfo sourceTransitionInfo)
+	// {
+	// 	while (!FadeToBlackManager.isBlack())
+	// 	{
+	// 		yield return null;
+	// 	}
 
-		changeScene(sourceTransitionInfo);
-	}
+	// 	changeScene(sourceTransitionInfo);
+	// }
 	
-	public Vector3 getCurrentDestinationWorldPosition()
-	{
-		if(State.currentSourceTransitionInfo.transitionHash != null)
-		{
-			return getCurrentDestinationWorldPositionFromTransitionHash();
-		}
+	// public Vector3 getCurrentDestinationWorldPosition()
+	// {
+	// 	if(State.currentSourceTransitionInfo.transitionHash != null)
+	// 	{
+	// 		return getCurrentDestinationWorldPositionFromTransitionHash();
+	// 	}
 
-		string destinationSquareHash = State.currentSourceTransitionInfo.hash;
+	// 	string destinationSquareHash = State.currentSourceTransitionInfo.hash;
 		
-		foreach(NewSceneTransition transition in transitions)
-		{
-			if(transition.getTransitionInfo().hash.Equals(destinationSquareHash))
-			{
-				GameObject destinationSquare = transition.currentSceneDestinationSquare;
+	// 	foreach(NewSceneTransition transition in transitions)
+	// 	{
+	// 		if(transition.getTransitionInfo().hash.Equals(destinationSquareHash))
+	// 		{
+	// 			GameObject destinationSquare = transition.currentSceneDestinationSquare;
 				
-				return destinationSquare.transform.position;
-			}
-		}
+	// 			return destinationSquare.transform.position;
+	// 		}
+	// 	}
 		
-		return transitions[0].currentSceneDestinationSquare.transform.position;
-	}
+	// 	return transitions[0].currentSceneDestinationSquare.transform.position;
+	// }
 
-	private Vector3 getCurrentDestinationWorldPositionFromTransitionHash()
-	{
-		TransitionHash destinationSquareHash = State.currentSourceTransitionInfo.transitionHash;
+	// private Vector3 getCurrentDestinationWorldPositionFromTransitionHash()
+	// {
+	// 	TransitionHash destinationSquareHash = State.currentSourceTransitionInfo.transitionHash;
 
-		foreach (NewSceneTransition transition in transitions)
-		{
-			if(transition.getTransitionInfo().transitionHash == null)
-			{
-				continue;
-			}
+	// 	foreach (NewSceneTransition transition in transitions)
+	// 	{
+	// 		if(transition.getTransitionInfo().transitionHash == null)
+	// 		{
+	// 			continue;
+	// 		}
 
-			if (transition.getTransitionInfo().transitionHash.Equals(destinationSquareHash))
-			{
-				GameObject destinationSquare = transition.currentSceneDestinationSquare;
+	// 		if (transition.getTransitionInfo().transitionHash.Equals(destinationSquareHash))
+	// 		{
+	// 			GameObject destinationSquare = transition.currentSceneDestinationSquare;
 
-				return destinationSquare.transform.position;
-			}
-		}
+	// 			return destinationSquare.transform.position;
+	// 		}
+	// 	}
 		
-		return transitions[0].currentSceneDestinationSquare.transform.position;
-	}
+	// 	return transitions[0].currentSceneDestinationSquare.transform.position;
+	// }
 	
-	public static void resetCurrentSourceTransition()
-	{
-		State.currentSourceTransitionInfo = null;
-	}
+	// public static void resetCurrentSourceTransition()
+	// {
+	// 	State.currentSourceTransitionInfo = null;
+	// }
 	
-	public static bool hasASourceTransition()
-	{
-		if(State.currentSourceTransitionInfo == null || State.currentSourceTransitionInfo is null)
-		{	
-			return false;
-		} else
-		{
-			return true;
-		}
-	}
+	// public static bool hasASourceTransition()
+	// {
+	// 	if(State.currentSourceTransitionInfo == null || State.currentSourceTransitionInfo is null)
+	// 	{	
+	// 		return false;
+	// 	} else
+	// 	{
+	// 		return true;
+	// 	}
+	// }
 
-    public static bool hasASortingLayer()
-    {
-		if(!hasASourceTransition())
-		{
-			return false;
-		}
+    // public static bool hasASortingLayer()
+    // {
+	// 	if(!hasASourceTransition())
+	// 	{
+	// 		return false;
+	// 	}
 
-        if (State.currentSourceTransitionInfo.sortingLayerName != null && State.currentSourceTransitionInfo.sortingLayerName.Length > 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    //     if (State.currentSourceTransitionInfo.sortingLayerName != null && State.currentSourceTransitionInfo.sortingLayerName.Length > 0)
+    //     {
+    //         return true;
+    //     }
+    //     else
+    //     {
+    //         return false;
+    //     }
+    // }
 
-    private static void resetRelevantDataOnSceneTransitionToExactPosition()
-	{
-		//AllMonsterPackLists.setAllMonsterPackListsToReset();
-		CunningManager.resetCunningsRemaining();
-		IntimidateManager.resetIntimidatesRemaining();
-		TrapAndButtonStateManager.resetTrapKeys();
-		PartyMemberPlacer.removeAllPlacedPartyMembers();
-	}
+    // private static void resetRelevantDataOnSceneTransitionToExactPosition()
+	// {
+	// 	//AllMonsterPackLists.setAllMonsterPackListsToReset();
+	// 	CunningManager.resetCunningsRemaining();
+	// 	IntimidateManager.resetIntimidatesRemaining();
+	// 	TrapAndButtonStateManager.resetTrapKeys();
+	// 	PartyMemberPlacer.removeAllPlacedPartyMembers();
+	// }
 	
     
-	private static NewSceneTransition[] getAllTransitionObjects()
-	{
-		GameObject[] newSceneTransitionToExactPositionObjects = GameObject.FindGameObjectsWithTag(LayerAndTagManager.transitionTag);
-		NewSceneTransition[] transitions = new NewSceneTransition[0];
+	// private static NewSceneTransition[] getAllTransitionObjects()
+	// {
+	// 	GameObject[] newSceneTransitionToExactPositionObjects = GameObject.FindGameObjectsWithTag(LayerAndTagManager.transitionTag);
+	// 	NewSceneTransition[] transitions = new NewSceneTransition[0];
 		
-		foreach(GameObject transitionObject in newSceneTransitionToExactPositionObjects)
-		{
-			NewSceneTransition newSceneTransitionToExactPosition = transitionObject.GetComponent<NewSceneTransition>();
+	// 	foreach(GameObject transitionObject in newSceneTransitionToExactPositionObjects)
+	// 	{
+	// 		NewSceneTransition newSceneTransitionToExactPosition = transitionObject.GetComponent<NewSceneTransition>();
 			
-			if(newSceneTransitionToExactPosition == null)
-			{
-				continue;
-			}
+	// 		if(newSceneTransitionToExactPosition == null)
+	// 		{
+	// 			continue;
+	// 		}
 			
-			transitions = Helpers.appendArray<NewSceneTransition>(transitions,newSceneTransitionToExactPosition);
-		}
+	// 		transitions = Helpers.appendArray<NewSceneTransition>(transitions,newSceneTransitionToExactPosition);
+	// 	}
 		
-		return transitions;
-	}		
-	
-	private void Awake()
-	{
-		if(instance != null)  
-		{						
-			throw new IOException("There is already an instance of TransitionManager");
-		}
-	
-		instance = this;
-		transitions = getAllTransitionObjects();
-	}
-	
-	public static TransitionManager getInstance()
-	{
-		return instance;
-	}
+	// 	return transitions;
+	// }		
 }

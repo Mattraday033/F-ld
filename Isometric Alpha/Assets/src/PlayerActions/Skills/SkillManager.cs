@@ -76,7 +76,7 @@ public class SkillManager
 
     public static Vector3Int getPlayerCoords()
     {
-        return AreaManager.getMasterGrid().WorldToCell(MovementManager.endingPositions[MovementManager.playerSpriteIndex]);
+        return AreaManager.getMasterGrid().WorldToCell(PlayerMovement.getInstance().endingPosition);
     }
 
     private bool coordsWithinRange(int row, int col)

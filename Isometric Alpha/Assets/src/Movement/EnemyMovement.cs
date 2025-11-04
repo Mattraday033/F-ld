@@ -8,11 +8,17 @@ using TMPro;
 
 public class PathSegment
 {
-	public static int counter = 0;
+    public static int counter;
 	public int ID;
 	public Vector3Int coords;
-	public PathSegment nextSegment;
+    public PathSegment nextSegment;
 	
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializePathSegment()
+    {
+        counter = 0;
+    }
+
 	public PathSegment(Vector3Int coords, PathSegment nextSegment)
 	{
 		ID = counter;
@@ -140,7 +146,7 @@ public class PathToPlayer
 	}
 }
 
-public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorialSequenceTarget, IDescribableInBlocks
+public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutorialSequenceTarget, IDescribableInBlocks
 {
 	public enum playerDirection
 	{
@@ -163,7 +169,6 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 	public string tutorialHash;
 	public string packName = "???"; //Worms
 
-	public bool moveableObject;
 	public bool followsPlayer = true;
 	public bool movesEveryTurn = false;
 	public bool neverMoves = false;
@@ -187,10 +192,76 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 
 	public GameObject hoverTarget;
 
-	private void Awake()
-	{
-		spawnTargetCanvas();
-	}
+    #region MovementTracker Overrides
+
+    private bool _MovableObject;
+    public override bool movableObject
+    {
+        get => _MovableObject;
+        set
+        {
+            _MovableObject = value;
+        }
+    }
+
+    public override int getMovementIndex()
+    {
+        return getMonsterPackIndex() + 1;
+    }
+
+    public override void determineDirection()
+    {
+        if (movableObject && PlayerMovement.getInstance().endingPosition == MovementTracker.getCurrentCell(this))
+        {
+            _DirectionMod = PlayerMovement.getInstance().directionMod;
+        }
+        else if (movableObject)
+        {
+            _DirectionMod = Vector3Int.zero;
+        }
+        else
+        {
+            _DirectionMod = findDirection();
+        }
+
+        _StartingPosition = getWorldPosition();
+        _EndingPosition = AreaManager.getMasterGrid().GetCellCenterWorld(MovementTracker.getCurrentCell(this) + _DirectionMod);
+    }
+
+    public override void updateFacing()
+    {
+        if (directionMod.Equals(Vector3Int.zero))
+        {
+            return;
+        }
+
+        if (directionMod.Equals(MovementManager.distance1TileNorthEastGrid))
+        {
+            setEnemyFacing(Facing.NorthEast);
+
+        }
+        else if (directionMod.Equals(MovementManager.distance1TileSouthEastGrid))
+        {
+            setEnemyFacing(Facing.SouthEast);
+
+        }
+        else if (directionMod.Equals(MovementManager.distance1TileSouthWestGrid))
+        {
+            setEnemyFacing(Facing.SouthWest);
+
+        }
+        else if (directionMod.Equals(MovementManager.distance1TileNorthWestGrid))
+        {
+            setEnemyFacing(Facing.NorthWest);
+        }
+    }
+
+    #endregion
+
+    private void Awake()
+    {
+        spawnTargetCanvas();
+    }
 
     public MovementManager getMovementManager()
     {
@@ -247,7 +318,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 	// 	{
 	// 		if (MovementManager.colliderInCell(getCurrentCell() + distanceModifier, LayerAndTagManager.playerLayerMask))
 	// 		{
-	// 			if (!moveableObject && !stunnedFromRetreating())
+	// 			if (!movableObject && !stunnedFromRetreating())
 	// 			{
 	// 				prepCombat(monsterTransformIndex);
 	// 			}
@@ -260,7 +331,12 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 	// }
 
 	public void prepCombat()
-	{
+    {
+        if(MonsterDefeatKeysList.monsterIsDefeated(getMonsterPackIndex()))
+        {
+            return;
+        }
+
 		State.enemyPackInfo = getEnemyPackInfo();
 		CombatStateManager.currentDefeatKey = AreaManager.locationName + "-" + monsterPackIndex;
         CombatStateManager.locationBeforeCombat = AreaManager.locationName;
@@ -513,7 +589,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 
         Transform newMonster = SpawnInfoManager.spawnMonster(list[monsterPackIndex], monsterPackIndex);
 
-        getMovementManager().addEnemySprite(newMonster, monsterPackIndex+1);
+        MovementManager.addMovementTracker(this);
         
         DestroyImmediate(gameObject);
 	}
@@ -521,11 +597,11 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
     public bool canBePutBackToStartingPosition()
     {
         Vector3Int startPositionGridSquare = getStartingCell();
-        List<Vector3Int> allCurrentCells = MovementManager.getAllCurrentSpriteCells();
 
-        foreach (Vector3Int cellPos in allCurrentCells)
+        foreach (MovementTracker movement in MovementManager.allMovementTrackers)
         {
-            if (startPositionGridSquare.x == cellPos.x && startPositionGridSquare.y == cellPos.y)
+            if (movement.startingPosition.x == startPositionGridSquare.x &&
+                movement.startingPosition.y == startPositionGridSquare.y)
             {
                 return false;
             }
@@ -719,11 +795,6 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
         }
     }
 
-    private bool isMoving()
-    {
-        return MovementManager.isMoving[monsterPackIndex + 1];
-    }
-
     public void updateIdleDirection()
     {
         switch (enemyFacing.getFacing())
@@ -783,7 +854,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 
 	public Color getRevealColor()
 	{
-		if (moveableObject)
+		if (movableObject)
 		{
 			return RevealManager.canBePushed;
 		}
@@ -799,7 +870,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 		// {
 		// 	gameObject.AddComponent<RectTransform>();
 
-		// 	if (moveableObject)
+		// 	if (movableObject)
 		// 	{
 		// 		hoverTarget = Instantiate(Resources.Load<GameObject>(PrefabNames.targetBox), transform);
 		// 	}
@@ -839,7 +910,7 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 
 	public string getName()
 	{
-		if (moveableObject)
+		if (movableObject)
 		{
 			return "Pushable " + packName;
 		}
@@ -864,11 +935,6 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 	public bool isUI()
 	{
 		return false;
-	}
-
-	public Transform getTransform() 
-	{
-		return transform;
 	}
 
 	public string getTutorialHash()
@@ -922,6 +988,6 @@ public class EnemyMovement : MonoBehaviour, ISkillTarget, IRevealable, ITutorial
 
 	public Vector2 getDimensions()
 	{
-		return (new Vector2(getRectTransform().rect.width / 4f, getRectTransform().rect.height / 4f) * PlayerMovement.getTransform().localScale);
+		return (new Vector2(getRectTransform().rect.width / 4f, getRectTransform().rect.height / 4f) * PlayerMovement.getInstanceTransform().localScale);
 	}
 }

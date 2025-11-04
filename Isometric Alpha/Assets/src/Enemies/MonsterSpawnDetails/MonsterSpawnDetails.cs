@@ -72,7 +72,7 @@ public class MonsterSpawnDetails : OOCSpawnDetails
             addTutorialTargetComponent(enemyMovement, tutorialTargetHash);
         }
 
-        AreaManager.getMovementManager().addEnemySprite(enemyMovement.transform, enemyMovement.getMonsterPackIndex() + 1);
+        MovementManager.addMovementTracker(enemyMovement);
         enemyMovement.initializeAnimationManager();
         enemyMovement.setEnemyFacing(facing);
         enemyMovement.followsPlayer = chasesPlayer;
@@ -113,7 +113,7 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
     {
         enemyMovement.setEnemyFacing(Facing.Random);
         enemyMovement.followsPlayer = false;
-        AreaManager.getMovementManager().addEnemySprite(enemyMovement.transform, enemyMovement.getMonsterPackIndex() + 1);
+        MovementManager.addMovementTracker(enemyMovement);
     }
 
 

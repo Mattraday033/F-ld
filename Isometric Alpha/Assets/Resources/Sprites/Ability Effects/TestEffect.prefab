@@ -76,15 +76,15 @@ SpriteRenderer:
   m_SortingLayerID: -570789731
   m_SortingLayer: 7
   m_SortingOrder: 1
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 279639546, guid: 0bd2971aca1086145a721a7062dd7f36, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.64, y: 0.64}
+  m_Size: {x: 1.0039216, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &8123317049189917128
@@ -99,8 +99,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c6c8284735ecc4f99981890296a1be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
   animancer: {fileID: 5092550638677199902}
   key: 0
+  targetCoords:
+    row: 0
+    col: 0
   damage: 0
   crit: 0
   healsTarget: 0

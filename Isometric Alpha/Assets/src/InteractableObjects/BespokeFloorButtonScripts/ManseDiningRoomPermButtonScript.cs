@@ -44,7 +44,7 @@ public class ManseDiningRoomPermButtonScript : MonoBehaviour, IFloorButtonScript
 
 		// monsterToSpawn = MonsterPackListManager.getInstance().instantiateMonsterSprite(monsterToSpawn.index, monsterToSpawn);
 
-		// AreaManager.getMovementManager().addEnemySprite(monsterToSpawn.monsterSprite.transform, monsterToSpawn.index+1);
+		// MovementManager.addMovementTracker(monsterToSpawn.monsterSprite.transform, monsterToSpawn.index+1);
 		
 		// FadeToBlackManager.getInstance().setAndStartFadeBackIn();
 	}

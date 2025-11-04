@@ -84,6 +84,12 @@ public static class EnemyPackInfoList
     private readonly static EnemyPackInfo twoArmoredBats = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.twoArmoredBats},
                                                                                             DropTableList.slaveMineDT1Name);
 
+    private readonly static EnemyPackInfo twoGiantBatsTwoBatSwarmsTwoArmoredBats = new EnemyPackInfo(new EnemyAmount[] {  EnemyAmountList.twoGiantBats,
+                                                                                                                            EnemyAmountList.twoBatSwarms,
+                                                                                                                            EnemyAmountList.twoArmoredBats
+                                                                                                                            },
+                                                                                                                    DropTableList.slaveMineDT1Name);
+
     public static EnemyPackInfo getEnemyPackInfo(string areaName, int index)
     {
         return enemyPackInfoDict[areaName][index];
@@ -99,11 +105,11 @@ public static class EnemyPackInfoList
         #region Slave Shack Six
         list = new List<EnemyPackInfo>();
 
-        list.Add(twoGiantBatsTwoBatSwarms);
-        list.Add(twoGiantBatsTwoBatSwarms);
+        // list.Add(twoGiantBatsTwoBatSwarms);
+        // list.Add(twoGiantBatsTwoBatSwarms);
 
-        // list.Add(twoArmoredBats);
-        // list.Add(twoArmoredBats);
+        list.Add(twoGiantBatsTwoBatSwarmsTwoArmoredBats);
+        list.Add(twoGiantBatsTwoBatSwarmsTwoArmoredBats);
 
         enemyPackInfoDict.Add(LocationNameList.slaveShackSix, list);
         #endregion

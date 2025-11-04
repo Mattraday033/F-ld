@@ -90,7 +90,7 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
 
 	public virtual Vector2 getDimensions()
 	{
-		return (new Vector2(getRectTransform().rect.width/4f, getRectTransform().rect.height/4f) * PlayerMovement.getTransform().localScale);
+		return (new Vector2(getRectTransform().rect.width/4f, getRectTransform().rect.height/4f) * PlayerMovement.getInstanceTransform().localScale);
 	}
 
 	public virtual Vector2 getPosition()

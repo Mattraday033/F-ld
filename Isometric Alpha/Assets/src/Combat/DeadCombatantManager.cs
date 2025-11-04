@@ -6,8 +6,14 @@ using UnityEngine;
 
 public class DeadCombatantManager : MonoBehaviour
 {
-	public static DeadCombatantManager instance;
+    public static DeadCombatantManager instance;
 	
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeDeadCombatManager()
+    {
+        instance = null;
+    }
+
 	public static void handleDeadCombatants()
 	{
 		getInstance().cleanUpAllDeadCombatants();
@@ -19,8 +25,6 @@ public class DeadCombatantManager : MonoBehaviour
 	
 	public void cleanUpAllDeadCombatants()
     {
-        Debug.LogError("1 cleanUpAllDeadCombatants()");
-
 		ArrayList deadCombatantList = new ArrayList();
 		ArrayList listOfCombatants = CombatGrid.getAllCombatants();
 
@@ -43,13 +47,10 @@ public class DeadCombatantManager : MonoBehaviour
             }
         }
 		
-        Debug.LogError("2 cleanUpAllDeadCombatants()");
-        
 		foreach(Stats deadCombatant in deadCombatantList)
 		{			
 			deadCombatant.setToDeadSprite();
 		}
-		
 	}
 	
 	public void removeDeadCombatantCombatActions(ArrayList actionQueue)

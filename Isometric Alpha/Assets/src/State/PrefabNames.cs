@@ -224,7 +224,7 @@ public static class PrefabNames
     public const string negativeEffectFolderPath = abilityEffectFolderPath + "Negative Effect";
     public const string positiveEffectFolderPath = abilityEffectFolderPath + "Positive Effect";
     public const string healingEffectFolderPath = abilityEffectFolderPath + "Healing Effect";
-                    
+    public const string batSwarmEffectFolderPath = abilityEffectFolderPath + "Bat Swarm";
 
     public const string barrelsFolder = spriteFolder + "Barrels/";
     public const string vaultableBarrels = barrelsFolder + "VaultableBarrels";

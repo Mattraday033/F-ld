@@ -127,7 +127,7 @@ public class TutorialSequenceStepWindow : DescriptionPanel
 
         /*
 
-        Vector2 playerTransformLocalScale = PlayerMovement.getTransform().localScale;
+        Vector2 playerTransformLocalScale = PlayerMovement.getInstanceTransform().localScale;
 
         //Vector2 arrowIndicatorSizeOffset = new Vector2( 100f * descriptionPanelRectTransform.localScale.x * playerTransformLocalScale.x,
         //                                                150f * descriptionPanelRectTransform.localScale.y * playerTransformLocalScale.y);

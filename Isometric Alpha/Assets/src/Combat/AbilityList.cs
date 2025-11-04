@@ -86,14 +86,13 @@ public static class AbilityList
 
     public const string batClawName = "Bat Claw";
 	public readonly static DescriptionParams batClawDescription = DescriptionParams.build(batClawName, "The sharp talons of a bat", "Claw");
+    public const string swarmRushKey = "Swarm Rush";
 
     public const string harmlessKey = "Harmless";
 
 	public const string punchKey = "Punch";
 	public const string swapKey = "Swap";
 
-    public const string weakBatClawKey = "Weak Bat Claw";
-	public const string strongBatClawKey = "Strong Bat Claw";
 	public const string bossBatClawKey = "Boss Bat Claw";
 	public const string diveBombKey = "Dive Bomb";
 	public const string flurryKey = "Flurry";
@@ -162,9 +161,22 @@ public static class AbilityList
 	public static Dictionary<string,Ability> summonAbilityDictionary;
 	public static Dictionary<string,Ability> enemyAbilityDictionary;
 	public static Dictionary<string,Ability> miscAbilityDictionary;
+
+    public static Dictionary<string, ArrayList> companionAbilityDictionary;
 	
-	public static Dictionary<string,ArrayList> companionAbilityDictionary;
-	
+    private static void initializeAbilityListAtRunTime()
+    {
+        strAbilityLevel = 2;
+        dexAbilityLevel = 2;
+        wisAbilityLevel = 2;
+        chaAbilityLevel = 2;
+        
+        strAbilityIndex = 1;
+        dexAbilityIndex = 1;
+        wisAbilityIndex = 1;
+        chaAbilityIndex = 1;
+    }
+
     public static void initialize()
     {
         if(statAbilityDictionary != null &&
@@ -203,9 +215,9 @@ public static class AbilityList
 		enemyAbilityDictionary.Add(flurryKey, new Ability(CombatActionSettings.build(DescriptionParams.build(flurryKey, "A devastating surge of claws and jaws."), DamageParams.build("10", "5"), AnimationParams.build(CombatAnimationType.Effect))));
         enemyAbilityDictionary.Add(colonyCrushKey, new Ability(CombatActionSettings.build(DescriptionParams.build(colonyCrushKey, "A torrent of tiny bats is launched at the target."), DamageParams.build("5", "1"), TargetParams.build(Range.quadrupleBoxIndex))));
         enemyAbilityDictionary.Add(spawnPupsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(spawnPupsKey, "The bat calls forth it's pups to fight for it.")), EnemyStatsList.pupSpawnCombos));
-        enemyAbilityDictionary.Add(weakBatClawKey, new Ability(CombatActionSettings.build(weakBatClawKey, batClawDescription, DamageParams.build("3", "2"))));
-        enemyAbilityDictionary.Add(strongBatClawKey, new Ability(CombatActionSettings.build(strongBatClawKey, batClawDescription, DamageParams.build("6", "8"))));
-        enemyAbilityDictionary.Add(bossBatClawKey, new Ability(CombatActionSettings.build(strongBatClawKey, batClawDescription, DamageParams.build("12", "12"))));
+        enemyAbilityDictionary.Add(swarmRushKey, new Ability(CombatActionSettings.build(DescriptionParams.build(swarmRushKey, "The swarm flutters about their target, clawing and biting ferociously.", colonyCrushKey), DamageParams.build("3", "2"), AnimationParams.build(CombatAnimationType.Effect))));
+        enemyAbilityDictionary.Add(batClawName, new Ability(CombatActionSettings.build(batClawName, batClawDescription, DamageParams.build("6", "8"))));
+        enemyAbilityDictionary.Add(bossBatClawKey, new Ability(CombatActionSettings.build(batClawName, batClawDescription, DamageParams.build("12", "12"))));
         enemyAbilityDictionary.Add(diveBombKey, new SuicideAbility(CombatActionSettings.build(DescriptionParams.build(diveBombKey, "The bat dives straight for an enemy at lightning speed and collides with it, spraying everyone closeby with viscera and guano.", "DiveBomb"), DamageParams.build("5", "1"), TargetParams.build(Range.quadrupleBoxIndex))));
 
         //worm abilities

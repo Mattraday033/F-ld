@@ -2,88 +2,129 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PartyMemberMovement : MonoBehaviour
+public class PartyMemberMovement : MovementTracker
 {
+    private CharacterFacing characterFacing = new CharacterFacing();
 
-	public static Transform[] partyMemberTrain;
-	public static int stepCounter = 0;
+    #region MovementTracker Overrides
 
-	public static void instantiatePartyMemberTrain()
-	{
+    public override int getMovementIndex()
+    {
+        return -1;
+    }
+
+    public override void updateFacing()
+    {
+        if (directionMod.Equals(Vector3Int.zero))
+        {
+            return;
+        }
+
+        if (directionMod.Equals(MovementManager.distance1TileNorthEastGrid))
+        {
+            characterFacing.setFacing(Facing.NorthEast);
+
+        }
+        else if (directionMod.Equals(MovementManager.distance1TileSouthEastGrid))
+        {
+            characterFacing.setFacing(Facing.SouthEast);
+
+        }
+        else if (directionMod.Equals(MovementManager.distance1TileSouthWestGrid))
+        {
+            characterFacing.setFacing(Facing.SouthWest);
+
+        }
+        else if (directionMod.Equals(MovementManager.distance1TileNorthWestGrid))
+        {
+            characterFacing.setFacing(Facing.NorthWest);
+        }
+    }
+
+    #endregion
+
+    public static PartyMemberMovement[] partyMemberTrain;
+    public static int stepCounter;
+
+    [RuntimeInitializeOnLoadMethod]
+    public static void instantiatePartyMemberTrain()
+    {
         return; //turning off party member movement
 
-		Transform player = PlayerMovement.getTransform();
+        stepCounter = 0;
 
-		if (player == null)
-		{
-			return;
-		}
+        // Transform player = PlayerMovement.getInstanceTransform();
 
-		destroyPartyMemberTrain();
+        // if (player == null)
+        // {
+        //     return;
+        // }
 
-		if (AreaList.currentSceneIsHostile() || Flags.shouldStopPartyTrainSpawning())
-		{
-			return;
-		}
-		ArrayList partyMembersInFormation = new ArrayList();
-		List<string> trainGameObjectNames = PartyManager.getAllGameObjectNamesInTrain();
+        // destroyPartyMemberTrain();
 
-		foreach (string objectName in trainGameObjectNames)
-		{
-			partyMembersInFormation.Add(Instantiate(Resources.Load<GameObject>(objectName), player.transform.parent).transform);
-		}
+        // if (AreaList.currentSceneIsHostile() || Flags.shouldStopPartyTrainSpawning())
+        // {
+        //     return;
+        // }
+        List<PartyMemberMovement> partyMembersInFormation = new List<PartyMemberMovement>();
+        // List<string> trainGameObjectNames = PartyManager.getAllGameObjectNamesInTrain();
 
-		if (partyMembersInFormation.Count <= 0)
-		{
-			return;
-		}
+        // foreach (string objectName in trainGameObjectNames)
+        // {
+        //     partyMembersInFormation.Add(Instantiate(Resources.Load<GameObject>(objectName), player.transform.parent).transform);
+        // }
 
-		partyMemberTrain = new Transform[partyMembersInFormation.Count];
+        // if (partyMembersInFormation.Count <= 0)
+        // {
+        //     return;
+        // }
 
-		for (int formationIndex = (partyMemberTrain.Length - 1); formationIndex >= 0; formationIndex--)
-		{
-			partyMemberTrain[formationIndex] = (Transform)partyMembersInFormation[formationIndex];
-			partyMemberTrain[formationIndex].GetComponent<Collider2D>().enabled = false;
-		}
+        partyMemberTrain = new PartyMemberMovement[partyMembersInFormation.Count];
 
-		foreach (Transform partyMember in partyMemberTrain)
-		{
-			partyMember.position = MovementManager.getGrid().CellToWorld(SkillManager.getPlayerCoords());
-			setPartyMemberSpriteEnabled(partyMember, false);
-		}
-	}
+        // for (int formationIndex = (partyMemberTrain.Length - 1); formationIndex >= 0; formationIndex--)
+        // {
+        //     partyMemberTrain[formationIndex] = (Transform)partyMembersInFormation[formationIndex];
+        //     partyMemberTrain[formationIndex].GetComponent<Collider2D>().enabled = false;
+        // }
+
+        // foreach (Transform partyMember in partyMemberTrain)
+        // {
+        //     partyMember.position = MovementManager.getGrid().CellToWorld(SkillManager.getPlayerCoords());
+        //     setPartyMemberSpriteEnabled(partyMember, false);
+        // }
+    }
 
 	public static void hideOverlappingPartyMembers()
 	{
-		if (AreaList.currentSceneIsHostile() || partyMemberTrain == null || partyMemberTrain is null)
-		{
-			return;
-		}
+		// if (AreaList.currentSceneIsHostile() || partyMemberTrain == null || partyMemberTrain is null)
+		// {
+		// 	return;
+		// }
 
-		for (int partyMemberIndex = 0; partyMemberIndex < partyMemberTrain.Length; partyMemberIndex++)
-		{
-			Transform currentPartyMember = partyMemberTrain[partyMemberIndex];
-			Vector3Int currentPartyMemberCell = MovementManager.getCellWorld(currentPartyMember.position);
+		// for (int partyMemberIndex = 0; partyMemberIndex < partyMemberTrain.Length; partyMemberIndex++)
+		// {
+		// 	Transform currentPartyMember = partyMemberTrain[partyMemberIndex];
+		// 	Vector3Int currentPartyMemberCell = MovementManager.getCellWorld(currentPartyMember.position);
 
-			if (currentPartyMemberCell.Equals(MovementManager.getCellWorld(PlayerMovement.getInstance().transform.position)))
-			{
-				setPartyMemberSpriteEnabled(currentPartyMember, false);
-			}
-			else
-			{
-				for (int previousPartyMemberIndex = (partyMemberIndex - 1); previousPartyMemberIndex >= 0; previousPartyMemberIndex--)
-				{
-					Transform previousPartyMember = partyMemberTrain[previousPartyMemberIndex];
+		// 	if (currentPartyMemberCell.Equals(MovementManager.getCellWorld(PlayerMovement.getInstance().transform.position)))
+		// 	{
+		// 		setPartyMemberSpriteEnabled(currentPartyMember, false);
+		// 	}
+		// 	else
+		// 	{
+		// 		for (int previousPartyMemberIndex = (partyMemberIndex - 1); previousPartyMemberIndex >= 0; previousPartyMemberIndex--)
+		// 		{
+		// 			Transform previousPartyMember = partyMemberTrain[previousPartyMemberIndex];
 
-					Vector3Int previousPartyMemberCell = MovementManager.getCellWorld(previousPartyMember.position);
+		// 			Vector3Int previousPartyMemberCell = MovementManager.getCellWorld(previousPartyMember.position);
 
-					if (previousPartyMemberCell.Equals(currentPartyMemberCell))
-					{
-						setPartyMemberSpriteEnabled(currentPartyMember, false);
-					}
-				}
-			}
-		}
+		// 			if (previousPartyMemberCell.Equals(currentPartyMemberCell))
+		// 			{
+		// 				setPartyMemberSpriteEnabled(currentPartyMember, false);
+		// 			}
+		// 		}
+		// 	}
+		// }
 	}
 
 	private static void setPartyMemberSpriteEnabled(Transform partyMemberTransform, bool isEnabled)
@@ -98,64 +139,64 @@ public class PartyMemberMovement : MonoBehaviour
 
 	public static void showAllPartyMembers()
 	{
-		if (AreaList.currentSceneIsHostile() || partyMemberTrain == null || partyMemberTrain is null)
-		{
-			return;
-		}
+		// if (AreaList.currentSceneIsHostile() || partyMemberTrain == null || partyMemberTrain is null)
+		// {
+		// 	return;
+		// }
 
-		for (int trainIndex = (partyMemberTrain.Length - 1); trainIndex >= 0; trainIndex--)
-		{
-			setPartyMemberSpriteEnabled(partyMemberTrain[trainIndex], true);
-		}
+		// for (int trainIndex = (partyMemberTrain.Length - 1); trainIndex >= 0; trainIndex--)
+		// {
+		// 	setPartyMemberSpriteEnabled(partyMemberTrain[trainIndex], true);
+		// }
 	}
 
 	public static void destroyPartyMemberTrain()
 	{
-		if (partyMemberTrain == null || partyMemberTrain is null)
-		{
-			return;
-		}
+		// if (partyMemberTrain == null || partyMemberTrain is null)
+		// {
+		// 	return;
+		// }
 
-		foreach (Transform npc in partyMemberTrain)
-		{
-			if (npc != null)
-			{
-				GameObject.Destroy(npc.gameObject);
-			}
-		}
+		// foreach (Transform npc in partyMemberTrain)
+		// {
+		// 	if (npc != null)
+		// 	{
+		// 		GameObject.Destroy(npc.gameObject);
+		// 	}
+		// }
 
-		partyMemberTrain = new Transform[0];
+		// partyMemberTrain = new Transform[0];
 	}
 
 	public static void hidePartyMemberTrain()
 	{
-		if (partyMemberTrain == null || partyMemberTrain is null)
-		{
-			return;
-		}
+		// if (partyMemberTrain == null || partyMemberTrain is null)
+		// {
+		// 	return;
+		// }
 
-		foreach (Transform npc in partyMemberTrain)
-		{
-			if (npc != null)
-			{
-				npc.gameObject.SetActive(false);
-			}
-		}
+		// foreach (Transform npc in partyMemberTrain)
+		// {
+		// 	if (npc != null)
+		// 	{
+		// 		npc.gameObject.SetActive(false);
+		// 	}
+		// }
 	}
 	
 	public static void showPartyMemberTrain()
 	{
-		if(partyMemberTrain == null || partyMemberTrain is null)
-		{
-			return;
-		}
+		// if(partyMemberTrain == null || partyMemberTrain is null)
+		// {
+		// 	return;
+		// }
 		
-		foreach(Transform npc in partyMemberTrain)
-		{	
-			if(npc != null)
-			{
-				npc.gameObject.SetActive(true);
-			}
-		}
+		// foreach(Transform npc in partyMemberTrain)
+		// {	
+		// 	if(npc != null)
+		// 	{
+		// 		npc.gameObject.SetActive(true);
+		// 	}
+		// }
 	}
 }

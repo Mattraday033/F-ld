@@ -134,7 +134,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         enemyStatsDict.Add(MonsterNameList.giantBat, new EnemyStats(MonsterNameList.giantBat,
                                                                                       tenArmor,
                                                                                             25,
-                                               AbilityList.getAbility(null, AbilityList.strongBatClawKey),
+                                               AbilityList.getAbility(null, AbilityList.batClawName),
                                                                 new Trait[] { TraitList.master,
                                                                              TraitList.chaotic
                                                                             }));
@@ -143,7 +143,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         enemyStatsDict.Add(MonsterNameList.batSwarm, new EnemyStats(MonsterNameList.batSwarm,
                                                                                       zeroArmor,
                                                                                             5,
-                                               AbilityList.getAbility(null, AbilityList.weakBatClawKey),
+                                               AbilityList.getAbility(null, AbilityList.swarmRushKey),
                                                                 new Trait[] { TraitList.minion,
                                                                              TraitList.chaotic
                                                                             }));

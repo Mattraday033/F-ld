@@ -29,8 +29,6 @@ public class AnimationManager : MonoBehaviour
     //MonsterNameList.armoredBat
     public virtual void setAnimations(string monsterName)
     {
-        Debug.LogError("monsterName = " + monsterName);
-
         string folderPath = EnemyTypeFolderPathList.getEnemyTypeFolderPath(monsterName);
 
         if(folderPath == null)

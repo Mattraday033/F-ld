@@ -300,6 +300,12 @@ public class CombatActionSettings
         return CombatActionSettings.build(key, descriptionParams, damageParams, TargetParams.build(), frequencyParams, CostParams.build(), AnimationParams.build(), null, null);
     }
 
+    public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, AnimationParams animationParams)
+    {
+        return CombatActionSettings.build(key, descriptionParams, damageParams, TargetParams.build(), FrequencyParams.build(), CostParams.build(), animationParams, null, null);
+    }
+
+
     public static CombatActionSettings build(DescriptionParams descriptionParams, DamageParams damageParams, FrequencyParams frequencyParams)
     {
         return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, TargetParams.build(), frequencyParams, CostParams.build(), AnimationParams.build(), null, null);

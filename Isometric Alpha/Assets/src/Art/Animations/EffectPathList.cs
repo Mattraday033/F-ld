@@ -25,12 +25,15 @@ public static class EffectPathList
 
         //Positive Effects
         effectByActionNameDict.Add(ChargeUpAbility.chargingUpName, PrefabNames.positiveEffectFolderPath);
-        
+
         //Damaging Effects
         effectByActionNameDict.Add(AbilityList.batClawName, PrefabNames.damagingEffectFolderPath);
-        effectByActionNameDict.Add(AbilityList.flurryKey, PrefabNames.damagingEffectFolderPath);
+        // effectByActionNameDict.Add(AbilityList.flurryKey, PrefabNames.damagingEffectFolderPath);
         effectByActionNameDict.Add(AbilityList.godSpellAbilityKey, PrefabNames.damagingEffectFolderPath);
 
+        //Bat Swarm Effects
+        effectByActionNameDict.Add(AbilityList.swarmRushKey, PrefabNames.batSwarmEffectFolderPath);
+        effectByActionNameDict.Add(AbilityList.flurryKey, PrefabNames.batSwarmEffectFolderPath);
     }
 
 }

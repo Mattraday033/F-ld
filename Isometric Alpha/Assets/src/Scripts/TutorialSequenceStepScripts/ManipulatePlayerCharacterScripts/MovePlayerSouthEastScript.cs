@@ -7,7 +7,9 @@ public class MovePlayerSouthEastScript  : TutorialSequenceStepScript
     public override void runScript(GameObject target)
     {
         FaceSouthEastScript.runScript();
-        AreaManager.getMovementManager().moveAllSprites(MovementManager.distance1TileSouthEastGrid);
+        PlayerMovement.getInstance().directionMod = MovementManager.distance1TileSouthEastGrid;
+        AreaManager.getMovementManager().moveAllSprites();
+
     }
 }
 

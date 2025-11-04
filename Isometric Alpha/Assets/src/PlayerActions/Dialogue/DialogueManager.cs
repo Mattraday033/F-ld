@@ -1168,16 +1168,16 @@ public class DialogueManager : MonoBehaviour
 
                 case "changescene":
 
-                    NewSceneTransition transition = currentDialogue.cameraFoci[1].GetComponent<NewSceneTransition>();
+                    // NewSceneTransition transition = currentDialogue.cameraFoci[1].GetComponent<NewSceneTransition>();
 
-                    if (transition == null)
-                    {
-                        Debug.LogError("NewSceneTransition component not found on " + currentDialogue.cameraFoci[1].name);
-                    }
-                    else
-                    {
-                        TransitionManager.getInstance().changeSceneWithoutTrigger(transition.getTransitionInfo());
-                    }
+                    // if (transition == null)
+                    // {
+                    //     Debug.LogError("NewSceneTransition component not found on " + currentDialogue.cameraFoci[1].name);
+                    // }
+                    // else
+                    // {
+                    //     TransitionManager.getInstance().changeSceneWithoutTrigger(transition.getTransitionInfo());
+                    // }
 
                     continueStory();
                     break;

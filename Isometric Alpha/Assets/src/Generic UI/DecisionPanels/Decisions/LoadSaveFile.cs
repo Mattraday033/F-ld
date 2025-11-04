@@ -52,6 +52,7 @@ public class LoadSaveFile : IDecision
         SaveHandler.createSavedGameList();
         OverallUIManager.setCurrentScreenType(null);
         TutorialSequenceList.initializeTutorials();
+        MovementManager.initializeMovementManager();
         State.dialogueUponSceneLoadKey = null;
 
         if (!SceneManager.GetActiveScene().name.Equals(SceneNameList.loadingScreen))
