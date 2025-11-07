@@ -206,6 +206,8 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
 
     public void disableOOCUI()
     {
+        Debug.LogError("Disabling OOCUI");
+
         if(oocUIParent == null || oocUIParent is null)
         {
             return;

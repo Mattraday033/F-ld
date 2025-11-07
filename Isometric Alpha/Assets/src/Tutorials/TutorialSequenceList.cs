@@ -193,7 +193,7 @@ public static class TutorialSequenceList
 
         TutorialSequence interactableObjectTutorialSequence = new TutorialSequence(OOCActivity.inDialogue, doNoSkipCurrentActivityChange, interactableObjectTutorialSeenFlag, new TutorialSequenceStep[] { stepOne });
 
-        interactableObjectTutorialSequence.setSkipScript(new SkipTutorialScript());
+        interactableObjectTutorialSequence.setSkipScript(new SkipInteractionTutorialScript());
         tutorialSequenceDictionary.Add(interactableRubbleTutorialSequenceKey, interactableObjectTutorialSequence);
     }
 
@@ -203,7 +203,7 @@ public static class TutorialSequenceList
 
         TutorialSequence vaultableObjectTutorialSequence = new TutorialSequence(OOCActivity.inDialogue, doNoSkipCurrentActivityChange, interactableObjectTutorialSeenFlag, new TutorialSequenceStep[] { stepOne });
 
-        vaultableObjectTutorialSequence.setSkipScript(new SkipTutorialScript());
+        vaultableObjectTutorialSequence.setSkipScript(new SkipInteractionTutorialScript());
         tutorialSequenceDictionary.Add(vaultableObjectTutorialSequenceKey, vaultableObjectTutorialSequence);
     }
 

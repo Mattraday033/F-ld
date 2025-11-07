@@ -141,7 +141,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         loadCombatAction(action);
 
-        if (!CombatStateManager.isPlayerSurpriseRound() && loadedCombatAction != null && loadedCombatAction.getOnlyUsableDuringSurpriseRound())
+        if (!CombatStateManager.isPlayerSurpriseRound() && loadedCombatAction != null && loadedCombatAction.onlyUsableDuringSurpriseRound)
         {
             greyOutAbility();
         }
@@ -152,7 +152,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         setDisplay(abilityIconSprite, iconBackgroundColor);
         loadCombatAction(action);
 
-        if (!CombatStateManager.isPlayerSurpriseRound() && loadedCombatAction != null && loadedCombatAction.getOnlyUsableDuringSurpriseRound())
+        if (!CombatStateManager.isPlayerSurpriseRound() && loadedCombatAction != null && loadedCombatAction.onlyUsableDuringSurpriseRound)
         {
             greyOutAbility();
         }

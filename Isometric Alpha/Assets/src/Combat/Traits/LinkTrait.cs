@@ -5,7 +5,7 @@ using UnityEngine;
 public class LinkTrait : Trait
 {
     public const string linkTraitType = "Link Trait";
-    private static CombatAction linkAction = new CombatAction(null, null);
+    private Ability linkAction = new Ability(CombatActionSettings.build(DescriptionParams.build("Link Trait", "Link Damage")));
 
     private ArrayList linkedTargets;
 

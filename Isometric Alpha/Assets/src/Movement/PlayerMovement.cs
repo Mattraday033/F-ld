@@ -1456,14 +1456,29 @@ public class PlayerMovement : MovementTracker
         }
     }
 
+    private Vector3Int getDirectionModFromFacing()
+    {
+        switch(State.playerFacing.getFacing())
+        {
+            case Facing.NorthEast:
+                return MovementManager.distance1TileNorthEastGrid;
+            case Facing.NorthWest:
+                return MovementManager.distance1TileNorthWestGrid;
+            case Facing.SouthEast:
+                return MovementManager.distance1TileSouthEastGrid;
+            default:
+                return MovementManager.distance1TileSouthWestGrid;
+        }
+    }
+
     private Vector3 colliderWorldPosition() //world used for checking for colliders and drawing gizmos
     {
-        return AreaManager.getMovementManager().grid.GetCellCenterWorld(AreaManager.getMovementManager().grid.WorldToCell(transform.position) + _DirectionMod) - new Vector3(0f, .2f, 0);
+        return AreaManager.getMovementManager().grid.GetCellCenterWorld(AreaManager.getMovementManager().grid.WorldToCell(transform.position) + getDirectionModFromFacing()) - new Vector3(0f, .2f, 0);
     }
 
     private Vector3 colliderWorldPosition(int multiplier) //world used for checking for colliders and drawing gizmos, with multiplier
     {
-        return AreaManager.getMovementManager().grid.GetCellCenterWorld(AreaManager.getMovementManager().grid.WorldToCell(transform.position) + (_DirectionMod) * multiplier) - new Vector3(0f, .2f, 0);
+        return AreaManager.getMovementManager().grid.GetCellCenterWorld(AreaManager.getMovementManager().grid.WorldToCell(transform.position) + (getDirectionModFromFacing()) * multiplier) - new Vector3(0f, .2f, 0);
     }
 
     public static Vector3Int getMovementGridCoords()

@@ -248,7 +248,8 @@ public static class PrefabNames
     public const string cratesFolder = spriteFolder + "Crates/";
     public const string squareCratesSmall = cratesFolder + "Square Crates Small";
 
-    public const string halfWallsFolder = spriteFolder + "Half Walls/";
+    public const string tilesFolder = spriteFolder + "Tiles/";
+    public const string halfWallsFolder = tilesFolder + "Half Walls/";
     public const string shackWallHalf = halfWallsFolder + "Shack Wall Half";
 
     public const string rubbleFolder = spriteFolder + "Rubble/";

@@ -28,10 +28,19 @@ public class Ability: CombatAction, IJSONConvertable
 	private int maximumCooldown;
 	
 	public EnemyStats spawnType;
-	
-	public bool selfTargeting;
-	public bool onlyUsableDuringSurpriseRound; 
-	
+
+    public bool selfTargeting;
+    
+    private bool _OnlyUsableDuringSurpriseRound; 
+    public override bool onlyUsableDuringSurpriseRound
+    {
+        get => _OnlyUsableDuringSurpriseRound;
+        set
+        {
+            _OnlyUsableDuringSurpriseRound = value;
+        }
+    }
+
 	private Trait appliedTrait;
 
 	private ActionCostType[] costTypes = new ActionCostType[] { ActionCostType.None };
@@ -63,7 +72,7 @@ public class Ability: CombatAction, IJSONConvertable
 
 		maximumSlots = settings.frequencyParams.maximumSlots;
 		maximumCooldown = settings.frequencyParams.maximumCooldown;
-		onlyUsableDuringSurpriseRound = settings.frequencyParams.onlyUsableDuringSurpriseRound;
+		_OnlyUsableDuringSurpriseRound = settings.frequencyParams.onlyUsableDuringSurpriseRound;
 
 		costTypes = settings.costParams.costTypes;
 		actionCosts = settings.costParams.actionCosts;
@@ -213,11 +222,6 @@ public class Ability: CombatAction, IJSONConvertable
 		this.statKey = statKey;
 		this.requiredStatLevel = int.Parse(statKey.Split("-")[1]);
 	}
-
-    public override bool getOnlyUsableDuringSurpriseRound()
-    {
-        return onlyUsableDuringSurpriseRound;
-    }
 
     public virtual void setAppliedTrait(Trait trait)
     {

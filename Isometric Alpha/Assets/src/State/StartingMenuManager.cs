@@ -23,10 +23,16 @@ public class StartingMenuManager : MonoBehaviour
 
 	private static StartingMenuManager instance;
 
-	public static StartingMenuManager getInstance()
-	{
-		return instance;
-	}
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeStartingMenuManager()
+    {
+        instance = null;
+    }
+
+    public static StartingMenuManager getInstance()
+    {
+        return instance;
+    }
 
     private void Awake()
     {

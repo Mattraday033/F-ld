@@ -492,7 +492,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
     {
         foreach (AbilityMenuButton button in abilityButtons)
         {
-            if (button.loadedCombatAction != null && button.enabled && button.loadedCombatAction.getOnlyUsableDuringSurpriseRound())
+            if (button.loadedCombatAction != null && button.enabled && button.loadedCombatAction.onlyUsableDuringSurpriseRound)
             {
                 button.greyOutAbility();
             }

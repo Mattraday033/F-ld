@@ -9,16 +9,16 @@ using System.Linq;
 [System.Serializable]
 public struct GridCoords
 {
-	public static GridCoords incrementNorth = new GridCoords(-1, 0);
-	public static GridCoords incrementNorthEast = new GridCoords(-1, 1);
-	public static GridCoords incrementEast = new GridCoords(0, 1);
-	public static GridCoords incrementSouthEast = new GridCoords(1, 1);
-	public static GridCoords incrementSouth = new GridCoords(1, 0);
-	public static GridCoords incrementSouthWest = new GridCoords(1, -1);
-	public static GridCoords incrementWest = new GridCoords(0, -1);
-	public static GridCoords incrementNorthWest = new GridCoords(-1, -1);
+	public readonly static GridCoords incrementNorth = new GridCoords(-1, 0);
+	public readonly static GridCoords incrementNorthEast = new GridCoords(-1, 1);
+	public readonly static GridCoords incrementEast = new GridCoords(0, 1);
+	public readonly static GridCoords incrementSouthEast = new GridCoords(1, 1);
+	public readonly static GridCoords incrementSouth = new GridCoords(1, 0);
+	public readonly static GridCoords incrementSouthWest = new GridCoords(1, -1);
+	public readonly static GridCoords incrementWest = new GridCoords(0, -1);
+	public readonly static GridCoords incrementNorthWest = new GridCoords(-1, -1);
 
-	public static GridCoords[] increments = new GridCoords[]{incrementNorth, incrementNorthEast, incrementEast, incrementSouthEast,
+	public readonly static GridCoords[] increments = new GridCoords[]{incrementNorth, incrementNorthEast, incrementEast, incrementSouthEast,
 																incrementSouth, incrementSouthWest, incrementWest, incrementNorthWest};
 
 	public int row;
@@ -109,14 +109,27 @@ public enum CombatAnimationType{ None, Projectile, Effect }
 //a single thing that the player has selected themself or a party member to do during combat
 //Or a single thing the enemy has elected to do during their turn, typically based on logic explained in their trait descriptions
 [System.Serializable]
-public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortable, IDescribableInBlocks, IFormulaSource, IStatBoostSource
+public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortable, IDescribableInBlocks, IFormulaSource, IStatBoostSource
 {
+
+    #region Constants
+
     private const string noSlotsRequiredMessage = "No Slots Required";
     private const string noCooldownMessage = "No Cooldown";
     private const string harmlessMessage = "Harmless";
     private const string cannotCritMessage = "Cannot Crit";
     private const int noDamage = -1;
     protected const int singleExuberanceStack = 1;
+
+    #endregion
+
+    #region Global Variables
+
+    public virtual bool onlyUsableDuringSurpriseRound
+    {
+        get => false;
+        set { }
+    }
 
     public Stats actorStats;
 
@@ -130,17 +143,14 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
 
     public ArrayList previousTargets = new ArrayList();
 
-    public int framesToWaitPerProjectile = 50;
-
     private Stats previewActor;
     public bool inPreviewMode { get; private set; } = false;
 
     public bool cannotDealDamage;
 
-    // public CombatAction()
-    // {
-    // 	//0 references but somehow necessary to compile without a :base() in the constructors of derived classes
-    // }
+    #endregion
+
+    #region Constructors
 
     public CombatAction(Stats actor, Selector selector)
     {
@@ -148,295 +158,9 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
         this.selector = selector;
     }
 
-    public virtual void applySettings(CombatActionSettings settings)
-    {
-        //empty on purpose
-    }
+    #endregion
 
-    public virtual Selector getTargetSelector() //used for finding selectors when enemies are targeting
-    {
-        SelectorManager selectorManager = SelectorManager.getInstance();
-        Selector selector = null;
-        Stats actor = getActorStats();
-
-        ArrayList listOfTargets;
-
-        if (actor.shouldTargetEnemy())
-        {
-            listOfTargets = CombatGrid.getAllAliveEnemyCombatants();
-        }
-        else
-        {
-            listOfTargets = CombatGrid.getAllAliveAllyCombatants();
-        }
-
-        if (isSelfTargeting())
-        {
-            selector = selectorManager.selectors[getRangeIndex()].clone();
-            selector.setToLocation(getActorCoords());
-            return selector;
-        }
-        //Debug.LogError(actor.getName() + " is at position " + actor.position.ToString());
-
-        Trait[] traits = actor.traits;
-
-        foreach (Trait trait in traits)
-        {
-            if (trait == null)
-            {
-                continue;
-            }
-
-            selector = trait.findTargetLocation(selectorManager.selectors[getRangeIndex()].clone(), listOfTargets);
-
-            if (selector != null)
-            {
-                break;
-            }
-        }
-
-        return selector;
-    }
-
-    public void setFramesToWaitPerProjectile(int newWait)
-    {
-        framesToWaitPerProjectile = newWait;
-    }
-
-    public void addPreviousTarget(GridCoords coords)
-    {
-        previousTargets.Add(coords);
-    }
-
-    public virtual int getMaximumCooldown()
-    {
-        return 1;
-    }
-
-    public string getMaximumCooldownForDisplay()
-    {
-        if (getMaximumCooldown() - 1 <= 0)
-        {
-            return noCooldownMessage;
-        }
-        else if (getMaximumCooldown() - 1 == 1)
-        {
-            return (getMaximumCooldown() - 1) + " Round";
-        }
-        else
-        {
-            return (getMaximumCooldown() - 1) + " Rounds";
-        }
-    }
-
-    public virtual int getCooldownRemaining()
-    {
-        return cooldownRemaining;
-    }
-
-    public virtual void setCooldownToMax()
-    {
-        setCooldownRemaining(1);
-
-    }
-
-    public virtual CombatAnimationType getCombatAnimationType()
-    {
-        return CombatAnimationType.Projectile;
-    }
-
-    public void setCooldownRemaining(int cooldownRemaining)
-    {
-        this.cooldownRemaining = cooldownRemaining;
-    }
-
-    public virtual void takeOffCooldown()
-    {
-        setCooldownRemaining(0);
-    }
-
-    public void tickDown()
-    {
-        if (cooldownRemaining > 0)
-        {
-            setCooldownRemaining(cooldownRemaining - 1);
-        }
-    }
-
-    public virtual string getUseDescription()
-    {
-        return "";
-    }
-
-    public GridCoords getPreviousTarget()
-    {
-        GridCoords previousTarget = (GridCoords)previousTargets[previousTargets.Count - 1];
-
-        previousTargets.RemoveAt(previousTargets.Count - 1);
-
-        return previousTarget;
-    }
-
-    public void setToPreviewMode()
-    {
-        previewActor = getActorStats().clone();
-
-        inPreviewMode = true;
-    }
-
-    public virtual void onAddToAbilityMenu() //for updating things like checking for source item quantity
-    {
-        // Empty on purpose
-    }
-
-    public void leavePreviewMode()
-    {
-        inPreviewMode = false;
-    }
-
-    public virtual bool isSelfTargeting()
-    {
-        return false;
-    }
-
-    public virtual GridCoords getSecondaryCoords()
-    {
-        throw new IOException("Base version of getSecondaryCoords() was called erroneously");
-    }
-
-    public virtual void setSecondaryCoords(GridCoords coords)
-    {
-        throw new IOException("Base version of setSecondaryCoords() was called erroneously");
-    }
-
-    public virtual bool secondaryCoordsRequiresEmptySpace()
-    {
-        return false;
-    }
-
-    public virtual bool requiresSecondaryCoords()
-    {
-        return false;
-    }
-    public virtual bool requiresTertiaryCoords()
-    {
-        return false;
-    }
-
-    public virtual bool resetCoordsWhenChoosingTertiary() // if true, when the player backs out of choosing the tertiary target, then the previous selector will snap to it's default position 
-    {
-        return false;
-    }
-
-    public virtual bool resetCoordsOnBackOutOfTertiary() // if true, when the player backs out of choosing the tertiary target, then the previous selector will snap to it's default position 
-    {
-        return false;
-    }
-
-    public virtual bool targetsAllySection()
-    {
-        return false;
-    }
-
-    public virtual bool targetsOnlyEmptySpace()
-    {
-        return false;
-    }
-
-    public virtual bool tertiaryCoordsRequiresEmptySpace()
-    {
-        throw new IOException("The base class version of tertiaryCoordsRequiresEmptySpace() was called extraneously");
-    }
-
-    public virtual void setTertiaryCoords(GridCoords coords)
-    {
-        throw new IOException("The base class version of setTertiaryCoords() was called extraneously");
-    }
-
-    public virtual string getKey()
-    {
-        throw new IOException("The base class version of getKey() was called extraneously");
-    }
-
-    public virtual Selector getSelector()
-    {
-        return selector;
-    }
-
-    public virtual int getSaveType()
-    {
-        throw new IOException("The base class version of getSaveType() was called extraneously");
-    }
-
-    public virtual int getRangeIndex()
-    {
-        throw new IOException("The base class version of getRangeIndex() was called extraneously");
-    }
-
-    public virtual string getRangeTitle()
-    {
-        throw new IOException("The base class version of getRangeTitle() was called extraneously");
-    }
-
-    public virtual bool usableWithoutItemsInInventory()
-    {
-        return true;
-    }
-
-    public virtual Item getSourceItem()
-    {
-        return null;
-    }
-
-    public virtual void setSourceItem(Item sourceItem)
-    {
-        throw new IOException("The base class version of setSourceItem() was called extraneously");
-    }
-
-    public virtual void setOffHandWeapon(Weapon offHandWeapon)
-    {
-        //empty on purpose
-    }
-
-    public bool actorIsPriorityAttacker()
-    {
-        if (getActorCoords().Equals(GridCoords.getDefaultCoords()) || getActorStats() == null)
-        {
-            return false;
-        }
-
-        return getActorStats().isPriorityAttacker();
-    }
-
-    public bool actorIsLowPriorityAttacker()
-    {
-        if (getActorCoords().Equals(GridCoords.getDefaultCoords()) || getActorStats() == null)
-        {
-            return false;
-        }
-
-        return getActorStats().isPriorityAttacker();
-    }
-
-    public virtual string getIconName()
-    {
-        throw new IOException("The base class version of getIconName() was called extraneously");
-    }
-
-    public Sprite getIconSprite()
-    {
-        return Helpers.loadSpriteFromResources(getIconName());
-    }
-
-    public virtual string getName()
-    {
-        throw new IOException("The base class version of getName() was called extraneously");
-    }
-
-    public virtual string getDisplayType()
-    {
-        throw new IOException("The base class version of getDisplayType() was called extraneously");
-    }
+    #region Crit and Damage
 
     public virtual string getDamageFormula()
     {
@@ -513,139 +237,9 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
         return DamageCalculator.calculateFormula(getCritFormula(), getActorStats()) + " %";
     }
 
-    public string getCritFormulaForDisplay()
-    {
-        if (getCritFormulaTotal() <= 0)
-        {
-            return cannotCritMessage;
-        }
+    #endregion
 
-        return getCritFormula() + " %";
-    }
-
-    public virtual int getMaximumSlots()
-    {
-        return 1;
-    }
-
-    public virtual bool hasRepetitionsRemaining()
-    {
-        return false;
-    }
-
-    public virtual string getMaximumSlotsForDisplay()
-    {
-        if (getMaximumSlots() <= 0)
-        {
-            return noSlotsRequiredMessage;
-        }
-        else
-        {
-            return getMaximumSlots() + " Slot(s)";
-        }
-    }
-
-    public virtual bool takesAWeaponSlot()
-    {
-        return false;
-    }
-
-    public bool actorIsPlayer()
-    {
-        if (getActorCoords().Equals(PartyManager.getPlayerStats().position))
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    public bool hasAvailableSlots(IActionArrayStorage actionArrayStorage)
-    {
-        return hasAvailableSlots(actionArrayStorage.getStoredCombatActionArray());
-    }
-
-    public virtual bool hasAvailableSlots(CombatActionArray combatActionArray)
-    {
-        return combatActionArray.hasAvailableSlots(this);
-    }
-
-    public virtual bool requiresAnAction()
-    {
-        return true;
-    }
-
-    public virtual bool unactivatable()
-    {
-        return false;
-    }
-
-    public virtual bool canBePlacedInActionSlot()
-    {
-        return true;
-    }
-
-    public virtual CombatAction alternateActionWhenPlacedInActionSlot()
-    {
-        return null;
-    }
-
-    public bool actorIsSlowed()
-    {
-        if (getActorStats() == null)
-        {
-            return false;
-        }
-        else
-        {
-            return getActorStats().isSlowed();
-        }
-    }
-
-    public virtual bool autoApply()
-    {
-        return false;
-    }
-
-    public virtual Trait getAppliedTrait()
-    {
-        return null;
-    }
-
-    //sometimes you want an applied trait, but you don't want to describe it as in the case of activated passives which
-    //apply a trait that is basically a copy of their ability description. In this case it would be redundant to describe
-    //both, and in these cases the action should reimplement getAppliedTraitForDescription() to return null or another trait
-    public virtual Trait getAppliedTraitForDescription()
-    {
-        return getAppliedTrait();
-    }
-
-    //nonapplied related traits are traits that may be related to an action, but aren't directly applied by it, such as the
-    //afraid trait with the activated passive Devastating Criticals. It's applied by a random chance on crit, not applied by the
-    //activated passive ability itself.
-    public virtual ArrayList getNonAppliedRelatedTraits()
-    {
-        return new ArrayList();
-    }
-
-    public virtual ArrayList getTraitsToDescribe()
-    {
-        ArrayList listOfTraits = new ArrayList();
-
-        listOfTraits.AddRange(getNonAppliedRelatedTraits());
-
-        if (getAppliedTraitForDescription() != null)
-        {
-            listOfTraits.Add(getAppliedTraitForDescription());
-        }
-
-        return listOfTraits;
-    }
-
-    public virtual int[] findFinalDamage(Stats targetCombatant)
-    {
-        return findFinalDamage(targetCombatant, false);
-    }
+    #region Perform Combat Action
 
     public virtual int[] findFinalDamage(Stats targetCombatant, bool isCrit)
     {
@@ -674,11 +268,6 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
         int finalDamage = targetCombatant.modifyIncomingDamage(baseDamage);
 
         return new int[] { finalDamage };
-    }
-
-    public virtual ScriptOnLanding getLandingScript()
-    {
-        return null;
     }
 
     public virtual void performCombatAction() //virtual because some abilities target the ground below their targets, such as GroundEffectAbility
@@ -718,6 +307,48 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
 
             applyTrait(targetCombatant);
         }
+    }
+
+    #endregion
+
+    #region Animations
+
+    public virtual void playActivationAnimation()
+    {
+        getActorStats().playAttackAnimation();
+    }
+
+    #region Projectiles and Effects
+
+    public void createEffectAnimation(GridCoords targetCoords)
+    {
+        createEffectAnimation(targetCoords, false, noDamage, healsTarget(), targetMustBeDead());
+    }
+
+    public void createEffectAnimation(GridCoords targetCoords, bool crit, int damageNumber)
+    {
+        createEffectAnimation(targetCoords, crit, damageNumber, healsTarget(), targetMustBeDead());
+    }
+
+    public void createEffectAnimation(GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
+    {
+        switch (getCombatAnimationType())
+        {
+            case CombatAnimationType.None:
+                CombatAnimationManager.loadInvisibleProjectile(getActorCoords(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
+                break;
+            case CombatAnimationType.Projectile:
+                CombatAnimationManager.loadProjectile(getActorCoords(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead, getLandingScript());
+                break;
+            case CombatAnimationType.Effect:
+                CombatAnimationManager.loadInstantEffect(getName(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
+                break;
+        }
+    }
+
+    public virtual ScriptOnLanding getLandingScript()
+    {
+        return null;
     }
 
     public virtual int sendProjectileAt(GridCoords coords, Stats targetCombatant, int projectileNumber)
@@ -779,38 +410,12 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
                 }
 
                 targetCombatant.modifyCurrentHealth(finalDamage, healsTarget());
-                
+
                 return 1;
             }
         }
 
         return 0;
-    }
-
-    public void createEffectAnimation(GridCoords targetCoords)
-    {
-        createEffectAnimation(targetCoords, false, noDamage, healsTarget(), targetMustBeDead());
-    }
-
-    public void createEffectAnimation(GridCoords targetCoords, bool crit, int damageNumber)
-    {
-        createEffectAnimation(targetCoords, crit, damageNumber, healsTarget(), targetMustBeDead());
-    }
-
-    public void createEffectAnimation(GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
-    {
-        switch (getCombatAnimationType())
-        {
-            case CombatAnimationType.None:
-                CombatAnimationManager.loadInvisibleProjectile(getActorCoords(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
-                break;
-            case CombatAnimationType.Projectile:
-                CombatAnimationManager.loadProjectile(getActorCoords(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead, getLandingScript());
-                break;
-            case CombatAnimationType.Effect:
-                CombatAnimationManager.loadInstantEffect(getName(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
-                break;
-        }
     }
 
     public int sendProjectileAt(GridCoords coords, Stats targetCombatant, int projectileNumber, bool noDamage)
@@ -855,7 +460,7 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
                     {
                         Exuberances.addExuberance(MultiStackProcType.GreenLeaf, singleExuberanceStack);
                     }
-                    
+
                     createEffectAnimation(coords, crit, finalDamage);
                 }
 
@@ -903,232 +508,21 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
         return 0;
     }
 
-    public Stats getStatSource()
+    #endregion
+
+    #endregion
+
+    #region Sprite and GameObject
+
+    public virtual string getIconName()
     {
-        return getActorStats();
+        throw new IOException("The base class version of getIconName() was called extraneously");
     }
 
-    public virtual void applyTrait(Stats target)
+
+    public Sprite getIconSprite()
     {
-        Trait traitToApply = getAppliedTrait();
-
-        if (target == null || traitToApply == null)
-        {
-            return;
-        }
-
-        traitToApply.traitApplier = getActorStats();
-
-        if (!inPreviewMode && actorIsAlly() && traitToApply.isBuff())
-        {
-            Exuberances.addExuberance(MultiStackProcType.BlueShield, singleExuberanceStack);
-        }
-
-        if (!inPreviewMode && actorIsAlly() && traitToApply.isDebuff())
-        {
-            Exuberances.addExuberance(MultiStackProcType.YellowThorn, singleExuberanceStack);
-        }
-
-        target.addTrait(traitToApply);
-    }
-
-    public virtual void playActivationAnimation()
-    {
-        getActorStats().playAttackAnimation();
-    }
-
-    public bool actorIsAlly()
-    {
-        return CombatGrid.positionIsOnAlliedSide(getActorStats().position);
-    }
-
-    public virtual bool healsTarget()
-    {
-        return false;
-    }
-
-    public virtual bool targetMustBeDead()
-    {
-        return false;
-    }
-
-    public virtual bool repositionsCaster()
-    {
-        return false;
-    }
-
-    public virtual bool getOnlyUsableDuringSurpriseRound()
-    {
-        return false;
-    }
-
-    public virtual bool killsCaster()
-    {
-        return false;
-    }
-
-    public virtual void queueingAction()
-    {
-        //empty on purpose
-    }
-
-    public virtual void unqueueingAction()
-    {
-        //empty on purpose
-    }
-
-    public virtual void activatingAction()
-    {
-        //empty on purpose
-    }
-
-    public GameObject getSelectorObject()
-    {
-        if (selector == null)
-        {
-            return null;
-        }
-
-        return selector.getSelectorObject();
-    }
-
-    public virtual void setSelector(Selector selector)
-    {
-        this.selector = selector;
-    }
-
-    public virtual GridCoords getActorCoords()
-    {
-        return actorStats.position.clone();
-    }
-
-    public virtual void setActorCoords(GridCoords newPosition)
-    {
-        if (actorStats == null)
-        {
-            actorStats = CombatGrid.getCombatantAtCoords(newPosition);
-        }
-        else
-        {
-            actorStats.position = newPosition;
-        }
-    }
-
-    public virtual void setActor(Stats actor)
-    {
-        this.actorStats = actor;
-    }
-
-    public virtual GridCoords getTargetCoords()
-    {
-        if (getSelector() != null)
-        {
-            return getSelector().getCoords();
-        }
-        else
-        {
-            return GridCoords.getDefaultCoords();
-        }
-    }
-
-    public virtual bool needsItemQuantityPanel()
-    {
-        return false;
-    }
-
-    public virtual int[] getActionCosts()
-    {
-        return new int[] { 0 };
-    }
-
-    public virtual ActionCostType[] getActionCostTypes()
-    {
-        return new ActionCostType[] { ActionCostType.None };
-    }
-
-    //convertToJson is for save files, you will never need to save an actions coords so actor/target coords are not saved
-    public virtual string convertToJson()
-    {
-        throw new IOException("The base class version of convertToJson() was called extraneously");
-    }
-
-    public static CombatAction extractFromJson(Stats statsSource, string json)
-    {
-        if (json == null || json.ToLower().Equals("null"))
-        {
-            return null;
-        }
-
-        json = json.Replace("\"CombatActionSaveType\":\"0}", "\"CombatActionSaveType\":\"0\"}");
-        json = json.Replace("\"CombatActionSaveType\":\"1}", "\"CombatActionSaveType\":\"1\"}");
-        json = json.Replace("\"CombatActionSaveType\":\"2}", "\"CombatActionSaveType\":\"2\"}");
-
-        string[] kvps = json.Replace("{", "").Replace("}", "").Replace("\"", "").Split(",");
-        int saveType = int.Parse(kvps[kvps.Length - 1].Split(":")[1]);
-
-        switch (saveType)
-        {
-            case (int)CombatActionSaveType.Attack:
-                return (CombatAction)new Attack(statsSource, (Weapon)SaveBlueprint.convertJsonToItem(json));
-            case (int)CombatActionSaveType.Ability:
-                return AbilityList.getAbility(statsSource, kvps[0].Split(":")[1]);
-            case (int)CombatActionSaveType.ItemCombatAction:
-                return (CombatAction)new ItemCombatAction(statsSource, (UsableItem)SaveBlueprint.convertJsonToItem(json));
-            default:
-                return null;
-        }
-    }
-
-    public virtual Stats getActorStats()
-    {
-        if (inPreviewMode)
-        {
-            return previewActor;
-        } else if (actorStats != null)
-        {
-            return actorStats;
-        }
-        else if (!CombatStateManager.inCombat)
-        {
-            return OverallUIManager.getCurrentPartyMember();
-        }
-
-        return actorStats;
-    }
-
-    public Stats getTargetStats()
-    {
-        if (getTargetCoords().row < 0 || getTargetCoords().col < 0)
-        {
-            return null;
-        }
-
-        return CombatGrid.getCombatantAtCoords(getTargetCoords());
-    }
-
-    public Vector3 getActorPosition()
-    {
-        if (getActorCoords().row < 0 || getActorCoords().col < 0)
-        {
-            throw new IOException("Actor Coords never set. Are you sure that this action has an actor yet?");
-        }
-
-        return CombatGrid.getPositionAt(getActorCoords());
-    }
-
-    public Vector3 getTargetPosition()
-    {
-        if (getTargetCoords().row < 0 || getTargetCoords().col < 0)
-        {
-            throw new IOException("Target Coords never set. Are you sure that this action has a target yet?");
-        }
-
-        return CombatGrid.getPositionAt(getTargetCoords());
-    }
-
-    public virtual Vector3 getTertiaryPosition()
-    {
-        throw new IOException("Called base version of getTertiaryPosition");
+        return Helpers.loadSpriteFromResources(getIconName());
     }
 
     public virtual void highlightActorSprites()
@@ -1164,6 +558,521 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
         // }
     }
 
+    #endregion
+
+    #region Cooldown
+
+    public virtual int getMaximumCooldown()
+    {
+        return 1;
+    }
+
+    public string getMaximumCooldownForDisplay()
+    {
+        if (getMaximumCooldown() - 1 <= 0)
+        {
+            return noCooldownMessage;
+        }
+        else if (getMaximumCooldown() - 1 == 1)
+        {
+            return (getMaximumCooldown() - 1) + " Round";
+        }
+        else
+        {
+            return (getMaximumCooldown() - 1) + " Rounds";
+        }
+    }
+
+    public virtual int getCooldownRemaining()
+    {
+        return cooldownRemaining;
+    }
+
+    public virtual void setCooldownToMax()
+    {
+        setCooldownRemaining(1);
+
+    }
+
+    public void setCooldownRemaining(int cooldownRemaining)
+    {
+        this.cooldownRemaining = cooldownRemaining;
+    }
+
+    public virtual void takeOffCooldown()
+    {
+        setCooldownRemaining(0);
+    }
+
+    public void tickDown()
+    {
+        if (cooldownRemaining > 0)
+        {
+            setCooldownRemaining(cooldownRemaining - 1);
+        }
+    }
+
+    public virtual CombatAnimationType getCombatAnimationType()
+    {
+        return CombatAnimationType.Projectile;
+    }
+
+    #endregion
+
+    #region Targeting and Selector
+
+    public virtual Selector getTargetSelector() //used for finding selectors when enemies are targeting
+    {
+        SelectorManager selectorManager = SelectorManager.getInstance();
+        Selector selector = null;
+        Stats actor = getActorStats();
+
+        ArrayList listOfTargets;
+
+        if (actor.shouldTargetEnemy())
+        {
+            listOfTargets = CombatGrid.getAllAliveEnemyCombatants();
+        }
+        else
+        {
+            listOfTargets = CombatGrid.getAllAliveAllyCombatants();
+        }
+
+        if (isSelfTargeting())
+        {
+            selector = selectorManager.selectors[getRangeIndex()].clone();
+            selector.setToLocation(getActorCoords());
+            return selector;
+        }
+        //Debug.LogError(actor.getName() + " is at position " + actor.position.ToString());
+
+        Trait[] traits = actor.traits;
+
+        foreach (Trait trait in traits)
+        {
+            if (trait == null)
+            {
+                continue;
+            }
+
+            selector = trait.findTargetLocation(selectorManager.selectors[getRangeIndex()].clone(), listOfTargets);
+
+            if (selector != null)
+            {
+                break;
+            }
+        }
+
+        return selector;
+    }
+
+    public void addPreviousTarget(GridCoords coords)
+    {
+        previousTargets.Add(coords);
+    }
+
+    public GridCoords getPreviousTarget()
+    {
+        GridCoords previousTarget = (GridCoords)previousTargets[previousTargets.Count - 1];
+
+        previousTargets.RemoveAt(previousTargets.Count - 1);
+
+        return previousTarget;
+    }
+
+    public virtual Selector getSelector()
+    {
+        return selector;
+    }
+
+    public virtual bool isSelfTargeting()
+    {
+        return false;
+    }
+
+    public virtual GridCoords getSecondaryCoords()
+    {
+        throw new IOException("Base version of getSecondaryCoords() was called erroneously");
+    }
+
+    public virtual void setSecondaryCoords(GridCoords coords)
+    {
+        throw new IOException("Base version of setSecondaryCoords() was called erroneously");
+    }
+
+    public virtual bool secondaryCoordsRequiresEmptySpace()
+    {
+        return false;
+    }
+
+    public virtual bool requiresSecondaryCoords()
+    {
+        return false;
+    }
+    public virtual bool requiresTertiaryCoords()
+    {
+        return false;
+    }
+
+    public virtual bool resetCoordsWhenChoosingTertiary() // if true, when the player backs out of choosing the tertiary target, then the previous selector will snap to it's default position 
+    {
+        return false;
+    }
+
+    public virtual bool resetCoordsOnBackOutOfTertiary() // if true, when the player backs out of choosing the tertiary target, then the previous selector will snap to it's default position 
+    {
+        return false;
+    }
+
+    public virtual bool targetsAllySection()
+    {
+        return false;
+    }
+
+    public virtual bool targetsOnlyEmptySpace()
+    {
+        return false;
+    }
+
+    public virtual bool tertiaryCoordsRequiresEmptySpace()
+    {
+        throw new IOException("The base class version of tertiaryCoordsRequiresEmptySpace() was called extraneously");
+    }
+
+    public virtual void setTertiaryCoords(GridCoords coords)
+    {
+        throw new IOException("The base class version of setTertiaryCoords() was called extraneously");
+    }
+
+    public virtual int getRangeIndex()
+    {
+        throw new IOException("The base class version of getRangeIndex() was called extraneously");
+    }
+
+    public virtual string getRangeTitle()
+    {
+        throw new IOException("The base class version of getRangeTitle() was called extraneously");
+    }
+
+    public GameObject getSelectorObject()
+    {
+        if (selector == null)
+        {
+            return null;
+        }
+
+        return selector.getSelectorObject();
+    }
+
+    public virtual void setSelector(Selector selector)
+    {
+        this.selector = selector;
+    }
+
+    public virtual GridCoords getActorCoords()
+    {
+        return actorStats.position.clone();
+    }
+
+    public virtual Stats getActorStats()
+    {
+        if (inPreviewMode)
+        {
+            return previewActor;
+        }
+        else if (actorStats != null)
+        {
+            return actorStats;
+        }
+        else if (!CombatStateManager.inCombat)
+        {
+            return OverallUIManager.getCurrentPartyMember();
+        }
+
+        return actorStats;
+    }
+
+    public virtual GridCoords getTargetCoords()
+    {
+        if (getSelector() != null)
+        {
+            return getSelector().getCoords();
+        }
+        else
+        {
+            return GridCoords.getDefaultCoords();
+        }
+    }
+
+    public Vector3 getTargetPosition()
+    {
+        if (getTargetCoords().row < 0 || getTargetCoords().col < 0)
+        {
+            throw new IOException("Target Coords never set. Are you sure that this action has a target yet?");
+        }
+
+        return CombatGrid.getPositionAt(getTargetCoords());
+    }
+
+    public virtual Vector3 getTertiaryPosition()
+    {
+        throw new IOException("Called base version of getTertiaryPosition");
+    }
+
+    public virtual Selector getTertiarySelector()
+    {
+        Selector tertiarySelector = SelectorManager.getInstance().selectors[Range.singleTargetIndex];
+
+        //if (!tertiaryCoords.Equals(GridCoords.getDefaultCoords()))
+        //{
+        //    tertiarySelector.setToLocation(tertiaryCoords); 
+        //}
+
+        return tertiarySelector;
+    }
+
+    public virtual void setActorCoords(GridCoords newPosition)
+    {
+        if (actorStats == null)
+        {
+            actorStats = CombatGrid.getCombatantAtCoords(newPosition);
+        }
+        else
+        {
+            actorStats.position = newPosition;
+        }
+    }
+
+    public virtual void setActor(Stats actor)
+    {
+        this.actorStats = actor;
+    }
+
+    #endregion
+
+    #region Traits
+
+    //sometimes you want an applied trait, but you don't want to describe it as in the case of activated passives which
+    //apply a trait that is basically a copy of their ability description. In this case it would be redundant to describe
+    //both, and in these cases the action should reimplement getAppliedTraitForDescription() to return null or another trait
+    public virtual Trait getAppliedTraitForDescription()
+    {
+        return getAppliedTrait();
+    }
+
+    //nonapplied related traits are traits that may be related to an action, but aren't directly applied by it, such as the
+    //afraid trait with the activated passive Devastating Criticals. It's applied by a random chance on crit, not applied by the
+    //activated passive ability itself.
+    public virtual ArrayList getNonAppliedRelatedTraits()
+    {
+        return new ArrayList();
+    }
+
+    public virtual ArrayList getTraitsToDescribe()
+    {
+        ArrayList listOfTraits = new ArrayList();
+
+        listOfTraits.AddRange(getNonAppliedRelatedTraits());
+
+        if (getAppliedTraitForDescription() != null)
+        {
+            listOfTraits.Add(getAppliedTraitForDescription());
+        }
+
+        return listOfTraits;
+    }
+
+    public virtual Trait getAppliedTrait()
+    {
+        return null;
+    }
+
+    public virtual void applyTrait(Stats target)
+    {
+        Trait traitToApply = getAppliedTrait();
+
+        if (target == null || traitToApply == null)
+        {
+            return;
+        }
+
+        traitToApply.traitApplier = getActorStats();
+
+        if (!inPreviewMode && actorIsAlly() && traitToApply.isBuff())
+        {
+            Exuberances.addExuberance(MultiStackProcType.BlueShield, singleExuberanceStack);
+        }
+
+        if (!inPreviewMode && actorIsAlly() && traitToApply.isDebuff())
+        {
+            Exuberances.addExuberance(MultiStackProcType.YellowThorn, singleExuberanceStack);
+        }
+
+        target.addTrait(traitToApply);
+    }
+
+    #endregion
+
+    #region Queueing Actions
+
+    public virtual void queueingAction()
+    {
+        //empty on purpose
+    }
+
+    public virtual void unqueueingAction()
+    {
+        //empty on purpose
+    }
+
+    public virtual void activatingAction()
+    {
+        //empty on purpose
+    }
+
+    #endregion
+
+    #region Action Costs
+
+    public virtual int[] getActionCosts()
+    {
+        return new int[] { 0 };
+    }
+
+    public virtual ActionCostType[] getActionCostTypes()
+    {
+        return new ActionCostType[] { ActionCostType.None };
+    }
+
+    #endregion
+
+    #region Boolean Getters
+
+    public virtual bool usableWithoutItemsInInventory()
+    {
+        return true;
+    }
+
+    public bool actorIsPriorityAttacker()
+    {
+        if (getActorCoords().Equals(GridCoords.getDefaultCoords()) || getActorStats() == null)
+        {
+            return false;
+        }
+
+        return getActorStats().isPriorityAttacker();
+    }
+
+    public bool actorIsLowPriorityAttacker()
+    {
+        if (getActorCoords().Equals(GridCoords.getDefaultCoords()) || getActorStats() == null)
+        {
+            return false;
+        }
+
+        return getActorStats().isPriorityAttacker();
+    }
+
+    public virtual bool hasRepetitionsRemaining()
+    {
+        return false;
+    }
+    public virtual bool takesAWeaponSlot()
+    {
+        return false;
+    }
+
+    public bool hasAvailableSlots(IActionArrayStorage actionArrayStorage)
+    {
+        return hasAvailableSlots(actionArrayStorage.getStoredCombatActionArray());
+    }
+
+    public virtual bool hasAvailableSlots(CombatActionArray combatActionArray)
+    {
+        return combatActionArray.hasAvailableSlots(this);
+    }
+
+    public virtual bool requiresAnAction()
+    {
+        return true;
+    }
+
+    public virtual bool unactivatable()
+    {
+        return false;
+    }
+
+    public virtual bool canBePlacedInActionSlot()
+    {
+        return true;
+    }
+
+    public bool actorIsSlowed()
+    {
+        if (getActorStats() == null)
+        {
+            return false;
+        }
+        else
+        {
+            return getActorStats().isSlowed();
+        }
+    }
+
+    public virtual bool autoApply()
+    {
+        return false;
+    }
+
+    public bool actorIsAlly()
+    {
+        return CombatGrid.positionIsOnAlliedSide(getActorStats().position);
+    }
+
+    public virtual bool healsTarget()
+    {
+        return false;
+    }
+
+    public virtual bool targetMustBeDead()
+    {
+        return false;
+    }
+
+    public virtual bool repositionsCaster()
+    {
+        return false;
+    }
+
+    public virtual bool killsCaster()
+    {
+        return false;
+    }
+
+    public virtual bool canBePlacedInPassiveSlot()
+    {
+        return false;
+    }
+
+    public virtual bool needsItemQuantityPanel()
+    {
+        return false;
+    }
+
+    public virtual bool movesTarget()
+    {
+        return false;
+    }
+
+    public virtual bool multiActorAction()
+    {
+        return false;
+    }
+
+    #endregion
+
+    #region Passive Benefits
+
     public virtual int getRedStacksAtStart()
     {
         return 0;
@@ -1184,9 +1093,77 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
         return 0;
     }
 
-    public virtual bool movesTarget()
+    #endregion
+
+    #region Miscellaneous
+
+    public virtual void applySettings(CombatActionSettings settings)
     {
-        return false;
+        //empty on purpose
+    }
+
+    public virtual string getUseDescription()
+    {
+        return "";
+    }
+
+    public virtual string getKey()
+    {
+        throw new IOException("The base class version of getKey() was called extraneously");
+    }
+
+    public virtual void onAddToAbilityMenu() //for updating things like checking for source item quantity
+    {
+        // Empty on purpose
+    }
+
+    public void setToPreviewMode()
+    {
+        previewActor = getActorStats().clone();
+
+        inPreviewMode = true;
+    }
+
+    public virtual int getSaveType()
+    {
+        throw new IOException("The base class version of getSaveType() was called extraneously");
+    }
+
+    public virtual Item getSourceItem()
+    {
+        return null;
+    }
+
+    public virtual void setSourceItem(Item sourceItem)
+    {
+        throw new IOException("The base class version of setSourceItem() was called extraneously");
+    }
+
+    public virtual string getDisplayType()
+    {
+        throw new IOException("The base class version of getDisplayType() was called extraneously");
+    }
+
+    public virtual int getMaximumSlots()
+    {
+        return 1;
+    }
+
+    public virtual string getMaximumSlotsForDisplay()
+    {
+        if (getMaximumSlots() <= 0)
+        {
+            return noSlotsRequiredMessage;
+        }
+        else
+        {
+            return getMaximumSlots() + " Slot(s)";
+        }
+    }
+
+    public virtual CombatAction alternateActionWhenPlacedInActionSlot()
+    {
+        return null;
     }
 
     public virtual int getRequiredStatLevel()
@@ -1195,25 +1172,34 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
         return -1;
     }
 
-    public virtual Selector getTertiarySelector()
-    {
-        Selector tertiarySelector = SelectorManager.getInstance().selectors[Range.singleTargetIndex];
+    //convertToJson is for save files, you will never need to save an actions coords so actor/target coords are not saved
+    public abstract string convertToJson();
 
-        //if (!tertiaryCoords.Equals(GridCoords.getDefaultCoords()))
-        //{
-        //    tertiarySelector.setToLocation(tertiaryCoords); 
-        //}
-
-        return tertiarySelector;
-    }
-
-    public virtual bool multiActorAction()
+    public static CombatAction extractFromJson(Stats statsSource, string json)
     {
-        return false;
-    }
-    public virtual void removeActorFromActorList(Stats actor)
-    {
-        //empty on purpose
+        if (json == null || json.ToLower().Equals("null"))
+        {
+            return null;
+        }
+
+        json = json.Replace("\"CombatActionSaveType\":\"0}", "\"CombatActionSaveType\":\"0\"}");
+        json = json.Replace("\"CombatActionSaveType\":\"1}", "\"CombatActionSaveType\":\"1\"}");
+        json = json.Replace("\"CombatActionSaveType\":\"2}", "\"CombatActionSaveType\":\"2\"}");
+
+        string[] kvps = json.Replace("{", "").Replace("}", "").Replace("\"", "").Split(",");
+        int saveType = int.Parse(kvps[kvps.Length - 1].Split(":")[1]);
+
+        switch (saveType)
+        {
+            case (int)CombatActionSaveType.Attack:
+                return (CombatAction)new Attack(statsSource, (Weapon)SaveBlueprint.convertJsonToItem(json));
+            case (int)CombatActionSaveType.Ability:
+                return AbilityList.getAbility(statsSource, kvps[0].Split(":")[1]);
+            case (int)CombatActionSaveType.ItemCombatAction:
+                return (CombatAction)new ItemCombatAction(statsSource, (UsableItem)SaveBlueprint.convertJsonToItem(json));
+            default:
+                return null;
+        }
     }
 
     public static ArrayList getAllActionTypeGlossaryEntries()
@@ -1231,12 +1217,10 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
         return allActionTypesGlossaryEntries;
     }
 
-    public virtual bool canBePlacedInPassiveSlot()
-    {
-        return false;
-    }
+    #endregion
 
-    //ICloneable methods
+    #region ICloneable
+
     public object Clone()
     {
         return this.MemberwiseClone();
@@ -1275,7 +1259,236 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
         return actionClone;
     }
 
-    //IDescribable methods
+    #endregion
+
+    #region ISortable
+
+    public virtual int getQuantity()
+    {
+        return 0;
+    }
+    public int getWorth()
+    {
+        throw new NotImplementedException("CombatActions cannot be sorted by Worth.");
+    }
+    public virtual string getType()
+    {
+        return getDisplayType();
+    }
+
+    public string getSubtype()
+    {
+        throw new NotImplementedException("CombatActions cannot be sorted by Subtype.");
+    }
+    public virtual int getLevel()
+    {
+        throw new NotImplementedException("CombatActions cannot be sorted by Level.");
+    }
+    public int getNumber()
+    {
+        throw new NotImplementedException("CombatActions cannot be sorted by Number.");
+    }
+
+    #endregion
+
+    #region IStatBoostSource Methods
+
+    public Stats getStatSource()
+    {
+        return getActorStats();
+    }
+
+    #region Generic Stats
+
+    public string getBonusCritFormula()
+    {
+        return StatBoostManager.getBonusCritFormula(this);
+    }
+
+    public string getBonusDamageFormula()
+    {
+        return StatBoostManager.getBonusDamageFormula(this);
+    }
+
+    #endregion
+
+    #region PrimaryStats
+
+    public string getBonusStrengthFormula()
+    {
+        return StatBoostManager.getBonusStrengthFormula(this);
+    }
+
+    public string getBonusDexterityFormula()
+    {
+        return StatBoostManager.getBonusDexterityFormula(this);
+    }
+
+    public string getBonusWisdomFormula()
+    {
+        return StatBoostManager.getBonusWisdomFormula(this);
+    }
+
+    public string getBonusCharismaFormula()
+    {
+        return StatBoostManager.getBonusCharismaFormula(this);
+    }
+
+
+    #endregion
+
+    #region Secondary Stats
+
+    //Strength Stats
+    public string getBonusPhysicalResistanceFormula()
+    {
+        return StatBoostManager.getBonusPhysicalResistanceFormula(this);
+    }
+
+    public string getBonusCriticalDamageMultiplierFormula()
+    {
+        return StatBoostManager.getBonusCriticalDamageMultiplierFormula(this);
+    }
+
+    public string getBonusHealthFormula()
+    {
+        return StatBoostManager.getBonusHealthFormula(this);
+    }
+
+
+    //Dexterity Stats
+    public string getBonusSurpriseRoundDamageFormula()
+    {
+        return StatBoostManager.getBonusSurpriseRoundDamageFormula(this);
+    }
+
+    public virtual string getBonusArmorFormula()
+    {
+        return StatBoostManager.getBonusArmorFormula(this);
+    }
+
+    public string getBonusArmorPenetrationFormula()
+    {
+        return StatBoostManager.getBonusArmorPenetrationFormula(this);
+    }
+
+
+    //Wisdom Stats
+    public string getBonusPassiveSlotsFormula()
+    {
+        return StatBoostManager.getBonusPassiveSlotsFormula(this);
+    }
+
+    public string getBonusWeaponSlotsFormula()
+    {
+        return StatBoostManager.getBonusWeaponSlotsFormula(this);
+    }
+
+    public string getBonusMentalResistanceFormula()
+    {
+        return StatBoostManager.getBonusMentalResistanceFormula(this);
+    }
+
+
+    //Charisma Stats
+    public string getBonusSynergyFormula()
+    {
+        return StatBoostManager.getBonusSynergyFormula(this);
+    }
+
+    public string getBonusExuberancesFormula()
+    {
+        return StatBoostManager.getBonusExuberancesFormula(this);
+    }
+
+    public string getBonusZOIPotencyFormula()
+    {
+        return StatBoostManager.getBonusZOIPotencyFormula(this);
+    }
+
+
+    #endregion
+
+    #region Party Stats
+
+    public string getBonusRegenFormula()
+    {
+        return StatBoostManager.getBonusRegenFormula(this);
+    }
+
+
+    public string getBonusSurpriseRoundsFormula()
+    {
+        return StatBoostManager.getBonusSurpriseRoundsFormula(this);
+    }
+
+    public string getBonusRetreatChanceFormula()
+    {
+        return StatBoostManager.getBonusRetreatChanceFormula(this);
+    }
+
+
+    public string getBonusPartyActionsFormula()
+    {
+        return StatBoostManager.getBonusPartyActionsFormula(this);
+    }
+
+    public string getBonusPartySlotsFormula()
+    {
+        return StatBoostManager.getBonusPartySlotsFormula(this);
+    }
+
+
+    public string getBonusGoldMultiplierFormula()
+    {
+        return StatBoostManager.getBonusGoldMultiplierFormula(this);
+    }
+
+    public string getBonusDiscountFormula()
+    {
+        return StatBoostManager.getBonusDiscountFormula(this);
+    }
+
+
+    public string getBonusVolleyAccuracyFormula()
+    {
+        return StatBoostManager.getBonusVolleyAccuracyFormula(this);
+    }
+
+
+    #endregion
+
+    #region Skills
+    public string getBonusIntimidateChargesFormula()
+    {
+        return StatBoostManager.getBonusIntimidateChargesFormula(this);
+    }
+
+    public string getBonusCunningChargesFormula()
+    {
+        return StatBoostManager.getBonusCunningChargesFormula(this);
+    }
+
+    public string getBonusObservationLevelFormula()
+    {
+        return StatBoostManager.getBonusObservationLevelFormula(this);
+    }
+
+    public string getBonusLeadershipUsesFormula()
+    {
+        return StatBoostManager.getBonusLeadershipUsesFormula(this);
+    }
+
+    #endregion
+    #endregion
+
+    #region IDescribable
+
+    public virtual string getName()
+    {
+        throw new IOException("The base class version of getName() was called extraneously");
+    }
+
     public virtual GameObject getRowType(RowType rowType)
     {
         string rowTypeName = "";
@@ -1447,34 +1660,11 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
         return true;
     }
 
-    //ISortable
-    public virtual int getQuantity()
-    {
-        return 0;
-    }
-    public int getWorth()
-    {
-        throw new NotImplementedException("CombatActions cannot be sorted by Worth.");
-    }
-    public virtual string getType()
-    {
-        return getDisplayType();
-    }
 
-    public string getSubtype()
-    {
-        throw new NotImplementedException("CombatActions cannot be sorted by Subtype.");
-    }
-    public virtual int getLevel()
-    {
-        throw new NotImplementedException("CombatActions cannot be sorted by Level.");
-    }
-    public int getNumber()
-    {
-        throw new NotImplementedException("CombatActions cannot be sorted by Number.");
-    }
+    #endregion
 
-    //IDescribableInBlocks methods
+    #region IDescribableInBlocks
+
     public virtual List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
     {
 
@@ -1514,191 +1704,7 @@ public class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortabl
         return buildingBlocks;
 
     }
-    
-    
-    #region IStatBoostSource Methods
-    #region Generic Stats
 
-    public string getBonusCritFormula()
-    {
-        return StatBoostManager.getBonusCritFormula(this);
-    }
-
-    public string getBonusDamageFormula()
-    {
-        return StatBoostManager.getBonusDamageFormula(this);
-    }
-
-    #endregion
-
-    #region PrimaryStats
-
-    public string getBonusStrengthFormula()
-    {
-        return StatBoostManager.getBonusStrengthFormula(this);
-    }
-    
-    public string getBonusDexterityFormula()
-    {
-        return StatBoostManager.getBonusDexterityFormula(this);
-    }
- 
-    public string getBonusWisdomFormula()
-    {
-        return StatBoostManager.getBonusWisdomFormula(this);
-    }
- 
-    public string getBonusCharismaFormula()
-    {
-        return StatBoostManager.getBonusCharismaFormula(this);
-    }
- 
-
-    #endregion
-
-    #region Secondary Stats
-
-    //Strength Stats
-    public string getBonusPhysicalResistanceFormula()
-    {
-        return StatBoostManager.getBonusPhysicalResistanceFormula(this);
-    }
- 
-    public string getBonusCriticalDamageMultiplierFormula()
-    {
-        return StatBoostManager.getBonusCriticalDamageMultiplierFormula(this);
-    }
- 
-    public string getBonusHealthFormula()
-    {
-        return StatBoostManager.getBonusHealthFormula(this);
-    }
- 
-
-    //Dexterity Stats
-    public string getBonusSurpriseRoundDamageFormula()
-    {
-        return StatBoostManager.getBonusSurpriseRoundDamageFormula(this);
-    }
- 
-    public virtual string getBonusArmorFormula()
-    {
-        return StatBoostManager.getBonusArmorFormula(this);
-    }
- 
-    public string getBonusArmorPenetrationFormula()
-    {
-        return StatBoostManager.getBonusArmorPenetrationFormula(this);
-    }
- 
-
-    //Wisdom Stats
-    public string getBonusPassiveSlotsFormula()
-    {
-        return StatBoostManager.getBonusPassiveSlotsFormula(this);
-    }
- 
-    public string getBonusWeaponSlotsFormula()
-    {
-        return StatBoostManager.getBonusWeaponSlotsFormula(this);
-    }
- 
-    public string getBonusMentalResistanceFormula()
-    {
-        return StatBoostManager.getBonusMentalResistanceFormula(this);
-    }
- 
-
-    //Charisma Stats
-    public string getBonusSynergyFormula()
-    {
-        return StatBoostManager.getBonusSynergyFormula(this);
-    }
- 
-    public string getBonusExuberancesFormula()
-    {
-        return StatBoostManager.getBonusExuberancesFormula(this);
-    }
- 
-    public string getBonusZOIPotencyFormula()
-    {
-        return StatBoostManager.getBonusZOIPotencyFormula(this);
-    }
- 
-
-    #endregion
-
-    #region Party Stats
-
-    public string getBonusRegenFormula()
-    {
-        return StatBoostManager.getBonusRegenFormula(this);
-    }
- 
-
-    public string getBonusSurpriseRoundsFormula()
-    {
-        return StatBoostManager.getBonusSurpriseRoundsFormula(this);
-    }
- 
-    public string getBonusRetreatChanceFormula()
-    {
-        return StatBoostManager.getBonusRetreatChanceFormula(this);
-    }
- 
-
-    public string getBonusPartyActionsFormula()
-    {
-        return StatBoostManager.getBonusPartyActionsFormula(this);
-    }
- 
-    public string getBonusPartySlotsFormula()
-    {
-        return StatBoostManager.getBonusPartySlotsFormula(this);
-    }
- 
-
-    public string getBonusGoldMultiplierFormula()
-    {
-        return StatBoostManager.getBonusGoldMultiplierFormula(this);
-    }
- 
-    public string getBonusDiscountFormula()
-    {
-        return StatBoostManager.getBonusDiscountFormula(this);
-    }
- 
-
-    public string getBonusVolleyAccuracyFormula()
-    {
-        return StatBoostManager.getBonusVolleyAccuracyFormula(this);
-    }
- 
-
-    #endregion
-
-    #region Skills
-    public string getBonusIntimidateChargesFormula()
-    {
-        return StatBoostManager.getBonusIntimidateChargesFormula(this);
-    }
- 
-    public string getBonusCunningChargesFormula()
-    {
-        return StatBoostManager.getBonusCunningChargesFormula(this);
-    }
- 
-    public string getBonusObservationLevelFormula()
-    {
-        return StatBoostManager.getBonusObservationLevelFormula(this);
-    }
- 
-    public string getBonusLeadershipUsesFormula()
-    {
-        return StatBoostManager.getBonusLeadershipUsesFormula(this);
-    }
- 
-    #endregion
     #endregion
 
 

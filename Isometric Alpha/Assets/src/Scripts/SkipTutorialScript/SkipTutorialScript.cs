@@ -16,7 +16,23 @@ public class SkipTutorialScript : ScriptableObject
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
         PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
     }
+}
 
+public class SkipInteractionTutorialScript : SkipTutorialScript
+{
+    public override void runScript()
+    {
+        IntimidateManager.getInstance().destroySkillArea();
+        CunningManager.getInstance().destroySkillArea();
+        ObservationManager.getInstance().destroySkillArea();
+
+        RevealManager.OnReveal.Invoke();
+
+        TutorialSequence.endCurrentTutorialSequence();
+        DialogueManager.getInstance().endDialogue();
+        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
+    }
 }
 
 public class SkipUpgradingPartyMemberTutorialScript : SkipTutorialScript

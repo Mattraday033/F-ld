@@ -941,6 +941,8 @@ public class TutorialSequence
 
     public bool inFinalStep()
     {
+        Debug.LogError("currentStepIndex = " + currentStepIndex);
+        Debug.LogError("currentTutorialSequence.tutorialSequenceSteps.Length = " + currentTutorialSequence.tutorialSequenceSteps.Length);
         return currentStepIndex >= currentTutorialSequence.tutorialSequenceSteps.Length - 1;
     }
 
