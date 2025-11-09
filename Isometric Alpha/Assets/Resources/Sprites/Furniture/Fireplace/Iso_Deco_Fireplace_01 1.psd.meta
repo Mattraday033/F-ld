@@ -3,7 +3,7 @@ guid: 0a5e2d6a32e27cc429ee28a1a9474b16
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -47,8 +47,8 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 9
-  spritePivot: {x: 0.34922612, y: 0.11519626}
-  spritePixelsToUnits: 128
+  spritePivot: {x: 0.3592261, y: 0.1801963}
+  spritePixelsToUnits: 108
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
