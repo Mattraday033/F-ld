@@ -26,7 +26,7 @@ public class SaveHandler : ScreenManager, IEscapable
 
 	public const string cleanSlateSaveName = "cleanSlateSave";
 
-    private static readonly Regex sWhitespace = new Regex(@"\s+");
+    private readonly static Regex sWhitespace = new Regex(@"\s+");
 	
 	public static string ReplaceWhitespace(string input, string replacement) 
 	{

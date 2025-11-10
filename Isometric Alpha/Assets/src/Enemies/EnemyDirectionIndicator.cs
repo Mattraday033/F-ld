@@ -34,11 +34,16 @@ public class EnemyDirectionIndicator : MonoBehaviour
 				throw new IOException("Unknown facing: " + enemyFacing.getFacing().ToString());
         }
 	}
-	
-	public void setColors(Color newColor)
-	{
-		tileSpriteRenderer.color = newColor;
-		arrowIconSpriteRenderer.color = newColor;
-	}
+
+    public void setColors(Color newColor)
+    {
+        tileSpriteRenderer.color = newColor;
+        arrowIconSpriteRenderer.color = newColor;
+    }
+    
+    public void disable()
+    {
+        gameObject.SetActive(false);
+    }
 
 }

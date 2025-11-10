@@ -226,14 +226,15 @@ public static class PrefabNames
     public const string healingEffectFolderPath = abilityEffectFolderPath + "Healing Effect";
     public const string batSwarmEffectFolderPath = abilityEffectFolderPath + "Bat Swarm";
 
-    public const string barrelsFolder = spriteFolder + "Barrels/";
-    public const string vaultableBarrels = barrelsFolder + "VaultableBarrels";
+    public const string cratesAndBarrelsFolder = spriteFolder + "CratesAndBarrels/";
+    public const string vaultableBarrels = cratesAndBarrelsFolder + "VaultableBarrels";
 
     public const string charactersFolder = spriteFolder + "Characters/";
     public const string humansFolder = charactersFolder + "Humans/";
     public const string defaultNPCSprite = humansFolder + "NPC Sprite";
 
-    public const string chestsFolder = spriteFolder + "Chests/";
+    public const string furnitureFolder = spriteFolder + "Furniture/";
+    public const string chestsFolder = furnitureFolder + "Chests/";
     public const string chestBackClosed = chestsFolder + "Chest_Back_Closed";
     public const string chestBackOpenFilled = chestsFolder + "Chest_Back_Opened_Filled";
     public const string chestBackOpenEmpty = chestsFolder + "Chest_Back_Opened_Empty";
@@ -241,22 +242,36 @@ public static class PrefabNames
     public const string chestFrontOpenFilled = chestsFolder + "Chest_Front_Opened_Filled";
     public const string chestFrontOpenEmpty = chestsFolder + "Chest_Front_Opened_Empty";
 
+    public const string storageFolder = furnitureFolder + "Storage/";
+    public const string itemContainersFolder = storageFolder + "Containers/";
+
+    public const string shelfFrontFull = itemContainersFolder + "Shelf_Front_Full";
+    public const string shelfFrontEmpty = itemContainersFolder + "Shelf_Front_Empty";
+
     public const string cunningObjectsFolder = spriteFolder + "CunningObjects/";
     public const string statueBack = cunningObjectsFolder + "Statue Back";
     public const string statueFront = cunningObjectsFolder + "Statue Front";
 
     public const string cratesFolder = spriteFolder + "Crates/";
     public const string squareCratesSmall = cratesFolder + "Square Crates Small";
+    public const string movableCrate = cratesFolder + "Crate";
+
+    public const string secretDoorsFolder = spriteFolder + "SecretDoors/";
+    public const string mineLvl2WallSecretDoor = secretDoorsFolder + "MineLvl_2 Wall";
 
     public const string tilesFolder = spriteFolder + "Tiles/";
     public const string halfWallsFolder = tilesFolder + "Half Walls/";
     public const string shackWallHalf = halfWallsFolder + "Shack Wall Half";
+
+    public const string tallWallsFolder = tilesFolder + "Tall Walls/";
+
 
     public const string rubbleFolder = spriteFolder + "Rubble/";
     public const string southDescendingRubble = rubbleFolder + "South Descending Rubble";
     public const string northWestDescendingRubble = rubbleFolder + "NW Descending Rubble";
     public const string southWestDescendingRubble = rubbleFolder + "SW Descending Rubble";
     public const string blockRubble = rubbleFolder + "Block Rubble";
+    public const string vaultableRocks = rubbleFolder + "Vaultable Rocks";
 
     public const string doorsFolder =  spriteFolder + "Doors/";
     public const string XAxisDoor = doorsFolder + "XAxisDoor";

@@ -27,11 +27,19 @@ public static class DialogueNameList
     public const string campInteriorPathName = campPathName + LocationNameList.campInterior + seperatorChar;
     public const string campExteriorPathName = campPathName + LocationNameList.campExterior + seperatorChar;
 
-    #region Gates
+    #region Interactables
     public const string interactablesPath = dialogueResourcesPathName + "Interactables" + seperatorChar;
+
+    #region Gates
     public const string gatesPath = interactablesPath + "Gates" + seperatorChar;
     public const string liftableRubblePath = gatesPath + "LiftableRubble";
     public const string fallenBeamPath = gatesPath + "FallenBeam";
+    #endregion
+
+    #region Vaultable Objects
+    public const string vaultableObjectPath = interactablesPath + "VaultableObject";
+    #endregion
+    
     #endregion
 
     #region PartyMembers
@@ -111,6 +119,20 @@ public static class DialogueNameList
     public const string imrePath = campExteriorPathName + LocationNameList.campManse + seperatorChar + NPCNameList.imre;
     public const string manseFrontDoorPath = campExteriorPathName + LocationNameList.campManse + seperatorChar + "ManseFrontDoor";
     public const string manseServiceEntrancePath = campExteriorPathName + LocationNameList.campManse + seperatorChar + "ManseServiceEntrance";
+    #endregion
+
+    #endregion
+
+    #region Mine
+
+    public const string mineFolderPath = dialogueResourcesPathName + "Mine/";
+
+    #region MineLvl_2
+
+    public const string mineLvl2FolderPath = mineFolderPath + "MineLvl_2/";
+
+    public const string suspiciousWallPath = mineLvl2FolderPath + NPCNameList.suspiciousWall;
+
     #endregion
 
     #endregion

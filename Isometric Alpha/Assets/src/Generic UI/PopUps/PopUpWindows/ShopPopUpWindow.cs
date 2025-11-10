@@ -8,7 +8,7 @@ public enum ShopMode { Buy = 0, Sell = 1, BuyBack = 2, Junk = 3 }
 
 public class ShopPopUpWindow : PopUpWindow
 {
-    public static Dictionary<string, Item> junkDestinationPocket = null; //junk that gets sold gets send to the void
+    public readonly static Dictionary<string, Item> junkDestinationPocket = null; //junk that gets sold gets send to the void
     public TabCollection itemTypeTabs;
     public TabCollection buySellTabs;
 
@@ -186,14 +186,14 @@ public class ShopPopUpWindow : PopUpWindow
             sellAllJunkButton.interactable = true;
             sellAllJunkIconImageBackground.color = Color.black;
             sellAllJunkIconImage.color = Color.white;
-            sellAllJunkText.color = new Color32(25, 25, 25, 255);
+            sellAllJunkText.color = ColorList.grey35;
         }
         else
         {
             sellAllJunkButton.interactable = false;
-            sellAllJunkIconImageBackground.color = new Color32(100, 100, 100, 255);
-            sellAllJunkIconImage.color = new Color32(155, 155, 155, 255);
-            sellAllJunkText.color = new Color32(155, 155, 155, 255);
+            sellAllJunkIconImageBackground.color = ColorList.grey100;
+            sellAllJunkIconImage.color = ColorList.grey155;
+            sellAllJunkText.color = ColorList.grey155;
         }
     }
 

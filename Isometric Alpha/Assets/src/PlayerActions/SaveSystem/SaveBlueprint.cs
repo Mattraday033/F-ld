@@ -26,7 +26,7 @@ public struct PositionWrapper
     {
         x = position.x;
         y = position.y;
-        z = position.z;
+        z = 0f;
     }
 
     public Vector3 getPosition()

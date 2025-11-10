@@ -40,7 +40,7 @@ public class SurpriseIcon : SlotIconHover
             case SurpriseState.EnemySurprised:
                 return Color.green;
             default:
-                return new Color32(155, 155, 155, 255);
+                return ColorList.surpriseIconGrey;
         }
     }
 

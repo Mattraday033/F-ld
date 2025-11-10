@@ -84,7 +84,10 @@ public static class NPCNameList
 
     public const string leafPile = "Leaf Pile";
     public const string vaultableBarrels = "Vaultable Barrels";
+    public const string vaultableRocks = "Vaultable Rocks";
     public const string wallPatch = "Wall Patch";
+    public const string mineLvl2Wall = "MineLvl_2 Wall";
+    public const string suspiciousWall = "Suspicious Wall";
     public const string rubble = "Rubble";
     public const string chest = "Chest";
     public const string crate = "Crate";

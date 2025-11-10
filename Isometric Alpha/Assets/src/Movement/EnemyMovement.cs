@@ -169,12 +169,18 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	public string tutorialHash;
 	public string packName = "???"; //Worms
 
-	public bool followsPlayer = true;
+    private bool _FollowsPlayer = true;
+    public virtual bool followsPlayer
+    {
+        get => _FollowsPlayer;
+        set => _FollowsPlayer = value;
+    }
+
 	public bool movesEveryTurn = false;
 	public bool neverMoves = false;
 
 	public EnemyDirectionIndicator enemyDirectionIndicator;
-
+    
     public AnimationManager animationManager;
 
     public int cunningStunCounter = 0;
@@ -194,16 +200,6 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
     #region MovementTracker Overrides
 
-    private bool _MovableObject;
-    public override bool movableObject
-    {
-        get => _MovableObject;
-        set
-        {
-            _MovableObject = value;
-        }
-    }
-
     public override int getMovementIndex()
     {
         return getMonsterPackIndex() + 1;
@@ -211,18 +207,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
     public override void determineDirection()
     {
-        if (movableObject && PlayerMovement.getInstance().endingPosition == MovementTracker.getCurrentCell(this))
-        {
-            _DirectionMod = PlayerMovement.getInstance().directionMod;
-        }
-        else if (movableObject)
-        {
-            _DirectionMod = Vector3Int.zero;
-        }
-        else
-        {
-            _DirectionMod = findDirection();
-        }
+        _DirectionMod = findDirection();
 
         _StartingPosition = getWorldPosition();
         _EndingPosition = AreaManager.getMasterGrid().GetCellCenterWorld(MovementTracker.getCurrentCell(this) + _DirectionMod);
@@ -273,6 +258,11 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         return EnemyPackInfoList.getEnemyPackInfo(AreaManager.locationName, monsterPackIndex);
     }
 
+    public virtual SpriteRenderer getSpriteRenderer()
+    {
+        return animationManager.spriteRenderer;
+    }
+
     private void OnDrawGizmos()
     {
 
@@ -307,30 +297,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
     }
 
-	// public bool checkForPlayer(int monsterTransformIndex)
-	// {
-	// 	Vector3Int[] distanceModifiers = new Vector3Int[]{  MovementManager.distance1TileNorthEastGrid,
-	// 														MovementManager.distance1TileNorthWestGrid,
-	// 														MovementManager.distance1TileSouthWestGrid,
-	// 														MovementManager.distance1TileSouthEastGrid};
-
-	// 	foreach (Vector3Int distanceModifier in distanceModifiers)
-	// 	{
-	// 		if (MovementManager.colliderInCell(getCurrentCell() + distanceModifier, LayerAndTagManager.playerLayerMask))
-	// 		{
-	// 			if (!movableObject && !stunnedFromRetreating())
-	// 			{
-	// 				prepCombat(monsterTransformIndex);
-	// 			}
-
-	// 			return true;
-	// 		}
-	// 	}
-
-	// 	return false;
-	// }
-
-	public void prepCombat()
+	public virtual void prepCombat()
     {
         if(MonsterDefeatKeysList.monsterIsDefeated(getMonsterPackIndex()))
         {
@@ -589,19 +556,26 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
         Transform newMonster = SpawnInfoManager.spawnMonster(list[monsterPackIndex], monsterPackIndex);
 
-        MovementManager.addMovementTracker(this);
+        MovementManager.replaceMovementTracker(newMonster.GetComponent<MovementTracker>());
         
         DestroyImmediate(gameObject);
 	}
 
     public bool canBePutBackToStartingPosition()
     {
+        if(isMoving())
+        {
+            return false;
+        }
+
         Vector3Int startPositionGridSquare = getStartingCell();
 
         foreach (MovementTracker movement in MovementManager.allMovementTrackers)
         {
-            if (movement.startingPosition.x == startPositionGridSquare.x &&
-                movement.startingPosition.y == startPositionGridSquare.y)
+            Vector3Int currentCell = MovementManager.getCellWorld(movement.startingPosition);
+
+            if (currentCell.x == startPositionGridSquare.x &&
+                currentCell.y == startPositionGridSquare.y)
             {
                 return false;
             }
@@ -706,27 +680,32 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 		setIndicatorColor();
 	}
 
-	private void setIndicatorColor()
-	{
-		switch (cunningStunCounter, intimidateCounter, retreatStunnedCounter)
-		{
-			case ( > 0, <= 0, <= 0):
-				enemyDirectionIndicator.setColors(cunningStunnedColor);
-				return;
+    private void setIndicatorColor()
+    {
+        if (enemyDirectionIndicator == null)
+        {
+            return;
+        }
 
-			case ( <= 0, > 0, <= 0):
-				enemyDirectionIndicator.setColors(intimidatedColor);
-				return;
+        switch (cunningStunCounter, intimidateCounter, retreatStunnedCounter)
+        {
+            case ( > 0, <= 0, <= 0):
+                enemyDirectionIndicator.setColors(cunningStunnedColor);
+                return;
 
-			case ( <= 0, <= 0, > 0):
-				enemyDirectionIndicator.setColors(retreatStunnedColor);
-				return;
+            case ( <= 0, > 0, <= 0):
+                enemyDirectionIndicator.setColors(intimidatedColor);
+                return;
 
-			case ( <= 0, <= 0, <= 0):
-				enemyDirectionIndicator.setColors(Color.white);
-				return;
-		}
-	}
+            case ( <= 0, <= 0, > 0):
+                enemyDirectionIndicator.setColors(retreatStunnedColor);
+                return;
+
+            case ( <= 0, <= 0, <= 0):
+                enemyDirectionIndicator.setColors(Color.white);
+                return;
+        }
+    }
 
 	private void OnEnable()
 	{
@@ -795,7 +774,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         }
     }
 
-    public void updateIdleDirection()
+    public virtual void updateIdleDirection()
     {
         switch (enemyFacing.getFacing())
         {
@@ -814,7 +793,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         }
     }
 
-    public void updateRunDirection()
+    public virtual void updateRunDirection()
     {
         switch (enemyFacing.getFacing())
         {
@@ -908,16 +887,9 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 	//IDescribableInBlocks
 
-	public string getName()
+	public virtual string getName()
 	{
-		if (movableObject)
-		{
-			return "Pushable " + packName;
-		}
-		else
-		{
-			return packName;
-		}
+        return packName;
 	}
 
 	public List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()

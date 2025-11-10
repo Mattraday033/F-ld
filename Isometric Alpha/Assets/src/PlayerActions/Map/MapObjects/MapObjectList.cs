@@ -232,10 +232,8 @@ public static class MapObjectList
 			case LocationNameList.section4:
 				return new MapLocation(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section4, "4", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl2+LocationNameList.section3b, LocationNameList.mineLvl2+LocationNameList.section7a});
 			
-			case LocationNameList.section5a:
-				return new MapLocation(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section5a, "5a - Collapsed Vault", notFastTravelAccessible, oneInterior, new string[]{LocationNameList.mineLvl2+LocationNameList.section3a, LocationNameList.mineLvl2+LocationNameList.section5b, LocationNameList.mineLvl2+LocationNameList.section7a});
-			case LocationNameList.section5b:
-				return new MapInterior(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section5b, "5b - Below", interiorIndexZero, LocationNameList.mineLvl2+LocationNameList.section5a);
+			case LocationNameList.section5:
+				return new MapLocation(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section5, "5 - Collapsed Vault", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl2+LocationNameList.section3a, LocationNameList.mineLvl2+LocationNameList.section5b, LocationNameList.mineLvl2+LocationNameList.section7a});
 
 			case LocationNameList.section6:
 				return new MapLocation(LocationNameList.mineLvl2, LocationNameList.mineLvl2+LocationNameList.section6, "6", notFastTravelAccessible, zeroInteriors, new string[]{LocationNameList.mineLvl2+LocationNameList.section1a, LocationNameList.mineLvl2+LocationNameList.section7a});

@@ -86,7 +86,7 @@ public class GeneratedSelector : Selector
 
 public static class SelectorGenerator
 {
-    private static readonly string singleTargetTitle = Range.getRangeTitle(Range.singleTargetIndex);
+    private readonly static string singleTargetTitle = Range.getRangeTitle(Range.singleTargetIndex);
     private static int generatedSelectorCount;
 	private const string generatedSelectorName = "Generated Selector #";
 	private const string childTileName = "Child Tile #";

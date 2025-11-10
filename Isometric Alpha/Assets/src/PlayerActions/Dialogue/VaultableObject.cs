@@ -12,6 +12,7 @@ public class VaultableObject : IStoryVariableSource
 {
     public const bool isPlural = true;
     public const string barrelName = "barrels";
+    public const string rockName = "rocks";
     public const int oneTile = 1;
     public const int twoTiles = 2;
 

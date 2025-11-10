@@ -6,11 +6,12 @@ public static class ChestItemIDList
 {
 
     private static Dictionary<string, List<ItemListID>> chestItemIDList;
-    private static List<ItemListID> list;
 
-    static ChestItemIDList()
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeChestItemIDList()
     {
         chestItemIDList = new Dictionary<string, List<ItemListID>>();
+        List<ItemListID> list;
 
         #region NECamp
 
@@ -27,8 +28,47 @@ public static class ChestItemIDList
         list = new List<ItemListID>();
 
         list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.bandagesIndex, 4));
-    
+
         chestItemIDList.Add(LocationNameList.campSouthEast, list);
+
+        #endregion
+
+        #region MineLvl_2
+
+        #region MineLvl_2-1b
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rockCakeIndex, 2));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.leatherBootsIndex));
+
+        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section1b, list);
+
+        #endregion
+
+        #region MineLvl_2-1c
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rockCakeIndex, 2));
+        list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.bronzeDirkIndex));
+
+        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section1c, list);
+
+        #endregion
+
+        #region MineLvl_2-2b
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.questItemListIndex, ItemList.toolBundleIndex));
+        list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.heavyPickIndex));
+        list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.lightPickIndex));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.paddedArmorIndex));
+    
+        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section2b, list);
+
+        #endregion
 
         #endregion
 

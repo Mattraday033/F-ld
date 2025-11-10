@@ -25,20 +25,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4968793318184311776, guid: 043c4c1bc369a1c4ab9e55576a2e078b,
         type: 3}
+      propertyPath: m_Size.x
+      value: 1.15625
+      objectReference: {fileID: 0}
+    - target: {fileID: -4968793318184311776, guid: 043c4c1bc369a1c4ab9e55576a2e078b,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.28125
+      objectReference: {fileID: 0}
+    - target: {fileID: -4968793318184311776, guid: 043c4c1bc369a1c4ab9e55576a2e078b,
+        type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: df07fc4230d62ea4a8dfde2f71c7837f,
+      objectReference: {fileID: 21300000, guid: bc392bf3f6bb96c409e3dca23c1b65fa,
         type: 3}
     - target: {fileID: -4968793318184311776, guid: 043c4c1bc369a1c4ab9e55576a2e078b,
         type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4968793318184311776, guid: 043c4c1bc369a1c4ab9e55576a2e078b,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 517585897779863325, guid: 043c4c1bc369a1c4ab9e55576a2e078b,
         type: 3}
       propertyPath: dialogue.inkJSON
       value: 
-      objectReference: {fileID: 4900000, guid: abaa66449079fe944a493e9d9b903c9a, type: 3}
+      objectReference: {fileID: 4900000, guid: af7510967b6aedb46a3a3dad1c09b4fb, type: 3}
     - target: {fileID: 517585897779863325, guid: 043c4c1bc369a1c4ab9e55576a2e078b,
         type: 3}
       propertyPath: dialogue.isVaultable

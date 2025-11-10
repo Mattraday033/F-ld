@@ -350,6 +350,9 @@ public class EquippableItem : Item, IJSONConvertable, IStatBoostSource
         if (equipTarget == null && !CombatStateManager.inCombat && OverallUIManager.getCurrentPartyMember() != null)
         {
             return OverallUIManager.getCurrentPartyMember();
+        } else if(equipTarget == null && !CombatStateManager.inCombat && OverallUIManager.getCurrentPartyMember() == null)
+        {
+            return PartyManager.getPlayerStats();
         }
 
         return equipTarget;

@@ -215,6 +215,17 @@ public class PlayerMovement : MovementTracker
         return instance.gameObject.transform;
     }
 
+    public static void updateStartEndPosition()
+    {
+        if (instance == null)
+        {
+            return;
+        }
+
+        instance.startingPosition = getInstanceTransform().position;
+        instance.endingPosition = getInstanceTransform().position;
+    }
+
     public static Transform getUIParentTransform()
     {
         return instance.UIParent;

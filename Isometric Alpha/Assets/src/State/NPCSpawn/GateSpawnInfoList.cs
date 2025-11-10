@@ -160,7 +160,7 @@ public class GateSpawnInfo : AxisSpawnInfo
 
     public override bool shouldSpawn()
     {
-        return NPCSpawnParamList.getNPCSpawnParams(currentArea, getGateName()).canSpawn(getGateName());
+        return SpawnParamList.getSpawnParams(currentArea, getGateName()).canSpawn(getGateName());
     }
 
     public override List<OOCSpawnDetails> getSpawnDetails()

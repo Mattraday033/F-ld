@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class HealthBarManager : MonoBehaviour
 {
-	private readonly static Color previewSliderOrange = new Color(255f,140f,0f,255f);
-
 	public Slider previewSlider;
 	public Image previewImage;
 	
@@ -65,7 +63,7 @@ public class HealthBarManager : MonoBehaviour
 	public void resetPreviewHealth()
 	{
 		previewSlider.value = emptySlider.value;
-		previewImage.color = previewSliderOrange;
+		previewImage.color = ColorList.previewSliderOrange;
 
 		if (previewSlider.value > 0 && previewImage.gameObject != null)
 		{
@@ -91,7 +89,7 @@ public class HealthBarManager : MonoBehaviour
 		} else
 		{	
 			previewSlider.value += incomingDamage;
-			previewImage.color = previewSliderOrange;
+			previewImage.color = ColorList.previewSliderOrange;
 		}
 		
 		if(previewSlider.value > 0 && previewImage.gameObject != null)

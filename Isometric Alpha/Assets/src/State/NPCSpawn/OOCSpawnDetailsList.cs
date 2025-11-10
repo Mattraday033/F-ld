@@ -127,10 +127,10 @@ public static class OOCSpawnDetailsList
         list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(3, -3), PrefabNames.shackWallHalf));
         list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(4, -3), PrefabNames.shackWallHalf));
 
-        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(0, -6), PrefabNames.southDescendingRubble, Constants.shackRubbleColor));
-        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(1, -6), PrefabNames.blockRubble, Constants.shackRubbleColor));
-        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(0, -5), PrefabNames.northWestDescendingRubble, Constants.shackRubbleColor));
-        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(1, -5), PrefabNames.northWestDescendingRubble, Constants.shackRubbleColor));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(0, -6), PrefabNames.southDescendingRubble));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(1, -6), PrefabNames.blockRubble));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(0, -5), PrefabNames.northWestDescendingRubble));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(1, -5), PrefabNames.northWestDescendingRubble));
         #endregion
         #region Wis Tutorial
 
@@ -150,16 +150,16 @@ public static class OOCSpawnDetailsList
                                                                           TutorialSequenceList.firstHostitilityTutorialSeenFlag}),
                                                                           Constants.indexZero));
 
-        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(0, -6), PrefabNames.southDescendingRubble, Constants.shackRubbleColor));
-        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(1, -6), PrefabNames.blockRubble, Constants.shackRubbleColor));
-        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(0, -5), PrefabNames.northWestDescendingRubble, Constants.shackRubbleColor));
-        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(1, -5), PrefabNames.northWestDescendingRubble, Constants.shackRubbleColor));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(0, -6), PrefabNames.southDescendingRubble));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(1, -6), PrefabNames.blockRubble));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(0, -5), PrefabNames.northWestDescendingRubble));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(1, -5), PrefabNames.northWestDescendingRubble));
 
-        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(3, -5), PrefabNames.southWestDescendingRubble, Constants.shackRubbleColor));
-        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(5, -5), PrefabNames.blockRubble, Constants.shackRubbleColor));
-        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(4, -5), PrefabNames.blockRubble, Constants.shackRubbleColor));
-        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(5, -4), PrefabNames.northWestDescendingRubble, Constants.shackRubbleColor));
-        list.Add(new ObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(4, -4), PrefabNames.northWestDescendingRubble, Constants.shackRubbleColor));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(3, -5), PrefabNames.southWestDescendingRubble));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(5, -5), PrefabNames.blockRubble));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(4, -5), PrefabNames.blockRubble));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(5, -4), PrefabNames.northWestDescendingRubble));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(4, -4), PrefabNames.northWestDescendingRubble));
 
         #endregion
 
@@ -176,7 +176,7 @@ public static class OOCSpawnDetailsList
         #region Stables
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.beam, new Vector3Int(5,5), LocationNameList.stables));
+        list.Add(new NPCSpawnDetails(NPCNameList.beam, new Vector3Int(5, 5), LocationNameList.stables));
 
         list.Add(new NPCSpawnDetails(NPCNameList.horse, new Vector3Int(3, -1), LocationNameList.stables));
         list.Add(new NPCSpawnDetails(NPCNameList.horse + 1, new Vector3Int(12, 9), LocationNameList.stables));
@@ -193,7 +193,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.crate, new Vector3Int(10, 4), LocationNameList.stockhouse));
         list.Add(new NPCSpawnDetails(NPCNameList.crate + 1, new Vector3Int(6, -1), LocationNameList.stockhouse));
         list.Add(new NPCSpawnDetails(NPCNameList.crate + 2, new Vector3Int(5, 3), LocationNameList.stockhouse));
-        
+
         list.Add(new NPCSpawnDetails(NPCNameList.barrels, new Vector3Int(6, 5), LocationNameList.stockhouse));
 
         oocSpawnDetailsDict.Add(LocationNameList.stockhouse, list);
@@ -210,7 +210,7 @@ public static class OOCSpawnDetailsList
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(5, 2), VaultableObject.vaultableBarrelsOneTile));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-1, 3), VaultableObject.vaultableBarrelsOneTile));
 
-        list.Add(new ChestSpawnDetails(0, new Vector3Int(2, 4), Facing.SouthEast));
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(2, 4), Facing.SouthEast));
 
         oocSpawnDetailsDict.Add(LocationNameList.campNorthEast, list);
         #endregion
@@ -221,7 +221,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCSpawnDetails(NPCNameList.temple, new Vector3Int(6, 7), LocationNameList.campCenter));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.guard+1, new Vector3Int(5, 3), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.guard + 1, new Vector3Int(5, 3), LocationNameList.campCenter));
 
         list.Add(new NPCSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(3, 2), LocationNameList.campCenter));
         list.Add(new NPCSpawnDetails(NPCNameList.branded, new Vector3Int(1, 0), LocationNameList.campCenter));
@@ -238,7 +238,7 @@ public static class OOCSpawnDetailsList
         list = new List<OOCSpawnDetails>();
 
 
-        list.Add(new ChestSpawnDetails(0, new Vector3Int(13, 11), Facing.SouthEast));
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(13, 11), Facing.SouthEast));
 
         oocSpawnDetailsDict.Add(LocationNameList.campSouthEast, list);
         #endregion
@@ -263,6 +263,60 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.imre, new Vector3Int(-7, -11), LocationNameList.campManse));
 
         oocSpawnDetailsDict.Add(LocationNameList.campManse, list); //3,9 / kitchen -6,5
+        #endregion
+
+        #region MineLvl_2
+
+        #region MineLvl_2-1a
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl2FirstSecretDoor, LocationNameList.mineLvl2, LocationNameList.section1a, Constants.indexOne));
+
+        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section1a, list);
+
+        #endregion
+
+        #region MineLvl_2-1b
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new VaultableRubbleSpawnDetails(NPCNameList.vaultableRocks, new Vector3Int(8, 7), Constants.sizeTwo));
+        list.Add(new VaultableRubbleSpawnDetails(NPCNameList.vaultableRocks, new Vector3Int(7, 7), Constants.sizeTwo));
+
+        list.Add(new VaultableRubbleSpawnDetails(NPCNameList.vaultableRocks, new Vector3Int(5, 10), Constants.sizeOne));
+
+        list.Add(new ShelfSpawnDetails(Constants.indexZero, new Vector3Int(11, 3), Facing.SouthWest));
+        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(4, 5), Facing.SouthEast));
+
+        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section1b, list);
+
+        #endregion
+
+        #region MineLvl_2-1c
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ShelfSpawnDetails(Constants.indexZero, new Vector3Int(-6, 2), Facing.SouthEast));
+        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(-3, 11), Facing.SouthWest));
+
+        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section1c, list);
+
+        #endregion
+
+        #region MineLvl_2-2b
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(11, 4), Facing.SouthWest));
+        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(11, -2), Facing.SouthWest));
+        list.Add(new ChestSpawnDetails(Constants.indexTwo, new Vector3Int(1, 5), Facing.SouthEast));
+        list.Add(new ChestSpawnDetails(Constants.indexThree, new Vector3Int(1, -3), Facing.NorthWest));
+
+        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section2b, list);
+
+        #endregion
+
         #endregion
     }
 

@@ -15,6 +15,7 @@ public static class SpawnInfoManager
         lastSaveBlueprint = null;
         allSpawnedObjects = null;
         AreaManager.OnAreaSpawn.AddListener(spawnDetails);
+        SecretDoorFlags.OnSecretDoorDiscovery.AddListener(spawnHiddenTerrain);
     }
 
     public static Vector3Int getDefaultCell()
@@ -119,20 +120,37 @@ public static class SpawnInfoManager
 
         foreach (OOCSpawnDetails details in oocSpawnDetailsList)
         {
-            NPCSpawnParams spawnParams = NPCSpawnParamList.getNPCSpawnParams(AreaManager.locationName, details.npcName);
+            SpawnParams spawnParams = details.getSpawnParams();
 
-            if (spawnParams == null)
-            {
-                continue;
-            }
-
-            if (spawnParams.canSpawn(details.npcName))
+            if (spawnParams != null && spawnParams.canSpawn(details.npcName))
             {
                 spawnedObjects.Add(spawnInteractable(details));
             }
         }
 
         return spawnedObjects;
+    }
+
+    private static void spawnHiddenTerrain(string secretDoorFlag)
+    {
+        List<OOCSpawnDetails> oocSpawnDetailsList = OOCSpawnDetailsList.getOOCSpawnDetails(AreaManager.locationName);
+
+        foreach (OOCSpawnDetails details in oocSpawnDetailsList)
+        {
+            if(!details.spawnsOnSecretDoorActivation())
+            {
+                continue;
+            } 
+
+            HiddenTerrainSpawnDetails hiddenTerrainDetails = details as HiddenTerrainSpawnDetails;
+
+            if (hiddenTerrainDetails.secretDoorFlag.Equals(secretDoorFlag))
+            {
+                GameObject spawnedObject = spawnInteractable(details);
+                allSpawnedObjects.Add(spawnedObject);
+                return;
+            }
+        }
     }
 
     public static GameObject spawnInteractable(OOCSpawnDetails details)
@@ -227,7 +245,7 @@ public static class SpawnInfoManager
 
         details.spawnActions(monsterGameObject);
 
-        NPCSpawnParams spawnParams = NPCSpawnParamList.getMonsterSpawnParams(AreaManager.locationName, index.ToString());
+        InteractableSpawnParams spawnParams = SpawnParamList.getMonsterSpawnParams(AreaManager.locationName, index.ToString());
 
         string key = MonsterDefeatKeysList.generateMonsterDefeatKey(monsterMovement.getMonsterPackIndex());
 

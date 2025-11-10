@@ -108,7 +108,6 @@ public class AmountPanel : MonoBehaviour
         {
 
         }
-
 	}
 
 	public void setAmount(int newAmount)
@@ -201,7 +200,6 @@ public class AmountPanel : MonoBehaviour
 
             costWorthAmountTMP.text = "0g";
             amountInput.enabled = false;
-            // costWorthAmountTMP.color = new Color(greyRGB, greyRGB, greyRGB);
             return;
         }
         else

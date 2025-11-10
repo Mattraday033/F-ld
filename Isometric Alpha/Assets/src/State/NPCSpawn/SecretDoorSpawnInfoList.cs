@@ -25,7 +25,7 @@ public static class SecretDoorSpawnInfoList
         #region 5SlaveShack
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackFive, NPCNameList.wallPatch, new Vector3Int(2, -6), 
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackFive, NPCNameList.wallPatch, PrefabNames.defaultNPCSprite, new Vector3Int(2, -6),
                                             new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchThree), Constants.sizeTwo, Axis.DescendingX));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.slaveShackFive, list);
@@ -33,13 +33,13 @@ public static class SecretDoorSpawnInfoList
         #region 6SlaveShack
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, new Vector3Int(5, 2), 
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, PrefabNames.defaultNPCSprite, new Vector3Int(5, 2),
                                             new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchTwo), Constants.sizeTwo, Axis.DescendingX));
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, new Vector3Int(8, -6),
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, PrefabNames.defaultNPCSprite, new Vector3Int(8, -6),
                                             new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchOne), Constants.sizeTwo, Axis.DescendingX));
-                                            
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, new Vector3Int(2, -4),
+
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, PrefabNames.defaultNPCSprite, new Vector3Int(2, -4),
                                             new TutorialSecretDoorInfo(SecretDoorKeyList.wisTutorialSecretDoor,
                                             new StartSpawningAllTrueFlagList(new string[] { FlagNameList.choseWisdomAtStart })),
                                             Constants.sizeTwo, Axis.DescendingY,
@@ -51,7 +51,7 @@ public static class SecretDoorSpawnInfoList
         #region Stables
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.stables, NPCNameList.wallPatch, new Vector3Int(9, -4), 
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.stables, NPCNameList.wallPatch, PrefabNames.defaultNPCSprite, new Vector3Int(9, -4),
                                             new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchOne), Constants.sizeTwo, Axis.DescendingX));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.stables, list);
@@ -59,7 +59,7 @@ public static class SecretDoorSpawnInfoList
         #region Temple
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.temple, NPCNameList.wallPatch, new Vector3Int(11, 4), 
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.temple, NPCNameList.wallPatch, PrefabNames.defaultNPCSprite, new Vector3Int(11, 4),
                                             new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchTwo), Constants.sizeTwo, Axis.DescendingY));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.temple, list);
@@ -68,10 +68,10 @@ public static class SecretDoorSpawnInfoList
         #region CenterCamp
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.campCenter, NPCNameList.wallPatch, new Vector3Int(8, 8), 
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.campCenter, NPCNameList.wallPatch, PrefabNames.defaultNPCSprite, new Vector3Int(8, 8),
                                             new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchOne), Constants.sizeTwo, Axis.DescendingX));
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.campCenter, NPCNameList.wallPatch, new Vector3Int(-5, 14), 
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.campCenter, NPCNameList.wallPatch, PrefabNames.defaultNPCSprite, new Vector3Int(-5, 14),
                                             new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchTwo), Constants.sizeTwo, Axis.DescendingY));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.campCenter, list);
@@ -79,16 +79,38 @@ public static class SecretDoorSpawnInfoList
         #region SECamp
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.campSouthEast, NPCNameList.wallPatch, new Vector3Int(12, 12), 
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.campSouthEast, NPCNameList.wallPatch, PrefabNames.defaultNPCSprite, new Vector3Int(12, 12),
                                             new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchThree), Constants.sizeTwo, Axis.DescendingX));
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.campSouthEast, NPCNameList.wallPatch, new Vector3Int(15, 9), 
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.campSouthEast, NPCNameList.wallPatch, PrefabNames.defaultNPCSprite, new Vector3Int(15, 9),
                                             new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchTwo), Constants.sizeTwo, Axis.DescendingX));
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.campSouthEast, NPCNameList.wallPatch, new Vector3Int(16, 3), 
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.campSouthEast, NPCNameList.wallPatch, PrefabNames.defaultNPCSprite, new Vector3Int(16, 3),
                                             new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchOne), Constants.sizeTwo, Axis.DescendingX));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.campSouthEast, list);
+        #endregion
+
+        #region MineLvl_2
+
+        #region 1a
+        list = new List<SecretDoorSpawnInfo>();
+
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.mineLvl2 + LocationNameList.section1a, NPCNameList.suspiciousWall, PrefabNames.mineLvl2WallSecretDoor, new Vector3Int(5, 1),
+                                            new SecretDoorInfo(SecretDoorKeyList.mineLvl2FirstSecretDoor), Constants.sizeTwo, Axis.DescendingY));
+
+        secretDoorSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section1a, list);
+        #endregion
+
+        #region 7b
+        list = new List<SecretDoorSpawnInfo>();
+
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.mineLvl2 + LocationNameList.section7b, NPCNameList.suspiciousWall, PrefabNames.mineLvl2WallSecretDoor, new Vector3Int(4, 5),
+                                            new SecretDoorInfo(SecretDoorKeyList.mineLvl2SecondSecretDoor), Constants.sizeThree, Axis.DescendingX));
+
+        secretDoorSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7b, list);
+        #endregion
+
         #endregion
     }
 }
@@ -136,28 +158,31 @@ public class SecretDoorSpawnInfo : AxisSpawnInfo
 {
     private string secretDoorName;
     private SecretDoorInfo secretDoorInfo;
+    private string spritePathName;
 
-    public SecretDoorSpawnInfo(string currentArea, string secretDoorName, Vector3Int startCell, SecretDoorInfo secretDoorInfo):
+    public SecretDoorSpawnInfo(string currentArea, string secretDoorName, string spritePathName, Vector3Int startCell, SecretDoorInfo secretDoorInfo):
     base(currentArea, startCell)
     {
         this.secretDoorName = secretDoorName;
         this.secretDoorInfo = secretDoorInfo;
-
+        this.spritePathName = spritePathName;
     }
 
-    public SecretDoorSpawnInfo(string currentArea, string secretDoorName, Vector3Int startCell, SecretDoorInfo secretDoorInfo, int size, Axis axis) :
+    public SecretDoorSpawnInfo(string currentArea, string secretDoorName, string spritePathName, Vector3Int startCell, SecretDoorInfo secretDoorInfo, int size, Axis axis) :
     base(currentArea, startCell, size, axis)
     {
         this.secretDoorName = secretDoorName;
         this.secretDoorInfo = secretDoorInfo;
+        this.spritePathName = spritePathName;        
     }
     
-    public SecretDoorSpawnInfo(string currentArea, string secretDoorName, Vector3Int startCell, SecretDoorInfo secretDoorInfo, int size, Axis axis, string tutorialTargetHash) :
+    public SecretDoorSpawnInfo(string currentArea, string secretDoorName, string spritePathName, Vector3Int startCell, SecretDoorInfo secretDoorInfo, int size, Axis axis, string tutorialTargetHash) :
     base(currentArea, startCell, size, axis)
     {
         this.secretDoorName = secretDoorName;
         this.secretDoorInfo = secretDoorInfo;
-
+        this.spritePathName = spritePathName;        
+        
         this.tutorialTargetHash = tutorialTargetHash;
     }
     
@@ -184,7 +209,7 @@ public class SecretDoorSpawnInfo : AxisSpawnInfo
                 currentCell.y -= index;
             }
 
-            list.Add(new SecretDoorSpawnDetails(secretDoorName, currentCell, currentArea, secretDoorInfo, tutorialTargetHash));
+            list.Add(new SecretDoorSpawnDetails(secretDoorName, currentCell, currentArea, secretDoorInfo, tutorialTargetHash, spritePathName));
         }
 
         return list;

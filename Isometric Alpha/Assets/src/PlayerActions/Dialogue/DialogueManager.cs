@@ -500,6 +500,8 @@ public class DialogueManager : MonoBehaviour
 
                     checkForHaltNotificationBoolArg(buffer, fourthArgIndex);
 
+                    Debug.LogError("questSuccessful = " + questSuccessful);
+
                     QuestList.finishQuest(questTitle, finalQuestStep, questSuccessful);
 
                     OOCUIManager.updateQuestCounter();
@@ -808,9 +810,11 @@ public class DialogueManager : MonoBehaviour
 
                     Vector3Int targetCellCoords = new Vector3Int(xPos, yPos);
 
-                    PlayerMovement.getInstance().gameObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(targetCellCoords);
+                    PlayerMovement.getInstanceTransform().position = AreaManager.getMasterGrid().GetCellCenterWorld(targetCellCoords);
 
-                    Helpers.updateColliderPosition(PlayerMovement.getInstance().gameObject.transform);
+                    PlayerMovement.updateStartEndPosition();
+
+                    Helpers.updateColliderPosition(PlayerMovement.getInstanceTransform());
 
                     PartyMemberMovement.instantiatePartyMemberTrain();
 
@@ -880,9 +884,11 @@ public class DialogueManager : MonoBehaviour
 
                     Vector3Int newPlayerGridSquare = PlayerMovement.getMovementGridCoords() + gridSquareAdjustment;
 
-                    player.gameObject.transform.position = player.convertGridCoordsToWorldPos(newPlayerGridSquare);
+                    PlayerMovement.getInstanceTransform().position = player.convertGridCoordsToWorldPos(newPlayerGridSquare);
 
-                    Helpers.updateColliderPosition(player.gameObject.transform);
+                    PlayerMovement.updateStartEndPosition();
+
+                    Helpers.updateColliderPosition(PlayerMovement.getInstanceTransform());
 
                     PartyMemberMovement.instantiatePartyMemberTrain();
 
@@ -1289,7 +1295,7 @@ public class DialogueManager : MonoBehaviour
     {
         string[] args = getAllArgs(buffer);
 
-        if(args.Length >= argIndex)
+        if (args.Length <= argIndex)
         {
             return false;
         }

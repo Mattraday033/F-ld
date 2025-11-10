@@ -11,13 +11,13 @@ public class HealingItem: UsableItem, IJSONConvertable
 	public const bool treatAmountAsHealing = true;
 	private int amountToHeal;
 	
-	public HealingItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int amountToHeal): base(listId, key, loreDescription, useDescription, subtype, iconName, worth) 
+	public HealingItem(ItemListID listId, string key, string loreDescription, string iconName, int worth, int amountToHeal): base(listId, key, loreDescription, generateUseDescription(amountToHeal), subtype, iconName, worth) 
 	{
 
 		this.amountToHeal = amountToHeal;
 	}
 	
-	public HealingItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int amountToHeal, int quantity): base(listId, key, loreDescription, useDescription, subtype, iconName, worth, quantity) 
+	public HealingItem(ItemListID listId, string key, string loreDescription, string iconName, int worth, int amountToHeal, int quantity): base(listId, key, loreDescription, generateUseDescription(amountToHeal), subtype, iconName, worth, quantity) 
 	{
 		
 		this.amountToHeal = amountToHeal;
@@ -58,13 +58,18 @@ public class HealingItem: UsableItem, IJSONConvertable
 		return typeIconName;
 	}
 
-	public override void describeSelfFull(DescriptionPanel panel)
-	{
-		base.describeSelfFull(panel);
-		
-		if(panel.damageText != null && !(panel.damageText is null))
-		{
-			panel.damageText.text = getDamageFormula();
-		}
-	}
+    public override void describeSelfFull(DescriptionPanel panel)
+    {
+        base.describeSelfFull(panel);
+
+        if (panel.damageText != null && !(panel.damageText is null))
+        {
+            panel.damageText.text = getDamageFormula();
+        }
+    }
+    
+    private static string generateUseDescription(int healingAmount)
+    {
+        return "Heals " + healingAmount + " hp.";
+    }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 187361839520295261}
   - component: {fileID: 187361839520295260}
-  - component: {fileID: 7869856070068566400}
+  - component: {fileID: 36482149289718256}
   - component: {fileID: 6023327784898744763}
   - component: {fileID: 4198935460251172341}
   m_Layer: 21
@@ -76,18 +76,18 @@ SpriteRenderer:
   m_SortingLayerID: 877229515
   m_SortingLayer: 6
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 218c5cbefbe197a41b32c4a8fa40c3ce, type: 2}
+  m_Sprite: {fileID: 21300000, guid: 74bec10a24cb0f7469a41d11033d1698, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.12, y: 5.12}
+  m_Size: {x: 0.63125, y: 0.7}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &7869856070068566400
+--- !u!114 &36482149289718256
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,12 +96,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 187361839520295263}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f7573ec3d76b9148bae512c0e167c31, type: 3}
+  m_Script: {fileID: 11500000, guid: f31f48a9f6b721549bca54e3ae8b2a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialHash: 
   packName: ???
-  followsPlayer: 1
   movesEveryTurn: 0
   neverMoves: 0
   enemyDirectionIndicator: {fileID: 0}
@@ -110,6 +109,7 @@ MonoBehaviour:
   intimidateCounter: 0
   retreatStunnedCounter: 0
   hoverTarget: {fileID: 0}
+  spriteRenderer: {fileID: 187361839520295260}
 --- !u!1839735485 &6023327784898744763
 Tilemap:
   m_ObjectHideFlags: 0

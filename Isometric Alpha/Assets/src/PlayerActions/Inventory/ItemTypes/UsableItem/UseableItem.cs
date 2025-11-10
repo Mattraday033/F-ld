@@ -71,7 +71,7 @@ public class UsableItem : Item, IJSONConvertable
         throw new IOException("Base version of use() was called");
     }
 
-    public string getUseDescription()
+    public virtual string getUseDescription()
     {
         return useDescription + " " + getUseDescriptionAdditions();
     }

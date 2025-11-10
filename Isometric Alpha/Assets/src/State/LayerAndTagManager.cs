@@ -5,23 +5,23 @@ using UnityEngine;
 public static class LayerAndTagManager
 {
 
-	private static readonly int playerLayer = LayerMask.NameToLayer("Player");
-	private static readonly int colliderLayer = LayerMask.NameToLayer("Collider");
-	private static readonly int enemyBoundaryLayer = LayerMask.NameToLayer("EnemyBoundary");
-	public static readonly int npcLayer = LayerMask.NameToLayer("NPC");
-	private static readonly int objectLayer = LayerMask.NameToLayer("Object");
-	private static readonly int movableObjectLayer = LayerMask.NameToLayer("MovableObject");
-	private static readonly int enemyLayer = LayerMask.NameToLayer("Enemy");
-	private static readonly int cunningableObjectLayer = LayerMask.NameToLayer("CunningableObject");
-	private static readonly int openableDoorLayer = LayerMask.NameToLayer("OpenableDoor");
-	private static readonly int terrainLayer = LayerMask.NameToLayer("Terrain");
-	private static readonly int trainLayer = LayerMask.NameToLayer("Train");
-	private static readonly int chestLayer = LayerMask.NameToLayer("Chest");
-	private static readonly int transitionLayer = LayerMask.NameToLayer("Transition");
-	private static readonly int tutorialLayer = LayerMask.NameToLayer("Tutorial");
-	private static readonly int movableObjectBlockerLayer = LayerMask.NameToLayer("MovableObjectBlocker");
-    private static readonly int UILayer = LayerMask.NameToLayer("UI");
-	private static readonly int observableLayer = LayerMask.NameToLayer("Observable");
+	private readonly static int playerLayer = LayerMask.NameToLayer("Player");
+	private readonly static int colliderLayer = LayerMask.NameToLayer("Collider");
+	private readonly static int enemyBoundaryLayer = LayerMask.NameToLayer("EnemyBoundary");
+	public readonly static int npcLayer = LayerMask.NameToLayer("NPC");
+	private readonly static int objectLayer = LayerMask.NameToLayer("Object");
+	private readonly static int movableObjectLayer = LayerMask.NameToLayer("MovableObject");
+	private readonly static int enemyLayer = LayerMask.NameToLayer("Enemy");
+	private readonly static int cunningableObjectLayer = LayerMask.NameToLayer("CunningableObject");
+	private readonly static int openableDoorLayer = LayerMask.NameToLayer("OpenableDoor");
+	private readonly static int terrainLayer = LayerMask.NameToLayer("Terrain");
+	private readonly static int trainLayer = LayerMask.NameToLayer("Train");
+	private readonly static int chestLayer = LayerMask.NameToLayer("Chest");
+	private readonly static int transitionLayer = LayerMask.NameToLayer("Transition");
+	private readonly static int tutorialLayer = LayerMask.NameToLayer("Tutorial");
+	private readonly static int movableObjectBlockerLayer = LayerMask.NameToLayer("MovableObjectBlocker");
+    private readonly static int UILayer = LayerMask.NameToLayer("UI");
+	private readonly static int observableLayer = LayerMask.NameToLayer("Observable");
 
 	public const string firstSortingLayerName = "First";
 	public const string thirdSortingLayerName = "Third";

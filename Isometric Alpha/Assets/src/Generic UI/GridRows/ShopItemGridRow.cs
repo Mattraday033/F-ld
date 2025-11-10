@@ -58,6 +58,6 @@ public class ShopItemGridRow : InventoryItemGridRow
 
     public void setToUnbuyableDisplay()
     {
-        interiorImage.color = new Color32(125, 125, 125, 255);
+        interiorImage.color = ColorList.shopUnbuyable;
     }
 }

@@ -19,9 +19,6 @@ public interface IDragAndDropListener
 public class PartyPositionSpriteGridSquare : PartyPositionGridSquare, IPointerDownHandler, IDragAndDropSource, IDragAndDropListener
 {
 
-    private static Color spaceOccupiedColor = new Color32(55, 55, 55, 255);
-    private static Color spaceFreeColor = new Color32(155, 155, 155, 255);
-
     public Image partyMemberSprite;
 
     public BoxCollider2D boxCollider;
@@ -64,14 +61,14 @@ public class PartyPositionSpriteGridSquare : PartyPositionGridSquare, IPointerDo
 
     private void enablePartyMemberSprite()
     {
-        image.color = spaceOccupiedColor;
+        image.color = ColorList.grey55;
         partyMemberSprite.color = characterInSquare.getSpriteColor();
         partyMemberSprite.enabled = true;
     }
 
     private void disablePartyMemberSprite()
     {
-        image.color = spaceFreeColor;
+        image.color = ColorList.grey155;
         partyMemberSprite.enabled = false;
     }
 

@@ -25,7 +25,7 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
     {
 		foreach(Image panel in panelSections)
 		{
-			panel.color = ineligibleColor;
+			panel.color = ColorList.ineligibleColor;
         }
     }
 

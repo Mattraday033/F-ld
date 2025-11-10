@@ -14,14 +14,8 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     private EquippableItem itemInSlot;
     private int combatActionSlotIndex = -1;
 
-    private static Color availableGrey = new Color32(100, 100, 100, 255);
-    private static Color unavailableGrey = new Color32(35, 35, 35, 255);
-    private static Color availableIconFadeOutLevel = new Color32(0, 0, 0, 85);
-    private static Color unavailableIconFadeOutLevel = new Color32(125, 125, 125, 85);
-    private static Color filledIconFadeOutLevel = new Color32(160, 160, 160, 210);
-
     public Button unequipButton;
-    public Collider2D collider;
+    public Collider2D boxCollider;
 
     public int slotIndex;
     public int displayIndex;
@@ -201,7 +195,7 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
             iconImage.sprite = Helpers.loadSpriteFromResources(getItemInSlot().getIconName());
         }
 
-        collider.enabled = true;
+        boxCollider.enabled = true;
     }
 
     public void setToFilledAndUnusable()
@@ -215,14 +209,14 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
         this.combatActionSlotIndex = combatActionSlotIndex;
 
         backgroundImage.color = Color.black;
-        iconImage.color = filledIconFadeOutLevel;
+        iconImage.color = ColorList.filledIconFadeOutLevel;
 
         if (getItemInSlot() != null && getItemInSlot().getSlotID() == Weapon.offHandSlotIndex)
         {
             iconImage.sprite = Helpers.loadSpriteFromResources(getItemInSlot().getIconName());
         }
 
-        collider.enabled = true;
+        boxCollider.enabled = true;
     }
 
     public void setToAvailableAndUsable()
@@ -235,12 +229,12 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     {
         this.combatActionSlotIndex = combatActionSlotIndex;
 
-        backgroundImage.color = availableGrey;
-        iconImage.color = availableIconFadeOutLevel;
+        backgroundImage.color = ColorList.availableEquipmentIcon;
+        iconImage.color = ColorList.availableIconFadeOutLevel;
 
         setToSlotSprite();
 
-        collider.enabled = true;
+        boxCollider.enabled = true;
     }
 
     public void setToUnavailableAndUnusable()
@@ -253,12 +247,12 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     {
         this.combatActionSlotIndex = combatActionSlotIndex;
 
-        backgroundImage.color = unavailableGrey;
-        iconImage.color = unavailableIconFadeOutLevel;
+        backgroundImage.color = ColorList.unavailableEquipmentIcon;
+        iconImage.color = ColorList.unavailableIconFadeOutLevel;
 
         setToSlotSprite();
 
-        collider.enabled = false;
+        boxCollider.enabled = false;
     }
 
     public bool isFilled()

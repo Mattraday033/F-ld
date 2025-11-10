@@ -11,20 +11,6 @@ using UnityEngine.EventSystems;
 public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
     IPointerExitHandler, IHoverIconSource
 {
-    private const int hexadupleBoxStartingPositionEnemySideRow = 2;
-    private const int hexadupleBoxStartingPositionAllySideRow = 6;
-    private const int hexadupleBoxStartingPositionCol = 2;
-
-    private const float maximumAlpha = 1f;
-    private const float greyedOutAlpha = .3f;
-    private readonly static Color greyedOutIconColor = new Color(maximumAlpha, maximumAlpha, maximumAlpha, greyedOutAlpha);
-    private readonly static Color greyedOutBackgroundColor = new Color(greyedOutAlpha, greyedOutAlpha, greyedOutAlpha, maximumAlpha);
-
-    private readonly static Color lockedBackgroundColor = new Color32(55, 55, 55, 255);
-
-    private readonly static Color costPayableColor = Color.green;
-    private readonly static Color costNotPayableColor = Color.red;
-    private readonly static Color cooldownColor = Color.yellow;
 
     public int index;
     public bool greyedOut = false;
@@ -309,8 +295,8 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         greyedOut = true;
         iconOutline.enabled = false;
 
-        abilityIcon.color = greyedOutIconColor;
-        iconBackground.color = greyedOutBackgroundColor;
+        abilityIcon.color = ColorList.greyedOutIconColor;
+        iconBackground.color = ColorList.greyedOutBackgroundColor;
 
         Helpers.updateGameObjectPosition(abilityIcon.gameObject);
         Helpers.updateGameObjectPosition(iconBackground.gameObject);
@@ -351,11 +337,11 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
                     if (casterCanPayActionCost())
                     {
-                        cooldownCostText.color = costPayableColor;
+                        cooldownCostText.color = ColorList.costPayableColor;
                     }
                     else
                     {
-                        cooldownCostText.color = costNotPayableColor;
+                        cooldownCostText.color = ColorList.costNotPayableColor;
                     }
                 }
                 else
@@ -370,7 +356,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
             }
             else
             {
-                cooldownCostText.color = cooldownColor;
+                cooldownCostText.color = ColorList.cooldownColor;
                 cooldownCostText.text = "" + loadedCombatAction.getCooldownRemaining();
 
                 redKnifeCostText.text = "";
@@ -419,7 +405,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         abilityIcon.gameObject.SetActive(false);
 
         iconOutline.color = Color.black;
-        iconBackground.color = lockedBackgroundColor;
+        iconBackground.color = ColorList.lockedBackgroundColor;
         abilityMenuButton.enabled = false;
     }
 

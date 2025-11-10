@@ -30,13 +30,15 @@ public struct ItemListID
 
 public static class ItemList 
 {
-	public static ArrayList allItems = new ArrayList();
+    public static ArrayList allItems;
 
 	public const int onlyAcceptableEquippedItemQuantity = 1;
 	public const string dominantFistKey = "Dominant Fist";
 	public const string fistKey = "Fist";
 
-	public const int rationsHealingAmount = 25;
+    public const int rationsHealingAmount = 20;
+    public const int rockCakeHealingAmount = 25;
+	public const int horseFleshHealingAmount = 35;
 	public const int properFoodHealingAmount = 40;
 
 	public const bool isOneHanded = false; //what you in the constructor when you want a weapon to be one handed
@@ -59,6 +61,8 @@ public static class ItemList
 	public const int properFoodIndex = 3;
 	public const int chokegrassBombIndex = 4;
 	public const int chewIndex = 5;
+    public const int rockCakeIndex = 6;
+	public const int horseFleshIndex = 7;
 	
 	public const int cudgelIndex = 0;
 	public const int shivIndex = 1;
@@ -202,8 +206,10 @@ public static class ItemList
 	public const int wardensShieldArmorValue = 10; //plus 2S
 
 
-	static ItemList()
+	[RuntimeInitializeOnLoadMethod]
+	private static void initializeItemList()
 	{
+        allItems = new ArrayList();
 
 		ArrayList usableItems = new ArrayList();
 		ArrayList weapons = new ArrayList();
@@ -216,13 +222,14 @@ public static class ItemList
 		ArrayList books = new ArrayList();
 
 		//HealingItem(string key, string loreDescription, string useDescription, int worth, int amountToHeal)
-		usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, rationsIndex), "Rations", "Moldy bread and grimy pemmican.", "Heals " + rationsHealingAmount + " hp.", "Rations", 5, rationsHealingAmount));
+		usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, rationsIndex), "Rations", "Moldy bread and grimy pemmican.", "Rations", 5, rationsHealingAmount));
 		usableItems.Add(new RestorationItem(new ItemListID(usableItemListIndex, bandagesIndex), "Bandages", "Wrappings made from a coarse, firm cloth.", "Used to remove all " + TraitList.woundTraitType + " Traits from a friendly target.", "Bandages", 15, Range.hexadecupleBoxIndex, TraitList.woundTraitType));
 		usableItems.Add(new SkillReplenishItem(new ItemListID(usableItemListIndex, thistleTeaIndex), "Thistle Tea", "Tea made from the flower of local thistle plants. Sharpens the senses and reinvigorates the mind.", "Used to replenish a use of the Cunning Skill. Can not be used to increase your cunning uses above your maximum.", "Tea", 25));
-		usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, properFoodIndex), "Proper Food", "Food worth eating. It'll fill you up and more so.", "Heals " + properFoodHealingAmount + " hp.", "Rations", 15, properFoodHealingAmount));
+		usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, properFoodIndex), "Proper Food", "Food worth eating. It'll fill you up and more so.", "Rations", 15, properFoodHealingAmount));
 		usableItems.Add(new TraitApplicationItem(new ItemListID(usableItemListIndex, chokegrassBombIndex), "Chokegrass Bomb", "A small tin casing filled with a powder that ignites when exposed to air. The smoke from this bomb attacks the eyes and lungs, preventing it's victims from attacking or defending themselves.", "Stuns all targets for 1 round.", "SmokeBomb", 50, Range.hexadecupleBoxIndex, TraitList.chokingKey, CombatItem.useDoesRequireAnAction));
 		usableItems.Add(new TraitApplicationItem(new ItemListID(usableItemListIndex, chewIndex), "Chew", "A leaf that is ground between ones teeth to get at the juices within. These secretions provide an energetic numbness that removes the ache from wounds and fatigue from muscles.", "Heals the user for "+TraitList.chewHealing+" health, increases their damage by "+TraitList.chewExtraDamage+", and their crit chance by "+TraitList.chewExtraCritPercent+"%.", "Chew", 35, Range.singleTargetIndex, TraitList.chewKey, CombatItem.useDoesNotRequireAnAction));
-
+        usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, rockCakeIndex), "Rock Cake", "A brittle roll that looks like a grey stone. Surprisingly, it appears to still be edible.", "Rations", 8, rockCakeHealingAmount));
+        usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, horseFleshIndex), "Horse Flesh", "Strips of cooked and salted horsemeat. Chewier than beef, but no less nutritious.", "Rations", 10, horseFleshHealingAmount));
 
 		//Weapon(string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, int slotID)
 		//Weapon(string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, int slotID, bool isTwoHanded)

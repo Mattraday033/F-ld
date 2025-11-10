@@ -5,6 +5,7 @@ using UnityEngine;
 public static class Constants
 {
 
+    public const int sizeOne = 1;
     public const int sizeTwo = 2;
     public const int sizeThree = 3;
     public const int sizeFour = 4;
@@ -23,6 +24,6 @@ public static class Constants
     public const string WISDesignator = "WIS";
     public const string CHADesignator = "CHA";
 
-    public readonly static Color32 shackRubbleColor = new Color32(225, 205, 175, 255);
+    public const string emptyString = "";
 
 }

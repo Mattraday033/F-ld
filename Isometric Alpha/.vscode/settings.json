@@ -43,6 +43,8 @@
         "**/*.user": true,
         "**/*.userprefs": true,
         "**/*.wav": true,
+        "builds/": true,
+        "Builds/": true,
         "build/": true,
         "Build/": true,
         "logs/": true,
@@ -54,7 +56,13 @@
         "Library/": true,
         "temp/": true,
         "Temp/": true,
-        "UserSettings/": true
+        "UserSettings/": true,
+        
+        "Packages/": true,
+        "Other Assets/": true,
+        "MonoBleedingEdge/": true,
+        "Assets/Ink": true,
+        "Assets/RedBlueGames": true
     },
     "dotnet.defaultSolution": "Isometric Alpha.slnx",
     "files.associations": {

@@ -87,21 +87,24 @@ public class MonsterSpawnDetails : OOCSpawnDetails
 
 public class MovableObjectSpawnDetails: MonsterSpawnDetails
 {
-    public MovableObjectSpawnDetails(string npcName, Vector3Int cellCoords) :
+    private string spritePath;
+
+    public MovableObjectSpawnDetails(string npcName, Vector3Int cellCoords, string spritePath) :
     base(npcName, cellCoords)
     {
         this.facing = Facing.Random;
         this.chasesPlayer = false;
-    }
-
-    public override string getSpriteName()
-    {
-        return null;
+        this.spritePath = spritePath;
     }
 
     public override string getPrefabName()
     {
         return PrefabNames.movableObject;
+    }
+
+    public override string getSpriteName()
+    {
+        return spritePath;
     }
 
     public override Transform getParent()
@@ -111,9 +114,9 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
 
     public override void spawnActions(EnemyMovement enemyMovement)
     {
-        enemyMovement.setEnemyFacing(Facing.Random);
-        enemyMovement.followsPlayer = false;
         MovementManager.addMovementTracker(enemyMovement);
+
+        enemyMovement.getSpriteRenderer().sprite = Helpers.loadSpriteFromResources(getSpriteName());
     }
 
 

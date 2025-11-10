@@ -5,9 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerCombatActionCounterManager : MonoBehaviour
 {
-	public static Color usedCombatActionSlotColor = Color.green;
-	public static Color unusedCombatActionSlotColor = Color.red;
-	public static Color dormantCombatActionSlotColor = new Color32(75,75,75,255);
+
 	
 	public Image[] partyMemberCombatActionPanels;
 	
@@ -35,7 +33,7 @@ public class PlayerCombatActionCounterManager : MonoBehaviour
 
 			if (combatant.costsPartyCombatActions())
 			{
-				partyMemberCombatActionPanels[panelIndex].color = usedCombatActionSlotColor;
+				partyMemberCombatActionPanels[panelIndex].color = ColorList.usedCombatActionSlotColor;
 				panelIndex++;
 			}
 		}
@@ -53,10 +51,10 @@ public class PlayerCombatActionCounterManager : MonoBehaviour
 		{
 			if(panelIndex < PartyStats.getPartyMemberCombatActionSlots())
 			{
-				partyMemberCombatActionPanels[panelIndex].color = unusedCombatActionSlotColor;
+				partyMemberCombatActionPanels[panelIndex].color = ColorList.unusedCombatActionSlotColor;
 			} else
 			{
-				partyMemberCombatActionPanels[panelIndex].color = dormantCombatActionSlotColor;
+				partyMemberCombatActionPanels[panelIndex].color = ColorList.dormantCombatActionSlotColor;
 			}
 		}
 	}

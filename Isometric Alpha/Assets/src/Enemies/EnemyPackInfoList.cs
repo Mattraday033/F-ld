@@ -92,6 +92,11 @@ public static class EnemyPackInfoList
 
     public static EnemyPackInfo getEnemyPackInfo(string areaName, int index)
     {
+        if(!enemyPackInfoDict.ContainsKey(areaName))
+        {
+            return twoGiantBatsTwoBatSwarmsTwoArmoredBats;
+        }
+
         return enemyPackInfoDict[areaName][index];
     }
 
@@ -120,6 +125,23 @@ public static class EnemyPackInfoList
         list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
 
         enemyPackInfoDict.Add(LocationNameList.mineLvl1 + LocationNameList.section1b, list);
+        #endregion
+
+        #region MineLvl_2-1b
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
+
+        enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section1b, list);
+        #endregion
+
+        #region MineLvl_2-1c
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
+        list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
+
+        enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section1c, list);
         #endregion
     }
 

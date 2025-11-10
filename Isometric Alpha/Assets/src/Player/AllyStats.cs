@@ -868,7 +868,7 @@ public class AllyStats : Stats
             panel.iconPanel.gameObject.SetActive(true);
         }
 
-        DescriptionPanel.setImageColor(panel.iconBackgroundPanel, new Color32(125,125,125,255));
+        DescriptionPanel.setImageColor(panel.iconBackgroundPanel, ColorList.grey125);
         DescriptionPanel.setImageColor(panel.iconPanel, getSpriteColor());
     }
 

@@ -8,12 +8,6 @@ public enum BlockFormatType {None = 0, PartyMemberStats = 1, CombatHover = 2, Pl
 
 public class BlockFormat
 {
-    private static Color combatHoverOutlineGrey = new Color32(155, 155, 155, 255);
-    private static Color combatHoverInteriorGrey = new Color32(25, 25, 25, 255);
-
-    private static Color iconBackgroundBlack = Color.black;
-    private static Color iconOutlineGrey = Color.white;
-
     public bool disableImages;
 
     public Color outlineColor;
@@ -31,8 +25,8 @@ public class BlockFormat
     {
         this.disableImages = disableImages;
 
-        this.outlineColor = combatHoverOutlineGrey;
-        this.interiorColor = combatHoverOutlineGrey;
+        this.outlineColor = ColorList.combatHoverOutlineGrey;
+        this.interiorColor = ColorList.combatHoverOutlineGrey;
     }
 
     public BlockFormat(Color outlineColor, Color interiorColor)
@@ -47,8 +41,8 @@ public class BlockFormat
     {
         this.disableImages = disableImages;
 
-        this.outlineColor = combatHoverOutlineGrey;
-        this.interiorColor = combatHoverOutlineGrey;
+        this.outlineColor = ColorList.combatHoverOutlineGrey;
+        this.interiorColor = ColorList.combatHoverOutlineGrey;
         
         this.iconOutlineColor = iconOutlineColor;
         this.iconBackgroundColor = iconBackgroundColor;
@@ -103,10 +97,10 @@ public class BlockFormat
                 return new BlockFormat(Color.clear, Color.clear, Color.clear, Color.black, new Vector2Int(45, 45), 26, 5);
 
             case BlockFormatType.CombatHover:
-                return new BlockFormat(combatHoverOutlineGrey, combatHoverOutlineGrey, Color.clear, Color.black);
+                return new BlockFormat(ColorList.combatHoverOutlineGrey, ColorList.combatHoverOutlineGrey, Color.clear, Color.black);
 
-            case BlockFormatType.PartyMemberStats:
-                return new BlockFormat(false, iconOutlineGrey, iconBackgroundBlack);
+            case BlockFormatType.PartyMemberStats: 
+                return new BlockFormat(false, Color.white, Color.black);
             default:
                 return null;
         }

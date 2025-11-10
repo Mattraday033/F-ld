@@ -13,10 +13,6 @@ public static class TraitList
 																		new GridCoords(3,3)
 																		};
 
-	//Text Colors for Exuberances
-	public readonly static Color blueShieldTextColor = new Color(.1f, .4f, 1f, 1f); // color is a lighter blue than default Color.blue
-	public readonly static Color greenLeafTextColor = new Color(0.1f, 1f, 0f, 1f); // color is a lighter green than default Color.green
-
 	//Permanent Trait Types
 	public const string creatureTypeTraitType = "Creature Type";
 	public const string interactionTypeTraitType = "Interaction";
@@ -225,13 +221,13 @@ public static class TraitList
 	private readonly static Trait redKnifeBaseTrait = new Trait("Red Knife", chargeTraitType, "The will to harm. " + AbilityList.redKnifeAcquisitionMethodExplanation, "Red Knife", Color.red);
 	private readonly static StackableTrait redKnife = new StackableTrait(zeroStacksAtStart, oneStackPerApplication, ActionCostType.RedKnife, redKnifeBaseTrait);
 
-    private readonly static Trait blueShieldBaseTrait = new Trait("Blue Shield", chargeTraitType, "The will to help. " + AbilityList.blueShieldAcquisitionMethodExplanation, "Blue Shield", blueShieldTextColor);
+    private readonly static Trait blueShieldBaseTrait = new Trait("Blue Shield", chargeTraitType, "The will to help. " + AbilityList.blueShieldAcquisitionMethodExplanation, "Blue Shield", ColorList.blueShieldTextColor);
     private readonly static StackableTrait blueShield = new StackableTrait(zeroStacksAtStart, oneStackPerApplication, ActionCostType.BlueShield, blueShieldBaseTrait);
 
     private readonly static Trait yellowThornBaseTrait = new Trait("Yellow Thorn", chargeTraitType, "The will to hinder. " + AbilityList.yellowThornAcquisitionMethodExplanation, "Yellow Thorn", Color.yellow);
     private readonly static StackableTrait yellowThorn = new StackableTrait(zeroStacksAtStart, oneStackPerApplication, ActionCostType.YellowThorn, yellowThornBaseTrait);
 
-    private readonly static Trait greenLeafBaseTrait = new Trait("Green Leaf", chargeTraitType, "The will to heal. " + AbilityList.greenLeafAcquisitionMethodExplanation, "Green Leaf", greenLeafTextColor); 
+    private readonly static Trait greenLeafBaseTrait = new Trait("Green Leaf", chargeTraitType, "The will to heal. " + AbilityList.greenLeafAcquisitionMethodExplanation, "Green Leaf", ColorList.greenLeafTextColor); 
     private readonly static StackableTrait greenLeaf = new StackableTrait(zeroStacksAtStart, oneStackPerApplication, ActionCostType.GreenLeaf, greenLeafBaseTrait);
 
     private readonly static StackableTrait[] charismaPassiveStackableTraits = new StackableTrait[] { redKnife, blueShield, yellowThorn, greenLeaf };

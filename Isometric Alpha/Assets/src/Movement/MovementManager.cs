@@ -174,8 +174,6 @@ public class MovementManager : MonoBehaviour
         movement.startingPosition = movement.getWorldPosition();
         movement.endingPosition = movement.startingPosition;
 
-        Debug.LogError("movement index = " + movement.getMovementIndex());
-
         if (allMovementTrackers.Count == movement.getMovementIndex())
         {
             allMovementTrackers.Add(movement);
@@ -195,6 +193,14 @@ public class MovementManager : MonoBehaviour
 
             allMovementTrackers.AddRange(movements);
         }      
+    }
+
+    public static void replaceMovementTracker(MovementTracker movement)
+    {
+        movement.startingPosition = movement.getWorldPosition();
+        movement.endingPosition = movement.startingPosition;
+
+        allMovementTrackers[movement.getMovementIndex()] = movement;
     }
 
     private IEnumerator prepCombatAfterMovesFinish(MovementTracker movement)
@@ -226,7 +232,7 @@ public class MovementManager : MonoBehaviour
         while (elapsedTime <= timeToMove)
         {
             movement.getTransform().position = Vector3.Lerp(movement.startingPosition, movement.endingPosition, (elapsedTime / timeToMove));
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.deltaTime;  
             yield return null;
         }
 
@@ -358,7 +364,7 @@ public class MovementManager : MonoBehaviour
         {
             EnemyMovement enemyMovement = allMovementTrackers[index + 1] as EnemyMovement;
 
-            statWrappers[index] = new EnemyStatWrapper(enemyMovement.startingPosition,
+            statWrappers[index] = new EnemyStatWrapper(enemyMovement.transform.position,
                                                         enemyMovement.enemyFacing.getFacing(),
                                                         enemyMovement.intimidateCounter,
                                                         enemyMovement.cunningStunCounter,

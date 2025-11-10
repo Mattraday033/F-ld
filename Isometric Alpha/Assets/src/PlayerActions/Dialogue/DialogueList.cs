@@ -8,6 +8,7 @@ using UnityEngine;
 public static class DialogueList
 {
 
+
     private readonly static Dialogue wallPatchDialogue = new Dialogue(new string[] { NPCNameList.wallPatch },
                                                             Resources.Load<TextAsset>(DialogueNameList.wallPatchPath));
 
@@ -285,9 +286,20 @@ public static class DialogueList
                             new Dialogue(new string[] { NPCNameList.manseFrontDoor },
                             Resources.Load<TextAsset>(DialogueNameList.manseFrontDoorPath)));
 
-        addDialogueToList(LocationNameList.campManse, NPCNameList.manseServiceEntrance+1,
+        addDialogueToList(LocationNameList.campManse, NPCNameList.manseServiceEntrance + 1,
                             new Dialogue(new string[] { NPCNameList.manseServiceEntrance },
                             Resources.Load<TextAsset>(DialogueNameList.manseServiceEntrancePath)));
+
+        #endregion
+
+        #region MineLvl_2
+
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section1a, NPCNameList.suspiciousWall,
+                                                                                  new Dialogue(new string[] { NPCNameList.suspiciousWall },
+                                                                                  Resources.Load<TextAsset>(DialogueNameList.suspiciousWallPath + 1)));
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7b, NPCNameList.suspiciousWall,
+                                                                                  new Dialogue(new string[] { NPCNameList.suspiciousWall },
+                                                                                  Resources.Load<TextAsset>(DialogueNameList.suspiciousWallPath + 2)));
 
         #endregion
     }
@@ -340,14 +352,19 @@ public static class DialogueList
     public static Dialogue getDialogue(string key)
     {
         key = key.Replace(" ", "");
-        if(!dialogueList.ContainsKey(key))
+        if (!dialogueList.ContainsKey(key))
         {
             return null;
         }
 
-        return  dialogueList[key.Replace(" ", "")].clone();
+        return dialogueList[key.Replace(" ", "")].clone();
     }
 	
+    public static Dialogue getVaultableObjectDialogue()
+    {
+        return new Dialogue(new string[] { Constants.emptyString, Constants.emptyString }, Resources.Load<TextAsset>(DialogueNameList.vaultableObjectPath));
+    }
+
 	public static string scrubNameOfEndNumbers(string name)
 	{
 		

@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public enum ChestState {Closed, OpenFilled, OpenEmpty }
+public enum ChestType {Chest, Shelf }
+public enum ChestState { Closed, OpenFilled, OpenEmpty }
 
 public class Chest : MonoBehaviour, IRevealable
 {
@@ -18,9 +19,10 @@ public class Chest : MonoBehaviour, IRevealable
     private readonly static Vector2 mouseHoverOffsetSW = new Vector2(0.075f,0.075f);
 
     private static Dictionary<KeyValuePair<Facing, ChestState>, string> chestSprites;
+    private static Dictionary<KeyValuePair<Facing, ChestState>, string> shelfSprites;
 
     [RuntimeInitializeOnLoadMethod]
-    private static void instantiateChestSprites()
+    private static void instantiateSprites()
     {
         chestSprites = new Dictionary<KeyValuePair<Facing, ChestState>, string>();
 
@@ -39,16 +41,33 @@ public class Chest : MonoBehaviour, IRevealable
         chestSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthWest, ChestState.Closed), PrefabNames.chestFrontClosed);
         chestSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthWest, ChestState.OpenFilled), PrefabNames.chestFrontOpenFilled);
         chestSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthWest, ChestState.OpenEmpty), PrefabNames.chestFrontOpenEmpty);
+
+        shelfSprites = new Dictionary<KeyValuePair<Facing, ChestState>, string>();
+
+        shelfSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthEast, ChestState.Closed), PrefabNames.shelfFrontFull);
+        shelfSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthEast, ChestState.OpenFilled), PrefabNames.shelfFrontFull);
+        shelfSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthEast, ChestState.OpenEmpty), PrefabNames.shelfFrontEmpty);
+
+        shelfSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthWest, ChestState.Closed), PrefabNames.shelfFrontFull);
+        shelfSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthWest, ChestState.OpenFilled), PrefabNames.shelfFrontFull);
+        shelfSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthWest, ChestState.OpenEmpty), PrefabNames.shelfFrontEmpty);
     }
 
-    private static Sprite getCurrentSprite(Facing facing, ChestState chestState)
+    private static Sprite getCurrentSprite(Facing facing, ChestState chestState, ChestType type)
     {
-        return Helpers.loadSpriteFromResources(chestSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)]);
+        switch(type)
+        {
+            case ChestType.Shelf:
+                return Helpers.loadSpriteFromResources(shelfSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)]);
+            default:
+                return Helpers.loadSpriteFromResources(chestSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)]);
+        }
     }
 
     public BoxCollider2D mouseHoverCollider;
     public Facing facing = Facing.NorthEast;
     public ChestState chestState = ChestState.Closed;
+    public ChestType chestType = ChestType.Chest;
 
     public SpriteRenderer spriteRenderer;
 
@@ -93,9 +112,10 @@ public class Chest : MonoBehaviour, IRevealable
 
     }
 
-    public void populate(int index, Facing facing)
+    public void populate(int index, Facing facing, ChestType type)
     {
         this.facing = facing;
+        chestType = type;
         setMouseHoverOffset();
 
         chestContents = ChestItemIDList.getChestItem(AreaManager.locationName, index);
@@ -112,7 +132,7 @@ public class Chest : MonoBehaviour, IRevealable
     
     private void setToCurrentSprite()
     {
-        spriteRenderer.sprite = getCurrentSprite(facing, chestState);
+        spriteRenderer.sprite = getCurrentSprite(facing, chestState, chestType);
 
         switch(facing)
         {

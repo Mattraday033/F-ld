@@ -255,19 +255,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef62337ef606dae46957980709b443b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverMessageKey: OffHandSlot
-  bonusDamageIcon: 0
-  damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 9068592614491674452}
   backgroundImage: {fileID: 5311501905831558017}
   iconImage: {fileID: 3600378303577562142}
   unequipButton: {fileID: 1887986879957476077}
-  collider: {fileID: 8380376106774274993}
+  boxCollider: {fileID: 8380376106774274993}
   slotIndex: 0
   displayIndex: 0
   outline: {fileID: 9068592614491674452}
-  toJunk: 1
+  slotType: 0
 --- !u!114 &1887986879957476077
 MonoBehaviour:
   m_ObjectHideFlags: 0

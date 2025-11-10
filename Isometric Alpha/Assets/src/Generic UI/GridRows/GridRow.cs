@@ -10,9 +10,6 @@ public class GridRow : MonoBehaviour,
 	IPointerExitHandler,
     IHoverIconSource
 {
-	public static Color ineligibleColor = new Color(0.5f, 0.5f, 0.5f, 1.0f); //Should be a light grey/red for now
-	private static Color alternateRowColor = new Color(0.85f, 0.85f, 0.85f, 1.0f);
-
 	public bool hoverEnabled;
     public bool useFloatingHover;
 
@@ -62,11 +59,11 @@ public class GridRow : MonoBehaviour,
 		foreach (Button button in buttons)
 		{
 			ColorBlock colors = button.colors;
-			colors.normalColor = ineligibleColor;
+			colors.normalColor = ColorList.ineligibleColor;
 			button.colors = colors;
 
 			Image buttonGraphic = (Image)button.targetGraphic;
-			buttonGraphic.color = ineligibleColor;
+			buttonGraphic.color = ColorList.ineligibleColor;
 
 			if (wipeIfIneligible)
 			{
@@ -88,11 +85,11 @@ public class GridRow : MonoBehaviour,
 		foreach (Button button in buttons)
 		{
 			ColorBlock colors = button.colors;
-			colors.normalColor = alternateRowColor;
+			colors.normalColor = ColorList.alternateRowColor;
 			button.colors = colors;
 
 			Image buttonGraphic = (Image)button.targetGraphic;
-			buttonGraphic.color = ineligibleColor;
+			buttonGraphic.color = ColorList.alternateRowColor;
 		}
 	}
 

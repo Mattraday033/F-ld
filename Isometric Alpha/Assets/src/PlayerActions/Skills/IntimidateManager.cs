@@ -117,7 +117,7 @@ public class IntimidateManager : CunningManager
 
     public override Color getTileBaseColor()
     {
-        return new Color(1f, 0.6470588f, 0f, 1f);
+        return ColorList.previewSliderOrange;
     }
 
     public override Color getTileTargetColor()

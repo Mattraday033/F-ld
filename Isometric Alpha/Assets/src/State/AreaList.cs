@@ -200,8 +200,7 @@ public static class AreaList
             LocationNameList.mineLvl2 + LocationNameList.section3a,
             LocationNameList.mineLvl2 + LocationNameList.section3b,
             LocationNameList.mineLvl2 + LocationNameList.section4,
-            LocationNameList.mineLvl2 + LocationNameList.section5a,
-            LocationNameList.mineLvl2 + LocationNameList.section5b,
+            LocationNameList.mineLvl2 + LocationNameList.section5,
             LocationNameList.mineLvl2 + LocationNameList.section6,
             LocationNameList.mineLvl2 + LocationNameList.section7a,
             LocationNameList.mineLvl2 + LocationNameList.section7b

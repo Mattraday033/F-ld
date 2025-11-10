@@ -27,5 +27,16 @@ public static class SecretDoorKeyList
     #endregion
 
     #endregion
+
+    #region Mine
+
+    #region MineLvl_2-1a
+
+    public const string mineLvl2FirstSecretDoor = LocationNameList.mineLvl2 + LocationNameList.section1a + NPCNameList.mineLvl2Wall;
+    public const string mineLvl2SecondSecretDoor = LocationNameList.mineLvl2 + LocationNameList.section7b + NPCNameList.mineLvl2Wall;
+
+    #endregion
+
+    #endregion
 }
 

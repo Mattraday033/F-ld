@@ -11,19 +11,9 @@ using UnityEngine.EventSystems;
 
 public class CharacterCreationPopUpWindow : PopUpWindow
 {
-    private static Color32 disabledColor = new Color32(125, 125, 125, 255);
     private static CharacterCreationPopUpWindow instance;
 
-    public TextMeshProUGUI placeHolderNameText;
     public TMP_InputField nameField;
-
-    public Image statTitleImage;
-    public TextMeshProUGUI statTitle;
-
-    public Image statDescriptionImage;
-    public TextMeshProUGUI statDescription;
-
-    public ScrollableUIElement statDescriptionScroll;
 
     public AllyStats currentStats;
 
@@ -34,13 +24,16 @@ public class CharacterCreationPopUpWindow : PopUpWindow
     public int pointsSpent;
 
     public TextMeshProUGUI pointsToSpendDisplay;
-    public TextMeshProUGUI oldLevelDisplay;
-    public TextMeshProUGUI newLevelDisplay;
 
     public PrimaryStatsPanel primaryStatsPanel;
-    public SecondaryStatsPanel secondaryStatsPanel;
 
-    public ScrollableUIElement newAbilityGrid;
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void intitializeCharacterCreationWindow()
+    {
+        instance = null;
+    }
+
 
     public static CharacterCreationPopUpWindow getInstanceCC()
     {

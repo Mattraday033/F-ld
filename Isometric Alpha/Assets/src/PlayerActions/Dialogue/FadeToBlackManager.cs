@@ -10,7 +10,7 @@ using UnityEngine.Events;
 public class FadeToBlackManager : MonoBehaviour
 {
 	private static FadeToBlackManager instance;
-    public static UnityEvent OnFadeToBlack = new UnityEvent();
+    public readonly static UnityEvent OnFadeToBlack = new UnityEvent();
 
     [Header("Cameras")]
 
@@ -29,22 +29,31 @@ public class FadeToBlackManager : MonoBehaviour
 	//[SerializeField] 
     public Image fadeToBlackImage;
 
-	public static bool reset = false;
-	
-	private const float illuminationIncrement = 510f;
-	
 	private const float maxOpacity = 255f;
-	private static float frameCount = 0f;
+	private static float frameCount;
 	
 	private static IEnumerator fadingToBlackCoroutine;
 	private static IEnumerator fadingBackInCoroutine;
-	
-	private static bool waitToFadeIn = false;
+
+    private static bool waitToFadeIn;
 
     public bool fadeBackInOnStart = false;
 
     private const float slowFadeInSpeed = 3.5f;
     public float fadeTime = .5f;
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeFadeToBlackManager()
+    {
+        waitToFadeIn = false;
+
+        fadingBackInCoroutine = null;
+        fadingToBlackCoroutine = null;
+
+        frameCount = 0f;
+
+        instance = null;
+    }
 
     private void Awake()
     {
