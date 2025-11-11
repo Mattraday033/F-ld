@@ -7,8 +7,7 @@ using UnityEngine.Events;
 
 public static class GateAndChestManager
 {
-    public const bool resetDictionary = true;
-    public static UnityEvent OnGateKeyAdd;
+    public readonly static UnityEvent OnGateKeyAdd = new UnityEvent();
 
     private static Dictionary<string, bool> openedGatesAndChests;
 
@@ -16,7 +15,6 @@ public static class GateAndChestManager
     public static void resetGatesAndChests()
     {
         openedGatesAndChests = new Dictionary<string, bool>();
-        OnGateKeyAdd = new UnityEvent();
     }
 
     public static void resetGatesAndChests(Dictionary<string, bool> newDict)
@@ -47,6 +45,11 @@ public static class GateAndChestManager
 
     public static FlagWrapper[] getAllGateAndChestFlagWrappers()
     {
+        // foreach (KeyValuePair<string, bool> kvp in openedGatesAndChests)
+        // {
+        //     Debug.LogError("kvp.Key = " + kvp.Key);
+        // }
+
         return FlagWrapper.getAllFlagsInDictionary(openedGatesAndChests);
     }
 

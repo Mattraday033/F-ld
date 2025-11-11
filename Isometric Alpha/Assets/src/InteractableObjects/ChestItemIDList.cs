@@ -65,8 +65,19 @@ public static class ChestItemIDList
         list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.heavyPickIndex));
         list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.lightPickIndex));
         list.Add(new ItemListID(ItemList.armorListIndex, ItemList.paddedArmorIndex));
-    
+
         chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section2b, list);
+
+        #endregion
+
+        #region MineLvl_2-7b
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rockCakeIndex));
+        list.Add(new ItemListID(ItemList.questItemListIndex, ItemList.winchIndex));
+    
+        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section7b, list);
 
         #endregion
 

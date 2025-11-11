@@ -12,6 +12,15 @@ public static class DialogueList
     private readonly static Dialogue wallPatchDialogue = new Dialogue(new string[] { NPCNameList.wallPatch },
                                                             Resources.Load<TextAsset>(DialogueNameList.wallPatchPath));
 
+    private readonly static Dialogue awkwardRubbleDialogue = new Dialogue(new string[] { NPCNameList.awkwardRubble },
+                                                             Resources.Load<TextAsset>(DialogueNameList.awkwardRubblePath));
+                                                        
+    private readonly static Dialogue ancientPortcullisDialogue = new Dialogue(new string[] { NPCNameList.ancientPortcullis },
+                                                             Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath));
+
+    private readonly static Dialogue liftableGateDialogue = new Dialogue(new string[] { "", NPCNameList.liftableGate + 1},
+                                                             Resources.Load<TextAsset>(DialogueNameList.liftableGatePath));
+
     public static Dictionary<string, Dialogue> dialogueList;
 
     [RuntimeInitializeOnLoadMethod]
@@ -300,6 +309,26 @@ public static class DialogueList
         addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7b, NPCNameList.suspiciousWall,
                                                                                   new Dialogue(new string[] { NPCNameList.suspiciousWall },
                                                                                   Resources.Load<TextAsset>(DialogueNameList.suspiciousWallPath + 2)));
+
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2b, NPCNameList.mineArmoryGate + 1,
+                                                                                  new Dialogue(new string[] { NPCNameList.mineArmoryGate },
+                                                                                  Resources.Load<TextAsset>(DialogueNameList.mineArmoryGatePath)));
+
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section3a, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section3a, NPCNameList.awkwardRubble + 1, awkwardRubbleDialogue);
+
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section3b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section3b, NPCNameList.liftableGate + 1, liftableGateDialogue);
+
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7a, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7a, NPCNameList.ancientPortcullis + 1, ancientPortcullisDialogue);
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7a, NPCNameList.ancientPortcullis + 2, ancientPortcullisDialogue);
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7a, NPCNameList.ancientPortcullis + 3, ancientPortcullisDialogue);
+
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7b, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7b, NPCNameList.ancientPortcullis + 1, ancientPortcullisDialogue);
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7b, NPCNameList.liftableGate + 2, liftableGateDialogue);
 
         #endregion
     }

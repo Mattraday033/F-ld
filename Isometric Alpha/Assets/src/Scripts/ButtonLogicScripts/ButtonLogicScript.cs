@@ -79,7 +79,13 @@ public class OpenGateButtonLogicScript : ButtonLogicScript
 
     public override void runScript()
     {
-        GateAndChestManager.addKey(gateKey);
+        if(scriptIndex <= 0)
+        {
+            GateAndChestManager.addKey(AreaManager.locationName+gateKey);
+        } else
+        {
+            GateAndChestManager.addKey(AreaManager.locationName+gateKey+scriptIndex);
+        }
     }
 
     public override bool scriptConditionsMet()

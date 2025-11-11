@@ -377,6 +377,13 @@ public class ButtonSpawnDetails : OOCSpawnDetails
         this.index = 0;
     }
 
+    public ButtonSpawnDetails(string npcName, Vector3Int cellCoords, int index) :
+    base(npcName, cellCoords)
+    {
+        this.index = index;
+    }
+
+
     public ButtonSpawnDetails(string npcName, Vector3Int cellCoords, string tutorialTargetHash) :
     base(npcName, cellCoords)
     {
@@ -564,7 +571,8 @@ public class GateSpawnDetails : NPCSpawnDetails
         if (skewed)
         {
             return base.getParent();
-        } else
+        }
+        else
         {
             return null;
         }
@@ -582,6 +590,15 @@ public class GateSpawnDetails : NPCSpawnDetails
         {
             addTutorialTargetComponent(gateGameObject, gate.spriteRenderer, tutorialTargetHash);
         }
+    }
+
+    public override void spawnActions(DialogueTrigger dialogueTrigger)
+    {
+        base.spawnActions(dialogueTrigger);
+
+        Dialogue dialogue = dialogueTrigger.dialogue;
+
+        dialogue.cameraFoci[Constants.indexOne] = dialogueTrigger.gameObject;
     }
 }
 

@@ -32,7 +32,60 @@ public static class ButtonScriptList
 
         scriptDict.Add(LocationNameList.slaveShackSix, list);
 
-        #endregion        
+        #endregion
+        #region MineLvl_2-2b
+
+        list = new List<ButtonLogicScript>();
+
+        list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeOne, NPCNameList.ancientPortcullis));
+
+        scriptDict.Add(LocationNameList.mineLvl2 + LocationNameList.section2b, list);
+
+        #endregion
+        #region MineLvl_2-3a
+
+        list = new List<ButtonLogicScript>();
+
+        list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeTwo, NPCNameList.awkwardRubble));
+        list.Add(new OpenGateButtonLogicScript(Constants.indexOne, Constants.sizeTwo, NPCNameList.awkwardRubble + 1));
+
+        scriptDict.Add(LocationNameList.mineLvl2 + LocationNameList.section3a, list);
+
+        #endregion
+        #region MineLvl_2-3b
+
+        list = new List<ButtonLogicScript>();
+
+        list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeThree, NPCNameList.ancientPortcullis));
+
+        scriptDict.Add(LocationNameList.mineLvl2 + LocationNameList.section3b, list);
+
+        #endregion
+
+        #region MineLvl_2-7a
+
+        list = new List<ButtonLogicScript>();
+
+        list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeOne, NPCNameList.ancientPortcullis));
+        list.Add(new OpenGateButtonLogicScript(Constants.indexOne, Constants.sizeOne, NPCNameList.ancientPortcullis));
+        list.Add(new OpenGateButtonLogicScript(Constants.indexTwo, Constants.sizeOne, NPCNameList.ancientPortcullis));
+        list.Add(new OpenGateButtonLogicScript(Constants.indexThree, Constants.sizeOne, NPCNameList.ancientPortcullis));
+
+        scriptDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7a, list);
+
+        #endregion
+
+        #region MineLvl_2-7b
+
+        list = new List<ButtonLogicScript>();
+
+        list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeTwo, NPCNameList.awkwardRubble));
+        list.Add(new OpenGateButtonLogicScript(Constants.indexOne, Constants.sizeOne, NPCNameList.ancientPortcullis));
+
+        scriptDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7b, list);
+
+        #endregion          
+
     }
 
 

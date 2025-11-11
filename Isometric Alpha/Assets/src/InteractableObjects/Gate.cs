@@ -24,7 +24,7 @@ public class Gate : MonoBehaviour, IRevealable
 
     private void checkGateStatus()
     {
-        if (GateAndChestManager.hasBeenOpened(gateKey))
+        if (GateAndChestManager.hasBeenOpened(getGateKey()))
         {
             gameObject.SetActive(false);
         }
@@ -32,7 +32,7 @@ public class Gate : MonoBehaviour, IRevealable
 
     public string getGateKey()
     {
-        return gateKey;
+        return AreaManager.locationName+gateKey;
     }
 
 	private void OnEnable()

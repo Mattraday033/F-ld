@@ -8,7 +8,10 @@ public class PartyMemberPlacer : MonoBehaviour
 {
 	public static ArrayList placedPartyMemberObjects = new ArrayList();
 
-	public static UnityEvent DestroyAllFollowers = new UnityEvent();
+    public readonly static UnityEvent DestroyAllFollowers = new UnityEvent();
+
+    public readonly static UnityEvent HideAllFollowers = new UnityEvent();
+    public readonly static UnityEvent RevealAllFollowers = new UnityEvent();
 
 	public static PartyMemberPlacer instance;
 
@@ -16,8 +19,6 @@ public class PartyMemberPlacer : MonoBehaviour
     private static void instantiatePartyMemberPlacer()
     {
         placedPartyMemberObjects = new ArrayList();
-
-        DestroyAllFollowers = new UnityEvent();
 
         instance = null;
     }
@@ -34,13 +35,15 @@ public class PartyMemberPlacer : MonoBehaviour
 
 		List<PartyMember> allPartyMembers = PartyManager.getAllPartyMembers();
 
-		foreach (PartyMember partyMember in allPartyMembers)
-		{
-			if (partyMember.placed)
+        foreach (PartyMember partyMember in allPartyMembers)
+        {
+            if (partyMember.placed)
             {
                 placeNextPartyMember(partyMember.getName());
-			}
-		}
+            }
+        }
+
+        MovementManager.OnMoveFinished.Invoke();
 	}
 
 	public static PartyMemberPlacer getInstance()

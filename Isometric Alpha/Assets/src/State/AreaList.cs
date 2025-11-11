@@ -11,34 +11,43 @@ public class Area
 	public int hostility {get; private set;}
 	public string[] scenesInArea {get; private set;}
 	public string[] areasSharingHostility {get; private set;}
-	public bool alwaysAllowsFastTravel {get; private set;}
+	public bool alwaysAllowsFastTravel { get; private set; }
 	
 	public const int hostilityThreshold = 5;
-	private const string combatBackgroundSuffix = "_CombatBackground";
 	private const int interiorHostilityPerCombat = 1;
 	private const int exteriorHostilityPerCombat = 3;
 	
-	public Area(string areaKey, string combatBackgroundName, string[] scenesInArea, string[] areasSharingHostility)
+	public Area(string areaKey, string[] scenesInArea, string[] areasSharingHostility)
 	{
 		this.areaKey = areaKey;
-		this.combatBackgroundName = combatBackgroundName;
+		this.combatBackgroundName = areaKey;
 		this.hostility = 0;
 		this.scenesInArea = scenesInArea;
 		this.areasSharingHostility = areasSharingHostility;
 		this.alwaysAllowsFastTravel = true;
 	}
 	
-	public Area(string areaKey, string combatBackgroundName, string[] scenesInArea, string[] areasSharingHostility, bool alwaysAllowsFastTravel)
+	public Area(string areaKey, string[] scenesInArea, string[] areasSharingHostility, bool alwaysAllowsFastTravel)
 	{
 		this.areaKey = areaKey;
-		this.combatBackgroundName = combatBackgroundName;
+		this.combatBackgroundName = areaKey;
 		this.hostility = 0;
 		this.scenesInArea = scenesInArea;
 		this.areasSharingHostility = areasSharingHostility;
 		this.alwaysAllowsFastTravel = alwaysAllowsFastTravel;
 	}
+
+    public Area(string areaKey, int startingHostility, string[] scenesInArea, string[] areasSharingHostility)
+    {
+        this.areaKey = areaKey;
+        this.combatBackgroundName = areaKey;
+        this.hostility = startingHostility;
+        this.scenesInArea = scenesInArea;
+        this.areasSharingHostility = areasSharingHostility;
+        this.alwaysAllowsFastTravel = true;
+    }
 	
-	public Area(string areaKey, string combatBackgroundName, int startingHostility, string[] scenesInArea, string[] areasSharingHostility)
+    public Area(string areaKey, string combatBackgroundName, int startingHostility, string[] scenesInArea, string[] areasSharingHostility)
 	{
 		this.areaKey = areaKey;
 		this.combatBackgroundName = combatBackgroundName;
@@ -47,7 +56,7 @@ public class Area
 		this.areasSharingHostility = areasSharingHostility;
 		this.alwaysAllowsFastTravel = true;
 	}
-	
+
 	public void addHostility()
 	{
 		addHostility(true);
@@ -100,8 +109,8 @@ public class Area
 	}
 	
 	public GameObject getCombatBackgroundObject()
-	{
-		return Resources.Load<GameObject>(combatBackgroundName + combatBackgroundSuffix);
+    {
+		return Resources.Load<GameObject>(PrefabNames.combatBackgroundFolderPath + combatBackgroundName);
 	}
 }
 
@@ -112,19 +121,10 @@ public static class AreaList
 	private const int startsHostile = 5;
 	private const bool fastTravelContingentOnHostility = false;
 	
-	private const string campBackgroundName = "Camp";
-	private const string manseBackgroundName = "Manse";
-	private const string slaveShackBackgroundName = "SlaveShack";
-	
-	static AreaList()
-	{
-		resetAreaList();
-	}
-	
+    [RuntimeInitializeOnLoadMethod]
 	public static void resetAreaList()
 	{
         allAreas = new Dictionary<string, Area>();
-
 
         string[] scenesInCampExterior = new string[]
         {
@@ -143,7 +143,7 @@ public static class AreaList
             LocationNameList.pit
         };
 
-        allAreas.Add(LocationNameList.campExterior, new Area(LocationNameList.campExterior, campBackgroundName, scenesInCampExterior, areasSharingHostilityWithCampExterior, fastTravelContingentOnHostility));
+        allAreas.Add(LocationNameList.campExterior, new Area(LocationNameList.campExterior, scenesInCampExterior, areasSharingHostilityWithCampExterior, fastTravelContingentOnHostility));
 
         string[] scenesInCampInterior = new string[]
         {
@@ -174,7 +174,7 @@ public static class AreaList
             LocationNameList.pit
         };
 
-        allAreas.Add(LocationNameList.campInterior, new Area(LocationNameList.campInterior, slaveShackBackgroundName, scenesInCampInterior, areasSharingHostilityWithCampInterior));
+        allAreas.Add(LocationNameList.campInterior, new Area(LocationNameList.campInterior, scenesInCampInterior, areasSharingHostilityWithCampInterior));
 
         string[] scenesInMineLvl1 = new string[]
         {
@@ -188,7 +188,7 @@ public static class AreaList
 
         };
 
-        allAreas.Add(LocationNameList.mineLvl1, new Area(LocationNameList.mineLvl1, LocationNameList.mineLvl1, startsHostile, scenesInMineLvl1, areasSharingHostilityWithMineLvl1));
+        allAreas.Add(LocationNameList.mineLvl1, new Area(LocationNameList.mineLvl1, startsHostile, scenesInMineLvl1, areasSharingHostilityWithMineLvl1));
 
         string[] scenesInMineLvl2 = new string[]
         {
@@ -211,7 +211,7 @@ public static class AreaList
 
         };
 
-        allAreas.Add(LocationNameList.mineLvl2, new Area(LocationNameList.mineLvl2, LocationNameList.mineLvl2, startsHostile, scenesInMineLvl2, areasSharingHostilityWithMineLvl2));
+        allAreas.Add(LocationNameList.mineLvl2, new Area(LocationNameList.mineLvl2, startsHostile, scenesInMineLvl2, areasSharingHostilityWithMineLvl2));
 
         string[] scenesInMineLvl3 = new string[]
         {
@@ -234,7 +234,7 @@ public static class AreaList
 
         };
 
-        allAreas.Add(LocationNameList.mineLvl3, new Area(LocationNameList.mineLvl3, LocationNameList.mineLvl3, startsHostile, scenesInMineLvl3, areasSharingHostilityWithMineLvl3));
+        allAreas.Add(LocationNameList.mineLvl3, new Area(LocationNameList.mineLvl3, startsHostile, scenesInMineLvl3, areasSharingHostilityWithMineLvl3));
 
         string[] scenesInManseFirstFloor = new string[]
         {
@@ -263,7 +263,7 @@ public static class AreaList
             LocationNameList.pit
         };
 
-        allAreas.Add(LocationNameList.manseFirstFloor, new Area(LocationNameList.manseFirstFloor, manseBackgroundName, scenesInManseFirstFloor, areasSharingHostilityWithManseFirstFloor));
+        allAreas.Add(LocationNameList.manseFirstFloor, new Area(LocationNameList.manseFirstFloor, scenesInManseFirstFloor, areasSharingHostilityWithManseFirstFloor));
 
         string[] scenesInManseSecondFloor = new string[]
         {
@@ -290,7 +290,7 @@ public static class AreaList
             LocationNameList.pit
         };
 
-        allAreas.Add(LocationNameList.manseSecondFloor, new Area(LocationNameList.manseSecondFloor, manseBackgroundName, scenesInManseSecondFloor, areasSharingHostilityWithManseSecondFloor));
+        allAreas.Add(LocationNameList.manseSecondFloor, new Area(LocationNameList.manseSecondFloor, scenesInManseSecondFloor, areasSharingHostilityWithManseSecondFloor));
 
         string[] scenesInPit = new string[]
         {

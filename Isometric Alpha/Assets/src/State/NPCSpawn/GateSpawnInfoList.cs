@@ -60,9 +60,9 @@ public static class GateSpawnInfoList
                                     new Vector3Int(3, 9),
                                     Constants.sizeTwo,
                                     Axis.DescendingX));
-        
 
-        list.Add(new GateSpawnInfo( Constants.indexOne,
+
+        list.Add(new GateSpawnInfo(Constants.indexOne,
                                     NPCNameList.manseServiceEntrance,
                                     LocationNameList.campManse,
                                     new Vector3Int(-6, 5),
@@ -70,6 +70,140 @@ public static class GateSpawnInfoList
                                     Axis.DescendingX));
 
         gateSpawnInfoDict.Add(LocationNameList.campManse, list);
+
+        #endregion
+
+        #region MineLvl_2-2b
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero,
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section2b,
+                                    new Vector3Int(6, -4),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+        list.Add(new GateSpawnInfo(Constants.indexOne,
+                                    NPCNameList.mineArmoryGate,
+                                    LocationNameList.mineLvl2 + LocationNameList.section2b,
+                                    new Vector3Int(6, 6),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+        gateSpawnInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section2b, list);
+
+        #endregion
+
+        #region MineLvl_2-3a
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero,
+                                    NPCNameList.awkwardRubble,
+                                    LocationNameList.mineLvl2 + LocationNameList.section3a,
+                                    PrefabNames.blockRubble,
+                                    new Vector3Int(3, 7),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        list.Add(new GateSpawnInfo(Constants.indexOne,
+                                    NPCNameList.awkwardRubble,
+                                    LocationNameList.mineLvl2 + LocationNameList.section3a,
+                                    PrefabNames.blockRubble,
+                                    new Vector3Int(10, 7),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        gateSpawnInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section3a, list);
+
+        #endregion
+
+        #region MineLvl_2-3b
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero,
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section3b,
+                                    new Vector3Int(5, -1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        list.Add(new GateSpawnInfo(Constants.indexOne,
+                                    NPCNameList.liftableGate,
+                                    LocationNameList.mineLvl2 + LocationNameList.section3b,
+                                    new Vector3Int(-11, -10),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+        gateSpawnInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section3b, list);
+
+        #endregion
+
+        #region MineLvl_2-7a
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero,
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section7a,
+                                    new Vector3Int(-1, 5),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+        
+        list.Add(new GateSpawnInfo(Constants.indexOne,
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section7a,
+                                    new Vector3Int(1, 2),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        list.Add(new GateSpawnInfo(Constants.indexTwo,
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section7a,
+                                    new Vector3Int(1, -4),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        list.Add(new GateSpawnInfo(Constants.indexThree,
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section7a,
+                                    new Vector3Int(-1, -7),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+        gateSpawnInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7a, list);
+
+        #endregion
+
+        #region MineLvl_2-7b
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero,
+                                    NPCNameList.awkwardRubble,
+                                    LocationNameList.mineLvl2 + LocationNameList.section7b,
+                                    PrefabNames.blockRubble,
+                                    new Vector3Int(-9, -7),
+                                    Constants.sizeThree,
+                                    Axis.DescendingX));
+
+        list.Add(new GateSpawnInfo(Constants.indexOne,
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section7b,
+                                    new Vector3Int(-10, -1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+        list.Add(new GateSpawnInfo(Constants.indexTwo,
+                                    NPCNameList.liftableGate,
+                                    LocationNameList.mineLvl2 + LocationNameList.section7b,
+                                    new Vector3Int(-6, -4),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
+
+        gateSpawnInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7b, list);
 
         #endregion
 

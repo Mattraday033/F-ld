@@ -313,7 +313,71 @@ public static class OOCSpawnDetailsList
         list.Add(new ChestSpawnDetails(Constants.indexTwo, new Vector3Int(1, 5), Facing.SouthEast));
         list.Add(new ChestSpawnDetails(Constants.indexThree, new Vector3Int(1, -3), Facing.NorthWest));
 
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(7, -5)));
+
         oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section2b, list);
+
+        #endregion
+
+        #region MineLvl_2-3a
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new VaultableRubbleSpawnDetails(NPCNameList.vaultableRocks, new Vector3Int(0, 1), Constants.sizeFour));
+        list.Add(new VaultableRubbleSpawnDetails(NPCNameList.vaultableRocks, new Vector3Int(-1, 1), Constants.sizeFour));
+        list.Add(new VaultableRubbleSpawnDetails(NPCNameList.vaultableRocks, new Vector3Int(0, -2), Constants.sizeFour));
+        list.Add(new VaultableRubbleSpawnDetails(NPCNameList.vaultableRocks, new Vector3Int(-1, -2), Constants.sizeFour));
+
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(2, 8)));
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(2, 5)));
+
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(9, 8), Constants.indexOne));
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(9, 5), Constants.indexOne));
+
+        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section3a, list);
+
+        #endregion
+
+        #region MineLvl_2-3b
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(3, 5)));
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(-1, 5)));
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(-4, 5)));
+
+        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section3b, list);
+
+        #endregion
+
+        #region MineLvl_2-7a
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(-2, 7)));
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(4, 0), Constants.indexOne));
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(5, -2), Constants.indexTwo));
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(-3, -9), Constants.indexThree));
+
+        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7a, list);
+
+        #endregion
+
+        #region MineLvl_2-7b
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ShelfSpawnDetails(Constants.indexZero, new Vector3Int(5, -4), Facing.SouthWest));
+        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(-3, 11), Facing.SouthEast));
+
+        list.Add(new VaultableRubbleSpawnDetails(NPCNameList.vaultableRocks, new Vector3Int(-1, -3), Constants.sizeOne));
+
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(-9, -8)));
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(-11, -8)));
+
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(-9, -2), Constants.indexOne));
+
+        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7b, list);
 
         #endregion
 

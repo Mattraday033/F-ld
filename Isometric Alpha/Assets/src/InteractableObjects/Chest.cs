@@ -107,18 +107,15 @@ public class Chest : MonoBehaviour, IRevealable
         destroyListeners();
     }
 
-    void Start()
-    {
-
-    }
-
     public void populate(int index, Facing facing, ChestType type)
     {
+        chestIndex = index;
+
         this.facing = facing;
         chestType = type;
         setMouseHoverOffset();
 
-        chestContents = ChestItemIDList.getChestItem(AreaManager.locationName, index);
+        chestContents = ChestItemIDList.getChestItem(AreaManager.locationName, chestIndex);
 
         if (GateAndChestManager.hasBeenOpened(getChestKey()))
         {

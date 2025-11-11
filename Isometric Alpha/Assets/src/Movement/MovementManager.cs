@@ -27,8 +27,6 @@ public class MovementManager : MonoBehaviour
     public static List<MovementTracker> allMovementTrackers;
     public static Dictionary<MovementTracker, Coroutine> currentMovements;
 
-    private bool neverMoved = true;
-
     private const float timeToMove = .2f;
 
     public const int playerSpriteIndex = 0;
@@ -115,8 +113,6 @@ public class MovementManager : MonoBehaviour
 
             if (!movement.isMoving())
             {
-                neverMoved = false;
-
                 movement.updateFacing();
 
                 currentMovements.Add(movement, StartCoroutine(moveSprite(movement)));
@@ -626,7 +622,6 @@ public class MovementManager : MonoBehaviour
         //     if (!isMoving[i])
         //     {
         //         isMoving[i] = true;
-        //         neverMoved = false;
 
         //         if (i > playerSpriteIndex && endingPositions[i] != startingPositions[i])
         //         {

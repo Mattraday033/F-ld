@@ -212,7 +212,15 @@ public static class PrefabNames
     public const string projectile = combatFolder + "Projectile";
     public const string effect = combatFolder + "Effect";
 
-	public const string placeHolderObject = combatFolder + "RepositionPlaceholder";
+    public const string placeHolderObject = combatFolder + "RepositionPlaceholder";
+
+    #endregion
+
+    #region Sprite Maps
+    
+    public const string spriteMapFolder = "SpriteMaps/";
+
+    public const string combatBackgroundFolderPath = PrefabNames.spriteMapFolder + "Combat Backgrounds/";
 
     #endregion
 

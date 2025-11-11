@@ -107,6 +107,10 @@ public static class MonsterSpawnDetailsList
 
         list = new List<MonsterSpawnDetails>();
 
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(3, 1), Facing.SouthEast));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(0, 0), Facing.SouthEast));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(-4, 0), Facing.SouthWest));
+
         list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.movableCrate, new Vector3Int(2, -10), PrefabNames.movableCrate));
         list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.movableCrate, new Vector3Int(-1, -10), PrefabNames.movableCrate));
         list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.movableCrate, new Vector3Int(-5, -10), PrefabNames.movableCrate));
@@ -131,7 +135,11 @@ public static class MonsterSpawnDetailsList
 
         list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(-4, 8)));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(1, -11)));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(-3, 2)));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(3, 9)));
+
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(-3, 9), Facing.SouthWest));
 
         monsterSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7b, list);
 

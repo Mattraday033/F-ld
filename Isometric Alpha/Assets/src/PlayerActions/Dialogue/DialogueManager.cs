@@ -186,7 +186,7 @@ public class DialogueManager : MonoBehaviour
 
 		currentDialogue = dialogue;
 
-        PartyMemberPlacer.DestroyAllFollowers.Invoke();
+        PartyMemberPlacer.HideAllFollowers.Invoke();
         
         findNPCGameObject();
 
@@ -254,10 +254,12 @@ public class DialogueManager : MonoBehaviour
 		previousChoice = null;
 		QuestList.checkForDeadNames();
 
-		if (Flags.getFlag(FlagNameList.newGameFlagName))
-		{
-			Flags.setFlag(FlagNameList.newGameFlagName, false);
-		}
+        PartyMemberPlacer.RevealAllFollowers.Invoke();
+
+        if (Flags.getFlag(FlagNameList.newGameFlagName))
+        {
+            Flags.setFlag(FlagNameList.newGameFlagName, false);
+        }
 
 		if (returnToRevealAfterDialogue)
 		{
@@ -1012,9 +1014,9 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case "opengate":
 
-                    string gateKey = currentDialogue.cameraFoci[Constants.indexOne].GetComponent<Gate>().getGateKey();
+                    Gate gate = currentDialogue.cameraFoci[Constants.indexOne].GetComponent<Gate>();
 
-                    GateAndChestManager.addKey(gateKey);
+                    GateAndChestManager.addKey(gate.getGateKey());
 
                     continueStory();
 

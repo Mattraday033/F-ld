@@ -90,9 +90,11 @@ public static class EnemyPackInfoList
                                                                                                                             },
                                                                                                                     DropTableList.slaveMineDT1Name);
 
+    private readonly static EnemyPackInfo caveMatronBatBoss = twoGiantBatsTwoBatSwarmsTwoArmoredBats;
+
     public static EnemyPackInfo getEnemyPackInfo(string areaName, int index)
     {
-        if(!enemyPackInfoDict.ContainsKey(areaName))
+        if (!enemyPackInfoDict.ContainsKey(areaName))
         {
             return twoGiantBatsTwoBatSwarmsTwoArmoredBats;
         }
@@ -143,6 +145,45 @@ public static class EnemyPackInfoList
 
         enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section1c, list);
         #endregion
+
+        #region MineLvl_2-2a
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
+
+        enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section2a, list);
+        #endregion
+
+        #region MineLvl_2-3a
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
+
+        enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section3a, list);
+        #endregion
+
+        #region MineLvl_2-3b
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
+        list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
+        list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
+
+        enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section3b, list);
+        #endregion
+
+        #region MineLvl_2-7b
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
+        list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
+        list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
+
+        list.Add(caveMatronBatBoss);
+
+        enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7b, list);
+        #endregion
+
     }
 
 
