@@ -21,9 +21,9 @@ public abstract class ButtonLogicScript
 
     public abstract void getFloorButtonStatus(FloorButton floorButton);
 
-    public static bool validButtonForScript(ButtonLogicScript script, FloorButton floorButton)
+    public virtual bool validButtonForScript( FloorButton floorButton)
     {
-        return floorButton.getKey().Equals(script.getKey()) && floorButton.isPressed();
+        return floorButton.getKey().Equals(getKey()) && floorButton.isPressed();
     }
 
     public static void evaluateScript(ButtonLogicScript script)
@@ -65,13 +65,12 @@ public class OpenGateButtonLogicScript : ButtonLogicScript
     {
         this.scriptIndex = scriptIndex;
         this.requiredButtons = requiredButtons;
-        this.gateKey = gateKey;        
+        this.gateKey = gateKey;
     }
 
     public override void getFloorButtonStatus(FloorButton floorButton)
     {
-
-        if(validButtonForScript(this, floorButton))
+        if (validButtonForScript(floorButton))
         {
             pressedCount++;
         }
@@ -79,12 +78,13 @@ public class OpenGateButtonLogicScript : ButtonLogicScript
 
     public override void runScript()
     {
-        if(scriptIndex <= 0)
+        if (scriptIndex <= 0)
         {
-            GateAndChestManager.addKey(AreaManager.locationName+gateKey);
-        } else
+            GateAndChestManager.addKey(AreaManager.locationName + gateKey);
+        }
+        else
         {
-            GateAndChestManager.addKey(AreaManager.locationName+gateKey+scriptIndex);
+            GateAndChestManager.addKey(AreaManager.locationName + gateKey + scriptIndex);
         }
     }
 
@@ -92,15 +92,85 @@ public class OpenGateButtonLogicScript : ButtonLogicScript
     {
         OnButtonDataRequest.Invoke(this);
 
-        if(pressedCount >= requiredButtons)
+        if (pressedCount >= requiredButtons)
         {
             pressedCount = 0;
             return true;
-        } else
+        }
+        else
         {
             pressedCount = 0;
-            return false;            
-        }        
+            return false;
+        }
+    }
+
+}
+
+public class OnOffButtonLogicScript : ButtonLogicScript
+{
+    private string gateKey;
+
+    private int lastPressedButtonIndex = -1;
+
+    private Dictionary<int, int[]> gatesPerButton;
+    private Dictionary<int, bool> released;
+
+    public OnOffButtonLogicScript(string gateKey, Dictionary<int, int[]> gatesPerButton)
+    {
+        this.gateKey = gateKey;
+        this.gatesPerButton = gatesPerButton;
+
+        released = new Dictionary<int, bool>();
+
+        foreach(KeyValuePair<int, int[]> kvp in gatesPerButton)
+        {
+            released.Add(kvp.Key, true);
+        }
+    }
+
+    public override void getFloorButtonStatus(FloorButton floorButton)
+    {
+        Debug.LogError("getFloorButtonStatus");
+
+        Debug.LogError("validButtonForScript("+floorButton.index+") = " + validButtonForScript(floorButton));
+
+        if (validButtonForScript(floorButton))
+        {
+            lastPressedButtonIndex = floorButton.index;
+        }
+        
+        released[floorButton.index] = !floorButton.isPressed();
+    }
+
+    public override bool validButtonForScript(FloorButton floorButton)
+    {
+        return floorButton != null && gatesPerButton.ContainsKey(floorButton.index) && floorButton.isPressed() && released[floorButton.index];
+    }
+
+    public override void runScript()
+    {
+        Debug.LogError("runScript");
+
+        foreach (int gateIndex in gatesPerButton[lastPressedButtonIndex])
+        {
+            Debug.LogError("gateIndex = " + gateIndex);
+
+            string fullKey = AreaManager.locationName + gateKey + gateIndex;
+            bool activated = TrapAndButtonStateManager.contains(fullKey);
+
+            TrapAndButtonStateManager.setKey(fullKey, !activated);
+        }
+
+        lastPressedButtonIndex = -1;
+    }
+
+    public override bool scriptConditionsMet()
+    {
+        OnButtonDataRequest.Invoke(this);
+
+        Debug.LogError("lastPressedButtonIndex = " + lastPressedButtonIndex);
+
+        return lastPressedButtonIndex >= 0;
     }
 
 }

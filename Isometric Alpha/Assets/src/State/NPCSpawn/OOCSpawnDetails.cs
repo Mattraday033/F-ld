@@ -555,7 +555,7 @@ public class NPCSpawnDetails : OOCSpawnDetails
 
 public class GateSpawnDetails : NPCSpawnDetails
 {
-    private Sprite sprite;
+    protected Sprite sprite;
     private bool skewed;
 
     public GateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed) :
@@ -578,11 +578,16 @@ public class GateSpawnDetails : NPCSpawnDetails
         }
     }
 
+    public virtual Gate addGate(GameObject gateGameObject)
+    {
+        return gateGameObject.AddComponent<Gate>();
+    }
+
     public override void spawnActions(GameObject gateGameObject)
     {
         base.spawnActions(gateGameObject);
 
-        Gate gate = gateGameObject.AddComponent<Gate>();
+        Gate gate = addGate(gateGameObject);
         gate.setKey(npcName);
         gate.spriteRenderer.sprite = sprite;
 
@@ -600,6 +605,26 @@ public class GateSpawnDetails : NPCSpawnDetails
 
         dialogue.cameraFoci[Constants.indexOne] = dialogueTrigger.gameObject;
     }
+}
+
+public class TemporaryGateSpawnDetails : GateSpawnDetails
+{
+    public TemporaryGateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed) :
+    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, skewed)
+    {
+
+    }
+
+    public override Dialogue getDialogue(string areaName)
+    {
+        return DialogueList.getDialogue(DialogueList.scrubNameOfEndNumbers(npcName), areaName);
+    }
+
+    public override Gate addGate(GameObject gateGameObject)
+    {
+        return gateGameObject.AddComponent<TemporaryGate>();
+    }
+
 }
 
 public class ShopkeeperSpawnDetails : NPCSpawnDetails

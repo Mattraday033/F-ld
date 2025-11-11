@@ -141,6 +141,78 @@ public static class GateSpawnInfoList
 
         #endregion
 
+        #region MineLvl_2-6
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexZero, //A1
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section6,
+                                    new Vector3Int(3, 10),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
+
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexOne, //A2
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section6,
+                                    new Vector3Int(5, 10),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
+
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexTwo, //A3
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section6,
+                                    new Vector3Int(10, 10),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
+
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexThree, //B1
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section6,
+                                    new Vector3Int(3, 5),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
+
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexFour, //B2
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section6,
+                                    new Vector3Int(5, 5),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
+        
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexFive, //B3
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section6,
+                                    new Vector3Int(10, 5),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
+
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexSix, //C1
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section6,
+                                    new Vector3Int(3, 0),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
+
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexSeven, //C2
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section6,
+                                    new Vector3Int(5, 0),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
+        
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexEight, //C3
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section6,
+                                    new Vector3Int(10, 0),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
+
+
+        gateSpawnInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section6, list);
+
+        #endregion
+
         #region MineLvl_2-7a
 
         list = new List<GateSpawnInfo>();
@@ -212,11 +284,11 @@ public static class GateSpawnInfoList
 
 public class GateSpawnInfo : AxisSpawnInfo
 {
-    private int gateIndex;
-    private string npcName;
+    protected int gateIndex;
+    protected string npcName;
     private string spriteName;
 
-    public GateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell):
+    public GateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell) :
     base(currentArea, startCell)
     {
         this.gateIndex = gateIndex;
@@ -224,8 +296,8 @@ public class GateSpawnInfo : AxisSpawnInfo
         this.tutorialTargetHash = "";
     }
 
-    public GateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell, int size, Axis axis):
-    base(currentArea, startCell, size, axis) 
+    public GateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell, int size, Axis axis) :
+    base(currentArea, startCell, size, axis)
     {
         this.gateIndex = gateIndex;
         this.npcName = npcName;
@@ -241,8 +313,8 @@ public class GateSpawnInfo : AxisSpawnInfo
         this.tutorialTargetHash = "";
     }
 
-    public GateSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, int size, Axis axis):
-    base(currentArea, startCell, size, axis) 
+    public GateSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, int size, Axis axis) :
+    base(currentArea, startCell, size, axis)
     {
         this.gateIndex = gateIndex;
         this.npcName = npcName;
@@ -250,8 +322,8 @@ public class GateSpawnInfo : AxisSpawnInfo
         this.tutorialTargetHash = "";
     }
 
-    public GateSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, int size, Axis axis, string tutorialTargetHash):
-    base(currentArea, startCell, size, axis) 
+    public GateSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, int size, Axis axis, string tutorialTargetHash) :
+    base(currentArea, startCell, size, axis)
     {
         this.gateIndex = gateIndex;
         this.npcName = npcName;
@@ -259,7 +331,7 @@ public class GateSpawnInfo : AxisSpawnInfo
         this.tutorialTargetHash = tutorialTargetHash;
     }
 
-    private string getGateName()
+    protected virtual string getGateName()
     {
         if (gateIndex == 0)
         {
@@ -271,9 +343,9 @@ public class GateSpawnInfo : AxisSpawnInfo
         }
     }
 
-    private string getSpriteName(Axis axis, int index)
+    protected string getSpriteName(Axis axis, int index)
     {
-        if(spriteName != null && spriteName.Length > 0)
+        if (spriteName != null && spriteName.Length > 0)
         {
             return spriteName;
         }
@@ -281,13 +353,13 @@ public class GateSpawnInfo : AxisSpawnInfo
         switch (axis)
         {
             case Axis.DescendingX:
-                return PrefabNames.XAxisDoor + (index+1);
+                return PrefabNames.XAxisDoor + (index + 1);
             default:
-                return PrefabNames.YAxisDoor + (index+1);
+                return PrefabNames.YAxisDoor + (index + 1);
         }
     }
 
-    private bool skewed()
+    protected bool skewed()
     {
         return spriteName != null && spriteName.Length > 0;
     }
@@ -295,6 +367,11 @@ public class GateSpawnInfo : AxisSpawnInfo
     public override bool shouldSpawn()
     {
         return SpawnParamList.getSpawnParams(currentArea, getGateName()).canSpawn(getGateName());
+    }
+
+    public virtual GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
+    {
+        return new GateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, skewed());
     }
 
     public override List<OOCSpawnDetails> getSpawnDetails()
@@ -314,10 +391,30 @@ public class GateSpawnInfo : AxisSpawnInfo
                 currentCell.y -= index;
             }
 
-            list.Add(new GateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis,index), tutorialTargetHash, skewed()));
+            list.Add(createSpawnDetails(currentCell, index));
         }
 
         return list;
+    }
+
+}
+
+public class TemporaryGateSpawnInfo : GateSpawnInfo
+{
+
+    public TemporaryGateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell, int size, Axis axis) :
+    base(gateIndex, npcName, currentArea, startCell, size, axis)
+    {
+    }
+
+    protected override string getGateName()
+    {
+        return npcName + gateIndex;
+    }
+
+    public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
+    {
+        return new TemporaryGateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, skewed());
     }
 
 }

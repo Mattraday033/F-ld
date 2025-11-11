@@ -350,6 +350,20 @@ public static class OOCSpawnDetailsList
 
         #endregion
 
+        #region MineLvl_2-6
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(1, 11)));
+
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(1, 6), Constants.indexOne));
+
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(1, 1), Constants.indexTwo));
+
+        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section6, list);
+
+        #endregion
+
         #region MineLvl_2-7a
 
         list = new List<OOCSpawnDetails>();

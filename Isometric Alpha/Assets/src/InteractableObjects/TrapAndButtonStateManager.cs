@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class TrapAndButtonStateManager : MonoBehaviour
 {
-    public static UnityEvent<string, bool> OnSetTraps;
+    public readonly static UnityEvent<string, bool> OnSetTraps = new UnityEvent<string, bool>();
 
     public static Dictionary<string, bool> allActivatedTrapKeys;
 
@@ -23,17 +23,13 @@ public class TrapAndButtonStateManager : MonoBehaviour
     public static void setKey(string key, bool status)
     {
         allActivatedTrapKeys[key] = status;
+        OnSetTraps.Invoke(key, status);
     }
 
     [RuntimeInitializeOnLoadMethod]
     public static void resetTrapKeys()
     {
         allActivatedTrapKeys = new Dictionary<string, bool>();
-
-        if (OnSetTraps == null)
-        {
-            OnSetTraps = new UnityEvent<string, bool>();
-        }
     }
 
     public static void setTrapsAndButtons()

@@ -321,6 +321,8 @@ public static class DialogueList
         addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section3b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
         addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section3b, NPCNameList.liftableGate + 1, liftableGateDialogue);
 
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section6, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
+
         addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7a, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
         addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7a, NPCNameList.ancientPortcullis + 1, ancientPortcullisDialogue);
         addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7a, NPCNameList.ancientPortcullis + 2, ancientPortcullisDialogue);

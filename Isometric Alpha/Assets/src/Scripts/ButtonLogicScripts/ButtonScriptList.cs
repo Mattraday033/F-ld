@@ -62,6 +62,25 @@ public static class ButtonScriptList
 
         #endregion
 
+        #region MineLvl_2-6
+
+        list = new List<ButtonLogicScript>();
+
+        int[] gatesAttachedToButtonIndexZero = new int[] {Constants.indexTwo, Constants.indexThree, Constants.indexFour, Constants.indexEight };
+        int[] gatesAttachedToButtonIndexOne = new int[] {Constants.indexZero, Constants.indexFour, Constants.indexSix, Constants.indexEight };
+        int[] gatesAttachedToButtonIndexTwo = new int[] {Constants.indexZero, Constants.indexOne, Constants.indexFive, Constants.indexSeven, Constants.indexEight  };
+
+        Dictionary<int, int[]> gatesPerButton = new Dictionary<int, int[]>();
+        gatesPerButton.Add(Constants.indexZero, gatesAttachedToButtonIndexZero); 
+        gatesPerButton.Add(Constants.indexOne, gatesAttachedToButtonIndexOne); 
+        gatesPerButton.Add(Constants.indexTwo, gatesAttachedToButtonIndexTwo); 
+
+        list.Add(new OnOffButtonLogicScript(NPCNameList.ancientPortcullis, gatesPerButton));
+
+        scriptDict.Add(LocationNameList.mineLvl2 + LocationNameList.section6, list);
+
+        #endregion
+
         #region MineLvl_2-7a
 
         list = new List<ButtonLogicScript>();

@@ -10,7 +10,7 @@ public class Gate : MonoBehaviour, IRevealable
 
     public SpriteRenderer spriteRenderer;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -22,7 +22,7 @@ public class Gate : MonoBehaviour, IRevealable
         checkGateStatus();
     }
 
-    private void checkGateStatus()
+    public virtual void checkGateStatus()
     {
         if (GateAndChestManager.hasBeenOpened(getGateKey()))
         {
@@ -47,13 +47,13 @@ public class Gate : MonoBehaviour, IRevealable
 
 	//IRevealable interface methods
 
-	public void createListeners()
+	public virtual void createListeners()
 	{
         RevealManager.OnReveal.AddListener(onReveal);
         GateAndChestManager.OnGateKeyAdd.AddListener(checkGateStatus);
 	}
 
-	public void destroyListeners()
+	public virtual void destroyListeners()
 	{
 		RevealManager.OnReveal.RemoveListener(onReveal);
         GateAndChestManager.OnGateKeyAdd.RemoveListener(checkGateStatus);

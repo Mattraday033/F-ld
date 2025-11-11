@@ -17,6 +17,10 @@ public static class Constants
     public const int indexTwo = 2;
     public const int indexThree = 3;
     public const int indexFour = 4;
+    public const int indexFive = 5;
+    public const int indexSix = 6;
+    public const int indexSeven = 7;
+    public const int indexEight = 8;
 
 
     public const string STRDesignator = "STR";
