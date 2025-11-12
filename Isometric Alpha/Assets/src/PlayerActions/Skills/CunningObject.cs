@@ -59,6 +59,17 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
         }
     }
 
+    public virtual bool validTarget(SkillType skillType)
+    {
+        switch(skillType)
+        {
+            case SkillType.Cunning:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     public void cunning()
     {
         cunning(trackChangeInStateManager);

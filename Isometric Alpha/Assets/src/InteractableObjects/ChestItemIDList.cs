@@ -70,6 +70,16 @@ public static class ChestItemIDList
 
         #endregion
 
+        #region MineLvl_2-6
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.staffIndex));
+
+        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section6, list);
+
+        #endregion
+
         #region MineLvl_2-7b
 
         list = new List<ItemListID>();

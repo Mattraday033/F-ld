@@ -121,7 +121,6 @@ public static class OOCSpawnDetailsList
                  new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(6, -2), PrefabNames.shackWallHalf),
                  TutorialSequenceList.tutorialCunningObjectTargetHash));
 
-
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(0, -4), VaultableObject.vaultableBarrelsOneTile, TutorialSequenceList.vaultableBarrelsTargetHash));
 
         list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(3, -3), PrefabNames.shackWallHalf));
@@ -334,6 +333,8 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(9, 8), Constants.indexOne));
         list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(9, 5), Constants.indexOne));
 
+        list.Add(new BookSpawnDetails(NPCNameList.diary, new Vector3Int(0, 13), PrefabNames.note, ItemList.mineGuardsDiaryIndex));
+
         oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section3a, list);
 
         #endregion
@@ -354,13 +355,78 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(1, 11)));
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(5, 10))); //b0 in A1
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(5, 2), Constants.indexOne)); // b1 in C1
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(9, 6), Constants.indexTwo)); // b2 in B2
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(9, 2), Constants.indexThree)); // b3 in C2
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(9, 10), Constants.indexFour)); // b4 in A2
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(1, 6), Constants.indexFive)); // b5 in S2
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(1, 10), Constants.indexSix)); // b6 in S1
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(13, 6), Constants.indexSeven)); // b7 in 7a
 
-        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(1, 6), Constants.indexOne));
-
-        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(1, 1), Constants.indexTwo));
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(4, 5), Facing.SouthWest));
 
         oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section6, list);
+
+        #endregion
+
+        #region MineLvl_2-5
+
+        list = new List<OOCSpawnDetails>();
+
+        List<ObstacleSpawnDetails> blockerSpawnDetails = new List<ObstacleSpawnDetails>();
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(7, 8), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(6, 8), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(5, 8), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(7, 7), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(6, 7), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(7, 6), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(8, 7), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(8, 6), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(8, 5), PrefabNames.mineLvl2WallCunningObstacle));
+
+        list.Add(new CunningBlockerSpawnDetails(new Vector3Int(8, 8), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Statue, blockerSpawnDetails));
+
+        blockerSpawnDetails = new List<ObstacleSpawnDetails>();
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(7, 11), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(6, 11), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(5, 11), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(7, 12), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(6, 12), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(7, 13), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(8, 12), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(8, 13), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(8, 14), PrefabNames.mineLvl2WallCunningObstacle));
+
+        list.Add(new CunningBlockerSpawnDetails(new Vector3Int(8, 11), Facing.SouthWest, Facing.NorthWest, CunningObjectSpriteCategory.Statue, blockerSpawnDetails));
+
+        blockerSpawnDetails = new List<ObstacleSpawnDetails>();
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(12, 8), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(13, 8), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(14, 8), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(12, 7), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(13, 7), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(12, 6), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(11, 7), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(11, 6), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(11, 5), PrefabNames.mineLvl2WallCunningObstacle));
+
+        list.Add(new CunningBlockerSpawnDetails(new Vector3Int(11, 8), Facing.NorthEast, Facing.SouthEast, CunningObjectSpriteCategory.Statue, blockerSpawnDetails));
+        
+        blockerSpawnDetails = new List<ObstacleSpawnDetails>();
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(11, 12), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(11, 13), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(11, 14), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(12, 12), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(12, 13), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(13, 12), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(12, 11), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(13, 11), PrefabNames.mineLvl2WallCunningObstacle));
+        blockerSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(14, 11), PrefabNames.mineLvl2WallCunningObstacle));
+
+        list.Add(new CunningBlockerSpawnDetails(new Vector3Int(11, 11), Facing.NorthEast, Facing.NorthWest, CunningObjectSpriteCategory.Statue, blockerSpawnDetails));
+
+        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section5, list);
 
         #endregion
 

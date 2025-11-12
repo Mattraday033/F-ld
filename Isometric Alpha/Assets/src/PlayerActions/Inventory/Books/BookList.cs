@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class BookList
 {
-	public const string mineGuardsJournalKey = "Mine Guard's Journal";
+	public const string mineGuardsJournalKey = "Mine Guard's Diary";
 	public const string mineGuardsJournalReadFlag = "mineLvl2ReadNoteAboutHiddenPassage";
 
 	public const string pageFirstDiaryEntryKey = "Page's Diary #1";

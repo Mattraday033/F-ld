@@ -584,13 +584,18 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         return true;
     }
 
-	public void cunning()
+    public void cunning()
+    {
+        setCunningCounter(CunningManager.cunningRange / 2);
+
+        setEnemyFacing(CharacterFacing.getOpposingFacing(enemyFacing.getFacing()));
+
+        enemyDirectionIndicator.setColors(cunningStunnedColor);
+    }
+    
+	public bool validTarget(SkillType skillType)
 	{
-		setCunningCounter(CunningManager.cunningRange / 2);
-
-		setEnemyFacing(CharacterFacing.getOpposingFacing(enemyFacing.getFacing()));
-
-		enemyDirectionIndicator.setColors(cunningStunnedColor);
+        return true;
 	}
 
 	public void setCunningCounter(int newCunningCounter)

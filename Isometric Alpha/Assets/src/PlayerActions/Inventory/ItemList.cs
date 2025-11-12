@@ -144,7 +144,7 @@ public static class ItemList
 	public const int carterShivLevel4Index = 13;
 	public const int carterShivLevel5Index = 14;
 	
-	public const int mineGuardsJournalIndex = 0;
+	public const int mineGuardsDiaryIndex = 0;
 	public const int pageDiaryFirstEntryIndex = 1;
 	public const int pageDiarySecondEntryIndex = 2;
     public const int orderTranscriptIndex = 3;
@@ -326,7 +326,7 @@ public static class ItemList
 		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, carterShivLevel4Index), NPCNameList.carter + "'s Shiv", "A weapon made from a bronze nail tied to a small piece of wood.", "34 + 4C", "20", "Shiv", Range.singleTargetIndex, 3, Weapon.mainHandSlotIndex, isTwoHanded));
 		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, carterShivLevel5Index), NPCNameList.carter + "'s Shiv", "A weapon made from a bronze nail tied to a small piece of wood.", "44 + 5C", "28", "Shiv", Range.doubleVerticalIndex, 3, Weapon.mainHandSlotIndex, isTwoHanded));
 
-		books.Add(new BookItem(new ItemListID(bookListIndex, mineGuardsJournalIndex), BookList.mineGuardsJournalKey, "This looks to be a journal kept by one of the guards. The pages of this book are thick with writing, most of it about the mundane.", mineGuardsJournalIndex, new string[] { BookList.mineGuardsJournalReadFlag }, "Hidden Away", 0));
+		books.Add(new BookItem(new ItemListID(bookListIndex, mineGuardsDiaryIndex), BookList.mineGuardsJournalKey, "This looks to be a journal kept by one of the guards. The pages of this book are thick with writing, most of it about the mundane.", mineGuardsDiaryIndex, new string[] { BookList.mineGuardsJournalReadFlag }, "Hidden Away", 0));
 		books.Add(new BookItem(new ItemListID(bookListIndex, pageDiaryFirstEntryIndex), BookList.pageFirstDiaryEntryKey, "A piece of parchment serving as a portion of the diary of Page the scholar.", pageDiaryFirstEntryIndex, new string[] { BookList.pageFirstDiaryEntryReadFlag }, "Delving Deeper", 0));
 		books.Add(new BookItem(new ItemListID(bookListIndex, pageDiarySecondEntryIndex), BookList.pageSecondDiaryEntryKey, "A piece of parchment serving as a portion of the diary of Page the scholar.", pageDiarySecondEntryIndex, new string[] { BookList.pageSecondDiaryEntryReadFlag }, "Delving Deeper", 2));
 		books.Add(new BookItem(new ItemListID(bookListIndex, orderTranscriptIndex), BookList.ordersTranscriptKey, "A long wax tablet with quickly marked characters imprinted upon it, detailing orders to be relayed to the Lovashi guards.", orderTranscriptIndex, new string[] { BookList.ordersTranscriptReadFlag }, "The Plan", 15));

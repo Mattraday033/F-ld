@@ -4,18 +4,47 @@ using UnityEngine;
 
 public class CunningBlocker : CunningObject
 {
-    public GameObject blocker;
+    public List<GameObject> blockers = new List<GameObject>();
+    public List<Vector3Int> blockerCoords = new List<Vector3Int>();
 
-    public void build(Facing startFacing, Facing endFacing, CunningObjectSpriteCategory type, GameObject blocker)
+    public void build(Facing startFacing, Facing endFacing, CunningObjectSpriteCategory type, GameObject blocker, Vector3Int blockerCoords)
     {
         base.build(startFacing, endFacing, type);
 
-        this.blocker = blocker;
+        blockers.Add(blocker);
+        this.blockerCoords.Add(blockerCoords);
+
+        setToCurrentSprite();
+    }
+
+    public override bool validTarget(SkillType skillType)
+    {
+        if (!base.validTarget(skillType))
+        {
+            return false;
+        }
+
+        if (!activated)
+        {
+            return true;
+        }
+
+        Vector3Int playerCell = AreaManager.getMasterGrid().WorldToCell(PlayerMovement.getInstanceTransform().position);
+
+        foreach (Vector3Int coords in blockerCoords)
+        {
+            if (playerCell.x == coords.x && playerCell.y == coords.y)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public override void setStatus(string key, bool status)
     {
-        if(!getKey().Equals(getKey()))
+        if (!getKey().Equals(getKey()))
         {
             return;
         }
@@ -43,13 +72,16 @@ public class CunningBlocker : CunningObject
 
     private void setBlockerStatus()
     {
-        if (activated)
+        foreach(GameObject blocker in blockers)
         {
-            blocker.SetActive(false);
-        }
-        else
-        {
-            blocker.SetActive(true);
+            if (activated)
+            {
+                blocker.SetActive(false);
+            }
+            else
+            {
+                blocker.SetActive(true);
+            }
         }
     }
 }

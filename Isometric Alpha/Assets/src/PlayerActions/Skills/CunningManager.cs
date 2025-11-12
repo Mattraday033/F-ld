@@ -383,7 +383,7 @@ public class CunningManager : SkillManager
     {
         ISkillTarget cunningTarget = getTargetFromTile(skillGrid[selectorPosition.x, selectorPosition.y]);
 
-        if (cunningTarget != null)
+        if (cunningTarget != null && cunningTarget.validTarget(SkillType.Cunning))
         {
             cunningTarget.cunning();
             decrementCunningsRemaining();

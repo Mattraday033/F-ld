@@ -126,7 +126,7 @@ public static class SpawnParamList
                                new InteractableSpawnParams(spawnWhileHostile));
 
         InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, Constants.indexOne.ToString()),
-                               new MonsterSpawnParams(new StartSpawningFlagList(new string[] {FlagNameList.choseStrengthAtStart, FlagNameList.choseDexterityAtStart })));
+                               new MonsterSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.choseStrengthAtStart, FlagNameList.choseDexterityAtStart })));
 
         #region Str Tutorial
 
@@ -206,6 +206,14 @@ public static class SpawnParamList
 
         InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campManse, NPCNameList.imre),
                                new InteractableSpawnParams(new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated })));
+
+        #endregion
+
+        #region MineLvl_2-3a
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl2 + LocationNameList.section3a, NPCNameList.diary),
+                                        new StatBasedSpawnParams(PrimaryStat.Wisdom, Constants.statLevelTwo,
+                                        new StopSpawningFlagList(new string[] { BookList.mineGuardsJournalReadFlag }), spawnWhileHostile));
 
         #endregion
 

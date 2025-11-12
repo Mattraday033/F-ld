@@ -65,12 +65,24 @@ public static class SpawnInfoManager
 
         spawnAllMonsters();
 
+        performButtonScriptStartingAction();
+
         TrapAndButtonStateManager.setTrapsAndButtons();
 
         if(lastSaveBlueprint != null)
         {
             PartyMemberPlacer.placeAllPartyMembers();
             lastSaveBlueprint = null;
+        }
+    }
+
+    public static void performButtonScriptStartingAction()
+    {
+        List<ButtonLogicScript> buttonLogicScripts = ButtonScriptList.getButtonScripts(AreaManager.locationName);
+
+        foreach(ButtonLogicScript script in buttonLogicScripts)
+        {
+            script.startingAction();
         }
     }
 

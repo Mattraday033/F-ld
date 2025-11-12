@@ -194,6 +194,7 @@ public static class PrefabNames
     public const string secretDoor = interactablesFolder + "Secret Door";
     public const string tutorialCollider = interactablesFolder + "Tutorial Collider";
     public const string cunningBlocker = interactablesFolder + "Cunning Blocker";
+    public const string book = interactablesFolder + "Book";
 
     #endregion
 
@@ -241,6 +242,9 @@ public static class PrefabNames
     public const string humansFolder = charactersFolder + "Humans/";
     public const string defaultNPCSprite = humansFolder + "NPC Sprite";
 
+    public const string bookFolder = spriteFolder + "Books/";
+    public const string note = bookFolder + "Note";
+
     public const string furnitureFolder = spriteFolder + "Furniture/";
     public const string chestsFolder = furnitureFolder + "Chests/";
     public const string chestBackClosed = chestsFolder + "Chest_Back_Closed";
@@ -269,7 +273,10 @@ public static class PrefabNames
 
     public const string tilesFolder = spriteFolder + "Tiles/";
     public const string halfWallsFolder = tilesFolder + "Half Walls/";
-    public const string shackWallHalf = halfWallsFolder + "Shack Wall Half";
+    public const string stoneHalfWallsFolder = halfWallsFolder + "Stone/";
+    public const string shackWallHalf = stoneHalfWallsFolder + "Shack Wall Half";
+    public const string brickHalfWallsFolder = halfWallsFolder + "Brick/";
+    public const string mineLvl2WallCunningObstacle = brickHalfWallsFolder + "Dark_Brick_Cunning_Obstacle";
 
     public const string tallWallsFolder = tilesFolder + "Tall Walls/";
 

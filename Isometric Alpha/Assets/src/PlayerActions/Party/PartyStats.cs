@@ -236,9 +236,19 @@ public static class PartyStats
         return State.formation.getTotalStrength();
     }
 
+    public static int getHighestStrength()
+    {
+        return State.formation.getHighestStat(t => t.getStrength());
+    }
+
     public static int getTotalDexterity()
     {
         return State.formation.getTotalDexterity();
+    }
+
+    public static int getHighestDexterity()
+    {
+        return State.formation.getHighestStat(t => t.getDexterity());
     }
 
     public static int getTotalWisdom()
@@ -246,9 +256,19 @@ public static class PartyStats
         return State.formation.getTotalWisdom();
     }
 
+    public static int getHighestWisdom()
+    {
+        return State.formation.getHighestStat(t => t.getWisdom());
+    }
+
     public static int getTotalCharisma()
     {
         return State.formation.getTotalCharisma();
+    }
+
+    public static int getHighestCharisma()
+    {
+        return State.formation.getHighestStat(t => t.getCharisma());
     }
 
     public static int getHighestLevel()

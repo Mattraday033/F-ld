@@ -149,11 +149,15 @@ public static class QuestList
 		if (quest.steps.Length > questStepIndex &&
 			!quest.steps[questStepIndex].active)
 		{
-			quest.active = true;
-			quest.steps[questStepIndex].active = true;
-			quest.currentStepIndex = questStepIndex;
+            quest.steps[questStepIndex].active = true;
 
-			NotificationManager.addToNotificationQueue(quest.steps[questStepIndex]);
+            if(!quest.finished)
+            {
+                quest.active = true;
+			    quest.currentStepIndex = questStepIndex;
+                NotificationManager.addToNotificationQueue(quest.steps[questStepIndex]);
+            }
+
 			return quest;
 		}
 		else if (quest.steps.Length > questStepIndex &&

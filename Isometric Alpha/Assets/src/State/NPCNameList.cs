@@ -88,6 +88,7 @@ public static class NPCNameList
     public const string wallPatch = "Wall Patch";
     public const string mineLvl2Wall = "MineLvl_2 Wall";
     public const string suspiciousWall = "Suspicious Wall";
+    public const string diary = "Diary";
     public const string rubble = "Rubble";
     public const string chest = "Chest";
     public const string crate = "Crate";

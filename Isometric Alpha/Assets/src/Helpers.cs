@@ -12,7 +12,7 @@ public static class Helpers
     public static bool IsInLayerMask(GameObject obj, LayerMask mask) => (mask.value & (1 << obj.layer)) != 0;
     public static bool IsInLayerMask(int layer, LayerMask mask) => (mask.value & (1 << layer)) != 0;
 
-    public static ContactFilter2D emptyFilter = new ContactFilter2D();
+    public readonly static ContactFilter2D emptyFilter = new ContactFilter2D();
 
     public static Collider2D getCollision(Collider2D currentCollider)
     {

@@ -7,7 +7,7 @@ public static class KeyPressManager
 	public static bool handlingPrimaryKeyPress = false;
     public static bool handlingSecondaryKeyPress = false;
 
-    public static KeyCode[] WASDKeys = new KeyCode[] { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D };
+    public readonly static KeyCode[] WASDKeys = new KeyCode[] { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D };
 
     public static bool WOnlyKeyPressed()
     {

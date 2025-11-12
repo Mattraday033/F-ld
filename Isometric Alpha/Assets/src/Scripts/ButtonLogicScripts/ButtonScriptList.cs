@@ -64,18 +64,31 @@ public static class ButtonScriptList
 
         #region MineLvl_2-6
 
-        list = new List<ButtonLogicScript>();
+        list = new List<ButtonLogicScript>(); //Constants.index
 
-        int[] gatesAttachedToButtonIndexZero = new int[] {Constants.indexTwo, Constants.indexThree, Constants.indexFour, Constants.indexEight };
-        int[] gatesAttachedToButtonIndexOne = new int[] {Constants.indexZero, Constants.indexFour, Constants.indexSix, Constants.indexEight };
-        int[] gatesAttachedToButtonIndexTwo = new int[] {Constants.indexZero, Constants.indexOne, Constants.indexFive, Constants.indexSeven, Constants.indexEight  };
+        int[] gatesAttachedToButtonIndexZero = new int[] { Constants.indexFive, Constants.indexSix , Constants.indexEight};
+        int[] gatesAttachedToButtonIndexOne = new int[] { Constants.indexSeven, Constants.indexTwelve};
+        int[] gatesAttachedToButtonIndexTwo = new int[] { Constants.indexSeven, Constants.indexEight, Constants.indexNine};
+        int[] gatesAttachedToButtonIndexThree = new int[] {Constants.indexTwo, Constants.indexSeven, Constants.indexNine, Constants.indexEleven, Constants.indexTwelve};
+        int[] gatesAttachedToButtonIndexFour = new int[] { Constants.indexZero, Constants.indexOne, Constants.indexFive};
+        int[] gatesAttachedToButtonIndexFive = new int[] { Constants.indexFive, Constants.indexSix };
+        int[] gatesAttachedToButtonIndexSix = new int[] { Constants.indexEight };
+        int[] gatesAttachedToButtonIndexSeven = new int[] { Constants.indexEight, Constants.indexTen};
+
+        int[] gatesOpenAtStart = new int[] {  Constants.indexZero, Constants.indexTwo, Constants.indexFive};
 
         Dictionary<int, int[]> gatesPerButton = new Dictionary<int, int[]>();
+
         gatesPerButton.Add(Constants.indexZero, gatesAttachedToButtonIndexZero); 
         gatesPerButton.Add(Constants.indexOne, gatesAttachedToButtonIndexOne); 
         gatesPerButton.Add(Constants.indexTwo, gatesAttachedToButtonIndexTwo); 
+        gatesPerButton.Add(Constants.indexThree, gatesAttachedToButtonIndexThree); 
+        gatesPerButton.Add(Constants.indexFour, gatesAttachedToButtonIndexFour); 
+        gatesPerButton.Add(Constants.indexFive, gatesAttachedToButtonIndexFive); 
+        gatesPerButton.Add(Constants.indexSix, gatesAttachedToButtonIndexSix); 
+        gatesPerButton.Add(Constants.indexSeven, gatesAttachedToButtonIndexSeven); 
 
-        list.Add(new OnOffButtonLogicScript(NPCNameList.ancientPortcullis, gatesPerButton));
+        list.Add(new OnOffButtonLogicScript(NPCNameList.ancientPortcullis, gatesPerButton, gatesOpenAtStart));
 
         scriptDict.Add(LocationNameList.mineLvl2 + LocationNameList.section6, list);
 

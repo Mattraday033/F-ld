@@ -130,30 +130,81 @@ public class InteractableSpawnParams : SpawnParams
     }
 }
 
+public class StatBasedSpawnParams : InteractableSpawnParams
+{
+    private PrimaryStat primaryStat;
+    private int statLevelRequirement;
+
+    public StatBasedSpawnParams(PrimaryStat primaryStat, int statLevelRequirement, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile) :
+    base(stopSpawningFlagList, spawnWhileHostile)
+    {
+        this.primaryStat = primaryStat;
+        this.statLevelRequirement = statLevelRequirement;
+    }
+    
+    public override bool canSpawn(string npcName)
+    {
+        if(!base.canSpawn(npcName))
+        {
+            return doNotSpawn;
+        }
+
+        switch(primaryStat)
+        {
+            case PrimaryStat.Strength:
+                if(PartyStats.getHighestStrength() >= statLevelRequirement)
+                {
+                    return doSpawn;
+                }
+                break;
+            case PrimaryStat.Dexterity:
+                if(PartyStats.getHighestDexterity() >= statLevelRequirement)
+                {
+                    return doSpawn;
+                }
+                break;
+            case PrimaryStat.Wisdom:
+                if(PartyStats.getHighestWisdom() >= statLevelRequirement)
+                {
+                    return doSpawn;
+                }
+                break;
+            case PrimaryStat.Charisma:
+                if(PartyStats.getHighestCharisma() >= statLevelRequirement)
+                {
+                    return doSpawn;
+                }
+                break;
+        }
+
+        return doNotSpawn;
+    }
+}
+
 public class MonsterSpawnParams : InteractableSpawnParams
 {
-    public MonsterSpawnParams():
+    public MonsterSpawnParams() :
     base()
     {
         spawnWhileHostile = true;
         onlySpawnWhileHostile = true;
     }
 
-    public MonsterSpawnParams(StartSpawningFlagList startSpawningFlagList):
+    public MonsterSpawnParams(StartSpawningFlagList startSpawningFlagList) :
     base(startSpawningFlagList)
     {
         spawnWhileHostile = true;
         onlySpawnWhileHostile = true;
     }
 
-    public MonsterSpawnParams(StopSpawningFlagList stopSpawningFlagList):
+    public MonsterSpawnParams(StopSpawningFlagList stopSpawningFlagList) :
     base(stopSpawningFlagList)
     {
         spawnWhileHostile = true;
         onlySpawnWhileHostile = true;
     }
 
-    public MonsterSpawnParams(StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList):
+    public MonsterSpawnParams(StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList) :
     base(startSpawningFlagList, stopSpawningFlagList)
     {
         spawnWhileHostile = true;

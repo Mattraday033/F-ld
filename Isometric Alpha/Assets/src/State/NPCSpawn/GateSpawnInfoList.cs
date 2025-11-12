@@ -145,68 +145,97 @@ public static class GateSpawnInfoList
 
         list = new List<GateSpawnInfo>();
 
-        list.Add(new TemporaryGateSpawnInfo(Constants.indexZero, //A1
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexZero, //A1 - S1
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl2 + LocationNameList.section6,
-                                    new Vector3Int(3, 10),
+                                    new Vector3Int(2, 9),
                                     Constants.sizeOne,
                                     Axis.DescendingY));
 
-        list.Add(new TemporaryGateSpawnInfo(Constants.indexOne, //A2
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexOne, //B1 - S2
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl2 + LocationNameList.section6,
-                                    new Vector3Int(5, 10),
+                                    new Vector3Int(2, 5),
                                     Constants.sizeOne,
                                     Axis.DescendingY));
 
-        list.Add(new TemporaryGateSpawnInfo(Constants.indexTwo, //A3
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexTwo, //C1 - S3
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl2 + LocationNameList.section6,
-                                    new Vector3Int(10, 10),
+                                    new Vector3Int(2, 1),
                                     Constants.sizeOne,
                                     Axis.DescendingY));
 
-        list.Add(new TemporaryGateSpawnInfo(Constants.indexThree, //B1
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexThree, //A1 - B1
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl2 + LocationNameList.section6,
-                                    new Vector3Int(3, 5),
+                                    new Vector3Int(4, 7),
+                                    Constants.sizeOne,
+                                    Axis.DescendingX));
+
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexFour, //B1 - C1
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section6,
+                                    new Vector3Int(4, 3),
+                                    Constants.sizeOne,
+                                    Axis.DescendingX));
+        
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexFive, //A1 - A2
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section6,
+                                    new Vector3Int(6, 9),
                                     Constants.sizeOne,
                                     Axis.DescendingY));
 
-        list.Add(new TemporaryGateSpawnInfo(Constants.indexFour, //B2
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexSix, //B1 - B2
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl2 + LocationNameList.section6,
-                                    new Vector3Int(5, 5),
+                                    new Vector3Int(6, 5),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
+
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexSeven, //C1 - C2
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section6,
+                                    new Vector3Int(6, 1),
                                     Constants.sizeOne,
                                     Axis.DescendingY));
         
-        list.Add(new TemporaryGateSpawnInfo(Constants.indexFive, //B3
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexEight, //A2 - B2
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section6,
+                                    new Vector3Int(8, 7),
+                                    Constants.sizeOne,
+                                    Axis.DescendingX));
+
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexNine, //B2 - C2
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section6,
+                                    new Vector3Int(8, 3),
+                                    Constants.sizeOne,
+                                    Axis.DescendingX));
+
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexTen, //B2 - 7A
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl2 + LocationNameList.section6,
                                     new Vector3Int(10, 5),
                                     Constants.sizeOne,
                                     Axis.DescendingY));
 
-        list.Add(new TemporaryGateSpawnInfo(Constants.indexSix, //C1
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexEleven, //C2 - C3
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl2 + LocationNameList.section6,
-                                    new Vector3Int(3, 0),
+                                    new Vector3Int(10, 1),
                                     Constants.sizeOne,
                                     Axis.DescendingY));
 
-        list.Add(new TemporaryGateSpawnInfo(Constants.indexSeven, //C2
+        list.Add(new TemporaryGateSpawnInfo(Constants.indexTwelve, //C3 - 7a
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl2 + LocationNameList.section6,
-                                    new Vector3Int(5, 0),
+                                    new Vector3Int(12, 3),
                                     Constants.sizeOne,
-                                    Axis.DescendingY));
-        
-        list.Add(new TemporaryGateSpawnInfo(Constants.indexEight, //C3
-                                    NPCNameList.ancientPortcullis,
-                                    LocationNameList.mineLvl2 + LocationNameList.section6,
-                                    new Vector3Int(10, 0),
-                                    Constants.sizeOne,
-                                    Axis.DescendingY));
+                                    Axis.DescendingX));
+
 
 
         gateSpawnInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section6, list);

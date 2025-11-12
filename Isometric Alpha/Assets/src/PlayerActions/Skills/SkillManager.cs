@@ -6,8 +6,11 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum SkillType {Intimidate = 0, Cunning = 1}
+
 public interface ISkillTarget
 {
+    public bool validTarget(SkillType skillType);
     public void cunning();
     public void intimidate();
 }

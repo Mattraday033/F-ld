@@ -234,31 +234,32 @@ public abstract class CunningObjectSpawnDetails : OOCSpawnDetails
 public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
 {
 
-    private ObstacleSpawnDetails blockerSpawnDetails;
+    private List<ObstacleSpawnDetails> allBlockerSpawnDetails;
 
-    public CunningBlockerSpawnDetails(Vector3Int cellCoords, Facing facing, CunningObjectSpriteCategory category, ObstacleSpawnDetails blockerSpawnDetails) :
+    public CunningBlockerSpawnDetails(Vector3Int cellCoords, Facing facing, CunningObjectSpriteCategory category, List<ObstacleSpawnDetails> allBlockerSpawnDetails) :
     base(cellCoords, facing, category)
     {
-        this.blockerSpawnDetails = blockerSpawnDetails;
+        this.allBlockerSpawnDetails = allBlockerSpawnDetails;
     }
 
-    public CunningBlockerSpawnDetails(Vector3Int cellCoords, Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category, ObstacleSpawnDetails blockerSpawnDetails) :
+    public CunningBlockerSpawnDetails(Vector3Int cellCoords, Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category, List<ObstacleSpawnDetails> allBlockerSpawnDetails) :
     base(cellCoords, startFacing, endFacing, category)
     {
-        this.blockerSpawnDetails = blockerSpawnDetails;
+        this.allBlockerSpawnDetails = allBlockerSpawnDetails;
     }
 
-    public CunningBlockerSpawnDetails(Vector3Int cellCoords, Facing facing, CunningObjectSpriteCategory category, ObstacleSpawnDetails blockerSpawnDetails, string tutorialTargetHash) :
+    public CunningBlockerSpawnDetails(Vector3Int cellCoords, Facing facing, CunningObjectSpriteCategory category, List<ObstacleSpawnDetails> allBlockerSpawnDetails, string tutorialTargetHash) :
     base(cellCoords, facing, category)
     {
-        this.blockerSpawnDetails = blockerSpawnDetails;
+        this.allBlockerSpawnDetails = allBlockerSpawnDetails;
         this.tutorialTargetHash = tutorialTargetHash;
     }
 
     public CunningBlockerSpawnDetails(Vector3Int cellCoords, Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category, ObstacleSpawnDetails blockerSpawnDetails, string tutorialTargetHash) :
     base(cellCoords, startFacing, endFacing, category)
     {
-        this.blockerSpawnDetails = blockerSpawnDetails;
+        this.allBlockerSpawnDetails = new List<ObstacleSpawnDetails>(); 
+        allBlockerSpawnDetails.Add(blockerSpawnDetails);
         this.tutorialTargetHash = tutorialTargetHash;
     }
 
@@ -277,10 +278,14 @@ public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
     public override void spawnActions(CunningObject cunningObject)
     {
         CunningBlocker cunningBlocker = cunningObject as CunningBlocker;
-        GameObject blocker = SpawnInfoManager.spawnInteractable(blockerSpawnDetails);
 
-        cunningBlocker.build(startFacing, endFacing, category, blocker);
-        SpawnInfoManager.addGameObject(blocker);
+        foreach (ObstacleSpawnDetails details in allBlockerSpawnDetails)
+        {
+            GameObject blocker = SpawnInfoManager.spawnInteractable(details);
+
+            cunningBlocker.build(startFacing, endFacing, category, blocker, details.cellCoords);
+            SpawnInfoManager.addGameObject(blocker);
+        }
 
         if (hasTutorialTargetHash())
         {
@@ -310,6 +315,8 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
 
     public override string getSpriteName()
     {
+        Debug.LogError("spriteName = " + spriteName);
+
         return spriteName;
     }
 
@@ -878,6 +885,70 @@ public class ShelfSpawnDetails : ChestSpawnDetails
     }
 }
 
+
+public class OnTableSpawnDetails : OOCSpawnDetails
+{
+    public OnTableSpawnDetails(string npcName, Vector3Int cellCoords) :
+    base(npcName, cellCoords)
+    {
+
+    }
+    
+    public override void spawnActions(GameObject interactable)
+    {
+        base.spawnActions(interactable);
+
+        Vector3 currentPosition = interactable.transform.position;
+
+        currentPosition.y -= Constants.onTableHeightOffset;
+
+        interactable.transform.position = currentPosition;
+    }
+}
+
+public class BookSpawnDetails : OnTableSpawnDetails
+{
+
+    protected string spriteName;
+    private int bookIndex;
+
+    public BookSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, int bookIndex) :
+    base(npcName, cellCoords)
+    {
+        this.spriteName = spriteName;
+        this.bookIndex = bookIndex;
+    }
+
+    public override string getSpriteName()
+    {
+        return spriteName;
+    }
+
+    public override string getPrefabName()
+    {
+        return PrefabNames.book;
+    }
+
+    public override bool determineSpriteAtSpawn()
+    {
+        return true;
+    }
+
+    public override Transform getParent()
+    {
+        return AreaManager.getNPCParent();
+    }
+
+    public override void spawnActions(GameObject interactable)
+    {
+        base.spawnActions(interactable);
+
+        WorldBookInfo bookInfo = interactable.GetComponent<WorldBookInfo>();
+
+        bookInfo.bookIndex = bookIndex;
+    }
+}
+
 public class HiddenTerrainSpawnDetails : OOCSpawnDetails
 {
 
@@ -911,7 +982,7 @@ public class HiddenTerrainSpawnDetails : OOCSpawnDetails
         this.sectionName = sectionName;
 
         this.index = index;
-        
+
         this.locationName = null;
     }
 

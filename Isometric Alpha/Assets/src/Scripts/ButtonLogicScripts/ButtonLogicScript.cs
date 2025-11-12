@@ -26,6 +26,11 @@ public abstract class ButtonLogicScript
         return floorButton.getKey().Equals(getKey()) && floorButton.isPressed();
     }
 
+    public virtual void startingAction()
+    {
+        //Empty on purpose
+    }
+
     public static void evaluateScript(ButtonLogicScript script)
     {
         if (script.scriptConditionsMet())
@@ -51,6 +56,7 @@ public abstract class ButtonLogicScript
             evaluateScript(script);
         }
     }
+    
 
 }
 
@@ -114,17 +120,28 @@ public class OnOffButtonLogicScript : ButtonLogicScript
 
     private Dictionary<int, int[]> gatesPerButton;
     private Dictionary<int, bool> released;
+    private int[] gatesOpenAtStart;
 
-    public OnOffButtonLogicScript(string gateKey, Dictionary<int, int[]> gatesPerButton)
+    public OnOffButtonLogicScript(string gateKey, Dictionary<int, int[]> gatesPerButton, int[] gatesOpenAtStart)
     {
         this.gateKey = gateKey;
         this.gatesPerButton = gatesPerButton;
+        this.gatesOpenAtStart = gatesOpenAtStart;
 
         released = new Dictionary<int, bool>();
 
-        foreach(KeyValuePair<int, int[]> kvp in gatesPerButton)
+        foreach (KeyValuePair<int, int[]> kvp in gatesPerButton)
         {
             released.Add(kvp.Key, true);
+        }
+    }
+
+    public override void startingAction()
+    {
+        foreach (int gateIndex in gatesOpenAtStart)
+        {
+            string fullKey = AreaManager.locationName + gateKey + gateIndex;
+            TrapAndButtonStateManager.setKey(fullKey, true);           
         }
     }
 
@@ -132,13 +149,13 @@ public class OnOffButtonLogicScript : ButtonLogicScript
     {
         Debug.LogError("getFloorButtonStatus");
 
-        Debug.LogError("validButtonForScript("+floorButton.index+") = " + validButtonForScript(floorButton));
+        Debug.LogError("validButtonForScript(" + floorButton.index + ") = " + validButtonForScript(floorButton));
 
         if (validButtonForScript(floorButton))
         {
             lastPressedButtonIndex = floorButton.index;
         }
-        
+
         released[floorButton.index] = !floorButton.isPressed();
     }
 

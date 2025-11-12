@@ -900,7 +900,7 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl2 + LocationNameList.section6, LocationNameList.mineLvl2 + LocationNameList.section1a, new Vector3Int(-5, 5), Facing.NorthEast));
 
-        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl2 + LocationNameList.section6, LocationNameList.mineLvl2 + LocationNameList.section7a, new Vector3Int(14, 5), Facing.SouthWest));
+        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl2 + LocationNameList.section6, LocationNameList.mineLvl2 + LocationNameList.section7a, new Vector3Int(17, 5), Facing.SouthWest));
 
         transitionSpawnInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section6, list);
 

@@ -316,6 +316,26 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
         return total;
     }
 
+    public delegate int HighestDelegateInt<T>(T t);
+
+    public int getHighestStat(HighestDelegateInt<AllyStats> getStat)
+    {
+        int highest = 0;
+
+        foreach (AllyStats[] row in grid)
+        {
+            foreach (AllyStats ally in row)
+            {
+                if (ally != null && getStat(ally) > highest)
+                {
+                    highest = getStat(ally);
+                }
+            }
+        }
+
+        return highest;
+    }
+
     public int getTotalDexterity()
     {
         int total = 0;
