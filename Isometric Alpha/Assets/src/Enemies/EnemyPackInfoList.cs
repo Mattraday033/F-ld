@@ -172,6 +172,14 @@ public static class EnemyPackInfoList
         enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section3b, list);
         #endregion
 
+        #region MineLvl_2-5
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
+
+        enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section5, list);
+        #endregion
+
         #region MineLvl_2-7b
         list = new List<EnemyPackInfo>();
 

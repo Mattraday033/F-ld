@@ -380,42 +380,42 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 		{
 			PathToPlayer currentPath = (PathToPlayer)listOfPaths[pathIndex];
 
-			if (currentPath.lastSegment.coords.x == playerCoords.x && currentPath.lastSegment.coords.y == playerCoords.y)
-			{
-				outputPathToPlayer = currentPath;
-				break;
-			}
-			else if (thisMoveIsLegal(currentPath.lastSegment.coords))
-			{
-				Vector3Int[] directions = new Vector3Int[4];
-				directions[0] = findClosestVectorToPlayer(currentPath.firstSegment.coords, playerCoords);
+            if (currentPath.lastSegment.coords.x == playerCoords.x && currentPath.lastSegment.coords.y == playerCoords.y)
+            {
+                outputPathToPlayer = currentPath;
+                break;
+            }
+            else if (canMoveIntoThisSpace(currentPath.lastSegment.coords))
+            {
+                Vector3Int[] directions = new Vector3Int[4];
+                directions[0] = findClosestVectorToPlayer(currentPath.firstSegment.coords, playerCoords);
 
-				directions = fillOtherDirections(directions);
+                directions = fillOtherDirections(directions);
 
-				foreach (Vector3Int direction in directions)
-				{
-					PathSegment newSegment = new PathSegment(currentPath.lastSegment.coords + direction);
+                foreach (Vector3Int direction in directions)
+                {
+                    PathSegment newSegment = new PathSegment(currentPath.lastSegment.coords + direction);
 
-					if (!dictionaryOfSegments.ContainsKey(newSegment.coords))
-					{
-						gizmosToDraw.Add(newSegment.coords);
-						dictionaryOfSegments.Add(newSegment.coords, true);
-					}
-					else
-					{
-						continue;
-					}
+                    if (!dictionaryOfSegments.ContainsKey(newSegment.coords))
+                    {
+                        gizmosToDraw.Add(newSegment.coords);
+                        dictionaryOfSegments.Add(newSegment.coords, true);
+                    }
+                    else
+                    {
+                        continue;
+                    }
 
-					PathToPlayer newPath = currentPath.clone();
+                    PathToPlayer newPath = currentPath.clone();
 
-					newPath.setLastSegment(newSegment);
+                    newPath.setLastSegment(newSegment);
 
-					if (newPath.length <= PathToPlayer.maxLength)
-					{
-						listOfPaths.Add(newPath);
-					}
-				}
-			}
+                    if (newPath.length <= PathToPlayer.maxLength)
+                    {
+                        listOfPaths.Add(newPath);
+                    }
+                }
+            }
 		}
 
 		if (outputPathToPlayer != null)
@@ -523,10 +523,15 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         return !MovementManager.colliderInCell(getCurrentCell() + directionalModifier, LayerAndTagManager.blocksEnemyMovementLayerMask);
 	}
 
-	public void setMonsterPackIndex(int i)
+	public bool canMoveIntoThisSpace(Vector3Int spaceCoords)
 	{
-		monsterPackIndex = i;
+        return spaceCoords.Equals(AreaManager.getMasterGrid().WorldToCell(transform.position)) || !MovementManager.colliderInCell(spaceCoords, LayerAndTagManager.blocksEnemyMovementLayerMask);
 	}
+
+    public void setMonsterPackIndex(int i)
+    {
+        monsterPackIndex = i;
+    }
 
 	public int getMonsterPackIndex()
 	{

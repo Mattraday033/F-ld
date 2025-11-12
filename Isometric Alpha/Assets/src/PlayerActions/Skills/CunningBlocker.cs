@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CunningBlocker : CunningObject
 {
-    public List<GameObject> blockers = new List<GameObject>();
+    public List<Obstacle> blockers = new List<Obstacle>();
     public List<Vector3Int> blockerCoords = new List<Vector3Int>();
 
-    public void build(Facing startFacing, Facing endFacing, CunningObjectSpriteCategory type, GameObject blocker, Vector3Int blockerCoords)
+    public void build(Facing startFacing, Facing endFacing, CunningObjectSpriteCategory type, Obstacle blocker, Vector3Int blockerCoords)
     {
         base.build(startFacing, endFacing, type);
 
@@ -44,7 +44,11 @@ public class CunningBlocker : CunningObject
 
     public override void setStatus(string key, bool status)
     {
-        if (!getKey().Equals(getKey()))
+        Debug.LogError("key = " + key);
+        Debug.LogError("getKey() = " + getKey());
+
+
+        if (!getKey().Equals(key))
         {
             return;
         }
@@ -70,17 +74,17 @@ public class CunningBlocker : CunningObject
         }
     }
 
-    private void setBlockerStatus()
+    public void setBlockerStatus()
     {
-        foreach(GameObject blocker in blockers)
+        foreach(Obstacle blocker in blockers)
         {
             if (activated)
             {
-                blocker.SetActive(false);
+                blocker.setToDown();
             }
             else
             {
-                blocker.SetActive(true);
+                blocker.setToUp();
             }
         }
     }

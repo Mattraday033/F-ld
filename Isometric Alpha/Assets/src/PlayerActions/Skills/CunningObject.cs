@@ -48,11 +48,11 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
 
         switch (getCurrentFacing())
         {
-            case Facing.NorthEast:
+            case Facing.NorthWest:
             case Facing.SouthWest:
                 spriteRenderer.flipX = true;
                 break;
-            case Facing.NorthWest:
+            case Facing.NorthEast:
             case Facing.SouthEast:
                 spriteRenderer.flipX = false;
                 break;
@@ -79,7 +79,12 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
 
     public string getKey()
     {
-        return AreaManager.locationName + "_CO_" + index;
+        return generateKey(AreaManager.locationName, index);
+    }
+
+    public static string generateKey(string locationName, int index)
+    {
+        return locationName + "_CO_" + index;
     }
 
     public void trackKey()

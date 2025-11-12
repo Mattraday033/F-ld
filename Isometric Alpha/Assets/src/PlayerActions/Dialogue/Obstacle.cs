@@ -22,4 +22,14 @@ public class Obstacle : MonoBehaviour, IDialogueParticipant
         return null;
     }
 
+    public virtual void setToDown()
+    {
+        gameObject.SetActive(false);
+    }
+    
+    public virtual void setToUp()
+    {
+        gameObject.SetActive(true);
+    }
+
 }

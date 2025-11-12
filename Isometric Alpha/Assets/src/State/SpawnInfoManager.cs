@@ -73,6 +73,19 @@ public static class SpawnInfoManager
         {
             PartyMemberPlacer.placeAllPartyMembers();
             lastSaveBlueprint = null;
+        } else
+        {
+            setDefaultTrapStates();
+        }
+    }
+
+    private static void setDefaultTrapStates()
+    {
+        List<KeyValuePair<string, bool>> defaultTrapStates = TrapStateList.getDefaultTrapStates();
+
+        foreach(KeyValuePair<string, bool> kvp in defaultTrapStates)
+        {
+            TrapAndButtonStateManager.setKey(kvp.Key, kvp.Value);
         }
     }
 
@@ -80,7 +93,7 @@ public static class SpawnInfoManager
     {
         List<ButtonLogicScript> buttonLogicScripts = ButtonScriptList.getButtonScripts(AreaManager.locationName);
 
-        foreach(ButtonLogicScript script in buttonLogicScripts)
+        foreach (ButtonLogicScript script in buttonLogicScripts)
         {
             script.startingAction();
         }

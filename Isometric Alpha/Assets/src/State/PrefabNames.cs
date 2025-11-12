@@ -189,6 +189,7 @@ public static class PrefabNames
     public const string chest = interactablesFolder + "Chest";
     public const string oocMonster = interactablesFolder + "OOC Monster";
     public const string oocObstacle = interactablesFolder + "OOC Obstacle";
+    public const string spikes = interactablesFolder + "Spikes";
     public const string floorButton = interactablesFolder + "Floor Button";
     public const string movableObject = interactablesFolder + "Movable Object";
     public const string secretDoor = interactablesFolder + "Secret Door";
@@ -244,6 +245,10 @@ public static class PrefabNames
 
     public const string bookFolder = spriteFolder + "Books/";
     public const string note = bookFolder + "Note";
+
+    public const string spikesFolderPath = spriteFolder + "Spikes/";
+    public const string spikesUp = spikesFolderPath + "Spikes_Up";
+    public const string spikesDown = spikesFolderPath + "Spikes_Down";
 
     public const string furnitureFolder = spriteFolder + "Furniture/";
     public const string chestsFolder = furnitureFolder + "Chests/";

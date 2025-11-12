@@ -196,19 +196,24 @@ public abstract class CunningObjectSpawnDetails : OOCSpawnDetails
     public Facing startFacing;
     public Facing endFacing;
     public CunningObjectSpriteCategory category;
+    public int index;
 
-    public CunningObjectSpawnDetails(Vector3Int cellCoords, Facing facing, CunningObjectSpriteCategory category) :
+    public CunningObjectSpawnDetails(int index, Vector3Int cellCoords, Facing facing, CunningObjectSpriteCategory category) :
     base(category.ToString(), cellCoords)
     {
+        this.index = index;
+
         this.startFacing = facing;
         this.endFacing = facing;
 
         this.category = category;
     }
 
-    public CunningObjectSpawnDetails(Vector3Int cellCoords, Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category) :
+    public CunningObjectSpawnDetails(int index, Vector3Int cellCoords, Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category) :
     base(category.ToString(), cellCoords)
     {
+        this.index = index;
+
         this.startFacing = startFacing;
         this.endFacing = endFacing;
 
@@ -236,27 +241,27 @@ public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
 
     private List<ObstacleSpawnDetails> allBlockerSpawnDetails;
 
-    public CunningBlockerSpawnDetails(Vector3Int cellCoords, Facing facing, CunningObjectSpriteCategory category, List<ObstacleSpawnDetails> allBlockerSpawnDetails) :
-    base(cellCoords, facing, category)
+    public CunningBlockerSpawnDetails(int index, Vector3Int cellCoords, Facing facing, CunningObjectSpriteCategory category, List<ObstacleSpawnDetails> allBlockerSpawnDetails) :
+    base(index, cellCoords, facing, category)
     {
         this.allBlockerSpawnDetails = allBlockerSpawnDetails;
     }
 
-    public CunningBlockerSpawnDetails(Vector3Int cellCoords, Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category, List<ObstacleSpawnDetails> allBlockerSpawnDetails) :
-    base(cellCoords, startFacing, endFacing, category)
+    public CunningBlockerSpawnDetails(int index, Vector3Int cellCoords, Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category, List<ObstacleSpawnDetails> allBlockerSpawnDetails) :
+    base(index, cellCoords, startFacing, endFacing, category)
     {
         this.allBlockerSpawnDetails = allBlockerSpawnDetails;
     }
 
-    public CunningBlockerSpawnDetails(Vector3Int cellCoords, Facing facing, CunningObjectSpriteCategory category, List<ObstacleSpawnDetails> allBlockerSpawnDetails, string tutorialTargetHash) :
-    base(cellCoords, facing, category)
+    public CunningBlockerSpawnDetails(int index, Vector3Int cellCoords, Facing facing, CunningObjectSpriteCategory category, List<ObstacleSpawnDetails> allBlockerSpawnDetails, string tutorialTargetHash) :
+    base(index, cellCoords, facing, category)
     {
         this.allBlockerSpawnDetails = allBlockerSpawnDetails;
         this.tutorialTargetHash = tutorialTargetHash;
     }
 
-    public CunningBlockerSpawnDetails(Vector3Int cellCoords, Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category, ObstacleSpawnDetails blockerSpawnDetails, string tutorialTargetHash) :
-    base(cellCoords, startFacing, endFacing, category)
+    public CunningBlockerSpawnDetails(int index, Vector3Int cellCoords, Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category, ObstacleSpawnDetails blockerSpawnDetails, string tutorialTargetHash) :
+    base(index, cellCoords, startFacing, endFacing, category)
     {
         this.allBlockerSpawnDetails = new List<ObstacleSpawnDetails>(); 
         allBlockerSpawnDetails.Add(blockerSpawnDetails);
@@ -279,11 +284,14 @@ public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
     {
         CunningBlocker cunningBlocker = cunningObject as CunningBlocker;
 
+        cunningBlocker.index = index;
+
         foreach (ObstacleSpawnDetails details in allBlockerSpawnDetails)
         {
             GameObject blocker = SpawnInfoManager.spawnInteractable(details);
 
-            cunningBlocker.build(startFacing, endFacing, category, blocker, details.cellCoords);
+            cunningBlocker.build(startFacing, endFacing, category, blocker.GetComponent<Obstacle>(), details.cellCoords);
+            cunningBlocker.setBlockerStatus();
             SpawnInfoManager.addGameObject(blocker);
         }
 
@@ -297,7 +305,7 @@ public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
 public class ObstacleSpawnDetails : OOCSpawnDetails
 {
     private string spriteName;
-    private Color tint;
+    protected Color tint;
 
     public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName) :
     base(npcName, cellCoords)
@@ -315,8 +323,6 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
 
     public override string getSpriteName()
     {
-        Debug.LogError("spriteName = " + spriteName);
-
         return spriteName;
     }
 
@@ -356,12 +362,38 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
 
 }
 
+public class SpikeSpawnDetails : ObstacleSpawnDetails
+{
+
+    public SpikeSpawnDetails(string npcName, Vector3Int cellCoords) :
+    base(npcName, cellCoords, PrefabNames.spikesDown, Color.white)
+    {
+    }
+
+    public SpikeSpawnDetails(string npcName, Vector3Int cellCoords, Color tint) :
+    base(npcName, cellCoords, PrefabNames.spikesDown, tint)
+    {
+        
+    }
+
+    public override string getPrefabName()
+    {
+        return PrefabNames.spikes;
+    }
+
+    public override Transform getParent()
+    {
+        return AreaManager.getNPCParent();
+    }
+
+}
+
 public class RubbleObstacleSpawnDetails : ObstacleSpawnDetails
 {
     public RubbleObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName) :
     base(npcName, cellCoords, spriteName)
     {
-        
+
     }
 
     public override void spawnActions(SpriteRenderer spriteRenderer)
