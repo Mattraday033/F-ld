@@ -276,6 +276,9 @@ public static class PrefabNames
     public const string secretDoorsFolder = spriteFolder + "SecretDoors/";
     public const string mineLvl2WallSecretDoor = secretDoorsFolder + "MineLvl_2 Wall";
 
+    public const string miscFolder = spriteFolder + "Misc/";
+    public const string controlPanel = miscFolder + NPCNameList.controlPanel;
+
     public const string tilesFolder = spriteFolder + "Tiles/";
     public const string halfWallsFolder = tilesFolder + "Half Walls/";
     public const string stoneHalfWallsFolder = halfWallsFolder + "Stone/";

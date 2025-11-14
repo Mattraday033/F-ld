@@ -44,9 +44,6 @@ public class CunningBlocker : CunningObject
 
     public override void setStatus(string key, bool status)
     {
-        Debug.LogError("key = " + key);
-        Debug.LogError("getKey() = " + getKey());
-
 
         if (!getKey().Equals(key))
         {
@@ -68,15 +65,43 @@ public class CunningBlocker : CunningObject
 
         setToCurrentSprite();
 
+        if(!activated)
+        {
+            killEverythingInArea();
+        }
+
         if (trackChangeInStateManager)
         {
             trackKey();
         }
     }
 
+    private void killEverythingInArea()
+    {
+        foreach(Vector3Int coord in blockerCoords)
+        {
+            foreach(MovementTracker movementTracker in MovementManager.allMovementTrackers)
+            {
+                if(movementTracker != PlayerMovement.getInstance() &&
+                    movementTracker != null &&
+                    movementTracker.getAnimationManager() != null &&
+                    movementTracker.getCell().Equals(coord))
+                {
+                    movementTracker.getAnimationManager().playDeathAnimationThenHide();
+                    EnemyMovement enemyMovement = movementTracker as EnemyMovement;
+
+                    if(enemyMovement != null)
+                    {
+                        enemyMovement.setToDefeated();
+                    }
+                }
+            }
+        }
+    }
+
     public void setBlockerStatus()
     {
-        foreach(Obstacle blocker in blockers)
+        foreach (Obstacle blocker in blockers)
         {
             if (activated)
             {

@@ -113,9 +113,9 @@ public class MovementManager : MonoBehaviour
 
             if (!movement.isMoving())
             {
-                movement.updateFacing();
-
                 currentMovements.Add(movement, StartCoroutine(moveSprite(movement)));
+
+                movement.updateFacing();
 
                 if (!PlayerMovement.getInstance().directionMod.Equals(Vector3Int.zero))
                 {
@@ -239,6 +239,8 @@ public class MovementManager : MonoBehaviour
 
         currentMovements.Remove(movement);
 
+        movement.updateFacing();
+
         OnMoveFinished.Invoke();
     }
 
@@ -253,19 +255,23 @@ public class MovementManager : MonoBehaviour
             {
                 previousMovements.Add(movement);
                 continue;
-            }
-            if (movement == null)
+            }else if (movement == null)
             {
                 continue;
             }
 
             Vector3Int currentMonstersCellCoords = MovementTracker.getCurrentCell(movement);
+            Vector3Int currentMonstersEndingCellCoords = MovementTracker.getEndingCell(movement);
 
             foreach (MovementTracker previousMovement in previousMovements)
             {
                 Vector3Int previousMonstersCellCoords = MovementTracker.getCurrentCell(previousMovement);
+                Vector3Int previousMonstersEndingCellCoords = MovementTracker.getEndingCell(previousMovement);
 
                 if (previousMonstersCellCoords.Equals(currentMonstersCellCoords))
+                {
+                    movement.cancelMovement();
+                } else if (previousMonstersEndingCellCoords.Equals(currentMonstersEndingCellCoords))
                 {
                     movement.cancelMovement();
                 }
@@ -321,7 +327,8 @@ public class MovementManager : MonoBehaviour
                 allMovementTrackers[positionIndex].cancelMovement();
             }
 
-            if (cellsAreAdjacent(PlayerMovement.getInstance().endingPosition, allMovementTrackers[positionIndex].endingPosition))
+            if (allMovementTrackers[positionIndex].gameObject.activeSelf == true &&
+                cellsAreAdjacent(PlayerMovement.getInstance().endingPosition, allMovementTrackers[positionIndex].endingPosition))
             {
                 StartCoroutine(prepCombatAfterMovesFinish(allMovementTrackers[positionIndex]));
             }

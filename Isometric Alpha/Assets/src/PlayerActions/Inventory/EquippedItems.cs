@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class EquippedItems : IEnumerable
 {
     public const int totalEquipmentSlots = 6;
-    public static UnityEvent OnEquipmentChange = new UnityEvent();
+    public readonly static UnityEvent OnEquipmentChange = new UnityEvent();
 
     public Stats owner;
     public EquippableItem[] equippedItems = new EquippableItem[totalEquipmentSlots];
@@ -136,7 +136,7 @@ public class EquippedItems : IEnumerable
 
     public ArrayList createEquippedItemList()
     {
-        ArrayList equippedItems = new ArrayList();
+        ArrayList allEquippedItems = new ArrayList();
         ArrayList equippedMainHandWeapons = new ArrayList();
         ArrayList equippedArmorPlusOffHand = new ArrayList();
 
@@ -153,17 +153,17 @@ public class EquippedItems : IEnumerable
             equippedMainHandWeapons.Add(null);
         }
 
+        equippedArmorPlusOffHand.Add(getOffHand());
+
         foreach (EquippableItem item in equippedItems)
         {
             equippedArmorPlusOffHand.Add(item);
         }
 
-        equippedArmorPlusOffHand.Insert(0, getOffHand());
+        allEquippedItems.AddRange(equippedMainHandWeapons);
+        allEquippedItems.AddRange(equippedArmorPlusOffHand);
 
-        equippedItems.AddRange(equippedMainHandWeapons);
-        equippedItems.AddRange(equippedArmorPlusOffHand);
-
-        return equippedItems;
+        return allEquippedItems;
     }
 
     //IEnumerable methods

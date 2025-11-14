@@ -21,13 +21,7 @@ public class StartingMenuManager : MonoBehaviour
 	public GameObject mainMenuBackground; 
 	public StatAdjustmentManager statAdjustmentManager;
 
-	private static StartingMenuManager instance;
-
-    [RuntimeInitializeOnLoadMethod]
-    private static void initializeStartingMenuManager()
-    {
-        instance = null;
-    }
+	private static StartingMenuManager instance; //Don't instantiate, somehow Awake runs after [RuntimeInitializeOnLoadMethod]
 
     public static StartingMenuManager getInstance()
     {
@@ -46,7 +40,7 @@ public class StartingMenuManager : MonoBehaviour
 			Debug.LogError("Duplicate instances of StartingMenuManager exist erroneously");
 		}
 
-		instance = this;
+        instance = this;
     }
 
     void Update() //here for Key Input

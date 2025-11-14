@@ -70,6 +70,29 @@ public static class ChestItemIDList
 
         #endregion
 
+        #region MineLvl_2-4
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.bronzeBarIndex));
+
+        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section4, list);
+
+        #endregion
+
+        #region MineLvl_2-5
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.thistleTeaIndex, Constants.sizeFour));
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rockCakeIndex, Constants.sizeTwo));
+        list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.wickedKnifeIndex));
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.chokegrassBombIndex, Constants.sizeTwo));
+
+        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section5, list);
+
+        #endregion
+
         #region MineLvl_2-6
 
         list = new List<ItemListID>();

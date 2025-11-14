@@ -134,6 +134,7 @@ public static class DialogueNameList
 
     public const string mineLvl2FolderPath = mineFolderPath + "MineLvl_2/";
 
+    public const string controlPanelPath = mineLvl2FolderPath + NPCNameList.controlPanel;
     public const string suspiciousWallPath = mineLvl2FolderPath + NPCNameList.suspiciousWall;
     public const string mineArmoryGatePath = mineLvl2FolderPath + NPCNameList.mineArmoryGate;
 

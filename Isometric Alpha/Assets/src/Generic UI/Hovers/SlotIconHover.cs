@@ -8,13 +8,13 @@ using TMPro;
 
 public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IHoverIconSource, IDescribable
 {
-    //[SerializeField]
+    [SerializeField]
     protected string hoverMessageKey;
-    private string hoverText;
+    protected string hoverText;
 
-    //[SerializeField]
+    [SerializeField]
     private bool bonusDamageIcon = false;
-    //[SerializeField]
+    [SerializeField]
     private bool damageIcon = false;
 
     public HoverIconDescriptionPanel descriptionPanel;
@@ -107,7 +107,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         OnPointerExit(null);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public virtual void OnPointerEnter(PointerEventData eventData)
     {
         if (hoverText != null && hoverText.Length > 0)
         {
@@ -115,7 +115,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public virtual void OnPointerExit(PointerEventData eventData)
     {
         MouseHoverManager.OnHoverPanelCreation.Invoke();
         MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldDestroyHoverIcon));

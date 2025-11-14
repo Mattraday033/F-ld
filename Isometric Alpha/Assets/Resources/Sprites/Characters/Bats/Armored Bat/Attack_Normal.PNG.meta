@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7e7d9810e44397e47a6a1f245520159a
+guid: 45a01515aac49e94093af78af62885f2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,9 +48,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 350
+  spritePixelsToUnits: 385
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Armored_Bat_Howl_0
+      name: Attack_Normal_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 818e3da667d52284f85c88252a70349e
-      internalID: -1797455097
+      spriteID: d2f1822a0c58f684984c742cec5f876f
+      internalID: 220802946
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_1
+      name: Attack_Normal_1
       rect:
         serializedVersion: 2
         x: 512
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d29154d1de042e2478bc413aad5e06a5
-      internalID: -166793363
+      spriteID: 2c481a2bf84298543bb1fe7ae01f61e1
+      internalID: -697900300
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_2
+      name: Attack_Normal_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f3cbcfb9c4a6ad46a1370749f1f176f
-      internalID: -1194402426
+      spriteID: 40ab854ef79634848b4cdf962f35481f
+      internalID: 588399609
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_3
+      name: Attack_Normal_3
       rect:
         serializedVersion: 2
         x: 1536
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08213dff04a240d45900fbc1912f313c
-      internalID: 389361864
+      spriteID: 69c9931355214d8489534334e269f6e5
+      internalID: 1468713413
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_4
+      name: Attack_Normal_4
       rect:
         serializedVersion: 2
         x: 2048
@@ -195,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdc4af40a9ef5134cbdc660c91bf6629
-      internalID: 474934720
+      spriteID: c09de43ad1fef2d44a5b9d7bde4f9d44
+      internalID: 691741688
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_5
+      name: Attack_Normal_5
       rect:
         serializedVersion: 2
         x: 2560
@@ -216,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ce82c3a0928e1446a0cc80bf0f44ac3
-      internalID: 219218735
+      spriteID: 442ab3f3230881e45b321d51e4a5c99e
+      internalID: -464457423
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_6
+      name: Attack_Normal_6
       rect:
         serializedVersion: 2
         x: 3072
@@ -237,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7108041d5a88014883f5908fbb59140
-      internalID: -1775517831
+      spriteID: 360c7116c5cd799468b043eac2768e55
+      internalID: -1090003223
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_7
+      name: Attack_Normal_7
       rect:
         serializedVersion: 2
         x: 3584
@@ -258,14 +258,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1fb669f8e6036ba458ca56a2e4027828
-      internalID: 142061380
+      spriteID: 7fe35b21150864e4d8ac7ee76274d83b
+      internalID: -1283434187
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_8
+      name: Attack_Normal_8
       rect:
         serializedVersion: 2
         x: 4096
@@ -279,14 +279,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f568df7d9f78a0d4cbb7bf483a4a4519
-      internalID: -780271579
+      spriteID: 578c696e8109ee143974b4639ba8edee
+      internalID: 125682231
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_9
+      name: Attack_Normal_9
       rect:
         serializedVersion: 2
         x: 4608
@@ -300,14 +300,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebebc3223176ac34392bbc1466ae7a4c
-      internalID: -1363685412
+      spriteID: 2af72b2c1a7781541ad7e1340bdc4814
+      internalID: -720831402
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_10
+      name: Attack_Normal_10
       rect:
         serializedVersion: 2
         x: 5120
@@ -321,14 +321,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77c10e71752750a4cadf95f4623063a4
-      internalID: 612745126
+      spriteID: c2dc1a13e48394e46b9e4cd2a7e62689
+      internalID: 2029659702
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_11
+      name: Attack_Normal_11
       rect:
         serializedVersion: 2
         x: 5632
@@ -342,14 +342,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dda262a0019659443b387b77bde60401
-      internalID: 1022037941
+      spriteID: a0675a014ad5413408fd7d138d8e9771
+      internalID: 2131972942
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_12
+      name: Attack_Normal_12
       rect:
         serializedVersion: 2
         x: 6144
@@ -363,14 +363,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce76c61be8fc8ed4da6d2a7fd4f645e3
-      internalID: 939808758
+      spriteID: 0717210b79adcd848b2da0d2e438246f
+      internalID: 1507006249
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_13
+      name: Attack_Normal_13
       rect:
         serializedVersion: 2
         x: 6656
@@ -384,14 +384,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac8213c84fdee7d44b59832529e255b2
-      internalID: 1240765328
+      spriteID: 1ae57e0a89e991d4597b66c481210438
+      internalID: -2108410804
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_14
+      name: Attack_Normal_14
       rect:
         serializedVersion: 2
         x: 7168
@@ -405,14 +405,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3465169c04334da4d8201cfbba3af086
-      internalID: 1662841685
+      spriteID: 74446bae508cad141bb817d36cab9734
+      internalID: 372985485
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_15
+      name: Attack_Normal_15
       rect:
         serializedVersion: 2
         x: 7680
@@ -426,14 +426,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4738e2e5435e9d4cb8a03b79a2911be
-      internalID: 1891412265
+      spriteID: cefc3d8c2b6ac5043bfaf11e9d86e5db
+      internalID: -640485160
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_16
+      name: Attack_Normal_16
       rect:
         serializedVersion: 2
         x: 8192
@@ -447,14 +447,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 223bc74a09bb1e84aa2117659d8eb4fd
-      internalID: 826749233
+      spriteID: a38017c237a8b8842b4e5abfdcfcd93a
+      internalID: 214315262
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_17
+      name: Attack_Normal_17
       rect:
         serializedVersion: 2
         x: 8704
@@ -468,14 +468,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58bc110f6424a214d891b7d2abea4bd9
-      internalID: 98359268
+      spriteID: ed469bf5ee97e6e49a266bdd14d11e43
+      internalID: 1302864748
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Howl_18
+      name: Attack_Normal_18
       rect:
         serializedVersion: 2
         x: 9216
@@ -489,8 +489,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3037cf250be574b40bdb0d7fd33f09c4
-      internalID: 830922210
+      spriteID: 5fb74ed87b5a77b4a805f48ebea8edc3
+      internalID: 2013783007
       vertices: []
       indices: 
       edges: []
@@ -506,25 +506,25 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Armored_Bat_Howl_0: -1797455097
-      Armored_Bat_Howl_1: -166793363
-      Armored_Bat_Howl_10: 612745126
-      Armored_Bat_Howl_11: 1022037941
-      Armored_Bat_Howl_12: 939808758
-      Armored_Bat_Howl_13: 1240765328
-      Armored_Bat_Howl_14: 1662841685
-      Armored_Bat_Howl_15: 1891412265
-      Armored_Bat_Howl_16: 826749233
-      Armored_Bat_Howl_17: 98359268
-      Armored_Bat_Howl_18: 830922210
-      Armored_Bat_Howl_2: -1194402426
-      Armored_Bat_Howl_3: 389361864
-      Armored_Bat_Howl_4: 474934720
-      Armored_Bat_Howl_5: 219218735
-      Armored_Bat_Howl_6: -1775517831
-      Armored_Bat_Howl_7: 142061380
-      Armored_Bat_Howl_8: -780271579
-      Armored_Bat_Howl_9: -1363685412
+      Attack_Normal_0: 220802946
+      Attack_Normal_1: -697900300
+      Attack_Normal_10: 2029659702
+      Attack_Normal_11: 2131972942
+      Attack_Normal_12: 1507006249
+      Attack_Normal_13: -2108410804
+      Attack_Normal_14: 372985485
+      Attack_Normal_15: -640485160
+      Attack_Normal_16: 214315262
+      Attack_Normal_17: 1302864748
+      Attack_Normal_18: 2013783007
+      Attack_Normal_2: 588399609
+      Attack_Normal_3: 1468713413
+      Attack_Normal_4: 691741688
+      Attack_Normal_5: -464457423
+      Attack_Normal_6: -1090003223
+      Attack_Normal_7: -1283434187
+      Attack_Normal_8: 125682231
+      Attack_Normal_9: -720831402
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

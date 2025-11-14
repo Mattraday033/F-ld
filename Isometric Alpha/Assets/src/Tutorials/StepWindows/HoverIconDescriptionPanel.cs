@@ -5,19 +5,28 @@ using UnityEngine.UI;
 
 public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
 {
-    private static int screenWidthFirstThird = (int) (((double) Screen.width) * (1.0 / 3.0));
-    private static int screenWidthSecondThird = (int) (((double) Screen.width) * (2.0 / 3.0));
+    private readonly static int screenWidthFirstThird = (int) (((double) Screen.width) * (1.0 / 3.0));
+    private readonly static int screenWidthSecondThird = (int) (((double) Screen.width) * (2.0 / 3.0));
 
-    private static int screenHeightFirstThird = (int) (((double) Screen.height) * (1.0 / 3.0));
-    private static int screenHeightSecondThird = (int) (((double) Screen.height) * (2.0 / 3.0));
+    private readonly static int screenHeightFirstThird = (int) (((double) Screen.height) * (1.0 / 3.0));
+    private readonly static int screenHeightSecondThird = (int) (((double) Screen.height) * (2.0 / 3.0));
 
     private const int distanceFromHover = 15;
 
+    private const float maxWidth = 330f;
+
     public bool alwaysTop = false;
+
+    public CanvasGroup canvasGroup;
+
     public LayoutGroup thirdLayoutGroup;
+
+    public LayoutElement layoutElement;
 
     private void Awake()
     {
+        canvasGroup.alpha = 0;
+
         parentRect = transform.parent.gameObject.GetComponent<RectTransform>();
 
         // setTopRectDimensions();
@@ -35,6 +44,28 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
 
         setAnchorsAndPivot(direction);
         setPadding();
+
+        StartCoroutine(checkAndSetWidth());
+    }
+
+    private IEnumerator checkAndSetWidth()
+    {
+        yield return new WaitForEndOfFrame();
+        
+        LayoutRebuilder.ForceRebuildLayoutImmediate(descPanelWindow);
+        Canvas.ForceUpdateCanvases();
+        
+        yield return new WaitForEndOfFrame();
+
+        if (descPanelWindow.rect.width > maxWidth)
+        {
+            layoutElement.preferredWidth = maxWidth;
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(descPanelWindow);
+            Canvas.ForceUpdateCanvases();
+        }
+
+        canvasGroup.alpha = 1;
     }
 
     public void setDescriptionText(string text)

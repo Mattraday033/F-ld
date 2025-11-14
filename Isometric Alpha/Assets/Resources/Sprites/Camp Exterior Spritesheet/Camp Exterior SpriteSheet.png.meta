@@ -334,7 +334,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: props_0
+      name: Camp Exterior SpriteSheet_0
       rect:
         serializedVersion: 2
         x: 38
@@ -348,19 +348,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02305410000000000800000000000000
-      internalID: 21300000
+      spriteID: 866c542808ce0da488b5fbfc6ff4312f
+      internalID: 1121241558
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_1
+      name: Camp Exterior SpriteSheet_1
       rect:
         serializedVersion: 2
-        x: 284
+        x: 285
         y: 3622
-        width: 190
+        width: 189
         height: 398
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -369,20 +369,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22305410000000000800000000000000
-      internalID: 21300002
+      spriteID: 6cf5638eec2c14b48bec2262a96a29ac
+      internalID: 1316673410
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_2
+      name: Camp Exterior SpriteSheet_2
       rect:
         serializedVersion: 2
         x: 271
         y: 3308
         width: 196
-        height: 276
+        height: 275
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -390,14 +390,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42305410000000000800000000000000
-      internalID: 21300004
+      spriteID: f4dd9fe7a42724d48aa4bc0b09fdf41a
+      internalID: 64748905
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_4
+      name: Camp Exterior SpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 3582
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 623a0fd32643e7b468f7814d4f48d84b
+      internalID: -835855578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_4
       rect:
         serializedVersion: 2
         x: 46
@@ -411,14 +432,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62305410000000000800000000000000
-      internalID: 21300006
+      spriteID: 35b5432138d057f41af2a07a6891f440
+      internalID: -522452665
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_5
+      name: Camp Exterior SpriteSheet_5
       rect:
         serializedVersion: 2
         x: 520
@@ -432,14 +453,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82305410000000000800000000000000
-      internalID: 21300008
+      spriteID: 30f54313e4532144491889fd39b0cdf4
+      internalID: -494555426
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_6
+      name: Camp Exterior SpriteSheet_6
       rect:
         serializedVersion: 2
         x: 709
@@ -453,14 +474,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2305410000000000800000000000000
-      internalID: 21300010
+      spriteID: 32313da160e7a3c4da73d624d9ab024d
+      internalID: 1675356797
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_7
+      name: Camp Exterior SpriteSheet_7
       rect:
         serializedVersion: 2
         x: 888
@@ -474,41 +495,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2305410000000000800000000000000
-      internalID: 21300012
+      spriteID: 1f3bbb179fcfbfc4ea628d0208a59359
+      internalID: -1011621998
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_8
+      name: Control Panel
       rect:
         serializedVersion: 2
         x: 55
-        y: 3109
+        y: 3114
         width: 108
         height: 187
       alignment: 9
-      pivot: {x: 0.5, y: 0}
+      pivot: {x: 1.2, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2305410000000000800000000000000
-      internalID: 21300014
+      spriteID: 3822d3c114cccba4ea94ae5a152cc84d
+      internalID: 494951121
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_10
+      name: Camp Exterior SpriteSheet_9
       rect:
         serializedVersion: 2
-        x: 528
-        y: 3072
-        width: 120
-        height: 236
+        x: 58
+        y: 3295
+        width: 8
+        height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -516,20 +537,62 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03305410000000000800000000000000
-      internalID: 21300016
+      spriteID: 1f5bd2a2f18ced746927ef7fffb1a437
+      internalID: -742290877
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_12
+      name: Camp Exterior SpriteSheet_10
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 3072
+        width: 118
+        height: 235
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1eed0022396eeab478c9519fd893863a
+      internalID: 1350742624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_11
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 3293
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97e9c41c05f538d41a7c3c86343ab093
+      internalID: -1619023533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_12
       rect:
         serializedVersion: 2
         x: 719
         y: 3072
-        width: 170
-        height: 236
+        width: 118
+        height: 235
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -537,18 +600,60 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23305410000000000800000000000000
-      internalID: 21300018
+      spriteID: 9639a2cb14cbffe43a82274e56c0f8e4
+      internalID: -1157833186
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_13
+      name: Camp Exterior SpriteSheet_13
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 3100
+        width: 23
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e688a0be7c606d4c9f888fdb1811a03
+      internalID: -1664004023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_14
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 3100
+        width: 22
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d04d978004806b44d912ef0f4283c104
+      internalID: -1206526324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_15
       rect:
         serializedVersion: 2
         x: 912
-        y: 3081
+        y: 3080
         width: 64
         height: 215
       alignment: 0
@@ -558,40 +663,40 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43305410000000000800000000000000
-      internalID: 21300020
+      spriteID: c7d92981ed86fb3499ea675b30a923a5
+      internalID: 1410076628
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_15
+      name: Camp Exterior SpriteSheet_16
       rect:
         serializedVersion: 2
         x: 3077
-        y: 2572
+        y: 2573
         width: 507
-        height: 691
-      alignment: 9
-      pivot: {x: 0.54, y: 0.2}
+        height: 690
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63305410000000000800000000000000
-      internalID: 21300022
+      spriteID: 158fc92b553849b4ba6edf0bc84004bd
+      internalID: 1835356587
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_16
+      name: Camp Exterior SpriteSheet_17
       rect:
         serializedVersion: 2
-        x: 16
+        x: 17
         y: 2670
-        width: 200
+        width: 199
         height: 399
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -600,20 +705,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83305410000000000800000000000000
-      internalID: 21300024
+      spriteID: c899cefa23971974dab0d965c7561622
+      internalID: 428351299
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_17
+      name: Camp Exterior SpriteSheet_18
       rect:
         serializedVersion: 2
         x: 279
-        y: 2655
-        width: 201
-        height: 417
+        y: 2653
+        width: 199
+        height: 416
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -621,20 +726,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3305410000000000800000000000000
-      internalID: 21300026
+      spriteID: 99393bb6676cf21498d87a2db0570b37
+      internalID: 1587797005
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_18
+      name: Camp Exterior SpriteSheet_19
       rect:
         serializedVersion: 2
         x: 545
         y: 2903
         width: 119
-        height: 146
+        height: 147
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -642,14 +747,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3305410000000000800000000000000
-      internalID: 21300028
+      spriteID: 46665f908ff9e884abc823111199b551
+      internalID: 616570527
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_19
+      name: Camp Exterior SpriteSheet_20
       rect:
         serializedVersion: 2
         x: 696
@@ -663,19 +768,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3305410000000000800000000000000
-      internalID: 21300030
+      spriteID: cf7b7021dc8d2ca41938066f2f5062e5
+      internalID: -1614014050
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_20
+      name: Camp Exterior SpriteSheet_21
       rect:
         serializedVersion: 2
         x: 862
         y: 2903
-        width: 118
+        width: 116
         height: 131
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -684,14 +789,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04305410000000000800000000000000
-      internalID: 21300032
+      spriteID: 1b9b94302be9dbc428acc4e40fe4aa29
+      internalID: 1823259389
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_21
+      name: Camp Exterior SpriteSheet_22
       rect:
         serializedVersion: 2
         x: 1041
@@ -705,19 +810,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24305410000000000800000000000000
-      internalID: 21300034
+      spriteID: e54b378ac0e6d5e4886e40b5202278a2
+      internalID: 1409514816
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_22
+      name: Camp Exterior SpriteSheet_23
       rect:
         serializedVersion: 2
         x: 1304
         y: 2833
-        width: 204
+        width: 202
         height: 224
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -726,140 +831,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44305410000000000800000000000000
-      internalID: 21300036
+      spriteID: 40f0daeb72b40964f9a3905231540a0a
+      internalID: 329766363
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_23
-      rect:
-        serializedVersion: 2
-        x: 559
-        y: 2769
-        width: 88
-        height: 96
-      alignment: 9
-      pivot: {x: 0.5, y: 0.32}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 64305410000000000800000000000000
-      internalID: 21300038
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: props_24
-      rect:
-        serializedVersion: 2
-        x: 852
-        y: 2586
-        width: 136
-        height: 263
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 84305410000000000800000000000000
-      internalID: 21300040
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: props_25
-      rect:
-        serializedVersion: 2
-        x: 1040
-        y: 2592
-        width: 204
-        height: 224
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a4305410000000000800000000000000
-      internalID: 21300042
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: props_26
-      rect:
-        serializedVersion: 2
-        x: 1284
-        y: 2587
-        width: 221
-        height: 231
-      alignment: 9
-      pivot: {x: 0.5, y: 0.32}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c4305410000000000800000000000000
-      internalID: 21300044
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: props_27
-      rect:
-        serializedVersion: 2
-        x: 1548
-        y: 2574
-        width: 236
-        height: 224
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e4305410000000000800000000000000
-      internalID: 21300046
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: props_28
-      rect:
-        serializedVersion: 2
-        x: 1800
-        y: 2568
-        width: 240
-        height: 242
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 05305410000000000800000000000000
-      internalID: 21300048
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: props_29
+      name: Camp Exterior SpriteSheet_24
       rect:
         serializedVersion: 2
         x: 2074
@@ -873,20 +852,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25305410000000000800000000000000
-      internalID: 21300050
+      spriteID: 3da26c4480c5b6f468fe7b8a14a48aeb
+      internalID: -1822924432
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_30
+      name: Camp Exterior SpriteSheet_25
       rect:
         serializedVersion: 2
-        x: 2185
-        y: 2583
-        width: 97
-        height: 288
+        x: 2252
+        y: 2868
+        width: 5
+        height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -894,19 +873,61 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45305410000000000800000000000000
-      internalID: 21300052
+      spriteID: 28950ede263195f4e833f5a3d0aa6dab
+      internalID: -1188491757
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_31
+      name: Camp Exterior SpriteSheet_26
       rect:
         serializedVersion: 2
-        x: 2335
-        y: 2584
-        width: 199
+        x: 559
+        y: 2769
+        width: 88
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20cb3ecf7867df34eb605913e2fbb8a0
+      internalID: 90506677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_27
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 2586
+        width: 133
+        height: 263
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d95504b1528f424fb9f1d4c3d5b8da5
+      internalID: -368536673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_28
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 2560
+        width: 202
         height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -915,20 +936,125 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65305410000000000800000000000000
-      internalID: 21300054
+      spriteID: fe51d2996c157ef48b895fdf446af7ed
+      internalID: -1730655615
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_32
+      name: Camp Exterior SpriteSheet_29
+      rect:
+        serializedVersion: 2
+        x: 1286
+        y: 2587
+        width: 219
+        height: 231
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: becf7bf8e0c1feb468388353250a3150
+      internalID: 1176854845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_30
+      rect:
+        serializedVersion: 2
+        x: 1548
+        y: 2574
+        width: 236
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf0838b8d155e7d48baa74982a06195a
+      internalID: 1432779192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_31
+      rect:
+        serializedVersion: 2
+        x: 1803
+        y: 2568
+        width: 236
+        height: 242
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf389d5c3b8f93d49817ed126749026e
+      internalID: 1215087940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_32
+      rect:
+        serializedVersion: 2
+        x: 2185
+        y: 2587
+        width: 97
+        height: 279
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca169aecc75a72d4ab7f745e11516479
+      internalID: -974879709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_33
+      rect:
+        serializedVersion: 2
+        x: 2334
+        y: 2582
+        width: 200
+        height: 258
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 304fcb87d6a8cfa489e093888cbcc214
+      internalID: -1241341734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_34
       rect:
         serializedVersion: 2
         x: 2568
         y: 2599
         width: 262
-        height: 177
+        height: 176
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -936,20 +1062,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85305410000000000800000000000000
-      internalID: 21300056
+      spriteID: 9175e9f255bdfa847a7ab90ead46d3c8
+      internalID: -1043781167
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_33
+      name: Camp Exterior SpriteSheet_35
       rect:
         serializedVersion: 2
-        x: 375
-        y: 2652
-        width: 10
-        height: 5
+        x: 387
+        y: 2659
+        width: 4
+        height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -957,20 +1083,62 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5305410000000000800000000000000
-      internalID: 21300058
+      spriteID: 5125a56950ac8c3418a8e0677da6b8fe
+      internalID: -1740128234
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_36
+      name: Camp Exterior SpriteSheet_36
+      rect:
+        serializedVersion: 2
+        x: 2227
+        y: 2582
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a0042911c3a14844a228c68ecdf4c80
+      internalID: 607703094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_37
+      rect:
+        serializedVersion: 2
+        x: 2350
+        y: 2560
+        width: 45
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b53763d003ccdd42b0f86e2c2691fea
+      internalID: -2042215633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_38
       rect:
         serializedVersion: 2
         x: 46
         y: 2315
         width: 155
-        height: 233
+        height: 232
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -978,19 +1146,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06305410000000000800000000000000
-      internalID: 21300064
+      spriteID: 8de1d09670669d64c882ccbb89036a08
+      internalID: 496669931
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_37
+      name: Camp Exterior SpriteSheet_39
       rect:
         serializedVersion: 2
         x: 279
         y: 2315
-        width: 157
+        width: 155
         height: 231
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -999,20 +1167,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26305410000000000800000000000000
-      internalID: 21300066
+      spriteID: 5238df603b7cb334fb2bb2577fef280a
+      internalID: -1107192730
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_38
+      name: Camp Exterior SpriteSheet_40
       rect:
         serializedVersion: 2
         x: 562
         y: 2315
         width: 155
-        height: 233
+        height: 232
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1020,19 +1188,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46305410000000000800000000000000
-      internalID: 21300068
+      spriteID: 16641dc40f5ba02428a50bf3080d53a9
+      internalID: -1329506369
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_39
+      name: Camp Exterior SpriteSheet_41
       rect:
         serializedVersion: 2
         x: 795
         y: 2315
-        width: 157
+        width: 155
         height: 231
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1041,20 +1209,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66305410000000000800000000000000
-      internalID: 21300070
+      spriteID: c1684dd0248dfc245b0bd9c294826225
+      internalID: 1135443022
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_40
+      name: Camp Exterior SpriteSheet_42
       rect:
         serializedVersion: 2
-        x: 1076
-        y: 2351
-        width: 180
-        height: 179
+        x: 1077
+        y: 2350
+        width: 178
+        height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1062,14 +1230,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86305410000000000800000000000000
-      internalID: 21300072
+      spriteID: 737b4162ba80f7c4296ec97c08f8ee64
+      internalID: 2120955850
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_41
+      name: Camp Exterior SpriteSheet_43
       rect:
         serializedVersion: 2
         x: 1303
@@ -1083,20 +1251,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6305410000000000800000000000000
-      internalID: 21300074
+      spriteID: 85e4ccafaafcfcf4088cfc1b88f33e52
+      internalID: -413991766
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_42
+      name: Camp Exterior SpriteSheet_44
       rect:
         serializedVersion: 2
-        x: 1584
-        y: 2351
-        width: 180
-        height: 179
+        x: 1585
+        y: 2350
+        width: 178
+        height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1104,14 +1272,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6305410000000000800000000000000
-      internalID: 21300076
+      spriteID: a4df36dc6ad44af438a84830d3e756a8
+      internalID: -713388266
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_43
+      name: Camp Exterior SpriteSheet_45
       rect:
         serializedVersion: 2
         x: 1811
@@ -1125,20 +1293,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6305410000000000800000000000000
-      internalID: 21300078
+      spriteID: 93851de04d96d0e469f9a53ddcc4b881
+      internalID: 577829026
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_44
+      name: Camp Exterior SpriteSheet_46
       rect:
         serializedVersion: 2
-        x: 2100
-        y: 2338
-        width: 180
-        height: 179
+        x: 2102
+        y: 2337
+        width: 178
+        height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1146,20 +1314,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07305410000000000800000000000000
-      internalID: 21300080
+      spriteID: bdb1506926260bb479fd43f7534294fd
+      internalID: -534675901
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_45
+      name: Camp Exterior SpriteSheet_47
       rect:
         serializedVersion: 2
         x: 2328
         y: 2330
-        width: 180
-        height: 182
+        width: 178
+        height: 181
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1167,20 +1335,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27305410000000000800000000000000
-      internalID: 21300082
+      spriteID: 085075dcd6068af4cae7a5fec65b83aa
+      internalID: 155994125
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_46
+      name: Camp Exterior SpriteSheet_48
       rect:
         serializedVersion: 2
-        x: 2624
-        y: 2338
-        width: 180
-        height: 179
+        x: 2625
+        y: 2337
+        width: 178
+        height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1188,20 +1356,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47305410000000000800000000000000
-      internalID: 21300084
+      spriteID: 50cec5c2ed45c3448b413464d387e215
+      internalID: -1510460398
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_47
+      name: Camp Exterior SpriteSheet_49
       rect:
         serializedVersion: 2
         x: 2851
-        y: 2328
+        y: 2330
         width: 178
-        height: 184
+        height: 181
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1209,14 +1377,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67305410000000000800000000000000
-      internalID: 21300086
+      spriteID: a915873f8b148e44aa4170df000abe0d
+      internalID: 1708859432
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_48
+      name: Camp Exterior SpriteSheet_50
       rect:
         serializedVersion: 2
         x: 46
@@ -1230,14 +1398,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87305410000000000800000000000000
-      internalID: 21300088
+      spriteID: af509625d06334749a860191231ba4db
+      internalID: -1851035168
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_49
+      name: Camp Exterior SpriteSheet_51
       rect:
         serializedVersion: 2
         x: 279
@@ -1251,14 +1419,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7305410000000000800000000000000
-      internalID: 21300090
+      spriteID: 8c8c2bd96d121b84992adb5c31c51ae0
+      internalID: -1643555104
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_50
+      name: Camp Exterior SpriteSheet_52
       rect:
         serializedVersion: 2
         x: 562
@@ -1272,14 +1440,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7305410000000000800000000000000
-      internalID: 21300092
+      spriteID: 83d6ff3a102522a47b44505956e25f2f
+      internalID: -1569601297
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_51
+      name: Camp Exterior SpriteSheet_53
       rect:
         serializedVersion: 2
         x: 795
@@ -1293,20 +1461,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7305410000000000800000000000000
-      internalID: 21300094
+      spriteID: c2f25deeb78256e45bcce4571ceca81f
+      internalID: 1161570327
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_52
+      name: Camp Exterior SpriteSheet_54
       rect:
         serializedVersion: 2
-        x: 1076
-        y: 2131
-        width: 180
-        height: 179
+        x: 1077
+        y: 2130
+        width: 178
+        height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1314,14 +1482,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08305410000000000800000000000000
-      internalID: 21300096
+      spriteID: 1e12b682fc860ff4c8face6f025c238b
+      internalID: -1715057506
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_53
+      name: Camp Exterior SpriteSheet_55
       rect:
         serializedVersion: 2
         x: 1303
@@ -1335,20 +1503,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28305410000000000800000000000000
-      internalID: 21300098
+      spriteID: c1060a2539b72544f8e19fdf6d446740
+      internalID: -154688742
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_54
+      name: Camp Exterior SpriteSheet_56
       rect:
         serializedVersion: 2
-        x: 1584
-        y: 2131
-        width: 180
-        height: 179
+        x: 1585
+        y: 2130
+        width: 178
+        height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1356,14 +1524,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48305410000000000800000000000000
-      internalID: 21300100
+      spriteID: 46a173c5ae461ab4a9e1e9e3011fe342
+      internalID: 947376476
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_55
+      name: Camp Exterior SpriteSheet_57
       rect:
         serializedVersion: 2
         x: 1788
@@ -1377,20 +1545,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68305410000000000800000000000000
-      internalID: 21300102
+      spriteID: f8a5a23d09a1c8242ad4ce77b3c5524e
+      internalID: 946860202
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_56
+      name: Camp Exterior SpriteSheet_58
       rect:
         serializedVersion: 2
-        x: 2100
-        y: 2118
-        width: 180
-        height: 179
+        x: 2102
+        y: 2117
+        width: 178
+        height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1398,20 +1566,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88305410000000000800000000000000
-      internalID: 21300104
+      spriteID: 88c065371b150dc4a975eda9f7839b98
+      internalID: 1568366828
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_57
+      name: Camp Exterior SpriteSheet_59
       rect:
         serializedVersion: 2
         x: 2328
         y: 2110
-        width: 180
-        height: 182
+        width: 178
+        height: 181
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1419,19 +1587,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8305410000000000800000000000000
-      internalID: 21300106
+      spriteID: 2908ffd6576cde7498ea609b4603dd57
+      internalID: 213393590
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_58
+      name: Camp Exterior SpriteSheet_60
       rect:
         serializedVersion: 2
-        x: 2624
+        x: 2625
         y: 2052
-        width: 190
+        width: 189
         height: 245
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1440,14 +1608,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8305410000000000800000000000000
-      internalID: 21300108
+      spriteID: 9f7996ee9888b7846a384eb9a1af0b5a
+      internalID: 1771047496
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_59
+      name: Camp Exterior SpriteSheet_61
       rect:
         serializedVersion: 2
         x: 2827
@@ -1461,20 +1629,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8305410000000000800000000000000
-      internalID: 21300110
+      spriteID: 2a6cad96c2d256545a3233dafd3fd698
+      internalID: 1809416480
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_60
+      name: Camp Exterior SpriteSheet_62
       rect:
         serializedVersion: 2
         x: 2851
-        y: 2108
+        y: 2110
         width: 178
-        height: 184
+        height: 181
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1482,20 +1650,209 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09305410000000000800000000000000
-      internalID: 21300112
+      spriteID: 42ca6ae72e8351c44b65cb0a4ea73bc5
+      internalID: -1678210714
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_70
+      name: Camp Exterior SpriteSheet_63
+      rect:
+        serializedVersion: 2
+        x: 3950
+        y: 2140
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dfe773c17b447a46a6b2321d1928e0a
+      internalID: 1568488824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_64
+      rect:
+        serializedVersion: 2
+        x: 3196
+        y: 2129
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06b8988b1b8cfb74895345025d1bb5eb
+      internalID: -1349436140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_65
+      rect:
+        serializedVersion: 2
+        x: 3506
+        y: 2048
+        width: 139
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 368187d40a77a2d4fab6a79e35f477fc
+      internalID: -880944489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_66
+      rect:
+        serializedVersion: 2
+        x: 3359
+        y: 815
+        width: 44
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 464502e1ea7bf7947883581e9e1e1824
+      internalID: 214067736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_67
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 791
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8accc9c7d9aebc4cbb318b5d00945a2
+      internalID: -1200257287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_68
+      rect:
+        serializedVersion: 2
+        x: 1392
+        y: 791
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1cfb5797d863244a8f6fee48ca2a109
+      internalID: -1791713017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_69
+      rect:
+        serializedVersion: 2
+        x: 2416
+        y: 791
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6800d707680508d4fb92f1315210a716
+      internalID: -1070345330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_70
+      rect:
+        serializedVersion: 2
+        x: 3440
+        y: 791
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09f02d4c96a9f7d4183cba21fba08277
+      internalID: 1527034411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_71
+      rect:
+        serializedVersion: 2
+        x: 3465
+        y: 770
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adbad90e537c53d4da3730221aad6977
+      internalID: 396618367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_72
       rect:
         serializedVersion: 2
         x: 0
         y: 56
         width: 510
-        height: 712
+        height: 710
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1503,14 +1860,56 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 29305410000000000800000000000000
-      internalID: 21300114
+      spriteID: 7e2530dd2921330418230d8fe7ec7496
+      internalID: -517045766
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_73
+      name: Camp Exterior SpriteSheet_73
+      rect:
+        serializedVersion: 2
+        x: 3894
+        y: 759
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a39f7d0503cccef4882c4811846c2cc1
+      internalID: 782902626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_74
+      rect:
+        serializedVersion: 2
+        x: 3419
+        y: 730
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a6eb1b14cd9aa74885284ef5f84e93b
+      internalID: -1665276775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_75
       rect:
         serializedVersion: 2
         x: 526
@@ -1524,41 +1923,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49305410000000000800000000000000
-      internalID: 21300116
+      spriteID: 09a21128a98f21449ace71b59b2a9714
+      internalID: 116249814
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_82
+      name: Camp Exterior SpriteSheet_76
       rect:
         serializedVersion: 2
-        x: 3072
-        y: 56
-        width: 512
-        height: 664
-      alignment: 9
-      pivot: {x: 0.5, y: 0.32}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 89305410000000000800000000000000
-      internalID: 21300120
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: props_85
-      rect:
-        serializedVersion: 2
-        x: 1031
-        y: 56
-        width: 505
-        height: 624
+        x: 891
+        y: 707
+        width: 5
+        height: 5
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1566,14 +1944,245 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9305410000000000800000000000000
-      internalID: 21300122
+      spriteID: ca4b042819ae67740bd412c7dbc2ae5d
+      internalID: 1967502104
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_87
+      name: Camp Exterior SpriteSheet_77
+      rect:
+        serializedVersion: 2
+        x: 892
+        y: 715
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1bc6e9fd762758429182eb2b0d63dfd
+      internalID: 1990001637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_78
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 678
+        width: 12
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ae8dafa0225bc14692364a2279bd284
+      internalID: 2066413548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_79
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 704
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31296c8c7e8bd044591e0d8f40d84d50
+      internalID: 678823301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_80
+      rect:
+        serializedVersion: 2
+        x: 1918
+        y: 707
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fc9fcf12c1b441489d502d1679e1805
+      internalID: -1871077185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_81
+      rect:
+        serializedVersion: 2
+        x: 2123
+        y: 672
+        width: 31
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb32fcffadaae914c90de4bac32f2a99
+      internalID: -841931860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_82
+      rect:
+        serializedVersion: 2
+        x: 2942
+        y: 707
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d5fbb362fd9b1247afe2a41e44027fc
+      internalID: 577329010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_83
+      rect:
+        serializedVersion: 2
+        x: 2943
+        y: 715
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db56d5a99005c9e41ad1b6e0c466eda2
+      internalID: -209143695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_84
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 56
+        width: 512
+        height: 664
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c454428d2eb6d264abbbe9fd0b7eb8ec
+      internalID: -1738568612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_85
+      rect:
+        serializedVersion: 2
+        x: 3966
+        y: 707
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9beb5fbfd20e63743acc491342e5fec7
+      internalID: -1963082837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_86
+      rect:
+        serializedVersion: 2
+        x: 3967
+        y: 696
+        width: 39
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a11afbb2901c2ee4d9b7d35b91735a44
+      internalID: 156671107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_87
+      rect:
+        serializedVersion: 2
+        x: 1031
+        y: 56
+        width: 505
+        height: 623
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2df93eba7375e30488a909d6d2390a44
+      internalID: 291185296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_88
       rect:
         serializedVersion: 2
         x: 2048
@@ -1587,20 +2196,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9305410000000000800000000000000
-      internalID: 21300124
+      spriteID: 411dd50ed9fe3d74181018e11300a5cd
+      internalID: 1905758405
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_92
+      name: Camp Exterior SpriteSheet_89
       rect:
         serializedVersion: 2
-        x: 1591
-        y: 62
-        width: 450
-        height: 546
+        x: 3949
+        y: 659
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1608,14 +2217,119 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9305410000000000800000000000000
-      internalID: 21300126
+      spriteID: 0560574da435aa94b9ada8578b6f2f4b
+      internalID: 971536717
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_94
+      name: Camp Exterior SpriteSheet_90
+      rect:
+        serializedVersion: 2
+        x: 1656
+        y: 630
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9dbce6328f0a14d41b6b0b612b70b68f
+      internalID: 1034091770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_91
+      rect:
+        serializedVersion: 2
+        x: 2677
+        y: 606
+        width: 23
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aff59910e842f047b1104b9bcb98d42
+      internalID: 642532227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_92
+      rect:
+        serializedVersion: 2
+        x: 2677
+        y: 635
+        width: 5
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38974f47bc8f7944da2ca3bee4f41ba6
+      internalID: -1166350381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_93
+      rect:
+        serializedVersion: 2
+        x: 3628
+        y: 62
+        width: 468
+        height: 587
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 287a082d0084c1b4db974ac705d1dbe3
+      internalID: 2010455667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_94
+      rect:
+        serializedVersion: 2
+        x: 1656
+        y: 607
+        width: 11
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa375a9e959f31843972efc2969ae5bd
+      internalID: -286282539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp Exterior SpriteSheet_95
       rect:
         serializedVersion: 2
         x: 2607
@@ -1629,20 +2343,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a305410000000000800000000000000
-      internalID: 21300128
+      spriteID: 00d52a82510f62946ba5d811f5178276
+      internalID: -1599369692
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: props_95
+      name: Camp Exterior SpriteSheet_96
       rect:
         serializedVersion: 2
-        x: 3628
+        x: 1591
         y: 62
-        width: 468
-        height: 554
+        width: 450
+        height: 545
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1650,8 +2364,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a305410000000000800000000000000
-      internalID: 21300130
+      spriteID: 1dc1716a0ce161f4288ab3ef0919db75
+      internalID: -348807441
       vertices: []
       indices: 
       edges: []
@@ -1667,69 +2381,103 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      props_0: 21300000
-      props_1: 21300002
-      props_10: 21300016
-      props_12: 21300018
-      props_13: 21300020
-      props_15: 21300022
-      props_16: 21300024
-      props_17: 21300026
-      props_18: 21300028
-      props_19: 21300030
-      props_2: 21300004
-      props_20: 21300032
-      props_21: 21300034
-      props_22: 21300036
-      props_23: 21300038
-      props_24: 21300040
-      props_25: 21300042
-      props_26: 21300044
-      props_27: 21300046
-      props_28: 21300048
-      props_29: 21300050
-      props_30: 21300052
-      props_31: 21300054
-      props_32: 21300056
-      props_33: 21300058
-      props_36: 21300064
-      props_37: 21300066
-      props_38: 21300068
-      props_39: 21300070
-      props_4: 21300006
-      props_40: 21300072
-      props_41: 21300074
-      props_42: 21300076
-      props_43: 21300078
-      props_44: 21300080
-      props_45: 21300082
-      props_46: 21300084
-      props_47: 21300086
-      props_48: 21300088
-      props_49: 21300090
-      props_5: 21300008
-      props_50: 21300092
-      props_51: 21300094
-      props_52: 21300096
-      props_53: 21300098
-      props_54: 21300100
-      props_55: 21300102
-      props_56: 21300104
-      props_57: 21300106
-      props_58: 21300108
-      props_59: 21300110
-      props_6: 21300010
-      props_60: 21300112
-      props_7: 21300012
-      props_70: 21300114
-      props_73: 21300116
-      props_8: 21300014
-      props_82: 21300120
-      props_85: 21300122
-      props_87: 21300124
-      props_92: 21300126
-      props_94: 21300128
-      props_95: 21300130
+      Camp Exterior SpriteSheet_0: 1121241558
+      Camp Exterior SpriteSheet_1: 1316673410
+      Camp Exterior SpriteSheet_10: 1350742624
+      Camp Exterior SpriteSheet_11: -1619023533
+      Camp Exterior SpriteSheet_12: -1157833186
+      Camp Exterior SpriteSheet_13: -1664004023
+      Camp Exterior SpriteSheet_14: -1206526324
+      Camp Exterior SpriteSheet_15: 1410076628
+      Camp Exterior SpriteSheet_16: 1835356587
+      Camp Exterior SpriteSheet_17: 428351299
+      Camp Exterior SpriteSheet_18: 1587797005
+      Camp Exterior SpriteSheet_19: 616570527
+      Camp Exterior SpriteSheet_2: 64748905
+      Camp Exterior SpriteSheet_20: -1614014050
+      Camp Exterior SpriteSheet_21: 1823259389
+      Camp Exterior SpriteSheet_22: 1409514816
+      Camp Exterior SpriteSheet_23: 329766363
+      Camp Exterior SpriteSheet_24: -1822924432
+      Camp Exterior SpriteSheet_25: -1188491757
+      Camp Exterior SpriteSheet_26: 90506677
+      Camp Exterior SpriteSheet_27: -368536673
+      Camp Exterior SpriteSheet_28: -1730655615
+      Camp Exterior SpriteSheet_29: 1176854845
+      Camp Exterior SpriteSheet_3: -835855578
+      Camp Exterior SpriteSheet_30: 1432779192
+      Camp Exterior SpriteSheet_31: 1215087940
+      Camp Exterior SpriteSheet_32: -974879709
+      Camp Exterior SpriteSheet_33: -1241341734
+      Camp Exterior SpriteSheet_34: -1043781167
+      Camp Exterior SpriteSheet_35: -1740128234
+      Camp Exterior SpriteSheet_36: 607703094
+      Camp Exterior SpriteSheet_37: -2042215633
+      Camp Exterior SpriteSheet_38: 496669931
+      Camp Exterior SpriteSheet_39: -1107192730
+      Camp Exterior SpriteSheet_4: -522452665
+      Camp Exterior SpriteSheet_40: -1329506369
+      Camp Exterior SpriteSheet_41: 1135443022
+      Camp Exterior SpriteSheet_42: 2120955850
+      Camp Exterior SpriteSheet_43: -413991766
+      Camp Exterior SpriteSheet_44: -713388266
+      Camp Exterior SpriteSheet_45: 577829026
+      Camp Exterior SpriteSheet_46: -534675901
+      Camp Exterior SpriteSheet_47: 155994125
+      Camp Exterior SpriteSheet_48: -1510460398
+      Camp Exterior SpriteSheet_49: 1708859432
+      Camp Exterior SpriteSheet_5: -494555426
+      Camp Exterior SpriteSheet_50: -1851035168
+      Camp Exterior SpriteSheet_51: -1643555104
+      Camp Exterior SpriteSheet_52: -1569601297
+      Camp Exterior SpriteSheet_53: 1161570327
+      Camp Exterior SpriteSheet_54: -1715057506
+      Camp Exterior SpriteSheet_55: -154688742
+      Camp Exterior SpriteSheet_56: 947376476
+      Camp Exterior SpriteSheet_57: 946860202
+      Camp Exterior SpriteSheet_58: 1568366828
+      Camp Exterior SpriteSheet_59: 213393590
+      Camp Exterior SpriteSheet_6: 1675356797
+      Camp Exterior SpriteSheet_60: 1771047496
+      Camp Exterior SpriteSheet_61: 1809416480
+      Camp Exterior SpriteSheet_62: -1678210714
+      Camp Exterior SpriteSheet_63: 1568488824
+      Camp Exterior SpriteSheet_64: -1349436140
+      Camp Exterior SpriteSheet_65: -880944489
+      Camp Exterior SpriteSheet_66: 214067736
+      Camp Exterior SpriteSheet_67: -1200257287
+      Camp Exterior SpriteSheet_68: -1791713017
+      Camp Exterior SpriteSheet_69: -1070345330
+      Camp Exterior SpriteSheet_7: -1011621998
+      Camp Exterior SpriteSheet_70: 1527034411
+      Camp Exterior SpriteSheet_71: 396618367
+      Camp Exterior SpriteSheet_72: -517045766
+      Camp Exterior SpriteSheet_73: 782902626
+      Camp Exterior SpriteSheet_74: -1665276775
+      Camp Exterior SpriteSheet_75: 116249814
+      Camp Exterior SpriteSheet_76: 1967502104
+      Camp Exterior SpriteSheet_77: 1990001637
+      Camp Exterior SpriteSheet_78: 2066413548
+      Camp Exterior SpriteSheet_79: 678823301
+      Camp Exterior SpriteSheet_80: -1871077185
+      Camp Exterior SpriteSheet_81: -841931860
+      Camp Exterior SpriteSheet_82: 577329010
+      Camp Exterior SpriteSheet_83: -209143695
+      Camp Exterior SpriteSheet_84: -1738568612
+      Camp Exterior SpriteSheet_85: -1963082837
+      Camp Exterior SpriteSheet_86: 156671107
+      Camp Exterior SpriteSheet_87: 291185296
+      Camp Exterior SpriteSheet_88: 1905758405
+      Camp Exterior SpriteSheet_89: 971536717
+      Camp Exterior SpriteSheet_9: -742290877
+      Camp Exterior SpriteSheet_90: 1034091770
+      Camp Exterior SpriteSheet_91: 642532227
+      Camp Exterior SpriteSheet_92: -1166350381
+      Camp Exterior SpriteSheet_93: 2010455667
+      Camp Exterior SpriteSheet_94: -286282539
+      Camp Exterior SpriteSheet_95: -1599369692
+      Camp Exterior SpriteSheet_96: -348807441
+      Control Panel: 494951121
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

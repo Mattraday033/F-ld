@@ -5,7 +5,7 @@ VAR charisma = 0
 VAR mineLvl2GateToLevel3Opened = false
 VAR hasWinch = false
 
-VAR winchGateKey = "ML2-2a-winch"
+VAR gateKey = "Ancient Portcullis"
 
 VAR playerName = ""
 
@@ -37,22 +37,24 @@ This panel once controlled the gate. An empty slot indicates it to be missing so
 
 {
 -hasWinch:
-    +Insert the winch into the slot
+    +Insert the winch into the slot.
         ->1b
-    +Leave
+    +\*Leave.*
         ->Close
 -else:
-    +Leave
+    +\*Leave.*
         ->Close
 }
 
 === 1b ===
 
+fadeToBlack(true, false)
+
 setToTrue(mineLvl2GateToLevel3Opened)
 
-deactivate(2)
+openGateFromKey({gateKey})
 
-openGate({winchGateKey})
+fadeBackIn(60)
 
 You insert the winch and begin to crank. After some effort, the portculis begins to rise. You then remove the winch and place it back among your belongings.
 

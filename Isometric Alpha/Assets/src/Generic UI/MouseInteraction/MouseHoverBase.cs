@@ -4,26 +4,34 @@ using UnityEngine;
 
 public class MouseHoverBase : MonoBehaviour
 {
-    public static int frameCount = 0;
+
+    private const int fullyVisable = 1;
 
     public RectTransform baseRectTransform;
 
+    public CanvasGroup canvasGroup;
+
     private void Awake()
     {
-        frameCount = 0;
-        Update();
+        StartCoroutine(revealWhenReady(canvasGroup));
     }
 
     public void Update()
     {
-        if (frameCount % 5 == 0)
-        {
-            Vector3 mousePos = Input.mousePosition;
+        Vector3 mousePos = Input.mousePosition;
 
-            baseRectTransform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
-        }
+        baseRectTransform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
+    }
 
-        frameCount++; 
+    public static IEnumerator revealWhenReady(CanvasGroup canvasGroup)
+    {
+        canvasGroup.alpha = 0;
+
+        yield return null;
+
+        yield return null;
+
+        canvasGroup.alpha = fullyVisable;
     }
 
 }

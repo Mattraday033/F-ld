@@ -24,11 +24,6 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
 
     public DragDrogItemSlotType slotType;
 
-    public override void Awake()
-    {
-        base.Awake();
-    }
-
     public EquippableItem getItemInSlot()
     {
         if (combatActionSlotIndex >= 0)
@@ -128,34 +123,6 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
         itemInSlot = null;
         setToAvailableAndUsable();
         setToSlotSprite();
-
-        // if (isFilled() && combatActionSlotIndex < 0)
-        // {
-        //     setIconImage();
-        //     unequipButton.enabled = true;
-        // }
-        // else if (isFilled() && combatActionSlotIndex >= 0)
-        // {
-        //     if (combatActionSlotIndex < CombatActionArray.numberOfActivatablePlayerCombatActions)
-        //     {
-        //         setToAvailableAndUsable(combatActionSlotIndex);
-        //     }
-        //     else if (combatActionSlotIndex < CombatActionArray.maxPlayerCombatActions)
-        //     {
-        //         setToFilledAndUnusable(combatActionSlotIndex);
-        //     }
-
-        //     iconImage.sprite = Helpers.loadSpriteFromResources(getItemInSlot().getIconName());
-
-        //     unequipButton.enabled = true;
-        // } else
-        // {
-        //     setToSlotSprite();
-
-        //     setToAvailableAndUsable();
-
-        //     unequipButton.enabled = false;
-        // }
     }
 
     public void unequipInCurrentSlot()
@@ -297,8 +264,6 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
         {
             OverallUIManager.getCurrentPartyMember().getActionArray().unequipCombatAction(usableItem.getKey());
         }
-
-        EquippedItems.OnEquipmentChange.Invoke();
     }
 
     public void moveAllItemOutOfJunk(Item item)
@@ -310,8 +275,6 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
 
         Inventory.removeItem(item, State.junkPocket);
         Inventory.addItem(item, State.inventory);
-
-        EquippedItems.OnEquipmentChange.Invoke();
     }
 
     public void setToSlotSprite()
@@ -363,5 +326,13 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     {
         DragAndDropManager.OnDragAndDropCreated.RemoveListener(highlight);
         DragAndDropManager.OnDragAndDropDestroyed.RemoveListener(unhighlight);
+    }
+
+    public override void OnPointerEnter(PointerEventData eventData)
+    {
+        if ((hoverText != null && hoverText.Length > 0) || isFilled())
+        {
+            MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldSpawnHoverIcon));
+        }
     }
 }

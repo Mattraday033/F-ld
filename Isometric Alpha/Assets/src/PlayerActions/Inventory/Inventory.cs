@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public static class Inventory
 {
+
+    public readonly static UnityEvent OnInventoryChange = new UnityEvent();
 
     public static void addItem(Item item)
     {
@@ -56,7 +59,7 @@ public static class Inventory
             pocket.Add(item.getKey(), item);
         }
 
-        EquippedItems.OnEquipmentChange.Invoke();
+        OnInventoryChange.Invoke();
     }
 
 
@@ -117,7 +120,7 @@ public static class Inventory
 
         pocket.Remove(key);
 
-        EquippedItems.OnEquipmentChange.Invoke();
+        OnInventoryChange.Invoke();
 
         return oldItem.clone();
     }
@@ -187,7 +190,7 @@ public static class Inventory
                 pocket.Remove(key);
             }
 
-            EquippedItems.OnEquipmentChange.Invoke();
+            OnInventoryChange.Invoke();
 
             return oldItem;
 

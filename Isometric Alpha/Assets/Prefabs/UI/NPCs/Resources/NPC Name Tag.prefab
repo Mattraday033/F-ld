@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 992026282818773877}
   - component: {fileID: 1586294673063044057}
   - component: {fileID: 1255462771965997067}
+  - component: {fileID: 3723719804075166832}
   m_Layer: 5
   m_Name: NPC Name Tag
   m_TagString: Untagged
@@ -408,7 +409,21 @@ MonoBehaviour:
   arrowPointer: {fileID: 0}
   arrowPositioningLayoutGroup: {fileID: 0}
   alwaysTop: 1
+  canvasGroup: {fileID: 3723719804075166832}
   thirdLayoutGroup: {fileID: 8745047365154977081}
+  layoutElement: {fileID: 0}
+--- !u!225 &3723719804075166832
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4398534563976359584}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6399035106628174270
 GameObject:
   m_ObjectHideFlags: 0

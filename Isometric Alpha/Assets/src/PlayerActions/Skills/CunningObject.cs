@@ -104,13 +104,13 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
 
     //IRevealable interface methods
 
-    public void createListeners()
+    public virtual void createListeners()
     {
         RevealManager.OnReveal.AddListener(onReveal);
         TrapAndButtonStateManager.OnSetTraps.AddListener(setStatus);
     }
 
-    public void destroyListeners()
+    public virtual void destroyListeners()
     {
         RevealManager.OnReveal.RemoveListener(onReveal);
         TrapAndButtonStateManager.OnSetTraps.RemoveListener(setStatus);
@@ -138,18 +138,18 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!RevealManager.currentlyRevealed)
-        {
-            RevealManager.setOutlineColor(gameObject, getRevealColor());
-        }
+        // if (!RevealManager.currentlyRevealed)
+        // {
+        //     RevealManager.setOutlineColor(gameObject, getRevealColor());
+        // }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!RevealManager.currentlyRevealed)
-        {
-            RevealManager.setOutlineColorToDefault(gameObject);
-        }
+        // if (!RevealManager.currentlyRevealed)
+        // {
+        //     RevealManager.setOutlineColorToDefault(gameObject);
+        // }
     }
 }
 

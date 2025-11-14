@@ -60,11 +60,6 @@ public class MonsterSpawnDetails : OOCSpawnDetails
         return AreaManager.getMonsterParent();
     }
 
-    // public override bool determineSpriteAtSpawn()
-    // {
-    //     return false;
-    // }
-
     public virtual void spawnActions(EnemyMovement enemyMovement)
     {
         if (hasTutorialTargetHash())

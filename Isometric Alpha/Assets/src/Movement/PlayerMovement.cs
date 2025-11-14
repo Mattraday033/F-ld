@@ -38,6 +38,11 @@ public abstract class MovementTracker : MonoBehaviour
         }
     }
 
+    public Vector3Int getCell()
+    {
+        return AreaManager.getMasterGrid().WorldToCell(transform.position);
+    }
+
     public bool isMoving()
     {
         return MovementManager.currentMovements.ContainsKey(this);
@@ -73,15 +78,25 @@ public abstract class MovementTracker : MonoBehaviour
         //Empty on purpose
     }
 
+    public virtual AnimationManager getAnimationManager()
+    {
+        return null;
+    }
+
     public virtual void cancelMovement()
     {
         _DirectionMod = Vector3Int.zero;
-        startingPosition = endingPosition;
+        endingPosition = startingPosition;
     }
 
     public static Vector3Int getCurrentCell(MovementTracker movement)
     {
         return AreaManager.getMasterGrid().WorldToCell(movement.getWorldPosition());
+    }
+
+    public static Vector3Int getEndingCell(MovementTracker movement)
+    {
+        return AreaManager.getMasterGrid().WorldToCell(movement.endingPosition);
     }
 }
 
@@ -118,7 +133,7 @@ public class PlayerMovement : MovementTracker
     public override void cancelMovement()
     {
         _DirectionMod = Vector3Int.zero;
-        startingPosition = endingPosition;
+        endingPosition = startingPosition;
     }
 
     public static bool hasCustomPromptMessage;

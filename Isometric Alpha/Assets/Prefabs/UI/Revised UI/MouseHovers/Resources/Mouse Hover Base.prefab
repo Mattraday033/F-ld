@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1372512125034931870}
   - component: {fileID: 6640701629138017142}
   - component: {fileID: 1660108486642158540}
+  - component: {fileID: 803754440097126735}
   m_Layer: 0
   m_Name: Mouse Hover Base
   m_TagString: Untagged
@@ -89,3 +90,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseRectTransform: {fileID: 1769857225092635888}
+  canvasGroup: {fileID: 803754440097126735}
+--- !u!225 &803754440097126735
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601644693118415501}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public static class OOCSpawnDetailsList
 {
     private const bool notActivated = false;
+    private const bool flipX = true;
     private static List<OOCSpawnDetails> list;
 
     private static Dictionary<string, List<OOCSpawnDetails>> oocSpawnDetailsDict;
@@ -303,6 +304,16 @@ public static class OOCSpawnDetailsList
 
         #endregion
 
+        #region MineLvl_2-2a
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new NPCSpawnDetails(NPCNameList.controlPanel, new Vector3Int(5, 3), LocationNameList.mineLvl2 + LocationNameList.section2a, PrefabNames.controlPanel, flipX, Constants.onTableHeightOffset));
+
+        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section2a, list);
+
+        #endregion
+
         #region MineLvl_2-2b
 
         list = new List<OOCSpawnDetails>();
@@ -351,22 +362,13 @@ public static class OOCSpawnDetailsList
 
         #endregion
 
-        #region MineLvl_2-6
+        #region MineLvl_2-4
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(5, 10))); //b0 in A1
-        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(5, 2), Constants.indexOne)); // b1 in C1
-        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(9, 6), Constants.indexTwo)); // b2 in B2
-        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(9, 2), Constants.indexThree)); // b3 in C2
-        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(9, 10), Constants.indexFour)); // b4 in A2
-        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(1, 6), Constants.indexFive)); // b5 in S2
-        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(1, 10), Constants.indexSix)); // b6 in S1
-        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(13, 6), Constants.indexSeven)); // b7 in 7a
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(7, 5), Facing.SouthWest));
 
-        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(4, 5), Facing.SouthWest));
-
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section6, list);
+        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section4, list);
 
         #endregion
 
@@ -385,7 +387,7 @@ public static class OOCSpawnDetailsList
         blockerSpawnDetails.Add(new SpikeSpawnDetails(NPCNameList.halfWall, new Vector3Int(8, 6)));
         blockerSpawnDetails.Add(new SpikeSpawnDetails(NPCNameList.halfWall, new Vector3Int(8, 5)));
 
-        list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(8, 8), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Statue, blockerSpawnDetails));
+        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(8, 8), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Statue, blockerSpawnDetails, Constants.indexTwo));
 
         blockerSpawnDetails = new List<ObstacleSpawnDetails>();
         blockerSpawnDetails.Add(new SpikeSpawnDetails(NPCNameList.halfWall, new Vector3Int(7, 11)));
@@ -398,7 +400,7 @@ public static class OOCSpawnDetailsList
         blockerSpawnDetails.Add(new SpikeSpawnDetails(NPCNameList.halfWall, new Vector3Int(8, 13)));
         blockerSpawnDetails.Add(new SpikeSpawnDetails(NPCNameList.halfWall, new Vector3Int(8, 14)));
 
-        list.Add(new CunningBlockerSpawnDetails(Constants.indexOne, new Vector3Int(8, 11), Facing.SouthWest, Facing.NorthWest, CunningObjectSpriteCategory.Statue, blockerSpawnDetails));
+        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexOne, new Vector3Int(8, 11), Facing.SouthWest, Facing.NorthWest, CunningObjectSpriteCategory.Statue, blockerSpawnDetails, Constants.indexThree));
 
         blockerSpawnDetails = new List<ObstacleSpawnDetails>();
         blockerSpawnDetails.Add(new SpikeSpawnDetails(NPCNameList.halfWall, new Vector3Int(12, 8)));
@@ -411,7 +413,7 @@ public static class OOCSpawnDetailsList
         blockerSpawnDetails.Add(new SpikeSpawnDetails(NPCNameList.halfWall, new Vector3Int(11, 6)));
         blockerSpawnDetails.Add(new SpikeSpawnDetails(NPCNameList.halfWall, new Vector3Int(11, 5)));
 
-        list.Add(new CunningBlockerSpawnDetails(Constants.indexTwo, new Vector3Int(11, 8), Facing.NorthEast, Facing.SouthEast, CunningObjectSpriteCategory.Statue, blockerSpawnDetails));
+        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexTwo, new Vector3Int(11, 8), Facing.NorthEast, Facing.SouthEast, CunningObjectSpriteCategory.Statue, blockerSpawnDetails, Constants.indexZero));
         
         blockerSpawnDetails = new List<ObstacleSpawnDetails>();
         blockerSpawnDetails.Add(new SpikeSpawnDetails(NPCNameList.halfWall, new Vector3Int(11, 12)));
@@ -424,9 +426,34 @@ public static class OOCSpawnDetailsList
         blockerSpawnDetails.Add(new SpikeSpawnDetails(NPCNameList.halfWall, new Vector3Int(13, 11)));
         blockerSpawnDetails.Add(new SpikeSpawnDetails(NPCNameList.halfWall, new Vector3Int(14, 11)));
 
-        list.Add(new CunningBlockerSpawnDetails(Constants.indexThree, new Vector3Int(11, 11), Facing.NorthEast, Facing.NorthWest, CunningObjectSpriteCategory.Statue, blockerSpawnDetails));
+        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexThree, new Vector3Int(11, 11), Facing.NorthEast, Facing.NorthWest, CunningObjectSpriteCategory.Statue, blockerSpawnDetails, Constants.indexOne));
+
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(8, 10), Facing.SouthWest));
+        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(8, 9), Facing.SouthWest));
+        list.Add(new ChestSpawnDetails(Constants.indexTwo, new Vector3Int(6, 27), Facing.SouthEast));
+        list.Add(new ChestSpawnDetails(Constants.indexThree, new Vector3Int(6, -9), Facing.NorthWest));
+                                
 
         oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section5, list);
+
+        #endregion
+
+        #region MineLvl_2-6
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(5, 10))); //b0 in A1
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(5, 2), Constants.indexOne)); // b1 in C1
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(9, 6), Constants.indexTwo)); // b2 in B2
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(9, 2), Constants.indexThree)); // b3 in C2
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(9, 10), Constants.indexFour)); // b4 in A2
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(1, 6), Constants.indexFive)); // b5 in S2
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(1, 10), Constants.indexSix)); // b6 in S1
+        list.Add(new ButtonSpawnDetails(NPCNameList.floorButton, new Vector3Int(13, 6), Constants.indexSeven)); // b7 in 7a
+
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(4, 5), Facing.SouthWest));
+
+        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section6, list);
 
         #endregion
 

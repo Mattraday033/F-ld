@@ -28,6 +28,7 @@ public static class TrapStateList
         list = new List<KeyValuePair<string, bool>>();
 
         list.Add(new KeyValuePair<string, bool>(CunningObject.generateKey(LocationNameList.mineLvl2 + LocationNameList.section5, Constants.indexZero), true));
+        list.Add(new KeyValuePair<string, bool>(CunningObject.generateKey(LocationNameList.mineLvl2 + LocationNameList.section5, Constants.indexThree), true));
 
         defaultTrapStates.Add(LocationNameList.mineLvl2 + LocationNameList.section5, list);
 

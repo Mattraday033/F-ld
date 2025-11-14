@@ -14,7 +14,7 @@ public interface IHoverIconSource
 
 public static class MouseHoverManager
 {
-    public static UnityEvent OnHoverPanelCreation = new UnityEvent();
+    public readonly static UnityEvent OnHoverPanelCreation = new UnityEvent();
 
     public const bool shouldSpawnHoverIcon = false;
     public const bool shouldDestroyHoverIcon = true;

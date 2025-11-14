@@ -44,8 +44,6 @@ This looks like the gate to the Mine's Armory. It's locked up tight.
 
 === 1b ===
 
-deactivate(1)
-
 openGate()
 
 The gate swings open.

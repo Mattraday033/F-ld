@@ -449,9 +449,9 @@ public class AllyStats : Stats
 
     public override int getExtraArmorFromDexterity()
     {
-        int bonusFormulas = StatBoostManager.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusArmorFormula());
+        // int bonusFormulas = StatBoostManager.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusArmorFormula());
 
-        return getDexterity() * Dexterity.extraArmorMultiplier + bonusFormulas;
+        return getDexterity() * Dexterity.extraArmorMultiplier;
     }
 
     #endregion

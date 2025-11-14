@@ -36,10 +36,10 @@ RectTransform:
   - {fileID: 6788992986950250895}
   m_Father: {fileID: 4185456663301789596}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 20, y: -20}
+  m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1248325739791489556
 CanvasRenderer:
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 330
+  m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
@@ -260,6 +260,7 @@ GameObject:
   - component: {fileID: 1586294673063044057}
   - component: {fileID: 8220717802295056365}
   - component: {fileID: 1255462771965997067}
+  - component: {fileID: 2441501899632409055}
   m_Layer: 5
   m_Name: Hover Icon Combat Action Description Panel
   m_TagString: Untagged
@@ -434,7 +435,22 @@ MonoBehaviour:
   descPanelWindow: {fileID: 6788992986950250895}
   arrowPointer: {fileID: 0}
   arrowPositioningLayoutGroup: {fileID: 0}
+  alwaysTop: 0
+  canvasGroup: {fileID: 2441501899632409055}
   thirdLayoutGroup: {fileID: 8745047365154977081}
+  layoutElement: {fileID: 8589187664673124323}
+--- !u!225 &2441501899632409055
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4398534563976359584}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6399035106628174270
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,9 +485,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1776608453568327826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 5, y: -5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5609164930711351792

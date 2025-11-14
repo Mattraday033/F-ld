@@ -124,9 +124,9 @@ public static class MonsterSpawnDetailsList
 
         list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(3, 8)));
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(2, 3)));
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-1, -6)));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(5, 9)));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(4, 2)));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(-2, -5), Facing.NorthWest));
 
         monsterSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section4, list);
 
@@ -136,7 +136,8 @@ public static class MonsterSpawnDetailsList
 
         list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(9, -5), chasesPlayer));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(9, 2), chasesPlayer));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(9, 16), chasesPlayer));
 
         monsterSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section5, list);
 

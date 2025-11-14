@@ -127,6 +127,7 @@ public class CharacterScreen : ScreenWithGeneratedPartyTabs, ICounter
         List<UnityEvent> listOfEvents = new List<UnityEvent>();
 
         listOfEvents.Add(CombatActionArray.OnCombatActionArrayChange);
+        listOfEvents.Add(Inventory.OnInventoryChange);
         listOfEvents.Add(EquippedItems.OnEquipmentChange);
         listOfEvents.Add(Stats.OnStatsChange);
 

@@ -200,6 +200,11 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
     #region MovementTracker Overrides
 
+    public override AnimationManager getAnimationManager()
+    {
+        return animationManager;
+    }
+
     public override int getMovementIndex()
     {
         return getMonsterPackIndex() + 1;
@@ -297,29 +302,34 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
     }
 
-	public virtual void prepCombat()
+    public void setToDefeated()
     {
-        if(MonsterDefeatKeysList.monsterIsDefeated(getMonsterPackIndex()))
+        MonsterDefeatKeysList.setDefeatKey(MonsterDefeatKeysList.generateMonsterDefeatKey(getMonsterPackIndex()), true);
+    }
+
+    public virtual void prepCombat()
+    {
+        if (MonsterDefeatKeysList.monsterIsDefeated(getMonsterPackIndex()))
         {
             return;
         }
 
-		State.enemyPackInfo = getEnemyPackInfo();
-		CombatStateManager.currentDefeatKey = AreaManager.locationName + "-" + monsterPackIndex;
+        State.enemyPackInfo = getEnemyPackInfo();
+        CombatStateManager.currentDefeatKey = AreaManager.locationName + "-" + monsterPackIndex;
         CombatStateManager.locationBeforeCombat = AreaManager.locationName;
 
-		if (intimidated())
-		{
-			CombatStateManager.whoIsSurprised = SurpriseState.NoOneSurprised;
-		}
-		else
-		{
-			// CombatStateManager.whoIsSurprised = SurpriseState.PlayerSurprised;
-			CombatStateManager.whoIsSurprised = MovementManager.determineSurprisedParty(PlayerMovement.getInstance().transform.position, transform.position, enemyFacing.getFacing());
-		}
+        if (intimidated())
+        {
+            CombatStateManager.whoIsSurprised = SurpriseState.NoOneSurprised;
+        }
+        else
+        {
+            // CombatStateManager.whoIsSurprised = SurpriseState.PlayerSurprised;
+            CombatStateManager.whoIsSurprised = MovementManager.determineSurprisedParty(PlayerMovement.getInstance().transform.position, transform.position, enemyFacing.getFacing());
+        }
 
         SceneChange.changeSceneToCombat();
-	}
+    }
 
 
 	public Vector3Int findDirection()

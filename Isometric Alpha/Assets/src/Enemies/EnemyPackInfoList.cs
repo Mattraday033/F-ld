@@ -90,7 +90,10 @@ public static class EnemyPackInfoList
                                                                                                                             },
                                                                                                                     DropTableList.slaveMineDT1Name);
 
-    private readonly static EnemyPackInfo caveMatronBatBoss = twoGiantBatsTwoBatSwarmsTwoArmoredBats;
+    private readonly static EnemyPackInfo caveMatronBatBoss = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.twoArmoredBats },
+                                                                                                    DropTableList.slaveMineDT1Name,
+                                                                                                    new ItemListID[] { new ItemListID(  ItemList.questItemListIndex,
+                                                                                                                                        ItemList.mineArmoryKeyIndex) });
 
     public static EnemyPackInfo getEnemyPackInfo(string areaName, int index)
     {
@@ -175,7 +178,8 @@ public static class EnemyPackInfoList
         #region MineLvl_2-5
         list = new List<EnemyPackInfo>();
 
-        list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
+        list.Add(twoArmoredBats);
+        list.Add(twoArmoredBats);
 
         enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section5, list);
         #endregion

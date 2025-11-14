@@ -310,6 +310,10 @@ public static class DialogueList
                                                                                   new Dialogue(new string[] { NPCNameList.suspiciousWall },
                                                                                   Resources.Load<TextAsset>(DialogueNameList.suspiciousWallPath + 2)));
 
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.controlPanel, new Dialogue(new string[] { NPCNameList.controlPanel},
+                                                                                  Resources.Load<TextAsset>(DialogueNameList.controlPanelPath)));
+
         addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
         addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2b, NPCNameList.mineArmoryGate + 1,
                                                                                   new Dialogue(new string[] { NPCNameList.mineArmoryGate },

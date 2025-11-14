@@ -83,6 +83,7 @@ public static class NPCNameList
     #region Inanimate Objects
 
     public const string leafPile = "Leaf Pile";
+    public const string controlPanel = "Control Panel";
     public const string vaultableBarrels = "Vaultable Barrels";
     public const string vaultableRocks = "Vaultable Rocks";
     public const string wallPatch = "Wall Patch";

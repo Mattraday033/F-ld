@@ -73,6 +73,21 @@ public static class GateSpawnInfoList
 
         #endregion
 
+        #region MineLvl_2-2a
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero,
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl2 + LocationNameList.section2a,
+                                    new Vector3Int(3, 3),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+        gateSpawnInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section2a, list);
+
+        #endregion
+
         #region MineLvl_2-2b
 
         list = new List<GateSpawnInfo>();

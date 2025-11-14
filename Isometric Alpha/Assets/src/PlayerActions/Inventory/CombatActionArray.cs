@@ -27,7 +27,7 @@ public class CombatActionArray : IEnumerable
     public const int numberOfActivatablePlayerCombatActions = 8;
     public const int maxPlayerCombatActions = 12;
 
-    public static UnityEvent OnCombatActionArrayChange = new UnityEvent();
+    public readonly static UnityEvent OnCombatActionArrayChange = new UnityEvent();
 
     private Stats actor;
     private CombatAction[] combatActions;
@@ -118,6 +118,7 @@ public class CombatActionArray : IEnumerable
         if (oldItem != null && oldItem.getQuantity() > 0 && !oldItem.usableInCombat())
         {
             Inventory.addItem(oldItem);
+            EquippedItems.OnEquipmentChange.Invoke();
         }
 
         combatActions[slotIndex] = null;
@@ -210,6 +211,7 @@ public class CombatActionArray : IEnumerable
                 !newItem.getKey().Equals(ItemList.getOffHandFist().getKey()))
             {
                 Inventory.removeItem(newItem, 1);
+                EquippedItems.OnEquipmentChange.Invoke();
             }
 
             combatActions[slotIndex] = newCombatAction.clone();

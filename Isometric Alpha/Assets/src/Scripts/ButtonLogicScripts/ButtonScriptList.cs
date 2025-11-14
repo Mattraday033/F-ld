@@ -47,7 +47,7 @@ public static class ButtonScriptList
         list = new List<ButtonLogicScript>();
 
         list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeTwo, NPCNameList.awkwardRubble));
-        list.Add(new OpenGateButtonLogicScript(Constants.indexOne, Constants.sizeTwo, NPCNameList.awkwardRubble + 1));
+        list.Add(new OpenGateButtonLogicScript(Constants.indexOne, Constants.sizeTwo, NPCNameList.awkwardRubble));
 
         scriptDict.Add(LocationNameList.mineLvl2 + LocationNameList.section3a, list);
 

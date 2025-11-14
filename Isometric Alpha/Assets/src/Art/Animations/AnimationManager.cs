@@ -19,6 +19,9 @@ public class AnimationManager : MonoBehaviour
     public SpriteRenderer spriteRenderer;
 
     private CharacterAnimationType lastIdle;
+    [SerializeField]
+    private EnemyDirectionIndicator directionIndicator;
+
 
     public Dictionary<CharacterAnimationType, AnimationClip> animationDict;
 
@@ -26,15 +29,18 @@ public class AnimationManager : MonoBehaviour
 
     public NamedAnimancerComponent animancer;
 
-    //MonsterNameList.armoredBat
     public virtual void setAnimations(string monsterName)
     {
         string folderPath = EnemyTypeFolderPathList.getEnemyTypeFolderPath(monsterName);
 
-        if(folderPath == null)
+        if (folderPath == null)
         {
             animationDict = new Dictionary<CharacterAnimationType, AnimationClip>();
             return;
+        }
+        else if(directionIndicator != null)
+        {
+            directionIndicator.disable();
         }
 
         animationDict = getTempAnimations(folderPath);
@@ -114,9 +120,14 @@ public class AnimationManager : MonoBehaviour
         playAnimation(createClipTransitionToDeath());
     }
 
+    public void playDeathAnimationThenHide()
+    {
+        playAnimation(createClipTransitionToDeathThenHide());
+    }
+
     public void playAttackAnimation()
     {
-       playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Normal));
+        playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Normal));
     }
 
     public void playAttackIntoFrontIdleAnimation()
@@ -241,6 +252,25 @@ public class AnimationManager : MonoBehaviour
         clipTransition.Events.OnEnd = () => haltAllAnimations();
 
         return clipTransition;
+    }
+
+    private ClipTransition createClipTransitionToDeathThenHide()
+    {
+        if (!animationDict.ContainsKey(CharacterAnimationType.Death))
+        {
+            return null;
+        }
+
+        ClipTransition clipTransition = new ClipTransition();
+        clipTransition.Clip = animationDict[CharacterAnimationType.Death];
+        clipTransition.Events.OnEnd = () => hideObject();
+
+        return clipTransition;
+    }
+
+    private void hideObject()
+    {
+        gameObject.SetActive(false);
     }
 
     public void startUpAnimations()

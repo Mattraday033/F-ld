@@ -104,7 +104,7 @@ I understand, but I'm beyond caring at this point. Ask what you need, and then l
 
 === 1d ===
 
-Escape? *Thatch considers it.* Maybe it's the lack of sleep talking, but never having to move another stack of rocks around is sounding pretty good right now. But you're going to have to do something for me, first.
+Escape? *Thatch considers it.* Maybe it's the lack of sleep talking, but never having to move another stack of rocks around is sounding pretty good right now. But you're going to have to do something for me first.
 
     +What is it?
         {

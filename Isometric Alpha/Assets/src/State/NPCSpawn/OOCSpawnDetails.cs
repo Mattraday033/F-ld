@@ -12,36 +12,59 @@ public abstract class OOCSpawnDetails
 
     public string npcName = "";
     public Vector3Int cellCoords;
+    protected string spriteName;
+    private bool flipX = false;
 
     public OOCSpawnDetails()
     {
         this.cellCoords = Vector3Int.zero;
+        this.spriteName = null;
     }
 
     public OOCSpawnDetails(Vector3Int cellCoords)
     {
         this.cellCoords = cellCoords;
+        this.spriteName = null;
     }
 
     public OOCSpawnDetails(string npcName, Vector3Int cellCoords)
     {
         this.npcName = npcName;
         this.cellCoords = cellCoords;
+        this.spriteName = null;
     }
+
+    public OOCSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName)
+    {
+        this.npcName = npcName;
+        this.cellCoords = cellCoords;
+        this.spriteName = spriteName;
+    }
+
+    public OOCSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, bool flipX)
+    {
+        this.npcName = npcName;
+        this.cellCoords = cellCoords;
+        this.spriteName = spriteName;
+        this.flipX = flipX;
+    }
+
 
     public virtual string getSpriteName()
     {
-        return null;
+        if (spriteName == null)
+        {
+            return PrefabNames.defaultNPCSprite;
+        }
+        else
+        {
+            return spriteName;
+        }
     }
 
     public virtual string getPrefabName()
     {
         return null;
-    }
-
-    public virtual bool determineSpriteAtSpawn()
-    {
-        return true;
     }
 
     public virtual Transform getParent()
@@ -80,6 +103,7 @@ public abstract class OOCSpawnDetails
     {
         SpriteRenderer spriteRenderer = interactable.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = Helpers.loadSpriteFromResources(getSpriteName());
+        spriteRenderer.flipX = flipX;
     }
 
     public static void addTutorialTargetComponent(GameObject gameObject, string tutorialTargetHash)
@@ -199,7 +223,7 @@ public abstract class CunningObjectSpawnDetails : OOCSpawnDetails
     public int index;
 
     public CunningObjectSpawnDetails(int index, Vector3Int cellCoords, Facing facing, CunningObjectSpriteCategory category) :
-    base(category.ToString(), cellCoords)
+    base(category.ToString(), cellCoords, null)
     {
         this.index = index;
 
@@ -210,7 +234,7 @@ public abstract class CunningObjectSpawnDetails : OOCSpawnDetails
     }
 
     public CunningObjectSpawnDetails(int index, Vector3Int cellCoords, Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category) :
-    base(category.ToString(), cellCoords)
+    base(category.ToString(), cellCoords, null)
     {
         this.index = index;
 
@@ -302,22 +326,44 @@ public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
     }
 }
 
+public class LinkedCunningBlockerSpawnDetails : CunningBlockerSpawnDetails
+{
+
+    private int linkedIndex;
+
+    public LinkedCunningBlockerSpawnDetails(int index, Vector3Int cellCoords, Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category, List<ObstacleSpawnDetails> allBlockerSpawnDetails, int linkedIndex) :
+    base(index, cellCoords, startFacing, endFacing, category, allBlockerSpawnDetails)
+    {
+        this.linkedIndex = linkedIndex;
+    }
+
+    public override void spawnActions(CunningObject cunningObject)
+    {
+        GameObject gameObject = cunningObject.gameObject;
+
+        LinkedCunningBlocker linkedBlocker = gameObject.AddComponent<LinkedCunningBlocker>();
+        linkedBlocker.spriteRenderer = cunningObject.spriteRenderer;
+        linkedBlocker.linkedIndex = linkedIndex;
+
+        GameObject.Destroy(cunningObject);
+
+        base.spawnActions(linkedBlocker);
+    }
+}
+
 public class ObstacleSpawnDetails : OOCSpawnDetails
 {
-    private string spriteName;
     protected Color tint;
 
     public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName) :
-    base(npcName, cellCoords)
+    base(npcName, cellCoords, spriteName)
     {
-        this.spriteName = spriteName;
         this.tint = Color.white;
     }
 
     public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, Color tint) :
-    base(npcName, cellCoords)
+    base(npcName, cellCoords, spriteName)
     {
-        this.spriteName = spriteName;
         this.tint = tint;
     }
 
@@ -329,11 +375,6 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
     public override string getPrefabName()
     {
         return PrefabNames.oocObstacle;
-    }
-
-    public override bool determineSpriteAtSpawn()
-    {
-        return true;
     }
 
     public override Transform getParent()
@@ -351,7 +392,7 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
 
     public virtual void spawnActions(SpriteRenderer spriteRenderer)
     {
-        if(spriteRenderer == null)
+        if (spriteRenderer == null)
         {
             return;
         }
@@ -455,7 +496,7 @@ public class ButtonSpawnDetails : OOCSpawnDetails
 
 }
 
-public class NPCSpawnDetails : OOCSpawnDetails
+public class NPCSpawnDetails : OffSetSpawnDetails
 {
 
     public const string extraSpaceNameSuffix = "'s Extra Space GameObject";
@@ -475,6 +516,20 @@ public class NPCSpawnDetails : OOCSpawnDetails
 
     public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string areaName) :
     base(npcName, cellCoords)
+    {
+        this.activated = true;
+        this.dialogue = getDialogue(areaName);
+    }
+
+    public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName) :
+    base(npcName, cellCoords, spriteName)
+    {
+        this.activated = true;
+        this.dialogue = getDialogue(areaName);
+    }
+
+    public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName, bool flipX, float offset) :
+    base(npcName, cellCoords, spriteName, flipX, offset)
     {
         this.activated = true;
         this.dialogue = getDialogue(areaName);
@@ -526,11 +581,6 @@ public class NPCSpawnDetails : OOCSpawnDetails
         return dialogue != null;
     }
 
-    public override string getSpriteName()
-    {
-        return PrefabNames.defaultNPCSprite;
-    }
-
     public override string getPrefabName()
     {
         return PrefabNames.NPC;
@@ -548,6 +598,11 @@ public class NPCSpawnDetails : OOCSpawnDetails
         npc.SetActive(activated);
 
         DialogueTrigger dialogueTrigger = npc.GetComponent<DialogueTrigger>();
+
+        if(dialogueTrigger == null)
+        {
+            return;
+        }
 
         if (interactable())
         {
@@ -598,9 +653,8 @@ public class GateSpawnDetails : NPCSpawnDetails
     private bool skewed;
 
     public GateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed) :
-    base(npcName, cellCoords, currentArea)
+    base(npcName, cellCoords, currentArea, spriteName)
     {
-        this.sprite = Helpers.loadSpriteFromResources(spriteName);
         this.tutorialTargetHash = tutorialTargetHash;
         this.skewed = skewed;
     }
@@ -628,7 +682,6 @@ public class GateSpawnDetails : NPCSpawnDetails
 
         Gate gate = addGate(gateGameObject);
         gate.setKey(npcName);
-        gate.spriteRenderer.sprite = sprite;
 
         if (hasTutorialTargetHash())
         {
@@ -699,13 +752,11 @@ public class ShopkeeperSpawnDetails : NPCSpawnDetails
 public class SecretDoorSpawnDetails : NPCSpawnDetails
 {
     private SecretDoorInfo secretDoorInfo;
-    private string spriteNamePath;
 
-    public SecretDoorSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, SecretDoorInfo secretDoorInfo, string tutorialTargetHash, string spriteNamePath) :
-    base(npcName, cellCoords, areaName)
+    public SecretDoorSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, SecretDoorInfo secretDoorInfo, string tutorialTargetHash, string spriteName) :
+    base(npcName, cellCoords, areaName, spriteName)
     {
         this.secretDoorInfo = secretDoorInfo;
-        this.spriteNamePath = spriteNamePath;
 
         this.tutorialTargetHash = tutorialTargetHash;
     }
@@ -713,19 +764,6 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
     public override bool interactable()
     {
         return true;
-    }
-
-    public override string getSpriteName()
-    {
-        Sprite sprite = Helpers.loadSpriteFromResources(spriteNamePath);
-
-        if(sprite != null)
-        {
-            return spriteNamePath;
-        } else
-        {
-            return PrefabNames.defaultNPCSprite;
-        }        
     }
 
     public override string getPrefabName()
@@ -883,11 +921,6 @@ public class ChestSpawnDetails : OOCSpawnDetails
         return AreaManager.getNPCParent();
     }
 
-    public override bool determineSpriteAtSpawn()
-    {
-        return false;
-    }
-
     public virtual ChestType getType()
     {
         return ChestType.Chest;
@@ -918,52 +951,61 @@ public class ShelfSpawnDetails : ChestSpawnDetails
 }
 
 
-public class OnTableSpawnDetails : OOCSpawnDetails
+public class OffSetSpawnDetails : OOCSpawnDetails
 {
-    public OnTableSpawnDetails(string npcName, Vector3Int cellCoords) :
+    protected float offset = 0f;
+
+    public OffSetSpawnDetails(string npcName, Vector3Int cellCoords) :
     base(npcName, cellCoords)
     {
 
     }
-    
+
+    public OffSetSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName) :
+    base(npcName, cellCoords, spriteName)
+    {
+
+    }
+
+    public OffSetSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, bool flipX) :
+    base(npcName, cellCoords, spriteName, flipX)
+    {
+
+    }
+
+    public OffSetSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, bool flipX, float offset) :
+    base(npcName, cellCoords, spriteName, flipX)
+    {
+        this.offset = offset;
+    }
+
     public override void spawnActions(GameObject interactable)
     {
         base.spawnActions(interactable);
 
         Vector3 currentPosition = interactable.transform.position;
 
-        currentPosition.y -= Constants.onTableHeightOffset;
+        currentPosition.y -= offset;
 
         interactable.transform.position = currentPosition;
     }
 }
 
-public class BookSpawnDetails : OnTableSpawnDetails
+public class BookSpawnDetails : OffSetSpawnDetails
 {
 
-    protected string spriteName;
     private int bookIndex;
 
     public BookSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, int bookIndex) :
-    base(npcName, cellCoords)
+    base(npcName, cellCoords, spriteName)
     {
-        this.spriteName = spriteName;
         this.bookIndex = bookIndex;
-    }
-
-    public override string getSpriteName()
-    {
-        return spriteName;
+        offset = Constants.onTableHeightOffset;
     }
 
     public override string getPrefabName()
     {
         return PrefabNames.book;
-    }
-
-    public override bool determineSpriteAtSpawn()
-    {
-        return true;
     }
 
     public override Transform getParent()
@@ -1038,11 +1080,6 @@ public class HiddenTerrainSpawnDetails : OOCSpawnDetails
     public override SpawnParams getSpawnParams()
     {
         return new HiddenTerrainSpawnParams(secretDoorFlag);
-    }
-
-    public override bool determineSpriteAtSpawn()
-    {
-        return false;
     }
 
     public override Transform getParent()

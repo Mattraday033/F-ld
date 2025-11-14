@@ -69,6 +69,10 @@ public class InventoryScreen : ScreenWithGeneratedPartyTabs, ICounter
 
     public override AllyStats getCurrentPartyMember()
     {
+        IDescribable disabledRowDescribable = grids[partyMemberGridIndex].getDisabledRowDescribable();
+
+        string name = disabledRowDescribable.getName();
+
         return Stats.convertIDescribableToStats(grids[partyMemberGridIndex].getDisabledRowDescribable());
     }
 
@@ -117,6 +121,7 @@ public class InventoryScreen : ScreenWithGeneratedPartyTabs, ICounter
     {
         List<UnityEvent> listOfEvents = new List<UnityEvent>();
 
+        listOfEvents.Add(Inventory.OnInventoryChange);
         listOfEvents.Add(EquippedItems.OnEquipmentChange);
         listOfEvents.Add(CombatActionArray.OnCombatActionArrayChange);
         listOfEvents.Add(PartySpriteGridRow.OnPartyMemberSelected);

@@ -72,12 +72,14 @@ public class OpenGateButtonLogicScript : ButtonLogicScript
         this.scriptIndex = scriptIndex;
         this.requiredButtons = requiredButtons;
         this.gateKey = gateKey;
+
     }
 
     public override void getFloorButtonStatus(FloorButton floorButton)
     {
         if (validButtonForScript(floorButton))
         {
+            Debug.LogError("pressed count for script ()" + (AreaManager.locationName + gateKey + scriptIndex) + ") +1");
             pressedCount++;
         }
     }

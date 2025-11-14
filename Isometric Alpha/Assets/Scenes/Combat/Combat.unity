@@ -199,7 +199,7 @@ MonoBehaviour:
   combatBackgroundGrid: {fileID: 1465001915}
   selectorManager: {fileID: 954190045}
   combatActionManager: {fileID: 1916716394}
-  creatureParent: {fileID: 698304144}
+  creatureParent: {fileID: 1350236158}
   creatureGrid: {fileID: 698304145}
   enemySpawner: {fileID: 1429841033}
   partySpawner: {fileID: 1447127903}
@@ -818,11 +818,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b1b2022ef64605848b90fa6368725b69, type: 2}
   - {fileID: 11400000, guid: c411cf09d9d420c45b301156f888e4dc, type: 2}
   playerCombatActionManager: {fileID: 1898927716}
-  combatActionManager: {fileID: 1916716394}
-  combatStateManager: {fileID: 131579871}
   frameCount: 0
   isMoving: 0
-  exampleSelector: {fileID: 0}
   hoverPanelPopUpButton: {fileID: 0}
   testSelector: {fileID: 0}
 --- !u!1 &956383623
@@ -950,10 +947,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8873714e19d5c5e4fb30fc3ee24ff390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volleyCombatAction:
-    actorStats: {fileID: 0}
-    framesToWaitPerProjectile: 50
-    cannotDealDamage: 0
 --- !u!224 &1124912102
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1220,10 +1213,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageNumberCanvas: {fileID: 671090002}
-  combatStateManager: {fileID: 131579871}
-  combatResultsUI: {fileID: 0}
-  combatResultsUIScreen: {fileID: 0}
-  drawFrameAtThisX: []
+--- !u!1 &1350236157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1350236158}
+  m_Layer: 9
+  m_Name: Creature Parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1350236158
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350236157}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.5557685, y: -1.9872283, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1429841031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,8 +1378,8 @@ RectTransform:
   m_LocalScale: {x: 1.012393, y: 0.8640123, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 937399947}
   - {fileID: 698304144}
+  - {fileID: 937399947}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1924,6 +1944,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1803719625}
   - {fileID: 223569767}
+  - {fileID: 1350236158}
   - {fileID: 1465001915}
   - {fileID: 2147280350}
   - {fileID: 1732457776}

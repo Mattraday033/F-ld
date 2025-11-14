@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 187361839520295260}
+  directionIndicator: {fileID: 3316192889476500395}
   animancer: {fileID: 3500790127400912763}
 --- !u!114 &3500790127400912763
 MonoBehaviour:

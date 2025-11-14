@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c4c764a202949dc4596b82d60b514f6a
+guid: 9ee1b61728d9b6744b69e635b87b54db
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,9 +48,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 350
+  spritePixelsToUnits: 385
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44c832125372ae84dbcc6127b9c733a7
-      internalID: 220048171
+      spriteID: 92190cada7c210441819c2dcd949e7ca
+      internalID: -1951195353
       vertices: []
       indices: 
       edges: []
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2dbe4064ea986e541a97e6f92956ecfa
-      internalID: 1038020739
+      spriteID: 123971428296b9c4f8677825e47f0af0
+      internalID: -1001863240
       vertices: []
       indices: 
       edges: []
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 201228a7acda9c44896ee84010ff573d
-      internalID: -192169367
+      spriteID: d04c4cdbd5a2c8040a52d1b91ff9734a
+      internalID: 1437044357
       vertices: []
       indices: 
       edges: []
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 646ae91bbe9236e45b51160afc5196cb
-      internalID: -1007462197
+      spriteID: 833547aca9361c6409464ea95b8c3d80
+      internalID: 99432951
       vertices: []
       indices: 
       edges: []
@@ -195,8 +195,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0d50683870fc1d4fbdd630d9aa7e94e
-      internalID: 643504256
+      spriteID: 4c56cf2e1aa1f7043b5a84fa525238d6
+      internalID: -299150625
       vertices: []
       indices: 
       edges: []
@@ -212,11 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Wounded_0: 220048171
-      Wounded_1: 1038020739
-      Wounded_2: -192169367
-      Wounded_3: -1007462197
-      Wounded_4: 643504256
+      Wounded_0: -1951195353
+      Wounded_1: -1001863240
+      Wounded_2: 1437044357
+      Wounded_3: 99432951
+      Wounded_4: -299150625
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
