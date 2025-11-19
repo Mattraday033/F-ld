@@ -10,6 +10,7 @@ public static class MonsterNameList
     public const string batSwarm = "Bat Swarm";
     public const string armoredBat = "Armored Bat";
     public const string screecher = "Screecher";
+    public const string caveMatron = "Cave Matron";
 
 
 

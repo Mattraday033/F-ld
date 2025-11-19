@@ -548,7 +548,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridToDebug: {fileID: 698304145}
-  debug: 1
   radius: 25
 --- !u!1 &925539197
 GameObject:

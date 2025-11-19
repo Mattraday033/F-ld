@@ -34,4 +34,6 @@ public static class EnemyAmountList
     public readonly static EnemyAmount twoDenMothers = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.denMother));
     public readonly static EnemyAmount threeDenMothers = new EnemyAmount(threeEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.denMother));
 
+    public readonly static EnemyAmount caveMatron = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.caveMatron));
+
 }

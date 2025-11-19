@@ -64,7 +64,6 @@ public class ChargeUpAbility : Ability
         {
             getActorStats().playAttackIntoFrontIdleAnimation();
         }
-        
     }
 
 	public override bool isSelfTargeting()

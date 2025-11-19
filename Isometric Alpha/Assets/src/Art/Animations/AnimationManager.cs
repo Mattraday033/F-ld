@@ -18,14 +18,12 @@ public class AnimationManager : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
 
-    private CharacterAnimationType lastIdle;
+    public CharacterAnimationType currentIdle;
     [SerializeField]
     private EnemyDirectionIndicator directionIndicator;
 
 
     public Dictionary<CharacterAnimationType, AnimationClip> animationDict;
-
-    private const int maxAttackAnimationNumber = 10;
 
     public NamedAnimancerComponent animancer;
 
@@ -46,7 +44,7 @@ public class AnimationManager : MonoBehaviour
         animationDict = getTempAnimations(folderPath);
 
         animancer.Animations = getIdleAnimations(folderPath);
-        lastIdle = CharacterAnimationType.Idle_Front;
+        currentIdle = CharacterAnimationType.Idle_Front;
     }
 
     private static AnimationClip[] getIdleAnimations(string folderPath)
@@ -99,20 +97,25 @@ public class AnimationManager : MonoBehaviour
 
     public void playIdleBackAnimation()
     {
-        lastIdle = CharacterAnimationType.Idle_Back;
+        currentIdle = CharacterAnimationType.Idle_Back;
         playAnimation(CharacterAnimationType.Idle_Back);
     }
 
     public void playIdleFrontAnimation()
     {
-        lastIdle = CharacterAnimationType.Idle_Front;
+        currentIdle = CharacterAnimationType.Idle_Front;
         playAnimation(CharacterAnimationType.Idle_Front);
     }
 
     public void playSecondaryIdleAnimation()
     {
-        lastIdle = CharacterAnimationType.Secondary_Idle;
+        currentIdle = CharacterAnimationType.Secondary_Idle;
         playAnimation(CharacterAnimationType.Secondary_Idle);
+    }
+
+    public void playCurrentIdleAnimation()
+    {
+        playAnimation(currentIdle);
     }
 
     public void playDeathAnimation()
@@ -132,14 +135,14 @@ public class AnimationManager : MonoBehaviour
 
     public void playAttackIntoFrontIdleAnimation()
     {
-        lastIdle = CharacterAnimationType.Idle_Front;
+        currentIdle = CharacterAnimationType.Idle_Front;
        playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Normal));
     }
 
     public void playAttackIntoSecondaryIdleAnimation()
     {
-        lastIdle = CharacterAnimationType.Secondary_Idle;
-        playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Normal));
+        currentIdle = CharacterAnimationType.Secondary_Idle;
+        playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Special));
     }
 
     public void playSpecialAttackAnimation()
@@ -204,24 +207,30 @@ public class AnimationManager : MonoBehaviour
     {
         if (!animationDict.ContainsKey(type))
         {
+            if(type == CharacterAnimationType.Attack_Special)
+            {
+                return createClipTransitionToIdle(CharacterAnimationType.Attack_Normal);
+            }
+
             return null;
         }
 
         ClipTransition clipTransition = new ClipTransition();
         clipTransition.Clip = animationDict[type];
+        clipTransition.Events.OnEnd = () => playCurrentIdleAnimation();
 
-        switch (lastIdle)
-        {
-            case CharacterAnimationType.Idle_Front:
-                clipTransition.Events.OnEnd = () => playIdleFrontAnimation();
-                break;
-            case CharacterAnimationType.Idle_Back:
-                clipTransition.Events.OnEnd = () => playIdleBackAnimation();
-                break;
-            case CharacterAnimationType.Secondary_Idle:
-                clipTransition.Events.OnEnd = () => playSecondaryIdleAnimation();
-                break;
-        }
+        // switch (currentIdle)
+        // {
+        //     case CharacterAnimationType.Idle_Front:
+        //         clipTransition.Events.OnEnd = () => playIdleFrontAnimation();
+        //         break;
+        //     case CharacterAnimationType.Idle_Back:
+        //         clipTransition.Events.OnEnd = () => playIdleBackAnimation();
+        //         break;
+        //     case CharacterAnimationType.Secondary_Idle:
+        //         clipTransition.Events.OnEnd = () => playSecondaryIdleAnimation();
+        //         break;
+        // }
 
         return clipTransition;
     }
@@ -318,7 +327,7 @@ public class AnimationManager : MonoBehaviour
         {
             if(animationType == CharacterAnimationType.Secondary_Idle)
             {
-                playAnimation(CharacterAnimationType.Idle_Front);
+                playIdleFrontAnimation();
             }else
             {
                 Debug.LogError("No such animation for type: " + animationType.ToString());

@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 524de8e31f94ceb4daea7be22bf86989
+guid: 12d879abc6ab0fa4b8b0cbbbccdda040
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -48,9 +48,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 350
+  spritePixelsToUnits: 155
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -102,17 +102,17 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.45}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 605b67812e224d144bdb378458a20ccc
-      internalID: 1605752301
+      spriteID: 5978b14d9605dcd4fbfcfeadf5c1f32b
+      internalID: -1187058268
       vertices: []
       indices: 
       edges: []
@@ -121,19 +121,19 @@ TextureImporter:
       name: Secondary_Idle_1
       rect:
         serializedVersion: 2
-        x: 512
+        x: 256
         y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.45}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f502d9b5c2cfe664c99a24e706e76370
-      internalID: 673004611
+      spriteID: 330bb5888459f064e8b2bc86af3b9a81
+      internalID: 125202243
       vertices: []
       indices: 
       edges: []
@@ -142,19 +142,19 @@ TextureImporter:
       name: Secondary_Idle_2
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 512
         y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.45}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f2a79469cd26a04c84337767f05e6c5
-      internalID: -1719246632
+      spriteID: c045e5dfd5fcafd4db3ebe5a9bc342e0
+      internalID: -1753720951
       vertices: []
       indices: 
       edges: []
@@ -163,19 +163,19 @@ TextureImporter:
       name: Secondary_Idle_3
       rect:
         serializedVersion: 2
-        x: 1536
+        x: 768
         y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.45}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 162dac038a2eb3a41a8cdeb318a91eef
-      internalID: -746364383
+      spriteID: 3055a0c5b02b16147b27e66e63a968c2
+      internalID: 296437305
       vertices: []
       indices: 
       edges: []
@@ -184,19 +184,19 @@ TextureImporter:
       name: Secondary_Idle_4
       rect:
         serializedVersion: 2
-        x: 2048
+        x: 1024
         y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.45}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a531f24b75f862949acaa15176c6ddbf
-      internalID: 1364086895
+      spriteID: 00a5c7269dc111a4e90e3f9083b15d64
+      internalID: -1056748313
       vertices: []
       indices: 
       edges: []
@@ -205,19 +205,19 @@ TextureImporter:
       name: Secondary_Idle_5
       rect:
         serializedVersion: 2
-        x: 2560
+        x: 1280
         y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.45}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d9ed22b6c9deac4cb995e13f4ee0fb6
-      internalID: -358792880
+      spriteID: d13d81befe42c7149a6d204a5a0d7955
+      internalID: 2072992366
       vertices: []
       indices: 
       edges: []
@@ -226,19 +226,19 @@ TextureImporter:
       name: Secondary_Idle_6
       rect:
         serializedVersion: 2
-        x: 3072
+        x: 1536
         y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.45}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0dccb289363a72b4f80ae02e741f53af
-      internalID: 326497343
+      spriteID: e3a568c804f50b24f826f122430a311b
+      internalID: 254188185
       vertices: []
       indices: 
       edges: []
@@ -247,19 +247,19 @@ TextureImporter:
       name: Secondary_Idle_7
       rect:
         serializedVersion: 2
-        x: 3584
+        x: 1792
         y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.45}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03d2a997dff04964cbdad21728c5f870
-      internalID: -276638957
+      spriteID: a6b8675e61701a34ebaef79b935b0507
+      internalID: -1547955797
       vertices: []
       indices: 
       edges: []
@@ -275,14 +275,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Secondary_Idle_0: 1605752301
-      Secondary_Idle_1: 673004611
-      Secondary_Idle_2: -1719246632
-      Secondary_Idle_3: -746364383
-      Secondary_Idle_4: 1364086895
-      Secondary_Idle_5: -358792880
-      Secondary_Idle_6: 326497343
-      Secondary_Idle_7: -276638957
+      Secondary_Idle_0: -1187058268
+      Secondary_Idle_1: 125202243
+      Secondary_Idle_2: -1753720951
+      Secondary_Idle_3: 296437305
+      Secondary_Idle_4: -1056748313
+      Secondary_Idle_5: 2072992366
+      Secondary_Idle_6: 254188185
+      Secondary_Idle_7: -1547955797
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

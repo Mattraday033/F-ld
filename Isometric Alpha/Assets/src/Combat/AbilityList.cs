@@ -214,8 +214,7 @@ public static class AbilityList
 
 		//bat abilities
 		enemyAbilityDictionary.Add(flurryKey, new Ability(CombatActionSettings.build(DescriptionParams.build(flurryKey, "A devastating surge of claws and jaws."), DamageParams.build("10", "5"), AnimationParams.build(CombatAnimationType.Effect))));
-        enemyAbilityDictionary.Add(colonyCrushKey, new Ability(CombatActionSettings.build(DescriptionParams.build(colonyCrushKey, "A torrent of tiny bats is launched at the target."), DamageParams.build("5", "1"), TargetParams.build(Range.quadrupleBoxIndex))));
-        enemyAbilityDictionary.Add(screechKey, new Ability(CombatActionSettings.build(DescriptionParams.build(screechKey, "Howl so loud as to drive you mad.", TraitList.caveMadnessKey), DamageParams.build("6", "2"), TargetParams.build(Range.quadrupleBoxIndex), AnimationParams.build(CombatAnimationType.Effect), TraitList.caveMadness)));
+        enemyAbilityDictionary.Add(screechKey, new Ability(CombatActionSettings.build(DescriptionParams.build(screechKey, "A howl so loud it draws blood.", TraitList.caveMadnessKey), DamageParams.build("6", "2"), TargetParams.build(Range.quadrupleBoxIndex), AnimationParams.build(CombatAnimationType.Effect), TraitList.caveMadness)));
         enemyAbilityDictionary.Add(spawnPupsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(spawnPupsKey, "The bat calls forth it's pups to fight for it.")), MonsterNameList.batSwarm));
         enemyAbilityDictionary.Add(swarmRushKey, new Ability(CombatActionSettings.build(DescriptionParams.build(swarmRushKey, "The swarm flutters about their target, clawing and biting ferociously.", colonyCrushKey), DamageParams.build("3", "2"), AnimationParams.build(CombatAnimationType.Effect))));
         enemyAbilityDictionary.Add(batClawName, new Ability(CombatActionSettings.build(batClawName, batClawDescription, DamageParams.build("6", "8"))));

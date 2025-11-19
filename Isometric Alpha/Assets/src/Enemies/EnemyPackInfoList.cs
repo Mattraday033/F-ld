@@ -120,6 +120,16 @@ public static class EnemyPackInfoList
                                                                                                     new ItemListID[] { new ItemListID(  ItemList.keyItemListIndex,
                                                                                                                                         ItemList.mineArmoryKeyIndex) });
 
+    private readonly static EnemyPackInfo testOneOfEach = new EnemyPackInfo(new EnemyAmount[]   { 
+                                                                                                    EnemyAmountList.oneScreecherBat,
+                                                                                                    // EnemyAmountList.oneArmoredBat, 
+                                                                                                    // EnemyAmountList.oneDenMother, 
+                                                                                                    // EnemyAmountList.oneGiantBat, 
+                                                                                                    EnemyAmountList.oneBatSwarm,
+                                                                                                    // EnemyAmountList.caveMatron
+                                                                                                },
+                                                                                                DropTableList.slaveMineDT1Name);
+
     public static EnemyPackInfo getEnemyPackInfo(string areaName, int index)
     {
         if (!enemyPackInfoDict.ContainsKey(areaName))
@@ -218,6 +228,16 @@ public static class EnemyPackInfoList
         list.Add(caveMatronBatBoss);
 
         enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7b, list);
+        #endregion
+
+
+        #region MineLvl_3-1a
+        list = new List<EnemyPackInfo>();
+
+        list.Add(testOneOfEach);
+        list.Add(testOneOfEach);
+
+        enemyPackInfoDict.Add(LocationNameList.mineLvl3 + LocationNameList.section1a, list);
         #endregion
 
     }

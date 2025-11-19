@@ -641,10 +641,10 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         newTrait.onApplication();
         newTrait.setTraitHolder(this);
 
-        // if (CombatStateManager.inCombat)
-        // {
-        //     animationManager.playAnimation(newTrait.getAnimationOnApplication());
-        // }
+        if (CombatStateManager.inCombat)
+        {
+            newTrait.setIdleAnimationOnApplication(animationManager);
+        }
         
         dealTraitApplicationDamage(newTrait);
 
@@ -726,31 +726,10 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
         traits = newTraits.ToArray();
 
-        // if(removedTrait != null)
-        // {
-        //     CharacterAnimationType nextIdleAnimation = getOtherAnimationsFromTraits();
-
-        //     if(nextIdleAnimation != CharacterAnimationType.None)
-        //     {
-        //         animationManager.playAnimation(nextIdleAnimation);
-        //     } else
-        //     {
-        //         animationManager.playAnimation(removedTrait.getAnimationOnRemoval());
-        //     }
-        // }
-    }
-
-    private CharacterAnimationType getOtherAnimationsFromTraits()
-    {
-        foreach (Trait trait in traits)
+        if(removedTrait != null)
         {
-            if (trait.getAnimationOnApplication() != CharacterAnimationType.None)
-            {
-                return trait.getAnimationOnApplication();
-            }
+            removedTrait.setIdleAnimationOnRemoval(animationManager);
         }
-
-        return CharacterAnimationType.None;
     }
 
     public void removeAllTraits()

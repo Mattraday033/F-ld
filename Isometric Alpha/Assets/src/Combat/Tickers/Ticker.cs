@@ -54,25 +54,28 @@ public class Ticker : MonoBehaviour
 	{
 		foreach(Stats combatant in allCombatants)
 		{
-			Trait[] traits = new Trait[0];
-			
 			if(combatant.traits == null)
 			{
 				combatant.traits = new Trait[0];
 				continue;
 			}
 			
-			foreach(Trait trait in combatant.traits)
+            List<Trait> traits = new List<Trait>(combatant.traits);
+
+			foreach(Trait trait in traits)
 			{
 				trait.tickDown();
 				
-				if(trait.isPermanent() || trait.getRoundsLeft() > 0)
+				if(!trait.isPermanent() && trait.getRoundsLeft() <= 0)
 				{
-					traits = Helpers.appendArray<Trait>(traits, trait);
-				}
+					combatant.removeTrait(trait);
+				} 
 			}
 			
-			combatant.traits = traits;
+            if(combatant.animationManager != null)
+            {
+                combatant.animationManager.playCurrentIdleAnimation();
+            }
 		}
 	}
 }

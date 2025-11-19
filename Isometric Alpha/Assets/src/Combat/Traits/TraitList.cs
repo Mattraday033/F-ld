@@ -201,7 +201,7 @@ public static class TraitList
 	public readonly static Trait insecure = new VulnerabilityTrait("Insecure", mentalTraitType, "This creature is no longer sure of it's own defenses. This creature takes " + insecureExtraDamage + " extra damage whenever it is hit.", "Victimize", Color.black, insecureExtraDamage);
 	public readonly static Trait demoralized = new SlowingTrait("Demoralized", mentalTraitType, "This creature is reluctant to fight. It takes " + demoralizeExtraDamage + " extra damage and always attacks last in the action order.", "Demoralize", fourRoundDuration, Color.black, demoralizeExtraDamage);
 	public readonly static Trait choking = new CrowdControlTrait(chokingKey, woundTraitType, "This creature is stunned, and cannot complete any actions until this trait is removed.", "SmokeBomb", oneRoundDuration, Color.black);
-    public readonly static Trait caveMadness = new SlowingTrait(caveMadnessKey, mentalTraitType, "The screech of the bat's still rings in this one's ears. The afflicted creature is slowed and takes " + caveMadnessExtraDamage + " extra damage.", caveMadnessKey, twoRoundDuration, Color.black, caveMadnessExtraDamage);
+    public readonly static Trait caveMadness = new SlowingTrait(caveMadnessKey, mentalTraitType, "The ringing won't stop! The afflicted creature is slowed and takes " + caveMadnessExtraDamage + " extra damage when struck.", caveMadnessKey, twoRoundDuration, Color.black, caveMadnessExtraDamage);
 	
 
 	//permanent debuffs

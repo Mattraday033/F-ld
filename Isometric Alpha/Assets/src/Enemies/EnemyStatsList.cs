@@ -171,6 +171,15 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                                   TraitList.empty
                                                                                 }));
         #endregion
+        #region Cave Matron
+        enemyStatsDict.Add(MonsterNameList.caveMatron, new EnemyStats(MonsterNameList.caveMatron,
+                                                                                      twentyArmor,
+                                                                                            35,
+                                            AbilityList.getAbility(null, AbilityList.spawnPupsKey),
+                                                                    new Trait[] { TraitList.master,
+                                                                                  TraitList.empty
+                                                                                }));
+        #endregion
     }
 
 }

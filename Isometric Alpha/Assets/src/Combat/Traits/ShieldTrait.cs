@@ -23,15 +23,16 @@ public class ShieldTrait : Trait
         return percentageDamageReduction;
     }
 
-    public override CharacterAnimationType getAnimationOnApplication()
+    public override void setIdleAnimationOnApplication(AnimationManager animationManager)
     {
-        return CharacterAnimationType.Secondary_Idle;
+        animationManager.currentIdle = CharacterAnimationType.Secondary_Idle;
     }
 
-    public override CharacterAnimationType getAnimationOnRemoval()
+    public override void setIdleAnimationOnRemoval(AnimationManager animationManager)
     {
-        return CharacterAnimationType.Idle_Front;
+        animationManager.currentIdle = CharacterAnimationType.Idle_Front;
     }
+
 }
 
 public class HiddenShieldTrait : ShieldTrait
@@ -42,13 +43,13 @@ public class HiddenShieldTrait : ShieldTrait
     {
     }
 
-    public override CharacterAnimationType getAnimationOnApplication()
+    public override void setIdleAnimationOnApplication(AnimationManager animationManager)
     {
-        return CharacterAnimationType.None;
+        //empty on purpose
     }
 
-    public override CharacterAnimationType getAnimationOnRemoval()
+    public override void setIdleAnimationOnRemoval(AnimationManager animationManager)
     {
-        return CharacterAnimationType.None;
+        //empty on purpose
     }
 }

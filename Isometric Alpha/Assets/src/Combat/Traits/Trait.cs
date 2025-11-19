@@ -476,14 +476,14 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
         return allTraitTypesGlossaryEntries;
     }
 
-    public virtual CharacterAnimationType getAnimationOnApplication()
+    public virtual void setIdleAnimationOnApplication(AnimationManager animationManager)
     {
-        return CharacterAnimationType.None;
+        //empty on purpose
     }
 
-    public virtual CharacterAnimationType getAnimationOnRemoval()
+    public virtual void setIdleAnimationOnRemoval(AnimationManager animationManager)
     {
-        return CharacterAnimationType.None;
+        //empty on purpose
     }
 
     //ICloneable methods
