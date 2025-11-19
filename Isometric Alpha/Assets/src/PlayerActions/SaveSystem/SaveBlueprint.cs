@@ -192,22 +192,22 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 	public string saveName;
 
 	public string currentFlags;
-	public string[] currentChoices = new string[ChoiceManager.choices.Count];
-	public string[] currentDeathFlags = new string[DeathFlagManager.deadNames.Count];
-	public string[] currentMetFlags = new string[MetFlagManager.metNames.Count];
-	public FlagWrapper[] currentChestAndGateFlags = new FlagWrapper[GateAndChestManager.getKeyCount()];
-	public FlagWrapper[] currentActivatedTrapsAndButtons = new FlagWrapper[TrapAndButtonStateManager.allActivatedTrapKeys.Count];
+	public string[] currentChoices;// = new string[ChoiceManager.choices.Count];
+	public string[] currentDeathFlags;// = new string[DeathFlagManager.deadNames.Count];
+	public string[] currentMetFlags;// = new string[MetFlagManager.metNames.Count];
+	public FlagWrapper[] currentChestAndGateFlags;// = new FlagWrapper[GateAndChestManager.getKeyCount()];
+	public FlagWrapper[] currentActivatedTrapsAndButtons;// = new FlagWrapper[TrapAndButtonStateManager.allActivatedTrapKeys.Count];
 
-	public string[] currentInventory = new string[State.inventory.Count];
-	public string[] currentJunk = new string[State.junkPocket.Count];
-	public string[] currentLessons = new string[State.lessonsLearned.Length];
-	public string[] currentQuestList = new string[State.questDictionary.Count];
-	public string[] currentKnownMapData = new string[State.allKnownMapData.Count];
-	public string[] currentAreaHostilities = new string[AreaList.allAreas.Count];
+	public string[] currentInventory;// = new string[State.inventory.Count];
+	public string[] currentJunk;// = new string[State.junkPocket.Count];
+	public string[] currentLessons;// = new string[State.lessonsLearned.Length];
+	public string[] currentQuestList;// = new string[State.questDictionary.Count];
+	public string[] currentKnownMapData;// = new string[State.allKnownMapData.Count];
+	public string[] currentAreaHostilities;// = new string[AreaList.allAreas.Count];
 
-    public string[] secretDoors = new string[0];
+    public string[] secretDoors;// = new string[0];
 
-    public StatsWrapper[] partyMemberStats = new StatsWrapper[PartyManager.getNumberOfPartyMembersTotal()];
+    public StatsWrapper[] partyMemberStats;// = new StatsWrapper[PartyManager.getNumberOfPartyMembersTotal()];
 
 	public InventoryWrapper[] currentShopkeeperInventories;
 	public InventoryWrapper[] currentBuyBackInventories;
@@ -529,6 +529,8 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 	{
 		int partyMemberIndex = 0;
 		List<PartyMember> allPartyMembers = PartyManager.getAllPartyMembers();
+        partyMemberStats = new StatsWrapper[PartyManager.getNumberOfPartyMembersTotal()];
+
 		foreach (PartyMember partyMember in allPartyMembers)
 		{
             StatsWrapper partyMemberStats = new StatsWrapper();    
@@ -539,6 +541,8 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
             partyMemberStats.currentHealth = partyMember.stats.currentHealth;
             partyMemberStats.totalHealth = partyMember.stats.getTotalHealth();
             partyMemberStats.canJoinParty = partyMember.canJoinParty;
+
+            partyMemberStats.xp = partyMember.stats.xp;
 
             partyMemberStats.strength = partyMember.stats.getStrengthWithoutBoosts();
             partyMemberStats.dexterity = partyMember.stats.getDexterityWithoutBoosts();

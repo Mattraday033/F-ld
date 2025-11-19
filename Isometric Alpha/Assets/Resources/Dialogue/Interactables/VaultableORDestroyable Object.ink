@@ -28,7 +28,7 @@ VAR playerName = ""
 
 === 1a ===
 
-This barricade was built to funnel or delay rampaging slaves. A sufficiently dexterous person could clamber over it, or it could be torn down with enough strength and determination.
+This barricade was built to funnel or delay rampaging slaves. A sufficiently dexterous person could vault over it, or it could be torn down with enough strength and determination.
 
 
 {
@@ -38,7 +38,7 @@ This barricade was built to funnel or delay rampaging slaves. A sufficiently dex
 }
 {
 -dexterity >= 2:
-    +Climb over the barricade. <Dex {dexterity}/2>
+    +Vault over the barricade. <Dex {dexterity}/2>
         ->1c
 }
     +Leave the gate alone.
@@ -46,9 +46,11 @@ This barricade was built to funnel or delay rampaging slaves. A sufficiently dex
 
 === 1b ===
 
-deactivate(1)
+fadeToBlack(true, false)
 
 openGate()
+
+fadeBackIn(60)
 
 You successfully lift the gate.
     

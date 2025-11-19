@@ -73,6 +73,37 @@ public static class GateSpawnInfoList
 
         #endregion
 
+        #region MineLvl_1-1b
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero,
+                                    NPCNameList.awkwardRubble,
+                                    LocationNameList.mineLvl1 + LocationNameList.section1b,
+                                    PrefabNames.lowRubble,
+                                    new Vector3Int(5, 1),
+                                    Constants.sizeThree,
+                                    Axis.DescendingY));
+
+        gateSpawnInfoDict.Add(LocationNameList.mineLvl1 + LocationNameList.section1b, list);
+
+        #endregion
+
+        #region MineLvl_1-1c
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero,
+                                    NPCNameList.liftableGate,
+                                    LocationNameList.mineLvl1 + LocationNameList.section1c,
+                                    new Vector3Int(2, 1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        gateSpawnInfoDict.Add(LocationNameList.mineLvl1 + LocationNameList.section1c, list);
+
+        #endregion
+
         #region MineLvl_2-2a
 
         list = new List<GateSpawnInfo>();
@@ -323,6 +354,107 @@ public static class GateSpawnInfoList
 
         #endregion
 
+        #region MineLvl_3
+
+        #region MineLvl_3-2b
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.liftableGate,
+                                    LocationNameList.mineLvl3 + LocationNameList.section2b,
+                                    new Vector3Int(-6, 2),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        list.Add(new GateSpawnInfo(Constants.indexOne,
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl3 + LocationNameList.section2b,
+                                    new Vector3Int(3, 10),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+        gateSpawnInfoDict.Add(LocationNameList.mineLvl3 + LocationNameList.section2b, list);
+
+        #endregion
+
+        #region MineLvl_3-3b
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.liftableGate,
+                                    LocationNameList.mineLvl3 + LocationNameList.section3b,
+                                    new Vector3Int(5, 2),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+        gateSpawnInfoDict.Add(LocationNameList.mineLvl3 + LocationNameList.section3b, list);
+
+        #endregion
+
+        #region MineLvl_3-4b
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl3 + LocationNameList.section4b,
+                                    new Vector3Int(0, 15),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+        list.Add(new GateSpawnInfo(Constants.indexOne, 
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl3 + LocationNameList.section4b,
+                                    new Vector3Int(-6, 2),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
+
+        gateSpawnInfoDict.Add(LocationNameList.mineLvl3 + LocationNameList.section4b, list);
+
+        #endregion
+
+        #region MineLvl_3-5
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.liftableRubble,
+                                    LocationNameList.mineLvl3 + LocationNameList.section5,
+                                    new Vector3Int(7, 2),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        gateSpawnInfoDict.Add(LocationNameList.mineLvl3 + LocationNameList.section5, list);
+
+        #endregion
+
+        #region MineLvl_3-6a
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl3 + LocationNameList.section6a,
+                                    new Vector3Int(-9, 6),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        list.Add(new GateWithHiddenTerrainSpawnInfo(Constants.indexOne, 
+                                    NPCNameList.unstablePillar,
+                                    LocationNameList.mineLvl3 + LocationNameList.section6a,
+                                    PrefabNames.unstablePillar,
+                                    ColorList.mineLvl3RubbleColor,
+                                    new Vector3Int(-18, -8),
+                                    SecretDoorKeyList.mineLvl3UnstablePillarHiddenTerrain));
+
+        gateSpawnInfoDict.Add(LocationNameList.mineLvl3 + LocationNameList.section6a, list);
+
+        #endregion
+
+        #endregion
+
     }
 }
 
@@ -459,6 +591,42 @@ public class TemporaryGateSpawnInfo : GateSpawnInfo
     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
     {
         return new TemporaryGateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, skewed());
+    }
+
+}
+
+public class GateWithHiddenTerrainSpawnInfo : GateSpawnInfo
+{
+    private string hiddenTerrainFlag;
+    private Color tint = Color.white;
+
+    public GateWithHiddenTerrainSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell, string hiddenTerrainFlag) :
+    base(gateIndex, npcName, currentArea, startCell)
+    {
+        this.hiddenTerrainFlag = hiddenTerrainFlag;        
+    }
+
+    public GateWithHiddenTerrainSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Color tint, Vector3Int startCell, string hiddenTerrainFlag) :
+    base(gateIndex, npcName, currentArea, spriteName, startCell)
+    {
+        this.hiddenTerrainFlag = hiddenTerrainFlag;        
+        this.tint = tint;        
+    }
+
+    public GateWithHiddenTerrainSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell, int size, Axis axis, string hiddenTerrainFlag) :
+    base(gateIndex, npcName, currentArea, startCell, size, axis)
+    {
+        this.hiddenTerrainFlag = hiddenTerrainFlag;        
+    }
+
+    // protected override string getGateName()
+    // {
+    //     return npcName + gateIndex;
+    // }
+
+    public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
+    {
+        return new GateWithHiddenTerrainSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, skewed(), hiddenTerrainFlag, tint);
     }
 
 }

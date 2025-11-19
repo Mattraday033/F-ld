@@ -690,9 +690,8 @@ MonoBehaviour:
   nestedDescriptionPanelMouseListener: {fileID: 6380758327094278386}
   rowBackground: {fileID: 5752082821935764093}
   panelSections:
-  - {fileID: 1070700655662567961}
   - {fileID: 6463336367437485793}
-  - {fileID: 0}
+  - {fileID: 2586312156129838485}
 --- !u!222 &9220119316378092554
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -26,6 +26,8 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
         this.startFacing = startFacing;
         this.endFacing = endFacing;
         this.category = category;
+
+        setToCurrentSprite();
     }
 
     public abstract void setStatus(string key, bool status);

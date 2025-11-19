@@ -64,6 +64,7 @@ public static class TraitList
 
 	public const string devastatingCriticalsKey = "Devastating Criticals";
 
+    public const string caveMadnessKey = "Cave Madness";
 	public const string chokingKey = "Choking";
 	public const string chewKey = "Chew";
 
@@ -93,6 +94,7 @@ public static class TraitList
 	public const int chewHealing = 8;
 	public const int chewExtraDamage = 4;
 	public const int chewExtraCritPercent = 4;
+	public const int caveMadnessExtraDamage = 3;
 	public const int demoralizeExtraDamage = 5;
 	private const int bloodlustExtraDamage = 1;
 	private const int predationExtraDamage = 4;
@@ -199,7 +201,8 @@ public static class TraitList
 	public readonly static Trait insecure = new VulnerabilityTrait("Insecure", mentalTraitType, "This creature is no longer sure of it's own defenses. This creature takes " + insecureExtraDamage + " extra damage whenever it is hit.", "Victimize", Color.black, insecureExtraDamage);
 	public readonly static Trait demoralized = new SlowingTrait("Demoralized", mentalTraitType, "This creature is reluctant to fight. It takes " + demoralizeExtraDamage + " extra damage and always attacks last in the action order.", "Demoralize", fourRoundDuration, Color.black, demoralizeExtraDamage);
 	public readonly static Trait choking = new CrowdControlTrait(chokingKey, woundTraitType, "This creature is stunned, and cannot complete any actions until this trait is removed.", "SmokeBomb", oneRoundDuration, Color.black);
-
+    public readonly static Trait caveMadness = new SlowingTrait(caveMadnessKey, mentalTraitType, "The screech of the bat's still rings in this one's ears. The afflicted creature is slowed and takes " + caveMadnessExtraDamage + " extra damage.", caveMadnessKey, twoRoundDuration, Color.black, caveMadnessExtraDamage);
+	
 
 	//permanent debuffs
 	public readonly static Trait flensed = new DamageOverTimeTrait("Flensed", woundTraitType, "This creature takes 3D + 5 damage at the end of every round for the rest of combat.", "Flense", Color.black, "3D + 5");

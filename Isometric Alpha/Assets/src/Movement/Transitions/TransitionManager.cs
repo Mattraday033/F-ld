@@ -83,6 +83,8 @@ public class TransitionManager : MonoBehaviour
 
     private IEnumerator waitForBlackScreenThenTransition(Transition transition)
     {
+        NotificationManager.OnDeleteAllNotifications.Invoke();
+
         while (fadeToBlackManager.currentlyFadingToBlack())
         {
             yield return null;

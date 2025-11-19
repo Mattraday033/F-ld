@@ -82,7 +82,7 @@ public class SkillManager
         return AreaManager.getMasterGrid().WorldToCell(PlayerMovement.getInstance().endingPosition);
     }
 
-    private bool coordsWithinRange(int row, int col)
+    public bool coordsWithinRange(int row, int col)
     {
         return (Math.Abs(row - getCurrentPlayerSkillGridCoords().row) + Math.Abs(col - getCurrentPlayerSkillGridCoords().col)) <= getCurrentPlayerSkillGridCoords().row;
     }

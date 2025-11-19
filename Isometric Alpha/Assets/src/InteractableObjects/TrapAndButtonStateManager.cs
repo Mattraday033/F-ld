@@ -20,6 +20,11 @@ public class TrapAndButtonStateManager : MonoBehaviour
         return allActivatedTrapKeys[key];
     }
 
+    public static int trapKeyCount()
+    {
+        return allActivatedTrapKeys.Count;
+    }
+
     public static void setKey(string key, bool status)
     {
         allActivatedTrapKeys[key] = status;

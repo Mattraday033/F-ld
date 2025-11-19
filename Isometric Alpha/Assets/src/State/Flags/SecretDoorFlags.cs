@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public static class SecretDoorFlags
 {
-    public static UnityEvent<string> OnSecretDoorDiscovery;
+    public readonly static UnityEvent<string> OnSecretDoorDiscovery = new UnityEvent<string>();
 
     private static Dictionary<string, bool> secretDoorFlags;
 
@@ -13,7 +13,6 @@ public static class SecretDoorFlags
     private static void initializeSecretDoorFlags()
     {
         secretDoorFlags = new Dictionary<string, bool>();
-        OnSecretDoorDiscovery = new UnityEvent<string>();
     }
 
     public static void addSecretDoorFlag(string secretDoorKey)

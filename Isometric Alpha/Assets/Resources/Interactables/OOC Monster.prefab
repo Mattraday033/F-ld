@@ -112,6 +112,7 @@ MonoBehaviour:
   cunningStunCounter: 0
   intimidateCounter: 0
   retreatStunnedCounter: 0
+  attachedCollider2D: {fileID: 158998442895171975}
   hoverTarget: {fileID: 0}
 --- !u!1839735485 &5795555889662786569
 Tilemap:

@@ -181,7 +181,7 @@ public class CunningManager : SkillManager
 
             if (skillGrid[currentCoords.x, currentCoords.y] != null &&
                         Helpers.hasCollision(currentCollider) &&
-                        collisionsContainsColliderLayer(Helpers.getCollisions(currentCollider)))
+                        cullFromCollision(Helpers.getCollisions(currentCollider)))
             {
                 foundCollider = true;
                 colliderIndicators.Add(currentCoords);  // store the collider for later
@@ -202,11 +202,14 @@ public class CunningManager : SkillManager
         return colliderIndicators;
     }
 
-    private bool collisionsContainsColliderLayer(Collider2D[] collisions)
+    private bool cullFromCollision(Collider2D[] collisions)
     {
         foreach (Collider2D collision in collisions)
         {
-            if (collision != null && collision.gameObject.layer == LayerMask.NameToLayer("Collider"))
+            if (collision != null && 
+                (collision.gameObject.layer == LayerAndTagManager.colliderLayer || 
+                 collision.gameObject.layer == LayerAndTagManager.observableLayer || 
+                 collision.gameObject.layer == LayerAndTagManager.npcLayer))
             {
                 return true;
             }
@@ -367,11 +370,6 @@ public class CunningManager : SkillManager
     public override Color getTileTargetColor()
     {
         return Color.red;
-    }
-
-    private bool coordsWithinRange(int row, int col)
-    {
-        return (Math.Abs(row - getCurrentPlayerSkillGridCoords().row) + Math.Abs(col - getCurrentPlayerSkillGridCoords().col)) <= getCurrentPlayerSkillGridCoords().row;
     }
 
     public override int getRange()

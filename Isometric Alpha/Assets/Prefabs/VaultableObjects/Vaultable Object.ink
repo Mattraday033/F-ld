@@ -29,15 +29,15 @@ VAR playerName = ""
 
 {
 -plural:
-These {objectName} look climbable. A sufficiently dexterous person could clamber over them.
+These {objectName} look climbable. A sufficiently dexterous person could vault over them.
 -else:
-This {objectName} looks climbable. A sufficiently dexterous person could clamber over it.
+This {objectName} looks traversable. A sufficiently dexterous person could vault over it.
 }
 
 
 {
 -dexterity >= 2:
-    *Climb over the {objectName}. <Dex {dexterity}/2>
+    *Vault over the {objectName}. <Dex {dexterity}/2>
         ->1b
     *Leave the {objectName} alone.
         ->Close

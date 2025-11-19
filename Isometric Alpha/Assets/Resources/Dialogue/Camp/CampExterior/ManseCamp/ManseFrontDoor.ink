@@ -38,12 +38,13 @@ These doors lead into the Manse. They are closed and barred.
         ->Close
 
 === 1b ===
+fadeToBlack(true, false)
 
 setToTrue(manseDoorsOpenedRevolt)
 
-deactivate(1)
-
 openGate()
+
+fadeBackIn(60)
 
 You break down the doors.
 
@@ -51,11 +52,13 @@ You break down the doors.
 
 === 1c ===
 
+fadeToBlack(true, false)
+
 setToTrue(manseDoorsOpenedRevolt)
 
-deactivate(1)
-
 openGate()
+
+fadeBackIn(60)
 
 The slaves surge forward and clear the door with pick and mattock.
 

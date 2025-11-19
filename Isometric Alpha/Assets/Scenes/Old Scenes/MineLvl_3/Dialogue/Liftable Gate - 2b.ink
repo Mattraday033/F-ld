@@ -38,9 +38,11 @@ This gate rattles at your touch. With enough effort it could be lifted.
 
 === 1b ===
 
-deactivate(1)
+fadeToBlack(true, false)
 
 openGate()
+
+fadeBackIn(60)
 
 You successfully lift the gate.
     

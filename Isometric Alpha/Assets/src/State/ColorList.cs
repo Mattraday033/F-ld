@@ -7,8 +7,9 @@ public static class ColorList
     #region Private Colors
 
     #region Rubble Colors
-    private readonly static Color32 mineLvl2RubbleColor = new Color32(175, 170, 160, 255);
-    private readonly static Color32 shackRubbleColor = new Color32(225, 205, 175, 255);
+    public readonly static Color32 mineLvl3RubbleColor = new Color32(179, 175, 192, 255);
+    public readonly static Color32 mineLvl2RubbleColor = new Color32(175, 170, 160, 255);
+    public readonly static Color32 shackRubbleColor = new Color32(225, 205, 175, 255);
     #endregion
 
     #endregion
@@ -30,6 +31,7 @@ public static class ColorList
     public readonly static Color32 grey55 = new Color32(55, 55, 55, 255);
     public readonly static Color32 grey75 = new Color32(75, 75, 75, 255);
     public readonly static Color32 grey100 = new Color32(100, 100, 100, 255);
+    public readonly static Color32 grey100Transparent = new Color32(100, 100, 100, 125);
     public readonly static Color32 grey125 = new Color32(125, 125, 125, 255);
     public readonly static Color32 grey155 = new Color32(155, 155, 155, 255);
     public readonly static Color32 grey215 = new Color32(215, 215, 215, 255);
@@ -48,14 +50,18 @@ public static class ColorList
     public readonly static Color ineligibleColor = grey125; //Should be a light grey/red for now
     public readonly static Color alternateRowColor = grey215;
 
-    public readonly static Color colorIndicatingChosenBefore = grey125; //turns choice text gray and a bit transparent if it has been chosen before
+    public readonly static Color colorIndicatingChosenBefore = grey100Transparent; //turns choice text gray and a bit transparent if it has been chosen before
 
     public readonly static Color combatHoverOutlineGrey = grey155;
 
     public readonly static Color blueShieldTextColor = new Color32(25, 100, 255, 255); // color is a lighter blue than default Color.blue
 	public readonly static Color greenLeafTextColor = new Color32(25, 255, 0, 255); // color is a lighter green than default Color.green
 
-    public readonly static Color previewSliderOrange = new Color(255f, 140f, 0f, 255f);
+	public readonly static Color cunningStunnedColor = Color.red;
+	public readonly static Color intimidatedColor = Color.magenta;
+	public readonly static Color retreatStunnedColor = Color.cyan;
+
+    public readonly static Color intimidateIndicatorOrange = new Color32(225, 115, 0, 255);
 
     public readonly static Color greyedOutIconColor = new Color32(255, 255, 255, 75);
     public readonly static Color greyedOutBackgroundColor = grey75;
@@ -101,8 +107,9 @@ public static class ColorList
         rubbleColorDict.Add(LocationNameList.slaveShackEight, shackRubbleColor);
         rubbleColorDict.Add(LocationNameList.slaveShackNine, shackRubbleColor);
 
-
         rubbleColorDict.Add(LocationNameList.mineLvl2, mineLvl2RubbleColor);
+
+        rubbleColorDict.Add(LocationNameList.mineLvl3, mineLvl3RubbleColor);
     }
 
 }

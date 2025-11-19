@@ -49,11 +49,11 @@ public static class EnemyStatsList
 
     private const string smallStoneMaterials = "StoneSaintBuildingMaterialsSmall";
 
-    public readonly static EnemyStats[][] pupSpawnCombos =  {new EnemyStats[] {Resources.Load<EnemyStats>(explosiveBat), Resources.Load<EnemyStats>(chargedBat)},
-                                                            new EnemyStats[] {Resources.Load<EnemyStats>(armoredBat), Resources.Load<EnemyStats>(giantBat)},
-                                                            new EnemyStats[] {Resources.Load<EnemyStats>(spawnerBat), Resources.Load<EnemyStats>(spawnerBat)},
-                                                            new EnemyStats[] {Resources.Load<EnemyStats>(explosiveBat), Resources.Load<EnemyStats>(explosiveBat)},
-                                                            new EnemyStats[] {Resources.Load<EnemyStats>(chargedBat), Resources.Load<EnemyStats>(giantBat)}};
+    // public readonly static EnemyStats[][] pupSpawnCombos =  {new EnemyStats[] {Resources.Load<EnemyStats>(explosiveBat), Resources.Load<EnemyStats>(chargedBat)},
+    //                                                         new EnemyStats[] {Resources.Load<EnemyStats>(armoredBat), Resources.Load<EnemyStats>(giantBat)},
+    //                                                         new EnemyStats[] {Resources.Load<EnemyStats>(spawnerBat), Resources.Load<EnemyStats>(spawnerBat)},
+    //                                                         new EnemyStats[] {Resources.Load<EnemyStats>(explosiveBat), Resources.Load<EnemyStats>(explosiveBat)},
+    //                                                         new EnemyStats[] {Resources.Load<EnemyStats>(chargedBat), Resources.Load<EnemyStats>(giantBat)}};
 
     public readonly static EnemyStats[] wormSplitSpawnCombo = new EnemyStats[] { Resources.Load<EnemyStats>(wormMinionAcid), Resources.Load<EnemyStats>(wormMinionAcid) };
 
@@ -81,16 +81,11 @@ public static class EnemyStatsList
 
         if (!enemyStatsDict.ContainsKey(key))
         {
-            Debug.LogError("No Enemy at key: " + key);
+            Debug.LogError("No Enemy at key: (" + key + ")");
             return null;
         }
 
         return enemyStatsDict[key];
-    }
-
-    static EnemyStatsList()
-    {
-
     }
 
     [RuntimeInitializeOnLoadMethod]
@@ -148,22 +143,32 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                              TraitList.chaotic
                                                                             }));
         #endregion
+
         #region Screecher
         enemyStatsDict.Add(MonsterNameList.screecher, new EnemyStats(MonsterNameList.screecher,
                                                                                       twentyArmor,
-                                                                                            35,
-  new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.flurryKey) as Ability),
+                                                                                            45,
+  new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.screechKey) as Ability),
                                                                     new Trait[] { TraitList.master,
-                                                                                  TraitList.territorial
+                                                                                  TraitList.chaotic
                                                                                 }));
         #endregion
         #region Armored Bat
         enemyStatsDict.Add(MonsterNameList.armoredBat, new EnemyStats(MonsterNameList.armoredBat,
                                                                                       thirtyArmor,
-                                                                                            35,
+                                                                                            45,
   new ChargeUpAbility(TraitList.shielded, AbilityList.getAbility(null, AbilityList.flurryKey) as Ability),
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.territorial
+                                                                                }));
+        #endregion
+        #region Den Mother
+        enemyStatsDict.Add(MonsterNameList.denMother, new EnemyStats(MonsterNameList.denMother,
+                                                                                      twentyArmor,
+                                                                                            35,
+                                            AbilityList.getAbility(null, AbilityList.spawnPupsKey),
+                                                                    new Trait[] { TraitList.master,
+                                                                                  TraitList.empty
                                                                                 }));
         #endregion
     }

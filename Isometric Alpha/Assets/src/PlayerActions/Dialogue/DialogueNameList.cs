@@ -37,6 +37,8 @@ public static class DialogueNameList
     public const string awkwardRubblePath = gatesPath + NPCNameList.awkwardRubble;
     public const string ancientPortcullisPath = gatesPath + NPCNameList.ancientPortcullis;
     public const string liftableGatePath = gatesPath + NPCNameList.liftableGate;
+    public const string cellDoorPath = gatesPath + NPCNameList.cellDoor;
+    public const string unstablePillarPath = gatesPath + NPCNameList.unstablePillar;
     #endregion
 
     #region Vaultable Objects
@@ -137,6 +139,17 @@ public static class DialogueNameList
     public const string controlPanelPath = mineLvl2FolderPath + NPCNameList.controlPanel;
     public const string suspiciousWallPath = mineLvl2FolderPath + NPCNameList.suspiciousWall;
     public const string mineArmoryGatePath = mineLvl2FolderPath + NPCNameList.mineArmoryGate;
+
+    #endregion
+
+    #region MineLvl_3
+    public const string mineLvl3FolderPath = mineFolderPath + "MineLvl_3/";
+
+    public const string ml3GuardCampLiftableGatePath = mineLvl3FolderPath + NPCNameList.guard + " " + NPCNameList.liftableGate;
+    public const string rekaML3CampPath = mineLvl3FolderPath + "GuardReka";
+    public const string ml3GuardBarricadePath = mineLvl3FolderPath + "GuardsCrate";
+    public const string pazmanML3CampPath = mineLvl3FolderPath + "GuardPazman";
+    public const string viragML3CampPath = mineLvl3FolderPath +  "GuardVirag";
 
     #endregion
 

@@ -11,13 +11,15 @@ public interface IStoryVariableSource
 public class VaultableObject : IStoryVariableSource
 {
     public const bool isPlural = true;
+    public const bool notPlural = false;
     public const string barrelName = "barrels";
     public const string rockName = "rocks";
-    public const int oneTile = 1;
-    public const int twoTiles = 2;
+    public const string gapName = "gap";
 
-    public readonly static VaultableObject vaultableBarrelsOneTile = new VaultableObject(VaultableObject.oneTile, VaultableObject.isPlural, VaultableObject.barrelName);
-    public readonly static VaultableObject vaultableBarrelsTwoTiles = new VaultableObject(VaultableObject.twoTiles, VaultableObject.isPlural, VaultableObject.barrelName);
+    public readonly static VaultableObject vaultableBarrelsOneTile = new VaultableObject(Constants.sizeOne, isPlural, barrelName);
+    public readonly static VaultableObject vaultableBarrelsTwoTiles = new VaultableObject(Constants.sizeTwo, isPlural, barrelName);
+
+    public readonly static VaultableObject vaultableGap = new VaultableObject(Constants.sizeThree, notPlural, gapName);
 
     public int size;
 
@@ -41,7 +43,7 @@ public class VaultableObject : IStoryVariableSource
 
         if (story.variablesState[nameof(plural)] != null)
         {
-            story.variablesState[nameof(plural)] = size;
+            story.variablesState[nameof(plural)] = plural;
         }
 
         if (story.variablesState[nameof(objectName)] != null)

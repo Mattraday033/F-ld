@@ -200,6 +200,11 @@ public class SaveHandler : ScreenManager, IEscapable
 
 	public static SaveBlueprint save(string saveName)
 	{
+		return save(saveName, false);
+	}
+
+	public static SaveBlueprint save(string saveName, bool skipFileCreation)
+	{
 		int saveNumber;
 
 		if (saveGameList.Count == 0)
@@ -215,7 +220,10 @@ public class SaveHandler : ScreenManager, IEscapable
 
 		SaveBlueprint blueprint = SaveBlueprint.build(saveName, saveNumber);
 
-		createSave(blueprint);
+        if(!skipFileCreation)
+        {
+            createSave(blueprint);
+        }
 
 		return blueprint;
 	}

@@ -4,6 +4,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ink.Runtime;
 
+public class StoryStatRequirementVariableSource : IStoryVariableSource
+{
+    private List<KeyValuePair<string, int>> statRequirements = new List<KeyValuePair<string, int>>();
+
+    public StoryStatRequirementVariableSource(string variableName, int statLevel)
+    {
+        statRequirements.Add(new KeyValuePair<string, int>(variableName, statLevel));
+    }
+
+    public StoryStatRequirementVariableSource(List<KeyValuePair<string, int>> statRequirements)
+    {
+        this.statRequirements = statRequirements;
+    }
+
+    public Story addVariables(Story story)
+    {
+        foreach(KeyValuePair<string, int> statRequirement in statRequirements)
+        {
+            if(story.variablesState[statRequirement.Key] != null)
+            {
+                story.variablesState[statRequirement.Key] = statRequirement.Value;
+            }
+        }
+
+        return story;
+    }
+}
+
 [System.Serializable]
 public class Dialogue : ICloneable
 {
@@ -43,6 +71,16 @@ public class Dialogue : ICloneable
         this.inkJSON = inkJSON;
     }
 
+    public Dialogue(string[] names, TextAsset inkJSON, IStoryVariableSource variableSource)
+    {
+        this.names = createNameArray(names);
+
+        this.cameraFoci = new GameObject[this.names.Length];
+        this.inkJSON = inkJSON;
+
+        variableSources.Add(variableSource);
+    }
+
 	public Dialogue(string[] names, GameObject[] cameraFoci, TextAsset inkJSON, TextAsset[] secondaryInkJSONs)
 	{
         this.names = createNameArray(names);
@@ -51,6 +89,17 @@ public class Dialogue : ICloneable
 		this.inkJSON = inkJSON;
 		this.secondaryInkJSONs = secondaryInkJSONs;
 	}
+
+	public Dialogue(string[] names, TextAsset inkJSON, TextAsset[] secondaryInkJSONs)
+	{
+        this.names = createNameArray(names);
+
+        this.cameraFoci = new GameObject[this.names.Length];
+
+		this.inkJSON = inkJSON;
+		this.secondaryInkJSONs = secondaryInkJSONs;
+	}
+
 
 	public Dialogue(string[] names, TextAsset inkJSON, NPCCombatInfo npcCombatInfo)
 	{
@@ -85,7 +134,7 @@ public class Dialogue : ICloneable
 
     public Dialogue clone()
     {
-        Dialogue clone = new Dialogue(new string[names.Length], new GameObject[cameraFoci.Length], inkJSON);
+        Dialogue clone = new Dialogue(new string[names.Length], new GameObject[cameraFoci.Length], inkJSON, variableSources);
 
         for (int index = 0; index < clone.names.Length; index++)
         {
@@ -98,11 +147,13 @@ public class Dialogue : ICloneable
     }
     
     //Clone Constructor
-    public Dialogue(string[] names, GameObject[] cameraFoci, TextAsset inkJSON)
+    public Dialogue(string[] names, GameObject[] cameraFoci, TextAsset inkJSON, List<IStoryVariableSource> variableSources)
     {
         this.names = names;
 
         this.cameraFoci = cameraFoci;
         this.inkJSON = inkJSON;
+
+        this.variableSources = variableSources;
     }
 }

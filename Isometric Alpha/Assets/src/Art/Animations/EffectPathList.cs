@@ -26,6 +26,9 @@ public static class EffectPathList
         //Positive Effects
         effectByActionNameDict.Add(ChargeUpAbility.chargingUpName, PrefabNames.positiveEffectFolderPath);
 
+        //Negative Effects
+        effectByActionNameDict.Add(AbilityList.screechKey, PrefabNames.negativeEffectFolderPath);
+
         //Damaging Effects
         effectByActionNameDict.Add(AbilityList.batClawName, PrefabNames.damagingEffectFolderPath);
         // effectByActionNameDict.Add(AbilityList.flurryKey, PrefabNames.damagingEffectFolderPath);

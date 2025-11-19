@@ -157,7 +157,7 @@ public class MovementManager : MonoBehaviour
     {
         Vector3 worldPosition = AreaManager.getMasterGrid().CellToWorld(cellCoords);
 
-        return Physics2D.OverlapCircle(worldPosition, .05f, layerMask);
+        return Physics2D.OverlapCircle(worldPosition, Constants.detectionSize, layerMask);
     }
 
     public static Vector3 getColliderInCellPosition(Vector3Int cellCoords)
@@ -265,6 +265,11 @@ public class MovementManager : MonoBehaviour
 
             foreach (MovementTracker previousMovement in previousMovements)
             {
+                if(previousMovement.isDefeated())
+                {
+                    continue;
+                }
+
                 Vector3Int previousMonstersCellCoords = MovementTracker.getCurrentCell(previousMovement);
                 Vector3Int previousMonstersEndingCellCoords = MovementTracker.getEndingCell(previousMovement);
 

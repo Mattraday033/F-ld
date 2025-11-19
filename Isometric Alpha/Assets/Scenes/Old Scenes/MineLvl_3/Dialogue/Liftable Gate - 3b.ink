@@ -51,8 +51,6 @@ setToTrue(mineLvl3SpeakingFromBrokenGate)
 
 fadeToBlack(true, false)
 
-deactivate(1)
-
 openGate()
 
 fadeBackIn(60)

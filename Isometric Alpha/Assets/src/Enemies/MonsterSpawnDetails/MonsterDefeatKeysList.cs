@@ -20,6 +20,11 @@ public static class MonsterDefeatKeysList
 
     public static bool monsterIsDefeated(int index)
     {
+        if(State.debugStopMonsterSpawning)
+        {
+            return true;
+        }
+
         return monsterIsDefeated(generateMonsterDefeatKey(index));
     }
 

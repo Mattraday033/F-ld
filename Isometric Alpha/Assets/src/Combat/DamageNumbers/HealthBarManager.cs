@@ -63,7 +63,7 @@ public class HealthBarManager : MonoBehaviour
 	public void resetPreviewHealth()
 	{
 		previewSlider.value = emptySlider.value;
-		previewImage.color = ColorList.previewSliderOrange;
+		previewImage.color = Color.yellow;
 
 		if (previewSlider.value > 0 && previewImage.gameObject != null)
 		{
@@ -89,7 +89,7 @@ public class HealthBarManager : MonoBehaviour
 		} else
 		{	
 			previewSlider.value += incomingDamage;
-			previewImage.color = ColorList.previewSliderOrange;
+			previewImage.color = Color.yellow;
 		}
 		
 		if(previewSlider.value > 0 && previewImage.gameObject != null)

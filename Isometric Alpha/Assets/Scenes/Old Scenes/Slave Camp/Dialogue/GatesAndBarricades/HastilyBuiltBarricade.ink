@@ -41,9 +41,11 @@ This barricade is poorly put together, and could be destroyed with enough effort
 
 === 1b ===
 
-deactivate({barricadeIndex})
+fadeToBlack(true, false)
 
 openGate()
+
+fadeBackIn(60)
 
 You tear apart the barricade with your bare hands.
     

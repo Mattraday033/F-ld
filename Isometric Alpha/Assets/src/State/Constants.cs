@@ -10,6 +10,8 @@ public static class Constants
     public const int sizeThree = 3;
     public const int sizeFour = 4;
     public const int sizeFive = 5;
+    public const int sizeSix = 6;
+    public const int sizeSeven = 7;
 
 
     public const int indexZero = 0;
@@ -25,6 +27,8 @@ public static class Constants
     public const int indexTen = 10;
     public const int indexEleven = 11;
     public const int indexTwelve = 12;
+
+	public const float detectionSize = .075f;
 
     public const int statLevelOne = 1;
     public const int statLevelTwo = 2;

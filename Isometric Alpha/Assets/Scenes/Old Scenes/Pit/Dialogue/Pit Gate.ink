@@ -38,11 +38,13 @@ This locked metal gate bars your way.
         ->Close
 === 1b ===
 
+fadeToBlack(true, false)
+
 setToTrue(unlockedThePitGate)
 
-deactivate(1)
-
 openGate()
+
+fadeBackIn(60)
 
 You unlock the gate.
     

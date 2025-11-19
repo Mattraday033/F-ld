@@ -89,6 +89,11 @@ public abstract class MovementTracker : MonoBehaviour
         endingPosition = startingPosition;
     }
 
+    public virtual bool isDefeated()
+    {
+        return false;
+    }
+
     public static Vector3Int getCurrentCell(MovementTracker movement)
     {
         return AreaManager.getMasterGrid().WorldToCell(movement.getWorldPosition());

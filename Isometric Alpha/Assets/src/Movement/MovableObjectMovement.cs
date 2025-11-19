@@ -39,6 +39,16 @@ public class MovableObjectMovement : EnemyMovement
         _EndingPosition = AreaManager.getMasterGrid().GetCellCenterWorld(MovementTracker.getCurrentCell(this) + _DirectionMod);
     }
 
+    public override bool isDefeated()
+    {
+        return false;
+    }
+
+	public override bool validTarget(SkillType skillType)
+	{
+        return false;
+	}
+
     public override void prepCombat()
     {
         //Empty on purpose

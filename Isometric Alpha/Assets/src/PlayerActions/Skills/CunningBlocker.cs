@@ -7,14 +7,10 @@ public class CunningBlocker : CunningObject
     public List<Obstacle> blockers = new List<Obstacle>();
     public List<Vector3Int> blockerCoords = new List<Vector3Int>();
 
-    public void build(Facing startFacing, Facing endFacing, CunningObjectSpriteCategory type, Obstacle blocker, Vector3Int blockerCoords)
+    public virtual void addBlocker(Obstacle blocker, Vector3Int blockerCoords)
     {
-        base.build(startFacing, endFacing, type);
-
         blockers.Add(blocker);
         this.blockerCoords.Add(blockerCoords);
-
-        setToCurrentSprite();
     }
 
     public override bool validTarget(SkillType skillType)
@@ -67,7 +63,7 @@ public class CunningBlocker : CunningObject
 
         if(!activated)
         {
-            killEverythingInArea();
+            killEverythingInArea(blockerCoords);
         }
 
         if (trackChangeInStateManager)
@@ -76,7 +72,7 @@ public class CunningBlocker : CunningObject
         }
     }
 
-    private void killEverythingInArea()
+    public static void killEverythingInArea(List<Vector3Int> blockerCoords)
     {
         foreach(Vector3Int coord in blockerCoords)
         {
@@ -99,7 +95,7 @@ public class CunningBlocker : CunningObject
         }
     }
 
-    public void setBlockerStatus()
+    public virtual void setBlockerStatus()
     {
         foreach (Obstacle blocker in blockers)
         {

@@ -20,7 +20,6 @@ public class CharacterScreen : ScreenWithGeneratedPartyTabs, ICounter
 
     public Image characterSprite;
 
-    public DescriptionPanelSlot local;
     public static DescriptionPanelSlot upgradeDescriptionPanelSlot;
 
     public override void Awake()
@@ -105,6 +104,8 @@ public class CharacterScreen : ScreenWithGeneratedPartyTabs, ICounter
         {
             unityEvent.AddListener(updateCounter);
         }
+
+
     }
     public void removeListeners()
     {
@@ -126,6 +127,7 @@ public class CharacterScreen : ScreenWithGeneratedPartyTabs, ICounter
     {
         List<UnityEvent> listOfEvents = new List<UnityEvent>();
 
+        // listOfEvents.Add(PartySpriteGridRow.OnPartyMemberSelected); listening to PartyGridRow.OnPartyMemberSelected creates infinite loop
         listOfEvents.Add(CombatActionArray.OnCombatActionArrayChange);
         listOfEvents.Add(Inventory.OnInventoryChange);
         listOfEvents.Add(EquippedItems.OnEquipmentChange);

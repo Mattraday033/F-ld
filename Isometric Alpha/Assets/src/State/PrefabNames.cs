@@ -238,6 +238,8 @@ public static class PrefabNames
 
     public const string cratesAndBarrelsFolder = spriteFolder + "CratesAndBarrels/";
     public const string vaultableBarrels = cratesAndBarrelsFolder + "VaultableBarrels";
+    public const string squareCratesSmall = cratesAndBarrelsFolder + "Square Crates Small";
+    public const string movableCrate = cratesAndBarrelsFolder + "Crate";
 
     public const string charactersFolder = spriteFolder + "Characters/";
     public const string humansFolder = charactersFolder + "Humans/";
@@ -265,23 +267,25 @@ public static class PrefabNames
     public const string shelfFrontFull = itemContainersFolder + "Shelf_Front_Full";
     public const string shelfFrontEmpty = itemContainersFolder + "Shelf_Front_Empty";
 
+    public const string waterFolder = spriteFolder + "Water/";
+    public const string water = waterFolder + "Water";
+
     public const string cunningObjectsFolder = spriteFolder + "CunningObjects/";
     public const string statueBack = cunningObjectsFolder + "Statue Back";
     public const string statueFront = cunningObjectsFolder + "Statue Front";
-
-    public const string cratesFolder = spriteFolder + "Crates/";
-    public const string squareCratesSmall = cratesFolder + "Square Crates Small";
-    public const string movableCrate = cratesFolder + "Crate";
 
     public const string secretDoorsFolder = spriteFolder + "SecretDoors/";
     public const string mineLvl2WallSecretDoor = secretDoorsFolder + "MineLvl_2 Wall";
 
     public const string miscFolder = spriteFolder + "Misc/";
     public const string controlPanel = miscFolder + NPCNameList.controlPanel;
+    public const string unstablePillar = miscFolder + NPCNameList.unstablePillar;
 
     public const string tilesFolder = spriteFolder + "Tiles/";
     public const string halfWallsFolder = tilesFolder + "Half Walls/";
     public const string stoneHalfWallsFolder = halfWallsFolder + "Stone/";
+    public const string lavaHalfWallsFolder = halfWallsFolder + "Lava/";
+    public const string lavaVaultableGap = lavaHalfWallsFolder + "Lava Vaultable Gap";
     public const string shackWallHalf = stoneHalfWallsFolder + "Shack Wall Half";
     public const string brickHalfWallsFolder = halfWallsFolder + "Brick/";
     public const string mineLvl2WallCunningObstacle = brickHalfWallsFolder + "Dark_Brick_Cunning_Obstacle";
@@ -294,6 +298,7 @@ public static class PrefabNames
     public const string northWestDescendingRubble = rubbleFolder + "NW Descending Rubble";
     public const string southWestDescendingRubble = rubbleFolder + "SW Descending Rubble";
     public const string blockRubble = rubbleFolder + "Block Rubble";
+    public const string lowRubble = rubbleFolder + "Low Rubble";
     public const string vaultableRocks = rubbleFolder + "Vaultable Rocks";
 
     public const string doorsFolder =  spriteFolder + "Doors/";

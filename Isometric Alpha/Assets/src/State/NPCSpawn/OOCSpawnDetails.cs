@@ -13,7 +13,9 @@ public abstract class OOCSpawnDetails
     public string npcName = "";
     public Vector3Int cellCoords;
     protected string spriteName;
+    protected Color tint = Color.white;
     private bool flipX = false;
+    protected SortingLayerInfo sortingLayerInfo;
 
     public OOCSpawnDetails()
     {
@@ -39,6 +41,14 @@ public abstract class OOCSpawnDetails
         this.npcName = npcName;
         this.cellCoords = cellCoords;
         this.spriteName = spriteName;
+    }
+
+    public OOCSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo)
+    {
+        this.npcName = npcName;
+        this.cellCoords = cellCoords;
+        this.spriteName = spriteName;
+        this.sortingLayerInfo = sortingLayerInfo;
     }
 
     public OOCSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, bool flipX)
@@ -104,6 +114,13 @@ public abstract class OOCSpawnDetails
         SpriteRenderer spriteRenderer = interactable.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = Helpers.loadSpriteFromResources(getSpriteName());
         spriteRenderer.flipX = flipX;
+        
+        spriteRenderer.color = tint;
+
+        if(sortingLayerInfo != null)
+        {
+            sortingLayerInfo.setSpriteRendererSortingLayer(spriteRenderer);
+        }
     }
 
     public static void addTutorialTargetComponent(GameObject gameObject, string tutorialTargetHash)
@@ -310,19 +327,27 @@ public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
 
         cunningBlocker.index = index;
 
-        foreach (ObstacleSpawnDetails details in allBlockerSpawnDetails)
-        {
-            GameObject blocker = SpawnInfoManager.spawnInteractable(details);
+        cunningBlocker.build(startFacing,endFacing, category);
 
-            cunningBlocker.build(startFacing, endFacing, category, blocker.GetComponent<Obstacle>(), details.cellCoords);
-            cunningBlocker.setBlockerStatus();
-            SpawnInfoManager.addGameObject(blocker);
-        }
+        buildBlockers(cunningBlocker, allBlockerSpawnDetails);
 
         if (hasTutorialTargetHash())
         {
             addTutorialTargetComponent(cunningBlocker.gameObject, cunningBlocker.spriteRenderer, tutorialTargetHash);
         }
+    }
+
+    protected static void buildBlockers(CunningBlocker cunningBlocker, List<ObstacleSpawnDetails> blockerSpawnDetails)
+    {
+
+        foreach (ObstacleSpawnDetails details in blockerSpawnDetails)
+        {
+            GameObject blocker = SpawnInfoManager.spawnInteractable(details);
+            cunningBlocker.addBlocker(blocker.GetComponent<Obstacle>(), details.cellCoords);
+            SpawnInfoManager.addGameObject(blocker);
+        }
+
+        cunningBlocker.setBlockerStatus();
     }
 }
 
@@ -351,14 +376,43 @@ public class LinkedCunningBlockerSpawnDetails : CunningBlockerSpawnDetails
     }
 }
 
+public class DoubleCunningBlockerSpawnDetails : CunningBlockerSpawnDetails
+{
+
+    private List<ObstacleSpawnDetails> deactivatedBlockerSpawnDetails;
+
+    public DoubleCunningBlockerSpawnDetails(int index, Vector3Int cellCoords, Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category, List<ObstacleSpawnDetails> activatedBlockerSpawnDetails, List<ObstacleSpawnDetails> deactivatedBlockerSpawnDetails) :
+    base(index, cellCoords, startFacing, endFacing, category, activatedBlockerSpawnDetails)
+    {
+        this.deactivatedBlockerSpawnDetails = deactivatedBlockerSpawnDetails;
+    }
+
+    public override void spawnActions(CunningObject cunningObject)
+    {
+        GameObject gameObject = cunningObject.gameObject;
+
+        DoubleCunningBlocker doubleBlocker = gameObject.AddComponent<DoubleCunningBlocker>();
+        doubleBlocker.spriteRenderer = cunningObject.spriteRenderer;
+
+        GameObject.Destroy(cunningObject);
+
+        base.spawnActions(doubleBlocker);
+
+        buildBlockers(doubleBlocker, deactivatedBlockerSpawnDetails);
+    }
+}
+
 public class ObstacleSpawnDetails : OOCSpawnDetails
 {
-    protected Color tint;
 
     public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName) :
     base(npcName, cellCoords, spriteName)
     {
-        this.tint = Color.white;
+    }
+
+    public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo) :
+    base(npcName, cellCoords, spriteName, sortingLayerInfo)
+    {
     }
 
     public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, Color tint) :
@@ -399,6 +453,81 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
 
         spriteRenderer.sprite = Helpers.loadSpriteFromResources(getSpriteName());
         spriteRenderer.color = tint;
+
+        if(sortingLayerInfo != null)
+        {
+            sortingLayerInfo.setSpriteRendererSortingLayer(spriteRenderer);
+        }
+    }
+
+}
+
+public class ObstacleWithSecretDoorFlagSpawnDetails : ObstacleSpawnDetails
+{
+
+    private string secretDoorFlag;
+
+    public ObstacleWithSecretDoorFlagSpawnDetails(Vector3Int cellCoords, string secretDoorFlag) :
+    base(NPCNameList.unseenBarrier, cellCoords, null) 
+    {
+        this.secretDoorFlag = secretDoorFlag;
+    }
+
+    public ObstacleWithSecretDoorFlagSpawnDetails(string npcName, Vector3Int cellCoords, string secretDoorFlag) :
+    base(npcName, cellCoords, null)
+    {
+        this.secretDoorFlag = secretDoorFlag;
+    }
+
+    public ObstacleWithSecretDoorFlagSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, string secretDoorFlag) :
+    base(npcName, cellCoords, spriteName)
+    {
+        this.secretDoorFlag = secretDoorFlag;
+    }
+
+    public ObstacleWithSecretDoorFlagSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo, string secretDoorFlag) :
+    base(npcName, cellCoords, spriteName, sortingLayerInfo)
+    {
+        this.secretDoorFlag = secretDoorFlag;
+    }
+
+    public override string getPrefabName()
+    {
+        return PrefabNames.oocObstacle;
+    }
+
+    public override Transform getParent()
+    {
+        return AreaManager.getNPCParent();
+    }
+
+    public override void spawnActions(GameObject interactable)
+    {
+        GameObject.Destroy(interactable.GetComponent<Obstacle>());
+
+        ObstacleWithSecretDoorFlag obstacle = interactable.AddComponent<ObstacleWithSecretDoorFlag>();
+
+        obstacle.setObstacleName(npcName);
+        obstacle.secretDoorFlag = secretDoorFlag;
+
+        spawnActions(interactable.GetComponent<SpriteRenderer>());
+    }
+
+    public override void spawnActions(SpriteRenderer spriteRenderer)
+    {
+        if (spriteRenderer == null)
+        {
+            return;
+        }
+
+        if(getSpriteName() == null)
+        {
+            spriteRenderer.sprite = null;
+        }
+        else
+        {
+            base.spawnActions(spriteRenderer);
+        }
     }
 
 }
@@ -406,13 +535,13 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
 public class SpikeSpawnDetails : ObstacleSpawnDetails
 {
 
-    public SpikeSpawnDetails(string npcName, Vector3Int cellCoords) :
-    base(npcName, cellCoords, PrefabNames.spikesDown, Color.white)
+    public SpikeSpawnDetails(Vector3Int cellCoords) :
+    base(NPCNameList.spike, cellCoords, PrefabNames.spikesDown, Color.white)
     {
     }
 
-    public SpikeSpawnDetails(string npcName, Vector3Int cellCoords, Color tint) :
-    base(npcName, cellCoords, PrefabNames.spikesDown, tint)
+    public SpikeSpawnDetails(Vector3Int cellCoords, Color tint) :
+    base(NPCNameList.spike, cellCoords, PrefabNames.spikesDown, tint)
     {
         
     }
@@ -450,25 +579,42 @@ public class ButtonSpawnDetails : OOCSpawnDetails
 {
 
     private int index;
+    private int weight;
 
-    public ButtonSpawnDetails(string npcName, Vector3Int cellCoords) :
-    base(npcName, cellCoords)
+    public ButtonSpawnDetails(Vector3Int cellCoords) :
+    base(NPCNameList.floorButton, cellCoords)
     {
         this.index = 0;
+        this.weight = 1;
     }
 
-    public ButtonSpawnDetails(string npcName, Vector3Int cellCoords, int index) :
-    base(npcName, cellCoords)
+    public ButtonSpawnDetails(Vector3Int cellCoords, int index) :
+    base(NPCNameList.floorButton, cellCoords)
     {
         this.index = index;
+        this.weight = 1;
     }
 
+    public ButtonSpawnDetails(int weight, Vector3Int cellCoords) :
+    base(NPCNameList.floorButton, cellCoords)
+    {
+        this.index = 0;
+        this.weight = weight;
+    }
 
-    public ButtonSpawnDetails(string npcName, Vector3Int cellCoords, string tutorialTargetHash) :
-    base(npcName, cellCoords)
+    public ButtonSpawnDetails(int weight, Vector3Int cellCoords, int index) :
+    base(NPCNameList.floorButton, cellCoords)
+    {
+        this.index = index;
+        this.weight = weight;
+    }
+
+    public ButtonSpawnDetails(Vector3Int cellCoords, string tutorialTargetHash) :
+    base(NPCNameList.floorButton, cellCoords)
     {
         this.tutorialTargetHash = tutorialTargetHash;
         this.index = 0;
+        this.weight = 1;
     }
 
     public override string getPrefabName()
@@ -492,6 +638,7 @@ public class ButtonSpawnDetails : OOCSpawnDetails
 
         FloorButton floorButton = button.GetComponent<FloorButton>();
         floorButton.index = index;
+        floorButton.weight = weight;
     }
 
 }
@@ -519,6 +666,13 @@ public class NPCSpawnDetails : OffSetSpawnDetails
     {
         this.activated = true;
         this.dialogue = getDialogue(areaName);
+    }
+
+    public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo) :
+    base(npcName, cellCoords, spriteName, sortingLayerInfo, Constants.onTableHeightOffset)
+    {
+        this.activated = true;
+        this.dialogue = getDialogue(npcName);
     }
 
     public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName) :
@@ -649,7 +803,6 @@ public class NPCSpawnDetails : OffSetSpawnDetails
 
 public class GateSpawnDetails : NPCSpawnDetails
 {
-    protected Sprite sprite;
     private bool skewed;
 
     public GateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed) :
@@ -715,6 +868,40 @@ public class TemporaryGateSpawnDetails : GateSpawnDetails
     public override Gate addGate(GameObject gateGameObject)
     {
         return gateGameObject.AddComponent<TemporaryGate>();
+    }
+
+}
+
+public class GateWithHiddenTerrainSpawnDetails : GateSpawnDetails
+{
+    private string hiddenTerrainFlag;
+
+    public GateWithHiddenTerrainSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed, string hiddenTerrainFlag, Color tint) :
+    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, skewed)
+    {
+        this.hiddenTerrainFlag = hiddenTerrainFlag;
+        this.tint = tint;
+    }
+
+    public override Dialogue getDialogue(string areaName)
+    {
+        return DialogueList.getDialogue(DialogueList.scrubNameOfEndNumbers(npcName), areaName);
+    }
+
+    public override Gate addGate(GameObject gateGameObject)
+    {
+        GateWithHiddenTerrain gate = gateGameObject.AddComponent<GateWithHiddenTerrain>();
+        gate.hiddenTerrainFlag = hiddenTerrainFlag;
+
+        return gate;
+    }
+
+    public override void spawnActions(DialogueTrigger dialogueTrigger)
+    {
+        base.spawnActions(dialogueTrigger);
+
+
+
     }
 
 }
@@ -810,21 +997,27 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
     public VaultableObject vaultableObject;
 
     public VaultableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableObject vaultableObject) :
-    base(npcName, cellCoords)
+    base(npcName, cellCoords, npcName)
+    {
+        this.vaultableObject = vaultableObject;
+    }
+
+    public VaultableObjectSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo, VaultableObject vaultableObject) :
+    base(npcName, cellCoords, spriteName, sortingLayerInfo)
     {
         this.vaultableObject = vaultableObject;
     }
 
     public VaultableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableObject vaultableObject, string tutorialTargetHash) :
-    base(npcName, cellCoords)
+    base(npcName, cellCoords, npcName)
     {
         this.vaultableObject = vaultableObject;
         this.tutorialTargetHash = tutorialTargetHash;
     }
 
-    public override Dialogue getDialogue(string areaName)
+    public override Dialogue getDialogue(string npcName)
     {
-        return DialogueList.getVaultableObjectDialogue();
+        return DialogueList.getVaultableObjectDialogue(npcName);
     }
 
     public override bool interactable()
@@ -834,6 +1027,11 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
 
     public override string getSpriteName()
     {
+        if(spriteName != null)
+        {
+            return spriteName;
+        }
+
         switch (vaultableObject.objectName)
         {
             case VaultableObject.barrelName:
@@ -967,6 +1165,12 @@ public class OffSetSpawnDetails : OOCSpawnDetails
 
     }
 
+    public OffSetSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo, float offset) :
+    base(npcName, cellCoords, spriteName, sortingLayerInfo)
+    {
+        this.offset = offset;
+    }
+
     public OffSetSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, bool flipX) :
     base(npcName, cellCoords, spriteName, flipX)
     {
@@ -986,6 +1190,8 @@ public class OffSetSpawnDetails : OOCSpawnDetails
         Vector3 currentPosition = interactable.transform.position;
 
         currentPosition.y -= offset;
+        Collider2D collider2D = interactable.GetComponent<Collider2D>();
+        collider2D.offset += new Vector2(0f, offset);
 
         interactable.transform.position = currentPosition;
     }

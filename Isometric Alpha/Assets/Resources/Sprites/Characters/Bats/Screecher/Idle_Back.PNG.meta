@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fa9826243097e1d49943a5724af41e98
+guid: baa6aace057eee041959690c2847b0f1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,9 +48,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 350
+  spritePixelsToUnits: 385
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Armored_Bat_Idle_Back_0
+      name: Idle_Back_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c42fc61ceae05d42b7759d93e758a0f
-      internalID: 1262637933
+      spriteID: aaf0e1970f4d08a4b801243b671b9f2d
+      internalID: 649378779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Idle_Back_1
+      name: Idle_Back_1
       rect:
         serializedVersion: 2
         x: 512
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d7b8fa79f379274aa321fc5cb3cf791
-      internalID: 28295111
+      spriteID: 12fa9b0b7a96dce4d98bceed84748687
+      internalID: -1106774821
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Idle_Back_2
+      name: Idle_Back_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab6455165d9d07e4d90b4e2f0b2ce167
-      internalID: 1286665630
+      spriteID: 1390ff2d07b243a4e829420827d164ce
+      internalID: 581060105
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Idle_Back_3
+      name: Idle_Back_3
       rect:
         serializedVersion: 2
         x: 1536
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dae427ae4fa581744828023571661e56
-      internalID: 1159946350
+      spriteID: 81f97b204ba74624b88e3e2fd152da76
+      internalID: 2092575798
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Idle_Back_4
+      name: Idle_Back_4
       rect:
         serializedVersion: 2
         x: 2048
@@ -195,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7acf4cc89ef337345b4c98021902ee12
-      internalID: -1467883582
+      spriteID: b0e0c0e8c4c2a48499a2bb32656c143a
+      internalID: 1477855536
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Idle_Back_5
+      name: Idle_Back_5
       rect:
         serializedVersion: 2
         x: 2560
@@ -216,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 381cdb600486df445add4eceb57ca3f8
-      internalID: -697933859
+      spriteID: 73748768da653994f84ddd99d084f042
+      internalID: 1504659744
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Idle_Back_6
+      name: Idle_Back_6
       rect:
         serializedVersion: 2
         x: 3072
@@ -237,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88c649f3c5e07fe408f7e7869bf08eca
-      internalID: -2114975251
+      spriteID: e8f8cf1567e33bd46a48a832d28a6941
+      internalID: 847331459
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Idle_Back_7
+      name: Idle_Back_7
       rect:
         serializedVersion: 2
         x: 3584
@@ -258,14 +258,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4681bf094da09d45b40a68c807c262e
-      internalID: 899802204
+      spriteID: 442cbcea586514444922615c1a8e882b
+      internalID: -276169932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Idle_Back_8
+      name: Idle_Back_8
       rect:
         serializedVersion: 2
         x: 4096
@@ -279,14 +279,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb5ae4dafec1a1a45a53e51c49d11732
-      internalID: 724564453
+      spriteID: b9dd74fda8f5e36469b51d3f7d3d2c18
+      internalID: -776538036
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Idle_Back_9
+      name: Idle_Back_9
       rect:
         serializedVersion: 2
         x: 4608
@@ -300,8 +300,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ad92ea56db77a4488c0ca7d9ccf61a8
-      internalID: 1475824729
+      spriteID: 070fc0493e630594b892ad2666916903
+      internalID: -1884851606
       vertices: []
       indices: 
       edges: []
@@ -317,16 +317,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Armored_Bat_Idle_Back_0: 1262637933
-      Armored_Bat_Idle_Back_1: 28295111
-      Armored_Bat_Idle_Back_2: 1286665630
-      Armored_Bat_Idle_Back_3: 1159946350
-      Armored_Bat_Idle_Back_4: -1467883582
-      Armored_Bat_Idle_Back_5: -697933859
-      Armored_Bat_Idle_Back_6: -2114975251
-      Armored_Bat_Idle_Back_7: 899802204
-      Armored_Bat_Idle_Back_8: 724564453
-      Armored_Bat_Idle_Back_9: 1475824729
+      Idle_Back_0: 649378779
+      Idle_Back_1: -1106774821
+      Idle_Back_2: 581060105
+      Idle_Back_3: 2092575798
+      Idle_Back_4: 1477855536
+      Idle_Back_5: 1504659744
+      Idle_Back_6: 847331459
+      Idle_Back_7: -276169932
+      Idle_Back_8: -776538036
+      Idle_Back_9: -1884851606
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

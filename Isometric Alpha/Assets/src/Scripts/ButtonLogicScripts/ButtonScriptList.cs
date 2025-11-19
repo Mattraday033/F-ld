@@ -33,6 +33,23 @@ public static class ButtonScriptList
         scriptDict.Add(LocationNameList.slaveShackSix, list);
 
         #endregion
+
+        #region MineLvl_1
+
+        #region MineLvl_1-1b
+
+        list = new List<ButtonLogicScript>();
+
+        list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeTwo, NPCNameList.awkwardRubble));
+
+        scriptDict.Add(LocationNameList.mineLvl1 + LocationNameList.section1b, list);
+
+        #endregion
+
+        #endregion
+
+        #region MineLvl_2
+
         #region MineLvl_2-2b
 
         list = new List<ButtonLogicScript>();
@@ -116,7 +133,44 @@ public static class ButtonScriptList
 
         scriptDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7b, list);
 
-        #endregion          
+        #endregion   
+        #endregion      
+
+        #region MineLvl_3
+
+        #region MineLvl_3-2b
+
+        list = new List<ButtonLogicScript>();
+
+        list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeThree, NPCNameList.ancientPortcullis + 1));
+
+        list.Add(new OpenGateButtonLogicScript(Constants.indexOne, Constants.sizeOne, NPCNameList.ancientPortcullis));
+
+        scriptDict.Add(LocationNameList.mineLvl3 + LocationNameList.section2b, list);
+
+        #endregion
+
+        #region MineLvl_3-4b
+
+        list = new List<ButtonLogicScript>();
+
+        list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeTwo, NPCNameList.ancientPortcullis));
+
+        list.Add(new OpenGateButtonLogicScript(Constants.indexOne, Constants.sizeOne, NPCNameList.ancientPortcullis));
+
+        scriptDict.Add(LocationNameList.mineLvl3 + LocationNameList.section4b, list);
+
+        #endregion
+        #region MineLvl_3-6a
+
+        list = new List<ButtonLogicScript>();
+
+        list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeSeven, NPCNameList.ancientPortcullis));
+
+        scriptDict.Add(LocationNameList.mineLvl3 + LocationNameList.section6a, list);
+
+        #endregion
+        #endregion     
 
     }
 

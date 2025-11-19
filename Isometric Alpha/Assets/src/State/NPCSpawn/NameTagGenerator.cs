@@ -83,7 +83,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
     private string getName()
     {
-        return GetComponent<DialogueTrigger>().dialogue.names[1].Replace(vaultablePrefix,"");
+        return GetComponent<DialogueTrigger>().dialogue.names[1];
     }
 
     private void destroyNameTag()

@@ -26,7 +26,10 @@ public class CanvasScalerSetToResolution : CanvasScaler
             }
 
             m_ReferenceResolution = resolution;
+            Screen.SetResolution((int) resolution.x, (int) resolution.y, true);
         }
+
+
 
         base.Awake();
     }

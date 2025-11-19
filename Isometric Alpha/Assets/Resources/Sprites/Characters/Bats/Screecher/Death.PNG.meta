@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0762bed54f11a724bb8f4a8c67d2314e
+guid: 156e63fd879a67e438a1651b22b7261e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,9 +48,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 350
+  spritePixelsToUnits: 385
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Armored_Bat_Death_0
+      name: Death_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b28ec63d2066e2b47ac882dc78184837
-      internalID: -1352325999
+      spriteID: 6bb4522aa39ca52408d1607e2f220615
+      internalID: -584665898
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Death_1
+      name: Death_1
       rect:
         serializedVersion: 2
         x: 512
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3188f49b6f030745aebf455032e0019
-      internalID: -614316720
+      spriteID: 46d5a54f386cbc242b01bf081021894b
+      internalID: 447411012
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Death_2
+      name: Death_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ed1a34330de8d744b401d566ceceb82
-      internalID: 1315506288
+      spriteID: 480491cbd2447e1419168da643081b73
+      internalID: 1594895600
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Death_3
+      name: Death_3
       rect:
         serializedVersion: 2
         x: 1536
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 038b51ac85a368c438e80e92903a0d2b
-      internalID: 887180422
+      spriteID: 4285f93612cd4f44c855ff6df985c8d0
+      internalID: -1872018362
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Death_4
+      name: Death_4
       rect:
         serializedVersion: 2
         x: 2048
@@ -195,8 +195,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0bd96081663c06d458e24459d4415832
-      internalID: 254069138
+      spriteID: 5c98e188d2783294ab8cc7af00a6adff
+      internalID: -2111760818
       vertices: []
       indices: 
       edges: []
@@ -212,11 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Armored_Bat_Death_0: -1352325999
-      Armored_Bat_Death_1: -614316720
-      Armored_Bat_Death_2: 1315506288
-      Armored_Bat_Death_3: 887180422
-      Armored_Bat_Death_4: 254069138
+      Death_0: -584665898
+      Death_1: 447411012
+      Death_2: 1594895600
+      Death_3: -1872018362
+      Death_4: -2111760818
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

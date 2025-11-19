@@ -73,7 +73,7 @@ public static class SpawnInfoManager
         {
             PartyMemberPlacer.placeAllPartyMembers();
             lastSaveBlueprint = null;
-        } else
+        } else if(TrapAndButtonStateManager.trapKeyCount() <= 0)
         {
             setDefaultTrapStates();
         }
@@ -276,7 +276,7 @@ public static class SpawnInfoManager
 
         if (!spawnParams.canSpawn(key))
         {
-            monsterGameObject.SetActive(false);
+            monsterMovement.setToDefeatedMode();
         } 
 
         details.spawnActions(monsterMovement);

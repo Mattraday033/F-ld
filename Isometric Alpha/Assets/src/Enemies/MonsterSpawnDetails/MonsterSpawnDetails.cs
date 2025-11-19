@@ -76,7 +76,7 @@ public class MonsterSpawnDetails : OOCSpawnDetails
 
     public override void spawnActions(GameObject interactable)
     {
-        // base.spawnActions(interactable); commented out until animations are implemented
+        
     }
 }
 
@@ -90,6 +90,15 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
         this.facing = Facing.Random;
         this.chasesPlayer = false;
         this.spritePath = spritePath;
+    }
+
+    public MovableObjectSpawnDetails(string npcName, Vector3Int cellCoords, string spritePath, string tutorialTargetHash) :
+    base(npcName, cellCoords)
+    {
+        this.facing = Facing.Random;
+        this.chasesPlayer = false;
+        this.spritePath = spritePath;
+        this.tutorialTargetHash = tutorialTargetHash;
     }
 
     public override string getPrefabName()
@@ -109,6 +118,11 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
 
     public override void spawnActions(EnemyMovement enemyMovement)
     {
+        if (hasTutorialTargetHash())
+        {
+            addTutorialTargetComponent(enemyMovement, tutorialTargetHash);
+        }
+
         MovementManager.addMovementTracker(enemyMovement);
 
         enemyMovement.getSpriteRenderer().sprite = Helpers.loadSpriteFromResources(getSpriteName());

@@ -44,9 +44,11 @@ This locked door is made of solid wood reinforced with bronze. It would take age
 
 === 1b ===
 
-deactivate(1)
+fadeToBlack(true, false)
 
 openGate()
+
+fadeBackIn(60)
 
 You insert the key into the lock and unlock the door.
     ->Close

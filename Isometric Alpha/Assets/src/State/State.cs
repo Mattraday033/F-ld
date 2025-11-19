@@ -10,6 +10,7 @@ public static class State
 	public static bool debugStopMonsterSpawning = false;
 	public static bool debugDiscoverAllLocations = false;
 	public static bool debugRetreatAutoSucceed = false;
+	public static bool enableGridDebugger = false;
 
 	public static OOCUIManager oocUIManager;
 

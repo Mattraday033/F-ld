@@ -9,18 +9,8 @@ public class SelectCurrentActor : TutorialSequenceStepScript
     {
         Selector currentSelector = SelectorManager.currentSelector;
 
-        Collider2D collider = Helpers.getCollision(currentSelector.getCollider());
+        AbilityMenuManager currentAbilityManager = CombatGrid.getCombatantAtCoords(currentSelector.getCoords()).getAbilityMenuManager();
 
-        if(collider == null)
-        {
-            return;
-        }
-
-        if (collider.gameObject.tag.Equals(LayerAndTagManager.playerTag) || collider.gameObject.tag.Equals(LayerAndTagManager.npcTag))
-        {
-            AbilityMenuManager currentAbilityManager = collider.gameObject.GetComponent<AbilityMenuManager>();
-
-            currentAbilityManager.enableAbilityButtonCanvas();
-        }
+        currentAbilityManager.enableAbilityButtonCanvas();
     }
 }

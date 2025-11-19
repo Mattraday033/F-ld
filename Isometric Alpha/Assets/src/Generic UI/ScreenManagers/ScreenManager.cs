@@ -434,6 +434,11 @@ public class ScreenManager : MonoBehaviour
 
     public virtual void populateGrid(int tabCollectionIndex)
     {
+        if(tabCollectionIndex < 0 || tabCollectionIndex >= grids.Length)
+        {
+            return;
+        }
+
         ScrollableUIElement currentScrollableUIElement = grids[tabCollectionIndex];
 
         if (currentScrollableUIElement == null || currentScrollableUIElement is null)

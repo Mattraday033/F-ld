@@ -55,7 +55,7 @@ PrefabInstance:
     - target: {fileID: 851517781658613874, guid: 1256cc0d79c215146afe103426db154d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 851517781658613874, guid: 1256cc0d79c215146afe103426db154d,
         type: 3}
@@ -1202,7 +1202,7 @@ PrefabInstance:
     - target: {fileID: 8582364765253528305, guid: 1256cc0d79c215146afe103426db154d,
         type: 3}
       propertyPath: m_ChunkCullingBounds.y
-      value: 0.5185938
+      value: 0.37125003
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2435,7 +2435,7 @@ PrefabInstance:
     - target: {fileID: 8582364765253528305, guid: 1256cc0d79c215146afe103426db154d,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8582364765253528305, guid: 1256cc0d79c215146afe103426db154d,
         type: 3}

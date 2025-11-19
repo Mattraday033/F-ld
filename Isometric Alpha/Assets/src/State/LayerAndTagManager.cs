@@ -5,23 +5,23 @@ using UnityEngine;
 public static class LayerAndTagManager
 {
 
-	private readonly static int playerLayer = LayerMask.NameToLayer("Player");
-	private readonly static int colliderLayer = LayerMask.NameToLayer("Collider");
-	private readonly static int enemyBoundaryLayer = LayerMask.NameToLayer("EnemyBoundary");
+	public readonly static int playerLayer = LayerMask.NameToLayer("Player");
+	public readonly static int colliderLayer = LayerMask.NameToLayer("Collider");
+	public readonly static int enemyBoundaryLayer = LayerMask.NameToLayer("EnemyBoundary");
 	public readonly static int npcLayer = LayerMask.NameToLayer("NPC");
-	private readonly static int objectLayer = LayerMask.NameToLayer("Object");
-	private readonly static int movableObjectLayer = LayerMask.NameToLayer("MovableObject");
-	private readonly static int enemyLayer = LayerMask.NameToLayer("Enemy");
-	private readonly static int cunningableObjectLayer = LayerMask.NameToLayer("CunningableObject");
-	private readonly static int openableDoorLayer = LayerMask.NameToLayer("OpenableDoor");
-	private readonly static int terrainLayer = LayerMask.NameToLayer("Terrain");
-	private readonly static int trainLayer = LayerMask.NameToLayer("Train");
-	private readonly static int chestLayer = LayerMask.NameToLayer("Chest");
-	private readonly static int transitionLayer = LayerMask.NameToLayer("Transition");
-	private readonly static int tutorialLayer = LayerMask.NameToLayer("Tutorial");
-	private readonly static int movableObjectBlockerLayer = LayerMask.NameToLayer("MovableObjectBlocker");
-    private readonly static int UILayer = LayerMask.NameToLayer("UI");
-	private readonly static int observableLayer = LayerMask.NameToLayer("Observable");
+	public readonly static int objectLayer = LayerMask.NameToLayer("Object");
+	public readonly static int movableObjectLayer = LayerMask.NameToLayer("MovableObject");
+	public readonly static int enemyLayer = LayerMask.NameToLayer("Enemy");
+	public readonly static int cunningableObjectLayer = LayerMask.NameToLayer("CunningableObject");
+	public readonly static int openableDoorLayer = LayerMask.NameToLayer("OpenableDoor");
+	public readonly static int terrainLayer = LayerMask.NameToLayer("Terrain");
+	public readonly static int trainLayer = LayerMask.NameToLayer("Train");
+	public readonly static int chestLayer = LayerMask.NameToLayer("Chest");
+	public readonly static int transitionLayer = LayerMask.NameToLayer("Transition");
+	public readonly static int tutorialLayer = LayerMask.NameToLayer("Tutorial");
+	public readonly static int movableObjectBlockerLayer = LayerMask.NameToLayer("MovableObjectBlocker");
+    public readonly static int UILayer = LayerMask.NameToLayer("UI");
+	public readonly static int observableLayer = LayerMask.NameToLayer("Observable");
 
 	public const string firstSortingLayerName = "First";
 	public const string thirdSortingLayerName = "Third";
@@ -184,11 +184,14 @@ public static class LayerAndTagManager
 	private static LayerMask initializeBlocksSkillsLayerMask()
 	{
 		LayerMask blocksSkillLayerMask = new LayerMask();
+        
 		blocksSkillLayerMask |= (1 << colliderLayer);
 		blocksSkillLayerMask |= (1 << objectLayer);
 		blocksSkillLayerMask |= (1 << cunningableObjectLayer);
         blocksSkillLayerMask |= (1 << openableDoorLayer);
+		blocksSkillLayerMask |= (1 << enemyLayer);
         blocksSkillLayerMask |= (1 << observableLayer);
+
         return blocksSkillLayerMask;
 	}
 

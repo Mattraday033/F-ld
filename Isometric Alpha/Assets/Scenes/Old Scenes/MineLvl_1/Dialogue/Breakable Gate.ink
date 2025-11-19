@@ -38,9 +38,11 @@ This gate looks old and worn. A strong enough arm could break it's lock.
 
 === 1b ===
 
-deactivate(1)
+fadeToBlack(true, false)
 
 openGate()
+
+fadeBackIn(60)
 
 You successfully wrench the gate open.
     

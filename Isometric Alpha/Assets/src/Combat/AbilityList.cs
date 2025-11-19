@@ -97,6 +97,7 @@ public static class AbilityList
 	public const string diveBombKey = "Dive Bomb";
 	public const string flurryKey = "Flurry";
 	public const string colonyCrushKey = "Colony Crush";
+	public const string screechKey = "Screech";
 	public const string spawnPupsKey = "Spawn Pups";
 
 	public const string wallopKey = "Wallop";	
@@ -214,17 +215,18 @@ public static class AbilityList
 		//bat abilities
 		enemyAbilityDictionary.Add(flurryKey, new Ability(CombatActionSettings.build(DescriptionParams.build(flurryKey, "A devastating surge of claws and jaws."), DamageParams.build("10", "5"), AnimationParams.build(CombatAnimationType.Effect))));
         enemyAbilityDictionary.Add(colonyCrushKey, new Ability(CombatActionSettings.build(DescriptionParams.build(colonyCrushKey, "A torrent of tiny bats is launched at the target."), DamageParams.build("5", "1"), TargetParams.build(Range.quadrupleBoxIndex))));
-        enemyAbilityDictionary.Add(spawnPupsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(spawnPupsKey, "The bat calls forth it's pups to fight for it.")), EnemyStatsList.pupSpawnCombos));
+        enemyAbilityDictionary.Add(screechKey, new Ability(CombatActionSettings.build(DescriptionParams.build(screechKey, "Howl so loud as to drive you mad.", TraitList.caveMadnessKey), DamageParams.build("6", "2"), TargetParams.build(Range.quadrupleBoxIndex), AnimationParams.build(CombatAnimationType.Effect), TraitList.caveMadness)));
+        enemyAbilityDictionary.Add(spawnPupsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(spawnPupsKey, "The bat calls forth it's pups to fight for it.")), MonsterNameList.batSwarm));
         enemyAbilityDictionary.Add(swarmRushKey, new Ability(CombatActionSettings.build(DescriptionParams.build(swarmRushKey, "The swarm flutters about their target, clawing and biting ferociously.", colonyCrushKey), DamageParams.build("3", "2"), AnimationParams.build(CombatAnimationType.Effect))));
         enemyAbilityDictionary.Add(batClawName, new Ability(CombatActionSettings.build(batClawName, batClawDescription, DamageParams.build("6", "8"))));
         enemyAbilityDictionary.Add(bossBatClawKey, new Ability(CombatActionSettings.build(batClawName, batClawDescription, DamageParams.build("12", "12"))));
         enemyAbilityDictionary.Add(diveBombKey, new SuicideAbility(CombatActionSettings.build(DescriptionParams.build(diveBombKey, "The bat dives straight for an enemy at lightning speed and collides with it, spraying everyone closeby with viscera and guano.", "DiveBomb"), DamageParams.build("5", "1"), TargetParams.build(Range.quadrupleBoxIndex))));
 
         //worm abilities
-        enemyAbilityDictionary.Add(splitSpawnWormsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(splitSpawnWormsKey, "The worm splits to spawn two smaller worms.")), EnemyStatsList.wormSplitSpawnCombo));
+        // enemyAbilityDictionary.Add(splitSpawnWormsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(splitSpawnWormsKey, "The worm splits to spawn two smaller worms.")), EnemyStatsList.wormSplitSpawnCombo));
         enemyAbilityDictionary.Add(wallopKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wallopKey, "The worm drives forward, using the weight of it's body and it's intense bite to rip apart it's foe."), DamageParams.build("2", "1"))));
         enemyAbilityDictionary.Add(trampleKey, new Ability(CombatActionSettings.build(DescriptionParams.build(trampleKey, "The monster crashes into the target, using the size and weight of it's body to crush it's prey."), DamageParams.build("12", "5"))));
-        enemyAbilityDictionary.Add(splitBossSpawnWormsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(splitBossSpawnWormsKey, "The worm splits to spawn four smaller worms."), TargetParams.build(Range.quadrupleBoxIndex)), EnemyStatsList.wormSplitBossSpawnCombo));
+        // enemyAbilityDictionary.Add(splitBossSpawnWormsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(splitBossSpawnWormsKey, "The worm splits to spawn four smaller worms."), TargetParams.build(Range.quadrupleBoxIndex)), EnemyStatsList.wormSplitBossSpawnCombo));
         enemyAbilityDictionary.Add(acidVomitKey, new Ability(CombatActionSettings.build(DescriptionParams.build(acidVomitKey, "The worm spits acidic bile at it's enemy, making them more vulnerable to attacks."), DamageParams.build("2", "0"), TraitList.acidVomit)));
         enemyAbilityDictionary.Add(wormExplosionKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wormExplosionKey, "The worm explodes on death, spraying everything around it in burning guts.", "Volatile"), DamageParams.build("5", "0"), TargetParams.build(Range.nontupleBoxIndex, isSelfTargeting), TraitList.acidVomit)));
         enemyAbilityDictionary.Add(wormBossExplosionKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wormBossExplosionKey, "The worm explodes on death, spraying everything around it in burning guts.", "Volatile"), DamageParams.build("30", "0"), TargetParams.build(Range.nontupleBoxIndex, isSelfTargeting), TraitList.acidVomit)));
@@ -243,8 +245,8 @@ public static class AbilityList
         enemyAbilityDictionary.Add(guardLashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardLashKey, "The bane of slaves everywhere.", "Lashings"), DamageParams.build("8", "40"), TargetParams.build(Range.quadrupleVerticalIndex))));
         enemyAbilityDictionary.Add(guardCoordinateKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardCoordinateKey, "A leader takes charge and directs their troops in battle, increasing their damage.", "Cohesion"), TargetParams.build(Range.hexadecupleBoxIndex), TraitList.cohesion)));
         enemyAbilityDictionary.Add(guardSlingAttackKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardSlingAttackKey, "The slinger whips a bullet towards it's target."), DamageParams.build("6", "4"))));
-        enemyAbilityDictionary.Add(guardSlaveSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(guardSlaveSummonKey, "The slave driver calls forth more slaves to act as fodder.")), EnemyStatsList.slaveBlockerCombo));
-        enemyAbilityDictionary.Add(guardWarriorSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(guardWarriorSummonKey, "The slave driver calls forth more slaves to act as fodder.")), EnemyStatsList.slaveWarriorCombo));
+        // enemyAbilityDictionary.Add(guardSlaveSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(guardSlaveSummonKey, "The slave driver calls forth more slaves to act as fodder.")), EnemyStatsList.slaveBlockerCombo));
+        // enemyAbilityDictionary.Add(guardWarriorSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(guardWarriorSummonKey, "The slave driver calls forth more slaves to act as fodder.")), EnemyStatsList.slaveWarriorCombo));
 
 
         //Honorguard abilities
@@ -268,7 +270,7 @@ public static class AbilityList
 		enemyAbilityDictionary.Add(boulderRollKey, new Ability(CombatActionSettings.build(DescriptionParams.build(boulderRollKey, "A massive rock tumbling quickly towards you.", "BoulderRoll"), DamageParams.build("12", "10"), TargetParams.build(Range.quadrupleVerticalIndex))));
         enemyAbilityDictionary.Add(lesserBoulderRollKey, new Ability(CombatActionSettings.build(lesserBoulderRollKey, boulderRollDescription, DamageParams.build("6", "5"), TargetParams.build(Range.quadrupleVerticalIndex))));
         enemyAbilityDictionary.Add(evolveKey, new EvolveAbility(CombatActionSettings.build(DescriptionParams.build(evolveKey, "Evolves targets into more powerful versions of themselves."), TargetParams.build(Range.hexadecupleBoxIndex)), enemyAbilityDictionary[boulderRollKey]));
-        enemyAbilityDictionary.Add(stoneSaintMaterialsSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(stoneSaintMaterialsSummonKey, "The Saint wills more rocks to come to it's aid.")), EnemyStatsList.smallStonesCombo));
+        // enemyAbilityDictionary.Add(stoneSaintMaterialsSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(stoneSaintMaterialsSummonKey, "The Saint wills more rocks to come to it's aid.")), EnemyStatsList.smallStonesCombo));
 	}
 	
 	private static void instantiateStatAbilities()

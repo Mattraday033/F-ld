@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEngine;
 
 public class SummonAbility: Ability
 {
@@ -11,17 +10,17 @@ public class SummonAbility: Ability
 
 	private SummonCombos creaturesToSpawn;
 
-	public SummonAbility(CombatActionSettings settings, EnemyStats creatureToSpawn): base(settings)
+	public SummonAbility(CombatActionSettings settings, string creatureKey): base(settings)
 	{
-		this.creaturesToSpawn = new SummonCombos(new EnemyStats[][]{new EnemyStats[]{creatureToSpawn}});
+		this.creaturesToSpawn = new SummonCombos(new string[][]{new string[]{creatureKey}});
 	}
 
-    public SummonAbility(CombatActionSettings settings, EnemyStats[] creatureComboToSpawn) : base(settings)
+    public SummonAbility(CombatActionSettings settings, string[] creatureComboToSpawn) : base(settings)
     {
-        this.creaturesToSpawn = new SummonCombos(new EnemyStats[][] { creatureComboToSpawn });
+		this.creaturesToSpawn = new SummonCombos(new string[][]{ creatureComboToSpawn });
     }
 
-    public SummonAbility(CombatActionSettings settings, EnemyStats[][] creatureCombosToSpawn) : base(settings)
+    public SummonAbility(CombatActionSettings settings, string[][] creatureCombosToSpawn) : base(settings)
     {
         this.creaturesToSpawn = new SummonCombos(creatureCombosToSpawn);
     }
@@ -60,7 +59,7 @@ public class SummonAbility: Ability
     public override void performCombatAction()
 	{
 		EnemySpawner enemySpawner = EnemySpawner.getInstance();
-		EnemyStats[] comboToSpawn = creaturesToSpawn.getNextCombo();
+		List<EnemyStats> comboToSpawn = creaturesToSpawn.getNextCombo();
 		Selector selector = getSelector();
 		GridCoords[] targetCoords = selector.getAllSelectorCoords();
 		
@@ -74,7 +73,7 @@ public class SummonAbility: Ability
                 continue;
 			}
 
-			if(comboIndex < comboToSpawn.Length)
+			if(comboIndex < comboToSpawn.Count)
 			{
 				enemySpawner.spawnEnemy(comboToSpawn[comboIndex], coords);
 			} else
@@ -91,57 +90,27 @@ public class SummonAbility: Ability
 		performCombatAction();
     }
 
-    private struct SummonCombos
+    private class SummonCombos
 	{
-		private EnemyStats[][] combos;
-		private bool[] used;
+		private List<string[]> combos;
+        private Random rng = new Random();
 
-		public SummonCombos(EnemyStats[][] combos)
+
+		public SummonCombos(string[][] combos)
 		{
-			this.combos = combos;
-			this.used = new bool[combos.Length];
+			this.combos = combos.ToList();
 		}
 
-		public EnemyStats[] getNextCombo()
+		public List<EnemyStats> getNextCombo()
 		{
-			if(getFirstUnusedComboInOrder() < 0)
-			{
-				resetUsed();
-			}
-			
-			int comboIndex = 0;
-			int attempts = 0;
-			
-			do{
-				comboIndex = UnityEngine.Random.Range(0, used.Length);
-				attempts++;
-			} while(used[comboIndex] && attempts < (Int32.MaxValue/10000));
-			
-			if(attempts > 1000)
-			{
-				Debug.LogError("Attempts was high: attempts = " + attempts);
-			}
-			
-			used[comboIndex] = true;
-			return combos[comboIndex];
-		}
+            combos = combos.OrderBy(_ => rng.Next()).ToList();
+            List<EnemyStats> list = new List<EnemyStats>();
 
-		private int getFirstUnusedComboInOrder()
-		{
-			for(int comboIndex = 0; comboIndex < combos.Length; comboIndex++)
-			{
-				if(!used[comboIndex])
-				{
-					return comboIndex;
-				}
-			}
-			
-			return -1;
-		}
-
-		private void resetUsed()
-		{
-			this.used = new bool[combos.Length];
+            foreach(string creatureKey in combos[0])
+            {
+                list.Add(EnemyStatsList.getEnemyStats(creatureKey));
+            }
+			return list;
 		}
 	}
 }

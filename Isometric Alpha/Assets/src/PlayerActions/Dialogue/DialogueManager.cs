@@ -15,14 +15,14 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Cameras")]
 
-    //[SerializeField] 
+    [SerializeField] 
     public Camera mainCamera;
-	//[SerializeField] 
+	[SerializeField] 
     public CinemachineVirtualCamera mainCM;
 	private CinemachineFramingTransposer framingTransposer;
 
     [Header("Managers")]
-	//[SerializeField] 
+	[SerializeField] 
     public OOCUIManager oocUIManager;
 	private FadeToBlackManager fadeToBlackManager;
 
@@ -60,11 +60,7 @@ public class DialogueManager : MonoBehaviour
 	public DialogueTrackerButton dialogueTrackerButton;
 	private DialogueTrackerWindow dialogueTrackerWindow;
 
-	private TutorialPopUpButton tutorialPopUpButton;
-
 	private IEnumerator tutorialWaitCoroutine;
-
-	private static bool hasQueuedPopUpCoroutine;
 
 	void Start()
 	{
@@ -496,8 +492,6 @@ public class DialogueManager : MonoBehaviour
                     int finalQuestStep = getArgumentInt(buffer, Constants.indexTwo);
 
                     checkForHaltNotificationBoolArg(buffer, Constants.indexThree);
-
-                    Debug.LogError("questSuccessful = " + questSuccessful);
 
                     QuestList.finishQuest(questTitle, finalQuestStep, questSuccessful);
 
@@ -1016,6 +1010,7 @@ public class DialogueManager : MonoBehaviour
                     continueStory();
 
                     break;
+                case "opengatewithkey":
                 case "opengatefromkey":
 
                     string gateKey = getArgument(buffer, Constants.indexZero);
@@ -1296,7 +1291,7 @@ public class DialogueManager : MonoBehaviour
     {
         string[] args = getAllArgs(buffer);
 
-        if(args.Length <= 0)
+        if(args.Length <= argIndex || args[argIndex].Length <= 0)
         {
             return Constants.indexOne;
         }

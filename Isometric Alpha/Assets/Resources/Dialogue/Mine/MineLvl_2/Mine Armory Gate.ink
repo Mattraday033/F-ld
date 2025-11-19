@@ -4,6 +4,8 @@ VAR wisdom = 0
 VAR charisma = 0
 VAR hasKey = false
 
+VAR gateKey = "Mine Armory Gate1"
+
 VAR playerName = ""
 
 //changeCamTarget(int targetIndex)
@@ -20,8 +22,6 @@ VAR playerName = ""
 //takeAllOfItem(string itemName)
 //searchinventoryfor(string flagToUpdate, string key) || 
 //                  (string flagToUpdate, string subtype, int ID)
-
-
 
 ->1a
 
@@ -44,7 +44,7 @@ This looks like the gate to the Mine's Armory. It's locked up tight.
 
 === 1b ===
 
-openGate()
+openGateFromKey({gateKey})
 
 The gate swings open.
 

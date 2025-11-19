@@ -6,12 +6,12 @@ using UnityEngine;
 
 public static class PartyManager
 {
-    private static Dictionary<string, PartyMember> partyMemberDict;
+    private static Dictionary<string, PartyMember> partyMemberDict = new Dictionary<string, PartyMember>();
 
     [RuntimeInitializeOnLoadMethod]
     private static void initializePartyManager()
     {
-        partyMemberDict = null;
+        partyMemberDict = new Dictionary<string, PartyMember>();
         resetPartyMembers();
     }
     
@@ -166,7 +166,7 @@ public static class PartyManager
         {
             if (kvp.Value.canJoinParty)
             {
-            joinablePartyMembers.Add(kvp.Value);
+                joinablePartyMembers.Add(kvp.Value);
             }
         }
 

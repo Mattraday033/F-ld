@@ -117,17 +117,12 @@ public class IntimidateManager : CunningManager
 
     public override Color getTileBaseColor()
     {
-        return ColorList.previewSliderOrange;
+        return ColorList.intimidateIndicatorOrange;
     }
 
     public override Color getTileTargetColor()
     {
         return Color.red;
-    }
-
-    private bool coordsWithinRange(int row, int col)
-    {
-        return (Math.Abs(row - getCurrentPlayerSkillGridCoords().row) + Math.Abs(col - getCurrentPlayerSkillGridCoords().col)) <= getCurrentPlayerSkillGridCoords().row;
     }
 
     public override int getRange()

@@ -9,7 +9,7 @@ public static class GateAndChestManager
 {
     public readonly static UnityEvent OnGateKeyAdd = new UnityEvent();
 
-    private static Dictionary<string, bool> openedGatesAndChests;
+    private static Dictionary<string, bool> openedGatesAndChests = new Dictionary<string, bool>();
 
     [RuntimeInitializeOnLoadMethod]
     public static void resetGatesAndChests()

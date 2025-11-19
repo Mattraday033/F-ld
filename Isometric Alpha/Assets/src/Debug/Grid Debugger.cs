@@ -6,7 +6,6 @@ public class GridDebugger : MonoBehaviour
 {
 
 	public Grid gridToDebug;
-	public bool debug;
 	
 	public int radius = 25;
 	
@@ -19,7 +18,7 @@ public class GridDebugger : MonoBehaviour
 
     void Start()
     {
-        if (Application.isEditor && debug)
+        if (Application.isEditor && State.enableGridDebugger)
         {
             parentObject = new GameObject("Debug Square Parent");
             parentObject.transform.parent = gridToDebug.gameObject.transform;

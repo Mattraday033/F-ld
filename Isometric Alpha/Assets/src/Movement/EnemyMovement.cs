@@ -148,20 +148,8 @@ public class PathToPlayer
 
 public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutorialSequenceTarget, IDescribableInBlocks
 {
-	public enum playerDirection
-	{
-		NorthEast = 1, NorthWest = 2, SouthWest = 3, SouthEast = 4
-	}
-	public const string neDebugText = "NORTHEAST";
-	public const string nwDebugText = "NORTHWEST";
-	public const string seDebugText = "SOUTHEAST";
-	public const string swDebugText = "SOUTHWEST";
-
-	private readonly static Color cunningStunnedColor = Color.red;
-	private readonly static Color intimidatedColor = Color.magenta;
-	private readonly static Color retreatStunnedColor = Color.cyan;
-
 	public const int pathIndexHardCutoff = 1000;
+    private const bool skipFileCreation = true;
 
     //[SerializeField]
     private int monsterPackIndex; //private so it can only set by using setMonsterPackIndex()
@@ -189,9 +177,9 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 	public CharacterFacing enemyFacing = new CharacterFacing();
 
-	private const int moveThreshold = 7;
+    public Collider2D attachedCollider2D;
 
-	private float detectionSize = .05f;
+	private const int moveThreshold = 7;
 
 	public Dictionary<Vector3Int, bool> dictionaryOfSegments = new Dictionary<Vector3Int, bool>();
 	public ArrayList gizmosToDraw = new ArrayList();
@@ -199,6 +187,11 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	public GameObject hoverTarget;
 
     #region MovementTracker Overrides
+
+    public override bool isDefeated()
+    {
+        return MonsterDefeatKeysList.monsterIsDefeated(getMonsterPackIndex());
+    }
 
     public override AnimationManager getAnimationManager()
     {
@@ -286,7 +279,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
                     Gizmos.color = Color.red;
                 }
 
-                Gizmos.DrawWireSphere(AreaManager.getMasterGrid().CellToWorld(coords), detectionSize);
+                Gizmos.DrawWireSphere(AreaManager.getMasterGrid().CellToWorld(coords), Constants.detectionSize);
                 coordsIndex++;
             }
         }
@@ -296,7 +289,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
             foreach (Vector3Int direction in MovementManager.allDirectionVectors)
             {
-                Gizmos.DrawWireSphere(MovementManager.getColliderInCellPosition(getCurrentCell() + direction), detectionSize);
+                Gizmos.DrawWireSphere(MovementManager.getColliderInCellPosition(getCurrentCell() + direction), Constants.detectionSize);
             }
         }
 
@@ -309,11 +302,12 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
     public virtual void prepCombat()
     {
-        if (MonsterDefeatKeysList.monsterIsDefeated(getMonsterPackIndex()))
+        if (isDefeated())
         {
             return;
         }
 
+        SpawnInfoManager.lastSaveBlueprint = SaveHandler.save("Before Combat", skipFileCreation);
         State.enemyPackInfo = getEnemyPackInfo();
         CombatStateManager.currentDefeatKey = AreaManager.locationName + "-" + monsterPackIndex;
         CombatStateManager.locationBeforeCombat = AreaManager.locationName;
@@ -548,6 +542,12 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 		return monsterPackIndex;
 	}
 
+    public void setToDefeatedMode()
+    {
+        attachedCollider2D.enabled = false;
+        gameObject.SetActive(false);
+    }
+
     private Vector3Int getCurrentCell() //world used for checking for colliders and drawing gizmos
     {
         return AreaManager.getMasterGrid().WorldToCell(transform.position);
@@ -605,10 +605,10 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
         setEnemyFacing(CharacterFacing.getOpposingFacing(enemyFacing.getFacing()));
 
-        enemyDirectionIndicator.setColors(cunningStunnedColor);
+        enemyDirectionIndicator.setColors(ColorList.cunningStunnedColor);
     }
     
-	public bool validTarget(SkillType skillType)
+	public virtual bool validTarget(SkillType skillType)
 	{
         return true;
 	}
@@ -619,7 +619,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 		if (enemyDirectionIndicator != null && stunnedFromCunning())
 		{
-			enemyDirectionIndicator.setColors(cunningStunnedColor);
+			enemyDirectionIndicator.setColors(ColorList.cunningStunnedColor);
 		}
 
 		// State.currentMonsterPackList.monsterPacks[monsterPackIndex].cunningCounter = cunningStunCounter;
@@ -629,7 +629,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	{
 		intimidateCounter = IntimidateManager.intimidateRange / 2;
 
-		enemyDirectionIndicator.setColors(intimidatedColor);
+		enemyDirectionIndicator.setColors(ColorList.intimidatedColor);
 	}
 
 	public void setIntimidateCounter(int newIntimidateCounter)
@@ -638,7 +638,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 		if (enemyDirectionIndicator != null && intimidated())
 		{
-			enemyDirectionIndicator.setColors(intimidatedColor);
+			enemyDirectionIndicator.setColors(ColorList.intimidatedColor);
 		}
 
 		// State.currentMonsterPackList.monsterPacks[monsterPackIndex].intimidateCounter = intimidateCounter;
@@ -648,7 +648,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	{
 		retreatStunnedCounter = 1;
 
-		enemyDirectionIndicator.setColors(retreatStunnedColor);
+		enemyDirectionIndicator.setColors(ColorList.retreatStunnedColor);
 	}
 
 	public void setRetreatStunCounter(int newRetreatStunnedCounter)
@@ -657,7 +657,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 		if (enemyDirectionIndicator != null && stunnedFromRetreating())
 		{
-			enemyDirectionIndicator.setColors(retreatStunnedColor);
+			enemyDirectionIndicator.setColors(ColorList.retreatStunnedColor);
 		}
 
 		// State.currentMonsterPackList.monsterPacks[monsterPackIndex].retreatCounter = retreatStunnedCounter;
@@ -710,15 +710,15 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         switch (cunningStunCounter, intimidateCounter, retreatStunnedCounter)
         {
             case ( > 0, <= 0, <= 0):
-                enemyDirectionIndicator.setColors(cunningStunnedColor);
+                enemyDirectionIndicator.setColors(ColorList.cunningStunnedColor);
                 return;
 
             case ( <= 0, > 0, <= 0):
-                enemyDirectionIndicator.setColors(intimidatedColor);
+                enemyDirectionIndicator.setColors(ColorList.intimidatedColor);
                 return;
 
             case ( <= 0, <= 0, > 0):
-                enemyDirectionIndicator.setColors(retreatStunnedColor);
+                enemyDirectionIndicator.setColors(ColorList.retreatStunnedColor);
                 return;
 
             case ( <= 0, <= 0, <= 0):

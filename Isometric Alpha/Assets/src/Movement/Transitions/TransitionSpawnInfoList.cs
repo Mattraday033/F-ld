@@ -768,7 +768,7 @@ public static class TransitionSpawnInfoList
 
         list = new List<TransitionSpawnInfo>();
 
-        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl1 + LocationNameList.section1c, LocationNameList.mineLvl1 + LocationNameList.section1b, new Vector3Int(-10, 2), Facing.NorthEast, Constants.sizeThree, Axis.DescendingX));
+        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl1 + LocationNameList.section1c, LocationNameList.mineLvl1 + LocationNameList.section1b, new Vector3Int(-10, 2), Facing.NorthEast, Constants.sizeThree, Axis.DescendingY));
 
         transitionSpawnInfoDict.Add(LocationNameList.mineLvl1 + LocationNameList.section1c, list);
 
@@ -778,13 +778,13 @@ public static class TransitionSpawnInfoList
 
         list = new List<TransitionSpawnInfo>();
 
-        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl2 + LocationNameList.section1a, LocationNameList.mineLvl1 + LocationNameList.section1b, new Vector3Int(3, -5), Facing.NorthWest, Constants.sizeThree, Axis.DescendingX));
+        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl2 + LocationNameList.section1a, LocationNameList.mineLvl1 + LocationNameList.section1b, new Vector3Int(3, -7), Facing.NorthWest, Constants.sizeThree, Axis.DescendingX));
 
         list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl2 + LocationNameList.section1a, LocationNameList.mineLvl2 + LocationNameList.section6, new Vector3Int(19, 1), Facing.SouthEast));
 
-        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl2 + LocationNameList.section1a, LocationNameList.mineLvl2 + LocationNameList.section1b, new Vector3Int(3, 6), Facing.SouthEast, Constants.sizeThree, Axis.DescendingX));
+        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl2 + LocationNameList.section1a, LocationNameList.mineLvl2 + LocationNameList.section1b, new Vector3Int(3, 8), Facing.SouthEast, Constants.sizeThree, Axis.DescendingX));
 
-        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(2, -3), Facing.NorthWest));
+        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(2, -5), Facing.NorthWest));
 
         transitionSpawnInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section1a, list);
 
@@ -918,7 +918,7 @@ public static class TransitionSpawnInfoList
         list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl2 + LocationNameList.section7a, LocationNameList.mineLvl2 + LocationNameList.section6, new Vector3Int(0, -10), Facing.SouthWest));
 
 
-        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl2 + LocationNameList.section7a, LocationNameList.mineLvl2 + LocationNameList.section7b, new Vector3Int(-6, -1), Facing.NorthEast, Constants.sizeThree, Axis.DescendingY));
+        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl2 + LocationNameList.section7a, LocationNameList.mineLvl2 + LocationNameList.section7b, new Vector3Int(-6, 0), Facing.NorthEast, Constants.sizeThree, Axis.DescendingY));
 
         transitionSpawnInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7a, list);
 
@@ -976,9 +976,9 @@ public static class TransitionSpawnInfoList
 
         list = new List<TransitionSpawnInfo>();
 
-        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section2b, LocationNameList.mineLvl3 + LocationNameList.section2a, new Vector3Int(4, -8), Facing.NorthWest, Constants.sizeTwo, Axis.DescendingX));
+        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section2b, LocationNameList.mineLvl3 + LocationNameList.section2a, new Vector3Int(5, -8), Facing.NorthWest, Constants.sizeTwo, Axis.DescendingX));
 
-        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section2b, LocationNameList.mineLvl3 + LocationNameList.section3a, new Vector3Int(3, 12), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX));
+        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section2b, LocationNameList.mineLvl3 + LocationNameList.section3a, new Vector3Int(3, 14), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX));
 
         list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section2b, LocationNameList.mineLvl3 + LocationNameList.section3b, new Vector3Int(-7, 2), Facing.NorthEast, Constants.sizeTwo, Axis.DescendingY));
 
@@ -989,11 +989,11 @@ public static class TransitionSpawnInfoList
 
         list = new List<TransitionSpawnInfo>();
 
-        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section3a, LocationNameList.mineLvl3 + LocationNameList.section6a, new Vector3Int(19, 11), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX));
+        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section3a, LocationNameList.mineLvl3 + LocationNameList.section6a, new Vector3Int(19, 14), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX));
 
         list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section3a, LocationNameList.mineLvl3 + LocationNameList.section2b, new Vector3Int(19, -2), Facing.NorthWest, Constants.sizeTwo, Axis.DescendingX));
 
-        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section3a, LocationNameList.mineLvl3 + LocationNameList.section3b, new Vector3Int(3, 1), Facing.NorthWest, Constants.sizeTwo, Axis.DescendingX));
+        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section3a, LocationNameList.mineLvl3 + LocationNameList.section3b, new Vector3Int(3, -3), Facing.NorthWest, Constants.sizeTwo, Axis.DescendingX));
 
         list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section3a, LocationNameList.mineLvl3 + LocationNameList.section7, new Vector3Int(-20, 7), Facing.NorthEast, Constants.sizeTwo, Axis.DescendingY));
 
@@ -1019,7 +1019,7 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section4a, LocationNameList.mineLvl3 + LocationNameList.section1a, new Vector3Int(2, -7), Facing.NorthWest, Constants.sizeTwo, Axis.DescendingX));
 
-        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section4a, LocationNameList.mineLvl3 + LocationNameList.section4b, new Vector3Int(2, 12), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX));
+        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section4a, LocationNameList.mineLvl3 + LocationNameList.section4b, new Vector3Int(2, 14), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX));
 
         transitionSpawnInfoDict.Add(LocationNameList.mineLvl3 + LocationNameList.section4a, list);
 
@@ -1030,7 +1030,7 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section4b, LocationNameList.mineLvl3 + LocationNameList.section4a, new Vector3Int(0, -12), Facing.NorthWest, Constants.sizeTwo, Axis.DescendingX));
 
-        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section4b, LocationNameList.mineLvl3 + LocationNameList.section5, new Vector3Int(0, 17), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX));
+        list.Add(new TransitionSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section4b, LocationNameList.mineLvl3 + LocationNameList.section5, new Vector3Int(0, 18), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX));
 
         transitionSpawnInfoDict.Add(LocationNameList.mineLvl3 + LocationNameList.section4b, list);
 

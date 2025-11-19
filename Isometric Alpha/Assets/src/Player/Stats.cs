@@ -159,8 +159,6 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual void playAnimationOnDamage()
     {
-        Debug.LogError("playAnimationOnDamage()");
-
         if (isDead())
         {
             animationManager.playDeathAnimation();

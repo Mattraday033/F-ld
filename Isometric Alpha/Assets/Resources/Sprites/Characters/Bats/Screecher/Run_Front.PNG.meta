@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7e1fbd83bf49e214b897ce17cd5a3768
+guid: 16325cf1195c27f489809cc94a36c483
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,9 +48,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 350
+  spritePixelsToUnits: 385
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Armored_Bat_Run_Front_0
+      name: Run_Front_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed3837fa4dc831149b32cfc56d29b4ce
-      internalID: 1875545057
+      spriteID: 7bcfca7286017664da2b635e06dc65ca
+      internalID: -1941596158
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Run_Front_1
+      name: Run_Front_1
       rect:
         serializedVersion: 2
         x: 512
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1bfc64c572a7f1f46abd339c879e4976
-      internalID: 926230748
+      spriteID: 1c2b7559d1bdfff42bb3f661b2975071
+      internalID: 865298705
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Run_Front_2
+      name: Run_Front_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e2cc8079e0f9514981c82bc886f6744
-      internalID: -1427558327
+      spriteID: 4fb6dcdbe80e01c419258956f73f0fa2
+      internalID: -1892374488
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Run_Front_3
+      name: Run_Front_3
       rect:
         serializedVersion: 2
         x: 1536
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2b41e623abcbd3478725e327f04e0de
-      internalID: -287474580
+      spriteID: 5cca558cf1d8ac24882280e41f14226e
+      internalID: -950229305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Run_Front_4
+      name: Run_Front_4
       rect:
         serializedVersion: 2
         x: 2048
@@ -195,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d79dd9f9f639a9478c6c42eab069679
-      internalID: -974974215
+      spriteID: b5a13b46197b85e49bf1c32f15e9dbea
+      internalID: 989119122
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Run_Front_5
+      name: Run_Front_5
       rect:
         serializedVersion: 2
         x: 2560
@@ -216,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 96a55201b75d5504e9a60b5064ec8d8c
-      internalID: -1367838226
+      spriteID: 31a740587f0540b4b828d84c9190ed6a
+      internalID: -1852360426
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Run_Front_6
+      name: Run_Front_6
       rect:
         serializedVersion: 2
         x: 3072
@@ -237,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad1b9d5a1f536114c81850b1b7ad0738
-      internalID: -1980099340
+      spriteID: 22eb5dbee823a22458f91d80a49d54f3
+      internalID: -456894617
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armored_Bat_Run_Front_7
+      name: Run_Front_7
       rect:
         serializedVersion: 2
         x: 3584
@@ -258,8 +258,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42765fa56c288e942a72116947e9569d
-      internalID: -396888612
+      spriteID: 696237f59eb3db941bf01467bab20608
+      internalID: -1409063847
       vertices: []
       indices: 
       edges: []
@@ -275,14 +275,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Armored_Bat_Run_Front_0: 1875545057
-      Armored_Bat_Run_Front_1: 926230748
-      Armored_Bat_Run_Front_2: -1427558327
-      Armored_Bat_Run_Front_3: -287474580
-      Armored_Bat_Run_Front_4: -974974215
-      Armored_Bat_Run_Front_5: -1367838226
-      Armored_Bat_Run_Front_6: -1980099340
-      Armored_Bat_Run_Front_7: -396888612
+      Run_Front_0: -1941596158
+      Run_Front_1: 865298705
+      Run_Front_2: -1892374488
+      Run_Front_3: -950229305
+      Run_Front_4: 989119122
+      Run_Front_5: -1852360426
+      Run_Front_6: -456894617
+      Run_Front_7: -1409063847
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

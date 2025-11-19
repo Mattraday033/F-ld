@@ -382,7 +382,7 @@ takeAllOfItem(Candy)
 
 setToTrue(gaveSnipeHuntExcuseToMuzsa)
 
-\*Múzsa gives you a pitying look.* I'm not gonna get in the way of such an <i>important</i> task, but don't go past the first floor, and watch out for the bats. And if any of the guards say they forgot their 'left-handed smoke shifter' somewhere, come get me. I'll help you find it.
+\*Múzsa gives you a pitying look.* I won't impede such an <i>important</i> task, but don't go past the first floor, and watch out for the bats. And if any of the guards say they forgot their 'left-handed smoke shifter' somewhere, come get me. I'll help you find it.
 
 ->moveMuzsaAndClose
 

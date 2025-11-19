@@ -50,7 +50,7 @@ public static class NPCNameList
     public const string reka = "Réka";
     public const string guardPazman = "Guard Pázmán";
     public const string pazman = "Pázmán";
-    public const string guardVirag = "Virág";
+    public const string guardVirag = "Guard Virág";
 
     public const string guardVazul = "Guard Vazul";
 
@@ -86,6 +86,7 @@ public static class NPCNameList
     public const string controlPanel = "Control Panel";
     public const string vaultableBarrels = "Vaultable Barrels";
     public const string vaultableRocks = "Vaultable Rocks";
+    public const string vaultableGap = "Vaultable Gap";
     public const string wallPatch = "Wall Patch";
     public const string mineLvl2Wall = "MineLvl_2 Wall";
     public const string suspiciousWall = "Suspicious Wall";
@@ -102,11 +103,18 @@ public static class NPCNameList
     public const string liftableRubble = liftablePrefix + rubble;
     public const string awkwardRubble = "Awkward Rubble";
     public const string ancientPortcullis = "Ancient Portcullis";
+    public const string cellDoor = "Cell Door";
     public const string fallenBeam = "Fallen Beam";
     public const string floorButton = "Floor Button";
     public const string manseFrontDoor = "Manse Front Door";
     public const string manseServiceEntrance = "Service Entrance";
     public const string mineArmoryGate = "Mine Armory Gate";
+    public const string spike = "Spike";
+    public const string unstablePillar = "Unstable Pillar";
+    public const string unseenBarrier = "Unseen Barrier";
+    public const string water = "Water";
+
+    public const string guardCampLiftableGate = guard + " " + liftablePrefix + gate;
     #endregion
 
     #region Party Member Names

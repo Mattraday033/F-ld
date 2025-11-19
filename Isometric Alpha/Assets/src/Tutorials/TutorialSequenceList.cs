@@ -46,21 +46,12 @@ public static class TutorialSequenceList
     private const string itemGridTargetHash = "Item Grid";
     private const string inventoryScreenTargetHash = "Inventory Screen";
 
-    private const string screenTabsSection = "Screen Tabs";
-    private const string screenBackground = "Screen Background";
     private const string characterScreenBackground = "Character Screen Background";
-    private const string characterScreenAbilityWheel = "Character Screen Ability Wheel";
     private const string characterScreenAbilityList = "Character Screen Ability List";
-    private const string fullEditActionWheelButton = "Edit Action Wheel Button";
-    private const string fullEditActionWheelActionList = "Full Action List";
-    private const string actionDescriptionPanel = "Action Description Panel";
-    private const string bonusDamagePanel = "Bonus Damage Panel";
-    private const string fullActionWheelEditorPopUp = "Full Action Wheel Editor Pop Up";
 
     private const string formationPopUpTitleTargetHash = "Formation Pop Up Title";
     private const string partySlotTracker = "Party Slot Tracker";
     private const string partyMemberList = "Party Member List";
-    private const string partyMemberRow = "Party Member Row";
     private const string formationGrid = "Formation Grid";
     private const string acceptButton = "Accept Button";
 
@@ -72,7 +63,6 @@ public static class TutorialSequenceList
     public const string firstTutorialEnemyTargetHash = "First Tutorial Enemy";
     public const string secondTutorialEnemyTargetHash = "Second Tutorial Enemy";
     private const string hostilityUITargetHash = "Hostility UI Panel";
-    private const string firstEnemyDirectionIndicatorTargetHash = "First Enemy Direction Indicator";
 
     public const string interactableRubbleTargetHash = "Interactable Rubble";
     private const string intimidateUITargetHash = "Intimidate UI Panel";
@@ -94,7 +84,6 @@ public static class TutorialSequenceList
     public const string mapPopUpWindow = "Map PopUp Window";
     public const string mapTileQuestCounter = "Map Tile Quest Counter";
 
-    private const string combatUIParentTargetHash = "Combat UI Parent";
     private const string playerCombatSpriteTargetHash = "Player Combat";
     private const string allyZoneTargetHash = "Ally Zone";
     private const string enemyZoneTargetHash = "Enemy Zone";
@@ -111,9 +100,9 @@ public static class TutorialSequenceList
     private const string retreatUITargetHash = "Retreat UI";
     private const string traitMonsterTargetHash = "Trait Monster";
 
-    private const string movableObjectTutorialSequenceKey = "Movable Object Tutorial";
+    public const string movableObjectTutorialSequenceKey = "Movable Object Tutorial";
     public const string movableObjectTutorialSeenFlag = "movableObjectTutorialSequenceEntered";
-    private const string tutorialCrateTargetHash = "Tutorial Crate";
+    public const string tutorialCrateTargetHash = "Tutorial Crate";
 
     public const string questCounterTutorialSeenFlag = "questCounterTutorialSequenceEntered";
 
@@ -177,14 +166,14 @@ public static class TutorialSequenceList
         TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.hostileTargetTutorialMessagePrefix + 1, firstTutorialEnemyTargetHash, noScript, new HighlightTargetScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.RightShift, KeyCode.LeftShift }, highlight, skipUnhighlight, createPopUpScreenBlocker);
         TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.hostileTargetTutorialMessagePrefix + 2, firstTutorialEnemyTargetHash, noScript, new UnhighlightTargetScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.RightShift, KeyCode.LeftShift }, skipHighlight, unhighlight, createPopUpScreenBlocker);
         TutorialSequenceStep stepThree = new TutorialSequenceStep(TutorialMessageList.hostileTargetTutorialMessagePrefix + 3, hostilityUITargetHash, ArrowDirection.Left, new KeyCode[] { KeyCode.Space }, skipHighlight, skipUnhighlight, createPopUpScreenBlocker);
-        TutorialSequenceStep stepFour = new TutorialSequenceStep(TutorialMessageList.hostileTargetTutorialMessagePrefix + 4, firstEnemyDirectionIndicatorTargetHash, ArrowDirection.Bottom, new KeyCode[] { KeyCode.Space }, highlight, skipUnhighlight, createPopUpScreenBlocker);
-        TutorialSequenceStep stepFive = new TutorialSequenceStep(TutorialMessageList.hostileTargetTutorialMessagePrefix + 5, firstEnemyDirectionIndicatorTargetHash, ArrowDirection.Right, new KeyCode[] { KeyCode.Space }, highlight, skipUnhighlight, createPopUpScreenBlocker);
-        TutorialSequenceStep stepSix = new TutorialSequenceStep(TutorialMessageList.hostileTargetTutorialMessagePrefix + 6, firstEnemyDirectionIndicatorTargetHash, noScript, new MovePlayerSouthEastScript(), ArrowDirection.Right, new KeyCode[] { KeyCode.D }, highlight, unhighlight, createPopUpScreenBlocker);
+        TutorialSequenceStep stepFour = new TutorialSequenceStep(TutorialMessageList.hostileTargetTutorialMessagePrefix + 4, firstTutorialEnemyTargetHash, ArrowDirection.Top, new KeyCode[] { KeyCode.Space }, highlight, skipUnhighlight, createPopUpScreenBlocker);
+        TutorialSequenceStep stepFive = new TutorialSequenceStep(TutorialMessageList.hostileTargetTutorialMessagePrefix + 5, firstTutorialEnemyTargetHash, ArrowDirection.Top, new KeyCode[] { KeyCode.Space }, highlight, skipUnhighlight, createPopUpScreenBlocker);
+        TutorialSequenceStep stepSix = new TutorialSequenceStep(TutorialMessageList.hostileTargetTutorialMessagePrefix + 6, firstTutorialEnemyTargetHash, noScript, new MovePlayerSouthEastScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.D }, highlight, unhighlight, createPopUpScreenBlocker);
 
         TutorialSequence firstHostilityTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, firstHostitilityTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree, stepFour, stepFive, stepSix });
 
         firstHostilityTutorialSequence.setSkipScript(new SkipTutorialScript());
-        tutorialSequenceDictionary.Add(firstHostilityTutorialSequenceKey, firstHostilityTutorialSequence);
+        tutorialSequenceDictionary.Add(firstHostilityTutorialSequenceKey, firstHostilityTutorialSequence); 
     }
 
     public static void initializeLiftableRubbleTutorial()
@@ -225,7 +214,7 @@ public static class TutorialSequenceList
         TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 1, secondTutorialEnemyTargetHash, noScript, new ShowCunningRangeScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.Alpha2 }, highlight, unhighlight, createPopUpScreenBlocker);
         TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 2, secondTutorialEnemyTargetHash, noScript, new MoveCunningTargetSouthWestScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.S }, highlight, unhighlight, createPopUpScreenBlocker);
         TutorialSequenceStep stepThree = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 3, secondTutorialEnemyTargetHash, noScript, new ActivateCunningScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.E }, highlight, unhighlight, createPopUpScreenBlocker);
-        TutorialSequenceStep stepFour = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 4, firstEnemyDirectionIndicatorTargetHash, noScript, new MovePlayerNorthWestScript(), ArrowDirection.Bottom, new KeyCode[] { KeyCode.A }, highlight, unhighlight, createPopUpScreenBlocker);
+        TutorialSequenceStep stepFour = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 4, secondTutorialEnemyTargetHash, noScript, new MovePlayerNorthWestScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.A }, highlight, unhighlight, createPopUpScreenBlocker);
 
         TutorialSequence firstCunningTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, cunningTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree, stepFour });
 

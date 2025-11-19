@@ -16,7 +16,7 @@ public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSour
     public TextMeshProUGUI healthText;
     public HealthBarManager healthBar;
 
-    public static UnityEvent OnPartyMemberSelected = new UnityEvent();
+    public readonly static UnityEvent OnPartyMemberSelected = new UnityEvent();
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -38,6 +38,11 @@ public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSour
         base.displayDescribable();
 
         OnPartyMemberSelected.Invoke();
+
+        if(OverallUIManager.currentScreenManager.getAbilityGridIndex() > 0)
+        {
+            OverallUIManager.currentScreenManager.populateGrid(OverallUIManager.currentScreenManager.getAbilityGridIndex());
+        }
 
         if (OverallUIManager.currentScreenManager.grids.Length <= 2)
         {

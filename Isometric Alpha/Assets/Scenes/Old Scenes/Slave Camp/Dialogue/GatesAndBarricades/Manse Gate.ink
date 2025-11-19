@@ -41,9 +41,11 @@ These doors lead into the Manse. They are closed and barred.
 
 setToTrue(manseDoorsOpenedRevolt)
 
-deactivate(1)
+fadeToBlack(true, false)
 
 openGate()
+
+fadeBackIn(60)
 
 You break down the doors.
 

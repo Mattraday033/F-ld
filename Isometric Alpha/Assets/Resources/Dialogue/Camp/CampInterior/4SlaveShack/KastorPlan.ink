@@ -523,9 +523,9 @@ You performed well, and have earned my trust. You are now the lynchpin of the en
 
 === 2h ===
 
-{saidIKnowWhatImDoing:I'm glad to hear that. |}There are some parts of the plan that still need completing. I've assigned each task to a different hut. You'll need to check in on their progress and aid them with whatever they need. Are you ready?
+{saidIKnowWhatImDoing:I'm glad to hear that. |}There are some parts of the plan that still need completing. I've assigned each task to a different hut. You'll need to check in on their progress and aid them with whatever they need.
 
-    +Yes. Lay it on me.
+    +Lay it on me.
         ->2i
 
 === 2i ===

@@ -14,6 +14,7 @@ public static class TestScript
         // State.debugStopMonsterSpawning = true;
         // State.debugDiscoverAllLocations = true;
         // State.debugRetreatAutoSucceed = true;
+        State.enableGridDebugger = true;
 
         // AffinityManager.addAffinity(200000);
 
@@ -21,7 +22,7 @@ public static class TestScript
 
         // PartyManager.getPlayerStats().setLevel(3);
         // PartyManager.getPlayerStats().currentHealth = 1;
-        // PartyManager.getPlayerStats().strength = 10;
+        PartyManager.getPlayerStats().strength = 3;
         // PartyManager.getPlayerStats().dexterity = 3;
         // PartyManager.getPlayerStats().wisdom = 2;
         // PartyManager.getPlayerStats().charisma = 2;

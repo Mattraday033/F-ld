@@ -33,6 +33,17 @@ public static class ChestItemIDList
 
         #endregion
 
+        #region MineLvl_1-1c
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.malletIndex));
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rationsIndex, 3));
+
+        chestItemIDList.Add(LocationNameList.mineLvl1 + LocationNameList.section1c, list);
+
+        #endregion
+
         #region MineLvl_2
 
         #region MineLvl_2-1b
@@ -111,6 +122,63 @@ public static class ChestItemIDList
         list.Add(new ItemListID(ItemList.questItemListIndex, ItemList.winchIndex));
     
         chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section7b, list);
+
+        #endregion
+
+        #endregion
+
+        #region MineLvl_3
+
+        #region MineLvl_3-2a
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.heavyPickIndex));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.leatherBootsIndex));
+
+        chestItemIDList.Add(LocationNameList.mineLvl3 + LocationNameList.section2a, list);
+
+        #endregion
+
+        #region MineLvl_3-3b
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rationsIndex, Constants.sizeFive));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.bronzeBadgeArmorValue));
+
+        chestItemIDList.Add(LocationNameList.mineLvl3 + LocationNameList.section3b, list);
+
+        #endregion
+
+        #region MineLvl_3-4a
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.leatherGlovesIndex));
+
+        chestItemIDList.Add(LocationNameList.mineLvl3 + LocationNameList.section4a, list);
+
+        #endregion
+
+        #region MineLvl_3-5
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.paddedArmorIndex));
+
+        chestItemIDList.Add(LocationNameList.mineLvl3 + LocationNameList.section5, list);
+
+        #endregion
+
+        #region MineLvl_3-6a
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.treasureItemListIndex, ItemList.ironNuggetIndex));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.bronzeHelmetIndex));
+
+        chestItemIDList.Add(LocationNameList.mineLvl3 + LocationNameList.section6a, list);
 
         #endregion
 

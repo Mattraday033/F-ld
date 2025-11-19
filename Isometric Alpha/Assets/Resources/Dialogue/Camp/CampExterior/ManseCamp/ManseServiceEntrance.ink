@@ -40,9 +40,12 @@ These doors provide access to the Manse's kitchens. They are closed and barred.
 {
 -askedImreToLeadTheWay:
     +Proceed through the door.
-        deactivate(1)
+        fadeToBlack(true, false)
 
         openGate()
+
+        fadeBackIn(60)
+
         ->Close
 }
     +Leave the doors alone.

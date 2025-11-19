@@ -19,6 +19,24 @@ public class FloorButton : MonoBehaviour
 
     public int index;
 
+    public int weight = 1;
+
+    void Start()
+    {
+        StartCoroutine(waitThreeFramesThenSetSprite());
+    }
+
+    private IEnumerator waitThreeFramesThenSetSprite()
+    {
+        yield return null;
+
+        yield return null;
+
+        yield return null;
+
+        setSprite();
+    }
+
     public string getKey()
     {
         return AreaManager.locationName + index;

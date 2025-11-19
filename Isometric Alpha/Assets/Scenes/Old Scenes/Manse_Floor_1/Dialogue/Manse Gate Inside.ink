@@ -33,11 +33,13 @@ These doors lead out into the camp.
 
 === 1b ===
 
+fadeToBlack()
+
 setToTrue(manseDoorsOpenedRevolt)
 
-deactivate(1)
-
 openGate()
+
+fadeBackIn(60)
 
 You open the doors.
 

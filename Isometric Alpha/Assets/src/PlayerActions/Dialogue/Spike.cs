@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Spike : Obstacle
 {
+    private const bool up = false;
+    private const bool down = true;
 
     public SpriteRenderer spriteRenderer;
     public Collider2D movementBlockingCollider;
@@ -27,12 +29,14 @@ public class Spike : Obstacle
     {
         movementBlockingCollider.enabled = false;
         spriteRenderer.sprite = downSprite;
+        SortingLayerManager.getSpikeSortingLayerInfo(down).setSpriteRendererSortingLayer(spriteRenderer);
     }
     
     public override void setToUp()
     {
         movementBlockingCollider.enabled = true;
         spriteRenderer.sprite = upSprite;
+        SortingLayerManager.getSpikeSortingLayerInfo(up).setSpriteRendererSortingLayer(spriteRenderer);
     }
 
 }

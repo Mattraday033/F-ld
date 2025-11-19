@@ -26,11 +26,9 @@ This rubble blocks your path, but with enough strength and effort it can be move
 
 fadeToBlack(true, false)
 
-deactivate({rubbleIndex})
+openGate()
 
 fadeBackIn(60)
-
-openGate()
 
 You move the rubble. The path is now clear.
     ->Close
