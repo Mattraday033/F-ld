@@ -444,7 +444,7 @@ public class DescriptionPanelBuilder : MonoBehaviour
 {
     private const int descriptionTextTopPaddingAmount = 15;
 
-    public static UnityEvent OnFormulaSwap = new UnityEvent();
+    public readonly static UnityEvent OnFormulaSwap = new UnityEvent();
 
     public IDescribableInBlocks blockOrigin;
     public RectTransform[] rectTransforms;
@@ -567,6 +567,10 @@ public class DescriptionPanelBuilder : MonoBehaviour
         if (block.type == DescriptionPanelBuildingBlockType.DescriptionText)
         {
             row.GetComponent<HorizontalOrVerticalLayoutGroup>().padding.top = descriptionTextTopPaddingAmount;
+        } else if(block.type == DescriptionPanelBuildingBlockType.Name)
+        {
+            row.transform.SetAsFirstSibling();
+
         }
 
         if (hasFormatToFollow())

@@ -61,6 +61,12 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
         }
     }
 
+    public int getChargeCost(SkillType skillType)
+    {
+        return Constants.sizeOne;
+    }
+
+
     public virtual bool validTarget(SkillType skillType)
     {
         switch(skillType)

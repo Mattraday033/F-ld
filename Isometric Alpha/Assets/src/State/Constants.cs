@@ -5,6 +5,7 @@ using UnityEngine;
 public static class Constants
 {
 
+    public const int sizeZero = 0;
     public const int sizeOne = 1;
     public const int sizeTwo = 2;
     public const int sizeThree = 3;
@@ -12,7 +13,6 @@ public static class Constants
     public const int sizeFive = 5;
     public const int sizeSix = 6;
     public const int sizeSeven = 7;
-
 
     public const int indexZero = 0;
     public const int indexOne = 1;
@@ -47,6 +47,8 @@ public static class Constants
     public const string DEXDesignator = "DEX";
     public const string WISDesignator = "WIS";
     public const string CHADesignator = "CHA";
+
+    public const string zeroRating = "0";
 
     public const string emptyString = "";
 

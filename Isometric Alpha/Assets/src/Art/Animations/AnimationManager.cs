@@ -20,7 +20,7 @@ public class AnimationManager : MonoBehaviour
 
     public CharacterAnimationType currentIdle;
     [SerializeField]
-    private EnemyDirectionIndicator directionIndicator;
+    private SpriteRenderer shadowSprite;
 
 
     public Dictionary<CharacterAnimationType, AnimationClip> animationDict;
@@ -35,10 +35,6 @@ public class AnimationManager : MonoBehaviour
         {
             animationDict = new Dictionary<CharacterAnimationType, AnimationClip>();
             return;
-        }
-        else if(directionIndicator != null)
-        {
-            directionIndicator.disable();
         }
 
         animationDict = getTempAnimations(folderPath);
@@ -118,8 +114,14 @@ public class AnimationManager : MonoBehaviour
         playAnimation(currentIdle);
     }
 
+    public void playSpawnAnimation()
+    {
+        shadowSprite.enabled = true;
+    }
+
     public void playDeathAnimation()
     {
+        shadowSprite.enabled = false;
         playAnimation(createClipTransitionToDeath());
     }
 
@@ -325,12 +327,18 @@ public class AnimationManager : MonoBehaviour
 
         if (state == null)
         {
-            if(animationType == CharacterAnimationType.Secondary_Idle)
+            switch(animationType)
             {
-                playIdleFrontAnimation();
-            }else
-            {
-                Debug.LogError("No such animation for type: " + animationType.ToString());
+                case CharacterAnimationType.Run_Front:
+                case CharacterAnimationType.Secondary_Idle:
+                    playIdleFrontAnimation();
+                    break;
+                case CharacterAnimationType.Run_Back:
+                    playIdleBackAnimation();
+                    break;
+                default:
+                    Debug.LogError("No such animation for type: " + animationType.ToString());
+                    break;                
             }
         }
     }

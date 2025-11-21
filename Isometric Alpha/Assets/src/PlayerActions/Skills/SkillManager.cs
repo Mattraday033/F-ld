@@ -10,6 +10,7 @@ public enum SkillType {Intimidate = 0, Cunning = 1}
 
 public interface ISkillTarget
 {
+    public int getChargeCost(SkillType skillType);
     public bool validTarget(SkillType skillType);
     public void cunning();
     public void intimidate();

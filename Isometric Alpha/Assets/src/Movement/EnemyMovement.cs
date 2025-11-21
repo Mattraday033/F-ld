@@ -148,6 +148,7 @@ public class PathToPlayer
 
 public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutorialSequenceTarget, IDescribableInBlocks
 {
+    private const int cunningChargeCost = 2;
 	public const int pathIndexHardCutoff = 1000;
     private const bool skipFileCreation = true;
 
@@ -167,8 +168,6 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	public bool movesEveryTurn = false;
 	public bool neverMoves = false;
 
-	public EnemyDirectionIndicator enemyDirectionIndicator;
-    
     public AnimationManager animationManager;
 
     public int cunningStunCounter = 0;
@@ -599,13 +598,24 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         return true;
     }
 
+    public int getChargeCost(SkillType skillType)
+    {
+        switch(skillType)
+        {
+            case SkillType.Cunning:
+                return cunningChargeCost;
+            default:
+                return Constants.sizeOne;
+        }
+    }
+
     public void cunning()
     {
         setCunningCounter(CunningManager.cunningRange / 2);
 
         setEnemyFacing(CharacterFacing.getOpposingFacing(enemyFacing.getFacing()));
 
-        enemyDirectionIndicator.setColors(ColorList.cunningStunnedColor);
+        // enemyDirectionIndicator.setColors(ColorList.cunningStunnedColor);
     }
     
 	public virtual bool validTarget(SkillType skillType)
@@ -617,10 +627,10 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	{
 		cunningStunCounter = newCunningCounter;
 
-		if (enemyDirectionIndicator != null && stunnedFromCunning())
-		{
-			enemyDirectionIndicator.setColors(ColorList.cunningStunnedColor);
-		}
+		// if (enemyDirectionIndicator != null && stunnedFromCunning())
+		// {
+		// 	enemyDirectionIndicator.setColors(ColorList.cunningStunnedColor);
+		// }
 
 		// State.currentMonsterPackList.monsterPacks[monsterPackIndex].cunningCounter = cunningStunCounter;
 	}
@@ -629,17 +639,17 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	{
 		intimidateCounter = IntimidateManager.intimidateRange / 2;
 
-		enemyDirectionIndicator.setColors(ColorList.intimidatedColor);
+		// enemyDirectionIndicator.setColors(ColorList.intimidatedColor);
 	}
 
 	public void setIntimidateCounter(int newIntimidateCounter)
 	{
 		intimidateCounter = newIntimidateCounter;
 
-		if (enemyDirectionIndicator != null && intimidated())
-		{
-			enemyDirectionIndicator.setColors(ColorList.intimidatedColor);
-		}
+		// if (enemyDirectionIndicator != null && intimidated())
+		// {
+		// 	enemyDirectionIndicator.setColors(ColorList.intimidatedColor);
+		// }
 
 		// State.currentMonsterPackList.monsterPacks[monsterPackIndex].intimidateCounter = intimidateCounter;
 	}
@@ -648,17 +658,17 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	{
 		retreatStunnedCounter = 1;
 
-		enemyDirectionIndicator.setColors(ColorList.retreatStunnedColor);
+		// enemyDirectionIndicator.setColors(ColorList.retreatStunnedColor);
 	}
 
 	public void setRetreatStunCounter(int newRetreatStunnedCounter)
 	{
 		retreatStunnedCounter = newRetreatStunnedCounter;
 
-		if (enemyDirectionIndicator != null && stunnedFromRetreating())
-		{
-			enemyDirectionIndicator.setColors(ColorList.retreatStunnedColor);
-		}
+		// if (enemyDirectionIndicator != null && stunnedFromRetreating())
+		// {
+		// 	enemyDirectionIndicator.setColors(ColorList.retreatStunnedColor);
+		// }
 
 		// State.currentMonsterPackList.monsterPacks[monsterPackIndex].retreatCounter = retreatStunnedCounter;
 	}
@@ -697,35 +707,35 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 
 
-		setIndicatorColor();
+		// setIndicatorColor();
 	}
 
-    private void setIndicatorColor()
-    {
-        if (enemyDirectionIndicator == null)
-        {
-            return;
-        }
+    // private void setIndicatorColor()
+    // {
+    //     if (enemyDirectionIndicator == null)
+    //     {
+    //         return;
+    //     }
 
-        switch (cunningStunCounter, intimidateCounter, retreatStunnedCounter)
-        {
-            case ( > 0, <= 0, <= 0):
-                enemyDirectionIndicator.setColors(ColorList.cunningStunnedColor);
-                return;
+    //     switch (cunningStunCounter, intimidateCounter, retreatStunnedCounter)
+    //     {
+    //         case ( > 0, <= 0, <= 0):
+    //             enemyDirectionIndicator.setColors(ColorList.cunningStunnedColor);
+    //             return;
 
-            case ( <= 0, > 0, <= 0):
-                enemyDirectionIndicator.setColors(ColorList.intimidatedColor);
-                return;
+    //         case ( <= 0, > 0, <= 0):
+    //             enemyDirectionIndicator.setColors(ColorList.intimidatedColor);
+    //             return;
 
-            case ( <= 0, <= 0, > 0):
-                enemyDirectionIndicator.setColors(ColorList.retreatStunnedColor);
-                return;
+    //         case ( <= 0, <= 0, > 0):
+    //             enemyDirectionIndicator.setColors(ColorList.retreatStunnedColor);
+    //             return;
 
-            case ( <= 0, <= 0, <= 0):
-                enemyDirectionIndicator.setColors(Color.white);
-                return;
-        }
-    }
+    //         case ( <= 0, <= 0, <= 0):
+    //             enemyDirectionIndicator.setColors(Color.white);
+    //             return;
+    //     }
+    // }
 
 	private void OnEnable()
 	{
@@ -777,10 +787,10 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
         updateAnimationDirection();
 
-        if (enemyDirectionIndicator != null)
-        {
-            enemyDirectionIndicator.setArrowDirection(enemyFacing);
-        }
+        // if (enemyDirectionIndicator != null)
+        // {
+        //     enemyDirectionIndicator.setArrowDirection(enemyFacing);
+        // }
 	}
 
     public void updateAnimationDirection()

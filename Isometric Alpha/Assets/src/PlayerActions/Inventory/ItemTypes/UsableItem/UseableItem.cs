@@ -12,13 +12,22 @@ public class UsableItem : Item, IJSONConvertable
     private string useDescription;
     private string iconName;
 
-    public UsableItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth) : base(listID, key, loreDescription, type, subtype, worth)
+    public UsableItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth) : 
+    base(listID, key, loreDescription, type, subtype, worth)
     {
         this.useDescription = useDescription;
         this.iconName = iconName;
     }
 
-    public UsableItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth, int quantity) : base(listID, key, loreDescription, type, subtype, worth, quantity)
+    public UsableItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth, int quantity) : 
+    base(listID, key, loreDescription, Constants.zeroRating, Constants.zeroRating, type, subtype, worth, quantity)
+    {
+        this.useDescription = useDescription;
+        this.iconName = iconName;
+    }
+
+    public UsableItem(ItemListID listID, string key, string loreDescription, string useDescription, string damageFormula, string critFormula, string subtype, string iconName, int worth, int quantity) : 
+    base(listID, key, loreDescription, damageFormula, critFormula, type, subtype, worth, quantity) 
     {
         this.useDescription = useDescription;
         this.iconName = iconName;
@@ -32,13 +41,13 @@ public class UsableItem : Item, IJSONConvertable
         }
         else
         {
-            return "0";
+            return Constants.zeroRating;
         }
     }
 
     public override string getCritFormula()
     {
-        return "0";
+        return Constants.zeroRating;
     }
 
     public virtual int getAmountToHeal()

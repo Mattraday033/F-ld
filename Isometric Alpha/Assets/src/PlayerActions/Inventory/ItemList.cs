@@ -103,7 +103,7 @@ public static class ItemList
 	public const int salvagedGuardArmorIndex = 15;
 	public const int salvagedGuardGlovesIndex = 16;
 	public const int salvagedGuardBootsIndex = 17;
-	public const int andrasLuckyTalismanIndex = 18;
+	public const int luckyTalismanIndex = 18;
 	public const int delversDreamIndex = 19;
 	public const int cookingPotIndex = 20;
 	public const int bronzeBadgeIndex = 21;
@@ -276,7 +276,7 @@ public static class ItemList
 		armor.Add(new Armor(new ItemListID(armorListIndex, salvagedGuardArmorIndex), salvagedGuardArmorKey, "A set of armor stripped off a dead guard. Don't mind whatever that smell is.", salvagedGuardArmorArmorValue, Armor.bodySlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, salvagedGuardGlovesIndex), salvagedGuardGlovesKey, "A pair of gloves taken from a dead guard. Their literal death grip provides a bonus equal to your dexterity to crit chance.", salvagedGuardGlovesArmorValue, Armor.handsSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, salvagedGuardBootsIndex), salvagedGuardBootsKey, "A pair of boots taken from a dead guard. His soles have left his body.", salvagedGuardBootsArmorValue, Armor.feetSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, andrasLuckyTalismanIndex), luckyTalismanKey, "András's lucky talisman. Let's hope it serves you better than it served him.", givesNoArmor, Armor.trinketSlotIndex));
+		armor.Add(new Armor(new ItemListID(armorListIndex, luckyTalismanIndex), luckyTalismanKey, "András's lucky talisman. Let's hope it serves you better than it served him.", "4", "2", givesNoArmor, Armor.trinketSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, delversDreamIndex), delversDreamKey, "A gem, finely cut, with a deep blue hue. The longer you stare, the more certain you become that you do not hold the gem, but it holds you. 10% bonus mental resistance when equipped.", delversDreamArmorValue, Armor.trinketSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, cookingPotIndex), cookingPotKey, "A pot from the kitchens. Worn about the head, it could provide some meager protection.", cookingPotArmorValue, Armor.headSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, bronzeBadgeIndex), bronzeBadgeKey, "This bronze badge looks bruised and worn, as if it was just pulled from a fire.", bronzeBadgeArmorValue, Armor.trinketSlotIndex));

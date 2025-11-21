@@ -34,20 +34,20 @@ public class CunningManager : SkillManager
         cunningsRemaining = newCunningsRemaining;
     }
 
-    public static void incrementCunningsRemaining()
+    public static void addCunningsRemaining(int charges)
     {
-        if (cunningsRemaining + 1 <= PartyStats.getMaxCunningCount())
+        if (cunningsRemaining + charges <= PartyStats.getMaxCunningCount())
         {
-            cunningsRemaining++;
+            cunningsRemaining += charges;
             OOCUIManager.updateOOCUI();
         }
     }
 
-    public static void decrementCunningsRemaining()
+    public static void removeCunningsRemaining(int charges)
     {
-        if (cunningsRemaining > 0)
+        if (cunningsRemaining - charges >= 0)
         {
-            cunningsRemaining--;
+            cunningsRemaining -= charges;
             OOCUIManager.updateOOCUI();
         }
     }
@@ -377,14 +377,19 @@ public class CunningManager : SkillManager
         return cunningRange;
     }
 
+    public bool hasEnoughChargesForTarget(ISkillTarget target)
+    {
+        return target.getChargeCost(SkillType.Cunning) >= getCunningsRemaining();
+    }
+
     public override bool executeSkill()
     {
-        ISkillTarget cunningTarget = getTargetFromTile(skillGrid[selectorPosition.x, selectorPosition.y]);
+        ISkillTarget target = getTargetFromTile(skillGrid[selectorPosition.x, selectorPosition.y]);
 
-        if (cunningTarget != null && cunningTarget.validTarget(SkillType.Cunning))
+        if (target != null && target.validTarget(SkillType.Cunning) && hasEnoughChargesForTarget(target))
         {
-            cunningTarget.cunning();
-            decrementCunningsRemaining();
+            target.cunning();
+            removeCunningsRemaining(target.getChargeCost(SkillType.Cunning));
             destroySkillArea();
             OnSkillUse.Invoke();
             return true;

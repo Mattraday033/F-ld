@@ -211,7 +211,7 @@ public static class TutorialSequenceList
 
     public static void initializeFirstCunningTutorial()
     {
-        TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 1, secondTutorialEnemyTargetHash, noScript, new ShowCunningRangeScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.Alpha2 }, highlight, unhighlight, createPopUpScreenBlocker);
+        TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 1, secondTutorialEnemyTargetHash, new ReplenishCunningChargesScript(), new ShowCunningRangeScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.Alpha2 }, highlight, unhighlight, createPopUpScreenBlocker);
         TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 2, secondTutorialEnemyTargetHash, noScript, new MoveCunningTargetSouthWestScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.S }, highlight, unhighlight, createPopUpScreenBlocker);
         TutorialSequenceStep stepThree = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 3, secondTutorialEnemyTargetHash, noScript, new ActivateCunningScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.E }, highlight, unhighlight, createPopUpScreenBlocker);
         TutorialSequenceStep stepFour = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 4, secondTutorialEnemyTargetHash, noScript, new MovePlayerNorthWestScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.A }, highlight, unhighlight, createPopUpScreenBlocker);
@@ -224,9 +224,9 @@ public static class TutorialSequenceList
 
     public static void initializeSecondCunningTutorial()
     {
-        TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 5, tutorialCunningObjectTargetHash, noScript, new ShowCunningRangeScript(), ArrowDirection.Left, new KeyCode[] { KeyCode.Alpha2 }, highlight, unhighlight, createPopUpScreenBlocker);
+        TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 5, tutorialCunningObjectTargetHash, new ReplenishCunningChargesScript(), new ShowCunningRangeScript(), ArrowDirection.Left, new KeyCode[] { KeyCode.Alpha2 }, highlight, unhighlight, createPopUpScreenBlocker);
         TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 6, cunningUIPanelTargetHash, noScript, new MoveCunningTargetNorthEastScript(), ArrowDirection.Left, new KeyCode[] { KeyCode.W }, highlight, unhighlight, createPopUpScreenBlocker);
-        TutorialSequenceStep stepThree = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 7, tutorialCunningObjectTargetHash, new ReplenishCunningChargesScript(), new ActivateCunningScript(), ArrowDirection.Left, new KeyCode[] { KeyCode.E });
+        TutorialSequenceStep stepThree = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 7, tutorialCunningObjectTargetHash, noScript, new ActivateCunningScript(), ArrowDirection.Left, new KeyCode[] { KeyCode.E });
 
         TutorialSequence secondCunningTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, secondCunningTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree });
 

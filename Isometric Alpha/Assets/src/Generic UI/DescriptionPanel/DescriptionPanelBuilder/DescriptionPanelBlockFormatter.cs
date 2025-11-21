@@ -97,7 +97,7 @@ public class BlockFormat
                 return new BlockFormat(Color.clear, Color.clear, Color.clear, Color.black, new Vector2Int(45, 45), 26, 5);
 
             case BlockFormatType.CombatHover:
-                return new BlockFormat(ColorList.combatHoverOutlineGrey, ColorList.combatHoverOutlineGrey, Color.clear, Color.black);
+                return new BlockFormat(ColorList.combatHoverOutlineGrey, ColorList.combatHoverOutlineGrey, Color.clear, Color.clear);
 
             case BlockFormatType.PartyMemberStats: 
                 return new BlockFormat(false, Color.white, Color.black);

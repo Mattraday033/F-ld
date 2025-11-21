@@ -23,35 +23,30 @@ public class Armor : EquippableItem, IJSONConvertable
 
 	private int armorRating;
 
-	public Armor(ItemListID listID, string key, string loreDescription, int armorRating, int slotID) : base(listID, key, loreDescription, subtype, 0, slotID)
+	public Armor(ItemListID listID, string key, string loreDescription, int armorRating, int slotID) : 
+    base(listID, key, loreDescription, Constants.zeroRating, Constants.zeroRating, subtype, 0, slotID)
 	{
 		this.armorRating = armorRating;
 		setWorth(calculateWorth(armorRating, slotID));
 	}
 
-    public override int getDamageFormulaTotal()
+	public Armor(ItemListID listID, string key, string loreDescription, string damageFormula, int armorRating, int slotID) : 
+    base(listID, key, loreDescription, damageFormula, Constants.zeroRating, subtype, 0, slotID)
 	{
-		return DamageCalculator.calculateFormula(getDamageFormula(), getStatSource());
+		this.armorRating = armorRating;
+		setWorth(calculateWorth(armorRating, slotID));
 	}
 
-    public override string getDamageTotalForDisplay()
+	public Armor(ItemListID listID, string key, string loreDescription, string damageFormula, string critFormula, int armorRating, int slotID) : 
+    base(listID, key, loreDescription, damageFormula, critFormula, subtype, 0, slotID)
 	{
-		return DamageCalculator.calculateFormula(getDamageFormula(), getStatSource()) + "";
+		this.armorRating = armorRating;
+		setWorth(calculateWorth(armorRating, slotID));
 	}
-
-    public override int getCritFormulaTotal()
-	{
-		return DamageCalculator.calculateFormula(getCritFormula(), getStatSource());
-	}
-
-    public override int getArmorRating()
-    {
-        return DamageCalculator.calculateFormula(getBonusArmorFormula(), getStatSource());
-    }
 
     public override string getBonusArmorFormula()
     {
-        if (base.getBonusArmorFormula().Equals(IStatBoostSource.zeroRating)) 
+        if (base.getBonusArmorFormula().Equals(Constants.zeroRating)) 
         {
             return armorRating.ToString();
         }
@@ -59,6 +54,11 @@ public class Armor : EquippableItem, IJSONConvertable
         {
             return base.getBonusArmorFormula() + "+" + armorRating;
         }
+    }
+
+    public override int getArmorRating()
+    {
+        return DamageCalculator.calculateFormula(getBonusArmorFormula(), getStatSource());
     }
 
     public string getArmorRatingForDisplay()
@@ -187,9 +187,19 @@ public class Armor : EquippableItem, IJSONConvertable
     {
         List<DescriptionPanelBuildingBlock> buildingBlocks = base.getDescriptionBuildingBlocks();
 
-        if (!getDamageFormula().Equals(IStatBoostSource.zeroRating))
+        if (getArmorRating() > Constants.sizeZero)
         {
-            buildingBlocks.Insert(1, DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getBonusDamageBlock(getDamageFormulaTotal().ToString()), getDamageFormula()));
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getArmorRatingForDisplay()));
+        }
+
+        if (!getCritFormula().Equals(Constants.zeroRating))
+        {
+            buildingBlocks.Insert(1, DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getCritBlock(getCritFormulaTotal().ToString(), getCritFormula()), getCritFormula()));
+        }
+
+        if (!getDamageFormula().Equals(Constants.zeroRating))
+        {
+            buildingBlocks.Insert(1, DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getDamageBlock(getDamageFormulaTotal().ToString(), getDamageFormula()), getDamageFormula()));
         }
 
         return buildingBlocks;

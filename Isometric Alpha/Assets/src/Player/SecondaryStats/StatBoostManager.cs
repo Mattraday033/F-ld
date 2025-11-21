@@ -5,8 +5,6 @@ using UnityEngine;
 
 public interface IStatBoostSource : IDescribable
 {
-    public const string zeroRating = "0";
-
     #region Generic Stats
     
     public string getBonusCritFormula();
@@ -94,12 +92,12 @@ public interface IStatBoostSource : IDescribable
 
         #region Generic Stats
 
-        if (!boostSource.getBonusCritFormula().Equals(zeroRating))
+        if (!boostSource.getBonusCritFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getCritBlock(DamageCalculator.calculateFormula(boostSource.getBonusCritFormula(), statsSource).ToString(), boostSource.getBonusCritFormula()));
         }
 
-        if (!boostSource.getBonusDamageFormula().Equals(zeroRating))
+        if (!boostSource.getBonusDamageFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getBonusDamageBlock(DamageCalculator.calculateFormula(boostSource.getBonusDamageFormula(), statsSource).ToString()), boostSource.getBonusDamageFormula()));
         }
@@ -108,22 +106,22 @@ public interface IStatBoostSource : IDescribable
 
         #region PrimaryStats
 
-        if (!boostSource.getBonusStrengthFormula().Equals(zeroRating))
+        if (!boostSource.getBonusStrengthFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getStrengthBlock(DamageCalculator.calculateFormula(boostSource.getBonusStrengthFormula(), statsSource).ToString()), boostSource.getBonusStrengthFormula()));
         }
 
-        if (!boostSource.getBonusDexterityFormula().Equals(zeroRating))
+        if (!boostSource.getBonusDexterityFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getDexterityBlock(DamageCalculator.calculateFormula(boostSource.getBonusDexterityFormula(), statsSource).ToString()), boostSource.getBonusDexterityFormula()));
         }
 
-        if (!boostSource.getBonusWisdomFormula().Equals(zeroRating))
+        if (!boostSource.getBonusWisdomFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getWisdomBlock(DamageCalculator.calculateFormula(boostSource.getBonusWisdomFormula(), statsSource).ToString()), boostSource.getBonusWisdomFormula()));
         }
 
-        if (!boostSource.getBonusCharismaFormula().Equals(zeroRating))
+        if (!boostSource.getBonusCharismaFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getCharismaBlock(DamageCalculator.calculateFormula(boostSource.getBonusCharismaFormula(), statsSource).ToString()), boostSource.getBonusCharismaFormula()));
         }
@@ -133,68 +131,68 @@ public interface IStatBoostSource : IDescribable
 
         //Strength Stats
 
-        if (!boostSource.getBonusHealthFormula().Equals(zeroRating))
+        if (!boostSource.getBonusHealthFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getBonusHealthBlock(DamageCalculator.calculateFormula(boostSource.getBonusHealthFormula(), statsSource).ToString()), boostSource.getBonusHealthFormula()));
         }
 
-        if (!boostSource.getBonusCriticalDamageMultiplierFormula().Equals(zeroRating))
+        if (!boostSource.getBonusCriticalDamageMultiplierFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getCriticalHitDamageBlock(DamageCalculator.calculateFormula(boostSource.getBonusCriticalDamageMultiplierFormula(), statsSource).ToString() + "%"), boostSource.getBonusCriticalDamageMultiplierFormula()));
         }
 
-        if (!boostSource.getBonusPhysicalResistanceFormula().Equals(zeroRating))
+        if (!boostSource.getBonusPhysicalResistanceFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getPhysicalResistBlock(DamageCalculator.calculateFormula(boostSource.getBonusPhysicalResistanceFormula(), statsSource).ToString() + "%"), boostSource.getBonusPhysicalResistanceFormula()));
         }
 
         //Dexterity Stats
 
-        if (!boostSource.getBonusSurpriseRoundDamageFormula().Equals(zeroRating))
+        if (!boostSource.getBonusSurpriseRoundDamageFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getSurpriseRoundDamageMultiplierBlock(DamageCalculator.calculateFormula(boostSource.getBonusSurpriseRoundDamageFormula(), statsSource).ToString()), boostSource.getBonusSurpriseRoundDamageFormula()));
         }
 
-        if (!boostSource.getBonusArmorFormula().Equals(zeroRating))
+        if (!boostSource.getBonusArmorFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getArmorBlock(DamageCalculator.calculateFormula(boostSource.getBonusArmorFormula(), statsSource).ToString()), boostSource.getBonusArmorFormula()));
         }
 
-        if (!boostSource.getBonusArmorPenetrationFormula().Equals(zeroRating))
+        if (!boostSource.getBonusArmorPenetrationFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getArmorPenetrationBlock(DamageCalculator.calculateFormula(boostSource.getBonusArmorPenetrationFormula(), statsSource).ToString() + "%"), boostSource.getBonusArmorPenetrationFormula()));
         }
 
         //Wisdom Stats
 
-        if (!boostSource.getBonusPassiveSlotsFormula().Equals(zeroRating))
+        if (!boostSource.getBonusPassiveSlotsFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getPassiveSlotsBlock(DamageCalculator.calculateFormula(boostSource.getBonusPassiveSlotsFormula(), statsSource).ToString()), boostSource.getBonusPassiveSlotsFormula()));
         }
 
-        if (!boostSource.getBonusWeaponSlotsFormula().Equals(zeroRating))
+        if (!boostSource.getBonusWeaponSlotsFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getBonusWeaponSlotsBlock(DamageCalculator.calculateFormula(boostSource.getBonusWeaponSlotsFormula(), statsSource).ToString()), boostSource.getBonusWeaponSlotsFormula()));
         }
 
-        if (!boostSource.getBonusMentalResistanceFormula().Equals(zeroRating))
+        if (!boostSource.getBonusMentalResistanceFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getMentalResistBlock(DamageCalculator.calculateFormula(boostSource.getBonusMentalResistanceFormula(), statsSource).ToString() + "%"), boostSource.getBonusMentalResistanceFormula()));
         }
 
         //Charisma Stats
 
-        if (!boostSource.getBonusSynergyFormula().Equals(zeroRating))
+        if (!boostSource.getBonusSynergyFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getSynergyBlock(DamageCalculator.calculateFormula(boostSource.getBonusSynergyFormula(), statsSource).ToString()), boostSource.getBonusSynergyFormula()));
         }
 
-        if (!boostSource.getBonusExuberancesFormula().Equals(zeroRating))
+        if (!boostSource.getBonusExuberancesFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getBonusExuberancesBlock(DamageCalculator.calculateFormula(boostSource.getBonusExuberancesFormula(), statsSource).ToString()), boostSource.getBonusExuberancesFormula()));
         }
 
-        // if (!boostSource.getBonusZOIPotencyFormula().Equals(zeroRating))
+        // if (!boostSource.getBonusZOIPotencyFormula().Equals(Constants.zeroRating))
         // {
         //     blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getZOIBlock(DamageCalculator.calculateFormula(boostSource.getBonusZOIPotencyFormula(), statsSource).ToString()), boostSource.getBonusZOIPotencyFormula()));
         // }
@@ -203,42 +201,42 @@ public interface IStatBoostSource : IDescribable
 
         #region Party Stats
 
-        if (!boostSource.getBonusRegenFormula().Equals(zeroRating))
+        if (!boostSource.getBonusRegenFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getRegenBlock(DamageCalculator.calculateFormula(boostSource.getBonusRegenFormula(), statsSource).ToString()), boostSource.getBonusRegenFormula()));
         }
 
-        if (!boostSource.getBonusRetreatChanceFormula().Equals(zeroRating))
+        if (!boostSource.getBonusRetreatChanceFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getRetreatChanceBlock(DamageCalculator.calculateFormula(boostSource.getBonusRetreatChanceFormula(), statsSource).ToString() + "%"), boostSource.getBonusRetreatChanceFormula()));
         }
 
-        if (!boostSource.getBonusSurpriseRoundsFormula().Equals(zeroRating))
+        if (!boostSource.getBonusSurpriseRoundsFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getSurpriseRoundAmountBlock(DamageCalculator.calculateFormula(boostSource.getBonusSurpriseRoundsFormula(), statsSource).ToString()), boostSource.getBonusSurpriseRoundsFormula()));
         }
 
-        if (!boostSource.getBonusPartySlotsFormula().Equals(zeroRating))
+        if (!boostSource.getBonusPartySlotsFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getPartySlotsBlock(DamageCalculator.calculateFormula(boostSource.getBonusPartySlotsFormula(), statsSource).ToString()), boostSource.getBonusPartySlotsFormula()));
         }
 
-        if (!boostSource.getBonusPartyActionsFormula().Equals(zeroRating))
+        if (!boostSource.getBonusPartyActionsFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getPartyActionsBlock(DamageCalculator.calculateFormula(boostSource.getBonusPartyActionsFormula(), statsSource).ToString()), boostSource.getBonusPartyActionsFormula()));
         }
 
-        if (!boostSource.getBonusGoldMultiplierFormula().Equals(zeroRating))
+        if (!boostSource.getBonusGoldMultiplierFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getGoldMultiplierBlock(DamageCalculator.calculateFormula(boostSource.getBonusGoldMultiplierFormula(), statsSource).ToString()), boostSource.getBonusGoldMultiplierFormula()));
         }
 
-        if (!boostSource.getBonusDiscountFormula().Equals(zeroRating))
+        if (!boostSource.getBonusDiscountFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getDiscountBlock(DamageCalculator.calculateFormula(boostSource.getBonusDiscountFormula(), statsSource).ToString()), boostSource.getBonusDiscountFormula()));
         }
 
-        if (!boostSource.getBonusVolleyAccuracyFormula().Equals(zeroRating))
+        if (!boostSource.getBonusVolleyAccuracyFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getVolleyBlock(DamageCalculator.calculateFormula(boostSource.getBonusVolleyAccuracyFormula(), statsSource).ToString()), boostSource.getBonusVolleyAccuracyFormula()));
         }
@@ -247,22 +245,22 @@ public interface IStatBoostSource : IDescribable
 
         #region Skills
 
-        if (!boostSource.getBonusIntimidateChargesFormula().Equals(zeroRating))
+        if (!boostSource.getBonusIntimidateChargesFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getIntimidateBlock(DamageCalculator.calculateFormula(boostSource.getBonusIntimidateChargesFormula(), statsSource).ToString()), boostSource.getBonusIntimidateChargesFormula()));
         }
 
-        if (!boostSource.getBonusCunningChargesFormula().Equals(zeroRating))
+        if (!boostSource.getBonusCunningChargesFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getCunningBlock(DamageCalculator.calculateFormula(boostSource.getBonusCunningChargesFormula(), statsSource).ToString()), boostSource.getBonusCunningChargesFormula()));
         }
 
-        if (!boostSource.getBonusObservationLevelFormula().Equals(zeroRating))
+        if (!boostSource.getBonusObservationLevelFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getObservationBlock(DamageCalculator.calculateFormula(boostSource.getBonusObservationLevelFormula(), statsSource).ToString()), boostSource.getBonusObservationLevelFormula()));
         }
 
-        if (!boostSource.getBonusLeadershipUsesFormula().Equals(zeroRating))
+        if (!boostSource.getBonusLeadershipUsesFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getLeadershipBlock(DamageCalculator.calculateFormula(boostSource.getBonusLeadershipUsesFormula(), statsSource).ToString()), boostSource.getBonusLeadershipUsesFormula()));
         }
@@ -321,8 +319,6 @@ public static class StatBoostManager
         {
             case ItemList.salvagedGuardGlovesKey:
                 return "D";
-            case ItemList.luckyTalismanKey:
-                return "2";
         }
 
         return "0";
@@ -333,8 +329,7 @@ public static class StatBoostManager
     {
         switch (describable.getName())
         {
-            case ItemList.luckyTalismanKey:
-                return "4";
+            
         }
 
         return "0";

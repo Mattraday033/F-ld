@@ -6,12 +6,16 @@ using UnityEngine;
 [System.Serializable]
 public class SkillReplenishItem: UsableItem, IJSONConvertable
 {
-	public SkillReplenishItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth): base(listId, key, loreDescription, useDescription, "SkillReplenish", iconName, worth) 
+    public const string subtype = "SkillReplenish";
+
+	public SkillReplenishItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth): 
+    base(listId, key, loreDescription, useDescription, subtype, iconName, worth) 
 	{
 
 	}
 	
-	public SkillReplenishItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int quantity): base(listId, key, loreDescription, useDescription, "SkillReplenish", iconName, worth, quantity) 
+	public SkillReplenishItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int quantity): 
+    base(listId, key, loreDescription, useDescription, subtype, iconName, worth, quantity) 
 	{
 
 	}
@@ -23,7 +27,7 @@ public class SkillReplenishItem: UsableItem, IJSONConvertable
             return;
         }
 
-		CunningManager.incrementCunningsRemaining();
+		CunningManager.addCunningsRemaining(Constants.sizeOne);
 	}
 	
 	public override bool usableOnParty()

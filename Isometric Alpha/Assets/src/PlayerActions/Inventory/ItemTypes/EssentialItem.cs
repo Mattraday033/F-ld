@@ -10,17 +10,20 @@ public class EssentialItem : Item, IJSONConvertable
     public const string type = "Essential";
 
 
-    public EssentialItem(ItemListID listId, string key, string loreDescription, string subtype) : base(listId, key, loreDescription, type, subtype, 1)
+    public EssentialItem(ItemListID listId, string key, string loreDescription, string subtype) : 
+    base(listId, key, loreDescription, type, subtype, 1)
     {
 
     }
 
-    public EssentialItem(ItemListID listId, string key, string loreDescription, string subtype, int quantity) : base(listId, key, loreDescription, type, subtype, 1, quantity)
+    public EssentialItem(ItemListID listId, string key, string loreDescription, string subtype, int quantity) : 
+    base(listId, key, loreDescription, type, subtype, 1, quantity)
     {
 
     }
 
-    public EssentialItem(ItemListID listId, string key, string loreDescription, string subtype, int worth, int quantity) : base(listId, key, loreDescription, type, subtype, worth, quantity)
+    public EssentialItem(ItemListID listId, string key, string loreDescription, string subtype, int worth, int quantity) : 
+    base(listId, key, loreDescription, type, subtype, worth, quantity)
     {
 
     }

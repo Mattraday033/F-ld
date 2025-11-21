@@ -22,10 +22,10 @@ public static class EnemyPackInfoList
                                                                                                         new ItemListID(ItemList.weaponsListIndex, ItemList.bronzeDirkIndex)});
 
     public readonly static EnemyPackInfo guardAndrasWithKeyFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.guardAndras }, DropTableList.slaveMineDT1Name,
-                                                                                    new ItemListID[]  {new ItemListID(ItemList.armorListIndex, ItemList.andrasLuckyTalismanIndex),
+                                                                                    new ItemListID[]  {new ItemListID(ItemList.armorListIndex, ItemList.luckyTalismanIndex),
                                                                                                         new ItemListID(ItemList.keyItemListIndex, ItemList.mineArmoryKeyIndex)});
     public readonly static EnemyPackInfo guardAndrasWithOutKeyFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.guardAndras }, DropTableList.slaveMineDT1Name,
-                                                                                        new ItemListID[] { new ItemListID(ItemList.armorListIndex, ItemList.andrasLuckyTalismanIndex) });
+                                                                                        new ItemListID[] { new ItemListID(ItemList.armorListIndex, ItemList.luckyTalismanIndex) });
     public readonly static EnemyPackInfo imreFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.imre }, DropTableList.slaveMineDT1Name);
 
 

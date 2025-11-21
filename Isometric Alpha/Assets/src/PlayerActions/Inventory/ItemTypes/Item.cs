@@ -15,8 +15,13 @@ public class Item : ICloneable, IJSONConvertable, IDescribable, ISortable, IDesc
 	private string subtype;
 	private string loreDescription;
 
+    protected string damageFormula;
+    protected string critFormula;
+
 	private int worth;
 	private int quantity;
+
+    public Stats equipTarget;
 
 	public Item(ItemListID listID, string key, string loreDescription, string type, string subtype, int worth)
 	{
@@ -28,10 +33,11 @@ public class Item : ICloneable, IJSONConvertable, IDescribable, ISortable, IDesc
 		this.loreDescription = loreDescription;
 
 		this.worth = worth;
+        this.damageFormula = Constants.zeroRating;
+        this.critFormula = Constants.zeroRating;
 		this.quantity = 1;
 	}
 
-	[JsonConstructor]
 	public Item(ItemListID listID, string key, string loreDescription, string type, string subtype, int worth, int quantity)
 	{
 		this.listID = listID;
@@ -42,6 +48,39 @@ public class Item : ICloneable, IJSONConvertable, IDescribable, ISortable, IDesc
 		this.loreDescription = loreDescription;
 
 		this.worth = worth;
+        this.damageFormula = Constants.zeroRating;
+        this.critFormula = Constants.zeroRating;
+		this.quantity = quantity;
+	}
+
+	public Item(ItemListID listID, string key, string loreDescription, string damageFormula, string critFormula, string type, string subtype, int worth)
+	{
+		this.listID = listID;
+
+		this.key = key;
+		this.type = type;
+		this.subtype = subtype;
+		this.loreDescription = loreDescription;
+
+		this.worth = worth;
+		this.damageFormula = damageFormula;
+        this.critFormula = critFormula;
+		this.quantity = 1;
+	}
+
+	[JsonConstructor]
+	public Item(ItemListID listID, string key, string loreDescription, string damageFormula, string critFormula, string type, string subtype, int worth, int quantity)
+	{
+		this.listID = listID;
+
+		this.key = key;
+		this.type = type;
+		this.subtype = subtype;
+		this.loreDescription = loreDescription;
+
+		this.worth = worth;
+		this.damageFormula = damageFormula;
+        this.critFormula = critFormula;
 		this.quantity = quantity;
 
 	}
@@ -267,39 +306,65 @@ public class Item : ICloneable, IJSONConvertable, IDescribable, ISortable, IDesc
         return "x" + getQuantity();
 	}
 
+    public Stats getStatSource()
+    {
+        // Helpers.debugNullCheck("equipTarget", equipTarget);
+
+        if (equipTarget == null && !CombatStateManager.inCombat && OverallUIManager.getCurrentPartyMember() != null)
+        {
+            return OverallUIManager.getCurrentPartyMember();
+        } else if(equipTarget == null && !CombatStateManager.inCombat && OverallUIManager.getCurrentPartyMember() == null)
+        {
+            return PartyManager.getPlayerStats();
+        }
+
+        return equipTarget;
+    }
+
+
 	public virtual string getDamageFormula()
 	{
-		return "0";
+		return damageFormula;
 	}
 
-	public virtual int getDamageFormulaTotal()
+	public int getDamageFormulaTotal()
 	{
-		return 0;
+		return DamageCalculator.calculateFormula(getDamageFormula(), getStatSource());
 	}
 
-	public virtual string getDamageTotalForDisplay()
+	public string getDamageTotalForDisplay()
 	{
-		return "0 (0)";
+		if (CombatStateManager.inCombat)
+		{
+			return "" + getDamageFormulaTotal();
+		}
+
+		return "" + getDamageFormulaTotal();
+	}
+
+	public string getDamageFormulaForDisplayAlternate()
+	{
+		return getDamageFormula();
 	}
 
 	public virtual string getCritFormula()
 	{
-		return "0";
+		return critFormula;
 	}
 
-	public virtual int getCritFormulaTotal()
+	public int getCritFormulaTotal()
 	{
-		return 0;
+		return DamageCalculator.calculateFormula(getCritFormula(), getStatSource());
+	}
+
+	public string getCritFormulaForDisplay()
+	{
+		return "(" + getCritFormula() + ")%";
 	}
 
 	public string getCritTotalForDisplay()
 	{
 		return getCritFormulaTotal() + "%";
-	}
-
-	public virtual string getCritFormulaTotalForDisplay()
-	{
-		return DamageCalculator.calculateFormula(getCritFormula(), null) + "%";
 	}
 
 	public virtual CombatAction getCombatAction(AllyStats stats)
@@ -317,9 +382,13 @@ public class Item : ICloneable, IJSONConvertable, IDescribable, ISortable, IDesc
 		return this.MemberwiseClone();
 	}
 
-	public virtual Item clone()
+	public Item clone()
 	{
-		return (Item)Clone();
+        Item cloneOfItem = (Item) Clone();
+
+        cloneOfItem.equipTarget = equipTarget;
+
+		return cloneOfItem;
 	}
 
 	public string convertToJson()
