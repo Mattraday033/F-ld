@@ -39,23 +39,12 @@ public static class Inventory
             }
         }
 
-        Item oldItem;
-
-        if (pocket.TryGetValue(item.getKey(), out oldItem))
-        { // This section checks for an amount of the item already existing in the pocket. 
-          //if it exists, it stores the amount of it, removes it from the State.inventory, then add's it in again along with new amount you're adding
-          //might be slower than adjusting.
-
-            pocket.Remove(item.getKey());
-
-            oldItem.addQuantity(item.getQuantity());
-
-            pocket.Add(item.getKey(), oldItem);
-
+        if (pocket.ContainsKey(item.getKey()))
+        { 
+            pocket[item.getKey()].addQuantity(item.getQuantity());
         }
         else
         {
-
             pocket.Add(item.getKey(), item);
         }
 
@@ -170,30 +159,22 @@ public static class Inventory
             return null;
         }
 
-        Item oldItem;
-
-        if (pocket.TryGetValue(key, out oldItem))
+        if (pocket.ContainsKey(key))
         {
-            if (oldItem.getQuantity() < amount)
-            {
-                throw new IOException("Quantity of " + key + " is already 0. Cannot remove anymore of this item");
-            }
+            Item removedItems = pocket[key].clone();
 
-            oldItem = oldItem.clone();
-
-            oldItem.setQuantity(amount);
+            removedItems.setQuantity(amount);
 
             pocket[key].removeQuantity(amount);
 
-            if (pocket[key].getQuantity() == 0)
+            if (pocket[key].getQuantity() <= 0)
             {
                 pocket.Remove(key);
             }
 
             OnInventoryChange.Invoke();
 
-            return oldItem;
-
+            return removedItems;
         }
         else
         {
@@ -237,22 +218,7 @@ public static class Inventory
             return false;
         }
 
-        try
-        {
-            if (pocket[key].getQuantity() > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
-        catch (KeyNotFoundException e)
-        {
-            return false;
-        }
+        return pocket.ContainsKey(key);
     }
 
     public static bool inventoryContainsItem(string subtype, int ID)

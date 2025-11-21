@@ -19,9 +19,7 @@ public static class MouseHoverManager
     public const bool shouldSpawnHoverIcon = false;
     public const bool shouldDestroyHoverIcon = true;
 
-    public const float timeToWait = .25f;
     public static GameObject mouseHoverBase;
-    public static GameObject hoverDescription;
 
     public static MonoBehaviour coroutineParent;
     public static Coroutine hoverCoroutine;
