@@ -33,8 +33,8 @@ public class SaveHandler : ScreenManager, IEscapable
 		return sWhitespace.Replace(input, replacement);
 	}
 
-	private static string fileExtension = ".json";
-    private static string fileExtensionWithoutPeriod = "json";
+	private const string fileExtension = ".json";
+    private const string fileExtensionWithoutPeriod = "json";
 
     //[SerializeField] 
     public TMP_InputField saveNameField;

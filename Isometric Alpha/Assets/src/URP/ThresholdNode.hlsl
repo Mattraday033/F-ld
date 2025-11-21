@@ -14,26 +14,36 @@
         }
     }
 
-    void Combine_float(float4 main, float4 left, float4 right, float4 top, float4 bottom, out float4 result)
+    void Combine_float(float4 main, float4 left, float4 right, float4 top, float4 bottom, 
+                                    float4 topLeft, float4 topRight, float4 bottomLeft, float4 bottomRight,
+                                    float4 color, out float4 result, out float alpha)
     {
         result = float4(0.0,0.0,0.0,0.0);
+        alpha = 0.0;
 
-        if(main.w > 0)
+        if(main.w > .1)
         {
             result = main;
-        } else if(right.w > 0)
+        } else 
         {
-            result = right;
-        } else if(left.w > 0)
-        {
-            result = left;
-        } else if(top.w > 0)
-        {
-            result = top;
-        } else if(bottom.w > 0)
-        {
-            result = bottom;
+            float4 outlines[8] = {left, right, top, bottom, topLeft, topRight, bottomLeft, bottomRight};
+
+            int highestAlphaIndex = 0;
+            float highestAlpha = 0.0;
+
+            for(int index = 0; index < outlines.Length; index++)
+            {
+                if(outlines[index].w > .1)
+                {
+                    result = color;
+                    break;
+                }
+            }
+
+            // result = outlines[highestAlphaIndex];
         }
+
+        alpha = result.w;
     }
 
 #endif
