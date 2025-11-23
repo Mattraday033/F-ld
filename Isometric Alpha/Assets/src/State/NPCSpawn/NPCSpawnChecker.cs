@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class NPCSpawnChecker : MonoBehaviour, IRevealable
+public class NPCSpawnChecker : MonoBehaviour
 {
 	public bool ignoreHover;
 
@@ -28,11 +28,6 @@ public class NPCSpawnChecker : MonoBehaviour, IRevealable
 
 	public GameObject targetCanvas;
 
-	private void Awake()
-	{
-		spawnTargetCanvas();
-	}
-
 	private void OnEnable()
 	{
 		spawnCheck();
@@ -44,7 +39,7 @@ public class NPCSpawnChecker : MonoBehaviour, IRevealable
 		destroyListeners();
 	}
 
-	public void handleNameTagOnReveal()
+	public void handleNameTagOnReveal(bool toggleReveal)
 	{
 		if (noNameTag)
 		{
@@ -153,6 +148,11 @@ public class NPCSpawnChecker : MonoBehaviour, IRevealable
 
 	//IRevealable interface methods
 
+    public SpriteOutline getSpriteOutline()
+    {
+        return null;
+    }
+
 	public void createListeners()
 	{
 		RevealManager.OnReveal.AddListener(onReveal);
@@ -165,15 +165,20 @@ public class NPCSpawnChecker : MonoBehaviour, IRevealable
 		RevealManager.OnReveal.RemoveListener(handleNameTagOnReveal);
 	}
 
-	public void onReveal()
+	public void onReveal(bool toggleReveal)
 	{
-		RevealManager.setRevealForGameObject(gameObject, getRevealColor());
+		// RevealManager.setRevealForGameObject(gameObject, getRevealColor());
 	}
 
 	public Color getRevealColor()
 	{
-		return RevealManager.canBeInteractedWith;
+		return ColorList.canBeInteractedWith;
 	}
+
+	public OutlineMode getOutlineSize()
+    {
+        return OutlineMode.Bold;
+    }
 
 	private void spawnNameTag()
 	{
@@ -194,15 +199,6 @@ public class NPCSpawnChecker : MonoBehaviour, IRevealable
 		}
 	}
 
-	public void spawnTargetCanvas()
-	{
-		if (targetCanvas == null && GetComponent<SpriteRenderer>() != null && !ignoreHover)
-		{
-			// gameObject.AddComponent<RectTransform>();
-			// targetCanvas = Instantiate(Resources.Load<GameObject>(PrefabNames.targetBox), transform);
-		}
-	}
-
 	public void createHoverTag()
 	{
 		//Empty on purpose (may add for things like portcullis controls in mine lvl 2)
@@ -217,7 +213,7 @@ public class NPCSpawnChecker : MonoBehaviour, IRevealable
                 eventData.Use();
             }
 
-            RevealManager.setOutlineColor(gameObject, getRevealColor());
+            // RevealManager.setOutlineColor(gameObject, getRevealColor());
             spawnNameTag();
         }
     }
@@ -226,7 +222,7 @@ public class NPCSpawnChecker : MonoBehaviour, IRevealable
 	{
 		if (!RevealManager.currentlyRevealed && !ignoreHover)
 		{
-			RevealManager.setOutlineColorToDefault(gameObject);
+			// RevealManager.setOutlineColorToDefault(gameObject);
 			destroyNameTag();
 		}
 	}

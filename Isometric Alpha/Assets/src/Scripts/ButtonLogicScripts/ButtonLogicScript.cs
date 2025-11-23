@@ -79,7 +79,6 @@ public class OpenGateButtonLogicScript : ButtonLogicScript
     {
         if (validButtonForScript(floorButton))
         {
-            Debug.LogError("pressed count for script ()" + (AreaManager.locationName + gateKey + scriptIndex) + ") +1");
             pressedCount += floorButton.weight;
         }
     }

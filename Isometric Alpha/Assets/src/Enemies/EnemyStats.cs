@@ -99,7 +99,7 @@ public class EnemyStats : Stats
 
     public override Color getOutlineColor()
     {
-        return RevealManager.attacksOnSight;
+        return ColorList.attacksOnSight;
     }
 
     public override GridCoords getPositionToHit(Selector selector, int skips)

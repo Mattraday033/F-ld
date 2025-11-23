@@ -33,7 +33,7 @@ public class Shopkeeper : MonoBehaviour
         }
         else
         {
-            shopkeeperInventoryKey = gameObject.GetComponent<DialogueTrigger>().getDialogue().getMainNPCName();
+            shopkeeperInventoryKey = gameObject.GetComponent<DialogueTrigger>().getDialogue().getName();
 
             return shopkeeperInventoryKey;
         }

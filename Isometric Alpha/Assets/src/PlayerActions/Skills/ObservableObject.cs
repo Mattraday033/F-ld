@@ -45,11 +45,30 @@ public class TutorialSecretDoorInfo : SecretDoorInfo
     }
 }
 
-public class ObservableObject : MonoBehaviour
+public class ObservableObject : MonoBehaviour, INonRevealableNameSource
 {
     public bool observed = false;
     public string secretDoorKey;
     public SpriteRenderer spriteRenderer;
+
+    public DialogueTrigger dialogueTrigger;
+
+    public string getName()
+    {
+        return dialogueTrigger.getName();
+    }
+
+    public bool isRevealable()
+    {
+        if(gameObject.layer == LayerAndTagManager.npcLayer)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+
 
     private void OnEnable()
     {

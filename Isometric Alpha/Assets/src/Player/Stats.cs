@@ -66,6 +66,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     #region Sprite and GameObject
 
     public SpriteRenderer spriteRenderer;
+    public SpriteOutline outline;
 
     public virtual Color getSpriteColor()
     {
@@ -74,7 +75,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual Color getOutlineColor()
     {
-        return RevealManager.canBeInteractedWith;
+        return ColorList.canBeInteractedWith;
     }
 
     public void setPreviousColor(Color newColor)
@@ -127,6 +128,9 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         }
         
         spriteRenderer = list.spriteRenderer;
+
+        outline = new SpriteOutline();
+        outline.setSpriteRenderer(spriteRenderer);
     }
 
     public virtual AbilityMenuManager getAbilityMenuManager()

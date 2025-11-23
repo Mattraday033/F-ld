@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 517585897779863325}
   - component: {fileID: -5299874797357560549}
   - component: {fileID: 6576346719778344862}
-  - component: {fileID: 8761656224251614378}
   - component: {fileID: 3876896030663513859}
   - component: {fileID: 2738034900309326918}
+  - component: {fileID: 3634232630484593473}
   m_Layer: 16
   m_Name: NPC
   m_TagString: NPC
@@ -177,18 +177,6 @@ MonoBehaviour:
   isRestNPC: 0
   isCompanion: 0
   hostility: 0
---- !u!114 &8761656224251614378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5555899077454664655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f5492c6f059a6f40873cd7d35adee4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1839735485 &3876896030663513859
 Tilemap:
   m_ObjectHideFlags: 0
@@ -297,6 +285,23 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &3634232630484593473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5555899077454664655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce29e502aaff19e4d925b1cf00eaa5b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreHover: 0
+  noNameTag: 0
+  spriteRenderer: {fileID: -4968793318184311776}
+  nameTag: {fileID: 0}
+  targetCanvas: {fileID: 0}
 --- !u!1001 &2344614687612598003
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -364,6 +369,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MouseHover
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342533383209927448, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342533383209927448, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342533383209927448, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0.025
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

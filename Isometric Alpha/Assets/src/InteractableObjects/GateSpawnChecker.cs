@@ -11,11 +11,6 @@ public class GateSpawnChecker : MonoBehaviour, IRevealable
 	public string gateKey;
 	public GameObject targetCanvas;
 
-	private void Awake()
-	{
-		spawnTargetCanvas();
-	}
-
 	void Start()
 	{
 		if (GateAndChestManager.hasBeenOpened(gateKey))
@@ -57,32 +52,25 @@ public class GateSpawnChecker : MonoBehaviour, IRevealable
 		RevealManager.OnReveal.RemoveListener(onReveal);
 	}
 
-	public void onReveal()
+    public SpriteOutline getSpriteOutline()
+    {
+        return null;
+    }
+
+	public void onReveal(bool toggleReveal)
 	{
-		RevealManager.setRevealForGameObject(gameObject, getRevealColor());
+		// RevealManager.setRevealForGameObject(gameObject, getRevealColor());
 	}
 
 	public Color getRevealColor()
 	{
-		return RevealManager.canBeInteractedWith;
+		return ColorList.canBeInteractedWith;
 	}
 
-	public void spawnTargetCanvas()
-	{
-		if (targetCanvas == null)
-		{
-			gameObject.AddComponent<RectTransform>();
-			if (exactDimensionsHover)
-			{
-				targetCanvas = Instantiate(Resources.Load<GameObject>(PrefabNames.targetCanvas), transform);
-			}
-			else
-			{
-				targetCanvas = Instantiate(Resources.Load<GameObject>(PrefabNames.targetBox), transform);
-			}
-
-		}
-	}
+	public OutlineMode getOutlineSize()
+    {
+        return OutlineMode.Normal;
+    }
 
 	public void createHoverTag()
 	{
@@ -94,7 +82,7 @@ public class GateSpawnChecker : MonoBehaviour, IRevealable
 	{
 		if (!RevealManager.currentlyRevealed)
 		{
-			RevealManager.setOutlineColor(gameObject, getRevealColor());
+			// RevealManager.setOutlineColor(gameObject, getRevealColor());
 			createHoverTag();
 		}
 	}
@@ -103,7 +91,7 @@ public class GateSpawnChecker : MonoBehaviour, IRevealable
 	{
 		if (!RevealManager.currentlyRevealed)
 		{
-			RevealManager.setOutlineColorToDefault(gameObject);
+			// RevealManager.setOutlineColorToDefault(gameObject);
 		}
 
 		MouseHoverManager.destroyMouseHoverBase();

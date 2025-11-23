@@ -85,13 +85,13 @@ public class ObjectSpawnChecker : MonoBehaviour
 		RevealManager.OnReveal.RemoveListener(onReveal);
 	}
 
-	public void onReveal()
+	public void onReveal(bool toggleReveal)
 	{
-		RevealManager.setRevealForGameObject(gameObject, getRevealColor());
+		// RevealManager.setRevealForGameObject(gameObject, getRevealColor());
 	}
 
 	public Color getRevealColor()
 	{
-		return RevealManager.canBeInteractedWith;
+		return ColorList.canBeInteractedWith;
 	}
 }

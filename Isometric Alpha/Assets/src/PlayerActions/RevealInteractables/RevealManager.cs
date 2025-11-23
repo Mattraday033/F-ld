@@ -7,135 +7,31 @@ using UnityEngine.EventSystems;
 public interface IRevealable : IPointerEnterHandler,
 	IPointerExitHandler
 {
+    public SpriteOutline getSpriteOutline();
+    
 	public void createListeners();
 
 	public void destroyListeners();
 
-	public void onReveal();
+	public void onReveal(bool toggleReveal);
 
 	public Color getRevealColor();
-
-	public void spawnTargetCanvas();
+	public OutlineMode getOutlineSize();
 
 	public void createHoverTag();
 }
 
 public static class RevealManager
 {
-	public static bool currentlyRevealed = false;
+	public static bool currentlyRevealed;
 
-	public static UnityEvent OnReveal = new UnityEvent();
+	public readonly static UnityEvent<bool> OnReveal = new UnityEvent<bool>();
 
-	public static Color attacksOnSight = Color.red;
-	public static Color canBeInteractedWith = Color.green;
-	public static Color canBePushed = Color.blue;
-	public static Color canBeCunninged = Color.yellow;
-	public static Color defaultWhenNotRevealed = Color.clear;
-	public static Color tutorialDefault = Color.cyan;
-
-	public static void setRevealForGameObject(GameObject gameObject, Color outlineColor)
-	{
-		if (gameObject == null)
-		{
-			return;
-		}
-
-		SpriteOutline outlineComponent = gameObject.GetComponent<SpriteOutline>();
-
-		if (outlineComponent == null || outlineComponent is null)
-		{
-			return;
-		}
-
-		if (currentlyRevealed || CombatStateManager.inCombat)
-		{
-			setOutlineColor(outlineComponent, outlineColor);
-		}
-		else
-		{
-			setOutlineColorToDefault(outlineComponent);
-		}
-	}
-
-	public static void setOutlineColor(GameObject gameObject, Color outlineColor)
-	{
-		if (gameObject == null)
-		{
-			return;
-		}
-
-		setOutlineColor(gameObject.GetComponent<SpriteOutline>(), outlineColor);
-	}
-	public static void setOutlineColor(SpriteOutline outlineComponent, Color outlineColor)
-	{
-		if (outlineComponent == null)
-		{
-			return;
-		}
-
-		outlineComponent.color = outlineColor;
-		resetOutlineComponent(outlineComponent);
-	}
-
-	public static void setOutlineColorToDefault(GameObject gameObject)
-	{
-		if (gameObject == null)
-		{
-			return;
-		}
-
-		setOutlineColorToDefault(gameObject.GetComponent<SpriteOutline>());
-	}
-
-	public static void setOutlineColorToDefault(SpriteOutline outlineComponent)
-	{
-		if (outlineComponent == null)
-		{
-			return;
-		}
-
-		outlineComponent.color = defaultWhenNotRevealed;
-		resetOutlineComponent(outlineComponent);
-	}
-
-	private static void resetOutlineComponent(SpriteOutline outlineComponent)
-	{
-		if (outlineComponent == null)
-		{
-			return;
-		}
-
-		outlineComponent.enabled = false;
-		outlineComponent.enabled = true;
-	}
-
-	public static void manuallyRevealGameObject(GameObject gameObject, Color outlineColor)
-	{
-		SpriteOutline outlineComponent = gameObject.GetComponent<SpriteOutline>();
-
-		if (outlineComponent == null || outlineComponent is null)
-		{
-			return;
-		}
-
-		outlineComponent.color = outlineColor;
-
-		Helpers.updateColliderPosition(gameObject);
-	}
-
-	public static void manuallyUnrevealGameObject(GameObject gameObject)
-	{
-		SpriteOutline outlineComponent = gameObject.GetComponent<SpriteOutline>();
-
-		if (outlineComponent == null || outlineComponent is null)
-		{
-			return;
-		}
-
-		outlineComponent.color = defaultWhenNotRevealed;
-		
-		Helpers.updateColliderPosition(gameObject);
-	}
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeRevealManager()
+    {
+        currentlyRevealed = false;
+    }
 
 	public static void toggleReveal()
 	{
@@ -146,6 +42,16 @@ public static class RevealManager
 
 	public static void revealAllObjects()
 	{
-		OnReveal.Invoke();
+		OnReveal.Invoke(currentlyRevealed);
 	}
+
+    public static void resetReveals()   // For when non-standard highlight colors are used, 
+    {                                   // and you want to reset to the correct outline colors
+        OnReveal.Invoke(Constants.removeReveal);
+
+        if(currentlyRevealed)
+        {
+           OnReveal.Invoke(Constants.reveal);
+        }
+    }
 }

@@ -28,7 +28,7 @@ public class SummonStats : EnemyStats
 	
 	public override Color getOutlineColor()
 	{
-		return RevealManager.canBeInteractedWith;
+		return ColorList.canBeInteractedWith;
 	}
 	
 	public override Trait getZoneOfInfluenceTrait()

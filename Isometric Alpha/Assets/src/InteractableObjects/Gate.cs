@@ -9,10 +9,13 @@ public class Gate : MonoBehaviour, IRevealable
     public string hoverName;
 
     public SpriteRenderer spriteRenderer;
+    public SpriteOutline outline;
 
     protected virtual void Awake()
     {
+        outline = new SpriteOutline();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        outline.setSpriteRenderer(spriteRenderer);
     }
 
     public void setKey(string gateKey)
@@ -47,6 +50,11 @@ public class Gate : MonoBehaviour, IRevealable
 
 	//IRevealable interface methods
 
+    public SpriteOutline getSpriteOutline()
+    {
+        return outline;
+    }
+
 	public virtual void createListeners()
 	{
         RevealManager.OnReveal.AddListener(onReveal);
@@ -59,20 +67,26 @@ public class Gate : MonoBehaviour, IRevealable
         GateAndChestManager.OnGateKeyAdd.RemoveListener(checkGateStatus);
 	}
 
-	public void onReveal()
+	public void onReveal(bool toggleReveal)
 	{
-		RevealManager.setRevealForGameObject(gameObject, getRevealColor());
+        if(toggleReveal)
+        {
+            outline.createOutline(getRevealColor(), getOutlineSize());
+        } else
+        {
+            outline.removeOutline();
+        }
 	}
 
 	public Color getRevealColor()
 	{
-		return RevealManager.canBeInteractedWith;
+		return ColorList.canBeInteractedWith;
 	}
 
-	public void spawnTargetCanvas()
-	{
-
-	}
+	public OutlineMode getOutlineSize()
+    {
+        return OutlineMode.Bold;
+    }
 
 	public void createHoverTag()
 	{
@@ -84,7 +98,7 @@ public class Gate : MonoBehaviour, IRevealable
 	{
 		if (!RevealManager.currentlyRevealed)
 		{
-			RevealManager.setOutlineColor(gameObject, getRevealColor());
+            outline.createOutline(getRevealColor(), getOutlineSize());
 			createHoverTag();
 		}
 	}
@@ -93,7 +107,7 @@ public class Gate : MonoBehaviour, IRevealable
 	{
 		if (!RevealManager.currentlyRevealed)
 		{
-			RevealManager.setOutlineColorToDefault(gameObject);
+			outline.removeOutline();
 		}
 
 		MouseHoverManager.destroyMouseHoverBase();

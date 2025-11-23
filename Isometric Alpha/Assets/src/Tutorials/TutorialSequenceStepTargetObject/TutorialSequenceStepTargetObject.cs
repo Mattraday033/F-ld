@@ -150,7 +150,16 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
 			return;
 		}
 
-		RevealManager.manuallyRevealGameObject(gameObject, RevealManager.tutorialDefault);
+        IRevealable revealable = gameObject.GetComponent<IRevealable>();
+
+        if(revealable == null)
+        {
+            return;
+        }
+
+        SpriteOutline spriteOutline = revealable.getSpriteOutline();
+
+        spriteOutline.createOutline(ColorList.tutorialDefault, OutlineMode.Normal);
 	}
 	
     public virtual void unhighlight(bool skip)
@@ -160,6 +169,15 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
 			return;
 		}
 		
-		RevealManager.manuallyUnrevealGameObject(gameObject);	
+        IRevealable revealable = gameObject.GetComponent<IRevealable>();
+
+        if(revealable == null)
+        {
+            return;
+        }
+
+        SpriteOutline spriteOutline = revealable.getSpriteOutline();
+
+        spriteOutline.removeOutline();
 	}
 }

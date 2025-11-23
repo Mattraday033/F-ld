@@ -10,7 +10,7 @@ public class SkipTutorialScript : ScriptableObject
         CunningManager.getInstance().destroySkillArea();
         ObservationManager.getInstance().destroySkillArea();
 
-        RevealManager.OnReveal.Invoke();
+        RevealManager.resetReveals();
 
         TutorialSequence.endCurrentTutorialSequence();
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
@@ -26,7 +26,7 @@ public class SkipInteractionTutorialScript : SkipTutorialScript
         CunningManager.getInstance().destroySkillArea();
         ObservationManager.getInstance().destroySkillArea();
 
-        RevealManager.OnReveal.Invoke();
+        RevealManager.resetReveals();
 
         TutorialSequence.endCurrentTutorialSequence();
         DialogueManager.getInstance().endDialogue();

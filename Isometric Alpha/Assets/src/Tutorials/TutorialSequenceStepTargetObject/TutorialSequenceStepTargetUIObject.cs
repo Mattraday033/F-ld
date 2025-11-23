@@ -76,7 +76,7 @@ public class TutorialSequenceStepTargetUIObject : TutorialSequenceStepTargetObje
 		if (image != null)
 		{
 			previousColor = image.color;
-			image.color = RevealManager.tutorialDefault;
+			image.color = ColorList.tutorialDefault;
 		}
 	}
 

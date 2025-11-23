@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 252820351671257986}
   - component: {fileID: 7450099372692967583}
   - component: {fileID: 7969805419722209152}
+  - component: {fileID: 8222206575868024775}
   m_Layer: 19
   m_Name: Chest
   m_TagString: Untagged
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 877229515
   m_SortingLayer: 6
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: d5fc965a55292e4478e529e6a3c0b48b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bc7afb700f8e87c4fb6a29b5a1147377, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,6 +105,7 @@ MonoBehaviour:
   mouseHoverCollider: {fileID: 442924692877372290}
   facing: 1
   chestState: 0
+  chestType: 0
   spriteRenderer: {fileID: 6660733450008172774}
   chestIndex: 0
   chestContentsItemType: 0
@@ -237,6 +239,23 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 3
   m_CellSwizzle: 0
+--- !u!114 &8222206575868024775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6199324058133591741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce29e502aaff19e4d925b1cf00eaa5b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreHover: 0
+  noNameTag: 0
+  spriteRenderer: {fileID: 6660733450008172774}
+  nameTag: {fileID: 0}
+  targetCanvas: {fileID: 0}
 --- !u!1001 &8494690771702950042
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -308,12 +327,12 @@ PrefabInstance:
     - target: {fileID: 8342533383209927448, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
         type: 3}
       propertyPath: m_Size.x
-      value: 0.65
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8342533383209927448, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
         type: 3}
       propertyPath: m_Size.y
-      value: 0.65
+      value: 1.35
       objectReference: {fileID: 0}
     - target: {fileID: 8342533383209927448, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
         type: 3}
@@ -323,7 +342,7 @@ PrefabInstance:
     - target: {fileID: 8342533383209927448, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
         type: 3}
       propertyPath: m_Offset.y
-      value: 0.075
+      value: 0.475
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

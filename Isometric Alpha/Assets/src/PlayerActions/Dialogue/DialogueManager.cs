@@ -48,12 +48,10 @@ public class DialogueManager : MonoBehaviour
 	private bool waitingOnFadeToBlack = false;
 	private bool waitingOnFadeBackIn = false;
 
-	private const float defaultXDamping = .5f;
-	private const float defaultYDamping = .5f;
+	private const float defaultXDamping = 0f;
+	private const float defaultYDamping = 0f;
 	private const float dialogueXDamping = 1.25f;
 	private const float dialogueYDamping = 1.25f;
-	public const float fadeXDamping = 0f;
-	public const float fadeYDamping = 0f;
 	private int frames = 60;
 	private int framesToWait = 60;
 
@@ -365,12 +363,6 @@ public class DialogueManager : MonoBehaviour
 		instance.framingTransposer.m_YDamping = dialogueYDamping;
 	}
 
-	public static void setCameraToFadeSpeed()
-	{
-		instance.framingTransposer.m_XDamping = fadeXDamping;
-		instance.framingTransposer.m_YDamping = fadeYDamping;
-	}
-
 	public void spawnDialogueTrackerWindowWithoutChoices()
 	{
 		dialogueTrackerButton.withChoices = false;
@@ -398,7 +390,7 @@ public class DialogueManager : MonoBehaviour
 
                 if (npcDialogueTrigger != null)
                 {
-                    if (currentDialogue.names[nameIndex].Equals(npcDialogueTrigger.getMainNPCName()))
+                    if (currentDialogue.names[nameIndex].Equals(npcDialogueTrigger.getName()))
                     {
                         currentDialogue.names[nameIndex] = currentDialogue.names[nameIndex];
                         currentDialogue.cameraFoci[nameIndex] = child.gameObject;
@@ -744,7 +736,7 @@ public class DialogueManager : MonoBehaviour
                         continueAfterTransparent = bool.Parse(fadeToBlackArgs[Constants.indexOne]);
                     }
 
-                    setCameraToFadeSpeed();
+                    setCameraToDefaultSpeed();
 
                     fadeToBlackManager.setAndStartFadeToBlack();
                     waitingOnFadeToBlack = true;

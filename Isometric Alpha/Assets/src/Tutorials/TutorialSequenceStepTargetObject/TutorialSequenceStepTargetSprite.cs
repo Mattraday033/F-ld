@@ -17,7 +17,7 @@ public class TutorialSequenceStepTargetSprite : TutorialSequenceStepTargetObject
         //        Debug.LogError("Outlines temporarily disabled");
 
         // previousColor = spriteRenderer.color;
-        // spriteRenderer.color = RevealManager.tutorialDefault;
+        // spriteRenderer.color = ColorList.tutorialDefault;
     }
 	
     public override void unhighlight(bool skip)

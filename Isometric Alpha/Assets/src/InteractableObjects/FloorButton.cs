@@ -11,7 +11,7 @@ public interface IFloorButton
 	
 }
 
-public class FloorButton : MonoBehaviour
+public class FloorButton : MonoBehaviour, INameSource
 {
 
 	public Collider2D collider;
@@ -24,6 +24,11 @@ public class FloorButton : MonoBehaviour
     void Start()
     {
         StartCoroutine(waitThreeFramesThenSetSprite());
+    }
+
+    public string getName()
+    {
+        return NPCNameList.button;
     }
 
     private IEnumerator waitThreeFramesThenSetSprite()
@@ -56,10 +61,12 @@ public class FloorButton : MonoBehaviour
     {
         if(isPressed())
         {
-            spriteRenderer.color = Color.green;
+            spriteRenderer.sprite = Resources.Load<Sprite>(PrefabNames.buttonDownStoneFolderPath);            
+            // spriteRenderer.color = Color.green;
         } else
         {
-            spriteRenderer.color = Color.white;            
+            spriteRenderer.sprite = Resources.Load<Sprite>(PrefabNames.buttonUpStoneFolderPath);      
+            // spriteRenderer.color = Color.white;            
         }
     }
 

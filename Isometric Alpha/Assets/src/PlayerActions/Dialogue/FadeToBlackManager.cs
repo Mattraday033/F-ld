@@ -184,7 +184,7 @@ public class FadeToBlackManager : MonoBehaviour
 
         GC.Collect();
 
-        DialogueManager.setCameraToFadeSpeed();
+        DialogueManager.setCameraToDefaultSpeed();
 
     }
 	
@@ -200,6 +200,11 @@ public class FadeToBlackManager : MonoBehaviour
             DialogueManager.setCameraToDialogueSpeed();
         } else
         {
+            if(RevealManager.currentlyRevealed)
+            {
+                RevealManager.revealAllObjects();
+            }
+
             DialogueManager.setCameraToDefaultSpeed();
         }        
 
@@ -221,8 +226,7 @@ public class FadeToBlackManager : MonoBehaviour
 		
 		frameCount = 0;
 		updateFadeToBlackImageOpacity();
-		RevealManager.revealAllObjects();
-		
+
 		yield break;
 	}
 

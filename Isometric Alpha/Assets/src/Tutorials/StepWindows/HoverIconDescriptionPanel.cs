@@ -36,7 +36,7 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
 
         if (alwaysTop)
         {
-            direction = ArrowDirection.Bottom;
+            direction = ArrowDirection.Top;
         } else
         {
             direction = getDirectionOfHover(RectTransformUtility.WorldToScreenPoint(Camera.main, centerWorldPosition));    
@@ -158,6 +158,12 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
         
         thirdLayoutGroup.padding.top = heightPadding;
         thirdLayoutGroup.padding.bottom = heightPadding;
+
+        if(alwaysTop)
+        {
+            thirdLayoutGroup.padding.top = (int) ((float) thirdLayoutGroup.padding.top * -.8f);
+        }
+
     }
 
     private static bool mouseInWidthFirstSection(int mousePosX)

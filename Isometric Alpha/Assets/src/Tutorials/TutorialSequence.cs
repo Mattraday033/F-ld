@@ -880,7 +880,7 @@ public class TutorialSequence
             currentTutorialSequence = null;
             TutorialSequenceStep.hashFound = false;
 
-            RevealManager.OnReveal.Invoke();
+            RevealManager.resetReveals();
 
             if (tutorialSequenceQueue.Count > 0)
             {

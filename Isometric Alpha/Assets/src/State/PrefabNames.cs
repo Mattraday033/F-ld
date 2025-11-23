@@ -177,6 +177,8 @@ public static class PrefabNames
     public const string dragAndDropItemIcon = "Drag And Drop Item Icon";
     public const string dragAndDropItemShopIcon = "Drag And Drop Item Shop Icon";
 
+    public const string outlineMaterial = "Sprite-Outline-Material";
+
     #endregion
 
     #region Interactable Game Objects
@@ -235,6 +237,10 @@ public static class PrefabNames
     public const string positiveEffectFolderPath = abilityEffectFolderPath + "Positive Effect";
     public const string healingEffectFolderPath = abilityEffectFolderPath + "Healing Effect";
     public const string batSwarmEffectFolderPath = abilityEffectFolderPath + "Bat Swarm";
+
+    public const string buttonsFolderPath = spriteFolder + "Buttons/";
+    public const string buttonUpStoneFolderPath = buttonsFolderPath + "Button_Up_Stone";
+    public const string buttonDownStoneFolderPath = buttonsFolderPath + "Button_Down_Stone";
 
     public const string cratesAndBarrelsFolder = spriteFolder + "CratesAndBarrels/";
     public const string vaultableBarrels = cratesAndBarrelsFolder + "VaultableBarrels";

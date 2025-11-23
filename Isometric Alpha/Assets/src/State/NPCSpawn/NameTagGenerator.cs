@@ -11,13 +11,29 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
     public bool ignoreHover;
 	public bool noNameTag = false;
 
+    public SpriteOutline outline;
+
+    public SpriteRenderer spriteRenderer;
+
+    public INameSource nameSource;
 	public DescriptionPanel nameTag;
 
 	public GameObject targetCanvas;
 
 	private void Awake()
 	{
-		spawnTargetCanvas();
+        outline = new SpriteOutline();
+        outline.setSpriteRenderer(spriteRenderer);
+
+        INonRevealableNameSource nonRevealableNameSource = GetComponent<INonRevealableNameSource>();
+
+        if(nonRevealableNameSource != null)
+        {
+            nameSource = nonRevealableNameSource;
+        } else
+        {
+            nameSource = GetComponent<INameSource>();
+        }
 	}
 
 	private void OnEnable()
@@ -30,7 +46,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 		destroyListeners();
 	}
 
-	public void handleNameTagOnReveal()
+	public void handleNameTagOnReveal(bool toggleReveal)
 	{
 		if (noNameTag)
 		{
@@ -52,29 +68,57 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 	public void createListeners()
 	{
 		RevealManager.OnReveal.AddListener(onReveal);
-		RevealManager.OnReveal.AddListener(handleNameTagOnReveal);
+		// RevealManager.OnReveal.AddListener(handleNameTagOnReveal);
 	}
 
 	public void destroyListeners()
 	{
 		RevealManager.OnReveal.RemoveListener(onReveal);
-		RevealManager.OnReveal.RemoveListener(handleNameTagOnReveal);
+		// RevealManager.OnReveal.RemoveListener(handleNameTagOnReveal);
 	}
 
-	public void onReveal()
+    public SpriteOutline getSpriteOutline()
+    {
+        return outline;
+    }
+
+	public void onReveal(bool toggleReveal)
 	{
-		RevealManager.setRevealForGameObject(gameObject, getRevealColor());
+        if(!nameSourceRevealable())
+        {
+            return;
+        }
+
+        if(toggleReveal)
+        {
+            outline.createOutline(getRevealColor(), getOutlineSize());
+        } else
+        {
+            outline.removeOutline();
+        }
 	}
 
 	public Color getRevealColor()
 	{
-		return RevealManager.canBeInteractedWith;
+		return ColorList.canBeInteractedWith;
 	}
+
+	public OutlineMode getOutlineSize()
+    {
+        return OutlineMode.Bold;
+    }
 
 	private void spawnNameTag()
 	{
+        if(gameObject.GetComponent<RectTransform>() == null)
+        {
+            gameObject.AddComponent<RectTransform>();
+        }
+
 		if (nameTag == null && !noNameTag)
 		{
+           
+
 			nameTag = Instantiate(Resources.Load<GameObject>(PrefabNames.npcNameTag), transform).GetComponent<DescriptionPanel>();
 
 			nameTag.nameText.text = getName();
@@ -83,7 +127,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
     private string getName()
     {
-        return GetComponent<DialogueTrigger>().dialogue.names[1];
+        return DialogueList.scrubNameOfEndNumbers(nameSource.getName());
     }
 
     private void destroyNameTag()
@@ -95,40 +139,45 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
         }
     }
 
-	public void spawnTargetCanvas()
-	{
-		if (targetCanvas == null && GetComponent<SpriteRenderer>() != null && !ignoreHover)
-		{
-			// gameObject.AddComponent<RectTransform>();
-			// targetCanvas = Instantiate(Resources.Load<GameObject>(PrefabNames.targetBox), transform);
-		}
-	}
-
 	public void createHoverTag()
 	{
 		//Empty on purpose (may add for things like portcullis controls in mine lvl 2)
 	}
 
+    public bool nameSourceRevealable()
+    {
+        return INonRevealableNameSource.nameSourceIsRevealable(nameSource);
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!RevealManager.currentlyRevealed && !ignoreHover && (eventData == null || !eventData.used))
+        if (nameSourceRevealable() && (!ignoreHover && (eventData == null || !eventData.used)))
         {
             if (eventData != null)
             {
                 eventData.Use();
             }
 
-            RevealManager.setOutlineColor(gameObject, getRevealColor());
+            if(!RevealManager.currentlyRevealed)
+            {
+                outline.createOutline(getRevealColor(), OutlineMode.Bold);
+            }
+
             spawnNameTag();
         }
     }
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
-		if (!RevealManager.currentlyRevealed && !ignoreHover)
+		if (!ignoreHover)
 		{
-			RevealManager.setOutlineColorToDefault(gameObject);
+            if(!RevealManager.currentlyRevealed)
+            {
+                outline.removeOutline();
+            }
 			destroyNameTag();
 		}
 	}
+
+
 }

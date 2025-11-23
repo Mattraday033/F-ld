@@ -8,7 +8,25 @@ using UnityEngine.SceneManagement;
 public enum ChestType {Chest, Shelf }
 public enum ChestState { Closed, OpenFilled, OpenEmpty }
 
-public class Chest : MonoBehaviour, IRevealable
+public interface INonRevealableNameSource: INameSource
+{
+    public bool isRevealable();
+
+    public static bool nameSourceIsRevealable(INameSource nameSource)
+    {
+        INonRevealableNameSource nonRevealableNameSource = nameSource as INonRevealableNameSource;
+
+        if(nonRevealableNameSource == null)
+        {
+            return true;
+        } else
+        {
+            return nonRevealableNameSource.isRevealable();
+        }   
+    }
+}
+
+public class Chest : MonoBehaviour, INonRevealableNameSource
 {
 
     private const string tagText = "Chest";
@@ -17,6 +35,11 @@ public class Chest : MonoBehaviour, IRevealable
     private readonly static Vector2 mouseHoverOffsetNW = new Vector2(-0.11f,-0.025f);
     private readonly static Vector2 mouseHoverOffsetSE = new Vector2(-0.075f,0.075f);
     private readonly static Vector2 mouseHoverOffsetSW = new Vector2(0.075f,0.075f);
+
+    private readonly static Vector2 mouseHoverOffsetLarge = new Vector2(-0.075f,0.475f);
+
+    private readonly static Vector2 mouseHoverSmallSize = new Vector2(0.65f,0.65f);
+    private readonly static Vector2 mouseHoverLargeSize = new Vector2(0.7f,1.35f);
 
     private static Dictionary<KeyValuePair<Facing, ChestState>, string> chestSprites;
     private static Dictionary<KeyValuePair<Facing, ChestState>, string> shelfSprites;
@@ -70,6 +93,7 @@ public class Chest : MonoBehaviour, IRevealable
     public ChestType chestType = ChestType.Chest;
 
     public SpriteRenderer spriteRenderer;
+    public SpriteOutline outline;
 
     public int chestIndex;
     //public bool FooBar { get; protected set; }
@@ -92,20 +116,27 @@ public class Chest : MonoBehaviour, IRevealable
 
     public GameObject targetCanvas;
 
-    private void Awake()
+    public string getName()
     {
-        spawnTargetCanvas();
+        return chestType.ToString();
+    }
+
+    public bool isRevealable()
+    {
+        return !GateAndChestManager.hasBeenOpened(getChestKey());
     }
 
     private void OnEnable()
     {
-        createListeners();
+        // createListeners();
+        outline = new SpriteOutline();
+        outline.setSpriteRenderer(spriteRenderer);
     }
 
-    private void OnDisable()
-    {
-        destroyListeners();
-    }
+    // private void OnDisable()
+    // {
+    //     destroyListeners();
+    // }
 
     public void populate(int index, Facing facing, ChestType type)
     {
@@ -113,7 +144,7 @@ public class Chest : MonoBehaviour, IRevealable
 
         this.facing = facing;
         chestType = type;
-        setMouseHoverOffset();
+        setMouseHoverPosition();
 
         chestContents = ChestItemIDList.getChestItem(AreaManager.locationName, chestIndex);
 
@@ -142,26 +173,39 @@ public class Chest : MonoBehaviour, IRevealable
                 spriteRenderer.flipX = false;
                 break;
         }    
+
+        setMouseHoverPosition();
     }
 
-    private void setMouseHoverOffset()
+    private void setMouseHoverPosition()
     {
-        switch(facing)
+        switch(chestType)
         {
-            case Facing.NorthEast:
-                mouseHoverCollider.offset = mouseHoverOffsetNE;
+            case ChestType.Shelf:
+                mouseHoverCollider.size = mouseHoverLargeSize;
+                mouseHoverCollider.offset = mouseHoverOffsetLarge;
                 break;
-            case Facing.NorthWest:
-                mouseHoverCollider.offset = mouseHoverOffsetNW;
-                break;
-            case Facing.SouthEast:
-                mouseHoverCollider.offset = mouseHoverOffsetSE;
-                break;
-            case Facing.SouthWest:
-                mouseHoverCollider.offset = mouseHoverOffsetSW;
-                break;
+            default:
+                mouseHoverCollider.size = mouseHoverSmallSize;
+                switch(facing)
+                {
+                    case Facing.NorthEast:
+                        mouseHoverCollider.offset = mouseHoverOffsetNE;
+                        break;
+                    case Facing.NorthWest:
+                        mouseHoverCollider.offset = mouseHoverOffsetNW;
+                        break;
+                    case Facing.SouthEast:
+                        mouseHoverCollider.offset = mouseHoverOffsetSE;
+                        break;
+                    case Facing.SouthWest:
+                        mouseHoverCollider.offset = mouseHoverOffsetSW;
+                        break;
+                }
+                break;;
         }
 
+        Helpers.updateGameObjectPosition(gameObject);
     }
 
     public void playerOpensChest()
@@ -175,7 +219,7 @@ public class Chest : MonoBehaviour, IRevealable
         Inventory.addItem(chestContents);
 
         setSpriteToOpenFilled();
-        RevealManager.setOutlineColorToDefault(gameObject);
+        outline.removeOutline();
 
         GateAndChestManager.addKey(getChestKey());
 
@@ -234,77 +278,84 @@ public class Chest : MonoBehaviour, IRevealable
 
     //IRevealable interface methods
 
-    public void createListeners()
-    {
-        RevealManager.OnReveal.AddListener(onReveal);
-    }
+    // public SpriteOutline getSpriteOutline()
+    // {
+    //     return outline;
+    // }
 
-    public void destroyListeners()
-    {
-        RevealManager.OnReveal.RemoveListener(onReveal);
-    }
+    // public void createListeners()
+    // {
+    //     RevealManager.OnReveal.AddListener(onReveal);
+    // }
 
-    public void onReveal()
-    {
-        if (!hasBeenOpened())
-        {
-            RevealManager.setRevealForGameObject(gameObject, getRevealColor());
-        }
-    }
+    // public void destroyListeners()
+    // {
+    //     RevealManager.OnReveal.RemoveListener(onReveal);
+    // }
 
-    public Color getRevealColor()
-    {
-        return RevealManager.canBeInteractedWith;
-    }
+    // public void onReveal(bool toggleReveal)
+    // {
+    //     if (!hasBeenOpened())
+    //     {
+    //         if(toggleReveal)
+    //         {
+    //             outline.createOutline(getRevealColor(), getOutlineSize());
+    //         } else
+    //         {
+    //             outline.removeOutline();
+    //         }
+    //     }
+    // }
 
-    public void spawnTargetCanvas()
-    {
-        // if (targetCanvas == null)
-        // {
-        //     gameObject.AddComponent<RectTransform>();
-        //     targetCanvas = Instantiate(Resources.Load<GameObject>(PrefabNames.targetBox), transform);
-        // }
-    }
+    // public Color getRevealColor()
+    // {
+    //     return ColorList.canBeInteractedWith;
+    // }
 
-    public void createHoverTag()
-    {
-        MouseHoverManager.getMouseHoverBase();
-        MouseHoverManager.createHoverTag(tagText);
-    }
+	// public OutlineMode getOutlineSize()
+    // {
+    //     return OutlineMode.Bold;
+    // }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if (eventData != null && eventData.used)
-        {
-            return;
-        }
+    // public void createHoverTag()
+    // {
+    //     MouseHoverManager.getMouseHoverBase();
+    //     MouseHoverManager.createHoverTag(tagText);
+    // }
 
-        if (!RevealManager.currentlyRevealed && !hasBeenOpened())
-        {
-            RevealManager.setOutlineColor(gameObject, getRevealColor());
-        }
+    // public void OnPointerEnter(PointerEventData eventData)
+    // {
+    //     if (eventData != null && eventData.used)
+    //     {
+    //         return;
+    //     }
 
-        if (!hasBeenOpened())
-        {
-            createHoverTag();
-        }
-    }
+    //     if (!RevealManager.currentlyRevealed && !hasBeenOpened())
+    //     {
+    //         outline.createOutline(getRevealColor(), getOutlineSize());
+    //     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (eventData != null && eventData.used)
-        {
-            return;
-        }
+    //     if (!hasBeenOpened())
+    //     {
+    //         createHoverTag();
+    //     }
+    // }
 
-        if (!RevealManager.currentlyRevealed && !hasBeenOpened())
-        {
-            RevealManager.setOutlineColorToDefault(gameObject);
-        }
+    // public void OnPointerExit(PointerEventData eventData)
+    // {
+    //     if (eventData != null && eventData.used)
+    //     {
+    //         return;
+    //     }
 
-        if (!hasBeenOpened())
-        {
-            MouseHoverManager.destroyMouseHoverBase();
-        }
-    }
+    //     if (!RevealManager.currentlyRevealed && !hasBeenOpened())
+    //     {
+    //         outline.removeOutline();
+    //     }
+
+    //     if (!hasBeenOpened())
+    //     {
+    //         MouseHoverManager.destroyMouseHoverBase();
+    //     }
+    // }
 }

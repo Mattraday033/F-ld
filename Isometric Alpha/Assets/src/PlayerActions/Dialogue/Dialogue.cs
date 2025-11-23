@@ -122,7 +122,7 @@ public class Dialogue : ICloneable
         }
     }
 
-    public string getMainNPCName()
+    public string getName()
     {
         return names[mainNPCIndex];
     }

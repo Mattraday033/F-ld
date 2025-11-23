@@ -37,6 +37,15 @@ public static class ColorList
     public readonly static Color32 grey215 = new Color32(215, 215, 215, 255);
     #endregion
 
+    #region Outline Colors
+	public readonly static Color attacksOnSight = Color.red;
+	public readonly static Color canBeInteractedWith = Color.green;
+	public readonly static Color canBePushed = Color.blue;
+	public readonly static Color canBeCunninged = Color.yellow;
+	public readonly static Color defaultWhenNotRevealed = Color.clear;
+	public readonly static Color tutorialDefault = Color.cyan;
+    #endregion
+
     public readonly static Color surpriseIconGrey = grey155;
 
     public readonly static Color availableEquipmentIcon = grey100;

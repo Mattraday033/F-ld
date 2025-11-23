@@ -8,7 +8,7 @@ public class HighlightTargetScript : TutorialSequenceStepScript
     {
         IRevealable revealable = target.GetComponent<IRevealable>();
 
-        RevealManager.manuallyRevealGameObject(target, revealable.getRevealColor());
+        revealable.onReveal(Constants.reveal);
     }
 }
 

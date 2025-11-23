@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDialogueParticipant
+public interface INameSource
 {
-    public string getMainNPCName();
+    public string getName();
+}
 
+public interface IDialogueParticipant: INameSource
+{
     public Dialogue getDialogue();
 }
+
 public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
 {
 
@@ -35,9 +39,9 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
         DialogueManager.getInstance().startDialogue(dialogue);
     }
 
-    public string getMainNPCName()
+    public string getName()
     {
-        return getDialogue().getMainNPCName();
+        return getDialogue().getName();
     }
 
     private void OnEnable()

@@ -15,9 +15,16 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
     public int index;
     public bool activated = false;
     public SpriteRenderer spriteRenderer;
+    public SpriteOutline outline;
     public Facing startFacing;
     public Facing endFacing;
     public CunningObjectSpriteCategory category;
+
+    private void Awake()
+    {
+        outline = new SpriteOutline();
+        outline.setSpriteRenderer(spriteRenderer);
+    }
 
     public void intimidate() { }
 
@@ -112,6 +119,11 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
 
     //IRevealable interface methods
 
+    public SpriteOutline getSpriteOutline()
+    {
+        return outline;
+    }
+
     public virtual void createListeners()
     {
         RevealManager.OnReveal.AddListener(onReveal);
@@ -124,19 +136,25 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
         TrapAndButtonStateManager.OnSetTraps.RemoveListener(setStatus);
     }
 
-    public void onReveal()
+    public void onReveal(bool toggleReveal)
     {
-        RevealManager.setRevealForGameObject(gameObject, getRevealColor());
+        if(toggleReveal)
+        {
+            outline.createOutline(getRevealColor(), getOutlineSize());
+        } else
+        {
+            outline.removeOutline();
+        }
     }
 
     public Color getRevealColor()
     {
-        return RevealManager.canBeCunninged;
+        return ColorList.canBeCunninged;
     }
 
-    public void spawnTargetCanvas()
+	public OutlineMode getOutlineSize()
     {
-
+        return OutlineMode.Normal;
     }
 
     public void createHoverTag()
@@ -146,18 +164,18 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        // if (!RevealManager.currentlyRevealed)
-        // {
-        //     RevealManager.setOutlineColor(gameObject, getRevealColor());
-        // }
+        if (!RevealManager.currentlyRevealed)
+        {
+            outline.createOutline(getRevealColor(), getOutlineSize());
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        // if (!RevealManager.currentlyRevealed)
-        // {
-        //     RevealManager.setOutlineColorToDefault(gameObject);
-        // }
+        if (!RevealManager.currentlyRevealed)
+        {
+            outline.removeOutline();
+        }
     }
 }
 

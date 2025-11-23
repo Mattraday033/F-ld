@@ -149,7 +149,7 @@ public class VolleyAbility : Ability
 		
 			if(combatSprite != null && !(combatSprite is null))
 			{
-				combatSprite.GetComponent<SpriteOutline>().color = actorStats.getOutlineColor();
+				// combatSprite.GetComponent<SpriteOutline>().color = actorStats.getOutlineColor();
 				Helpers.updateColliderPosition(combatSprite);
 			}
 		}

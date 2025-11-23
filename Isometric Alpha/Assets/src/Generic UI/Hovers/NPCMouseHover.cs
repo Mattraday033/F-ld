@@ -29,4 +29,26 @@ public class NPCMouseHover : MonoBehaviour
         npc.OnPointerExit(null);
     }
 
+    private void OnEnable()
+    {
+        PlayerOOCStateManager.OnStateChangeToInUI.AddListener(enableSelf);
+        PlayerOOCStateManager.OnStateChangeFromInUI.AddListener(disableSelf);
+    }
+
+    private void OnDestroy()
+    {
+        PlayerOOCStateManager.OnStateChangeToInUI.RemoveListener(enableSelf);
+        PlayerOOCStateManager.OnStateChangeFromInUI.RemoveListener(disableSelf);
+    }
+
+    private void enableSelf()
+    {
+        enabled = true;
+    }
+
+    private void disableSelf()
+    {
+        enabled = false;
+    }
+
 }

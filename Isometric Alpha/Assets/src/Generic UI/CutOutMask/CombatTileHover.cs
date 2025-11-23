@@ -48,27 +48,38 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
         onEnemySide = CombatGrid.positionIsOnEnemySide(targetCoords);
     }
 
-    public void onReveal()
+    public SpriteOutline getSpriteOutline()
     {
-        RevealManager.setRevealForGameObject(getTargetGameObject(), getRevealColor());
+        return getTargetStats().outline;
+    }
+
+    public void onReveal(bool toggleReveal)
+    {
+        if(toggleReveal)
+        {
+            getTargetOutline().createOutline(getRevealColor(), getOutlineSize());
+        } else
+        {
+            getTargetOutline().removeOutline();
+        }
+    }
+
+    public OutlineMode getOutlineSize()
+    {
+        return OutlineMode.Normal;
     }
 
     public Color getRevealColor()
     {
         if (onEnemySide)
         {
-            return RevealManager.attacksOnSight;
+            return ColorList.attacksOnSight;
         }
         else
         {
-            return RevealManager.canBeInteractedWith;
+            return ColorList.canBeInteractedWith;
         }
 
-    }
-
-    public void spawnTargetCanvas()
-    {
-        //EmptyOnPurpose
     }
 
     private Stats getTargetStats()
@@ -93,6 +104,11 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
         {
             return null;
         }
+    }
+
+    private SpriteOutline getTargetOutline()
+    {
+        return getTargetStats().outline;
     }
 
     public void createHoverTag()
@@ -121,7 +137,7 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
 
         if (CombatStateManager.whoseTurn == WhoseTurn.Player)
         {
-            onReveal();
+            onReveal(Constants.reveal);
 
             createHoverTag();
 
@@ -136,14 +152,13 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
 
     public override void OnPointerExit(PointerEventData eventData) 
     {
-
         purgeHoverCoords();
 
         if (CombatStateManager.whoseTurn == WhoseTurn.Player)
         {
             if (getTargetGameObject() != null)
             {
-                RevealManager.setOutlineColorToDefault(getTargetGameObject());
+                getTargetOutline().removeOutline();
             }
 
             SelectorManager.displayHoverUIForCurrentSelectorTarget();

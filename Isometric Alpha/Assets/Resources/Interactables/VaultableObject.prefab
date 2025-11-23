@@ -292,5 +292,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignoreHover: 0
   noNameTag: 0
+  spriteRenderer: {fileID: 5547093590764737088}
   nameTag: {fileID: 0}
   targetCanvas: {fileID: 0}
+--- !u!212 &5547093590764737088 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: -4968793318184311776, guid: 043c4c1bc369a1c4ab9e55576a2e078b,
+    type: 3}
+  m_PrefabInstance: {fileID: 8642531889710298720}
+  m_PrefabAsset: {fileID: 0}

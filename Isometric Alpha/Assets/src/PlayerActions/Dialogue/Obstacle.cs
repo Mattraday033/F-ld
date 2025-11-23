@@ -12,7 +12,7 @@ public class Obstacle : MonoBehaviour, IDialogueParticipant
         this.obstacleName = obstacleName;
     }
 
-    public string getMainNPCName()
+    public string getName()
     {
         return obstacleName;
     }

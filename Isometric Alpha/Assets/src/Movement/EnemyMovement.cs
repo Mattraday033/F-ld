@@ -169,6 +169,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	public bool neverMoves = false;
 
     public AnimationManager animationManager;
+    public SpriteOutline outline;
 
     public int cunningStunCounter = 0;
 	public int intimidateCounter = 0;
@@ -184,6 +185,12 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	public ArrayList gizmosToDraw = new ArrayList();
 
 	public GameObject hoverTarget;
+
+    private void Awake()
+    {
+        outline = new SpriteOutline();
+        outline.setSpriteRenderer(animationManager.spriteRenderer);
+    }
 
     #region MovementTracker Overrides
 
@@ -239,11 +246,6 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     }
 
     #endregion
-
-    private void Awake()
-    {
-        spawnTargetCanvas();
-    }
 
     public MovementManager getMovementManager()
     {
@@ -844,6 +846,11 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
     //IRevealable interface methods
 
+    public SpriteOutline getSpriteOutline()
+    {
+        return outline;
+    }
+
     public void createListeners()
     {
         RevealManager.OnReveal.AddListener(onReveal);
@@ -856,39 +863,33 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 		TutorialSequence.TutorialSequenceTargetFinder.RemoveListener(assignToTutorialSequence);
 	}
 
-	public void onReveal()
+	public void onReveal(bool toggleReveal)
 	{
-		RevealManager.setRevealForGameObject(gameObject, getRevealColor());
+        if(toggleReveal)
+        {
+            outline.createOutline(getRevealColor(), getOutlineSize());
+        } else
+        {
+            outline.removeOutline();
+        }
 	}
 
 	public Color getRevealColor()
 	{
 		if (movableObject)
 		{
-			return RevealManager.canBePushed;
+			return ColorList.canBePushed;
 		}
 		else
 		{
-			return RevealManager.attacksOnSight;
+			return ColorList.attacksOnSight;
 		}
 	}
-	
-	public void spawnTargetCanvas()
-	{
-		// if (hoverTarget == null)
-		// {
-		// 	gameObject.AddComponent<RectTransform>();
 
-		// 	if (movableObject)
-		// 	{
-		// 		hoverTarget = Instantiate(Resources.Load<GameObject>(PrefabNames.targetBox), transform);
-		// 	}
-		// 	else
-		// 	{
-		// 		hoverTarget = Instantiate(Resources.Load<GameObject>(PrefabNames.targetBox), transform);
-		// 	}
-		// }
-	}
+	public OutlineMode getOutlineSize()
+    {
+        return OutlineMode.Normal;
+    }
 
 	public void createHoverTag()
 	{
@@ -901,7 +902,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	{
 		if (!RevealManager.currentlyRevealed)
 		{
-			RevealManager.setOutlineColor(gameObject, getRevealColor());
+			// RevealManager.setOutlineColor(outline, getRevealColor());
 			createHoverTag();
 		}
 	}
@@ -910,7 +911,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	{
 		if (!RevealManager.currentlyRevealed)
 		{
-			RevealManager.setOutlineColorToDefault(gameObject);
+			outline.removeOutline();
 			MouseHoverManager.destroyMouseHoverBase();
 		}
 	}
@@ -976,7 +977,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 			return;
 		}
 
-		RevealManager.manuallyRevealGameObject(gameObject, RevealManager.tutorialDefault);
+        outline.createOutline(ColorList.tutorialDefault, getOutlineSize());
 	}
 	public void unhighlight(bool skip)
 	{
@@ -985,7 +986,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 			return;
 		}
 		
-		RevealManager.manuallyUnrevealGameObject(gameObject);
+        outline.removeOutline();
 	}
 
 	public Vector2 getDimensions()

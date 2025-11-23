@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ComponentList : MonoBehaviour
 {
-    public SpriteRenderer spriteRenderer;
-
-    public HealthBarManager healthBarManager;
+    public AbilityMenuManager abilityMenuManager;
 
     public AnimationManager animationManager;
 
-    public AbilityMenuManager abilityMenuManager;
+    public HealthBarManager healthBarManager;
+
+    public SpriteRenderer spriteRenderer;
 
 }

@@ -582,35 +582,35 @@ public class ButtonSpawnDetails : OOCSpawnDetails
     private int weight;
 
     public ButtonSpawnDetails(Vector3Int cellCoords) :
-    base(NPCNameList.floorButton, cellCoords)
+    base(NPCNameList.button, cellCoords)
     {
         this.index = 0;
         this.weight = 1;
     }
 
     public ButtonSpawnDetails(Vector3Int cellCoords, int index) :
-    base(NPCNameList.floorButton, cellCoords)
+    base(NPCNameList.button, cellCoords)
     {
         this.index = index;
         this.weight = 1;
     }
 
     public ButtonSpawnDetails(int weight, Vector3Int cellCoords) :
-    base(NPCNameList.floorButton, cellCoords)
+    base(NPCNameList.button, cellCoords)
     {
         this.index = 0;
         this.weight = weight;
     }
 
     public ButtonSpawnDetails(int weight, Vector3Int cellCoords, int index) :
-    base(NPCNameList.floorButton, cellCoords)
+    base(NPCNameList.button, cellCoords)
     {
         this.index = index;
         this.weight = weight;
     }
 
     public ButtonSpawnDetails(Vector3Int cellCoords, string tutorialTargetHash) :
-    base(NPCNameList.floorButton, cellCoords)
+    base(NPCNameList.button, cellCoords)
     {
         this.tutorialTargetHash = tutorialTargetHash;
         this.index = 0;
@@ -624,7 +624,7 @@ public class ButtonSpawnDetails : OOCSpawnDetails
 
     public override Transform getParent()
     {
-        return AreaManager.getNPCParent();
+        return null;
     }
 
     public override void spawnActions(GameObject button)

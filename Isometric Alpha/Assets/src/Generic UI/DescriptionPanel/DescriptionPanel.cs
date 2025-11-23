@@ -7,9 +7,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine;
 
-public interface IDescribable
+public interface IDescribable: INameSource
 {
-	public string getName();
 	//used to show if it's a valid option, like in the grid for abilities by stats if you have enough 
 	public bool ineligible();   //of that stat this would return false, if you didn't have enough of that stat it would return true. 
 								//Probably need a better name for it than just ineligible
