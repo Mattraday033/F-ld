@@ -83,6 +83,8 @@ public class SummonAbility: Ability
 			
 			comboIndex++;
 		}
+
+        playActivationAnimation();
 	}
 
     public override void performCombatAction(ArrayList targets)

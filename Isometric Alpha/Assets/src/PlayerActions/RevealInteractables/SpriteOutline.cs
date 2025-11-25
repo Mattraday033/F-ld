@@ -10,12 +10,13 @@ public class SpriteOutline
     private const string blackBorderSizeVarName = "_BlackBorderSize";
     private const string colorOutlineSizeVarName = "_ColorOutlineSize";
 
-    private const float boldOutlineSize = 0.016f;
-    private const float normalOutlineSize = 0.002f;
+    private const float boldOutlineSize = 0.02f;
+    private const float normalOutlineSize = 0.0025f;
 
     private Material outlineMaterial;
     private Material defaultMaterial;
     private SpriteRenderer spriteRenderer;
+    private Transform spriteTransform;
 
 
     public SpriteOutline()
@@ -29,13 +30,19 @@ public class SpriteOutline
     {
         this.spriteRenderer = spriteRenderer;
 
-        Helpers.debugNullCheck("spriteRenderer.material", spriteRenderer.material);
-
         defaultMaterial = spriteRenderer.material;
     }
 
     public void createOutline(Color color, OutlineMode outlineMode)
     {
+        spriteTransform = spriteRenderer.transform;
+
+        if(spriteTransform.position.z > 0f)
+        {
+            Vector3 oldPos = spriteTransform.position;
+            spriteTransform.position = new Vector3(oldPos.x, oldPos.y, -1f);
+        }
+
         outlineMaterial.color = color;
 
         spriteRenderer.material = outlineMaterial;

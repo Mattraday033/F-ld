@@ -17,8 +17,6 @@ public class MovableObjectMovement : EnemyMovement
         set { }
     }
 
-    public SpriteRenderer spriteRenderer;
-
     public override SpriteRenderer getSpriteRenderer()
     {
         return spriteRenderer;
@@ -37,6 +35,11 @@ public class MovableObjectMovement : EnemyMovement
 
         _StartingPosition = getWorldPosition();
         _EndingPosition = AreaManager.getMasterGrid().GetCellCenterWorld(MovementTracker.getCurrentCell(this) + _DirectionMod);
+    }
+
+	public override OutlineMode getOutlineSize()
+    {
+        return OutlineMode.Bold;
     }
 
     public override bool isDefeated()
@@ -66,7 +69,16 @@ public class MovableObjectMovement : EnemyMovement
 
     public override string getName()
     {
-        return "Pushable " + packName;
+        return packName;
     }
+
+	public override List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
+	{
+		List<DescriptionPanelBuildingBlock> blocks = new List<DescriptionPanelBuildingBlock>();
+
+		blocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+
+		return blocks;
+	}
 
 }

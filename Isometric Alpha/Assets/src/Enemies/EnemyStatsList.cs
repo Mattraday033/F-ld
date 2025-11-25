@@ -174,8 +174,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #region Cave Matron
         enemyStatsDict.Add(MonsterNameList.caveMatron, new EnemyStats(MonsterNameList.caveMatron,
                                                                                       twentyArmor,
-                                                                                            35,
-                                            AbilityList.getAbility(null, AbilityList.spawnPupsKey),
+                                                                                            155,
+    new LastManStandingAbility(TraitList.extraShielded, AbilityList.getAbility(null, AbilityList.rouseColonyKey) as Ability),
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.empty
                                                                                 }));

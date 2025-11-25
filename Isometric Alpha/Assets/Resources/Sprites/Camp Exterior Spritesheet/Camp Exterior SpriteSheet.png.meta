@@ -799,10 +799,10 @@ TextureImporter:
       name: Camp Exterior SpriteSheet_22
       rect:
         serializedVersion: 2
-        x: 1041
-        y: 2835
-        width: 202
-        height: 224
+        x: 1012
+        y: 2820
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

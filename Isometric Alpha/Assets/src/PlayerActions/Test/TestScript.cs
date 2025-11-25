@@ -12,7 +12,7 @@ public static class TestScript
         }
 
         // State.debugStopMonsterSpawning = true;
-        // State.debugDiscoverAllLocations = true;
+        State.debugDiscoverAllLocations = true;
         // State.debugRetreatAutoSucceed = true;
         State.enableGridDebugger = true;
 
@@ -20,10 +20,10 @@ public static class TestScript
 
         // PartyManager.getPartyMember(NPCNameList.thatch).canJoinParty = true;
 
-        // PartyManager.getPlayerStats().setLevel(3);
+        PartyManager.getPlayerStats().setLevel(3);
         // PartyManager.getPlayerStats().currentHealth = 1;
         PartyManager.getPlayerStats().strength = 3;
-        // PartyManager.getPlayerStats().dexterity = 3;
+        PartyManager.getPlayerStats().dexterity = 3;
         // PartyManager.getPlayerStats().wisdom = 2;
         // PartyManager.getPlayerStats().charisma = 2;
 
@@ -36,7 +36,8 @@ public static class TestScript
         // Flags.flags["charismaBarricadePassUsed"] = false;
         // Flags.flags["andrasBarricadePassUsed"] = false;
 
-        // PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
+        PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
+        PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
 
         //Flags.flags["seenHostilityTutorial"] = false;
         //Flags.flags["seenCombatTutorial"] = false;

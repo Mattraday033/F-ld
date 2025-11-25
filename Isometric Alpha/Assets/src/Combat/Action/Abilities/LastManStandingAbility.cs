@@ -28,10 +28,10 @@ public class LastManStandingAbility : ChargeUpAbility
 		base.setActor(actor);
 		actionWhenCharged.setActor(actor);
 		
-		if (actor != null)
-		{
-			Debug.LogError("setActor to " + actor.position.ToString());
-		}
+		// if (actor != null)
+		// {
+		// 	Debug.LogError("setActor to " + actor.position.ToString());
+		// }
 	}
 	/*
 	public override void setTargetCoords(GridCoords newTargetCoords)
@@ -50,6 +50,7 @@ public class LastManStandingAbility : ChargeUpAbility
 		
 		if(shouldApplyTrait())
 		{
+            createEffectAnimation(getActorCoords());
 			getActorStats().addTrait(chargeUpTrait);
 		}
 	}

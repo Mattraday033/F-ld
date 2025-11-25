@@ -99,6 +99,7 @@ public static class AbilityList
 	public const string colonyCrushKey = "Colony Crush";
 	public const string screechKey = "Screech";
 	public const string spawnPupsKey = "Spawn Pups";
+	public const string rouseColonyKey = "Rouse Colony";
 
 	public const string wallopKey = "Wallop";	
 	public const string trampleKey = "Trample";
@@ -216,6 +217,7 @@ public static class AbilityList
 		enemyAbilityDictionary.Add(flurryKey, new Ability(CombatActionSettings.build(DescriptionParams.build(flurryKey, "A devastating surge of claws and jaws."), DamageParams.build("10", "5"), AnimationParams.build(CombatAnimationType.Effect))));
         enemyAbilityDictionary.Add(screechKey, new Ability(CombatActionSettings.build(DescriptionParams.build(screechKey, "A howl so loud it draws blood.", TraitList.caveMadnessKey), DamageParams.build("6", "2"), TargetParams.build(Range.quadrupleBoxIndex), AnimationParams.build(CombatAnimationType.Effect), TraitList.caveMadness)));
         enemyAbilityDictionary.Add(spawnPupsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(spawnPupsKey, "The bat calls forth it's pups to fight for it.")), MonsterNameList.batSwarm));
+        enemyAbilityDictionary.Add(rouseColonyKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(rouseColonyKey, "The Matron calls it's children to war.")), MonsterNameList.batSwarm));
         enemyAbilityDictionary.Add(swarmRushKey, new Ability(CombatActionSettings.build(DescriptionParams.build(swarmRushKey, "The swarm flutters about their target, clawing and biting ferociously.", colonyCrushKey), DamageParams.build("3", "2"), AnimationParams.build(CombatAnimationType.Effect))));
         enemyAbilityDictionary.Add(batClawName, new Ability(CombatActionSettings.build(batClawName, batClawDescription, DamageParams.build("6", "8"))));
         enemyAbilityDictionary.Add(bossBatClawKey, new Ability(CombatActionSettings.build(batClawName, batClawDescription, DamageParams.build("12", "12"))));

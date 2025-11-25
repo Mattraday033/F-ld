@@ -90,11 +90,12 @@ public class EnemyStats : Stats
 
         Helpers.updateGameObjectPosition(combatSprite);
 
-        // EnemyStatsHover statsHover = combatSprite.AddComponent<EnemyStatsHover>();
-
-        // statsHover.stats = this;
-
         return combatSprite;
+    }
+
+    public void playSpawnAnimation()
+    {
+        animationManager.playSpawnAnimation();
     }
 
     public override Color getOutlineColor()

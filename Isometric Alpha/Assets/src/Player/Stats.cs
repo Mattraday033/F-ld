@@ -121,6 +121,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         updateHealthBar();
 
         animationManager = list.animationManager;
+        animationManager.healthBarManager = healthBarManager;
 
         if (animationManager != null)
         {

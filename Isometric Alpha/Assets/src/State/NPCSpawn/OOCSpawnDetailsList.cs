@@ -253,6 +253,12 @@ public static class OOCSpawnDetailsList
         #region SECamp
         list = new List<OOCSpawnDetails>();
 
+        list.Add(new NPCOffGridSpawnDetails(NPCNameList.statue, new Vector3Int(4, 0), LocationNameList.campSouthEast, PrefabNames.directorStatue, 
+                                    new Vector3Int[] { 
+                                                        new Vector3Int(5, 1),
+                                                        new Vector3Int(5, 0),
+                                                        new Vector3Int(4, 1)
+                                                     }));
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(13, 11), Facing.SouthEast));
 
@@ -357,7 +363,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.controlPanel, new Vector3Int(5, 3), LocationNameList.mineLvl2 + LocationNameList.section2a, PrefabNames.controlPanel, flipX, Constants.onTableHeightOffset));
+        list.Add(new NPCSpawnDetails(NPCNameList.controlPanel, new Vector3Int(5, 3), LocationNameList.mineLvl2 + LocationNameList.section2a, PrefabNames.controlPanel, flipX, Constants.onTableHeightOffset*2));
 
         oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section2a, list);
 

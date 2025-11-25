@@ -18,9 +18,8 @@ public static class EnemyCategoryNameList
     public const string saints = "Saints";
 
     #region Movable Objects
-
-    private const string movablePrefix = "Movable ";
-    public const string movableCrate = movablePrefix + "Crate";
+    private const string pushablePrefix = "Pushable ";
+    public const string pushableCrate = pushablePrefix + "Crate";
 
     #endregion
 

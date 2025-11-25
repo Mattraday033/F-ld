@@ -273,6 +273,9 @@ public static class DialogueList
         #region SECamp
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.wallPatch, wallPatchDialogue);
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.statue,
+                            new Dialogue(new string[] { "", NPCNameList.statue},
+                            Resources.Load<TextAsset>(DialogueNameList.directorStatuePath)));
 
         #endregion
         #region MineEntranceCamp

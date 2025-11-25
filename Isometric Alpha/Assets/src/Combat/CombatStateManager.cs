@@ -375,6 +375,11 @@ public class CombatStateManager : MonoBehaviour
 
 	public void checkForWinOrLossStates()
 	{
+        if(whoseTurn == WhoseTurn.Won || whoseTurn == WhoseTurn.Lost)
+        {
+            return;
+        }
+
 		if (PartyManager.getPlayerStats().currentHealth <= 0)
 		{
 			updateTurnState(WhoseTurn.Lost);

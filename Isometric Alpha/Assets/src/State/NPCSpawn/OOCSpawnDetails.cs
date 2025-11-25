@@ -698,6 +698,16 @@ public class NPCSpawnDetails : OffSetSpawnDetails
         this.extraSpaces = extraSpaces;
     }
 
+    public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName, Vector3Int[] extraSpaces) :
+    base(npcName, cellCoords, spriteName)
+    {
+        this.activated = true;
+        this.dialogue = getDialogue(areaName);
+
+        this.extraSpaces = extraSpaces;
+    }
+
+
     public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, SpeakAtStartScript speakAtStartScript) :
     base(npcName, cellCoords)
     {
@@ -801,15 +811,67 @@ public class NPCSpawnDetails : OffSetSpawnDetails
     }
 }
 
+public class NPCOffGridSpawnDetails : NPCSpawnDetails
+{
+
+    public NPCOffGridSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName) :
+    base(npcName, cellCoords, areaName, spriteName)
+    {
+    }
+
+    public NPCOffGridSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName, Vector3Int[] extraSpaces) :
+    base(npcName, cellCoords, areaName, spriteName,extraSpaces)
+    {
+    }
+
+    public override Transform getParent()
+    {
+        return null;
+    }
+
+    // public override void spawnActions(DialogueTrigger mainTrigger)
+    // {
+    //     List<GameObject> listOfExtraSpaces = new List<GameObject>();
+
+    //     int index = 0;
+    //     foreach (Vector3Int extraSpace in extraSpaces)
+    //     {
+    //         GameObject extraSpaceGameObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.npcExtraSpace), getParent());
+
+    //         extraSpaceGameObject.name = npcName + extraSpaceNameSuffix + " #" + (index + 1);
+
+    //         DialogueTriggerLink linkTrigger = extraSpaceGameObject.GetComponent<DialogueTriggerLink>();
+
+    //         linkTrigger.linkedDialogue = mainTrigger;
+
+    //         extraSpaceGameObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(extraSpace);
+
+    //         Helpers.updateColliderPosition(extraSpaceGameObject);
+
+    //         SpawnInfoManager.addGameObject(extraSpaceGameObject);
+
+    //         listOfExtraSpaces.Add(extraSpaceGameObject);
+
+    //         index++;
+    //     }
+
+    //     mainTrigger.extraSpaces = listOfExtraSpaces.ToArray();
+    // }
+}
+
 public class GateSpawnDetails : NPCSpawnDetails
 {
     private bool skewed;
+    private bool hasSprite;
+    private Axis axis;
 
-    public GateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed) :
+    public GateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed, bool hasSprite, Axis axis) :
     base(npcName, cellCoords, currentArea, spriteName)
     {
         this.tutorialTargetHash = tutorialTargetHash;
         this.skewed = skewed;
+        this.hasSprite = hasSprite;
+        this.axis = axis;
     }
 
     public override Transform getParent()
@@ -821,6 +883,49 @@ public class GateSpawnDetails : NPCSpawnDetails
         else
         {
             return null;
+        }
+    }
+
+    public virtual bool flipSprite()
+    {
+        switch(spriteName)
+        {
+            case PrefabNames.portcullis1x1:
+            case PrefabNames.portcullis2x1:
+            case PrefabNames.portcullis3x1:
+                return axis == Axis.DescendingX;
+            default:
+                return false;
+        }
+    }
+
+    public void setMouseHover(BoxCollider2D boxCollider)
+    {
+        if(!hasSprite)
+        {
+            boxCollider.enabled = false;
+            return;
+        }
+
+        switch(spriteName)
+        {
+            case PrefabNames.portcullis1x1:
+                break;
+            case PrefabNames.portcullis2x1:
+                boxCollider.size = new Vector2(.95f, 1.6f);
+
+                if(flipSprite())
+                {
+                    boxCollider.offset = new Vector2(-.27f, 0.27f);
+                } else
+                {
+                    boxCollider.offset = new Vector2(.27f, 0.27f);
+                }
+                break;
+            case PrefabNames.portcullis3x1:
+                break;
+            default:
+                return;
         }
     }
 
@@ -840,6 +945,16 @@ public class GateSpawnDetails : NPCSpawnDetails
         {
             addTutorialTargetComponent(gateGameObject, gate.spriteRenderer, tutorialTargetHash);
         }
+
+        if(!hasSprite)
+        {
+            gate.spriteRenderer.enabled = false;
+        } else if(flipSprite())
+        {
+            gate.spriteRenderer.flipX = true;
+        }
+
+        setMouseHover(gateGameObject.GetComponentInChildren<BoxCollider2D>());
     }
 
     public override void spawnActions(DialogueTrigger dialogueTrigger)
@@ -854,8 +969,8 @@ public class GateSpawnDetails : NPCSpawnDetails
 
 public class TemporaryGateSpawnDetails : GateSpawnDetails
 {
-    public TemporaryGateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed) :
-    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, skewed)
+    public TemporaryGateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed, Axis axis) :
+    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, skewed, true, axis)
     {
 
     }
@@ -877,7 +992,7 @@ public class GateWithHiddenTerrainSpawnDetails : GateSpawnDetails
     private string hiddenTerrainFlag;
 
     public GateWithHiddenTerrainSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed, string hiddenTerrainFlag, Color tint) :
-    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, skewed)
+    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, skewed, true, Axis.DescendingX)
     {
         this.hiddenTerrainFlag = hiddenTerrainFlag;
         this.tint = tint;

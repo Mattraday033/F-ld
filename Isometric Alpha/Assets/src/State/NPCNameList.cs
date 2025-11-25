@@ -103,13 +103,15 @@ public static class NPCNameList
     public const string liftableGate = liftablePrefix + gate;
     public const string liftableRubble = liftablePrefix + rubble;
     public const string awkwardRubble = "Awkward Rubble";
-    public const string ancientPortcullis = "Ancient Portcullis";
+    public const string portcullis = "Portcullis";
+    public const string ancientPortcullis = "Ancient " + portcullis;
     public const string cellDoor = "Cell Door";
     public const string fallenBeam = "Fallen Beam";
     public const string button = "Button";
     public const string manseFrontDoor = "Manse Front Door";
     public const string manseServiceEntrance = "Service Entrance";
     public const string mineArmoryGate = "Mine Armory Gate";
+    public const string statue = "Statue";
     public const string spike = "Spike";
     public const string unstablePillar = "Unstable Pillar";
     public const string unseenBarrier = "Unseen Barrier";

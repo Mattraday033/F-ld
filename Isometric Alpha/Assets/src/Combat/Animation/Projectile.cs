@@ -54,7 +54,7 @@ public class Projectile : MonoBehaviour, IAnimationTracker
         }
         else
         {
-            destroyAnimation();
+            removeAnimation();
             return;
         }
 
@@ -94,7 +94,7 @@ public class Projectile : MonoBehaviour, IAnimationTracker
 
         if (animator.GetBool("finished"))
         {
-            destroyAnimation();
+            removeAnimation();
         }
     }
 
@@ -159,9 +159,9 @@ public class Projectile : MonoBehaviour, IAnimationTracker
         return Instantiate(Resources.Load<GameObject>(PrefabNames.projectile)).GetComponent<Projectile>();
     }
 
-    public void destroyAnimation()
+    public void removeAnimation()
     {
-        CombatAnimationManager.currentAnimations.Remove(key);
+        CombatAnimationManager.removeAnimation(key);
 
         DestroyImmediate(gameObject);
 

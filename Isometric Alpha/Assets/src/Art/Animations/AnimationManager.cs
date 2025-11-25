@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Animancer;
 using Animancer.FSM;
-public enum CharacterAnimationType { None, Idle_Front, Idle_Back, Secondary_Idle, Run_Front, Run_Back, Wounded, Death, Attack_Normal, Attack_Special }
+public enum CharacterAnimationType { None, Idle_Front, Idle_Back, Secondary_Idle, Run_Front, Run_Back, Wounded, Death, Attack_Normal, Attack_Special, Spawn }
 
-public class AnimationManager : MonoBehaviour
+public class AnimationManager : MonoBehaviour, IAnimationTracker
 {
     public readonly static CharacterAnimationType[] loopedAnimationTypesTypes = new CharacterAnimationType[]
     { CharacterAnimationType.Idle_Front, CharacterAnimationType.Idle_Back, CharacterAnimationType.Secondary_Idle,
@@ -13,19 +13,53 @@ public class AnimationManager : MonoBehaviour
 
 
     public readonly static CharacterAnimationType[] tempAnimationTypes = new CharacterAnimationType[]
-    { CharacterAnimationType.Run_Front, CharacterAnimationType.Run_Back,  CharacterAnimationType.Wounded,
-      CharacterAnimationType.Death, CharacterAnimationType.Attack_Normal, CharacterAnimationType.Attack_Special};
+    { 
+      CharacterAnimationType.Run_Front, CharacterAnimationType.Run_Back,  CharacterAnimationType.Wounded,
+      CharacterAnimationType.Death, CharacterAnimationType.Attack_Normal, CharacterAnimationType.Attack_Special, 
+      CharacterAnimationType.Spawn
+    };
 
     public SpriteRenderer spriteRenderer;
 
     public CharacterAnimationType currentIdle;
     [SerializeField]
     private SpriteRenderer shadowSprite;
-
+    public HealthBarManager healthBarManager;
 
     public Dictionary<CharacterAnimationType, AnimationClip> animationDict;
 
     public NamedAnimancerComponent animancer;
+
+    #region IAnimationTracker
+
+    public int key;
+
+    private void Awake()
+    {
+        if(CombatStateManager.inCombat)
+        {
+            key = CombatAnimationManager.getCurrentKey();
+        } 
+    }
+
+    public GameObject getGameObject()
+    {
+        return gameObject;
+    }
+
+    public virtual void removeAnimation()
+    {
+        if(!CombatStateManager.inCombat)
+        {
+            return;
+        }
+
+        CombatAnimationManager.removeAnimation(key);
+
+        CombatAnimationManager.checkAllAnimationsFinished();
+    }
+
+    #endregion
 
     public virtual void setAnimations(string monsterName)
     {
@@ -93,62 +127,77 @@ public class AnimationManager : MonoBehaviour
 
     public void playIdleBackAnimation()
     {
+        enableExtras();
+        removeAnimation();
         currentIdle = CharacterAnimationType.Idle_Back;
         playAnimation(CharacterAnimationType.Idle_Back);
     }
 
     public void playIdleFrontAnimation()
     {
+        enableExtras();
+        removeAnimation();
         currentIdle = CharacterAnimationType.Idle_Front;
         playAnimation(CharacterAnimationType.Idle_Front);
     }
 
     public void playSecondaryIdleAnimation()
     {
+        enableExtras();
+        removeAnimation();
         currentIdle = CharacterAnimationType.Secondary_Idle;
         playAnimation(CharacterAnimationType.Secondary_Idle);
     }
 
     public void playCurrentIdleAnimation()
     {
+        enableExtras();
+        removeAnimation();
         playAnimation(currentIdle);
     }
 
     public void playSpawnAnimation()
     {
-        shadowSprite.enabled = true;
+        disableExtras();
+        playAnimation(createClipTransitionToIdle(CharacterAnimationType.Spawn));
     }
 
     public void playDeathAnimation()
     {
-        shadowSprite.enabled = false;
+        disableExtras();
         playAnimation(createClipTransitionToDeath());
+        removeAnimation();
     }
 
     public void playDeathAnimationThenHide()
     {
         playAnimation(createClipTransitionToDeathThenHide());
+        removeAnimation();
     }
 
     public void playAttackAnimation()
     {
+        CombatAnimationManager.trackAnimation(key, this);
         playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Normal));
     }
 
     public void playAttackIntoFrontIdleAnimation()
     {
+        CombatAnimationManager.trackAnimation(key, this);
         currentIdle = CharacterAnimationType.Idle_Front;
-       playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Normal));
+        playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Normal));
     }
 
     public void playAttackIntoSecondaryIdleAnimation()
     {
+        CombatAnimationManager.trackAnimation(key, this);
         currentIdle = CharacterAnimationType.Secondary_Idle;
         playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Special));
     }
 
     public void playSpecialAttackAnimation()
     {
+        CombatAnimationManager.trackAnimation(key, this);
         playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Special));
     }
 
@@ -213,7 +262,7 @@ public class AnimationManager : MonoBehaviour
             {
                 return createClipTransitionToIdle(CharacterAnimationType.Attack_Normal);
             }
-
+            removeAnimation();
             return null;
         }
 
@@ -241,6 +290,7 @@ public class AnimationManager : MonoBehaviour
     {
         if(!animationDict.ContainsKey(type))
         {
+            removeAnimation();
             return null;
         }
 
@@ -255,6 +305,7 @@ public class AnimationManager : MonoBehaviour
     {
         if (!animationDict.ContainsKey(CharacterAnimationType.Death))
         {
+            removeAnimation();
             return null;
         }
 
@@ -269,6 +320,7 @@ public class AnimationManager : MonoBehaviour
     {
         if (!animationDict.ContainsKey(CharacterAnimationType.Death))
         {
+            removeAnimation();
             return null;
         }
 
@@ -292,6 +344,7 @@ public class AnimationManager : MonoBehaviour
     private void haltAllAnimations()
     {
         animancer.enabled = false;
+        removeAnimation();
     }
 
     private void playAnimation(ClipTransition clipTransition)
@@ -306,6 +359,7 @@ public class AnimationManager : MonoBehaviour
 
         if (state == null)
         {
+            removeAnimation();
             Debug.LogError("No such animation for type: " + clipTransition.Clip.name);
         } else
         {
@@ -317,6 +371,7 @@ public class AnimationManager : MonoBehaviour
     {
         if(animationType == CharacterAnimationType.None)
         {
+            removeAnimation();
             return;
         }
 
@@ -331,16 +386,38 @@ public class AnimationManager : MonoBehaviour
             {
                 case CharacterAnimationType.Run_Front:
                 case CharacterAnimationType.Secondary_Idle:
+                case CharacterAnimationType.Spawn:
                     playIdleFrontAnimation();
                     break;
                 case CharacterAnimationType.Run_Back:
                     playIdleBackAnimation();
                     break;
                 default:
+                    removeAnimation();
                     Debug.LogError("No such animation for type: " + animationType.ToString());
                     break;                
             }
         }
+    }
+
+    private void disableExtras()
+    {
+        if(CombatStateManager.inCombat)
+        {
+            healthBarManager.hide();
+        }
+
+        shadowSprite.enabled = false;
+    }
+
+    private void enableExtras()
+    {
+        if(CombatStateManager.inCombat)
+        {
+            healthBarManager.show();
+        }
+        
+        shadowSprite.enabled = true;
     }
 
 }

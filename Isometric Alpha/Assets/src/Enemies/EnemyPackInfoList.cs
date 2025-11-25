@@ -81,7 +81,7 @@ public static class EnemyPackInfoList
 
     private readonly static EnemyPackInfo oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat = new EnemyPackInfo(new EnemyAmount[] {  EnemyAmountList.oneDenMother,
                                                                                                                                     EnemyAmountList.oneGiantBat,
-                                                                                                                                    EnemyAmountList.oneScreecherBat,
+                                                                                                                                    EnemyAmountList.oneArmoredBat,
                                                                                                                                     EnemyAmountList.threeBatSwarms
                                                                                                                                  },
                                                                                                                                 DropTableList.slaveMineDT1Name);
@@ -98,10 +98,11 @@ public static class EnemyPackInfoList
                                                                                                                             },
                                                                                                                     DropTableList.slaveMineDT1Name);
 
-    private readonly static EnemyPackInfo twoArmoredBatsOneDenMotherOneBatSwarm = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.twoArmoredBats,
-                                                                                                                        EnemyAmountList.oneDenMother,
-                                                                                                                        EnemyAmountList.oneBatSwarm},
-                                                                                                                        DropTableList.slaveMineDT1Name);
+    private readonly static EnemyPackInfo twoArmoredBatsOneDenMotherOneGiantBatTwoBatSwarm = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.twoArmoredBats,
+                                                                                                                                    EnemyAmountList.oneDenMother,
+                                                                                                                                    EnemyAmountList.oneGiantBat,
+                                                                                                                                    EnemyAmountList.twoBatSwarms},
+                                                                                                                                    DropTableList.slaveMineDT1Name);
 
     private readonly static EnemyPackInfo twoGiantBatsTwoBatSwarmsTwoArmoredBats = new EnemyPackInfo(new EnemyAmount[] {  EnemyAmountList.twoGiantBats,
                                                                                                                             EnemyAmountList.twoBatSwarms,
@@ -115,7 +116,7 @@ public static class EnemyPackInfoList
                                                                                                                             },
                                                                                                                     DropTableList.slaveMineDT1Name);
 
-    private readonly static EnemyPackInfo caveMatronBatBoss = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.twoArmoredBats },
+    private readonly static EnemyPackInfo caveMatronBatBoss = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.caveMatron },
                                                                                                     DropTableList.slaveMineDT1Name,
                                                                                                     new ItemListID[] { new ItemListID(  ItemList.keyItemListIndex,
                                                                                                                                         ItemList.mineArmoryKeyIndex) });
@@ -184,7 +185,7 @@ public static class EnemyPackInfoList
         #region MineLvl_2-2b
         list = new List<EnemyPackInfo>();
 
-        list.Add(twoArmoredBatsOneDenMotherOneBatSwarm);
+        list.Add(twoArmoredBatsOneDenMotherOneGiantBatTwoBatSwarm);
 
         enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section2b, list);
         #endregion
@@ -212,10 +213,19 @@ public static class EnemyPackInfoList
 
 
         list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
-        list.Add(twoArmoredBatsOneDenMotherOneBatSwarm);
+        list.Add(twoArmoredBatsOneDenMotherOneGiantBatTwoBatSwarm);
         list.Add(threeDenMothersThreeBatSwarmsOneArmoredBat);
 
         enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section4, list);
+        #endregion
+
+       #region MineLvl_2-5
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
+        list.Add(twoArmoredBatsOneDenMotherOneGiantBatTwoBatSwarm);
+
+        enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section5, list);
         #endregion
 
         #region MineLvl_2-7b

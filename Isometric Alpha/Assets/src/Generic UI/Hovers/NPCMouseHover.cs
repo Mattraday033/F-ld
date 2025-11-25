@@ -21,34 +21,21 @@ public class NPCMouseHover : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if(PlayerOOCStateManager.currentActivity != OOCActivity.walking)
+        {
+            return;
+        }
+
         npc.OnPointerEnter(null);
     }
 
     private void OnMouseExit()
     {
+        if(PlayerOOCStateManager.currentActivity != OOCActivity.walking)
+        {
+            return;
+        }
+
         npc.OnPointerExit(null);
     }
-
-    private void OnEnable()
-    {
-        PlayerOOCStateManager.OnStateChangeToInUI.AddListener(enableSelf);
-        PlayerOOCStateManager.OnStateChangeFromInUI.AddListener(disableSelf);
-    }
-
-    private void OnDestroy()
-    {
-        PlayerOOCStateManager.OnStateChangeToInUI.RemoveListener(enableSelf);
-        PlayerOOCStateManager.OnStateChangeFromInUI.RemoveListener(disableSelf);
-    }
-
-    private void enableSelf()
-    {
-        enabled = true;
-    }
-
-    private void disableSelf()
-    {
-        enabled = false;
-    }
-
 }

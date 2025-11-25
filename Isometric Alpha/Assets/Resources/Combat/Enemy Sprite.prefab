@@ -204,10 +204,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14a1213ab7fe954bafa44dc9c89d997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 3060634069565429307}
-  healthBarManager: {fileID: 3927253085229646063}
-  animationManager: {fileID: 2130261850575857977}
   abilityMenuManager: {fileID: 0}
+  animationManager: {fileID: 2130261850575857977}
+  healthBarManager: {fileID: 3927253085229646063}
+  spriteRenderer: {fileID: 3060634069565429307}
 --- !u!114 &2130261850575857977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3584462627e7c4ba6323639e9738e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 3060634069565429307}
   currentIdle: 0
   shadowSprite: {fileID: 5984545968167463069}
   animancer: {fileID: 5092550638677199902}

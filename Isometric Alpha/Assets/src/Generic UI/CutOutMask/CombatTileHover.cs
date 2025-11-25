@@ -135,7 +135,7 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
     {
         preserveHoverCoords();
 
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player)
+        if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null)
         {
             onReveal(Constants.reveal);
 
@@ -154,7 +154,7 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
     {
         purgeHoverCoords();
 
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player)
+        if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null)
         {
             if (getTargetGameObject() != null)
             {

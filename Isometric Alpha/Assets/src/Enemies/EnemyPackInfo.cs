@@ -83,6 +83,11 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
         this.script = script;
     }
 
+    public string getPackName()
+    {
+        return enemyTypes[Constants.indexZero].enemyStats.getName();
+    }
+
     public void markBossAsKilled()
     {
         if (isBossMonster)

@@ -62,10 +62,10 @@ Material:
     m_Floats:
     - _AlphaClip: 1
     - _AlphaToMask: 0
-    - _BlackBorderSize: 0.004
+    - _BlackBorderSize: 0.005
     - _Blend: 0
     - _CastShadows: 0
-    - _ColorOutlineSize: 0.012
+    - _ColorOutlineSize: 0.03
     - _Cull: 0
     - _DstBlend: 10
     - _QueueControl: 0
@@ -77,5 +77,5 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 2
     m_Colors:
-    - _Color: {r: 1, g: 0.030960336, b: 0, a: 1}
+    - _Color: {r: 0, g: 0.11830664, b: 1, a: 1}
   m_BuildTextureStacks: []

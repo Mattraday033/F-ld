@@ -169,6 +169,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	public bool neverMoves = false;
 
     public AnimationManager animationManager;
+    public SpriteRenderer spriteRenderer;
     public SpriteOutline outline;
 
     public int cunningStunCounter = 0;
@@ -189,7 +190,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     private void Awake()
     {
         outline = new SpriteOutline();
-        outline.setSpriteRenderer(animationManager.spriteRenderer);
+        outline.setSpriteRenderer(spriteRenderer);
     }
 
     #region MovementTracker Overrides
@@ -886,7 +887,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 		}
 	}
 
-	public OutlineMode getOutlineSize()
+	public virtual OutlineMode getOutlineSize()
     {
         return OutlineMode.Normal;
     }
@@ -902,9 +903,10 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	{
 		if (!RevealManager.currentlyRevealed)
 		{
-			// RevealManager.setOutlineColor(outline, getRevealColor());
-			createHoverTag();
+            outline.createOutline(getRevealColor(), getOutlineSize());
 		}
+
+        createHoverTag();
 	}
 
 	public void OnPointerExit(PointerEventData eventData)
@@ -912,8 +914,9 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 		if (!RevealManager.currentlyRevealed)
 		{
 			outline.removeOutline();
-			MouseHoverManager.destroyMouseHoverBase();
 		}
+
+        MouseHoverManager.destroyMouseHoverBase();
 	}
 
 	//IDescribableInBlocks
@@ -923,7 +926,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         return packName;
 	}
 
-	public List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
+	public virtual List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
 	{
 		List<DescriptionPanelBuildingBlock> blocks = new List<DescriptionPanelBuildingBlock>();
 

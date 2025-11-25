@@ -156,7 +156,7 @@ public static class TraitList
 
 	public readonly static Trait charged = new Trait("Charged", chargeTraitType, "This creature is capable of delivering a devastating attack.", "Charged", Color.blue);
 	public readonly static Trait shielded = new ShieldTrait("Shielded", chargeTraitType, "This creature is shielded and takes half damage.", "Shielded", oneRoundDuration, Color.blue, shieldedDamageReduction);
-	public readonly static Trait extraShielded = new ShieldTrait("Shielded", chargeTraitType, "This creature is shielded and takes half damage.", "Shielded", oneRoundDuration, Color.blue, extraShieldedDamageReduction);
+	public readonly static Trait extraShielded = new ShieldTrait("Shielded", chargeTraitType, "This creature is shielded and takes a quarter damage. It will lose this trait if it is the last enemy alive.", "Shielded", oneRoundDuration, Color.blue, extraShieldedDamageReduction);
 	public readonly static Trait signaling = new Trait("Signaling", chargeTraitType, "This guard is going to call signal an arrow tower to fire upon their assailants.", "Signaling", oneRoundDuration, Color.blue);
 	public readonly static Trait observing = new Trait("Observing", chargeTraitType, "The creature is observing it's troops and developing a strategy.", "Observing", oneRoundDuration, Color.blue);
 

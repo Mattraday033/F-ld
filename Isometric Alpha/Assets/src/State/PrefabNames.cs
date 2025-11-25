@@ -245,7 +245,7 @@ public static class PrefabNames
     public const string cratesAndBarrelsFolder = spriteFolder + "CratesAndBarrels/";
     public const string vaultableBarrels = cratesAndBarrelsFolder + "VaultableBarrels";
     public const string squareCratesSmall = cratesAndBarrelsFolder + "Square Crates Small";
-    public const string movableCrate = cratesAndBarrelsFolder + "Crate";
+    public const string pushableCrate = cratesAndBarrelsFolder + "Crate";
 
     public const string charactersFolder = spriteFolder + "Characters/";
     public const string humansFolder = charactersFolder + "Humans/";
@@ -275,6 +275,9 @@ public static class PrefabNames
 
     public const string waterFolder = spriteFolder + "Water/";
     public const string water = waterFolder + "Water";
+
+    public const string statueFolder = furnitureFolder + "Statues/";
+    public const string directorStatue = statueFolder + "DirectorStatue";
 
     public const string cunningObjectsFolder = spriteFolder + "CunningObjects/";
     public const string statueBack = cunningObjectsFolder + "Statue Back";
@@ -310,6 +313,10 @@ public static class PrefabNames
     public const string doorsFolder =  spriteFolder + "Doors/";
     public const string XAxisDoor = doorsFolder + "XAxisDoor";
     public const string YAxisDoor = doorsFolder + "YAxisDoor";
+
+    public const string portcullis1x1 =  doorsFolder + "1x1Portcullis";
+    public const string portcullis2x1 =  doorsFolder + "2x1Portcullis";
+    public const string portcullis3x1 =  doorsFolder + "3x1Portcullis";
 
     #endregion
 }

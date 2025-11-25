@@ -6,7 +6,7 @@ using UnityEngine;
 public interface IAnimationTracker
 {
     public GameObject getGameObject();
-    public void destroyAnimation();
+    public void removeAnimation();
 
 }
 
@@ -15,7 +15,7 @@ public class CombatAnimationManager : MonoBehaviour
 
     public Transform damageNumberCanvas;
 
-    public static Dictionary<int, IAnimationTracker> currentAnimations;
+    private static Dictionary<int, IAnimationTracker> currentAnimations;
 
     private static CombatAnimationManager instance;
 
@@ -64,6 +64,27 @@ public class CombatAnimationManager : MonoBehaviour
         return getInstance().currentKey++;
     }
 
+    public static void trackAnimation(int key, IAnimationTracker tracker)
+    {
+        if(tracker == null)
+        {
+            return;
+        }
+
+        if(!currentAnimations.ContainsKey(key))
+        {
+            currentAnimations.Add(key, tracker);
+        }
+    }
+
+    public static void removeAnimation(int key)
+    {
+        if(currentAnimations.ContainsKey(key))
+        {
+            currentAnimations.Remove(key);
+        }
+    }
+
     public static void checkAllAnimationsFinished()
     {
         if (!getInstance().hasOngoingAnimations())
@@ -85,11 +106,7 @@ public class CombatAnimationManager : MonoBehaviour
             return;
         }
 
-        int key = getCurrentKey();
-
         EffectAnimationManager currentEffect = EffectAnimationManager.instantiatePrefab();
-
-        currentEffect.key = key;
 
         currentEffect.damage = damageNumber;
         currentEffect.crit = crit;
@@ -99,7 +116,7 @@ public class CombatAnimationManager : MonoBehaviour
 
         currentEffect.transform.position = CombatGrid.getPositionAt(targetCoords);
 
-        currentAnimations.Add(key, currentEffect);
+        currentAnimations.Add(currentEffect.key, currentEffect);
 
         currentEffect.setAnimations(abilityName);
     }

@@ -144,6 +144,18 @@ public class ChargeUpAbility : Ability
 
         return clone;
 	}
+
+    public override string getUseDescription()
+	{
+        if(isCharged())
+        {
+            return actionWhenCharged.getUseDescription();
+        } 
+        else
+        {
+            return chargeUpTrait.getDescription();
+        }
+	}
 	
 
 }

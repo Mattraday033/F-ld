@@ -270,7 +270,7 @@ public static class ItemList
 		armor.Add(new Shield(new ItemListID(armorListIndex, wardensShieldIndex), wardensShieldKey, "A shield made from bands of bronze fitted over a hard wood core. This shield provides armor equal to twice your strength + 10", wardensShieldArmorValue, Armor.offHandSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, silverSpoonIndex), silverSpoonKey, "The holder of this spoon accumulates wealth at a faster rate. Monsters drop 20% more gold.", givesNoArmor, Armor.trinketSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, leatherBootsIndex), "Leather Boots", "Solid boots made of cowhide. Meant to be worn with armor.", leatherBootsArmorValue, Armor.feetSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, bronzeHelmetIndex), "Bronze Cavalry Helmet", "A Bronze Helmet in the Lovashi style. Well padded and comfortable to wear.", bronzeHelmetArmorValue, Armor.headSlotIndex));
+		armor.Add(new Armor(new ItemListID(armorListIndex, bronzeHelmetIndex), "Bronze Cavalry Helmet", "A bronze helmet in the Lovashi style. Well padded and comfortable to wear.", bronzeHelmetArmorValue, Armor.headSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, bronzeCuirassIndex), "Bronze Cuirass", "Armor made of interlocking bronze scales.", bronzeCuirassArmorValue, Armor.bodySlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, salvagedGuardHelmIndex), salvagedGuardHelmKey, "A helm taken from a slain guard. Buff out that dent and it's good as new.", salvagedGuardHelmArmorValue, Armor.headSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, salvagedGuardArmorIndex), salvagedGuardArmorKey, "A set of armor stripped off a dead guard. Don't mind whatever that smell is.", salvagedGuardArmorArmorValue, Armor.bodySlotIndex));
@@ -280,6 +280,7 @@ public static class ItemList
 		armor.Add(new Armor(new ItemListID(armorListIndex, delversDreamIndex), delversDreamKey, "A gem, finely cut, with a deep blue hue. The longer you stare, the more certain you become that you do not hold the gem, but it holds you. 10% bonus mental resistance when equipped.", delversDreamArmorValue, Armor.trinketSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, cookingPotIndex), cookingPotKey, "A pot from the kitchens. Worn about the head, it could provide some meager protection.", cookingPotArmorValue, Armor.headSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, bronzeBadgeIndex), bronzeBadgeKey, "This bronze badge looks bruised and worn, as if it was just pulled from a fire.", bronzeBadgeArmorValue, Armor.trinketSlotIndex));
+		armor.Add(new Armor(new ItemListID(armorListIndex, bronzeHelmetIndex), "Ancient Plumed Helmet", "A battered helmet, with a ragged plume made of dyed hair from an unknown beast.", salvagedGuardHelmArmorValue, Armor.headSlotIndex));
 		
 
 		//QuestItem(string key, string loreDescription, int ID)

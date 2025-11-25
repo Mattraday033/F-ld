@@ -71,6 +71,7 @@ public class MonsterSpawnDetails : OOCSpawnDetails
         enemyMovement.initializeAnimationManager();
         enemyMovement.setEnemyFacing(facing);
         enemyMovement.followsPlayer = chasesPlayer;
+        enemyMovement.packName = npcName;
     }
 
 
@@ -126,6 +127,7 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
         MovementManager.addMovementTracker(enemyMovement);
 
         enemyMovement.getSpriteRenderer().sprite = Helpers.loadSpriteFromResources(getSpriteName());
+        enemyMovement.packName = npcName;
     }
 
 

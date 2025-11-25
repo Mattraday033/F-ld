@@ -688,6 +688,11 @@ public class DescriptionPanelBuilder : MonoBehaviour
 
         foreach (RectTransform rectTranform in rectTransforms)
         {
+            if(rectTranform == null)
+            {
+                continue;
+            }
+
             LayoutRebuilder.ForceRebuildLayoutImmediate(rectTranform);
         }
     }

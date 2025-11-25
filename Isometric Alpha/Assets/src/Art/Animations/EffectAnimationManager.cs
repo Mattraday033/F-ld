@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Animancer;
 using Animancer.FSM;
-public class EffectAnimationManager : AnimationManager, IAnimationTracker
+public class EffectAnimationManager : AnimationManager
 {
-    public int key;
-
     public GridCoords targetCoords;
 
     public int damage;
@@ -17,9 +15,11 @@ public class EffectAnimationManager : AnimationManager, IAnimationTracker
 
     public override void setAnimations(string abilityName)
     {
+        Debug.LogError("abilityName = " + abilityName);
+
         string folderPath = EffectPathList.getEffectFolderPath(abilityName);
 
-        // Debug.LogError("folderPath = " + folderPath);
+        Debug.LogError("folderPath = " + folderPath);
 
         AnimationClip animationClip = Resources.Load<AnimationClip>(folderPath);
 
@@ -27,7 +27,7 @@ public class EffectAnimationManager : AnimationManager, IAnimationTracker
 
         // Helpers.debugNullCheck("animationClip", animationClip);
 
-        animancer.Play(createClipTransitionTheDelete(animationClip));
+        animancer.Play(createClipTransitionThenDelete(animationClip));
     }
     
     private IEnumerator spawnDamageNumbers()
@@ -51,11 +51,11 @@ public class EffectAnimationManager : AnimationManager, IAnimationTracker
         }
     }
 
-    private ClipTransition createClipTransitionTheDelete(AnimationClip clip)
+    private ClipTransition createClipTransitionThenDelete(AnimationClip clip)
     {
         ClipTransition clipTransition = new ClipTransition();
         clipTransition.Clip = clip;
-        clipTransition.Events.OnEnd = () => destroyAnimation();
+        clipTransition.Events.OnEnd = () => removeAnimation();
 
         if(damage > 0)
         {
@@ -65,23 +65,16 @@ public class EffectAnimationManager : AnimationManager, IAnimationTracker
         return clipTransition;
     }
 
-    public GameObject getGameObject()
-    {
-        return gameObject;
-    }
-
     public static EffectAnimationManager instantiatePrefab()
     {
         return Instantiate(Resources.Load<GameObject>(PrefabNames.effect)).GetComponent<EffectAnimationManager>();
     }
 
-    public void destroyAnimation()
+    public override void removeAnimation()
     {
-        CombatAnimationManager.currentAnimations.Remove(key);
-
         DestroyImmediate(gameObject);
 
-        CombatAnimationManager.checkAllAnimationsFinished();
+        base.removeAnimation();
     }
 
 }

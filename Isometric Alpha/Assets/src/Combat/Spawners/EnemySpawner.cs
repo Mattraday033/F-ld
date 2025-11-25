@@ -290,7 +290,10 @@ public class EnemySpawner : MonoBehaviour
 			if(CombatStateManager.whoseTurn == WhoseTurn.Start)
 			{
 				cloneOfEnemyType.instateEnvironmentalCombatAction();
-			}
+			} else
+            {
+                cloneOfEnemyType.playSpawnAnimation();
+            }
 		}
 	}
 	
