@@ -47,8 +47,13 @@ public abstract class ButtonLogicScript
         MovementManager.OnMoveFinished.AddListener(evaluateAllScriptsInLocation);        
     }
 
-    public static void evaluateAllScriptsInLocation()
+    public static void evaluateAllScriptsInLocation(int movementIndex)
     {
+        if(movementIndex != Constants.indexZero)
+        {
+            return;
+        }
+
         List<ButtonLogicScript> scriptList = ButtonScriptList.getButtonScripts(AreaManager.locationName);
 
         foreach(ButtonLogicScript script in scriptList)
@@ -200,19 +205,68 @@ public class ButtonOrderLogicScript : ButtonLogicScript
 
     private int numberOfButtonsPressed = 0;
     private int currentButtonIndex = -1;
+    private List<MonsterSpawnDetails> monstersToSpawn;
+
+    private List<ObstacleSpawnDetails> obstacleSpawnDetails;
+    private List<Obstacle> obstacles;
+
+    private Color tint = Color.white;
 
     private int[] indexOrder;
     private string secretDoorKey;
 
-    public ButtonOrderLogicScript(int[] indexOrder, string secretDoorKey)
+    public ButtonOrderLogicScript(int[] indexOrder, Vector3Int[] obstacleCoords, string[] spriteNames, string secretDoorKey, Color tint)
     {
         this.indexOrder = indexOrder;
         this.secretDoorKey = secretDoorKey;
+
+        createSpawnDetails(obstacleCoords, spriteNames);
+
+        this.tint = tint;
+    }
+
+    private void createSpawnDetails(Vector3Int[] obstacleCoords, string[] spriteNames)
+    {
+        obstacleSpawnDetails = new List<ObstacleSpawnDetails>();
+
+        for(int index = 0; index < obstacleCoords.Length && index < spriteNames.Length; index++)
+        {
+            obstacleSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.obstacle, obstacleCoords[index], spriteNames[index]));
+        }
     }
 
     public override void startingAction()
     {
-        
+        monstersToSpawn = MonsterSpawnDetailsList.getMonsterSpawnDetails();
+        obstacles = new List<Obstacle>();
+
+        foreach(ObstacleSpawnDetails spawnDetails in obstacleSpawnDetails)
+        {
+            GameObject gameObject = SpawnInfoManager.spawnInteractable(spawnDetails);
+            Obstacle obstacle = gameObject.GetComponent<Obstacle>();
+
+            obstacle.spriteRenderer.color = tint;
+
+            obstacle.setToDown();
+
+            SpawnInfoManager.addGameObject(gameObject);
+
+            obstacles.Add(obstacle);
+        }
+
+        if(SpawnInfoManager.lastSaveBlueprint == null)
+        {
+            for(int index = 0; index < monstersToSpawn.Count; index++)
+            {
+                MonsterDefeatKeysList.setDefeatKey(MonsterDefeatKeysList.generateMonsterDefeatKey(index), true);
+            }
+        } else if(PuzzleFlags.currentPuzzleIndex > 0)
+        {
+            for(int index = 0; index <= PuzzleFlags.currentPuzzleIndex; index++)
+            {
+                obstacles[index].setToUp();
+            }
+        }
     }
 
     public override void getFloorButtonStatus(FloorButton floorButton)
@@ -231,7 +285,15 @@ public class ButtonOrderLogicScript : ButtonLogicScript
 
     public override void runScript()
     {
-        // SecretDoorKeyList.a
+        SecretDoorFlags.addSecretDoorFlag(secretDoorKey);
+    }
+
+    private void resetAllObstacles()
+    {
+        foreach(Obstacle obstacle in obstacles)
+        {
+            obstacle.setToDown();
+        }
     }
 
     public override bool scriptConditionsMet()
@@ -243,43 +305,43 @@ public class ButtonOrderLogicScript : ButtonLogicScript
             return false;
         }
 
-        if(numberOfButtonsPressed >= Constants.sizeTwo)
+        bool conditionsMet = false;
+
+        if(numberOfButtonsPressed >= Constants.sizeTwo || currentButtonIndex != indexOrder[PuzzleFlags.currentPuzzleIndex])
         {
             PuzzleFlags.currentPuzzleIndex = 0;
-            //reset
+            resetAllObstacles();
+            spawnMonster();
+        } else if(PuzzleFlags.currentPuzzleIndex >= obstacles.Count)
+        {
+            conditionsMet = true;
         } else if(PuzzleFlags.currentPuzzleIndex < indexOrder.Length && currentButtonIndex == indexOrder[PuzzleFlags.currentPuzzleIndex])
         {
+            obstacles[PuzzleFlags.currentPuzzleIndex].setToUp();
             PuzzleFlags.currentPuzzleIndex++;
-            //spawn next hint
-        } else if(PuzzleFlags.currentPuzzleIndex >= indexOrder.Length)
-        {
-            //finish puzzle
-        } else
-        {
-            
-        }
+        } 
 
         currentButtonIndex = -1;
+        numberOfButtonsPressed = 0;
 
-        // if(validButtonForScript(floorButton))
-        // {
-        //     PuzzleFlags.currentPuzzleIndex++;
+        return conditionsMet;
+    }
 
-        //     if(PuzzleFlags.currentPuzzleIndex >= indexOrder.Length)
-        //     {
-        //         //finish puzzle
-        //     } else
-        //     {
-                
-        //     }
+    private void spawnMonster()
+    {
+        for(int index = 0; index < monstersToSpawn.Count; index++)
+        {
+            if(!MonsterDefeatKeysList.monsterIsDefeated(MonsterDefeatKeysList.generateMonsterDefeatKey(index)))
+            {
+                continue;
+            }
 
-        // } else
-        // {
-        //     PuzzleFlags.currentPuzzleIndex = 0;
+            MonsterDefeatKeysList.setDefeatKey(MonsterDefeatKeysList.generateMonsterDefeatKey(index), false);
 
-        // }
+            Transform monster = SpawnInfoManager.spawnMonster(monstersToSpawn[index], index);
 
-        return true;
+            MovementManager.replaceMovementTracker(monster.GetComponent<EnemyMovement>());
+        }
     }
 
 }

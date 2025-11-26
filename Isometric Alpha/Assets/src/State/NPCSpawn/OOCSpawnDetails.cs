@@ -491,9 +491,26 @@ public class ObstacleWithSecretDoorFlagSpawnDetails : ObstacleSpawnDetails
         this.secretDoorFlag = secretDoorFlag;
     }
 
+    private void setOffset(Transform transform)
+    {
+        switch(spriteName)
+        {
+            case PrefabNames.water:
+                transform.position = new Vector3(transform.position.x, transform.position.y - Constants.onTableHeightOffset*2);
+                break;
+            default:
+                break;
+        }
+    }
+
     public override string getPrefabName()
     {
         return PrefabNames.oocObstacle;
+    }
+
+    public override SpawnParams getSpawnParams()
+    {
+        return new SecretDoorObstacleSpawnParams(secretDoorFlag);
     }
 
     public override Transform getParent()
@@ -509,6 +526,8 @@ public class ObstacleWithSecretDoorFlagSpawnDetails : ObstacleSpawnDetails
 
         obstacle.setObstacleName(npcName);
         obstacle.secretDoorFlag = secretDoorFlag;
+
+        setOffset(interactable.transform);
 
         spawnActions(interactable.GetComponent<SpriteRenderer>());
     }
@@ -636,11 +655,49 @@ public class ButtonSpawnDetails : OOCSpawnDetails
             addTutorialTargetComponent(button, spriteRenderer, tutorialTargetHash);
         }
 
-        FloorButton floorButton = button.GetComponent<FloorButton>();
+        spawnActions(button.GetComponent<FloorButton>());
+    }
+
+    public virtual void spawnActions(FloorButton floorButton)
+    {
         floorButton.index = index;
         floorButton.weight = weight;
     }
 
+}
+
+public class HiddenButtonSpawnDetails : ButtonSpawnDetails
+{
+    private string secretDoorFlag;
+
+    public HiddenButtonSpawnDetails(Vector3Int cellCoords, string secretDoorFlag) :
+    base(Constants.sizeOne, cellCoords, Constants.indexZero)
+    {
+        this.secretDoorFlag = secretDoorFlag;
+    }
+
+    public HiddenButtonSpawnDetails(Vector3Int cellCoords, int index, string secretDoorFlag) :
+    base(Constants.sizeOne, cellCoords, index)
+    {
+        this.secretDoorFlag = secretDoorFlag;
+    }
+
+    public override void spawnActions(GameObject button)
+    {
+        base.spawnActions(button);
+
+        if(!SecretDoorFlags.secretDoorHasBeenDiscovered(secretDoorFlag))
+        {
+            button.SetActive(false);
+        }
+    }
+
+    public override void spawnActions(FloorButton floorButton)
+    {
+        base.spawnActions(floorButton);
+        floorButton.secretDoorFlag = secretDoorFlag;
+
+    }
 }
 
 public class NPCSpawnDetails : OffSetSpawnDetails

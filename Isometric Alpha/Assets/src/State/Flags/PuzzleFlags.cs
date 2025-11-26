@@ -15,11 +15,8 @@ public static class PuzzleFlags
         TransitionManager.BeforeTransition.AddListener(resetPuzzleFlags);
     }
 
-
     private static void resetPuzzleFlags()
     {
         currentPuzzleIndex = 0;
     }
-
-
 }

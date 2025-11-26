@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class SecretDoorKeyList
 {
+    private const string puzzledFinishedSuffix = "PuzzleFinished";
+
     #region Camp
 
     #region 6SlaveShack
@@ -33,6 +35,11 @@ public static class SecretDoorKeyList
     #region MineLvl_2-1a
 
     public const string mineLvl2FirstSecretDoor = LocationNameList.mineLvl2 + LocationNameList.section1a + NPCNameList.mineLvl2Wall;
+
+    #endregion
+
+    #region MineLvl_2-7b
+
     public const string mineLvl2SecondSecretDoor = LocationNameList.mineLvl2 + LocationNameList.section7b + NPCNameList.mineLvl2Wall;
 
     #endregion
@@ -40,6 +47,7 @@ public static class SecretDoorKeyList
     #region MineLvl_3-1b
 
     public const string mineLvl3PuzzleDoor = LocationNameList.mineLvl3 + LocationNameList.section1b + NPCNameList.mineLvl3Wall;
+    public const string mineLvl3PuzzleFinished = LocationNameList.mineLvl3 + LocationNameList.section1b + puzzledFinishedSuffix;
 
     #endregion
 

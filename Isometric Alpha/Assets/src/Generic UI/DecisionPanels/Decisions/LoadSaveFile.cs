@@ -121,9 +121,9 @@ public class LoadSaveFile : IDecision
             Dictionary<string, Dictionary<string, Item>> newShopkeeperInventories = SaveBlueprint.extractShopkeeperInventoriesFromJson(saveBlueprint.currentShopkeeperInventories);
             Dictionary<string, Dictionary<string, Item>> newBuyBackInventories = SaveBlueprint.extractShopkeeperInventoriesFromJson(saveBlueprint.currentBuyBackInventories);
 
-            ShopkeeperInventoryList.setShopkeeperInventoryList(newShopkeeperInventories, newBuyBackInventories);
+            PuzzleFlags.currentPuzzleIndex = saveBlueprint.currentPuzzleIndex;
 
-            // State.currentMonsterPackList = saveBlueprint.extractMonsterPackListFromJson();
+            ShopkeeperInventoryList.setShopkeeperInventoryList(newShopkeeperInventories, newBuyBackInventories);
 
             SaveBlueprint.resetAndOverwriteQuestDictionary(saveBlueprint.extractQuestListFromJson());
             State.allKnownMapData = saveBlueprint.extractAllKnownMapDataFromJson();

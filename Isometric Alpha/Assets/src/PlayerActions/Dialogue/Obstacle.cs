@@ -6,6 +6,7 @@ public class Obstacle : MonoBehaviour, IDialogueParticipant
 {
 
     public string obstacleName;
+    public SpriteRenderer spriteRenderer;
 
     public void setObstacleName(string obstacleName)
     {

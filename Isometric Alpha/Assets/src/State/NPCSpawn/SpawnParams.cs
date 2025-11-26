@@ -295,6 +295,20 @@ public class HiddenTerrainSpawnParams : SpawnParams
     }
 }
 
+public class SecretDoorObstacleSpawnParams : HiddenTerrainSpawnParams
+{
+    public SecretDoorObstacleSpawnParams(string secretDoorFlag):
+    base(secretDoorFlag)
+    {
+        
+    }
+
+    public override bool canSpawn(string npcName)
+    {
+        return !base.canSpawn(npcName);
+    }
+}
+
 public class FlagList : IEnumerable
 {
     public string[] flags;

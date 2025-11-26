@@ -189,6 +189,8 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 
 	public bool onLeftFoot;
 
+    public int currentPuzzleIndex;
+
 	public string saveName;
 
 	public string currentFlags;
@@ -265,6 +267,8 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 
         saveBlueprint.monsterLocations = MovementManager.getAllMonsterStats();
 
+        saveBlueprint.currentPuzzleIndex = PuzzleFlags.currentPuzzleIndex;
+
 		return saveBlueprint;
 	}
 
@@ -327,6 +331,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		this.currentShopkeeperInventories = GetFromJson.getElementFromJson(this.saveName, nameof(currentShopkeeperInventories), jsonDynamic, SaveDefaultValues.defaultEmptyInventoryWrapperArray);
 		this.currentBuyBackInventories = GetFromJson.getElementFromJson(this.saveName, nameof(currentBuyBackInventories), jsonDynamic, SaveDefaultValues.defaultEmptyInventoryWrapperArray);
 
+        this.currentPuzzleIndex = GetFromJson.getElementFromJson(this.saveName, nameof(currentPuzzleIndex), jsonDynamic, SaveDefaultValues.defaultStatZero);
 
 		this.monsterLocations = GetFromJson.getElementFromJson(this.saveName, nameof(monsterLocations), jsonDynamic, SaveDefaultValues.defaultEmptyEnemyStatsWrapperArray);
         this.currentMonsterDefeatKeys = GetFromJson.getElementFromJson(this.saveName, nameof(currentMonsterDefeatKeys), jsonDynamic, SaveDefaultValues.defaultEmptyFlagWrapperArray);

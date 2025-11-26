@@ -43,7 +43,7 @@ public class PartyMemberPlacer : MonoBehaviour
             }
         }
 
-        MovementManager.OnMoveFinished.Invoke();
+        MovementManager.OnMoveFinished.Invoke(Constants.indexZero);
 	}
 
 	public static PartyMemberPlacer getInstance()
@@ -125,7 +125,7 @@ public class PartyMemberPlacer : MonoBehaviour
 			{
 				GameObject.Destroy(currentPartyMember);
                 placedPartyMemberObjects.RemoveAt(partyMemberIndex);
-                MovementManager.OnMoveFinished.Invoke();
+                MovementManager.OnMoveFinished.Invoke(Constants.indexZero);
 			}
 		}
 	}
@@ -148,7 +148,7 @@ public class PartyMemberPlacer : MonoBehaviour
         }
 
         DestroyAllFollowers.Invoke();
-        MovementManager.OnMoveFinished.Invoke();
+        MovementManager.OnMoveFinished.Invoke(Constants.indexZero);
 
         placedPartyMemberObjects = new ArrayList();
     }

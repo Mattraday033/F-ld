@@ -63,9 +63,9 @@ public static class SpawnInfoManager
 
         allSpawnedObjects.AddRange(instantiateAllAxisSpawnDetails());
 
-        spawnAllMonsters();
-
         performButtonScriptStartingAction();
+
+        spawnAllMonsters();
 
         TrapAndButtonStateManager.setTrapsAndButtons();
 

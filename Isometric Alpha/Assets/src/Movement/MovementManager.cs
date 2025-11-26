@@ -18,7 +18,7 @@ public class MovementManager : MonoBehaviour
                                                                                 distance1TileSouthWestGrid,
                                                                                 distance1TileSouthEastGrid};
 
-    public readonly static UnityEvent OnMoveFinished = new UnityEvent();
+    public readonly static UnityEvent<int> OnMoveFinished = new UnityEvent<int>();
 
     public Grid grid;
 
@@ -196,7 +196,11 @@ public class MovementManager : MonoBehaviour
         movement.startingPosition = movement.getWorldPosition();
         movement.endingPosition = movement.startingPosition;
 
+        MovementTracker oldMovement = allMovementTrackers[movement.getMovementIndex()];
+
         allMovementTrackers[movement.getMovementIndex()] = movement;
+
+        GameObject.Destroy(oldMovement.gameObject);
     }
 
     private IEnumerator prepCombatAfterMovesFinish(MovementTracker movement)
@@ -241,7 +245,7 @@ public class MovementManager : MonoBehaviour
 
         movement.updateFacing();
 
-        OnMoveFinished.Invoke();
+        OnMoveFinished.Invoke(movement.getMovementIndex());
     }
 
     private void preventCollidingEndingPositions()

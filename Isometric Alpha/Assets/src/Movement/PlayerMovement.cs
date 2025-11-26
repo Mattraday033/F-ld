@@ -497,7 +497,7 @@ public class PlayerMovement : MovementTracker
                 GameObject movableObject = Physics2D.OverlapCircle(colliderWorldPosition(), detectionSize, LayerAndTagManager.movableObjectLayerMask).gameObject;
                 EnemyMovement enemyMovement = movableObject.GetComponent<EnemyMovement>();
                 enemyMovement.putBackToStartingPosition();
-                MovementManager.OnMoveFinished.Invoke();
+                MovementManager.OnMoveFinished.Invoke(getMovementIndex());
             }
 
             OOCUIManager.updateOOCUI();

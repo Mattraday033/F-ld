@@ -258,6 +258,12 @@ public static class PrefabNames
     public const string spikesUp = spikesFolderPath + "Spikes_Up";
     public const string spikesDown = spikesFolderPath + "Spikes_Down";
 
+    public const string stalagmiteFolder = spriteFolder + "Stalagmites/";
+    public const string singleStalagmite = stalagmiteFolder + "Single Stalagmite";
+    public const string tripleStalagmite = stalagmiteFolder + "Triple Stalagmite";
+    public const string mediumBushStalagmite = stalagmiteFolder + "Medium Bush Stalagmite";
+    public const string lowStalagmite = stalagmiteFolder + "Low Stalagmite";
+
     public const string furnitureFolder = spriteFolder + "Furniture/";
     public const string chestsFolder = furnitureFolder + "Chests/";
     public const string chestBackClosed = chestsFolder + "Chest_Back_Closed";

@@ -5,7 +5,7 @@ using UnityEngine;
 public static class MonsterSpawnDetailsList
 {
 
-    private const bool chasesPlayer = true;
+    public const bool chasesPlayer = true;
     private static Dictionary<string, List<MonsterSpawnDetails>> monsterSpawnDetailsDict;
 
 
@@ -166,6 +166,17 @@ public static class MonsterSpawnDetailsList
         monsterSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.section1a, list);
 
         #endregion
+
+        #region MineLvl_3-1b
+
+        list = new List<MonsterSpawnDetails>();
+
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(4, -2), chasesPlayer, Facing.NorthWest));
+
+        monsterSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.section1b, list);
+
+        #endregion
+
 
         #region MineLvl_3-2a
 

@@ -13,6 +13,8 @@ public interface IFloorButton
 
 public class FloorButton : MonoBehaviour, INameSource
 {
+    public string secretDoorFlag;
+
 
 	public Collider2D collider;
     public SpriteRenderer spriteRenderer;
@@ -20,6 +22,23 @@ public class FloorButton : MonoBehaviour, INameSource
     public int index;
 
     public int weight = 1;
+
+    private void Awake()
+    {
+        SecretDoorFlags.OnSecretDoorDiscovery.AddListener(show);
+    }
+    private void OnDestroy()
+    {
+        SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(show);
+    }
+
+    private void show(string discoveredSecretDoorFlag)
+    {
+        if(this.secretDoorFlag != null && this.secretDoorFlag.Equals(discoveredSecretDoorFlag))
+        {
+            gameObject.SetActive(true);
+        }
+    }
 
     void Start()
     {
@@ -39,7 +58,7 @@ public class FloorButton : MonoBehaviour, INameSource
 
         yield return null;
 
-        setSprite();
+        setSprite(Constants.indexZero);
     }
 
     public string getKey()
@@ -57,7 +76,7 @@ public class FloorButton : MonoBehaviour, INameSource
         return Helpers.hasCollision(collider, LayerAndTagManager.pressesButtonsLayerMask); 
     }
 
-    private void setSprite()
+    private void setSprite(int movementIndex)
     {
         if(isPressed())
         {

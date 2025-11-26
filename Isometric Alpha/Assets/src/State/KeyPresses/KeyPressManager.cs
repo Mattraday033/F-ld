@@ -10,11 +10,6 @@ public static class KeyPressManager
         get => _HandlingPrimaryKeyPress;
         set
         {
-            if(value == true)
-            {
-                Debug.LogError("handlingPrimaryKeyPress set to true");
-            }
-
            _HandlingPrimaryKeyPress = value;
         } 
     }
