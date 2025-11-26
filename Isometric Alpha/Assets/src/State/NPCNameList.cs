@@ -89,6 +89,7 @@ public static class NPCNameList
     public const string vaultableGap = "Vaultable Gap";
     public const string wallPatch = "Wall Patch";
     public const string mineLvl2Wall = "MineLvl_2 Wall";
+    public const string mineLvl3Wall = "MineLvl_3 Wall";
     public const string suspiciousWall = "Suspicious Wall";
     public const string diary = "Diary";
     public const string rubble = "Rubble";

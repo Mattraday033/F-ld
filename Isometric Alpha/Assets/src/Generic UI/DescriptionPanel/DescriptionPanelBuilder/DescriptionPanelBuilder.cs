@@ -151,7 +151,6 @@ public struct DescriptionPanelBuildingBlock
         return new DescriptionPanelBuildingBlock(text, DescriptionPanelBuildingBlockType.BonusDamageText, formula);
     }
 
-
     public static DescriptionPanelBuildingBlock getCritBlock(string text, string formula)
     {
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.critIconName, formula);
@@ -193,6 +192,11 @@ public struct DescriptionPanelBuildingBlock
     public static DescriptionPanelBuildingBlock getArmorBlock(string text)
     {
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.armorScoreIconName);
+    }
+
+    public static DescriptionPanelBuildingBlock getArmorBlock(string text, string formula)
+    {
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.armorScoreIconName, formula);
     }
 
     public static DescriptionPanelBuildingBlock getAmountBlock(string text)

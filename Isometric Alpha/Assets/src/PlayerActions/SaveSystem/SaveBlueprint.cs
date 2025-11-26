@@ -791,7 +791,6 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		DescriptionPanel.setText(panel.amountText, getSaveNumberForDisplay());
 
 		DescriptionPanel.setText(panel.worthText, gold);
-		DescriptionPanel.setText(panel.affinityText, affinity);
 		DescriptionPanel.setText(panel.partyText, getPartyMembersInPartyText());
 	}
 

@@ -9,8 +9,10 @@ public class DescriptionPanelWithFormula : DescriptionPanel
 
     private string damageTotal = "";
     private string critTotal = "";
+    private string armorTotal = "";
     private string damageFormula;
     private string critFormula;
+    private string armorFormula;
     private bool hasListener = false;
     private bool hasFormula = false;
 
@@ -35,6 +37,7 @@ public class DescriptionPanelWithFormula : DescriptionPanel
         {
             damageFormula = formulaSource.getDamageFormula().Replace(" ", "");
             critFormula = formulaSource.getCritFormula().Replace(" ", "");
+            armorFormula = formulaSource.getArmorFormula().Replace(" ", "");
 
             DescriptionPanelBuilder.OnFormulaSwap.AddListener(swapStatText);
             hasListener = true;
@@ -91,21 +94,33 @@ public class DescriptionPanelWithFormula : DescriptionPanel
             if (critTotal == null || critTotal.Length <= 0)
             {
                 critTotal = critRatingText.text;
+                oldFontSize = critRatingText.fontSize;
             }
 
-            damageText.text = damageFormula;
-            critRatingText.text = critFormula;
+            if (armorTotal == null || armorTotal.Length <= 0)
+            {
+                armorTotal = armorRatingText.text;
+                oldFontSize = armorRatingText.fontSize;
+            }
 
-            damageText.fontSize *= fontSizeModifier;
-            critRatingText.fontSize *= fontSizeModifier;
+            DescriptionPanel.setText(damageText, damageFormula);
+            DescriptionPanel.setText(critRatingText, critFormula);
+            DescriptionPanel.setText(armorRatingText, armorFormula);
+
+            DescriptionPanel.adjustTextFontSize(damageText, fontSizeModifier);
+            DescriptionPanel.adjustTextFontSize(critRatingText, fontSizeModifier);
+            DescriptionPanel.adjustTextFontSize(armorRatingText, fontSizeModifier);
+
         }
         else
         {
-            damageText.text = damageTotal;
-            critRatingText.text = critTotal;
+            DescriptionPanel.setText(damageText, damageTotal);
+            DescriptionPanel.setText(critRatingText, critTotal);
+            DescriptionPanel.setText(armorRatingText, armorTotal);
 
-            damageText.fontSize = oldFontSize;
-            critRatingText.fontSize = oldFontSize;
+            DescriptionPanel.setTextFontSize(damageText, oldFontSize);
+            DescriptionPanel.setTextFontSize(critRatingText, oldFontSize);
+            DescriptionPanel.setTextFontSize(armorRatingText, oldFontSize);
         }
     }
 

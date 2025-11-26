@@ -15,17 +15,11 @@ public class EffectAnimationManager : AnimationManager
 
     public override void setAnimations(string abilityName)
     {
-        Debug.LogError("abilityName = " + abilityName);
-
         string folderPath = EffectPathList.getEffectFolderPath(abilityName);
-
-        Debug.LogError("folderPath = " + folderPath);
 
         AnimationClip animationClip = Resources.Load<AnimationClip>(folderPath);
 
         spawnDamageNumbersTime = animationClip.length * (3f/4f);
-
-        // Helpers.debugNullCheck("animationClip", animationClip);
 
         animancer.Play(createClipTransitionThenDelete(animationClip));
     }

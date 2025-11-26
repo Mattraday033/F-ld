@@ -226,7 +226,6 @@ public class KnockBackOnLanding : ScriptOnLanding
 
             if(!targetSnapshot.isDead())
             {
-                Debug.LogError("combatantToBeMoved.isDead() = " + combatantToBeMoved.isDead());
                 combatantToBeMoved.playAnimationOnDamage();
                 combatantToBeMoved.updateHealthBar();
             }

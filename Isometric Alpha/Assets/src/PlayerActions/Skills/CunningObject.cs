@@ -23,7 +23,7 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
     private void Awake()
     {
         outline = new SpriteOutline();
-        outline.setSpriteRenderer(spriteRenderer);
+        outline.setSpriteRenderer(GetComponent<SpriteRenderer>());
     }
 
     public void intimidate() { }
@@ -154,7 +154,7 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
 
 	public OutlineMode getOutlineSize()
     {
-        return OutlineMode.Normal;
+        return OutlineMode.Bold;
     }
 
     public void createHoverTag()

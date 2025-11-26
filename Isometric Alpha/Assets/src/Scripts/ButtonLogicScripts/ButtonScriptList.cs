@@ -138,6 +138,16 @@ public static class ButtonScriptList
 
         #region MineLvl_3
 
+        #region MineLvl_3-1b
+
+        list = new List<ButtonLogicScript>();
+
+        // list.Add(new ButtonOrderLogicScript(new int[]{Constants.indexZero, Constants.indexThree, Constants.indexOne,  Constants.indexTwo, Constants.indexZero}));
+
+        scriptDict.Add(LocationNameList.mineLvl3 + LocationNameList.section2b, list);
+
+        #endregion
+
         #region MineLvl_3-2b
 
         list = new List<ButtonLogicScript>();
@@ -168,6 +178,15 @@ public static class ButtonScriptList
         list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeSeven, NPCNameList.ancientPortcullis));
 
         scriptDict.Add(LocationNameList.mineLvl3 + LocationNameList.section6a, list);
+
+        #endregion
+        #region MineLvl_3-7
+
+        list = new List<ButtonLogicScript>();
+
+        list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeSix, NPCNameList.ancientPortcullis));
+
+        scriptDict.Add(LocationNameList.mineLvl3 + LocationNameList.section7, list);
 
         #endregion
         #endregion     

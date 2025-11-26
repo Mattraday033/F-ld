@@ -11,7 +11,14 @@ public class Shield : Armor
 	base(listID, key, loreDescription, armorRating, Armor.offHandSlotIndex)
     {
         setWorth(calculateWorth(armorRating));
+	}	
+    
+    public Shield(ItemListID listID, string key, string loreDescription, string armorFormula, int slotID) :
+	base(listID, key, loreDescription, armorFormula, Armor.offHandSlotIndex)
+    {
+        setWorth(calculateWorth(DamageCalculator.calculateFormula(armorFormula, worthStatsSource)));
 	}
+
 	private static int calculateWorth(int armorRating)
 	{
 		return (armorRating / 2);

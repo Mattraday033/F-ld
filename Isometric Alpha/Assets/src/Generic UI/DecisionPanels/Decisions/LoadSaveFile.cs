@@ -132,7 +132,6 @@ public class LoadSaveFile : IDecision
             SecretDoorFlags.setFromSaveData(saveBlueprint.secretDoors);
 
             Purse.setCoinsInPurse(saveBlueprint.gold);
-            AffinityManager.setAffinity(saveBlueprint.affinity);
 
             MonsterDefeatKeysList.extractAllMonsterDefeatKeys(saveBlueprint);
 

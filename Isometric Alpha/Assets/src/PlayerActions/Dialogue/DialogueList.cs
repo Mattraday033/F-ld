@@ -14,7 +14,7 @@ public static class DialogueList
 
     private readonly static Dialogue awkwardRubbleDialogue = new Dialogue(new string[] { NPCNameList.awkwardRubble },
                                                              Resources.Load<TextAsset>(DialogueNameList.awkwardRubblePath));
-    private readonly static Dialogue ancientPortcullisDialogue = new Dialogue(new string[] { NPCNameList.cellDoor },
+    private readonly static Dialogue ancientPortcullisDialogue = new Dialogue(new string[] { NPCNameList.ancientPortcullis},
                                                              Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath));
     private readonly static Dialogue liftableGateDialogue = new Dialogue(new string[] { "", NPCNameList.liftableGate + 1},
                                                              Resources.Load<TextAsset>(DialogueNameList.liftableGatePath));
@@ -320,10 +320,10 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section1a, NPCNameList.suspiciousWall,
                                                                                   new Dialogue(new string[] { NPCNameList.suspiciousWall },
-                                                                                  Resources.Load<TextAsset>(DialogueNameList.suspiciousWallPath + 1)));
+                                                                                  Resources.Load<TextAsset>(DialogueNameList.suspiciousWallPathML2 + 1)));
         addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7b, NPCNameList.suspiciousWall,
                                                                                   new Dialogue(new string[] { NPCNameList.suspiciousWall },
-                                                                                  Resources.Load<TextAsset>(DialogueNameList.suspiciousWallPath + 2)));
+                                                                                  Resources.Load<TextAsset>(DialogueNameList.suspiciousWallPathML2 + 2)));
 
         addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
         addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.controlPanel, new Dialogue(new string[] { NPCNameList.controlPanel},
@@ -354,6 +354,10 @@ public static class DialogueList
         #endregion
 
         #region MineLvl_3
+
+        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section1b, NPCNameList.suspiciousWall,
+                                                                                  new Dialogue(new string[] { NPCNameList.suspiciousWall },
+                                                                                  Resources.Load<TextAsset>(DialogueNameList.suspiciousWallPathML3)));
 
         addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section2b, NPCNameList.liftableGate, liftableGateDialogue);
         addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section2b, NPCNameList.ancientPortcullis+1, ancientPortcullisDialogue);
@@ -420,6 +424,9 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section6a, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
         addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section6a, NPCNameList.unstablePillar, unstablePillarDialogue);
+
+        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section7, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
+        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section7, NPCNameList.unstablePillar, unstablePillarDialogue);
 
         #endregion
 

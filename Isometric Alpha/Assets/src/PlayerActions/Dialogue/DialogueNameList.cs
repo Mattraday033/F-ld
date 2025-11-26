@@ -140,7 +140,7 @@ public static class DialogueNameList
     public const string mineLvl2FolderPath = mineFolderPath + "MineLvl_2/";
 
     public const string controlPanelPath = mineLvl2FolderPath + NPCNameList.controlPanel;
-    public const string suspiciousWallPath = mineLvl2FolderPath + NPCNameList.suspiciousWall;
+    public const string suspiciousWallPathML2 = mineLvl2FolderPath + NPCNameList.suspiciousWall;
     public const string mineArmoryGatePath = mineLvl2FolderPath + NPCNameList.mineArmoryGate;
 
     #endregion
@@ -153,6 +153,8 @@ public static class DialogueNameList
     public const string ml3GuardBarricadePath = mineLvl3FolderPath + "GuardsCrate";
     public const string pazmanML3CampPath = mineLvl3FolderPath + "GuardPazman";
     public const string viragML3CampPath = mineLvl3FolderPath +  "GuardVirag";
+
+    public const string suspiciousWallPathML3 = mineLvl3FolderPath + NPCNameList.suspiciousWall;
 
     #endregion
 

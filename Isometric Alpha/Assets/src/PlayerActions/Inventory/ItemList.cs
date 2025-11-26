@@ -107,6 +107,7 @@ public static class ItemList
 	public const int delversDreamIndex = 19;
 	public const int cookingPotIndex = 20;
 	public const int bronzeBadgeIndex = 21;
+	public const int plumedHelmetIndex = 22;
 	
 	public const int leafSamplesIndex = 0;
 	public const int guardDiaryIndex = 1;
@@ -266,21 +267,21 @@ public static class ItemList
 		armor.Add(new Armor(new ItemListID(armorListIndex, leatherGlovesIndex), "Leather Gloves", "Gloves made to be worn with armor, but still suitable for protecting the hands during hard labor.", leatherGlovesArmorValue, Armor.handsSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, paddedArmorIndex), "Padded Armor", "Armor made of heavy cloth.", paddedArmorArmorValue, Armor.bodySlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, thatchNecklaceIndex), "Thatch's Silver Necklace", "A necklace made of a silver medalion attached to a thin silver chain. A sun rising over the horizon is etched into the medalion's disk.", thatchNecklaceArmorValue, Armor.trinketSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, martialArtistsBeltIndex), martialArtistsBeltKey, "A simple belt made of rope. This belt gives you extra armor equal to twice your wisdom score + 6.", martialArtistsBeltArmorValue, Armor.trinketSlotIndex));
-		armor.Add(new Shield(new ItemListID(armorListIndex, wardensShieldIndex), wardensShieldKey, "A shield made from bands of bronze fitted over a hard wood core. This shield provides armor equal to twice your strength + 10", wardensShieldArmorValue, Armor.offHandSlotIndex));
+		armor.Add(new Armor(new ItemListID(armorListIndex, martialArtistsBeltIndex), martialArtistsBeltKey, "A simple belt made of rope. Unadorned and unburdened.", "2W+6", Armor.trinketSlotIndex));
+		armor.Add(new Shield(new ItemListID(armorListIndex, wardensShieldIndex), wardensShieldKey, "A shield made from bands of bronze fitted over a hard wooden core.", "2S + 10", Armor.offHandSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, silverSpoonIndex), silverSpoonKey, "The holder of this spoon accumulates wealth at a faster rate. Monsters drop 20% more gold.", givesNoArmor, Armor.trinketSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, leatherBootsIndex), "Leather Boots", "Solid boots made of cowhide. Meant to be worn with armor.", leatherBootsArmorValue, Armor.feetSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, bronzeHelmetIndex), "Bronze Cavalry Helmet", "A bronze helmet in the Lovashi style. Well padded and comfortable to wear.", bronzeHelmetArmorValue, Armor.headSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, bronzeCuirassIndex), "Bronze Cuirass", "Armor made of interlocking bronze scales.", bronzeCuirassArmorValue, Armor.bodySlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, salvagedGuardHelmIndex), salvagedGuardHelmKey, "A helm taken from a slain guard. Buff out that dent and it's good as new.", salvagedGuardHelmArmorValue, Armor.headSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, salvagedGuardArmorIndex), salvagedGuardArmorKey, "A set of armor stripped off a dead guard. Don't mind whatever that smell is.", salvagedGuardArmorArmorValue, Armor.bodySlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, salvagedGuardGlovesIndex), salvagedGuardGlovesKey, "A pair of gloves taken from a dead guard. Their literal death grip provides a bonus equal to your dexterity to crit chance.", salvagedGuardGlovesArmorValue, Armor.handsSlotIndex));
+		armor.Add(new Armor(new ItemListID(armorListIndex, salvagedGuardGlovesIndex), salvagedGuardGlovesKey, "A pair of gloves taken from a guard's cold, dead hands.", salvagedGuardGlovesArmorValue, Armor.handsSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, salvagedGuardBootsIndex), salvagedGuardBootsKey, "A pair of boots taken from a dead guard. His soles have left his body.", salvagedGuardBootsArmorValue, Armor.feetSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, luckyTalismanIndex), luckyTalismanKey, "András's lucky talisman. Let's hope it serves you better than it served him.", "4", "2", givesNoArmor, Armor.trinketSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, delversDreamIndex), delversDreamKey, "A gem, finely cut, with a deep blue hue. The longer you stare, the more certain you become that you do not hold the gem, but it holds you. 10% bonus mental resistance when equipped.", delversDreamArmorValue, Armor.trinketSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, cookingPotIndex), cookingPotKey, "A pot from the kitchens. Worn about the head, it could provide some meager protection.", cookingPotArmorValue, Armor.headSlotIndex));
 		armor.Add(new Armor(new ItemListID(armorListIndex, bronzeBadgeIndex), bronzeBadgeKey, "This bronze badge looks bruised and worn, as if it was just pulled from a fire.", bronzeBadgeArmorValue, Armor.trinketSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, bronzeHelmetIndex), "Ancient Plumed Helmet", "A battered helmet, with a ragged plume made of dyed hair from an unknown beast.", salvagedGuardHelmArmorValue, Armor.headSlotIndex));
+		armor.Add(new Armor(new ItemListID(armorListIndex, plumedHelmetIndex), "Ancient Plumed Helmet", "A battered helmet, with a ragged plume made of dyed hair from an unknown beast.", "C + 2", Armor.headSlotIndex));
 		
 
 		//QuestItem(string key, string loreDescription, int ID)

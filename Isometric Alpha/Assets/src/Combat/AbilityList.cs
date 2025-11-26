@@ -217,12 +217,21 @@ public static class AbilityList
 		enemyAbilityDictionary.Add(flurryKey, new Ability(CombatActionSettings.build(DescriptionParams.build(flurryKey, "A devastating surge of claws and jaws."), DamageParams.build("10", "5"), AnimationParams.build(CombatAnimationType.Effect))));
         enemyAbilityDictionary.Add(screechKey, new Ability(CombatActionSettings.build(DescriptionParams.build(screechKey, "A howl so loud it draws blood.", TraitList.caveMadnessKey), DamageParams.build("6", "2"), TargetParams.build(Range.quadrupleBoxIndex), AnimationParams.build(CombatAnimationType.Effect), TraitList.caveMadness)));
         enemyAbilityDictionary.Add(spawnPupsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(spawnPupsKey, "The bat calls forth it's pups to fight for it.")), MonsterNameList.batSwarm));
-        enemyAbilityDictionary.Add(rouseColonyKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(rouseColonyKey, "The Matron calls it's children to war.")), MonsterNameList.batSwarm));
         enemyAbilityDictionary.Add(swarmRushKey, new Ability(CombatActionSettings.build(DescriptionParams.build(swarmRushKey, "The swarm flutters about their target, clawing and biting ferociously.", colonyCrushKey), DamageParams.build("3", "2"), AnimationParams.build(CombatAnimationType.Effect))));
         enemyAbilityDictionary.Add(batClawName, new Ability(CombatActionSettings.build(batClawName, batClawDescription, DamageParams.build("6", "8"))));
         enemyAbilityDictionary.Add(bossBatClawKey, new Ability(CombatActionSettings.build(batClawName, batClawDescription, DamageParams.build("12", "12"))));
-        enemyAbilityDictionary.Add(diveBombKey, new SuicideAbility(CombatActionSettings.build(DescriptionParams.build(diveBombKey, "The bat dives straight for an enemy at lightning speed and collides with it, spraying everyone closeby with viscera and guano.", "DiveBomb"), DamageParams.build("5", "1"), TargetParams.build(Range.quadrupleBoxIndex))));
-
+        enemyAbilityDictionary.Add(diveBombKey, new SuicideAbility(CombatActionSettings.build(DescriptionParams.build(diveBombKey, "The bat dives straight for an enemy at lightning speed and collides with it, spraying everyone close by with viscera and guano.", "DiveBomb"), DamageParams.build("5", "1"), TargetParams.build(Range.quadrupleBoxIndex))));
+        enemyAbilityDictionary.Add(rouseColonyKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(rouseColonyKey, "The Matron calls her children to war.")), 
+                                                                                                new string[][]
+                                                                                                            {
+                                                                                                                new string[]{MonsterNameList.armoredBat, MonsterNameList.screecher},
+                                                                                                                new string[]{MonsterNameList.armoredBat, MonsterNameList.denMother},
+                                                                                                                new string[]{MonsterNameList.giantBat, MonsterNameList.batSwarm},
+                                                                                                                new string[]{MonsterNameList.screecher, MonsterNameList.batSwarm},
+                                                                                                                new string[]{MonsterNameList.screecher, MonsterNameList.giantBat},
+                                                                                                                new string[]{MonsterNameList.giantBat, MonsterNameList.denMother}
+                                                                                                            }));
+        
         //worm abilities
         // enemyAbilityDictionary.Add(splitSpawnWormsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(splitSpawnWormsKey, "The worm splits to spawn two smaller worms.")), EnemyStatsList.wormSplitSpawnCombo));
         enemyAbilityDictionary.Add(wallopKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wallopKey, "The worm drives forward, using the weight of it's body and it's intense bite to rip apart it's foe."), DamageParams.build("2", "1"))));

@@ -379,7 +379,7 @@ public class CunningManager : SkillManager
 
     public bool hasEnoughChargesForTarget(ISkillTarget target)
     {
-        return target.getChargeCost(SkillType.Cunning) >= getCunningsRemaining();
+        return target.getChargeCost(SkillType.Cunning) <= getCunningsRemaining();
     }
 
     public override bool executeSkill()

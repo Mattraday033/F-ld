@@ -561,6 +561,8 @@ public class DialogueManager : MonoBehaviour
 
                     string secretDoorKey = getArgument(buffer);
 
+                    Debug.LogError("secretDoorKey = " + secretDoorKey);
+
                     SecretDoorFlags.addSecretDoorFlag(secretDoorKey);
 
                     continueStory();

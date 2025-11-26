@@ -12,7 +12,7 @@ public class UpgradePartyMemberDecisionPanel : MonoBehaviour, IPointerEnterHandl
 	private const string affinityTitleWord = "Affinity";
 	private const string maxLevelTitleWords = "Max Level";
 
-	public static UnityEvent OnPartyMemberUpgraded = new UnityEvent();
+	public readonly static UnityEvent OnPartyMemberUpgraded = new UnityEvent();
 
 	public DescriptionPanelSlot hoverDescriptionPanelSlot;
 

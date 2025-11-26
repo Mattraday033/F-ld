@@ -4,8 +4,28 @@ using UnityEngine;
 
 public static class KeyPressManager
 {
-	public static bool handlingPrimaryKeyPress = false;
-    public static bool handlingSecondaryKeyPress = false;
+    private static bool _HandlingPrimaryKeyPress = false;
+    public static bool handlingPrimaryKeyPress
+    {
+        get => _HandlingPrimaryKeyPress;
+        set
+        {
+            if(value == true)
+            {
+                Debug.LogError("handlingPrimaryKeyPress set to true");
+            }
+
+           _HandlingPrimaryKeyPress = value;
+        } 
+    }
+
+    public static bool _HandlingSecondaryKeyPress = false;
+    public static bool handlingSecondaryKeyPress
+    {
+        get => _HandlingSecondaryKeyPress;
+        set => _HandlingSecondaryKeyPress = value;
+    }
+
 
     public readonly static KeyCode[] WASDKeys = new KeyCode[] { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D };
 

@@ -81,6 +81,16 @@ public static class ChestItemIDList
 
         #endregion
 
+        #region MineLvl_2-3a
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.plumedHelmetIndex));
+
+        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section3a, list);
+
+        #endregion
+
         #region MineLvl_2-4
 
         list = new List<ItemListID>();
@@ -128,6 +138,17 @@ public static class ChestItemIDList
         #endregion
 
         #region MineLvl_3
+
+        #region MineLvl_3-1b
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rockCakeIndex, Constants.sizeTwo));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.delversDreamIndex));
+
+        chestItemIDList.Add(LocationNameList.mineLvl3 + LocationNameList.section1b, list);
+
+        #endregion
 
         #region MineLvl_3-2a
 
@@ -181,7 +202,15 @@ public static class ChestItemIDList
         chestItemIDList.Add(LocationNameList.mineLvl3 + LocationNameList.section6a, list);
 
         #endregion
+        #region MineLvl_3-7
 
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.salvagedGuardGlovesIndex));
+
+        chestItemIDList.Add(LocationNameList.mineLvl3 + LocationNameList.section7, list);
+
+        #endregion
         #endregion
 
     }

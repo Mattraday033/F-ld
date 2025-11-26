@@ -20,11 +20,11 @@ public static class TestScript
 
         // PartyManager.getPartyMember(NPCNameList.thatch).canJoinParty = true;
 
-        PartyManager.getPlayerStats().setLevel(3);
+        PartyManager.getPlayerStats().setLevel(10);
         // PartyManager.getPlayerStats().currentHealth = 1;
-        PartyManager.getPlayerStats().strength = 3;
-        PartyManager.getPlayerStats().dexterity = 3;
-        // PartyManager.getPlayerStats().wisdom = 2;
+        PartyManager.getPlayerStats().strength = 10;
+        PartyManager.getPlayerStats().dexterity = 10;
+        PartyManager.getPlayerStats().wisdom = 3;
         // PartyManager.getPlayerStats().charisma = 2;
 
         // PartyManager.addXP(1050);

@@ -872,6 +872,15 @@ public class GateSpawnDetails : NPCSpawnDetails
         this.skewed = skewed;
         this.hasSprite = hasSprite;
         this.axis = axis;
+
+        switch(spriteName)
+        {
+            case PrefabNames.portcullis3x1:
+                offset = Constants.onTableHeightOffset*5;
+                break;
+            default:
+                break;
+        }
     }
 
     public override Transform getParent()
@@ -923,6 +932,15 @@ public class GateSpawnDetails : NPCSpawnDetails
                 }
                 break;
             case PrefabNames.portcullis3x1:
+                boxCollider.size = new Vector2(1.5f,2.05f);
+
+                if(flipSprite())
+                {
+                    boxCollider.offset = new Vector2(-0.45f,0.325f);
+                } else
+                {
+                    boxCollider.offset = new Vector2(0.45f,0.325f);
+                }
                 break;
             default:
                 return;

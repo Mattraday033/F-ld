@@ -464,9 +464,34 @@ public static class GateSpawnInfoList
                                     PrefabNames.unstablePillar,
                                     ColorList.mineLvl3RubbleColor,
                                     new Vector3Int(-18, -8),
-                                    SecretDoorKeyList.mineLvl3UnstablePillarHiddenTerrain));
+                                    SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain));
 
         gateSpawnInfoDict.Add(LocationNameList.mineLvl3 + LocationNameList.section6a, list);
+
+        #endregion
+
+        #region MineLvl_3-7
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.ancientPortcullis,
+                                    LocationNameList.mineLvl3 + LocationNameList.section7,
+                                    PrefabNames.portcullis3x1,
+                                    new Vector3Int(0, 2),
+                                    Constants.sizeThree,
+                                    Axis.DescendingY));
+
+        list.Add(new GateWithHiddenTerrainSpawnInfo(Constants.indexOne, 
+                                    NPCNameList.unstablePillar,
+                                    LocationNameList.mineLvl3 + LocationNameList.section7,
+                                    PrefabNames.unstablePillar,
+                                    ColorList.mineLvl3RubbleColor,
+                                    new Vector3Int(-9, -2),
+                                    SecretDoorKeyList.mineLvl3_7UnstablePillarHiddenTerrain));
+
+
+        gateSpawnInfoDict.Add(LocationNameList.mineLvl3 + LocationNameList.section7, list);
 
         #endregion
 

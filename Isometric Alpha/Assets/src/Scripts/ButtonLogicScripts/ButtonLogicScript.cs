@@ -192,3 +192,94 @@ public class OnOffButtonLogicScript : ButtonLogicScript
     }
 
 }
+
+// public enum WallType {None = 0, RoundRubble = 1, SingleStalagmite = 2,  TripleStalagmite = 3, BushRock = 4}
+
+public class ButtonOrderLogicScript : ButtonLogicScript
+{
+
+    private int numberOfButtonsPressed = 0;
+    private int currentButtonIndex = -1;
+
+    private int[] indexOrder;
+    private string secretDoorKey;
+
+    public ButtonOrderLogicScript(int[] indexOrder, string secretDoorKey)
+    {
+        this.indexOrder = indexOrder;
+        this.secretDoorKey = secretDoorKey;
+    }
+
+    public override void startingAction()
+    {
+        
+    }
+
+    public override void getFloorButtonStatus(FloorButton floorButton)
+    {
+        if(floorButton.isPressed())
+        {
+            numberOfButtonsPressed++;
+            currentButtonIndex = floorButton.index;
+        }
+    }
+
+    public override bool validButtonForScript(FloorButton floorButton)
+    {
+        return true;
+    }
+
+    public override void runScript()
+    {
+        // SecretDoorKeyList.a
+    }
+
+    public override bool scriptConditionsMet()
+    {
+        OnButtonDataRequest.Invoke(this);
+
+        if(currentButtonIndex == -1)
+        {
+            return false;
+        }
+
+        if(numberOfButtonsPressed >= Constants.sizeTwo)
+        {
+            PuzzleFlags.currentPuzzleIndex = 0;
+            //reset
+        } else if(PuzzleFlags.currentPuzzleIndex < indexOrder.Length && currentButtonIndex == indexOrder[PuzzleFlags.currentPuzzleIndex])
+        {
+            PuzzleFlags.currentPuzzleIndex++;
+            //spawn next hint
+        } else if(PuzzleFlags.currentPuzzleIndex >= indexOrder.Length)
+        {
+            //finish puzzle
+        } else
+        {
+            
+        }
+
+        currentButtonIndex = -1;
+
+        // if(validButtonForScript(floorButton))
+        // {
+        //     PuzzleFlags.currentPuzzleIndex++;
+
+        //     if(PuzzleFlags.currentPuzzleIndex >= indexOrder.Length)
+        //     {
+        //         //finish puzzle
+        //     } else
+        //     {
+                
+        //     }
+
+        // } else
+        // {
+        //     PuzzleFlags.currentPuzzleIndex = 0;
+
+        // }
+
+        return true;
+    }
+
+}

@@ -428,14 +428,6 @@ public static class StatBoostManager
 
     public static string getBonusArmorFormula(IDescribable describable)
     {
-        switch (describable.getName())
-        {
-            case ItemList.martialArtistsBeltKey:
-                return "2W";
-            case ItemList.wardensShieldKey:
-                return "2S";
-        }
-
         return "0";
     }
 

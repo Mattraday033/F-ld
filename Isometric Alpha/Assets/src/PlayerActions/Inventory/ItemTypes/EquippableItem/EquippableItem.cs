@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using System;
 
 [System.Serializable]
-public class EquippableItem : Item, IJSONConvertable, IStatBoostSource 
+public class EquippableItem : Item, IJSONConvertable, IStatBoostSource, IFormulaSource
 {
     public const string offHandSlotText = "Off Hand";
     public const string headSlotText = "Head";
@@ -28,20 +28,37 @@ public class EquippableItem : Item, IJSONConvertable, IStatBoostSource
 
     public const string type = "Equip";
 
-    //[SerializeField] 
     private int slotID;
+    protected string armorFormula;
 
-    public EquippableItem(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string subtype, int worth, int slotID) : 
+    public EquippableItem(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string armorFormula, string subtype, int worth, int slotID) : 
     base(listId, key, loreDescription, damageFormula, critFormula, type, subtype, worth)
     {
         this.slotID = slotID;
+        this.armorFormula = armorFormula;
     }
 
     [JsonConstructor]
-    public EquippableItem(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string subtype, int worth, int slotID, int quantity) : 
+    public EquippableItem(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string armorFormula, string subtype, int worth, int slotID, int quantity) : 
     base(listId, key, loreDescription, damageFormula, critFormula, type, subtype, worth, quantity)
     {
         this.slotID = slotID;
+        this.armorFormula = armorFormula;
+    }
+
+    public int getArmorRating()
+    {
+        return DamageCalculator.calculateFormula(armorFormula, getStatSource());
+    }
+
+    public virtual string getArmorFormula()
+    {
+        return armorFormula;
+    }
+
+    public string getArmorRatingForDisplay()
+    {
+        return "" + getArmorRating();
     }
 
     public override bool isEquippable()
@@ -130,11 +147,6 @@ public class EquippableItem : Item, IJSONConvertable, IStatBoostSource
         throw new IOException("getIconName() was called in the base class extraneously");
     }
 
-    public virtual int getArmorRating()
-    {
-        throw new IOException("getArmorRating() was called in the base class extraneously");
-    }
-
     #region IStatBoostSource Methods
     #region Generic Stats
 
@@ -202,7 +214,7 @@ public class EquippableItem : Item, IJSONConvertable, IStatBoostSource
  
     public virtual string getBonusArmorFormula()
     {
-        return StatBoostManager.getBonusArmorFormula(this);
+        return Constants.zeroRating;
     }
  
     public string getBonusArmorPenetrationFormula()

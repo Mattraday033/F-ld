@@ -50,6 +50,7 @@ public class GridDebugger : MonoBehaviour
         if(Application.isEditor && parentObject != null && Input.GetKey(KeyCode.LeftAlt) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             parentObject.SetActive(false);
+            parentObject = null;
             KeyPressManager.handlingPrimaryKeyPress = true;
         }
     }

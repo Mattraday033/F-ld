@@ -29,7 +29,7 @@ public class PartyMemberSpritePanel : DescriptionPanel
 
         AllyStats stats = Stats.convertIDescribableToStats(getObjectBeingDescribed()) as AllyStats;
 
-        if (PartyMember.getNextUpgradeCost(stats.getLevel()) <= AffinityManager.getTotalAffinity() && stats.getLevel() < stats.getLevelMaximum())
+        if (stats.xp >= AllyStats.xpNeededToLevelUp)
         {
             levelUpSymbol.SetActive(true);
         }

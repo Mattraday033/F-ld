@@ -37,9 +37,22 @@ public static class SecretDoorKeyList
 
     #endregion
 
+    #region MineLvl_3-1b
+
+    public const string mineLvl3PuzzleDoor = LocationNameList.mineLvl3 + LocationNameList.section1b + NPCNameList.mineLvl3Wall;
+
+    #endregion
+
     #region MineLvl_3-6a
 
-    public const string mineLvl3UnstablePillarHiddenTerrain = LocationNameList.mineLvl3 + LocationNameList.section6a + NPCNameList.unstablePillar;
+    public const string mineLvl3_6aUnstablePillarHiddenTerrain = LocationNameList.mineLvl3 + LocationNameList.section6a + NPCNameList.unstablePillar;
+
+    #endregion
+
+
+    #region MineLvl_3-7
+
+    public const string mineLvl3_7UnstablePillarHiddenTerrain = LocationNameList.mineLvl3 + LocationNameList.section7 + NPCNameList.unstablePillar;
 
     #endregion
 

@@ -177,7 +177,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                                             155,
     new LastManStandingAbility(TraitList.extraShielded, AbilityList.getAbility(null, AbilityList.rouseColonyKey) as Ability),
                                                                     new Trait[] { TraitList.master,
-                                                                                  TraitList.empty
+                                                                                  TraitList.emptyGenerated2
                                                                                 }));
         #endregion
     }

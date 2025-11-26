@@ -20,51 +20,37 @@ public class Armor : EquippableItem, IJSONConvertable
 	public const int trinketSlotIndex = 5;
 
 	private const double maximumArmorDamageReduction = 99.0;
-
-	private int armorRating;
+    protected readonly static Stats worthStatsSource = new AllyStats("Worth Stats Calc", Constants.sizeFour, Constants.sizeFour, Constants.sizeFour, Constants.sizeFour);
 
 	public Armor(ItemListID listID, string key, string loreDescription, int armorRating, int slotID) : 
-    base(listID, key, loreDescription, Constants.zeroRating, Constants.zeroRating, subtype, 0, slotID)
+    base(listID, key, loreDescription, Constants.zeroRating, Constants.zeroRating, armorRating.ToString(), subtype, 0, slotID)
 	{
-		this.armorRating = armorRating;
 		setWorth(calculateWorth(armorRating, slotID));
 	}
 
-	public Armor(ItemListID listID, string key, string loreDescription, string damageFormula, int armorRating, int slotID) : 
-    base(listID, key, loreDescription, damageFormula, Constants.zeroRating, subtype, 0, slotID)
+	public Armor(ItemListID listID, string key, string loreDescription, string armorFormula, int slotID) : 
+    base(listID, key, loreDescription, Constants.zeroRating, Constants.zeroRating, armorFormula, subtype, 0, slotID)
 	{
-		this.armorRating = armorRating;
+		setWorth(calculateWorth(DamageCalculator.calculateFormula(armorFormula, worthStatsSource), slotID));
+	}
+
+	public Armor(ItemListID listID, string key, string loreDescription, string damageFormula, int armorRating, int slotID) : 
+    base(listID, key, loreDescription, damageFormula, Constants.zeroRating, armorRating.ToString(), subtype, 0, slotID)
+	{
 		setWorth(calculateWorth(armorRating, slotID));
 	}
 
 	public Armor(ItemListID listID, string key, string loreDescription, string damageFormula, string critFormula, int armorRating, int slotID) : 
-    base(listID, key, loreDescription, damageFormula, critFormula, subtype, 0, slotID)
+    base(listID, key, loreDescription, damageFormula, critFormula, armorRating.ToString(), subtype, 0, slotID)
 	{
-		this.armorRating = armorRating;
 		setWorth(calculateWorth(armorRating, slotID));
 	}
 
-    public override string getBonusArmorFormula()
-    {
-        if (base.getBonusArmorFormula().Equals(Constants.zeroRating)) 
-        {
-            return armorRating.ToString();
-        }
-        else
-        {
-            return base.getBonusArmorFormula() + "+" + armorRating;
-        }
-    }
-
-    public override int getArmorRating()
-    {
-        return DamageCalculator.calculateFormula(getBonusArmorFormula(), getStatSource());
-    }
-
-    public string getArmorRatingForDisplay()
-    {
-        return "" + getArmorRating();
-    }
+	public Armor(ItemListID listID, string key, string loreDescription, string damageFormula, string critFormula, string armorFormula, int slotID) : 
+    base(listID, key, loreDescription, damageFormula, critFormula, armorFormula, subtype, 0, slotID)
+	{
+		setWorth(calculateWorth(DamageCalculator.calculateFormula(armorFormula, worthStatsSource), slotID));
+	}
 
 	private static int calculateWorth(int armorRating, int slotID)
 	{
@@ -189,7 +175,7 @@ public class Armor : EquippableItem, IJSONConvertable
 
         if (getArmorRating() > Constants.sizeZero)
         {
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getArmorRatingForDisplay()));
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getArmorRatingForDisplay(), armorFormula));
         }
 
         if (!getCritFormula().Equals(Constants.zeroRating))

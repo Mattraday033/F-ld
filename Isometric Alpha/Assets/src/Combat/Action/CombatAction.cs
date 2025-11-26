@@ -102,6 +102,7 @@ public interface IFormulaSource
 {
     public string getDamageFormula();
     public string getCritFormula();
+    public string getArmorFormula();
 }
 
 public enum CombatAnimationType{ None, Projectile, Effect }
@@ -160,7 +161,12 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
 
     #endregion
 
-    #region Crit and Damage
+    #region Damage/Crit/Armor
+
+    public virtual string getArmorFormula()
+    {
+        return Constants.zeroRating;
+    }
 
     public virtual string getDamageFormula()
     {

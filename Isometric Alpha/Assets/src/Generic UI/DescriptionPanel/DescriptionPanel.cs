@@ -80,7 +80,6 @@ public class DescriptionPanel : MonoBehaviour
 	public TextMeshProUGUI timerText;
 	public TextMeshProUGUI levelText;
 	public TextMeshProUGUI experienceText;
-	public TextMeshProUGUI affinityText;
 	public TextMeshProUGUI partyText;
 	public TextMeshProUGUI strText;
 	public TextMeshProUGUI dexText;
@@ -140,6 +139,23 @@ public class DescriptionPanel : MonoBehaviour
             tmpTextObject.color = color;
         }
     }
+
+	public static void adjustTextFontSize(TextMeshProUGUI tmpTextObject, float sizeMod)
+	{
+		if(tmpTextObject != null && !(tmpTextObject is null))
+		{
+			tmpTextObject.fontSize *= sizeMod;
+		}
+	}
+
+	public static void setTextFontSize(TextMeshProUGUI tmpTextObject, float newFontSize)
+	{
+		if(tmpTextObject != null && !(tmpTextObject is null))
+		{
+			tmpTextObject.fontSize = newFontSize;
+		}
+	}
+	
 
 	public virtual void setObjectBeingDescribed(IDescribable describable)
 	{

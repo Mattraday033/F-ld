@@ -5,7 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 
 [System.Serializable]
-public class Weapon : EquippableItem, IJSONConvertable, IFormulaSource
+public class Weapon : EquippableItem, IJSONConvertable
 {
 	public const string typeIconName = "Weapon";
 	public const string subtype = "Weapon";
@@ -18,7 +18,7 @@ public class Weapon : EquippableItem, IJSONConvertable, IFormulaSource
     private bool isTwoHanded;
 
 	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, int worth, int slotID) : 
-    base(listId, key, loreDescription, damageFormula, critFormula,subtype, worth, slotID)
+    base(listId, key, loreDescription, damageFormula, critFormula, Constants.zeroRating, subtype, worth, slotID)
 	{
 		this.isTwoHanded = false;
 		this.iconName = iconName;
@@ -26,16 +26,15 @@ public class Weapon : EquippableItem, IJSONConvertable, IFormulaSource
 	}
 
 	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, int slotID, bool isTwoHanded) :
-    base(listId, key, loreDescription, damageFormula, critFormula, subtype, worth, slotID)
+    base(listId, key, loreDescription, damageFormula, critFormula, Constants.zeroRating, subtype, worth, slotID)
 	{
 		this.isTwoHanded = isTwoHanded;
 		this.iconName = iconName;
 		this.rangeIndex = rangeIndex;
 	}
 
-	[JsonConstructor]
-	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, int slotID, int quantity, bool isTwoHanded) :
-     base(listId, key, loreDescription, damageFormula, critFormula, subtype, worth, slotID, quantity)
+	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string armorFormula, string iconName, int rangeIndex, int worth, int slotID, bool isTwoHanded) :
+    base(listId, key, loreDescription, damageFormula, critFormula, armorFormula, subtype, worth, slotID)
 	{
 		this.isTwoHanded = isTwoHanded;
 		this.iconName = iconName;
@@ -65,11 +64,6 @@ public class Weapon : EquippableItem, IJSONConvertable, IFormulaSource
 	public override bool removeFromInventoryWhenCreatingCombatAction()
 	{
 		return true;
-	}
-
-	public override int getArmorRating()
-	{
-		return 0;
 	}
 
 	public override bool isUnequippable()
@@ -217,6 +211,11 @@ public class Weapon : EquippableItem, IJSONConvertable, IFormulaSource
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDamageBlock(getDamageTotalForDisplay(), getDamageFormulaForDisplayAlternate()));
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getCritBlock(getCritTotalForDisplay(), getCritFormulaForDisplay()));
+
+        if (getArmorRating() > Constants.sizeZero)
+        {
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getArmorRatingForDisplay(), armorFormula));
+        }
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getWorthBlock(getWorthForDisplay()));
 
