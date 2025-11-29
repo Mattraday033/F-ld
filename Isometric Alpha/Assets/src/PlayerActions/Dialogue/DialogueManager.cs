@@ -370,37 +370,45 @@ public class DialogueManager : MonoBehaviour
 		dialogueTrackerButton.withChoices = true;
 	}
 
+    public static GameObject findNPCGameObject(string npcName)
+    {
+        foreach (Transform child in AreaManager.getNPCParent())
+        {
+            if(child.gameObject.name.Contains(NPCSpawnDetails.extraSpaceNameSuffix))
+            {
+                continue;
+            }
+
+            IDialogueParticipant npcDialogueTrigger = child.GetComponent<IDialogueParticipant>();
+
+            if (npcDialogueTrigger != null)
+            {
+                if (npcName.Equals(npcDialogueTrigger.getName()))
+                {
+                    return child.gameObject;
+                }
+            }
+        }
+
+        return null;
+    }
+
     public void findNPCGameObject()
     {
-        IDialogueParticipant npcDialogueTrigger;
-
         currentDialogue.names[0] = PartyManager.getPlayerStats().getName();
         currentDialogue.cameraFoci[0] = PlayerMovement.getInstance().gameObject;
 
         for (int nameIndex = 1; nameIndex < currentDialogue.names.Length; nameIndex++)
         {
-            foreach (Transform child in AreaManager.getNPCParent())
+            GameObject npcObject = findNPCGameObject(currentDialogue.names[nameIndex]);
+
+            if(npcObject != null)
             {
-                if(child.gameObject.name.Contains(NPCSpawnDetails.extraSpaceNameSuffix))
-                {
-                    continue;
-                }
-
-                npcDialogueTrigger = child.GetComponent<IDialogueParticipant>();
-
-                if (npcDialogueTrigger != null)
-                {
-                    if (currentDialogue.names[nameIndex].Equals(npcDialogueTrigger.getName()))
-                    {
-                        currentDialogue.names[nameIndex] = currentDialogue.names[nameIndex];
-                        currentDialogue.cameraFoci[nameIndex] = child.gameObject;
-                        break;
-                    }
-                    else
-                    {
-                        // Debug.LogError(currentDialogue.names[nameIndex] + " was not found");
-                    }
-                }
+                currentDialogue.names[nameIndex] = currentDialogue.names[nameIndex];
+                currentDialogue.cameraFoci[nameIndex] = npcObject;
+            } else
+            {
+                Debug.LogError(currentDialogue.names[nameIndex] + " was not found");
             }
         }
     }
@@ -786,7 +794,7 @@ public class DialogueManager : MonoBehaviour
                 case "changeplayerpos":
                 case "changeplayerposition":
 
-                    Debug.LogError("changePosition section changed to use cells and not floats");
+                    Debug.LogError("changePosition section changed to use cells and not floats: " + buffer);
 
                     int xPos = getArgumentInt(buffer, Constants.indexZero);
                     int yPos = getArgumentInt(buffer, Constants.indexOne);

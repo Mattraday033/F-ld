@@ -14,7 +14,24 @@ public static class DialogueCombatInfoList
     public readonly static NPCCombatInfo imreCombatInfo = new NPCCombatInfo(new EnemyPackInfo[] { EnemyPackInfoList.imreFight },
                                                                             new DeadNameList[] { new DeadNameList(new string[] { NPCNameList.imre }) });
 
-
+    public readonly static NPCCombatInfo mineLvl3GuardsCombatInfo = new NPCCombatInfo(new EnemyPackInfo[] { EnemyPackInfoList.ml3GuardsWithBarricades, EnemyPackInfoList.ml3GuardsWithoutBarricades},
+                                                                            new DeadNameList[] { new DeadNameList(new string[] { 
+                                                                                                                                NPCNameList.guardPazman, 
+                                                                                                                                NPCNameList.pazman, 
+                                                                                                                                NPCNameList.guardReka,
+                                                                                                                                NPCNameList.reka,
+                                                                                                                                NPCNameList.guardVirag,
+                                                                                                                                NPCNameList.overseerGaspar
+                                                                                                                                 }),
+                                                                                                 new DeadNameList(new string[] { 
+                                                                                                                                NPCNameList.guardPazman, 
+                                                                                                                                NPCNameList.pazman, 
+                                                                                                                                NPCNameList.guardReka,
+                                                                                                                                NPCNameList.reka,
+                                                                                                                                NPCNameList.guardVirag,
+                                                                                                                                NPCNameList.overseerGaspar
+                                                                                                                                 } ) 
+                                                                                               });
 
     // new NPCCombatInfo(new EnemyPackInfo[]{     EnemyPackInfoList.halfSlavesNoGuardFight,
     //                                                                                                                                                                                                                                         EnemyPackInfoList.halfSlavesFight,

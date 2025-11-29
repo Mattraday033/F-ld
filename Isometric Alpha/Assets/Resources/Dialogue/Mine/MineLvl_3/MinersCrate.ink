@@ -20,11 +20,10 @@ VAR saidYouMustBeJoking = false
 VAR formationScreenTutorialKey = "Formation Tutorial"
 
 //camera Target index's
-VAR cratesIndex = 1
-VAR carterCratesIndex = 2
-VAR carterIndex = 3
-VAR nandorIndex = 4
-VAR marcosIndex = 5
+VAR barricadeIndex = 1
+VAR carterIndex = 2
+VAR nandorIndex = 3
+VAR marcosIndex = 4
 
 VAR marcosDialogueIndex = 0
 
@@ -56,7 +55,7 @@ VAR playerName = ""
 
 === 1a ===
 
-changeCamTarget({carterCratesIndex})
+changeCamTarget({carterIndex})
 
 You there! Step into the light, with your hands where I can see them. *A branded slave, wielding a large mining pick in both hands, glares at you from behind a makeshift barricade.*
     
@@ -108,9 +107,10 @@ fadeToBlack()
 setToTrue(mineLvl3ClearedCratesToMiners)
 
 changeCamTarget({nandorIndex})
-deactivate({cratesIndex})
+deactivate({barricadeIndex})
 activate({carterIndex})
-moveToPos(-44.5,14.15)
+moveToPos(2,1)
+setFacing(NE)
 fadeBackIn(60)
 
 {
@@ -251,7 +251,7 @@ changeCamTarget({nandorIndex})
 
 keepDialogue()
 
-He has bled for us many times, and we've discussed it at length while we've been trapped down here. He will fight with us again when the time comes.
+He has bled for us many times, and we've spoken at length while we've been trapped down here. He will fight with us again when the time comes.
     ->1f
 
 === 1j ===
@@ -297,7 +297,7 @@ I can use the jelly if we truly need, but with my wounds I may make a mistake. I
         But if they should stand between us and the safety of the camp simply because the plan came from the mouth of a slave? Then the needs of the many demand we act. I will mourn their deaths in my own time. Does that satisfy your question?
         
         +For now. But I will be watching.
-            As would I.
+            Of course.
             ->1lb
         +No. I don't buy it. Get in the way of the plan and I will act. Believe me.
             I understand. I won't give you cause.
@@ -321,7 +321,7 @@ Are you ready to set out?
 
 {
 -takingCarterNandorWithYou:
-    fadeToBlack()
+    fadeToBlack(true, false)
         
     deactivate({carterIndex})
     addToParty({carterIndex})

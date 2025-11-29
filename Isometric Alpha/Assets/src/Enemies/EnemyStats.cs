@@ -23,7 +23,7 @@ public struct SpawnDetails
 		this.spritePosition = spritePosition;
 		this.dontSpawnWhenSurprised = dontSpawnWhenSurprised;
 		
-		this.hasSpawnDetails = false;
+		this.hasSpawnDetails = true;
 	}
 }
 
@@ -64,6 +64,22 @@ public class EnemyStats : Stats
 
         this.totalHealth = tHP;
         this.currentHealth = totalHealth;
+    }
+
+    public EnemyStats(string key, int armor, int tHP, Trait[] traits, SpawnDetails spawnDetails) :
+    base(key)
+    {
+        this.armor = armor;
+
+        this.totalHealth = tHP;
+        this.currentHealth = totalHealth;
+
+        this.spawnDetails = spawnDetails;
+
+        foreach (Trait trait in traits)
+        {
+            addTrait(trait);
+        }
     }
 
     public EnemyStats(string key, int armor, int tHP, CombatAction combatAction, Trait[] traits) :

@@ -130,6 +130,14 @@ public class InteractableSpawnParams : SpawnParams
     }
 }
 
+public class NeverSpawnParams : InteractableSpawnParams
+{
+    public override bool canSpawn(string npcName)
+    {
+        return false;       
+    }
+}
+
 public class StatBasedSpawnParams : InteractableSpawnParams
 {
     private PrimaryStat primaryStat;
@@ -232,43 +240,49 @@ public class MonsterSpawnParams : InteractableSpawnParams
     }
 }
 
-public class PartyMemberInteractableSpawnParams : InteractableSpawnParams
+public class PartyMemberSpawnParams : InteractableSpawnParams
 {
 
     private bool ignoreInParty;
 
-    public PartyMemberInteractableSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList) :
+    public PartyMemberSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList) :
     base(startSpawningFlagList)
     {
         this.ignoreInParty = ignoreInParty;
     }
 
-    public PartyMemberInteractableSpawnParams(StartSpawningFlagList startSpawningFlagList, bool spawnWhileHostile) :
+    public PartyMemberSpawnParams(StartSpawningFlagList startSpawningFlagList, bool spawnWhileHostile) :
     base(startSpawningFlagList, spawnWhileHostile)
     {
         this.ignoreInParty = false;
     }
 
-    public PartyMemberInteractableSpawnParams(StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile) :
+    public PartyMemberSpawnParams(StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile) :
     base(stopSpawningFlagList, spawnWhileHostile)
     {
         this.ignoreInParty = false;
     }
 
 
-    public PartyMemberInteractableSpawnParams(bool ignoreInParty, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile) :
+    public PartyMemberSpawnParams(bool ignoreInParty, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile) :
     base(stopSpawningFlagList, spawnWhileHostile)
     {
         this.ignoreInParty = ignoreInParty;
     }
 
-    public PartyMemberInteractableSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList) :
+    public PartyMemberSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList) :
     base(startSpawningFlagList, stopSpawningFlagList)
     {
         this.ignoreInParty = ignoreInParty;
     }
 
-    public PartyMemberInteractableSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile, bool onlySpawnWhileHostile) :
+    public PartyMemberSpawnParams(StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile) :
+    base(startSpawningFlagList, stopSpawningFlagList,spawnWhileHostile)
+    {
+        this.ignoreInParty = false;
+    }
+
+    public PartyMemberSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile, bool onlySpawnWhileHostile) :
     base(startSpawningFlagList, stopSpawningFlagList, spawnWhileHostile, onlySpawnWhileHostile)
     {
         this.ignoreInParty = ignoreInParty;

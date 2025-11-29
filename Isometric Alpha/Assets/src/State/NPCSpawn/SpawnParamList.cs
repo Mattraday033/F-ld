@@ -81,9 +81,6 @@ public static class SpawnParamList
                                new InteractableSpawnParams(revoltStartedStopSpawning));
 
         InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackThree, NPCNameList.guardAndras + 1),
-                               new InteractableSpawnParams(revoltStartedStopSpawning));
-
-        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackThree, NPCNameList.guardAndras + 2),
                                new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.andrasLeftInHut }),
                                                     revoltStartedStopSpawning));
 
@@ -112,7 +109,7 @@ public static class SpawnParamList
         #region Slave Shack 6
 
         InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.thatch),
-                               new PartyMemberInteractableSpawnParams(new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }), spawnWhileHostile));
+                               new PartyMemberSpawnParams(new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }), spawnWhileHostile));
 
         InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.slate), new InteractableSpawnParams(directorDefeatedStopSpawning, spawnWhileHostile));
 
@@ -196,7 +193,7 @@ public static class SpawnParamList
         InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.barricade),
                                new InteractableSpawnParams(new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.mineCratesCleared })));
 
-        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.guardMuzsa + 2),
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.guardMuzsa + 1),
                                new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.mineCratesCleared }),
                                             new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated })));
 
@@ -215,6 +212,78 @@ public static class SpawnParamList
                                         new StatBasedSpawnParams(PrimaryStat.Wisdom, Constants.statLevelTwo,
                                         new StopSpawningFlagList(new string[] { BookList.mineGuardsJournalReadFlag }), spawnWhileHostile));
 
+        #endregion
+
+        #region MineLvl_3-3b
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardPazman),
+                                        new InteractableSpawnParams(new StartSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl3ClearedCratesToGuards
+                                                                                                          }),
+                                                                    new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl3GuardsBackToSurface, 
+                                                                                                            FlagNameList.mineLvl2GuardsMovedToSecondLevelGate, 
+                                                                                                            FlagNameList.mineLvl3ConvincedRekaAndPazman
+                                                                                                          }), spawnWhileHostile));
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardVirag),
+                                        new InteractableSpawnParams(new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl3GuardsInParty, 
+                                                                                                            FlagNameList.mineLvl2GuardsMovedToSecondLevelGate 
+                                                                                                           }), spawnWhileHostile));
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardReka),
+                                        new InteractableSpawnParams(new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl3GuardsInParty, 
+                                                                                                            FlagNameList.mineLvl2GuardsMovedToSecondLevelGate 
+                                                                                                           }), spawnWhileHostile));
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.overseerGaspar),
+                                        new InteractableSpawnParams(new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl3GuardsInParty, 
+                                                                                                            FlagNameList.mineLvl2GuardsMovedToSecondLevelGate 
+                                                                                                           }), spawnWhileHostile));
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.barricade),
+                                        new InteractableSpawnParams(new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl3ClearedCratesToGuards
+                                                                                                           }), spawnWhileHostile));
+
+        #endregion
+
+        #region MineLvl_3-Miner Camp
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter),
+                                        new PartyMemberSpawnParams(new StartSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl3ClearedCratesToMiners
+                                                                                                          }),
+                                                                    new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.directorDefeated, 
+                                                                                                            FlagNameList.mineLvl3BreachSealed
+                                                                                                          }), spawnWhileHostile));
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter+1),
+                                        new PartyMemberSpawnParams( new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl3ClearedCratesToMiners
+                                                                                                          }), spawnWhileHostile));
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.nandor),
+                                        new PartyMemberSpawnParams(new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.directorDefeated, 
+                                                                                                            FlagNameList.mineLvl3BreachSealed
+                                                                                                           }), spawnWhileHostile));
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.guardMarcos),
+                                        new InteractableSpawnParams(new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.directorDefeated, 
+                                                                                                            FlagNameList.mineLvl3BreachSealed,
+                                                                                                            FlagNameList.mineLvl3MarcosAgreedToIgniteJelly
+                                                                                                           }), spawnWhileHostile));
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.barricade),
+                                        new InteractableSpawnParams(new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl3ClearedCratesToMiners
+                                                                                                           }), spawnWhileHostile));
         #endregion
 
     }

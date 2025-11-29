@@ -705,7 +705,6 @@ public class NPCSpawnDetails : OffSetSpawnDetails
 
     public const string extraSpaceNameSuffix = "'s Extra Space GameObject";
 
-    public bool activated;
     public Vector3Int[] extraSpaces = new Vector3Int[0];
     public Dialogue dialogue;
     public SpeakAtStartScript speakAtStartScript;
@@ -713,43 +712,36 @@ public class NPCSpawnDetails : OffSetSpawnDetails
     public NPCSpawnDetails(string npcName, Vector3Int cellCoords) :
     base(npcName, cellCoords)
     {
-        this.activated = true;
-
         this.dialogue = getDialogue();
     }
 
     public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string areaName) :
     base(npcName, cellCoords)
     {
-        this.activated = true;
         this.dialogue = getDialogue(areaName);
     }
 
     public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo) :
     base(npcName, cellCoords, spriteName, sortingLayerInfo, Constants.onTableHeightOffset)
     {
-        this.activated = true;
         this.dialogue = getDialogue(npcName);
     }
 
     public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName) :
     base(npcName, cellCoords, spriteName)
     {
-        this.activated = true;
         this.dialogue = getDialogue(areaName);
     }
 
     public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName, bool flipX, float offset) :
     base(npcName, cellCoords, spriteName, flipX, offset)
     {
-        this.activated = true;
         this.dialogue = getDialogue(areaName);
     }
 
     public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, Vector3Int[] extraSpaces) :
     base(npcName, cellCoords)
     {
-        this.activated = true;
         this.dialogue = getDialogue(areaName);
 
         this.extraSpaces = extraSpaces;
@@ -758,33 +750,16 @@ public class NPCSpawnDetails : OffSetSpawnDetails
     public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName, Vector3Int[] extraSpaces) :
     base(npcName, cellCoords, spriteName)
     {
-        this.activated = true;
         this.dialogue = getDialogue(areaName);
 
         this.extraSpaces = extraSpaces;
     }
 
-
     public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, SpeakAtStartScript speakAtStartScript) :
     base(npcName, cellCoords)
     {
-        this.activated = true;
         this.dialogue = getDialogue(areaName);
         this.speakAtStartScript = speakAtStartScript;
-    }
-
-    public NPCSpawnDetails(string npcName, Vector3Int cellCoords, bool activated) :
-    base(npcName, cellCoords)
-    {
-        this.activated = activated;
-        this.dialogue = null;
-    }
-
-    public NPCSpawnDetails(string npcName, Vector3Int cellCoords, bool activated, string areaName) :
-    base(npcName, cellCoords)
-    {
-        this.activated = activated;
-        this.dialogue = getDialogue(areaName);
     }
 
     public Dialogue getDialogue()
@@ -815,8 +790,6 @@ public class NPCSpawnDetails : OffSetSpawnDetails
     public override void spawnActions(GameObject npc)
     {
         base.spawnActions(npc);
-
-        npc.SetActive(activated);
 
         DialogueTrigger dialogueTrigger = npc.GetComponent<DialogueTrigger>();
 
@@ -866,6 +839,78 @@ public class NPCSpawnDetails : OffSetSpawnDetails
 
         mainTrigger.extraSpaces = listOfExtraSpaces.ToArray();
     }
+}
+
+public class NonDialogueNPCSpawnDetails : NPCSpawnDetails
+{
+
+    public NonDialogueNPCSpawnDetails(string npcName, Vector3Int cellCoords) :
+    base(npcName, cellCoords)
+    {
+        
+    }
+
+    public override Dialogue getDialogue(string areaName)
+    {
+        return null;
+    }
+
+
+    public override SpawnParams getSpawnParams()
+    {
+        InteractableSpawnParams spawnParams = SpawnParamList.getSpawnParams(AreaManager.locationName, npcName);
+
+        if(spawnParams.startSpawningFlagList.flags.Length == 0 && 
+            spawnParams.stopSpawningFlagList.flags.Length == 0)
+        {
+            return new NeverSpawnParams();
+        } else
+        {
+            return spawnParams;
+        }
+    }
+
+}
+
+public class DependantSpawnDetails : NPCSpawnDetails
+{
+
+    private string parentName;
+    private Transform parent;
+
+    public DependantSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string parentName) :
+    base(npcName, cellCoords, areaName)
+    {
+        this.parentName = parentName;
+    }
+
+    public override Transform getParent()
+    {
+        return parent;
+    }
+
+    public override void spawnActions(GameObject npc)
+    {
+        GameObject parentObject = DialogueManager.findNPCGameObject(parentName);
+
+        if(parentObject != null)
+        {
+            parent = parentObject.AddComponent<RectTransform>();
+        }
+
+        // Vector3 worldPos = npc.transform.position;
+
+        npc.AddComponent<RectTransform>();
+
+        npc.transform.SetParent(getParent());
+
+        npc.transform.localScale = Vector3.one;
+
+        // npc.transform.position = worldPos;
+
+        base.spawnActions(npc);
+    }
+
 }
 
 public class NPCOffGridSpawnDetails : NPCSpawnDetails

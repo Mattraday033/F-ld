@@ -318,7 +318,9 @@ public class EnemySpawner : MonoBehaviour
 			
 			CombatGrid.combatantStatsGrid[cloneOfEnemyType.position.row].setCol(cloneOfEnemyType.position.col, cloneOfEnemyType);
 			
-			cloneOfEnemyType.combatSprite = Instantiate(cloneOfEnemyType.combatSprite, CombatGrid.getPositionAt(spriteRow, spriteCol), Quaternion.identity);
+            cloneOfEnemyType.instantiateCombatSprite();
+
+			cloneOfEnemyType.combatSprite.transform.position = CombatGrid.getPositionAt(spriteRow, spriteCol);
 			
 			foreach(GridCoords coords in spawnDetails.allSpawnPositions)
 			{

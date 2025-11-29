@@ -13,6 +13,13 @@ public static class EnemyAmountList
     public readonly static EnemyAmount guardAndras = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.guardAndras));
     public readonly static EnemyAmount imre = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.imre));
 
+    public readonly static EnemyAmount barricade = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.barricade));
+
+    public readonly static EnemyAmount guardReka = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.guardReka));
+    public readonly static EnemyAmount guardPazman = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.guardPazman));
+    public readonly static EnemyAmount guardVirag = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.guardVirag));
+    public readonly static EnemyAmount overseerGaspar = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.overseerGaspar));
+
     #endregion
 
     public readonly static EnemyAmount oneBatSwarm = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.batSwarm));

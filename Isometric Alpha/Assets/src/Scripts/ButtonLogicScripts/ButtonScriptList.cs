@@ -142,9 +142,9 @@ public static class ButtonScriptList
 
         list = new List<ButtonLogicScript>();
 
-        list.Add(new ButtonOrderLogicScript(new int[]{Constants.indexZero, Constants.indexOne, Constants.indexTwo,  Constants.indexThree, Constants.indexTwo},
-                                            new Vector3Int[]{new Vector3Int(17,1), new Vector3Int(17,-1), new Vector3Int(17,-3), new Vector3Int(17,-5)},
-                                            new string[]{PrefabNames.tripleStalagmite, PrefabNames.singleStalagmite, PrefabNames.mediumBushStalagmite, PrefabNames.lowStalagmite},
+        list.Add(new ButtonOrderLogicScript(new int[]{Constants.indexZero, Constants.indexOne, Constants.indexTwo,  Constants.indexThree, Constants.indexOne, Constants.indexTwo},
+                                            new Vector3Int[]{new Vector3Int(17,2), new Vector3Int(17,0), new Vector3Int(17,-2), new Vector3Int(17,-4), new Vector3Int(17,-6)},
+                                            new string[]{PrefabNames.tripleStalagmite, PrefabNames.singleStalagmite, PrefabNames.mediumBushStalagmite, PrefabNames.tripleStalagmite, PrefabNames.lowStalagmite},
                                             SecretDoorKeyList.mineLvl3PuzzleFinished,
                                             ColorList.mineLvl3RubbleColor));
 

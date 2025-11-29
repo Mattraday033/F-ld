@@ -147,10 +147,14 @@ public static class SpawnInfoManager
         {
             SpawnParams spawnParams = details.getSpawnParams();
 
-            if (spawnParams != null && spawnParams.canSpawn(details.npcName))
+            GameObject interactable = spawnInteractable(details);
+
+            if (spawnParams != null && interactable != null && !spawnParams.canSpawn(details.npcName))
             {
-                spawnedObjects.Add(spawnInteractable(details));
+                interactable.SetActive(false);
             }
+
+            spawnedObjects.Add(interactable);
         }
 
         return spawnedObjects;

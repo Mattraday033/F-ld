@@ -4,7 +4,6 @@ using UnityEngine;
 
 public static class OOCSpawnDetailsList
 {
-    private const bool notActivated = false;
     private const bool flipX = true;
     private static List<OOCSpawnDetails> list;
 
@@ -39,9 +38,9 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.broglin, new Vector3Int(4, 4), LocationNameList.slaveShackTwo, new BeginningConversationScript()));
         list.Add(new NPCSpawnDetails(NPCNameList.garcha, new Vector3Int(4, -1), LocationNameList.slaveShackTwo));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.guardLaszlo, new Vector3Int(3, 1), notActivated));
-        list.Add(new NPCSpawnDetails(NPCNameList.guardLaszlo + 1, new Vector3Int(-2, -1), notActivated));
-        list.Add(new NPCSpawnDetails(NPCNameList.garcha + 1, new Vector3Int(3, 1), notActivated));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardLaszlo, new Vector3Int(3, 1)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardLaszlo + 1, new Vector3Int(-2, -1)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.garcha + 1, new Vector3Int(3, 1)));
 
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackTwo, list);
         #endregion
@@ -50,9 +49,8 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCSpawnDetails(NPCNameList.janos, new Vector3Int(5, 3), LocationNameList.slaveShackThree));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.guardAndras, new Vector3Int(4, 1), notActivated));
-        list.Add(new NPCSpawnDetails(NPCNameList.guardAndras + 1, new Vector3Int(6, 2), notActivated, LocationNameList.slaveShackThree));
-        list.Add(new NPCSpawnDetails(NPCNameList.guardAndras + 2, new Vector3Int(6, 2), LocationNameList.slaveShackThree));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardAndras, new Vector3Int(4, 1)));
+        list.Add(new NPCSpawnDetails(NPCNameList.guardAndras + 1, new Vector3Int(6, 2), LocationNameList.slaveShackThree));
 
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackThree, list);
         #endregion
@@ -80,14 +78,13 @@ public static class OOCSpawnDetailsList
         
         list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchOne, LocationNameList.slaveShackSix, Constants.indexOne));
         list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchTwo, LocationNameList.slaveShackSix, Constants.indexTwo));
-
         
         list.Add(new NPCSpawnDetails(NPCNameList.thatch, new Vector3Int(-1, 1), LocationNameList.slaveShackSix));
         list.Add(new NPCSpawnDetails(NPCNameList.slate, new Vector3Int(9, 1), LocationNameList.slaveShackSix));
         list.Add(new NPCSpawnDetails(NPCNameList.guardVazul, new Vector3Int(9, 0), LocationNameList.slaveShackSix));
         list.Add(new NPCSpawnDetails(NPCNameList.rubble, new Vector3Int(-1, -3), LocationNameList.slaveShackSix));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.thatch + 1, new Vector3Int(6, -2), notActivated));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch + 1, new Vector3Int(6, -2)));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -3), TutorialSequenceList.firstHostilityTutorialSequenceKey,
                                                                           TutorialSequenceList.firstHostitilityTutorialSeenFlag));
@@ -271,8 +268,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ObstacleSpawnDetails(NPCNameList.barricade, new Vector3Int(8, 5), PrefabNames.squareCratesSmall));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.guardMuzsa + 1, new Vector3Int(6, 3), notActivated, LocationNameList.campMineEntrance));
-        list.Add(new NPCSpawnDetails(NPCNameList.guardMuzsa + 2, new Vector3Int(6, 3), LocationNameList.campMineEntrance));
+        list.Add(new NPCSpawnDetails(NPCNameList.guardMuzsa + 1, new Vector3Int(6, 3), LocationNameList.campMineEntrance));
 
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(13, 9), VaultableObject.vaultableBarrelsTwoTiles));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(12, 9), VaultableObject.vaultableBarrelsTwoTiles));
@@ -678,11 +674,11 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.guardPazman, new Vector3Int(5, 10), LocationNameList.mineLvl3 + LocationNameList.section3b));
-
         list.Add(new NPCSpawnDetails(NPCNameList.barricade, new Vector3Int(5, 11), LocationNameList.mineLvl3 + LocationNameList.section3b));
 
         list.Add(new NPCSpawnDetails(NPCNameList.guardPazman, new Vector3Int(3, 10), LocationNameList.mineLvl3 + LocationNameList.section3b));
+
+        list.Add(new DependantSpawnDetails(NPCNameList.guardPazman+1, new Vector3Int(5, 10), LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.barricade));
 
         list.Add(new NPCSpawnDetails(NPCNameList.guardReka, new Vector3Int(2, 7), LocationNameList.mineLvl3 + LocationNameList.section3b));
 
@@ -739,6 +735,16 @@ public static class OOCSpawnDetailsList
         #region MineLvl_3-Miner Camp
 
         list = new List<OOCSpawnDetails>();
+
+        list.Add(new NPCSpawnDetails(NPCNameList.barricade, new Vector3Int(3, 3), LocationNameList.mineLvl3 + LocationNameList.minerCamp));
+
+        list.Add(new NPCSpawnDetails(NPCNameList.carter, new Vector3Int(1, 2), LocationNameList.mineLvl3 + LocationNameList.minerCamp));
+
+        list.Add(new DependantSpawnDetails(NPCNameList.carter+1, new Vector3Int(3, 2), LocationNameList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.barricade));
+
+        list.Add(new NPCSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(3, -1), LocationNameList.mineLvl3 + LocationNameList.minerCamp));
+
+        list.Add(new NPCSpawnDetails(NPCNameList.nandor, new Vector3Int(4, 1), LocationNameList.mineLvl3 + LocationNameList.minerCamp));
 
         oocSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.minerCamp, list);
 
@@ -807,6 +813,18 @@ public static class OOCSpawnDetailsList
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-10, -9), PrefabNames.lavaVaultableGap, SortingLayerManager.buttonSortingLayerInfo, VaultableObject.vaultableGap));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-10, -11), PrefabNames.lavaVaultableGap, SortingLayerManager.groundSortingLayerInfo, VaultableObject.vaultableGap));
 
+        list.Add(new NPCSpawnDetails(NPCNameList.rubble, new Vector3Int(-6, 9), LocationNameList.mineLvl3 + LocationNameList.section7, PrefabNames.lowStalagmite));
+        list.Add(new NPCSpawnDetails(NPCNameList.rubble+1, new Vector3Int(-7, 9), LocationNameList.mineLvl3 + LocationNameList.section7, PrefabNames.lowStalagmite));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardPazman, new Vector3Int(-6, 6)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardReka, new Vector3Int(-8, 7)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardVirag, new Vector3Int(-7, 8)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.overseerGaspar, new Vector3Int(-6, 8)));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(-6, 3)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.nandor, new Vector3Int(-8, 2)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(-9, 3)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardMarcos+1, new Vector3Int(-6, 6)));
 
         oocSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.section7, list);
 

@@ -110,6 +110,16 @@ public class Dialogue : ICloneable
 		this.npcCombatInfo = npcCombatInfo;
 	}
 
+	public Dialogue(string[] names, TextAsset inkJSON, NPCCombatInfo npcCombatInfo, TextAsset[] secondaryInkJSONs)
+	{
+        this.names = createNameArray(names);
+
+        this.cameraFoci = new GameObject[this.names.Length];
+		this.inkJSON = inkJSON;
+		this.npcCombatInfo = npcCombatInfo;
+        this.secondaryInkJSONs = secondaryInkJSONs;
+	}
+
     private string[] createNameArray(string[] npcNames)
     {
         if (npcNames[0] == null || npcNames[0].Length > 0)

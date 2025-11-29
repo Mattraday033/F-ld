@@ -28,6 +28,24 @@ public static class EnemyPackInfoList
                                                                                         new ItemListID[] { new ItemListID(ItemList.armorListIndex, ItemList.luckyTalismanIndex) });
     public readonly static EnemyPackInfo imreFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.imre }, DropTableList.slaveMineDT1Name);
 
+    public readonly static EnemyPackInfo ml3GuardsWithBarricades = new EnemyPackInfo(new EnemyAmount[] { 
+                                                                                                        EnemyAmountList.barricade, 
+                                                                                                        EnemyAmountList.guardReka, 
+                                                                                                        EnemyAmountList.guardPazman, 
+                                                                                                        EnemyAmountList.overseerGaspar, 
+                                                                                                        EnemyAmountList.guardVirag 
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                    new ItemListID[]  {new ItemListID(ItemList.questItemListIndex, ItemList.blastingJellyIndex)});
+
+    public readonly static EnemyPackInfo ml3GuardsWithoutBarricades = new EnemyPackInfo(new EnemyAmount[] { 
+                                                                                                        EnemyAmountList.guardReka, 
+                                                                                                        EnemyAmountList.guardPazman, 
+                                                                                                        EnemyAmountList.overseerGaspar, 
+                                                                                                        EnemyAmountList.guardVirag 
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                    new ItemListID[]  {new ItemListID(ItemList.questItemListIndex, ItemList.blastingJellyIndex)});
 
     // //used in the dialogue started upon entering the Manse kitchens
     // public readonly static EnemyPackInfo halfSlavesNoGuardFight = new EnemyPackInfo(new int[] { 1, 6 }, new int[] { 1, 6 }, new EnemyStats[]{loadEnemyStatsFromResources(kendeTheCookWithoutSummon),

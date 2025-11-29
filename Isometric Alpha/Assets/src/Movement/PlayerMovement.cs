@@ -1524,9 +1524,6 @@ public class PlayerMovement : MovementTracker
 
     private void showFormulaToggleCheck()
     {
-        Debug.LogError("OverallUIManager.showFormula = " + OverallUIManager.showFormula);
-        Debug.LogError("KeyBindingList.eitherAltKeyIsPressed() = " + KeyBindingList.eitherAltKeyIsPressed());
-
         if (KeyBindingList.eitherAltKeyIsPressed() && !OverallUIManager.showFormula)
         {
             OverallUIManager.showFormula = true;

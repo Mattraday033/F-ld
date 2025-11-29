@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: -4968793318184311776}
   - component: {fileID: 517585897779863325}
   - component: {fileID: -5299874797357560549}
-  - component: {fileID: 6576346719778344862}
   - component: {fileID: 3876896030663513859}
   - component: {fileID: 2738034900309326918}
   - component: {fileID: 3634232630484593473}
@@ -122,7 +121,7 @@ MonoBehaviour:
     inkJSON: {fileID: 4900000, guid: 5e4bfc0a83ae16e4bae7e2c1234c4a81, type: 3}
     startWithUIDisabled: 0
     secondaryInkJSONs: []
-    npcCombatInfo: {fileID: 6576346719778344862}
+    npcCombatInfo: {fileID: 0}
   speakAtStartScript: {fileID: 0}
   extraSpaces: []
 --- !u!114 &-5299874797357560549
@@ -160,23 +159,6 @@ MonoBehaviour:
   nameTag: {fileID: 0}
   scripts: []
   targetCanvas: {fileID: 0}
---- !u!114 &6576346719778344862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5555899077454664655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5bfca2556fa7a04aa1bc59ef2040de2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ignoreDeathFlags: 0
-  deadNameList: []
-  isRestNPC: 0
-  isCompanion: 0
-  hostility: 0
 --- !u!1839735485 &3876896030663513859
 Tilemap:
   m_ObjectHideFlags: 0

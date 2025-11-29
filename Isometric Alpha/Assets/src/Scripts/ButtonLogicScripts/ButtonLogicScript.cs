@@ -262,7 +262,7 @@ public class ButtonOrderLogicScript : ButtonLogicScript
             }
         } else if(PuzzleFlags.currentPuzzleIndex > 0)
         {
-            for(int index = 0; index <= PuzzleFlags.currentPuzzleIndex; index++)
+            for(int index = 0; index < PuzzleFlags.currentPuzzleIndex; index++)
             {
                 obstacles[index].setToUp();
             }
@@ -300,7 +300,7 @@ public class ButtonOrderLogicScript : ButtonLogicScript
     {
         OnButtonDataRequest.Invoke(this);
 
-        if(currentButtonIndex == -1)
+        if(currentButtonIndex == -1 || SecretDoorFlags.secretDoorHasBeenDiscovered(secretDoorKey))
         {
             return false;
         }

@@ -22,7 +22,7 @@ public class PartyMemberUpgradeCounter : MonoBehaviour
         {
             counterText.text = "" + upgradablePartyMemberCount;
             gameObject.SetActive(true);
-            partyMemberUpgradeTutorialSequenceCheck();
+            // partyMemberUpgradeTutorialSequenceCheck();
         }
         else
         {
@@ -30,16 +30,16 @@ public class PartyMemberUpgradeCounter : MonoBehaviour
         }
     }
 
-    private void partyMemberUpgradeTutorialSequenceCheck()
-    {
-        if (!Flags.getFlag(TutorialSequenceList.partyMemberUpgradeTutorialSeenFlag))
-        {
-            TutorialSequence.startTutorialSequence(getPartyMemberUpgradeTutorialSequence());
-        }
-    }
+    // private void partyMemberUpgradeTutorialSequenceCheck()
+    // {
+    //     if (!Flags.getFlag(TutorialSequenceList.partyMemberUpgradeTutorialSeenFlag))
+    //     {
+    //         TutorialSequence.startTutorialSequence(getPartyMemberUpgradeTutorialSequence());
+    //     }
+    // }
 
-    private TutorialSequence getPartyMemberUpgradeTutorialSequence()
-    {
-        return TutorialSequenceList.getTutorialSequence(TutorialSequenceList.partyMemberUpgradeTutorialSequenceKey);
-    }
+    // private TutorialSequence getPartyMemberUpgradeTutorialSequence()
+    // {
+    //     return TutorialSequenceList.getTutorialSequence(TutorialSequenceList.partyMemberUpgradeTutorialSequenceKey);
+    // }
 }

@@ -154,7 +154,14 @@ public static class DialogueNameList
     public const string pazmanML3CampPath = mineLvl3FolderPath + "GuardPazman";
     public const string viragML3CampPath = mineLvl3FolderPath +  "GuardVirag";
 
+    public const string ml3MinerBarricadePath = mineLvl3FolderPath + "MinersCrate";
+    public const string ml3CarterPath = mineLvl3FolderPath + "Carter";
+    public const string ml3MarcosPath = mineLvl3FolderPath + "GuardMarcos";
+    public const string ml3NandorPath = mineLvl3FolderPath + "Nandor";
+
     public const string suspiciousWallPathML3 = mineLvl3FolderPath + NPCNameList.suspiciousWall;
+
+    public const string pocketRubblePathML3 = mineLvl3FolderPath + NPCNameList.rubble;
 
     #endregion
 

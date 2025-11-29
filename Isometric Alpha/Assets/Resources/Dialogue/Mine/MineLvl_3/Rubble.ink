@@ -138,18 +138,21 @@ fadeToBlack(true, false)
 
 activate({blastRubbleIndex})
 
-moveToPos(-72,-9.65)
+moveToPos(-7,4)
 
 {
 -mineLvl3GuardsInParty:
     activate({gasparIndex})
     activate({rekaIndex})
     activate({viragIndex})
+    setFacing(NW)
 
     {
     -not deathFlagGuardPázmán:
         activate({pazmanIndex})
     }
+-else:
+    setFacing(SE)
 }
 
 {
@@ -159,7 +162,7 @@ moveToPos(-72,-9.65)
 }
 
 {
--not mineLvl3MarcosAgreedToIgniteJelly:
+-not mineLvl3MarcosDiedSealingBreach:
     activate({marcosIndex})
 }
 
@@ -747,9 +750,13 @@ The rest of us are heading back up to the surface. Now that I know you can be tr
 
 === 6a === 
 
+fadeToBlack(true, false)
+
 activate({rubbleMarcosIndex})
 changeCamTarget({rubbleMarcosIndex})
 setToTrue(mineLvl3BreachSealed)
+
+fadeBackIn(60)
     
 I'll do my best, but it's getting colder. And I can't keep myself from shivering. It may be that I slip and spill the timer. Should this happen, I must know something.
     
@@ -777,6 +784,7 @@ I've been a guard at this camp since it was founded months ago. In my time here,
 ~mineLvl3MarcosDiedSealingBreach = true
 setToTrue(mineLvl3MarcosDiedSealingBreach)
 kill({marcosIndex})
+deactivate({rubbleMarcosIndex})
 
     ->2a
 

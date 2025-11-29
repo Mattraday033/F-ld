@@ -111,6 +111,59 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                           TraitList.chaotic
                                                                             }));
 
+        enemyStatsDict.Add(NPCNameList.guardReka, new EnemyStats(NPCNameList.guardReka,
+                                                                        fortyFiveArmor,
+                                                                                    95,
+                        AbilityList.getAbility(null, AbilityList.guardAxeKey) as Ability,
+                                                            new Trait[] { TraitList.master,
+                                                                        TraitList.chaotic,
+                                                                        TraitList.frontLine
+                                                                        }));
+
+        enemyStatsDict.Add(NPCNameList.guardVirag, new EnemyStats(NPCNameList.guardVirag,
+                                                                            thirtyArmor,
+                                                                                    75,
+                    AbilityList.getAbility(null, AbilityList.guardJavelinKey) as Ability,
+                                                        new Trait[] { TraitList.master,
+                                                                    TraitList.chaotic,
+                                                                    TraitList.backLine
+                                                                    }));
+
+        enemyStatsDict.Add(NPCNameList.overseerGaspar, new EnemyStats(NPCNameList.overseerGaspar,
+                                                                                    fortyArmor,
+                                                                                            130,
+                            AbilityList.getAbility(null, AbilityList.guardLashKey) as Ability,
+                                                                new Trait[] { TraitList.master,
+                                                                          TraitList.predatory
+                                                                            }));
+
+        enemyStatsDict.Add(NPCNameList.guardPazman, new EnemyStats(NPCNameList.guardPazman,
+                                                                                thirtyArmor,
+                                                                                        95,
+                        AbilityList.getAbility(null, AbilityList.guardSpearKey) as Ability,
+                                                            new Trait[] { TraitList.master,
+                                                                        TraitList.territorial
+                                                                        }));
+
+        SpawnDetails spawnDetails = new SpawnDetails(new GridCoords[] {
+                                                                        new GridCoords(Constants.indexThree, Constants.indexZero),
+                                                                        new GridCoords(Constants.indexThree, Constants.indexOne),
+                                                                        new GridCoords(Constants.indexThree, Constants.indexTwo),
+                                                                        new GridCoords(Constants.indexThree, Constants.indexThree)
+                                                                      }, 
+                                                                       new GridCoords(Constants.indexThree, Constants.indexOne),
+                                                                       new GridCoords(Constants.indexThree, Constants.indexOne), 
+                                                                       true);
+
+        enemyStatsDict.Add(NPCNameList.barricade, new EnemyStats(NPCNameList.barricade,
+                                                                                thirtyArmor,
+                                                                                        125,
+                                                            new Trait[] { TraitList.minion,
+                                                                        TraitList.large,
+                                                                        TraitList.blocker
+                                                                        },
+                                                                        spawnDetails));
+
         #endregion
 
         #region Brandless Slaves

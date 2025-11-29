@@ -142,7 +142,7 @@ public static class TutorialMessageList
         tutorialDictionary.Add(questCounterTutorialMessagePrefix + 3, "This is your Map. It will only show you places you've been before. Nearby places will be silhouetted in black.");
         tutorialDictionary.Add(questCounterTutorialMessagePrefix + 4, "The Quest Symbol next to an area name means a quest wants you to go there. If you cannot find the Quest Objective it is indicating, try looking inside buildings in that area.");
 
-        tutorialDictionary.Add(partyMemberUpgradeTutorialMessagePrefix + 1, "You earned enough affinity to upgrade a companion.");
+        tutorialDictionary.Add(partyMemberUpgradeTutorialMessagePrefix + 1, "You have earned enough affinity to upgrade a companion.");
         tutorialDictionary.Add(partyMemberUpgradeTutorialMessagePrefix + 2, "You can tell you have enough affinity because the party screen button has a counter next to it.");
         tutorialDictionary.Add(partyMemberUpgradeTutorialMessagePrefix + 3, "You earn affinity for each monster you defeat in combat. The more monsters you beat, the more affinity you get.");
         tutorialDictionary.Add(partyMemberUpgradeTutorialMessagePrefix + 4, "Having more companions, and a higher charisma, also grants you more affinity per monster.");

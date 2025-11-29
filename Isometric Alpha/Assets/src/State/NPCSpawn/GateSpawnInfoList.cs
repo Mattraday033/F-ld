@@ -399,6 +399,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexZero, 
                                     NPCNameList.liftableGate,
                                     LocationNameList.mineLvl3 + LocationNameList.section3b,
+                                    PrefabNames.portcullis2x1,
                                     new Vector3Int(5, 2),
                                     Constants.sizeTwo,
                                     Axis.DescendingX));
@@ -438,6 +439,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexZero, 
                                     NPCNameList.liftableRubble,
                                     LocationNameList.mineLvl3 + LocationNameList.section5,
+                                    PrefabNames.portcullis2x1,
                                     new Vector3Int(7, 2),
                                     Constants.sizeTwo,
                                     Axis.DescendingY));

@@ -7,7 +7,6 @@ public class Spike : Obstacle
     private const bool up = false;
     private const bool down = true;
 
-    public SpriteRenderer spriteRenderer;
     public Collider2D movementBlockingCollider;
 
     private static Sprite downSprite;

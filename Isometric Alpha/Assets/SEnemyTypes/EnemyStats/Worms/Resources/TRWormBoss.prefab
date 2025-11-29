@@ -194,7 +194,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3060634069565429252}
   - component: {fileID: 9159307075307564791}
-  - component: {fileID: 2683914727616530238}
   m_Layer: 0
   m_Name: TRWormBoss
   m_TagString: Enemy
@@ -270,18 +269,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2683914727616530238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3060634069565429253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a72247d5aa84112962198463a3c864, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
-  _spriteRenderer: {fileID: 9159307075307564791}
-  _outlineSize: 1
