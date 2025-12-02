@@ -44,7 +44,7 @@ You search around for anything that catches your eye, and notice that the burnt 
 
 fadeToBlack(true, false)
 
-disableSecretDoor({secretDoorKey})
+addSecretDoorFlag({secretDoorKey})
 
 setToTrue(mineLvl2HiddenPassageFound)
 

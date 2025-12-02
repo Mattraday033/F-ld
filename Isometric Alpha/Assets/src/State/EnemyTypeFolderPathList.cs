@@ -7,6 +7,8 @@ public static class EnemyTypeFolderPathList
 
     private const string batsFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.bats + "/";
 
+    private const string lovashiFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/" + EnemyCategoryNameList.lovashi + "/";
+
     private static Dictionary<string, string> folderPathDict;
 
     public static string getEnemyTypeFolderPath(string enemyType)
@@ -32,6 +34,10 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(MonsterNameList.screecher, batsFolderPath + MonsterNameList.screecher + "/");
         folderPathDict.Add(MonsterNameList.denMother, batsFolderPath + MonsterNameList.denMother + "/");
         folderPathDict.Add(MonsterNameList.caveMatron, batsFolderPath + MonsterNameList.caveMatron + "/");
+        #endregion
+
+        #region Lovashi
+        folderPathDict.Add(MonsterNameList.executioner, lovashiFolderPath + MonsterNameList.executioner + "/");
         #endregion
 
     }

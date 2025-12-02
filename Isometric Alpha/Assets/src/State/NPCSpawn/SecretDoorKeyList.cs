@@ -61,6 +61,7 @@ public static class SecretDoorKeyList
     #region MineLvl_3-7
 
     public const string mineLvl3_7UnstablePillarHiddenTerrain = LocationNameList.mineLvl3 + LocationNameList.section7 + NPCNameList.unstablePillar;
+    public const string mineLvl3_7PocketSealedRubble = LocationNameList.mineLvl3 + LocationNameList.section7 + NPCNameList.rubble;
 
     #endregion
 

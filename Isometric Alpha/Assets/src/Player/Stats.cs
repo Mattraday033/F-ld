@@ -240,7 +240,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     {
         int totalHealth = getTotalHealth();
 
-        if (changeInHealth >= getTotalHealth() && !healing && hasTraitAtIndex(TraitList.master) >= 0)
+        if (!inPreviewMode && changeInHealth >= getTotalHealth() && !healing && hasTraitAtIndex(TraitList.master) >= 0)
         {
             PredationProc.Invoke();
         }

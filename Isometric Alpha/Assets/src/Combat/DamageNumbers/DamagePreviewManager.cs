@@ -73,6 +73,8 @@ public class DamagePreviewManager : MonoBehaviour
 				Stats currentActualTarget = (Stats)actualTargets[index];
 				Stats currentCloneTarget = (Stats)cloneTargets[index];
 
+                currentCloneTarget.healthBarManager = null;
+
 				addDamagePreviewToHealthBar(currentActualTarget, currentCloneTarget);
 			}
 
@@ -96,7 +98,7 @@ public class DamagePreviewManager : MonoBehaviour
 			actualTargets.Add(stats);
 
 			ArrayList cloneTargets = new ArrayList();
-			cloneTargets.Add(stats.clone());
+			cloneTargets.Add(stats.getPreviewClone());
 
 			actionClone.performCombatAction(cloneTargets);
 

@@ -68,6 +68,16 @@ public static class ChestItemIDList
 
         #endregion
 
+        #region MineLvl_2-2a
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rockCakeIndex, 3));
+
+        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section2a, list);
+
+        #endregion
+
         #region MineLvl_2-2b
 
         list = new List<ItemListID>();

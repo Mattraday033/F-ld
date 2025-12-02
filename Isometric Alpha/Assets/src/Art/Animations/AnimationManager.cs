@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Animancer;
 using Animancer.FSM;
-public enum CharacterAnimationType { None, Idle_Front, Idle_Back, Secondary_Idle, Run_Front, Run_Back, Wounded, Death, Attack_Normal, Attack_Special, Spawn }
+public enum CharacterAnimationType { None, Idle_Front, Idle_Back, OOC_Idle_Front, OOC_Idle_Back, Secondary_Idle, Run_Front, Run_Back, Wounded, Death, Attack_Normal, Attack_Special, Spawn }
 
 public class AnimationManager : MonoBehaviour, IAnimationTracker
 {
     public readonly static CharacterAnimationType[] loopedAnimationTypesTypes = new CharacterAnimationType[]
-    { CharacterAnimationType.Idle_Front, CharacterAnimationType.Idle_Back, CharacterAnimationType.Secondary_Idle,
-        CharacterAnimationType.Run_Front, CharacterAnimationType.Run_Back};
+    {   
+        CharacterAnimationType.Idle_Front, CharacterAnimationType.Idle_Back, 
+        CharacterAnimationType.OOC_Idle_Front, CharacterAnimationType.OOC_Idle_Back, 
+        CharacterAnimationType.Secondary_Idle,
+        CharacterAnimationType.Run_Front, CharacterAnimationType.Run_Back
+    };
 
 
     public readonly static CharacterAnimationType[] tempAnimationTypes = new CharacterAnimationType[]
@@ -19,6 +23,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
       CharacterAnimationType.Spawn
     };
 
+    private bool changesFacing;
+    public CharacterFacing facing = new CharacterFacing();
     public SpriteRenderer spriteRenderer;
 
     public CharacterAnimationType currentIdle;
@@ -68,13 +74,30 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         if (folderPath == null)
         {
             animationDict = new Dictionary<CharacterAnimationType, AnimationClip>();
+            changesFacing = false;
             return;
         }
+
+        changesFacing = true;
 
         animationDict = getTempAnimations(folderPath);
 
         animancer.Animations = getIdleAnimations(folderPath);
-        currentIdle = CharacterAnimationType.Idle_Front;
+
+        setToDefaultIdle();
+    }
+
+    private void setToDefaultIdle()
+    {
+        if(CombatStateManager.inCombat)
+        {
+            currentIdle = CharacterAnimationType.Idle_Front;
+        } else
+        {
+            currentIdle = CharacterAnimationType.OOC_Idle_Front;
+
+            playCurrentIdleAnimation();
+        }
     }
 
     private static AnimationClip[] getIdleAnimations(string folderPath)
@@ -139,6 +162,22 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         removeAnimation();
         currentIdle = CharacterAnimationType.Idle_Front;
         playAnimation(CharacterAnimationType.Idle_Front);
+    }
+
+    public void playOOCIdleBackAnimation()
+    {
+        enableExtras();
+        removeAnimation();
+        currentIdle = CharacterAnimationType.OOC_Idle_Back;
+        playAnimation(CharacterAnimationType.OOC_Idle_Back);
+    }
+
+    public void playOOCIdleFrontAnimation()
+    {
+        enableExtras();
+        removeAnimation();
+        currentIdle = CharacterAnimationType.OOC_Idle_Front;
+        playAnimation(CharacterAnimationType.OOC_Idle_Front);
     }
 
     public void playSecondaryIdleAnimation()
@@ -208,49 +247,74 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public void playNorthEastRun()
     {
-        spriteRenderer.flipX = false;
+        facing.setFacing(Facing.NorthEast);
         playRunBackAnimation();
     }
 
     public void playNorthWestRun()
     {
-        spriteRenderer.flipX = true;
+        facing.setFacing(Facing.NorthWest);
         playRunBackAnimation();
     }
 
     public void playSouthEastRun()
     {
-        spriteRenderer.flipX = true;
+        facing.setFacing(Facing.SouthEast);
         playRunFrontAnimation();
     }
 
     public void playSouthWestRun()
     {
-        spriteRenderer.flipX = false;
+        facing.setFacing(Facing.SouthWest);
         playRunFrontAnimation();
+    }
+
+
+    public void playNorthEastOOCIdle()
+    {
+        facing.setFacing(Facing.NorthEast);
+        playOOCIdleBackAnimation();
+    }
+
+    public void playNorthWestOOCIdle()
+    {
+        facing.setFacing(Facing.NorthWest);
+        playOOCIdleBackAnimation();
+    }
+
+    public void playSouthEastOOCIdle()
+    {
+        facing.setFacing(Facing.SouthEast);
+        playOOCIdleFrontAnimation();
+    }
+
+    public void playSouthWestOOCIdle()
+    {
+        facing.setFacing(Facing.SouthWest);
+        playOOCIdleFrontAnimation();
     }
 
     public void playNorthEastIdle()
     {
-        spriteRenderer.flipX = false;
+        facing.setFacing(Facing.NorthEast);
         playIdleBackAnimation();
     }
 
     public void playNorthWestIdle()
     {
-        spriteRenderer.flipX = true;
+        facing.setFacing(Facing.NorthWest);
         playIdleBackAnimation();
     }
 
     public void playSouthEastIdle()
     {
-        spriteRenderer.flipX = true;
+        facing.setFacing(Facing.SouthEast);
         playIdleFrontAnimation();
     }
 
     public void playSouthWestIdle()
     {
-        spriteRenderer.flipX = false;
+        facing.setFacing(Facing.SouthWest);
         playIdleFrontAnimation();
     }
 
@@ -378,25 +442,49 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         // Debug.LogError("Play Animation: " + animationType.ToString());
 
         animancer.Stop();
+
+        handleFacingChange();
+
         AnimancerState state = animancer.TryPlay(animationType.ToString());
 
         if (state == null)
         {
             switch(animationType)
             {
+                case CharacterAnimationType.OOC_Idle_Front:
                 case CharacterAnimationType.Run_Front:
                 case CharacterAnimationType.Secondary_Idle:
                 case CharacterAnimationType.Spawn:
                     playIdleFrontAnimation();
                     break;
+                case CharacterAnimationType.OOC_Idle_Back:
                 case CharacterAnimationType.Run_Back:
                     playIdleBackAnimation();
                     break;
                 default:
                     removeAnimation();
-                    Debug.LogError("No such animation for type: " + animationType.ToString());
                     break;                
             }
+        }
+    }
+
+    private void handleFacingChange()
+    {
+        if(!changesFacing)
+        {
+            return;
+        }
+
+        switch(facing.getFacing())
+        {
+            case Facing.NorthEast:
+            case Facing.SouthWest:
+                spriteRenderer.flipX = false;
+                break;
+            case Facing.NorthWest:
+            case Facing.SouthEast:
+                spriteRenderer.flipX = true;
+                break;
         }
     }
 
@@ -407,7 +495,10 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             healthBarManager.hide();
         }
 
-        shadowSprite.enabled = false;
+        if(shadowSprite != null)
+        {
+            shadowSprite.enabled = false;
+        }
     }
 
     private void enableExtras()
@@ -417,7 +508,11 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             healthBarManager.show();
         }
         
-        shadowSprite.enabled = true;
+        if(shadowSprite != null)
+        {
+            shadowSprite.enabled = true;
+        }
+
     }
 
 }

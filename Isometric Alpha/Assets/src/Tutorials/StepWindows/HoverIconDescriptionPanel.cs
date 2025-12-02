@@ -145,6 +145,11 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
                 break;
         }
 
+        if(parentRect.localScale.x < 0)
+        {
+            transform.localScale = Constants.flippedXScale;
+        }
+
         Helpers.updateGameObjectPosition(gameObject);
     }
 

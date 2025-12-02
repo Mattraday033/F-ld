@@ -27,6 +27,8 @@ public static class NPCNameList
     #endregion
 
     #region Non-Branded
+    
+    public const string noBrand = "No-Brand";
     public const string imre = "Imre";
     public const string pan = "Pan";
     public const string page = "Page";

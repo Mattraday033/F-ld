@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.EventSystems;
 
 public class NameTagGenerator : MonoBehaviour, IRevealable
@@ -18,8 +15,6 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
     public INameSource nameSource;
 	public DescriptionPanel nameTag;
 
-	public GameObject targetCanvas;
-
 	private void Awake()
 	{
         outline = new SpriteOutline();
@@ -34,6 +29,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
         {
             nameSource = GetComponent<INameSource>();
         }
+
 	}
 
 	private void OnEnable()
@@ -68,14 +64,22 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 	public void createListeners()
 	{
 		RevealManager.OnReveal.AddListener(onReveal);
-		// RevealManager.OnReveal.AddListener(handleNameTagOnReveal);
+		SecretDoorFlags.OnSecretDoorDiscovery.AddListener(checkSpawnParams);
 	}
 
 	public void destroyListeners()
 	{
 		RevealManager.OnReveal.RemoveListener(onReveal);
-		// RevealManager.OnReveal.RemoveListener(handleNameTagOnReveal);
+		SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(checkSpawnParams);
 	}
+
+    private void checkSpawnParams(string secretDoorFlag)
+    {
+        if(!SpawnParamList.getSpawnParams(AreaManager.locationName, nameSource.getName()).canSpawn(nameSource.getName()))
+        {
+            gameObject.SetActive(false);
+        }
+    }
 
     public SpriteOutline getSpriteOutline()
     {
@@ -92,11 +96,41 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
         if(toggleReveal)
         {
             outline.createOutline(getRevealColor(), getOutlineSize());
+
+            if(!hasGenericName())
+            {
+                spawnNameTag();
+            }
+
         } else
         {
             outline.removeOutline();
+
+            destroyNameTag();
         }
 	}
+
+    private bool hasGenericName()
+    {
+        switch(nameSource.getName())
+        {
+            //inanimate object
+            case NPCNameList.chest:
+            case NPCNameList.shelf:
+            case NPCNameList.barrels:
+            case NPCNameList.barricade:
+            case NPCNameList.statue:
+            case NPCNameList.rubble:
+
+            //occupation
+            case NPCNameList.guard:
+            case NPCNameList.branded:
+            case NPCNameList.noBrand:
+                return true;
+        }
+
+        return false;
+    }
 
 	public Color getRevealColor()
 	{
@@ -105,7 +139,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
 	public OutlineMode getOutlineSize()
     {
-        return OutlineMode.Bold;
+        return OutlineMode.Normal;
     }
 
 	private void spawnNameTag()
@@ -160,7 +194,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
             if(!RevealManager.currentlyRevealed)
             {
-                outline.createOutline(getRevealColor(), OutlineMode.Bold);
+                outline.createOutline(getRevealColor(), getOutlineSize());
             }
 
             spawnNameTag();
@@ -175,7 +209,12 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
             {
                 outline.removeOutline();
             }
-			destroyNameTag();
+			
+            if(hasGenericName() || !RevealManager.currentlyRevealed)
+            {
+                destroyNameTag();
+            }
+
 		}
 	}
 

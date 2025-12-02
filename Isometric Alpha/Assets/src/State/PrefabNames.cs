@@ -199,6 +199,9 @@ public static class PrefabNames
     public const string cunningBlocker = interactablesFolder + "Cunning Blocker";
     public const string book = interactablesFolder + "Book";
 
+    public const string commonComponentsFolder = interactablesFolder + "CommonComponents/";
+    public const string mouseHoverTileMap = commonComponentsFolder + "MouseHoverTileMap";
+
     #endregion
 
     #region Combat
@@ -283,7 +286,9 @@ public static class PrefabNames
     public const string water = waterFolder + "Water";
 
     public const string statueFolder = furnitureFolder + "Statues/";
-    public const string directorStatue = statueFolder + "DirectorStatue";
+    public const string directorStatueSpriteName = "DirectorStatue";
+    public const string directorStatuePath = statueFolder + directorStatueSpriteName;
+
 
     public const string cunningObjectsFolder = spriteFolder + "CunningObjects/";
     public const string statueBack = cunningObjectsFolder + "Statue Back";
@@ -302,13 +307,16 @@ public static class PrefabNames
     public const string halfWallsFolder = tilesFolder + "Half Walls/";
     public const string stoneHalfWallsFolder = halfWallsFolder + "Stone/";
     public const string lavaHalfWallsFolder = halfWallsFolder + "Lava/";
-    public const string lavaVaultableGap = lavaHalfWallsFolder + "Lava Vaultable Gap";
+    public const string lavaVaultableGapHalf = lavaHalfWallsFolder + "Lava Vaultable Gap";
     public const string shackWallHalf = stoneHalfWallsFolder + "Shack Wall Half";
     public const string brickHalfWallsFolder = halfWallsFolder + "Brick/";
     public const string mineLvl2WallCunningObstacle = brickHalfWallsFolder + "Dark_Brick_Cunning_Obstacle";
 
     public const string tallWallsFolder = tilesFolder + "Tall Walls/";
 
+    public const string groundFolder = tilesFolder + "Ground/";
+    public const string stoneGroundFolder = groundFolder + "Stone/";
+    public const string stoneVaultableGap = stoneGroundFolder + "Stone Vaultable Gap";
 
     public const string rubbleFolder = spriteFolder + "Rubble/";
     public const string southDescendingRubble = rubbleFolder + "South Descending Rubble";
@@ -322,9 +330,12 @@ public static class PrefabNames
     public const string XAxisDoor = doorsFolder + "XAxisDoor";
     public const string YAxisDoor = doorsFolder + "YAxisDoor";
 
-    public const string portcullis1x1 =  doorsFolder + "1x1Portcullis";
-    public const string portcullis2x1 =  doorsFolder + "2x1Portcullis";
-    public const string portcullis3x1 =  doorsFolder + "3x1Portcullis";
+    public const string portcullis1x1SpriteName = "1x1Portcullis";
+    public const string portcullis1x1Path =  doorsFolder + portcullis1x1SpriteName;
+    public const string portcullis2x1SpriteName = "2x1Portcullis";
+    public const string portcullis2x1Path =  doorsFolder + portcullis2x1SpriteName;
+    public const string portcullis3x1SpriteName = "3x1Portcullis";
+    public const string portcullis3x1Path =  doorsFolder + portcullis3x1SpriteName;
 
     #endregion
 }

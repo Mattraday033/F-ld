@@ -44,7 +44,7 @@ You search around for anything that catches your eye, and notice a loose rock.
 
 fadeToBlack(true, false)
 
-disableSecretDoor({secretDoorKey})
+addSecretDoorFlag({secretDoorKey})
 
 fadeBackIn(60)
 

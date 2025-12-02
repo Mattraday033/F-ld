@@ -125,6 +125,11 @@ public class TutorialSequenceStepWindow : DescriptionPanel
         setArrowPointerPosition(directionToPanel);
         rotatePointerTowardsTargetPosition(targetTransform);
 
+        if(parentRect.localScale.x < 0)
+        {
+            transform.localScale = Constants.flippedXScale;
+        }
+
         /*
 
         Vector2 playerTransformLocalScale = PlayerMovement.getInstanceTransform().localScale;

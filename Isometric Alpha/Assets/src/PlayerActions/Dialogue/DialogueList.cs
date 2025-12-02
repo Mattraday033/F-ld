@@ -272,7 +272,7 @@ public static class DialogueList
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.wallPatch, wallPatchDialogue);
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.statue,
                             new Dialogue(new string[] { "", NPCNameList.statue},
-                            Resources.Load<TextAsset>(DialogueNameList.directorStatuePath)));
+                            Resources.Load<TextAsset>(DialogueNameList.directorStatuePathPath)));
 
         #endregion
         #region MineEntranceCamp
@@ -322,6 +322,31 @@ public static class DialogueList
         addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
         addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.controlPanel, new Dialogue(new string[] { NPCNameList.controlPanel},
                                                                                   Resources.Load<TextAsset>(DialogueNameList.controlPanelPath)));
+
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardPazman,
+                                                            new Dialogue(new string[] { "", NPCNameList.guardPazman},
+                                                             Resources.Load<TextAsset>(DialogueNameList.pazmanML3CampPath)));                                        
+
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardVirag, 
+                                                            new Dialogue(new string[] { "", NPCNameList.guardVirag},
+                                                             Resources.Load<TextAsset>(DialogueNameList.viragML3CampPath)));
+
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardReka, 
+                                                            new Dialogue(new string[] { "", NPCNameList.guardReka},
+                                                             Resources.Load<TextAsset>(DialogueNameList.rekaML3CampPath)));
+
+        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.overseerGaspar, 
+                                                            new Dialogue(new string[] 
+                                                            { 
+                                                                "", 
+                                                                NPCNameList.overseerGaspar,
+                                                                NPCNameList.guardPazman,
+                                                                NPCNameList.overseerGaspar,
+                                                                NPCNameList.guardReka,
+                                                                NPCNameList.guardVirag
+                                                            },
+                                                             Resources.Load<TextAsset>(DialogueNameList.ml3GuardBarricadePath),
+                                                             DialogueCombatInfoList.mineLvl3GuardsCombatInfo));
 
         addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
         addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2b, NPCNameList.mineArmoryGate + 1,

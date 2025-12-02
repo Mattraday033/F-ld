@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public abstract class OOCSpawnDetails
 {
@@ -72,6 +73,15 @@ public abstract class OOCSpawnDetails
         }
     }
 
+    public virtual bool flipSprite()
+    {
+        switch(spriteName)
+        {
+            default:
+                return flipX;
+        }
+    }
+
     public virtual string getPrefabName()
     {
         return null;
@@ -113,7 +123,11 @@ public abstract class OOCSpawnDetails
     {
         SpriteRenderer spriteRenderer = interactable.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = Helpers.loadSpriteFromResources(getSpriteName());
-        spriteRenderer.flipX = flipX;
+        
+        if(flipSprite())
+        {
+            interactable.transform.localScale = Constants.flippedXScale;
+        }
         
         spriteRenderer.color = tint;
 
@@ -158,7 +172,22 @@ public abstract class OOCSpawnDetails
         target.getGameObject().AddComponent<RectTransform>();
     }
 
+
+
+    public static void setMouseHoverTileMap(string spriteName, Transform transform)
+    {
+        Tilemap npcMouseHover = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.mouseHoverTileMap), transform).GetComponent<Tilemap>();
+
+        Tile tile = ScriptableObject.CreateInstance<Tile>();
+
+        tile.sprite = Resources.Load<Sprite>(spriteName);
+
+        npcMouseHover.SetTile(new Vector3Int(-1, -1), tile);
+    }
+
 }
+
+public enum SpriteDimensions {}
 
 public class TutorialColliderSpawnDetails : OOCSpawnDetails
 {
@@ -733,6 +762,12 @@ public class NPCSpawnDetails : OffSetSpawnDetails
         this.dialogue = getDialogue(areaName);
     }
 
+    public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, float offset, SortingLayerInfo sortingLayerInfo) :
+    base(npcName, cellCoords, spriteName, sortingLayerInfo, offset)
+    {
+        this.dialogue = getDialogue(npcName);
+    }
+
     public NPCSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName, bool flipX, float offset) :
     base(npcName, cellCoords, spriteName, flipX, offset)
     {
@@ -841,6 +876,35 @@ public class NPCSpawnDetails : OffSetSpawnDetails
     }
 }
 
+public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
+{
+
+    public NPCWithAnimationsSpawnDetails(string npcName, Vector3Int cellCoords, string areaName) :
+    base(npcName, cellCoords, areaName)
+    {
+        
+    }
+
+    public override Transform getParent()
+    {
+        return null;
+    }
+
+    public override void spawnActions(GameObject npc)
+    {
+        base.spawnActions(npc);
+
+        spawnActions(npc.GetComponent<AnimationManager>());
+
+    }
+
+    public virtual void spawnActions(AnimationManager animationManager)
+    {
+        animationManager.setAnimations(MonsterNameList.executioner);
+        
+    }
+}
+
 public class NonDialogueNPCSpawnDetails : NPCSpawnDetails
 {
 
@@ -913,6 +977,8 @@ public class DependantSpawnDetails : NPCSpawnDetails
 
 }
 
+
+
 public class NPCOffGridSpawnDetails : NPCSpawnDetails
 {
 
@@ -929,6 +995,13 @@ public class NPCOffGridSpawnDetails : NPCSpawnDetails
     public override Transform getParent()
     {
         return null;
+    }
+
+    public override void spawnActions(GameObject gameObject)
+    {
+        base.spawnActions(gameObject);
+
+        setMouseHoverTileMap(spriteName, gameObject.transform);
     }
 
     // public override void spawnActions(DialogueTrigger mainTrigger)
@@ -961,23 +1034,74 @@ public class NPCOffGridSpawnDetails : NPCSpawnDetails
     // }
 }
 
-public class GateSpawnDetails : NPCSpawnDetails
+public class CustomMouseHoverNPCSpawnDetails : NPCSpawnDetails
+{
+
+    public CustomMouseHoverNPCSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName):
+    base(npcName, cellCoords, currentArea, spriteName)
+    {
+        
+    }
+
+    public CustomMouseHoverNPCSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName, bool flipX, float offset) :
+    base(npcName, cellCoords, areaName, spriteName, flipX, offset)
+    {
+        
+    }
+
+    public virtual bool hasSprite()
+    {
+        return true;
+    }
+
+    public void setUpMouseHover(GameObject gameObject)
+    {
+
+        foreach(Transform child in gameObject.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        if(hasSprite())
+        {
+            setMouseHoverTileMap(spriteName, gameObject.transform);
+        } else
+        {
+            NameTagGenerator nameTagGenerator = gameObject.GetComponent<NameTagGenerator>();
+
+            if(nameTagGenerator != null)
+            {
+                GameObject.Destroy(nameTagGenerator);
+            }
+        }
+    }
+
+    public override void spawnActions(GameObject gameObject)
+    {
+        base.spawnActions(gameObject);
+
+        setUpMouseHover(gameObject);
+    }
+
+}
+
+public class GateSpawnDetails : CustomMouseHoverNPCSpawnDetails
 {
     private bool skewed;
-    private bool hasSprite;
+    private bool showSprite;
     private Axis axis;
 
-    public GateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed, bool hasSprite, Axis axis) :
+    public GateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed, bool showSprite, Axis axis) :
     base(npcName, cellCoords, currentArea, spriteName)
     {
         this.tutorialTargetHash = tutorialTargetHash;
         this.skewed = skewed;
-        this.hasSprite = hasSprite;
+        this.showSprite = showSprite;
         this.axis = axis;
 
         switch(spriteName)
         {
-            case PrefabNames.portcullis3x1:
+            case PrefabNames.portcullis3x1Path:
                 offset = Constants.onTableHeightOffset*5;
                 break;
             default:
@@ -997,55 +1121,21 @@ public class GateSpawnDetails : NPCSpawnDetails
         }
     }
 
-    public virtual bool flipSprite()
+    public override bool hasSprite()
+    {
+        return showSprite;
+    }
+
+    public override bool flipSprite()
     {
         switch(spriteName)
         {
-            case PrefabNames.portcullis1x1:
-            case PrefabNames.portcullis2x1:
-            case PrefabNames.portcullis3x1:
+            case PrefabNames.portcullis1x1Path:
+            case PrefabNames.portcullis2x1Path:
+            case PrefabNames.portcullis3x1Path:
                 return axis == Axis.DescendingX;
             default:
                 return false;
-        }
-    }
-
-    public void setMouseHover(BoxCollider2D boxCollider)
-    {
-        if(!hasSprite)
-        {
-            boxCollider.enabled = false;
-            return;
-        }
-
-        switch(spriteName)
-        {
-            case PrefabNames.portcullis1x1:
-                break;
-            case PrefabNames.portcullis2x1:
-                boxCollider.size = new Vector2(.95f, 1.6f);
-
-                if(flipSprite())
-                {
-                    boxCollider.offset = new Vector2(-.27f, 0.27f);
-                } else
-                {
-                    boxCollider.offset = new Vector2(.27f, 0.27f);
-                }
-                break;
-            case PrefabNames.portcullis3x1:
-                boxCollider.size = new Vector2(1.5f,2.05f);
-
-                if(flipSprite())
-                {
-                    boxCollider.offset = new Vector2(-0.45f,0.325f);
-                } else
-                {
-                    boxCollider.offset = new Vector2(0.45f,0.325f);
-                }
-                break;
-            default:
-                return;
         }
     }
 
@@ -1066,15 +1156,13 @@ public class GateSpawnDetails : NPCSpawnDetails
             addTutorialTargetComponent(gateGameObject, gate.spriteRenderer, tutorialTargetHash);
         }
 
-        if(!hasSprite)
+        if(!hasSprite())
         {
             gate.spriteRenderer.enabled = false;
         } else if(flipSprite())
         {
-            gate.spriteRenderer.flipX = true;
+            gateGameObject.transform.localScale = Constants.flippedXScale;
         }
-
-        setMouseHover(gateGameObject.GetComponentInChildren<BoxCollider2D>());
     }
 
     public override void spawnActions(DialogueTrigger dialogueTrigger)
@@ -1243,6 +1331,12 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
         this.vaultableObject = vaultableObject;
     }
 
+    public VaultableObjectSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, float offset, SortingLayerInfo sortingLayerInfo, VaultableObject vaultableObject) :
+    base(npcName, cellCoords, spriteName, offset, sortingLayerInfo)
+    {
+        this.vaultableObject = vaultableObject;
+    }
+
     public VaultableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableObject vaultableObject, string tutorialTargetHash) :
     base(npcName, cellCoords, npcName)
     {
@@ -1290,6 +1384,7 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
             SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
             addTutorialTargetComponent(gameObject, spriteRenderer, tutorialTargetHash);
         }
+        setMouseHoverTileMap(spriteName, gameObject.transform);
     }
 
     public override void spawnActions(DialogueTrigger dialogueTrigger)

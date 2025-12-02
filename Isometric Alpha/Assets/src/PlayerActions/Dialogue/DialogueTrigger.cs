@@ -18,6 +18,8 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
     public Dialogue dialogue;
     public SpeakAtStartScript speakAtStartScript;
 
+    public AnimationManager animationManager;
+
     public GameObject[] extraSpaces;
 
     public virtual void Start()
@@ -36,7 +38,33 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
 
     public virtual void triggerDialogue()
     {
+        setFacing();
+
         DialogueManager.getInstance().startDialogue(dialogue);
+    }
+
+    protected void setFacing()
+    {
+        if(animationManager == null)
+        {
+            return;
+        }
+
+        switch(State.playerFacing.getFacing())
+        {
+            case Facing.NorthEast:
+                animationManager.playSouthWestOOCIdle();
+                break;
+            case Facing.NorthWest:
+                animationManager.playSouthEastOOCIdle();
+                break;
+            case Facing.SouthEast:
+                animationManager.playNorthWestOOCIdle();
+                break;
+            default:
+                animationManager.playNorthEastOOCIdle();
+                break;
+        }
     }
 
     public string getName()

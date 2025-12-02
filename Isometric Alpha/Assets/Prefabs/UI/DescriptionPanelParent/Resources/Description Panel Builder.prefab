@@ -143,8 +143,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6632941324553516236}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 1275, y: 0}
   m_SizeDelta: {x: 2550, y: 0}
   m_Pivot: {x: 0.5, y: 1}
@@ -475,6 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverEnabled: 0
+  useFloatingHover: 0
   rowTypeToUse: 1
   tabCollection: 0
   buttons: []
@@ -494,6 +495,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e230f8bff8dca41a1be30b7cc02ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preventPlusButtons: 1
+  flipDirection: 0
   panelOutline: {fileID: 306991805636363987}
   panelInterior: {fileID: 4609250361205931205}
   rowParent: {fileID: 830922064694390164}
@@ -605,7 +608,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 300
+  m_PreferredWidth: 762.5
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1

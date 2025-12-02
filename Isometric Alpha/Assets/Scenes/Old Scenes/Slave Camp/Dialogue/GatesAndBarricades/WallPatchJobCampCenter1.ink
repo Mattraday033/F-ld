@@ -37,7 +37,7 @@ You begin removing some of the boards and make a hole large enough to pass throu
 
 fadeToBlack()
 
-disableSecretDoor({secretDoorKey})
+addSecretDoorFlag({secretDoorKey})
 
 fadeBackIn(60)
     ->Close

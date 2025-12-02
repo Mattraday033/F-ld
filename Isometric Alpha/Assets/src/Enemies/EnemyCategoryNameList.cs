@@ -9,7 +9,9 @@ public static class EnemyCategoryNameList
 
     public const string worms = "Worms";
 
-    public const string lovashiSoldiers = "Lovashi Soldiers";
+    public const string humans = "Humans";
+
+    public const string lovashi = "Lovashi";
 
     public const string horses = "Horses";
 

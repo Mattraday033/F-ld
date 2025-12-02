@@ -206,6 +206,42 @@ public static class SpawnParamList
 
         #endregion
 
+        #region MineLvl_2-2a
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardPazman),
+                                        new InteractableSpawnParams(new StartSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl2GuardsFinishedMove
+                                                                                                          }),
+                                                                    new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl3GuardsInParty
+                                                                                                          }), spawnWhileHostile));
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardVirag),
+                                        new InteractableSpawnParams(new StartSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl2GuardsFinishedMove
+                                                                                                          }),
+                                                                    new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl3GuardsInParty
+                                                                                                           }), spawnWhileHostile));
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardReka),
+                                        new InteractableSpawnParams(new StartSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl2GuardsFinishedMove
+                                                                                                          }),
+                                                                    new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl3GuardsInParty
+                                                                                                           }), spawnWhileHostile));
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.overseerGaspar),
+                                        new InteractableSpawnParams(new StartSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl2GuardsFinishedMove
+                                                                                                          }),
+                                                                    new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl3GuardsInParty
+                                                                                                           }), spawnWhileHostile));
+
+        #endregion
+
         #region MineLvl_2-3a
 
         InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl2 + LocationNameList.section3a, NPCNameList.diary),
@@ -284,6 +320,20 @@ public static class SpawnParamList
                                         new InteractableSpawnParams(new StopSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.mineLvl3ClearedCratesToMiners
                                                                                                            }), spawnWhileHostile));
+        #endregion
+
+        #region MineLvl_3-7
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.section7, NPCNameList.rubble),
+                                        new InteractableSpawnParams(new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl3BreachSealed
+                                                                                                          }), spawnWhileHostile));
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.section7, NPCNameList.rubble+1),
+                                        new InteractableSpawnParams(new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl3BreachSealed
+                                                                                                          }), spawnWhileHostile));
+
         #endregion
 
     }

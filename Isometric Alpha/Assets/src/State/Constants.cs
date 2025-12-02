@@ -55,4 +55,6 @@ public static class Constants
     public const bool reveal = true;
     public const bool removeReveal = false;
 
+    public readonly static Vector3 flippedXScale = new Vector3(-1f, 1f, 1f);
+
 }

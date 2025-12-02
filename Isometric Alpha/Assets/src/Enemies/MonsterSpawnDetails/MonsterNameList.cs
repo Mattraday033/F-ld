@@ -13,5 +13,6 @@ public static class MonsterNameList
     public const string caveMatron = "Cave Matron";
 
 
+    public const string executioner = "Executioner";
 
 }

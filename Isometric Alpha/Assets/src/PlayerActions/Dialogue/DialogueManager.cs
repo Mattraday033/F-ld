@@ -565,7 +565,7 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
-                case "disablesecretdoor":
+                case "addsecretdoorflag":
 
                     string secretDoorKey = getArgument(buffer);
 

@@ -96,7 +96,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexZero,
                                     NPCNameList.liftableGate,
                                     LocationNameList.mineLvl1 + LocationNameList.section1c,
-                                    PrefabNames.portcullis2x1,
+                                    PrefabNames.portcullis2x1Path,
                                     new Vector3Int(2, 1),
                                     Constants.sizeTwo,
                                     Axis.DescendingY));
@@ -112,7 +112,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexZero,
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl2 + LocationNameList.section2a,
-                                    PrefabNames.portcullis2x1,
+                                    PrefabNames.portcullis2x1Path,
                                     new Vector3Int(3, 3),
                                     Constants.sizeTwo,
                                     Axis.DescendingX));
@@ -128,7 +128,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexZero,
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl2 + LocationNameList.section2b,
-                                    PrefabNames.portcullis2x1,
+                                    PrefabNames.portcullis2x1Path,
                                     new Vector3Int(6, -4),
                                     Constants.sizeTwo,
                                     Axis.DescendingX));
@@ -136,7 +136,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexOne,
                                     NPCNameList.mineArmoryGate,
                                     LocationNameList.mineLvl2 + LocationNameList.section2b,
-                                    PrefabNames.portcullis2x1,
+                                    PrefabNames.portcullis2x1Path,
                                     new Vector3Int(6, 6),
                                     Constants.sizeTwo,
                                     Axis.DescendingX));
@@ -176,7 +176,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexZero,
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl2 + LocationNameList.section3b,
-                                    PrefabNames.portcullis2x1,
+                                    PrefabNames.portcullis2x1Path,
                                     new Vector3Int(5, -1),
                                     Constants.sizeTwo,
                                     Axis.DescendingY));
@@ -184,7 +184,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexOne,
                                     NPCNameList.liftableGate,
                                     LocationNameList.mineLvl2 + LocationNameList.section3b,
-                                    PrefabNames.portcullis2x1,
+                                    PrefabNames.portcullis2x1Path,
                                     new Vector3Int(-11, -10),
                                     Constants.sizeTwo,
                                     Axis.DescendingX));
@@ -301,7 +301,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexZero,
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl2 + LocationNameList.section7a,
-                                    PrefabNames.portcullis2x1,
+                                    PrefabNames.portcullis2x1Path,
                                     new Vector3Int(-1, 5),
                                     Constants.sizeTwo,
                                     Axis.DescendingX));
@@ -309,7 +309,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexOne,
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl2 + LocationNameList.section7a,
-                                    PrefabNames.portcullis2x1,
+                                    PrefabNames.portcullis2x1Path,
                                     new Vector3Int(1, 2),
                                     Constants.sizeTwo,
                                     Axis.DescendingY));
@@ -317,7 +317,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexTwo,
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl2 + LocationNameList.section7a,
-                                    PrefabNames.portcullis2x1,
+                                    PrefabNames.portcullis2x1Path,
                                     new Vector3Int(1, -4),
                                     Constants.sizeTwo,
                                     Axis.DescendingY));
@@ -325,7 +325,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexThree,
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl2 + LocationNameList.section7a,
-                                    PrefabNames.portcullis2x1,
+                                    PrefabNames.portcullis2x1Path,
                                     new Vector3Int(-1, -7),
                                     Constants.sizeTwo,
                                     Axis.DescendingX));
@@ -349,7 +349,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexOne,
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl2 + LocationNameList.section7b,
-                                    PrefabNames.portcullis2x1,
+                                    PrefabNames.portcullis2x1Path,
                                     new Vector3Int(-10, -1),
                                     Constants.sizeTwo,
                                     Axis.DescendingX));
@@ -357,7 +357,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexTwo,
                                     NPCNameList.liftableGate,
                                     LocationNameList.mineLvl2 + LocationNameList.section7b,
-                                    PrefabNames.portcullis1x1,
+                                    PrefabNames.portcullis1x1Path,
                                     new Vector3Int(-6, -4),
                                     Constants.sizeOne,
                                     Axis.DescendingY));
@@ -375,7 +375,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexZero, 
                                     NPCNameList.liftableGate,
                                     LocationNameList.mineLvl3 + LocationNameList.section2b,
-                                    PrefabNames.portcullis2x1,
+                                    PrefabNames.portcullis2x1Path,
                                     new Vector3Int(-6, 2),
                                     Constants.sizeTwo,
                                     Axis.DescendingY));
@@ -383,7 +383,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexOne,
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl3 + LocationNameList.section2b,
-                                    PrefabNames.portcullis2x1,
+                                    PrefabNames.portcullis2x1Path,
                                     new Vector3Int(3, 10),
                                     Constants.sizeTwo,
                                     Axis.DescendingX));
@@ -399,7 +399,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexZero, 
                                     NPCNameList.liftableGate,
                                     LocationNameList.mineLvl3 + LocationNameList.section3b,
-                                    PrefabNames.portcullis2x1,
+                                    PrefabNames.portcullis2x1Path,
                                     new Vector3Int(5, 2),
                                     Constants.sizeTwo,
                                     Axis.DescendingX));
@@ -415,7 +415,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexZero, 
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl3 + LocationNameList.section4b,
-                                    PrefabNames.portcullis2x1,
+                                    PrefabNames.portcullis2x1Path,
                                     new Vector3Int(0, 15),
                                     Constants.sizeTwo,
                                     Axis.DescendingX));
@@ -423,7 +423,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexOne, 
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl3 + LocationNameList.section4b,
-                                    PrefabNames.portcullis1x1,
+                                    PrefabNames.portcullis1x1Path,
                                     new Vector3Int(-6, 2),
                                     Constants.sizeOne,
                                     Axis.DescendingY));
@@ -439,7 +439,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexZero, 
                                     NPCNameList.liftableRubble,
                                     LocationNameList.mineLvl3 + LocationNameList.section5,
-                                    PrefabNames.portcullis2x1,
+                                    PrefabNames.portcullis2x1Path,
                                     new Vector3Int(7, 2),
                                     Constants.sizeTwo,
                                     Axis.DescendingY));
@@ -455,17 +455,25 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexZero, 
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl3 + LocationNameList.section6a,
-                                    PrefabNames.portcullis2x1,
-                                    new Vector3Int(-9, 6),
-                                    Constants.sizeTwo,
-                                    Axis.DescendingY));
+                                    PrefabNames.portcullis3x1Path,
+                                    new Vector3Int(-4, 7),
+                                    Constants.sizeThree,
+                                    Axis.DescendingX));
 
         list.Add(new GateWithHiddenTerrainSpawnInfo(Constants.indexOne, 
                                     NPCNameList.unstablePillar,
                                     LocationNameList.mineLvl3 + LocationNameList.section6a,
                                     PrefabNames.unstablePillar,
                                     ColorList.mineLvl3RubbleColor,
-                                    new Vector3Int(-18, -8),
+                                    new Vector3Int(-6, -1),
+                                    SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain));
+
+        list.Add(new GateWithHiddenTerrainSpawnInfo(Constants.indexOne, 
+                                    NPCNameList.unstablePillar,
+                                    LocationNameList.mineLvl3 + LocationNameList.section6a,
+                                    PrefabNames.unstablePillar,
+                                    ColorList.mineLvl3RubbleColor,
+                                    new Vector3Int(-6, -5),
                                     SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain));
 
         gateSpawnInfoDict.Add(LocationNameList.mineLvl3 + LocationNameList.section6a, list);
@@ -479,7 +487,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexZero, 
                                     NPCNameList.ancientPortcullis,
                                     LocationNameList.mineLvl3 + LocationNameList.section7,
-                                    PrefabNames.portcullis3x1,
+                                    PrefabNames.portcullis3x1Path,
                                     new Vector3Int(0, 2),
                                     Constants.sizeThree,
                                     Axis.DescendingY));
@@ -583,9 +591,9 @@ public class GateSpawnInfo : AxisSpawnInfo
     {
         switch(spriteName)
         {
-            case PrefabNames.portcullis1x1:
-            case PrefabNames.portcullis2x1:
-            case PrefabNames.portcullis3x1:
+            case PrefabNames.portcullis1x1Path:
+            case PrefabNames.portcullis2x1Path:
+            case PrefabNames.portcullis3x1Path:
                 return false;
             default:
                 return true;
@@ -606,9 +614,9 @@ public class GateSpawnInfo : AxisSpawnInfo
     {
         switch(spriteName)
         {
-            case PrefabNames.portcullis1x1:
-            case PrefabNames.portcullis2x1:
-            case PrefabNames.portcullis3x1:
+            case PrefabNames.portcullis1x1Path:
+            case PrefabNames.portcullis2x1Path:
+            case PrefabNames.portcullis3x1Path:
                 return index == 0;
             default:
                 return true;
@@ -644,7 +652,7 @@ public class TemporaryGateSpawnInfo : GateSpawnInfo
 {
 
     public TemporaryGateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell, int size, Axis axis) :
-    base(gateIndex, npcName, currentArea, PrefabNames.portcullis1x1, startCell, size, axis)
+    base(gateIndex, npcName, currentArea, PrefabNames.portcullis1x1Path, startCell, size, axis)
     {
     }
 

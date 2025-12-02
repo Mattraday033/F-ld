@@ -8,7 +8,7 @@ public static class EnemyAmountList
     private const int twoEnemies = 2;
     private const int threeEnemies = 3;
 
-    #region NPCs
+    #region Named NPCs
     public readonly static EnemyAmount guardVazul = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.guardVazul));
     public readonly static EnemyAmount guardAndras = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.guardAndras));
     public readonly static EnemyAmount imre = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.imre));
@@ -22,6 +22,12 @@ public static class EnemyAmountList
 
     #endregion
 
+    #region Lovashi Guards
+    public readonly static EnemyAmount oneExecutioner = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.executioner));
+
+    #endregion
+
+    #region Bats
     public readonly static EnemyAmount oneBatSwarm = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.batSwarm));
     public readonly static EnemyAmount twoBatSwarms = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.batSwarm));
     public readonly static EnemyAmount threeBatSwarms = new EnemyAmount(threeEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.batSwarm));
@@ -43,4 +49,5 @@ public static class EnemyAmountList
 
     public readonly static EnemyAmount caveMatron = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.caveMatron));
 
+    #endregion
 }

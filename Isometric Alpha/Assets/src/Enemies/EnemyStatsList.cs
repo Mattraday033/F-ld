@@ -93,7 +93,7 @@ public static class EnemyStatsList
     {
         enemyStatsDict = new Dictionary<string, EnemyStats>();
 
-        #region NPCs
+        #region Named NPCs
         #region Lovashi Guards
         enemyStatsDict.Add(NPCNameList.guardVazul, new EnemyStats(NPCNameList.guardVazul,
                                                                                     fiftyArmor,
@@ -175,6 +175,17 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                       TraitList.chaotic
                                                                             }));
         #endregion
+        #endregion
+
+        #region Lovashi Guards
+
+        enemyStatsDict.Add(MonsterNameList.executioner, new EnemyStats(MonsterNameList.executioner,
+                                                                                    thirtyFiveArmor,
+                                                                                            100,
+                            AbilityList.getAbility(null, AbilityList.executeKey) as Ability,
+                                                                new Trait[] { TraitList.master,
+                                                                          TraitList.predatory
+                                                                            }));
         #endregion
 
 

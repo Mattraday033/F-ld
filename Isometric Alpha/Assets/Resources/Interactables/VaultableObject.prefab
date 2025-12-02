@@ -51,6 +51,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 517585897779863325, guid: 043c4c1bc369a1c4ab9e55576a2e078b,
         type: 3}
+      propertyPath: animationManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 517585897779863325, guid: 043c4c1bc369a1c4ab9e55576a2e078b,
+        type: 3}
       propertyPath: dialogue.inkJSON
       value: 
       objectReference: {fileID: 4900000, guid: af7510967b6aedb46a3a3dad1c09b4fb, type: 3}
@@ -164,6 +169,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5927826668492765011, guid: 043c4c1bc369a1c4ab9e55576a2e078b,
+        type: 3}
+      propertyPath: _Animator
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5946003317781484665, guid: 043c4c1bc369a1c4ab9e55576a2e078b,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -259,45 +269,22 @@ PrefabInstance:
       propertyPath: npc
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8556038871526208797, guid: 043c4c1bc369a1c4ab9e55576a2e078b,
+        type: 3}
+      propertyPath: animationManager
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -3015359391068420140, guid: 043c4c1bc369a1c4ab9e55576a2e078b, type: 3}
     - {fileID: 6576346719778344862, guid: 043c4c1bc369a1c4ab9e55576a2e078b, type: 3}
     - {fileID: 8761656224251614378, guid: 043c4c1bc369a1c4ab9e55576a2e078b, type: 3}
     - {fileID: -5299874797357560549, guid: 043c4c1bc369a1c4ab9e55576a2e078b, type: 3}
-    m_RemovedGameObjects: []
+    - {fileID: 1099698400944458396, guid: 043c4c1bc369a1c4ab9e55576a2e078b, type: 3}
+    - {fileID: 5460278621860717577, guid: 043c4c1bc369a1c4ab9e55576a2e078b, type: 3}
+    - {fileID: 5927826668492765011, guid: 043c4c1bc369a1c4ab9e55576a2e078b, type: 3}
+    - {fileID: 8556038871526208797, guid: 043c4c1bc369a1c4ab9e55576a2e078b, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 9106756119347765176, guid: 043c4c1bc369a1c4ab9e55576a2e078b, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5555899077454664655, guid: 043c4c1bc369a1c4ab9e55576a2e078b,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1390893866125889865}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 043c4c1bc369a1c4ab9e55576a2e078b, type: 3}
---- !u!1 &4245474089666471343 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5555899077454664655, guid: 043c4c1bc369a1c4ab9e55576a2e078b,
-    type: 3}
-  m_PrefabInstance: {fileID: 8642531889710298720}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1390893866125889865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4245474089666471343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce29e502aaff19e4d925b1cf00eaa5b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ignoreHover: 0
-  noNameTag: 0
-  spriteRenderer: {fileID: 5547093590764737088}
-  nameTag: {fileID: 0}
-  targetCanvas: {fileID: 0}
---- !u!212 &5547093590764737088 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -4968793318184311776, guid: 043c4c1bc369a1c4ab9e55576a2e078b,
-    type: 3}
-  m_PrefabInstance: {fileID: 8642531889710298720}
-  m_PrefabAsset: {fileID: 0}

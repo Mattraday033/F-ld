@@ -557,7 +557,7 @@ setToTrue(learnedCampLocationFromCarter)
 
 prepForItem()
 
-Actually Kastor, I think I may be able to help with this one. I've already told Nándor and Márcos about this while we were stuck in the mine, but since I trust everyone here and it will help our cause, I'll tell you and {playerName} about it as well.
+Actually Kastor, I think I may be able to help with this one. I've already told Nándor and Márcos about this while we were stuck in the mine, but since I trust everyone here, I'll tell you and {playerName} about it as well.
 
 addXP(250)
 
@@ -567,7 +567,7 @@ addXP(250)
 
 The plan was established with the belief that the camp resided somewhere within the Lovashi Confederation. But that isn't true. At least, not unless we've been invaded since I was planted at this camp three months ago. I obviously haven't been able to learn much of anything happening outside the camp since I arrived here, being a prisoner and all.
 
-    +I don't understand: 'planted'? Someone sent you here from the outside?
+    +Someone sent you here from the outside?
         ~learnedCartersIdentity = true
         setToTrue(learnedCartersIdentity)
         ->2ic

@@ -47,6 +47,11 @@ public static class EnemyPackInfoList
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                     new ItemListID[]  {new ItemListID(ItemList.questItemListIndex, ItemList.blastingJellyIndex)});
 
+    public readonly static EnemyPackInfo executionerTest = new EnemyPackInfo(new EnemyAmount[] { 
+                                                                                                        EnemyAmountList.oneExecutioner, 
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDT1Name);
+
     // //used in the dialogue started upon entering the Manse kitchens
     // public readonly static EnemyPackInfo halfSlavesNoGuardFight = new EnemyPackInfo(new int[] { 1, 6 }, new int[] { 1, 6 }, new EnemyStats[]{loadEnemyStatsFromResources(kendeTheCookWithoutSummon),
     //                                                                                                                         loadEnemyStatsFromResources(slaveWarrior)
@@ -193,6 +198,9 @@ public static class EnemyPackInfoList
 
         #region MineLvl_2-1c
         list = new List<EnemyPackInfo>();
+
+        // list.Add(executionerTest);
+        // list.Add(executionerTest);
 
         list.Add(oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat);
         list.Add(twoGiantBatsThreeBatSwarmsOneArmoredBat);

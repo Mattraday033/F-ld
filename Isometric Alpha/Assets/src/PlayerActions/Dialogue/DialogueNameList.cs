@@ -126,7 +126,7 @@ public static class DialogueNameList
     public const string manseServiceEntrancePath = campExteriorPathName + LocationNameList.campManse + seperatorChar + "ManseServiceEntrance";
     #endregion
     #region Camp South East
-    public const string directorStatuePath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "DirectorStatue";
+    public const string directorStatuePathPath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "DirectorStatue";
     #endregion
 
     #endregion

@@ -41,6 +41,7 @@ VAR mineLvl3ConvincedRekaAndPazman = false
 VAR mineLvl3PromisedToProtectRekaAndPazman = false
 VAR mineLvl3ThreatenedRekaAndPazmanAsPrisoners = false
 
+VAR sealedPocketRubbleFlagName = "MineLvl_3-7Rubble"
 
 VAR smallCupPlacedOnBarrel = false
 VAR largeCupFilledWithWater = false
@@ -136,7 +137,7 @@ The water begins to drip into the small cup. In a minute, the small cup will ove
 
 fadeToBlack(true, false)
 
-activate({blastRubbleIndex})
+addSecretDoorFlag({sealedPocketRubbleFlagName})
 
 moveToPos(-7,4)
 
@@ -174,8 +175,8 @@ fadeBackIn(60)
     ->3a
 -mineLvl3CarterAndNandorInParty:
     ->4a
--mineLvl3GuardsInParty:
-    ->5a
+//-mineLvl3GuardsInParty:
+//    ->5a
 -else:
     ->Close
 }
@@ -663,90 +664,6 @@ The rest of us are heading back up to the surface. Now that I know you can be tr
     +I'll take you up on that rest, sir.
         Good, but don't dawdle. I expect you back up on the surface within the hour.
         ->Close
-
-=== 4f ===
-
-->Close
-
-=== 4h ===
-
-->Close
-
-=== 4i ===
-
-->Close
-
-=== 4j ===
-
-->Close
-
-=== 4k ===
-
-->Close
-
-=== 4l ===
-
-->Close
-
-=== 4m ===
-
-->Close
-
-=== 4n ===
-
-->Close
-
-=== 5a ===
-
-->Close
-    
-=== 2b ===
-
-->Close
-
-=== 2c ===
-
-->Close
-
-=== 2d ===
-
-->Close
-
-=== 2e ===
-
-->Close
-
-=== 2f ===
-
-->Close
-
-=== 2h ===
-
-->Close
-
-=== 2i ===
-
-->Close
-
-=== 2j ===
-
-->Close
-
-=== 2k ===
-
-->Close
-
-=== 2l ===
-
-->Close
-
-=== 2m ===
-
-->Close
-
-=== 2n ===
-
-->Close
 
 === 6a === 
 
