@@ -1,10 +1,12 @@
 ﻿using System.IO;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using Cinemachine;
+
 
 public abstract class MovementTracker : MonoBehaviour
 {
@@ -161,8 +163,8 @@ public class PlayerMovement : MovementTracker
 
     public CapsuleCollider2D terrainCollider;
 
-    public TilemapRenderer[] terrainTilemaps;
-    public SpriteRenderer[] terrainSprites;
+    public List<TilemapRenderer> terrainTilemaps;
+    public List<SpriteRenderer> terrainSprites;
 
     public Chest currentChest;
     public Collider2D transitionCollider;
@@ -1273,46 +1275,26 @@ public class PlayerMovement : MovementTracker
 
     public void hideTerrain()
     {
-        for (int i = 0; i < terrainTilemaps.Length; i++)
+        for (int i = 0; i < terrainTilemaps.Count; i++)
         {
-            if (terrainTilemaps[i].maskInteraction == SpriteMaskInteraction.VisibleOutsideMask)
-            {
-                continue;
-            }
-
             terrainTilemaps[i].maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
         }
 
-        for (int i = 0; i < terrainSprites.Length; i++)
+        for (int i = 0; i < terrainSprites.Count; i++)
         {
-            if (terrainSprites[i].maskInteraction == SpriteMaskInteraction.VisibleOutsideMask)
-            {
-                continue;
-            }
-
             terrainSprites[i].maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
         }
     }
 
     public void displayTerrain()
     {
-        for (int i = 0; i < terrainTilemaps.Length; i++)
+        for (int i = 0; i < terrainTilemaps.Count; i++)
         {
-            if (terrainTilemaps[i].maskInteraction == SpriteMaskInteraction.None)
-            {
-                continue;
-            }
-
             terrainTilemaps[i].maskInteraction = SpriteMaskInteraction.None;
         }
 
-        for (int i = 0; i < terrainSprites.Length; i++)
+        for (int i = 0; i < terrainSprites.Count; i++)
         {
-            if (terrainSprites[0].maskInteraction == SpriteMaskInteraction.None)
-            {
-                continue;
-            }
-
             terrainSprites[i].maskInteraction = SpriteMaskInteraction.None;
         }
     }
@@ -1365,8 +1347,8 @@ public class PlayerMovement : MovementTracker
     {
         GameObject[] terrainObjects = GameObject.FindGameObjectsWithTag(LayerAndTagManager.terrainTag);
 
-        terrainTilemaps = new TilemapRenderer[0];
-        terrainSprites = new SpriteRenderer[0];
+        terrainTilemaps = new List<TilemapRenderer>();
+        terrainSprites = new List<SpriteRenderer>();
 
         foreach (GameObject terrainObject in terrainObjects)
         {
@@ -1375,12 +1357,12 @@ public class PlayerMovement : MovementTracker
 
             if (terrainTilemap != null && !(terrainTilemap is null))
             {
-                terrainTilemaps = Helpers.appendArray<TilemapRenderer>(terrainTilemaps, terrainTilemap);
+                terrainTilemaps.Add(terrainTilemap);
             }
 
             if (terrainSprite != null && !(terrainSprite is null))
             {
-                terrainSprites = Helpers.appendArray<SpriteRenderer>(terrainSprites, terrainSprite);
+                terrainSprites.Add(terrainSprite);
             }
         }
     }

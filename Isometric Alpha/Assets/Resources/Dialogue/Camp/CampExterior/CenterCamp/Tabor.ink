@@ -54,7 +54,7 @@ VAR playerName = ""
 fadeToBlack(true, false)
 
 changeCamTarget({taborIndex})
-moveToPos(1,2)
+moveToPos(0,5)
 setFacing(NE)
 
 fadeBackIn(60)

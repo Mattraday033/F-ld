@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1276453434881988008}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.323, y: 0.055, z: 0}
+  m_LocalPosition: {x: 0, y: -0.125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42,7 +42,7 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1276453434881988008}
   m_Enabled: 1
-  m_CellSize: {x: 0.165, y: 0.083, z: 1}
+  m_CellSize: {x: 0.33333334, y: 0.16666667, z: 1}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 3
   m_CellSwizzle: 0

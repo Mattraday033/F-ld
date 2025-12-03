@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8101f733e050ce14d9a68d86770b02ff
+guid: 2840903352b185a43ad31be4e9646f56
 labels:
 - 2d
 - Sprite
@@ -8,10 +8,10 @@ labels:
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0

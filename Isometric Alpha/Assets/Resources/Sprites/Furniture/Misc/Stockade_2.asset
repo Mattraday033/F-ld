@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Stockade_2
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 1756356434, guid: e8cbf235be4eb484ba53d9751a704693, type: 3}
+  m_Sprite: {fileID: 191994173, guid: f510299d4552c0945bf3bd2718a131ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

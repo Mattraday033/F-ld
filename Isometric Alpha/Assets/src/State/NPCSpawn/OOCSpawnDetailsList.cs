@@ -220,30 +220,30 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.leafPile, new Vector3Int(18, -7), LocationNameList.campNorthEast));
         list.Add(new NPCSpawnDetails(NPCNameList.leafPile, new Vector3Int(17, -8), LocationNameList.campNorthEast));
 
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(5, 2), VaultableObject.vaultableBarrelsOneTile));
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-1, 3), VaultableObject.vaultableBarrelsOneTile));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(0, 3), VaultableObject.vaultableBarrelsOneTile));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(6, 1), VaultableObject.vaultableBarrelsOneTile));
 
-        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(2, 4), Facing.SouthEast));
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(3, 5), Facing.SouthEast));
 
         oocSpawnDetailsDict.Add(LocationNameList.campNorthEast, list);
         #endregion
         #region CenterCamp
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.csalan, new Vector3Int(16, 14), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.csalan, new Vector3Int(17, 17), LocationNameList.campCenter));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.temple, new Vector3Int(6, 7), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.temple, new Vector3Int(9, 11), LocationNameList.campCenter));
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard + 1, new Vector3Int(5, 3), LocationNameList.campCenter));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard + 1, new Vector3Int(6, 3), LocationNameList.campCenter));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(3, 2), LocationNameList.campCenter));
-        list.Add(new NPCSpawnDetails(NPCNameList.branded, new Vector3Int(1, 0), LocationNameList.campCenter));
-        list.Add(new NPCSpawnDetails(NPCNameList.branded, new Vector3Int(1, 1), LocationNameList.campCenter));
-        list.Add(new NPCSpawnDetails(NPCNameList.branded, new Vector3Int(1, 3), LocationNameList.campCenter));
-        list.Add(new NPCSpawnDetails(NPCNameList.feher, new Vector3Int(3, 1), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(4, 5), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.branded, new Vector3Int(0, 6), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.branded, new Vector3Int(0, 4), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.branded, new Vector3Int(0, 3), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.feher, new Vector3Int(4, 4), LocationNameList.campCenter));
 
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-4, -7), VaultableObject.vaultableBarrelsOneTile));
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-11, 0), VaultableObject.vaultableBarrelsOneTile));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-16, -6), VaultableObject.vaultableBarrelsOneTile));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-7, -10), VaultableObject.vaultableBarrelsOneTile));
 
         oocSpawnDetailsDict.Add(LocationNameList.campCenter, list);
         #endregion

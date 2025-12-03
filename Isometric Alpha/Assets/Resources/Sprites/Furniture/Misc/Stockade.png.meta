@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e8cbf235be4eb484ba53d9751a704693
+guid: f510299d4552c0945bf3bd2718a131ed
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -46,10 +46,10 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 500
-  spriteBorder: {x: 0, y: 0, z: 511, w: 0}
+  spritePixelsToUnits: 400
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -84,7 +84,7 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 12
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -101,9 +101,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 497
-        width: 4
-        height: 15
+        y: 0
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9252643978feb94dac782b8990ae368
-      internalID: -1062528929
+      spriteID: b87b64cc34bd4774396e9d39417d7eff
+      internalID: 1078774551
       vertices: []
       indices: 
       edges: []
@@ -121,40 +121,19 @@ TextureImporter:
       name: Stockade_1
       rect:
         serializedVersion: 2
-        x: 1
+        x: 512
         y: 0
-        width: 385
-        height: 502
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 744a962ec56862840bacfc170578a372
-      internalID: -731212161
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Stockade_2
-      rect:
-        serializedVersion: 2
-        x: 683
-        y: 0
-        width: 200
-        height: 412
+        width: 512
+        height: 512
       alignment: 9
-      pivot: {x: 0.5, y: 0.24}
+      pivot: {x: 0.5, y: 0.18}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab99e60a543ad0141bc15f220e9a059e
-      internalID: 1756356434
+      spriteID: 2665a46da56c8eb4994da04a8d4284aa
+      internalID: 191994173
       vertices: []
       indices: 
       edges: []
@@ -163,16 +142,15 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Stockade_0: -1062528929
-      Stockade_1: -731212161
-      Stockade_2: 1756356434
+      Stockade_0: 1078774551
+      Stockade_1: 191994173
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
