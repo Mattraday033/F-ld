@@ -868,7 +868,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	{
         if(toggleReveal)
         {
-            outline.createOutline(getRevealColor(), getOutlineSize());
+            outline.createOutline(getRevealColor());
         } else
         {
             outline.removeOutline();
@@ -887,11 +887,6 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 		}
 	}
 
-	public virtual OutlineMode getOutlineSize()
-    {
-        return OutlineMode.Normal;
-    }
-
 	public void createHoverTag()
 	{
 		MouseHoverManager.getMouseHoverBase();
@@ -903,7 +898,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	{
 		if (!RevealManager.currentlyRevealed)
 		{
-            outline.createOutline(getRevealColor(), getOutlineSize());
+            outline.createOutline(getRevealColor());
 		}
 
         createHoverTag();
@@ -980,7 +975,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 			return;
 		}
 
-        outline.createOutline(ColorList.tutorialDefault, getOutlineSize());
+        outline.createOutline(ColorList.tutorialDefault);
 	}
 	public void unhighlight(bool skip)
 	{

@@ -107,6 +107,8 @@ public abstract class MovementTracker : MonoBehaviour
     }
 }
 
+public enum AnimationState { Run, Idle}
+
 public class PlayerMovement : MovementTracker
 {
 
@@ -187,7 +189,7 @@ public class PlayerMovement : MovementTracker
     private const string baseLayerName = "Base Layer";
 
     private string direction = "SW";
-    private string runOrIdle = "Idle";
+    private AnimationState runOrIdle = AnimationState.Idle;
 
     [RuntimeInitializeOnLoadMethod]
     private static void initializePlayerMovement()
@@ -213,6 +215,13 @@ public class PlayerMovement : MovementTracker
         {
             State.playerFacing = new CharacterFacing();
         }
+
+        PlayerOOCStateManager.OnStateChangeToInTutorialSequence.AddListener(adjustAnimator);
+    }
+
+    private void OnDisable()
+    {
+        PlayerOOCStateManager.OnStateChangeToInTutorialSequence.RemoveListener(adjustAnimator);
     }
 
     private void setAsCameraTarget()
@@ -410,19 +419,7 @@ public class PlayerMovement : MovementTracker
             KeyPressManager.handlingPrimaryKeyPress = true;
         }
 
-        if (Input.GetKey(KeyBindingList.hideTerrainKey) && !KeyPressManager.handlingSecondaryKeyPress)
-        {
-            if (State.terrainHidden)
-            {
-                setTerrainActive(true);
-            }
-            else
-            {
-                setTerrainActive(false);
-            }
-
-            KeyPressManager.handlingSecondaryKeyPress = true;
-        }
+        toggleTerrainKeyCheck();
 
         if (Input.GetKey(KeyBindingList.interactKey) && !KeyPressManager.handlingPrimaryKeyPress)
         {
@@ -603,6 +600,8 @@ public class PlayerMovement : MovementTracker
             KeyPressManager.handlingPrimaryKeyPress = true;
             return;
         }
+
+        toggleTerrainKeyCheck();
 
 
         if (Input.GetKey(KeyCode.Alpha1))
@@ -961,6 +960,10 @@ public class PlayerMovement : MovementTracker
     {
         if (!canMove() && !moveOverride)
         {
+            runOrIdle = AnimationState.Idle;
+            currentMovementKeyCode = KeyCode.None;
+            playCurrentAnimation();
+
             return;
         }
 
@@ -984,19 +987,24 @@ public class PlayerMovement : MovementTracker
 
         if (currentMovementKeyCode != KeyCode.None && FadeToBlackManager.isTransparent())
         {
-            runOrIdle = "Run";
+            runOrIdle = AnimationState.Run;
         }
         else if (!FadeToBlackManager.isTransparent() || currentMovementKeyCode == KeyCode.None || PlayerOOCStateManager.currentActivity != OOCActivity.walking)
         {
-            runOrIdle = "Idle";
+            runOrIdle = AnimationState.Idle;
         }
 
-        string newStateName = animationStatePrefix + runOrIdle + direction;
+        string newStateName = animationStatePrefix + runOrIdle.ToString() + direction;
 
         if (!animator.GetCurrentAnimatorStateInfo(animator.GetLayerIndex("Base Layer")).IsName(newStateName))
         {
-            animator.Play(baseLayerName + "." + newStateName);
+            playCurrentAnimation();
         }
+    }
+
+    private void playCurrentAnimation()
+    {
+        animator.Play(baseLayerName + "." + animationStatePrefix + runOrIdle + direction);
     }
 
     public bool handleWASDMovement()
@@ -1296,6 +1304,23 @@ public class PlayerMovement : MovementTracker
         for (int i = 0; i < terrainSprites.Count; i++)
         {
             terrainSprites[i].maskInteraction = SpriteMaskInteraction.None;
+        }
+    }
+
+    public void toggleTerrainKeyCheck()
+    {
+        if (Input.GetKey(KeyBindingList.hideTerrainKey) && !KeyPressManager.handlingSecondaryKeyPress)
+        {
+            if (State.terrainHidden)
+            {
+                setTerrainActive(true);
+            }
+            else
+            {
+                setTerrainActive(false);
+            }
+
+            KeyPressManager.handlingSecondaryKeyPress = true;
         }
     }
 

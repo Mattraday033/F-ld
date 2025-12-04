@@ -249,6 +249,7 @@ public static class PrefabNames
     public const string vaultableBarrels = cratesAndBarrelsFolder + "VaultableBarrels";
     public const string squareCratesSmall = cratesAndBarrelsFolder + "Square Crates Small";
     public const string pushableCrate = cratesAndBarrelsFolder + "Crate";
+    public const string tripleBarrel = cratesAndBarrelsFolder + "TripleBarrels";
 
     public const string charactersFolder = spriteFolder + "Characters/";
     public const string humansFolder = charactersFolder + "Humans/";

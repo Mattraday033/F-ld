@@ -492,11 +492,6 @@ public class DescriptionPanelBuilder : MonoBehaviour
             rows.Add(buildRow(block));
         }
 
-        if (iconParent != null)
-        {
-            iconParent.SetAsLastSibling();
-        }
-
         rebuildLayouts();
 
         StartCoroutine(waitAndUpdateGameObjectPosition());

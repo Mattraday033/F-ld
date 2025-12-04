@@ -108,7 +108,7 @@ finishQuest(Stockhouse Stash, true, 10)
 
 prepForItem()
 
-\*Quartermaster Emese examines the Iron Nugget.* Iron? Very interesting. When I tell the Director about this, Uros will be interogated to the fullest extent to find where he got it and if there's any more where it came from. You've done an excellent job.
+\*Quartermaster Emese examines the Iron Nugget.* Iron? Very interesting. When I tell the Director about this, Uros will be interogated to the fullest extent to find where he got it. You've done an excellent job.
 
 takeItem(Lost Iron Nugget, 1)&
 addXP(100)

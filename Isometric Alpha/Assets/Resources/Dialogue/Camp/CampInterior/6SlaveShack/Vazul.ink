@@ -243,7 +243,7 @@ giveItem(1,8,1)
 === 4ca ===
     changeCamTarget({thatchIndex})
 
-    \*Thatch considers you with a weary scowl.* You don't let much get to you, do you.
+    \*Thatch considers you with a weary scowl.* You don't let much get to you, do you?
 
 {
 -thatchBeginsStranglingVazul:
@@ -293,7 +293,7 @@ And a whole camp's worth to go. Though, I expect none will be more vile than he 
 
 === 4da === //No. My head and heart both ache.
 
-I was a silversmith's apprentice before I was branded. He was a tailor, before his. He had a workshop of his own, and the way he would talk about it reminded me of the woman I apprenticed under.
+I was a silversmith's apprentice before I my branding. Slate was a tailor, before his. He had a workshop of his own, and the way he would talk about it reminded me of the woman I apprenticed under.
 
 I did not know him well. But in this camp, friends are rare. If you find one, cling to them hard, lest they be ripped from your grasp.
 
@@ -460,7 +460,7 @@ Hmmph. Seems like a lot of effort to go to to keep him alive. But I said I'd fol
 
 changeCamTarget({thatchIndex})
 
-\*Thatch considers you with a weary scowl.* You don't let much get to you, do you.
+\*Thatch considers you with a weary scowl.* You don't let much get to you, do you?
 
     +If we're going to survive, we have to keep at least a little cheer. Otherwise, we might as well lay down and die.
         ->4za
@@ -557,6 +557,7 @@ Oh, Slate? He talked when he should have worked a few too many times. Now he doe
 
     activate({thatchIndex})
     changeCamTarget({thatchIndex})
+    setFacing(SE)
     I can see Slate's body. Vazul deserved worse than he got. Far worse. 
 
 {
@@ -583,7 +584,7 @@ Oh, Slate? He talked when he should have worked a few too many times. Now he doe
 
 === 8b ===
 
-    \*Thatch considers you with a weary scowl.* You don't let much get to you, do you. Was that true, what you said about killing a man for less than some chew?
+    \*Thatch considers you with a weary scowl.* You don't let much get to you, do you? Was that true, what you said about killing a man for less than some chew?
 
     +We all got our brand somehow.
         ->8c
@@ -601,7 +602,7 @@ Oh, Slate? He talked when he should have worked a few too many times. Now he doe
 
 === 8d ===
 
-    Right. Well, I said I would help you and your group with your escape attempt if you helped me find Slate, and you held up your end of the bargain. I'll see this through to the end.
+    Right... Well, I said I would help you and your group with your escape attempt if you helped me find Slate, and you held up your end of the bargain. I'll see this through to the end.
         
         +Who was Slate to you?
             ->4da

@@ -26,10 +26,10 @@ public static class TutorialColliderSpawnDetailsList
         #region NECamp
         list = new List<MultiTutorialColliderSpawnInfo>();
 
-        list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campNorthEast, new Vector3Int(-9, 1),
+        list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campNorthEast, new Vector3Int(-7, 3),
                                                     TutorialSequenceList.hiddenObjectTutorialSequenceKey,
                                                     TutorialSequenceList.hiddenObjectsTutorialSeenFlag,
-                                                    Constants.sizeThree, Axis.DescendingY,
+                                                    Constants.sizeSix, Axis.DescendingY,
                                                     new StartSpawningAllTrueFlagList(new string[] {FlagNameList.givenTaskByBalint})));
 
         list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campNorthEast, new Vector3Int(-2, -1),
@@ -43,12 +43,12 @@ public static class TutorialColliderSpawnDetailsList
         #region SECamp
         list = new List<MultiTutorialColliderSpawnInfo>();
 
-        list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campSouthEast, new Vector3Int(6,21),
+        list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campSouthEast, new Vector3Int(10,26),
                                                     TutorialSequenceList.questCounterTutorialSequenceKey,
                                                     TutorialSequenceList.questCounterTutorialSeenFlag,
                                                     Constants.sizeThree, Axis.DescendingX));
 
-        list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campSouthEast, new Vector3Int(18,1),
+        list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campSouthEast, new Vector3Int(24,1),
                                                     TutorialSequenceList.questCounterTutorialSequenceKey,
                                                     TutorialSequenceList.questCounterTutorialSeenFlag,
                                                     Constants.sizeThree, Axis.DescendingY));

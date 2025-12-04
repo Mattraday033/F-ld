@@ -175,11 +175,6 @@ public class NPCSpawnChecker : MonoBehaviour
 		return ColorList.canBeInteractedWith;
 	}
 
-	public OutlineMode getOutlineSize()
-    {
-        return OutlineMode.Bold;
-    }
-
 	private void spawnNameTag()
 	{
 		if (nameTag == null && !noNameTag)

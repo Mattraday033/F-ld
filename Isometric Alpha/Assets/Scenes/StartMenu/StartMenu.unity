@@ -188,7 +188,6 @@ GameObject:
   m_Component:
   - component: {fileID: 618236186}
   - component: {fileID: 618236187}
-  - component: {fileID: 618236188}
   m_Layer: 0
   m_Name: Starting Menu Manager
   m_TagString: Untagged
@@ -227,18 +226,6 @@ MonoBehaviour:
   nameField: {fileID: 0}
   mainMenuBackground: {fileID: 976196660}
   statAdjustmentManager: {fileID: 0}
---- !u!156049354 &618236188
-Grid:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618236184}
-  m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 1}
-  m_CellGap: {x: 0, y: 0, z: 0}
-  m_CellLayout: 0
-  m_CellSwizzle: 0
 --- !u!1 &629863425
 GameObject:
   m_ObjectHideFlags: 0

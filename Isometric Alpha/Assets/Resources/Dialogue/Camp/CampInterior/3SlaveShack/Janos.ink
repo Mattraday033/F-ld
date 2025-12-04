@@ -698,8 +698,8 @@ setToTrue(andrasLeftInHut)
 deactivate({andrasIndex})
 activate({andrasAfterConvoIndex})
 changeCamTarget({andrasAfterConvoIndex})
-movePlayer(-0.475f,1.645f)
-setFacing(NE)
+movePlayer(3,3)
+setFacing(SW)
 fadeBackIn(60)
 
 What did you wish to discuss?
@@ -759,7 +759,7 @@ Of course. Our feelings are eternal.
 My intentions are pure. I have not harmed him and I never will.
 
     +You protest too hastily. Just because you agree with us in principle does not mean you will keep to your morals when angry, or frightened. Have you thought about what it would take unlearn your training as a guard?
-        ->9bcc(->9bdb)
+        ->9bcc(->9bda)
 
 === 9bcc(->divert) ===
 
@@ -769,28 +769,23 @@ I have thought about it some...
 
 === 9bda ===
 
-    +And even should you make it to somewhere safe, Janos will never be able to remove his brand, while you could simply melt back into the Confederation. 
-        ->9bdb
-
-=== 9bdb ===
-
 {
 -wisdom >= 2:
     +That is not enough. You cannot just be dedicated to him. You have to be dedicated to bettering yourself. <Wis {wisdom}>/2>
-        ->9bdd
--else:
-    +Some? Can you not see yourself as the threat one of the branded would see you as? Are you going to prioritize his safety?
         ->9bdc
+-else:
+    +Some? Can you not recognize yourself as the threat one of the branded would see you as? Are you going to prioritize his safety?
+        ->9bdb
 }
 
-=== 9bdc ===
+=== 9bdb ===
 
 Yes, but-
 
     +Do not lie to me. I must be certain of your certainty.
         ->9bdc
 
-=== 9bdd ===
+=== 9bdc ===
 
 How can I prove my dedication to you?
 
@@ -801,7 +796,7 @@ How can I prove my dedication to you?
     +Make an oath now, before the Gods, that stakes your health against his. If you harm him, the Gods will see you suffer for it.
         ->9e
     +Simply give me your word that you will not harm Janos. That will suffice.
-        ->Close
+        ->9f
     +I don't believe you can. <Combat>
         ->fightingAndras
 
@@ -837,6 +832,15 @@ Vows sworn before the Gods are a serious matter but I know the words I will spea
     +I will tell the others that I bore witness to this oath. I must leave you now. Spend this time with Janos wisely, soon the plan will commence and your aid will be needed again.
         ->leavingWithAndrasAlive
     +I shall hold you to your oath. If you break it, pray the Gods find you before I do.
+        ->leavingWithAndrasAlive
+
+=== 9f ===
+
+Of course. You have it.
+
+    +Good. Now, spend what little time you have together well. Before long, we will find ourselves fighting for our freedom.
+        ->leavingWithAndrasAlive
+    +I shall hold you to that.
         ->leavingWithAndrasAlive
 
 /*

@@ -38,6 +38,8 @@ VAR playerName = ""
 searchInventoryFor(hasIronNugget,{lostIronNuggetName})
 
 {
+-snitchedOnUros:
+->4a
 -gaveUrosTheNugget:
 ->3a
 -showedUrosTheNuggetWithoutGivingItBack:
@@ -165,6 +167,7 @@ You snitch scum, you wouldn't dare!
 }
 
     +Oh quartermaster!
+        setFacing(NE)
         ->1i
     +You're right, it's not worth snitching on you for.
         activateQuestStep(Stockhouse Stash, 1)
@@ -191,7 +194,7 @@ changeCamTarget(2)
 
 I believe it, you're clearly behind on your tasks. Wait for your lashing outside. If you're not there when I come looking for you, it'll be to the pit with you.
 
-fadeToBlack()
+fadeToBlack(true, false)
 
 setToTrue(snitchedOnUros)
 deactivate(1)
@@ -317,6 +320,12 @@ Thanks again, friend. I wish you the best out there.
 === 3b ===
 
 Get out of here you rat.
+
+    ->Close
+
+=== 4a ===
+
+You disgust me. I won't forget this. Ever!
 
     ->Close
 

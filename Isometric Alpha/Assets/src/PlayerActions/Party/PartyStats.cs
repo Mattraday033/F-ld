@@ -5,6 +5,9 @@ using UnityEngine;
 public static class PartyStats
 {
 
+    private const float baseCostMultiplier = 3f;
+    
+
     #region Party Wide Secondary Stats
 
     public static float getPartyRegenAmount()
@@ -135,12 +138,12 @@ public static class PartyStats
     {
         float totalCha = getTotalCharisma();
 
-        return totalCha * .01f;
+        return totalCha * Charisma.discountPerCharismaPoint;
     }
 
     public static float getDiscountMultiplier()
     {
-        return 1f - calculateDiscount();
+        return baseCostMultiplier - calculateDiscount();
     }
 
     public static string getDiscountForDisplay()

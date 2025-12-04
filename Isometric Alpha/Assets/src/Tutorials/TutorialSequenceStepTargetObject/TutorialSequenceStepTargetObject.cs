@@ -159,7 +159,7 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
 
         SpriteOutline spriteOutline = revealable.getSpriteOutline();
 
-        spriteOutline.createOutline(ColorList.tutorialDefault, OutlineMode.Normal);
+        spriteOutline.createOutline(ColorList.tutorialDefault);
 	}
 	
     public virtual void unhighlight(bool skip)

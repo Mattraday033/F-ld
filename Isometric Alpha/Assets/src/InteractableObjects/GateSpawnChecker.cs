@@ -67,11 +67,6 @@ public class GateSpawnChecker : MonoBehaviour, IRevealable
 		return ColorList.canBeInteractedWith;
 	}
 
-	public OutlineMode getOutlineSize()
-    {
-        return OutlineMode.Normal;
-    }
-
 	public void createHoverTag()
 	{
 		MouseHoverManager.getMouseHoverBase();

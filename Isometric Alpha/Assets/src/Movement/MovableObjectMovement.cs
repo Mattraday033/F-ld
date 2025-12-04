@@ -37,11 +37,6 @@ public class MovableObjectMovement : EnemyMovement
         _EndingPosition = AreaManager.getMasterGrid().GetCellCenterWorld(MovementTracker.getCurrentCell(this) + _DirectionMod);
     }
 
-	public override OutlineMode getOutlineSize()
-    {
-        return OutlineMode.Bold;
-    }
-
     public override bool isDefeated()
     {
         return false;

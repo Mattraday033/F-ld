@@ -65,12 +65,16 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 	{
 		RevealManager.OnReveal.AddListener(onReveal);
 		SecretDoorFlags.OnSecretDoorDiscovery.AddListener(checkSpawnParams);
+        PlayerOOCStateManager.OnStateChangeFromWalking.AddListener(displayNameTagBasedOnStateChange);
+        PlayerOOCStateManager.OnStateChangeToWalking.AddListener(displayNameTagBasedOnStateChange);
 	}
 
 	public void destroyListeners()
 	{
 		RevealManager.OnReveal.RemoveListener(onReveal);
 		SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(checkSpawnParams);
+        PlayerOOCStateManager.OnStateChangeFromWalking.RemoveListener(displayNameTagBasedOnStateChange);
+        PlayerOOCStateManager.OnStateChangeToWalking.RemoveListener(displayNameTagBasedOnStateChange);
 	}
 
     private void checkSpawnParams(string secretDoorFlag)
@@ -86,6 +90,17 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
         return outline;
     }
 
+    public void displayNameTagBasedOnStateChange()
+    {
+        if(PlayerOOCStateManager.currentActivity == OOCActivity.walking && RevealManager.currentlyRevealed && !hasGenericName() && nameSourceRevealable())
+        {
+            spawnNameTag();
+        } else if(PlayerOOCStateManager.currentActivity != OOCActivity.walking)
+        {
+            onReveal(false);
+        }
+    }
+
 	public void onReveal(bool toggleReveal)
 	{
         if(!nameSourceRevealable())
@@ -95,7 +110,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
         if(toggleReveal)
         {
-            outline.createOutline(getRevealColor(), getOutlineSize());
+            outline.createOutline(getRevealColor());
 
             if(!hasGenericName())
             {
@@ -112,15 +127,18 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
     private bool hasGenericName()
     {
-        switch(nameSource.getName())
+        switch(DialogueList.scrubNameOfEndNumbers(nameSource.getName()))
         {
             //inanimate object
             case NPCNameList.chest:
             case NPCNameList.shelf:
+            case NPCNameList.crate:
+            case NPCNameList.crates:
             case NPCNameList.barrels:
             case NPCNameList.barricade:
             case NPCNameList.statue:
             case NPCNameList.rubble:
+            case NPCNameList.awkwardRubble:
 
             //occupation
             case NPCNameList.guard:
@@ -137,11 +155,6 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 		return ColorList.canBeInteractedWith;
 	}
 
-	public OutlineMode getOutlineSize()
-    {
-        return OutlineMode.Normal;
-    }
-
 	private void spawnNameTag()
 	{
         if(gameObject.GetComponent<RectTransform>() == null)
@@ -151,8 +164,6 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
 		if (nameTag == null && !noNameTag)
 		{
-           
-
 			nameTag = Instantiate(Resources.Load<GameObject>(PrefabNames.npcNameTag), transform).GetComponent<DescriptionPanel>();
 
 			nameTag.nameText.text = getName();
@@ -194,7 +205,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
             if(!RevealManager.currentlyRevealed)
             {
-                outline.createOutline(getRevealColor(), getOutlineSize());
+                outline.createOutline(getRevealColor());
             }
 
             spawnNameTag();

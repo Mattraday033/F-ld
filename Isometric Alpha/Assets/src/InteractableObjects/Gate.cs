@@ -71,7 +71,7 @@ public class Gate : MonoBehaviour, IRevealable
 	{
         if(toggleReveal)
         {
-            outline.createOutline(getRevealColor(), getOutlineSize());
+            outline.createOutline(getRevealColor());
         } else
         {
             outline.removeOutline();
@@ -83,11 +83,6 @@ public class Gate : MonoBehaviour, IRevealable
 		return ColorList.canBeInteractedWith;
 	}
 
-	public OutlineMode getOutlineSize()
-    {
-        return OutlineMode.Bold;
-    }
-
 	public void createHoverTag()
 	{
 		MouseHoverManager.getMouseHoverBase();
@@ -98,7 +93,7 @@ public class Gate : MonoBehaviour, IRevealable
 	{
 		if (!RevealManager.currentlyRevealed)
 		{
-            outline.createOutline(getRevealColor(), getOutlineSize());
+            outline.createOutline(getRevealColor());
 			createHoverTag();
 		}
 	}

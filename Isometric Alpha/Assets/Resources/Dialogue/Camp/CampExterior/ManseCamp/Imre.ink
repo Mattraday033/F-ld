@@ -359,12 +359,12 @@ Name it but make it quick. I cannot be late.
 
 If I am, what would you need from me?
     
-    +We need you to get the other brandless on board.
+    +We need you to get the other brandless onboard.
         ->7e
 
 === 7e ===
 
-On board for what?
+Onboard for what?
 
     +We're planning a breakout. We're going to fight our way out of here. The more hands the better.
             ->7f

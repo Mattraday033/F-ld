@@ -98,6 +98,7 @@ public static class NPCNameList
     public const string chest = "Chest";
     public const string shelf = "Shelf";
     public const string crate = "Crate";
+    public const string crates = "Crates";
     public const string barrels = "Barrels";
     public const string barricade = "Barricade";
     public const string halfWall = "Half Wall";

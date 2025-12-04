@@ -108,9 +108,8 @@ public static class KeyPressManager
         switch (PlayerOOCStateManager.currentActivity)
         {
             case OOCActivity.walking:
-                return KeyBindingList.revealKeyIsPressed() || Input.GetKey(KeyBindingList.hideTerrainKey);
-
             case OOCActivity.inDialogue:
+                return KeyBindingList.revealKeyIsPressed() || Input.GetKey(KeyBindingList.hideTerrainKey);
             case OOCActivity.inUI:
             case OOCActivity.inMap:
             case OOCActivity.cunning:

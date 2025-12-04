@@ -182,15 +182,14 @@ Any luck with Kende? He can be a bit of a hard ass sometimes.
 ~gaveCandyToMuzsa = true
 setToTrue(gaveCandyToMuzsa)
 
+finishQuest(Múzsa's Sweet Tooth, true, 6)
 
 {
 -mentionedGoodReasonForGoingInsideMine:
 
-finishQuest(Múzsa's Sweet Tooth, true, 6)
-
 prepForItem()
 
-Yes! Finally! Ok, I'll keep my end of the bargain. You can go on in but be careful in there. If they come looking for you I never saw you go in, but if they find your corpse in there later it's probably gonna be my ass on the chopping block.
+Yes! Finally! Ok, I'll hold to my end of the bargain. You can go on in but be careful in there. If they come looking for you I never saw you go in, but if they find your corpse in there later it's probably gonna be my ass on the chopping block.
 
 takeAllOfItem(Candy)
 
@@ -198,11 +197,9 @@ takeAllOfItem(Candy)
         ->moveMuzsaAndClose
 -else:
 
-finishQuest(Múzsa's Sweet Tooth, true, 6)
-
 prepForItem()
 
-Yes! Finally! Ok, I'll keep my end of the bargain. Keep the change, I consider it money well spent. Now get out of here before you get both of us in trouble.
+Yes! Finally! Ok, I'll hold to my end of the bargain. Keep the change, I consider it money well spent. Now get out of here before you get both of us in trouble.
 
 takeAllOfItem(Candy)
    
@@ -211,7 +208,6 @@ takeAllOfItem(Candy)
     +Alright, I'll go.
         ->Close
 }
-
 
 === 1k ===
 

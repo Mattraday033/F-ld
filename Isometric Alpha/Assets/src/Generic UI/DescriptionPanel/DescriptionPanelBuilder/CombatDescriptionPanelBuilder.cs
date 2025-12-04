@@ -36,10 +36,6 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
                     {
                         return levelParent;
                     }
-                    else if (blockIsTypeBlock(block))
-                    {
-                        return nameParent;
-                    }
                 }
 
                 return base.getParent(block);

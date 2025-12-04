@@ -186,13 +186,14 @@ public static class DialogueList
         addDialogueToList(LocationNameList.stockhouse, NPCNameList.crate + 1,
                             new Dialogue(new string[] { NPCNameList.crate + 1 },
                             Resources.Load<TextAsset>(DialogueNameList.dudCratePath)));
-        addDialogueToList(LocationNameList.stockhouse, NPCNameList.crate + 2,
-                            new Dialogue(new string[] { NPCNameList.crate + 2 },
-                            Resources.Load<TextAsset>(DialogueNameList.dudCratePath)));
 
         addDialogueToList(LocationNameList.stockhouse, NPCNameList.barrels,
                             new Dialogue(new string[] { NPCNameList.barrels },
                             Resources.Load<TextAsset>(DialogueNameList.barrelsWithNuggetPath)));
+        addDialogueToList(LocationNameList.stockhouse, NPCNameList.barrels + 1,
+                            new Dialogue(new string[] { NPCNameList.barrels + 1},
+                            Resources.Load<TextAsset>(DialogueNameList.dudBarrelPath)));
+
         #endregion
         #region Stables
 
@@ -283,6 +284,11 @@ public static class DialogueList
         addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.guardMuzsa + 1,
                             new Dialogue(new string[] { NPCNameList.guardMuzsa + 1, NPCNameList.barricade, NPCNameList.guardMuzsa + 1 },
                             Resources.Load<TextAsset>(DialogueNameList.muszaPath)));
+
+
+        addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.uros,
+                            new Dialogue(new string[] { NPCNameList.uros },
+                            Resources.Load<TextAsset>(DialogueNameList.urosPath)));
 
         #endregion
         #region ManseCamp

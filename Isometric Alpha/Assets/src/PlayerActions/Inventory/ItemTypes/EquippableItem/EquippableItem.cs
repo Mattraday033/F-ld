@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using System;
 
 [System.Serializable]
-public class EquippableItem : Item, IJSONConvertable, IStatBoostSource, IFormulaSource
+public abstract class EquippableItem : Item, IJSONConvertable, IStatBoostSource, IFormulaSource
 {
     public const string offHandSlotText = "Off Hand";
     public const string headSlotText = "Head";
@@ -142,10 +142,7 @@ public class EquippableItem : Item, IJSONConvertable, IStatBoostSource, IFormula
         }
     }
 
-    public virtual string getIconName()
-    {
-        throw new IOException("getIconName() was called in the base class extraneously");
-    }
+    public abstract string getIconName();
 
     #region IStatBoostSource Methods
     #region Generic Stats

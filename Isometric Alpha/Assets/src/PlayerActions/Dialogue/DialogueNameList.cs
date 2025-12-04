@@ -99,7 +99,8 @@ public static class DialogueNameList
     #region Stockhouse
     public const string urosPath = campInteriorPathName + LocationNameList.stockhouse + seperatorChar + NPCNameList.uros;
     public const string emesePath = campInteriorPathName + LocationNameList.stockhouse + seperatorChar + "Emese";
-    public const string dudCratePath = campInteriorPathName + LocationNameList.stockhouse + seperatorChar + "DudCrate";
+    public const string dudCratePath = campInteriorPathName + LocationNameList.stockhouse + seperatorChar + "DudCrates";
+    public const string dudBarrelPath = campInteriorPathName + LocationNameList.stockhouse + seperatorChar + "DudBarrels";
     public const string barrelsWithNuggetPath = campInteriorPathName + LocationNameList.stockhouse + seperatorChar + "BarrelsWithNugget";
 
     #endregion

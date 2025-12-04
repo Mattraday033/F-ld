@@ -642,7 +642,21 @@ public class DialogueManager : MonoBehaviour
                     string itemName = getArgument(buffer);
                     //Item(string key, string loreDescription, string type, string subtype)
 
-                    int quantity = Inventory.removeItem(itemName).getQuantity();
+                    int quantity = 0;
+
+                    Item itemInInv = Inventory.removeItem(itemName);
+
+                    if(itemInInv != null)
+                    {
+                        quantity += itemInInv.getQuantity();
+                    }
+
+                    Item itemInJunk = Inventory.removeItem(itemName, State.junkPocket);
+
+                    if(itemInJunk != null)
+                    {
+                        quantity += itemInJunk.getQuantity();
+                    }
 
                     List<PartyMember> partyMembers = PartyManager.getAllPartyMembers();
 
@@ -673,6 +687,7 @@ public class DialogueManager : MonoBehaviour
                     int itemQuantity = getArgumentInt(buffer, Constants.indexOne);
 
                     Inventory.removeItem(itemKey, itemQuantity);
+                    Inventory.removeItem(itemKey, itemQuantity, State.junkPocket);
 
                     newLine = itemKey + quantitySymbol + itemQuantity;
 

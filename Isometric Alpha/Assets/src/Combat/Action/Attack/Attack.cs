@@ -92,7 +92,7 @@ public class Attack : CombatAction, IJSONConvertable
 
 	public override string getDamageFormula()
 	{
-		if (getMainHandWeapon().getIsTwoHanded())
+		if (getMainHandWeapon().getIsTwoHanded() || getOffHandWeapon() == null)
 		{
             return getMainHandWeapon().getDamageFormula();
 		}
@@ -220,7 +220,7 @@ public class Attack : CombatAction, IJSONConvertable
 
     private Weapon getOffHandWeapon()
     {
-        return (Weapon) getActorStats().getEquippedItems().getOffHand();
+        return getActorStats().getEquippedItems().getOffHand() as Weapon;
     }
 
 
@@ -334,9 +334,9 @@ public class Attack : CombatAction, IJSONConvertable
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDamageBlock(getDamageTotalForDisplay(), getDamageFormulaForDisplayAlternate()));
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getCritBlock(getCritTotalForDisplay(), getCritFormulaForDisplayAlternate()));
-
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRangeTitle()));
+
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getCritBlock(getCritTotalForDisplay(), getCritFormulaForDisplayAlternate()));
 
 		if (getAppliedTrait() != null)
 		{

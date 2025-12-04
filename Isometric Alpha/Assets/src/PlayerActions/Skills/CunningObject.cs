@@ -140,7 +140,7 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
     {
         if(toggleReveal)
         {
-            outline.createOutline(getRevealColor(), getOutlineSize());
+            outline.createOutline(getRevealColor());
         } else
         {
             outline.removeOutline();
@@ -152,11 +152,6 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
         return ColorList.canBeCunninged;
     }
 
-	public OutlineMode getOutlineSize()
-    {
-        return OutlineMode.Bold;
-    }
-
     public void createHoverTag()
     {
         MouseHoverManager.createHoverTag(tagText);
@@ -166,7 +161,7 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
     {
         if (!RevealManager.currentlyRevealed)
         {
-            outline.createOutline(getRevealColor(), getOutlineSize());
+            outline.createOutline(getRevealColor());
         }
     }
 

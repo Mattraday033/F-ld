@@ -21,6 +21,8 @@ public static class Charisma
 
 	public const int charismaEnergiesActivatedPassiveLevel = 2;
 
+    public const float discountPerCharismaPoint = 0.01f;
+
 	// public static string[] getAllSecondaryStatsForDisplay(AllyStats targetStats)
 	// {
 	// 	return getAllSecondaryStatsForDisplay(targetStats.getCharisma());

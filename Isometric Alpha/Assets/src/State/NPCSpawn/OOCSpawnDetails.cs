@@ -176,6 +176,14 @@ public abstract class OOCSpawnDetails
 
     public static void setMouseHoverTileMap(string spriteName, Transform transform)
     {
+        foreach(Transform child in transform)
+        {
+            if(child.GetComponent<NPCMouseHover>() != null)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+        }
+
         Tilemap npcMouseHover = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.mouseHoverTileMap), transform).GetComponent<Tilemap>();
 
         Tile tile = ScriptableObject.CreateInstance<Tile>();

@@ -292,7 +292,7 @@ He slew the beasts, but not before one bit into his leg. Last I saw him, he was 
     +Sounds like one less guard to deal with.
         I suppose thats one way to look at it.
         ->mineExplanation4Pref(needsKeepDialogueLine,divert)
-    +Would that they feasted on his guts. *Spits*
+    +I'd have prefered if they had slain <i>him</i>. *Spits*
         If they had, I would have died with him. I can forgive much of those who save my life.
         ->mineExplanation4Pref(needsKeepDialogueLine,divert)
 
@@ -1253,7 +1253,7 @@ addXP(250)
 {
 -gotKeyFromJanos:
 
-    +Janos's plan to get the key included letting a guard in on the plan.
+    +To get the key, Janos had to tell a guard about the plan.
         ->3j
     +None worth mentioning. <Lie>
         finishQuest(Aiding Janos, true, 10)

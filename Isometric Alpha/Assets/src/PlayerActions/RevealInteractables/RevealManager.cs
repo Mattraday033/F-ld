@@ -16,7 +16,6 @@ public interface IRevealable : IPointerEnterHandler,
 	public void onReveal(bool toggleReveal);
 
 	public Color getRevealColor();
-	public OutlineMode getOutlineSize();
 
 	public void createHoverTag();
 }

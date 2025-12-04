@@ -57,16 +57,11 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
     {
         if(toggleReveal)
         {
-            getTargetOutline().createOutline(getRevealColor(), getOutlineSize());
+            getTargetOutline().createOutline(getRevealColor());
         } else
         {
             getTargetOutline().removeOutline();
         }
-    }
-
-    public OutlineMode getOutlineSize()
-    {
-        return OutlineMode.Normal;
     }
 
     public Color getRevealColor()

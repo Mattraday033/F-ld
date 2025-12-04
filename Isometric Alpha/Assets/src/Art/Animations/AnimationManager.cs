@@ -470,7 +470,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     private void handleFacingChange()
     {
-        if(!changesFacing)
+        if(!changesFacing || CombatStateManager.inCombat)
         {
             return;
         }

@@ -52,6 +52,11 @@ public class Armor : EquippableItem, IJSONConvertable
 		setWorth(calculateWorth(DamageCalculator.calculateFormula(armorFormula, worthStatsSource), slotID));
 	}
 
+    public override string getIconName()
+    {
+        return getSlotIconName();
+    }
+
 	private static int calculateWorth(int armorRating, int slotID)
 	{
 		if (slotID == trinketSlotIndex && armorRating * 2 <= trinketBaseWorthWithoutArmor)
@@ -110,25 +115,12 @@ public class Armor : EquippableItem, IJSONConvertable
 	{
 		base.describeSelfFull(panel);
 
-		if (panel.armorRatingText != null && !(panel.armorRatingText is null))
-		{
-			panel.armorRatingText.text = "" + getArmorRating();
-		}
+        DescriptionPanel.setText(panel.armorRatingText, getArmorRating());
+        DescriptionPanel.setText(panel.slotText, getSlotIDForDisplay());
+        DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getIconName()));
+        DescriptionPanel.setImage(panel.typeIconPanel, Helpers.loadSpriteFromResources(getTypeIconName()));
+        DescriptionPanel.setImageColor(panel.typeIconBackgroundPanel, getTypeIconBackgroundColor());
 
-		if (panel.slotText != null && !(panel.slotText is null))
-		{
-			panel.slotText.text = "" + getSlotIDForDisplay();
-		}
-
-		if (panel.typeIconPanel != null && !(panel.typeIconPanel is null))
-		{
-			panel.typeIconPanel.sprite = Helpers.loadSpriteFromResources(getTypeIconName());
-		}
-
-		if (panel.typeIconBackgroundPanel != null && !(panel.typeIconBackgroundPanel is null))
-		{
-			panel.typeIconBackgroundPanel.color = getTypeIconBackgroundColor();
-		}
 	}
 
 	public override string getTypeIconName()

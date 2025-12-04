@@ -50,7 +50,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.janos, new Vector3Int(5, 3), LocationNameList.slaveShackThree));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardAndras, new Vector3Int(4, 1)));
-        list.Add(new NPCSpawnDetails(NPCNameList.guardAndras + 1, new Vector3Int(6, 2), LocationNameList.slaveShackThree));
+        list.Add(new NPCSpawnDetails(NPCNameList.guardAndras + 1, new Vector3Int(2, 3), LocationNameList.slaveShackThree));
 
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackThree, list);
         #endregion
@@ -196,11 +196,11 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.uros, new Vector3Int(7, -1), LocationNameList.stockhouse));
         list.Add(new NPCSpawnDetails(NPCNameList.quartermasterEmese, new Vector3Int(11, 1), LocationNameList.stockhouse, new Vector3Int[] { new Vector3Int(10, 1) }));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.crate, new Vector3Int(10, 4), LocationNameList.stockhouse));
-        list.Add(new NPCSpawnDetails(NPCNameList.crate + 1, new Vector3Int(6, -1), LocationNameList.stockhouse));
-        list.Add(new NPCSpawnDetails(NPCNameList.crate + 2, new Vector3Int(5, 3), LocationNameList.stockhouse));
+        list.Add(new NPCSpawnDetails(NPCNameList.crate, new Vector3Int(10, 4), LocationNameList.stockhouse, PrefabNames.squareCratesSmall));
+        list.Add(new NPCSpawnDetails(NPCNameList.crate + 1, new Vector3Int(5, 3), LocationNameList.stockhouse, PrefabNames.squareCratesSmall));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.barrels, new Vector3Int(6, 5), LocationNameList.stockhouse));
+        list.Add(new NPCSpawnDetails(NPCNameList.barrels, new Vector3Int(6, 5), LocationNameList.stockhouse, PrefabNames.tripleBarrel));
+        list.Add(new NPCSpawnDetails(NPCNameList.barrels + 1, new Vector3Int(6, -1), LocationNameList.stockhouse, PrefabNames.tripleBarrel));
 
         oocSpawnDetailsDict.Add(LocationNameList.stockhouse, list);
         #endregion
@@ -250,35 +250,36 @@ public static class OOCSpawnDetailsList
         #region SECamp
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCOffGridSpawnDetails(NPCNameList.statue, new Vector3Int(4, 0), LocationNameList.campSouthEast, PrefabNames.directorStatuePath, 
+        list.Add(new NPCOffGridSpawnDetails(NPCNameList.statue, new Vector3Int(7, 3), LocationNameList.campSouthEast, PrefabNames.directorStatuePath, 
                                     new Vector3Int[] { 
-                                                        new Vector3Int(5, 1),
-                                                        new Vector3Int(5, 0),
-                                                        new Vector3Int(4, 1)
+                                                        new Vector3Int(7, 4),
+                                                        new Vector3Int(8, 4),
+                                                        new Vector3Int(8, 3)
                                                      }));
 
-        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(13, 11), Facing.SouthEast));
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(19, 14), Facing.SouthEast));
 
         oocSpawnDetailsDict.Add(LocationNameList.campSouthEast, list);
         #endregion
         #region MineEntranceCamp
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.guardMuzsa, new Vector3Int(8, 4), LocationNameList.campMineEntrance));
+        list.Add(new NPCSpawnDetails(NPCNameList.guardMuzsa, new Vector3Int(9, 10), LocationNameList.campMineEntrance));
 
-        list.Add(new ObstacleSpawnDetails(NPCNameList.barricade, new Vector3Int(8, 5), PrefabNames.squareCratesSmall));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.barricade, new Vector3Int(9, 11), PrefabNames.squareCratesSmall));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.guardMuzsa + 1, new Vector3Int(6, 3), LocationNameList.campMineEntrance));
+        list.Add(new NPCSpawnDetails(NPCNameList.guardMuzsa + 1, new Vector3Int(7, 10), LocationNameList.campMineEntrance));
 
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(13, 9), VaultableObject.vaultableBarrelsTwoTiles));
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(12, 9), VaultableObject.vaultableBarrelsTwoTiles));
+        list.Add(new NPCSpawnDetails(NPCNameList.uros, new Vector3Int(13, -1), LocationNameList.campMineEntrance));
+
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(12, 13), VaultableObject.vaultableBarrelsOneTile));
 
         oocSpawnDetailsDict.Add(LocationNameList.campMineEntrance, list);
         #endregion
         #region Camp Manse
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.imre, new Vector3Int(-7, -11), LocationNameList.campManse));
+        list.Add(new NPCSpawnDetails(NPCNameList.imre, new Vector3Int(-6, -9), LocationNameList.campManse));
 
         oocSpawnDetailsDict.Add(LocationNameList.campManse, list); //3,9 / kitchen -6,5
         #endregion
