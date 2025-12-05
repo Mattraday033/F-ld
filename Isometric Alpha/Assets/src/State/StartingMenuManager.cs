@@ -12,14 +12,9 @@ public enum StartingMenuState { OnMainMenu = 1, Loading = 2, CharacterCreation =
 
 public class StartingMenuManager : MonoBehaviour 
 {
-	private const string uiSceneName = "UI Revision";
-
 	private StartingMenuState currentState;
 
-	public Button newGameButton;
-	public GameObject nameField;
 	public GameObject mainMenuBackground; 
-	public StatAdjustmentManager statAdjustmentManager;
 
 	private static StartingMenuManager instance; //Don't instantiate, somehow Awake runs after [RuntimeInitializeOnLoadMethod]
 

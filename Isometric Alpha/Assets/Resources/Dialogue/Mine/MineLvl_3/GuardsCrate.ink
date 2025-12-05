@@ -297,7 +297,7 @@ You apparently do not understand the predicament you are in. Protocal dictates t
 
 changeCamTarget({rekaIndex})
 
-Overseer, with respect, the slave has risked their life considerably to get down here. Shouldn't we at least hear the reason?
+Overseer, with respect, this slave has risked their life considerably to get down here. Shouldn't we at least hear the reason?
 
 ->2caa
 

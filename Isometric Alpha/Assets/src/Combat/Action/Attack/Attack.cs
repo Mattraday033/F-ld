@@ -110,7 +110,7 @@ public class Attack : CombatAction, IJSONConvertable
 			return "0";
 		}
 
-		if (getMainHandWeapon().getIsTwoHanded())
+		if (getMainHandWeapon().getIsTwoHanded() || getOffHandWeapon() == null)
 		{
 			return getMainHandWeapon().getCritFormula() + getActorStats().getBonusCritChance();
 		}

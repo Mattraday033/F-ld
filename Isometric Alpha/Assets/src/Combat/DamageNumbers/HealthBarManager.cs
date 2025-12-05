@@ -13,6 +13,13 @@ public class HealthBarManager : MonoBehaviour
 	public Slider emptySlider;
     public Image emptyImage;
 	
+    public Stats linkedStats;
+
+    public void setLinkedStats(Stats statsToLink)
+    {
+        linkedStats = statsToLink;
+    }
+
     public void hide()
     {
         gameObject.SetActive(false);
@@ -20,6 +27,11 @@ public class HealthBarManager : MonoBehaviour
 
     public void show()
     {
+        if(linkedStats == null || linkedStats.isDead())
+        {
+            return;
+        }
+        
         gameObject.SetActive(true);
     }
 

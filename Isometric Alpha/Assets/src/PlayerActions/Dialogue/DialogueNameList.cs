@@ -7,13 +7,11 @@ public static class DialogueNameList
 {
 
     #region Dialogues Without Area Names
-    public const string nandorAfterKillingGuardsMineLvl3Key = "nandorAfterKillingGuardsMineLvl3";
     public const string slavesAfterKillingOverseerCampNEKey = "slavesAfterKillingOverseerCampNE";
     public const string kendeUponEnteringKitchensKey = "kendeUponEnteringKitchens";
     public const string taborManse2F2BKey = "taborManse-2F-2B";
     public const string directorDefeatedConvoKey = "directorDefeatedConvo";
     public const string guardPunishmentConvoKey = "guardPunishmentStartConvo";
-    public const string afterKillingAndrasConvoKey = "JanosAfterKillingAndras";
 
 
     public const string taborAfterClayFightKey = "taborAfterClayFight";
@@ -163,6 +161,9 @@ public static class DialogueNameList
     public const string suspiciousWallPathML3 = mineLvl3FolderPath + NPCNameList.suspiciousWall;
 
     public const string pocketRubblePathML3 = mineLvl3FolderPath + NPCNameList.rubble;
+
+    public const string afterKillingGuardsMineLvl3Path = mineLvl3FolderPath + "AfterKillingGuardsMineLvl3";
+    public const string afterKillingGuardsMineLvl3Key = "AfterKillingGuardsMineLvl3";
 
     #endregion
 

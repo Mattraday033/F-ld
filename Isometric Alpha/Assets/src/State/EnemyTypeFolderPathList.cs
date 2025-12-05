@@ -15,7 +15,7 @@ public static class EnemyTypeFolderPathList
     {
         if(!folderPathDict.ContainsKey(enemyType))
         {
-            return null;
+            return folderPathDict[MonsterNameList.executioner];
         }
 
         return folderPathDict[enemyType];

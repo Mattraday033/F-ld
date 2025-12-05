@@ -299,7 +299,7 @@ I can use the jelly if we truly need, but with my wounds I may make a mistake. I
         +For now. But I will be watching.
             Of course.
             ->1lb
-        +No. I don't buy it. Get in the way of the plan and I will act. Believe me.
+        +No. I don't buy it. Get in the way of the plan and I will remove you from our path. Believe me.
             I understand. I won't give you cause.
             ->1lb
 

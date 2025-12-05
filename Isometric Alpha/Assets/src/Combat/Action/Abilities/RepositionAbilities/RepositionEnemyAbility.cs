@@ -23,11 +23,6 @@ public class RepositionEnemyAbility : RepositionAbility
 	
     public override void unqueueingAction()
     {
-        Debug.LogError("getTargetCoords() = " + getTargetCoords().ToString());
-
-        Helpers.debugNullCheck("getCombatantToBeMoved()", getCombatantToBeMoved());
-        Helpers.debugNullCheck("getStatsClone()", getStatsClone());
-
         if (getStatsClone() != null && !getCombatantToBeMoved().position.Equals(getStatsClone().position))
         {
             CombatGrid.setCombatantAtCoords(getStatsClone().position, null);

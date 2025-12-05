@@ -176,7 +176,7 @@ public static class ChestItemIDList
         list = new List<ItemListID>();
 
         list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rationsIndex, Constants.sizeFive));
-        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.bronzeBadgeArmorValue));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.bronzeBadgeIndex));
 
         chestItemIDList.Add(LocationNameList.mineLvl3 + LocationNameList.section3b, list);
 

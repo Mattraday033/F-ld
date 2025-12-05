@@ -16,7 +16,7 @@ VAR rubbleMarcosIndex = 10
 
 VAR fullGuardFightIndex = 0
 VAR halfGuardFightIndex = 1
-VAR dialogueKeyForAfterKillingGuards = "nandorAfterKillingGuardsMineLvl3"
+VAR dialogueKeyForAfterKillingGuards = "AfterKillingGuardsMineLvl3"
 
 VAR deathFlagGuardMárcos = false
 VAR deathFlagGuardPázmán = false

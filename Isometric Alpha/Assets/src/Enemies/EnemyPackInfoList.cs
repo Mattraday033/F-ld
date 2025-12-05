@@ -47,6 +47,20 @@ public static class EnemyPackInfoList
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                     new ItemListID[]  {new ItemListID(ItemList.questItemListIndex, ItemList.blastingJellyIndex)});
 
+    public readonly static EnemyPackInfo ml3GuardsNoSurrenders = new EnemyPackInfo(new EnemyAmount[] { 
+                                                                                                        EnemyAmountList.guardReka, 
+                                                                                                        EnemyAmountList.guardPazman, 
+                                                                                                        EnemyAmountList.overseerGaspar, 
+                                                                                                        EnemyAmountList.guardVirag 
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDT1Name);
+
+    public readonly static EnemyPackInfo ml3GuardsRekaPazmanSurrender = new EnemyPackInfo(new EnemyAmount[] { 
+                                                                                                        EnemyAmountList.overseerGaspar, 
+                                                                                                        EnemyAmountList.guardVirag 
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDT1Name);
+
     public readonly static EnemyPackInfo executionerTest = new EnemyPackInfo(new EnemyAmount[] { 
                                                                                                         EnemyAmountList.oneExecutioner, 
                                                                                                        },

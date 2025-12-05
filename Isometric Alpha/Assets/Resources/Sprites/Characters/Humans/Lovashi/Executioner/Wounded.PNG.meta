@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fc006a10dac95fb4493d8b8f3788ac00
+guid: 207d6b9adf80ac14dbec136039665ee0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -46,7 +46,7 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
+  alignment: 9
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a4eef6b1522578448c7281cf1fe95f3
-      internalID: -1277225698
+      spriteID: 62b17cd0806344749a977cace94ee3ae
+      internalID: -2054237115
       vertices: []
       indices: 
       edges: []
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf3b6428d5174b94ea725a73ed6235d9
-      internalID: 2072795017
+      spriteID: e428335b7b5dca741bd3d7cf7b63d6d8
+      internalID: -220156677
       vertices: []
       indices: 
       edges: []
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 682a28b7ab618c048bde4f45e70d7c26
-      internalID: -1885671982
+      spriteID: 87bf4edb050d7414ba6976615e8d0245
+      internalID: 1685042754
       vertices: []
       indices: 
       edges: []
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ffe42a4969c68e64d9db24bed55e46c7
-      internalID: 1679828433
+      spriteID: 3012e597e764cc44f965afbaa162e752
+      internalID: -1043007672
       vertices: []
       indices: 
       edges: []
@@ -195,8 +195,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74bd2d85835a9d64e879e777ce2c47fe
-      internalID: -726069671
+      spriteID: aa75e5438af71c44ab5a5f26efd4b6ad
+      internalID: -1950416346
       vertices: []
       indices: 
       edges: []
@@ -212,11 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Wounded_0: -1277225698
-      Wounded_1: 2072795017
-      Wounded_2: -1885671982
-      Wounded_3: 1679828433
-      Wounded_4: -726069671
+      Wounded_0: -2054237115
+      Wounded_1: -220156677
+      Wounded_2: 1685042754
+      Wounded_3: -1043007672
+      Wounded_4: -1950416346
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -14,7 +14,7 @@ public static class TestScript
         // State.debugStopMonsterSpawning = true;
         // State.debugDiscoverAllLocations = true;
         // State.debugRetreatAutoSucceed = true;
-        State.enableGridDebugger = true;
+        // State.enableGridDebugger = true;
 
         // PartyManager.getPartyMember(NPCNameList.thatch).canJoinParty = true;
 
@@ -34,8 +34,7 @@ public static class TestScript
         // Flags.flags["charismaBarricadePassUsed"] = false;
         // Flags.flags["andrasBarricadePassUsed"] = false;
 
-        // PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
-        // PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
+        PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
 
         //Flags.flags["seenHostilityTutorial"] = false;
         //Flags.flags["seenCombatTutorial"] = false;

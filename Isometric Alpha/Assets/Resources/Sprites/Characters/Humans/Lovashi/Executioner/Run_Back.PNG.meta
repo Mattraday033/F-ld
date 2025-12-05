@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d2ca804b9c7416040b6ccd972ecc1439
+guid: 70d7ba8092ee7134389b3b7e62c19a0f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -46,7 +46,7 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
+  alignment: 9
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -70,7 +70,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 16384
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a17188aa80934349ba44dff109708c5
-      internalID: 1126452575
+      spriteID: 614bcb8e606480b4183f06d894be013e
+      internalID: 333387692
       vertices: []
       indices: 
       edges: []
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 486a9d409dcf01c4192f40a571987213
-      internalID: 215639471
+      spriteID: a62dd986ebeaa52419ee44ea35ea0f7d
+      internalID: -1157371318
       vertices: []
       indices: 
       edges: []
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 69423b13b8814054280795f597cc730d
-      internalID: 1522375950
+      spriteID: 398fcc2f4e20be940bd90c9e098dff23
+      internalID: 1418092299
       vertices: []
       indices: 
       edges: []
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10364c29e1633b14cb4ec7c6b1600bfe
-      internalID: 655784788
+      spriteID: a3ad029e41278744082070ea9bc467c6
+      internalID: 1367194351
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Run_Back_0: 1126452575
-      Run_Back_1: 215639471
-      Run_Back_2: 1522375950
-      Run_Back_3: 655784788
+      Run_Back_0: 333387692
+      Run_Back_1: -1157371318
+      Run_Back_2: 1418092299
+      Run_Back_3: 1367194351
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

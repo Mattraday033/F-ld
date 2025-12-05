@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 940810aad2fd5ea489b33b9166f5e3f0
+guid: d9dfbebdb31daa244851a9dcca9c2f1e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -46,7 +46,7 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
+  alignment: 9
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -70,7 +70,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 16384
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa686c767ed43b34dade6f62fd2b0168
-      internalID: 1341600355
+      spriteID: f6a87bb8f9387fa4babb0373680d9c36
+      internalID: -2067597315
       vertices: []
       indices: 
       edges: []
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c5b48327cdb09b40bad424ef208c0d1
-      internalID: -706847715
+      spriteID: 45cbe36c33846de4e853aa9fef5dc58c
+      internalID: -271217857
       vertices: []
       indices: 
       edges: []
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee18baac3fe73c84e9f37d975d8ea4a0
-      internalID: 1278229734
+      spriteID: fd0d61f47c1caae49a818f1bd8e927f2
+      internalID: -1457446460
       vertices: []
       indices: 
       edges: []
@@ -174,92 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef98217612d542040b1fa52d44a2fbc5
-      internalID: 602074859
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: OOC_Idle_Back_4
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.27}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5080f419fbd4db4439ba3c0c3a84b9ec
-      internalID: 989991250
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: OOC_Idle_Back_5
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.27}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9442d6bdd5ce1b24fbc38a4d6ecddef6
-      internalID: 1395678701
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: OOC_Idle_Back_6
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.27}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c25170c56f894f64f81f29f163a74066
-      internalID: -569209121
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: OOC_Idle_Back_7
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.27}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 970f74a091ea46942bf4dd5d30403f7e
-      internalID: -2130228443
+      spriteID: 3dd547b112a236547a70df54ffda06e1
+      internalID: -632870886
       vertices: []
       indices: 
       edges: []
@@ -275,14 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      OOC_Idle_Back_0: 1341600355
-      OOC_Idle_Back_1: -706847715
-      OOC_Idle_Back_2: 1278229734
-      OOC_Idle_Back_3: 602074859
-      OOC_Idle_Back_4: 989991250
-      OOC_Idle_Back_5: 1395678701
-      OOC_Idle_Back_6: -569209121
-      OOC_Idle_Back_7: -2130228443
+      OOC_Idle_Back_0: -2067597315
+      OOC_Idle_Back_1: -271217857
+      OOC_Idle_Back_2: -1457446460
+      OOC_Idle_Back_3: -632870886
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

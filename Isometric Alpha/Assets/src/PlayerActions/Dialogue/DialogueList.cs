@@ -36,8 +36,8 @@ public static class DialogueList
         dialogueList = new Dictionary<string, Dialogue>();
 
         #region Dialogues not attached to NPC's
-        // addDialogueToList(DialogueNameList.nandorAfterKillingGuardsMineLvl3Key,
-        //                  new Dialogue(new string[] { "", "Nándor", "Carter", "Guard Márcos", "Guard Pázmán", "Guard Réka" }, new GameObject[6], Resources.Load<TextAsset>(DialogueNameList.nandorAfterKillingGuardsMineLvl3Key)));
+        // addDialogueToList(DialogueNameList.afterKillingGuardsMineLvl3Key,
+        //                  new Dialogue(new string[] { "", "Nándor", "Carter", "Guard Márcos", "Guard Pázmán", "Guard Réka" }, new GameObject[6], Resources.Load<TextAsset>(DialogueNameList.afterKillingGuardsMineLvl3Key)));
 
         // addDialogueToList(DialogueNameList.slavesAfterKillingOverseerCampNEKey,
         //                  new Dialogue(new string[] { "", "Nándor", "Carter", "Garcha", "Janos", "Clay", "Slave 1", "Slave 2", "Slave 3", "Slave 4", "The Crowd", "AfterOverseerParent" }, new GameObject[12], Resources.Load<TextAsset>(DialogueNameList.slavesAfterKillingOverseerCampNEKey)));
@@ -515,21 +515,6 @@ public static class DialogueList
         addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section7, NPCNameList.rubble, 
                                                                                 new Dialogue(new string[] { 
                                                                                                             NPCNameList.rubble,
-                                                                                                            NPCNameList.rubble+1,
-                                                                                                            NPCNameList.guardPazman,
-                                                                                                            NPCNameList.guardReka,
-                                                                                                            NPCNameList.guardVirag,
-                                                                                                            NPCNameList.overseerGaspar,
-                                                                                                            NPCNameList.carter,
-                                                                                                            NPCNameList.nandor,
-                                                                                                            NPCNameList.guardMarcos,
-                                                                                                            NPCNameList.guardMarcos+1
-                                                                                                        },
-                                                                                Resources.Load<TextAsset>(DialogueNameList.pocketRubblePathML3)));
-
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section7, NPCNameList.rubble+1, 
-                                                                                new Dialogue(new string[] { 
-                                                                                                            NPCNameList.rubble+1,
                                                                                                             NPCNameList.rubble,
                                                                                                             NPCNameList.guardPazman,
                                                                                                             NPCNameList.guardReka,
@@ -540,7 +525,33 @@ public static class DialogueList
                                                                                                             NPCNameList.guardMarcos,
                                                                                                             NPCNameList.guardMarcos+1
                                                                                                         },
-                                                                                Resources.Load<TextAsset>(DialogueNameList.pocketRubblePathML3)));
+                                                                                Resources.Load<TextAsset>(DialogueNameList.pocketRubblePathML3),
+                                                                                DialogueCombatInfoList.breachRubbleCombatInfo));
+
+        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section7, DialogueNameList.afterKillingGuardsMineLvl3Key, 
+                                                                                new Dialogue(new string[] { 
+                                                                                                            NPCNameList.nandor,
+                                                                                                            NPCNameList.carter,
+                                                                                                            NPCNameList.guardMarcos,
+                                                                                                            NPCNameList.guardPazman,
+                                                                                                            NPCNameList.guardReka
+                                                                                                        },
+                                                                                Resources.Load<TextAsset>(DialogueNameList.afterKillingGuardsMineLvl3Path)));
+
+        // addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section7, NPCNameList.rubble+1, 
+        //                                                                         new Dialogue(new string[] { 
+        //                                                                                                     NPCNameList.rubble+1,
+        //                                                                                                     NPCNameList.rubble,
+        //                                                                                                     NPCNameList.guardPazman,
+        //                                                                                                     NPCNameList.guardReka,
+        //                                                                                                     NPCNameList.guardVirag,
+        //                                                                                                     NPCNameList.overseerGaspar,
+        //                                                                                                     NPCNameList.carter,
+        //                                                                                                     NPCNameList.nandor,
+        //                                                                                                     NPCNameList.guardMarcos,
+        //                                                                                                     NPCNameList.guardMarcos+1
+        //                                                                                                 },
+        //                                                                         Resources.Load<TextAsset>(DialogueNameList.pocketRubblePathML3)));
         #endregion
 
         #endregion

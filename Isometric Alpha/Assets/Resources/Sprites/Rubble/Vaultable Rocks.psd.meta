@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 16
     mipBias: 0
     wrapU: 1
@@ -53,7 +53,7 @@ TextureImporter:
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: -1
+  spriteTessellationDetail: 0.25
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -69,10 +69,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -123,10 +123,31 @@ TextureImporter:
     serializedVersion: 2
     sprites: []
     outline: []
-    physicsShape: []
+    physicsShape:
+    - - {x: 55, y: -48}
+      - {x: 54, y: -43}
+      - {x: 52, y: -12}
+      - {x: 44, y: -6}
+      - {x: 27, y: 6}
+      - {x: 20, y: 15}
+      - {x: 0, y: 27}
+      - {x: -10, y: 27}
+      - {x: -32, y: 12}
+      - {x: -38, y: -2}
+      - {x: -50, y: -16}
+      - {x: -57, y: -25}
+      - {x: -57, y: -49}
+      - {x: -44, y: -61}
+      - {x: -28, y: -65}
+      - {x: -15, y: -69}
+      - {x: -4, y: -71}
+      - {x: 10, y: -71}
+      - {x: 21, y: -70}
+      - {x: 36, y: -68}
+      - {x: 54, y: -62}
     bones: []
     spriteID: c17202ed586f7c349aef86d6498a69dd
-    internalID: 0
+    internalID: -975156904
     vertices: []
     indices: 
     edges: []

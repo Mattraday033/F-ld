@@ -14,23 +14,28 @@ public static class DialogueCombatInfoList
     public readonly static NPCCombatInfo imreCombatInfo = new NPCCombatInfo(new EnemyPackInfo[] { EnemyPackInfoList.imreFight },
                                                                             new DeadNameList[] { new DeadNameList(new string[] { NPCNameList.imre }) });
 
+    public readonly static DeadNameList allMineGuardsDead = new DeadNameList(new string[] { 
+                                                                                            NPCNameList.guardPazman, 
+                                                                                            NPCNameList.pazman, 
+                                                                                            NPCNameList.guardReka,
+                                                                                            NPCNameList.reka,
+                                                                                            NPCNameList.guardVirag,
+                                                                                            NPCNameList.overseerGaspar
+                                                                                          });
+
     public readonly static NPCCombatInfo mineLvl3GuardsCombatInfo = new NPCCombatInfo(new EnemyPackInfo[] { EnemyPackInfoList.ml3GuardsWithBarricades, EnemyPackInfoList.ml3GuardsWithoutBarricades},
-                                                                            new DeadNameList[] { new DeadNameList(new string[] { 
-                                                                                                                                NPCNameList.guardPazman, 
-                                                                                                                                NPCNameList.pazman, 
-                                                                                                                                NPCNameList.guardReka,
-                                                                                                                                NPCNameList.reka,
-                                                                                                                                NPCNameList.guardVirag,
-                                                                                                                                NPCNameList.overseerGaspar
-                                                                                                                                 }),
-                                                                                                 new DeadNameList(new string[] { 
-                                                                                                                                NPCNameList.guardPazman, 
-                                                                                                                                NPCNameList.pazman, 
-                                                                                                                                NPCNameList.guardReka,
-                                                                                                                                NPCNameList.reka,
-                                                                                                                                NPCNameList.guardVirag,
-                                                                                                                                NPCNameList.overseerGaspar
-                                                                                                                                 } ) 
+                                                                            new DeadNameList[] { allMineGuardsDead,
+                                                                                                 allMineGuardsDead
+                                                                                               });
+
+    public readonly static DeadNameList gasparViragDead = new DeadNameList(new string[] { 
+                                                                                            NPCNameList.guardVirag,
+                                                                                            NPCNameList.overseerGaspar
+                                                                                          });
+
+    public readonly static NPCCombatInfo breachRubbleCombatInfo = new NPCCombatInfo(new EnemyPackInfo[] { EnemyPackInfoList.ml3GuardsNoSurrenders, EnemyPackInfoList.ml3GuardsRekaPazmanSurrender},
+                                                                            new DeadNameList[] { allMineGuardsDead,
+                                                                                                 gasparViragDead
                                                                                                });
 
     // new NPCCombatInfo(new EnemyPackInfo[]{     EnemyPackInfoList.halfSlavesNoGuardFight,

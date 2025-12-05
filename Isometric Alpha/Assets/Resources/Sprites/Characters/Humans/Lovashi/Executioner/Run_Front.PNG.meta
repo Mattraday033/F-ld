@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e3ce74d8304c3664fa19a33c5a547897
+guid: 4986cc5936419a64a9ef598755a758c3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -46,7 +46,7 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
+  alignment: 9
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -70,7 +70,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 16384
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab2cc3402aac2f844961212675205421
-      internalID: -501000093
+      spriteID: 4efa4a9d53afe8e4e861525d75d760af
+      internalID: 1278891536
       vertices: []
       indices: 
       edges: []
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f45de1bae4e9a274f98eace40d5002d2
-      internalID: 1235116334
+      spriteID: 659002a4f9442b14e9c35658aa6a3de6
+      internalID: -1679690083
       vertices: []
       indices: 
       edges: []
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04a6b23784ef49348b2b28030bd6dc7e
-      internalID: -823080416
+      spriteID: 2f0b67c7a07c4484aabc650e6e53984c
+      internalID: 324675332
       vertices: []
       indices: 
       edges: []
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 817af818d9353e8438177c83105a9bfd
-      internalID: 1942861819
+      spriteID: 1983846f1cd75c34aa6d45882114f27e
+      internalID: 2036737052
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Run_Front_0: -501000093
-      Run_Front_1: 1235116334
-      Run_Front_2: -823080416
-      Run_Front_3: 1942861819
+      Run_Front_0: 1278891536
+      Run_Front_1: -1679690083
+      Run_Front_2: 324675332
+      Run_Front_3: 2036737052
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

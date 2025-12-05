@@ -1392,7 +1392,8 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
             SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
             addTutorialTargetComponent(gameObject, spriteRenderer, tutorialTargetHash);
         }
-        setMouseHoverTileMap(spriteName, gameObject.transform);
+
+        setMouseHoverTileMap(getSpriteName(), gameObject.transform);
     }
 
     public override void spawnActions(DialogueTrigger dialogueTrigger)

@@ -152,6 +152,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
             return;
         }
 
+        healthBarManager.setLinkedStats(this);
         healthBarManager.setTotalHealth(getTotalHealth());
         healthBarManager.setMissingHealth(getMissingHealth());
         healthBarManager.resetPreviewHealth();
