@@ -4,7 +4,7 @@ VAR wisdom = 0
 VAR charisma = 0
 VAR playerName = ""
 
-VAR strengthRequirement = 2
+VAR strDifficulty = 2
 
 VAR gateKey = ""
 
@@ -17,9 +17,9 @@ VAR rubbleIndex = 1
 This pillar is about to give way. A strong enough push would cause it to tumble, providing a way forward.
 
 
-    +Remove the rubble. <Str {strength}/{strengthRequirement}>
+    +Remove the rubble. <Str {strength}/{strDifficulty}>
     {
-    -strength >= strengthRequirement:
+    -strength >= strDifficulty:
         ->1b
     -else:
         ->1c

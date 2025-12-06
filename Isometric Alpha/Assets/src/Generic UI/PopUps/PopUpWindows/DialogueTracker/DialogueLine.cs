@@ -80,9 +80,9 @@ public class DialogueLine : IDescribable
 		return;
 	}
 
-	public ArrayList getRelatedDescribables()
+	public List<IDescribable> getRelatedDescribables()
 	{
-		return new ArrayList();
+		return new List<IDescribable>();
 	}
 	public bool buildableWithBlocks()
 	{

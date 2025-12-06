@@ -27,7 +27,7 @@ public class RepositionUIManager : MonoBehaviour, INeedsUpdateOnStateChange
 	public Button confirmRepositionButton;
 	public Image repositionCounterImage;
 	
-	public ArrayList combatantSelectionButtonQueue = new ArrayList();
+	public List<GameObject> combatantSelectionButtonQueue = new List<GameObject>();
 	
 	void Start()
 	{
@@ -65,7 +65,7 @@ public class RepositionUIManager : MonoBehaviour, INeedsUpdateOnStateChange
 		repositionGrid.SetActive(activateGrid);
 	}
 	
-	public void addAllCombatantSelectionButtons(ArrayList combatantsToMove)
+	public void addAllCombatantSelectionButtons(List<Stats> combatantsToMove)
 	{
 		foreach(Stats combatant in combatantsToMove)
 		{
@@ -80,7 +80,7 @@ public class RepositionUIManager : MonoBehaviour, INeedsUpdateOnStateChange
 			GameObject.Destroy(statsRepositionGameObject);
 		}
 		
-		combatantSelectionButtonQueue = new ArrayList();
+		combatantSelectionButtonQueue = new List<GameObject>();
 	}
 	
 	public void requeueCombatantSelectionButton(Stats stats)

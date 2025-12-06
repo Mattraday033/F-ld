@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
 public class EquippedItems : IEnumerable
 {
@@ -134,17 +135,17 @@ public class EquippedItems : IEnumerable
         OnEquipmentChange.Invoke();
     }
 
-    public ArrayList createEquippedItemList()
+    public IEnumerable<IDescribable> createEquippedItemList()
     {
-        ArrayList allEquippedItems = new ArrayList();
-        ArrayList equippedMainHandWeapons = new ArrayList();
-        ArrayList equippedArmorPlusOffHand = new ArrayList();
+        List<EquippableItem> allEquippedItems = new List<EquippableItem>();
+        List<EquippableItem> equippedMainHandWeapons = new List<EquippableItem>();
+        List<EquippableItem> equippedArmorPlusOffHand = new List<EquippableItem>();
 
         foreach (CombatAction action in owner.getActionArray().getActions())
         {
             if (action != null && action.getSourceItem() != null && action.getSourceItem().isEquippable())
             {
-                equippedMainHandWeapons.Add(action.getSourceItem());
+                equippedMainHandWeapons.Add(action.getSourceItem() as EquippableItem);
             }
         }
 

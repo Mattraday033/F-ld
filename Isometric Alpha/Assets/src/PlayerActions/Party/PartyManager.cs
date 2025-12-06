@@ -103,41 +103,6 @@ public static class PartyManager
         partyMemberDict.Add(NPCNameList.carter, PartyMemberList.getResetPartyMember(NPCNameList.carter));
     }
 
-    public static ArrayList getAllUnassignedPartyMembers(Stats[][] positionGrid)
-    {
-        ArrayList unassignedPartyMembers = new ArrayList();
-
-        foreach (KeyValuePair<string, PartyMember> kvp in partyMemberDict)
-        {
-            PartyMember partyMember = kvp.Value;
-
-            if (partyMember.canJoinParty && !partyMember.isInParty(positionGrid))
-            {
-                unassignedPartyMembers.Add(partyMember);
-            }
-        }
-
-        return unassignedPartyMembers;
-    }
-
-    public static int getCurrentPartyMemberSlotsUsed()
-    {
-        int usedSlots = 0;
-
-        foreach (Stats[] row in State.formation.getGrid())
-        {
-            foreach (Stats position in row)
-            {
-                if (!(position is null))
-                {
-                    usedSlots++;
-                }
-            }
-        }
-
-        return usedSlots;
-    }
-
     public static void removeAllPartyMembersFromCurrentParty()
     {
         State.formation.removeAllPartyMembers();
@@ -278,23 +243,6 @@ public static class PartyManager
         }
 
         return null;
-    }
-
-    public static ArrayList getAllPossiblePartyMembers()
-    {
-        ArrayList allPossiblePartyMembers = new ArrayList();
-
-        foreach (KeyValuePair<string, PartyMember> kvp in partyMemberDict)
-        {
-            allPossiblePartyMembers.Add(kvp.Value);
-        }
-
-        // while (allPossiblePartyMembers.Count < totalPossiblePartyMembers)
-        // {
-        // 	allPossiblePartyMembers.Add(null);
-        // }
-
-        return allPossiblePartyMembers;
     }
 
     public static void addPlayerStatsToDict(AllyStats playerStats)

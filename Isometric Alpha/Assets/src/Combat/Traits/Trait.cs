@@ -113,7 +113,7 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
         return false;
     }
 
-    public virtual Selector findTargetLocation(Selector selector, ArrayList listOfTargets)
+    public virtual Selector findTargetLocation(Selector selector, List<Stats> listOfTargets)
     {
         return null;
     }
@@ -456,9 +456,9 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
         //empty on purpose
     }
 
-    public static ArrayList getAllTraitTypeGlossaryEntries()
+    public static List<GlossaryEntry> getAllTraitTypeGlossaryEntries()
     {
-        ArrayList allTraitTypesGlossaryEntries = new ArrayList();
+        List<GlossaryEntry> allTraitTypesGlossaryEntries = new List<GlossaryEntry>();
 
         allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Boost", "Trait Types", "These traits provide offensive effects, like increasing speed or damage dealt."));
         allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Charge", "Trait Types", "These traits allow the creature to cast powerful abilities."));
@@ -570,9 +570,9 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
 
     }
 
-    public virtual ArrayList getRelatedDescribables()
+    public virtual List<IDescribable> getRelatedDescribables()
     {
-        return new ArrayList();
+        return new List<IDescribable>();
     }
 
     public bool buildableWithBlocks()

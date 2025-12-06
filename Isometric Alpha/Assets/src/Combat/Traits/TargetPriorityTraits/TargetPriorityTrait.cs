@@ -34,7 +34,7 @@ public class TargetPriorityTrait : Trait
 		return true;
 	}
 	
-	public override Selector findTargetLocation(Selector selector, ArrayList listOfTargets)
+	public override Selector findTargetLocation(Selector selector, List<Stats> listOfTargets)
 	{
 		Selector selectorOnTarget = selector.clone();
 		Stats mandatoryTarget = getMandatoryTarget(listOfTargets);
@@ -57,7 +57,7 @@ public class TargetPriorityTrait : Trait
 		}
 	}
 	
-	public virtual Stats getMandatoryTarget(ArrayList listOfTargets)
+	public virtual Stats getMandatoryTarget(List<Stats> listOfTargets)
 	{
 		foreach(Stats target in listOfTargets)
 		{

@@ -152,6 +152,13 @@ public static class SpawnParamList
 
         #endregion
 
+        #region MessHall
+
+        InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.messHall, NPCNameList.kende),
+                                new InteractableSpawnParams(revoltStartedStopSpawning));
+
+        #endregion
+
         #region Stables
 
         InteractableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.stables, NPCNameList.beam),

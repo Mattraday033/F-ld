@@ -112,8 +112,8 @@ public class CunningManager : SkillManager
 
     public void cullSkillArea()
     {
-        ArrayList snake;
-        ArrayList colliderIndicators = new ArrayList();
+        List<Vector2Int> snake;
+        List<Vector2Int> colliderIndicators = new List<Vector2Int>();
 
         for (int i = 0; i < getRange(); i++)
         {
@@ -138,11 +138,11 @@ public class CunningManager : SkillManager
         }
     }
 
-    private ArrayList snakeTowardCenter(Vector2Int start)
+    private List<Vector2Int> snakeTowardCenter(Vector2Int start)
     {
         Vector2Int currentCoords = start;
 
-        ArrayList snake = new ArrayList();
+        List<Vector2Int> snake = new List<Vector2Int>();
 
         while (currentCoords.x != getMiddleOfRange() || currentCoords.y != getMiddleOfRange())
         {
@@ -161,15 +161,15 @@ public class CunningManager : SkillManager
         return snake;
     }
 
-    private ArrayList cullSnake(ArrayList snake)
+    private List<Vector2Int> cullSnake(List<Vector2Int> snake)
     {
         bool foundCollider = false;
-        ArrayList colliderIndicators = new ArrayList();
+        List<Vector2Int> colliderIndicators = new List<Vector2Int>();
 
-        for (int i = (snake.Count - 1); i >= 0; i--)
+        for (int i = snake.Count - 1; i >= 0; i--)
         {
-            Vector2Int currentCoords = (Vector2Int)snake[i];
-            snake.Remove(i);
+            Vector2Int currentCoords = snake[i];
+            snake.RemoveAt(i);
 
             if (skillGrid[currentCoords.x, currentCoords.y] == null)
             {

@@ -46,9 +46,9 @@ public class MapInterior : MapLocation
         return exteriorSceneName;
     }
 
-	public override ArrayList getAllQuestsInLocation()
+	public override List<QuestStep> getAllQuestStepsInLocation()
 	{
-		return QuestList.getActiveQuestsWithObjectivesInScene(locationName);
+		return QuestList.getActiveQuestStepsWithObjectivesInScene(locationName);
 	}
 
 }

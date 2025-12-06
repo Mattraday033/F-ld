@@ -30,7 +30,7 @@ public static class State
 	public static bool onLeftFoot;
 
     public static TransitionInfo currentSourceTransitionInfo;
-	public static Dictionary<string, ArrayList> allKnownMapData = new Dictionary<string, ArrayList>();
+	public static Dictionary<string, List<string>> allKnownMapData = new Dictionary<string, List<string>>();
 
 	public static bool enteredCombatFromDialogue = false;
 	public static string dialogueUponSceneLoadKey;

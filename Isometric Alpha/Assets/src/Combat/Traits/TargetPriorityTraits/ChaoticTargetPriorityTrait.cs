@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class ChaoticTargetPriorityTrait : TargetPriorityTrait
 {
-	private static string initialName = "Chaotic";
-	private static string initialTraitDescription = "This creature chooses it's targets at random. Ignores summons.";
-	private static string initialTraitIconName = "Dice";
-	private static Color initialIconBackgroundColor = Color.blue;
+	private const string initialName = "Chaotic";
+	private const string initialTraitDescription = "This creature chooses it's targets at random. Ignores summons.";
+	private const string initialTraitIconName = "Dice";
+	private readonly static Color initialIconBackgroundColor = Color.blue;
 	
 	public ChaoticTargetPriorityTrait(): base(initialName, initialTraitDescription, initialTraitIconName, initialIconBackgroundColor)
 	{
@@ -20,7 +20,7 @@ public class ChaoticTargetPriorityTrait : TargetPriorityTrait
 		return false;
 	}
 	
-	public override Stats getMandatoryTarget(ArrayList listOfTargets)
+	public override Stats getMandatoryTarget(List<Stats> listOfTargets)
 	{
 		listOfTargets = scrubSummonsFromTargetList(listOfTargets);
 		
@@ -36,9 +36,9 @@ public class ChaoticTargetPriorityTrait : TargetPriorityTrait
 		return mandatoryTarget;
 	}
 	
-	private ArrayList scrubSummonsFromTargetList(ArrayList listOfTargets)
+	private List<Stats> scrubSummonsFromTargetList(List<Stats> listOfTargets)
 	{
-		ArrayList newListOfTargets = new ArrayList();
+		List<Stats> newListOfTargets = new List<Stats>();
 
 		foreach(Stats target in listOfTargets)
 		{

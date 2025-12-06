@@ -30,7 +30,7 @@ public class HoverPanel : PopUpWindow, IEscapable
 	{
 		descriptionPanelSlot.setPrimaryDescribable(combatant);
 
-		ArrayList traitList = new ArrayList();
+		List<Trait> traitList = new List<Trait>();
 		traitList.AddRange(combatant.traits);
 
 		traitDisplay.populatePanels(traitList);

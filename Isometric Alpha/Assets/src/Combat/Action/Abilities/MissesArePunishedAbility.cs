@@ -13,7 +13,7 @@ public class MissesArePunishedAbility : Ability
 
 	}
 
-    public override void performCombatAction(ArrayList targets)
+    public override void performCombatAction(List<Stats> targets)
     {
         bool hasTargets = false;
 

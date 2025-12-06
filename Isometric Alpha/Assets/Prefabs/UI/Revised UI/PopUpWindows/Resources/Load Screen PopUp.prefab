@@ -435,6 +435,7 @@ MonoBehaviour:
   columnHeader: {fileID: 7652531619728354850}
   sortPanels: 1
   defaultSortBy: 1
+  listOfRows: []
   objectsDisabledWithSlider:
   - {fileID: 1193568135053859185}
 --- !u!1 &1193568135053859185
@@ -2256,7 +2257,7 @@ MonoBehaviour:
   - {fileID: 8101125153382937182}
   - {fileID: 4376095962963234160}
   - {fileID: 793867159723551072}
-  defaultSortBy: 0
+  defaultSortBy: 6
   clickDefaultHeader: 1
   setAllHeadersToUninteractable: 1
 --- !u!1 &4016614292964635617

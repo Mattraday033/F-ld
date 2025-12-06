@@ -25,7 +25,7 @@ public class LowestHealthEnemySideTargetPriorityTrait : TargetPriorityTrait
 
 	}
 
-	public override Stats getMandatoryTarget(ArrayList listOfTargets)
+	public override Stats getMandatoryTarget(List<Stats> listOfTargets)
 	{
 		listOfTargets = CombatGrid.getAllAliveEnemyCombatants();
 
@@ -59,7 +59,7 @@ public class LowestHealthEnemySideTargetPriorityTrait : TargetPriorityTrait
 		return sortedTargets.Where(x => x.healthRatio == sortedTargets.Min(y => y.healthRatio)).ToList();
 	}
 
-	private List<TargetHealthRatio> orderTargetsByHealthMissing(ArrayList listOfTargets)
+	private List<TargetHealthRatio> orderTargetsByHealthMissing(List<Stats> listOfTargets)
 	{
 		List<TargetHealthRatio> targetHealthDictionary = new List<TargetHealthRatio>();
 

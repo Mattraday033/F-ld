@@ -40,7 +40,7 @@ public class LastManStandingAbility : ChargeUpAbility
 		actionWhenCharged.setTargetCoords(newTargetCoords);
 	}
 	*/
-	public override void performCombatAction(ArrayList targets)
+	public override void performCombatAction(List<Stats> targets)
 	{
 		if(isCharged())
 		{

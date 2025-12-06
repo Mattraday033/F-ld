@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Stance: ActivatedPassive
+public class Stance: EquippedPassive
 {
     public const string stanceNameFragment = "Stance";
 	public static UnityEvent OnStanceApplyingWeaponAttack = new UnityEvent();

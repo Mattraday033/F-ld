@@ -159,12 +159,11 @@ public static class AbilityList
 	public readonly static GroundEffect wormFumesGroundEffect = new GroundEffect("6", 4, GridCoords.getDefaultCoords(), Resources.Load<GameObject>(wormFumesIndicatorName));
 	
 	public static Dictionary<string,Ability> statAbilityDictionary;
-	public static Dictionary<string,Ability> lessonAbilityDictionary;
 	public static Dictionary<string,Ability> summonAbilityDictionary;
 	public static Dictionary<string,Ability> enemyAbilityDictionary;
 	public static Dictionary<string,Ability> miscAbilityDictionary;
 
-    public static Dictionary<string, ArrayList> companionAbilityDictionary;
+    public static Dictionary<string, List<CombatAction>> companionAbilityDictionary;
 	
     private static void initializeAbilityListAtRunTime()
     {
@@ -182,7 +181,6 @@ public static class AbilityList
     public static void initialize()
     {
         if(statAbilityDictionary != null &&
-            lessonAbilityDictionary != null &&
             summonAbilityDictionary != null &&
             enemyAbilityDictionary != null &&
             miscAbilityDictionary != null &&
@@ -193,8 +191,6 @@ public static class AbilityList
 
         instantiateStatAbilities();
 	
-		instantiateLessonAbilities();
-
 		instantiateCompanionAbilities();
 		
 		instantiateSummonAbilities();
@@ -294,7 +290,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		currentKey = generateAbilityKey(strengthKeyChar);
-        statAbilityDictionary.Add(currentKey, new ActivatedPassive(CombatActionSettings.build(currentKey, TraitList.intimidatingPressence)));
+        statAbilityDictionary.Add(currentKey, new EquippedPassive(CombatActionSettings.build(currentKey, TraitList.intimidatingPressence)));
 		statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		currentKey = "s-2-3";
@@ -314,7 +310,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(strengthKeyChar);
-        statAbilityDictionary.Add(currentKey, new ActivatedPassive(CombatActionSettings.build(currentKey, TraitList.bloodlust)));
+        statAbilityDictionary.Add(currentKey, new EquippedPassive(CombatActionSettings.build(currentKey, TraitList.bloodlust)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         //start of Dex Abilities
@@ -323,7 +319,7 @@ public static class AbilityList
 		statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(dexterityKeyChar);
-        statAbilityDictionary.Add(currentKey, new ActivatedPassive(CombatActionSettings.build(currentKey, TraitList.devastatingCriticals, new Trait[] { TraitList.afraid })));
+        statAbilityDictionary.Add(currentKey, new EquippedPassive(CombatActionSettings.build(currentKey, TraitList.devastatingCriticals, new Trait[] { TraitList.afraid })));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(dexterityKeyChar);
@@ -339,7 +335,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(dexterityKeyChar);
-        statAbilityDictionary.Add(currentKey, new ActivatedPassive(CombatActionSettings.build(currentKey, TraitList.predation)));
+        statAbilityDictionary.Add(currentKey, new EquippedPassive(CombatActionSettings.build(currentKey, TraitList.predation)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(dexterityKeyChar);
@@ -383,7 +379,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(charismaKeyChar);
-        statAbilityDictionary.Add(currentKey, new ExuberanceActivatedPassive(CombatActionSettings.build(currentKey, DescriptionParams.build(unflinchingName, "You are fearless in battle, and your companions know it. Gain "+fourStackBonus+" stacks of the Red Knife Exuberance at the start of every combat.", "Red Knife")), MultiStackProcType.RedKnife, fourStackBonus));	
+        statAbilityDictionary.Add(currentKey, new ExuberanceEquippedPassive(CombatActionSettings.build(currentKey, DescriptionParams.build(unflinchingName, "You are fearless in battle, and your companions know it. Gain "+fourStackBonus+" stacks of the Red Knife Exuberance at the start of every combat.", "Red Knife")), MultiStackProcType.RedKnife, fourStackBonus));	
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = "c-2-3";
@@ -403,7 +399,7 @@ public static class AbilityList
         // statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		currentKey = "c-3-3";
-        statAbilityDictionary.Add(currentKey, new ExuberanceActivatedPassive(CombatActionSettings.build(currentKey, DescriptionParams.build(versatileName, "Your companions have come to rely on you in a variety of situations. Gain "+oneStackBonus+" stack of each Exuberance type at the start of every combat.", "Blue Shield")), new MultiStackProcType[] { MultiStackProcType.RedKnife, MultiStackProcType.BlueShield, MultiStackProcType.YellowThorn, MultiStackProcType.GreenLeaf}, new int[]{oneStackCastCost,oneStackCastCost,oneStackCastCost,oneStackCastCost}));	
+        statAbilityDictionary.Add(currentKey, new ExuberanceEquippedPassive(CombatActionSettings.build(currentKey, DescriptionParams.build(versatileName, "Your companions have come to rely on you in a variety of situations. Gain "+oneStackBonus+" stack of each Exuberance type at the start of every combat.", "Blue Shield")), new MultiStackProcType[] { MultiStackProcType.RedKnife, MultiStackProcType.BlueShield, MultiStackProcType.YellowThorn, MultiStackProcType.GreenLeaf}, new int[]{oneStackCastCost,oneStackCastCost,oneStackCastCost,oneStackCastCost}));	
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		currentKey = generateAbilityKey(charismaKeyChar);
@@ -415,33 +411,23 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey); 
     }
 	
-	private static void instantiateLessonAbilities()
-	{
-		lessonAbilityDictionary = new Dictionary<string,Ability>();
-		string currentKey;
-		
-		currentKey = LessonList.clayRemorseKey;
-
-        lessonAbilityDictionary.Add(currentKey, new ActivatedPassive(CombatActionSettings.build(currentKey, TraitList.wearyHeart)));
-	}
-	
 	private static void instantiateCompanionAbilities()
 	{
-		companionAbilityDictionary = new Dictionary<string,ArrayList>();
+		companionAbilityDictionary = new Dictionary<string,List<CombatAction>>();
 		
-		ArrayList listOfNandorAbilities = new ArrayList();
+		List<CombatAction> listOfNandorAbilities = new List<CombatAction>();
         listOfNandorAbilities.Add(new RepositionEnemyAbility(CombatActionSettings.build(NPCNameList.nandor, DescriptionParams.build("Rolling Throw", "Leverage the enemy's body as a fulcrum and fling them to the ground. The enemy cannot act this turn.", "Trip"), DamageParams.build("4 + 3C", "5 + C"), FrequencyParams.build(oneSlotMax, fourRoundCooldown), TraitList.tripped)));
 
         listOfNandorAbilities.Add(new KnockBackAbility(CombatActionSettings.build(NPCNameList.nandor, DescriptionParams.build("Push", "The companion forces an opponent backwards, dealing damage to the opponent and anyone they are pushed into."), DamageParams.build("4 + 3C", "5 + C"), FrequencyParams.build(oneSlotMax, fiveRoundCooldown)), fiftyPercentPerSquare));
 
-        listOfNandorAbilities.Add(new ActivatedPassive(CombatActionSettings.build(NPCNameList.nandor, TraitList.persistentInfluence)));
+        listOfNandorAbilities.Add(new EquippedPassive(CombatActionSettings.build(NPCNameList.nandor, TraitList.persistentInfluence)));
 
         listOfNandorAbilities.Add(new ReviveAbility(CombatActionSettings.build(NPCNameList.nandor, DescriptionParams.build("On Your Feet!", "Cutting an inspiring figure, the companion brings some of the formation back from the brink of submission. Every companion in this ability's area that is downed is healed and put back on their feet.", "OnYourFeet"), DamageParams.build("50"), FrequencyParams.build(oneSlotMax, fiveRoundCooldown))));
 
 		companionAbilityDictionary.Add(NPCNameList.nandor,listOfNandorAbilities);
 		
 		
-		ArrayList listOfRedAbilities = new ArrayList();
+		List<CombatAction> listOfRedAbilities = new List<CombatAction>();
 		
 		listOfRedAbilities.Add(new CompanionAttack(NPCNameList.thatch,"Backhanded Swing","TwoHandedPickReversed",Range.tripleReverseHookIndex, "A swing of Thatch's pick in the opposite direction."));
 
@@ -449,20 +435,20 @@ public static class AbilityList
 
 		//listOfRedAbilities.Add(new Ability(CombatActionSettings.build(NPCNameList.thatch, DescriptionParams.build("Stonewall", "The caster and every ally within the caster's Zone of Influence take 75% less damage until the next turn. Best used early in the turn order. Has a long cooldown."), TargetParams.build(Range.quintupleCrossIndex, isSelfTargeting), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), TraitList.stonewall)));
 
-		listOfRedAbilities.Add(new ActivatedPassive(CombatActionSettings.build(NPCNameList.thatch, TraitList.stalwartInfluence)));
+		listOfRedAbilities.Add(new EquippedPassive(CombatActionSettings.build(NPCNameList.thatch, TraitList.stalwartInfluence)));
 
         listOfRedAbilities.Add(new RepositionSelfAbility(CombatActionSettings.build(NPCNameList.thatch, DescriptionParams.build("Daring Sacrifice", "Become invulnerable for one turn. All enemy attack patterns must include this creature when possible, even if they normally would not.", "DaringSacrifice"), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), TraitList.daringSacrifice)));
 		
 		companionAbilityDictionary.Add(NPCNameList.thatch,listOfRedAbilities);
 		
 		
-		ArrayList listOfCarterAbilities = new ArrayList();
+		List<CombatAction> listOfCarterAbilities = new List<CombatAction>();
 
         listOfCarterAbilities.Add(new Ability(CombatActionSettings.build(NPCNameList.carter, DescriptionParams.build("Bristle Bomb", "The caster throws a bomb, damaging the targets and leaving them bristling with needles."), DamageParams.build("2 + 2C", "4 + C"), TargetParams.build(Range.quadrupleBoxIndex), FrequencyParams.build(oneSlotMax, fourRoundCooldown), TraitList.bristled)));
 
         listOfCarterAbilities.Add(new Ability(CombatActionSettings.build(NPCNameList.carter, DescriptionParams.build("Upside The Head", "The caster gives the target a good thwacking, taking it out of commision for three rounds. Only usable in the suprise round."), DamageParams.build("2 + 2C", "4 + C"), FrequencyParams.build(oneSlotMax, noCooldown, !FrequencyParams.usableOutsideSurpriseRound), TraitList.upsideTheHead)));
 
-        listOfCarterAbilities.Add(new ActivatedPassive(CombatActionSettings.build(NPCNameList.carter, TraitList.cleverInfluence))); 
+        listOfCarterAbilities.Add(new EquippedPassive(CombatActionSettings.build(NPCNameList.carter, TraitList.cleverInfluence))); 
 
         listOfCarterAbilities.Add(new TraitBasedDamageAbility(CombatActionSettings.build(NPCNameList.carter, DescriptionParams.build("Bouncing Blade", "The companion throws his blade, striking multiple targets in a line and dealing extra damage per additional trait applied to the target.", "BouncingBlade"), DamageParams.build("25 + 3C", "28"), TargetParams.build(Range.quadrupleVerticalIndex), FrequencyParams.build(oneSlotMax, fiveRoundCooldown)), 0.25));
 		
@@ -488,9 +474,9 @@ public static class AbilityList
 	
 	public static CombatAction getCompanionAbility(string name, int abilityIndex) 
 	{
-		ArrayList listOfAbilities = companionAbilityDictionary[name];
+		List<CombatAction> listOfAbilities = companionAbilityDictionary[name];
 		
-		return ((CombatAction) listOfAbilities[abilityIndex]);
+		return listOfAbilities[abilityIndex];
 	}
 	
 	private static string generateAbilityKey(char abilityKeyChar)
@@ -559,41 +545,18 @@ public static class AbilityList
     {
         initialize();
 
-		Ability ability = null;
-			
-		statAbilityDictionary.TryGetValue(key, out ability);
-		
-		if(ability != null)
+		if(statAbilityDictionary.ContainsKey(key))
 		{
-			return ability.clone(statSource);
-		}
-		
-		lessonAbilityDictionary.TryGetValue(key, out ability);
-		
-		if(ability != null)
+            return statAbilityDictionary[key].clone(statSource);
+		} else if(enemyAbilityDictionary.ContainsKey(key))
 		{
-			return ability.clone(statSource);
-		}
-		
-		enemyAbilityDictionary.TryGetValue(key, out ability);
-		
-		if(ability != null)
+            return enemyAbilityDictionary[key].clone(statSource);
+		}else if(summonAbilityDictionary.ContainsKey(key))
 		{
-			return ability.clone(statSource);
-		}
-		
-		summonAbilityDictionary.TryGetValue(key, out ability);
-		
-		if(ability != null)
+            return summonAbilityDictionary[key].clone(statSource);
+		}else if(miscAbilityDictionary.ContainsKey(key))
 		{
-			return ability.clone(statSource);
-		}
-		
-		miscAbilityDictionary.TryGetValue(key, out ability);
-		
-		if(ability != null)
-		{
-			return ability.clone(statSource);
+            return miscAbilityDictionary[key].clone(statSource);
 		}
 		
 		if(key.Contains(ItemList.fistKey))
@@ -604,52 +567,32 @@ public static class AbilityList
 		throw new IOException("The key '"+key+"' does not exist."); 
 	}
 	
-	// public static ArrayList getAllAvailableStrengthAbilities()
-	// {
-	// 	return getAllAvailableAbilitiesOfStat(strengthKeyChar, State.playerStats.getStrength());
-	// }
-	
-	// public static ArrayList getAllAvailableDexterityAbilities()
-	// {
-	// 	return getAllAvailableAbilitiesOfStat(dexterityKeyChar, State.playerStats.getDexterity());
-	// }
-	
-	// public static ArrayList getAllAvailableWisdomAbilities()
-	// {
-	// 	return getAllAvailableAbilitiesOfStat(wisdomKeyChar, State.playerStats.getWisdom());
-	// }
-	
-	// public static ArrayList getAllAvailableCharismaAbilities()
-	// {
-	// 	return getAllAvailableAbilitiesOfStat(charismaKeyChar, State.playerStats.getCharisma());
-	// }
-	
-	public static ArrayList getAllStrengthAbilities()
+	public static List<CombatAction> getAllStrengthAbilities()
 	{
 		return getAllAvailableAbilitiesOfStat(strengthKeyChar, AllyStats.statMaximum);
 	}
 	
-	public static ArrayList getAllDexterityAbilities()
+	public static List<CombatAction> getAllDexterityAbilities()
 	{
 		return getAllAvailableAbilitiesOfStat(dexterityKeyChar, AllyStats.statMaximum);
 	}
 	
-	public static ArrayList getAllWisdomAbilities()
+	public static List<CombatAction> getAllWisdomAbilities()
 	{
 		return getAllAvailableAbilitiesOfStat(wisdomKeyChar, AllyStats.statMaximum);
 	}
 	
-	public static ArrayList getAllCharismaAbilities()
+	public static List<CombatAction> getAllCharismaAbilities()
 	{
 		return getAllAvailableAbilitiesOfStat(charismaKeyChar, AllyStats.statMaximum);
 	}
 
-    public static ArrayList getAllAvailableAbilitiesOfStat(char keyChar, int highestLevel)
+    public static List<CombatAction> getAllAvailableAbilitiesOfStat(char keyChar, int highestLevel)
     {
         return getAllAvailableAbilitiesOfStat(keyChar, lowestLevelForAbilities, highestLevel);
     }
 
-    public static ArrayList getAllAvailableAbilitiesOfStat(StatType type, int lowestLevel, int highestLevel)
+    public static List<CombatAction> getAllAvailableAbilitiesOfStat(StatType type, int lowestLevel, int highestLevel)
 	{
         switch (type)
 		{
@@ -666,9 +609,9 @@ public static class AbilityList
 		}
     }
 
-    private static ArrayList getAllAvailableAbilitiesOfStat(char keyChar, int lowestLevel, int highestLevel)
+    private static List<CombatAction> getAllAvailableAbilitiesOfStat(char keyChar, int lowestLevel, int highestLevel)
 	{
-		ArrayList availableAbilities = new ArrayList();
+		List<CombatAction> availableAbilities = new List<CombatAction>();
 		
 		for(int currentLevel = lowestLevel; currentLevel <= highestLevel; currentLevel++)
 		{

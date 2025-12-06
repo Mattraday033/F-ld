@@ -183,9 +183,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	private const int moveThreshold = 7;
 
 	public Dictionary<Vector3Int, bool> dictionaryOfSegments = new Dictionary<Vector3Int, bool>();
-	public ArrayList gizmosToDraw = new ArrayList();
-
-	public GameObject hoverTarget;
+	public List<Vector3Int> gizmosToDraw = new List<Vector3Int>();
 
     private void Awake()
     {
@@ -364,12 +362,12 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	public PathToPlayer findPathToPlayer()
 	{
 		dictionaryOfSegments = new Dictionary<Vector3Int, bool>();
-		ArrayList listOfPaths = new ArrayList();
+		List<PathToPlayer> listOfPaths = new List<PathToPlayer>();
 		Vector3Int playerCoords = PlayerMovement.getMovementGridCoords();
 		PathSegment firstPathSegment = new PathSegment(AreaManager.getMasterGrid().WorldToCell(transform.position));
 		dictionaryOfSegments.Add(firstPathSegment.coords, true);
 		PathToPlayer firstPathToPlayer = new PathToPlayer(firstPathSegment);
-		gizmosToDraw = new ArrayList();
+		gizmosToDraw = new List<Vector3Int>();
 
 		gizmosToDraw.Add(firstPathToPlayer.firstSegment.coords);
 
@@ -480,9 +478,9 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 		}
 	}
 
-	public ArrayList getAllLegalMoves()
+	public List<Vector3Int> getAllLegalMoves()
 	{
-		ArrayList legalMoves = new ArrayList();
+		List<Vector3Int> legalMoves = new List<Vector3Int>();
 
 		foreach (Vector3Int dirMod in MovementManager.allDirectionVectors)
 		{
@@ -505,7 +503,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 		}
 		else
 		{
-			ArrayList legalMoves = getAllLegalMoves();
+			List<Vector3Int> legalMoves = getAllLegalMoves();
 
 			if (legalMoves.Count == 0 || legalMoves.Count > 4)
 			{

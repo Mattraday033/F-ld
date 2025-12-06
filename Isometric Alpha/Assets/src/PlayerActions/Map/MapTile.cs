@@ -10,7 +10,7 @@ using UnityEngine.Events;
 //Vector3(321.155304,306.360229,65.2149353)
 public class MapTile : MonoBehaviour, IQuestListSource
 {
-    public static UnityEvent<string> OnJournalEntryShownOnMap = new UnityEvent<string>();
+    public readonly static UnityEvent<string> OnJournalEntryShownOnMap = new UnityEvent<string>();
 
     public QuestCounter questCounter;
 
@@ -217,13 +217,13 @@ public class MapTile : MonoBehaviour, IQuestListSource
 
     public int getNumberOfQuests()
     {
-        return getListOfQuestsForDisplay().Count;
+        return getListOfQuestStepsForDisplay().Count;
     }
 
-    public ArrayList getListOfQuestsForDisplay()
+    public List<QuestStep> getListOfQuestStepsForDisplay()
     {
 		IMapObject location = MapObjectList.getMapObject(getListKey());
 
-		return location.getAllQuestsInLocation();
+		return location.getAllQuestStepsInLocation();
     }
 }

@@ -134,9 +134,9 @@ public class MultiStackTrait : Trait
         return Resources.Load<GameObject>(PrefabNames.multiStackableTraitSquareRowPanel);
     }
 
-    public override ArrayList getRelatedDescribables()
+    public override List<IDescribable> getRelatedDescribables()
     {
-        ArrayList relatedDescribables = new ArrayList();
+        List<IDescribable> relatedDescribables = new List<IDescribable>();
 
         relatedDescribables.AddRange(stackableTraits);
 

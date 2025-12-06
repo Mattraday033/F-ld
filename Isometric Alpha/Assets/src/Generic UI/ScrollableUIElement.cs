@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -54,7 +55,7 @@ public class ScrollableUIElement : MonoBehaviour
 	public bool sortPanels = true;
 	public SortBy defaultSortBy = SortBy.Name;
 
-	public ArrayList listOfRows = new ArrayList();
+	public List<GridRow> listOfRows = new List<GridRow>();
 
 	public GameObject[] objectsDisabledWithSlider;
 
@@ -79,23 +80,33 @@ public class ScrollableUIElement : MonoBehaviour
 		return rowType;
 	}
 
-	public virtual void appendPanels(ArrayList listOfDescribables)
+	public void appendPanels(IEnumerable<IDescribable> listOfDescribables)
+	{
+		populatePanels(new List<IDescribable>(listOfDescribables), false);
+	}
+
+	public virtual void appendPanels(List<IDescribable> listOfDescribables)
 	{
 		populatePanels(listOfDescribables, false);
 	}
 
-	public virtual void populatePanels(ArrayList listOfDescribables)
+	public void populatePanels(IEnumerable<IDescribable> listOfDescribables)
+	{
+		populatePanels(new List<IDescribable>(listOfDescribables), true);
+	}
+
+	public virtual void populatePanels(List<IDescribable> listOfDescribables)
 	{
 		populatePanels(listOfDescribables, true);
 	}
 
-	private void populatePanels(ArrayList listOfDescribables, bool deleteOldPanels)
+	private void populatePanels(List<IDescribable> listOfDescribables, bool deleteOldPanels)
 	{
 		// Debug.LogError("populating Panels");
 
 		if (sortPanels)
 		{
-			listOfDescribables.Sort(getComparisonMethod());
+			listOfDescribables = sortListOfPanels(listOfDescribables);
 		}
 
 		if (deleteOldPanels)
@@ -148,6 +159,20 @@ public class ScrollableUIElement : MonoBehaviour
 			scrollableComponent.verticalScrollbar.value = scrollableComponent.verticalNormalizedPosition;
 		}
 	}
+
+    private List<IDescribable> sortListOfPanels(List<IDescribable> listOfDescribables)
+    {
+        if(listOfDescribables.Count <= 0 || listOfDescribables[0] as ISortable == null)
+        {
+            return listOfDescribables;
+        }
+
+        List<ISortable> listOfSortables = listOfDescribables.Cast<ISortable>().ToList();
+
+        listOfSortables.Sort(getComparisonMethod());
+
+        return listOfSortables.Cast<IDescribable>().ToList();
+    }
 
 	public void clickFirstPanelInList()
 	{
@@ -418,7 +443,7 @@ public class ScrollableUIElement : MonoBehaviour
 			Destroy(row.gameObject);
 		}
 
-		listOfRows = new ArrayList();
+		listOfRows = new List<GridRow>();
 	}
 
 	public bool contains(string name)
@@ -532,7 +557,7 @@ public class ScrollableUIElement : MonoBehaviour
 		scrollableComponent.content.localPosition = snapToPosition;
 	}
 
-	public IComparer getComparisonMethod()
+	public IComparer<ISortable> getComparisonMethod()
 	{
 		if (columnHeader == null || columnHeader is null)
 		{

@@ -12,7 +12,7 @@ public class BacklashAbility : Ability
 		this.backlashMultiplier = backlashMultiplier;
 	}
 
-    public override void performCombatAction(ArrayList targets)
+    public override void performCombatAction(List<Stats> targets)
 	{
 		dealBacklashDamage();
 		

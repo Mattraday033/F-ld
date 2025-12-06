@@ -1148,10 +1148,10 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     }
 
-    public ArrayList getRelatedDescribables()
-    {
-        return new ArrayList();
-    }
+	public List<IDescribable> getRelatedDescribables()
+	{
+		return new List<IDescribable>();
+	}
 
     public bool buildableWithBlocks()
     {

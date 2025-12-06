@@ -107,11 +107,10 @@ public class LoadSaveFile : IDecision
 
             State.inventory = SaveBlueprint.extractInventoryItemsFromJson(saveBlueprint.currentInventory);
             State.junkPocket = SaveBlueprint.extractInventoryItemsFromJson(saveBlueprint.currentJunk);
-            State.lessonsLearned = saveBlueprint.extractAllLessonKeysFromJson();
 
             ChoiceManager.choices = saveBlueprint.extractChoicesFromJson();
-            DeathFlagManager.deadNames = saveBlueprint.extractArrayListOfStringsFromJson(saveBlueprint.currentDeathFlags);
-            MetFlagManager.metNames = saveBlueprint.extractArrayListOfStringsFromJson(saveBlueprint.currentMetFlags);
+            DeathFlagManager.resetAllDeadNpcs(saveBlueprint.extractListOfStringsFromJson(saveBlueprint.currentDeathFlags));
+            MetFlagManager.resetAllMetNpcs(saveBlueprint.extractListOfStringsFromJson(saveBlueprint.currentMetFlags));
             GateAndChestManager.resetGatesAndChests(FlagWrapper.convertFlagWrapperListToDictionary(saveBlueprint.currentChestAndGateFlags));
             TrapAndButtonStateManager.resetTrapKeys(saveBlueprint.currentActivatedTrapsAndButtons);
 

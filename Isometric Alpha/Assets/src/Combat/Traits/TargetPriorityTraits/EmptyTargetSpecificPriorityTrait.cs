@@ -26,7 +26,7 @@ public class EmptyTargetSpecificPriorityTrait : TargetPriorityTrait
 		return true;
 	}
 	
-	public override Selector findTargetLocation(Selector selector, ArrayList listOfTargets)
+	public override Selector findTargetLocation(Selector selector, List<Stats> listOfTargets)
 	{
 		Selector selectorOnTarget = selector.clone();
 		selectorOnTarget.setToLocation(targetCoords);

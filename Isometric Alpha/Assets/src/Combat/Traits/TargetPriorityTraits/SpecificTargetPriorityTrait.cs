@@ -20,7 +20,7 @@ public class SpecificTargetPriorityTrait : TargetPriorityTrait
 		this.specificTargets = specificTargets;
 	}
 	
-	public override Selector findTargetLocation(Selector selector, ArrayList listOfTargets)
+	public override Selector findTargetLocation(Selector selector, List<Stats> listOfTargets)
 	{
 		Selector selectorOnTarget = selector.clone();
 

@@ -142,7 +142,7 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
 
     public int cooldownRemaining { get; private set; } = 0;
 
-    public ArrayList previousTargets = new ArrayList();
+    public List<GridCoords> previousTargets = new List<GridCoords>();
 
     private Stats previewActor;
     public bool inPreviewMode { get; private set; } = false;
@@ -289,7 +289,7 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
         performCombatAction(getSelector().getAllTargets());
     }
 
-    public virtual void performCombatAction(ArrayList targets)
+    public virtual void performCombatAction(List<Stats> targets)
     {
         int projectileNumber = 1;
 
@@ -634,7 +634,7 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
         Selector selector = null;
         Stats actor = getActorStats();
 
-        ArrayList listOfTargets;
+        List<Stats> listOfTargets;
 
         if (actor.shouldTargetEnemy())
         {
@@ -870,14 +870,14 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
     //nonapplied related traits are traits that may be related to an action, but aren't directly applied by it, such as the
     //afraid trait with the activated passive Devastating Criticals. It's applied by a random chance on crit, not applied by the
     //activated passive ability itself.
-    public virtual ArrayList getNonAppliedRelatedTraits()
+    public virtual List<Trait> getNonAppliedRelatedTraits()
     {
-        return new ArrayList();
+        return new List<Trait>();
     }
 
-    public virtual ArrayList getTraitsToDescribe()
+    public virtual List<Trait> getTraitsToDescribe()
     {
-        ArrayList listOfTraits = new ArrayList();
+        List<Trait> listOfTraits = new List<Trait>();
 
         listOfTraits.AddRange(getNonAppliedRelatedTraits());
 
@@ -1209,9 +1209,9 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
         }
     }
 
-    public static ArrayList getAllActionTypeGlossaryEntries()
+    public static List<GlossaryEntry> getAllActionTypeGlossaryEntries()
     {
-        ArrayList allActionTypesGlossaryEntries = new ArrayList();
+        List<GlossaryEntry> allActionTypesGlossaryEntries = new List<GlossaryEntry>();
 
         allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Ability", "Action Types", "An Action gained through leveling up. Abilities are the only type of Action that benefits from your Bonus Damage. Every time you level up and raise your Primary Stats, you will gain at least two new Abilities. Remember to add your new Abilities to your Action Wheel, or else you won't be able to use them in Combat."));
         allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Attack", "Action Types", "Attacks are gained by equipping Weapons to the Action Wheel. Attacks never have a cooldown, and the amount of Action Wheel Slots you can use for Attacks is determined by your Strength. An Attack acquired from a one handed weapon will add your off hand weapon's damage to it's damage. Using an Attack from a two handed weapon will not add your off hand weapon's damage, and will remove your shield's armor bonus for the rest of the turn."));
@@ -1246,7 +1246,7 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
 
         if (previousTargets != null)
         {
-            clone.previousTargets = new ArrayList();
+            clone.previousTargets = new List<GridCoords>();
 
             foreach (GridCoords previousTarget in previousTargets)
             {
@@ -1639,9 +1639,9 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
         }
     }
 
-    public ArrayList getRelatedDescribables()
+    public List<IDescribable> getRelatedDescribables()
     {
-        return getTraitsToDescribe();
+        return getTraitsToDescribe().Cast<IDescribable>().ToList();
     }
 
     public bool canPayActionCost(Stats caster)

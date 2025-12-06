@@ -187,7 +187,7 @@ public static class CombatGrid
 	
 	public static int getEnemyTypeCount(Trait typeTrait)
 	{
-		ArrayList listOfEnemies = getAllAliveEnemyCombatants();
+		List<Stats> listOfEnemies = getAllAliveEnemyCombatants();
 		int enemyTypeCount = 0;
 		
 		foreach(Stats enemy in listOfEnemies)
@@ -209,9 +209,9 @@ public static class CombatGrid
 		return maximumNumberOfSpaces - getTotalEnemyCount();
 	}
 	
-	public static ArrayList getAllAliveSummonedEnemies()
+	public static List<Stats> getAllAliveSummonedEnemies()
 	{
-		ArrayList allAliveSummonedEnemies = new ArrayList();
+		List<Stats> allAliveSummonedEnemies = new List<Stats>();
 
 		for(int rowIndex = enemyRowUpperBounds; rowIndex <= enemyRowLowerBounds; rowIndex++)
 		{
@@ -227,9 +227,9 @@ public static class CombatGrid
 		return scrubDuplicatesFromList(allAliveSummonedEnemies);
 	}
 	
-	public static ArrayList getAllAliveNonsummonedEnemies()
+	public static List<Stats> getAllAliveNonsummonedEnemies()
 	{
-		ArrayList allAllyCombatants = new ArrayList();
+		List<Stats> allAllyCombatants = new List<Stats>();
 
 		for(int rowIndex = enemyRowUpperBounds; rowIndex <= enemyRowLowerBounds; rowIndex++)
 		{
@@ -245,9 +245,9 @@ public static class CombatGrid
 		return scrubDuplicatesFromList(allAllyCombatants);
 	}
 	
-	public static ArrayList getAllAliveSummonedAllies()
+	public static List<Stats> getAllAliveSummonedAllies()
 	{
-		ArrayList allAliveSummonedAllies = new ArrayList();
+		List<Stats> allAliveSummonedAllies = new List<Stats>();
 
 		for(int rowIndex = allyRowUpperBounds; rowIndex <= allyRowLowerBounds; rowIndex++)
 		{
@@ -263,9 +263,9 @@ public static class CombatGrid
 		return scrubDuplicatesFromList(allAliveSummonedAllies);
 	}
 	
-	public static ArrayList getAllAliveNonsummonedAllies()
+	public static List<Stats> getAllAliveNonsummonedAllies()
 	{
-		ArrayList allAllyCombatants = new ArrayList();
+		List<Stats> allAllyCombatants = new List<Stats>();
 
 		for(int rowIndex = allyRowUpperBounds; rowIndex <= allyRowLowerBounds; rowIndex++)
 		{
@@ -281,9 +281,9 @@ public static class CombatGrid
 		return scrubDuplicatesFromList(allAllyCombatants);
 	}
 	
-	public static ArrayList getAllAliveAllyCombatants()
+	public static List<Stats> getAllAliveAllyCombatants()
 	{
-		ArrayList allAllyCombatants = new ArrayList();
+		List<Stats> allAllyCombatants = new List<Stats>();
 
 		for(int rowIndex = allyRowUpperBounds; rowIndex <= allyRowLowerBounds; rowIndex++)
 		{
@@ -299,9 +299,9 @@ public static class CombatGrid
 		return scrubDuplicatesFromList(allAllyCombatants);
 	}
 	
-	public static ArrayList getAllAliveEnemyCombatants()
+	public static List<Stats> getAllAliveEnemyCombatants()
 	{
-		ArrayList allEnemyCombatants = new ArrayList();
+		List<Stats> allEnemyCombatants = new List<Stats>();
 
 		for(int rowIndex = enemyRowUpperBounds; rowIndex <= enemyRowLowerBounds; rowIndex++)
 		{
@@ -317,18 +317,18 @@ public static class CombatGrid
 		return scrubDuplicatesFromList(allEnemyCombatants);
 	}
 
-	public static ArrayList getAllAliveCombatants()
+	public static List<Stats> getAllAliveCombatants()
 	{
-		ArrayList allCombatants = getAllAliveAllyCombatants();
+		List<Stats> allCombatants = getAllAliveAllyCombatants();
 		
 		allCombatants.AddRange(getAllAliveEnemyCombatants());
 		
 		return allCombatants;
 	}
 	
-	public static ArrayList getAllAllyCombatants()
+	public static List<Stats> getAllAllyCombatants()
 	{
-		ArrayList allAllyCombatants = new ArrayList();
+		List<Stats> allAllyCombatants = new List<Stats>();
 
 		for(int rowIndex = allyRowUpperBounds; rowIndex <= allyRowLowerBounds; rowIndex++)
 		{
@@ -346,7 +346,7 @@ public static class CombatGrid
 
 	public static bool selectableAllyAtLocation(GridCoords coords)
 	{
-		ArrayList allAllyCombatants = getAllAllyCombatants();
+		List<Stats> allAllyCombatants = getAllAllyCombatants();
 		
 		foreach(Stats ally in allAllyCombatants)
 		{
@@ -359,9 +359,9 @@ public static class CombatGrid
 		return false;
 	}
 
-	public static ArrayList getAllNonsummonedAllyCombatants()
+	public static List<Stats> getAllNonsummonedAllyCombatants()
 	{
-		ArrayList allAllyCombatants = new ArrayList();
+		List<Stats> allAllyCombatants = new List<Stats>();
 
 		for (int rowIndex = allyRowUpperBounds; rowIndex <= allyRowLowerBounds; rowIndex++)
 		{
@@ -377,9 +377,9 @@ public static class CombatGrid
 		return scrubDuplicatesFromList(allAllyCombatants);
 	}
 	
-	public static ArrayList getAllEnemyCombatants()
+	public static List<Stats> getAllEnemyCombatants()
 	{
-		ArrayList allEnemyCombatants = new ArrayList();
+		List<Stats> allEnemyCombatants = new List<Stats>();
 
 		for(int rowIndex = enemyRowUpperBounds; rowIndex <= enemyRowLowerBounds; rowIndex++)
 		{
@@ -395,16 +395,16 @@ public static class CombatGrid
 		return scrubDuplicatesFromList(allEnemyCombatants);
 	}
 
-	public static ArrayList getAllCombatants()
+	public static List<Stats> getAllCombatants()
 	{
-		ArrayList allCombatants = getAllAllyCombatants();
+		List<Stats> allCombatants = getAllAllyCombatants();
 		
 		allCombatants.AddRange(getAllEnemyCombatants());
 		
 		return allCombatants;
 	}
 	
-	public static ArrayList getAllZOITargets(GridCoords coords)
+	public static List<Stats> getAllZOITargets(GridCoords coords)
 	{
 		if(coords.row > allyRowLowerBounds || 
 			coords.row < allyRowUpperBounds ||
@@ -414,7 +414,7 @@ public static class CombatGrid
 				throw new IOException("Given Coords not within Ally Bounds. Coords = " + coords.ToString());
 			}
 
-		ArrayList allZOITargets = new ArrayList();
+		List<Stats> allZOITargets = new List<Stats>();
 		
 		if(coords.row-1 >= allyRowUpperBounds && getCombatantAtCoords(coords.row-1,coords.col) != null)
 		{
@@ -538,7 +538,7 @@ public static class CombatGrid
 		return getMandatoryTargetFromList(getAllAliveAllyCombatants());
 	}
 
-	private static Stats getMandatoryTargetFromList(ArrayList targets)
+	private static Stats getMandatoryTargetFromList(List<Stats> targets)
 	{
 		foreach(Stats target in targets)
 		{
@@ -568,15 +568,15 @@ public static class CombatGrid
 		}
 	}
 	
-	private static ArrayList scrubDuplicatesFromList(ArrayList combatantList)
+	private static List<Stats> scrubDuplicatesFromList(List<Stats> combatantList)
 	{
 		for(int combatantIndex = 0; combatantIndex < combatantList.Count; combatantIndex++)
 		{
-			Stats currentCombatant = (Stats) combatantList[combatantIndex];
+			Stats currentCombatant = combatantList[combatantIndex];
 			
 			for(int priorCombatantIndex = combatantIndex-1; priorCombatantIndex >= 0; priorCombatantIndex--)
 			{
-				Stats currentPriorCombatant = (Stats) combatantList[priorCombatantIndex];
+				Stats currentPriorCombatant = combatantList[priorCombatantIndex];
 				
 				if(currentCombatant.position.Equals(currentPriorCombatant.position))
 				{

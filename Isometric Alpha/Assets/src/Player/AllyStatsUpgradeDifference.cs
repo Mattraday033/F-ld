@@ -103,10 +103,10 @@ public class AllyStatsUpgradeDifference: IDescribable, IDescribableInBlocks
 
     }
 
-	public ArrayList getRelatedDescribables()
-    {
-        return new ArrayList();
-    }
+	public List<IDescribable> getRelatedDescribables()
+	{
+		return new List<IDescribable>();
+	}
 
 	public bool buildableWithBlocks()
     {

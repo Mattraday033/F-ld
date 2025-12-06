@@ -24,7 +24,7 @@ public interface IMapObject
 
 	public int getInteriors();
 	public string getExteriorSceneName();
-	public ArrayList getAllQuestsInLocation();
+	public List<QuestStep> getAllQuestStepsInLocation();
 }
 
 public struct ZoneButtonInfo
@@ -385,18 +385,6 @@ public static class MapObjectList
 				return new MapLocation(name, name, name, notFastTravelAccessible, zeroInteriors, new string[0]);
 		}
 		
-	}
-
-	public static ArrayList getAllDiscoveredZones()
-	{
-		ArrayList discoveredZones = new ArrayList();
-		
-		if(MapZone.hasBeenDiscovered(LocationNameList.camp))
-		{
-			discoveredZones.Add(LocationNameList.camp);
-		}
-		
-		return discoveredZones;
 	}
 
 }

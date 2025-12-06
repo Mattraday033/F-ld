@@ -7,7 +7,7 @@ public class LinkTrait : Trait
     public const string linkTraitType = "Link Trait";
     private Ability linkAction = new Ability(CombatActionSettings.build(DescriptionParams.build("Link Trait", "Link Damage")));
 
-    private ArrayList linkedTargets;
+    private List<Stats> linkedTargets;
 
     private double percentageOfDamageDealt;
 
@@ -17,7 +17,7 @@ public class LinkTrait : Trait
         this.percentageOfDamageDealt = percentageOfDamageDealt;
     }
 
-    public void setLinkedTargets(ArrayList targets)
+    public void setLinkedTargets(List<Stats> targets)
     {
         linkedTargets = targets;
     }

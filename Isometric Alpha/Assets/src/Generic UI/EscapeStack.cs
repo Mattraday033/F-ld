@@ -9,15 +9,13 @@ public interface IEscapable
 
 public static class EscapeStack
 {
-	private static ArrayList escapableObjects;
+	private static List<IEscapable> escapableObjects;
 
-	static EscapeStack()
-	{
-		if(escapableObjects == null || escapableObjects is null)
-		{
-			escapableObjects = new ArrayList();
-		}
-	}
+    [RuntimeInitializeOnLoadMethod]
+    private static void instantiateEscapeStack()
+    {
+        escapableObjects = new List<IEscapable>();
+    }
 
 	public static void addEscapableObject(IEscapable newEscapableObject)
 	{
@@ -74,7 +72,7 @@ public static class EscapeStack
 			handleEscapePress();
 		}
 
-		escapableObjects = new ArrayList();
+		escapableObjects = new List<IEscapable>();
 		//Debug.LogError("all escapableObject have been removed from stack. Count: " + escapableObjects.Count);
     }
 

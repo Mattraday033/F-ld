@@ -17,7 +17,7 @@ public class RandomEnemyTargetPriorityTrait : TargetPriorityTrait
 
     }
     
-    public override Stats getMandatoryTarget(ArrayList listOfTargets)
+    public override Stats getMandatoryTarget(List<Stats> listOfTargets)
     {
         listOfTargets = CombatGrid.getAllAliveEnemyCombatants();
 

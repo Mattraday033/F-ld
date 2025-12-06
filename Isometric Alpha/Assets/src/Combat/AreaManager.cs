@@ -85,16 +85,16 @@ public class AreaManager : MonoBehaviour
 
     public void addMapData()
     {
-        ArrayList knownLocationsInZone;
+        List<string> knownLocationsInZone;
         IMapObject mapObject = getMapData();
 
         if (State.allKnownMapData.ContainsKey(mapObject.getZoneKey()))
         {
-            knownLocationsInZone = State.allKnownMapData[mapObject.getZoneKey()];
+            knownLocationsInZone = State.allKnownMapData[mapObject.getZoneKey()]; 
         }
         else
         {
-            knownLocationsInZone = new ArrayList();
+            knownLocationsInZone = new List<string>();
         }        
 
         if (!knownLocationsInZone.Contains(mapObject.getLocationName()))
@@ -193,10 +193,10 @@ public class AreaDescription : IDescribable
         return Resources.Load<GameObject>(PrefabNames.areaNameDescriptionPanel);
     }
 
-    public ArrayList getRelatedDescribables()
-    {
-        return new ArrayList();
-    }
+	public List<IDescribable> getRelatedDescribables()
+	{
+		return new List<IDescribable>();
+	}
 
 	public bool buildableWithBlocks()
     {

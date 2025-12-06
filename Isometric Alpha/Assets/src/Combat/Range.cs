@@ -107,9 +107,9 @@ public static class Range
 		return hexadecupleBoxIndex;
 	}
 
-	public static ArrayList getAllRangesGlossaryEntries()
+	public static List<GlossaryEntry> getAllRangesGlossaryEntries()
 	{
-		ArrayList allRangesGlossaryEntries = new ArrayList();
+		List<GlossaryEntry> allRangesGlossaryEntries = new List<GlossaryEntry>();
 		
 		for(int rangeIndex = getSmallestRangeIndex(); rangeIndex <= getLargestRangeIndex(); rangeIndex++)
 		{

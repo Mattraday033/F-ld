@@ -41,12 +41,12 @@ public class BombardmentTargetPriorityTrait: TargetPriorityTrait
 		return true;
 	}
 	
-	public override Selector findTargetLocation(Selector selector, ArrayList listOfTargets)
+	public override Selector findTargetLocation(Selector selector, List<Stats> listOfTargets)
 	{		
 		return SelectorGenerator.generate(getAllTargetCoords(listOfTargets)).clone();
 	}
 	
-	private GridCoords[] getAllTargetCoords(ArrayList listOfTargets)
+	private GridCoords[] getAllTargetCoords(List<Stats> listOfTargets)
 	{
 		HitsAndMisses hitsAndMisses = getHitsAndMisses();
 		GridCoords[] targetCoords = new GridCoords[0];

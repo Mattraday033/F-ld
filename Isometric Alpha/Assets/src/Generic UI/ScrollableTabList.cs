@@ -10,11 +10,11 @@ using UnityEngine;
 public class ScrollableTabList : ScrollableUIElement
 {
 	public int tabCollectionIndexToCreate = -1;
-	public ArrayList newTabs;
+	public List<Tab> newTabs;
 
-	public override void populatePanels(ArrayList listOfDescribables)
+	public override void populatePanels(List<IDescribable> listOfDescribables)
 	{
-		newTabs = new ArrayList();
+		newTabs = new List<Tab>();
 
 		deleteAllPanels();
 
@@ -47,13 +47,13 @@ public class ScrollableTabList : ScrollableUIElement
 		}
 	}
 	
-	private TabCollection createTabCollection(ArrayList listOfTabs)
+	private TabCollection createTabCollection(List<Tab> listOfTabs)
 	{
 		Tab[] tabs = new Tab[listOfTabs.Count];
 		
 		for(int index = 0; index < listOfTabs.Count; index++)
 		{
-			tabs[index] = (Tab) listOfTabs[index];
+			tabs[index] = listOfTabs[index];
 		}
 		
 		return new TabCollection(tabs);
@@ -66,7 +66,7 @@ public class ScrollableTabList : ScrollableUIElement
 			Destroy(row.gameObject);	
 		}
 
-		newTabs = new ArrayList();
-		listOfRows = new ArrayList();
+		newTabs = new List<Tab>();
+		listOfRows = new List<GridRow>();
 	}
 }

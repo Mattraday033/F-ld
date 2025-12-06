@@ -22,9 +22,6 @@ public struct SlideShowCoroutineDetails
 public class SlideShowManager : MonoBehaviour
 {
 
-    private const float waitMultiplier = 1000f;
-
-    public float endWait;
     public List<float> times;
 
     public List<string> subtitles;

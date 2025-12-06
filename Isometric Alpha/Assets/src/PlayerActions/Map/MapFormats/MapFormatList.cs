@@ -171,7 +171,7 @@ public class MapTileFormat
 
     private bool bothPathEndsVisible()
     {
-        ArrayList allLocationsThatShareAnAxis = new ArrayList();
+        List<MapTileFormat> allLocationsThatShareAnAxis = new List<MapTileFormat>();
 
         foreach (KeyValuePair<string, MapTileFormat> kvp in parentFormat.locationNameToTileFormat)
         {
@@ -216,7 +216,7 @@ public class MapTileFormat
         }
     }
 
-    private ArrayList keepTwoClosestMapTileFormats(ArrayList allLocationsThatShareAnAxis)
+    private List<MapTileFormat> keepTwoClosestMapTileFormats(List<MapTileFormat> allLocationsThatShareAnAxis)
     {
         if (allLocationsThatShareAnAxis.Count <= 2)
         {
@@ -268,17 +268,14 @@ public class MapTileFormat
     }
 }
 
-public class NESWRowDistanceComparer : IComparer
+public class NESWRowDistanceComparer : IComparer<MapTileFormat>
 {
     public static int currentRow;
 
-    public int Compare(object x, object y)
+    public int Compare(MapTileFormat x, MapTileFormat y)
     {
-        MapTileFormat xSortable = (MapTileFormat)x;
-        MapTileFormat ySortable = (MapTileFormat)y;
-
-        int xDistance = Math.Abs(currentRow - xSortable.row);
-        int yDistance = Math.Abs(currentRow - ySortable.row);
+        int xDistance = Math.Abs(currentRow - x.row);
+        int yDistance = Math.Abs(currentRow - y.row);
 
         if (xDistance > yDistance)
         {
@@ -293,17 +290,14 @@ public class NESWRowDistanceComparer : IComparer
     }
 }
 
-public class NWSEColDistanceComparer : IComparer
+public class NWSEColDistanceComparer : IComparer<MapTileFormat>
 {
     public static int currentCol;
 
-    public int Compare(object x, object y)
+    public int Compare(MapTileFormat x, MapTileFormat y)
     {
-        MapTileFormat xSortable = (MapTileFormat)x;
-        MapTileFormat ySortable = (MapTileFormat)y;
-
-        int xDistance = Math.Abs(currentCol - xSortable.col);
-        int yDistance = Math.Abs(currentCol - ySortable.col);
+        int xDistance = Math.Abs(currentCol - x.col);
+        int yDistance = Math.Abs(currentCol - y.col);
 
         if (xDistance > yDistance)
         {

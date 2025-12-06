@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ExuberanceActivatedPassive : ActivatedPassive
+public class ExuberanceEquippedPassive : EquippedPassive
 {
     private const int redStackIndex = 0;
     private const int blueStackIndex = 1;
@@ -15,14 +15,14 @@ public class ExuberanceActivatedPassive : ActivatedPassive
 	private MultiStackProcType[] procTypes;
 
 
-	public ExuberanceActivatedPassive(CombatActionSettings settings, MultiStackProcType procType, int numberOfFreeStacks) :
+	public ExuberanceEquippedPassive(CombatActionSettings settings, MultiStackProcType procType, int numberOfFreeStacks) :
 	base(settings)
 	{
 		this.numberOfFreeStacks = new int[] { numberOfFreeStacks };
 		this.procTypes = new MultiStackProcType[] { procType };
 	}
 
-	public ExuberanceActivatedPassive(CombatActionSettings settings, MultiStackProcType[] procTypes, int[] numberOfFreeStacks) :
+	public ExuberanceEquippedPassive(CombatActionSettings settings, MultiStackProcType[] procTypes, int[] numberOfFreeStacks) :
 	base(settings)
 	{
 		this.numberOfFreeStacks = numberOfFreeStacks;

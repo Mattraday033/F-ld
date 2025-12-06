@@ -3,28 +3,28 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class ActivatedPassiveTraitManager : MonoBehaviour
+public class EquippedPassiveTraitManager : MonoBehaviour
 {
-	private static ActivatedPassiveTraitManager instance;
+	private static EquippedPassiveTraitManager instance;
 	
 	private void Awake()
 	{
 		if(instance != null)
 		{
-			throw new IOException("Instance of ActivatedPassiveTraitManager already exists");
+			throw new IOException("Instance of EquippedPassiveTraitManager already exists");
 		}
 		
 		instance = this;
 	}
 	
-	public static ActivatedPassiveTraitManager getInstance()
+	public static EquippedPassiveTraitManager getInstance()
 	{
 		return instance;
 	}
 	
 	public void addEquippedPassiveTraits()
 	{
-		ArrayList allAllies = CombatGrid.getAllAliveAllyCombatants();
+		List<Stats> allAllies = CombatGrid.getAllAliveAllyCombatants();
 
         foreach (Stats ally in allAllies)
 		{
@@ -34,7 +34,7 @@ public class ActivatedPassiveTraitManager : MonoBehaviour
 	
 	public static void removeAllTraits()
 	{
-		ArrayList allAllies = CombatGrid.getAllAliveAllyCombatants();
+		List<Stats> allAllies = CombatGrid.getAllAliveAllyCombatants();
 		
 		foreach(Stats ally in allAllies)
 		{

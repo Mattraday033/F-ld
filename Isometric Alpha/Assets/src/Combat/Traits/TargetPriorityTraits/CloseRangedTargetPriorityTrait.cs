@@ -5,24 +5,24 @@ using UnityEngine;
 
 public class CloseRangedTargetPriorityTrait : TargetPriorityTrait
 {
-	private static string initialName = "Close Ranged";
-	private static string initialTraitDescription = "This creature always attacks the targets that are closest to it.";
-	private static string initialTraitIconName = "Close Ranged";
-	private static Color initialIconBackgroundColor = Color.red;
+	private const string initialName = "Close Ranged";
+	private const string initialTraitDescription = "This creature always attacks the targets that are closest to it.";
+	private const string initialTraitIconName = "Close Ranged";
+	private readonly static Color initialIconBackgroundColor = Color.red;
 	
 	public CloseRangedTargetPriorityTrait(): base(initialName, initialTraitDescription, initialTraitIconName, initialIconBackgroundColor)
 	{
 		
 	}
 	
-	public override Stats getMandatoryTarget(ArrayList listOfTargets)
+	public override Stats getMandatoryTarget(List<Stats> listOfTargets)
 	{
 		Stats mandatoryTarget = base.getMandatoryTarget(listOfTargets);
 		
 		if(mandatoryTarget == null)
 		{
 			Stats mostForwardTarget = null;
-			ArrayList mostForwardTargets = new ArrayList();
+			List<Stats> mostForwardTargets = new List<Stats>();
 			
 			foreach(Stats potentialTarget in listOfTargets)
 			{

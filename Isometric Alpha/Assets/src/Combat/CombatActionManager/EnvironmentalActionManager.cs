@@ -25,7 +25,7 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 		instance = this;
 	}
 	
-	public ArrayList getAllEnvironmentalCombatActions(ArrayList actionList)
+	public List<CombatAction> getAllEnvironmentalCombatActions(List<CombatAction> actionList)
 	{
 		foreach(KeyValuePair<CombatAction,Trait> kvp in environmentalCombatActions)
 		{
@@ -38,7 +38,7 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 			}
 			
 			Trait targetingTrait = kvp.Value.clone();
-			ArrayList listOfTargets;
+			List<Stats> listOfTargets;
 			
 			if(envCombatAction.getActorStats().shouldTargetEnemy())
 			{

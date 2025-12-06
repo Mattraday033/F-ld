@@ -108,13 +108,13 @@ public class JournalHandler : ScreenManager
         populateAllGrids();
     }
 
-    private ArrayList getListOfSubCategories()
+    private List<IDescribable> getListOfSubCategories()
     {
         IJournalCategory currentCategory = (IJournalCategory)grids[grids.Length - 1].getDisabledRowDescribable();
 
         if (currentCategory == null)
         {
-            return new ArrayList();
+            return new List<IDescribable>();
         }
         else
         {

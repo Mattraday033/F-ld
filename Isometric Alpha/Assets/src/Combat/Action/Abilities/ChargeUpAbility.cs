@@ -39,7 +39,7 @@ public class ChargeUpAbility : Ability
 		actionWhenCharged.setTargetCoords(newTargetCoords);
 	}
 	*/
-    public override void performCombatAction(ArrayList targets)
+    public override void performCombatAction(List<Stats> targets)
     {
         if (!isCharged())
         {

@@ -137,26 +137,6 @@ public static class Helpers
                                                      image.rectTransform.localScale.z);
     }
 
-    public static string replaceSaveUnfriendlyCharacters(string input)
-    {
-        return input.Replace(",", "$").Replace(":", "@").Replace("\"", "^");
-    }
-
-    public static string addSaveUnfriendlyCharactersBackIn(string input)
-    {
-        return input.Replace("$", ",").Replace("@", ":").Replace("^", "\"");
-    }
-
-    public static void destroyAllGameObjectsInList(ArrayList gameObjects)
-    {
-        for (int objectIndex = (gameObjects.Count - 1); objectIndex >= 0; objectIndex--)
-        {
-            GameObject.Destroy((GameObject)gameObjects[objectIndex]);
-
-            gameObjects.RemoveAt(objectIndex);
-        }
-    }
-
     public static T[] appendArray<T>(T[] array, T t)
     {
 
@@ -208,24 +188,6 @@ public static class Helpers
 			return array.Aggregate(output, (a,b) => a += b);
 		}
 	*/
-    public static string[] arrayListToStrings(ArrayList arrayList)
-    {
-        return Array.ConvertAll(arrayList.ToArray(), item => (string)item);
-    }
-
-    public static string[] getAllKeys<T>(Dictionary<string, T> dictionary)
-    {
-        string[] allKeys = new string[dictionary.Count];
-
-        dictionary.Keys.CopyTo(allKeys, 0);
-
-        return allKeys;
-    }
-
-    public static string enumToString(Enum anEnum)
-    {
-        return Enum.GetName(anEnum.GetType(), anEnum);
-    }
 
     public static void debugNullCheck(string objName, object objectToCheck)
     {
@@ -377,41 +339,6 @@ public static class Helpers
     }
 
     private delegate bool CandidacyDelegate<T>(T t);
-
-    private static void removeElements<T>(ArrayList arrayList, CandidacyDelegate<T> isRemovalCandidate)
-    {
-        for (int index = 0; index < arrayList.Count; index++)
-        {
-            if (arrayList[index] != null)
-            {
-                if (isRemovalCandidate((T)arrayList[index]))
-                {
-                    arrayList.RemoveAt(index);
-                    index--;
-                }
-            }
-        }
-    }
-
-    public static string[] convertJsonStringToKVPs(string json)
-    {
-        return json.Replace("{", "").Replace("}", "").Replace("\"", "").Split(",");
-    }
-
-    public static ArrayList removeAll<T>(ArrayList list, T t)
-    {
-        ArrayList output = new ArrayList();
-
-        foreach (T obj in list)
-        {
-            if (!obj.Equals(t))
-            {
-                output.Add(obj);
-            }
-        }
-
-        return output;
-    }
 
     public static void setInteractability(Button[] buttons, int index)
     {

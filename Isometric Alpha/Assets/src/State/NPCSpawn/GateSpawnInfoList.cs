@@ -466,7 +466,8 @@ public static class GateSpawnInfoList
                                     PrefabNames.unstablePillar,
                                     ColorList.mineLvl3RubbleColor,
                                     new Vector3Int(-6, -1),
-                                    SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain));
+                                    SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain,
+                                    StatDifficultyList.strengthDifficultyThree));
 
         list.Add(new GateWithHiddenTerrainSpawnInfo(Constants.indexOne, 
                                     NPCNameList.unstablePillar,
@@ -474,7 +475,8 @@ public static class GateSpawnInfoList
                                     PrefabNames.unstablePillar,
                                     ColorList.mineLvl3RubbleColor,
                                     new Vector3Int(-6, -5),
-                                    SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain));
+                                    SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain,
+                                    StatDifficultyList.strengthDifficultyThree));
 
         gateSpawnInfoDict.Add(LocationNameList.mineLvl3 + LocationNameList.section6a, list);
 
@@ -498,7 +500,8 @@ public static class GateSpawnInfoList
                                     PrefabNames.unstablePillar,
                                     ColorList.mineLvl3RubbleColor,
                                     new Vector3Int(-9, -2),
-                                    SecretDoorKeyList.mineLvl3_7UnstablePillarHiddenTerrain));
+                                    SecretDoorKeyList.mineLvl3_7UnstablePillarHiddenTerrain,
+                                    StatDifficultyList.strengthDifficultyThree));
 
 
         gateSpawnInfoDict.Add(LocationNameList.mineLvl3 + LocationNameList.section7, list);
@@ -515,6 +518,7 @@ public class GateSpawnInfo : AxisSpawnInfo
     protected int gateIndex;
     protected string npcName;
     private string spriteName;
+    protected Dictionary<string, int> statDifficulties;
 
     public GateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell) :
     base(currentArea, startCell)
@@ -522,7 +526,9 @@ public class GateSpawnInfo : AxisSpawnInfo
         this.gateIndex = gateIndex;
         this.npcName = npcName;
         this.tutorialTargetHash = "";
+        this.statDifficulties = new Dictionary<string, int>();
     }
+
 
     public GateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell, int size, Axis axis) :
     base(currentArea, startCell, size, axis)
@@ -530,6 +536,7 @@ public class GateSpawnInfo : AxisSpawnInfo
         this.gateIndex = gateIndex;
         this.npcName = npcName;
         this.tutorialTargetHash = "";
+        this.statDifficulties = new Dictionary<string, int>();
     }
 
     public GateSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell) :
@@ -539,6 +546,19 @@ public class GateSpawnInfo : AxisSpawnInfo
         this.npcName = npcName;
         this.spriteName = spriteName;
         this.tutorialTargetHash = "";
+        this.statDifficulties = new Dictionary<string, int>();
+    }
+
+    public GateSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, KeyValuePair<string, int> statDifficulty) :
+    base(currentArea, startCell)
+    {
+        this.gateIndex = gateIndex;
+        this.npcName = npcName;
+        this.spriteName = spriteName;
+        this.tutorialTargetHash = "";
+        this.statDifficulties = new Dictionary<string, int>();
+
+        statDifficulties.Add(statDifficulty.Key, statDifficulty.Value);
     }
 
     public GateSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, int size, Axis axis) :
@@ -548,6 +568,7 @@ public class GateSpawnInfo : AxisSpawnInfo
         this.npcName = npcName;
         this.spriteName = spriteName;
         this.tutorialTargetHash = "";
+        this.statDifficulties = new Dictionary<string, int>();
     }
 
     public GateSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, int size, Axis axis, string tutorialTargetHash) :
@@ -557,6 +578,7 @@ public class GateSpawnInfo : AxisSpawnInfo
         this.npcName = npcName;
         this.spriteName = spriteName;
         this.tutorialTargetHash = tutorialTargetHash;
+        this.statDifficulties = new Dictionary<string, int>();
     }
 
     protected virtual string getGateName()
@@ -607,7 +629,7 @@ public class GateSpawnInfo : AxisSpawnInfo
 
     public virtual GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
     {
-        return new GateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, skewed(),  indexHasSprite(spriteName, index), axis);
+        return new GateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, skewed(),  indexHasSprite(spriteName, index), axis, statDifficulties);
     }
 
     public static bool indexHasSprite(string spriteName, int index)
@@ -663,7 +685,7 @@ public class TemporaryGateSpawnInfo : GateSpawnInfo
 
     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
     {
-        return new TemporaryGateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, skewed(), axis);
+        return new TemporaryGateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, skewed(), axis, statDifficulties);
     }
 
 }
@@ -686,20 +708,22 @@ public class GateWithHiddenTerrainSpawnInfo : GateSpawnInfo
         this.tint = tint;        
     }
 
+    public GateWithHiddenTerrainSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Color tint, Vector3Int startCell, string hiddenTerrainFlag, KeyValuePair<string, int> statDifficulty) :
+    base(gateIndex, npcName, currentArea, spriteName, startCell, statDifficulty)
+    {
+        this.hiddenTerrainFlag = hiddenTerrainFlag;        
+        this.tint = tint;        
+    }
+
     public GateWithHiddenTerrainSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell, int size, Axis axis, string hiddenTerrainFlag) :
     base(gateIndex, npcName, currentArea, startCell, size, axis)
     {
         this.hiddenTerrainFlag = hiddenTerrainFlag;        
     }
 
-    // protected override string getGateName()
-    // {
-    //     return npcName + gateIndex;
-    // }
-
     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
     {
-        return new GateWithHiddenTerrainSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, skewed(), hiddenTerrainFlag, tint);
+        return new GateWithHiddenTerrainSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, skewed(), statDifficulties, hiddenTerrainFlag, tint);
     }
 
 }

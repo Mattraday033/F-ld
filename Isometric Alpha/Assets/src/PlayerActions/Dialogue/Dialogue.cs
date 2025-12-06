@@ -18,6 +18,16 @@ public class StoryStatRequirementVariableSource : IStoryVariableSource
         this.statRequirements = statRequirements;
     }
 
+    public StoryStatRequirementVariableSource(Dictionary<string, int> newStatReqs)
+    {
+        this.statRequirements = new List<KeyValuePair<string, int>>();
+
+        foreach(KeyValuePair<string, int> statReq in newStatReqs)
+        {
+            statRequirements.Add(statReq);
+        }
+    }
+
     public Story addVariables(Story story)
     {
         foreach(KeyValuePair<string, int> statRequirement in statRequirements)

@@ -18,7 +18,7 @@ public class SwapAbility : Ability
 		return true;
 	}
 
-	public override void performCombatAction(ArrayList targets)
+	public override void performCombatAction(List<Stats> targets)
 	{
 		GridCoords tempCoords = getActorCoords().clone();
 

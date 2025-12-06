@@ -87,12 +87,12 @@ public class DoubleStrikeAbility : Ability
         Debug.LogError("getTertiarySelector() coords = " + getTertiarySelector().getCoords().ToString());
 
         Selector firstSelector = getSelector();
-        ArrayList firstListOfTargets = firstSelector.getAllTargets();
+        List<Stats> firstListOfTargets = firstSelector.getAllTargets();
 
         Debug.LogError("firstListOfTargets.Count = " + firstListOfTargets.Count);
 
         Selector secondSelector = getTertiarySelector();
-        ArrayList secondListOfTargets = secondSelector.getAllTargets();
+        List<Stats> secondListOfTargets = secondSelector.getAllTargets();
 
         Debug.LogError("secondListOfTargets.Count = " + secondListOfTargets.Count);
 

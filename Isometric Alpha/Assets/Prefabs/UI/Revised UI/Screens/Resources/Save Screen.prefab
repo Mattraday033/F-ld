@@ -1521,6 +1521,11 @@ PrefabInstance:
       objectReference: {fileID: 6005758709957577854}
     - target: {fileID: 6317558153537350181, guid: 684ceeb562e9d6b44bba62908519361a,
         type: 3}
+      propertyPath: defaultSortBy
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317558153537350181, guid: 684ceeb562e9d6b44bba62908519361a,
+        type: 3}
       propertyPath: screenManager
       value: 
       objectReference: {fileID: 0}

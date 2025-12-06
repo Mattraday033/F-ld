@@ -7,7 +7,7 @@ public class BufferTargetPriorityTrait : TargetPriorityTrait
 	private const string initialName = "Support";
 	private const string initialTraitDescription = "This creature does not attack but aids it's allies in other ways.";
 	private const string initialTraitIconName = "Support";
-	private static Color initialIconBackgroundColor = Color.blue;
+	private readonly static Color initialIconBackgroundColor = Color.blue;
 
 	private TargetPriorityTrait targetPriorityTrait;
 
@@ -17,7 +17,7 @@ public class BufferTargetPriorityTrait : TargetPriorityTrait
 		this.targetPriorityTrait = targetPriorityTrait;
 	}
 	
-	public override Selector findTargetLocation(Selector selector, ArrayList listOfTargets)
+	public override Selector findTargetLocation(Selector selector, List<Stats> listOfTargets)
 	{
 		return targetPriorityTrait.findTargetLocation(selector, listOfTargets);
 	}

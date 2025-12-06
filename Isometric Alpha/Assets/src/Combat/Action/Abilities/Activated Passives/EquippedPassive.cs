@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class ActivatedPassive : Ability
+public class EquippedPassive : Ability
 {
 	private const int mustBeUnique = 1;
 	private const int noCooldown = 1;
@@ -11,9 +11,9 @@ public class ActivatedPassive : Ability
 
 	public const string displayType = "Equipped Passive";
 
-	private ArrayList relatedTraits = new ArrayList();
+	private List<Trait> relatedTraits = new List<Trait>();
 
-	public ActivatedPassive(CombatActionSettings settings) :
+	public EquippedPassive(CombatActionSettings settings) :
 	base(settings)
 	{
 
@@ -55,7 +55,7 @@ public class ActivatedPassive : Ability
 		return true;
 	}
 
-	public override ArrayList getNonAppliedRelatedTraits()
+	public override List<Trait> getNonAppliedRelatedTraits()
 	{
 		return relatedTraits;
 	}

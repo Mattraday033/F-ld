@@ -10,7 +10,7 @@ public class TraitHoverMouseListener : GridRow, IPointerEnterHandler, IPointerEx
     private const int maxPanels = 4;
 
 	public DescriptionPanelBuilder traitHoverDescriptionPanel;
-    public ArrayList relatedDescriptionPanelBuilders;
+    public List<DescriptionPanelBuilder> relatedDescriptionPanelBuilders;
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
@@ -18,7 +18,7 @@ public class TraitHoverMouseListener : GridRow, IPointerEnterHandler, IPointerEx
 
         descriptionPanelParent.gameObject.SetActive(true);
 
-        ArrayList relatedDescribables = descriptionPanel.getObjectBeingDescribed().getRelatedDescribables();
+        List<IDescribable> relatedDescribables = descriptionPanel.getObjectBeingDescribed().getRelatedDescribables();
 
         if (relatedDescribables.Count < maxPanels)
         {
@@ -58,13 +58,13 @@ public class TraitHoverMouseListener : GridRow, IPointerEnterHandler, IPointerEx
             Destroy(panel.gameObject);
         }
 
-        relatedDescriptionPanelBuilders = new ArrayList();
+        relatedDescriptionPanelBuilders = new List<DescriptionPanelBuilder>();
         HoverPanel.getTraitDescriptionPanelParent().gameObject.SetActive(false);
     }
 
-    private ArrayList setUpRelatedDescriptionPanelBuilders(ArrayList listOfDescribables, Transform parent)
+    private List<DescriptionPanelBuilder> setUpRelatedDescriptionPanelBuilders(List<IDescribable> listOfDescribables, Transform parent)
     {
-        ArrayList listOfDescriptionPanelBuilders = new ArrayList();
+        List<DescriptionPanelBuilder> listOfDescriptionPanelBuilders = new List<DescriptionPanelBuilder>();
 
         foreach (IDescribable describable in listOfDescribables)
         {

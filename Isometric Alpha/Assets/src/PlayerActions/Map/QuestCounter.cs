@@ -13,7 +13,7 @@ public interface IQuestListSource
 
     public int getNumberOfQuests();
 
-    public ArrayList getListOfQuestsForDisplay();
+    public List<QuestStep> getListOfQuestStepsForDisplay();
 }
 
 public class QuestCounter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
@@ -78,7 +78,7 @@ public class QuestCounter : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             return;
         }
 
-        ArrayList questStepsInScene = questListSource.getListOfQuestsForDisplay();
+        List<QuestStep> questStepsInScene = questListSource.getListOfQuestStepsForDisplay();
 
         questStepGrid.populatePanels(questStepsInScene);
         setQuestStepGridVisibility(true);

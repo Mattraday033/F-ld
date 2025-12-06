@@ -16,7 +16,6 @@ public class CombatUI : MonoBehaviour
 	public Button resolveTurnButton;
 	
 	public Transform descriptionPanelParent;
-	public ArrayList descriptionPanels;
 
 	public static Transform selectorParent;
 	
@@ -51,7 +50,7 @@ public class CombatUI : MonoBehaviour
 	
 	public static void populateCombatActionPanels()
 	{
-		ArrayList actionOrder = CombatActionManager.getCombatActionOrder();
+		List<CombatAction> actionOrder = CombatActionManager.getCombatActionOrder();
 		
 		getInstance().actionOrderGrid.populatePanels(actionOrder);
 		
@@ -75,6 +74,5 @@ public class CombatUI : MonoBehaviour
 		
 		instance = this;
 		combatResultsPopUpButton = new CombatResultsPopUpButton();
-		descriptionPanels = new ArrayList();
 	}
 }

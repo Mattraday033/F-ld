@@ -6,26 +6,22 @@ using UnityEngine;
 
 public class EnemyCombatActionManager : MonoBehaviour
 {
-	/*
-		public int totalEnemyCount; //number of currently alive enemies. Should always be equal to mainEnemyCount + minionCount
-		public int mainEnemyCount;  //number of full enemies whose turn is determined on enemy main phase
-		public int minionCount;		//number of minions whose turn is determined on enemy minion phase
-	*/
-	
-	public static ArrayList enemyCombatActionQueue = new ArrayList();
-    public static ArrayList slowedEnemyCombatActionQueue = new ArrayList();
+	public static List<CombatAction> enemyCombatActionQueue = new List<CombatAction>();
+    public static List<CombatAction> slowedEnemyCombatActionQueue = new List<CombatAction>();
 
-    public SelectorManager selectorManager;
 	
-	//method to populate CombatStateManager.EnemyCombatActionQueue
-	//runs through all enemies in listOfEnemies and assigns them actions
-	//eventually will need to only provide actions for the amount of enemies based on
-	//some enemies leadership stat. For now all enemies attack the player
+    [RuntimeInitializeOnLoadMethod]
+    private static void instantiatePlayerCombatActionManager()
+    {
+        enemyCombatActionQueue = new List<CombatAction>();
+	    slowedEnemyCombatActionQueue = new List<CombatAction>();
+    }
+
 	public void decideEnemyCombatActions()
 	{
-		ArrayList listOfEnemies = CombatGrid.getAllAliveEnemyCombatants();
-		ArrayList lowPriorityAttacks = new ArrayList();
-        ArrayList slowedAttacks = new ArrayList();
+		List<Stats> listOfEnemies = CombatGrid.getAllAliveEnemyCombatants();
+		List<CombatAction> lowPriorityAttacks = new List<CombatAction>();
+        List<CombatAction> slowedAttacks = new List<CombatAction>();
 
         foreach (EnemyStats enemy in listOfEnemies)
 		{			
@@ -99,7 +95,7 @@ public class EnemyCombatActionManager : MonoBehaviour
 	
 	public static void applyLinkDamage()
 	{
-		ArrayList listOfEnemies = CombatGrid.getAllAliveEnemyCombatants();
+		List<Stats> listOfEnemies = CombatGrid.getAllAliveEnemyCombatants();
 		
 		foreach(EnemyStats enemy in listOfEnemies)
 		{

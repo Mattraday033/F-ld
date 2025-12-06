@@ -68,9 +68,9 @@ public class GlossaryEntry : IDescribable
 
 	}
 
-	public ArrayList getRelatedDescribables()
+	public List<IDescribable> getRelatedDescribables()
 	{
-		return new ArrayList();
+		return new List<IDescribable>();
 	}
 
 	public virtual bool buildableWithBlocks()

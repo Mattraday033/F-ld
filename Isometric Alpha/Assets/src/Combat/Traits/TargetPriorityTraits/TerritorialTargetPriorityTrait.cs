@@ -15,7 +15,7 @@ public class TerritorialTargetPriorityTrait : TargetPriorityTrait
 		
 	}
 	
-	public override Stats getMandatoryTarget(ArrayList listOfTargets)
+	public override Stats getMandatoryTarget(List<Stats> listOfTargets)
 	{
 		Stats mandatoryTarget = base.getMandatoryTarget(listOfTargets);
 		

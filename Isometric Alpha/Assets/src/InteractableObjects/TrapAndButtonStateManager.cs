@@ -77,37 +77,3 @@ public class TrapAndButtonStateManager : MonoBehaviour
         TransitionManager.BeforeTransition.RemoveListener(resetTrapKeys);
     }
 }
-
-
-    // void Start()
-    // {
-    //     if(allActivatedTrapKeys != null && allActivatedTrapKeys.Count > 0)
-    // 	{
-    // 		GameObject[] cunningTargets = GameObject.FindGameObjectsWithTag(LayerAndTagManager.cunningTargetTag);
-    // 		GameObject[] permanentButtons = GameObject.FindGameObjectsWithTag(LayerAndTagManager.permanentButtonTag);
-
-    // 		foreach(GameObject cunningTarget in cunningTargets)
-    // 		{
-    // 			CunningObject cunningObject = cunningTarget.GetComponent<CunningObject>();
-
-    // 			if(cunningObject != null && contains(cunningObject.getKey()))
-    // 			{
-    // 				cunningObject.cunning(skipKeyHandling);
-    // 			}
-    // 		}
-
-    // 		foreach(GameObject permanentButton in permanentButtons)
-    // 		{
-    // 			FloorButtonPermanent floorButtonPermanent = permanentButton.GetComponent<FloorButtonPermanent>();
-
-    // 			if(floorButtonPermanent != null && contains(floorButtonPermanent.getKey()))
-    // 			{
-    // 				floorButtonPermanent.handleButtonPress(skipKeyHandling);
-    // 			}
-    // 		}
-
-    // 	} else if(allActivatedTrapKeys == null)
-    // 	{
-    // 		allActivatedTrapKeys = new ArrayList();
-    // 	}
-    // }

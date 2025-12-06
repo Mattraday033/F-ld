@@ -12,7 +12,7 @@ public class NestedDescriptionPanelMouseListener : MonoBehaviour, IPointerEnterH
 {
 	public DescriptionPanelParent parentType;
 	public DescriptionPanel inputDescriptionPanel; //descriptionPanel that when moused over needs to be described in more detail
-	public ArrayList relatedDescriptionPanels;
+	public List<DescriptionPanelBuilder> relatedDescriptionPanels;
 	private DescriptionPanelBuilder outputDescriptionPanel;
 	
 	public Transform getDescriptionPanelParent()
@@ -64,7 +64,7 @@ public class NestedDescriptionPanelMouseListener : MonoBehaviour, IPointerEnterH
 		
 		outputDescriptionPanel = setUpDescriptionPanel(describable, descriptionPanelParent);
 
-		relatedDescriptionPanels = setUpDescriptionPanels(describable.getRelatedDescribables(), descriptionPanelParent);
+		relatedDescriptionPanels = setUpDescriptionPanels(describable.getRelatedDescribables(), descriptionPanelParent); 
 	}
  
 	public void destroyAllDescriptionPanels()
@@ -89,13 +89,13 @@ public class NestedDescriptionPanelMouseListener : MonoBehaviour, IPointerEnterH
 			Destroy(builder.gameObject);
 		}
 		
-		relatedDescriptionPanels = new ArrayList();
+		relatedDescriptionPanels = new List<DescriptionPanelBuilder>();
 		getDescriptionPanelParent().gameObject.SetActive(false);
 	}
  
-	private ArrayList setUpDescriptionPanels(ArrayList listOfDescribables, Transform parent)
+	private List<DescriptionPanelBuilder> setUpDescriptionPanels(List<IDescribable> listOfDescribables, Transform parent)
 	{
-		ArrayList listOfDescriptionPanels = new ArrayList();
+		List<DescriptionPanelBuilder> listOfDescriptionPanels = new List<DescriptionPanelBuilder>();
 		
 		foreach(IDescribable describable in listOfDescribables)
 		{

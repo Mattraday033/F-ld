@@ -8,7 +8,7 @@ public class SnapSelectorToMaster : TutorialSequenceStepScript
     public override void runScript(GameObject target) 
     {
         // snaps to master with shielded trait
-        ArrayList allEnemies = CombatGrid.getAllAliveEnemyCombatants();
+        List<Stats> allEnemies = CombatGrid.getAllAliveEnemyCombatants();
 
         Stats shieldedEnemy;
 

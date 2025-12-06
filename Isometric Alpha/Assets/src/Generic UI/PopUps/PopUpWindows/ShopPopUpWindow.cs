@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -197,7 +198,7 @@ public class ShopPopUpWindow : PopUpWindow
         }
     }
 
-    private ArrayList getCurrentInventory()
+    private IEnumerable<IDescribable> getCurrentInventory()
     {
         Dictionary<string, Item> currentPocket;
 
@@ -234,7 +235,7 @@ public class ShopPopUpWindow : PopUpWindow
             return true;
         }
 
-        return Tab.getList(DescribableList.ShopKeeperMainHandWeapons).Count > 0;
+        return new List<IDescribable>(Tab.getList(DescribableList.ShopKeeperMainHandWeapons)).Count > 0;
     }
 
     private bool useItemTabVisible()
@@ -244,7 +245,7 @@ public class ShopPopUpWindow : PopUpWindow
             return true;
         }
 
-        return Tab.getList(DescribableList.ShopKeeperUseItems).Count > 0;
+        return Tab.getList(DescribableList.ShopKeeperUseItems).Count() > 0;
     }
 
     private bool offHandTabVisible()
@@ -254,7 +255,7 @@ public class ShopPopUpWindow : PopUpWindow
             return true;
         }
 
-        return Tab.getList(DescribableList.ShopKeeperOffHandWeapons).Count > 0;
+        return Tab.getList(DescribableList.ShopKeeperOffHandWeapons).Count() > 0;
     }
 
     private bool armorTabVisible()
@@ -264,7 +265,7 @@ public class ShopPopUpWindow : PopUpWindow
             return true;
         }
 
-        return Tab.getList(DescribableList.ShopKeeperArmor).Count > 0;
+        return Tab.getList(DescribableList.ShopKeeperArmor).Count() > 0;
     }
 
     private bool essentialTabVisible()
@@ -274,7 +275,7 @@ public class ShopPopUpWindow : PopUpWindow
             return false;
         }
 
-        return Tab.getList(DescribableList.ShopKeeperEssentialItems).Count > 0;
+        return Tab.getList(DescribableList.ShopKeeperEssentialItems).Count() > 0;
     }
 
     private bool junkTabVisible()
@@ -343,7 +344,7 @@ public class ShopPopUpWindow : PopUpWindow
 
     public void sellAllJunkButtonPress()
     {
-        ArrayList junkList = Tab.getList(DescribableList.Junk);
+        IEnumerable<IDescribable> junkList = Tab.getList(DescribableList.Junk);
 
         foreach (Item item in junkList)
         {

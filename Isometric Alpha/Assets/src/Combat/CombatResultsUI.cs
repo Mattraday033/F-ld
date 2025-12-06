@@ -55,7 +55,7 @@ public class CombatResultsUI : PopUpWindow
 
     private void displayDrops(DropTable dropTable, int numberOfDrops, ItemListID[] guaranteedDrops, int xpDropped)
     {
-        ArrayList itemDrops = CombatResultsManager.determineItemDrops(dropTable, numberOfDrops, guaranteedDrops);
+        List<Item> itemDrops = CombatResultsManager.determineItemDrops(dropTable, numberOfDrops, guaranteedDrops);
         int goldDropped = CombatResultsManager.determineGoldDrops(dropTable, numberOfDrops);
 
         if (xpDropped < 0)

@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class ClockwiseTargetPriorityTrait : TargetPriorityTrait
 {
-	private static string initialName = "Clockwise";
-	private static string initialTraitDescription = "This creature chooses it's targets in a cycle in the clockwise direction.";
-	private static string initialTraitIconName = "Clockwise";
-	private static Color initialIconBackgroundColor = Color.black;
+	private const string initialName = "Clockwise";
+	private const string initialTraitDescription = "This creature chooses it's targets in a cycle in the clockwise direction.";
+	private const string initialTraitIconName = "Clockwise";
+	private readonly static Color initialIconBackgroundColor = Color.black;
 	
 	public GridCoords[] positions;
 	
@@ -18,7 +18,7 @@ public class ClockwiseTargetPriorityTrait : TargetPriorityTrait
 		this.positions = positions;
 	}
 	
-	public override Selector findTargetLocation(Selector selector, ArrayList listOfTargets)
+	public override Selector findTargetLocation(Selector selector, List<Stats> listOfTargets)
 	{		
 		for(int positionsIndex = 0; positionsIndex < positions.Length; positionsIndex++)
 		{

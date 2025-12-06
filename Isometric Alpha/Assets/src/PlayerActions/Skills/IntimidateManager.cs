@@ -132,7 +132,7 @@ public class IntimidateManager : CunningManager
 
     public override bool executeSkill()
     {
-        ArrayList listOfTargets = new ArrayList();
+        List<ISkillTarget> listOfTargets = new List<ISkillTarget>();
 
         foreach (GameObject tile in skillGrid)
         {

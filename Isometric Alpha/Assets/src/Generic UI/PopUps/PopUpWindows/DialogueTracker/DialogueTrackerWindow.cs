@@ -38,17 +38,17 @@ public class DialogueTrackerWindow : PopUpWindow, IEscapable
 		dialogueGrid.populatePanels(conversation.getDialogueList());
 	}
 
-	public void populateDialogue(ArrayList dialogueList)
+	public void populateDialogue(List<DialogueLine> dialogueList)
 	{
 		dialogueGrid.populatePanels(dialogueList);
 	}
 
-	public void appendDialogue(ArrayList dialogueList)
+	public void appendDialogue(List<DialogueLine> dialogueList)
 	{
 		dialogueGrid.appendPanels(dialogueList);
 	}
 
-	public void populateChoices(ArrayList choicesList)
+	public void populateChoices(List<ChoiceDescription> choicesList)
 	{
 		choicesGrid.populatePanels(choicesList);
 	}

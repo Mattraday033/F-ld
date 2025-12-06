@@ -77,8 +77,8 @@ public class ChangeMapZoneButton : MonoBehaviour, IQuestListSource
         return QuestList.getNumberOfActiveUnfinishedQuestsInZone(zoneKey);
     }
 
-	public ArrayList getListOfQuestsForDisplay()
+	public List<QuestStep> getListOfQuestStepsForDisplay()
 	{
-		return QuestList.getActiveUnfinishedQuestStepsInZone(zoneKey);
+		return QuestList.getActiveUnfinishedQuestStepsInZone(zoneKey); 
 	}
 }

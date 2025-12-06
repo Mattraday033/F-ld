@@ -22,15 +22,15 @@ public class GeneratedTargetPriorityTrait : TargetPriorityTrait
 		return targetParameters.deterministic();
 	}
 	
-	public override Selector findTargetLocation(Selector selector, ArrayList listOfTargets)
+	public override Selector findTargetLocation(Selector selector, List<Stats> listOfTargets)
 	{
 		return findTargetLocation(listOfTargets);
 	}
 	
-	private Selector findTargetLocation(ArrayList listOfTargets)
+	private Selector findTargetLocation(List<Stats> listOfTargets)
 	{
 		List<Selector> allTargetSelectors = new List<Selector>();
-		ArrayList placeHolderGridCoords = new ArrayList();
+		List<GridCoords> placeHolderGridCoords = new List<GridCoords>();
 		int spacesLeft = 0;
 		
 		// if(targetParameters.targetsOnlyEmptySpace())

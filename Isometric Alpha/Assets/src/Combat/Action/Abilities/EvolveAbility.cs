@@ -96,7 +96,7 @@ public class EvolveAbility : Ability
 		actionWhenInAttackMode.setTargetCoords(newTargetCoords);
 	}
 	*/
-	public override void performCombatAction(ArrayList targets)
+	public override void performCombatAction(List<Stats> targets)
 	{
 		if(inAttackMode())
 		{	

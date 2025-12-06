@@ -157,7 +157,6 @@ public class PlayerMovement : MovementTracker
 
     public DialogueManager dialogueManager;
     public DialogueTrigger dialogueTrigger;
-    public LessonUIManager lessonUIManager;
 
     public MapPopUpButton mapPopUpButton;
 
@@ -179,7 +178,7 @@ public class PlayerMovement : MovementTracker
     public CunningManager cunningManager;
     public IntimidateManager intimidateManager;
 
-    private ArrayList barredMovementKeyCodes = new ArrayList(); //key codes that are not able to be used because you have selected
+    private List<KeyCode> barredMovementKeyCodes = new List<KeyCode>(); //key codes that are not able to be used because you have selected
                                                                 //multiple keys at once. Pressing W, then while W is pressed also
                                                                 //pressing A should stop accepting W as an input and allow A.
 
@@ -271,11 +270,6 @@ public class PlayerMovement : MovementTracker
             dialogueManager = DialogueManager.getInstance();
         }
 
-        if (lessonUIManager == null)
-        {
-            lessonUIManager = LessonUIManager.getInstance();
-        }
-
         transitionCollider = GetComponent<CircleCollider2D>();
 
         adjustDirectionalModifierGrid();
@@ -322,7 +316,6 @@ public class PlayerMovement : MovementTracker
         if ((KeyPressManager.handlingPrimaryKeyPress && PlayerOOCStateManager.currentActivity != OOCActivity.inChestUI &&
                                                 PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence)
         || !FadeToBlackManager.isTransparent())
-        //|| AdjustPartyRosterManager.isInPartySelection || lessonUIManager.isLearningLesson)
         {
             return;
         }
@@ -1021,7 +1014,7 @@ public class PlayerMovement : MovementTracker
 
         if (currentMovementKeyCode == KeyCode.None && barredMovementKeyCodes.Count != 0)
         {
-            barredMovementKeyCodes = new ArrayList();
+            barredMovementKeyCodes = new List<KeyCode>();
         }
 
         int numberOfMovementKeysPressed = KeyPressManager.numberOfMovementKeysPressed();
@@ -1039,7 +1032,7 @@ public class PlayerMovement : MovementTracker
 
                 if (barredMovementKeyCodes.Count != 0)
                 {
-                    barredMovementKeyCodes = new ArrayList();
+                    barredMovementKeyCodes = new List<KeyCode>();
                 }
                 break;
             case 2:

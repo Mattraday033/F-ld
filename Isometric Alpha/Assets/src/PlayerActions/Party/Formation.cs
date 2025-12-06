@@ -402,9 +402,9 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
         return allCombatActionArrays;
     }
 
-    public ArrayList getAllPartyStatsInFormation()
+    public List<AllyStats> getAllPartyStatsInFormation()
     {
-        ArrayList stats = new ArrayList();
+        List<AllyStats> stats = new List<AllyStats>();
 
         AllyStats player = PartyManager.getPlayerStats();
 
@@ -478,9 +478,9 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
     {
     }
 
-	public ArrayList getRelatedDescribables()
+	public List<IDescribable> getRelatedDescribables()
     {
-        return new ArrayList();
+        return new List<IDescribable>();
     }
 
 	public bool buildableWithBlocks()

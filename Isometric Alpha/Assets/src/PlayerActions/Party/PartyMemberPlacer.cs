@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class PartyMemberPlacer : MonoBehaviour
 {
-	public static ArrayList placedPartyMemberObjects = new ArrayList();
+	public static List<GameObject> placedPartyMemberObjects = new List<GameObject>();
 
     public readonly static UnityEvent DestroyAllFollowers = new UnityEvent();
 
@@ -18,7 +18,7 @@ public class PartyMemberPlacer : MonoBehaviour
     [RuntimeInitializeOnLoadMethod]
     private static void instantiatePartyMemberPlacer()
     {
-        placedPartyMemberObjects = new ArrayList();
+        placedPartyMemberObjects = new List<GameObject>();
 
         instance = null;
     }
@@ -31,7 +31,7 @@ public class PartyMemberPlacer : MonoBehaviour
 	public static void placeAllPartyMembers()
     {
         DestroyAllFollowers.Invoke();
-		placedPartyMemberObjects = new ArrayList();
+		placedPartyMemberObjects = new List<GameObject>();
 
 		List<PartyMember> allPartyMembers = PartyManager.getAllPartyMembers();
 
@@ -150,7 +150,7 @@ public class PartyMemberPlacer : MonoBehaviour
         DestroyAllFollowers.Invoke();
         MovementManager.OnMoveFinished.Invoke(Constants.indexZero);
 
-        placedPartyMemberObjects = new ArrayList();
+        placedPartyMemberObjects = new List<GameObject>();
     }
 
 	public static int getPlacedPartyMemberCount()

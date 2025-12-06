@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ZoneOfInfluenceManager: MonoBehaviour
 {
-	private ActivatedPassiveTraitManager activatedPassiveTraitManager;
+	private EquippedPassiveTraitManager equippedPassiveTraitManager;
 	private static ZoneOfInfluenceManager instance;
 	
 	
@@ -27,16 +27,16 @@ public class ZoneOfInfluenceManager: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		activatedPassiveTraitManager = ActivatedPassiveTraitManager.getInstance();
+		equippedPassiveTraitManager = EquippedPassiveTraitManager.getInstance();
 		
-        activatedPassiveTraitManager.addEquippedPassiveTraits();
+        equippedPassiveTraitManager.addEquippedPassiveTraits();
 		
 		applyAllZOITraits();
     }
 
 	public void applyAllZOITraits()
 	{
-		ArrayList listOfAllies = CombatGrid.getAllAliveAllyCombatants();
+		List<Stats> listOfAllies = CombatGrid.getAllAliveAllyCombatants();
 		
 		foreach(Stats ally in listOfAllies)
 		{
@@ -51,7 +51,7 @@ public class ZoneOfInfluenceManager: MonoBehaviour
 	
 	private Trait[] getAllZOITraitsAtCoords(GridCoords coords)
 	{
-		ArrayList ZOITargets = CombatGrid.getAllZOITargets(coords); //used to get all creatures both within someone's ZOI
+		List<Stats> ZOITargets = CombatGrid.getAllZOITargets(coords); //used to get all creatures both within someone's ZOI
 		Trait[] traits = new Trait[0];								//and also can be used to get all creatures providing ZOI
 																	//benefits back to the target
 		foreach(Stats target in ZOITargets)

@@ -22,7 +22,7 @@ public class Attack : CombatAction, IJSONConvertable
         this.mainHandWeapon.equipTarget = actor;
     }
 
-	public override void performCombatAction(ArrayList targets)
+	public override void performCombatAction(List<Stats> targets)
 	{
 		base.performCombatAction(targets);
 

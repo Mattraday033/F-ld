@@ -55,6 +55,7 @@ VAR mineLvl3DealtWithGaspar = false
 VAR kastorReadyToStartRevolt = false
 VAR mineLvl3MarcosAgreedToIgniteJelly = false
 VAR broughtNandorToKastor = false
+VAR startedRevolt = false
 VAR kastorStartedRevolt = false
 VAR toldCarterPassword = false
 VAR toldCarterWrongPassword = false
@@ -645,7 +646,7 @@ Correct. I am not Carter, the Confederation serf branded for horse-smuggling, bu
     
     I meant no offense, Kastor. Anyways, lets start at the basics. As you know, the majority of the serfs in the Confederation are descended from the Folk of the Craft, and most of the lords and landowners in the Confederation are descended from the Folk of the Saddle, or the Lovashi as they refer to themselves.
         
-    Both the subjects and lords of the Kingdom of Masons, myself included, share blood with your people. Infact, almost all of the land now controlled by the Confederation was once owned by one Craft Folk Kingdom or another, though most of them succumbed to the Lovashi decades ago. We Masons are one of the last Kingdoms, alongside the Smiths and Jewellers.
+    Both the subjects and lords of the Kingdom of Masons, myself included, share blood with your people. In fact, almost all of the land now controlled by the Confederation was once owned by one Craft Folk Kingdom or another, though most of them succumbed to the Lovashi decades ago. We Masons are one of the last Kingdoms, alongside the Smiths and Jewellers.
     
     As for what the Kingdom is like itself? Much of the northern portion was ravaged when we repelled the last Lovashi incursion. After that, and the years of famine that followed, we've only recently begun resettling. Much of the north is overgrown or abandoned; a frontier within our own kingdom. But the south wasn't as affected, which is where most of the cities are. 
     
@@ -678,7 +679,7 @@ Masonic Command is the council of generals that advises the King on military mat
 ~learnedCartersIdentity = true
 setToTrue(learnedPagesIdentity)
 
-The other agent is a nonbranded slave in the service of the Director named 'Page'. She has been a spy in the Director's household for years; since well before this camp was built, and the Director became the Director. She's the one who got word back to Command about the camp's existence. I've only spoken a few times, since meeting within the camp walls was risky, but she seems to have a cool head on her shoulders.
+The other agent is a nonbranded slave in the service of the Director named 'Page'. She has been a spy in the Director's household for years; since well before this camp was built, and the Director became the Director. She's the one who got word back to Command about the camp's existence. We've only spoken a few times, since meeting within the camp walls was risky, but she seems to have a cool head on her shoulders.
 
     +It sounds like she would have to, considering how long she has been undercover.
         keepDialogue()
@@ -1680,11 +1681,11 @@ changeCamTarget({kastorIndex})
     
         changeCamTarget({nandorIndex})
         
-        Yes, and infact, Kastor, Carter, and myself were the first to set the plan in motion. We decided who to recruit, and what jobs they should perform.
+        Yes, Kastor, Carter, and myself were the first to set the plan in motion. We decided who to recruit, and what jobs they should perform.
         
         changeCamTarget({kastorIndex})
         
-        With that out of the way, we should get right to discussing how to procede with the plan. A guard could enter at any moment and disrupt us, and we would have a hard time explaining Nándor, Carter, and Márcos's sudden reappearance.
+        With that out of the way, we need to discuss how to procede with the plan. A guard could enter at any moment and disrupt us, and we would have a hard time explaining Nándor, Carter, and Márcos's sudden reappearance.
             ->6cab
 }
 
@@ -1914,7 +1915,7 @@ It looks like everything is finished. We are ready to move on to the final part 
 setToTrue(kastorReadyToStartRevolt)
 ~kastorReadyToStartRevolt = true
 
-Are you ready to begin the revolt? After we kick things off, we won't be able to turn back.
+Are you ready to begin our revolution? After we kick things off, we won't be able to turn back.
 
     +I'm ready. Let us finally start this thing.
             ->7ac
@@ -1924,7 +1925,7 @@ Are you ready to begin the revolt? After we kick things off, we won't be able to
 
 === 7ab ===
 
-Are you ready to begin the revolt? After we kick things off, we won't be able to turn back.
+Are you ready to begin our revolution? After we kick things off, we won't be able to turn back.
 
     +I'm ready. Let us finally start this thing.
         ->7ac
@@ -1933,7 +1934,7 @@ Are you ready to begin the revolt? After we kick things off, we won't be able to
         ->Close
 
 === 7ac ===
-        fadeToBlack()
+        fadeToBlack(true, false)
 
         hideTrain()
         
@@ -2099,6 +2100,7 @@ setToTrue(imreReadyToHelpPlayer)
 activateQuestStep(Assist the Nonbranded,2)
 }
 
+setToTrue(startedRevolt)
 setToTrue(kastorStartedRevolt)
 activateQuestStep(The Plan,12)
 
@@ -2133,7 +2135,7 @@ I'm not much of a fighter, but I've tended my fair share of wounds from the mine
 
 {
 -formationFlagNándor or formationFlagCarter or restAfterDeactivatingExtras:
-    fadeToBlack(false)
+    fadeToBlack(false, false)
 }
 
 {

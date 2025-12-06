@@ -57,7 +57,7 @@ public static class KeyPressManager
         return KeyCode.None;
     }
 
-    public static KeyCode getFirstNonBarredMovementKeyPressedDetectedInWASDOrder(ArrayList barredMovementKeyCodes)
+    public static KeyCode getFirstNonBarredMovementKeyPressedDetectedInWASDOrder(List<KeyCode> barredMovementKeyCodes)
     {
         foreach (KeyCode keyCode in WASDKeys)
         {

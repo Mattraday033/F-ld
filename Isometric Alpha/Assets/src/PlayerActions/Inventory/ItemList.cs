@@ -30,7 +30,7 @@ public struct ItemListID
 
 public static class ItemList 
 {
-    public static ArrayList allItems;
+    public static List<List<Item>> allItems;
 
 	public const int onlyAcceptableEquippedItemQuantity = 1;
 	public const string dominantFistKey = "Dominant Fist";
@@ -210,17 +210,16 @@ public static class ItemList
 	[RuntimeInitializeOnLoadMethod]
 	private static void initializeItemList()
 	{
-        allItems = new ArrayList();
+        allItems = new List<List<Item>>();
 
-		ArrayList usableItems = new ArrayList();
-		ArrayList weapons = new ArrayList();
-		ArrayList armor = new ArrayList();
-		ArrayList questItems = new ArrayList();
-		ArrayList keys = new ArrayList();
-		ArrayList treasure = new ArrayList();
-		ArrayList monsterWeapons = new ArrayList();
-		ArrayList partyMemberWeapons = new ArrayList();
-		ArrayList books = new ArrayList();
+		List<Item> usableItems = new List<Item>();
+		List<Item> weapons = new List<Item>();
+		List<Item> armor = new List<Item>();
+		List<Item> questItems = new List<Item>();
+		List<Item> keys = new List<Item>();
+		List<Item> treasure = new List<Item>();
+		List<Item> partyMemberWeapons = new List<Item>();
+		List<Item> books = new List<Item>();
 
 		//HealingItem(string key, string loreDescription, string useDescription, int worth, int amountToHeal)
 		usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, rationsIndex), "Rations", "Moldy bread and grimy pemmican.", "Rations", 5, rationsHealingAmount));
@@ -349,6 +348,23 @@ public static class ItemList
 		allItems.Add(treasure);             // listIndex = 5
 		allItems.Add(partyMemberWeapons);   // listIndex = 6
 		allItems.Add(books);                // listIndex = 7
+
+        DropTableList.slaveMineDT1 = new DropTable(DropTableList.slaveMineDT1Name, 3, 9,
+														 new Item[]{
+                                                                        ItemList.getItem(ItemList.usableItemListIndex, ItemList.rationsIndex, 1),
+                                                                        ItemList.getItem(ItemList.weaponsListIndex, ItemList.malletIndex, 1),
+                                                                        ItemList.getItem(ItemList.armorListIndex, ItemList.clothGlovesIndex, 1),
+                                                                        ItemList.getItem(ItemList.armorListIndex, ItemList.rottenSandalsIndex, 1),
+                                                                        ItemList.getItem(ItemList.armorListIndex, ItemList.potLidIndex, 1),
+                                                                        ItemList.getItem(ItemList.armorListIndex, ItemList.minersHelmetIndex, 1),
+                                                                        ItemList.getItem(ItemList.treasureItemListIndex, ItemList.ironNuggetIndex, 1),
+																	    null
+                                                                    },
+														 new float[]{.1f,.025f,.025f,.025f,.025f,.025f,.025f,.75f});	
+
+        DropTableList.allDropTables = new List<DropTable>();
+
+		DropTableList.allDropTables.Add(DropTableList.slaveMineDT1);
 	}
 	
 	public static Item getItem(string listIndex, string itemIndex)
@@ -382,11 +398,11 @@ public static class ItemList
 	
 	public static Item getItem(int listIndex, int itemIndex, int quantity){
 		
-		ArrayList currentItemList = (ArrayList) allItems[listIndex];
+		List<Item> currentItemList = allItems[listIndex];
 		
-		Item itemTemplate = (Item) currentItemList[itemIndex];
+		Item itemTemplate = currentItemList[itemIndex];
 		
-		Item output = (Item) itemTemplate.Clone();
+		Item output = itemTemplate.clone();
 		
 		output.setQuantity(quantity);
 		

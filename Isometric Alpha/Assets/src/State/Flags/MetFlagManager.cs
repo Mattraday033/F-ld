@@ -4,20 +4,30 @@ using UnityEngine;
 
 public static class MetFlagManager
 {
-	public static ArrayList metNames = new ArrayList();
+	public static Dictionary<string, bool> metNames = new Dictionary<string, bool>();
 
 	public static void addName(string npcName)
 	{
-		metNames.Add(npcName);
+		metNames.Add(npcName, true);
 	}
 	
 	public static bool metBefore(string npcName)
 	{
-		return metNames.Contains(npcName);
+		return metNames.ContainsKey(npcName);
 	}
 
 	public static void resetAllMetNpcs()
 	{
-		metNames = new ArrayList();
+		metNames = new Dictionary<string, bool>();
 	}
+
+    public static void resetAllMetNpcs(List<string> newMetNPCNames)
+    {
+        metNames = new Dictionary<string, bool>();
+
+        foreach(string metName in newMetNPCNames)
+        {
+            addName(metName);
+        }
+    }
 }

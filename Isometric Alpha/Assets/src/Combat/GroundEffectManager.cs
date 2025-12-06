@@ -56,7 +56,7 @@ public class GroundEffectManager : MonoBehaviour
 	
 	public Transform indicatorParent;
 	public Transform damageNumberCanvas;
-	public ArrayList allGroundEffects = new ArrayList();
+	public List<GroundEffect> allGroundEffects = new List<GroundEffect>();
 
 	public static void createNewGroundEffect(GroundEffect template, GridCoords coords)
 	{
@@ -88,7 +88,7 @@ public class GroundEffectManager : MonoBehaviour
 		}
 	}
 	
-	public static ArrayList getAllGroundEffects()
+	public static List<GroundEffect> getAllGroundEffects()
 	{
 		return getInstance().allGroundEffects;
 	}

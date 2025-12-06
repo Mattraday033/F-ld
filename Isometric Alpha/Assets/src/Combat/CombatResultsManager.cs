@@ -7,7 +7,7 @@ public static class CombatResultsManager
 {
 	public static bool rerolled = false;
 
-	public static ArrayList determineItemDrops(DropTable dropTable, int numberOfDrops, ItemListID[] guaranteedDrops)
+	public static List<Item> determineItemDrops(DropTable dropTable, int numberOfDrops, ItemListID[] guaranteedDrops)
     {
 
         if (dropTable.items.Length < dropTable.dropChances.Length)
@@ -15,7 +15,7 @@ public static class CombatResultsManager
             throw new IOException("Each Item in drop table does not have a drop chance");
         }
 
-        ArrayList itemNames = new ArrayList();
+        List<Item> itemDrops = new List<Item>();
 
         if (guaranteedDrops != null)
         {
@@ -23,14 +23,14 @@ public static class CombatResultsManager
             {
                 Item item = ItemList.getItem(guaranteedDropID);
 
-                itemNames.Add(item.Clone());
-                Inventory.addItem((Item)item.Clone());
+                itemDrops.Add(item.clone());
+                Inventory.addItem(item.clone());
             }
         }
 
         if (State.enemyPackInfo.isBossMonster)
         {
-            return itemNames;
+            return itemDrops;
         }
 
         float currentDieRoll = 0f;
@@ -58,8 +58,8 @@ public static class CombatResultsManager
                         break;
                     }
 
-                    itemNames.Add(item.Clone());
-                    Inventory.addItem((Item)item.Clone());
+                    itemDrops.Add(item.clone());
+                    Inventory.addItem(item.clone());
                 }
 
                 currentTableProbability += dropTable.dropChances[index];
@@ -70,7 +70,7 @@ public static class CombatResultsManager
 
 
         rerolled = false;
-        return itemNames;
+        return itemDrops;
     }
 	
 	public static int determineGoldDrops(DropTable dropTable, int numberOfDrops)

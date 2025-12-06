@@ -18,7 +18,7 @@ public static class TraitList
 	public const string interactionTypeTraitType = "Interaction";
 	public const string positioningTraitType = "Positioning";
 	public const string passiveTraitType = "Passive";
-	public const string activatedPassiveTraitType = "Equipped Passive";
+	public const string equippedPassiveTraitType = "Equipped Passive";
 	public const string stanceTraitType = "Stance";
 	public const string sizeTraitType = "Size";
 
@@ -201,23 +201,23 @@ public static class TraitList
 	public readonly static Trait insecure = new VulnerabilityTrait("Insecure", mentalTraitType, "This creature is no longer sure of it's own defenses. This creature takes " + insecureExtraDamage + " extra damage whenever it is hit.", "Victimize", Color.black, insecureExtraDamage);
 	public readonly static Trait demoralized = new SlowingTrait("Demoralized", mentalTraitType, "This creature is reluctant to fight. It takes " + demoralizeExtraDamage + " extra damage and always attacks last in the action order.", "Demoralize", fourRoundDuration, Color.black, demoralizeExtraDamage);
 	public readonly static Trait choking = new CrowdControlTrait(chokingKey, woundTraitType, "This creature is stunned, and cannot complete any actions until this trait is removed.", "SmokeBomb", oneRoundDuration, Color.black);
-    public readonly static Trait caveMadness = new SlowingTrait(caveMadnessKey, mentalTraitType, "The ringing won't stop! The afflicted creature is slowed and takes " + caveMadnessExtraDamage + " extra damage when struck.", caveMadnessKey, twoRoundDuration, Color.black, caveMadnessExtraDamage);
+    public readonly static Trait caveMadness = new SlowingTrait(caveMadnessKey, mentalTraitType, "The ringing won't stop! The afflicted creature always moves last in the action order, and takes " + caveMadnessExtraDamage + " extra damage when struck.", caveMadnessKey, twoRoundDuration, Color.black, caveMadnessExtraDamage);
 	
 
 	//permanent debuffs
 	public readonly static Trait flensed = new DamageOverTimeTrait("Flensed", woundTraitType, "This creature takes 3D + 5 damage at the end of every round for the rest of combat.", "Flense", Color.black, "3D + 5");
 	public readonly static Trait isolated = new BreakableCrowdControlTrait("Isolated", mentalTraitType, "This creature has been removed from battle and cannot act until it is dealt damage.", "Isolate", Color.black);
 
-	//ActivatedPassiveBuffs
-	public readonly static Trait wearyHeart = new Trait("Weary Heart", activatedPassiveTraitType, "This creature's Armor is increased by 5 and your chance to successfully retreat is increased by 20%.", "WearyHeart", Color.black);
-	public readonly static Trait devastatingCriticals = new Trait(devastatingCriticalsKey, activatedPassiveTraitType, "This creature's critical hits deal D% of the victim's health as extra damage normally, and 2D% during a surprise round. Critical hits caused by single target actions can cause a random enemy to receive the '" + afraid.getName() + "' trait.", devastatingCriticalsKey, Color.black);
-	public readonly static Trait intimidatingPressence = new MandatoryTargetTrait("Intimidating Pressence", activatedPassiveTraitType, "All enemy attack patterns must include this creature when possible. Useful for preventing enemies from attacking weaker or hurt allies.", "InitmidatingPressence", Color.black);
-	private readonly static Trait bloodlustBaseTrait = new DamageBoostTrait("Bloodlust", activatedPassiveTraitType, "The red mist descends, causing the creature to deal " + bloodlustExtraDamage + " more damage per stack. Gain a stack at the start of every turn, and whenever you slay a minion or summoned enemy. Maximum of " + bloodlustMaximumStacks + " stacks.", "Bloodlust", Color.black, bloodlustExtraDamage);
+	//EquippedPassiveBuffs
+	public readonly static Trait wearyHeart = new Trait("Weary Heart", equippedPassiveTraitType, "This creature's Armor is increased by 5 and your chance to successfully retreat is increased by 20%.", "WearyHeart", Color.black);
+	public readonly static Trait devastatingCriticals = new Trait(devastatingCriticalsKey, equippedPassiveTraitType, "This creature's critical hits deal D% of the victim's health as extra damage normally, and 2D% during a surprise round. Critical hits caused by single target actions can cause a random enemy to receive the '" + afraid.getName() + "' trait.", devastatingCriticalsKey, Color.black);
+	public readonly static Trait intimidatingPressence = new MandatoryTargetTrait("Intimidating Pressence", equippedPassiveTraitType, "All enemy attack patterns must include this creature when possible. Useful for preventing enemies from attacking weaker or hurt allies.", "InitmidatingPressence", Color.black);
+	private readonly static Trait bloodlustBaseTrait = new DamageBoostTrait("Bloodlust", equippedPassiveTraitType, "The red mist descends, causing the creature to deal " + bloodlustExtraDamage + " more damage per stack. Gain a stack at the start of every turn, and whenever you slay a minion or summoned enemy. Maximum of " + bloodlustMaximumStacks + " stacks.", "Bloodlust", Color.black, bloodlustExtraDamage);
 	public readonly static Trait bloodlust = new StackOnKillOrNewTurnTrait(new UnityEvent[] { EnemyStats.OnMinionSummonDeath, CombatStateManager.OnNewTurn }, oneStackAtStart, oneStackPerApplication, bloodlustMaximumStacks, ActionCostType.Bloodlust, bloodlustBaseTrait);
     private readonly static Trait halfHandStanceBaseTrait = new DamageBoostTrait("Half Hand Stance", stanceTraitType, "A balanced stance, increasing damage dealt by " + halfHandStanceExtraDamage + " and decreasing damage taken by " + halfHandStanceExtraDamage + " per stack. Starts with " + halfHandStanceStartingStacks + " stacks. Gain stacks by attacking with fists or staffs. Only one stance can be active at a time.", "Half Hand Stance", Color.black, halfHandStanceExtraDamage);
     private readonly static Trait halfHandStanceBaseTrait2 = new VulnerabilityTrait("Half Hand Stance", stanceTraitType, "", "Bloodlust", Color.black, -1*halfHandStanceExtraDamage);
     public readonly static Trait halfHandStance = new StackableTrait(Stance.OnStanceApplyingWeaponAttack, fourStacksAtStart, oneStackPerApplication, ActionCostType.Stance, new Trait[] { halfHandStanceBaseTrait, halfHandStanceBaseTrait2 });
-    private readonly static Trait predationBaseTrait = new DamageBoostTrait("Predation", activatedPassiveTraitType, "Your brutal strikes reinvigorate you. Whenever you deal 100% or more of a Master enemy's health in one hit, you heal for D/2 health and gain 10% Armor Penetration and 4 extra damage per attack. The enemy does not need to be at full health to activate Predation.", "Predation", Color.black, predationExtraDamage);
+    private readonly static Trait predationBaseTrait = new DamageBoostTrait("Predation", equippedPassiveTraitType, "Your brutal strikes reinvigorate you. Whenever you deal 100% or more of a Master enemy's health in one hit, you heal for D/2 health and gain 10% Armor Penetration and 4 extra damage per attack. The enemy does not need to be at full health to activate Predation.", "Predation", Color.black, predationExtraDamage);
     public readonly static Trait predation = new StackOnKillTrait(Stats.PredationProc, zeroStacksAtStart, oneStackPerApplication, ActionCostType.Predation, predationBaseTrait);
 
 	//Charisma passive stackable traits

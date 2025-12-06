@@ -12,10 +12,10 @@ public class EnemySpawner : MonoBehaviour
 	public CombatStateManager combatStateManager;
 	public EnemyCombatActionManager enemyCombatActionManager;
 	
-	public static ArrayList frontLine;
-	public static ArrayList specificSpawns;
-	public static ArrayList randomSpawns;
-	public static ArrayList backLine;
+	public static List<Stats> frontLine;
+	public static List<Stats> specificSpawns;
+	public static List<Stats> randomSpawns;
+	public static List<Stats> backLine;
 	
 	public static Stats[][] enemyFormation = new Stats[][] {new Stats[]{null,null,null,null},
 															new Stats[]{null,null,null,null},
@@ -87,7 +87,7 @@ public class EnemySpawner : MonoBehaviour
 
 	private void createInitialSpawnQueue()
 	{
-		ArrayList spawnQueue = new ArrayList();
+		List<Stats> spawnQueue = new List<Stats>();
 		
 		for(int enemyTypeIndex = 0; enemyTypeIndex < State.enemyPackInfo.enemyTypes.Length; enemyTypeIndex++)
 		{	
@@ -106,12 +106,12 @@ public class EnemySpawner : MonoBehaviour
 		sortSpawnQueue(spawnQueue);
 	}
 	
-	private void sortSpawnQueue(ArrayList unsortedSpawnQueue)
+	private void sortSpawnQueue(List<Stats> unsortedSpawnQueue)
 	{
-		frontLine = new ArrayList();
-		randomSpawns = new ArrayList();
-		specificSpawns = new ArrayList();
-		backLine = new ArrayList();
+		frontLine = new List<Stats>();
+		randomSpawns = new List<Stats>();
+		specificSpawns = new List<Stats>();
+		backLine = new List<Stats>();
 		
 		foreach(EnemyStats enemy in unsortedSpawnQueue)
 		{	
@@ -218,7 +218,7 @@ public class EnemySpawner : MonoBehaviour
 			return -1;
 		}
 		
-		ArrayList acceptableCoordsInRow = new ArrayList();
+		List<GridCoords> acceptableCoordsInRow = new List<GridCoords>();
 		
 		for(int colIndex = 0; colIndex < row.Length; colIndex++)
 		{
@@ -233,7 +233,7 @@ public class EnemySpawner : MonoBehaviour
 			return -1;
 		} else
 		{
-			GridCoords chosenCoords = (GridCoords) acceptableCoordsInRow[UnityEngine.Random.Range(0,acceptableCoordsInRow.Count)];
+			GridCoords chosenCoords = acceptableCoordsInRow[UnityEngine.Random.Range(0,acceptableCoordsInRow.Count)];
 			return chosenCoords.col;
 		}
 	}

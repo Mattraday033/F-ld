@@ -503,9 +503,9 @@ public class Item : ICloneable, IJSONConvertable, IDescribable, ISortable, IDesc
 		return false;
 	}
 
-	public ArrayList getRelatedDescribables()
+	public List<IDescribable> getRelatedDescribables()
 	{
-		return new ArrayList();
+		return new List<IDescribable>();
 	}
 
 	public bool buildableWithBlocks()

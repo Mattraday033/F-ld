@@ -34,7 +34,7 @@ public class CombatStateManager : MonoBehaviour
     public static Vector3Int returnCell;
 
     public static FadeToBlackManager fadeToBlackManager;
-	public static ArrayList allQueuedSummonLocations = new ArrayList();
+	public static List<GridCoords> allQueuedSummonLocations = new List<GridCoords>();
 
 	public static bool inCombat = false;
 
@@ -42,7 +42,7 @@ public class CombatStateManager : MonoBehaviour
 	public static int turnNumber = 1;
 
 	public SelectorManager selectorManager;
-	public static UnityEvent OnNewTurn = new UnityEvent();
+	public readonly static UnityEvent OnNewTurn = new UnityEvent();
 
 	public CombatActionManager combatActionManager;
 
@@ -65,8 +65,6 @@ public class CombatStateManager : MonoBehaviour
 
 	public static CombatStateManager instance;
 
-	public ArrayList listOfObjectToUpdate;
-
 	private GameOverPopUpButton gameOverPopUpButton;
 
 	private static bool resolvingTurnDuringTutorial = false;
@@ -85,7 +83,6 @@ public class CombatStateManager : MonoBehaviour
 	void Start()
 	{
         inCombat = true;
-		initializeListOfObjectToUpdate();
 
 		fadeToBlackManager = FadeToBlackManager.getInstance();
 
@@ -185,14 +182,6 @@ public class CombatStateManager : MonoBehaviour
 		Helpers.updateGameObjectPosition(PartyManager.getPlayerStats().combatSprite);
 
 		SelectorManager.displayHoverUIForCurrentSelectorTarget();
-	}
-
-	public void initializeListOfObjectToUpdate()
-	{
-		listOfObjectToUpdate = new ArrayList();
-
-		listOfObjectToUpdate.Add(RepositionManager.getInstance());
-		listOfObjectToUpdate.Add(RepositionUIManager.getInstance());
 	}
 
 	public void updateAllObjectsAfterStateChange()
@@ -408,18 +397,18 @@ public class CombatStateManager : MonoBehaviour
 	{
 		resetAllQueuedSummonLocations();
 
-		CombatActionManager.lockedInCombatActionQueue = new ArrayList();
-		CombatActionManager.onDeathCombatActionQueue = new ArrayList();
-		CombatActionManager.critCombatActionQueue = new ArrayList();
+		CombatActionManager.lockedInCombatActionQueue = new List<CombatAction>();
+		CombatActionManager.onDeathCombatActionQueue = new List<CombatAction>();
+		CombatActionManager.critCombatActionQueue = new List<CombatAction>();
 
-		PlayerCombatActionManager.playerCombatActionQueue = new ArrayList();
-		EnemyCombatActionManager.enemyCombatActionQueue = new ArrayList();
-		EnemyCombatActionManager.slowedEnemyCombatActionQueue = new ArrayList();
-		CombatActionManager.lockedInCombatActionQueue = new ArrayList();
+		PlayerCombatActionManager.playerCombatActionQueue = new List<CombatAction>();
+		EnemyCombatActionManager.enemyCombatActionQueue = new List<CombatAction>();
+		EnemyCombatActionManager.slowedEnemyCombatActionQueue = new List<CombatAction>();
+		CombatActionManager.lockedInCombatActionQueue = new List<CombatAction>();
 
 		EnvironmentalCombatActionManager.deleteAllEnvironmentalCombatActions();
 
-		ActivatedPassiveTraitManager.removeAllTraits();
+		EquippedPassiveTraitManager.removeAllTraits();
 
 		OnNewTurn.RemoveAllListeners();
 
@@ -547,7 +536,7 @@ public class CombatStateManager : MonoBehaviour
 
 	private static void resetAllQueuedSummonLocations()
 	{
-		allQueuedSummonLocations = new ArrayList();
+		allQueuedSummonLocations = new List<GridCoords>();
 	}
 
 	private static string getCombatTutorialKey()

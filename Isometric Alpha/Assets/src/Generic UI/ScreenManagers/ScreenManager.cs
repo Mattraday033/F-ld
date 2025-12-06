@@ -170,28 +170,30 @@ public struct Tab
 		return !button.interactable;
 	}
 	
-	public ArrayList getList()
+	public IEnumerable<IDescribable> getList()
 	{
 		if(usePartyMemberName)
 		{
-            return new ArrayList();
+            return new List<IDescribable>();
 		}
 
 		return getList(list, filterParameters);
 	}
 
-    public static ArrayList getList(DescribableList describableList)
+    public static IEnumerable<IDescribable> getList(DescribableList describableList)
     {
 		return getList(describableList, null);
     }
 
-    public static ArrayList getList(DescribableList describableList, string[] filterParameters)
+    public static IEnumerable<IDescribable> getList(DescribableList describableList, string[] filterParameters)
     {
+
+        
         switch (describableList)
         {
             case DescribableList.Unnecessary:
 
-                return new ArrayList();
+                return new List<IDescribable>();
 
             case DescribableList.Inventory:
 
@@ -227,7 +229,7 @@ public struct Tab
 
             case DescribableList.PartyMembers:
 
-                return new ArrayList(PartyManager.getAllJoinablePartyMembers());
+                return new List<IDescribable>(PartyManager.getAllJoinablePartyMembers());
 
             case DescribableList.Quests:
 
@@ -238,6 +240,8 @@ public struct Tab
                 return GlossaryCategoryList.getAllGlossaryCategories();
 
             case DescribableList.PerkCategories:
+
+                Debug.LogError("returning PerkCategories");
 
                 return PerkCategoryList.getAllPerkCategories();
 
@@ -258,7 +262,7 @@ public struct Tab
                 return Inventory.getAllOffHandWeaponsInPocket(State.inventory);
             case DescribableList.PartyMembersWithPlayer:
 
-                return new ArrayList(PartyManager.getAllJoinablePartyMembers());
+                return new List<IDescribable>(PartyManager.getAllJoinablePartyMembers());
             case DescribableList.CombatUsableItems:
                 
                 return Inventory.getAllItemsUsableInCombat();
@@ -314,7 +318,7 @@ public struct Tab
                 }
                 else
                 {
-                    return new ArrayList(); //can't sell essential items
+                    return new List<IDescribable>(); //can't sell essential items
                 }
             default:
 

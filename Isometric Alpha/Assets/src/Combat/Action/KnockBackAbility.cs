@@ -70,7 +70,7 @@ public class KnockBackAbility : RepositionEnemyAbility
 
     public override void performCombatAction()
     {
-        ArrayList targets = new ArrayList();
+        List<Stats> targets = new List<Stats>();
 
         targets.Add(CombatGrid.getCombatantAtCoords(getTargetCoords()));
 
@@ -88,7 +88,7 @@ public class KnockBackAbility : RepositionEnemyAbility
         performCombatAction(targets);
     }
 
-    public override void performCombatAction(ArrayList targets)
+    public override void performCombatAction(List<Stats> targets)
     {
         if (targets.Count < 1)
         {

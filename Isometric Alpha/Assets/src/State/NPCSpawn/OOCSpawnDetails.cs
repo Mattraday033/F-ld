@@ -1098,14 +1098,16 @@ public class GateSpawnDetails : CustomMouseHoverNPCSpawnDetails
     private bool skewed;
     private bool showSprite;
     private Axis axis;
+    private Dictionary<string, int> statDifficulties;
 
-    public GateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed, bool showSprite, Axis axis) :
+    public GateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed, bool showSprite, Axis axis, Dictionary<string, int> statDifficulties) :
     base(npcName, cellCoords, currentArea, spriteName)
     {
         this.tutorialTargetHash = tutorialTargetHash;
         this.skewed = skewed;
         this.showSprite = showSprite;
         this.axis = axis;
+        this.statDifficulties = statDifficulties;
 
         switch(spriteName)
         {
@@ -1180,13 +1182,15 @@ public class GateSpawnDetails : CustomMouseHoverNPCSpawnDetails
         Dialogue dialogue = dialogueTrigger.dialogue;
 
         dialogue.cameraFoci[Constants.indexOne] = dialogueTrigger.gameObject;
+
+        dialogue.variableSources.Add(new StoryStatRequirementVariableSource(statDifficulties));
     }
 }
 
 public class TemporaryGateSpawnDetails : GateSpawnDetails
 {
-    public TemporaryGateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed, Axis axis) :
-    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, skewed, true, axis)
+    public TemporaryGateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed, Axis axis, Dictionary<string, int> statDifficulties) :
+    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, skewed, true, axis, statDifficulties)
     {
 
     }
@@ -1207,8 +1211,8 @@ public class GateWithHiddenTerrainSpawnDetails : GateSpawnDetails
 {
     private string hiddenTerrainFlag;
 
-    public GateWithHiddenTerrainSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed, string hiddenTerrainFlag, Color tint) :
-    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, skewed, true, Axis.DescendingX)
+    public GateWithHiddenTerrainSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed, Dictionary<string, int> statDifficulties, string hiddenTerrainFlag, Color tint) :
+    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, skewed, true, Axis.DescendingX, statDifficulties)
     {
         this.hiddenTerrainFlag = hiddenTerrainFlag;
         this.tint = tint;
@@ -1226,15 +1230,6 @@ public class GateWithHiddenTerrainSpawnDetails : GateSpawnDetails
 
         return gate;
     }
-
-    public override void spawnActions(DialogueTrigger dialogueTrigger)
-    {
-        base.spawnActions(dialogueTrigger);
-
-
-
-    }
-
 }
 
 public class ShopkeeperSpawnDetails : NPCSpawnDetails
@@ -1406,8 +1401,8 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
 public class VaultableRubbleSpawnDetails : VaultableObjectSpawnDetails
 {
 
-    public VaultableRubbleSpawnDetails(string npcName, Vector3Int cellCoords, int vaultDistance) :
-    base(npcName, cellCoords, new VaultableObject(vaultDistance, VaultableObject.isPlural, VaultableObject.rockName))
+    public VaultableRubbleSpawnDetails(string npcName, Vector3Int cellCoords, int difficulty, int vaultDistance) :
+    base(npcName, cellCoords, new VaultableObject(difficulty, vaultDistance, VaultableObject.isPlural, VaultableObject.rockName))
     {
 
     }

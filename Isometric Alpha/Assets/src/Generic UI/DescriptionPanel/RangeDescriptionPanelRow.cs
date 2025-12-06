@@ -43,7 +43,7 @@ public class RangeDescriptionPanelRow : DescriptionPanelRow
 
     private void setGlossaryEntry()
     {
-        ArrayList allRangeEntries = Range.getAllRangesGlossaryEntries();
+        List<GlossaryEntry> allRangeEntries = Range.getAllRangesGlossaryEntries();
 
         foreach (GridGlossaryEntry entry in allRangeEntries)
         {

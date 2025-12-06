@@ -63,8 +63,8 @@ public class DamagePreviewManager : MonoBehaviour
 
 			actionClone.setToPreviewMode();
 
-			ArrayList actualTargets = SelectorManager.currentSelector.getAllTargets();
-			ArrayList cloneTargets = SelectorManager.currentSelector.getAllPreviewTargetClones();
+			List<Stats> actualTargets = SelectorManager.currentSelector.getAllTargets();
+			List<Stats> cloneTargets = SelectorManager.currentSelector.getAllPreviewTargetClones();
 
 			actionClone.performCombatAction(cloneTargets);
 
@@ -94,10 +94,10 @@ public class DamagePreviewManager : MonoBehaviour
 
 			actionClone.setToPreviewMode();
 
-			ArrayList actualTargets = new ArrayList();
+			List<Stats> actualTargets = new List<Stats>();
 			actualTargets.Add(stats);
 
-			ArrayList cloneTargets = new ArrayList();
+			List<Stats> cloneTargets = new List<Stats>();
 			cloneTargets.Add(stats.getPreviewClone());
 
 			actionClone.performCombatAction(cloneTargets);
@@ -214,7 +214,7 @@ public class DamagePreviewManager : MonoBehaviour
 
 	public static void resetAllDamagePreviewsOnStateChange()
 	{
-		ArrayList allCombatants = CombatGrid.getAllAliveCombatants();
+		List<Stats> allCombatants = CombatGrid.getAllAliveCombatants();
 
 		foreach (Stats stats in allCombatants)
 		{

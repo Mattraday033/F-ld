@@ -160,7 +160,7 @@ public class SaveHandler : ScreenManager, IEscapable
 			return autoSave3Name; 
 		}
 
-		ArrayList autosaveBlueprints = new ArrayList();
+		List<SaveBlueprint> autosaveBlueprints = new List<SaveBlueprint>();
 
 		foreach(KeyValuePair<string, SaveBlueprint> kvp in saveGameList)
 		{
@@ -360,9 +360,9 @@ public class SaveHandler : ScreenManager, IEscapable
         saveGameList.Remove(saveFileName);
 	}
 	
-	public static ArrayList getSaveGameList()
+	public static List<IDescribable> getSaveGameList()
 	{
-		ArrayList saveGameArrayList = new ArrayList();
+		List<IDescribable> saveGameBluepreints = new List<IDescribable>();
 
 		if (saveGameList == null)
 		{
@@ -371,10 +371,10 @@ public class SaveHandler : ScreenManager, IEscapable
 
 		foreach (KeyValuePair<string, SaveBlueprint> kvp in saveGameList)
 		{
-			saveGameArrayList.Add(kvp.Value);
+			saveGameBluepreints.Add(kvp.Value);
 		}
 
-		return saveGameArrayList;
+		return saveGameBluepreints;
 	}
 
 	public static void createSavedGameList() //side effect: will update all saveblueprint.saveName's

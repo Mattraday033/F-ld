@@ -10,7 +10,7 @@ public class SuicideAbility : Ability
 
 	}
 	
-	public override void performCombatAction(ArrayList targets)
+	public override void performCombatAction(List<Stats> targets)
 	{
 		base.performCombatAction(targets);
 		

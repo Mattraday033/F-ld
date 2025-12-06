@@ -8,10 +8,10 @@ using UnityEngine.SceneManagement;
 
 public class NotificationManager : MonoBehaviour  
 {
-    public static ArrayList notificationQueue;
+    public static List<IDescribable> notificationQueue;
     private static NotificationManager instance;
 
-    public static UnityEvent OnDeleteAllNotifications;
+    public readonly static UnityEvent OnDeleteAllNotifications = new UnityEvent();
 
     private static bool skipNextSpawn;
 
@@ -110,7 +110,7 @@ public class NotificationManager : MonoBehaviour
 
     public static void purgeNotifications()
     {
-        notificationQueue = new ArrayList();
+        notificationQueue = new List<IDescribable>();
     }
 
     public static GameObject getCurrentNotificationPopUpWindowGameObject()
@@ -145,13 +145,11 @@ public class NotificationManager : MonoBehaviour
     [RuntimeInitializeOnLoadMethod]
     private static void initializeNotificationManager()
     {
-        OnDeleteAllNotifications = new UnityEvent();
-
         PlayerOOCStateManager.OnStateChangeToWalking.AddListener(startSpawningNotifications);
         PlayerOOCStateManager.OnLeavingTutorialSequenceState.AddListener(startSpawningNotifications);
         AreaManager.OnAreaSpawn.AddListener(spawnNotificationsOnAreaChange);
 
-        notificationQueue = new ArrayList();
+        notificationQueue = new List<IDescribable>();
         
         notificationPopUpButton = null;
         instance = null;

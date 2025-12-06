@@ -6,22 +6,23 @@ using System.IO;
 public static class GlossaryCategoryList
 {
 
-	public static GlossaryCategory ranges = new GlossaryCategory("Ranges", Range.getAllRangesGlossaryEntries());
-	public static GlossaryCategory actionTypes = new GlossaryCategory("Action Types", CombatAction.getAllActionTypeGlossaryEntries());
-	public static GlossaryCategory traitTypes = new GlossaryCategory("Trait Types", Trait.getAllTraitTypeGlossaryEntries());
+	public readonly static GlossaryCategory ranges = new GlossaryCategory("Ranges", Range.getAllRangesGlossaryEntries());
+	public readonly static GlossaryCategory actionTypes = new GlossaryCategory("Action Types", CombatAction.getAllActionTypeGlossaryEntries());
+	public readonly static GlossaryCategory traitTypes = new GlossaryCategory("Trait Types", Trait.getAllTraitTypeGlossaryEntries());
 
-	public static ArrayList allGlossaryCategories;
+	public static List<GlossaryCategory> allGlossaryCategories;
 
-	static GlossaryCategoryList()
+    [RuntimeInitializeOnLoadMethod]
+	private static void instantiateGlossaryCategoryList()
 	{
-		allGlossaryCategories = new ArrayList();
+		allGlossaryCategories = new List<GlossaryCategory>();
 
 		allGlossaryCategories.Add(actionTypes);
 		allGlossaryCategories.Add(ranges);
 		allGlossaryCategories.Add(traitTypes);
 	}
 
-	public static ArrayList getAllGlossaryCategories()
+	public static List<GlossaryCategory> getAllGlossaryCategories()
 	{
 		return allGlossaryCategories;
 	}

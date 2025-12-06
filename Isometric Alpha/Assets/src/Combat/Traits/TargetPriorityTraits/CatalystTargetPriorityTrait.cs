@@ -7,7 +7,7 @@ public class CatalystTargetPriorityTrait : TargetPriorityTrait
 	private const string initialName = "Saintly";
 	private const string initialTraitDescription = "This creature alternates between building up it's allies and demolishing it's enemies.";
 	private const string initialTraitIconName = "Hammer";
-	private static Color initialIconBackgroundColor = Color.blue;
+	private readonly static Color initialIconBackgroundColor = Color.blue;
 
 	private SpecificTargetPriorityTrait evolutionTargetPriorityTrait;
 	private TargetPriorityTrait damagingTargetTrait;
@@ -19,7 +19,7 @@ public class CatalystTargetPriorityTrait : TargetPriorityTrait
 		this.damagingTargetTrait = damagingTargetTrait;
 	}
 	
-	public override Selector findTargetLocation(Selector selector, ArrayList listOfTargets)
+	public override Selector findTargetLocation(Selector selector, List<Stats> listOfTargets)
 	{
 		
 		if(EvolveAbility.inAttackMode())

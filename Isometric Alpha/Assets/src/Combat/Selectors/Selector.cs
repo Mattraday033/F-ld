@@ -73,7 +73,7 @@ public class Selector : ScriptableObject, ICloneable
 	public GridCoords[] getAllSelectorCoords(bool includeIllegalCoords)
 	{
 		GridCoords[] allSelectorCoords = new GridCoords[0];
-		ArrayList allTileAdjustments = new ArrayList();
+		List<GridCoords> allTileAdjustments = new List<GridCoords>();
 		allTileAdjustments.Add(new GridCoords(0, 0)); //parent Selector Coord
 		
 		if(getChildTileAdjustments() != null)
@@ -184,24 +184,10 @@ public class Selector : ScriptableObject, ICloneable
 		
 		return collider;
 	}
-	
-	public ArrayList getAllTileColliders()
-	{
-		ArrayList allTileColliders = new ArrayList();
-		
-		allTileColliders.Add(getCollider());
-		
-		for(int childIndex = 0; childIndex < getSelectorObject().transform.childCount; childIndex++)
-		{
-			allTileColliders.Add(getSelectorObject().transform.GetChild(childIndex).GetComponent<Collider2D>());
-		}
-		
-		return allTileColliders;
-	}
 
-    public ArrayList getAllTileChildren()
+    public List<GameObject> getAllTileChildren()
     {
-        ArrayList allTileChildren = new ArrayList();
+        List<GameObject> allTileChildren = new List<GameObject>();
 
         for (int childIndex = 0; childIndex < getSelectorObject().transform.childCount; childIndex++)
         {
@@ -308,7 +294,7 @@ public class Selector : ScriptableObject, ICloneable
 	
 	public bool hasAtLeastOneTarget(string[] tagCriteria)
 	{
-		ArrayList allTargets = getAllTargets();
+		List<Stats> allTargets = getAllTargets();
 
 		foreach (Stats stats in allTargets)
 		{
@@ -325,7 +311,7 @@ public class Selector : ScriptableObject, ICloneable
 	
 	public bool hasAtLeastOneLivingTarget(string[] tagCriteria)
 	{
-		ArrayList allTargets = getAllTargets();
+		List<Stats> allTargets = getAllTargets();
 
 		foreach (Stats stats in allTargets)
 		{
@@ -363,10 +349,10 @@ public class Selector : ScriptableObject, ICloneable
 		return false;
 	}
 	
-	public ArrayList getAllTargets()
+	public List<Stats> getAllTargets()
 	{
         GridCoords[] targetTileCoords = getAllSelectorCoords();
-        ArrayList allActionTargets = new ArrayList();
+        List<Stats> allActionTargets = new List<Stats>();
 
         foreach (GridCoords targetTileCoord in targetTileCoords)
         {
@@ -379,10 +365,10 @@ public class Selector : ScriptableObject, ICloneable
 		return allActionTargets;
     }
 
-    public ArrayList getAllPreviewTargetClones()
+    public List<Stats> getAllPreviewTargetClones()
     {
-        ArrayList allActionTargets = getAllTargets();
-		ArrayList cloneTargets = new ArrayList();
+        List<Stats> allActionTargets = getAllTargets();
+		List<Stats> cloneTargets = new List<Stats>();
 
         foreach (Stats target in allActionTargets)
         {
@@ -462,7 +448,7 @@ public class Selector : ScriptableObject, ICloneable
         
         selectorSprite.color = newColor;
 
-		ArrayList listOfTileChildren = getAllTileChildren();
+		List<GameObject> listOfTileChildren = getAllTileChildren();
 
 
         foreach (GameObject gObject in listOfTileChildren)

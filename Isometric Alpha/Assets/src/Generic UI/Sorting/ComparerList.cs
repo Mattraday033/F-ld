@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public interface ISortable
+public interface ISortable : IDescribable
 {
-    public string getName();
-
     public int getQuantity();
 
     public int getWorth();
@@ -18,8 +16,6 @@ public interface ISortable
     public int getLevel();
 
     public int getNumber();
-
-    public bool ineligible();
 }
 
 public enum SortBy { Name = 1, Quantity = 2, Worth = 3, Type = 4, Level = 5, Number = 6, Eligibility = 7}
@@ -27,7 +23,7 @@ public enum SortBy { Name = 1, Quantity = 2, Worth = 3, Type = 4, Level = 5, Num
 public static class ComparerList
 { 
 
-    public static IComparer getComparer(SortBy sortBy)
+    public static IComparer<ISortable> getComparer(SortBy sortBy)
     {
         switch (sortBy)
         {
@@ -53,25 +49,19 @@ public static class ComparerList
 }
 
 
-public class NameComparer : IComparer
+public class NameComparer : IComparer<ISortable>
 {
-    public int Compare(object x, object y)
+    public int Compare(ISortable x, ISortable y)
     {
-        IDescribable xDescribable = (IDescribable) x;
-        IDescribable yDescribable = (IDescribable) y;
-
-        return xDescribable.getName().CompareTo(yDescribable.getName());
+        return x.getName().CompareTo(y.getName());
     }
 }
 
-public class QuantityComparer : IComparer
+public class QuantityComparer : IComparer<ISortable>
 {
-    public int Compare(object x, object y)
+    public int Compare(ISortable x, ISortable y)
     {
-        ISortable xSortable = (ISortable) x;
-        ISortable ySortable = (ISortable) y;
-
-        int comparisonInt = xSortable.getQuantity() - ySortable.getQuantity();
+        int comparisonInt = x.getQuantity() - y.getQuantity();
 
         if (comparisonInt != 0)
         {
@@ -79,19 +69,16 @@ public class QuantityComparer : IComparer
         }
         else
         {
-            return xSortable.getName().CompareTo(ySortable.getName());
+            return x.getName().CompareTo(y.getName());
         }
     }
 }
 
-public class WorthComparer : IComparer
+public class WorthComparer : IComparer<ISortable>
 {
-    public int Compare(object x, object y)
+    public int Compare(ISortable x, ISortable y)
     {
-        ISortable xSortable = (ISortable) x;
-        ISortable ySortable = (ISortable) y;
-
-        int comparisonInt = xSortable.getWorth() - ySortable.getWorth();
+        int comparisonInt = x.getWorth() - y.getWorth();
 
         if (comparisonInt != 0)
         {
@@ -99,19 +86,16 @@ public class WorthComparer : IComparer
         }
         else
         {
-            return xSortable.getName().CompareTo(ySortable.getName());
+            return x.getName().CompareTo(y.getName());
         }
     }
 }
 
-public class TypeComparer : IComparer
+public class TypeComparer : IComparer<ISortable>
 {
-    public int Compare(object x, object y)
+    public int Compare(ISortable x, ISortable y)
     {
-        ISortable xSortable = (ISortable) x;
-        ISortable ySortable = (ISortable) y;
-
-        int comparisonInt = xSortable.getType().CompareTo(ySortable.getType());
+        int comparisonInt = x.getType().CompareTo(y.getType());
 
         if (comparisonInt != 0)
         {
@@ -119,27 +103,24 @@ public class TypeComparer : IComparer
         }
         else
         {
-            comparisonInt = xSortable.getSubtype().CompareTo(ySortable.getSubtype());
+            comparisonInt = x.getSubtype().CompareTo(y.getSubtype());
 
             if (comparisonInt != 0)
             {
                 return comparisonInt;
             } else
             {
-                return xSortable.getName().CompareTo(ySortable.getName());
+                return x.getName().CompareTo(y.getName());
             }
         }
     }
 }
 
-public class LevelComparer : IComparer
+public class LevelComparer : IComparer<ISortable>
 {
-    public int Compare(object x, object y)
+    public int Compare(ISortable x, ISortable y)
     {
-        ISortable xSortable = (ISortable) x;
-        ISortable ySortable = (ISortable) y;
-
-        int comparisonInt = xSortable.getLevel() - ySortable.getLevel();
+        int comparisonInt = x.getLevel() - y.getLevel();
 
         if (comparisonInt != 0)
         {
@@ -147,19 +128,16 @@ public class LevelComparer : IComparer
         }
         else
         {
-            return xSortable.getName().CompareTo(ySortable.getName());
+            return x.getName().CompareTo(y.getName());
         }
     }
 }
 
-public class NumberComparer : IComparer //NumberComparer is set to compare in descending order, so the largest/latest numbers are displayed first
+public class NumberComparer : IComparer<ISortable> //NumberComparer is set to compare in descending order, so the largest/latest numbers are displayed first
 {
-    public int Compare(object x, object y)
+    public int Compare(ISortable x, ISortable y)
     {
-        ISortable xSortable = (ISortable) x;
-        ISortable ySortable = (ISortable) y;
-
-        int comparisonInt =  ySortable.getNumber() - xSortable.getNumber(); //y and x are flipped
+        int comparisonInt =  y.getNumber() - x.getNumber(); //y and x are flipped
 
         if (comparisonInt != 0)
         {
@@ -167,28 +145,25 @@ public class NumberComparer : IComparer //NumberComparer is set to compare in de
         }
         else
         {
-            return xSortable.getName().CompareTo(ySortable.getName());
+            return x.getName().CompareTo(y.getName());
         }
     }
 }
 
-public class EligibilityComparer : IComparer //EligibilityComparer is set to compare so that eligible items are sorted first
+public class EligibilityComparer : IComparer<IDescribable> //EligibilityComparer is set to compare so that eligible items are sorted first
 {
-    public int Compare(object x, object y)
+    public int Compare(IDescribable x, IDescribable y)
     {
-        ISortable xSortable = (ISortable) x;
-        ISortable ySortable = (ISortable) y;
-
-        if (!xSortable.ineligible() && ySortable.ineligible())
+        if (!x.ineligible() && y.ineligible())
         {
             return 1;
-        } else if(xSortable.ineligible() && !ySortable.ineligible())
+        } else if(x.ineligible() && !y.ineligible())
         {
             return -1;
         }
         else
         {
-            return xSortable.getName().CompareTo(ySortable.getName());
+            return x.getName().CompareTo(y.getName());
         }
     }
 }

@@ -55,9 +55,9 @@ public class ScreenWithGeneratedPartyTabs : ScreenManager
         // currentScrollableUIElement.disableGridRowAndClick(0);
     }
 
-    public virtual ArrayList getListOfGeneratedTabDescribables()
+    public virtual List<IDescribable> getListOfGeneratedTabDescribables()
     {
-        return Tab.getList(DescribableList.PartyMembersWithPlayer);
+        return new List<IDescribable>(Tab.getList(DescribableList.PartyMembersWithPlayer));
     }
 
 }

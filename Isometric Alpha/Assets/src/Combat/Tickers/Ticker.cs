@@ -34,7 +34,7 @@ public class Ticker : MonoBehaviour
 		
 	}
 	
-	public void tickDownAllCooldowns(ArrayList allAllies)
+	public void tickDownAllCooldowns(List<Stats> allAllies)
 	{
 		foreach(Stats ally in allAllies)
 		{
@@ -50,7 +50,7 @@ public class Ticker : MonoBehaviour
 		}
 	}
 	
-	public void tickDownAllNonPermanentTraits(ArrayList allCombatants)
+	public void tickDownAllNonPermanentTraits(List<Stats> allCombatants)
 	{
 		foreach(Stats combatant in allCombatants)
 		{

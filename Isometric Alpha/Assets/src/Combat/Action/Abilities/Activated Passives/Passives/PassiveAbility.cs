@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PassiveAbility : ActivatedPassive //passives are (currently) mostly used to explain to the player some mechanic that happens naturally,
+public class PassiveAbility : EquippedPassive //passives are (currently) mostly used to explain to the player some mechanic that happens naturally,
 {                                              //like regeneration
     public const string passiveAbilityType = "Passive";
 

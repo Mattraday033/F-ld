@@ -14,7 +14,7 @@ public class PlayerCombatActionCounterManager : MonoBehaviour
 		setCombatActionCounterPanelsToDefault();
     }
 
-	public void updateCombatActionCounterPanels(ArrayList actionOrder)
+	public void updateCombatActionCounterPanels(List<CombatAction> actionOrder)
 	{
 		setCombatActionCounterPanelsToDefault();
 

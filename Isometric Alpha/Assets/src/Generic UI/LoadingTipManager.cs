@@ -18,11 +18,12 @@ public class LoadingTip
 
 public static class LoadingTipList
 {
-    public static ArrayList loadingTips;
+    public static List<LoadingTip> loadingTips;
 
-    static LoadingTipList()
+    [RuntimeInitializeOnLoadMethod]
+    private static void instantiateLoadingTipList()
     {
-        loadingTips = new ArrayList();
+        loadingTips = new List<LoadingTip>();
 
         loadingTips.Add(new LoadingTip("\"There is only one thing you must know here: the guards cannot break you. They can only trick you into breaking yourself.\" - Bálint the Sage"));
 

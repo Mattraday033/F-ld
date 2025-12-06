@@ -72,7 +72,7 @@ public class DescriptionPanelSlot : MonoBehaviour
 
     private static List<IDescribable> addRelatedDescribables(List<IDescribable> list, IDescribable describable)
     {
-        ArrayList relatedDescribables = describable.getRelatedDescribables();
+        List<IDescribable> relatedDescribables = describable.getRelatedDescribables();
 
         foreach(IDescribable relatedDescribable in relatedDescribables)
         {

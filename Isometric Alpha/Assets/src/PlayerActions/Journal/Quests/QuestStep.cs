@@ -128,9 +128,9 @@ public class QuestStep : IDescribable, IDescribableInBlocks
 
 	}
 
-	public ArrayList getRelatedDescribables()
+	public List<IDescribable> getRelatedDescribables()
 	{
-		return new ArrayList();
+		return new List<IDescribable>();
 	}
 
 	public bool buildableWithBlocks()

@@ -12,7 +12,7 @@ public class ColumnHeader : MonoBehaviour
     public int tabCollectionIndex;
 
     public Button[] headerButtons;
-    public IComparer currentComparisonMethod;
+    public IComparer<ISortable> currentComparisonMethod;
     public SortBy defaultSortBy;
 
     public bool clickDefaultHeader = true;
@@ -43,12 +43,12 @@ public class ColumnHeader : MonoBehaviour
         Helpers.setInteractability(headerButtons, buttonIndex);
     }
 
-    public void setComparisonMethod(IComparer newComparisonMethod)
+    public void setComparisonMethod(IComparer<ISortable> newComparisonMethod)
     {
         currentComparisonMethod = newComparisonMethod;
     }
 
-    public void setComparisonMethodAndPopulateGrid(IComparer newComparisonMethod)
+    public void setComparisonMethodAndPopulateGrid(IComparer<ISortable> newComparisonMethod)
     {
         setComparisonMethod(newComparisonMethod);
         populateGrid();
@@ -66,7 +66,7 @@ public class ColumnHeader : MonoBehaviour
         }
     }
 
-    public IComparer getComparisonMethod()
+    public IComparer<ISortable> getComparisonMethod()
     {
         return currentComparisonMethod;
     }

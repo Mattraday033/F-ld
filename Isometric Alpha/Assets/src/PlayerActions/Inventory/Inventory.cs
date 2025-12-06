@@ -311,9 +311,9 @@ public static class Inventory
         return smallerPocket;
     }
 
-    public static ArrayList getPocketForDisplayGenericUI(Dictionary<string, Item> pocket, string[] filterParameters, IComparer comparer)
+    public static List<IDescribable> getPocketForDisplayGenericUI(Dictionary<string, Item> pocket, string[] filterParameters, IComparer<ISortable> comparer)
     {
-        ArrayList output = new ArrayList();
+        List<Item> output = new List<Item>();
 
         foreach (KeyValuePair<string, Item> kvp in pocket)
         {
@@ -325,25 +325,7 @@ public static class Inventory
 
         output.Sort(comparer);
 
-        return output;
-    }
-
-    public static ArrayList getAllMainHandWeapons()
-    {
-        ArrayList allWeapons = getPocketForDisplayGenericUI(State.inventory, new string[] { Weapon.subtype }, new NameComparer());
-        ArrayList allMainHandWeapons = new ArrayList();
-
-        foreach (Weapon weapon in allWeapons)
-        {
-            if (weapon.getSlotID().Equals(Weapon.mainHandSlotIndex))
-            {
-                allMainHandWeapons.Add(weapon);
-            }
-        }
-
-        allMainHandWeapons.Sort(new NameComparer());
-
-        return allMainHandWeapons;
+        return output.Cast<IDescribable>().ToList();
     }
 
     public static Dictionary<string, Item> getPocketForDisplay(Dictionary<string, Item> pocket, string[] subtypes)
@@ -383,9 +365,9 @@ public static class Inventory
         return pockets[0];
     }
 
-    public static ArrayList getAllItemsOfTypeInPocket(Dictionary<string, Item> pocket, string type)
+    public static List<Item> getAllItemsOfTypeInPocket(Dictionary<string, Item> pocket, string type)
     {
-        ArrayList allItemsOfType = new ArrayList();
+        List<Item> allItemsOfType = new List<Item>();
 
         foreach (KeyValuePair<string, Item> kvp in pocket)
         {
@@ -400,9 +382,9 @@ public static class Inventory
         return allItemsOfType;
     }
 
-    public static ArrayList getAllItemsExcludingOfTypesInPocket(Dictionary<string, Item> pocket, string[] types)
+    public static List<Item> getAllItemsExcludingOfTypesInPocket(Dictionary<string, Item> pocket, string[] types)
     {
-        ArrayList allItemsExceptOfTypes = new ArrayList();
+        List<Item> allItemsExceptOfTypes = new List<Item>();
 
         foreach (KeyValuePair<string, Item> kvp in pocket)
         {
@@ -417,9 +399,9 @@ public static class Inventory
         return allItemsExceptOfTypes;
     }
 
-    public static ArrayList getAllUsableItemCombatActionsInPocket(Dictionary<string, Item> pocket)
+    public static List<CombatAction> getAllUsableItemCombatActionsInPocket(Dictionary<string, Item> pocket)
     {
-        ArrayList allUsableItemCombatActions = new ArrayList();
+        List<CombatAction> allUsableItemCombatActions = new List<CombatAction>();
 
         foreach (KeyValuePair<string, Item> kvp in pocket)
         {
@@ -434,14 +416,14 @@ public static class Inventory
         return allUsableItemCombatActions;
     }
 
-    public static ArrayList convertPocketToArrayList(Dictionary<string, Item> pocket)
+    public static List<Item> convertPocketToList<Item>(Dictionary<string, Item> pocket)
     {
-        return new ArrayList(pocket.Select(x => x.Value).ToList());
+        return new List<Item>(pocket.Select(x => x.Value).ToList());
     }
 
-    public static ArrayList getAllItemsOfSubtypeInPocket(Dictionary<string, Item> pocket, string subtype)
+    public static List<Item> getAllItemsOfSubtypeInPocket(Dictionary<string, Item> pocket, string subtype)
     {
-        ArrayList allItemsOfSubtype = new ArrayList();
+        List<Item> allItemsOfSubtype = new List<Item>();
 
         foreach (KeyValuePair<string, Item> kvp in pocket)
         {
@@ -456,10 +438,10 @@ public static class Inventory
         return allItemsOfSubtype;
     }
 
-    public static ArrayList getAllMainHandWeaponsInPocket(Dictionary<string, Item> pocket)
+    public static List<Item> getAllMainHandWeaponsInPocket(Dictionary<string, Item> pocket)
     {
-        ArrayList allWeapons = getAllItemsOfSubtypeInPocket(pocket, Weapon.subtype);
-        ArrayList allMainHandWeapons = new ArrayList();
+        List<Item> allWeapons = getAllItemsOfSubtypeInPocket(pocket, Weapon.subtype);
+        List<Item> allMainHandWeapons = new List<Item>();
 
         foreach (Item item in allWeapons)
         {
@@ -474,10 +456,10 @@ public static class Inventory
         return allMainHandWeapons;
     }
 
-    public static ArrayList getAllMainHandWeaponsInPocketAsCombatActions(Dictionary<string, Item> pocket)
+    public static List<CombatAction> getAllMainHandWeaponsInPocketAsCombatActions(Dictionary<string, Item> pocket)
     {
-        ArrayList allWeapons = getAllItemsOfSubtypeInPocket(pocket, Weapon.subtype);
-        ArrayList allMainHandWeaponsAsCombatActions = new ArrayList();
+        List<Item> allWeapons = getAllItemsOfSubtypeInPocket(pocket, Weapon.subtype);
+        List<CombatAction> allMainHandWeaponsAsCombatActions = new List<CombatAction>();
 
         allMainHandWeaponsAsCombatActions.Add(new FistAttack(OverallUIManager.getCurrentPartyMember()));
 
@@ -494,9 +476,9 @@ public static class Inventory
         return allMainHandWeaponsAsCombatActions;
     }
 
-    public static ArrayList getAllOffHandWeaponsInPocket(Dictionary<string, Item> pocket)
+    public static List<Item> getAllOffHandWeaponsInPocket(Dictionary<string, Item> pocket)
     {
-        ArrayList allWeapons = getAllItemsOfSubtypeInPocket(pocket, Weapon.subtype);
+        List<Item> allWeapons = getAllItemsOfSubtypeInPocket(pocket, Weapon.subtype);
 
         for (int index = allWeapons.Count - 1; index >= 0; index--)
         {
@@ -511,11 +493,11 @@ public static class Inventory
         return allWeapons;
     }
 
-    public static ArrayList getAllItemsUsableInCombat()
+    public static List<CombatAction> getAllItemsUsableInCombat()
     {
-        ArrayList allUsableItems = getPocketForDisplayGenericUI(State.inventory, new string[] { UsableItem.type }, new NameComparer());
+        List<Item> allUsableItems = getAllItemsOfTypeInPocket(State.inventory, UsableItem.type );
 
-        ArrayList allCombatUsableItems = new ArrayList();
+        List<CombatAction> allCombatUsableItems = new List<CombatAction>();
 
         foreach (UsableItem item in allUsableItems)
         {
@@ -524,6 +506,8 @@ public static class Inventory
                 allCombatUsableItems.Add(new ItemCombatAction(OverallUIManager.getCurrentPartyMember(), item));
             }
         }
+
+        allCombatUsableItems.Sort(new NameComparer());
 
         return allCombatUsableItems;
     }

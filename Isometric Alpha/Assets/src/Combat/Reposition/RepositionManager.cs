@@ -42,8 +42,8 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 	private const bool deactivate = false;
 	private const bool dontPopulateCombatActionPanels = false;
 	
-	private ArrayList repositionDetailsList = new ArrayList();
-	private ArrayList currentSetOfCombatantsToReposition = new ArrayList();
+	private List<RepositionDetails> repositionDetailsList = new List<RepositionDetails>();
+	private List<Stats> currentSetOfCombatantsToReposition = new List<Stats>();
 	
 	void Start()
 	{
@@ -232,7 +232,7 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 		return repositionUIManager.combatantSelectionButtonQueue.Count;
 	}
 	
-	private void activateAllSprites(ArrayList combatants, bool activateSprites)
+	private void activateAllSprites(List<Stats> combatants, bool activateSprites)
 	{
 		foreach(Stats combatant in combatants)
 		{
@@ -259,7 +259,7 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 		
 		activateAllSprites(currentSetOfCombatantsToReposition, activate);
 		repositionUIManager.removeAllCombatantSelectionButtons();
-		currentSetOfCombatantsToReposition = new ArrayList();
+		currentSetOfCombatantsToReposition = new List<Stats>();
 		
 		repositionUIManager.hideConfirmRepositionButton();
 		CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
@@ -285,8 +285,8 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 			GameObject.Destroy(repositionDetails.placeHolderObject);
 		}
 		
-		repositionDetailsList = new ArrayList();
-		currentSetOfCombatantsToReposition = new ArrayList();
+		repositionDetailsList = new List<RepositionDetails>();
+		currentSetOfCombatantsToReposition = new List<Stats>();
 		
 		ZoneOfInfluenceManager.getInstance().applyAllZOITraits();
 		

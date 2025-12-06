@@ -256,6 +256,8 @@ public class DialogueManager : MonoBehaviour
 			RevealManager.toggleReveal();
 		}
 
+        FadeToBlackManager.allowFadingIn();
+
 		SpeechLog.appendConversation(currentConversation);
 		dialogueTrackerButton.destroyPopUp();
 		dialogueTrackerWindow = null;
@@ -280,7 +282,7 @@ public class DialogueManager : MonoBehaviour
 
 	private void displayChoices()
 	{
-		ArrayList choiceDescriptions = new ArrayList();
+		List<ChoiceDescription> choiceDescriptions = new List<ChoiceDescription>();
 
 		if (currentStory.currentChoices.Count <= 0)
 		{
@@ -700,7 +702,6 @@ public class DialogueManager : MonoBehaviour
                     string earnedXP = getArgument(buffer);
 
                     PartyManager.addXP(earnedXP);
-                    LessonUIManager.lastEarnedXPBonus = int.Parse(earnedXP);
 
                     newLine = earnedXP + " experience points";
 
@@ -957,21 +958,6 @@ public class DialogueManager : MonoBehaviour
 
                     break;
                 case "addtoparty":
-
-                // int nameIndex = int.Parse(buffer.Split("(")[1].Split(")")[0]);  //use to be index of party member in the partyMember arrayList in State
-                // 																//but after swapping to a dictionary that is depricated. Now uses same index
-                // 																//as changeCamTarget
-
-                // partyMemberName = currentDialogue.names[nameIndex];
-
-                // PartyManager.getPartyMember(partyMemberName).canJoinParty = true;
-
-                // // StartCoroutine(waitToSpawnPopUp(formationEditorButton));
-
-                // continueStory();
-
-                // break;
-
                 case "addtopartywithoutpopup":          
 
                     partyMemberName = currentDialogue.names[getArgumentInt(buffer, Constants.indexZero)];
@@ -1063,18 +1049,6 @@ public class DialogueManager : MonoBehaviour
 
                     continueStory();
 
-                    break;
-                case "learnlesson":
-
-                    LessonUIManager lessonUIManager = LessonUIManager.getInstance();
-                    lessonUIManager.addLessonKey(buffer.Split("(")[1].Split(")")[0]);
-
-                    if (!LessonUIManager.waitingToActivate)
-                    {
-                        StartCoroutine(LessonUIManager.activateAfterDialogue());
-                    }
-
-                    continueStory();
                     break;
                 case "entercombat":
 
@@ -1451,7 +1425,7 @@ public class DialogueManager : MonoBehaviour
 	private IEnumerator fadeBackIn(bool continueAfterTransparent)
 	{
 
-		// Debug.LogError("inside fadeBackIn");
+		Debug.LogError("inside fadeBackIn");
 
 		yield return new WaitUntil(() => frames >= framesToWait);
 
@@ -1505,7 +1479,7 @@ public class Conversation
 
     private DialogueTrackerWindow attachedWindow;
 	
-	private ArrayList dialogueList = new ArrayList();
+	private List<DialogueLine> dialogueList = new List<DialogueLine>();
 	
 	public Conversation()
 	{
@@ -1526,7 +1500,7 @@ public class Conversation
         }
 	}
 
-	public ArrayList getDialogueList()
+	public List<DialogueLine> getDialogueList()
 	{
 		return dialogueList;
 	}
@@ -1580,7 +1554,7 @@ public class Conversation
 	{
 		if(attachedWindow != null && !(attachedWindow is null))
 		{
-			ArrayList listOfDialogue = new ArrayList();
+			List<DialogueLine> listOfDialogue = new List<DialogueLine>();
 			listOfDialogue.Add(getLastLine());
 			
 			attachedWindow.appendDialogue(listOfDialogue);
@@ -1589,7 +1563,7 @@ public class Conversation
 	
 	public void appendConversation(Conversation newConversation)
 	{
-		ArrayList dialogueToAppend = newConversation.getDialogueList();
+		List<DialogueLine> dialogueToAppend = newConversation.getDialogueList();
 		
 		if(dialogueToAppend.Count >= maxLineCount)
 		{
@@ -1620,7 +1594,7 @@ public static class SpeechLog
 		allDialogues.appendConversation(newConversation);
 	}
 	
-	public static ArrayList getDialogueList()
+	public static List<DialogueLine> getDialogueList()
 	{
 		return allDialogues.getDialogueList();
 	}

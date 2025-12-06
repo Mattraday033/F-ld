@@ -147,9 +147,9 @@ public class Quest: IJSONConvertable, IDescribable, IJournalCategory
 		return deathStepStatus;
 	}
 	
-	public ArrayList getActiveQuestSteps()
+	public List<IDescribable> getActiveQuestSteps()
 	{
-		ArrayList activeQuestSteps = new ArrayList();
+		List<IDescribable> activeQuestSteps = new List<IDescribable>();
 		
 		foreach(QuestStep step in steps)
 		{
@@ -231,9 +231,9 @@ public class Quest: IJSONConvertable, IDescribable, IJournalCategory
 
 	}
 	
-	public ArrayList getRelatedDescribables()
+	public List<IDescribable> getRelatedDescribables()
 	{
-		return new ArrayList();
+		return new List<IDescribable>();
 	}
 	
 	public bool buildableWithBlocks()
@@ -248,7 +248,7 @@ public class Quest: IJSONConvertable, IDescribable, IJournalCategory
 
     //IJournalCategory Methods
 
-	public ArrayList getSubcategories()
+	public List<IDescribable> getSubcategories()
 	{
 		return getActiveQuestSteps();
 	}

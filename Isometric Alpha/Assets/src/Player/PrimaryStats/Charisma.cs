@@ -19,7 +19,7 @@ public static class Charisma
 	public const int partyMemberCombatActionPlusThreeLevel = 7;
 	public const int partyMemberCombatActionPlusFourLevel = 9;
 
-	public const int charismaEnergiesActivatedPassiveLevel = 2;
+	public const int charismaEnergiesEquippedPassiveLevel = 2;
 
     public const float discountPerCharismaPoint = 0.01f;
 

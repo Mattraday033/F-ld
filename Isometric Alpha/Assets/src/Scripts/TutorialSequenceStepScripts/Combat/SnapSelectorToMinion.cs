@@ -8,7 +8,7 @@ public class SnapSelectorToMinion : TutorialSequenceStepScript
     public override void runScript(GameObject target)
     {
 
-        ArrayList allEnemies = CombatGrid.getAllAliveEnemyCombatants();
+        List<Stats> allEnemies = CombatGrid.getAllAliveEnemyCombatants();
 
         List<Stats> allMasterEnemies = new List<Stats>();
 

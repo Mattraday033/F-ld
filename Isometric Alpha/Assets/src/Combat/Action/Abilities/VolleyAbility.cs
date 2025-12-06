@@ -40,8 +40,8 @@ public class VolleyAbility : Ability
 
     public override Stats getActorStats()
 	{
-		ArrayList deadActors = new ArrayList();
-		ArrayList stunnedActors = new ArrayList();
+		List<Stats> deadActors = new List<Stats>();
+		List<Stats> stunnedActors = new List<Stats>();
 
 		foreach (Stats actor in allActors)
 		{
@@ -126,7 +126,7 @@ public class VolleyAbility : Ability
 
 		// Debug.LogError(actor.getName() + " is at position " + actor.position.ToString());
 
-		ArrayList listOfTargets;
+		List<Stats> listOfTargets;
 		
 		if(actor.shouldTargetEnemy())
 		{
@@ -176,7 +176,7 @@ public class VolleyAbility : Ability
 	
 	public void findAllVolleyActorCoords(bool alliedSide)
 	{
-		ArrayList allSummonActors;
+		List<Stats> allSummonActors;
 		
 		if(alliedSide)
 		{
@@ -229,7 +229,7 @@ public class VolleyAbility : Ability
 	public static int numberOfVolleyActors(bool alliedSide)
 	{
 		int volleyActors = 0;
-		ArrayList allSummonActors;
+		List<Stats> allSummonActors;
 
 		if (alliedSide)
 		{

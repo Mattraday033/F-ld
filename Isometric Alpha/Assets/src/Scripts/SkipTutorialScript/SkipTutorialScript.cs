@@ -60,15 +60,10 @@ public class SkipAddingAbilitiesTutorialScript : SkipTutorialScript
 {
     public override void runScript()
     {
-        if (FullEditAbilityWheelPopUpWindow.getInstance() != null || OverallUIManager.currentScreenManager != null)
+        if (OverallUIManager.currentScreenManager != null)
         {
             TutorialSequence.endCurrentTutorialSequence();
             PlayerOOCStateManager.setCurrentActivity(OOCActivity.inUI);
-
-            if (FullEditAbilityWheelPopUpWindow.getInstance() == null)
-            {
-                PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
-            }
         }
         else
         {

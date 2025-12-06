@@ -333,14 +333,14 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
 
     public int getNumberOfQuests()
     {
-        return getListOfQuestsForDisplay().Count;
+        return getListOfQuestStepsForDisplay().Count;
     }
 
-    public ArrayList getListOfQuestsForDisplay()
+    public List<QuestStep> getListOfQuestStepsForDisplay()
     {
         IMapObject location = MapObjectList.getMapObject(getListKey());
 
-        return location.getAllQuestsInLocation();
+        return location.getAllQuestStepsInLocation();
     }
 
     //ICounter methods

@@ -12,7 +12,7 @@ public class EstablishLinkAbility : Ability
         this.linkTrait = (LinkTrait) linkTrait.clone();
     }
 
-    public override void performCombatAction(ArrayList targets)
+    public override void performCombatAction(List<Stats> targets)
     {
         base.performCombatAction(targets);
 

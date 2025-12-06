@@ -12,9 +12,9 @@ public class CombatActionManager : MonoBehaviour
 	public PlayerCombatActionManager playerCombatActionManager;	
 	public SummonsCombatActionManager summonedCombatActionManager;
 
-    public static ArrayList critCombatActionQueue = new ArrayList();
-    public static ArrayList onDeathCombatActionQueue = new ArrayList();
-	public static ArrayList lockedInCombatActionQueue = new ArrayList();
+    public static List<CombatAction> critCombatActionQueue = new List<CombatAction>();
+    public static List<CombatAction> onDeathCombatActionQueue = new List<CombatAction>();
+	public static List<CombatAction> lockedInCombatActionQueue = new List<CombatAction>();
 	
 	public static Coroutine currentWait;
 
@@ -39,7 +39,7 @@ public class CombatActionManager : MonoBehaviour
 			nextCombatAction = removeNextCombatActionFromQueue(onDeathCombatActionQueue);
 		} else
 		{
-			ArrayList actions = getCombatActionOrder();
+			List<CombatAction> actions = getCombatActionOrder();
 			
 			if(actions.Count == 0)
 			{
@@ -158,7 +158,7 @@ public class CombatActionManager : MonoBehaviour
 	
 	public static bool actorAlreadyHasCombatAction(GridCoords coords)
 	{
-		ArrayList actions = getCombatActionOrder();
+		List<CombatAction> actions = getCombatActionOrder();
 		
 		foreach(CombatAction action in actions)
 		{
@@ -235,7 +235,7 @@ public class CombatActionManager : MonoBehaviour
 		action.getSelector().setToLocation(action.getPreviousTarget());
 	}
 	
-	public static ArrayList getCombatActionOrder()
+	public static List<CombatAction> getCombatActionOrder()
 	{
 		if (lockedInCombatActionQueue.Count > 0)
 		{
@@ -247,9 +247,9 @@ public class CombatActionManager : MonoBehaviour
 		}
 	}	
 	
-	public static ArrayList createCombatActionOrder()
+	public static List<CombatAction> createCombatActionOrder()
 	{
-		ArrayList actionOrder = new ArrayList();
+		List<CombatAction> actionOrder = new List<CombatAction>();
 		
 		DeadCombatantManager.getInstance().removeDeadCombatantCombatActions(PlayerCombatActionManager.playerCombatActionQueue);
 		DeadCombatantManager.getInstance().removeDeadCombatantCombatActions(EnemyCombatActionManager.enemyCombatActionQueue);
@@ -276,6 +276,11 @@ public class CombatActionManager : MonoBehaviour
 		{
 			actionOrder.Add(action);
 		}
+
+        foreach (CombatAction action in PlayerCombatActionManager.slowedPlayerCombatActionQueue)
+        {
+            actionOrder.Add(action);
+        }
 
         foreach (CombatAction action in EnemyCombatActionManager.slowedEnemyCombatActionQueue)
         {
@@ -308,23 +313,24 @@ public class CombatActionManager : MonoBehaviour
 
 	public static void wipeAllCombatActions()
 	{
-		PlayerCombatActionManager.playerCombatActionQueue = new ArrayList();
-		EnemyCombatActionManager.enemyCombatActionQueue = new ArrayList();
-        EnemyCombatActionManager.slowedEnemyCombatActionQueue = new ArrayList();
-        SummonsCombatActionManager.alliedSummonsCombatActionQueue = new ArrayList();
-		SummonsCombatActionManager.enemySummonsCombatActionQueue = new ArrayList();
+		PlayerCombatActionManager.playerCombatActionQueue = new List<CombatAction>();
+        PlayerCombatActionManager.slowedPlayerCombatActionQueue = new List<CombatAction>();
+		EnemyCombatActionManager.enemyCombatActionQueue = new List<CombatAction>();
+        EnemyCombatActionManager.slowedEnemyCombatActionQueue = new List<CombatAction>();
+        SummonsCombatActionManager.alliedSummonsCombatActionQueue = new List<CombatAction>();
+		SummonsCombatActionManager.enemySummonsCombatActionQueue = new List<CombatAction>();
 	}
 
 	public static void wipeLockedInCombatActionQueue()
 	{
-		lockedInCombatActionQueue = new ArrayList();
+		lockedInCombatActionQueue = new List<CombatAction>();
 	}
 	
 	private static int getNumberOfCurrentPartyCombatActions()
 	{
 		int numberOfPartyCombatActions = 0;
 
-		ArrayList actions = getCombatActionOrder();
+		List<CombatAction> actions = getCombatActionOrder();
 
 		foreach (CombatAction action in actions)
 		{
@@ -338,9 +344,9 @@ public class CombatActionManager : MonoBehaviour
 		return numberOfPartyCombatActions;
 	}
 	
-	private static CombatAction removeNextCombatActionFromQueue(ArrayList actionQueue)
+	private static CombatAction removeNextCombatActionFromQueue(List<CombatAction> actionQueue)
 	{
-        CombatAction nextCombatAction = (CombatAction)actionQueue[0];
+        CombatAction nextCombatAction = actionQueue[0];
         actionQueue.RemoveAt(0);
 
 		return nextCombatAction;

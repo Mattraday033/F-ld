@@ -28,7 +28,7 @@ public interface IDescribable: INameSource
 
 	public void setUpDecisionPanel(IDecisionPanel descisionPanel);
 
-	public ArrayList getRelatedDescribables();
+	public List<IDescribable> getRelatedDescribables();
 
 	public bool buildableWithBlocks(); // temporary measure for checking if you should be building with IDescribableInBlocks instead
 

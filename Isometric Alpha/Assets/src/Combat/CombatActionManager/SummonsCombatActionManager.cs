@@ -7,15 +7,15 @@ public class SummonsCombatActionManager : MonoBehaviour
 	private const bool onAlliedSide = true;
 	private const bool onEnemySide = false;
 	
-	public static ArrayList enemySummonsCombatActionQueue = new ArrayList();
-	public static ArrayList alliedSummonsCombatActionQueue = new ArrayList();
+	public static List<CombatAction> enemySummonsCombatActionQueue = new List<CombatAction>();
+	public static List<CombatAction> alliedSummonsCombatActionQueue = new List<CombatAction>();
 	
 	public CombatAction volleyCombatAction;
 
 	public void updateSummonedCombatActions()
 	{
-		ArrayList listOfSummonedAllies = CombatGrid.getAllAliveSummonedAllies();
-		ArrayList listOfSummonedEnemies = CombatGrid.getAllAliveSummonedEnemies();
+		List<Stats> listOfSummonedAllies = CombatGrid.getAllAliveSummonedAllies();
+		List<Stats> listOfSummonedEnemies = CombatGrid.getAllAliveSummonedEnemies();
 		
 		if(listOfSummonedAllies.Count > 0)
 		{
@@ -28,7 +28,7 @@ public class SummonsCombatActionManager : MonoBehaviour
 		}
 	}
 
-	private void decideSummonedCombatActions(ArrayList listOfSummons, bool alliedSide)
+	private void decideSummonedCombatActions(List<Stats> listOfSummons, bool alliedSide)
 	{
 		foreach(SummonStats summon in listOfSummons)
 		{	

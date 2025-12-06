@@ -180,9 +180,9 @@ public static class QuestList
         questToFinish.succeeded = questSuccessful;
     }
 
-    public static ArrayList getActiveUnfinishedQuests()
+    public static List<Quest> getActiveUnfinishedQuests()
 	{
-		ArrayList activeUnfinishedQuests = new ArrayList();
+		List<Quest> activeUnfinishedQuests = new List<Quest>();
 		
 		foreach(KeyValuePair<string, Quest> kvp in State.questDictionary)
 		{
@@ -197,11 +197,11 @@ public static class QuestList
 		return activeUnfinishedQuests;
 	}
 
-	public static ArrayList getActiveQuestsWithObjectivesInScene(string sceneName)
+	public static List<QuestStep> getActiveQuestStepsWithObjectivesInScene(string sceneName)
 	{
 
-		ArrayList activeUnfinishedQuests = getActiveUnfinishedQuests();
-		ArrayList questStepsInScene = new ArrayList();
+		List<Quest> activeUnfinishedQuests = getActiveUnfinishedQuests();
+		List<QuestStep> questStepsInScene = new List<QuestStep>();
 
 		foreach (Quest quest in activeUnfinishedQuests)
 		{
@@ -216,10 +216,10 @@ public static class QuestList
 		return questStepsInScene;
 	}
 
-	public static ArrayList getActiveUnfinishedQuestStepsInZone(string zoneKey)
+	public static List<QuestStep> getActiveUnfinishedQuestStepsInZone(string zoneKey)
 	{
-		ArrayList activeUnfinishedQuests = getActiveUnfinishedQuests();
-		ArrayList activeUnfinishedQuestsInZone = new ArrayList();
+		List<Quest> activeUnfinishedQuests = getActiveUnfinishedQuests();
+		List<QuestStep> activeUnfinishedQuestsInZone = new List<QuestStep>();
 
 		foreach (Quest quest in activeUnfinishedQuests)
 		{
@@ -238,9 +238,9 @@ public static class QuestList
 		return getActiveUnfinishedQuestStepsInZone(zoneKey).Count;
 	}
 
-	public static ArrayList getActiveFinishedQuests()
+	public static List<IDescribable> getActiveFinishedQuests()
 	{
-		ArrayList activeQuests = new ArrayList();
+		List<IDescribable> activeQuests = new List<IDescribable>();
 
 		foreach (KeyValuePair<string, Quest> kvp in State.questDictionary)
 		{
@@ -255,9 +255,9 @@ public static class QuestList
 		return activeQuests;
 	}
 
-	public static ArrayList getActiveQuests()
+	public static List<IDescribable> getActiveQuests()
 	{
-		ArrayList activeQuests = new ArrayList();
+		List<IDescribable> activeQuests = new List<IDescribable>();
 
 		activeQuests.AddRange(getActiveUnfinishedQuests());
 		activeQuests.AddRange(getActiveFinishedQuests());

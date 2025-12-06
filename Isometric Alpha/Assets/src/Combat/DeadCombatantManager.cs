@@ -25,12 +25,12 @@ public class DeadCombatantManager : MonoBehaviour
 	
 	public void cleanUpAllDeadCombatants()
     {
-		ArrayList deadCombatantList = new ArrayList();
-		ArrayList listOfCombatants = CombatGrid.getAllCombatants();
+		List<Stats> deadCombatantList = new List<Stats>();
+		List<Stats> listOfCombatants = CombatGrid.getAllCombatants();
 
         for (int i = 0; i < listOfCombatants.Count; i++)
         {
-            Stats currentCombatant = (Stats)listOfCombatants[i];
+            Stats currentCombatant = listOfCombatants[i];
 
             if (currentCombatant.isDead())
             {
@@ -53,11 +53,11 @@ public class DeadCombatantManager : MonoBehaviour
 		}
 	}
 	
-	public void removeDeadCombatantCombatActions(ArrayList actionQueue)
+	public void removeDeadCombatantCombatActions(List<CombatAction> actionQueue)
 	{
 		for(int actionIndex = 0; actionIndex < actionQueue.Count; actionIndex++)
 		{
-			CombatAction action = (CombatAction) actionQueue[actionIndex];
+			CombatAction action = actionQueue[actionIndex];
 			if (!action.multiActorAction() &&
 				(CombatGrid.getCombatantAtCoords(action.getActorCoords()) == null ||
 				!CombatGrid.getCombatantAtCoords(action.getActorCoords()).isAlive()))

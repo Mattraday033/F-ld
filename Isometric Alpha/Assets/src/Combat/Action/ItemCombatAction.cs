@@ -104,7 +104,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		return sourceItem.useRequiresAnAction();
 	}
 
-	public override void performCombatAction(ArrayList targets)
+	public override void performCombatAction(List<Stats> targets)
 	{
 		foreach (Stats targetCombatant in targets)
 		{

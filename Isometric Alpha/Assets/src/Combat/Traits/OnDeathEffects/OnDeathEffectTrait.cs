@@ -21,7 +21,7 @@ public class OnDeathEffectTrait : Trait
 		actionOnDeath.setActorCoords(actor.position);
 		Selector actionSelector = SelectorManager.getInstance().selectors[actionOnDeath.getRangeIndex()].clone();
 		
-		ArrayList listOfTargets;
+		List<Stats> listOfTargets;
 		
 		if(actor.shouldTargetEnemy())
 		{

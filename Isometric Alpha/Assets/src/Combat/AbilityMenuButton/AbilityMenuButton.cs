@@ -280,7 +280,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
             return action;
         }
 
-        ArrayList allAliveEnemies = CombatGrid.getAllAliveEnemyCombatants();
+        List<Stats> allAliveEnemies = CombatGrid.getAllAliveEnemyCombatants();
 
         Stats closestTarget = (Stats)allAliveEnemies[allAliveEnemies.Count - 1];
 

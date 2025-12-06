@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public interface ISaveChangesPromptable 
+{
+	public bool changesMade();
+
+	public void bypassChangesMadePromptAndClose();
+}
+
 public class ReturnToPopUp : IDecision
 {
 	public const string ReturnToPopUpMessage = "Do you wish to close this window? Any changes you made will be lost.";

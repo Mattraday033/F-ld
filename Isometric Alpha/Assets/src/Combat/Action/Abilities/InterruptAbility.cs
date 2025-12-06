@@ -27,7 +27,7 @@ public class InterruptAbility : Ability
         base.applySettings(settings);
     }
 
-    public override void performCombatAction(ArrayList targets)
+    public override void performCombatAction(List<Stats> targets)
     {
         takeCritSnapShot();
 

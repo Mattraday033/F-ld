@@ -15,36 +15,38 @@ public class PerkCategory : GlossaryCategory
 		this.type = type;
 	}
 	
-	public override ArrayList getSubcategories()
+	public override List<IDescribable> getSubcategories()
 	{
-		switch(type)
-		{
-			case PerkSubcategoryType.Strength:
+		// switch(type)
+		// {
+		// 	case PerkSubcategoryType.Strength:
 			
-				return AbilityList.getAllStrengthAbilities();
+		// 		return AbilityList.getAllStrengthAbilities();
 				
-			case PerkSubcategoryType.Dexterity:
+		// 	case PerkSubcategoryType.Dexterity:
 			
-				return AbilityList.getAllDexterityAbilities();
+		// 		return AbilityList.getAllDexterityAbilities();
 				
-			case PerkSubcategoryType.Wisdom:
+		// 	case PerkSubcategoryType.Wisdom:
 			
-				return AbilityList.getAllWisdomAbilities();
+		// 		return AbilityList.getAllWisdomAbilities();
 				
-			case PerkSubcategoryType.Charisma:
+		// 	case PerkSubcategoryType.Charisma:
 			
-				return AbilityList.getAllCharismaAbilities();
-			case PerkSubcategoryType.Lessons:
+		// 		return AbilityList.getAllCharismaAbilities();
+		// 	case PerkSubcategoryType.Lessons:
 			
-				return null;
-			case PerkSubcategoryType.Backgrounds:
+		// 		return null;
+		// 	case PerkSubcategoryType.Backgrounds:
 			
-				return null;
-			case PerkSubcategoryType.Spells:
+		// 		return null;
+		// 	case PerkSubcategoryType.Spells:
 			
-				return null;
-			default:
-				throw new IOException("Unknown PerkSubcategoryType: " + type.ToString());
-		}
+		// 		return null;
+		// 	default:
+		// 		throw new IOException("Unknown PerkSubcategoryType: " + type.ToString());
+		// }
+
+        return null;
 	}
 }

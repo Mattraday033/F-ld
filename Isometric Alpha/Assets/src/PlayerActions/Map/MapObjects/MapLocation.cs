@@ -111,37 +111,23 @@ public class MapLocation : IMapObject
 	
 	public static bool hasBeenDiscovered(string zoneKey, string locationName)
 	{
-		try
-		{
-			ArrayList listOfLocationNames = null;
-			
-			if (State.allKnownMapData.TryGetValue(zoneKey, out listOfLocationNames))
-			{
-				if(State.allKnownMapData[zoneKey].Count > 0)
-				{
-					foreach(string listSceneName in State.allKnownMapData[zoneKey])
-					{
-						if(listSceneName.Equals(locationName))
-						{
-							return true;
-						}
-					}
-					
-					return false;
-					
-				} else
-				{
-					return false;
-				}
-				
-			} else
-			{
-				return false;
-			}
-		} catch(Exception e)
-		{
-			return false;
-		}
+        if(State.allKnownMapData.ContainsKey(zoneKey))
+        {
+            List<string> listOfLocationNames = State.allKnownMapData[zoneKey];
+
+            if(listOfLocationNames != null && listOfLocationNames.Count > 0)
+            {
+                foreach(string listSceneName in State.allKnownMapData[zoneKey])
+                {
+                    if(listSceneName.Equals(locationName))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
 	}
 	
 	public string[] getAdjacentMapObjects()
@@ -214,9 +200,9 @@ public class MapLocation : IMapObject
         }
     }
 
-	public virtual ArrayList getAllQuestsInLocation()
+	public virtual List<QuestStep> getAllQuestStepsInLocation()
 	{
-		ArrayList allQuestsInLocation = QuestList.getActiveQuestsWithObjectivesInScene(locationName);
+		List<QuestStep> allQuestsInLocation = QuestList.getActiveQuestStepsWithObjectivesInScene(locationName);
 
 		foreach (string adjacentSceneName in adjacentLocations)
 		{
@@ -224,7 +210,7 @@ public class MapLocation : IMapObject
 
 			if (adjacentLocation.isInterior())
 			{
-				allQuestsInLocation.AddRange(adjacentLocation.getAllQuestsInLocation());
+				allQuestsInLocation.AddRange(adjacentLocation.getAllQuestStepsInLocation());
 			}
 		}
 

@@ -16,10 +16,13 @@ public class VaultableObject : IStoryVariableSource
     public const string rockName = "rocks";
     public const string gapName = "gap";
 
-    public readonly static VaultableObject vaultableBarrelsOneTile = new VaultableObject(Constants.sizeOne, isPlural, barrelName);
-    public readonly static VaultableObject vaultableBarrelsTwoTiles = new VaultableObject(Constants.sizeTwo, isPlural, barrelName);
+    public readonly static VaultableObject diffTwoVaultableBarrelsOneTile = new VaultableObject(Constants.difficultyTwo, Constants.sizeOne, isPlural, barrelName);
+    public readonly static VaultableObject diffTwoVaultableBarrelsTwoTiles = new VaultableObject(Constants.difficultyTwo, Constants.sizeTwo, isPlural, barrelName);
 
-    public readonly static VaultableObject vaultableGap = new VaultableObject(Constants.sizeThree, notPlural, gapName);
+    public readonly static VaultableObject diffTwoVaultableGap = new VaultableObject(Constants.difficultyTwo, Constants.sizeThree, notPlural, gapName);
+    public readonly static VaultableObject diffThreeVaultableGap = new VaultableObject(Constants.difficultyThree, Constants.sizeThree, notPlural, gapName);
+
+    public int difficulty;
 
     public int size;
 
@@ -27,8 +30,9 @@ public class VaultableObject : IStoryVariableSource
 
     public string objectName;
 
-    public VaultableObject(int size, bool plural, string objectName)
+    public VaultableObject(int difficulty, int size, bool plural, string objectName)
     {
+        this.difficulty = difficulty;
         this.size = size;
         this.plural = plural;
         this.objectName = objectName;
@@ -50,6 +54,11 @@ public class VaultableObject : IStoryVariableSource
         {
             story.variablesState[nameof(objectName)] = objectName;
         }
+
+        if (story.variablesState[Constants.dexDiffVarName] != null)
+        {
+            story.variablesState[Constants.dexDiffVarName] = difficulty;
+        }   
 
         return story;
     }

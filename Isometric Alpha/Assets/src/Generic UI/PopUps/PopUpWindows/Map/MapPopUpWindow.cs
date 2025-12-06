@@ -51,9 +51,9 @@ public class MapPopUpWindow : PopUpWindow, IEscapable
 
 	private void populateJournalEntryGrid()
 	{
-		ArrayList relevantJournalEntries = new ArrayList();
+		List<QuestStep> relevantJournalEntries = new List<QuestStep>();
 
-		ArrayList activeUnfinishedQuests = QuestList.getActiveUnfinishedQuests();
+		List<Quest> activeUnfinishedQuests = QuestList.getActiveUnfinishedQuests();
 
 		foreach (Quest quest in activeUnfinishedQuests)
 		{

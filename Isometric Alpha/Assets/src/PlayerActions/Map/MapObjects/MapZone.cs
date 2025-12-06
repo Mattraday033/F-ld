@@ -34,24 +34,7 @@ public class MapZone : IMapObject
 			return true;
 		}
 
-		try
-		{
-			ArrayList listOfSceneNames = null;
-
-			if (State.allKnownMapData.TryGetValue(zoneKey, out listOfSceneNames))
-			{
-				return State.allKnownMapData[zoneKey].Count > 0;
-			}
-			else
-			{
-				return false;
-			}
-
-		}
-		catch (Exception e)
-		{
-			return false;
-		}
+        return State.allKnownMapData.ContainsKey(zoneKey);
 	}
 	
 	public int getInteriors()
@@ -122,8 +105,8 @@ public class MapZone : IMapObject
 		return null;
 	}
 
-	public ArrayList getAllQuestsInLocation()
+	public List<QuestStep> getAllQuestStepsInLocation()
 	{
-		return new ArrayList();
+		return new List<QuestStep>();
 	}
 }

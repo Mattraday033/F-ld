@@ -194,22 +194,21 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 	public string saveName;
 
 	public string currentFlags;
-	public string[] currentChoices;// = new string[ChoiceManager.choices.Count];
-	public string[] currentDeathFlags;// = new string[DeathFlagManager.deadNames.Count];
-	public string[] currentMetFlags;// = new string[MetFlagManager.metNames.Count];
-	public FlagWrapper[] currentChestAndGateFlags;// = new FlagWrapper[GateAndChestManager.getKeyCount()];
-	public FlagWrapper[] currentActivatedTrapsAndButtons;// = new FlagWrapper[TrapAndButtonStateManager.allActivatedTrapKeys.Count];
+	public string[] currentChoices;
+	public string[] currentDeathFlags;
+	public string[] currentMetFlags;
+	public FlagWrapper[] currentChestAndGateFlags;
+	public FlagWrapper[] currentActivatedTrapsAndButtons;
 
-	public string[] currentInventory;// = new string[State.inventory.Count];
-	public string[] currentJunk;// = new string[State.junkPocket.Count];
-	public string[] currentLessons;// = new string[State.lessonsLearned.Length];
-	public string[] currentQuestList;// = new string[State.questDictionary.Count];
-	public string[] currentKnownMapData;// = new string[State.allKnownMapData.Count];
-	public string[] currentAreaHostilities;// = new string[AreaList.allAreas.Count];
+	public string[] currentInventory;
+	public string[] currentJunk;
+	public string[] currentQuestList;
+	public string[] currentKnownMapData;
+	public string[] currentAreaHostilities;
 
-    public string[] secretDoors;// = new string[0];
+    public string[] secretDoors;
 
-    public StatsWrapper[] partyMemberStats;// = new StatsWrapper[PartyManager.getNumberOfPartyMembersTotal()];
+    public StatsWrapper[] partyMemberStats;
 
 	public InventoryWrapper[] currentShopkeeperInventories;
 	public InventoryWrapper[] currentBuyBackInventories;
@@ -244,13 +243,12 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		saveBlueprint.currentFlags = Flags.getFlagsForSave();
 		saveBlueprint.currentInventory = SaveBlueprint.convertToJson<Item>(State.inventory);
 		saveBlueprint.currentJunk = convertToJson<Item>(State.junkPocket);
-		saveBlueprint.currentLessons = State.lessonsLearned;
 		saveBlueprint.currentQuestList = convertToJson(State.questDictionary);
 		saveBlueprint.currentKnownMapData = SaveBlueprint.convertAllKnownMapDataToJson();
 		saveBlueprint.currentAreaHostilities = SaveBlueprint.convertAllAreaHostilitiesToJson();
 		saveBlueprint.currentChoices = convertToJson<ChoiceKey>(ChoiceManager.choices);
-		saveBlueprint.currentDeathFlags = Helpers.arrayListToStrings(DeathFlagManager.deadNames);
-		saveBlueprint.currentMetFlags = Helpers.arrayListToStrings(MetFlagManager.metNames);
+		saveBlueprint.currentDeathFlags = DeathFlagManager.deadNames.Keys.ToArray();
+		saveBlueprint.currentMetFlags = MetFlagManager.metNames.Keys.ToArray();
 		saveBlueprint.currentChestAndGateFlags = GateAndChestManager.getAllGateAndChestFlagWrappers();
 		saveBlueprint.currentActivatedTrapsAndButtons = TrapAndButtonStateManager.getAllWrappers();
 		saveBlueprint.currentLocation = AreaManager.locationName;
@@ -319,7 +317,6 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		this.currentInventory = GetFromJson.getElementFromJson(this.saveName, nameof(currentInventory), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
 		this.currentJunk = GetFromJson.getElementFromJson(this.saveName, nameof(currentJunk), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
 
-		this.currentLessons = GetFromJson.getElementFromJson(this.saveName, nameof(currentLessons), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
 		this.currentQuestList = GetFromJson.getElementFromJson(this.saveName, nameof(currentQuestList), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
 		this.currentKnownMapData = GetFromJson.getElementFromJson(this.saveName, nameof(currentKnownMapData), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray).ToObject<string[]>();
 		this.currentAreaHostilities = GetFromJson.getElementFromJson(this.saveName, nameof(currentAreaHostilities), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
@@ -347,25 +344,6 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 			if (arrayOfJSONConvertableObjects[index] != null)
 			{
 				json[index] = arrayOfJSONConvertableObjects[index].convertToJson();
-			}
-			else
-			{
-				json[index] = null;
-			}
-		}
-
-		return json;
-	}
-
-	public static string[] convertToJson(ArrayList listOfJSONConvertableObjects)
-	{
-		string[] json = new string[listOfJSONConvertableObjects.Count];
-
-		for (int index = 0; index < json.Length; index++)
-		{
-			if (listOfJSONConvertableObjects[index] != null)
-			{
-				json[index] = ((IJSONConvertable)listOfJSONConvertableObjects[index]).convertToJson();
 			}
 			else
 			{
@@ -503,9 +481,9 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		return newChoices;
 	}
 
-	public ArrayList extractArrayListOfStringsFromJson(string[] json)
+	public List<string> extractListOfStringsFromJson(string[] json)
 	{
-		ArrayList listOfStrings = new ArrayList();
+		List<string> listOfStrings = new List<string>();
 
 		foreach (string str in json)
 		{
@@ -606,9 +584,9 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		string[] allKnownSceneNames = new string[1];
 		int sceneNameIndex = 0;
 
-		foreach (KeyValuePair<string, ArrayList> kvp in State.allKnownMapData)
+		foreach (KeyValuePair<string, List<string>> kvp in State.allKnownMapData)
 		{
-			ArrayList sceneNames = kvp.Value;
+			List<string> sceneNames = kvp.Value;
 
 			foreach (string sceneName in sceneNames)
 			{
@@ -630,20 +608,20 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		return allKnownSceneNames;
 	}
 
-	public Dictionary<string, ArrayList> extractAllKnownMapDataFromJson()
+	public Dictionary<string, List<string>> extractAllKnownMapDataFromJson()
 	{
-		Dictionary<string, ArrayList> extractedMapData = new Dictionary<string, ArrayList>();
+		Dictionary<string, List<string>> extractedMapData = new Dictionary<string, List<string>>();
 
 		foreach (string kvpString in currentKnownMapData)
 		{
 			string zoneKey = kvpString.Split(dividerCharacter)[0];
 			string sceneName = kvpString.Split(dividerCharacter)[1];
 
-			ArrayList listOfSceneNames;
+			List<string> listOfSceneNames;
 
 			if (!extractedMapData.TryGetValue(zoneKey, out listOfSceneNames))
 			{
-				listOfSceneNames = new ArrayList();
+				listOfSceneNames = new List<string>();
 				extractedMapData[zoneKey] = listOfSceneNames;
 			}
 
@@ -679,18 +657,6 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 
 			AreaList.allAreas[areaKey].setHostility(hostility);
 		}
-	}
-
-	public string[] extractAllLessonKeysFromJson()
-	{
-		string[] lessonKeys = new string[currentLessons.Length];
-
-		for (int keyIndex = 0; keyIndex < lessonKeys.Length; keyIndex++)
-		{
-			lessonKeys[keyIndex] = Lesson.extractFromJson(currentLessons[keyIndex]);
-		}
-
-		return lessonKeys;
 	}
 
 	private int getNumberOfPartyMembersInFormation()
@@ -812,9 +778,9 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		//empty on purpose
 	}
 
-	public ArrayList getRelatedDescribables()
+	public List<IDescribable> getRelatedDescribables()
 	{
-		return new ArrayList();
+		return new List<IDescribable>();
 	}
 	
 	public bool buildableWithBlocks()

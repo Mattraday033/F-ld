@@ -83,10 +83,10 @@ public class TutorialMessage : IDescribable
 
     }
 
-    public ArrayList getRelatedDescribables()
-    {
-        return new ArrayList();
-    }
+	public List<IDescribable> getRelatedDescribables()
+	{
+		return new List<IDescribable>();
+	}
 
     public bool buildableWithBlocks()
     {

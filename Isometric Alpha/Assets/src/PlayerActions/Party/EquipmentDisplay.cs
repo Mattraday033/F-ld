@@ -11,7 +11,7 @@ public class EquipmentDisplay : MonoBehaviour, ICounter
 
     public void setIconList()
     {
-        ArrayList equippedItems = OverallUIManager.getCurrentEquippedItems().createEquippedItemList();
+        IEnumerable<IDescribable> equippedItems = OverallUIManager.getCurrentEquippedItems().createEquippedItemList();
 
         foreach (EquippableItem item in equippedItems)
         {

@@ -5,6 +5,7 @@ VAR charisma = 0
 
 VAR size = 0
 VAR plural = false
+VAR dexDifficulty = 2
 VAR objectName = ""
 
 VAR playerName = ""
@@ -36,13 +37,13 @@ This {objectName} looks traversable. A sufficiently dexterous person could vault
 
 
 {
--dexterity >= 2:
-    *Vault over the {objectName}. <Dex {dexterity}/2>
+-dexterity >= dexDifficulty:
+    *Vault over the {objectName}. <Dex {dexterity}/{dexDifficulty}>
         ->1b
     *Leave the {objectName} alone.
         ->Close
 -else:
-    *Leave the {objectName} alone. <Dex {dexterity}/2>
+    *Leave the {objectName} alone. <Dex {dexterity}/{dexDifficulty}>
         ->Close
 }
 

@@ -87,7 +87,7 @@ public class SummonAbility: Ability
         playActivationAnimation();
 	}
 
-    public override void performCombatAction(ArrayList targets)
+    public override void performCombatAction(List<Stats> targets)
     {
 		performCombatAction();
     }

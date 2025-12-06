@@ -56,7 +56,7 @@ public class CompanionAttack : CombatAction
         }
 
     }
-    public override void performCombatAction(ArrayList targets)
+    public override void performCombatAction(List<Stats> targets)
     {
         base.performCombatAction(targets);
 

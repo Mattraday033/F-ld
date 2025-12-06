@@ -6,21 +6,25 @@ public interface IJournalCategory
 {
 	public string getName();
 	
-	public ArrayList getSubcategories();
+	public List<IDescribable> getSubcategories();
 }
 
+public interface ITest
+{
+    
+}
 
-public class GlossaryCategory : IDescribable, IJournalCategory
+public class GlossaryCategory: IDescribable, IJournalCategory
 {
 	private string title;
-	private ArrayList subcategories;
+	private IEnumerable<IDescribable> subcategories;
 
 	public GlossaryCategory(string title)
 	{
 		this.title = title;
 	}
 
-	public GlossaryCategory(string title, ArrayList subcategories)
+	public GlossaryCategory(string title, IEnumerable<IDescribable> subcategories) 
 	{
 		this.title = title;
 		this.subcategories = subcategories;
@@ -80,14 +84,14 @@ public class GlossaryCategory : IDescribable, IJournalCategory
 
 	}
 
-	public virtual ArrayList getSubcategories()
+	public virtual List<IDescribable> getSubcategories()
 	{
-		return subcategories;
+		return new List<IDescribable>(subcategories);
 	}
 
-	public ArrayList getRelatedDescribables()
+	public List<IDescribable> getRelatedDescribables()
 	{
-		return new ArrayList();
+		return new List<IDescribable>();
 	}
 
 	public bool buildableWithBlocks()

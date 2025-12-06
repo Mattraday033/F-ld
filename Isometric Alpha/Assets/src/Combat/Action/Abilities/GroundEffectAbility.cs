@@ -12,7 +12,7 @@ public class GroundEffectAbility : Ability
 		this.template = template;
 	}
 
-	public override void performCombatAction(ArrayList targets)
+	public override void performCombatAction(List<Stats> targets)
 	{
 		GridCoords[] allTargetCoords = getSelector().getAllSelectorCoords();
 

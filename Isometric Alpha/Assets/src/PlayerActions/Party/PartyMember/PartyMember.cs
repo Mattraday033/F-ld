@@ -177,9 +177,9 @@ public class PartyMember : IDescribable, IDescribableInBlocks
 
 	}
 
-	public ArrayList getRelatedDescribables()
+	public List<IDescribable> getRelatedDescribables()
 	{
-		return new ArrayList();
+		return new List<IDescribable>();
 	}
 
 	public bool buildableWithBlocks()
@@ -278,10 +278,11 @@ public class CompanionCombatActionDescriptionWrapper : IDescribable, IDescribabl
 		companionCombatAction.setUpDecisionPanel(decisionPanel);
 	}
 
-	public ArrayList getRelatedDescribables()
+	public List<IDescribable> getRelatedDescribables()
 	{
-		return new ArrayList();
+		return new List<IDescribable>();
 	}
+
 	public bool buildableWithBlocks()
 	{
 		return companionCombatAction.buildableWithBlocks();
