@@ -72,8 +72,10 @@ public static class FlagNameList
         public const string kastorExplainedWhereToFindAnotherKey = "kastorExplainedWhereToFindAnotherKey"; //kastor told player about the guardhouse armory key
 
         //Revolt flags
-        public const string revoltStarted = "revoltStarted";
+        public const string revoltStarted = "revoltStarted"; //The camp is hostile
         public const string spawnWormsInsteadOfGuards = "spawnWormsInsteadOfGuards"; //if the revolt has started and you opened the way to the third level of the mine, but didn't seal the breach
+        public const string duringSlaveRallyConversation = "duringSlaveRallyConversation";
+        public const string waitingOnGarchaToSpeak = "waitingOnGarchaToSpeak"; //flag that allows garcha to still be visible after rally conversation
 
 
         //Nándor Flags

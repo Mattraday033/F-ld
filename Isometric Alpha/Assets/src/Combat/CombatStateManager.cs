@@ -385,9 +385,9 @@ public class CombatStateManager : MonoBehaviour
 		CombatUI.populateCombatActionPanels();
 		updateTurnState(WhoseTurn.Won);
 
-        if (State.enemyPackInfo.xpDrop > 0)
+        if (State.enemyPackInfo.getXPDrops() > 0)
         {
-            PartyManager.addXP(State.enemyPackInfo.xpDrop);
+            PartyManager.addXP(State.enemyPackInfo.getXPDrops());
         }
 
 		CombatUI.combatResultsPopUpButton.spawnPopUp();
@@ -452,16 +452,16 @@ public class CombatStateManager : MonoBehaviour
 				State.dialogueUponSceneLoadKey = State.enemyPackInfo.dialogueUponSceneLoadKey;
 			}
 
-			if (State.enemyPackInfo.script != null)
+			if (State.enemyPackInfo.getQuestScript() != null)
 			{
-				State.enemyPackInfo.script.runScript();
+				State.enemyPackInfo.getQuestScript().runScript();
 
 				NotificationManager.skipNextNotificationSpawn();
 
 			}
-			else if (State.enemyPackInfo.questName != null && State.enemyPackInfo.questName.Length > 0)
+			else if (State.enemyPackInfo.getQuestName() != null && State.enemyPackInfo.getQuestName().Length > 0)
 			{
-				QuestList.activateQuestStep(State.enemyPackInfo.questName, State.enemyPackInfo.questStep);
+				QuestList.activateQuestStep(State.enemyPackInfo.getQuestName(), State.enemyPackInfo.getQuestStep());
 			}
 		}
 

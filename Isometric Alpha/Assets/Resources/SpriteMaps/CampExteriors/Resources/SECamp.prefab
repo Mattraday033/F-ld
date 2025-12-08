@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 804135150270028177}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.822, y: 2.992, z: 0}
+  m_LocalPosition: {x: -3.549997, y: 3.0139995, z: 0}
   m_LocalScale: {x: 0.98775876, y: 1.1574072, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -121,7 +121,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.389474, y: 3.6473684}
+    oldSize: {x: 2.7578948, y: 3.0842106}
     newSize: {x: 5.389474, y: 3.6473684}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -739,7 +739,7 @@ Transform:
   m_GameObject: {fileID: 6187873210404325593}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.032, y: 2.594, z: 0}
+  m_LocalPosition: {x: -2.76, y: 2.616, z: 0}
   m_LocalScale: {x: 0.98775876, y: 1.1574072, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -833,7 +833,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.389474, y: 3.6473684}
+    oldSize: {x: 2.7578948, y: 3.0842106}
     newSize: {x: 5.389474, y: 3.6473684}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -959,7 +959,7 @@ Transform:
   m_GameObject: {fileID: 8560413783162724259}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.613, y: 3.396, z: 0}
+  m_LocalPosition: {x: -4.3409967, y: 3.4179993, z: 0}
   m_LocalScale: {x: 0.98775876, y: 1.1574072, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1053,7 +1053,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.389474, y: 3.6473684}
+    oldSize: {x: 2.7578948, y: 3.0842106}
     newSize: {x: 5.389474, y: 3.6473684}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -149025,12 +149025,12 @@ PrefabInstance:
     - target: {fileID: 3246991911772155654, guid: 0123bae10eaa05b499dd3bfd0b753415,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.63
+      value: -5.142
       objectReference: {fileID: 0}
     - target: {fileID: 3246991911772155654, guid: 0123bae10eaa05b499dd3bfd0b753415,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.433
+      value: 3.822
       objectReference: {fileID: 0}
     - target: {fileID: 3526615426493474005, guid: 0123bae10eaa05b499dd3bfd0b753415,
         type: 3}

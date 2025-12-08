@@ -2,7 +2,8 @@ VAR strength = 0
 VAR dexterity = 0
 VAR wisdom = 0
 VAR charisma = 0
-VAR kastorStartedRevolt = false
+VAR revoltStarted = false
+VAR convincedSlavesToHelpYou = false
 
 VAR playerName = ""
 
@@ -30,7 +31,7 @@ These doors lead into the Manse. They are closed and barred.
 -strength >= 4:
     +\*Break down the doors.*
         ->1b
--kastorStartedRevolt:
+-revoltStarted && convincedSlavesToHelpYou:
     +Alright everyone! Break down these doors!
         ->1c
 }

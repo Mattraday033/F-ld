@@ -274,7 +274,7 @@ public static class SpawnInfoManager
 
         details.spawnActions(monsterGameObject);
 
-        InteractableSpawnParams spawnParams = SpawnParamList.getMonsterSpawnParams(AreaManager.locationName, index.ToString());
+        InteractableSpawnParams spawnParams = SpawnParamsList.getMonsterSpawnParams(AreaManager.locationName, index.ToString());
 
         string key = MonsterDefeatKeysList.generateMonsterDefeatKey(monsterMovement.getMonsterPackIndex());
 

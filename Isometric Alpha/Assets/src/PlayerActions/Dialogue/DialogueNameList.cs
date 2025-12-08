@@ -7,7 +7,6 @@ public static class DialogueNameList
 {
 
     #region Dialogues Without Area Names
-    public const string slavesAfterKillingOverseerCampNEKey = "slavesAfterKillingOverseerCampNE";
     public const string kendeUponEnteringKitchensKey = "kendeUponEnteringKitchens";
     public const string taborManse2F2BKey = "taborManse-2F-2B";
     public const string directorDefeatedConvoKey = "directorDefeatedConvo";
@@ -105,7 +104,26 @@ public static class DialogueNameList
 
     #region Camp North East
     public const string leafPilePath = campExteriorPathName + LocationNameList.campNorthEast + seperatorChar + "LeafPile";
+    public const string slavesAfterKillingOverseerCampNEKey = "slavesAfterKillingOverseerCampNE";
+    public const string slavesAfterKillingOverseerCampNEPathName = campExteriorPathName + LocationNameList.campNorthEast + seperatorChar + slavesAfterKillingOverseerCampNEKey;
+    
+    public const string woundedSlaveNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + seperatorChar + NPCNameList.woundedSlave;
+    public const string woundedSlaveOneNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + seperatorChar + NPCNameList.woundedSlave+"1";
+    public const string woundedSlaveTwoNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + seperatorChar + NPCNameList.woundedSlave+"2";
+
+    public const string slaveFiveNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + seperatorChar + NPCNameList.slave+"5";
+    public const string slaveSixNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + seperatorChar + NPCNameList.slave+"6";
+    public const string slaveSevenNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + seperatorChar + NPCNameList.slave+"7";
+    public const string slaveEightNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + seperatorChar + NPCNameList.slave+"8";
+    public const string slaveNineNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + seperatorChar + NPCNameList.slave+"9";
+
+    public const string duringRevolutionSuffix = "DuringRevolution";
+    public const string kastorNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + seperatorChar + NPCNameList.kastor+duringRevolutionSuffix;
+    public const string urosNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + seperatorChar + NPCNameList.uros+duringRevolutionSuffix;
+    public const string garchaNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + seperatorChar + NPCNameList.garcha+duringRevolutionSuffix;
+    public const string guardMarcosNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + seperatorChar + NPCNameList.guardMarcos+duringRevolutionSuffix;
     #endregion
+
     #region Camp Center
     public const string csalanPath = campExteriorPathName + LocationNameList.campCenter + seperatorChar + NPCNameList.csalan;
     public const string taborPath = campExteriorPathName + LocationNameList.campCenter + seperatorChar + NPCNameList.tabor;

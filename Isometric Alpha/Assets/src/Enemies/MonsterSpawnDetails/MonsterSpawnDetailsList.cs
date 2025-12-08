@@ -38,6 +38,14 @@ public static class MonsterSpawnDetailsList
         monsterSpawnDetailsDict.Add(LocationNameList.slaveShackSix, list);
         #endregion
 
+        #region NECamp
+        list = new List<MonsterSpawnDetails>();
+
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(13, -3), Facing.SouthWest));
+
+        monsterSpawnDetailsDict.Add(LocationNameList.campNorthEast, list);
+        #endregion
+
         #endregion
 
         #region Mine Levels 1-3
@@ -160,8 +168,8 @@ public static class MonsterSpawnDetailsList
 
         list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-11, 13)));
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(1, 13)));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-11, 13), chasesPlayer));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(1, 13), chasesPlayer));
 
         monsterSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.section1a, list);
 

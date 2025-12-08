@@ -7,7 +7,7 @@ public class CampRevoltWormSpawn : MonsterSpawnScript
 
     public override bool evaluateScript()
     {
-        if(Flags.getFlag(FlagNameList.kastorStartedRevolt) && !Flags.getFlag(FlagNameList.mineLvl3BreachSealed))
+        if(Flags.getFlag(FlagNameList.revoltStarted) && !Flags.getFlag(FlagNameList.mineLvl3BreachSealed))
         {
             Flags.setFlag(FlagNameList.spawnWormsInsteadOfGuards, true);
         }

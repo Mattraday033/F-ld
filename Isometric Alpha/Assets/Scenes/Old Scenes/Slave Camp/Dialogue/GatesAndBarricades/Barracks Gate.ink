@@ -2,7 +2,6 @@ VAR strength = 0
 VAR dexterity = 0
 VAR wisdom = 0
 VAR charisma = 0
-VAR kastorStartedRevolt = false
 
 VAR playerName = ""
 
@@ -24,7 +23,7 @@ VAR playerName = ""
 
 === 1a ===
 
-This gate is locked. It looks formidable, and will not relent easily.
+This gate is locked. It looks formidable. You'll have to find another way inside.
 
     +\*Leave.*
         ->Close

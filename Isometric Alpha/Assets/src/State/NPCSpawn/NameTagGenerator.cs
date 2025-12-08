@@ -30,14 +30,10 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
             nameSource = GetComponent<INameSource>();
         }
 
+        createListeners();
 	}
 
-	private void OnEnable()
-	{
-		createListeners();
-	}
-
-	private void OnDisable()
+	private void OnDestroy()
 	{
 		destroyListeners();
 	}
@@ -79,9 +75,14 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
     private void checkSpawnParams(string secretDoorFlag)
     {
-        if(!SpawnParamList.getSpawnParams(AreaManager.locationName, nameSource.getName()).canSpawn(nameSource.getName()))
+        Debug.LogError("("+nameSource.getName()+").canSpawn() = " + SpawnParamsList.getSpawnParams(AreaManager.locationName, nameSource.getName()).canSpawn(nameSource.getName()));
+
+        if(!SpawnParamsList.getSpawnParams(AreaManager.locationName, nameSource.getName()).canSpawn(nameSource.getName()))
         {
             gameObject.SetActive(false);
+        } else
+        {
+            gameObject.SetActive(true); 
         }
     }
 

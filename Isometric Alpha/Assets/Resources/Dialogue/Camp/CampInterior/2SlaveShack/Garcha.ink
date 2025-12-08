@@ -1,11 +1,11 @@
 VAR gotBroglinKilledByGuard = false
 VAR spokeToGarchaAboutPlan = false
-VAR kastorStartedRevolt = false
+VAR revoltStarted = false
 VAR wisdom = 0
 VAR charisma = 0
 
 {
--kastorStartedRevolt:
+-revoltStarted:
 ->4a
 -else:
 ->3a

@@ -6,7 +6,7 @@ public class TaborDialogueActivationScriptOne : DialogueActivationScript
 {
     public override bool evaluateScript()
     {
-        if (Flags.getFlag(FlagNameList.kastorStartedRevolt) && !(Flags.getFlag(FlagNameList.letTaborLive) || Flags.getFlag(FlagNameList.killedTaborInManse)))
+        if (Flags.getFlag(FlagNameList.revoltStarted) && !(Flags.getFlag(FlagNameList.letTaborLive) || Flags.getFlag(FlagNameList.killedTaborInManse)))
         {
             return true;
         } else

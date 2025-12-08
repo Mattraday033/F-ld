@@ -225,6 +225,91 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(3, 5), Facing.SouthEast));
 
+        #region Rallying Slaves Dialogue
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(8, 5)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.nandor, new Vector3Int(8, 3)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.garcha, new Vector3Int(11, 4)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.janos, new Vector3Int(10, 6)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.clay, new Vector3Int(9, 2)));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveOne, new Vector3Int(11, 3)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveTwo, new Vector3Int(11, 6)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveThree, new Vector3Int(8, 2)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveFour, new Vector3Int(9, 6)));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 2)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 1)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 0)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, -1)));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 2)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 1)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 0)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, -1)));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 1)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 0)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, -1)));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 1)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 0)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, -1)));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(7, 1)));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(5, 3)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.crowd, new Vector3Int(5, 2))); //Crowd
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(5, 1)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(5, 0)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(5, -1)));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(4, 3)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(4, 2)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(4, 1)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(4, 0)));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(3, 2)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(3, 2)));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 9)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 8)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 7)));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 10)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 9)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 8)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 7)));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 10)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 9)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 8)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 7)));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 9)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 8)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 7)));
+
+        #endregion
+
+        #region After Slaves Recruited
+
+        list.Add(new NPCSpawnDetails(NPCNameList.slave+5, new Vector3Int(-2, 9), LocationNameList.campNorthEast));
+        list.Add(new NPCSpawnDetails(NPCNameList.slave+6, new Vector3Int(6, 10), LocationNameList.campNorthEast));
+        list.Add(new NPCSpawnDetails(NPCNameList.slave+7, new Vector3Int(-3, -8), LocationNameList.campNorthEast));
+        list.Add(new NPCSpawnDetails(NPCNameList.slave+8, new Vector3Int(-6, -1), LocationNameList.campNorthEast));
+        list.Add(new NPCSpawnDetails(NPCNameList.uros, new Vector3Int(-6, 2), LocationNameList.campNorthEast));
+
+        list.Add(new NPCSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(11, 1), LocationNameList.campNorthEast));
+        list.Add(new NPCSpawnDetails(NPCNameList.woundedSlave, new Vector3Int(11, 3), LocationNameList.campNorthEast));
+        list.Add(new NPCSpawnDetails(NPCNameList.woundedSlave+1, new Vector3Int(11, 6), LocationNameList.campNorthEast));
+        list.Add(new NPCSpawnDetails(NPCNameList.woundedSlave+2, new Vector3Int(11, 8), LocationNameList.campNorthEast));
+
+        list.Add(new NPCSpawnDetails(NPCNameList.kastor, new Vector3Int(11, 2), LocationNameList.campNorthEast));
+        list.Add(new NPCSpawnDetails(NPCNameList.garcha+1, new Vector3Int(-2, 1), LocationNameList.campNorthEast));
+
+        #endregion
+
         oocSpawnDetailsDict.Add(LocationNameList.campNorthEast, list);
         #endregion
         #region CenterCamp

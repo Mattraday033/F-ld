@@ -28,7 +28,7 @@ public static class CombatResultsManager
             }
         }
 
-        if (State.enemyPackInfo.isBossMonster)
+        if (State.enemyPackInfo.isBossMonster())
         {
             return itemDrops;
         }

@@ -39,9 +39,6 @@ public static class DialogueList
         // addDialogueToList(DialogueNameList.afterKillingGuardsMineLvl3Key,
         //                  new Dialogue(new string[] { "", "Nándor", "Carter", "Guard Márcos", "Guard Pázmán", "Guard Réka" }, new GameObject[6], Resources.Load<TextAsset>(DialogueNameList.afterKillingGuardsMineLvl3Key)));
 
-        // addDialogueToList(DialogueNameList.slavesAfterKillingOverseerCampNEKey,
-        //                  new Dialogue(new string[] { "", "Nándor", "Carter", "Garcha", "Janos", "Clay", "Slave 1", "Slave 2", "Slave 3", "Slave 4", "The Crowd", "AfterOverseerParent" }, new GameObject[12], Resources.Load<TextAsset>(DialogueNameList.slavesAfterKillingOverseerCampNEKey)));
-
         // addDialogueToList(DialogueNameList.kendeUponEnteringKitchensKey,
         //                  new Dialogue(new string[] { "", "Kende", "Imre 1", "Imre 2", "Pan", "Guard", "Slave" }, new GameObject[7], Resources.Load<TextAsset>(DialogueNameList.kendeUponEnteringKitchensKey), new NPCCombatInfo(new EnemyPackInfo[]{     EnemyPackInfoList.halfSlavesNoGuardFight,
         //                                                                                                                                                                                                                                 EnemyPackInfoList.halfSlavesFight,
@@ -232,6 +229,69 @@ public static class DialogueList
                             new Dialogue(new string[] { NPCNameList.leafPile },
                             Resources.Load<TextAsset>(DialogueNameList.leafPilePath)));
 
+        addDialogueToList(LocationNameList.campNorthEast, DialogueNameList.slavesAfterKillingOverseerCampNEKey,
+                         new Dialogue(new string[] { 
+                                                        "", 
+                                                        NPCNameList.nandor, 
+                                                        NPCNameList.carter, 
+                                                        NPCNameList.garcha, 
+                                                        NPCNameList.janos, 
+                                                        NPCNameList.clay, 
+                                                        NPCNameList.slaveOne, 
+                                                        NPCNameList.slaveTwo, 
+                                                        NPCNameList.slaveThree, 
+                                                        NPCNameList.slaveFour, 
+                                                        NPCNameList.crowd
+                                                        }, 
+                            Resources.Load<TextAsset>(DialogueNameList.slavesAfterKillingOverseerCampNEPathName)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.slave+5,
+                         new Dialogue(new string[] { NPCNameList.slave+5 }, 
+                            Resources.Load<TextAsset>(DialogueNameList.slaveFiveNECampPathName)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.slave+6,
+                         new Dialogue(new string[] { NPCNameList.slave+6 }, 
+                            Resources.Load<TextAsset>(DialogueNameList.slaveSixNECampPathName)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.slave+7,
+                         new Dialogue(new string[] { NPCNameList.slave+7 }, 
+                            Resources.Load<TextAsset>(DialogueNameList.slaveSevenNECampPathName)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.slave+8,
+                         new Dialogue(new string[] { NPCNameList.slave+8 }, 
+                            Resources.Load<TextAsset>(DialogueNameList.slaveEightNECampPathName)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.slave+9,
+                         new Dialogue(new string[] { NPCNameList.slave+9 }, 
+                            Resources.Load<TextAsset>(DialogueNameList.slaveNineNECampPathName)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.woundedSlave,
+                         new Dialogue(new string[] { NPCNameList.woundedSlave }, 
+                            Resources.Load<TextAsset>(DialogueNameList.woundedSlaveNECampPathName)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.woundedSlave+1,
+                         new Dialogue(new string[] { NPCNameList.woundedSlave+1 }, 
+                            Resources.Load<TextAsset>(DialogueNameList.woundedSlaveOneNECampPathName)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.woundedSlave+2,
+                         new Dialogue(new string[] { NPCNameList.woundedSlave+2 }, 
+                            Resources.Load<TextAsset>(DialogueNameList.woundedSlaveTwoNECampPathName)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guardMarcos,
+                         new Dialogue(new string[] { NPCNameList.guardMarcos }, 
+                            Resources.Load<TextAsset>(DialogueNameList.ml3MarcosPath)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.uros,
+                         new Dialogue(new string[] { NPCNameList.uros }, 
+                            Resources.Load<TextAsset>(DialogueNameList.urosNECampPathName)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.kastor,
+                         new Dialogue(new string[] { NPCNameList.kastor }, 
+                            Resources.Load<TextAsset>(DialogueNameList.kastorNECampPathName)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.garcha+1,
+                         new Dialogue(new string[] { NPCNameList.garcha+1 }, 
+                            Resources.Load<TextAsset>(DialogueNameList.garchaNECampPathName)));
         #endregion
         #region CenterCamp
 

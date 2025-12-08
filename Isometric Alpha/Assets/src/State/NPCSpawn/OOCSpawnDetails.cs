@@ -99,7 +99,7 @@ public abstract class OOCSpawnDetails
 
     public virtual SpawnParams getSpawnParams()
     {
-        return SpawnParamList.getSpawnParams(AreaManager.locationName, npcName);
+        return SpawnParamsList.getSpawnParams(AreaManager.locationName, npcName);
     }
 
     public bool hasTutorialTargetHash()
@@ -930,7 +930,7 @@ public class NonDialogueNPCSpawnDetails : NPCSpawnDetails
 
     public override SpawnParams getSpawnParams()
     {
-        InteractableSpawnParams spawnParams = SpawnParamList.getSpawnParams(AreaManager.locationName, npcName);
+        InteractableSpawnParams spawnParams = SpawnParamsList.getSpawnParams(AreaManager.locationName, npcName);
 
         if(spawnParams.startSpawningFlagList.flags.Length == 0 && 
             spawnParams.stopSpawningFlagList.flags.Length == 0)

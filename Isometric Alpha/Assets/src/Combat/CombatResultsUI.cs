@@ -50,7 +50,7 @@ public class CombatResultsUI : PopUpWindow
 		displayDrops(DropTableList.getDropTable(packInfo.dropTableName),
 					 packInfo.numberOfDrops,
 					 packInfo.guaranteedDrops,
-					 packInfo.xpDrop);
+					 packInfo.getXPDrops());
 	}
 
     private void displayDrops(DropTable dropTable, int numberOfDrops, ItemListID[] guaranteedDrops, int xpDropped)

@@ -55,7 +55,7 @@ VAR mineLvl3DealtWithGaspar = false
 VAR kastorReadyToStartRevolt = false
 VAR mineLvl3MarcosAgreedToIgniteJelly = false
 VAR broughtNandorToKastor = false
-VAR startedRevolt = false
+VAR revoltStarted = false
 VAR kastorStartedRevolt = false
 VAR toldCarterPassword = false
 VAR toldCarterWrongPassword = false
@@ -2100,7 +2100,7 @@ setToTrue(imreReadyToHelpPlayer)
 activateQuestStep(Assist the Nonbranded,2)
 }
 
-setToTrue(startedRevolt)
+setToTrue(revoltStarted)
 setToTrue(kastorStartedRevolt)
 activateQuestStep(The Plan,12)
 

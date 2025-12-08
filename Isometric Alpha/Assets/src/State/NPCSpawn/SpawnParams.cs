@@ -398,7 +398,7 @@ public class StartSpawningFlagList : FlagList
 
 }
 
-public class StartSpawningAllTrueFlagList : FlagList
+public class StartSpawningAllTrueFlagList : StartSpawningFlagList
 {
     public StartSpawningAllTrueFlagList():
     base()

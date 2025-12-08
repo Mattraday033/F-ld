@@ -3,7 +3,6 @@ VAR dexterity = 0
 VAR wisdom = 0
 VAR charisma = 0
 VAR askedImreToLeadTheWay = false
-VAR kastorStartedRevolt = false
 
 VAR playerName = ""
 

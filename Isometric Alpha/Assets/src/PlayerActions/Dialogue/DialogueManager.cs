@@ -577,6 +577,14 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
+                case "updatenpcvisibility":
+
+                    SecretDoorFlags.addSecretDoorFlag("");
+
+                    continueStory();
+
+                    break;
+
                 case "combinedialogue":
 
                     combineOldDialogue = true;

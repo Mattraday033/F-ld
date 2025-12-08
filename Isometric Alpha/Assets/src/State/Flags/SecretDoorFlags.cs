@@ -17,7 +17,7 @@ public static class SecretDoorFlags
 
     public static void addSecretDoorFlag(string secretDoorKey)
     {
-        if(!secretDoorFlags.ContainsKey(secretDoorKey))
+        if(secretDoorKey.Length > 0 && !secretDoorFlags.ContainsKey(secretDoorKey))
         {
             secretDoorFlags.Add(secretDoorKey, true);
         }

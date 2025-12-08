@@ -5,7 +5,7 @@ VAR convincedImre = false
 VAR terrifiedImre = false
 VAR givenTaskByErvin = false
 VAR imreReadyToHelpPlayer = false
-VAR kastorStartedRevolt = false
+VAR revoltStarted = false
 VAR toldImreNeededToRest = false
 VAR hasToolBundle = false
 VAR gaveKastorToolBundle = false
@@ -31,7 +31,7 @@ searchInventoryFor(hasToolBundle,Tool Bundle)
 {
 -toldImreNeededToRest:
 ->8b
--imreReadyToHelpPlayer && kastorStartedRevolt:
+-imreReadyToHelpPlayer && revoltStarted:
 ->8a
 -terrifiedImre:
  ->1ac

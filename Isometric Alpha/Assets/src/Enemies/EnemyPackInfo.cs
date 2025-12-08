@@ -21,8 +21,7 @@ public struct EnemyAmount
 public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
 {
 
-    //[SerializeField]
-    private string[] flagsToCheckForAllies;
+    protected string[] flagsToCheckForAllies;
 
     public string tutorialSequenceKey;
 
@@ -30,22 +29,13 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
 
     public string dropTableName;
 
-    public string killFlagKey;
-
     public string dialogueUponSceneLoadKey;
 
     //[SerializeField]
     public ItemListID[] guaranteedDrops;
 
-    public int numberOfDrops = 1;
-    public int xpDrop = -1;
+    public int numberOfDrops = 1; //number of rolls on their drop table
 
-    public bool isBossMonster = false;
-
-    public string questName;
-    public int questStep;
-
-    public QuestStepActivationScript script;
 
     public EnemyPackInfo(EnemyAmount[] enemyTypes, string dropTableName)
     {
@@ -72,15 +62,30 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
         this.dropTableName = dropTableName;
     }
 
-    public EnemyPackInfo(EnemyAmount[] enemyTypes, string[] flagsToCheckForAllies, string dropTableName, QuestStepActivationScript script)
+    public virtual int getQuestStep()
     {
-        this.enemyTypes = enemyTypes;
+        return -1;
+    }
 
-        this.flagsToCheckForAllies = flagsToCheckForAllies;
+    public virtual QuestStepActivationScript getQuestScript()
+    {
+        return null;
+    }
 
-        this.dropTableName = dropTableName;
 
-        this.script = script;
+    public virtual int getXPDrops()
+    {
+        return 0;
+    }
+
+    public virtual bool isBossMonster()
+    {
+        return false;
+    }
+
+    public virtual string getQuestName()
+    {
+        return null;
     }
 
     public string getPackName()
@@ -88,12 +93,9 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
         return enemyTypes[Constants.indexZero].enemyStats.getName();
     }
 
-    public void markBossAsKilled()
+    public virtual void markBossAsKilled()
     {
-        if (isBossMonster)
-        {
-            Flags.setFlag(killFlagKey, true);
-        }
+        //empty on purpose
     }
 
     public int determineEnemyCount(int index)
@@ -160,4 +162,153 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
 
         return blocks;
     }
+}
+
+//info about a pack of enemies on the overworld, such as how many of them there are and of what type. Stored in State
+public class BossPackInfo : EnemyPackInfo
+{
+
+    public string killFlagKey;
+    public int xpDrop = 0;
+
+    public string questName;
+    public int questStep;
+
+    public QuestStepActivationScript script;
+
+    public BossPackInfo(EnemyAmount[] enemyTypes, string dropTableName, string killFlagKey, string dialogueUponSceneLoadKey):
+    base(enemyTypes, dropTableName)
+    {
+        this.enemyTypes = enemyTypes;
+
+        this.dropTableName = dropTableName;
+        this.killFlagKey = killFlagKey;
+        
+        this.dialogueUponSceneLoadKey = dialogueUponSceneLoadKey;
+    }
+
+    public BossPackInfo(EnemyAmount[] enemyTypes, string dropTableName, string killFlagKey, ItemListID[] guaranteedDrops):
+    base(enemyTypes, dropTableName, guaranteedDrops)
+    {
+        this.enemyTypes = enemyTypes;
+
+        this.dropTableName = dropTableName;
+        this.killFlagKey = killFlagKey;
+    }
+
+    public BossPackInfo(EnemyAmount[] enemyTypes, string[] flagsToCheckForAllies, string dropTableName, QuestStepActivationScript script):
+    base(enemyTypes, flagsToCheckForAllies, dropTableName)
+    {
+        this.enemyTypes = enemyTypes;
+
+        this.flagsToCheckForAllies = flagsToCheckForAllies;
+
+        this.dropTableName = dropTableName;
+
+        this.script = script;
+    }
+
+    public override int getQuestStep()
+    {
+        return questStep;
+    }
+
+    public override string getQuestName()
+    {
+        return questName;
+    }
+
+    public override QuestStepActivationScript getQuestScript()
+    {
+        return script;
+    }
+
+    public override void markBossAsKilled()
+    {
+        Flags.setFlag(killFlagKey, true);
+    }
+
+    public override bool isBossMonster()
+    {
+        return true;
+    }
+
+    public override int getXPDrops()
+    {
+        return xpDrop;
+    }
+
+/*
+    public string getPackName()
+    {
+        return enemyTypes[Constants.indexZero].enemyStats.getName();
+    }
+
+
+
+    public int determineEnemyCount(int index)
+    {
+        return enemyTypes[index].amount;
+    }
+
+    public bool hasSummonsToSpawn()
+    {
+
+        if (flagsToCheckForAllies == null || flagsToCheckForAllies is null || flagsToCheckForAllies.Length == 0)
+        {
+            return false;
+        }
+
+        foreach (string flag in flagsToCheckForAllies)
+        {
+            if (flag == null || flag is null || flag.Length == 0)
+            {
+                continue;
+            }
+            else
+            {
+                if (Flags.getFlag(flag))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public string getAllyGroupingKey()
+    {
+        for (int keyIndex = 0; keyIndex < flagsToCheckForAllies.Length; keyIndex++)
+        {
+            if (Flags.getFlag(flagsToCheckForAllies[keyIndex]))
+            {
+                return flagsToCheckForAllies[keyIndex];
+            }
+        }
+
+        throw new IOException("No key to use");
+    }
+
+
+    //IDescribableInBlocks methods
+    public string getName()
+    {
+        return "";
+    }
+
+    public List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
+    {
+        List<DescriptionPanelBuildingBlock> blocks = new List<DescriptionPanelBuildingBlock>();
+
+        for (int enemyIndex = 0; enemyIndex < enemyTypes.Length; enemyIndex++)
+        {
+            string enemyNumber = enemyTypes[enemyIndex].amount.ToString();
+
+            blocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, enemyNumber + "   " + enemyTypes[enemyIndex].enemyStats.getName()));
+        }
+
+        return blocks;
+    }
+    */
 }

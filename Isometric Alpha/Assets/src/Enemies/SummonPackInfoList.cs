@@ -11,8 +11,8 @@ public static class SummonPackInfoList
 	public const string guardsGameObjectKey = "CampGuard";
 	
 	public const string guardsMineLvl3Key = "mineLvl3GuardsInParty";
-	public const string smallSlaveRiotKey = "kastorStartedRevolt";
-	public const string largeSlaveRiotKey = "convincedSlavesToHelpYou";
+	public const string smallSlaveRiotKey = FlagNameList.kastorStartedRevolt;
+	public const string largeSlaveRiotKey = FlagNameList.convincedSlavesToHelpYou;
 	
 	static SummonPackInfoList()
 	{	

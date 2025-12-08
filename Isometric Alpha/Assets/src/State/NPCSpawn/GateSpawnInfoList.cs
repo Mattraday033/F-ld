@@ -624,7 +624,7 @@ public class GateSpawnInfo : AxisSpawnInfo
 
     public override bool shouldSpawn()
     {
-        return SpawnParamList.getSpawnParams(currentArea, getGateName()).canSpawn(getGateName());
+        return SpawnParamsList.getSpawnParams(currentArea, getGateName()).canSpawn(getGateName());
     }
 
     public virtual GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)

@@ -24,6 +24,16 @@ public static class NPCNameList
     public const string temple = "Temple";
     public const string uros = "Uros";
 
+    public const string slave = "Slave";
+    public const string slaveOne = "Slave1";
+    public const string slaveTwo = "Slave2";
+    public const string slaveThree = "Slave3";
+    public const string slaveFour = "Slave4";
+    public const string slaveFive = "Slave5";
+    public const string slaveSix = "Slave6";
+
+    public const string woundedSlave = "Wounded Slave";
+
     #endregion
 
     #region Non-Branded
@@ -131,6 +141,12 @@ public static class NPCNameList
     public const string thatch = "Thatch";
     public const string nandor = "Nándor";
     public const string carter = "Carter";
+
+    #endregion
+
+    #region Misc
+
+    public const string crowd = "The Crowd";
 
     #endregion
 

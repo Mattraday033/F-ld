@@ -15,7 +15,7 @@ public static class EnemyPackInfoList
 
     public const string chiefTabor = "ChiefTabor";
 
-    public readonly static string[] flagsToCheckForSlaveAllies = new string[] { "convincedSlavesToHelpYou", "kastorStartedRevolt" };
+    public readonly static string[] flagsToCheckForSlaveAllies = new string[] { FlagNameList.convincedSlavesToHelpYou, FlagNameList.kastorStartedRevolt };
 
     public readonly static EnemyPackInfo guardVazulFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.guardVazul }, DropTableList.slaveMineDT1Name,
                                                                                     new ItemListID[]  {new ItemListID(ItemList.usableItemListIndex, ItemList.chewIndex, quantityOfThree),
@@ -62,9 +62,16 @@ public static class EnemyPackInfoList
                                                                                                         DropTableList.slaveMineDT1Name);
 
     public readonly static EnemyPackInfo executionerTest = new EnemyPackInfo(new EnemyAmount[] { 
-                                                                                                        EnemyAmountList.oneExecutioner, 
+                                                                                                        EnemyAmountList.oneExecutioner
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name);
+
+    public readonly static BossPackInfo campNorthEastOverseerBoss = new BossPackInfo(new EnemyAmount[] { 
+                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        FlagNameList.neCampOverseerKilled,
+                                                                                                        DialogueNameList.slavesAfterKillingOverseerCampNEKey);
 
     // //used in the dialogue started upon entering the Manse kitchens
     // public readonly static EnemyPackInfo halfSlavesNoGuardFight = new EnemyPackInfo(new int[] { 1, 6 }, new int[] { 1, 6 }, new EnemyStats[]{loadEnemyStatsFromResources(kendeTheCookWithoutSummon),
@@ -192,6 +199,14 @@ public static class EnemyPackInfoList
         list.Add(twoGiantBatsTwoBatSwarms);
 
         enemyPackInfoDict.Add(LocationNameList.slaveShackSix, list);
+        #endregion
+
+        #region North East Camp
+        list = new List<EnemyPackInfo>();
+
+        list.Add(campNorthEastOverseerBoss);
+
+        enemyPackInfoDict.Add(LocationNameList.campNorthEast, list);
         #endregion
 
         #region MineLvl_1-1b
