@@ -7,9 +7,8 @@ public static class DialogueNameList
 {
 
     #region Dialogues Without Area Names
-    public const string kendeUponEnteringKitchensKey = "kendeUponEnteringKitchens";
     public const string taborManse2F2BKey = "taborManse-2F-2B";
-    public const string directorDefeatedConvoKey = "directorDefeatedConvo";
+    public const string directorDefeatedConvoKey = NPCNameList.director + "DefeatedConvo";
     public const string guardPunishmentConvoKey = "guardPunishmentStartConvo";
 
 
@@ -182,6 +181,53 @@ public static class DialogueNameList
 
     public const string afterKillingGuardsMineLvl3Path = mineLvl3FolderPath + "AfterKillingGuardsMineLvl3";
     public const string afterKillingGuardsMineLvl3Key = "AfterKillingGuardsMineLvl3";
+
+    #endregion
+
+    #endregion
+
+
+    #region Manse
+
+    public const string mansePathName = dialogueResourcesPathName + LocationNameList.manse + seperatorChar;
+    public const string manseFirstFloorPathName =  mansePathName + LocationNameList.manseFirstFloor + seperatorChar;
+
+    #region Manse-1F
+
+    #region Manse-1F-Kitchens
+
+    public const string kendeUponEnteringKitchensPathName = manseFirstFloorPathName + "kendeUponEnteringKitchens";
+
+    public const string loyalImrePathName = manseFirstFloorPathName + "LoyalImre";
+
+    #endregion
+
+    #region Manse-1F-3b
+
+    public const string beamAndCsalanPathName = manseFirstFloorPathName + NPCNameList.beam+"And"+NPCNameList.csalan;
+
+    #endregion
+
+
+    #endregion
+
+    public const string manseSecondFloorPathName =  mansePathName + LocationNameList.manseSecondFloor + seperatorChar;
+
+    #region Manse-2F
+
+    #region Manse-2F-2c
+
+    public const string chiefTaborManseSecondFloorPathName = manseSecondFloorPathName + NPCNameList.chiefTabor;
+
+    #endregion
+
+    #region Manse-2F-Office
+
+    public const string officeDoorPathName = manseSecondFloorPathName + NPCNameList.officeDoor;
+    public const string directorPathName = manseSecondFloorPathName + NPCNameList.director;
+    public const string directorDefeatedPathName = manseSecondFloorPathName + NPCNameList.director+"DefeatedConvo";
+
+    #endregion
 
     #endregion
 

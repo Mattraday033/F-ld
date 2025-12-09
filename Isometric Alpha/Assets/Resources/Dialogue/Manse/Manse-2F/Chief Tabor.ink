@@ -119,7 +119,7 @@ This isn't about me: it's always been about you and your wicked ways. Could you 
         keepDialogue()
         I do not understand what you mean.
         ->1d
-    +Take your twisted rhetoric and shove it up your ass, old man. You die now. <Combat>
+    +Take your twisted rhetoric and shove it up your ass. You die now. <Combat>
         ~attackedTabor = true
         ->killTabor
     
@@ -375,7 +375,7 @@ And why would you want that? After all of the killing, you come to me claiming t
 Then leave. Take the rioters from the Manse and let me return to the Confederation.
 
     +I doubt the rioters would heed my call to leave you be. Their grudge with you is too great. But if you become my prisoner, I can keep you safe long enough to convince them.
-        ->9bb
+        ->9bd
 
 === 9bd ===
 
@@ -398,7 +398,7 @@ Absolutely. My work may never be finished, but it requires doing. I will never g
     +I can not allow that. <Combat>
         ~attackedTabor = true
         ->killTabor
-    +The Director spoke of a cycle, and he told me that there was nothing I could do to stop it. What if I told you I am going to prove it can be done.
+    +The Director spoke of a cycle, and he told me he fought to see it's end. What if I told you I am going to prove it can be done.
         ->9e
         
 === 9e ===
@@ -440,7 +440,7 @@ Of course I have. But your people have proven that there isn't.
 
 fadeToBlack()
 
-moveToPos(1.5,27.125)
+moveToPos(2,0)
 changeCamTarget({taborIndex})
 setFacing(NorthEast)
 

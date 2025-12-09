@@ -25,11 +25,21 @@ public class NotificationPopUpButton : PopUpButton
 
     public override void spawnPopUp()
     {
+        StartCoroutine(spawnPopUpWhenParentExists());
+    }
+
+    private IEnumerator spawnPopUpWhenParentExists()
+    {
+        while(OverallUIManager.notificationParent == null)
+        {
+            yield return null;
+        }
+
         GameObject notificationPopUpGameObject = Instantiate(Resources.Load<GameObject>(getPopUpPrefabName(type)), OverallUIManager.notificationParent);
 
         if(notificationPopUpGameObject == null || getCurrentPopUpGameObject() == null)
         {
-            return;
+            yield break;
         }
 
         setPopUpWindow(getCurrentPopUpGameObject().GetComponent<PopUpWindow>());
@@ -41,6 +51,8 @@ public class NotificationPopUpButton : PopUpButton
         NotificationPopUpWindow window = (NotificationPopUpWindow)getPopUpWindow();
 
         window.populate();
+
+        NotificationManager.purgeNotifications();
 
         //EscapeStack.addEscapableObject(getPopUpWindow());
     }

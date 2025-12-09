@@ -454,9 +454,7 @@ activateQuestStep(Assist the Nonbranded, 3)
 The head chef has kept us penned up in the kitchen while we wait out the riots. I only managed to sneak away because I had Pan catch a beating to provide a distraction. I've unbarred the doors, but we have no time to waste. Are you ready to enter the Manse? Once you enter the kitchens, the guards will rush to block your passage.
 
     +Yes, I'm ready. Lead the way.
-        setToTrue(askedImreToLeadTheWay)
-        deactivate(1)
-        ->Close
+        ->deactivateImreWithFade
     +No, I need a moment.
         setToTrue(toldImreNeededToRest)
         I'll wait here until you're back.
@@ -467,9 +465,7 @@ The head chef has kept us penned up in the kitchen while we wait out the riots. 
 Are you ready to enter the kitchens?
 
     +Yes, I'm ready. Lead the way.
-        setToTrue(askedImreToLeadTheWay)
-        deactivate(1)
-        ->Close
+        ->deactivateImreWithFade
     +No, I need a moment to rest.
         setToTrue(toldImreNeededToRest)
         I'll wait here until you're back.
@@ -511,6 +507,17 @@ That's a major step.
 //Attitude set to {attitude}.
 
     -> divert
+
+=== deactivateImreWithFade ===
+
+fadeToBlack()
+
+setToTrue(askedImreToLeadTheWay)
+deactivate({imreIndex})
+
+fadeBackIn(60)
+
+->Close
 
 === Close ===
 

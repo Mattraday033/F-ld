@@ -297,8 +297,9 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.slave+5, new Vector3Int(-2, 9), LocationNameList.campNorthEast));
         list.Add(new NPCSpawnDetails(NPCNameList.slave+6, new Vector3Int(6, 10), LocationNameList.campNorthEast));
         list.Add(new NPCSpawnDetails(NPCNameList.slave+7, new Vector3Int(-3, -8), LocationNameList.campNorthEast));
-        list.Add(new NPCSpawnDetails(NPCNameList.slave+8, new Vector3Int(-6, -1), LocationNameList.campNorthEast));
-        list.Add(new NPCSpawnDetails(NPCNameList.uros, new Vector3Int(-6, 2), LocationNameList.campNorthEast));
+        list.Add(new NPCSpawnDetails(NPCNameList.slave+8, new Vector3Int(2, -3), LocationNameList.campNorthEast));
+        list.Add(new NPCSpawnDetails(NPCNameList.slave+9, new Vector3Int(-6, -1), LocationNameList.campNorthEast));
+        list.Add(new ShopkeeperSpawnDetails(NPCNameList.uros, new Vector3Int(-6, 2), LocationNameList.campNorthEast));
 
         list.Add(new NPCSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(11, 1), LocationNameList.campNorthEast));
         list.Add(new NPCSpawnDetails(NPCNameList.woundedSlave, new Vector3Int(11, 3), LocationNameList.campNorthEast));
@@ -365,6 +366,7 @@ public static class OOCSpawnDetailsList
         list = new List<OOCSpawnDetails>();
 
         list.Add(new NPCSpawnDetails(NPCNameList.imre, new Vector3Int(-6, -9), LocationNameList.campManse));
+        list.Add(new NPCSpawnDetails(NPCNameList.imre+1, new Vector3Int(-8, 1), LocationNameList.campManse));
 
         oocSpawnDetailsDict.Add(LocationNameList.campManse, list); //3,9 / kitchen -6,5
         #endregion
@@ -623,7 +625,7 @@ public static class OOCSpawnDetailsList
         list = new List<OOCSpawnDetails>();
 
         list.Add(new ShelfSpawnDetails(Constants.indexZero, new Vector3Int(5, -4), Facing.SouthWest));
-        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(-3, 11), Facing.SouthEast));
+        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(-3, 11), Facing.SouthEast, new FoundWinch()));
 
         list.Add(new VaultableRubbleSpawnDetails(NPCNameList.vaultableRocks, new Vector3Int(-1, -3), Constants.difficultyTwo, Constants.sizeOne));
 
@@ -931,6 +933,88 @@ public static class OOCSpawnDetailsList
         #endregion
 
         #endregion
+
+        #region Manse-1F
+
+        #region Manse-1F-Kitchens
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new NPCSpawnDetails(NPCNameList.kende, new Vector3Int(0, 1), LocationNameList.manseFirstFloor + LocationNameList.kitchens, new KendeInKitchenDuringRiotScript()));
+
+        list.Add(new NPCSpawnDetails(NPCNameList.imre+1, new Vector3Int(0, -3), LocationNameList.manseFirstFloor + LocationNameList.kitchens)); //loyal imre
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.imre+2, new Vector3Int(0, 0))); //disloyal imre
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.pan, new Vector3Int(0, 2)));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard, new Vector3Int(0, 3)));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(-5, -1))); 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveOne, new Vector3Int(-5, 0))); 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveTwo, new Vector3Int(-5, 1)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveThree, new Vector3Int(-5, 2))); 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveFour, new Vector3Int(-5, 3))); 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveFive, new Vector3Int(-5, 4))); 
+
+
+        oocSpawnDetailsDict.Add(LocationNameList.manseFirstFloor + LocationNameList.kitchens, list);
+
+        #endregion
+
+        #region Manse-1F-3b
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new NPCSpawnDetails(NPCNameList.beam, new Vector3Int(3, 9), LocationNameList.manseFirstFloor + LocationNameList.section3b, new BeamAndCsalanInManseScript()));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.csalan, new Vector3Int(5, 8))); 
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.horse, new Vector3Int(6, 4))); 
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.horse+1, new Vector3Int(3, 3)));  
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.horse+2, new Vector3Int(1, 6)));  
+
+        oocSpawnDetailsDict.Add(LocationNameList.manseFirstFloor + LocationNameList.section3b, list);
+
+        #endregion
+
+        #endregion
+
+        #region Manse-2F
+
+        #region Manse-2F-2c
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new NPCSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(3, 0), LocationNameList.manseSecondFloor + LocationNameList.section2c, new ChiefTaborManseSecondFloorScript()));
+
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(3, -4), Facing.SouthWest, new KeyHalfScript()));
+
+        oocSpawnDetailsDict.Add(LocationNameList.manseSecondFloor + LocationNameList.section2c, list);
+
+        #endregion
+
+        #region Manse-2F-Office
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new NPCSpawnDetails(NPCNameList.director, new Vector3Int(2, -1), LocationNameList.manseSecondFloor + LocationNameList.office));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(-3, -3))); 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.nandor, new Vector3Int(-3, 0))); 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.page, new Vector3Int(2, 2)));
+
+        list.Add(new BookSpawnDetails(NPCNameList.orders, new Vector3Int(-6, 0), PrefabNames.note, ItemList.orderTranscriptIndex));
+        
+        // list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchThree, LocationNameList.manseSecondFloor + LocationNameList.office, Constants.indexOne));
+
+        oocSpawnDetailsDict.Add(LocationNameList.manseSecondFloor + LocationNameList.office, list);
+
+        #endregion
+
+        #endregion
+
     }
 
 }

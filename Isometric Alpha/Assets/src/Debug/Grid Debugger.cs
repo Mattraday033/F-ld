@@ -47,7 +47,7 @@ public class GridDebugger : MonoBehaviour
     
     void Update()
     {
-        if(Application.isEditor && parentObject != null && Input.GetKey(KeyCode.LeftAlt) && !KeyPressManager.handlingPrimaryKeyPress)
+        if(Application.isEditor && parentObject != null && Input.GetKey(KeyCode.LeftControl) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             parentObject.SetActive(false);
             parentObject = null;

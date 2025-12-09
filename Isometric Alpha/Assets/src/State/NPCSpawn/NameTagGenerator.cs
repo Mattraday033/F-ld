@@ -75,8 +75,6 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
     private void checkSpawnParams(string secretDoorFlag)
     {
-        Debug.LogError("("+nameSource.getName()+").canSpawn() = " + SpawnParamsList.getSpawnParams(AreaManager.locationName, nameSource.getName()).canSpawn(nameSource.getName()));
-
         if(!SpawnParamsList.getSpawnParams(AreaManager.locationName, nameSource.getName()).canSpawn(nameSource.getName()))
         {
             gameObject.SetActive(false);

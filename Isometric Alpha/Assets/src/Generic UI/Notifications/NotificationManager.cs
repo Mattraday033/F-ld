@@ -62,7 +62,7 @@ public class NotificationManager : MonoBehaviour
 
         for (int index = 0; index < notificationQueue.Count; index++)
         {
-            IDescribable describable = (IDescribable)notificationQueue[index];
+            IDescribable describable = notificationQueue[index];
 
             if (AreaManager.getInstance().getAreaDescription().getName().Equals(describable.getName()) ||
                 describable.getName().Contains(SaveHandler.quickSaveName))
@@ -80,7 +80,6 @@ public class NotificationManager : MonoBehaviour
         if (notificationQueue.Count > 0 && ((PlayerOOCStateManager.currentActivity == OOCActivity.walking || PlayerOOCStateManager.currentActivity == OOCActivity.inUI) && !State.hasLoadedDialogueKey()))
         {
             notificationPopUpButton.spawnPopUp();
-            purgeNotifications();
         }
     }
 
@@ -132,6 +131,7 @@ public class NotificationManager : MonoBehaviour
         else
         {
             skipNextSpawn = false;
+            // return;
         }
 
         // if (AreaManager.getInstance() != null)

@@ -158,7 +158,7 @@ All my life, I've fought to keep my people safe from those that would do them ha
 
     I understand your apprehension. I couldn't fathom it either, in yesteryears, the similarities between the Craft and Riding Folks. Only recently, did it dawn on me. 
 
-    I fought in the last war between our peoples. The Confederation, despite it's faults, spends all of it's energies, makes each of it's decisions, with one goal in mind. The freeing of every horse that the Craft Folk keep as slaves on their farms, or in their armies. The Emancipation Conflict is what we call the series of wars we have waged to that end.
+    I fought in the last war between our peoples. The Confederation, despite it's faults, spends all of it's energies, makes each of it's decisions, with one goal in mind: the freeing of every horse that the Craft Folk keep as slaves on their farms, or in their armies. The Emancipation Conflict is what we call the series of wars we have waged to that end.
 
     Fifteen years ago, I had the privilege of leading a horde of our riders against the Kingdom of Masons. We struck deep into their land, freeing the feral horses they kept as we went. The ones that were too old to rehabilitate, we sent to sanctuaries, to live out their days as honored guests of the Counts. Those that could be taught to speak, we welcomed home as freed prisoners of war.
         ->2ca
@@ -186,7 +186,7 @@ Never again would our forces venture that far west. The Kingdom of Smiths, neigh
 
 === 2cc ===
 
-All horses have the potential for intelligence. But the horses the Craft Folk keep have the intelligence of unspeaking beasts. This is because they are not taught the horsetongue, the language the god Beast gave the Lovashi to speak with horses.
+All horses have the potential for intelligence. But the horses the Craft Folk keep have the intelligence of unspeaking animals. This is because they are not taught the horsetongue, the language the god Beast gave the Lovashi to speak with horses.
 
 Human children and horse foals, if they are not taught to speak by a certain age, forever lose the ability to learn. And without language, they cannot learn to become truly sapient. When the Lovashi rescue horses from the Craft Folk, they are immediately brought before teachers who attempt to impart the horsetongue to them. If they cannot learn it, they are sent to special santuaries, to be cared for until they pass away.
 

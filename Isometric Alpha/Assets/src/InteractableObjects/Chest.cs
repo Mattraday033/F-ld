@@ -26,7 +26,7 @@ public interface INonRevealableNameSource: INameSource
     }
 }
 
-public class Chest : MonoBehaviour, INonRevealableNameSource
+public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationObject
 {
 
     private const string tagText = "Chest";
@@ -111,6 +111,8 @@ public class Chest : MonoBehaviour, INonRevealableNameSource
     public string questName;
     public int questStep;
     public string flagOnPickUp;
+
+    private QuestStepActivationScript script;
 
     public PlayerInteractionScript[] scripts;
 
@@ -225,15 +227,20 @@ public class Chest : MonoBehaviour, INonRevealableNameSource
 
         PlayerInteractionScript.runAllScripts(scripts);
 
-        if (questName != null && !questName.Equals("") && (activateQuestOnPickup || QuestList.getQuest(questName).active))
+        if(script != null)
         {
-            QuestList.activateQuestStep(questName, questStep);
+            script.runScript();
         }
 
-        if (flagOnPickUp != null && flagOnPickUp.Length > 0)
-        {
-            Flags.setFlag(flagOnPickUp, true);
-        }
+        // if (questName != null && !questName.Equals("") && (activateQuestOnPickup || QuestList.getQuest(questName).active))
+        // {
+        //     QuestList.activateQuestStep(questName, questStep);
+        // }
+
+        // if (flagOnPickUp != null && flagOnPickUp.Length > 0)
+        // {
+        //     Flags.setFlag(flagOnPickUp, true);
+        // }
     }
 
     private void createChestItemUI()
@@ -274,6 +281,11 @@ public class Chest : MonoBehaviour, INonRevealableNameSource
     public bool hasBeenOpened()
     {
         return chestState != ChestState.Closed;
+    }
+
+    public void setScript(QuestStepActivationScript script)
+    {
+        this.script = script;
     }
 
 }

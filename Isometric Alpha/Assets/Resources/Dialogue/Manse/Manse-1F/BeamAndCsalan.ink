@@ -21,6 +21,9 @@ VAR askedAboutSurrender = false
 
 VAR beamIndex = 1
 VAR csalanIndex = 2
+VAR horseOneIndex = 3
+VAR horseTwoIndex = 4
+VAR horseThreeIndex = 5
 
 VAR playerName = ""
 
@@ -54,6 +57,12 @@ changeCamTarget({beamIndex})
 ->1a
 
 === 1a ===
+
+activate({beamIndex})
+activate({csalanIndex})
+activate({horseOneIndex})
+activate({horseTwoIndex})
+activate({horseThreeIndex})
 
 changeCamTarget({beamIndex})
 

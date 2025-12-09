@@ -176,6 +176,15 @@ public class BossPackInfo : EnemyPackInfo
 
     public QuestStepActivationScript script;
 
+    public BossPackInfo(EnemyAmount[] enemyTypes, string dropTableName, string killFlagKey):
+    base(enemyTypes, dropTableName)
+    {
+        this.enemyTypes = enemyTypes;
+
+        this.dropTableName = dropTableName;
+        this.killFlagKey = killFlagKey;
+    }
+
     public BossPackInfo(EnemyAmount[] enemyTypes, string dropTableName, string killFlagKey, string dialogueUponSceneLoadKey):
     base(enemyTypes, dropTableName)
     {
@@ -187,13 +196,37 @@ public class BossPackInfo : EnemyPackInfo
         this.dialogueUponSceneLoadKey = dialogueUponSceneLoadKey;
     }
 
-    public BossPackInfo(EnemyAmount[] enemyTypes, string dropTableName, string killFlagKey, ItemListID[] guaranteedDrops):
+    public BossPackInfo(EnemyAmount[] enemyTypes, string dropTableName, ItemListID[] guaranteedDrops, string killFlagKey):
     base(enemyTypes, dropTableName, guaranteedDrops)
     {
         this.enemyTypes = enemyTypes;
 
         this.dropTableName = dropTableName;
         this.killFlagKey = killFlagKey;
+    }
+
+    public BossPackInfo(EnemyAmount[] enemyTypes, string dropTableName, string killFlagKey, QuestStepActivationScript script):
+    base(enemyTypes, dropTableName)
+    {
+        this.enemyTypes = enemyTypes;
+
+        this.dropTableName = dropTableName;
+
+        this.killFlagKey = killFlagKey;
+
+        this.script = script;
+    }
+
+    public BossPackInfo(EnemyAmount[] enemyTypes, string dropTableName, ItemListID[] guaranteedDrops, string killFlagKey, QuestStepActivationScript script):
+    base(enemyTypes, dropTableName, guaranteedDrops)
+    {
+        this.enemyTypes = enemyTypes;
+
+        this.dropTableName = dropTableName;
+
+        this.killFlagKey = killFlagKey;
+
+        this.script = script;
     }
 
     public BossPackInfo(EnemyAmount[] enemyTypes, string[] flagsToCheckForAllies, string dropTableName, QuestStepActivationScript script):

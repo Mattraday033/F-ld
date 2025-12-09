@@ -291,6 +291,7 @@ public static class FlagNameList
         public const string mineLvl3WormFinalBossKilled = "mineLvl3WormFinalBossKilled";
         public const string neCampOverseerKilled = "neCampOverseerKilled";
         public const string killedChiefIren = "killedChiefIren";
+        public const string honorguardCaptainKilled = "honorguardCaptainKilled";
 
         //puzzle flags
         public const string wisdomPuzzleMineLvl3Completed = "wisdomPuzzleMineLvl3Completed";

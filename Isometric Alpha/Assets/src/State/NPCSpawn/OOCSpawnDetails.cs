@@ -172,8 +172,6 @@ public abstract class OOCSpawnDetails
         target.getGameObject().AddComponent<RectTransform>();
     }
 
-
-
     public static void setMouseHoverTileMap(string spriteName, Transform transform)
     {
         foreach(Transform child in transform)
@@ -192,10 +190,31 @@ public abstract class OOCSpawnDetails
 
         npcMouseHover.SetTile(new Vector3Int(-1, -1), tile);
     }
-
 }
 
-public enum SpriteDimensions {}
+public interface IQuestActivationObject
+{
+    public void setScript(QuestStepActivationScript script);
+}
+public abstract class QuestActivationObjectSpawnDetails : OOCSpawnDetails
+{
+
+    protected QuestStepActivationScript script;
+
+    public QuestActivationObjectSpawnDetails(string npcName, Vector3Int cellCoords) :
+    base(npcName, cellCoords)
+    {
+
+    }
+
+    public QuestActivationObjectSpawnDetails(string npcName, Vector3Int cellCoords, QuestStepActivationScript script) :
+    base(npcName, cellCoords)
+    {
+        this.script = script;
+    }
+
+    protected abstract void setScript(IQuestActivationObject questActivationObject);
+}
 
 public class TutorialColliderSpawnDetails : OOCSpawnDetails
 {
@@ -1425,14 +1444,20 @@ public class VaultableRubbleSpawnDetails : VaultableObjectSpawnDetails
     }
 }
 
-public class ChestSpawnDetails : OOCSpawnDetails
+public class ChestSpawnDetails : QuestActivationObjectSpawnDetails
 {
     private int index;
     private Facing facing;
 
-
     public ChestSpawnDetails(int index, Vector3Int cellCoords, Facing facing) :
     base(generateName(index), cellCoords)
+    {
+        this.index = index;
+        this.facing = facing;
+    }
+
+    public ChestSpawnDetails(int index, Vector3Int cellCoords, Facing facing, QuestStepActivationScript script) :
+    base(generateName(index), cellCoords, script)
     {
         this.index = index;
         this.facing = facing;
@@ -1463,6 +1488,13 @@ public class ChestSpawnDetails : OOCSpawnDetails
         Chest chest = chestGameObject.GetComponent<Chest>();
 
         chest.populate(index, facing, getType());
+
+        setScript(chest);
+    }
+
+    protected override void setScript(IQuestActivationObject questActivationObject)
+    {
+        questActivationObject.setScript(script);
     }
 }
 

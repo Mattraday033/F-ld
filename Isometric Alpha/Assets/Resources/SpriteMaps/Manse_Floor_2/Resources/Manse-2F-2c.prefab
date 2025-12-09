@@ -44,41 +44,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1879317843192467036, guid: f8dbaebccaf42394db824f98f8ae8fd4,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1879317843192467036, guid: f8dbaebccaf42394db824f98f8ae8fd4,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.0999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 1879317843192467036, guid: f8dbaebccaf42394db824f98f8ae8fd4,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1879317843192467036, guid: f8dbaebccaf42394db824f98f8ae8fd4,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1879317843192467036, guid: f8dbaebccaf42394db824f98f8ae8fd4,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1879317843192467036, guid: f8dbaebccaf42394db824f98f8ae8fd4,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1879317843192467036, guid: f8dbaebccaf42394db824f98f8ae8fd4,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1879317843192467036, guid: f8dbaebccaf42394db824f98f8ae8fd4,
-        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -4391,7 +4356,7 @@ PrefabInstance:
     - target: {fileID: 7469480958065751900, guid: f8dbaebccaf42394db824f98f8ae8fd4,
         type: 3}
       propertyPath: m_ChunkCullingBounds.y
-      value: 0.515625
+      value: 0.140625
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -5433,41 +5398,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 871331040440479984}
     m_Modifications:
-    - target: {fileID: 851517781658613874, guid: e57beddfde017664693528e8c1bb98b5,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.98000014
-      objectReference: {fileID: 0}
-    - target: {fileID: 851517781658613874, guid: e57beddfde017664693528e8c1bb98b5,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.2249999
-      objectReference: {fileID: 0}
-    - target: {fileID: 851517781658613874, guid: e57beddfde017664693528e8c1bb98b5,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 851517781658613874, guid: e57beddfde017664693528e8c1bb98b5,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 851517781658613874, guid: e57beddfde017664693528e8c1bb98b5,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 851517781658613874, guid: e57beddfde017664693528e8c1bb98b5,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 851517781658613874, guid: e57beddfde017664693528e8c1bb98b5,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
     - target: {fileID: 851517781658613874, guid: e57beddfde017664693528e8c1bb98b5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7880,12 +7810,12 @@ PrefabInstance:
     - target: {fileID: 8582364765253528305, guid: 1256cc0d79c215146afe103426db154d,
         type: 3}
       propertyPath: m_ChunkCullingBounds.x
-      value: 0.57876706
+      value: 0.75781536
       objectReference: {fileID: 0}
     - target: {fileID: 8582364765253528305, guid: 1256cc0d79c215146afe103426db154d,
         type: 3}
       propertyPath: m_ChunkCullingBounds.y
-      value: 1.5046334
+      value: 1.7013247
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

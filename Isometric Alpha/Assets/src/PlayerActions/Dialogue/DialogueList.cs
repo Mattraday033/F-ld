@@ -39,23 +39,9 @@ public static class DialogueList
         // addDialogueToList(DialogueNameList.afterKillingGuardsMineLvl3Key,
         //                  new Dialogue(new string[] { "", "Nándor", "Carter", "Guard Márcos", "Guard Pázmán", "Guard Réka" }, new GameObject[6], Resources.Load<TextAsset>(DialogueNameList.afterKillingGuardsMineLvl3Key)));
 
-        // addDialogueToList(DialogueNameList.kendeUponEnteringKitchensKey,
-        //                  new Dialogue(new string[] { "", "Kende", "Imre 1", "Imre 2", "Pan", "Guard", "Slave" }, new GameObject[7], Resources.Load<TextAsset>(DialogueNameList.kendeUponEnteringKitchensKey), new NPCCombatInfo(new EnemyPackInfo[]{     EnemyPackInfoList.halfSlavesNoGuardFight,
-        //                                                                                                                                                                                                                                 EnemyPackInfoList.halfSlavesFight,
-        //                                                                                                                                                                                                                                 EnemyPackInfoList.fullSlavesNoGuardFight,
-        // /*Dont delete this white space*/																																																EnemyPackInfoList.fullSlavesFight},
-        //                                                                                                                                                                                                              new DeadNameList[]{new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre}),
-        //                                                                                                                                                                                                                                 new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre}),
-        //                                                                                                                                                                                                                                 new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre}),
-        //                                                                                                                                                                                                                                 new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre})})));
-
         // addDialogueToList(DialogueNameList.taborManse2F2BKey,
         //                  new Dialogue(new string[] { "", "Chief Tabor" }, new GameObject[2], Resources.Load<TextAsset>(DialogueNameList.taborManse2F2BKey), new NPCCombatInfo(new EnemyPackInfo[] { EnemyPackInfoList.taborFight },
         //                                                                                                                                                        new DeadNameList[] { new DeadNameList(new string[] { NPCNameList.chiefTabor }) })));
-
-        // addDialogueToList(DialogueNameList.directorDefeatedConvoKey,
-        //                  new Dialogue(new string[] { "", "Director", "Page", "Carter", "Nándor" }, new GameObject[5], Resources.Load<TextAsset>(DialogueNameList.directorDefeatedConvoKey)));
-
 
         // addDialogueToList(DialogueNameList.guardPunishmentConvoKey,
         //                  new Dialogue(new string[] { "", "Nándor", "Carter", "Kastor", "Janos", "Broglin", "Garcha", "Slave 1", "Slave 2", "Slave 3", "The Crowd", "Chief Tabor", "Guard Márcos", "Guard András", "Guard Réka", "Guard Pázmán", "Ervin", "Clay" }, new GameObject[18], Resources.Load<TextAsset>(DialogueNameList.guardPunishmentConvoKey)));
@@ -358,6 +344,10 @@ public static class DialogueList
                             Resources.Load<TextAsset>(DialogueNameList.imrePath),
                             DialogueCombatInfoList.imreCombatInfo));
 
+        addDialogueToList(LocationNameList.campManse, NPCNameList.imre+1,
+                            new Dialogue(new string[] { NPCNameList.imre+1 },
+                            Resources.Load<TextAsset>(DialogueNameList.imrePath)));
+
         addDialogueToList(LocationNameList.campManse, NPCNameList.manseFrontDoor,
                             new Dialogue(new string[] { NPCNameList.manseFrontDoor },
                             Resources.Load<TextAsset>(DialogueNameList.manseFrontDoorPath)));
@@ -613,6 +603,73 @@ public static class DialogueList
         //                                                                                                 },
         //                                                                         Resources.Load<TextAsset>(DialogueNameList.pocketRubblePathML3)));
         #endregion
+
+        #endregion
+
+        #region Manse
+
+            addDialogueToList(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.kende,
+                                new Dialogue(new string[]   { 
+                                                                NPCNameList.playerNamePlaceHolder, 
+                                                                NPCNameList.kende, 
+                                                                NPCNameList.imre+1, 
+                                                                NPCNameList.imre+2, 
+                                                                NPCNameList.pan, 
+                                                                NPCNameList.guard, 
+                                                                NPCNameList.slave
+                                                            }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.kendeUponEnteringKitchensPathName), 
+                                 DialogueCombatInfoList.kendeInKitchensCombatInfo));
+
+            addDialogueToList(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.imre+1,
+                                new Dialogue(new string[]   { NPCNameList.imre+1 }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.loyalImrePathName)));
+
+            addDialogueToList(LocationNameList.manseFirstFloor + LocationNameList.section3b, NPCNameList.beam,
+                                new Dialogue(new string[]   { 
+                                                                NPCNameList.playerNamePlaceHolder, 
+                                                                NPCNameList.beam,
+                                                                NPCNameList.csalan,
+                                                                NPCNameList.horse,
+                                                                NPCNameList.horse+1,
+                                                                NPCNameList.horse+2
+                                                            }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName), 
+                                 DialogueCombatInfoList.beamAndCsalanCombatInfo));
+
+            addDialogueToList(LocationNameList.manseSecondFloor + LocationNameList.section2c, NPCNameList.chiefTabor,
+                                new Dialogue(new string[]   { NPCNameList.chiefTabor }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.chiefTaborManseSecondFloorPathName),
+                                 DialogueCombatInfoList.taborCombatInfo));
+
+            addDialogueToList(LocationNameList.manseSecondFloor + LocationNameList.office, NPCNameList.director,
+                                new Dialogue(new string[]   { 
+                                                                NPCNameList.playerNamePlaceHolder,
+                                                                NPCNameList.director,
+                                                                NPCNameList.page,
+                                                                NPCNameList.carter,
+                                                                NPCNameList.nandor
+                                                            }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.directorPathName),
+                                 DialogueCombatInfoList.directorCombatInfo));
+
+        // addDialogueToList(DialogueNameList.directorDefeatedConvoKey,
+        //                  new Dialogue(new string[] { "", "Director", "Page", "Carter", "Nándor" }, new GameObject[5], Resources.Load<TextAsset>(DialogueNameList.directorDefeatedConvoKey)));
+
+
+            addDialogueToList(LocationNameList.manseSecondFloor + LocationNameList.office, DialogueNameList.directorDefeatedConvoKey,
+                                new Dialogue(new string[]   {   
+                                                                NPCNameList.playerNamePlaceHolder,
+                                                                NPCNameList.director,
+                                                                NPCNameList.page,
+                                                                NPCNameList.carter,
+                                                                NPCNameList.nandor
+                                                            }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.directorDefeatedPathName)));
+
+            addDialogueToList(LocationNameList.manseSecondFloor + LocationNameList.office, NPCNameList.officeDoor,
+                                new Dialogue(new string[]   { NPCNameList.officeDoor }, 
+                                Resources.Load<TextAsset>(DialogueNameList.officeDoorPathName)));
 
         #endregion
 

@@ -73,6 +73,68 @@ public static class EnemyPackInfoList
                                                                                                         FlagNameList.neCampOverseerKilled,
                                                                                                         DialogueNameList.slavesAfterKillingOverseerCampNEKey);
 
+    public readonly static BossPackInfo kendeKitchensHalfSlavesNoGuard = new BossPackInfo(new EnemyAmount[] { 
+                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        FlagNameList.kendeUponEnteringKitchens,
+                                                                                                        new KendeFightQuestScript());
+
+    public readonly static BossPackInfo kendeKitchensHalfSlaves = new BossPackInfo(new EnemyAmount[] { 
+                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        FlagNameList.kendeUponEnteringKitchens,
+                                                                                                        new KendeFightQuestScript());
+
+    public readonly static BossPackInfo kendeKitchensFullSlavesNoGuard = new BossPackInfo(new EnemyAmount[] { 
+                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        FlagNameList.kendeUponEnteringKitchens,
+                                                                                                        new KendeFightQuestScript());
+
+    public readonly static BossPackInfo kendeKitchensFullSlaves = new BossPackInfo(new EnemyAmount[] { 
+                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        FlagNameList.kendeUponEnteringKitchens,
+                                                                                                        new KendeFightQuestScript());
+
+    public readonly static BossPackInfo taborManseSecondFloorFight = new BossPackInfo(new EnemyAmount[] { 
+                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        FlagNameList.killedTaborInManse);
+
+    public readonly static BossPackInfo honorguardCaptainBossFight = new BossPackInfo(new EnemyAmount[] { 
+                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        new ItemListID[]  {new ItemListID(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyBackIndex)},
+                                                                                                        FlagNameList.honorguardCaptainKilled,
+                                                                                                        new KeyHalfScript());
+
+    public readonly static BossPackInfo directorWithBarricades = new BossPackInfo(new EnemyAmount[] { 
+                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        FlagNameList.directorDefeated,
+                                                                                                        DialogueNameList.directorDefeatedConvoKey);
+
+    public readonly static BossPackInfo directorWithoutBarricades = new BossPackInfo(new EnemyAmount[] { 
+                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        FlagNameList.directorDefeated,
+                                                                                                        DialogueNameList.directorDefeatedConvoKey);
+
+    public readonly static BossPackInfo beamAndCsalanFight = new BossPackInfo(new EnemyAmount[] { 
+                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        FlagNameList.foughtHorsesInManse);
+
     // //used in the dialogue started upon entering the Manse kitchens
     // public readonly static EnemyPackInfo halfSlavesNoGuardFight = new EnemyPackInfo(new int[] { 1, 6 }, new int[] { 1, 6 }, new EnemyStats[]{loadEnemyStatsFromResources(kendeTheCookWithoutSummon),
     //                                                                                                                         loadEnemyStatsFromResources(slaveWarrior)
@@ -209,6 +271,8 @@ public static class EnemyPackInfoList
         enemyPackInfoDict.Add(LocationNameList.campNorthEast, list);
         #endregion
 
+        #region Mine
+
         #region MineLvl_1-1b
         list = new List<EnemyPackInfo>();
 
@@ -304,7 +368,25 @@ public static class EnemyPackInfoList
 
         enemyPackInfoDict.Add(LocationNameList.mineLvl3 + LocationNameList.section1a, list);
         #endregion
+        #endregion
 
+        #region Manse-1F
+
+        #endregion
+
+        #region Manse-2F
+
+        #region Manse-2F-3b
+
+        list = new List<EnemyPackInfo>();
+
+        list.Add(honorguardCaptainBossFight);
+
+        enemyPackInfoDict.Add(LocationNameList.manseSecondFloor + LocationNameList.section3b, list);
+
+        #endregion
+
+        #endregion
     }
 
 

@@ -63,7 +63,7 @@ activate({nandorIndex})
 
 changeCamTarget({directorIndex})
 
-\*The Director wobbles, and then falls to his knees. His swordarm falls slack, and his weapon tumbles to the ground. Blood and sweat cake his face.*
+\*The Director wobbles, and then falls to his knees. His swordarm goes slack, and his weapon tumbles to the ground. Blood and sweat cake his face.*
 
 In my years of service to the Confederation, I've been on both sides of defeat. I know what it looks like. \*A heavy sigh escapes his labored chest.* Get on with it. Kill me.
 
@@ -292,7 +292,7 @@ I will gather them in the southeastern part of the camp, near the mess hall. We'
 	setAreaToPassive(ManseCamp)
 	setAreaToPassive(SECamp)
 	setAreaToPassive(MineEntranceCamp)
-	setAreaToPassive(MessHall)
+	setAreaToPassive(Mess Hall)
         ->deactivateExtras
 -else:
         ->deactivateExtras

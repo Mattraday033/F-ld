@@ -47,6 +47,15 @@ public class Area
         this.alwaysAllowsFastTravel = true;
     }
 	
+    public Area(string areaKey, string combatBackgroundName, string[] scenesInArea, string[] areasSharingHostility)
+	{
+		this.areaKey = areaKey;
+		this.combatBackgroundName = combatBackgroundName;
+		this.scenesInArea = scenesInArea;
+		this.areasSharingHostility = areasSharingHostility;
+		this.alwaysAllowsFastTravel = true;
+	}
+
     public Area(string areaKey, string combatBackgroundName, int startingHostility, string[] scenesInArea, string[] areasSharingHostility)
 	{
 		this.areaKey = areaKey;
@@ -290,7 +299,7 @@ public static class AreaList
             LocationNameList.pit
         };
 
-        allAreas.Add(LocationNameList.manseSecondFloor, new Area(LocationNameList.manseSecondFloor, scenesInManseSecondFloor, areasSharingHostilityWithManseSecondFloor));
+        allAreas.Add(LocationNameList.manseSecondFloor, new Area(LocationNameList.manseSecondFloor, LocationNameList.manseFirstFloor, scenesInManseSecondFloor, areasSharingHostilityWithManseSecondFloor));
 
         string[] scenesInPit = new string[]
         {

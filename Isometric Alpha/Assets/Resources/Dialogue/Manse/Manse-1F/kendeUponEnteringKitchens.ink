@@ -3,6 +3,7 @@ VAR dexterity = 0
 VAR wisdom = 0
 VAR charisma = 0
 
+VAR kendeUponEnteringKitchens = false
 VAR insultedKendesCooking = false
 VAR kendeWillSellToPlayer = false
 VAR convincedImre = false
@@ -51,6 +52,8 @@ VAR playerName = ""
 }
 
 === 1a ===
+
+setToTrue(kendeUponEnteringKitchens)
 
 changeCamTarget({kendeIndex})
 

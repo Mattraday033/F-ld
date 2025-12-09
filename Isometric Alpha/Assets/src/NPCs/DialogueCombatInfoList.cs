@@ -38,15 +38,46 @@ public static class DialogueCombatInfoList
                                                                                                  gasparViragDead
                                                                                                });
 
-    // new NPCCombatInfo(new EnemyPackInfo[]{     EnemyPackInfoList.halfSlavesNoGuardFight,
-    //                                                                                                                                                                                                                                         EnemyPackInfoList.halfSlavesFight,
-    //                                                                                                                                                                                                                                         EnemyPackInfoList.fullSlavesNoGuardFight,
-    //         /*Dont delete this white space*/																																																EnemyPackInfoList.fullSlavesFight},
-    //                                                                                                                                                                                                                      new DeadNameList[]{new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre}),
-    //                                                                                                                                                                                                                                         new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre}),
-    //                                                                                                                                                                                                                                         new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre}),
-    //                                                                                                                                                                                                                                         new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre})})));
+    public readonly static DeadNameList kendeKitchenDeadNames = new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre});
 
+    public readonly static NPCCombatInfo kendeInKitchensCombatInfo = new NPCCombatInfo( 
+                                                                     new EnemyPackInfo[]   {   
+                                                                                                EnemyPackInfoList.kendeKitchensHalfSlavesNoGuard,
+                                                                                                EnemyPackInfoList.kendeKitchensHalfSlaves,
+                                                                                                EnemyPackInfoList.kendeKitchensFullSlavesNoGuard,
+                                                                                                EnemyPackInfoList.kendeKitchensFullSlavesNoGuard
+                                                                                            },
+                                                                    new DeadNameList[]  {
+                                                                                            kendeKitchenDeadNames,
+                                                                                            kendeKitchenDeadNames,
+                                                                                            kendeKitchenDeadNames,
+                                                                                            kendeKitchenDeadNames
+                                                                                        });
 
+    public readonly static NPCCombatInfo taborCombatInfo = new NPCCombatInfo( 
+                                                                     new EnemyPackInfo[]   {   
+                                                                                                EnemyPackInfoList.taborManseSecondFloorFight
+                                                                                            },
+                                                                    new DeadNameList[]  {
+                                                                                            new DeadNameList(new string[]{NPCNameList.tabor, NPCNameList.chiefTabor})
+                                                                                        });
+
+    public readonly static NPCCombatInfo directorCombatInfo = new NPCCombatInfo( 
+                                                                     new EnemyPackInfo[]   {   
+                                                                                                EnemyPackInfoList.directorWithBarricades,
+                                                                                                EnemyPackInfoList.directorWithoutBarricades
+                                                                                            },
+                                                                    new DeadNameList[]  {
+                                                                                            new DeadNameList(new string[0]),
+                                                                                            new DeadNameList(new string[0])
+                                                                                        });
+
+    public readonly static NPCCombatInfo beamAndCsalanCombatInfo = new NPCCombatInfo( 
+                                                                     new EnemyPackInfo[]   {   
+                                                                                                EnemyPackInfoList.beamAndCsalanFight
+                                                                                            },
+                                                                    new DeadNameList[]  {
+                                                                                            new DeadNameList(new string[]{NPCNameList.beam, NPCNameList.csalan})
+                                                                                        });
 
 }

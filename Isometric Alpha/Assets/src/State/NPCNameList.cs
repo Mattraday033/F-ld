@@ -5,6 +5,7 @@ using UnityEngine;
 public static class NPCNameList
 {
 
+    public const string playerNamePlaceHolder = "";
 
     #region Branded
 
@@ -104,6 +105,7 @@ public static class NPCNameList
     public const string mineLvl3Wall = "MineLvl_3 Wall";
     public const string suspiciousWall = "Suspicious Wall";
     public const string diary = "Diary";
+    public const string orders = "Orders";
     public const string rubble = "Rubble";
     public const string chest = "Chest";
     public const string shelf = "Shelf";
@@ -119,6 +121,7 @@ public static class NPCNameList
     public const string awkwardRubble = "Awkward Rubble";
     public const string portcullis = "Portcullis";
     public const string ancientPortcullis = "Ancient " + portcullis;
+    public const string officeDoor = "Office Door";
     public const string cellDoor = "Cell Door";
     public const string fallenBeam = "Fallen Beam";
     public const string button = "Button";

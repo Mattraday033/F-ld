@@ -11,8 +11,8 @@ public class KeyHalfScript : QuestStepActivationScript
 
     public override void runScript()
     {
-        bool hasFirstKeyHalf = Inventory.inventoryContainsItem(ItemList.getItem(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyFrontIndex, 1).getKey());
-        bool hasSecondKeyHalf = Inventory.inventoryContainsItem(ItemList.getItem(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyBackIndex, 1).getKey());
+        bool hasFirstKeyHalf = Inventory.inventoryContainsItem(ItemList.getItem(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyFrontIndex).getKey());
+        bool hasSecondKeyHalf = Inventory.inventoryContainsItem(ItemList.getItem(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyBackIndex).getKey());
 
         if (hasFirstKeyHalf && hasSecondKeyHalf)
         {
@@ -24,7 +24,6 @@ public class KeyHalfScript : QuestStepActivationScript
         {
             Debug.LogError("KeyHalfScript ran but no key halves detected");
         }
-
     }
 
 }

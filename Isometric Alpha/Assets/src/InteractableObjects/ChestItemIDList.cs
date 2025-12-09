@@ -223,6 +223,28 @@ public static class ChestItemIDList
         #endregion
         #endregion
 
+        #region Manse
+
+        #region Manse-1F
+
+        #endregion
+
+        #region Manse-2F
+
+        #region Manse-2F-2c
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyFrontIndex));
+
+        chestItemIDList.Add(LocationNameList.manseSecondFloor + LocationNameList.section2c, list);
+
+        #endregion
+
+        #endregion
+
+        #endregion
+
     }
 
     public static Item getChestItem(string key, int index)

@@ -294,6 +294,28 @@ public static class MonsterSpawnDetailsList
 
         #endregion
 
+        #region Manse
+
+        #region Manse-1F
+
+        #endregion
+
+        #region Manse-2F
+
+        #region Manse-2F-3b
+
+        list = new List<MonsterSpawnDetails>();
+
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-8, 5), Facing.NorthEast));
+
+        monsterSpawnDetailsDict.Add(LocationNameList.manseSecondFloor + LocationNameList.section3b, list);
+
+        #endregion
+
+        #endregion
+
+        #endregion
+
     }
 
 

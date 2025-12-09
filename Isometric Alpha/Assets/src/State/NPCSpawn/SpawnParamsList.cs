@@ -295,8 +295,12 @@ public static class SpawnParamsList
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campManse, NPCNameList.imre),
                                new InteractableSpawnParams(new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated })));
-
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campManse, NPCNameList.imre+1),
+                               new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.convincedImre }),
+                                new StopSpawningFlagList(new string[] { FlagNameList.askedImreToLeadTheWay, FlagNameList.directorDefeated }), spawnWhileHostile));
         #endregion
+
+        #region Mine
 
         #region MineLvl_2-2a
 
@@ -428,6 +432,79 @@ public static class SpawnParamsList
 
         #endregion
 
+        #endregion
+    
+        #region Manse
+
+        #region Manse-1F
+
+        #region Manse-1F-Kitchens
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.kende),
+                                        new InteractableSpawnParams(spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.imre+1), //Loyal Imre
+                                        new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.convincedImre }), spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.imre+2), //Disloyal Imre
+                                        new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.terrifiedImre }),
+                                                                    new StopSpawningFlagList(new string[] { FlagNameList.convincedImre }), spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.pan),
+                                        new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.convincedImre }), spawnWhileHostile));
+
+        StopSpawningFlagList stopSpawningAfterKendeKitchenConvo = new StopSpawningFlagList(new string[] { FlagNameList.kendeUponEnteringKitchens });
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.guard),
+                                        new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slave),
+                                        new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveOne),
+                                        new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveTwo),
+                                        new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveThree),
+                                        new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveFour),
+                                        new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveFive),
+                                        new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
+        #endregion
+
+        #region Manse-1F-3b
+
+        StopSpawningFlagList killedHorses = new StopSpawningFlagList(new string[] { FlagNameList.foughtHorsesInManse });
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.section3b, NPCNameList.beam),
+                                        new InteractableSpawnParams(killedHorses, spawnWhileHostile));
+        
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.section3b, NPCNameList.csalan),
+                                        new InteractableSpawnParams(killedHorses, spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse),
+                                        new InteractableSpawnParams(killedHorses, spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse+1),
+                                        new InteractableSpawnParams(killedHorses, spawnWhileHostile));
+                                    
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse+2),
+                                        new InteractableSpawnParams(killedHorses, spawnWhileHostile));
+        #endregion
+
+        #endregion
+
+        #region Manse-2F
+
+        #region Manse-2F-2b
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseSecondFloor + LocationNameList.section2c, NPCNameList.chiefTabor),
+                                        new InteractableSpawnParams(new StopSpawningFlagList(new string[] { FlagNameList.acceptedTaborsSurrenderAfterDirectorFight, FlagNameList.killedTaborInManse}),spawnWhileHostile));
+
+        #endregion
+
+        #endregion
+
+        #endregion
     }
     
 

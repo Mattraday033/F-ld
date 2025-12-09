@@ -510,6 +510,34 @@ public static class GateSpawnInfoList
 
         #endregion
 
+        #region Manse
+
+        #region Manse-1f
+
+        #endregion
+
+        #region Manse-2F
+
+        #region Manse-2F-Office
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.officeDoor,
+                                    LocationNameList.manseSecondFloor + LocationNameList.office,
+                                    PrefabNames.portcullis2x1Path,
+                                    new Vector3Int(-4, -1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+                                    
+        gateSpawnInfoDict.Add(LocationNameList.manseSecondFloor + LocationNameList.office, list);
+
+        #endregion
+
+        #endregion
+
+        #endregion
+
     }
 }
 

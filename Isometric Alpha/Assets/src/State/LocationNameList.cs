@@ -122,6 +122,8 @@ public static class LocationNameList
 
     #region Manse
 
+    public const string manse = "Manse";
+
     public const string manseFirstFloor = "Manse-1F";
     public const string manseSecondFloor = "Manse-2F";
 
