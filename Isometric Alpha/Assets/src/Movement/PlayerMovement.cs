@@ -146,6 +146,7 @@ public class PlayerMovement : MovementTracker
     }
 
     public static bool hasCustomPromptMessage;
+    public static bool terrainSpriteMaskHidingTerrain = false;
 
     private float debugMessageTimer = 0f;
 
@@ -164,6 +165,7 @@ public class PlayerMovement : MovementTracker
 
     public CapsuleCollider2D terrainCollider;
 
+    public List<TilemapRenderer> shownWhileTerrainHiddenTilemaps;
     public List<TilemapRenderer> terrainTilemaps;
     public List<SpriteRenderer> terrainSprites;
 
@@ -321,11 +323,11 @@ public class PlayerMovement : MovementTracker
         }
 
         //for checking whether you need to display behind a building
-        if (Helpers.hasCollision(terrainCollider, LayerAndTagManager.terrainLayerMask))
+        if (Helpers.hasCollision(terrainCollider, LayerAndTagManager.terrainLayerMask) && !terrainSpriteMaskHidingTerrain)
         {
             hideTerrain();
         }
-        else
+        else if(!Helpers.hasCollision(terrainCollider, LayerAndTagManager.terrainLayerMask) && terrainSpriteMaskHidingTerrain)
         {
             displayTerrain();
         }
@@ -1285,6 +1287,13 @@ public class PlayerMovement : MovementTracker
         {
             terrainSprites[i].maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
         }
+
+        foreach (TilemapRenderer tilemap in shownWhileTerrainHiddenTilemaps)
+        {
+            tilemap.enabled = true;
+        }
+
+        terrainSpriteMaskHidingTerrain = true;
     }
 
     public void displayTerrain()
@@ -1298,6 +1307,13 @@ public class PlayerMovement : MovementTracker
         {
             terrainSprites[i].maskInteraction = SpriteMaskInteraction.None;
         }
+
+        foreach (TilemapRenderer tilemap in shownWhileTerrainHiddenTilemaps)
+        {
+            tilemap.enabled = false;
+        }
+
+        terrainSpriteMaskHidingTerrain = false;
     }
 
     public void toggleTerrainKeyCheck()
@@ -1329,6 +1345,28 @@ public class PlayerMovement : MovementTracker
         {
             sprite.enabled = terrainStatus;
         }
+
+        foreach (TilemapRenderer tilemap in shownWhileTerrainHiddenTilemaps)
+        {
+            if(!terrainStatus)
+            {
+                tilemap.enabled = true;
+                tilemap.maskInteraction = SpriteMaskInteraction.None;               
+            } else
+            {   
+                tilemap.enabled = false;
+                tilemap.maskInteraction = SpriteMaskInteraction.VisibleInsideMask; 
+            }
+        }
+
+        // for (int i = 0; i < shownWhileTerrainHiddenTilemaps.Count; i++)
+        // {
+        //     shownWhileTerrainHiddenTilemaps[i].maskInteraction = SpriteMaskInteraction.None;
+        // }
+        // for (int i = 0; i < shownWhileTerrainHiddenTilemaps.Count; i++)
+        // {
+        //     shownWhileTerrainHiddenTilemaps[i].maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+        // }
 
         State.terrainHidden = !terrainStatus;
     }
@@ -1364,7 +1402,9 @@ public class PlayerMovement : MovementTracker
     private void findTerrainObjects()
     {
         GameObject[] terrainObjects = GameObject.FindGameObjectsWithTag(LayerAndTagManager.terrainTag);
+        GameObject[] shownWhileTerrainHiddenObjects = GameObject.FindGameObjectsWithTag(LayerAndTagManager.shownWhileTerrainHiddenTag);
 
+        shownWhileTerrainHiddenTilemaps = new List<TilemapRenderer>();
         terrainTilemaps = new List<TilemapRenderer>();
         terrainSprites = new List<SpriteRenderer>();
 
@@ -1381,6 +1421,17 @@ public class PlayerMovement : MovementTracker
             if (terrainSprite != null && !(terrainSprite is null))
             {
                 terrainSprites.Add(terrainSprite);
+            }
+        }
+
+        foreach (GameObject shownWhileTerrainHiddenObject in shownWhileTerrainHiddenObjects)
+        {
+            TilemapRenderer shownWhileTerrainHiddenTilemap = shownWhileTerrainHiddenObject.GetComponent<TilemapRenderer>();
+            // SpriteRenderer terrainSprite = terrainObject.GetComponent<SpriteRenderer>();
+
+            if (shownWhileTerrainHiddenTilemap != null && !(shownWhileTerrainHiddenTilemap is null))
+            {
+                shownWhileTerrainHiddenTilemaps.Add(shownWhileTerrainHiddenTilemap);
             }
         }
     }

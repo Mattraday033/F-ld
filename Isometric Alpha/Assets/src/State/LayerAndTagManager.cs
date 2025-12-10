@@ -43,7 +43,7 @@ public static class LayerAndTagManager
 	public const string transitionTag = "Transition";
 	public const string placeHolderTag = "PlaceHolder";
 	public const string bookTag = "Book";
-
+	public const string shownWhileTerrainHiddenTag = "ShownWhileTerrainHidden";
 
 	// public static LayerMask allInteractableLayers;
 	public readonly static LayerMask playerLayerMask = initializePlayerLayerMask();

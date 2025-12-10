@@ -29,6 +29,7 @@ TagManager:
   - EquipmentDisplay
   - ItemUseTarget
   - JunkSlotTarget
+  - ShownWhileTerrainHidden
   layers:
   - Default
   - TransparentFX
