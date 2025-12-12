@@ -168,7 +168,7 @@ I would have died at my post. Had I never met Janos, I would not have had the ca
 
     keepDialogue()
 
-    I contributed to the suffering of the branded. I supported their imprisonment, I punished them when they slowed their work, and I... ignored their cries when they asked for mercy. *András hangs his head.*
+    I contributed to the suffering of the branded. I supported their imprisonment, I punished them when they stopped their work, and I... ignored their cries when they asked for mercy. *András hangs his head.*
 
     ->1c
         
@@ -178,11 +178,11 @@ keepDialogue()
 {
 -gotKeyFromJanos and andrasBarricadePassUsed:
 
-I relinquished the key to the mine's armory without a fight. I also convinced a group of guards to leave their barricade and surrender. Finally, I stayed with Janos and protected them during the riots.
+I relinquished the key to the mine's armory without a fight. I also convinced a group of guards to leave their barricade and surrender. Finally, I stayed with Janos and protected him during the riots.
 
 -gotKeyFromJanos:
 
-I relinquished the key to the mine's armory without a fight. I also stayed with Janos and protected them during the riots.
+I relinquished the key to the mine's armory without a fight. I also stayed with Janos and protected him during the riots.
 
 }
 
@@ -200,7 +200,7 @@ I regret that I did not do more to help the cause. I confessed to Janos before y
 
 keepDialogue()
 
-Janos will, I'm sure of it. And I suppose I had hoped you would as well.
+Janos will, I'm sure of it. And I had hoped you would as well.
         ->1c
 
 === 2a === //Your aid to the rebellion has earned you your freedom. Rise as a friend, András. *Undo András's bonds.*

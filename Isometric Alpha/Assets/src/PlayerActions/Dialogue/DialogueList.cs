@@ -313,13 +313,173 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.wallPatch, wallPatchDialogue);
 
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.page,
+                                new Dialogue(new string[] { 
+                                                            NPCNameList.playerNamePlaceHolder,
+                                                            NPCNameList.page,
+                                                            NPCNameList.carter,
+                                                            NPCNameList.carter
+                                                          },
+                            Resources.Load<TextAsset>(DialogueNameList.pageBeforeLeavingPath)));
+
         #endregion
         #region SECamp
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.wallPatch, wallPatchDialogue);
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.statue,
                             new Dialogue(new string[] { "", NPCNameList.statue},
-                            Resources.Load<TextAsset>(DialogueNameList.directorStatuePathPath)));
+                            Resources.Load<TextAsset>(DialogueNameList.directorStatuePath)));
+
+        #region Guard Punishment Scene
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+1,
+                            new SingleCharacterDialogue(NPCNameList.slave,
+                            Resources.Load<TextAsset>(DialogueNameList.crowdSlave1Path)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+2,
+                            new SingleCharacterDialogue(NPCNameList.slave,
+                            Resources.Load<TextAsset>(DialogueNameList.crowdSlave2Path)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+3,
+                            new SingleCharacterDialogue(NPCNameList.slave ,
+                            Resources.Load<TextAsset>(DialogueNameList.crowdSlave3Path)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.kastor,
+                            new Dialogue(new string[]   {  
+                                                            NPCNameList.playerNamePlaceHolder,
+                                                            NPCNameList.kastor,
+                                                            NPCNameList.carter,
+                                                            NPCNameList.kastor,
+                                                            NPCNameList.guardMarcos,
+                                                            NPCNameList.guardAndras,
+                                                            NPCNameList.chiefTabor,
+                                                            NPCNameList.crowd,
+                                                            NPCNameList.clay,
+                                                            NPCNameList.garcha,
+                                                            NPCNameList.thatch
+                                                        },
+                            Resources.Load<TextAsset>(DialogueNameList.kastorGuardPunishmentPath),
+                            new TextAsset[]{Resources.Load<TextAsset>(DialogueNameList.nandorGuardPunishmentPath)}));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.broglin,
+                            new SingleCharacterDialogue(NPCNameList.broglin,
+                            Resources.Load<TextAsset>(DialogueNameList.broglinGuardPunishmentPath)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.garcha,
+                            new SingleCharacterDialogue(NPCNameList.garcha,
+                            Resources.Load<TextAsset>(DialogueNameList.garchaGuardPunishmentPath)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.ervin,
+                            new SingleCharacterDialogue(NPCNameList.ervin,
+                            Resources.Load<TextAsset>(DialogueNameList.ervinGuardPunishmentPath)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.janos,
+                            new SingleCharacterDialogue(NPCNameList.janos,
+                            Resources.Load<TextAsset>(DialogueNameList.janosGuardPunishmentPath)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.thatch,
+                            new SingleCharacterDialogue(NPCNameList.thatch,
+                            Resources.Load<TextAsset>(DialogueNameList.thatchGuardPunishmentPath)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.carter,
+                            new SingleCharacterDialogue(NPCNameList.carter,
+                            Resources.Load<TextAsset>(DialogueNameList.carterGuardPunishmentPath)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.nandor,
+                            new Dialogue(new string[]   {  
+                                                            NPCNameList.playerNamePlaceHolder,
+                                                            NPCNameList.nandor,
+                                                            NPCNameList.carter,
+                                                            NPCNameList.kastor,
+                                                            NPCNameList.janos,
+                                                            NPCNameList.broglin,
+                                                            NPCNameList.garcha,
+                                                            NPCNameList.slaveFour,
+                                                            NPCNameList.slaveFive,
+                                                            NPCNameList.slaveSix,
+                                                            NPCNameList.crowd,
+                                                            NPCNameList.chiefTabor,
+                                                            NPCNameList.guardMarcos,
+                                                            NPCNameList.guardAndras,
+                                                            NPCNameList.guardReka,
+                                                            NPCNameList.guardPazman,
+                                                            NPCNameList.ervin,
+                                                            NPCNameList.clay,
+                                                            NPCNameList.nandor+1
+                                                        },
+                            Resources.Load<TextAsset>(DialogueNameList.guardPunishmentStartConvoPath)));
+
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.nandor+1,
+                            new Dialogue(new string[]   {  
+                                                            NPCNameList.playerNamePlaceHolder,
+                                                            NPCNameList.nandor+1,
+                                                            NPCNameList.carter,
+                                                            NPCNameList.kastor,
+                                                            NPCNameList.guardMarcos,
+                                                            NPCNameList.guardAndras,
+                                                            NPCNameList.chiefTabor,
+                                                            NPCNameList.crowd,
+                                                            NPCNameList.clay,
+                                                            NPCNameList.garcha,
+                                                            NPCNameList.thatch
+                                                        },
+                            Resources.Load<TextAsset>(DialogueNameList.nandorGuardPunishmentPath)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.guardMarcos,
+                            new Dialogue(new string[]   {  
+                                                            NPCNameList.playerNamePlaceHolder,
+                                                            NPCNameList.guardMarcos,
+                                                            NPCNameList.crowd
+                                                        },
+                            Resources.Load<TextAsset>(DialogueNameList.marcosGuardPunishmentPath)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.guardAndras,
+                            new Dialogue(new string[]   {  
+                                                            NPCNameList.playerNamePlaceHolder,
+                                                            NPCNameList.guardAndras,
+                                                            NPCNameList.crowd,
+                                                            NPCNameList.janos
+                                                        },
+                            Resources.Load<TextAsset>(DialogueNameList.andrasGuardPunishmentPath)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.guardReka,
+                            new Dialogue(new string[]   {  
+                                                            NPCNameList.playerNamePlaceHolder,
+                                                            NPCNameList.guardReka,
+                                                            NPCNameList.crowd
+                                                        },
+                            Resources.Load<TextAsset>(DialogueNameList.rekaGuardPunishmentPath)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.guardPazman,
+                            new Dialogue(new string[]   {  
+                                                            NPCNameList.playerNamePlaceHolder,
+                                                            NPCNameList.guardPazman,
+                                                            NPCNameList.crowd,
+                                                            NPCNameList.ervin,
+                                                            NPCNameList.ervin+1
+                                                        },
+                            Resources.Load<TextAsset>(DialogueNameList.pazmanGuardPunishmentPath)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.chiefTabor,
+                            new Dialogue(new string[]   {  
+                                                            NPCNameList.playerNamePlaceHolder,
+                                                            NPCNameList.chiefTabor,
+                                                            NPCNameList.crowd,
+                                                            NPCNameList.clay
+                                                        },
+                            Resources.Load<TextAsset>(DialogueNameList.taborGuardPunishmentPath),
+                            DialogueCombatInfoList.clayFightForTaborCombatInfo));
+
+        addDialogueToList(LocationNameList.campSouthEast, DialogueNameList.taborAfterClayFightKey,
+                            new Dialogue(new string[]   {  
+                                                            NPCNameList.playerNamePlaceHolder,
+                                                            NPCNameList.chiefTabor
+                                                        },
+                            Resources.Load<TextAsset>(DialogueNameList.taborAfterClayFightPath),
+                            new TextAsset[]{Resources.Load<TextAsset>(DialogueNameList.taborGuardPunishmentPath)}));             
+
+        #endregion
 
         #endregion
         #region MineEntranceCamp

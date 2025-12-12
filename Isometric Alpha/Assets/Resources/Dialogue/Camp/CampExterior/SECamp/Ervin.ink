@@ -32,13 +32,15 @@ You did well. Thank you.
         ->1b
     +I must be going.
         ->Close
+-else:
+    ->Close
 }
 
-->Close
+
 
 === 1b ===
         
-\*Ervin's eyes narrow.* None. But Pazman was one who gave me brand. Kill him. Or let me do it.
+\*Ervin's eyes narrow.* None. But Pázmán was one who gave me brand. Kill him. Or let me do it.
 
     +I promise you, justice will be served.
         \*Ervin nods.*

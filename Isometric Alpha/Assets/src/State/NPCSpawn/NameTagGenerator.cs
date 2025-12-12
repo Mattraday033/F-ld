@@ -143,6 +143,8 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
             case NPCNameList.guard:
             case NPCNameList.branded:
             case NPCNameList.noBrand:
+            case NPCNameList.slave:
+            case NPCNameList.horse:
                 return true;
         }
 

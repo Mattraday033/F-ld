@@ -8,6 +8,6 @@ public class DisplayTerrain : TutorialSequenceStepScript
     {
         PlayerMovement playerMovement = PlayerMovement.getInstance();
 
-        playerMovement.setTerrainActive(true);
+        playerMovement.toggleTerrainKeyCheck();
     }
 }

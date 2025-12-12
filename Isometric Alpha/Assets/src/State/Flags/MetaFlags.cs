@@ -7,7 +7,6 @@ using Ink.Runtime;
 public static class MetaFlags
 {
 
-
     public static Dictionary<string, bool> metaFlags = new Dictionary<string, bool>();
 
     private static void buildMetaFlags()
@@ -36,6 +35,18 @@ public static class MetaFlags
         metaFlags[MetaFlagNameList.nandorReadyToSpeakAfterTrial] = !(metaFlags[MetaFlagNameList.marcosNeedsHandling] || metaFlags[MetaFlagNameList.andrasNeedsHandling] || metaFlags[MetaFlagNameList.pazmanNeedsHandling] || metaFlags[MetaFlagNameList.rekaNeedsHandling] || metaFlags[MetaFlagNameList.taborNeedsHandling]);
     }
 
+    public static bool getMetaFlag(string flagName)
+    {
+        buildMetaFlags();
+
+        if(!metaFlags.ContainsKey(flagName))
+        {
+            Debug.LogError("Mismatched Meta Flag Name: " + flagName);
+            return false;
+        }
+        
+        return metaFlags[flagName];
+    }
 
     public static Story addAllVariables(Story story)
     {

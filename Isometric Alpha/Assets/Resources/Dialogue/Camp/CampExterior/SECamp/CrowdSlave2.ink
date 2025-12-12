@@ -33,7 +33,7 @@ VAR playerName = ""
 
 changeCamTarget({selfIndex})
 
-Go away, I'm trying to watch.
+There's too many of us. I can't see what's going on!
 
 ->Close
 

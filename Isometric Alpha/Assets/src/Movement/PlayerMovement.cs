@@ -109,6 +109,8 @@ public abstract class MovementTracker : MonoBehaviour
 
 public enum AnimationState { Run, Idle}
 
+public enum TerrainHiddenState { None, InFrontOfTerrain, BehindTerrain, TerrainHidden}
+
 public class PlayerMovement : MovementTracker
 {
 
@@ -146,7 +148,8 @@ public class PlayerMovement : MovementTracker
     }
 
     public static bool hasCustomPromptMessage;
-    public static bool terrainSpriteMaskHidingTerrain = false;
+
+    private TerrainHiddenState currentTerrainHiddenState = TerrainHiddenState.None;
 
     private float debugMessageTimer = 0f;
 
@@ -209,7 +212,7 @@ public class PlayerMovement : MovementTracker
 
         if (State.terrainHidden)
         {
-            setTerrainActive(false);
+            toggleTerrainKeyCheck();
         }
 
         if (State.playerFacing == null)
@@ -267,6 +270,8 @@ public class PlayerMovement : MovementTracker
     {
         MovementManager.addMovementTracker(this);
 
+        checkTerrainStatus();
+
         if (dialogueManager == null)
         {
             dialogueManager = DialogueManager.getInstance();
@@ -322,15 +327,7 @@ public class PlayerMovement : MovementTracker
             return;
         }
 
-        //for checking whether you need to display behind a building
-        if (Helpers.hasCollision(terrainCollider, LayerAndTagManager.terrainLayerMask) && !terrainSpriteMaskHidingTerrain)
-        {
-            hideTerrain();
-        }
-        else if(!Helpers.hasCollision(terrainCollider, LayerAndTagManager.terrainLayerMask) && terrainSpriteMaskHidingTerrain)
-        {
-            displayTerrain();
-        }
+        checkTerrainStatus();
 
         if (!KeyPressManager.handlingPrimaryKeyPress || PlayerOOCStateManager.currentActivity == OOCActivity.inTutorialSequence)
         {
@@ -1149,6 +1146,18 @@ public class PlayerMovement : MovementTracker
 
     }
 
+    public static GameObject getCurrentInteractableBeforePlayer()
+    {
+        Collider2D collider = Physics2D.OverlapCircle(getInstance().colliderWorldPosition(), detectionSize, LayerAndTagManager.npcLayerMask);
+
+        if(collider != null)
+        {
+            return collider.gameObject;
+        }
+
+        return null;
+    }
+
     public void interact()
     {
         // Debug.LogError("interact called");
@@ -1275,100 +1284,131 @@ public class PlayerMovement : MovementTracker
                 throw new IOException("Unknown facing: " + State.playerFacing.getFacing().ToString());
         }
     }
-
-    public void hideTerrain()
+    
+    private void checkTerrainStatus()
     {
-        for (int i = 0; i < terrainTilemaps.Count; i++)
+        bool needToChangeTerrainHiddenState = false;
+
+        switch(currentTerrainHiddenState)
         {
-            terrainTilemaps[i].maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+            case TerrainHiddenState.InFrontOfTerrain:
+            case TerrainHiddenState.BehindTerrain:
+            case TerrainHiddenState.None:
+                if(Helpers.hasCollision(terrainCollider, LayerAndTagManager.terrainLayerMask))
+                {
+                    if(currentTerrainHiddenState != TerrainHiddenState.BehindTerrain)
+                    {
+                        currentTerrainHiddenState = TerrainHiddenState.BehindTerrain;
+                        needToChangeTerrainHiddenState = true;
+                    }
+                    
+                } else
+                {
+                    if(currentTerrainHiddenState != TerrainHiddenState.InFrontOfTerrain)
+                    {
+                        currentTerrainHiddenState = TerrainHiddenState.InFrontOfTerrain;
+                        needToChangeTerrainHiddenState = true;
+                    }
+                }
+
+                break;
+            default:
+                needToChangeTerrainHiddenState = false;
+                break;
         }
 
-        for (int i = 0; i < terrainSprites.Count; i++)
+        if(needToChangeTerrainHiddenState)
         {
-            terrainSprites[i].maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+            adjustTerrainHiddenState();
         }
-
-        foreach (TilemapRenderer tilemap in shownWhileTerrainHiddenTilemaps)
-        {
-            tilemap.enabled = true;
-        }
-
-        terrainSpriteMaskHidingTerrain = true;
     }
 
-    public void displayTerrain()
+    private void adjustTerrainHiddenState()
     {
-        for (int i = 0; i < terrainTilemaps.Count; i++)
+        switch(currentTerrainHiddenState)
         {
-            terrainTilemaps[i].maskInteraction = SpriteMaskInteraction.None;
-        }
+            case TerrainHiddenState.InFrontOfTerrain:
 
-        for (int i = 0; i < terrainSprites.Count; i++)
-        {
-            terrainSprites[i].maskInteraction = SpriteMaskInteraction.None;
-        }
+                for (int i = 0; i < terrainTilemaps.Count; i++)
+                {
+                    terrainTilemaps[i].enabled = true;
+                    terrainTilemaps[i].maskInteraction = SpriteMaskInteraction.None;
+                }
 
-        foreach (TilemapRenderer tilemap in shownWhileTerrainHiddenTilemaps)
-        {
-            tilemap.enabled = false;
-        }
+                for (int i = 0; i < terrainSprites.Count; i++)
+                {
+                     terrainSprites[i].enabled = true;
+                    terrainSprites[i].maskInteraction = SpriteMaskInteraction.None;
+                }
 
-        terrainSpriteMaskHidingTerrain = false;
+                foreach (TilemapRenderer tilemap in shownWhileTerrainHiddenTilemaps)
+                {
+                    tilemap.enabled = false;
+                }
+
+                break;
+            case TerrainHiddenState.BehindTerrain:
+                    for (int i = 0; i < terrainTilemaps.Count; i++)
+                    {
+                        terrainTilemaps[i].enabled = true;
+                        terrainTilemaps[i].maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+                    }
+
+                    for (int i = 0; i < terrainSprites.Count; i++)
+                    {
+                         terrainSprites[i].enabled = true;
+                        terrainSprites[i].maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+                    }
+
+                    foreach (TilemapRenderer tilemap in shownWhileTerrainHiddenTilemaps)
+                    {
+                        tilemap.enabled = true;
+                        tilemap.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+                    }
+                break;
+            case TerrainHiddenState.TerrainHidden:
+                    for (int i = 0; i < terrainTilemaps.Count; i++)
+                    {
+                        terrainTilemaps[i].enabled = false;
+                    }
+
+                    for (int i = 0; i < terrainSprites.Count; i++)
+                    {
+                        terrainSprites[i].enabled = false;
+                    }
+
+                    foreach (TilemapRenderer tilemap in shownWhileTerrainHiddenTilemaps)
+                    {
+                        tilemap.enabled = true;
+                        tilemap.maskInteraction = SpriteMaskInteraction.None;
+                    }
+                break;
+        }
     }
 
     public void toggleTerrainKeyCheck()
     {
         if (Input.GetKey(KeyBindingList.hideTerrainKey) && !KeyPressManager.handlingSecondaryKeyPress)
         {
-            if (State.terrainHidden)
-            {
-                setTerrainActive(true);
-            }
-            else
-            {
-                setTerrainActive(false);
-            }
+            toggleTerrainVisibility();
 
             KeyPressManager.handlingSecondaryKeyPress = true;
         }
     }
 
-    //doesn't just mask terrain objects but turns them completely off.
-    public void setTerrainActive(bool terrainStatus)
+    public void toggleTerrainVisibility()
     {
-        foreach (TilemapRenderer tilemap in terrainTilemaps)
+        if(currentTerrainHiddenState != TerrainHiddenState.TerrainHidden)
         {
-            tilemap.enabled = terrainStatus;
-        }
-
-        foreach (SpriteRenderer sprite in terrainSprites)
+            currentTerrainHiddenState = TerrainHiddenState.TerrainHidden;
+            State.terrainHidden = true;
+            adjustTerrainHiddenState();
+        } else
         {
-            sprite.enabled = terrainStatus;
+            currentTerrainHiddenState = TerrainHiddenState.None;
+            State.terrainHidden = false;
+            checkTerrainStatus();
         }
-
-        foreach (TilemapRenderer tilemap in shownWhileTerrainHiddenTilemaps)
-        {
-            if(!terrainStatus)
-            {
-                tilemap.enabled = true;
-                tilemap.maskInteraction = SpriteMaskInteraction.None;               
-            } else
-            {   
-                tilemap.enabled = false;
-                tilemap.maskInteraction = SpriteMaskInteraction.VisibleInsideMask; 
-            }
-        }
-
-        // for (int i = 0; i < shownWhileTerrainHiddenTilemaps.Count; i++)
-        // {
-        //     shownWhileTerrainHiddenTilemaps[i].maskInteraction = SpriteMaskInteraction.None;
-        // }
-        // for (int i = 0; i < shownWhileTerrainHiddenTilemaps.Count; i++)
-        // {
-        //     shownWhileTerrainHiddenTilemaps[i].maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
-        // }
-
-        State.terrainHidden = !terrainStatus;
     }
 
     public bool onTopOfTransitionOrTutorial()

@@ -79,6 +79,7 @@ public static class FlagNameList
 
 
         //Nándor Flags
+        public const string nandorStartedGuardPunishmentConvo = "nandorStartedGuardPunishmentConvo";
         public const string spokeWithNandorAfterPrisoners = "spokeWithNandorAfterPrisoners"; //finished prisoner punishments and ready to leave camp
         public const string nandorLeftParty = "nandorLeftParty"; //main left party flag
         public const string nandorLeftPartyOverPrisonerPunishment = "nandorLeftPartyOverPrisonerPunishment"; //gave a guard to the crowd and couldn't keep Nandor from leaving

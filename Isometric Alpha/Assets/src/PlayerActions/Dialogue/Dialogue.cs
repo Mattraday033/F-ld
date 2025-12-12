@@ -130,6 +130,11 @@ public class Dialogue : ICloneable
         this.secondaryInkJSONs = secondaryInkJSONs;
 	}
 
+    public virtual bool findNPCGameObjectsInScene()
+    {
+        return true;
+    }
+
     private string[] createNameArray(string[] npcNames)
     {
         if (npcNames[0] == null || npcNames[0].Length > 0)
@@ -163,6 +168,22 @@ public class Dialogue : ICloneable
 
         clone.npcCombatInfo = npcCombatInfo;
 
+        if(secondaryInkJSONs == null)
+        {
+            secondaryInkJSONs = new TextAsset[0];
+            clone.secondaryInkJSONs = new TextAsset[0];
+        } else
+        {
+            clone.secondaryInkJSONs = new TextAsset[secondaryInkJSONs.Length];
+
+            int index = 0;
+            foreach(TextAsset secondaryInkJSON in secondaryInkJSONs)
+            {
+                clone.secondaryInkJSONs[index] = secondaryInkJSON;
+                index++;
+            }
+        }
+
         return clone;
     }
     
@@ -175,5 +196,19 @@ public class Dialogue : ICloneable
         this.inkJSON = inkJSON;
 
         this.variableSources = variableSources;
+    }
+}
+
+public class SingleCharacterDialogue : Dialogue
+{
+    public SingleCharacterDialogue(string name, TextAsset inkJSON) : 
+    base(new string[]{name}, inkJSON)
+    {
+        
+    }
+
+    public override bool findNPCGameObjectsInScene()
+    {
+        return false;
     }
 }

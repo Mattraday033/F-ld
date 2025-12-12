@@ -158,6 +158,7 @@ changeCamTarget({taborIndex})
 You trick me into surrendering without a fight, and then you commence with the executions? How very devious of you, branded. You had even myself fooled, but you showed your true colors eventually, didn't you?
 
     +Our deal still holds. Wait a moment as I announce your fate.
+        keepDialogue()
         \*Tabor closes his eyes* Forgive me if I don't raise my hopes too high.
         ->2a
     +The others' crimes have no bearing on my verdict for you. 
@@ -249,7 +250,7 @@ changeCamTarget({crowdIndex})
 
 changeCamTarget({crowdIndex})
 
-\*A sense of shock ripples through the crowd. Shouts and boos erupt as they let their ire be known*
+\*A sense of shock ripples through the crowd. Shouts and boos erupt as the Crowd shows their displeasure.*
 
 changeCamTarget({clayIndex})
 
@@ -266,7 +267,7 @@ We must not understand your meaning. You're not letting him go... are you?
     changeCamTarget({crowdIndex})
     
     ~crowdStatus = rageThreshold
-    \*The noise of the crowd builds. They make their rage known.*
+    \*The noise of the crowd builds. Your words have enraged them.*
     
     changeCamTarget({clayIndex})
     
@@ -533,7 +534,7 @@ We must not understand your meaning. You're not letting him go... are you?
     +Do not so quickly dismiss what I have done. I am owed by each of you. This is the manner in which I will collect that debt.
             changeCamTarget({clayIndex})
         
-            Our debt to you is of a different nature. We owe you our own lives, not the life of our greatest antagonist.  *Clay grimaces, as if his rebuke has left a bad taste in his mouth*
+            \*Clay grimaces at the mention of his debt to you.* Our debt is of a different nature. We owe you our own lives, not the life of our greatest nemesis. *Even as Clay says this, he seems unsure.*
                 ->returnTo3aaSuccess
         
     +He has abused too many for any of you to claim him individually. What, you wish to each harm a scrap of him? Isn't that kind of pathetic?
@@ -616,7 +617,7 @@ We must not understand your meaning. You're not letting him go... are you?
     ->currentKnot
 = choice_section
 
-    +I'm not so certain. And it's that uncertainty that leads to me preserve him from the finality of death.
+    +I'm not so certain. And it's that uncertainty that leads me to preserve him from the finality of death.
             ->returnTo3aaSuccess
 
 === 3acb === // I have already claimed his life as mine. His fate now concerns me, no matter how much you argue. Unless... you're challenging my authority?
@@ -846,7 +847,7 @@ We must not understand your meaning. You're not letting him go... are you?
 
     changeCamTarget({clayIndex})
 
-    Thats just a cliché. The real best revenge is to impart back the same pain your enemy did, twice over. And to get to look them in the eyes while you do it. 
+    That's just a cliché. The real best revenge is to impart back the same pain your enemy did, twice over. And to get to look them in the eyes while you do it. 
     
     ->currentKnot
 = choice_section

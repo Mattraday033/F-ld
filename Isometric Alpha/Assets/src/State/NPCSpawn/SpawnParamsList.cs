@@ -16,7 +16,7 @@ public static class SpawnParamsList
 
     private readonly static StartSpawningFlagList rallySlavesCampNE = new StartSpawningFlagList(new string[] { FlagNameList.duringSlaveRallyConversation });
     private readonly static InteractableSpawnParams slavesInNorthEastCamp = new InteractableSpawnParams(new StartSpawningAllTrueFlagList(new string[] { FlagNameList.convincedSlavesToHelpYou}),
-                                                                                                        new StopSpawningFlagList(new string[] { FlagNameList.waitingOnGarchaToSpeak }), spawnWhileHostile);
+                                                                                                        new StopSpawningFlagList(new string[] { FlagNameList.waitingOnGarchaToSpeak, FlagNameList.directorDefeated }), spawnWhileHostile);
 
 
     private readonly static InteractableSpawnParams strTutorial = new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.choseStrengthAtStart }), spawnWhileHostile);
@@ -269,6 +269,202 @@ public static class SpawnParamsList
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.guard+1),
                                new InteractableSpawnParams(revoltStartedStopSpawning));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.page),
+                                        new InteractableSpawnParams(new StartSpawningAllTrueFlagList(new string[]  { 
+                                                                                            FlagNameList.directorDefeated
+                                                                                        }), 
+                                        new StopSpawningFlagList(new string[]  { 
+                                                                                    FlagNameList.enteredCivilizationAfterLeavingCamp
+                                                                                })));
+
+        #endregion
+
+        #region Camp South East
+
+        #region Guard Punishment Scene
+
+        StartSpawningAllTrueFlagList guardPunishmentCrowdStartSpawning = new StartSpawningAllTrueFlagList(new string[] { FlagNameList.directorDefeated, FlagNameList.mineLvl3CarterAndNandorInParty });
+        StopSpawningFlagList guardPunishmentCrowdStopSpawning = new StopSpawningFlagList(new string[] { FlagNameList.spokeWithNandorAfterPrisoners, FlagNameList.foughtCrowdForTabor });
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave),
+                               new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+1),
+                               new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+2),
+                               new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+3),
+                               new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+4),
+                               new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+5),
+                               new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+6),
+                               new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.clay),
+                               new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
+
+            #region Pazman Ervin Reka
+
+                InteractableSpawnParams pazmanErvinPunishmentSpawnParams = new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
+                                                                                                            { 
+                                                                                                                MetaFlagNameList.guardPazmanAndRekaAtTrial,
+                                                                                                                MetaFlagNameList.pazmanNeedsHandling
+                                                                                                            },
+
+                                                            new StartSpawningAllTrueFlagList(new string[]   { 
+                                                                                                                FlagNameList.directorDefeated, 
+                                                                                                                FlagNameList.mineLvl3CarterAndNandorInParty
+                                                                                                            })));
+
+                interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.ervin),
+                                        pazmanErvinPunishmentSpawnParams);
+
+                interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.guardPazman),
+                                                pazmanErvinPunishmentSpawnParams);
+                
+                interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.guardReka),
+                                new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
+                                                                                                            { 
+                                                                                                                MetaFlagNameList.guardPazmanAndRekaAtTrial,
+                                                                                                                MetaFlagNameList.rekaNeedsHandling
+                                                                                                            },
+                                                            new StartSpawningAllTrueFlagList(new string[]   { 
+                                                                                                                FlagNameList.directorDefeated, 
+                                                                                                                FlagNameList.mineLvl3CarterAndNandorInParty
+                                                                                                            }))));
+            #endregion
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.guardMarcos),
+                                new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
+                                                                                                    { 
+                                                                                                        MetaFlagNameList.marcosIsAtTrial,
+                                                                                                        MetaFlagNameList.marcosNeedsHandling
+                                                                                                    },
+
+                                                    new StartSpawningAllTrueFlagList(new string[]   { 
+                                                                                                        FlagNameList.directorDefeated, 
+                                                                                                        FlagNameList.mineLvl3CarterAndNandorInParty
+                                                                                                    }))));
+
+        InteractableSpawnParams andrasJanosPunishmentSpawnParams = new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
+                                                                                                    { 
+                                                                                                        MetaFlagNameList.andrasIsAtTrial,
+                                                                                                        MetaFlagNameList.andrasNeedsHandling
+                                                                                                    },
+
+                                                    new StartSpawningAllTrueFlagList(new string[]   { 
+                                                                                                        FlagNameList.directorDefeated, 
+                                                                                                        FlagNameList.mineLvl3CarterAndNandorInParty
+                                                                                                    })));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.guardAndras),
+                                        new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
+                                                                                                    { 
+                                                                                                        MetaFlagNameList.andrasIsAtTrial,
+                                                                                                        MetaFlagNameList.andrasNeedsHandling
+                                                                                                    },
+
+                                                    new StartSpawningAllTrueFlagList(new string[]   { 
+                                                                                                        FlagNameList.directorDefeated, 
+                                                                                                        FlagNameList.mineLvl3CarterAndNandorInParty
+                                                                                                    }))));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.janos),
+                                        new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
+                                                                                                    { 
+                                                                                                        MetaFlagNameList.janosIsAtTrial
+                                                                                                    },
+
+                                                    new StartSpawningAllTrueFlagList(new string[]   { 
+                                                                                                        FlagNameList.directorDefeated, 
+                                                                                                        FlagNameList.mineLvl3CarterAndNandorInParty,
+                                                                                                    }))));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.chiefTabor),
+                                        new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
+                                                                                                    { 
+                                                                                                        MetaFlagNameList.taborIsAtTrial,
+                                                                                                        MetaFlagNameList.taborNeedsHandling
+                                                                                                    },
+
+                                                    new StartSpawningAllTrueFlagList(new string[]   { 
+                                                                                                        FlagNameList.directorDefeated, 
+                                                                                                        FlagNameList.mineLvl3CarterAndNandorInParty
+                                                                                                    }))));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.nandor),
+                                        new InteractableSpawnParams(new StartSpawningAllTrueFlagList(new string[]  { 
+                                                                                                                        FlagNameList.directorDefeated, 
+                                                                                                                        FlagNameList.mineLvl3CarterAndNandorInParty,
+                                                                                                                        FlagNameList.enteredMessHallYardAfterRevolt
+                                                                                                                    }), 
+                                                                    new StopSpawningFlagList(new string[]  { 
+                                                                                                                FlagNameList.nandorStartedGuardPunishmentConvo
+                                                                                                            })));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.nandor+1),
+                                        new InteractableSpawnParams(new StartSpawningAllTrueFlagList(new string[]  { 
+                                                                                                                        FlagNameList.nandorStartedGuardPunishmentConvo
+                                                                                                                    }), 
+                                                                    new StopSpawningFlagList(new string[]  { 
+                                                                                                                FlagNameList.nandorLeftParty,
+                                                                                                                FlagNameList.nandorLeftPartyOverPrisonerPunishment,
+                                                                                                                FlagNameList.spokeWithNandorAfterPrisoners
+                                                                                                            })));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.carter),
+                                        new InteractableSpawnParams(new StartSpawningAllTrueFlagList(new string[]  { 
+                                                                                                                        FlagNameList.directorDefeated, 
+                                                                                                                        FlagNameList.mineLvl3CarterAndNandorInParty
+                                                                                                                    }), 
+                                                                    new StopSpawningFlagList(new string[]  { 
+                                                                                                                FlagNameList.spokeWithNandorAfterPrisoners
+                                                                                                            })));
+
+        InteractableSpawnParams miscGuardPunishmentSpawnParams = new InteractableSpawnParams(new StartSpawningAllTrueFlagList(new string[]  { 
+                                                                                                                        FlagNameList.directorDefeated, 
+                                                                                                                        FlagNameList.mineLvl3CarterAndNandorInParty
+                                                                                                                    }), 
+                                                                    new StopSpawningFlagList(new string[]  { 
+                                                                                                                FlagNameList.spokeWithNandorAfterPrisoners
+                                                                                                            }));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.kastor),
+                                        new InteractableSpawnParams(new StartSpawningAllTrueFlagList(new string[]  { 
+                                                                                                                        FlagNameList.directorDefeated, 
+                                                                                                                        FlagNameList.mineLvl3CarterAndNandorInParty
+                                                                                                                    }), 
+                                                                    new StopSpawningFlagList(new string[]  { 
+                                                                                                                FlagNameList.orderedTheHorsesBurned,
+                                                                                                                FlagNameList.orderedTheHorsesEaten,
+                                                                                                                FlagNameList.enteredCivilizationAfterLeavingCamp
+                                                                                                            })));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.garcha),
+                                        miscGuardPunishmentSpawnParams);
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.thatch),
+                                        new InteractableSpawnParams(new StartSpawningAllTrueFlagList(new string[]  { 
+                                                                                                                        FlagNameList.directorDefeated, 
+                                                                                                                        FlagNameList.mineLvl3CarterAndNandorInParty,
+                                                                                                                        FlagNameList.toldKastorOfThatchsFate
+                                                                                                                    }), 
+                                                                    new StopSpawningFlagList(new string[]  { 
+                                                                                                                FlagNameList.spokeWithNandorAfterPrisoners
+                                                                                                            })));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.broglin),
+                                        new InteractableSpawnParams(new StartSpawningAllTrueFlagList(new string[]  { 
+                                                                                                                        FlagNameList.directorDefeated, 
+                                                                                                                        FlagNameList.mineLvl3CarterAndNandorInParty,
+                                                                                                                        FlagNameList.freedBroglin
+                                                                                                                    }), 
+                                                                    new StopSpawningFlagList(new string[]  { 
+                                                                                                                FlagNameList.spokeWithNandorAfterPrisoners
+                                                                                                            })));
+        #endregion
 
         #endregion
 

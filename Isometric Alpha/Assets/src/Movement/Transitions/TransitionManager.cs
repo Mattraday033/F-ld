@@ -92,6 +92,8 @@ public class TransitionManager : MonoBehaviour
 
         SaveHandler.autosave(transition);
 
+        transition.playScript();
+
         BeforeTransition.Invoke();
 
         AreaManager.changeArea(transition.destinationAreaName);

@@ -11,7 +11,6 @@ public class SpeakAtStartScript : PlayerInteractionScript
     {
         //empty on purpose
     }
-
 }
 
 public class BeginningConversationScript: SpeakAtStartScript //Broglin + Garcha in the Starting Hut
@@ -61,6 +60,20 @@ public class BeamAndCsalanInManseScript : SpeakAtStartScript
     {
         if (!DeathFlagManager.isDead(NPCNameList.beam))
         {
+            dialogueTrigger.triggerDialogue();
+        }
+    }
+
+}
+
+public class GuardPunishmentNandorStartScript : SpeakAtStartScript
+{
+
+    public override void runScript()
+    {
+        if (Flags.getFlag(FlagNameList.enteredMessHallYardAfterRevolt) && !Flags.getFlag(FlagNameList.nandorStartedGuardPunishmentConvo))
+        {
+            Flags.setFlag(FlagNameList.nandorStartedGuardPunishmentConvo, true);
             dialogueTrigger.triggerDialogue();
         }
     }

@@ -135,6 +135,13 @@ public static class EnemyPackInfoList
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                                         FlagNameList.foughtHorsesInManse);
 
+    public readonly static BossPackInfo clayFightForTabor = new BossPackInfo(new EnemyAmount[] { 
+                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        FlagNameList.foughtCrowdForTabor,
+                                                                                                        DialogueNameList.taborAfterClayFightKey);
+
     // //used in the dialogue started upon entering the Manse kitchens
     // public readonly static EnemyPackInfo halfSlavesNoGuardFight = new EnemyPackInfo(new int[] { 1, 6 }, new int[] { 1, 6 }, new EnemyStats[]{loadEnemyStatsFromResources(kendeTheCookWithoutSummon),
     //                                                                                                                         loadEnemyStatsFromResources(slaveWarrior)

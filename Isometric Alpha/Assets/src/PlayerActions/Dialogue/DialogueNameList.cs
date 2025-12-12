@@ -12,7 +12,6 @@ public static class DialogueNameList
     public const string guardPunishmentConvoKey = "guardPunishmentStartConvo";
 
 
-    public const string taborAfterClayFightKey = "taborAfterClayFight";
     public const string chiefTaborPunishmentDialogueKey = "ChiefTabor";
     #endregion
 
@@ -130,6 +129,8 @@ public static class DialogueNameList
     public const string slavesWatchingTaborPath = campExteriorPathName + LocationNameList.campCenter + seperatorChar + "SlavesWatchingTabor";
     public const string guardWatchingTaborPath = campExteriorPathName + LocationNameList.campCenter + seperatorChar + "GuardWatchingTabor";
     public const string templePath = campExteriorPathName + LocationNameList.campCenter + seperatorChar + NPCNameList.temple;
+
+    public const string pageBeforeLeavingPath = campExteriorPathName + LocationNameList.campCenter+ seperatorChar + NPCNameList.page;
     #endregion
 
     #region Camp Mine Entrance
@@ -142,7 +143,34 @@ public static class DialogueNameList
     public const string manseServiceEntrancePath = campExteriorPathName + LocationNameList.campManse + seperatorChar + "ManseServiceEntrance";
     #endregion
     #region Camp South East
-    public const string directorStatuePathPath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "DirectorStatue";
+    public const string directorStatuePath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "DirectorStatue";
+    public const string crowdSlave1Path = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "CrowdSlave1";
+    public const string crowdSlave2Path = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "CrowdSlave2";
+    public const string crowdSlave3Path = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "CrowdSlave3";
+
+    public const string kastorGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + NPCNameList.kastor;
+    public const string garchaGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + NPCNameList.garcha;
+    public const string broglinGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + NPCNameList.broglin;
+
+
+    public const string guardPunishmentStartConvoPath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "GuardPunishmentStartConvo";
+    public const string nandorGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "Nandor";
+
+    public const string carterGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + NPCNameList.carter;
+    public const string thatchGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + NPCNameList.thatch;
+
+    public const string ervinGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + NPCNameList.ervin;
+    public const string janosGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + NPCNameList.janos;
+
+    public const string pazmanGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "Pazman";
+    public const string rekaGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "Reka";
+    public const string taborGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + NPCNameList.chiefTabor;
+    public const string marcosGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "Marcos";
+    public const string andrasGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "Andras";
+
+    public const string taborAfterClayFightKey = "TaborAfterClayFight";
+    public const string taborAfterClayFightPath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "TaborAfterClayFight";
+
     #endregion
 
     #endregion

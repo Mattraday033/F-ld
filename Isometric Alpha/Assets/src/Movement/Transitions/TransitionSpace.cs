@@ -17,6 +17,7 @@ public class Transition
 
     public int outputMultiplier;
     public bool usableForFastTravel;
+    public PlayerInteractionScript scriptOnTransition; 
 
     //used in fast travelling
     public Transition(string currentAreaName, string destinationAreaName)
@@ -32,7 +33,7 @@ public class Transition
         this.outputMultiplier = 0; //to prevent autosave from moving player
     }
 
-    public Transition(string currentAreaName, string destinationAreaName, Vector3Int cellCoords, int index, Facing playerSpawnDirection, bool usableForFastTravel, int outputMultiplier)
+    public Transition(string currentAreaName, string destinationAreaName, Vector3Int cellCoords, int index, Facing playerSpawnDirection, bool usableForFastTravel, int outputMultiplier, PlayerInteractionScript scriptOnTransition)
     {
         this.currentAreaName = currentAreaName;
         this.destinationAreaName = destinationAreaName;
@@ -45,14 +46,25 @@ public class Transition
         this.usableForFastTravel = usableForFastTravel;
 
         this.outputMultiplier = outputMultiplier;
+        
+        this.scriptOnTransition = scriptOnTransition;
     }
-
 
     public bool sharesHash(Transition transition)
     {
         return currentAreaName.Equals(transition.destinationAreaName) &&
             destinationAreaName.Equals(transition.currentAreaName) &&
             transition.index == index;
+    }
+
+    public void playScript()
+    {
+        if(scriptOnTransition == null)
+        {
+            return;
+        }
+
+        scriptOnTransition.runScript();
     }
 
     public virtual bool fastTravelCapable()

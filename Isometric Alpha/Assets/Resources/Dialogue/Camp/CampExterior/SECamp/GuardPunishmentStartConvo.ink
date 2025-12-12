@@ -11,7 +11,7 @@ VAR nandorIndex = 1
 VAR carterIndex = 2
 VAR kastorIndex = 3 
 VAR janosIndex = 4
-VAR broglinIndex  =5
+VAR broglinIndex = 5
 VAR garchaIndex = 6
 VAR slaveOneIndex = 7
 VAR slaveTwoIndex = 8
@@ -24,6 +24,7 @@ VAR rekaIndex = 14
 VAR pazmanIndex = 15
 VAR ervinIndex = 16
 VAR clayIndex = 17
+VAR otherNandorIndex = 18
 
 VAR letTaborLive = false
 VAR acceptedTaborsSurrenderAfterDirectorFight = false
@@ -37,6 +38,8 @@ VAR andrasIsDead = false
 VAR afterNandorDecidesGuardPunishments = false
 VAR letNandorDecideGuardPunishments = false
 VAR mineLvl3ConvincedRekaAndPazman = false
+
+VAR nandorStartedGuardPunishmentConvo = false
 
 VAR deathFlagCarter = false
 VAR deathFlagNándor = false
@@ -52,6 +55,8 @@ VAR janosIsAtTrial = false
 VAR guardPazmanAndRekaAtTrial = false
 
 VAR nandorDialogueFileIndex = 1
+
+deactivate({crowdIndex})
 
 {
 -not taborIsAtTrial:
@@ -79,12 +84,14 @@ VAR nandorDialogueFileIndex = 1
     deactivate({pazmanIndex})
 }
 
-movePosition(-29.5,-21.35)
+movePosition(7,-9)
 setfacing(NW)
 
 ->1a
 
 === 1a ===
+
+setToTrue(nandorStartedGuardPunishmentConvo)
 
 healParty()
 
@@ -822,9 +829,15 @@ activateQuestStep(An Uneasy Truce, 5)
 activateQuestStep(An Uneasy Truce, 6)
 }
 
+deactivate({nandorIndex})
+activate({otherNandorIndex})
+
     ->Close
 
 === 6a === 
+
+deactivate({nandorIndex})
+activate({otherNandorIndex})
 
 swapInkFile(0,noPrisoners,true)
 
@@ -865,6 +878,9 @@ setToTrue(executedPazman)
 kill({rekaIndex})
 setToTrue(executedReka)
 }
+
+deactivate({nandorIndex})
+activate({otherNandorIndex})
 
 fadeBackIn(60)
 

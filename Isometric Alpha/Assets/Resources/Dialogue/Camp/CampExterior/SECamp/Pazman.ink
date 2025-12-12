@@ -434,7 +434,7 @@ activateQuestStep(Deal With the Prisoners, 18)
 
 changeCamTarget({crowdIndex})
 
-\*The crowd surges forward and pulls Pázmán within it like a wave submerging a raft. His shrill cries for his mother continue for only moment, and then cease.*
+\*The crowd surges forward and pulls Pázmán within it like a wave submerging a raft. His shrill cries for his mother continue for only a moment, and then cease.*
 
 fadeToBlack()
 
@@ -444,7 +444,7 @@ kill({pazmanIndex})
 
 fadeBackIn(60)
 
-->3e
+->Close
 
 === 3d === //executed Pazman
 

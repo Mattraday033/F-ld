@@ -492,6 +492,7 @@ Were you able to recruit Thatch?
 === T1e ===
 
 finishQuest(Look for Thatch, true, 6)
+setToTrue(toldKastorOfThatchsFate)
 
 Well done. What were the screams about. Is he hurt?
 

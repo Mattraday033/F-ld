@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GuardPunishmentConvoActivationScript : DialogueActivationScript
+public class GuardPunishmentTransitionScript : PlayerInteractionScript
 {
     public override void runScript()
     {
-        if (Flags.getFlag(FlagNameList.kastorStartedRevolt) && Flags.getFlag(FlagNameList.directorDefeated))
+        if (Flags.getFlag(FlagNameList.directorDefeated) && Flags.getFlag(FlagNameList.mineLvl3CarterAndNandorInParty))
         {
             if (!Flags.getFlag(FlagNameList.enteredMessHallYardAfterRevolt))
             {
-                State.dialogueUponSceneLoadKey = DialogueNameList.guardPunishmentConvoKey;
                 Flags.setFlag(FlagNameList.enteredMessHallYardAfterRevolt, true);
             }
 

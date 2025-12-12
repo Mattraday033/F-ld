@@ -80,4 +80,13 @@ public static class DialogueCombatInfoList
                                                                                             new DeadNameList(new string[]{NPCNameList.beam, NPCNameList.csalan})
                                                                                         });
 
+    public readonly static NPCCombatInfo clayFightForTaborCombatInfo = new NPCCombatInfo( 
+                                                                     new EnemyPackInfo[]   {   
+                                                                                                EnemyPackInfoList.clayFightForTabor
+                                                                                            },
+                                                                    new DeadNameList[]  {
+                                                                                            new DeadNameList(new string[]{NPCNameList.clay})
+                                                                                        });
+
+
 }

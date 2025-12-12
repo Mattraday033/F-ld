@@ -129,7 +129,7 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfoWithCorner(startingIndexOne, LocationNameList.messHall, LocationNameList.campSouthEast, new Vector3Int(0, 14), Facing.SouthEast));
 
-        list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, LocationNameList.messHall, LocationNameList.campSouthEast, new Vector3Int(-3, 9), Facing.NorthEast, Constants.sizeTwo, Axis.DescendingY));
+        list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, LocationNameList.messHall, LocationNameList.campSouthEast, new Vector3Int(-3, 9), Facing.NorthEast, Constants.sizeTwo, Axis.DescendingY, new GuardPunishmentTransitionScript()));
 
         transitionSpawnInfoDict.Add(LocationNameList.messHall, list);
 
@@ -173,7 +173,7 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(LocationNameList.stockhouse, LocationNameList.campMineEntrance, new Vector3Int(9, 6), Facing.SouthEast, Constants.sizeThree, Axis.DescendingX));
 
-        list.Add(new TransitionSpawnInfoWithCorner(startingIndexThree, LocationNameList.stockhouse, LocationNameList.campMineEntrance, new Vector3Int(3, 2), Facing.NorthEast, Constants.sizeTwo, Axis.DescendingY));
+        list.Add(new TransitionSpawnInfoWithCorner(startingIndexThree, LocationNameList.stockhouse, LocationNameList.campMineEntrance, new Vector3Int(3, 2), Facing.NorthEast, Constants.sizeThree, Axis.DescendingY));
 
         transitionSpawnInfoDict.Add(LocationNameList.stockhouse, list);
 
@@ -280,7 +280,7 @@ public static class TransitionSpawnInfoList
         list.Add(new TransitionSpawnInfoWithCorner(startingIndexOne, LocationNameList.campSouthEast, LocationNameList.messHall, new Vector3Int(13, -5), Facing.NorthWest, twoSpaceMultiplier));
         list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, LocationNameList.campSouthEast, LocationNameList.messHall, new Vector3Int(12, -7), Facing.SouthWest, twoSpaceMultiplier, Constants.sizeTwo, Axis.DescendingY));
 
-        list.Add(new TransitionSpawnInfo(LocationNameList.campSouthEast, LocationNameList.campCenter, new Vector3Int(25, 1), Facing.SouthWest, Constants.sizeThree, Axis.DescendingY));
+        list.Add(new TransitionSpawnInfo(LocationNameList.campSouthEast, LocationNameList.campCenter, new Vector3Int(29, 1), Facing.SouthWest, Constants.sizeThree, Axis.DescendingY));
 
         list.Add(new TransitionSpawnInfo(LocationNameList.campSouthEast, LocationNameList.campMineEntrance, new Vector3Int(9, 27), Facing.SouthEast, Constants.sizeThree, Axis.DescendingX));
 
@@ -296,7 +296,7 @@ public static class TransitionSpawnInfoList
         list.Add(new TransitionSpawnInfo(LocationNameList.campMineEntrance, LocationNameList.guardHouseSouthWest, new Vector3Int(12, -14), Facing.SouthWest, twoSpaceMultiplier, Constants.sizeTwo, Axis.DescendingY));
 
         list.Add(new TransitionSpawnInfo(LocationNameList.campMineEntrance, LocationNameList.stockhouse, new Vector3Int(17, 6), Facing.NorthWest, twoSpaceMultiplier, Constants.sizeThree, Axis.DescendingX));
-        list.Add(new TransitionSpawnInfoWithCorner(startingIndexThree, LocationNameList.campMineEntrance, LocationNameList.stockhouse, new Vector3Int(15, 4), Facing.SouthWest, twoSpaceMultiplier, Constants.sizeTwo, Axis.DescendingY));
+        list.Add(new TransitionSpawnInfoWithCorner(startingIndexThree, LocationNameList.campMineEntrance, LocationNameList.stockhouse, new Vector3Int(15, 4), Facing.SouthWest, twoSpaceMultiplier, Constants.sizeThree, Axis.DescendingY));
 
         list.Add(new TransitionSpawnInfo(LocationNameList.campMineEntrance, LocationNameList.campSouthEast, new Vector3Int(9, -19), Facing.NorthWest, Constants.sizeThree, Axis.DescendingX));
 
@@ -1102,6 +1102,9 @@ public class TransitionSpawnInfo
     private int size;
     private Axis axis;
 
+    private PlayerInteractionScript scriptOnTransition;
+    
+
     public TransitionSpawnInfo(string currentArea, string destinationArea, Vector3Int startCell, Facing playerSpawnDirection)
     {
         this.currentArea = currentArea;
@@ -1142,6 +1145,22 @@ public class TransitionSpawnInfo
         this.outputMultiplier = 1;
     }
 
+    public TransitionSpawnInfo(string currentArea, string destinationArea, Vector3Int startCell, Facing playerSpawnDirection, int size, Axis axis, PlayerInteractionScript scriptOnTransition)
+    {
+        this.currentArea = currentArea;
+        this.destinationArea = destinationArea;
+
+        this.startCell = startCell;
+        this.playerSpawnDirection = playerSpawnDirection;
+
+        this.size = size;
+        this.axis = axis;
+
+        this.outputMultiplier = 1;
+
+        this.scriptOnTransition = scriptOnTransition;
+    }
+
     public TransitionSpawnInfo(string currentArea, string destinationArea, Vector3Int startCell, Facing playerSpawnDirection, int outputMultiplier, int size, Axis axis)
     {
         this.currentArea = currentArea;
@@ -1153,6 +1172,21 @@ public class TransitionSpawnInfo
         this.outputMultiplier = outputMultiplier;
         this.size = size;
         this.axis = axis;
+    }
+
+    public TransitionSpawnInfo(string currentArea, string destinationArea, Vector3Int startCell, Facing playerSpawnDirection, int outputMultiplier, int size, Axis axis, PlayerInteractionScript scriptOnTransition)
+    {
+        this.currentArea = currentArea;
+        this.destinationArea = destinationArea;
+
+        this.startCell = startCell;
+        this.playerSpawnDirection = playerSpawnDirection;
+
+        this.outputMultiplier = outputMultiplier;
+        this.size = size;
+        this.axis = axis;
+
+        this.scriptOnTransition = scriptOnTransition;
     }
 
     public virtual int getStartIndex()
@@ -1187,7 +1221,7 @@ public class TransitionSpawnInfo
                 currentCell.y -= index;
             }
 
-            list.Add(new Transition(currentArea, destinationArea, currentCell, index + getStartIndex(), playerSpawnDirection, fastTravelCapable(), getOutputMultiplier()));
+            list.Add(new Transition(currentArea, destinationArea, currentCell, index + getStartIndex(), playerSpawnDirection, fastTravelCapable(), getOutputMultiplier(), scriptOnTransition));
         }
 
         return list;
@@ -1218,8 +1252,20 @@ public class TransitionSpawnInfoWithCorner : TransitionSpawnInfo
         this.startIndex = startIndex;
     }
 
+    public TransitionSpawnInfoWithCorner(int startIndex, string currentArea, string destinationArea, Vector3Int startCell, Facing playerSpawnDirection, int size, Axis axis, PlayerInteractionScript scriptOnTransition):
+    base(currentArea, destinationArea, startCell, playerSpawnDirection, size, axis, scriptOnTransition)
+    {
+        this.startIndex = startIndex;
+    }
+
     public TransitionSpawnInfoWithCorner(int startIndex, string currentArea, string destinationArea, Vector3Int startCell, Facing playerSpawnDirection, int outputMultiplier, int size, Axis axis):
     base(currentArea, destinationArea, startCell, playerSpawnDirection, outputMultiplier, size, axis)
+    {
+        this.startIndex = startIndex;
+    }
+
+    public TransitionSpawnInfoWithCorner(int startIndex, string currentArea, string destinationArea, Vector3Int startCell, Facing playerSpawnDirection, int outputMultiplier, int size, Axis axis, PlayerInteractionScript scriptOnTransition):
+    base(currentArea, destinationArea, startCell, playerSpawnDirection, outputMultiplier, size, axis, scriptOnTransition)
     {
         this.startIndex = startIndex;
     }

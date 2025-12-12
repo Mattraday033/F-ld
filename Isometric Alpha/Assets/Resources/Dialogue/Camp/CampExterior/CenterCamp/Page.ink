@@ -55,13 +55,13 @@ Carter and I are both ready to make our way through the forest. Are you ready to
 
 === 2b ===
 
-fadeToBlack()
+fadeToBlack(true, false)
 
 changeCamTarget({pageIndex})
 activate({carterIndex})
 
-moveToPos(-11,-10.65)
-setFacing(NorthWest)
+//moveToPos(-11,-10.65)
+//setFacing(NorthWest)
 
 fadeBackIn(60)
 

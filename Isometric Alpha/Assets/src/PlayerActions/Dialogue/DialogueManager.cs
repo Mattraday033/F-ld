@@ -72,8 +72,6 @@ public class DialogueManager : MonoBehaviour
 			npcParent = AreaManager.getNPCParent();
 			dialogueTrackerButton = new DialogueTrackerButton(true);
 
-            // Debug.LogError("State.dialogueUponSceneLoadKey = " + State.dialogueUponSceneLoadKey);
-
             startDialogue(DialogueList.getDialogue(AreaManager.locationName, State.dialogueUponSceneLoadKey));
 			State.dialogueUponSceneLoadKey = null;
 			return;
@@ -177,7 +175,14 @@ public class DialogueManager : MonoBehaviour
 
         PartyMemberPlacer.HideAllFollowers.Invoke();
         
-        findNPCGameObject();
+        if(currentDialogue.findNPCGameObjectsInScene())
+        {
+            findNPCGameObject();
+        } else
+        {
+            currentDialogue.cameraFoci[Constants.indexOne] = PlayerMovement.getCurrentInteractableBeforePlayer();
+        }
+        
 
         NPCCombatInfo combatInfo = currentDialogue.npcCombatInfo;
 
@@ -1325,6 +1330,11 @@ public class DialogueManager : MonoBehaviour
 
     private TextAsset getSecondaryStoryJSON(int secondaryInkFileIndex)
     {
+        Helpers.debugNullCheck("currentDialogue.secondaryInkJSONs",currentDialogue.secondaryInkJSONs);
+        Debug.LogError("currentDialogue.secondaryInkJSONs.Length = " + currentDialogue.secondaryInkJSONs.Length);
+        Debug.LogError("secondaryInkFileIndex = " + secondaryInkFileIndex);
+        Helpers.debugNullCheck("currentDialogue.secondaryInkJSONs[secondaryInkFileIndex]", currentDialogue.secondaryInkJSONs[secondaryInkFileIndex]);
+
         if (currentDialogue.secondaryInkJSONs == null || currentDialogue.secondaryInkJSONs.Length <= secondaryInkFileIndex || currentDialogue.secondaryInkJSONs[secondaryInkFileIndex] == null)
         {
             GameObject tabor = currentDialogue.cameraFoci[1];

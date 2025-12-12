@@ -8,6 +8,6 @@ public class HideTerrain : TutorialSequenceStepScript
     {
         PlayerMovement playerMovement = PlayerMovement.getInstance();
 
-        playerMovement.setTerrainActive(false);
+        playerMovement.toggleTerrainKeyCheck();
     }
 }

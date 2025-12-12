@@ -323,7 +323,7 @@ public class SecretDoorObstacleSpawnParams : HiddenTerrainSpawnParams
     }
 }
 
-public class FlagList : IEnumerable
+public abstract class FlagList : IEnumerable
 {
     public string[] flags;
 
@@ -337,18 +337,7 @@ public class FlagList : IEnumerable
         this.flags = flags;
     }
 
-    public virtual bool evaluateFlags()
-    {
-        foreach (string flag in this)
-        {
-            if (Flags.getFlag(flag))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
+    public abstract bool evaluateFlags();
 
     public IEnumerator GetEnumerator()
     {
@@ -371,6 +360,54 @@ public class StopSpawningFlagList : FlagList
     base(flags)
     {
     }
+
+    public override bool evaluateFlags()
+    {
+        foreach (string flag in this)
+        {
+            if (Flags.getFlag(flag))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+
+public class StopSpawningMetaFlagList : StopSpawningFlagList
+{
+    private StopSpawningFlagList stopSpawningFlagList;
+
+    public StopSpawningMetaFlagList(string[] metaFlags):
+    base(metaFlags)
+    {
+    }
+
+    public StopSpawningMetaFlagList(string[] metaFlags, StopSpawningFlagList stopSpawningFlagList):
+    base(metaFlags)
+    {
+        this.stopSpawningFlagList = stopSpawningFlagList;
+    }
+
+    public override bool evaluateFlags()
+    {
+        if (stopSpawningFlagList != null && stopSpawningFlagList.evaluateFlags())
+        {
+            return true;
+        }
+
+        foreach (string metaFlag in this)
+        {
+            if (MetaFlags.getMetaFlag(metaFlag))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
 
 public class StartSpawningFlagList : FlagList
@@ -393,7 +430,15 @@ public class StartSpawningFlagList : FlagList
             return true;
         }
 
-        return base.evaluateFlags();
+        foreach (string flag in this)
+        {
+            if (Flags.getFlag(flag))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }
@@ -421,6 +466,36 @@ public class StartSpawningAllTrueFlagList : StartSpawningFlagList
         foreach (string flag in this)
         {
             if (!Flags.getFlag(flag))
+            {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+}
+
+public class StartSpawningAllTrueMetaFlagList : StartSpawningAllTrueFlagList
+{
+    private StartSpawningAllTrueFlagList startSpawningAllTrueFlagList;
+
+    public StartSpawningAllTrueMetaFlagList(string[] metaFlags, StartSpawningAllTrueFlagList startSpawningAllTrueFlagList):
+    base(metaFlags)
+    {
+        this.startSpawningAllTrueFlagList = startSpawningAllTrueFlagList;
+    }
+
+    public override bool evaluateFlags()
+    {
+        if(startSpawningAllTrueFlagList != null && !startSpawningAllTrueFlagList.evaluateFlags())
+        {
+            return false;
+        }
+        
+        foreach (string metaFlag in this)
+        {
+            if (!MetaFlags.getMetaFlag(metaFlag))
             {
                 return false;
             }
