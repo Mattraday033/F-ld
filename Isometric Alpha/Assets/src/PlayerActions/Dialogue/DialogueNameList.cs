@@ -130,6 +130,8 @@ public static class DialogueNameList
     public const string guardWatchingTaborPath = campExteriorPathName + LocationNameList.campCenter + seperatorChar + "GuardWatchingTabor";
     public const string templePath = campExteriorPathName + LocationNameList.campCenter + seperatorChar + NPCNameList.temple;
 
+    public const string campGatePath = campExteriorPathName + LocationNameList.campCenter + seperatorChar + NPCNameList.campGate;
+
     public const string pageBeforeLeavingPath = campExteriorPathName + LocationNameList.campCenter+ seperatorChar + NPCNameList.page;
     #endregion
 
@@ -144,6 +146,7 @@ public static class DialogueNameList
     #endregion
     #region Camp South East
     public const string directorStatuePath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "DirectorStatue";
+    public const string brokenDirectorStatuePath = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "BrokenDirectorStatue";
     public const string crowdSlave1Path = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "CrowdSlave1";
     public const string crowdSlave2Path = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "CrowdSlave2";
     public const string crowdSlave3Path = campExteriorPathName + LocationNameList.campSouthEast + seperatorChar + "CrowdSlave3";

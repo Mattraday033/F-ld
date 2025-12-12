@@ -97,9 +97,6 @@ public static class NPCNameList
 
     public const string leafPile = "Leaf Pile";
     public const string controlPanel = "Control Panel";
-    public const string vaultableBarrels = "Vaultable Barrels";
-    public const string vaultableRocks = "Vaultable Rocks";
-    public const string vaultableGap = "Vaultable Gap";
     public const string wallPatch = "Wall Patch";
     public const string mineLvl2Wall = "MineLvl_2 Wall";
     public const string mineLvl3Wall = "MineLvl_3 Wall";
@@ -114,21 +111,13 @@ public static class NPCNameList
     public const string barrels = "Barrels";
     public const string barricade = "Barricade";
     public const string halfWall = "Half Wall";
-    public const string liftablePrefix = "Liftable ";
-    public const string gate = "Gate";
-    public const string liftableGate = liftablePrefix + gate;
-    public const string liftableRubble = liftablePrefix + rubble;
-    public const string awkwardRubble = "Awkward Rubble";
-    public const string portcullis = "Portcullis";
-    public const string ancientPortcullis = "Ancient " + portcullis;
-    public const string officeDoor = "Office Door";
-    public const string cellDoor = "Cell Door";
     public const string fallenBeam = "Fallen Beam";
     public const string button = "Button";
     public const string manseFrontDoor = "Manse Front Door";
     public const string manseServiceEntrance = "Service Entrance";
     public const string mineArmoryGate = "Mine Armory Gate";
     public const string statue = "Statue";
+    public const string toppledStatue = "Toppled Statue";
     public const string spike = "Spike";
     public const string unstablePillar = "Unstable Pillar";
     public const string unseenBarrier = "Unseen Barrier";
@@ -136,7 +125,6 @@ public static class NPCNameList
     public const string stalagmite = "Stalagmite";
     public const string obstacle = "Obstacle";
 
-    public const string guardCampLiftableGate = guard + " " + liftablePrefix + gate;
     #endregion
 
     #region Party Member Names
@@ -145,6 +133,28 @@ public static class NPCNameList
     public const string nandor = "Nándor";
     public const string carter = "Carter";
 
+    #endregion
+
+    #region Vaultable Object
+
+    public const string vaultablePrefix = "Vaultable ";
+    public const string vaultableBarrels = vaultablePrefix + " Barrels";
+    public const string vaultableRocks = vaultablePrefix + " Rocks";
+    public const string vaultableGap = vaultablePrefix + " Gap";
+
+    #endregion
+
+    #region Gates and Doors
+    public const string liftablePrefix = "Liftable ";
+    public const string gate = "Gate";
+    public const string liftableGate = liftablePrefix + gate;
+    public const string liftableRubble = liftablePrefix + rubble;
+    public const string awkwardRubble = "Awkward Rubble";
+    public const string portcullis = "Portcullis";
+    public const string ancientPortcullis = "Ancient " + portcullis;
+    public const string officeDoor = "Office Door";
+    public const string cellDoor = "Cell Door";    
+    public const string campGate = "Camp Gate";
     #endregion
 
     #region Misc

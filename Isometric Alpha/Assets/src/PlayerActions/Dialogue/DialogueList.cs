@@ -311,6 +311,10 @@ public static class DialogueList
         // addDialogueToList(LocationNameList.campCenter, NPCNameList.branded+1, slavesWatchingTaborDialogue);
         // addDialogueToList(LocationNameList.campCenter, NPCNameList.branded+2, slavesWatchingTaborDialogue);
 
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.campGate, 
+                            new Dialogue(new string[] { NPCNameList.campGate },
+                            Resources.Load<TextAsset>(DialogueNameList.campGatePath)));
+
         addDialogueToList(LocationNameList.campCenter, NPCNameList.wallPatch, wallPatchDialogue);
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.page,
@@ -327,8 +331,12 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.wallPatch, wallPatchDialogue);
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.statue,
-                            new Dialogue(new string[] { "", NPCNameList.statue},
+                            new SingleCharacterDialogue(NPCNameList.statue,
                             Resources.Load<TextAsset>(DialogueNameList.directorStatuePath)));
+                            
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.toppledStatue,
+                            new SingleCharacterDialogue(NPCNameList.toppledStatue,
+                            Resources.Load<TextAsset>(DialogueNameList.brokenDirectorStatuePath)));
 
         #region Guard Punishment Scene
 

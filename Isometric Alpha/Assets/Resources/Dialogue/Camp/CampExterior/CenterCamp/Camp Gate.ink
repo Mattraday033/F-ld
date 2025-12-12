@@ -23,7 +23,7 @@ VAR playerName = ""
 
 === 1a ===
 
-These gates lead out of the camp. They are locked and sturdy.
+This gate lead out of the camp. This is locked and sturdy.
 
     +\*Leave.*
         ->Close

@@ -289,7 +289,7 @@ public static class PrefabNames
     public const string statueFolder = furnitureFolder + "Statues/";
     public const string directorStatueSpriteName = "DirectorStatue";
     public const string directorStatuePath = statueFolder + directorStatueSpriteName;
-
+    public const string brokenDirectorStatuePath = statueFolder + "Broken"+directorStatueSpriteName;
 
     public const string cunningObjectsFolder = spriteFolder + "CunningObjects/";
     public const string statueBack = cunningObjectsFolder + "Statue Back";

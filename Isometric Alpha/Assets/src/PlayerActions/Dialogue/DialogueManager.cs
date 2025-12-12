@@ -182,7 +182,6 @@ public class DialogueManager : MonoBehaviour
         {
             currentDialogue.cameraFoci[Constants.indexOne] = PlayerMovement.getCurrentInteractableBeforePlayer();
         }
-        
 
         NPCCombatInfo combatInfo = currentDialogue.npcCombatInfo;
 

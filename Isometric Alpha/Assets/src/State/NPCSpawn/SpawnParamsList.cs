@@ -282,6 +282,18 @@ public static class SpawnParamsList
 
         #region Camp South East
 
+        string[] directorStatueBrokenConditions = new string[]  { 
+                                                                    FlagNameList.convincedSlavesToHelpYou,
+                                                                    FlagNameList.directorDefeated
+                                                                };
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.statue),
+                                        new InteractableSpawnParams(new StopSpawningFlagList(directorStatueBrokenConditions)));
+                                        
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.toppledStatue),
+                                        new InteractableSpawnParams(new StartSpawningFlagList(directorStatueBrokenConditions)));
+
         #region Guard Punishment Scene
 
         StartSpawningAllTrueFlagList guardPunishmentCrowdStartSpawning = new StartSpawningAllTrueFlagList(new string[] { FlagNameList.directorDefeated, FlagNameList.mineLvl3CarterAndNandorInParty });

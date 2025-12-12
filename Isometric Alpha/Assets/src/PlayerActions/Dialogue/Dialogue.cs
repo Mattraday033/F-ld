@@ -157,27 +157,25 @@ public class Dialogue : ICloneable
 		return this.MemberwiseClone();
 	}
 
-    public Dialogue clone()
+    protected static Dialogue addInfoToClone(Dialogue original, Dialogue clone)
     {
-        Dialogue clone = new Dialogue(new string[names.Length], new GameObject[cameraFoci.Length], inkJSON, variableSources);
-
         for (int index = 0; index < clone.names.Length; index++)
         {
-            clone.names[index] = names[index];
+            clone.names[index] = original.names[index];
         }
 
-        clone.npcCombatInfo = npcCombatInfo;
+        clone.npcCombatInfo = original.npcCombatInfo;
 
-        if(secondaryInkJSONs == null)
+        if(original.secondaryInkJSONs == null)
         {
-            secondaryInkJSONs = new TextAsset[0];
+            original.secondaryInkJSONs = new TextAsset[0];
             clone.secondaryInkJSONs = new TextAsset[0];
         } else
         {
-            clone.secondaryInkJSONs = new TextAsset[secondaryInkJSONs.Length];
+            clone.secondaryInkJSONs = new TextAsset[original.secondaryInkJSONs.Length];
 
             int index = 0;
-            foreach(TextAsset secondaryInkJSON in secondaryInkJSONs)
+            foreach(TextAsset secondaryInkJSON in original.secondaryInkJSONs)
             {
                 clone.secondaryInkJSONs[index] = secondaryInkJSON;
                 index++;
@@ -185,6 +183,13 @@ public class Dialogue : ICloneable
         }
 
         return clone;
+    }
+
+    public virtual Dialogue clone()
+    {
+        Dialogue clone = new Dialogue(new string[names.Length], new GameObject[cameraFoci.Length], inkJSON, variableSources);
+
+        return addInfoToClone(this, clone);
     }
     
     //Clone Constructor
@@ -210,5 +215,12 @@ public class SingleCharacterDialogue : Dialogue
     public override bool findNPCGameObjectsInScene()
     {
         return false;
+    }
+
+    public override Dialogue clone()
+    {
+        SingleCharacterDialogue clone = new SingleCharacterDialogue(names[Constants.indexOne], inkJSON);
+
+        return addInfoToClone(this, clone);
     }
 }

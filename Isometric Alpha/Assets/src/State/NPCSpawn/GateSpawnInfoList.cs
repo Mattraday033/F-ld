@@ -50,6 +50,22 @@ public static class GateSpawnInfoList
 
         #endregion
 
+        #region CenterCamp
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero,
+                                    NPCNameList.campGate,
+                                    LocationNameList.campCenter,
+                                    PrefabNames.portcullis2x1Path,
+                                    new Vector3Int(2, -17),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+        gateSpawnInfoDict.Add(LocationNameList.campCenter, list);
+
+        #endregion
+
         #region ManseCamp
 
         list = new List<GateSpawnInfo>();

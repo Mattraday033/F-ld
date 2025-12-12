@@ -346,6 +346,13 @@ public static class OOCSpawnDetailsList
                                                         new Vector3Int(8, 3)
                                                      }));
 
+        list.Add(new NPCOffGridSpawnDetails(NPCNameList.toppledStatue, new Vector3Int(7, 3), LocationNameList.campSouthEast, PrefabNames.brokenDirectorStatuePath, 
+                                    new Vector3Int[] { 
+                                                        new Vector3Int(7, 4),
+                                                        new Vector3Int(8, 4),
+                                                        new Vector3Int(8, 3)
+                                                     }));
+
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(19, 14), Facing.SouthEast));
 
         #region Guard Punishment Scene
