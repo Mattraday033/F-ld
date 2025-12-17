@@ -96,19 +96,19 @@ public static class SecretDoorSpawnInfoList
         #region MineLvl_2-1a
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.mineLvl2 + LocationNameList.section1a, NPCNameList.suspiciousWall, PrefabNames.mineLvl2WallSecretDoor, new Vector3Int(5, 1),
+        list.Add(new SecretDoorSpawnInfo(ZoneKeyList.mineLvl2 + LocationNameList.section1a, NPCNameList.suspiciousWall, PrefabNames.mineLvl2WallSecretDoor, new Vector3Int(5, 1),
                                             new SecretDoorInfo(SecretDoorKeyList.mineLvl2FirstSecretDoor), Constants.sizeTwo, Axis.DescendingY));
 
-        secretDoorSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section1a, list);
+        secretDoorSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1a, list);
         #endregion
 
         #region MineLvl_2-7b
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.mineLvl2 + LocationNameList.section7b, NPCNameList.suspiciousWall, PrefabNames.mineLvl2WallSecretDoor, new Vector3Int(4, 5),
+        list.Add(new SecretDoorSpawnInfo(ZoneKeyList.mineLvl2 + LocationNameList.section7b, NPCNameList.suspiciousWall, PrefabNames.mineLvl2WallSecretDoor, new Vector3Int(4, 5),
                                             new SecretDoorInfo(SecretDoorKeyList.mineLvl2SecondSecretDoor), Constants.sizeThree, Axis.DescendingX));
 
-        secretDoorSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7b, list);
+        secretDoorSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section7b, list);
         #endregion
 
         #endregion
@@ -118,10 +118,10 @@ public static class SecretDoorSpawnInfoList
         #region MineLvl_3-1b
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.mineLvl3 + LocationNameList.section1b, NPCNameList.suspiciousWall, PrefabNames.mineLvl3WallSecretDoor, new Vector3Int(0, -3),
+        list.Add(new SecretDoorSpawnInfo(ZoneKeyList.mineLvl3 + LocationNameList.section1b, NPCNameList.suspiciousWall, PrefabNames.mineLvl3WallSecretDoor, new Vector3Int(0, -3),
                                             new SecretDoorInfo(SecretDoorKeyList.mineLvl3PuzzleDoor), Constants.sizeThree, Axis.DescendingY));
 
-        secretDoorSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.section1b, list);
+        secretDoorSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section1b, list);
         #endregion
 
         #endregion

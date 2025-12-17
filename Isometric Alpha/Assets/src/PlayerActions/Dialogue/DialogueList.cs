@@ -528,38 +528,38 @@ public static class DialogueList
 
         #region MineLvl_1
 
-        addDialogueToList(LocationNameList.mineLvl1 + LocationNameList.section1b, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl1 + LocationNameList.section1b, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
 
-        addDialogueToList(LocationNameList.mineLvl1 + LocationNameList.section1c, NPCNameList.liftableGate, liftableGateDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl1 + LocationNameList.section1c, NPCNameList.liftableGate, liftableGateDialogue);
 
         #endregion
 
         #region MineLvl_2
 
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section1a, NPCNameList.suspiciousWall,
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section1a, NPCNameList.suspiciousWall,
                                                                                   new Dialogue(new string[] { NPCNameList.suspiciousWall },
                                                                                   Resources.Load<TextAsset>(DialogueNameList.suspiciousWallPathML2 + 1)));
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7b, NPCNameList.suspiciousWall,
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section7b, NPCNameList.suspiciousWall,
                                                                                   new Dialogue(new string[] { NPCNameList.suspiciousWall },
                                                                                   Resources.Load<TextAsset>(DialogueNameList.suspiciousWallPathML2 + 2)));
 
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.controlPanel, new Dialogue(new string[] { NPCNameList.controlPanel},
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section2a, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section2a, NPCNameList.controlPanel, new Dialogue(new string[] { NPCNameList.controlPanel},
                                                                                   Resources.Load<TextAsset>(DialogueNameList.controlPanelPath)));
 
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardPazman,
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardPazman,
                                                             new Dialogue(new string[] { "", NPCNameList.guardPazman},
                                                              Resources.Load<TextAsset>(DialogueNameList.pazmanML3CampPath)));                                        
 
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardVirag, 
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardVirag, 
                                                             new Dialogue(new string[] { "", NPCNameList.guardVirag},
                                                              Resources.Load<TextAsset>(DialogueNameList.viragML3CampPath)));
 
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardReka, 
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardReka, 
                                                             new Dialogue(new string[] { "", NPCNameList.guardReka},
                                                              Resources.Load<TextAsset>(DialogueNameList.rekaML3CampPath)));
 
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.overseerGaspar, 
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section2a, NPCNameList.overseerGaspar, 
                                                             new Dialogue(new string[] 
                                                             { 
                                                                 "", 
@@ -572,42 +572,42 @@ public static class DialogueList
                                                              Resources.Load<TextAsset>(DialogueNameList.ml3GuardBarricadePath),
                                                              DialogueCombatInfoList.mineLvl3GuardsCombatInfo));
 
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section2b, NPCNameList.mineArmoryGate + 1,
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section2b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section2b, NPCNameList.mineArmoryGate + 1,
                                                                                   new Dialogue(new string[] { NPCNameList.mineArmoryGate },
                                                                                   Resources.Load<TextAsset>(DialogueNameList.mineArmoryGatePath)));
 
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section3a, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section3a, NPCNameList.awkwardRubble + 1, awkwardRubbleDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section3a, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section3a, NPCNameList.awkwardRubble + 1, awkwardRubbleDialogue);
 
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section3b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section3b, NPCNameList.liftableGate + 1, liftableGateDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section3b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section3b, NPCNameList.liftableGate + 1, liftableGateDialogue);
 
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section6, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section6, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
 
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7a, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7a, NPCNameList.ancientPortcullis + 1, ancientPortcullisDialogue);
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7a, NPCNameList.ancientPortcullis + 2, ancientPortcullisDialogue);
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7a, NPCNameList.ancientPortcullis + 3, ancientPortcullisDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section7a, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section7a, NPCNameList.ancientPortcullis + 1, ancientPortcullisDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section7a, NPCNameList.ancientPortcullis + 2, ancientPortcullisDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section7a, NPCNameList.ancientPortcullis + 3, ancientPortcullisDialogue);
 
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7b, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7b, NPCNameList.ancientPortcullis + 1, ancientPortcullisDialogue);
-        addDialogueToList(LocationNameList.mineLvl2 + LocationNameList.section7b, NPCNameList.liftableGate + 2, liftableGateDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section7b, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section7b, NPCNameList.ancientPortcullis + 1, ancientPortcullisDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section7b, NPCNameList.liftableGate + 2, liftableGateDialogue);
 
         #endregion
 
         #region MineLvl_3
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section1b, NPCNameList.suspiciousWall,
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section1b, NPCNameList.suspiciousWall,
                                                                                   new Dialogue(new string[] { NPCNameList.suspiciousWall },
                                                                                   Resources.Load<TextAsset>(DialogueNameList.suspiciousWallPathML3)));
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section2b, NPCNameList.liftableGate, liftableGateDialogue);
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section2b, NPCNameList.ancientPortcullis+1, ancientPortcullisDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section2b, NPCNameList.liftableGate, liftableGateDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section2b, NPCNameList.ancientPortcullis+1, ancientPortcullisDialogue);
 
         #region MineLvl_3-3b
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.liftableGate, 
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.liftableGate, 
                                                             new Dialogue(new string[] 
                                                             { 
                                                                 "", 
@@ -625,22 +625,22 @@ public static class DialogueList
                                                                  Resources.Load<TextAsset>(DialogueNameList.ml3GuardBarricadePath)
                                                              }));
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardPazman, //unreachable, for pazman behind barricade
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardPazman, //unreachable, for pazman behind barricade
                                                             new Dialogue(new string[] { "", NPCNameList.guardPazman},
                                                              Resources.Load<TextAsset>(DialogueNameList.pazmanML3CampPath)));                                        
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardPazman+1, 
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardPazman+1, 
                                                             new Dialogue(new string[] { "", NPCNameList.guardPazman+1},
                                                              Resources.Load<TextAsset>(DialogueNameList.pazmanML3CampPath)));
                                                             
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardVirag, 
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardVirag, 
                                                             new Dialogue(new string[] { "", NPCNameList.guardVirag},
                                                              Resources.Load<TextAsset>(DialogueNameList.viragML3CampPath)));
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardReka, 
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardReka, 
                                                             new Dialogue(new string[] { "", NPCNameList.guardReka},
                                                              Resources.Load<TextAsset>(DialogueNameList.rekaML3CampPath)));
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.overseerGaspar, 
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.overseerGaspar, 
                                                             new Dialogue(new string[] 
                                                             { 
                                                                 "", 
@@ -654,7 +654,7 @@ public static class DialogueList
                                                              Resources.Load<TextAsset>(DialogueNameList.ml3GuardBarricadePath),
                                                              DialogueCombatInfoList.mineLvl3GuardsCombatInfo));
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.barricade, 
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.barricade, 
                                                             new Dialogue(new string[] 
                                                             { 
                                                                 "", 
@@ -670,14 +670,14 @@ public static class DialogueList
 
         #endregion
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section4b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section4b, NPCNameList.ancientPortcullis+1, ancientPortcullisDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section4b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section4b, NPCNameList.ancientPortcullis+1, ancientPortcullisDialogue);
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section5, NPCNameList.liftableRubble, liftableRubbleDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section5, NPCNameList.liftableRubble, liftableRubbleDialogue);
 
         #region MineLvl_3-Miner Camp
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.barricade, 
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.barricade, 
                                                             new Dialogue(new string[] 
                                                             { 
                                                                 "", 
@@ -688,7 +688,7 @@ public static class DialogueList
                                                             },
                                                              Resources.Load<TextAsset>(DialogueNameList.ml3MinerBarricadePath)));
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter, 
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter, 
                                                             new Dialogue(new string[] 
                                                             { 
                                                                 "", 
@@ -696,7 +696,7 @@ public static class DialogueList
                                                             },
                                                              Resources.Load<TextAsset>(DialogueNameList.ml3CarterPath)));
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter+1, 
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter+1, 
                                                             new Dialogue(new string[] 
                                                             { 
                                                                 "", 
@@ -704,7 +704,7 @@ public static class DialogueList
                                                             },
                                                              Resources.Load<TextAsset>(DialogueNameList.ml3CarterPath)));
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.guardMarcos, 
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.guardMarcos, 
                                                             new Dialogue(new string[] 
                                                             { 
                                                                 "", 
@@ -712,7 +712,7 @@ public static class DialogueList
                                                             },
                                                              Resources.Load<TextAsset>(DialogueNameList.ml3MarcosPath)));
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.nandor, 
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.nandor, 
                                                             new Dialogue(new string[] 
                                                             { 
                                                                 "", 
@@ -722,15 +722,15 @@ public static class DialogueList
 
         #endregion
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section6a, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section6a, NPCNameList.unstablePillar, unstablePillarDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section6a, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section6a, NPCNameList.unstablePillar, unstablePillarDialogue);
 
         #region MineLvl_3-7
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section7, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section7, NPCNameList.unstablePillar, unstablePillarDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section7, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section7, NPCNameList.unstablePillar, unstablePillarDialogue);
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section7, NPCNameList.rubble, 
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section7, NPCNameList.rubble, 
                                                                                 new Dialogue(new string[] { 
                                                                                                             NPCNameList.rubble,
                                                                                                             NPCNameList.rubble,
@@ -746,7 +746,7 @@ public static class DialogueList
                                                                                 Resources.Load<TextAsset>(DialogueNameList.pocketRubblePathML3),
                                                                                 DialogueCombatInfoList.breachRubbleCombatInfo));
 
-        addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section7, DialogueNameList.afterKillingGuardsMineLvl3Key, 
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section7, DialogueNameList.afterKillingGuardsMineLvl3Key, 
                                                                                 new Dialogue(new string[] { 
                                                                                                             NPCNameList.nandor,
                                                                                                             NPCNameList.carter,
@@ -756,7 +756,7 @@ public static class DialogueList
                                                                                                         },
                                                                                 Resources.Load<TextAsset>(DialogueNameList.afterKillingGuardsMineLvl3Path)));
 
-        // addDialogueToList(LocationNameList.mineLvl3 + LocationNameList.section7, NPCNameList.rubble+1, 
+        // addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section7, NPCNameList.rubble+1, 
         //                                                                         new Dialogue(new string[] { 
         //                                                                                                     NPCNameList.rubble+1,
         //                                                                                                     NPCNameList.rubble,
@@ -776,7 +776,7 @@ public static class DialogueList
 
         #region Manse
 
-            addDialogueToList(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.kende,
+            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.kende,
                                 new Dialogue(new string[]   { 
                                                                 NPCNameList.playerNamePlaceHolder, 
                                                                 NPCNameList.kende, 
@@ -789,11 +789,11 @@ public static class DialogueList
                                  Resources.Load<TextAsset>(DialogueNameList.kendeUponEnteringKitchensPathName), 
                                  DialogueCombatInfoList.kendeInKitchensCombatInfo));
 
-            addDialogueToList(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.imre+1,
+            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.imre+1,
                                 new Dialogue(new string[]   { NPCNameList.imre+1 }, 
                                  Resources.Load<TextAsset>(DialogueNameList.loyalImrePathName)));
 
-            addDialogueToList(LocationNameList.manseFirstFloor + LocationNameList.section3b, NPCNameList.beam,
+            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.beam,
                                 new Dialogue(new string[]   { 
                                                                 NPCNameList.playerNamePlaceHolder, 
                                                                 NPCNameList.beam,
@@ -805,12 +805,12 @@ public static class DialogueList
                                  Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName), 
                                  DialogueCombatInfoList.beamAndCsalanCombatInfo));
 
-            addDialogueToList(LocationNameList.manseSecondFloor + LocationNameList.section2c, NPCNameList.chiefTabor,
+            addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section2c, NPCNameList.chiefTabor,
                                 new Dialogue(new string[]   { NPCNameList.chiefTabor }, 
                                  Resources.Load<TextAsset>(DialogueNameList.chiefTaborManseSecondFloorPathName),
                                  DialogueCombatInfoList.taborCombatInfo));
 
-            addDialogueToList(LocationNameList.manseSecondFloor + LocationNameList.office, NPCNameList.director,
+            addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.director,
                                 new Dialogue(new string[]   { 
                                                                 NPCNameList.playerNamePlaceHolder,
                                                                 NPCNameList.director,
@@ -825,7 +825,7 @@ public static class DialogueList
         //                  new Dialogue(new string[] { "", "Director", "Page", "Carter", "Nándor" }, new GameObject[5], Resources.Load<TextAsset>(DialogueNameList.directorDefeatedConvoKey)));
 
 
-            addDialogueToList(LocationNameList.manseSecondFloor + LocationNameList.office, DialogueNameList.directorDefeatedConvoKey,
+            addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.office, DialogueNameList.directorDefeatedConvoKey,
                                 new Dialogue(new string[]   {   
                                                                 NPCNameList.playerNamePlaceHolder,
                                                                 NPCNameList.director,
@@ -835,7 +835,7 @@ public static class DialogueList
                                                             }, 
                                  Resources.Load<TextAsset>(DialogueNameList.directorDefeatedPathName)));
 
-            addDialogueToList(LocationNameList.manseSecondFloor + LocationNameList.office, NPCNameList.officeDoor,
+            addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.officeDoor,
                                 new Dialogue(new string[]   { NPCNameList.officeDoor }, 
                                 Resources.Load<TextAsset>(DialogueNameList.officeDoorPathName)));
 

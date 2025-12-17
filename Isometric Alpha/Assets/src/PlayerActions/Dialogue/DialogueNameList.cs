@@ -18,9 +18,9 @@ public static class DialogueNameList
     public const string seperatorChar = "/";
     public const string dialogueResourcesPathName = "Dialogue" + seperatorChar;
 
-    public const string campPathName = dialogueResourcesPathName + LocationNameList.camp + seperatorChar;
-    public const string campInteriorPathName = campPathName + LocationNameList.campInterior + seperatorChar;
-    public const string campExteriorPathName = campPathName + LocationNameList.campExterior + seperatorChar;
+    public const string campPathName = dialogueResourcesPathName + ZoneKeyList.lovashiCamp + seperatorChar;
+    public const string campInteriorPathName = campPathName + AreaNameList.lovashiCampInterior + seperatorChar;
+    public const string campExteriorPathName = campPathName + AreaNameList.lovashiCampExterior + seperatorChar;
 
     #region Interactables
     public const string interactablesPath = dialogueResourcesPathName + "Interactables" + seperatorChar;
@@ -221,7 +221,7 @@ public static class DialogueNameList
     #region Manse
 
     public const string mansePathName = dialogueResourcesPathName + LocationNameList.manse + seperatorChar;
-    public const string manseFirstFloorPathName =  mansePathName + LocationNameList.manseFirstFloor + seperatorChar;
+    public const string manseFirstFloorPathName =  mansePathName + ZoneKeyList.manseFirstFloor + seperatorChar;
 
     #region Manse-1F
 
@@ -242,7 +242,7 @@ public static class DialogueNameList
 
     #endregion
 
-    public const string manseSecondFloorPathName =  mansePathName + LocationNameList.manseSecondFloor + seperatorChar;
+    public const string manseSecondFloorPathName =  mansePathName + ZoneKeyList.manseSecondFloor + seperatorChar;
 
     #region Manse-2F
 

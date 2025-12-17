@@ -59,13 +59,13 @@ public static class TutorialColliderSpawnDetailsList
         #region MineLvl_2-1a
         list = new List<MultiTutorialColliderSpawnInfo>();
 
-        list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.mineLvl2 + LocationNameList.section1a, 
+        list.Add(new MultiTutorialColliderSpawnInfo(ZoneKeyList.mineLvl2 + LocationNameList.section1a, 
                                                     new Vector3Int(4,-4),
                                                     TutorialSequenceList.movableObjectTutorialSequenceKey,
                                                     TutorialSequenceList.movableObjectTutorialSeenFlag,
                                                     Constants.sizeFive, Axis.DescendingX));
 
-        tutorialSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section1a, list);
+        tutorialSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1a, list);
         #endregion
     }
 }

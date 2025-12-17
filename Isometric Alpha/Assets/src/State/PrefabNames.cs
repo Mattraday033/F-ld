@@ -146,6 +146,8 @@ public static class PrefabNames
     public const string mapTileName = "Map Tile";
     public const string nonInteractableMapTileName = "NonInteractable Map Tile";
     public const string mapPopUpWindow = "Map PopUp Window";
+    public const string worldMapPopUpWindow = "World Map PopUp Window";
+    public const string worldMapLandmark = "World Map Landmark";
 
     public const string descriptionPanelBuilder = "Description Panel Builder";
     public const string hoverDescriptionPanelBuilder = "Hover Description Panel Builder";
@@ -337,6 +339,12 @@ public static class PrefabNames
     public const string portcullis2x1Path =  doorsFolder + portcullis2x1SpriteName;
     public const string portcullis3x1SpriteName = "3x1Portcullis";
     public const string portcullis3x1Path =  doorsFolder + portcullis3x1SpriteName;
+
+    public const string mapTilesFolder = tilesFolder + "MapTiles/";
+
+    public const string manMadeFolder = mapTilesFolder + "manmade/";
+    public const string delverCampMapTile = manMadeFolder + "village_delver (3)";
+    public const string mineMapTile = manMadeFolder + "mine";
 
     #endregion
 }

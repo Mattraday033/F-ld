@@ -146,13 +146,13 @@ public static class AreaList
 
         string[] areasSharingHostilityWithCampExterior = new string[]
         {
-            LocationNameList.campInterior,
-            LocationNameList.manseFirstFloor,
-            LocationNameList.manseSecondFloor,
-            LocationNameList.pit
+            AreaNameList.lovashiCampInterior,
+            ZoneKeyList.manseFirstFloor,
+            ZoneKeyList.manseSecondFloor,
+            ZoneKeyList.pit
         };
 
-        allAreas.Add(LocationNameList.campExterior, new Area(LocationNameList.campExterior, scenesInCampExterior, areasSharingHostilityWithCampExterior, fastTravelContingentOnHostility));
+        allAreas.Add(AreaNameList.lovashiCampExterior, new Area(AreaNameList.lovashiCampExterior, scenesInCampExterior, areasSharingHostilityWithCampExterior, fastTravelContingentOnHostility));
 
         string[] scenesInCampInterior = new string[]
         {
@@ -177,19 +177,19 @@ public static class AreaList
 
         string[] areasSharingHostilityWithCampInterior = new string[]
         {
-            LocationNameList.campExterior,
-            LocationNameList.manseFirstFloor,
-            LocationNameList.manseSecondFloor,
-            LocationNameList.pit
+            AreaNameList.lovashiCampExterior,
+            ZoneKeyList.manseFirstFloor,
+            ZoneKeyList.manseSecondFloor,
+            ZoneKeyList.pit
         };
 
-        allAreas.Add(LocationNameList.campInterior, new Area(LocationNameList.campInterior, scenesInCampInterior, areasSharingHostilityWithCampInterior));
+        allAreas.Add(AreaNameList.lovashiCampInterior, new Area(AreaNameList.lovashiCampInterior, scenesInCampInterior, areasSharingHostilityWithCampInterior));
 
         string[] scenesInMineLvl1 = new string[]
         {
-            LocationNameList.mineLvl1 + LocationNameList.section1a,
-            LocationNameList.mineLvl1 + LocationNameList.section1b,
-            LocationNameList.mineLvl1 + LocationNameList.section1c
+            ZoneKeyList.mineLvl1 + LocationNameList.section1a,
+            ZoneKeyList.mineLvl1 + LocationNameList.section1b,
+            ZoneKeyList.mineLvl1 + LocationNameList.section1c
         };
 
         string[] areasSharingHostilityWithMineLvl1 = new string[]
@@ -197,22 +197,22 @@ public static class AreaList
 
         };
 
-        allAreas.Add(LocationNameList.mineLvl1, new Area(LocationNameList.mineLvl1, startsHostile, scenesInMineLvl1, areasSharingHostilityWithMineLvl1));
+        allAreas.Add(ZoneKeyList.mineLvl1, new Area(ZoneKeyList.mineLvl1, startsHostile, scenesInMineLvl1, areasSharingHostilityWithMineLvl1));
 
         string[] scenesInMineLvl2 = new string[]
         {
-            LocationNameList.mineLvl2 + LocationNameList.section1a,
-            LocationNameList.mineLvl2 + LocationNameList.section1b,
-            LocationNameList.mineLvl2 + LocationNameList.section1c,
-            LocationNameList.mineLvl2 + LocationNameList.section2a,
-            LocationNameList.mineLvl2 + LocationNameList.section2b,
-            LocationNameList.mineLvl2 + LocationNameList.section3a,
-            LocationNameList.mineLvl2 + LocationNameList.section3b,
-            LocationNameList.mineLvl2 + LocationNameList.section4,
-            LocationNameList.mineLvl2 + LocationNameList.section5,
-            LocationNameList.mineLvl2 + LocationNameList.section6,
-            LocationNameList.mineLvl2 + LocationNameList.section7a,
-            LocationNameList.mineLvl2 + LocationNameList.section7b
+            ZoneKeyList.mineLvl2 + LocationNameList.section1a,
+            ZoneKeyList.mineLvl2 + LocationNameList.section1b,
+            ZoneKeyList.mineLvl2 + LocationNameList.section1c,
+            ZoneKeyList.mineLvl2 + LocationNameList.section2a,
+            ZoneKeyList.mineLvl2 + LocationNameList.section2b,
+            ZoneKeyList.mineLvl2 + LocationNameList.section3a,
+            ZoneKeyList.mineLvl2 + LocationNameList.section3b,
+            ZoneKeyList.mineLvl2 + LocationNameList.section4,
+            ZoneKeyList.mineLvl2 + LocationNameList.section5,
+            ZoneKeyList.mineLvl2 + LocationNameList.section6,
+            ZoneKeyList.mineLvl2 + LocationNameList.section7a,
+            ZoneKeyList.mineLvl2 + LocationNameList.section7b
         };
 
         string[] areasSharingHostilityWithMineLvl2 = new string[]
@@ -220,22 +220,22 @@ public static class AreaList
 
         };
 
-        allAreas.Add(LocationNameList.mineLvl2, new Area(LocationNameList.mineLvl2, startsHostile, scenesInMineLvl2, areasSharingHostilityWithMineLvl2));
+        allAreas.Add(ZoneKeyList.mineLvl2, new Area(ZoneKeyList.mineLvl2, startsHostile, scenesInMineLvl2, areasSharingHostilityWithMineLvl2));
 
         string[] scenesInMineLvl3 = new string[]
         {
-            LocationNameList.mineLvl3 + LocationNameList.section1a,
-            LocationNameList.mineLvl3 + LocationNameList.section1b,
-            LocationNameList.mineLvl3 + LocationNameList.section2a,
-            LocationNameList.mineLvl3 + LocationNameList.section2b,
-            LocationNameList.mineLvl3 + LocationNameList.section3a,
-            LocationNameList.mineLvl3 + LocationNameList.section3b,
-            LocationNameList.mineLvl3 + LocationNameList.section4a,
-            LocationNameList.mineLvl3 + LocationNameList.section4b,
-            LocationNameList.mineLvl3 + LocationNameList.section5,
-            LocationNameList.mineLvl3 + LocationNameList.minerCamp,
-            LocationNameList.mineLvl3 + LocationNameList.section6a,
-            LocationNameList.mineLvl3 + LocationNameList.section7
+            ZoneKeyList.mineLvl3 + LocationNameList.section1a,
+            ZoneKeyList.mineLvl3 + LocationNameList.section1b,
+            ZoneKeyList.mineLvl3 + LocationNameList.section2a,
+            ZoneKeyList.mineLvl3 + LocationNameList.section2b,
+            ZoneKeyList.mineLvl3 + LocationNameList.section3a,
+            ZoneKeyList.mineLvl3 + LocationNameList.section3b,
+            ZoneKeyList.mineLvl3 + LocationNameList.section4a,
+            ZoneKeyList.mineLvl3 + LocationNameList.section4b,
+            ZoneKeyList.mineLvl3 + LocationNameList.section5,
+            ZoneKeyList.mineLvl3 + LocationNameList.minerCamp,
+            ZoneKeyList.mineLvl3 + LocationNameList.section6a,
+            ZoneKeyList.mineLvl3 + LocationNameList.section7
         };
 
         string[] areasSharingHostilityWithMineLvl3 = new string[]
@@ -243,84 +243,84 @@ public static class AreaList
 
         };
 
-        allAreas.Add(LocationNameList.mineLvl3, new Area(LocationNameList.mineLvl3, startsHostile, scenesInMineLvl3, areasSharingHostilityWithMineLvl3));
+        allAreas.Add(ZoneKeyList.mineLvl3, new Area(ZoneKeyList.mineLvl3, startsHostile, scenesInMineLvl3, areasSharingHostilityWithMineLvl3));
 
         string[] scenesInManseFirstFloor = new string[]
         {
-            LocationNameList.manseFirstFloor + LocationNameList.section1a,
-            LocationNameList.manseFirstFloor + LocationNameList.section1b,
-            LocationNameList.manseFirstFloor + LocationNameList.section1c,
-            LocationNameList.manseFirstFloor + LocationNameList.kitchens,
-            LocationNameList.manseFirstFloor + LocationNameList.section2a,
-            LocationNameList.manseFirstFloor + LocationNameList.section2b,
-            LocationNameList.manseFirstFloor + LocationNameList.section2c,
-            LocationNameList.manseFirstFloor + LocationNameList.stairsToPit,
-            LocationNameList.manseFirstFloor + LocationNameList.diningRoom,
-            LocationNameList.manseFirstFloor + LocationNameList.section3a,
-            LocationNameList.manseFirstFloor + LocationNameList.section3b,
-            LocationNameList.manseFirstFloor + LocationNameList.section3c,
-            LocationNameList.manseFirstFloor + LocationNameList.section3d,
-            LocationNameList.manseFirstFloor + LocationNameList.section3e
+            ZoneKeyList.manseFirstFloor + LocationNameList.section1a,
+            ZoneKeyList.manseFirstFloor + LocationNameList.section1b,
+            ZoneKeyList.manseFirstFloor + LocationNameList.section1c,
+            ZoneKeyList.manseFirstFloor + LocationNameList.kitchens,
+            ZoneKeyList.manseFirstFloor + LocationNameList.section2a,
+            ZoneKeyList.manseFirstFloor + LocationNameList.section2b,
+            ZoneKeyList.manseFirstFloor + LocationNameList.section2c,
+            ZoneKeyList.manseFirstFloor + LocationNameList.stairsToPit,
+            ZoneKeyList.manseFirstFloor + LocationNameList.diningRoom,
+            ZoneKeyList.manseFirstFloor + LocationNameList.section3a,
+            ZoneKeyList.manseFirstFloor + LocationNameList.section3b,
+            ZoneKeyList.manseFirstFloor + LocationNameList.section3c,
+            ZoneKeyList.manseFirstFloor + LocationNameList.section3d,
+            ZoneKeyList.manseFirstFloor + LocationNameList.section3e
 
         };
 
         string[] areasSharingHostilityWithManseFirstFloor = new string[]
         {
-            LocationNameList.manseSecondFloor,
-            LocationNameList.campExterior,
-            LocationNameList.campInterior,
-            LocationNameList.pit
+            ZoneKeyList.manseSecondFloor,
+            AreaNameList.lovashiCampExterior,
+            AreaNameList.lovashiCampInterior,
+            ZoneKeyList.pit
         };
 
-        allAreas.Add(LocationNameList.manseFirstFloor, new Area(LocationNameList.manseFirstFloor, scenesInManseFirstFloor, areasSharingHostilityWithManseFirstFloor));
+        allAreas.Add(ZoneKeyList.manseFirstFloor, new Area(ZoneKeyList.manseFirstFloor, scenesInManseFirstFloor, areasSharingHostilityWithManseFirstFloor));
 
         string[] scenesInManseSecondFloor = new string[]
         {
-            LocationNameList.manseSecondFloor + LocationNameList.section1a,
-            LocationNameList.manseSecondFloor + LocationNameList.section1b,
-            LocationNameList.manseSecondFloor + LocationNameList.section1c,
-            LocationNameList.manseSecondFloor + LocationNameList.office,
-            LocationNameList.manseSecondFloor + LocationNameList.section2a,
-            LocationNameList.manseSecondFloor + LocationNameList.section2b,
-            LocationNameList.manseSecondFloor + LocationNameList.section2c,
-            LocationNameList.manseSecondFloor + LocationNameList.section2d,
-            LocationNameList.manseSecondFloor + LocationNameList.section3a,
-            LocationNameList.manseSecondFloor + LocationNameList.section3b,
-            LocationNameList.manseSecondFloor + LocationNameList.section3c,
-            LocationNameList.manseSecondFloor + LocationNameList.stockroom
+            ZoneKeyList.manseSecondFloor + LocationNameList.section1a,
+            ZoneKeyList.manseSecondFloor + LocationNameList.section1b,
+            ZoneKeyList.manseSecondFloor + LocationNameList.section1c,
+            ZoneKeyList.manseSecondFloor + LocationNameList.office,
+            ZoneKeyList.manseSecondFloor + LocationNameList.section2a,
+            ZoneKeyList.manseSecondFloor + LocationNameList.section2b,
+            ZoneKeyList.manseSecondFloor + LocationNameList.section2c,
+            ZoneKeyList.manseSecondFloor + LocationNameList.section2d,
+            ZoneKeyList.manseSecondFloor + LocationNameList.section3a,
+            ZoneKeyList.manseSecondFloor + LocationNameList.section3b,
+            ZoneKeyList.manseSecondFloor + LocationNameList.section3c,
+            ZoneKeyList.manseSecondFloor + LocationNameList.stockroom
 
         };
 
         string[] areasSharingHostilityWithManseSecondFloor = new string[]
         {
-            LocationNameList.manseFirstFloor,
-            LocationNameList.campExterior,
-            LocationNameList.campInterior,
-            LocationNameList.pit
+            ZoneKeyList.manseFirstFloor,
+            AreaNameList.lovashiCampExterior,
+            AreaNameList.lovashiCampInterior,
+            ZoneKeyList.pit
         };
 
-        allAreas.Add(LocationNameList.manseSecondFloor, new Area(LocationNameList.manseSecondFloor, LocationNameList.manseFirstFloor, scenesInManseSecondFloor, areasSharingHostilityWithManseSecondFloor));
+        allAreas.Add(ZoneKeyList.manseSecondFloor, new Area(ZoneKeyList.manseSecondFloor, ZoneKeyList.manseFirstFloor, scenesInManseSecondFloor, areasSharingHostilityWithManseSecondFloor));
 
         string[] scenesInPit = new string[]
         {
-            LocationNameList.pit + LocationNameList.section1a,
-            LocationNameList.pit + LocationNameList.section1b,
-            LocationNameList.pit + LocationNameList.section2a,
-            LocationNameList.pit + LocationNameList.section2b,
-            LocationNameList.pit + LocationNameList.section2c,
-            LocationNameList.pit + LocationNameList.section2d
+            ZoneKeyList.pit + LocationNameList.section1a,
+            ZoneKeyList.pit + LocationNameList.section1b,
+            ZoneKeyList.pit + LocationNameList.section2a,
+            ZoneKeyList.pit + LocationNameList.section2b,
+            ZoneKeyList.pit + LocationNameList.section2c,
+            ZoneKeyList.pit + LocationNameList.section2d
 
         };
 
         string[] areasSharingHostilityWithPit = new string[]
         {
-            LocationNameList.campExterior,
-            LocationNameList.campInterior,
-            LocationNameList.manseFirstFloor,
-            LocationNameList.manseSecondFloor
+            AreaNameList.lovashiCampExterior,
+            AreaNameList.lovashiCampInterior,
+            ZoneKeyList.manseFirstFloor,
+            ZoneKeyList.manseSecondFloor
         };
 
-        allAreas.Add(LocationNameList.pit, new Area(LocationNameList.pit, LocationNameList.mineLvl3, startsHostile, scenesInPit, areasSharingHostilityWithPit));
+        allAreas.Add(ZoneKeyList.pit, new Area(ZoneKeyList.pit, ZoneKeyList.mineLvl3, startsHostile, scenesInPit, areasSharingHostilityWithPit));
 
     }
 
@@ -411,7 +411,7 @@ public static class AreaList
 	{
 		if (Flags.getFlag(FlagNameList.mineLvl2GuardsFinishedMove) && !Flags.getFlag(FlagNameList.mineLvl3BreachSealed))
 		{
-			if (!sceneName.Contains(LocationNameList.mineLvl3))
+			if (!sceneName.Contains(ZoneKeyList.mineLvl3))
 			{
 				return true;
 			}

@@ -491,7 +491,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(6, 1)));
         list.Add(new ButtonSpawnDetails(new Vector3Int(6, -1)));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl1 + LocationNameList.section1b, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl1 + LocationNameList.section1b, list);
 
         #endregion
 
@@ -503,7 +503,7 @@ public static class OOCSpawnDetailsList
     
         list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(-1, 4), Facing.SouthEast));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl1 + LocationNameList.section1c, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl1 + LocationNameList.section1c, list);
 
         #endregion
 
@@ -515,12 +515,12 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl2FirstSecretDoor, LocationNameList.mineLvl2, LocationNameList.section1a, Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl2FirstSecretDoor, ZoneKeyList.mineLvl2, LocationNameList.section1a, Constants.indexOne));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -3), TutorialSequenceList.firstHostilityTutorialSequenceKey,
                                                                           TutorialSequenceList.firstHostitilityTutorialSeenFlag));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section1a, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1a, list);
 
         #endregion
 
@@ -536,7 +536,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ShelfSpawnDetails(Constants.indexZero, new Vector3Int(11, 3), Facing.SouthWest));
         list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(4, 5), Facing.SouthEast));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section1b, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1b, list);
 
         #endregion
 
@@ -547,7 +547,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ShelfSpawnDetails(Constants.indexZero, new Vector3Int(-6, 2), Facing.SouthEast));
         list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(-3, 11), Facing.SouthWest));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section1c, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1c, list);
 
         #endregion
 
@@ -555,18 +555,18 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new CustomMouseHoverNPCSpawnDetails(NPCNameList.controlPanel, new Vector3Int(5, 3), LocationNameList.mineLvl2 + LocationNameList.section2a, PrefabNames.controlPanel, flipX, Constants.onTableHeightOffset*2));
+        list.Add(new CustomMouseHoverNPCSpawnDetails(NPCNameList.controlPanel, new Vector3Int(5, 3), ZoneKeyList.mineLvl2 + LocationNameList.section2a, PrefabNames.controlPanel, flipX, Constants.onTableHeightOffset*2));
         list.Add(new ShelfSpawnDetails(Constants.indexZero, new Vector3Int(5, 7), Facing.SouthWest));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.guardPazman, new Vector3Int(-1, 4), LocationNameList.mineLvl2 + LocationNameList.section2a));
+        list.Add(new NPCSpawnDetails(NPCNameList.guardPazman, new Vector3Int(-1, 4), ZoneKeyList.mineLvl2 + LocationNameList.section2a));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.guardReka, new Vector3Int(3, 9), LocationNameList.mineLvl2 + LocationNameList.section2a));
+        list.Add(new NPCSpawnDetails(NPCNameList.guardReka, new Vector3Int(3, 9), ZoneKeyList.mineLvl2 + LocationNameList.section2a));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.guardVirag, new Vector3Int(3, 6), LocationNameList.mineLvl2 + LocationNameList.section2a));
+        list.Add(new NPCSpawnDetails(NPCNameList.guardVirag, new Vector3Int(3, 6), ZoneKeyList.mineLvl2 + LocationNameList.section2a));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.overseerGaspar, new Vector3Int(0, 9), LocationNameList.mineLvl2 + LocationNameList.section2a));
+        list.Add(new NPCSpawnDetails(NPCNameList.overseerGaspar, new Vector3Int(0, 9), ZoneKeyList.mineLvl2 + LocationNameList.section2a));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section2a, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section2a, list);
 
         #endregion
 
@@ -581,7 +581,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(7, -5)));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section2b, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section2b, list);
 
         #endregion
 
@@ -604,7 +604,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new BookSpawnDetails(NPCNameList.diary, new Vector3Int(0, 13), PrefabNames.note, ItemList.mineGuardsDiaryIndex));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section3a, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section3a, list);
 
         #endregion
 
@@ -616,7 +616,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(-1, 5)));
         list.Add(new ButtonSpawnDetails(new Vector3Int(-4, 5)));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section3b, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section3b, list);
 
         #endregion
 
@@ -626,7 +626,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(7, 5), Facing.SouthWest));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section4, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section4, list);
 
         #endregion
 
@@ -692,7 +692,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ChestSpawnDetails(Constants.indexThree, new Vector3Int(6, -9), Facing.NorthWest));
                                 
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section5, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section5, list);
 
         #endregion
 
@@ -711,7 +711,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(4, 5), Facing.SouthWest));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section6, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section6, list);
 
         #endregion
 
@@ -724,7 +724,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(5, -2), Constants.indexTwo));
         list.Add(new ButtonSpawnDetails(new Vector3Int(-3, -9), Constants.indexThree));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7a, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section7a, list);
 
         #endregion
 
@@ -742,7 +742,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(-9, -2), Constants.indexOne));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7b, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section7b, list);
 
         #endregion
 
@@ -754,7 +754,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.section1a, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section1a, list);
 
         #endregion
 
@@ -762,7 +762,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3PuzzleDoor, LocationNameList.mineLvl3,  LocationNameList.section1b, Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3PuzzleDoor, ZoneKeyList.mineLvl3,  LocationNameList.section1b, Constants.indexOne));
 
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.mineLvl3Wall, new Vector3Int(0, -6), PrefabNames.mineLvl3WallSecretDoor, SecretDoorKeyList.mineLvl3PuzzleDoor));
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.mineLvl3Wall, new Vector3Int(1, -3), PrefabNames.mineLvl3WallSecretDoor, SecretDoorKeyList.mineLvl3PuzzleDoor));
@@ -790,7 +790,7 @@ public static class OOCSpawnDetailsList
         list.Add(new HiddenButtonSpawnDetails(new Vector3Int(9, -3), Constants.indexTwo, SecretDoorKeyList.mineLvl3PuzzleDoor));
         list.Add(new HiddenButtonSpawnDetails(new Vector3Int(7, 1), Constants.indexThree, SecretDoorKeyList.mineLvl3PuzzleDoor));
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3PuzzleFinished, LocationNameList.mineLvl3,  LocationNameList.section1b, Constants.indexTwo));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3PuzzleFinished, ZoneKeyList.mineLvl3,  LocationNameList.section1b, Constants.indexTwo));
 
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(new Vector3Int(12, -8), SecretDoorKeyList.mineLvl3PuzzleFinished));
   
@@ -802,7 +802,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(-5, -7), Facing.NorthWest));  
         list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(13, -11), Facing.SouthWest));  
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.section1b, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section1b, list);
 
         #endregion
 
@@ -849,7 +849,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(-1, -1), Facing.SouthEast));
         list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(0, -2), Facing.SouthWest));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.section2a, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section2a, list);
 
         #endregion
 
@@ -863,7 +863,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(4, 13), Constants.indexOne));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.section2b, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section2b, list);
 
         #endregion
 
@@ -871,7 +871,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.section3a, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section3a, list);
 
         #endregion
 
@@ -879,22 +879,22 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.barricade, new Vector3Int(5, 11), LocationNameList.mineLvl3 + LocationNameList.section3b));
+        list.Add(new NPCSpawnDetails(NPCNameList.barricade, new Vector3Int(5, 11), ZoneKeyList.mineLvl3 + LocationNameList.section3b));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.guardPazman, new Vector3Int(3, 10), LocationNameList.mineLvl3 + LocationNameList.section3b));
+        list.Add(new NPCSpawnDetails(NPCNameList.guardPazman, new Vector3Int(3, 10), ZoneKeyList.mineLvl3 + LocationNameList.section3b));
 
-        list.Add(new DependantSpawnDetails(NPCNameList.guardPazman+1, new Vector3Int(5, 10), LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.barricade));
+        list.Add(new DependantSpawnDetails(NPCNameList.guardPazman+1, new Vector3Int(5, 10), ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.barricade));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.guardReka, new Vector3Int(2, 7), LocationNameList.mineLvl3 + LocationNameList.section3b));
+        list.Add(new NPCSpawnDetails(NPCNameList.guardReka, new Vector3Int(2, 7), ZoneKeyList.mineLvl3 + LocationNameList.section3b));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.guardVirag, new Vector3Int(4, 5), LocationNameList.mineLvl3 + LocationNameList.section3b));
+        list.Add(new NPCSpawnDetails(NPCNameList.guardVirag, new Vector3Int(4, 5), ZoneKeyList.mineLvl3 + LocationNameList.section3b));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.overseerGaspar, new Vector3Int(6, 7), LocationNameList.mineLvl3 + LocationNameList.section3b));
+        list.Add(new NPCSpawnDetails(NPCNameList.overseerGaspar, new Vector3Int(6, 7), ZoneKeyList.mineLvl3 + LocationNameList.section3b));
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(6, 6), Facing.SouthWest));
         list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(6, 0), Facing.SouthEast));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.section3b, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section3b, list);
 
         #endregion
 
@@ -907,7 +907,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(8, 9), Facing.SouthWest));  
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.section4a, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section4a, list);
 
         #endregion
 
@@ -923,7 +923,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(1, 13), Constants.indexOne));  
         list.Add(new ButtonSpawnDetails(new Vector3Int(3, 11), Constants.indexOne));  
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.section4b, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section4b, list);
 
         #endregion
 
@@ -933,7 +933,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(20, 1), Facing.SouthWest));  
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.section5, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section5, list);
 
         #endregion
 
@@ -941,17 +941,17 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.barricade, new Vector3Int(3, 3), LocationNameList.mineLvl3 + LocationNameList.minerCamp));
+        list.Add(new NPCSpawnDetails(NPCNameList.barricade, new Vector3Int(3, 3), ZoneKeyList.mineLvl3 + LocationNameList.minerCamp));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.carter, new Vector3Int(1, 2), LocationNameList.mineLvl3 + LocationNameList.minerCamp));
+        list.Add(new NPCSpawnDetails(NPCNameList.carter, new Vector3Int(1, 2), ZoneKeyList.mineLvl3 + LocationNameList.minerCamp));
 
-        list.Add(new DependantSpawnDetails(NPCNameList.carter+1, new Vector3Int(3, 2), LocationNameList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.barricade));
+        list.Add(new DependantSpawnDetails(NPCNameList.carter+1, new Vector3Int(3, 2), ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.barricade));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(3, -1), LocationNameList.mineLvl3 + LocationNameList.minerCamp));
+        list.Add(new NPCSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(3, -1), ZoneKeyList.mineLvl3 + LocationNameList.minerCamp));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.nandor, new Vector3Int(4, 1), LocationNameList.mineLvl3 + LocationNameList.minerCamp));
+        list.Add(new NPCSpawnDetails(NPCNameList.nandor, new Vector3Int(4, 1), ZoneKeyList.mineLvl3 + LocationNameList.minerCamp));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.minerCamp, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, list);
 
         #endregion
 
@@ -975,7 +975,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.water, new Vector3Int(-7, -4), PrefabNames.water, SortingLayerManager.groundSortingLayerInfo, SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain));
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.water, new Vector3Int(-7, -5), PrefabNames.water, SortingLayerManager.groundSortingLayerInfo, SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain));
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain, LocationNameList.mineLvl3,  LocationNameList.section6a, Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain, ZoneKeyList.mineLvl3,  LocationNameList.section6a, Constants.indexOne));
 
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(2, 4), PrefabNames.stoneVaultableGap, Constants.onTableHeightOffset*10, SortingLayerManager.groundSortingLayerInfo, VaultableObject.diffThreeVaultableGap));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(0, 4), PrefabNames.stoneVaultableGap, Constants.onTableHeightOffset*10, SortingLayerManager.groundSortingLayerInfo, VaultableObject.diffThreeVaultableGap));
@@ -983,7 +983,7 @@ public static class OOCSpawnDetailsList
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-11, 2), PrefabNames.stoneVaultableGap, Constants.onTableHeightOffset*10, SortingLayerManager.groundSortingLayerInfo, VaultableObject.diffThreeVaultableGap));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-13, 2), PrefabNames.stoneVaultableGap, Constants.onTableHeightOffset*10, SortingLayerManager.groundSortingLayerInfo, VaultableObject.diffThreeVaultableGap));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.section6a, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section6a, list);
 
         #endregion
 
@@ -1000,7 +1000,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(new Vector3Int(-9, 1), SecretDoorKeyList.mineLvl3_7UnstablePillarHiddenTerrain));
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_7UnstablePillarHiddenTerrain, LocationNameList.mineLvl3,  LocationNameList.section7, Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_7UnstablePillarHiddenTerrain, ZoneKeyList.mineLvl3,  LocationNameList.section7, Constants.indexOne));
 
         blockerSpawnDetails = new List<ObstacleSpawnDetails>();
 
@@ -1021,8 +1021,8 @@ public static class OOCSpawnDetailsList
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-10, -9), PrefabNames.lavaVaultableGapHalf, SortingLayerManager.buttonSortingLayerInfo, VaultableObject.diffThreeVaultableGap));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-10, -11), PrefabNames.lavaVaultableGapHalf, SortingLayerManager.groundSortingLayerInfo, VaultableObject.diffThreeVaultableGap));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.rubble, new Vector3Int(-6, 9), LocationNameList.mineLvl3 + LocationNameList.section7, PrefabNames.lowStalagmite));
-        list.Add(new NPCSpawnDetails(NPCNameList.rubble, new Vector3Int(-7, 9), LocationNameList.mineLvl3 + LocationNameList.section7, PrefabNames.lowStalagmite));
+        list.Add(new NPCSpawnDetails(NPCNameList.rubble, new Vector3Int(-6, 9), ZoneKeyList.mineLvl3 + LocationNameList.section7, PrefabNames.lowStalagmite));
+        list.Add(new NPCSpawnDetails(NPCNameList.rubble, new Vector3Int(-7, 9), ZoneKeyList.mineLvl3 + LocationNameList.section7, PrefabNames.lowStalagmite));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardPazman, new Vector3Int(-6, 6)));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardReka, new Vector3Int(-8, 7)));
@@ -1034,9 +1034,9 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(-9, 3)));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardMarcos+1, new Vector3Int(-6, 6)));
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_7PocketSealedRubble, LocationNameList.mineLvl3,  LocationNameList.section7, Constants.indexTwo));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_7PocketSealedRubble, ZoneKeyList.mineLvl3,  LocationNameList.section7, Constants.indexTwo));
 
-        oocSpawnDetailsDict.Add(LocationNameList.mineLvl3 + LocationNameList.section7, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section7, list);
 
         #endregion
 
@@ -1048,9 +1048,9 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.kende, new Vector3Int(0, 1), LocationNameList.manseFirstFloor + LocationNameList.kitchens, new KendeInKitchenDuringRiotScript()));
+        list.Add(new NPCSpawnDetails(NPCNameList.kende, new Vector3Int(0, 1), ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, new KendeInKitchenDuringRiotScript()));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.imre+1, new Vector3Int(0, -3), LocationNameList.manseFirstFloor + LocationNameList.kitchens)); //loyal imre
+        list.Add(new NPCSpawnDetails(NPCNameList.imre+1, new Vector3Int(0, -3), ZoneKeyList.manseFirstFloor + LocationNameList.kitchens)); //loyal imre
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.imre+2, new Vector3Int(0, 0))); //disloyal imre
 
@@ -1066,7 +1066,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveFive, new Vector3Int(-5, 4))); 
 
 
-        oocSpawnDetailsDict.Add(LocationNameList.manseFirstFloor + LocationNameList.kitchens, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, list);
 
         #endregion
 
@@ -1074,7 +1074,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.beam, new Vector3Int(3, 9), LocationNameList.manseFirstFloor + LocationNameList.section3b, new BeamAndCsalanInManseScript()));
+        list.Add(new NPCSpawnDetails(NPCNameList.beam, new Vector3Int(3, 9), ZoneKeyList.manseFirstFloor + LocationNameList.section3b, new BeamAndCsalanInManseScript()));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.csalan, new Vector3Int(5, 8))); 
 
@@ -1084,7 +1084,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.horse+2, new Vector3Int(1, 6)));  
 
-        oocSpawnDetailsDict.Add(LocationNameList.manseFirstFloor + LocationNameList.section3b, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, list);
 
         #endregion
 
@@ -1096,18 +1096,18 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(3, 0), LocationNameList.manseSecondFloor + LocationNameList.section2c, new ChiefTaborManseSecondFloorScript()));
+        list.Add(new NPCSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(3, 0), ZoneKeyList.manseSecondFloor + LocationNameList.section2c, new ChiefTaborManseSecondFloorScript()));
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(3, -4), Facing.SouthWest, new KeyHalfScript()));
 
-        oocSpawnDetailsDict.Add(LocationNameList.manseSecondFloor + LocationNameList.section2c, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section2c, list);
 
         #endregion
 
         #region Manse-2F-Office
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.director, new Vector3Int(2, -1), LocationNameList.manseSecondFloor + LocationNameList.office));
+        list.Add(new NPCSpawnDetails(NPCNameList.director, new Vector3Int(2, -1), ZoneKeyList.manseSecondFloor + LocationNameList.office));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(-3, -3))); 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.nandor, new Vector3Int(-3, 0))); 
@@ -1115,9 +1115,9 @@ public static class OOCSpawnDetailsList
 
         list.Add(new BookSpawnDetails(NPCNameList.orders, new Vector3Int(-6, 0), PrefabNames.note, ItemList.orderTranscriptIndex));
         
-        // list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchThree, LocationNameList.manseSecondFloor + LocationNameList.office, Constants.indexOne));
+        // list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchThree, ZoneKeyList.manseSecondFloor + LocationNameList.office, Constants.indexOne));
 
-        oocSpawnDetailsDict.Add(LocationNameList.manseSecondFloor + LocationNameList.office, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.office, list);
 
         #endregion
 

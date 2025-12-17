@@ -42,7 +42,7 @@ public static class ButtonScriptList
 
         list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeTwo, NPCNameList.awkwardRubble));
 
-        scriptDict.Add(LocationNameList.mineLvl1 + LocationNameList.section1b, list);
+        scriptDict.Add(ZoneKeyList.mineLvl1 + LocationNameList.section1b, list);
 
         #endregion
 
@@ -56,7 +56,7 @@ public static class ButtonScriptList
 
         list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeOne, NPCNameList.ancientPortcullis));
 
-        scriptDict.Add(LocationNameList.mineLvl2 + LocationNameList.section2b, list);
+        scriptDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section2b, list);
 
         #endregion
         #region MineLvl_2-3a
@@ -66,7 +66,7 @@ public static class ButtonScriptList
         list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeTwo, NPCNameList.awkwardRubble));
         list.Add(new OpenGateButtonLogicScript(Constants.indexOne, Constants.sizeTwo, NPCNameList.awkwardRubble));
 
-        scriptDict.Add(LocationNameList.mineLvl2 + LocationNameList.section3a, list);
+        scriptDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section3a, list);
 
         #endregion
         #region MineLvl_2-3b
@@ -75,7 +75,7 @@ public static class ButtonScriptList
 
         list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeThree, NPCNameList.ancientPortcullis));
 
-        scriptDict.Add(LocationNameList.mineLvl2 + LocationNameList.section3b, list);
+        scriptDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section3b, list);
 
         #endregion
 
@@ -107,7 +107,7 @@ public static class ButtonScriptList
 
         list.Add(new OnOffButtonLogicScript(NPCNameList.ancientPortcullis, gatesPerButton, gatesOpenAtStart));
 
-        scriptDict.Add(LocationNameList.mineLvl2 + LocationNameList.section6, list);
+        scriptDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section6, list);
 
         #endregion
 
@@ -120,7 +120,7 @@ public static class ButtonScriptList
         list.Add(new OpenGateButtonLogicScript(Constants.indexTwo, Constants.sizeOne, NPCNameList.ancientPortcullis));
         list.Add(new OpenGateButtonLogicScript(Constants.indexThree, Constants.sizeOne, NPCNameList.ancientPortcullis));
 
-        scriptDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7a, list);
+        scriptDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section7a, list);
 
         #endregion
 
@@ -131,7 +131,7 @@ public static class ButtonScriptList
         list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeTwo, NPCNameList.awkwardRubble));
         list.Add(new OpenGateButtonLogicScript(Constants.indexOne, Constants.sizeOne, NPCNameList.ancientPortcullis));
 
-        scriptDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7b, list);
+        scriptDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section7b, list);
 
         #endregion   
         #endregion      
@@ -148,7 +148,7 @@ public static class ButtonScriptList
                                             SecretDoorKeyList.mineLvl3PuzzleFinished,
                                             ColorList.mineLvl3RubbleColor));
 
-        scriptDict.Add(LocationNameList.mineLvl3 + LocationNameList.section1b, list);
+        scriptDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section1b, list);
 
         #endregion
 
@@ -160,7 +160,7 @@ public static class ButtonScriptList
 
         list.Add(new OpenGateButtonLogicScript(Constants.indexOne, Constants.sizeOne, NPCNameList.ancientPortcullis));
 
-        scriptDict.Add(LocationNameList.mineLvl3 + LocationNameList.section2b, list);
+        scriptDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section2b, list);
 
         #endregion
 
@@ -172,7 +172,7 @@ public static class ButtonScriptList
 
         list.Add(new OpenGateButtonLogicScript(Constants.indexOne, Constants.sizeOne, NPCNameList.ancientPortcullis));
 
-        scriptDict.Add(LocationNameList.mineLvl3 + LocationNameList.section4b, list);
+        scriptDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section4b, list);
 
         #endregion
         #region MineLvl_3-6a
@@ -181,7 +181,7 @@ public static class ButtonScriptList
 
         list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeSeven, NPCNameList.ancientPortcullis));
 
-        scriptDict.Add(LocationNameList.mineLvl3 + LocationNameList.section6a, list);
+        scriptDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section6a, list);
 
         #endregion
         #region MineLvl_3-7
@@ -190,7 +190,7 @@ public static class ButtonScriptList
 
         list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeSix, NPCNameList.ancientPortcullis));
 
-        scriptDict.Add(LocationNameList.mineLvl3 + LocationNameList.section7, list);
+        scriptDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section7, list);
 
         #endregion
         #endregion     

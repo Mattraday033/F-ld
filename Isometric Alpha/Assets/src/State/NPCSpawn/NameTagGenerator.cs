@@ -17,8 +17,11 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
 	private void Awake()
 	{
-        outline = new SpriteOutline();
-        outline.setSpriteRenderer(spriteRenderer);
+        if(spriteRenderer != null)
+        {
+            outline = new SpriteOutline();
+            outline.setSpriteRenderer(spriteRenderer); 
+        }
 
         INonRevealableNameSource nonRevealableNameSource = GetComponent<INonRevealableNameSource>();
 
@@ -102,7 +105,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
 	public void onReveal(bool toggleReveal)
 	{
-        if(!nameSourceRevealable())
+        if(!nameSourceRevealable() || outline == null)
         {
             return;
         }
@@ -156,7 +159,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 		return ColorList.canBeInteractedWith;
 	}
 
-	private void spawnNameTag()
+	public void spawnNameTag()
 	{
         if(gameObject.GetComponent<RectTransform>() == null)
         {
@@ -176,7 +179,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
         return DialogueList.scrubNameOfEndNumbers(nameSource.getName());
     }
 
-    private void destroyNameTag()
+    public void destroyNameTag()
     {
         if (nameTag != null)
         {
@@ -204,7 +207,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
                 eventData.Use();
             }
 
-            if(!RevealManager.currentlyRevealed)
+            if(!RevealManager.currentlyRevealed && outline != null)
             {
                 outline.createOutline(getRevealColor());
             }
@@ -217,7 +220,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 	{
 		if (!ignoreHover)
 		{
-            if(!RevealManager.currentlyRevealed)
+            if(!RevealManager.currentlyRevealed && outline != null)
             {
                 outline.removeOutline();
             }

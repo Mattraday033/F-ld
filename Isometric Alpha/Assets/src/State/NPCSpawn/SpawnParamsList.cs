@@ -512,7 +512,7 @@ public static class SpawnParamsList
 
         #region MineLvl_2-2a
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardPazman),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardPazman),
                                         new InteractableSpawnParams(new StartSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.mineLvl2GuardsFinishedMove
                                                                                                           }),
@@ -520,7 +520,7 @@ public static class SpawnParamsList
                                                                                                             FlagNameList.mineLvl3GuardsInParty
                                                                                                           }), spawnWhileHostile));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardVirag),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardVirag),
                                         new InteractableSpawnParams(new StartSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.mineLvl2GuardsFinishedMove
                                                                                                           }),
@@ -528,7 +528,7 @@ public static class SpawnParamsList
                                                                                                             FlagNameList.mineLvl3GuardsInParty
                                                                                                            }), spawnWhileHostile));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardReka),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardReka),
                                         new InteractableSpawnParams(new StartSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.mineLvl2GuardsFinishedMove
                                                                                                           }),
@@ -536,7 +536,7 @@ public static class SpawnParamsList
                                                                                                             FlagNameList.mineLvl3GuardsInParty
                                                                                                            }), spawnWhileHostile));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl2 + LocationNameList.section2a, NPCNameList.overseerGaspar),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl2 + LocationNameList.section2a, NPCNameList.overseerGaspar),
                                         new InteractableSpawnParams(new StartSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.mineLvl2GuardsFinishedMove
                                                                                                           }),
@@ -548,7 +548,7 @@ public static class SpawnParamsList
 
         #region MineLvl_2-3a
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl2 + LocationNameList.section3a, NPCNameList.diary),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl2 + LocationNameList.section3a, NPCNameList.diary),
                                         new StatBasedSpawnParams(PrimaryStat.Wisdom, Constants.statLevelTwo,
                                         new StopSpawningFlagList(new string[] { BookList.mineGuardsJournalReadFlag }), spawnWhileHostile));
 
@@ -556,7 +556,7 @@ public static class SpawnParamsList
 
         #region MineLvl_3-3b
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardPazman),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardPazman),
                                         new InteractableSpawnParams(new StartSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.mineLvl3ClearedCratesToGuards
                                                                                                           }),
@@ -566,25 +566,25 @@ public static class SpawnParamsList
                                                                                                             FlagNameList.mineLvl3ConvincedRekaAndPazman
                                                                                                           }), spawnWhileHostile));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardVirag),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardVirag),
                                         new InteractableSpawnParams(new StopSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.mineLvl3GuardsInParty, 
                                                                                                             FlagNameList.mineLvl2GuardsMovedToSecondLevelGate 
                                                                                                            }), spawnWhileHostile));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardReka),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardReka),
                                         new InteractableSpawnParams(new StopSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.mineLvl3GuardsInParty, 
                                                                                                             FlagNameList.mineLvl2GuardsMovedToSecondLevelGate 
                                                                                                            }), spawnWhileHostile));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.overseerGaspar),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.overseerGaspar),
                                         new InteractableSpawnParams(new StopSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.mineLvl3GuardsInParty, 
                                                                                                             FlagNameList.mineLvl2GuardsMovedToSecondLevelGate 
                                                                                                            }), spawnWhileHostile));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.section3b, NPCNameList.barricade),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.barricade),
                                         new InteractableSpawnParams(new StopSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.mineLvl3ClearedCratesToGuards
                                                                                                            }), spawnWhileHostile));
@@ -593,7 +593,7 @@ public static class SpawnParamsList
 
         #region MineLvl_3-Miner Camp
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter),
                                         new PartyMemberSpawnParams(new StartSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.mineLvl3ClearedCratesToMiners
                                                                                                           }),
@@ -602,25 +602,25 @@ public static class SpawnParamsList
                                                                                                             FlagNameList.mineLvl3BreachSealed
                                                                                                           }), spawnWhileHostile));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter+1),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter+1),
                                         new PartyMemberSpawnParams( new StopSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.mineLvl3ClearedCratesToMiners
                                                                                                           }), spawnWhileHostile));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.nandor),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.nandor),
                                         new PartyMemberSpawnParams(new StopSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.directorDefeated, 
                                                                                                             FlagNameList.mineLvl3BreachSealed
                                                                                                            }), spawnWhileHostile));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.guardMarcos),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.guardMarcos),
                                         new InteractableSpawnParams(new StopSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.directorDefeated, 
                                                                                                             FlagNameList.mineLvl3BreachSealed,
                                                                                                             FlagNameList.mineLvl3MarcosAgreedToIgniteJelly
                                                                                                            }), spawnWhileHostile));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.barricade),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.barricade),
                                         new InteractableSpawnParams(new StopSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.mineLvl3ClearedCratesToMiners
                                                                                                            }), spawnWhileHostile));
@@ -628,12 +628,12 @@ public static class SpawnParamsList
 
         #region MineLvl_3-7
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.section7, NPCNameList.rubble),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.section7, NPCNameList.rubble),
                                         new InteractableSpawnParams(new StopSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.mineLvl3BreachSealed
                                                                                                           }), spawnWhileHostile));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.mineLvl3 + LocationNameList.section7, NPCNameList.rubble+1),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.section7, NPCNameList.rubble+1),
                                         new InteractableSpawnParams(new StopSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.mineLvl3BreachSealed
                                                                                                           }), spawnWhileHostile));
@@ -648,34 +648,34 @@ public static class SpawnParamsList
 
         #region Manse-1F-Kitchens
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.kende),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.kende),
                                         new InteractableSpawnParams(spawnWhileHostile));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.imre+1), //Loyal Imre
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.imre+1), //Loyal Imre
                                         new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.convincedImre }), spawnWhileHostile));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.imre+2), //Disloyal Imre
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.imre+2), //Disloyal Imre
                                         new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.terrifiedImre }),
                                                                     new StopSpawningFlagList(new string[] { FlagNameList.convincedImre }), spawnWhileHostile));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.pan),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.pan),
                                         new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.convincedImre }), spawnWhileHostile));
 
         StopSpawningFlagList stopSpawningAfterKendeKitchenConvo = new StopSpawningFlagList(new string[] { FlagNameList.kendeUponEnteringKitchens });
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.guard),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.guard),
                                         new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slave),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slave),
                                         new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveOne),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveOne),
                                         new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveTwo),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveTwo),
                                         new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveThree),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveThree),
                                         new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveFour),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveFour),
                                         new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveFive),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveFive),
                                         new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
         #endregion
 
@@ -683,19 +683,19 @@ public static class SpawnParamsList
 
         StopSpawningFlagList killedHorses = new StopSpawningFlagList(new string[] { FlagNameList.foughtHorsesInManse });
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.section3b, NPCNameList.beam),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.beam),
                                         new InteractableSpawnParams(killedHorses, spawnWhileHostile));
         
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.section3b, NPCNameList.csalan),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.csalan),
                                         new InteractableSpawnParams(killedHorses, spawnWhileHostile));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse),
                                         new InteractableSpawnParams(killedHorses, spawnWhileHostile));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse+1),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse+1),
                                         new InteractableSpawnParams(killedHorses, spawnWhileHostile));
                                     
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse+2),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse+2),
                                         new InteractableSpawnParams(killedHorses, spawnWhileHostile));
         #endregion
 
@@ -705,7 +705,7 @@ public static class SpawnParamsList
 
         #region Manse-2F-2b
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.manseSecondFloor + LocationNameList.section2c, NPCNameList.chiefTabor),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseSecondFloor + LocationNameList.section2c, NPCNameList.chiefTabor),
                                         new InteractableSpawnParams(new StopSpawningFlagList(new string[] { FlagNameList.acceptedTaborsSurrenderAfterDirectorFight, FlagNameList.killedTaborInManse}),spawnWhileHostile));
 
         #endregion

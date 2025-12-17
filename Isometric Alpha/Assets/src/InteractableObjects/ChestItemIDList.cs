@@ -40,7 +40,7 @@ public static class ChestItemIDList
         list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.malletIndex));
         list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rationsIndex, 3));
 
-        chestItemIDList.Add(LocationNameList.mineLvl1 + LocationNameList.section1c, list);
+        chestItemIDList.Add(ZoneKeyList.mineLvl1 + LocationNameList.section1c, list);
 
         #endregion
 
@@ -53,7 +53,7 @@ public static class ChestItemIDList
         list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rockCakeIndex, 2));
         list.Add(new ItemListID(ItemList.armorListIndex, ItemList.leatherBootsIndex));
 
-        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section1b, list);
+        chestItemIDList.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1b, list);
 
         #endregion
 
@@ -64,7 +64,7 @@ public static class ChestItemIDList
         list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rockCakeIndex, 2));
         list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.bronzeDirkIndex));
 
-        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section1c, list);
+        chestItemIDList.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1c, list);
 
         #endregion
 
@@ -74,7 +74,7 @@ public static class ChestItemIDList
 
         list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rockCakeIndex, 3));
 
-        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section2a, list);
+        chestItemIDList.Add(ZoneKeyList.mineLvl2 + LocationNameList.section2a, list);
 
         #endregion
 
@@ -87,7 +87,7 @@ public static class ChestItemIDList
         list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.lightPickIndex));
         list.Add(new ItemListID(ItemList.armorListIndex, ItemList.paddedArmorIndex));
 
-        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section2b, list);
+        chestItemIDList.Add(ZoneKeyList.mineLvl2 + LocationNameList.section2b, list);
 
         #endregion
 
@@ -97,7 +97,7 @@ public static class ChestItemIDList
 
         list.Add(new ItemListID(ItemList.armorListIndex, ItemList.plumedHelmetIndex));
 
-        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section3a, list);
+        chestItemIDList.Add(ZoneKeyList.mineLvl2 + LocationNameList.section3a, list);
 
         #endregion
 
@@ -107,7 +107,7 @@ public static class ChestItemIDList
 
         list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.bronzeBarIndex));
 
-        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section4, list);
+        chestItemIDList.Add(ZoneKeyList.mineLvl2 + LocationNameList.section4, list);
 
         #endregion
 
@@ -120,7 +120,7 @@ public static class ChestItemIDList
         list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.wickedKnifeIndex));
         list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.chokegrassBombIndex, Constants.sizeTwo));
 
-        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section5, list);
+        chestItemIDList.Add(ZoneKeyList.mineLvl2 + LocationNameList.section5, list);
 
         #endregion
 
@@ -130,7 +130,7 @@ public static class ChestItemIDList
 
         list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.staffIndex));
 
-        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section6, list);
+        chestItemIDList.Add(ZoneKeyList.mineLvl2 + LocationNameList.section6, list);
 
         #endregion
 
@@ -141,7 +141,7 @@ public static class ChestItemIDList
         list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rockCakeIndex));
         list.Add(new ItemListID(ItemList.questItemListIndex, ItemList.winchIndex));
     
-        chestItemIDList.Add(LocationNameList.mineLvl2 + LocationNameList.section7b, list);
+        chestItemIDList.Add(ZoneKeyList.mineLvl2 + LocationNameList.section7b, list);
 
         #endregion
 
@@ -156,7 +156,7 @@ public static class ChestItemIDList
         list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rockCakeIndex, Constants.sizeTwo));
         list.Add(new ItemListID(ItemList.armorListIndex, ItemList.delversDreamIndex));
 
-        chestItemIDList.Add(LocationNameList.mineLvl3 + LocationNameList.section1b, list);
+        chestItemIDList.Add(ZoneKeyList.mineLvl3 + LocationNameList.section1b, list);
 
         #endregion
 
@@ -167,7 +167,7 @@ public static class ChestItemIDList
         list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.heavyPickIndex));
         list.Add(new ItemListID(ItemList.armorListIndex, ItemList.leatherBootsIndex));
 
-        chestItemIDList.Add(LocationNameList.mineLvl3 + LocationNameList.section2a, list);
+        chestItemIDList.Add(ZoneKeyList.mineLvl3 + LocationNameList.section2a, list);
 
         #endregion
 
@@ -178,7 +178,7 @@ public static class ChestItemIDList
         list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rationsIndex, Constants.sizeFive));
         list.Add(new ItemListID(ItemList.armorListIndex, ItemList.bronzeBadgeIndex));
 
-        chestItemIDList.Add(LocationNameList.mineLvl3 + LocationNameList.section3b, list);
+        chestItemIDList.Add(ZoneKeyList.mineLvl3 + LocationNameList.section3b, list);
 
         #endregion
 
@@ -188,7 +188,7 @@ public static class ChestItemIDList
 
         list.Add(new ItemListID(ItemList.armorListIndex, ItemList.leatherGlovesIndex));
 
-        chestItemIDList.Add(LocationNameList.mineLvl3 + LocationNameList.section4a, list);
+        chestItemIDList.Add(ZoneKeyList.mineLvl3 + LocationNameList.section4a, list);
 
         #endregion
 
@@ -198,7 +198,7 @@ public static class ChestItemIDList
 
         list.Add(new ItemListID(ItemList.armorListIndex, ItemList.paddedArmorIndex));
 
-        chestItemIDList.Add(LocationNameList.mineLvl3 + LocationNameList.section5, list);
+        chestItemIDList.Add(ZoneKeyList.mineLvl3 + LocationNameList.section5, list);
 
         #endregion
 
@@ -209,7 +209,7 @@ public static class ChestItemIDList
         list.Add(new ItemListID(ItemList.treasureItemListIndex, ItemList.ironNuggetIndex));
         list.Add(new ItemListID(ItemList.armorListIndex, ItemList.bronzeHelmetIndex));
 
-        chestItemIDList.Add(LocationNameList.mineLvl3 + LocationNameList.section6a, list);
+        chestItemIDList.Add(ZoneKeyList.mineLvl3 + LocationNameList.section6a, list);
 
         #endregion
         #region MineLvl_3-7
@@ -218,7 +218,7 @@ public static class ChestItemIDList
 
         list.Add(new ItemListID(ItemList.armorListIndex, ItemList.salvagedGuardGlovesIndex));
 
-        chestItemIDList.Add(LocationNameList.mineLvl3 + LocationNameList.section7, list);
+        chestItemIDList.Add(ZoneKeyList.mineLvl3 + LocationNameList.section7, list);
 
         #endregion
         #endregion
@@ -237,7 +237,7 @@ public static class ChestItemIDList
 
         list.Add(new ItemListID(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyFrontIndex));
 
-        chestItemIDList.Add(LocationNameList.manseSecondFloor + LocationNameList.section2c, list);
+        chestItemIDList.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section2c, list);
 
         #endregion
 

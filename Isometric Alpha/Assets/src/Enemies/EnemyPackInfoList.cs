@@ -285,7 +285,7 @@ public static class EnemyPackInfoList
 
         list.Add(twoGiantBatsThreeBatSwarmsOneArmoredBat);
 
-        enemyPackInfoDict.Add(LocationNameList.mineLvl1 + LocationNameList.section1b, list);
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl1 + LocationNameList.section1b, list);
         #endregion
 
         #region MineLvl_2-1b
@@ -293,7 +293,7 @@ public static class EnemyPackInfoList
 
         list.Add(oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat);
 
-        enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section1b, list);
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1b, list);
         #endregion
 
         #region MineLvl_2-1c
@@ -305,7 +305,7 @@ public static class EnemyPackInfoList
         list.Add(oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat);
         list.Add(twoGiantBatsThreeBatSwarmsOneArmoredBat);
 
-        enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section1c, list);
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1c, list);
         #endregion
 
         #region MineLvl_2-2b
@@ -313,7 +313,7 @@ public static class EnemyPackInfoList
 
         list.Add(twoArmoredBatsOneDenMotherOneGiantBatTwoBatSwarm);
 
-        enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section2b, list);
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section2b, list);
         #endregion
 
         #region MineLvl_2-3a
@@ -321,7 +321,7 @@ public static class EnemyPackInfoList
 
         list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
 
-        enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section3a, list);
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section3a, list);
         #endregion
 
         #region MineLvl_2-3b
@@ -331,7 +331,7 @@ public static class EnemyPackInfoList
         list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
         list.Add(oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat);
 
-        enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section3b, list);
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section3b, list);
         #endregion
 
         #region MineLvl_2-4
@@ -342,7 +342,7 @@ public static class EnemyPackInfoList
         list.Add(twoArmoredBatsOneDenMotherOneGiantBatTwoBatSwarm);
         list.Add(threeDenMothersThreeBatSwarmsOneArmoredBat);
 
-        enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section4, list);
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section4, list);
         #endregion
 
        #region MineLvl_2-5
@@ -351,7 +351,7 @@ public static class EnemyPackInfoList
         list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
         list.Add(twoArmoredBatsOneDenMotherOneGiantBatTwoBatSwarm);
 
-        enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section5, list);
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section5, list);
         #endregion
 
         #region MineLvl_2-7b
@@ -363,7 +363,7 @@ public static class EnemyPackInfoList
 
         list.Add(caveMatronBatBoss);
 
-        enemyPackInfoDict.Add(LocationNameList.mineLvl2 + LocationNameList.section7b, list);
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section7b, list);
         #endregion
 
 
@@ -373,7 +373,7 @@ public static class EnemyPackInfoList
         list.Add(testOneOfEach);
         list.Add(testOneOfEach);
 
-        enemyPackInfoDict.Add(LocationNameList.mineLvl3 + LocationNameList.section1a, list);
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section1a, list);
         #endregion
         #endregion
 
@@ -389,7 +389,7 @@ public static class EnemyPackInfoList
 
         list.Add(honorguardCaptainBossFight);
 
-        enemyPackInfoDict.Add(LocationNameList.manseSecondFloor + LocationNameList.section3b, list);
+        enemyPackInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, list);
 
         #endregion
 

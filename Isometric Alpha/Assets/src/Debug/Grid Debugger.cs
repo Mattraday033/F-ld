@@ -16,7 +16,7 @@ public class GridDebugger : MonoBehaviour
 
     private GameObject parentObject;
 
-    void Start()
+    public void Start()
     {
         if (Application.isEditor && State.enableGridDebugger)
         {

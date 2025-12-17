@@ -23,6 +23,7 @@ public enum PopUpType	{
                             Tutorial = 16,
 							Notification = 17,
 							Map = 18,
+							WorldMap = 19
 						}
 
 public class PopUpButton : MonoBehaviour 
@@ -153,6 +154,9 @@ public class PopUpButton : MonoBehaviour
 				
 			case PopUpType.Map:
 				return PrefabNames.mapPopUpWindow;
+
+			case PopUpType.WorldMap:
+				return PrefabNames.worldMapPopUpWindow;
 
             default:
 				throw new IOException("Unknown PopUpType: " + type.ToString());

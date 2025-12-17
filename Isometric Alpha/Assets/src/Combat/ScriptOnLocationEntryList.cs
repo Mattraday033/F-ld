@@ -35,7 +35,7 @@ public static class ScriptOnLocationEntryList
 
         list.Add(new EnteredMineLvl1());
 
-        scriptOnAreaEntryDict.Add(LocationNameList.mineLvl1 + LocationNameList.section1a, list);
+        scriptOnAreaEntryDict.Add(ZoneKeyList.mineLvl1 + LocationNameList.section1a, list);
         #endregion
     }
 
