@@ -17,11 +17,13 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
 
     private int previousSortPriority = 1;
 
+    public GameObject playerIndicator;
+
     public RectTransform rectTransform;
     public SpriteRenderer spriteRenderer;
     public PolygonCollider2D polygonCollider2D;
 
-    private string zoneKey;
+    public string zoneKey;
     private string landmarkName = "Lovashi Camp";
 
     public NameTagGenerator nameTagGenerator;
@@ -41,6 +43,11 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
     public string getName()
     {
         return landmarkName;
+    }
+
+    public void revealIndicator()
+    {
+        playerIndicator.SetActive(true);
     }
 
     private void setLandmarkToLarge()

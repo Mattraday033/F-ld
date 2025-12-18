@@ -163,6 +163,7 @@ public class PlayerMovement : MovementTracker
     public DialogueTrigger dialogueTrigger;
 
     public MapPopUpButton mapPopUpButton;
+    public WorldMapPopUpButton worldMapPopUpButton;
 
     public Animator animator;
 
@@ -375,6 +376,9 @@ public class PlayerMovement : MovementTracker
                 case OOCActivity.inTutorialSequence:
                     handleTutorialSequenceStateKeyPresses();
                     break;
+                case OOCActivity.inWorldMap:
+                    handleWorldMapStateKeyPresses();
+                    break;
                 default:
                     Debug.LogError("Unrecognized OOCActivity: " + PlayerOOCStateManager.currentActivity.ToString());
                     break;
@@ -448,6 +452,14 @@ public class PlayerMovement : MovementTracker
         if (Input.GetKey(KeyBindingList.mapKey) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             mapPopUpButton.spawnPopUp();
+
+            KeyPressManager.handlingPrimaryKeyPress = true;
+            return;
+        }
+
+        if (Input.GetKey(KeyBindingList.worldMapKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        {
+            worldMapPopUpButton.spawnPopUp();
 
             KeyPressManager.handlingPrimaryKeyPress = true;
             return;
@@ -769,6 +781,16 @@ public class PlayerMovement : MovementTracker
         {
 
             mapPopUpButton.destroyPopUp();
+
+            KeyPressManager.handlingPrimaryKeyPress = true;
+        }
+    }
+
+    private void handleWorldMapStateKeyPresses()
+    {
+        if (Input.GetKey(KeyBindingList.worldMapKey) || KeyBindingList.eitherBackoutKeyIsPressed() && !KeyPressManager.handlingPrimaryKeyPress)
+        {
+            worldMapPopUpButton.destroyPopUp();
 
             KeyPressManager.handlingPrimaryKeyPress = true;
         }

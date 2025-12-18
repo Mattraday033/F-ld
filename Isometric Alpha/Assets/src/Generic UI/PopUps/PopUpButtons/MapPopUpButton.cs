@@ -15,7 +15,7 @@ public class MapPopUpButton : PopUpButton
     {
         base.spawnPopUp();
 
-        MapPopUpWindow.getInstance().populate(MapObjectList.getMapObject(AreaManager.locationName).getZoneKey());
+        MapPopUpWindow.getInstance().populate(MapObjectList.getCurrentZoneKey());
 
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.inMap);
     }

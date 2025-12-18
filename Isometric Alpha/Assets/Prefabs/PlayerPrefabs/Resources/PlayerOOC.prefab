@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 703898238046717503}
   - component: {fileID: 1040176692197359417}
   - component: {fileID: 4296566724507772205}
+  - component: {fileID: 2115896759193237329}
   - component: {fileID: 7992971974720730464}
   m_Layer: 15
   m_Name: PlayerOOC
@@ -110,25 +111,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095452c85a259fa4596e07434c191ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useMapStartLocation: 0
-  loadingStartLocationFromTransition: 0
   pressButtonPrompt: {fileID: 5917703585907860635}
   pressButtonPromptText: {fileID: 7201376879852185141}
-  directionalModifierGrid: {x: 0, y: 0, z: 0}
-  startingPosition: {fileID: 0}
-  colliderNotDetected: 0
-  locPos: {x: 0, y: 0, z: 0}
-  timeToMove: 0.1
   UIParent: {fileID: 8349594426262021622}
   dialogueManager: {fileID: 0}
   dialogueTrigger: {fileID: 0}
-  lessonUIManager: {fileID: 0}
-  tutorialPopUpButton: {fileID: 0}
   mapPopUpButton: {fileID: 4296566724507772205}
-  movementManager: {fileID: 0}
+  worldMapPopUpButton: {fileID: 2115896759193237329}
   animator: {fileID: 703898238046717503}
   terrainCollider: {fileID: 6050226065271995509}
-  spriteMask: {fileID: 8462031503004308828}
+  shownWhileTerrainHiddenTilemaps: []
   terrainTilemaps: []
   terrainSprites: []
   currentChest: {fileID: 0}
@@ -215,6 +207,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 18
+--- !u!114 &2115896759193237329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312928677131579617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3cfb75c087c09341b7fc92dd92f44b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 19
 --- !u!114 &7992971974720730464
 MonoBehaviour:
   m_ObjectHideFlags: 0

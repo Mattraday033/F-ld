@@ -13,7 +13,7 @@ public static class ScriptOnLocationEntryList
 
     public static List<PlayerInteractionScript> getScriptsOnLocationEntry()
     {
-        string zoneKey = MapObjectList.getMapObject(AreaManager.locationName).getZoneKey();
+        string zoneKey = MapObjectList.getCurrentZoneKey();
 
         if (!scriptOnAreaEntryDict.ContainsKey(AreaManager.locationName) ||
             MapLocation.hasBeenDiscovered(zoneKey, AreaManager.locationName))

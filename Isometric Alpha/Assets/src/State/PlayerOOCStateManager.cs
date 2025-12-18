@@ -18,7 +18,8 @@ public enum OOCActivity {
                             inDialoguePopUp = 11, 
                             inLevelUpPopUp = 12, 
                             inTutorialPopUp = 13,
-                            inTutorialSequence = 14
+                            inTutorialSequence = 14,
+                            inWorldMap = 15
 						};
 
 public static class PlayerOOCStateManager
@@ -36,6 +37,7 @@ public static class PlayerOOCStateManager
     public readonly static UnityEvent OnStateChangeFromInUI = new UnityEvent();
 
     public readonly static UnityEvent OnStateChangeToInMap = new UnityEvent();
+    public readonly static UnityEvent OnStateChangeToInWorldMap = new UnityEvent();
     public readonly static UnityEvent OnStateChangeToSkill = new UnityEvent();
     public readonly static UnityEvent OnStateChangeToInChestUI = new UnityEvent();
     public readonly static UnityEvent OnStateChangeToInBookUI = new UnityEvent();
@@ -126,6 +128,8 @@ public static class PlayerOOCStateManager
             case OOCActivity.inTutorialSequence:
                 OnLeavingTutorialSequenceState.Invoke();
                 break;
+            case OOCActivity.inWorldMap:
+                break;
         }
 
         switch (currentActivity)
@@ -169,6 +173,9 @@ public static class PlayerOOCStateManager
             case OOCActivity.inTutorialPopUp:
                 break;
             case OOCActivity.inTutorialSequence:
+                break;
+            case OOCActivity.inWorldMap:
+                OnStateChangeToInWorldMap.Invoke();
                 break;
         }
 

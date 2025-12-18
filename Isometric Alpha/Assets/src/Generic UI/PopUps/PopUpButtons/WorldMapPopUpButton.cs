@@ -21,9 +21,11 @@ public class WorldMapPopUpButton : PopUpButton
 
         base.spawnPopUp();
 
+        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inWorldMap);
+
         WorldMapPopUpWindow worldMapPopUpWindow = getPopUpWindow() as WorldMapPopUpWindow;
 
-        // worldMapPopUpWindow.populate(AreaManager.locationName);
+        worldMapPopUpWindow.populate();
     }
 
     public override void destroyPopUp()

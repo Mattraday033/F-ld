@@ -56,7 +56,11 @@ public static class MapObjectList
 	public const bool fastTravelAccessible = true;
 	public const bool notFastTravelAccessible = false;
 	
-	
+    public static string getCurrentZoneKey()
+    {		
+        return getMapObject(AreaManager.locationName).getZoneKey();
+    }
+
 	public static IMapObject getMapObject(string name)
     {		
         if(name == null)

@@ -30,6 +30,7 @@ public static class KeyBindingList
     public const KeyCode hideTerrainKey = KeyCode.F;
     public const KeyCode removePlacedCompanionmovableObjectKey = KeyCode.Z;
     public const KeyCode mapKey = KeyCode.M;
+    public const KeyCode worldMapKey = KeyCode.N;
     public const KeyCode transcriptKey = KeyCode.T;
     public const KeyCode showHideKeyBindingsListKey = KeyCode.Space;
     public const KeyCode quicksaveKey = KeyCode.Q;
@@ -47,6 +48,17 @@ public static class KeyBindingList
     public const KeyCode moveRightKey = KeyCode.D;
     public const KeyCode moveClockwiseKey = KeyCode.D;
     public const KeyCode acceptInputKey = KeyCode.Return;
+
+
+    public static bool mouseWheelScrollingUp()
+    {
+        return Input.mouseScrollDelta.y > 0;
+    }
+
+    public static bool mouseWheelScrollingDown()
+    {
+        return Input.mouseScrollDelta.y < 0;
+    }
 
     public static bool eitherShiftKeyIsPressed()
     {
