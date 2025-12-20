@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4643734863444062279}
   - component: {fileID: 6940207493320422151}
-  - component: {fileID: 2733951638165965045}
+  - component: {fileID: 8400308146848237443}
   - component: {fileID: 3842633388501494027}
+  - component: {fileID: 387306591066946761}
   m_Layer: 8
   m_Name: World Map Landmark
   m_TagString: Untagged
@@ -53,11 +54,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerIndicator: {fileID: 6489527503304682308}
   rectTransform: {fileID: 4643734863444062279}
-  spriteRenderer: {fileID: 2733951638165965045}
+  spriteRenderer: {fileID: 8400308146848237443}
   polygonCollider2D: {fileID: 0}
   zoneKey: 
   nameTagGenerator: {fileID: 3842633388501494027}
---- !u!212 &2733951638165965045
+  mapPopUpButton: {fileID: 387306591066946761}
+--- !u!212 &8400308146848237443
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,18 +99,18 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 510581953
   m_SortingLayer: 21
-  m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: ee18d912ea442af4eb4c376d625bfcce, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.28, y: 1.28}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 1
-  m_SpriteSortPoint: 1
+  m_SpriteSortPoint: 0
 --- !u!114 &3842633388501494027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,8 +125,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignoreHover: 0
   noNameTag: 0
-  spriteRenderer: {fileID: 2733951638165965045}
+  spriteRenderer: {fileID: 0}
   nameTag: {fileID: 0}
+--- !u!114 &387306591066946761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8780945315238412810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd622dbb76dfccb4e94a4e3dd0e1b633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 18
 --- !u!1001 &3981632414750473237
 PrefabInstance:
   m_ObjectHideFlags: 0

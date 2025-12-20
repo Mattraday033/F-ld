@@ -11,13 +11,18 @@ public class MapPopUpButton : PopUpButton
 
     }
 
-    public override void spawnPopUp()
+    public void spawnPopUp(string zoneKey)
     {
         base.spawnPopUp();
 
-        MapPopUpWindow.getInstance().populate(MapObjectList.getCurrentZoneKey());
+        MapPopUpWindow.getInstance().populate(zoneKey);
 
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.inMap);
+    }
+
+    public override void spawnPopUp()
+    {
+        spawnPopUp(MapObjectList.getCurrentZoneKey());
     }
 
     public override void destroyPopUp()

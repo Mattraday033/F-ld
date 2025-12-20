@@ -14,7 +14,7 @@ public static class TestScript
         // State.debugStopMonsterSpawning = true;
         // State.debugDiscoverAllLocations = true;
         // State.debugRetreatAutoSucceed = true;
-        // State.enableGridDebugger = true;
+        State.enableGridDebugger = true;
 
         // PartyManager.getPartyMember(NPCNameList.thatch).canJoinParty = true;
 

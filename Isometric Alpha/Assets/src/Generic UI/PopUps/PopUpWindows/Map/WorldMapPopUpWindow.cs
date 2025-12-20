@@ -172,6 +172,11 @@ public class WorldMapPopUpWindow : PopUpWindow, IEscapable
 
             landmarkComp.setLandmark(landmarkSpawnDetails);
             landmarkDict[landmarkComp.zoneKey] = landmarkComp;
+
+            foreach(string extraZoneKey in landmarkSpawnDetails.extraZoneKeys)
+            {
+                landmarkDict[extraZoneKey] = landmarkComp;
+            }
         }
     }
     
@@ -196,8 +201,9 @@ public static class WorldMapLandmarkList
     {
         allLandmarks = new List<LandmarkSpawnDetails>();
 
-        allLandmarks.Add(new LandmarkSpawnDetails(new Vector3Int(5, 4), MapDisplayNameList.lovashiCamp, ZoneKeyList.lovashiCamp, PrefabNames.delverCampMapTile));
-        allLandmarks.Add(new HighSortPriortyLandmarkSpawnDetails(new Vector3Int(5, 5), MapDisplayNameList.lovashiMine, ZoneKeyList.mineLvl1, PrefabNames.mineMapTile));
+        allLandmarks.Add(new LandmarkSpawnDetails(new Vector3Int(5, 4), MapDisplayNameList.lovashiCamp, PrefabNames.delverCampMapTile, ZoneKeyList.lovashiCamp));
+        allLandmarks.Add(new HighSortPriortyLandmarkSpawnDetails(new Vector3Int(5, 5), MapDisplayNameList.lovashiMine, PrefabNames.mineMapTile, 
+                                                                  ZoneKeyList.mineLvl1, new string[]{ZoneKeyList.mineLvl2, ZoneKeyList.mineLvl3}));
 
     }
 }
@@ -206,16 +212,30 @@ public class LandmarkSpawnDetails
 {
 
     public string landmarkName;
-    public string zoneKey;
     public string spriteName;
     public Vector3Int spawnCoords;
 
-    public LandmarkSpawnDetails(Vector3Int spawnCoords, string landmarkName, string zoneKey, string spriteName)
+    public string zoneKey;    
+    public string[] extraZoneKeys;
+
+    public LandmarkSpawnDetails(Vector3Int spawnCoords, string landmarkName, string spriteName, string zoneKey)
     {
         this.landmarkName = landmarkName;
-        this.zoneKey = zoneKey;
         this.spriteName = spriteName;
         this.spawnCoords = spawnCoords;
+
+        this.zoneKey = zoneKey;
+        this.extraZoneKeys = new string[0];
+    }
+
+    public LandmarkSpawnDetails(Vector3Int spawnCoords, string landmarkName, string spriteName, string zoneKey, string[] extraZoneKeys)
+    {
+        this.landmarkName = landmarkName;
+        this.spriteName = spriteName;
+        this.spawnCoords = spawnCoords;
+
+        this.zoneKey = zoneKey;
+        this.extraZoneKeys = extraZoneKeys;
     }
 
     public Sprite getSprite()
@@ -232,10 +252,16 @@ public class LandmarkSpawnDetails
 public class HighSortPriortyLandmarkSpawnDetails: LandmarkSpawnDetails
 {
 
-    public HighSortPriortyLandmarkSpawnDetails(Vector3Int spawnCoords, string landmarkName, string zoneKey, string spriteName):
-    base(spawnCoords, landmarkName, zoneKey, spriteName)
+    public HighSortPriortyLandmarkSpawnDetails(Vector3Int spawnCoords, string landmarkName, string spriteName, string zoneKey):
+    base(spawnCoords, landmarkName, spriteName, zoneKey)
     {
         
+    }
+
+    public HighSortPriortyLandmarkSpawnDetails(Vector3Int spawnCoords, string landmarkName, string spriteName, string zoneKey, string[] extraZoneKeys):
+    base(spawnCoords, landmarkName, spriteName, zoneKey, extraZoneKeys)
+    {
+
     }
 
     public override int getSortPriority()

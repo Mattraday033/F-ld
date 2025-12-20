@@ -23,6 +23,7 @@ public class MapPopUpWindow : PopUpWindow, IEscapable
 
 	public TextMeshProUGUI zoneName;
 	public TextMeshProUGUI locationName;
+	public GameObject locationNameBackground;
 
 	public string currentZoneKey;
 	private MapFormat currentMapFormat;
@@ -111,7 +112,15 @@ public class MapPopUpWindow : PopUpWindow, IEscapable
 	private void populateNamePlates()
 	{
 		zoneName.text = MapObjectList.getMapObject(currentZoneKey).getMapUIDisplayName();
-		locationName.text = MapObjectList.getMapObject(AreaManager.locationName).getMapUIDisplayNameWithoutZoneName();
+
+        if(currentZoneKey.Equals(MapObjectList.getCurrentZoneKey()))
+        {
+            locationNameBackground.SetActive(true);
+            locationName.text = MapObjectList.getMapObject(AreaManager.locationName).getMapUIDisplayNameWithoutZoneName();
+        } else
+        {
+            locationNameBackground.SetActive(false);
+        }
 	}
 
 	private void destroyAllMapTiles()

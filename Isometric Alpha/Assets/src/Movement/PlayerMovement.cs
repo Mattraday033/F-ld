@@ -770,17 +770,23 @@ public class PlayerMovement : MovementTracker
 
     private void handleMapStateKeyPresses()
     {
-        if (MapPopUpWindow.hasFastTravelTarget() && KeyBindingList.eitherBackoutKeyIsPressed() && !KeyPressManager.handlingPrimaryKeyPress)
+        if (MapPopUpWindow.hasFastTravelTarget() && KeyBindingList.eitherBackoutKeyIsPressed())
         {
             MapPopUpWindow.fastTravelPanelCloseButtonPress();
 
             KeyPressManager.handlingPrimaryKeyPress = true;
             return;
         }
-        else if (!MapPopUpWindow.hasFastTravelTarget() && Input.GetKey(KeyBindingList.mapKey) || KeyBindingList.eitherBackoutKeyIsPressed() && !KeyPressManager.handlingPrimaryKeyPress)
+        else if (!MapPopUpWindow.hasFastTravelTarget() && Input.GetKey(KeyBindingList.mapKey) || KeyBindingList.eitherBackoutKeyIsPressed())
         {
 
             mapPopUpButton.destroyPopUp();
+
+            KeyPressManager.handlingPrimaryKeyPress = true;
+        }else if(!MapPopUpWindow.hasFastTravelTarget() && Input.GetKey(KeyBindingList.worldMapKey))
+        {
+            mapPopUpButton.destroyPopUp();
+            worldMapPopUpButton.spawnPopUp();
 
             KeyPressManager.handlingPrimaryKeyPress = true;
         }
@@ -788,9 +794,15 @@ public class PlayerMovement : MovementTracker
 
     private void handleWorldMapStateKeyPresses()
     {
-        if (Input.GetKey(KeyBindingList.worldMapKey) || KeyBindingList.eitherBackoutKeyIsPressed() && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.worldMapKey) || KeyBindingList.eitherBackoutKeyIsPressed())
         {
             worldMapPopUpButton.destroyPopUp();
+
+            KeyPressManager.handlingPrimaryKeyPress = true;
+        } else if(Input.GetKey(KeyBindingList.mapKey))
+        {
+            worldMapPopUpButton.destroyPopUp();
+            mapPopUpButton.spawnPopUp();
 
             KeyPressManager.handlingPrimaryKeyPress = true;
         }

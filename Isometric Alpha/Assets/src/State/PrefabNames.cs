@@ -230,6 +230,8 @@ public static class PrefabNames
     public const string spriteMapFolder = "SpriteMaps/";
 
     public const string combatBackgroundFolderPath = PrefabNames.spriteMapFolder + "Combat Backgrounds/";
+    public const string OOCBackgroundFolderPath = PrefabNames.spriteMapFolder + "Backgrounds/";
+    public const string backgroundTilemap = OOCBackgroundFolderPath + "BackgroundTilemap";
 
     #endregion
 

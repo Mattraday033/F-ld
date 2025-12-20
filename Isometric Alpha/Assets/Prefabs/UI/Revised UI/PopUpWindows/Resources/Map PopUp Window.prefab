@@ -320,7 +320,7 @@ Tilemap:
       e33: 1
   m_TileColorArray:
   - m_RefCount: 1
-    m_Data: {r: 0.9242698, g: 0.5900635, b: 0.6069125, a: 1}
+    m_Data: {r: 0.78952837, g: 0.4714006, b: 0.5553651, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -725,7 +725,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 01225e4e9e16c6a458f307e681ba3db4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d823facce54f4e34faf41ea2dede2703, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2214,7 +2214,7 @@ Tilemap:
       e33: 1
   m_TileColorArray:
   - m_RefCount: 1
-    m_Data: {r: 0.73910755, g: 0.34213045, b: 0.4014552, a: 1}
+    m_Data: {r: 0.94894207, g: 0.48583165, b: 0.5133232, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2295,8 +2295,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -7, y: 0}
-  m_SizeDelta: {x: 45, y: 45}
+  m_AnchoredPosition: {x: -11.5, y: 0}
+  m_SizeDelta: {x: 55, y: 55}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &1398680643836034278
 CanvasRenderer:
@@ -2326,7 +2326,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 01225e4e9e16c6a458f307e681ba3db4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d823facce54f4e34faf41ea2dede2703, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4912,6 +4912,7 @@ MonoBehaviour:
   totalQuestCounter: {fileID: 701734979597227421}
   zoneName: {fileID: 1477573654028618489}
   locationName: {fileID: 7519437153917361936}
+  locationNameBackground: {fileID: 268827878625419859}
   currentZoneKey: 
   fastTravelPopUpButton: {fileID: 7659517752618136488}
   zoneButtons:

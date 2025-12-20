@@ -27,6 +27,7 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
     private string landmarkName = "Lovashi Camp";
 
     public NameTagGenerator nameTagGenerator;
+    public MapPopUpButton mapPopUpButton;
 
     public void setLandmark(LandmarkSpawnDetails spawnDetails)
     {
@@ -70,11 +71,28 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
     {
         setLandmarkToLarge();
         nameTagGenerator.spawnNameTag();
+        spriteRenderer.color = ColorList.grey245;
     }
 
     private void OnMouseExit()
     {
         setLandmarkToNormal();
         nameTagGenerator.destroyNameTag();
+        spriteRenderer.color = Color.white;
     }
+
+    private void OnMouseDown()
+    {
+        spriteRenderer.color = ColorList.grey215;
+    }
+
+    private void OnMouseUp()
+    {
+        spriteRenderer.color = ColorList.grey245;
+
+        WorldMapPopUpWindow.getInstance().popupProgenitor.destroyPopUp();
+
+        mapPopUpButton.spawnPopUp(zoneKey);
+    }
+
 }
