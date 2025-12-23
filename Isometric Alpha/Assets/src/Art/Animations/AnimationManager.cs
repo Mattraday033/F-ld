@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Animancer;
 using Animancer.FSM;
+using UnityEngine.Events;
+using System;
+using System.Linq;
+// using UnityEditor;
+
 public enum CharacterAnimationType { None, Idle_Front, Idle_Back, OOC_Idle_Front, OOC_Idle_Back, Secondary_Idle, Run_Front, Run_Back, Wounded, Death, Attack_Normal, Attack_Special, Spawn }
 
 public class AnimationManager : MonoBehaviour, IAnimationTracker
@@ -28,13 +33,74 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     public SpriteRenderer spriteRenderer;
 
     public CharacterAnimationType currentIdle;
+    public int currentIdleSpriteIndex = 0;
     [SerializeField]
     private SpriteRenderer shadowSprite;
+    public PolygonCollider2D polygonCollider2D;
     public HealthBarManager healthBarManager;
 
     public Dictionary<CharacterAnimationType, AnimationClip> animationDict;
+    public Dictionary<CharacterAnimationType, Sprite[]> idleDict;
 
     public NamedAnimancerComponent animancer;
+
+    #region HeartBeatListener
+
+    public void updateIdleAnimation(int rowToUpdate, bool beatIsEven)
+    {
+        if(!spriteSetByHeartBeat() || (!updatesIdleEveryBeat() && !beatIsEven) || healthBarManager.linkedStats.position.row != rowToUpdate)
+        {
+            return;
+        }
+
+        currentIdleSpriteIndex++;
+
+
+
+
+    }
+
+    public bool updatesIdleEveryBeat()
+    {
+        return true;
+    }
+
+    public bool spriteSetByHeartBeat()
+    {
+        return !CombatAnimationManager.trackerBeingTracked(this) && !healthBarManager.linkedStats.isDead();
+    }
+
+    private void updateCollider(SpriteRenderer renderer)
+    {
+        List<Vector2> pointsList = new List<Vector2>();
+
+        renderer.sprite.GetPhysicsShape(0, pointsList); 
+
+        polygonCollider2D.points = pointsList.ToArray();
+    }
+
+    private void OnEnable()
+    {
+        if(polygonCollider2D != null)
+        {
+            spriteRenderer.RegisterSpriteChangeCallback(updateCollider);
+            spriteRenderer.sprite = Resources.Load<Sprite>(EnemyTypeFolderPathList.getEnemyTypeFolderPath(MonsterNameList.lancer) + CharacterAnimationType.Death);
+        }
+
+        HeartBeatManager.HeartBeat.AddListener(updateIdleAnimation);
+    }
+
+    private void OnDisable()
+    {
+        if(polygonCollider2D != null)
+        {
+            spriteRenderer.UnregisterSpriteChangeCallback(updateCollider);
+        }
+
+        HeartBeatManager.HeartBeat.RemoveListener(updateIdleAnimation);
+    }
+
+    #endregion
 
     #region IAnimationTracker
 
@@ -84,6 +150,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
         animancer.Animations = getIdleAnimations(folderPath);
 
+        idleDict = getIdleSprites(folderPath);
+
         setToDefaultIdle();
     }
 
@@ -102,7 +170,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     private static AnimationClip[] getIdleAnimations(string folderPath)
     {
-        List<AnimationClip> animationDict = new List<AnimationClip>();
+        List<AnimationClip> animationList = new List<AnimationClip>();
 
         foreach (CharacterAnimationType type in loopedAnimationTypesTypes)
         {
@@ -113,10 +181,29 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
                 continue;
             }
 
-            animationDict.Add(animClip);
+            animationList.Add(animClip);
         }
 
-        return animationDict.ToArray();
+        return animationList.ToArray();
+    }
+
+    private static Dictionary<CharacterAnimationType, Sprite[]> getIdleSprites(string folderPath)
+    {
+        Dictionary<CharacterAnimationType, Sprite[]> spriteDict = new Dictionary<CharacterAnimationType, Sprite[]>();
+
+        foreach (CharacterAnimationType type in loopedAnimationTypesTypes)
+        {
+            Sprite[] sprites = Resources.LoadAll<Sprite>(folderPath);
+
+            if(sprites == null)
+            {
+                continue;
+            }
+
+            spriteDict.Add(type, sprites);
+        }
+
+        return null;
     }
 
     private static Dictionary<CharacterAnimationType, AnimationClip> getTempAnimations(string folderPath)

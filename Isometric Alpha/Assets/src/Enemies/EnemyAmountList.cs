@@ -7,6 +7,7 @@ public static class EnemyAmountList
     private const int oneEnemy = 1;
     private const int twoEnemies = 2;
     private const int threeEnemies = 3;
+    private const int fourEnemies = 4;
 
     #region Named NPCs
     public readonly static EnemyAmount guardVazul = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.guardVazul));
@@ -23,7 +24,26 @@ public static class EnemyAmountList
     #endregion
 
     #region Lovashi Guards
+    public readonly static EnemyAmount oneDisciplinarian = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.disciplinarian));
+    public readonly static EnemyAmount twoDisciplinarians = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.disciplinarian));
+
     public readonly static EnemyAmount oneExecutioner = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.executioner));
+    public readonly static EnemyAmount twoExecutioners = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.executioner));
+
+    public readonly static EnemyAmount oneJavelineer = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
+    public readonly static EnemyAmount twoJavelineers = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
+
+    public readonly static EnemyAmount oneLancer = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.lancer));
+    public readonly static EnemyAmount twoLancers = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.lancer));
+
+    public readonly static EnemyAmount oneLieutenant = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.lieutenant));
+    public readonly static EnemyAmount twoLieutenants = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.lieutenant));
+
+    public readonly static EnemyAmount oneLineBreaker = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.lineBreaker));
+    public readonly static EnemyAmount twoLineBreakers = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.lineBreaker));
+
+    public readonly static EnemyAmount oneSpearman = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.spearman));
+    public readonly static EnemyAmount twoSpearmen = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.spearman));
 
     #endregion
 

@@ -345,7 +345,7 @@ public static class PrefabNames
     public const string mapTilesFolder = tilesFolder + "MapTiles/";
 
     public const string manMadeFolder = mapTilesFolder + "manmade/";
-    public const string delverCampMapTile = manMadeFolder + "village_delver (3)";
+    public const string lovashiCampMapTile = manMadeFolder + "Lovashi Camp";
     public const string mineMapTile = manMadeFolder + "mine";
 
     #endregion

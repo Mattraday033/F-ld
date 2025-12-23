@@ -213,6 +213,11 @@ public class CombatAnimationManager : MonoBehaviour
         return outputArray;
     }
 
+    public static bool trackerBeingTracked(IAnimationTracker tracker)
+    {
+        return currentAnimations.ContainsValue(tracker);
+    }
+
     public bool hasOngoingAnimations()
     {
         if (currentAnimations.Count > 0)

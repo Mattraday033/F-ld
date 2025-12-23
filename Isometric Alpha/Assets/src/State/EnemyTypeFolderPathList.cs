@@ -22,10 +22,14 @@ public static class EnemyTypeFolderPathList
     }
 
     [RuntimeInitializeOnLoadMethod]
-    private static void initializeEnemyTypeFolderPathList()
+    public static void initializeEnemyTypeFolderPathList()
     {
-        folderPathDict = new Dictionary<string, string>();
+        if(folderPathDict != null)
+        {
+            return;
+        }
 
+        folderPathDict = new Dictionary<string, string>();
 
         #region Bats
         folderPathDict.Add(MonsterNameList.batSwarm, batsFolderPath + MonsterNameList.batSwarm + "/");
@@ -37,7 +41,13 @@ public static class EnemyTypeFolderPathList
         #endregion
 
         #region Lovashi
+        folderPathDict.Add(MonsterNameList.disciplinarian, lovashiFolderPath + MonsterNameList.disciplinarian + "/");
         folderPathDict.Add(MonsterNameList.executioner, lovashiFolderPath + MonsterNameList.executioner + "/");
+        folderPathDict.Add(MonsterNameList.javelineer, lovashiFolderPath + MonsterNameList.javelineer + "/");
+        folderPathDict.Add(MonsterNameList.lancer, lovashiFolderPath + MonsterNameList.lancer + "/");
+        folderPathDict.Add(MonsterNameList.lieutenant, lovashiFolderPath + MonsterNameList.lieutenant + "/");
+        folderPathDict.Add(MonsterNameList.lineBreaker, lovashiFolderPath + MonsterNameList.lineBreaker + "/");
+        folderPathDict.Add(MonsterNameList.spearman, lovashiFolderPath + MonsterNameList.spearman + "/");        
         #endregion
 
     }

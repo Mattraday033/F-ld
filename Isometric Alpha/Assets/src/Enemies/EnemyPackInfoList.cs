@@ -61,10 +61,16 @@ public static class EnemyPackInfoList
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name);
 
-    public readonly static EnemyPackInfo executionerTest = new EnemyPackInfo(new EnemyAmount[] { 
-                                                                                                        EnemyAmountList.oneExecutioner
-                                                                                                       },
-                                                                                                        DropTableList.slaveMineDT1Name);
+    public readonly static EnemyPackInfo testFight = new EnemyPackInfo(new EnemyAmount[] {      
+                                                                                                // EnemyAmountList.twoDisciplinarians,
+                                                                                                // EnemyAmountList.twoExecutioners,
+                                                                                                // EnemyAmountList.twoJavelineers,
+                                                                                                // EnemyAmountList.twoLancers,
+                                                                                                // EnemyAmountList.twoLieutenants,
+                                                                                                // EnemyAmountList.twoLineBreakers,
+                                                                                                EnemyAmountList.twoSpearmen
+                                                                                                },
+                                                                                                DropTableList.slaveMineDT1Name);
 
     public readonly static BossPackInfo campNorthEastOverseerBoss = new BossPackInfo(new EnemyAmount[] { 
                                                                                                         EnemyAmountList.oneExecutioner
@@ -299,11 +305,11 @@ public static class EnemyPackInfoList
         #region MineLvl_2-1c
         list = new List<EnemyPackInfo>();
 
-        // list.Add(executionerTest);
-        // list.Add(executionerTest);
+        list.Add(testFight);
+        list.Add(testFight);
 
-        list.Add(oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat);
-        list.Add(twoGiantBatsThreeBatSwarmsOneArmoredBat);
+        // list.Add(oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat);
+        // list.Add(twoGiantBatsThreeBatSwarmsOneArmoredBat);
 
         enemyPackInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1c, list);
         #endregion

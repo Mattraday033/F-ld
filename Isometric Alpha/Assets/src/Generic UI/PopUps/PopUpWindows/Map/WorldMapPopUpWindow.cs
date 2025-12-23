@@ -201,7 +201,7 @@ public static class WorldMapLandmarkList
     {
         allLandmarks = new List<LandmarkSpawnDetails>();
 
-        allLandmarks.Add(new LandmarkSpawnDetails(new Vector3Int(5, 4), MapDisplayNameList.lovashiCamp, PrefabNames.delverCampMapTile, ZoneKeyList.lovashiCamp));
+        allLandmarks.Add(new LandmarkSpawnDetails(new Vector3Int(5, 4), MapDisplayNameList.lovashiCamp, PrefabNames.lovashiCampMapTile, ZoneKeyList.lovashiCamp));
         allLandmarks.Add(new HighSortPriortyLandmarkSpawnDetails(new Vector3Int(5, 5), MapDisplayNameList.lovashiMine, PrefabNames.mineMapTile, 
                                                                   ZoneKeyList.mineLvl1, new string[]{ZoneKeyList.mineLvl2, ZoneKeyList.mineLvl3}));
 
@@ -210,7 +210,6 @@ public static class WorldMapLandmarkList
 
 public class LandmarkSpawnDetails
 {
-
     public string landmarkName;
     public string spriteName;
     public Vector3Int spawnCoords;

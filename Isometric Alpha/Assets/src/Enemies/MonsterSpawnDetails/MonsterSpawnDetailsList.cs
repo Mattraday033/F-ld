@@ -85,8 +85,8 @@ public static class MonsterSpawnDetailsList
 
         list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(0, -1)));
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(1, 13)));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(0, -1), chasesPlayer));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(1, 13), chasesPlayer));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1c, list);
 

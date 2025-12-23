@@ -111,8 +111,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3060634069565429252}
-  - component: {fileID: 3060634069565429307}
   - component: {fileID: 9065155027352122102}
+  - component: {fileID: 3060634069565429307}
+  - component: {fileID: 6229417721281125706}
   - component: {fileID: 2130261850575857977}
   - component: {fileID: 7304062698378934162}
   - component: {fileID: 5092550638677199902}
@@ -140,6 +141,22 @@ Transform:
   - {fileID: 8665332170792691668}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9065155027352122102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3060634069565429253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f14a1213ab7fe954bafa44dc9c89d997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityMenuManager: {fileID: 0}
+  animationManager: {fileID: 2130261850575857977}
+  healthBarManager: {fileID: 3927253085229646063}
+  spriteRenderer: {fileID: 3060634069565429307}
 --- !u!212 &3060634069565429307
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -192,22 +209,84 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &9065155027352122102
-MonoBehaviour:
+--- !u!60 &6229417721281125706
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3060634069565429253}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f14a1213ab7fe954bafa44dc9c89d997, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityMenuManager: {fileID: 0}
-  animationManager: {fileID: 2130261850575857977}
-  healthBarManager: {fileID: 3927253085229646063}
-  spriteRenderer: {fileID: 3060634069565429307}
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.225}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 5.12, y: 5.12}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.078125, y: 0.228125}
+      - {x: 0.17578125, y: 0.2671875}
+      - {x: 0.18359375, y: 0.31015626}
+      - {x: 0.21875, y: 0.38046876}
+      - {x: 0.2578125, y: 0.415625}
+      - {x: 0.265625, y: 0.42734376}
+      - {x: 0.265625, y: 0.4390625}
+      - {x: 0.26171875, y: 0.446875}
+      - {x: 0.15625, y: 0.43515626}
+      - {x: 0.0625, y: 0.3609375}
+      - {x: 0.03125, y: 0.3765625}
+      - {x: 0.01953125, y: 0.37265626}
+      - {x: -0.03125, y: 0.290625}
+      - {x: -0.03125, y: 0.33359376}
+      - {x: -0.05859375, y: 0.384375}
+      - {x: -0.07421875, y: 0.38828126}
+      - {x: -0.0859375, y: 0.415625}
+      - {x: -0.171875, y: 0.49375}
+      - {x: -0.2421875, y: 0.5171875}
+      - {x: -0.25, y: 0.5132812}
+      - {x: -0.25, y: 0.5015625}
+      - {x: -0.18359375, y: 0.39609376}
+      - {x: -0.1640625, y: 0.32578126}
+      - {x: -0.11328125, y: 0.2359375}
+      - {x: -0.125, y: 0.1890625}
+      - {x: -0.11328125, y: 0.1421875}
+      - {x: -0.10546875, y: 0.114843756}
+      - {x: -0.078125, y: 0.095312506}
+      - {x: -0.05078125, y: 0.095312506}
+      - {x: -0.015625, y: 0.118750006}
+      - {x: 0.0546875, y: 0.099218756}
+      - {x: 0.0703125, y: 0.122656256}
+      - {x: 0.0859375, y: 0.20859376}
+  m_UseDelaunayMesh: 0
 --- !u!114 &2130261850575857977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +302,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 3060634069565429307}
   currentIdle: 0
   shadowSprite: {fileID: 5984545968167463069}
+  polygonCollider2D: {fileID: 6229417721281125706}
   healthBarManager: {fileID: 0}
   animancer: {fileID: 5092550638677199902}
   key: 0
