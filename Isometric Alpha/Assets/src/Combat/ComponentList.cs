@@ -11,5 +11,6 @@ public class ComponentList : MonoBehaviour
     public HealthBarManager healthBarManager;
 
     public SpriteRenderer spriteRenderer;
+    public CombatantHover combatantHover;
 
 }

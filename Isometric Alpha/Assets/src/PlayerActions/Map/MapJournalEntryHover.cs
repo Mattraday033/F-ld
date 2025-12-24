@@ -70,7 +70,7 @@ public class MapJournalEntryHover : MonoBehaviour, IPointerEnterHandler, IPointe
 
         IMapObject mapObject = MapObjectList.getMapObject(questStep.mapLocation);
 
-        if (mapObject.isInterior() && mapObject.getExteriorSceneName().Equals(sceneName))
+        if (mapObject.isInterior() && mapObject.getExteriorLocationName().Equals(sceneName))
         {
             return true;
         }

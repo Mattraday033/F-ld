@@ -99,11 +99,11 @@ public class Area
 		hostility = newHostility;
 	}
 	
-	public bool contains(string sceneName)
+	public bool contains(string locationName)
 	{
 		foreach(string sceneInArea in scenesInArea)
 		{
-			if(sceneInArea.Equals(sceneName))
+			if(sceneInArea.Equals(locationName))
 			{
 				return true;
 			}
@@ -364,54 +364,54 @@ public static class AreaList
 		getCurrentArea().setHostility(Area.hostilityThreshold);
 	}
 	
-	public static void setAreaToHostile(string sceneName)
+	public static void setAreaToHostile(string locationName)
 	{
-		getArea(sceneName).setHostility(Area.hostilityThreshold);
+		getArea(locationName).setHostility(Area.hostilityThreshold);
 	}
 
-    public static void setAreaHostility(string sceneName, int hostility)
+    public static void setAreaHostility(string locationName, int hostility)
     {
-        getArea(sceneName).setHostility(hostility);
+        getArea(locationName).setHostility(hostility);
     }
 
-    public static void setAreaToPassive(string sceneName)
+    public static void setAreaToPassive(string locationName)
     {
-        getArea(sceneName).setHostility(0);
+        getArea(locationName).setHostility(0);
     }
 
-    public static bool areaIsHostile(string sceneName)
+    public static bool areaIsHostile(string locationName)
 	{
-		if(locationAlwaysHostile(sceneName))
+		if(locationAlwaysHostile(locationName))
 		{
 			return true;
 		}
 		
-		return getArea(sceneName).isHostile();
+		return getArea(locationName).isHostile();
 	}
 	
-	public static bool areaAlwaysAllowsFastTravel(string sceneName)
+	public static bool areaAlwaysAllowsFastTravel(string locationName)
 	{
-		return getArea(sceneName).alwaysAllowsFastTravel;
+		return getArea(locationName).alwaysAllowsFastTravel;
 	}
 
-    private static Area getArea(string sceneName)
+    public static Area getArea(string locationName)
 	{
 		foreach(KeyValuePair<string,Area> kvp in allAreas)
 		{
-			if(kvp.Value.contains(sceneName))
+			if(kvp.Value.contains(locationName))
 			{
 				return kvp.Value;
 			}
 		}
 		
-		throw new IOException("No area contains the sceneName: " + sceneName);
+		throw new IOException("No area contains the locationName: " + locationName);
 	}
 
-	public static bool areaOutsideAllowedFastTravelAreas(string sceneName)
+	public static bool areaOutsideAllowedFastTravelAreas(string locationName)
 	{
 		if (Flags.getFlag(FlagNameList.mineLvl2GuardsFinishedMove) && !Flags.getFlag(FlagNameList.mineLvl3BreachSealed))
 		{
-			if (!sceneName.Contains(ZoneKeyList.mineLvl3))
+			if (!locationName.Contains(ZoneKeyList.mineLvl3))
 			{
 				return true;
 			}
@@ -420,17 +420,17 @@ public static class AreaList
 		return false;
 	}
 
-	public static bool scenesInDifferentAreas(string firstSceneName, string secondSceneName)
+	public static bool scenesInDifferentAreas(string firstlocationName, string secondlocationName)
 	{
-		Area areaOne = getArea(firstSceneName);
-		Area areaTwo = getArea(secondSceneName);
+		Area areaOne = getArea(firstlocationName);
+		Area areaTwo = getArea(secondlocationName);
 
 		return areaOne.areaKey.Equals(areaTwo.areaKey);
 	}
 
-	private static bool locationAlwaysHostile(string sceneName)
+	private static bool locationAlwaysHostile(string locationName)
 	{
-		switch(sceneName)
+		switch(locationName)
 		{
 			case LocationNameList.slaveShackSix:
 			case LocationNameList.guardHouseTopFloor:

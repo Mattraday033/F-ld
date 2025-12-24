@@ -186,6 +186,8 @@ public static class SpawnInfoManager
     {
         GameObject interactable = GameObject.Instantiate(Resources.Load<GameObject>(details.getPrefabName()), details.getParent());
 
+        Canvas.ForceUpdateCanvases();
+
         Transform transform = interactable.transform;
 
         transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(details.cellCoords);

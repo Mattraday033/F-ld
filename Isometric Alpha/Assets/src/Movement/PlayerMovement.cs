@@ -149,7 +149,7 @@ public class PlayerMovement : MovementTracker
 
     public static bool hasCustomPromptMessage;
 
-    private TerrainHiddenState currentTerrainHiddenState = TerrainHiddenState.None;
+    public static TerrainHiddenState currentTerrainHiddenState = TerrainHiddenState.None;
 
     private float debugMessageTimer = 0f;
 
@@ -222,6 +222,8 @@ public class PlayerMovement : MovementTracker
         }
 
         PlayerOOCStateManager.OnStateChangeToInTutorialSequence.AddListener(adjustAnimator);
+        
+        adjustTerrainHiddenState();
     }
 
     private void OnDisable()

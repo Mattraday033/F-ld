@@ -46,7 +46,7 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 105
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -100,7 +100,7 @@ TextureImporter:
       name: Death_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 0
         width: 128
         height: 128
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c71aad6dcc53f444ba8d524607f330a
-      internalID: 1082914587
+      spriteID: decd04ca0e7cc9043ba665277bdea014
+      internalID: 1230610329
       vertices: []
       indices: 
       edges: []
@@ -121,7 +121,7 @@ TextureImporter:
       name: Death_1
       rect:
         serializedVersion: 2
-        x: 129
+        x: 128
         y: 0
         width: 128
         height: 128
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c08749ca282b6140b1f0b1d81ecf9b1
-      internalID: -881944564
+      spriteID: 4d43e585b498c6b47931473f96d61bb3
+      internalID: 167831085
       vertices: []
       indices: 
       edges: []
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b0a3bdf56413684a9647967fa13b026
-      internalID: 226402030
+      spriteID: 55b16ee147f13ed4fa0ea7a5bcb9f8a8
+      internalID: 240765757
       vertices: []
       indices: 
       edges: []
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 895932813cbc028498527e0129983f80
-      internalID: 1900021292
+      spriteID: 1aeadc728d5350e40913fbcabc6d1c0f
+      internalID: 1644325926
       vertices: []
       indices: 
       edges: []
@@ -195,8 +195,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8eb13a4481e8a8a478eb9ae1d7e7d614
-      internalID: -1113876010
+      spriteID: afc4024a016f47040920cd80a38f8e49
+      internalID: 195955096
       vertices: []
       indices: 
       edges: []
@@ -205,7 +205,7 @@ TextureImporter:
       name: Death_5
       rect:
         serializedVersion: 2
-        x: 641
+        x: 640
         y: 0
         width: 128
         height: 128
@@ -216,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d58abc7e14be077438a8933e6fe33c5f
-      internalID: 2018374057
+      spriteID: 015606e713396d9428a7aee7bf73739a
+      internalID: -1853106216
       vertices: []
       indices: 
       edges: []
@@ -237,8 +237,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb25c1d076e4ff141b8d2f6643705c5f
-      internalID: -157681983
+      spriteID: 011b04a6f898d37409f0f4b659be9c2d
+      internalID: 2144056818
       vertices: []
       indices: 
       edges: []
@@ -254,13 +254,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Death_0: 1082914587
-      Death_1: -881944564
-      Death_2: 226402030
-      Death_3: 1900021292
-      Death_4: -1113876010
-      Death_5: 2018374057
-      Death_6: -157681983
+      Death_0: 1230610329
+      Death_1: 167831085
+      Death_2: 240765757
+      Death_3: 1644325926
+      Death_4: 195955096
+      Death_5: -1853106216
+      Death_6: 2144056818
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

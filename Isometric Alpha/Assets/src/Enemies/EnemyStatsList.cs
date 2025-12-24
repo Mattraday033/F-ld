@@ -230,7 +230,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         
         enemyStatsDict.Add(MonsterNameList.spearman, new EnemyStats(MonsterNameList.spearman,
                                                                                     thirtyFiveArmor,
-                                                                                            1,
+                                                                                            100,
                             AbilityList.getAbility(null, AbilityList.executeKey) as Ability,
                                                                 new Trait[] { TraitList.master,
                                                                           TraitList.predatory

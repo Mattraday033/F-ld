@@ -132,6 +132,8 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
         outline = new SpriteOutline();
         outline.setSpriteRenderer(spriteRenderer);
+
+        list.combatantHover.linkedStats = this;
     }
 
     public virtual AbilityMenuManager getAbilityMenuManager()

@@ -145,17 +145,12 @@ public class AllyStats : Stats
         return PrefabNames.allyCombatSpriteName;
     }
 
-    public override GameObject instantiateCombatSprite()
-    {
-        base.instantiateCombatSprite();
+    // public override GameObject instantiateCombatSprite()
+    // {
+    //     base.instantiateCombatSprite();
 
-        // Debug.LogError(getName() + " is now " + spriteColor.ToString());
-
-        Helpers.updateGameObjectPosition(combatSprite);
-        setUpComponents(combatSprite.GetComponent<ComponentList>());
-
-        return combatSprite;
-    }
+    //     return combatSprite;
+    // }
 
     public override void setUpComponents(ComponentList list)
     {
@@ -171,10 +166,10 @@ public class AllyStats : Stats
 
     #region Animation Manager
     
-    public override void playAnimationOnDamage()
-    {
-        //Empty on purpose for now
-    }
+    // public override void playAnimationOnDamage()
+    // {
+    //     //Empty on purpose for now
+    // }
 
     #endregion
 

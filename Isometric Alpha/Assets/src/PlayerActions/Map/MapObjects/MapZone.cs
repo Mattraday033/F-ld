@@ -62,6 +62,11 @@ public class MapZone : IMapObject
 		return zoneKey;
 	}
 	
+	public string getBackgroundKey()
+	{
+		return zoneKey;
+	}
+
 	public string getMapUIDisplayName()
 	{
 		return displayName;
@@ -100,7 +105,7 @@ public class MapZone : IMapObject
 		return false;
 	}
 	
-	public string getExteriorSceneName()
+	public string getExteriorLocationName()
 	{
 		return null;
 	}

@@ -46,9 +46,9 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 105
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,14 +105,14 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.27}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34599e37921d71843a94616917e0ce29
-      internalID: -593343200
+      spriteID: 9526d48009af0a547adbd0f86f246c76
+      internalID: 1644628168
       vertices: []
       indices: 
       edges: []
@@ -126,14 +126,14 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.27}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7abc116f5071064498fe80e42bce4dea
-      internalID: -1166399343
+      spriteID: 25230a7d7f7578c45a6e10685c30a120
+      internalID: -1362960727
       vertices: []
       indices: 
       edges: []
@@ -147,14 +147,14 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.27}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e7573b576fe8514da3c79494428b467
-      internalID: -541906052
+      spriteID: aeddb3cf4eb9e5b43a701375b0ab10c9
+      internalID: -1872287870
       vertices: []
       indices: 
       edges: []
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a16d8eafc55dfc40a8ea34571aaf99a
-      internalID: 441068720
+      spriteID: 864f497fbabd0c54189f9f5c961780e2
+      internalID: -124955737
       vertices: []
       indices: 
       edges: []
@@ -189,14 +189,14 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.27}
+      pivot: {x: 0.5, y: 0.29}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8682d2c5758361458fe11431a80622c
-      internalID: -1432151119
+      spriteID: 3988f03f7b14d7e44ad299675567e1de
+      internalID: 486768577
       vertices: []
       indices: 
       edges: []
@@ -210,14 +210,14 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.27}
+      pivot: {x: 0.5, y: 0.31}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81891fefff04b044ab6d059b142f498d
-      internalID: 1371078764
+      spriteID: a4a6d867a9976994d9ed68da48590509
+      internalID: -1431227483
       vertices: []
       indices: 
       edges: []
@@ -231,14 +231,14 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.27}
+      pivot: {x: 0.5, y: 0.34}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09a62e52dc20d4b48af8fb7f1e47f659
-      internalID: -31366660
+      spriteID: 22cb91603de2d5240ae54f2c68d37e45
+      internalID: 480534263
       vertices: []
       indices: 
       edges: []
@@ -254,13 +254,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Death_0: -593343200
-      Death_1: -1166399343
-      Death_2: -541906052
-      Death_3: 441068720
-      Death_4: -1432151119
-      Death_5: 1371078764
-      Death_6: -31366660
+      Death_0: 1644628168
+      Death_1: -1362960727
+      Death_2: -1872287870
+      Death_3: -124955737
+      Death_4: 486768577
+      Death_5: -1431227483
+      Death_6: 480534263
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

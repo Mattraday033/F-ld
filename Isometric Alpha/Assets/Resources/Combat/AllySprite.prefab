@@ -272,6 +272,7 @@ GameObject:
   - component: {fileID: 4340910446031474860}
   - component: {fileID: 8916102299711102281}
   - component: {fileID: 3503089699390116283}
+  - component: {fileID: 835134193876085866}
   m_Layer: 0
   m_Name: AllySprite
   m_TagString: Player
@@ -318,6 +319,7 @@ MonoBehaviour:
   animationManager: {fileID: 3078529910110078376}
   healthBarManager: {fileID: 8078166988179091261}
   spriteRenderer: {fileID: 3150885771972809086}
+  combatantHover: {fileID: 835134193876085866}
 --- !u!212 &3150885771972809086
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -585,6 +587,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &835134193876085866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8896020149940805468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 968e84ea4ad6c764aaf339835d9d86f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2277986807921085070
 PrefabInstance:
   m_ObjectHideFlags: 0

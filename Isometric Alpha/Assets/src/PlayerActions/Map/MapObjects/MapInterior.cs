@@ -6,13 +6,15 @@ using UnityEngine;
 [System.Serializable]
 public class MapInterior : MapLocation
 {
-    private string exteriorSceneName;
+    private const string interiorKeyWord = "Interior";
+
+    private string exteriorLocationName;
     private int interiorIndex;
 
-    public MapInterior(string zoneKey, string sceneName, string displayName, int interiorIndex, string exteriorSceneName) :
-    base(zoneKey, sceneName, displayName, false, MapObjectList.zeroInteriors, new string[] { exteriorSceneName })
+    public MapInterior(string zoneKey, string locationName, string displayName, int interiorIndex, string exteriorLocationName) :
+    base(zoneKey, locationName, displayName, false, MapObjectList.zeroInteriors, new string[] { exteriorLocationName })
     {
-        this.exteriorSceneName = exteriorSceneName;
+        this.exteriorLocationName = exteriorLocationName;
         this.interiorIndex = interiorIndex;
     }
 
@@ -25,6 +27,17 @@ public class MapInterior : MapLocation
     {
         return new ZoneButtonInfo[0];
     }
+
+	public override string getBackgroundKey()
+	{
+        if(AreaList.getArea(locationName) != AreaList.getArea(exteriorLocationName))
+        {
+            return getZoneKey() + interiorKeyWord; 
+        }
+
+		return getZoneKey();
+	}
+
 
     public override bool getIsFastTravelDestination()
     {
@@ -41,9 +54,9 @@ public class MapInterior : MapLocation
         return interiorIndex;
     }
 
-    public override string getExteriorSceneName()
+    public override string getExteriorLocationName()
     {
-        return exteriorSceneName;
+        return exteriorLocationName;
     }
 
 	public override List<QuestStep> getAllQuestStepsInLocation()

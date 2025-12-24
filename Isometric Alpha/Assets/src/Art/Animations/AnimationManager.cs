@@ -33,14 +33,12 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     public SpriteRenderer spriteRenderer;
 
     public CharacterAnimationType currentIdle;
-    public int currentIdleSpriteIndex = 0;
     [SerializeField]
     private SpriteRenderer shadowSprite;
     public PolygonCollider2D polygonCollider2D;
     public HealthBarManager healthBarManager;
 
     public Dictionary<CharacterAnimationType, AnimationClip> animationDict;
-    public Dictionary<CharacterAnimationType, Sprite[]> idleDict;
 
     public NamedAnimancerComponent animancer;
 
@@ -48,16 +46,22 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public void updateIdleAnimation(int rowToUpdate, bool beatIsEven)
     {
+
         if(!spriteSetByHeartBeat() || (!updatesIdleEveryBeat() && !beatIsEven) || healthBarManager.linkedStats.position.row != rowToUpdate)
         {
             return;
         }
 
-        currentIdleSpriteIndex++;
+        setSpriteToCurrentIdle();
+    }
 
+    private void setSpriteToCurrentIdle()
+    {
+        spriteRenderer.sprite = IdleDictionary.getCurrentIdleSprite(healthBarManager.linkedStats.position.row,
+                                                                    healthBarManager.linkedStats.getName(), 
+                                                                    currentIdle);
 
-
-
+        updateCollider();
     }
 
     public bool updatesIdleEveryBeat()
@@ -70,34 +74,28 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         return !CombatAnimationManager.trackerBeingTracked(this) && !healthBarManager.linkedStats.isDead();
     }
 
-    private void updateCollider(SpriteRenderer renderer)
+    private void updateCollider()
     {
         List<Vector2> pointsList = new List<Vector2>();
 
-        renderer.sprite.GetPhysicsShape(0, pointsList); 
+        spriteRenderer.sprite.GetPhysicsShape(0, pointsList); 
 
         polygonCollider2D.points = pointsList.ToArray();
     }
 
     private void OnEnable()
     {
-        if(polygonCollider2D != null)
+        if(CombatStateManager.inCombat)
         {
-            spriteRenderer.RegisterSpriteChangeCallback(updateCollider);
-            spriteRenderer.sprite = Resources.Load<Sprite>(EnemyTypeFolderPathList.getEnemyTypeFolderPath(MonsterNameList.lancer) + CharacterAnimationType.Death);
+            HeartBeatManager.HeartBeat.AddListener(updateIdleAnimation);
+            CombatStateManager.OnCombatEnd.AddListener(OnDisable);
         }
-
-        HeartBeatManager.HeartBeat.AddListener(updateIdleAnimation);
     }
 
     private void OnDisable()
     {
-        if(polygonCollider2D != null)
-        {
-            spriteRenderer.UnregisterSpriteChangeCallback(updateCollider);
-        }
-
         HeartBeatManager.HeartBeat.RemoveListener(updateIdleAnimation);
+        CombatStateManager.OnCombatEnd.RemoveListener(OnDisable);
     }
 
     #endregion
@@ -150,7 +148,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
         animancer.Animations = getIdleAnimations(folderPath);
 
-        idleDict = getIdleSprites(folderPath);
+        addIdleSprites(monsterName, folderPath);
 
         setToDefaultIdle();
     }
@@ -160,6 +158,9 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         if(CombatStateManager.inCombat)
         {
             currentIdle = CharacterAnimationType.Idle_Front;
+            haltAllAnimations();
+
+            setSpriteToCurrentIdle();
         } else
         {
             currentIdle = CharacterAnimationType.OOC_Idle_Front;
@@ -187,24 +188,58 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         return animationList.ToArray();
     }
 
+    private static void addIdleSprites(string monsterName, string folderPath)
+    {
+        foreach (CharacterAnimationType type in loopedAnimationTypesTypes)
+        {
+            if(IdleDictionary.idleDictContainsSprites(monsterName, type))
+            {
+                continue;
+            }
+
+            Sprite[] sprites = Resources.LoadAll<Sprite>(folderPath+type.ToString());
+
+            if(sprites == null || sprites.Length <= 0)
+            {
+                continue;
+            }
+
+            IdleDictionary.addSpritesToIdleDict(monsterName, type, sprites);
+        }
+    }
+
+/*
     private static Dictionary<CharacterAnimationType, Sprite[]> getIdleSprites(string folderPath)
     {
         Dictionary<CharacterAnimationType, Sprite[]> spriteDict = new Dictionary<CharacterAnimationType, Sprite[]>();
 
         foreach (CharacterAnimationType type in loopedAnimationTypesTypes)
         {
-            Sprite[] sprites = Resources.LoadAll<Sprite>(folderPath);
+            int index = 0;
+            List<Sprite> sprites = new List<Sprite>();
+            Debug.LogError("folderPath = " + folderPath+type.ToString());
 
-            if(sprites == null)
+            Sprite sprite = Resources.Load<Sprite>(folderPath+type.ToString());
+
+            while(sprite != null)
+            {
+                sprites.Add(sprite);
+
+                index++;
+                sprite = Resources.Load<Sprite>(folderPath+type.ToString()+"_"+index);
+            }
+
+            if(sprites.Count <= 0)
             {
                 continue;
             }
 
-            spriteDict.Add(type, sprites);
+            spriteDict.Add(type, sprites.ToArray());
         }
 
-        return null;
+        return spriteDict;
     }
+*/
 
     private static Dictionary<CharacterAnimationType, AnimationClip> getTempAnimations(string folderPath)
     {
@@ -505,28 +540,50 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             return;
         }
 
+        startUpAnimations();
+
         animancer.Stop();
         AnimancerState state = animancer.Play(clipTransition);
 
         if (state == null)
         {
             removeAnimation();
-            Debug.LogError("No such animation for type: " + clipTransition.Clip.name);
+            Debug.Log("No such animation for type: " + clipTransition.Clip.name);
         } else
         {
-            // Debug.LogError("Play Animation: " + clipTransition.Clip.name);
+            // Debug.Log("Play Animation: " + clipTransition.Clip.name);
         }
     }
 
     public void playAnimation(CharacterAnimationType animationType)
     {
+        if(CombatStateManager.inCombat)
+        {
+            switch(animationType)
+            {
+                case CharacterAnimationType.Idle_Front:
+                case CharacterAnimationType.Idle_Back:
+                case CharacterAnimationType.OOC_Idle_Front:
+                case CharacterAnimationType.OOC_Idle_Back: 
+                case CharacterAnimationType.Secondary_Idle:
+                case CharacterAnimationType.Run_Front: 
+                case CharacterAnimationType.Run_Back:
+                    haltAllAnimations();
+                    setSpriteToCurrentIdle();
+                    return;
+                default:
+                    startUpAnimations();
+                    break;              
+            }
+        }
+
         if(animationType == CharacterAnimationType.None)
         {
             removeAnimation();
             return;
         }
 
-        // Debug.LogError("Play Animation: " + animationType.ToString());
+        // Debug.Log("Play Animation: " + animationType.ToString());
 
         animancer.Stop();
 

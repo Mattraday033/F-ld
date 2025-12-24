@@ -12,7 +12,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 32fd5b51125e3b14f8d10f64cac65dda, type: 2}
+      objectReference: {fileID: 9100000, guid: b06504918593e83408245c8ef20b22a3, type: 2}
     - target: {fileID: 1959585697237457907, guid: ee590a245bc8e5548bac3f88e182284c,
         type: 3}
       propertyPath: m_Name
@@ -32,7 +32,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1264589470, guid: 899de610074677247a585014ede6ee3e,
+      objectReference: {fileID: 58526919, guid: 899de610074677247a585014ede6ee3e,
         type: 3}
     - target: {fileID: 3088928631249601841, guid: ee590a245bc8e5548bac3f88e182284c,
         type: 3}

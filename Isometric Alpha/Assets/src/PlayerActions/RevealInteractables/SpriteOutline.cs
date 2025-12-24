@@ -38,6 +38,11 @@ public class SpriteOutline
 
     public void createOutline(Color color)
     {
+        if(spriteRenderer.material.color.Equals(color))
+        {
+            return;
+        }
+
         spriteTransform = spriteRenderer.transform;
 
         if(spriteTransform.position.z > 0f)

@@ -43,6 +43,8 @@ public class CombatStateManager : MonoBehaviour
 
 	public SelectorManager selectorManager;
 	public readonly static UnityEvent OnNewTurn = new UnityEvent();
+	public readonly static UnityEvent OnCombatStart = new UnityEvent();
+	public readonly static UnityEvent OnCombatEnd = new UnityEvent();
 
 	public CombatActionManager combatActionManager;
 
@@ -77,12 +79,12 @@ public class CombatStateManager : MonoBehaviour
 		}
 
 		instance = this;
+        announceCombatIsStarted();
 	}
 
 	// Start is called before the first frame update
 	void Start()
 	{
-        inCombat = true;
 
 		fadeToBlackManager = FadeToBlackManager.getInstance();
 
@@ -148,6 +150,18 @@ public class CombatStateManager : MonoBehaviour
 			StartCoroutine(waitOneFrameThenSpawnHoverUI());
 		}
 	}
+
+    private static void announceCombatIsStarted()
+    {
+        inCombat = true;
+        OnCombatStart.Invoke();
+    }
+
+    private static void announceCombatFinished()
+    {
+        inCombat = false;
+        OnCombatEnd.Invoke();
+    }
 
     public static void setReturnCell(Vector3Int newReturnCell)
     {
@@ -472,7 +486,7 @@ public class CombatStateManager : MonoBehaviour
 
 		resetCombat();
 
-        inCombat = false;
+        announceCombatFinished();
 
         SceneChange.changeSceneToOverworld();
 	}

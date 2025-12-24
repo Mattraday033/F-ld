@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class AlphaDeterminedRaycastTarget : MonoBehaviour, IPointerEnterHandler,
+public abstract class AlphaDeterminedRaycastTarget : CombatMouseHover, IPointerEnterHandler,
     IPointerExitHandler
 {
     public bool exactCopyOfSprite = true;

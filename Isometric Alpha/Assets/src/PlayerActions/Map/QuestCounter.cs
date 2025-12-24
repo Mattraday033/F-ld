@@ -106,7 +106,7 @@ public class QuestCounter : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
             if (mapLocation.isInterior())
             {
-                MapJournalEntryHover.OnQuestStarHover.Invoke((mapLocation as MapInterior).getExteriorSceneName(), highlight);
+                MapJournalEntryHover.OnQuestStarHover.Invoke((mapLocation as MapInterior).getExteriorLocationName(), highlight);
             }
             else
             {

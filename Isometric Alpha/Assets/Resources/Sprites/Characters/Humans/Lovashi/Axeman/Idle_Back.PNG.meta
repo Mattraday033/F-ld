@@ -46,7 +46,7 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87cf7f2de0f666242bb630c972b681fe
-      internalID: 2109349275
+      spriteID: 747ec27d9b82f3242820c27d0441be40
+      internalID: -78804200
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_Back_2
+      name: Idle_Back_1
       rect:
         serializedVersion: 2
         x: 128
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 513bfa6e5190a9b4992a4562d59c0389
-      internalID: -486335340
+      spriteID: 3361a9643d5f4ef4ba19a8c3797967cb
+      internalID: 1275266756
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_Back_4
+      name: Idle_Back_2
       rect:
         serializedVersion: 2
         x: 256
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5775ec852d93dd4ca9ec2b7f0f8293e
-      internalID: 161821216
+      spriteID: 41aa56744acff824fb2fdc58a8160603
+      internalID: 589634585
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_Back_6
+      name: Idle_Back_3
       rect:
         serializedVersion: 2
         x: 384
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3b16db9e240b0048a547d31f5e129ae
-      internalID: -335314529
+      spriteID: 27c376abfb759314a8fee870f51d9371
+      internalID: 192513376
       vertices: []
       indices: 
       edges: []
@@ -191,14 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Idle_Back_0: 2109349275
-      Idle_Back_1: 1622366980
-      Idle_Back_2: -486335340
-      Idle_Back_3: -300903274
-      Idle_Back_4: 161821216
-      Idle_Back_5: 1160023852
-      Idle_Back_6: -335314529
-      Idle_Back_7: -1557914274
+      Idle_Back_0: -78804200
+      Idle_Back_1: 1275266756
+      Idle_Back_2: 589634585
+      Idle_Back_3: 192513376
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

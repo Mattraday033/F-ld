@@ -57,10 +57,10 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
     {
         if(toggleReveal)
         {
-            getTargetOutline().createOutline(getRevealColor());
+            getSpriteOutline().createOutline(getRevealColor());
         } else
         {
-            getTargetOutline().removeOutline();
+            getSpriteOutline().removeOutline();
         }
     }
 
@@ -74,10 +74,9 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
         {
             return ColorList.canBeInteractedWith;
         }
-
     }
 
-    private Stats getTargetStats()
+    protected override Stats getTargetStats()
     {
         return CombatGrid.getCombatantAtCoords(targetCoords);
     }
@@ -85,35 +84,6 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
     private bool tileHasTarget()
     {
         return CombatGrid.getCombatantAtCoords(targetCoords) != null;
-    }
-
-    private GameObject getTargetGameObject()
-    {
-        Stats targetStats = getTargetStats();
-
-        if (targetStats != null)
-        {
-            return targetStats.combatSprite;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    private SpriteOutline getTargetOutline()
-    {
-        return getTargetStats().outline;
-    }
-
-    public void createHoverTag()
-    {
-        SelectorManager.displayHoverUI(getTargetStats());
-    }
-
-    private void createHoverDamagePreview()
-    {
-        DamagePreviewManager.setUpHoverDamagePreview(getTargetStats());
     }
 
     private void preserveHoverCoords()
@@ -128,118 +98,53 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        preserveHoverCoords();
+        // preserveHoverCoords();
 
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null)
-        {
-            onReveal(Constants.reveal);
+        // if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null)
+        // {
+        //     onReveal(Constants.reveal);
 
-            createHoverTag();
+        //     createHoverTag();
 
-            if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation && tileHasTarget() && !DamagePreviewManager.hasPreviewAtCoords(targetCoords))
-            {
-                createHoverDamagePreview();
-            }
-
-            createListeners();
-        }
+        //     if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation && tileHasTarget() && !DamagePreviewManager.hasPreviewAtCoords(targetCoords))
+        //     {
+        //         createHoverDamagePreview();
+        //     }
+        // }
     }
 
     public override void OnPointerExit(PointerEventData eventData) 
     {
-        purgeHoverCoords();
+        // purgeHoverCoords();
 
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null)
-        {
-            if (getTargetGameObject() != null)
-            {
-                getTargetOutline().removeOutline();
-            }
+        // if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null)
+        // {
+        //     if (getTargetGameObject() != null)
+        //     {
+        //         getSpriteOutline().removeOutline();
+        //     }
 
-            SelectorManager.displayHoverUIForCurrentSelectorTarget();
+        //     SelectorManager.displayHoverUIForCurrentSelectorTarget();
 
-            if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation && tileHasTarget())
-            {
-                DamagePreviewManager.removeAllHoverPreviews();
-                DamagePreviewManager.setUpDamagePreviews();
-            }
-        }
+        //     if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation && tileHasTarget())
+        //     {
+        //         DamagePreviewManager.removeAllHoverPreviews();
+        //         DamagePreviewManager.setUpDamagePreviews();
+        //     }
+        // }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player)
+        if(useHoverTiles())
         {
-
-            switch (CombatStateManager.currentActivity)
-            {
-                case CurrentActivity.ChoosingActor:
-
-                    moveSelectorToTarget();
-
-                    SelectorManager.handleAllySelection();
-
-                    break;
-                case CurrentActivity.ChoosingAbility:
-
-                    SelectorManager.deselectCurrentAlly();
-
-                    moveSelectorToTarget();
-
-                    SelectorManager.handleAllySelection();
-
-                    break;
-                case CurrentActivity.ChoosingLocation:
-
-                    if (currentSelectorOnTile())
-                    {
-                        SelectorManager.handleChoosingLocation();
-                    }
-                    else
-                    {
-                        if (canMoveToLocation(AbilityMenuManager.getInstance().getCurrentlySelectedAbility()))
-                        {
-                            moveSelectorToTarget();
-                        }
-                    }
-                    break;
-                case CurrentActivity.ChoosingTertiary:
-
-                    if (currentSelectorOnTile())
-                    {
-                        SelectorManager.handleChoosingTertiary();
-                    }
-                    else
-                    {
-                        if (canMoveToLocation(AbilityMenuManager.getInstance().getCurrentlySelectedAbility()))
-                        {
-                            moveSelectorToTarget();
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
-
-            createHoverTag();
+            OnMouseDown();
         }
     }
 
-    private void moveSelectorToTarget()
+    protected override GridCoords getTargetCoords()
     {
-        SelectorManager.currentSelector.setToLocation(SelectorManager.findLegalCoordsContainingMandatoryTarget(SelectorManager.getCurrentSelector(), targetCoords));
-
-        SelectorManager.createPressEPrompt();
-
-        if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation)
-        {
-            DamagePreviewManager.setUpDamagePreviews();
-        }
-    }
-
-    private bool currentSelectorOnTile()
-    {
-        return SelectorManager.currentSelector.getCoords().Equals(targetCoords);
+        return targetCoords;
     }
 
     private void handleEnemyClick(Stats targetStats)
@@ -263,18 +168,5 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
         {
             SelectorManager.handleAllySelection();
         }
-    }
-
-    public bool canMoveToLocation(CombatAction combatAction)
-    {
-        if (CombatGrid.positionIsOnAlliedSide(targetCoords) && combatAction.targetsAllySection())
-        {
-            return true;
-        } else if (CombatGrid.positionIsOnEnemySide(targetCoords) && !combatAction.targetsAllySection())
-        {
-            return true;
-        }
-        
-        return false;
     }
 }

@@ -9,12 +9,12 @@ public class BackgroundManager : MonoBehaviour
 	public List<Tilemap> backgroundTilemaps = new List<Tilemap>();
     private int currentBGPrefabIndex = 1;
     private const string backgroundAbbreviationCharacter = "-BG-";
-    private string zoneKey = "";
+    private string backgroundKey = "";
 
-    private const int maxRows = 10;
-    private const int maxCols = 10;
+    private const int maxRows = 15;
+    private const int maxCols = 15;
 
-    private Vector3Int currentTileCoords = new Vector3Int(-10,-10);
+    private Vector3Int currentTileCoords = new Vector3Int(-15,-15);
     private const int lengthMinusOne = 6;
 
     private List<List<Tilemap>> tilemapPrefabs = new List<List<Tilemap>>();
@@ -26,14 +26,14 @@ public class BackgroundManager : MonoBehaviour
 
     private void buildBackground()
     {
-        if(zoneKey.Equals(MapObjectList.getCurrentZoneKey()))
+        if(backgroundKey.Equals(MapObjectList.getCurrentZoneKey()))
         {
             return;
         }
 
         destroyAllTilemapPrefabs();
 
-        zoneKey = MapObjectList.getCurrentZoneKey();
+        backgroundKey = MapObjectList.getCurrentZoneKey();
 
         findBackgroundTilePrefabs();
 
@@ -44,6 +44,13 @@ public class BackgroundManager : MonoBehaviour
 
         createBackgroundTilemap();
 
+        StartCoroutine(populateBackgroundDelayed());
+    }
+
+    private IEnumerator populateBackgroundDelayed()
+    {
+        yield return null; // Wait one frame for tilemaps to initialize
+        
         populateBackgroundTilemap();
     }
 
@@ -78,7 +85,6 @@ public class BackgroundManager : MonoBehaviour
             for(int col = -3; col <= 3; col++)
             {
                 Vector3Int coords = new Vector3Int(row, col);
-
                 background.SetTile(getBackgroundCoords(coords), prefabTilemap.GetTile(coords));
             }
         }
@@ -135,8 +141,8 @@ public class BackgroundManager : MonoBehaviour
     private string getCurrentPrefabFolderPath()
     {
         return PrefabNames.OOCBackgroundFolderPath + 
-                                zoneKey + Constants.seperatorChar +
-                                zoneKey + backgroundAbbreviationCharacter + currentBGPrefabIndex;
+                                backgroundKey + Constants.seperatorChar +
+                                backgroundKey + backgroundAbbreviationCharacter + currentBGPrefabIndex;
     }
 	
     private void OnEnable()

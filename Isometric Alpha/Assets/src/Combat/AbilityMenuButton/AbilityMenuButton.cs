@@ -14,6 +14,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
     public int index;
     public bool greyedOut = false;
+    public static bool hoveringOverAbilityMenuButton = false;
 
     [SerializeField]
     public AbilityMenuManager abilityMenuManager;
@@ -443,6 +444,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         if (CombatStateManager.inCombat)
         {
+            hoveringOverAbilityMenuButton = true;
             getDescriptionPanelSlot().setTempDescribable(loadedCombatAction);
         }
         else
@@ -463,6 +465,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         if (CombatStateManager.inCombat)
         {
+            hoveringOverAbilityMenuButton = false;
             getDescriptionPanelSlot().revertToPrimaryDescribable();
         }
         else
@@ -488,6 +491,11 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
     public IDescribable getObjectBeingDescribed()
     {
         return loadedCombatAction;
+    }
+
+    private void OnDisable()
+    {
+        hoveringOverAbilityMenuButton = false;
     }
 }
 

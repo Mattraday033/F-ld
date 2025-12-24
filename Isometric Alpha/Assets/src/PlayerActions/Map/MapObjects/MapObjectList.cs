@@ -7,6 +7,7 @@ using UnityEngine;
 public interface IMapObject
 {
 	public string getZoneKey();
+	public string getBackgroundKey();
 	public string getLocationName();
 	public string getMapUIDisplayName();
 
@@ -23,7 +24,7 @@ public interface IMapObject
 	public bool isVisible();
 
 	public int getInteriors();
-	public string getExteriorSceneName();
+	public string getExteriorLocationName();
 	public List<QuestStep> getAllQuestStepsInLocation();
 }
 
@@ -59,6 +60,11 @@ public static class MapObjectList
     public static string getCurrentZoneKey()
     {		
         return getMapObject(AreaManager.locationName).getZoneKey();
+    }
+
+    public static string getCurrentBackgroundKey()
+    {		
+        return getMapObject(AreaManager.locationName).getBackgroundKey();
     }
 
 	public static IMapObject getMapObject(string name)

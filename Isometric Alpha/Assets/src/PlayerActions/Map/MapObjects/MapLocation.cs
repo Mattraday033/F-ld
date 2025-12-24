@@ -35,7 +35,7 @@ public class InteriorDisplayStatRequirements
 }
 
 [System.Serializable]
-public class MapLocation : IMapObject
+public class MapLocation : IMapObject 
 {
 
 	private string displayName;
@@ -227,7 +227,12 @@ public class MapLocation : IMapObject
 		return zoneKey;
 	}
 	
-    public virtual string getExteriorSceneName()
+	public virtual string getBackgroundKey()
+	{
+		return zoneKey;
+	}
+
+    public virtual string getExteriorLocationName()
     {
         return null;
     }
