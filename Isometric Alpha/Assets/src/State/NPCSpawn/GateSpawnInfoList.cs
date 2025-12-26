@@ -50,6 +50,38 @@ public static class GateSpawnInfoList
 
         #endregion
 
+        #region Guard House NE
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero,
+                                    NPCNameList.barracksGate,
+                                    LocationNameList.guardHouseNorthEast,
+                                    PrefabNames.portcullis2x1Path,
+                                    new Vector3Int(6, -1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        gateSpawnInfoDict.Add(LocationNameList.guardHouseNorthEast, list);
+
+        #endregion
+
+        #region Guard House SW
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero,
+                                    NPCNameList.barracksGate,
+                                    LocationNameList.guardHouseNorthEast,
+                                    PrefabNames.portcullis2x1Path,
+                                    new Vector3Int(-16, -1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        gateSpawnInfoDict.Add(LocationNameList.guardHouseSouthWest, list);
+
+        #endregion
+
         #region CenterCamp
 
         list = new List<GateSpawnInfo>();
@@ -63,6 +95,22 @@ public static class GateSpawnInfoList
                                     Axis.DescendingX));
 
         gateSpawnInfoDict.Add(LocationNameList.campCenter, list);
+
+        #endregion
+
+        #region Camp Mine Entrance
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero,
+                                    NPCNameList.barracksGate,
+                                    LocationNameList.campMineEntrance,
+                                    PrefabNames.portcullis2x1Path,
+                                    new Vector3Int(11, -14),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        gateSpawnInfoDict.Add(LocationNameList.campMineEntrance, list);
 
         #endregion
 
@@ -84,6 +132,15 @@ public static class GateSpawnInfoList
                                     new Vector3Int(-6, 5),
                                     Constants.sizeTwo,
                                     Axis.DescendingX));
+
+
+        list.Add(new GateSpawnInfo(Constants.indexTwo,
+                                    NPCNameList.barracksGate,
+                                    LocationNameList.campManse,
+                                    PrefabNames.portcullis2x1Path,
+                                    new Vector3Int(-1, -16),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
 
         gateSpawnInfoDict.Add(LocationNameList.campManse, list);
 

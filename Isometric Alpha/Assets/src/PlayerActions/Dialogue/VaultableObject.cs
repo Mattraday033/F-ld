@@ -74,17 +74,21 @@ public class VaultableObject : IStoryVariableSource
 
 public class VaultableOrDestroyableObject : VaultableObject
 {
+    
+    public const string gateKey = "-VaultableOrDestroyable-";
     private const string hastilyBuiltBarricadeExplanation = "This barricade was built in a hurry.";
-    public readonly static VaultableOrDestroyableObject diffThreeVaultableBarricadeOneTile = new VaultableOrDestroyableObject(Constants.difficultyThree, Constants.difficultyThree, Constants.sizeOne, notPlural, NPCNameList.barricade, hastilyBuiltBarricadeExplanation);
+    public readonly static VaultableOrDestroyableObject diffThreeVaultableBarricadeOneTileIndexZero = new VaultableOrDestroyableObject(Constants.difficultyThree, Constants.difficultyThree, Constants.sizeOne, notPlural, NPCNameList.barricade, hastilyBuiltBarricadeExplanation, 0);
 
     public int strDifficulty;
     public string explanation;
+    public int index;
 
-    public VaultableOrDestroyableObject(int dexDifficulty, int strDifficulty, int size, bool plural, string objectName, string explanation):
+    public VaultableOrDestroyableObject(int dexDifficulty, int strDifficulty, int size, bool plural, string objectName, string explanation, int index):
     base(dexDifficulty, size, plural, objectName)
     {
         this.strDifficulty = strDifficulty;
         this.explanation = explanation;
+        this.index = index;
     }
 
     public override Dialogue getDialogue(string name)
@@ -105,6 +109,13 @@ public class VaultableOrDestroyableObject : VaultableObject
         {
             story.variablesState[InkVariableNameList.explanation] = explanation;
         }   
+
+
+        if (story.variablesState[InkVariableNameList.gateKey] != null)
+        {
+            story.variablesState[InkVariableNameList.gateKey] = gateKey+index;
+        }   
+
 
         return story;
     }

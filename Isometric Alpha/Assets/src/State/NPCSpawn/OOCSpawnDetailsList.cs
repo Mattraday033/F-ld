@@ -347,9 +347,9 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-8, 0), LocationNameList.campCenter));
         list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-9, 0), LocationNameList.campCenter));
 
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(10, 11), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTile));
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(10, 10), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTile));
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(10, 9), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTile));
+        list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(10, 11), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
+        list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(10, 10), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
+        list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(10, 9), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
 
         oocSpawnDetailsDict.Add(LocationNameList.campCenter, list);
         #endregion
@@ -372,8 +372,8 @@ public static class OOCSpawnDetailsList
                                                         new Vector3Int(8, 3)
                                                      }));
 
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(2, 1), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTile));
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(1, 1), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTile));
+        list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(2, 1), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
+        list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(1, 1), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(19, 14), Facing.SouthEast));
 
@@ -497,8 +497,8 @@ public static class OOCSpawnDetailsList
 
         list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campManse, Constants.indexZero));
 
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(6, -18), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTile));
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(5, -18), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTile));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(6, -18), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(5, -18), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
 
         list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+2, new Vector3Int(2, -18), LocationNameList.campManse));
         list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+2, new Vector3Int(2, -19), LocationNameList.campManse));

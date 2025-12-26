@@ -139,6 +139,7 @@ public static class DialogueNameList
 
     #region Camp Mine Entrance
     public const string muszaPath = campExteriorPathName + LocationNameList.campMineEntrance + Constants.seperatorChar + "GuardMuzsa";
+    public const string barracksGatePath = campExteriorPathName + LocationNameList.campMineEntrance + Constants.seperatorChar + NPCNameList.barracksGate;
     #endregion
 
     #region Camp Manse

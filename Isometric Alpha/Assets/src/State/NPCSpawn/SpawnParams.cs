@@ -467,6 +467,21 @@ public class StartSpawningFlagList : FlagList
 
 }
 
+public class NeverSpawnFlagList : StartSpawningFlagList
+{
+    public NeverSpawnFlagList() :
+    base()
+    {
+
+    }
+
+    public override bool evaluateFlags()
+    {
+        return false;
+    }
+
+}
+
 public class StartSpawningAllTrueFlagList : StartSpawningFlagList
 {
     public StartSpawningAllTrueFlagList():

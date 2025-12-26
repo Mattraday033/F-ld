@@ -94,8 +94,8 @@ public static class DialogueCombatInfoList
                                                                                                 EnemyPackInfoList.testFight
                                                                                             },
                                                                     new DeadNameList[]  {
-                                                                                            new DeadNameList(new string[]{NPCNameList.barricadeGuards+1}),
-                                                                                            new DeadNameList(new string[]{NPCNameList.barricadeGuards+1})
+                                                                                            new DeadNameList(new string[]{}),
+                                                                                            new DeadNameList(new string[]{})
                                                                                         });
 
 }

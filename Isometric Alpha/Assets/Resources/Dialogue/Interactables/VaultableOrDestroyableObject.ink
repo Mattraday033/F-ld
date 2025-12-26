@@ -11,6 +11,8 @@ VAR explanation = ""
 VAR strDifficulty = 2
 VAR dexDifficulty = 2
 
+VAR gateKey = ""
+
 VAR playerName = ""
 
 //changeCamTarget(int targetIndex)
@@ -50,7 +52,7 @@ VAR playerName = ""
 
 fadeToBlack(true, false)
 
-openGate()
+openGateWithKey({gateKey})
 
 fadeBackIn(60)
 

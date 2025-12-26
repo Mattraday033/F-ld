@@ -153,6 +153,23 @@ public static class DialogueList
 
         #endregion
 
+
+        #region Guard House NE
+
+        addDialogueToList(LocationNameList.guardHouseNorthEast, NPCNameList.barracksGate,
+                            new SingleCharacterDialogue(NPCNameList.barracksGate,
+                            Resources.Load<TextAsset>(DialogueNameList.barracksGatePath)));
+
+        #endregion
+
+        #region Guard House SW
+
+        addDialogueToList(LocationNameList.guardHouseSouthWest, NPCNameList.barracksGate,
+                            new SingleCharacterDialogue(NPCNameList.barracksGate,
+                            Resources.Load<TextAsset>(DialogueNameList.barracksGatePath)));
+
+        #endregion
+
         #region Stockhouse
 
         addDialogueToList(LocationNameList.stockhouse, NPCNameList.uros,
@@ -504,6 +521,9 @@ public static class DialogueList
                             new Dialogue(new string[] { NPCNameList.guardMuzsa + 1, NPCNameList.barricade, NPCNameList.guardMuzsa + 1 },
                             Resources.Load<TextAsset>(DialogueNameList.muszaPath)));
 
+        addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.barracksGate,
+                            new SingleCharacterDialogue(NPCNameList.barracksGate,
+                            Resources.Load<TextAsset>(DialogueNameList.barracksGatePath)));
 
         addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.uros,
                             new Dialogue(new string[] { NPCNameList.uros },
@@ -546,6 +566,10 @@ public static class DialogueList
                                                       },
                                 Resources.Load<TextAsset>(DialogueNameList.secondBarricadeGuardsPath),
                                 DialogueCombatInfoList.barricadeGuardsCombatInfo));
+
+        addDialogueToList(LocationNameList.campManse, NPCNameList.barracksGate+2,
+                            new SingleCharacterDialogue(NPCNameList.barracksGate+2,
+                            Resources.Load<TextAsset>(DialogueNameList.barracksGatePath)));
 
         #endregion
 

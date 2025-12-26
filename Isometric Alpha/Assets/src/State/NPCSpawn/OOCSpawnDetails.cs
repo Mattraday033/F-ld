@@ -1455,6 +1455,27 @@ public class VaultableRubbleSpawnDetails : VaultableObjectSpawnDetails
     }
 }
 
+
+public class VaultableOrDestroyableObjectSpawnDetails : VaultableObjectSpawnDetails
+{
+
+    public int index;
+
+    public VaultableOrDestroyableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableOrDestroyableObject vaultableOrDestroyableObject) :
+    base(npcName, cellCoords, vaultableOrDestroyableObject)
+    {
+    }
+
+    public override void spawnActions(GameObject gameObject)
+    {
+        base.spawnActions(gameObject);
+
+        Gate gate = gameObject.AddComponent<Gate>();
+
+        gate.setKey(VaultableOrDestroyableObject.gateKey+index);
+    }
+}
+
 public class ChestSpawnDetails : QuestActivationObjectSpawnDetails
 {
     private int index;

@@ -157,6 +157,7 @@ public static class NPCNameList
     public const string officeDoor = "Office Door";
     public const string cellDoor = "Cell Door";    
     public const string campGate = "Camp Gate";
+    public const string barracksGate = "Barracks Gate";
     #endregion
 
     #region Misc

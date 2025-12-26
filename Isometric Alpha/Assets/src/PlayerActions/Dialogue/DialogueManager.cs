@@ -960,6 +960,14 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
+                case "killwithoutdeactivation":
+
+                    DeathFlagManager.addName(currentDialogue.names[getArgumentInt(buffer, Constants.indexZero)]);
+
+                    continueStory();
+
+                    break;
+
                 case "adddeathflag":
 
                     string deadName = getArgument(buffer);

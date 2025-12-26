@@ -308,6 +308,16 @@ public static class EnemyPackInfoList
         enemyPackInfoDict.Add(LocationNameList.campSouthEast, list);
         #endregion
 
+        #region Manse Camp
+        list = new List<EnemyPackInfo>();
+
+        list.Add(testFight);
+        list.Add(testFight);
+        list.Add(testFight);
+
+        enemyPackInfoDict.Add(LocationNameList.campManse, list);
+        #endregion
+
         #region Mine
 
         #region MineLvl_1-1b

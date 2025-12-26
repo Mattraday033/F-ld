@@ -4,8 +4,7 @@ VAR wisdom = 0
 VAR charisma = 0
 
 VAR speakerIndex = 1
-VAR barricadeParentIndex = 2
-VAR andrasIndex = 3
+VAR andrasIndex = 2
 
 VAR withBarricadeFightIndex = 0
 VAR withoutBarricadeFightIndex = 1
@@ -66,14 +65,17 @@ Halt! Approach the barricade at your own peril!
     }    
 
     +I'm getting through this barricade whether you man it or not. For freedom! <Attack>
+        killWithoutDeactivation({speakerIndex})
         enterCombat({withBarricadeFightIndex})
-        ->deactivateExtras
+        ->Close
     +\*Leave without fighting.*
         ->Close
 
 === 1b ===
 
 Blast, the rioters got behind us! To arms!
+
+killWithoutDeactivation({speakerIndex})
 
 enterCombat({withoutBarricadeFightIndex})
 ->Close
@@ -126,11 +128,11 @@ changeCamTarget({speakerIndex})
 
 changeCamTarget({andrasIndex})
 
-Sun's dipping, Ferenc. We're gonna need an answer.
+Sun's dipping, Ferenc. We need an answer.
 
 changeCamTarget({speakerIndex})
 
-They gonna kill us if we drop our weapons?
+Will they kill us if we drop our weapons?
 
 changeCamTarget({andrasIndex})
 
@@ -140,18 +142,23 @@ changeCamTarget({andrasIndex})
         changeCamTarget({speakerIndex})
 
         That'll do. Lower your weapons, we're coming out.
-        deactivate({andrasIndex})
-        ->Close
+        ->deactivateExtras
     +On second thought, I think I'd rather just kill you guys. <Combat>
-        deactivate({andrasIndex})
+        killWithoutDeactivation({speakerIndex})
         enterCombat({withBarricadeFightIndex})
         ->Close
 
 === deactivateExtras === 
 
-deactivate({speakerIndex})
-deactivate({barricadeParentIndex})
+fadeToBlack()
+
+kill({speakerIndex})
+
+updateNPCVisibility()
+
 deactivate({andrasIndex})
+
+fadeBackIn(60)
 
 ->Close
 

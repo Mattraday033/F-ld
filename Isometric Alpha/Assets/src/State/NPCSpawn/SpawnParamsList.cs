@@ -5,6 +5,7 @@ using UnityEngine;
 public static class SpawnParamsList
 {
     private const bool spawnWhileHostile = true;
+    private const bool spawnOnlyWhileHostile = true;
     private readonly static InteractableSpawnParams noNameParams = new InteractableSpawnParams(spawnWhileHostile);
 
     private static Dictionary<KeyValuePair<string, string>, InteractableSpawnParams> interactableSpawnParamsDict;
@@ -160,6 +161,22 @@ public static class SpawnParamsList
 
         #endregion
 
+        #region Guard House NE
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.guardHouseNorthEast, NPCNameList.barracksGate),
+                               new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.revoltStarted }),
+                                new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }), spawnWhileHostile, spawnOnlyWhileHostile));
+
+        #endregion
+
+        #region Guard House SW
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.guardHouseSouthWest, NPCNameList.barracksGate),
+                               new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.revoltStarted }),
+                                new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }), spawnWhileHostile, spawnOnlyWhileHostile));
+
+        #endregion
+
         #region MessHall
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.messHall, NPCNameList.kende),
@@ -279,7 +296,7 @@ public static class SpawnParamsList
                                                                                 })));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.vaultableBarrels+1),
-                               new InteractableSpawnParams(spawnWhileHostile, spawnWhileHostile));
+                               new InteractableSpawnParams(spawnWhileHostile, spawnOnlyWhileHostile));
 
         #endregion
 
@@ -499,6 +516,9 @@ public static class SpawnParamsList
                                 new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.snitchedOnUros }),
                                             new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated })));
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.barracksGate),
+                               new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.revoltStarted }),
+                                new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }), spawnWhileHostile, spawnOnlyWhileHostile));
 
         #endregion
 
@@ -509,6 +529,14 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campManse, NPCNameList.imre+1),
                                new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.convincedImre }),
                                 new StopSpawningFlagList(new string[] { FlagNameList.askedImreToLeadTheWay, FlagNameList.directorDefeated }), spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campManse, NPCNameList.barracksGate+2),
+                               new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.revoltStarted }),
+                                new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }), spawnWhileHostile, spawnOnlyWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campManse, NPCNameList.guardAndras+2),
+                               new InteractableSpawnParams(new NeverSpawnFlagList()));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campManse, NPCNameList.guardAndras+3),
+                               new InteractableSpawnParams(new NeverSpawnFlagList()));
         #endregion
 
         #region Mine

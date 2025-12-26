@@ -23,4 +23,5 @@ public static class InkVariableNameList
     public const string facingSE = "facingSE";
 
     public const string explanation = "explanation";
+    public const string gateKey = "gateKey";
 }
