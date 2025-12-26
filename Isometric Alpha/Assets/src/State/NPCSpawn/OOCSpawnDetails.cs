@@ -1345,30 +1345,39 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
     base(npcName, cellCoords, npcName)
     {
         this.vaultableObject = vaultableObject;
+        this.dialogue = getDialogue(npcName);
     }
 
     public VaultableObjectSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo, VaultableObject vaultableObject) :
     base(npcName, cellCoords, spriteName, sortingLayerInfo)
     {
         this.vaultableObject = vaultableObject;
+        this.dialogue = getDialogue(npcName);
     }
 
     public VaultableObjectSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, float offset, SortingLayerInfo sortingLayerInfo, VaultableObject vaultableObject) :
     base(npcName, cellCoords, spriteName, offset, sortingLayerInfo)
     {
         this.vaultableObject = vaultableObject;
+        this.dialogue = getDialogue(npcName);
     }
 
     public VaultableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableObject vaultableObject, string tutorialTargetHash) :
-    base(npcName, cellCoords, npcName)
+    base(npcName, cellCoords)
     {
         this.vaultableObject = vaultableObject;
         this.tutorialTargetHash = tutorialTargetHash;
+        this.dialogue = getDialogue(npcName);
     }
 
     public override Dialogue getDialogue(string npcName)
     {
-        return DialogueList.getVaultableObjectDialogue(npcName);
+        if(vaultableObject == null)
+        {
+            return null;
+        }
+
+        return vaultableObject.getDialogue(npcName);
     }
 
     public override bool interactable()
@@ -1385,6 +1394,8 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
 
         switch (vaultableObject.objectName)
         {
+            case NPCNameList.barricade:
+                return PrefabNames.destroyableBarricade;
             case VaultableObject.barrelName:
                 return PrefabNames.vaultableBarrels;
             default:
@@ -1599,12 +1610,12 @@ public class HiddenTerrainSpawnDetails : OOCSpawnDetails
 {
 
     public string secretDoorFlag;
-    private string areaName;
-    private string sectionName;
+    protected string areaName;
+    protected string sectionName;
 
-    private string locationName;
+    protected string locationName;
 
-    private int index;
+    protected int index;
 
     public HiddenTerrainSpawnDetails(string secretDoorFlag, string locationName, int index) :
     base()
@@ -1640,7 +1651,7 @@ public class HiddenTerrainSpawnDetails : OOCSpawnDetails
     public override string getPrefabName()
     {
         if (locationName == null)
-        {
+        {        
             return HiddenTerrainList.getHiddenTerrainFolderPath(areaName, sectionName, index);
         }
         else
@@ -1664,6 +1675,37 @@ public class HiddenTerrainSpawnDetails : OOCSpawnDetails
         interactable.transform.localPosition = Vector3.zero;
 
         Helpers.updateColliderPosition(interactable);
+    }
+
+}
+
+public class HostilityTerrainSpawnDetails : HiddenTerrainSpawnDetails
+{
+
+    private const string hostilitySecretDoorFlagPlaceholder = "Hostility-";
+
+    public HostilityTerrainSpawnDetails(string locationName, int index) :
+    base(hostilitySecretDoorFlagPlaceholder+index, locationName, index)
+    {
+    }
+
+    public override bool spawnsOnSecretDoorActivation()
+    {
+        return false;
+
+    }
+    public override SpawnParams getSpawnParams()
+    {
+        // HostilitySpawnParams spawnParams = 
+        return new HostilitySpawnParams(locationName);
+
+        // if(!spawnParams.canSpawn(locationName))
+        // {
+        //     return spawnParams;
+        // } else
+        // {
+        //     return null;
+        // }
     }
 
 }

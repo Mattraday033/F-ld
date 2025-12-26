@@ -212,6 +212,12 @@ public class SingleCharacterDialogue : Dialogue
         
     }
 
+    public SingleCharacterDialogue(string name, TextAsset inkJSON, NPCCombatInfo npcCombatInfo) : 
+    base(new string[]{name}, inkJSON, npcCombatInfo)
+    {
+        
+    }
+
     public override bool findNPCGameObjectsInScene()
     {
         return false;

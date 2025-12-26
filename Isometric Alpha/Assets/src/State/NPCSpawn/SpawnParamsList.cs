@@ -278,6 +278,9 @@ public static class SpawnParamsList
                                                                                     FlagNameList.enteredCivilizationAfterLeavingCamp
                                                                                 })));
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.vaultableBarrels+1),
+                               new InteractableSpawnParams(spawnWhileHostile, spawnWhileHostile));
+
         #endregion
 
         #region Camp South East
@@ -288,7 +291,7 @@ public static class SpawnParamsList
                                                                 };
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.statue),
-                                        new InteractableSpawnParams(new StopSpawningFlagList(directorStatueBrokenConditions)));
+                                        new InteractableSpawnParams(new StopSpawningFlagList(directorStatueBrokenConditions), spawnWhileHostile));
                                         
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.toppledStatue),

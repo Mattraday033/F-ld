@@ -251,6 +251,7 @@ public static class PrefabNames
 
     public const string cratesAndBarrelsFolder = spriteFolder + "CratesAndBarrels/";
     public const string vaultableBarrels = cratesAndBarrelsFolder + "VaultableBarrels";
+    public const string destroyableBarricade = cratesAndBarrelsFolder + "DestroyableBarricade";
     public const string squareCratesSmall = cratesAndBarrelsFolder + "Square Crates Small";
     public const string pushableCrate = cratesAndBarrelsFolder + "Crate";
     public const string tripleBarrel = cratesAndBarrelsFolder + "TripleBarrels";

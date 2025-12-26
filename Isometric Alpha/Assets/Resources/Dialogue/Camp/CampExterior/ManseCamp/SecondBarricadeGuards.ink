@@ -7,9 +7,13 @@ VAR speakerIndex = 1
 VAR barricadeParentIndex = 2
 VAR andrasIndex = 3
 
-VAR barricadeGuardDeathFlagNameIndex = 2
+VAR withBarricadeFightIndex = 0
+VAR withoutBarricadeFightIndex = 1
 
-VAR barricadeEnemyInfoIndex = 0
+VAR facingNE = false
+VAR facingNW = false
+VAR facingSW = false
+VAR facingSE = false
 
 VAR wisdomBarricadePassUsed = false
 VAR strengthBarricadePassUsed = false
@@ -21,25 +25,17 @@ VAR gotKeyFromJanos = false
 VAR acceptingGuardPrisoners = false
 
 VAR deathFlagGuardAndrás = false
-VAR deathFlagGuardJanos = false
+VAR deathFlagJanos = false
 
 VAR playerName = ""
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//prepForItem()
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
 
-->1a
+{
+-facingNW:
+    ->1a
+-else:
+    ->1b
+}
 
 === 1a ===
 
@@ -64,16 +60,23 @@ Halt! Approach the barricade at your own peril!
     }
     
     {
-    -not andrasBarricadePassUsed and not deathFlagGuardAndrás and not deathFlagGuardJanos and acceptingGuardPrisoners and (gotKeyFromJanos or andrasLeftInHut):
+    -not andrasBarricadePassUsed and not deathFlagGuardAndrás and not deathFlagJanos and acceptingGuardPrisoners and (gotKeyFromJanos or andrasLeftInHut):
     +Janos, go get András. Have him negotiate.
         ->And
     }    
 
     +I'm getting through this barricade whether you man it or not. For freedom! <Attack>
-        enterCombat({barricadeEnemyInfoIndex})
+        enterCombat({withBarricadeFightIndex})
         ->deactivateExtras
     +\*Leave without fighting.*
         ->Close
+
+=== 1b ===
+
+Blast, the rioters got behind us! To arms!
+
+enterCombat({withoutBarricadeFightIndex})
+->Close
 
 === Str ===
 
@@ -81,7 +84,6 @@ setToTrue(strengthBarricadePassUsed)
 
 \*Gulp* L-less by the second. I'm getting outta here!
 
-kill({barricadeGuardDeathFlagNameIndex})
     ->deactivateExtras
     
 === Wis ===
@@ -90,16 +92,14 @@ setToTrue(wisdomBarricadePassUsed)
 
 \*Sigh* I can see that. Fine, we'll enter into your custody. Lower your weapons, we're coming out.
 
-kill({barricadeGuardDeathFlagNameIndex})
     ->deactivateExtras
 
 === Cha ===
 
 setToTrue(charismaBarricadePassUsed)
 
-Dying for your boss isn't all it's cracked up to be anyways. Lower your weapons, we're coming out.
+Dying for your boss isn't all it's cracked up to be. Lower your weapons, we're coming out.
 
-kill({barricadeGuardDeathFlagNameIndex})
     ->deactivateExtras
 
 === And ===
@@ -141,12 +141,10 @@ changeCamTarget({andrasIndex})
 
         That'll do. Lower your weapons, we're coming out.
         deactivate({andrasIndex})
-        kill({barricadeGuardDeathFlagNameIndex})
         ->Close
     +On second thought, I think I'd rather just kill you guys. <Combat>
         deactivate({andrasIndex})
-        //kill({barricadeGuardDeathFlagNameIndex})
-        enterCombat({barricadeEnemyInfoIndex})
+        enterCombat({withBarricadeFightIndex})
         ->Close
 
 === deactivateExtras === 

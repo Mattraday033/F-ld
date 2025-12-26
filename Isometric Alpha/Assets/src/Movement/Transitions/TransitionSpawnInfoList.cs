@@ -251,7 +251,7 @@ public static class TransitionSpawnInfoList
         list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, LocationNameList.campCenter, LocationNameList.stables, new Vector3Int(8, 13), Facing.SouthEast, twoSpaceMultiplier, Constants.sizeTwo, Axis.DescendingX));
         list.Add(new TransitionSpawnInfoWithCorner(startingIndexFour, LocationNameList.campCenter, LocationNameList.stables, new Vector3Int(10, 18), Facing.NorthEast, twoSpaceMultiplier, Constants.sizeTwo, Axis.DescendingY));
 
-        list.Add(new TransitionSpawnInfo(LocationNameList.campCenter, LocationNameList.campNorthEast, new Vector3Int(20, 9), Facing.SouthWest, Constants.sizeThree, Axis.DescendingY));
+        list.Add(new TransitionSpawnInfo(LocationNameList.campCenter, LocationNameList.campNorthEast, new Vector3Int(23, 9), Facing.SouthWest, Constants.sizeThree, Axis.DescendingY));
 
         list.Add(new TransitionSpawnInfo(LocationNameList.campCenter, LocationNameList.campManse, new Vector3Int(0, 24), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX));
         list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, LocationNameList.campCenter, LocationNameList.campManse, new Vector3Int(-2, 24), Facing.SouthEast, Constants.sizeThree, Axis.DescendingX));

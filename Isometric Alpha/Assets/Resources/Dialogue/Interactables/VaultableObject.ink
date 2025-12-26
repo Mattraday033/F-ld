@@ -38,12 +38,12 @@ This {objectName} looks traversable. A sufficiently dexterous person could vault
 
 {
 -dexterity >= dexDifficulty:
-    *Vault over the {objectName}. <Dex {dexterity}/{dexDifficulty}>
+    +Vault over the {objectName}. <Dex {dexterity}/{dexDifficulty}>
         ->1b
-    *Leave the {objectName} alone.
+    +Leave the {objectName} alone.
         ->Close
 -else:
-    *Leave the {objectName} alone. <Dex {dexterity}/{dexDifficulty}>
+    +Leave the {objectName} alone. <Dex {dexterity}/{dexDifficulty}>
         ->Close
 }
 

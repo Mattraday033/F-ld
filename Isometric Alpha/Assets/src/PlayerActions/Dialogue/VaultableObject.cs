@@ -19,10 +19,12 @@ public class VaultableObject : IStoryVariableSource
     public readonly static VaultableObject diffTwoVaultableBarrelsOneTile = new VaultableObject(Constants.difficultyTwo, Constants.sizeOne, isPlural, barrelName);
     public readonly static VaultableObject diffTwoVaultableBarrelsTwoTiles = new VaultableObject(Constants.difficultyTwo, Constants.sizeTwo, isPlural, barrelName);
 
+    public readonly static VaultableObject diffThreeVaultableBarrelsOneTile = new VaultableObject(Constants.difficultyThree, Constants.sizeOne, isPlural, barrelName);
+
     public readonly static VaultableObject diffTwoVaultableGap = new VaultableObject(Constants.difficultyTwo, Constants.sizeThree, notPlural, gapName);
     public readonly static VaultableObject diffThreeVaultableGap = new VaultableObject(Constants.difficultyThree, Constants.sizeThree, notPlural, gapName);
 
-    public int difficulty;
+    public int dexDifficulty;
 
     public int size;
 
@@ -30,15 +32,20 @@ public class VaultableObject : IStoryVariableSource
 
     public string objectName;
 
-    public VaultableObject(int difficulty, int size, bool plural, string objectName)
+    public VaultableObject(int dexDifficulty, int size, bool plural, string objectName)
     {
-        this.difficulty = difficulty;
+        this.dexDifficulty = dexDifficulty;
         this.size = size;
         this.plural = plural;
         this.objectName = objectName;
     }
 
-    public Story addVariables(Story story)
+    public virtual Dialogue getDialogue(string name)
+    {
+        return new Dialogue(new string[] { Constants.emptyString, name }, Resources.Load<TextAsset>(DialogueNameList.vaultableObjectPath));
+    }
+
+    public virtual Story addVariables(Story story)
     {
         if (story.variablesState[nameof(size)] != null)
         {
@@ -55,9 +62,48 @@ public class VaultableObject : IStoryVariableSource
             story.variablesState[nameof(objectName)] = objectName;
         }
 
-        if (story.variablesState[Constants.dexDiffVarName] != null)
+        if (story.variablesState[InkVariableNameList.dexDiffVarName] != null)
         {
-            story.variablesState[Constants.dexDiffVarName] = difficulty;
+            story.variablesState[InkVariableNameList.dexDiffVarName] = dexDifficulty;
+        }   
+
+        return story;
+    }
+
+}
+
+public class VaultableOrDestroyableObject : VaultableObject
+{
+    private const string hastilyBuiltBarricadeExplanation = "This barricade was built in a hurry.";
+    public readonly static VaultableOrDestroyableObject diffThreeVaultableBarricadeOneTile = new VaultableOrDestroyableObject(Constants.difficultyThree, Constants.difficultyThree, Constants.sizeOne, notPlural, NPCNameList.barricade, hastilyBuiltBarricadeExplanation);
+
+    public int strDifficulty;
+    public string explanation;
+
+    public VaultableOrDestroyableObject(int dexDifficulty, int strDifficulty, int size, bool plural, string objectName, string explanation):
+    base(dexDifficulty, size, plural, objectName)
+    {
+        this.strDifficulty = strDifficulty;
+        this.explanation = explanation;
+    }
+
+    public override Dialogue getDialogue(string name)
+    {
+        return new Dialogue(new string[] { Constants.emptyString, name }, Resources.Load<TextAsset>(DialogueNameList.vaultableOrDestroyableObjectPath));
+    }
+
+    public override Story addVariables(Story story)
+    {
+        story = base.addVariables(story);
+
+        if (story.variablesState[InkVariableNameList.strDiffVarName] != null)
+        {
+            story.variablesState[InkVariableNameList.strDiffVarName] = strDifficulty;
+        }  
+
+        if (story.variablesState[InkVariableNameList.explanation] != null)
+        {
+            story.variablesState[InkVariableNameList.explanation] = explanation;
         }   
 
         return story;

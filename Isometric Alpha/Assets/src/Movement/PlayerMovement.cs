@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using Cinemachine;
+using Ink.Runtime;
 
 
 public abstract class MovementTracker : MonoBehaviour
@@ -1667,5 +1668,30 @@ public class PlayerMovement : MovementTracker
     public override int getMovementIndex()
     {
         return MovementManager.playerSpriteIndex;
+    }
+
+    public static Story addAllVariables(Story currentStory)
+    {
+        if (currentStory.variablesState[InkVariableNameList.facingNE] != null)
+        {
+            currentStory.variablesState[InkVariableNameList.facingNE] = State.playerFacing.getFacing().Equals(Facing.NorthEast);
+        }
+
+        if (currentStory.variablesState[InkVariableNameList.facingNW] != null)
+        {
+            currentStory.variablesState[InkVariableNameList.facingNW] = State.playerFacing.getFacing().Equals(Facing.NorthWest);
+        }
+
+        if (currentStory.variablesState[InkVariableNameList.facingSW] != null)
+        {
+            currentStory.variablesState[InkVariableNameList.facingSW] = State.playerFacing.getFacing().Equals(Facing.SouthWest);
+        }
+
+        if (currentStory.variablesState[InkVariableNameList.facingSE] != null)
+        {
+            currentStory.variablesState[InkVariableNameList.facingSE] = State.playerFacing.getFacing().Equals(Facing.SouthEast);
+        }
+
+        return currentStory;
     }
 }

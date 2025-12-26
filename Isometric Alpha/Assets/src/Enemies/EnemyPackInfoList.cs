@@ -284,6 +284,30 @@ public static class EnemyPackInfoList
         enemyPackInfoDict.Add(LocationNameList.campNorthEast, list);
         #endregion
 
+        #region Center Camp
+        list = new List<EnemyPackInfo>();
+
+        list.Add(testFight);
+        list.Add(testFight);
+        list.Add(testFight);
+        list.Add(testFight);
+        list.Add(testFight);
+
+        enemyPackInfoDict.Add(LocationNameList.campCenter, list);
+        #endregion
+
+        #region South East Camp
+        list = new List<EnemyPackInfo>();
+
+        list.Add(testFight);
+        list.Add(testFight);
+        list.Add(testFight);
+        list.Add(testFight);
+        list.Add(testFight);
+
+        enemyPackInfoDict.Add(LocationNameList.campSouthEast, list);
+        #endregion
+
         #region Mine
 
         #region MineLvl_1-1b

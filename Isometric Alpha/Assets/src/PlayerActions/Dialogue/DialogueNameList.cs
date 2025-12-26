@@ -37,6 +37,7 @@ public static class DialogueNameList
 
     #region Vaultable Objects
     public const string vaultableObjectPath = interactablesPath + "VaultableObject";
+    public const string vaultableOrDestroyableObjectPath = interactablesPath + "VaultableOrDestroyableObject";
     #endregion
     
     #endregion
@@ -131,6 +132,8 @@ public static class DialogueNameList
 
     public const string campGatePath = campExteriorPathName + LocationNameList.campCenter + Constants.seperatorChar + NPCNameList.campGate;
 
+    public const string firstBarricadeGuardsPath = campExteriorPathName + LocationNameList.campCenter+ Constants.seperatorChar + "FirstBarricadeGuards";
+
     public const string pageBeforeLeavingPath = campExteriorPathName + LocationNameList.campCenter+ Constants.seperatorChar + NPCNameList.page;
     #endregion
 
@@ -142,6 +145,7 @@ public static class DialogueNameList
     public const string imrePath = campExteriorPathName + LocationNameList.campManse + Constants.seperatorChar + NPCNameList.imre;
     public const string manseFrontDoorPath = campExteriorPathName + LocationNameList.campManse + Constants.seperatorChar + "ManseFrontDoor";
     public const string manseServiceEntrancePath = campExteriorPathName + LocationNameList.campManse + Constants.seperatorChar + "ManseServiceEntrance";
+    public const string secondBarricadeGuardsPath = campExteriorPathName + LocationNameList.campManse+ Constants.seperatorChar + "SecondBarricadeGuards";
     #endregion
     #region Camp South East
     public const string directorStatuePath = campExteriorPathName + LocationNameList.campSouthEast + Constants.seperatorChar + "DirectorStatue";

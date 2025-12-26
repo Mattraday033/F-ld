@@ -68,54 +68,48 @@ public static class Constants
     public const bool removeReveal = false;
 
     public readonly static Vector3 flippedXScale = new Vector3(-1f, 1f, 1f);
-
-    public const string strDiffVarName = "strDifficulty";
-    public const string dexDiffVarName = "dexDifficulty";
-    public const string wisDiffVarName = "wisDifficulty";
-    public const string chaDiffVarName = "chaDifficulty";
-
 }
 
 public static class StatDifficultyList
 {
-    public readonly static KeyValuePair<string, int> strengthDifficultyTwo = new KeyValuePair<string, int>(Constants.strDiffVarName, Constants.difficultyTwo);
-    public readonly static KeyValuePair<string, int> strengthDifficultyThree = new KeyValuePair<string, int>(Constants.strDiffVarName, Constants.difficultyThree);
-    public readonly static KeyValuePair<string, int> strengthDifficultyFour = new KeyValuePair<string, int>(Constants.strDiffVarName, Constants.difficultyFour);
-    public readonly static KeyValuePair<string, int> strengthDifficultyFive = new KeyValuePair<string, int>(Constants.strDiffVarName, Constants.difficultyFive);
-    public readonly static KeyValuePair<string, int> strengthDifficultySix = new KeyValuePair<string, int>(Constants.strDiffVarName, Constants.difficultySix);
-    public readonly static KeyValuePair<string, int> strengthDifficultySeven = new KeyValuePair<string, int>(Constants.strDiffVarName, Constants.difficultySeven);
-    public readonly static KeyValuePair<string, int> strengthDifficultyEight = new KeyValuePair<string, int>(Constants.strDiffVarName, Constants.difficultyEight);
-    public readonly static KeyValuePair<string, int> strengthDifficultyNine = new KeyValuePair<string, int>(Constants.strDiffVarName, Constants.difficultyNine);
-    public readonly static KeyValuePair<string, int> strengthDifficultyTen = new KeyValuePair<string, int>(Constants.strDiffVarName, Constants.difficultyTen);
+    public readonly static KeyValuePair<string, int> strengthDifficultyTwo = new KeyValuePair<string, int>(InkVariableNameList.strDiffVarName, Constants.difficultyTwo);
+    public readonly static KeyValuePair<string, int> strengthDifficultyThree = new KeyValuePair<string, int>(InkVariableNameList.strDiffVarName, Constants.difficultyThree);
+    public readonly static KeyValuePair<string, int> strengthDifficultyFour = new KeyValuePair<string, int>(InkVariableNameList.strDiffVarName, Constants.difficultyFour);
+    public readonly static KeyValuePair<string, int> strengthDifficultyFive = new KeyValuePair<string, int>(InkVariableNameList.strDiffVarName, Constants.difficultyFive);
+    public readonly static KeyValuePair<string, int> strengthDifficultySix = new KeyValuePair<string, int>(InkVariableNameList.strDiffVarName, Constants.difficultySix);
+    public readonly static KeyValuePair<string, int> strengthDifficultySeven = new KeyValuePair<string, int>(InkVariableNameList.strDiffVarName, Constants.difficultySeven);
+    public readonly static KeyValuePair<string, int> strengthDifficultyEight = new KeyValuePair<string, int>(InkVariableNameList.strDiffVarName, Constants.difficultyEight);
+    public readonly static KeyValuePair<string, int> strengthDifficultyNine = new KeyValuePair<string, int>(InkVariableNameList.strDiffVarName, Constants.difficultyNine);
+    public readonly static KeyValuePair<string, int> strengthDifficultyTen = new KeyValuePair<string, int>(InkVariableNameList.strDiffVarName, Constants.difficultyTen);
 
-    public readonly static KeyValuePair<string, int> dexterityDifficultyTwo = new KeyValuePair<string, int>(Constants.dexDiffVarName, Constants.difficultyTwo);
-    public readonly static KeyValuePair<string, int> dexterityDifficultyThree = new KeyValuePair<string, int>(Constants.dexDiffVarName, Constants.difficultyThree);
-    public readonly static KeyValuePair<string, int> dexterityDifficultyFour = new KeyValuePair<string, int>(Constants.dexDiffVarName, Constants.difficultyFour);
-    public readonly static KeyValuePair<string, int> dexterityDifficultyFive = new KeyValuePair<string, int>(Constants.dexDiffVarName, Constants.difficultyFive);
-    public readonly static KeyValuePair<string, int> dexterityDifficultySix = new KeyValuePair<string, int>(Constants.dexDiffVarName, Constants.difficultySix);
-    public readonly static KeyValuePair<string, int> dexterityDifficultySeven = new KeyValuePair<string, int>(Constants.dexDiffVarName, Constants.difficultySeven);
-    public readonly static KeyValuePair<string, int> dexterityDifficultyEight = new KeyValuePair<string, int>(Constants.dexDiffVarName, Constants.difficultyEight);
-    public readonly static KeyValuePair<string, int> dexterityDifficultyNine = new KeyValuePair<string, int>(Constants.dexDiffVarName, Constants.difficultyNine);
-    public readonly static KeyValuePair<string, int> dexterityDifficultyTen = new KeyValuePair<string, int>(Constants.dexDiffVarName, Constants.difficultyTen);
+    public readonly static KeyValuePair<string, int> dexterityDifficultyTwo = new KeyValuePair<string, int>(InkVariableNameList.dexDiffVarName, Constants.difficultyTwo);
+    public readonly static KeyValuePair<string, int> dexterityDifficultyThree = new KeyValuePair<string, int>(InkVariableNameList.dexDiffVarName, Constants.difficultyThree);
+    public readonly static KeyValuePair<string, int> dexterityDifficultyFour = new KeyValuePair<string, int>(InkVariableNameList.dexDiffVarName, Constants.difficultyFour);
+    public readonly static KeyValuePair<string, int> dexterityDifficultyFive = new KeyValuePair<string, int>(InkVariableNameList.dexDiffVarName, Constants.difficultyFive);
+    public readonly static KeyValuePair<string, int> dexterityDifficultySix = new KeyValuePair<string, int>(InkVariableNameList.dexDiffVarName, Constants.difficultySix);
+    public readonly static KeyValuePair<string, int> dexterityDifficultySeven = new KeyValuePair<string, int>(InkVariableNameList.dexDiffVarName, Constants.difficultySeven);
+    public readonly static KeyValuePair<string, int> dexterityDifficultyEight = new KeyValuePair<string, int>(InkVariableNameList.dexDiffVarName, Constants.difficultyEight);
+    public readonly static KeyValuePair<string, int> dexterityDifficultyNine = new KeyValuePair<string, int>(InkVariableNameList.dexDiffVarName, Constants.difficultyNine);
+    public readonly static KeyValuePair<string, int> dexterityDifficultyTen = new KeyValuePair<string, int>(InkVariableNameList.dexDiffVarName, Constants.difficultyTen);
 
-    public readonly static KeyValuePair<string, int> wisdomDifficultyTwo = new KeyValuePair<string, int>(Constants.wisDiffVarName, Constants.difficultyTwo);
-    public readonly static KeyValuePair<string, int> wisdomDifficultyThree = new KeyValuePair<string, int>(Constants.wisDiffVarName, Constants.difficultyThree);
-    public readonly static KeyValuePair<string, int> wisdomDifficultyFour = new KeyValuePair<string, int>(Constants.wisDiffVarName, Constants.difficultyFour);
-    public readonly static KeyValuePair<string, int> wisdomDifficultyFive = new KeyValuePair<string, int>(Constants.wisDiffVarName, Constants.difficultyFive);
-    public readonly static KeyValuePair<string, int> wisdomDifficultySix = new KeyValuePair<string, int>(Constants.wisDiffVarName, Constants.difficultySix);
-    public readonly static KeyValuePair<string, int> wisdomDifficultySeven = new KeyValuePair<string, int>(Constants.wisDiffVarName, Constants.difficultySeven);
-    public readonly static KeyValuePair<string, int> wisdomDifficultyEight = new KeyValuePair<string, int>(Constants.wisDiffVarName, Constants.difficultyEight);
-    public readonly static KeyValuePair<string, int> wisdomDifficultyNine = new KeyValuePair<string, int>(Constants.wisDiffVarName, Constants.difficultyNine);
-    public readonly static KeyValuePair<string, int> wisdomDifficultyTen = new KeyValuePair<string, int>(Constants.wisDiffVarName, Constants.difficultyTen);
+    public readonly static KeyValuePair<string, int> wisdomDifficultyTwo = new KeyValuePair<string, int>(InkVariableNameList.wisDiffVarName, Constants.difficultyTwo);
+    public readonly static KeyValuePair<string, int> wisdomDifficultyThree = new KeyValuePair<string, int>(InkVariableNameList.wisDiffVarName, Constants.difficultyThree);
+    public readonly static KeyValuePair<string, int> wisdomDifficultyFour = new KeyValuePair<string, int>(InkVariableNameList.wisDiffVarName, Constants.difficultyFour);
+    public readonly static KeyValuePair<string, int> wisdomDifficultyFive = new KeyValuePair<string, int>(InkVariableNameList.wisDiffVarName, Constants.difficultyFive);
+    public readonly static KeyValuePair<string, int> wisdomDifficultySix = new KeyValuePair<string, int>(InkVariableNameList.wisDiffVarName, Constants.difficultySix);
+    public readonly static KeyValuePair<string, int> wisdomDifficultySeven = new KeyValuePair<string, int>(InkVariableNameList.wisDiffVarName, Constants.difficultySeven);
+    public readonly static KeyValuePair<string, int> wisdomDifficultyEight = new KeyValuePair<string, int>(InkVariableNameList.wisDiffVarName, Constants.difficultyEight);
+    public readonly static KeyValuePair<string, int> wisdomDifficultyNine = new KeyValuePair<string, int>(InkVariableNameList.wisDiffVarName, Constants.difficultyNine);
+    public readonly static KeyValuePair<string, int> wisdomDifficultyTen = new KeyValuePair<string, int>(InkVariableNameList.wisDiffVarName, Constants.difficultyTen);
 
-    public readonly static KeyValuePair<string, int> charismaDifficultyTwo = new KeyValuePair<string, int>(Constants.chaDiffVarName, Constants.difficultyTwo);
-    public readonly static KeyValuePair<string, int> charismaDifficultyThree = new KeyValuePair<string, int>(Constants.chaDiffVarName, Constants.difficultyThree);
-    public readonly static KeyValuePair<string, int> charismaDifficultyFour = new KeyValuePair<string, int>(Constants.chaDiffVarName, Constants.difficultyFour);
-    public readonly static KeyValuePair<string, int> charismaDifficultyFive = new KeyValuePair<string, int>(Constants.chaDiffVarName, Constants.difficultyFive);
-    public readonly static KeyValuePair<string, int> charismaDifficultySix = new KeyValuePair<string, int>(Constants.chaDiffVarName, Constants.difficultySix);
-    public readonly static KeyValuePair<string, int> charismaDifficultySeven = new KeyValuePair<string, int>(Constants.chaDiffVarName, Constants.difficultySeven);
-    public readonly static KeyValuePair<string, int> charismaDifficultyEight = new KeyValuePair<string, int>(Constants.chaDiffVarName, Constants.difficultyEight);
-    public readonly static KeyValuePair<string, int> charismaDifficultyNine = new KeyValuePair<string, int>(Constants.chaDiffVarName, Constants.difficultyNine);
-    public readonly static KeyValuePair<string, int> charismaDifficultyTen = new KeyValuePair<string, int>(Constants.chaDiffVarName, Constants.difficultyTen);
+    public readonly static KeyValuePair<string, int> charismaDifficultyTwo = new KeyValuePair<string, int>(InkVariableNameList.chaDiffVarName, Constants.difficultyTwo);
+    public readonly static KeyValuePair<string, int> charismaDifficultyThree = new KeyValuePair<string, int>(InkVariableNameList.chaDiffVarName, Constants.difficultyThree);
+    public readonly static KeyValuePair<string, int> charismaDifficultyFour = new KeyValuePair<string, int>(InkVariableNameList.chaDiffVarName, Constants.difficultyFour);
+    public readonly static KeyValuePair<string, int> charismaDifficultyFive = new KeyValuePair<string, int>(InkVariableNameList.chaDiffVarName, Constants.difficultyFive);
+    public readonly static KeyValuePair<string, int> charismaDifficultySix = new KeyValuePair<string, int>(InkVariableNameList.chaDiffVarName, Constants.difficultySix);
+    public readonly static KeyValuePair<string, int> charismaDifficultySeven = new KeyValuePair<string, int>(InkVariableNameList.chaDiffVarName, Constants.difficultySeven);
+    public readonly static KeyValuePair<string, int> charismaDifficultyEight = new KeyValuePair<string, int>(InkVariableNameList.chaDiffVarName, Constants.difficultyEight);
+    public readonly static KeyValuePair<string, int> charismaDifficultyNine = new KeyValuePair<string, int>(InkVariableNameList.chaDiffVarName, Constants.difficultyNine);
+    public readonly static KeyValuePair<string, int> charismaDifficultyTen = new KeyValuePair<string, int>(InkVariableNameList.chaDiffVarName, Constants.difficultyTen);
 
 }

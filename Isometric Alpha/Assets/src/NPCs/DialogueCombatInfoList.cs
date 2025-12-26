@@ -88,5 +88,14 @@ public static class DialogueCombatInfoList
                                                                                             new DeadNameList(new string[]{NPCNameList.clay})
                                                                                         });
 
+    public readonly static NPCCombatInfo barricadeGuardsCombatInfo = new NPCCombatInfo( 
+                                                                     new EnemyPackInfo[]   {   
+                                                                                                EnemyPackInfoList.testFight,
+                                                                                                EnemyPackInfoList.testFight
+                                                                                            },
+                                                                    new DeadNameList[]  {
+                                                                                            new DeadNameList(new string[]{NPCNameList.barricadeGuards+1}),
+                                                                                            new DeadNameList(new string[]{NPCNameList.barricadeGuards+1})
+                                                                                        });
 
 }

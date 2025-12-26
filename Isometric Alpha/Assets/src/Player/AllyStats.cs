@@ -798,29 +798,29 @@ public class AllyStats : Stats
 
     public Story addAllStats(Story currentStory)
     {
-        if (currentStory.variablesState["playerName"] != null)
+        if (currentStory.variablesState[InkVariableNameList.playerName] != null)
         {
-            currentStory.variablesState["playerName"] = getName();
+            currentStory.variablesState[InkVariableNameList.playerName] = getName();
         }
 
-        if (currentStory.variablesState["strength"] != null)
+        if (currentStory.variablesState[InkVariableNameList.strengthVarName] != null)
         {
-            currentStory.variablesState["strength"] = strength;
+            currentStory.variablesState[InkVariableNameList.strengthVarName] = strength;
         }
 
-        if (currentStory.variablesState["dexterity"] != null)
+        if (currentStory.variablesState[InkVariableNameList.dexterityVarName] != null)
         {
-            currentStory.variablesState["dexterity"] = dexterity;
+            currentStory.variablesState[InkVariableNameList.dexterityVarName] = dexterity;
         }
 
-        if (currentStory.variablesState["wisdom"] != null)
+        if (currentStory.variablesState[InkVariableNameList.wisdomVarName] != null)
         {
-            currentStory.variablesState["wisdom"] = wisdom;
+            currentStory.variablesState[InkVariableNameList.wisdomVarName] = wisdom;
         }
 
-        if (currentStory.variablesState["charisma"] != null)
+        if (currentStory.variablesState[InkVariableNameList.charismaVarName] != null)
         {
-            currentStory.variablesState["charisma"] = charisma;
+            currentStory.variablesState[InkVariableNameList.charismaVarName] = charisma;
         }
 
         return currentStory;

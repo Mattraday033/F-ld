@@ -1474,6 +1474,7 @@ public class DialogueManager : MonoBehaviour
 		story = GateAndChestManager.addAllVariables(story);
 		story = Purse.addCoinsToStory(story);
 		story = PartyManager.getPlayerStats().addAllStats(story);
+		story = PlayerMovement.addAllVariables(story);
 
         foreach(IStoryVariableSource source in variableSources)
         {

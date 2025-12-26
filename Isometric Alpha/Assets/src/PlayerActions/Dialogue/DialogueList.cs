@@ -317,7 +317,12 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.wallPatch, wallPatchDialogue);
 
-        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.page,
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.barricadeGuards+1,
+                                new SingleCharacterDialogue(NPCNameList.barricadeGuards+1,
+                                Resources.Load<TextAsset>(DialogueNameList.firstBarricadeGuardsPath),
+                                DialogueCombatInfoList.barricadeGuardsCombatInfo));
+
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.page,
                                 new Dialogue(new string[] { 
                                                             NPCNameList.playerNamePlaceHolder,
                                                             NPCNameList.page,
@@ -523,6 +528,24 @@ public static class DialogueList
         addDialogueToList(LocationNameList.campManse, NPCNameList.manseServiceEntrance + 1,
                             new Dialogue(new string[] { NPCNameList.manseServiceEntrance },
                             Resources.Load<TextAsset>(DialogueNameList.manseServiceEntrancePath)));
+
+        addDialogueToList(LocationNameList.campManse, NPCNameList.barricadeGuards+2,
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.barricadeGuards+2,
+                                                        NPCNameList.guardAndras+2
+                                                      },
+                                Resources.Load<TextAsset>(DialogueNameList.secondBarricadeGuardsPath),
+                                DialogueCombatInfoList.barricadeGuardsCombatInfo));
+
+        addDialogueToList(LocationNameList.campManse, NPCNameList.barricadeGuards+3,
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.barricadeGuards+3,
+                                                        NPCNameList.guardAndras+3
+                                                      },
+                                Resources.Load<TextAsset>(DialogueNameList.secondBarricadeGuardsPath),
+                                DialogueCombatInfoList.barricadeGuardsCombatInfo));
 
         #endregion
 
@@ -899,11 +922,6 @@ public static class DialogueList
         return dialogueList[key.Replace(" ", "")].clone();
     }
 	
-    public static Dialogue getVaultableObjectDialogue(string name)
-    {
-        return new Dialogue(new string[] { Constants.emptyString, name }, Resources.Load<TextAsset>(DialogueNameList.vaultableObjectPath));
-    }
-
 	public static string scrubNameOfEndNumbers(string name)
 	{
 		

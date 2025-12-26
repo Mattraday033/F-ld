@@ -215,6 +215,8 @@ public static class OOCSpawnDetailsList
         #region NECamp
         list = new List<OOCSpawnDetails>();
 
+        list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campNorthEast, Constants.indexZero));
+
         list.Add(new NPCSpawnDetails(NPCNameList.leafPile, new Vector3Int(18, -4), LocationNameList.campNorthEast));
         list.Add(new NPCSpawnDetails(NPCNameList.leafPile, new Vector3Int(18, -5), LocationNameList.campNorthEast));
         list.Add(new NPCSpawnDetails(NPCNameList.leafPile, new Vector3Int(18, -7), LocationNameList.campNorthEast));
@@ -316,6 +318,8 @@ public static class OOCSpawnDetailsList
         #region CenterCamp
         list = new List<OOCSpawnDetails>();
 
+        list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campCenter, Constants.indexZero));
+
         list.Add(new NPCSpawnDetails(NPCNameList.csalan, new Vector3Int(17, 17), LocationNameList.campCenter));
 
         list.Add(new NPCSpawnDetails(NPCNameList.temple, new Vector3Int(9, 11), LocationNameList.campCenter));
@@ -329,15 +333,30 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.feher, new Vector3Int(4, 4), LocationNameList.campCenter));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(8, 0)));
-        list.Add(new NPCSpawnDetails(NPCNameList.page, new Vector3Int(6, 1), LocationNameList.campSouthEast));
+        list.Add(new NPCSpawnDetails(NPCNameList.page, new Vector3Int(6, 1), LocationNameList.campCenter));
 
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-16, -6), VaultableObject.diffTwoVaultableBarrelsOneTile));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-7, -10), VaultableObject.diffTwoVaultableBarrelsOneTile));
+
+        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-8, 3), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-9, 3), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-8, 2), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-9, 2), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-8, 1), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-9, 1), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-8, 0), LocationNameList.campCenter));
+        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-9, 0), LocationNameList.campCenter));
+
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(10, 11), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTile));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(10, 10), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTile));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(10, 9), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTile));
 
         oocSpawnDetailsDict.Add(LocationNameList.campCenter, list);
         #endregion
         #region SECamp
         list = new List<OOCSpawnDetails>();
+
+        list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campSouthEast, Constants.indexZero));
 
         list.Add(new NPCOffGridSpawnDetails(NPCNameList.statue, new Vector3Int(7, 3), LocationNameList.campSouthEast, PrefabNames.directorStatuePath, 
                                     new Vector3Int[] { 
@@ -352,6 +371,9 @@ public static class OOCSpawnDetailsList
                                                         new Vector3Int(8, 4),
                                                         new Vector3Int(8, 3)
                                                      }));
+
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(2, 1), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTile));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(1, 1), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTile));
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(19, 14), Facing.SouthEast));
 
@@ -472,6 +494,23 @@ public static class OOCSpawnDetailsList
         #endregion
         #region Camp Manse
         list = new List<OOCSpawnDetails>();
+
+        list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campManse, Constants.indexZero));
+
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(6, -18), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTile));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(5, -18), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTile));
+
+        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+2, new Vector3Int(2, -18), LocationNameList.campManse));
+        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+2, new Vector3Int(2, -19), LocationNameList.campManse));
+        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+2, new Vector3Int(1, -18), LocationNameList.campManse));
+        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+2, new Vector3Int(1, -19), LocationNameList.campManse));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardAndras+2, new Vector3Int(3, -21))); 
+
+        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+3, new Vector3Int(3, 3), LocationNameList.campManse));
+        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+3, new Vector3Int(3, 2), LocationNameList.campManse));
+        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+3, new Vector3Int(2, 3), LocationNameList.campManse));
+        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+3, new Vector3Int(2, 2), LocationNameList.campManse));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardAndras+3, new Vector3Int(3, -2))); 
 
         list.Add(new NPCSpawnDetails(NPCNameList.imre, new Vector3Int(-6, -9), LocationNameList.campManse));
         list.Add(new NPCSpawnDetails(NPCNameList.imre+1, new Vector3Int(-8, 1), LocationNameList.campManse));

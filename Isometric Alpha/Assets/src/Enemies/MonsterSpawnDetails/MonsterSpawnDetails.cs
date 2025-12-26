@@ -2,47 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MonsterMovementType { Random, Stationary, ChasesPlayer }
+
 public class MonsterSpawnDetails : OOCSpawnDetails
 {
     public const bool followsPlayer = true;
 
     public Facing facing;
-    public bool chasesPlayer;
+    public MonsterMovementType movementType;
 
     public MonsterSpawnDetails(string npcName, Vector3Int cellCoords) :
     base(npcName, cellCoords)
     {
         this.facing = Facing.Random;
-        this.chasesPlayer = false;
+        this.movementType = MonsterMovementType.Random;
     }
 
     public MonsterSpawnDetails(string npcName, Vector3Int cellCoords, Facing facing) :
     base(npcName, cellCoords)
     {
         this.facing = facing;
-        this.chasesPlayer = false;
+        this.movementType = MonsterMovementType.Random;
     }
 
     public MonsterSpawnDetails(string npcName, Vector3Int cellCoords, Facing facing, string tutorialTargetHash) :
     base(npcName, cellCoords)
     {
         this.facing = facing;
-        this.chasesPlayer = false;
+        this.movementType = MonsterMovementType.Random;
         this.tutorialTargetHash = tutorialTargetHash;
     }
 
-    public MonsterSpawnDetails(string npcName, Vector3Int cellCoords, bool chasesPlayer) :
+    public MonsterSpawnDetails(string npcName, Vector3Int cellCoords, MonsterMovementType movementType) :
     base(npcName, cellCoords)
     {
         this.facing = Facing.Random;
-        this.chasesPlayer = chasesPlayer;
+        this.movementType = movementType;
     }
 
-    public MonsterSpawnDetails(string npcName, Vector3Int cellCoords, bool chasesPlayer, Facing facing) :
+    public MonsterSpawnDetails(string npcName, Vector3Int cellCoords, MonsterMovementType movementType, Facing facing) :
     base(npcName, cellCoords)
     {
         this.facing = facing;
-        this.chasesPlayer = chasesPlayer;
+        this.movementType = movementType;
     }
 
     public override string getSpriteName()
@@ -70,7 +72,7 @@ public class MonsterSpawnDetails : OOCSpawnDetails
         MovementManager.addMovementTracker(enemyMovement);
         enemyMovement.initializeAnimationManager();
         enemyMovement.setEnemyFacing(facing);
-        enemyMovement.followsPlayer = chasesPlayer;
+        enemyMovement.movementType = movementType;
         enemyMovement.packName = npcName;
     }
 
@@ -89,7 +91,7 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
     base(npcName, cellCoords)
     {
         this.facing = Facing.Random;
-        this.chasesPlayer = false;
+        this.movementType = MonsterMovementType.Random;
         this.spritePath = spritePath;
     }
 
@@ -97,7 +99,7 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
     base(npcName, cellCoords)
     {
         this.facing = Facing.Random;
-        this.chasesPlayer = false;
+        this.movementType = MonsterMovementType.Random;
         this.spritePath = spritePath;
         this.tutorialTargetHash = tutorialTargetHash;
     }
@@ -134,6 +136,15 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
     public override void spawnActions(GameObject interactable)
     {
         // base.spawnActions(interactable);
+        
+    }
+}
+
+public class BossPackSpawnDetails: MonsterSpawnDetails
+{
+    public BossPackSpawnDetails(string npcName, Vector3Int cellCoords) :
+    base(npcName, cellCoords, MonsterMovementType.Stationary, Facing.Random)
+    {
         
     }
 }

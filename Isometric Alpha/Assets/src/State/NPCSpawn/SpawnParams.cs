@@ -34,6 +34,15 @@ public class InteractableSpawnParams : SpawnParams
         this.onlySpawnWhileHostile = false;
     }
 
+    public InteractableSpawnParams(bool spawnWhileHostile, bool spawnOnlyWhileHostile)
+    {
+        this.startSpawningFlagList = new StartSpawningFlagList();
+        this.stopSpawningFlagList = new StopSpawningFlagList();
+        this.spawnWhileHostile = spawnWhileHostile;
+        this.onlySpawnWhileHostile = spawnOnlyWhileHostile;
+    }
+
+
     public InteractableSpawnParams(StartSpawningFlagList startSpawningFlagList)
     {
         this.startSpawningFlagList = startSpawningFlagList;
@@ -306,6 +315,21 @@ public class HiddenTerrainSpawnParams : SpawnParams
     public override bool canSpawn(string npcName)
     {
         return SecretDoorFlags.secretDoorHasBeenDiscovered(secretDoorFlag);
+    }
+}
+
+public class HostilitySpawnParams : SpawnParams
+{
+    private string locationName;
+
+    public HostilitySpawnParams(string locationName)
+    {
+        this.locationName = locationName;
+    }
+
+    public override bool canSpawn(string npcName)
+    {
+        return AreaList.getArea(locationName).isHostile();
     }
 }
 

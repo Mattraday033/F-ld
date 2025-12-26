@@ -110,6 +110,7 @@ public static class NPCNameList
     public const string crates = "Crates";
     public const string barrels = "Barrels";
     public const string barricade = "Barricade";
+    public const string barricadeGuards = "Barricade Guards";
     public const string halfWall = "Half Wall";
     public const string fallenBeam = "Fallen Beam";
     public const string button = "Button";
@@ -138,6 +139,7 @@ public static class NPCNameList
     #region Vaultable Object
 
     public const string vaultablePrefix = "Vaultable ";
+    public const string hastilyBuiltBarricade = "Hastily Built Barricade";
     public const string vaultableBarrels = vaultablePrefix + " Barrels";
     public const string vaultableRocks = vaultablePrefix + " Rocks";
     public const string vaultableGap = vaultablePrefix + " Gap";

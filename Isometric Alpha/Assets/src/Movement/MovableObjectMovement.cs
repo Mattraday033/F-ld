@@ -11,9 +11,9 @@ public class MovableObjectMovement : EnemyMovement
         set { }
     }
 
-    public override bool followsPlayer
+    public override MonsterMovementType movementType
     {
-        get => false;
+        get => MonsterMovementType.Stationary;
         set { }
     }
 

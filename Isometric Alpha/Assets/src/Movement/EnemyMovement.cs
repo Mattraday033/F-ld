@@ -158,11 +158,11 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	public string tutorialHash;
 	public string packName = "???"; //Worms
 
-    private bool _FollowsPlayer = true;
-    public virtual bool followsPlayer
+    private MonsterMovementType _MovementType = MonsterMovementType.Random;
+    public virtual MonsterMovementType movementType
     {
-        get => _FollowsPlayer;
-        set => _FollowsPlayer = value;
+        get => _MovementType;
+        set => _MovementType = value;
     }
 
 	public bool movesEveryTurn = false;
@@ -264,7 +264,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     private void OnDrawGizmos()
     {
 
-        if (followsPlayer)
+        if (movementType == MonsterMovementType.ChasesPlayer)
         {
 
             int coordsIndex = 0;
@@ -339,24 +339,24 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 			return Vector3Int.zero;
 		}
 
-		if (!followsPlayer)
-		{
-			return findRandomDirection();
-		}
-		else
-		{
-			PathToPlayer pathToPlayer = findPathToPlayer();
+        switch(_MovementType)
+        {
+            case MonsterMovementType.Random:
+                return findRandomDirection();
+            case MonsterMovementType.ChasesPlayer:
+                PathToPlayer pathToPlayer = findPathToPlayer();
 
-			if (pathToPlayer == null || pathToPlayer is null)
-			{
-				//Debug.LogError("Couldn't Find Player");
-				return Vector3Int.zero;
-			}
-			else
-			{
-				return pathToPlayer.getDirection(AreaManager.getMasterGrid().WorldToCell(transform.position));
-			}
-		}
+                if (pathToPlayer == null || pathToPlayer is null)
+                {
+                    return Vector3Int.zero;
+                }
+                else
+                {
+                    return pathToPlayer.getDirection(AreaManager.getMasterGrid().WorldToCell(transform.position));
+                }
+            default:
+                return Vector3Int.zero;
+        }
 	}
 
 	public PathToPlayer findPathToPlayer()

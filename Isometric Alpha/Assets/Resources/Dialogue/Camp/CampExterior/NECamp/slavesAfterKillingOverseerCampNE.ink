@@ -674,7 +674,7 @@ fadeBackIn(60)
 === deactivateExtras ===
 
 {
--not deathFlagGarcha and revoltStarted and crowdFervor >= crowdAppeasementThreshold:
+-crowdFervor >= crowdAppeasementThreshold:
     fadeToBlack(true, false)
 -else:
     fadeToBlack()
@@ -704,7 +704,7 @@ activateQuestStep(The Plan,14)
 }
 
 {
--not deathFlagGarcha and revoltStarted and crowdFervor >= crowdAppeasementThreshold:
+-crowdFervor >= crowdAppeasementThreshold:
 ->7a
 }
 
