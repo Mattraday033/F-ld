@@ -409,6 +409,16 @@ public class AllyStats : Stats
         return Strength.physResistBase + (getStrength() * Strength.physResistPerStrength) + bonusFormulas + "%";
     }
 
+    public override bool rollAgainstPhysicalResistance()
+    {
+        if(getPhysicalResistance() >= Constants.autoSuccess)
+        {
+            return true;
+        }
+
+        return UnityEngine.Random.Range(0f, 1f) <= getPhysicalResistance();
+    }
+
     #endregion
 
     #region Dexterity + Secondaries
@@ -520,6 +530,17 @@ public class AllyStats : Stats
 
         return (Wisdom.mentalResistBase + (getWisdom() * Wisdom.mentalResistPerWisdom) + bonusFormulas) + "%";
     }
+
+    public override bool rollAgainstMentalResistance()
+    {
+        if(getPhysicalResistance() >= Constants.autoSuccess)
+        {
+            return true;
+        }
+
+        return UnityEngine.Random.Range(0f, 1f) <= getPhysicalResistance();
+    }
+
 
     public override int getWeaponSlots()
     {

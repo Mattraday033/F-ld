@@ -412,6 +412,7 @@ public static class EnemyPackInfoList
 
         list.Add(testOneOfEach);
         list.Add(testOneOfEach);
+        list.Add(testOneOfEach);
 
         enemyPackInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section1a, list);
         #endregion

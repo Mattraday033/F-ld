@@ -29,10 +29,26 @@ public class QuestCounter : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public TextMeshProUGUI questCounterText;
 
+    public void updateQuestCounter()
+    {
+        setQuestCounter(questListSource.getNumberOfQuests());
+    }
+
     public void setQuestListSource(IQuestListSource source)
     {
         questListSource = source;
-        setQuestCounter(questListSource.getNumberOfQuests());
+        updateQuestCounter();
+    }
+
+    public void visibilityCheck()
+    {
+        if(questListSource.getNumberOfQuests() <= 0)
+        {
+            gameObject.SetActive(false);
+        } else
+        {
+            gameObject.SetActive(true);
+        }
     }
 
     private void setQuestCounter(int questCount)

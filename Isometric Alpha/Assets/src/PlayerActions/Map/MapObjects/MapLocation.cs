@@ -252,7 +252,10 @@ public class MapLocation : IMapObject
 		if (displayName.Contains(getZoneMapUIDisplayName()))
 		{
 			return displayName.Replace(getZoneMapUIDisplayName() + " - ", "");
-		} else
+		} else if(displayName.ToCharArray()[Constants.indexZero] == '-')
+		{
+			return displayName.Replace("-", "");
+		}else        
 		{
 			return displayName;
 		}

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class InteriorCounter : MonoBehaviour
 {
-    public Transform questCounter;
     public Image[] interiorCounters;
 
     public void setInteriorCounters(int interiorsToSpawn)   
@@ -13,24 +12,21 @@ public class InteriorCounter : MonoBehaviour
         if (interiorsToSpawn <= 0)
         {
             gameObject.SetActive(false);
-            questCounter.localPosition = new Vector3(-67f, 0f, 0f);
             return;
         }
-        else
-        {
-            questCounter.localPosition = new Vector3(-105f, 0f, 0f);
-        }
+
+        gameObject.SetActive(true);
 
         for (int index = 0; index < interiorCounters.Length; index++)
+        {
+            if (index < interiorsToSpawn)
             {
-                if (index < interiorsToSpawn)
-                {
-                    interiorCounters[index].color = Color.white;
-                }
-                else
-                {
-                    interiorCounters[index].color = Color.black;
-                }
+                interiorCounters[index].color = Color.white;
             }
+            else
+            {
+                interiorCounters[index].color = Color.black;
+            }
+        }
     }
 }

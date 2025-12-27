@@ -903,6 +903,12 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
             return;
         }
 
+        if(checkForResistance(target))
+        {
+            DamageNumberPopup.createResistPopUp(target.combatSprite.transform.position, CombatAnimationManager.getInstance().damageNumberCanvas);
+            return;
+        }
+
         traitToApply.traitApplier = getActorStats();
 
         if (!inPreviewMode && actorIsAlly() && traitToApply.isBuff())
@@ -918,6 +924,27 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
         target.addTrait(traitToApply);
     }
 
+    private bool checkForResistance(Stats target)
+    {
+        Trait traitToApply = getAppliedTrait();
+
+        if(!traitToApply.isDebuff())
+        {
+            return false;
+        }
+
+        if(traitToApply.getType().Equals(TraitList.woundTraitType) && target.rollAgainstPhysicalResistance())
+        {
+            return true;
+        } 
+        
+        if(traitToApply.getType().Equals(TraitList.mentalTraitType) && target.rollAgainstMentalResistance())
+        {
+            return true;
+        } 
+
+        return false;
+    }
     #endregion
 
     #region Queueing Actions

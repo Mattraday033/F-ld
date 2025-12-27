@@ -84,15 +84,15 @@ public static class MapObjectList
 			
 			case ZoneKeyList.mineLvl1:
 				
-				return new MapZone(ZoneKeyList.mineLvl1, ZoneKeyList.mineLvl1, null);
+				return new MapZone(ZoneKeyList.mineLvl1, MapDisplayNameList.mineLvl1, null);
 			
 			case ZoneKeyList.mineLvl2:
 				
-				return new MapZone(ZoneKeyList.mineLvl1, ZoneKeyList.mineLvl2, null);
+				return new MapZone(ZoneKeyList.mineLvl1, MapDisplayNameList.mineLvl2, null);
 			
 			case ZoneKeyList.mineLvl3:
 				
-				return new MapZone(ZoneKeyList.mineLvl1, ZoneKeyList.mineLvl3, null);
+				return new MapZone(ZoneKeyList.mineLvl1, MapDisplayNameList.mineLvl3, null);
 			
 			case ZoneKeyList.manseFirstFloor:
 				

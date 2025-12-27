@@ -13,6 +13,8 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     #region Constants
 
+    public const bool failedToResist = false;
+
     public const string zoiTraitName = "'s Influence";
     public const string zoiTraitDescription = "The benefits of a Zone of Influence are being applied to this creature.";
 
@@ -305,6 +307,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return 1;
     }
 
+    public virtual bool rollAgainstPhysicalResistance()
+    {
+        return failedToResist;
+    }
+
     #endregion
 
     #region Dexterity + Secondaries
@@ -331,6 +338,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     public virtual int getPassiveSlotsUnlocked()
     {
         return 0;
+    }
+
+    public virtual bool rollAgainstMentalResistance()
+    {
+        return failedToResist;
     }
 
     #endregion
@@ -678,6 +690,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
             {
                 DamageNumberPopup.create(traitApplicationDamage,
                                      CombatGrid.getPositionAt(position),
+                                     DamageNumberPopup.getDirectionByTargetCoords(position),
                                      CombatAnimationManager.getInstance().damageNumberCanvas,
                                      isNotACrit,
                                      doesNotHealTarget,

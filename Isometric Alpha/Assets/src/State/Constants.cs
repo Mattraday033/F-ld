@@ -58,8 +58,11 @@ public static class Constants
     public const string WISDesignator = "WIS";
     public const string CHADesignator = "CHA";
 
+    public const string resist = "Resist";
+
     public const string seperatorChar = "/";
 
+    public const double autoSuccess = 1.0;
     public const string zeroRating = "0";
 
     public const string emptyString = "";

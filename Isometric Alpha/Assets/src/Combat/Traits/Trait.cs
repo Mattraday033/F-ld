@@ -400,6 +400,7 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
             {
                 DamageNumberPopup.create(getTickDownDamage(),
                                          CombatGrid.getPositionAt(traitHolder.position),
+                                         DamageNumberPopup.getDirectionByTargetCoords(traitHolder.position),
                                          CombatAnimationManager.getInstance().damageNumberCanvas,
                                          false,
                                          false,

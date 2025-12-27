@@ -106,7 +106,8 @@ public class GroundEffectManager : MonoBehaviour
 			{
 				int damageDealt = DamageCalculator.calculateFormula(groundEffect.damageFormula, DamageCalculator.noStatsSource);
 				
-				DamageNumberPopup.create(damageDealt, CombatGrid.getPositionAt(groundEffect.position), getInstance().damageNumberCanvas, isNotACrit, doesNotHealTarget);
+				DamageNumberPopup.create(damageDealt, CombatGrid.getPositionAt(groundEffect.position), DamageNumberPopup.getDirectionByTargetCoords(groundEffect.position),
+                                        getInstance().damageNumberCanvas, isNotACrit, doesNotHealTarget);
 				target.modifyCurrentHealth(DamageCalculator.calculateFormula(groundEffect.damageFormula, DamageCalculator.noStatsSource));
 			}
 			

@@ -26,14 +26,14 @@ public class BackgroundManager : MonoBehaviour
 
     private void buildBackground()
     {
-        if(backgroundKey.Equals(MapObjectList.getCurrentZoneKey()))
+        if(backgroundKey.Equals(getBackgroundKey()))
         {
             return;
         }
 
         destroyAllTilemapPrefabs();
 
-        backgroundKey = MapObjectList.getCurrentZoneKey();
+        backgroundKey = getBackgroundKey();
 
         findBackgroundTilePrefabs();
 
@@ -154,6 +154,21 @@ public class BackgroundManager : MonoBehaviour
     {
         AreaManager.OnAreaSpawn.RemoveListener(buildBackground);
     }
+
+    private static string getBackgroundKey()
+    {
+        string zoneKey = MapObjectList.getCurrentZoneKey();
+
+        switch(zoneKey)
+        {
+            case ZoneKeyList.pit:
+                return ZoneKeyList.mineLvl3;
+
+            default:
+                return zoneKey;
+        }
+    }
+
 }
 /*
 

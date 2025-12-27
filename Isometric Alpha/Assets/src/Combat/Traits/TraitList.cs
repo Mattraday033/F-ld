@@ -345,7 +345,7 @@ public static class TraitList
 		
 		return traits;
 	}
-	
+
 	public static Trait getTrait(string traitName)
 	{
 		return dictionaryOfTraits[traitName];

@@ -18,12 +18,6 @@ public class ChangeMapZoneButton : MonoBehaviour, IQuestListSource
 	private void Awake()
 	{
 		questCounter.setQuestListSource(this);
-
-		if (getNumberOfQuests() > 0)
-		{
-			questCounter.gameObject.SetActive(true);
-		}
-
 	}
 
 	private void setInteractability()
@@ -54,6 +48,15 @@ public class ChangeMapZoneButton : MonoBehaviour, IQuestListSource
 		setInteractability();
 
 		questCounter.setQuestStepGridVisibility(false);
+
+        if (getNumberOfQuests() > 0)
+		{
+		    gameObject.SetActive(true);
+            questCounter.updateQuestCounter();
+		} else
+        {
+            questCounter.gameObject.SetActive(false);
+        }
 	}
 
 	public void deactivate()

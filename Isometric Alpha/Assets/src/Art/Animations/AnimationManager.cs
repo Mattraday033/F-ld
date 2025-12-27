@@ -561,11 +561,21 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         {
             switch(animationType)
             {
+                case CharacterAnimationType.Secondary_Idle:
+
+                    if(!IdleDictionary.idleDictContainsSprites(healthBarManager.linkedStats.getName(), CharacterAnimationType.Secondary_Idle))
+                    {
+                        currentIdle = CharacterAnimationType.Idle_Front;
+                    }
+
+                    haltAllAnimations();
+                    setSpriteToCurrentIdle();
+                    return;
+
                 case CharacterAnimationType.Idle_Front:
                 case CharacterAnimationType.Idle_Back:
                 case CharacterAnimationType.OOC_Idle_Front:
                 case CharacterAnimationType.OOC_Idle_Back: 
-                case CharacterAnimationType.Secondary_Idle:
                 case CharacterAnimationType.Run_Front: 
                 case CharacterAnimationType.Run_Back:
                     haltAllAnimations();

@@ -100,6 +100,16 @@ public static class IdleDictionary
     {
         if(!idleDictContainsSprites(monsterName, animationType))
         {
+            Debug.LogError("no "+animationType.ToString()+" entry for "+monsterName);    
+
+            foreach(KeyValuePair<KeyValuePair<string, CharacterAnimationType>, Sprite[]> kvp in idleDict)
+            {
+                if(kvp.Key.Key.Equals(monsterName))
+                {
+                    Debug.LogError(monsterName + " has entry for " + kvp.Key.Value.ToString());    
+                }
+            }
+
             return null;
         }
 

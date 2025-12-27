@@ -40,7 +40,7 @@ public static class MonsterSpawnDetailsList
         #region NECamp
         list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(13, -3), Facing.SouthWest));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-11, 6), MonsterMovementType.Stationary, Facing.SouthEast));
 
         monsterSpawnDetailsDict.Add(LocationNameList.campNorthEast, list);
         #endregion
@@ -202,6 +202,7 @@ public static class MonsterSpawnDetailsList
         list = new List<MonsterSpawnDetails>();
 
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-11, 13), MonsterMovementType.ChasesPlayer));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(1, 13), MonsterMovementType.ChasesPlayer));
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(1, 13), MonsterMovementType.ChasesPlayer));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section1a, list);

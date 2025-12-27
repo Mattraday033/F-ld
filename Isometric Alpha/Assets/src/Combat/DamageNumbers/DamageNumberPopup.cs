@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+public enum PopUpMoveDirection { Up, UpLeft, UpRight }
 
 public class DamageNumberPopup : MonoBehaviour
 {
@@ -11,10 +12,12 @@ public class DamageNumberPopup : MonoBehaviour
 	
 	private int frameDelay = 0;
 	
+    public PopUpMoveDirection direction = PopUpMoveDirection.UpRight;
+
 	private float disappearTimer = .7f;
 	private float disappearSpeed = 3f;
-	private float moveSpeedY = 1f;
-	private float moveSpeedX = .4f;
+	private const float moveSpeedY = 1f;
+	private const float moveSpeedX = .4f;
 	private Color textColor;
 	
 	void Update() //here for Animation 
@@ -28,7 +31,7 @@ public class DamageNumberPopup : MonoBehaviour
 			frameDelay--;
 		}
 	
-		transform.position += new Vector3(moveSpeedX, moveSpeedY) * Time.deltaTime;
+		transform.position += new Vector3(getMoveSpeedX(), moveSpeedY) * Time.deltaTime;
 		
 		disappearTimer -= Time.deltaTime;
 		
@@ -44,9 +47,22 @@ public class DamageNumberPopup : MonoBehaviour
 		}
 	}
 
-	public void populate(int damageAmount)
+    public float getMoveSpeedX()
+    {
+        switch(direction)
+        {
+            case PopUpMoveDirection.UpRight:
+                return moveSpeedX;
+            case PopUpMoveDirection.UpLeft:
+                return moveSpeedX*-1f;
+            default:
+                return 0f;
+        }
+    }
+
+	public void populate(string damageAmount)
 	{
-		damageNumberTMP.text = "" + damageAmount;
+		damageNumberTMP.text = damageAmount;
 		textColor = damageNumberTMP.color;
 		textColor.a = 1f;
 	}
@@ -61,36 +77,65 @@ public class DamageNumberPopup : MonoBehaviour
 		this.frameDelay = frameDelay;
 	}
 	
-	public static DamageNumberPopup create(int damageAmount, Vector3 newPosition, Transform canvas, bool crit, bool healsTarget)
+	public static DamageNumberPopup createResistPopUp(Vector3 newPosition, Transform canvas)
+	{
+		return create(Constants.resist, newPosition, PopUpMoveDirection.Up, canvas, false, false);
+	}
+    
+	public static DamageNumberPopup create(int damageAmount, Vector3 newPosition, PopUpMoveDirection direction, Transform canvas, bool crit, bool healsTarget)
+	{
+		return create(damageAmount.ToString(), newPosition, direction, canvas, crit, healsTarget);
+	}
+
+	public static DamageNumberPopup create(string damageAmount, Vector3 newPosition, PopUpMoveDirection direction, Transform canvas, bool crit, bool healsTarget)
 	{
 		GameObject damageNumberObject;
 		
 		if(healsTarget)
 		{
-			damageNumberObject = Instantiate(Resources.Load<GameObject>("Healing Numbers PF"), canvas).gameObject;
+			damageNumberObject = Instantiate(Resources.Load<GameObject>(PrefabNames.healingNumbersFont), canvas).gameObject;
 		} else if(crit)
 		{
-			damageNumberObject = Instantiate(Resources.Load<GameObject>("Critical Damage Numbers PF"), canvas).gameObject;
+			damageNumberObject = Instantiate(Resources.Load<GameObject>(PrefabNames.critNumbersFont), canvas).gameObject;
 		} else
 		{
-			damageNumberObject = Instantiate(Resources.Load<GameObject>("Damage Numbers PF"), canvas).gameObject;
+			damageNumberObject = Instantiate(Resources.Load<GameObject>(PrefabNames.damageNumbersFont), canvas).gameObject;
 		}
 
 		DamageNumberPopup popup = damageNumberObject.GetComponent<DamageNumberPopup>();
 		popup.populate(damageAmount);
 		popup.moveTo(newPosition);
+        popup.direction = direction;
 		
 		damageNumberObject.SetActive(true);
 		
 		return popup;
 	}
 	
-	public static DamageNumberPopup create(int damageAmount, Vector3 newPosition, Transform canvas, bool crit, bool healsTarget, int frameDelay)
+	public static DamageNumberPopup create(int damageAmount, Vector3 newPosition, PopUpMoveDirection direction, Transform canvas, bool crit, bool healsTarget, int frameDelay)
 	{
-		DamageNumberPopup popup = create(damageAmount, newPosition, canvas, crit, healsTarget);
+		return create(damageAmount.ToString(), newPosition, direction, canvas, crit, healsTarget, frameDelay);
+	}
+
+	public static DamageNumberPopup create(string damageAmount, Vector3 newPosition, PopUpMoveDirection direction, Transform canvas, bool crit, bool healsTarget, int frameDelay)
+	{
+		DamageNumberPopup popup = create(damageAmount, newPosition, direction, canvas, crit, healsTarget);
 		
 		popup.setFrameDelay(frameDelay);
 		
 		return popup;
 	}
+
+    public static PopUpMoveDirection getDirectionByTargetCoords(GridCoords targetCoords)
+    {
+        bool allySide = CombatGrid.positionIsOnAlliedSide(targetCoords);
+
+        if(allySide)
+        {
+            return PopUpMoveDirection.UpLeft;
+        } else
+        {
+            return PopUpMoveDirection.UpRight;
+        }
+    }
 }

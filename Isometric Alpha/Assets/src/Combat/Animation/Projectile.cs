@@ -81,7 +81,8 @@ public class Projectile : MonoBehaviour, IAnimationTracker
                     }
                 }
 
-                DamageNumberPopup.create(damage, transform.position, CombatAnimationManager.getInstance().damageNumberCanvas, crit, healsTarget);
+                DamageNumberPopup.create(damage, transform.position, DamageNumberPopup.getDirectionByTargetCoords(targetCoords), 
+                                            CombatAnimationManager.getInstance().damageNumberCanvas, crit, healsTarget);
             }
 
             skipSpawningDamageNumbers = true;

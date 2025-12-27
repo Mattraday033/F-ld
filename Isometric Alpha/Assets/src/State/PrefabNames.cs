@@ -14,6 +14,10 @@ public static class PrefabNames
     public const string saveScreen = "Save Screen";
     public const string settingsScreen = "Settings Screen";
 
+    public const string healingNumbersFont = "Healing Numbers PF";
+    public const string critNumbersFont = "Critical Damage Numbers PF";
+    public const string damageNumbersFont = "Damage Numbers PF";
+
     public const string armorDescPanelFull = "Armor Description Panels";
     public const string weaponDescPanelFull = "Weapon Description Panels";
     public const string offHandWeaponDescPanelFull = "Off Hand Weapon Description Panels";

@@ -124,14 +124,17 @@ public class MapTile : MonoBehaviour, IQuestListSource
 
     private void setButtonInteractability()
     {
-
-        if (mapObject != null && mapObject.hasBeenDiscovered() && mapObject.getIsFastTravelDestination() && !AreaList.areaOutsideAllowedFastTravelAreas(mapObject.getLocationName()))
+        if(mapObject == null || 
+           !mapObject.hasBeenDiscovered() ||
+           !mapObject.getIsFastTravelDestination() ||
+           AreaList.areaOutsideAllowedFastTravelAreas(mapObject.getLocationName()) ||
+           (AreaList.areaIsHostile(locationName) && !AreaList.areaAlwaysAllowsFastTravel(locationName)))
         {
-            multiTargetButton.enabled = true;
+            multiTargetButton.enabled = false;
         }
         else
         {
-            multiTargetButton.enabled = false;
+            multiTargetButton.enabled = true;
         }
     }
 
@@ -145,7 +148,6 @@ public class MapTile : MonoBehaviour, IQuestListSource
 
         this.locationName = locationName;
         this.mapObject = MapObjectList.getMapObject(locationName);
-
 
         nameTagParent.SetActive(true);
         locationLabel.text = mapObject.getMapUIDisplayNameWithoutZoneName();
@@ -164,7 +166,7 @@ public class MapTile : MonoBehaviour, IQuestListSource
             return;
         }
 
-        if ((AreaList.areaIsHostile(locationName) && !AreaList.areaAlwaysAllowsFastTravel(locationName)) || AreaList.areaOutsideAllowedFastTravelAreas(locationName))
+        if (fastTravelBlocked())
         {
             fastTravelIcon.setToFastTravelNotAllowed();
             return;
@@ -173,6 +175,12 @@ public class MapTile : MonoBehaviour, IQuestListSource
         {
             fastTravelIcon.setToFastTravelAllowed();
         }
+    }
+
+    private bool fastTravelBlocked()
+    {
+        return (AreaList.areaIsHostile(locationName) && !AreaList.areaAlwaysAllowsFastTravel(locationName)) 
+                || AreaList.areaOutsideAllowedFastTravelAreas(locationName);
     }
 
     private void setFloorImage(Sprite sprite)

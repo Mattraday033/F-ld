@@ -35,7 +35,8 @@ public class EffectAnimationManager : AnimationManager
             elapsedTime += Time.deltaTime;
         }
 
-        DamageNumberPopup.create(damage, transform.position, CombatAnimationManager.getInstance().damageNumberCanvas, crit, healsTarget);
+        DamageNumberPopup.create(damage, transform.position, DamageNumberPopup.getDirectionByTargetCoords(targetCoords),
+                                 CombatAnimationManager.getInstance().damageNumberCanvas, crit, healsTarget);
 
         Stats target = CombatGrid.getCombatantAtCoords(targetCoords);
 
