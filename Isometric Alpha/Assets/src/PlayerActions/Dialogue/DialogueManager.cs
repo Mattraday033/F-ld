@@ -472,11 +472,11 @@ public class DialogueManager : MonoBehaviour
                     //activateQuestStep(string questTitle, int questStepIndex)
                     //activateQuestStep(string questTitle, int questStepIndex, bool haltNotificationQueue)
                     string questTitle3 = getArgument(buffer);
-                    int questStepIndex3 = getArgumentInt(buffer, Constants.indexOne);
+                    string questStepTitle = getArgument(buffer, Constants.indexOne);
 
                     checkForHaltNotificationBoolArg(buffer, Constants.indexTwo);
 
-                    QuestList.activateQuestStep(questTitle3, questStepIndex3);
+                    QuestList.activateQuestStep(questTitle3, questStepTitle);
 
                     OOCUIManager.updateQuestCounter();
 
@@ -492,7 +492,7 @@ public class DialogueManager : MonoBehaviour
 
                     string questTitle = getArgument(buffer);
                     bool questSuccessful = getArgumentBool(buffer, Constants.indexOne);
-                    int finalQuestStep = getArgumentInt(buffer, Constants.indexTwo);
+                    string finalQuestStep = getArgument(buffer, Constants.indexTwo);
 
                     checkForHaltNotificationBoolArg(buffer, Constants.indexThree);
 

@@ -163,7 +163,6 @@ public struct QuestWrapper
     public bool active;
     public bool finished;
     public bool succeeded;
-    public int currentStepIndex;
     public QuestStepWrapper[] steps;
     public DeathStepWrapper[] deathSteps;
 
@@ -173,18 +172,22 @@ public struct QuestWrapper
         this.active = quest.active;
         this.finished = quest.finished;
         this.succeeded = quest.succeeded;
-        this.currentStepIndex = quest.currentStepIndex;
 
-        this.steps = new QuestStepWrapper[quest.steps.Length];
-        for (int i = 0; i < quest.steps.Length; i++)
+        this.steps = new QuestStepWrapper[quest.steps.Count];
+
+        int index = 0;
+        foreach(KeyValuePair<string, QuestStep> kvp in quest.steps)
         {
-            this.steps[i] = new QuestStepWrapper(quest.steps[i]);
+            this.steps[index] = new QuestStepWrapper(kvp.Value);
+            index++;
         }
 
-        this.deathSteps = new DeathStepWrapper[quest.deathSteps.Length];
-        for (int i = 0; i < quest.deathSteps.Length; i++)
+        this.deathSteps = new DeathStepWrapper[quest.deathSteps.Count];
+        index = 0;
+        foreach(KeyValuePair<string, DeathStep> kvp in quest.deathSteps)
         {
-            this.deathSteps[i] = new DeathStepWrapper(quest.deathSteps[i]);
+            this.deathSteps[index] = new DeathStepWrapper(kvp.Value);
+            index++;
         }
     }
 
@@ -193,16 +196,15 @@ public struct QuestWrapper
         quest.active = active;
         quest.finished = finished;
         quest.succeeded = succeeded;
-        quest.currentStepIndex = currentStepIndex;
 
-        for(int stepIndex = 0; stepIndex < quest.steps.Length && stepIndex < steps.Length; stepIndex++)
+        for(int stepIndex = 0; stepIndex < quest.steps.Count && stepIndex < steps.Length; stepIndex++)
         {
-            quest.steps[stepIndex] = steps[stepIndex].unwrapQuestStep(quest.steps[stepIndex]);
+            quest.steps[steps[stepIndex].stepName] = steps[stepIndex].unwrapQuestStep(quest.steps[steps[stepIndex].stepName]);
         }
 
-        for(int stepIndex = 0; stepIndex < quest.deathSteps.Length && stepIndex < deathSteps.Length; stepIndex++)
+        for(int stepIndex = 0; stepIndex < quest.deathSteps.Count && stepIndex < deathSteps.Length; stepIndex++)
         {
-            quest.deathSteps[stepIndex] = deathSteps[stepIndex].unwrapDeathStep(quest.deathSteps[stepIndex]);
+            quest.deathSteps[deathSteps[stepIndex].stepName] = deathSteps[stepIndex].unwrapDeathStep(quest.deathSteps[deathSteps[stepIndex].stepName]);
         }
 
         return quest;
@@ -212,11 +214,13 @@ public struct QuestWrapper
 [System.Serializable]
 public struct QuestStepWrapper
 {
+    public string stepName;
     public bool active;
     public int activationIndex;
 
     public QuestStepWrapper(QuestStep step)
     {
+        this.stepName = step.stepName;
         this.active = step.active;
         this.activationIndex = step.activationIndex;
     }
@@ -232,12 +236,15 @@ public struct QuestStepWrapper
 [System.Serializable]
 public struct DeathStepWrapper
 {
+    public string stepName;
     public bool active;
     public int activationIndex;
     public int currentStepOnDeath;
 
     public DeathStepWrapper(DeathStep deathStep)
     {
+        
+        this.stepName = deathStep.stepName;
         this.active = deathStep.active;
         this.activationIndex = deathStep.activationIndex;
         this.currentStepOnDeath = deathStep.currentStepOnDeath;

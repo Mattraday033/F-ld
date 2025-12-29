@@ -365,10 +365,10 @@ public static class ShopItemQuestChecker
         switch (item.getKey())
         {
             case "Candy":
-                QuestList.activateQuestStep("Múzsa's Sweet Tooth", 4);
+                QuestList.activateQuestStep(QuestNameList.muzsasSweetToothQuestTitle, QuestNameList.muzsasSweetToothStepTitleFour);
                 break;
             case "Lost Iron Nugget":
-                QuestList.finishQuest("Stockhouse Stash", 12, questSuccessful);
+                QuestList.finishQuest("Stockhouse Stash", QuestNameList.stockhouseStashStepTitleTwelve, questSuccessful);
                 break;
             default:
                 return;

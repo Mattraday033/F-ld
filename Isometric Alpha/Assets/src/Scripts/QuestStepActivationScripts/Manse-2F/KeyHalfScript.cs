@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class KeyHalfScript : QuestStepActivationScript
 {
-    private const string questName = "The Plan";
-
-    private const int haveBothHalvesQuestStepIndex = 17; 
-    private const int haveOneHalfQuestStepIndex = 16;
-
     public override void runScript()
     {
         bool hasFirstKeyHalf = Inventory.inventoryContainsItem(ItemList.getItem(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyFrontIndex).getKey());
@@ -16,10 +11,10 @@ public class KeyHalfScript : QuestStepActivationScript
 
         if (hasFirstKeyHalf && hasSecondKeyHalf)
         {
-            QuestList.activateQuestStep(questName, haveBothHalvesQuestStepIndex);
+            QuestList.activateQuestStep(QuestNameList.thePlanQuestTitle, QuestNameList.thePlanStepTitleSeventeen);
         } else if (hasFirstKeyHalf || hasSecondKeyHalf)
         {
-            QuestList.activateQuestStep(questName, haveOneHalfQuestStepIndex);
+            QuestList.activateQuestStep(QuestNameList.thePlanQuestTitle, QuestNameList.thePlanStepTitleSixteen);
         } else
         {
             Debug.LogError("KeyHalfScript ran but no key halves detected");

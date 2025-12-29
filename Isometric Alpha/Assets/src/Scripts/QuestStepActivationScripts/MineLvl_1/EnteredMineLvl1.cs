@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class EnteredMineLvl1 : QuestStepActivationScript
 {
-    private const string questName = "Explore the Mine";
-
-    private const int nextQuestStepIndex = 1;
-
     public override void runScript()
     {
         if (!Flags.getFlag(FlagNameList.enteredMineLvl1))
         {
-            QuestList.activateQuestStep(questName, nextQuestStepIndex);
+            QuestList.activateQuestStep(QuestNameList.exploreTheMineQuestTitle, QuestNameList.exploreTheMineStepTitleOne);
             Flags.setFlag(FlagNameList.enteredMineLvl1, true);
         }
     }

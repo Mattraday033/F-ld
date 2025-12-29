@@ -14,7 +14,7 @@ public class BookItem : UsableItem
 	
 	public int index;
 	public string questName;
-	public int questStep = -1;
+	public string questStepName;
 	public string[] flagsFlippedWhenRead;
 
 	public BookPopUpButton bookPopUpButton;
@@ -34,31 +34,31 @@ public class BookItem : UsableItem
         this.bookPopUpButton = new BookPopUpButton();
     }
 
-	public BookItem(ItemListID listID, string key, string loreDescription, int index, string questName, int questStep): base(listID, key, loreDescription, bookUseDescription, subtype, bookIconName, bookWorth) 
+	public BookItem(ItemListID listID, string key, string loreDescription, int index, string questName, string questStepName): base(listID, key, loreDescription, bookUseDescription, subtype, bookIconName, bookWorth) 
 	{
 		this.index = index;
 		this.questName = questName;
-		this.questStep = questStep;
+		this.questStepName = questStepName;
 
         this.bookPopUpButton = new BookPopUpButton();
     }
 
-	public BookItem(ItemListID listID, string key, string loreDescription, int index, string[] flagsFlippedWhenRead, string questName, int questStep): base(listID, key, loreDescription, bookUseDescription, subtype, bookIconName, bookWorth) 
+	public BookItem(ItemListID listID, string key, string loreDescription, int index, string[] flagsFlippedWhenRead, string questName, string questStepName): base(listID, key, loreDescription, bookUseDescription, subtype, bookIconName, bookWorth) 
 	{
 		this.index = index;
 		this.flagsFlippedWhenRead = flagsFlippedWhenRead;
 		this.questName = questName;
-		this.questStep = questStep;
+		this.questStepName = questStepName;
 
         this.bookPopUpButton = new BookPopUpButton();
     }
 	
-	public BookItem(ItemListID listID, string key, string loreDescription, int index, string[] flagsFlippedWhenRead, string questName, int questStep, int quantity): base(listID, key, loreDescription, bookUseDescription, subtype, bookIconName, bookWorth, quantity) 
+	public BookItem(ItemListID listID, string key, string loreDescription, int index, string[] flagsFlippedWhenRead, string questName, string questStepName, int quantity): base(listID, key, loreDescription, bookUseDescription, subtype, bookIconName, bookWorth, quantity) 
 	{
 		this.index = index;
 		this.flagsFlippedWhenRead = flagsFlippedWhenRead;
 		this.questName = questName;
-		this.questStep = questStep;
+		this.questStepName = questStepName;
 
         this.bookPopUpButton = new BookPopUpButton();
     }
@@ -114,9 +114,9 @@ public class BookItem : UsableItem
 	
 	public void setQuestStepOnRead()
 	{
-		if(questName != null && !(questName is null) && questStep >= 0)
+		if(questName != null && questStepName != null)
 		{
-			QuestList.activateQuestStep(questName, questStep);
+			QuestList.activateQuestStep(questName, questStepName);
 		}
 	}
 	
