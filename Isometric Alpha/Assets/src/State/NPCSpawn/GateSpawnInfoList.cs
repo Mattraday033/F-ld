@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ink.Runtime;
 
 public static class GateSpawnInfoList
 {
@@ -72,11 +73,23 @@ public static class GateSpawnInfoList
 
         list.Add(new GateSpawnInfo(Constants.indexZero,
                                     NPCNameList.barracksGate,
-                                    LocationNameList.guardHouseNorthEast,
+                                    LocationNameList.guardHouseSouthWest,
                                     PrefabNames.portcullis2x1Path,
                                     new Vector3Int(-16, -1),
                                     Constants.sizeTwo,
                                     Axis.DescendingY));
+
+        list.Add(new GateWithKeySpawnInfo(Constants.indexOne,
+                                    NPCNameList.barracksArmoryGate,
+                                    LocationNameList.guardHouseSouthWest,
+                                    PrefabNames.portcullis2x1Path,
+                                    new Vector3Int(-6, 0),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX,
+                                    new GateKeyDetails("*This is the gate to the Barracks' Armory. It is currently locked, and watched closely by the guards.*",
+                                                       ItemList.barracksArmoryKeyName,
+                                                       HostilityScriptList.openBarracksGateScriptKey,
+                                                       "the " + MapDisplayNameList.lovashiCamp)));
 
         gateSpawnInfoDict.Add(LocationNameList.guardHouseSouthWest, list);
 
@@ -618,7 +631,7 @@ public class GateSpawnInfo : AxisSpawnInfo
 {
     protected int gateIndex;
     protected string npcName;
-    private string spriteName;
+    protected string spriteName;
     protected Dictionary<string, int> statDifficulties;
 
     public GateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell) :
@@ -629,7 +642,6 @@ public class GateSpawnInfo : AxisSpawnInfo
         this.tutorialTargetHash = "";
         this.statDifficulties = new Dictionary<string, int>();
     }
-
 
     public GateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell, int size, Axis axis) :
     base(currentArea, startCell, size, axis)
@@ -827,4 +839,58 @@ public class GateWithHiddenTerrainSpawnInfo : GateSpawnInfo
         return new GateWithHiddenTerrainSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, skewed(), statDifficulties, hiddenTerrainFlag, tint);
     }
 
+}
+
+
+public class GateKeyDetails : IStoryVariableSource
+{
+
+    public string description = "";
+    public string keyName = "";
+
+    public string hostileAreaName = "";
+    public string hostilityScriptKey = "";
+
+    public GateKeyDetails(string description, string keyName)
+    {
+        this.description = description;
+        this.keyName = keyName;
+    }
+
+    public GateKeyDetails(string description, string keyName, string hostilityScriptKey, string hostileAreaName)
+    {
+        this.description = description;
+        this.keyName = keyName;
+
+        this.hostilityScriptKey = hostilityScriptKey;
+        this.hostileAreaName = hostileAreaName;
+    }
+
+    public Story addVariables(Story story)
+    {
+        story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.description, description);
+        story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.keyName, keyName);
+
+        story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.hostileAreaName, hostileAreaName);
+        story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.hostilityScriptKey, hostilityScriptKey);
+  
+        return story;
+    }
+
+}
+
+public class GateWithKeySpawnInfo : GateSpawnInfo
+{
+    private GateKeyDetails gateKeyDetails;
+
+    public GateWithKeySpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, int size, Axis axis, GateKeyDetails gateKeyDetails) :
+    base(gateIndex, npcName, currentArea, spriteName, startCell, size, axis)
+    {
+        this.gateKeyDetails = gateKeyDetails;
+    }
+
+    public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
+    {
+        return new GateWithKeySpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), skewed(),  indexHasSprite(spriteName, index), axis, gateKeyDetails);
+    }
 }

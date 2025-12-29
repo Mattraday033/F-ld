@@ -5,160 +5,6 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using Newtonsoft.Json;
-using UnityEngine.SceneManagement;
-
-[System.Serializable]
-public struct InventoryWrapper
-{
-    public string key;
-    public string[] inventory;
-}
-
-
-[System.Serializable]
-public struct PositionWrapper
-{
-    public float x;
-    public float y;
-    public float z;
-
-    public PositionWrapper(Vector3 position)
-    {
-        x = position.x;
-        y = position.y;
-        z = 0f;
-    }
-
-    public Vector3 getPosition()
-    {
-        return new Vector3(x, y, z);
-    }
-}
-
-[System.Serializable]
-public struct EnemyStatWrapper
-{
-    public PositionWrapper positionWrapper;
-
-    public Facing facing;
-
-    public int intimidateCounter;
-    public int cunningCounter;
-    public int retreatCounter;
-
-    public EnemyStatWrapper(Vector3 position, Facing facing, int intimidateCounter, int cunningCounter, int retreatCounter)
-    {
-        positionWrapper = new PositionWrapper(position);
-        this.facing = facing;
-        this.intimidateCounter = intimidateCounter;
-        this.cunningCounter = cunningCounter;
-        this.retreatCounter = retreatCounter;
-    }
-
-    public Vector3 getPosition()
-    {
-        return positionWrapper.getPosition();
-    }
-}
-
-[System.Serializable]
-public struct FlagWrapper
-{
-
-    public string flagName;
-    public bool flagStatus;
-
-    public FlagWrapper(string flagName, bool flagStatus)
-    {
-        this.flagName = flagName;
-        this.flagStatus = flagStatus;
-    }
-
-    public FlagWrapper(KeyValuePair<string, bool> kvp)
-    {
-        this.flagName = kvp.Key;
-        this.flagStatus = kvp.Value;
-    }
-
-    public static FlagWrapper[] getAllFlagsInDictionary(Dictionary<string, bool> dict)
-    {
-        List<FlagWrapper> flagWrappers = new List<FlagWrapper>();
-
-        foreach (KeyValuePair<string, bool> kvp in dict)
-        {
-            flagWrappers.Add(new FlagWrapper(kvp));
-        }
-
-        return flagWrappers.ToArray();
-    }
-
-    public static Dictionary<string, bool> convertFlagWrapperListToDictionary(FlagWrapper[] flagWrappers)
-    {
-        Dictionary<string, bool> dict = new Dictionary<string, bool>();
-
-        foreach (FlagWrapper wrapper in flagWrappers)
-        {
-            dict[wrapper.flagName] = wrapper.flagStatus;
-        }
-
-        return dict;
-    }
-
-}
-
-[System.Serializable]
-public struct StatsWrapper
-{
-    public string key;
-
-    public int strength;
-    public int dexterity;
-    public int wisdom;
-    public int charisma;
-
-    public int level;
-    public int xp;
-    public int totalHealth;
-    public int currentHealth;
-
-    public bool canJoinParty;
-
-    public bool placed;
-
-    public string partyMemberPlacedPosition;
-    public GridCoords partyMemberFormationCoords;
-
-    public string[] currentEquipment;
-    public string[] combatActions;
-
-    public List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
-    {
-        if (!canJoinParty)
-        {
-            return new List<DescriptionPanelBuildingBlock>();
-        }
-
-        List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
-
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, key));
-
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Level: " + level));
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Health: " + currentHealth + "/" + totalHealth));
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Experience: " + xp));
-
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, ""));
-
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Strength: " + strength));
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Dexterity: " + dexterity));
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Wisdom: " + wisdom));
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Charisma: " + charisma));
-
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, ""));
-
-        return buildingBlocks;
-    }
-
-}
 
 public interface IJSONConvertable
 {
@@ -202,7 +48,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 
 	public string[] currentInventory;
 	public string[] currentJunk;
-	public string[] currentQuestList;
+	public QuestWrapper[] currentQuestList;
 	public string[] currentKnownMapData;
 	public string[] currentAreaHostilities;
 
@@ -243,7 +89,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		saveBlueprint.currentFlags = Flags.getFlagsForSave();
 		saveBlueprint.currentInventory = SaveBlueprint.convertToJson<Item>(State.inventory);
 		saveBlueprint.currentJunk = convertToJson<Item>(State.junkPocket);
-		saveBlueprint.currentQuestList = convertToJson(State.questDictionary);
+		saveBlueprint.currentQuestList = QuestList.getQuestWrappers();
 		saveBlueprint.currentKnownMapData = SaveBlueprint.convertAllKnownMapDataToJson();
 		saveBlueprint.currentAreaHostilities = SaveBlueprint.convertAllAreaHostilitiesToJson();
 		saveBlueprint.currentChoices = convertToJson<ChoiceKey>(ChoiceManager.choices);
@@ -307,7 +153,6 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		this.playerFacing = (int) GetFromJson.getElementFromJson(this.saveName, nameof(playerFacing), jsonDynamic, SaveDefaultValues.defaultFacing);
 		this.onLeftFoot = GetFromJson.getElementFromJson(this.saveName, nameof(onLeftFoot), jsonDynamic, SaveDefaultValues.defaultBoolFalse);
 
-
 		this.currentFlags = GetFromJson.getElementFromJson(this.saveName, nameof(currentFlags), jsonDynamic, SaveDefaultValues.defaultCurrentFlags);
 		this.currentChoices = GetFromJson.getElementFromJson(this.saveName, nameof(currentChoices), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
 		this.currentDeathFlags = GetFromJson.getElementFromJson(this.saveName, nameof(currentDeathFlags), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
@@ -317,7 +162,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		this.currentInventory = GetFromJson.getElementFromJson(this.saveName, nameof(currentInventory), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
 		this.currentJunk = GetFromJson.getElementFromJson(this.saveName, nameof(currentJunk), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
 
-		this.currentQuestList = GetFromJson.getElementFromJson(this.saveName, nameof(currentQuestList), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
+		this.currentQuestList = GetFromJson.getElementFromJson(this.saveName, nameof(currentQuestList), jsonDynamic, SaveDefaultValues.defaultEmptyQuestWrapperArray);
 		this.currentKnownMapData = GetFromJson.getElementFromJson(this.saveName, nameof(currentKnownMapData), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray).ToObject<string[]>();
 		this.currentAreaHostilities = GetFromJson.getElementFromJson(this.saveName, nameof(currentAreaHostilities), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
 
@@ -433,36 +278,6 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 		{
 			return ItemList.getItem(itemListID);
 		}
-	}
-
-	public static void resetAndOverwriteQuestDictionary(Dictionary<string, Quest> newQuestDictionary)
-	{
-		QuestList.buildQuestListFromScratch();
-
-		foreach (KeyValuePair<string, Quest> kvp in newQuestDictionary)
-		{
-			if (State.questDictionary.ContainsKey(kvp.Key))
-			{
-				State.questDictionary[kvp.Key] = kvp.Value;
-			}
-		}
-	}
-
-	public Dictionary<string, Quest> extractQuestListFromJson()
-	{
-		Dictionary<string, Quest> newQuestDictionary = new Dictionary<string, Quest>();
-
-		for (int questIndex = 0; questIndex < currentQuestList.Length; questIndex++)
-		{
-			Quest currentQuest = Quest.extractFromJson(currentQuestList[questIndex]);
-
-			if (currentQuest != null)
-			{
-				newQuestDictionary.Add(currentQuest.getName(), currentQuest);
-			}
-		}
-
-		return newQuestDictionary;
 	}
 
 	public Dictionary<string, ChoiceKey> extractChoicesFromJson()

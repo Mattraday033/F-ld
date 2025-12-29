@@ -8,6 +8,7 @@ public abstract class OOCSpawnDetails
 
     private const string gameObjectNameSuffix = "'s GameObject";
     private const string gameObjectPlaceHolderName = "PlaceHolder GameObject";
+    protected const string noTutorialTargetHash = Constants.emptyString;
 
     public string tutorialTargetHash = "";
 
@@ -906,10 +907,21 @@ public class NPCSpawnDetails : OffSetSpawnDetails
 public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
 {
 
+    private string animationName;
+    private Facing facing;
+
     public NPCWithAnimationsSpawnDetails(string npcName, Vector3Int cellCoords, string areaName) :
     base(npcName, cellCoords, areaName)
     {
-        
+        this.animationName = MonsterNameList.executioner;
+        facing = Facing.SouthWest;
+    }
+
+    public NPCWithAnimationsSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string animationName, Facing facing) :
+    base(npcName, cellCoords, areaName)
+    {
+        this.animationName = animationName;
+        this.facing = facing;
     }
 
     public override Transform getParent()
@@ -927,8 +939,8 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
 
     public virtual void spawnActions(AnimationManager animationManager)
     {
-        animationManager.setAnimations(MonsterNameList.executioner);
-        
+        animationManager.setAnimations(animationName);
+        animationManager.setFacing(facing);
     }
 }
 
@@ -1011,6 +1023,11 @@ public class NPCOffGridSpawnDetails : NPCSpawnDetails
 
     public NPCOffGridSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName) :
     base(npcName, cellCoords, areaName, spriteName)
+    {
+    }
+
+    public NPCOffGridSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName, bool flipX, float offset) :
+    base(npcName, cellCoords, areaName, spriteName, flipX, offset)
     {
     }
 
@@ -1206,6 +1223,29 @@ public class GateSpawnDetails : CustomMouseHoverNPCSpawnDetails
     }
 }
 
+public class GateWithKeySpawnDetails : GateSpawnDetails
+{
+    private GateKeyDetails gateKeyDetails;
+
+    public GateWithKeySpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, bool skewed, bool showSprite, Axis axis, GateKeyDetails gateKeyDetails) :
+    base(npcName, cellCoords, currentArea, spriteName, noTutorialTargetHash, skewed, showSprite, axis, new Dictionary<string, int>())
+    {
+        this.gateKeyDetails = gateKeyDetails;
+    }
+
+    public override Dialogue getDialogue(string areaName)
+    {
+        return new SingleCharacterDialogue(npcName, Resources.Load<TextAsset>(DialogueNameList.gateWithKeyPath));
+    }
+
+    public override void spawnActions(DialogueTrigger dialogueTrigger)
+    {
+        base.spawnActions(dialogueTrigger);
+
+        dialogueTrigger.dialogue.variableSources.Add(gateKeyDetails);
+    }
+}
+
 public class TemporaryGateSpawnDetails : GateSpawnDetails
 {
     public TemporaryGateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed, Axis axis, Dictionary<string, int> statDifficulties) :
@@ -1333,6 +1373,40 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
         Dialogue dialogue = dialogueTrigger.dialogue;
 
         dialogue.variableSources.Add(secretDoorInfo);
+    }
+}
+
+public class LadderSpawnDetails : NPCSpawnDetails
+{
+    public const float offsetY = .1f;
+    public const bool doNotFlipX = false;
+
+    public Ladder ladder;
+
+    public LadderSpawnDetails(Vector3Int cellCoords, string spriteName, Ladder ladder) :
+    base(NPCNameList.ladder, cellCoords, Constants.emptyString, spriteName, doNotFlipX, offsetY)
+    {
+        this.ladder = ladder;
+    }
+
+    public LadderSpawnDetails(Vector3Int cellCoords, string spriteName, bool flipX, Ladder ladder) :
+    base(NPCNameList.ladder, cellCoords, Constants.emptyString, spriteName, flipX, offsetY)
+    {
+        this.ladder = ladder;
+    }
+
+    public override Dialogue getDialogue(string areaName)
+    {
+        return Ladder.getDialogue();
+    }
+
+    public override void spawnActions(DialogueTrigger mainTrigger)
+    {
+        base.spawnActions(mainTrigger);
+
+        mainTrigger.dialogue.variableSources.Add(ladder);
+
+        SpawnInfoManager.spawnTransitionSpace(ladder.locationName, ladder.destinationName, cellCoords, ladder.facing);
     }
 }
 
@@ -1713,7 +1787,6 @@ public class HostilityTerrainSpawnDetails : HiddenTerrainSpawnDetails
     public override bool spawnsOnSecretDoorActivation()
     {
         return false;
-
     }
     public override SpawnParams getSpawnParams()
     {

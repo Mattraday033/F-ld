@@ -5403,7 +5403,7 @@ PrefabInstance:
     - target: {fileID: 7809821531317374320, guid: e57beddfde017664693528e8c1bb98b5,
         type: 3}
       propertyPath: m_TileAssetArray.Array.size
-      value: 22
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 7809821531317374320, guid: e57beddfde017664693528e8c1bb98b5,
         type: 3}
@@ -7898,7 +7898,7 @@ PrefabInstance:
     - target: {fileID: 7809821531317374320, guid: e57beddfde017664693528e8c1bb98b5,
         type: 3}
       propertyPath: m_Tiles.Array.data[235].first.x
-      value: -29
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 7809821531317374320, guid: e57beddfde017664693528e8c1bb98b5,
         type: 3}
@@ -9518,6 +9518,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 7809821531317374320, guid: e57beddfde017664693528e8c1bb98b5,
         type: 3}
+      propertyPath: m_TileAssetArray.Array.data[22].m_Data
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809821531317374320, guid: e57beddfde017664693528e8c1bb98b5,
+        type: 3}
       propertyPath: m_TileSpriteArray.Array.data[0].m_Data
       value: 
       objectReference: {fileID: 21300000, guid: b05441cade88a3947b97dc52e4e1305f,
@@ -10496,6 +10501,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TileAssetArray.Array.data[21].m_RefCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809821531317374320, guid: e57beddfde017664693528e8c1bb98b5,
+        type: 3}
+      propertyPath: m_TileAssetArray.Array.data[22].m_RefCount
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7809821531317374320, guid: e57beddfde017664693528e8c1bb98b5,
         type: 3}
@@ -135597,7 +135607,7 @@ PrefabInstance:
     - target: {fileID: 9036732094104403220, guid: f3a4ee1083fcb6a40b85d6ca7d61a8d0,
         type: 3}
       propertyPath: m_Tiles.Array.data[123].first.x
-      value: -32
+      value: -29
       objectReference: {fileID: 0}
     - target: {fileID: 9036732094104403220, guid: f3a4ee1083fcb6a40b85d6ca7d61a8d0,
         type: 3}

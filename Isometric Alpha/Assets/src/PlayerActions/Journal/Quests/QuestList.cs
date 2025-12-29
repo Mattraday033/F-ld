@@ -12,6 +12,9 @@ public static class QuestList
 	private const string jsonFileExtension = ".json";
     private const string metaFileExtension = ".meta";
 
+
+	private static Dictionary<string, Quest> questDict = new Dictionary<string, Quest>();
+
     static QuestList()
 	{
 		//Do not change quest add order. Would need to either write something to find the quest in the list as if it's not an ordered list (time consuming to write and run)
@@ -45,23 +48,23 @@ public static class QuestList
 		
 		quest.title = jsonDynamic["title"];
 
-		quest.steps = new QuestStep[stepNum];
+		quest.steps = new Dictionary<string, QuestStep>();
 
 		for (int i = 0; i < stepNum; i++)
 		{
 			stepName = jsonDynamic["steps"][i]["stepName"];
 			journalDescription = jsonDynamic["steps"][i]["journalDescription"];
 
-			quest.steps[i] = new QuestStep(quest, false, i, stepName, journalDescription);
+			quest.steps[stepName] = new QuestStep(quest, false, i, stepName, journalDescription);
 
 			if (jsonDynamic["steps"][i]["MapZone"] != null && jsonDynamic["steps"][i]["MapLocation"] != null)
 			{
-				quest.steps[i].mapZone = jsonDynamic["steps"][i]["MapZone"];
-				quest.steps[i].mapLocation = jsonDynamic["steps"][i]["MapLocation"];
+				quest.steps[stepName].mapZone = jsonDynamic["steps"][i]["MapZone"];
+				quest.steps[stepName].mapLocation = jsonDynamic["steps"][i]["MapLocation"];
 			}
 		}
 		
-		quest.deathSteps = new DeathStep[deathStepNum];
+		quest.deathSteps = new Dictionary<string, DeathStep>();
 		
 		for(int i = 0; i < deathStepNum; i++)
 		{
@@ -87,7 +90,7 @@ public static class QuestList
 				succeedOnActivation = false;
 			}
 			
-			quest.deathSteps[i] = new DeathStep(quest, false, -1, stepName, journalDescription, deadName, firstStep, lastStep, failOnActivation, succeedOnActivation);
+			quest.deathSteps[stepName] = new DeathStep(quest, false, -1, stepName, journalDescription, deadName, firstStep, lastStep, failOnActivation, succeedOnActivation);
 		}
 		
 		return quest;
@@ -95,29 +98,40 @@ public static class QuestList
  
 	public static Quest getQuest(string questTitle)
 	{
-		return State.questDictionary[questTitle];
+		return questDict[questTitle];
 	}
  
+    public static QuestWrapper[] getQuestWrappers()
+    {
+        List<QuestWrapper> questWrappers = new List<QuestWrapper>();
+
+        foreach(KeyValuePair<string, Quest> kvp in questDict)
+        {
+            questWrappers.Add(new QuestWrapper(kvp.Value));
+        }
+
+        return questWrappers.ToArray();   
+    }
+
 	public static void checkForDeadNames()
 	{
-		foreach(KeyValuePair<string, Quest> kvp in State.questDictionary)
+		foreach(KeyValuePair<string, Quest> kvpQuest in questDict)
 		{
-			Quest quest = kvp.Value;
+			Quest quest = kvpQuest.Value;
 
             if (quest.active && !quest.finished)
 			{
-				foreach(DeathStep deathStep in quest.deathSteps)
+				foreach(KeyValuePair<string, DeathStep> kvpDeathStep in quest.deathSteps)
 				{
-					if(DeathFlagManager.isDead(deathStep.deadName))
+					if(DeathFlagManager.isDead(kvpDeathStep.Value.deadName))
 					{
-						if(deathStep.currentStepOnDeath < 0) //how you tell you shouldn't activate any more death steps. If currentStepOnDeath < 0 but
-						{									 //the character is dead, you need to activate. If not, whatever the correct deathstep is 
+						if(kvpDeathStep.Value.currentStepOnDeath < 0) //how you tell you shouldn't activate any more death steps. If currentStepOnDeath < 0 but
+						{									 //the character is dead, you need to activate. If not, whatever the correct kvpDeathStep.Value is 
 															 //should already be activated
-							deathStep.currentStepOnDeath = quest.currentStepIndex; // set currentStepOnDeath to > 0
-							if(deathStep.currentStepOnDeath >= deathStep.firstStep &&
-							   deathStep.currentStepOnDeath <= deathStep.lastStep) //if the deathStep.currentStepOnDeath (and thus quest.currentStepIndex)
-							{													   //is within the deathsteps purview, activate that deathstep
-								deathStep.active = true;
+							if(kvpDeathStep.Value.currentStepOnDeath >= kvpDeathStep.Value.firstStep &&
+							   kvpDeathStep.Value.currentStepOnDeath <= kvpDeathStep.Value.lastStep) //if the kvpDeathStep.Value.currentStepOnDeath (and thus quest.currentStepIndex)
+							{													   //is within the kvpDeathStep.Values purview, activate that kvpDeathStep.Value
+								kvpDeathStep.Value.setActiveStatus(true);
 							}
 						}
 					}
@@ -130,7 +144,7 @@ public static class QuestList
 	{
 		//Always add quests to the end of the order.
 
-		State.questDictionary = new Dictionary<string, Quest>();
+		questDict = new Dictionary<string, Quest>();
 
         TextAsset[] questTextAssets = Resources.LoadAll<TextAsset>(pathToQuestFolder);
 
@@ -138,32 +152,31 @@ public static class QuestList
 		{
 			Quest quest = convertJsonTextAssetToQuest(textAsset);
 
-			State.questDictionary.Add(quest.getName(), quest);
+			questDict.Add(quest.getName(), quest);
 		}
     }
 	
-	public static Quest activateQuestStep(string questTitle, int questStepIndex)
+	public static Quest activateQuestStep(string questTitle, string questStepName)
 	{
-		Quest quest = State.questDictionary[questTitle];
+		Quest quest = questDict[questTitle];
 
-		if (quest.steps.Length > questStepIndex &&
-			!quest.steps[questStepIndex].active)
+		if (quest.steps.ContainsKey(questStepName) &&
+			!quest.steps[questStepName].active)
 		{
-            quest.steps[questStepIndex].active = true;
+            quest.steps[questStepName].setActiveStatus(true);
 
             if(!quest.finished)
             {
                 quest.active = true;
-			    quest.currentStepIndex = questStepIndex;
-                NotificationManager.addToNotificationQueue(quest.steps[questStepIndex]);
+                NotificationManager.addToNotificationQueue(quest.steps[questStepName]);
             }
 
 			return quest;
 		}
-		else if (quest.steps.Length > questStepIndex &&
-			quest.steps[questStepIndex].active)
+		else if (quest.steps.ContainsKey(questStepName) &&
+			quest.steps[questStepName].active)
 		{
-			Debug.LogError("Step at index (" + questStepIndex + ") already active for quest: " + questTitle);
+			Debug.LogError("Step (" + questStepName + ") already active for quest: " + questTitle);
 		}
 		else
 		{
@@ -173,9 +186,9 @@ public static class QuestList
 		return null;
 	}
 
-    public static void finishQuest(string questTitle, int questStepIndex, bool questSuccessful)
+    public static void finishQuest(string questTitle, string questStepName, bool questSuccessful)
     {
-		Quest questToFinish = activateQuestStep(questTitle, questStepIndex); 
+		Quest questToFinish = activateQuestStep(questTitle, questStepName); 
 		questToFinish.finished = true;
         questToFinish.succeeded = questSuccessful;
     }
@@ -184,7 +197,7 @@ public static class QuestList
 	{
 		List<Quest> activeUnfinishedQuests = new List<Quest>();
 		
-		foreach(KeyValuePair<string, Quest> kvp in State.questDictionary)
+		foreach(KeyValuePair<string, Quest> kvp in questDict)
 		{
 			Quest quest = kvp.Value;
 
@@ -242,7 +255,7 @@ public static class QuestList
 	{
 		List<IDescribable> activeQuests = new List<IDescribable>();
 
-		foreach (KeyValuePair<string, Quest> kvp in State.questDictionary)
+		foreach (KeyValuePair<string, Quest> kvp in questDict)
 		{
 			Quest quest = kvp.Value;
 
@@ -265,13 +278,16 @@ public static class QuestList
 		return activeQuests;
 	}
 
-	public static string checkForQuestNameChange(string questName) //checks if a quest name has been changed and if so, returns the name it was changed to.
-																   //otherwise, returns the old name as is.
-	{															   //no quests have been changed yet, so empty list
-		switch (questName)
+	public static void resetAndOverwriteQuestDictionary(QuestWrapper[] questWrappers)
+	{
+		buildQuestListFromScratch();
+
+		foreach (QuestWrapper questWrapper in questWrappers)
 		{
-			default:
-				return questName;
+            if(questDict.ContainsKey(questWrapper.title))
+            {
+                questDict[questWrapper.title] = questWrapper.unwrapQuest(questDict[questWrapper.title]);
+            }
 		}
 	}
 }

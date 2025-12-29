@@ -168,6 +168,11 @@ public static class DialogueList
                             new SingleCharacterDialogue(NPCNameList.barracksGate,
                             Resources.Load<TextAsset>(DialogueNameList.barracksGatePath)));
 
+
+        addDialogueToList(LocationNameList.guardHouseSouthWest, NPCNameList.guard,
+                            new SingleCharacterDialogue(NPCNameList.guard,
+                            Resources.Load<TextAsset>(DialogueNameList.barracksGuardPath)));
+
         #endregion
 
         #region Stockhouse

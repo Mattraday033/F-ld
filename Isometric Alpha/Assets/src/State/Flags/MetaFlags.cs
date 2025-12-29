@@ -13,6 +13,8 @@ public static class MetaFlags
     {
         metaFlags = new Dictionary<string, bool>();
 
+        metaFlags[MetaFlagNameList.inHostileArea] = AreaList.currentAreaIsHostile();
+
         //who is at Guard Punishment scene
         metaFlags[MetaFlagNameList.marcosIsAtTrial] = !DeathFlagManager.isDead(NPCNameList.guardMarcos);
         metaFlags[MetaFlagNameList.taborIsAtTrial] = !DeathFlagManager.isDead(NPCNameList.chiefTabor);

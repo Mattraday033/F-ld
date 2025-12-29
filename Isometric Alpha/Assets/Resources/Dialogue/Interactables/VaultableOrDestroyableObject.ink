@@ -45,8 +45,16 @@ VAR playerName = ""
     +Vault over the {objectName}. <Dex {dexterity}/{dexDifficulty}>
         ->1c
 }
+
+{
+-dexterity >= dexDifficulty or strength >= strDifficulty:
+    +\*Leave*
+        ->Close
+-else:
     +\*Leave* <Str {strength}/{strDifficulty}> / <Dex {dexterity}/{dexDifficulty}>
         ->Close
+}
+
 
 === 1b ===
 
@@ -56,7 +64,7 @@ openGateWithKey({gateKey})
 
 fadeBackIn(60)
 
-The way is clear.
+\*The way is clear.*
     
     ->Close
 

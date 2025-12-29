@@ -33,6 +33,20 @@ public static class ChestItemIDList
 
         #endregion
 
+        #region GuardHouse SW
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.questItemListIndex, ItemList.toolBundleIndex));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.bronzeHelmetIndex));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.bronzeCuirassIndex));
+        list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.bronzeGreatspearIndex));
+        list.Add(new ItemListID(ItemList.keyItemListIndex, ItemList.barracksArmoryKeyIndex));
+
+        chestItemIDList.Add(LocationNameList.guardHouseSouthWest, list);
+
+        #endregion
+
         #region MineLvl_1-1c
 
         list = new List<ItemListID>();

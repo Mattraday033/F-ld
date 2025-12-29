@@ -23,6 +23,7 @@ public static class FlagNameList
         public const string choseWisdomAtStart = "choseWisdomAtStart"; //Used to determine which tutorial quest objects spawn in slaveshack6
         public const string choseCharismaAtStart = "choseCharismaAtStart"; //Used to determine which tutorial quest objects spawn in slaveshack6
         public const string givenTutorialQuest = "givenTutorialQuest"; //given tutorial quest by Kastor, can talk to Thatch now
+        public const string toldToInvestigateScreamingInThatchsHut = "toldToInvestigateScreamingInThatchsHut"; //Told about screaming in thatch's hut
         public const string thatchRemovedTutorialRubble = "thatchRemovedTutorialRubble";
         public const string wisdomTutorialWallsFound = "wisdomTutorialWallsFound";
         public const string foundSlate = "foundSlate"; //Got past guards in thatch's hut, not need to make it back to Kastor
@@ -42,6 +43,7 @@ public static class FlagNameList
 
         //kastor convo flags
         public const string metKastor = "metKastor"; //if the player has spoken to Kastor before
+        public const string kastorReactedToHostility = "kastorReactedToHostility";
         public const string askedKastorWhoHeIs = "askedKastorWhoHeIs"; //if the player asks kastor's name
         public const string gaveKastorYourName = "gaveKastorYourName"; //if the player gave their name to Kastor
         public const string askedKastorToHelpEscape = "askedKastorToHelpEscape"; //if the player asks Kastor to help him escape before giving the password

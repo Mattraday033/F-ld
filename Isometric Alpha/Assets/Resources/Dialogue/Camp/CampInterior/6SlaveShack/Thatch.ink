@@ -7,6 +7,7 @@ VAR givenFullExplanation = false
 
 VAR givenTutorialQuest = false
 VAR toldKastorOfThatchsFate = false
+VAR toldToInvestigateScreamingInThatchsHut = false
 
 VAR metThatch = false
 VAR slateFound = false
@@ -57,10 +58,14 @@ setToTrue(metThatch)
 
 \*This man is toweringly tall, with the hard muscles one acquires after years of labor. He has deep circles under his eyes, and a weariness about him that you must work hard at to keep from catching. He regards you for a moment.* Who are you? 
 
-    +I'm looking for a man named Thatch. Is that you?
-        ->1b
+{
+-toldToInvestigateScreamingInThatchsHut:
     +I'm {playerName}. Kastor sent me to investigate all the screaming coming from this hut.
         ->2a
+}
+    +I'm looking for a man named Thatch. Is that you?
+        ->1b
+
 
 === 1b ===
 
@@ -90,8 +95,11 @@ I'm Thatch. Am I needed for more work?
 
 Look, I'll say or do anything to get a bit of rest. What will get you to shut up and leave me alone the fastest?
 
+{
+-toldToInvestigateScreamingInThatchsHut:
     +Fine, I'll cut to it. Kastor has a plan to escape. He want's you in on it.
         ->1d
+}
     +Hopefully "anything" includes joining an escape attempt, because that's why I'm here.
         ->1d
 
@@ -99,7 +107,12 @@ Look, I'll say or do anything to get a bit of rest. What will get you to shut up
 
 I understand, but I'm beyond caring at this point. Ask what you need, and then let me rest.
 
+{
+-toldToInvestigateScreamingInThatchsHut:
     +Fine, I'll cut to it. Kastor has a plan to escape. He want's you in on it.
+        ->1d
+}
+    +I'm planning to escape. I need your help with that.
         ->1d
 
 === 1d ===
@@ -195,8 +208,10 @@ activateQuestStep(Look for Thatch, 1)
 === skippedTutorial ===
 
 I think... I think I already knew that. Somewhere, deep down. But thank you for telling me this. I have no reason to stay any longer.
-
-activateQuestStep(Look for Thatch, 2)
+{
+-toldToInvestigateScreamingInThatchsHut:
+    activateQuestStep(Look for Thatch, 2)
+}
 setToTrue(toldThatchAboutSlate)
 
 ->addThatchToParty(false)

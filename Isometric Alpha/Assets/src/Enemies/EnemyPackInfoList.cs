@@ -23,9 +23,11 @@ public static class EnemyPackInfoList
 
     public readonly static EnemyPackInfo guardAndrasWithKeyFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.guardAndras }, DropTableList.slaveMineDT1Name,
                                                                                     new ItemListID[]  {new ItemListID(ItemList.armorListIndex, ItemList.luckyTalismanIndex),
-                                                                                                        new ItemListID(ItemList.keyItemListIndex, ItemList.mineArmoryKeyIndex)});
+                                                                                                        new ItemListID(ItemList.keyItemListIndex, ItemList.mineArmoryKeyIndex),
+                                                                                                        new ItemListID(ItemList.keyItemListIndex, ItemList.barracksArmoryKeyIndex)});
     public readonly static EnemyPackInfo guardAndrasWithOutKeyFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.guardAndras }, DropTableList.slaveMineDT1Name,
-                                                                                        new ItemListID[] { new ItemListID(ItemList.armorListIndex, ItemList.luckyTalismanIndex) });
+                                                                                        new ItemListID[] { new ItemListID(ItemList.armorListIndex, ItemList.luckyTalismanIndex),
+                                                                                                        new ItemListID(ItemList.keyItemListIndex, ItemList.barracksArmoryKeyIndex)});
     public readonly static EnemyPackInfo imreFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.imre }, DropTableList.slaveMineDT1Name);
 
     public readonly static EnemyPackInfo ml3GuardsWithBarricades = new EnemyPackInfo(new EnemyAmount[] { 
@@ -274,6 +276,22 @@ public static class EnemyPackInfoList
         list.Add(twoGiantBatsTwoBatSwarms);
 
         enemyPackInfoDict.Add(LocationNameList.slaveShackSix, list);
+        #endregion
+
+        #region GuardHouse NE
+        list = new List<EnemyPackInfo>();
+
+        list.Add(testFight);
+
+        enemyPackInfoDict.Add(LocationNameList.guardHouseNorthEast, list);
+        #endregion
+
+        #region GuardHouse SW
+        list = new List<EnemyPackInfo>();
+
+        list.Add(testFight);
+
+        enemyPackInfoDict.Add(LocationNameList.guardHouseSouthWest, list);
         #endregion
 
         #region North East Camp

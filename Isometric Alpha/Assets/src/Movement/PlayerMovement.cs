@@ -1455,10 +1455,10 @@ public class PlayerMovement : MovementTracker
             if (Helpers.hasCollision(transitionCollider, LayerAndTagManager.transitionLayerMask))
             {
                 // NewSceneTransition transition = Helpers.getCollision(transitionCollider, LayerAndTagManager.transitionLayerMask).transform.parent.GetComponent<NewSceneTransition>();
-                // TransitionManager.changeScene(transition.getTransitionInfo());
+                // TransitionManager.changeLocation(transition.getTransitionInfo());
 
                 Transition transition = Helpers.getCollision(transitionCollider, LayerAndTagManager.transitionLayerMask).transform.GetComponent<TransitionSpace>().getTransition();
-                TransitionManager.changeScene(transition);
+                TransitionManager.changeLocation(transition);
                 return true;
             }
 

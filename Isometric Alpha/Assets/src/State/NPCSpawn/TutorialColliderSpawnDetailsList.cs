@@ -48,7 +48,7 @@ public static class TutorialColliderSpawnDetailsList
                                                     TutorialSequenceList.questCounterTutorialSeenFlag,
                                                     Constants.sizeThree, Axis.DescendingX));
 
-        list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campSouthEast, new Vector3Int(24,1),
+        list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campSouthEast, new Vector3Int(28,1),
                                                     TutorialSequenceList.questCounterTutorialSequenceKey,
                                                     TutorialSequenceList.questCounterTutorialSeenFlag,
                                                     Constants.sizeThree, Axis.DescendingY));

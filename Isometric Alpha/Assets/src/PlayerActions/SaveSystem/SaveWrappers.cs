@@ -1,0 +1,253 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+[System.Serializable]
+public struct InventoryWrapper
+{
+    public string key;
+    public string[] inventory;
+}
+
+
+[System.Serializable]
+public struct PositionWrapper
+{
+    public float x;
+    public float y;
+    public float z;
+
+    public PositionWrapper(Vector3 position)
+    {
+        x = position.x;
+        y = position.y;
+        z = 0f;
+    }
+
+    public Vector3 getPosition()
+    {
+        return new Vector3(x, y, z);
+    }
+}
+
+[System.Serializable]
+public struct EnemyStatWrapper
+{
+    public PositionWrapper positionWrapper;
+
+    public Facing facing;
+
+    public int intimidateCounter;
+    public int cunningCounter;
+    public int retreatCounter;
+
+    public EnemyStatWrapper(Vector3 position, Facing facing, int intimidateCounter, int cunningCounter, int retreatCounter)
+    {
+        positionWrapper = new PositionWrapper(position);
+        this.facing = facing;
+        this.intimidateCounter = intimidateCounter;
+        this.cunningCounter = cunningCounter;
+        this.retreatCounter = retreatCounter;
+    }
+
+    public Vector3 getPosition()
+    {
+        return positionWrapper.getPosition();
+    }
+}
+
+[System.Serializable]
+public struct FlagWrapper
+{
+
+    public string flagName;
+    public bool flagStatus;
+
+    public FlagWrapper(string flagName, bool flagStatus)
+    {
+        this.flagName = flagName;
+        this.flagStatus = flagStatus;
+    }
+
+    public FlagWrapper(KeyValuePair<string, bool> kvp)
+    {
+        this.flagName = kvp.Key;
+        this.flagStatus = kvp.Value;
+    }
+
+    public static FlagWrapper[] getAllFlagsInDictionary(Dictionary<string, bool> dict)
+    {
+        List<FlagWrapper> flagWrappers = new List<FlagWrapper>();
+
+        foreach (KeyValuePair<string, bool> kvp in dict)
+        {
+            flagWrappers.Add(new FlagWrapper(kvp));
+        }
+
+        return flagWrappers.ToArray();
+    }
+
+    public static Dictionary<string, bool> convertFlagWrapperListToDictionary(FlagWrapper[] flagWrappers)
+    {
+        Dictionary<string, bool> dict = new Dictionary<string, bool>();
+
+        foreach (FlagWrapper wrapper in flagWrappers)
+        {
+            dict[wrapper.flagName] = wrapper.flagStatus;
+        }
+
+        return dict;
+    }
+
+}
+
+[System.Serializable]
+public struct StatsWrapper
+{
+    public string key;
+
+    public int strength;
+    public int dexterity;
+    public int wisdom;
+    public int charisma;
+
+    public int level;
+    public int xp;
+    public int totalHealth;
+    public int currentHealth;
+
+    public bool canJoinParty;
+
+    public bool placed;
+
+    public string partyMemberPlacedPosition;
+    public GridCoords partyMemberFormationCoords;
+
+    public string[] currentEquipment;
+    public string[] combatActions;
+
+    public List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
+    {
+        if (!canJoinParty)
+        {
+            return new List<DescriptionPanelBuildingBlock>();
+        }
+
+        List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
+
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, key));
+
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Level: " + level));
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Health: " + currentHealth + "/" + totalHealth));
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Experience: " + xp));
+
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, ""));
+
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Strength: " + strength));
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Dexterity: " + dexterity));
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Wisdom: " + wisdom));
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Charisma: " + charisma));
+
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, ""));
+
+        return buildingBlocks;
+    }
+
+}
+
+[System.Serializable]
+public struct QuestWrapper
+{
+    public string title;
+    public bool active;
+    public bool finished;
+    public bool succeeded;
+    public int currentStepIndex;
+    public QuestStepWrapper[] steps;
+    public DeathStepWrapper[] deathSteps;
+
+    public QuestWrapper(Quest quest)
+    {
+        this.title = quest.title;
+        this.active = quest.active;
+        this.finished = quest.finished;
+        this.succeeded = quest.succeeded;
+        this.currentStepIndex = quest.currentStepIndex;
+
+        this.steps = new QuestStepWrapper[quest.steps.Length];
+        for (int i = 0; i < quest.steps.Length; i++)
+        {
+            this.steps[i] = new QuestStepWrapper(quest.steps[i]);
+        }
+
+        this.deathSteps = new DeathStepWrapper[quest.deathSteps.Length];
+        for (int i = 0; i < quest.deathSteps.Length; i++)
+        {
+            this.deathSteps[i] = new DeathStepWrapper(quest.deathSteps[i]);
+        }
+    }
+
+    public Quest unwrapQuest(Quest quest)
+    {
+        quest.active = active;
+        quest.finished = finished;
+        quest.succeeded = succeeded;
+        quest.currentStepIndex = currentStepIndex;
+
+        for(int stepIndex = 0; stepIndex < quest.steps.Length && stepIndex < steps.Length; stepIndex++)
+        {
+            quest.steps[stepIndex] = steps[stepIndex].unwrapQuestStep(quest.steps[stepIndex]);
+        }
+
+        for(int stepIndex = 0; stepIndex < quest.deathSteps.Length && stepIndex < deathSteps.Length; stepIndex++)
+        {
+            quest.deathSteps[stepIndex] = deathSteps[stepIndex].unwrapDeathStep(quest.deathSteps[stepIndex]);
+        }
+
+        return quest;
+    }
+}
+
+[System.Serializable]
+public struct QuestStepWrapper
+{
+    public bool active;
+    public int activationIndex;
+
+    public QuestStepWrapper(QuestStep step)
+    {
+        this.active = step.active;
+        this.activationIndex = step.activationIndex;
+    }
+
+    public QuestStep unwrapQuestStep(QuestStep questStep)
+    {
+        questStep.setActiveStatus(active, activationIndex);
+
+        return questStep;
+    }
+}
+
+[System.Serializable]
+public struct DeathStepWrapper
+{
+    public bool active;
+    public int activationIndex;
+    public int currentStepOnDeath;
+
+    public DeathStepWrapper(DeathStep deathStep)
+    {
+        this.active = deathStep.active;
+        this.activationIndex = deathStep.activationIndex;
+        this.currentStepOnDeath = deathStep.currentStepOnDeath;
+    }
+
+    public DeathStep unwrapDeathStep(DeathStep deathStep)
+    {
+        deathStep.setActiveStatus(active, activationIndex);
+        deathStep.currentStepOnDeath = currentStepOnDeath;
+
+        return deathStep;
+    }
+}

@@ -9,7 +9,7 @@ public class Transition
 {
     public int index;
     public string currentAreaName;
-    public string destinationAreaName;
+    public string destinationName;
 
     public Facing playerSpawnDirection;
 
@@ -19,11 +19,11 @@ public class Transition
     public bool usableForFastTravel;
     public PlayerInteractionScript scriptOnTransition; 
 
-    //used in fast travelling
-    public Transition(string currentAreaName, string destinationAreaName)
+    //used in fast traveling
+    public Transition(string currentAreaName, string destinationName)
     {
         this.currentAreaName = currentAreaName;
-        this.destinationAreaName = destinationAreaName;
+        this.destinationName = destinationName;
         this.usableForFastTravel = true;
 
         this.cellCoords = PlayerMovement.getMovementGridCoords();
@@ -33,10 +33,10 @@ public class Transition
         this.outputMultiplier = 0; //to prevent autosave from moving player
     }
 
-    public Transition(string currentAreaName, string destinationAreaName, Vector3Int cellCoords, int index, Facing playerSpawnDirection, bool usableForFastTravel, int outputMultiplier, PlayerInteractionScript scriptOnTransition)
+    public Transition(string currentAreaName, string destinationName, Vector3Int cellCoords, int index, Facing playerSpawnDirection, bool usableForFastTravel, int outputMultiplier, PlayerInteractionScript scriptOnTransition)
     {
         this.currentAreaName = currentAreaName;
-        this.destinationAreaName = destinationAreaName;
+        this.destinationName = destinationName;
 
         this.cellCoords = cellCoords;
         this.index = index;
@@ -52,8 +52,8 @@ public class Transition
 
     public bool sharesHash(Transition transition)
     {
-        return currentAreaName.Equals(transition.destinationAreaName) &&
-            destinationAreaName.Equals(transition.currentAreaName) &&
+        return currentAreaName.Equals(transition.destinationName) &&
+            destinationName.Equals(transition.currentAreaName) &&
             transition.index == index;
     }
 
@@ -72,28 +72,57 @@ public class Transition
         return usableForFastTravel;
     }
 
-    public Vector3Int getOutPutCellCoords()
+    public virtual Vector3Int getPositionOnSaveMultiplier()
+    {
+        return getOutPutCellCoords();
+    }
+
+    public virtual Vector3Int getOutPutCellCoords()
+    {
+        return multiplyCellCoords(outputMultiplier);
+    }
+
+    protected Vector3Int multiplyCellCoords(int multiplier)
     {
         switch (playerSpawnDirection)
         {
             case Facing.NorthEast:
-                return cellCoords + MovementManager.distance1TileNorthEastGrid * outputMultiplier;
+                return cellCoords + MovementManager.distance1TileNorthEastGrid * multiplier;
             case Facing.NorthWest:
-                return cellCoords + MovementManager.distance1TileNorthWestGrid * outputMultiplier;
+                return cellCoords + MovementManager.distance1TileNorthWestGrid * multiplier;
             case Facing.SouthEast:
-                return cellCoords + MovementManager.distance1TileSouthEastGrid * outputMultiplier;
+                return cellCoords + MovementManager.distance1TileSouthEastGrid * multiplier;
             default:
-                return cellCoords + MovementManager.distance1TileSouthWestGrid * outputMultiplier;
+                return cellCoords + MovementManager.distance1TileSouthWestGrid * multiplier;
         }
     }
 
 }
 
+public class LadderTransition : Transition
+{
+    private const bool notFastTravelCapable = false;
+
+    public LadderTransition(string locationName, string destinationName, Vector3Int cellCoords, Facing playerSpawnDirection):
+    base(locationName, destinationName, cellCoords, Constants.indexZero, playerSpawnDirection, notFastTravelCapable, Constants.sizeOne, null)
+    {
+        
+    }
+
+    public override Vector3Int getPositionOnSaveMultiplier()
+    {
+        return multiplyCellCoords(Constants.sizeZero);
+    }
+}
+
 public class TransitionSpace : MonoBehaviour, ICounter
 {
 
+    public string currentAreaName;
+    public string destinationName;
+
     [SerializeField]
-    private Transition transition;
+    public Transition transition;
     public Collider2D collider;
 
     public Transition getTransition()
@@ -104,6 +133,9 @@ public class TransitionSpace : MonoBehaviour, ICounter
     public void setTransition(Transition transition)
     {
         this.transition = transition;
+
+        currentAreaName = transition.currentAreaName;
+        destinationName = transition.destinationName;
 
         if (transition.fastTravelCapable())
         {
@@ -150,7 +182,7 @@ public class TransitionSpace : MonoBehaviour, ICounter
     {
         List<UnityEvent> listOfEvents = new List<UnityEvent>();
 
-        listOfEvents.Add(TransitionManager.AfterTransition);
+        listOfEvents.Add(TransitionManager.CollectTransitionSpaces);
 
         return listOfEvents;
     }

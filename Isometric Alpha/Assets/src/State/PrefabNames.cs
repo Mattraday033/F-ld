@@ -353,5 +353,9 @@ public static class PrefabNames
     public const string lovashiCampMapTile = manMadeFolder + "Lovashi Camp";
     public const string mineMapTile = manMadeFolder + "mine";
 
+    private const string ladderFolder = spriteFolder + "Ladders/";
+    public const string ladderTallNE = ladderFolder + "Ladder_Tall_NE";
+    public const string ladderTallSW = ladderFolder + "Ladder_Tall_SW";
+
     #endregion
 }

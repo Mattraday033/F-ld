@@ -46,8 +46,7 @@ VAR facingSE = false
 Halt, slave! Riot control is in effect. Any slave that is found in their huts without a weapon after order is restored to the camp will be pardoned. Anyone who continues to resist will be put to death. What say you?
 
     +I'm getting through this barricade whether you man it or not. For freedom! <Attack>
-        enterCombat({withBarricadeFightIndex})
-        ->Close
+        ->combat(withBarricadeFightIndex)
     +\*Leave without fighting.*
         ->Close
 
@@ -55,9 +54,15 @@ Halt, slave! Riot control is in effect. Any slave that is found in their huts wi
 
 Blast, the rioters got behind us! To arms!
 
-enterCombat({withoutBarricadeFightIndex})
-->Close
+->combat(withoutBarricadeFightIndex)
     
+=== combat(fightIndex) ===
+
+killWithoutDeactivation({speakerIndex})
+enterCombat({fightIndex})
+
+->Close
+
 === Close ===
 
 close()

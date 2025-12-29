@@ -6,36 +6,30 @@ using UnityEngine;
 
 public static class ScriptOnLocationEntryList
 {
-
-
-    private static Dictionary<string, List<PlayerInteractionScript>> scriptOnAreaEntryDict;
-
+    private static Dictionary<string, List<PlayerInteractionScript>> scriptOnLocationEntryDict;
 
     public static List<PlayerInteractionScript> getScriptsOnLocationEntry()
     {
-        string zoneKey = MapObjectList.getCurrentZoneKey();
-
-        if (!scriptOnAreaEntryDict.ContainsKey(AreaManager.locationName) ||
-            MapLocation.hasBeenDiscovered(zoneKey, AreaManager.locationName))
+        if (!scriptOnLocationEntryDict.ContainsKey(AreaManager.locationName))
         {
             return new List<PlayerInteractionScript>();
         }
         
-        return scriptOnAreaEntryDict[AreaManager.locationName];
+        return scriptOnLocationEntryDict[AreaManager.locationName];
     }
 
     [RuntimeInitializeOnLoadMethod]
     public static void initialize()
     {
-        scriptOnAreaEntryDict = new Dictionary<string, List<PlayerInteractionScript>>();
+        scriptOnLocationEntryDict = new Dictionary<string, List<PlayerInteractionScript>>();
         List<PlayerInteractionScript> list;
 
-        #region Mine_Lvl_1
+        #region MineLvl_1
         list = new List<PlayerInteractionScript>();
 
         list.Add(new EnteredMineLvl1());
 
-        scriptOnAreaEntryDict.Add(ZoneKeyList.mineLvl1 + LocationNameList.section1a, list);
+        scriptOnLocationEntryDict.Add(ZoneKeyList.mineLvl1 + LocationNameList.section1a, list);
         #endregion
     }
 

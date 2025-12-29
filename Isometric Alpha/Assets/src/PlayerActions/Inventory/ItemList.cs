@@ -123,6 +123,9 @@ public static class ItemList
 	public const int directorsOfficeKeyFrontIndex = 2;
 	public const int directorsOfficeKeyBackIndex = 3;
 	public const int munitionsKeyIndex = 4;
+    public const int barracksArmoryKeyIndex = 5;
+
+    public const string barracksArmoryKeyName = "Barracks Armory Key";
 	
 	public const int ironNuggetIndex = 0;
 	public const int goldLocketIndex = 1;	  // x1
@@ -303,7 +306,8 @@ public static class ItemList
 		keys.Add(new Key(new ItemListID(keyItemListIndex, directorsOfficeKeyFrontIndex), "Office Key Front", "This is the front half of a key that opens the door to the Camp Director's Office.", directorsOfficeKeyFrontIndex));
 		keys.Add(new Key(new ItemListID(keyItemListIndex, directorsOfficeKeyBackIndex), "Office Key Back", "This is the back half of a key that opens the door to the Camp Director's Office.", directorsOfficeKeyBackIndex));
 		keys.Add(new Key(new ItemListID(keyItemListIndex, munitionsKeyIndex), "Munitions Key", "This is key to the munitions storage room on the lowest level of the mine.", munitionsKeyIndex));
-
+        keys.Add(new Key(new ItemListID(keyItemListIndex, barracksArmoryKeyIndex), barracksArmoryKeyName, "The key to the armory where the camp's guards keep all of their gear. The gate this key belongs to is sure to be heavily guarded.", barracksArmoryKeyIndex));
+		
 		//TreasureItem(string key, string loreDescription, int worth)
 
 		treasure.Add(new TreasureItem(new ItemListID(treasureItemListIndex, ironNuggetIndex), "Iron Nugget", "A small lump of iron. It was possibly once part of some larger object, or is an eroded smaller item such as an old clasp or nail.", 100));

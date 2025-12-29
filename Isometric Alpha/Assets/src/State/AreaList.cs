@@ -334,7 +334,7 @@ public static class AreaList
 		return getCurrentArea().getCombatBackgroundObject();
 	}
 	
-	public static bool currentSceneIsHostile()
+	public static bool currentAreaIsHostile()
 	{
 		if(locationAlwaysHostile(AreaManager.locationName))
 		{

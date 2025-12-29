@@ -3,6 +3,8 @@ VAR dexterity = 0
 VAR wisdom = 0
 VAR charisma = 0
 
+VAR inHostileArea = false
+
 VAR givenTutorialQuest = false
 VAR foundSlate = false
 VAR thatchRemovedTutorialRubble = false
@@ -10,6 +12,7 @@ VAR toldThatchAboutSlate = false
 VAR toldKastorOfThatchsFate = false
 
 VAR metKastor = false
+VAR kastorReactedToHostility = false
 VAR gotBroglinKilledByGuard = false
 VAR spokeToGarchaAboutPlan = false
 VAR askedKastorWhoHeIs = false
@@ -62,6 +65,7 @@ VAR toldCarterWrongPassword = false
 VAR learnedCartersIdentity = false
 VAR learnedPagesIdentity = false
 VAR toldDirectorIsAWarHero = false
+VAR convincedSlavesToHelpYou = false
 
 VAR explainingPlan = false
 VAR backTo6cza = false
@@ -108,6 +112,50 @@ VAR playerName = ""
 searchInventoryFor(obtainedMineArmoryKey,Key,0)
 searchInventoryFor(hasToolBundle,Tool Bundle)
 
+->chooseConvoStart
+
+=== chooseConvoStart ===
+
+
+{
+-kastorReactedToHostility:
+
+    {
+    -convincedSlavesToHelpYou:
+        Oh, word? The north section is on our side? (PH)
+        ->Close
+    -mineLvl3CarterAndNandorInParty:
+        Sick you found Nandor (PH)
+        ->Close
+    -else:
+        I told you, I cannot be seen with you. Be gone, quickly!
+        ->Close
+    }
+}
+
+{
+-!kastorStartedRevolt && inHostileArea && !kastorReactedToHostility:
+
+    setToTrue(kastorReactedToHostility)
+
+    {
+    -kastorReadyToStartRevolt:
+        ->HR_ReadyToStartRevolt
+    -not metKastor and mineLvl3CarterAndNandorInParty and not broughtNandorToKastor and not gotThePlanFromKastor:
+        ->HR_NotMetButHaveNandor
+    -gotThePlanFromKastor:
+        ->HR_WorkingOnPlan
+    -givenTutorialQuest and not toldKastorOfThatchsFate:
+        ->HR_LookingForThatch
+    -metKastor and not gaveKastorThePassword:
+        ->HR_MetButNotGivenPassword
+    -not metKastor:
+        Who are you? How are you able to walk around during the lockdown? And what's going on outside?
+        ->HR_HaveNotMetYet
+    }
+
+}
+
 {
 -kastorStartedRevolt:
     ->8a
@@ -129,30 +177,163 @@ searchInventoryFor(hasToolBundle,Tool Bundle)
     You're back. What do you need? 
     ->2aa
 -else:
-    ~metKastor = true
     setToTrue(metKastor)
     ->1a
 }
 
+=== HR_ReadyToStartRevolt ===
+
+Wish you had waited for me. (PH)
+
+->Close
+
+=== HR_NotMetButHaveNandor ===
+
+Yo, is that Nandor with you? (PH)
+
+->Close
+
+=== HR_WorkingOnPlan ===
+
+How's the plan going? (PH)
+
+->Close
+
+=== HR_LookingForThatch ===
+
+Have you found Thatch? (PH)
+
+->Close
+
+=== HR_MetButNotGivenPassword ===
+
+We have met, but you're still a stranger. (PH)
+
+->Close
+
+=== HR_HaveNotMetYet ===
+
+    {
+    -not askedKastorWhoHeIs:
+        *Are you Kastor?
+            ->1b(->HR_HaveNotMetYet)
+    } 
+    {
+    -revoltStarted:
+    +There's a riot on, and I was the spark. I'm looking for comrades.
+        A riot? *Kastor gives you a dubious expression.* Is it just you, or are there others involved?
+        ->HR_HaveNotMetYet_1a
+    }
+    +Who I am doesn't matter. Garcha sent me. And I got into a little trouble along the way.
+        Trouble that I can ill-afford. Do you fight alone?
+        ->HR_HaveNotMetYet_1a
+
+=== HR_HaveNotMetYet_1a ===
+
+    {
+    -knowRevolutionPassword:
+        +Our conspiracy is vast, and it includes yourself. Garcha told me the wind blows eastward.
+            setToTrue(gaveKastorThePassword)
+            ->HR_HaveNotMetYet_1ab
+    }
+
+    {
+    -convincedSlavesToHelpYou:
+        +I've convinced the north section of the camp to follow my lead. Now I come to liberate the southern half.
+            ->HR_HaveNotMetYet_1b
+    -else:
+        +Well... it's just myself at the moment. But I've faced many guards to get here. 
+            ->HR_HaveNotMetYet_1c
+    }
+
+
+=== HR_HaveNotMetYet_1ab ===
+
+I had not realized our conspiracy had grown so large. But you have abandoned the plan and started the riots early? Are you mad?
+
+{
+-convincedSlavesToHelpYou:
+    +I was not privy to the details of your plan. However, things have progressed rapidly in our favor. I have convinced the north section of the camp to follow my lead. Now I come to liberate the southern half.
+        ->HR_HaveNotMetYet_1b
+-else:
+    +Well... it's just myself at the moment. But I've faced many guards to get this far. 
+        ->HR_HaveNotMetYet_1c
+}
+
+=== HR_HaveNotMetYet_1b ===
+
+In that case, it seems my hand is forced.{not gaveKastorThePassword: I and a few others have been working for days to start our own revolution, but t|T}here is no point in sticking to the shadows if the fight is already in motion.
+
+    //I also have nandor if statement
+
+    +So you are with us?
+        I will do what I can from here. I am not much of a fighter, but I have some experience in treating wounded soldiers. If you should return to me, I can heal your injuries.
+        
+        setToTrue(givenTutorialQuest)
+        activateQuestStep(Look for Thatch, 5)
+        keepDialogue()
+        Also, if you are looking for more allies, there is another branded in this section named Thatch. That one's arms are as thick as tree trunks; you'll want him on your side if you're fighting the guards. His hut lies across the road from this one, you should be able to find him there. 
+        ->HR_HaveNotMetYet_1ba
+
+=== HR_HaveNotMetYet_1ba ===
+
+You're back. Are you in need of my attention?
+
+    +I could use some healing.
+        Certainly.
+        
+        restParty()
+        ->Close
+    +I've got to go.
+        ->Close
+
+=== HR_HaveNotMetYet_1c ===
+
+setToTrue(givenTutorialQuest)
+activateQuestStep(Look for Thatch, 5)
+
+setToTrue(toldToFindNandor)
+activateQuestStep(Finding Nándor, 0)
+activateQuestStep(Explore the Mine, 0)
+
+activateQuestStep(The Plan, 20)
+
+Mad it is then. I will aid you, but only because I would lend a hand to anyone willing to spit in the eye of the masters: I don't expect your one-body war to end in anything but failure.
+
+I shall heal your injuries this one time, but do not return to this hut until you have gathered allies. I cannot risk being linked to you until there is a real chance of victory.
+
+There is another branded in this section named Thatch. That one's arms are as thick as tree trunks; you'll want him on your side. His hut lies across the road from this one. You should be able to find him there. 
+        
+Also, if your thirst for danger has not yet been quenched, there were some branded trapped on the bottom level of the mine. It's impossible to say if any have survived, but if they have they would surely join your cause. You will find the mine in the southwestern part of the camp, to the west of my hut.
+
+//fadeToBlack(false, false)
+
+restParty()
+
+//fadeBackIn(60)
+
+->Close
+
 === 1a ===
 {
- -  gaveKastorThePassword:
+-gaveKastorThePassword:
     You're back. What do you need? 
-    ->2aa
- -  gaveKastorYourName:
+        ->2aa
+-gaveKastorYourName:
     keepDialogue()
     You're back. What do you need? 
-    ->1c
- -  not gaveKastorYourName:
+        ->1c
+-not gaveKastorYourName:
     Who are you? How are you able to walk around during the lockdown?
-    ->1aa
+        ->1aa
 }
 
 === 1aa ===
 
-    {not askedKastorWhoHeIs:
-    *Are you Kastor?
-        ->1b
+    {
+    -not askedKastorWhoHeIs:
+        *Are you Kastor?
+            ->1b(->1aa)
     } 
     +I'm {playerName}. Broglin helped me gain the trust of the guards.
         ~gaveKastorYourName = true
@@ -161,15 +342,13 @@ searchInventoryFor(hasToolBundle,Tool Bundle)
     +Who I am doesn't matter. Garcha sent me.
         ->1c
 
-=== 1b ===
-
-~askedKastorWhoHeIs = true
+=== 1b(->divert) ===
 
 setToTrue(askedKastorWhoHeIs)
 
 I am. But I ask again, who are you?
 
-->1aa
+->divert
 
 === 1c ===
 
@@ -494,7 +673,7 @@ Were you able to recruit Thatch?
 finishQuest(Look for Thatch, true, 6)
 setToTrue(toldKastorOfThatchsFate)
 
-Well done. What were the screams about. Is he hurt?
+Well done. What were the screams about? Is he hurt?
 
     +No, he was on a work detail last night. The screams were from his hutmate, Slate.
         ->T1f

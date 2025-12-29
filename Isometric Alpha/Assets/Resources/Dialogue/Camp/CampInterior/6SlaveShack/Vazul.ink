@@ -293,7 +293,7 @@ And a whole camp's worth to go. Though, I expect none will be more vile than he 
 
 === 4da === //No. My head and heart both ache.
 
-I was a silversmith's apprentice before I my branding. Slate was a tailor, before his. He had a workshop of his own, and the way he would talk about it reminded me of the woman I apprenticed under.
+I was a silversmith's apprentice before my branding. Slate was a tailor, before his. He had a workshop of his own, and the way he would talk about it reminded me of the woman I apprenticed under.
 
 I did not know him well. But in this camp, friends are rare. If you find one, cling to them hard, lest they be ripped from your grasp.
 
@@ -332,7 +332,7 @@ You underestimate me. I can be angry at both.
 
 === 4f === 
 
-My body wants to fight. I want to avenge every slight the guards have committed against me. But it's hard to muscle on in this camp, where you can fight as hard as you wish but your friends die around you all the same. Where is the hope in that?
+My body wants to fight. I want to avenge every slight the guards have committed against me. But it's difficult to muscle on in this camp, where you can fight as hard as you wish but your friends die around you all the same. Where is the hope in that?
     
     +Slate was dead long before you chose to fight with me. You've fought the guards, and walked away unhurt. There is hope yet, in that.
         ->4fa
@@ -343,7 +343,7 @@ My body wants to fight. I want to avenge every slight the guards have committed 
 
 === 4fa ===
 
-A meager hope. The guards are many. We are but two slaves, rags and callused hands. Nothing more.
+A meager hope. The guards are many. We are but two slaves: rags and calloused hands. Nothing more.
 
     +You forget, we are many too. Kastor is with us, and all the others he has recruited. Kindle that meager hope for now. I promise it will spark something, before long.
         I will follow you, for now. I have revenge on my mind. But your words do make me wonder how far you'll get. I want to be there to see it.
@@ -354,7 +354,7 @@ A meager hope. The guards are many. We are but two slaves, rags and callused han
 
 === 4fb ===
 
-No... you're right. He would not. But it is a sickly hope indeed if it is the thoughts of the dead that keeps it alive.
+No... you're right. He would not. But it is a sickly hope indeed if it is the thoughts of the dead that keep it alive.
 
     +I'll take a frail hope over none at all, any day. The dead will just have to keep it alive until the living can be bothered to nurse it themselves.
         \*Thatch chuckles.* Surely the living are not so lazy. Fine then, despite my efforts, you've coaxed a smile from me. I'll follow you, if only to see how far we get. Lead on.

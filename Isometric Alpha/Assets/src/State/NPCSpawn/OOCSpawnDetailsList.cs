@@ -170,6 +170,29 @@ public static class OOCSpawnDetailsList
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackSix, list);
         #endregion
 
+        #region GuardHouse Top Floor
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new LadderSpawnDetails(new Vector3Int(7, -4), PrefabNames.ladderTallSW,
+                                        new Ladder(Constants.difficultyTwo, LocationNameList.guardHouseTopFloor, LocationNameList.campManse, 
+                                                    Ladder.barracksLadderDescription, Facing.SouthWest)));
+
+        oocSpawnDetailsDict.Add(LocationNameList.guardHouseTopFloor, list);
+        #endregion
+        #region GuardHouse SW
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(-5,1), Facing.SouthWest));
+        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(-6,3), Facing.SouthEast));
+        list.Add(new ChestSpawnDetails(Constants.indexTwo, new Vector3Int(-7,3), Facing.SouthEast));
+        list.Add(new ChestSpawnDetails(Constants.indexThree, new Vector3Int(-8,1), Facing.NorthEast));
+
+        list.Add(new ChestSpawnDetails(Constants.indexFour, new Vector3Int(-7, -2), Facing.NorthWest));
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard, new Vector3Int(-8, -2), LocationNameList.guardHouseSouthWest, MonsterNameList.spearman, Facing.NorthWest));
+
+        oocSpawnDetailsDict.Add(LocationNameList.guardHouseSouthWest, list);
+        #endregion
         #region Mess Hall
         list = new List<OOCSpawnDetails>();
 
@@ -497,8 +520,8 @@ public static class OOCSpawnDetailsList
 
         list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campManse, Constants.indexZero));
 
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(6, -18), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(5, -18), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
+        list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(6, -18), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
+        list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(5, -18), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
 
         list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+2, new Vector3Int(2, -18), LocationNameList.campManse));
         list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+2, new Vector3Int(2, -19), LocationNameList.campManse));
@@ -515,7 +538,11 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.imre, new Vector3Int(-6, -9), LocationNameList.campManse));
         list.Add(new NPCSpawnDetails(NPCNameList.imre+1, new Vector3Int(-8, 1), LocationNameList.campManse));
 
-        oocSpawnDetailsDict.Add(LocationNameList.campManse, list); //3,9 / kitchen -6,5
+        list.Add(new LadderSpawnDetails(new Vector3Int(-5, -20), PrefabNames.ladderTallSW, Constants.flipX,
+                                        new Ladder(Constants.difficultyTwo, LocationNameList.campManse, LocationNameList.guardHouseTopFloor, 
+                                                    Ladder.barracksLadderDescription, Facing.SouthEast)));
+
+        oocSpawnDetailsDict.Add(LocationNameList.campManse, list);
         #endregion
 
         #region MineLvl_1

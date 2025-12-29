@@ -23,7 +23,6 @@ public static class State
 
 	public static string[] lessonsLearned = new string[0];
 	public static Formation formation = new Formation();
-	public static Dictionary<string, Quest> questDictionary = new Dictionary<string, Quest>();
 
 	public static EnemyPackInfo enemyPackInfo;
 	public static CharacterFacing playerFacing;

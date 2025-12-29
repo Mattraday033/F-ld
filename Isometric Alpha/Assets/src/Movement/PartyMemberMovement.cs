@@ -62,7 +62,7 @@ public class PartyMemberMovement : MovementTracker
 
         // destroyPartyMemberTrain();
 
-        // if (AreaList.currentSceneIsHostile() || Flags.shouldStopPartyTrainSpawning())
+        // if (AreaList.currentAreaIsHostile() || Flags.shouldStopPartyTrainSpawning())
         // {
         //     return;
         // }
@@ -96,7 +96,7 @@ public class PartyMemberMovement : MovementTracker
 
 	public static void hideOverlappingPartyMembers()
 	{
-		// if (AreaList.currentSceneIsHostile() || partyMemberTrain == null || partyMemberTrain is null)
+		// if (AreaList.currentAreaIsHostile() || partyMemberTrain == null || partyMemberTrain is null)
 		// {
 		// 	return;
 		// }
@@ -139,7 +139,7 @@ public class PartyMemberMovement : MovementTracker
 
 	public static void showAllPartyMembers()
 	{
-		// if (AreaList.currentSceneIsHostile() || partyMemberTrain == null || partyMemberTrain is null)
+		// if (AreaList.currentAreaIsHostile() || partyMemberTrain == null || partyMemberTrain is null)
 		// {
 		// 	return;
 		// }

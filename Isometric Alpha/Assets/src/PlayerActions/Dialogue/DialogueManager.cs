@@ -195,20 +195,20 @@ public class DialogueManager : MonoBehaviour
         {
             VaultableObject vaultableObject = currentDialogue.cameraFoci[Dialogue.mainNPCIndex].GetComponent<VaultableObject>();
 
-            if (currentStory.variablesState["objectName"] != null)
+            if (currentStory.variablesState[InkVariableNameList.objectName] != null)
             {
-                currentStory.variablesState["objectName"] = vaultableObject.objectName;
+                currentStory.variablesState[InkVariableNameList.objectName] = vaultableObject.objectName;
             }
 
-            if (currentStory.variablesState["plural"] != null)
+            if (currentStory.variablesState[InkVariableNameList.plural] != null)
             {
-                currentStory.variablesState["plural"] = vaultableObject.plural;
+                currentStory.variablesState[InkVariableNameList.plural] = vaultableObject.plural;
             }
         }
 
-		if (currentStory.variablesState["attitude"] != null)
+		if (currentStory.variablesState[InkVariableNameList.attitude] != null)
 		{
-			currentStory.variablesState["attitude"] = 0;
+			currentStory.variablesState[InkVariableNameList.attitude] = 0;
 		}
 
 		if (!dialogue.startWithUIDisabled)
@@ -311,12 +311,9 @@ public class DialogueManager : MonoBehaviour
 
 	public void makeChoice(int choiceIndex)
 	{
-		if (currentChoiceInkObjects == null || choiceIndex >= currentChoiceInkObjects.Count)
-		{
-			if (choiceIndex == 0 && currentChoiceInkObjects.Count == 0)
-			{
-				continueStory();
-			}
+		if (currentChoiceInkObjects == null || choiceIndex >= currentChoiceInkObjects.Count || currentChoiceInkObjects.Count == 0)
+        {
+            continueStory();
 
 			return;
 		}
@@ -1110,10 +1107,17 @@ public class DialogueManager : MonoBehaviour
                     SceneChange.changeSceneToCombat();
                     break;
 
-                case "setareatohostile":
-                    string sceneToBecomeHostile = getArgument(buffer);
+                case "activatehostilityscript":
 
-                    AreaList.setAreaToHostile(sceneToBecomeHostile);
+                    HostilityScriptList.runScript(getArgument(buffer));
+
+                    continueStory();
+                    break;
+
+                case "setareatohostile":
+                    string locationToBecomeHostile = getArgument(buffer);
+
+                    AreaList.setAreaToHostile(locationToBecomeHostile);
 
                     continueStory();
                     break;
@@ -1182,21 +1186,15 @@ public class DialogueManager : MonoBehaviour
                     continueStory();
                     break;
 
-                case "changescene":
+                case "changelocation":
 
-                    // NewSceneTransition transition = currentDialogue.cameraFoci[1].GetComponent<NewSceneTransition>();
+                    string destinationName = getArgument(buffer);
 
-                    // if (transition == null)
-                    // {
-                    //     Debug.LogError("NewSceneTransition component not found on " + currentDialogue.cameraFoci[1].name);
-                    // }
-                    // else
-                    // {
-                    //     TransitionManager.getInstance().changeSceneWithoutTrigger(transition.getTransitionInfo());
-                    // }
+                    endDialogue();
 
-                    continueStory();
-                    break;
+                    TransitionManager.changeLocation(new Transition(AreaManager.locationName, destinationName));
+
+                    return;
 
                 case "close":
 
@@ -1449,8 +1447,6 @@ public class DialogueManager : MonoBehaviour
 
 	private IEnumerator fadeBackIn(bool continueAfterTransparent)
 	{
-
-		Debug.LogError("inside fadeBackIn");
 
 		yield return new WaitUntil(() => frames >= framesToWait);
 

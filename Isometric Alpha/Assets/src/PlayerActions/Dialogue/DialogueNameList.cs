@@ -33,11 +33,16 @@ public static class DialogueNameList
     public const string liftableGatePath = gatesPath + NPCNameList.liftableGate;
     public const string cellDoorPath = gatesPath + NPCNameList.cellDoor;
     public const string unstablePillarPath = gatesPath + NPCNameList.unstablePillar;
+    public const string gateWithKeyPath = gatesPath + "Gate With Key";
     #endregion
 
     #region Vaultable Objects
     public const string vaultableObjectPath = interactablesPath + "VaultableObject";
     public const string vaultableOrDestroyableObjectPath = interactablesPath + "VaultableOrDestroyableObject";
+    #endregion
+
+    #region Ladder
+    public const string ladderPath = interactablesPath + NPCNameList.ladder;
     #endregion
     
     #endregion
@@ -78,6 +83,11 @@ public static class DialogueNameList
     public const string slatePath = campInteriorPathName + LocationNameList.slaveShackSix + Constants.seperatorChar + NPCNameList.slate;
     public const string vazulPath = campInteriorPathName + LocationNameList.slaveShackSix + Constants.seperatorChar + "Vazul";
     public const string immovableRubblePath = campInteriorPathName + LocationNameList.slaveShackSix + Constants.seperatorChar + "ImmovableRubble";
+    #endregion
+
+    #region Guard House SW
+
+    public const string barracksGuardPath = campInteriorPathName + LocationNameList.guardHouseSouthWest + Constants.seperatorChar + "Barracks Guard";
 
     #endregion
 
@@ -146,7 +156,7 @@ public static class DialogueNameList
     public const string imrePath = campExteriorPathName + LocationNameList.campManse + Constants.seperatorChar + NPCNameList.imre;
     public const string manseFrontDoorPath = campExteriorPathName + LocationNameList.campManse + Constants.seperatorChar + "ManseFrontDoor";
     public const string manseServiceEntrancePath = campExteriorPathName + LocationNameList.campManse + Constants.seperatorChar + "ManseServiceEntrance";
-    public const string secondBarricadeGuardsPath = campExteriorPathName + LocationNameList.campManse+ Constants.seperatorChar + "SecondBarricadeGuards";
+    public const string secondBarricadeGuardsPath = campExteriorPathName + LocationNameList.campManse + Constants.seperatorChar + "SecondBarricadeGuards";
     #endregion
     #region Camp South East
     public const string directorStatuePath = campExteriorPathName + LocationNameList.campSouthEast + Constants.seperatorChar + "DirectorStatue";

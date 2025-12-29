@@ -25,12 +25,12 @@ public class ShieldTrait : Trait
 
     public override void setIdleAnimationOnApplication(AnimationManager animationManager)
     {
-        animationManager.currentIdle = CharacterAnimationType.Secondary_Idle;
+        animationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle);
     }
 
     public override void setIdleAnimationOnRemoval(AnimationManager animationManager)
     {
-        animationManager.currentIdle = CharacterAnimationType.Idle_Front;
+        animationManager.setCurrentIdle(CharacterAnimationType.Idle_Front);
     }
 
 }

@@ -1,6 +1,6 @@
 {
 	"title": "The Plan",
-	"numberOfSteps": 20,
+	"numberOfSteps": 21,
 	"steps":[	
 				{"stepName":"I just got here!","MapZone":"","MapLocation":"","journalDescription":"Upon waking up for the first time at the work camp, I was approached by my fellow inmates to join a conspiracy to escape. I accepted, and now they are counting on me to be their messenger to other cells working on the same plan."},
 				{"stepName":"The death of Broglin.","MapZone":"","MapLocation":"","journalDescription":"I may have over done it a little when trying to convince a guard of my 'trustworthiness'. The guard took exception to the words I put in Broglin's mouth and executed him for it. A man is dead, and I am at least partly responsible. I will need to take more care in the future what I say and to whom."},
@@ -21,8 +21,10 @@
 				{"stepName":"Found half a key.","MapZone":"Manse-2F","MapLocation":"","journalDescription":"I have one half of the key to the Director's office. I now need to find the other half."},
 				{"stepName":"Found both parts of the key.","MapZone":"Manse-2F","MapLocation":"Manse-2F-Office","journalDescription":"I have retrieved both halfs of the key to the Director's office. I should now make my way back to his office on the north side of the Manse's second floor and finally end this."},
 				{"stepName":"I killed the Director.","MapZone":"","MapLocation":"","journalDescription":"I broke into the Director's office, where I met the Director and his assistant Page. Page revealed that she was a Masonic Agent, and tried to convince me to take the Director alive, but I refused. The Director now stands before the Gods, and I am finally free."},
-				{"stepName":"I took the Director prisoner.","MapZone":"","MapLocation":"","journalDescription":"I broke into the Director's office, where I met the Director and his assistant Page. Page revealed that she was a Masonic Agent, and told me that the Director could be useful to the Kingdom of Masons if he was interrogated. I have decided to take the Director prisoner, and I am finally free."}
-	],
+				{"stepName":"I took the Director prisoner.","MapZone":"","MapLocation":"","journalDescription":"I broke into the Director's office, where I met the Director and his assistant Page. Page revealed that she was a Masonic Agent, and told me that the Director could be useful to the Kingdom of Masons if he was interrogated. I have decided to take the Director prisoner, and I am finally free."},
+	            {"stepName":"I'm on my own.","MapZone":"","MapLocation":"","journalDescription":"I met Kastor and told him that I had angered the guards of the camp. He was fearful for his own safety and will not speak to me until I have found more allies."}
+	
+            ],
 			
 	
 	"deathSteps":

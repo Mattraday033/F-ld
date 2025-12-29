@@ -13,6 +13,14 @@ public class CunningBlocker : CunningObject
         this.blockerCoords.Add(blockerCoords);
     }
 
+    private void OnDisable()
+    {
+        foreach(Obstacle blocker in blockers)
+        {
+            blocker.setToDown();
+        }
+    }
+
     public override bool validTarget(SkillType skillType)
     {
         if (!base.validTarget(skillType))

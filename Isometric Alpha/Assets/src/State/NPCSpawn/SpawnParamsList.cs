@@ -4,9 +4,11 @@ using UnityEngine;
 
 public static class SpawnParamsList
 {
+    private const bool doesNotSpawnWhileHostile = false;
     private const bool spawnWhileHostile = true;
     private const bool spawnOnlyWhileHostile = true;
     private readonly static InteractableSpawnParams noNameParams = new InteractableSpawnParams(spawnWhileHostile);
+    private readonly static InteractableSpawnParams spawnOnlyWhenHostileParams = new InteractableSpawnParams(spawnWhileHostile, spawnOnlyWhileHostile);
 
     private static Dictionary<KeyValuePair<string, string>, InteractableSpawnParams> interactableSpawnParamsDict;
 
@@ -26,6 +28,21 @@ public static class SpawnParamsList
 
     #endregion
 
+    //list of npcNames that can only ever spawn in a hostile area, like Hastily Built Barricades
+    public static bool npcNameOnlySpawnsWhileHostile(string npcName)
+    {
+        npcName = DialogueList.scrubNameOfEndNumbers(npcName);
+
+        switch(npcName)
+        {
+            case NPCNameList.barricadeGuards:
+            case NPCNameList.hastilyBuiltBarricade:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     public static InteractableSpawnParams getSpawnParams(string areaName, string npcName)
     {
         KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(areaName, npcName);
@@ -33,6 +50,11 @@ public static class SpawnParamsList
         if (npcName.Length <= 0)
         {
             return noNameParams;
+        }
+
+        if(npcNameOnlySpawnsWhileHostile(npcName))
+        {
+            return spawnOnlyWhenHostileParams;
         }
 
         if (!interactableSpawnParamsDict.ContainsKey(kvp))
@@ -163,17 +185,17 @@ public static class SpawnParamsList
 
         #region Guard House NE
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.guardHouseNorthEast, NPCNameList.barracksGate),
-                               new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.revoltStarted }),
-                                new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }), spawnWhileHostile, spawnOnlyWhileHostile));
+        InteractableSpawnParams barracksGateSpawnParams = new InteractableSpawnParams(new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }), spawnWhileHostile, spawnOnlyWhileHostile);
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.guardHouseNorthEast, NPCNameList.barracksGate), barracksGateSpawnParams);
 
         #endregion
 
         #region Guard House SW
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.guardHouseSouthWest, NPCNameList.barracksGate),
-                               new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.revoltStarted }),
-                                new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }), spawnWhileHostile, spawnOnlyWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.guardHouseSouthWest, NPCNameList.barracksGate), barracksGateSpawnParams);
+        
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.guardHouseSouthWest, NPCNameList.guard), new InteractableSpawnParams(doesNotSpawnWhileHostile));
 
         #endregion
 
@@ -295,8 +317,7 @@ public static class SpawnParamsList
                                                                                     FlagNameList.enteredCivilizationAfterLeavingCamp
                                                                                 })));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.vaultableBarrels+1),
-                               new InteractableSpawnParams(spawnWhileHostile, spawnOnlyWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.vaultableBarrels+1), barracksGateSpawnParams);
 
         #endregion
 
@@ -516,9 +537,7 @@ public static class SpawnParamsList
                                 new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.snitchedOnUros }),
                                             new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated })));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.barracksGate),
-                               new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.revoltStarted }),
-                                new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }), spawnWhileHostile, spawnOnlyWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.barracksGate), barracksGateSpawnParams);
 
         #endregion
 

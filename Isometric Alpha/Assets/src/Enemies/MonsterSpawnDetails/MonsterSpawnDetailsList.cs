@@ -37,6 +37,22 @@ public static class MonsterSpawnDetailsList
         monsterSpawnDetailsDict.Add(LocationNameList.slaveShackSix, list);
         #endregion
 
+        #region GuardHouse NE
+        list = new List<MonsterSpawnDetails>();
+
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(2, -1), MonsterMovementType.ChasesPlayer, Facing.SouthWest));
+
+        monsterSpawnDetailsDict.Add(LocationNameList.guardHouseNorthEast, list);
+        #endregion    
+
+        #region GuardHouse SW
+        list = new List<MonsterSpawnDetails>();
+
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(-8, -2), MonsterMovementType.ChasesPlayer, Facing.NorthWest));
+
+        monsterSpawnDetailsDict.Add(LocationNameList.guardHouseSouthWest, list);
+        #endregion    
+
         #region NECamp
         list = new List<MonsterSpawnDetails>();
 
@@ -48,11 +64,11 @@ public static class MonsterSpawnDetailsList
         #region CenterCamp
         list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(1, 3), MonsterMovementType.ChasesPlayer, Facing.SouthEast));
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(12, 6), MonsterMovementType.ChasesPlayer, Facing.SouthEast));
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(19, 8), MonsterMovementType.ChasesPlayer, Facing.SouthWest));
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(1, 15), MonsterMovementType.ChasesPlayer, Facing.SouthWest));
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-6, 17), MonsterMovementType.ChasesPlayer, Facing.NorthWest));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(1, 3), MonsterMovementType.Stationary, Facing.SouthEast));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(12, 6), MonsterMovementType.Stationary, Facing.SouthEast));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(19, 8), MonsterMovementType.Stationary, Facing.SouthWest));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(1, 15), MonsterMovementType.Stationary, Facing.SouthWest));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-5, 19), MonsterMovementType.ChasesPlayer, Facing.NorthWest));
 
         monsterSpawnDetailsDict.Add(LocationNameList.campCenter, list);
         #endregion

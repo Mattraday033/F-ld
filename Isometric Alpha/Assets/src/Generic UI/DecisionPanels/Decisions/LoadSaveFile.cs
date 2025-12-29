@@ -124,7 +124,7 @@ public class LoadSaveFile : IDecision
 
             ShopkeeperInventoryList.setShopkeeperInventoryList(newShopkeeperInventories, newBuyBackInventories);
 
-            SaveBlueprint.resetAndOverwriteQuestDictionary(saveBlueprint.extractQuestListFromJson());
+            QuestList.resetAndOverwriteQuestDictionary(saveBlueprint.currentQuestList);
             State.allKnownMapData = saveBlueprint.extractAllKnownMapDataFromJson();
             saveBlueprint.extractAllAreaHostilitiesFromJson();
 

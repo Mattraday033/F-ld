@@ -14,16 +14,16 @@ public static class TestScript
         // State.debugStopMonsterSpawning = true;
         // State.debugDiscoverAllLocations = true;
         // State.debugRetreatAutoSucceed = true;
-        State.enableGridDebugger = true;
+        // State.enableGridDebugger = true;
 
         // PartyManager.getPartyMember(NPCNameList.thatch).canJoinParty = true;
 
         // PartyManager.getPlayerStats().setLevel(1);
-        // // PartyManager.getPlayerStats().currentHealth = 1;
-        // PartyManager.getPlayerStats().strength = 10;
-        // PartyManager.getPlayerStats().dexterity = 10;
-        // PartyManager.getPlayerStats().wisdom = 10;
-        // PartyManager.getPlayerStats().charisma = 10;
+        // PartyManager.getPlayerStats().currentHealth = 1;
+        PartyManager.getPlayerStats().strength = 10;
+        PartyManager.getPlayerStats().dexterity = 10;
+        PartyManager.getPlayerStats().wisdom = 10;
+        PartyManager.getPlayerStats().charisma = 10;
 
         // PartyManager.addXP(1050);
 

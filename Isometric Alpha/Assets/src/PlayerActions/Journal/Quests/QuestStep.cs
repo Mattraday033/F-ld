@@ -10,8 +10,13 @@ public class QuestStep : IDescribable, IDescribableInBlocks
 	private const string questUpdatedPrefix = "Quest Updated: ";
 
 	public Quest parentQuest;
-	public bool active;
+	public bool active
+    {
+        get;
+        private set;
+    }
 	public int stepIndex;
+    public int activationIndex;
 	public string stepName;
 	public string journalDescription;
 
@@ -25,6 +30,18 @@ public class QuestStep : IDescribable, IDescribableInBlocks
 		this.stepIndex = stepIndex;
 		this.stepName = stepName;
 		this.journalDescription = journalDescription;
+
+        activationIndex = -1;
+	}
+
+	public QuestStep(Quest parentQuest, bool active, int stepIndex, string stepName, string journalDescription, int activationIndex)
+	{
+		this.parentQuest = parentQuest;
+		this.active = active;
+		this.stepIndex = stepIndex;
+		this.stepName = stepName;
+		this.journalDescription = journalDescription;
+        this.activationIndex = activationIndex;
 	}
 
 	public bool hasTargetLocation()
@@ -40,7 +57,7 @@ public class QuestStep : IDescribable, IDescribableInBlocks
 
 	public bool ineligible()
 	{
-		return stepIndex < parentQuest.currentStepIndex;
+		return activationIndex < parentQuest.activeQuestStepsDict.Count-1;
 	}
 
 	public GameObject getRowType(RowType rowType)
@@ -77,6 +94,35 @@ public class QuestStep : IDescribable, IDescribableInBlocks
 
 		return DescriptionPanel.getDescriptionPanel(panelTypeName);
 	}
+
+    public void setActiveStatus(bool status)
+    {
+        if(status && !active)
+        {
+            this.activationIndex = parentQuest.getNextActivationIndex();
+        } else if(!status)
+        {
+            return;
+        }
+
+        active = status;
+
+        if(active)
+        {
+            parentQuest.activeQuestStepsDict[activationIndex] = this;
+        }
+    }
+
+    public void setActiveStatus(bool status, int activationIndex)
+    {
+        active = status;
+        this.activationIndex = activationIndex;
+
+        if(active)
+        {
+            parentQuest.activeQuestStepsDict[activationIndex] = this;
+        }
+    }
 
 	public GameObject getDecisionPanel()
 	{

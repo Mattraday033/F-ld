@@ -170,7 +170,7 @@ public class SaveHandler : ScreenManager, IEscapable
 			}
 		}
 
-        SaveBlueprint oldestAutosave = (SaveBlueprint) autosaveBlueprints[0];
+        SaveBlueprint oldestAutosave = autosaveBlueprints[0];
 
 		foreach(SaveBlueprint autosaveBlueprint in autosaveBlueprints)
 		{
@@ -189,7 +189,7 @@ public class SaveHandler : ScreenManager, IEscapable
 
         saveNumber *= -1;
 
-        Vector3 position = AreaManager.getMasterGrid().GetCellCenterWorld(transition.getOutPutCellCoords());
+        Vector3 position = AreaManager.getMasterGrid().GetCellCenterWorld(transition.getPositionOnSaveMultiplier());
 		SaveBlueprint blueprint = SaveBlueprint.build(determineCurrentAutosaveName(), saveNumber);
 
 		blueprint.playerPosition = new float[] { position.x, position.y, position.z};

@@ -47,25 +47,10 @@ public class VaultableObject : IStoryVariableSource
 
     public virtual Story addVariables(Story story)
     {
-        if (story.variablesState[nameof(size)] != null)
-        {
-            story.variablesState[nameof(size)] = size;
-        }
-
-        if (story.variablesState[nameof(plural)] != null)
-        {
-            story.variablesState[nameof(plural)] = plural;
-        }
-
-        if (story.variablesState[nameof(objectName)] != null)
-        {
-            story.variablesState[nameof(objectName)] = objectName;
-        }
-
-        if (story.variablesState[InkVariableNameList.dexDiffVarName] != null)
-        {
-            story.variablesState[InkVariableNameList.dexDiffVarName] = dexDifficulty;
-        }   
+        story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.size, size);
+        story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.plural, plural);
+        story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.objectName, objectName);
+        story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.dexDiffVarName, dexDifficulty);
 
         return story;
     }
@@ -100,22 +85,45 @@ public class VaultableOrDestroyableObject : VaultableObject
     {
         story = base.addVariables(story);
 
-        if (story.variablesState[InkVariableNameList.strDiffVarName] != null)
-        {
-            story.variablesState[InkVariableNameList.strDiffVarName] = strDifficulty;
-        }  
+        story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.strDiffVarName, strDifficulty);
+        story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.explanation, explanation);
+        story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.gateKey, gateKey+index);
 
-        if (story.variablesState[InkVariableNameList.explanation] != null)
-        {
-            story.variablesState[InkVariableNameList.explanation] = explanation;
-        }   
+        return story;
+    }
 
+}
 
-        if (story.variablesState[InkVariableNameList.gateKey] != null)
-        {
-            story.variablesState[InkVariableNameList.gateKey] = gateKey+index;
-        }   
+public class Ladder : IStoryVariableSource
+{
+    public const string barracksLadderDescription = "This ladder is old and weather-worn. One false step could alert the guards, or prove fatal.";
 
+    public Facing facing;
+    public int dexDifficulty;
+
+    public string locationName;
+    public string destinationName;
+    public string description;
+
+    public Ladder(int dexDifficulty, string locationName, string destinationName, string description, Facing facing)
+    {
+        this.dexDifficulty = dexDifficulty;
+        this.locationName = locationName;
+        this.destinationName = destinationName;
+        this.description = description;
+        this.facing = facing;
+    }
+
+    public static Dialogue getDialogue()
+    {
+        return new SingleCharacterDialogue(NPCNameList.ladder, Resources.Load<TextAsset>(DialogueNameList.ladderPath));
+    }
+
+    public virtual Story addVariables(Story story)
+    {
+        story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.description, description);
+        story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.destinationName, destinationName);
+        story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.dexDiffVarName, dexDifficulty);
 
         return story;
     }

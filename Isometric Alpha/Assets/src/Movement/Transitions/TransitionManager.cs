@@ -9,7 +9,9 @@ public class TransitionManager : MonoBehaviour
 {
     public readonly static UnityEvent BeforeTransition = new UnityEvent();
 
+    public readonly static UnityEvent CollectTransitionSpaces = new UnityEvent();
     public readonly static UnityEvent AfterTransition = new UnityEvent();
+
 	public static TransitionManager instance;
 
     public static bool autosaveMade;
@@ -56,7 +58,7 @@ public class TransitionManager : MonoBehaviour
 
     }
 
-    public static void changeScene(Transition transition)
+    public static void changeLocation(Transition transition)
     {
         if(currentCoroutine != null)
         {
@@ -78,7 +80,7 @@ public class TransitionManager : MonoBehaviour
 
     public static void fastTravel(string targetLocationName)
 	{
-        changeScene(new Transition(AreaManager.locationName, targetLocationName));
+        changeLocation(new Transition(AreaManager.locationName, targetLocationName));
 	}
 
     private IEnumerator waitForBlackScreenThenTransition(Transition transition)
@@ -96,14 +98,16 @@ public class TransitionManager : MonoBehaviour
 
         BeforeTransition.Invoke();
 
-        AreaManager.changeArea(transition.destinationAreaName);
+        AreaManager.changeArea(transition.destinationName);
 
         currentTransitions = new List<Transition>();
 
-        AfterTransition.Invoke();
+        CollectTransitionSpaces.Invoke();
 
         moveToMatchingTransition(transition);
 
+        AfterTransition.Invoke();
+        
         currentCoroutine = null;
     }
 
@@ -164,7 +168,7 @@ public class TransitionManager : MonoBehaviour
 
 
 
-    // public static void changeScene(TransitionInfo sourceTransitionInfo)
+    // public static void changeLocation(TransitionInfo sourceTransitionInfo)
     // {
     //     if (fadeToBlackOnTransition && !FadeToBlackManager.isBlack() && !fadeToBlackManager.currentlyFadingToBlack())
     //     {
@@ -204,13 +208,13 @@ public class TransitionManager : MonoBehaviour
     //             State.playerFacing.setToOpposingFacing();
     //         }
 
-    //         SceneChange.changeSceneToOverworld();
+    //         SceneChange.changeLocationToOverworld();
     //     }
     // }
 
-	// public void changeSceneWithoutTrigger(TransitionInfo sourceTransitionInfo)
+	// public void changeLocationWithoutTrigger(TransitionInfo sourceTransitionInfo)
 	// {
-	// 	changeScene(sourceTransitionInfo);
+	// 	changeLocation(sourceTransitionInfo);
 
 	// 	StartCoroutine(getInstance().waitForBlackScreenThenTransition(sourceTransitionInfo));
 	// }
@@ -222,7 +226,7 @@ public class TransitionManager : MonoBehaviour
 	// 		yield return null;
 	// 	}
 
-	// 	changeScene(sourceTransitionInfo);
+	// 	changeLocation(sourceTransitionInfo);
 	// }
 	
 	// public Vector3 getCurrentDestinationWorldPosition()

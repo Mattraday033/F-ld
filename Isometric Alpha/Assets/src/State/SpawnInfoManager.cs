@@ -59,7 +59,7 @@ public static class SpawnInfoManager
 
         allSpawnedObjects.AddRange(spawnAllInteractables());
 
-        allSpawnedObjects.AddRange(spawnAllTransitions());
+        spawnAllTransitions();
 
         allSpawnedObjects.AddRange(instantiateAllAxisSpawnDetails());
 
@@ -201,7 +201,7 @@ public static class SpawnInfoManager
         return interactable;
     }
 
-    private static List<GameObject> spawnAllTransitions()
+    private static void spawnAllTransitions()
     {
         List<TransitionSpawnInfo> transitionSpawnInfoList = TransitionSpawnInfoList.getTransitionSpawnInfo(AreaManager.locationName);
         List<GameObject> spawnedObjects = new List<GameObject>();
@@ -212,18 +212,28 @@ public static class SpawnInfoManager
 
             foreach (Transition transition in transitionList)
             {
-                GameObject transitionGameObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.transitionSpace), AreaManager.getTransitionParent());
-                TransitionSpace transitionSpace = transitionGameObject.GetComponent<TransitionSpace>();
-
-                transitionSpace.setTransition(transition);
-
-                transitionGameObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(transition.cellCoords);
-
-                spawnedObjects.Add(transitionGameObject);
+                spawnTransitionSpace(transition);
             }
         }
+    }
+  
+    public static TransitionSpace spawnTransitionSpace(string locationName, string destinationName, Vector3Int cellCoords, Facing facing)
+    {
+        return spawnTransitionSpace(new LadderTransition(locationName, destinationName, cellCoords, facing));
+    }
 
-        return spawnedObjects;
+    public static TransitionSpace spawnTransitionSpace(Transition transition)
+    {
+        GameObject transitionGameObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.transitionSpace), AreaManager.getTransitionParent());
+        TransitionSpace transitionSpace = transitionGameObject.GetComponent<TransitionSpace>();
+
+        transitionSpace.setTransition(transition);
+
+        transitionGameObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(transition.cellCoords);
+
+        addGameObject(transitionGameObject);
+
+        return transitionSpace;
     }
 
     private static List<GameObject> instantiateAllAxisSpawnDetails()
@@ -256,6 +266,11 @@ public static class SpawnInfoManager
 
     private static void spawnAllMonsters()
     {
+        if(!AreaList.currentAreaIsHostile())
+        {
+            return;
+        }
+
         List<MonsterSpawnDetails> monsterDetailsList = MonsterSpawnDetailsList.getMonsterSpawnDetails();
 
         int index = 0;

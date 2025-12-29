@@ -62,9 +62,9 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
         this.dropTableName = dropTableName;
     }
 
-    public virtual int getQuestStep()
+    public virtual string getQuestStep()
     {
-        return -1;
+        return "";
     }
 
     public virtual QuestStepActivationScript getQuestScript()
@@ -172,7 +172,7 @@ public class BossPackInfo : EnemyPackInfo
     public int xpDrop = 0;
 
     public string questName;
-    public int questStep;
+    public string questStepName;
 
     public QuestStepActivationScript script;
 
@@ -241,9 +241,9 @@ public class BossPackInfo : EnemyPackInfo
         this.script = script;
     }
 
-    public override int getQuestStep()
+    public override string getQuestStep()
     {
-        return questStep;
+        return questStepName;
     }
 
     public override string getQuestName()

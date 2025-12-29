@@ -370,6 +370,14 @@ public class MovementManager : MonoBehaviour
 
     public static EnemyStatWrapper[] getAllMonsterStats()
     {
+        long count = ((long) allMovementTrackers.Count) - 1;
+        
+        if (count > int.MaxValue || count < 0)
+        {
+            Debug.LogError($"Array size overflow: {count}");
+            return new EnemyStatWrapper[0];
+        }
+
         EnemyStatWrapper[] statWrappers = new EnemyStatWrapper[allMovementTrackers.Count - 1];
 
         for (int index = 0; index < statWrappers.Length; index++)

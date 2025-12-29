@@ -29,10 +29,10 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     };
 
     private bool changesFacing;
-    public CharacterFacing facing = new CharacterFacing();
+    private CharacterFacing facing = new CharacterFacing();
     public SpriteRenderer spriteRenderer;
 
-    public CharacterAnimationType currentIdle;
+    private CharacterAnimationType currentIdle;
     [SerializeField]
     private SpriteRenderer shadowSprite;
     public PolygonCollider2D polygonCollider2D;
@@ -72,6 +72,34 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     public bool spriteSetByHeartBeat()
     {
         return !CombatAnimationManager.trackerBeingTracked(this) && !healthBarManager.linkedStats.isDead();
+    }
+
+    public void setCurrentIdle(CharacterAnimationType newIdle)
+    {
+        if(!CombatStateManager.inCombat)
+        {
+            currentIdle = newIdle;
+            return;
+        } 
+
+        Stats linkedStats = healthBarManager.linkedStats;
+        bool isAlly = CombatGrid.positionIsOnAlliedSide(linkedStats.position);
+        bool containsSprites = IdleDictionary.idleDictContainsSprites(linkedStats.getName(), newIdle);
+
+        if(newIdle == CharacterAnimationType.Secondary_Idle &&
+            containsSprites)
+        {
+            currentIdle = newIdle;
+            return;
+        }
+
+        if(isAlly)
+        {
+            currentIdle = CharacterAnimationType.Idle_Back;
+        } else
+        {
+            currentIdle = CharacterAnimationType.Idle_Front;
+        }
     }
 
     private void updateCollider()
@@ -157,13 +185,13 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         if(CombatStateManager.inCombat)
         {
-            currentIdle = CharacterAnimationType.Idle_Front;
+            setCurrentIdle(CharacterAnimationType.Idle_Front);
             haltAllAnimations();
 
             setSpriteToCurrentIdle();
         } else
         {
-            currentIdle = CharacterAnimationType.OOC_Idle_Front;
+            setCurrentIdle(CharacterAnimationType.OOC_Idle_Front);
 
             playCurrentIdleAnimation();
         }
@@ -274,7 +302,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         enableExtras();
         removeAnimation();
-        currentIdle = CharacterAnimationType.Idle_Back;
+        setCurrentIdle(CharacterAnimationType.Idle_Back);
         playAnimation(CharacterAnimationType.Idle_Back);
     }
 
@@ -282,7 +310,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         enableExtras();
         removeAnimation();
-        currentIdle = CharacterAnimationType.Idle_Front;
+        setCurrentIdle(CharacterAnimationType.Idle_Front);
         playAnimation(CharacterAnimationType.Idle_Front);
     }
 
@@ -290,7 +318,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         enableExtras();
         removeAnimation();
-        currentIdle = CharacterAnimationType.OOC_Idle_Back;
+        setCurrentIdle(CharacterAnimationType.OOC_Idle_Back);
         playAnimation(CharacterAnimationType.OOC_Idle_Back);
     }
 
@@ -298,7 +326,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         enableExtras();
         removeAnimation();
-        currentIdle = CharacterAnimationType.OOC_Idle_Front;
+        setCurrentIdle(CharacterAnimationType.OOC_Idle_Front);
         playAnimation(CharacterAnimationType.OOC_Idle_Front);
     }
 
@@ -306,7 +334,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         enableExtras();
         removeAnimation();
-        currentIdle = CharacterAnimationType.Secondary_Idle;
+        setCurrentIdle(CharacterAnimationType.Secondary_Idle);
         playAnimation(CharacterAnimationType.Secondary_Idle);
     }
 
@@ -345,14 +373,14 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     public void playAttackIntoFrontIdleAnimation()
     {
         CombatAnimationManager.trackAnimation(key, this);
-        currentIdle = CharacterAnimationType.Idle_Front;
+        setCurrentIdle(CharacterAnimationType.Idle_Front);
         playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Normal));
     }
 
     public void playAttackIntoSecondaryIdleAnimation()
     {
         CombatAnimationManager.trackAnimation(key, this);
-        currentIdle = CharacterAnimationType.Secondary_Idle;
+        setCurrentIdle(CharacterAnimationType.Secondary_Idle);
         playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Special));
     }
 
@@ -456,34 +484,6 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         clipTransition.Clip = animationDict[type];
         clipTransition.Events.OnEnd = () => playCurrentIdleAnimation();
 
-        // switch (currentIdle)
-        // {
-        //     case CharacterAnimationType.Idle_Front:
-        //         clipTransition.Events.OnEnd = () => playIdleFrontAnimation();
-        //         break;
-        //     case CharacterAnimationType.Idle_Back:
-        //         clipTransition.Events.OnEnd = () => playIdleBackAnimation();
-        //         break;
-        //     case CharacterAnimationType.Secondary_Idle:
-        //         clipTransition.Events.OnEnd = () => playSecondaryIdleAnimation();
-        //         break;
-        // }
-
-        return clipTransition;
-    }
-
-    private ClipTransition createClipTransitionToSecondaryIdle(CharacterAnimationType type)
-    {
-        if(!animationDict.ContainsKey(type))
-        {
-            removeAnimation();
-            return null;
-        }
-
-        ClipTransition clipTransition = new ClipTransition();
-        clipTransition.Clip = animationDict[type];
-        clipTransition.Events.OnEnd = () => playSecondaryIdleAnimation();
-
         return clipTransition;
     }
 
@@ -565,7 +565,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
                     if(!IdleDictionary.idleDictContainsSprites(healthBarManager.linkedStats.getName(), CharacterAnimationType.Secondary_Idle))
                     {
-                        currentIdle = CharacterAnimationType.Idle_Front;
+                        setCurrentIdle(CharacterAnimationType.Idle_Front);
                     }
 
                     haltAllAnimations();
@@ -620,6 +620,30 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
                     break;                
             }
         }
+    }
+
+    public void setFacing(Facing newFacing)
+    {
+        if(!changesFacing || CombatStateManager.inCombat)
+        {
+            return;
+        }
+
+        facing.setFacing(newFacing);
+
+        switch(facing.getFacing())
+        {
+            case Facing.NorthEast:
+            case Facing.NorthWest:
+                playOOCIdleBackAnimation();
+                break;
+            case Facing.SouthWest:
+            case Facing.SouthEast:
+                playOOCIdleFrontAnimation();
+                break;
+        }
+
+        handleFacingChange();
     }
 
     private void handleFacingChange()

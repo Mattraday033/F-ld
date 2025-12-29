@@ -111,6 +111,7 @@ public static class NPCNameList
     public const string barrels = "Barrels";
     public const string barricade = "Barricade";
     public const string barricadeGuards = "Barricade Guards";
+    public const string ladder = "Ladder";
     public const string halfWall = "Half Wall";
     public const string fallenBeam = "Fallen Beam";
     public const string button = "Button";
@@ -158,6 +159,7 @@ public static class NPCNameList
     public const string cellDoor = "Cell Door";    
     public const string campGate = "Camp Gate";
     public const string barracksGate = "Barracks Gate";
+    public const string barracksArmoryGate = "Barracks Armory Gate";
     #endregion
 
     #region Misc

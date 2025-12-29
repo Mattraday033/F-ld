@@ -71,6 +71,14 @@ public class InteractableSpawnParams : SpawnParams
         this.onlySpawnWhileHostile = false;
     }
 
+    public InteractableSpawnParams(StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile, bool onlySpawnWhileHostile)
+    {
+        this.startSpawningFlagList = new StartSpawningFlagList();
+        this.stopSpawningFlagList = stopSpawningFlagList;
+        this.spawnWhileHostile = spawnWhileHostile;
+        this.onlySpawnWhileHostile = onlySpawnWhileHostile;
+    }
+
     public InteractableSpawnParams(StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList)
     {
         this.startSpawningFlagList = startSpawningFlagList;
@@ -100,12 +108,12 @@ public class InteractableSpawnParams : SpawnParams
             return doNotSpawn;
         }
 
-        if (!spawnWhileHostile && AreaList.currentSceneIsHostile())
+        if (!spawnWhileHostile && AreaList.currentAreaIsHostile())
         {
             return doNotSpawn;
         }
 
-        if (onlySpawnWhileHostile && !AreaList.currentSceneIsHostile())
+        if (onlySpawnWhileHostile && !AreaList.currentAreaIsHostile())
         {
             return doNotSpawn;
         }

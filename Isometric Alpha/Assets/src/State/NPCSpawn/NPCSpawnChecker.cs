@@ -69,12 +69,12 @@ public class NPCSpawnChecker : MonoBehaviour
 			return;
 		}
 
-		if (!spawnWhileHostile && AreaList.currentSceneIsHostile())
+		if (!spawnWhileHostile && AreaList.currentAreaIsHostile())
 		{
 			gameObject.SetActive(false);
 			return;
 		}
-		else if (onlySpawnWhileHostile && !AreaList.currentSceneIsHostile())
+		else if (onlySpawnWhileHostile && !AreaList.currentAreaIsHostile())
 		{
 			gameObject.SetActive(false);
 			return;
