@@ -24,25 +24,6 @@ VAR janosIndex = 3
 
 VAR playerName = ""
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//prepForItem() //used before giveItem/giveItems/takeAllOfItem to add obtained/removed text after next line
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
-//activateQuestStep(string fullTitleOfQuestFoundInQuestJsonFile,int questStepIndex)
-//searchInventoryFor(string nameOfVarSetToTrueInsideInkFile,string itemNameToSearchFor)
-//fadeToBlack()
-//fadeBackIn(int numberOfFramesToWaitBeforeFadingBackIn)
-//moveToPos(float xCoord,float yCoord)
-
 changeCamTarget({andrasIndex})
 
 {
@@ -231,7 +212,7 @@ setToTrue(didNotExecuteAndras)
 
 changeCamTarget({crowdIndex})
 
-activateQuestStep(Deal With the Prisoners, 7)
+activateQuestStep(Deal With the Prisoners, András, free.)
 
 \*The crowd erupts in cheers.*
 
@@ -276,7 +257,7 @@ Wait! Wait, please!
 setToTrue(didNotExecuteAndras)
 setToTrue(gaveAndrasFiftyLashes)
 
-activateQuestStep(Deal With the Prisoners, 8)
+activateQuestStep(Deal With the Prisoners, András, punished.)
 
 changeCamTarget({janosIndex})
 
@@ -298,7 +279,7 @@ fadeBackIn(60)
 
 setToTrue(executedAndras)
 
-activateQuestStep(Deal With the Prisoners, 9)
+activateQuestStep(Deal With the Prisoners, András, executed.)
 
 changeCamTarget({janosIndex})
 
@@ -316,7 +297,7 @@ fadeBackIn(60)
 
 setToTrue(gaveAndrasToTheCrowd)
 
-activateQuestStep(Deal With the Prisoners, 10)
+activateQuestStep(Deal With the Prisoners, András, mobbed.)
 
 changeCamTarget({janosIndex})
 

@@ -79,20 +79,6 @@ VAR guardPazmanAndRekaAtTrial = false
 
 VAR nandorReadyToSpeakAfterTrial = false
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//prepForItem()
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
-
 {
 -noPrisoners:
     changeCamTarget({nandorIndex})
@@ -411,16 +397,16 @@ When we were stuck in the mine together, Márcos asked me if I could forgive him
 -letNandorDecideGuardPunishments:
     //empty on purpose
 -gaveAGuardToTheCrowd:
-    finishQuest(Deal With the Prisoners, true, 21)
+    finishQuest(Deal With the Prisoners, true, Delegation of duties.)
 -else:
-    finishQuest(Deal With the Prisoners, true, 19)
+    finishQuest(Deal With the Prisoners, true, Nándor's apprehension.)
 }
 
 {
 -spokeWithPageBeforePrisoners:
-    activateQuestStep(Leave the Camp, 3)
+    activateQuestStep(Leave the Camp,Return to Page.)
 -else:
-    activateQuestStep(Leave the Camp, 1)
+    activateQuestStep(Leave the Camp,Speak with the Masons.)
 }
 
 {refusedToHearNandorsTale:Very well. }On to other matters. With the prisoners no longer a concern, we can start thinking about leaving this wretched camp. I've placed Kastor in charge of getting the others prepared to leave, and he has informed me that the stores we found within the Manse were less than we expected. 
@@ -589,7 +575,7 @@ I will personally see that your orders are carried out. The others may not under
 
 === 3ea ===
 
-finishQuest(Food Shortage, true, 3)
+finishQuest(Food Shortage, true, Horsemeat for all.)
 
 ->3e(->3j)
 
@@ -606,7 +592,7 @@ finishQuest(Food Shortage, true, 3)
 
 === 3f ===
 
-finishQuest(Food Shortage, true, 4)
+finishQuest(Food Shortage, true, Uneven portions.)
 
 prepItem()
 
@@ -620,7 +606,7 @@ giveItem(0,0,7)
 
 === 3g ===
 
-finishQuest(Food Shortage, true, 5)
+finishQuest(Food Shortage, true, Feast amidst famine.)
 
 I question whether this is the best use of our food, but the others will be overjoyed. And perhaps that is all that matters at this time.
 
@@ -628,7 +614,7 @@ I question whether this is the best use of our food, but the others will be over
 
 === 3h ===
 
-The others will certainly react poorly should they ever learn of this. I will do my best to keep it a secret... but I'm not sure where in the camp the smell of cooked meat will go unnoticed. 
+The others will certainly react poorly should they ever learn of this. I will do my best to keep it a secret... but I'm not sure where in the camp the smell of cooked meat will go unnoticed.
 
     +I don't care how you do it, just get it done.
         setToTrue(hoardedTheHorseMeat)
@@ -638,7 +624,7 @@ The others will certainly react poorly should they ever learn of this. I will do
 
 === 3i ===
 
-finishQuest(Food Shortage, true, 6)
+finishQuest(Food Shortage, true, They shall go hungry.)
 
 prepItem()
 
@@ -673,7 +659,7 @@ I'm glad that is over. It makes me... uncomfortable to pass judgement on others.
 
 {
 -sworeToBurnCsalansBody:
-    finishQuest(Food Shortage, true, 1)
+    finishQuest(Food Shortage, true, I kept my word.)
 }
 setToTrue(orderedTheHorsesBurned)
 
@@ -683,7 +669,7 @@ setToTrue(orderedTheHorsesBurned)
 
 {
 -sworeToBurnCsalansBody:
-    activateQuestStep(Food Shortage, 2)
+    activateQuestStep(Food Shortage, I broke my word.)
 }
 
 setToTrue(orderedTheHorsesEaten)
@@ -706,16 +692,16 @@ setToTrue(nandorLeftPartyOverPrisonerPunishment)
 
 removeFromParty({nandorIndex})
 
-activateQuestStep(Food Shortage, 0)
+activateQuestStep(Food Shortage, Discuss with Kastor.)
 
 {
 -spokeWithPageBeforePrisoners:
-    activateQuestStep(Leave the Camp, 3)
+    activateQuestStep(Leave the Camp,Return to Page.)
 -else:
-    activateQuestStep(Leave the Camp, 2)
+    activateQuestStep(Leave the Camp,Time to leave.)
 }
 
-finishQuest(Deal With the Prisoners, true, 20)
+finishQuest(Deal With the Prisoners, true, Nándor's fury.)
 
 ->FinalClose
 

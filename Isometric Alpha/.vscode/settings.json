@@ -33,6 +33,7 @@
         "**/*.pidb": true,
         "**/*.png": true,
         "**/*.prefab": true,
+        "**/*.json": true,
         "**/*.psd": true,
         "**/*.suo": true,
         "**/*.tga": true,

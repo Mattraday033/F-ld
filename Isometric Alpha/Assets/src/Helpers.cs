@@ -475,4 +475,33 @@ public static class Helpers
         return false;
     }
 
+    public static string removeSpacesOnEnds(string stringWithSpaces)
+    {
+        int startIndex = 0;
+        for(int i = 0; i < stringWithSpaces.Length; i++)
+        {
+            if(stringWithSpaces[i] == ' ')
+            {
+                continue;
+            }
+
+            startIndex = i;
+            break;
+        }
+
+        int endIndex = stringWithSpaces.Length;
+        for(int i = stringWithSpaces.Length-1; i >= 0; i--)
+        {
+            if(stringWithSpaces[i] == ' ')
+            {
+                continue;
+            }
+
+            endIndex = i+1;
+            break;
+        }
+
+        return stringWithSpaces.Substring(startIndex,endIndex - startIndex);
+    }
+
 } 

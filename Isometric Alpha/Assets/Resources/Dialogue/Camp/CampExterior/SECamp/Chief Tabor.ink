@@ -99,25 +99,6 @@ VAR clayIndex = 3
 
 VAR playerName = ""
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//prepForItem() //used before giveItem/giveItems/takeAllOfItem to add obtained/removed text after next line
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
-//activateQuestStep(string fullTitleOfQuestFoundInQuestJsonFile,int questStepIndex)
-//searchInventoryFor(string nameOfVarSetToTrueInsideInkFile,string itemNameToSearchFor)
-//fadeToBlack()
-//fadeBackIn(int numberOfFramesToWaitBeforeFadingBackIn)
-//moveToPos(float xCoord,float yCoord)
-
 changeCamTarget({taborIndex})
 
 {
@@ -998,7 +979,7 @@ I heard your words; I believe you. What I can't believe is that you would actual
 
 === 4e ===
 
-finishQuest(An Uneasy Truce, true, 7)
+finishQuest(An Uneasy Truce, true, Under my guidance.)
 
 setToTrue(didNotExecuteTabor)
 
@@ -1029,7 +1010,7 @@ I won't let this breach of justice come to pass. If you're going to take the sid
         ->6b
 
 === 5b ===
-finishQuest(An Uneasy Truce, true, 11, true)
+finishQuest(An Uneasy Truce, true, Riot Control., true)
 
 changeCamTarget({crowdIndex})
 
@@ -1070,7 +1051,7 @@ You put up more of a fight than I thought you would. It didn't matter in the end
 
 === 6c(->divert) ===
 
-finishQuest(An Uneasy Truce, true, 8)
+finishQuest(An Uneasy Truce, true, Tabor's end.)
 
 setToTrue(executedTabor)
 
@@ -1115,7 +1096,7 @@ changeCamTarget({taborIndex})
     Whipped to death? Your cruelty cannot be understated, branded. If the Gods are good they will find an equally brutal fate for the likes of you.
 }
 
-finishQuest(An Uneasy Truce, true, 9)
+finishQuest(An Uneasy Truce, true, Communal revenge.)
 
 setToTrue(gaveTaborToTheCrowd)
 

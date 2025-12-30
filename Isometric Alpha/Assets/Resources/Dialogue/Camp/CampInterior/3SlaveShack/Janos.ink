@@ -161,7 +161,7 @@ Thank you. Now, will you wait here for him or do you have other things to see to
             ->1ma
     +I need to go, but I will return shortly
         setToTrue(canWaitWithJanos)
-        activateQuestStep(Aiding Janos,2)
+        activateQuestStep(Aiding Janos,Return to Janos.)
         Don't take too long. He will arrive soon and we will waste our chance.
             ->Close
 
@@ -264,7 +264,7 @@ You have every right to be wary, but think about this for a moment. What do I ge
     +I haven't figured that part out yet, but I'm not about to walk into this blind. I'll find another way to get the key.
         ~refusedToWorkWithJanos = true
         setToTrue(refusedToWorkWithJanos)
-        activateQuestStep(Aiding Janos,1)
+        activateQuestStep(Aiding Janos,An obvious trap.)
         Oh you stubborn fool! Fine, come back when you're ready to take this seriously!
             ->Close
 
@@ -477,7 +477,7 @@ No! But I don't wish to gamble with his life!
 setToTrue(obtainedMineArmoryKey)
 ~gotKeyFromJanos = true
 setToTrue(gotKeyFromJanos)
-activateQuestStep(Aiding Janos,7)
+activateQuestStep(Aiding Janos,András saw the light.)
 prepForItem()
 
 The mine armory? That's going to be tricky. I hope you know what you're doing.

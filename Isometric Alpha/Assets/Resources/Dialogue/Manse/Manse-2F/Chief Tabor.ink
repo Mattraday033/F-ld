@@ -16,24 +16,7 @@ VAR taborFightIndex = 0
 
 VAR playerName = ""
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//prepForItem() //used before giveItem/giveItems/takeAllOfItem to add obtained/removed text after next line
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
-//activateQuestStep(string fullTitleOfQuestFoundInQuestJsonFile,int questStepIndex)
-//searchInventoryFor(string nameOfVarSetToTrueInsideInkFile,string itemNameToSearchFor)
-//fadeToBlack()
-//fadeBackIn(int numberOfFramesToWaitBeforeFadingBackIn)
-//moveToPos(float xCoord,float yCoord)
+
 
 {
 -directorDefeated:
@@ -105,7 +88,7 @@ Why would I do that? And further more, why would you want that?
 
     +Sure, Tabor. See you then.
         setToTrue(letTaborLive)
-        activateQuestStep(An Uneasy Truce, 0)
+        activateQuestStep(An Uneasy Truce, The truce is made.)
         ->Close
     +On second thought, I can't stand letting someone like you live. <Combat>
         ~attackedTabor = true
@@ -498,7 +481,7 @@ fadeBackIn(60)
     setToTrue(letTaborLive)
     setToTrue(acceptedTaborsSurrenderAfterDirectorFight)
 
-    activateQuestStep(An Uneasy Truce, 4)
+    activateQuestStep(An Uneasy Truce, Relinquish the power.)
 
     fadeToBlack()
     
@@ -514,9 +497,9 @@ setToFalse(letTaborLive)
 
 {
 -directorDefeated:
-    finishQuest(An Uneasy Truce, true, 3, true)
--else:    
-    finishQuest(An Uneasy Truce, true, 1, true)
+    finishQuest(An Uneasy Truce, true, The hostilities never cease.1, true)
+-else:
+    finishQuest(An Uneasy Truce, true, The hostilities never cease., true)
 }
 
 kill({taborIndex})

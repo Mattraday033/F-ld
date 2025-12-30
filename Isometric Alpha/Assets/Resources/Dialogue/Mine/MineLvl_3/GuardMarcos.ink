@@ -16,19 +16,7 @@ VAR minersCrateDialogueIndex = 1
 
 VAR playerName = ""
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//prepForItem()
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
+
 
 {
 -broughtNandorToKastor:
@@ -88,11 +76,11 @@ That does not matter, I am the only one here who has been trained in how to mix 
 }
     +I understand. May the Gods guide your hands.
         setToTrue(mineLvl3MarcosAgreedToIgniteJelly)
-        activateQuestStep(Sealing the Breach, 5)
+        activateQuestStep(Sealing the Breach, Sided With the Guards.)
         ->2c
     +Fine. Lets get a move on then.
         setToTrue(mineLvl3MarcosAgreedToIgniteJelly)
-        activateQuestStep(Sealing the Breach, 5)
+        activateQuestStep(Sealing the Breach, Sided With the Guards.)
         ->2c
 
 === 1e ===
@@ -168,7 +156,7 @@ When you reach the mixed blasting jelly, place the smaller cup on top of the bar
 
 setToTrue(mineLvl3MarcosAgreedToIgniteJelly)
 setToTrue(mineLvl3MarcosTaughtHowToIgniteJelly)
-activateQuestStep(Sealing the Breach, 3)
+activateQuestStep(Sealing the Breach, The Jelly's Secrets.)
 
 Be careful not to knock over either of the cups as you hurry away from the barrel. We've lost more than one guard to that mistake.
 

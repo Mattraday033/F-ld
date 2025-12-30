@@ -129,9 +129,9 @@ setToTrue(givenTaskByMuzsa)
 
 {
 -mentionedGoodReasonForGoingInsideMine:
-activateQuestStep(Múzsa's Sweet Tooth, 1)
+activateQuestStep(Múzsa's Sweet Tooth, Kende's candy.1)
 -else:
-activateQuestStep(Múzsa's Sweet Tooth, 0)
+activateQuestStep(Múzsa's Sweet Tooth, Kende's candy.)
 }
 
 prepForItem()
@@ -182,7 +182,7 @@ Any luck with Kende? He can be a bit of a hard ass sometimes.
 ~gaveCandyToMuzsa = true
 setToTrue(gaveCandyToMuzsa)
 
-finishQuest(Múzsa's Sweet Tooth, true, 6)
+finishQuest(Múzsa's Sweet Tooth, true, The way is clear.)
 
 {
 -mentionedGoodReasonForGoingInsideMine:
@@ -259,7 +259,7 @@ How about this. Prove to me you can be trusted with a quick task and I'll enable
 ~mentionedBadReasonForGoingInsideMine = true
 setToTrue(mentionedBadReasonForGoingInsideMine)
 
-activateQuestStep(Múzsa's Sweet Tooth, 2)
+activateQuestStep(Múzsa's Sweet Tooth, A dead end.)
 
 Well that's too bad, because I'm not getting in trouble just so you can take a look around in there. On your way, slave.
 
@@ -364,7 +364,7 @@ Past the barricade? Eh, fine. If you get yourself killed in there no one's gonna
     
 === 3e ===
 
-finishQuest(Múzsa's Sweet Tooth, true, 6)
+finishQuest(Múzsa's Sweet Tooth, true, The way is clear.)
 
 prepForItem()
 

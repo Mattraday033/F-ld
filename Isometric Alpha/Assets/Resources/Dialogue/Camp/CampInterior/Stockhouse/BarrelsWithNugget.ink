@@ -14,31 +14,6 @@ VAR lostIronNuggetIndex = 3
 
 VAR playerName = ""
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//prepForItem() //used before giveItem/giveItems/takeAllOfItem to add obtained/removed text after next line
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
-//activateQuestStep(string fullTitleOfQuestFoundInQuestJsonFile,int questStepIndex)
-//searchInventoryFor(string nameOfVarSetToTrueInsideInkFile,string itemNameToSearchFor)
-//fadeToBlack()
-//fadeBackIn(int numberOfFramesToWaitBeforeFadingBackIn)
-//moveToPos(float xCoord,float yCoord)
-
-//prepForitem()
-
-//Here you go!
-
-//giveItem(5,0,1)
-
 ->1a
 
 === 1a ===
@@ -56,14 +31,14 @@ Searching behind some barrels, you find a small scrap of iron.
 -startledUros:
     {
     -convincedUros or intimidatedUros or threatenedToSnitchOnUros:
-    activateQuestStep(Stockhouse Stash,7)
+    activateQuestStep(Stockhouse Stash, Lost and found.1)
     -snitchedOnUros:
-    activateQuestStep(Stockhouse Stash,8)
+    activateQuestStep(Stockhouse Stash, Lost and found.2)
     -else:
-    activateQuestStep(Stockhouse Stash,6)
+    activateQuestStep(Stockhouse Stash, Lost and found.)
     }
 -else:
-    activateQuestStep(Stockhouse Stash,0)
+    activateQuestStep(Stockhouse Stash, I found some iron)
 }
 
 giveItem({treasureItemListIndex},{lostIronNuggetIndex},1)

@@ -29,7 +29,7 @@ A pile of leaves that have been blown over the wall by the wind.
 
 setToTrue(gotLeavesForBalint)
 
-activateQuestStep(Aiding Bálint, 2)
+activateQuestStep(Aiding Bálint, Back to Bálint.)
 
 prepForItem()
 

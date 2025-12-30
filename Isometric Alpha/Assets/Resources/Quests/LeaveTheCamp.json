@@ -19,7 +19,7 @@
 			"MapZone":"Camp","MapLocation":"CenterCamp","journalDescription": "I have finished my business in the camp. I should now return to Page so we can talk about where to go from here."
 		},
 		{
-			"stepName": "Through the forest",
+			"stepName": "Through the forest.",
 			"MapZone":"Camp","MapLocation":"CenterCamp","journalDescription": "Page has explained how to get to the nearest town. I should rest up and collect anything I need from the camp before I begin my journey. (Leaving the camp will end this Demo)"
 		}
 	],

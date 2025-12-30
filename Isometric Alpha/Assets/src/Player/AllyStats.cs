@@ -350,15 +350,9 @@ public class AllyStats : Stats
             highestStats.Add(PrimaryStat.Charisma);
         }
 
-        if (highestStatLvl <= 1)
+        if (highestStatLvl <= 1 || highestStats.Count >= 4)
         {
-            //Debug.LogError("No primary stats are above 1");
-            return new List<PrimaryStat>() { PrimaryStat.None };
-        }
-        if (highestStats.Count >= 4)
-        {
-            //Debug.LogError("All primary stats are at the same level");
-            return new List<PrimaryStat>() { PrimaryStat.None };
+            return new List<PrimaryStat>() { PrimaryStat.Strength };
         }
 
         return highestStats;

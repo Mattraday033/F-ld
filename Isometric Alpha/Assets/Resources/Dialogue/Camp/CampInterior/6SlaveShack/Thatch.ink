@@ -20,25 +20,6 @@ VAR removableRubbleIndex = 2
 
 VAR playerName = ""
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//prepForItem() //used before giveItem/giveItems/takeAllOfItem to add obtained/removed text after next line
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
-//activateQuestStep(string fullTitleOfQuestFoundInQuestJsonFile,int questStepIndex)
-//searchInventoryFor(string nameOfVarSetToTrueInsideInkFile,string itemNameToSearchFor)
-//fadeToBlack()
-//fadeBackIn(int numberOfFramesToWaitBeforeFadingBackIn)
-//moveToPos(float xCoord,float yCoord)
-
     {
     -thatchRemovedTutorialRubble or toldThatchAboutSlate:
         ->afterAddingThatchToParty
@@ -49,8 +30,6 @@ VAR playerName = ""
     -else:
         ->deepSnoozing
     }
-
-//Removed old thatch dialogue on 6/22/2025, to get it back try before that in version control
 
 === 1a ===
 
@@ -201,7 +180,7 @@ With the two of us together, we might be able to get to the back of the hut and 
 Good. I shall move the first bit of rubble so we can get past, then I'll follow your lead. And you'd best be ready for a fight, I'm not about to let them get away with hurting Slate.
 
 setToTrue(thatchRemovedTutorialRubble)
-activateQuestStep(Look for Thatch, 1)
+activateQuestStep(Look for Thatch, Thatch is willing.)
 
 ->addThatchToParty(true)
 
@@ -210,7 +189,7 @@ activateQuestStep(Look for Thatch, 1)
 I think... I think I already knew that. Somewhere, deep down. But thank you for telling me this. I have no reason to stay any longer.
 {
 -toldToInvestigateScreamingInThatchsHut:
-    activateQuestStep(Look for Thatch, 2)
+    activateQuestStep(Look for Thatch, Return to Kastor)
 }
 setToTrue(toldThatchAboutSlate)
 

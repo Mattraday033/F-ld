@@ -50,18 +50,6 @@ VAR agreedToFightGaspar = false
 
 VAR playerName = ""
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
 
 ->1a
 
@@ -72,14 +60,14 @@ VAR playerName = ""
 {
 -mineLvl3MarcosTaughtHowToIgniteJelly:
     +\*Make sure the tunnel is clear, then seal the breach yourself*.
-    finishQuest(Sealing the Breach, true, 6)
+    finishQuest(Sealing the Breach, true, Sealed the Breach Myself.)
         ->1d
 }
 
 {
 -not deathFlagGuardMárcos and mineLvl3MarcosAgreedToIgniteJelly:
     +Alright Márcos, you're up. Seal the breach.
-    finishQuest(Sealing the Breach, true, 7)
+    finishQuest(Sealing the Breach, true, Márcos Sealed the Breach.)
         ->6a
 }
 
@@ -596,7 +584,7 @@ Gáspár, we refuse! I don't care if I die here, I will no longer be a slave!
         kill({marcosIndex})
         kill({nandorIndex})
         kill({carterIndex})
-        finishQuest(Sealing the Breach, true, 5)
+        finishQuest(Sealing the Breach, true, Sided With the Guards.)
         ->4d
 
 === 4a ===

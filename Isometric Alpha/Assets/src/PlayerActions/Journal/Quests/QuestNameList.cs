@@ -19,9 +19,9 @@ public static class QuestNameList
     public const string aidingErvinStepTitleZero = "Hear Ervin's plan.";
     public const string aidingErvinStepTitleOne = "It can always be worse.";
     public const string aidingErvinStepTitleTwo = "A convincing argument.";
-    public const string aidingErvinStepTitleThree = "A convincing argument.";
-    public const string aidingErvinStepTitleFour = "An unconvincing argument.";
-    public const string aidingErvinStepTitleFive = "An unconvincing argument.";
+    public const string aidingErvinStepTitleThree = "A convincing argument.1";
+    public const string aidingErvinStepTitleFour = "An unconvincing argument.2";
+    public const string aidingErvinStepTitleFive = "An unconvincing argument.3";
     public const string aidingErvinStepTitleSix = "Return to Kastor.";
     public const string aidingErvinStepTitleSeven = "Kastor has been told.";
 
@@ -38,9 +38,9 @@ public static class QuestNameList
     public const string aidingJanosStepTitleSeven = "András saw the light.";
     public const string aidingJanosStepTitleEight = "Put down like a dog.";
     public const string aidingJanosStepTitleNine = "Kastor was informed.";
-    public const string aidingJanosStepTitleTen = "Kastor was informed.";
-    public const string aidingJanosStepTitleEleven = "Kastor was informed.";
-    public const string aidingJanosStepTitleTwelve = "Kastor was informed.";
+    public const string aidingJanosStepTitleTen = "Kastor was informed.1";
+    public const string aidingJanosStepTitleEleven = "Kastor was informed.2";
+    public const string aidingJanosStepTitleTwelve = "Kastor was informed.3";
 
     // An Uneasy Truce
     public const string anUneasyTruceQuestTitle = "An Uneasy Truce";
@@ -48,10 +48,10 @@ public static class QuestNameList
     public const string anUneasyTruceStepTitleZero = "The truce is made.";
     public const string anUneasyTruceStepTitleOne = "The hostilities never cease.";
     public const string anUneasyTruceStepTitleTwo = "Back to Tabor.";
-    public const string anUneasyTruceStepTitleThree = "The hostilities never cease.";
+    public const string anUneasyTruceStepTitleThree = "The hostilities never cease.1";
     public const string anUneasyTruceStepTitleFour = "Relinquish the power.";
     public const string anUneasyTruceStepTitleFive = "Decide Tabor's fate.";
-    public const string anUneasyTruceStepTitleSix = "Decide Tabor's fate.";
+    public const string anUneasyTruceStepTitleSix = "Decide Tabor's fate.1";
     public const string anUneasyTruceStepTitleSeven = "Under my guidance.";
     public const string anUneasyTruceStepTitleEight = "Tabor's end.";
     public const string anUneasyTruceStepTitleNine = "Communal revenge.";
@@ -153,7 +153,7 @@ public static class QuestNameList
     public const string leaveTheCampStepTitleOne = "Speak with the Masons.";
     public const string leaveTheCampStepTitleTwo = "Time to leave.";
     public const string leaveTheCampStepTitleThree = "Return to Page.";
-    public const string leaveTheCampStepTitleFour = "Through the forest";
+    public const string leaveTheCampStepTitleFour = "Through the forest.";
 
     // Look for Thatch
     public const string lookForThatchQuestTitle = "Look for Thatch";
@@ -161,8 +161,8 @@ public static class QuestNameList
     public const string lookForThatchStepTitleZero = "Cross the road.";
     public const string lookForThatchStepTitleOne = "Slate's fate.";
     public const string lookForThatchStepTitleTwo = "Return to Kastor";
-    public const string lookForThatchStepTitleThree = "Return to Kastor.";
-    public const string lookForThatchStepTitleFour = "Return to Kastor.";
+    public const string lookForThatchStepTitleThree = "Return to Kastor.1";
+    public const string lookForThatchStepTitleFour = "Return to Kastor.2";
     public const string lookForThatchStepTitleFive = "In need of allies.";
     public const string lookForThatchStepTitleSix = "Kastor has been told.";
     public const string lookForThatchStepTitleSeven = "Thatch is willing.";
@@ -171,7 +171,7 @@ public static class QuestNameList
     public const string muzsasSweetToothQuestTitle = "Múzsa's Sweet Tooth";
 
     public const string muzsasSweetToothStepTitleZero = "Kende's candy.";
-    public const string muzsasSweetToothStepTitleOne = "Kende's candy.";
+    public const string muzsasSweetToothStepTitleOne = "Kende's candy.1";
     public const string muzsasSweetToothStepTitleTwo = "A dead end.";
     public const string muzsasSweetToothStepTitleThree = "A way forward?";
     public const string muzsasSweetToothStepTitleFour = "Package received";
@@ -209,14 +209,14 @@ public static class QuestNameList
     public const string stockhouseStashStepTitleZero = "I found some iron";
     public const string stockhouseStashStepTitleOne = "Uros is hiding something.";
     public const string stockhouseStashStepTitleTwo = "The lump of iron.";
-    public const string stockhouseStashStepTitleThree = "The lump of iron.";
-    public const string stockhouseStashStepTitleFour = "The lump of iron.";
+    public const string stockhouseStashStepTitleThree = "The lump of iron.1";
+    public const string stockhouseStashStepTitleFour = "The lump of iron.2";
     public const string stockhouseStashStepTitleFive = "Uros was hiding something.";
     public const string stockhouseStashStepTitleSix = "Lost and found.";
-    public const string stockhouseStashStepTitleSeven = "Lost and found.";
-    public const string stockhouseStashStepTitleEight = "Lost and found.";
+    public const string stockhouseStashStepTitleSeven = "Lost and found.1";
+    public const string stockhouseStashStepTitleEight = "Lost and found.2";
     public const string stockhouseStashStepTitleNine = "The nugget retrieved.";
-    public const string stockhouseStashStepTitleTen = "The nugget retrieved.";
+    public const string stockhouseStashStepTitleTen = "The nugget retrieved.1";
     public const string stockhouseStashStepTitleEleven = "The nugget stolen.";
     public const string stockhouseStashStepTitleTwelve = "The nugget sold.";
 
@@ -234,10 +234,10 @@ public static class QuestNameList
     public const string thePlanStepTitleEight = "Raid the armory.";
     public const string thePlanStepTitleNine = "Return to Kastor.";
     public const string thePlanStepTitleTen = "Wait for now.";
-    public const string thePlanStepTitleEleven = "I told Kastor no.";
+    public const string thePlanStepTitleEleven = "I told Kastor no.1";
     public const string thePlanStepTitleTwelve = "Free the others.";
     public const string thePlanStepTitleThirteen = "Take your revenge.";
-    public const string thePlanStepTitleFourteen = "Take your revenge.";
+    public const string thePlanStepTitleFourteen = "Take your revenge.1";
     public const string thePlanStepTitleFifteen = "Find the key to the Director's office.";
     public const string thePlanStepTitleSixteen = "Found half a key.";
     public const string thePlanStepTitleSeventeen = "Found both parts of the key.";

@@ -218,7 +218,7 @@ I should have been here. I should have... *Thatch turns to Vazul and wraps his p
 
 === 4c ===
 
-activateQuestStep(Look for Thatch, 3)
+activateQuestStep(Look for Thatch, Return to Kastor.1)
 changeCamTarget({vazulIndex})
 
 prepForItem()
@@ -407,7 +407,7 @@ changeCamTarget({thatchIndex})
 
 === 5ba === 
 
-activateQuestStep(Look for Thatch, 3)
+activateQuestStep(Look for Thatch, Return to Kastor.1)
 
 I guess I can respect that. Even if I wish you had let me end it my way.
 
@@ -421,7 +421,7 @@ giveItem(1,8,1)
 
 === 5c ===
 
-activateQuestStep(Look for Thatch, 5)
+activateQuestStep(Look for Thatch,In need of allies.)
 
 Alive? How are we going to keep him prisoner without anyone noticing him?
 
@@ -635,7 +635,7 @@ changeCamTarget({thatchIndex})
 \*As soon as Vazul's back is turned, Thatch moves to grab him with two massive hands.*
 
     +\*Wave off Thatch, and let Vazul go.*
-        activateQuestStep(Look for Thatch, 4)
+        activateQuestStep(Look for Thatch,Return to Kastor.2)
         ->6a
 
     +\*Back Thatch up.* <Combat>
@@ -643,7 +643,7 @@ changeCamTarget({thatchIndex})
 
 === Combat === 
 
-activateQuestStep(Look for Thatch, 3, true)
+activateQuestStep(Look for Thatch,Return to Kastor.1)
 enterCombat({vazulFightIndex}, {vazulAfterFightConvoKey})
 
 ->Close

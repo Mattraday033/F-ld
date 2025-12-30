@@ -22,21 +22,6 @@ VAR ervinCloserIndex = 4
 
 VAR playerName = ""
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//prepForItem()
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
-
-
 changeCamTarget({pazmanIndex})
 
 {
@@ -353,7 +338,7 @@ changeCamTarget({ervinCloserIndex})
 
 setToTrue(didNotExecutePazman)
 
-activateQuestStep(Deal With the Prisoners, 15)
+activateQuestStep(Deal With the Prisoners, Pázmán, free.)
 
 changeCamTarget({crowdIndex})
 
@@ -430,7 +415,7 @@ No... please! Don't do this!
 
 setToTrue(gavePazmanToTheCrowd)
 
-activateQuestStep(Deal With the Prisoners, 18)
+activateQuestStep(Deal With the Prisoners, Pázmán, mobbed.)
 
 changeCamTarget({crowdIndex})
 
@@ -454,7 +439,7 @@ No... please! Don't do this!
 
 setToTrue(executedPazman)
 
-activateQuestStep(Deal With the Prisoners, 17)
+activateQuestStep(Deal With the Prisoners, Pázmán, executed.)
 
 changeCamTarget({crowdIndex})
 
@@ -487,7 +472,7 @@ changeCamTarget({pazmanIndex})
 
 setToTrue(gavePazmanFiftyLashes)
 
-activateQuestStep(Deal With the Prisoners, 16)
+activateQuestStep(Deal With the Prisoners, Pázmán, punished.)
 
 changeCamTarget({crowdIndex})
 

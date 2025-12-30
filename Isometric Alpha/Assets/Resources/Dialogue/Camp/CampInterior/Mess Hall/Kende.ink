@@ -14,20 +14,6 @@ VAR gotMessHallInstructionsFromKende = false
 
 VAR playerName = ""
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//prepForItem() 
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
-
 ->1a
 
 === 1a ===
@@ -77,16 +63,11 @@ giveItem(0,0,1)
 
 === 1b ===
 
-//activateQuestStep(Múzsa's Sweet Tooth, 3)
 setToTrue(kendeWillSellToPlayer)
-
-//prepForItem()
 
 Augh, that idiot is sending slaves now? Look, buy whatever she sent you to get and then leave. I don't need this attention.
 
 enterShopMode()
-
-//giveItem(3,3,1)
 
 ->Close
 

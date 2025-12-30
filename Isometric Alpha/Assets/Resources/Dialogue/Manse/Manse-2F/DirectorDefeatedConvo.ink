@@ -32,24 +32,7 @@ VAR dealWiththePrisonersQuestName = "Deal With the Prisoners"
 
 VAR playerName = ""
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//prepForItem() //used before giveItem/giveItems/takeAllOfItem to add obtained/removed text after next line
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
-//activateQuestStep(string fullTitleOfQuestFoundInQuestJsonFile,int questStepIndex)
-//searchInventoryFor(string nameOfVarSetToTrueInsideInkFile,string itemNameToSearchFor)
-//fadeToBlack()
-//fadeBackIn(int numberOfFramesToWaitBeforeFadingBackIn)
-//moveToPos(float xCoord,float yCoord)
+
 
 ->1a
 
@@ -138,14 +121,14 @@ If you kill him, you free him from a life hunted by the Lovashi. If you keep him
         ->3a
     +I need no excuse to prevent an execution. You can have him.
         setToTrue(keptDirectorAlive)
-        finishQuest({thePlanQuestName}, {questSucceeded}, {tookDirectorPrisonerQuestStepIndex})
+        finishQuest(The Plan, true, I took the Director prisoner.)
         changeCamTarget({pageIndex})
         ->2a
     +You may take him with my blessing, so long as you remember who allowed it.
-    
+
         changeCamTarget({pageIndex})
         setToTrue(keptDirectorAlive)
-        finishQuest({thePlanQuestName}, {questSucceeded}, {tookDirectorPrisonerQuestStepIndex})
+        finishQuest(The Plan, true, I took the Director prisoner.)
         I certainly won't forget what you've done here today. And you've made a wise decision. 
        
         keepDialogue()     
@@ -174,7 +157,7 @@ changeCamTarget({directorIndex})
 
     +\*Kill the Director.*
         kill({directorIndex})
-        finishQuest({thePlanQuestName}, {questSucceeded}, {killedDirectorQuestStepIndex})
+        finishQuest(The Plan, true, I killed the Director.)
         ->3c
 
 === 3b ===
@@ -270,21 +253,21 @@ I will gather them in the southeastern part of the camp, near the mess hall. We'
     }
     
     +Very well. I'll meet you at the mess hall.
-    
-    activateQuestStep({dealWiththePrisonersQuestName}, 0)
-    
+
+    activateQuestStep(Deal With the Prisoners, To the Mess Hall.)
+
     {
     - letTaborLive:
-        activateQuestStep(An Uneasy Truce, 2)
+        activateQuestStep(An Uneasy Truce, Back to Tabor.)
     }
-    
+
     setToTrue(directorDefeated)
-    
+
     {
     - (convincedImre or terrifiedImre) and not foughtKendeInManseKitchen:
-    
+
     addDeathFlag(Imre)
-    finishedQuest(Assist the Nonbranded, false, 6)
+    finishQuest(Assist the Nonbranded, false, Left to their fate.)
     }
     
     setAreaToPassive(NECamp)

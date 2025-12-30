@@ -32,7 +32,7 @@ I am ready to leave this camp behind, but Carter has asked me to allow you time 
 {
 -not spokeWithPageBeforePrisoners:
 
-activateQuestStep(Leave the Camp, 0)
+activateQuestStep(Leave the Camp, Unfinished business.)
 setToTrue(spokeWithPageBeforePrisoners)
 ~spokeWithPageBeforePrisoners = true
 
@@ -135,7 +135,7 @@ I should warn you now against going west. If you go that way, you'll hit the Wan
 ~pageSaidReadyToLeave = true
 setToTrue(pageSaidReadyToLeave)
 
-activateQuestStep(Leave the Camp, 4)
+activateQuestStep(Leave the Camp, Through the forest.)
 
 Gather what you need. When you're ready, leave the camp and I'll follow you out. 
 

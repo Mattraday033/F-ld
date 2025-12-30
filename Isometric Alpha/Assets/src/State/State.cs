@@ -9,6 +9,7 @@ public static class State
 {
 	public static bool debugStopMonsterSpawning = false;
 	public static bool debugDiscoverAllLocations = false;
+	public static bool allLocationsFastTravelAvailable = false;
 	public static bool debugRetreatAutoSucceed = false;
 	public static bool enableGridDebugger = false;
 
@@ -28,7 +29,6 @@ public static class State
 	public static CharacterFacing playerFacing;
 	public static bool onLeftFoot;
 
-    public static TransitionInfo currentSourceTransitionInfo;
 	public static Dictionary<string, List<string>> allKnownMapData = new Dictionary<string, List<string>>();
 
 	public static bool enteredCombatFromDialogue = false;

@@ -267,10 +267,10 @@ In that case, it seems my hand is forced.{not gaveKastorThePassword: I and a few
     //I also have nandor if statement
 
     +So you are with us?
-        I will do what I can from here. I am not much of a fighter, but I have some experience in treating wounded soldiers. If you should return to me, I can heal your injuries.
+        I will do what I can from here. I am not much of a fighter, but I have some experience in treating wounded miners. If you should return to me, I can heal your injuries.
         
         setToTrue(givenTutorialQuest)
-        activateQuestStep(Look for Thatch, 5)
+        activateQuestStep(Look for Thatch, In need of allies.)
         keepDialogue()
         Also, if you are looking for more allies, there is another branded in this section named Thatch. That one's arms are as thick as tree trunks; you'll want him on your side if you're fighting the guards. His hut lies across the road from this one, you should be able to find him there. 
         ->HR_HaveNotMetYet_1ba
@@ -290,13 +290,13 @@ You're back. Are you in need of my attention?
 === HR_HaveNotMetYet_1c ===
 
 setToTrue(givenTutorialQuest)
-activateQuestStep(Look for Thatch, 5)
+activateQuestStep(Look for Thatch, In need of allies.)
 
 setToTrue(toldToFindNandor)
-activateQuestStep(Finding Nándor, 0)
-activateQuestStep(Explore the Mine, 0)
+activateQuestStep(Finding Nándor, Find Nándor.)
+activateQuestStep(Explore the Mine, Enter the mine.)
 
-activateQuestStep(The Plan, 20)
+activateQuestStep(The Plan, I'm on my own.)
 
 Mad it is then. I will aid you, but only because I would lend a hand to anyone willing to spit in the eye of the masters: I don't expect your one-body war to end in anything but failure.
 
@@ -631,8 +631,8 @@ Last night, I heard screams coming from the direction of his hut. I'm not sure w
     +I'll see what has become of him.
 
         setToTrue(givenTutorialQuest)
-        activateQuestStep(Look for Thatch, 0)
-        activateQuestStep(The Plan,5)
+        activateQuestStep(Look for Thatch, Cross the road.)
+        activateQuestStep(The Plan, Help the cells.)
         
         startTutorial({itemTutorialKey})
 
@@ -670,7 +670,7 @@ Were you able to recruit Thatch?
 
 === T1e ===
 
-finishQuest(Look for Thatch, true, 6)
+finishQuest(Look for Thatch, true, Kastor has been told.)
 setToTrue(toldKastorOfThatchsFate)
 
 Well done. What were the screams about? Is he hurt?
@@ -726,7 +726,7 @@ There is no point in escape if we cannot reach some place where the Lovashi cann
 I have tasked Bálint with divining our location. He is the most learned of us, as he was a scholar before his branding. He lives in the hut just north of the gate, in the center of the camp.
     
     +I understand. What else?
-    activateQuestStep(Aiding Bálint,0)
+    activateQuestStep(Aiding Bálint, Speak to Bálint.)
         ->2m
 
 
@@ -957,7 +957,7 @@ A branded slave's only chances at freedom are to fight or escape, but the brandl
 
 === 2l ===
 
-activateQuestStep(Aiding Ervin,0)
+activateQuestStep(Aiding Ervin, Hear Ervin's plan.)
 
 For this, you'll need to speak to Ervin in the hut directly across the street from this one. He is the only slave to receive his brand within the camp. He should know how to approach the situation.
 
@@ -981,7 +981,7 @@ I gave the job of obtaining a key to the armory to Janos. He lives in the hut to
 -else:
    +Got it.
         setToTrue(toldToAidJanos)
-        activateQuestStep(Aiding Janos,0)
+        activateQuestStep(Aiding Janos, Change of plans.)
         ->2j
 }
 
@@ -1018,7 +1018,7 @@ That's it for now. There is one final part that comes after, but it doesn't matt
 
 setToTrue(gotThePlanFromKastor)
 
-activateQuestStep(The Plan,6)
+activateQuestStep(The Plan, Help the cells.)
 
 ~explainingPlan = false
 ~gotThePlanFromKastor = true
@@ -1057,7 +1057,7 @@ Please hurry. We need this over quickly or else the guards might catch on.
 ~ learnedAboutMuzsasSweetToothFromKastor = true
 setToTrue(learnedAboutMuzsasSweetToothFromKastor)
 
-activateQuestStep(Múzsa's Sweet Tooth, 3)
+activateQuestStep(Múzsa's Sweet Tooth, A way forward?)
 
 I see. I've never spoken with her, but I've overheard some of the guards say she's always on the lookout for sweets. Must be hard to get them in the camp, since we never let outsiders in here.
 
@@ -1094,26 +1094,26 @@ What happened?
                 ~toldKastorFinishedErvinsTask = true
                 setToTrue(finishedErvinsTask)
                 setToTrue(toldKastorFinishedErvinsTask)
-                finishQuest(Aiding Ervin, true, 7)
+                finishQuest(Aiding Ervin, true, Kastor was informed.)
                     ->3d
-    
+
         -convincedImre:
             +I did what Ervin asked of me. The Manse slaves will aid us.
                 ~toldKastorFinishedErvinsTask = true
                 setToTrue(finishedErvinsTask)
                 setToTrue(toldKastorFinishedErvinsTask)
-                finishQuest(Aiding Ervin, true, 7)
-                
+                finishQuest(Aiding Ervin, true, Kastor was informed.)
+
                 prepForItem()
-                
+
                 This is good! Very good. There aren't as many of them as us, but their help will certainly make a difference.
-                
+
                 addXP(250)
-                
+
                 keepDialogue()
-                
+
                 When we attack we will need to make our way to the Manse to set them free. If left on their own, they will not be able to help us or make their own escape.
-                
+
                 {
                 -mineLvl3CarterAndNandorInParty:
                     ->7aa
@@ -1125,22 +1125,22 @@ What happened?
                 ~toldKastorFinishedErvinsTask = true
                 setToTrue(finishedErvinsTask)
                 setToTrue(toldKastorFinishedErvinsTask)
-                finishQuest(Aiding Ervin, true, 7)
+                finishQuest(Aiding Ervin, true, Kastor was informed.)
                     ->3d
-        
+
         -deathFlagImre:
             +I couldn't convince the Manse slaves. I had to kill one of them to keep our secret.
                 ~toldKastorFinishedErvinsTask = true
                 setToTrue(finishedErvinsTask)
                 setToTrue(toldKastorFinishedErvinsTask)
-                finishQuest(Aiding Ervin, true, 7)
+                finishQuest(Aiding Ervin, true, Kastor was informed.)
                     ->3d
         -terrifiedImre and not convincedImre:
             +I applied some pressure to the Manse slaves. They will aid us when the time comes.
                 ~toldKastorFinishedErvinsTask = true
                 setToTrue(finishedErvinsTask)
                 setToTrue(toldKastorFinishedErvinsTask)
-                finishQuest(Aiding Ervin, true, 7)
+                finishQuest(Aiding Ervin, true, Kastor was informed.)
                 
                 prepForItem()
                 
@@ -1294,7 +1294,7 @@ What happened?
 
 === 3dc ===
 
-    finishQuest(Aiding Ervin, true, 8)
+    finishQuest(Aiding Ervin, true, Kastor was informed.1)
     
     prepForItem()
     
@@ -1329,7 +1329,7 @@ Excellent! Where are we?
     
         {
         -mineLvl3CarterAndNandorInParty or broughtNandorToKastor:
-            finishQuest(Aiding Bálint, 4)
+            finishQuest(Aiding Bálint, true, Returned to Kastor.)
         
             changeCamTarget({carterIndex})
             
@@ -1350,7 +1350,7 @@ Excellent! Where are we?
 
 === 3f ===
 
-finishQuest(Aiding Bálint, true, 4)
+finishQuest(Aiding Bálint, true, Returned to Kastor.)
 
 prepForItem()
 
@@ -1383,7 +1383,7 @@ The guards killed Janos? But he was always so friendly, and he never gave them a
 
 === 3gb ===
 
-finishQuest(Aiding Janos, true, 9)
+finishQuest(Aiding Janos, true, Kastor was informed.)
 
 prepForItem()
 
@@ -1407,7 +1407,7 @@ addXP(250)
     +While I was grabbing the key I was forced to kill Chief Irén.
         {
         -not explainingPlan:
-        finishQuest(Aiding Janos, true, 12)
+        finishQuest(Aiding Janos, true, Kastor was informed.3)
         }
         ->3i
 }
@@ -1428,7 +1428,7 @@ addXP(250)
 {
 -deathFlagAndrás:
     +While following Janos's plan, I was forced to kill a guard.
-        finishQuest(Aiding Janos, true, 10)
+        finishQuest(Aiding Janos, true, Kastor was informed.1)
         ->3i
 }
 {
@@ -1437,7 +1437,7 @@ addXP(250)
     +To get the key, Janos had to tell a guard about the plan.
         ->3j
     +None worth mentioning. <Lie>
-        finishQuest(Aiding Janos, true, 10)
+        finishQuest(Aiding Janos, true, Kastor was informed.1)
         keepDialogue()
         Incredible. You performed your part to perfection. Continue like this and we'll all be free in no time.
             ->3c
@@ -1472,14 +1472,14 @@ That is certainly bad news, but I expected that we would have to kill a guard ev
 Tell the guards? Did Janos betray us?
 
     +Almost certainly. We should proceed with caution.
-        finishQuest(Aiding Janos, true, 9)
+        finishQuest(Aiding Janos, true, Kastor was informed.)
         setToTrue(saidJanosIsATraitor)
         keepDialogue()
         The guards have yet to take me to the pit, so we shall continue as if this hasn't happened yet. But should they come for me, I shall at least know who to curse with my final breath.
             ->3c
-    
+
     +I do not believe so. Evidenced by the fact that they haven't come for us yet.
-    finishQuest(Aiding Janos, true, 11)
+    finishQuest(Aiding Janos, true, Kastor was informed.2)
     {
     -deathFlagAndrás:
         keepDialogue()
@@ -1513,7 +1513,7 @@ You- Th- What? You told a guard our plan just because he seemed nice?
 === 3m ===
 
 setToTrue(kastorExplainedWhereToFindAnotherKey)
-activateQuestStep(Aiding Janos,4)
+activateQuestStep(Aiding Janos, A riskier path.)
 
 I see. I'm not sure what Janos was thinking, but I understand your decision to not go through with that. We'll have to proceed with the backup plan.
 
@@ -1569,7 +1569,7 @@ That I was. But back to the plan. The final thing we need to do before rallying 
 -hasToolBundle and not gaveKastorToolBundle:
     +I actually have already retrieved the tools from the armory.
 
-    activateQuestStep(The Plan,10)
+    activateQuestStep(The Plan, Wait for now.)
     ~gaveKastorToolBundle = true
     setToTrue(gaveKastorToolBundle)
     
@@ -1621,9 +1621,9 @@ I understand your apprehension, but you're the only one capable of leaving their
 
 {
 - gaveKastorToolBundle:
-activateQuestStep(The Plan, 11)
+activateQuestStep(The Plan, Wait for now.1)
 -else:
-activateQuestStep(The Plan, 7)
+activateQuestStep(The Plan, I told Kastor no.)
 }
 
 
@@ -1646,9 +1646,9 @@ I apologize, what I'm asking of you is an enormous undertaking. But because of y
 === 4h ===
 
 setToTrue(toldToFindNandor)
-activateQuestStep(The Plan, 8)
-activateQuestStep(Finding Nándor, 0)
-activateQuestStep(Explore the Mine, 0)
+activateQuestStep(The Plan, Raid the armory.)
+activateQuestStep(Finding Nándor, Find Nándor.)
+activateQuestStep(Explore the Mine, Enter the mine.)
 
 If you do not believe you are ready to face what is down there, I would recommend looking around the camp for any advantage you can bring with you. I believe the guards will have barricaded the mine entrance as well, so you may need to talk or sneak your way past them to get inside. If you need assistance, you can come back to me and I will help however I can. Take care.
     ->Close
@@ -1687,8 +1687,8 @@ You're right. I want in my heart to believe he's alive, but I'm shaken by all th
 
 setToTrue(toldToFindNandor)
 
-activateQuestStep(The Plan, 9)
-activateQuestStep(Finding Nándor, 0)
+activateQuestStep(The Plan, Return to Kastor.)
+activateQuestStep(Finding Nándor, Find Nándor.)
 
 I was going to ask you to enter the mine once we had all of the other pieces in place. But now that everything has fallen apart you volunteer to go? If you would do this for us, you would be a hero to all of the branded, even more than you already are. 
 
@@ -1790,7 +1790,7 @@ addXP(400)
             ->6c
     -else:// Nandor is not with you but you have found the tools
         +I have not found Nándor yet, but I will continue searching.
-            activateQuestStep(The Plan,10)
+            activateQuestStep(The Plan, Wait for now.)
             Good. I will hide the tools and await your return. When that happens, we can finally rise up and make the masters pay.
             
             ->Close
@@ -1877,7 +1877,7 @@ changeCamTarget({nandorIndex})
 
 Kastor, I am glad you were able make it out alright. It is good to be back above ground again, and it's all thanks to {playerName}'s heroism.
 
-finishQuest(Finding Nándor, true, 3)
+finishQuest(Finding Nándor, true, Nándor has returned.)
 
 changeCamTarget({kastorIndex})
 
@@ -1917,45 +1917,6 @@ Even in death, he helps our cause. I am once more in his debt.
 -hasToolBundle and not gaveKastorToolBundle:
     +If I may interject, I also have these tools from the mine's armory. They should help our cause. *Hand over the Tool Bundle.*
         ->6b
-/*
--finishedBalintsTask and not toldKastorFinishedBalintsTask:
-    +I'd like to bring up that I helped Bálint learn that the camp is located within the Kingdom of Masons.
-    
-        finishQuest(Aiding Bálint, 4)
-        
-        changeCamTarget({carterIndex})
-        
-        prepForItem()
-
-        Not to take away from what you've accomplished, {playerName}, but I need to talk to everyone about that.
-
-        addXP(250)
-        
-        keepDialogue()
-        
-        The plan was established with the belief that the camp resided somewhere within the Lovashi Confederation. But as {playerName} pointed out, that isn't true. At least, not unless we've been invaded since I was planted at this camp three months ago. I obviously haven't been able to learn much of anything happening outside the camp since I arrived here, being a prisoner and all.
-        ~backTo6cza = true
-        ->2iba
-
--finishedErvinsTask and not toldKastorFinishedBalintsTask:
-    +I'd like to say that I 
-    
-        finishQuest(Aiding Bálint, 4)
-        
-        changeCamTarget({carterIndex})
-        
-        prepForItem()
-
-        Not to take away from what you've accomplished, {playerName}, but I need to talk to everyone about that.
-
-        addXP(250)
-        
-        keepDialogue()
-        
-        The plan was established with the belief that the camp resided somewhere within the Lovashi Confederation. But as {playerName} pointed out, that isn't true. At least, not unless we've been invaded since I was planted at this camp three months ago. I obviously haven't been able to learn much of anything happening outside the camp since I arrived here, being a prisoner and all.
-        ~backTo6cza = true
-        ->2iba
-*/
 -else:
     +I think it is about time we made our move before the guards catch on to our return.
         ->6d
@@ -2170,7 +2131,7 @@ The next stage of the plan for the revolt was to fight our way to the northern s
 
 changeCamTarget({kastorIndex})
 
-activateQuestStep(Rescue Broglin,1)
+activateQuestStep(Rescue Broglin,Beneath the Manse.)
 
 That is true, but the Manse is almost certainly where the Pit and it's prisoners reside. I would not leave Broglin and any other slaves held there to whatever fate the guards have in store for them.
 
@@ -2180,7 +2141,7 @@ That is true, but the Manse is almost certainly where the Pit and it's prisoners
 
 changeCamTarget({kastorIndex})
 
-activateQuestStep(Rescue Broglin,1)
+activateQuestStep(Rescue Broglin,Beneath the Manse.)
 
 We could, but the Manse is almost certainly where the Pit and it's prisoners reside. We also swore to help free the Manse slaves. We owe it to anyone trapped there to at least attempt to free them.
 
@@ -2277,12 +2238,12 @@ With that settled, we're about to charge out there and take it to the guards. So
 {
 -convincedImre or terrifiedImre:
 setToTrue(imreReadyToHelpPlayer)
-activateQuestStep(Assist the Nonbranded,2)
+activateQuestStep(Assist the Nonbranded,Find Imre.)
 }
 
 setToTrue(revoltStarted)
 setToTrue(kastorStartedRevolt)
-activateQuestStep(The Plan,12)
+activateQuestStep(The Plan,Free the others.)
 
 setAreaToHostile({southEasternCampSceneName})
 setAreaToHostile({manseKitchensSceneName})

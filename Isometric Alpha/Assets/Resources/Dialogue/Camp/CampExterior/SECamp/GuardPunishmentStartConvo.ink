@@ -482,7 +482,7 @@ fadeBackIn(60)
 {
 -taborIsAtTrial:
 
-finishQuest(An Uneasy Truce, true, 10)
+finishQuest(An Uneasy Truce, true, Nándor's decision.)
 
 changeCamTarget({nandorIndex})
 
@@ -545,7 +545,7 @@ deactivate({crowdIndex})
 fadeBackIn(60)
 }
 
-finishQuest(Deal With the Prisoners, true, 22)
+finishQuest(Deal With the Prisoners, true, Delegation of duties.)
 setToTrue(afterNandorDecidesGuardPunishments)
 
 ->Close
@@ -820,13 +820,13 @@ Thank you. You have lifted a great burden from me.
 
 === agreedToBeJudge ===
 
-activateQuestStep(Deal With the Prisoners, 1)
+activateQuestStep(Deal With the Prisoners,The precipice.)
 
 {
 -letTaborLive and acceptedTaborsSurrenderAfterDirectorFight:
-activateQuestStep(An Uneasy Truce, 5)
+activateQuestStep(An Uneasy Truce, Decide Tabor's fate.)
 -letTaborLive:
-activateQuestStep(An Uneasy Truce, 6)
+activateQuestStep(An Uneasy Truce, Decide Tabor's fate.1)
 }
 
 deactivate({nandorIndex})
@@ -849,7 +849,7 @@ Very well. I will see that your judgement is carried out. Speak with me again on
 
 fadeToBlack()
 
-finishQuest(Deal With the Prisoners, true, 2)
+finishQuest(Deal With the Prisoners, true, Recompense, finally.)
 
 {
 -marcosIsAtTrial:
@@ -861,7 +861,7 @@ setToTrue(executedMarcos)
 -taborIsAtTrial:
 kill({taborIndex})
 setToTrue(executedTabor)
-finishQuest(An Uneasy Truce, true, 8)
+finishQuest(An Uneasy Truce, true, Tabor's end.)
 }
 
 {

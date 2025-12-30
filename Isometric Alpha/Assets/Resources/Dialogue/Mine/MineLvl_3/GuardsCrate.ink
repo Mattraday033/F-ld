@@ -39,19 +39,7 @@ VAR toldPazmanAboutSealingBreach = false
 
 VAR playerName = ""
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//prepForItem()
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
+
 
 {
 -mineLvl3SpeakingFromBrokenGate:
@@ -361,7 +349,7 @@ changeCamTarget({pazmanIndex})
 Yes sir!
 
 setToTrue(mineLvl3GuardsInParty)
-activateQuestStep(Sealing the Breach, 1)
+activateQuestStep(Sealing the Breach,The Guards Will Help.)
 
 ->deactivateExtras
 
@@ -445,7 +433,7 @@ Since you're so fond of wandering around down here, I now task you with finding 
 === 3eb ===
 
 setToTrue(mineLvl3ToldToFindMarcos)
-activateQuestStep(Find Guard Márcos, 0)
+activateQuestStep(Find Guard Márcos,Find Guard Márcos)
 setToTrue(mineLvl2GuardsMovedToSecondLevelGate)
 
 ->deactivateExtras
@@ -458,7 +446,7 @@ So, that stubborn fool made it after all. What was his condition?
 
 === 3fb ===
 
-finishQuest(Find Guard Márcos, true, 2)
+finishQuest(Find Guard Márcos, true, Returned to Gáspár)
 
 prepForItem()
 
@@ -523,7 +511,7 @@ I'll allow you to ask your questions, but make them quick. I am loathe to stay h
 
 {
     -mineLvl3ToldAboutJelly:
-    activateQuestStep(Sealing the Breach, 2, true)
+    activateQuestStep(Sealing the Breach, The Guards Are Dead., true)
 }
 
 //deactivate({pazmanCratesIndex})

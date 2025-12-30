@@ -60,26 +60,6 @@ VAR afterOverseerParentIndex = 11
 //depricated
 VAR thatchIndex = 11 
 
-
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//prepForItem() //used before giveItem/giveItems/takeAllOfItem to add obtained/removed text after next line
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
-//activateQuestStep(string fullTitleOfQuestFoundInQuestJsonFile,int questStepIndex)
-//searchInventoryFor(string nameOfVarSetToTrueInsideInkFile,string itemNameToSearchFor)
-//fadeToBlack()
-//fadeBackIn(int numberOfFramesToWaitBeforeFadingBackIn)
-//moveToPos(float xCoord,float yCoord)
-
 ->1a
 
 === 1a ===
@@ -698,9 +678,9 @@ fadeBackIn(60)
 
 {
 -crowdFervor >= crowdAppeasementThreshold:
-activateQuestStep(The Plan,13)
+activateQuestStep(The Plan, Take your revenge.)
 -else:
-activateQuestStep(The Plan,14)
+activateQuestStep(The Plan, Take your revenge.1)
 }
 
 {

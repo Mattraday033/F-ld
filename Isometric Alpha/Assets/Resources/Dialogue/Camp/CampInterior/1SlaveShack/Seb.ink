@@ -76,7 +76,7 @@ Whatever the case, he's not going to be able to read it. I've seen this happen t
     
         ~gaveNoteToSeb = true
         setToTrue(gaveNoteToSeb)
-        activateQuestStep(Note Worthy,2)
+        activateQuestStep(Note Worthy, Placed note in front of Seb.)
         
         prepForItem()
         
@@ -87,7 +87,7 @@ Whatever the case, he's not going to be able to read it. I've seen this happen t
 
 === 2e ===
 
-activateQuestStep(Note Worthy,3)
+activateQuestStep(Note Worthy, Read note aloud.)
 ~gaveNoteToSeb = true
 setToTrue(gaveNoteToSeb)
 
@@ -106,7 +106,7 @@ changeCamTarget({sebsIndex})
 ->Close
 
 === 2f ===
-activateQuestStep(Note Worthy,2)
+activateQuestStep(Note Worthy, Kept Seb company.)
 ~gaveNoteToSeb = true
 setToTrue(gaveNoteToSeb)
 

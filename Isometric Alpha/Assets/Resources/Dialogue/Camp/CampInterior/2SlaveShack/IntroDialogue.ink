@@ -256,7 +256,7 @@ changeCamTarget({laszloVoiceIndex})
 
 {peacefullyRefusedBroglin: ->4b}
 
-activateQuestStep(The Plan,0)
+activateQuestStep(The Plan, I just got here!)
 
 setToTrue(goesWithBroglinsPlan)
 
@@ -369,7 +369,7 @@ deactivate({broglinIndex})
 
 ~impressedGuard = true
 
-activateQuestStep(The Plan,2)
+activateQuestStep(The Plan, Making an impression.)
 
 setToTrue(impressedGuardLaszlo)
 
@@ -392,7 +392,7 @@ deactivate({broglinIndex})
 === 4k ===
 
 
-activateQuestStep(The Plan,1)
+activateQuestStep(The Plan, The death of Broglin.)
 
 setToTrue(gotBroglinKilledByGuard)
 ~gotBroglinKilledByGuard = true
@@ -411,7 +411,7 @@ deactivate({broglinIndex})
 
 ~impressedGuard = true
 
-activateQuestStep(The Plan,2)
+activateQuestStep(The Plan,Making an impression.)
 
 setToTrue(impressedGuardLaszlo)
 
@@ -462,7 +462,7 @@ Well you earned it, so here you go. Here's Broglin's {takeGarchaAway + killedBAn
 
 === 5e ===
 
-activateQuestStep(The Plan,3)
+activateQuestStep(The Plan,Deemed trustworthy.)
 
 prepForItem()
 
@@ -893,7 +893,7 @@ But enough about Broglin. I'd prefer not to waste time thinking about his fate t
 //So what now?
 === 20a ===
 
-activateQuestStep(The Plan,4)
+activateQuestStep(The Plan,Make contact with Kastor.)
 
 Now, you run as quick as you can to Kastor. He's the one that got Broglin and I in on the escape plan; he should know others who are in on it. He's in a large hut in the southeastern part of the camp, along the southern wall. Just follow the road past the gate and you can't miss it.
 
@@ -913,7 +913,6 @@ East. The way the road leads out of this hellhole.
         ->20c
 
 === 20c ===
-//activateQuestStep(Rescue Broglin,0)
 
 setToTrue(spokeToGarchaAboutPlan)
 

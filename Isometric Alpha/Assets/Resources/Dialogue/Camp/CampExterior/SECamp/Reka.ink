@@ -14,21 +14,6 @@ VAR crowdIndex = 2
 
 VAR playerName = ""
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//prepForItem()
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
-
-
 changeCamTarget({rekaIndex})
 
 {
@@ -192,7 +177,7 @@ changeCamTarget({crowdIndex})
 
 \*Your words are met with encouragement from a portion of the crowd. Others look about in mild confusion, or shake their heads.*
 
-activateQuestStep(Deal With the Prisoners, 11)
+activateQuestStep(Deal With the Prisoners, Réka, free.)
         
     fadeToBlack()
 
@@ -273,7 +258,7 @@ You bastard. If Gáspár could see me now, I know he would laugh.
 setToTrue(didNotExecuteReka)
 setToTrue(gaveRekaFiftyLashes)
 
-activateQuestStep(Deal With the Prisoners, 12)
+activateQuestStep(Deal With the Prisoners, Réka, punished.)
 
 {
 -gaveAGuardToTheCrowd:
@@ -298,7 +283,7 @@ fadeBackIn(60)
 
 setToTrue(executedReka)
 
-activateQuestStep(Deal With the Prisoners, 13)
+activateQuestStep(Deal With the Prisoners, Réka, executed.)
 
 {
 -gaveAGuardToTheCrowd:
@@ -319,7 +304,7 @@ fadeBackIn(60)
 
 setToTrue(gaveRekaToTheCrowd)
 
-activateQuestStep(Deal With the Prisoners, 14)
+activateQuestStep(Deal With the Prisoners, Réka, mobbed.)
 
 Stay back you scum, stay back! The first to approach I will bleed with my teeth!
 

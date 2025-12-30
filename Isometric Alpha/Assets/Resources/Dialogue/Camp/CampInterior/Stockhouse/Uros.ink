@@ -16,25 +16,6 @@ VAR lostIronNuggetName = "Lost Iron Nugget"
 
 VAR playerName = ""
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//prepForItem() //used before giveItem/giveItems/takeAllOfItem to add obtained/removed text after next line
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
-//activateQuestStep(string fullTitleOfQuestFoundInQuestJsonFile,int questStepIndex)
-//searchInventoryFor(string nameOfVarSetToTrueInsideInkFile,string itemNameToSearchFor)
-//fadeToBlack()
-//fadeBackIn(int numberOfFramesToWaitBeforeFadingBackIn)
-//moveToPos(float xCoord,float yCoord)
-
 searchInventoryFor(hasIronNugget,{lostIronNuggetName})
 
 {
@@ -74,7 +55,7 @@ Oh! You startled me. I ain't lookin' for nothin', just movin' boxes around.
     +I won't tell anyone, I'm just curious. <Cha {charisma}/2>
         ~convincedUros = true
         setToTrue(convincedUros)
-        activateQuestStep(Stockhouse Stash, 2)
+        activateQuestStep(Stockhouse Stash, The lump of iron.)
         ->1d
 }
 
@@ -87,7 +68,7 @@ Oh! You startled me. I ain't lookin' for nothin', just movin' boxes around.
     +Tell me or I'm going to call the Quartermaster over. We'll see how interested she is in a slave stashing goods in her stockhouse.
         ->1h
     +Fine, nevermind then.
-        activateQuestStep(Stockhouse Stash, 1)
+        activateQuestStep(Stockhouse Stash, Uros is hiding something.)
         ->Close
 
 === 1c ===
@@ -97,14 +78,14 @@ Oh! You startled me. I ain't lookin' for nothin', just movin' boxes around.
     +Tell me or the next thing you'll be looking for is all your missing teeth. <Str {strength}/2>
         ~intimidatedUros = true
         setToTrue(intimidatedUros)
-        activateQuestStep(Stockhouse Stash, 3)
+        activateQuestStep(Stockhouse Stash, The lump of iron.1)
         keepDialogue()
         No need for violence! I like my teeth where they are. And it's not like I'm going to find the damn thing anyways. Ok, I'll tell you.
         ->1d
 }
 
     +Fine, I'm going.
-        activateQuestStep(Stockhouse Stash, 1)
+        activateQuestStep(Stockhouse Stash, Uros is hiding something.)
         ->Close
     
 === 1d ===
@@ -160,7 +141,7 @@ You snitch scum, you wouldn't dare!
     +Try me. <Cha {charisma}/2>
         ~threatenedToSnitchOnUros = true
         setToTrue(threatenedToSnitchOnUros)
-        activateQuestStep(Stockhouse Stash, 4)
+        activateQuestStep(Stockhouse Stash, The lump of iron.2)
         keepDialogue()
         Fine, damn you! It's not like I was gonna find the stupid thing anyways.
         ->1d
@@ -170,7 +151,7 @@ You snitch scum, you wouldn't dare!
         setFacing(NE)
         ->1i
     +You're right, it's not worth snitching on you for.
-        activateQuestStep(Stockhouse Stash, 1)
+        activateQuestStep(Stockhouse Stash, Uros is hiding something.)
         ->Close
 
 === 1i ===
@@ -201,7 +182,7 @@ deactivate(1)
 
 fadeBackIn(60)
 
-activateQuestStep(Stockhouse Stash, 5)
+activateQuestStep(Stockhouse Stash, Uros was hiding something.)
 
 Thank you for bringing this to my attention. If you happen to find whatever he had squirrelled away in here before I get him to talk, and bring it to me, I'll reward you. Just don't let it get in the way of your work; I won't be defending you to some other guard if they come looking for you.
 
@@ -248,7 +229,7 @@ Don't bother me, I have work to get to.
 === 2c ===
 
 setToTrue(gaveUrosTheNugget)
-finishQuest(Stockhouse Stash, true, 9) 
+finishQuest(Stockhouse Stash, true, The nugget retrieved.)
 
 prepForItem()
 
@@ -262,7 +243,7 @@ addXP(200)
 === 2d ===
 
 setToTrue(showedUrosTheNuggetWithoutGivingItBack)
-finishQuest(Stockhouse Stash, true, 11)
+finishQuest(Stockhouse Stash, true, The nugget stolen.)
 
 prepForItem()
 

@@ -12,9 +12,9 @@
 				{"stepName":"András saw the light.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"I managed to convince the guard to hand over the key without a fight. What's more, he seems to be willing to stay out of the fighting to come. I should hurry and bring the key to Kastor before someone comes around looking for it or me."},
 				{"stepName":"Put down like a dog.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"I took no chances and slew the guard at the meeting that Janos arranged. Janos was mortified, but better he weep than we all die. Perhaps next time he will think twice before trusting a slaver. I must now return the key to Kastor before someone comes looking for the body."},
 				{"stepName":"Kastor was informed.","MapZone":"","MapLocation":"","journalDescription":"I told Kastor what transpired at the meeting between the guard and Janos. I told Kastor that Janos was a traitor, but now we have the key."},
-				{"stepName":"Kastor was informed.","MapZone":"","MapLocation":"","journalDescription":"I told Kastor what transpired at the meeting between the guard and Janos, but I kept Janos's affair with the guard a secret. Best not to risk their safety by disclosing that to anyone."},
-				{"stepName":"Kastor was informed.","MapZone":"","MapLocation":"","journalDescription":"I told Kastor what transpired at the meeting between the guard and Janos, but did my best to explain to him that Janos was not a traitor. I hope I was convincing."},
-				{"stepName":"Kastor was informed.","MapZone":"","MapLocation":"","journalDescription":"I obtained the key to the armory for Kastor."}
+				{"stepName":"Kastor was informed.1","MapZone":"","MapLocation":"","journalDescription":"I told Kastor what transpired at the meeting between the guard and Janos, but I kept Janos's affair with the guard a secret. Best not to risk their safety by disclosing that to anyone."},
+				{"stepName":"Kastor was informed.2","MapZone":"","MapLocation":"","journalDescription":"I told Kastor what transpired at the meeting between the guard and Janos, but did my best to explain to him that Janos was not a traitor. I hope I was convincing."},
+				{"stepName":"Kastor was informed.3","MapZone":"","MapLocation":"","journalDescription":"I obtained the key to the armory for Kastor."}
 			
 			],
 			

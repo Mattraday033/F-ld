@@ -279,29 +279,29 @@ I always wondered where we are. You've done some legwork, it seems.
 \*Imre gulps* Aha, I w-will do j-j-just that.
 
     +Good. Now leave. I'm sick of looking at you.
-        activateQuestStep(Aiding Ervin,3)
+        activateQuestStep(Aiding Ervin, A convincing argument.1)
         setToTrue(convincedImre)
         setToTrue(terrifiedImre)
-        activateQuestStep(Assist the Nonbranded,0)
+        activateQuestStep(Assist the Nonbranded, Convinced Imre.)
             ->Close
 
 -attitude >= 2:
 I-I'll tell them exactly what you told me.
 
     +Good. Now leave. I'm sick of looking at you.
-        activateQuestStep(Aiding Ervin,3)
+        activateQuestStep(Aiding Ervin, A convincing argument.1)
         setToTrue(convincedImre)
         setToTrue(terrifiedImre)
-        activateQuestStep(Assist the Nonbranded,0)
+        activateQuestStep(Assist the Nonbranded, Convinced Imre.)
             ->Close
-    
+
 -else:
 Er... Ok, I'll try to make that work. P-Please don't hurt me if I don't sell it as well as you could.
 
     +Good. Now leave. I'm sick of looking at you.
-        activateQuestStep(Aiding Ervin,3)
+        activateQuestStep(Aiding Ervin, A convincing argument.1)
         setToTrue(terrifiedImre)
-        activateQuestStep(Assist the Nonbranded,1)
+        activateQuestStep(Assist the Nonbranded, Terrified Imre.)
             ->Close
 }
 
@@ -419,20 +419,20 @@ I see you've put in the work. This should be an easy sell to get the rest of the
 
     +"Our" side? So you're in?
         setToTrue(convincedImre)
-        activateQuestStep(Aiding Ervin,2)
-        activateQuestStep(Assist the Nonbranded,0)
+        activateQuestStep(Aiding Ervin, A convincing argument.)
+        activateQuestStep(Assist the Nonbranded, Convinced Imre.)
         ->7h
-    
+
 -else:
 I'm not going to throw my lot in with someone I just met. I'm late coming back from break, so if you'll excuse me...
 
     +You're making a huge mistake, but it's yours to make. I'll be going as well.
         setToTrue(imreWontSpeakToPlayer)
-        activateQuestStep(Aiding Ervin,4)
+        activateQuestStep(Aiding Ervin, An unconvincing argument.)
         ->Close
-        
+
     +I'm sorry, but if you wont join us I can't let you live. <Combat>
-        activateQuestStep(Aiding Ervin,5)
+        activateQuestStep(Aiding Ervin, An unconvincing argument.1)
         enterCombat({imreCombatIndex})
         ->Close
 }
@@ -449,7 +449,7 @@ We're in this together now. I'm overdue to come back from break. You tell the ot
 
 You've kept to your word and I've kept mine. The other Manse slaves stand ready to assist you in any way they can. However, we have a small problem.
 
-activateQuestStep(Assist the Nonbranded, 3)
+activateQuestStep(Assist the Nonbranded, To the kitchens.)
 
 The head chef has kept us penned up in the kitchen while we wait out the riots. I only managed to sneak away because I had Pan catch a beating to provide a distraction. I've unbarred the doors, but we have no time to waste. Are you ready to enter the Manse? Once you enter the kitchens, the guards will rush to block your passage.
 

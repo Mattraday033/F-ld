@@ -38,18 +38,6 @@ VAR agreedToFightGaspar = false
 
 VAR playerName = ""
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
 
 ->4a
 
@@ -68,12 +56,12 @@ Márcos...
 
     +He gave his life so that we might be free. Remember him that way.
         I will. Have no doubt about that.
-        finishQuest(Sealing the Breach, true, 7)
-        activateQuestStep(Finding Nándor, 2)
+        finishQuest(Sealing the Breach, true, Márcos Sealed the Breach.)
+        activateQuestStep(Finding Nándor, The Guards Will Help.)
         ->4b
     +I will not weep for a slaver. Even one who turned at the eleventh hour.
-        finishQuest(Sealing the Breach, true, 7)
-        activateQuestStep(Finding Nándor, 2)
+        finishQuest(Sealing the Breach, true, Márcos Sealed the Breach.)
+        activateQuestStep(Finding Nándor, The Guards Will Help.)
         I can understand why you say that, but to me he seemed different. Alas, it doesn't matter now.
         ->4b
 
@@ -85,10 +73,10 @@ activate({rekaIndex})
 
 changeCamTarget({rekaIndex})
 
-Gáspár, you idiot. A stubborn ox to the last. 
+Gáspár, you idiot. A stubborn ox to the last.
 
-finishQuest(Sealing the Breach, true, 8)
-activateQuestStep(Finding Nándor, 2)
+finishQuest(Sealing the Breach, true, Some Guards Surrendered.)
+activateQuestStep(Finding Nándor, The Guards Will Help.)
 
 changeCamTarget({pazmanIndex})
 
@@ -105,15 +93,15 @@ changeCamTarget({rekaIndex})
     changeCamTarget({nandorIndex})
 
     The guards are dead, and the breach is sealed. I have not felt like this in a long time... Relieved. Hopeful. All thanks to your efforts.
-    
+
     {
     -not deathFlagGuardMárcos and mineLvl3MarcosAgreedToIgniteJelly:
-        finishQuest(Sealing the Breach, true, 6)
+        finishQuest(Sealing the Breach, true, Sealed the Breach Myself.)
     -else:
-        finishQuest(Sealing the Breach, true, 9)
+        finishQuest(Sealing the Breach, true, The Guards Are Dead.1)
     }
-    
-    activateQuestStep(Finding Nándor, 2)
+
+    activateQuestStep(Finding Nándor, The Guards Will Help.)
     
     changeCamTarget({carterIndex})
     

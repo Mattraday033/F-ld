@@ -172,7 +172,7 @@ No-brands take breaks in alley on west side of barracks, in front of the Manse. 
 
 setToTrue(givenTaskByErvin)
 
-activateQuestStep(Aiding Ervin, 1)
+activateQuestStep(Aiding Ervin, It can always be worse.)
 
 Wait. There's chance you can't convince them. That happen, you be ready to kill. A missing slave gives time before they are noticed. A slave who knows our plans threatens now.
 
@@ -299,7 +299,7 @@ That is sad, but you had to do it. Do not weep for what you did. Hate the master
 
 === 3f ===
 
-activateQuestStep(Aiding Ervin, 6)
+activateQuestStep(Aiding Ervin, Return to Kastor.)
 
 setToTrue(finishedErvinsTask)
 

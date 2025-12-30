@@ -605,7 +605,7 @@ Remember: the more life the leaves have in them, and the more complete they are,
 
     +I understand.
         setToTrue(givenTaskByBalint)
-        activateQuestStep(Aiding Bálint,1)
+        activateQuestStep(Aiding Bálint, Obtaining Samples.)
         The wind sometimes carries leaves over the northern wall. I would look there. Return to me when you find something.
             ->Close
 
@@ -625,7 +625,7 @@ Have you found anything that I can use?
 
 === 5f ===
 
-activateQuestStep(Aiding Bálint, 3)
+activateQuestStep(Aiding Bálint, Kastor must be told.)
 
 prepForItem()
 

@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65c2e76a493814442aeddb3d30b06edb
-      internalID: -511586461
+      spriteID: 3fca4323b5268c641adc2041ba6caaa9
+      internalID: -187035214
       vertices: []
       indices: 
       edges: []
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ccf833b359238734a85598ecea1cdb04
-      internalID: 429855517
+      spriteID: c77f55d21d0ea2843aff33d3452a07e3
+      internalID: 359606598
       vertices: []
       indices: 
       edges: []
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ef06c0c40e9f0940ac3a0c2c9869413
-      internalID: -363234426
+      spriteID: 6fb0599468a6e5b41a8acf7037594bd6
+      internalID: 696496918
       vertices: []
       indices: 
       edges: []
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a00324ca0ac7376418e5297f01a50616
-      internalID: 1179108975
+      spriteID: 63f737c1a55a52f46ba05a0cb1e102bf
+      internalID: 1413427361
       vertices: []
       indices: 
       edges: []
@@ -195,8 +195,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 79bd34d8240296c4bab61561e2ce1b68
-      internalID: 561185608
+      spriteID: c1b3aa9046f1afe4290e71a2abb98e50
+      internalID: 281880328
       vertices: []
       indices: 
       edges: []
@@ -212,11 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Wounded_0: -511586461
-      Wounded_1: 429855517
-      Wounded_2: -363234426
-      Wounded_3: 1179108975
-      Wounded_4: 561185608
+      Wounded_0: -187035214
+      Wounded_1: 359606598
+      Wounded_2: 696496918
+      Wounded_3: 1413427361
+      Wounded_4: 281880328
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

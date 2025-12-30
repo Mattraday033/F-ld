@@ -15,25 +15,6 @@ VAR crowdIndex = 2
 
 VAR playerName = ""
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-//activate(int index of gameobject you're activating)
-//deactivate(int index of gameobject you're deactivating)
-//activateQuestStep(string questTitle, int questStepIndex)
-//prepForItem() //used before giveItem/giveItems/takeAllOfItem to add obtained/removed text after next line
-//giveItem(int listIndex, int itemIndex, int quantity)
-//giveItems(int listIndex1, int itemIndex1, int quantity1 |
-//          int listIndex2, int itemIndex2, int quantity2 |
-//          ... etc)
-//takeAllOfItem(string itemName)
-//activateQuestStep(string fullTitleOfQuestFoundInQuestJsonFile,int questStepIndex)
-//searchInventoryFor(string nameOfVarSetToTrueInsideInkFile,string itemNameToSearchFor)
-//fadeToBlack()
-//fadeBackIn(int numberOfFramesToWaitBeforeFadingBackIn)
-//moveToPos(float xCoord,float yCoord)
-
 changeCamTarget({marcosIndex})
 
 {
@@ -257,10 +238,10 @@ Yes, I believe Kastor, Carter, and Nándor would. There may be more, but those a
         setToTrue(didNotExecuteMarcos)
         
         changeCamTarget({crowdIndex})
-        
+
         \*The crowd erupts in cheers.*
-        
-        activateQuestStep(Deal With the Prisoners, 3)
+
+        activateQuestStep(Deal With the Prisoners, Márcos, free.)
         
         fadeToBlack()
 
@@ -301,7 +282,7 @@ Yes, I believe Kastor, Carter, and Nándor would. There may be more, but those a
 setToTrue(didNotExecuteMarcos)
 setToTrue(gaveMarcosFiftyLashes)
 
-activateQuestStep(Deal With the Prisoners, 4)
+activateQuestStep(Deal With the Prisoners, Márcos, punished.)
 
 Were our places reversed, and you were in the hands of a younger me, your fate would not have been this merciful. I find your verdict more than fair.
 
@@ -317,7 +298,7 @@ fadeBackIn(60)
 
 setToTrue(executedMarcos)
 
-activateQuestStep(Deal With the Prisoners, 5)
+activateQuestStep(Deal With the Prisoners, Márcos, executed.)
 
 My death has been a long time coming. I know what I have done to deserve this punishment, although some part of me had hoped it would not come to this. I will not resist.
 
@@ -333,7 +314,7 @@ fadeBackIn(60)
 
 setToTrue(gaveMarcosToTheCrowd)
 
-activateQuestStep(Deal With the Prisoners, 6)
+activateQuestStep(Deal With the Prisoners, Márcos, mobbed.)
 
 \*Márcos looks up at you. You can see true fear in his eyes.*
 

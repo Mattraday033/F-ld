@@ -469,10 +469,8 @@ public class DialogueManager : MonoBehaviour
 
                 case "activatequeststep":
 
-                    //activateQuestStep(string questTitle, int questStepIndex)
-                    //activateQuestStep(string questTitle, int questStepIndex, bool haltNotificationQueue)
                     string questTitle3 = getArgument(buffer);
-                    string questStepTitle = getArgument(buffer, Constants.indexOne);
+                    string questStepTitle = Helpers.removeSpacesOnEnds(getArgument(buffer, Constants.indexOne));
 
                     checkForHaltNotificationBoolArg(buffer, Constants.indexTwo);
 
@@ -487,12 +485,9 @@ public class DialogueManager : MonoBehaviour
                 case "finishedquest":
                 case "finishquest":
 
-                    //finishQuest(string questTitle, bool succeeded, int questStepIndex) if you're activating a quest step
-                    //finishQuest(string questTitle, bool succeeded, int questStepIndex, bool haltNotificationQueue)
-
                     string questTitle = getArgument(buffer);
                     bool questSuccessful = getArgumentBool(buffer, Constants.indexOne);
-                    string finalQuestStep = getArgument(buffer, Constants.indexTwo);
+                    string finalQuestStep = Helpers.removeSpacesOnEnds(getArgument(buffer, Constants.indexTwo));
 
                     checkForHaltNotificationBoolArg(buffer, Constants.indexThree);
 

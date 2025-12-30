@@ -35,7 +35,7 @@ changeCamTarget({janosIndex})
 === 6a === //killed Andras after saying you would
 
 setToTrue(gotKeyFromJanos)
-activateQuestStep(Aiding Janos,8)
+activateQuestStep(Aiding Janos,Put down like a dog.)
 
 He's dead. It's all I could think about while we were waiting and now it's come to pass.
 
@@ -48,7 +48,7 @@ He's dead. It's all I could think about while we were waiting and now it's come 
 
 === 6b === //killed Andras after obtaining the key and didn't tell Janos.
 
-activateQuestStep(Aiding Janos,8)
+activateQuestStep(Aiding Janos,Put down like a dog.)
 
 You killed him! Why? He already gave you the key!
 
@@ -64,7 +64,7 @@ You killed him! Why? He already gave you the key!
 
 setToTrue(andrasAttackedPlayer)
 setToTrue(gotKeyFromJanos)
-activateQuestStep(Aiding Janos,6)
+activateQuestStep(Aiding Janos,The guard turned on us.)
 
 No... András.
 
@@ -78,7 +78,7 @@ No... András.
 === 6d === //didn't say you would kill Andras but did it anyways (and none of the others apply)
 
 setToTrue(gotKeyFromJanos)
-activateQuestStep(Aiding Janos,8)
+activateQuestStep(Aiding Janos,Put down like a dog.)
 
 Oh gods, you killed him!
 
