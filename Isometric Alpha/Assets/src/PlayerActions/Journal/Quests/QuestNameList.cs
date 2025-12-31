@@ -69,6 +69,13 @@ public static class QuestNameList
     public const string assistTheNonbrandedStepTitleFive = "Betrayal!";
     public const string assistTheNonbrandedStepTitleSix = "Left to their fate.";
 
+    public const string convinceTheBrandedQuestTitle = "Convince the Branded";
+
+    public const string convinceTheBrandedStepTitleZero = "Back to the North East.";
+    public const string convinceTheBrandedStepTitleOne = "The Branded have been convinced.";
+    public const string convinceTheBrandedStepTitleTwo = "The Branded will not help me.";
+    public const string convinceTheBrandedStepTitleThree = "Kastor has joined our cause.";
+
     // Deal With the Prisoners
     public const string dealWithThePrisonersQuestTitle = "Deal With the Prisoners";
 

@@ -13,6 +13,8 @@ VAR toldKastorOfThatchsFate = false
 
 VAR metKastor = false
 VAR kastorReactedToHostility = false
+VAR kastorCalledPlayerMadReckless = false
+VAR failedToConvinceSlavesToHelpYou = false
 VAR gotBroglinKilledByGuard = false
 VAR spokeToGarchaAboutPlan = false
 VAR askedKastorWhoHeIs = false
@@ -66,6 +68,8 @@ VAR learnedCartersIdentity = false
 VAR learnedPagesIdentity = false
 VAR toldDirectorIsAWarHero = false
 VAR convincedSlavesToHelpYou = false
+VAR hadSlavesAfterKillingOverseerCampNEConvo = false
+VAR hadLeaderConversation = false
 
 VAR explainingPlan = false
 VAR backTo6cza = false
@@ -118,15 +122,14 @@ searchInventoryFor(hasToolBundle,Tool Bundle)
 
 
 {
--kastorReactedToHostility:
+-!kastorStartedRevolt && kastorReactedToHostility:
 
     {
     -convincedSlavesToHelpYou:
         Oh, word? The north section is on our side? (PH)
         ->Close
     -mineLvl3CarterAndNandorInParty:
-        Sick you found Nandor (PH)
-        ->Close
+        ->6c
     -else:
         I told you, I cannot be seen with you. Be gone, quickly!
         ->Close
@@ -258,6 +261,8 @@ I had not realized our conspiracy had grown so large. But you have abandoned the
 -else:
     +Well... it's just myself at the moment. But I've faced many guards to get this far. 
         ->HR_HaveNotMetYet_1c
+    +No one has told me the plan beyond that I should come to you.
+        ->HR_HaveNotMetYet_1ca
 }
 
 === HR_HaveNotMetYet_1b ===
@@ -287,7 +292,23 @@ You're back. Are you in need of my attention?
     +I've got to go.
         ->Close
 
+=== HR_HaveNotMetYet_1ca ===
+
+Was it not obvious that a more subtle approach to this is needed? It seems to me that Garcha judged you poorly. 
+
+keepDialogue()
+
+Your recklessness has jeopardized the plan, but I will still provide you with limited assistance. You are lucky that my hatred for the guards outweighs my distaste for your methods: I would lend a hand to anyone willing to spit in the eye of the masters.
+
+->HR_HaveNotMetYet_1c
+
 === HR_HaveNotMetYet_1c ===
+
+Mad it is then. I will aid you, but only because I would lend a hand to anyone willing to spit in the eye of the masters: I don't expect your one-body war to end in anything but failure.
+
+setToTrue(kastorCalledPlayerMadReckless)
+
+activateQuestStep(The Plan, I'm on my own.)
 
 setToTrue(givenTutorialQuest)
 activateQuestStep(Look for Thatch, In need of allies.)
@@ -296,15 +317,13 @@ setToTrue(toldToFindNandor)
 activateQuestStep(Finding Nándor, Find Nándor.)
 activateQuestStep(Explore the Mine, Enter the mine.)
 
-activateQuestStep(The Plan, I'm on my own.)
-
-Mad it is then. I will aid you, but only because I would lend a hand to anyone willing to spit in the eye of the masters: I don't expect your one-body war to end in anything but failure.
+activateQuestStep(Convince the Branded, Back to the North East.)
 
 I shall heal your injuries this one time, but do not return to this hut until you have gathered allies. I cannot risk being linked to you until there is a real chance of victory.
 
 There is another branded in this section named Thatch. That one's arms are as thick as tree trunks; you'll want him on your side. His hut lies across the road from this one. You should be able to find him there. 
         
-Also, if your thirst for danger has not yet been quenched, there were some branded trapped on the bottom level of the mine. It's impossible to say if any have survived, but if they have they would surely join your cause. You will find the mine in the southwestern part of the camp, to the west of my hut.
+Also, if your thirst for danger has not yet been quenched, there were some branded trapped on the bottom level of the mine. Among them was a man named Nándor. It's impossible to say if he has survived, but if he has then his help would greatly increase our chances of convincing the other slaves to help us fight the guards. You will find the mine in the southwestern part of the camp, to the west of my hut.
 
 //fadeToBlack(false, false)
 
@@ -1804,8 +1823,8 @@ fadeToBlack(true, false)
 
 hideTrain()
 
+finishQuest(Finding Nándor, true, Nándor has returned.)
 setToTrue(broughtNandorToKastor)
-~broughtNandorToKastor = true
 
 activate({nandorIndex})
 activate({carterIndex})
@@ -1876,8 +1895,6 @@ changeCamTarget({kastorIndex})
 changeCamTarget({nandorIndex})
 
 Kastor, I am glad you were able make it out alright. It is good to be back above ground again, and it's all thanks to {playerName}'s heroism.
-
-finishQuest(Finding Nándor, true, Nándor has returned.)
 
 changeCamTarget({kastorIndex})
 
@@ -1950,7 +1967,7 @@ Even in death, he helps our cause. I am once more in his debt.
     
     {
     -spokeToGarchaAboutPlan:
-        +Actually, Broglin and Garcha already filled me in on the plan.
+        +Actually, Broglin and Garcha already filled me in on some of the plan.
         {
         -toldCarterWrongPassword:
             ->6cb
@@ -1970,7 +1987,15 @@ Even in death, he helps our cause. I am once more in his debt.
     
     changeCamTarget({kastorIndex})
     
+    {
+    -kastorCalledPlayerMadReckless:
+    Yes, but you seem to have a hard time sticking to it. Your actions up to this point have swung wildly between supreme competence and reckless abandon. However... because you have brought Nándor back to us, I believe you have aided the plan more than hindered it.
+    
+    ->campHostileBeforeDiscussingPlan
+
+    -else:
     We certainly were lucky that they were able to recruit such a capable member to our cause, then. Not many could have braved the mine and brought Nándor back to us.
+    }
     ->6cab
 
 === 6cab ===
@@ -2004,7 +2029,7 @@ Even in death, he helps our cause. I am once more in his debt.
 
     changeCamTarget({carterIndex})
 
-    I suppose if I wasn't so desperate after being stuck in the mine for so long, I may have thought the same thing. I can't fault you for being overly cautious.
+    I suppose if I wasn't so desperate after being stuck in the mine for so long, I may have thought the same thing. I can not fault you for being overly cautious.
         ->6cab
 
 === 6d ===
@@ -2095,12 +2120,47 @@ Are you ready to begin our revolution? After we kick things off, we won't be abl
         changeCamTarget({nandorIndex})
 ->7b
 
+=== campHostileBeforeDiscussingPlan === 
+
+Now, back to business. The next stage of the plan for the revolt was to fight our way to the northern section of the camp, kill the overseer holding the slaves there, and then use our combined numbers to move on the Manse itself.
+
+{
+-failedToConvinceSlavesToHelpYou:
+    +I have already dealt with the Overseer. Despite this, the other slaves decided to wait out the riot without getting involved.
+        ->campHostileBeforeDiscussingPlan_1a
+-convincedSlavesToHelpYou:
+    +I have already dealt with the Overseer. The other slaves are with us.
+        ->campHostileBeforeDiscussingPlan_1b
+-else:
+        ->7bz
+}
+
+=== campHostileBeforeDiscussingPlan_1a === 
+
+While I will celebrate the death of any of the overseers, this bodes poorly for us. Perhaps some of the branded can be coaxed from their huts to join us, but having made up their minds the rest will stay put.
+
+changeCamTarget({nandorIndex})
+
+We shall just have to focus our attentions on the Manse and hope that the others come around in time. If we win enough victories, perhaps they will follow our example.
+
+->7bz
+
+=== campHostileBeforeDiscussingPlan_1b === 
+
+Excellent! We are farther along than I had realized. Now we can focus on our attention on prying the Director from his Manse without any other distractions.
+
+->7bz
+
 === 7b ===
 
 The next stage of the plan for the revolt was to fight our way to the northern section of the camp, kill the overseer holding the slaves there, and then use our combined numbers to move on the Manse itself.
 
+->7bz
+
+=== 7bz ===
+
 {
--not terrifiedImre and not convincedImre:
+-not terrifiedImre and not convincedImre and playerFinishedErvinsTask():
     +Why do we need to assault the Manse at all? The Manse slaves never agreed to join us. Couldn't we just leave once the branded are freed?
         ->7ba
 -else:
@@ -2143,7 +2203,7 @@ changeCamTarget({kastorIndex})
 
 activateQuestStep(Rescue Broglin,Beneath the Manse.)
 
-We could, but the Manse is almost certainly where the Pit and it's prisoners reside. We also swore to help free the Manse slaves. We owe it to anyone trapped there to at least attempt to free them.
+We could, but the Manse is almost certainly where the Pit and it's prisoners reside. {terrifiedImre or convincedImre:We also swore to help free the Manse slaves. }We owe it to anyone trapped there to at least attempt to free them.
 
 ->7bc
 
@@ -2167,7 +2227,7 @@ And on more practical grounds, the Manse contains most of the camp's food stores
 
 === 7c ===
 
-When we leave here and rally the slaves on the southern side of the camp, the guards will deploy in force to stop us. They may erect barricades to slow or channel us towards areas it's easier to deal with us. 
+When we leave here and rally the slaves on the southern side of the camp, the guards will deploy in force to stop us. They may erect barricades to slow us, or channel us towards places where we will be at a disadvantage. 
 
 They will also have guards trained to signal the arrow towers spread around the camp. Killing these guards quickly should be our highest priority, to lower our casualties.
 
@@ -2178,10 +2238,16 @@ The slaves we free will rally around you, but it won't be easy to direct the mob
 I would also pick your battles. Not every guard needs to die in the actual riot to achieve victory. Once we take the Manse and defeat the Director, the rest of the guards will know that the battle is lost.
 
     +Very well. Anything else?
+    {
+    -hadSlavesAfterKillingOverseerCampNEConvo:
+        ->7f
+    -else:
         ->7d
+    }
 
 === 7d ===
 
+setToTrue(hadLeaderConversation)
 changeCamTarget({nandorIndex})
 
 When I was coming up with the plan, I thought myself something of a leader to the other workers. But you have been the one to put everything in motion while I was trapped beneath the surface. On the precipice of battle, let there be no confusion: you have earned my respect, and I will follow your lead during the revolt to whatever end it brings us.
@@ -2226,7 +2292,7 @@ I will be there when the time comes but when it comes to combat, I am no tactici
 === 7f ===
 changeCamTarget({carterIndex})
 
-With that settled, we're about to charge out there and take it to the guards. Some of us at this gathering may not make it to the next one. If I die before the lot of you, I swear to sing your praises at my hearth before all the Gods. They deserve to hear of the heroes they are about to meet.
+{hadLeaderConversation:With that settled, w|W}e are about to charge out there and take it to the guards. Some of us at this gathering may not make it to the next one. If I die before the lot of you, I swear to sing your praises at my hearth before all the Gods. They deserve to hear of the heroes they are about to meet.
     
     +Thank you, Carter, but I intend to live through this, and so should all of you. Let us go. 
         ->revolutionStart
@@ -2243,7 +2309,10 @@ activateQuestStep(Assist the Nonbranded,Find Imre.)
 
 setToTrue(revoltStarted)
 setToTrue(kastorStartedRevolt)
+{
+-not hadSlavesAfterKillingOverseerCampNEConvo:
 activateQuestStep(The Plan,Free the others.)
+}
 
 setAreaToHostile({southEasternCampSceneName})
 setAreaToHostile({manseKitchensSceneName})

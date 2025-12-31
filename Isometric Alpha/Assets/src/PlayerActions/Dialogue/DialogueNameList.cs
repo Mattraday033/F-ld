@@ -73,7 +73,6 @@ public static class DialogueNameList
     #endregion
     #region Slave Shack 4
     public const string kastorPlanPath = campInteriorPathName + LocationNameList.slaveShackFour + Constants.seperatorChar + "KastorPlan";
-    public const string guardMarcosSS4Path = campInteriorPathName + LocationNameList.slaveShackFour + Constants.seperatorChar + "GuardMarcos";
     #endregion
     #region Slave Shack 5
     public const string ervinPath = campInteriorPathName + LocationNameList.slaveShackFive + Constants.seperatorChar + NPCNameList.ervin;

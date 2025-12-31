@@ -18,6 +18,8 @@ public static class SpawnParamsList
     private readonly static StopSpawningFlagList revoltStartedStopSpawning = new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated });
 
     private readonly static StartSpawningFlagList rallySlavesCampNE = new StartSpawningFlagList(new string[] { FlagNameList.duringSlaveRallyConversation });
+    private readonly static StartSpawningFlagList nandorCarterRallySlavesCampNE = new StartSpawningAllTrueFlagList(new string[] { FlagNameList.duringSlaveRallyConversation, FlagNameList.mineLvl3CarterAndNandorInParty});
+
     private readonly static InteractableSpawnParams slavesInNorthEastCamp = new InteractableSpawnParams(new StartSpawningAllTrueFlagList(new string[] { FlagNameList.convincedSlavesToHelpYou}),
                                                                                                         new StopSpawningFlagList(new string[] { FlagNameList.waitingOnGarchaToSpeak, FlagNameList.directorDefeated }), spawnWhileHostile);
 
@@ -100,7 +102,7 @@ public static class SpawnParamsList
                                                                                           FlagNameList.directorDefeated })));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackTwo, NPCNameList.garcha),
-                               new InteractableSpawnParams(revoltStartedStopSpawning));
+                               new InteractableSpawnParams(revoltStartedStopSpawning, spawnWhileHostile));
 
         #endregion
         #region Slave Shack 3
@@ -249,12 +251,13 @@ public static class SpawnParamsList
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.janos),
                                new InteractableSpawnParams(rallySlavesCampNE, spawnWhileHostile));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.nandor),
-                               new InteractableSpawnParams(rallySlavesCampNE, spawnWhileHostile));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.carter),
-                               new InteractableSpawnParams(rallySlavesCampNE, spawnWhileHostile));
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.clay),
                                new InteractableSpawnParams(rallySlavesCampNE, spawnWhileHostile));
+                               
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.nandor),
+                               new InteractableSpawnParams(nandorCarterRallySlavesCampNE, spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.carter),
+                               new InteractableSpawnParams(nandorCarterRallySlavesCampNE, spawnWhileHostile));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.garcha),
                                new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.waitingOnGarchaToSpeak }), spawnWhileHostile));

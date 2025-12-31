@@ -138,7 +138,7 @@ public class QuestStep : IDescribable, IDescribableInBlocks
 	{
 		panel.setObjectBeingDescribed(this);
 
-		DescriptionPanel.setText(panel.nameText, parentQuest.getName());
+		// DescriptionPanel.setText(panel.nameText, parentQuest.getName());
 
 		if (parentQuest.finished)
 		{
@@ -157,7 +157,7 @@ public class QuestStep : IDescribable, IDescribableInBlocks
 			DescriptionPanel.setText(panel.notificationNameText, questUpdatedPrefix + parentQuest.getName());
 		}
 
-		DescriptionPanel.setText(panel.secondaryNameText, getName());
+		DescriptionPanel.setText(panel.secondaryNameText, DialogueList.scrubNameOfEndNumbers(getName()));
 		DescriptionPanel.setText(panel.loreDescriptionText, journalDescription);
 	}
 
@@ -165,7 +165,7 @@ public class QuestStep : IDescribable, IDescribableInBlocks
 	{
 		panel.setObjectBeingDescribed(this);
 
-		DescriptionPanel.setText(panel.nameText, getName());
+		DescriptionPanel.setText(panel.nameText, DialogueList.scrubNameOfEndNumbers(getName()));
 		DescriptionPanel.setText(panel.secondaryNameText, parentQuest.getName());
 	}
 

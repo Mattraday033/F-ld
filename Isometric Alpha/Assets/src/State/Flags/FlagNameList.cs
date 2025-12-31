@@ -68,10 +68,12 @@ public static class FlagNameList
         public const string agreedToBeLeader = "agreedToBeLeader"; //told Nandor you would lead the revolt
         public const string kastorStartedRevolt = "kastorStartedRevolt"; //kastor has started the revolt
         public const string convincedSlavesToHelpYou = "convincedSlavesToHelpYou"; // convinced slaves to help you during convo after killing slavedriver in CampNE
+        public const string hadSlavesAfterKillingOverseerCampNEConvo = "hadSlavesAfterKillingOverseerCampNEConvo"; //entered slavesAfterKillingOverseerCampNE conversation
         public const string acceptingGuardPrisoners = "acceptingGuardPrisoners"; // accepted Janos's call to accept prisoners during convo after killing slavedriver in CampNE
         public const string notAcceptingGuardPrisoners = "notAcceptingGuardPrisoners"; // rejected Janos's call to accept prisoners during convo after killing slavedriver in CampNE
         public const string imreReadyToHelpPlayer = "imreReadyToHelpPlayer";
         public const string kastorExplainedWhereToFindAnotherKey = "kastorExplainedWhereToFindAnotherKey"; //kastor told player about the guardhouse armory key
+        public const string kastorCalledPlayerMadReckless = "kastorCalledPlayerMadReckless"; //made camp hostile before meeting kastor and he said player was mad/reckless
 
         //Revolt flags
         public const string revoltStarted = "revoltStarted"; //The camp is hostile

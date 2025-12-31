@@ -51,7 +51,6 @@ setToTrue(metThatch)
 I'm Thatch. Am I needed for more work?
 
     +No, I'm here for something else. Is that why you look like someone rolled you down a craggy hill? All the work?
-        //The guards have been working me twice as hard during this lockdown. They can't let too many slaves out of their huts at once so they just pick the biggest ones to get the most out of us. I just got back from working all night, but I'm afraid they're going to  
         ->1ba
     +Good, I've been sent to find you. We have some things to discuss.
         keepDialogue()
@@ -60,7 +59,7 @@ I'm Thatch. Am I needed for more work?
 
 === 1ba ===
 
-\*Thatch glares at you.* You'd look like this too if they put you to work like I've been. The guards can't let too many of us out of our huts during this lockdown so they just pick the biggest ones to get the most out of us. I just got back from working all night.  
+\*Thatch glares at you.* You'd look like this too if they put you to work like I've been. The guards can't let too many of us out of our huts during this lockdown so they pick the biggest ones to get the most work done per slave. I just got back from working all night.  
 
     +Don't complain to me, we've all got it bad right now. 
         //The guards have been working me twice as hard during this lockdown. 
@@ -180,7 +179,7 @@ With the two of us together, we might be able to get to the back of the hut and 
 Good. I shall move the first bit of rubble so we can get past, then I'll follow your lead. And you'd best be ready for a fight, I'm not about to let them get away with hurting Slate.
 
 setToTrue(thatchRemovedTutorialRubble)
-activateQuestStep(Look for Thatch, Thatch is willing.)
+activateQuestStep(Look for Thatch, Slate's fate.)
 
 ->addThatchToParty(true)
 
@@ -189,7 +188,7 @@ activateQuestStep(Look for Thatch, Thatch is willing.)
 I think... I think I already knew that. Somewhere, deep down. But thank you for telling me this. I have no reason to stay any longer.
 {
 -toldToInvestigateScreamingInThatchsHut:
-    activateQuestStep(Look for Thatch, Return to Kastor)
+    activateQuestStep(Look for Thatch, Return to Kastor.)
 }
 setToTrue(toldThatchAboutSlate)
 

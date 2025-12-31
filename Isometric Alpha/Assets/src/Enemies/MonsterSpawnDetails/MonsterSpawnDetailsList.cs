@@ -80,7 +80,7 @@ public static class MonsterSpawnDetailsList
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(13, 13), MonsterMovementType.ChasesPlayer));
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(9, 7), MonsterMovementType.Stationary, Facing.NorthWest));
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(14, 0), MonsterMovementType.Stationary, Facing.SouthEast));
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(24, 0), MonsterMovementType.Stationary, Facing.SouthEast));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(23, 0), MonsterMovementType.Stationary, Facing.SouthEast));
 
         monsterSpawnDetailsDict.Add(LocationNameList.campSouthEast, list);
         #endregion

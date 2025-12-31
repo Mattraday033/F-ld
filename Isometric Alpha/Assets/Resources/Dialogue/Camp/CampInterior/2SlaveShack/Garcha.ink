@@ -1,16 +1,34 @@
 VAR gotBroglinKilledByGuard = false
 VAR spokeToGarchaAboutPlan = false
+
 VAR revoltStarted = false
+VAR kastorStartedRevolt = false
+
+VAR inHostileArea = false
+VAR hadSlavesAfterKillingOverseerCampNEConvo = false
+
 VAR wisdom = 0
 VAR charisma = 0
 
 {
--revoltStarted:
-->4a
+-revoltStarted or kastorStartedRevolt:
+    ->4a
+-inHostileArea:
+    ->hostilityResponse
 -else:
-->3a
+    ->3a
 }
 
+=== hostilityResponse ===
+
+{
+-hadSlavesAfterKillingOverseerCampNEConvo:
+You really screwed this up big time. The whole camp wants your head, not just the guards. Get out of my hut, I don't want any of the kind of attention you bring!
+-else:
+You've got too many guards looking for you. I can't let you rest in my hut anymore. Get out, quickly!
+}
+
+->Close
 
 === 1b ===
 

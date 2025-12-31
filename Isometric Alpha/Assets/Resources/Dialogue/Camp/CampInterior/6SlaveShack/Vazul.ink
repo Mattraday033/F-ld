@@ -17,6 +17,8 @@ VAR metThatch = false
 VAR thatchRemovedTutorialRubble = false
 VAR thatchBeginsStranglingVazul = false
 
+VAR toldToInvestigateScreamingInThatchsHut = false
+
 VAR vazulMentionedSlatesFate = false
 
 VAR deathFlagGuardVazul = false
@@ -217,8 +219,11 @@ I should have been here. I should have... *Thatch turns to Vazul and wraps his p
         ->5a
 
 === 4c ===
+{
+-toldToInvestigateScreamingInThatchsHut:
+    activateQuestStep(Look for Thatch, Return to Kastor.1)
+}
 
-activateQuestStep(Look for Thatch, Return to Kastor.1)
 changeCamTarget({vazulIndex})
 
 prepForItem()
@@ -267,7 +272,7 @@ No. He didn't. Whatever, lets get going. I don't want to stay here any longer th
 
 You've been through it, haven't you. I would hear your story, when we have a moment. But for now, let us leave. It would not do to linger here.
 
-    +Let's return to Kastor then.
+    +\*Leave.*
         ->Close
 
 === 4cd ===
@@ -277,7 +282,7 @@ And a whole camp's worth to go. Though, I expect none will be more vile than he 
     
     +Who was Slate to you?
         ->4da
-    +Time is short. Let's return to Kastor.
+    +Time is short. Let us go.
         ->Close
 
 === 4d === //No. My head and heart both ache.
@@ -288,7 +293,7 @@ And a whole camp's worth to go. Though, I expect none will be more vile than he 
 
     +Who was Slate to you?
         ->4da
-    +Time is short. Let's return to Kastor.
+    +Time is short. Let us go.
         ->Close
 
 === 4da === //No. My head and heart both ache.
@@ -299,7 +304,7 @@ I did not know him well. But in this camp, friends are rare. If you find one, cl
 
     +I'm sorry for your loss.
         ->4ea
-    +Time is short. Let's return to Kastor.
+    +Time is short. Let us go.
         ->Close
 
 === 4ea === 
@@ -406,8 +411,10 @@ changeCamTarget({thatchIndex})
         ->5c
 
 === 5ba === 
-
-activateQuestStep(Look for Thatch, Return to Kastor.1)
+{
+-toldToInvestigateScreamingInThatchsHut:
+    activateQuestStep(Look for Thatch, Return to Kastor.1)
+}
 
 I guess I can respect that. Even if I wish you had let me end it my way.
 
@@ -420,8 +427,6 @@ giveItem(1,8,1)
     ->4caa
 
 === 5c ===
-
-activateQuestStep(Look for Thatch,In need of allies.)
 
 Alive? How are we going to keep him prisoner without anyone noticing him?
 
@@ -510,7 +515,7 @@ But he was right here! He was within our grasp, and to let him slip away unhurt.
 
     +Who was Slate to you?
         ->4da
-    +Time is short. Let's return to Kastor.
+    +Time is short. Let us go.
         ->Close
 
 === 7a ===
@@ -597,7 +602,7 @@ Oh, Slate? He talked when he should have worked a few too many times. Now he doe
 
         +Who was Slate to you?
             ->4da
-        +Good. We should get back to Kastor.
+        +Good. Let us go.
             ->Close
 
 === 8d ===
@@ -606,7 +611,7 @@ Oh, Slate? He talked when he should have worked a few too many times. Now he doe
         
         +Who was Slate to you?
             ->4da
-        +Good. We should get back to Kastor.
+        +Good. Let us go.
             ->Close
 
 === showSlatesBody(->divert, targetIndex) ===
@@ -635,15 +640,20 @@ changeCamTarget({thatchIndex})
 \*As soon as Vazul's back is turned, Thatch moves to grab him with two massive hands.*
 
     +\*Wave off Thatch, and let Vazul go.*
-        activateQuestStep(Look for Thatch,Return to Kastor.2)
+        {
+        -toldToInvestigateScreamingInThatchsHut:
+            activateQuestStep(Look for Thatch,Return to Kastor.2)
+        }
         ->6a
 
     +\*Back Thatch up.* <Combat>
         ->Combat
 
 === Combat === 
-
-activateQuestStep(Look for Thatch,Return to Kastor.1)
+{
+-toldToInvestigateScreamingInThatchsHut:
+    activateQuestStep(Look for Thatch,Return to Kastor.1)
+}
 enterCombat({vazulFightIndex}, {vazulAfterFightConvoKey})
 
 ->Close
@@ -662,7 +672,13 @@ fadeToBlack()
 
 deactivate({thatchIndex})
 
+    {
+    -not toldToInvestigateScreamingInThatchsHut:
+        finishQuest(Look for Thatch, true, Thatch is willing.) 
+    }
+
 fadeBackIn(60)
+
 }
 
 close()

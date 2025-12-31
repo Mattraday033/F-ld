@@ -814,7 +814,7 @@ public class DialogueManager : MonoBehaviour
                 case "changeplayerpos":
                 case "changeplayerposition":
 
-                    Debug.LogError("changePosition section changed to use cells and not floats: " + buffer);
+//                    Debug.LogError("changePosition section changed to use cells and not floats: " + buffer);
 
                     int xPos = getArgumentInt(buffer, Constants.indexZero);
                     int yPos = getArgumentInt(buffer, Constants.indexOne);

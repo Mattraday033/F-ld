@@ -109,7 +109,7 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.guardMarcos,
                             new Dialogue(new string[] { NPCNameList.guardMarcos },
-                            Resources.Load<TextAsset>(DialogueNameList.guardMarcosSS4Path)));
+                            Resources.Load<TextAsset>(DialogueNameList.ml3MarcosPath)));
 
         addPartyMemberDialogue(LocationNameList.slaveShackFour, NPCNameList.nandor);
         addPartyMemberDialogue(LocationNameList.slaveShackFour, NPCNameList.carter);

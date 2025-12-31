@@ -23,6 +23,9 @@ VAR andrasLeftInHut = false
 VAR obtainedMineArmoryKey = false
 VAR mineLvl3CarterAndNandorInParty = false
 VAR failedToConvinceClay = false
+VAR hadSlavesAfterKillingOverseerCampNEConvo = false
+
+VAR hasToolBundle = false
 
 VAR partyFlagNándor = false
 
@@ -60,26 +63,35 @@ VAR afterOverseerParentIndex = 11
 //depricated
 VAR thatchIndex = 11 
 
-->1a
 
-=== 1a ===
+setToTrue(hadSlavesAfterKillingOverseerCampNEConvo)
 
 setToTrue(duringSlaveRallyConversation)
 setToTrue(waitingOnGarchaToSpeak)
+searchInventoryFor(hasToolBundle,Tool Bundle)
 
 updateNPCVisibility()
 
 moveToPos(8,4)
 setFacing(NE)
 
+{
+-mineLvl3CarterAndNandorInParty:
+    ->1a
+-else:
+    ->1c
+}
+
+=== 1a ===
+
 changeCamTarget({nandorIndex})
 
-Hear me! We have slain the overseers in this section, so you do not need to fear the guards during this gathering. But time is short, and we have much to explain if we are to move quickly enough to take advantage of their confusion.
+Hear me! We have slain the overseer in this section, so you do not need to fear the guards during this gathering. But time is short, and we have much to explain if we are to move quickly enough to take advantage of their confusion.
 
 {
 -agreedToBeLeader:
 
-You all know me, but you may not know my friend here. They are the one who has secured the equipment you see before you. They are the one who has already slain many guards. And they are the one who personally saved myself and others from being trapped below the earth. Hear them now and know they have more than earned your trust!
+You all know me, but you may not know my friend here.{hasTools(): They are the one who has secured the equipment you see before you.} They are the one who has already slain many guards. And they are the one who personally saved myself and others from being trapped below the earth. Hear them now and know they have more than earned your trust!
 
     ->1b
 
@@ -128,6 +140,28 @@ I would not ask what I ask of you now if I was not sure it would succeed. The gu
         ->3a
     //}
 
+
+=== 1c ===
+
+changeCamTarget({slave1Index})
+
+What is going on here? Who are you, and why have you roused us from our huts? Where are all the guards?
+
+    +Hear me! I have slain the overseer in this section, so you do not need to fear the guards during this gathering. But time is short, and I have much to explain if we are to move quickly enough to take advantage of their confusion.
+        ->1ca
+
+=== 1ca ===
+    changeCamTarget({theCrowdIndex})
+    
+    \*Your words cause a stir throughout the gathering. The other slaves whisper to each other, and jostle among themselves to get a glimpse of the one addressing them.*
+
+    +I am a new arrival, so I may be unknown to many of you: I am {playerName}, and I have come to liberate you from your shackles.
+        \*A mood of doubtfulness sets in among your audience.*
+
+        changeCamTarget({slave1Index}))
+
+        ->3a
+
 === 2a ===
 
 ~janosInterjected = true
@@ -135,7 +169,7 @@ changeCamTarget({janosIndex})
 
 Heed not {playerName}'s words! They would use you as fodder to enable their own escape!
 
-+Janos? You oppose the plan you helped with? Why are you doing this?
++Janos? You oppose the plan you helped execute? Why are you doing this?
     You know why, villain.  I do what I do for András.
         ->2b
 +\*Say nothing.*
@@ -286,101 +320,79 @@ changeCamTarget({theCrowdIndex})
     {
     -crowdFervor >= crowdAppeasementThreshold:
         ->4a
-    }
-
-    {
-    -charisma >= 3 && not gainedFervorFromChaOption:
-        *\*Address the crowd.* Look at what we have here! The choosiest beggar, come to tell you that the guards are too mighty and handsome to be taken down by the likes of us! <Cha {charisma}/3>
-            {
-            -not gainedFervorFromChaOption:
-                ~gainedFervorFromChaOption = true
-                ~crowdFervor++
-            }
-            ->3e
-    -charisma < 3 && not gainedFervorFromChaOption:
-        *\*Address the crowd.* Look at what we have here! The choosiest beggar, come to tell you that the guards are too mighty and handsome to be taken down by the likes of us! <Cha {charisma}/3>
-
-            {
-            -not gainedFervorFromChaOption:
-                ~gainedFervorFromChaOption = true
-                ~crowdFervor--
-            }
-
-            keepDialogue()
-
-            I speak to save lives! I would not follow a fool who can not see the seriousness of the moment! *Your words have riled up the crowd. They are less likely to follow you now.*
-
-            ->3a
-    }
-
-    {
-    -strength >= 3 && not gainedFervorFromStrOption:
+    -else:
+        {
+        -true:
         *\*Address the crowd.* I have personally slain the Overseer of this portion of the camp! Look at how his blood spatters my clothes and tell me the guards are so skilled! So mighty! <Str {strength}/3>
             {
-            -not gainedFervorFromStrOption:
-                ~gainedFervorFromStrOption = true
+            -strength >= 3:
                 ~crowdFervor++
-            }
-            ->3f
-    -strength < 3 && not gainedFervorFromStrOption:
-        *\*Address the crowd.* I have personally slain the Overseer of this portion of the camp! Look at how his blood spatters my clothes and tell me the guards are so skilled! So mighty! <Str {strength}/3>
-
-            {
-            -not gainedFervorFromStrOption:
-                ~gainedFervorFromStrOption = true
+                ->3f
+            -else:
                 ~crowdFervor--
+                keepDialogue()
+
+                And what? You'll protect all of us? If you could do this alone you wouldn't be here begging us to die for you! *Your words have riled up the crowd. They are less likely to follow you now.*
+
+                ->3a
             }
 
-            keepDialogue()
-
-            And what? You'll protect all of us? If you could do this alone you wouldn't be here begging us to die for you! *Your words have riled up the crowd. They are less likely to follow you now.*
-
-            ->3a
-    }
-
-    {
-    -(knowsAboutTheMine or mineLvl3CarterAndNandorInParty) and (agreedToBeLeader or not partyFlagNándor):
-    
-        *It was hard to see during the lockdown, but the guards are undermanned. We outnumber them greatly!
+        *\*Address the crowd.* After everything I've accomplished, look at what we have here! The choosiest beggar, come to tell you that the guards are too strong and handsome to be taken down by the likes of us! <Cha {charisma}/3>
             {
-            -not gainedFervorFromLockdownExplanation:
-                ~gainedFervorFromLockdownExplanation = true
+            -charisma >= 3:
                 ~crowdFervor++
+                ->3e
+            -else:
+                ~crowdFervor--
+                keepDialogue()
+
+                I speak to save lives! I would not follow a fool who can not see the seriousness of the moment! *Your words have riled up the crowd. They are less likely to follow you now.*
+
+                ->3a
             }
-            ->3b
-    }
-    
-    {
-    -gaveKastorToolBundle:
-        *Who among you can say that you do not know a pick backwards and forwards? Or a shovel, or a mattock? The tools in front of you can be mighty in even a slave's hands. Perhaps especially a slave's!
-            {
-            -not gainedFervorFromToolsMention:
-                ~gainedFervorFromToolsMention = true
-                ~crowdFervor++
-            }
-            ->3c
-    }
-    
-    {
-    -partyFlagNándor && agreedToBeLeader:
-        *\*Look to Nándor.*
-            {
-            -not gainedFervorFromNandorExplanation:
-                ~gainedFervorFromNandorExplanation = true
-                ~crowdFervor+=5
-            }
-            ->3d
-    }
-    
-    {
-    -not knowsAboutTheMine and not gaveKastorToolBundle and not partyFlagNándor and charisma < 3 and strength < 3 and crowdFervor < 3:
-        *Uh... well, I just thought-
+        }
+
+        {
+        -(knowsAboutTheMine or mineLvl3CarterAndNandorInParty) and (agreedToBeLeader or not partyFlagNándor):
+        
+            *It was hard to see during the lockdown, but the guards are undermanned. We outnumber them greatly!
+                {
+                -not gainedFervorFromLockdownExplanation:
+                    ~gainedFervorFromLockdownExplanation = true
+                    ~crowdFervor++
+                }
+                ->3b
+        }
+        
+        {
+        -gaveKastorToolBundle:
+            *Who among you can say that you do not know a pick backwards and forwards? Or a shovel, or a mattock? The tools in front of you can be mighty in even a slave's hands. Perhaps especially a slave's!
+                {
+                -not gainedFervorFromToolsMention:
+                    ~gainedFervorFromToolsMention = true
+                    ~crowdFervor++
+                }
+                ->3c
+        }
+        
+        {
+        -mineLvl3CarterAndNandorInParty && partyFlagNándor && agreedToBeLeader:
+            *\*Look to Nándor.*
+                {
+                -not gainedFervorFromNandorExplanation:
+                    ~gainedFervorFromNandorExplanation = true
+                    ~crowdFervor+=5
+                }
+                ->3d
+        }
+
+        *Uh... well, I just thought...
             ->3aa
     }
     
 === 3aa ===
 
-Just thought what? That you could take the whole camp by yourself? That we might come along to get slaughtered with? I'm not sticking around to be seen with you, but don't worry. I'm sure the guards will force me to watch your execution.
+Just thought what? That you could take the whole camp by yourself? That we might come along to get slaughtered? I'm not sticking around to be seen with you, but don't worry. I'm sure the guards will force me to watch your execution.
     
     ->deactivateExtras
 
@@ -450,7 +462,7 @@ I would not ask what I ask of you now if I was not sure it would succeed. The gu
 
 \*The slave looks back at you with surprise.* No, you misundersta-
 
-    +No, we understand you plainly enough: you have been a slave so long that you have grown used to your shackles. Just make sure the next time you want to speak up for the guards you don't slander the rest of us in the same breath!
+    +No, we understand you plainly enough: you have been a slave so long that you have grown used to your condition. Just make sure the next time you want to speak up for the guards you don't slander the rest of us in the same breath!
         keepDialogue()
         \*The older man looks around sheepishly at the glares he is receiving from the crowd.*
         -> 3a
@@ -651,12 +663,18 @@ fadeBackIn(60)
 
 ->Close
 
+=== function hasTools ===
+
+~ return hasToolBundle or gaveKastorToolBundle
+
 === deactivateExtras ===
 
 {
 -crowdFervor >= crowdAppeasementThreshold:
     fadeToBlack(true, false)
+    
 -else:
+    setToFalse(waitingOnGarchaToSpeak)
     fadeToBlack()
 }
 

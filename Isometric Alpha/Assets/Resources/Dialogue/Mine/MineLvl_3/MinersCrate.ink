@@ -179,7 +179,7 @@ Having fought the worms many times while we've been stuck down here, I'm all too
 
 keepDialogue()
 
-The acid that hits the ground doesn't eat through the rock so easily, however. If we can find a way to seal the breach that they're coming through, we should be able to block the flow of worms coming through it. At least for longer than the gate can.
+The acid that hits the ground doesn't eat through the rock so easily, however. If we can find a way to seal the breach that they're coming through, we should be able to prevent the worms from flowing out of it. At least for longer than the gate can.
         ->1f
 
 === 1g ===

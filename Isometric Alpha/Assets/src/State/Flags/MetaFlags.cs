@@ -35,6 +35,8 @@ public static class MetaFlags
 		metaFlags[MetaFlagNameList.executedAnyGuard] = Flags.getFlag(FlagNameList.executedMarcos) || Flags.getFlag(FlagNameList.executedAndras) || Flags.getFlag(FlagNameList.executedReka) || Flags.getFlag(FlagNameList.executedPazman) || Flags.getFlag(FlagNameList.executedTabor);
 
         metaFlags[MetaFlagNameList.nandorReadyToSpeakAfterTrial] = !(metaFlags[MetaFlagNameList.marcosNeedsHandling] || metaFlags[MetaFlagNameList.andrasNeedsHandling] || metaFlags[MetaFlagNameList.pazmanNeedsHandling] || metaFlags[MetaFlagNameList.rekaNeedsHandling] || metaFlags[MetaFlagNameList.taborNeedsHandling]);
+    
+        metaFlags[MetaFlagNameList.failedToConvinceSlavesToHelpYou] =  !Flags.getFlag(FlagNameList.convincedSlavesToHelpYou) && Flags.getFlag(FlagNameList.hadSlavesAfterKillingOverseerCampNEConvo);
     }
 
     public static bool getMetaFlag(string flagName)

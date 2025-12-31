@@ -27,4 +27,9 @@ public static class MetaFlagNameList
     public const string nandorReadyToSpeakAfterTrial = "nandorReadyToSpeakAfterTrial";
     #endregion
 
+    #region The Plan relevant flags
+
+    public const string failedToConvinceSlavesToHelpYou = "failedToConvinceSlavesToHelpYou"; // failed slavesAfterKillingOverseerCampNE conversation
+
+    #endregion
 }
