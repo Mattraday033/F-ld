@@ -204,15 +204,45 @@ How's the plan going? (PH)
 
 === HR_LookingForThatch ===
 
-Have you found Thatch? (PH)
+Were you able to recruit Thatch?
 
-->Close
+    {
+    -thatchRemovedTutorialRubble or toldThatchAboutSlate:
+        +Yes, he's with us. But we've had some complicatons.
+            ->HR_LookingForThatch_1a
+    -else:
+        +No, but that is unimportant. We've had some complications.
+            ->HR_LookingForThatch_1a
+    }
+
+=== HR_LookingForThatch_1a ===
+
+What kind of complications?
+
+    +The guards are after me. They've set up barricades and posted extra guards to ferret me out.
+        ->HR_LookingForThatch_1b
+
+=== HR_LookingForThatch_1b ===
+
+This is terrible news. You ne
+
+    +The guards are after me. They've set up barricades and posted extra guards to ferret me out.
+        ->HR_LookingForThatch_1b
 
 === HR_MetButNotGivenPassword ===
 
-We have met, but you're still a stranger. (PH)
+I heard a lot of noise coming from outside. What's going on?
 
-->Close
+    {
+    -revoltStarted:
+    +There's a riot on, and I was the spark. I'm looking for comrades.
+        A riot? *Kastor gives you a dubious expression.* Is it just you, or are there others involved?
+        ->HR_HaveNotMetYet_1a
+    }
+
+    +I got into a little trouble with the guards. Now they're after me.
+        Trouble that I can ill-afford. Do you fight alone?
+        ->HR_HaveNotMetYet_1a
 
 === HR_HaveNotMetYet ===
 
@@ -235,7 +265,7 @@ We have met, but you're still a stranger. (PH)
 
     {
     -knowRevolutionPassword:
-        +Our conspiracy is vast, and it includes yourself. Garcha told me the wind blows eastward.
+        +I have friends throughout the camp. Garcha told me the wind blows eastward.
             setToTrue(gaveKastorThePassword)
             ->HR_HaveNotMetYet_1ab
     }
@@ -323,7 +353,7 @@ I shall heal your injuries this one time, but do not return to this hut until yo
 
 There is another branded in this section named Thatch. That one's arms are as thick as tree trunks; you'll want him on your side. His hut lies across the road from this one. You should be able to find him there. 
         
-Also, if your thirst for danger has not yet been quenched, there were some branded trapped on the bottom level of the mine. Among them was a man named Nándor. It's impossible to say if he has survived, but if he has then his help would greatly increase our chances of convincing the other slaves to help us fight the guards. You will find the mine in the southwestern part of the camp, to the west of my hut.
+Also, if your thirst for danger has not yet been quenched, there were some branded trapped on the bottom level of the mine. Among them was a man named Nándor. It's impossible to say if he has survived, but if he has then his help would greatly increase our chances of convincing the other slaves to join our fight against the guards. You will find the mine in the southwestern part of the camp, to the west of my hut.
 
 //fadeToBlack(false, false)
 
@@ -629,7 +659,7 @@ I appreciate you telling me this. Once we have dealt with the guards, we'll free
 
 === T1a ===
 
-\*Kastor considers you for a moment.* You seem no less capable than anyone else, I suppose. But I was not present for how you impressed Broglin. You'll need to prove you can be trusted to handle yourself out there before I divulge any more of the plan to you.
+\*Kastor considers you for a moment.* You seem no less capable than anyone else, I suppose. But I was not present for how you impressed Garcha. You'll need to prove you can be trusted to handle yourself out there before I divulge any more of the plan to you.
 
     +I understand. What do I need to do?
         ->T1b
