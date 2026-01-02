@@ -120,14 +120,9 @@ searchInventoryFor(hasToolBundle,Tool Bundle)
 
 === chooseConvoStart ===
 
-
 {
 -!kastorStartedRevolt && kastorReactedToHostility:
-
     {
-    -convincedSlavesToHelpYou:
-        Oh, word? The north section is on our side? (PH)
-        ->Close
     -mineLvl3CarterAndNandorInParty:
         ->6c
     -else:
@@ -139,22 +134,24 @@ searchInventoryFor(hasToolBundle,Tool Bundle)
 {
 -!kastorStartedRevolt && inHostileArea && !kastorReactedToHostility:
 
-    setToTrue(kastorReactedToHostility)
-
     {
     -kastorReadyToStartRevolt:
-        ->HR_ReadyToStartRevolt
-    -not metKastor and mineLvl3CarterAndNandorInParty and not broughtNandorToKastor and not gotThePlanFromKastor:
-        ->HR_NotMetButHaveNandor
-    -gotThePlanFromKastor:
-        ->HR_WorkingOnPlan
-    -givenTutorialQuest and not toldKastorOfThatchsFate:
-        ->HR_LookingForThatch
-    -metKastor and not gaveKastorThePassword:
-        ->HR_MetButNotGivenPassword
-    -not metKastor:
-        Who are you? How are you able to walk around during the lockdown? And what's going on outside?
-        ->HR_HaveNotMetYet
+        ->7ab
+    -mineLvl3CarterAndNandorInParty:
+        ->6c
+    -else:
+        setToTrue(kastorReactedToHostility)
+        {
+        -gotThePlanFromKastor:
+            ->HR_WorkingOnPlan
+        -givenTutorialQuest and not toldKastorOfThatchsFate:
+            ->HR_LookingForThatch
+        -metKastor and not gaveKastorThePassword:
+            ->HR_MetButNotGivenPassword
+        -not metKastor:
+            Who are you? How are you able to walk around during the lockdown? And what's going on outside?
+            ->HR_HaveNotMetYet
+        }
     }
 
 }
@@ -184,35 +181,42 @@ searchInventoryFor(hasToolBundle,Tool Bundle)
     ->1a
 }
 
-=== HR_ReadyToStartRevolt ===
-
-Wish you had waited for me. (PH)
-
-->Close
-
-=== HR_NotMetButHaveNandor ===
-
-Yo, is that Nandor with you? (PH)
-
-->Close
-
 === HR_WorkingOnPlan ===
 
-How's the plan going? (PH)
+You're back. Were you successful? And what is going on outside?
 
-->Close
+{
+-convincedSlavesToHelpYou:
+    +No. However, I've convinced the north section of the camp to follow my lead. Now I come to liberate the southern half.
+        ->HR_HaveNotMetYet_1b
+-else:
+    +We've had some complications.
+    ->HR_LookingForThatch_1a
+}
 
 === HR_LookingForThatch ===
 
-Were you able to recruit Thatch?
+Were you able to recruit Thatch? And what is going on outside?
 
     {
     -thatchRemovedTutorialRubble or toldThatchAboutSlate:
-        +Yes, he's with us. But we've had some complicatons.
-            ->HR_LookingForThatch_1a
+        {
+        -convincedSlavesToHelpYou:
+            +Yes. And I've convinced the north section of the camp to follow my lead as well. Now I come to liberate the southern half.
+                ->HR_HaveNotMetYet_1b
+        -else:
+            +Yes, he's with us. But we've had some complications.
+                ->HR_LookingForThatch_1a
+        }
     -else:
-        +No, but that is unimportant. We've had some complications.
+        {
+        -convincedSlavesToHelpYou:
+            +No. However, I've convinced the north section of the camp to follow my lead. Now I come to liberate the southern half.
+                ->HR_HaveNotMetYet_1b
+        -else:
+            +No, but that is unimportant. We've had some complications.
             ->HR_LookingForThatch_1a
+        }
     }
 
 === HR_LookingForThatch_1a ===
@@ -224,10 +228,17 @@ What kind of complications?
 
 === HR_LookingForThatch_1b ===
 
-This is terrible news. You ne
+\*Kastor's eyes grow large and he shoots you a worried expression.* This is terrible news. I shall heal your injuries this one time, but afterwards you must get far away from this hut. I cannot be seen with you: to do so would jeopardize the entire plan.
 
-    +The guards are after me. They've set up barricades and posted extra guards to ferret me out.
-        ->HR_LookingForThatch_1b
+activateQuestStep(The Plan, I'm on my own.)
+
+setToTrue(toldToFindNandor)
+activateQuestStep(Finding Nándor, Find Nándor.)
+activateQuestStep(Explore the Mine, Enter the mine.)
+
+I fear your capture by the guards, so before you leave I will impart no more of the plan to you than this: when the lockdown started, there were some branded trapped on the bottom level of the mine, whose entrance rests a ways to the west of my hut. If they still live, among them should be a man named Nándor. He was the original architect of the plan. Rescue him, and there may be a way to avert the plan's failure. Without him, we are lost. Good luck.
+
+->Close
 
 === HR_MetButNotGivenPassword ===
 
@@ -338,22 +349,28 @@ Mad it is then. I will aid you, but only because I would lend a hand to anyone w
 
 setToTrue(kastorCalledPlayerMadReckless)
 
-activateQuestStep(The Plan, I'm on my own.)
+->HR_HaveNotMetYet_1cb
 
-setToTrue(givenTutorialQuest)
-activateQuestStep(Look for Thatch, In need of allies.)
+=== HR_HaveNotMetYet_1cb ===
+
+I shall heal your injuries this one time, but do not return to this hut until you have gathered allies. I cannot risk being linked to you until there is a real chance of victory.
+
+activateQuestStep(The Plan, I'm on my own.)
 
 setToTrue(toldToFindNandor)
 activateQuestStep(Finding Nándor, Find Nándor.)
 activateQuestStep(Explore the Mine, Enter the mine.)
 
-activateQuestStep(Convince the Branded, Back to the North East.)
-
-I shall heal your injuries this one time, but do not return to this hut until you have gathered allies. I cannot risk being linked to you until there is a real chance of victory.
+{
+-not givenTutorialQuest:
+setToTrue(givenTutorialQuest)
+activateQuestStep(Look for Thatch, In need of allies.)
 
 There is another branded in this section named Thatch. That one's arms are as thick as tree trunks; you'll want him on your side. His hut lies across the road from this one. You should be able to find him there. 
-        
-Also, if your thirst for danger has not yet been quenched, there were some branded trapped on the bottom level of the mine. Among them was a man named Nándor. It's impossible to say if he has survived, but if he has then his help would greatly increase our chances of convincing the other slaves to join our fight against the guards. You will find the mine in the southwestern part of the camp, to the west of my hut.
+  
+}
+
+If your thirst for danger has not yet been quenched, there were some branded trapped on the bottom level of the mine. Among them was a man named Nándor. It's impossible to say if he has survived, but if he has then his help would greatly increase our chances of convincing the other slaves to join our fight against the guards. You will find the mine in the southwestern part of the camp, to the west of my hut.
 
 //fadeToBlack(false, false)
 
@@ -679,9 +696,10 @@ Last night, I heard screams coming from the direction of his hut. I'm not sure w
 
     +I'll see what has become of him.
 
+        setToTrue(toldToInvestigateScreamingInThatchsHut)
         setToTrue(givenTutorialQuest)
         activateQuestStep(Look for Thatch, Cross the road.)
-        activateQuestStep(The Plan, Help the cells.)
+        activateQuestStep(The Plan, Earn Kastor's trust.)
         
         startTutorial({itemTutorialKey})
 

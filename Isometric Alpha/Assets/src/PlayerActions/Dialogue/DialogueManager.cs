@@ -1086,7 +1086,7 @@ public class DialogueManager : MonoBehaviour
                     }
 
                     QuestList.checkForDeadNames();
-                    AreaList.addHostility();
+                    // AreaList.addHostility();
 
                     CombatStateManager.locationBeforeCombat = AreaManager.locationName;
 

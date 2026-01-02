@@ -9,11 +9,17 @@
 				{"stepName":"An unconvincing argument.","MapZone":"Camp","MapLocation":"5SlaveShack","journalDescription":"My words held no water with Imre, who told me flat out that he would not go along with my plan. I decided to let him live rather than end his life, something that Ervin will surely disapprove of. Let us hope it was the right decision."},
 				{"stepName":"An unconvincing argument.1","MapZone":"Camp","MapLocation":"5SlaveShack","journalDescription":"My words held no water with Imre, who told me flat out that he would not go along with my plan. Rather than give him the oppurtunity to betray us, I slew him. I should let Ervin know what has transpired."},
 				{"stepName":"Return to Kastor.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"I have informed Ervin of what has happened, it's time to report back to Kastor."},
-				{"stepName":"Kastor has been told.","MapZone":"","MapLocation":"","journalDescription":"I told Kastor what happened with Imre and the brandless slaves."}
+				{"stepName":"Kastor has been told.","MapZone":"","MapLocation":"","journalDescription":"I told Kastor what happened with Imre and the brandless slaves."},
+				{"stepName":"Area Hostile","MapZone":"","MapLocation":"","journalDescription":"The Area is Hostile. This quest cannot be completed."}			
 			],
 			
 	
 	"deathSteps":
 			[
-			]	
+            ],
+    "failureOnAreaHostility":
+			[
+                "CampExterior",
+                "CampInterior"
+			]
 }

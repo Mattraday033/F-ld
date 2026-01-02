@@ -63,3 +63,12 @@ public static class SaveDefaultValues
                                                                          };
 
 }
+
+public static class InteriorDefaultValues
+{
+    public const string badString = "Bad String";
+    public const bool badBool = false;
+    public readonly static string[] defaultEmptyStringArray = new string[0];
+    public readonly static QuestListStepWrapper[] defaultEmptyQuestListStepWrapperArray = new QuestListStepWrapper[0];
+}
+

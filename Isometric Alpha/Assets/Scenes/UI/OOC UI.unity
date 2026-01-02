@@ -9235,12 +9235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac127833c51d904aa87167f16086896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hostilityBars:
-  - {fileID: 819715860}
-  - {fileID: 1666543263}
-  - {fileID: 1426962457}
-  - {fileID: 620360972}
-  - {fileID: 471464085}
+  hostilityBarManager: {fileID: 3432560956765814433}
   topOOCUIBackground: {fileID: 604767240}
   bottomOOCUIBackground: {fileID: 1021005172}
   oocUIParent: {fileID: 340239920}
@@ -10646,6 +10641,7 @@ GameObject:
   - component: {fileID: 1641531568245948170}
   - component: {fileID: 3432560956765814432}
   - component: {fileID: 3432560956765814431}
+  - component: {fileID: 3432560956765814433}
   m_Layer: 5
   m_Name: Hostility Level Panel
   m_TagString: Untagged
@@ -11599,6 +11595,24 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &3432560956765814433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776237316868860513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f35408b23ee523f408b82de22ac0bd5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hostilityBars:
+  - {fileID: 471464085}
+  - {fileID: 620360972}
+  - {fileID: 1426962457}
+  - {fileID: 1666543263}
+  - {fileID: 819715860}
 --- !u!114 &3591059335710141299
 MonoBehaviour:
   m_ObjectHideFlags: 0

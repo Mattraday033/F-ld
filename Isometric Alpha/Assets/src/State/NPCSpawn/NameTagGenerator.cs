@@ -97,6 +97,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
         if(PlayerOOCStateManager.currentActivity == OOCActivity.walking && RevealManager.currentlyRevealed && !hasGenericName() && nameSourceRevealable())
         {
             spawnNameTag();
+            outline.createOutline(getRevealColor());
         } else if(PlayerOOCStateManager.currentActivity != OOCActivity.walking)
         {
             onReveal(false);

@@ -19,6 +19,7 @@ VAR thatchBeginsStranglingVazul = false
 
 VAR toldToInvestigateScreamingInThatchsHut = false
 
+VAR kastorReactedToHostility = false
 VAR vazulMentionedSlatesFate = false
 
 VAR deathFlagGuardVazul = false
@@ -673,7 +674,7 @@ fadeToBlack()
 deactivate({thatchIndex})
 
     {
-    -not toldToInvestigateScreamingInThatchsHut:
+    -not toldToInvestigateScreamingInThatchsHut or kastorReactedToHostility:
         finishQuest(Look for Thatch, true, Thatch is willing.) 
     }
 

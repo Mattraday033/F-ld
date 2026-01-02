@@ -37,6 +37,7 @@ public static class TutorialSequenceList
 	public const string leadershipTutorialSeenFlag = "leadershipTutorialSequenceEntered";
 	public const string interactableObjectTutorialSeenFlag = "interactableObjectTutorialSequenceEntered";
     public const string hiddenObjectsTutorialSeenFlag = "hiddenObjectsTutorialSequenceEntered";
+    public const string secondHostitilityTutorialSeenFlag = "secondHostitilityTutorialSequenceEntered";
 
     private const string characterScreenStatsTargetHash = "Character Screen Stats";
 
@@ -107,6 +108,7 @@ public static class TutorialSequenceList
     public const string questCounterTutorialSeenFlag = "questCounterTutorialSequenceEntered";
 
     public const string firstHostilityTutorialSequenceKey = "First Hostility Tutorial";
+    public const string secondHostilityTutorialSequenceKey = "Second Hostility Tutorial";
     public const string intimidateTutorialSequenceKey = "Intimidate Tutorial";
     public const string interactableRubbleTutorialSequenceKey = "Interactable Rubble Tutorial";
     public const string vaultableObjectTutorialSequenceKey = "Vaultable Object Tutorial";
@@ -135,6 +137,7 @@ public static class TutorialSequenceList
         noScript = null;
 
         initializeFirstHostilityTutorial();
+        initializeSecondHostilityTutorial();
 
         initializeLiftableRubbleTutorial();
         initializeIntimidateTutorial();
@@ -174,6 +177,17 @@ public static class TutorialSequenceList
 
         firstHostilityTutorialSequence.setSkipScript(new SkipTutorialScript());
         tutorialSequenceDictionary.Add(firstHostilityTutorialSequenceKey, firstHostilityTutorialSequence); 
+    }
+
+    public static void initializeSecondHostilityTutorial()
+    {
+        TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.hostilityBarsTutorialMessagePrefix + 1, hostilityUITargetHash, ArrowDirection.Left, new KeyCode[] { KeyCode.Space}, highlight, skipUnhighlight, createPopUpScreenBlocker);
+        TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.hostilityBarsTutorialMessagePrefix + 2, hostilityUITargetHash,  ArrowDirection.Left, new KeyCode[] { KeyCode.Space }, skipHighlight, unhighlight, createPopUpScreenBlocker);
+
+        TutorialSequence secondHostilityTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, secondHostitilityTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo});
+
+        secondHostilityTutorialSequence.setSkipScript(new SkipTutorialScript());
+        tutorialSequenceDictionary.Add(secondHostilityTutorialSequenceKey, secondHostilityTutorialSequence); 
     }
 
     public static void initializeLiftableRubbleTutorial()

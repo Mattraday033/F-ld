@@ -73,7 +73,7 @@ public class MonsterSpawnDetails : OOCSpawnDetails
         enemyMovement.initializeAnimationManager();
         enemyMovement.setEnemyFacing(facing);
         enemyMovement.movementType = movementType;
-        enemyMovement.packName = npcName;
+        // enemyMovement.packName = npcName;
     }
 
 
@@ -129,7 +129,7 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
         MovementManager.addMovementTracker(enemyMovement);
 
         enemyMovement.getSpriteRenderer().sprite = Helpers.loadSpriteFromResources(getSpriteName());
-        enemyMovement.packName = npcName;
+        // enemyMovement.packName = npcName;
     }
 
 

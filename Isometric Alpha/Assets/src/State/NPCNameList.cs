@@ -54,6 +54,8 @@ public static class NPCNameList
     #region Lovashi Guards
 
     public const string guard = "Guard";
+    public const string overseer = "Overseer";
+    public const string chief = "Chief";
 
     public const string guardMuzsa = "Guard Múzsa";
 

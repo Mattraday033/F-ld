@@ -64,7 +64,7 @@ public class MovableObjectMovement : EnemyMovement
 
     public override string getName()
     {
-        return packName;
+        return MonsterNameList.movableObject;
     }
 
 	public override List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()

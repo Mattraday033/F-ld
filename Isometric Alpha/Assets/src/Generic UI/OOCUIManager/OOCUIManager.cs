@@ -9,9 +9,9 @@ using TMPro;
 
 public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
 {
-    public Image[] hostilityBars;
-
     private static OOCUIManager instance;
+
+    public HostilityBarManager hostilityBarManager;
 
     public Image topOOCUIBackground;
     public Image bottomOOCUIBackground;
@@ -100,7 +100,7 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
         updateLeadershipText();
 
         updateFooting();
-        setUpHostilityBars();        
+        hostilityBarManager.setUpHostilityBars();        
         
         updateQuestCounter();
 
@@ -229,39 +229,6 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
     public void testAddXP()
     {
         PartyManager.addXP(AllyStats.xpNeededToLevelUp);
-    }
-
-    private void setUpHostilityBars()
-    {
-        int lowestGreenIndex = AreaList.getCurrentAreaHostility();
-
-        if (lowestGreenIndex >= Area.hostilityThreshold)
-        {
-            setAllHostilityBarsToRed();
-            return;
-        }
-        else
-        {
-            for (int barIndex = 0; barIndex < hostilityBars.Length; barIndex++)
-            {
-                if (barIndex < lowestGreenIndex)
-                {
-                    hostilityBars[barIndex].color = Color.yellow;
-                }
-                else
-                {
-                    hostilityBars[barIndex].color = Color.green;
-                }
-            }
-        }
-    }
-
-    private void setAllHostilityBarsToRed()
-    {
-        foreach (Image bar in hostilityBars)
-        {
-            bar.color = Color.red;
-        }
     }
 
     public void updateFooting()

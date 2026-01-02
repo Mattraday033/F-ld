@@ -14,7 +14,7 @@ public class DeathStep: QuestStep {
 	
 	
 	public DeathStep(Quest parentQuest, bool active, int stepIndex, string stepName, string journalDescription,
-					 string deadName, int firstStep, int lastStep): base(parentQuest, active, stepIndex, stepName, journalDescription)
+					 string deadName, int firstStep, int lastStep): base(parentQuest, active, stepName, journalDescription)
 	{
 		this.deadName = deadName;
 		this.firstStep = firstStep;
@@ -22,7 +22,7 @@ public class DeathStep: QuestStep {
 	}
 	
 	public DeathStep(Quest parentQuest, bool active, int stepIndex, string stepName, string journalDescription,
-					 string deadName, int firstStep, int lastStep, bool failOnActivation, bool succeedOnActivation): base(parentQuest, active, stepIndex, stepName, journalDescription)
+					 string deadName, int firstStep, int lastStep, bool failOnActivation, bool succeedOnActivation): base(parentQuest, active, stepName, journalDescription)
 	{
 		this.deadName = deadName;
 		this.firstStep = firstStep;

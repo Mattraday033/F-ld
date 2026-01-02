@@ -5,6 +5,7 @@ using UnityEngine;
 public static class TutorialMessageList
 {
     public const string hostileTargetTutorialMessagePrefix = "Hostile Target Tutorial Message ";
+    public const string hostilityBarsTutorialMessagePrefix = "Hostility Bars Tutorial Message ";
     public const string intimidateTutorialMessagePrefix = "Intimidate Tutorial Message ";
     public const string interactableObjectTutorialMessagePrefix = "Interactable Object Tutorial Message ";
 
@@ -45,6 +46,9 @@ public static class TutorialMessageList
         tutorialDictionary.Add(hostileTargetTutorialMessagePrefix + 4, "The enemy is facing away from you. If you move next to a creature while facing it's sides or back, you will surprise it and gain a free round of attacks.");
         tutorialDictionary.Add(hostileTargetTutorialMessagePrefix + 5, "Be careful how you approach creatures. Creatures can surprise you if they sneak up on you.");
         tutorialDictionary.Add(hostileTargetTutorialMessagePrefix + 6, "Press 'D' to move next to the creature and start combat.");
+
+        tutorialDictionary.Add(hostilityBarsTutorialMessagePrefix + 1, "You have commited an action that has raised the Hostility in the area. Attacking or using Skills on NPC's can result in raising an area's Hostility. You will receive less Hostility if you are indoors.");
+        tutorialDictionary.Add(hostilityBarsTutorialMessagePrefix + 2, "Should you ever receive your fifth yellow Hostility bar, the entire Zone will become Hostile. This will result in previously peaceful areas being filled with guards looking to make you pay. It can also affect the outcome of certain quests. Be careful who you attack!");
 
         tutorialDictionary.Add(intimidateTutorialMessagePrefix + 1, "This creature is hiding around a blind corner. The Intimidate skill can keep it from surprising you. Press '1' to activate it.");
         tutorialDictionary.Add(intimidateTutorialMessagePrefix + 2, "The orange tiles show Intimidate's range. A red tile shows a target. All targets in range will be affected by Intimidate. Intimidated creatures cannot surprise you or be surprised.");

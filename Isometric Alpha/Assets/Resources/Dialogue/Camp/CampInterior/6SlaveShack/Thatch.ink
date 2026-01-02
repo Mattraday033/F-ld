@@ -8,6 +8,7 @@ VAR givenFullExplanation = false
 VAR givenTutorialQuest = false
 VAR toldKastorOfThatchsFate = false
 VAR toldToInvestigateScreamingInThatchsHut = false
+VAR kastorReactedToHostility = false
 
 VAR metThatch = false
 VAR slateFound = false
@@ -185,12 +186,14 @@ activateQuestStep(Look for Thatch, Slate's fate.)
 
 === skippedTutorial ===
 
+setToTrue(toldThatchAboutSlate)
 I think... I think I already knew that. Somewhere, deep down. But thank you for telling me this. I have no reason to stay any longer.
 {
+-kastorReactedToHostility:
+    finishQuest(Look for Thatch, true, Thatch is willing.)
 -toldToInvestigateScreamingInThatchsHut:
     activateQuestStep(Look for Thatch, Return to Kastor.)
 }
-setToTrue(toldThatchAboutSlate)
 
 ->addThatchToParty(false)
 

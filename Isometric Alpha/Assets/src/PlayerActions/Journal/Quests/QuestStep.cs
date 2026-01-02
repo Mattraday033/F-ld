@@ -15,7 +15,6 @@ public class QuestStep : IDescribable, IDescribableInBlocks
         get;
         private set;
     }
-	public int stepIndex;
     public int activationIndex;
 	public string stepName;
 	public string journalDescription;
@@ -23,22 +22,34 @@ public class QuestStep : IDescribable, IDescribableInBlocks
 	public string mapZone;
 	public string mapLocation;
 
-	public QuestStep(Quest parentQuest, bool active, int stepIndex, string stepName, string journalDescription)
+	public QuestStep(Quest parentQuest, QuestListStepWrapper wrapper)
+	{
+		this.parentQuest = parentQuest;
+
+        this.active = false;
+
+        this.stepName = wrapper.stepName;
+        this.journalDescription = wrapper.journalDescription;
+        this.mapZone = wrapper.mapZone;
+        this.mapLocation = wrapper.mapLocation;
+
+        this.activationIndex = -1;
+	}
+
+	public QuestStep(Quest parentQuest, bool active, string stepName, string journalDescription)
 	{
 		this.parentQuest = parentQuest;
 		this.active = active;
-		this.stepIndex = stepIndex;
 		this.stepName = stepName;
 		this.journalDescription = journalDescription;
 
         activationIndex = -1;
 	}
 
-	public QuestStep(Quest parentQuest, bool active, int stepIndex, string stepName, string journalDescription, int activationIndex)
+	public QuestStep(Quest parentQuest, bool active, string stepName, string journalDescription, int activationIndex)
 	{
 		this.parentQuest = parentQuest;
 		this.active = active;
-		this.stepIndex = stepIndex;
 		this.stepName = stepName;
 		this.journalDescription = journalDescription;
         this.activationIndex = activationIndex;

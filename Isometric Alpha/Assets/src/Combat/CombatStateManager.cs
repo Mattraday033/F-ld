@@ -476,6 +476,11 @@ public class CombatStateManager : MonoBehaviour
 			{
 				QuestList.activateQuestStep(State.enemyPackInfo.getQuestName(), State.enemyPackInfo.getQuestStep());
 			}
+
+            if(!MonsterNameList.packNameNeverAddsHostility(State.enemyPackInfo))
+            {
+                AreaList.addHostility();
+            }
 		}
 
         if (defeatedEnemy)

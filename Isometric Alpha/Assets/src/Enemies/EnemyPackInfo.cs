@@ -90,7 +90,7 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
 
     public string getPackName()
     {
-        return enemyTypes[Constants.indexZero].enemyStats.getName();
+        return MonsterNameList.getPackName(enemyTypes[Constants.indexZero].enemyStats.getName());
     }
 
     public virtual void markBossAsKilled()

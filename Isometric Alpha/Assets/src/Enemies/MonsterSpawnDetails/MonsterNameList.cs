@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class MonsterNameList
 {
+    public const string batsPackName = "Bats";
     public const string denMother = "Den Mother";
     public const string giantBat = "Giant Bat";
     public const string batSwarm = "Bat Swarm";
@@ -11,7 +12,7 @@ public static class MonsterNameList
     public const string screecher = "Screecher";
     public const string caveMatron = "Cave Matron";
 
-
+    public const string lovashiPackName = "Lovashi";
     public const string disciplinarian = "Disciplinarian";
     public const string executioner = "Executioner";
     public const string javelineer = "Javelineer";
@@ -19,5 +20,48 @@ public static class MonsterNameList
     public const string lieutenant = "Lieutenant";
     public const string lineBreaker = "Line Breaker";
     public const string spearman = "Spearman";
+
+    public const string movableObject = "Movable Object";
+
+    public static string getPackName(string enemyType)
+    {
+        if(enemyType.Contains(NPCNameList.guard) ||
+            enemyType.Contains(NPCNameList.overseer) ||
+            enemyType.Contains(NPCNameList.chief)  )
+        {
+                return lovashiPackName;
+        }
+
+        switch(enemyType)
+        {
+            case disciplinarian:
+            case executioner:
+            case javelineer:
+            case lancer:
+            case lieutenant:
+            case lineBreaker:
+            case spearman:
+                return lovashiPackName;
+            default:
+                return batsPackName;
+        }
+    }
+
+    public static bool packNameNeverAddsHostility(EnemyPackInfo packInfo)
+    {
+        return packNameNeverAddsHostility(packInfo.getPackName());
+    }
+
+    public static bool packNameNeverAddsHostility(string packName)
+    {
+        switch(packName)
+        {
+            case batsPackName:
+            case movableObject:
+                return true;
+            default:
+                return false;
+        }
+    }
 
 }

@@ -41,4 +41,33 @@ public static class GetFromJson
             return defaultValue;
         }
     }
+
+    public static dynamic getElementFromJson<T>(string jsonName, string elementName, dynamic jsonDynamic, dynamic defaultValue)
+    {
+        try
+        {
+            dynamic element = jsonDynamic[elementName];
+
+            if (element == null)
+            {
+                return defaultValue;
+            }
+            else
+            {
+                return element.ToObject<T>();
+            }
+        }
+        catch (Exception e)
+        {
+            if (!jsonName.Equals(cleanSlateSaveName) && !elementName.Equals(saveNameElementName))
+            {
+                Debug.LogError("Caught Exception of type:" + e.GetType().Name +
+                                "\nMessage:" + e.Message +
+                                "\n\nSaveBlueprint(" + jsonName + ") does not have an elementNamed: " + elementName +
+                                "\n\njsonDynamic: (" + jsonDynamic.ToString() + ")");
+            }
+
+            return defaultValue;
+        }
+    }
 }

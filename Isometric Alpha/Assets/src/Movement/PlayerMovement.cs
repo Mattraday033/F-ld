@@ -149,6 +149,7 @@ public class PlayerMovement : MovementTracker
     }
 
     public static bool hasCustomPromptMessage;
+    public static bool waitingOnHostilityTutorial = false;
 
     public static TerrainHiddenState currentTerrainHiddenState = TerrainHiddenState.None;
 
@@ -295,6 +296,12 @@ public class PlayerMovement : MovementTracker
             PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence)
         {
             PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        }
+
+        if(waitingOnHostilityTutorial)
+        {
+            waitingOnHostilityTutorial = false;
+            StartCoroutine(waitForHostilityTutorial());
         }
     }
 
@@ -1693,5 +1700,43 @@ public class PlayerMovement : MovementTracker
         }
 
         return currentStory;
+    }
+
+    private IEnumerator waitForHostilityTutorial()
+    {
+
+		while (PlayerOOCStateManager.currentActivity != OOCActivity.walking)
+		{
+			if (PlayerOOCStateManager.currentActivity == OOCActivity.inTutorialSequence)
+			{
+				yield break;
+			}
+			else
+			{
+				yield return null;
+			}
+		}
+
+        do
+		{
+            yield return null;
+		} while (!FadeToBlackManager.isTransparent());
+
+		while (PlayerOOCStateManager.currentActivity != OOCActivity.walking)
+		{
+			if (PlayerOOCStateManager.currentActivity == OOCActivity.inTutorialSequence)
+			{
+				yield break;
+			}
+			else
+			{
+				yield return null;
+			}
+		}
+
+		if (!TutorialSequence.currentlyInTutorialSequence() && TutorialSequence.startTutorialSequence(TutorialSequenceList.secondHostilityTutorialSequenceKey))
+		{
+			PlayerOOCStateManager.setCurrentActivity(OOCActivity.inTutorialSequence);
+		}
     }
 }

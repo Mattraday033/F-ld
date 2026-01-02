@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class Area
 {
@@ -15,7 +16,7 @@ public class Area
 	
 	public const int hostilityThreshold = 5;
 	private const int interiorHostilityPerCombat = 1;
-	private const int exteriorHostilityPerCombat = 3;
+	private const int exteriorHostilityPerCombat = 2;
 	
 	public Area(string areaKey, string[] scenesInArea, string[] areasSharingHostility)
 	{
@@ -73,9 +74,12 @@ public class Area
 	
 	internal void addHostility(bool addToSharedHositilityAreas)
 	{
-		return;
-		
-		if (MapObjectList.getMapObject(SceneManager.GetActiveScene().name).isInterior())
+        if(isHostile())
+        {
+            return;
+        }
+
+		if (MapObjectList.getMapObject(AreaManager.locationName).isInterior())
 		{
 			hostility += interiorHostilityPerCombat;
 		}
@@ -91,9 +95,18 @@ public class Area
 				AreaList.allAreas[sharedHostilityAreaKey].addHostility(false);
 			}
 		}
+
+        if(!Flags.getFlag(TutorialSequenceList.secondHostitilityTutorialSeenFlag))
+        {
+            PlayerMovement.waitingOnHostilityTutorial = true;
+        }
+
+        if(isHostile())
+        {
+            AreaList.AreaBecameHostile.Invoke(this);
+        }
 	}
 	
-	//for setting hostility from save file
 	public void setHostility(int newHostility)
 	{
 		hostility = newHostility;
@@ -125,6 +138,7 @@ public class Area
 
 public static class AreaList
 {
+    public readonly static UnityEvent<Area> AreaBecameHostile = new UnityEvent<Area>();
 	public static Dictionary<string, Area> allAreas;
 	
 	private const int startsHostile = 5;
@@ -346,11 +360,6 @@ public static class AreaList
 
 	public static int getCurrentAreaHostility()
 	{
-		if (locationAlwaysHostile(AreaManager.locationName))
-		{
-			return Area.hostilityThreshold;
-		}
-
 		return getCurrentArea().hostility;
 	}
 	
@@ -366,7 +375,14 @@ public static class AreaList
 	
 	public static void setAreaToHostile(string locationName)
 	{
+        bool areaWasHostile = getArea(locationName).isHostile();
+
 		getArea(locationName).setHostility(Area.hostilityThreshold);
+
+        if(!areaWasHostile && getArea(locationName).isHostile())
+        {
+            AreaBecameHostile.Invoke(getArea(locationName));
+        }
 	}
 
     public static void setAreaHostility(string locationName, int hostility)
@@ -428,7 +444,7 @@ public static class AreaList
 		return areaOne.areaKey.Equals(areaTwo.areaKey);
 	}
 
-	private static bool locationAlwaysHostile(string locationName)
+	public static bool locationAlwaysHostile(string locationName)
 	{
 		switch(locationName)
 		{

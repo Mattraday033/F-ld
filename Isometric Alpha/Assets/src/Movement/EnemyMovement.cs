@@ -156,7 +156,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     private int monsterPackIndex; //private so it can only set by using setMonsterPackIndex()
 
 	public string tutorialHash;
-	public string packName = "???"; //Worms
+	// public string packName = "???"; //Worms
 
     private MonsterMovementType _MovementType = MonsterMovementType.Random;
     public virtual MonsterMovementType movementType
@@ -916,7 +916,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 	public virtual string getName()
 	{
-        return packName;
+        return getEnemyPackInfo().getPackName();
 	}
 
 	public virtual List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()

@@ -12,21 +12,16 @@ public class NPCMouseHover : MonoBehaviour
 
     void Start()
     {
-        npc = transform.parent.GetComponent<IRevealable>();
+        npc = GetComponent<IRevealable>();
         
-        Vector3Int currentCell = AreaManager.getMasterGrid().WorldToCell(transform.parent.position);
+        Vector3Int currentCell = AreaManager.getMasterGrid().WorldToCell(transform.position);
 
         transform.position = new Vector3(transform.position.x, transform.position.y, -1f + ((( zPosMultiplier * (float) currentCell.x) + ( zPosMultiplier * (float) currentCell.y))/2f));
-
-        if (npc == null)
-        {
-            DestroyImmediate(gameObject);
-        }
     }
 
     private void OnMouseEnter()
     {
-        if(PlayerOOCStateManager.currentActivity != OOCActivity.walking)
+        if(PlayerOOCStateManager.currentActivity != OOCActivity.walking || npc == null)
         {
             return;
         }
@@ -36,7 +31,7 @@ public class NPCMouseHover : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if(PlayerOOCStateManager.currentActivity != OOCActivity.walking)
+        if(PlayerOOCStateManager.currentActivity != OOCActivity.walking || npc == null)
         {
             return;
         }

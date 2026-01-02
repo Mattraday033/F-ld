@@ -14,12 +14,16 @@
 				{"stepName":"Kastor was informed.","MapZone":"","MapLocation":"","journalDescription":"I told Kastor what transpired at the meeting between the guard and Janos. I told Kastor that Janos was a traitor, but now we have the key."},
 				{"stepName":"Kastor was informed.1","MapZone":"","MapLocation":"","journalDescription":"I told Kastor what transpired at the meeting between the guard and Janos, but I kept Janos's affair with the guard a secret. Best not to risk their safety by disclosing that to anyone."},
 				{"stepName":"Kastor was informed.2","MapZone":"","MapLocation":"","journalDescription":"I told Kastor what transpired at the meeting between the guard and Janos, but did my best to explain to him that Janos was not a traitor. I hope I was convincing."},
-				{"stepName":"Kastor was informed.3","MapZone":"","MapLocation":"","journalDescription":"I obtained the key to the armory for Kastor."}
-			
+				{"stepName":"Kastor was informed.3","MapZone":"","MapLocation":"","journalDescription":"I obtained the key to the armory for Kastor."},
+				{"stepName":"Area Hostile","MapZone":"","MapLocation":"","journalDescription":"The Area is Hostile. This quest cannot be completed."}		
 			],
 			
 	"deathSteps":
 			[
+			],
+    "failureOnAreaHostility":
+			[
+                "CampExterior",
+                "CampInterior"
 			]
-	
 }

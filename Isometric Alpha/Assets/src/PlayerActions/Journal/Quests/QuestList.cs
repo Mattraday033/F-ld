@@ -9,9 +9,16 @@ using Newtonsoft.Json;
 public static class QuestList 
 {
 	private const string pathToQuestFolder = "Quests";
-	private const string jsonFileExtension = ".json";
-    private const string metaFileExtension = ".meta";
 
+    private const string titleVarName = "title";
+    public const string stepsVarName = "steps";
+    private const string deathStepsVarName = "deathSteps";
+    private const string succeedOnActivationVarName = "succeedOnActivation";
+    private const string stepNameVarName = "stepName";
+    private const string journalDescriptionVarName = "journalDescription";
+    private const string mapZoneVarName = "MapZone";
+    private const string mapLocationVarName = "MapLocation";
+    private const string failureOnAreaHostilityVarName = "failureOnAreaHostility";
 
 	private static Dictionary<string, Quest> questDict = new Dictionary<string, Quest>();
 
@@ -25,74 +32,46 @@ public static class QuestList
  
 	public static Quest convertJsonTextAssetToQuest(TextAsset textAsset)
 	{
-		string stepName;
-		string journalDescription;
-		string deadName;
-		int firstStep;
-		int lastStep;
-		bool failOnActivation;
-		bool succeedOnActivation;
 
-		//Debug.LogError("filePath = " + filePath);
 
-		string jsonString = textAsset.ToString();
 
-        //Debug.LogError("jsonString = " + jsonString);
+		// string stepName;
+		// string journalDescription;
 
-		dynamic jsonDynamic = JsonConvert.DeserializeObject<dynamic>(jsonString); 
+		// //Debug.LogError("filePath = " + filePath);
+
+		// string jsonString = textAsset.ToString();
+
+        // //Debug.LogError("jsonString = " + jsonString);
+
+		// dynamic jsonDynamic = JsonConvert.DeserializeObject<dynamic>(jsonString); 
 		
-		int stepNum = jsonDynamic["steps"].Count;
-		int deathStepNum = jsonDynamic["deathSteps"].Count;
+		// int stepNum = jsonDynamic[stepsVarName].Count;
 		
-		Quest quest = new Quest();
+		// Quest quest = new Quest();
 		
-		quest.title = jsonDynamic["title"];
+		// quest.title = jsonDynamic[titleVarName];
 
-		quest.steps = new Dictionary<string, QuestStep>();
+		// quest.steps = new Dictionary<string, QuestStep>();
 
-		for (int i = 0; i < stepNum; i++)
-		{
-			stepName = jsonDynamic["steps"][i]["stepName"];
-			journalDescription = jsonDynamic["steps"][i]["journalDescription"];
+		// for (int i = 0; i < stepNum; i++)
+		// {
+		// 	stepName = jsonDynamic[stepsVarName][i][stepNameVarName];
+		// 	journalDescription = jsonDynamic[stepsVarName][i][journalDescriptionVarName];
 
-			quest.steps[stepName] = new QuestStep(quest, false, i, stepName, journalDescription);
+		// 	quest.steps[stepName] = new QuestStep(quest, false, stepName, journalDescription);
 
-			if (jsonDynamic["steps"][i]["MapZone"] != null && jsonDynamic["steps"][i]["MapLocation"] != null)
-			{
-				quest.steps[stepName].mapZone = jsonDynamic["steps"][i]["MapZone"];
-				quest.steps[stepName].mapLocation = jsonDynamic["steps"][i]["MapLocation"];
-			}
-		}
+		// 	if (jsonDynamic[stepsVarName][i][mapZoneVarName] != null && jsonDynamic[stepsVarName][i][mapLocationVarName] != null)
+		// 	{
+		// 		quest.steps[stepName].mapZone = jsonDynamic[stepsVarName][i][mapZoneVarName];
+		// 		quest.steps[stepName].mapLocation = jsonDynamic[stepsVarName][i][mapLocationVarName];
+		// 	}
+		// }
 		
-		quest.deathSteps = new Dictionary<string, DeathStep>();
-		
-		for(int i = 0; i < deathStepNum; i++)
-		{
-			stepName = jsonDynamic["deathSteps"][i]["stepName"];
-			journalDescription = jsonDynamic["deathSteps"][i]["journalDescription"];
-			deadName = jsonDynamic["deathSteps"][i]["deadName"];
-			firstStep = jsonDynamic["deathSteps"][i]["firstStep"];
-			lastStep = jsonDynamic["deathSteps"][i]["lastStep"];
-			
-			try
-			{
-				failOnActivation = jsonDynamic["deathSteps"][i]["failOnActivation"];
-			} catch(Exception e)
-			{
-				failOnActivation = false;
-			}
-			
-			try
-			{
-				succeedOnActivation = jsonDynamic["deathSteps"][i]["succeedOnActivation"];
-			} catch(Exception e)
-			{
-				succeedOnActivation = false;
-			}
-			
-			quest.deathSteps[stepName] = new DeathStep(quest, false, -1, stepName, journalDescription, deadName, firstStep, lastStep, failOnActivation, succeedOnActivation);
-		}
-		
+		// quest.deathSteps = new Dictionary<string, DeathStep>();
+        string jsonString = textAsset.ToString();
+        Quest quest = new Quest(jsonString);
+
 		return quest;
 	}
  
@@ -140,9 +119,22 @@ public static class QuestList
 		}
 	}
  
+    private static void removeAllListeners()
+    {
+        if(questDict == null || questDict.Count <= 0)
+        {
+            return;
+        }
+
+        foreach(KeyValuePair<string, Quest> kvp in questDict)
+        {
+            kvp.Value.removeListeners();
+        }
+    }
+
 	public static void buildQuestListFromScratch()
 	{
-		//Always add quests to the end of the order.
+        removeAllListeners();
 
 		questDict = new Dictionary<string, Quest>();
 
