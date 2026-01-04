@@ -45,7 +45,7 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
 
     protected void setFacing()
     {
-        if(animationManager == null)
+        if(animationManager == null || !animationManager.changesFacing)
         {
             return;
         }

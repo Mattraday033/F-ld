@@ -51,7 +51,7 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 
 		if (actionBeingDescribed.getRangeIndex() >= 0)
 		{
-			targetDisplaySelector = (GameObject)Instantiate(actionBeingDescribed.getSelector().getSelectorObject(), CombatUI.selectorParent);
+			targetDisplaySelector = Instantiate(actionBeingDescribed.getSelector().getSelectorObject(), CombatUI.selectorParent);
 
 			targetDisplaySelector.transform.position = actionBeingDescribed.getTargetPosition();
 
@@ -60,7 +60,7 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 
 		if (actionBeingDescribed.requiresTertiaryCoords())
 		{
-			tertiaryDisplaySelector = (GameObject)Instantiate(SelectorManager.getInstance().selectors[actionBeingDescribed.getRangeIndex()].getSelectorObject(), CombatUI.selectorParent);
+			tertiaryDisplaySelector = Instantiate(SelectorManager.getInstance().selectors[actionBeingDescribed.getRangeIndex()].getSelectorObject(), CombatUI.selectorParent);
 
 			tertiaryDisplaySelector.transform.position = actionBeingDescribed.getTertiaryPosition();
 			tertiaryDisplaySelector.GetComponent<SpriteRenderer>().color = Selector.secondaryColor;

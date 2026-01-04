@@ -535,34 +535,20 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
     {
         Stats actorStats = getActorStats();
 
-        GameObject combatSprite = actorStats.combatSprite;
-
-        if (combatSprite != null && !(combatSprite is null))
+        if (actorStats != null && !(actorStats is null))
         {
-            // Debug.LogError("Outlines not implemented");
-            // combatSprite.GetComponent<SpriteOutline>().color = actorStats.getOutlineColor();
-            // Helpers.updateColliderPosition(combatSprite);
-            //UPDATING COLLIDER POSITION RESETS ANIMATIONS
+            actorStats.setOutline();
         }
     }
 
     public virtual void removeHighlightFromActorSprites()
     {
-        // Debug.LogError("Outlines not implemented");
+        Stats actorStats = getActorStats();
 
-        // Stats actorStats = getActorStats();
-
-        // if (actorStats != null)
-        // {
-        //     GameObject combatSprite = actorStats.combatSprite;
-
-        //     if (combatSprite != null && !(combatSprite is null))
-        //     {
-        //         combatSprite.GetComponent<SpriteOutline>().color = RevealManager.defaultWhenNotRevealed;
-        //         Helpers.updateColliderPosition(combatSprite);
-        //          UPDATING COLLIDER POSITION RESETS ANIMATIONS
-        //     }           
-        // }
+        if (actorStats != null && !(actorStats is null))
+        {
+            actorStats.removeOutline();
+        }
     }
 
     #endregion

@@ -72,10 +72,10 @@ public class Ticker : MonoBehaviour
 				} 
 			}
 			
-            if(combatant.animationManager != null)
-            {
-                combatant.animationManager.playCurrentIdleAnimation();
-            }
+            // if(combatant.animationManager != null)
+            // {
+            //     combatant.animationManager.playCurrentIdleAnimation();
+            // }
 		}
 	}
 }

@@ -90,8 +90,8 @@ public static class DialogueCombatInfoList
 
     public readonly static NPCCombatInfo barricadeGuardsCombatInfo = new NPCCombatInfo( 
                                                                      new EnemyPackInfo[]   {   
-                                                                                                EnemyPackInfoList.testFight,
-                                                                                                EnemyPackInfoList.testFight
+                                                                                                EnemyPackInfoList.barricadeGuardsFront,
+                                                                                                EnemyPackInfoList.barricadeGuardsBehind
                                                                                             },
                                                                     new DeadNameList[]  {
                                                                                             new DeadNameList(new string[]{}),

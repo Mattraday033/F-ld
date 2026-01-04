@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca5c73792d0d2e45bc70ecaf1568b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseHoverCollider: {fileID: 442924692877372290}
+  mouseHoverCollider: {fileID: 9128299601820289389}
   facing: 1
   chestState: 0
   chestType: 0
@@ -255,7 +255,6 @@ MonoBehaviour:
   noNameTag: 0
   spriteRenderer: {fileID: 6660733450008172774}
   nameTag: {fileID: 0}
-  targetCanvas: {fileID: 0}
 --- !u!1001 &8494690771702950042
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -349,15 +348,15 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca, type: 3}
---- !u!61 &442924692877372290 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 8342533383209927448, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
-    type: 3}
-  m_PrefabInstance: {fileID: 8494690771702950042}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5475051574664286788 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4474464932253563614, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 8494690771702950042}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &9128299601820289389 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 814316315059823095, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
     type: 3}
   m_PrefabInstance: {fileID: 8494690771702950042}
   m_PrefabAsset: {fileID: 0}

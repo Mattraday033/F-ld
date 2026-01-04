@@ -4717,7 +4717,8 @@ PrefabInstance:
       propertyPath: m_Tiles.Array.data[128].second.m_TileObjectToInstantiateIndex
       value: 65535
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6452389963009450734, guid: f3a4ee1083fcb6a40b85d6ca7d61a8d0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -4846,7 +4847,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8097840318414424412, guid: 6c262c33d157d2348bbc8d00bcbe9062, type: 3}
+    - {fileID: 5373107377150414737, guid: 6c262c33d157d2348bbc8d00bcbe9062, type: 3}
+    - {fileID: 6962697303419834022, guid: 6c262c33d157d2348bbc8d00bcbe9062, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -4985,7 +4989,19 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6811892265850695248, guid: 54b7d5b85a7ec024c99271a04217a003, type: 3}
+    - {fileID: 8556514744424390782, guid: 54b7d5b85a7ec024c99271a04217a003, type: 3}
+    - {fileID: 8956484879309193082, guid: 54b7d5b85a7ec024c99271a04217a003, type: 3}
+    - {fileID: 91347230855991482, guid: 54b7d5b85a7ec024c99271a04217a003, type: 3}
+    - {fileID: 2296168361365968414, guid: 54b7d5b85a7ec024c99271a04217a003, type: 3}
+    - {fileID: 1108363008596760559, guid: 54b7d5b85a7ec024c99271a04217a003, type: 3}
+    - {fileID: 7028410022094326225, guid: 54b7d5b85a7ec024c99271a04217a003, type: 3}
+    - {fileID: 1971266186010891367, guid: 54b7d5b85a7ec024c99271a04217a003, type: 3}
+    - {fileID: 1054186010398649449, guid: 54b7d5b85a7ec024c99271a04217a003, type: 3}
+    - {fileID: 8396818043649938104, guid: 54b7d5b85a7ec024c99271a04217a003, type: 3}
+    - {fileID: 911906292993329531, guid: 54b7d5b85a7ec024c99271a04217a003, type: 3}
+    - {fileID: 3606260552726013192, guid: 54b7d5b85a7ec024c99271a04217a003, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -9663,7 +9679,8 @@ PrefabInstance:
       propertyPath: m_Tiles.Array.data[128].second.m_TileObjectToInstantiateIndex
       value: 65535
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6452389963009450734, guid: f3a4ee1083fcb6a40b85d6ca7d61a8d0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8335138890795478271, guid: f3a4ee1083fcb6a40b85d6ca7d61a8d0,
@@ -14417,7 +14434,8 @@ PrefabInstance:
       propertyPath: m_Tiles.Array.data[15].second.m_TileObjectToInstantiateIndex
       value: 65535
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4980243820059314181, guid: 1e5cff6468b0a174489314bb9e925ea2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

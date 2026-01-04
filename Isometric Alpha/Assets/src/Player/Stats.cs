@@ -143,6 +143,16 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return null;
     }
 
+    public virtual void setOutline()
+    {
+        outline.createOutline(getOutlineColor());
+    }
+
+    public virtual void removeOutline()
+    {
+        outline.removeOutline();
+    }
+
     #endregion
 
     #region HealthBarManager

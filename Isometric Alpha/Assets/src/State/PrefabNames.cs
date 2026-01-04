@@ -206,7 +206,6 @@ public static class PrefabNames
     public const string book = interactablesFolder + "Book";
 
     public const string commonComponentsFolder = interactablesFolder + "CommonComponents/";
-    public const string mouseHoverTileMap = commonComponentsFolder + "MouseHoverTileMap";
 
     #endregion
 

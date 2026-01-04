@@ -179,61 +179,80 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
 
         #region Lovashi Guards
 
+        enemyStatsDict.Add(MonsterNameList.axeman, new EnemyStats(MonsterNameList.axeman,
+                                                                                    fiftyFiveArmor,
+                                                                                            55,
+                            AbilityList.getAbility(null, AbilityList.guardAxeKey) as Ability,
+                                                                new Trait[] { TraitList.master,
+                                                                          TraitList.predatory,
+                                                                          TraitList.frontLine
+                                                                            }));
+
         enemyStatsDict.Add(MonsterNameList.disciplinarian, new EnemyStats(MonsterNameList.disciplinarian,
-                                                                                    thirtyFiveArmor,
-                                                                                            1,
-                            AbilityList.getAbility(null, AbilityList.executeKey) as Ability,
+                                                                                    fortyArmor,
+                                                                                            55,
+                            AbilityList.getAbility(null, AbilityList.guardLashKey) as Ability,
                                                                 new Trait[] { TraitList.master,
                                                                           TraitList.predatory
                                                                             }));
 
         enemyStatsDict.Add(MonsterNameList.executioner, new EnemyStats(MonsterNameList.executioner,
-                                                                                    thirtyFiveArmor,
-                                                                                            100,
+                                                                                    fortyArmor,
+                                                                                            70,
                             AbilityList.getAbility(null, AbilityList.executeKey) as Ability,
                                                                 new Trait[] { TraitList.master,
                                                                           TraitList.predatory
                                                                             }));
 
         enemyStatsDict.Add(MonsterNameList.javelineer, new EnemyStats(MonsterNameList.javelineer,
-                                                                                    thirtyFiveArmor,
+                                                                                    thirtyArmor,
                                                                                             25,
-                            AbilityList.getAbility(null, AbilityList.executeKey) as Ability,
+                            AbilityList.getAbility(null, AbilityList.guardJavelinKey) as Ability,
                                                                 new Trait[] { TraitList.minion,
                                                                           TraitList.chaotic,
                                                                           TraitList.backLine
                                                                             }));
 
         enemyStatsDict.Add(MonsterNameList.lancer, new EnemyStats(MonsterNameList.lancer,
-                                                                                    thirtyFiveArmor,
-                                                                                            1,
-                            AbilityList.getAbility(null, AbilityList.executeKey) as Ability,
+                                                                                    fortyArmor,
+                                                                                            60,
+                            AbilityList.getAbility(null, AbilityList.skewerKey) as Ability,
                                                                 new Trait[] { TraitList.master,
-                                                                            TraitList.predatory
+                                                                            TraitList.territorial
                                                                             }));
 
         enemyStatsDict.Add(MonsterNameList.lieutenant, new EnemyStats(MonsterNameList.lieutenant,
-                                                                                    thirtyFiveArmor,
-                                                                                            1,
-                            AbilityList.getAbility(null, AbilityList.executeKey) as Ability,
+                                                                                    fortyArmor,
+                                                                                            60,
+                            AbilityList.getAbility(null, AbilityList.squadStrikeKey) as Ability,
                                                                 new Trait[] { TraitList.master,
-                                                                          TraitList.predatory
+                                                                          TraitList.territorial
                                                                             }));
 
         enemyStatsDict.Add(MonsterNameList.lineBreaker, new EnemyStats(MonsterNameList.lineBreaker,
-                                                                                    thirtyFiveArmor,
-                                                                                            1,
-                            AbilityList.getAbility(null, AbilityList.executeKey) as Ability,
+                                                                                    fortyArmor,
+                                                                                            60,
+                            AbilityList.getAbility(null, AbilityList.skullBashKey) as Ability,
                                                                 new Trait[] { TraitList.master,
-                                                                          TraitList.predatory
+                                                                          TraitList.chaotic
                                                                             }));        
         
+        enemyStatsDict.Add(MonsterNameList.signaleer, new EnemyStats(MonsterNameList.signaleer,
+                                                                                    thirtyArmor,
+                                                                                            45,
+new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.guardArrowBarrageKey) as Ability),
+                                                                new Trait[] { 
+                                                                                TraitList.master,
+                                                                                TraitList.rapidInaccurateBombardment,
+                                                                                TraitList.backLine
+                                                                            }));
+
         enemyStatsDict.Add(MonsterNameList.spearman, new EnemyStats(MonsterNameList.spearman,
-                                                                                    thirtyFiveArmor,
-                                                                                            100,
-                            AbilityList.getAbility(null, AbilityList.executeKey) as Ability,
+                                                                                    thirtyArmor,
+                                                                                            40,
+                            AbilityList.getAbility(null, AbilityList.guardSpearKey) as Ability,
                                                                 new Trait[] { TraitList.master,
-                                                                          TraitList.predatory
+                                                                            TraitList.territorial
                                                                             }));
 
         #endregion

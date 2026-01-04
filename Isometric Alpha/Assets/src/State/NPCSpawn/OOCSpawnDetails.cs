@@ -173,24 +173,24 @@ public abstract class OOCSpawnDetails
         target.getGameObject().AddComponent<RectTransform>();
     }
 
-    public static void setMouseHoverTileMap(string spriteName, Transform transform)
-    {
-        foreach(Transform child in transform)
-        {
-            if(child.GetComponent<NPCMouseHover>() != null)
-            {
-                GameObject.Destroy(child.gameObject);
-            }
-        }
+    // public static void setMouseHoverTileMap(string spriteName, Transform transform)
+    // {
+    //     foreach(Transform child in transform)
+    //     {
+    //         if(child.GetComponent<NPCMouseHover>() != null)
+    //         {
+    //             GameObject.Destroy(child.gameObject);
+    //         }
+    //     }
 
-        Tilemap npcMouseHover = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.mouseHoverTileMap), transform).GetComponent<Tilemap>();
+    //     Tilemap npcMouseHover = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.mouseHoverTileMap), transform).GetComponent<Tilemap>();
 
-        Tile tile = ScriptableObject.CreateInstance<Tile>();
+    //     Tile tile = ScriptableObject.CreateInstance<Tile>();
 
-        tile.sprite = Resources.Load<Sprite>(spriteName);
+    //     tile.sprite = Resources.Load<Sprite>(spriteName);
 
-        npcMouseHover.SetTile(new Vector3Int(-1, -1), tile);
-    }
+    //     npcMouseHover.SetTile(new Vector3Int(-1, -1), tile);
+    // }
 }
 
 public interface IQuestActivationObject
@@ -1045,7 +1045,7 @@ public class NPCOffGridSpawnDetails : NPCSpawnDetails
     {
         base.spawnActions(gameObject);
 
-        setMouseHoverTileMap(spriteName, gameObject.transform);
+        // setMouseHoverTileMap(spriteName, gameObject.transform);
     }
 
     // public override void spawnActions(DialogueTrigger mainTrigger)
@@ -1101,15 +1101,12 @@ public class CustomMouseHoverNPCSpawnDetails : NPCSpawnDetails
     public void setUpMouseHover(GameObject gameObject)
     {
 
-        foreach(Transform child in gameObject.transform)
-        {
-            GameObject.Destroy(child.gameObject);
-        }
+        // foreach(Transform child in gameObject.transform)
+        // {
+        //     GameObject.Destroy(child.gameObject);
+        // }
 
-        if(hasSprite())
-        {
-            setMouseHoverTileMap(spriteName, gameObject.transform);
-        } else
+        if(!hasSprite())
         {
             NameTagGenerator nameTagGenerator = gameObject.GetComponent<NameTagGenerator>();
 
@@ -1205,6 +1202,16 @@ public class GateSpawnDetails : CustomMouseHoverNPCSpawnDetails
         if(!hasSprite())
         {
             gate.spriteRenderer.enabled = false;
+
+            foreach(Transform child in gateGameObject.transform)
+            {
+                Collider2D childCollider = child.GetComponent<Collider2D>();
+                if(childCollider != null)
+                {
+                    childCollider.enabled = false;
+                }
+            }
+
         } else if(flipSprite())
         {
             gateGameObject.transform.localScale = Constants.flippedXScale;
@@ -1492,7 +1499,7 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
             addTutorialTargetComponent(gameObject, spriteRenderer, tutorialTargetHash);
         }
 
-        setMouseHoverTileMap(getSpriteName(), gameObject.transform);
+        // setMouseHoverTileMap(getSpriteName(), gameObject.transform);
     }
 
     public override void spawnActions(DialogueTrigger dialogueTrigger)

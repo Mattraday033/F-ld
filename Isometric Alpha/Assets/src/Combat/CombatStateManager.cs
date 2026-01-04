@@ -377,7 +377,7 @@ public class CombatStateManager : MonoBehaviour
 
 	public void checkForWinOrLossStates()
 	{
-        if(whoseTurn == WhoseTurn.Won || whoseTurn == WhoseTurn.Lost)
+        if(whoseTurn == WhoseTurn.Start || whoseTurn == WhoseTurn.Won || whoseTurn == WhoseTurn.Lost)
         {
             return;
         }

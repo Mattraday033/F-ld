@@ -4,21 +4,24 @@ using UnityEngine;
 
 public static class EnemyPackInfoList
 {
-    private const int quantityOfTwo = 2;
-    private const int quantityOfThree = 3;
-    private const int quantityOfFour = 4;
-
-    public const string kendeTheCook = "KendeTheCook";
-    public const string kendeTheCookWithoutSummon = "KendeTheCookWithoutSummon";
-    public const string slaveWarrior = "Slave Warrior";
-    public const string kitchenGuards = "GuardJavalineer";
-
-    public const string chiefTabor = "ChiefTabor";
-
     public readonly static string[] flagsToCheckForSlaveAllies = new string[] { FlagNameList.convincedSlavesToHelpYou, FlagNameList.kastorStartedRevolt };
 
+    public readonly static EnemyPackInfo testFight = new EnemyPackInfo(new EnemyAmount[] {      
+                                                                                                EnemyAmountList.twoDisciplinarians,
+                                                                                                EnemyAmountList.twoExecutioners,
+                                                                                                EnemyAmountList.twoJavelineers,
+                                                                                                EnemyAmountList.twoLancers,
+                                                                                                EnemyAmountList.twoLieutenants,
+                                                                                                EnemyAmountList.twoLineBreakers,
+                                                                                                EnemyAmountList.twoSignaleers,
+                                                                                                EnemyAmountList.twoSpearmen
+                                                                                                },
+                                                                                                DropTableList.slaveMineDT1Name);
+
+    #region Named Lovashi Guard Fights
+
     public readonly static EnemyPackInfo guardVazulFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.guardVazul }, DropTableList.slaveMineDT1Name,
-                                                                                    new ItemListID[]  {new ItemListID(ItemList.usableItemListIndex, ItemList.chewIndex, quantityOfThree),
+                                                                                    new ItemListID[]  {new ItemListID(ItemList.usableItemListIndex, ItemList.chewIndex, Constants.sizeThree),
                                                                                                         new ItemListID(ItemList.weaponsListIndex, ItemList.bronzeDirkIndex)});
 
     public readonly static EnemyPackInfo guardAndrasWithKeyFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.guardAndras }, DropTableList.slaveMineDT1Name,
@@ -31,7 +34,7 @@ public static class EnemyPackInfoList
     public readonly static EnemyPackInfo imreFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.imre }, DropTableList.slaveMineDT1Name);
 
     public readonly static EnemyPackInfo ml3GuardsWithBarricades = new EnemyPackInfo(new EnemyAmount[] { 
-                                                                                                        EnemyAmountList.barricade, 
+                                                                                                        // EnemyAmountList.barricade, 
                                                                                                         EnemyAmountList.guardReka, 
                                                                                                         EnemyAmountList.guardPazman, 
                                                                                                         EnemyAmountList.overseerGaspar, 
@@ -63,19 +66,67 @@ public static class EnemyPackInfoList
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name);
 
-    public readonly static EnemyPackInfo testFight = new EnemyPackInfo(new EnemyAmount[] {      
-                                                                                                // EnemyAmountList.twoDisciplinarians,
-                                                                                                // EnemyAmountList.twoExecutioners,
-                                                                                                // EnemyAmountList.twoJavelineers,
-                                                                                                // EnemyAmountList.twoLancers,
-                                                                                                // EnemyAmountList.twoLieutenants,
-                                                                                                // EnemyAmountList.twoLineBreakers,
-                                                                                                EnemyAmountList.twoSpearmen
+    #endregion
+
+    #region  Generic Lovashi Guard Fights
+
+    public readonly static EnemyPackInfo barricadeGuardsFront = new EnemyPackInfo(new EnemyAmount[] {      
+                                                                                                EnemyAmountList.oneSignaleer,
+                                                                                                EnemyAmountList.oneDisciplinarian,
+                                                                                                EnemyAmountList.twoSpearmen,
+                                                                                                EnemyAmountList.twoAxemen
                                                                                                 },
                                                                                                 DropTableList.slaveMineDT1Name);
 
+    public readonly static EnemyPackInfo barricadeGuardsBehind = new EnemyPackInfo(new EnemyAmount[] {      
+                                                                                                        EnemyAmountList.oneSignaleer,
+                                                                                                        EnemyAmountList.oneDisciplinarian,
+                                                                                                        EnemyAmountList.twoSpearmen,
+                                                                                                        EnemyAmountList.twoAxemen
+                                                                                                     },
+                                                                                    DropTableList.slaveMineDT1Name);
+
+    public readonly static EnemyPackInfo oneSignaleerOneAxemanOneSpearmenTwoJavalineers = new EnemyPackInfo(new EnemyAmount[] {      
+                                                                                                        EnemyAmountList.oneSignaleer,
+                                                                                                        EnemyAmountList.oneAxeman,
+                                                                                                        EnemyAmountList.oneSpearman,
+                                                                                                        EnemyAmountList.twoJavelineers
+                                                                                                     },
+                                                                                    DropTableList.slaveMineDT1Name);
+
+    public readonly static EnemyPackInfo oneDisciplinarianTwoSpearmenTwoJavalineers = new EnemyPackInfo(new EnemyAmount[] {      
+                                                                                                        EnemyAmountList.oneDisciplinarian,
+                                                                                                        EnemyAmountList.twoSpearmen,
+                                                                                                        EnemyAmountList.twoJavelineers
+                                                                                                     },
+                                                                                    DropTableList.slaveMineDT1Name);
+
+    public readonly static EnemyPackInfo oneLieutenantOneAxemanOneSpearmanThreeJavalineers = new EnemyPackInfo(new EnemyAmount[] {     
+                                                                                                        EnemyAmountList.oneLieutenant, 
+                                                                                                        EnemyAmountList.oneAxeman,
+                                                                                                        EnemyAmountList.oneSpearman,
+                                                                                                        EnemyAmountList.threeJavelineers
+                                                                                                     },
+                                                                                    DropTableList.slaveMineDT1Name);
+
+    public readonly static EnemyPackInfo twoSpearmenTwoAxemenTwoJavalineers = new EnemyPackInfo(new EnemyAmount[] {      
+                                                                                                        EnemyAmountList.twoSpearmen,
+                                                                                                        EnemyAmountList.twoAxemen,
+                                                                                                        EnemyAmountList.twoJavelineers
+                                                                                                     },
+                                                                                    DropTableList.slaveMineDT1Name);
+
+    public readonly static EnemyPackInfo twoAxemenTwoSpearmenTwoJavalineers = new EnemyPackInfo(new EnemyAmount[] {      
+                                                                                                        EnemyAmountList.twoAxemen,
+                                                                                                        EnemyAmountList.twoSpearmen,
+                                                                                                        EnemyAmountList.twoJavelineers
+                                                                                                     },
+                                                                                    DropTableList.slaveMineDT1Name);
+
+    #endregion
+
     public readonly static BossPackInfo campNorthEastOverseerBoss = new BossPackInfo(new EnemyAmount[] { 
-                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                        EnemyAmountList.oneDisciplinarian
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                                         FlagNameList.neCampOverseerKilled,
@@ -242,16 +293,6 @@ public static class EnemyPackInfoList
                                                                                                     new ItemListID[] { new ItemListID(  ItemList.keyItemListIndex,
                                                                                                                                         ItemList.mineArmoryKeyIndex) });
 
-    private readonly static EnemyPackInfo testOneOfEach = new EnemyPackInfo(new EnemyAmount[]   { 
-                                                                                                    EnemyAmountList.oneScreecherBat,
-                                                                                                    // EnemyAmountList.oneArmoredBat, 
-                                                                                                    // EnemyAmountList.oneDenMother, 
-                                                                                                    // EnemyAmountList.oneGiantBat, 
-                                                                                                    EnemyAmountList.oneBatSwarm,
-                                                                                                    // EnemyAmountList.caveMatron
-                                                                                                },
-                                                                                                DropTableList.slaveMineDT1Name);
-
     public static EnemyPackInfo getEnemyPackInfo(string areaName, int index)
     {
         if (!enemyPackInfoDict.ContainsKey(areaName))
@@ -281,7 +322,7 @@ public static class EnemyPackInfoList
         #region GuardHouse NE
         list = new List<EnemyPackInfo>();
 
-        list.Add(testFight);
+        list.Add(twoAxemenTwoSpearmenTwoJavalineers);
 
         enemyPackInfoDict.Add(LocationNameList.guardHouseNorthEast, list);
         #endregion
@@ -289,7 +330,7 @@ public static class EnemyPackInfoList
         #region GuardHouse SW
         list = new List<EnemyPackInfo>();
 
-        list.Add(testFight);
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
 
         enemyPackInfoDict.Add(LocationNameList.guardHouseSouthWest, list);
         #endregion
@@ -305,11 +346,11 @@ public static class EnemyPackInfoList
         #region Center Camp
         list = new List<EnemyPackInfo>();
 
-        list.Add(testFight);
-        list.Add(testFight);
-        list.Add(testFight);
-        list.Add(testFight);
-        list.Add(testFight);
+        list.Add(oneDisciplinarianTwoSpearmenTwoJavalineers);
+        list.Add(oneLieutenantOneAxemanOneSpearmanThreeJavalineers);
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+        list.Add(oneSignaleerOneAxemanOneSpearmenTwoJavalineers);
+        list.Add(twoAxemenTwoSpearmenTwoJavalineers);
 
         enemyPackInfoDict.Add(LocationNameList.campCenter, list);
         #endregion
@@ -317,11 +358,11 @@ public static class EnemyPackInfoList
         #region South East Camp
         list = new List<EnemyPackInfo>();
 
-        list.Add(testFight);
-        list.Add(testFight);
-        list.Add(testFight);
-        list.Add(testFight);
-        list.Add(testFight);
+        list.Add(twoAxemenTwoSpearmenTwoJavalineers);
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+        list.Add(oneLieutenantOneAxemanOneSpearmanThreeJavalineers);
+        list.Add(oneSignaleerOneAxemanOneSpearmenTwoJavalineers);
+        list.Add(oneDisciplinarianTwoSpearmenTwoJavalineers);
 
         enemyPackInfoDict.Add(LocationNameList.campSouthEast, list);
         #endregion
@@ -329,9 +370,9 @@ public static class EnemyPackInfoList
         #region Manse Camp
         list = new List<EnemyPackInfo>();
 
-        list.Add(testFight);
-        list.Add(testFight);
-        list.Add(testFight);
+        list.Add(oneDisciplinarianTwoSpearmenTwoJavalineers);
+        list.Add(oneLieutenantOneAxemanOneSpearmanThreeJavalineers);
+        list.Add(oneSignaleerOneAxemanOneSpearmenTwoJavalineers);
 
         enemyPackInfoDict.Add(LocationNameList.campManse, list);
         #endregion
@@ -349,16 +390,14 @@ public static class EnemyPackInfoList
         #region MineLvl_2-1b
         list = new List<EnemyPackInfo>();
 
-        list.Add(oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat);
+        list.Add(testFight);
+        // list.Add(oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat);
 
         enemyPackInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1b, list);
         #endregion
 
         #region MineLvl_2-1c
         list = new List<EnemyPackInfo>();
-
-        // list.Add(testFight);
-        // list.Add(testFight);
 
         list.Add(oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat);
         list.Add(twoGiantBatsThreeBatSwarmsOneArmoredBat);
@@ -428,9 +467,9 @@ public static class EnemyPackInfoList
         #region MineLvl_3-1a
         list = new List<EnemyPackInfo>();
 
-        list.Add(testOneOfEach);
-        list.Add(testOneOfEach);
-        list.Add(testOneOfEach);
+        list.Add(oneArmoredBatOneScreecherOneDenMother);
+        list.Add(oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat);
+        list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
 
         enemyPackInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section1a, list);
         #endregion

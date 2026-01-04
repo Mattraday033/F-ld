@@ -243,10 +243,10 @@ public static class AbilityList
 
         //guard abilities
         enemyAbilityDictionary.Add(slashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(slashKey, "The bite of a sword swung quick."), DamageParams.build("4", "3"))));
-        enemyAbilityDictionary.Add(bladeBlitzKey, new Ability(CombatActionSettings.build(DescriptionParams.build(bladeBlitzKey, "Wow Irén, your mom lets you have two axes?"), DamageParams.build("20", "15"), TargetParams.build(Range.tripleHorizontalIndex))));
+        enemyAbilityDictionary.Add(bladeBlitzKey, new Ability(CombatActionSettings.build(DescriptionParams.build(bladeBlitzKey, "Two axe strikes, lightning fast."), DamageParams.build("20", "15"), TargetParams.build(Range.tripleHorizontalIndex))));
         enemyAbilityDictionary.Add(guardSpearKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardSpearKey, "A piercing blow capable of skewering multiple foes."), DamageParams.build("11", "4"), TargetParams.build(Range.doubleVerticalIndex))));
         enemyAbilityDictionary.Add(guardAxeKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardAxeKey, "A wide sweep from a sharp axe."), DamageParams.build("8", "10"), TargetParams.build(Range.tripleHorizontalIndex))));
-        enemyAbilityDictionary.Add(guardArrowBarrageKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardArrowBarrageKey, "A hail of deadly missles."), DamageParams.build("10", "15"))));
+        enemyAbilityDictionary.Add(guardArrowBarrageKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardArrowBarrageKey, "A hail of deadly missles called from nearby arrow towers."), DamageParams.build("10", "15"))));
         enemyAbilityDictionary.Add(guardJavelinKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardJavelinKey, "A missile aimed right at your heart."), DamageParams.build("8", "5"), TargetParams.build(Range.doubleVerticalIndex))));
         enemyAbilityDictionary.Add(guardLashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardLashKey, "The bane of slaves everywhere.", "Lashings"), DamageParams.build("8", "40"), TargetParams.build(Range.quadrupleVerticalIndex))));
         enemyAbilityDictionary.Add(guardCoordinateKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardCoordinateKey, "A leader takes charge and directs their troops in battle, increasing their damage.", "Cohesion"), TargetParams.build(Range.hexadecupleBoxIndex), TraitList.cohesion)));

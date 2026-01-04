@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class AreaManager : MonoBehaviour
 {
-    public static UnityEvent OnAreaSpawn;
+    public readonly static UnityEvent OnAreaSpawn = new UnityEvent();
 
     public static string locationName;
     private static AreaManager instance;
@@ -24,6 +24,7 @@ public class AreaManager : MonoBehaviour
     #endregion
 
     public NotificationManager notificationManager;
+    public HeartBeatManager[] heartBeatManagers;
 
     public QuestStepActivationScript[] scripts;
 
@@ -33,7 +34,6 @@ public class AreaManager : MonoBehaviour
     [RuntimeInitializeOnLoadMethod]
     private static void instantiateAreaManager()
     {
-        OnAreaSpawn = new UnityEvent();
         locationName = null;
         instance = null;
         saveBlueprint = null;
@@ -56,6 +56,11 @@ public class AreaManager : MonoBehaviour
         instance = this;
         notificationManager.Awake();
         
+        foreach(HeartBeatManager heartBeatManager in heartBeatManagers)
+        {
+            heartBeatManager.Awake();
+        }
+
         runAllScriptsOnLocationEntry();
 
         addMapData();

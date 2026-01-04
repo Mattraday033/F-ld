@@ -24,6 +24,9 @@ public static class EnemyAmountList
     #endregion
 
     #region Lovashi Guards
+    public readonly static EnemyAmount oneAxeman = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.axeman));
+    public readonly static EnemyAmount twoAxemen = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.axeman));
+
     public readonly static EnemyAmount oneDisciplinarian = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.disciplinarian));
     public readonly static EnemyAmount twoDisciplinarians = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.disciplinarian));
 
@@ -32,6 +35,7 @@ public static class EnemyAmountList
 
     public readonly static EnemyAmount oneJavelineer = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
     public readonly static EnemyAmount twoJavelineers = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
+    public readonly static EnemyAmount threeJavelineers = new EnemyAmount(threeEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
 
     public readonly static EnemyAmount oneLancer = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.lancer));
     public readonly static EnemyAmount twoLancers = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.lancer));
@@ -41,6 +45,10 @@ public static class EnemyAmountList
 
     public readonly static EnemyAmount oneLineBreaker = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.lineBreaker));
     public readonly static EnemyAmount twoLineBreakers = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.lineBreaker));
+
+
+    public readonly static EnemyAmount oneSignaleer = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.signaleer));
+    public readonly static EnemyAmount twoSignaleers = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.signaleer));
 
     public readonly static EnemyAmount oneSpearman = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.spearman));
     public readonly static EnemyAmount twoSpearmen = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.spearman));

@@ -9,14 +9,23 @@ public class NPCMouseHover : MonoBehaviour
     //Needs to be attached to an object with a 2DCollider Component
 
     public IRevealable npc;
+    public PolygonCollider2D polygonCollider2D;
+    public SpriteRenderer spriteRenderer;
 
     void Start()
     {
-        npc = GetComponent<IRevealable>();
+        npc = transform.parent.GetComponent<IRevealable>();
         
-        Vector3Int currentCell = AreaManager.getMasterGrid().WorldToCell(transform.position);
+        Vector3Int currentCell = AreaManager.getMasterGrid().WorldToCell(transform.parent.position);
 
         transform.position = new Vector3(transform.position.x, transform.position.y, -1f + ((( zPosMultiplier * (float) currentCell.x) + ( zPosMultiplier * (float) currentCell.y))/2f));
+
+        if(spriteRenderer == null)
+        {
+            spriteRenderer = transform.parent.GetComponent<SpriteRenderer>();
+        }
+
+        Helpers.updatePolygonCollider(spriteRenderer, polygonCollider2D);
     }
 
     private void OnMouseEnter()

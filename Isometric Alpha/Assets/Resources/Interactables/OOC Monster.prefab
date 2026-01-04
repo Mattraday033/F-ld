@@ -105,7 +105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialHash: 
-  packName: ???
   movesEveryTurn: 0
   neverMoves: 0
   animationManager: {fileID: 931909941065032088}
@@ -114,7 +113,7 @@ MonoBehaviour:
   intimidateCounter: 0
   retreatStunnedCounter: 0
   attachedCollider2D: {fileID: 158998442895171975}
-  hoverTarget: {fileID: 0}
+  gizmosToDraw: []
 --- !u!1839735485 &5795555889662786569
 Tilemap:
   m_ObjectHideFlags: 0
@@ -236,9 +235,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 187361839520295260}
-  currentIdle: 0
   shadowSprite: {fileID: 4136148854305267487}
+  polygonCollider2D: {fileID: 7099107780644013801}
+  healthBarManager: {fileID: 0}
+  characterToAnimate: 
+  heartBeatRow: 0
   animancer: {fileID: 3500790127400912763}
+  key: 0
 --- !u!114 &3500790127400912763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,38 +370,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4474464932253563614, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 4474464932253563614, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4474464932253563614, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
-        type: 3}
       propertyPath: m_LocalPosition.z
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4474464932253563614, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4474464932253563614, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4474464932253563614, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4474464932253563614, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4474464932253563614, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
         type: 3}
@@ -415,6 +388,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5919107343244956837, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
+        type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 187361839520295260}
     - target: {fileID: 6473877421389885030, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
         type: 3}
       propertyPath: m_Name
@@ -448,6 +426,12 @@ PrefabInstance:
 --- !u!4 &6327679041283808704 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4474464932253563614, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 7622360743908583198}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &7099107780644013801 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 814316315059823095, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
     type: 3}
   m_PrefabInstance: {fileID: 7622360743908583198}
   m_PrefabAsset: {fileID: 0}

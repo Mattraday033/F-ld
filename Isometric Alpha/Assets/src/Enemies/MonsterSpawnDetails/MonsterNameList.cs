@@ -13,12 +13,14 @@ public static class MonsterNameList
     public const string caveMatron = "Cave Matron";
 
     public const string lovashiPackName = "Lovashi";
+    public const string axeman = "Axeman";
     public const string disciplinarian = "Disciplinarian";
     public const string executioner = "Executioner";
     public const string javelineer = "Javelineer";
     public const string lancer = "Lancer";
     public const string lieutenant = "Lieutenant";
     public const string lineBreaker = "Line Breaker";
+    public const string signaleer = "Signaleer";
     public const string spearman = "Spearman";
 
     public const string movableObject = "Movable Object";
@@ -34,12 +36,14 @@ public static class MonsterNameList
 
         switch(enemyType)
         {
+            case axeman:            
             case disciplinarian:
             case executioner:
             case javelineer:
             case lancer:
             case lieutenant:
             case lineBreaker:
+            case signaleer:
             case spearman:
                 return lovashiPackName;
             default:

@@ -87,7 +87,7 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
         }
     }
 
-    public BoxCollider2D mouseHoverCollider;
+    public PolygonCollider2D mouseHoverCollider;
     public Facing facing = Facing.NorthEast;
     public ChestState chestState = ChestState.Closed;
     public ChestType chestType = ChestType.Chest;
@@ -181,33 +181,8 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
     private void setMouseHoverPosition()
     {
-        switch(chestType)
-        {
-            case ChestType.Shelf:
-                mouseHoverCollider.size = mouseHoverLargeSize;
-                mouseHoverCollider.offset = mouseHoverOffsetLarge;
-                break;
-            default:
-                mouseHoverCollider.size = mouseHoverSmallSize;
-                switch(facing)
-                {
-                    case Facing.NorthEast:
-                        mouseHoverCollider.offset = mouseHoverOffsetNE;
-                        break;
-                    case Facing.NorthWest:
-                        mouseHoverCollider.offset = mouseHoverOffsetNW;
-                        break;
-                    case Facing.SouthEast:
-                        mouseHoverCollider.offset = mouseHoverOffsetSE;
-                        break;
-                    case Facing.SouthWest:
-                        mouseHoverCollider.offset = mouseHoverOffsetSW;
-                        break;
-                }
-                break;;
-        }
-
-        Helpers.updateGameObjectPosition(gameObject);
+        Helpers.updatePolygonCollider(spriteRenderer, mouseHoverCollider);
+        // Helpers.updateGameObjectPosition(gameObject);
     }
 
     public void playerOpensChest()

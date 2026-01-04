@@ -177,15 +177,10 @@ public class EnemyStats : Stats
             }
 
             OnMinionSummonDeath.Invoke();
-
         }
         else if (notResurrectable())
         {
             Destroy(combatSprite);
-        }
-        else
-        {
-            base.setToDeadSprite();
         }
 
         OnEnemyDeath.Invoke();

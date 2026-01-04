@@ -504,4 +504,14 @@ public static class Helpers
         return stringWithSpaces.Substring(startIndex,endIndex - startIndex);
     }
 
+    public static void updatePolygonCollider(SpriteRenderer spriteRenderer, PolygonCollider2D polygonCollider2D)
+    {
+        List<Vector2> pointsList = new List<Vector2>();
+
+        spriteRenderer.sprite.GetPhysicsShape(0, pointsList); 
+
+        polygonCollider2D.points = pointsList.ToArray();
+    }
+
+
 } 

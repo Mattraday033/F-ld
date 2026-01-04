@@ -6,16 +6,22 @@ using UnityEngine.Events;
 public class HeartBeatManager : MonoBehaviour
 {
 
-    public const float beatLengthSeconds = 1.2f;
-    private static bool beatIsEven = false;
-    private static int currentRow = 0;
-    private static float timestamp = 0f;
+    private static HeartBeatManager fastHeartBeatManager;
+    private static HeartBeatManager slowHeartBeatManager;
 
-    private static Dictionary<int, int> beatsPerRow;
+    public const float slowBeatLengthSeconds = .75f;
+    public const float fastBeatLengthSeconds = .05f;
+    private bool beatIsEven = false;
+    public int currentRow = 0;
+    public float timestamp = 0f;
+    public bool isFast = false;
 
-    public readonly static UnityEvent<int, bool> HeartBeat = new UnityEvent<int, bool>();
+    private Dictionary<int, int> beatsPerRow;
 
-    private void Awake()
+    public readonly static UnityEvent<int> SlowHeartBeat = new UnityEvent<int>();
+    public readonly static UnityEvent<int> FastHeartBeat = new UnityEvent<int>();
+
+    public void Awake()
     {
         timestamp = 0f;
 
@@ -25,31 +31,37 @@ public class HeartBeatManager : MonoBehaviour
         {
             beatsPerRow[rowIndex] = 0;
         }
+
+        if(isFast)
+        {
+            fastHeartBeatManager = this;
+        } else
+        {
+            slowHeartBeatManager = this;
+        }
     }
 
     void Update()
     {
-        timestamp += Time.deltaTime;
+        float addedTime = Time.deltaTime;
 
-        if(timestamp > beatLengthSeconds)
+        timestamp += addedTime;
+
+        if(timestamp > getBeatLength())
         {
-            timestamp -= beatLengthSeconds;
+            timestamp -= getBeatLength();
             invokeHeartBeat();
         }
     }
 
-    private static void trackBeatsPerRow(int row)
-    {
-        beatsPerRow[row]++;
-        beatsPerRow[currentRow+CombatGrid.allyRowUpperBounds]++;
-    }
-
-    private static void invokeHeartBeat()
+    private void invokeHeartBeat()
     {
         trackBeatsPerRow(currentRow);
 
-        HeartBeat.Invoke(currentRow, beatIsEven);
-        HeartBeat.Invoke(currentRow+CombatGrid.allyRowUpperBounds, beatIsEven);
+        UnityEvent<int> heartBeat = getHeartBeat(isFast);
+
+        heartBeat.Invoke(currentRow);
+        heartBeat.Invoke(currentRow+CombatGrid.allyRowUpperBounds);
 
         beatIsEven = !beatIsEven;
         currentRow++;
@@ -60,7 +72,35 @@ public class HeartBeatManager : MonoBehaviour
         }
     }
 
-    public static int getBeatsSentToRow(int row)
+    private float getBeatLength()
+    {
+        if(isFast)
+        {
+            return fastBeatLengthSeconds;
+        } else
+        {
+            return slowBeatLengthSeconds;
+        }
+    }
+
+    private void trackBeatsPerRow(int row)
+    {
+        beatsPerRow[row]++;
+        beatsPerRow[currentRow+CombatGrid.allyRowUpperBounds]++;
+    }
+
+    public static int getHeartBeatsSentToRow(string monsterName, int row)
+    {
+        if(useFastHeartBeatInAnimation(monsterName))
+        {
+            return fastHeartBeatManager.getBeatsSentToRow(row);
+        } else
+        {
+            return slowHeartBeatManager.getBeatsSentToRow(row);
+        }
+    }
+
+    private int getBeatsSentToRow(int row)
     {
         if(beatsPerRow == null)
         {
@@ -70,6 +110,33 @@ public class HeartBeatManager : MonoBehaviour
         return beatsPerRow[row];
     }
 
+    private static UnityEvent<int> getHeartBeat(bool isFast)
+    {
+        if(isFast)
+        {
+            return FastHeartBeat;
+        }else
+        {
+            return SlowHeartBeat;
+        }
+    }
+    public static UnityEvent<int> getHeartBeat(string enemyType)
+    {
+        return getHeartBeat(useFastHeartBeatInAnimation(enemyType));
+    }
+
+    private static bool useFastHeartBeatInAnimation(string enemyType)
+    {
+        switch(enemyType)
+        {
+            case MonsterNameList.denMother:
+            case MonsterNameList.batSwarm:
+            case MonsterNameList.giantBat:         
+                return true;
+            default:
+                return false;
+        }
+    }
 }
 
 public static class IdleDictionary
@@ -115,7 +182,7 @@ public static class IdleDictionary
 
         Sprite[] currentIdleSprites = idleDict[new KeyValuePair<string, CharacterAnimationType>(monsterName, animationType)];
 
-        int beats = HeartBeatManager.getBeatsSentToRow(row);
+        int beats = HeartBeatManager.getHeartBeatsSentToRow(monsterName, row);
 
         int currentSpriteIndex = beats % currentIdleSprites.Length;
 
