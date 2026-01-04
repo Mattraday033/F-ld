@@ -2285,6 +2285,17 @@ The slaves we free will rally around you, but it won't be easy to direct the mob
 
 I would also pick your battles. Not every guard needs to die in the actual riot to achieve victory. Once we take the Manse and defeat the Director, the rest of the guards will know that the battle is lost.
 
+{
+-not givenTutorialQuest:
+
+changeCamTarget({kastorIndex})
+
+setToTrue(givenTutorialQuest)
+activateQuestStep(Look for Thatch, Cross the road.1)
+
+There is a slave by the name of Thatch who lives in the hut just northeast of here. He is a giant of a man, and would be a boon to our cause if we recruit him. Make seeking him out a priority before we start our fight with the overseer.
+}
+
     +Very well. Anything else?
     {
     -hadSlavesAfterKillingOverseerCampNEConvo:

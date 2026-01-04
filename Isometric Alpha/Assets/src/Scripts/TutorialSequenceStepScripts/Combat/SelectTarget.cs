@@ -17,7 +17,7 @@ public class SelectTarget : TutorialSequenceStepScript
         }
         else
         {
-            loadedCombatAction = currentAbilityManager.getCurrentlySelectedLoadedCombatAction();
+            loadedCombatAction = currentAbilityManager.getCurrentlySelectedAction();
         }
 
         SelectorManager.getInstance().finishChoosingLocation(loadedCombatAction);

@@ -245,7 +245,7 @@ public class CombatStateManager : MonoBehaviour
 
 		SelectorManager.displayHoverUIForCurrentSelectorTarget();
 
-		DamagePreviewManager.resetAllDamagePreviews();
+		DamagePreviewManager.wipeAllDamagePreviews();
 
 		TutorialSequence.endCurrentTutorialSequence();
 
@@ -281,6 +281,8 @@ public class CombatStateManager : MonoBehaviour
 		{
 			getInstance().gameOverPopUpButton.spawnPopUp();
 		}
+        
+        SelectorManager.declareSelectors();
 	}
 
 	public void resolveTurn()
@@ -352,7 +354,7 @@ public class CombatStateManager : MonoBehaviour
 
 		if (!stateAllowsDamagePreviews())
 		{
-			DamagePreviewManager.resetAllDamagePreviewsOnStateChange();
+			DamagePreviewManager.wipeAllDamagePreviews();
 		}
 
 		// Debug.LogError("CombatStateManager.currentActivity = " + CombatStateManager.currentActivity.ToString());
@@ -373,6 +375,7 @@ public class CombatStateManager : MonoBehaviour
 
 		getInstance().updateAllObjectsAfterStateChange();
 		CombatUI.setCurrentActivityText(currentActivity);
+        SelectorManager.declareSelectors();
 	}
 
 	public void checkForWinOrLossStates()

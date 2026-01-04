@@ -891,7 +891,7 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
 
         if(checkForResistance(target))
         {
-            DamageNumberPopup.createResistPopUp(target.combatSprite.transform.position, CombatAnimationManager.getInstance().damageNumberCanvas);
+            DamageNumberPopup.createResistPopUp(CombatGrid.getPositionAt(target.position), CombatAnimationManager.getInstance().damageNumberCanvas);
             return;
         }
 

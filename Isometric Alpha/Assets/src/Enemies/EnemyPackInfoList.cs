@@ -7,13 +7,14 @@ public static class EnemyPackInfoList
     public readonly static string[] flagsToCheckForSlaveAllies = new string[] { FlagNameList.convincedSlavesToHelpYou, FlagNameList.kastorStartedRevolt };
 
     public readonly static EnemyPackInfo testFight = new EnemyPackInfo(new EnemyAmount[] {      
-                                                                                                EnemyAmountList.twoDisciplinarians,
-                                                                                                EnemyAmountList.twoExecutioners,
-                                                                                                EnemyAmountList.twoJavelineers,
-                                                                                                EnemyAmountList.twoLancers,
-                                                                                                EnemyAmountList.twoLieutenants,
-                                                                                                EnemyAmountList.twoLineBreakers,
-                                                                                                EnemyAmountList.twoSignaleers,
+                                                                                                EnemyAmountList.barricade, 
+                                                                                                // EnemyAmountList.twoDisciplinarians,
+                                                                                                // EnemyAmountList.twoExecutioners,
+                                                                                                // EnemyAmountList.twoJavelineers,
+                                                                                                // EnemyAmountList.twoLancers,
+                                                                                                // EnemyAmountList.twoLieutenants,
+                                                                                                // EnemyAmountList.twoLineBreakers,
+                                                                                                // EnemyAmountList.twoSignaleers,
                                                                                                 EnemyAmountList.twoSpearmen
                                                                                                 },
                                                                                                 DropTableList.slaveMineDT1Name);
@@ -34,7 +35,7 @@ public static class EnemyPackInfoList
     public readonly static EnemyPackInfo imreFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.imre }, DropTableList.slaveMineDT1Name);
 
     public readonly static EnemyPackInfo ml3GuardsWithBarricades = new EnemyPackInfo(new EnemyAmount[] { 
-                                                                                                        // EnemyAmountList.barricade, 
+                                                                                                        EnemyAmountList.barricade, 
                                                                                                         EnemyAmountList.guardReka, 
                                                                                                         EnemyAmountList.guardPazman, 
                                                                                                         EnemyAmountList.overseerGaspar, 
@@ -71,6 +72,7 @@ public static class EnemyPackInfoList
     #region  Generic Lovashi Guard Fights
 
     public readonly static EnemyPackInfo barricadeGuardsFront = new EnemyPackInfo(new EnemyAmount[] {      
+                                                                                                EnemyAmountList.barricade,
                                                                                                 EnemyAmountList.oneSignaleer,
                                                                                                 EnemyAmountList.oneDisciplinarian,
                                                                                                 EnemyAmountList.twoSpearmen,
@@ -175,6 +177,7 @@ public static class EnemyPackInfoList
                                                                                                         new KeyHalfScript());
 
     public readonly static BossPackInfo directorWithBarricades = new BossPackInfo(new EnemyAmount[] { 
+                                                                                                        EnemyAmountList.barricade,
                                                                                                         EnemyAmountList.oneExecutioner
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,

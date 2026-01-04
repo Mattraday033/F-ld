@@ -604,25 +604,25 @@ public struct TutorialSequenceStep : IDescribable
                 return abilityMenuManager.getCurrentlySelectedAbilityMenuButton().casterCanPayActionCost();
             case TutorialMessageList.selectingAllyKey:
 
-                Collider2D collider = Helpers.getCollision(SelectorManager.currentSelector.getCollider());
+                // Collider2D collider = Helpers.getCollision(SelectorManager.currentSelector.getCollider());
 
-                if (collider == null)
-                {
-                    return false;
-                }
+                // if (collider == null)
+                // {
+                //     return false;
+                // }
 
 
-                if (Helpers.getCollision(SelectorManager.currentSelector.getCollider()).gameObject.tag.Equals(LayerAndTagManager.playerTag) &&
-                    Input.GetKey(KeyBindingList.combatAcceptChoiceKey) && !SelectorManager.getInstance().isMoving)
-                {
-                    return true;
-                }
+                // if (Helpers.getCollision(SelectorManager.currentSelector.getCollider()).gameObject.tag.Equals(LayerAndTagManager.playerTag) &&
+                //     Input.GetKey(KeyBindingList.combatAcceptChoiceKey) && !SelectorManager.getInstance().isMoving)
+                // {
+                //     return true;
+                // }
 
-                if (Helpers.getCollision(SelectorManager.currentSelector.getCollider()).gameObject.tag.Equals(LayerAndTagManager.npcTag) &&
-                    Input.GetKey(KeyBindingList.combatAcceptChoiceKey) && !SelectorManager.getInstance().isMoving)
-                {
-                    return true;
-                }
+                // if (Helpers.getCollision(SelectorManager.currentSelector.getCollider()).gameObject.tag.Equals(LayerAndTagManager.npcTag) &&
+                //     Input.GetKey(KeyBindingList.combatAcceptChoiceKey) && !SelectorManager.getInstance().isMoving)
+                // {
+                //     return true;
+                // }
 
                 return false;
             case TutorialMessageList.selectingTargetKey:
@@ -635,7 +635,7 @@ public struct TutorialSequenceStep : IDescribable
                 }
                 else
                 {
-                    loadedCombatAction = AbilityMenuManager.getInstance().getCurrentlySelectedLoadedCombatAction();
+                    loadedCombatAction = AbilityMenuManager.getInstance().getCurrentlySelectedAction();
                 }
 
                 if (loadedCombatAction.movesTarget() && currentSelector.targetsImmobileTarget())
@@ -682,7 +682,7 @@ public struct TutorialSequenceStep : IDescribable
             case TutorialMessageList.repositionStepKey:
 
                 currentSelector = SelectorManager.currentSelector;
-                loadedCombatAction = AbilityMenuManager.getInstance().getCurrentlySelectedLoadedCombatAction();
+                loadedCombatAction = AbilityMenuManager.getInstance().getCurrentlySelectedAction();
 
                 if (loadedCombatAction.tertiaryCoordsRequiresEmptySpace() && CombatGrid.getCombatantAtCoords(currentSelector.getCoords()) != null)
                 {
@@ -720,9 +720,9 @@ public class TutorialSequence
 
     public static bool fromButton;
     public static TutorialSequence currentTutorialSequence;
-    public static UnityEvent OnEnableButtons = new UnityEvent();
-    public static UnityEvent<TutorialSequenceStep> TutorialSequenceTargetFinder = new UnityEvent<TutorialSequenceStep>();
-    public static UnityEvent DestroyAllTutorialMessageWindows = new UnityEvent();
+    public readonly static UnityEvent OnEnableButtons = new UnityEvent();
+    public readonly static UnityEvent<TutorialSequenceStep> TutorialSequenceTargetFinder = new UnityEvent<TutorialSequenceStep>();
+    public readonly static UnityEvent DestroyAllTutorialMessageWindows = new UnityEvent();
 
     public static List<TutorialSequence> tutorialSequenceQueue = new List<TutorialSequence>();
 

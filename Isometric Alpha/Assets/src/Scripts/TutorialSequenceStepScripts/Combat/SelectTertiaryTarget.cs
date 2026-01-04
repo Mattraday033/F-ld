@@ -8,7 +8,7 @@ public class SelectTertiaryTarget : TutorialSequenceStepScript
     public override void runScript(GameObject target)
     {
         Selector currentSelector = SelectorManager.currentSelector;
-        CombatAction loadedCombatAction = AbilityMenuManager.getInstance().getCurrentlySelectedAbility();
+        CombatAction loadedCombatAction = AbilityMenuManager.getInstance().getCurrentlySelectedAction();
 
 
         loadedCombatAction.setTertiaryCoords(currentSelector.getCoords());

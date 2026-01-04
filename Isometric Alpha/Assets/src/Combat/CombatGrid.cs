@@ -102,7 +102,7 @@ public static class CombatGrid
 	{
 		Stats combatant = getCombatantAtCoords(newCoords);
 		
-		if(combatant == null)
+		if(combatant == null || combatant.combatSprite == null)
 		{
 			return;
 		}
@@ -396,6 +396,21 @@ public static class CombatGrid
 		
 		return scrubDuplicatesFromList(allEnemyCombatants);
 	}
+
+    public static Stats findOriginalCombatant(Stats repositionClone)
+    {
+        List<Stats> stats = getAllCombatants();
+
+        foreach(Stats stat in stats)
+        {
+            if(stat != null && stat.repositionClone != null && stat.repositionClone.Equals(repositionClone))
+            {
+                return stat;
+            }
+        }
+
+        return null;
+    }
 
 	public static List<Stats> getAllCombatants()
 	{

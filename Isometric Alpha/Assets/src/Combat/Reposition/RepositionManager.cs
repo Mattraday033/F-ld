@@ -236,6 +236,11 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 	{
 		foreach(Stats combatant in combatants)
 		{
+            if(combatant == null || combatant.combatSprite == null)
+            {
+                continue;
+            }
+
 			combatant.combatSprite.SetActive(activateSprites);
 		}
 	}

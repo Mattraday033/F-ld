@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class PartySpawner : MonoBehaviour
 {
-	public Canvas combatantInfoCanvas;
-	
 	public static PartySpawner instance;
 	
 	public static PartySpawner getInstance()

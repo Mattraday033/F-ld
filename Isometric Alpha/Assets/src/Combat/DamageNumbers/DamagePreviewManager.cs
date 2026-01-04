@@ -4,9 +4,93 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class DamagePreviewManager : MonoBehaviour
+public static class DamagePreviewManager
 {
+
+    public readonly static UnityEvent<CombatAction> UpdateDamagePreviews = new UnityEvent<CombatAction>();
+	public static Dictionary<Stats, HealthBarManager> damagePreviewHealthBarDict = new Dictionary<Stats, HealthBarManager>();
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeDamagePreviewManager()
+    {
+        damagePreviewHealthBarDict = new Dictionary<Stats, HealthBarManager>();
+    }
+
+	public static HealthBarManager applyAllPreviewDamageToHealthBar(Stats stats, HealthBarManager healthBar, CombatAction actionToPreview)
+	{
+        CombatAction actionClone = actionToPreview.clone();
+
+        actionClone.setToPreviewMode();
+        int healthBarOccurances = actionToPreview.getSelector().countHealthBarOccurances(healthBar);
+
+        if(healthBarOccurances <= 0)
+        {
+            healthBarOccurances = 1;
+        }
+
+        List<Stats> cloneTarget = new List<Stats>();
+        cloneTarget.Add(stats.getPreviewClone());
+
+        actionClone.performCombatAction(cloneTarget);
+
+        for (int index = 0; index < healthBarOccurances; index++)
+        {
+            healthBar.addPreviewHealth(stats.currentHealth - cloneTarget[Constants.indexZero].currentHealth);
+        }
+
+        return healthBar;
+	}
+
+    public static void addDamagePreview(Stats stats, HealthBarManager healthBar, CombatAction combatAction)
+    {
+        if(damagePreviewHealthBarDict.ContainsKey(stats) || stats == null || combatAction == null ||
+			stats.isDead() || improperTargetForAction(stats, combatAction))
+        {
+            return;
+        }
+
+        healthBar = applyAllPreviewDamageToHealthBar(stats, healthBar, combatAction);
+
+        damagePreviewHealthBarDict[stats] = healthBar;
+    }
+
+    public static void wipeAllDamagePreviews()
+    {
+        foreach(KeyValuePair<Stats, HealthBarManager> kvp in damagePreviewHealthBarDict)
+        {
+            kvp.Key.updateHealthBar();
+        }
+
+        damagePreviewHealthBarDict = new Dictionary<Stats, HealthBarManager>();
+    }
+
+    public static void removeDamagePreview(Stats stats)
+    {
+        if(damagePreviewHealthBarDict.ContainsKey(stats))
+        {
+            damagePreviewHealthBarDict.Remove(stats);
+            stats.updateHealthBar();
+        }
+    }
+
+	private static bool improperTargetForAction(Stats actualTarget, CombatAction actionToPreview)
+	{
+		if ((actionToPreview.targetsAllySection() && CombatGrid.positionIsOnEnemySide(actualTarget.position)) ||
+            (!actionToPreview.targetsAllySection() && CombatGrid.positionIsOnAlliedSide(actualTarget.position)) ||
+                actualTarget.queuedToMove())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+}
+
+/*
 	private static DamagePreviewManager instance;
 
 	public static Dictionary<GridCoords, HealthBarManager> damagePreviewHealthBarContainer = new Dictionary<GridCoords, HealthBarManager>();
@@ -73,7 +157,7 @@ public class DamagePreviewManager : MonoBehaviour
 				Stats currentActualTarget = (Stats)actualTargets[index];
 				Stats currentCloneTarget = (Stats)cloneTargets[index];
 
-                currentCloneTarget.healthBarManager = null;
+                currentCloneTarget.healthBar = null;
 
 				addDamagePreviewToHealthBar(currentActualTarget, currentCloneTarget);
 			}
@@ -141,37 +225,37 @@ public class DamagePreviewManager : MonoBehaviour
 			return;
 		}
 
-		HealthBarManager healthBarManager = actualTarget.healthBarManager;
+		HealthBarManager healthBar = actualTarget.healthBar;
 
-		if ((healthBarAlreadyHasHoverPreview(healthBarManager) && isHoverPreview) || (healthBarAlreadyHasPreview(healthBarManager) && !isHoverPreview))
+		if ((healthBarAlreadyHasHoverPreview(healthBar) && isHoverPreview) || (healthBarAlreadyHasPreview(healthBar) && !isHoverPreview))
 		{
 			if (!actualTarget.hasHealthBarWithPreview())
 			{
-				healthBarManager.addPreviewHealth(actualTarget.currentHealth - cloneTarget.currentHealth);
+				healthBar.addPreviewHealth(actualTarget.currentHealth - cloneTarget.currentHealth);
 			} 
 			return;
 		}
 
-		if (healthBarAlreadyHasHoverPreview(healthBarManager) && !isHoverPreview)
+		if (healthBarAlreadyHasHoverPreview(healthBar) && !isHoverPreview)
 		{
-			damagePreviewHealthBarContainer[actualTarget.position] = healthBarManager;
+			damagePreviewHealthBarContainer[actualTarget.position] = healthBar;
 			return;
 		}
 
-		if (healthBarAlreadyHasPreview(healthBarManager) && isHoverPreview)
+		if (healthBarAlreadyHasPreview(healthBar) && isHoverPreview)
 		{
 			return;
 		}
 
-		healthBarManager.addPreviewHealth(actualTarget.currentHealth - cloneTarget.currentHealth);
+		healthBar.addPreviewHealth(actualTarget.currentHealth - cloneTarget.currentHealth);
 
 		if (isHoverPreview)
 		{
-			hoverDamagePreviewHealthBarContainer[actualTarget.position] = healthBarManager;
+			hoverDamagePreviewHealthBarContainer[actualTarget.position] = healthBar;
 		}
 		else
 		{
-			damagePreviewHealthBarContainer[actualTarget.position] = healthBarManager;
+			damagePreviewHealthBarContainer[actualTarget.position] = healthBar;
 		}
 	}
 
@@ -198,7 +282,7 @@ public class DamagePreviewManager : MonoBehaviour
 		{
 			Stats hoverTarget = CombatGrid.getCombatantAtCoords(CombatTileHover.previousGridCoords);
 
-            if (((hoverTarget != null && kvp.Value == hoverTarget.healthBarManager) || 
+            if (((hoverTarget != null && kvp.Value == hoverTarget.healthBar) || 
                 kvp.Key.Equals(CombatTileHover.previousGridCoords)) && !improperTargetForAction(hoverTarget))
             {
                 hoverDamagePreviewHealthBarContainer[kvp.Key] = damagePreviewHealthBarContainer[kvp.Key];
@@ -260,29 +344,4 @@ public class DamagePreviewManager : MonoBehaviour
 		}
 	}
 
-}
-
-
-/*
-	public static void removeAllUpdatedPreviews()
-	{
-		for (int row = CombatGrid.rowUpperBounds; row <= CombatGrid.rowLowerBounds; row++)
-		{
-			for (int col = CombatGrid.colLeftBounds; col <= CombatGrid.colRightBounds; col++)
-			{
-				GridCoords currentCoords = new GridCoords(row, col);
-				Stats stats = CombatGrid.getCombatantAtCoords(currentCoords);
-
-				if (hoverDamagePreviewHealthBarContainer.ContainsKey(currentCoords) && stats != null && !stats.hasHealthBarWithPreview())
-				{
-					hoverDamagePreviewHealthBarContainer.Remove(currentCoords);
-				}
-
-				if (damagePreviewHealthBarContainer.ContainsKey(currentCoords) && stats != null && !stats.hasHealthBarWithPreview())
-				{
-					damagePreviewHealthBarContainer.Remove(currentCoords);
-				}
-			}
-		}
-	}
 */

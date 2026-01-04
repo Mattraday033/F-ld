@@ -14,7 +14,7 @@ public class MoveCurrentSelector : TutorialSequenceStepScript
 
         SpawnHoverPanel.runInstanceOfScript();
 
-        DamagePreviewManager.resetAllDamagePreviews();
-        DamagePreviewManager.setUpDamagePreviews();
+        DamagePreviewManager.wipeAllDamagePreviews();
+        SelectorManager.updateAllDamagePreviews();
     }
 }

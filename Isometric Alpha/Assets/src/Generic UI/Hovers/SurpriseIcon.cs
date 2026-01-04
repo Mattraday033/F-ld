@@ -36,9 +36,21 @@ public class SurpriseIcon : SlotIconHover
         switch (CombatStateManager.whoIsSurprised)
         {
             case SurpriseState.PlayerSurprised:
-                return Color.red;
+                if(CombatStateManager.turnNumber > Constants.sizeOne)
+                {
+                    return ColorList.surpriseIconGrey;
+                } else
+                {
+                    return Color.red;
+                }
             case SurpriseState.EnemySurprised:
+                if(CombatStateManager.turnNumber > PartyStats.getPartySurpriseRounds())
+                {
+                    return ColorList.surpriseIconGrey;
+                } else
+                {
                 return Color.green;
+                }
             default:
                 return ColorList.surpriseIconGrey;
         }

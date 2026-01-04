@@ -89,7 +89,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         bool isAlly = CombatGrid.positionIsOnAlliedSide(healthBarManager.linkedStats.position);
         bool containsSprites = IdleDictionary.idleDictContainsSprites(characterToAnimate, newIdle);
 
-        if(newIdle == CharacterAnimationType.Secondary_Idle &&
+        if((newIdle == CharacterAnimationType.Secondary_Idle || newIdle == CharacterAnimationType.Death) &&
             containsSprites)
         {
             currentIdle = newIdle;
@@ -220,20 +220,32 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         foreach (CharacterAnimationType type in loopedAnimationTypesTypes)
         {
-            if(IdleDictionary.idleDictContainsSprites(characterToAnimate, type))
-            {
-                continue;
-            }
-
-            Sprite[] sprites = Resources.LoadAll<Sprite>(folderPath+type.ToString());
-
-            if(sprites == null || sprites.Length <= 0)
-            {
-                continue;
-            }
-
-            IdleDictionary.addSpritesToIdleDict(characterToAnimate, type, sprites);
+            addIdleSpritesOfType(characterToAnimate, folderPath, type);
         }
+
+        addIdleSpritesOfType(characterToAnimate, folderPath, CharacterAnimationType.Death);
+    }
+
+    private static void addIdleSpritesOfType(string characterToAnimate, string folderPath, CharacterAnimationType type)
+    {
+        if(IdleDictionary.idleDictContainsSprites(characterToAnimate, type))
+        {
+            return;
+        }
+
+        Sprite[] sprites = Resources.LoadAll<Sprite>(folderPath+type.ToString());
+
+        if(sprites == null || sprites.Length <= 0)
+        {
+            return;
+        }
+
+        if(type == CharacterAnimationType.Death)
+        {
+            sprites = new Sprite[1]{sprites[sprites.Length-1]};    
+        } 
+
+        IdleDictionary.addSpritesToIdleDict(characterToAnimate, type, sprites);
     }
 
     private static Dictionary<CharacterAnimationType, AnimationClip> getTempAnimations(string folderPath)

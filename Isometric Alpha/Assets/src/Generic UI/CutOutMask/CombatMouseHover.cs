@@ -4,11 +4,6 @@ using UnityEngine;
 
 public abstract class CombatMouseHover : MonoBehaviour
 {
-    protected void createHoverDamagePreview()
-    {
-        DamagePreviewManager.setUpHoverDamagePreview(getTargetStats());
-    }
-
     public void createHoverTag()
     {
         SelectorManager.displayHoverUI(getTargetStats());
@@ -20,10 +15,7 @@ public abstract class CombatMouseHover : MonoBehaviour
 
         SelectorManager.createPressEPrompt();
 
-        if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation)
-        {
-            DamagePreviewManager.setUpDamagePreviews();
-        }
+        SelectorManager.updateAllDamagePreviews();
     }
 
     public void OnMouseDown()
@@ -62,7 +54,7 @@ public abstract class CombatMouseHover : MonoBehaviour
                     }
                     else
                     {
-                        if (canMoveToLocation(AbilityMenuManager.getInstance().getCurrentlySelectedAbility()))
+                        if (canMoveToLocation(AbilityMenuManager.getInstance().getCurrentlySelectedAction()))
                         {
                             moveSelectorToTarget();
                         }
@@ -76,7 +68,7 @@ public abstract class CombatMouseHover : MonoBehaviour
                     }
                     else
                     {
-                        if (canMoveToLocation(AbilityMenuManager.getInstance().getCurrentlySelectedAbility()))
+                        if (canMoveToLocation(AbilityMenuManager.getInstance().getCurrentlySelectedAction()))
                         {
                             moveSelectorToTarget();
                         }
@@ -93,7 +85,7 @@ public abstract class CombatMouseHover : MonoBehaviour
     protected bool useHoverTiles()
     {
         return CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation && 
-            AbilityMenuManager.getInstance().getCurrentlySelectedLoadedCombatAction().targetsOnlyEmptySpace();
+            AbilityMenuManager.getInstance().getCurrentlySelectedAction().targetsOnlyEmptySpace();
     }
 
     protected abstract Stats getTargetStats();

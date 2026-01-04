@@ -174,7 +174,7 @@ public class Selector : ScriptableObject, ICloneable
 	public CapsuleCollider2D getCollider()
 	{
 		if(selectorObject == null)
-		{ //Instantiate(CombatGrid.getCombatantAtCoords(x,y).combatSprite, CombatGrid.fullCombatGrid[x][y] + CombatGrid.getCombatantAtCoords(x,y).adjustment, Quaternion.identity);
+		{ 
 			selectorObject = Instantiate(Resources.Load<GameObject>(name), CombatGrid.getPositionAt(startRow, startCol),Quaternion.identity);
 			collider = selectorObject.GetComponent<CapsuleCollider2D>();
 		} else if(collider == null)
@@ -376,6 +376,22 @@ public class Selector : ScriptableObject, ICloneable
         }
 
         return cloneTargets;
+    }
+
+    public int countHealthBarOccurances(HealthBarManager healthBar)
+    {
+        List<Stats> allActionTargets = getAllTargets();
+        int healthBarOccurances = 0;
+
+        foreach (Stats target in allActionTargets)
+        {
+			if(target.healthBarManager == healthBar)
+            {
+                healthBarOccurances++;
+            }
+        }
+
+        return healthBarOccurances;
     }
 
     public void setToCurrentSelector()

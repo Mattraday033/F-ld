@@ -90,12 +90,34 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual void setToDeadSprite()
     {
+        if (CombatStateManager.whoseTurn != WhoseTurn.Resolving && CombatStateManager.whoseTurn != WhoseTurn.Start )
+        {
+            return;
+        }
+
+        if (notResurrectable())
+        {
+            destroyCombatSprite();
+            removeFromGrid();
+        } else
+        {
+            healthBarManager.hide();
+        }
         
+        if(CombatStateManager.whoseTurn == WhoseTurn.Start)
+        {
+            animationManager.setCurrentIdle(CharacterAnimationType.Death);
+        }
+        
+        if(CombatStateManager.whoseTurn != WhoseTurn.Start)
+        {
+            prepareOnDeathEffects();
+        }
     }
 
     public virtual void bringBackFromDeath()
     {
-        
+        healthBarManager.show();
     }
 
     public virtual GridCoords getPositionToHit(Selector selector, int skips)
@@ -151,6 +173,26 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     public virtual void removeOutline()
     {
         outline.removeOutline();
+    }
+
+    public virtual void destroyCombatSprite()
+    {
+        Destroy(combatSprite);
+    }
+
+    public virtual void removeFromGrid()
+    {
+        CombatGrid.setCombatantAtCoords(position, null);
+    }
+
+    public virtual bool isInsideCoordinates(GridCoords coords)
+    {
+        return coords.Equals(position);
+    }
+
+    public virtual bool isInsideCoordinates(GridCoords[] coords)
+    {
+        return coords.Contains(position);
     }
 
     #endregion
@@ -922,6 +964,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         }
     }
 
+    public virtual bool notResurrectable()
+    {
+        return Helpers.hasQuality<Trait>(traits, (t => t.preventsResurrection()));
+    } 
+
     #region Zone of Influence
 
     public virtual Trait getZoneOfInfluenceTrait()
@@ -1210,5 +1257,17 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     #endregion
 
+
+    public override bool Equals(object obj)
+    {
+        Stats stats = obj as Stats;
+
+        if (stats == null)
+        {
+            return false;
+        }
+
+        return stats.position.Equals(position) && stats.getName().Equals(getName());
+    }
 
 }

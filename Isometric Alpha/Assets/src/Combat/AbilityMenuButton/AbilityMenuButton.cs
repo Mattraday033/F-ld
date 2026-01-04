@@ -224,7 +224,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         loadedCombatAction = setCombatActionSelectorStartingPosition(loadedCombatAction);
         loadedCombatAction.setActor(CombatGrid.getCombatantAtCoords(SelectorManager.getInstance().selectors[0].getCoords()));
 
-        DamagePreviewManager.getInstance().setupDamagePreviews(loadedCombatAction);
+        SelectorManager.updateAllDamagePreviews();
 
         loadedCombatAction.getSelectorObject().SetActive(true);
 

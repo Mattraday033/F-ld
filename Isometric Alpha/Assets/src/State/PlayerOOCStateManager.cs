@@ -92,10 +92,7 @@ public static class PlayerOOCStateManager
 
         previousActivity = currentActivity;
 
-        // Debug.LogError("New previousActivity = " + previousActivity.ToString());
         currentActivity = newActivity;
-
-        // Debug.LogError("New currentActivity = " + currentActivity.ToString());
 
         switch (previousActivity)
         {
@@ -146,7 +143,10 @@ public static class PlayerOOCStateManager
                 OnStateChangeToInDialogue.Invoke();
                 break;
             case OOCActivity.inUI:
-                NotificationManager.OnDeleteAllNotifications.Invoke();
+                if(previousActivity != OOCActivity.inTutorialSequence)
+                {
+                    NotificationManager.OnDeleteAllNotifications.Invoke();
+                }
                 OnStateChangeToInUI.Invoke();
                 break;
             case OOCActivity.inMap:

@@ -24,6 +24,11 @@ public static class RepositionPlaceholderGenerator
 		placeHolderObject.transform.localScale = combatantToBeMoved.combatSprite.transform.localScale;
 		Helpers.updateGameObjectPosition(placeHolderObject);
 		
+        CombatantHover hover = placeHolderObject.AddComponent<CombatantHover>();
+
+        hover.linkedStats = combatantToBeMoved;
+        placeHolderObject.AddComponent<PolygonCollider2D>();
+
 		return placeHolderObject;
 	}
 

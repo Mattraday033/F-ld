@@ -50,9 +50,8 @@ public class RepositionAbility : Ability, IJSONConvertable
 
         if (!combatantToBeMoved.position.Equals(getDestinationCoords()))
         {
-            placeHolderObject = RepositionPlaceholderGenerator.generatePlaceholderObject(combatantToBeMoved, getDestinationCoords());
-
             setStatsClone(getCombatantToBeMoved().clone());
+
             statsClone.position = getDestinationCoords().clone();
             statsClone.addTrait(TraitList.repositioningInvulnerability);
             statsClone.addTrait(getAppliedTrait());
@@ -60,6 +59,8 @@ public class RepositionAbility : Ability, IJSONConvertable
 
             CombatGrid.setCombatantAtCoords(statsClone.position, statsClone);
             combatantToBeMoved.repositionClone = statsClone;
+
+            placeHolderObject = RepositionPlaceholderGenerator.generatePlaceholderObject(statsClone, getDestinationCoords());
         }
         else
         {

@@ -10,7 +10,7 @@ using System;
 public interface IHandlesAbilityWheelSelectionInput
 {
 	public int getCurrentlySelectedAbilityIndex();
-	public CombatAction getCurrentlySelectedAbility();
+	public CombatAction getCurrentlySelectedAction();
 	public void moveSelectedButtonClockwise();
 	public void moveSelectedButtonCounterClockwise();
 	public void chooseAbility(int abilityIndex);
@@ -274,11 +274,11 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         abilityButtons[previousIndex].updateCooldownCostText();
         getCurrentlySelectedAbilityMenuButton().updateCooldownCostText();
 
-        if (CombatStateManager.inCombat && getCurrentlySelectedAbility() != null && !getCurrentlySelectedAbility().unactivatable() &&
+        if (CombatStateManager.inCombat && getCurrentlySelectedAction() != null && !getCurrentlySelectedAction().unactivatable() &&
             !noButtonsSelectable)
         {
             getCurrentlySelectedAbilityMenuButton().enableCombatActionSelectorPreview();
-            CurrentActionHoverPanelManager.addPrimaryDescriptionPanel(getCurrentlySelectedAbility());
+            CurrentActionHoverPanelManager.addPrimaryDescriptionPanel(getCurrentlySelectedAction());
         }
     }
 
@@ -310,7 +310,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
             CurrentActionHoverPanelManager.removeCurrentPrimaryDescribable();
 
             getCurrentlySelectedAbilityMenuButton().enableCombatActionSelectorPreview();
-            CurrentActionHoverPanelManager.addPrimaryDescriptionPanel(getCurrentlySelectedAbility());
+            CurrentActionHoverPanelManager.addPrimaryDescriptionPanel(getCurrentlySelectedAction());
         }
     }
 
@@ -407,7 +407,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         displayOnly = true;
     }
 
-    public CombatAction getCurrentlySelectedLoadedCombatAction()
+    public CombatAction getCurrentlySelectedAction()
     {
         return abilityButtons[currentlySelectedAbilityIndex].loadedCombatAction;
     }
@@ -562,11 +562,6 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
     public int getCurrentlySelectedAbilityIndex()
     {
         return currentlySelectedAbilityIndex;
-    }
-
-    public CombatAction getCurrentlySelectedAbility()
-    {
-        return abilityButtons[currentlySelectedAbilityIndex].loadedCombatAction;
     }
 
     public void moveSelectedButtonClockwise()

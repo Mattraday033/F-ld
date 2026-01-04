@@ -155,10 +155,11 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                        new GridCoords(Constants.indexThree, Constants.indexOne), 
                                                                        true);
 
-        enemyStatsDict.Add(NPCNameList.barricade, new EnemyStats(NPCNameList.barricade,
-                                                                                thirtyArmor,
+        enemyStatsDict.Add(NPCNameList.barricade, new LargeEnemyStats(NPCNameList.barricade,
+                                                                                fiftyArmor,
                                                                                         125,
-                                                            new Trait[] { TraitList.minion,
+                                                            new Trait[] { 
+                                                                        TraitList.minion,
                                                                         TraitList.large,
                                                                         TraitList.blocker
                                                                         },

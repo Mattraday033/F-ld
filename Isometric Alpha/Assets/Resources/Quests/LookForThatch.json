@@ -1,6 +1,6 @@
 {
 	"title": "Look for Thatch",
-	"numberOfSteps": 8,
+	"numberOfSteps": 9,
 	"steps":[
 				{"stepName":"Cross the road.","MapZone":"Camp","MapLocation":"6SlaveShack","journalDescription":"Kastor needs a little more convincing before he entrusts me with the knowledge of his plans and comrades. He has tasked me with investigating the shack just northeast of his. He said he heard some screams coming from that direction last night and wishes to learn what happened."},
 				
@@ -16,7 +16,9 @@
 
 				{"stepName":"Kastor has been told.","MapZone":"","MapLocation":"","journalDescription":"I informed Kastor of what became of Slate. He seemed impressed with how I handled the situation and now trusts me enough to disclose more parts of the plan."},
 
-				{"stepName":"Thatch is willing.","MapZone":"","MapLocation":"","journalDescription":"Thatch has joined the fight."}
+				{"stepName":"Thatch is willing.","MapZone":"","MapLocation":"","journalDescription":"Thatch has joined the fight."},
+
+                {"stepName":"Cross the road.1","MapZone":"Camp","MapLocation":"6SlaveShack","journalDescription":"Kastor needs a little more convincing before he entrusts me with the knowledge of his plans and comrades. He has tasked me with investigating the shack just northeast of his."}
 			],
 
 	"deathSteps":

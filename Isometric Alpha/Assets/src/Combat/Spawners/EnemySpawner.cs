@@ -48,7 +48,7 @@ public class EnemySpawner : MonoBehaviour
 		
 		foreach(EnemyStats enemy in specificSpawns)
 		{
-			spawnLargeEnemy(enemy);
+			spawnLargeEnemy(enemy as LargeEnemyStats);
 		}	
 		
 		setupEnemyFrontLine();
@@ -121,7 +121,7 @@ public class EnemySpawner : MonoBehaviour
 			} else if(Helpers.hasQuality<Trait>(enemy.traits, t => t.stackInBack()))
 			{
 				backLine.Add(enemy);
-			} else if(enemy.spawnDetails.hasSpawnDetails)
+			} else if(enemy.isLarge())
 			{
 				specificSpawns.Add(enemy);
 			} else
@@ -297,9 +297,14 @@ public class EnemySpawner : MonoBehaviour
 		}
 	}
 	
-	public void spawnLargeEnemy(EnemyStats enemyTypeToSpawn)
+	public void spawnLargeEnemy(LargeEnemyStats enemyTypeToSpawn)
 	{
-		EnemyStats cloneOfEnemyType = (EnemyStats) enemyTypeToSpawn.Clone();
+        if(enemyTypeToSpawn == null)
+        {
+            return;
+        }
+
+		LargeEnemyStats cloneOfEnemyType = enemyTypeToSpawn.clone() as LargeEnemyStats;
 		SpawnDetails spawnDetails = cloneOfEnemyType.spawnDetails;
 		
 		if(spawnDetails.dontSpawnWhenSurprised && CombatStateManager.whoIsSurprised == SurpriseState.EnemySurprised)
@@ -320,8 +325,6 @@ public class EnemySpawner : MonoBehaviour
 			
             cloneOfEnemyType.instantiateCombatSprite();
 
-			cloneOfEnemyType.combatSprite.transform.position = CombatGrid.getPositionAt(spriteRow, spriteCol);
-			
 			foreach(GridCoords coords in spawnDetails.allSpawnPositions)
 			{
 				CombatGrid.combatantStatsGrid[coords.row].setCol(coords.col, cloneOfEnemyType);

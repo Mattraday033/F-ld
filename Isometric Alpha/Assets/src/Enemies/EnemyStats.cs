@@ -6,27 +6,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-[System.Serializable]
-public struct SpawnDetails
-{
-	public bool hasSpawnDetails;
-	public bool dontSpawnWhenSurprised;
-	
-	public GridCoords[] allSpawnPositions; //every coords that has a reference to the enemy's stats
-	public GridCoords baseStatsPosition;   //the coords put into the "position" of the base class
-	public GridCoords spritePosition;      //the coords that the sprite is placed at on the grid
-	
-	public SpawnDetails(GridCoords[] allSpawnPositions, GridCoords baseStatsPosition, GridCoords spritePosition, bool dontSpawnWhenSurprised)
-	{
-		this.allSpawnPositions = allSpawnPositions;
-		this.baseStatsPosition = baseStatsPosition;
-		this.spritePosition = spritePosition;
-		this.dontSpawnWhenSurprised = dontSpawnWhenSurprised;
-		
-		this.hasSpawnDetails = true;
-	}
-}
-
 public class EnemyStats : Stats
 {
     #region Unity Events
@@ -45,7 +24,6 @@ public class EnemyStats : Stats
     private bool lowPriorityAttacker;
     public int armor;
 
-    public SpawnDetails spawnDetails;
     private CombatAction combatAction;
 
     #endregion
@@ -66,15 +44,13 @@ public class EnemyStats : Stats
         this.currentHealth = totalHealth;
     }
 
-    public EnemyStats(string key, int armor, int tHP, Trait[] traits, SpawnDetails spawnDetails) :
+    public EnemyStats(string key, int armor, int tHP, Trait[] traits) :
     base(key)
     {
         this.armor = armor;
 
         this.totalHealth = tHP;
         this.currentHealth = totalHealth;
-
-        this.spawnDetails = spawnDetails;
 
         foreach (Trait trait in traits)
         {
@@ -126,66 +102,20 @@ public class EnemyStats : Stats
 
     public override GridCoords getPositionToHit(Selector selector, int skips)
     {
-
-        if (spawnDetails.allSpawnPositions == null || spawnDetails.allSpawnPositions.Length <= 1)
-        {
-            return position.clone();
-        }
-
-        GridCoords[] allSelectorCoords = selector.getAllSelectorCoords();
-        List<GridCoords> allCompatabilePositions = new List<GridCoords>();
-
-
-        foreach (GridCoords coords in allSelectorCoords)
-        {
-            if (spawnDetails.allSpawnPositions.Contains(coords))
-            {
-                allCompatabilePositions.Add(coords);
-            }
-        }
-
-        if (allCompatabilePositions.Count == 0 || skips >= allCompatabilePositions.Count)
-        {
-            return position.clone();
-        }
-        else
-        {
-            return allCompatabilePositions[skips];
-        }
+        return position.clone();
     }
 
     public override void setToDeadSprite()
     {
-        if (CombatStateManager.whoseTurn != WhoseTurn.Resolving)
-        {
-            return;
-        }
-
-        CombatStateManager.deadMonsterCount++;
+        base.setToDeadSprite();
 
         if (isMinion() || wasSummoned())
         {
-            Destroy(combatSprite);
-
-            if (isLarge())
-            {
-                destroyAllSpawnPositions();
-            }
-            else
-            {
-                CombatGrid.setCombatantAtCoords(position, null);
-            }
-
             OnMinionSummonDeath.Invoke();
         }
-        else if (notResurrectable())
-        {
-            Destroy(combatSprite);
-        }
 
+        CombatStateManager.deadMonsterCount++;
         OnEnemyDeath.Invoke();
-
-        prepareOnDeathEffects();
     }
 
     public override void bringBackFromDeath()
@@ -252,11 +182,6 @@ public class EnemyStats : Stats
         return lowPriorityAttacker;
     }
 
-    public virtual bool notResurrectable()
-    {
-        return Helpers.hasQuality<Trait>(traits, (t => t.preventsResurrection()));
-    }
-
     #endregion
 
     #region Traits
@@ -266,23 +191,19 @@ public class EnemyStats : Stats
         return hasTrait(TraitList.minion);
     }
 
-    public bool isLarge()
+    public virtual bool isLarge()
     {
-        return hasTrait(TraitList.large);
+        return false;
     }
     
+    public override bool notResurrectable()
+    {
+        return isMinion() || wasSummoned() || base.notResurrectable();
+    } 
+
     #endregion
 
     #region Miscellaneous
-
-    private void destroyAllSpawnPositions()
-    {
-        foreach (GridCoords coords in spawnDetails.allSpawnPositions)
-        {
-            CombatGrid.setCombatantAtCoords(coords, null);
-        }
-    }
-
     public override IDescribable getHoverPanelDescribable()
     {
         IDescribable hoverPanelDescribable = getCombatAction();

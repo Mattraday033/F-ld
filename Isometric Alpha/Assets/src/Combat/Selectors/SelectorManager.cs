@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using TMPro;
+using UnityEngine.Events;
 
 public class SelectorManager : MonoBehaviour 
 {
@@ -18,6 +18,8 @@ public class SelectorManager : MonoBehaviour
                                                                             LayerAndTagManager.enemyTag,
                                                                             LayerAndTagManager.npcTag,
                                                                             LayerAndTagManager.placeHolderTag};
+
+    public readonly static UnityEvent<List<Selector>> SelectorMoved = new UnityEvent<List<Selector>>();
 
 	private GameObject pressEPrompt;
 
@@ -36,9 +38,6 @@ public class SelectorManager : MonoBehaviour
 	public HoverPanelPopUpButton hoverPanelPopUpButton;
 
 	private Stats previousHoverTarget;
-	private bool playerActed = false;
-
-	public Selector testSelector;
 
 	private readonly static RowColumnChangeDelegate rowDecrement = (r => r - 1);
 	private readonly static RowColumnChangeDelegate rowIncrement = (r => r + 1);
@@ -151,7 +150,7 @@ public class SelectorManager : MonoBehaviour
 						currentAbilityManager.enableAbilityButtonCanvas();
 						CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingAbility);
 
-						DamagePreviewManager.resetAllDamagePreviews();
+						DamagePreviewManager.wipeAllDamagePreviews();
 
 						displayHoverUIForCurrentSelectorTarget();
 
@@ -180,7 +179,7 @@ public class SelectorManager : MonoBehaviour
 					currentSelector.setToOriginalColor();
 					currentSelector.SetActive(false);
 
-					CombatAction loadedCombatAction = currentAbilityManager.getCurrentlySelectedLoadedCombatAction();
+					CombatAction loadedCombatAction = currentAbilityManager.getCurrentlySelectedAction();
 
 					currentSelector = loadedCombatAction.getSelector();
 					currentSelector.SetActive(true);
@@ -294,12 +293,15 @@ public class SelectorManager : MonoBehaviour
 			   currentCombatant.getName().Length == 0 ||
 			   Helpers.hasQuality<Trait>(currentCombatant.hiddenTraits, hT => hT.isUntargetable()))
 			{
-				instance.hoverPanelPopUpButton.destroyPopUp();
-				return;
+                currentCombatant = CombatGrid.findOriginalCombatant(currentCombatant);
+
+                if(currentCombatant == null)
+                {
+                    return;
+                }
 			}
 
 			displayHoverUI(currentCombatant);
-
 
 			createPressEPrompt();
 		}
@@ -329,7 +331,7 @@ public class SelectorManager : MonoBehaviour
 		destroyPressEPrompt();
 
 		if (target == null || CombatActionManager.actorAlreadyHasCombatAction(getCurrentSelectorCoords()) ||
-			(SelectionInfo.selectionIsPartyMember(getCurrentSelectorCoords()) && CombatActionManager.finishedChoosingPartyMemberCombatActions()))
+			(CombatGrid.positionIsOnAlliedSide(getCurrentSelectorCoords()) && CombatActionManager.finishedChoosingPartyMemberCombatActions()))
 		{
 			return;
 		}
@@ -377,7 +379,7 @@ public class SelectorManager : MonoBehaviour
 		}
 		else
 		{
-			loadedCombatAction = currentAbilityManager.getCurrentlySelectedLoadedCombatAction();
+			loadedCombatAction = currentAbilityManager.getCurrentlySelectedAction();
 		}
 
 		if (loadedCombatAction.movesTarget() && currentSelector.targetsImmobileTarget())
@@ -450,7 +452,7 @@ public class SelectorManager : MonoBehaviour
 			selectors[0].setToLocation(loadedCombatAction.getActorStats().position);
 
 			CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
-			DamagePreviewManager.resetAllDamagePreviews();
+			DamagePreviewManager.wipeAllDamagePreviews();
 
 			previousHoverTarget = null;
 			displayHoverUIForCurrentSelectorTarget();
@@ -485,7 +487,7 @@ public class SelectorManager : MonoBehaviour
 			return;
 		}
 
-		CombatAction loadedCombatAction = currentAbilityManager.getCurrentlySelectedLoadedCombatAction();
+		CombatAction loadedCombatAction = currentAbilityManager.getCurrentlySelectedAction();
 
 		if (loadedCombatAction.tertiaryCoordsRequiresEmptySpace() && CombatGrid.getCombatantAtCoords(currentSelector.getCoords()) != null)
 		{
@@ -526,7 +528,7 @@ public class SelectorManager : MonoBehaviour
 
 		CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
 
-		DamagePreviewManager.resetAllDamagePreviews();
+		DamagePreviewManager.wipeAllDamagePreviews();
 	}
 
 	//may extend to all party members or make another method to handle selecting friendly minions
@@ -709,22 +711,52 @@ public class SelectorManager : MonoBehaviour
 			frameCount++;
 		}
 
-		if (moved && CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation)
-		{
-			DamagePreviewManager.setUpDamagePreviews();
-		}
-
 		if (moved)
 		{
+            updateAllDamagePreviews();
+
 			displayHoverUIForCurrentSelectorTarget();
+
+            declareSelectors();
 		}
 	}
+
+    public static void declareSelectors()
+    {
+        List<Selector> visibleSelectors = new List<Selector>();
+        SelectorManager selectorManager = getInstance();
+
+        if(selectorManager == null)
+        {
+            return;
+        } else if(CombatStateManager.whoseTurn != WhoseTurn.Player)
+        {
+            SelectorMoved.Invoke(visibleSelectors);
+            return;
+        }
+
+        switch(CombatStateManager.currentActivity)
+        {
+            case CurrentActivity.ChoosingLocation:
+                break;
+            default:
+                visibleSelectors.Add(selectorManager.selectors[Constants.indexZero]);
+                break;
+        }
+
+        if(currentSelector != selectorManager.selectors[Constants.indexZero])
+        {
+            visibleSelectors.Add(currentSelector);
+        }
+
+        SelectorMoved.Invoke(visibleSelectors);
+        updateAllDamagePreviews();
+    }
 
 	public void moveCurrentSelectorToNextSingleTileTarget()
 	{
 		if (isMoving && (frameCount % 150) == 0)
 		{
-
 			GridCoords targetPosition = GridCoords.getDefaultCoords();
 			bool dontWrap = true;
 
@@ -779,12 +811,10 @@ public class SelectorManager : MonoBehaviour
 			if (!targetPosition.Equals(GridCoords.getDefaultCoords()))
 			{
 				destroyPressEPrompt();
+
 				currentSelector.setToLocation(targetPosition);
 
-				if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation)
-				{
-					DamagePreviewManager.setUpDamagePreviews();
-				}
+                updateAllDamagePreviews();
 			}
 
 			updateCurrentSelectorPosition();
@@ -800,6 +830,16 @@ public class SelectorManager : MonoBehaviour
 			frameCount++;
 		}
 	}
+
+    public static void updateAllDamagePreviews()
+    {
+        DamagePreviewManager.wipeAllDamagePreviews();
+
+        if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation)
+        {
+            DamagePreviewManager.UpdateDamagePreviews.Invoke(AbilityMenuManager.getInstance().getCurrentlySelectedAction());
+        } 
+    }
 
 	private GridCoords findNextSingleTileTarget(RowColumnChangeDelegate rowChange, RowColumnChangeDelegate colChange)
 	{
@@ -1014,8 +1054,6 @@ public class SelectorManager : MonoBehaviour
 
 		return false;
 	}
-
-
 
 	private bool canMoveLeft()
 	{

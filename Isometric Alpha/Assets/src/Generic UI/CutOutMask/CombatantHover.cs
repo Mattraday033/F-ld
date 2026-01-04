@@ -1,52 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CombatantHover : CombatMouseHover
 {
-
+    public bool revealPriorityHeld = false;
     public Stats linkedStats;
+    private List<Selector> selectors = new List<Selector>();
 
     public void OnMouseEnter()
     {
         if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !useHoverTiles())
         {
+            revealPriorityHeld = true;
+
             onReveal(Constants.reveal);
 
             createHoverTag();
 
-            if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation && !DamagePreviewManager.hasPreviewAtCoords(getTargetStats().position))
-            {
-                createHoverDamagePreview();
-            }
-
+            SelectorManager.updateAllDamagePreviews();
         }
     }
 
     public void OnMouseExit()
     {
+        revealPriorityHeld = false;
+
         if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null)
         {
             if (getTargetGameObject() != null && !useHoverTiles())
             {
-                getSpriteOutline().removeOutline();
+                onReveal(insideSelectors());
             }
 
             SelectorManager.displayHoverUIForCurrentSelectorTarget();
-
-            if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation)
-            {
-                DamagePreviewManager.removeAllHoverPreviews();
-                DamagePreviewManager.setUpDamagePreviews();
-            }
         }
+
+        SelectorManager.updateAllDamagePreviews();
     }
 
     public void OnMouseOver()
     {
         if(AbilityMenuButton.hoveringOverAbilityMenuButton)
         {
-            getSpriteOutline().removeOutline();
+            getTargetStats().removeOutline();
         } else
         {
             onReveal(Constants.reveal);
@@ -55,7 +53,14 @@ public class CombatantHover : CombatMouseHover
 
     protected override Stats getTargetStats()
     {
-        return linkedStats;
+        Stats originalCombatant = CombatGrid.findOriginalCombatant(linkedStats);
+
+        if(originalCombatant == null)
+        {
+            return linkedStats;
+        }
+
+        return originalCombatant;
     }
 
     protected override GridCoords getTargetCoords()
@@ -63,19 +68,15 @@ public class CombatantHover : CombatMouseHover
         return linkedStats.position;
     }
 
-    public SpriteOutline getSpriteOutline()
-    {
-        return getTargetStats().outline;
-    }
 
     public void onReveal(bool toggleReveal)
     {
-        if(toggleReveal)
+        if(toggleReveal && (!linkedStats.isDead() || revealPriorityHeld))
         {
-            getSpriteOutline().createOutline(getRevealColor());
+            getTargetStats().setOutline();
         } else
         {
-            getSpriteOutline().removeOutline();
+            getTargetStats().removeOutline();
         }
     }
 
@@ -89,6 +90,53 @@ public class CombatantHover : CombatMouseHover
         {
             return ColorList.attacksOnSight;
         }
+    }
+
+    private void updateOutlineFromSelectors(List<Selector> selectors)
+    {
+        this.selectors = selectors;
+
+        if(revealPriorityHeld)
+        {
+            return;
+        }
+
+        onReveal(insideSelectors());
+    }
+
+    private bool insideSelectors()
+    {
+        foreach(Selector selector in selectors)
+        {
+            GridCoords[] gridCoords = selector.getAllSelectorCoords();
+
+            if(linkedStats.isInsideCoordinates(gridCoords))
+            {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
+    private void addDamagePreview(CombatAction combatAction)
+    {
+        if(revealPriorityHeld || linkedStats.isInsideCoordinates(combatAction.getSelector().getAllSelectorCoords()))
+        {
+            DamagePreviewManager.addDamagePreview(linkedStats, linkedStats.healthBarManager, combatAction);
+        }
+    }
+
+    private void OnEnable()
+    {
+        SelectorManager.SelectorMoved.AddListener(updateOutlineFromSelectors);
+        DamagePreviewManager.UpdateDamagePreviews.AddListener(addDamagePreview);
+    }
+
+    private void OnDisable()
+    {
+        SelectorManager.SelectorMoved.RemoveListener(updateOutlineFromSelectors);
+        DamagePreviewManager.UpdateDamagePreviews.RemoveListener(addDamagePreview);
     }
 
 }

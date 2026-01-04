@@ -127,7 +127,7 @@ public static class TraitList
 
 	public readonly static Trait evolutionary = new Trait("Evolutionary", interactionTypeTraitType, "Can be evolved into a better version of itself.", "Evolve", Color.black, isMandatoryTrait);
 	public readonly static Trait immobile = new Trait("Immobile", interactionTypeTraitType, "Takes no actions. Cannot be moved.", "Immobile", Color.black, isMandatoryTrait, preventsMovementTrait, isPacificstic);
-	public readonly static Trait large = new Trait("Large", sizeTraitType, "And in charge. This creature takes up multiple spaces and will take damage each time it is hit by the same attack. Cannot be moved.", "Large", Color.black, isMandatoryTrait, preventsMovementTrait);
+	public readonly static Trait large = new Trait("Large", sizeTraitType, "And in charge. This creature takes up multiple spaces, and will take damage each time one of its spaces is hit by the same attack. Cannot be moved.", "Large", Color.black, isMandatoryTrait, preventsMovementTrait);
 
 	//all specific target priorities
 	public readonly static SpecificTargetPriorityTrait specificCheckeredLeftAlliedSide = new SpecificTargetPriorityTrait("(6,2)", "SpecificTargetPriorityTrait", "", Color.black, new GridCoords(6, 2));

@@ -703,6 +703,11 @@ public class AllyStats : Stats
         }
     }
 
+    public override bool notResurrectable()
+    {
+        return false;
+    } 
+
     #region Zone of Influence
 
     public override Trait getZoneOfInfluenceTrait()

@@ -173,6 +173,7 @@ public static class QuestNameList
     public const string lookForThatchStepTitleFive = "In need of allies.";
     public const string lookForThatchStepTitleSix = "Kastor has been told.";
     public const string lookForThatchStepTitleSeven = "Thatch is willing.";
+    public const string lookForThatchStepTitleEight = "Cross the road.1";
 
     // Múzsa's Sweet Tooth
     public const string muzsasSweetToothQuestTitle = "Múzsa's Sweet Tooth";
