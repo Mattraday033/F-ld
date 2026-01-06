@@ -6,7 +6,7 @@ public class PlayerInteractScript : TutorialSequenceStepScript
 {
     public override void runScript(GameObject target)
     {
-        PlayerMovement.getInstance().interact();
+        PlayerInput.interact();
     }
 }
 

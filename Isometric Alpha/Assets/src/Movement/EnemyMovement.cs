@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
-using TMPro;
 
 public class PathSegment
 {
@@ -214,34 +212,6 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
         _StartingPosition = getWorldPosition();
         _EndingPosition = AreaManager.getMasterGrid().GetCellCenterWorld(MovementTracker.getCurrentCell(this) + _DirectionMod);
-    }
-
-    public override void updateFacing()
-    {
-        if (directionMod.Equals(Vector3Int.zero))
-        {
-            return;
-        }
-
-        if (directionMod.Equals(MovementManager.distance1TileNorthEastGrid))
-        {
-            setEnemyFacing(Facing.NorthEast);
-
-        }
-        else if (directionMod.Equals(MovementManager.distance1TileSouthEastGrid))
-        {
-            setEnemyFacing(Facing.SouthEast);
-
-        }
-        else if (directionMod.Equals(MovementManager.distance1TileSouthWestGrid))
-        {
-            setEnemyFacing(Facing.SouthWest);
-
-        }
-        else if (directionMod.Equals(MovementManager.distance1TileNorthWestGrid))
-        {
-            setEnemyFacing(Facing.NorthWest);
-        }
     }
 
     #endregion
@@ -578,7 +548,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
     public bool canBePutBackToStartingPosition()
     {
-        if(isMoving())
+        if(PlayerMovement.getInstance().canPlayRunAnimation())
         {
             return false;
         }
@@ -614,7 +584,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     {
         setCunningCounter(CunningManager.cunningRange / 2);
 
-        setEnemyFacing(CharacterFacing.getOpposingFacing(enemyFacing.getFacing()));
+        setFacing(CharacterFacing.getOpposingFacing(enemyFacing.getFacing()));
 
         // enemyDirectionIndicator.setColors(ColorList.cunningStunnedColor);
     }
@@ -770,7 +740,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
             retreatStunnedCounter = statsWrapper.retreatCounter;
         }
 
-        setEnemyFacing(statsWrapper.facing);
+        setFacing(statsWrapper.facing);
     }
 
     public void initializeAnimationManager()
@@ -782,66 +752,17 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         updateIdleDirection();
     }
 
-	public void setEnemyFacing(Facing newFacing)
+	public override void setFacing(Facing newFacing)
 	{
-		enemyFacing.setFacing(newFacing);
+		getCharacterFacing().setFacing(newFacing);
 
         updateAnimationDirection();
-
-        // if (enemyDirectionIndicator != null)
-        // {
-        //     enemyDirectionIndicator.setArrowDirection(enemyFacing);
-        // }
 	}
 
-    public void updateAnimationDirection()
-    {
-        if(isMoving())
-        {
-            updateRunDirection();
-        } else
-        {
-            updateIdleDirection();
-        }
-    }
-
-    public virtual void updateIdleDirection()
-    {
-        switch (enemyFacing.getFacing())
-        {
-            case Facing.NorthEast:
-                animationManager.playNorthEastIdle();
-                break;
-            case Facing.NorthWest:
-                animationManager.playNorthWestIdle();
-                break;
-            case Facing.SouthEast:
-                animationManager.playSouthEastIdle();
-                break;
-            default:
-                animationManager.playSouthWestIdle();
-                break;
-        }
-    }
-
-    public virtual void updateRunDirection()
-    {
-        switch (enemyFacing.getFacing())
-        {
-            case Facing.NorthEast:
-                animationManager.playNorthEastRun();
-                break;
-            case Facing.NorthWest:
-                animationManager.playNorthWestRun();
-                break;
-            case Facing.SouthEast:
-                animationManager.playSouthEastRun();
-                break;
-            default:
-                animationManager.playSouthWestRun();
-                break;
-        }
-    }
+	public override CharacterFacing getCharacterFacing()
+	{
+        return enemyFacing;
+	}
 
     //IRevealable interface methods
 
@@ -914,7 +835,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 	//IDescribableInBlocks
 
-	public virtual string getName()
+	public override string getName()
 	{
         return getEnemyPackInfo().getPackName();
 	}
@@ -987,6 +908,6 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 	public Vector2 getDimensions()
 	{
-		return (new Vector2(getRectTransform().rect.width / 4f, getRectTransform().rect.height / 4f) * PlayerMovement.getInstanceTransform().localScale);
+		return new Vector2(getRectTransform().rect.width / 4f, getRectTransform().rect.height / 4f) * PlayerObject.getInstanceTransform().localScale;
 	}
 }

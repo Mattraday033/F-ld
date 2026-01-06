@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public enum ChestType {Chest, Shelf }
 public enum ChestState { Closed, OpenFilled, OpenEmpty }
@@ -202,25 +200,18 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
         PlayerInteractionScript.runAllScripts(scripts);
 
+        PlayerOOCStateManager.OnStateChangeFromInChestUI.AddListener(destroyUI);
+        PlayerOOCStateManager.OnStateChangeFromInChestUI.AddListener(setSpriteToOpenEmpty);
+
         if(script != null)
         {
             script.runScript();
         }
-
-        // if (questName != null && !questName.Equals("") && (activateQuestOnPickup || QuestList.getQuest(questName).active))
-        // {
-        //     QuestList.activateQuestStep(questName, questStep);
-        // }
-
-        // if (flagOnPickUp != null && flagOnPickUp.Length > 0)
-        // {
-        //     Flags.setFlag(flagOnPickUp, true);
-        // }
     }
 
     private void createChestItemUI()
     {
-        chestItemDescriptionPanel = Instantiate(Resources.Load<GameObject>(PrefabNames.chestDescriptionPanel), PlayerMovement.getUIParentTransform()).GetComponent<DescriptionPanel>();
+        chestItemDescriptionPanel = Instantiate(Resources.Load<GameObject>(PrefabNames.chestDescriptionPanel), PlayerObject.getUIParentTransform()).GetComponent<DescriptionPanel>();
         chestContents.describeSelfRow(chestItemDescriptionPanel);
     }
 
@@ -246,6 +237,8 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
     {
         chestState = ChestState.OpenEmpty;
         setToCurrentSprite();
+        PlayerOOCStateManager.OnStateChangeFromInChestUI.RemoveListener(destroyUI);
+        PlayerOOCStateManager.OnStateChangeFromInChestUI.RemoveListener(setSpriteToOpenEmpty);
     }
 
     private string getChestKey()

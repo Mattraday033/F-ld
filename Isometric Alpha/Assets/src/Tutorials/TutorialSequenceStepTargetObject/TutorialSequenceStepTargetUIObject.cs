@@ -38,7 +38,7 @@ public class TutorialSequenceStepTargetUIObject : TutorialSequenceStepTargetObje
 
 	public override Vector2 getDimensions()
 	{
-		return new Vector2(getRectTransform().rect.width / 2f, getRectTransform().rect.height / 2f) * PlayerMovement.getInstanceTransform().localScale * new Vector2(.05f, .05f);
+		return new Vector2(getRectTransform().rect.width / 2f, getRectTransform().rect.height / 2f) * PlayerObject.getInstanceTransform().localScale * new Vector2(.05f, .05f);
 	}
 
 	public override Vector2 getPosition()

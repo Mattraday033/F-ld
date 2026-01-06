@@ -131,7 +131,7 @@ public class TransitionManager : MonoBehaviour
 
     private void moveToTargetTransition(Transition destinationTransition)
     {
-        PlayerMovement.getInstanceTransform().position = AreaManager.getMasterGrid().GetCellCenterWorld(destinationTransition.getOutPutCellCoords());
+        PlayerObject.getInstanceTransform().position = AreaManager.getMasterGrid().GetCellCenterWorld(destinationTransition.getOutPutCellCoords());
         State.playerFacing.setFacing(destinationTransition.playerSpawnDirection);
         MovementManager.addMovementTracker(PlayerMovement.getInstance());
     }

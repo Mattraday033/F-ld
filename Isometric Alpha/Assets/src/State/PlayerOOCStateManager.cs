@@ -40,6 +40,7 @@ public static class PlayerOOCStateManager
     public readonly static UnityEvent OnStateChangeToInWorldMap = new UnityEvent();
     public readonly static UnityEvent OnStateChangeToSkill = new UnityEvent();
     public readonly static UnityEvent OnStateChangeToInChestUI = new UnityEvent();
+    public readonly static UnityEvent OnStateChangeFromInChestUI = new UnityEvent();
     public readonly static UnityEvent OnStateChangeToInBookUI = new UnityEvent();
     public readonly static UnityEvent OnStateChangeToInShopUI = new UnityEvent();
     public readonly static UnityEvent OnStateChangeToInDialoguePopUp = new UnityEvent();
@@ -54,6 +55,18 @@ public static class PlayerOOCStateManager
     {
         currentActivity = OOCActivity.walking;
         previousActivity = OOCActivity.nothing;
+
+        TransitionManager.AfterTransition.AddListener(setToDefaultStateOnTransition);
+        TransitionManager.AfterTransition.AddListener(checkIfWaitingOnSecondHostilityTutorial);
+    }
+
+    private static void setToDefaultStateOnTransition()
+    {
+        if (currentActivity != OOCActivity.inDialogue &&
+            currentActivity != OOCActivity.inTutorialSequence)
+        {
+            setCurrentActivity(OOCActivity.walking);
+        }
     }
 
     public static void returnToPreviousActivity()
@@ -67,8 +80,6 @@ public static class PlayerOOCStateManager
             // Debug.LogError("previousActivity = " + previousActivity.ToString());
             setCurrentActivity(previousActivity);
         }
-
-
     }
 
     public static void setCurrentActivity(OOCActivity newActivity)
@@ -111,6 +122,7 @@ public static class PlayerOOCStateManager
             case OOCActivity.observing:
                 break;
             case OOCActivity.inChestUI:
+                OnStateChangeFromInChestUI.Invoke();
                 break;
             case OOCActivity.inBookUI:
                 break;
@@ -179,6 +191,55 @@ public static class PlayerOOCStateManager
                 break;
         }
 
-        PlayerMovement.setButtonPromptVisibility();
+        PlayerObject.setButtonPromptVisibility(Constants.indexZero);
+    }
+
+    public static bool waitingOnHostilityTutorial;
+
+    private static void checkIfWaitingOnSecondHostilityTutorial()
+    {
+        if(waitingOnHostilityTutorial)
+        {
+            waitingOnHostilityTutorial = false;
+            PlayerObject.getInstance().StartCoroutine(waitForHostilityTutorial());
+        }
+    }
+
+    private static IEnumerator waitForHostilityTutorial()
+    {
+
+		do
+		{
+			if (currentActivity == OOCActivity.inTutorialSequence)
+			{
+				yield break;
+			}
+			else
+			{
+				yield return null;
+			}
+		}while (currentActivity != OOCActivity.walking);
+
+        do
+		{
+            yield return null;
+		} while (!FadeToBlackManager.isTransparent());
+
+		while (currentActivity != OOCActivity.walking)
+		{
+			if (currentActivity == OOCActivity.inTutorialSequence)
+			{
+				yield break;
+			}
+			else
+			{
+				yield return null;
+			}
+		}
+
+		if (!TutorialSequence.currentlyInTutorialSequence() && TutorialSequence.startTutorialSequence(TutorialSequenceList.secondHostilityTutorialSequenceKey))
+		{
+			setCurrentActivity(OOCActivity.inTutorialSequence);
+		}
     }
 }

@@ -22,7 +22,7 @@ public class FastTravel : IDecision
     public void execute()
     {
         MapPopUpWindow.fastTravelPanelCloseButtonPress();
-        PlayerMovement.getInstance().mapPopUpButton.destroyPopUp();
+        PlayerObject.getMapPopUpButton().destroyPopUp();
 
 		TransitionManager.fastTravel(targetMapObject.getLocationName());
     }

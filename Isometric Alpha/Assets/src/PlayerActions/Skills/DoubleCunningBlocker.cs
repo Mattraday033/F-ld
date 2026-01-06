@@ -30,7 +30,7 @@ public class DoubleCunningBlocker : CunningBlocker
             return false;
         }
 
-        Vector3Int playerCell = AreaManager.getMasterGrid().WorldToCell(PlayerMovement.getInstanceTransform().position);
+        Vector3Int playerCell = AreaManager.getMasterGrid().WorldToCell(PlayerObject.getInstanceTransform().position);
 
         foreach (Vector3Int coords in deactivatedBlockerCoords)
         {

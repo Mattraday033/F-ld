@@ -11,7 +11,7 @@ public class ObservationManager : SkillManager
 
     public static ObservationManager getInstance()
     {
-        return PlayerMovement.getInstance().observationManager;
+        return new ObservationManager();
     }
 
     public static void enterObservationMode()

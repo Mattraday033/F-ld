@@ -9,6 +9,9 @@ public static class EnemyTypeFolderPathList
 
     private const string lovashiFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/" + EnemyCategoryNameList.lovashi + "/";
 
+    private const string partyMembersFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/PartyMembers/";
+
+
     private static Dictionary<string, string> folderPathDict;
 
     public static string getEnemyTypeFolderPath(string enemyType)
@@ -50,6 +53,12 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(MonsterNameList.lineBreaker, lovashiFolderPath + MonsterNameList.lineBreaker + "/");
         folderPathDict.Add(MonsterNameList.signaleer, lovashiFolderPath + MonsterNameList.signaleer + "/");        
         folderPathDict.Add(MonsterNameList.spearman, lovashiFolderPath + MonsterNameList.spearman + "/");        
+        #endregion
+
+        #region Party Members
+        
+        folderPathDict.Add(NPCNameList.thatch, partyMembersFolderPath + NPCNameList.thatch + "/");        
+
         #endregion
 
     }

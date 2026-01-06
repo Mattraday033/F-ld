@@ -146,12 +146,8 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
         animationManager = list.animationManager;
         animationManager.healthBarManager = healthBarManager;
+        animationManager.setAnimations(getName());
 
-        if (animationManager != null)
-        {
-            animationManager.setAnimations(getName());
-        }
-        
         spriteRenderer = list.spriteRenderer;
 
         outline = new SpriteOutline();
@@ -1148,7 +1144,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     #region IDescribable
 
-    public string getName()
+    public virtual string getName()
     {
         return characterName;
     }

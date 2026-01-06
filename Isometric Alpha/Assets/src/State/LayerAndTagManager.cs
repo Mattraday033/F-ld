@@ -44,6 +44,7 @@ public static class LayerAndTagManager
 	public const string placeHolderTag = "PlaceHolder";
 	public const string bookTag = "Book";
 	public const string shownWhileTerrainHiddenTag = "ShownWhileTerrainHidden";
+    public const string mainVirtualCameraTag = "MainVirtualCamera";
 
 	// public static LayerMask allInteractableLayers;
 	public readonly static LayerMask playerLayerMask = initializePlayerLayerMask();
@@ -52,12 +53,12 @@ public static class LayerAndTagManager
 	public readonly static LayerMask transitionLayerMask = initializeTransitionLayerMask();
 	public readonly static LayerMask tutorialLayerMask = initializeTutorialLayerMask();
     public readonly static LayerMask terrainLayerMask = initializeTerrainLayerMask();
-	public readonly static LayerMask movableObjectLayerMask = initializeMovableObjectLayerMask();
+	public readonly static LayerMask moveableObjectLayerMask = initializemoveableObjectLayerMask();
 	public readonly static LayerMask uiLayerMask = initializeUILayerMask();
 
 
 	public readonly static LayerMask blocksPlayerMovementLayerMask = initializeBlocksPlayerMovementLayerMask();
-	public readonly static LayerMask blocksMovableObjectLayerMask = initializeBlocksMovableObjectLayerMask();
+	public readonly static LayerMask blocksMoveableObjectLayerMask = initializeblocksMoveableObjectLayerMask();
 	public readonly static LayerMask blocksEnemyMovementLayerMask = initializeBlocksEnemyMovementLayerMask();
 
     public readonly static LayerMask observableLayerMask = initializeObservableLayerMask();
@@ -117,11 +118,11 @@ public static class LayerAndTagManager
         return terrainLayerMask;
 	}
 
-	private static LayerMask initializeMovableObjectLayerMask()
+	private static LayerMask initializemoveableObjectLayerMask()
 	{
-		LayerMask movableObjectLayerMask = new LayerMask();
-        movableObjectLayerMask |= (1 << movableObjectLayer);
-        return movableObjectLayerMask;
+		LayerMask moveableObjectLayerMask = new LayerMask();
+        moveableObjectLayerMask |= (1 << movableObjectLayer);
+        return moveableObjectLayerMask;
 	}
 
 	private static LayerMask initializeUILayerMask()
@@ -164,21 +165,21 @@ public static class LayerAndTagManager
 	}
 
 
-	private static LayerMask initializeBlocksMovableObjectLayerMask()
+	private static LayerMask initializeblocksMoveableObjectLayerMask()
 	{
-		LayerMask blocksMovableObjectLayerMask = new LayerMask();
-		blocksMovableObjectLayerMask |= (1 << movableObjectLayer);
-		blocksMovableObjectLayerMask |= (1 << colliderLayer);
-		blocksMovableObjectLayerMask |= (1 << npcLayer);
-		blocksMovableObjectLayerMask |= (1 << objectLayer);
-		blocksMovableObjectLayerMask |= (1 << enemyLayer);
-		blocksMovableObjectLayerMask |= (1 << cunningableObjectLayer);
-		blocksMovableObjectLayerMask |= (1 << openableDoorLayer);
-		blocksMovableObjectLayerMask |= (1 << chestLayer);
-        blocksMovableObjectLayerMask |= (1 << movableObjectBlockerLayer);
-        blocksMovableObjectLayerMask |= (1 << observableLayer);
+		LayerMask blocksMoveableObjectLayerMask = new LayerMask();
+		blocksMoveableObjectLayerMask |= (1 << movableObjectLayer);
+		blocksMoveableObjectLayerMask |= (1 << colliderLayer);
+		blocksMoveableObjectLayerMask |= (1 << npcLayer);
+		blocksMoveableObjectLayerMask |= (1 << objectLayer);
+		blocksMoveableObjectLayerMask |= (1 << enemyLayer);
+		blocksMoveableObjectLayerMask |= (1 << cunningableObjectLayer);
+		blocksMoveableObjectLayerMask |= (1 << openableDoorLayer);
+		blocksMoveableObjectLayerMask |= (1 << chestLayer);
+        blocksMoveableObjectLayerMask |= (1 << movableObjectBlockerLayer);
+        blocksMoveableObjectLayerMask |= (1 << observableLayer);
 
-        return blocksMovableObjectLayerMask;
+        return blocksMoveableObjectLayerMask;
 	}
 
 	private static LayerMask initializeBlocksSkillsLayerMask()

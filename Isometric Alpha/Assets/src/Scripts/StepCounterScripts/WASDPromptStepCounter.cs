@@ -15,7 +15,7 @@ public class WASDPromptStepCounter : StepCountScript
 
     public override void runScript()
     {
-        PlayerMovement.hasCustomPromptMessage = false;
+        PlayerObject.hasCustomPromptMessage = false;
     }
 
     public static void createStepCounter()

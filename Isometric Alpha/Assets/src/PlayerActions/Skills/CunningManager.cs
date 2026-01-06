@@ -11,6 +11,11 @@ public class CunningManager : SkillManager
     public const int cunningRange = 9;
     public const int playerCunningCoords = (cunningRange - 1) / 2;
 
+    public static CunningManager getInstance()
+    {
+        return new CunningManager();
+    } 
+
     public static int cunningsRemaining;
 
     [RuntimeInitializeOnLoadMethod]
@@ -61,11 +66,6 @@ public class CunningManager : SkillManager
             OOCUIManager.updateOOCUI();
         }
 
-    }
-
-    public static CunningManager getInstance()
-    {
-        return PlayerMovement.getInstance().cunningManager;
     }
 
     public static void enterCunningMode()

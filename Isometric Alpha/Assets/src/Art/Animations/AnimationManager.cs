@@ -2,30 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Animancer;
-using Animancer.FSM;
 using UnityEngine.Events;
 using System;
 using System.Linq;
-// using UnityEditor;
 
-public enum CharacterAnimationType { None, Idle_Front, Idle_Back, OOC_Idle_Front, OOC_Idle_Back, Secondary_Idle, Run_Front, Run_Back, Wounded, Death, Attack_Normal, Attack_Special, Spawn }
+public enum CharacterAnimationType { None, Idle_Front, Idle_Back, OOC_Idle_Front, OOC_Idle_Back, Secondary_Idle, Run_Front, Run_Front_Left, Run_Front_Right, Run_Back, Run_Back_Left, Run_Back_Right, Wounded, Death, Attack_Normal, Attack_Special, Spawn }
 
 public class AnimationManager : MonoBehaviour, IAnimationTracker
 {
-    public readonly static CharacterAnimationType[] loopedAnimationTypesTypes = new CharacterAnimationType[]
+    public readonly static CharacterAnimationType[] loopedAnimationTypes = new CharacterAnimationType[]
     {   
         CharacterAnimationType.Idle_Front, CharacterAnimationType.Idle_Back, 
         CharacterAnimationType.OOC_Idle_Front, CharacterAnimationType.OOC_Idle_Back, 
-        CharacterAnimationType.Secondary_Idle,
-        CharacterAnimationType.Run_Front, CharacterAnimationType.Run_Back
+        CharacterAnimationType.Secondary_Idle
     };
 
 
     public readonly static CharacterAnimationType[] tempAnimationTypes = new CharacterAnimationType[]
     { 
-      CharacterAnimationType.Run_Front, CharacterAnimationType.Run_Back,  CharacterAnimationType.Wounded,
-      CharacterAnimationType.Death, CharacterAnimationType.Attack_Normal, CharacterAnimationType.Attack_Special, 
-      CharacterAnimationType.Spawn
+      CharacterAnimationType.Run_Front, CharacterAnimationType.Run_Front_Left,   CharacterAnimationType.Run_Front_Right, 
+      CharacterAnimationType.Run_Back,  CharacterAnimationType.Run_Back_Left,    CharacterAnimationType.Run_Back_Right,  
+      CharacterAnimationType.Wounded,   CharacterAnimationType.Death,       CharacterAnimationType.Spawn,
+      CharacterAnimationType.Attack_Normal, CharacterAnimationType.Attack_Special
     };
 
     public bool changesFacing
@@ -52,6 +50,10 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     private void updateIdleAnimation(int rowToUpdate)
     {
+        if(spriteSetByHeartBeat() && animancer.enabled)
+        {
+            haltAllAnimations();
+        }
 
         if(!spriteSetByHeartBeat() || heartBeatRow != rowToUpdate)
         {
@@ -72,7 +74,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public bool spriteSetByHeartBeat()
     {
-        return (!CombatStateManager.inCombat && !PlayerMovement.getInstance().isMoving()) || 
+        return (!CombatStateManager.inCombat && !PlayerMovement.getInstance().canPlayRunAnimation()) || 
                 (CombatStateManager.inCombat && !CombatAnimationManager.trackerBeingTracked(this) && !healthBarManager.linkedStats.isDead());
     }
 
@@ -200,8 +202,12 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     private static AnimationClip[] getIdleAnimations(string folderPath)
     {
         List<AnimationClip> animationList = new List<AnimationClip>();
+        List<CharacterAnimationType> animationTypes = new List<CharacterAnimationType>();
 
-        foreach (CharacterAnimationType type in loopedAnimationTypesTypes)
+        animationTypes.AddRange(loopedAnimationTypes);
+        animationTypes.AddRange(tempAnimationTypes);
+
+        foreach (CharacterAnimationType type in animationTypes)
         {
             AnimationClip animClip = Resources.Load<AnimationClip>(folderPath + type.ToString());
 
@@ -218,7 +224,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     private static void addIdleSprites(string characterToAnimate, string folderPath)
     {
-        foreach (CharacterAnimationType type in loopedAnimationTypesTypes)
+        foreach (CharacterAnimationType type in loopedAnimationTypes)
         {
             addIdleSpritesOfType(characterToAnimate, folderPath, type);
         }
@@ -269,12 +275,35 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public void playRunBackAnimation()
     {
-        playAnimation(CharacterAnimationType.Run_Back);
+        playAnimation(getRunAnimationFooting(CharacterAnimationType.Run_Back));
     }
 
     public void playRunFrontAnimation()
     {
-        playAnimation(CharacterAnimationType.Run_Front);
+        playAnimation(getRunAnimationFooting(CharacterAnimationType.Run_Front));
+    }
+
+    private static CharacterAnimationType getRunAnimationFooting(CharacterAnimationType animationType)
+    {
+        if(animationType == CharacterAnimationType.Run_Front)
+        {
+            if(State.onLeftFoot)
+            {
+                return CharacterAnimationType.Run_Front_Left;
+            } else
+            {
+                return CharacterAnimationType.Run_Front_Right;
+            }
+        } else
+        {
+            if(State.onLeftFoot)
+            {
+                return CharacterAnimationType.Run_Back_Left;
+            } else
+            {
+                return CharacterAnimationType.Run_Back_Right;
+            }
+        }
     }
 
     private void playIdleAnimation(CharacterAnimationType newIdle)
@@ -476,8 +505,9 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         animancer.enabled = true;
     }
 
-    private void haltAllAnimations()
+    public void haltAllAnimations()
     {
+        animancer.Stop();
         animancer.enabled = false;
         removeAnimation();
     }
@@ -506,7 +536,10 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public void playAnimation(CharacterAnimationType animationType)
     {
-        animationType = getFallBackIdleType(characterToAnimate, animationType);
+        if(spriteSetByHeartBeat())
+        {
+            animationType = getFallBackIdleType(characterToAnimate, animationType);
+        }
 
         switch(animationType)
         {
@@ -540,6 +573,14 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         {
             switch(animationType)
             {
+                case CharacterAnimationType.Run_Front_Left:
+                case CharacterAnimationType.Run_Front_Right: 
+                    playAnimation(CharacterAnimationType.Run_Front);
+                    break;
+                case CharacterAnimationType.Run_Back_Left:
+                case CharacterAnimationType.Run_Back_Right: 
+                    playAnimation(CharacterAnimationType.Run_Back);
+                    break;
                 case CharacterAnimationType.OOC_Idle_Front:
                 case CharacterAnimationType.Run_Front:
                 case CharacterAnimationType.Secondary_Idle:
@@ -673,7 +714,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         Dictionary<CharacterAnimationType, Sprite[]> spriteDict = new Dictionary<CharacterAnimationType, Sprite[]>();
 
-        foreach (CharacterAnimationType type in loopedAnimationTypesTypes)
+        foreach (CharacterAnimationType type in loopedAnimationTypes)
         {
             int index = 0;
             List<Sprite> sprites = new List<Sprite>();

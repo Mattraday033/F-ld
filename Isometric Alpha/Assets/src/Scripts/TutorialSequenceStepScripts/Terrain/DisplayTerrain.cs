@@ -6,8 +6,6 @@ public class DisplayTerrain : TutorialSequenceStepScript
 {
     public override void runScript(GameObject target)
     {
-        PlayerMovement playerMovement = PlayerMovement.getInstance();
-
-        playerMovement.toggleTerrainKeyCheck();
+        PlayerInput.toggleTerrainKeyCheck();
     }
 }

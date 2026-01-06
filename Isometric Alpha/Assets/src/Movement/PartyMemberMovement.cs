@@ -5,55 +5,42 @@ using UnityEngine;
 public class PartyMemberMovement : MovementTracker
 {
     private CharacterFacing characterFacing = new CharacterFacing();
+    public PartyMember partyMember;
 
     #region MovementTracker Overrides
+	public override string getName()
+	{
+        return partyMember.getName();
+	}
 
     public override int getMovementIndex()
     {
         return -1;
     }
 
-    public override void updateFacing()
+    public override AnimationManager getAnimationManager()
     {
-        if (directionMod.Equals(Vector3Int.zero))
-        {
-            return;
-        }
-
-        if (directionMod.Equals(MovementManager.distance1TileNorthEastGrid))
-        {
-            characterFacing.setFacing(Facing.NorthEast);
-
-        }
-        else if (directionMod.Equals(MovementManager.distance1TileSouthEastGrid))
-        {
-            characterFacing.setFacing(Facing.SouthEast);
-
-        }
-        else if (directionMod.Equals(MovementManager.distance1TileSouthWestGrid))
-        {
-            characterFacing.setFacing(Facing.SouthWest);
-
-        }
-        else if (directionMod.Equals(MovementManager.distance1TileNorthWestGrid))
-        {
-            characterFacing.setFacing(Facing.NorthWest);
-        }
+        return null;
     }
+
+	public override CharacterFacing getCharacterFacing()
+	{
+        return characterFacing;
+	}
 
     #endregion
 
-    public static PartyMemberMovement[] partyMemberTrain;
-    public static int stepCounter;
+    // public static PartyMemberMovement[] partyMemberTrain;
+    // public static int stepCounter;
 
     [RuntimeInitializeOnLoadMethod]
     public static void instantiatePartyMemberTrain()
     {
         return; //turning off party member movement
 
-        stepCounter = 0;
+        // stepCounter = 0;
 
-        // Transform player = PlayerMovement.getInstanceTransform();
+        // Transform player = PlayerObject.getInstanceTransform();
 
         // if (player == null)
         // {
@@ -66,7 +53,7 @@ public class PartyMemberMovement : MovementTracker
         // {
         //     return;
         // }
-        List<PartyMemberMovement> partyMembersInFormation = new List<PartyMemberMovement>();
+        // List<PartyMemberMovement> partyMembersInFormation = new List<PartyMemberMovement>();
         // List<string> trainGameObjectNames = PartyManager.getAllGameObjectNamesInTrain();
 
         // foreach (string objectName in trainGameObjectNames)
@@ -79,7 +66,7 @@ public class PartyMemberMovement : MovementTracker
         //     return;
         // }
 
-        partyMemberTrain = new PartyMemberMovement[partyMembersInFormation.Count];
+        // partyMemberTrain = new PartyMemberMovement[partyMembersInFormation.Count];
 
         // for (int formationIndex = (partyMemberTrain.Length - 1); formationIndex >= 0; formationIndex--)
         // {

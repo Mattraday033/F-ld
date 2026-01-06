@@ -821,11 +821,11 @@ public class DialogueManager : MonoBehaviour
 
                     Vector3Int targetCellCoords = new Vector3Int(xPos, yPos);
 
-                    PlayerMovement.getInstanceTransform().position = AreaManager.getMasterGrid().GetCellCenterWorld(targetCellCoords);
+                    PlayerObject.getInstanceTransform().position = AreaManager.getMasterGrid().GetCellCenterWorld(targetCellCoords);
 
                     PlayerMovement.updateStartEndPosition();
 
-                    Helpers.updateColliderPosition(PlayerMovement.getInstanceTransform());
+                    Helpers.updateColliderPosition(PlayerObject.getInstanceTransform());
 
                     PartyMemberMovement.instantiatePartyMemberTrain();
 
@@ -858,8 +858,6 @@ public class DialogueManager : MonoBehaviour
                             State.playerFacing.setFacing(Facing.SouthWest);
                             break;
                     }
-
-                    PlayerMovement.getInstance().adjustAnimator(true);
 
                     continueStory();
 
@@ -895,15 +893,13 @@ public class DialogueManager : MonoBehaviour
 
                     Vector3Int newPlayerGridSquare = PlayerMovement.getMovementGridCoords() + gridSquareAdjustment;
 
-                    PlayerMovement.getInstanceTransform().position = player.convertGridCoordsToWorldPos(newPlayerGridSquare);
+                    PlayerObject.getInstanceTransform().position = player.convertGridCoordsToWorldPos(newPlayerGridSquare);
 
                     PlayerMovement.updateStartEndPosition();
 
-                    Helpers.updateColliderPosition(PlayerMovement.getInstanceTransform());
+                    Helpers.updateColliderPosition(PlayerObject.getInstanceTransform());
 
                     PartyMemberMovement.instantiatePartyMemberTrain();
-
-                    PlayerMovement.getInstance().adjustAnimator(true);
 
                     continueStory();
 
@@ -1175,7 +1171,7 @@ public class DialogueManager : MonoBehaviour
 
                     string promptMessage = getArgument(buffer);
 
-                    PlayerMovement.createCustomButtonPrompt(promptMessage);
+                    PlayerObject.createCustomButtonPrompt(promptMessage);
                     WASDPromptStepCounter.createStepCounter();
 
                     continueStory();

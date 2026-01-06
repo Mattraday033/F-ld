@@ -17,7 +17,7 @@ public interface ISkillTarget
 }
 public class SkillManager
 {
-    public static UnityEvent OnSkillUse;
+    public readonly static UnityEvent OnSkillUse = new UnityEvent();
 
     public Vector2Int selectorPosition;
     public Color oldColor;
@@ -28,12 +28,6 @@ public class SkillManager
     public const int skillUnlockLevel = 2;
     public const int skillImprovedLevel = 5;
     public const int skillExtraordinaryLevel = 8;
-
-    [RuntimeInitializeOnLoadMethod]
-    private static void initializeSkillManager()
-    {
-        OnSkillUse = new UnityEvent();
-    }
 
     public SkillManager()
     {

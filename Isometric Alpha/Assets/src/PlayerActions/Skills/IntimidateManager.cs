@@ -66,7 +66,7 @@ public class IntimidateManager : CunningManager
 
     public static IntimidateManager getInstance()
     {
-        return PlayerMovement.getInstance().intimidateManager;
+        return new IntimidateManager();
     }
 
     public static void enterIntimidateMode()

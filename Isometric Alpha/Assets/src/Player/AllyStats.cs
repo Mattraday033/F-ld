@@ -15,13 +15,6 @@ public class AllyStats : Stats
 
     public const int xpNeededToLevelUp = 1000;
 
-    private const int baseNumberOfPartyMembers = 2;
-    private const int maxNumberOfPartyMembers = 16;
-    private const int baseNumberOfPartyCombatActionPoints = 5;
-    private const int actionPointsPerPartyAction = 5;
-    private const int minimumPartycombatActionArray = 1;
-    private const int maximumPartycombatActionArray = 6;
-
     private const string combatantTypeDescription = "Party Leader";
     private const string zoiIconBackgroundName = "ZOI-Icon";
     public const string ZOIStatBoostKey = "PartyMemberBoost";
@@ -31,7 +24,6 @@ public class AllyStats : Stats
     public const string carterCleverInfluenceStatBoostKey = "carterCleverInfluence";
 
     public const int playerLevelMaximum = 20;
-    public const int playerActionWheelLength = 8;
     private const int playerHealthPerLevelAboveOne = 10;
     private const int playerBaseHealth = 90;
 
@@ -145,18 +137,9 @@ public class AllyStats : Stats
         return PrefabNames.allyCombatSpriteName;
     }
 
-    // public override GameObject instantiateCombatSprite()
-    // {
-    //     base.instantiateCombatSprite();
-
-    //     return combatSprite;
-    // }
-
     public override void setUpComponents(ComponentList list)
     {
         base.setUpComponents(list);
-
-        spriteRenderer.color = getSpriteColor();
 
         lastCombatAbilityMenuManager = list.abilityMenuManager;
         lastCombatAbilityMenuManager.actionArraySource = this;
@@ -866,6 +849,11 @@ public class AllyStats : Stats
     #endregion
 
     #region IDescribable
+
+    public override string getName()
+    {
+        return NPCNameList.thatch;
+    }
 
     public override GameObject getRowType(RowType rowType)
     {

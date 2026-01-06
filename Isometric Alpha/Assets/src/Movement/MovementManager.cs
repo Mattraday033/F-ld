@@ -27,7 +27,7 @@ public class MovementManager : MonoBehaviour
     public static List<MovementTracker> allMovementTrackers;
     public static Dictionary<MovementTracker, Coroutine> currentMovements;
 
-    private const float timeToMove = .2f;
+    private const float timeToMove = .135f;
 
     public const int playerSpriteIndex = 0;
 
@@ -58,13 +58,6 @@ public class MovementManager : MonoBehaviour
         return MovementTracker.getCurrentCell(PlayerMovement.getInstance());
     }
 
-    public void addFloorButton(IFloorButton button)
-    {
-        // floorButtons.Add(button);
-    }
-
-    //something keeps setting sprites' Z position to 25.5 and this messes with positioning. 
-    //this sets them all back to 0 before doing movement stuff
     private void setAllZPositionsToZero()
     {
         foreach (MovementTracker movement in allMovementTrackers)
@@ -242,6 +235,13 @@ public class MovementManager : MonoBehaviour
         PartyMemberMovement.hideOverlappingPartyMembers();
 
         currentMovements.Remove(movement);
+
+        if(movement.getAnimationManager() != null)
+        {
+            movement.getAnimationManager().haltAllAnimations();
+        }
+
+        movement.updateAnimationDirection();
 
         movement.updateFacing();
 

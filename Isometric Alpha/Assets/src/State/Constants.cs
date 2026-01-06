@@ -38,7 +38,7 @@ public static class Constants
     public const int difficultyNine = 9;
     public const int difficultyTen = 10;
 
-	public const float detectionSize = .075f;
+	public const float detectionSize = .05f;
 
     public const int statLevelOne = 1;
     public const int statLevelTwo = 2;
@@ -74,6 +74,7 @@ public static class Constants
     public const bool flipY = true;
 
     public readonly static Vector3 flippedXScale = new Vector3(-1f, 1f, 1f);
+
 }
 
 public static class StatDifficultyList

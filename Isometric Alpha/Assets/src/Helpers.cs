@@ -117,9 +117,9 @@ public static class Helpers
         transform.gameObject.SetActive(true);
     }
 
-    public static bool checkPositionForColliders(Vector3 position, float size, LayerMask layerMask)
+    public static bool checkPositionForColliders(Vector3 position, LayerMask layerMask)
     {
-        if (Physics2D.OverlapCircle(position, size, layerMask))
+        if (Physics2D.OverlapCircle(position, Constants.detectionSize, layerMask))
         {
             return true;
         }

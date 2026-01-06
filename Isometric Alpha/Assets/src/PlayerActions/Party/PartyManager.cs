@@ -65,24 +65,6 @@ public static class PartyManager
         }
     }
 
-    public static List<string> getAllGameObjectNamesInTrain()
-    {
-        List<string> gameObjectNames = new List<string>();
-
-        foreach (KeyValuePair<string, PartyMember> kvp in PartyManager.partyMemberDict)
-        {
-            PartyMember partyMember = kvp.Value;
-
-            if (partyMember.isInParty())
-            {
-                gameObjectNames.Add(partyMember.overWorldGameObjectName);
-            }
-        }
-
-        return gameObjectNames;
-    }
-
-
     public static void resetAllPartyMemberCooldowns()
     {
         foreach (KeyValuePair<string, PartyMember> kvp in partyMemberDict)

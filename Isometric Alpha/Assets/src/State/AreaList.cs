@@ -98,7 +98,7 @@ public class Area
 
         if(!Flags.getFlag(TutorialSequenceList.secondHostitilityTutorialSeenFlag))
         {
-            PlayerMovement.waitingOnHostilityTutorial = true;
+            PlayerOOCStateManager.waitingOnHostilityTutorial = true;
         }
 
         if(isHostile())

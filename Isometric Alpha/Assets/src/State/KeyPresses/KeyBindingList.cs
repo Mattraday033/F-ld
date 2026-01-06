@@ -28,7 +28,7 @@ public static class KeyBindingList
     //General Walking Keys
     public const KeyCode interactKey = KeyCode.E;
     public const KeyCode hideTerrainKey = KeyCode.F;
-    public const KeyCode removePlacedCompanionmovableObjectKey = KeyCode.Z;
+    public const KeyCode removePlacedCompanionMovableObjectKey = KeyCode.Z;
     public const KeyCode mapKey = KeyCode.M;
     public const KeyCode worldMapKey = KeyCode.N;
     public const KeyCode transcriptKey = KeyCode.T;

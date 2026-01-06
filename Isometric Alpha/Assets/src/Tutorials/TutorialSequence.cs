@@ -983,7 +983,7 @@ public class TutorialSequence
 
     public static Transform getUIParent()
     {
-        return PlayerMovement.getUIParentTransform();
+        return PlayerObject.getUIParentTransform();
     }
 
     public static bool startTutorialSequence(GameObject tutorialColliderGameObject)

@@ -5,12 +5,6 @@ using UnityEngine;
 
 public class PartyMember : IDescribable, IDescribableInBlocks
 {
-	public string overWorldGameObjectName;
-	public string combatGameObjectName;
-
-	public GameObject overWorldGameObject;
-	public GameObject combatGameObject;
-
 	public AllyStats stats;
 
 	public bool placed;       //if they were placed on the overworld somewhere

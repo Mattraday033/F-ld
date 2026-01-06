@@ -80,9 +80,9 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
         saveBlueprint.gold = Purse.getCoinsInPurse();
 
 		saveBlueprint.playerPosition = new float[3];
-		saveBlueprint.playerPosition[0] = PlayerMovement.getInstanceTransform().position.x; //player.transform.position.x;
-		saveBlueprint.playerPosition[1] = PlayerMovement.getInstanceTransform().position.y;
-		saveBlueprint.playerPosition[2] = PlayerMovement.getInstanceTransform().position.z;
+		saveBlueprint.playerPosition[0] = PlayerObject.getInstanceTransform().position.x; //player.transform.position.x;
+		saveBlueprint.playerPosition[1] = PlayerObject.getInstanceTransform().position.y;
+		saveBlueprint.playerPosition[2] = PlayerObject.getInstanceTransform().position.z;
 
 		saveBlueprint.playerFacing = (int) State.playerFacing.getFacing();
 
