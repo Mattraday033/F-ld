@@ -162,8 +162,21 @@ public static class MouseHoverManager
 
         hoverDescriptionPanelSlot.setPrimaryDescribable(source.getObjectBeingDescribed());
         hoverDescriptionPanelObject.SetActive(true);
+    }
 
-        
+    public static void spawnCustomHover(IHoverIconSource source, Transform parent, string prefabName)
+    {
+        if (source.getObjectBeingDescribed() == null)
+        {
+            return;
+        }
+
+        OnHoverPanelCreation.Invoke();
+
+        hoverDescriptionPanelObject = GameObject.Instantiate(Resources.Load<GameObject>(prefabName), parent);
+        hoverDescriptionPanelObject.AddComponent<HoverPanelCreationListener>();
+
+        hoverDescriptionPanelObject.SetActive(true);
     }
 
     public static void destroyHoverIcon()

@@ -211,7 +211,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         _DirectionMod = findDirection();
 
         _StartingPosition = getWorldPosition();
-        _EndingPosition = AreaManager.getMasterGrid().GetCellCenterWorld(MovementTracker.getCurrentCell(this) + _DirectionMod);
+        _EndingPosition = AreaManager.getMasterGrid().GetCellCenterWorld(getCurrentCell(this) + _DirectionMod);
     }
 
     #endregion
@@ -708,7 +708,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     //     }
     // }
 
-	private void OnEnable()
+	protected override void OnEnable()
 	{
 		createListeners();
 	}

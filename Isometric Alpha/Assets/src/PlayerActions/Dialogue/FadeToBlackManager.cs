@@ -185,7 +185,6 @@ public class FadeToBlackManager : MonoBehaviour
         GC.Collect();
 
         DialogueManager.setCameraToDefaultSpeed();
-
     }
 	
 	private IEnumerator fadeBackIn()

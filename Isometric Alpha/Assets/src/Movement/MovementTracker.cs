@@ -4,6 +4,18 @@ using UnityEngine;
 
 public abstract class MovementTracker : MonoBehaviour
 {
+    protected virtual void OnEnable()
+    {
+        TransitionManager.AfterTransition.AddListener(resetPreviousDirectionMod);
+    }
+
+    protected virtual void OnDestroy()
+    {
+        TransitionManager.AfterTransition.RemoveListener(resetPreviousDirectionMod);
+    }
+
+    public MovementTracker nextInTrain;
+
     public abstract string getName();
 
     protected Vector3 _StartingPosition;
@@ -26,13 +38,40 @@ public abstract class MovementTracker : MonoBehaviour
         }
     }
 
+    protected Vector3 _PreviousCell;
+    public virtual Vector3 previousCell
+    {
+        get => _PreviousCell;
+        set
+        {
+            _PreviousCell = value;
+        }
+    }
+
+    private void resetPreviousDirectionMod()
+    {
+        previousDirectionMod = Vector3Int.zero;
+    }
+
+    protected Vector3Int _PreviousDirectionMod = Vector3Int.zero;
+    public virtual Vector3Int previousDirectionMod
+    {
+        get => _PreviousDirectionMod;
+        set
+        {
+            _PreviousDirectionMod = value;
+        }
+    }
+
     protected Vector3Int _DirectionMod;
     public virtual Vector3Int directionMod
     {
         get => _DirectionMod;
         set
-        {
+        {   
+            _PreviousDirectionMod = _DirectionMod;
             _DirectionMod = value;
+            previousCell = getCell();
         }
     }
 
@@ -41,7 +80,7 @@ public abstract class MovementTracker : MonoBehaviour
         return AreaManager.getMasterGrid().WorldToCell(transform.position);
     }
 
-    public bool isMoving()
+    public virtual bool isMoving()
     {
         return MovementManager.currentMovements.ContainsKey(this);
     }
@@ -209,5 +248,57 @@ public abstract class MovementTracker : MonoBehaviour
     public static Vector3Int getEndingCell(MovementTracker movement)
     {
         return AreaManager.getMasterGrid().WorldToCell(movement.endingPosition);
+    }
+
+    public virtual int getPlaceInTrain()
+    {
+        return 0;
+    }
+
+    public virtual bool canMoveInTrain()
+    {
+        return true;
+    }
+
+    public virtual void moveNextInTrain()
+    {
+        if(nextInTrain == null || !nextInTrain.canMoveInTrain())
+        {
+            return;
+        }
+        
+        if(Helpers.checkPositionForColliders(PlayerMovement.getColliderWorldPosition(), LayerAndTagManager.blocksMoveableObjectLayerMask))
+        {
+            nextInTrain.updateAnimationDirection();
+            return;
+        } 
+
+        nextInTrain.directionMod = previousDirectionMod;
+        nextInTrain.startingPosition = nextInTrain.transform.position;
+        nextInTrain.endingPosition = transform.position;
+
+        AreaManager.getMovementManager().startMovement(nextInTrain);
+        nextInTrain.moveNextInTrain();
+    }
+
+    public void hideSprite()
+    {
+        getAnimationManager().spriteRenderer.enabled = false;
+    }
+
+    public void showSprite()
+    {
+        getAnimationManager().spriteRenderer.enabled = true;
+    }
+
+    public static MovementTracker determineLowestTrainPriority(MovementTracker movementOne, MovementTracker movementTwo)
+    {
+        if(movementOne.getPlaceInTrain() < movementTwo.getPlaceInTrain())
+        {
+            return movementTwo;
+        } else
+        {
+            return movementOne;
+        }
     }
 }

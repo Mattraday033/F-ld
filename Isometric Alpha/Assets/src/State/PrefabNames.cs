@@ -187,10 +187,13 @@ public static class PrefabNames
 
     #endregion
 
+    public const string playerPrefab = "PlayerOOC";
+
     #region Interactable Game Objects
     public const string interactablesFolder = "Interactables/";
     public const string NPC = interactablesFolder + "NPC";
-    public const string PartyMember = interactablesFolder + "PartyMember";
+    public const string placedPartyMember = interactablesFolder + "PlacedPartyMember";
+    public const string partyMemberFollower = interactablesFolder + "PartyMemberFollower";
     public const string npcExtraSpace = interactablesFolder + "NPC Extra Space";
     public const string transitionSpace = interactablesFolder + "Transition Space";
     public const string vaultableObject = interactablesFolder + "VaultableObject";

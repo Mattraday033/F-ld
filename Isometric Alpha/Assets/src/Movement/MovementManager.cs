@@ -17,6 +17,7 @@ public class MovementManager : MonoBehaviour
                                                                                 distance1TileNorthWestGrid,
                                                                                 distance1TileSouthWestGrid,
                                                                                 distance1TileSouthEastGrid};
+    public readonly static UnityEvent OnMoveStarted = new UnityEvent();
 
     public readonly static UnityEvent<int> OnMoveFinished = new UnityEvent<int>();
 
@@ -100,20 +101,21 @@ public class MovementManager : MonoBehaviour
 
         //movement loop
 
+        OnMoveStarted.Invoke();
+
         foreach (MovementTracker movement in allMovementTrackers)
         {
             if (movement == null) { continue; }
 
             if (!movement.isMoving())
             {
-                currentMovements.Add(movement, StartCoroutine(moveSprite(movement)));
+                startMovement(movement);
 
                 movement.updateFacing();
 
-                if (!PlayerMovement.getInstance().directionMod.Equals(Vector3Int.zero))
+                if (movement.getMovementIndex() == playerSpriteIndex)
                 {
-                    PartyMemberMovement.showAllPartyMembers();
-                    movePartyMembers(0, grid.CellToWorld(getFirstPartyMemberEndingPosition()));
+                    movement.moveNextInTrain();
                 }
             }
         }
@@ -121,6 +123,11 @@ public class MovementManager : MonoBehaviour
         smallWaitAfterMoving = true;
 
         changeFooting();
+    }
+
+    public void startMovement(MovementTracker movement)
+    {
+        currentMovements.Add(movement, StartCoroutine(moveSprite(movement)));
     }
 
     public static bool onLeftFoot()
@@ -222,6 +229,9 @@ public class MovementManager : MonoBehaviour
 
         float elapsedTime = 0;
 
+        movement.updateFacing();
+        movement.updateAnimationDirection();
+
         while (elapsedTime <= timeToMove)
         {
             movement.getTransform().position = Vector3.Lerp(movement.startingPosition, movement.endingPosition, (elapsedTime / timeToMove));
@@ -232,7 +242,7 @@ public class MovementManager : MonoBehaviour
         movement.getTransform().position = movement.endingPosition;
         movement.startingPosition = movement.getTransform().position;
 
-        PartyMemberMovement.hideOverlappingPartyMembers();
+        PartyMemberTrainManager.hideOverlappingPartyMembers();
 
         currentMovements.Remove(movement);
 
@@ -296,31 +306,31 @@ public class MovementManager : MonoBehaviour
         return grid.WorldToCell(PlayerMovement.getInstance().startingPosition);
     }
 
-    public void movePartyMembers(int partyMemberIndex, Vector3 endingPosition)
-    {
+    // public void movePartyMembers(int partyMemberIndex, Vector3 endingPosition)
+    // {
 
-        // if (PartyMemberMovement.partyMemberTrain == null)
-        // {
-        //     return;
-        // }
+    //     // if (PartyMemberMovement.partyMemberTrain == null)
+    //     // {
+    //     //     return;
+    //     // }
 
-        // if (partyMemberIndex < PartyMemberMovement.partyMemberTrain.Length &&
-        //     partyMemberIndex < (PartyMemberMovement.stepCounter))
-        // {
-        //     Vector3 startingPosition = PartyMemberMovement.partyMemberTrain[partyMemberIndex].position;
+    //     // if (partyMemberIndex < PartyMemberMovement.partyMemberTrain.Length &&
+    //     //     partyMemberIndex < (PartyMemberMovement.stepCounter))
+    //     // {
+    //     //     Vector3 startingPosition = PartyMemberMovement.partyMemberTrain[partyMemberIndex].position;
 
-        //     StartCoroutine(moveSprite(PartyMemberMovement.partyMemberTrain[partyMemberIndex]));
+    //     //     StartCoroutine(moveSprite(PartyMemberMovement.partyMemberTrain[partyMemberIndex]));
 
-        //     endingPosition = startingPosition;
+    //     //     endingPosition = startingPosition;
 
-        //     movePartyMembers(partyMemberIndex + 1, endingPosition);
-        // }
-        // else
-        // {
-        //     PartyMemberMovement.stepCounter++;
-        //     return;
-        // }
-    }
+    //     //     movePartyMembers(partyMemberIndex + 1, endingPosition);
+    //     // }
+    //     // else
+    //     // {
+    //     //     PartyMemberMovement.stepCounter++;
+    //     //     return;
+    //     // }
+    // }
 
     private void preventMonstersFromMovingAwayFromPlayer()
     {

@@ -65,7 +65,7 @@ public class PartyMemberPlacer : MonoBehaviour
 			return;
 		}
 
-        GameObject placedPartyMember = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.PartyMember), AreaManager.getNPCParent());
+        GameObject placedPartyMember = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.placedPartyMember), AreaManager.getNPCParent());
 
         PartyMemberTrainPriority trainPriority = placedPartyMember.GetComponent<PartyMemberTrainPriority>();
         trainPriority.partyMemberName = nameOfPartyMember;

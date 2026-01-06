@@ -14,7 +14,6 @@ public static class PartyManager
         partyMemberDict = new Dictionary<string, PartyMember>();
         resetPartyMembers();
     }
-    
     public static int getNumberOfPartyMembersTotal()
     {
         return partyMemberDict.Count;
@@ -22,14 +21,7 @@ public static class PartyManager
 
     public static List<PartyMember> getAllPartyMembers()
     {
-        List<PartyMember> allPartyMembers = new List<PartyMember>();
-
-        foreach (KeyValuePair<string, PartyMember> kvp in partyMemberDict)
-        {
-            allPartyMembers.Add(kvp.Value);
-        }
-
-        return allPartyMembers;
+        return new List<PartyMember>(partyMemberDict.Values);
     }
 
     public static PartyMember getPartyMember(string partyMemberName)
@@ -92,10 +84,8 @@ public static class PartyManager
 
     public static bool hasJoinablePartyMembers()
     {
-        foreach (KeyValuePair<string, PartyMember> kvp in partyMemberDict)
+        foreach (PartyMember partyMember in partyMemberDict.Values)
         {
-            PartyMember partyMember = kvp.Value;
-
             if (partyMember.canJoinParty)
             {
                 return true;
@@ -109,11 +99,11 @@ public static class PartyManager
     {
         List<PartyMember> joinablePartyMembers = new List<PartyMember>();
 
-        foreach (KeyValuePair<string, PartyMember> kvp in partyMemberDict)
+        foreach (PartyMember partyMember in partyMemberDict.Values)
         {
-            if (kvp.Value.canJoinParty)
+            if (partyMember.canJoinParty)
             {
-                joinablePartyMembers.Add(kvp.Value);
+                joinablePartyMembers.Add(partyMember);
             }
         }
 
@@ -254,5 +244,25 @@ public static class PartyManager
         {
             partyMember.stats.addXP(xpToAdd);
         }
+    }
+
+    public static List<PartyMember> getAllPartyMembersInTrain()
+    {
+        List<PartyMember> train = new List<PartyMember>();
+
+        // foreach(PartyMember partyMember in partyMemberDict.Values)
+        // {
+        //     if(State.formation.contains(partyMember.stats.getName()) && !partyMember.stats.isDead())
+        //     {
+        //         train.Add(partyMember);
+        //     }
+        // }
+        train.Add(partyMemberDict[NPCNameList.thatch]);
+        train.Add(partyMemberDict[NPCNameList.carter]);
+        train.Add(partyMemberDict[NPCNameList.nandor]);
+        train.Add(partyMemberDict[NPCNameList.thatch]);
+        train.Add(partyMemberDict[NPCNameList.carter]);
+        train.Add(partyMemberDict[NPCNameList.nandor]);
+        return train;
     }
 }

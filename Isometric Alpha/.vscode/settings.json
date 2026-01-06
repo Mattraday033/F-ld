@@ -33,7 +33,10 @@
         "**/*.pidb": true,
         "**/*.png": true,
         "**/*.prefab": true,
-//        "**/*.json": true,
+        "**/results.json": true,
+        "**/results.txt": true,
+        "**/*.csv": true,
+        "**/*.md": true,
         "**/*.psd": true,
         "**/*.suo": true,
         "**/*.tga": true,
@@ -58,7 +61,6 @@
         "temp/": true,
         "Temp/": true,
         "UserSettings/": true,
-        
         "Packages/": true,
         "Other Assets/": true,
         "MonoBleedingEdge/": true,
@@ -124,5 +126,8 @@
     "csharp.format.enable": true,
     "editor.suggest.showWords": false,
     "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": false,
-    "search.useIgnoreFiles": false
+    "search.useIgnoreFiles": false,
+    "omnisharp.enableCompletionItemCommitCharacters": false,
+    "omnisharp.acceptSuggestionsOnCommitCharacter": false,
+    "editor.acceptSuggestionsOnCommitCharacter": false
 }

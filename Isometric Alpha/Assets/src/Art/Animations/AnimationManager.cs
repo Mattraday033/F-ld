@@ -31,7 +31,19 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         get;
         private set;
     }
-    private CharacterFacing facing = new CharacterFacing();
+    public CharacterFacing _Facing = new CharacterFacing();
+
+    public CharacterFacing facing
+    {
+        get
+        {
+            return _Facing;
+        }
+        private set
+        {
+            _Facing = value;
+        }
+    }
     public SpriteRenderer spriteRenderer;
 
     private CharacterAnimationType currentIdle;

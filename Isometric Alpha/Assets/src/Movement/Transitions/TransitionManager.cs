@@ -103,7 +103,7 @@ public class TransitionManager : MonoBehaviour
         currentTransitions = new List<Transition>();
 
         CollectTransitionSpaces.Invoke();
-
+        MouseHoverManager.OnHoverPanelCreation.Invoke();
         moveToMatchingTransition(transition);
 
         AfterTransition.Invoke();

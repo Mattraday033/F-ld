@@ -55,7 +55,7 @@ public static class Wisdom
 
     public static string getDescription()
     {
-        string startingDescription = "Wisdom is the Primary Stat of knowledge, curiousity, and introspection. " +
+        string startingDescription = "Wisdom determines a character's knowledge, curiosity, and introspection. " +
                                      "Wise characters have an inherent appetite for mystery which propels them to always be on the hunt for ways to better themselves. " +
                                      "Their tendancy for self betterment leads them to hone their bodies as well as the mind, keeping fit and ready for when conflict becomes inevitable. " +
                                      "Will you use your knowledge to better those around you? " +

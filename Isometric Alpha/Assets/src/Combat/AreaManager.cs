@@ -112,12 +112,12 @@ public class AreaManager : MonoBehaviour
     
     public static MovementManager getMovementManager()
     {
-        return AreaManager.getPlayerParent().GetComponent<MovementManager>();
+        return getPlayerParent().GetComponent<MovementManager>();
     }
 
     public static Grid getMasterGrid()
     {
-        return AreaManager.getPlayerParent().GetComponent<MovementManager>().grid;
+        return getPlayerParent().GetComponent<MovementManager>().grid;
     }
 
     public static Transform getGridParent()

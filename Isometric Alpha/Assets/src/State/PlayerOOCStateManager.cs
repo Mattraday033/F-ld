@@ -147,11 +147,11 @@ public static class PlayerOOCStateManager
                 OnStateChangeToWalking.Invoke();
                 //EscapeStack.escapeAll();
                 OOCUIManager.updateOOCUI();
-                PartyMemberMovement.showPartyMemberTrain();
+                PartyMemberTrainManager.showPartyMemberTrain();
                 break;
             case OOCActivity.inDialogue:
-                PartyMemberMovement.instantiatePartyMemberTrain();
-                PartyMemberMovement.hidePartyMemberTrain();
+                PartyMemberTrainManager.createPartyMemberTrain();
+                PartyMemberTrainManager.hidePartyMemberTrain();
                 OnStateChangeToInDialogue.Invoke();
                 break;
             case OOCActivity.inUI:

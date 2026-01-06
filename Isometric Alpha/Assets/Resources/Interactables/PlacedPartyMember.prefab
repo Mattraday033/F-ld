@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3037790728722644318}
   - component: {fileID: 939906928805741642}
   m_Layer: 16
-  m_Name: PartyMember
+  m_Name: PlacedPartyMember
   m_TagString: PartyMember
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

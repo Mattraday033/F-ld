@@ -16,6 +16,13 @@ public static class EnemyTypeFolderPathList
 
     public static string getEnemyTypeFolderPath(string enemyType)
     {
+        if(enemyType.Equals(PartyManager.getPlayerStats().getName()) || 
+        enemyType.Equals(NPCNameList.carter) || 
+        enemyType.Equals(NPCNameList.nandor))
+        {
+            enemyType = NPCNameList.thatch;
+        }
+
         if(!folderPathDict.ContainsKey(enemyType))
         {
             return folderPathDict[MonsterNameList.executioner];

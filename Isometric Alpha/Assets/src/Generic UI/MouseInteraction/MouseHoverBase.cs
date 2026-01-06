@@ -34,4 +34,19 @@ public class MouseHoverBase : MonoBehaviour
         canvasGroup.alpha = fullyVisable;
     }
 
+    private void OnEnable()
+    {
+        MouseHoverManager.OnHoverPanelCreation.AddListener(destroyHover);
+    }
+
+    private void OnDestroy()
+    {
+        MouseHoverManager.OnHoverPanelCreation.RemoveListener(destroyHover);
+    }
+
+    private void destroyHover()
+    {
+        DestroyImmediate(gameObject);
+    }
+
 }

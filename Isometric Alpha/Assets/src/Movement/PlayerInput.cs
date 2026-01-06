@@ -751,25 +751,23 @@ public class PlayerInput : MonoBehaviour
             switch (currentMovementKeyCode)
             {
                 case KeyBindingList.moveNorthKey:
-                    PlayerMovement.setPlayerFacing(Facing.NorthEast);
-                    PlayerMovement.adjustPlayerDirectionalModifierGrid();
+                    PlayerMovement.adjustPlayerDirectionalMod(MovementManager.distance1TileNorthEastGrid);
                     break;
 
                 case KeyBindingList.moveWestKey:
-                    PlayerMovement.setPlayerFacing(Facing.NorthWest);
-                    PlayerMovement.adjustPlayerDirectionalModifierGrid();
+                    PlayerMovement.adjustPlayerDirectionalMod(MovementManager.distance1TileNorthWestGrid);
                     break;
 
                 case KeyBindingList.moveSouthKey:
-                    PlayerMovement.setPlayerFacing(Facing.SouthWest);
-                    PlayerMovement.adjustPlayerDirectionalModifierGrid();
+                    PlayerMovement.adjustPlayerDirectionalMod(MovementManager.distance1TileSouthWestGrid);
                     break;
 
                 case KeyBindingList.moveEastKey:
-                    PlayerMovement.setPlayerFacing(Facing.SouthEast);
-                    PlayerMovement.adjustPlayerDirectionalModifierGrid();
+                    PlayerMovement.adjustPlayerDirectionalMod(MovementManager.distance1TileSouthEastGrid);
                     break;
             }
+
+            PlayerMovement.updatePlayerFacing();
 
             if (PositionQuery.moveableObjectAtPosition(PlayerMovement.getColliderWorldPosition()) != null)
             {

@@ -393,8 +393,7 @@ public static class EnemyPackInfoList
         #region MineLvl_2-1b
         list = new List<EnemyPackInfo>();
 
-        list.Add(testFight);
-        // list.Add(oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat);
+        list.Add(oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat);
 
         enemyPackInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1b, list);
         #endregion

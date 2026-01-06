@@ -850,11 +850,6 @@ public class AllyStats : Stats
 
     #region IDescribable
 
-    public override string getName()
-    {
-        return NPCNameList.thatch;
-    }
-
     public override GameObject getRowType(RowType rowType)
     {
         return Resources.Load<GameObject>(PrefabNames.party2x3GridSection);

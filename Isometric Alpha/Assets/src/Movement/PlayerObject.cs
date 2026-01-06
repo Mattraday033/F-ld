@@ -41,11 +41,29 @@ public class PlayerObject : MonoBehaviour
         animationManager.setAnimations(PartyManager.getPlayer().getName());
 
         playerMovement.Awake();
+        playerMovement.updateFacing();
         playerMovement.updateIdleDirection();
+        MovementManager.OnMoveFinished.AddListener(playerMovement.preventAnimationStall);
         
         TerrainVisibilityManager.initializeOnTransition();
 
         MovementManager.OnMoveFinished.AddListener(setButtonPromptVisibility);
+
+    }
+
+    void Start()
+    {
+        StartCoroutine(setCameraSpeed());
+    }
+
+    private IEnumerator setCameraSpeed()
+    {
+        yield return null;
+
+        if(PlayerOOCStateManager.currentActivity != OOCActivity.inDialogue)
+        {
+            DialogueManager.setCameraToDefaultSpeed();  
+        }
     }
 
     private void OnDestroy()

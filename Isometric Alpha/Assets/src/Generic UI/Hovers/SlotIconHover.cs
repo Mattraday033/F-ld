@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using TMPro;
 
 public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IHoverIconSource, IDescribable
 {
@@ -77,7 +76,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
     }
 
-    public void spawnHoverIcon()
+    public virtual void spawnHoverIcon()
     {
         MouseHoverManager.spawnHoverIcon(this, transform);
     }

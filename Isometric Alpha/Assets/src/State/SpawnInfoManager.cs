@@ -7,7 +7,7 @@ public static class SpawnInfoManager
 
     public static SaveBlueprint lastSaveBlueprint;
     public static List<GameObject> allSpawnedObjects;
-    private const string playerPrefab = "PlayerOOC";
+
 
     [RuntimeInitializeOnLoadMethod]
     private static void initializeSpawnInfoManager()
@@ -62,6 +62,8 @@ public static class SpawnInfoManager
         spawnAllTransitions();
 
         allSpawnedObjects.AddRange(instantiateAllAxisSpawnDetails());
+
+        PartyMemberTrainManager.createPartyMemberTrain();
 
         performButtonScriptStartingAction();
 
@@ -118,7 +120,7 @@ public static class SpawnInfoManager
     {
         List<GameObject> spawnedObjects = new List<GameObject>();
 
-        Transform player = GameObject.Instantiate(Resources.Load<GameObject>(playerPrefab), AreaManager.getPlayerParent()).transform;
+        Transform player = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.playerPrefab), AreaManager.getPlayerParent()).transform;
 
         if (AreaManager.saveBlueprint != null)
         {

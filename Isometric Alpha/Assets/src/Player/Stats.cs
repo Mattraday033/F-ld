@@ -1144,7 +1144,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     #region IDescribable
 
-    public virtual string getName()
+    public string getName()
     {
         return characterName;
     }

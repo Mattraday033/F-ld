@@ -191,6 +191,24 @@ public class PartyMember : IDescribable, IDescribableInBlocks
 		return stats.getDescriptionBuildingBlocks();
 	}
 
+    public override bool Equals(object obj)
+    {
+        PartyMember otherPartyMember = obj as PartyMember;
+
+        if(otherPartyMember == null)
+        {
+            return false;
+        }
+
+        if((otherPartyMember.stats == null && stats != null) || 
+            (otherPartyMember.stats != null && stats == null))
+        {
+            return false;
+        }
+
+        return otherPartyMember.stats.getName().Equals(stats.getName());
+    }
+
 }
 
 public class CompanionCombatActionDescriptionWrapper : IDescribable, IDescribableInBlocks

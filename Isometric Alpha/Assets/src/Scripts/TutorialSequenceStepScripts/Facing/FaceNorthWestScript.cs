@@ -6,9 +6,7 @@ public class FaceNorthWestScript : TutorialSequenceStepScript
 {
     public override void runScript(GameObject target)
     {
-        State.playerFacing.setFacing(Facing.NorthWest);
-
-        PlayerMovement.adjustPlayerDirectionalModifierGrid();
+        PlayerMovement.setPlayerFacing(Facing.NorthWest);
     }
 }
 

@@ -48,7 +48,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
     public void setGrid(AllyStats[][] newGrid)
     {
         grid = newGrid;
-        PartyMemberMovement.instantiatePartyMemberTrain();
+        // PartyMemberTrainManager.createPartyMemberTrain();
     }
 
     public void setCharacterAtCoords(AllyStats newStats, GridCoords coords)
@@ -140,7 +140,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
             }
         }
 
-        PartyMemberMovement.instantiatePartyMemberTrain();
+        PartyMemberTrainManager.createPartyMemberTrain();
     }
 
     public void removeCharacter(AllyStats characterToRemove)
@@ -171,7 +171,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
             }
         }
 
-        PartyMemberMovement.instantiatePartyMemberTrain();
+        PartyMemberTrainManager.createPartyMemberTrain();
     }
 
     public static AllyStats[][] getEmptyGrid()

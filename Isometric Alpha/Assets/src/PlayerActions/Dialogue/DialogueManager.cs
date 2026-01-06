@@ -827,7 +827,7 @@ public class DialogueManager : MonoBehaviour
 
                     Helpers.updateColliderPosition(PlayerObject.getInstanceTransform());
 
-                    PartyMemberMovement.instantiatePartyMemberTrain();
+                    PartyMemberTrainManager.createPartyMemberTrain();
 
                     continueStory();
 
@@ -899,7 +899,7 @@ public class DialogueManager : MonoBehaviour
 
                     Helpers.updateColliderPosition(PlayerObject.getInstanceTransform());
 
-                    PartyMemberMovement.instantiatePartyMemberTrain();
+                    PartyMemberTrainManager.createPartyMemberTrain();
 
                     continueStory();
 
@@ -1123,7 +1123,7 @@ public class DialogueManager : MonoBehaviour
 
                 case "hidetrain":
 
-                    PartyMemberMovement.instantiatePartyMemberTrain();
+                    PartyMemberTrainManager.createPartyMemberTrain();
 
                     continueStory();
                     break;

@@ -36,12 +36,10 @@ public class Selector : ScriptableObject, ICloneable
 	public GridCoords[] childTileAdjustments; //should be empty if singleTile is true
 	
 	private GameObject selectorObject;
-	private CapsuleCollider2D collider;
 	
 	void Start()
 	{
 		selectorObject = Resources.Load<GameObject>(name);
-		collider = selectorObject.GetComponent<CapsuleCollider2D>();
 	}
 	
 	public virtual GameObject getSelectorObject()
@@ -171,20 +169,6 @@ public class Selector : ScriptableObject, ICloneable
 		return false;
 	}
 	
-	public CapsuleCollider2D getCollider()
-	{
-		if(selectorObject == null)
-		{ 
-			selectorObject = Instantiate(Resources.Load<GameObject>(name), CombatGrid.getPositionAt(startRow, startCol),Quaternion.identity);
-			collider = selectorObject.GetComponent<CapsuleCollider2D>();
-		} else if(collider == null)
-		{
-			collider = selectorObject.GetComponent<CapsuleCollider2D>();
-		} 
-		
-		return collider;
-	}
-
     public List<GameObject> getAllTileChildren()
     {
         List<GameObject> allTileChildren = new List<GameObject>();
@@ -286,7 +270,6 @@ public class Selector : ScriptableObject, ICloneable
 		if(selectorObject == null)
 		{
 			selectorObject = Instantiate(Resources.Load<GameObject>(name), CombatGrid.getPositionAt(startRow, startCol),Quaternion.identity);
-			collider = selectorObject.GetComponent<CapsuleCollider2D>();
 		} 
 		
 		selectorObject.SetActive(active);

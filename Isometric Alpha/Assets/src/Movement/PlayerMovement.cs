@@ -1,11 +1,6 @@
 ﻿using System.IO;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Tilemaps;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
-using Cinemachine;
 using Ink.Runtime;
 
 public class PlayerMovement : MovementTracker
@@ -16,36 +11,27 @@ public class PlayerMovement : MovementTracker
         return PartyManager.getPlayerStats().getName();
 	}
 
-    public override Vector3 startingPosition
-    {
-        get => _StartingPosition;
-        set
-        {
-            _StartingPosition = value;
-        }
-    }
+    // public override Vector3 startingPosition
+    // {
+    //     get => _StartingPosition;
+    //     set
+    //     {
+    //         _StartingPosition = value;
+    //     }
+    // }
 
-    public override Vector3 endingPosition
-    {
-        get => _EndingPosition;
-        set
-        {
-            _EndingPosition = value;
-        }
-    }
-
-    public override Vector3Int directionMod
-    {
-        get => _DirectionMod;
-        set
-        {
-            _DirectionMod = value;
-        }
-    }
+    // public override Vector3 endingPosition
+    // {
+    //     get => _EndingPosition;
+    //     set
+    //     {
+    //         _EndingPosition = value;
+    //     }
+    // }
 
     public override void cancelMovement()
     {
-        _DirectionMod = Vector3Int.zero;
+        directionMod = Vector3Int.zero;
         endingPosition = startingPosition;
     }
 
@@ -63,6 +49,11 @@ public class PlayerMovement : MovementTracker
     {
         return PlayerObject.getAnimationManager();
 	}
+
+    public static void updatePlayerFacing()
+    {
+        instance.updateFacing();
+    }
 
 	public static void setPlayerFacing(Facing newFacing)
 	{
@@ -106,16 +97,15 @@ public class PlayerMovement : MovementTracker
     public void Awake()
     {
         instance = this;
-
-        MovementManager.OnMoveFinished.AddListener(preventAnimationStall);
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         MovementManager.OnMoveFinished.RemoveListener(preventAnimationStall);
     }
 
-    private void preventAnimationStall(int index)
+    public void preventAnimationStall(int index)
     {
         if(index != getMovementIndex() || getAnimationManager() == null)
         {
@@ -149,43 +139,11 @@ public class PlayerMovement : MovementTracker
     void Start()
     {
         MovementManager.addMovementTracker(this);
-
-        adjustDirectionalModifierGrid();
     }
 
-    public static void adjustPlayerDirectionalModifierGrid()
+    public static void adjustPlayerDirectionalMod(Vector3Int directionMod)
     {
-        getInstance().adjustDirectionalModifierGrid();
-    }
-
-    private void adjustDirectionalModifierGrid()
-    {
-        if (State.playerFacing.getFacing() == Facing.NorthEast)
-        {
-            _DirectionMod = MovementManager.distance1TileNorthEastGrid;
-            return;
-
-        }
-        else if (State.playerFacing.getFacing() == Facing.NorthWest)
-        {
-            _DirectionMod = MovementManager.distance1TileNorthWestGrid;
-            return;
-
-        }
-        else if (State.playerFacing.getFacing() == Facing.SouthWest)
-        {
-            _DirectionMod = MovementManager.distance1TileSouthWestGrid;
-            return;
-
-        }
-        else if (State.playerFacing.getFacing() == Facing.SouthEast)
-        {
-            _DirectionMod = MovementManager.distance1TileSouthEastGrid;
-            return;
-        }
-
-        throw new IOException("State.playerFacing isn't set to any direction");
-
+        getInstance().directionMod = directionMod;
     }
 
     public static void cancelPlayerMovement()
@@ -325,5 +283,10 @@ public class PlayerMovement : MovementTracker
         }
 
         return currentStory;
+    }
+
+    public static void setNextInTrain(PartyMemberMovement nextInTrain)
+    {
+        instance.nextInTrain = nextInTrain;
     }
 }
