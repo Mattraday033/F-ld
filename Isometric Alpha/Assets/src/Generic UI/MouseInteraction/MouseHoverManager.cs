@@ -173,8 +173,11 @@ public static class MouseHoverManager
 
         OnHoverPanelCreation.Invoke();
 
-        hoverDescriptionPanelObject = GameObject.Instantiate(Resources.Load<GameObject>(prefabName), parent);
+        hoverDescriptionPanelObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.hoverIconCombatActionDescriptionPanel), parent);
         hoverDescriptionPanelObject.AddComponent<HoverPanelCreationListener>();
+
+        Transform customPrefabParent = hoverDescriptionPanelObject.GetComponent<DescriptionPanelSlot>().descriptionPanelParent;
+        hoverDescriptionPanelObject = GameObject.Instantiate(Resources.Load<GameObject>(prefabName), customPrefabParent);
 
         hoverDescriptionPanelObject.SetActive(true);
     }

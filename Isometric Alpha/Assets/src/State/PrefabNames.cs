@@ -131,7 +131,10 @@ public static class PrefabNames
     public const string traitHoverDescriptionPanel = "Trait Hover Description Panel";
     public const string multiStackableTraitHoverDescriptionPanel = "MultiStackable Trait Hover Description Panel";
 
+    public const string characterGenerationStatDescriptionPanel = "Chargen Mouse Hover";
+
     public const string combatResultsPopUp = "Combat Results PopUp";
+    public const string star = "Star";
 
     public const string popUpScreenBlocker = "PopUp Screen Blocker";
 
