@@ -153,7 +153,15 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         outline = new SpriteOutline();
         outline.setSpriteRenderer(spriteRenderer);
 
+        tutorialTarget = list.tutorialTarget;
+        tutorialTarget.tutorialHash = getTutorialTargetHash();
+
         list.combatantHover.linkedStats = this;
+
+        foreach(Trait trait in traits)
+        {
+            trait.setIdleAnimationOnApplication(animationManager);
+        }
     }
 
     public virtual AbilityMenuManager getAbilityMenuManager()
@@ -189,6 +197,28 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     public virtual bool isInsideCoordinates(GridCoords[] coords)
     {
         return coords.Contains(position);
+    }
+
+    #endregion
+
+    #region Tutorial
+    
+    public TutorialSequenceStepTargetObject tutorialTarget;
+
+    public string getTutorialTargetHash()
+    {
+        if(getName().Equals(PartyManager.getPlayerStats().getName()))
+        {
+            return TutorialSequenceList.playerCombatSpriteTargetHash;
+        }
+
+        switch(getName())
+        {
+            case MonsterNameList.armoredBat:
+                return TutorialSequenceList.traitMonsterTargetHash;
+            default:
+                return getName();
+        }
     }
 
     #endregion
@@ -1069,7 +1099,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         }
         else
         {
-            return (describable as AllyStats);
+            return describable as AllyStats;
         }
     }
 
@@ -1194,7 +1224,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     {
         panel.setObjectBeingDescribed(this);
 
-        DescriptionPanel.setText(panel.nameText, getName());
+        DescriptionPanel.setText(panel.nameText, getName().Replace(PartyManager.playerMarker, ""));
         DescriptionPanel.setText(panel.hpText, currentHealth + " / " + getTotalHealth());
         DescriptionPanel.setText(panel.armorRatingText, getTotalArmorRatingForDisplay());
 
@@ -1241,7 +1271,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName().Replace(PartyManager.playerMarker, "")));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(currentHealth + " / " + getTotalHealth()));
 

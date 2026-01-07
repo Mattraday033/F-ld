@@ -28,7 +28,7 @@ public class MovementManager : MonoBehaviour
     public static List<MovementTracker> allMovementTrackers;
     public static Dictionary<MovementTracker, Coroutine> currentMovements;
 
-    private const float timeToMove = .135f;
+    private const float timeToMove = .15f;
 
     public const int playerSpriteIndex = 0;
 

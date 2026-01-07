@@ -70,7 +70,7 @@ public class CunningManager : SkillManager
 
     public static void enterCunningMode()
     {
-        SkillManager.destroyAllSkillGrids();
+        destroyAllSkillGrids();
         getInstance().createSkillArea();
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.cunning);
     }

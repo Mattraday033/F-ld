@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class CombatantHover : CombatMouseHover
+public class CombatantHover : CombatMouseHover, IRevealable
 {
     public bool revealPriorityHeld = false;
     public Stats linkedStats;
@@ -11,6 +12,11 @@ public class CombatantHover : CombatMouseHover
 
     public void OnMouseEnter()
     {
+        if(TutorialSequence.blockMouseHovers())
+        {
+            return;
+        }
+
         if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !useHoverTiles())
         {
             revealPriorityHeld = true;
@@ -27,6 +33,11 @@ public class CombatantHover : CombatMouseHover
     {
         revealPriorityHeld = false;
 
+        if(TutorialSequence.blockMouseHovers())
+        {
+            return;
+        }
+
         if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null)
         {
             if (getTargetGameObject() != null && !useHoverTiles())
@@ -42,6 +53,11 @@ public class CombatantHover : CombatMouseHover
 
     public void OnMouseOver()
     {
+        if(TutorialSequence.blockMouseHovers())
+        {
+            return;
+        }
+
         if(AbilityMenuButton.hoveringOverAbilityMenuButton)
         {
             getTargetStats().removeOutline();
@@ -129,14 +145,43 @@ public class CombatantHover : CombatMouseHover
 
     private void OnEnable()
     {
-        SelectorManager.SelectorMoved.AddListener(updateOutlineFromSelectors);
-        DamagePreviewManager.UpdateDamagePreviews.AddListener(addDamagePreview);
+        createListeners();
     }
 
     private void OnDisable()
     {
+        destroyListeners();
+    }
+
+    #region IRevealable
+
+    public SpriteOutline getSpriteOutline()
+    {
+        return getTargetStats().outline;
+    }
+    
+	public void createListeners()
+    {
+        SelectorManager.SelectorMoved.AddListener(updateOutlineFromSelectors);
+        DamagePreviewManager.UpdateDamagePreviews.AddListener(addDamagePreview);
+    }
+
+	public void destroyListeners()
+    {
         SelectorManager.SelectorMoved.RemoveListener(updateOutlineFromSelectors);
         DamagePreviewManager.UpdateDamagePreviews.RemoveListener(addDamagePreview);
     }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        //Empty on purpose
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        //Empty on purpose
+    }
+
+    #endregion
 
 }

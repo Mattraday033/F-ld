@@ -125,8 +125,7 @@ public static class TutorialMessageList
         tutorialDictionary.Add(combatTutorialMessagePrefix + 6, "This is this character's Action Wheel. Use the 'A' and 'D' keys to cycle through your choices. Press 'E' to select an Action.");
         tutorialDictionary.Add(combatTutorialMessagePrefix + 7, "Use the 'WASD' keys to target a creature. Press 'E' to queue your action.");
         tutorialDictionary.Add(combatTutorialMessagePrefix + 8, "Most Actions can only be performed between rounds. When you resolve the turn, all Actions in the Action Order will occur in order, starting at the top.");
-        tutorialDictionary.Add(combatTutorialMessagePrefix + 9, "You can perform one Action per round. Your companions, however, draw from a shared pool of Action slots. These icons show how many actions your party has left.");
-
+        tutorialDictionary.Add(combatTutorialMessagePrefix + 9, "You and your companions can each perfom a single action per round. You can only perform as many total Actions as you have Action Slots, shown here.");
         tutorialDictionary.Add(combatTutorialMessagePrefix + 10, "When you are finished choosing your Actions, click the 'Resolve Turn' button, or press 'Space'. Press 'E' to end this tutorial.");
 
 
@@ -138,7 +137,7 @@ public static class TutorialMessageList
         tutorialDictionary.Add(movableObjectTutorialMessagePrefix + 3, "If a movable object is stuck, face it and press 'Z' to put it back where you found it.");
 
         tutorialDictionary.Add(combatTraitTutorialMessagePrefix + 1, "This creature has a trait that makes it take less damage. Press 'Shift' + 'W' to quickly select it.");
-        tutorialDictionary.Add(combatTraitTutorialMessagePrefix + 2, "When your selector is under a single creature, that creatures stats will be displayed here.");
+        tutorialDictionary.Add(combatTraitTutorialMessagePrefix + 2, "When your selector is under a single creature, that creature's stats will be displayed here.");
         tutorialDictionary.Add(combatTraitTutorialMessagePrefix + 3, "These icons show the enemy's traits. Traits are special boosts or penalties that have been applied to a creature. Hover over them to learn more about them.");
 
         tutorialDictionary.Add(questCounterTutorialMessagePrefix + 1, "This is the Quest Counter. It appears when you enter an area with a Quest Objective.");

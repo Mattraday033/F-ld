@@ -68,10 +68,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8424885160415236264}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 8, y: 60}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6572509242321053972
 MonoBehaviour:
@@ -318,6 +318,8 @@ GameObject:
   - component: {fileID: 7382370535488236058}
   - component: {fileID: 8954376583442343395}
   - component: {fileID: 6115217682039465393}
+  - component: {fileID: 2984667644708475874}
+  - component: {fileID: 4411143631376294205}
   m_Layer: 5
   m_Name: Scroll Container
   m_TagString: Untagged
@@ -421,6 +423,44 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &2984667644708475874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5226306122030408805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df7e0b42142bafa41b0eb154b8633843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useUltraWideTutorialWindow: 0
+  rectTransform: {fileID: 0}
+  tutorialHash: 
+  useUIScale: 0
+  disableArrow: 0
+  image: {fileID: 0}
+  previousColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &4411143631376294205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5226306122030408805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df7e0b42142bafa41b0eb154b8633843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useUltraWideTutorialWindow: 0
+  rectTransform: {fileID: 158085119528395646}
+  tutorialHash: Trait Display
+  useUIScale: 0
+  disableArrow: 0
+  image: {fileID: 5575207913275378888}
+  previousColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &5916599070987202166
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,7 +471,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5617391052382148684}
   - component: {fileID: 6022763646658050983}
-  - component: {fileID: 8269133311979929146}
   - component: {fileID: 4045074160850459501}
   m_Layer: 5
   m_Name: Combatant Hover Panel
@@ -479,25 +518,6 @@ MonoBehaviour:
   descriptionPanelParent: {fileID: 7150090150504424626}
   traitDisplay: {fileID: 3762250737763184130}
   traitDescriptionPanelParent: {fileID: 6104706297592010660}
---- !u!114 &8269133311979929146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5916599070987202166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df7e0b42142bafa41b0eb154b8633843, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useUltraWideTutorialWindow: 0
-  rectTransform: {fileID: 5617391052382148684}
-  tutorialHash: Bottom Right Hover Panel
-  useUIScale: 0
-  disableArrow: 0
-  image: {fileID: 2815669714282402955}
-  previousColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &4045074160850459501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,7 +531,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neverUseBlocks: 0
+  neverAllowDecisionPanels: 0
   addToScreenOnCreation: 0
+  handlesRelatedDescribables: 0
+  prebuiltBuilder: {fileID: 0}
   builderType: 1
   whiteList: 
   additionalSlots: []
@@ -649,7 +672,6 @@ GameObject:
   - component: {fileID: 158085119528395646}
   - component: {fileID: 7873920170004916934}
   - component: {fileID: 5575207913275378888}
-  - component: {fileID: 1925960901665743487}
   - component: {fileID: 9134995459231862920}
   m_Layer: 5
   m_Name: Combatant Trait Icon Display Panel Background
@@ -717,25 +739,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1925960901665743487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6368816711457714347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df7e0b42142bafa41b0eb154b8633843, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useUltraWideTutorialWindow: 0
-  rectTransform: {fileID: 158085119528395646}
-  tutorialHash: Trait Display
-  useUIScale: 0
-  disableArrow: 0
-  image: {fileID: 5575207913275378888}
-  previousColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &9134995459231862920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1050,6 +1053,7 @@ MonoBehaviour:
   columnHeader: {fileID: 0}
   sortPanels: 0
   defaultSortBy: 1
+  listOfRows: []
   objectsDisabledWithSlider: []
 --- !u!114 &8830465852166304858
 MonoBehaviour:

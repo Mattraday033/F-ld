@@ -152,7 +152,7 @@ public class PartyMember : IDescribable, IDescribableInBlocks
 
 		// DescriptionPanel.setImageColor(panel.iconPanel, spriteColor);
 
-		DescriptionPanel.setText(panel.nameText, getName());
+		DescriptionPanel.setText(panel.nameText, getName().Replace(PartyManager.playerMarker, ""));
 		
 		DescriptionPanel.setImageColor(panel.iconPanel, stats.getSpriteColor());
 	}
@@ -161,7 +161,7 @@ public class PartyMember : IDescribable, IDescribableInBlocks
     {
         panel.setObjectBeingDescribed(this);
 
-        DescriptionPanel.setText(panel.nameText, getName());
+        DescriptionPanel.setText(panel.nameText, getName().Replace(PartyManager.playerMarker, ""));
         DescriptionPanel.setText(panel.levelText, stats.getLevel());
         DescriptionPanel.setImageColor(panel.iconPanel, stats.getSpriteColor());
 	}

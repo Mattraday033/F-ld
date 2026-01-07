@@ -31,7 +31,6 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
 
     public string dialogueUponSceneLoadKey;
 
-    //[SerializeField]
     public ItemListID[] guaranteedDrops;
 
     public int numberOfDrops = 1; //number of rolls on their drop table
@@ -42,6 +41,15 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
         this.enemyTypes = enemyTypes;
 
         this.dropTableName = dropTableName;
+    }
+
+    public EnemyPackInfo(EnemyAmount[] enemyTypes, string dropTableName, string tutorialSequenceKey)
+    {
+        this.enemyTypes = enemyTypes;
+
+        this.dropTableName = dropTableName;
+
+        this.tutorialSequenceKey = tutorialSequenceKey;
     }
 
     public EnemyPackInfo(EnemyAmount[] enemyTypes, string dropTableName, ItemListID[] guaranteedDrops)

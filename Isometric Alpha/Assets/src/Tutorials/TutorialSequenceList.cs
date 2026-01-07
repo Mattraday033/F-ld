@@ -85,7 +85,7 @@ public static class TutorialSequenceList
     public const string mapPopUpWindow = "Map PopUp Window";
     public const string mapTileQuestCounter = "Map Tile Quest Counter";
 
-    private const string playerCombatSpriteTargetHash = "Player Combat";
+    public const string playerCombatSpriteTargetHash = "Player Combat";
     private const string allyZoneTargetHash = "Ally Zone";
     private const string enemyZoneTargetHash = "Enemy Zone";
     private const string surpriseIconTargetHash = "Surprise Icon";
@@ -98,8 +98,7 @@ public static class TutorialSequenceList
     private const string combatActionWheelTargetHash = "Combat Action Wheel";
     private const string actionOrderTargetHash = "Action Order";
     private const string actionSlotIconsTargetHash = "Action Slot Icons";
-    private const string retreatUITargetHash = "Retreat UI";
-    private const string traitMonsterTargetHash = "Trait Monster";
+    public const string traitMonsterTargetHash = "Trait Monster";
 
     public const string movableObjectTutorialSequenceKey = "Movable Object Tutorial";
     public const string movableObjectTutorialSeenFlag = "movableObjectTutorialSequenceEntered";
@@ -398,7 +397,6 @@ public static class TutorialSequenceList
         TutorialSequenceStep traitTutorialStepOne = new TutorialSequenceStep(TutorialMessageList.combatTraitTutorialMessagePrefix + 1, traitMonsterTargetHash, noScript, new SnapSelectorToMaster(), ArrowDirection.Left, new KeyCode[] { KeyCode.W }, createPopUpScreenBlocker);
         traitTutorialStepOne.addShiftToKeyCodeMessage = true;
         traitTutorialSteps.Add(traitTutorialStepOne);
-        
 
         traitTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTraitTutorialMessagePrefix + 2, bottomRightHoverPanelTargetHash, ArrowDirection.Left, new KeyCode[] { KeyCode.Space }));
 
@@ -408,6 +406,7 @@ public static class TutorialSequenceList
 
 
         TutorialSequence traitTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingActor, doNoSkipCurrentActivityChange, traitTutorialSequenceKey, traitTutorialSteps);
+        traitTutorialSequence.preventMouseHovers = true;
 
         traitTutorialSequence.setSkipScript(new SkipCombatTutorialScript());
 

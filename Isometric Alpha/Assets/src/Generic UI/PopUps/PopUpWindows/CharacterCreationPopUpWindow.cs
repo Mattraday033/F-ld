@@ -224,7 +224,7 @@ public class CharacterCreationPopUpWindow : PopUpWindow
 
         LoadSaveFile.loadCleanSlateSaveFile();
 
-        AllyStats playerStats = new AllyStats(name, currentStats.getStrength(), currentStats.getDexterity(), currentStats.getWisdom(), currentStats.getCharisma());
+        AllyStats playerStats = new AllyStats(name + PartyManager.playerMarker, currentStats.getStrength(), currentStats.getDexterity(), currentStats.getWisdom(), currentStats.getCharisma());
 
         playerStats.combatActionArray = new CombatActionArray(playerStats, getStartingActions(playerStats));
 
@@ -235,44 +235,6 @@ public class CharacterCreationPopUpWindow : PopUpWindow
 
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.inDialogue);
         OverallUIManager.resetScreenStates();
-    }
-
-    private string getStatTitle()
-    {
-        PrimaryStat chosenStat = currentStats.getHighestPrimaryStats()[0];
-
-        switch (chosenStat)
-        {
-            case PrimaryStat.Strength:
-                return "Strength";
-            case PrimaryStat.Dexterity:
-                return "Dexterity";
-            case PrimaryStat.Wisdom:
-                return "Wisdom";
-            case PrimaryStat.Charisma:
-                return "Charisma";
-            default:
-                return "";
-        }
-    }
-
-    private string getStatDescription()
-    {
-        PrimaryStat chosenStat = currentStats.getHighestPrimaryStats()[0];
-
-        switch (chosenStat)
-        {
-            case PrimaryStat.Strength:
-                return Strength.getDescription();
-            case PrimaryStat.Dexterity:
-                return Dexterity.getDescription();
-            case PrimaryStat.Wisdom:
-                return Wisdom.getDescription();
-            case PrimaryStat.Charisma:
-                return Charisma.getDescription();
-            default:
-                return "";
-        }
     }
 
     public static CombatAction[] getStartingActions(AllyStats stats)
@@ -302,5 +264,63 @@ public class CharacterCreationPopUpWindow : PopUpWindow
     {
         base.closeButtonPress();
         StartingMenuManager.getInstance().revertToMainMenu();
+    }
+
+    public void removeInvalidNameCharacters()
+    {
+        string characterName = nameField.text;
+
+        if(characterName.Length == 0)
+        {
+            return;
+        }
+
+        switch(characterName[characterName.Length-1])
+        {
+            case '<':
+            case '>':
+            case ':':
+            case '"':
+            case '/':
+            case '\\':
+            case '|':
+            case '?':
+            case '*':
+            case '.':
+            case ',':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+            case '0':
+            case '!':
+            case '@':
+            case '#':
+            case '$':
+            case '%':
+            case '^':
+            case '&':
+            case '(':
+            case ')':
+            case '-':
+            case '_':
+            case '+':
+            case '=':
+            case '{':
+            case '}':
+            case '[':
+            case ']':
+            case ';':
+            case '\'':
+            nameField.text = nameField.text.Substring(0, nameField.text.Length-1);
+                break;
+            default:
+                return;
+        }
     }
 }

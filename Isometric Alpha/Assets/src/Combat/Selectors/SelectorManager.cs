@@ -796,7 +796,7 @@ public class SelectorManager : MonoBehaviour
 				}
 
 			}
-			else //if(Input.GetKey(KeyCode.W))
+			else
 			{
 				verticalPriority = true;
 
@@ -815,6 +815,7 @@ public class SelectorManager : MonoBehaviour
 				currentSelector.setToLocation(targetPosition);
 
                 updateAllDamagePreviews();
+                declareSelectors();
 			}
 
 			updateCurrentSelectorPosition();
@@ -829,6 +830,7 @@ public class SelectorManager : MonoBehaviour
 		{
 			frameCount++;
 		}
+
 	}
 
     public static void updateAllDamagePreviews()

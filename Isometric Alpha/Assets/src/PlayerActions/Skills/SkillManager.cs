@@ -21,7 +21,7 @@ public class SkillManager
 
     public Vector2Int selectorPosition;
     public Color oldColor;
-    public GameObject[,] skillGrid;
+    public static GameObject[,] skillGrid;
 
     public ContactFilter2D filterCollider;
 

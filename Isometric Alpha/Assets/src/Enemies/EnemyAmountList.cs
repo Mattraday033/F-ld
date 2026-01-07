@@ -71,6 +71,8 @@ public static class EnemyAmountList
     public readonly static EnemyAmount oneArmoredBat = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.armoredBat));
     public readonly static EnemyAmount twoArmoredBats = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.armoredBat));
 
+    public readonly static EnemyAmount oneArmoredBatShielded = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.armoredBatShielded));
+
     public readonly static EnemyAmount oneDenMother = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.denMother));
     public readonly static EnemyAmount twoDenMothers = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.denMother));
     public readonly static EnemyAmount threeDenMothers = new EnemyAmount(threeEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.denMother));

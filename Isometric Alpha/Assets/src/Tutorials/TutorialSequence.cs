@@ -732,6 +732,7 @@ public class TutorialSequence
     public SkipTutorialScript skipScript;
 
     public bool skipCurrentActivityChange;
+    public bool preventMouseHovers = false;
 
     private bool started;
     private int currentStepIndex = 0;
@@ -740,7 +741,6 @@ public class TutorialSequence
 
     public static bool endingSequence = false;
 
-    //[SerializeField]
     public TutorialSequenceStep[] tutorialSequenceSteps;
 
     public TutorialSequence(OOCActivity activityToReturnTo, bool skipCurrentActivityChange, string tutorialSeenFlag, TutorialSequenceStep[] tutorialSequenceSteps)
@@ -1152,5 +1152,11 @@ public class TutorialSequence
         }
 
         return false;
+    }
+
+    public static bool blockMouseHovers()
+    {
+        return (PlayerOOCStateManager.currentActivity == OOCActivity.inTutorialSequence || CombatStateManager.currentActivity == CurrentActivity.Tutorial)
+                 && currentTutorialSequence != null && currentTutorialSequence.preventMouseHovers;
     }
 }

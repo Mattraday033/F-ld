@@ -51,20 +51,5 @@ public static class PartyMemberList
         }
 
         throw new IOException("No PartyMember by the name " + allyName + " exists");
-
     }
-
-    public static bool isPartyMemberName(string name)
-    {
-        switch (name)
-        {
-            case NPCNameList.thatch:
-            case NPCNameList.carter:
-            case NPCNameList.nandor:
-                return true;
-            default:
-                return false;
-        }
-    }
-
 }

@@ -113,9 +113,37 @@ public class SaveHandler : ScreenManager, IEscapable
 		return EventSystem.current.currentSelectedGameObject == getInstance().saveNameField.gameObject;
 	}
 
+    public void removeInvalidFileNameCharacter()
+    {
+        string saveName = saveNameField.text;
+
+        if(saveName.Length == 0)
+        {
+            return;
+        }
+
+        switch(saveName[saveName.Length-1])
+        {
+            case '<':
+            case '>':
+            case ':':
+            case '"':
+            case '/':
+            case '\\':
+            case '|':
+            case '?':
+            case '*':
+            case '.':
+            saveNameField.text = saveNameField.text.Substring(0, saveNameField.text.Length-1);
+                break;
+            default:
+                return;
+        }
+    }
+
 	public void setSaveButtonInteractibility()
 	{
-		if (saveNameField.text.Length <= 0)
+		if (saveNameField.text.Length <= 0 || saveNameIsInvalid(saveNameField.text))
 		{
 			saveButton.interactable = false;
 		}
@@ -125,15 +153,54 @@ public class SaveHandler : ScreenManager, IEscapable
 		}
 	}
 
+    public static bool saveNameIsInvalid(string saveName)
+    {
+        switch(saveName.ToUpperInvariant())
+        {
+            case "CON":
+            case "PRN":
+            case "AUX":
+            case "NUL":
+            case "COM1":
+            case "COM2":
+            case "COM3":
+            case "COM4":
+            case "COM5":
+            case "COM6":
+            case "COM7":
+            case "COM8":
+            case "COM9":
+            case "COM¹":
+            case "COM²":
+            case "COM³":
+            case "LPT1":
+            case "LPT2":
+            case "LPT3":
+            case "LPT4":
+            case "LPT5":
+            case "LPT6":
+            case "LPT7":
+            case "LPT8":
+            case "LPT9":
+            case "LPT¹":
+            case "LPT²":
+            case "LPT³":
+                return true;
+            default:
+                return false;
+        }
+    }
+
 	public void saveButtonPress()
 	{
 		if(saveNameField.text.Length <= 0 || 
-			saveNameField.text.Length > saveNameCharacterLimit)
+			saveNameField.text.Length > saveNameCharacterLimit || 
+            Flags.isInNewGameMode())
 		{
 			return;
 		}
 		
-		if(grids[0].contains(saveNameField.text))
+		if(grids != null && grids.Length > 0 && grids[0].contains(saveNameField.text))
 		{
 			overwriteButton.spawnPopUp(new OverwriteSaveFile(saveNameField.text));
 		} else

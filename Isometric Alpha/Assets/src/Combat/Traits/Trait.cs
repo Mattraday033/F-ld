@@ -813,9 +813,19 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
     {
         return StatBoostManager.getBonusLeadershipUsesFormula(this);
     }
- 
+
     #endregion
     #endregion
 
+    public override bool Equals(object obj)
+    {
+        Trait other = obj as Trait;
 
+        if(other == null)
+        {
+            return false;
+        }
+
+        return other.getName().Equals(getName());
+    }
 }

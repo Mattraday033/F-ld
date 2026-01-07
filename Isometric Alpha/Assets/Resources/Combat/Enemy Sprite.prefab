@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 7304062698378934162}
   - component: {fileID: 5092550638677199902}
   - component: {fileID: 9105492636863428279}
+  - component: {fileID: 286076530785322949}
   m_Layer: 0
   m_Name: Enemy Sprite
   m_TagString: Enemy
@@ -125,14 +126,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3060634069565429252
-Transform:
+--- !u!224 &3060634069565429252
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3060634069565429253}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -142,6 +142,11 @@ Transform:
   - {fileID: 8665332170792691668}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.22500002}
 --- !u!114 &9065155027352122102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +164,7 @@ MonoBehaviour:
   healthBarManager: {fileID: 3927253085229646063}
   spriteRenderer: {fileID: 3060634069565429307}
   combatantHover: {fileID: 9105492636863428279}
+  tutorialTarget: {fileID: 286076530785322949}
 --- !u!212 &3060634069565429307
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -302,10 +308,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 3060634069565429307}
-  currentIdle: 0
   shadowSprite: {fileID: 5984545968167463069}
   polygonCollider2D: {fileID: 6229417721281125706}
   healthBarManager: {fileID: 0}
+  characterToAnimate: 
+  heartBeatRow: 0
   animancer: {fileID: 5092550638677199902}
   key: 0
 --- !u!95 &7304062698378934162
@@ -358,6 +365,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968e84ea4ad6c764aaf339835d9d86f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  revealPriorityHeld: 0
+  linkedStats: {fileID: 0}
+--- !u!114 &286076530785322949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3060634069565429253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ded253a0f506a46bc9bdd5b358d87b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useUltraWideTutorialWindow: 0
+  rectTransform: {fileID: 3060634069565429252}
+  tutorialHash: 
+  useUIScale: 0
+  disableArrow: 0
 --- !u!1001 &1137799254364956001
 PrefabInstance:
   m_ObjectHideFlags: 0

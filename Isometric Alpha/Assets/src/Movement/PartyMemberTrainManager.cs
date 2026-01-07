@@ -15,15 +15,15 @@ public static class PartyMemberTrainManager
         MovementManager.OnMoveFinished.AddListener(hideOverlappingPartyMembersOnMoveEnded);
         MovementManager.OnMoveStarted.AddListener(showPartyMemberTrain);
         partyMemberTrain = new List<PartyMemberMovement>();
-        stepCounter = 0;
+        stepCounter = 1;
     }
 
     public static void createPartyMemberTrain()
     {
-        stepCounter = 0;
+        stepCounter = 1;
         destroyPartyMemberTrain();
 
-        if(AreaManager.locationName.Length == 0 || AreaList.currentAreaIsHostile())
+        if(AreaManager.locationName == null || AreaManager.locationName.Length == 0 || AreaList.currentAreaIsHostile())
         {
             return;
         }

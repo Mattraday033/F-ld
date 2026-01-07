@@ -258,7 +258,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
 
         #endregion
 
-
+        #region Bats
         #region Giant Bat
         enemyStatsDict.Add(MonsterNameList.giantBat, new EnemyStats(MonsterNameList.giantBat,
                                                                                       tenArmor,
@@ -295,6 +295,15 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.territorial
                                                                                 }));
+                                                                                
+        enemyStatsDict.Add(MonsterNameList.armoredBatShielded, new EnemyStats(MonsterNameList.armoredBat,
+                                                                                      thirtyArmor,
+                                                                                            45,
+  new ChargeUpAbility(TraitList.shielded, AbilityList.getAbility(null, AbilityList.flurryKey) as Ability),
+                                                                    new Trait[] { TraitList.master,
+                                                                                  TraitList.territorial,
+                                                                                  TraitList.shielded
+                                                                                }));
         #endregion
         #region Den Mother
         enemyStatsDict.Add(MonsterNameList.denMother, new EnemyStats(MonsterNameList.denMother,
@@ -313,6 +322,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.emptyGenerated2
                                                                                 }));
+        #endregion
         #endregion
     }
 

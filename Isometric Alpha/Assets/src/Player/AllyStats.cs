@@ -803,7 +803,7 @@ public class AllyStats : Stats
     {
         if (currentStory.variablesState[InkVariableNameList.playerName] != null)
         {
-            currentStory.variablesState[InkVariableNameList.playerName] = getName();
+            currentStory.variablesState[InkVariableNameList.playerName] = PartyManager.getPlayerNameForDisplay();
         }
 
         if (currentStory.variablesState[InkVariableNameList.strengthVarName] != null)

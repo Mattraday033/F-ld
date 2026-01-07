@@ -107,6 +107,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             containsSprites)
         {
             currentIdle = newIdle;
+            setSpriteToCurrentIdle();
             return;
         }
 
@@ -117,6 +118,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         {
             currentIdle = CharacterAnimationType.Idle_Front;
         }
+
+        setSpriteToCurrentIdle();
     }
 
     private void OnDestroy()

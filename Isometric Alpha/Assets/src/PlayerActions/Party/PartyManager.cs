@@ -6,6 +6,7 @@ using UnityEngine;
 
 public static class PartyManager
 {
+    public const string playerMarker = "_P";
     private static Dictionary<string, PartyMember> partyMemberDict = new Dictionary<string, PartyMember>();
 
     [RuntimeInitializeOnLoadMethod]
@@ -14,6 +15,7 @@ public static class PartyManager
         partyMemberDict = new Dictionary<string, PartyMember>();
         resetPartyMembers();
     }
+
     public static int getNumberOfPartyMembersTotal()
     {
         return partyMemberDict.Count;
@@ -47,10 +49,8 @@ public static class PartyManager
 
     public static void healFullAllPartyMembers()
     {
-        foreach (KeyValuePair<string, PartyMember> kvp in PartyManager.partyMemberDict)
+        foreach (PartyMember partyMember in partyMemberDict.Values)
         {
-            PartyMember partyMember = kvp.Value;
-
             if (partyMember != null && !(partyMember is null))
 
                 partyMember.stats.modifyCurrentHealth(partyMember.stats.getTotalHealth(), true);
@@ -135,16 +135,6 @@ public static class PartyManager
         return getAllUpgradablePartyMembers().Count;
     }
 
-    public static void printAllJoinabilities()
-    {
-        foreach (KeyValuePair<string, PartyMember> kvp in partyMemberDict)
-        {
-            PartyMember partyMember = kvp.Value;
-
-            Debug.Log("Current PartyMember: " + partyMember.getName() + "'s canJoinParty = " + partyMember.canJoinParty);
-        }
-    }
-
     public static Story addAllVariables(Story story)
     {
         foreach (KeyValuePair<string, PartyMember> kvp in partyMemberDict)
@@ -167,11 +157,11 @@ public static class PartyManager
 
     public static PartyMember getPlayer()
     {
-        foreach (KeyValuePair<string, PartyMember> kvp in partyMemberDict)
+        foreach (PartyMember partyMember in partyMemberDict.Values)
         {
-            if (!PartyMemberList.isPartyMemberName(kvp.Key))
+            if (partyMember.getName().Contains(playerMarker))
             {
-                return kvp.Value;
+                return partyMember;
             }
         }
 
@@ -180,11 +170,11 @@ public static class PartyManager
 
     public static AllyStats getPlayerStats()
     {
-        foreach (KeyValuePair<string, PartyMember> kvp in partyMemberDict)
+        foreach (PartyMember partyMember in partyMemberDict.Values)
         {
-            if (!PartyMemberList.isPartyMemberName(kvp.Key))
+            if (partyMember.getName().Contains(playerMarker))
             {
-                return kvp.Value.stats;
+                return partyMember.stats;
             }
         }
 
@@ -195,7 +185,7 @@ public static class PartyManager
     {
         foreach (PartyMember partyMember in party)
         {
-            if (!PartyMemberList.isPartyMemberName(partyMember.stats.getName()))
+            if (partyMember.getName().Contains(playerMarker))
             {
                 return partyMember.stats;
             }
@@ -208,7 +198,7 @@ public static class PartyManager
     {
         foreach (StatsWrapper partyMember in party)
         {
-            if (!PartyMemberList.isPartyMemberName(partyMember.key))
+            if (partyMember.key.Contains(playerMarker))
             {
                 return new AllyStats(partyMember);
             }
@@ -250,19 +240,21 @@ public static class PartyManager
     {
         List<PartyMember> train = new List<PartyMember>();
 
-        // foreach(PartyMember partyMember in partyMemberDict.Values)
-        // {
-        //     if(State.formation.contains(partyMember.stats.getName()) && !partyMember.stats.isDead())
-        //     {
-        //         train.Add(partyMember);
-        //     }
-        // }
-        train.Add(partyMemberDict[NPCNameList.thatch]);
-        train.Add(partyMemberDict[NPCNameList.carter]);
-        train.Add(partyMemberDict[NPCNameList.nandor]);
-        train.Add(partyMemberDict[NPCNameList.thatch]);
-        train.Add(partyMemberDict[NPCNameList.carter]);
-        train.Add(partyMemberDict[NPCNameList.nandor]);
+        foreach(PartyMember partyMember in partyMemberDict.Values)
+        {
+            if( !partyMember.getName().Contains(playerMarker) &&
+                State.formation.contains(partyMember.stats.getName()) &&
+                !partyMember.stats.isDead())
+            {
+                train.Add(partyMember);
+            }
+        }
+
         return train;
+    }
+
+    public static string getPlayerNameForDisplay()
+    {
+        return getPlayerStats().getName().Replace(playerMarker,"");
     }
 }

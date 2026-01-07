@@ -30,11 +30,6 @@ public class EnemyStats : Stats
 
     #region Constructors
 
-    public EnemyStats() :
-    base("Placeholder")
-    {
-    }
-
     public EnemyStats(string key, int armor, int tHP) :
     base(key)
     {

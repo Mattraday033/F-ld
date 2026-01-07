@@ -129,34 +129,6 @@ public class TutorialSequenceStepWindow : DescriptionPanel
         {
             transform.localScale = Constants.flippedXScale;
         }
-
-        /*
-
-        Vector2 playerTransformLocalScale = PlayerObject.getInstanceTransform().localScale;
-
-        //Vector2 arrowIndicatorSizeOffset = new Vector2( 100f * descriptionPanelRectTransform.localScale.x * playerTransformLocalScale.x,
-        //                                                150f * descriptionPanelRectTransform.localScale.y * playerTransformLocalScale.y);
-
-        //Canvas.ForceUpdateCanvases();
-
-        Vector2 targetDimensions = tutorialSequenceTarget.getDimensions();
-
-        Canvas.ForceUpdateCanvases();
-
-        Vector2 distanceModifiers = new Vector2((secondTopRect.rect.width / 2F * (secondTopRect.localScale.x * playerTransformLocalScale.x)) + targetDimensions.x,
-                                                (secondTopRect.rect.height / 2F * (secondTopRect.localScale.y * playerTransformLocalScale.y)) + targetDimensions.y);
-
-        Vector2 directionModifiers = getDirectionModifiers(directionToPanel);
-        Vector2 targetPosition = targetTransform.TransformPoint(targetTransform.rect.center);
-
-		//Vector2 screenCenter = RectTransformUtility.WorldToScreenPoint(Camera.main, targetTransform.position);
-        //Vector3 targetPosition = Camera.main.ScreenToWorldPoint(new Vector3(screenCenter.x, screenCenter.y, Camera.main.nearClipPlane + 1f));
-
-        //RectTransformUtility.ScreenPointToWorldPointInRectangle(targetTransform, Camera.main.WorldToViewportPoint(targetTransform.position), null, out targetPosition);
-
-        secondTopRect.position = new Vector2(targetPosition.x + (distanceModifiers.x * directionModifiers.x),
-                                          targetPosition.y + (distanceModifiers.y * directionModifiers.y));
-        */
     }
 
     public virtual void setTopRectDimensions()
@@ -164,13 +136,6 @@ public class TutorialSequenceStepWindow : DescriptionPanel
         topRectTransform.localPosition = Vector3.zero;
 
         Canvas.ForceUpdateCanvases();
-
-        // Debug.LogError("getDescPanelWidth()*2.08f = " + getDescPanelWidth()*2.08f);
-        // Debug.LogError("parentRect.rect.width = " + parentRect.rect.width);
-        // Debug.LogError(" 1/topRectTransform.localScale.x = " +  (1 / topRectTransform.localScale.x));
-        // Debug.LogError("getDescPanelHeight()*2 = " + getDescPanelHeight()*2f);
-        // Debug.LogError("parentRect.rect.height = " + parentRect.rect.height);
-        // Debug.LogError("1/topRectTransform.localScale.y = " + (1 / topRectTransform.localScale.y));
 
         topRectTransform.sizeDelta = new Vector2(getDescPanelWidth()*2.08f + (parentRect.rect.width * 1/topRectTransform.localScale.x), getDescPanelHeight() * 2.08f + (parentRect.rect.height * 1/topRectTransform.localScale.y));
     }

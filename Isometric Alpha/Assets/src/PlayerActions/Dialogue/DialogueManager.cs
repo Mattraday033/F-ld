@@ -329,9 +329,9 @@ public class DialogueManager : MonoBehaviour
 		{
 			previousChoice = currentChoice;
 
-			string newLine = PartyManager.getPlayerStats().getName() + ": " + currentChoiceInkObjects[choiceIndex].text;
+			string newLine = PartyManager.getPlayerNameForDisplay() + ": " + currentChoiceInkObjects[choiceIndex].text;
 
-			currentConversation.addDialogueLine(PartyManager.getPlayerStats().getName(), currentChoiceInkObjects[choiceIndex].text);
+			currentConversation.addDialogueLine(PartyManager.getPlayerNameForDisplay(), currentChoiceInkObjects[choiceIndex].text);
 
 			ChoiceManager.addChoice(storyName, currentChoiceInkObjects[choiceIndex].sourcePath);
 
@@ -343,17 +343,7 @@ public class DialogueManager : MonoBehaviour
 		}
 
 	}
-	/*
-		public void disableCanvas()
-		{
-			dialogueCanvas.gameObject.SetActive(false);
-		}
 
-		public void enableCanvas()
-		{
-			dialogueCanvas.gameObject.SetActive(true);
-		}
-	*/
 	public static void setCameraToDefaultSpeed()
 	{
 		instance.framingTransposer.m_XDamping = defaultXDamping;

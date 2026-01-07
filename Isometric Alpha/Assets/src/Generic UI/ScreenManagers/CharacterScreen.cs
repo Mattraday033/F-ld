@@ -157,7 +157,7 @@ public class CharacterScreen : ScreenWithGeneratedPartyTabs, ICounter
 
         currentPartyMember = statsToDescribe;
 
-        playerNameText.text = getCurrentPartyMember().getName();
+        playerNameText.text = getCurrentPartyMember().getName().Replace(PartyManager.playerMarker, "");
         characterSprite.color = currentPartyMember.getSpriteColor();
 
         abilityMenuManager.actionArraySource = getCurrentPartyMember();
