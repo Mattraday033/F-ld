@@ -32,7 +32,6 @@ public class CombatStateManager : MonoBehaviour
     public static bool hasReturnCell = false;
     public static Vector3Int returnCell;
 
-    public static FadeToBlackManager fadeToBlackManager;
 	public static List<GridCoords> allQueuedSummonLocations = new List<GridCoords>();
 
 	public static bool inCombat = false;
@@ -68,7 +67,28 @@ public class CombatStateManager : MonoBehaviour
 
 	private GameOverPopUpButton gameOverPopUpButton;
 
-	private static bool resolvingTurnDuringTutorial = false;
+	private static bool resolvingTurnDuringTutorial;
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeCombatStateManager()
+    {
+        instance = null;
+        resolvingTurnDuringTutorial = false;
+        locationBeforeCombat = null;
+        whoseTurn = WhoseTurn.Start;
+        whoIsSurprised = SurpriseState.NoOneSurprised;
+        turnNumber = 1;
+        currentDefeatKey = "";
+        inCombat = false;
+        deadMonsterCount = 0;
+        hasReturnCell = false;
+        returnCell = new Vector3Int();
+        allQueuedSummonLocations = new List<GridCoords>();
+        retreatedFromIndex = -1;
+
+        TransitionManager.BeforeTransition.AddListener(resetRetreatedFromIndex);
+        LoadSaveFile.OnLoad.AddListener(resetRetreatedFromIndex);
+    }
 
 	private void Awake()
 	{
@@ -84,8 +104,6 @@ public class CombatStateManager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-
-		fadeToBlackManager = FadeToBlackManager.getInstance();
 
 		updateTurnState(WhoseTurn.Start);
 
@@ -441,18 +459,19 @@ public class CombatStateManager : MonoBehaviour
 		StepCountScriptManager.reset();
 	}
 
+    public static int retreatedFromIndex = -1;
+
+    public static void resetRetreatedFromIndex()
+    {
+        retreatedFromIndex = -1;
+    }
+
 	public static void returnToOverworld(bool defeatedEnemy)
 	{
-		// if (State.currentMonsterPackList != null &&
-		// 	(currentMonsterPack.index < State.currentMonsterPackList.monsterPacks.Length && currentMonsterPack.index >= 0))
-		// {
-		// 	if (!defeatedEnemy)
-		// 	{
-		// 		State.currentMonsterPackList.monsterPacks[currentMonsterPack.index].retreatCounter = 1;
-		// 	}
-
-		// 	//State.currentMonsterPackList.shouldReset = false;
-		// }
+        if (defeatedEnemy)
+        {
+            resetRetreatedFromIndex();
+        }
 
 		if (!State.enteredCombatFromDialogue && defeatedEnemy)
 		{

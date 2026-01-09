@@ -119,6 +119,16 @@ public class ChargeUpAbility : Ability
         return CombatAnimationType.Effect;
     }
 
+    public override string getEffectAnimationType()
+    {
+        if(!isCharged())
+        {
+            return EffectAnimationType.Positive.ToString();
+        }
+
+        return base.getEffectAnimationType();
+    }
+
     public override string getIconName()
     {
         if (isCharged())

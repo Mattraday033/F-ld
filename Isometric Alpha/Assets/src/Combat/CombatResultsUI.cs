@@ -100,7 +100,7 @@ public class CombatResultsUI : PopUpWindow
 
             if (regenAmount > 0)
             {
-                regenText = ally.getName() + " has healed for " + regenAmount + " HP.\n";
+                regenText = ally.getName().Replace(PartyManager.playerMarker, "") + " has healed for " + regenAmount + " HP.\n";
             }
         }
 

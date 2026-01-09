@@ -47,6 +47,7 @@ public class Ability: CombatAction, IJSONConvertable
     private int[] actionCosts = new int[] { 0 };
 
     private CombatAnimationType animationType;
+    private EffectAnimationType effectAnimationType;
 
     public Ability(CombatActionSettings settings) :
     base(null, null)
@@ -78,6 +79,7 @@ public class Ability: CombatAction, IJSONConvertable
 		actionCosts = settings.costParams.actionCosts;
 
         animationType = settings.animationParams.animationType;
+        effectAnimationType = settings.animationParams.effectAnimationType;
 
         appliedTrait = settings.appliedTrait;
     }
@@ -136,7 +138,32 @@ public class Ability: CombatAction, IJSONConvertable
 	
     public override CombatAnimationType getCombatAnimationType()
     {
-        return animationType;
+        return CombatAnimationType.Effect;
+    }
+
+    public override string getEffectAnimationType()
+    {
+        if(effectAnimationType != EffectAnimationType.Default)
+        {
+            return effectAnimationType.ToString();
+        }
+
+        if(healsTarget())
+        {
+            return EffectAnimationType.Healing.ToString();
+        }
+
+        if(getAppliedTrait() != null && getAppliedTrait().isDebuff())
+        {
+            return EffectAnimationType.Negative.ToString();
+        }
+
+        if(getAppliedTrait() != null && getAppliedTrait().isBuff())
+        {
+            return EffectAnimationType.Positive.ToString();
+        }
+
+        return EffectAnimationType.Slash.ToString();
     }
 
 	public override string getDamageFormula()

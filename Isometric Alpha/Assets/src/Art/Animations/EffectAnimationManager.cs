@@ -13,9 +13,9 @@ public class EffectAnimationManager : AnimationManager
 
     float spawnDamageNumbersTime;
 
-    public override void setAnimations(string abilityName)
+    public override void setAnimations(string effectType)
     {
-        string folderPath = EffectPathList.getEffectFolderPath(abilityName);
+        string folderPath = PrefabNames.abilityEffectFolderPath + effectType;
 
         AnimationClip animationClip = Resources.Load<AnimationClip>(folderPath);
 

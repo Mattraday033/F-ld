@@ -37,4 +37,9 @@ public class RepositionEnemyAbility : RepositionAbility
 	{
 		return true;
 	}
+
+    public override string getEffectAnimationType()
+    {
+        return EffectAnimationType.Negative.ToString();
+    }
 }

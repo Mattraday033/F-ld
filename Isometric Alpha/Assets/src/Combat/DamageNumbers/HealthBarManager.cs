@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class HealthBarManager : MonoBehaviour
 {
+    
+
+	public Image backgroundImage; //starts green
+
 	public Slider previewSlider;
 	public Image previewImage;
 	
@@ -15,9 +19,51 @@ public class HealthBarManager : MonoBehaviour
 	
     public Stats linkedStats;
 
+    private void Awake()
+    {
+        Trait.OnTraitApplication.AddListener(updateHealthBarColor);
+        Trait.OnTraitRemoval.AddListener(updateHealthBarColor);
+    }
+
+    private void OnDestroy()
+    {
+        Trait.OnTraitApplication.RemoveListener(updateHealthBarColor);
+        Trait.OnTraitRemoval.RemoveListener(updateHealthBarColor);
+    }
+
+    public void updateHealthBarColor(Trait trait)
+    {
+        if(linkedStats.inPreviewMode)
+        {
+            return;
+        }
+        
+        if(linkedStats.isDebuffed() && linkedStats.isBuffed())
+        {
+            backgroundImage.color = ColorList.buffedDebuffed;
+            return;
+        }
+
+        if(linkedStats.isBuffed())
+        {
+            backgroundImage.color = ColorList.buffedBlue;
+            return;
+        }
+
+        if(linkedStats.isDebuffed())
+        {
+            backgroundImage.color = ColorList.debuffedPurple;
+            return;
+        }
+
+        backgroundImage.color = ColorList.healthyGreen;
+    }
+
     public void setLinkedStats(Stats statsToLink)
     {
         linkedStats = statsToLink;
+        updateHealthBarColor(null);
+        show();
     }
 
     public void hide()
@@ -32,6 +78,7 @@ public class HealthBarManager : MonoBehaviour
             return;
         }
         
+        updateHealthBarColor(null);
         gameObject.SetActive(true);
     }
 

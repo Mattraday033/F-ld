@@ -37,5 +37,17 @@ public class RepositionAllyAbility : RepositionAbility, IJSONConvertable
 	{
 		return true;
 	}
+
+    public override string getEffectAnimationType()
+    {
+        return EffectAnimationType.Positive.ToString();
+    }
+
+    public override void createEffectAnimation(GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
+    {
+        targetCoords = getDestinationCoords();
+
+        CombatAnimationManager.loadInstantEffect(this, targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
+    }
 	
 }

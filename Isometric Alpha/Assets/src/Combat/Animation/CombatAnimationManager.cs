@@ -97,7 +97,7 @@ public class CombatAnimationManager : MonoBehaviour
         }
     }
 
-    public static void loadInstantEffect(string abilityName, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
+    public static void loadInstantEffect(CombatAction combatAction, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
     {
         Stats target = CombatGrid.getCombatantAtCoords(targetCoords);
 
@@ -114,11 +114,11 @@ public class CombatAnimationManager : MonoBehaviour
 
         currentEffect.targetCoords = targetCoords;
 
-        currentEffect.transform.position = CombatGrid.getPositionAt(targetCoords);
+        currentEffect.transform.position = CombatGrid.getEffectPositionAt(targetCoords);
 
         currentAnimations.Add(currentEffect.key, currentEffect);
 
-        currentEffect.setAnimations(abilityName);
+        currentEffect.setAnimations(combatAction.getEffectAnimationType());
     }
 
     public static Projectile loadProjectile(GridCoords actorCoords, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)

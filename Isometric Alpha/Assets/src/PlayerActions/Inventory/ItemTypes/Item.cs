@@ -290,6 +290,11 @@ public class Item : ICloneable, IJSONConvertable, IDescribable, ISortable, IDesc
 		return false;
 	}
 
+	public virtual string getEffectAnimationType()
+	{
+		return EffectAnimationType.Slash.ToString();
+	}
+
 	//used when calculating worth via some formula, such as in the case of finding worth of armor via it's armorRating
 	public void setWorth(int worth)
 	{

@@ -162,51 +162,10 @@ public class Attack : CombatAction, IJSONConvertable
         item.equipTarget = actor;
     }
 
-    // public static bool hasAvailableWeaponSlots()
-    // {
-    //     return hasAvailableWeaponSlots(State.CombatActionArray);
-    // }
-
-    // public static bool hasAvailableWeaponSlots(IActionArrayStorage actionArrayStorage)
-    // {
-    // 	return hasAvailableWeaponSlots(actionArrayStorage.getStoredCombatActionArray());
-    // }
-
-    // public static bool hasAvailableWeaponSlots(CombatAction[] actions)
-    // {
-    // 	return getAmountOfWeaponCombatActions(actions) < State.playerStats.getWeaponSlots();
-    // }
-
-    // public static int getAmountOfWeaponCombatActions()
-    // {
-    // 	return getAmountOfWeaponCombatActions(State.CombatActionArray);
-    // }
-
-    // public static int getAmountOfWeaponCombatActions(IActionArrayStorage actionArrayStorage)
-    // {
-
-    // 	return getAmountOfWeaponCombatActions(actionArrayStorage.getStoredCombatActionArray());
-    // }
-
-    // public static int getAmountOfWeaponCombatActions(CombatAction[] actions)
-    // {
-    // 	int amountOfWeapons = 0;
-
-    // 	foreach (CombatAction action in actions)
-    //     {
-    //         if (action == null)
-    //         {
-    //             continue;
-    //         }
-
-    //         if (action.takesAWeaponSlot())
-    //         {
-    //             amountOfWeapons++;
-    //         }
-    //     }
-
-    // 	return amountOfWeapons;
-    // }
+    public override string getEffectAnimationType()
+    {
+        return getSourceItem().getEffectAnimationType();
+    }
 
     public override int getQuantity()
     {

@@ -16,29 +16,15 @@ public class Weapon : EquippableItem, IJSONConvertable
     private int rangeIndex;
     private string iconName;
     private bool isTwoHanded;
+    private EffectAnimationType effectAnimationType;
 
-	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, int worth, int slotID) : 
-    base(listId, key, loreDescription, damageFormula, critFormula, Constants.zeroRating, subtype, worth, slotID)
-	{
-		this.isTwoHanded = false;
-		this.iconName = iconName;
-		this.rangeIndex = 1;
-	}
-
-	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, int slotID, bool isTwoHanded) :
+	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, int slotID, bool isTwoHanded, EffectAnimationType effectAnimationType = EffectAnimationType.Slash) :
     base(listId, key, loreDescription, damageFormula, critFormula, Constants.zeroRating, subtype, worth, slotID)
 	{
 		this.isTwoHanded = isTwoHanded;
 		this.iconName = iconName;
 		this.rangeIndex = rangeIndex;
-	}
-
-	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string armorFormula, string iconName, int rangeIndex, int worth, int slotID, bool isTwoHanded) :
-    base(listId, key, loreDescription, damageFormula, critFormula, armorFormula, subtype, worth, slotID)
-	{
-		this.isTwoHanded = isTwoHanded;
-		this.iconName = iconName;
-		this.rangeIndex = rangeIndex;
+        this.effectAnimationType = effectAnimationType;
 	}
 
 	public bool getIsTwoHanded()
@@ -79,6 +65,11 @@ public class Weapon : EquippableItem, IJSONConvertable
 	public override CombatAction getCombatAction(AllyStats stats)
 	{
 		return new Attack(stats, this);
+	}
+
+	public override string getEffectAnimationType()
+	{
+		return effectAnimationType.ToString();
 	}
 
 	public override GameObject getRowType(RowType rowType)

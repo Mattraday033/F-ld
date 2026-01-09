@@ -86,6 +86,11 @@ public static class ColorList
     public readonly static Color costNotPayableColor = Color.red;
     public readonly static Color cooldownColor = Color.yellow;
 
+    //HealthBarManager colors
+    public readonly static Color healthyGreen = new Color32(0,175,55,255);
+    public readonly static Color buffedBlue = new Color32(0,225,225,255);
+    public readonly static Color debuffedPurple = new Color32(135,15,175,255);
+    public readonly static Color buffedDebuffed = new Color32(230,190,186,255);
     #endregion
 
     private static Dictionary<string, Color> rubbleColorDict;

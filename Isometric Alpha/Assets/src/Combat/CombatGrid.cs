@@ -56,6 +56,11 @@ public static class CombatGrid
         return getPositionAt(coords.row, coords.col);
 	}
 
+	public static Vector3 getEffectPositionAt(GridCoords coords)
+    {
+        return getPositionAt(coords.row, coords.col) + new Vector3(0f, 0.4f);
+	}
+
     public static Vector3 getPositionAt(int row, int col)
     {
         Grid creatureGrid = CombatStateManager.getCreatureGrid();

@@ -19,8 +19,8 @@ public class SkillManager
 {
     public readonly static UnityEvent OnSkillUse = new UnityEvent();
 
-    public Vector2Int selectorPosition;
-    public Color oldColor;
+    public static Vector2Int selectorPosition;
+    public static Color oldColor;
     public static GameObject[,] skillGrid;
 
     public ContactFilter2D filterCollider;

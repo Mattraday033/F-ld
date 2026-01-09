@@ -173,11 +173,12 @@ public class CostParams
 public class AnimationParams
 {
     public CombatAnimationType animationType;
+    public EffectAnimationType effectAnimationType;
 
 
     public static AnimationParams build()
     {
-        return build(CombatAnimationType.Projectile);
+        return build(CombatAnimationType.Effect);
     }
 
     public static AnimationParams build(CombatAnimationType animationType)
@@ -185,6 +186,17 @@ public class AnimationParams
         AnimationParams animationParams = new AnimationParams();
 
         animationParams.animationType = animationType;
+        animationParams.effectAnimationType = EffectAnimationType.Default;
+
+        return animationParams;
+    }
+
+    public static AnimationParams build(EffectAnimationType effectAnimationType)
+    {
+        AnimationParams animationParams = new AnimationParams();
+
+        animationParams.animationType = CombatAnimationType.Effect;
+        animationParams.effectAnimationType = effectAnimationType;
 
         return animationParams;
     }
@@ -338,6 +350,11 @@ public class CombatActionSettings
 
     //4 Param Builds
 
+    public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, FrequencyParams frequencyParams, AnimationParams animationParams, Trait appliedTrait)
+    {
+        return CombatActionSettings.build(key, descriptionParams, damageParams, TargetParams.build(), frequencyParams, CostParams.build(), animationParams, appliedTrait, null);
+    }
+
     public static CombatActionSettings build(DescriptionParams descriptionParams, DamageParams damageParams, TargetParams targetParams, AnimationParams animationParams)
     {
         return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, targetParams, FrequencyParams.build(), CostParams.build(), animationParams, null, null);
@@ -384,6 +401,12 @@ public class CombatActionSettings
     }
 
     //5 Param Builds
+
+    public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, FrequencyParams frequencyParams, CostParams costParams, AnimationParams animationParams)
+    {
+        return CombatActionSettings.build(key, descriptionParams, damageParams, TargetParams.build(), frequencyParams, costParams, animationParams, null, null);
+    }
+
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, TargetParams targetParams, FrequencyParams frequencyParams, CostParams costParams)
     {
         return CombatActionSettings.build(key, descriptionParams, damageParams, targetParams, frequencyParams, costParams, AnimationParams.build(), null, null);
@@ -392,6 +415,27 @@ public class CombatActionSettings
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, TargetParams targetParams, FrequencyParams frequencyParams, CostParams costParams, Trait appliedTrait)
     {
         return CombatActionSettings.build(key, descriptionParams, damageParams, targetParams, frequencyParams, costParams, AnimationParams.build(), appliedTrait, null);
+    }
+
+    public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, FrequencyParams frequencyParams, CostParams costParams, AnimationParams animationParams, Trait appliedTrait)
+    {
+        return CombatActionSettings.build(key, descriptionParams, damageParams, TargetParams.build(), frequencyParams, costParams, animationParams, appliedTrait, null);
+    }
+
+    public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, TargetParams targetParams, FrequencyParams frequencyParams, AnimationParams animationParams)
+    {
+        return CombatActionSettings.build(key, descriptionParams, damageParams, targetParams, frequencyParams, CostParams.build(), animationParams, null, null);
+    }
+
+    //6 Param Builds
+    public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, TargetParams targetParams, FrequencyParams frequencyParams, CostParams costParams, AnimationParams animationParams)
+    {
+        return CombatActionSettings.build(key, descriptionParams, damageParams, targetParams, frequencyParams, costParams, animationParams, null, null);
+    }
+
+    public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, TargetParams targetParams, FrequencyParams frequencyParams, CostParams costParams, AnimationParams animationParams, Trait appliedTrait)
+    {
+        return CombatActionSettings.build(key, descriptionParams, damageParams, targetParams, frequencyParams, costParams, animationParams, appliedTrait, null);
     }
 
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, TargetParams targetParams, FrequencyParams frequencyParams, CostParams costParams, AnimationParams animationParams, Trait appliedTrait, Trait[] relatedTraits)

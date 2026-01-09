@@ -385,6 +385,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public void playWoundedAnimation()
     {
+        CombatAnimationManager.trackAnimation(key, this);
         playAnimation(createClipTransitionToIdle(CharacterAnimationType.Wounded));
     }
 

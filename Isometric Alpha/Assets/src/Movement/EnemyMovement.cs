@@ -187,6 +187,12 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     {
         outline = new SpriteOutline();
         outline.setSpriteRenderer(spriteRenderer);
+
+        if(getMonsterPackIndex() == CombatStateManager.retreatedFromIndex)
+        {
+            retreatStun();
+            SkillManager.OnSkillUse.Invoke();
+        }
     }
 
     #region MovementTracker Overrides
@@ -281,6 +287,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         State.enemyPackInfo = getEnemyPackInfo();
         CombatStateManager.currentDefeatKey = AreaManager.locationName + "-" + monsterPackIndex;
         CombatStateManager.locationBeforeCombat = AreaManager.locationName;
+        CombatStateManager.retreatedFromIndex = monsterPackIndex;
 
         if (intimidated())
         {
@@ -585,8 +592,6 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         setCunningCounter(CunningManager.cunningRange / 2);
 
         setFacing(CharacterFacing.getOpposingFacing(enemyFacing.getFacing()));
-
-        // enemyDirectionIndicator.setColors(ColorList.cunningStunnedColor);
     }
     
 	public virtual bool validTarget(SkillType skillType)
@@ -597,51 +602,26 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	public void setCunningCounter(int newCunningCounter)
 	{
 		cunningStunCounter = newCunningCounter;
-
-		// if (enemyDirectionIndicator != null && stunnedFromCunning())
-		// {
-		// 	enemyDirectionIndicator.setColors(ColorList.cunningStunnedColor);
-		// }
-
-		// State.currentMonsterPackList.monsterPacks[monsterPackIndex].cunningCounter = cunningStunCounter;
 	}
 
 	public void intimidate()
 	{
 		intimidateCounter = IntimidateManager.intimidateRange / 2;
-
-		// enemyDirectionIndicator.setColors(ColorList.intimidatedColor);
 	}
 
 	public void setIntimidateCounter(int newIntimidateCounter)
 	{
 		intimidateCounter = newIntimidateCounter;
-
-		// if (enemyDirectionIndicator != null && intimidated())
-		// {
-		// 	enemyDirectionIndicator.setColors(ColorList.intimidatedColor);
-		// }
-
-		// State.currentMonsterPackList.monsterPacks[monsterPackIndex].intimidateCounter = intimidateCounter;
 	}
 
 	public void retreatStun()
 	{
 		retreatStunnedCounter = 1;
-
-		// enemyDirectionIndicator.setColors(ColorList.retreatStunnedColor);
 	}
 
 	public void setRetreatStunCounter(int newRetreatStunnedCounter)
 	{
 		retreatStunnedCounter = newRetreatStunnedCounter;
-
-		// if (enemyDirectionIndicator != null && stunnedFromRetreating())
-		// {
-		// 	enemyDirectionIndicator.setColors(ColorList.retreatStunnedColor);
-		// }
-
-		// State.currentMonsterPackList.monsterPacks[monsterPackIndex].retreatCounter = retreatStunnedCounter;
 	}
 
 	public bool stunnedFromCunning()

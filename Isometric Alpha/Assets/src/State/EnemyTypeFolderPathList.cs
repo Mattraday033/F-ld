@@ -16,9 +16,7 @@ public static class EnemyTypeFolderPathList
 
     public static string getEnemyTypeFolderPath(string enemyType)
     {
-        if(enemyType.Equals(PartyManager.getPlayerStats().getName()) || 
-        enemyType.Equals(NPCNameList.carter) || 
-        enemyType.Equals(NPCNameList.nandor))
+        if(enemyType.Contains(PartyManager.playerMarker))
         {
             enemyType = NPCNameList.thatch;
         }
@@ -64,7 +62,9 @@ public static class EnemyTypeFolderPathList
 
         #region Party Members
         
-        folderPathDict.Add(NPCNameList.thatch, partyMembersFolderPath + NPCNameList.thatch + "/");        
+        folderPathDict.Add(NPCNameList.thatch, partyMembersFolderPath + NPCNameList.thatch + "/");  
+        folderPathDict.Add(NPCNameList.carter, partyMembersFolderPath + NPCNameList.carter + "/");  
+        folderPathDict.Add(NPCNameList.nandor, partyMembersFolderPath + NPCNameList.nandor + "/");        
 
         #endregion
 

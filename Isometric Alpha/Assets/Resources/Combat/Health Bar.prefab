@@ -215,10 +215,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae84ba20212dc34ea8c9c68e60e70d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgroundImage: {fileID: 3007529949960319995}
   previewSlider: {fileID: 2581836209421845890}
   previewImage: {fileID: 6554130078921216767}
   emptySlider: {fileID: 4261221852925791384}
   emptyImage: {fileID: 4420613625563567508}
+  linkedStats: {fileID: 0}
 --- !u!1 &5441019262958904461
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, IStatBoostSource
 {
+
+    public readonly static UnityEvent<Trait> OnTraitApplication = new UnityEvent<Trait>();
+    public readonly static UnityEvent<Trait> OnTraitRemoval = new UnityEvent<Trait>();
     private const int traitTickDownDamageFrameDelay = 2;
 
     private string traitName;

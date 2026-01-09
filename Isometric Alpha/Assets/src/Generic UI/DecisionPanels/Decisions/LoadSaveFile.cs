@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 
 public interface IDecisionPanel
@@ -24,6 +25,8 @@ public class LoadSaveFile : IDecision
 {
     private const string loadLostProgressMessageStart = "Are you sure you want to load '";
     private const string loadLostProgressMessageEnd = "'? Any unsaved progress will be lost.";
+
+    public readonly static UnityEvent OnLoad = new UnityEvent();
 
     public string saveName;
 
@@ -155,6 +158,8 @@ public class LoadSaveFile : IDecision
 
             SpawnInfoManager.lastSaveBlueprint = saveBlueprint;
 
+            OnLoad.Invoke();
+            
             SceneChange.changeSceneToOverworld();
 
         }

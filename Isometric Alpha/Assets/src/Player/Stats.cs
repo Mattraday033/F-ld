@@ -528,9 +528,10 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     {
         bool[] costsPayable = new bool[costTypes.Length];
 
-        int index = 0;
+        int index = -1;
         foreach (ActionCostType costType in costTypes)
         {
+            index++;
             if (costType == ActionCostType.None)
             {
                 costsPayable[index] = true;
@@ -559,8 +560,6 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
                     costsPayable[index] = true;
                 }
             }
-
-            index++;
         }
 
         return !costsPayable.Contains(false);
@@ -754,6 +753,8 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         {
             traits = Helpers.appendArray<Trait>(traits, newTrait);
         }
+
+        Trait.OnTraitApplication.Invoke(newTrait);
     }
 
     private void dealTraitApplicationDamage(Trait newTrait)
@@ -828,6 +829,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         if(removedTrait != null)
         {
             removedTrait.setIdleAnimationOnRemoval(animationManager);
+            Trait.OnTraitRemoval.Invoke(removedTrait);
         }
     }
 
@@ -993,6 +995,16 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     public virtual bool notResurrectable()
     {
         return Helpers.hasQuality<Trait>(traits, (t => t.preventsResurrection()));
+    } 
+
+    public bool isBuffed()
+    {
+        return Helpers.hasQuality<Trait>(traits, (t => t.isBuff()));
+    } 
+
+    public bool isDebuffed()
+    {
+        return Helpers.hasQuality<Trait>(traits, (t => t.isDebuff()));
     } 
 
     #region Zone of Influence

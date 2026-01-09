@@ -24,4 +24,10 @@ public class Fist : Weapon
 	{
 		return true;
 	}
+
+	public override string getEffectAnimationType()
+	{
+		return EffectAnimationType.Blunt.ToString();
+	}
+
 }

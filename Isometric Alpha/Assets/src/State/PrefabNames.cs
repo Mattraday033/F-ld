@@ -248,11 +248,6 @@ public static class PrefabNames
     public const string spriteFolder = "Sprites/";
 
     public const string abilityEffectFolderPath = spriteFolder + "Ability Effects/";
-    public const string damagingEffectFolderPath = abilityEffectFolderPath + "Damaging Effect";
-    public const string negativeEffectFolderPath = abilityEffectFolderPath + "Negative Effect";
-    public const string positiveEffectFolderPath = abilityEffectFolderPath + "Positive Effect";
-    public const string healingEffectFolderPath = abilityEffectFolderPath + "Healing Effect";
-    public const string batSwarmEffectFolderPath = abilityEffectFolderPath + "Bat Swarm";
 
     public const string buttonsFolderPath = spriteFolder + "Buttons/";
     public const string buttonUpStoneFolderPath = buttonsFolderPath + "Button_Up_Stone";
@@ -361,6 +356,11 @@ public static class PrefabNames
     private const string ladderFolder = spriteFolder + "Ladders/";
     public const string ladderTallNE = ladderFolder + "Ladder_Tall_NE";
     public const string ladderTallSW = ladderFolder + "Ladder_Tall_SW";
+
+    public const string statusFolder = spriteFolder + "Status/";
+
+    public const string intimidatedStatusSprite = statusFolder + "Intimidated";
+    public const string cunningStatusSprite = statusFolder + "Cunning";
 
     #endregion
 }

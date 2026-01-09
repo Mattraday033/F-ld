@@ -324,6 +324,11 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
         getActorStats().playAttackAnimation();
     }
 
+    public virtual string getEffectAnimationType()
+    {
+        return EffectAnimationType.Slash.ToString();
+    }
+
     #region Projectiles and Effects
 
     public void createEffectAnimation(GridCoords targetCoords)
@@ -336,7 +341,7 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
         createEffectAnimation(targetCoords, crit, damageNumber, healsTarget(), targetMustBeDead());
     }
 
-    public void createEffectAnimation(GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
+    public virtual void createEffectAnimation(GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
     {
         switch (getCombatAnimationType())
         {
@@ -347,7 +352,7 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
                 CombatAnimationManager.loadProjectile(getActorCoords(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead, getLandingScript());
                 break;
             case CombatAnimationType.Effect:
-                CombatAnimationManager.loadInstantEffect(getName(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
+                CombatAnimationManager.loadInstantEffect(this, targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
                 break;
         }
     }
@@ -384,6 +389,9 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
                 targetCombatant.modifyCurrentHealth(finalDamage, healsTarget());
 
                 return 1;
+            } else if(getAppliedTrait() != null && !inPreviewMode)
+            {
+                    createEffectAnimation(coords, crit, finalDamage);
             }
         }
 
@@ -607,7 +615,7 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
 
     public virtual CombatAnimationType getCombatAnimationType()
     {
-        return CombatAnimationType.Projectile;
+        return CombatAnimationType.Effect;
     }
 
     #endregion

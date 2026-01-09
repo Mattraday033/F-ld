@@ -53,7 +53,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     public void OnMouseOver()
     {
-        if(TutorialSequence.blockMouseHovers())
+        if(TutorialSequence.blockMouseHovers() || CombatStateManager.whoseTurn != WhoseTurn.Player)
         {
             return;
         }
