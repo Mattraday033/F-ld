@@ -370,29 +370,27 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
             bool crit = DamageCalculator.isACrit(getCritFormula(), getName());
             int finalDamage = findFinalDamage(targetCombatant, crit)[0];
 
+            if (!inPreviewMode)
+            {
+                if (crit && actorIsAlly())
+                {
+                    Exuberances.addExuberance(MultiStackProcType.YellowThorn, singleExuberanceStack);
+                }
+
+                if (healsTarget() && actorIsAlly())
+                {
+                    Exuberances.addExuberance(MultiStackProcType.GreenLeaf, singleExuberanceStack);
+                }
+
+                createEffectAnimation(coords, crit, finalDamage);
+            }
+
             if (finalDamage >= 0)
             {
-                if (!inPreviewMode)
-                {
-                    if (crit && actorIsAlly())
-                    {
-                        Exuberances.addExuberance(MultiStackProcType.YellowThorn, singleExuberanceStack);
-                    }
-
-                    if (healsTarget() && actorIsAlly())
-                    {
-                        Exuberances.addExuberance(MultiStackProcType.GreenLeaf, singleExuberanceStack);
-                    }
-
-                    createEffectAnimation(coords, crit, finalDamage);
-                }
                 targetCombatant.modifyCurrentHealth(finalDamage, healsTarget());
+            } 
 
-                return 1;
-            } else if(getAppliedTrait() != null && !inPreviewMode)
-            {
-                    createEffectAnimation(coords, crit, finalDamage);
-            }
+            return 1;
         }
 
         return 0;

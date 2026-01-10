@@ -176,14 +176,16 @@ public class ScrollableUIElement : MonoBehaviour
 
 	public void clickFirstPanelInList()
 	{
-		foreach (GridRow gridRow in listOfRows)
-		{
-			if (gridRow.buttonTexts.Length > 0 && !gridRow.buttonTexts[0].text.Equals(""))
-			{
-				disableGridRowAndClick(gridRow.buttonTexts[0].text, true);
-				return;
-			}
-		}
+        disableGridRowAndClick(0);
+
+		// foreach (GridRow gridRow in listOfRows)
+		// {
+		// 	if (gridRow.buttonTexts.Length > 0 && !gridRow.buttonTexts[0].text.Equals(""))
+		// 	{
+		// 		disableGridRowAndClick(gridRow.buttonTexts[0].text, true);
+		// 		return;
+		// 	}
+		// }
 	}
 
 	public void clickLastPanelInList()
@@ -326,9 +328,9 @@ public class ScrollableUIElement : MonoBehaviour
             }
             
 			if (!row.nameButton.interactable)
-                {
-                    return row;
-                }
+            {
+                return row;
+            }
 		}
 
 		return null;

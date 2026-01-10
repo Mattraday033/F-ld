@@ -49,7 +49,10 @@ public class FormationHandler : ScreenWithGeneratedPartyTabs, IPartyEditor, ICou
 
     public override void revealDescriptionPanelSet(IDescribable objectToDescribe)
     {
-        //empty on purpose
+        if(objectToDescribe != null)
+        {
+            currentPartyMember = Stats.convertIDescribableToStats(objectToDescribe) as AllyStats;
+        }
     }
 
     public override void populateObjectAttachedToSpriteRowButton(PartyMember partyMember)
@@ -118,11 +121,6 @@ public class FormationHandler : ScreenWithGeneratedPartyTabs, IPartyEditor, ICou
     public Formation getFormation()
     {
         return State.formation;
-    }
-
-    public override AllyStats getCurrentPartyMember()
-    {
-        return Stats.convertIDescribableToStats(grids[0].getDisabledRowDescribable());
     }
 
     //ICounter Methods

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using TMPro;
 
 public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitHandler
 {

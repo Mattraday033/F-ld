@@ -67,15 +67,6 @@ public class InventoryScreen : ScreenWithGeneratedPartyTabs, ICounter
         }
     }
 
-    public override AllyStats getCurrentPartyMember()
-    {
-        IDescribable disabledRowDescribable = grids[partyMemberGridIndex].getDisabledRowDescribable();
-
-        string name = disabledRowDescribable.getName();
-
-        return Stats.convertIDescribableToStats(grids[partyMemberGridIndex].getDisabledRowDescribable());
-    }
-
     //ICounter methods
     private void OnEnable()
     {

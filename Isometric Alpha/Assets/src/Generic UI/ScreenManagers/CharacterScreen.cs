@@ -16,8 +16,6 @@ public class CharacterScreen : ScreenWithGeneratedPartyTabs, ICounter
 
     public TextMeshProUGUI playerNameText;
 
-    public static AllyStats currentPartyMember;
-
     public Image characterSprite;
 
     public static DescriptionPanelSlot upgradeDescriptionPanelSlot;
@@ -168,15 +166,5 @@ public class CharacterScreen : ScreenWithGeneratedPartyTabs, ICounter
         descriptionPanelSlots[sideStatsSlotIndex].setPrimaryDescribable(getCurrentPartyMember());
 
         // setAbilityGridToDefaultTab();
-    }
-
-    public override AllyStats getCurrentPartyMember()
-    {
-        if (currentPartyMember == null)
-        {
-            currentPartyMember = PartyManager.getPlayerStats();
-        }
-
-        return currentPartyMember;
     }
 }

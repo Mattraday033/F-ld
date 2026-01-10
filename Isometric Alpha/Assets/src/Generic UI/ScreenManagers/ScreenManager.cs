@@ -340,7 +340,6 @@ public class ScreenManager : MonoBehaviour
     //[SerializeField]
     public List<InterfaceReference<IStatsPanel>> allStatsPanels;
 
-
     public bool alternateWayOfSettingDefaultState;
 
     public TabCollection[] tabCollections;
@@ -350,6 +349,8 @@ public class ScreenManager : MonoBehaviour
     public int currentTabCollection = 0;
 
     public List<DescriptionPanelSlot> descriptionPanelSlots;
+
+    public static AllyStats currentPartyMember;
 
     //[SerializeField]
     private ScreenType screenType;
@@ -389,6 +390,11 @@ public class ScreenManager : MonoBehaviour
         }
 
         descriptionPanelSlots[currentTabCollection].setPrimaryDescribable(objectToDescribe);
+
+        if(objectToDescribe != null)
+        {
+            currentPartyMember = Stats.convertIDescribableToStats(objectToDescribe) as AllyStats;
+        }
     }
 
     public virtual void revealTemptDescriptionPanelSet(IDescribable objectToDescribe, int slotIndex)
@@ -618,8 +624,15 @@ public class ScreenManager : MonoBehaviour
         return 4f;
     }
 
-    public virtual AllyStats getCurrentPartyMember()
+    public AllyStats getCurrentPartyMember()
     {
-        return null;
+        if (currentPartyMember == null)
+        {
+            currentPartyMember = PartyManager.getPlayerStats();
+        }
+
+        return currentPartyMember;
     }
+
+
 }
