@@ -1,16 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 using TMPro;
-using Cinemachine;
 using System.IO;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using System.Linq;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class SaveHandler : ScreenManager, IEscapable
@@ -103,7 +101,7 @@ public class SaveHandler : ScreenManager, IEscapable
 		return Flags.getFlag(FlagNameList.newGameFlagName) || CombatStateManager.inCombat;
 	}
 
-	public static bool ignoreNavigationKeyPresseDuringInputFieldSelection()
+	public static bool ignoreNavigationKeyPressedDuringInputFieldSelection()
 	{
 		if(getInstance() == null || EventSystem.current == null)
 		{
@@ -504,4 +502,29 @@ public class SaveHandler : ScreenManager, IEscapable
             Destroy(gameObject);
 		}
 	}
+
+    public override void updateCounter()
+    {
+        // updateAllStatsPanels();
+        // populateAllGrids();
+    }
+
+    public override List<UnityEvent> getUpdateEvents()
+    {
+        List<UnityEvent> listOfEvents = new List<UnityEvent>();
+
+        listOfEvents.Add(OnScreenInteriorUpdate);
+
+        return listOfEvents;
+    }
+
+    public override bool requiresPartyMemberSelectionGrid()
+    {
+        return false;
+    }
+
+    public override DescribableList getDefaultDescribableList()
+    {
+        return DescribableList.Saves;
+    }
 }

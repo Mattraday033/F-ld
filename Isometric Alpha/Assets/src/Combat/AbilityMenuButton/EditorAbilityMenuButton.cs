@@ -45,7 +45,6 @@ public class EditorAbilityMenuButton : AbilityMenuButton
         abilityMenuManager.getStoredCombatActionArray().equipCombatAction(combatAction, index);
 
         OnPointerEnter(null);
-        populateUI();
     }
 
     public void removeAbility()
@@ -53,13 +52,6 @@ public class EditorAbilityMenuButton : AbilityMenuButton
         abilityMenuManager.getStoredCombatActionArray().unequipCombatAction(index);
 
         OnPointerExit(null);
-        populateUI();
-    }
-
-    private void populateUI()
-    {
-        abilityMenuManager.populateAbilityMenuFromCombatActionArray();
-        OverallUIManager.currentScreenManager.populateAllGrids();
     }
 
     public override void enable()

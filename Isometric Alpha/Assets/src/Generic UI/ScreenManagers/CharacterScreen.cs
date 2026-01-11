@@ -5,84 +5,25 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 
-public class CharacterScreen : ScreenWithGeneratedPartyTabs, ICounter
+public class CharacterScreen : ScreenManager, ICounter
 {
-    public AbilityMenuManagerWithPassives abilityMenuManager;
-
-    private const int nonPrimaryStatTabOffset = 2;
-    private const int abilityGridIndex = 1;
-    private const int sideStatsSlotIndex = 0;
-    private const int upgradeDescriptionPanelSlotIndex = 1;
-
     public TextMeshProUGUI playerNameText;
 
     public Image characterSprite;
 
     public static DescriptionPanelSlot upgradeDescriptionPanelSlot;
 
-    public override void Awake()
-    {
-        base.Awake();
-
-        upgradeDescriptionPanelSlot = descriptionPanelSlots[upgradeDescriptionPanelSlotIndex];
-
-        revealDescriptionPanelSet(getCurrentPartyMember());
-
-        addListeners();
-    }
-
-    public override int getAbilityGridIndex()
-    {
-        return abilityGridIndex;
-    }
-
-    public override void setUpTabs()
-    {
-        TabCollection abilityGridTabCollection = tabCollections[getAbilityGridIndex()];
-
-        base.setUpTabs();
-
-        tabCollections = Helpers.appendArray<TabCollection>(tabCollections, abilityGridTabCollection);
-    }
-
-    public override void setToDefaultScreenState()
-    {
-        base.setToDefaultScreenState();
-
-        setAbilityGridToDefaultTab();
-    }
-
-    private void setAbilityGridToDefaultTab()
-    {
-        currentTabCollection = getAbilityGridIndex();
-
-        int buttonIndex = ((int)getCurrentPartyMember().getHighestPrimaryStats()[0]) + nonPrimaryStatTabOffset;
-
-
-        if (tabCollections[getAbilityGridIndex()].getCurrentTabIndex() != buttonIndex)
-        {
-            tabCollections[getAbilityGridIndex()].collection[buttonIndex].button.onClick.Invoke();
-        }
-        else
-        {
-            populateGrid(getAbilityGridIndex());
-        }
-    }
-
     public static int getCurrentDisplayedStatLevel()
     {
-        int currentTabCollection = OverallUIManager.currentScreenManager.currentTabCollection;
-        TabCollection collection = OverallUIManager.currentScreenManager.tabCollections[currentTabCollection];
-
-        switch (collection.getCurrentTabIndex())
+        switch (AbilityGridSideTab.getDescribableList())
         {
-            case 2:
+            case DescribableList.Strength:
                 return OverallUIManager.getCurrentPartyMember().getStrength();
-            case 3:
+            case DescribableList.Dexterity:
                 return OverallUIManager.getCurrentPartyMember().getDexterity();
-            case 4:
+            case DescribableList.Wisdom:
                 return OverallUIManager.getCurrentPartyMember().getWisdom();
-            case 5:
+            case DescribableList.Charisma:
                 return OverallUIManager.getCurrentPartyMember().getCharisma();
             default:
                 return 0;
@@ -94,77 +35,63 @@ public class CharacterScreen : ScreenWithGeneratedPartyTabs, ICounter
         removeListeners();
     }
 
-    public void addListeners()
+    public override void updateCounter()
     {
-        List<UnityEvent> listOfEvents = getUpdateEvents();
-
-        foreach (UnityEvent unityEvent in listOfEvents)
-        {
-            unityEvent.AddListener(updateCounter);
-        }
-
-
-    }
-    public void removeListeners()
-    {
-        List<UnityEvent> listOfEvents = getUpdateEvents();
-
-        foreach (UnityEvent unityEvent in listOfEvents)
-        {
-            unityEvent.RemoveListener(updateCounter);
-        }
+        playerNameText.text = currentPartyMember.getName().Replace(PartyManager.playerMarker, "");
+        characterSprite.sprite = currentPartyMember.getSpriteIcon();
     }
 
-    public void updateCounter()
-    {
-        descriptionPanelSlots[sideStatsSlotIndex].resetPrimary();
-        populateGrid(0);
-    }
-
-    public List<UnityEvent> getUpdateEvents()
+    public override List<UnityEvent> getUpdateEvents()
     {
         List<UnityEvent> listOfEvents = new List<UnityEvent>();
-
-        // listOfEvents.Add(PartySpriteGridRow.OnPartyMemberSelected); listening to PartyGridRow.OnPartyMemberSelected creates infinite loop
         listOfEvents.Add(CombatActionArray.OnCombatActionArrayChange);
         listOfEvents.Add(Inventory.OnInventoryChange);
         listOfEvents.Add(EquippedItems.OnEquipmentChange);
         listOfEvents.Add(Stats.OnStatsChange);
+        listOfEvents.Add(AbilityGridSideTab.OnSideTabChosen);
+        listOfEvents.Add(PartySpriteGridRow.OnPartyMemberSelected);
+        listOfEvents.Add(OnScreenInteriorUpdate);
 
         return listOfEvents;
     }
 
     public override bool levelUpCapable()
     {
-        return getCurrentPartyMember().xp >= AllyStats.xpNeededToLevelUp;
+        return currentPartyMember.xp >= AllyStats.xpNeededToLevelUp;
     }
 
-    public override float getNumberOfUpgradeTilesPerRow()
+    public override bool requiresPartyMemberSelectionGrid()
     {
-        return 6f;
+        return true;
     }
 
-    public override void revealDescriptionPanelSet(IDescribable objectToDescribe)
+    public override DescribableList getDefaultDescribableList()
     {
-        AllyStats statsToDescribe = Stats.convertIDescribableToStats(objectToDescribe) as AllyStats;
-
-        if (statsToDescribe == null)
-        {
-            return;
-        }
-
-        currentPartyMember = statsToDescribe;
-
-        playerNameText.text = getCurrentPartyMember().getName().Replace(PartyManager.playerMarker, "");
-        characterSprite.color = currentPartyMember.getSpriteColor();
-
-        abilityMenuManager.actionArraySource = getCurrentPartyMember();
-
-        abilityMenuManager.populateAbilityMenuFromCombatActionArray();
-        abilityMenuManager.disableLockedPassiveButtons();
-
-        descriptionPanelSlots[sideStatsSlotIndex].setPrimaryDescribable(getCurrentPartyMember());
-
-        // setAbilityGridToDefaultTab();
+        return DescribableList.MainHandWeaponsAsActions;
     }
+
+    // public override void revealDescriptionPanelSet(IDescribable objectToDescribe)
+    // {
+    //     AllyStats statsToDescribe = Stats.convertIDescribableToStats(objectToDescribe) as AllyStats;
+
+    //     if (statsToDescribe == null)
+    //     {
+    //         return;
+    //     }
+
+    //     currentPartyMember = statsToDescribe;
+
+    //     playerNameText.text = getCurrentPartyMember().getName().Replace(PartyManager.playerMarker, "");
+    //     characterSprite.color = currentPartyMember.getSpriteColor();
+
+    //     abilityMenuManager.actionArraySource = getCurrentPartyMember();
+
+    //     abilityMenuManager.populateAbilityMenuFromCombatActionArray();
+    //     abilityMenuManager.disableLockedPassiveButtons();
+
+    //     descriptionPanelSlots[sideStatsSlotIndex].setPrimaryDescribable(getCurrentPartyMember());
+
+    //     // setAbilityGridToDefaultTab();
+    // }
+
 }

@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum DescribableList
 {
@@ -332,12 +333,17 @@ public struct Tab
 	}
 }
 
-public class ScreenManager : MonoBehaviour
+public abstract class ScreenManager : MonoBehaviour
 {
     private const int defaultAbilityGridIndex = 0;
 
-    //allStatsPanels does not use currentTabCollection and can be in any order
-    //[SerializeField]
+    #region Events
+
+    public readonly static UnityEvent<ScreenManager> OnScreenDeclaration = new UnityEvent<ScreenManager>();
+    public readonly static UnityEvent OnScreenInteriorUpdate = new UnityEvent();
+    #endregion
+
+
     public List<InterfaceReference<IStatsPanel>> allStatsPanels;
 
     public bool alternateWayOfSettingDefaultState;
@@ -350,7 +356,23 @@ public class ScreenManager : MonoBehaviour
 
     public List<DescriptionPanelSlot> descriptionPanelSlots;
 
-    public static AllyStats currentPartyMember;
+    private static AllyStats _CurrentPartyMember;
+    public static AllyStats currentPartyMember
+    {
+        get
+        {
+            if (_CurrentPartyMember == null)
+            {
+                _CurrentPartyMember = PartyManager.getPlayerStats();
+            }
+
+            return _CurrentPartyMember;
+        }
+        set
+        {
+            _CurrentPartyMember = value;
+        }
+    }
 
     //[SerializeField]
     private ScreenType screenType;
@@ -358,10 +380,13 @@ public class ScreenManager : MonoBehaviour
     public virtual void Awake()
     {
         OverallUIManager.currentScreenManager = this; 
+        OnScreenDeclaration.Invoke(this);
+        addListeners();
+    }
 
-        setAllTabCollectionsAndDescriptionSlotIndexes();
-
-        updateAllStatsPanels();
+    void Start()
+    {        
+        OnScreenInteriorUpdate.Invoke();
     }
 
     public virtual ScreenType getScreenType()
@@ -624,15 +649,31 @@ public class ScreenManager : MonoBehaviour
         return 4f;
     }
 
-    public AllyStats getCurrentPartyMember()
+    public abstract bool requiresPartyMemberSelectionGrid();
+
+    public abstract List<UnityEvent> getUpdateEvents();
+
+    public abstract DescribableList getDefaultDescribableList();
+
+    public abstract void updateCounter();
+
+    public virtual void addListeners()
     {
-        if (currentPartyMember == null)
+        List<UnityEvent> listOfEvents = getUpdateEvents();
+
+        foreach (UnityEvent unityEvent in listOfEvents)
         {
-            currentPartyMember = PartyManager.getPlayerStats();
+            unityEvent.AddListener(updateCounter);
         }
-
-        return currentPartyMember;
     }
+    public virtual void removeListeners()
+    {
+        List<UnityEvent> listOfEvents = getUpdateEvents();
 
+        foreach (UnityEvent unityEvent in listOfEvents)
+        {
+            unityEvent.RemoveListener(updateCounter);
+        }
+    }
 
 }

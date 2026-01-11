@@ -427,7 +427,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.moveLeftKey) && !SaveHandler.ignoreNavigationKeyPresseDuringInputFieldSelection() && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.moveLeftKey) && !SaveHandler.ignoreNavigationKeyPressedDuringInputFieldSelection() && !KeyPressManager.handlingPrimaryKeyPress)
         {
             OverallUIManager.moveToScreenToTheLeft();
 
@@ -435,7 +435,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.moveRightKey) && !SaveHandler.ignoreNavigationKeyPresseDuringInputFieldSelection() && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.moveRightKey) && !SaveHandler.ignoreNavigationKeyPressedDuringInputFieldSelection() && !KeyPressManager.handlingPrimaryKeyPress)
         {
             OverallUIManager.moveToScreenToTheRight();
 
@@ -452,7 +452,7 @@ public class PlayerInput : MonoBehaviour
 
         if (Input.GetKey(keyCode) && !KeyPressManager.handlingPrimaryKeyPress)
         {
-            if ((keyCode == KeyBindingList.saveScreenKey || keyCode == KeyBindingList.loadScreenKey) && SaveHandler.ignoreNavigationKeyPresseDuringInputFieldSelection())
+            if ((keyCode == KeyBindingList.saveScreenKey || keyCode == KeyBindingList.loadScreenKey) && SaveHandler.ignoreNavigationKeyPressedDuringInputFieldSelection())
             {
                 return false;
             }

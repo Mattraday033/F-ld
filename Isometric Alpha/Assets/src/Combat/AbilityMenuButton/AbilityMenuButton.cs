@@ -456,7 +456,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        MouseHoverManager.OnHoverPanelCreation.Invoke();
+        // MouseHoverManager.OnHoverPanelCreation.Invoke();
 
         if (disableHover || loadedCombatAction == null || !enabled)
         {

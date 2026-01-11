@@ -1,25 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using TMPro;
 
-public interface ICounter
+
+
+public class UIDescriptionPanelSlot : DescriptionPanelSlot, ICounter
 {
-    public void addListeners();
-    public void removeListeners();
 
-    public void updateCounter();
-    public List<UnityEvent> getUpdateEvents();
-}
-
-public class WeaponCounter : MonoBehaviour, ICounter
-{
-    public TextMeshProUGUI counterText;
-
-    private void OnEnable()
+    private void Awake()
     {
-        updateCounter();
         addListeners();
     }
 
@@ -49,18 +40,21 @@ public class WeaponCounter : MonoBehaviour, ICounter
 
     public void updateCounter()
     {
-        counterText.text = OverallUIManager.getCurrentActionArray().getAmountOfWeaponCombatActions() + "/" + OverallUIManager.getCurrentPartyMember().getWeaponSlots();
+        if(OverallUIManager.currentScreenManager != null)
+        {
+            setPrimaryDescribable(ScreenManager.currentPartyMember);
+        }
     }
 
     public List<UnityEvent> getUpdateEvents()
     {
         List<UnityEvent> listOfEvents = new List<UnityEvent>();
 
-        listOfEvents.Add(PartySpriteGridRow.OnPartyMemberSelected);
-        listOfEvents.Add(CombatActionArray.OnCombatActionArrayChange);
-        listOfEvents.Add(ScreenManager.OnScreenInteriorUpdate);
+        if(OverallUIManager.currentScreenManager != null)
+        {
+            listOfEvents.AddRange(OverallUIManager.currentScreenManager.getUpdateEvents());
+        }
 
         return listOfEvents;
     }
-
 }

@@ -2,62 +2,62 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScreenWithGeneratedPartyTabs : ScreenManager
-{
+// public class ScreenWithGeneratedPartyTabs : ScreenManager
+// {
 
-    public override bool hasGeneratedTabs()
-    {
-        return true;
-    }
+//     public override bool hasGeneratedTabs()
+//     {
+//         return true;
+//     }
 
-    public override void setToDefaultScreenState()
-    {
-        ScrollableUIElement currentScrollableUIElement = grids[0];
+//     public override void setToDefaultScreenState()
+//     {
+//         ScrollableUIElement currentScrollableUIElement = grids[0];
 
-        currentScrollableUIElement.populatePanels(getListOfGeneratedTabDescribables());
+//         currentScrollableUIElement.populatePanels(getListOfGeneratedTabDescribables());
 
-        setUpTabs();
+//         setUpTabs();
 
-        if (OverallUIManager.previousPartyMember != null)
-        {
-            grids[0].disableGridRowAndClick(OverallUIManager.previousPartyMember.getName());
-        }
-        else
-        {
-            grids[0].disableGridRowAndClick(0);
-        }
-    }
+//         if (OverallUIManager.previousPartyMember != null)
+//         {
+//             grids[0].disableGridRowAndClick(OverallUIManager.previousPartyMember.getName());
+//         }
+//         else
+//         {
+//             grids[0].disableGridRowAndClick(0);
+//         }
+//     }
 
-    public override void populateGrid(int tabCollectionIndex)
-    {
-        base.populateGrid(tabCollectionIndex);
+//     public override void populateGrid(int tabCollectionIndex)
+//     {
+//         base.populateGrid(tabCollectionIndex);
 
-        if (tabCollectionIndex == 0)
-        {
-            setUpTabs();
-        }
-    }
+//         if (tabCollectionIndex == 0)
+//         {
+//             setUpTabs();
+//         }
+//     }
 
-    public virtual void setUpTabs()
-    {
-        Tab[] tabs = new Tab[grids[0].listOfRows.Count];
+//     public virtual void setUpTabs()
+//     {
+//         Tab[] tabs = new Tab[grids[0].listOfRows.Count];
 
-        int rowIndex = 0;
-        foreach (GridRow row in grids[0].listOfRows)
-        {
-            tabs[rowIndex] = row.getAsTab(); //row.descriptionPanel.getObjectBeingDescribed().getName()
+//         int rowIndex = 0;
+//         foreach (GridRow row in grids[0].listOfRows)
+//         {
+//             tabs[rowIndex] = row.getAsTab(); //row.descriptionPanel.getObjectBeingDescribed().getName()
 
-            rowIndex++;
-        }
+//             rowIndex++;
+//         }
 
-        tabCollections = new TabCollection[1] { new TabCollection(tabs) };
+//         tabCollections = new TabCollection[1] { new TabCollection(tabs) };
 
-        // currentScrollableUIElement.disableGridRowAndClick(0);
-    }
+//         // currentScrollableUIElement.disableGridRowAndClick(0);
+//     }
 
-    public virtual List<IDescribable> getListOfGeneratedTabDescribables()
-    {
-        return new List<IDescribable>(Tab.getList(DescribableList.PartyMembersWithPlayer));
-    }
+//     public virtual List<IDescribable> getListOfGeneratedTabDescribables()
+//     {
+//         return new List<IDescribable>(Tab.getList(DescribableList.PartyMembersWithPlayer));
+//     }
 
-}
+// }

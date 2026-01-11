@@ -6,16 +6,16 @@ using UnityEngine.Events;
 public static class DragAndDropManager
 {
     public const float timeToWait = .5f;
-    public static UnityEvent<IDescribable> OnDragAndDropCreated = new UnityEvent<IDescribable>();
-    public static UnityEvent<IDescribable> OnDragAndDropDestroyed = new UnityEvent<IDescribable>();
+    public readonly static UnityEvent<IDescribable> OnDragAndDropCreated = new UnityEvent<IDescribable>();
+    public readonly static UnityEvent<IDescribable> OnDragAndDropDestroyed = new UnityEvent<IDescribable>();
 
     public static void createDragAndDrop(IDragAndDropSource source, IDescribable objectBeingDragged)
     {
+        OnDragAndDropCreated.Invoke(objectBeingDragged);
+        
         IDragAndDropContainer dragAndDrop = GameObject.Instantiate(Resources.Load<GameObject>(source.getDragAndDropPrefabName()), MouseHoverManager.getDragAndDropBase().transform).GetComponent<IDragAndDropContainer>();
 
         dragAndDrop.setObjectBeingDragged(objectBeingDragged);
-
-        OnDragAndDropCreated.Invoke(objectBeingDragged);
     }
 
     public static IEnumerator waitForMouseRelease(IDragAndDropSource source, IDescribable objectBeingDragged)

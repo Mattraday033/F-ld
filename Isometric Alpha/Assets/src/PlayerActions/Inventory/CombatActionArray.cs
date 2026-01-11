@@ -372,4 +372,17 @@ public class CombatActionArray : IEnumerable
         return combatActions.GetEnumerator();
     }
 
+    public bool allActionSlotsFull()
+    {
+        for (int index = 0; index < numberOfActivatablePlayerCombatActions + actor.getPassiveSlotsUnlocked(); index++)
+        {
+            if(getActions()[index] == null)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

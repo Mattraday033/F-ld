@@ -70,11 +70,6 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     public SpriteRenderer spriteRenderer;
     public SpriteOutline outline;
 
-    public virtual Color getSpriteColor()
-    {
-        return Color.white;
-    }
-
     public virtual Color getOutlineColor()
     {
         return ColorList.canBeInteractedWith;

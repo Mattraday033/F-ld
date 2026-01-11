@@ -521,6 +521,7 @@ MonoBehaviour:
   columnHeader: {fileID: 0}
   sortPanels: 0
   defaultSortBy: 1
+  listOfRows: []
   objectsDisabledWithSlider: []
 --- !u!1 &2644255860166365338
 GameObject:
@@ -1771,6 +1772,7 @@ GameObject:
   - component: {fileID: 3544732649962940779}
   - component: {fileID: 8538254983896310146}
   - component: {fileID: 635923920598296927}
+  - component: {fileID: 9056429219492020285}
   m_Layer: 5
   m_Name: Ability Grid Parent
   m_TagString: Untagged
@@ -1884,6 +1886,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9056429219492020285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6965602317111890105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d3688b9771924419ed5fc481d8338d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 6516829064865710263}
 --- !u!1 &7987027821569624376
 GameObject:
   m_ObjectHideFlags: 0
@@ -2037,8 +2052,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1922310227212041757}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 350, y: 0}
   m_SizeDelta: {x: 700, y: 0}
   m_Pivot: {x: 0.5, y: 1}

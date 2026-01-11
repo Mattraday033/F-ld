@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 
-public class FormationHandler : ScreenWithGeneratedPartyTabs, IPartyEditor, ICounter
+public class FormationHandler : ScreenManager, IPartyEditor, ICounter
 {
     private const int party2x3GridIndex = 1;
 
@@ -17,14 +17,14 @@ public class FormationHandler : ScreenWithGeneratedPartyTabs, IPartyEditor, ICou
     public DescriptionPanelSlot primaryStatSlot;
     public DescriptionPanelSlot secondaryStatSlot;
 
-    public override void Awake()
-    {
-        base.Awake();
+    // public override void Awake()
+    // {
+    //     base.Awake();
 
-        formationDisplayUI.setToReadOnly();
-        updateAllStatsPanels();
-        populateAllGrids();
-    }
+    //     formationDisplayUI.setToReadOnly();
+    //     updateAllStatsPanels();
+    //     populateAllGrids();
+    // }
 
     public override void updateAllStatsPanels()
     {
@@ -136,41 +136,41 @@ public class FormationHandler : ScreenWithGeneratedPartyTabs, IPartyEditor, ICou
         MouseHoverManager.destroyMouseHoverBase();
     }
 
-    public void addListeners()
+    public override void addListeners()
     {
-        List<UnityEvent> listOfEvents = getUpdateEvents();
-
-        foreach (UnityEvent unityEvent in listOfEvents)
-        {
-            unityEvent.AddListener(updateCounter);
-        }
+        base.addListeners();
 
         PlayerOOCStateManager.OnStateChangeFromInUI.AddListener(MouseHoverManager.destroyMouseHoverBase);
     }
-    public void removeListeners()
+    public override void removeListeners()
     {
-        List<UnityEvent> listOfEvents = getUpdateEvents();
-
-        foreach (UnityEvent unityEvent in listOfEvents)
-        {
-            unityEvent.RemoveListener(updateCounter);
-        }
+        base.removeListeners();
         
         PlayerOOCStateManager.OnStateChangeFromInUI.RemoveListener(MouseHoverManager.destroyMouseHoverBase);
     }
 
-    public void updateCounter()
+    public override void updateCounter()
     {
-        updateAllStatsPanels();
-        populateAllGrids();
+        // updateAllStatsPanels();
+        // populateAllGrids();
     }
 
-    public List<UnityEvent> getUpdateEvents()
+    public override List<UnityEvent> getUpdateEvents()
     {
         List<UnityEvent> listOfEvents = new List<UnityEvent>();
 
         listOfEvents.Add(Formation.OnFormationChange);
 
         return listOfEvents;
+    }
+
+    public override bool requiresPartyMemberSelectionGrid()
+    {
+        return true;
+    }
+
+    public override DescribableList getDefaultDescribableList()
+    {
+        return DescribableList.Unnecessary;
     }
 }

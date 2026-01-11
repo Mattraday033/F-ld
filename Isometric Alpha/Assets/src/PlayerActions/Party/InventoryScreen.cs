@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 
-public class InventoryScreen : ScreenWithGeneratedPartyTabs, ICounter
+public class InventoryScreen : ScreenManager, ICounter
 {
     private const int partyMemberGridIndex = 0;
     private const int inventoryGridIndex = 1;
@@ -36,14 +36,14 @@ public class InventoryScreen : ScreenWithGeneratedPartyTabs, ICounter
         return inventoryGridIndex;
     }
 
-    public override void setUpTabs()
-    {
-        TabCollection inventorySideTabs = tabCollections[sideTabCollectionIndex];
+    // public override void setUpTabs()
+    // {
+    //     TabCollection inventorySideTabs = tabCollections[sideTabCollectionIndex];
 
-        base.setUpTabs();
+    //     base.setUpTabs();
 
-        tabCollections = Helpers.appendArray<TabCollection>(tabCollections, inventorySideTabs);
-    }
+    //     tabCollections = Helpers.appendArray<TabCollection>(tabCollections, inventorySideTabs);
+    // }
 
     public override void setToDefaultScreenState()
     {
@@ -84,31 +84,13 @@ public class InventoryScreen : ScreenWithGeneratedPartyTabs, ICounter
         removeListeners();
     }
 
-    public void addListeners()
+    public override void updateCounter()
     {
-        List<UnityEvent> listOfEvents = getUpdateEvents();
-
-        foreach (UnityEvent unityEvent in listOfEvents)
-        {
-            unityEvent.AddListener(updateCounter);
-        }
-    }
-    public void removeListeners()
-    {
-        List<UnityEvent> listOfEvents = getUpdateEvents();
-
-        foreach(UnityEvent unityEvent in listOfEvents)
-        {
-            unityEvent.RemoveListener(updateCounter);
-        }
+        // populateGrid(inventoryGridIndex);
+        // statsDescriptionSlot.setPrimaryDescribable(getCurrentPartyMember());
     }
 
-    public void updateCounter()
-    {
-        populateGrid(inventoryGridIndex);
-        statsDescriptionSlot.setPrimaryDescribable(getCurrentPartyMember());
-    }
-    public List<UnityEvent> getUpdateEvents()
+    public override List<UnityEvent> getUpdateEvents()
     {
         List<UnityEvent> listOfEvents = new List<UnityEvent>();
 
@@ -116,7 +98,19 @@ public class InventoryScreen : ScreenWithGeneratedPartyTabs, ICounter
         listOfEvents.Add(EquippedItems.OnEquipmentChange);
         listOfEvents.Add(CombatActionArray.OnCombatActionArrayChange);
         listOfEvents.Add(PartySpriteGridRow.OnPartyMemberSelected);
-
+        listOfEvents.Add(AbilityGridSideTab.OnSideTabChosen);
+        listOfEvents.Add(OnScreenInteriorUpdate);
+        
         return listOfEvents;
+    }
+
+    public override bool requiresPartyMemberSelectionGrid()
+    {
+        return true;
+    }
+
+    public override DescribableList getDefaultDescribableList()
+    {
+        return DescribableList.MainHandWeaponsAsItems;
     }
 }

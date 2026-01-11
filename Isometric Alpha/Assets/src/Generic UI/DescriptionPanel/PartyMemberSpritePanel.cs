@@ -51,7 +51,7 @@ public class PartyMemberSpritePanel : DescriptionPanel
     {
         base.setObjectBeingDescribed(describable);
 
-        PartyMember partyMember = (PartyMember)describable;
+        PartyMember partyMember = (PartyMember) describable;
 
         // if (iconPanel != null && !(iconPanel is null))
         // {
@@ -75,6 +75,9 @@ public class PartyMemberSpritePanel : DescriptionPanel
             zoneOfInfluenceIcon.setObjectBeingDescribed(partyMember.stats.getZoneOfInfluenceTrait());
             partyMember.stats.getZoneOfInfluenceTrait().describeSelfFull(zoneOfInfluenceIcon);
         }
+
+        iconPanel.sprite = partyMember.stats.getSpriteIcon();
+        iconPanel.color = Color.white;
     }
 
 

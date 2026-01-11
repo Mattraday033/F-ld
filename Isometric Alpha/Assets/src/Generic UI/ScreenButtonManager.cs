@@ -28,7 +28,9 @@ public class ScreenButtonManager : MonoBehaviour
 			return;
 		}
 		
-		for(int currentIndex = 0; currentIndex < getInstance().screenButtons.Length; currentIndex++)
+        //getInstance().screenButtons.Length
+
+		for(int currentIndex = 0; currentIndex < 2; currentIndex++)
 		{			
 			getInstance().screenButtons[currentIndex].interactable = true;
 		}

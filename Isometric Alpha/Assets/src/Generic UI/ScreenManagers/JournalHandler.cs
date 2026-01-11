@@ -1,14 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
-using TMPro;
-using Cinemachine;
-using System.IO;
-using System.Text.RegularExpressions;
-using Newtonsoft.Json;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class JournalHandler : ScreenManager
@@ -243,6 +236,32 @@ public class JournalHandler : ScreenManager
     {
         subcategoryDictionary = new Dictionary<string, string>();
         lastCategoryOpened = null;
+    }
+
+    public override void updateCounter()
+    {
+        // updateAllStatsPanels();
+        // populateAllGrids();
+    }
+
+    public override List<UnityEvent> getUpdateEvents()
+    {
+        List<UnityEvent> listOfEvents = new List<UnityEvent>();
+
+        listOfEvents.Add(AbilityGridSideTab.OnSideTabChosen);
+        listOfEvents.Add(OnScreenInteriorUpdate);
+
+        return listOfEvents;
+    }
+
+    public override bool requiresPartyMemberSelectionGrid()
+    {
+        return false;
+    }
+
+    public override DescribableList getDefaultDescribableList()
+    {
+        return DescribableList.Quests;
     }
 
 }

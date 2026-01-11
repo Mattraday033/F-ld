@@ -3,9 +3,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public static class PartyManager
 {
+    public readonly static UnityEvent OnPartyChange = new UnityEvent();
     public const string playerMarker = "_P";
     private static Dictionary<string, PartyMember> partyMemberDict = new Dictionary<string, PartyMember>();
 

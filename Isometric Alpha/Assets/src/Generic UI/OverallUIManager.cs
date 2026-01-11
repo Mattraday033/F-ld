@@ -15,6 +15,7 @@ public static class OverallUIManager
     public static ScreenManager currentScreenManager { get; set; }
 
     public static Transform screenBackground; //parent of everything described in a screen manager
+    public static ScrollableUIElement partyMemberSelectionGrid; 
     public static GameObject UIParentPanel;
     public static Transform notificationParent;
 
@@ -78,7 +79,7 @@ public static class OverallUIManager
         }
 
         ScreenButtonManager.setCurrentScreenButton(newScreenType);
-        currentScreenManager.setToScreenState(getScreenState(newScreenType));
+        // currentScreenManager.setToScreenState(getScreenState(newScreenType));
     }
 
     public static void setCurrentScreenType(ScreenManager screenManager)
@@ -110,9 +111,9 @@ public static class OverallUIManager
 
     private static void savePreviousPartyMember()
     {
-        if (currentScreenManager != null && currentScreenManager.getCurrentPartyMember() != null)
+        if (ScreenManager.currentPartyMember != null)
         {
-            previousPartyMember = currentScreenManager.getCurrentPartyMember();
+            previousPartyMember = ScreenManager.currentPartyMember;
         }
     }
 
@@ -240,12 +241,12 @@ public static class OverallUIManager
             return null;
         }
 
-        // if (currentScreenManager.getCurrentPartyMember() != null)
+        // if (ScreenManager.currentPartyMember != null)
         // {
-        //     Debug.LogError("currentScreenManager.getCurrentPartyMember() = " + currentScreenManager.getCurrentPartyMember().getName());
+        //     Debug.LogError("ScreenManager.currentPartyMember = " + ScreenManager.currentPartyMember.getName());
         // }
 
-        return currentScreenManager.getCurrentPartyMember();
+        return ScreenManager.currentPartyMember;
     }
 
     public static CombatActionArray getCurrentActionArray()

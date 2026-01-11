@@ -116,22 +116,6 @@ public class AllyStats : Stats
 
     #region Sprite and GameObject
 
-    public override Color getSpriteColor()
-    {
-        switch (getName())
-        {
-            case NPCNameList.thatch:
-                return Color.red;
-            case NPCNameList.carter:
-                return Color.green;
-            case NPCNameList.nandor:
-                return Color.yellow;
-            default:
-                return Color.white;
-
-        }
-    }
-
     public override string getCombatSpriteName()
     {
         return PrefabNames.allyCombatSpriteName;
@@ -149,10 +133,10 @@ public class AllyStats : Stats
 
     #region Animation Manager
     
-    // public override void playAnimationOnDamage()
-    // {
-    //     //Empty on purpose for now
-    // }
+    public Sprite getSpriteIcon()
+    {
+        return Resources.LoadAll<Sprite>(EnemyTypeFolderPathList.getEnemyTypeFolderPath(getName()) + CharacterAnimationType.Idle_Front.ToString())[0];
+    }
 
     #endregion
 
@@ -867,7 +851,7 @@ public class AllyStats : Stats
         }
 
         DescriptionPanel.setImageColor(panel.iconBackgroundPanel, ColorList.grey125);
-        DescriptionPanel.setImageColor(panel.iconPanel, getSpriteColor());
+        DescriptionPanel.setImage(panel.iconPanel, getSpriteIcon());
     }
 
     #endregion

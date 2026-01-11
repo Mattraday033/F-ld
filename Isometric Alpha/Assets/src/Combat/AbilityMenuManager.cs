@@ -389,13 +389,12 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         {
             if (parentDescriptionPanel != null)
             {
-                actionArraySource = Stats.convertIDescribableToStats(parentDescriptionPanel.getObjectBeingDescribed());
+                return Stats.convertIDescribableToStats(parentDescriptionPanel.getObjectBeingDescribed());
             }
 
             if (actionArraySource == null)
             {
-                actionArraySource = OverallUIManager.getCurrentPartyMember();
-                Debug.LogError("actionArraySource.getName() = " + actionArraySource.getName());
+                return OverallUIManager.getCurrentPartyMember();
             }
         }
 
@@ -737,7 +736,9 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
     {
         List<UnityEvent> listOfEvents = new List<UnityEvent>();
 
+        listOfEvents.Add(PartySpriteGridRow.OnPartyMemberSelected);
         listOfEvents.Add(CombatActionArray.OnCombatActionArrayChange);
+        listOfEvents.Add(ScreenManager.OnScreenInteriorUpdate);
 
         return listOfEvents;
     }

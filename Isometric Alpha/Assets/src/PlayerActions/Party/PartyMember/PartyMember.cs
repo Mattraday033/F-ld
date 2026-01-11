@@ -8,7 +8,20 @@ public class PartyMember : IDescribable, IDescribableInBlocks
 	public AllyStats stats;
 
 	public bool placed;       //if they were placed on the overworld somewhere
-	public bool canJoinParty; //if you can add them to your line up in the party ui
+
+	private bool _CanJoinParty;
+	public bool canJoinParty
+    {
+        get
+        {
+            return _CanJoinParty;
+        }
+        set
+        {
+            _CanJoinParty = value;
+            PartyManager.OnPartyChange.Invoke();
+        }
+    }
 
 	public Vector3 placedPosition = Vector3.zero;
 
@@ -21,11 +34,6 @@ public class PartyMember : IDescribable, IDescribableInBlocks
 	{
 		return stats.getName();
 	}
-
-    public Color getSpriteColor()
-    {
-        return stats.getSpriteColor();
-    }
 
     public bool isInParty()
     {
@@ -154,7 +162,8 @@ public class PartyMember : IDescribable, IDescribableInBlocks
 
 		DescriptionPanel.setText(panel.nameText, getName().Replace(PartyManager.playerMarker, ""));
 		
-		DescriptionPanel.setImageColor(panel.iconPanel, stats.getSpriteColor());
+		DescriptionPanel.setImage(panel.iconPanel, stats.getSpriteIcon());
+
 	}
 
     public void describeSelfRow(DescriptionPanel panel)
@@ -163,7 +172,6 @@ public class PartyMember : IDescribable, IDescribableInBlocks
 
         DescriptionPanel.setText(panel.nameText, getName().Replace(PartyManager.playerMarker, ""));
         DescriptionPanel.setText(panel.levelText, stats.getLevel());
-        DescriptionPanel.setImageColor(panel.iconPanel, stats.getSpriteColor());
 	}
 
 	public void setUpDecisionPanel(IDecisionPanel descisionPanel)

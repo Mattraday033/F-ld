@@ -148,7 +148,7 @@ public class GridRow : MonoBehaviour,
 
 	public virtual void OnPointerExit(PointerEventData eventData)
 	{
-        MouseHoverManager.OnHoverPanelCreation.Invoke();
+        // MouseHoverManager.OnHoverPanelCreation.Invoke();
 
 		if (!canSeeHover())
         {

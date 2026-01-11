@@ -61,10 +61,11 @@ public class ScrollableUIElement : MonoBehaviour
 
 	private void Awake()
 	{
-        if (performDisableScrollBarCheck)
-        {
-            disableScrollCheck();
-        } else if (scrollableComponent != null && scrollableComponent.verticalScrollbar != null)
+        // if (performDisableScrollBarCheck)
+        // {
+        //     disableScrollCheck();
+        // } else
+         if (scrollableComponent != null && scrollableComponent.verticalScrollbar != null)
 		{
 			scrollableComponent.verticalScrollbar.size = 0.1f;
 		}
@@ -130,10 +131,10 @@ public class ScrollableUIElement : MonoBehaviour
 			Helpers.updateGameObjectPosition(scrollableArea);
 		}
 
-		if (performDisableScrollBarCheck)
-		{
-			disableScrollCheck();
-		}
+		// if (performDisableScrollBarCheck)
+		// {
+		// 	disableScrollCheck();
+		// }
 
 		disableScrollableComponentCheck();
 
@@ -375,7 +376,7 @@ public class ScrollableUIElement : MonoBehaviour
         foreach (GridRow row in listOfRows)
         {
             if (row.descriptionPanel.getObjectBeingDescribed() != null &&
-                String.Equals(row.descriptionPanel.nameText.text, name, StringComparison.OrdinalIgnoreCase))
+                String.Equals(row.descriptionPanel.getObjectBeingDescribed().getName(), name, StringComparison.OrdinalIgnoreCase))
             {
                 int oldTabCollection = -1;
 

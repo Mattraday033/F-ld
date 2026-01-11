@@ -43,49 +43,63 @@ public class EquipmentDisplay : MonoBehaviour, ICounter
 
     public void setWeaponSlotEligibility()
     {
-        int weaponSearchStartingIndex = -1;
+        Dictionary<int, Attack> weaponsAndSlots = findAllWeaponActionSlots();
 
-        for (int index = Weapon.mainHandSlotIndex; index < Weapon.mainHandSlotIndex + OverallUIManager.getCurrentPartyMember().getWeaponSlots(); index++)
+        int weaponSlotIndex = 0;
+        for(int index = 0; index < OverallUIManager.getCurrentActionArray().getActions().Length; index++)
         {
-            weaponSearchStartingIndex = findNextWeaponActionSlot(weaponSearchStartingIndex);
+            if(weaponsAndSlots.ContainsKey(index))
+            {
+                if(index >= CombatActionArray.numberOfActivatablePlayerCombatActions)
+                {
+                    slotIconList[Weapon.mainHandSlotIndex+weaponSlotIndex].setToFilledAndUsable();
+                } else
+                {
+                    slotIconList[Weapon.mainHandSlotIndex+weaponSlotIndex].setToFilledAndUnusable();
+                }
 
-            if (weaponSearchStartingIndex >= 0 && weaponSearchStartingIndex < CombatActionArray.numberOfActivatablePlayerCombatActions)
-            {
-                slotIconList[index].setToFilledAndUsable(-1);
+                weaponSlotIndex++;
             }
-            else if (weaponSearchStartingIndex >= CombatActionArray.numberOfActivatablePlayerCombatActions)
-            {
-                slotIconList[index].setToFilledAndUnusable(-1);
-            }
-            else if (weaponSearchStartingIndex < 0 && OverallUIManager.getCurrentPartyMember().getActionArray().everyAvailableCombatActionSlotFilled())
+        }
+
+        for (int index = Weapon.mainHandSlotIndex+weaponSlotIndex; index < slotIconList.Count; index++)
+        {
+            if(OverallUIManager.getCurrentActionArray().allActionSlotsFull())
             {
                 slotIconList[index].setToUnavailableAndUnusable();
-            }
-            else if (weaponSearchStartingIndex < 0)
+            } else
             {
                 slotIconList[index].setToAvailableAndUsable();
             }
         }
 
-        for (int index = Weapon.mainHandSlotIndex + OverallUIManager.getCurrentPartyMember().getWeaponSlots(); index < slotIconList.Count; index++)
+        for (int index = Weapon.mainHandSlotIndex; index < slotIconList.Count; index++)
         {
-            slotIconList[index].gameObject.SetActive(false);
+            if(index >= Weapon.mainHandSlotIndex + OverallUIManager.getCurrentPartyMember().getWeaponSlots())
+            {
+                slotIconList[index].gameObject.SetActive(false);
+            } else
+            {
+                slotIconList[index].gameObject.SetActive(true);
+            }
         }
     }
 
-    private int findNextWeaponActionSlot(int startingIndex)
+    private static Dictionary<int, Attack> findAllWeaponActionSlots()
     {
-        for (int index = startingIndex + 1; index < OverallUIManager.getCurrentActionArray().getActions().Length; index++)
+        Dictionary<int, Attack> output = new Dictionary<int, Attack>();
+
+        for (int index = 0; index < OverallUIManager.getCurrentActionArray().getActions().Length; index++)
         {
             if (OverallUIManager.getCurrentActionArray().getActions()[index] != null &&
                 OverallUIManager.getCurrentActionArray().getActions()[index].getSourceItem() != null &&
                 OverallUIManager.getCurrentActionArray().getActions()[index].getSourceItem().isEquippable())
             {
-                return index;
+                output[index] = OverallUIManager.getCurrentActionArray().getActions()[index] as Attack;
             }
         }
 
-        return -1;
+        return output;
     }
 
     private void setWeaponSlot(Weapon mainHand)
@@ -164,6 +178,7 @@ public class EquipmentDisplay : MonoBehaviour, ICounter
         listOfEvents.Add(EquippedItems.OnEquipmentChange);
         listOfEvents.Add(CombatActionArray.OnCombatActionArrayChange);
         listOfEvents.Add(PartySpriteGridRow.OnPartyMemberSelected);
+        listOfEvents.Add(ScreenManager.OnScreenInteriorUpdate);
 
         return listOfEvents;
     }

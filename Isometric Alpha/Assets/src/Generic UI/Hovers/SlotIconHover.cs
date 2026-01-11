@@ -116,7 +116,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        MouseHoverManager.OnHoverPanelCreation.Invoke();
+        // MouseHoverManager.OnHoverPanelCreation.Invoke();
         MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldDestroyHoverIcon));
     }
 
@@ -249,7 +249,7 @@ public static class HoverMessageList
     private const string stanceWeaponMessage = "Stance Weapon. Attacks made with Stance Weapons, such as fists and staffs, give the attacker additional stacks of their current Stance.";
 
     private const string levelMessage = "Level. Leveling up a character costs 1000 Experience. Gaining a level will increase their Maximum Health, heal them to full, and boost one of their Primary Stats. The highest level a character can reach is 20.";
-    private const string healthMessage = "Health. A Party Member reduced to 0 health is knocked unconcious, and needs special abilities or items to be awakened in combat. Normal healing items can awaken a Party Member out of combat. If your character loses all of their health, however, they will die.";
+    private const string healthMessage = "Health. A Party Member reduced to 0 health is knocked unconscious, and needs special abilities or items to be awakened in combat. Normal healing items can awaken a Party Member out of combat. If your character loses all of their health, however, they will die.";
     private const string affinityMessage = "Affinity. Affinity is gained whenever you defeat a creature in combat; the more creatures in combat you defeat, the more Affinity you will gain per fight. A higher Charisma also contributes to the amount of Affinity you gain. Spend Affinity to upgrade your companions.";
     private const string experienceMessage = "Experience. Your progress towards your next level up. Gain Experience from completing quests and defeating some boss monsters. For every 1000 Experience you gain, you can level up.";
 
