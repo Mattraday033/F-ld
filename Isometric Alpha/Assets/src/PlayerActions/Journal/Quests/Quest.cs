@@ -78,11 +78,16 @@ public class Quest: IDescribable, IJournalCategory
         AreaList.AreaBecameHostile.RemoveListener(checkFailState);  
     }
 
-	public List<IDescribable> getActiveQuestSteps()
+    public List<IDescribable> getActiveQuestSteps()
 	{
 		List<IDescribable> activeQuestStepsList = new List<IDescribable>();
 		
-        for(int index = 0; index < activeQuestStepsDict.Count; index++)
+        if(activeQuestStepsDict.Count == 0)
+        {
+            return activeQuestStepsList;
+        }
+
+        for(int index = activeQuestStepsDict.Count-1; index >= 0; index--)
         {
             activeQuestStepsList.Add(activeQuestStepsDict[index]);
         }

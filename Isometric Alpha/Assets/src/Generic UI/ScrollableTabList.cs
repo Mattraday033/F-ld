@@ -23,10 +23,10 @@ public class ScrollableTabList : ScrollableUIElement
 		{
 			GridRow currentRow = populatePanel(describable, rowIndex);
 
-			if (describable != null && !(describable is null))
-			{
-				newTabs.Add(new Tab(currentRow, tabCollectionIndexToCreate, describable.getName()));
-			}
+			// if (describable != null && !(describable is null))
+			// {
+			// 	newTabs.Add(new Tab(currentRow, tabCollectionIndexToCreate, describable.getName()));
+			// }
 
 			listOfRows.Add(currentRow);
 
@@ -34,8 +34,8 @@ public class ScrollableTabList : ScrollableUIElement
 		}
 
 		//OverallUIManager.currentScreenManager.setCurrentTabCollection(tabCollectionIndexToCreate);
-		OverallUIManager.currentScreenManager.tabCollections[tabCollectionIndexToCreate] = createTabCollection(newTabs);
-		OverallUIManager.currentScreenManager.grids[tabCollectionIndexToCreate - 1] = null;
+		// OverallUIManager.currentScreenManager.tabCollections[tabCollectionIndexToCreate] = createTabCollection(newTabs);
+		// OverallUIManager.currentScreenManager.grids[tabCollectionIndexToCreate - 1] = null;
 		
 		if (clickFirstPanel)
 		{
@@ -45,18 +45,6 @@ public class ScrollableTabList : ScrollableUIElement
 		{
 			clickLastPanelInList();
 		}
-	}
-	
-	private TabCollection createTabCollection(List<Tab> listOfTabs)
-	{
-		Tab[] tabs = new Tab[listOfTabs.Count];
-		
-		for(int index = 0; index < listOfTabs.Count; index++)
-		{
-			tabs[index] = listOfTabs[index];
-		}
-		
-		return new TabCollection(tabs);
 	}
 	
 	public override void deleteAllPanels()

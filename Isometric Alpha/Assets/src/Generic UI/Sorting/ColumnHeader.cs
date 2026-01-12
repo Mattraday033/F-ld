@@ -58,7 +58,7 @@ public class ColumnHeader : MonoBehaviour
     {
         if (screenManager != null && !(screenManager is null))
         {
-            screenManager.populateGrid(tabCollectionIndex);
+            ScreenManager.OnScreenInteriorUpdate.Invoke();
         }
         else if (Flags.getFlag(FlagNameList.newGameFlagName) || CombatStateManager.inCombat)
         {

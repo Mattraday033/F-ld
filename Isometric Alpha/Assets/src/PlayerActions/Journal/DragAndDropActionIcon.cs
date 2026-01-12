@@ -48,13 +48,6 @@ public class DragAndDropCombatActionIcon : MonoBehaviour
 
 			GameObject collisionObject = collision.gameObject;
 
-			if(collisionObject.tag.Equals(LayerAndTagManager.abilityEditorTag))
-			{
-				int buttonIndex = collisionObject.GetComponent<AbilityMenuButton>().index;
-
-				EditAbilityWheelPopUpWindow.getInstance().setAbilityAtIndex(abilityMenuButton.loadedCombatAction.clone(), buttonIndex);
-			}
-
 			GameObject.Destroy(gameObject);
 		}
 	}

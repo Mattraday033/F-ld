@@ -31,7 +31,6 @@ public static class OverallUIManager
 
     public static void leaveUI()
     {
-        saveCurrentScreenType();
         destroyCurrentScreenType();
 
         UIParentPanel.SetActive(false);
@@ -48,7 +47,6 @@ public static class OverallUIManager
 
         UIParentPanel.SetActive(true);
 
-        saveCurrentScreenType();
         savePreviousPartyMember();
         destroyCurrentScreenType();
 
@@ -87,7 +85,6 @@ public static class OverallUIManager
         currentScreenManager = screenManager;
     }
 
-
     public static ScreenState getScreenState(ScreenType screenType)
     {
         if (!screenStates.ContainsKey(screenType))
@@ -104,7 +101,7 @@ public static class OverallUIManager
     {
         if (currentScreenManager != null)
         {
-            GameObject.Destroy(currentScreenManager.gameObject);
+            GameObject.DestroyImmediate(currentScreenManager.gameObject);
             currentScreenManager = null;
         }
     }
@@ -117,20 +114,10 @@ public static class OverallUIManager
         }
     }
 
-    private static void saveCurrentScreenType()
-    {
-        if (currentScreenManager != null)
-        {
-            screenStates[currentScreenManager.getScreenType()] = new ScreenState(currentScreenManager);
-        }
-    }
-
     public static void resetScreenStates()
     {
         screenStates = new Dictionary<ScreenType, ScreenState>();
     }
-
-
 
     public static bool onScreen(ScreenType screen)
     {

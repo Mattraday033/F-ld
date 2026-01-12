@@ -33,7 +33,6 @@ public class ScrollableUIElement : MonoBehaviour
 	public GameObject scrollableArea;
 	public ContentSizeFitter scrollableAreaContentSizeFitter;
 
-	public bool performDisableScrollBarCheck = true;
 	public bool setScrollBarToBottomOnPopulate = false;
 
 	public GameObject scrollBar;
@@ -378,19 +377,7 @@ public class ScrollableUIElement : MonoBehaviour
             if (row.descriptionPanel.getObjectBeingDescribed() != null &&
                 String.Equals(row.descriptionPanel.getObjectBeingDescribed().getName(), name, StringComparison.OrdinalIgnoreCase))
             {
-                int oldTabCollection = -1;
-
-                if (OverallUIManager.currentScreenManager != null && !(OverallUIManager.currentScreenManager is null))
-                {
-                    oldTabCollection = OverallUIManager.currentScreenManager.getCurrentTabCollection();
-                }
-
                 row.nameButton.onClick.Invoke();
-
-                if (OverallUIManager.currentScreenManager != null && !(OverallUIManager.currentScreenManager is null))
-                {
-                    OverallUIManager.currentScreenManager.setCurrentTabCollection(oldTabCollection);
-                }
 
                 return true;
             }
@@ -412,10 +399,6 @@ public class ScrollableUIElement : MonoBehaviour
 
 		if (row.descriptionPanel.getObjectBeingDescribed() != null)
 		{
-			int oldTabCollection = OverallUIManager.currentScreenManager.getCurrentTabCollection();
-
-            OverallUIManager.currentScreenManager.setCurrentTabCollection(oldTabCollection);
-
             row.nameButton.onClick.Invoke();
 		}
 	}

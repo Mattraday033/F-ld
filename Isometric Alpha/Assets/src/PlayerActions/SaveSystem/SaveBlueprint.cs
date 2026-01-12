@@ -14,7 +14,7 @@ public interface IJSONConvertable
 }
 
 [System.Serializable]
-public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
+public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, IComparable
 {
 	private const string dividerCharacter = "~";
 
@@ -674,5 +674,17 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks
 				return "" + getNumber();
 		}
 	}
+
+    public int CompareTo(object obj)
+    {
+        SaveBlueprint otherSave = obj as SaveBlueprint;
+
+        if(otherSave == null)
+        {
+            return -1;
+        }
+
+        return otherSave.getNumber() - getNumber();
+    }
 
 }

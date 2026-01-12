@@ -5,9 +5,10 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-
 public class UIDescriptionPanelSlot : DescriptionPanelSlot, ICounter
 {
+    [SerializeField]
+    private bool listeningForGridRows = false;
 
     private void Awake()
     {
@@ -27,6 +28,11 @@ public class UIDescriptionPanelSlot : DescriptionPanelSlot, ICounter
         {
             unityEvent.AddListener(updateCounter);
         }
+
+        if(listeningForGridRows)
+        {
+            GridRow.OnDescribableToDisplay.AddListener(updateCounter);
+        }
     }
     public void removeListeners()
     {
@@ -36,17 +42,27 @@ public class UIDescriptionPanelSlot : DescriptionPanelSlot, ICounter
         {
             unityEvent.RemoveListener(updateCounter);
         }
+
+        if(listeningForGridRows)
+        {
+            GridRow.OnDescribableToDisplay.RemoveListener(updateCounter);
+        }
     }
 
-    public void updateCounter()
+    public virtual void updateCounter()
     {
-        if(OverallUIManager.currentScreenManager != null)
+        if(OverallUIManager.currentScreenManager != null && !listeningForGridRows)
         {
             setPrimaryDescribable(ScreenManager.currentPartyMember);
         }
     }
 
-    public List<UnityEvent> getUpdateEvents()
+    public virtual void updateCounter(IDescribable describable)
+    {
+        setPrimaryDescribable(describable);
+    }
+
+    public virtual List<UnityEvent> getUpdateEvents()
     {
         List<UnityEvent> listOfEvents = new List<UnityEvent>();
 

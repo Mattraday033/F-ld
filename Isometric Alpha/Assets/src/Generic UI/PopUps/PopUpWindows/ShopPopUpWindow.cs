@@ -10,8 +10,6 @@ public enum ShopMode { Buy = 0, Sell = 1, BuyBack = 2, Junk = 3 }
 public class ShopPopUpWindow : PopUpWindow
 {
     public readonly static Dictionary<string, Item> junkDestinationPocket = null; //junk that gets sold gets send to the void
-    public TabCollection itemTypeTabs;
-    public TabCollection buySellTabs;
 
     public TextMeshProUGUI shopNameTag;
     public TextMeshProUGUI totalPlayerDiscount;
@@ -61,12 +59,12 @@ public class ShopPopUpWindow : PopUpWindow
 
     public static ShopMode getCurrentMode()
     {
-        if (getInstance() == null)
-        {
+        // if (getInstance() == null)
+        // {
             return ShopMode.Sell;
-        }
+        // }
 
-        return (ShopMode)getInstance().buySellTabs.getCurrentTabIndex();
+        // return (ShopMode)getInstance().buySellTabs.getCurrentTabIndex();
     }
 
     public void setCurrentShopkeeper(Shopkeeper shopkeeper)
@@ -98,7 +96,7 @@ public class ShopPopUpWindow : PopUpWindow
 
     public void setShopMode(int newMode)
     {
-        buySellTabs.selectTab(newMode);
+        // buySellTabs.selectTab(newMode);
 
         hideUnnecessaryTabs();
 
@@ -114,63 +112,63 @@ public class ShopPopUpWindow : PopUpWindow
     {
         if (mainHandTabVisible())
         {
-            itemTypeTabs.selectAndClickTab(0);
+            // itemTypeTabs.selectAndClickTab(0);
             return;
         }
 
         if (useItemTabVisible())
         {
-            itemTypeTabs.selectAndClickTab(1);
+            // itemTypeTabs.selectAndClickTab(1);
             return;
         }
 
         if (offHandTabVisible())
         {
-            itemTypeTabs.selectAndClickTab(2);
+            // itemTypeTabs.selectAndClickTab(2);
             return;
         }
 
         if (armorTabVisible())
         {
-            itemTypeTabs.selectAndClickTab(3);
+            // itemTypeTabs.selectAndClickTab(3);
             return;
         }
 
         if (essentialTabVisible())
         {
-            itemTypeTabs.selectAndClickTab(4);
+            // itemTypeTabs.selectAndClickTab(4);
             return;
         }
 
         if (junkTabVisible())
         {
-            itemTypeTabs.selectAndClickTab(5);
+            // itemTypeTabs.selectAndClickTab(5);
             return;
         }
 
-        itemTypeTabs.collection[0].button.gameObject.SetActive(true);
-        itemTypeTabs.selectAndClickTab(0);
+        // itemTypeTabs.collection[0].button.gameObject.SetActive(true);
+        // itemTypeTabs.selectAndClickTab(0);
     }
 
     private bool currentTabStillVisible()
     {
-        switch (itemTypeTabs.getCurrentTabIndex())
-        {
-            case 0:
+        // switch (itemTypeTabs.getCurrentTabIndex())
+        // {
+        //     case 0:
                 return mainHandTabVisible();
-            case 1:
-                return useItemTabVisible();
-            case 2:
-                return offHandTabVisible();
-            case 3:
-                return armorTabVisible();
-            case 4:
-                return essentialTabVisible();
-            case 5:
-                return junkTabVisible();
-            default:
-                return false;
-        }
+        //     case 1:
+        //         return useItemTabVisible();
+        //     case 2:
+        //         return offHandTabVisible();
+        //     case 3:
+        //         return armorTabVisible();
+        //     case 4:
+        //         return essentialTabVisible();
+        //     case 5:
+        //         return junkTabVisible();
+        //     default:
+        //         return false;
+        // }
     }
 
     public static void populateGrid()
@@ -215,17 +213,19 @@ public class ShopPopUpWindow : PopUpWindow
                 break;
         }
 
-        return Tab.getList(itemTypeTabs.getCurrentTab().list);
+        return Tab.getList(DescribableList.Inventory);
+
+        // return Tab.getList(itemTypeTabs.getCurrentTab().list);
     }
 
     public void hideUnnecessaryTabs()
     {
-        itemTypeTabs.collection[0].button.gameObject.SetActive(mainHandTabVisible());
-        itemTypeTabs.collection[1].button.gameObject.SetActive(useItemTabVisible());
-        itemTypeTabs.collection[2].button.gameObject.SetActive(offHandTabVisible());
-        itemTypeTabs.collection[3].button.gameObject.SetActive(armorTabVisible());
-        itemTypeTabs.collection[4].button.gameObject.SetActive(essentialTabVisible());
-        itemTypeTabs.collection[5].button.gameObject.SetActive(junkTabVisible());
+        // itemTypeTabs.collection[0].button.gameObject.SetActive(mainHandTabVisible());
+        // itemTypeTabs.collection[1].button.gameObject.SetActive(useItemTabVisible());
+        // itemTypeTabs.collection[2].button.gameObject.SetActive(offHandTabVisible());
+        // itemTypeTabs.collection[3].button.gameObject.SetActive(armorTabVisible());
+        // itemTypeTabs.collection[4].button.gameObject.SetActive(essentialTabVisible());
+        // itemTypeTabs.collection[5].button.gameObject.SetActive(junkTabVisible());
     }
 
     private bool mainHandTabVisible()

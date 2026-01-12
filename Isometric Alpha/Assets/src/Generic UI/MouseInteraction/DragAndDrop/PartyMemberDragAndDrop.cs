@@ -5,10 +5,6 @@ using UnityEngine;
 public interface IPartyEditor
 {
 	public void updateSlotTracker();
-	public void populateFormationGrid(); //populates Formation UI
-
-	public void readInCurrentFormation(); //Reads Formation info from State.formation, incase an interim formation is used
-	public void writeFormation();   //Writes from interirm formation to State.formation
 
 	public void addCharacterToFormation(AllyStats characterToAdd, int row, int col);
 	public void removeCharacter(AllyStats characterToRemove);

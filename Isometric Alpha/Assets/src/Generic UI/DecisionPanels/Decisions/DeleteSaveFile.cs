@@ -7,24 +7,23 @@ public class DeleteSaveFile : IDecision
 	private const string deleteMessageStart = "Are you sure you want to delete '";
 	private const string deleteMessageEnd = "'? This can't be undone.";
 	
-	public string saveName;
+	public SaveBlueprint save;
 	
-	public DeleteSaveFile(string saveName)
+	public DeleteSaveFile(SaveBlueprint save)
 	{
-		this.saveName = saveName;
+		this.save = save;
 	}
 	
 	public string getMessage()
 	{
-		return deleteMessageStart + saveName + deleteMessageEnd;
+		return deleteMessageStart + save.getName() + deleteMessageEnd;
 	}
  
 	public void execute()
 	{
-		SaveHandler.deleteSaveFile(saveName);
+		SaveHandler.deleteSaveFile(save.getName());
 		
-		OverallUIManager.currentScreenManager.populateAllGridsEnableAllRows();
-		OverallUIManager.currentScreenManager.hideCurrentDescriptionPanel();
+		ScreenManager.OnScreenInteriorUpdate.Invoke();
 		
 		EscapeStack.handleEscapePress();
 	}

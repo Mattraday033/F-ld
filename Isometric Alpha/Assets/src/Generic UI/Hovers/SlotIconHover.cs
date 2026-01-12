@@ -299,14 +299,14 @@ public static class HoverMessageList
     private const string sellSlotMessage = "Drag Items here to sell them.";
 
     public const string skillsLabelKey = "Skills";
-    private const string skillsMessage = "Skills are Abilities that are usable outside of combat. Unlock Skills by upgrading your Primary Stats. The higher your Primary Stats, the more proficient in your skills. Only the Main Character's Primary Stat's contribute to your Skills.";
+    private const string skillsMessage = "Skills are Abilities that are usable outside of combat. Unlock Skills by upgrading your Primary Stats. Proficiency in each Skill is based on the the highest Primary Stat of all Party Members.";
     public const string partyStatsLabelKey = "Party Stats";
     private const string partyStatsMessage = "Party Stats are Stats that reflect your Party's combined knowledge. Each Party Stat's progression is based on one or more of your Party's total Primary Stats.";
     public const string exuberancesLabelKey = "Exuberances";
     private const string exuberancesMessage = "Exuberances are resources that you can spend to activate powerful abilities during combat. To unlock Exuberances, at least one of your Party Members must have two or more Charisma.";
 
 
-    private const string intimidateMessage = "Intimidate. This ability can be used to stop enemies from ambushing you, but prevents you from being ambushed in turn. Your Intimidate charges are determined by your character's Strength.";
+    private const string intimidateMessage = "Intimidate. This ability can be used to stop enemies from ambushing you, but prevents you from ambushing them in turn. Your Intimidate charges are determined by your character's Strength.";
     private const string cunningMessage = "Cunning. Cunning is used out of combat to fool enemies, turning them around and stunning them for a few steps, allowing you to ambush them or sneak around them. Some objects in the overworld can activated with Cunning as well. Your Cunning charges are determined by your character's Dexterity.";
     private const string observationMessage = "Observation. This skill allows you to find secret doors and hidden secrets. Determined by your character's Wisdom.";
     private const string leadershipMessage = "Leadership. This skill allows you to command your followers out of combat, telling them to stand on buttons or in doorways to block enemy movement. The number of Party Members you can command with Leadership is determined by your character's Charisma.";

@@ -65,7 +65,6 @@ public static class PrefabNames
     public const string saveLoadPanelFull = "SaveDescriptionPanel";
     public const string loadOverwriteDeleteDecisionPanel = "Save Decision Panel";
     public const string loadDecisionPanel = "Load Only Decision Panel";
-    public const string loadOnlyPopUp = "Load Screen PopUp";
 
     public const string bookPopUpWindow = "Book PopUp Window";
 

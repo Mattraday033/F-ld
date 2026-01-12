@@ -7,28 +7,25 @@ public class OverwriteSaveFile : IDecision
 	private const string overwriteMessageStart = "Are you sure you want to overwrite '";
 	private const string overwriteMessageEnd = "'? This can't be undone.";
 	
-	public string saveName;
+	public SaveBlueprint save;
 	
-	public OverwriteSaveFile(string saveName)
+	public OverwriteSaveFile(SaveBlueprint save)
 	{
-		this.saveName = saveName;
+		this.save = save;
 	}
 	
 	public string getMessage()
 	{
-		return overwriteMessageStart + saveName + overwriteMessageEnd;
+		return overwriteMessageStart + save.getName() + overwriteMessageEnd;
 	}
  
 	public void execute()
 	{
-		// Debug.LogError("Deleting " + saveName);
+		SaveHandler.deleteSaveFile(save.getName());
 		
-		SaveHandler.deleteSaveFile(saveName);
+		SaveHandler.save(save.getName());
 		
-		SaveHandler.save(saveName);
-		
-		OverallUIManager.currentScreenManager.populateAllGridsEnableAllRows();
-		OverallUIManager.currentScreenManager.hideCurrentDescriptionPanel();
+		ScreenManager.OnScreenInteriorUpdate.Invoke();
 		
 		EscapeStack.handleEscapePress();
 	}

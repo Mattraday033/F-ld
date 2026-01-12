@@ -9,11 +9,6 @@ public interface IJournalCategory
 	public List<IDescribable> getSubcategories();
 }
 
-public interface ITest
-{
-    
-}
-
 public class GlossaryCategory: IDescribable, IJournalCategory
 {
 	private string title;

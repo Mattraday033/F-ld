@@ -4,12 +4,15 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class GridRow : MonoBehaviour,
 	IPointerEnterHandler,
 	IPointerExitHandler,
     IHoverIconSource
 {
+    public readonly static UnityEvent<IDescribable> OnDescribableToDisplay = new UnityEvent<IDescribable>();
+
 	public bool hoverEnabled;
     public bool useFloatingHover;
 
@@ -39,19 +42,7 @@ public class GridRow : MonoBehaviour,
 			OverallUIManager.setCurrentScreenType(SaveHandler.getInstance());
 		}
 
-		OverallUIManager.currentScreenManager.setCurrentTabCollection(tabCollection);
-
-		OverallUIManager.currentScreenManager.revealDescriptionPanelSet(descriptionPanel.getObjectBeingDescribed());
-	}
-
-	public virtual void displayDescribableGrid()
-	{
-		OverallUIManager.currentScreenManager.setCurrentTabCollection(tabCollection);
-		OverallUIManager.currentScreenManager.setGridRowType(tabCollection, rowTypeToUse);
-
-		OverallUIManager.currentScreenManager.revealDescriptionPanelSet(descriptionPanel.getObjectBeingDescribed());
-
-		OverallUIManager.currentScreenManager.populateGrid(tabCollection);
+		OnDescribableToDisplay.Invoke(descriptionPanel.getObjectBeingDescribed());
 	}
 
 	public virtual void setToIneligible()
@@ -121,16 +112,6 @@ public class GridRow : MonoBehaviour,
 		}
 	}
 
-	public void hideDescriptionPanel(int tabCollectionIndex)
-	{
-		OverallUIManager.currentScreenManager.hideDescriptionPanel(tabCollectionIndex);
-	}
-
-    public void setCurrentTabCollection(int tabCollection)
-    {
-        OverallUIManager.currentScreenManager.setCurrentTabCollection(tabCollection);
-    }
-
     public virtual bool canSeeHover()
     {
         return hoverEnabled && PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence;
@@ -170,85 +151,62 @@ public class GridRow : MonoBehaviour,
 
     public void spawnHoverIcon()
     {
-        if (useFloatingHover)
-        {
+        // if (useFloatingHover)
+        // {
             MouseHoverManager.spawnHoverIcon(this, transform);
-        }
-        else
-        {
-            useDedicatedSlot();
-        }
+        // }
+        // else
+        // {
+        //     useDedicatedSlot();
+        // }
     }
 
-    private void useDedicatedSlot()
-    {
-        if (PopUpWindow.currentPopUpDescriptionPanelSlot != null)
-        {
-            PopUpWindow.currentPopUpDescriptionPanelSlot.setTempDescribable(descriptionPanel.getObjectBeingDescribed());
-        }
-        else if(OverallUIManager.currentScreenManager != null)
-        {
-            OverallUIManager.currentScreenManager.revealTemptDescriptionPanelSet(descriptionPanel.getObjectBeingDescribed(), tabCollection);
-        }
-    }
+    // private void useDedicatedSlot()
+    // {
+    //     if (PopUpWindow.currentPopUpDescriptionPanelSlot != null)
+    //     {
+    //         PopUpWindow.currentPopUpDescriptionPanelSlot.setTempDescribable(descriptionPanel.getObjectBeingDescribed());
+    //     }
+    //     else if(OverallUIManager.currentScreenManager != null)
+    //     {
+    //         OverallUIManager.currentScreenManager.revealTemptDescriptionPanelSet(descriptionPanel.getObjectBeingDescribed(), tabCollection);
+    //     }
+    // }
 
     public void destroyHoverIcon()
     {
-        if (useFloatingHover)
-        {
+        // if (useFloatingHover)
+        // {
             MouseHoverManager.destroyHoverIcon();
-        }
-        else
-        {
-            revertDedicatedSlot();
-        }
+        // }
+        // else
+        // {
+            // revertDedicatedSlot();
+        // }
     }
 
-    private void revertDedicatedSlot()
-    {
-        if (PopUpWindow.currentPopUpDescriptionPanelSlot != null)
-        {
-            List<IDescribable> list = PopUpWindow.currentPopUpDescriptionPanelSlot.getCurrentDescribables();
+    // private void revertDedicatedSlot()
+    // {
+    //     if (PopUpWindow.currentPopUpDescriptionPanelSlot != null)
+    //     {
+    //         List<IDescribable> list = PopUpWindow.currentPopUpDescriptionPanelSlot.getCurrentDescribables();
 
-            if (list[0] == descriptionPanel.getObjectBeingDescribed())
-            {
-                PopUpWindow.currentPopUpDescriptionPanelSlot.revertToPrimaryDescribable();
-            }
-        }
-        else if(OverallUIManager.currentScreenManager != null &&
-                OverallUIManager.currentScreenManager.descriptionPanelSlots.Count > tabCollection &&
-                OverallUIManager.currentScreenManager.descriptionPanelSlots[tabCollection] != null)
-        {
-            List<IDescribable> list = OverallUIManager.currentScreenManager.descriptionPanelSlots[tabCollection].getCurrentDescribables();
+    //         if (list[0] == descriptionPanel.getObjectBeingDescribed())
+    //         {
+    //             PopUpWindow.currentPopUpDescriptionPanelSlot.revertToPrimaryDescribable();
+    //         }
+    //     }
+    //     else if(OverallUIManager.currentScreenManager != null &&
+    //             OverallUIManager.currentScreenManager.descriptionPanelSlots.Count > tabCollection &&
+    //             OverallUIManager.currentScreenManager.descriptionPanelSlots[tabCollection] != null)
+    //     {
+    //         List<IDescribable> list = OverallUIManager.currentScreenManager.descriptionPanelSlots[tabCollection].getCurrentDescribables();
 
-            if (list != null && descriptionPanel != null && list[0] == descriptionPanel.getObjectBeingDescribed())
-            {
-                OverallUIManager.currentScreenManager.hideTempDescriptionPanelSet(tabCollection);
-            }
-        }
-    }
+    //         if (list != null && descriptionPanel != null && list[0] == descriptionPanel.getObjectBeingDescribed())
+    //         {
+    //             OverallUIManager.currentScreenManager.hideTempDescriptionPanelSet(tabCollection);
+    //         }
+    //     }
+    // }
 
-    public Tab getAsTab()
-    {
-        return getAsTab(null);
-    }
-
-	public Tab getAsTab(string partyMemberName)
-	{
-		Tab rowAsTab = new Tab();
-
-		rowAsTab.button = buttons[0];
-		rowAsTab.filterParameters = new string[0];
-		rowAsTab.grid = parentGrid;
-		rowAsTab.list = DescribableList.PartyMembers;
-		rowAsTab.tabCollectionIndex = 0;
-		rowAsTab.partyMemberName = partyMemberName;
-
-		if (partyMemberName != null && partyMemberName.Length > 0)
-		{
-			rowAsTab.usePartyMemberName = true; 
-		}
-
-		return rowAsTab;
-	}
 }

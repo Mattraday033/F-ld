@@ -44,11 +44,11 @@ public class BinaryPanelPopUpButton : PopUpButton
 		switch(decisionType)
 		{
 			case BinaryDescisionType.LoadSaveFile:
-				return new LoadSaveFile(SaveHandler.getCurrentSaveName());
+				return new LoadSaveFile(SaveHandler.getCurrentSave());
 			case BinaryDescisionType.OverwriteSaveFile:
-				return new OverwriteSaveFile(SaveHandler.getCurrentSaveName());
+				return new OverwriteSaveFile(SaveHandler.getCurrentSave());
 			case BinaryDescisionType.DeleteSaveFile:
-				return new DeleteSaveFile(SaveHandler.getCurrentSaveName());
+				return new DeleteSaveFile(SaveHandler.getCurrentSave());
 			case BinaryDescisionType.QuitToDesktop:
 				return new QuitToDesktop();
             case BinaryDescisionType.ReturnToMainMenu:

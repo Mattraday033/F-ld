@@ -37,7 +37,7 @@ public class AbilityGridSideTab : MonoBehaviour
         ScreenManager.OnScreenInteriorUpdate.RemoveListener(setToDefaultState);
     }
 
-    public static DescribableList getDescribableList()
+    public static DescribableList getDescribableListType()
     {
         if(!currentTabDict.ContainsKey(OverallUIManager.currentScreenManager))
         {

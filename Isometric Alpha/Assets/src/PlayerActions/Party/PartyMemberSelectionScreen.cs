@@ -40,7 +40,7 @@ public class PartyMemberSelectionScreen : PopUpWindow
 		if(!itemBeingDescribed.infiniteUses())
 		{
 			Inventory.removeItem(itemBeingDescribed, 1);
-			OverallUIManager.currentScreenManager.populateAllGrids();
+			ScreenManager.OnScreenInteriorUpdate.Invoke();
 		}
 		
 		populate();

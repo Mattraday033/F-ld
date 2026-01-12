@@ -505,7 +505,6 @@ MonoBehaviour:
   scrollContainer: {fileID: 2792741011665849040}
   scrollableArea: {fileID: 8290105976648597428}
   scrollableAreaContentSizeFitter: {fileID: 3850684094896981921}
-  performDisableScrollBarCheck: 1
   setScrollBarToBottomOnPopulate: 0
   scrollBar: {fileID: 1401300073100024603}
   slidingArea: {fileID: 7987027821569624376}
@@ -654,7 +653,7 @@ MonoBehaviour:
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 7444323400997760270}
   m_HorizontalScrollbarVisibility: 0
-  m_VerticalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 1
   m_HorizontalScrollbarSpacing: 0
   m_VerticalScrollbarSpacing: 0
   m_OnValueChanged:
@@ -1898,6 +1897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d3688b9771924419ed5fc481d8338d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  describableListType: 0
   grid: {fileID: 6516829064865710263}
 --- !u!1 &7987027821569624376
 GameObject:

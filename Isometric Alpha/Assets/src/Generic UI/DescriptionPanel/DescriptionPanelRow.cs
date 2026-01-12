@@ -168,7 +168,7 @@ public class DescriptionPanelRow : MonoBehaviour
             yield return new WaitForEndOfFrame();
 
             if (OverallUIManager.currentScreenManager != null &&
-                OverallUIManager.currentScreenManager.levelUpCapable())
+                CharacterScreen.levelUpCapable())
             {
                 plusButton.SetActive(true);
             }

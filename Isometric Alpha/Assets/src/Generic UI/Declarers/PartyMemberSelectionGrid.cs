@@ -54,7 +54,7 @@ public class PartyMemberSelectionGrid : UIListenerGrid
         gameObject.SetActive(screenManager.requiresPartyMemberSelectionGrid());
     }
 
-    public override DescribableList getDescribableList()
+    public override DescribableList getDescribableListType()
     {
         return DescribableList.PartyMembers;
     }

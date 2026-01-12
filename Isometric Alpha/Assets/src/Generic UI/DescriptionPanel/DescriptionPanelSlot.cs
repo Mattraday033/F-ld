@@ -38,15 +38,6 @@ public class DescriptionPanelSlot : MonoBehaviour
 
     private List<IDescribable> tempDescribables;
 
-
-    private void Awake()
-    {
-        if (addToScreenOnCreation)
-        {
-            OverallUIManager.currentScreenManager.descriptionPanelSlots[collectionTabIndex] = this;
-        }
-    }
-
     // private IDescribable getMainPrimaryDescribable()
     // {
     //     return getFirstDescribableInList(primaryDescribables);

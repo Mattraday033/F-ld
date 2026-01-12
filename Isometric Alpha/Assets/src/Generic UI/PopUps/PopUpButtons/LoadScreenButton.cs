@@ -45,12 +45,10 @@ public class LoadScreenButton : PopUpButton
 
 		OverallUIManager.UIParentPanel.SetActive(true); 
 		
-		Instantiate(Resources.Load<GameObject>(PrefabNames.loadOnlyPopUp), PopUpScreenBlockerManager.getPopUpParent(PopUpType.LoadOnlyScreen)); 
+		Instantiate(Resources.Load<GameObject>(PrefabNames.saveScreen), PopUpScreenBlockerManager.getPopUpParent(PopUpType.LoadOnlyScreen)); 
 		
 		OverallUIManager.setCurrentScreenType(getCurrentPopUpGameObject().GetComponent<SaveHandler>());
 		
-		OverallUIManager.currentScreenManager.populateAllGrids();
-
 		EscapeStack.addEscapableObject(getCurrentPopUpGameObject().GetComponent<SaveHandler>()); 
 	}
 

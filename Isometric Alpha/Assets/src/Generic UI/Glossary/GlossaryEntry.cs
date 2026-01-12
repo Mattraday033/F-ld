@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlossaryEntry : IDescribable
+public class GlossaryEntry : IJournalSubcategory
 {
 	public string title;
 	public string category;

@@ -11,11 +11,9 @@ public class CharacterScreen : ScreenManager, ICounter
 
     public Image characterSprite;
 
-    public static DescriptionPanelSlot upgradeDescriptionPanelSlot;
-
     public static int getCurrentDisplayedStatLevel()
     {
-        switch (AbilityGridSideTab.getDescribableList())
+        switch (AbilityGridSideTab.getDescribableListType())
         {
             case DescribableList.Strength:
                 return OverallUIManager.getCurrentPartyMember().getStrength();
@@ -55,7 +53,7 @@ public class CharacterScreen : ScreenManager, ICounter
         return listOfEvents;
     }
 
-    public override bool levelUpCapable()
+    public static bool levelUpCapable()
     {
         return currentPartyMember.xp >= AllyStats.xpNeededToLevelUp;
     }

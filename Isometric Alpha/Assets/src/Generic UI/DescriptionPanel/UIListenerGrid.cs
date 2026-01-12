@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class UIListenerGrid : MonoBehaviour, ICounter
+public class UIListenerGrid : MonoBehaviour, ICounter
 {
+    [SerializeField]
+    private DescribableList describableListType;
     public ScrollableUIElement grid;
 
     private void Awake()
@@ -46,7 +48,12 @@ public abstract class UIListenerGrid : MonoBehaviour, ICounter
 
     public virtual void updateCounter()
     {
-        grid.populatePanels(Tab.getList(getDescribableList()));
+        grid.populatePanels(getDescribableList());
+    }
+
+    public virtual void updateCounter(IDescribable describable)
+    {
+        //empty on purpose
     }
 
     public virtual List<UnityEvent> getUpdateEvents()
@@ -61,6 +68,14 @@ public abstract class UIListenerGrid : MonoBehaviour, ICounter
         return listOfEvents;
     }
 
-    public abstract DescribableList getDescribableList();
+    public virtual DescribableList getDescribableListType()
+    {
+        return describableListType;
+    }
+
+    public virtual IEnumerable<IDescribable> getDescribableList()
+    {
+        return Tab.getList(getDescribableListType());
+    }
 
 }

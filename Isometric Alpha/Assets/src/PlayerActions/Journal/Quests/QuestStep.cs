@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface IJournalSubcategory : IDescribable
+{
+    
+}
+
 [System.Serializable]
-public class QuestStep : IDescribable, IDescribableInBlocks
+public class QuestStep : IJournalSubcategory, IDescribableInBlocks
 {
 	private const string questCompletedPrefix = "Quest Complete: ";
 	private const string questFailedPrefix = "Quest Failed: ";

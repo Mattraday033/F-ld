@@ -112,15 +112,9 @@ public class PopUpButton : MonoBehaviour
 
 			case PopUpType.DialogueTrackerWithoutChoices:				
 				return PrefabNames.dialogueTrackerWindowPopUp;
-				
-			case PopUpType.FullEditAbilityWheel:
-				return PrefabNames.abilityWheelEditorFull;
 			
 			case PopUpType.LoadOnlyScreen:
-				return PrefabNames.loadOnlyPopUp;
-				
-			case PopUpType.SingleEditAbilityWheel:
-				return PrefabNames.singleEditAbilityWheelPopUp;
+				return PrefabNames.saveScreen;
 				
 			case PopUpType.DialogueTrackerWithChoices:
 				return PrefabNames.dialogueTrackerWindowWithChoicesPopUp;

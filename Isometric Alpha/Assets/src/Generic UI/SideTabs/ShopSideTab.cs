@@ -22,9 +22,9 @@ public class ShopSideTab : AbilityGridSideTab
         OnSideTabChosen.Invoke();
         openTabPanel.SetActive(true);
 
-        TabCollection typeTabs = ShopPopUpWindow.getInstance().itemTypeTabs;
+        // TabCollection typeTabs = ShopPopUpWindow.getInstance().itemTypeTabs;
 
-        typeTabs.selectTab(tabIndex);
+        // typeTabs.selectTab(tabIndex);
 
         ShopPopUpWindow.populateGrid();
     }

@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class GridWithTabs : UIListenerGrid
 {
-    public override DescribableList getDescribableList()
+    public override DescribableList getDescribableListType()
     {
-        return AbilityGridSideTab.getDescribableList();
+        return AbilityGridSideTab.getDescribableListType();
     }
 }

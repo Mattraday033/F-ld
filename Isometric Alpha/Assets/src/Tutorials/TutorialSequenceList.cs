@@ -528,25 +528,25 @@ public class OpenRelevantAbilityTabScript : TutorialSequenceStepScript
 {
     public override void runScript(GameObject targetObject)
     {
-        PrimaryStat type = PrimaryStatIncreaseButton.currentStatType;
-        int abilityGridIndex = OverallUIManager.currentScreenManager.getAbilityGridIndex();
-        TabCollection abilityGridTabCollection = OverallUIManager.currentScreenManager.tabCollections[abilityGridIndex];
+        // PrimaryStat type = PrimaryStatIncreaseButton.currentStatType;
+        // int abilityGridIndex = OverallUIManager.currentScreenManager.getAbilityGridIndex();
+        // TabCollection abilityGridTabCollection = OverallUIManager.currentScreenManager.tabCollections[abilityGridIndex];
 
-        switch (type)
-        {
-            case PrimaryStat.Strength:
-                abilityGridTabCollection.selectAndClickTab(2);
-                return;
-            case PrimaryStat.Dexterity:
-                abilityGridTabCollection.selectAndClickTab(3);
-                return;
-            case PrimaryStat.Wisdom:
-                abilityGridTabCollection.selectAndClickTab(4);
-                return;
-            case PrimaryStat.Charisma:
-                abilityGridTabCollection.selectAndClickTab(5);
-                return;
-        }
+        // switch (type)
+        // {
+        //     case PrimaryStat.Strength:
+        //         abilityGridTabCollection.selectAndClickTab(2);
+        //         return;
+        //     case PrimaryStat.Dexterity:
+        //         abilityGridTabCollection.selectAndClickTab(3);
+        //         return;
+        //     case PrimaryStat.Wisdom:
+        //         abilityGridTabCollection.selectAndClickTab(4);
+        //         return;
+        //     case PrimaryStat.Charisma:
+        //         abilityGridTabCollection.selectAndClickTab(5);
+        //         return;
+        // }
     }
 }
 

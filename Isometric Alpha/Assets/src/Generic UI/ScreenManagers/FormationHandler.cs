@@ -6,59 +6,11 @@ using TMPro;
 
 public class FormationHandler : ScreenManager, IPartyEditor, ICounter
 {
-    private const int party2x3GridIndex = 1;
-
     public FormationDisplayUI formationDisplayUI;
 
     public TextMeshProUGUI slotTracker;
 
-    public DescriptionPanelSlot skillSlot;
-    public DescriptionPanelSlot exuberanceSlot;
     public DescriptionPanelSlot primaryStatSlot;
-    public DescriptionPanelSlot secondaryStatSlot;
-
-    // public override void Awake()
-    // {
-    //     base.Awake();
-
-    //     formationDisplayUI.setToReadOnly();
-    //     updateAllStatsPanels();
-    //     populateAllGrids();
-    // }
-
-    public override void updateAllStatsPanels()
-    {
-        skillSlot.setPrimaryDescribable(State.formation);
-        exuberanceSlot.setPrimaryDescribable(State.formation);
-        primaryStatSlot.setPrimaryDescribable(State.formation);
-        secondaryStatSlot.setPrimaryDescribable(State.formation);
-    }
-
-    public override void populateAllGrids()
-    {
-        grids[party2x3GridIndex].populatePanels(State.formation.getAllPartyStatsInFormation()); 
-        readInCurrentFormation();
-    }
-
-    public void removeAllPartyMembersFromCurrentPartyAndDisplay()
-    {
-        PartyManager.removeAllPartyMembersFromCurrentParty();
-
-        readInCurrentFormation();
-    }
-
-    public override void revealDescriptionPanelSet(IDescribable objectToDescribe)
-    {
-        if(objectToDescribe != null)
-        {
-            currentPartyMember = Stats.convertIDescribableToStats(objectToDescribe) as AllyStats;
-        }
-    }
-
-    public override void populateObjectAttachedToSpriteRowButton(PartyMember partyMember)
-    {
-        // grids[2].populatePanels(partyMember.getCombatActionsForDisplay());
-    }
 
     public override bool enableSpriteRowDragAndDrop()
     {
@@ -72,30 +24,12 @@ public class FormationHandler : ScreenManager, IPartyEditor, ICounter
         slotTracker.text = State.formation.getSizeOfFormation() + " / " + PartyStats.getPartySizeMaximum();
     }
 
-    public void populateFormationGrid()
-    {
-        formationDisplayUI.populate(State.formation);
-        updateSlotTracker();
-    }
-
-    public void readInCurrentFormation()
-    {
-        populateFormationGrid();
-    }
-
-    public void writeFormation()
-    {
-        populateFormationGrid();
-    }
-
     public void addCharacterToFormation(AllyStats characterToAdd, int row, int col)
     {
-        Debug.LogError("characterToAdd = " + characterToAdd.getName());
-
         if (State.formation.canWriteToSlot(row, col) && !State.formation.contains(characterToAdd))
         {
             State.formation.setCharacterAtCoords(characterToAdd, row, col);
-            populateFormationGrid();
+            OnScreenInteriorUpdate.Invoke();
         }
     }
 
@@ -103,7 +37,7 @@ public class FormationHandler : ScreenManager, IPartyEditor, ICounter
     {
         State.formation.removeCharacter(characterToRemove);
 
-        populateFormationGrid();
+        OnScreenInteriorUpdate.Invoke();
     }
 
     public AllyStats getSelectedPartyMember()
@@ -151,8 +85,7 @@ public class FormationHandler : ScreenManager, IPartyEditor, ICounter
 
     public override void updateCounter()
     {
-        // updateAllStatsPanels();
-        // populateAllGrids();
+        updateSlotTracker();
     }
 
     public override List<UnityEvent> getUpdateEvents()
@@ -160,6 +93,8 @@ public class FormationHandler : ScreenManager, IPartyEditor, ICounter
         List<UnityEvent> listOfEvents = new List<UnityEvent>();
 
         listOfEvents.Add(Formation.OnFormationChange);
+        listOfEvents.Add(PartySpriteGridRow.OnPartyMemberSelected);
+        listOfEvents.Add(OnScreenInteriorUpdate);
 
         return listOfEvents;
     }

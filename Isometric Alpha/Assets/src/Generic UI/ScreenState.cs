@@ -15,33 +15,33 @@ public class ScreenState
 
 	private void setCurrentTabIndexes(ScreenManager screenManager)
 	{
-		currentTabIndexes = new int[screenManager.tabCollections.Length];
+		// currentTabIndexes = new int[screenManager.tabCollections.Length];
 		
-		int index = 0;
-		foreach(TabCollection tabCollection in screenManager.tabCollections)
-		{
+		// int index = 0;
+		// foreach(TabCollection tabCollection in screenManager.tabCollections)
+		// {
 			
 
-			currentTabIndexes[index] = tabCollection.getCurrentTabIndex();
+		// 	currentTabIndexes[index] = tabCollection.getCurrentTabIndex();
 			
-			index++;
-		}
+		// 	index++;
+		// }
 	}
 
 	private void setRowNames(ScreenManager screenManager)
 	{
-		rowNames = new string[screenManager.grids.Length];
+		// rowNames = new string[screenManager.grids.Length];
 		
-		int index = 0;
+		// int index = 0;
 		
-		foreach (ScrollableUIElement grid in screenManager.grids)
-		{
-			if (grid != null && !(grid is null))
-			{
-				rowNames[index] = grid.getDisabledRowName();
-			}
+		// foreach (ScrollableUIElement grid in screenManager.grids)
+		// {
+		// 	if (grid != null && !(grid is null))
+		// 	{
+		// 		rowNames[index] = grid.getDisabledRowName();
+		// 	}
 
-			index++;
-		}
+		// 	index++;
+		// }
 	}
 }

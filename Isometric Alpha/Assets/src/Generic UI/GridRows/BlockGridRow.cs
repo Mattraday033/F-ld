@@ -10,11 +10,6 @@ public class BlockGridRow : GridRow
         //Empty on purpose
 	}
 	
-	public override void displayDescribableGrid()
-	{	
-        //Empty on purpose
-	}
-	
 	public override void setToIneligible()
 	{
         //Empty on purpose

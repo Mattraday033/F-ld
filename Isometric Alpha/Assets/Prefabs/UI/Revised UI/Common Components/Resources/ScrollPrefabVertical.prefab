@@ -32,8 +32,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7694769997653530642}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 135.41667, y: 0}
   m_SizeDelta: {x: 270.83334, y: 0}
   m_Pivot: {x: 0.5, y: 1}
@@ -399,7 +399,7 @@ MonoBehaviour:
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1669629082061720321}
   m_HorizontalScrollbarVisibility: 0
-  m_VerticalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 1
   m_HorizontalScrollbarSpacing: 0
   m_VerticalScrollbarSpacing: 0
   m_OnValueChanged:
@@ -744,18 +744,20 @@ MonoBehaviour:
   scrollContainer: {fileID: 6243666232250739935}
   scrollableArea: {fileID: 245557274709416379}
   scrollableAreaContentSizeFitter: {fileID: 4977703219472818606}
-  performDisableScrollBarCheck: 1
   setScrollBarToBottomOnPopulate: 0
   scrollBar: {fileID: 7139982774956539156}
   slidingArea: {fileID: 2212293262473686839}
   scrollableComponent: {fileID: 8669734958571217568}
   clickFirstPanel: 0
   clickLastPanel: 0
+  useBlockDescriptionsInRows: 0
   keepScrollBarVisable: 0
+  normalizeAfterPopulate: 0
   describeAsFullPanel: 0
   rowType: 0
   specificRowType: 
   columnHeader: {fileID: 0}
   sortPanels: 1
   defaultSortBy: 1
+  listOfRows: []
   objectsDisabledWithSlider: []

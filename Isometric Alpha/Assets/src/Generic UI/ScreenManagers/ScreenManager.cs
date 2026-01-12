@@ -22,7 +22,6 @@ public enum DescribableList
     PartyMembers = 9,
     Quests = 10,
     GlossaryCategories = 11,
-    PerkCategories = 12,
     MainHandWeaponsAsActions = 13,
     Armor = 14,
     Usable = 15,
@@ -39,148 +38,8 @@ public enum DescribableList
 }
 
 [System.Serializable]
-public struct TabCollection
-{
-	public bool statTabs;
-	public Tab[] collection;
-	
-	public TabCollection(Tab[] collection)
-	{
-		this.collection = collection;
-		this.statTabs = false;
-	}
-	
-	public void setTabCollectionIndex(int index)
-	{
-		foreach(Tab tab in collection)
-		{
-			tab.setTabCollectionIndex(index);
-		}
-	}
-	
-	public void selectTab(int tabIndex)
-	{
-		foreach (Tab tab in collection)
-		{
-			tab.button.interactable = true;
-		}
-		
-		collection[tabIndex].button.interactable = false;
-	}
-	
-	public void selectAndClickTab(int tabIndex)
-	{
-		foreach (Tab tab in collection)
-		{
-			tab.button.interactable = true;
-		}
-		
-		if(collection[tabIndex].button.enabled)
-		{
-			collection[tabIndex].button.onClick.Invoke();			
-		}
-		
-		collection[tabIndex].button.interactable = false;
-	}
-	
-	public void selectDefaultTab()
-	{
-		if(!statTabs)
-		{
-			selectTab(0);
-		} else
-		{
-			selectTab((int) PartyManager.getPlayerStats().getHighestStat());
-		}
-	}
-
-	public Tab getCurrentTab()
-	{
-		for (int tabIndex = 0; tabIndex < collection.Length; tabIndex++)
-		{
-			if (!collection[tabIndex].button.interactable && collection[tabIndex].button.enabled)
-			{
-				return collection[tabIndex];
-			}
-		}
-
-		return collection[0];
-
-		// throw new IOException("All tabs are interactable");
-	}
-
-	public int getCurrentTabIndex()
-	{
-		for (int tabIndex = 0; tabIndex < collection.Length; tabIndex++)
-		{
-			if (!collection[tabIndex].button.interactable)
-			{
-				return tabIndex;
-			}
-		}
-
-		return 0;
-	}
-}
-
-[System.Serializable]
 public struct Tab
 {
-	public Button button;
-	public string[] filterParameters;
-	public ScrollableUIElement grid;
-	public DescribableList list;
-	public int tabCollectionIndex;
-	public bool usePartyMemberName;
-	public string partyMemberName;
-	
-	public Tab(GridRow gridRow, int collectionIndex, string partyMemberName)
-	{
-		this.button = gridRow.buttons[0];
-		
-		this.grid = OverallUIManager.currentScreenManager.grids[collectionIndex];
-		
-		this.filterParameters = null;
-		
-		this.list = DescribableList.Unnecessary;
-		
-		this.tabCollectionIndex = collectionIndex;
-		
-		this.usePartyMemberName= true;
-		this.partyMemberName = partyMemberName;
-
-    }
-	
-	public Tab(Button button, ScrollableUIElement grid, string[] filterParameters, DescribableList list)
-	{
-		this.button = button;
-		
-		this.grid = grid;
-		
-		this.filterParameters = filterParameters;
-		
-		this.list = list;
-		
-		this.tabCollectionIndex = -1;
-		this.usePartyMemberName = false;
-		this.partyMemberName = "";
-	}
-	
-	public bool isCurrentTab()
-	{
-		return !button.interactable;
-	}
-	
-	public IEnumerable<IDescribable> getList()
-	{
-		if(usePartyMemberName)
-		{
-            return new List<IDescribable>();
-		}
-
-		return getList(list, filterParameters);
-	}
-
     public static IEnumerable<IDescribable> getList(DescribableList describableList)
     {
 		return getList(describableList, null);
@@ -239,12 +98,6 @@ public struct Tab
             case DescribableList.GlossaryCategories:
 
                 return GlossaryCategoryList.getAllGlossaryCategories();
-
-            case DescribableList.PerkCategories:
-
-                Debug.LogError("returning PerkCategories");
-
-                return PerkCategoryList.getAllPerkCategories();
 
             case DescribableList.MainHandWeaponsAsActions:
 
@@ -326,35 +179,15 @@ public struct Tab
                 throw new IOException("Unknown DescribableList = " + describableList.ToString());
         }
     }
-
-    public void setTabCollectionIndex(int index)
-	{
-		tabCollectionIndex = index;
-	}
 }
 
 public abstract class ScreenManager : MonoBehaviour
 {
-    private const int defaultAbilityGridIndex = 0;
-
     #region Events
 
     public readonly static UnityEvent<ScreenManager> OnScreenDeclaration = new UnityEvent<ScreenManager>();
     public readonly static UnityEvent OnScreenInteriorUpdate = new UnityEvent();
     #endregion
-
-
-    public List<InterfaceReference<IStatsPanel>> allStatsPanels;
-
-    public bool alternateWayOfSettingDefaultState;
-
-    public TabCollection[] tabCollections;
-
-    public ScrollableUIElement[] grids;
-
-    public int currentTabCollection = 0;
-
-    public List<DescriptionPanelSlot> descriptionPanelSlots;
 
     private static AllyStats _CurrentPartyMember;
     public static AllyStats currentPartyMember
@@ -374,9 +207,6 @@ public abstract class ScreenManager : MonoBehaviour
         }
     }
 
-    //[SerializeField]
-    private ScreenType screenType;
-
     public virtual void Awake()
     {
         OverallUIManager.currentScreenManager = this; 
@@ -389,264 +219,9 @@ public abstract class ScreenManager : MonoBehaviour
         OnScreenInteriorUpdate.Invoke();
     }
 
-    public virtual ScreenType getScreenType()
-    {
-        return screenType;
-    }
-
-    public virtual bool hasGeneratedTabs()
-    {
-        return false;
-    }
-
-    public virtual void updateAllStatsPanels()
-    {
-        foreach (InterfaceReference<IStatsPanel> reference in allStatsPanels)
-        {
-            reference.Target.updateStatsPanel();
-        }
-    }
-
-    public virtual void revealDescriptionPanelSet(IDescribable objectToDescribe)
-    {
-        if (descriptionPanelSlots.Count <= currentTabCollection)
-        {
-            return;
-        }
-
-        descriptionPanelSlots[currentTabCollection].setPrimaryDescribable(objectToDescribe);
-
-        if(objectToDescribe != null)
-        {
-            currentPartyMember = Stats.convertIDescribableToStats(objectToDescribe) as AllyStats;
-        }
-    }
-
-    public virtual void revealTemptDescriptionPanelSet(IDescribable objectToDescribe, int slotIndex)
-    {
-        if (descriptionPanelSlots.Count <= slotIndex)
-        {
-            return;
-        }
-
-        descriptionPanelSlots[slotIndex].setTempDescribable(objectToDescribe);
-    }
-
-    public virtual void hideTempDescriptionPanelSet(int slotIndex)
-    {
-        if (descriptionPanelSlots.Count <= slotIndex)
-        {
-            return;
-        }
-
-        descriptionPanelSlots[slotIndex].revertToPrimaryDescribable();
-    }
-
-    public virtual void populateObjectAttachedToSpriteRowButton(PartyMember partyMember)
-    {
-        //Empty on purpose
-    }
-
-    public virtual int getAbilityGridIndex()
-    {
-        return defaultAbilityGridIndex;
-    }
-
     public virtual bool enableSpriteRowDragAndDrop()
     {
         return false;
-    }
-
-    public virtual void setGridRowType(int gridIndex, RowType rowType)
-    {
-        grids[gridIndex].setRowType(rowType);
-    }
-
-    public void populateGrid()
-    {
-        populateGrid(currentTabCollection);
-    }
-
-    public virtual void populateGrid(int tabCollectionIndex)
-    {
-        if(tabCollectionIndex < 0 || tabCollectionIndex >= grids.Length)
-        {
-            return;
-        }
-
-        ScrollableUIElement currentScrollableUIElement = grids[tabCollectionIndex];
-
-        if (currentScrollableUIElement == null || currentScrollableUIElement is null)
-        {
-            return;
-        }
-
-        string disabledRowName = currentScrollableUIElement.getDisabledRowName();
-
-        currentScrollableUIElement.populatePanels(tabCollections[tabCollectionIndex].getCurrentTab().getList());
-
-        if (disabledRowName != null)
-        {
-            currentScrollableUIElement.disableGridRowAndClick(disabledRowName);
-        }
-    }
-
-    public virtual void populateAllGrids()
-    {
-        for (int tabCollectionIndex = 0; tabCollectionIndex < grids.Length; tabCollectionIndex++)
-        {
-            populateGrid(tabCollectionIndex);
-        }
-    }
-
-    public void populateAllGridsEnableAllRows()
-    {
-        for (int tabCollectionIndex = 0; tabCollectionIndex < grids.Length; tabCollectionIndex++)
-        {
-            populateGrid(tabCollectionIndex);
-
-            grids[tabCollectionIndex].enableAllGridRows();
-        }
-    }
-
-    public int getCurrentTabCollection()
-    {
-        return currentTabCollection;
-    }
-
-    public void setCurrentTabCollection(int tabCollectionIndex)
-    {
-        this.currentTabCollection = tabCollectionIndex;
-    }
-
-    public virtual void setCurrentTab(int tabIndex)
-    {
-        tabCollections[currentTabCollection].selectTab(tabIndex);
-    }
-
-    private void setAllTabCollectionsAndDescriptionSlotIndexes()
-    {
-        int collectionIndex = 0;
-
-        foreach (TabCollection collection in tabCollections)
-        {
-            collection.setTabCollectionIndex(collectionIndex);
-
-            collectionIndex++;
-        }
-
-        collectionIndex = 0;
-
-        foreach (DescriptionPanelSlot slot in descriptionPanelSlots)
-        {
-            slot.collectionTabIndex = collectionIndex;
-
-            collectionIndex++;
-        }
-    }
-
-    public virtual void setToScreenState(ScreenState screenState)
-    {
-        if (screenState == null)
-        {
-            // if (!alternateWayOfSettingDefaultState)
-            // {
-            setToDefaultScreenState();
-            // }
-
-            return;
-        }
-        else if (hasGeneratedTabs() && alternateWayOfSettingDefaultState)
-        {
-            //do nothing here
-        }
-        else if (hasGeneratedTabs())
-        {
-            setToDefaultScreenState();
-        }
-
-        for (int index = 0; index < tabCollections.Length; index++)
-        {
-            tabCollections[index].selectAndClickTab(screenState.currentTabIndexes[index]);
-        }
-
-        populateAllGrids();
-
-        if (hasGeneratedTabs())
-        {
-            setPartyMemberTabGridToPreviousPartyMember();
-        }
-
-        for (int index = 0; index < grids.Length; index++)
-        {
-            if (grids[index] != null && !(grids[index] is null))
-            {
-                grids[index].disableGridRowAndClick(screenState.rowNames[index]);
-            }
-        }
-
-
-    }
-
-    public void setPartyMemberTabGridToPreviousPartyMember()
-    {
-        if (OverallUIManager.previousPartyMember == null)
-        {
-            return;
-        }
-
-        grids[0].disableGridRowAndClick(OverallUIManager.previousPartyMember.getName());
-    }
-
-    public virtual void setToDefaultScreenState()
-    {
-        int collectionIndex = 0;
-        foreach (TabCollection collection in tabCollections)
-        {
-            collection.selectDefaultTab();
-
-            populateGrid(collectionIndex);
-
-            if (alternateWayOfSettingDefaultState)
-            {
-                break;
-            }
-
-            collectionIndex++;
-        }
-
-        if (hasGeneratedTabs() && !alternateWayOfSettingDefaultState)
-        {
-            tabCollections[1].selectAndClickTab(0);
-        }
-    }
-
-    public void hideCurrentDescriptionPanel()
-    {
-        hideDescriptionPanel(currentTabCollection);
-    }
-
-    public void hideDescriptionPanel(int tabCollectionIndex)
-    {
-        descriptionPanelSlots[currentTabCollection].removePrimaryDescribable();
-    }
-
-    public void updateAllDecisionPanels()
-    {
-        foreach (DescriptionPanelSlot slot in descriptionPanelSlots)
-        {
-            slot.updateDecisionPanel();
-        }
-    }
-
-    public virtual bool levelUpCapable()
-    {
-        return false;
-    }
-
-    public virtual float getNumberOfUpgradeTilesPerRow()
-    {
-        return 4f;
     }
 
     public abstract bool requiresPartyMemberSelectionGrid();

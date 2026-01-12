@@ -23,8 +23,8 @@ public class PartyGridSection : GridRow
         if (formationHandler != null)
         {
             formationHandler.primaryStatSlot.revertToPrimaryDescribable();
+            formationHandler.primaryStatSlot.setPrimaryDescribable(State.formation);
         }
     }
-
 
 }

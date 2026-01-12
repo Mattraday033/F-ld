@@ -28,24 +28,22 @@ public class LoadSaveFile : IDecision
 
     public readonly static UnityEvent OnLoad = new UnityEvent();
 
-    public string saveName;
-
     private SaveBlueprint saveBlueprint;
 
 
     public LoadSaveFile()
     {
-        this.saveName = null;
+        this.saveBlueprint = null;
     }
 
-    public LoadSaveFile(string saveName)
+    public LoadSaveFile(SaveBlueprint saveBlueprint)
     {
-        this.saveName = saveName;
+        this.saveBlueprint = saveBlueprint;
     }
 
     public string getMessage()
     {
-        return loadLostProgressMessageStart + saveName + loadLostProgressMessageEnd;
+        return loadLostProgressMessageStart + saveBlueprint.getName() + loadLostProgressMessageEnd;
     }
 
     public void execute()
@@ -74,13 +72,12 @@ public class LoadSaveFile : IDecision
                 CombatStateManager.inCombat = false;
             }
 
-            if (saveName == null)
+            if (saveBlueprint == null)
             {
                 saveBlueprint = SaveHandler.getCleanSlateSave();
             }
             else
             {
-                saveBlueprint = SaveHandler.getDataFromSaveFile(saveName);
                 Flags.exitNewGameMode();
             }
 
@@ -140,8 +137,6 @@ public class LoadSaveFile : IDecision
             CombatStateManager.inCombat = false;
 
             SpeechLog.cleanSpeechLog();
-
-            JournalHandler.wipeLastOpened();
 
             TestScript.addTestVariables();
 

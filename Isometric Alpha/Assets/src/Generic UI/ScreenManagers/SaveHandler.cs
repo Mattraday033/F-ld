@@ -41,6 +41,8 @@ public class SaveHandler : ScreenManager, IEscapable
 	//[SerializeField] 
     public Button saveButton;
 	
+    public SaveBlueprint currentSaveFile;
+
 	public BinaryPanelPopUpButton overwriteButton;
 
 	private static SaveHandler instance;
@@ -50,7 +52,7 @@ public class SaveHandler : ScreenManager, IEscapable
 		return instance;
 	}
 
-	private void Awake()
+	public override void Awake()
 	{
 		if (instance != null)
 		{
@@ -64,11 +66,19 @@ public class SaveHandler : ScreenManager, IEscapable
 			createSavedGameList();
 		}
 
-		if (CombatStateManager.inCombat)
+		if(Flags.isInNewGameMode())
+        {
+            OverallUIManager.setCurrentScreenType(this);
+        }
+        else if (CombatStateManager.inCombat)
 		{
 			OverallUIManager.setCurrentScreenType(this);
 			HealthBarCanvas.disableHealthBarCanvas();
 		}
+
+        saveButton.gameObject.SetActive(!Flags.isInNewGameMode() && !CombatStateManager.inCombat);
+
+        base.Awake();
 	}
 
 	void Update()
@@ -198,18 +208,7 @@ public class SaveHandler : ScreenManager, IEscapable
 			return;
 		}
 		
-		if(grids != null && grids.Length > 0 && grids[0].contains(saveNameField.text))
-		{
-			overwriteButton.spawnPopUp(new OverwriteSaveFile(saveNameField.text));
-		} else
-		{
-			save(saveNameField.text);
-			
-			populateAllGridsEnableAllRows();
-			hideCurrentDescriptionPanel();
-			
-			saveNameField.text = "";
-		}
+        Debug.LogError("saveButtonPress() is empty");
 	}
 
 	private static string determineCurrentAutosaveName()
@@ -349,19 +348,14 @@ public class SaveHandler : ScreenManager, IEscapable
 		return saveGameList.ContainsKey(saveName);
 	}
 
-	public void removeOldSaveInfoFromScreen() //used when checking for nonexistant save names in save input field
+    public static SaveBlueprint getCurrentSave()
 	{
-		string possibleSaveName = saveNameField.text;
+        if(instance == null)
+        {
+            return null;
+        }
 
-		if(!saveExists(possibleSaveName))
-		{
-			hideCurrentDescriptionPanel();
-		}
-	}
-
-    public static string getCurrentSaveName()
-	{
-		return getInstance().descriptionPanelSlots[0].getCurrentDescribables()[0].getName();
+		return instance.currentSaveFile;
 	}
 	
 	public void setInputFieldToSaveName(TextMeshProUGUI saveNameText)
@@ -397,7 +391,7 @@ public class SaveHandler : ScreenManager, IEscapable
 
     	SaveBlueprint topSave = saveGameList.Values.OrderByDescending(blueprint => blueprint.getNumber()).First();
 
-		new LoadSaveFile(topSave.saveName).execute();
+		new LoadSaveFile(topSave).execute();
 	}	
 
 	public static SaveBlueprint getDataFromSaveFile(string saveName)
@@ -486,13 +480,6 @@ public class SaveHandler : ScreenManager, IEscapable
 			saveGameList.Add(blueprint.saveName, blueprint);
 		}
 	}
-	
-	public override void revealDescriptionPanelSet(IDescribable objectToDescribe)
-	{
-		base.revealDescriptionPanelSet(objectToDescribe);
-		
-		saveNameField.text = objectToDescribe.getName();			
-	}
 
     public void handleEscapePress()
 	{
@@ -526,5 +513,26 @@ public class SaveHandler : ScreenManager, IEscapable
     public override DescribableList getDefaultDescribableList()
     {
         return DescribableList.Saves;
+    }
+
+    public override void addListeners()
+    {
+        base.addListeners();
+        GridRow.OnDescribableToDisplay.AddListener(setCurrentSaveFile);
+    }
+    public override void removeListeners()
+    {
+        base.removeListeners();
+        GridRow.OnDescribableToDisplay.RemoveListener(setCurrentSaveFile);
+    }
+
+    public void setCurrentSaveFile(IDescribable describable)
+    {
+        if(describable as SaveBlueprint == null)
+        {
+            return;
+        }
+
+        currentSaveFile = describable as SaveBlueprint;
     }
 }
