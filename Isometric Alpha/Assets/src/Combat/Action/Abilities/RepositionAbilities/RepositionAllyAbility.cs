@@ -20,7 +20,7 @@ public class RepositionAllyAbility : RepositionAbility, IJSONConvertable
 
 	public override bool repositionsCaster()
 	{
-		return true;
+		return false;
 	}
 
 	// public override bool targetsOnlyEmptySpace()

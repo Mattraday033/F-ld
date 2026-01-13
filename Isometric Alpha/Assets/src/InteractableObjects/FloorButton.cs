@@ -81,11 +81,9 @@ public class FloorButton : MonoBehaviour, INameSource
         if(isPressed())
         {
             spriteRenderer.sprite = Resources.Load<Sprite>(PrefabNames.buttonDownStoneFolderPath);            
-            // spriteRenderer.color = Color.green;
         } else
         {
             spriteRenderer.sprite = Resources.Load<Sprite>(PrefabNames.buttonUpStoneFolderPath);      
-            // spriteRenderer.color = Color.white;            
         }
     }
 

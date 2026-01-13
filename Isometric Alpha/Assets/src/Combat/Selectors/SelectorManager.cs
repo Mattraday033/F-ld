@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -412,7 +413,8 @@ public class SelectorManager : MonoBehaviour
 			{
 				if (loadedCombatAction.targetsAllySection())
 				{
-					if (currentSelector.hasAtLeastOneLivingTarget(allyTagCriteria))
+					if (currentSelector.hasAtLeastOneLivingTarget(allyTagCriteria) && 
+                        !(currentSelector.getAllSelectorCoords().Contains(loadedCombatAction.getActorCoords()) && !loadedCombatAction.repositionsCaster()))
 					{
 						instance.finishChoosingLocation(loadedCombatAction);
 					}

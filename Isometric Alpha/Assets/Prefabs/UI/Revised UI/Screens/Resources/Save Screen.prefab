@@ -515,6 +515,7 @@ MonoBehaviour:
   saveNameField: {fileID: 3663321465971817}
   newSaveInputPanel: {fileID: 5570539854505573528}
   saveButton: {fileID: 1244599659773969725}
+  overwriteButton: {fileID: 1708904393221626395}
   currentSaveFile:
     saveNumber: 0
     currentLocation: 
@@ -546,7 +547,6 @@ MonoBehaviour:
     currentBuyBackInventories: []
     monsterLocations: []
     currentMonsterDefeatKeys: []
-  overwriteButton: {fileID: 1708904393221626395}
 --- !u!114 &5926230575925302289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,7 +624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
-  decisionType: 0
+  decisionType: 2
 --- !u!114 &3893161300125749164
 MonoBehaviour:
   m_ObjectHideFlags: 0

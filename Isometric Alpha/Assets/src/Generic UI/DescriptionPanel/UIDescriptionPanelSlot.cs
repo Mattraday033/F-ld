@@ -59,7 +59,13 @@ public class UIDescriptionPanelSlot : DescriptionPanelSlot, ICounter
 
     public virtual void updateCounter(IDescribable describable)
     {
-        setPrimaryDescribable(describable);
+        if(describable == null)
+        {
+            removePrimaryDescribable();
+        } else
+        {
+            setPrimaryDescribable(describable);
+        }
     }
 
     public virtual List<UnityEvent> getUpdateEvents()

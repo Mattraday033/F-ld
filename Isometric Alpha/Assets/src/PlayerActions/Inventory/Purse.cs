@@ -36,7 +36,7 @@ public static class Purse
 	{
 		if(cost > getCoinsInPurse())
 		{
-			throw new IOException("cost > coinsInPurse()");
+			Debug.LogError("cost("+cost+") > coinsInPurse("+getCoinsInPurse()+")");
 		}
 		
 		coins -= Math.Abs(cost);

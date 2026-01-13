@@ -40,10 +40,9 @@ public class SaveHandler : ScreenManager, IEscapable
     public GameObject newSaveInputPanel; //panel behind saveNameField
 	//[SerializeField] 
     public Button saveButton;
-	
-    public SaveBlueprint currentSaveFile;
+    public BinaryPanelPopUpButton overwriteButton;
 
-	public BinaryPanelPopUpButton overwriteButton;
+    public SaveBlueprint currentSaveFile;
 
 	private static SaveHandler instance;
 	
@@ -208,7 +207,13 @@ public class SaveHandler : ScreenManager, IEscapable
 			return;
 		}
 		
-        Debug.LogError("saveButtonPress() is empty");
+        if(saveGameList.ContainsKey(saveNameField.text))
+        {
+            overwriteButton.spawnPopUp();
+        } else
+        {
+            save(saveNameField.text); 
+        }
 	}
 
 	private static string determineCurrentAutosaveName()
@@ -279,8 +284,6 @@ public class SaveHandler : ScreenManager, IEscapable
 		{
 			saveNumber = getHighestSaveNumber() + 1;
 		}
-
-		//Flags.printAll();
 
 		SaveBlueprint blueprint = SaveBlueprint.build(saveName, saveNumber);
 
@@ -436,7 +439,7 @@ public class SaveHandler : ScreenManager, IEscapable
 		return saveGameBluepreints;
 	}
 
-	public static void createSavedGameList() //side effect: will update all saveblueprint.saveName's
+	public static void createSavedGameList(bool skipInvokeCall = false) //side effect: will update all saveblueprint.saveName's
 	{
 		string[] saveFiles = Directory.GetFiles(Application.persistentDataPath + "/");
 		saveGameList = new Dictionary<string, SaveBlueprint>();
@@ -479,6 +482,11 @@ public class SaveHandler : ScreenManager, IEscapable
 
 			saveGameList.Add(blueprint.saveName, blueprint);
 		}
+
+        if(!skipInvokeCall)
+        {
+            OnScreenInteriorUpdate.Invoke();
+        }
 	}
 
     public void handleEscapePress()
@@ -492,8 +500,8 @@ public class SaveHandler : ScreenManager, IEscapable
 
     public override void updateCounter()
     {
-        // updateAllStatsPanels();
-        // populateAllGrids();
+        saveNameField.text = "";
+        GridRow.OnDescribableToDisplay.Invoke(null);
     }
 
     public override List<UnityEvent> getUpdateEvents()

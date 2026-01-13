@@ -36,6 +36,8 @@ public static class PlayerOOCStateManager
     public readonly static UnityEvent OnStateChangeToInUI = new UnityEvent();
     public readonly static UnityEvent OnStateChangeFromInUI = new UnityEvent();
 
+    public readonly static UnityEvent OnStateChangeFromInShopUI = new UnityEvent();
+
     public readonly static UnityEvent OnStateChangeToInMap = new UnityEvent();
     public readonly static UnityEvent OnStateChangeToInWorldMap = new UnityEvent();
     public readonly static UnityEvent OnStateChangeToSkill = new UnityEvent();
@@ -127,6 +129,7 @@ public static class PlayerOOCStateManager
             case OOCActivity.inBookUI:
                 break;
             case OOCActivity.inShopUI:
+                OnStateChangeFromInShopUI.Invoke();
                 break;
             case OOCActivity.inDialoguePopUp:
                 break;

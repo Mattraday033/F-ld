@@ -1,45 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class ShopSideTab : AbilityGridSideTab
 {
-    private void Awake()
+    public override void setToDefaultState()
     {
-        setToClosed();
+        int currentListCount = Tab.getList(listToChoose).Count();
 
-        OnSideTabChosen.AddListener(setToClosed);
+        if(currentListCount <= 0 && listToChoose == ShopPopUpWindow.currentDescribableList)
+        {
+            return;
+        } 
+    
+        setVisibility(currentListCount > 0);
+
+        base.setToDefaultState();
     }
 
-    private void OnDestroy()
+    private void setVisibility(bool visible)
     {
-        OnSideTabChosen.RemoveListener(setToClosed);
+        gameObject.SetActive(visible);
     }
 
     public override void setToOpen()
     {
-        OnSideTabChosen.Invoke();
-        openTabPanel.SetActive(true);
-
-        // TabCollection typeTabs = ShopPopUpWindow.getInstance().itemTypeTabs;
-
-        // typeTabs.selectTab(tabIndex);
-
-        ShopPopUpWindow.populateGrid();
-    }
-
-    public override void setToClosed()
-    {
-        closedButton.interactable = true;
-
-        if (openTabPanel == null || openTabPanel is null)
+        if(getCurrentDictKey() == null)
         {
             return;
         }
 
-        openTabPanel.SetActive(false);
+        ShopPopUpWindow.currentDescribableList = listToChoose;
+
+        base.setToOpen();
     }
+
+    // public override void setToOpen()
+    // {
+    //     OnSideTabChosen.Invoke();
+    //     openTabPanel.SetActive(true);
+
+    //     ShopPopUpWindow.populateGrid();
+    // }
+
+    // public override void setToClosed()
+    // {
+    //     closedButton.interactable = true;
+
+    //     if (openTabPanel == null || openTabPanel is null)
+    //     {
+    //         return;
+    //     }
+
+    //     openTabPanel.SetActive(false);
+    // }
 
 }
 

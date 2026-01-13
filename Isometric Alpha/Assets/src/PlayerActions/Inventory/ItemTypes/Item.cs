@@ -176,7 +176,7 @@ public class Item : ICloneable, IJSONConvertable, IDescribable, ISortable, IDesc
 
 	public int getWorth()
 	{
-        return getWorth(ShopPopUpWindow.getCurrentMode());
+        return getWorth(ShopPopUpWindow.currentShopMode);
 	}
 
 	public int getWorth(ShopMode shopMode)
@@ -544,7 +544,7 @@ public class Item : ICloneable, IJSONConvertable, IDescribable, ISortable, IDesc
     
     public static int getTotalWorth(Item item)
 	{
-		return getTotalWorth(item.getWorth(ShopPopUpWindow.getCurrentMode()), item.getQuantity());
+		return getTotalWorth(item.getWorth(ShopPopUpWindow.currentShopMode), item.getQuantity());
 	}
 
     public static int getTotalWorth(Item item, ShopMode shopMode)

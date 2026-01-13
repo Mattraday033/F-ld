@@ -1230,68 +1230,6 @@ MonoBehaviour:
   acceptButton: {fileID: 0}
   closeButton: {fileID: 7645947039440295021}
   popupProgenitor: {fileID: 0}
-  itemTypeTabs:
-    statTabs: 0
-    collection:
-    - button: {fileID: 2413434658913502125}
-      filterParameters: []
-      grid: {fileID: 6109413579089519793}
-      list: 21
-      tabCollectionIndex: 0
-      usePartyMemberName: 0
-      partyMemberName: 
-    - button: {fileID: 8442747878966089596}
-      filterParameters: []
-      grid: {fileID: 6109413579089519793}
-      list: 22
-      tabCollectionIndex: 1
-      usePartyMemberName: 0
-      partyMemberName: 
-    - button: {fileID: 4549715267196343391}
-      filterParameters: []
-      grid: {fileID: 6109413579089519793}
-      list: 23
-      tabCollectionIndex: 2
-      usePartyMemberName: 0
-      partyMemberName: 
-    - button: {fileID: 4952161789562386128}
-      filterParameters: []
-      grid: {fileID: 6109413579089519793}
-      list: 24
-      tabCollectionIndex: 3
-      usePartyMemberName: 0
-      partyMemberName: 
-    - button: {fileID: 4513782802340647401}
-      filterParameters: []
-      grid: {fileID: 6109413579089519793}
-      list: 25
-      tabCollectionIndex: 4
-      usePartyMemberName: 0
-      partyMemberName: 
-    - button: {fileID: 5852777103743498922}
-      filterParameters: []
-      grid: {fileID: 6109413579089519793}
-      list: 2
-      tabCollectionIndex: 5
-      usePartyMemberName: 0
-      partyMemberName: 
-  buySellTabs:
-    statTabs: 0
-    collection:
-    - button: {fileID: 5812725240887153087}
-      filterParameters: []
-      grid: {fileID: 0}
-      list: 0
-      tabCollectionIndex: 0
-      usePartyMemberName: 0
-      partyMemberName: 
-    - button: {fileID: 4811255341695408075}
-      filterParameters: []
-      grid: {fileID: 0}
-      list: 0
-      tabCollectionIndex: 1
-      usePartyMemberName: 0
-      partyMemberName: 
   shopNameTag: {fileID: 8205464814676208680}
   totalPlayerDiscount: {fileID: 0}
   totalPlayerGold: {fileID: 16137523319707724}
@@ -1299,7 +1237,6 @@ MonoBehaviour:
   sellAllJunkIconImageBackground: {fileID: 4376538958919552112}
   sellAllJunkIconImage: {fileID: 4971328388882705391}
   sellAllJunkText: {fileID: 7972376400286765775}
-  shopInventoryGrid: {fileID: 6109413579089519793}
 --- !u!114 &3503573398678084102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1903,6 +1840,7 @@ MonoBehaviour:
   tabIndex: 1
   openTabPanel: {fileID: 6946016253998656589}
   closedButton: {fileID: 4811255341695408075}
+  listToChoose: 0
   otherTab: {fileID: 7112288119749343763}
   shopMode: 1
 --- !u!1 &7036634656755780167
@@ -2452,6 +2390,7 @@ MonoBehaviour:
   tabIndex: 0
   openTabPanel: {fileID: 8217597116745247289}
   closedButton: {fileID: 5812725240887153087}
+  listToChoose: 0
   otherTab: {fileID: 4560263610251368453}
   shopMode: 0
 --- !u!1 &8343151417163484211
@@ -3329,6 +3268,7 @@ MonoBehaviour:
   tabIndex: 0
   openTabPanel: {fileID: 278671015096006699}
   closedButton: {fileID: 2413434658913502125}
+  listToChoose: 21
 --- !u!1 &278671015096006699 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 188761032696636769, guid: 34d2199783a236e488d30e445ce0a05b,
@@ -4754,7 +4694,7 @@ PrefabInstance:
     - target: {fileID: 4884123421154914116, guid: 759b43fed655b7d4396032f231270a28,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -384.1667
+      value: -432.5
       objectReference: {fileID: 0}
     - target: {fileID: 4884935962637930581, guid: 759b43fed655b7d4396032f231270a28,
         type: 3}
@@ -5699,6 +5639,7 @@ MonoBehaviour:
   tabIndex: 4
   openTabPanel: {fileID: 2018767454944193135}
   closedButton: {fileID: 4513782802340647401}
+  listToChoose: 25
 --- !u!1 &2121084205780245988 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1429620335261399522, guid: 759b43fed655b7d4396032f231270a28,
@@ -5740,6 +5681,7 @@ MonoBehaviour:
   tabIndex: 2
   openTabPanel: {fileID: 2126792114111098841}
   closedButton: {fileID: 4549715267196343391}
+  listToChoose: 23
 --- !u!1 &2126792114111098841 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1385825481850784735, guid: 759b43fed655b7d4396032f231270a28,
@@ -5813,18 +5755,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6109413579089519793 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6516829064865710263, guid: 759b43fed655b7d4396032f231270a28,
-    type: 3}
-  m_PrefabInstance: {fileID: 1060759092267000838}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ec517189e458a341927450db9edaecc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6297973192630017735 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6475744731907373761, guid: 759b43fed655b7d4396032f231270a28,
@@ -5866,6 +5796,7 @@ MonoBehaviour:
   tabIndex: 1
   openTabPanel: {fileID: 6308027607848692986}
   closedButton: {fileID: 8442747878966089596}
+  listToChoose: 22
 --- !u!1 &6308027607848692986 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6427216618395961596, guid: 759b43fed655b7d4396032f231270a28,
@@ -5942,6 +5873,7 @@ MonoBehaviour:
   tabIndex: 5
   openTabPanel: {fileID: 8329699993681314092}
   closedButton: {fileID: 5852777103743498922}
+  listToChoose: 2
 --- !u!1 &8329699993681314092 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9016655900012045610, guid: 759b43fed655b7d4396032f231270a28,
@@ -8333,6 +8265,7 @@ MonoBehaviour:
   tabIndex: 3
   openTabPanel: {fileID: 7357099681215253846}
   closedButton: {fileID: 4952161789562386128}
+  listToChoose: 24
 --- !u!1001 &7271902605468555371
 PrefabInstance:
   m_ObjectHideFlags: 0

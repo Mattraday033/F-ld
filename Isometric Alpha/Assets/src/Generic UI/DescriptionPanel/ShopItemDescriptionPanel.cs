@@ -14,7 +14,7 @@ public class ShopItemDescriptionPanel : DescriptionPanelWithFormula
     {
         base.setObjectBeingDescribed(describable);
 
-        if (ShopPopUpWindow.getCurrentMode() == ShopMode.Buy)
+        if (ShopPopUpWindow.currentShopMode == ShopMode.Buy)
         {
             amountPanel.setDirectionMode(DirectionMode.BuySendTo);
         }

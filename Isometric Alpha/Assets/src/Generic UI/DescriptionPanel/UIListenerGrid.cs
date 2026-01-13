@@ -60,9 +60,9 @@ public class UIListenerGrid : MonoBehaviour, ICounter
     {
         List<UnityEvent> listOfEvents = new List<UnityEvent>();
 
-        if(OverallUIManager.currentScreenManager != null)
+        if(AbilityGridSideTab.getCurrentDictKey() != null)
         {
-            listOfEvents.AddRange(OverallUIManager.currentScreenManager.getUpdateEvents());
+            listOfEvents.AddRange(AbilityGridSideTab.getCurrentDictKey().getUpdateEvents());
         }
 
         return listOfEvents;

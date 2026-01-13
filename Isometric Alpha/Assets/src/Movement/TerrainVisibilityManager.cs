@@ -26,7 +26,19 @@ public static class TerrainVisibilityManager
         terrainSprites = new List<SpriteRenderer>();
 
         TransitionManager.AfterTransition.AddListener(initializeOnTransition);
+        TransitionManager.AfterTransition.AddListener(waitFrameAndCheckForTerrainOnTransition);
         MovementManager.OnMoveFinished.AddListener(changeTerrainStateOnTerrainCollision);
+    }
+
+    private static void waitFrameAndCheckForTerrainOnTransition()
+    {
+        PlayerMovement.getInstance().StartCoroutine(waitFrameAndCheckForTerrain());
+    }
+
+    private static IEnumerator waitFrameAndCheckForTerrain()
+    {
+        yield return null;
+        changeTerrainStateOnTerrainCollision(0);
     }
 
     public static void initializeOnTransition()

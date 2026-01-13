@@ -126,7 +126,7 @@ public struct Tab
 
             case DescribableList.ShopKeeperMainHandWeapons:
 
-                if (ShopPopUpWindow.getCurrentMode() == ShopMode.Buy)
+                if (ShopPopUpWindow.currentShopMode == ShopMode.Buy)
                 {
                     return Inventory.getAllMainHandWeaponsInPocket(ShopPopUpWindow.getCurrentShopkeeper().getInventory());
                 }
@@ -136,7 +136,7 @@ public struct Tab
                 }
             case DescribableList.ShopKeeperUseItems:
 
-                if (ShopPopUpWindow.getCurrentMode() == ShopMode.Buy)
+                if (ShopPopUpWindow.currentShopMode == ShopMode.Buy)
                 {
                     return Inventory.getAllItemsOfTypeInPocket(ShopPopUpWindow.getCurrentShopkeeper().getInventory(), UsableItem.type);
                 }
@@ -146,7 +146,7 @@ public struct Tab
                 }
             case DescribableList.ShopKeeperOffHandWeapons:
 
-                if (ShopPopUpWindow.getCurrentMode() == ShopMode.Buy)
+                if (ShopPopUpWindow.currentShopMode == ShopMode.Buy)
                 {
                     return Inventory.getAllOffHandWeaponsInPocket(ShopPopUpWindow.getCurrentShopkeeper().getInventory());
                 }
@@ -156,7 +156,7 @@ public struct Tab
                 }
             case DescribableList.ShopKeeperArmor:
 
-                if (ShopPopUpWindow.getCurrentMode() == ShopMode.Buy)
+                if (ShopPopUpWindow.currentShopMode == ShopMode.Buy)
                 {
                     return Inventory.getPocketForDisplayGenericUI(ShopPopUpWindow.getCurrentShopkeeper().getInventory(), new string[]{Armor.subtype}, new NameComparer());
                 }
@@ -166,7 +166,7 @@ public struct Tab
                 }
             case DescribableList.ShopKeeperEssentialItems:
 
-                if (ShopPopUpWindow.getCurrentMode() == ShopMode.Buy)
+                if (ShopPopUpWindow.currentShopMode == ShopMode.Buy)
                 {
                     return Inventory.getPocketForDisplayGenericUI(ShopPopUpWindow.getCurrentShopkeeper().getInventory(), new string[]{EssentialItem.type}, new NameComparer());
                 }
@@ -181,10 +181,9 @@ public struct Tab
     }
 }
 
-public abstract class ScreenManager : MonoBehaviour
+public abstract class ScreenManager : MonoBehaviour, ITabParent
 {
     #region Events
-
     public readonly static UnityEvent<ScreenManager> OnScreenDeclaration = new UnityEvent<ScreenManager>();
     public readonly static UnityEvent OnScreenInteriorUpdate = new UnityEvent();
     #endregion

@@ -50,7 +50,7 @@ public class LoadSaveFile : IDecision
     {
         NotificationManager.purgeNotifications();
         StepCountScriptManager.reset();
-        SaveHandler.createSavedGameList();
+        SaveHandler.createSavedGameList(true);
         OverallUIManager.setCurrentScreenType(null);
         TutorialSequenceList.initializeTutorials();
         MovementManager.initializeMovementManager();

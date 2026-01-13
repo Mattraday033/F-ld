@@ -4,9 +4,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+public interface ITabParent : ICounter
+{
+    public DescribableList getDefaultDescribableList();
+}
+
 public class AbilityGridSideTab : MonoBehaviour
 {
-    private static Dictionary<ScreenManager,DescribableList> currentTabDict;
+    private static Dictionary<ITabParent,DescribableList> currentTabDict;
 
     public int tabIndex;
 
@@ -39,25 +44,25 @@ public class AbilityGridSideTab : MonoBehaviour
 
     public static DescribableList getDescribableListType()
     {
-        if(!currentTabDict.ContainsKey(OverallUIManager.currentScreenManager))
+        if(getCurrentDictKey() != null && !currentTabDict.ContainsKey(getCurrentDictKey()))
         {
-            return OverallUIManager.currentScreenManager.getDefaultDescribableList();
+            return getCurrentDictKey().getDefaultDescribableList();
         }
 
-        return currentTabDict[OverallUIManager.currentScreenManager];
+        return currentTabDict[getCurrentDictKey()];
     }
 
     public virtual void setToOpen()
     {
-        currentTabDict[OverallUIManager.currentScreenManager] = listToChoose;
+        if(getCurrentDictKey() == null)
+        {
+            return;
+        }
+
+        currentTabDict[getCurrentDictKey()] = listToChoose;
         
         OnSideTabChosen.Invoke();
         openTabPanel.SetActive(true);
-
-        // OverallUIManager.currentScreenManager.setCurrentTabCollection(getCurrentScreenAbilityGridIndex());
-        // OverallUIManager.currentScreenManager.setCurrentTab(tabIndex);
-
-        // OverallUIManager.currentScreenManager.populateGrid(getCurrentScreenAbilityGridIndex());
     }
 
     public virtual void setToClosed()
@@ -72,10 +77,10 @@ public class AbilityGridSideTab : MonoBehaviour
         openTabPanel.SetActive(false);
     }
 
-    private void setToDefaultState()
+    public virtual void setToDefaultState()
     {
-        if((currentTabDict.ContainsKey(OverallUIManager.currentScreenManager) && listToChoose == currentTabDict[OverallUIManager.currentScreenManager]) || 
-            OverallUIManager.currentScreenManager.getDefaultDescribableList() == listToChoose)
+        if((currentTabDict.ContainsKey(getCurrentDictKey()) && listToChoose == currentTabDict[getCurrentDictKey()]) || 
+            getCurrentDictKey().getDefaultDescribableList() == listToChoose)
         {
             closedButton.onClick.Invoke();
         } else
@@ -87,7 +92,18 @@ public class AbilityGridSideTab : MonoBehaviour
     [RuntimeInitializeOnLoadMethod]
     private static void initializeAbilityGridSideTab()
     {
-        currentTabDict = new Dictionary<ScreenManager,DescribableList>();
+        currentTabDict = new Dictionary<ITabParent,DescribableList>();
+    }
+
+    public static ITabParent getCurrentDictKey()
+    {
+        switch(PlayerOOCStateManager.currentActivity)
+        {
+            case OOCActivity.inShopUI:
+                return ShopPopUpWindow.getInstance();
+            default:
+                return OverallUIManager.currentScreenManager;
+        }
     }
 
 }

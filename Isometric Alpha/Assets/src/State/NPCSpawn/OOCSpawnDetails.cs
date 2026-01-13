@@ -910,11 +910,31 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
     private string animationName;
     private Facing facing;
 
+    public NPCWithAnimationsSpawnDetails(string npcName, Vector3Int cellCoords) :
+    base(npcName, cellCoords)
+    {
+        
+    }
+
     public NPCWithAnimationsSpawnDetails(string npcName, Vector3Int cellCoords, string areaName) :
     base(npcName, cellCoords, areaName)
     {
         this.animationName = MonsterNameList.executioner;
         facing = Facing.SouthWest;
+    }
+
+    public NPCWithAnimationsSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, Facing facing) :
+    base(npcName, cellCoords, areaName)
+    {
+        this.animationName = npcName;
+        this.facing = facing;
+    }
+
+    public NPCWithAnimationsSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, Facing facing, SpeakAtStartScript speakAtStartScript) :
+    base(npcName, cellCoords, areaName, speakAtStartScript)
+    {
+        this.animationName = npcName;
+        this.facing = facing;
     }
 
     public NPCWithAnimationsSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string animationName, Facing facing) :
@@ -935,16 +955,22 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
 
         spawnActions(npc.GetComponent<AnimationManager>());
 
+        npc.transform.localScale = Constants.antiAngleAdjustmentScale;
     }
 
     public virtual void spawnActions(AnimationManager animationManager)
     {
-        animationManager.setAnimations(animationName);
+        if(animationName == null)
+        {
+            return;
+        }
+
+        animationManager.setAnimations(DialogueList.scrubNameOfEndNumbers(animationName));
         animationManager.setFacing(facing);
     }
 }
 
-public class NonDialogueNPCSpawnDetails : NPCSpawnDetails
+public class NonDialogueNPCSpawnDetails : NPCWithAnimationsSpawnDetails
 {
 
     public NonDialogueNPCSpawnDetails(string npcName, Vector3Int cellCoords) :
@@ -953,11 +979,22 @@ public class NonDialogueNPCSpawnDetails : NPCSpawnDetails
         
     }
 
+    public NonDialogueNPCSpawnDetails(string npcName, Vector3Int cellCoords, Facing facing) :
+    base(npcName, cellCoords, "", npcName, facing)
+    {
+        
+    }
+
+    public NonDialogueNPCSpawnDetails(string npcName, Vector3Int cellCoords, string animationName, Facing facing) :
+    base(npcName, cellCoords, "", animationName, facing)
+    {
+        
+    }
+
     public override Dialogue getDialogue(string areaName)
     {
         return null;
     }
-
 
     public override SpawnParams getSpawnParams()
     {
@@ -973,9 +1010,10 @@ public class NonDialogueNPCSpawnDetails : NPCSpawnDetails
         }
     }
 
+
 }
 
-public class DependantSpawnDetails : NPCSpawnDetails
+public class DependantSpawnDetails : NPCWithAnimationsSpawnDetails
 {
 
     private string parentName;
@@ -983,6 +1021,12 @@ public class DependantSpawnDetails : NPCSpawnDetails
 
     public DependantSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string parentName) :
     base(npcName, cellCoords, areaName)
+    {
+        this.parentName = parentName;
+    }
+
+    public DependantSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, Facing facing, string parentName) :
+    base(npcName, cellCoords, areaName, facing)
     {
         this.parentName = parentName;
     }

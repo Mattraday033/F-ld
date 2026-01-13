@@ -42,8 +42,6 @@ public class PartyMemberPlacer : MonoBehaviour
                 placeNextPartyMember(partyMember.getName());
             }
         }
-
-        MovementManager.OnMoveFinished.Invoke(Constants.indexZero);
 	}
 
 	public static PartyMemberPlacer getInstance()

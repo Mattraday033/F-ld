@@ -13,15 +13,15 @@ public class ShopPopUpButton : PopUpButton
 
     public void spawnPopUp(Shopkeeper currentShopkeeper)
     {
+        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inShopUI);
+
         spawnPopUp();
 
         ShopPopUpWindow popUpWindow = (ShopPopUpWindow) getPopUpWindow();
 
         popUpWindow.setCurrentShopkeeper(currentShopkeeper);
-        // popUpWindow.buyButtonPress();
-        popUpWindow.updateGold();
+        ScreenManager.OnScreenInteriorUpdate.Invoke();
 
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inShopUI);
         getCurrentPopUpGameObject().SetActive(true);
     }
 
