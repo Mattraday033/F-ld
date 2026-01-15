@@ -484,7 +484,7 @@ The mine armory? That's going to be tricky. I hope you know what you're doing.
 
 giveItem(4,0,1)
 
-    +Now that I have the key, how do I know you wont tell the guards once I leave?
+    +Now that I have the key, how do I know you won't tell the guards once I leave?
         ->5h
     +Your part in this is done. Time to die. <Combat>
         ->fightingAndras
@@ -700,6 +700,7 @@ activate({andrasAfterConvoIndex})
 changeCamTarget({andrasAfterConvoIndex})
 movePlayer(3,3)
 setFacing(SW)
+setNPCFacing({andrasAfterConvoIndex},NE)
 fadeBackIn(60)
 
 What did you wish to discuss?
@@ -771,7 +772,7 @@ I have thought about it some...
 
 {
 -wisdom >= 2:
-    +That is not enough. You cannot just be dedicated to him. You have to be dedicated to bettering yourself. <Wis {wisdom}>/2>
+    +That is not enough. You cannot just be dedicated to him. You have to be dedicated to bettering yourself. <Wis {wisdom}/2>
         ->9bdc
 -else:
     +Some? Can you not recognize yourself as the threat one of the branded would see you as? Are you going to prioritize his safety?
@@ -789,9 +790,9 @@ Yes, but-
 
 How can I prove my dedication to you?
 
-    +Vow to me that once we all are free, you will take the brand. Prove that you can live as Janos must. 
+    +Swear to me that once we all are free, you will take the brand. Prove that you can live as Janos must. 
         ->9c
-    +Vow to me that after we leave this camp, you will stay away from Janos for a month's time. If your relationship can survive the separation and his freedom, I will trust in its permanence.
+    +Swear to me that after we leave this camp, you will stay away from Janos for a month's time. If your relationship can survive the separation and his freedom, I will trust in its permanence.
         ->9d
     +Make an oath now, before the Gods, that stakes your health against his. If you harm him, the Gods will see you suffer for it.
         ->9e
@@ -803,7 +804,7 @@ How can I prove my dedication to you?
 === 9c ===
 setToTrue(andrasAgreedToBeBranded)
 
-\*András looks back at Janos. He thinks for moment, then turns back to you.* I will do it. My people created the brand to serve as a symbol of oppression; to mark a person without a future. Let ours instead symbolize our devotion to one another, and the future of our love.
+\*András looks back at Janos. He thinks for moment, then turns back to you.* I will do it. My people created the brand to mark a person without a future. Let ours instead symbolize our devotion to one another, and the future of our love.
 
     +Well said, András. With that, I leave you. Spend what little time you have together well. Before long, we will find ourselves fighting for our freedom.
         ->leavingWithAndrasAlive

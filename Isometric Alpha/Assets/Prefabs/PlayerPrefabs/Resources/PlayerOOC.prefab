@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 2115896759193237329}
   - component: {fileID: 7992971974720730464}
   - component: {fileID: 8448093679278581172}
+  - component: {fileID: 98894172240438418}
   m_Layer: 0
   m_Name: PlayerOOC
   m_TagString: Player
@@ -263,7 +264,6 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 3312928677131579616}
   tutorialHash: Player
-  useUIScale: 0
   disableArrow: 0
 --- !u!60 &8448093679278581172
 PolygonCollider2D:
@@ -337,6 +337,22 @@ PolygonCollider2D:
       - {x: 0.14782608, y: -0.13634782}
       - {x: 0.069565214, y: -0.11026087}
   m_UseDelaunayMesh: 0
+--- !u!114 &98894172240438418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312928677131579617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ded253a0f506a46bc9bdd5b358d87b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useUltraWideTutorialWindow: 0
+  rectTransform: {fileID: 3312928677131579616}
+  tutorialHash: PlayerNoArrow
+  disableArrow: 1
 --- !u!1 &4129230569518797910
 GameObject:
   m_ObjectHideFlags: 0

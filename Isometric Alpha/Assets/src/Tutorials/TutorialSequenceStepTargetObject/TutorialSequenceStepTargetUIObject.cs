@@ -10,6 +10,19 @@ public class TutorialSequenceStepTargetUIObject : TutorialSequenceStepTargetObje
 
 	public Image image;
 	public Color previousColor = Color.clear;
+    [SerializeField]
+    private bool _UseUIScaleOverride = true;
+	public override bool useUIScale
+    {
+        get
+        {
+            return _UseUIScaleOverride;
+        }
+        set
+        {
+            _UseUIScaleOverride = value;
+        }
+    }
 
 	private RectTransform cutOutMask;
 
@@ -100,7 +113,7 @@ public class TutorialSequenceStepTargetUIObject : TutorialSequenceStepTargetObje
 
 	public override bool isUI()
 	{
-		return true;
+		return _UseUIScaleOverride;
 	}
 
 }

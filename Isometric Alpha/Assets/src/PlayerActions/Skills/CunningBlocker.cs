@@ -15,6 +15,11 @@ public class CunningBlocker : CunningObject
 
     private void OnDisable()
     {
+        if(SpawnInfoManager.wipingSlate)
+        {
+            return;
+        }
+
         foreach(Obstacle blocker in blockers)
         {
             blocker.setToDown();

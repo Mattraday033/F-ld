@@ -431,7 +431,7 @@ I'm not going to throw my lot in with someone I just met. I'm late coming back f
         activateQuestStep(Aiding Ervin, An unconvincing argument.)
         ->Close
 
-    +I'm sorry, but if you wont join us I can't let you live. <Combat>
+    +I'm sorry, but if you won't join us I can't let you live. <Combat>
         activateQuestStep(Aiding Ervin, An unconvincing argument.1)
         enterCombat({imreCombatIndex})
         ->Close

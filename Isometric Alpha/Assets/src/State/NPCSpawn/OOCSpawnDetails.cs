@@ -90,7 +90,7 @@ public abstract class OOCSpawnDetails
 
     public virtual Transform getParent()
     {
-        return null;
+        return AreaManager.getNPCParentWithoutScale();
     }
 
     public virtual bool spawnsOnSecretDoorActivation()
@@ -320,7 +320,7 @@ public abstract class CunningObjectSpawnDetails : OOCSpawnDetails
 
     public override Transform getParent()
     {
-        return AreaManager.getNPCParent();
+        return AreaManager.getNPCParentWithScale();
     }
 
     public override void spawnActions(GameObject gameObject)
@@ -490,7 +490,7 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
 
     public override Transform getParent()
     {
-        return AreaManager.getNPCParent();
+        return AreaManager.getNPCParentWithScale();
     }
 
     public override void spawnActions(GameObject interactable)
@@ -572,7 +572,7 @@ public class ObstacleWithSecretDoorFlagSpawnDetails : ObstacleSpawnDetails
 
     public override Transform getParent()
     {
-        return AreaManager.getNPCParent();
+        return AreaManager.getNPCParentWithScale();
     }
 
     public override void spawnActions(GameObject interactable)
@@ -629,7 +629,7 @@ public class SpikeSpawnDetails : ObstacleSpawnDetails
 
     public override Transform getParent()
     {
-        return AreaManager.getNPCParent();
+        return AreaManager.getNPCParentWithScale();
     }
 
 }
@@ -700,7 +700,7 @@ public class ButtonSpawnDetails : OOCSpawnDetails
 
     public override Transform getParent()
     {
-        return null;
+        return AreaManager.getNPCParentWithoutScale();
     }
 
     public override void spawnActions(GameObject button)
@@ -847,7 +847,7 @@ public class NPCSpawnDetails : OffSetSpawnDetails
 
     public override Transform getParent()
     {
-        return AreaManager.getNPCParent();
+        return AreaManager.getNPCParentWithScale();
     }
 
     public override void spawnActions(GameObject npc)
@@ -930,6 +930,13 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
         this.facing = facing;
     }
 
+    public NPCWithAnimationsSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, Facing facing, Vector3Int[] extraSpaces) :
+    base(npcName, cellCoords, areaName, extraSpaces)
+    {
+        this.animationName = npcName;
+        this.facing = facing;
+    }
+
     public NPCWithAnimationsSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, Facing facing, SpeakAtStartScript speakAtStartScript) :
     base(npcName, cellCoords, areaName, speakAtStartScript)
     {
@@ -946,7 +953,7 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
 
     public override Transform getParent()
     {
-        return null;
+        return AreaManager.getNPCParentWithoutScale();
     }
 
     public override void spawnActions(GameObject npc)
@@ -955,7 +962,7 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
 
         spawnActions(npc.GetComponent<AnimationManager>());
 
-        npc.transform.localScale = Constants.antiAngleAdjustmentScale;
+        // npc.transform.localScale = Constants.antiAngleAdjustmentScale;
     }
 
     public virtual void spawnActions(AnimationManager animationManager)
@@ -1082,7 +1089,7 @@ public class NPCOffGridSpawnDetails : NPCSpawnDetails
 
     public override Transform getParent()
     {
-        return null;
+        return AreaManager.getNPCParentWithoutScale();
     }
 
     public override void spawnActions(GameObject gameObject)
@@ -1200,11 +1207,11 @@ public class GateSpawnDetails : CustomMouseHoverNPCSpawnDetails
     {
         if (skewed)
         {
-            return base.getParent();
+            return AreaManager.getNPCParentWithScale();
         }
         else
         {
-            return null;
+            return AreaManager.getNPCParentWithoutScale();
         }
     }
 
@@ -1396,7 +1403,7 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
 
     public override Transform getParent()
     {
-        return AreaManager.getNPCParent();
+        return AreaManager.getNPCParentWithScale();
     }
 
     public override void spawnActions(GameObject secretDoor)
@@ -1632,7 +1639,7 @@ public class ChestSpawnDetails : QuestActivationObjectSpawnDetails
 
     public override Transform getParent()
     {
-        return AreaManager.getNPCParent();
+        return AreaManager.getNPCParentWithScale();
     }
 
     public virtual ChestType getType()
@@ -1739,7 +1746,7 @@ public class BookSpawnDetails : OffSetSpawnDetails
 
     public override Transform getParent()
     {
-        return AreaManager.getNPCParent();
+        return AreaManager.getNPCParentWithScale();
     }
 
     public override void spawnActions(GameObject interactable)

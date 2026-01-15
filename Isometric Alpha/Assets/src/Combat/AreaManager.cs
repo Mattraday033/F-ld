@@ -16,7 +16,8 @@ public class AreaManager : MonoBehaviour
     #region Parent Transforms
     public Transform gridParent;
     public Transform playerParent;
-    public Transform npcParent;
+    public Transform npcParentWithScale;
+    public Transform npcParentWithoutScale;
     public Transform transitionParent;
     public Transform monsterParent;
     public Transform movableObjectParent;
@@ -130,9 +131,14 @@ public class AreaManager : MonoBehaviour
         return instance.playerParent;
     }
 
-    public static Transform getNPCParent()
+    public static Transform getNPCParentWithScale()
     {
-        return instance.npcParent;
+        return instance.npcParentWithScale;
+    }
+
+    public static Transform getNPCParentWithoutScale()
+    {
+        return instance.npcParentWithoutScale;
     }
 
     public static Transform getTransitionParent()

@@ -56,14 +56,16 @@ public class ColumnHeader : MonoBehaviour
 
     private void populateGrid()
     {
-        if (screenManager != null && !(screenManager is null))
-        {
-            ScreenManager.OnScreenInteriorUpdate.Invoke();
-        }
-        else if (Flags.getFlag(FlagNameList.newGameFlagName) || CombatStateManager.inCombat)
-        {
-            grid.populatePanels(Tab.getList(DescribableList.Saves));
-        }
+        // if (screenManager != null && !(screenManager is null))
+        // {
+        //     ScreenManager.OnScreenInteriorUpdate.Invoke();
+        // }
+        // else if (Flags.getFlag(FlagNameList.newGameFlagName) || CombatStateManager.inCombat)
+        // {
+        //     grid.populatePanels(Tab.getList(DescribableList.Saves));
+        // }
+
+        ScreenManager.OnScreenInteriorUpdate.Invoke();
     }
 
     public IComparer<ISortable> getComparisonMethod()

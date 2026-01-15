@@ -213,7 +213,7 @@ public abstract class ScreenManager : MonoBehaviour, ITabParent
         addListeners();
     }
 
-    void Start()
+    protected virtual void Start()
     {        
         OnScreenInteriorUpdate.Invoke();
     }

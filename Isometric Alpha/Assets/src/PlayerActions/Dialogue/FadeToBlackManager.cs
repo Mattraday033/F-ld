@@ -11,6 +11,7 @@ public class FadeToBlackManager : MonoBehaviour
 {
 	private static FadeToBlackManager instance;
     public readonly static UnityEvent OnFadeToBlack = new UnityEvent();
+    public readonly static UnityEvent OnFadeBackInFinished = new UnityEvent();
 
     [Header("Cameras")]
 
@@ -225,8 +226,11 @@ public class FadeToBlackManager : MonoBehaviour
 		
 		frameCount = 0;
 		updateFadeToBlackImageOpacity();
-
-		yield break;
+        
+        if(!Flags.isInNewGameMode())
+        {
+            OnFadeBackInFinished.Invoke();
+        }
 	}
 
 	public static void delayFadingIn()

@@ -299,6 +299,8 @@ He'll play crazy. Happens to some slaves, the guards won't bat an eye. Easy for 
 
 === 4d ===
 
+setNPCFacing({laszloActualIndex}, NW)
+
 What? Broglin, you treacherous dog!
 
     +It's true sir! I told him where he could shove that treasonous speech of his, but he kept moaning about it!
@@ -421,6 +423,8 @@ setToTrue(impressedGuardLaszlo)
 //Guard interactions after completing Broglin's plan.!
 //Broglin's alive, Guard is impressed
 === 5a ===
+
+setNPCFacing({laszloActualIndex}, NE)
 
 fadeBackIn(60)
 

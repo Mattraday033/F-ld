@@ -134,8 +134,8 @@ public static class MonsterSpawnDetailsList
 
         list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(0, -1), MonsterMovementType.ChasesPlayer));
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(1, 13), MonsterMovementType.ChasesPlayer));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(0, -1), MonsterMovementType.Random));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(1, 13), MonsterMovementType.Random));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1c, list);
 

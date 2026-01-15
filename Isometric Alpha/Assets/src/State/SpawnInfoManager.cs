@@ -29,8 +29,12 @@ public static class SpawnInfoManager
         }
     }
 
+    public static bool wipingSlate = false;
+
     private static void wipeSlate()
     {
+        wipingSlate = true;
+
         if (allSpawnedObjects == null)
         {
             return;
@@ -45,6 +49,8 @@ public static class SpawnInfoManager
 
             GameObject.DestroyImmediate(spawnedObject);
         }
+
+        wipingSlate = false;
     }
 
     public static void spawnDetails()

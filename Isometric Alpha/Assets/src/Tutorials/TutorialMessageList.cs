@@ -53,7 +53,7 @@ public static class TutorialMessageList
         tutorialDictionary.Add(intimidateTutorialMessagePrefix + 1, "This creature is hiding around a blind corner. The Intimidate skill can keep it from surprising you. Press '1' to activate it.");
         tutorialDictionary.Add(intimidateTutorialMessagePrefix + 2, "The orange tiles show Intimidate's range. A red tile shows a target. All targets in range will be affected by Intimidate. Intimidated creatures cannot surprise you or be surprised.");
         tutorialDictionary.Add(intimidateTutorialMessagePrefix + 3, "You have limited uses of Intimidate. These are replenished when you enter a new area. Press 'E' to use Intimidate.");
-        tutorialDictionary.Add(intimidateTutorialMessagePrefix + 4, "The symbols above the creature indicate it has been intimidated. Press 'A' to move next to the creature and start combat.");
+        tutorialDictionary.Add(intimidateTutorialMessagePrefix + 4, "The symbol above the creature indicates it has been intimidated. Press 'A' to move next to the creature and start combat.");
 
         tutorialDictionary.Add(interactableObjectTutorialMessagePrefix + 1, "Rubble blocks your path. If you highlight interactables, the rubble will be shown in green. This means you can interact with it like you would an NPC. Press 'E' to interact with it.");
         tutorialDictionary.Add(interactableObjectTutorialMessagePrefix + 2, "Barrels block your path. If you highlight interactables, the barrels will be shown in green. This means you can interact with them like you would an NPC. Press 'E' to interact with it.");
@@ -62,7 +62,7 @@ public static class TutorialMessageList
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 1, "This creature is hiding around a blind corner. This is a good opportunity to use the Cunning skill. Press '2' to begin to activate the Cunning Skill.");
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 2, "The yellow tiles show the Cunning skill's range. A red tile shows a target. You are currently targeting the green tile. Use the 'WASD' keys to change the tile you are targeting. Press 'S' to target the creature.");
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 3, "You are now targeting the creature. Press 'E' to use Cunning on the creature.");
-        tutorialDictionary.Add(cunningTutorialMessagePrefix + 4, "The symbols above the creature indicate it has been distracted. Press 'A' to start combat.");
+        tutorialDictionary.Add(cunningTutorialMessagePrefix + 4, "The symbol above the creature indicates it has been distracted. Press 'A' to start combat.");
 
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 5, "Some obstacles can be activated with Cunning. Cunning targets have a yellow border when you highlight interactables. Press '2' to begin to activate the Cunning Skill again.");
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 6, "You have limited uses of Cunning, shown here. Your charges are replenished when you enter a new area, or by using certain items. Press 'W' to target the object.");

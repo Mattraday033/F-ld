@@ -6,19 +6,22 @@ using UnityEngine.Events;
 
 public class PartyMemberPlacer : MonoBehaviour
 {
-	public static List<GameObject> placedPartyMemberObjects = new List<GameObject>();
+	public static List<PlacedPartyMember> placedPartyMembers = new List<PlacedPartyMember>();
 
     public readonly static UnityEvent DestroyAllFollowers = new UnityEvent();
 
     public readonly static UnityEvent HideAllFollowers = new UnityEvent();
     public readonly static UnityEvent RevealAllFollowers = new UnityEvent();
 
+    public readonly static UnityEvent OnPartyMemberPlaced = new UnityEvent();
+    public readonly static UnityEvent OnPartyMemberRemoved = new UnityEvent();
+
 	public static PartyMemberPlacer instance;
 
     [RuntimeInitializeOnLoadMethod]
     private static void instantiatePartyMemberPlacer()
     {
-        placedPartyMemberObjects = new List<GameObject>();
+        placedPartyMembers = new List<PlacedPartyMember>();
 
         instance = null;
     }
@@ -31,7 +34,7 @@ public class PartyMemberPlacer : MonoBehaviour
 	public static void placeAllPartyMembers()
     {
         DestroyAllFollowers.Invoke();
-		placedPartyMemberObjects = new List<GameObject>();
+		placedPartyMembers = new List<PlacedPartyMember>();
 
 		List<PartyMember> allPartyMembers = PartyManager.getAllPartyMembers();
 
@@ -42,6 +45,8 @@ public class PartyMemberPlacer : MonoBehaviour
                 placeNextPartyMember(partyMember.getName());
             }
         }
+
+        OnPartyMemberPlaced.Invoke();
 	}
 
 	public static PartyMemberPlacer getInstance()
@@ -63,31 +68,46 @@ public class PartyMemberPlacer : MonoBehaviour
 			return;
 		}
 
-        GameObject placedPartyMember = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.placedPartyMember), AreaManager.getNPCParent());
+        GameObject placedPartyMemberObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.placedPartyMember), AreaManager.getNPCParentWithoutScale());
 
-        PartyMemberTrainPriority trainPriority = placedPartyMember.GetComponent<PartyMemberTrainPriority>();
-        trainPriority.partyMemberName = nameOfPartyMember;
-
-        OOCSpawnDetails.addTutorialTargetComponent(placedPartyMember, TutorialSequenceList.placedCharacterTargetHash);
+        OOCSpawnDetails.addTutorialTargetComponent(placedPartyMemberObject, TutorialSequenceList.placedCharacterTargetHash);
 
         if (PartyManager.getPartyMember(nameOfPartyMember).placed)
         {
-            placedPartyMember.transform.position = PartyManager.getPartyMember(nameOfPartyMember).placedPosition;
-            Helpers.updateGameObjectPosition(placedPartyMember);
+            placedPartyMemberObject.transform.position = PartyManager.getPartyMember(nameOfPartyMember).placedPosition;
+            Helpers.updateGameObjectPosition(placedPartyMemberObject);
         }
         else
         {
-            placedPartyMember.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(SkillManager.getPlayerCoords());
-            Helpers.updateGameObjectPosition(placedPartyMember);
+            placedPartyMemberObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(SkillManager.getPlayerCoords());
+            Helpers.updateGameObjectPosition(placedPartyMemberObject);
 
             PartyManager.getPartyMember(nameOfPartyMember).placed = true;
-            PartyManager.getPartyMember(nameOfPartyMember).placedPosition = placedPartyMember.transform.position;
+            PartyManager.getPartyMember(nameOfPartyMember).placedPosition = placedPartyMemberObject.transform.position;
         }        
 
-        placedPartyMemberObjects.Add(placedPartyMember);
+        PlacedPartyMember placedPartyMember = placedPartyMemberObject.GetComponent<PlacedPartyMember>();
+
+        placedPartyMember.partyMember = PartyManager.getPartyMember(nameOfPartyMember);
+
+        placedPartyMembers.Add(placedPartyMember);
         
         SkillManager.OnSkillUse.Invoke();
+        OnPartyMemberPlaced.Invoke();
 	}
+
+    public static bool hasBeenPlaced(PartyMember partyMember)
+    {
+        foreach(PlacedPartyMember placedPartyMember in placedPartyMembers)
+        {
+            if(placedPartyMember.partyMember.Equals(partyMember))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     private static string findNextPlaceablePartyMember()
     {
@@ -97,11 +117,16 @@ public class PartyMemberPlacer : MonoBehaviour
 
         foreach (PartyMember partyMember in allPartyMembers)
         {
-            if (partyMember.isInParty() && skippedPartyMembers == placedPartyMemberObjects.Count)
+            if(partyMember.getName().Equals(PartyManager.getPlayer().getName()))
+            {
+                continue;
+            }
+
+            if (partyMember.isInParty() && skippedPartyMembers == placedPartyMembers.Count)
             {
                 return partyMember.getName();
             }
-            else if (partyMember.isInParty() && skippedPartyMembers != placedPartyMemberObjects.Count)
+            else if (partyMember.isInParty() && skippedPartyMembers != placedPartyMembers.Count)
             {
                 skippedPartyMembers++;
             }
@@ -115,17 +140,19 @@ public class PartyMemberPlacer : MonoBehaviour
 		PartyManager.getPartyMember(targetPartyMemberName).placed = false;
 		PartyManager.getPartyMember(targetPartyMemberName).placedPosition = Vector3.zero;
 
-		for (int partyMemberIndex = 0; partyMemberIndex < placedPartyMemberObjects.Count; partyMemberIndex++)
+		for (int partyMemberIndex = 0; partyMemberIndex < placedPartyMembers.Count; partyMemberIndex++)
 		{
-			GameObject currentPartyMember = (GameObject)placedPartyMemberObjects[partyMemberIndex];
+			GameObject currentPartyMember = placedPartyMembers[partyMemberIndex].gameObject;
 
-			if (currentPartyMember.GetComponent<PartyMemberTrainPriority>().partyMemberName.Equals(targetPartyMemberName))
+			if (currentPartyMember.GetComponent<PlacedPartyMember>().partyMember.getName().Equals(targetPartyMemberName))
 			{
 				GameObject.Destroy(currentPartyMember);
-                placedPartyMemberObjects.RemoveAt(partyMemberIndex);
+                placedPartyMembers.RemoveAt(partyMemberIndex);
                 MovementManager.OnMoveFinished.Invoke(Constants.indexZero);
 			}
 		}
+
+        OnPartyMemberRemoved.Invoke();
 	}
 
     [RuntimeInitializeOnLoadMethod]
@@ -148,12 +175,12 @@ public class PartyMemberPlacer : MonoBehaviour
         DestroyAllFollowers.Invoke();
         MovementManager.OnMoveFinished.Invoke(Constants.indexZero);
 
-        placedPartyMemberObjects = new List<GameObject>();
+        placedPartyMembers = new List<PlacedPartyMember>();
     }
 
 	public static int getPlacedPartyMemberCount()
 	{
-		return placedPartyMemberObjects.Count;
+		return placedPartyMembers.Count;
 	}
     
 }

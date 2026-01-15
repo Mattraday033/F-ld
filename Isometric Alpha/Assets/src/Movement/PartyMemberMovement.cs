@@ -44,4 +44,16 @@ public class PartyMemberMovement : MovementTracker
     {
         return placeInTrain;
     }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        PlacedPartyMember.PartyMemberLocationRequest.AddListener(addToList);
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        PlacedPartyMember.PartyMemberLocationRequest.RemoveListener(addToList);
+    }
 }

@@ -63,6 +63,7 @@ public static class TutorialSequenceList
 
     public const string firstTutorialEnemyTargetHash = "First Tutorial Enemy";
     public const string secondTutorialEnemyTargetHash = "Second Tutorial Enemy";
+    public const string statusEffectDisplayTargetHash = "Status Effect Display";
     private const string hostilityUITargetHash = "Hostility UI Panel";
 
     public const string interactableRubbleTargetHash = "Interactable Rubble";
@@ -122,6 +123,7 @@ public static class TutorialSequenceList
     public const string playerLevelUpTutorialSequenceKey = "Player Level Up Tutorial";
     public const string playerLevelUpTutorialSeenFlag = "playerLevelUpTutorialSequenceEntered";
     public const string playerSpriteOOCTargetHash = "Player";
+    public const string playerSpriteOOCNoArrowTargetHash = "PlayerNoArrow";
     public const string partyScreenButtonTargetHash = "Party Screen Button";
     public const string affinityCounterTargetHash = "Affinity Counter";
 
@@ -227,7 +229,7 @@ public static class TutorialSequenceList
         TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 1, secondTutorialEnemyTargetHash, new ReplenishCunningChargesScript(), new ShowCunningRangeScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.Alpha2 }, highlight, unhighlight, createPopUpScreenBlocker);
         TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 2, secondTutorialEnemyTargetHash, noScript, new MoveCunningTargetSouthWestScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.S }, highlight, unhighlight, createPopUpScreenBlocker);
         TutorialSequenceStep stepThree = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 3, secondTutorialEnemyTargetHash, noScript, new ActivateCunningScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.E }, highlight, unhighlight, createPopUpScreenBlocker);
-        TutorialSequenceStep stepFour = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 4, secondTutorialEnemyTargetHash, noScript, new MovePlayerNorthWestScript(), ArrowDirection.Top, new KeyCode[] { KeyCode.A }, highlight, unhighlight, createPopUpScreenBlocker);
+        TutorialSequenceStep stepFour = new TutorialSequenceStep(TutorialMessageList.cunningTutorialMessagePrefix + 4, statusEffectDisplayTargetHash, noScript, new MovePlayerNorthWestScript(), ArrowDirection.Left, new KeyCode[] { KeyCode.A }, highlight, unhighlight, createPopUpScreenBlocker);
 
         TutorialSequence firstCunningTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, cunningTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree, stepFour });
 
@@ -294,7 +296,7 @@ public static class TutorialSequenceList
 
     public static void initializeHiddenObjectTutorial()
     {
-        TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.hiddenObjectTutorialMessagePrefix + 1, playerSpriteOOCTargetHash, noScript, new HideTerrain(), ArrowDirection.Top, new KeyCode[] { KeyCode.F }, skipHighlight, skipUnhighlight, createPopUpScreenBlocker);
+        TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.hiddenObjectTutorialMessagePrefix + 1, playerSpriteOOCNoArrowTargetHash, noScript, new HideTerrain(), ArrowDirection.Top, new KeyCode[] { KeyCode.F }, skipHighlight, skipUnhighlight, createPopUpScreenBlocker);
 
         TutorialSequence hiddenObjectsTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, hiddenObjectsTutorialSeenFlag, new TutorialSequenceStep[] { stepOne});
 
@@ -528,117 +530,22 @@ public class OpenRelevantAbilityTabScript : TutorialSequenceStepScript
 {
     public override void runScript(GameObject targetObject)
     {
-        // PrimaryStat type = PrimaryStatIncreaseButton.currentStatType;
-        // int abilityGridIndex = OverallUIManager.currentScreenManager.getAbilityGridIndex();
-        // TabCollection abilityGridTabCollection = OverallUIManager.currentScreenManager.tabCollections[abilityGridIndex];
+        PrimaryStat type = PrimaryStatIncreaseButton.currentStatType;
 
-        // switch (type)
-        // {
-        //     case PrimaryStat.Strength:
-        //         abilityGridTabCollection.selectAndClickTab(2);
-        //         return;
-        //     case PrimaryStat.Dexterity:
-        //         abilityGridTabCollection.selectAndClickTab(3);
-        //         return;
-        //     case PrimaryStat.Wisdom:
-        //         abilityGridTabCollection.selectAndClickTab(4);
-        //         return;
-        //     case PrimaryStat.Charisma:
-        //         abilityGridTabCollection.selectAndClickTab(5);
-        //         return;
-        // }
+        switch (type)
+        {
+            case PrimaryStat.Strength:
+                AbilityGridSideTab.chooseTab(DescribableList.Strength);
+                return;
+            case PrimaryStat.Dexterity:
+                AbilityGridSideTab.chooseTab(DescribableList.Dexterity);
+                return;
+            case PrimaryStat.Wisdom:
+                AbilityGridSideTab.chooseTab(DescribableList.Wisdom);
+                return;
+            case PrimaryStat.Charisma:
+                AbilityGridSideTab.chooseTab(DescribableList.Charisma);
+                return;
+        }
     }
 }
-
-/* Old Combat Tutorial
-    public static TutorialSequence getCombatTutorialSequence()
-    {
-        TutorialSequenceAdditionalScript[] combatTutorialStepElevenAndFifteenAdditionalScripts = new TutorialSequenceAdditionalScript[] { new TutorialSequenceAdditionalScript(KeyCode.W, new MoveCurrentSelector()),
-                                                                                                                                          new TutorialSequenceAdditionalScript(KeyCode.A, new MoveCurrentSelector()),
-                                                                                                                                          new TutorialSequenceAdditionalScript(KeyCode.S, new MoveCurrentSelector()),
-                                                                                                                                          new TutorialSequenceAdditionalScript(KeyCode.D, new MoveCurrentSelector()) };
-
-        TutorialSequenceAdditionalScript[] combatTutorialStepFourteenAdditionalScripts = new TutorialSequenceAdditionalScript[] { new TutorialSequenceAdditionalScript(KeyCode.A, new AbilityWheelCycleCounterClockwise()),
-                                                                                                                                  new TutorialSequenceAdditionalScript(KeyCode.D, new AbilityWheelCycleClockwise()) };
-
-        List<TutorialSequenceStep> combatTutorialSteps = new List<TutorialSequenceStep>();
-
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 1, topThirdOfCombatUITargetHash, ArrowDirection.Center, new KeyCode[] { KeyCode.Space }, createPopUpScreenBlocker));
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 2, playerCombatSpriteTargetHash, ArrowDirection.Top, new KeyCode[] { KeyCode.Space }, createPopUpScreenBlocker));
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 3, allyZoneTargetHash, ArrowDirection.Right, new KeyCode[] { KeyCode.Space }, createPopUpScreenBlocker));
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 4, enemyZoneTargetHash, ArrowDirection.Left, new KeyCode[] { KeyCode.Space }, createPopUpScreenBlocker));
-
-        switch(CombatStateManager.whoIsSurprised)
-        {
-            case SurpriseState.EnemySurprised:
-                Debug.LogError("CombatStateManager.whoIsSurprised = " + CombatStateManager.whoIsSurprised.ToString());
-                combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 5 + " PlayerGetsSurpriseRound", surpriseIconTargetHash, ArrowDirection.BottomRight, new KeyCode[] { KeyCode.Space }));
-                break;
-            case SurpriseState.NoOneSurprised:
-                Debug.LogError("CombatStateManager.whoIsSurprised = " + CombatStateManager.whoIsSurprised.ToString());
-                combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 5 + " NoSurpriseRound", surpriseIconTargetHash, ArrowDirection.BottomRight, new KeyCode[] { KeyCode.Space }));
-                break;
-            case SurpriseState.PlayerSurprised:
-                Debug.LogError("CombatStateManager.whoIsSurprised = " + CombatStateManager.whoIsSurprised.ToString());
-                combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 5 + " EnemyGetsSurpriseRound", surpriseIconTargetHash, noScript, new ResolveTurn(), ArrowDirection.BottomRight, new KeyCode[] { KeyCode.Space }));
-                break;
-        }
-
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 6, singleTargetSelectorTargetHash, noScript, new SnapSelectorToMaster(), ArrowDirection.Right, new KeyCode[] { KeyCode.W }, createPopUpScreenBlocker));
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 7, bottomRightHoverPanelTargetHash, ArrowDirection.Left, new KeyCode[] { KeyCode.Space }));
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 8, traitDisplayTargetHash, ArrowDirection.Left, new KeyCode[] { KeyCode.Space }));
-
-        if (CombatGrid.actualEnemyMinionCombatActionCount() > 0)
-        {
-            combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 9, masterTraitIconTargetHash, noScript, new SnapSelectorToMinion(),ArrowDirection.Left, new KeyCode[] { KeyCode.Space }));
-            combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 10 + " MinionTraitIcon", minionTraitIconTargetHash, noScript, new SnapSelectorToPlayer(), ArrowDirection.Left, new KeyCode[] { KeyCode.S }));
-        }
-        else
-        {
-            combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 9 + " SnapToPlayer", masterTraitIconTargetHash,  noScript, new SnapSelectorToPlayer(), ArrowDirection.Left, new KeyCode[] { KeyCode.S }));
-        }
- 
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 11, topThirdOfCombatUITargetHash, noScript, new SelectCurrentActor(), combatTutorialStepElevenAndFifteenAdditionalScripts, ArrowDirection.Center, new KeyCode[] { KeyCode.E }, createPopUpScreenBlocker));
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 12, combatActionWheelTargetHash, new DestroyHoverPanel(), noScript, ArrowDirection.Right, new KeyCode[] { KeyCode.Space }, createPopUpScreenBlocker));
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 13, combatActionWheelTargetHash, ArrowDirection.Right, new KeyCode[] { KeyCode.Space }, createPopUpScreenBlocker));
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 14, combatActionWheelTargetHash, noScript, new AbilityWheelChooseAbility(), combatTutorialStepFourteenAdditionalScripts, ArrowDirection.Right, new KeyCode[] { KeyCode.E }, createPopUpScreenBlocker));
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 15, topThirdOfCombatUITargetHash, noScript, new SelectTarget(), combatTutorialStepElevenAndFifteenAdditionalScripts, ArrowDirection.Center, new KeyCode[] { KeyCode.E }, createPopUpScreenBlocker));
-
-        combatTutorialSteps = getFinalCombatTutorialSteps(combatTutorialSteps);
-
-        TutorialSequence combatTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingActor, doNoSkipCurrentActivityChange, combatTutorialSeenFlag, combatTutorialSteps);
-
-        return combatTutorialSequence;
-    }
-
-    public static TutorialSequence getCombatTutorialSequenceForReposition()
-    {
-        TutorialSequenceAdditionalScript[] combatTutorialRepositionStepOneAdditionalScripts = new TutorialSequenceAdditionalScript[] {  new TutorialSequenceAdditionalScript(KeyCode.W, new MoveCurrentSelector()),
-                                                                                                                                        new TutorialSequenceAdditionalScript(KeyCode.A, new MoveCurrentSelector()),
-                                                                                                                                        new TutorialSequenceAdditionalScript(KeyCode.S, new MoveCurrentSelector()),
-                                                                                                                                        new TutorialSequenceAdditionalScript(KeyCode.D, new MoveCurrentSelector()) };
-
-        List<TutorialSequenceStep> combatTutorialSteps = new List<TutorialSequenceStep>();
-
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialRepositionMessagePrefix + 1, topThirdOfCombatUITargetHash, noScript, new SelectTertiaryTarget(), combatTutorialRepositionStepOneAdditionalScripts, ArrowDirection.Center, new KeyCode[] { KeyCode.E }));
-
-        combatTutorialSteps = getFinalCombatTutorialSteps(combatTutorialSteps);
-
-        TutorialSequence combatTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingActor, doNoSkipCurrentActivityChange, combatTutorialSeenFlag, combatTutorialSteps);
-
-        return combatTutorialSequence;
-    }
-
-    private static List<TutorialSequenceStep> getFinalCombatTutorialSteps(List<TutorialSequenceStep> combatTutorialSteps)
-    {
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 16, actionOrderTargetHash, ArrowDirection.Right, new KeyCode[] { KeyCode.Space }));
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 17, actionSlotIconsTargetHash, ArrowDirection.BottomRight, new KeyCode[] { KeyCode.Space }));
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 18, actionSlotIconsTargetHash, ArrowDirection.BottomRight, new KeyCode[] { KeyCode.Space }));
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 19, retreatUITargetHash, ArrowDirection.BottomRight, new KeyCode[] { KeyCode.Space }, createPopUpScreenBlocker));
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 20, retreatUITargetHash, ArrowDirection.BottomRight, new KeyCode[] { KeyCode.Space }, createPopUpScreenBlocker));
-
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 21, topThirdOfCombatUITargetHash, ArrowDirection.Center, new KeyCode[] { KeyCode.E }));
-
-        return combatTutorialSteps;
-    }
-    */

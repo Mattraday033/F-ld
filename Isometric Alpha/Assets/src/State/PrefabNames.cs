@@ -356,10 +356,10 @@ public static class PrefabNames
     public const string ladderTallNE = ladderFolder + "Ladder_Tall_NE";
     public const string ladderTallSW = ladderFolder + "Ladder_Tall_SW";
 
-    public const string statusFolder = spriteFolder + "Status/";
-
-    public const string intimidatedStatusSprite = statusFolder + "Intimidated";
-    public const string cunningStatusSprite = statusFolder + "Cunning";
+    private const string testSpriteFolder = spriteFolder + "TestSprites/";
+    public const string hammerRack = testSpriteFolder + "HammerRack";
+    public const string shovelRack = testSpriteFolder + "ShovelRack";
+    public const string pickRack = testSpriteFolder + "PickRack";
 
     #endregion
 }

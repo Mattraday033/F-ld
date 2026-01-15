@@ -43,12 +43,11 @@ public class PlayerObject : MonoBehaviour
         playerMovement.Awake();
         playerMovement.updateFacing();
         playerMovement.updateIdleDirection();
-        MovementManager.OnMoveFinished.AddListener(playerMovement.preventAnimationStall);
         
         TerrainVisibilityManager.initializeOnTransition();
 
         MovementManager.OnMoveFinished.AddListener(setButtonPromptVisibility);
-
+        FadeToBlackManager.OnFadeBackInFinished.AddListener(setButtonPromptVisibility);
     }
 
     void Start()
@@ -142,6 +141,11 @@ public class PlayerObject : MonoBehaviour
         {
             player.pressButtonPrompt.SetActive(false);
         }
+    }
+
+    public static void setButtonPromptVisibility()
+    {
+        setButtonPromptVisibility(MovementManager.playerSpriteIndex);
     }
 
     public static void setButtonPromptVisibility(int index)

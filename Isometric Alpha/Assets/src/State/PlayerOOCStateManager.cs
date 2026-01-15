@@ -59,7 +59,7 @@ public static class PlayerOOCStateManager
         previousActivity = OOCActivity.nothing;
 
         TransitionManager.AfterTransition.AddListener(setToDefaultStateOnTransition);
-        TransitionManager.AfterTransition.AddListener(checkIfWaitingOnSecondHostilityTutorial);
+        FadeToBlackManager.OnFadeBackInFinished.AddListener(checkIfWaitingOnSecondHostilityTutorial);
     }
 
     private static void setToDefaultStateOnTransition()

@@ -80,6 +80,11 @@ public class SaveHandler : ScreenManager, IEscapable
         base.Awake();
 	}
 
+    protected override void Start()
+    {
+        //Empty On Purpose
+    }
+
 	void Update()
 	{
 		KeyPressManager.updateKeyBools();

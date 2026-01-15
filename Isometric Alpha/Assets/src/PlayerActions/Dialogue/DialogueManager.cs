@@ -26,8 +26,6 @@ public class DialogueManager : MonoBehaviour
     public OOCUIManager oocUIManager;
 	private FadeToBlackManager fadeToBlackManager;
 
-	public Transform npcParent;
-
 	private static bool returnToRevealAfterDialogue;
 
 	private string nameText;
@@ -69,7 +67,6 @@ public class DialogueManager : MonoBehaviour
 
 		if (State.dialogueUponSceneLoadKey != null && State.dialogueUponSceneLoadKey.Length > 0)
 		{
-			npcParent = AreaManager.getNPCParent();
 			dialogueTrackerButton = new DialogueTrackerButton(true);
 
             startDialogue(DialogueList.getDialogue(AreaManager.locationName, State.dialogueUponSceneLoadKey));
@@ -365,7 +362,11 @@ public class DialogueManager : MonoBehaviour
 
     public static GameObject findNPCGameObject(string npcName)
     {
-        foreach (Transform child in AreaManager.getNPCParent())
+        List<Transform> children = new List<Transform>();
+        children.AddRange(AreaManager.getNPCParentWithScale().Cast<Transform>().ToList());
+        children.AddRange(AreaManager.getNPCParentWithoutScale().Cast<Transform>().ToList());
+
+        foreach (Transform child in children)
         {
             if(child.gameObject.name.Contains(NPCSpawnDetails.extraSpaceNameSuffix))
             {
@@ -829,24 +830,59 @@ public class DialogueManager : MonoBehaviour
 
                     string facingArgs = getArgument(buffer);
 
-                    switch (facingArgs.ToLower())
+                    switch (facingArgs.ToLower().Replace(" ",""))
                     {
                         case "ne":
                         case "northeast":
-                            State.playerFacing.setFacing(Facing.NorthEast);
+                            PlayerMovement.getInstance().getAnimationManager().setFacing(Facing.NorthEast);
                             break;
                         case "nw":
                         case "northwest":
-                            State.playerFacing.setFacing(Facing.NorthWest);
+                            PlayerMovement.getInstance().getAnimationManager().setFacing(Facing.NorthWest);
                             break;
                         case "se":
                         case "southeast":
-                            State.playerFacing.setFacing(Facing.SouthEast);
+                            PlayerMovement.getInstance().getAnimationManager().setFacing(Facing.SouthEast);
                             break;
                         case "sw":
                         case "southwest":
-                            State.playerFacing.setFacing(Facing.SouthWest);
+                            PlayerMovement.getInstance().getAnimationManager().setFacing(Facing.SouthWest);
                             break;
+                    }
+
+                    continueStory();
+
+                    break;
+
+                case "setnpcfacing":
+                case "changenpcfacing":
+
+                    int camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
+                    string npcFacingArgs = getArgument(buffer, Constants.indexOne);
+
+                    AnimationManager targetAnimationManager = currentDialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
+
+                    if(targetAnimationManager != null)
+                    {
+                        switch (npcFacingArgs.ToLower().Replace(" ",""))
+                        {
+                            case "ne":
+                            case "northeast":
+                                targetAnimationManager.setFacing(Facing.NorthEast);
+                                break;
+                            case "nw":
+                            case "northwest":
+                                targetAnimationManager.setFacing(Facing.NorthWest);
+                                break;
+                            case "se":
+                            case "southeast":
+                                targetAnimationManager.setFacing(Facing.SouthEast);
+                                break;
+                            case "sw":
+                            case "southwest":
+                                targetAnimationManager.setFacing(Facing.SouthWest);
+                                break;
+                        }
                     }
 
                     continueStory();

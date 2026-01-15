@@ -1161,7 +1161,7 @@ What happened?
                 ~toldKastorFinishedErvinsTask = true
                 setToTrue(finishedErvinsTask)
                 setToTrue(toldKastorFinishedErvinsTask)
-                finishQuest(Aiding Ervin, true, Kastor was informed.)
+                finishQuest(Aiding Ervin, true, Kastor has been told.)
                     ->3d
 
         -convincedImre:
@@ -1169,7 +1169,7 @@ What happened?
                 ~toldKastorFinishedErvinsTask = true
                 setToTrue(finishedErvinsTask)
                 setToTrue(toldKastorFinishedErvinsTask)
-                finishQuest(Aiding Ervin, true, Kastor was informed.)
+                finishQuest(Aiding Ervin, true, Kastor has been told.)
 
                 prepForItem()
 
@@ -1192,7 +1192,7 @@ What happened?
                 ~toldKastorFinishedErvinsTask = true
                 setToTrue(finishedErvinsTask)
                 setToTrue(toldKastorFinishedErvinsTask)
-                finishQuest(Aiding Ervin, true, Kastor was informed.)
+                finishQuest(Aiding Ervin, true, Kastor has been told.)
                     ->3d
 
         -deathFlagImre:
@@ -1200,14 +1200,14 @@ What happened?
                 ~toldKastorFinishedErvinsTask = true
                 setToTrue(finishedErvinsTask)
                 setToTrue(toldKastorFinishedErvinsTask)
-                finishQuest(Aiding Ervin, true, Kastor was informed.)
+                finishQuest(Aiding Ervin, true, Kastor has been told.)
                     ->3d
         -terrifiedImre and not convincedImre:
             +I applied some pressure to the Manse slaves. They will aid us when the time comes.
                 ~toldKastorFinishedErvinsTask = true
                 setToTrue(finishedErvinsTask)
                 setToTrue(toldKastorFinishedErvinsTask)
-                finishQuest(Aiding Ervin, true, Kastor was informed.)
+                finishQuest(Aiding Ervin, true, Kastor has been told.)
                 
                 prepForItem()
                 
@@ -1361,7 +1361,7 @@ What happened?
 
 === 3dc ===
 
-    finishQuest(Aiding Ervin, true, Kastor was informed.1)
+    finishQuest(Aiding Ervin, true, Kastor has been told.)
     
     prepForItem()
     

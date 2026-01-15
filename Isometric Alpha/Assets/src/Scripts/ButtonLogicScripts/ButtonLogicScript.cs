@@ -153,10 +153,6 @@ public class OnOffButtonLogicScript : ButtonLogicScript
 
     public override void getFloorButtonStatus(FloorButton floorButton)
     {
-        Debug.LogError("getFloorButtonStatus");
-
-        Debug.LogError("validButtonForScript(" + floorButton.index + ") = " + validButtonForScript(floorButton));
-
         if (validButtonForScript(floorButton))
         {
             lastPressedButtonIndex = floorButton.index;
@@ -172,12 +168,8 @@ public class OnOffButtonLogicScript : ButtonLogicScript
 
     public override void runScript()
     {
-        Debug.LogError("runScript");
-
         foreach (int gateIndex in gatesPerButton[lastPressedButtonIndex])
         {
-            Debug.LogError("gateIndex = " + gateIndex);
-
             string fullKey = AreaManager.locationName + gateKey + gateIndex;
             bool activated = TrapAndButtonStateManager.contains(fullKey);
 
@@ -190,8 +182,6 @@ public class OnOffButtonLogicScript : ButtonLogicScript
     public override bool scriptConditionsMet()
     {
         OnButtonDataRequest.Invoke(this);
-
-        Debug.LogError("lastPressedButtonIndex = " + lastPressedButtonIndex);
 
         return lastPressedButtonIndex >= 0;
     }

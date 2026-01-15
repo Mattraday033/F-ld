@@ -377,10 +377,10 @@ public static class SpawnParamsList
                 interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.ervin),
                                         pazmanErvinPunishmentSpawnParams);
 
-                interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.guardPazman),
+                interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.pazman),
                                                 pazmanErvinPunishmentSpawnParams);
                 
-                interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.guardReka),
+                interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.reka),
                                 new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
                                                                                                             { 
                                                                                                                 MetaFlagNameList.guardPazmanAndRekaAtTrial,
@@ -392,7 +392,7 @@ public static class SpawnParamsList
                                                                                                             }))));
             #endregion
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.guardMarcos),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.marcos),
                                 new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
                                                                                                     { 
                                                                                                         MetaFlagNameList.marcosIsAtTrial,
@@ -415,7 +415,7 @@ public static class SpawnParamsList
                                                                                                         FlagNameList.mineLvl3CarterAndNandorInParty
                                                                                                     })));
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.guardAndras),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.andras),
                                         new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
                                                                                                     { 
                                                                                                         MetaFlagNameList.andrasIsAtTrial,

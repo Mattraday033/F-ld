@@ -14,6 +14,10 @@ public static class PartyMemberTrainManager
         MovementManager.OnMoveFinished.AddListener(incrementStepCounter);
         MovementManager.OnMoveFinished.AddListener(hideOverlappingPartyMembersOnMoveEnded);
         MovementManager.OnMoveStarted.AddListener(showPartyMemberTrain);
+
+        PartyMemberPlacer.OnPartyMemberPlaced.AddListener(createPartyMemberTrain);
+        PartyMemberPlacer.OnPartyMemberRemoved.AddListener(createPartyMemberTrain);
+
         partyMemberTrain = new List<PartyMemberMovement>();
         stepCounter = 1;
     }
@@ -35,6 +39,11 @@ public static class PartyMemberTrainManager
         int index = 0;
         foreach(PartyMember partyMember in formationPartyMembers)
         {
+            if(PartyMemberPlacer.hasBeenPlaced(partyMember))
+            {
+                continue;
+            }
+
             PartyMemberMovement partyMemberMovement = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.partyMemberFollower), AreaManager.getPlayerParent()).GetComponent<PartyMemberMovement>();
             
             partyMemberMovement.partyMember = partyMember;

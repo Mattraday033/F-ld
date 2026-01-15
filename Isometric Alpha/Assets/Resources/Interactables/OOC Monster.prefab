@@ -309,6 +309,11 @@ PrefabInstance:
       propertyPath: m_OverrideSorting
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1950615130571192716, guid: c9f955322233dd84594c93ab46aead29,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2359363756102110204, guid: c9f955322233dd84594c93ab46aead29,
         type: 3}
       propertyPath: m_Name

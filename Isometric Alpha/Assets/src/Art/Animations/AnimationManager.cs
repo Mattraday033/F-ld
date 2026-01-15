@@ -6,7 +6,18 @@ using UnityEngine.Events;
 using System;
 using System.Linq;
 
-public enum CharacterAnimationType { None, Idle_Front, Idle_Back, OOC_Idle_Front, OOC_Idle_Back, Secondary_Idle, Run_Front, Run_Front_Left, Run_Front_Right, Run_Back, Run_Back_Left, Run_Back_Right, Wounded, Death, Attack_Normal, Attack_Special, Spawn }
+public enum CharacterAnimationType { 
+                                    None, 
+                                    Idle_Front, Idle_Back, 
+                                    OOC_Idle_Front, OOC_Idle_Back, 
+                                    Secondary_Idle, 
+                                    Run_Front, Run_Front_Left, Run_Front_Right, 
+                                    Run_Back, Run_Back_Left, Run_Back_Right, 
+                                    Wounded, Wounded_Front, Wounded_Back, 
+                                    Death, Death_Front, Death_Back, 
+                                    Attack_Normal, Attack_Normal_Front, Attack_Normal_Back, 
+                                    Attack_Special, 
+                                    Spawn }
 
 public class AnimationManager : MonoBehaviour, IAnimationTracker
 {
@@ -20,10 +31,13 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public readonly static CharacterAnimationType[] tempAnimationTypes = new CharacterAnimationType[]
     { 
-      CharacterAnimationType.Run_Front, CharacterAnimationType.Run_Front_Left,   CharacterAnimationType.Run_Front_Right, 
-      CharacterAnimationType.Run_Back,  CharacterAnimationType.Run_Back_Left,    CharacterAnimationType.Run_Back_Right,  
-      CharacterAnimationType.Wounded,   CharacterAnimationType.Death,       CharacterAnimationType.Spawn,
-      CharacterAnimationType.Attack_Normal, CharacterAnimationType.Attack_Special
+      CharacterAnimationType.Run_Front,     CharacterAnimationType.Run_Front_Left,      CharacterAnimationType.Run_Front_Right, 
+      CharacterAnimationType.Run_Back,      CharacterAnimationType.Run_Back_Left,       CharacterAnimationType.Run_Back_Right,  
+      CharacterAnimationType.Wounded,       CharacterAnimationType.Wounded_Front,       CharacterAnimationType.Wounded_Back,
+      CharacterAnimationType.Death,         CharacterAnimationType.Death_Front,         CharacterAnimationType.Death_Back,   
+      CharacterAnimationType.Attack_Normal, CharacterAnimationType.Attack_Normal_Front, CharacterAnimationType.Attack_Normal_Back, 
+      CharacterAnimationType.Attack_Special,
+      CharacterAnimationType.Spawn
     };
 
     public bool changesFacing
@@ -359,8 +373,21 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public void playAttackAnimation()
     {
+        CharacterAnimationType attackAnimationType = CharacterAnimationType.Attack_Normal;
+
+        if(CombatStateManager.inCombat)
+        {
+            if(CombatGrid.positionIsOnAlliedSide(healthBarManager.linkedStats.position))
+            {
+                attackAnimationType = CharacterAnimationType.Attack_Normal_Back;
+            } else
+            {
+                attackAnimationType = CharacterAnimationType.Attack_Normal_Front;
+            }
+        }
+
         CombatAnimationManager.trackAnimation(key, this);
-        playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Normal));
+        playAnimation(createClipTransitionToIdle(attackAnimationType));
     }
 
     public void playAttackIntoFrontIdleAnimation()
@@ -385,8 +412,21 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public void playWoundedAnimation()
     {
+        CharacterAnimationType woundedAnimationType = CharacterAnimationType.Wounded;
+
+        if(CombatStateManager.inCombat)
+        {
+            if(CombatGrid.positionIsOnAlliedSide(healthBarManager.linkedStats.position))
+            {
+                woundedAnimationType = CharacterAnimationType.Wounded_Back;
+            } else
+            {
+                woundedAnimationType = CharacterAnimationType.Wounded_Front;
+            }
+        }
+
         CombatAnimationManager.trackAnimation(key, this);
-        playAnimation(createClipTransitionToIdle(CharacterAnimationType.Wounded));
+        playAnimation(createClipTransitionToIdle(woundedAnimationType));
     }
 
     public void playNorthEastRun()
@@ -464,6 +504,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     private ClipTransition createClipTransitionToIdle(CharacterAnimationType type)
     {
+        type = getFallBackAnimationType(type);
+
         if (!animationDict.ContainsKey(type))
         {
             if(type == CharacterAnimationType.Attack_Special)
@@ -482,15 +524,11 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     }
 
     private ClipTransition createClipTransitionToDeath()
-    {
-        if (!animationDict.ContainsKey(CharacterAnimationType.Death))
-        {
-            removeAnimation();
-            return null;
-        }
+    {        
+        CharacterAnimationType deathAnimationType = getDeathAnimationType();
 
         ClipTransition clipTransition = new ClipTransition();
-        clipTransition.Clip = animationDict[CharacterAnimationType.Death];
+        clipTransition.Clip = animationDict[deathAnimationType];
         clipTransition.Events.OnEnd = () => haltAllAnimations();
 
         return clipTransition;
@@ -498,17 +536,31 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     private ClipTransition createClipTransitionToDeathThenHide()
     {
-        if (!animationDict.ContainsKey(CharacterAnimationType.Death))
-        {
-            removeAnimation();
-            return null;
-        }
+        CharacterAnimationType deathAnimationType = getDeathAnimationType();
 
         ClipTransition clipTransition = new ClipTransition();
-        clipTransition.Clip = animationDict[CharacterAnimationType.Death];
+        clipTransition.Clip = animationDict[deathAnimationType];
         clipTransition.Events.OnEnd = () => hideObject();
 
         return clipTransition;
+    }
+
+    private CharacterAnimationType getDeathAnimationType()
+    {
+        CharacterAnimationType deathAnimationType = CharacterAnimationType.Death;
+
+        if(CombatStateManager.inCombat)
+        {
+            if(CombatGrid.positionIsOnAlliedSide(healthBarManager.linkedStats.position))
+            {
+                deathAnimationType = CharacterAnimationType.Death_Back;
+            } else
+            {
+                deathAnimationType = CharacterAnimationType.Death_Front;
+            }
+        }
+
+        return getFallBackAnimationType(deathAnimationType);
     }
 
     private void hideObject()
@@ -589,6 +641,14 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         {
             switch(animationType)
             {
+                case CharacterAnimationType.Wounded_Front:
+                case CharacterAnimationType.Wounded_Back: 
+                    playAnimation(CharacterAnimationType.Wounded);
+                    break;
+                case CharacterAnimationType.Death_Front:
+                case CharacterAnimationType.Death_Back: 
+                    playAnimation(CharacterAnimationType.Death);
+                    break;
                 case CharacterAnimationType.Run_Front_Left:
                 case CharacterAnimationType.Run_Front_Right: 
                     playAnimation(CharacterAnimationType.Run_Front);
@@ -658,7 +718,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         }
     }
 
-    private void disableExtras()
+    public void disableExtras()
     {
         if(CombatStateManager.inCombat)
         {
@@ -671,7 +731,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         }
     }
 
-    private void enableExtras()
+    public void enableExtras()
     {
         if(CombatStateManager.inCombat)
         {
@@ -683,6 +743,30 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             shadowSprite.enabled = true;
         }
 
+    }
+
+    public CharacterAnimationType getFallBackAnimationType(CharacterAnimationType animationType)
+    {
+        if(animationDict.ContainsKey(animationType))
+        {
+            return animationType;
+        }
+
+        switch(animationType)
+        {
+            case CharacterAnimationType.Wounded_Front:
+            case CharacterAnimationType.Wounded_Back:
+                return CharacterAnimationType.Wounded;
+            case CharacterAnimationType.Death_Front:
+            case CharacterAnimationType.Death_Back:
+                return CharacterAnimationType.Death;
+            case CharacterAnimationType.Attack_Normal_Front:
+            case CharacterAnimationType.Attack_Normal_Back:
+                return CharacterAnimationType.Attack_Normal;
+            default:
+                Debug.LogError("No Animation Type in animationDict: " + animationType.ToString());
+                return animationType;
+        }
     }
 
     public static CharacterAnimationType getFallBackIdleType(string characterToAnimate, CharacterAnimationType animationType)
@@ -724,36 +808,3 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     }
 
 }
-
-/*
-    private static Dictionary<CharacterAnimationType, Sprite[]> getIdleSprites(string folderPath)
-    {
-        Dictionary<CharacterAnimationType, Sprite[]> spriteDict = new Dictionary<CharacterAnimationType, Sprite[]>();
-
-        foreach (CharacterAnimationType type in loopedAnimationTypes)
-        {
-            int index = 0;
-            List<Sprite> sprites = new List<Sprite>();
-            Debug.LogError("folderPath = " + folderPath+type.ToString());
-
-            Sprite sprite = Resources.Load<Sprite>(folderPath+type.ToString());
-
-            while(sprite != null)
-            {
-                sprites.Add(sprite);
-
-                index++;
-                sprite = Resources.Load<Sprite>(folderPath+type.ToString()+"_"+index);
-            }
-
-            if(sprites.Count <= 0)
-            {
-                continue;
-            }
-
-            spriteDict.Add(type, sprites.ToArray());
-        }
-
-        return spriteDict;
-    }
-*/

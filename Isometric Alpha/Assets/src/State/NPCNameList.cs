@@ -61,6 +61,7 @@ public static class NPCNameList
 
 
     public const string overseerGaspar = "Overseer Gáspár";
+    public const string gaspar = "Gáspár";
     public const string guardReka = "Guard Réka";
     public const string reka = "Réka";
     public const string guardPazman = "Guard Pázmán";

@@ -55,6 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNameText: {fileID: 3902710112629199359}
   characterSprite: {fileID: 6961521922608981332}
+  upgradeDescriptionPanelSlot: {fileID: 4639761657522184987}
 --- !u!222 &3754919462998202464
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -496,10 +497,10 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 4123196051477050391}
   tutorialHash: Character Screen Ability List
-  useUIScale: 0
   disableArrow: 1
   image: {fileID: 1701011181935812538}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  _UseUIScaleOverride: 1
 --- !u!1 &8779882533588721272
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,10 +554,10 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 2396315649676472557}
   tutorialHash: Character Screen Background
-  useUIScale: 0
   disableArrow: 1
   image: {fileID: 0}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  _UseUIScaleOverride: 1
 --- !u!1 &8876309106101701346
 GameObject:
   m_ObjectHideFlags: 0
@@ -3535,10 +3536,10 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 6200225813144800217}
   tutorialHash: Character Screen Ability Wheel
-  useUIScale: 0
   disableArrow: 0
   image: {fileID: 2962895536327673764}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  _UseUIScaleOverride: 1
 --- !u!114 &2962895536327673764 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7928665471416171955, guid: 07e24cfefd472a94ea76a05d19e39fd8,
@@ -4316,10 +4317,10 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 8851134318238177521}
   tutorialHash: Character Screen Stats
-  useUIScale: 0
   disableArrow: 0
   image: {fileID: 0}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  _UseUIScaleOverride: 1
 --- !u!114 &4448458518395514796
 MonoBehaviour:
   m_ObjectHideFlags: 0

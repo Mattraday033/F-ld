@@ -136,7 +136,7 @@ activateQuestStep(Múzsa's Sweet Tooth, Kende's candy.)
 
 prepForItem()
 
-The mess hall is the large building with the fenced-in yard in the south eastern part of the camp. If you just continue back down the path behind you until you hit the eastern wall you can't miss it. When you see Kende, tell him Múzsa sent you. He should be a little more talkative about his wares that way.
+The mess hall is the large building with the fenced-in yard in the southeastern part of the camp. If you just continue back down the path behind you until you hit the eastern wall you can't miss it. When you see Kende, tell him Múzsa sent you. He should be a little more talkative about his wares that way.
         
 giveCoins(50)
         ->Close

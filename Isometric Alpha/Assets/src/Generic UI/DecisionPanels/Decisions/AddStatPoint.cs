@@ -8,7 +8,7 @@ public class AddStatPoint : IDecision
 
     public string getMessage()
     {
-        return "Are you sure you want to raise "+targetStats.getName()+"'s " + PrimaryStatIncreaseButton.currentButton.getStatName() + " by 1? This is permanent and costs 1000 Experience Points.";
+        return "Are you sure you want to raise "+targetStats.getName().Replace(PartyManager.playerMarker,"")+"'s " + PrimaryStatIncreaseButton.currentButton.getStatName() + " by 1? This is permanent and costs 1000 Experience Points.";
     }
 
 	public AddStatPoint(Stats targetStats)

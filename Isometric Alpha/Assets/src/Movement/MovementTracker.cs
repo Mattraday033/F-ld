@@ -14,6 +14,11 @@ public abstract class MovementTracker : MonoBehaviour
         TransitionManager.AfterTransition.RemoveListener(resetPreviousDirectionMod);
     }
 
+    public void addToList(PlacedPartyMember placedPartyMember)
+    {
+        placedPartyMember.movementTrackers.Add(this);
+    }
+
     public MovementTracker nextInTrain;
 
     public abstract string getName();
@@ -284,11 +289,13 @@ public abstract class MovementTracker : MonoBehaviour
     public void hideSprite()
     {
         getAnimationManager().spriteRenderer.enabled = false;
+        getAnimationManager().disableExtras();
     }
 
     public void showSprite()
     {
         getAnimationManager().spriteRenderer.enabled = true;
+        getAnimationManager().enableExtras();
     }
 
     public static MovementTracker determineLowestTrainPriority(MovementTracker movementOne, MovementTracker movementTwo)

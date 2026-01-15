@@ -385,8 +385,8 @@ public static class DialogueList
                                                             NPCNameList.kastor,
                                                             NPCNameList.carter,
                                                             NPCNameList.kastor,
-                                                            NPCNameList.guardMarcos,
-                                                            NPCNameList.guardAndras,
+                                                            NPCNameList.marcos,
+                                                            NPCNameList.andras,
                                                             NPCNameList.chiefTabor,
                                                             NPCNameList.crowd,
                                                             NPCNameList.clay,
@@ -434,10 +434,10 @@ public static class DialogueList
                                                             NPCNameList.slaveSix,
                                                             NPCNameList.crowd,
                                                             NPCNameList.chiefTabor,
-                                                            NPCNameList.guardMarcos,
-                                                            NPCNameList.guardAndras,
-                                                            NPCNameList.guardReka,
-                                                            NPCNameList.guardPazman,
+                                                            NPCNameList.marcos,
+                                                            NPCNameList.andras,
+                                                            NPCNameList.reka,
+                                                            NPCNameList.pazman,
                                                             NPCNameList.ervin,
                                                             NPCNameList.clay,
                                                             NPCNameList.nandor+1
@@ -451,8 +451,8 @@ public static class DialogueList
                                                             NPCNameList.nandor+1,
                                                             NPCNameList.carter,
                                                             NPCNameList.kastor,
-                                                            NPCNameList.guardMarcos,
-                                                            NPCNameList.guardAndras,
+                                                            NPCNameList.marcos,
+                                                            NPCNameList.andras,
                                                             NPCNameList.chiefTabor,
                                                             NPCNameList.crowd,
                                                             NPCNameList.clay,
@@ -461,35 +461,35 @@ public static class DialogueList
                                                         },
                             Resources.Load<TextAsset>(DialogueNameList.nandorGuardPunishmentPath)));
 
-        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.guardMarcos,
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.marcos,
                             new Dialogue(new string[]   {  
                                                             NPCNameList.playerNamePlaceHolder,
-                                                            NPCNameList.guardMarcos,
+                                                            NPCNameList.marcos,
                                                             NPCNameList.crowd
                                                         },
                             Resources.Load<TextAsset>(DialogueNameList.marcosGuardPunishmentPath)));
 
-        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.guardAndras,
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.andras,
                             new Dialogue(new string[]   {  
                                                             NPCNameList.playerNamePlaceHolder,
-                                                            NPCNameList.guardAndras,
+                                                            NPCNameList.andras,
                                                             NPCNameList.crowd,
                                                             NPCNameList.janos
                                                         },
                             Resources.Load<TextAsset>(DialogueNameList.andrasGuardPunishmentPath)));
 
-        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.guardReka,
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.reka,
                             new Dialogue(new string[]   {  
                                                             NPCNameList.playerNamePlaceHolder,
-                                                            NPCNameList.guardReka,
+                                                            NPCNameList.reka,
                                                             NPCNameList.crowd
                                                         },
                             Resources.Load<TextAsset>(DialogueNameList.rekaGuardPunishmentPath)));
 
-        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.guardPazman,
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.pazman,
                             new Dialogue(new string[]   {  
                                                             NPCNameList.playerNamePlaceHolder,
-                                                            NPCNameList.guardPazman,
+                                                            NPCNameList.pazman,
                                                             NPCNameList.crowd,
                                                             NPCNameList.ervin,
                                                             NPCNameList.ervin+1

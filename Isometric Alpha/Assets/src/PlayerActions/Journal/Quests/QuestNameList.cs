@@ -182,7 +182,7 @@ public static class QuestNameList
     public const string muzsasSweetToothStepTitleOne = "Kende's candy.1";
     public const string muzsasSweetToothStepTitleTwo = "A dead end.";
     public const string muzsasSweetToothStepTitleThree = "A way forward?";
-    public const string muzsasSweetToothStepTitleFour = "Package received";
+    public const string muzsasSweetToothStepTitleFour = "Package received.";
     public const string muzsasSweetToothStepTitleFive = "Candy handed over.";
     public const string muzsasSweetToothStepTitleSix = "The way is clear.";
 

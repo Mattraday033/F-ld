@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -154,11 +155,32 @@ public class ScrollableUIElement : MonoBehaviour
 			clickLastPanelInList();
 		}
 
-		if(normalizeAfterPopulate)
-		{
-			scrollableComponent.verticalScrollbar.value = scrollableComponent.verticalNormalizedPosition;
-		}
+		// if(normalizeAfterPopulate)
+		// {
+		// 	scrollableComponent.verticalScrollbar.value = scrollableComponent.verticalNormalizedPosition;
+		// }
+
+        if( deleteOldPanels && 
+            gameObject.activeInHierarchy && 
+            scrollableComponent != null && 
+            scrollableComponent.verticalScrollbar != null && 
+            updateScrollComp == null)
+        {
+            updateScrollComp = StartCoroutine(updateScrollComponent(scrollableComponent.verticalScrollbar));
+        }
 	}
+
+    private Coroutine updateScrollComp;
+
+    private IEnumerator updateScrollComponent(Scrollbar scrollbar)
+    {
+        yield return new WaitForEndOfFrame();
+        
+        scrollableComponent.verticalNormalizedPosition = 1f;
+        scrollableComponent.verticalScrollbar.size = 0.1f;
+        scrollbar.Rebuild(CanvasUpdate.Prelayout);
+        updateScrollComp = null;
+    }
 
     private List<IDescribable> sortListOfPanels(List<IDescribable> listOfDescribables)
     {

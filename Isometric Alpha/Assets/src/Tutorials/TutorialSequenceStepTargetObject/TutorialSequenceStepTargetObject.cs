@@ -9,7 +9,18 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
 	public bool useUltraWideTutorialWindow = false;
 	public RectTransform rectTransform;
 	public string tutorialHash;
-	public bool useUIScale = false;
+    protected bool _UseUIScale = false;
+	public virtual bool useUIScale
+    {
+        get
+        {
+            return _UseUIScale;
+        }
+        set
+        {
+            _UseUIScale = value;
+        }
+    }
 	public bool disableArrow = false;
 
 	private void Awake()

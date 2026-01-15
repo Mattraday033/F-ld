@@ -22,7 +22,6 @@ public class AbilityGridSideTab : MonoBehaviour
 
     public readonly static UnityEvent OnSideTabChosen = new UnityEvent();
 
-
     static AbilityGridSideTab()
     {
         LoadSaveFile.OnLoad.AddListener(initializeAbilityGridSideTab);
@@ -80,13 +79,19 @@ public class AbilityGridSideTab : MonoBehaviour
     public virtual void setToDefaultState()
     {
         if((currentTabDict.ContainsKey(getCurrentDictKey()) && listToChoose == currentTabDict[getCurrentDictKey()]) || 
-            getCurrentDictKey().getDefaultDescribableList() == listToChoose)
+            (!currentTabDict.ContainsKey(getCurrentDictKey()) && getCurrentDictKey().getDefaultDescribableList() == listToChoose))
         {
             closedButton.onClick.Invoke();
         } else
         {
             setToClosed();
         }
+    }
+
+    public static void chooseTab(DescribableList list)
+    {
+        currentTabDict[getCurrentDictKey()] = list;
+        ScreenManager.OnScreenInteriorUpdate.Invoke();
     }
 
     [RuntimeInitializeOnLoadMethod]

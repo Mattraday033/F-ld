@@ -10,6 +10,19 @@ public class CharacterScreen : ScreenManager, ICounter
     public TextMeshProUGUI playerNameText;
 
     public Image characterSprite;
+    public DescriptionPanelSlot upgradeDescriptionPanelSlot;
+
+    public static DescriptionPanelSlot getUpgradeDescriptionPanelSlot()
+    {
+        if(OverallUIManager.currentScreenManager as CharacterScreen == null)
+        {
+            return null;
+        }
+
+        CharacterScreen screen = OverallUIManager.currentScreenManager as CharacterScreen;
+
+        return screen.upgradeDescriptionPanelSlot;
+    }
 
     public static int getCurrentDisplayedStatLevel()
     {

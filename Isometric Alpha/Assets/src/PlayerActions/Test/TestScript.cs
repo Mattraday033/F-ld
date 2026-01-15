@@ -11,9 +11,9 @@ public static class TestScript
             return;
         }
 
-        State.debugStopMonsterSpawning = true;
-        State.debugDiscoverAllLocations = true;
-        State.allLocationsFastTravelAvailable = true;
+        // State.debugStopMonsterSpawning = true;
+        // State.debugDiscoverAllLocations = true;
+        // State.allLocationsFastTravelAvailable = true;
         // State.debugRetreatAutoSucceed = true;
         // State.enableGridDebugger = true;
 
@@ -21,10 +21,10 @@ public static class TestScript
 
         // PartyManager.getPlayerStats().setLevel(1);
         // PartyManager.getPlayerStats().currentHealth = 1;
-        PartyManager.getPlayerStats().strength = 10;
-        PartyManager.getPlayerStats().dexterity = 10;
-        PartyManager.getPlayerStats().wisdom = 10;
-        PartyManager.getPlayerStats().charisma = 10;
+        PartyManager.getPlayerStats().strength = 5;
+        PartyManager.getPlayerStats().dexterity = 5;
+        PartyManager.getPlayerStats().wisdom = 5;
+        PartyManager.getPlayerStats().charisma = 5;
 
         // PartyManager.addXP(1050);
 
@@ -36,9 +36,6 @@ public static class TestScript
         // Flags.flags["andrasBarricadePassUsed"] = false;
 
         PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
-
-        //Flags.flags["seenHostilityTutorial"] = false;
-        //Flags.flags["seenCombatTutorial"] = false;
 
         //Inventory.addItem(ItemList.getItem(ItemList.usableItemListIndex, ItemList.bandagesIndex, 5));
 

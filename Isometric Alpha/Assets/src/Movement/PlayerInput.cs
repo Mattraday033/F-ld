@@ -1,11 +1,7 @@
 ﻿using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Tilemaps;
 using UnityEngine;
-using Cinemachine;
-using Ink.Runtime;
-using TMPro;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -198,7 +194,7 @@ public class PlayerInput : MonoBehaviour
 
                 if (npcGameObject.tag.Equals(LayerAndTagManager.partyMemberTag))
                 {
-                    string partyMemberName = npcGameObject.GetComponent<PartyMemberTrainPriority>().partyMemberName;
+                    string partyMemberName = npcGameObject.GetComponent<PlacedPartyMember>().partyMember.getName();
                     PartyMemberPlacer.removePlacedPartyMember(partyMemberName);
                 }
                 else

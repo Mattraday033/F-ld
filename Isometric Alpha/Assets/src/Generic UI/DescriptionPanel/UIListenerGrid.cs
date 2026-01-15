@@ -16,7 +16,7 @@ public class UIListenerGrid : MonoBehaviour, ICounter
 	
     private void OnEnable()
     {
-        updateCounter();
+        // updateCounter();
     }
 
     private void OnDestroy()

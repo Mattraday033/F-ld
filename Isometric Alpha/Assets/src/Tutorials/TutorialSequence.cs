@@ -444,7 +444,7 @@ public struct TutorialSequenceStep : IDescribable
             }
             else
             {
-                currentTutorialMessageWindow.transform.localScale = new Vector3(0.009f, 0.01f, 1f);
+                currentTutorialMessageWindow.transform.localScale = new Vector3(0.008f, 0.008f, 1f);
             }
 
             Canvas.ForceUpdateCanvases();

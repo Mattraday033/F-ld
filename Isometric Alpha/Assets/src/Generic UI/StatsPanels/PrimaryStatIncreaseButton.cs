@@ -100,14 +100,18 @@ public class PrimaryStatIncreaseButton : BinaryPanelPopUpButton, IPointerEnterHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.LogError("OnPointerEnter is empty");
-        // CharacterScreen.upgradeDescriptionPanelSlot.setPrimaryDescribable(new AllyStatsUpgradeDifference(OverallUIManager.getCurrentPartyMember(), getPrimaryStatType())); 
+        if(CharacterScreen.getUpgradeDescriptionPanelSlot() != null)
+        {
+            CharacterScreen.getUpgradeDescriptionPanelSlot().setPrimaryDescribable(new AllyStatsUpgradeDifference(OverallUIManager.getCurrentPartyMember(), getPrimaryStatType())); 
+        }
     }
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
-        Debug.LogError("OnPointerExit is empty");
-		// CharacterScreen.upgradeDescriptionPanelSlot.removePrimaryDescribable();
+        if(CharacterScreen.getUpgradeDescriptionPanelSlot() != null)
+        {
+            CharacterScreen.getUpgradeDescriptionPanelSlot().removePrimaryDescribable();
+        }
 	}
 
 }

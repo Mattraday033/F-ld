@@ -58,13 +58,31 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(MonsterNameList.lineBreaker, lovashiFolderPath + MonsterNameList.lineBreaker + "/");
         folderPathDict.Add(MonsterNameList.signaleer, lovashiFolderPath + MonsterNameList.signaleer + "/");        
         folderPathDict.Add(MonsterNameList.spearman, lovashiFolderPath + MonsterNameList.spearman + "/");        
+
+        //Named Lovashi
+        folderPathDict.Add(NPCNameList.andras, lovashiFolderPath + NPCNameList.guardAndras + "/");
+        folderPathDict.Add(NPCNameList.guardAndras, lovashiFolderPath + NPCNameList.guardAndras + "/");
+        folderPathDict.Add(NPCNameList.director, lovashiFolderPath + NPCNameList.director + "/");
+        folderPathDict.Add(NPCNameList.quartermasterEmese, lovashiFolderPath + NPCNameList.quartermasterEmese + "/");
+        folderPathDict.Add(NPCNameList.guardLaszlo, lovashiFolderPath + NPCNameList.guardLaszlo + "/");
+        folderPathDict.Add(NPCNameList.guardMuzsa, lovashiFolderPath + NPCNameList.guardMuzsa + "/");
+        folderPathDict.Add(NPCNameList.marcos, lovashiFolderPath + NPCNameList.marcos + "/");
+        folderPathDict.Add(NPCNameList.guardMarcos, lovashiFolderPath + NPCNameList.guardMarcos + "/");
+        folderPathDict.Add(NPCNameList.pazman, lovashiFolderPath + NPCNameList.guardPazman + "/");
+        folderPathDict.Add(NPCNameList.guardPazman, lovashiFolderPath + NPCNameList.guardPazman + "/");
+        folderPathDict.Add(NPCNameList.reka, lovashiFolderPath + NPCNameList.guardReka + "/");
+        folderPathDict.Add(NPCNameList.guardReka, lovashiFolderPath + NPCNameList.guardReka+ "/");
+        folderPathDict.Add(NPCNameList.guardVazul, lovashiFolderPath + MonsterNameList.spearman + "/");
+        folderPathDict.Add(NPCNameList.guardVirag, lovashiFolderPath + NPCNameList.guardVirag+ "/");
         #endregion
 
         #region Party Members
         
         folderPathDict.Add(NPCNameList.thatch, partyMembersFolderPath + NPCNameList.thatch + "/");  
         folderPathDict.Add(NPCNameList.carter, partyMembersFolderPath + NPCNameList.carter + "/");  
-        folderPathDict.Add(NPCNameList.nandor, partyMembersFolderPath + NPCNameList.nandor + "/");        
+        folderPathDict.Add(NPCNameList.nandor, partyMembersFolderPath + NPCNameList.nandor + "/");     
+        folderPathDict.Add(NPCNameList.gaspar, partyMembersFolderPath + NPCNameList.gaspar + "/");  
+        folderPathDict.Add(NPCNameList.overseerGaspar, partyMembersFolderPath + NPCNameList.gaspar + "/");         
 
         #endregion
 

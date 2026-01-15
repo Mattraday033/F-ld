@@ -16,11 +16,6 @@ public class BuySellSideTab : AbilityGridSideTab
         }
     }
 
-    private void OnDestroy()
-    {
-
-    }
-
     public override void setToOpen()
     {
         openTabPanel.SetActive(true);

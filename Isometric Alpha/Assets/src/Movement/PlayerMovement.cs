@@ -6,6 +6,20 @@ using Ink.Runtime;
 public class PlayerMovement : MovementTracker
 {
     #region MovementTracker Overrides
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        PlacedPartyMember.PartyMemberLocationRequest.AddListener(addToList);
+        MovementManager.OnMoveFinished.AddListener(preventAnimationStall);
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        PlacedPartyMember.PartyMemberLocationRequest.RemoveListener(addToList);
+        MovementManager.OnMoveFinished.RemoveListener(preventAnimationStall);
+    }
+
 	public override string getName()
 	{
         return PartyManager.getPlayerStats().getName();
@@ -97,12 +111,6 @@ public class PlayerMovement : MovementTracker
     public void Awake()
     {
         instance = this;
-    }
-
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
-        MovementManager.OnMoveFinished.RemoveListener(preventAnimationStall);
     }
 
     public void preventAnimationStall(int index)
