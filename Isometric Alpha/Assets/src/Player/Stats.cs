@@ -1280,7 +1280,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName().Replace(PartyManager.playerMarker, "")));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(currentHealth + " / " + getTotalHealth()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(currentHealth.ToString()));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getTotalArmorRatingForDisplay()));
 

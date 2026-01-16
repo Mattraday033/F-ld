@@ -206,10 +206,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: 55
+  m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
+  m_PreferredWidth: 55
+  m_PreferredHeight: 55
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
@@ -255,6 +255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3377d3025ff2a5a4ab8c6d59599f0658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverEnabled: 0
+  useFloatingHover: 0
   rowTypeToUse: 1
   tabCollection: 0
   buttons: []
@@ -263,6 +265,7 @@ MonoBehaviour:
   wipeIfIneligible: 0
   buttonTexts: []
   traitHoverDescriptionPanel: {fileID: 0}
+  relatedDescriptionPanelBuilders: []
 --- !u!222 &2865348212820803570
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -283,6 +286,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc2e7e94585c2a4f9960856fa0b6567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amountPrefix: 
+  additionalSlots: []
   showingShopkeeperInventory: 0
   iconBackgroundPanel: {fileID: 512775804487562130}
   iconPanel: {fileID: 6360019292168267799}
@@ -302,7 +307,6 @@ MonoBehaviour:
   loreDescriptionText: {fileID: 0}
   useDescriptionText: {fileID: 0}
   contentsText: {fileID: 0}
-  worthTitleText: {fileID: 0}
   worthText: {fileID: 0}
   slotText: {fileID: 0}
   weaponNameText: {fileID: 0}
@@ -315,7 +319,6 @@ MonoBehaviour:
   timerText: {fileID: 0}
   levelText: {fileID: 0}
   experienceText: {fileID: 0}
-  affinityText: {fileID: 0}
   partyText: {fileID: 0}
   strText: {fileID: 0}
   dexText: {fileID: 0}
@@ -339,10 +342,8 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 7519700100138570462}
   tutorialHash: 
-  useUIScale: 0
+  disableArrow: 0
   image: {fileID: 7298907026656628428}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
-  advanceSequenceOnButtonPress: 0
-  buttonTarget: {fileID: 0}
+  _UseUIScaleOverride: 1
   descriptionPanel: {fileID: 1315430121420685169}
-  buttonToDisable: {fileID: 0}

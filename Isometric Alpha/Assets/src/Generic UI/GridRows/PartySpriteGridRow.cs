@@ -35,24 +35,14 @@ public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSour
 
     public override void displayDescribable()
     {
-        // base.displayDescribable();
-
         ScreenManager.currentPartyMember = Stats.convertIDescribableToStats(getObjectBeingDescribed());
 
         OnPartyMemberSelected.Invoke();
+    }
 
-        // if(OverallUIManager.currentScreenManager.getAbilityGridIndex() > 0)
-        // {
-        //     OverallUIManager.currentScreenManager.populateGrid(OverallUIManager.currentScreenManager.getAbilityGridIndex());
-        // }
-
-        // if (OverallUIManager.currentScreenManager.grids.Length <= 2)
-        // {
-        //     return;
-        // }
-
-        // // OverallUIManager.currentScreenManager.descriptionPanelSlots[2].setPrimaryDescribable(Stats.convertIDescribableToStats(descriptionPanel.getObjectBeingDescribed()));
-        // OverallUIManager.currentScreenManager.populateObjectAttachedToSpriteRowButton(PartyManager.getPartyMember(descriptionPanel.getObjectBeingDescribed().getName()));
+    public override void spawnHoverIcon()
+    {
+        MouseHoverManager.spawnCustomHover(this, transform, PrefabNames.oocStatsHoverDescriptionPanelBuilder);
     }
 
     //ICounter

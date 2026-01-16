@@ -404,20 +404,22 @@ public class SaveHandler : ScreenManager, IEscapable
 
 	public static SaveBlueprint getDataFromSaveFile(string saveName)
 	{
-		// if this method is ever edited to somehow return the wrong save file, it will torpedo every single save file in the save folder
+        SaveBlueprint output = null;
 
 		if (File.Exists(Application.persistentDataPath + "/" + saveName + fileExtension))
 		{
 			string jsonString = File.ReadAllText(Application.persistentDataPath + "/" + saveName + fileExtension);
 
-			return JsonConvert.DeserializeObject<SaveBlueprint>(jsonString);
+            try
+            {
+                output = JsonConvert.DeserializeObject<SaveBlueprint>(jsonString);
+            } catch(Exception e)
+            {
+                
+            }
+		}
 
-		}
-		else
-		{
-			Debug.LogError("Save File not found: " + Application.persistentDataPath + "/" + saveName + fileExtension);
-			return null;
-		}
+        return output;
 	}
 
     public static void deleteSaveFile(string saveFileName)
@@ -460,6 +462,11 @@ public class SaveHandler : ScreenManager, IEscapable
 			string saveFileName = saveFilePathParts[saveFilePathParts.Length - 1];
 
 			SaveBlueprint blueprint = getDataFromSaveFile(saveFileName.Split(".")[0]);
+
+            if(blueprint == null)
+            {
+                continue;
+            }
 
 			blueprint.saveName = saveFileName.Replace(fileExtension, ""); 
 

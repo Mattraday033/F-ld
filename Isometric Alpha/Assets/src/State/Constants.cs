@@ -5,6 +5,12 @@ using UnityEngine;
 public static class Constants
 {
 
+    public const int tierZero = 0;
+    public const int tierOne = 1;
+    public const int tierTwo = 2;
+    public const int tierThree = 3;
+    public const int tierFour = 4;
+
     public const int sizeZero = 0;
     public const int sizeOne = 1;
     public const int sizeTwo = 2;
@@ -76,6 +82,8 @@ public static class Constants
     public readonly static Vector3 flippedXScale = new Vector3(-1f, 1f, 1f);
 
     public readonly static Vector3 antiAngleAdjustmentScale = new Vector3(0.98776f,1.15741f,1f);
+
+    public const int resistanceBonusPerTier = 3;
 }
 
 public static class StatDifficultyList

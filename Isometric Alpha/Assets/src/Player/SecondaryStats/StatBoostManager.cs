@@ -329,10 +329,9 @@ public static class StatBoostManager
     {
         switch (describable.getName())
         {
-            
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     #endregion
@@ -343,40 +342,36 @@ public static class StatBoostManager
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusDexterityFormula(IDescribable describable)
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusWisdomFormula(IDescribable describable)
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusCharismaFormula(IDescribable describable)
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     #endregion
@@ -399,20 +394,18 @@ public static class StatBoostManager
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusHealthFormula(IDescribable describable)
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     //Dexterity Stats
@@ -420,10 +413,9 @@ public static class StatBoostManager
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusArmorFormula(IDescribable describable)
@@ -435,10 +427,9 @@ public static class StatBoostManager
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     //Wisdom Stats
@@ -446,20 +437,18 @@ public static class StatBoostManager
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusWeaponSlotsFormula(IDescribable describable)
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusMentalResistanceFormula(IDescribable describable)
@@ -478,30 +467,27 @@ public static class StatBoostManager
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusExuberancesFormula(IDescribable describable)
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusZOIPotencyFormula(IDescribable describable)
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     #endregion
@@ -512,50 +498,45 @@ public static class StatBoostManager
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusSurpriseRoundsFormula(IDescribable describable)
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusRetreatChanceFormula(IDescribable describable)
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusPartyActionsFormula(IDescribable describable)
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusPartySlotsFormula(IDescribable describable)
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusGoldMultiplierFormula(IDescribable describable)
@@ -573,20 +554,18 @@ public static class StatBoostManager
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusVolleyAccuracyFormula(IDescribable describable)
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     #endregion
@@ -596,40 +575,36 @@ public static class StatBoostManager
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusCunningChargesFormula(IDescribable describable)
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusObservationLevelFormula(IDescribable describable)
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
 
     public static string getBonusLeadershipUsesFormula(IDescribable describable)
     {
         switch (describable.getName())
         {
-
+            default:
+                return Constants.zeroRating;
         }
-
-        return "0";
     }
     #endregion
 

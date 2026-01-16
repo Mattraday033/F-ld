@@ -248,7 +248,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         if (loadedCombatAction.targetsAllySection())
         {
-            if (loadedCombatAction.getRangeIndex() == Range.hexadecupleBoxIndex)
+            if (loadedCombatAction.getRangeIndex() == Range.boxThreeIndex)
             {
                 loadedCombatAction.getSelector().setToLocation(Range.getRangeAllyStartingPosition(loadedCombatAction.getRangeIndex()));
             }
@@ -260,7 +260,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
             return action;
         }
-        else if (!loadedCombatAction.targetsAllySection() && loadedCombatAction.getRangeIndex() == Range.hexadecupleBoxIndex)
+        else if (!loadedCombatAction.targetsAllySection() && loadedCombatAction.getRangeIndex() == Range.boxThreeIndex)
         {
             loadedCombatAction.getSelector().setToLocation(Range.getRangeEnemyStartingPosition(loadedCombatAction.getRangeIndex()));
 
@@ -518,7 +518,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
 		if(loadedCombatAction.targetsAllySection())
 		{
-			if (loadedCombatAction.getRangeIndex() == Range.hexadecupleBoxIndex)
+			if (loadedCombatAction.getRangeIndex() == Range.boxThreeIndex)
 			{
 				loadedCombatAction.getSelector().setToLocation(Range.getRangeAllyStartingPosition(loadedCombatAction.getRangeIndex()));
 			}
@@ -531,7 +531,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 			return action;
 		} else if(!loadedCombatAction.targetsAllySection() && loadedCombatAction.getSelector().singleTile)
 		{
-			if (loadedCombatAction.getRangeIndex() == Range.hexadecupleBoxIndex)
+			if (loadedCombatAction.getRangeIndex() == Range.boxThreeIndex)
 			{
 				loadedCombatAction.getSelector().setToLocation(Range.getRangeEnemyStartingPosition(loadedCombatAction.getRangeIndex()));
 			}

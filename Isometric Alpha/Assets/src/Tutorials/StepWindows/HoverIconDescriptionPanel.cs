@@ -13,7 +13,7 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
 
     private const int distanceFromHover = 15;
 
-    private const float maxWidth = 330f;
+    private const float maxWidth = 430f;
 
     public bool alwaysTop = false;
 

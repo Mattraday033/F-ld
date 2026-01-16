@@ -176,10 +176,29 @@ public static class MouseHoverManager
         hoverDescriptionPanelObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.hoverIconCombatActionDescriptionPanel), parent);
         hoverDescriptionPanelObject.AddComponent<HoverPanelCreationListener>();
 
-        Transform customPrefabParent = hoverDescriptionPanelObject.GetComponent<DescriptionPanelSlot>().descriptionPanelParent;
-        hoverDescriptionPanelObject = GameObject.Instantiate(Resources.Load<GameObject>(prefabName), customPrefabParent);
+        hoverDescriptionPanelSlot = hoverDescriptionPanelObject.GetComponent<DescriptionPanelSlot>();
 
-        hoverDescriptionPanelObject.SetActive(true);
+        Transform customPrefabParent = hoverDescriptionPanelObject.GetComponent<DescriptionPanelSlot>().descriptionPanelParent;
+        GameObject customObject = GameObject.Instantiate(Resources.Load<GameObject>(prefabName), customPrefabParent);
+
+        DescriptionPanelBuilder builder = customObject.GetComponent<DescriptionPanelBuilder>();
+
+        if(builder != null && hoverDescriptionPanelSlot != null)
+        {
+            hoverDescriptionPanelSlot.prebuiltBuilder = builder;
+
+            if(CombatStateManager.inCombat)
+            {
+                hoverDescriptionPanelSlot.formatType = BlockFormatType.CombatHover;
+            } else
+            {
+                hoverDescriptionPanelSlot.formatType = BlockFormatType.PlayerStats;
+            }
+
+            hoverDescriptionPanelSlot.setPrimaryDescribable(source.getObjectBeingDescribed());
+        }
+
+        customObject.SetActive(true);
     }
 
     public static void destroyHoverIcon()

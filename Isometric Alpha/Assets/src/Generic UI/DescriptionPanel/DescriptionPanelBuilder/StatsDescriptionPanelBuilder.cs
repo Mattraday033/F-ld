@@ -7,19 +7,15 @@ public class StatsDescriptionPanelBuilder : DescriptionPanelBuilder
 {
 
     public Transform primaryStatParent;
-
-    public Transform strStatParent;
-    public Transform dexStatParent;
-    public Transform wisStatParent;
-    public Transform chaStatParent;
+    public Transform secondaryStatParent;
 
     public GridLayoutGroup primaryGridLayout;
 
-    public GridLayoutGroup[] secondaryGridLayouts;
+    public GridLayoutGroup secondaryGridLayout;
 
     public float numberOfTilesPerRow = 4f;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         filter = new BuilderFilterWhiteList(new List<DescriptionPanelBuildingBlockType>() { DescriptionPanelBuildingBlockType.PrimaryStat, DescriptionPanelBuildingBlockType.SecondaryStat });
 
@@ -38,13 +34,10 @@ public class StatsDescriptionPanelBuilder : DescriptionPanelBuilder
                 switch (block.symbolCharacter)
                 {
                     case Strength.symbolChar:
-                        return strStatParent;
                     case Dexterity.symbolChar:
-                        return dexStatParent;
                     case Wisdom.symbolChar:
-                        return wisStatParent;
                     case Charisma.symbolChar:
-                        return chaStatParent;
+                        return secondaryStatParent;
                 }
 
                 break;
@@ -64,10 +57,7 @@ public class StatsDescriptionPanelBuilder : DescriptionPanelBuilder
 
         primaryGridLayout.cellSize = new Vector2((parentRectTrans.rect.width - 20f) / numberOfTilesPerRow , primaryGridLayout.cellSize.y);
 
-        foreach (GridLayoutGroup grid in secondaryGridLayouts)
-        {
-            grid.cellSize = new Vector2((parentRectTrans.rect.width - 20f) / numberOfTilesPerRow , primaryGridLayout.cellSize.y);
-        }
+        secondaryGridLayout.cellSize = new Vector2((parentRectTrans.rect.width - 20f) / numberOfTilesPerRow , primaryGridLayout.cellSize.y);
 
         rebuildLayouts();
     }

@@ -510,7 +510,6 @@ public class DescriptionPanelBuilder : MonoBehaviour
 
     public virtual DescriptionPanelRow buildRow(DescriptionPanelBuildingBlock block)
     {
-
         if (getParent(block) == null)
         {
             return null;
@@ -518,9 +517,11 @@ public class DescriptionPanelBuilder : MonoBehaviour
 
         DescriptionPanelRow row = Instantiate(getDescriptionPanelRowGameObject(block.type), getParent(block)).GetComponent<DescriptionPanelRow>();
 
-        if (block.type == DescriptionPanelBuildingBlockType.Icon)
+        switch(block.type)
         {
-            iconParent.gameObject.SetActive(true);
+            case DescriptionPanelBuildingBlockType.Icon:
+                iconParent.gameObject.SetActive(true);
+                break;
         }
 
         if (block.iconName != null)

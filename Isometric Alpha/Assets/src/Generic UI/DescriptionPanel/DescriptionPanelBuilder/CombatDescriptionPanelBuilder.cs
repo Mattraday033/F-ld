@@ -12,6 +12,8 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
     private const float namePivotY = 1f;
     private const float typePivotY = 1.35f;
 
+    public int maxChildren = -1;
+
     public Transform nameParent;
     public Transform levelParent;
     public Transform descriptionParent;
@@ -52,6 +54,12 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
 
         if (row == null)
         {
+            return null;
+        }
+
+        if(maxChildren > 0 && row.transform.parent.childCount > maxChildren && block.type != DescriptionPanelBuildingBlockType.BonusDamageText)
+        {
+            Destroy(row.gameObject);
             return null;
         }
 

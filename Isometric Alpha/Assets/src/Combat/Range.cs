@@ -7,23 +7,23 @@ public static class Range
 {
 
 	public const int singleTargetIndex = 1;
-	public const int doubleVerticalIndex = 2;
-	public const int doubleHorizontalIndex = 3;
-	public const int tripleVerticalIndex = 4;
-	public const int tripleHorizontalIndex = 5;
-	public const int tripleHookIndex = 6;
-	public const int tripleReverseHookIndex = 7; 
-	public const int tripleLIndex = 8;
-	public const int tripleReverseLIndex = 9; 
-	public const int quadrupleVerticalIndex = 10;
-	public const int quadrupleHorizontalIndex = 11;
-	public const int quadrupleBoxIndex = 12;
-	public const int quintupleCrossIndex = 13;
-    public const int octupleHorizontalIndex = 14;
+	public const int verticalOneIndex = 2;
+	public const int horizontalOneIndex = 3;
+	public const int verticalTwoIndex = 4;
+	public const int horizontalTwoIndex = 5;
+	public const int hookOneIndex = 6;
+	public const int reverseHookOneIndex = 7; 
+	public const int L_OneIndex = 8;
+	public const int reverseL_OneIndex = 9; 
+	public const int verticalThreeIndex = 10;
+	public const int horizontalThreeIndex = 11;
+	public const int boxOneIndex = 12;
+	public const int crossIndex = 13;
+    public const int horizontalFourIndex = 14;
     public const int checkeredLeftIndex = 15;
 	public const int checkeredRightIndex = 16;
-	public const int nontupleBoxIndex = 17;
-	public const int hexadecupleBoxIndex = 18;
+	public const int boxTwoIndex = 17;
+	public const int boxThreeIndex = 18;
 	
 	public static string getRangeTitle(int rangeIndex)
 	{
@@ -32,41 +32,41 @@ public static class Range
 			case 0:
 				return "Self";
 			case singleTargetIndex: 
-				return "Single Target";
-			case doubleVerticalIndex:
-				return "Double Vertical";
-			case doubleHorizontalIndex:
-				return "Double Horizontal";
-			case tripleVerticalIndex:
-				return "Triple Vertical";
-			case tripleHorizontalIndex:
-				return "Triple Horizontal";
-			case tripleHookIndex:
-				return "Triple Hook";
-			case tripleReverseHookIndex: 
-				return "Triple Reverse Hook";
-			case tripleLIndex:
-				return "Triple L";
-			case tripleReverseLIndex: 
-				return "Triple Reverse L";
-			case quadrupleVerticalIndex: 
-				return "Quadruple Vertical";
-			case quadrupleHorizontalIndex: 
-				return "Quadruple Horizontal";
-			case quadrupleBoxIndex:
-				return "Quadruple Box";
-			case quintupleCrossIndex:
-				return "Quintuple Cross";
-            case octupleHorizontalIndex:
-                return "Octuple Horizontal";
+				return "Single";
+			case verticalOneIndex:
+				return "Vertical 1";
+			case horizontalOneIndex:
+				return "Horizontal 1";
+			case verticalTwoIndex:
+				return "Vertical 2";
+			case horizontalTwoIndex:
+				return "Horizontal 2";
+			case hookOneIndex:
+				return "Hook 1";
+			case reverseHookOneIndex: 
+				return "Reverse Hook 1";
+			case L_OneIndex:
+				return "L 1";
+			case reverseL_OneIndex: 
+				return "Reverse L 1";
+			case verticalThreeIndex: 
+				return "Vertical 3";
+			case horizontalThreeIndex: 
+				return "Horizontal 3";
+			case boxOneIndex:
+				return "Box 1";
+			case crossIndex:
+				return "Cross";
+            case horizontalFourIndex:
+                return "Horizontal 4";
             case checkeredLeftIndex:
 				return "Checkered Left";
 			case checkeredRightIndex:
 				return "Checkered Right";
-			case nontupleBoxIndex:
-				return "Nontuple Box";
-			case hexadecupleBoxIndex:
-				return "Hexadecuple Box";
+			case boxTwoIndex:
+				return "Box 2";
+			case boxThreeIndex:
+				return "Box 3";
 			default:
 				throw new IOException("Unidentified range index: " + rangeIndex);
 		}
@@ -84,13 +84,13 @@ public static class Range
 		switch(rangeIndex)
 		{
 			case singleTargetIndex:
-			case tripleHookIndex:
+			case hookOneIndex:
 				return new GridCoords(1,2);
-			case nontupleBoxIndex: 
-			case tripleReverseHookIndex: 
+			case boxTwoIndex: 
+			case reverseHookOneIndex: 
 				return new GridCoords(1,1);
-			case tripleReverseLIndex:
-			case quadrupleHorizontalIndex:
+			case reverseL_OneIndex:
+			case horizontalThreeIndex:
 				return new GridCoords(2,1);
 			default:
 				return new GridCoords(2,2);
@@ -104,7 +104,7 @@ public static class Range
 	
 	public static int getLargestRangeIndex()
 	{
-		return hexadecupleBoxIndex;
+		return boxThreeIndex;
 	}
 
 	public static List<GlossaryEntry> getAllRangesGlossaryEntries()

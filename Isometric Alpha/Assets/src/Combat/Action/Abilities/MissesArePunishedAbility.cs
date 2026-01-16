@@ -61,16 +61,16 @@ public class MissesArePunishedAbility : Ability
 	{
 		if(CombatStateManager.turnNumber % 4 == 1)
 		{
-			return Range.tripleReverseHookIndex; 	//northwest
+			return Range.reverseHookOneIndex; 	//northwest
 		} else if(CombatStateManager.turnNumber % 4 == 2)
 		{
-			return Range.tripleHookIndex; 			//northeast
+			return Range.hookOneIndex; 			//northeast
 		} else if(CombatStateManager.turnNumber % 4 == 3)
 		{
-			return Range.tripleReverseLIndex; 	//southeast
+			return Range.reverseL_OneIndex; 	//southeast
 		} else if(CombatStateManager.turnNumber % 4 == 0)
 		{
-			return Range.tripleLIndex; 				//southwest
+			return Range.L_OneIndex; 				//southwest
 		} else
 		{
 			throw new IOException("Unexpected number : " + CombatStateManager.turnNumber);	//should never happen

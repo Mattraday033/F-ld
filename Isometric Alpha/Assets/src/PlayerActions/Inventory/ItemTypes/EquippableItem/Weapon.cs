@@ -27,6 +27,11 @@ public class Weapon : EquippableItem, IJSONConvertable
         this.effectAnimationType = effectAnimationType;
 	}
 
+    public override int getSlotID()
+    {
+        return mainHandSlotIndex;
+    }
+
 	public bool getIsTwoHanded()
 	{
 		return isTwoHanded;

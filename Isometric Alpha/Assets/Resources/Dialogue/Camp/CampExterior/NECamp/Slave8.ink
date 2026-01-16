@@ -26,8 +26,6 @@ VAR clayPacifistKey = "Slipping Upward"
 VAR clayHeroKey = "A Hero, Actually"
 
 
-VAR weaponListIndex = 1
-VAR bronzeDirkIndex = 8
 VAR questItemListIndex = 3
 VAR claysNoteIndex = 6
 VAR thatchsNecklaceKey = "Thatch's Silver Necklace"

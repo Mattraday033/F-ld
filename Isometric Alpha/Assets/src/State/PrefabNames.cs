@@ -158,6 +158,7 @@ public static class PrefabNames
     public const string descriptionPanelBuilder = "Description Panel Builder";
     public const string hoverDescriptionPanelBuilder = "Hover Description Panel Builder";
     public const string combatStatsHoverDescriptionPanelBuilder = "Combat Stats Hover Description Panel Builder";
+    public const string oocStatsHoverDescriptionPanelBuilder = "OOC Stats Hover Description Panel Builder";
     public const string combatActionHoverDescriptionPanelBuilder = "Combat Action Hover Description Panel Builder";
     public const string statsDescriptionPanelBuilder = "Stats Description Panel Builder";
     public const string statsUpgradeDescriptionPanelBuilder = "Stats Upgrade Description Panel Builder";

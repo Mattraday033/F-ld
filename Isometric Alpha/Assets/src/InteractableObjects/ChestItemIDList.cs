@@ -76,7 +76,7 @@ public static class ChestItemIDList
         list = new List<ItemListID>();
 
         list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rockCakeIndex, 2));
-        list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.bronzeDirkIndex));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.bronzeDirkIndex));
 
         chestItemIDList.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1c, list);
 
@@ -131,7 +131,7 @@ public static class ChestItemIDList
 
         list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.thistleTeaIndex, Constants.sizeFour));
         list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rockCakeIndex, Constants.sizeTwo));
-        list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.wickedKnifeIndex));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.wickedKnifeIndex));
         list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.chokegrassBombIndex, Constants.sizeTwo));
 
         chestItemIDList.Add(ZoneKeyList.mineLvl2 + LocationNameList.section5, list);

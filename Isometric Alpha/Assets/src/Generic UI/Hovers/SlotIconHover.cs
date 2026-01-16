@@ -203,7 +203,7 @@ public static class HoverMessageList
     private const string oneHandedWeaponMessage = "You only need one hand to wield this weapon. One handed weapons have shorter ranges and deal less damage than two handed ones, but add the damage of your offhand weapon to their damage.";
 
     private const string offhandSlotMessage = "Offhand Slot.";
-    private const string offhandSubMessage = "Offhand weapons give you extra Damage and Crit Chance when you attack with a One Handed Weapon. Shields give extra Armor as long as you haven't attacked with a Two Handed Weapon this turn.";
+    private const string offhandSubMessage = " Offhand weapons give you extra Damage and Crit Chance when you attack with a One Handed Weapon. Shields give extra Armor as long as you haven't attacked with a Two Handed Weapon this turn.";
     private const string headSlotMessage = "Head Slot";
     private const string bodySlotMessage = "Body Slot";
     private const string handsSlotMessage = "Hand Slot";

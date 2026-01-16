@@ -67,12 +67,12 @@ public static class ItemList
 	public const int cudgelIndex = 0;
 	public const int shivIndex = 1;
 	public const int mainHandFistIndex = 2;
-	public const int offHandFistIndex = 3;
+	// public const int offHandFistIndex = 3;
 	public const int malletIndex = 4;
 	public const int lightPickIndex = 5;
 	public const int heavyPickIndex = 6;
 	public const int bronzeBarIndex = 7;
-	public const int bronzeDirkIndex = 8;
+	// public const int bronzeDirkIndex = 8;
 	public const int improvedMainHandFistIndex = 9;
 	public const int greaterMainHandFistIndex = 10;
 	public const int ruinousMainHandFistIndex = 11;
@@ -80,8 +80,8 @@ public static class ItemList
 	public const int wornBowIndex = 13;		 //Manse 2F-2c
 	public const int fightingCapeIndex = 14; //Pit 1a
     public const int staffIndex = 15;	//Mine lvl 2 6 (wisdom room)
-	public const int ancientClawIndex = 16; //Pit 2c
-	public const int wickedKnifeIndex = 17; //Mine lvl 2 5b (dexterity room)
+	// public const int ancientClawIndex = 16; //Pit 2c
+	// public const int wickedKnifeIndex = 17; //Mine lvl 2 5b (dexterity room)
 	public const int plankIndex = 18;
 	public const int sharpRockIndex = 19;
 
@@ -108,7 +108,11 @@ public static class ItemList
 	public const int cookingPotIndex = 20;
 	public const int bronzeBadgeIndex = 21;
 	public const int plumedHelmetIndex = 22;
-	
+	public const int offHandFistIndex = 23;
+	public const int bronzeDirkIndex = 24;
+	public const int ancientClawIndex = 25; //Pit 2c
+    public const int wickedKnifeIndex = 26; //Mine lvl 2 5b (dexterity room)
+
 	public const int leafSamplesIndex = 0;
 	public const int guardDiaryIndex = 1;
 	public const int winchIndex = 2;
@@ -175,39 +179,37 @@ public static class ItemList
 
 	public const string cookingPotKey = "Cooking Pot";
 
-	private const int givesNoArmor = 0;
-
 	//head slot armor values
-	public const int minersHelmetArmorValue = 1;
-	public const int bronzeHelmetArmorValue = 5;
-	public const int salvagedGuardHelmArmorValue = 3; 
-	public const int cookingPotArmorValue = 2; 
+	public const string minersHelmetArmorValue = "1";
+	public const string bronzeHelmetArmorValue = "5";
+	public const string salvagedGuardHelmArmorValue = "3"; 
+	public const string cookingPotArmorValue = "2"; 
 
 	//chest slot armor values
-	public const int slaveRagsArmorValue = 1;
-	public const int paddedArmorArmorValue = 5;
-	public const int bronzeCuirassArmorValue = 10;
-	public const int salvagedGuardArmorArmorValue = 10;
+	public const string slaveRagsArmorValue = "1";
+	public const string paddedArmorArmorValue = "5";
+	public const string bronzeCuirassArmorValue = "10";
+	public const string salvagedGuardArmorArmorValue = "10";
 
 	//hands slot armor values
-	public const int clothGlovesArmorValue = 1;
-	public const int leatherGlovesArmorValue = 3;
-	public const int salvagedGuardGlovesArmorValue = 3;
+	public const string clothGlovesArmorValue = "1";
+	public const string leatherGlovesArmorValue = "3";
+	public const string salvagedGuardGlovesArmorValue = "3";
 
 	//feet slot armor values
-	public const int rottenSandalsArmorValue = 1;
-	public const int leatherBootsArmorValue = 3;
-	public const int salvagedGuardBootsArmorValue = 3;
+	public const string rottenSandalsArmorValue = "1";
+	public const string leatherBootsArmorValue = "3";
+	public const string salvagedGuardBootsArmorValue = "3";
 
 	//trinket slot armor values
-	public const int thatchNecklaceArmorValue = 4;
-	public const int martialArtistsBeltArmorValue = 6; //plus 2W
-	public const int delversDreamArmorValue = 4;
-	public const int bronzeBadgeArmorValue = 4;
+	public const string thatchNecklaceArmorValue = "4";
+	public const string martialArtistsBeltArmorValue = "6"; //plus 2W
+	public const string delversDreamArmorValue = "4";
+	public const string bronzeBadgeArmorValue = "4";
 
 	//shield armor values
-	public const int potLidArmorValue = 8;
-	public const int wardensShieldArmorValue = 10; //plus 2S
+	public const string potLidArmorValue = "8";
+	public const string wardensShieldArmorValue = "10"; //plus 2S
 
 
 	[RuntimeInitializeOnLoadMethod]
@@ -226,10 +228,10 @@ public static class ItemList
 
 		//HealingItem(string key, string loreDescription, string useDescription, int worth, int amountToHeal)
 		usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, rationsIndex), "Rations", "Moldy bread and grimy pemmican.", "Rations", 5, rationsHealingAmount));
-		usableItems.Add(new RestorationItem(new ItemListID(usableItemListIndex, bandagesIndex), "Bandages", "Wrappings made from a coarse, firm cloth.", "Used to remove all " + TraitList.woundTraitType + " Traits from a friendly target.", "Bandages", 15, Range.hexadecupleBoxIndex, TraitList.woundTraitType));
+		usableItems.Add(new RestorationItem(new ItemListID(usableItemListIndex, bandagesIndex), "Bandages", "Wrappings made from a coarse, firm cloth.", "Used to remove all " + TraitList.woundTraitType + " Traits from a friendly target.", "Bandages", 15, Range.boxThreeIndex, TraitList.woundTraitType));
 		usableItems.Add(new SkillReplenishItem(new ItemListID(usableItemListIndex, thistleTeaIndex), "Thistle Tea", "Tea made from the flower of local thistle plants. Sharpens the senses and reinvigorates the mind.", "Used to replenish a use of the Cunning Skill. Can not be used to increase your cunning uses above your maximum.", "Tea", 25));
 		usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, properFoodIndex), "Proper Food", "Food worth eating. It'll fill you up and more so.", "Rations", 15, properFoodHealingAmount));
-		usableItems.Add(new TraitApplicationItem(new ItemListID(usableItemListIndex, chokegrassBombIndex), "Chokegrass Bomb", "A small tin casing filled with a powder that ignites when exposed to air. The smoke from this bomb attacks the eyes and lungs, preventing it's victims from attacking or defending themselves.", "Stuns all targets for 1 round.", "SmokeBomb", 50, Range.hexadecupleBoxIndex, TraitList.chokingKey, CombatItem.useDoesRequireAnAction));
+		usableItems.Add(new TraitApplicationItem(new ItemListID(usableItemListIndex, chokegrassBombIndex), "Chokegrass Bomb", "A small tin casing filled with a powder that ignites when exposed to air. The smoke from this bomb attacks the eyes and lungs, preventing it's victims from attacking or defending themselves.", "Stuns all targets for 1 round.", "SmokeBomb", 50, Range.boxThreeIndex, TraitList.chokingKey, CombatItem.useDoesRequireAnAction));
 		usableItems.Add(new TraitApplicationItem(new ItemListID(usableItemListIndex, chewIndex), "Chew", "A leaf that is ground between ones teeth to get at the juices within. These secretions provide an energetic numbness that removes the ache from wounds and fatigue from muscles.", "Heals the user for "+TraitList.chewHealing+" health, increases their damage by "+TraitList.chewExtraDamage+", and their crit chance by "+TraitList.chewExtraCritPercent+"%.", "Chew", 35, Range.singleTargetIndex, TraitList.chewKey, CombatItem.useDoesNotRequireAnAction));
         usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, rockCakeIndex), "Rock Cake", "A brittle roll that looks like a grey stone. Surprisingly, it appears to still be edible.", "Rations", 8, rockCakeHealingAmount));
         usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, horseFleshIndex), "Horse Flesh", "Strips of cooked and salted horsemeat. Chewier than beef, but no less nutritious.", "Rations", 10, horseFleshHealingAmount));
@@ -237,53 +239,57 @@ public static class ItemList
 		//Weapon(string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, int slotID)
 		//Weapon(string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, int slotID, bool isTwoHanded)
 
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, cudgelIndex), "Cudgel", "A wooden club made from a fallen tree branch.", "2S + 5", "S+D", "Cudgel", Range.doubleVerticalIndex, 3, Weapon.mainHandSlotIndex, isOneHanded, EffectAnimationType.Blunt));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, cudgelIndex), "Cudgel", "A wooden club made from a fallen tree branch.", "2S + 5", "S+D", "Cudgel", Range.verticalOneIndex, 3, Weapon.mainHandSlotIndex, isOneHanded, EffectAnimationType.Blunt));
 		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, shivIndex), "Shiv", "A weapon made from a bronze nail tied to a small piece of wood.", "2D + 7", "3D", "Shiv", Range.singleTargetIndex, 3, Weapon.mainHandSlotIndex, isOneHanded, EffectAnimationType.Pierce));
 		weapons.Add(new Fist(new ItemListID(weaponsListIndex, mainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "S+D+W", "D+W", "FistIcon", Range.singleTargetIndex, Weapon.mainHandSlotIndex));
-		weapons.Add(new OffHandFist(new ItemListID(weaponsListIndex, offHandFistIndex), fistKey, "Good old fashioned meat bludgeons.", "S+D+W", "D+W", "FistIcon"));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, malletIndex), "Mallet", "A large hammer used to beat pitons into rock walls.", "3S + 6", "D", "MalletIcon", Range.doubleHorizontalIndex, 15, Weapon.mainHandSlotIndex, isOneHanded, EffectAnimationType.Blunt));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, lightPickIndex), "Light Pick", "A bronze pick meant to be used to in one hand.", "3D + 8", "3D", "OneHandedPick", Range.doubleHorizontalIndex, 15, Weapon.mainHandSlotIndex, isOneHanded, EffectAnimationType.Pierce));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, heavyPickIndex), "Heavy Pick", "A large bronze pick meant to be used in two hands.", "4S + 7", "D", "TwoHandedPick", Range.tripleHookIndex, 15, Weapon.mainHandSlotIndex, isTwoHanded, EffectAnimationType.Pierce));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, bronzeBarIndex), "Bronze Bar", "A long thin bronze ingot. A bit oxidized, but hefty.", "2S + 5", "D", "BronzeBar", Range.quadrupleHorizontalIndex, 5, Weapon.mainHandSlotIndex, isTwoHanded, EffectAnimationType.Blunt));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, bronzeDirkIndex), "Bronze Dirk", "A curved bronze blade, held in the off hand.", "S + D + 3", "D+2", "CurvedDagger", Range.singleTargetIndex, 5, Weapon.offHandSlotIndex, isTwoHanded, EffectAnimationType.Pierce));
-		weapons.Add(new Fist(new ItemListID(weaponsListIndex, improvedMainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "2W+S+D+4", "W+D+2", "ImprovedFistIcon", Range.doubleVerticalIndex, Weapon.mainHandSlotIndex));
-		weapons.Add(new Fist(new ItemListID(weaponsListIndex, greaterMainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "3W+S+D+8", "W+D+4", "GreaterFistIcon", Range.quadrupleBoxIndex, Weapon.mainHandSlotIndex));
+        weapons.Add(null);
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, malletIndex), "Mallet", "A large hammer used to beat pitons into rock walls.", "3S + 6", "D", "MalletIcon", Range.horizontalOneIndex, 15, Weapon.mainHandSlotIndex, isOneHanded, EffectAnimationType.Blunt));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, lightPickIndex), "Light Pick", "A bronze pick meant to be used to in one hand.", "3D + 8", "3D", "OneHandedPick", Range.horizontalOneIndex, 15, Weapon.mainHandSlotIndex, isOneHanded, EffectAnimationType.Pierce));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, heavyPickIndex), "Heavy Pick", "A large bronze pick meant to be used in two hands.", "4S + 7", "D", "TwoHandedPick", Range.hookOneIndex, 15, Weapon.mainHandSlotIndex, isTwoHanded, EffectAnimationType.Pierce));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, bronzeBarIndex), "Bronze Bar", "A long thin bronze ingot. A bit oxidized, but hefty.", "2S + 5", "D", "BronzeBar", Range.horizontalThreeIndex, 5, Weapon.mainHandSlotIndex, isTwoHanded, EffectAnimationType.Blunt));
+		weapons.Add(null);
+		weapons.Add(new Fist(new ItemListID(weaponsListIndex, improvedMainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "2W+S+D+4", "W+D+2", "ImprovedFistIcon", Range.verticalOneIndex, Weapon.mainHandSlotIndex));
+		weapons.Add(new Fist(new ItemListID(weaponsListIndex, greaterMainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "3W+S+D+8", "W+D+4", "GreaterFistIcon", Range.boxOneIndex, Weapon.mainHandSlotIndex));
 		weapons.Add(new Fist(new ItemListID(weaponsListIndex, ruinousMainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "4W+S+D+16", "W+D+8", "RuinousFistIcon", Range.singleTargetIndex, Weapon.mainHandSlotIndex)); //When implementing 6 range selectors, this gets Sextuple Box/Horizontal
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, bronzeGreatspearIndex), "Bronze Greatspear", "A long spear with a bronze tip, made to be wielded in two hands.", "6S+12", "S+D", "BronzeSpear", Range.quadrupleVerticalIndex, 50, Weapon.mainHandSlotIndex, isTwoHanded, EffectAnimationType.Pierce));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, wornBowIndex), "Worn Bow", "This bow is a little weathered, but can still answer the call of it's wielder", "7D+16", "3D", "WornBow", Range.doubleVerticalIndex, 55, Weapon.mainHandSlotIndex, isTwoHanded, EffectAnimationType.Pierce));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, bronzeGreatspearIndex), "Bronze Greatspear", "A long spear with a bronze tip, made to be wielded in two hands.", "6S+12", "S+D", "BronzeSpear", Range.verticalThreeIndex, 50, Weapon.mainHandSlotIndex, isTwoHanded, EffectAnimationType.Pierce));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, wornBowIndex), "Worn Bow", "This bow is a little weathered, but can still answer the call of it's wielder", "7D+16", "3D", "WornBow", Range.verticalOneIndex, 55, Weapon.mainHandSlotIndex, isTwoHanded, EffectAnimationType.Pierce));
 		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, fightingCapeIndex), "Fighting Cape", "A cape rapped around the offhand, used to both deflect small blows and disorient the opponent.", "3C", "C", "Cape", Range.singleTargetIndex, 35, Weapon.offHandSlotIndex, isTwoHanded, EffectAnimationType.Slash));
-		weapons.Add(new Staff (new ItemListID(weaponsListIndex, staffIndex), "Staff", "A weathered length of oak-spar. It would serve as well as a walking aid or a bludgeon. Has high Base Damage.", "10", "D+W", "Staff", Range.doubleHorizontalIndex, 10, Weapon.mainHandSlotIndex, isTwoHanded));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, ancientClawIndex), "Ancient Claw", "This battered gauntlet has sharp spikes protruding from its knuckles, which immitate an animal's claw. Its main use is to catch and hold an opponent, helping to line up a strike from your other hand or an ally.", "2S + 2D + 3", "D+2", "Claw", Range.singleTargetIndex, 15, Weapon.offHandSlotIndex, isOneHanded));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, wickedKnifeIndex), "Wicked Knife", "A barbed knife, meant for gouging.", "2D + 3", "2D + 1", "WickedKnife", Range.singleTargetIndex, 15, Weapon.offHandSlotIndex, isOneHanded, EffectAnimationType.Slash));
+		weapons.Add(new Staff (new ItemListID(weaponsListIndex, staffIndex), "Staff", "A weathered length of oak-spar. It would serve as well as a walking aid or a bludgeon. Has high Base Damage.", "10", "D+W", "Staff", Range.horizontalOneIndex, 10, Weapon.mainHandSlotIndex, isTwoHanded));
+		weapons.Add(null);
+		weapons.Add(null);
 		weapons.Add(new Staff (new ItemListID(weaponsListIndex, plankIndex), "Plank", "A long piece of wood, pulled from a shack wall. Poorly balanced, but it'll do in a pinch.", "2W + 2", "W+D", "Plank", Range.singleTargetIndex, 3, Weapon.mainHandSlotIndex, isOneHanded));
 		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, sharpRockIndex), "Sharp Rock", "A stone, chipped to have a meager edge. ", "2C + 3", "C+D", "SharpRock", Range.singleTargetIndex, 1, Weapon.mainHandSlotIndex, isOneHanded, EffectAnimationType.Pierce));
 		
 
 		//Armor(string key, string loreDescription, int worth, int armorRating, int slotID)
 
-		armor.Add(new Armor(new ItemListID(armorListIndex, slaveRagsIndex), "Slave Rags", "A set of ratty burlap tunic and pants.", slaveRagsArmorValue, Armor.bodySlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, clothGlovesIndex), "Cloth Gloves", "Gloves made of a thick cloth. Useful for hard labor.", clothGlovesArmorValue, Armor.handsSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, rottenSandalsIndex), "Rotten Sandals", "A pair of ankle high leather sandals whose soles have seen better days.", rottenSandalsArmorValue, Armor.feetSlotIndex));
-		armor.Add(new Shield(new ItemListID(armorListIndex, potLidIndex), "Pot Lid", "The lid to a large bronze cauldron, sufficiently sturdy and wide to be used as a haphazard shield.", potLidArmorValue, Armor.offHandSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, minersHelmetIndex), "Miner's Helmet", "A cheaply made copper head cover with a thin layer of cloth padding inside and a scrap of leather for a chin strap. Useful for protecting against the odd bat or falling rock, but not much else.", minersHelmetArmorValue, Armor.headSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, leatherGlovesIndex), "Leather Gloves", "Gloves made to be worn with armor, but still suitable for protecting the hands during hard labor.", leatherGlovesArmorValue, Armor.handsSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, paddedArmorIndex), "Padded Armor", "Armor made of heavy cloth.", paddedArmorArmorValue, Armor.bodySlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, thatchNecklaceIndex), "Thatch's Silver Necklace", "A necklace made of a silver medalion attached to a thin silver chain. A sun rising over the horizon is etched into the medalion's disk.", thatchNecklaceArmorValue, Armor.trinketSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, martialArtistsBeltIndex), martialArtistsBeltKey, "A simple belt made of rope. Unadorned and unburdened.", "2W+6", Armor.trinketSlotIndex));
-		armor.Add(new Shield(new ItemListID(armorListIndex, wardensShieldIndex), wardensShieldKey, "A shield made from bands of bronze fitted over a hard wooden core.", "2S + 10", Armor.offHandSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, silverSpoonIndex), silverSpoonKey, "The holder of this spoon accumulates wealth at a faster rate. Monsters drop 20% more gold.", givesNoArmor, Armor.trinketSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, leatherBootsIndex), "Leather Boots", "Solid boots made of cowhide. Meant to be worn with armor.", leatherBootsArmorValue, Armor.feetSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, bronzeHelmetIndex), "Bronze Cavalry Helmet", "A bronze helmet in the Lovashi style. Well padded and comfortable to wear.", bronzeHelmetArmorValue, Armor.headSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, bronzeCuirassIndex), "Bronze Cuirass", "Armor made of interlocking bronze scales.", bronzeCuirassArmorValue, Armor.bodySlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, salvagedGuardHelmIndex), salvagedGuardHelmKey, "A helm taken from a slain guard. Buff out that dent and it's good as new.", salvagedGuardHelmArmorValue, Armor.headSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, salvagedGuardArmorIndex), salvagedGuardArmorKey, "A set of armor stripped off a dead guard. Don't mind whatever that smell is.", salvagedGuardArmorArmorValue, Armor.bodySlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, salvagedGuardGlovesIndex), salvagedGuardGlovesKey, "A pair of gloves taken from a guard's cold, dead hands.", salvagedGuardGlovesArmorValue, Armor.handsSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, salvagedGuardBootsIndex), salvagedGuardBootsKey, "A pair of boots taken from a dead guard. His soles have left his body.", salvagedGuardBootsArmorValue, Armor.feetSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, luckyTalismanIndex), luckyTalismanKey, "András's lucky talisman. Let's hope it serves you better than it served him.", "4", "2", givesNoArmor, Armor.trinketSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, delversDreamIndex), delversDreamKey, "A gem, finely cut, with a deep blue hue. The longer you stare, the more certain you become that you do not hold the gem, but it holds you. 10% bonus mental resistance when equipped.", delversDreamArmorValue, Armor.trinketSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, cookingPotIndex), cookingPotKey, "A pot from the kitchens. Worn about the head, it could provide some meager protection.", cookingPotArmorValue, Armor.headSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, bronzeBadgeIndex), bronzeBadgeKey, "This bronze badge looks bruised and worn, as if it was just pulled from a fire.", bronzeBadgeArmorValue, Armor.trinketSlotIndex));
-		armor.Add(new Armor(new ItemListID(armorListIndex, plumedHelmetIndex), "Ancient Plumed Helmet", "A battered helmet, with a ragged plume made of dyed hair from an unknown beast.", "C + 2", Armor.headSlotIndex));
+		armor.Add(new TierOneBody(new ItemListID(armorListIndex, slaveRagsIndex), "Slave Rags", "A set of ratty burlap tunic and pants.", slaveRagsArmorValue));
+		armor.Add(new TierOneHands(new ItemListID(armorListIndex, clothGlovesIndex), "Cloth Gloves", "Gloves made of a thick cloth. Useful for hard labor.", clothGlovesArmorValue));
+		armor.Add(new TierOneFeet(new ItemListID(armorListIndex, rottenSandalsIndex), "Rotten Sandals", "A pair of ankle high leather sandals whose soles have seen better days.", rottenSandalsArmorValue));
+		armor.Add(new TierOneShield(new ItemListID(armorListIndex, potLidIndex), "Pot Lid", "The lid to a large bronze cauldron, sufficiently sturdy and wide to be used as a haphazard shield.", potLidArmorValue));
+		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, minersHelmetIndex), "Miner's Helmet", "A cheaply made copper head cover with a thin layer of cloth padding inside and a scrap of leather for a chin strap. Useful for protecting against the odd bat or falling rock, but not much else.", minersHelmetArmorValue));
+		armor.Add(new TierOneFeet(new ItemListID(armorListIndex, leatherGlovesIndex), "Leather Gloves", "Gloves made to be worn with armor, but still suitable for protecting the hands during hard labor.", leatherGlovesArmorValue));
+		armor.Add(new TierOneBody(new ItemListID(armorListIndex, paddedArmorIndex), "Padded Armor", "Armor made of heavy cloth.", paddedArmorArmorValue));
+		armor.Add(new Trinket(new ItemListID(armorListIndex, thatchNecklaceIndex), "Thatch's Silver Necklace", "A necklace made of a silver medalion attached to a thin silver chain. A sun rising over the horizon is etched into the medalion's disk.", thatchNecklaceArmorValue));
+		armor.Add(new Trinket(new ItemListID(armorListIndex, martialArtistsBeltIndex), martialArtistsBeltKey, "A simple belt made of rope. Unadorned and unburdened.", "2W+6"));
+		armor.Add(new TierOneShield(new ItemListID(armorListIndex, wardensShieldIndex), wardensShieldKey, "A shield made from bands of bronze fitted over a hard wooden core.", "2S + 10"));
+		armor.Add(new Trinket(new ItemListID(armorListIndex, silverSpoonIndex), silverSpoonKey, "The holder of this spoon accumulates wealth at a faster rate. Monsters drop 20% more gold.", Constants.zeroRating));
+		armor.Add(new TierOneFeet(new ItemListID(armorListIndex, leatherBootsIndex), "Leather Boots", "Solid boots made of cowhide. Meant to be worn with armor.", leatherBootsArmorValue));
+		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, bronzeHelmetIndex), "Bronze Cavalry Helmet", "A bronze helmet in the Lovashi style. Well padded and comfortable to wear.", bronzeHelmetArmorValue));
+		armor.Add(new TierOneBody(new ItemListID(armorListIndex, bronzeCuirassIndex), "Bronze Cuirass", "Armor made of interlocking bronze scales.", bronzeCuirassArmorValue));
+		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, salvagedGuardHelmIndex), salvagedGuardHelmKey, "A helm taken from a slain guard. Buff out that dent and it's good as new.", salvagedGuardHelmArmorValue));
+		armor.Add(new TierOneBody(new ItemListID(armorListIndex, salvagedGuardArmorIndex), salvagedGuardArmorKey, "A set of armor stripped off a dead guard. Don't mind whatever that smell is.", salvagedGuardArmorArmorValue));
+		armor.Add(new TierOneHands(new ItemListID(armorListIndex, salvagedGuardGlovesIndex), salvagedGuardGlovesKey, "A pair of gloves taken from a guard's cold, dead hands.", salvagedGuardGlovesArmorValue));
+		armor.Add(new TierOneFeet(new ItemListID(armorListIndex, salvagedGuardBootsIndex), salvagedGuardBootsKey, "A pair of boots taken from a dead guard. His soles have left his body.", salvagedGuardBootsArmorValue));
+		armor.Add(new Trinket(new ItemListID(armorListIndex, luckyTalismanIndex), luckyTalismanKey, "András's lucky talisman. Let's hope it serves you better than it served him.", Constants.zeroRating, "4", "2"));
+		armor.Add(new Trinket(new ItemListID(armorListIndex, delversDreamIndex), delversDreamKey, "A gem, finely cut, with a deep blue hue. The longer you stare, the more certain you become that you do not hold the gem, but it holds you. 10% bonus mental resistance when equipped.", delversDreamArmorValue));
+		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, cookingPotIndex), cookingPotKey, "A pot from the kitchens. Worn about the head, it could provide some meager protection.", cookingPotArmorValue));
+		armor.Add(new Trinket(new ItemListID(armorListIndex, bronzeBadgeIndex), bronzeBadgeKey, "This bronze badge looks bruised and worn, as if it was just pulled from a fire.", bronzeBadgeArmorValue));
+		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, plumedHelmetIndex), "Ancient Plumed Helmet", "A battered helmet, with a ragged plume made of dyed hair from an unknown beast.", "C + 2"));
+		armor.Add(new OffHandFist(new ItemListID(armorListIndex, offHandFistIndex), fistKey, "Good old fashioned meat bludgeons.", "S+D+W", "D+W"));
+        armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, bronzeDirkIndex), "Bronze Dirk", "A curved bronze blade, held in the off hand.", "S + D + 3", "D+2", "CurvedDagger"));
+		armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, ancientClawIndex), "Ancient Claw", "This battered gauntlet has sharp spikes protruding from its knuckles, which immitate an animal's claw. Its main use is to catch and hold an opponent, helping to line up a strike from your other hand or an ally.", "2S + 2D + 3", "D+2", "Claw"));
+		armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, wickedKnifeIndex), "Wicked Knife", "A barbed knife, meant for gouging.", "2D + 3", "2D + 1", "WickedKnife"));
 		
 
 		//QuestItem(string key, string loreDescription, int ID)
@@ -315,21 +321,21 @@ public static class ItemList
 		treasure.Add(new TreasureItem(new ItemListID(treasureItemListIndex, smallCoinPurseIndex), "Small Coin Purse", "A coin purse that still has a small collection of bronze and silver coins in it.", 75));
         treasure.Add(new TreasureItem(new ItemListID(treasureItemListIndex, urosIronNuggetIndex), "Lost Iron Nugget", "A small lump of iron. It was possibly once part of some larger object, or is an eroded smaller item such as an old clasp or nail.", 100));
 		
-		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, redPickLevel1Index), NPCNameList.thatch + "'s Heavy Pick", "A large bronze pick meant to be used in two hands.", "8 + C", "2", "TwoHandedPick", Range.doubleVerticalIndex, 15, Weapon.mainHandSlotIndex, isTwoHanded));
-		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, redPickLevel2Index), NPCNameList.thatch + "'s Heavy Pick", "A large bronze pick meant to be used in two hands.", "11 + 2C", "4", "TwoHandedPick", Range.tripleHookIndex, 15, Weapon.mainHandSlotIndex, isTwoHanded));
-		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, redPickLevel3Index), NPCNameList.thatch + "'s Heavy Pick", "A large bronze pick meant to be used in two hands.", "16 + 3C", "6", "TwoHandedPick", Range.tripleHookIndex, 15, Weapon.mainHandSlotIndex, isTwoHanded));
-		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, redPickLevel4Index), NPCNameList.thatch + "'s Heavy Pick", "A large bronze pick meant to be used in two hands.", "23 + 4C", "8", "TwoHandedPick", Range.tripleHookIndex, 15, Weapon.mainHandSlotIndex, isTwoHanded));
-		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, redPickLevel5Index), NPCNameList.thatch + "'s Heavy Pick", "A large bronze pick meant to be used in two hands.", "32 + 5C", "12", "TwoHandedPick", Range.tripleHookIndex, 15, Weapon.mainHandSlotIndex, isTwoHanded));
+		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, redPickLevel1Index), NPCNameList.thatch + "'s Heavy Pick", "A large bronze pick meant to be used in two hands.", "8 + C", "2", "TwoHandedPick", Range.verticalOneIndex, 15, Weapon.mainHandSlotIndex, isTwoHanded));
+		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, redPickLevel2Index), NPCNameList.thatch + "'s Heavy Pick", "A large bronze pick meant to be used in two hands.", "11 + 2C", "4", "TwoHandedPick", Range.hookOneIndex, 15, Weapon.mainHandSlotIndex, isTwoHanded));
+		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, redPickLevel3Index), NPCNameList.thatch + "'s Heavy Pick", "A large bronze pick meant to be used in two hands.", "16 + 3C", "6", "TwoHandedPick", Range.hookOneIndex, 15, Weapon.mainHandSlotIndex, isTwoHanded));
+		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, redPickLevel4Index), NPCNameList.thatch + "'s Heavy Pick", "A large bronze pick meant to be used in two hands.", "23 + 4C", "8", "TwoHandedPick", Range.hookOneIndex, 15, Weapon.mainHandSlotIndex, isTwoHanded));
+		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, redPickLevel5Index), NPCNameList.thatch + "'s Heavy Pick", "A large bronze pick meant to be used in two hands.", "32 + 5C", "12", "TwoHandedPick", Range.hookOneIndex, 15, Weapon.mainHandSlotIndex, isTwoHanded));
 		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, nandorCudgelLevel1Index), NPCNameList.nandor + "'s Cudgel", "A wooden club made from a fallen tree branch.", "6 + C", "4", "Cudgel", Range.singleTargetIndex, 3, Weapon.mainHandSlotIndex, isTwoHanded));
-		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, nandorCudgelLevel2Index), NPCNameList.nandor + "'s Cudgel", "A wooden club made from a fallen tree branch.", "8 + 2C", "6", "Cudgel", Range.doubleVerticalIndex, 3, Weapon.mainHandSlotIndex, isTwoHanded));
-		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, nandorCudgelLevel3Index), NPCNameList.nandor + "'s Cudgel", "A wooden club made from a fallen tree branch.", "11 + 3C", "8", "Cudgel", Range.doubleVerticalIndex, 3, Weapon.mainHandSlotIndex, isTwoHanded));
-		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, nandorCudgelLevel4Index), NPCNameList.nandor + "'s Cudgel", "A wooden club made from a fallen tree branch.", "15 + 4C", "10", "Cudgel", Range.quadrupleBoxIndex, 3, Weapon.mainHandSlotIndex, isTwoHanded));
-		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, nandorCudgelLevel5Index), NPCNameList.nandor + "'s Cudgel", "A wooden club made from a fallen tree branch.", "20 + 5C", "14", "Cudgel", Range.quadrupleBoxIndex, 3, Weapon.mainHandSlotIndex, isTwoHanded));
+		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, nandorCudgelLevel2Index), NPCNameList.nandor + "'s Cudgel", "A wooden club made from a fallen tree branch.", "8 + 2C", "6", "Cudgel", Range.verticalOneIndex, 3, Weapon.mainHandSlotIndex, isTwoHanded));
+		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, nandorCudgelLevel3Index), NPCNameList.nandor + "'s Cudgel", "A wooden club made from a fallen tree branch.", "11 + 3C", "8", "Cudgel", Range.verticalOneIndex, 3, Weapon.mainHandSlotIndex, isTwoHanded));
+		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, nandorCudgelLevel4Index), NPCNameList.nandor + "'s Cudgel", "A wooden club made from a fallen tree branch.", "15 + 4C", "10", "Cudgel", Range.boxOneIndex, 3, Weapon.mainHandSlotIndex, isTwoHanded));
+		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, nandorCudgelLevel5Index), NPCNameList.nandor + "'s Cudgel", "A wooden club made from a fallen tree branch.", "20 + 5C", "14", "Cudgel", Range.boxOneIndex, 3, Weapon.mainHandSlotIndex, isTwoHanded));
 		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, carterShivLevel1Index), NPCNameList.carter + "'s Shiv", "A weapon made from a bronze nail tied to a small piece of wood.", "14 + C", "8", "Shiv", Range.singleTargetIndex, 3, Weapon.mainHandSlotIndex, isTwoHanded));
 		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, carterShivLevel2Index), NPCNameList.carter + "'s Shiv", "A weapon made from a bronze nail tied to a small piece of wood.", "22 + 2C", "12", "Shiv", Range.singleTargetIndex, 3, Weapon.mainHandSlotIndex, isTwoHanded));
 		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, carterShivLevel3Index), NPCNameList.carter + "'s Shiv", "A weapon made from a bronze nail tied to a small piece of wood.", "28 + 3C", "16", "Shiv", Range.singleTargetIndex, 3, Weapon.mainHandSlotIndex, isTwoHanded));
 		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, carterShivLevel4Index), NPCNameList.carter + "'s Shiv", "A weapon made from a bronze nail tied to a small piece of wood.", "34 + 4C", "20", "Shiv", Range.singleTargetIndex, 3, Weapon.mainHandSlotIndex, isTwoHanded));
-		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, carterShivLevel5Index), NPCNameList.carter + "'s Shiv", "A weapon made from a bronze nail tied to a small piece of wood.", "44 + 5C", "28", "Shiv", Range.doubleVerticalIndex, 3, Weapon.mainHandSlotIndex, isTwoHanded));
+		partyMemberWeapons.Add(new Weapon(new ItemListID(partyMemberWeaponListIndex, carterShivLevel5Index), NPCNameList.carter + "'s Shiv", "A weapon made from a bronze nail tied to a small piece of wood.", "44 + 5C", "28", "Shiv", Range.verticalOneIndex, 3, Weapon.mainHandSlotIndex, isTwoHanded));
 
 		books.Add(new BookItem(new ItemListID(bookListIndex, mineGuardsDiaryIndex), BookList.mineGuardsJournalKey, "This looks to be a journal kept by one of the guards. The pages of this book are thick with writing, most of it about the mundane.", mineGuardsDiaryIndex, new string[] { BookList.mineGuardsJournalReadFlag }, QuestNameList.hiddenAwayQuestTitle, QuestNameList.hiddenAwayStepTitleZero));
 		books.Add(new BookItem(new ItemListID(bookListIndex, pageDiaryFirstEntryIndex), BookList.pageFirstDiaryEntryKey, "A piece of parchment serving as a portion of the diary of Page the scholar.", pageDiaryFirstEntryIndex, new string[] { BookList.pageFirstDiaryEntryReadFlag }, QuestNameList.delvingDeeperQuestTitle, QuestNameList.delvingDeeperStepTitleZero));
@@ -406,6 +412,11 @@ public static class ItemList
 		
 		Item itemTemplate = currentItemList[itemIndex];
 		
+        if(itemTemplate == null)
+        {
+            return null;
+        }
+
 		Item output = itemTemplate.clone();
 		
 		output.setQuantity(quantity);
@@ -421,7 +432,7 @@ public static class ItemList
 		switch (listIndex, itemIndex)
 		{
 			case (weaponsListIndex, mainHandFistIndex):
-			case (weaponsListIndex, offHandFistIndex):
+			case (armorListIndex, offHandFistIndex):
 			case (weaponsListIndex, improvedMainHandFistIndex):
 			case (weaponsListIndex, greaterMainHandFistIndex):
 			case (weaponsListIndex, ruinousMainHandFistIndex):
@@ -460,9 +471,9 @@ public static class ItemList
         return fist;
 	}
 	
-	public static Weapon getOffHandFist()
+	public static EquippableItem getOffHandFist()
 	{
-		return (Weapon) getItem(weaponsListIndex, offHandFistIndex, 1);
+		return (Armor) getItem(armorListIndex, offHandFistIndex, 1);
 	}
 
 }

@@ -249,6 +249,11 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 		{
 			Item item = convertJsonToItem(json);
 
+            if(item == null)
+            {
+                continue;
+            }
+
 			newInventory.Add(item.getKey(), item);
 		}
 

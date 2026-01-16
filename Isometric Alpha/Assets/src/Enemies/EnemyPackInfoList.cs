@@ -23,7 +23,7 @@ public static class EnemyPackInfoList
 
     public readonly static EnemyPackInfo guardVazulFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.guardVazul }, DropTableList.slaveMineDT1Name,
                                                                                     new ItemListID[]  {new ItemListID(ItemList.usableItemListIndex, ItemList.chewIndex, Constants.sizeThree),
-                                                                                                        new ItemListID(ItemList.weaponsListIndex, ItemList.bronzeDirkIndex)});
+                                                                                                        new ItemListID(ItemList.armorListIndex, ItemList.bronzeDirkIndex)});
 
     public readonly static EnemyPackInfo guardAndrasWithKeyFight = new EnemyPackInfo(new EnemyAmount[] { EnemyAmountList.guardAndras }, DropTableList.slaveMineDT1Name,
                                                                                     new ItemListID[]  {new ItemListID(ItemList.armorListIndex, ItemList.luckyTalismanIndex),

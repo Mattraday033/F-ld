@@ -129,8 +129,6 @@ public class GridRow : MonoBehaviour,
 
 	public virtual void OnPointerExit(PointerEventData eventData)
 	{
-        // MouseHoverManager.OnHoverPanelCreation.Invoke();
-
 		if (!canSeeHover())
         {
             return;
@@ -149,7 +147,7 @@ public class GridRow : MonoBehaviour,
         return descriptionPanel.getObjectBeingDescribed();
     }
 
-    public void spawnHoverIcon()
+    public virtual void spawnHoverIcon()
     {
         // if (useFloatingHover)
         // {

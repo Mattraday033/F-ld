@@ -118,6 +118,7 @@ public class DescriptionPanelBlockFormatter : MonoBehaviour
 
     public Transform rowParent;
 
+    [SerializeField]
     public BlockFormat format;
 
     public void setFormat(BlockFormat format)

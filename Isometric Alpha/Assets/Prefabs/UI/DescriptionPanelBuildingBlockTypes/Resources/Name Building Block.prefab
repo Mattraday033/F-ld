@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 5
     m_Right: 0
-    m_Top: 0
+    m_Top: 5
     m_Bottom: 0
   m_ChildAlignment: 0
   m_Spacing: 5
@@ -121,13 +121,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a63f7b28572834284477e9d665c2c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   iconObject: {fileID: 0}
   iconImage: {fileID: 0}
   iconOutline: {fileID: 0}
   iconBackground: {fileID: 0}
+  iconLayoutElement: {fileID: 0}
+  layoutGroup: {fileID: 0}
   iconSymbolText: {fileID: 0}
   iconHover: {fileID: 0}
   descriptionText: {fileID: 5095526879015476991}
+  plusButton: {fileID: 0}
 --- !u!1 &7066046098032454898
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,9 +166,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 3455717671499003533}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 127.34515, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 127.34515, y: -18.41}
   m_SizeDelta: {x: 244.6903, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5949719168110301097

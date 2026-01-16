@@ -44,7 +44,7 @@ public static class TestScript
         //Inventory.addItem(ItemList.getItem(ItemList.weaponsListIndex, ItemList.shivIndex));
         // Inventory.addItem(ItemList.getItem(ItemList.weaponsListIndex, ItemList.cudgelIndex));
 
-        // Inventory.addItem(ItemList.getItem(ItemList.weaponsListIndex, ItemList.bronzeDirkIndex));
+        // Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.bronzeDirkIndex));
         // Inventory.addItem(ItemList.getItem(ItemList.weaponsListIndex, ItemList.heavyPickIndex));
 
         // Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.wardensShieldIndex, 2));
