@@ -48,6 +48,7 @@ public static class KeyBindingList
     public const KeyCode moveRightKey = KeyCode.D;
     public const KeyCode moveClockwiseKey = KeyCode.D;
     public const KeyCode acceptInputKey = KeyCode.Return;
+    public const KeyCode inspectKey = KeyCode.T;
 
 
     public static bool mouseWheelScrollingUp()

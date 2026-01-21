@@ -92,14 +92,22 @@ public class Attack : CombatAction, IJSONConvertable
 
 	public override string getDamageFormula()
 	{
-		if (getMainHandWeapon().getIsTwoHanded() || getOffHandWeapon() == null)
+        AllyStats statSource = getStatSource() as AllyStats;
+
+		if (getMainHandWeapon().getIsTwoHanded() || statSource == null)
 		{
             return getMainHandWeapon().getDamageFormula();
 		}
 		else
 		{
-			string[] formulas = new string[] { getMainHandWeapon().getDamageFormula(), getOffHandWeapon().getDamageFormula() };
-			return DamageCalculator.combineFormulas(formulas);
+            EquippedItems equippedItems = statSource.equippedItems;
+
+            if(equippedItems == null)
+            {
+                return getMainHandWeapon().getDamageFormula();
+            }
+
+			return DamageCalculator.combineFormulas(getMainHandWeapon().getDamageFormula(), equippedItems.getDamageFormula());
 		}
 	}
 
@@ -186,8 +194,6 @@ public class Attack : CombatAction, IJSONConvertable
 	//IDescribable methods
     public override GameObject getRowType(RowType rowType)
     {
-        string rowTypeName = "";
-
         switch (rowType)
         {
             case RowType.Standard:
@@ -195,12 +201,9 @@ public class Attack : CombatAction, IJSONConvertable
             case RowType.StatRequirements:
             case RowType.AbilityEditor:
                 return getSourceItem().getRowType(rowType);
-                break;
             default:
                 return base.getRowType(rowType);
         }
-
-        return Resources.Load<GameObject>(rowTypeName);
     }
 
 	public override GameObject getDescriptionPanelFull()
@@ -293,9 +296,9 @@ public class Attack : CombatAction, IJSONConvertable
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDamageBlock(getDamageTotalForDisplay(), getDamageFormulaForDisplayAlternate()));
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRangeTitle()));
-
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getCritBlock(getCritTotalForDisplay(), getCritFormulaForDisplayAlternate()));
+
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRangeTitle()));
 
 		if (getAppliedTrait() != null)
 		{
@@ -307,6 +310,8 @@ public class Attack : CombatAction, IJSONConvertable
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getIconName()));
 
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getSourceItem().getSlotIconName()));
+
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getSourceItem().getTypeIconName()));
 
 		if (getSourceItem().appliesStanceStacks())
 		{

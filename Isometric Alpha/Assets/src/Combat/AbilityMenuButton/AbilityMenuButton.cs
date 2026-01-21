@@ -42,6 +42,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         abilityMenuManager.setCurrentlySelectedAbilityIndex(index);
 
         abilityMenuManager.selectAction();
+        OnPointerExit(null);
     }
 
     private void enableButtonComponent()

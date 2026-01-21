@@ -69,12 +69,17 @@ public class TutorialSequenceStepTargetUIObject : TutorialSequenceStepTargetObje
 			return;
 		}
 
-		cutOutMask = Instantiate(Resources.Load<GameObject>(PrefabNames.cutOutMask), transform).GetComponent<RectTransform>();
+		cutOutMask = createCutOutMask(transform).GetComponent<RectTransform>();
 
 		if (TutorialSequence.currentTutorialSequence.getCurrentTutorialSequenceStep().blockInternalRaycastsOnCutOutMask)
 		{
 			cutOutMask.gameObject.GetComponent<CutOutMaskInternalBlockerManager>().turnOnInternalBlocker();
 		}
+	}
+
+	public static GameObject createCutOutMask(Transform parent)
+	{
+		return Instantiate(Resources.Load<GameObject>(PrefabNames.cutOutMask), parent);
 	}
 
 	public override void highlight(bool skip)

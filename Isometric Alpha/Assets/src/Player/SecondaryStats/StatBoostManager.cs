@@ -9,6 +9,7 @@ public interface IStatBoostSource : IDescribable
     
     public string getBonusCritFormula();
     public string getBonusDamageFormula();
+    public string getDamageFormula();
 
     #endregion
 
@@ -326,6 +327,15 @@ public static class StatBoostManager
 
 
     public static string getBonusDamageFormula(IDescribable describable)
+    {
+        switch (describable.getName())
+        {
+            default:
+                return Constants.zeroRating;
+        }
+    }
+
+    public static string getDamageFormula(IDescribable describable)
     {
         switch (describable.getName())
         {

@@ -87,6 +87,8 @@ public class SelectorManager : MonoBehaviour
 			return;
 		}
 
+        PlayerInput.showFormulaToggleCheck();
+
 		switch (CombatStateManager.currentActivity)
 		{
 			case CurrentActivity.Waiting:
@@ -839,7 +841,7 @@ public class SelectorManager : MonoBehaviour
     {
         DamagePreviewManager.wipeAllDamagePreviews();
 
-        if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation)
+        if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation && AbilityMenuManager.getInstance() != null)
         {
             DamagePreviewManager.UpdateDamagePreviews.Invoke(AbilityMenuManager.getInstance().getCurrentlySelectedAction());
         } 

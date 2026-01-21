@@ -234,7 +234,11 @@ public class MovementManager : MonoBehaviour
 
         while (elapsedTime <= timeToMove)
         {
-            movement.getTransform().position = Vector3.Lerp(movement.startingPosition, movement.endingPosition, (elapsedTime / timeToMove));
+            if(movement == null)
+            {
+                yield break;
+            }
+            movement.getTransform().position = Vector3.Lerp(movement.startingPosition, movement.endingPosition, elapsedTime / timeToMove);
             elapsedTime += Time.deltaTime;  
             yield return null;
         }

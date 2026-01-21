@@ -32,7 +32,7 @@ public class PlayerInput : MonoBehaviour
 
         if ((KeyPressManager.handlingPrimaryKeyPress && PlayerOOCStateManager.currentActivity != OOCActivity.inChestUI &&
                                                 PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence)
-        || !FadeToBlackManager.isTransparent())
+        || FadeToBlackManager.isMidFade())
         {
             return;
         }
@@ -86,6 +86,8 @@ public class PlayerInput : MonoBehaviour
                 case OOCActivity.inWorldMap:
                     handleWorldMapStateKeyPresses();
                     break;
+                case OOCActivity.inFade:
+                    return;
                 default:
                     Debug.LogError("Unrecognized OOCActivity: " + PlayerOOCStateManager.currentActivity.ToString());
                     break;
@@ -891,7 +893,7 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    private void showFormulaToggleCheck()
+    public static void showFormulaToggleCheck()
     {
         if (KeyBindingList.eitherAltKeyIsPressed() && !OverallUIManager.showFormula)
         {

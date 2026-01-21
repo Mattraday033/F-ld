@@ -12,7 +12,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     public void OnMouseEnter()
     {
-        if(TutorialSequence.blockMouseHovers())
+        if(TutorialSequence.blockMouseHovers() || AbilityMenuButton.hoveringOverAbilityMenuButton)
         {
             return;
         }
@@ -61,9 +61,11 @@ public class CombatantHover : CombatMouseHover, IRevealable
         if(AbilityMenuButton.hoveringOverAbilityMenuButton)
         {
             getTargetStats().removeOutline();
+            SelectorManager.displayHoverUIForCurrentSelectorTarget();
         } else
         {
             onReveal(Constants.reveal);
+            createHoverTag();
         }
     }
 

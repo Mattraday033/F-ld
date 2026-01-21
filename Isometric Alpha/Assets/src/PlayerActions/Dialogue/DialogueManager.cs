@@ -79,13 +79,13 @@ public class DialogueManager : MonoBehaviour
 
 	void Update() //here for Animation
 	{
-		if (waitingOnFadeToBlack && FadeToBlackManager.isBlack())
+		if (waitingOnFadeToBlack && !FadeToBlackManager.isMidFade())
 		{
 			waitingOnFadeToBlack = false;
 			continueStory();
 		}
 
-		if (waitingOnFadeBackIn && FadeToBlackManager.isTransparent())
+		if (waitingOnFadeBackIn && !FadeToBlackManager.isMidFade())
 		{
 			waitingOnFadeBackIn = false;
 
@@ -514,11 +514,11 @@ public class DialogueManager : MonoBehaviour
 
                     if (k == 0)
                     {
-                        mainCM.m_Follow = PlayerMovement.getInstance().gameObject.transform;
+                        mainCM.Follow = PlayerMovement.getInstance().gameObject.transform;
                     }
                     else
                     {
-                        mainCM.m_Follow = currentDialogue.cameraFoci[k].transform;
+                        mainCM.Follow = currentDialogue.cameraFoci[k].transform;
                     }
                     nameText = DialogueList.scrubNameOfEndNumbers(currentDialogue.names[k]) + ":";
                     continueStory();
@@ -728,7 +728,7 @@ public class DialogueManager : MonoBehaviour
 
                     PartyManager.healFullAllPartyMembers();
 
-                    if (FadeToBlackManager.isBlack())
+                    if (!FadeToBlackManager.isMidFade())
                     {
                         fadeToBlackManager.setAndStartFadeBackIn();
                     }
@@ -1435,12 +1435,12 @@ public class DialogueManager : MonoBehaviour
 			yield break;
 		}
 
-		while (FadeToBlackManager.isTransparent())
+		while (!FadeToBlackManager.isMidFade())
 		{
 			yield return null;
 		}
 
-		while (!FadeToBlackManager.isTransparent())
+		while (FadeToBlackManager.isMidFade())
 		{
 			yield return null;
 		}
@@ -1475,7 +1475,7 @@ public class DialogueManager : MonoBehaviour
 
 		if (continueAfterTransparent)
 		{
-			while (!FadeToBlackManager.isTransparent())
+			while (FadeToBlackManager.isMidFade())
 			{
 				yield return null;
 			}

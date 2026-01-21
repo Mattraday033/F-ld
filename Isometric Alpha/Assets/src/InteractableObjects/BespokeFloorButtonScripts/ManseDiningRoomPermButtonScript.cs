@@ -33,7 +33,7 @@ public class ManseDiningRoomPermButtonScript : MonoBehaviour, IFloorButtonScript
 	
 	private IEnumerator handleCombatActionsAfterScreenIsBlack()
 	{
-		// while(!FadeToBlackManager.isBlack())
+		// while(FadeToBlackManager.isMidFade())
         // {
             yield return null;
         // }

@@ -40,7 +40,7 @@ public static class MouseHoverManager
 
     public static void stopCoroutine()
     {
-        if (coroutineParent != null && !(coroutineParent is null))
+        if (coroutineParent != null && !(coroutineParent is null) && hoverCoroutine != null)
         {
             coroutineParent.StopCoroutine(hoverCoroutine);
         }
@@ -121,7 +121,7 @@ public static class MouseHoverManager
 
         if (destroy)
         {
-            timeToWait /= 2f;
+            timeToWait = 0f;
         }
 
         while (timeWaited < timeToWait)
@@ -203,6 +203,12 @@ public static class MouseHoverManager
 
     public static void destroyHoverIcon()
     {
+        if(InspectNode.inspecting)
+        {
+            OnHoverPanelCreation.Invoke();
+            return;
+        }
+
         if (hoverDescriptionPanelObject != null)
         {
             GameObject.DestroyImmediate(hoverDescriptionPanelObject);

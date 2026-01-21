@@ -116,7 +116,6 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        // MouseHoverManager.OnHoverPanelCreation.Invoke();
         MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldDestroyHoverIcon));
     }
 

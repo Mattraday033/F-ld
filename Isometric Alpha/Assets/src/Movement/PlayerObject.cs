@@ -98,7 +98,7 @@ public class PlayerObject : MonoBehaviour
 
     public static bool onTopOfTransitionOrTutorial()
     {
-        if (Helpers.hasCollision(getInstance().transitionCollider) && !FadeToBlackManager.getInstance().currentlyFadingToBlack())
+        if (Helpers.hasCollision(getInstance().transitionCollider) && !FadeToBlackManager.isMidFade())
         {
             if (Helpers.hasCollision(getInstance().transitionCollider, LayerAndTagManager.transitionLayerMask))
             {

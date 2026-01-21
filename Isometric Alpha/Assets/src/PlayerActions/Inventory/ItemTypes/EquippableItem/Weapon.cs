@@ -159,19 +159,19 @@ public class Weapon : EquippableItem, IJSONConvertable
 	{
 		switch (getSlotID())
 		{
-			case Weapon.mainHandSlotIndex:
+			case mainHandSlotIndex:
 
 				if (isTwoHanded)
 				{
-					return EquippableItem.twoHandedSlotIconName;
+					return twoHandedSlotIconName;
 				}
 				else
 				{
-					return EquippableItem.oneHandedSlotIconName;
+					return oneHandedSlotIconName;
 				}
 
-			case Weapon.offHandSlotIndex:
-				return EquippableItem.offHandSlotIconName;
+			case offHandSlotIndex:
+				return offHandSlotIconName;
 
 			default:
 				throw new IOException("Unexpected slotID: " + getSlotID());
@@ -187,10 +187,10 @@ public class Weapon : EquippableItem, IJSONConvertable
 	{
 		switch (slotIndex)
 		{
-			case Weapon.mainHandSlotIndex:
+			case mainHandSlotIndex:
                 return mainHandSlotIconName;
-			case Weapon.offHandSlotIndex:
-				return EquippableItem.offHandSlotIconName;
+			case offHandSlotIndex:
+				return offHandSlotIconName;
 
 			default:
 				throw new IOException("Unexpected slotID: " + slotIndex);
@@ -223,7 +223,8 @@ public class Weapon : EquippableItem, IJSONConvertable
 
         if (getSlotID() == mainHandSlotIndex)
         {
-            buildingBlocks.Insert(3, DescriptionPanelBuildingBlock.getRangeBlock(getRangeIndex()));
+            // buildingBlocks.Insert(3, DescriptionPanelBuildingBlock.getRangeBlock(getRangeIndex()));
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRangeIndex()));
             buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getTypeIconName()));
         }
 

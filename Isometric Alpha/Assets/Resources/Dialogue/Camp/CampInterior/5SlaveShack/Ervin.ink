@@ -96,7 +96,7 @@ Before brand, I was slave. Guards didn't have tools to brand. Did it themselves.
             {finishedErvinsTask:->4a|{givenTaskByErvin:->3a|->1a}}
     +They'll all pay soon. Just wait a little.
         keepDialogue()
-        When they do, come get me. I want to be there.
+        I want to be there when they do.
             {finishedErvinsTask:->4a|{givenTaskByErvin:->3a|->1a}}
 
 === 1c ===

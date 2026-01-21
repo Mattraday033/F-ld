@@ -33,6 +33,11 @@ public static class TerrainVisibilityManager
 
     private static void waitFrameAndCheckForTerrainOnTransition()
     {
+        if(PlayerMovement.getInstance() == null)
+        {
+            return;
+        }
+
         PlayerMovement.getInstance().StartCoroutine(waitFrameAndCheckForTerrain());
     }
 

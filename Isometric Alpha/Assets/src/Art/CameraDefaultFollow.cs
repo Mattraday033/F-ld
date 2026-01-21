@@ -9,7 +9,7 @@ public class CameraDefaultFollow : MonoBehaviour
 	
     void Start()
     {
-        if(PlayerMovement.getInstance() != null)
+        if(PlayerMovement.getInstance() != null && PlayerOOCStateManager.currentActivity != OOCActivity.inDialogue)
 		{
 			mainCM.m_Follow = PlayerMovement.getInstance().gameObject.transform;
 		}

@@ -57,39 +57,39 @@ public class SlideShowManager : MonoBehaviour
     private IEnumerator executeSlideShow()
     {
 
-        while (!FadeToBlackManager.isTransparent())
-        {
+        // while (FadeToBlackManager.isMidFade())
+        // {
             yield return null;
-        }
+        // }
 
-        subtitleText.text = subtitles[slideIndex];
+        // subtitleText.text = subtitles[slideIndex];
 
-        float timeWaited = 0f;
-        float nextWait = getNextWait(0);
+        // float timeWaited = 0f;
+        // float nextWait = getNextWait(0);
 
-        while (slideIndex < slides.Count)
-        {
-            while (timeWaited < nextWait)
-            {
-                timeWaited += Time.deltaTime;
-                yield return null;
-            }
+        // while (slideIndex < slides.Count)
+        // {
+        //     while (timeWaited < nextWait)
+        //     {
+        //         timeWaited += Time.deltaTime;
+        //         yield return null;
+        //     }
 
-            nextWait += nextSlide();
-        }
+        //     nextWait += nextSlide();
+        // }
 
-        FadeToBlackManager.getInstance().fadeTime = 5.5f;
+        // FadeToBlackManager.getInstance().fadeTime = 5.5f;
 
-        FadeToBlackManager.getInstance().setAndStartFadeToBlack();
+        // FadeToBlackManager.getInstance().setAndStartFadeToBlack();
 
-        while (!FadeToBlackManager.isBlack())
-        {
-            yield return null;
-        }
+        // while (FadeToBlackManager.isMidFade())
+        // {
+        //     yield return null;
+        // }
 
-        blackScreen.gameObject.SetActive(true);
+        // blackScreen.gameObject.SetActive(true);
 
-        toMainMenu.execute();
+        // toMainMenu.execute();
     }
 
     private float nextSlide()

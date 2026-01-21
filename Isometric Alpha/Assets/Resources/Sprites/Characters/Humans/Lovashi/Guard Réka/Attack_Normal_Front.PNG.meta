@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a1064e45e4fdc14e9705d19cd1bdc45
-      internalID: -1084050225
+      spriteID: d96788ac67eaaeb4b9664c3aaa478d51
+      internalID: -385114542
       vertices: []
       indices: 
       edges: []
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 96d7872c6253aed4187eb5dd7f65803d
-      internalID: 777628841
+      spriteID: 6dc38a09b34fb10459eb4de0e2173e3a
+      internalID: 1357834762
       vertices: []
       indices: 
       edges: []
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2604561efa7a93445a214952efe86944
-      internalID: 872181274
+      spriteID: 9301b538d6a53d3409a6d7d9fd7278c8
+      internalID: 915942215
       vertices: []
       indices: 
       edges: []
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e329e7888f69dc24eaedd529fc60e086
-      internalID: -1335787769
+      spriteID: 31aa5e2832f4731479f2a005b052f9d9
+      internalID: -503126724
       vertices: []
       indices: 
       edges: []
@@ -195,8 +195,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7eeb5080f09cccb42ac70b1e6495ee68
-      internalID: 724044552
+      spriteID: ed1a521d0330aef45b1f6ddf41b9fc2d
+      internalID: -1957822885
       vertices: []
       indices: 
       edges: []
@@ -216,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 948e1728aac468541bda232f60032e74
-      internalID: -1763817796
+      spriteID: 087a6b235c4f3454dacc5556e5cc26c0
+      internalID: -1434396958
       vertices: []
       indices: 
       edges: []
@@ -233,12 +233,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Attack_Normal_Front_0: -1084050225
-      Attack_Normal_Front_1: 777628841
-      Attack_Normal_Front_2: 872181274
-      Attack_Normal_Front_3: -1335787769
-      Attack_Normal_Front_4: 724044552
-      Attack_Normal_Front_5: -1763817796
+      Attack_Normal_Front_0: -385114542
+      Attack_Normal_Front_1: 1357834762
+      Attack_Normal_Front_2: 915942215
+      Attack_Normal_Front_3: -503126724
+      Attack_Normal_Front_4: -1957822885
+      Attack_Normal_Front_5: -1434396958
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

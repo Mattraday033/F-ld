@@ -54,8 +54,6 @@ public class TransitionManager : MonoBehaviour
     {
         fadeToBlackManager = FadeToBlackManager.getInstance();
         fadeToBlackOnTransition = true;
-
-
     }
 
     public static void changeLocation(Transition transition)
@@ -65,7 +63,7 @@ public class TransitionManager : MonoBehaviour
             return;
         }
 
-        if (fadeToBlackOnTransition && !FadeToBlackManager.isBlack() && !fadeToBlackManager.currentlyFadingToBlack())
+        if (fadeToBlackOnTransition && !FadeToBlackManager.isMidFade())
         {
             fadeToBlackManager.setAndStartFadeToBlack();
         }
@@ -87,7 +85,7 @@ public class TransitionManager : MonoBehaviour
     {
         NotificationManager.OnDeleteAllNotifications.Invoke();
 
-        while (fadeToBlackManager.currentlyFadingToBlack())
+        while (FadeToBlackManager.isMidFade())
         {
             yield return null;
         }
@@ -170,7 +168,7 @@ public class TransitionManager : MonoBehaviour
 
     // public static void changeLocation(TransitionInfo sourceTransitionInfo)
     // {
-    //     if (fadeToBlackOnTransition && !FadeToBlackManager.isBlack() && !fadeToBlackManager.currentlyFadingToBlack())
+    //     if (fadeToBlackOnTransition && FadeToBlackManager.isMidFade() && !fadeToBlackManager.currentlyFadingToBlack())
     //     {
     //         fadeToBlackManager.setAndStartFadeToBlack();
     //     }
@@ -221,7 +219,7 @@ public class TransitionManager : MonoBehaviour
 
 	// private IEnumerator waitForBlackScreenThenTransition(TransitionInfo sourceTransitionInfo)
 	// {
-	// 	while (!FadeToBlackManager.isBlack())
+	// 	while (FadeToBlackManager.isMidFade())
 	// 	{
 	// 		yield return null;
 	// 	}

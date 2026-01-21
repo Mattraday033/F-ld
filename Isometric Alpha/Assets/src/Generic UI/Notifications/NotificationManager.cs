@@ -82,7 +82,7 @@ public class NotificationManager : MonoBehaviour
 
     private IEnumerator spawnNotification(IDescribable describable)
     {
-        while (!FadeToBlackManager.isTransparent())
+        while (FadeToBlackManager.isMidFade())
         {
             yield return null;
         }

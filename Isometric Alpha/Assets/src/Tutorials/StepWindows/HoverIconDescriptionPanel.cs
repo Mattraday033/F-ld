@@ -11,6 +11,9 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
     private readonly static int screenHeightFirstThird = (int) (((double) Screen.height) * (1.0 / 3.0));
     private readonly static int screenHeightSecondThird = (int) (((double) Screen.height) * (2.0 / 3.0));
 
+    private const int inspectingSortOrder = 6;
+    private const int nonInspectingSortOrder = 5;
+
     private const int distanceFromHover = 15;
 
     private const float maxWidth = 430f;
@@ -18,6 +21,8 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
     public bool alwaysTop = false;
 
     public CanvasGroup canvasGroup;
+
+    public Canvas canvas;
 
     public LayoutGroup thirdLayoutGroup;
 
@@ -46,6 +51,19 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
         setPadding();
 
         StartCoroutine(checkAndSetWidth());
+
+        if(canvas == null)
+        {
+            return;
+        }
+
+        if(InspectNode.inspecting)
+        {
+            canvas.sortingOrder = inspectingSortOrder;
+        } else
+        {
+            canvas.sortingOrder = nonInspectingSortOrder;
+        }
     }
 
     private IEnumerator checkAndSetWidth()

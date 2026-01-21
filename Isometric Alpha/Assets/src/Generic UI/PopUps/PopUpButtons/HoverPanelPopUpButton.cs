@@ -15,6 +15,11 @@ public class HoverPanelPopUpButton : PopUpButton
 
 	public void spawnPopUp(Stats newCombatant)
 	{
+        if(currentCombatant != null && currentCombatant.Equals(newCombatant))
+        {
+            return;
+        }
+
 		this.currentCombatant = newCombatant;
 		
 		spawnPopUp();

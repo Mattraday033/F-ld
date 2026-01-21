@@ -19,7 +19,8 @@ public enum OOCActivity {
                             inLevelUpPopUp = 12, 
                             inTutorialPopUp = 13,
                             inTutorialSequence = 14,
-                            inWorldMap = 15
+                            inWorldMap = 15,
+                            inFade = 16
 						};
 
 public static class PlayerOOCStateManager
@@ -58,18 +59,18 @@ public static class PlayerOOCStateManager
         currentActivity = OOCActivity.walking;
         previousActivity = OOCActivity.nothing;
 
-        TransitionManager.AfterTransition.AddListener(setToDefaultStateOnTransition);
+        // TransitionManager.AfterTransition.AddListener(setToDefaultStateOnTransition);
         FadeToBlackManager.OnFadeBackInFinished.AddListener(checkIfWaitingOnSecondHostilityTutorial);
     }
 
-    private static void setToDefaultStateOnTransition()
-    {
-        if (currentActivity != OOCActivity.inDialogue &&
-            currentActivity != OOCActivity.inTutorialSequence)
-        {
-            setCurrentActivity(OOCActivity.walking);
-        }
-    }
+    // private static void setToDefaultStateOnTransition()
+    // {
+    //     if (currentActivity != OOCActivity.inDialogue &&
+    //         currentActivity != OOCActivity.inTutorialSequence)
+    //     {
+    //         setCurrentActivity(OOCActivity.walking);
+    //     }
+    // }
 
     public static void returnToPreviousActivity()
     {
@@ -113,9 +114,9 @@ public static class PlayerOOCStateManager
                 OnStateChangeFromWalking.Invoke();
                 break;
             case OOCActivity.inDialogue:
-                OnStateChangeFromInUI.Invoke();
                 break;
             case OOCActivity.inUI:
+                OnStateChangeFromInUI.Invoke();
                 break;
             case OOCActivity.inMap:
                 break;
@@ -226,7 +227,7 @@ public static class PlayerOOCStateManager
         do
 		{
             yield return null;
-		} while (!FadeToBlackManager.isTransparent());
+		} while (FadeToBlackManager.isMidFade());
 
 		while (currentActivity != OOCActivity.walking)
 		{

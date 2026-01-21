@@ -7,6 +7,9 @@ public static class EnemyTypeFolderPathList
 
     private const string batsFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.bats + "/";
 
+    private const string brandedFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/Branded Slaves/";
+    private const string nonbrandedFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/Nonbranded Slaves/";
+
     private const string lovashiFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/" + EnemyCategoryNameList.lovashi + "/";
 
     private const string partyMembersFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/PartyMembers/";
@@ -74,6 +77,26 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.guardReka, lovashiFolderPath + NPCNameList.guardReka+ "/");
         folderPathDict.Add(NPCNameList.guardVazul, lovashiFolderPath + MonsterNameList.spearman + "/");
         folderPathDict.Add(NPCNameList.guardVirag, lovashiFolderPath + NPCNameList.guardVirag+ "/");
+        #endregion
+
+        #region Slaves
+
+        #region Branded Slaves
+        folderPathDict.Add(NPCNameList.broglin, brandedFolderPath + NPCNameList.broglin + "/");
+        folderPathDict.Add(NPCNameList.balint, brandedFolderPath + NPCNameList.balint + "/");
+        folderPathDict.Add(NPCNameList.clay, brandedFolderPath + NPCNameList.clay + "/");
+        folderPathDict.Add(NPCNameList.ervin, brandedFolderPath + NPCNameList.ervin + "/");
+        folderPathDict.Add(NPCNameList.garcha, brandedFolderPath + NPCNameList.garcha + "/");
+        folderPathDict.Add(NPCNameList.janos, brandedFolderPath + NPCNameList.janos + "/");
+        folderPathDict.Add(NPCNameList.kastor, brandedFolderPath + NPCNameList.kastor + "/");
+        #endregion
+
+        #region Nonbranded Slaves
+        folderPathDict.Add(NPCNameList.beam, nonbrandedFolderPath + NPCNameList.beam + "/");
+        folderPathDict.Add(NPCNameList.imre, nonbrandedFolderPath + NPCNameList.imre + "/");
+        folderPathDict.Add(NPCNameList.page, nonbrandedFolderPath + NPCNameList.page + "/");
+        #endregion
+
         #endregion
 
         #region Party Members

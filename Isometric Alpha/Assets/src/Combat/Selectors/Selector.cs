@@ -247,6 +247,8 @@ public class Selector : ScriptableObject, ICloneable
 				Helpers.updateColliderPosition(getSelectorObject());
 			}
 		}
+
+        SelectorManager.declareSelectors();
 	}
 	
 	public bool onEnemySide()

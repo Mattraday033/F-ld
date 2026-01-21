@@ -359,7 +359,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 		for (int pathIndex = 0; pathIndex < listOfPaths.Count && pathIndex < pathIndexHardCutoff; pathIndex++)
 		{
-			PathToPlayer currentPath = (PathToPlayer)listOfPaths[pathIndex];
+			PathToPlayer currentPath = listOfPaths[pathIndex];
 
             if (currentPath.lastSegment.coords.x == playerCoords.x && currentPath.lastSegment.coords.y == playerCoords.y)
             {

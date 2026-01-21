@@ -555,6 +555,8 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
         {
             actorStats.removeOutline();
         }
+
+        SelectorManager.declareSelectors();
     }
 
     #endregion
@@ -1249,7 +1251,7 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
 
     public object Clone()
     {
-        return this.MemberwiseClone();
+        return MemberwiseClone();
     }
 
     public virtual CombatAction clone()

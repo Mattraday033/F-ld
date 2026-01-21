@@ -28,6 +28,7 @@ VAR garchaSecondLocationIndex = 5
 === 1a === //Broglin starts
 
 setFacing(sw)
+setNPCFacing({broglinIndex},SE)
 
 setToTrue(finishedFirstDialogue)
 

@@ -649,6 +649,11 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
         return StatBoostManager.getBonusDamageFormula(this);
     }
 
+    public string getDamageFormula()
+    {
+        return StatBoostManager.getDamageFormula(this);
+    }
+
     #endregion
 
     #region PrimaryStats
