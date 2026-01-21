@@ -123,6 +123,8 @@ public static class PrefabNames
     public const string hoverIconDescriptionPanel = "Hover Icon Description Panel";
     public const string hoverIconDescriptionPanelInterior = "Hover Icon Description Panel Interior";
     public const string hoverIconCombatActionDescriptionPanel = "Hover Icon Combat Action Description Panel";
+    public const string questListDropDownGrid = "Quest List Drop Down Grid";
+
 
     public const string traitSquareRowPanel = "Trait Square Row Panel";
     public const string stackableTraitSquareRowPanel = "Stackable Trait Square Row Panel";
@@ -187,6 +189,15 @@ public static class PrefabNames
     public const string dragAndDropItemShopIcon = "Drag And Drop Item Shop Icon";
 
     public const string outlineMaterial = "Sprite-Outline-Material";
+
+    #endregion
+
+    #region UI
+
+    public const string UIFolder = "UI/";
+
+    public const string fadeFolder = UIFolder + "Fade/";
+    public const string circleTransitionObject = fadeFolder + "Circle Transition";
 
     #endregion
 

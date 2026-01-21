@@ -2362,7 +2362,7 @@ changeCamTarget({carterIndex})
 
 {
 -convincedImre or terrifiedImre:
-setToTrue(imreReadyToHelpPlayer)
+//setToTrue(imreReadyToHelpPlayer)
 activateQuestStep(Assist the Nonbranded,Find Imre.)
 }
 

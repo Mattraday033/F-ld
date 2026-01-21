@@ -299,7 +299,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
             CombatStateManager.whoIsSurprised = MovementManager.determineSurprisedParty(PlayerMovement.getInstance().transform.position, transform.position, enemyFacing.getFacing());
         }
 
-        SceneChange.changeSceneToCombat();
+        SceneChange.changeSceneToCombat(this);
     }
 
 

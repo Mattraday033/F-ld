@@ -201,6 +201,24 @@ public static class MouseHoverManager
         customObject.SetActive(true);
     }
 
+    public static void spawnQuestListHover(IQuestListSource questListSource, Transform parent)
+    {
+        OnHoverPanelCreation.Invoke();
+
+        hoverDescriptionPanelObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.hoverIconCombatActionDescriptionPanel), parent);
+        hoverDescriptionPanelObject.AddComponent<HoverPanelCreationListener>();
+
+        HoverIconDescriptionPanel hoverIconDescriptionPanel = hoverDescriptionPanelObject.GetComponent<HoverIconDescriptionPanel>();
+
+        GameObject questListGrid = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.questListDropDownGrid), hoverIconDescriptionPanel.descPanelWindow);
+
+        ScrollableUIElement grid = questListGrid.GetComponentInChildren<ScrollableUIElement>();
+
+        grid.populatePanels(questListSource.getListOfQuestStepsForDisplay());
+
+        questListGrid.SetActive(true);
+    }
+
     public static void destroyHoverIcon()
     {
         if(InspectNode.inspecting)

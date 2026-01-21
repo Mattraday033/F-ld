@@ -16,7 +16,7 @@ public interface IQuestListSource
     public List<QuestStep> getListOfQuestStepsForDisplay();
 }
 
-public class QuestCounter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class QuestCounter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IHoverIconSource
 {
     public bool disableHover = false;
 
@@ -87,33 +87,6 @@ public class QuestCounter : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         questStepGrid.transform.parent.gameObject.SetActive(visible);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if (sourceIsUnsafe() || disableHover || eventData.used)
-        {
-            return;
-        }
-
-        List<QuestStep> questStepsInScene = questListSource.getListOfQuestStepsForDisplay();
-
-        questStepGrid.populatePanels(questStepsInScene);
-        setQuestStepGridVisibility(true);
-
-        setTextHighlight(true);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (sourceIsUnsafe() || disableHover || eventData.used)
-        {
-            return;
-        }
-
-        setQuestStepGridVisibility(false);
-
-        setTextHighlight(false);
-    }
-
     private void setTextHighlight(bool highlight)
     {
         if (questListSource.highlightOnHover())
@@ -131,4 +104,48 @@ public class QuestCounter : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         }
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (sourceIsUnsafe() || disableHover || eventData.used)
+        {
+            return;
+        }
+
+        List<QuestStep> questStepsInScene = questListSource.getListOfQuestStepsForDisplay();
+
+        if (questStepsInScene != null && questStepsInScene.Count > 0)
+        {
+            MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldSpawnHoverIcon));
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldDestroyHoverIcon));
+    }
+
+    #region IHoverIconSource
+
+    public virtual void spawnHoverIcon()
+    {
+        MouseHoverManager.spawnQuestListHover(questListSource, transform);
+        setTextHighlight(true);
+    }
+
+    public void destroyHoverIcon()
+    {
+        MouseHoverManager.destroyHoverIcon();
+        setTextHighlight(false);
+    }
+    
+    public GameObject getDescriptionPanelType()
+    {
+        return null;
+    }
+    public IDescribable getObjectBeingDescribed()
+    {
+        return null;
+    }
+
+    #endregion
 }

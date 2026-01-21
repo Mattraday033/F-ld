@@ -6,170 +6,6 @@ using Cinemachine;
 using System;
 using UnityEngine.Events;
 
-
-public interface IFadeTransition
-{
-    public bool isFinished();
-
-    public IEnumerator getCoroutine();
-}
-
-public abstract class FullScreenTransition : IFadeTransition
-{
-
-	protected float frameCount = 0;
-    protected const float slowFadeInSpeed = 3.5f;
-    public float fadeTime = .5f;
-
-	protected void updateFadeToBlackImageOpacity()
-	{
-		FadeToBlackManager.getInstance().fadeToBlackImage.color = new Color(0f,0f,0f, frameCount/Constants.maxOpacity);
-	}
-
-	public abstract bool isFinished();
-
-    public abstract IEnumerator getCoroutine();
-
-    public abstract void setFrameCountAtStart();
-}
-
-public class FadeToBlackTransition : FullScreenTransition
-{
-
-    private FadeBackInTransition fadeBackIn;
-
-	public override bool isFinished()
-	{
-        if(fadeBackIn == null)
-        {
-		    return frameCount >= Constants.maxOpacity;
-        } else
-        {
-            return fadeBackIn.isFinished();
-        }
-	}
-
-    public override void setFrameCountAtStart()
-    {
-        frameCount = 0f;
-        updateFadeToBlackImageOpacity();
-    }
-
-    public override IEnumerator getCoroutine()
-    {
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.walking ||
-            PlayerOOCStateManager.currentActivity == OOCActivity.inMap )
-        {
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.inFade);
-        }
-
-		FadeToBlackManager.OnFadeToBlack.Invoke();
-
-        if(Flags.isInNewGameMode())
-        {
-            fadeTime = slowFadeInSpeed;
-        }
-
-        float timeWaited = 0f;
-
-        while (!isFinished())
-        {
-            frameCount = Mathf.Lerp(0f, Constants.maxOpacity, timeWaited/fadeTime);
-            timeWaited += Time.deltaTime;
-            updateFadeToBlackImageOpacity();
-
-            if (isFinished())
-            {
-                break;
-            }
-
-            yield return null;
-        }
-		
-        GC.Collect();
-
-        DialogueManager.setCameraToDefaultSpeed();
-
-        yield return null;
-        yield return null;
-        yield return null;
-        yield return null;
-
-        fadeBackIn = new FadeBackInTransition();
-        fadeBackIn.setFrameCountAtStart();
-
-        while(!fadeBackIn.isFinished())
-        {
-            yield return fadeBackIn.getCoroutine();
-        }
-    }
-}
-
-public class FadeBackInTransition : FullScreenTransition
-{
-	public override bool isFinished()
-	{
-		return frameCount <= 0;
-	}
-
-    public override void setFrameCountAtStart()
-    {
-        frameCount = Constants.maxOpacity;
-        updateFadeToBlackImageOpacity();
-    }
-
-    public override IEnumerator getCoroutine()
-    {
-        setFrameCountAtStart();
-        float timeWaited = 0f;
-
-        yield return null;
-        yield return null; //2 frames of instant camera speed
-
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.inDialogue)
-        {
-            DialogueManager.setCameraToDialogueSpeed();
-        } else
-        {
-            if(RevealManager.currentlyRevealed)
-            {
-                RevealManager.revealAllObjects();
-            }
-
-            DialogueManager.setCameraToDefaultSpeed();
-        }        
-
-        while (!isFinished())
-        {
-            frameCount = Mathf.Lerp(Constants.maxOpacity, 0f, timeWaited / fadeTime);
-
-            timeWaited += Time.deltaTime;
-            updateFadeToBlackImageOpacity();
-
-            if (isFinished())
-            {
-                break;
-            }
-
-            yield return null;
-        }
-		
-		
-		frameCount = 0;
-		updateFadeToBlackImageOpacity();
-        
-        if(!Flags.isInNewGameMode())
-        {
-            FadeToBlackManager.OnFadeBackInFinished.Invoke();
-        }
-
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.inFade)
-        {
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
-        }
-	}
-}
-
 public class FadeToBlackManager : MonoBehaviour
 {
 	private static FadeToBlackManager instance;
@@ -236,13 +72,19 @@ public class FadeToBlackManager : MonoBehaviour
 	{
 		setCameras();
 
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.walking)
+        if(CombatStateManager.inCombat)
         {
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.inFade);
-        }
+            createFade(new CircleTransitionReduce(mainCamera.transform, OOCActivity.walking));
+        } else
+        {
+            if(PlayerOOCStateManager.currentActivity == OOCActivity.walking)
+            {
+                PlayerOOCStateManager.setCurrentActivity(OOCActivity.inFade);
+            }
 
-        setToMaxOpacity();
-        setAndStartFadeBackIn();
+            setToMaxOpacity();
+            setAndStartFadeBackIn();
+        }
 	}
 
 	public void setCameras(){
@@ -267,6 +109,16 @@ public class FadeToBlackManager : MonoBehaviour
 	{
 		createFade(new FadeBackInTransition());
 	}
+
+    public static void startCombatTransition(Transform monsterTransform)
+    {
+        if(instance == null)
+        {
+            return;
+        }
+
+        instance.createFade(new CircleTransitionEnlarge(monsterTransform, OOCActivity.preCombat));
+    }
 
     public void createFade(IFadeTransition fadeTransition)
     {

@@ -20,7 +20,8 @@ public enum OOCActivity {
                             inTutorialPopUp = 13,
                             inTutorialSequence = 14,
                             inWorldMap = 15,
-                            inFade = 16
+                            inFade = 16,
+                            preCombat = 17
 						};
 
 public static class PlayerOOCStateManager

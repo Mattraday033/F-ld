@@ -7,12 +7,12 @@ using System;
 using UnityEngine.Events;
 
 
-public class CircleTransition : MonoBehaviour
-{
+// public class CircleTransition : MonoBehaviour
+// {
 
-    private void Awake()
-    {
+//     private void Awake()
+//     {
         
-    }
+//     }
 
-}
+// }

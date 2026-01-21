@@ -87,6 +87,7 @@ public class PlayerInput : MonoBehaviour
                     handleWorldMapStateKeyPresses();
                     break;
                 case OOCActivity.inFade:
+                case OOCActivity.preCombat:
                     return;
                 default:
                     Debug.LogError("Unrecognized OOCActivity: " + PlayerOOCStateManager.currentActivity.ToString());

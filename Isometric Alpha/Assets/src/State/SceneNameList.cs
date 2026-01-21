@@ -32,6 +32,25 @@ public static class SceneChange
         SceneManager.LoadScene(SceneNameList.combatUI, LoadSceneMode.Additive);
     }
 
+    public static void changeSceneToCombat(MonoBehaviour coroutineTarget)
+    {
+
+        FadeToBlackManager.startCombatTransition(coroutineTarget.transform);
+
+        coroutineTarget.StartCoroutine(waitForFadeFinish());
+    }
+
+    private static IEnumerator waitForFadeFinish()
+    {
+        while(PlayerOOCStateManager.currentActivity != OOCActivity.preCombat)
+        {
+            yield return null;
+        }
+
+        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        changeSceneToCombat();
+    }
+
     public static void changeSceneToEndOfDemo()
     {
         SceneManager.LoadScene(SceneNameList.endOfDemo);
