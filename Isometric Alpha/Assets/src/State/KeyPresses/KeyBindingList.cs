@@ -92,6 +92,16 @@ public static class KeyBindingList
                 (Input.GetKey(backOutKey2) && !SaveHandler.saveNameFieldIsSelected());
     }
 
+    public static bool screenNavigationbuttonIsPressed()
+    {
+        return !SaveHandler.saveNameFieldIsSelected() && 
+                (Input.GetKey(characterScreenKey) ||
+                 Input.GetKey(inventoryScreenKey) || 
+                 Input.GetKey(partyScreenKey) || 
+                 Input.GetKey(journalScreenKey) || 
+                 saveLoadScreenKeyIsPressed() || 
+                 settingsScreenKeyKeyIsPressed());
+    }
 
     //Combat Keys
     public const KeyCode resolveTurnKey = KeyCode.Space;

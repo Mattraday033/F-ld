@@ -238,11 +238,6 @@ public static class TraitList
     private readonly static Trait charismaPassivesBaseTrait = new Trait("Exuberance", chargeTraitType, "The energies that draw others to you, and inspire them to follow your example.", "", Color.black);
     // public readonly static MultiStackTrait charismaPassives = new MultiStackTrait(charismaPassivesBaseTrait, charismaPassiveStackableTraits);
 
-    //Zone Of Influence Traits
-    public readonly static Trait stalwartInfluence = new ZoneOfInfluenceTrait("Stalwart Influence", "The companion's influence now protects even more. The amount of armor gained by being in their Zone of Influence is doubled.", "Stalwart Influence", new string[]{"redStalwartInfluence"});
-	public readonly static Trait cleverInfluence = new ZoneOfInfluenceTrait("Clever Influence", "The companion's influence provides underhanded solutions to violent problems. The amount of extra damage in a surprise round provided by their Zone of Influence is doubled", "CleverInfluence", new string[]{AllyStats.carterCleverInfluenceStatBoostKey});
-	public readonly static Trait persistentInfluence = new ZoneOfInfluenceTrait("Persistent Influence", "The companion's influence is the light that guards the morale of those around them. +20% Mental Resistance to all allies within the companion's Zone of Influence", "PersistentInfluence", new string[]{AllyStats.nandorPersistentInfluenceStatBoostKey});
-	
 	public readonly static Trait stonewall = new ShieldTrait("Stonewall", protectionTraitType, "This creature will take 75% less damage until the following turn.", "Stonewall", twoRoundDuration, Color.black, stonewallDamageReduction);
 	
 	public readonly static Trait repositioningInvulnerability = new HiddenShieldTrait("Repositioning Invulnerability", protectionTraitType, "Become invulnerable until you reposition", "Default", Color.blue, 100.0);
@@ -317,7 +312,6 @@ public static class TraitList
 		
 		dictionaryOfTraits.Add(wearyHeart.getName(), wearyHeart);
 		dictionaryOfTraits.Add(stonewall.getName(), stonewall);
-		dictionaryOfTraits.Add(stalwartInfluence.getName(), stalwartInfluence);
 		
 		buffDebuffTraitTypes.Add(woundTraitType, isDebuff);
         buffDebuffTraitTypes.Add(mentalTraitType, isDebuff);

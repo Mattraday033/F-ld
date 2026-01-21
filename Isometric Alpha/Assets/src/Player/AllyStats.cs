@@ -16,12 +16,7 @@ public class AllyStats : Stats
     public const int xpNeededToLevelUp = 1000;
 
     private const string combatantTypeDescription = "Party Leader";
-    private const string zoiIconBackgroundName = "ZOI-Icon";
     public const string ZOIStatBoostKey = "PartyMemberBoost";
-
-    public const string nandorPersistentInfluenceStatBoostKey = "nandorPersistentInfluence";
-    public const string redStalwartInfluenceStatBoostKey = "redStalwartInfluence";
-    public const string carterCleverInfluenceStatBoostKey = "carterCleverInfluence";
 
     public const int playerLevelMaximum = 20;
     private const int playerHealthPerLevelAboveOne = 10;
@@ -677,22 +672,9 @@ public class AllyStats : Stats
 
     #region Zone of Influence
 
-    public override Trait getZoneOfInfluenceTrait()
+    public override ZoneOfInfluenceTrait getZoneOfInfluenceTrait()
     {
-        string[] allStatBoostKeys = getAllZoneOfInfluenceBoostKeys(State.lessonsLearned);
-        string[] zoiStatBoostKeys = new string[0];
-
-        foreach (string statBoostKey in allStatBoostKeys)
-        {
-            SecondaryStatBoost boost = StatBoostList.getStatBoost(statBoostKey);
-
-            if (boost.affectsZone && boost.sourceName.Equals(getName()) || boost.sourceName.Equals(""))
-            {
-                zoiStatBoostKeys = Helpers.appendArray<string>(zoiStatBoostKeys, statBoostKey);
-            }
-        }
-
-        return new ZoneOfInfluenceTrait(getName() + zoiTraitName, getZOITraitDescription(), zoiIconBackgroundName, zoiStatBoostKeys);
+        return new ZoneOfInfluenceTrait(getName().Replace(PartyManager.playerMarker, "") + zoiTraitName, getZOITraitDescription(), HoverMessageList.zoneOfInfluenceKey);
     }
 
     public string getZOITraitDescription()
@@ -700,11 +682,11 @@ public class AllyStats : Stats
         switch (getName())
         {
             case NPCNameList.thatch:
-                return "Creature's in this companion's Zone of Influence gain 30 extra armor. This increases to 60 if the companion is at least level 4.";
+                return "Creature's in this companion's Zone of Influence gain extra armor.";
             case NPCNameList.carter:
-                return "Creature's in this companion's Zone of Influence deal 10% extra damage during a surprise round. This increases to 20% if the companion is at least level 4.";
+                return "Creature's in this companion's Zone of Influence gain extra damage during a surprise round.";
             case NPCNameList.nandor:
-                return "Creature's in this companion's Zone of Influence gain 20% extra Mental Resistance. This increases to 40% if the companion is at least level 4.";
+                return "Creature's in this companion's Zone of Influence gain extra Mental Resistance.";
             default:
                 return zoiTraitDescription;
         }

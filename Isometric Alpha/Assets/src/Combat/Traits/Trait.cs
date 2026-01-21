@@ -23,8 +23,6 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
     private int roundsLeft;
     private int maxRoundsLeft;
 
-    public string[] statBoostKeys = new string[0];
-
     private double linkedPercentage = 0.0;
 
     private bool mandatoryTrait = false;
@@ -326,11 +324,6 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
         return false;
     }
 
-    public virtual string[] getStatBoostKeys()
-    {
-        return statBoostKeys;
-    }
-
     public virtual void onDeathEffect(Stats actor)
     {
         //purposefully empty
@@ -433,6 +426,11 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
 
     public Stats getStatSource()
     {
+        if(!CombatStateManager.inCombat && traitApplier == null)
+        {
+            return OverallUIManager.getCurrentPartyMember();
+        }
+
         return traitApplier;
     }
 
@@ -602,6 +600,8 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getMaxRoundsLeftForDisplay()));
 
+        buildingBlocks.AddRange(IStatBoostSource.getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
+
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getDescription()));
 
         buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getIconName()));
@@ -609,7 +609,7 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
         return buildingBlocks;
     }
 
-    //ISortable methods
+    #region ISortable
     public int getQuantity()
     {
         return getNumberOfStacks();
@@ -634,7 +634,7 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
     {
         throw new NotImplementedException("Traits cannot be sorted by Number");
     }
-	
+	#endregion
     
     #region IStatBoostSource Methods
     #region Generic Stats

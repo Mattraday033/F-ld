@@ -235,6 +235,11 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
+        handleScreenSelection();
+    }
+
+    private void handleScreenSelection()
+    {
         if (Input.GetKey(KeyBindingList.characterScreenKey) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             EscapeStack.escapeAll();
@@ -391,6 +396,12 @@ public class PlayerInput : MonoBehaviour
 
         if (EscapeStack.getEscapableObjectsCount() > 0)
         {
+            return;
+        }
+
+        if(KeyBindingList.screenNavigationbuttonIsPressed() && !KeyPressManager.handlingPrimaryKeyPress)
+        {
+            handleScreenSelection();
             return;
         }
 

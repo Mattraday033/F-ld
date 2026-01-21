@@ -91,6 +91,11 @@ public interface IStatBoostSource : IDescribable
     {
         List<DescriptionPanelBuildingBlock> blocks = new List<DescriptionPanelBuildingBlock>();
 
+        if(statsSource == null || boostSource == null)
+        {
+            return blocks;
+        }
+
         #region Generic Stats
 
         if (!boostSource.getBonusCritFormula().Equals(Constants.zeroRating))
@@ -423,6 +428,8 @@ public static class StatBoostManager
     {
         switch (describable.getName())
         {
+            case NPCNameList.carter + Stats.zoiTraitName:
+                return "5C";
             default:
                 return Constants.zeroRating;
         }
@@ -430,7 +437,13 @@ public static class StatBoostManager
 
     public static string getBonusArmorFormula(IDescribable describable)
     {
-        return "0";
+        switch (describable.getName())
+        {
+            case NPCNameList.thatch + Stats.zoiTraitName:
+                return Dexterity.extraArmorMultiplier + "C";
+            default:
+                return Constants.zeroRating;
+        }
     }
 
     public static string getBonusArmorPenetrationFormula(IDescribable describable)
@@ -465,6 +478,8 @@ public static class StatBoostManager
     {
         switch (describable.getName())
         {
+            case NPCNameList.nandor + Stats.zoiTraitName:
+                return Wisdom.mentalResistPerWisdom+"C";
             case ItemList.delversDreamKey:
                 return "10";
         }

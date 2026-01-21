@@ -74,6 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc2e7e94585c2a4f9960856fa0b6567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amountPrefix: 
   additionalSlots: []
   showingShopkeeperInventory: 0
   iconBackgroundPanel: {fileID: 6709517655672305534}
@@ -106,7 +107,6 @@ MonoBehaviour:
   timerText: {fileID: 0}
   levelText: {fileID: 8887877163351969096}
   experienceText: {fileID: 0}
-  affinityText: {fileID: 0}
   partyText: {fileID: 0}
   strText: {fileID: 0}
   dexText: {fileID: 0}
@@ -161,7 +161,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8490566, g: 0.8490566, b: 0.8490566, a: 1}
     m_PressedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
-    m_SelectedColor: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1

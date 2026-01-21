@@ -13,8 +13,6 @@ public class AbilityGridSideTab : MonoBehaviour
 {
     private static Dictionary<ITabParent,DescribableList> currentTabDict;
 
-    public int tabIndex;
-
     public GameObject openTabPanel;
     public Button closedButton;
 

@@ -93,9 +93,9 @@ public static class PlayerOOCStateManager
 
     public static void setCurrentActivity(OOCActivity newActivity, bool tutorialSequenceCheckBypass)
     {
-        if ((!tutorialSequenceCheckBypass && (currentActivity == newActivity ||
-            (currentActivity == OOCActivity.inTutorialSequence && newActivity != OOCActivity.walking)))
-            || CombatStateManager.inCombat)
+        if (CombatStateManager.inCombat || 
+            (!tutorialSequenceCheckBypass && (currentActivity == newActivity ||
+            (currentActivity == OOCActivity.inTutorialSequence && newActivity != OOCActivity.walking))))
         {
             return;
         }

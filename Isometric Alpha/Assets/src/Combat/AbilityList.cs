@@ -191,13 +191,13 @@ public static class AbilityList
 
         instantiateStatAbilities();
 	
-		instantiateCompanionAbilities();
-		
 		instantiateSummonAbilities();
 		
 		instantiateEnemyAbilities();
 		
 		instantiateMiscAbilities();
+
+		instantiateCompanionAbilities();
     }
 	
 	private static void instantiateEnemyAbilities()
@@ -416,41 +416,47 @@ public static class AbilityList
 		companionAbilityDictionary = new Dictionary<string,List<CombatAction>>();
 		
 		List<CombatAction> listOfNandorAbilities = new List<CombatAction>();
-        listOfNandorAbilities.Add(new RepositionEnemyAbility(CombatActionSettings.build(NPCNameList.nandor, DescriptionParams.build("Rolling Throw", "Leverage the enemy's body as a fulcrum and fling them to the ground. The enemy cannot act this turn.", "Trip"), DamageParams.build("4 + 3C", "5 + C"), FrequencyParams.build(oneSlotMax, fourRoundCooldown), TraitList.tripped)));
+        // listOfNandorAbilities.Add(new RepositionEnemyAbility(CombatActionSettings.build(NPCNameList.nandor, DescriptionParams.build("Rolling Throw", "Leverage the enemy's body as a fulcrum and fling them to the ground. The enemy cannot act this turn.", "Trip"), DamageParams.build("4 + 3C", "5 + C"), FrequencyParams.build(oneSlotMax, fourRoundCooldown), TraitList.tripped)));
 
-        listOfNandorAbilities.Add(new KnockBackAbility(CombatActionSettings.build(NPCNameList.nandor, DescriptionParams.build("Push", "The companion forces an opponent backwards, dealing damage to the opponent and anyone they are pushed into."), DamageParams.build("4 + 3C", "5 + C"), FrequencyParams.build(oneSlotMax, fiveRoundCooldown)), fiftyPercentPerSquare));
+        // listOfNandorAbilities.Add(new KnockBackAbility(CombatActionSettings.build(NPCNameList.nandor, DescriptionParams.build("Push", "The companion forces an opponent backwards, dealing damage to the opponent and anyone they are pushed into."), DamageParams.build("4 + 3C", "5 + C"), FrequencyParams.build(oneSlotMax, fiveRoundCooldown)), fiftyPercentPerSquare));
 
-        listOfNandorAbilities.Add(new EquippedPassive(CombatActionSettings.build(NPCNameList.nandor, TraitList.persistentInfluence)));
+        // listOfNandorAbilities.Add(new EquippedPassive(CombatActionSettings.build(NPCNameList.nandor, TraitList.persistentInfluence)));
 
-        listOfNandorAbilities.Add(new ReviveAbility(CombatActionSettings.build(NPCNameList.nandor, DescriptionParams.build("On Your Feet!", "Cutting an inspiring figure, the companion brings some of the formation back from the brink of submission. Every companion in this ability's area that is downed is healed and put back on their feet.", "OnYourFeet"), DamageParams.build("50"), FrequencyParams.build(oneSlotMax, fiveRoundCooldown))));
+        ReviveAbility nandorRevive = new ReviveAbility(CombatActionSettings.build(NPCNameList.nandor+1, DescriptionParams.build("On Your Feet!", "Cutting an inspiring figure, the companion brings some of the formation back from the brink of submission. Every companion in this ability's area that is downed is healed and put back on their feet.", "OnYourFeet"), DamageParams.build("50"), FrequencyParams.build(oneSlotMax, fiveRoundCooldown)));
+        miscAbilityDictionary.Add(nandorRevive.getKey(), nandorRevive);
+        listOfNandorAbilities.Add(nandorRevive);
 
 		companionAbilityDictionary.Add(NPCNameList.nandor,listOfNandorAbilities);
 		
 		
-		List<CombatAction> listOfRedAbilities = new List<CombatAction>();
+		List<CombatAction> listOfThatchAbilities = new List<CombatAction>();
 		
-		listOfRedAbilities.Add(new CompanionAttack(NPCNameList.thatch,"Backhanded Swing","TwoHandedPickReversed",Range.reverseHookOneIndex, "A swing of Thatch's pick in the opposite direction."));
+		// listOfThatchAbilities.Add(new CompanionAttack(NPCNameList.thatch,"Backhanded Swing","TwoHandedPickReversed",Range.reverseHookOneIndex, "A swing of Thatch's pick in the opposite direction."));
 
-		listOfRedAbilities.Add(new RepositionAllyAbility(CombatActionSettings.build(NPCNameList.thatch, DescriptionParams.build("Step Between", "Thatch shields an ally from harm, giving them time to reposition. Both Thatch and the target will take 75% less damage for two turns.", "Get Back!"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(oneSlotMax, fourRoundCooldown), TraitList.stonewall)));
+		// listOfThatchAbilities.Add(new RepositionAllyAbility(CombatActionSettings.build(NPCNameList.thatch, DescriptionParams.build("Step Between", "Thatch shields an ally from harm, giving them time to reposition. Both Thatch and the target will take 75% less damage for two turns.", "Get Back!"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(oneSlotMax, fourRoundCooldown), TraitList.stonewall)));
 
-		//listOfRedAbilities.Add(new Ability(CombatActionSettings.build(NPCNameList.thatch, DescriptionParams.build("Stonewall", "The caster and every ally within the caster's Zone of Influence take 75% less damage until the next turn. Best used early in the turn order. Has a long cooldown."), TargetParams.build(Range.crossIndex, isSelfTargeting), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), TraitList.stonewall)));
+		//listOfThatchAbilities.Add(new Ability(CombatActionSettings.build(NPCNameList.thatch, DescriptionParams.build("Stonewall", "The caster and every ally within the caster's Zone of Influence take 75% less damage until the next turn. Best used early in the turn order. Has a long cooldown."), TargetParams.build(Range.crossIndex, isSelfTargeting), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), TraitList.stonewall)));
 
-		listOfRedAbilities.Add(new EquippedPassive(CombatActionSettings.build(NPCNameList.thatch, TraitList.stalwartInfluence)));
+		// listOfThatchAbilities.Add(new EquippedPassive(CombatActionSettings.build(NPCNameList.thatch, TraitList.stalwartInfluence)));
 
-        listOfRedAbilities.Add(new RepositionSelfAbility(CombatActionSettings.build(NPCNameList.thatch, DescriptionParams.build("Daring Sacrifice", "Become invulnerable for one turn. All enemy attack patterns must include this creature when possible, even if they normally would not.", "DaringSacrifice"), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), TraitList.daringSacrifice)));
+        RepositionSelfAbility thatchSacrifice = new RepositionSelfAbility(CombatActionSettings.build(NPCNameList.thatch+1, DescriptionParams.build("Daring Sacrifice", "This creature repositions themselves and becomes invulnerable for one turn. All enemy attack patterns must include this creature when possible, even if they normally would not.", "DaringSacrifice"), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), TraitList.daringSacrifice));
+        miscAbilityDictionary.Add(thatchSacrifice.getKey(), thatchSacrifice);
+        listOfThatchAbilities.Add(thatchSacrifice);
 		
-		companionAbilityDictionary.Add(NPCNameList.thatch,listOfRedAbilities);
+		companionAbilityDictionary.Add(NPCNameList.thatch,listOfThatchAbilities);
 		
 		
 		List<CombatAction> listOfCarterAbilities = new List<CombatAction>();
 
-        listOfCarterAbilities.Add(new Ability(CombatActionSettings.build(NPCNameList.carter, DescriptionParams.build("Bristle Bomb", "The caster throws a bomb, damaging the targets and leaving them bristling with needles."), DamageParams.build("2 + 2C", "4 + C"), TargetParams.build(Range.boxOneIndex), FrequencyParams.build(oneSlotMax, fourRoundCooldown), TraitList.bristled)));
+        Ability carterBomb = new Ability(CombatActionSettings.build(NPCNameList.carter+1, DescriptionParams.build("Bristle Bomb", "The caster throws a bomb, damaging the targets and leaving them bristling with needles."), DamageParams.build("2 + 2C", "4 + C"), TargetParams.build(Range.boxOneIndex), FrequencyParams.build(oneSlotMax, fourRoundCooldown), TraitList.bristled));
+        miscAbilityDictionary.Add(carterBomb.getKey(), carterBomb);
+        listOfCarterAbilities.Add(carterBomb);
 
-        listOfCarterAbilities.Add(new Ability(CombatActionSettings.build(NPCNameList.carter, DescriptionParams.build("Upside The Head", "The caster gives the target a good thwacking, taking it out of commision for three rounds. Only usable in the suprise round."), DamageParams.build("2 + 2C", "4 + C"), FrequencyParams.build(oneSlotMax, noCooldown, !FrequencyParams.usableOutsideSurpriseRound), TraitList.upsideTheHead)));
+        // listOfCarterAbilities.Add(new Ability(CombatActionSettings.build(NPCNameList.carter, DescriptionParams.build("Upside The Head", "The caster gives the target a good thwacking, taking it out of commision for three rounds. Only usable in the suprise round."), DamageParams.build("2 + 2C", "4 + C"), FrequencyParams.build(oneSlotMax, noCooldown, !FrequencyParams.usableOutsideSurpriseRound), TraitList.upsideTheHead)));
 
-        listOfCarterAbilities.Add(new EquippedPassive(CombatActionSettings.build(NPCNameList.carter, TraitList.cleverInfluence))); 
+        // listOfCarterAbilities.Add(new EquippedPassive(CombatActionSettings.build(NPCNameList.carter, TraitList.cleverInfluence))); 
 
-        listOfCarterAbilities.Add(new TraitBasedDamageAbility(CombatActionSettings.build(NPCNameList.carter, DescriptionParams.build("Bouncing Blade", "The companion throws his blade, striking multiple targets in a line and dealing extra damage per additional trait applied to the target.", "BouncingBlade"), DamageParams.build("25 + 3C", "28"), TargetParams.build(Range.verticalThreeIndex), FrequencyParams.build(oneSlotMax, fiveRoundCooldown)), 0.25));
+        // listOfCarterAbilities.Add(new TraitBasedDamageAbility(CombatActionSettings.build(NPCNameList.carter, DescriptionParams.build("Bouncing Blade", "The companion throws his blade, striking multiple targets in a line and dealing extra damage per additional trait applied to the target.", "BouncingBlade"), DamageParams.build("25 + 3C", "28"), TargetParams.build(Range.verticalThreeIndex), FrequencyParams.build(oneSlotMax, fiveRoundCooldown)), 0.25));
 		
 		companionAbilityDictionary.Add(NPCNameList.carter, listOfCarterAbilities);
 		
@@ -472,13 +478,20 @@ public static class AbilityList
         miscAbilityDictionary.Add(fearName, new Ability(CombatActionSettings.build(DescriptionParams.build(fearName, "Puts the fear of the Gods in the target, setting their limbs to trembling and turning their bowels to ice water. This renders them stunned and vulnerable.", TraitList.afraid.getIconName()), TraitList.afraid)));
 	}
 	
-	public static CombatAction getCompanionAbility(string name, int abilityIndex) 
+	public static List<CombatAction> getCompanionAbilities(string name) 
 	{
-		List<CombatAction> listOfAbilities = companionAbilityDictionary[name];
-		
-		return listOfAbilities[abilityIndex];
+        List<CombatAction> combatActions = new List<CombatAction>();
+
+        combatActions.Add(new ZoneOfInfluenceDescriptorAbility(name, PartyManager.getPartyMember(name).stats.getZoneOfInfluenceTrait()));
+
+        if(companionAbilityDictionary.ContainsKey(name))
+        {
+            combatActions.AddRange(companionAbilityDictionary[name]);
+        }
+
+		return combatActions;
 	}
-	
+
 	private static string generateAbilityKey(char abilityKeyChar)
 	{
 		string key = "";
@@ -564,7 +577,7 @@ public static class AbilityList
 			return new FistAttack(statSource);
 		}
 		
-		throw new IOException("The key '"+key+"' does not exist."); 
+		return new FistAttack(statSource);
 	}
 	
 	public static List<CombatAction> getAllStrengthAbilities()

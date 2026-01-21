@@ -149,6 +149,7 @@ MonoBehaviour:
   tabIndex: 0
   openTabPanel: {fileID: 188761032696636769}
   closedButton: {fileID: 2323482399088369383}
+  listToChoose: 0
 --- !u!1 &188761032696636769
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +387,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3977232063883910884}
     m_Modifications:
+    - target: {fileID: 1726697119777815960, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2204647225293521607, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
         type: 3}
       propertyPath: m_Name
@@ -510,6 +516,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3798896855338769920}
     m_Modifications:
+    - target: {fileID: 1726697119777815960, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2204647225293521607, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
         type: 3}
       propertyPath: m_Name

@@ -1004,7 +1004,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     #region Zone of Influence
 
-    public virtual Trait getZoneOfInfluenceTrait()
+    public virtual ZoneOfInfluenceTrait getZoneOfInfluenceTrait()
     {
         return null;
     }
@@ -1028,23 +1028,6 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         }
 
         traits = nonZOITraits;
-    }
-
-    public static string[] getAllZoneOfInfluenceBoostKeys(string[] allBoostKeysAffectingTarget)
-    {
-        string[] boostKeys = new string[0];
-
-        foreach (string boostKey in allBoostKeysAffectingTarget)
-        {
-            SecondaryStatBoost statBoost = StatBoostList.getStatBoost(boostKey);
-
-            if (statBoost != null && statBoost.affectsZone)
-            {
-                boostKeys = Helpers.appendArray<string>(boostKeys, boostKey);
-            }
-        }
-
-        return boostKeys;
     }
     
     #endregion

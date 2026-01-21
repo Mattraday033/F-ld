@@ -188,7 +188,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
 public static class HoverMessageList
 {
-    private const string zoneOfInfluenceKey = "ZOI";
+    public const string zoneOfInfluenceKey = "ZOI-Icon";
     private const string zoneOfInfluenceMessage = "Zone of Influence. A Trait applied to the Zone's owner and all allies directly infront, behind, or beside this creature. Is not applied diagonally.";
     
     private const string actionWheelKey = "Action Wheel";
@@ -221,7 +221,7 @@ public static class HoverMessageList
     private const string armorSubtypeMessage = "Armor. Wearing it provides Armor Points, which blocks .5% of damage per point. Some pieces of Armor also provide additional benefits.";
 
     private const string armorScoreKey = "Armor Score";
-    private const string armorScoreMessage = "You gain armor from the items you have equipped, your Dexterity Stat, and some Abilities. For every point of Armor you have, you block .5% of incoming damage.";
+    private const string armorScoreMessage = armorScoreKey + ". You gain armor from the items you have equipped, your Dexterity Stat, and some Abilities. For every point of Armor you have, you block .5% of incoming damage.";
 
 
     private const string actionTypeIconMessage = "This Action's Type. A complete list of Action Types can be found in the Journal's Glossary.";
@@ -268,6 +268,9 @@ public static class HoverMessageList
     private const string synergyMessage = "Synergy. Party Members get to add their Synergy to the damage they deal, and subtract it from the damage they take, per Zone of Influence they are inside. Determined by a character's Charisma.";
     private const string bonusExuberancesMessage = "Bonus Exuberances. Bonus Exuberances are added at the start of Combat, letting you use Abilities with Exuberance costs faster and more often. Determined by a character's Charisma.";
     private const string zoiMessage = "Zone of Influence. A Zone of Influence is a bonus applied to all allies adjacent to this character in Combat. Each character's Zone of Influence is different, but the potency of that bonus is determined by a character's Charisma.";
+
+    private const string characterAbilityKey = "Character Abilities";
+    private const string characterAbilityMessage = characterAbilityKey + ". Each Party Member gets a number of unique Abilities they unlock at certain levels.";
 
     private const string statPointKey = "Stat Points";
     private const string statPointMessage = "Stat Points. This shows how many times you can increase your Primary Stats. The four Primary Stats are Strength, Dexterity, Wisdom, and Charisma.";
@@ -431,6 +434,9 @@ public static class HoverMessageList
             case IconList.experienceIconName:
                 return experienceMessage;
 
+            case characterAbilityKey:
+                return characterAbilityMessage;
+
             case Strength.symbolChar:
                 return strengthMessage;
             case Dexterity.symbolChar:
@@ -545,6 +551,12 @@ public static class HoverMessageList
                 return actionOrderMessage;
 
             default:
+
+                if(iconName != null && iconName.Contains(zoneOfInfluenceKey))
+                {
+                    return zoiMessage;
+                }
+
                 return "";
         }
     }

@@ -158,3 +158,25 @@ public class PassiveAbility : EquippedPassive //passives are (currently) mostly 
         return getDisplayType();
     }
 }
+
+
+public class ZoneOfInfluenceDescriptorAbility : PassiveAbility 
+{                                             
+    private ZoneOfInfluenceTrait zoiTrait;
+
+    public ZoneOfInfluenceDescriptorAbility(string key, ZoneOfInfluenceTrait trait) :
+    base(CombatActionSettings.build(key, DescriptionParams.build(trait.getName(), trait.getDescription(), trait.getIconName()), FrequencyParams.build(AbilityList.zeroSlotMax, AbilityList.noCooldown)))
+    {
+        zoiTrait = trait;
+    }
+
+    public override int getRequiredStatLevel()
+    {
+        return 1;
+    }
+
+    public override List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
+    {
+        return zoiTrait.getDescriptionBuildingBlocks();
+    }
+}

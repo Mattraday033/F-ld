@@ -100,5 +100,7 @@ public class PlayerAbilityGridRow : GridRow, IPointerDownHandler, IDragAndDropSo
 
             OverallUIManager.getCurrentActionArray().equipCombatAction(action);
         }
+
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }

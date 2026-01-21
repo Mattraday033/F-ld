@@ -31,7 +31,7 @@ public class SummonStats : EnemyStats
 		return ColorList.canBeInteractedWith;
 	}
 	
-	public override Trait getZoneOfInfluenceTrait()
+	public override ZoneOfInfluenceTrait getZoneOfInfluenceTrait()
 	{
 		return null;
 	}

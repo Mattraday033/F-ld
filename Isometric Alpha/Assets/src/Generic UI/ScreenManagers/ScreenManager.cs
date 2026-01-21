@@ -34,7 +34,8 @@ public enum DescribableList
     ShopKeeperUseItems = 22,
     ShopKeeperOffHandWeapons = 23,
     ShopKeeperArmor = 24,
-    ShopKeeperEssentialItems = 25
+    ShopKeeperEssentialItems = 25,
+    CharacterSpecificAbilities = 26
 }
 
 [System.Serializable]
@@ -173,6 +174,15 @@ public struct Tab
                 else
                 {
                     return new List<IDescribable>(); //can't sell essential items
+                }
+            case DescribableList.CharacterSpecificAbilities:
+
+                if(OverallUIManager.getCurrentPartyMember() == null)
+                {
+                    return new List<IDescribable>();
+                } else
+                {
+                    return AbilityList.getCompanionAbilities(OverallUIManager.getCurrentPartyMember().getName());
                 }
             default:
 
