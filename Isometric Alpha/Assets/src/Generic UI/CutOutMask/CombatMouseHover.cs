@@ -6,7 +6,8 @@ public abstract class CombatMouseHover : MonoBehaviour
 {
     public void createHoverTag()
     {
-        SelectorManager.displayHoverUI(getTargetStats());
+        // SelectorManager.displayHoverUI(getTargetStats());
+        SelectorManager.displayCurrentHoverUI();
     }
 
     protected void moveSelectorToTarget()

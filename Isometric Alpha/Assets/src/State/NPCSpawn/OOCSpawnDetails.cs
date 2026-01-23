@@ -1344,6 +1344,9 @@ public class GateWithHiddenTerrainSpawnDetails : GateSpawnDetails
     {
         GateWithHiddenTerrain gate = gateGameObject.AddComponent<GateWithHiddenTerrain>();
         gate.hiddenTerrainFlag = hiddenTerrainFlag;
+        NameTagGenerator nameTagGenerator = gateGameObject.GetComponent<NameTagGenerator>();
+
+        nameTagGenerator.nameSource = gate;
 
         return gate;
     }

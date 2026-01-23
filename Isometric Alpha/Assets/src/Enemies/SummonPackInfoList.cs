@@ -5,7 +5,7 @@ using UnityEngine;
 public static class SummonPackInfoList
 {
     
-	public static Dictionary<string, SummonStats[]> allSummonPackInfo;
+	public static Dictionary<string, AlliedSummonStats[]> allSummonPackInfo;
 	
 	public const string guardOverseerGameObjectKey = "GuardOverseer";
 	public const string guardsGameObjectKey = "CampGuard";
@@ -16,7 +16,7 @@ public static class SummonPackInfoList
 	
 	static SummonPackInfoList()
 	{	
-		allSummonPackInfo = new Dictionary<string, SummonStats[]>();
+		allSummonPackInfo = new Dictionary<string, AlliedSummonStats[]>();
 		
 		// SummonStats overseerGaspar = new SummonStats(Resources.Load<GameObject>(guardOverseerGameObjectKey), 
 		// 											 guardOverseerGameObjectKey, "Overseer Gáspár", 20, 65, AbilityList.summonsWhipAttackKey, TraitList.predatory.getName());
@@ -40,7 +40,7 @@ public static class SummonPackInfoList
 		// 														   slaveRioter, slaveRioter, slaveRioter, slaveRioter});
 	}
 	
-	public static SummonStats[] getSummonsToSpawn(string key)
+	public static AlliedSummonStats[] getSummonsToSpawn(string key)
 	{
 		return allSummonPackInfo[key];
 	}

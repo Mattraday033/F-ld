@@ -10,6 +10,9 @@ public class TutorialSequenceStepTargetUIObject : TutorialSequenceStepTargetObje
 
 	public Image image;
 	public Color previousColor = Color.clear;
+
+    public bool skipCutOutMask = false;
+
     [SerializeField]
     private bool _UseUIScaleOverride = true;
 	public override bool useUIScale
@@ -64,7 +67,7 @@ public class TutorialSequenceStepTargetUIObject : TutorialSequenceStepTargetObje
 
 	private void createCutOutMask()
 	{
-		if (cutOutMask != null)
+		if (skipCutOutMask || cutOutMask != null)
 		{
 			return;
 		}

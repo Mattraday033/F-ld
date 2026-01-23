@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,11 +84,6 @@ public class EnemyStats : Stats
         return combatSprite;
     }
 
-    public void playSpawnAnimation()
-    {
-        animationManager.playSpawnAnimation();
-    }
-
     public override Color getOutlineColor()
     {
         return ColorList.attacksOnSight;
@@ -149,11 +143,6 @@ public class EnemyStats : Stats
         //Empty On Purpose
     }
 
-    public void instateEnvironmentalCombatAction()
-    {
-        // EnvironmentalCombatActionManager.getInstance().instateEnvironmentalCombatAction(environmentalCombatActionKey, environmentalTargetingTraitKey, CombatGrid.getCombatantAtCoords(position));
-    }
-
     public CombatAction getCombatAction()
     {
         if (combatAction == null || combatAction is null)
@@ -198,24 +187,23 @@ public class EnemyStats : Stats
 
     #endregion
 
-    #region Miscellaneous
-    public override IDescribable getHoverPanelDescribable()
+    #region Miscellanious
+    
+    public override GridCoords findLocationToSpawn()
     {
-        IDescribable hoverPanelDescribable = getCombatAction();
+        if(isFrontline())
+        {
+            return CreatureSpawner.getNextFreeEnemyFrontLineSpace();
+        }
 
-        if (hoverPanelDescribable != null)
+        if(isBackline())
         {
-            return hoverPanelDescribable;
+            return CreatureSpawner.getNextFreeEnemyBackLineSpace();
         }
-        else if (hoverPanelDescribable == null && isPartOfVolley())
-        {
-            return new VolleyAbility(true);
-        }
-        else
-        {
-            return AbilityList.getAbility(this, AbilityList.harmlessKey);
-        }
+
+        return CombatGrid.findRandomOpenSpaceInEnemyZone();
     }
+
     #endregion
 
     #region IDescribable

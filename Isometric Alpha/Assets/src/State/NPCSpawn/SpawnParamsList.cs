@@ -691,6 +691,24 @@ public static class SpawnParamsList
                                                                                                             FlagNameList.mineLvl3BreachSealed
                                                                                                           }), spawnWhileHostile));
 
+        InteractableSpawnParams rubbleConvoSpawnParams = new InteractableSpawnParams(new StartSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.mineLvl3InRubbleConversation
+                                                                                                          }), spawnWhileHostile);
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.section7, NPCNameList.guardReka), rubbleConvoSpawnParams);
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.section7, NPCNameList.guardVirag), rubbleConvoSpawnParams);
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.section7, NPCNameList.guardPazman), rubbleConvoSpawnParams);
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.section7, NPCNameList.overseerGaspar), rubbleConvoSpawnParams);
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.section7, NPCNameList.carter), rubbleConvoSpawnParams);
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.section7, NPCNameList.nandor), rubbleConvoSpawnParams);
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.section7, NPCNameList.guardMarcos), rubbleConvoSpawnParams);
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.section7, NPCNameList.guardMarcos+1), 
+                                        new InteractableSpawnParams(new StartSpawningAllTrueFlagList(new string[]  { 
+                                                                                                                FlagNameList.mineLvl3InRubbleConversation,
+                                                                                                                FlagNameList.mineLvl3MarcosAgreedToIgniteJelly
+                                                                                                            }), spawnWhileHostile));
+
         #endregion
 
         #endregion

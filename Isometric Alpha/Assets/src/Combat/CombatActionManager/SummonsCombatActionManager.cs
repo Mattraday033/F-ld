@@ -30,7 +30,7 @@ public class SummonsCombatActionManager : MonoBehaviour
 
 	private void decideSummonedCombatActions(List<Stats> listOfSummons, bool alliedSide)
 	{
-		foreach(SummonStats summon in listOfSummons)
+		foreach(AlliedSummonStats summon in listOfSummons)
 		{	
 			if(summon.isPartOfVolley())
 			{
@@ -60,7 +60,7 @@ public class SummonsCombatActionManager : MonoBehaviour
 			}
 		}
 		
-		if(Helpers.hasQuality<SummonStats>(listOfSummons, s => s.isPartOfVolley()))
+		if(Helpers.hasQuality<AlliedSummonStats>(listOfSummons, s => s.isPartOfVolley()))
 		{
 			VolleyAbility newVolleyAbility = constructVolleyCombatAction(alliedSide);
 		

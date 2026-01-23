@@ -73,7 +73,6 @@ public class MonsterSpawnDetails : OOCSpawnDetails
         enemyMovement.initializeAnimationManager();
         enemyMovement.setFacing(facing);
         enemyMovement.movementType = movementType;
-        // enemyMovement.packName = npcName;
     }
 
 

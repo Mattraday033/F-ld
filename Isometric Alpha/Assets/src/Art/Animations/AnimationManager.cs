@@ -762,6 +762,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
                 return CharacterAnimationType.Death;
             case CharacterAnimationType.Attack_Normal_Front:
             case CharacterAnimationType.Attack_Normal_Back:
+            case CharacterAnimationType.Attack_Special:
                 return CharacterAnimationType.Attack_Normal;
             default:
                 Debug.LogError("No Animation Type in animationDict: " + animationType.ToString());

@@ -36,8 +36,8 @@ VAR mineLvl3SlavesBackToSurface = false
 VAR mineLvl3ToldPazmanToEatShit = false
 VAR mineLvl3ThreatenedGaspar = false
 
+VAR mineLvl3InRubbleConversation = false
 VAR mineLvl3ConvincedRekaAndPazman = false
-//VAR mineLvl3ConvincedOnlyReka = false
 VAR mineLvl3PromisedToProtectRekaAndPazman = false
 VAR mineLvl3ThreatenedRekaAndPazmanAsPrisoners = false
 
@@ -50,6 +50,7 @@ VAR agreedToFightGaspar = false
 
 VAR playerName = ""
 
+setToTrue(mineLvl3InRubbleConversation)
 
 ->1a
 
@@ -73,7 +74,7 @@ VAR playerName = ""
 
 {
 -mineLvl3GuardsInParty:
-    +Overseer, the way is clear and the breach can be sealed.
+    +Overseer, the way is clear. The breach can be sealed.
     setToTrue(mineLvl3BreachSealed)
         ->2a
 }
@@ -177,7 +178,7 @@ Good riddance. May I never see one of those things again for as long as I live.
 
 changeCamTarget({gasparIndex})
 
-Should we all be so lucky. When work resumes, we'll be certain to see another pocket. But at least this time we'll be ready. Fun's over slaves, hand over any tools you may be holding and place your hands on each others shoulders. We're heading back to the surface.
+Should we all be so lucky. When work resumes, we'll be certain to see another pocket. But at least this time we'll be ready. Fun's over slaves, hand over any tools you may be holding and place your hands on each other's shoulders. We're heading back to the surface.
 
 {
 -goesWithBroglinsPlan:
@@ -605,6 +606,11 @@ Márcos...
 
 -else:
 
+setFacing(SE)
+setNPCFacing({nandorIndex},NW)
+setNPCFacing({marcosIndex},NE)
+setNPCFacing({carterIndex},SW)
+
 changeCamTarget({nandorIndex})
 
     keepDialogue()
@@ -724,6 +730,8 @@ deactivate({rubbleMarcosIndex})
 
 
 === Close ===
+
+setToFalse(mineLvl3InRubbleConversation)
 
 deactivate({gasparIndex})
 deactivate({rekaIndex})

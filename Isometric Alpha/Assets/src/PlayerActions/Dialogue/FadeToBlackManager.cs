@@ -12,24 +12,12 @@ public class FadeToBlackManager : MonoBehaviour
     public readonly static UnityEvent OnFadeToBlack = new UnityEvent();
     public readonly static UnityEvent OnFadeBackInFinished = new UnityEvent();
 
-    [Header("Cameras")]
-
-    //[SerializeField] 
     public Camera mainCamera;
-    //[SerializeField] 
     public CinemachineVirtualCamera mainCM;
 
-    [Header("Canvas")]
-
-    //[SerializeField] 
     public Canvas fadeToBlackCanvas;
 
-    [Header("Black Screen")]
-
-	//[SerializeField] 
     public Image fadeToBlackImage;
-
-    private static bool waitToFadeIn;
 
     public bool fadeBackInOnStart = false;
 
@@ -39,8 +27,6 @@ public class FadeToBlackManager : MonoBehaviour
     [RuntimeInitializeOnLoadMethod]
     private static void initializeFadeToBlackManager()
     {
-        waitToFadeIn = false;
-
         currentCoroutine = null;
         currentFadeTransition = null;
 
@@ -56,11 +42,8 @@ public class FadeToBlackManager : MonoBehaviour
 
         currentCoroutine = null;
         currentFadeTransition = null;
-        waitToFadeIn = false;
 
         instance = this;
-
-
     }
 
 	public static FadeToBlackManager getInstance()
@@ -125,16 +108,6 @@ public class FadeToBlackManager : MonoBehaviour
         currentFadeTransition = fadeTransition;	
 		currentCoroutine = StartCoroutine(currentFadeTransition.getCoroutine());
     }
-
-	public static void delayFadingIn()
-	{
-		waitToFadeIn = true;
-	}
-		
-	public static void allowFadingIn()
-	{
-		waitToFadeIn = false;
-	}
 
     public static void setToMaxOpacity()
     {

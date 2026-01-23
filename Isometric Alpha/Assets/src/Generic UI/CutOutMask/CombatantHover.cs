@@ -45,7 +45,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
                 onReveal(insideSelectors());
             }
 
-            SelectorManager.displayHoverUIForCurrentSelectorTarget();
+            SelectorManager.displayCurrentHoverUI();
         }
 
         SelectorManager.updateAllDamagePreviews();
@@ -61,7 +61,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
         if(AbilityMenuButton.hoveringOverAbilityMenuButton)
         {
             getTargetStats().removeOutline();
-            SelectorManager.displayHoverUIForCurrentSelectorTarget();
+            SelectorManager.displayCurrentHoverUI();
         } else
         {
             onReveal(Constants.reveal);
@@ -114,7 +114,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
     {
         this.selectors = selectors;
 
-        if(revealPriorityHeld)
+        if(revealPriorityHeld || linkedStats.isRepositionClone())
         {
             return;
         }
@@ -139,9 +139,22 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     private void addDamagePreview(CombatAction combatAction)
     {
+        if(combatAction == null || combatAction.getSelector() == null)
+        {
+            return;
+        }
+
         if(revealPriorityHeld || linkedStats.isInsideCoordinates(combatAction.getSelector().getAllSelectorCoords()))
         {
             DamagePreviewManager.addDamagePreview(linkedStats, linkedStats.healthBarManager, combatAction);
+        }
+    }
+
+    private void answerCurrentCombatantPriorityRequest()
+    {
+        if(revealPriorityHeld)
+        {
+            HoverPanelPopUpButton.currentCombatantWithPriority = linkedStats;
         }
     }
 
@@ -166,12 +179,14 @@ public class CombatantHover : CombatMouseHover, IRevealable
     {
         SelectorManager.SelectorMoved.AddListener(updateOutlineFromSelectors);
         DamagePreviewManager.UpdateDamagePreviews.AddListener(addDamagePreview);
+        HoverPanelPopUpButton.HoverPriorityRequest.AddListener(answerCurrentCombatantPriorityRequest);
     }
 
 	public void destroyListeners()
     {
         SelectorManager.SelectorMoved.RemoveListener(updateOutlineFromSelectors);
         DamagePreviewManager.UpdateDamagePreviews.RemoveListener(addDamagePreview);
+        HoverPanelPopUpButton.HoverPriorityRequest.RemoveListener(answerCurrentCombatantPriorityRequest);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

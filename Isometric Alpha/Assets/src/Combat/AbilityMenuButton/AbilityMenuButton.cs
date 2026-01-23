@@ -229,7 +229,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         loadedCombatAction.getSelectorObject().SetActive(true);
 
-        SelectorManager.displayHoverUIForCurrentSelectorTarget();
+        SelectorManager.displayCurrentHoverUI();
     }
 
     private CombatAction setCombatActionSelectorStartingPosition(CombatAction action)

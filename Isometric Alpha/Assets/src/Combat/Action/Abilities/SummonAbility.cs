@@ -58,7 +58,6 @@ public class SummonAbility: Ability
 
     public override void performCombatAction()
 	{
-		EnemySpawner enemySpawner = EnemySpawner.getInstance();
 		List<EnemyStats> comboToSpawn = creaturesToSpawn.getNextCombo();
 		Selector selector = getSelector();
 		GridCoords[] targetCoords = selector.getAllSelectorCoords();
@@ -75,7 +74,7 @@ public class SummonAbility: Ability
 
 			if(comboIndex < comboToSpawn.Count)
 			{
-				enemySpawner.spawnEnemy(comboToSpawn[comboIndex], coords);
+				CreatureSpawner.spawn(comboToSpawn[comboIndex], coords);
 			} else
 			{
 				break;

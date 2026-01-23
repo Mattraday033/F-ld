@@ -23,6 +23,15 @@ public abstract class FullScreenTransition : IFadeTransition
 		FadeToBlackManager.getInstance().fadeToBlackImage.color = new Color(0f,0f,0f, frameCount/Constants.maxOpacity);
 	}
 
+    protected void setToClear()
+	{
+		FadeToBlackManager.getInstance().fadeToBlackImage.color = Color.clear;
+	}
+    protected void setToOpaque()
+	{
+		FadeToBlackManager.getInstance().fadeToBlackImage.color = Color.black;
+	}
+
 	public abstract bool isFinished();
 
     public abstract IEnumerator getCoroutine();
@@ -83,9 +92,16 @@ public class FadeToBlackTransition : FullScreenTransition
             yield return null;
         }
 		
+        setToOpaque();
+
         GC.Collect();
 
         DialogueManager.setCameraToDefaultSpeed();
+
+        if(PlayerOOCStateManager.currentActivity == OOCActivity.inDialogue)
+        {
+            yield break;
+        }
 
         yield return null;
         yield return null;
@@ -151,9 +167,7 @@ public class FadeBackInTransition : FullScreenTransition
             yield return null;
         }
 		
-		
-		frameCount = 0;
-		updateFadeToBlackImageOpacity();
+        setToClear();
         
         if(!Flags.isInNewGameMode())
         {

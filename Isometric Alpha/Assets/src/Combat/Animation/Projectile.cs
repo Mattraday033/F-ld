@@ -135,7 +135,12 @@ public class Projectile : MonoBehaviour, IAnimationTracker
     public void setTargetCoords(GridCoords targetCoords)
     {
         this.targetCoords = targetCoords.clone();
-        this.targetSnapshot = CombatGrid.getCombatantAtCoords(this.targetCoords).clone();
+        Stats target = CombatGrid.getCombatantAtCoords(this.targetCoords);
+
+        if(target != null)
+        {
+            targetSnapshot = target.clone();  
+        }
     }
 
     public void moveTo(Vector3 newPosition)

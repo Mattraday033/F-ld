@@ -40,9 +40,31 @@ public class CombatStateManager : MonoBehaviour
 	public static int turnNumber = 1;
 
 	public SelectorManager selectorManager;
+
+    #region UnityEvents
+
 	public readonly static UnityEvent OnNewTurn = new UnityEvent();
+    public readonly static UnityEvent OnTurnChangeToPlayer = new UnityEvent();
+    public readonly static UnityEvent OnTurnChangeToResolving = new UnityEvent();
+    public readonly static UnityEvent OnTurnChangeToWon = new UnityEvent();
+    public readonly static UnityEvent OnTurnChangeToLost = new UnityEvent();
+
+    public readonly static UnityEvent OnActivityChangeToWaiting = new UnityEvent();
+    public readonly static UnityEvent OnActivityChangeTo = new UnityEvent();
+    public readonly static UnityEvent OnActivityChangeToChoosingActor = new UnityEvent();
+    public readonly static UnityEvent OnActivityChangeToChoosingAbility = new UnityEvent();
+    public readonly static UnityEvent OnActivityChangeToChoosingLocation = new UnityEvent();
+    public readonly static UnityEvent OnActivityChangeToChoosingTertiary = new UnityEvent();
+    public readonly static UnityEvent OnActivityChangeToRepositioning = new UnityEvent();
+    public readonly static UnityEvent OnActivityChangeToTutorial = new UnityEvent();
+    public readonly static UnityEvent OnActivityChangeToRetreating = new UnityEvent();
+    public readonly static UnityEvent OnActivityChangeToFinished = new UnityEvent();
+
+
 	public readonly static UnityEvent OnCombatStart = new UnityEvent();
 	public readonly static UnityEvent OnCombatEnd = new UnityEvent();
+
+    #endregion
 
 	public CombatActionManager combatActionManager;
 
@@ -54,10 +76,6 @@ public class CombatStateManager : MonoBehaviour
 
     public Transform creatureParent;
     public Grid creatureGrid;
-
-    public EnemySpawner enemySpawner;
-	public PartySpawner partySpawner;
-	public SummonSpawner summonSpawner;
 
 	public Ticker ticker;
 
@@ -104,16 +122,19 @@ public class CombatStateManager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-
 		updateTurnState(WhoseTurn.Start);
 
 		CombatGrid.cleanCombatGrid();
 		CombatActionManager.wipeLockedInCombatActionQueue();
 		CombatActionManager.wipeAllCombatActions();
 
-		enemySpawner.spawn();
-		partySpawner.spawnFormation();
-		summonSpawner.spawn();
+        CreatureSpawner.spawnFormation();
+        CreatureSpawner.spawnEnemyPackInfo();
+        CreatureSpawner.spawnAllyPackInfo();
+
+		// enemySpawner.spawn();
+		// partySpawner.spawnFormation();
+		// summonSpawner.spawn();
 
 		ticker = Ticker.getInstance();
 
@@ -149,7 +170,7 @@ public class CombatStateManager : MonoBehaviour
 		CombatUI.setCurrentActivityText(currentActivity);
         OnNewTurn.Invoke();
 
-		CombatHoverManager.instantiateCombatHovers();
+		// CombatHoverManager.instantiateCombatHovers();
 
 		if (getCombatTutorialKey() != null)
 		{
@@ -209,10 +230,12 @@ public class CombatStateManager : MonoBehaviour
 	private IEnumerator waitOneFrameThenSpawnHoverUI()
 	{
 		yield return null;
+		yield return null;
+		yield return null;
 
 		Helpers.updateGameObjectPosition(PartyManager.getPlayerStats().combatSprite);
 
-		SelectorManager.displayHoverUIForCurrentSelectorTarget();
+		SelectorManager.displayCurrentHoverUI();
 	}
 
 	public void updateAllObjectsAfterStateChange()
@@ -261,7 +284,7 @@ public class CombatStateManager : MonoBehaviour
 
 		PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
 
-		SelectorManager.displayHoverUIForCurrentSelectorTarget();
+		SelectorManager.displayCurrentHoverUI();
 
 		DamagePreviewManager.wipeAllDamagePreviews();
 
@@ -285,10 +308,31 @@ public class CombatStateManager : MonoBehaviour
 			getInstance() != null && getInstance().ticker != null)
 		{
 			getInstance().ticker.tickDownEverything();
-			SelectorManager.displayHoverUIForCurrentSelectorTarget();
+			SelectorManager.displayCurrentHoverUI();
 		}
 
 		whoseTurn = wT;
+
+        switch(wT)
+        {
+            case WhoseTurn.Start:
+                break;
+            case WhoseTurn.Player:
+                OnTurnChangeToPlayer.Invoke();
+                break;
+            case WhoseTurn.Resolving:
+                OnTurnChangeToResolving.Invoke();
+                break;
+            case WhoseTurn.Won:
+                OnTurnChangeToWon.Invoke();
+                break;
+            case WhoseTurn.Lost:
+                OnTurnChangeToLost.Invoke();
+                break;
+            default:
+                Debug.LogError("Unknown WhoseTurn State: " + wT.ToString());
+                break;
+        }
 
 		// Debug.LogError("whoseTurn = " + whoseTurn.ToString());
 
@@ -366,9 +410,43 @@ public class CombatStateManager : MonoBehaviour
 		}
 	}
 
-	public static void setCurrentActivity(CurrentActivity currentActivity)
+	public static void setCurrentActivity(CurrentActivity newActivity)
 	{
-		CombatStateManager.currentActivity = currentActivity;
+		currentActivity = newActivity;
+
+        switch(newActivity)
+        {
+            case CurrentActivity.Waiting:
+                OnActivityChangeToWaiting.Invoke();
+                break;
+            case CurrentActivity.ChoosingActor:
+                OnActivityChangeToChoosingActor.Invoke();
+                break;
+            case CurrentActivity.ChoosingAbility:
+                OnActivityChangeToChoosingAbility.Invoke();
+                break;
+            case CurrentActivity.ChoosingLocation:
+                OnActivityChangeToChoosingLocation.Invoke();
+                break;
+            case CurrentActivity.ChoosingTertiary:
+                OnActivityChangeToChoosingTertiary.Invoke();
+                break;
+            case CurrentActivity.Repositioning:
+                OnActivityChangeToRepositioning.Invoke();
+                break;
+            case CurrentActivity.Tutorial:
+                OnActivityChangeToTutorial.Invoke();
+                break;
+            case CurrentActivity.Retreating:
+                OnActivityChangeToRetreating.Invoke();
+                break;
+            case CurrentActivity.Finished:
+                OnActivityChangeToFinished.Invoke();
+                break;
+            default:
+                Debug.LogError("Unknown CurrentActivity State: " + newActivity.ToString());
+                break;
+        }
 
 		if (!stateAllowsDamagePreviews())
 		{
@@ -381,7 +459,7 @@ public class CombatStateManager : MonoBehaviour
 
 		RetreatUIManager.setRetreatButtonInteractibility();
 
-		if (CombatStateManager.currentActivity == CurrentActivity.ChoosingActor)
+		if (currentActivity == CurrentActivity.ChoosingActor)
 		{
 			SelectorManager.createPressEPrompt();
 			CurrentActionHoverPanelManager.removeCurrentPrimaryDescribable();	
@@ -561,17 +639,20 @@ public class CombatStateManager : MonoBehaviour
 
 	public static bool snappingToTargetDuringReposition()
 	{
-		return ((currentActivity != CurrentActivity.Repositioning && CombatStateManager.currentActivity != CurrentActivity.ChoosingTertiary) || (currentActivity == CurrentActivity.Repositioning && RepositionManager.currentRepositionActivity == CurrentRepositionActivity.ChoosingRepositionTarget));
+		return (currentActivity != CurrentActivity.Repositioning && CombatStateManager.currentActivity != CurrentActivity.ChoosingTertiary) ||
+               (currentActivity == CurrentActivity.Repositioning && RepositionManager.currentRepositionActivity == CurrentRepositionActivity.ChoosingRepositionTarget);
 	}
 
 	public static bool choosingRepositionTarget()
 	{
-		return (currentActivity == CurrentActivity.Repositioning && RepositionManager.currentRepositionActivity == CurrentRepositionActivity.ChoosingRepositionTarget);
+		return currentActivity == CurrentActivity.Repositioning && 
+                RepositionManager.currentRepositionActivity == CurrentRepositionActivity.ChoosingRepositionTarget;
 	}
 
 	public static bool findingEmptySpaceForReposition()
 	{
-		return (currentActivity == CurrentActivity.Repositioning && RepositionManager.currentRepositionActivity == CurrentRepositionActivity.ChoosingNewLocation);
+		return currentActivity == CurrentActivity.Repositioning && 
+                RepositionManager.currentRepositionActivity == CurrentRepositionActivity.ChoosingNewLocation;
 	}
 
 	private static void resetAllQueuedSummonLocations()

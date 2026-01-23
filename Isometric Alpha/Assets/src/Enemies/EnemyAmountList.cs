@@ -4,80 +4,75 @@ using UnityEngine;
 
 public static class EnemyAmountList
 {
-    private const int oneEnemy = 1;
-    private const int twoEnemies = 2;
-    private const int threeEnemies = 3;
-    private const int fourEnemies = 4;
-
     #region Named NPCs
-    public readonly static EnemyAmount guardVazul = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.guardVazul));
-    public readonly static EnemyAmount guardAndras = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.guardAndras));
-    public readonly static EnemyAmount imre = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.imre));
+    public readonly static CreatureAmount guardVazul = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.guardVazul));
+    public readonly static CreatureAmount guardAndras = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.guardAndras));
+    public readonly static CreatureAmount imre = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.imre));
 
-    public readonly static EnemyAmount barricade = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.barricade));
+    public readonly static CreatureAmount barricade = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.barricade));
 
-    public readonly static EnemyAmount guardReka = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.guardReka));
-    public readonly static EnemyAmount guardPazman = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.guardPazman));
-    public readonly static EnemyAmount guardVirag = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.guardVirag));
-    public readonly static EnemyAmount overseerGaspar = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(NPCNameList.overseerGaspar));
+    public readonly static CreatureAmount guardReka = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.guardReka));
+    public readonly static CreatureAmount guardPazman = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.guardPazman));
+    public readonly static CreatureAmount guardVirag = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.guardVirag));
+    public readonly static CreatureAmount overseerGaspar = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.overseerGaspar));
 
     #endregion
 
     #region Lovashi Guards
-    public readonly static EnemyAmount oneAxeman = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.axeman));
-    public readonly static EnemyAmount twoAxemen = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.axeman));
+    public readonly static CreatureAmount oneAxeman = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.axeman));
+    public readonly static CreatureAmount twoAxemen = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.axeman));
 
-    public readonly static EnemyAmount oneDisciplinarian = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.disciplinarian));
-    public readonly static EnemyAmount twoDisciplinarians = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.disciplinarian));
+    public readonly static CreatureAmount oneDisciplinarian = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.disciplinarian));
+    public readonly static CreatureAmount twoDisciplinarians = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.disciplinarian));
 
-    public readonly static EnemyAmount oneExecutioner = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.executioner));
-    public readonly static EnemyAmount twoExecutioners = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.executioner));
+    public readonly static CreatureAmount oneExecutioner = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.executioner));
+    public readonly static CreatureAmount twoExecutioners = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.executioner));
 
-    public readonly static EnemyAmount oneJavelineer = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
-    public readonly static EnemyAmount twoJavelineers = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
-    public readonly static EnemyAmount threeJavelineers = new EnemyAmount(threeEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
+    public readonly static CreatureAmount oneJavelineer = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
+    public readonly static CreatureAmount twoJavelineers = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
+    public readonly static CreatureAmount threeJavelineers = new CreatureAmount(Constants.threeCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
 
-    public readonly static EnemyAmount oneLancer = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.lancer));
-    public readonly static EnemyAmount twoLancers = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.lancer));
+    public readonly static CreatureAmount oneLancer = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.lancer));
+    public readonly static CreatureAmount twoLancers = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.lancer));
 
-    public readonly static EnemyAmount oneLieutenant = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.lieutenant));
-    public readonly static EnemyAmount twoLieutenants = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.lieutenant));
+    public readonly static CreatureAmount oneLieutenant = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.lieutenant));
+    public readonly static CreatureAmount twoLieutenants = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.lieutenant));
 
-    public readonly static EnemyAmount oneLineBreaker = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.lineBreaker));
-    public readonly static EnemyAmount twoLineBreakers = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.lineBreaker));
+    public readonly static CreatureAmount oneLineBreaker = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.lineBreaker));
+    public readonly static CreatureAmount twoLineBreakers = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.lineBreaker));
 
 
-    public readonly static EnemyAmount oneSignaleer = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.signaleer));
-    public readonly static EnemyAmount twoSignaleers = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.signaleer));
+    public readonly static CreatureAmount oneSignaleer = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.signaleer));
+    public readonly static CreatureAmount twoSignaleers = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.signaleer));
 
-    public readonly static EnemyAmount oneSpearman = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.spearman));
-    public readonly static EnemyAmount twoSpearmen = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.spearman));
+    public readonly static CreatureAmount oneSpearman = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.spearman));
+    public readonly static CreatureAmount twoSpearmen = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.spearman));
 
     #endregion
 
     #region Bats
-    public readonly static EnemyAmount oneBatSwarm = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.batSwarm));
-    public readonly static EnemyAmount twoBatSwarms = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.batSwarm));
-    public readonly static EnemyAmount threeBatSwarms = new EnemyAmount(threeEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.batSwarm));
-    public readonly static EnemyAmount fourBatSwarms = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.batSwarm));
-    public readonly static EnemyAmount fiveBatSwarms = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.batSwarm));
+    public readonly static CreatureAmount oneBatSwarm = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.batSwarm));
+    public readonly static CreatureAmount twoBatSwarms = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.batSwarm));
+    public readonly static CreatureAmount threeBatSwarms = new CreatureAmount(Constants.threeCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.batSwarm));
+    public readonly static CreatureAmount fourBatSwarms = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.batSwarm));
+    public readonly static CreatureAmount fiveBatSwarms = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.batSwarm));
 
-    public readonly static EnemyAmount oneGiantBat = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.giantBat));
-    public readonly static EnemyAmount twoGiantBats = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.giantBat));
-    public readonly static EnemyAmount threeGiantBats = new EnemyAmount(threeEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.giantBat));
+    public readonly static CreatureAmount oneGiantBat = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.giantBat));
+    public readonly static CreatureAmount twoGiantBats = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.giantBat));
+    public readonly static CreatureAmount threeGiantBats = new CreatureAmount(Constants.threeCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.giantBat));
 
-    public readonly static EnemyAmount oneScreecherBat = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.screecher));
+    public readonly static CreatureAmount oneScreecherBat = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.screecher));
 
-    public readonly static EnemyAmount oneArmoredBat = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.armoredBat));
-    public readonly static EnemyAmount twoArmoredBats = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.armoredBat));
+    public readonly static CreatureAmount oneArmoredBat = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.armoredBat));
+    public readonly static CreatureAmount twoArmoredBats = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.armoredBat));
 
-    public readonly static EnemyAmount oneArmoredBatShielded = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.armoredBatShielded));
+    public readonly static CreatureAmount oneArmoredBatShielded = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.armoredBatShielded));
 
-    public readonly static EnemyAmount oneDenMother = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.denMother));
-    public readonly static EnemyAmount twoDenMothers = new EnemyAmount(twoEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.denMother));
-    public readonly static EnemyAmount threeDenMothers = new EnemyAmount(threeEnemies, EnemyStatsList.getEnemyStats(MonsterNameList.denMother));
+    public readonly static CreatureAmount oneDenMother = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.denMother));
+    public readonly static CreatureAmount twoDenMothers = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.denMother));
+    public readonly static CreatureAmount threeDenMothers = new CreatureAmount(Constants.threeCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.denMother));
 
-    public readonly static EnemyAmount caveMatron = new EnemyAmount(oneEnemy, EnemyStatsList.getEnemyStats(MonsterNameList.caveMatron));
+    public readonly static CreatureAmount caveMatron = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.caveMatron));
 
     #endregion
 }

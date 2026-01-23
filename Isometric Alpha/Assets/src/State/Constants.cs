@@ -86,6 +86,47 @@ public static class Constants
     public const int resistanceBonusPerTier = 3;
 
 	public const float maxOpacity = 255f;
+
+    #region Creature Amounts
+    public const int oneCreature = 1;
+    public const int twoCreatures = 2;
+    public const int threeCreatures = 3;
+    public const int fourCreatures = 4;
+    #endregion
+
+    #region Creature Armor Values
+
+    public const int zeroArmor = 0;
+    public const int fiveArmor = 5;
+    public const int tenArmor = 10;
+    public const int fifteenArmor = 15;
+    public const int twentyArmor = 20;
+    public const int twentyFiveArmor = 25;
+    public const int thirtyArmor = 30;
+    public const int thirtyFiveArmor = 35;
+    public const int fortyArmor = 40;
+    public const int fortyFiveArmor = 45;
+    public const int fiftyArmor = 50;
+    public const int fiftyFiveArmor = 55;
+    public const int sixtyArmor = 60;
+    public const int sixtyFiveArmor = 65;
+    public const int seventyArmor = 70;
+    public const int seventyFiveArmor = 75;
+    public const int eightyArmor = 80;
+    public const int eightyFiveArmor = 85;
+    public const int ninetyArmor = 90;
+    public const int ninetyFiveArmor = 95;
+    public const int oneHundredArmor = 100;
+    public const int oneHundredFiveArmor = 105;
+    public const int oneHundredTenArmor = 110;
+    public const int oneHundredFifteenArmor = 115;
+    public const int oneHundredTwentyArmor = 120;
+    public const int oneHundredTwentyFiveArmor = 125;
+    public const int oneHundredThirtyArmor = 130;
+    public const int oneHundredThirtyFiveArmor = 135;
+    public const int oneHundredFortyArmor = 140;
+
+    #endregion
 }
 
 public static class StatDifficultyList

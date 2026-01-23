@@ -154,7 +154,7 @@ public class PartyPositionSpriteGridSquare : PartyPositionGridSquare, IPointerDo
             }
             else
             {
-                if (partyEditor.getFormation().findLocationOfStats(statsBeingDragged).Equals(new GridCoords(row, col)))
+                if (Formation.findLocationOfStats(statsBeingDragged).Equals(new GridCoords(row, col)))
                 {
                     populate(statsBeingDragged);
                 }

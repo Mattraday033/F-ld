@@ -232,6 +232,11 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         return EnemyPackInfoList.getEnemyPackInfo(AreaManager.locationName, monsterPackIndex);
     }
 
+    public AllyPackInfo getAllyPackInfo()
+    {
+        return AllyPackInfoList.getAllyPackInfo(AreaManager.locationName, monsterPackIndex);
+    }
+
     public virtual SpriteRenderer getSpriteRenderer()
     {
         return animationManager.spriteRenderer;
@@ -285,6 +290,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
         SpawnInfoManager.lastSaveBlueprint = SaveHandler.save("Before Combat", skipFileCreation);
         State.enemyPackInfo = getEnemyPackInfo();
+        State.allyPackInfo = getAllyPackInfo();
         CombatStateManager.currentDefeatKey = AreaManager.locationName + "-" + monsterPackIndex;
         CombatStateManager.locationBeforeCombat = AreaManager.locationName;
         CombatStateManager.retreatedFromIndex = monsterPackIndex;
@@ -727,7 +733,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     {
         EnemyPackInfo enemyPackInfo = getEnemyPackInfo();
 
-        animationManager.setAnimations(enemyPackInfo.enemyTypes[0].enemyStats.getName());
+        animationManager.setAnimations(enemyPackInfo.creatureTypes[0].enemyStats.getName());
 
         updateIdleDirection();
     }

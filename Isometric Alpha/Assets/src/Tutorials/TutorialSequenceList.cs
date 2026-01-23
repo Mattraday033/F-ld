@@ -445,7 +445,7 @@ public static class TutorialSequenceList
         }
 
         combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 5, topThirdOfCombatUITargetHash, noScript, new SelectCurrentActor(), combatTutorialStepFiveAndSevenAdditionalScripts, ArrowDirection.Center, new KeyCode[] { KeyCode.E }, createPopUpScreenBlocker));
-        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 6, combatActionWheelTargetHash, noScript, new AbilityWheelChooseAbility(), combatTutorialStepFourteenAdditionalScripts, ArrowDirection.Right, new KeyCode[] { KeyCode.E }, createPopUpScreenBlocker));
+        combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 6, combatActionWheelTargetHash, noScript, new AbilityWheelChooseAbility(), combatTutorialStepFourteenAdditionalScripts, ArrowDirection.BottomRight, new KeyCode[] { KeyCode.E }, createPopUpScreenBlocker));
         combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 7, topThirdOfCombatUITargetHash, new DestroyHoverPanel(), new SelectTarget(), combatTutorialStepFiveAndSevenAdditionalScripts, ArrowDirection.Center, new KeyCode[] { KeyCode.E }, createPopUpScreenBlocker));
 
         combatTutorialSteps = getFinalCombatTutorialSteps(combatTutorialSteps);

@@ -259,6 +259,7 @@ public static class FlagNameList
         public const string mineLvl3RefusedToFightGaspar = "mineLvl3RefusedToFightGaspar";
         public const string mineLvl3DealtWithGaspar = "mineLvl3DealtWithGaspar"; //if you've killed gaspar and co after sealing the breach 
         public const string mineLvl3ToldPazmanToEatShit = "mineLvl3ToldPazmanToEatShit";
+        public const string mineLvl3InRubbleConversation = "mineLvl3InRubbleConversation";
         public const string mineLvl3GuardsBackToSurface = "mineLvl3GuardsBackToSurface";
         public const string mineLvl3SlavesBackToSurface = "mineLvl3SlavesBackToSurface";
         public const string mineLvl3ToldToFindMarcos = "mineLvl3ToldToFindMarcos";

@@ -8,7 +8,7 @@ public class SpawnHoverPanel : TutorialSequenceStepScript
     public override void runScript(GameObject target)
     {
 
-        SelectorManager.displayHoverUIForCurrentSelectorTarget();
+        SelectorManager.displayCurrentHoverUI();
 
         Canvas.ForceUpdateCanvases();
     }

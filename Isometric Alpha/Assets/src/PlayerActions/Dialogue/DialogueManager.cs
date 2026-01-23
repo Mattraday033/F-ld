@@ -257,8 +257,6 @@ public class DialogueManager : MonoBehaviour
 			RevealManager.toggleReveal();
 		}
 
-        FadeToBlackManager.allowFadingIn();
-
 		SpeechLog.appendConversation(currentConversation);
 		dialogueTrackerButton.destroyPopUp();
 		dialogueTrackerWindow = null;
@@ -759,8 +757,6 @@ public class DialogueManager : MonoBehaviour
 
                     fadeToBlackManager.setAndStartFadeToBlack();
                     waitingOnFadeToBlack = true;
-
-                    FadeToBlackManager.delayFadingIn();
 
                     StartCoroutine(handleDialogueUIDuringFadeOut(setDialogueUIActiveAfterFadeIn, continueAfterTransparent));
 
@@ -1467,7 +1463,6 @@ public class DialogueManager : MonoBehaviour
 
 		yield return new WaitUntil(() => frames >= framesToWait);
 
-		FadeToBlackManager.allowFadingIn();
 		fadeToBlackManager.setAndStartFadeBackIn();
 		waitingOnFadeBackIn = true;
 

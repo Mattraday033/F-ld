@@ -355,7 +355,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
             partyMemberStats.placed = partyMember.placed;
 
 			partyMemberStats.partyMemberPlacedPosition = partyMember.placedPosition.x + "_" + partyMember.placedPosition.y + "_" + partyMember.placedPosition.z;
-			partyMemberStats.partyMemberFormationCoords = State.formation.findLocationOfStats(partyMember.stats);
+			partyMemberStats.partyMemberFormationCoords = Formation.findLocationOfStats(partyMember.stats);
 
             partyMemberStats.currentEquipment = convertToJson(partyMember.stats.getEquippedItems().equippedItems);
             partyMemberStats.combatActions = convertToJson(partyMember.stats.getActionArray().getActions());

@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public struct EnemyAmount
+public struct CreatureAmount
 {
     public int amount;
-    public EnemyStats enemyStats;
+    public Stats enemyStats;
 
-    public EnemyAmount(int amount, EnemyStats enemyStats)
+    public CreatureAmount(int amount, Stats enemyStats)
     {
         this.amount = amount;
 
@@ -18,14 +18,12 @@ public struct EnemyAmount
 }
 
 //info about a pack of enemies on the overworld, such as how many of them there are and of what type. Stored in State
-public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
+public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks, ICreatureSpawnPackage
 {
-
-    protected string[] flagsToCheckForAllies;
 
     public string tutorialSequenceKey;
 
-    public EnemyAmount[] enemyTypes;
+    public CreatureAmount[] creatureTypes;
 
     public string dropTableName;
 
@@ -36,38 +34,29 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
     public int numberOfDrops = 1; //number of rolls on their drop table
 
 
-    public EnemyPackInfo(EnemyAmount[] enemyTypes, string dropTableName)
+    public EnemyPackInfo(CreatureAmount[] creatureTypes, string dropTableName)
     {
-        this.enemyTypes = enemyTypes;
+        this.creatureTypes = creatureTypes;
 
         this.dropTableName = dropTableName;
     }
 
-    public EnemyPackInfo(EnemyAmount[] enemyTypes, string dropTableName, string tutorialSequenceKey)
+    public EnemyPackInfo(CreatureAmount[] creatureTypes, string dropTableName, string tutorialSequenceKey)
     {
-        this.enemyTypes = enemyTypes;
+        this.creatureTypes = creatureTypes;
 
         this.dropTableName = dropTableName;
 
         this.tutorialSequenceKey = tutorialSequenceKey;
     }
 
-    public EnemyPackInfo(EnemyAmount[] enemyTypes, string dropTableName, ItemListID[] guaranteedDrops)
+    public EnemyPackInfo(CreatureAmount[] creatureTypes, string dropTableName, ItemListID[] guaranteedDrops)
     {
-        this.enemyTypes = enemyTypes;
+        this.creatureTypes = creatureTypes;
 
         this.dropTableName = dropTableName;
 
         this.guaranteedDrops = guaranteedDrops;
-    }
-
-    public EnemyPackInfo(EnemyAmount[] enemyTypes, string[] flagsToCheckForAllies, string dropTableName)
-    {
-        this.enemyTypes = enemyTypes;
-
-        this.flagsToCheckForAllies = flagsToCheckForAllies;
-
-        this.dropTableName = dropTableName;
     }
 
     public virtual string getQuestStep()
@@ -86,6 +75,11 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
         return 0;
     }
 
+    public virtual bool hasCreaturesToSpawn()
+    {
+        return true;
+    }
+
     public virtual bool isBossMonster()
     {
         return false;
@@ -98,7 +92,7 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
 
     public string getPackName()
     {
-        return MonsterNameList.getPackName(enemyTypes[Constants.indexZero].enemyStats.getName());
+        return MonsterNameList.getPackName(creatureTypes[Constants.indexZero].enemyStats.getName());
     }
 
     public virtual void markBossAsKilled()
@@ -108,46 +102,7 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
 
     public int determineEnemyCount(int index)
     {
-        return enemyTypes[index].amount;
-    }
-
-    public bool hasSummonsToSpawn()
-    {
-
-        if (flagsToCheckForAllies == null || flagsToCheckForAllies is null || flagsToCheckForAllies.Length == 0)
-        {
-            return false;
-        }
-
-        foreach (string flag in flagsToCheckForAllies)
-        {
-            if (flag == null || flag is null || flag.Length == 0)
-            {
-                continue;
-            }
-            else
-            {
-                if (Flags.getFlag(flag))
-                {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    public string getAllyGroupingKey()
-    {
-        for (int keyIndex = 0; keyIndex < flagsToCheckForAllies.Length; keyIndex++)
-        {
-            if (Flags.getFlag(flagsToCheckForAllies[keyIndex]))
-            {
-                return flagsToCheckForAllies[keyIndex];
-            }
-        }
-
-        throw new IOException("No key to use");
+        return creatureTypes[index].amount;
     }
 
 
@@ -157,15 +112,39 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks
         return "";
     }
 
+    public virtual IEnumerator GetEnumerator()
+    {
+        List<Stats> allStatsInPack = new List<Stats>();
+
+        //CreatureAmount[] creatureTypes
+        foreach (CreatureAmount amount in creatureTypes)
+        {
+            for(int index = 0; index < amount.amount; index++)
+            {
+                allStatsInPack.Add(amount.enemyStats);
+            }
+        }
+
+        foreach (Stats stats in allStatsInPack)
+        {
+            if(stats == null)
+            {
+                continue;
+            }
+
+            yield return stats.clone();
+        }
+    }
+
     public List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
     {
         List<DescriptionPanelBuildingBlock> blocks = new List<DescriptionPanelBuildingBlock>();
 
-        for (int enemyIndex = 0; enemyIndex < enemyTypes.Length; enemyIndex++)
+        for (int enemyIndex = 0; enemyIndex < creatureTypes.Length; enemyIndex++)
         {
-            string enemyNumber = enemyTypes[enemyIndex].amount.ToString();
+            string enemyNumber = creatureTypes[enemyIndex].amount.ToString();
 
-            blocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, enemyNumber + "   " + enemyTypes[enemyIndex].enemyStats.getName()));
+            blocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, enemyNumber + "   " + creatureTypes[enemyIndex].enemyStats.getName()));
         }
 
         return blocks;
@@ -184,19 +163,19 @@ public class BossPackInfo : EnemyPackInfo
 
     public QuestStepActivationScript script;
 
-    public BossPackInfo(EnemyAmount[] enemyTypes, string dropTableName, string killFlagKey):
-    base(enemyTypes, dropTableName)
+    public BossPackInfo(CreatureAmount[] creatureTypes, string dropTableName, string killFlagKey):
+    base(creatureTypes, dropTableName)
     {
-        this.enemyTypes = enemyTypes;
+        this.creatureTypes = creatureTypes;
 
         this.dropTableName = dropTableName;
         this.killFlagKey = killFlagKey;
     }
 
-    public BossPackInfo(EnemyAmount[] enemyTypes, string dropTableName, string killFlagKey, string dialogueUponSceneLoadKey):
-    base(enemyTypes, dropTableName)
+    public BossPackInfo(CreatureAmount[] creatureTypes, string dropTableName, string killFlagKey, string dialogueUponSceneLoadKey):
+    base(creatureTypes, dropTableName)
     {
-        this.enemyTypes = enemyTypes;
+        this.creatureTypes = creatureTypes;
 
         this.dropTableName = dropTableName;
         this.killFlagKey = killFlagKey;
@@ -204,31 +183,19 @@ public class BossPackInfo : EnemyPackInfo
         this.dialogueUponSceneLoadKey = dialogueUponSceneLoadKey;
     }
 
-    public BossPackInfo(EnemyAmount[] enemyTypes, string dropTableName, ItemListID[] guaranteedDrops, string killFlagKey):
-    base(enemyTypes, dropTableName, guaranteedDrops)
+    public BossPackInfo(CreatureAmount[] creatureTypes, string dropTableName, ItemListID[] guaranteedDrops, string killFlagKey):
+    base(creatureTypes, dropTableName, guaranteedDrops)
     {
-        this.enemyTypes = enemyTypes;
+        this.creatureTypes = creatureTypes;
 
         this.dropTableName = dropTableName;
         this.killFlagKey = killFlagKey;
     }
 
-    public BossPackInfo(EnemyAmount[] enemyTypes, string dropTableName, string killFlagKey, QuestStepActivationScript script):
-    base(enemyTypes, dropTableName)
+    public BossPackInfo(CreatureAmount[] creatureTypes, string dropTableName, string killFlagKey, QuestStepActivationScript script):
+    base(creatureTypes, dropTableName)
     {
-        this.enemyTypes = enemyTypes;
-
-        this.dropTableName = dropTableName;
-
-        this.killFlagKey = killFlagKey;
-
-        this.script = script;
-    }
-
-    public BossPackInfo(EnemyAmount[] enemyTypes, string dropTableName, ItemListID[] guaranteedDrops, string killFlagKey, QuestStepActivationScript script):
-    base(enemyTypes, dropTableName, guaranteedDrops)
-    {
-        this.enemyTypes = enemyTypes;
+        this.creatureTypes = creatureTypes;
 
         this.dropTableName = dropTableName;
 
@@ -237,12 +204,22 @@ public class BossPackInfo : EnemyPackInfo
         this.script = script;
     }
 
-    public BossPackInfo(EnemyAmount[] enemyTypes, string[] flagsToCheckForAllies, string dropTableName, QuestStepActivationScript script):
-    base(enemyTypes, flagsToCheckForAllies, dropTableName)
+    public BossPackInfo(CreatureAmount[] creatureTypes, string dropTableName, ItemListID[] guaranteedDrops, string killFlagKey, QuestStepActivationScript script):
+    base(creatureTypes, dropTableName, guaranteedDrops)
     {
-        this.enemyTypes = enemyTypes;
+        this.creatureTypes = creatureTypes;
 
-        this.flagsToCheckForAllies = flagsToCheckForAllies;
+        this.dropTableName = dropTableName;
+
+        this.killFlagKey = killFlagKey;
+
+        this.script = script;
+    }
+
+    public BossPackInfo(CreatureAmount[] creatureTypes, string dropTableName, QuestStepActivationScript script):
+    base(creatureTypes, dropTableName)
+    {
+        this.creatureTypes = creatureTypes;
 
         this.dropTableName = dropTableName;
 

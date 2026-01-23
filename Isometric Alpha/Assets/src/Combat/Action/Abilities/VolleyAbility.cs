@@ -181,7 +181,7 @@ public class VolleyAbility : Ability
 		
 		allActors = new Stats[0];
 		
-		foreach(SummonStats summon in allSummonActors)
+		foreach(AlliedSummonStats summon in allSummonActors)
 		{
 			if(summon.isPartOfVolley())
 			{
@@ -233,7 +233,7 @@ public class VolleyAbility : Ability
 			allSummonActors = CombatGrid.getAllAliveSummonedEnemies();
 		}
 
-		foreach (SummonStats summon in allSummonActors)
+		foreach (AlliedSummonStats summon in allSummonActors)
 		{
 			if (summon.isPartOfVolley())
 			{

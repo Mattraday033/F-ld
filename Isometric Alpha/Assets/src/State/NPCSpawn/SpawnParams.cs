@@ -128,12 +128,27 @@ public class InteractableSpawnParams : SpawnParams
             return doNotSpawn;
         }
 
-        if (!startSpawningFlagList.evaluateFlags())
+        if (stopSpawningFlagList.evaluateFlags())
         {
             return doNotSpawn;
         }
 
-        if (stopSpawningFlagList.evaluateFlags())
+/*
+    public virtual void checkGateStatus()
+    {
+        if (GateAndChestManager.hasBeenOpened(getGateKey()))
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    public string getGateKey()
+    {
+        return AreaManager.locationName+gateKey;
+    }
+*/
+
+        if(GateAndChestManager.hasBeenOpened(AreaManager.locationName+npcName))
         {
             return doNotSpawn;
         }

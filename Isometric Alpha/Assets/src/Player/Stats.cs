@@ -139,19 +139,19 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         healthBarManager = list.healthBarManager;
         updateHealthBar();
 
-        animationManager = list.animationManager;
-        animationManager.healthBarManager = healthBarManager;
-        animationManager.setAnimations(getName());
+        list.combatantHover.linkedStats = this;
 
         spriteRenderer = list.spriteRenderer;
 
         outline = new SpriteOutline();
         outline.setSpriteRenderer(spriteRenderer);
 
+        animationManager = list.animationManager;
+        animationManager.healthBarManager = healthBarManager;
+        animationManager.setAnimations(getName());
+
         tutorialTarget = list.tutorialTarget;
         tutorialTarget.tutorialHash = getTutorialTargetHash();
-
-        list.combatantHover.linkedStats = this;
 
         foreach(Trait trait in traits)
         {
@@ -177,6 +177,16 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     public virtual void destroyCombatSprite()
     {
         Destroy(combatSprite);
+    }
+
+    public void playSpawnAnimation()
+    {
+        animationManager.playSpawnAnimation();
+    }
+
+    public void instateEnvironmentalCombatAction()
+    {
+        // EnvironmentalCombatActionManager.getInstance().instateEnvironmentalCombatAction(environmentalCombatActionKey, environmentalTargetingTraitKey, CombatGrid.getCombatantAtCoords(position));
     }
 
     public virtual void removeFromGrid()
@@ -462,6 +472,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     public bool queuedToMove()
     {
         return repositionClone != null;
+    }
+
+    public bool isRepositionClone()
+    {
+        return Helpers.hasQuality<Trait>(traits, t => t.Equals(TraitList.repositioningInvulnerability));
     }
 
     public virtual bool isPriorityAttacker()
@@ -1002,6 +1017,16 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return Helpers.hasQuality<Trait>(traits, (t => t.isDebuff()));
     } 
 
+    public bool isFrontline()
+    {
+        return Helpers.hasQuality<Trait>(traits, t => t.Equals(TraitList.frontLine));
+    } 
+
+    public bool isBackline()
+    {
+        return Helpers.hasQuality<Trait>(traits, t => t.Equals(TraitList.backLine));
+    } 
+
     #region Zone of Influence
 
     public virtual ZoneOfInfluenceTrait getZoneOfInfluenceTrait()
@@ -1074,7 +1099,25 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     #region Miscellaneous
 
-    public abstract IDescribable getHoverPanelDescribable();
+    public abstract GridCoords findLocationToSpawn();
+
+    public override bool Equals(object obj)
+    {
+        Stats stats = obj as Stats;
+
+        if (stats == null)
+        {
+            return false;
+        }
+
+        if(CombatStateManager.inCombat)
+        {
+            return stats.position.Equals(position) && stats.getName().Equals(getName());
+        } else
+        {
+            return stats.getName().Equals(getName());
+        }
+    }
 
     public virtual bool removableFromFormation()
     {
@@ -1164,12 +1207,12 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     #region IDescribable
 
-    public string getName()
+    public virtual string getName()
     {
         return characterName;
     }
 
-    public bool ineligible()
+    public virtual bool ineligible()
     {
         return false;
     }
@@ -1179,12 +1222,12 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return null;
     }
 
-    public GameObject getDescriptionPanelFull()
+    public virtual GameObject getDescriptionPanelFull()
     {
         return getDescriptionPanelFull(PanelType.Standard);
     }
 
-    public GameObject getDescriptionPanelFull(PanelType type)
+    public virtual GameObject getDescriptionPanelFull(PanelType type)
     {
         string panelName = "";
 
@@ -1200,12 +1243,12 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return Resources.Load<GameObject>(panelName);
     }
 
-    public GameObject getDecisionPanel()
+    public virtual GameObject getDecisionPanel()
     {
         return null;
     }
 
-    public bool withinFilter(string[] filterParameters)
+    public virtual bool withinFilter(string[] filterParameters)
     {
         return true;
     }
@@ -1217,36 +1260,29 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         DescriptionPanel.setText(panel.nameText, getName().Replace(PartyManager.playerMarker, ""));
         DescriptionPanel.setText(panel.hpText, currentHealth + " / " + getTotalHealth());
         DescriptionPanel.setText(panel.armorRatingText, getTotalArmorRatingForDisplay());
-
-        DescriptionPanel nestedPanel = panel.getNestedDescriptionPanel();
-
-        if (nestedPanel != null)
-        {
-            getHoverPanelDescribable().describeSelfFull(nestedPanel);
-        }
     }
 
-    public void describeSelfRow(DescriptionPanel panel)
+    public virtual void describeSelfRow(DescriptionPanel panel)
     {
         describeSelfFull(panel);
     }
 
-    public void setUpDecisionPanel(IDecisionPanel descisionPanel)
+    public virtual void setUpDecisionPanel(IDecisionPanel descisionPanel)
     {
 
     }
 
-	public List<IDescribable> getRelatedDescribables()
+	public virtual List<IDescribable> getRelatedDescribables()
 	{
 		return new List<IDescribable>();
 	}
 
-    public bool buildableWithBlocks()
+    public virtual bool buildableWithBlocks()
     {
         return true;
     }
 
-    public bool buildableWithBlocksRows()
+    public virtual bool buildableWithBlocksRows()
     {
         return true;
     }
@@ -1272,18 +1308,5 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     }
 
     #endregion
-
-
-    public override bool Equals(object obj)
-    {
-        Stats stats = obj as Stats;
-
-        if (stats == null)
-        {
-            return false;
-        }
-
-        return stats.position.Equals(position) && stats.getName().Equals(getName());
-    }
 
 }

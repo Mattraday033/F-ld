@@ -26,6 +26,7 @@ public static class State
 	public static Formation formation = new Formation();
 
 	public static EnemyPackInfo enemyPackInfo;
+    public static AllyPackInfo allyPackInfo;
 	public static CharacterFacing playerFacing;
 	public static bool onLeftFoot;
 

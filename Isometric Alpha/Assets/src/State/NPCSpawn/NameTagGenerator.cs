@@ -3,8 +3,6 @@ using UnityEngine.EventSystems;
 
 public class NameTagGenerator : MonoBehaviour, IRevealable
 {
-    private const string vaultablePrefix = "Vaultable ";
-
     public bool ignoreHover;
 	public bool noNameTag = false;
 

@@ -23,7 +23,7 @@ public enum OOCActivity {
                             inFade = 16,
                             preCombat = 17
 						};
-
+//class OOCPlayer
 public static class PlayerOOCStateManager
 {
     public static OOCActivity currentActivity { get; private set; }

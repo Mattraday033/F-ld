@@ -172,7 +172,7 @@ public static class QuestList
 		}
 		else
 		{
-			Debug.LogError("Unknown quest: " + questTitle);
+			Debug.LogError("Unknown quest: " + questTitle + " or quest step: " + questStepName);
 		}
 
 		return null;

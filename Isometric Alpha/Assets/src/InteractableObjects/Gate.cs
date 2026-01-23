@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Gate : MonoBehaviour, IRevealable
+public class Gate : MonoBehaviour, IRevealable, INameSource
 {
     private string gateKey;
     public string hoverName;
@@ -31,6 +31,11 @@ public class Gate : MonoBehaviour, IRevealable
         {
             gameObject.SetActive(false);
         }
+    }
+
+    public string getName()
+    {
+        return gateKey;
     }
 
     public string getGateKey()

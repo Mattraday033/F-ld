@@ -41,7 +41,6 @@ VAR playerName = ""
 
 ->4a
 
-
 === 4a ===
 
 activate({nandorIndex})
@@ -50,20 +49,20 @@ activate({carterIndex})
 {
 -deathFlagGuardMárcos and mineLvl3MarcosAgreedToIgniteJelly:
 
+setFacing(SE)
+setNPCFacing({nandorIndex},NW)
+setNPCFacing({carterIndex},SW)
+
 changeCamTarget({nandorIndex})
 
 Márcos...
 
     +He gave his life so that we might be free. Remember him that way.
         I will. Have no doubt about that.
-        finishQuest(Sealing the Breach, true, Márcos Sealed the Breach.)
-        activateQuestStep(Finding Nándor, The Guards Will Help.)
-        ->4b
+        ->4ba
     +I will not weep for a slaver. Even one who turned at the eleventh hour.
-        finishQuest(Sealing the Breach, true, Márcos Sealed the Breach.)
-        activateQuestStep(Finding Nándor, The Guards Will Help.)
         I can understand why you say that, but to me he seemed different. Alas, it doesn't matter now.
-        ->4b
+        ->4ba
 
 -mineLvl3ConvincedRekaAndPazman:
 
@@ -76,7 +75,7 @@ changeCamTarget({rekaIndex})
 Gáspár, you idiot. A stubborn ox to the last.
 
 finishQuest(Sealing the Breach, true, Some Guards Surrendered.)
-activateQuestStep(Finding Nándor, The Guards Will Help.)
+activateQuestStep(Finding Nándor, Return to the Surface.)
 
 changeCamTarget({pazmanIndex})
 
@@ -90,6 +89,11 @@ changeCamTarget({rekaIndex})
 
     activate({marcosIndex})
 
+    setFacing(SE)
+    setNPCFacing({nandorIndex},NW)
+    setNPCFacing({marcosIndex},NE)
+    setNPCFacing({carterIndex},SW)
+
     changeCamTarget({nandorIndex})
 
     The guards are dead, and the breach is sealed. I have not felt like this in a long time... Relieved. Hopeful. All thanks to your efforts.
@@ -101,7 +105,7 @@ changeCamTarget({rekaIndex})
         finishQuest(Sealing the Breach, true, The Guards Are Dead.1)
     }
 
-    activateQuestStep(Finding Nándor, The Guards Will Help.)
+    activateQuestStep(Finding Nándor, Return to the Surface.)
     
     changeCamTarget({carterIndex})
     
@@ -173,6 +177,14 @@ There's a room on the first floor the guards would keep slaves in when they didn
     +What if we don't succeed? Won't they be trapped in there?
         ->4ada
     +It will have to do. Let's get moving then.
+
+        setFacing(SE)
+
+        setNPCFacing({nandorIndex},NW)
+        setNPCFacing({carterIndex},SW)
+
+        changeCamTarget({nandorIndex})
+
         keepDialogue()
         
         Wait a moment. I just wanted to say that, with the breach sealed and the worms no longer a threat, I have not felt like this in a long time... Relieved. Hopeful. All thanks to your efforts.
@@ -185,6 +197,20 @@ keepDialogue()
 I don't like to plan for that event, but if we fail then the guards should free them when they retake the mine. They won't have any reason to keep the lockdown going with the worms gone and us... no longer in the way. And we can leave them with some of the supplies from the stockroom on this level just in case.
 
     ->4ad
+
+=== 4ba ===
+
+finishQuest(Sealing the Breach, true, Márcos Sealed the Breach.)
+activateQuestStep(Finding Nándor, Return to the Surface.)
+
+setFacing(SE)
+
+setNPCFacing({nandorIndex},NW)
+setNPCFacing({carterIndex},SW)
+
+changeCamTarget({nandorIndex})
+
+->4ba
 
 === 4b ===
 

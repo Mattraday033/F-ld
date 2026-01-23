@@ -22,9 +22,20 @@ public class RepositionAbility : Ability, IJSONConvertable
 
         Stats combatantToBeMoved = getCombatantToBeMoved();
 
-        if (combatantToBeMoved == null)
+        if (combatantToBeMoved == null && getActorStats() != null)
         {
             return;
+        }
+
+        CombatAnimationManager.getInstance().StartCoroutine(waitForAttackAnimationToStop(getActorStats().animationManager, combatantToBeMoved));
+    }
+
+    private IEnumerator waitForAttackAnimationToStop(AnimationManager animationManager, Stats combatantToBeMoved)
+    {
+
+        while(CombatAnimationManager.trackerBeingTracked(animationManager))
+        {
+            yield return null;
         }
 
         combatantToBeMoved.moveTo(getDestinationCoords());

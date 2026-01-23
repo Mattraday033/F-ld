@@ -51,14 +51,37 @@ public class SelectorManager : MonoBehaviour
 
 	private void Awake()
 	{
-		if (instance != null)
-		{
-			Debug.LogError("Found more than one Selector Manager in the scene.");
-		}
+        instantiateSelectorManager();
 
 		instance = this;
 		hoverPanelPopUpButton = new HoverPanelPopUpButton();
 	}
+
+    private void OnEnable()
+    {
+        CombatStateManager.OnTurnChangeToResolving.AddListener(setFirstSelectorVisibility);
+        CombatStateManager.OnTurnChangeToPlayer.AddListener(setFirstSelectorVisibility);
+    }
+
+    private void OnDestroy()
+    {
+        CombatStateManager.OnTurnChangeToResolving.RemoveListener(setFirstSelectorVisibility);
+        CombatStateManager.OnTurnChangeToPlayer.RemoveListener(setFirstSelectorVisibility);
+    }
+
+    private void setFirstSelectorVisibility()
+    {
+        selectors[Constants.indexZero].getSelectorObject().SetActive(CombatStateManager.whoseTurn == WhoseTurn.Player);
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void instantiateSelectorManager()
+    {
+        currentAbilityManager = null;
+        currentSelector = null;
+        instance = null;
+        verticalPriority = true;
+    }
 
 	public static SelectorManager getInstance()
 	{
@@ -121,7 +144,7 @@ public class SelectorManager : MonoBehaviour
 				{
 					deselectAlly();
 
-					displayHoverUIForCurrentSelectorTarget();
+					displayCurrentHoverUI();
 
 					KeyPressManager.handlingPrimaryKeyPress = true;
 				}
@@ -155,7 +178,7 @@ public class SelectorManager : MonoBehaviour
 
 						DamagePreviewManager.wipeAllDamagePreviews();
 
-						displayHoverUIForCurrentSelectorTarget();
+						displayCurrentHoverUI();
 
 						KeyPressManager.handlingPrimaryKeyPress = true;
 					}
@@ -198,7 +221,7 @@ public class SelectorManager : MonoBehaviour
 					
 					CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingLocation);
 
-					displayHoverUIForCurrentSelectorTarget();
+					displayCurrentHoverUI();
 
 					KeyPressManager.handlingPrimaryKeyPress = true;
 				}
@@ -272,7 +295,7 @@ public class SelectorManager : MonoBehaviour
 		}
 	}
 
-	public static void displayHoverUIForCurrentSelectorTarget()
+	public static void displayCurrentHoverUI()
 	{
 		if (!currentSelector.singleTile ||
 			(!Flags.getFlag(TutorialSequenceList.combatTutorialSeenFlag) &&
@@ -282,50 +305,52 @@ public class SelectorManager : MonoBehaviour
 			return;
 		}
 
-        Stats currentCombatant = CombatGrid.getCombatantAtCoords(currentSelector.getCoords());
+        instance.hoverPanelPopUpButton.spawnPopUp();
 
-		if (currentCombatant != null)
-		{
-			if (instance.previousHoverTarget == currentCombatant)
-			{
-				return;
-			}
+        // Stats currentCombatant = CombatGrid.getCombatantAtCoords(currentSelector.getCoords());
 
-			if (currentCombatant == null ||
-			   currentCombatant.getName() == null ||
-			   currentCombatant.getName().Length == 0 ||
-			   Helpers.hasQuality<Trait>(currentCombatant.hiddenTraits, hT => hT.isUntargetable()))
-			{
-                currentCombatant = CombatGrid.findOriginalCombatant(currentCombatant);
+		// if (currentCombatant != null)
+		// {
+		// 	if (instance.previousHoverTarget == currentCombatant)
+		// 	{
+		// 		return;
+		// 	}
 
-                if(currentCombatant == null)
-                {
-                    return;
-                }
-			}
+		// 	if (currentCombatant == null ||
+		// 	   currentCombatant.getName() == null ||
+		// 	   currentCombatant.getName().Length == 0 ||
+		// 	   Helpers.hasQuality<Trait>(currentCombatant.hiddenTraits, hT => hT.isUntargetable()))
+		// 	{
+        //         currentCombatant = CombatGrid.findOriginalCombatant(currentCombatant);
 
-			displayHoverUI(currentCombatant);
+        //         if(currentCombatant == null)
+        //         {
+        //             return;
+        //         }
+		// 	}
 
-			createPressEPrompt();
-		}
-		else
-		{
-			instance.hoverPanelPopUpButton.destroyPopUp();
-			instance.previousHoverTarget = null;
-		}
+		// 	displayHoverUI(currentCombatant);
+
+		// 	createPressEPrompt();
+		// }
+		// else
+		// {
+		// 	instance.hoverPanelPopUpButton.destroyPopUp();
+		// 	instance.previousHoverTarget = null;
+		// }
 	}
 
-	public static void displayHoverUI(Stats stats)
-	{
-		if (stats != null && instance != null)
-		{
-			instance.previousHoverTarget = stats;
-			instance.hoverPanelPopUpButton.spawnPopUp(stats);
-		} else if(stats == null && instance != null)
-        {
-            displayHoverUIForCurrentSelectorTarget();
-        }
-	}
+	// public static void displayHoverUI(Stats stats)
+	// {
+	// 	if (stats != null && instance != null)
+	// 	{
+	// 		instance.previousHoverTarget = stats;
+	// 		instance.hoverPanelPopUpButton.spawnPopUp(stats);
+	// 	} else if(stats == null && instance != null)
+    //     {
+    //         displayCurrentHoverUI();
+    //     }
+	// }
 
 	public static void createPressEPrompt()
 	{
@@ -459,7 +484,7 @@ public class SelectorManager : MonoBehaviour
 			DamagePreviewManager.wipeAllDamagePreviews();
 
 			previousHoverTarget = null;
-			displayHoverUIForCurrentSelectorTarget();
+			displayCurrentHoverUI();
 		}
 		else
 		{
@@ -664,7 +689,7 @@ public class SelectorManager : MonoBehaviour
 		{
 			moveCurrentSelectorToNextSingleTileTarget();
 
-			displayHoverUIForCurrentSelectorTarget();
+			displayCurrentHoverUI();
 			return;
 		}
 
@@ -719,7 +744,7 @@ public class SelectorManager : MonoBehaviour
 		{
             updateAllDamagePreviews();
 
-			displayHoverUIForCurrentSelectorTarget();
+			displayCurrentHoverUI();
 
             declareSelectors();
 		}

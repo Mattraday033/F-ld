@@ -124,7 +124,7 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
         //         getSpriteOutline().removeOutline();
         //     }
 
-        //     SelectorManager.displayHoverUIForCurrentSelectorTarget();
+        //     SelectorManager.displayCurrentHoverUI();
 
         //     if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation && tileHasTarget())
         //     {

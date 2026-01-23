@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HoverPanelPopUpButton : PopUpButton
 {
-	private Stats currentCombatant;
+    public readonly static UnityEvent HoverPriorityRequest = new UnityEvent();
+
+    public static Stats currentCombatantWithPriority;
 
 	public HoverPanelPopUpButton():
 	base(PopUpType.HoverPanel)
@@ -13,20 +16,31 @@ public class HoverPanelPopUpButton : PopUpButton
 		
 	}
 
-	public void spawnPopUp(Stats newCombatant)
-	{
-        if(currentCombatant != null && currentCombatant.Equals(newCombatant))
+    private Stats findCurrentCombatant()
+    {
+        Stats currentCombatant = null;
+        HoverPriorityRequest.Invoke();
+
+        if(currentCombatantWithPriority != null)
         {
-            return;
+            currentCombatant = currentCombatantWithPriority;
+            currentCombatantWithPriority = null;
+            return currentCombatant;
         }
 
-		this.currentCombatant = newCombatant;
-		
-		spawnPopUp();
-	}
+        return CombatGrid.getCombatantAtCoords(SelectorManager.getCurrentSelector().getCoords());
+    }
 
 	public override void spawnPopUp()
 	{
+        Stats currentCombatant = findCurrentCombatant();
+
+        if(currentCombatant == null)
+        {
+            destroyPopUp();
+            return;
+        }
+
 		Instantiate(Resources.Load<GameObject>(getPopUpPrefabName(type)), PopUpScreenBlockerManager.getPopUpParent());
 
 		setPopUpWindow(getCurrentPopUpGameObject().GetComponent<PopUpWindow>());
@@ -48,5 +62,11 @@ public class HoverPanelPopUpButton : PopUpButton
         {
             return null;
         }
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void instantiateHoverPanelPopUpButton()
+    {
+        currentCombatantWithPriority = null;
     }
 }

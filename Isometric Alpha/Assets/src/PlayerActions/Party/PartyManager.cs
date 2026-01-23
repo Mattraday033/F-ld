@@ -101,17 +101,15 @@ public static class PartyManager
     {
         List<PartyMember> joinablePartyMembers = new List<PartyMember>();
 
+        joinablePartyMembers.Add(getPlayer());
+
         foreach (PartyMember partyMember in partyMemberDict.Values)
         {
-            if (partyMember.canJoinParty)
+            if (partyMember.canJoinParty && !partyMember.Equals(getPlayer()))
             {
                 joinablePartyMembers.Add(partyMember);
             }
         }
-
-        joinablePartyMembers.Remove(getPlayer());
-
-        joinablePartyMembers.Insert(0, getPlayer());
 
         return joinablePartyMembers;
     }

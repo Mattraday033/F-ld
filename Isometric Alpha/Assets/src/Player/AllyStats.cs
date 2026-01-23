@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 using Ink.Runtime;
 using System.Linq;
 
@@ -735,6 +733,13 @@ public class AllyStats : Stats
 
     #region Miscellaneous
 
+    public override GridCoords findLocationToSpawn()
+    {
+        GridCoords coords = Formation.findLocationOfStats(this);
+
+        return new GridCoords(coords.row + CombatGrid.allyRowUpperBounds, coords.col);
+    }
+
     public List<IStatBoostSource> getAllStatBoosts()
     {
         List<IStatBoostSource> boosts = new List<IStatBoostSource>();
@@ -806,11 +811,6 @@ public class AllyStats : Stats
             return true;
         }
     }
-
-	public override IDescribable getHoverPanelDescribable()
-	{
-        return getZoneOfInfluenceTrait();
-	}
 
     #endregion
 
@@ -902,8 +902,10 @@ public class AllyStats : Stats
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getSynergyBlock(getSynergyCoefficientForDisplay()));
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusExuberancesBlock(getBonusExuberances().ToString()));
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getZOIBlock(getCharisma().ToString(), getZoneOfInfluenceTrait().getIconName()));
-
+        if(getZoneOfInfluenceTrait() != null)
+        {
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getZOIBlock(getCharisma().ToString(), getZoneOfInfluenceTrait().getIconName()));
+        }
         // buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getZoneOfInfluenceTrait().getIconName()));
 
         return buildingBlocks;

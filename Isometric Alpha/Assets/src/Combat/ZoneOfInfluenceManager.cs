@@ -52,17 +52,17 @@ public class ZoneOfInfluenceManager: MonoBehaviour
 	private Trait[] getAllZOITraitsAtCoords(GridCoords coords)
 	{
 		List<Stats> ZOITargets = CombatGrid.getAllZOITargets(coords); //used to get all creatures both within someone's ZOI
-		Trait[] traits = new Trait[0];								//and also can be used to get all creatures providing ZOI
+		List<Trait> traits = new List<Trait>();								//and also can be used to get all creatures providing ZOI
 																	//benefits back to the target
 		foreach(Stats target in ZOITargets)
 		{
 			if(target.getZoneOfInfluenceTrait() != null && !(target.getZoneOfInfluenceTrait() is null))
 			{
-				traits = Helpers.appendArray<Trait>(traits, target.getZoneOfInfluenceTrait());
+				traits.Add(target.getZoneOfInfluenceTrait());
 			}
 		}
 		
-		return traits;
+		return traits.ToArray();
 	}
 
 

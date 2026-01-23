@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumerable
+public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumerable, ICreatureSpawnPackage
 {
     private const int rowCount = 4;
     private const int colCount = 4;
@@ -89,7 +89,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
         return grid[coords.row][coords.col];
     }
 
-    public GridCoords findLocationOfStats(AllyStats partyMember)
+    public static GridCoords findLocationOfStats(AllyStats partyMember)
     {
         GridCoords partyMemberLocation = new GridCoords(-1, -1);
 
@@ -531,6 +531,10 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
         return blocks;
     }
 
+    public bool hasCreaturesToSpawn()
+    {
+        return true;
+    }
     public IEnumerator GetEnumerator()
     {
         foreach (AllyStats[] row in grid)
