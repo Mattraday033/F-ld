@@ -18,19 +18,18 @@ public struct HitsAndMisses
 
 public class BombardmentTargetPriorityTrait: TargetPriorityTrait
 {
-	private static string initialName = "Bombardment";
-	private static string initialTraitDescription = "This creature attacks randomly, sometimes missing it's target.";
-	private static string initialTraitIconName = "Bombardment";
-	private static Color initialIconBackgroundColor = Color.blue;
+	private const string initialName = "Bombardment";
+	private const string initialTraitDescription = "This creature attacks randomly, sometimes missing it's target.";
+	private const string initialTraitIconName = "Bombardment";
 	
 	private int guaranteedHitChance;
 	private int numberOfTiles;
 	
-	private static bool hit = true;
-	private static bool miss = false;
+	private const bool hit = true;
+	private const bool miss = false;
 	
 	public BombardmentTargetPriorityTrait(int guaranteedHitChance, int numberOfTiles):
-		base(initialName, initialTraitDescription, initialTraitIconName, initialIconBackgroundColor)
+		base(initialName, initialTraitDescription, initialTraitIconName)
 	{
 		this.guaranteedHitChance = guaranteedHitChance;
 		this.numberOfTiles = numberOfTiles;

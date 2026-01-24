@@ -6,7 +6,7 @@ using System;
 using Newtonsoft.Json;
 
 [System.Serializable]
-public class Item : ICloneable, IJSONConvertable, IDescribable, ISortable, IDescribableInBlocks
+public class Item : StatBoostSource, ICloneable, IJSONConvertable, IDescribable, ISortable, IDescribableInBlocks
 {
 	private ItemListID listID;
 
@@ -101,7 +101,7 @@ public class Item : ICloneable, IJSONConvertable, IDescribable, ISortable, IDesc
 		return false;
 	}
 
-	public string getName()
+	public override string getName()
 	{
         return getKey();
 	}
@@ -311,7 +311,7 @@ public class Item : ICloneable, IJSONConvertable, IDescribable, ISortable, IDesc
         return "x" + getQuantity();
 	}
 
-    public Stats getStatSource()
+    public override Stats getStatSource()
     {
         // Helpers.debugNullCheck("equipTarget", equipTarget);
 

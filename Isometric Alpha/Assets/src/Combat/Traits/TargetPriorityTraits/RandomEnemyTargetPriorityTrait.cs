@@ -6,13 +6,13 @@ public class RandomEnemyTargetPriorityTrait : TargetPriorityTrait
 {
 
     public RandomEnemyTargetPriorityTrait() : 
-    base("","","",  Color.black) //used when name/description/icon/background color are overridden, like with BufferTargetPriorityTrait
+    base("","","") //used when name/description/icon/background color are overridden, like with BufferTargetPriorityTrait
     {
 
     }
 
-    public RandomEnemyTargetPriorityTrait(string traitName, string traitDescription, string traitIconName, Color traitIconBackgroundColor) :
-    base(traitName, traitDescription, traitIconName, traitIconBackgroundColor)
+    public RandomEnemyTargetPriorityTrait(string traitName, string traitDescription, string iconName) :
+    base(traitName, traitDescription, iconName)
     {
 
     }
@@ -26,9 +26,9 @@ public class RandomEnemyTargetPriorityTrait : TargetPriorityTrait
             return null;
         }
 
-        int index = UnityEngine.Random.Range(0, listOfTargets.Count);
+        int index = Random.Range(0, listOfTargets.Count);
         
-        return (Stats) listOfTargets[index];
+        return listOfTargets[index];
     }
 
 }

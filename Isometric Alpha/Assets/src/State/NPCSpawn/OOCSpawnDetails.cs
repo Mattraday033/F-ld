@@ -1385,15 +1385,17 @@ public class ShopkeeperSpawnDetails : NPCSpawnDetails
 public class SecretDoorSpawnDetails : NPCSpawnDetails
 {
     private SecretDoorInfo secretDoorInfo;
+    private string terrainSpriteName;
 
-    public SecretDoorSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, SecretDoorInfo secretDoorInfo, string tutorialTargetHash, string spriteName) :
+    public SecretDoorSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, SecretDoorInfo secretDoorInfo, string tutorialTargetHash, string spriteName, string terrainSpriteName) :
     base(npcName, cellCoords, areaName, spriteName)
     {
         this.secretDoorInfo = secretDoorInfo;
 
         this.tutorialTargetHash = tutorialTargetHash;
+        this.terrainSpriteName = terrainSpriteName;
     }
-    
+
     public override bool interactable()
     {
         return true;
@@ -1421,6 +1423,11 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
         ObservableObject observableObject = secretDoor.GetComponent<ObservableObject>();
 
         observableObject.secretDoorKey = secretDoorInfo.secretDoorKey;
+
+        if(terrainSpriteName != null && terrainSpriteName.Length > 0)
+        {
+            observableObject.terrainSprite = Helpers.loadSpriteFromResources(terrainSpriteName);
+        }
 
         if(hasTutorialTargetHash())
         {

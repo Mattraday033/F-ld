@@ -8,9 +8,8 @@ public class ChaoticTargetPriorityTrait : TargetPriorityTrait
 	private const string initialName = "Chaotic";
 	private const string initialTraitDescription = "This creature chooses it's targets at random. Ignores summons.";
 	private const string initialTraitIconName = "Dice";
-	private readonly static Color initialIconBackgroundColor = Color.blue;
 	
-	public ChaoticTargetPriorityTrait(): base(initialName, initialTraitDescription, initialTraitIconName, initialIconBackgroundColor)
+	public ChaoticTargetPriorityTrait(): base(initialName, initialTraitDescription, initialTraitIconName)
 	{
 		
 	}

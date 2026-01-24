@@ -8,9 +8,8 @@ public class CloseRangedTargetPriorityTrait : TargetPriorityTrait
 	private const string initialName = "Close Ranged";
 	private const string initialTraitDescription = "This creature always attacks the targets that are closest to it.";
 	private const string initialTraitIconName = "Close Ranged";
-	private readonly static Color initialIconBackgroundColor = Color.red;
 	
-	public CloseRangedTargetPriorityTrait(): base(initialName, initialTraitDescription, initialTraitIconName, initialIconBackgroundColor)
+	public CloseRangedTargetPriorityTrait(): base(initialName, initialTraitDescription, initialTraitIconName)
 	{
 		
 	}

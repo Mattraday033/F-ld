@@ -14,7 +14,7 @@ public class MarkObservableObject : MonoBehaviour
 		{
             GameObject observedObj = Helpers.getCollision(collider, LayerAndTagManager.observableLayerMask).gameObject;
 
-			if(observedObj.CompareTag("Observable"))
+			if(observedObj.CompareTag(LayerAndTagManager.observableTag))
 			{
 				observedObj.GetComponent<ObservableObject>().markAsObserved();
 				disableSelf(true);

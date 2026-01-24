@@ -15,6 +15,8 @@ VAR spokeWithPageBeforePrisoners = false
 
 VAR spokeWithNandorAfterPrisoners = false
 
+setToTrue(inLeavingCampPageCarterConvo)
+
 {
 -pageSaidReadyToLeave:
 	->3a
@@ -155,6 +157,8 @@ Whenever you're ready, leave the camp. I'll be right behind you.
 ->Close
 
 === Close ===
+
+setToFalse(inLeavingCampPageCarterConvo)
 
 close()
 

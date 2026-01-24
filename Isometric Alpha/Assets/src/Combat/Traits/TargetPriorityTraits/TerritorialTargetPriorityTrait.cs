@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class TerritorialTargetPriorityTrait : TargetPriorityTrait
 {
-	private static string initialName = "Territorial";
-	private static string initialTraitDescription = "This creature always attacks the target with the most health left.";
-	private static string initialTraitIconName = "Territorial";
-	private static Color initialIconBackgroundColor = Color.red;
+	private const string initialName = "Territorial";
+	private const string initialTraitDescription = "This creature always attacks the target with the most health left.";
+	private const string initialTraitIconName = "Territorial";
 	
-	public TerritorialTargetPriorityTrait(): base(initialName, initialTraitDescription, initialTraitIconName, initialIconBackgroundColor)
+	public TerritorialTargetPriorityTrait(): base(initialName, initialTraitDescription, initialTraitIconName)
 	{
 		
 	}

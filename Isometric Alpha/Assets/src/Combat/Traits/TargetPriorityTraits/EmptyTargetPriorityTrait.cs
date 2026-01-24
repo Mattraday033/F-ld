@@ -7,9 +7,8 @@ public class EmptyTargetPriorityTrait : TargetPriorityTrait
 	private const string initialName = "Empty";
 	private const string initialTraitDescription = "This creature targets an empty space on it's side of the field.";
 	private const string initialTraitIconName = "Empty";
-	private static Color initialIconBackgroundColor = Color.blue;
 	
-	public EmptyTargetPriorityTrait(): base(initialName, initialTraitDescription, initialTraitIconName, initialIconBackgroundColor)
+	public EmptyTargetPriorityTrait(): base(initialName, initialTraitDescription, initialTraitIconName)
 	{
 		
 	}

@@ -110,7 +110,7 @@ public enum CombatAnimationType{ None, Projectile, Effect }
 //a single thing that the player has selected themself or a party member to do during combat
 //Or a single thing the enemy has elected to do during their turn, typically based on logic explained in their trait descriptions
 [System.Serializable]
-public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable, ISortable, IDescribableInBlocks, IFormulaSource, IStatBoostSource
+public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertable, IDescribable, ISortable, IDescribableInBlocks, IFormulaSource
 {
 
     #region Constants
@@ -352,7 +352,7 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
                 CombatAnimationManager.loadProjectile(getActorCoords(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead, getLandingScript());
                 break;
             case CombatAnimationType.Effect:
-                CombatAnimationManager.loadInstantEffect(this, targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
+                CombatAnimationManager.loadInstantEffect(getEffectAnimationType(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
                 break;
         }
     }
@@ -927,12 +927,12 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
             return false;
         }
 
-        if(traitToApply.getType().Equals(TraitList.woundTraitType) && target.rollAgainstPhysicalResistance())
+        if(traitToApply.traitType == TraitType.Wound && target.rollAgainstPhysicalResistance())
         {
             return true;
         } 
         
-        if(traitToApply.getType().Equals(TraitList.mentalTraitType) && target.rollAgainstMentalResistance())
+        if(traitToApply.traitType == TraitType.Mental && target.rollAgainstMentalResistance())
         {
             return true;
         } 
@@ -1319,203 +1319,16 @@ public abstract class CombatAction : ICloneable, IJSONConvertable, IDescribable,
 
     #endregion
 
-    #region IStatBoostSource Methods
+    #region StatBoostSource Methods
 
-    public Stats getStatSource()
+    public override Stats getStatSource()
     {
         return getActorStats();
     }
 
-    #region Generic Stats
-
-    public string getBonusCritFormula()
-    {
-        return StatBoostManager.getBonusCritFormula(this);
-    }
-
-    public string getBonusDamageFormula()
-    {
-        return StatBoostManager.getBonusDamageFormula(this);
-    }
-
-    #endregion
-
-    #region PrimaryStats
-
-    public string getBonusStrengthFormula()
-    {
-        return StatBoostManager.getBonusStrengthFormula(this);
-    }
-
-    public string getBonusDexterityFormula()
-    {
-        return StatBoostManager.getBonusDexterityFormula(this);
-    }
-
-    public string getBonusWisdomFormula()
-    {
-        return StatBoostManager.getBonusWisdomFormula(this);
-    }
-
-    public string getBonusCharismaFormula()
-    {
-        return StatBoostManager.getBonusCharismaFormula(this);
-    }
-
-
-    #endregion
-
-    #region Secondary Stats
-
-    //Strength Stats
-    public string getBonusPhysicalResistanceFormula()
-    {
-        return StatBoostManager.getBonusPhysicalResistanceFormula(this);
-    }
-
-    public string getBonusCriticalDamageMultiplierFormula()
-    {
-        return StatBoostManager.getBonusCriticalDamageMultiplierFormula(this);
-    }
-
-    public string getBonusHealthFormula()
-    {
-        return StatBoostManager.getBonusHealthFormula(this);
-    }
-
-
-    //Dexterity Stats
-    public string getBonusSurpriseRoundDamageFormula()
-    {
-        return StatBoostManager.getBonusSurpriseRoundDamageFormula(this);
-    }
-
-    public virtual string getBonusArmorFormula()
-    {
-        return StatBoostManager.getBonusArmorFormula(this);
-    }
-
-    public string getBonusArmorPenetrationFormula()
-    {
-        return StatBoostManager.getBonusArmorPenetrationFormula(this);
-    }
-
-
-    //Wisdom Stats
-    public string getBonusPassiveSlotsFormula()
-    {
-        return StatBoostManager.getBonusPassiveSlotsFormula(this);
-    }
-
-    public string getBonusWeaponSlotsFormula()
-    {
-        return StatBoostManager.getBonusWeaponSlotsFormula(this);
-    }
-
-    public string getBonusMentalResistanceFormula()
-    {
-        return StatBoostManager.getBonusMentalResistanceFormula(this);
-    }
-
-
-    //Charisma Stats
-    public string getBonusSynergyFormula()
-    {
-        return StatBoostManager.getBonusSynergyFormula(this);
-    }
-
-    public string getBonusExuberancesFormula()
-    {
-        return StatBoostManager.getBonusExuberancesFormula(this);
-    }
-
-    public string getBonusZOIPotencyFormula()
-    {
-        return StatBoostManager.getBonusZOIPotencyFormula(this);
-    }
-
-
-    #endregion
-
-    #region Party Stats
-
-    public string getBonusRegenFormula()
-    {
-        return StatBoostManager.getBonusRegenFormula(this);
-    }
-
-
-    public string getBonusSurpriseRoundsFormula()
-    {
-        return StatBoostManager.getBonusSurpriseRoundsFormula(this);
-    }
-
-    public string getBonusRetreatChanceFormula()
-    {
-        return StatBoostManager.getBonusRetreatChanceFormula(this);
-    }
-
-
-    public string getBonusPartyActionsFormula()
-    {
-        return StatBoostManager.getBonusPartyActionsFormula(this);
-    }
-
-    public string getBonusPartySlotsFormula()
-    {
-        return StatBoostManager.getBonusPartySlotsFormula(this);
-    }
-
-
-    public string getBonusGoldMultiplierFormula()
-    {
-        return StatBoostManager.getBonusGoldMultiplierFormula(this);
-    }
-
-    public string getBonusDiscountFormula()
-    {
-        return StatBoostManager.getBonusDiscountFormula(this);
-    }
-
-
-    public string getBonusVolleyAccuracyFormula()
-    {
-        return StatBoostManager.getBonusVolleyAccuracyFormula(this);
-    }
-
-
-    #endregion
-
-    #region Skills
-    public string getBonusIntimidateChargesFormula()
-    {
-        return StatBoostManager.getBonusIntimidateChargesFormula(this);
-    }
-
-    public string getBonusCunningChargesFormula()
-    {
-        return StatBoostManager.getBonusCunningChargesFormula(this);
-    }
-
-    public string getBonusObservationLevelFormula()
-    {
-        return StatBoostManager.getBonusObservationLevelFormula(this);
-    }
-
-    public string getBonusLeadershipUsesFormula()
-    {
-        return StatBoostManager.getBonusLeadershipUsesFormula(this);
-    }
-
-    #endregion
     #endregion
 
     #region IDescribable
-
-    public virtual string getName()
-    {
-        throw new IOException("The base class version of getName() was called extraneously");
-    }
 
     public virtual GameObject getRowType(RowType rowType)
     {

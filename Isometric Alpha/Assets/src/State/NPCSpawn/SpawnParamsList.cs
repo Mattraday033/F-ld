@@ -320,6 +320,12 @@ public static class SpawnParamsList
                                                                                     FlagNameList.enteredCivilizationAfterLeavingCamp
                                                                                 })));
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.carter),
+                                        new InteractableSpawnParams(new StartSpawningAllTrueFlagList(new string[]  { 
+                                                                                            FlagNameList.directorDefeated,
+                                                                                            FlagNameList.inLeavingCampPageCarterConvo
+                                                                                        })));
+
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.vaultableBarrels+1), barracksGateSpawnParams);
 
         #endregion

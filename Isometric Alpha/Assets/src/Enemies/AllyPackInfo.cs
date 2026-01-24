@@ -6,14 +6,14 @@ public class AllyPackInfo : EnemyPackInfo
 {
     protected string[] flagsToCheckForAllies;
 
-    public AllyPackInfo(CreatureAmount creatureType, string flagToCheckForAllies):
-    base(new CreatureAmount[]{ creatureType }, null)
+    public AllyPackInfo(CreatureAmount FoeType, string flagToCheckForAllies):
+    base(new CreatureAmount[]{ FoeType }, null)
     {
         this.flagsToCheckForAllies = new string[]{ flagToCheckForAllies };
     }
 
-    public AllyPackInfo(CreatureAmount[] creatureTypes, string[] flagsToCheckForAllies):
-    base(creatureTypes, null)
+    public AllyPackInfo(CreatureAmount[] FoeTypes, string[] flagsToCheckForAllies):
+    base(FoeTypes, null)
     {
         this.flagsToCheckForAllies = flagsToCheckForAllies;
     }
@@ -22,18 +22,17 @@ public class AllyPackInfo : EnemyPackInfo
     {
         List<CreatureAmount> relevantAllies = new List<CreatureAmount>();
 
-        for(int index = 0; index < creatureTypes.Length; index++)
+        for(int index = 0; index < FoeTypes.Length; index++)
         {
             if (Flags.getFlag(getFlagAtIndex(index)))
             {
-                relevantAllies.Add(creatureTypes[index]);
+                relevantAllies.Add(FoeTypes[index]);
             }
         }
 
         List<Stats> allStatsInPack = new List<Stats>();
 
-        //CreatureAmount[] creatureTypes
-        foreach (CreatureAmount amount in creatureTypes)
+        foreach (CreatureAmount amount in relevantAllies)
         {
             for(int index = 0; index < amount.amount; index++)
             {

@@ -7,16 +7,31 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
 
-public enum SurpriseState { EnemySurprised, NoOneSurprised, PlayerSurprised }
-public enum WhoseTurn {Start = 1, Player = 2, Resolving = 3, Won = 4, Lost = 5}
-public enum CurrentActivity {Waiting = 1, ChoosingActor = 2, ChoosingAbility = 3, ChoosingLocation = 4, ChoosingTertiary = 5, Repositioning = 6, Tutorial = 7, Retreating = 8, Finished = 9 }
-																	  //What the player is currently doing, used to determine what
-																	  //class has priority for listening for key presses. Not to be
-																	  //confused with the action class, which is used for describing 
-																	  //Attacks/Abilities/Items the player has queued to be used on
-																	  //their turn.
-																	  //Waiting means that it's not the player's turn.	
-																	  //Finished means the only thing left to do is Resolve Turn
+public enum SurpriseState   { 
+                                EnemySurprised, 
+                                NoOneSurprised, 
+                                PlayerSurprised 
+                            }
+                            
+public enum WhoseTurn   {
+                            Start = 1, 
+                            Player = 2, 
+                            Resolving = 3, 
+                            Won = 4, 
+                            Lost = 5
+                        }
+
+public enum CurrentActivity {
+                                Waiting = 1,
+                                ChoosingActor = 2,
+                                ChoosingAbility = 3, 
+                                ChoosingLocation = 4, 
+                                ChoosingTertiary = 5, 
+                                Repositioning = 6, 
+                                Tutorial = 7, 
+                                Retreating = 8, 
+                                Finished = 9 
+                            }
 
 public interface INeedsUpdateOnStateChange
 {

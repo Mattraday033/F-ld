@@ -127,9 +127,10 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                                 Constants.fiftyArmor,
                                                                                         125,
                                                             new Trait[] { 
-                                                                        TraitList.minion,
-                                                                        TraitList.large,
-                                                                        TraitList.blocker
+                                                                            TraitList.minion,
+                                                                            TraitList.large,
+                                                                            TraitList.blocker,
+                                                                            TraitList.frontLine
                                                                         },
                                                                         spawnDetails));
 
@@ -237,13 +238,14 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             }));
         #endregion
         #region Bat Swarm
-        enemyStatsDict.Add(MonsterNameList.batSwarm, new EnemyStats(MonsterNameList.batSwarm,
+        enemyStatsDict.Add(MonsterNameList.batSwarm, new VolleyParticipantStats(MonsterNameList.batSwarm,
                                                                                       Constants.zeroArmor,
                                                                                             5,
                                                AbilityList.getAbility(null, AbilityList.swarmRushKey),
-                                                                new Trait[] { TraitList.minion,
-                                                                             TraitList.chaotic
-                                                                            }));
+                                                                traits: new Trait[] { 
+                                                                                        TraitList.minion,
+                                                                                        TraitList.chaotic
+                                                                                    }));
         #endregion
 
         #region Screecher

@@ -4,13 +4,32 @@ using UnityEngine;
 
 public class ZoneOfInfluenceTrait : Trait
 {
-	private const string zoneOfInfluenceTraitType = "Influence";
 	
-	public ZoneOfInfluenceTrait(string traitName, string traitDescription, string iconBackgroundName): base(traitName, zoneOfInfluenceTraitType, traitDescription, iconBackgroundName, Color.black)
+    public const string zoiTraitName = "'s Influence";
+    private const string zoiTraitDescription = "The benefits of a Zone of Influence are being applied to this creature.";
+
+
+	public ZoneOfInfluenceTrait(AllyStats zoneOwner): 
+    base(zoneOwner.getNameWithoutPlayerMarker() + zoiTraitName, TraitType.Influence, iconName: HoverMessageList.zoneOfInfluenceKey)
     {
-        
+        traitApplier = zoneOwner;
     }
 	
+    public override string getDescription()
+    {
+        switch (traitApplier.getName())
+        {
+            case NPCNameList.thatch:
+                return "Creature's in this companion's Zone of Influence gain extra armor.";
+            case NPCNameList.carter:
+                return "Creature's in this companion's Zone of Influence gain extra damage during a surprise round.";
+            case NPCNameList.nandor:
+                return "Creature's in this companion's Zone of Influence gain extra Mental Resistance.";
+            default:
+                return zoiTraitDescription;
+        }
+    }
+
 	public override bool fromZoneOfInfluence()
 	{
 		return true;
@@ -18,7 +37,7 @@ public class ZoneOfInfluenceTrait : Trait
 
     public override string getIconName()
     {
-        string companionName = getName().Replace(Stats.zoiTraitName, "");
+        string companionName = getName().Replace(zoiTraitName, "");
 
         switch(companionName)
         {

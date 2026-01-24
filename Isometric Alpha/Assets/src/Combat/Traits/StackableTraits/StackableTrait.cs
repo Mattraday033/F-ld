@@ -22,7 +22,7 @@ public class StackableTrait: Trait
     private ActionCostType costType; 
 	
 	public StackableTrait(int startingStacks, int stacksAppliedPerApplication, Trait baseTrait) :
-	base(baseTrait.getName(), baseTrait.getType(), baseTrait.getDescription(), baseTrait.getIconName(), baseTrait.getTraitIconBackgroundColor())
+	base(baseTrait.getName(), baseTrait.traitType, traitDescription: baseTrait.getDescription(), baseTrait.getIconName())
 	{
         this.startingStacks = startingStacks;
         resetStacksToStartingAmount();
@@ -34,7 +34,7 @@ public class StackableTrait: Trait
     }
 
     public StackableTrait(int startingStacks, int stacksAppliedPerApplication, ActionCostType costType, Trait baseTrait) :
-    base(baseTrait.getName(), baseTrait.getType(), baseTrait.getDescription(), baseTrait.getIconName(), baseTrait.getTraitIconBackgroundColor())
+    base(baseTrait.getName(), baseTrait.traitType, baseTrait.getDescription(), baseTrait.getIconName())
     {
         this.startingStacks = startingStacks;
         resetStacksToStartingAmount();
@@ -46,7 +46,7 @@ public class StackableTrait: Trait
     }
 
     public StackableTrait(UnityEvent reapplicationEvent, int startingStacks, int stacksAppliedPerApplication, Trait baseTrait) :
-	base(baseTrait.getName(), baseTrait.getType(), baseTrait.getDescription(), baseTrait.getIconName(), baseTrait.getTraitIconBackgroundColor())
+	base(baseTrait.getName(), baseTrait.traitType, baseTrait.getDescription(), baseTrait.getIconName())
     {
         this.reapplicationEvents = new UnityEvent[] { reapplicationEvent };
         //this.stackChangeAction += reapply; removed so that the base version of the method in TraitList isn't subscribed. Each StackableTrait is subscribed in clone()
@@ -61,7 +61,7 @@ public class StackableTrait: Trait
     }
 
     public StackableTrait(UnityEvent reapplicationEvent, int startingStacks, int stacksAppliedPerApplication, ActionCostType costType, Trait baseTrait) :
-    base(baseTrait.getName(), baseTrait.getType(), baseTrait.getDescription(), baseTrait.getIconName(), baseTrait.getTraitIconBackgroundColor())
+    base(baseTrait.getName(), baseTrait.traitType, baseTrait.getDescription(), baseTrait.getIconName())
     {
         this.reapplicationEvents = new UnityEvent[] { reapplicationEvent };
         //this.stackChangeAction += reapply; removed so that the base version of the method in TraitList isn't subscribed. Each StackableTrait is subscribed in clone()
@@ -75,7 +75,7 @@ public class StackableTrait: Trait
         this.baseTraits = new Trait[] { baseTrait };
     }
     public StackableTrait(UnityEvent reapplicationEvent, int startingStacks, int stacksAppliedPerApplication, ActionCostType costType, Trait[] baseTraits) :
-    base(baseTraits[0].getName(), baseTraits[0].getType(), baseTraits[0].getDescription(), baseTraits[0].getIconName(), baseTraits[0].getTraitIconBackgroundColor())
+    base(baseTraits[0].getName(), baseTraits[0].traitType, baseTraits[0].getDescription(), baseTraits[0].getIconName())
     {
         this.reapplicationEvents = new UnityEvent[] { reapplicationEvent };
         //this.stackChangeAction += reapply; removed so that the base version of the method in TraitList isn't subscribed. Each StackableTrait is subscribed in clone()
@@ -90,7 +90,7 @@ public class StackableTrait: Trait
     }
 
     public StackableTrait(UnityEvent[] reapplicationEvents, int startingStacks, int stacksAppliedPerApplication, int maximumStacks, ActionCostType costType, Trait baseTraits) :
-    base(baseTraits.getName(), baseTraits.getType(), baseTraits.getDescription(), baseTraits.getIconName(), baseTraits.getTraitIconBackgroundColor())
+    base(baseTraits.getName(), baseTraits.traitType, baseTraits.getDescription(), baseTraits.getIconName())
     {
         this.reapplicationEvents = reapplicationEvents;
         //this.stackChangeAction += reapply; removed so that the base version of the method in TraitList isn't subscribed. Each StackableTrait is subscribed in clone()

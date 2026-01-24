@@ -152,7 +152,10 @@ public static class PlayerOOCStateManager
                 OnStateChangeToWalking.Invoke();
                 //EscapeStack.escapeAll();
                 OOCUIManager.updateOOCUI();
-                PartyMemberTrainManager.showPartyMemberTrain();
+                if(previousActivity != OOCActivity.inFade)
+                {
+                    PartyMemberTrainManager.showPartyMemberTrain();
+                }
                 break;
             case OOCActivity.inDialogue:
                 PartyMemberTrainManager.createPartyMemberTrain();

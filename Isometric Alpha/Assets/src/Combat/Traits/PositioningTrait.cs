@@ -8,8 +8,8 @@ public class PositioningTrait : Trait
 {
 	private PositioningType positioningType;
 	
-	public PositioningTrait(string traitName, string traitType, string traitDescription, string traitIconName, Color traitIconBackgroundColor, PositioningType positioningType):
-	base(traitName, traitType, traitDescription, traitIconName, traitIconBackgroundColor)
+	public PositioningTrait(string traitName, TraitType traitType, string traitDescription, string iconName, PositioningType positioningType):
+	base(traitName, traitType, traitDescription, iconName)
 	{
 		this.positioningType = positioningType;
 	}

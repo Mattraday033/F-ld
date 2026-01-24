@@ -42,12 +42,17 @@ public class LargeEnemyStats : EnemyStats
 
     #endregion
 
+    #region Unity Events
+    public readonly static UnityEvent OnLargeEnemySpawn = new UnityEvent();
+    #endregion
+
+
     #region Constructors
 
     //There is a difference between multi-sprite enemies (barricades) and large single sprited enemies (large worms, horses, etc). 
-    //Currently set up for multi-sprited enemies, will eventually need to decouple when re-implementing worms
+    //Currently set up for multi-sprited enemies, will eventually need to decouple when re-implementing worms/horses
     public LargeEnemyStats(string key, int armor, int tHP, Trait[] traits, SpawnDetails spawnDetails) :
-    base(key, armor, tHP, traits)
+    base(key, armor, tHP, traits: traits)
     {
         this.spawnDetails = spawnDetails;
         position = spawnDetails.baseStatsPosition;
@@ -57,20 +62,25 @@ public class LargeEnemyStats : EnemyStats
 
     #region Sprite and GameObject
 
-    public override GameObject instantiateCombatSprite()
+    public override GameObject instantiateCombatSprite(GridCoords coords)
+    {
+        return instantiateCombatSprite();
+    }
+
+    private GameObject instantiateCombatSprite()
     {
         combatSprites = new Dictionary<GridCoords, GameObject>();
-        animationManagers= new Dictionary<GridCoords, AnimationManager>();
+        animationManagers = new Dictionary<GridCoords, AnimationManager>();
         spriteRenderers = new Dictionary<GridCoords, SpriteRenderer>();
         outlines = new Dictionary<GridCoords, SpriteOutline>();
         combatantHovers = new Dictionary<GridCoords, CombatantHover>();
 
         foreach(GridCoords coords in spawnDetails.allSpawnPositions)
         {
-            combatSprites[coords] = Instantiate(Resources.Load<GameObject>(PrefabNames.enemySprite), CombatStateManager.getCreatureParent());
+            combatSprites[coords] = Instantiate(Resources.Load<GameObject>(getCombatSpriteName()), CombatStateManager.getCreatureParent());
 
             combatSprites[coords].transform.position = CombatGrid.getPositionAt(coords);
-            combatSprites[coords].transform.localScale = new Vector3(1f, 1f, 1f);
+            combatSprites[coords].transform.localScale = Vector3.one;
 
             ComponentList componentList = combatSprites[coords].GetComponent<ComponentList>();
 
@@ -83,6 +93,8 @@ public class LargeEnemyStats : EnemyStats
             }
 
             setUpComponents(coords, componentList);
+
+            CombatGrid.setCombatantAtCoords(coords, this);
         }
 
         foreach(AnimationManager animationManager in animationManagers.Values)
@@ -92,6 +104,8 @@ public class LargeEnemyStats : EnemyStats
         }
 
         combatSprite = combatSprites[spawnDetails.baseStatsPosition];
+
+        OnLargeEnemySpawn.Invoke();
 
         return combatSprite;
     }

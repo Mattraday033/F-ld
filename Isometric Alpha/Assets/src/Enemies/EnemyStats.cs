@@ -29,16 +29,7 @@ public class EnemyStats : Stats
 
     #region Constructors
 
-    public EnemyStats(string key, int armor, int tHP) :
-    base(key)
-    {
-        this.armor = armor;
-
-        this.totalHealth = tHP;
-        this.currentHealth = totalHealth;
-    }
-
-    public EnemyStats(string key, int armor, int tHP, Trait[] traits) :
+    public EnemyStats(string key, int armor, int tHP, CombatAction combatAction = null, Trait[] traits = null) :
     base(key)
     {
         this.armor = armor;
@@ -46,25 +37,17 @@ public class EnemyStats : Stats
         this.totalHealth = tHP;
         this.currentHealth = totalHealth;
 
-        foreach (Trait trait in traits)
+        if(combatAction != null)
         {
-            addTrait(trait);
+            this.combatAction = combatAction.clone(this);
         }
-    }
 
-    public EnemyStats(string key, int armor, int tHP, CombatAction combatAction, Trait[] traits) :
-    base(key)
-    {
-        this.armor = armor;
-
-        this.totalHealth = tHP;
-        this.currentHealth = totalHealth;
-
-        this.combatAction = combatAction.clone(this);
-
-        foreach (Trait trait in traits)
+        if(traits != null)
         {
-            addTrait(trait);
+            foreach (Trait trait in traits)
+            {
+                addTrait(trait);
+            }
         }
     }
 
@@ -72,10 +55,9 @@ public class EnemyStats : Stats
 
     #region Sprite and GameObject
 
-    public override GameObject instantiateCombatSprite()
+    public override GameObject instantiateCombatSprite(GridCoords coords)
     {
-        combatSprite = Instantiate(Resources.Load<GameObject>(PrefabNames.enemySprite), CombatStateManager.getCreatureParent());
-        setUpComponents(combatSprite.GetComponent<ComponentList>());
+        combatSprite = base.instantiateCombatSprite(coords);
 
         combatSprite.transform.localScale = new Vector3(1f, 1f, 1f);
 
@@ -83,7 +65,10 @@ public class EnemyStats : Stats
 
         return combatSprite;
     }
-
+    public override string getCombatSpriteName()
+    {
+        return PrefabNames.enemySprite;
+    }
     public override Color getOutlineColor()
     {
         return ColorList.attacksOnSight;
@@ -164,6 +149,16 @@ public class EnemyStats : Stats
     public override bool isLowPriorityAttacker()
     {
         return lowPriorityAttacker;
+    }
+
+    public override string getVolleyAnimationType()
+    {
+        if(getCombatAction() == null)
+        {
+            return EffectAnimationType.Pierce.ToString();
+        }
+
+        return getCombatAction().getEffectAnimationType();
     }
 
     #endregion

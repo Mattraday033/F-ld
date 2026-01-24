@@ -166,6 +166,13 @@ public class Dialogue : ICloneable
 
         clone.npcCombatInfo = original.npcCombatInfo;
 
+        clone.variableSources = new List<IStoryVariableSource>();
+
+        foreach(IStoryVariableSource variableSource in original.variableSources)
+        {
+            clone.variableSources.Add(variableSource);
+        }
+
         if(original.secondaryInkJSONs == null)
         {
             original.secondaryInkJSONs = new TextAsset[0];

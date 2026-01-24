@@ -7,14 +7,14 @@ public class DamageOverTimeTrait : Trait
 	private int damageOnTickDown = 0;
 	private string damageFormula = "";
 
-	public DamageOverTimeTrait(string traitName, string traitType, string traitDescription, string traitIconName, Color traitIconBackgroundColor, int damageOnTickDown) :
-	base(traitName, traitType, traitDescription, traitIconName, traitIconBackgroundColor)
+	public DamageOverTimeTrait(string traitName, TraitType traitType, string traitDescription, string iconName, int damageOnTickDown) :
+	base(traitName, traitType, traitDescription, iconName)
 	{
 		this.damageOnTickDown = damageOnTickDown;
 	}
 
-	public DamageOverTimeTrait(string traitName, string traitType, string traitDescription, string traitIconName, Color traitIconBackgroundColor, string damageFormula) :
-	base(traitName, traitType, traitDescription, traitIconName, traitIconBackgroundColor)
+	public DamageOverTimeTrait(string traitName, TraitType traitType, string traitDescription, string iconName, string damageFormula) :
+	base(traitName, traitType, traitDescription, iconName)
 	{
 		this.damageFormula = damageFormula;
 	}

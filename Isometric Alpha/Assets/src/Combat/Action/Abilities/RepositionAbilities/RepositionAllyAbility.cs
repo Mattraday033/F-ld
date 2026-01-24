@@ -47,7 +47,7 @@ public class RepositionAllyAbility : RepositionAbility, IJSONConvertable
     {
         targetCoords = getDestinationCoords();
 
-        CombatAnimationManager.loadInstantEffect(this, targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
+        CombatAnimationManager.loadInstantEffect(getEffectAnimationType(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
     }
 	
 }

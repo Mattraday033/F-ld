@@ -8,21 +8,21 @@ public class RestorationItem : CombatItem, IJSONConvertable
 {
     private const string subtype = "Restoration";
 
-    private string traitTypeToRemove;
+    private TraitType traitTypeToRemove;
 
-    public RestorationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int rangeIndex, string traitTypeToRemove) : base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeIndex, CombatItem.useDoesNotRequireAnAction)
+    public RestorationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int rangeIndex, TraitType traitTypeToRemove) : base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeIndex, CombatItem.useDoesNotRequireAnAction)
     {
         this.traitTypeToRemove = traitTypeToRemove;
     }
 
-    public RestorationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int rangeIndex, string traitTypeToRemove, int quantity) : base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeIndex, CombatItem.useDoesNotRequireAnAction, quantity)
+    public RestorationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int rangeIndex, TraitType traitTypeToRemove, int quantity) : base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeIndex, CombatItem.useDoesNotRequireAnAction, quantity)
     {
         this.traitTypeToRemove = traitTypeToRemove;
     }
 
     public string getTraitTypeToRemove()
     {
-        return traitTypeToRemove;
+        return traitTypeToRemove.ToString();
     }
 
     public override void describeSelfFull(DescriptionPanel panel)
@@ -44,13 +44,11 @@ public class RestorationItem : CombatItem, IJSONConvertable
 
         for (int traitIndex = 0; traitIndex < target.traits.Length; traitIndex++)
         {
-            if (target.traits[traitIndex].getType().Equals(traitTypeToRemove))
+            if (target.traits[traitIndex].traitType == traitTypeToRemove)
             {
                 target.removeTrait(target.traits[traitIndex]);
                 return;
             }
-
-            //traitIndex--;
         }
     }
 

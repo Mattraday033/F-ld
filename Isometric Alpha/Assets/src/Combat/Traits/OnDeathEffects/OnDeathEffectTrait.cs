@@ -8,8 +8,8 @@ public class OnDeathEffectTrait : Trait
 	private TargetPriorityTrait targetPriority;
 	public bool deleteIfIsDead {private get; set;}
 	
-	public OnDeathEffectTrait(string traitName, string traitType, string traitDescription, string traitIconName, Color traitIconBackgroundColor, string abilityKey, TargetPriorityTrait targetPriority):
-	base(traitName, traitType, traitDescription, traitIconName, traitIconBackgroundColor)
+	public OnDeathEffectTrait(string traitName, string traitDescription, string iconName, string abilityKey, TargetPriorityTrait targetPriority, TraitType traitType = TraitType.OnDeath):
+	base(traitName, traitType, traitDescription, iconName)
 	{
 		this.abilityKey = abilityKey;
 		this.targetPriority = targetPriority;

@@ -496,8 +496,6 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.nandor+1, new Vector3Int(6, -9), LocationNameList.campSouthEast, Facing.NorthWest)); // Nandor after guard punishment start convo
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.carter, new Vector3Int(1, -11), LocationNameList.campSouthEast, Facing.NorthWest));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.thatch, new Vector3Int(10, -9), LocationNameList.campSouthEast, Facing.SouthWest));
-
-
         #endregion
 
         oocSpawnDetailsDict.Add(LocationNameList.campSouthEast, list);

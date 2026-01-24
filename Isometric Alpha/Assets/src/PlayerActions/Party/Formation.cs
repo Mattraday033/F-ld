@@ -514,7 +514,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
 
         blocks.Add(DescriptionPanelBuildingBlock.getRegenBlock(PartyStats.getPartyRegenAmountForDisplay())); 
 
-        blocks.Add(DescriptionPanelBuildingBlock.getVolleyBlock("+" + PartyStats.getVolleyAccuracy() + "%"));
+        blocks.Add(DescriptionPanelBuildingBlock.getVolleyBlock(PartyStats.getVolleyAccuracy() + "%"));
 
         blocks.Add(DescriptionPanelBuildingBlock.getPartyActionsBlock(PartyStats.getPartyMemberCombatActionSlots().ToString()));
 

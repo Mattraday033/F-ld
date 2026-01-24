@@ -13,7 +13,7 @@ public class MultiStackTrait : Trait
     public bool attachedToListeners = false;
 
     public MultiStackTrait(Trait baseTrait, StackableTrait[] stackableTraits) :
-    base(baseTrait.getName(), baseTrait.getType(), baseTrait.getDescription(), baseTrait.getIconName(), baseTrait.getTraitIconBackgroundColor())
+    base(baseTrait.getName(), baseTrait.traitType, baseTrait.getDescription(), baseTrait.getIconName())
     {
         this.stackableTraits = stackableTraits;
     }
@@ -101,12 +101,6 @@ public class MultiStackTrait : Trait
         {
             DescriptionPanel.setImage(multiPanel.iconPanels[index], Helpers.loadSpriteFromResources(stackableTraits[index].getIconName()));
             DescriptionPanel.setText(multiPanel.stackCounters[index], stackableTraits[index].getNumberOfStacks());
-
-            if (!stackableTraits[index].getTraitIconBackgroundColor().Equals(Color.black) &&
-                    !stackableTraits[index].getTraitIconBackgroundColor().Equals(Color.clear))
-            {
-                DescriptionPanel.setTextColor(multiPanel.stackCounters[index], stackableTraits[index].getTraitIconBackgroundColor());
-            }
         }
     }
 
@@ -120,12 +114,6 @@ public class MultiStackTrait : Trait
         {
             DescriptionPanel.setImage(multiPanel.iconPanels[index], Helpers.loadSpriteFromResources(stackableTraits[index].getIconName()));
             DescriptionPanel.setText(multiPanel.stackCounters[index], stackableTraits[index].getNumberOfStacks());
-
-            if (!stackableTraits[index].getTraitIconBackgroundColor().Equals(Color.black) &&
-                    !stackableTraits[index].getTraitIconBackgroundColor().Equals(Color.clear))
-            {
-                multiPanel.stackCounters[index].color = stackableTraits[index].getTraitIconBackgroundColor();
-            }
         }
     }
 

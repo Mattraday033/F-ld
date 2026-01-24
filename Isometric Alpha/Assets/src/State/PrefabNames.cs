@@ -319,6 +319,13 @@ public static class PrefabNames
     public const string mineLvl2WallSecretDoor = secretDoorsFolder + "MineLvl_2 Wall";
     public const string mineLvl3WallSecretDoor = secretDoorsFolder + "MineLvl_3-SecretDoor";
     public const string mineLvl3GroundSecretDoor = secretDoorsFolder + "MineLvl_3-Ground";
+    public const string wallPatch = secretDoorsFolder + "WallPatch";
+    public const string wallPatchTall = secretDoorsFolder + "WallPatchTall";
+
+/*
+WallPatch
+WallPatchTall
+*/
 
     public const string miscFolder = spriteFolder + "Misc/";
     public const string controlPanel = miscFolder + NPCNameList.controlPanel;

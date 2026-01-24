@@ -9,14 +9,16 @@ public class TraitApplicationItem : CombatItem, IJSONConvertable
 	private const string subtype = "TraitApplication";
 	private Trait traitToApply;
 
-	public TraitApplicationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int rangeIndex, string traitKeyToApply, bool useRequiresAnAction) : base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeIndex, useRequiresAnAction)
+	public TraitApplicationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int rangeIndex, Trait traitToApply, bool useRequiresAnAction) :
+    base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeIndex, useRequiresAnAction)
 	{
-		this.traitToApply = TraitList.getTrait(traitKeyToApply);
+		this.traitToApply = traitToApply;
 	}
 
-	public TraitApplicationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int rangeIndex, string traitKeyToApply, bool useRequiresAnAction, int quantity) : base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeIndex, useRequiresAnAction, quantity)
+	public TraitApplicationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int rangeIndex, Trait traitToApply, bool useRequiresAnAction, int quantity) :
+    base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeIndex, useRequiresAnAction, quantity)
 	{
-		this.traitToApply = TraitList.getTrait(traitKeyToApply);
+		this.traitToApply = traitToApply;
 	}
 
 	public override void use(Stats target)

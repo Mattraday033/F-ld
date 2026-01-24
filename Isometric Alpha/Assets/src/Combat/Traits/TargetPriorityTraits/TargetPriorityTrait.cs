@@ -6,10 +6,8 @@ using UnityEngine;
 
 public class TargetPriorityTrait : Trait 
 {
-	public const string initialTraitType = "Target Priority";
-	
-	public TargetPriorityTrait(string traitName, string traitDescription, string traitIconName, Color traitIconBackgroundColor): 
-	base(traitName, initialTraitType, traitDescription, traitIconName, traitIconBackgroundColor)
+	public TargetPriorityTrait(string traitName, string traitDescription, string iconName): 
+	base(traitName, TraitType.TargetPriority, traitDescription, iconName)
 	{
 		
 	}

@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class LinkTrait : Trait
 {
-    public const string linkTraitType = "Link Trait";
     private Ability linkAction = new Ability(CombatActionSettings.build(DescriptionParams.build("Link Trait", "Link Damage")));
 
     private List<Stats> linkedTargets;
 
     private double percentageOfDamageDealt;
 
-    public LinkTrait(string traitName, string traitDescription, string traitIconName, int duration, Color traitIconBackgroundColor, double percentageOfDamageDealt) :
-    base(traitName, linkTraitType, traitDescription, traitIconName, duration, traitIconBackgroundColor)
+    public LinkTrait(string traitName, string traitDescription, string iconName, int duration, double percentageOfDamageDealt) :
+    base(traitName, TraitType.Interaction, traitDescription, iconName, roundsLeft: duration)
     {
         this.percentageOfDamageDealt = percentageOfDamageDealt;
     }

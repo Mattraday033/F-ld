@@ -10,10 +10,9 @@ public class VolleyAbility : Ability
 	public const string alliedVolleyCritFormula = "2+3C";
 	public const string enemyVolleyDamageFormula = "10";
 	public const string enemyVolleyCritFormula = "5";
-	public const int volleyBaseAccuracy = 50;
 	
 	public BombardmentTargetPriorityTrait volleyTargetingPriority;
-	public Stats[] allActors;
+	public List<Stats> allActors;
 
 	public bool alliedSide;
 
@@ -23,12 +22,12 @@ public class VolleyAbility : Ability
 		this.alliedSide = alliedSide;
 		findAllVolleyActorCoords(alliedSide);
 
-		if(allActors.Length > 0)
+		if(allActors.Count > 0)
 		{
 			setActor(allActors[0]);
 		}
 
-		this.volleyTargetingPriority = new BombardmentTargetPriorityTrait(generateVolleyGuaranteedHitChance(), allActors.Length);
+		this.volleyTargetingPriority = new BombardmentTargetPriorityTrait(generateVolleyGuaranteedHitChance(), allActors.Count);
 	}
 
 	public override void applySettings(CombatActionSettings settings)
@@ -87,12 +86,14 @@ public class VolleyAbility : Ability
 		
 		foreach(Stats actor in allActors)
 		{
-			if(actor == null || actor.isDead() || actor.isStunned())
+			if(!isParticipating(actor))
 			{
 				continue;
 			}
 
-			int targetCoordsIndex = UnityEngine.Random.Range(0,targetTileCoords.Length);
+            actor.playAttackAnimation();
+
+			int targetCoordsIndex = Random.Range(0,targetTileCoords.Length);
 			Stats targetCombatant = CombatGrid.getCombatantAtCoords(targetTileCoords[targetCoordsIndex]);
 			bool crit = false;
 			int finalDamage;
@@ -108,16 +109,21 @@ public class VolleyAbility : Ability
 				finalDamage = -1;
 			}
 
-			CombatAnimationManager.loadProjectile(actor.position, targetTileCoords[targetCoordsIndex], crit, finalDamage, healsTarget(), targetMustBeDead());
-			projectileNumber++;
+            CombatAnimationManager.loadInstantEffect(actor.getVolleyAnimationType(), targetTileCoords[targetCoordsIndex], crit, finalDamage, healsTarget(), targetMustBeDead());
+			
+            projectileNumber++;
 			
 			applyTrait(targetCombatant);
 			
 			coordIndex++;
 		}
-		
 	}
-	
+
+    private bool isParticipating(Stats actor)
+    {
+        return actor != null && !actor.isDead() && !actor.isStunned();
+    }
+
 	public override Selector getTargetSelector()
 	{		
 		SelectorManager selectorManager = SelectorManager.getInstance();
@@ -179,17 +185,17 @@ public class VolleyAbility : Ability
 			allSummonActors = CombatGrid.getAllAliveSummonedEnemies();
 		}
 		
-		allActors = new Stats[0];
+		allActors = new List<Stats>();
 		
-		foreach(AlliedSummonStats summon in allSummonActors)
+		foreach(VolleyParticipantStats summon in allSummonActors)
 		{
 			if(summon.isPartOfVolley())
 			{
-				allActors = Helpers.appendArray<Stats>(allActors, summon);
+				allActors.Add(summon);
 			}
 		}
 
-		if (allActors.Length > 0)
+		if (allActors.Count > 0)
 		{
 			setActor(allActors[0]);
 		}
@@ -243,9 +249,21 @@ public class VolleyAbility : Ability
 
 		return volleyActors;
 	}
-    private static int generateVolleyGuaranteedHitChance()
+    private int generateVolleyGuaranteedHitChance()
 	{
-		return volleyBaseAccuracy + PartyStats.getVolleyAccuracy();
+        if(allActors.Count == 0)
+        {
+            return 0;
+        } 
+
+        int totalVolleyAccuracy = 0;
+
+        foreach(Stats stats in allActors)
+        {
+            totalVolleyAccuracy += stats.getVolleyAccuracy();
+        }
+
+		return totalVolleyAccuracy/allActors.Count;
 	}
 
 	public override void setActor(Stats actor)

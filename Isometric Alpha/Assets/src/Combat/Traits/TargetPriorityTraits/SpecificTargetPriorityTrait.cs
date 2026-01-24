@@ -8,14 +8,14 @@ public class SpecificTargetPriorityTrait : TargetPriorityTrait
 {
 	private GridCoords[] specificTargets;
 	
-	public SpecificTargetPriorityTrait(string traitName, string traitDescription, string traitIconName, Color traitIconBackgroundColor, GridCoords specificTarget): 
-	base(traitName, traitDescription, traitIconName, traitIconBackgroundColor)
+	public SpecificTargetPriorityTrait(string traitName, string traitDescription, string iconName, GridCoords specificTarget): 
+	base(traitName, traitDescription, iconName)
 	{
 		this.specificTargets = new GridCoords[1]{specificTarget};
 	}
 	
-	public SpecificTargetPriorityTrait(string traitName, string traitDescription, string traitIconName, Color traitIconBackgroundColor, GridCoords[] specificTargets): 
-	base(traitName, traitDescription, traitIconName, traitIconBackgroundColor)
+	public SpecificTargetPriorityTrait(string traitName, string traitDescription, string iconName, GridCoords[] specificTargets): 
+	base(traitName, traitDescription, iconName)
 	{
 		this.specificTargets = specificTargets;
 	}

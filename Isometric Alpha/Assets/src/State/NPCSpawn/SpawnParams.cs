@@ -133,22 +133,12 @@ public class InteractableSpawnParams : SpawnParams
             return doNotSpawn;
         }
 
-/*
-    public virtual void checkGateStatus()
-    {
-        if (GateAndChestManager.hasBeenOpened(getGateKey()))
-        {
-            gameObject.SetActive(false);
-        }
-    }
-
-    public string getGateKey()
-    {
-        return AreaManager.locationName+gateKey;
-    }
-*/
-
         if(GateAndChestManager.hasBeenOpened(AreaManager.locationName+npcName))
+        {
+            return doNotSpawn;
+        }
+
+        if(SecretDoorFlags.secretDoorHasBeenDiscovered(AreaManager.locationName+npcName))
         {
             return doNotSpawn;
         }

@@ -57,6 +57,20 @@ public static class Constants
     public const int statLevelNine = 9;
     public const int statLevelTen = 10;
 
+	public const int endOfRoundDuration = 1; //Trait duration will always tick down once before the player/enemy gets to exploit
+	public const int oneRoundDuration = 2; //so a 1 round duration is really just for the rest of that turn's resolution
+	public const int twoRoundDuration = 3;
+	public const int threeRoundDuration = 4;
+	public const int fourRoundDuration = 5;
+
+    public const int zeroStacksAtStart = 0;
+	public const int oneStackAtStart = 1;
+	public const int twoStacksAtStart = 2;
+	public const int threeStacksAtStart = 3;
+	public const int fourStacksAtStart = 4;
+
+	public const int oneStackPerApplication = 1;
+
     public const float onTableHeightOffset = 0.05f;
 
     public const string STRDesignator = "STR";
@@ -92,7 +106,18 @@ public static class Constants
     public const int twoCreatures = 2;
     public const int threeCreatures = 3;
     public const int fourCreatures = 4;
+    public const int fiveCreatures = 5;
+    public const int sixCreatures = 6;
+    public const int sevenCreatures = 7;
+    public const int eightCreatures = 8;
+    public const int nineCreatures = 9;
+    public const int tenCreatures = 10;
+    public const int elevenCreatures = 11;
+    public const int twelveCreatures = 12;
+    public const int tooManyCreatures = 20;
     #endregion
+
+    public const int perfectVolleyAccuracy = 100;
 
     #region Creature Armor Values
 

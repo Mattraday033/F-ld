@@ -353,7 +353,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(wisdomKeyChar);
-        statAbilityDictionary.Add(currentKey, new InterruptAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(throatJabName, "A swift jab in the throat that interrupts the enemy's plans. Guaranteed to critically hit if used on an enemy with a '" + TraitList.chargeTraitType + "' type trait. Removes 1 '" + TraitList.chargeTraitType + "' type trait from the target."), DamageParams.build("4W + 2S + 2D"), FrequencyParams.build(oneSlotMax, sixRoundCooldown), AnimationParams.build(EffectAnimationType.Blunt), TraitList.tripped), TraitList.chargeTraitType));
+        statAbilityDictionary.Add(currentKey, new InterruptAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(throatJabName, "A swift jab in the throat that interrupts the enemy's plans. Guaranteed to critically hit if used on an enemy with a '" + TraitType.Charge.ToString() + "' type trait. Removes 1 '" + TraitType.Charge.ToString() + "' type trait from the target."), DamageParams.build("4W + 2S + 2D"), FrequencyParams.build(oneSlotMax, sixRoundCooldown), AnimationParams.build(EffectAnimationType.Blunt), TraitList.tripped), TraitType.Charge));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(wisdomKeyChar);
@@ -383,7 +383,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = "c-2-3";
-        statAbilityDictionary.Add(currentKey, new HealingAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(rallyName, "Encourage an ally to fight on, increasing their damage by " + TraitList.ralliedExtraDamage + " and healing them. Costs 3 Red Knife stacks."), DamageParams.build("2C"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(twoSlotMax, sixRoundCooldown), CostParams.build(ActionCostType.RedKnife, threeStackCastCost), TraitList.rallied)));
+        statAbilityDictionary.Add(currentKey, new HealingAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(rallyName, "Encourage an ally to fight on, increasing their damage by " + TraitList.rallied.getDamageFormula() + " and healing them. Costs 3 Red Knife stacks."), DamageParams.build("2C"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(twoSlotMax, sixRoundCooldown), CostParams.build(ActionCostType.RedKnife, threeStackCastCost), TraitList.rallied)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		currentKey = generateAbilityKey(charismaKeyChar);

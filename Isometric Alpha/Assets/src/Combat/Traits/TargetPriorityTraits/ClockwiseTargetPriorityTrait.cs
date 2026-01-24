@@ -9,11 +9,10 @@ public class ClockwiseTargetPriorityTrait : TargetPriorityTrait
 	private const string initialName = "Clockwise";
 	private const string initialTraitDescription = "This creature chooses it's targets in a cycle in the clockwise direction.";
 	private const string initialTraitIconName = "Clockwise";
-	private readonly static Color initialIconBackgroundColor = Color.black;
 	
 	public GridCoords[] positions;
 	
-	public ClockwiseTargetPriorityTrait(GridCoords[] positions): base(initialName, initialTraitDescription, initialTraitIconName, initialIconBackgroundColor)
+	public ClockwiseTargetPriorityTrait(GridCoords[] positions): base(initialName, initialTraitDescription, initialTraitIconName)
 	{
 		this.positions = positions;
 	}

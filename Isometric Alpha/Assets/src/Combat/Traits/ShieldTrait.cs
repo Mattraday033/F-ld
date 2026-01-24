@@ -6,14 +6,14 @@ public class ShieldTrait : Trait
 {
     private double percentageDamageReduction = 0.0;
 
-    public ShieldTrait(string traitName, string traitType, string traitDescription, string traitIconName, Color traitIconBackgroundColor, double percentageDamageReduction):
-    base(traitName, traitType, traitDescription, traitIconName, traitIconBackgroundColor)
+    public ShieldTrait(string traitName, TraitType traitType, string traitDescription, string iconName, double percentageDamageReduction):
+    base(traitName, traitType, traitDescription, iconName)
     {
         this.percentageDamageReduction = percentageDamageReduction;
     }
 
-    public ShieldTrait(string traitName, string traitType, string traitDescription, string traitIconName, int roundsLeft, Color traitIconBackgroundColor, double percentageDamageReduction):
-    base(traitName, traitType, traitDescription, traitIconName, roundsLeft, traitIconBackgroundColor)
+    public ShieldTrait(string traitName, TraitType traitType, string traitDescription, string iconName, int roundsLeft, double percentageDamageReduction):
+    base(traitName, traitType, traitDescription, iconName, roundsLeft: roundsLeft)
     {
         this.percentageDamageReduction = percentageDamageReduction;
     }
@@ -38,8 +38,8 @@ public class ShieldTrait : Trait
 public class HiddenShieldTrait : ShieldTrait
 {
 
-    public HiddenShieldTrait(string traitName, string traitType, string traitDescription, string traitIconName, Color traitIconBackgroundColor, double percentageDamageReduction) :
-    base(traitName, traitType, traitDescription, traitIconName, traitIconBackgroundColor, percentageDamageReduction)
+    public HiddenShieldTrait(string traitName, TraitType traitType, string traitDescription, string iconName, double percentageDamageReduction) :
+    base(traitName, traitType, traitDescription, iconName, percentageDamageReduction)
     {
     }
 

@@ -15,9 +15,6 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public const bool failedToResist = false;
 
-    public const string zoiTraitName = "'s Influence";
-    public const string zoiTraitDescription = "The benefits of a Zone of Influence are being applied to this creature.";
-
     private const int traitApplicationDamageFrameDelay = 2;
     private const bool doesNotHealTarget = false;
     private const bool isNotACrit = false;
@@ -125,11 +122,15 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return combatSpriteName;
     }
 
-    public virtual GameObject instantiateCombatSprite()
+    public virtual GameObject instantiateCombatSprite(GridCoords initialPosition)
     {
         combatSprite = Instantiate(Resources.Load<GameObject>(getCombatSpriteName()), CombatStateManager.getCreatureParent());
 
+        position = initialPosition.clone();
+
         setUpComponents(combatSprite.GetComponent<ComponentList>());
+
+        moveTo(position);
 
         return combatSprite;
     }
@@ -590,7 +591,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
         bonusDamage += getSynergyModifier();
 
-        return (baseDamage + bonusDamage);
+        return baseDamage + bonusDamage;
     }
 
     public int modifyIncomingDamage(int baseDamage)
@@ -669,11 +670,6 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         }
     }
 
-    public virtual bool isPartOfVolley()
-    {
-        return false;
-    }
-
     public bool shouldTargetEnemy()
     {
         if (CombatGrid.positionIsOnAlliedSide(position))
@@ -733,6 +729,19 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return 0f;
     }
 
+    #region Volley
+    public virtual bool isPartOfVolley()
+    {
+        return false;
+    }
+
+    public virtual int getVolleyAccuracy()
+    {
+        return Constants.perfectVolleyAccuracy;
+    }
+
+    public abstract string getVolleyAnimationType();
+    #endregion
     #endregion
 
     #region Traits
@@ -848,13 +857,13 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         traits = new Trait[0];
     }
 
-    public void removeAllTraitsOfType(string traitType)
+    public void removeAllTraitsOfType(TraitType traitType)
     {
         Trait[] newTraits = new Trait[traits.Length];
 
         for (int index = 0; index < traits.Length; index++)
         {
-            if (traits[index] != null && !traits[index].getType().Equals(traitType))
+            if (traits[index] != null && traits[index].traitType != traitType)
             {
                 newTraits[index] = traits[index];
             }
@@ -957,26 +966,23 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return -1;
     }
 
-    public bool hasTraitOfType(string traitTypeToCheck)
+    public bool hasTraitOfType(TraitType traitTypeToCheck)
     {
         Trait traitOfType = getTraitOfType(traitTypeToCheck);
 
         return traitOfType != null && !(traitOfType is null);
     }
 
-    public Trait getTraitOfType(string traitTypeToCheck)
+    public Trait getTraitOfType(TraitType traitTypeToCheck)
     {
         Trait[] traitList = getTraits();
 
-        int traitIndex = 0;
         foreach (Trait trait in traitList)
         {
-            if (trait != null && trait.getType().Equals(traitTypeToCheck))
+            if (trait != null && trait.traitType == traitTypeToCheck)
             {
                 return trait;
             }
-
-            traitIndex++;
         }
 
         return null;
@@ -1004,27 +1010,27 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual bool notResurrectable()
     {
-        return Helpers.hasQuality<Trait>(traits, (t => t.preventsResurrection()));
+        return Helpers.hasQuality<Trait>(traits, t => t.preventsResurrection());
     } 
 
     public bool isBuffed()
     {
-        return Helpers.hasQuality<Trait>(traits, (t => t.isBuff()));
+        return Helpers.hasQuality<Trait>(traits, t => t.isBuff());
     } 
 
     public bool isDebuffed()
     {
-        return Helpers.hasQuality<Trait>(traits, (t => t.isDebuff()));
+        return Helpers.hasQuality<Trait>(traits, t => t.isDebuff());
     } 
 
     public bool isFrontline()
     {
-        return Helpers.hasQuality<Trait>(traits, t => t.Equals(TraitList.frontLine));
+        return hasTrait(TraitList.frontLine);
     } 
 
     public bool isBackline()
     {
-        return Helpers.hasQuality<Trait>(traits, t => t.Equals(TraitList.backLine));
+        return hasTrait(TraitList.backLine);
     } 
 
     #region Zone of Influence

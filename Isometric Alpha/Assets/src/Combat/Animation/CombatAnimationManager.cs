@@ -97,7 +97,7 @@ public class CombatAnimationManager : MonoBehaviour
         }
     }
 
-    public static void loadInstantEffect(CombatAction combatAction, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
+    public static void loadInstantEffect(string animationType, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
     {
         Stats target = CombatGrid.getCombatantAtCoords(targetCoords);
 
@@ -118,7 +118,7 @@ public class CombatAnimationManager : MonoBehaviour
 
         currentAnimations.Add(currentEffect.key, currentEffect);
 
-        currentEffect.setAnimations(combatAction.getEffectAnimationType());
+        currentEffect.setAnimations(animationType);
     }
 
     public static Projectile loadProjectile(GridCoords actorCoords, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)

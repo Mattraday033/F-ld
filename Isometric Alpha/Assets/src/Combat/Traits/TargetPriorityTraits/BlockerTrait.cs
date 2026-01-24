@@ -7,9 +7,8 @@ public class BlockerTrait : TargetPriorityTrait
 	private const string initialName = "Blocker";
 	private const string initialTraitDescription = "This enemy won't attack, but prevents you or your allies from attacking anything else.";
 	private const string initialTraitIconName = "Blocker";
-	private readonly static Color initialIconBackgroundColor = Color.blue;
 	
-	public BlockerTrait(): base(initialName, initialTraitDescription, initialTraitIconName, initialIconBackgroundColor)
+	public BlockerTrait(): base(initialName, initialTraitDescription, initialTraitIconName)
 	{
 		
 	}

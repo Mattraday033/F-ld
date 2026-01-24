@@ -6,10 +6,10 @@ using UnityEngine.Events;
 
 public class BreakableCrowdControlTrait: CrowdControlTrait
 {
-	public static UnityEvent<String> OnApplyingBreakableCrowdControl = new UnityEvent<string>();
+	public readonly static UnityEvent<string> OnApplyingBreakableCrowdControl = new UnityEvent<string>();
 
-    public BreakableCrowdControlTrait(string traitName, string traitType, string traitDescription, string traitIconName, Color traitIconBackgroundColor):
-	base(traitName, traitType, traitDescription, traitIconName, traitIconBackgroundColor)
+    public BreakableCrowdControlTrait(string traitName, TraitType traitType, string traitDescription, string iconName):
+	base(traitName, traitType, traitDescription, iconName)
 	{
 		OnApplyingBreakableCrowdControl.AddListener(breakCrowdControl);
     }

@@ -3,13 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public enum TerrainHiddenState { None, InFrontOfTerrain, BehindTerrain, TerrainHidden}
 
 public static class TerrainVisibilityManager
 {
-    public static TerrainHiddenState currentTerrainHiddenState;
+    public readonly static UnityEvent<TerrainHiddenState> OnTerrainVisibilityChange = new UnityEvent<TerrainHiddenState>();
+
+    private static TerrainHiddenState _CurrentTerrainHiddenState;
+    public static TerrainHiddenState currentTerrainHiddenState
+    {
+        get
+        {
+            return _CurrentTerrainHiddenState;
+        }
+        set
+        {
+            _CurrentTerrainHiddenState = value;
+            OnTerrainVisibilityChange.Invoke(_CurrentTerrainHiddenState);
+        }
+    }
 
     public static List<TilemapRenderer> shownWhileTerrainHiddenTilemaps;
     public static List<TilemapRenderer> terrainTilemaps;
@@ -19,6 +34,7 @@ public static class TerrainVisibilityManager
     [RuntimeInitializeOnLoadMethod]
     private static void initializeTerrainVisibilityManager()
     {
+        _CurrentTerrainHiddenState = TerrainHiddenState.None;
         currentTerrainHiddenState = TerrainHiddenState.None;
 
         shownWhileTerrainHiddenTilemaps = new List<TilemapRenderer>();
@@ -45,6 +61,7 @@ public static class TerrainVisibilityManager
     {
         yield return null;
         changeTerrainStateOnTerrainCollision(0);
+        OnTerrainVisibilityChange.Invoke(_CurrentTerrainHiddenState);
     }
 
     public static void initializeOnTransition()

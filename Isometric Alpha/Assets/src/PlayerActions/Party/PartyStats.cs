@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class PartyStats
 {
-
+	private const int alliedVolleyBaseAccuracy = 50;
     private const float baseCostMultiplier = 3f;
     
 
@@ -105,10 +105,7 @@ public static class PartyStats
 
     public static int getVolleyAccuracy()
     {
-        int totalWis = getTotalWisdom() / 2;
-        int totalCha = getTotalCharisma() / 2;
-
-        return totalWis + totalCha;
+        return ((getTotalCharisma() + getTotalWisdom()) / 2) + alliedVolleyBaseAccuracy;
     }
 
     public static int getPartySurpriseRounds()
@@ -162,7 +159,7 @@ public static class PartyStats
                 continue;
             }
 
-            goldMultiplier += StatBoostManager.calculateAllStatFormulasAsPercentageDouble(ally, ally.getAllStatBoosts(), b => b.getBonusGoldMultiplierFormula());
+            goldMultiplier += StatBoostSource.calculateAllStatFormulasAsPercentageDouble(ally, ally.getAllStatBoosts(), b => b.getBonusGoldMultiplierFormula());
         }
 
         return goldMultiplier;
@@ -352,7 +349,7 @@ public static class PartyStats
         }
         else
         {
-            int bonusFormulas = StatBoostManager.calculateAllStatFormulas(PartyManager.getPlayerStats(), PartyManager.getPlayerStats().getAllStatBoosts(), b => b.getBonusCunningChargesFormula());
+            int bonusFormulas = StatBoostSource.calculateAllStatFormulas(PartyManager.getPlayerStats(), PartyManager.getPlayerStats().getAllStatBoosts(), b => b.getBonusCunningChargesFormula());
 
             return baseDexCharges + bonusFormulas;
         }
@@ -368,7 +365,7 @@ public static class PartyStats
         }
         else
         {
-            return playerWisdom + StatBoostManager.calculateAllStatFormulas(PartyManager.getPlayerStats(), PartyManager.getPlayerStats().getAllStatBoosts(), b => b.getBonusObservationLevelFormula());
+            return playerWisdom + StatBoostSource.calculateAllStatFormulas(PartyManager.getPlayerStats(), PartyManager.getPlayerStats().getAllStatBoosts(), b => b.getBonusObservationLevelFormula());
         }
     }
 

@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class PredatoryTargetPriorityTrait : TargetPriorityTrait
 {
-	private static string initialName = "Predatory";
-	private static string initialTraitDescription = "This creature always attacks the target with the least health left.";
-	private static string initialTraitIconName = "Predatory";
-	private static Color initialIconBackgroundColor = Color.red;
+	private const string initialName = "Predatory";
+	private const string initialTraitDescription = "This creature always attacks the target with the least health left.";
+	private const string initialTraitIconName = "Predatory";
 	
-	public PredatoryTargetPriorityTrait(): base(initialName, initialTraitDescription, initialTraitIconName, initialIconBackgroundColor)
+	public PredatoryTargetPriorityTrait(): base(initialName, initialTraitDescription, initialTraitIconName)
 	{
 		
 	}

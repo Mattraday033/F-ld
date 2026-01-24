@@ -224,7 +224,7 @@ public static class CombatGrid
 		{
 			foreach(Stats combatantSlot in combatantStatsGrid[rowIndex].row)
 			{
-				if(combatantSlot != null && combatantSlot.isAlive() && combatantSlot.isTargetable() && combatantSlot.wasSummoned())
+				if(combatantSlot != null && combatantSlot.isAlive() && combatantSlot.isTargetable() && combatantSlot.isPartOfVolley())
 				{
 					allAliveSummonedEnemies.Add(combatantSlot);
 				}
@@ -516,12 +516,6 @@ public static class CombatGrid
 		
 		return allEmptySpaces;
 	}
-	/*
-		public const int allyRowLowerBounds = 7;
-	public const int allyRowUpperBounds = 4;
-	public const int enemyRowLowerBounds = 3;
-	public const int enemyRowUpperBounds = 0;
-	*/
 
 	public static GridCoords[] getAllSpacesInAllyZone()
 	{

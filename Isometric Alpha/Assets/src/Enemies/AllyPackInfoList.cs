@@ -9,9 +9,6 @@ public static class AllyPackInfoList
                                                                                                         AllyAmountList.guardReka,
                                                                                                         AllyAmountList.guardPazman,
                                                                                                         AllyAmountList.overseerGaspar,
-                                                                                                        // AllyAmountList.guardVirag,
-                                                                                                        // AllyAmountList.guardVirag,
-                                                                                                        // AllyAmountList.guardVirag,
                                                                                                         AllyAmountList.guardVirag
                                                                                                     }, 
                                                                             new string[]
@@ -19,13 +16,39 @@ public static class AllyPackInfoList
                                                                                             FlagNameList.mineLvl3GuardsInParty
                                                                                         });
 
+    private readonly static AllyPackInfo campSlaveAllies = new AllyPackInfo(new CreatureAmount[]   { 
+                                                                                                        AllyAmountList.southEastSlaves,
+                                                                                                        AllyAmountList.northEastSlaves,
+                                                                                                        AllyAmountList.manseSlaves
+                                                                                                    }, 
+                                                                            new string[]
+                                                                                        {
+                                                                                            FlagNameList.kastorStartedRevolt,
+                                                                                            FlagNameList.convincedSlavesToHelpYou,
+                                                                                            FlagNameList.haveManseSlaveHelp
+                                                                                        });
+
     private static Dictionary<string, List<AllyPackInfo>> allyPackInfoDict;
+
+    public static AllyPackInfo defaultAllyPackInfoByZone()
+    {
+        switch(MapObjectList.getCurrentZoneKey())
+        {
+            case ZoneKeyList.pit:
+            case ZoneKeyList.lovashiCamp:
+            case ZoneKeyList.manseFirstFloor:
+            case ZoneKeyList.manseSecondFloor:
+                return campSlaveAllies;
+            default:
+                return null;
+        }
+    }
 
     public static AllyPackInfo getAllyPackInfo(string areaName, int index)
     {
         if (!allyPackInfoDict.ContainsKey(areaName))
         {
-            return null;
+            return defaultAllyPackInfoByZone();
         }
 
         return allyPackInfoDict[areaName][index];
@@ -36,6 +59,14 @@ public static class AllyPackInfoList
     {
         List<AllyPackInfo> list;
         allyPackInfoDict = new Dictionary<string, List<AllyPackInfo>>();
+
+        #region GuardHouse SE
+        list = new List<AllyPackInfo>();
+
+        list.Add(campSlaveAllies);
+
+        allyPackInfoDict.Add(LocationNameList.guardHouseSouthWest, list);
+        #endregion
 
         #region MineLvl_3-7
         list = new List<AllyPackInfo>();

@@ -65,6 +65,11 @@ public class EffectAnimationManager : AnimationManager
         return Instantiate(Resources.Load<GameObject>(PrefabNames.effect)).GetComponent<EffectAnimationManager>();
     }
 
+    public override bool spriteSetByHeartBeat()
+    {
+        return false;
+    }
+
     public override void removeAnimation()
     {
         DestroyImmediate(gameObject);

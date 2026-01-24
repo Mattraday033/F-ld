@@ -10,24 +10,24 @@ public class DamageOnFutureTraitApplicationTrait : Trait
 	public string damagePenaltyFormula;
 	public TriggerType triggerType;
 
-	public DamageOnFutureTraitApplicationTrait(string traitName, string traitType, string traitDescription, string traitIconName, Color traitIconBackgroundColor, string damageOnApplicationFormula, TriggerType triggerType):
-	base(traitName, traitType, traitDescription, traitIconName, traitIconBackgroundColor)
+	public DamageOnFutureTraitApplicationTrait(string traitName, TraitType traitType, string traitDescription, string iconName, string damageOnApplicationFormula, TriggerType triggerType):
+	base(traitName, traitType, traitDescription, iconName)
 	{
 		this.damageOnApplicationFormula = damageOnApplicationFormula;
 		this.damagePenaltyFormula = "";
 		this.triggerType = triggerType;
 	}
 
-	public DamageOnFutureTraitApplicationTrait(string traitName, string traitType, string traitDescription, string traitIconName, int roundsLeft, Color traitIconBackgroundColor, string damageOnApplicationFormula, TriggerType triggerType):
-	base(traitName, traitType, traitDescription, traitIconName, roundsLeft, traitIconBackgroundColor)
+	public DamageOnFutureTraitApplicationTrait(string traitName, TraitType traitType, string traitDescription, string iconName, int roundsLeft, string damageOnApplicationFormula, TriggerType triggerType):
+	base(traitName, traitType, traitDescription, iconName, roundsLeft: roundsLeft)
 	{
 		this.damageOnApplicationFormula = damageOnApplicationFormula;
 		this.damagePenaltyFormula = "";
 		this.triggerType = triggerType;
 	}
 
-	public DamageOnFutureTraitApplicationTrait(string traitName, string traitType, string traitDescription, string traitIconName, int roundsLeft, Color traitIconBackgroundColor, string damageOnApplicationFormula, string damagePenaltyFormula, TriggerType triggerType):
-	base(traitName, traitType, traitDescription, traitIconName, roundsLeft, traitIconBackgroundColor)
+	public DamageOnFutureTraitApplicationTrait(string traitName, TraitType traitType, string traitDescription, string iconName, int roundsLeft, string damageOnApplicationFormula, string damagePenaltyFormula, TriggerType triggerType):
+	base(traitName, traitType, traitDescription, iconName, roundsLeft: roundsLeft)
 	{
 		this.damageOnApplicationFormula = damageOnApplicationFormula;
 		this.damagePenaltyFormula = damagePenaltyFormula;

@@ -76,9 +76,10 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 			CombatAction envCombatAction = AbilityList.getAbility(actorStats, environmentalCombatActionKey);
 			envCombatAction.setActor(actorStats);
 			
-			Trait targetingTrait = TraitList.getTrait(environmentalTargetingTraitKey);
+            Debug.LogError("Environmental Action Targeting Trait unimplmented");
+			// Trait targetingTrait = TraitList.getTrait(environmentalTargetingTraitKey);
 			
-			environmentalCombatActions[envCombatAction] = targetingTrait;
+			// environmentalCombatActions[envCombatAction] = targetingTrait;
 		}
 	}
 	

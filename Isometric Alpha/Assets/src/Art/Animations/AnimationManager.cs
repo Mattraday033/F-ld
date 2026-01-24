@@ -98,7 +98,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         Helpers.updatePolygonCollider(spriteRenderer, polygonCollider2D);
     }
 
-    public bool spriteSetByHeartBeat()
+    public virtual bool spriteSetByHeartBeat()
     {
         return (!CombatStateManager.inCombat && !PlayerMovement.getInstance().canPlayRunAnimation()) || 
                 (CombatStateManager.inCombat && !CombatAnimationManager.trackerBeingTracked(this) && !healthBarManager.linkedStats.isDead());
@@ -168,6 +168,11 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         }
 
         CombatAnimationManager.removeAnimation(key);
+
+        if(spriteSetByHeartBeat())
+        {
+            enableExtras();
+        }
 
         CombatAnimationManager.checkAllAnimationsFinished();
     }

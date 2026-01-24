@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using System.Linq;
 using System;
 
-public class EquippedItems : IEnumerable, IStatBoostSource, ICloneable
+public class EquippedItems : StatBoostSource, IEnumerable, ICloneable
 {
     public const int totalEquipmentSlots = 6;
     public readonly static UnityEvent OnEquipmentChange = new UnityEvent();
@@ -209,7 +209,7 @@ public class EquippedItems : IEnumerable, IStatBoostSource, ICloneable
 
     #endregion
 
-    #region IStatBoostSource
+    #region StatBoostSource
 
     public delegate string FormulaDelegate<T>(T t);
     public string getAllOfOneStatFormula<T>(FormulaDelegate<T> getFormula)
@@ -227,42 +227,41 @@ public class EquippedItems : IEnumerable, IStatBoostSource, ICloneable
         return totalFormula;   
     }
 
-
     #region Generic Stats
     
-    public string getBonusCritFormula()
+    public override string getBonusCritFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusCritFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusCritFormula());
     }
-    public string getBonusDamageFormula()
+    public override string getBonusDamageFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusDamageFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusDamageFormula());
     }
 
-    public string getDamageFormula()
+    public override string getDamageFormula()
     {
-        return clone().getAllOfOneStatFormula<IStatBoostSource>(t => t.getDamageFormula());
+        return clone().getAllOfOneStatFormula<StatBoostSource>(t => t.getDamageFormula());
     }
 
     #endregion
 
     #region PrimaryStats
 
-    public string getBonusStrengthFormula()
+    public override string getBonusStrengthFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusStrengthFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusStrengthFormula());
     }
-    public string getBonusDexterityFormula()
+    public override string getBonusDexterityFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusDexterityFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusDexterityFormula());
     }
-    public string getBonusWisdomFormula()
+    public override string getBonusWisdomFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusWisdomFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusWisdomFormula());
     }
-    public string getBonusCharismaFormula()
+    public override string getBonusCharismaFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusCharismaFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusCharismaFormula());
     }
 
     #endregion
@@ -270,124 +269,124 @@ public class EquippedItems : IEnumerable, IStatBoostSource, ICloneable
     #region Secondary Stats
 
     //Strength Stats
-    public string getBonusPhysicalResistanceFormula()
+    public override string getBonusPhysicalResistanceFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusPhysicalResistanceFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusPhysicalResistanceFormula());
     }
-    public string getBonusCriticalDamageMultiplierFormula()
+    public override string getBonusCriticalDamageMultiplierFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusCriticalDamageMultiplierFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusCriticalDamageMultiplierFormula());
     }
-    public string getBonusHealthFormula()
+    public override string getBonusHealthFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusHealthFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusHealthFormula());
     }
 
     //Dexterity Stats
-    public string getBonusSurpriseRoundDamageFormula()
+    public override string getBonusSurpriseRoundDamageFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusSurpriseRoundDamageFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusSurpriseRoundDamageFormula());
     }
-    public string getBonusArmorFormula()
+    public override string getBonusArmorFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusArmorFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusArmorFormula());
     }
-    public string getBonusArmorPenetrationFormula()
+    public override string getBonusArmorPenetrationFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusArmorPenetrationFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusArmorPenetrationFormula());
     }
 
     //Wisdom Stats
-    public string getBonusPassiveSlotsFormula()
+    public override string getBonusPassiveSlotsFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusPassiveSlotsFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusPassiveSlotsFormula());
     }
-    public string getBonusWeaponSlotsFormula()
+    public override string getBonusWeaponSlotsFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusWeaponSlotsFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusWeaponSlotsFormula());
     }
-    public string getBonusMentalResistanceFormula()
+    public override string getBonusMentalResistanceFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusMentalResistanceFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusMentalResistanceFormula());
     }
 
     //Charisma Stats
-    public string getBonusSynergyFormula()
+    public override string getBonusSynergyFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusSynergyFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusSynergyFormula());
     }
-    public string getBonusExuberancesFormula()
+    public override string getBonusExuberancesFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusExuberancesFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusExuberancesFormula());
     }
-    public string getBonusZOIPotencyFormula()
+    public override string getBonusZOIPotencyFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusZOIPotencyFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusZOIPotencyFormula());
     }
 
     #endregion
 
     #region Party Stats
 
-    public string getBonusRegenFormula()
+    public override string getBonusRegenFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusRegenFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusRegenFormula());
     }
 
-    public string getBonusSurpriseRoundsFormula()
+    public override string getBonusSurpriseRoundsFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusSurpriseRoundsFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusSurpriseRoundsFormula());
     }
-    public string getBonusRetreatChanceFormula()
+    public override string getBonusRetreatChanceFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusRetreatChanceFormula());
-    }
-
-    public string getBonusPartyActionsFormula()
-    {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusPartyActionsFormula());
-    }
-    public string getBonusPartySlotsFormula()
-    {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusPartySlotsFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusRetreatChanceFormula());
     }
 
-    public string getBonusGoldMultiplierFormula()
+    public override string getBonusPartyActionsFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusGoldMultiplierFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusPartyActionsFormula());
     }
-    public string getBonusDiscountFormula()
+    public override string getBonusPartySlotsFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusDiscountFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusPartySlotsFormula());
     }
 
-    public string getBonusVolleyAccuracyFormula()
+    public override string getBonusGoldMultiplierFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusVolleyAccuracyFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusGoldMultiplierFormula());
+    }
+    public override string getBonusDiscountFormula()
+    {
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusDiscountFormula());
+    }
+
+    public override string getBonusVolleyAccuracyFormula()
+    {
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusVolleyAccuracyFormula());
     }
 
     #endregion
 
     #region Skills
-    public string getBonusIntimidateChargesFormula()
+    public override string getBonusIntimidateChargesFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusIntimidateChargesFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusIntimidateChargesFormula());
     }
-    public string getBonusCunningChargesFormula()
+    public override string getBonusCunningChargesFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusCunningChargesFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusCunningChargesFormula());
     }
-    public string getBonusObservationLevelFormula()
+    public override string getBonusObservationLevelFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusObservationLevelFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusObservationLevelFormula());
     }
-    public string getBonusLeadershipUsesFormula()
+    public override string getBonusLeadershipUsesFormula()
     {
-        return getAllOfOneStatFormula<IStatBoostSource>(t => t.getBonusLeadershipUsesFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getBonusLeadershipUsesFormula());
     }
     #endregion
 
-    public Stats getStatSource()
+    public override Stats getStatSource()
     {
         return owner;
     }
@@ -397,7 +396,7 @@ public class EquippedItems : IEnumerable, IStatBoostSource, ICloneable
 
     #region IDescribable (Unimplemented)
 
-    public string getName()
+    public override string getName()
     {
         return owner.getName() + "'s Equipped Items";
     }

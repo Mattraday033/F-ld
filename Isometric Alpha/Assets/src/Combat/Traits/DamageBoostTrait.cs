@@ -4,41 +4,27 @@ using UnityEngine;
 
 public class DamageBoostTrait : Trait
 {
-    private int bonusDamageDealt;
-    private int bonusCritChance;
+    private const string damageBoostTraitDescription = "";
 
-    public DamageBoostTrait(string traitName, string traitType, string traitDescription, string traitIconName, Color traitIconBackgroundColor, int bonusDamageDealt) :
-    base(traitName, traitType, traitDescription, traitIconName, traitIconBackgroundColor)
+    public DamageBoostTrait
+                (string traitName, 
+                 TraitType traitType = TraitType.Boost, 
+                 string traitDescription = damageBoostTraitDescription, 
+                 string iconName = "",
+                 bool immobile = false, 
+                 bool pacifistic = false,
+                 bool permanent = true,
+                 int roundsLeft = Constants.oneRoundDuration) :
+            base(traitName, 
+                 traitType, 
+                 traitDescription, 
+                 iconName,
+                 immobile, 
+                 pacifistic,
+                 permanent,
+                 roundsLeft)
     {
-        this.bonusDamageDealt = bonusDamageDealt;
-        this.bonusCritChance = 0;
-    }
-    public DamageBoostTrait(string traitName, string traitType, string traitDescription, string traitIconName, Color traitIconBackgroundColor, int bonusDamageDealt, int bonusCritChance) :
-    base(traitName, traitType, traitDescription, traitIconName, traitIconBackgroundColor)
-    {
-        this.bonusDamageDealt = bonusDamageDealt;
-        this.bonusCritChance = bonusCritChance;
-    }
-
-    public DamageBoostTrait(string traitName, string traitType, string traitDescription, string traitIconName, int roundsLeft, Color traitIconBackgroundColor, int bonusDamageDealt) :
-    base(traitName, traitType, traitDescription, traitIconName, roundsLeft, traitIconBackgroundColor)
-    {
-        this.bonusDamageDealt = bonusDamageDealt;
-        this.bonusCritChance = 0;
-    }
-    public DamageBoostTrait(string traitName, string traitType, string traitDescription, string traitIconName, int roundsLeft, Color traitIconBackgroundColor, int bonusDamageDealt, int bonusCritChance) :
-    base(traitName, traitType, traitDescription, traitIconName, roundsLeft, traitIconBackgroundColor)
-    {
-        this.bonusDamageDealt = bonusDamageDealt;
-        this.bonusCritChance = bonusCritChance;
+        
     }
 
-    public override int getBonusDamageDealt()
-    {
-        return bonusDamageDealt;
-    }
-    public override int getBonusCritChance()
-    {
-        return bonusCritChance;
-    }
 }

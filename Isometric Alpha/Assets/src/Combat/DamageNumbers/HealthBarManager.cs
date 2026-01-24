@@ -23,12 +23,14 @@ public class HealthBarManager : MonoBehaviour
     {
         Trait.OnTraitApplication.AddListener(updateHealthBarColor);
         Trait.OnTraitRemoval.AddListener(updateHealthBarColor);
+        LargeEnemyStats.OnLargeEnemySpawn.AddListener(cleanUpHiddenHealthBars);
     }
 
     private void OnDestroy()
     {
         Trait.OnTraitApplication.RemoveListener(updateHealthBarColor);
         Trait.OnTraitRemoval.RemoveListener(updateHealthBarColor);
+        LargeEnemyStats.OnLargeEnemySpawn.RemoveListener(cleanUpHiddenHealthBars);
     }
 
     public void updateHealthBarColor(Trait trait)
@@ -160,4 +162,12 @@ public class HealthBarManager : MonoBehaviour
 		}
 	}
 	
+    private void cleanUpHiddenHealthBars()
+    {
+        if(!gameObject.activeInHierarchy)
+        {
+            DestroyImmediate(gameObject);
+        }
+    }
+
 }

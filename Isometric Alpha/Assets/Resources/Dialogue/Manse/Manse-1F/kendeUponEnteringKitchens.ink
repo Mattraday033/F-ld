@@ -245,10 +245,12 @@ setToTrue(foughtKendeInManseKitchen)
 {
 -(convincedImre or convincedNonbrandedToHelp) and guardSurrendered:
 
+    setToTrue(haveManseSlaveHelp)
     enterCombat({halfSlavesNoGuardFightIndex})
     
 -convincedImre or convincedNonbrandedToHelp:
 
+    setToTrue(haveManseSlaveHelp)
     enterCombat({halfSlavesFightIndex})
     
 -guardSurrendered:

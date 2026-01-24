@@ -11,7 +11,7 @@ public class GeneratedTargetPriorityTrait : TargetPriorityTrait
 	private int amountOfTargets;
 	
 	public GeneratedTargetPriorityTrait(TargetPriorityTrait targetParameters, int amountOfTargets):
-	base(targetParameters.getName(), targetParameters.getDescription(), targetParameters.getIconName(), targetParameters.getTraitIconBackgroundColor())
+	base(targetParameters.getName(), targetParameters.getDescription(), targetParameters.getIconName())
 	{
 		this.targetParameters = targetParameters;
 		this.amountOfTargets = amountOfTargets;

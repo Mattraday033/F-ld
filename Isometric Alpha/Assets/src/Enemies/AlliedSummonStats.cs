@@ -6,29 +6,24 @@ using System.Linq;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class AlliedSummonStats : EnemyStats
+public class AlliedSummonStats : VolleyParticipantStats
 {
-
-	public AlliedSummonStats(string name, int armor, int totalHitPoints): 
-		base(name, armor, totalHitPoints)
-    {
-    }
 	
 	public AlliedSummonStats(EnemyStats enemyStats): 
-		base(enemyStats.getName(), enemyStats.getTotalArmorRating(), enemyStats.getTotalHealth())
+		base(enemyStats.getName(), enemyStats.getTotalArmorRating(), enemyStats.getTotalHealth(), enemyStats.getCombatAction())
     {
         addTraits(enemyStats.traits);
-        setCreatureTypeToSummoned();
+        setFoeTypeToSummoned();
     }
 
-    private void setCreatureTypeToSummoned()
+    private void setFoeTypeToSummoned()
     {
         for(int index = 0; index < traits.Length; index++)
         {
             Trait trait = traits[index];
 
             if(trait != null && 
-                trait.getType().Equals(TraitList.creatureTypeTraitType))
+                trait.traitType == TraitType.FoeType)
             {
                 traits[index] = TraitList.summoned;
                 return;
@@ -50,14 +45,14 @@ public class AlliedSummonStats : EnemyStats
 
         return CombatGrid.findRandomOpenSpaceInAllyZone();
     }
-
-	public override bool isPartOfVolley()
-	{
-		return true;
-	}
 	
 	public override Color getOutlineColor()
 	{
 		return ColorList.canBeInteractedWith;
 	}
+
+    public override int getVolleyAccuracy()
+    {
+        return PartyStats.getVolleyAccuracy();
+    }
 }

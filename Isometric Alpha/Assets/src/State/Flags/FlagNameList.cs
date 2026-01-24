@@ -80,6 +80,7 @@ public static class FlagNameList
         public const string spawnWormsInsteadOfGuards = "spawnWormsInsteadOfGuards"; //if the revolt has started and you opened the way to the third level of the mine, but didn't seal the breach
         public const string duringSlaveRallyConversation = "duringSlaveRallyConversation";
         public const string waitingOnGarchaToSpeak = "waitingOnGarchaToSpeak"; //flag that allows garcha to still be visible after rally conversation
+        public const string haveManseSlaveHelp = "haveManseSlaveHelp";
 
 
         //Nándor Flags
@@ -231,6 +232,7 @@ public static class FlagNameList
         public const string campSEHiddenPassageFound3 = "campSEHiddenPassageFound3"; //You opened the passage between 5SlaveShack and CampSE
         public const string campCenterFirstHiddenPassageFound = "campCenterFirstHiddenPassageFound"; //You opened the passage between the Stables and CampCenter
         public const string campCenterSecondHiddenPassageFound = "campCenterSecondHiddenPassageFound"; //You opened the passage between the Temple and CampCenter
+        public const string inLeavingCampPageCarterConvo = "inLeavingCampPageCarterConvo"; //You opened the passage between the Temple and CampCenter
 
         //Minelvl2 flags
         public const string mineLvl2BrokenGateLifted = "mineLvl2BrokenGateLifted"; //if you've passed the strength check to lift the gate on the east side of Mine Lvl 2

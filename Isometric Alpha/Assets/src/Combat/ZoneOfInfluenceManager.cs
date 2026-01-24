@@ -16,12 +16,7 @@ public class ZoneOfInfluenceManager: MonoBehaviour
 	
 	private void Awake()
 	{
-		if(instance != null)
-		{
-			throw new IOException("Instance already exists for ZoneOfInfluenceManager");
-		}
-		
-		instance = this;
+        instance = this;
 	}
 	
     // Start is called before the first frame update

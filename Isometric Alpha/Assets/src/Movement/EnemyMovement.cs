@@ -733,7 +733,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     {
         EnemyPackInfo enemyPackInfo = getEnemyPackInfo();
 
-        animationManager.setAnimations(enemyPackInfo.creatureTypes[0].enemyStats.getName());
+        animationManager.setAnimations(enemyPackInfo.FoeTypes[0].enemyStats.getName());
 
         updateIdleDirection();
     }

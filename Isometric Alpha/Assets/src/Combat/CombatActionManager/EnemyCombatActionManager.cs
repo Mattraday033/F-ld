@@ -28,7 +28,6 @@ public class EnemyCombatActionManager : MonoBehaviour
 			if(Helpers.hasQuality<Trait>(enemy.traits, t => t.isPacifist()) || 
 				containsCombatActionFromPosition(enemy.position) || enemy.isPartOfVolley())
 			{
-				//Debug.LogError("Pacifistic enemy found");
 				continue; //if enemy failed to find a target, it shouldn't do anything
 			}
 			CombatAction enemyCombatAction = enemy.getCombatAction();
@@ -37,12 +36,10 @@ public class EnemyCombatActionManager : MonoBehaviour
 			
 			if(selector == null)
 			{
-				//Debug.LogError("selector == null, skipping enemy");
 				continue; //if enemy failed to find a target, it shouldn't do anything
 			}
 			
 			enemyCombatAction.setSelector(selector);
-			//enemyCombatAction.setTargetCoords(new GridCoords(selector.currentRow, selector.currentCol));
 			
 			enemyCombatAction.queueingAction();
 

@@ -5,78 +5,52 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 
+public enum TraitType
+{
+    Boost = 0,
+    Charge = 1,
+    FoeType = 2,
+    EquippedPassive = 3,
+    Influence = 4,
+    Interaction = 5,
+    Mental = 6,
+    OnDeath = 7,
+    Passive = 8,
+    Positioning = 9,
+    Protection = 10,
+    Size = 11,
+    Stance = 12,
+    TargetPriority = 13,
+    Wound = 14
+}
+
 public static class TraitList
 {
-	public readonly static GridCoords[] fourCornersEnemySide = new GridCoords[]{ new GridCoords(3,0),
-																		new GridCoords(0,0),
-																		new GridCoords(0,3),
-																		new GridCoords(3,3)
-																		};
-
-	//Permanent Trait Types
-	public const string creatureTypeTraitType = "Creature Type";
-	public const string interactionTypeTraitType = "Interaction";
-	public const string positioningTraitType = "Positioning";
-	public const string passiveTraitType = "Passive";
-	public const string equippedPassiveTraitType = "Equipped Passive";
-	public const string stanceTraitType = "Stance";
-	public const string sizeTraitType = "Size";
-
-	//Targeting traits
-	public const string generatedSuffix = "Generated";
-	public const string inaccurateBombardmentKey = "Inaccurate Bombardment";
-	public const string rapidInaccurateBombardmentKey = "Rapid Inaccurate Bombardment";
-	public const string clockwiseFourCornersEnemySideKey = "Four Corners Enemy Side";
-
-	//Debuff Trait Types
-	public const string woundTraitType = "Wound";
-	public const string mentalTraitType = "Mental";
-
-	//Buff Trait Types
-	public const string protectionTraitType = "Protection";
-	public const string boostTraitType = "Boost";
-	public const string chargeTraitType = "Charge";
+	public readonly static GridCoords[] fourCornersEnemySide = new GridCoords[]
+                                                                                { 
+                                                                                    new GridCoords(3,0),
+                                                                                    new GridCoords(0,0),
+                                                                                    new GridCoords(0,3),
+                                                                                    new GridCoords(3,3)
+                                                                                };
 
 	public const bool isBuff = true;
 	public const bool isDebuff = false;
-    public static Dictionary<string, bool> buffDebuffTraitTypes;
-
-	private const int zeroStacksAtStart = 0;
-	private const int oneStackAtStart = 1;
-	private const int twoStacksAtStart = 2;
-	private const int threeStacksAtStart = 3;
-	private const int fourStacksAtStart = 4;
 
 	private const double crushingBlowArmorShred = .5;
 
-	private const int oneStackPerApplication = 1;
+	public const string roastedKey = StatSourceNameList.roastedKey;
 
-	public const string extraShieldedKey = "Extra Shielded";
+	public const string devastatingCriticalsKey = StatSourceNameList.devastatingCriticalsKey;
 
-	public const string wormSplitsTraitKey = "Worm Splits";
-	public const string wormBossSplitsTraitKey = "Worm Boss Splits";
-	public const string wormExplodesTraitKey = "Worm Explodes";
-	public const string wormBossExplodesTraitKey = "Worm Boss Explodes";
-	public const string wormReviveTraitKey = "Worm Revive";
-	public const string wormBossReviveTraitKey = "Worm Boss Revive";
-
-	public const string roastedKey = "Roasted";
-
-	public const string devastatingCriticalsKey = "Devastating Criticals";
-
-    public const string caveMadnessKey = "Cave Madness";
-	public const string chokingKey = "Choking";
-	public const string chewKey = "Chew";
-
-	public const string bufferKey = "Buffer";
-	public const string healerKey = "Healer";
-	public const string singleTargetBuffKey = "Single Target Buff";
+    public const string caveMadnessKey = StatSourceNameList.caveMadnessKey;
+	public const string chokingKey = StatSourceNameList.chokingKey;
+	public const string chewKey = StatSourceNameList.chewKey;
 
     public static Dictionary<string, Trait> dictionaryOfTraits;
     public static Dictionary<string, Trait> dictionaryOfHiddenTraits;
 
-	private const bool isPacificstic = true;
-	private const bool isMandatoryTrait = true;
+	private const bool isPacifist = true;
 	private const bool preventsMovementTrait = true;
 	private const bool preventsResurrection = true;
 
@@ -89,14 +63,9 @@ public static class TraitList
 	private const int roastedExtraDamage = 1;
 	private const int bristledExtraDamage = 5;
 	private const int insecureExtraDamage = 7;
-	private const int cohesionExtraDamage = 6;
-	public const int ralliedExtraDamage = 8;
 	public const int chewHealing = 8;
-	public const int chewExtraDamage = 4;
-	public const int chewExtraCritPercent = 4;
 	public const int caveMadnessExtraDamage = 3;
 	public const int demoralizeExtraDamage = 5;
-	private const int bloodlustExtraDamage = 1;
 	private const int predationExtraDamage = 4;
 	private const int halfHandStanceExtraDamage = 1;
 	private const double shieldedDamageReduction = .5;
@@ -110,29 +79,22 @@ public static class TraitList
 
 	public const string crippledDamageFormula = "2D + 2W";
 
-	private const int endOfRoundDuration = 1; //duration will always tick down once before the player/enemy gets to exploit
-	private const int oneRoundDuration = 2; //so a 1 round duration is really just for the rest of that turns resolution
-	private const int twoRoundDuration = 3;
-	private const int threeRoundDuration = 4;
-	private const int fourRoundDuration = 5;
-
 
 	//permanent/mandatory monster traits
-	public readonly static Trait master = new Trait("Master", creatureTypeTraitType, "A creature that leads other creatures. All Master creatures must be dead to win.", "Crown", Color.blue, isMandatoryTrait);
-	public readonly static Trait minion = new Trait("Minion", creatureTypeTraitType, "A creature that takes orders from a Master. Most die in one hit.", "Collar", Color.red, isMandatoryTrait);
-	public readonly static Trait summoned = new Trait("Summoned", creatureTypeTraitType, "A creature that is here at the behest of another, but cannot be controlled directly.", "Summoned", Color.black, isMandatoryTrait);
+	public readonly static Trait master = new Trait(StatSourceNameList.masterKey, TraitType.FoeType, "A creature that leads other creatures. All Master creatures must be dead to win.", "Crown"); 
+	public readonly static Trait minion = new Trait(StatSourceNameList.minionKey, TraitType.FoeType, "A creature that takes orders from a Master. Most die in one hit.", "Collar");
+	public readonly static Trait summoned = new Trait(StatSourceNameList.summonedKey, TraitType.FoeType, "A creature that is here at the behest of another, but cannot be controlled directly.", "Summoned");
 
-	public readonly static Trait frontLine = new PositioningTrait("Front Line", positioningTraitType, "This creature always spawns at the front of the enemy field.", "Front Line", Color.black, PositioningType.Frontline);
-	public readonly static Trait backLine = new PositioningTrait("Back Line", positioningTraitType, "This creature always spawns at the back of the enemy field.", "Back Line", Color.black, PositioningType.Backline);
+	public readonly static Trait frontLine = new PositioningTrait(StatSourceNameList.frontLineKey, TraitType.Positioning, "This creature always spawns at the front of the enemy field.", "Front Line", PositioningType.Frontline);
+	public readonly static Trait backLine = new PositioningTrait(StatSourceNameList.backLineKey, TraitType.Positioning, "This creature always spawns at the back of the enemy field.", "Back Line", PositioningType.Backline);
 
-	public readonly static Trait evolutionary = new Trait("Evolutionary", interactionTypeTraitType, "Can be evolved into a better version of itself.", "Evolve", Color.black, isMandatoryTrait);
-	public readonly static Trait immobile = new Trait("Immobile", interactionTypeTraitType, "Takes no actions. Cannot be moved.", "Immobile", Color.black, isMandatoryTrait, preventsMovementTrait, isPacificstic);
-	public readonly static Trait large = new Trait("Large", sizeTraitType, "And in charge. This creature takes up multiple spaces, and will take damage each time one of its spaces is hit by the same attack. Cannot be moved.", "Large", Color.black, isMandatoryTrait, preventsMovementTrait);
+	public readonly static Trait evolutionary = new Trait(StatSourceNameList.evolutionaryKey, TraitType.Interaction, "Can be evolved into a better version of itself.", "Evolve");
+	public readonly static Trait immobile = new Trait(StatSourceNameList.immobileKey, TraitType.Interaction, "Takes no actions. Cannot be moved.", "Immobile", preventsMovementTrait, isPacifist);
+	public readonly static Trait large = new Trait(StatSourceNameList.largeKey, TraitType.Size, "And in charge. This creature takes up multiple spaces, and will take damage each time one of its spaces is hit by the same attack. Cannot be moved.", "Large", preventsMovementTrait);
 
 	//all specific target priorities
-	public readonly static SpecificTargetPriorityTrait specificCheckeredLeftAlliedSide = new SpecificTargetPriorityTrait("(6,2)", "SpecificTargetPriorityTrait", "", Color.black, new GridCoords(6, 2));
-	public readonly static SpecificTargetPriorityTrait specificHexadecupleBoxEnemySide = new SpecificTargetPriorityTrait("(2,2)", "SpecificTargetPriorityTrait", "", Color.black, new GridCoords(2, 2));
-
+	public readonly static SpecificTargetPriorityTrait specificCheckeredLeftAlliedSide = new SpecificTargetPriorityTrait("(6,2)", "SpecificTargetPriorityTrait", "", new GridCoords(6, 2));
+	public readonly static SpecificTargetPriorityTrait specificHexadecupleBoxEnemySide = new SpecificTargetPriorityTrait("(2,2)", "SpecificTargetPriorityTrait", "", new GridCoords(2, 2));
 
 	public readonly static Trait chaotic = new ChaoticTargetPriorityTrait();
 	public readonly static Trait clockwiseFourCornersEnemySide = new ClockwiseTargetPriorityTrait(fourCornersEnemySide);
@@ -151,98 +113,98 @@ public static class TraitList
 	public readonly static Trait singleTargetBuffer = new BufferTargetPriorityTrait(new RandomEnemyTargetPriorityTrait());
 	public readonly static Trait saintly = new CatalystTargetPriorityTrait(specificHexadecupleBoxEnemySide, new ChaoticTargetPriorityTrait());
 
-	public readonly static Trait spawner = new Trait("Spawner", interactionTypeTraitType, "This creature creates minions.", "Egg", Color.green, isMandatoryTrait);
-	public readonly static Trait fodder = new Trait("Fodder", interactionTypeTraitType, "This creature dies after it attacks", "Fodder", Color.red, isMandatoryTrait);
+	public readonly static Trait spawner = new Trait(StatSourceNameList.spawnerKey, TraitType.Interaction, "This creature creates minions.", "Egg");
+	public readonly static Trait fodder = new Trait(StatSourceNameList.fodderKey, TraitType.Interaction, "This creature dies after it attacks", "Fodder");
 
-	public readonly static Trait charged = new Trait("Charged", chargeTraitType, "This creature is capable of delivering a devastating attack.", "Charged", Color.blue);
-	public readonly static Trait shielded = new ShieldTrait("Shielded", chargeTraitType, "This creature is shielded and takes half damage.", "Shielded", oneRoundDuration, Color.blue, shieldedDamageReduction);
-	public readonly static Trait extraShielded = new ShieldTrait("Shielded", chargeTraitType, "This creature is shielded and takes a quarter damage. It will lose this trait if it is the last enemy alive.", "Shielded", oneRoundDuration, Color.blue, extraShieldedDamageReduction);
-	public readonly static Trait signaling = new Trait("Signaling", chargeTraitType, "This guard is going to call signal an arrow tower to fire upon their assailants.", "Signaling", oneRoundDuration, Color.blue);
-	public readonly static Trait observing = new Trait("Observing", chargeTraitType, "The creature is observing it's troops and developing a strategy.", "Observing", oneRoundDuration, Color.blue);
+	public readonly static Trait charged = new Trait(StatSourceNameList.chargedKey, TraitType.Charge, "This creature is capable of delivering a devastating attack.", "Charged");
+	public readonly static Trait shielded = new ShieldTrait(StatSourceNameList.shieldedKey, TraitType.Charge, "This creature is shielded and takes half damage.", "Shielded", Constants.oneRoundDuration, shieldedDamageReduction);
+	public readonly static Trait extraShielded = new ShieldTrait(StatSourceNameList.shieldedKey, TraitType.Charge, "This creature is shielded and takes a quarter damage. It will lose this trait if it is the last enemy alive.", "Shielded", Constants.oneRoundDuration, extraShieldedDamageReduction);
+	public readonly static Trait signaling = new Trait(StatSourceNameList.signalingKey, TraitType.Charge, "This guard is going to call signal an arrow tower to fire upon their assailants.", "Signaling");
+	public readonly static Trait observing = new Trait(StatSourceNameList.observingKey, TraitType.Charge, "The creature is observing it's troops and developing a strategy.", "Observing");
 
 
 	//on Death Effects
 	public readonly static Trait wormSplits = new SummonOnDeathTrait(AbilityList.splitSpawnWormsKey, (GeneratedTargetPriorityTrait)emptyGenerated2);
 	public readonly static Trait wormBossSplits = new SummonOnDeathTrait(AbilityList.splitBossSpawnWormsKey, (EmptyTargetSpecificPriorityTrait)bottomRightEnemySideEmptyTargetingTrait, preventsResurrection);
-	public readonly static Trait wormExplodes = new SelfTargetAOEOnDeathTrait("Volatile", "On Death", "When this creature is killed, it damages all creates near it.", "Volatile", AbilityList.wormExplosionKey);
-	public readonly static Trait wormBossExplodes = new SelfTargetAOEOnDeathTrait("Volatile", "On Death", "When this creature is killed, it damages all creates near it.", "Volatile", AbilityList.wormBossExplosionKey);
-	public readonly static Trait wormRevive = new SelfTargetAOEOnDeathTrait("Restorative", "On Death", "When this creature is killed, it brings back all downed creatures near it.", "Restorative", AbilityList.wormRestorativeKey, preventsResurrection);
-	public readonly static Trait wormBossRevive = new SelfTargetAOEOnDeathTrait("Restorative", "On Death", "When this creature is killed, it brings back all downed creatures near it.", "Restorative", AbilityList.wormBossRestorativeKey, preventsResurrection);
-	public readonly static Trait wormBossFumesOnDeath = new OnDeathEffectTrait("Miasmic", "On Death", "When this creature is killed, it releases a toxic gas as a final retribution against it's enemies.", "DeathFumes", Color.black, AbilityList.wormOnDeathFumesKey, specificCheckeredLeftAlliedSide);
+	public readonly static Trait wormExplodes = new SelfTargetAOEOnDeathTrait(StatSourceNameList.volatileKey, "When this creature is killed, it damages all creates near it.", "Volatile", AbilityList.wormExplosionKey);
+	public readonly static Trait wormBossExplodes = new SelfTargetAOEOnDeathTrait(StatSourceNameList.volatileKey, "When this creature is killed, it damages all creates near it.", "Volatile", AbilityList.wormBossExplosionKey);
+	public readonly static Trait wormRevive = new SelfTargetAOEOnDeathTrait(StatSourceNameList.restorativeKey, "When this creature is killed, it brings back all downed creatures near it.", "Restorative", AbilityList.wormRestorativeKey, preventsResurrection);
+	public readonly static Trait wormBossRevive = new SelfTargetAOEOnDeathTrait(StatSourceNameList.restorativeKey, "When this creature is killed, it brings back all downed creatures near it.", "Restorative", AbilityList.wormBossRestorativeKey, preventsResurrection);
+	public readonly static Trait wormBossFumesOnDeath = new OnDeathEffectTrait(StatSourceNameList.miasmicKey, "When this creature is killed, it releases a toxic gas as a final retribution against it's enemies.", "DeathFumes", AbilityList.wormOnDeathFumesKey, specificCheckeredLeftAlliedSide);
 
 
-	public readonly static Trait mobLinked = new Trait("Weakly Linked", passiveTraitType, "This creature takes a percentage of it's total health as damage when a minion dies.", "Chain", Color.blue, isMandatoryTrait);
-	public readonly static Trait bossLinked = new Trait("Power Linked", passiveTraitType, "This creature takes a percentage of it's total health as damage when a minion dies.", "Chain", Color.red, isMandatoryTrait);
+	public readonly static Trait mobLinked = new Trait(StatSourceNameList.weaklyLinkedKey, TraitType.Passive, "This creature takes a percentage of it's total health as damage when a minion dies.", "Chain");
+	public readonly static Trait bossLinked = new Trait(StatSourceNameList.powerLinkedKey, TraitType.Passive, "This creature takes a percentage of it's total health as damage when a minion dies.", "Chain");
 
 	//temporary buffs
-	public readonly static Trait daringSacrifice = new MandatoryTargetTrait("Daring Sacrifice", protectionTraitType, "Become invulnerable for one turn. All enemy attack patterns must include this creature when possible, even if they normally would not.", "DaringSacrifice", endOfRoundDuration, Color.black, daringSacrificeDamageReduction);
-	public readonly static Trait cohesion = new DamageBoostTrait("Cohesion", boostTraitType, "This creature deals " + cohesionExtraDamage + " extra damage whenever it attacks", "Cohesion", twoRoundDuration, Color.black, cohesionExtraDamage);
-	public readonly static Trait shoredUp = new ShieldTrait("Shored Up", boostTraitType, "This creature only takes half of any damage dealt to it.", "Shielded", twoRoundDuration, Color.black, shieldedDamageReduction);
-	public readonly static Trait exitStrategy = new ShieldTrait("Exit Strategy", protectionTraitType, "This creature and all of it's allies take 60% less damage until one round after the surprise round.", "ExitStrategy", oneRoundDuration, Color.black, exitStrategyDamageReduction); //exception to round duration rule because it's applied at the top of the first round and thus doesn't need to compensate for the first tick down.
-	public readonly static LinkTrait chokeholdLinkTrait = new LinkTrait("Chokehold", "This creature deals half of all damage received to whoever it is linked to.", "Chokehold", twoRoundDuration, Color.black, chokeholdDamagePercentage);
-	public readonly static Trait rallied = new DamageBoostTrait("Rallied", boostTraitType, "This creature deals " + ralliedExtraDamage + " extra damage whenever it attacks", "Rally", fourRoundDuration, Color.black, ralliedExtraDamage);
-	public readonly static Trait chew = new DamageBoostTrait(chewKey, boostTraitType, "This creature deals " + chewExtraDamage + " extra damage whenever it attacks. It also has an extra " + chewExtraCritPercent + "% chance to crit.", "Chew", threeRoundDuration, Color.black, chewExtraDamage, chewExtraCritPercent);
+	public readonly static Trait daringSacrifice = new MandatoryTargetTrait(StatSourceNameList.daringSacrificeKey, TraitType.Protection, "Become invulnerable for one turn. All enemy attack patterns must include this creature when possible, even if they normally would not.", "DaringSacrifice", Constants.endOfRoundDuration, daringSacrificeDamageReduction);
+	public readonly static Trait cohesion = new DamageBoostTrait(StatSourceNameList.cohesionKey, iconName:  "Cohesion", roundsLeft: Constants.twoRoundDuration);
+	public readonly static Trait shoredUp = new ShieldTrait(StatSourceNameList.shoredUpKey, TraitType.Boost, "This creature only takes half of any damage dealt to it.", "Shielded", Constants.twoRoundDuration, shieldedDamageReduction);
+	public readonly static Trait exitStrategy = new ShieldTrait(StatSourceNameList.exitStrategyKey, TraitType.Protection, "This creature and all of it's allies take 60% less damage until one round after the surprise round.", "ExitStrategy", Constants.oneRoundDuration, exitStrategyDamageReduction); //exception to round duration rule because it's applied at the top of the first round and thus doesn't need to compensate for the first tick down.
+	public readonly static LinkTrait chokeholdLinkTrait = new LinkTrait(StatSourceNameList.chokeholdKey, "This creature deals half of all damage received to whoever it is linked to.", "Chokehold", Constants.twoRoundDuration, chokeholdDamagePercentage);
+	public readonly static Trait rallied = new DamageBoostTrait(StatSourceNameList.ralliedKey, iconName: "Rally", roundsLeft: Constants.fourRoundDuration);
+	public readonly static Trait chew = new DamageBoostTrait(chewKey, iconName: chewKey, roundsLeft: Constants.threeRoundDuration);
 
 
 	//temporary debuffs
-	public readonly static Trait vulnerable = new VulnerabilityTrait("Vulnerable", woundTraitType, "This creature takes " + vulnerableExtraDamage + " extra damage whenever it is hit", "MakeItBleed", Color.black, vulnerableExtraDamage);
-	public readonly static Trait bristled = new VulnerabilityTrait("Bristled", woundTraitType, "This creature takes " + bristledExtraDamage + " extra damage whenever it is hit", "Bristled", fourRoundDuration, Color.black, bristledExtraDamage);
-	public readonly static Trait upsideTheHead = new CrowdControlTrait("Upside The Head", woundTraitType, "This creature is stunned, and cannot complete any actions until this trait is removed.", "UpsideTheHead", oneRoundDuration, Color.black);
-	public readonly static Trait tripped = new CrowdControlTrait("Trip", woundTraitType, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Trip", endOfRoundDuration, Color.black);
-	public readonly static Trait countered = new CrowdControlTrait("Countered", woundTraitType, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Trip", endOfRoundDuration, Color.black);
-	public readonly static Trait acidVomit = new VulnerabilityTrait("Acid Vomit", woundTraitType, "This creature takes " + acidVomitExtraDamage + " extra damage whenever it is hit", "Acid Vomit", threeRoundDuration, Color.black, acidVomitExtraDamage);
-	private readonly static Trait roastedBaseTrait = new VulnerabilityTrait(roastedKey, woundTraitType, "Roasted to perfection. This creature takes an extra point damage per stack of '" + roastedKey + "'", roastedKey, Color.black, roastedExtraDamage);
-	public readonly static Trait roasted = new StackableTrait(oneStackAtStart, oneStackPerApplication, roastedBaseTrait);
-	public readonly static Trait crippled = new DamageOnFutureTraitApplicationTrait("Crippled", woundTraitType, "This creature has suffered a crippling blow and takes " + crippledDamageFormula + " whenever a debuff is applied to it.", "Cripple", Color.black, crippledDamageFormula, TriggerType.Debuff);
-	public readonly static Trait whiplash = new CrowdControlTrait("Whiplash", woundTraitType, "This creature is stunned until the end of the round", "Lashings", endOfRoundDuration, Color.black);
-	public readonly static Trait afraid = new CrowdControlTrait("Afraid", woundTraitType, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Afraid", oneRoundDuration, Color.black);
-	public readonly static Trait crushingBlow = new ArmorShredTrait(AbilityList.crushingBlowName, woundTraitType, "Until the end of the turn this creature can only muster half of their normal armor value.", AbilityList.crushingBlowName, endOfRoundDuration, Color.black, crushingBlowArmorShred);
-	public readonly static Trait chokehold = new CrowdControlTrait("Chokehold", LinkTrait.linkTraitType, "This creature is stunned and receives half of all damage dealt to whoever stunned it.", "Chokehold", twoRoundDuration, Color.black);
-	public readonly static Trait insecure = new VulnerabilityTrait("Insecure", mentalTraitType, "This creature is no longer sure of it's own defenses. This creature takes " + insecureExtraDamage + " extra damage whenever it is hit.", "Victimize", Color.black, insecureExtraDamage);
-	public readonly static Trait demoralized = new SlowingTrait("Demoralized", mentalTraitType, "This creature is reluctant to fight. It takes " + demoralizeExtraDamage + " extra damage and always attacks last in the action order.", "Demoralize", fourRoundDuration, Color.black, demoralizeExtraDamage);
-	public readonly static Trait choking = new CrowdControlTrait(chokingKey, woundTraitType, "This creature is stunned, and cannot complete any actions until this trait is removed.", "SmokeBomb", oneRoundDuration, Color.black);
-    public readonly static Trait caveMadness = new SlowingTrait(caveMadnessKey, mentalTraitType, "The ringing won't stop! The afflicted creature always moves last in the action order, and takes " + caveMadnessExtraDamage + " extra damage when struck.", caveMadnessKey, twoRoundDuration, Color.black, caveMadnessExtraDamage);
+	public readonly static Trait vulnerable = new VulnerabilityTrait(StatSourceNameList.vulnerableKey, TraitType.Wound, "This creature takes " + vulnerableExtraDamage + " extra damage whenever it is hit", "MakeItBleed", vulnerableExtraDamage);
+	public readonly static Trait bristled = new VulnerabilityTrait(StatSourceNameList.bristledKey, TraitType.Wound, "This creature takes " + bristledExtraDamage + " extra damage whenever it is hit", "Bristled", Constants.fourRoundDuration, bristledExtraDamage);
+	public readonly static Trait upsideTheHead = new CrowdControlTrait(StatSourceNameList.upsideTheHeadKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "UpsideTheHead", Constants.oneRoundDuration);
+	public readonly static Trait tripped = new CrowdControlTrait(StatSourceNameList.tripKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Trip", Constants.endOfRoundDuration);
+	public readonly static Trait countered = new CrowdControlTrait(StatSourceNameList.counteredKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Trip", Constants.endOfRoundDuration);
+	public readonly static Trait acidVomit = new VulnerabilityTrait(StatSourceNameList.acidVomitKey, TraitType.Wound, "This creature takes " + acidVomitExtraDamage + " extra damage whenever it is hit", "Acid Vomit", Constants.threeRoundDuration, acidVomitExtraDamage);
+	private readonly static Trait roastedBaseTrait = new VulnerabilityTrait(roastedKey, TraitType.Wound, "Roasted to perfection. This creature takes an extra point damage per stack of '" + roastedKey + "'", roastedKey, roastedExtraDamage);
+	public readonly static Trait roasted = new StackableTrait(Constants.oneStackAtStart, Constants.oneStackPerApplication, roastedBaseTrait);
+	public readonly static Trait crippled = new DamageOnFutureTraitApplicationTrait(StatSourceNameList.crippledKey, TraitType.Wound, "This creature has suffered a crippling blow and takes " + crippledDamageFormula + " whenever a debuff is applied to it.", "Cripple", crippledDamageFormula, TriggerType.Debuff);
+	public readonly static Trait whiplash = new CrowdControlTrait(StatSourceNameList.whiplashKey, TraitType.Wound, "This creature is stunned until the end of the round", "Lashings", Constants.endOfRoundDuration);
+	public readonly static Trait afraid = new CrowdControlTrait(StatSourceNameList.afraidKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Afraid", Constants.oneRoundDuration);
+	public readonly static Trait crushingBlow = new ArmorShredTrait(AbilityList.crushingBlowName, TraitType.Wound, "Until the end of the turn this creature can only muster half of their normal armor value.", AbilityList.crushingBlowName, Constants.endOfRoundDuration, crushingBlowArmorShred);
+	public readonly static Trait chokehold = new CrowdControlTrait(StatSourceNameList.chokeholdKey, TraitType.Interaction, "This creature is stunned and receives half of all damage dealt to whoever stunned it.", "Chokehold", Constants.twoRoundDuration);
+	public readonly static Trait insecure = new VulnerabilityTrait(StatSourceNameList.insecureKey, TraitType.Mental, "This creature is no longer sure of it's own defenses. This creature takes " + insecureExtraDamage + " extra damage whenever it is hit.", "Victimize", insecureExtraDamage);
+	public readonly static Trait demoralized = new SlowingTrait(StatSourceNameList.demoralizedKey, TraitType.Mental, "This creature is reluctant to fight. It takes " + demoralizeExtraDamage + " extra damage and always attacks last in the action order.", "Demoralize", Constants.fourRoundDuration, demoralizeExtraDamage);
+	public readonly static Trait choking = new CrowdControlTrait(chokingKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "SmokeBomb", Constants.oneRoundDuration);
+    public readonly static Trait caveMadness = new SlowingTrait(caveMadnessKey, TraitType.Mental, "The ringing won't stop! The afflicted creature always moves last in the action order, and takes " + caveMadnessExtraDamage + " extra damage when struck.", caveMadnessKey, Constants.twoRoundDuration, caveMadnessExtraDamage);
 	
 
 	//permanent debuffs
-	public readonly static Trait flensed = new DamageOverTimeTrait("Flensed", woundTraitType, "This creature takes 3D + 5 damage at the end of every round for the rest of combat.", "Flense", Color.black, "3D + 5");
-	public readonly static Trait isolated = new BreakableCrowdControlTrait("Isolated", mentalTraitType, "This creature has been removed from battle and cannot act until it is dealt damage.", "Isolate", Color.black);
+	public readonly static Trait flensed = new DamageOverTimeTrait(StatSourceNameList.flensedKey, TraitType.Wound, "This creature takes 3D + 5 damage at the end of every round for the rest of combat.", "Flense", "3D + 5");
+	public readonly static Trait isolated = new BreakableCrowdControlTrait(StatSourceNameList.isolatedKey, TraitType.Mental, "This creature has been removed from battle and cannot act until it is dealt damage.", "Isolate");
 
 	//EquippedPassiveBuffs
-	public readonly static Trait wearyHeart = new Trait("Weary Heart", equippedPassiveTraitType, "This creature's Armor is increased by 5 and your chance to successfully retreat is increased by 20%.", "WearyHeart", Color.black);
-	public readonly static Trait devastatingCriticals = new Trait(devastatingCriticalsKey, equippedPassiveTraitType, "This creature's critical hits deal D% of the victim's health as extra damage normally, and 2D% during a surprise round. Critical hits caused by single target actions can cause a random enemy to receive the '" + afraid.getName() + "' trait.", devastatingCriticalsKey, Color.black);
-	public readonly static Trait intimidatingPressence = new MandatoryTargetTrait("Intimidating Pressence", equippedPassiveTraitType, "All enemy attack patterns must include this creature when possible. Useful for preventing enemies from attacking weaker or hurt allies.", "InitmidatingPressence", Color.black);
-	private readonly static Trait bloodlustBaseTrait = new DamageBoostTrait("Bloodlust", equippedPassiveTraitType, "The red mist descends, causing the creature to deal " + bloodlustExtraDamage + " more damage per stack. Gain a stack at the start of every turn, and whenever you slay a minion or summoned enemy. Maximum of " + bloodlustMaximumStacks + " stacks.", "Bloodlust", Color.black, bloodlustExtraDamage);
-	public readonly static Trait bloodlust = new StackOnKillOrNewTurnTrait(new UnityEvent[] { EnemyStats.OnMinionSummonDeath, CombatStateManager.OnNewTurn }, oneStackAtStart, oneStackPerApplication, bloodlustMaximumStacks, ActionCostType.Bloodlust, bloodlustBaseTrait);
-    private readonly static Trait halfHandStanceBaseTrait = new DamageBoostTrait("Half Hand Stance", stanceTraitType, "A balanced stance, increasing damage dealt by " + halfHandStanceExtraDamage + " and decreasing damage taken by " + halfHandStanceExtraDamage + " per stack. Starts with " + halfHandStanceStartingStacks + " stacks. Gain stacks by attacking with fists or staffs. Only one stance can be active at a time.", "Half Hand Stance", Color.black, halfHandStanceExtraDamage);
-    private readonly static Trait halfHandStanceBaseTrait2 = new VulnerabilityTrait("Half Hand Stance", stanceTraitType, "", "Bloodlust", Color.black, -1*halfHandStanceExtraDamage);
-    public readonly static Trait halfHandStance = new StackableTrait(Stance.OnStanceApplyingWeaponAttack, fourStacksAtStart, oneStackPerApplication, ActionCostType.Stance, new Trait[] { halfHandStanceBaseTrait, halfHandStanceBaseTrait2 });
-    private readonly static Trait predationBaseTrait = new DamageBoostTrait("Predation", equippedPassiveTraitType, "Your brutal strikes reinvigorate you. Whenever you deal 100% or more of a Master enemy's health in one hit, you heal for D/2 health and gain 10% Armor Penetration and 4 extra damage per attack. The enemy does not need to be at full health to activate Predation.", "Predation", Color.black, predationExtraDamage);
-    public readonly static Trait predation = new StackOnKillTrait(Stats.PredationProc, zeroStacksAtStart, oneStackPerApplication, ActionCostType.Predation, predationBaseTrait);
+	public readonly static Trait wearyHeart = new Trait(StatSourceNameList.wearyHeartKey, TraitType.EquippedPassive, "This creature's Armor is increased by 5 and your chance to successfully retreat is increased by 20%.", "WearyHeart");
+	public readonly static Trait devastatingCriticals = new Trait(devastatingCriticalsKey, TraitType.EquippedPassive, "This creature's critical hits deal D% of the victim's health as extra damage normally, and 2D% during a surprise round. Critical hits caused by single target actions can cause a random enemy to receive the '" + afraid.getName() + "' trait.", devastatingCriticalsKey);
+	public readonly static Trait intimidatingPressence = new MandatoryTargetTrait(StatSourceNameList.intimidatingPressenceKey, TraitType.EquippedPassive, "All enemy attack patterns must include this creature when possible. Useful for preventing enemies from attacking weaker or hurt allies.", "InitmidatingPressence");
+	private readonly static Trait bloodlustBaseTrait = new DamageBoostTrait(StatSourceNameList.bloodlustKey, traitType: TraitType.EquippedPassive, traitDescription: "The red mist descends, causing the creature to deal more damage per stack. Gain a stack at the start of every turn, and whenever you slay a minion or summoned enemy. Maximum of " + bloodlustMaximumStacks + " stacks.", StatSourceNameList.bloodlustKey);
+	public readonly static Trait bloodlust = new StackOnKillOrNewTurnTrait(new UnityEvent[] { EnemyStats.OnMinionSummonDeath, CombatStateManager.OnNewTurn }, Constants.oneStackAtStart, Constants.oneStackPerApplication, bloodlustMaximumStacks, ActionCostType.Bloodlust, bloodlustBaseTrait);
+    private readonly static Trait halfHandStanceBaseTrait = new DamageBoostTrait(StatSourceNameList.halfHandStanceKey, TraitType.Stance, "A balanced stance, increasing damage dealt by " + halfHandStanceExtraDamage + " and decreasing damage taken by " + halfHandStanceExtraDamage + " per stack. Starts with " + halfHandStanceStartingStacks + " stacks. Gain stacks by attacking with fists or staffs. Only one stance can be active at a time.", StatSourceNameList.halfHandStanceKey);
+    private readonly static Trait halfHandStanceBaseTrait2 = new VulnerabilityTrait(StatSourceNameList.halfHandStanceKey, TraitType.Stance, "", "Bloodlust", -1*halfHandStanceExtraDamage);
+    public readonly static Trait halfHandStance = new StackableTrait(Stance.OnStanceApplyingWeaponAttack, Constants.fourStacksAtStart, Constants.oneStackPerApplication, ActionCostType.Stance, new Trait[] { halfHandStanceBaseTrait, halfHandStanceBaseTrait2 });
+    private readonly static Trait predationBaseTrait = new DamageBoostTrait(StatSourceNameList.predationKey, TraitType.EquippedPassive, "Your brutal strikes reinvigorate you. Whenever you deal 100% or more of a Master enemy's health in one hit, you heal for D/2 health and gain 10% Armor Penetration and 4 extra damage per attack. The enemy does not need to be at full health to activate Predation.", StatSourceNameList.predationKey);
+    public readonly static Trait predation = new StackOnKillTrait(Stats.PredationProc, Constants.zeroStacksAtStart, Constants.oneStackPerApplication, ActionCostType.Predation, predationBaseTrait);
 
 	//Charisma passive stackable traits
-	private readonly static Trait redKnifeBaseTrait = new Trait("Red Knife", chargeTraitType, "The will to harm. " + AbilityList.redKnifeAcquisitionMethodExplanation, "Red Knife", Color.red);
-	private readonly static StackableTrait redKnife = new StackableTrait(zeroStacksAtStart, oneStackPerApplication, ActionCostType.RedKnife, redKnifeBaseTrait);
+	private readonly static Trait redKnifeBaseTrait = new Trait(StatSourceNameList.redKnifeKey, TraitType.Charge, "The will to harm. " + AbilityList.redKnifeAcquisitionMethodExplanation, "Red Knife");
+	private readonly static StackableTrait redKnife = new StackableTrait(Constants.zeroStacksAtStart, Constants.oneStackPerApplication, ActionCostType.RedKnife, redKnifeBaseTrait);
 
-    private readonly static Trait blueShieldBaseTrait = new Trait("Blue Shield", chargeTraitType, "The will to help. " + AbilityList.blueShieldAcquisitionMethodExplanation, "Blue Shield", ColorList.blueShieldTextColor);
-    private readonly static StackableTrait blueShield = new StackableTrait(zeroStacksAtStart, oneStackPerApplication, ActionCostType.BlueShield, blueShieldBaseTrait);
+    private readonly static Trait blueShieldBaseTrait = new Trait(StatSourceNameList.blueShieldKey, TraitType.Charge, "The will to help. " + AbilityList.blueShieldAcquisitionMethodExplanation, "Blue Shield");
+    private readonly static StackableTrait blueShield = new StackableTrait(Constants.zeroStacksAtStart, Constants.oneStackPerApplication, ActionCostType.BlueShield, blueShieldBaseTrait);
 
-    private readonly static Trait yellowThornBaseTrait = new Trait("Yellow Thorn", chargeTraitType, "The will to hinder. " + AbilityList.yellowThornAcquisitionMethodExplanation, "Yellow Thorn", Color.yellow);
-    private readonly static StackableTrait yellowThorn = new StackableTrait(zeroStacksAtStart, oneStackPerApplication, ActionCostType.YellowThorn, yellowThornBaseTrait);
+    private readonly static Trait yellowThornBaseTrait = new Trait(StatSourceNameList.yellowThornKey, TraitType.Charge, "The will to hinder. " + AbilityList.yellowThornAcquisitionMethodExplanation, "Yellow Thorn");
+    private readonly static StackableTrait yellowThorn = new StackableTrait(Constants.zeroStacksAtStart, Constants.oneStackPerApplication, ActionCostType.YellowThorn, yellowThornBaseTrait);
 
-    private readonly static Trait greenLeafBaseTrait = new Trait("Green Leaf", chargeTraitType, "The will to heal. " + AbilityList.greenLeafAcquisitionMethodExplanation, "Green Leaf", ColorList.greenLeafTextColor); 
-    private readonly static StackableTrait greenLeaf = new StackableTrait(zeroStacksAtStart, oneStackPerApplication, ActionCostType.GreenLeaf, greenLeafBaseTrait);
+    private readonly static Trait greenLeafBaseTrait = new Trait(StatSourceNameList.greenLeafKey, TraitType.Charge, "The will to heal. " + AbilityList.greenLeafAcquisitionMethodExplanation, "Green Leaf");
+    private readonly static StackableTrait greenLeaf = new StackableTrait(Constants.zeroStacksAtStart, Constants.oneStackPerApplication, ActionCostType.GreenLeaf, greenLeafBaseTrait);
 
     private readonly static StackableTrait[] charismaPassiveStackableTraits = new StackableTrait[] { redKnife, blueShield, yellowThorn, greenLeaf };
 
-    private readonly static Trait charismaPassivesBaseTrait = new Trait("Exuberance", chargeTraitType, "The energies that draw others to you, and inspire them to follow your example.", "", Color.black);
+    private readonly static Trait charismaPassivesBaseTrait = new Trait(StatSourceNameList.exuberanceKey, TraitType.Charge, "The energies that draw others to you, and inspire them to follow your example.", "");
     // public readonly static MultiStackTrait charismaPassives = new MultiStackTrait(charismaPassivesBaseTrait, charismaPassiveStackableTraits);
 
-	public readonly static Trait stonewall = new ShieldTrait("Stonewall", protectionTraitType, "This creature will take 75% less damage until the following turn.", "Stonewall", twoRoundDuration, Color.black, stonewallDamageReduction);
-	
-	public readonly static Trait repositioningInvulnerability = new HiddenShieldTrait("Repositioning Invulnerability", protectionTraitType, "Become invulnerable until you reposition", "Default", Color.blue, 100.0);
+	public readonly static Trait stonewall = new ShieldTrait(StatSourceNameList.stonewallKey, TraitType.Protection, "This creature will take 75% less damage until the following turn.", "Stonewall", Constants.twoRoundDuration, stonewallDamageReduction);
 
-    public readonly static Trait untargetable = new HiddenTrait("Untargetable", isUntargetable);
+	public readonly static Trait repositioningInvulnerability = new HiddenShieldTrait(StatSourceNameList.repositioningInvulnerabilityKey, TraitType.Protection, "Become invulnerable until you reposition", "Default", 100.0);
+
+    public readonly static Trait untargetable = new HiddenTrait(StatSourceNameList.untargetableKey, isUntargetable);
 	
     static TraitList()
     {
@@ -254,7 +216,6 @@ public static class TraitList
     {
         dictionaryOfTraits = new Dictionary<string,Trait>();
         dictionaryOfHiddenTraits = new Dictionary<string, Trait>();
-        buffDebuffTraitTypes = new Dictionary<string, bool>();
 
 		dictionaryOfTraits.Add(master.getName(), master);
 		dictionaryOfTraits.Add(minion.getName(), minion);
@@ -268,25 +229,25 @@ public static class TraitList
 		dictionaryOfTraits.Add(large.getName(), large);
 		
 		dictionaryOfTraits.Add(chaotic.getName(), chaotic);
-		dictionaryOfTraits.Add(clockwiseFourCornersEnemySideKey, clockwiseFourCornersEnemySide);
+		dictionaryOfTraits.Add(StatSourceNameList.clockwiseFourCornersEnemySideKey, clockwiseFourCornersEnemySide);
 		dictionaryOfTraits.Add(empty.getName(), empty);
-		dictionaryOfTraits.Add(emptyGenerated2.getName() + generatedSuffix + 2, emptyGenerated2);
-		dictionaryOfTraits.Add(emptyGenerated3.getName() + generatedSuffix + 3, emptyGenerated3);
+		dictionaryOfTraits.Add(emptyGenerated2.getName() + StatSourceNameList.generatedSuffix + 2, emptyGenerated2);
+		dictionaryOfTraits.Add(emptyGenerated3.getName() + StatSourceNameList.generatedSuffix + 3, emptyGenerated3);
 		dictionaryOfTraits.Add(territorial.getName(), territorial);
 		dictionaryOfTraits.Add(predatory.getName(), predatory);
 		dictionaryOfTraits.Add(closeRanged.getName(), closeRanged);
-		dictionaryOfTraits.Add(inaccurateBombardmentKey, inaccurateBombardment);
-		dictionaryOfTraits.Add(rapidInaccurateBombardmentKey, rapidInaccurateBombardment);
+		dictionaryOfTraits.Add(StatSourceNameList.inaccurateBombardmentKey, inaccurateBombardment);
+		dictionaryOfTraits.Add(StatSourceNameList.rapidInaccurateBombardmentKey, rapidInaccurateBombardment);
 		dictionaryOfTraits.Add(blocker.getName(), blocker);
 		dictionaryOfTraits.Add(buffer.getName(), buffer); //of the Support Targeting Priority subtypes, asking for "Support" gets you the buffer trait
-		dictionaryOfTraits.Add(bufferKey, buffer);
-		dictionaryOfTraits.Add(healerKey, healer);
-		dictionaryOfTraits.Add(singleTargetBuffKey, singleTargetBuffer);
+		dictionaryOfTraits.Add(StatSourceNameList.bufferKey, buffer);
+		dictionaryOfTraits.Add(StatSourceNameList.healerKey, healer);
+		dictionaryOfTraits.Add(StatSourceNameList.singleTargetBuffKey, singleTargetBuffer);
 		dictionaryOfTraits.Add(saintly.getName(), saintly);
 		
 		dictionaryOfTraits.Add(charged.getName(), charged);
 		dictionaryOfTraits.Add(shielded.getName(), shielded);
-		dictionaryOfTraits.Add(extraShieldedKey, extraShielded);
+		dictionaryOfTraits.Add(StatSourceNameList.extraShieldedKey, extraShielded);
 		dictionaryOfTraits.Add(signaling.getName(), signaling);
 		dictionaryOfTraits.Add(observing.getName(), observing);
 		dictionaryOfTraits.Add(chewKey, chew);
@@ -294,12 +255,12 @@ public static class TraitList
 		dictionaryOfTraits.Add(spawner.getName(), spawner);
 		dictionaryOfTraits.Add(fodder.getName(), fodder);
 		
-		dictionaryOfTraits.Add(wormSplitsTraitKey, wormSplits);
-		dictionaryOfTraits.Add(wormBossSplitsTraitKey, wormBossSplits);
-		dictionaryOfTraits.Add(wormExplodesTraitKey, wormExplodes);
-		dictionaryOfTraits.Add(wormBossExplodesTraitKey,wormBossExplodes);
-		dictionaryOfTraits.Add(wormReviveTraitKey, wormRevive);
-		dictionaryOfTraits.Add(wormBossReviveTraitKey, wormBossRevive);
+		dictionaryOfTraits.Add(StatSourceNameList.wormSplitsTraitKey, wormSplits);
+		dictionaryOfTraits.Add(StatSourceNameList.wormBossSplitsTraitKey, wormBossSplits);
+		dictionaryOfTraits.Add(StatSourceNameList.wormExplodesTraitKey, wormExplodes);
+		dictionaryOfTraits.Add(StatSourceNameList.wormBossExplodesTraitKey,wormBossExplodes);
+		dictionaryOfTraits.Add(StatSourceNameList.wormReviveTraitKey, wormRevive);
+		dictionaryOfTraits.Add(StatSourceNameList.wormBossReviveTraitKey, wormBossRevive);
 		dictionaryOfTraits.Add(wormBossFumesOnDeath.getName(), wormBossFumesOnDeath);
 		
 		mobLinked.setLinkedPercentage(.40);
@@ -313,31 +274,7 @@ public static class TraitList
 		dictionaryOfTraits.Add(wearyHeart.getName(), wearyHeart);
 		dictionaryOfTraits.Add(stonewall.getName(), stonewall);
 		
-		buffDebuffTraitTypes.Add(woundTraitType, isDebuff);
-        buffDebuffTraitTypes.Add(mentalTraitType, isDebuff);
-
-        buffDebuffTraitTypes.Add(protectionTraitType, isBuff);
-		buffDebuffTraitTypes.Add(boostTraitType, isBuff);
-		buffDebuffTraitTypes.Add(chargeTraitType, isBuff);
-		
 		dictionaryOfHiddenTraits.Add(untargetable.getName(), untargetable);
-	}
-
-	public static Trait[] getListOfTraits(string[] traitNames)
-	{
-		if(traitNames == null)
-		{
-			return new Trait[0];
-		}
-		
-		Trait[] traits = new Trait[traitNames.Length];
-		
-		for(int nameIndex = 0; nameIndex < traitNames.Length; nameIndex++)
-		{
-			traits[nameIndex] = dictionaryOfTraits[traitNames[nameIndex]];
-		}
-		
-		return traits;
 	}
 
 	public static Trait getTrait(string traitName)

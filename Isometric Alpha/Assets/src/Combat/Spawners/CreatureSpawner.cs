@@ -64,11 +64,7 @@ public static class CreatureSpawner
 			return;
 		}
 
-        stats.position = spawnCoords;
-
-        stats.instantiateCombatSprite();
-
-        stats.moveTo(spawnCoords);
+        stats.instantiateCombatSprite(spawnCoords);
         
         if(CombatStateManager.whoseTurn == WhoseTurn.Start)
         {
@@ -85,28 +81,28 @@ public static class CreatureSpawner
 	{
         return getNextFreeFrontBackLineSpace(CombatGrid.enemyRowLowerBounds, 
                                              row => row >= CombatGrid.enemyRowUpperBounds, 
-                                             row => row--);
+                                             row => row-1);
 	}
 
 	public static GridCoords getNextFreeEnemyBackLineSpace()
 	{
         return getNextFreeFrontBackLineSpace(CombatGrid.enemyRowUpperBounds, 
                                              row => row <= CombatGrid.enemyRowLowerBounds, 
-                                             row => row++);
+                                             row => row+1);
 	}
 
 	public static GridCoords getNextFreeAllyFrontLineSpace()
 	{
         return getNextFreeFrontBackLineSpace(CombatGrid.allyRowUpperBounds, 
                                              row => row <= CombatGrid.allyRowLowerBounds, 
-                                             row => row++);
+                                             row => row+1);
 	}
 
 	public static GridCoords getNextFreeAllyBackLineSpace()
 	{
         return getNextFreeFrontBackLineSpace(CombatGrid.allyRowLowerBounds, 
                                              row => row >= CombatGrid.allyRowUpperBounds, 
-                                             row => row--);
+                                             row => row-1);
 	}
 
 	private delegate bool IndexCompareDelegate(int rowOrColumn);

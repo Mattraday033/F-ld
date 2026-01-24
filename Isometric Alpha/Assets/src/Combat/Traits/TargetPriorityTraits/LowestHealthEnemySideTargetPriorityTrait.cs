@@ -20,7 +20,7 @@ public class LowestHealthEnemySideTargetPriorityTrait : TargetPriorityTrait
 {
 
 	public LowestHealthEnemySideTargetPriorityTrait() :
-	base("", "", "", Color.black)
+	base("", "", "")
 	{
 
 	}

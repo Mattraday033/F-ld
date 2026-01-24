@@ -5,15 +5,20 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, IStatBoostSource
+public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBlocks, ISortable
 {
 
-    public readonly static UnityEvent<Trait> OnTraitApplication = new UnityEvent<Trait>();
-    public readonly static UnityEvent<Trait> OnTraitRemoval = new UnityEvent<Trait>();
+    #region Constants
     private const int traitTickDownDamageFrameDelay = 2;
-
+    #endregion
+    
+    #region Global Variables
     private string traitName;
-    private string traitType;
+    public TraitType traitType
+    {
+        get;
+        private set;
+    }
     private string traitDescription;
     private Stats traitHolder;
     public Stats traitApplier;
@@ -25,78 +30,35 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
 
     private double linkedPercentage = 0.0;
 
-    private bool mandatoryTrait = false;
     private bool immobile = false;
 
-    private string traitIconName;
-    private Color traitIconBackgroundColor;
+    private string iconName;
+    #endregion
 
-    public Trait(string traitName, string traitType, string traitDescription, string traitIconName, Color traitIconBackgroundColor, bool mandatoryTrait)
+    #region Unity Events
+    public readonly static UnityEvent<Trait> OnTraitApplication = new UnityEvent<Trait>();
+    public readonly static UnityEvent<Trait> OnTraitRemoval = new UnityEvent<Trait>();
+    #endregion
+    
+    public Trait(string traitName, 
+                 TraitType traitType, 
+                 string traitDescription = "", 
+                 string iconName = "",
+                 bool immobile = false, 
+                 bool pacifistic = false,
+                 bool permanent = true,
+                 int roundsLeft = Constants.oneRoundDuration)
     {
         this.traitName = traitName;
         this.traitType = traitType;
         this.traitDescription = traitDescription;
+        this.iconName = iconName;
 
-        this.traitIconName = traitIconName;
-        this.traitIconBackgroundColor = traitIconBackgroundColor;
+        this.roundsLeft = roundsLeft;
 
-        this.permanent = true;
-        this.mandatoryTrait = mandatoryTrait;
-    }
-
-    public Trait(string traitName, string traitType, string traitDescription, string traitIconName, Color traitIconBackgroundColor, bool mandatoryTrait, bool immobile)
-    {
-        this.traitName = traitName;
-        this.traitType = traitType;
-        this.traitDescription = traitDescription;
-
-        this.traitIconName = traitIconName;
-        this.traitIconBackgroundColor = traitIconBackgroundColor;
-
-        this.permanent = true;
-        this.mandatoryTrait = mandatoryTrait;
-        this.immobile = immobile;
-    }
-
-    public Trait(string traitName, string traitType, string traitDescription, string traitIconName, Color traitIconBackgroundColor, bool mandatoryTrait, bool immobile, bool pacifistic)
-    {
-        this.traitName = traitName;
-        this.traitType = traitType;
-        this.traitDescription = traitDescription;
-
-        this.traitIconName = traitIconName;
-        this.traitIconBackgroundColor = traitIconBackgroundColor;
-
-        this.permanent = true;
-        this.mandatoryTrait = mandatoryTrait;
+        this.permanent = permanent;
         this.immobile = immobile;
         this.pacifistic = pacifistic;
-    }
-
-    public Trait(string traitName, string traitType, string traitDescription, string traitIconName, Color traitIconBackgroundColor)
-    {
-        this.traitName = traitName;
-        this.traitType = traitType;
-        this.traitDescription = traitDescription;
-
-        this.traitIconName = traitIconName;
-        this.traitIconBackgroundColor = traitIconBackgroundColor;
-
-        this.permanent = true;
-    }
-
-    public Trait(string traitName, string traitType, string traitDescription, string traitIconName, int roundsLeft, Color traitIconBackgroundColor)
-    {
-        this.traitName = traitName;
-        this.traitType = traitType;
-        this.traitDescription = traitDescription;
-
-        this.traitIconName = traitIconName;
-        this.traitIconBackgroundColor = traitIconBackgroundColor;
-
-        this.permanent = false;
-        this.roundsLeft = roundsLeft;
-        this.maxRoundsLeft = roundsLeft;
     }
 
     //Hidden Traits use this constructor
@@ -122,7 +84,18 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
 
     public virtual bool isMandatoryTrait()
     {
-        return mandatoryTrait;
+        switch(traitType)
+        {
+            case TraitType.FoeType:
+            case TraitType.Influence:
+            case TraitType.Passive:
+            case TraitType.Positioning:
+            case TraitType.OnDeath:
+            case TraitType.Size:
+                return true;
+            default:
+                return false;
+        }
     }
 
     public static string getPermanentDescription()
@@ -132,13 +105,7 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
 
     public virtual string getIconName()
     {
-        return traitIconName;
-    }
-
-    public virtual Color getTraitIconBackgroundColor()
-    {
-        return traitIconBackgroundColor;
-
+        return iconName;
     }
 
     public Sprite getIconSprite()
@@ -351,25 +318,26 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
 
     public bool isDebuff()
     {
-        if (TraitList.buffDebuffTraitTypes.ContainsKey(traitType))
+        switch(traitType)
         {
-            return !TraitList.buffDebuffTraitTypes[traitType];
-        }
-        else
-        {
-            return false;
+            case TraitType.Mental:
+            case TraitType.Wound:
+                return true;
+            default:
+                return false;
         }
     }
 
     public bool isBuff()
     {
-        if (TraitList.buffDebuffTraitTypes.ContainsKey(traitType))
+        switch(traitType)
         {
-            return TraitList.buffDebuffTraitTypes[traitType];
-        }
-        else
-        {
-            return false;
+            case TraitType.Boost:
+            case TraitType.Charge:
+            case TraitType.Protection:
+                return true;
+            default:
+                return false;
         }
     }
     public virtual void resetStacksToStartingAmount()
@@ -424,7 +392,7 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
         return traitHolder;
     }
 
-    public Stats getStatSource()
+    public override Stats getStatSource()
     {
         if(!CombatStateManager.inCombat && traitApplier == null)
         {
@@ -500,9 +468,9 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
         return (Trait)Clone();
     }
 
-    //IDescribable methods
+    #region IDescribable methods
 
-    public virtual string getName()
+    public override string getName()
     {
         return traitName;
     }
@@ -556,7 +524,7 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
         DescriptionPanel.setText(panel.nameText, getName());
         DescriptionPanel.setText(panel.useDescriptionText, traitDescription);
         DescriptionPanel.setText(panel.timerText, getRoundsLeftForDisplay());
-        DescriptionPanel.setText(panel.typeText, traitType);
+        DescriptionPanel.setText(panel.typeText, getType());
 
         DescriptionPanel.setImage(panel.iconPanel, getIconSprite());
     }
@@ -588,8 +556,9 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
         return true;
     }
 
-    //IDescribableInBlocks methods
+    #endregion
 
+    #region IDescribableInBlocks methods
     public virtual List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
     {
         List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
@@ -600,7 +569,7 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getMaxRoundsLeftForDisplay()));
 
-        buildingBlocks.AddRange(IStatBoostSource.getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
+        buildingBlocks.AddRange(StatBoostSource.getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getDescription()));
 
@@ -608,6 +577,7 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
 
         return buildingBlocks;
     }
+    #endregion
 
     #region ISortable
     public int getQuantity()
@@ -618,13 +588,27 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
     {
         throw new NotImplementedException("Traits cannot be sorted by Worth");
     }
+
     public string getType()
     {
-        return traitType;
+        switch(traitType)
+        {
+            case TraitType.FoeType:
+                return "Foe Type";
+            case TraitType.EquippedPassive:
+                return "Equipped Passive";
+            case TraitType.OnDeath:
+                return "On Death";
+            case TraitType.TargetPriority:
+                return "Target Priority";
+            default:
+                return traitType.ToString();
+        }
     }
+
     public string getSubtype()
     {
-        return traitType;
+        return getType();
     }
     public int getLevel()
     {
@@ -636,196 +620,6 @@ public class Trait : ICloneable, IDescribable, IDescribableInBlocks, ISortable, 
     }
 	#endregion
     
-    #region IStatBoostSource Methods
-    #region Generic Stats
-
-    public string getBonusCritFormula()
-    {
-        return StatBoostManager.getBonusCritFormula(this);
-    }
-
-    public string getBonusDamageFormula()
-    {
-        return StatBoostManager.getBonusDamageFormula(this);
-    }
-
-    public string getDamageFormula()
-    {
-        return StatBoostManager.getDamageFormula(this);
-    }
-
-    #endregion
-
-    #region PrimaryStats
-
-    public string getBonusStrengthFormula()
-    {
-        return StatBoostManager.getBonusStrengthFormula(this);
-    }
-    
-    public string getBonusDexterityFormula()
-    {
-        return StatBoostManager.getBonusDexterityFormula(this);
-    }
- 
-    public string getBonusWisdomFormula()
-    {
-        return StatBoostManager.getBonusWisdomFormula(this);
-    }
- 
-    public string getBonusCharismaFormula()
-    {
-        return StatBoostManager.getBonusCharismaFormula(this);
-    }
- 
-
-    #endregion
-
-    #region Secondary Stats
-
-    //Strength Stats
-    public string getBonusPhysicalResistanceFormula()
-    {
-        return StatBoostManager.getBonusPhysicalResistanceFormula(this);
-    }
- 
-    public string getBonusCriticalDamageMultiplierFormula()
-    {
-        return StatBoostManager.getBonusCriticalDamageMultiplierFormula(this);
-    }
- 
-    public string getBonusHealthFormula()
-    {
-        return StatBoostManager.getBonusHealthFormula(this);
-    }
- 
-
-    //Dexterity Stats
-    public string getBonusSurpriseRoundDamageFormula()
-    {
-        return StatBoostManager.getBonusSurpriseRoundDamageFormula(this);
-    }
- 
-    public string getBonusArmorFormula()
-    {
-        return StatBoostManager.getBonusArmorFormula(this);
-    }
- 
-    public string getBonusArmorPenetrationFormula()
-    {
-        return StatBoostManager.getBonusArmorPenetrationFormula(this);
-    }
- 
-
-    //Wisdom Stats
-    public string getBonusPassiveSlotsFormula()
-    {
-        return StatBoostManager.getBonusPassiveSlotsFormula(this);
-    }
- 
-    public string getBonusWeaponSlotsFormula()
-    {
-        return StatBoostManager.getBonusWeaponSlotsFormula(this);
-    }
- 
-    public string getBonusMentalResistanceFormula()
-    {
-        return StatBoostManager.getBonusMentalResistanceFormula(this);
-    }
- 
-
-    //Charisma Stats
-    public string getBonusSynergyFormula()
-    {
-        return StatBoostManager.getBonusSynergyFormula(this);
-    }
- 
-    public string getBonusExuberancesFormula()
-    {
-        return StatBoostManager.getBonusExuberancesFormula(this);
-    }
- 
-    public string getBonusZOIPotencyFormula()
-    {
-        return StatBoostManager.getBonusZOIPotencyFormula(this);
-    }
- 
-
-    #endregion
-
-    #region Party Stats
-
-    public string getBonusRegenFormula()
-    {
-        return StatBoostManager.getBonusRegenFormula(this);
-    }
- 
-
-    public string getBonusSurpriseRoundsFormula()
-    {
-        return StatBoostManager.getBonusSurpriseRoundsFormula(this);
-    }
- 
-    public string getBonusRetreatChanceFormula()
-    {
-        return StatBoostManager.getBonusRetreatChanceFormula(this);
-    }
- 
-
-    public string getBonusPartyActionsFormula()
-    {
-        return StatBoostManager.getBonusPartyActionsFormula(this);
-    }
- 
-    public string getBonusPartySlotsFormula()
-    {
-        return StatBoostManager.getBonusPartySlotsFormula(this);
-    }
- 
-
-    public string getBonusGoldMultiplierFormula()
-    {
-        return StatBoostManager.getBonusGoldMultiplierFormula(this);
-    }
- 
-    public string getBonusDiscountFormula()
-    {
-        return StatBoostManager.getBonusDiscountFormula(this);
-    }
- 
-
-    public string getBonusVolleyAccuracyFormula()
-    {
-        return StatBoostManager.getBonusVolleyAccuracyFormula(this);
-    }
- 
-
-    #endregion
-
-    #region Skills
-    public string getBonusIntimidateChargesFormula()
-    {
-        return StatBoostManager.getBonusIntimidateChargesFormula(this);
-    }
- 
-    public string getBonusCunningChargesFormula()
-    {
-        return StatBoostManager.getBonusCunningChargesFormula(this);
-    }
- 
-    public string getBonusObservationLevelFormula()
-    {
-        return StatBoostManager.getBonusObservationLevelFormula(this);
-    }
- 
-    public string getBonusLeadershipUsesFormula()
-    {
-        return StatBoostManager.getBonusLeadershipUsesFormula(this);
-    }
-
-    #endregion
-    #endregion
-
     public override bool Equals(object obj)
     {
         Trait other = obj as Trait;
