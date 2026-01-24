@@ -220,7 +220,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         loadedCombatAction.setSelector(selectorManager.selectors[loadedCombatAction.getRangeIndex()].clone());
 
         SelectorManager.currentSelector = loadedCombatAction.getSelector();
-        selectorManager.updateCurrentSelectorPosition();
+        SelectorManager.updateCurrentSelectorPosition();
 
         loadedCombatAction = setCombatActionSelectorStartingPosition(loadedCombatAction);
         loadedCombatAction.setActor(CombatGrid.getCombatantAtCoords(SelectorManager.getInstance().selectors[0].getCoords()));
@@ -499,68 +499,3 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         hoveringOverAbilityMenuButton = false;
     }
 }
-
-/*
-
-	private CombatAction setCombatActionSelectorStartingPosition(CombatAction action)
-	{
-		
-		SelectorManager selectorManager = SelectorManager.getInstance();
-		
-		if(loadedCombatAction.isSelfTargeting())
-		{
-			loadedCombatAction.getSelector().setToLocation(new GridCoords(selectorManager.selectors[0].currentRow,
-																	selectorManager.selectors[0].currentCol));
-			loadedCombatAction.getSelector().selfTargeting = true;
-			return action;
-		}
-
-		loadedCombatAction.getSelector().selfTargeting = false;
-
-		if(loadedCombatAction.targetsAllySection())
-		{
-			if (loadedCombatAction.getRangeIndex() == Range.boxThreeIndex)
-			{
-				loadedCombatAction.getSelector().setToLocation(Range.getRangeAllyStartingPosition(loadedCombatAction.getRangeIndex()));
-			}
-			else
-			{
-				loadedCombatAction.getSelector().setToLocation(new GridCoords(selectorManager.selectors[0].currentRow,
-																				selectorManager.selectors[0].currentCol));
-			}
-
-			return action;
-		} else if(!loadedCombatAction.targetsAllySection() && loadedCombatAction.getSelector().singleTile)
-		{
-			if (loadedCombatAction.getRangeIndex() == Range.boxThreeIndex)
-			{
-				loadedCombatAction.getSelector().setToLocation(Range.getRangeEnemyStartingPosition(loadedCombatAction.getRangeIndex()));
-			}
-			else
-			{
-				loadedCombatAction.getSelector().setToLocation(new GridCoords(0, 2));
-
-				selectorManager.isMoving = true;
-				selectorManager.moveCurrentSelectorToNextSingleTileTarget();
-			}
-
-			return action;
-		}
-		
-		loadedCombatAction.getSelector().setToStartLocation();
-		
-		Stats mandatoryTarget = CombatGrid.enemyHasMandatoryTarget();
-		
-		if(mandatoryTarget != null && !loadedCombatAction.getSelector().hasAtLeastOneMandatoryTarget() && loadedCombatAction.getSelector().singleTile)
-		{
-			GridCoords mandatoryTargetCoords = mandatoryTarget.position;
-			
-			loadedCombatAction.getSelector().setToLocation(new GridCoords(mandatoryTargetCoords.row,
-																	mandatoryTargetCoords.col));
-																	
-			return action;														
-		}
-		
-		return action;
-	}
-	*/

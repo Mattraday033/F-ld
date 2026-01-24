@@ -31,15 +31,22 @@ public class BinaryPanelPopUpButton : PopUpButton
 		
 		BinaryDescisionPanel binaryDecisionPanel = (BinaryDescisionPanel) getPopUpWindow();
 		
-		binaryDecisionPanel.populate(getDescisionType());
+		binaryDecisionPanel.populate(getDecisionType());
 	}
 	
 	public void executeDecisionWithoutPopUp()
 	{
-		getDescisionType().execute();
+        if((CombatStateManager.inCombat && CombatStateManager.whoseTurn == WhoseTurn.Lost) || 
+            Flags.isInNewGameMode())
+        {
+            getDecisionType().execute();
+        } else
+        {
+            spawnPopUp(getDecisionType());
+        }
 	}
 	
-	private IDecision getDescisionType()
+	private IDecision getDecisionType()
 	{
 		switch(decisionType)
 		{

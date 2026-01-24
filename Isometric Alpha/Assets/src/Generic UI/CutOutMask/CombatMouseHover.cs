@@ -21,7 +21,8 @@ public abstract class CombatMouseHover : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if(AbilityMenuButton.hoveringOverAbilityMenuButton)
+        if(AbilityMenuButton.hoveringOverAbilityMenuButton || 
+            CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
         {
             return;
         }
@@ -40,7 +41,7 @@ public abstract class CombatMouseHover : MonoBehaviour
                     break;
                 case CurrentActivity.ChoosingAbility:
 
-                    SelectorManager.deselectCurrentAlly();
+                    SelectorManager.deselectAlly();
 
                     moveSelectorToTarget();
 

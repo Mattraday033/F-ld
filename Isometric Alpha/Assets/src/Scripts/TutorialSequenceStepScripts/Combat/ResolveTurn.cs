@@ -7,7 +7,7 @@ public class ResolveTurn : TutorialSequenceStepScript
 
     public override void runScript(GameObject target)
     {
-        CombatStateManager.getInstance().resolveTurn();
+        CombatStateManager.resolveTurn();
     }
 
 }

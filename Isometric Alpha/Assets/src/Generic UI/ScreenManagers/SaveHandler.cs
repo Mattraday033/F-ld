@@ -71,8 +71,14 @@ public class SaveHandler : ScreenManager, IEscapable
         }
         else if (CombatStateManager.inCombat)
 		{
-			OverallUIManager.setCurrentScreenType(this);
-			HealthBarCanvas.disableHealthBarCanvas();
+            if(CombatStateManager.whoseTurn == WhoseTurn.Lost)
+            {
+			    OverallUIManager.setCurrentScreenType(this);
+			    HealthBarCanvas.disableHealthBarCanvas();
+            } else
+            {
+                TutorialSequenceStepTargetUIObject.createCutOutMask(transform);
+            }
 		}
 
         saveButton.gameObject.SetActive(!Flags.isInNewGameMode() && !CombatStateManager.inCombat);
@@ -507,7 +513,11 @@ public class SaveHandler : ScreenManager, IEscapable
 		{
             OverallUIManager.UIParentPanel.SetActive(false);
             Destroy(gameObject);
-		}
+		} else if(CombatStateManager.inCombat && CombatStateManager.whoseTurn != WhoseTurn.Lost)
+        {
+            EscapeStack.removeTopObjectFromStack();
+            Destroy(gameObject);
+        }
 	}
 
     public override void updateCounter()

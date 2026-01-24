@@ -21,7 +21,6 @@ public class PlayerCombatActionCounterManager : MonoBehaviour
 		bool deadActorFound = false;
 
 		int panelIndex = 0;
-
 		foreach (CombatAction action in actionOrder)
 		{
 			Stats combatant = CombatGrid.getCombatantAtCoords(action.getActorCoords());
@@ -45,6 +44,11 @@ public class PlayerCombatActionCounterManager : MonoBehaviour
 		}
 	}
 	
+    public static bool playerHasActionsLeft()
+    {
+        return PlayerCombatActionManager.playerCombatActionQueue.Count < PartyStats.getPartyMemberCombatActionSlots();
+    }
+
 	public void setCombatActionCounterPanelsToDefault()
 	{
 		for(int panelIndex = 0; panelIndex < partyMemberCombatActionPanels.Length; panelIndex++)

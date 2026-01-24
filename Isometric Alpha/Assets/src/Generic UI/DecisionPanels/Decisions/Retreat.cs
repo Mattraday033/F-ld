@@ -84,7 +84,7 @@ public class Retreat : IDecision
 
             CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor); 
 
-            CombatStateManager.getInstance().resolveTurn();
+            CombatStateManager.resolveTurn();
         }
     }
  

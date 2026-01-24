@@ -102,7 +102,7 @@ public static class KeyPressManager
     {
         if (CombatStateManager.inCombat)
         {
-            return false;
+            return KeyBindingList.movementKeyPressed();
         }
 
         switch (PlayerOOCStateManager.currentActivity)

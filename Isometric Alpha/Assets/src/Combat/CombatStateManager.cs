@@ -30,7 +30,8 @@ public enum CurrentActivity {
                                 Repositioning = 6, 
                                 Tutorial = 7, 
                                 Retreating = 8, 
-                                Finished = 9 
+                                InEscapeMenu = 9,
+                                Finished = 10
                             }
 
 public interface INeedsUpdateOnStateChange
@@ -73,7 +74,11 @@ public class CombatStateManager : MonoBehaviour
     public readonly static UnityEvent OnActivityChangeToRepositioning = new UnityEvent();
     public readonly static UnityEvent OnActivityChangeToTutorial = new UnityEvent();
     public readonly static UnityEvent OnActivityChangeToRetreating = new UnityEvent();
+    public readonly static UnityEvent OnActivityChangeToInEscapeMenu = new UnityEvent();
     public readonly static UnityEvent OnActivityChangeToFinished = new UnityEvent();
+
+
+    public readonly static UnityEvent OnActivityChangeFromInEscapeMenu = new UnityEvent();
 
 
 	public readonly static UnityEvent OnCombatStart = new UnityEvent();
@@ -106,6 +111,7 @@ public class CombatStateManager : MonoBehaviour
     private static void initializeCombatStateManager()
     {
         instance = null;
+        currentActivity = CurrentActivity.ChoosingActor;
         resolvingTurnDuringTutorial = false;
         locationBeforeCombat = null;
         whoseTurn = WhoseTurn.Start;
@@ -228,15 +234,6 @@ public class CombatStateManager : MonoBehaviour
         return returnCell;
     }
 
-    void Update()
-	{
-		if (Input.GetKey(KeyBindingList.resolveTurnKey) && canResolveTurn() && !KeyPressManager.handlingPrimaryKeyPress)
-		{
-			KeyPressManager.handlingPrimaryKeyPress = true;
-			resolveTurn();
-		}
-	}
-
 	public static CombatStateManager getInstance()
 	{
 		return instance;
@@ -307,7 +304,7 @@ public class CombatStateManager : MonoBehaviour
 
 		if (whoseTurn != WhoseTurn.Player)
 		{
-			getInstance().resolveTurn();
+			resolveTurn();
 		}
 		else
 		{
@@ -362,7 +359,7 @@ public class CombatStateManager : MonoBehaviour
         SelectorManager.declareSelectors();
 	}
 
-	public void resolveTurn()
+	public static void resolveTurn()
 	{
 		if (currentActivity == CurrentActivity.Tutorial)
 		{
@@ -371,12 +368,12 @@ public class CombatStateManager : MonoBehaviour
 
 		updateTurnState(WhoseTurn.Resolving);
 		CombatActionManager.lockInCombatActionOrder();
-		selectorManager.deactivateCombatantInfoUIHoverPanel();
+		SelectorManager.deactivateCombatantInfoUIHoverPanel();
 		setCurrentActivity(CurrentActivity.Waiting);
-        StartCoroutine(waitBeforeFirstResolve());
+        instance.StartCoroutine(waitBeforeFirstResolve());
 	}
 
-    private IEnumerator waitBeforeFirstResolve()
+    private static IEnumerator waitBeforeFirstResolve()
     {
         float timeElapsed = 0;
 
@@ -427,6 +424,32 @@ public class CombatStateManager : MonoBehaviour
 
 	public static void setCurrentActivity(CurrentActivity newActivity)
 	{
+        switch(currentActivity)
+        {
+            case CurrentActivity.Waiting:
+                break;
+            case CurrentActivity.ChoosingActor:
+                break;
+            case CurrentActivity.ChoosingAbility:
+                break;
+            case CurrentActivity.ChoosingLocation:
+                break;
+            case CurrentActivity.ChoosingTertiary:
+                break;
+            case CurrentActivity.Tutorial:
+                break;
+            case CurrentActivity.Retreating:
+                break;
+            case CurrentActivity.InEscapeMenu:
+                OnActivityChangeFromInEscapeMenu.Invoke();
+                break;
+            case CurrentActivity.Finished:
+                break;
+            default:
+                Debug.LogError("Unknown CurrentActivity State: " + currentActivity.ToString());
+                break;
+        }
+
 		currentActivity = newActivity;
 
         switch(newActivity)
@@ -446,14 +469,14 @@ public class CombatStateManager : MonoBehaviour
             case CurrentActivity.ChoosingTertiary:
                 OnActivityChangeToChoosingTertiary.Invoke();
                 break;
-            case CurrentActivity.Repositioning:
-                OnActivityChangeToRepositioning.Invoke();
-                break;
             case CurrentActivity.Tutorial:
                 OnActivityChangeToTutorial.Invoke();
                 break;
             case CurrentActivity.Retreating:
                 OnActivityChangeToRetreating.Invoke();
+                break;
+            case CurrentActivity.InEscapeMenu:
+                OnActivityChangeToInEscapeMenu.Invoke();
                 break;
             case CurrentActivity.Finished:
                 OnActivityChangeToFinished.Invoke();
@@ -647,14 +670,14 @@ public class CombatStateManager : MonoBehaviour
 
 		updateTurnState(WhoseTurn.Resolving);
 		CombatActionManager.lockInCombatActionOrder();
-		selectorManager.deactivateCombatantInfoUIHoverPanel();
+		SelectorManager.deactivateCombatantInfoUIHoverPanel();
 		setCurrentActivity(CurrentActivity.Waiting);
 		CombatActionManager.getInstance().resolveACombatAction();
 	}
 
 	public static bool snappingToTargetDuringReposition()
 	{
-		return (currentActivity != CurrentActivity.Repositioning && CombatStateManager.currentActivity != CurrentActivity.ChoosingTertiary) ||
+		return (currentActivity != CurrentActivity.Repositioning && currentActivity != CurrentActivity.ChoosingTertiary) ||
                (currentActivity == CurrentActivity.Repositioning && RepositionManager.currentRepositionActivity == CurrentRepositionActivity.ChoosingRepositionTarget);
 	}
 

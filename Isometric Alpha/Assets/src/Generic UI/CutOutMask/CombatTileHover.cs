@@ -98,6 +98,11 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
+        // if(CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+        // {
+        //     return;
+        // }
+
         // preserveHoverCoords();
 
         // if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null)
@@ -115,6 +120,11 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
 
     public override void OnPointerExit(PointerEventData eventData) 
     {
+        // if(CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+        // {
+        //     return;
+        // }
+
         // purgeHoverCoords();
 
         // if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null)
@@ -136,6 +146,11 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if(CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+        {
+            return;
+        }
+
         if(useHoverTiles())
         {
             OnMouseDown();
@@ -149,6 +164,11 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
 
     private void handleEnemyClick(Stats targetStats)
     {
+        if(CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+        {
+            return;
+        }
+
         if (CombatStateManager.currentActivity == CurrentActivity.ChoosingActor || CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation)
         {
             SelectorManager.currentSelector.setToLocation(SelectorManager.findLegalCoordsContainingMandatoryTarget(SelectorManager.getCurrentSelector(), targetCoords));
@@ -157,9 +177,14 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
 
     private void handleAllyClick(Stats targetStats)
     {
+        if(CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+        {
+            return;
+        }
+
         if (CombatStateManager.currentActivity == CurrentActivity.ChoosingAbility)
         {
-            SelectorManager.deselectCurrentAlly();
+            SelectorManager.deselectAlly();
         }
 
         SelectorManager.currentSelector.setToLocation(targetStats.position);

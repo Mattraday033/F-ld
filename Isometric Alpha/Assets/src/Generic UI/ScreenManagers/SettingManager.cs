@@ -5,8 +5,34 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class SettingsManager : ScreenManager
+public class SettingsManager : ScreenManager, IEscapable
 {
+    private static SettingsManager instance;
+
+    public GameObject quitMenu;
+
+    public static SettingsManager getInstance()
+    {
+        return instance;
+    }
+
+    public override void Awake()
+    {
+        base.Awake();
+
+        instance = this;
+
+        if(quitMenu != null && CombatStateManager.inCombat)
+        {
+            quitMenu.SetActive(false);
+        }
+
+        if (CombatStateManager.inCombat)
+        {
+            TutorialSequenceStepTargetUIObject.createCutOutMask(transform);
+        }
+    }
+
     public override bool requiresPartyMemberSelectionGrid()
     {
         return false;
@@ -27,5 +53,10 @@ public class SettingsManager : ScreenManager
     public override void updateCounter()
     {
         //Empty on Purpose
+    }
+    public void handleEscapePress()
+    {
+        EscapeStack.removeTopObjectFromStack();
+        Destroy(gameObject);
     }
 }

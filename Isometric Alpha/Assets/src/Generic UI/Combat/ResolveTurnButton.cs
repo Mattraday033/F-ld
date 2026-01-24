@@ -7,7 +7,7 @@ public class ResolveTurnButton : MonoBehaviour
 
 	public void resolveTurn()
 	{
-		CombatStateManager.getInstance().resolveTurn();
+		CombatStateManager.resolveTurn();
 	}
 
 }

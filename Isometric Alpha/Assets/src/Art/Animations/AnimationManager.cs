@@ -139,6 +139,18 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     private void OnDestroy()
     {
         HeartBeatManager.getHeartBeat(characterToAnimate).RemoveListener(updateIdleAnimation);
+        CombatStateManager.OnActivityChangeToInEscapeMenu.RemoveListener(disablePolygonCollider);
+        CombatStateManager.OnActivityChangeFromInEscapeMenu.RemoveListener(enablePolygonCollider);
+    }
+
+    private void disablePolygonCollider()
+    {
+        polygonCollider2D.enabled = false;
+    }
+
+    private void enablePolygonCollider()
+    {
+        polygonCollider2D.enabled = true;
     }
 
     #endregion
@@ -202,6 +214,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         setHeartBeatRow();
 
         HeartBeatManager.getHeartBeat(characterToAnimate).AddListener(updateIdleAnimation);
+        CombatStateManager.OnActivityChangeToInEscapeMenu.AddListener(disablePolygonCollider);
+        CombatStateManager.OnActivityChangeFromInEscapeMenu.AddListener(enablePolygonCollider);
 
         setToDefaultIdle();
     }

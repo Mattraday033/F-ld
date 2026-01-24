@@ -42,35 +42,6 @@ public class PlayerCombatActionManager : MonoBehaviour
 		instance = this;
     }
 
-    void Update() //here for Key Input
-	{
-        switch (CombatStateManager.currentActivity)
-		{
-			case CurrentActivity.ChoosingActor:
-                KeyPressManager.updateKeyBools();
-
-                if (KeyPressManager.handlingPrimaryKeyPress)
-                {
-                    return;
-                }
-
-                if (KeyBindingList.eitherBackoutKeyIsPressed())
-                {
-                    removeLastCombatActionFromPlayerCombatActionQueue();
-                    KeyPressManager.handlingPrimaryKeyPress = true;
-                }
-                break;
-            case CurrentActivity.Waiting:
-            case CurrentActivity.ChoosingAbility:
-			case CurrentActivity.ChoosingLocation:
-			case CurrentActivity.ChoosingTertiary:
-            case CurrentActivity.Retreating:
-            case CurrentActivity.Repositioning:
-			case CurrentActivity.Finished:
-				return;
-		}
-	}
-
 	public void queueCombatAction(Selector actorSelector, Selector targetSelector, CombatAction action)
 	{
 		action.setActor(CombatGrid.getCombatantAtCoords(actorSelector.currentRow, actorSelector.currentCol));
@@ -99,10 +70,15 @@ public class PlayerCombatActionManager : MonoBehaviour
 		}
 	}
 
-	public void removeLastCombatActionFromPlayerCombatActionQueue()
+    public static bool playerHasActionsInQueue()
+    {
+        return playerCombatActionQueue.Count > 0 || slowedPlayerCombatActionQueue.Count > 0 || 
+            orderOfActionsAddedToQueue.Count > 0;
+    }
+
+	public static void removeLastCombatActionFromPlayerCombatActionQueue()
 	{
-		if ((playerCombatActionQueue.Count == 0 && slowedPlayerCombatActionQueue.Count == 0) || 
-            orderOfActionsAddedToQueue.Count == 0)
+		if (!playerHasActionsInQueue())
 		{
 			return;
 		}
@@ -169,7 +145,7 @@ public class PlayerCombatActionManager : MonoBehaviour
 	{
 		for(int index = orderOfActionsAddedToQueue.Count-1; index >= 0 && orderOfActionsAddedToQueue.Count > 0; index--)
 		{
-			getInstance().removeLastCombatActionFromPlayerCombatActionQueue();
+			removeLastCombatActionFromPlayerCombatActionQueue();
 		}
 
         playerCombatActionQueue = new List<CombatAction>();

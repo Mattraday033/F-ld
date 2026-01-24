@@ -7,10 +7,9 @@ public class MoveCurrentSelector : TutorialSequenceStepScript
 {
     public override void runScript(GameObject target)
     {
-        SelectorManager.getInstance().moveCurrentSelector();
+        SelectorManager.moveCurrentSelector();
 
-        SelectorManager.getInstance().frameCount = 0;
-        SelectorManager.getInstance().isMoving = false;
+        SelectorManager.isMoving = false;
 
         SpawnHoverPanel.runInstanceOfScript();
 

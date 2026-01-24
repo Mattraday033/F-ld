@@ -329,10 +329,10 @@ public class DescriptionPanelSlot : MonoBehaviour
 
     private bool preventDecisionPanel()
     {
-        if (CombatStateManager.inCombat || neverAllowDecisionPanels)
-        {
-            return true;
-        }
+        // if (CombatStateManager.inCombat || neverAllowDecisionPanels)
+        // {
+        //     return true;
+        // }
 
         switch (panelType)
         {

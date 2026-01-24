@@ -76,6 +76,11 @@ public class SpriteOutline
 
     public void removeOutline()
     {
+        if(spriteRenderer == null)
+        {
+            return;
+        }
+
         outlineMaterial.color = Color.clear;
         outlineMaterial.SetColor(blackBorderColorVarName, Color.clear);
         

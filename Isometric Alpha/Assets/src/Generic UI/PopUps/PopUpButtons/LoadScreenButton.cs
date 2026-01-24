@@ -38,12 +38,15 @@ public class LoadScreenButton : PopUpButton
 
     public override void spawnPopUp()
 	{
-        if (CombatStateManager.inCombat)
+        if (CombatStateManager.inCombat && CombatStateManager.whoseTurn == WhoseTurn.Lost)
         {
             SceneManager.UnloadSceneAsync("Combat UI"); 
         }
 
-		OverallUIManager.UIParentPanel.SetActive(true); 
+        if(!CombatStateManager.inCombat)
+        {
+		    OverallUIManager.UIParentPanel.SetActive(true); 
+        }
 		
 		Instantiate(Resources.Load<GameObject>(PrefabNames.saveScreen), PopUpScreenBlockerManager.getPopUpParent(PopUpType.LoadOnlyScreen)); 
 		

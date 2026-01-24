@@ -18,6 +18,8 @@ public class QuitToDesktop : IDecision
  
 	public void execute()
 	{
+        EscapeStack.instantiateEscapeStack();
+
         Application.Quit();
     }
  

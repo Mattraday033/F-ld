@@ -146,7 +146,7 @@ public class CombatActionManager : MonoBehaviour
 	{
 		for(int actionIndex = onDeathCombatActionQueue.Count-1; actionIndex >= 0; actionIndex--)
 		{
-			Stats currentActor = ((CombatAction) onDeathCombatActionQueue[actionIndex]).getActorStats();
+			Stats currentActor = onDeathCombatActionQueue[actionIndex].getActorStats();
 			
 			if(currentActor == null || currentActor is null || !currentActor.isDead())
 			{
@@ -189,12 +189,12 @@ public class CombatActionManager : MonoBehaviour
 
 		for (int index = PlayerCombatActionManager.playerCombatActionQueue.Count - 1; index < EnemyCombatActionManager.enemyCombatActionQueue.Count; index++)
 		{
-			findNewTarget((CombatAction)EnemyCombatActionManager.enemyCombatActionQueue[index]);
+			findNewTarget(EnemyCombatActionManager.enemyCombatActionQueue[index]);
 		}
 
         for (int index = 0; index < EnemyCombatActionManager.slowedEnemyCombatActionQueue.Count; index++)
         {
-            findNewTarget((CombatAction)EnemyCombatActionManager.slowedEnemyCombatActionQueue[index]);
+            findNewTarget(EnemyCombatActionManager.slowedEnemyCombatActionQueue[index]);
         }
     }
 
@@ -205,7 +205,7 @@ public class CombatActionManager : MonoBehaviour
 			return;
 		}
 
-		EnemyStats enemyActor = (EnemyStats)CombatGrid.getCombatantAtCoords(action.getActorCoords());
+		// EnemyStats enemyActor = (EnemyStats)CombatGrid.getCombatantAtCoords(action.getActorCoords());
 		action.addPreviousTarget(action.getTargetCoords());
 		//action.setTargetCoords(action.getTargetSelector().getCoords());
 		action.getSelector().setToLocation(action.getTargetSelector().getCoords());
@@ -252,6 +252,7 @@ public class CombatActionManager : MonoBehaviour
 		List<CombatAction> actionOrder = new List<CombatAction>();
 		
 		DeadCombatantManager.getInstance().removeDeadCombatantCombatActions(PlayerCombatActionManager.playerCombatActionQueue);
+        DeadCombatantManager.getInstance().removeDeadCombatantCombatActions(PlayerCombatActionManager.slowedPlayerCombatActionQueue);
 		DeadCombatantManager.getInstance().removeDeadCombatantCombatActions(EnemyCombatActionManager.enemyCombatActionQueue);
         DeadCombatantManager.getInstance().removeDeadCombatantCombatActions(EnemyCombatActionManager.slowedEnemyCombatActionQueue);
 

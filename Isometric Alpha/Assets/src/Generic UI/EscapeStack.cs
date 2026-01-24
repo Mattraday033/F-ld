@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public interface IEscapable
 {
@@ -11,8 +12,10 @@ public static class EscapeStack
 {
 	private static List<IEscapable> escapableObjects;
 
+    public readonly static UnityEvent<IEscapable> OnEscapableObjectRemovedFromStack = new UnityEvent<IEscapable>();
+
     [RuntimeInitializeOnLoadMethod]
-    private static void instantiateEscapeStack()
+    public static void instantiateEscapeStack()
     {
         escapableObjects = new List<IEscapable>();
     }
@@ -27,9 +30,17 @@ public static class EscapeStack
 	{
         if (escapableObjects.Count > 0)
 		{
-			IEscapable escapableObject = (IEscapable)escapableObjects[escapableObjects.Count - 1];
+			IEscapable escapableObject = escapableObjects[escapableObjects.Count - 1];
 
-			escapableObject.handleEscapePress();
+            if(escapableObject != null && !(escapableObject is null))
+            {
+                escapableObject.handleEscapePress();
+            }
+
+            if(Flags.isInNewGameMode())
+            {
+                removeTopObjectFromStack();
+            }
 		}
 	}
 	
@@ -51,16 +62,17 @@ public static class EscapeStack
 	{
 		if (escapableObjects.Count > 0)
 		{
-			IEscapable escapable = (IEscapable)escapableObjects[escapableObjects.Count - 1];
+			IEscapable escapable = escapableObjects[escapableObjects.Count - 1];
 
 			for (int index = escapableObjects.Count - 1; index >= 0; index--)
 			{
 				if (escapableObjects[index] == escapable)
 				{
 					escapableObjects.RemoveAt(index);
-					//Debug.LogError("escapableObject removed from stack. Count: " + escapableObjects.Count);
 				}
 			}
+
+            OnEscapableObjectRemovedFromStack.Invoke(escapable);
 		}
 	}
 
@@ -75,6 +87,11 @@ public static class EscapeStack
 		escapableObjects = new List<IEscapable>();
 		//Debug.LogError("all escapableObject have been removed from stack. Count: " + escapableObjects.Count);
     }
+
+	public static IEscapable getTopEscapable() 
+	{
+		return escapableObjects[escapableObjects.Count - 1];
+	}
 
 	public static int getEscapableObjectsCount() 
 	{

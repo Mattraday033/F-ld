@@ -12,7 +12,9 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     public void OnMouseEnter()
     {
-        if(TutorialSequence.blockMouseHovers() || AbilityMenuButton.hoveringOverAbilityMenuButton)
+        if(TutorialSequence.blockMouseHovers() || 
+            AbilityMenuButton.hoveringOverAbilityMenuButton || 
+            CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
         {
             return;
         }
@@ -33,7 +35,8 @@ public class CombatantHover : CombatMouseHover, IRevealable
     {
         revealPriorityHeld = false;
 
-        if(TutorialSequence.blockMouseHovers())
+        if(TutorialSequence.blockMouseHovers() || 
+            CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
         {
             return;
         }
@@ -53,7 +56,9 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     public void OnMouseOver()
     {
-        if(TutorialSequence.blockMouseHovers() || CombatStateManager.whoseTurn != WhoseTurn.Player)
+        if(TutorialSequence.blockMouseHovers() || 
+            CombatStateManager.whoseTurn != WhoseTurn.Player || 
+            CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
         {
             return;
         }

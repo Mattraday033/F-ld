@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ReturnToMainMenu : IDecision
 {
@@ -22,6 +21,10 @@ public class ReturnToMainMenu : IDecision
         Flags.resetAllFlags(true);
         PartyManager.resetPartyMembers();
 		CombatStateManager.inCombat = false;
+
+        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+
+        EscapeStack.instantiateEscapeStack();
 
         SceneChange.changeSceneToStartMenu();
     }

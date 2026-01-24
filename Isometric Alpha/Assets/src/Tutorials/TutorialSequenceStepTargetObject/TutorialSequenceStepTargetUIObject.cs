@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class TutorialSequenceStepTargetUIObject : TutorialSequenceStepTargetObject 
 {
-
 	public const bool fromButton = true;
 
 	public Image image;

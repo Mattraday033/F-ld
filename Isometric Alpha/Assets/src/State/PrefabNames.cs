@@ -166,6 +166,8 @@ public static class PrefabNames
     public const string statsUpgradeDescriptionPanelBuilder = "Stats Upgrade Description Panel Builder";
     public const string playerSideStatsDescriptionPanelBuilder = "Player Side Stats Description Panel Builder";
 
+    public const string combatEscapeMenu = "Combat Escape Menu";
+
     public const string descriptionPanelBuildingBlockName = "Name Building Block";
     public const string descriptionPanelBuildingBlockIcon = "Icon Building Block";
     public const string descriptionPanelBuildingBlockText = "Text Building Block";

@@ -8,7 +8,7 @@ public class DestroyHoverPanel : TutorialSequenceStepScript
     public override void runScript(GameObject target)
     {
 
-        SelectorManager.getInstance().deactivateCombatantInfoUIHoverPanel();
+        SelectorManager.deactivateCombatantInfoUIHoverPanel();
 
         Canvas.ForceUpdateCanvases();
     }

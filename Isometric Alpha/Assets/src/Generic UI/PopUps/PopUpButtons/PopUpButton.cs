@@ -23,10 +23,12 @@ public enum PopUpType	{
                             Tutorial = 16,
 							Notification = 17,
 							Map = 18,
-							WorldMap = 19
+							WorldMap = 19,
+                            CombatEscapeMenu = 20,
+							SettingsScreen = 21 
 						}
 
-public class PopUpButton : MonoBehaviour 
+public abstract class PopUpButton : MonoBehaviour 
 {
 	public PopUpType type;
 	private PopUpWindow popUpWindow;
@@ -46,10 +48,7 @@ public class PopUpButton : MonoBehaviour
         this.popUpWindow = popUpWindow;
     }
 
-    public virtual GameObject getCurrentPopUpGameObject()
-    {
-		throw new IOException("Base version of getCurrentPopUpGameObject() called erronously");
-    }
+    public abstract GameObject getCurrentPopUpGameObject();
 
     public virtual void spawnPopUp()
 	{
@@ -61,9 +60,12 @@ public class PopUpButton : MonoBehaviour
 		popUpWindow.setProgenitor(this);
 		
 		EscapeStack.addEscapableObject(popUpWindow);
-    }
-	
 
+        if(CombatStateManager.inCombat && CombatStateManager.whoseTurn != WhoseTurn.Lost)
+        {
+            TutorialSequenceStepTargetUIObject.createCutOutMask(popUpWindow.transform);
+        }
+    }
 
 	public virtual void destroyPopUp()
 	{
@@ -152,6 +154,10 @@ public class PopUpButton : MonoBehaviour
 			case PopUpType.WorldMap:
 				return PrefabNames.worldMapPopUpWindow;
 
+            case PopUpType.CombatEscapeMenu:
+                return PrefabNames.combatEscapeMenu;
+            case PopUpType.SettingsScreen:
+                return PrefabNames.settingsScreen;
             default:
 				throw new IOException("Unknown PopUpType: " + type.ToString());
 		}
