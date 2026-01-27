@@ -286,11 +286,17 @@ public class DescriptionPanelSlot : MonoBehaviour
 
     private void buildDecisionPanel(IDescribable currentDescribable)
     {
-        GameObject descisionPanelTemplate = currentDescribable.getDecisionPanel();
+        GameObject decisionPanelTemplate = currentDescribable.getDecisionPanel();
 
-        if (descisionPanelTemplate != null && !(descisionPanelTemplate is null))
+        if (decisionPanelTemplate != null && !(decisionPanelTemplate is null))
         {
-            decisionPanel = Instantiate(descisionPanelTemplate, decisionPanelParent).GetComponent<IDecisionPanel>();
+            decisionPanel = Instantiate(decisionPanelTemplate, decisionPanelParent).GetComponent<IDecisionPanel>();
+
+            if(decisionPanel == null)
+            {
+                return;
+            }
+
             decisionPanel.setScrollableUIElement(grid);
             decisionPanel.setCollectionIndex(collectionTabIndex);
 

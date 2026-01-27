@@ -104,6 +104,12 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.thatch, partyMembersFolderPath + NPCNameList.thatch + "/");  
         folderPathDict.Add(NPCNameList.carter, partyMembersFolderPath + NPCNameList.carter + "/");  
         folderPathDict.Add(NPCNameList.nandor, partyMembersFolderPath + NPCNameList.nandor + "/");     
+
+        folderPathDict.Add(NPCNameList.sampson, partyMembersFolderPath + NPCNameList.sampson + "/");     
+
+        folderPathDict.Add(NPCNameList.tabor, partyMembersFolderPath + NPCNameList.tabor + "/");     
+        folderPathDict.Add(NPCNameList.chiefTabor, partyMembersFolderPath + NPCNameList.tabor + "/");     
+
         folderPathDict.Add(NPCNameList.gaspar, partyMembersFolderPath + NPCNameList.gaspar + "/");  
         folderPathDict.Add(NPCNameList.overseerGaspar, partyMembersFolderPath + NPCNameList.gaspar + "/");         
 

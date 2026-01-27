@@ -622,6 +622,11 @@ public class SelectorManager : MonoBehaviour
 			displayCurrentHoverUI();
 
             declareSelectors();
+
+            if(CombatStateManager.currentActivity == CurrentActivity.ChoosingActor)
+            {
+                createPressEPrompt();
+            }
 		}
 	}
 

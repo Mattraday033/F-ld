@@ -1313,6 +1313,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return buildingBlocks;
     }
 
+    public bool requiresInspectNode()
+    {
+        return false;
+    }
+
     #endregion
 
 }

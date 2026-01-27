@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
+  m_HorizontalFit: 0
   m_VerticalFit: 0
 --- !u!1 &1542679962189598486
 GameObject:
@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &312347765043098417
 RectTransform:
   m_ObjectHideFlags: 0
@@ -158,7 +158,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -15, y: 30.65}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 108.76, y: 30.65}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &9035829964512531455
 MonoBehaviour:
@@ -307,7 +307,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 44.38, y: -12.825}
-  m_SizeDelta: {x: 72.76, y: 0}
+  m_SizeDelta: {x: 72.76, y: 15.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5793710387580395897
 CanvasRenderer:
@@ -458,7 +458,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 93.76, y: -5}
-  m_SizeDelta: {x: 88.76, y: 0}
+  m_SizeDelta: {x: 88.76, y: 25.65}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &7866113706489325507
 CanvasRenderer:
@@ -694,7 +694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
+  m_HorizontalFit: 0
   m_VerticalFit: 0
 --- !u!1 &6340652525189225159
 GameObject:
@@ -739,7 +739,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 150}
+  m_SizeDelta: {x: 312, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &174695937134448013
 MonoBehaviour:
@@ -788,6 +788,7 @@ MonoBehaviour:
   - {fileID: 3062156804071585019}
   rowParent: {fileID: 6726128619312266876}
   iconParent: {fileID: 7485364326294441447}
+  fitter: {fileID: 8042152148194035035}
   formatter: {fileID: 7296700196902700887}
   nextBuilder: {fileID: 0}
   setNamePivot: 1
@@ -795,6 +796,7 @@ MonoBehaviour:
   nameParent: {fileID: 3636858921409273151}
   levelParent: {fileID: 6726128619312266876}
   descriptionParent: {fileID: 2688031058333170376}
+  inspectNode: {fileID: 1542679962189598486}
 --- !u!114 &306991805636363987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -901,7 +903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
+  m_HorizontalFit: 0
   m_VerticalFit: 0
 --- !u!1 &6597537884714635377
 GameObject:
@@ -1192,7 +1194,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 103.76, y: -5}
-  m_SizeDelta: {x: 98.76, y: 0}
+  m_SizeDelta: {x: 98.76, y: 30.65}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &5591419774603968647
 CanvasRenderer:

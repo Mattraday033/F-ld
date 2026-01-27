@@ -199,6 +199,11 @@ public class PartyMember : IDescribable, IDescribableInBlocks
 		return stats.getDescriptionBuildingBlocks();
 	}
 
+    public bool requiresInspectNode()
+    {
+        return stats.requiresInspectNode();
+    }
+
     public override bool Equals(object obj)
     {
         PartyMember otherPartyMember = obj as PartyMember;
@@ -316,4 +321,9 @@ public class CompanionCombatActionDescriptionWrapper : IDescribable, IDescribabl
 	{
 		return companionCombatAction.getDescriptionBuildingBlocks();
 	}
+
+    public bool requiresInspectNode()
+    {
+        return false;
+    }
 }

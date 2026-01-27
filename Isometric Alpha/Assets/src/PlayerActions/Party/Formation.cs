@@ -531,6 +531,11 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
         return blocks;
     }
 
+    public bool requiresInspectNode()
+    {
+        return false;
+    }
+
     public bool hasCreaturesToSpawn()
     {
         return true;

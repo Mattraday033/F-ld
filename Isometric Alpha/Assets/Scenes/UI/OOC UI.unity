@@ -169,7 +169,6 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   mainCM: {fileID: 0}
   oocUIManager: {fileID: 1728826365}
-  npcParent: {fileID: 0}
   dialogueTrackerButton: {fileID: 0}
 --- !u!1001 &74058960
 PrefabInstance:
@@ -548,10 +547,11 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 76954808}
   tutorialHash: Character Screen Button
-  useUIScale: 0
   disableArrow: 0
   image: {fileID: 76954812}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
   advanceSequenceOnButtonPress: 0
   buttonTarget: {fileID: 702962981}
 --- !u!114 &76954811
@@ -1598,10 +1598,11 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 278908138}
   tutorialHash: Inventory Button
-  useUIScale: 0
   disableArrow: 0
   image: {fileID: 278908142}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
   advanceSequenceOnButtonPress: 0
   buttonTarget: {fileID: 1497173687}
 --- !u!114 &278908141
@@ -2103,10 +2104,11 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 0}
   tutorialHash: Hostility UI Panel
-  useUIScale: 0
   disableArrow: 0
   image: {fileID: 0}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
 --- !u!114 &324618371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4154,10 +4156,11 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 795335993}
   tutorialHash: Party Screen Button
-  useUIScale: 0
   disableArrow: 0
   image: {fileID: 795335997}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
   advanceSequenceOnButtonPress: 0
   buttonTarget: {fileID: 74058965}
 --- !u!114 &795335996
@@ -6076,10 +6079,11 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 1169168817}
   tutorialHash: Intimidate UI Panel
-  useUIScale: 0
   disableArrow: 0
   image: {fileID: 1169168820}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
 --- !u!114 &1169168819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6192,10 +6196,11 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 1226617580}
   tutorialHash: Leadership UI Panel
-  useUIScale: 0
   disableArrow: 0
   image: {fileID: 1226617583}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
 --- !u!114 &1226617582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6501,10 +6506,11 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 1286495509}
   tutorialHash: Cunning UI Panel
-  useUIScale: 0
   disableArrow: 0
   image: {fileID: 1286495512}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
 --- !u!114 &1286495511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7082,10 +7088,11 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 1363331020}
   tutorialHash: Quest Counter
-  useUIScale: 0
   disableArrow: 0
   image: {fileID: 1363331022}
   previousColor: {r: 1, g: 1, b: 1, a: 1}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
 --- !u!1 &1370356214
 GameObject:
   m_ObjectHideFlags: 0
@@ -8228,8 +8235,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 779.66, y: -17.5}
-  m_SizeDelta: {x: 1529.32, y: 35}
+  m_AnchoredPosition: {x: 852.27, y: -17.5}
+  m_SizeDelta: {x: 1674.54, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1636446866
 MonoBehaviour:
@@ -8265,9 +8272,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'E: Select    R: Back    Q: Quicksave    M: Map    C: Character    I: Inventory   
-    P: Party    L: Save/Load    F: Toggle Terrain    T: Transcript    Shift: Highlight   
-    Space: Hide Keys'
+  m_text: 'E: Select    R: Back    Q: Quicksave    M: Map    N: World Map    C: Character   
+    I: Inventory    P: Party    L: Save/Load    F: Toggle Terrain    T: Transcript   
+    Shift: Highlight    Space: Hide Keys'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0df13e2d0e0fcee4ebfaa720a9ee5729, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 0df13e2d0e0fcee4ebfaa720a9ee5729, type: 2}
@@ -9908,10 +9915,11 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 2132835591}
   tutorialHash: Observation UI Panel
-  useUIScale: 0
   disableArrow: 0
   image: {fileID: 2132835594}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
 --- !u!114 &2132835593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10672,10 +10680,11 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 0}
   tutorialHash: 
-  useUIScale: 0
   disableArrow: 0
   image: {fileID: 0}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
 --- !u!114 &3432560956765814432
 MonoBehaviour:
   m_ObjectHideFlags: 0

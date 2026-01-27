@@ -19,7 +19,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
             return;
         }
 
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !useHoverTiles())
+        if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !getTargetStats().isDead() && !useHoverTiles())
         {
             revealPriorityHeld = true;
 
@@ -41,7 +41,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
             return;
         }
 
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null)
+        if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !getTargetStats().isDead())
         {
             if (getTargetGameObject() != null && !useHoverTiles())
             {

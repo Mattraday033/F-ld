@@ -18,6 +18,8 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
     public Transform levelParent;
     public Transform descriptionParent;
 
+    public GameObject inspectNode;
+
     private void Awake()
     {
         // filter = new BuilderFilterBlackList(new List<DescriptionPanelBuildingBlockType>() { DescriptionPanelBuildingBlockType.PrimaryStat, DescriptionPanelBuildingBlockType.SecondaryStat });
@@ -94,6 +96,14 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
         }
 
         return false;
+    }
+
+    public override void activateInspectNode()
+    {
+        if(inspectNode != null)
+        {
+            inspectNode.SetActive(true);
+        }
     }
 
 }

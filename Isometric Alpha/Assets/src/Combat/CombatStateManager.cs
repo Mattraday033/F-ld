@@ -81,6 +81,8 @@ public class CombatStateManager : MonoBehaviour
     public readonly static UnityEvent OnActivityChangeFromInEscapeMenu = new UnityEvent();
 
 
+    public readonly static UnityEvent OnCurrentActivityChange = new UnityEvent();
+
 	public readonly static UnityEvent OnCombatStart = new UnityEvent();
 	public readonly static UnityEvent OnCombatEnd = new UnityEvent();
 
@@ -510,6 +512,7 @@ public class CombatStateManager : MonoBehaviour
 		getInstance().updateAllObjectsAfterStateChange();
 		CombatUI.setCurrentActivityText(currentActivity);
         SelectorManager.declareSelectors();
+        OnCurrentActivityChange.Invoke();
 	}
 
 	public void checkForWinOrLossStates()

@@ -351,7 +351,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard + 1, new Vector3Int(6, 3), LocationNameList.campCenter, MonsterNameList.spearman, Facing.SouthWest));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(4, 5), LocationNameList.campCenter));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(4, 5), LocationNameList.campCenter, Facing.SouthWest));
         list.Add(new NPCSpawnDetails(NPCNameList.branded, new Vector3Int(0, 6), LocationNameList.campCenter));
         list.Add(new NPCSpawnDetails(NPCNameList.branded, new Vector3Int(0, 4), LocationNameList.campCenter));
         list.Add(new NPCSpawnDetails(NPCNameList.branded, new Vector3Int(0, 3), LocationNameList.campCenter));
@@ -482,7 +482,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.reka, new Vector3Int(7, -5), LocationNameList.campSouthEast, Facing.SouthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.andras, new Vector3Int(5, -5), LocationNameList.campSouthEast, Facing.SouthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.pazman, new Vector3Int(3, -5), LocationNameList.campSouthEast, Facing.SouthEast));
-        list.Add(new NPCSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(1, -5), LocationNameList.campSouthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(1, -5), LocationNameList.campSouthEast, Facing.SouthEast));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.garcha, new Vector3Int(6, -11), LocationNameList.campSouthEast, Facing.NorthWest));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.broglin, new Vector3Int(5, -11), LocationNameList.campSouthEast, Facing.NorthWest));
@@ -1163,7 +1163,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(3, 0), ZoneKeyList.manseSecondFloor + LocationNameList.section2c, new ChiefTaborManseSecondFloorScript()));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(3, 0), ZoneKeyList.manseSecondFloor + LocationNameList.section2c, Facing.SouthWest, new ChiefTaborManseSecondFloorScript()));
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(3, -4), Facing.SouthWest, new KeyHalfScript()));
 

@@ -243,6 +243,16 @@ public class EquippedItems : StatBoostSource, IEnumerable, ICloneable
         return clone().getAllOfOneStatFormula<StatBoostSource>(t => t.getDamageFormula());
     }
 
+    public override string getInvulnerableFormula()
+    {
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getInvulnerableFormula());
+    }
+
+    public override string getVulnerableFormula()
+    {
+        return getAllOfOneStatFormula<StatBoostSource>(t => t.getVulnerableFormula());
+    }
+
     #endregion
 
     #region PrimaryStats

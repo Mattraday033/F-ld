@@ -19,7 +19,7 @@ public class InspectNode : MonoBehaviour
     [SerializeField]
     private Transform hover;
 
-    void Awake()
+    private void OnEnable()
     {
         gameObject.SetActive(!CombatStateManager.inCombat);
     }

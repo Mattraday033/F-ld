@@ -28,4 +28,9 @@ public class WrittenGlossaryEntry : GlossaryEntry, IDescribableInBlocks
 
 		return buildingBlocks;
 	}
+
+    public bool requiresInspectNode()
+    {
+        return false;
+    }
 }

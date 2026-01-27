@@ -7,7 +7,7 @@ public class CrowdControlTrait: Trait
 {
 
 	public CrowdControlTrait(string traitName, TraitType traitType, string traitDescription, string iconName, int roundsLeft):
-		   base(traitName, traitType, traitDescription, iconName, roundsLeft: roundsLeft)
+		   base(traitName, traitType, traitDescription, iconName, roundsLeft: roundsLeft, permanent: false)
 	{
 
 	}

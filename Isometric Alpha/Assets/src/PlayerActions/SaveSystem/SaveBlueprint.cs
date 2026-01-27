@@ -639,6 +639,11 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 		return buildingBlocks;
 	}
 
+    public bool requiresInspectNode()
+    {
+        return false;
+    }
+
 	//ISortable Methods
 	public int getQuantity()
 	{

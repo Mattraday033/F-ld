@@ -79,10 +79,14 @@ public static class EscapeStack
 	public static void escapeAll()
 	{
 		// Debug.LogError("Escape all");
-		for (int index = escapableObjects.Count - 1; index >= 0; index--)
-		{
-			handleEscapePress();
-		}
+
+        if(!LoadSaveFile.midLoad)
+        {
+            for (int index = escapableObjects.Count - 1; index >= 0; index--)
+            {
+                handleEscapePress();
+            }
+        }
 
 		escapableObjects = new List<IEscapable>();
 		//Debug.LogError("all escapableObject have been removed from stack. Count: " + escapableObjects.Count);

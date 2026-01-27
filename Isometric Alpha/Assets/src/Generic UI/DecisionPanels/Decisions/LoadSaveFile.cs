@@ -26,6 +26,8 @@ public class LoadSaveFile : IDecision
     private const string loadLostProgressMessageStart = "Are you sure you want to load '";
     private const string loadLostProgressMessageEnd = "'? Any unsaved progress will be lost.";
 
+    public static bool midLoad = false;
+
     public readonly static UnityEvent OnLoad = new UnityEvent();
 
     private SaveBlueprint saveBlueprint;
@@ -48,6 +50,8 @@ public class LoadSaveFile : IDecision
 
     public void execute()
     {
+        midLoad = true;
+
         NotificationManager.purgeNotifications();
         StepCountScriptManager.reset();
         SaveHandler.createSavedGameList(true);
@@ -157,6 +161,7 @@ public class LoadSaveFile : IDecision
             
             SceneChange.changeSceneToOverworld();
 
+            midLoad = false;
         }
     }
 

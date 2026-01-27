@@ -227,4 +227,9 @@ public class AllyStatsUpgradeDifference: IDescribable, IDescribableInBlocks
         return listOfBlocks;
     }
 
+    public bool requiresInspectNode()
+    {
+        return false;
+    }
+
 }

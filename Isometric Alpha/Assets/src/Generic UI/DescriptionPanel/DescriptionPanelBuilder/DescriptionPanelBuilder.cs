@@ -14,10 +14,33 @@ public enum DescriptionPanelBuildingBlockType
 public enum DescriptionPanelBuilderType {Standard = 0, CombatStats = 1, Stats = 2, UpgradeStatsDifference = 3, PlayerSideStats = 4, CombatActionsAndTraits = 5};
 
 
-public interface IDescribableInBlocks
+public interface IDescribableInBlocks : INameSource
 {
-    public string getName();
     public List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks();
+
+    public bool requiresInspectNode();
+
+	public static List<IDescribableInBlocks> getRelatedDescribableInBlocks(IDescribableInBlocks blockOrigin)
+	{
+		List<IDescribableInBlocks> relatedBlocks = new List<IDescribableInBlocks>();
+
+        if(blockOrigin as IDescribable != null)
+        {
+            IDescribable describable = blockOrigin as IDescribable;
+
+            List<IDescribable> relatedDescribables = describable.getRelatedDescribables();
+
+            foreach(IDescribable relatedDescribable in relatedDescribables)
+            {
+                if(relatedDescribable as IDescribableInBlocks != null)
+                {
+                    relatedBlocks.Add(relatedDescribable as IDescribableInBlocks);
+                }
+            }
+        }
+
+		return relatedBlocks;
+	}
 
 	public static List<IDescribableInBlocks> getRelatedBlocks(IDescribable describable)
 	{
@@ -154,6 +177,16 @@ public struct DescriptionPanelBuildingBlock
     public static DescriptionPanelBuildingBlock getCritBlock(string text, string formula)
     {
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.critIconName, formula);
+    }
+
+    public static DescriptionPanelBuildingBlock getInvulnerableBlock(string text, string formula)
+    {
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.invulnerableIconName, formula);
+    }
+
+    public static DescriptionPanelBuildingBlock getVulnerableBlock(string text, string formula)
+    {
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.vulnerableIconName, formula);
     }
 
     public static DescriptionPanelBuildingBlock getRangeBlock(string text)
@@ -455,6 +488,8 @@ public class DescriptionPanelBuilder : MonoBehaviour
     public Transform rowParent;
     public Transform iconParent;
 
+    public ContentSizeFitter fitter;
+
     public DescriptionPanelBlockFormatter formatter;
     public IBuilderFilter filter;
 
@@ -492,9 +527,27 @@ public class DescriptionPanelBuilder : MonoBehaviour
             rows.Add(buildRow(block));
         }
 
+        if(blockOrigin.requiresInspectNode())
+        {
+            activateInspectNode();
+            setFitterToPreferredSize();
+
+        } else if(CombatStateManager.inCombat)
+        {
+            // setFitterToPreferredSize();
+        }
+
         rebuildLayouts();
 
         StartCoroutine(waitAndUpdateGameObjectPosition());
+    }
+
+    private void setFitterToPreferredSize()
+    {
+        if(fitter != null)
+        {
+            fitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
+        }
     }
 
     private IEnumerator waitAndUpdateGameObjectPosition()
@@ -633,6 +686,11 @@ public class DescriptionPanelBuilder : MonoBehaviour
         nextBuilder.buildDescriptionPanel(blockOrigin, format);
     }
 
+    public virtual void activateInspectNode()
+    {
+        //empty on purpose
+    }
+
     public virtual GameObject getDescriptionPanelRowGameObject(DescriptionPanelBuildingBlockType type)
     {
         switch (type)
@@ -725,6 +783,9 @@ public static class IconList
     public const string levelIconName = "Level";
     public const string affinityIconName = "Affinity";
     public const string experienceIconName = "XP";
+
+    public const string invulnerableIconName = "Invulnerable";
+    public const string vulnerableIconName = "Vulnerable";
 
     public const string intimidateIconName = "Intimidate";
     public const string bonusHealthIconName = "Bonus Health";

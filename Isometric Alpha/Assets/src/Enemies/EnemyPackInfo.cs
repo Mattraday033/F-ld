@@ -149,6 +149,11 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks, ICreatureSpawn
 
         return blocks;
     }
+
+    public bool requiresInspectNode()
+    {
+        return false;
+    }
 }
 
 //info about a pack of enemies on the overworld, such as how many of them there are and of what type. Stored in State

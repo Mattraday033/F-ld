@@ -45,7 +45,7 @@ public class DamageOverTimeTrait : Trait
 		}
 		else
 		{
-			buildingBlocks.Add(DescriptionPanelBuildingBlock.getDamageBlock(DamageCalculator.calculateFormula(damageFormula, traitApplier).ToString(), damageFormula));
+			buildingBlocks.Add(DescriptionPanelBuildingBlock.getDamageBlock(DamageCalculator.calculateFormula(damageFormula, getStatSource()).ToString(), damageFormula));
 		}
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getMaxRoundsLeftForDisplay()));

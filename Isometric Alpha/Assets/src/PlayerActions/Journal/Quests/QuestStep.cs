@@ -215,4 +215,9 @@ public class QuestStep : IJournalSubcategory, IDescribableInBlocks
 
 		return buildingBlocks;
 	}
+
+    public bool requiresInspectNode()
+    {
+        return false;
+    }
 }

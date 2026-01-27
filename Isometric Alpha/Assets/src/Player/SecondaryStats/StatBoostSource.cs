@@ -53,6 +53,35 @@ public abstract class StatBoostSource : INameSource
         }
     }
 
+    public virtual string getInvulnerableFormula()
+    {
+        switch (getName())
+        {
+            default:
+                return Constants.zeroRating;
+        }
+    }
+
+    public virtual string getVulnerableFormula()
+    {
+        switch (getName())
+        {
+            case StatSourceNameList.roastedKey:
+                return "1";
+            case StatSourceNameList.caveMadnessKey:
+                return "3";
+            case StatSourceNameList.acidVomitKey:
+                return "4";
+            case StatSourceNameList.bristledKey:
+            case StatSourceNameList.woundedKey:
+                return "5";
+            case StatSourceNameList.insecureKey:
+                return "7";
+            default:
+                return Constants.zeroRating;
+        }
+    }
+
     #endregion
 
     #region PrimaryStats
@@ -398,6 +427,16 @@ public abstract class StatBoostSource : INameSource
         if (!boostSource.getBonusDamageFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getBonusDamageBlock(DamageCalculator.calculateFormula(boostSource.getBonusDamageFormula(), statsSource).ToString()), boostSource.getBonusDamageFormula()));
+        }
+
+        if (!boostSource.getInvulnerableFormula().Equals(Constants.zeroRating))
+        {
+            blocks.Add(DescriptionPanelBuildingBlock.getInvulnerableBlock(DamageCalculator.calculateFormula(boostSource.getInvulnerableFormula(), statsSource).ToString()+ "%", boostSource.getInvulnerableFormula()));
+        }
+
+        if (!boostSource.getVulnerableFormula().Equals(Constants.zeroRating) && !boostSource.getName().Equals(StatSourceNameList.halfHandStanceKey))
+        {
+            blocks.Add(DescriptionPanelBuildingBlock.getVulnerableBlock(DamageCalculator.calculateFormula(boostSource.getVulnerableFormula(), statsSource).ToString(), boostSource.getVulnerableFormula()));
         }
 
         #endregion

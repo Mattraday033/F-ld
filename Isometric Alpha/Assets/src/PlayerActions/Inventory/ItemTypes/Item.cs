@@ -540,6 +540,11 @@ public class Item : StatBoostSource, ICloneable, IJSONConvertable, IDescribable,
 		return buildingBlocks;
 	}
 
+    public bool requiresInspectNode()
+    {
+        return false;
+    }
+
     //Shopkeeping Methods
     
     public static int getTotalWorth(Item item)

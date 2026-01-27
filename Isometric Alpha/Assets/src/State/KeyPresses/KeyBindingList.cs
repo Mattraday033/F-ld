@@ -106,6 +106,7 @@ public static class KeyBindingList
     //Combat Keys
     public const KeyCode resolveTurnKey = KeyCode.Space;
     public const KeyCode combatAcceptChoiceKey = KeyCode.E;
+    public const KeyCode combatHideKeyBindingsKey = KeyCode.Tab;
 
     public static bool jumpMoveKeyIsPressed()
     {

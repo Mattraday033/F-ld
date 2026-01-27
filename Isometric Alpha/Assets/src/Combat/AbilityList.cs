@@ -256,7 +256,7 @@ public static class AbilityList
 
 
         //Honorguard abilities
-        enemyAbilityDictionary.Add(eviscerateKey, new BacklashAbility(CombatActionSettings.build(DescriptionParams.build(eviscerateKey, "A devastating cut capable of unseaming an enemy. This attack hurts the attacker as well as the target.", "MakeItBleed"), DamageParams.build("16", "5"), TargetParams.build(Range.boxOneIndex), TraitList.vulnerable), oneHundredPercentBacklash));
+        enemyAbilityDictionary.Add(eviscerateKey, new BacklashAbility(CombatActionSettings.build(DescriptionParams.build(eviscerateKey, "A devastating cut capable of unseaming an enemy. This attack hurts the attacker as well as the target.", "MakeItBleed"), DamageParams.build("16", "5"), TargetParams.build(Range.boxOneIndex), TraitList.wounded), oneHundredPercentBacklash));
         enemyAbilityDictionary.Add(skullBashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(skullBashKey, "A blow to the temple that disorients the target.", "Upside the Head"), DamageParams.build("5", "10"), TargetParams.build(Range.verticalOneIndex), TraitList.upsideTheHead)));
         enemyAbilityDictionary.Add(squadStrikeKey, new SquadAbility(CombatActionSettings.build(DescriptionParams.build(squadStrikeKey, "An attack that utilizes the cooperation of other squard members. Deals more damage if the attacker is adjacent to one or more allies."), DamageParams.build("3", "5"), TargetParams.build(Range.boxOneIndex)), "15"));
         enemyAbilityDictionary.Add(skewerKey, new Ability(CombatActionSettings.build(DescriptionParams.build(skewerKey, "The lancer pierces multiple targets in a row."), DamageParams.build("10", "10"), TargetParams.build(Range.verticalThreeIndex), AnimationParams.build(EffectAnimationType.Pierce))));
@@ -298,7 +298,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(strengthKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Make It Bleed", "You impale, bludgeon, or slash your enemy to the point of massive hemorrhaging. The enemy takes initial damage and every hit the enemy takes for the rest of combat deals an additional " + TraitList.vulnerable.getBonusDamageTaken() + " damage.", "MakeItBleed"), DamageParams.build("3S + D", "D"), TargetParams.build(Range.boxOneIndex), FrequencyParams.build(twoSlotMax, fiveRoundCooldown), TraitList.vulnerable)));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Make It Bleed", "You impale, bludgeon, or slash your enemy to the point of massive hemorrhaging. The enemy takes initial damage and every hit the enemy takes for the rest of combat deals an additional " + TraitList.wounded.getBonusDamageTaken() + " damage.", "MakeItBleed"), DamageParams.build("3S + D", "D"), TargetParams.build(Range.boxOneIndex), FrequencyParams.build(twoSlotMax, fiveRoundCooldown), TraitList.wounded)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(strengthKeyChar);
@@ -323,11 +323,11 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(dexterityKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build(crippleName, "Your attack leaves permanent damage. The target takes " + TraitList.crippledDamageFormula + " extra damage whenever it receives a debuff."), DamageParams.build("3D + W", "2D"), FrequencyParams.build(twoSlotMax, fiveRoundCooldown), TraitList.crippled)));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build(crippleName, "Your attack leaves permanent damage. The target takes extra damage whenever it receives a debuff."), DamageParams.build("3D + W", "2D"), FrequencyParams.build(twoSlotMax, fiveRoundCooldown), TraitList.crippled)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 		
 		currentKey = generateAbilityKey(dexterityKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build(flenseName, "Deal 4D + 2S damage to a target. That target takes 4D damage at the end of the round for the rest of combat."), DamageParams.build("4D + 2S", "2D"), FrequencyParams.build(twoSlotMax, fourRoundCooldown), TraitList.flensed)));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build(flenseName, "Deal initial damage to a target. That target takes additional damage at the end of each round for the rest of combat."), DamageParams.build("4D + 2S", "2D"), FrequencyParams.build(twoSlotMax, fourRoundCooldown), TraitList.flensed)));
 		statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = "d-"+Dexterity.exitStrategyLevel+"-3";
@@ -383,7 +383,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = "c-2-3";
-        statAbilityDictionary.Add(currentKey, new HealingAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(rallyName, "Encourage an ally to fight on, increasing their damage by " + TraitList.rallied.getDamageFormula() + " and healing them. Costs 3 Red Knife stacks."), DamageParams.build("2C"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(twoSlotMax, sixRoundCooldown), CostParams.build(ActionCostType.RedKnife, threeStackCastCost), TraitList.rallied)));
+        statAbilityDictionary.Add(currentKey, new HealingAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(rallyName, "Encourage an ally to fight on, increasing their damage and healing them. Costs 3 Red Knife stacks."), DamageParams.build("2C"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(twoSlotMax, sixRoundCooldown), CostParams.build(ActionCostType.RedKnife, threeStackCastCost), TraitList.rallied)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		currentKey = generateAbilityKey(charismaKeyChar);

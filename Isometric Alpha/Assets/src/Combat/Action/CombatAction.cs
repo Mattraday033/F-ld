@@ -1546,6 +1546,11 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     }
 
+    public bool requiresInspectNode()
+    {
+        return true;
+    }
+
     #endregion
 
 

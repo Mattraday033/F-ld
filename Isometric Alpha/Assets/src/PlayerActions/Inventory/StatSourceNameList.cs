@@ -71,10 +71,10 @@ public static class StatSourceNameList
     public const string ralliedKey = "Rallied";
 
     // Debuff traits
-    public const string vulnerableKey = "Vulnerable";
+    public const string woundedKey = "Wounded";
     public const string bristledKey = "Bristled";
     public const string upsideTheHeadKey = "Upside The Head";
-    public const string tripKey = "Trip";
+    public const string tripKey = "Tripped";
     public const string counteredKey = "Countered";
     public const string acidVomitKey = "Acid Vomit";
     public const string crippledKey = "Crippled";

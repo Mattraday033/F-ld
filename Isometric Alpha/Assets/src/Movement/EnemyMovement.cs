@@ -837,6 +837,11 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 		return blocks;
 	}
 
+    public bool requiresInspectNode()
+    {
+        return false;
+    }
+
 	//ITutorialSequenceTarget interface methods
 	public bool isUI()
 	{

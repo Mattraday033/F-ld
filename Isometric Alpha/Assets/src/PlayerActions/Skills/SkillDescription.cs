@@ -166,4 +166,9 @@ public class SkillDescription : IDescribable, IDescribableInBlocks
         return buildingBlocks;
         
     }
+
+    public bool requiresInspectNode()
+    {
+        return true;
+    }
 }

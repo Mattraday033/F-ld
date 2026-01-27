@@ -174,13 +174,13 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                           TraitList.predatory
                                                                             }));
 
-        enemyStatsDict.Add(MonsterNameList.javelineer, new EnemyStats(MonsterNameList.javelineer,
+        enemyStatsDict.Add(MonsterNameList.javelineer, new MinionStats(MonsterNameList.javelineer,
                                                                                     Constants.thirtyArmor,
                                                                                             25,
                             AbilityList.getAbility(null, AbilityList.guardJavelinKey) as Ability,
-                                                                new Trait[] { TraitList.minion,
-                                                                          TraitList.chaotic,
-                                                                          TraitList.backLine
+                                                                new Trait[] { 
+                                                                                TraitList.chaotic,
+                                                                                TraitList.backLine
                                                                             }));
 
         enemyStatsDict.Add(MonsterNameList.lancer, new EnemyStats(MonsterNameList.lancer,
@@ -238,12 +238,11 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             }));
         #endregion
         #region Bat Swarm
-        enemyStatsDict.Add(MonsterNameList.batSwarm, new VolleyParticipantStats(MonsterNameList.batSwarm,
+        enemyStatsDict.Add(MonsterNameList.batSwarm, new MinionStats(MonsterNameList.batSwarm,
                                                                                       Constants.zeroArmor,
                                                                                             5,
                                                AbilityList.getAbility(null, AbilityList.swarmRushKey),
                                                                 traits: new Trait[] { 
-                                                                                        TraitList.minion,
                                                                                         TraitList.chaotic
                                                                                     }));
         #endregion

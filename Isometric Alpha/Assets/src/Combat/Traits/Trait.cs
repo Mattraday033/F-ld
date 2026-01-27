@@ -55,6 +55,7 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         this.iconName = iconName;
 
         this.roundsLeft = roundsLeft;
+        this.maxRoundsLeft = roundsLeft;
 
         this.permanent = permanent;
         this.immobile = immobile;
@@ -427,6 +428,16 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         //empty on purpose
     }
 
+    public override string getVulnerableFormula()
+    {
+        if(getName().Equals(StatSourceNameList.halfHandStanceKey))
+        {
+            return "-1";
+        }
+
+        return base.getVulnerableFormula();
+    }
+
     public static List<GlossaryEntry> getAllTraitTypeGlossaryEntries()
     {
         List<GlossaryEntry> allTraitTypesGlossaryEntries = new List<GlossaryEntry>();
@@ -576,6 +587,11 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getIconName()));
 
         return buildingBlocks;
+    }
+
+    public bool requiresInspectNode()
+    {
+        return false;
     }
     #endregion
 

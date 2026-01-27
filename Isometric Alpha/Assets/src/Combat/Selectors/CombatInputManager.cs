@@ -8,6 +8,8 @@ using UnityEngine.Events;
 
 public class CombatInputManager : MonoBehaviour
 {
+    public readonly static UnityEvent OnHideKeyBindingsList = new UnityEvent();
+
     private CombatEscapeMenuPopUpButton escapeButton;
 
     private void Awake()
@@ -26,6 +28,14 @@ public class CombatInputManager : MonoBehaviour
 		}
 
         PlayerInput.showFormulaToggleCheck();
+
+        if (Input.GetKey(KeyBindingList.combatHideKeyBindingsKey) && 
+            !KeyPressManager.handlingPrimaryKeyPress)
+        {
+            OnHideKeyBindingsList.Invoke();
+            KeyPressManager.handlingPrimaryKeyPress = true;
+            return;
+        }
 
 		switch (CombatStateManager.currentActivity)
 		{

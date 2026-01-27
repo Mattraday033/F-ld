@@ -140,18 +140,19 @@ public static class BookList
 						"Hide/Show Terrain: 'F'\n" +
 						"Highlight Interactables: 'Shift'\n" +
 						"Map: 'M'\n" +
+						"World Map: 'N'\n" +
 						"View Dialogue: 'T'\n" +
 						"Statistics: 'Tab'\n" +
 						"Character Screen: 'C' \n" +
 						"Inventory Screen: 'I' \n" +
 						"Party Screen: 'P' \n" +
 						"Journal Screen: 'J' \n" +
-						"Save/Load Screen: 'S' or 'L' \n" +
+						"Save/Load Screen: 'L' \n" +
 						"Settings Screen: 'Escape' \n" +
-						"Intimidate (Strength at least 2): '1' \n" +
-						"Cunning (Dexterity at least 2): '2' \n" +
-						"Observation (Wisdom at least 2): '3' \n" +
-						"Place Companion (Charisma at least 2): '4' \n" +
+						"Intimidate: '1' \n" +
+						"Cunning: '2' \n" +
+						"Observation: '3' \n" +
+						"Place Companion: '4' \n" +
 						"Return object/Remove placed Companion: 'Z'";
 			case horsetonguePronunciationGuideKey:
 				return "This short guide is meant to help someone pronounce the words of the horsetongue.\n\n" +
