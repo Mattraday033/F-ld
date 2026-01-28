@@ -10,6 +10,8 @@ public class TutorialSequenceStepTargetUIObject : TutorialSequenceStepTargetObje
 	public Image image;
 	public Color previousColor = Color.clear;
 
+	public Image secondaryImage;
+
     public bool skipCutOutMask = false;
 
     [SerializeField]
@@ -98,6 +100,11 @@ public class TutorialSequenceStepTargetUIObject : TutorialSequenceStepTargetObje
 			previousColor = image.color;
 			image.color = ColorList.tutorialDefault;
 		}
+
+        if(secondaryImage != null)
+        {
+            secondaryImage.color = ColorList.cutOutFade;
+        }
 	}
 
 	public override void unhighlight(bool skip)
@@ -116,6 +123,11 @@ public class TutorialSequenceStepTargetUIObject : TutorialSequenceStepTargetObje
 		{
 			image.color = previousColor;
 		}
+
+        if(secondaryImage != null)
+        {
+            secondaryImage.color = Color.clear;
+        }
 	}
 
 	public override bool isUI()

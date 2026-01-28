@@ -25,6 +25,8 @@ public static class State
 	public static string[] lessonsLearned = new string[0];
 	public static Formation formation = new Formation();
 
+    public static SkillType currentSkillType;
+
 	public static EnemyPackInfo enemyPackInfo;
     public static AllyPackInfo allyPackInfo;
 	public static CharacterFacing playerFacing;

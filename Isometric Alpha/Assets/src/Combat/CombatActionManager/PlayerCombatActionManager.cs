@@ -152,4 +152,27 @@ public class PlayerCombatActionManager : MonoBehaviour
 	    slowedPlayerCombatActionQueue = new List<CombatAction>();
 	    orderOfActionsAddedToQueue = new List<Stats>();
 	}
+
+    public static bool actorHasActionsInQueue(Stats actor)
+    {
+        if(actor == null)
+        {
+            return false;
+        }
+
+        List<CombatAction> actions = new List<CombatAction>();
+        actions.AddRange(playerCombatActionQueue);
+        actions.AddRange(slowedPlayerCombatActionQueue);
+
+        foreach(CombatAction action in actions)
+        {
+            if(action != null && actor.Equals(action.getActorStats()))
+            {
+                return true;
+            }
+        }
+
+
+        return false;
+    }
 }

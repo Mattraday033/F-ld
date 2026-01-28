@@ -13,26 +13,13 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
 
     public HostilityBarManager hostilityBarManager;
 
-    public Image topOOCUIBackground;
     public Image bottomOOCUIBackground;
     public GameObject oocUIParent;
 
-    public TextMeshProUGUI intimidateCountText;
-    public TextMeshProUGUI cunningCountText;
-    public TextMeshProUGUI leadershipCountText;
-
-    public GameObject intimidateParent;
-    public Image intimidateCountImage;
-
-    public GameObject cunningParent;
-    public Image cunningCountImage;
-
-    private static bool manuallySetObservationPanelColor;
-    public GameObject observationParent;
-    public Image observationToggleImage;
-
-    public GameObject leadershipParent;
-    public Image leadershipCountImage;
+    public SkillButtonManager skillButtonManager;
+    public TextMeshProUGUI skillChargeCountText;
+    public GameObject skillSwapArrowParent;
+    public SlotIconHover skillIconHover;
 
     public Image leftFootImage;
     public Image rightFootImage;
@@ -46,7 +33,6 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
     [RuntimeInitializeOnLoadMethod]
     private static void initializeOOCUIManager()
     {
-        manuallySetObservationPanelColor = false;
         instance = null;
     }
 
@@ -91,13 +77,7 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
             return;
         }
 
-        updateIntimidateText();
-
-        updateCunningText();
-
-        updateObservationText();
-
-        updateLeadershipText();
+        updateSkillUI();
 
         updateFooting();
         hostilityBarManager.setUpHostilityBars();        
@@ -108,100 +88,32 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
         updateCharacterLevelUpCounter();
     }
 
-    private void updateIntimidateText()
+
+    private void updateSkillUI()
     {
-        if (PartyStats.getMaxIntimidateCount() != 0)
-        {
-            intimidateParent.SetActive(true);
-            intimidateCountText.text = IntimidateManager.getIntimidatesRemaining() + "/" + PartyStats.getMaxIntimidateCount() + "  I";
+        skillSwapArrowParent.SetActive(PartyStats.hasMoreThanOneSkill());
 
-            if (IntimidateManager.getIntimidatesRemaining() == 0)
-            {
-                intimidateCountImage.color = Color.gray;
-            }
-            else
-            {
-                intimidateCountImage.color = Color.white;
-            }
-        }
-        else
-        {
-            intimidateParent.SetActive(false);
-        }
-    }
+        skillIconHover.iconImage.sprite = Resources.Load<Sprite>(State.currentSkillType.ToString());
 
-
-    private void updateCunningText()
-    {
-        if (PartyStats.getMaxCunningCount() != 0)
+        switch(State.currentSkillType)
         {
-            cunningParent.SetActive(true);
-            cunningCountText.text = CunningManager.getCunningsRemaining() + "/" + PartyStats.getMaxCunningCount() + " C";
-
-            if (CunningManager.getCunningsRemaining() == 0)
-            {
-                cunningCountImage.color = Color.gray;
-            }
-            else
-            {
-                cunningCountImage.color = Color.white;
-            }
-        }
-        else
-        {
-            cunningParent.SetActive(false);
-        }
-    }
-
-    private void updateObservationText()
-    {
-        if (manuallySetObservationPanelColor)
-        {
-            return;
+            case SkillType.Cunning:
+                skillChargeCountText.text = CunningManager.getCunningsRemaining() + "/" + PartyStats.getMaxCunningCount();
+                break;
+            case SkillType.Observation:
+                skillChargeCountText.text = "";
+                break;
+            case SkillType.Leadership:
+                skillChargeCountText.text = PartyMemberPlacer.getPlacedPartyMemberCount() + "/" + PartyStats.getMaxPlacablePartyMembers();
+                break;
+            default:
+                skillChargeCountText.text = IntimidateManager.getIntimidatesRemaining() + "/" + PartyStats.getMaxIntimidateCount();
+                break;
         }
 
-        if (PartyManager.getPlayerStats() != null && PartyManager.getPlayerStats().getWisdom() < SkillManager.skillUnlockLevel)
-        {
-            observationParent.SetActive(false);
-            return;
-        }
+        skillIconHover.setHoverMessage(HoverMessageList.getMessage(State.currentSkillType.ToString()));
 
-        observationParent.SetActive(true);
-
-        if (PlayerOOCStateManager.currentActivity == OOCActivity.observing)
-        {
-            observationToggleImage.color = Color.green;
-        }
-        else if (PlayerOOCStateManager.currentActivity != OOCActivity.observing)
-        {
-            observationToggleImage.color = Color.red;
-        }
-    }
-
-    public static void manuallySetObservationPanelColorOn()
-    {
-        manuallySetObservationPanelColor = true;
-
-        getInstance().observationToggleImage.color = Color.green;
-    }
-
-    public static void manuallySetObservationPanelColorOff()
-    {
-        manuallySetObservationPanelColor = false;
-        updateOOCUI();
-    }
-
-    private void updateLeadershipText()
-    {
-        if (PartyStats.getMaxPlacablePartyMembers() != 0)
-        {
-            leadershipParent.SetActive(true);
-            leadershipCountText.text = PartyMemberPlacer.getPlacedPartyMemberCount() + "/" + PartyStats.getMaxPlacablePartyMembers() + " L";
-        }
-        else
-        {
-            leadershipParent.SetActive(false);
-        }
+        skillButtonManager.setSkillButtonInteractability();
     }
 
     public void disableOOCUI()
@@ -213,16 +125,13 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
 
         State.oocUIManager = this;
         oocUIParent.SetActive(false);
-        topOOCUIBackground.color = Color.clear;
         bottomOOCUIBackground.color = Color.clear;
     }
 
     public void enableOOCUI()
     {
-
         State.oocUIManager = this;
         oocUIParent.SetActive(true);
-        topOOCUIBackground.color = Color.black;
         bottomOOCUIBackground.color = Color.black;
     }
 
@@ -355,6 +264,7 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
         listOfEvents.Add(SkillManager.OnSkillUse);
         listOfEvents.Add(UpgradePartyMemberDecisionPanel.OnPartyMemberUpgraded);
         listOfEvents.Add(AreaManager.OnAreaSpawn);
+        listOfEvents.Add(Formation.OnFormationChange);
 
         return listOfEvents;
     }

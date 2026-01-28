@@ -150,11 +150,9 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	public const int pathIndexHardCutoff = 1000;
     private const bool skipFileCreation = true;
 
-    //[SerializeField]
     private int monsterPackIndex; //private so it can only set by using setMonsterPackIndex()
 
 	public string tutorialHash;
-	// public string packName = "???"; //Worms
 
     private MonsterMovementType _MovementType = MonsterMovementType.Random;
     public virtual MonsterMovementType movementType
@@ -245,7 +243,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     private void OnDrawGizmos()
     {
 
-        if (movementType == MonsterMovementType.ChasesPlayer)
+        if (movementType == MonsterMovementType.Chases)
         {
 
             int coordsIndex = 0;
@@ -326,7 +324,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         {
             case MonsterMovementType.Random:
                 return findRandomDirection();
-            case MonsterMovementType.ChasesPlayer:
+            case MonsterMovementType.Chases:
                 PathToPlayer pathToPlayer = findPathToPlayer();
 
                 if (pathToPlayer == null || pathToPlayer is null)
@@ -661,38 +659,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 		{
 			retreatStunnedCounter--;
 		}
-
-
-
-		// setIndicatorColor();
 	}
-
-    // private void setIndicatorColor()
-    // {
-    //     if (enemyDirectionIndicator == null)
-    //     {
-    //         return;
-    //     }
-
-    //     switch (cunningStunCounter, intimidateCounter, retreatStunnedCounter)
-    //     {
-    //         case ( > 0, <= 0, <= 0):
-    //             enemyDirectionIndicator.setColors(ColorList.cunningStunnedColor);
-    //             return;
-
-    //         case ( <= 0, > 0, <= 0):
-    //             enemyDirectionIndicator.setColors(ColorList.intimidatedColor);
-    //             return;
-
-    //         case ( <= 0, <= 0, > 0):
-    //             enemyDirectionIndicator.setColors(ColorList.retreatStunnedColor);
-    //             return;
-
-    //         case ( <= 0, <= 0, <= 0):
-    //             enemyDirectionIndicator.setColors(Color.white);
-    //             return;
-    //     }
-    // }
 
 	protected override void OnEnable()
 	{
@@ -830,7 +797,9 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	{
 		List<DescriptionPanelBuildingBlock> blocks = new List<DescriptionPanelBuildingBlock>();
 
-		blocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+		blocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName() + "\n"));
+
+        blocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock("  Movement: " + movementType.ToString()+"  \n\n"));
 
         blocks.AddRange(getEnemyPackInfo().getDescriptionBuildingBlocks());
 

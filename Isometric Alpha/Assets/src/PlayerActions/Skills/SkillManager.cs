@@ -6,7 +6,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum SkillType {Intimidate = 0, Cunning = 1}
+public enum SkillType {Intimidate = 0, Cunning = 1, Observation = 2, Leadership = 3}
 
 public interface ISkillTarget
 {
@@ -15,9 +15,10 @@ public interface ISkillTarget
     public void cunning();
     public void intimidate();
 }
-public class SkillManager
+public abstract class SkillManager
 {
     public readonly static UnityEvent OnSkillUse = new UnityEvent();
+    public readonly static UnityEvent OnSkillTargetFound = new UnityEvent();
 
     public static Vector2Int selectorPosition;
     public static Color oldColor;
@@ -104,6 +105,7 @@ public class SkillManager
     {
         if (collidedWithTarget(tile))
         {
+            OnSkillTargetFound.Invoke();
             return getTileTargetColor();
         }
         else
@@ -172,6 +174,21 @@ public class SkillManager
         IntimidateManager.destroyIntimdiateSkillArea();
         CunningManager.destroyCunningSkillArea();
         ObservationManager.destroyObservationSkillArea();
+    }
+
+    public static SkillType getHighestSkillType(AllyStats stats)
+    {
+        switch(stats.getHighestStat())
+        {
+            case PrimaryStat.Dexterity:
+                return SkillType.Cunning;
+            case PrimaryStat.Wisdom:
+                return SkillType.Observation;
+            case PrimaryStat.Charisma:
+                return SkillType.Leadership;
+            default:
+                return SkillType.Intimidate;
+        }
     }
 
     /*

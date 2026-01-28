@@ -19,8 +19,8 @@ public class CombatKeyBindingDisplay : MonoBehaviour
 
     private const string backOutOfActionKeyBinding = "R: Back";
 
-    private const string hideKeyBindingListMessage = "Tab: Hide Key Bindings";
-    private const string showKeyBindingListMessage = "Tab: Show Key Bindings";    
+    private const string hideKeyBindingListMessage = "Backspace: Hide Key Bindings";
+    private const string showKeyBindingListMessage = "Backspace: Show Key Bindings";    
 
     private const string nextTurnButtonPress = "Space: Resolve Turn";
 

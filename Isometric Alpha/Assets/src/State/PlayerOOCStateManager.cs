@@ -42,7 +42,10 @@ public static class PlayerOOCStateManager
 
     public readonly static UnityEvent OnStateChangeToInMap = new UnityEvent();
     public readonly static UnityEvent OnStateChangeToInWorldMap = new UnityEvent();
+
     public readonly static UnityEvent OnStateChangeToSkill = new UnityEvent();
+    public readonly static UnityEvent OnStateChangeFromSkill = new UnityEvent();
+
     public readonly static UnityEvent OnStateChangeToInChestUI = new UnityEvent();
     public readonly static UnityEvent OnStateChangeFromInChestUI = new UnityEvent();
     public readonly static UnityEvent OnStateChangeToInBookUI = new UnityEvent();
@@ -124,6 +127,7 @@ public static class PlayerOOCStateManager
             case OOCActivity.intimidating:
             case OOCActivity.cunning:
             case OOCActivity.observing:
+                OnStateChangeFromSkill.Invoke();
                 break;
             case OOCActivity.inChestUI:
                 OnStateChangeFromInChestUI.Invoke();

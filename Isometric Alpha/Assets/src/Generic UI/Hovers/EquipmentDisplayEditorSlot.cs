@@ -304,6 +304,8 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     {
         Item itemBeingDragged = describable as Item;
 
+        int slotID = itemBeingDragged.getSlotID();
+
         if (itemBeingDragged != null && itemBeingDragged.getSlotID() >= 0 &&
             itemBeingDragged.getSlotID() == slotIndex)
         {

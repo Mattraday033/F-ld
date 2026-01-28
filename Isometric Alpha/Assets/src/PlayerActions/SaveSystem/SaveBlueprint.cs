@@ -56,6 +56,8 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 
     public StatsWrapper[] partyMemberStats;
 
+    public SkillType currentSkillType;
+
 	public InventoryWrapper[] currentShopkeeperInventories;
 	public InventoryWrapper[] currentBuyBackInventories;
 
@@ -99,6 +101,8 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 		saveBlueprint.currentActivatedTrapsAndButtons = TrapAndButtonStateManager.getAllWrappers();
 		saveBlueprint.currentLocation = AreaManager.locationName;
 		saveBlueprint.saveName = saveName;
+
+        saveBlueprint.currentSkillType = State.currentSkillType;
 
 		saveBlueprint.secretDoors = SecretDoorFlags.getSecretDoorKeys();
 
@@ -169,6 +173,8 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
         this.secretDoors = GetFromJson.getElementFromJson(this.saveName, nameof(secretDoors), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
 
         this.partyMemberStats = GetFromJson.getElementFromJson(this.saveName, nameof(partyMemberStats), jsonDynamic, SaveDefaultValues.defaultEmptyStatsWrapperArray);
+
+        this.currentSkillType = GetFromJson.getElementFromJson(this.saveName, nameof(currentSkillType), jsonDynamic, SaveDefaultValues.defaultSkillType);
 
 		this.currentShopkeeperInventories = GetFromJson.getElementFromJson(this.saveName, nameof(currentShopkeeperInventories), jsonDynamic, SaveDefaultValues.defaultEmptyInventoryWrapperArray);
 		this.currentBuyBackInventories = GetFromJson.getElementFromJson(this.saveName, nameof(currentBuyBackInventories), jsonDynamic, SaveDefaultValues.defaultEmptyInventoryWrapperArray);

@@ -1130,7 +1130,9 @@ public static class SelectionInfo
 
 	public static bool selectedAllyCanAct(GridCoords coords)
 	{
-		return selectionIsAlly(coords) && CombatGrid.getCombatantAtCoords(coords).isAlive() && PlayerCombatActionCounterManager.playerHasActionsLeft();
+        Stats actor = CombatGrid.getCombatantAtCoords(coords);
+
+		return selectionIsAlly(coords) && actor.isAlive() && !PlayerCombatActionManager.actorHasActionsInQueue(actor) && PlayerCombatActionCounterManager.playerHasActionsLeft();
 	}
 
 }

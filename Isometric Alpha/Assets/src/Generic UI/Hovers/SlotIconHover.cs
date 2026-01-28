@@ -277,6 +277,12 @@ public static class HoverMessageList
     private const string statPointKey = "Stat Points";
     private const string statPointMessage = "Stat Points. This shows how many times you can increase your Primary Stats. The four Primary Stats are Strength, Dexterity, Wisdom, and Charisma.";
 
+    private const string compassKey = "Compass";
+    private const string hostilityKey = "Hostility";
+    private const string hostilityMessage = hostilityKey + ". Areas with green Hostility means that you cannot be attacked by random monsters. Areas with red Hostility may contain random Monsters. Yellow Hosility means you have committed a crime. When the bars of an area fill up with yellow, they will turn red and guards will be set after you.";
+    private const string footingKey = "Footing";
+    private const string footingMessage = footingKey + ". Some enemies will chase you when you get too close. These enemies only move half as fast as you. When the Left Foot is highlighted Green, enemies chasing you will move the next time you take a step.";
+
     private const string strengthMessage = "Strength. This Primary Stat bolsters a character's Maximum Health, Critical Hit Damage, and Physical Resistance. Strength also governs the Intimidate skill.";
     private const string dexterityMessage = "Dexterity. This Primary Stat bolsters a character's Armor, Surprise Round Damage Modifier, and Armor Penetration. Dexterity also governs the Cunning skill.";
     private const string wisdomMessage = "Wisdom. This Primary Stat bolsters a character's Mental Resistance. Wisdom also provides bonus Passive Slots, increases the number of Weapons you can have equipped, and governs the Observation skill.";
@@ -452,6 +458,13 @@ public static class HoverMessageList
                 return wisdomMessage;
             case Charisma.symbolChar:
                 return charismaMessage;
+
+            case compassKey:
+                return compassKey;
+            case hostilityKey:
+                return hostilityMessage;
+            case footingKey:
+                return footingMessage;
 
             case IconList.intimidateIconName:
                 return intimidateMessage;

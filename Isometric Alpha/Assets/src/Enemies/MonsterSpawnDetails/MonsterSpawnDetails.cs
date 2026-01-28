@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum MonsterMovementType { Random, Stationary, ChasesPlayer }
+public enum MonsterMovementType { Random, Stationary, Chases }
 
 public class MonsterSpawnDetails : OOCSpawnDetails
 {

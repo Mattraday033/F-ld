@@ -136,23 +136,23 @@ public class PlayerInput : MonoBehaviour
 
         }
 
-        if (Input.GetKey(KeyBindingList.observationKey) && !KeyPressManager.handlingPrimaryKeyPress && PartyManager.getPlayerStats().getWisdom() >= 2)
+        if (Input.GetKey(KeyBindingList.skillKey) && !KeyPressManager.handlingPrimaryKeyPress)
         {
-            ObservationManager.enterObservationMode();
+            SkillButtonManager.useSkill();
             KeyPressManager.handlingPrimaryKeyPress = true;
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.cunningKey) && !KeyPressManager.handlingPrimaryKeyPress && CunningManager.getCunningsRemaining() > 0)
+        if (Input.GetKey(KeyBindingList.cycleSkillAscendingKey) && !KeyPressManager.handlingPrimaryKeyPress)
         {
-            CunningManager.enterCunningMode();
+            SkillButtonManager.changeSkill(false);
             KeyPressManager.handlingPrimaryKeyPress = true;
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.intimidateKey) && !KeyPressManager.handlingPrimaryKeyPress && IntimidateManager.getIntimidatesRemaining() > 0)
+        if (Input.GetKey(KeyBindingList.cycleSkillDecendingKey) && !KeyPressManager.handlingPrimaryKeyPress)
         {
-            IntimidateManager.enterIntimidateMode();
+            SkillButtonManager.changeSkill(true);
             KeyPressManager.handlingPrimaryKeyPress = true;
             return;
         }
@@ -177,12 +177,6 @@ public class PlayerInput : MonoBehaviour
         {
             DialogueManager.getInstance().spawnDialogueTrackerWindowWithoutChoices();
 
-            KeyPressManager.handlingPrimaryKeyPress = true;
-        }
-
-        if (Input.GetKey(KeyBindingList.placeCompanionKey) && !KeyPressManager.handlingPrimaryKeyPress && PartyMemberPlacer.getPlacedPartyMemberCount() < PartyStats.getMaxPlacablePartyMembers())
-        {
-            PartyMemberPlacer.placeNextPartyMember();
             KeyPressManager.handlingPrimaryKeyPress = true;
         }
 
@@ -532,7 +526,7 @@ public class PlayerInput : MonoBehaviour
 
     private void handleCunningStateKeyPresses()
     {
-        if ((KeyBindingList.eitherBackoutKeyIsPressed() || Input.GetKey(KeyBindingList.cunningKey)) && !KeyPressManager.handlingPrimaryKeyPress)
+        if ((KeyBindingList.eitherBackoutKeyIsPressed() || Input.GetKey(KeyBindingList.skillKey)) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             CunningManager.leaveCunningMode();
             KeyPressManager.handlingPrimaryKeyPress = true;
@@ -560,7 +554,7 @@ public class PlayerInput : MonoBehaviour
 
     private void handleObservingStateKeyPresses()
     {
-        if ((KeyBindingList.eitherBackoutKeyIsPressed() || Input.GetKey(KeyBindingList.observationKey)) && !KeyPressManager.handlingPrimaryKeyPress)
+        if ((KeyBindingList.eitherBackoutKeyIsPressed() || Input.GetKey(KeyBindingList.skillKey)) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             ObservationManager.leaveObservationMode();
             KeyPressManager.handlingPrimaryKeyPress = true;
@@ -570,7 +564,7 @@ public class PlayerInput : MonoBehaviour
 
     private void handleIntimidateStateKeyPresses()
     {
-        if ((KeyBindingList.eitherBackoutKeyIsPressed() || Input.GetKey(KeyBindingList.intimidateKey)) && !KeyPressManager.handlingPrimaryKeyPress)
+        if ((KeyBindingList.eitherBackoutKeyIsPressed() || Input.GetKey(KeyBindingList.skillKey)) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             IntimidateManager.leaveIntimidateMode();
             KeyPressManager.handlingPrimaryKeyPress = true;

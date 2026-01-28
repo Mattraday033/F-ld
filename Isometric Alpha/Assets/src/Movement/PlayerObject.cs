@@ -157,7 +157,9 @@ public class PlayerObject : MonoBehaviour
             return;
         }
 
-        if (PlayerOOCStateManager.currentActivity == OOCActivity.walking)
+        if (PlayerOOCStateManager.currentActivity == OOCActivity.walking || 
+            PlayerOOCStateManager.currentActivity == OOCActivity.cunning || 
+            PlayerOOCStateManager.currentActivity == OOCActivity.intimidating)
         {
             string promptMessage = player.getPromptMessage();
 
@@ -186,29 +188,56 @@ public class PlayerObject : MonoBehaviour
 
     private string getPromptMessage()
     {
-        if (PlayerMovement.canInteract())
+        switch(PlayerOOCStateManager.currentActivity)
         {
-            return "E: Interact";
-        }
+            case OOCActivity.walking:
+                if (PlayerMovement.canInteract())
+                {
+                    return "E: Interact";
+                }
 
+                Collider2D npcCollider = PositionQuery.npcAtPosition(PlayerMovement.getColliderWorldPosition());
 
-        Collider2D npcCollider = PositionQuery.npcAtPosition(PlayerMovement.getColliderWorldPosition());
+                if (npcCollider != null && npcCollider.gameObject.tag.Equals(LayerAndTagManager.partyMemberTag))
+                {
+                    return "Z: Remove";
+                }
 
-        if (npcCollider != null && npcCollider.gameObject.tag.Equals(LayerAndTagManager.partyMemberTag))
-        {
-            return "Z: Remove";
-        }
+                Collider2D moveableObjectCollider = PositionQuery.moveableObjectAtPosition(PlayerMovement.getColliderWorldPosition());
 
-        Collider2D moveableObjectCollider = PositionQuery.moveableObjectAtPosition(PlayerMovement.getColliderWorldPosition());
+                if (moveableObjectCollider != null)
+                {
+                    EnemyMovement movableObject = moveableObjectCollider.gameObject.GetComponent<EnemyMovement>();
 
-        if (moveableObjectCollider != null)
-        {
-            EnemyMovement movableObject = moveableObjectCollider.gameObject.GetComponent<EnemyMovement>();
+                    if (movableObject != null && movableObject.canBePutBackToStartingPosition())
+                    {
+                        return "Z: Return";
+                    }
+                }
+                break;
+            case OOCActivity.cunning:
+                if (CunningManager.getInstance().canUseSkill())
+                {
+                    return "E: Cunning";
+                } else if(CunningManager.getInstance().hasTooExpensiveTarget())
+                {
+                    return "Need More Charges";
+                } else
+                {
+                    return "WASD: Move";
+                }
+            case OOCActivity.intimidating:
+                if (IntimidateManager.getInstance().canUseSkill())
+                {
+                    return "E: Intimidate";
+                }
 
-            if (movableObject != null && movableObject.canBePutBackToStartingPosition())
-            {
-                return "Z: Return";
-            }
+                if(IntimidateManager.getIntimidatesRemaining() <= 0)
+                {
+                    return "Need More Charges";
+                }
+
+                break;
         }
 
         return "";

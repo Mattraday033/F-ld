@@ -683,7 +683,7 @@ I appreciate you telling me this. Once we have dealt with the guards, we'll free
 
 === T1b ===
 
-Before you arrived, I was considering who else among the slaves could be recruited to be our runner between the huts. There really is only one other candidate: a branded named Thatch. From my doorway, I have seen the guards assigning him to manual labor even during the lockdown; they'll be used to seeing him outside. And from my interactions with him, he seems to have a level head.
+Before you arrived, I was considering who else among the slaves could be recruited to be our runner. There really is only one other candidate: a branded named Thatch. From my doorway, I have seen the guards assigning him to manual labor even during the lockdown; they'll be used to seeing him outside. And from my interactions with him, he seems to have a level head.
 
 His hut is very close by, only just across the street to the northeast. If I wasn't stuck in here, I would have recruited him already. But with your arrival, you can go in my stead and speak with him. There's just one small wrinkle. 
 

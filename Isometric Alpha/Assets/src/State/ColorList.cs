@@ -20,6 +20,8 @@ public static class ColorList
 
     public readonly static Color32 blackFadeOut75 = new Color32(0, 0, 0, 75);
 
+    public readonly static Color32 cutOutFade = new Color32(0,0,0,120);
+
     #endregion
 
     #region White Fadeouts

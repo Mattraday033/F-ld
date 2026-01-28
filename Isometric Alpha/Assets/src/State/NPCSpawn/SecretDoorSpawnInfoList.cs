@@ -25,19 +25,19 @@ public static class SecretDoorSpawnInfoList
         #region 5SlaveShack
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackFive, NPCNameList.wallPatch, PrefabNames.wallPatchTall, new Vector3Int(2, -6),
-                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchThree), Constants.sizeTwo, Axis.DescendingX, terrainSpriteName: PrefabNames.wallPatch));
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackFive, NPCNameList.wallPatch, PrefabNames.wallPatch, new Vector3Int(2, -6),
+                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchThree), Constants.sizeTwo, Axis.DescendingX));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.slaveShackFive, list);
         #endregion
         #region 6SlaveShack
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, PrefabNames.wallPatchTall, new Vector3Int(5, 2),
-                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchTwo), Constants.sizeTwo, Axis.DescendingX, terrainSpriteName: PrefabNames.wallPatch));
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, PrefabNames.wallPatch, new Vector3Int(5, 2),
+                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchTwo), Constants.sizeTwo, Axis.DescendingX));
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, PrefabNames.wallPatchTall, new Vector3Int(8, -6),
-                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchOne), Constants.sizeTwo, Axis.DescendingX, terrainSpriteName: PrefabNames.wallPatch));
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, PrefabNames.wallPatch, new Vector3Int(8, -6),
+                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchOne), Constants.sizeTwo, Axis.DescendingX));
 
         list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, PrefabNames.wallPatch, new Vector3Int(2, -4),
                                             new TutorialSecretDoorInfo(SecretDoorKeyList.wisTutorialSecretDoor,
@@ -51,16 +51,16 @@ public static class SecretDoorSpawnInfoList
         #region Stables
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.stables, NPCNameList.wallPatch, PrefabNames.wallPatchTall, new Vector3Int(9, -4),
-                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchOne), Constants.sizeTwo, Axis.DescendingX, terrainSpriteName: PrefabNames.wallPatch));
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.stables, NPCNameList.wallPatch, PrefabNames.wallPatch, new Vector3Int(9, -4),
+                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchOne), Constants.sizeTwo, Axis.DescendingX));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.stables, list);
         #endregion
         #region Temple
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.temple, NPCNameList.wallPatch, PrefabNames.wallPatchTall, new Vector3Int(11, 4),
-                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchTwo), Constants.sizeTwo, Axis.DescendingY, terrainSpriteName: PrefabNames.wallPatch));
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.temple, NPCNameList.wallPatch, PrefabNames.wallPatch, new Vector3Int(11, 4),
+                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchTwo), Constants.sizeTwo, Axis.DescendingY));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.temple, list);
         #endregion

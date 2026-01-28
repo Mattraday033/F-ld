@@ -29,7 +29,7 @@ public class CombatInputManager : MonoBehaviour
 
         PlayerInput.showFormulaToggleCheck();
 
-        if (Input.GetKey(KeyBindingList.combatHideKeyBindingsKey) && 
+        if (Input.GetKey(KeyBindingList.showHideKeyBindingsListKey) && 
             !KeyPressManager.handlingPrimaryKeyPress)
         {
             OnHideKeyBindingsList.Invoke();

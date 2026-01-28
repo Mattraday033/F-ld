@@ -251,6 +251,8 @@ public class CunningManager : SkillManager
         {
             moveCurrentSelectorSouthEast();
         }
+
+        PlayerObject.setButtonPromptVisibility();
     }
 
 
@@ -382,11 +384,40 @@ public class CunningManager : SkillManager
         return target.getChargeCost(SkillType.Cunning) <= getCunningsRemaining();
     }
 
+    public virtual bool canUseSkill()
+    {
+        if(skillGrid == null)
+        {
+            return false;
+        }
+
+        ISkillTarget target = getTargetFromTile(skillGrid[selectorPosition.x, selectorPosition.y]);
+
+        return canUseSkill(target);
+    }
+
+    public bool hasTooExpensiveTarget()
+    {
+        if(skillGrid == null)
+        {
+            return false;
+        }
+
+        ISkillTarget target = getTargetFromTile(skillGrid[selectorPosition.x, selectorPosition.y]);
+
+        return target != null && target.validTarget(SkillType.Cunning) && !hasEnoughChargesForTarget(target);
+    }
+
+    private bool canUseSkill(ISkillTarget target)
+    {
+        return target != null && target.validTarget(SkillType.Cunning) && hasEnoughChargesForTarget(target);
+    }
+
     public override bool executeSkill()
     {
         ISkillTarget target = getTargetFromTile(skillGrid[selectorPosition.x, selectorPosition.y]);
 
-        if (target != null && target.validTarget(SkillType.Cunning) && hasEnoughChargesForTarget(target))
+        if (canUseSkill(target))
         {
             target.cunning();
             removeCunningsRemaining(target.getChargeCost(SkillType.Cunning));

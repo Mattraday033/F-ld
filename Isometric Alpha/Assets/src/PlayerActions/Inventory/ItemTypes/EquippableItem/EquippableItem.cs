@@ -104,8 +104,6 @@ public abstract class EquippableItem : Item, IJSONConvertable, IFormulaSource
         }
     }
 
-    public abstract int getSlotID();
-
     public string getSlotIDForDisplay()
     {
         switch (getSlotID())

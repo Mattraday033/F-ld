@@ -6,7 +6,7 @@ using System;
 using Newtonsoft.Json;
 
 [System.Serializable]
-public class Item : StatBoostSource, ICloneable, IJSONConvertable, IDescribable, ISortable, IDescribableInBlocks
+public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDescribable, ISortable, IDescribableInBlocks
 {
 	private ItemListID listID;
 

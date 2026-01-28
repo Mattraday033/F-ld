@@ -22,6 +22,8 @@ public class QuestCounter : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public IQuestListSource questListSource;
 
+    public GameObject parentObject;
+
     public ScrollableUIElement questStepGrid;
 
     public Image starOutlineImage;
@@ -44,10 +46,10 @@ public class QuestCounter : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         if(questListSource.getNumberOfQuests() <= 0)
         {
-            gameObject.SetActive(false);
+            getVisibilityGameObject().SetActive(false);
         } else
         {
-            gameObject.SetActive(true);
+            getVisibilityGameObject().SetActive(true);
         }
     }
 
@@ -57,11 +59,22 @@ public class QuestCounter : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
         if (questCount > 0)
         {
-            gameObject.SetActive(true);
+            getVisibilityGameObject().SetActive(true);
         }
         else
         {
-            gameObject.SetActive(false);
+            getVisibilityGameObject().SetActive(false);
+        }
+    }
+
+    private GameObject getVisibilityGameObject()
+    {
+        if(parentObject != null)
+        {
+            return parentObject;
+        } else
+        {
+            return gameObject;
         }
     }
 

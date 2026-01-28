@@ -394,6 +394,21 @@ public static class PartyStats
         return skillLevelFromCharisma;
     }
 
+    public static bool hasMoreThanOneSkill()
+    {
+        int maxInt = getMaxIntimidateCount();
+        int maxCun = getMaxCunningCount();
+        int maxObs = getObservationLevel();
+        int maxLea = getMaxPlacablePartyMembers();
+
+        return (maxInt > 0 && maxCun > 0) || 
+                (maxInt > 0 && maxObs > 0) || 
+                (maxInt > 0 && maxLea > 0) ||
+                (maxCun > 0 && maxObs > 0) ||
+                (maxInt > 0 && maxLea > 0) ||
+                (maxObs > 0 && maxLea > 0);
+    }
+
     #endregion
 
 }

@@ -33312,6 +33312,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyCollider
       objectReference: {fileID: 0}
+    - target: {fileID: 2782450835153354295, guid: 2e40cca09244c60478f3a9fa653e1235,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5161327632533506727, guid: 2e40cca09244c60478f3a9fa653e1235,
         type: 3}
       propertyPath: m_Size.x

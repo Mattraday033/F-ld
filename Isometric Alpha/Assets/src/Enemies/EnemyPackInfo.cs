@@ -144,7 +144,7 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks, ICreatureSpawn
         {
             string enemyNumber = FoeTypes[enemyIndex].amount.ToString();
 
-            blocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, enemyNumber + "   " + FoeTypes[enemyIndex].enemyStats.getName()));
+            blocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "  x"+enemyNumber + " "+FoeTypes[enemyIndex].enemyStats.getName() + " "));
         }
 
         return blocks;

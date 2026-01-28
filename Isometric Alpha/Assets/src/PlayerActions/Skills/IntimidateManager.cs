@@ -10,12 +10,34 @@ public class IntimidateManager : CunningManager
     public const int intimidateRange = 11;
     public const int playerIntimidateCoords = (intimidateRange - 1) / 2;
 
+    public static int targetsFound;
+
     public static int intimidatesRemaining;
 
     [RuntimeInitializeOnLoadMethod]
     private static void initializeInimidateManager()
     {
         intimidatesRemaining = -1;
+        targetsFound = 0;
+
+        PlayerOOCStateManager.OnStateChangeToSkill.AddListener(noLongerHasTarget);
+        PlayerOOCStateManager.OnStateChangeFromSkill.AddListener(noLongerHasTarget);
+        OnSkillTargetFound.AddListener(incrementIntimidateTargets);
+    }
+
+    private static void incrementIntimidateTargets()
+    {
+        targetsFound++;
+    }
+
+    public static void decrementIntimidateTargets()
+    {
+        targetsFound--;
+    }
+
+    private static void noLongerHasTarget()
+    {
+        targetsFound = 0;
     }
 
     public static int getIntimidatesRemaining()
@@ -72,14 +94,16 @@ public class IntimidateManager : CunningManager
     public static void enterIntimidateMode()
     {
         SkillManager.destroyAllSkillGrids();
-        IntimidateManager.getInstance().createSkillArea();
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.intimidating);
+        IntimidateManager.getInstance().createSkillArea();
+        PlayerObject.setButtonPromptVisibility();
     }
 
     public static void leaveIntimidateMode()
     {
         IntimidateManager.getInstance().destroySkillArea();
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        PlayerObject.setButtonPromptVisibility();
     }
 
     public override void createSkillArea()
@@ -108,6 +132,11 @@ public class IntimidateManager : CunningManager
         }
 
         cullSkillArea();
+    }
+
+    public override bool canUseSkill()
+    {
+        return targetsFound > 0 && intimidatesRemaining > 0;
     }
 
     public override string getTilePrefabName()

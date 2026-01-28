@@ -32,7 +32,7 @@ public static class KeyBindingList
     public const KeyCode mapKey = KeyCode.M;
     public const KeyCode worldMapKey = KeyCode.N;
     public const KeyCode transcriptKey = KeyCode.T;
-    public const KeyCode showHideKeyBindingsListKey = KeyCode.Space;
+    public const KeyCode showHideKeyBindingsListKey = KeyCode.Backspace;
     public const KeyCode quicksaveKey = KeyCode.Q;
 
     public static bool revealKeyIsPressed()
@@ -106,7 +106,6 @@ public static class KeyBindingList
     //Combat Keys
     public const KeyCode resolveTurnKey = KeyCode.Space;
     public const KeyCode combatAcceptChoiceKey = KeyCode.E;
-    public const KeyCode combatHideKeyBindingsKey = KeyCode.Tab;
 
     public static bool jumpMoveKeyIsPressed()
     {
@@ -122,10 +121,9 @@ public static class KeyBindingList
 
 
     //Skill KeyBinds
-    public const KeyCode intimidateKey = KeyCode.Alpha1;
-    public const KeyCode cunningKey = KeyCode.Alpha2;
-    public const KeyCode observationKey = KeyCode.Alpha3;
-    public const KeyCode placeCompanionKey = KeyCode.Alpha4;
+    public const KeyCode skillKey = KeyCode.Space;
+    public const KeyCode cycleSkillAscendingKey = KeyCode.Alpha1;
+    public const KeyCode cycleSkillDecendingKey = KeyCode.Alpha2;
 
     //Screen KeyBinds
     public const KeyCode lastScreenKey = KeyCode.Tab;

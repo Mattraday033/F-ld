@@ -140,6 +140,8 @@ public class LoadSaveFile : IDecision
 
             CombatStateManager.inCombat = false;
 
+            State.currentSkillType = SkillManager.getHighestSkillType(PartyManager.getPlayerStats());
+
             SpeechLog.cleanSpeechLog();
 
             TestScript.addTestVariables();
