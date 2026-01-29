@@ -50,38 +50,37 @@ public static class TutorialMessageList
         tutorialDictionary.Add(hostilityBarsTutorialMessagePrefix + 1, "You have commited an action that has raised the Hostility in the area. Attacking or using Skills on NPC's can result in raising an area's Hostility. You will receive less Hostility if you are indoors.");
         tutorialDictionary.Add(hostilityBarsTutorialMessagePrefix + 2, "Should you ever receive your fifth yellow Hostility bar, the entire Zone will become Hostile. This will result in previously peaceful areas being filled with guards looking to make you pay. It can also affect the outcome of certain quests. Be careful who you attack!");
 
-        tutorialDictionary.Add(intimidateTutorialMessagePrefix + 1, "This creature is hiding around a blind corner. The Intimidate skill can keep it from surprising you. Press '1' to activate it.");
+        tutorialDictionary.Add(intimidateTutorialMessagePrefix + 1, "This creature is hiding around a blind corner. The Intimidate skill can keep it from surprising you. Press 'Space' to activate it.");
         tutorialDictionary.Add(intimidateTutorialMessagePrefix + 2, "The orange tiles show Intimidate's range. A red tile shows a target. All targets in range will be affected by Intimidate. Intimidated creatures cannot surprise you or be surprised.");
         tutorialDictionary.Add(intimidateTutorialMessagePrefix + 3, "You have limited uses of Intimidate. These are replenished when you enter a new area. Press 'E' to use Intimidate.");
-        tutorialDictionary.Add(intimidateTutorialMessagePrefix + 4, "The symbol above the creature indicates it has been intimidated. Press 'A' to move next to the creature and start combat.");
+        tutorialDictionary.Add(intimidateTutorialMessagePrefix + 4, "The symbol above the creature indicates it has been intimidated. Press 'A' to start combat.");
 
         tutorialDictionary.Add(interactableObjectTutorialMessagePrefix + 1, "Rubble blocks your path. If you highlight interactables, the rubble will be shown in green. This means you can interact with it like you would an NPC. Press 'E' to interact with it.");
         tutorialDictionary.Add(interactableObjectTutorialMessagePrefix + 2, "Barrels block your path. If you highlight interactables, the barrels will be shown in green. This means you can interact with them like you would an NPC. Press 'E' to interact with it.");
 
 
-        tutorialDictionary.Add(cunningTutorialMessagePrefix + 1, "This creature is hiding around a blind corner. This is a good opportunity to use the Cunning skill. Press '2' to begin to activate the Cunning Skill.");
+        tutorialDictionary.Add(cunningTutorialMessagePrefix + 1, "This creature is hiding around a blind corner. This is a good opportunity to use the Cunning skill. Press 'Space' to begin to activate the Cunning Skill.");
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 2, "The yellow tiles show the Cunning skill's range. A red tile shows a target. You are currently targeting the green tile. Use the 'WASD' keys to change the tile you are targeting. Press 'S' to target the creature.");
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 3, "You are now targeting the creature. Press 'E' to use Cunning on the creature.");
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 4, "The symbol above the creature indicates it has been distracted. Press 'A' to start combat.");
 
-        tutorialDictionary.Add(cunningTutorialMessagePrefix + 5, "Some obstacles can be activated with Cunning. Cunning targets have a yellow border when you highlight interactables. Press '2' to begin to activate the Cunning Skill again.");
+        tutorialDictionary.Add(cunningTutorialMessagePrefix + 5, "Some obstacles can be activated with Cunning. Cunning targets have a yellow border when you highlight interactables. Press 'Space' to begin to activate the Cunning Skill again.");
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 6, "You have limited uses of Cunning, shown here. Your charges are replenished when you enter a new area, or by using certain items. Press 'W' to target the object.");
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 7, "Press 'E' to activate the object.");
 
         tutorialDictionary.Add(observationTutorialMessagePrefix + 1, "Your path is blocked by a hidden door. Hidden doors are not highlighted by pressing 'Shift'. Instead, use the Observation skill to reveal them. Press 'W' to face the door.");
-        tutorialDictionary.Add(observationTutorialMessagePrefix + 2, "Now press '3' to activate the Observation Skill.");
-        tutorialDictionary.Add(observationTutorialMessagePrefix + 3, "The pink tiles show where you are observing. The hidden doors are now also shaded pink. This means that you can now interact with them.");
-        tutorialDictionary.Add(observationTutorialMessagePrefix + 4, "When the Observation Symbol is green, that means you are observing. When you are not observing, it will turn red. Press '3' to exit the Observation Skill.");
+        tutorialDictionary.Add(observationTutorialMessagePrefix + 2, "Now press 'Space' to activate the Observation Skill.");
+        tutorialDictionary.Add(observationTutorialMessagePrefix + 3, "The pink tiles show where you are observing. The hidden doors are now also shaded pink. This means that you can now interact with them. Press 'Space' to exit the Observation Skill.");
+        // tutorialDictionary.Add(observationTutorialMessagePrefix + 4, "When the Observation Symbol is outlined in yellow, that means you are observing. When you are not observing, it will darken.");
         tutorialDictionary.Add(observationTutorialMessagePrefix + 5, "Now press 'W' to walk up to the secret door.");
         tutorialDictionary.Add(observationTutorialMessagePrefix + 6, "Press 'E' to interact.");
 
-
-        tutorialDictionary.Add(leadershipTutorialMessagePrefix + 1, "Your path is blocked by a gate. Some gates can be opened by pressing buttons. Press 'A' to move on to the button.");
-        tutorialDictionary.Add(leadershipTutorialMessagePrefix + 2, "The gate was not opened. This means there is another button that needs to be pressed. Buttons can also be held down by objects found in the terrain, or your followers.");
-        tutorialDictionary.Add(leadershipTutorialMessagePrefix + 3, "Press '4' to place a follower.");
+        tutorialDictionary.Add(leadershipTutorialMessagePrefix + 1, "Your path is blocked. Some obstacles can be removed by pressing buttons. Press 'A' to move on to the button.");
+        tutorialDictionary.Add(leadershipTutorialMessagePrefix + 2, "The obstacle was not removed. This means there is another button that needs to be pressed. Buttons can also be held down by objects found in the terrain, or your followers.");
+        tutorialDictionary.Add(leadershipTutorialMessagePrefix + 3, "Press 'Space' to place a follower.");
         tutorialDictionary.Add(leadershipTutorialMessagePrefix + 4, "You follower has been placed. Press 'W' to move off of the button and reveal your follower.");
         tutorialDictionary.Add(leadershipTutorialMessagePrefix + 5, "Your follower is now holding down the first button. You can't move through placed followers, but neither can enemies. Remove followers by pressing 'Z' while facing them.");
-        tutorialDictionary.Add(leadershipTutorialMessagePrefix + 6, "Press 'W' to move to the second button and open the gate.");
+        tutorialDictionary.Add(leadershipTutorialMessagePrefix + 6, "Press 'W' to move to the second button.");
 
         tutorialDictionary.Add(equippableItemTutorialMessagePrefix + 1, "You have been given some equipment. Click the Inventory button, or press 'I'.");
         tutorialDictionary.Add(equippableItemTutorialMessagePrefix + 2, "These are your equipped Items.");

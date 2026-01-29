@@ -2152,8 +2152,8 @@ GameObject:
   m_Component:
   - component: {fileID: 385846766}
   - component: {fileID: 385846768}
-  - component: {fileID: 385846769}
   - component: {fileID: 385846770}
+  - component: {fileID: 385846769}
   - component: {fileID: 385846771}
   - component: {fileID: 385846772}
   - component: {fileID: 385846773}
@@ -7299,6 +7299,7 @@ GameObject:
   - component: {fileID: 1566507952}
   - component: {fileID: 1566507954}
   - component: {fileID: 1566507953}
+  - component: {fileID: 1566507955}
   m_Layer: 5
   m_Name: Skill Parent
   m_TagString: Untagged
@@ -7364,6 +7365,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566507951}
   m_CullTransparentMesh: 1
+--- !u!114 &1566507955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566507951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df7e0b42142bafa41b0eb154b8633843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useUltraWideTutorialWindow: 0
+  rectTransform: {fileID: 1566507952}
+  tutorialHash: Skill UI Panel
+  disableArrow: 0
+  image: {fileID: 1566507953}
+  previousColor: {r: 0, g: 0, b: 0, a: 0}
+  secondaryImage: {fileID: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
 --- !u!1 &1579629658
 GameObject:
   m_ObjectHideFlags: 0
@@ -7945,6 +7967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillButton: {fileID: 385846773}
+  skillButtonOutline: {fileID: 385846769}
 --- !u!1 &1756044940
 GameObject:
   m_ObjectHideFlags: 0

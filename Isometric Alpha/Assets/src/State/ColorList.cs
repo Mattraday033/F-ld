@@ -29,6 +29,7 @@ public static class ColorList
     #endregion
 
     #region Greys
+    public readonly static Color32 grey25 = new Color32(25, 25, 25, 255);
     public readonly static Color32 grey35 = new Color32(35, 35, 35, 255);
     public readonly static Color32 grey55 = new Color32(55, 55, 55, 255);
     public readonly static Color32 grey75 = new Color32(75, 75, 75, 255);
@@ -50,6 +51,8 @@ public static class ColorList
     #endregion
 
     public readonly static Color surpriseIconGrey = grey155;
+
+    public readonly static Color skillButtonOutlineHighlight = Color.yellow;
 
     public readonly static Color availableEquipmentIcon = grey100;
     public readonly static Color unavailableEquipmentIcon = grey35;
@@ -112,7 +115,6 @@ public static class ColorList
     private static void initializeDictionaries()
     {
         rubbleColorDict = new Dictionary<string, Color>();
-
 
         rubbleColorDict.Add(LocationNameList.slaveShackOne, shackRubbleColor);
         rubbleColorDict.Add(LocationNameList.slaveShackTwo, shackRubbleColor);

@@ -327,8 +327,13 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
     }
 
 
-	public virtual string getDamageFormula()
+	public override string getDamageFormula()
 	{
+        if(!base.getDamageFormula().Equals(Constants.zeroRating))
+        {
+            base.getDamageFormula();
+        }
+
 		return damageFormula;
 	}
 

@@ -28,7 +28,7 @@ public class SelectTarget : TutorialSequenceStepScript
 
         if (loadedCombatAction.requiresTertiaryCoords())
         {
-            TutorialSequence.startTutorialSequence(TutorialSequenceList.getCombatTutorialSequenceForReposition());
+            TutorialSequence.overrideTutorialSequence(TutorialSequenceList.getCombatTutorialSequenceForReposition());
         }
 
     }

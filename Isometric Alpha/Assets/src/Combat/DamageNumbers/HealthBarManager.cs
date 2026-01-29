@@ -63,7 +63,13 @@ public class HealthBarManager : MonoBehaviour
 
     public void setLinkedStats(Stats statsToLink)
     {
+        if(statsToLink != null && statsToLink.isRepositionClone())
+        {
+            return;
+        }
+
         linkedStats = statsToLink;
+
         updateHealthBarColor(null);
         show();
     }

@@ -5,11 +5,57 @@ using UnityEngine.UI;
 
 public class SkillButtonManager : MonoBehaviour
 {
+    private static SkillButtonManager instance;
+
+    public static SkillButtonManager getInstance()
+    {
+        return instance;
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public Button skillButton;
+
+    public Image skillButtonOutline;
+
+    private void OnEnable()
+    {
+        PlayerOOCStateManager.OnStateChangeToSkill.AddListener(highlightSkillOutline);
+        PlayerOOCStateManager.OnStateChangeFromSkill.AddListener(unhighlightSkillOutline);
+    }
+
+    private void OnDisable()
+    {
+        PlayerOOCStateManager.OnStateChangeToSkill.RemoveListener(highlightSkillOutline);
+        PlayerOOCStateManager.OnStateChangeFromSkill.RemoveListener(unhighlightSkillOutline);
+    }
+
+    public static void highlightSkillOutline()
+    {
+        if(instance == null)
+        {
+            return;
+        }
+
+        instance.skillButtonOutline.color = ColorList.skillButtonOutlineHighlight;
+    }
+
+    public static void unhighlightSkillOutline()
+    {
+        if(instance == null)
+        {
+            return;
+        }
+
+        instance.skillButtonOutline.color = ColorList.grey25;
+    }
 
     public void changeCurrentSkill(bool descending)
     {
-            changeSkill(descending);
+        changeSkill(descending);
     }
 
     public static void changeSkill(bool descending)
@@ -61,6 +107,13 @@ public class SkillButtonManager : MonoBehaviour
         {
             SkillManager.OnSkillUse.Invoke();
         }
+    }
+
+    public static void setToSkill(SkillType skillType)
+    {
+        State.currentSkillType = skillType;
+
+        SkillManager.OnSkillUse.Invoke();
     }
 
     private static bool hasSkill(SkillType skillType)

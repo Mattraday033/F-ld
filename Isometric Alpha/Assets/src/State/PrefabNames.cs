@@ -355,6 +355,7 @@ WallPatchTall
     public const string blockRubble = rubbleFolder + "Block Rubble";
     public const string lowRubble = rubbleFolder + "Low Rubble";
     public const string vaultableRocks = rubbleFolder + "Vaultable Rocks";
+    public const string tutorialRubble = rubbleFolder + "Tutorial Rubble";
 
     public const string doorsFolder =  spriteFolder + "Doors/";
     public const string XAxisDoor = doorsFolder + "XAxisDoor";

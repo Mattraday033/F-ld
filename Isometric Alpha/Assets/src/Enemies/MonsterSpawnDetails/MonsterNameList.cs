@@ -24,6 +24,8 @@ public static class MonsterNameList
     public const string signaleer = "Signaleer";
     public const string spearman = "Spearman";
 
+    public const string brandedConscript = "Branded Conscript";
+
     public const string movableObject = "Movable Object";
 
     public static string getPackName(string enemyType)

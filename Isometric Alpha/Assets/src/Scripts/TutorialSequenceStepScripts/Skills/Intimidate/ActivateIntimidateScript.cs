@@ -8,6 +8,7 @@ public class ActivateIntimidateScript : TutorialSequenceStepScript
     public override void runScript(GameObject target)
     {
         IntimidateManager.getInstance().executeSkill();
+        SkillButtonManager.unhighlightSkillOutline();
     }
 
 }

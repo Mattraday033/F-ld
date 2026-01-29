@@ -532,7 +532,7 @@ public class SelectorManager : MonoBehaviour
 
 	public static void moveCurrentSelector()
 	{
-        moveCurrentSelector();
+        moveCurrentSelector(0);
     }
 
 	public static void moveCurrentSelector(int heartBeatRow)
@@ -540,6 +540,14 @@ public class SelectorManager : MonoBehaviour
 
         switch(CombatStateManager.currentActivity)
         {
+            case CurrentActivity.Tutorial:
+            
+                if(!TutorialSequence.currentTutorialSequence.getCurrentTutorialSequenceStep().allowsMovementKeys)
+                {
+                    return;
+                }
+
+                break;
             case CurrentActivity.ChoosingActor:
 			case CurrentActivity.ChoosingLocation:
 			case CurrentActivity.ChoosingTertiary:

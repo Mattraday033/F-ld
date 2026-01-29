@@ -13,6 +13,8 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
     public INameSource nameSource;
 	public DescriptionPanel nameTag;
 
+    private bool ignoreSecretDoors;
+
 	private void Awake()
 	{
         if(spriteRenderer != null)
@@ -61,9 +63,13 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 	public void createListeners()
 	{
 		RevealManager.OnReveal.AddListener(onReveal);
-		SecretDoorFlags.OnSecretDoorDiscovery.AddListener(checkSpawnParams);
         PlayerOOCStateManager.OnStateChangeFromWalking.AddListener(displayNameTagBasedOnStateChange);
         PlayerOOCStateManager.OnStateChangeToWalking.AddListener(displayNameTagBasedOnStateChange);
+
+        if(!ignoreSecretDoors)
+        {
+            SecretDoorFlags.OnSecretDoorDiscovery.AddListener(checkSpawnParams);
+        }
 	}
 
 	public void destroyListeners()
@@ -125,6 +131,12 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
             destroyNameTag();
         }
 	}
+
+    public void setToIgnoreSecretDoors()
+    {
+        ignoreSecretDoors = true;
+        SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(checkSpawnParams);   
+    }
 
     private bool hasGenericName()
     {

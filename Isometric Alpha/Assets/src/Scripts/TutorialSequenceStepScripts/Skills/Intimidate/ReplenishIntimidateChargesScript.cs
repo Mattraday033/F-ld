@@ -8,6 +8,7 @@ public class ReplenishIntimidateChargesScript : TutorialSequenceStepScript
     public override void runScript(GameObject target)
     {
         IntimidateManager.resetIntimidatesRemaining();
+        (new SetToSkillScript(SkillType.Intimidate)).runScript();
     }
 
 }

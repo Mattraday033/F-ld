@@ -8,6 +8,7 @@ public class RemoveAllFollowersScript : TutorialSequenceStepScript
     public override void runScript(GameObject target)
     {
         PartyMemberPlacer.removeAllPlacedPartyMembers();
+        (new SetToSkillScript(SkillType.Leadership)).runScript();
     }
 
 }

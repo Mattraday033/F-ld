@@ -768,6 +768,11 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
+        if(eventData != null && eventData.used)
+        {
+            return;
+        }
+
 		if (!RevealManager.currentlyRevealed)
 		{
             outline.createOutline(getRevealColor());
@@ -778,6 +783,11 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
+        if(eventData != null && eventData.used)
+        {
+            return;
+        }
+
 		if (!RevealManager.currentlyRevealed)
 		{
 			outline.removeOutline();

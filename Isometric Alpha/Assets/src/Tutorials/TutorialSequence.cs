@@ -59,6 +59,7 @@ public struct TutorialSequenceStep : IDescribable
 
     public string tutorialMessageKey;
     public bool createPopUpScreenBlocker;
+    public bool allowsMovementKeys;
     public bool addShiftToKeyCodeMessage;
     public bool skipHighlight;
     public bool skipUnhighlight;
@@ -81,227 +82,45 @@ public struct TutorialSequenceStep : IDescribable
 
     public KeyCode[] nextStepKeyCode;
 
-    public TutorialSequenceStep(string tutorialMessageKey, string tutorialTargetHash, ArrowDirection arrowDirection, KeyCode[] nextStepKeyCode)
+    public TutorialSequenceStep( string tutorialMessageKey,
+                                 string tutorialTargetHash,
+                                 ArrowDirection arrowDirection, 
+                                 KeyCode[] nextStepKeyCode, 
+                                 TutorialSequenceStepScript scriptAtStart = null, 
+                                 TutorialSequenceStepScript scriptAtEnd = null,
+                                 TutorialSequenceAdditionalScript[] additionalScripts = null, 
+                                 bool skipHighlight = false, 
+                                 bool skipUnhighlight = false, 
+                                 bool createPopUpScreenBlocker = false,
+                                 bool allowsMovementKeys = false)
     {
         this.tutorialMessageKey = tutorialMessageKey;
         this.tutorialTargetHash = tutorialTargetHash;
         this.arrowDirection = arrowDirection;
         this.nextStepKeyCode = nextStepKeyCode;
 
-        this.scriptAtStart = null;
-        this.scriptAtEnd = null;
-        this.additionalScripts = new TutorialSequenceAdditionalScript[0];
-        this.skipHighlight = false;
-        this.skipUnhighlight = false;
-        this.createPopUpScreenBlocker = false;
-        this.addShiftToKeyCodeMessage = false;
-        this.blockInternalRaycastsOnCutOutMask = false;
-        this.dragWeaponContinueMessage = false;
-        this.dragActionContinueMessage = false;
-    }
-    public TutorialSequenceStep(string tutorialMessageKey, string tutorialTargetHash, ArrowDirection arrowDirection, KeyCode[] nextStepKeyCode, bool skipHighlight, bool skipUnhighlight)
-    {
-        this.tutorialMessageKey = tutorialMessageKey;
-        this.tutorialTargetHash = tutorialTargetHash;
-        this.arrowDirection = arrowDirection;
-        this.nextStepKeyCode = nextStepKeyCode;
         this.skipHighlight = skipHighlight;
         this.skipUnhighlight = skipUnhighlight;
 
-        this.scriptAtStart = null;
-        this.scriptAtEnd = null;
-        this.additionalScripts = new TutorialSequenceAdditionalScript[0];
-        this.createPopUpScreenBlocker = false;
-        this.addShiftToKeyCodeMessage = false;
-        this.blockInternalRaycastsOnCutOutMask = false;
-        this.dragWeaponContinueMessage = false;
-        this.dragActionContinueMessage = false;
-    }
-    public TutorialSequenceStep(string tutorialMessageKey, string tutorialTargetHash, ArrowDirection arrowDirection, KeyCode[] nextStepKeyCode, bool createPopUpScreenBlocker)
-    {
-        this.tutorialMessageKey = tutorialMessageKey;
-        this.tutorialTargetHash = tutorialTargetHash;
-        this.arrowDirection = arrowDirection;
-        this.nextStepKeyCode = nextStepKeyCode;
         this.createPopUpScreenBlocker = createPopUpScreenBlocker;
 
-        this.scriptAtStart = null;
-        this.scriptAtEnd = null;
-        this.additionalScripts = new TutorialSequenceAdditionalScript[0];
-        this.skipHighlight = false;
-        this.skipUnhighlight = false;
-        this.addShiftToKeyCodeMessage = false;
-        this.blockInternalRaycastsOnCutOutMask = false;
-        this.dragWeaponContinueMessage = false;
-        this.dragActionContinueMessage = false;
-    }
-
-    public TutorialSequenceStep(string tutorialMessageKey, string tutorialTargetHash, ArrowDirection arrowDirection, KeyCode[] nextStepKeyCode, bool skipHighlight, bool skipUnhighlight, bool createPopUpScreenBlocker)
-    {
-        this.tutorialMessageKey = tutorialMessageKey;
-        this.tutorialTargetHash = tutorialTargetHash;
-        this.arrowDirection = arrowDirection;
-        this.nextStepKeyCode = nextStepKeyCode;
-        this.skipHighlight = skipHighlight;
-        this.skipUnhighlight = skipUnhighlight;
-        this.createPopUpScreenBlocker = createPopUpScreenBlocker;
-
-        this.scriptAtStart = null;
-        this.scriptAtEnd = null;
-        this.additionalScripts = new TutorialSequenceAdditionalScript[0];
-        this.addShiftToKeyCodeMessage = false;
-        this.blockInternalRaycastsOnCutOutMask = false;
-        this.dragWeaponContinueMessage = false;
-        this.dragActionContinueMessage = false;
-    }
-    public TutorialSequenceStep(string tutorialMessageKey, string tutorialTargetHash, TutorialSequenceAdditionalScript[] additionalScripts, ArrowDirection arrowDirection, KeyCode[] nextStepKeyCode)
-    {
-        this.tutorialMessageKey = tutorialMessageKey;
-        this.tutorialTargetHash = tutorialTargetHash;
-        this.additionalScripts = additionalScripts;
-        this.arrowDirection = arrowDirection;
-        this.nextStepKeyCode = nextStepKeyCode;
-
-        this.scriptAtStart = null;
-        this.scriptAtEnd = null;
-        this.skipHighlight = false;
-        this.skipUnhighlight = false;
-        this.createPopUpScreenBlocker = false;
-        this.addShiftToKeyCodeMessage = false;
-        this.blockInternalRaycastsOnCutOutMask = false;
-        this.dragWeaponContinueMessage = false;
-        this.dragActionContinueMessage = false;
-    }
-
-    public TutorialSequenceStep(string tutorialMessageKey, string tutorialTargetHash, TutorialSequenceStepScript scriptAtStart, TutorialSequenceStepScript scriptAtEnd, ArrowDirection arrowDirection, KeyCode[] nextStepKeyCode)
-    {
-        this.tutorialMessageKey = tutorialMessageKey;
-        this.tutorialTargetHash = tutorialTargetHash;
         this.scriptAtStart = scriptAtStart;
         this.scriptAtEnd = scriptAtEnd;
-        this.arrowDirection = arrowDirection;
-        this.nextStepKeyCode = nextStepKeyCode;
 
-        this.additionalScripts = new TutorialSequenceAdditionalScript[0];
-        this.skipHighlight = false;
-        this.skipUnhighlight = false;
-        this.createPopUpScreenBlocker = false;
-        this.addShiftToKeyCodeMessage = false;
-        this.blockInternalRaycastsOnCutOutMask = false;
-        this.dragWeaponContinueMessage = false;
-        this.dragActionContinueMessage = false;
-    }
-
-    public TutorialSequenceStep(string tutorialMessageKey, string tutorialTargetHash, TutorialSequenceStepScript scriptAtStart, TutorialSequenceStepScript scriptAtEnd, ArrowDirection arrowDirection, KeyCode[] nextStepKeyCode, bool createPopUpScreenBlocker)
-    {
-        this.tutorialMessageKey = tutorialMessageKey;
-        this.tutorialTargetHash = tutorialTargetHash;
-        this.scriptAtStart = scriptAtStart;
-        this.scriptAtEnd = scriptAtEnd;
-        this.arrowDirection = arrowDirection;
-        this.nextStepKeyCode = nextStepKeyCode;
-        this.createPopUpScreenBlocker = createPopUpScreenBlocker;
-
-        this.additionalScripts = new TutorialSequenceAdditionalScript[0];
-        this.skipHighlight = false;
-        this.skipUnhighlight = false;
-        this.addShiftToKeyCodeMessage = false;
-        this.blockInternalRaycastsOnCutOutMask = false;
-        this.dragWeaponContinueMessage = false;
-        this.dragActionContinueMessage = false;
-    }
-    public TutorialSequenceStep(string tutorialMessageKey, string tutorialTargetHash, TutorialSequenceStepScript scriptAtStart, TutorialSequenceStepScript scriptAtEnd, ArrowDirection arrowDirection, KeyCode[] nextStepKeyCode, bool skipHighlight, bool skipUnhighlight, bool createPopUpScreenBlocker)
-    {
-        this.tutorialMessageKey = tutorialMessageKey;
-        this.tutorialTargetHash = tutorialTargetHash;
-        this.scriptAtStart = scriptAtStart;
-        this.scriptAtEnd = scriptAtEnd;
-        this.arrowDirection = arrowDirection;
-        this.nextStepKeyCode = nextStepKeyCode;
-        this.skipHighlight = skipHighlight;
-        this.skipUnhighlight = skipUnhighlight;
-        this.createPopUpScreenBlocker = createPopUpScreenBlocker;
-
-        this.additionalScripts = new TutorialSequenceAdditionalScript[0];
-        this.addShiftToKeyCodeMessage = false;
-        this.blockInternalRaycastsOnCutOutMask = false;
-        this.dragWeaponContinueMessage = false;
-        this.dragActionContinueMessage = false;
-    }
-
-    public TutorialSequenceStep(string tutorialMessageKey, string tutorialTargetHash, TutorialSequenceStepScript scriptAtStart, TutorialSequenceStepScript scriptAtEnd, TutorialSequenceAdditionalScript[] additionalScripts, ArrowDirection arrowDirection, KeyCode[] nextStepKeyCode, bool createPopUpScreenBlocker)
-    {
-        this.tutorialMessageKey = tutorialMessageKey;
-        this.tutorialTargetHash = tutorialTargetHash;
-        this.scriptAtStart = scriptAtStart;
-        this.scriptAtEnd = scriptAtEnd;
-        this.additionalScripts = additionalScripts;
-        this.arrowDirection = arrowDirection;
-        this.nextStepKeyCode = nextStepKeyCode;
-        this.createPopUpScreenBlocker = createPopUpScreenBlocker;
-
-        this.skipHighlight = false;
-        this.skipUnhighlight = false;
-        this.addShiftToKeyCodeMessage = false;
-        this.blockInternalRaycastsOnCutOutMask = false;
-        this.dragWeaponContinueMessage = false;
-        this.dragActionContinueMessage = false;
-    }
-
-    public TutorialSequenceStep(string tutorialMessageKey, string tutorialTargetHash, TutorialSequenceStepScript scriptAtStart, TutorialSequenceStepScript scriptAtEnd, TutorialSequenceAdditionalScript[] additionalScripts, ArrowDirection arrowDirection, KeyCode[] nextStepKeyCode)
-    {
-        this.tutorialMessageKey = tutorialMessageKey;
-        this.tutorialTargetHash = tutorialTargetHash;
-        this.scriptAtStart = scriptAtStart;
-        this.scriptAtEnd = scriptAtEnd;
-        this.additionalScripts = additionalScripts;
-        this.arrowDirection = arrowDirection;
-        this.nextStepKeyCode = nextStepKeyCode;
-
-        this.skipHighlight = false;
-        this.skipUnhighlight = false;
-        this.createPopUpScreenBlocker = false;
-        this.addShiftToKeyCodeMessage = false;
-        this.blockInternalRaycastsOnCutOutMask = false;
-        this.dragWeaponContinueMessage = false;
-        this.dragActionContinueMessage = false;
-    }
-
-    public TutorialSequenceStep(string tutorialMessageKey, string tutorialTargetHash, TutorialSequenceStepScript scriptAtStart, TutorialSequenceStepScript scriptAtEnd, TutorialSequenceAdditionalScript[] additionalScripts, ArrowDirection arrowDirection, KeyCode[] nextStepKeyCode, bool skipHighlight, bool skipUnhighlight)
-    {
-        this.tutorialMessageKey = tutorialMessageKey;
-        this.tutorialTargetHash = tutorialTargetHash;
-        this.scriptAtStart = scriptAtStart;
-        this.scriptAtEnd = scriptAtEnd;
-        this.additionalScripts = additionalScripts;
-        this.arrowDirection = arrowDirection;
-        this.nextStepKeyCode = nextStepKeyCode;
-        this.skipHighlight = skipHighlight;
-        this.skipUnhighlight = skipUnhighlight;
-
-        this.createPopUpScreenBlocker = false;
-        this.addShiftToKeyCodeMessage = false;
-        this.blockInternalRaycastsOnCutOutMask = false;
-        this.dragWeaponContinueMessage = false;
-        this.dragActionContinueMessage = false;
-    }
-    public TutorialSequenceStep(string tutorialMessageKey, string tutorialTargetHash, TutorialSequenceStepScript scriptAtStart, TutorialSequenceStepScript scriptAtEnd, TutorialSequenceAdditionalScript[] additionalScripts, ArrowDirection arrowDirection, KeyCode[] nextStepKeyCode, bool skipHighlight, bool skipUnhighlight, bool createPopUpScreenBlocker)
-    {
-        this.tutorialMessageKey = tutorialMessageKey;
-        this.tutorialTargetHash = tutorialTargetHash;
-        this.scriptAtStart = scriptAtStart;
-        this.scriptAtEnd = scriptAtEnd;
-        this.additionalScripts = additionalScripts;
-        this.arrowDirection = arrowDirection;
-        this.nextStepKeyCode = nextStepKeyCode;
-        this.skipHighlight = skipHighlight;
-        this.skipUnhighlight = skipUnhighlight;
-        this.createPopUpScreenBlocker = createPopUpScreenBlocker;
+        this.allowsMovementKeys = allowsMovementKeys;
 
         this.addShiftToKeyCodeMessage = false;
         this.blockInternalRaycastsOnCutOutMask = false;
         this.dragWeaponContinueMessage = false;
         this.dragActionContinueMessage = false;
+
+        if(additionalScripts == null)
+        {
+            this.additionalScripts = new TutorialSequenceAdditionalScript[0];        
+        } else
+        {
+            this.additionalScripts = additionalScripts;
+        }
     }
 
 	public bool Equals(TutorialSequenceStep otherStep)
@@ -1050,6 +869,11 @@ public class TutorialSequence
             return false;
         }
 
+        return overrideTutorialSequence(tutorialSequence);
+    }
+
+    public static bool overrideTutorialSequence(TutorialSequence tutorialSequence)
+    {
         currentTutorialSequence = tutorialSequence;
 
         if (currentTutorialSequence.hasBeenSeen())

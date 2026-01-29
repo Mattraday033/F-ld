@@ -8,6 +8,7 @@ public class ShowCunningRangeScript : TutorialSequenceStepScript
     public override void runScript(GameObject target)
     {
         CunningManager.getInstance().createSkillArea();
+        SkillButtonManager.highlightSkillOutline();
     }
 
 }

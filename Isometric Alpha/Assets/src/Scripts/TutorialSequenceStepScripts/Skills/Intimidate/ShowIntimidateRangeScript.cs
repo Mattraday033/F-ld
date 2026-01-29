@@ -8,6 +8,7 @@ public class ShowIntimidateRangeScript : TutorialSequenceStepScript
     public override void runScript(GameObject target)
     {
         IntimidateManager.getInstance().createSkillArea();
+        SkillButtonManager.highlightSkillOutline();
     }
 
 }

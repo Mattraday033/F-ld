@@ -89,6 +89,9 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.garcha, brandedFolderPath + NPCNameList.garcha + "/");
         folderPathDict.Add(NPCNameList.janos, brandedFolderPath + NPCNameList.janos + "/");
         folderPathDict.Add(NPCNameList.kastor, brandedFolderPath + NPCNameList.kastor + "/");
+
+        folderPathDict.Add(NPCNameList.seb, brandedFolderPath + MonsterNameList.brandedConscript + "/");
+        folderPathDict.Add(NPCNameList.slate, brandedFolderPath + MonsterNameList.brandedConscript + "/");
         #endregion
 
         #region Nonbranded Slaves

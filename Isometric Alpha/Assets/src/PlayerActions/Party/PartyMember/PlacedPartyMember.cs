@@ -30,7 +30,8 @@ public class PlacedPartyMember : MonoBehaviour
     
     public void checkIfVisible(int i)
     {
-        if(PlayerOOCStateManager.currentActivity != OOCActivity.walking)
+        if(PlayerOOCStateManager.currentActivity != OOCActivity.walking && 
+            PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence)
         {
             return;
         }

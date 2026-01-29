@@ -147,8 +147,8 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.liftableRubble, liftableRubbleDialogue);
 
-        addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.fallenBeam,
-                            new Dialogue(new string[] { NPCNameList.fallenBeam },
+        addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.awkwardRubble,
+                            new Dialogue(new string[] { NPCNameList.awkwardRubble },
                             Resources.Load<TextAsset>(DialogueNameList.fallenBeamPath)));
 
         #endregion

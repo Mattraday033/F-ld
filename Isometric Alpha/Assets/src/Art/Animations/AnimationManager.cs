@@ -111,6 +111,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         if(!CombatStateManager.inCombat)
         {
             currentIdle = newIdle;
+            setSpriteToCurrentIdle();
             return;
         } 
 
@@ -294,10 +295,16 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             return;
         }
 
-        if(type == CharacterAnimationType.Death)
+        switch(type)
         {
-            sprites = new Sprite[1]{sprites[sprites.Length-1]};    
-        } 
+            case CharacterAnimationType.Death:
+            case CharacterAnimationType.Death_Back:
+            case CharacterAnimationType.Death_Front:
+
+                sprites = new Sprite[1]{sprites[sprites.Length-1]};    
+
+                break;
+        }
 
         IdleDictionary.addSpritesToIdleDict(characterToAnimate, type, sprites);
     }
@@ -356,6 +363,14 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     private void playIdleAnimation(CharacterAnimationType newIdle)
     {
+        switch(currentIdle)
+        {
+            case CharacterAnimationType.Death:
+            case CharacterAnimationType.Death_Back:
+            case CharacterAnimationType.Death_Front:
+                return;
+        }
+
         newIdle = getFallBackIdleType(characterToAnimate, newIdle);
 
         enableExtras();
@@ -695,6 +710,14 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public void setFacing(Facing newFacing)
     {
+        switch(currentIdle)
+        {
+            case CharacterAnimationType.Death:
+            case CharacterAnimationType.Death_Front:
+            case CharacterAnimationType.Death_Back:
+                return;
+        }
+
         if(!changesFacing || CombatStateManager.inCombat)
         {
             return;
@@ -808,6 +831,10 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
         switch(animationType)
         {
+            case CharacterAnimationType.Death_Front:
+                return getFallBackIdleType(characterToAnimate, CharacterAnimationType.Death, retry);
+            case CharacterAnimationType.Death_Back:
+                return getFallBackIdleType(characterToAnimate, CharacterAnimationType.Death, retry);
             case CharacterAnimationType.OOC_Idle_Front:
                 return getFallBackIdleType(characterToAnimate, CharacterAnimationType.Idle_Front, retry);
             case CharacterAnimationType.OOC_Idle_Back:

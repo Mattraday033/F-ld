@@ -108,6 +108,11 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
+        if(eventData == null || eventData.used)
+        {
+            return;
+        }
+
         if (hoverText != null && hoverText.Length > 0)
         {
             MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldSpawnHoverIcon));
@@ -116,6 +121,11 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
+        if(eventData == null || eventData.used)
+        {
+            return;
+        }
+
         MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldDestroyHoverIcon));
     }
 
@@ -317,7 +327,7 @@ public static class HoverMessageList
 
 
     private const string intimidateMessage = "Intimidate. This ability can be used to stop enemies from ambushing you, but prevents you from ambushing them in turn. Your Intimidate charges are determined by your character's Strength.";
-    private const string cunningMessage = "Cunning. Cunning is used out of combat to fool enemies, turning them around and stunning them for a few steps, allowing you to ambush them or sneak around them. Some objects in the overworld can activated with Cunning as well. Your Cunning charges are determined by your character's Dexterity.";
+    private const string cunningMessage = "Cunning. Cunning is used out of combat to fool enemies, turning them around and stunning them for a few steps, allowing you to ambush them or sneak around them. Some objects in the overworld can be activated with Cunning as well. Your Cunning charges are determined by your character's Dexterity.";
     private const string observationMessage = "Observation. This skill allows you to find secret doors and hidden secrets. Determined by your character's Wisdom.";
     private const string leadershipMessage = "Leadership. This skill allows you to command your followers out of combat, telling them to stand on buttons or in doorways to block enemy movement. The number of Party Members you can command with Leadership is determined by your character's Charisma.";
 

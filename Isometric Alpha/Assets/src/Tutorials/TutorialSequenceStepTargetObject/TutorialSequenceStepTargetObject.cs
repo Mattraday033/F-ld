@@ -92,11 +92,13 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
 	public virtual void createListeners()
 	{
 		TutorialSequence.TutorialSequenceTargetFinder.AddListener(assignToTutorialSequence);
+        PlayerOOCStateManager.OnLeavingTutorialSequenceState.AddListener(unhighlight);
 	}
 
 	public virtual void destroyListeners()
 	{
 		TutorialSequence.TutorialSequenceTargetFinder.RemoveListener(assignToTutorialSequence);
+        PlayerOOCStateManager.OnLeavingTutorialSequenceState.RemoveListener(unhighlight);
 	}
 
 	public virtual Vector2 getDimensions()
@@ -173,6 +175,11 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
         spriteOutline.createOutline(ColorList.tutorialDefault);
 	}
 	
+    public void unhighlight()
+	{
+        unhighlight(false);
+    }
+
     public virtual void unhighlight(bool skip)
 	{
 		if(skip)

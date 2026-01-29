@@ -29,7 +29,7 @@ public class MonsterSpawnDetails : OOCSpawnDetails
     base(npcName, cellCoords)
     {
         this.facing = facing;
-        this.movementType = MonsterMovementType.Random;
+        this.movementType = MonsterMovementType.Stationary;
         this.tutorialTargetHash = tutorialTargetHash;
     }
 

@@ -8,6 +8,7 @@ public class ReplenishCunningChargesScript : TutorialSequenceStepScript
     public override void runScript(GameObject target)
     {
         CunningManager.resetCunningsRemaining();
+        (new SetToSkillScript(SkillType.Cunning)).runScript();
     }
 
 }

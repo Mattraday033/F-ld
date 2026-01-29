@@ -13,8 +13,6 @@ public class SpriteOutline
 
     private const string blackBorderColorVarName = "_BlackBorderColor";
 
-    private const float maxSize = 0.015f;
-
     private Material outlineMaterial;
     private SpriteRenderer spriteRenderer;
     private Transform spriteTransform;

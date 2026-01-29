@@ -506,6 +506,11 @@ public static class Helpers
 
     public static void updatePolygonCollider(SpriteRenderer spriteRenderer, PolygonCollider2D polygonCollider2D)
     {
+        if(spriteRenderer.sprite == null)
+        {
+            return;
+        }
+
         List<Vector2> pointsList = new List<Vector2>();
 
         spriteRenderer.sprite.GetPhysicsShape(0, pointsList); 

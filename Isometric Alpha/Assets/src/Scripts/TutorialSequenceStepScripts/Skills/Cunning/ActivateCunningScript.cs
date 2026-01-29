@@ -8,6 +8,7 @@ public class ActivateCunningScript : TutorialSequenceStepScript
     public override void runScript(GameObject target)
     {
         CunningManager.getInstance().executeSkill();
+        SkillButtonManager.unhighlightSkillOutline();
     }
 
 }

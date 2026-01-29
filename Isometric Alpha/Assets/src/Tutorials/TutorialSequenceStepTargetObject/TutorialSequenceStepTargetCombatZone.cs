@@ -10,11 +10,21 @@ public class TutorialSequenceStepTargetCombatZone : TutorialSequenceStepTargetOb
 
 	public override void highlight(bool skip)
 	{
+        if(cutOutMask == null)
+        {
+            return;
+        }
+
 		cutOutMask.gameObject.SetActive(true);
 	}
 
 	public override void unhighlight(bool skip)
 	{
+        if(cutOutMask == null)
+        {
+            return;
+        }
+
 		cutOutMask.gameObject.SetActive(false);
 	}
 }

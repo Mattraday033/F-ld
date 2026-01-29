@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3807608323773115547}
   - component: {fileID: 7565830548206985090}
   - component: {fileID: 6829965674383287086}
+  - component: {fileID: 8728509695838693187}
   m_Layer: 0
   m_Name: Right Raycast Blocker Layout
   m_TagString: Untagged
@@ -72,6 +73,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &8728509695838693187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50902556238076435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddebba213809599459b79271410bd776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &577115578862083074
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +226,7 @@ GameObject:
   - component: {fileID: 1005337415370875194}
   - component: {fileID: 4989164811611899258}
   - component: {fileID: 8253646702719776360}
+  - component: {fileID: 2109866461166553265}
   m_Layer: 0
   m_Name: Bottom Raycast Blocker Layout
   m_TagString: Untagged
@@ -274,6 +288,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &2109866461166553265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809267071574277295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddebba213809599459b79271410bd776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2534972656071332703
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,6 +770,7 @@ GameObject:
   - component: {fileID: 5083934136949784744}
   - component: {fileID: 3920009857603815481}
   - component: {fileID: 598522907959641686}
+  - component: {fileID: 6102397575476172475}
   m_Layer: 0
   m_Name: Top Raycast Blocker Layout
   m_TagString: Untagged
@@ -805,6 +832,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &6102397575476172475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5630565341751600562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddebba213809599459b79271410bd776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6891338406889456527
 GameObject:
   m_ObjectHideFlags: 0
@@ -1121,6 +1160,7 @@ GameObject:
   - component: {fileID: 2218794116495031879}
   - component: {fileID: 6012278907274309398}
   - component: {fileID: 379106043245086617}
+  - component: {fileID: 4351253277009216688}
   m_Layer: 0
   m_Name: Left Raycast Blocker Layout
   m_TagString: Untagged
@@ -1182,6 +1222,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &4351253277009216688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7714652584331143228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddebba213809599459b79271410bd776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9118928718644525576
 GameObject:
   m_ObjectHideFlags: 0
