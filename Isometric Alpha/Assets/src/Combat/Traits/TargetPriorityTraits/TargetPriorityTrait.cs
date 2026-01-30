@@ -59,7 +59,7 @@ public class TargetPriorityTrait : Trait
 	{
 		foreach(Stats target in listOfTargets)
 		{
-			if(Helpers.hasQuality<Trait>(target.traits, t => t.isMandatoryTarget()))
+			if(Helpers.hasQuality<Trait>(target.traitContainer, t => t.isMandatoryTarget()))
 			{
 				return target;
 			}

@@ -48,8 +48,9 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public int currentHealth;
 
-    public Trait[] traits = new Trait[0];
-    public Trait[] hiddenTraits = new Trait[0];
+    // public Trait[] traits = new Trait[0];
+    // public Trait[] hiddenTraits = new Trait[0];
+    public TraitContainer traitContainer;
 
     #endregion
 
@@ -58,6 +59,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     public Stats(string name)
     {
         this.characterName = name;
+        traitContainer = new TraitContainer(this);
     }
 
     #endregion
@@ -154,7 +156,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         tutorialTarget = list.tutorialTarget;
         tutorialTarget.tutorialHash = getTutorialTargetHash();
 
-        foreach(Trait trait in traits)
+        foreach(Trait trait in traitContainer)
         {
             trait.setIdleAnimationOnApplication(animationManager);
         }
@@ -329,7 +331,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     {
         int totalHealth = getTotalHealth();
 
-        if (!inPreviewMode && changeInHealth >= getTotalHealth() && !healing && hasTraitAtIndex(TraitList.master) >= 0)
+        if (!inPreviewMode && changeInHealth >= getTotalHealth() && !healing && isMaster())
         {
             PredationProc.Invoke();
         }
@@ -448,7 +450,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         int sum = 0;
         int synergyBonus = getSynergyCoefficient();
 
-        foreach (Trait trait in traits)
+        foreach (Trait trait in traitContainer)
         {
             if (trait.fromZoneOfInfluence())
             {
@@ -477,7 +479,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public bool isRepositionClone()
     {
-        return Helpers.hasQuality<Trait>(traits, t => t.Equals(TraitList.repositioningInvulnerability));
+        return Helpers.hasQuality<Trait>(traitContainer, t => t.Equals(TraitList.repositioningInvulnerability));
     }
 
     public virtual bool isPriorityAttacker()
@@ -559,7 +561,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
                 continue;
             }
 
-            foreach (Trait trait in traits)
+            foreach (Trait trait in traitContainer)
             {
                 if (trait == null)
                 {
@@ -579,9 +581,8 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     public int modifyOutgoingDamage(int baseDamage)
     {
         int bonusDamage = 0;
-        Trait[] traitList = getTraits();
 
-        foreach (Trait trait in traitList)
+        foreach (Trait trait in traitContainer)
         {
             if (trait != null)
             {
@@ -598,9 +599,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     {
         int modifiedDamage = (int)(((double)baseDamage) * (1.0 - Armor.getDamageReduction(getTotalArmorRating())));
 
-        Trait[] traitList = getTraits();
-
-        foreach (Trait trait in traits)
+        foreach (Trait trait in traitContainer)
         {
             if (trait != null)
             {
@@ -608,7 +607,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
             }
         }
 
-        foreach (Trait trait in traitList)
+        foreach (Trait trait in traitContainer)
         {
             if (trait != null &&
               !(trait.getName().Equals(TraitList.repositioningInvulnerability.getName()) && CombatStateManager.whoseTurn != WhoseTurn.Resolving))
@@ -630,11 +629,6 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         }
 
         return modifiedDamage;
-    }
-
-    public bool wasSummoned()
-    {
-        return hasTrait(TraitList.summoned);
     }
 
     public virtual bool costsPartyCombatActions()
@@ -661,7 +655,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
                 continue;
             }
 
-            Trait costTrait = Helpers.getObjectWithQuality<Trait>(traits, t => t.hasActionCostType(costTypes[index]));
+            Trait costTrait = Helpers.getObjectWithQuality<Trait>(traitContainer, t => t.hasActionCostType(costTypes[index]));
 
             if (costTrait != null)
             {
@@ -689,12 +683,12 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public bool isMandatoryTarget()
     {
-        return Helpers.hasQuality<Trait>(traits, t => t.isMandatoryTarget());
+        return Helpers.hasQuality<Trait>(traitContainer, t => t.isMandatoryTarget());
     }
 
     public bool isTargetable()
     {
-        return !Helpers.hasQuality<Trait>(hiddenTraits, hT => hT.isUntargetable());
+        return !Helpers.hasQuality<Trait>(traitContainer, t => t.isUntargetable());
     }
 
     public virtual int getBonusAbilityDamage()
@@ -702,11 +696,14 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return 0;
     }
 
-    public string getBonusCritChance()
+    public virtual string getBonusCritChance()
     {
-        string bonusCritChance = DamageCalculator.combineFormulas(getBonusCritChanceFromArmor(), getBonusCritChanceFromTraits());
+        string bonusCritChance = "" + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getCritFormula());
 
-        if (bonusCritChance == null || bonusCritChance.Length <= 0 || bonusCritChance.Equals("0") || bonusCritChance.Equals("+0"))
+        if (bonusCritChance == null || 
+            bonusCritChance.Length <= 0 || 
+            bonusCritChance.Equals(Constants.zeroRating) || 
+            bonusCritChance.Equals(Constants.zeroBonus))
         {
             return "";
         }
@@ -746,6 +743,21 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     #region Traits
 
+    public bool isMaster()
+    {
+        return hasTrait(TraitList.master);
+    }
+
+    public bool isMinion()
+    {
+        return hasTrait(TraitList.minion);
+    }
+
+    public bool isSummon()
+    {
+        return hasTrait(TraitList.summoned);
+    }
+
     public void addTrait(Trait newTrait)
     {
         if (newTrait == null || isDead())
@@ -761,19 +773,20 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         {
             newTrait.setIdleAnimationOnApplication(animationManager);
         }
-        
-        dealTraitApplicationDamage(newTrait);
 
-        if (hasTraitAtIndex(newTrait) >= 0)
+        if(!newTrait.isHiddenTrait())
         {
-            traits[hasTraitAtIndex(newTrait)].reapply();
-        }
-        else
-        {
-            traits = Helpers.appendArray<Trait>(traits, newTrait);
-        }
+            dealTraitApplicationDamage(newTrait);
+        }        
+
+        traitContainer.addTrait(newTrait);
 
         Trait.OnTraitApplication.Invoke(newTrait);
+    }
+
+    public Trait getTraitOfType(TraitType traitType)
+    {
+        return Helpers.getObjectWithQuality<Trait>(traitContainer, t => t.traitType == traitType);
     }
 
     private void dealTraitApplicationDamage(Trait newTrait)
@@ -801,11 +814,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     {
         if (newTrait.isDebuff())
         {
-            return Helpers.sum<Trait>(traits, t => t.damageOnDebuffApplication());
+            return Helpers.sum<Trait>(traitContainer, t => t.damageOnDebuffApplication());
         }
         else if (newTrait.isBuff())
         {
-            return Helpers.sum<Trait>(traits, t => t.damageOnBuffApplication());
+            return Helpers.sum<Trait>(traitContainer, t => t.damageOnBuffApplication());
         }
         else
         {
@@ -813,7 +826,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         }
     }
 
-    public void addTraits(Trait[] newTraits)
+    public void addTraits(IEnumerable newTraits)
     {
         foreach (Trait trait in newTraits)
         {
@@ -821,55 +834,23 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         }
     }
 
-    public Trait[] getTraits()
-    {
-        return traits;
-    }
-
     public void removeTrait(Trait traitToRemove)
     {
-        List<Trait> newTraits = new List<Trait>();
-        Trait removedTrait = null;
-
-        foreach (Trait trait in traits)
+        if(traitContainer.removeTrait(traitToRemove))
         {
-            if (!trait.getName().Equals(traitToRemove.getName()))
-            {
-                newTraits.Add(trait);
-            }
-            else
-            {
-                removedTrait = trait;
-            }
-        }
-
-        traits = newTraits.ToArray();
-
-        if(removedTrait != null)
-        {
-            removedTrait.setIdleAnimationOnRemoval(animationManager);
-            Trait.OnTraitRemoval.Invoke(removedTrait);
+            traitToRemove.setIdleAnimationOnRemoval(animationManager);
+            Trait.OnTraitRemoval.Invoke(traitToRemove);
         }
     }
 
     public void removeAllTraits()
     {
-        traits = new Trait[0];
+        traitContainer = new TraitContainer(this);
     }
 
     public void removeAllTraitsOfType(TraitType traitType)
     {
-        Trait[] newTraits = new Trait[traits.Length];
-
-        for (int index = 0; index < traits.Length; index++)
-        {
-            if (traits[index] != null && traits[index].traitType != traitType)
-            {
-                newTraits[index] = traits[index];
-            }
-        }
-
-        traits = newTraits.Where(t => t != null).ToArray();
+        traitContainer.removeAllTraitsOfType(traitType);
     }
 
     public virtual void addEquippedPassiveTraits()
@@ -877,64 +858,24 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         //empty on purpose
     }
 
-    public string getBonusCritChanceFromTraits()
-    {
-        return "" + Helpers.sum<Trait>(traits, t => t.getBonusCritChance());
-    }
-
     public bool isSlowed()
     {
-        return Helpers.hasQuality<Trait>(traits, t => t.slowsTraitHolder());
+        return Helpers.hasQuality<Trait>(traitContainer, t => t.slowsTraitHolder());
     }
 
     public bool isStunned()
     {
-        if (traits.Length < 1)
-        {
-            return false;
-        }
-
-        int index = 0;
-        foreach (Trait trait in traits)
-        {
-            index++;
-        }
-
-        int stunnedStatus = traits.Aggregate(0, (status, trait) => status += Convert.ToInt32(trait.preventsCombatAction()));
-
-        if (stunnedStatus > 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return Helpers.hasQuality<Trait>(traitContainer, t => t.preventsCombatAction());
     }
 
     private void removeTraitsRemovedByDamage()
     {
-        if (traits == null)
-        {
-            return;
-        }
-
-        Trait[] newTraits = new Trait[0];
-
-        for (int index = 0; index < traits.Length; index++)
-        {
-            if (!traits[index].isRemovedOnDamage())
-            {
-                newTraits = Helpers.appendArray<Trait>(newTraits, traits[index]);
-            }
-        }
-
-        traits = newTraits;
+        traitContainer.removeAllTraitsRemovedByDamage();
     }
 
     public void prepareOnDeathEffects()
     {
-        foreach (Trait trait in traits)
+        foreach (Trait trait in traitContainer)
         {
             if (trait != null)
             {
@@ -945,61 +886,17 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public bool hasTrait(Trait trait)
     {
-        return Helpers.hasQuality<Trait>(traits, t => t.getName().Equals(trait.getName()));
+        return Helpers.hasQuality<Trait>(traitContainer, t => t.Equals(trait));
     }
 
-    public int hasTraitAtIndex(Trait traitToCheck)
+    public bool hasTraitOfType(TraitType traitType)
     {
-        Trait[] traitList = getTraits();
-
-        int traitIndex = 0;
-        foreach (Trait trait in traitList)
-        {
-            if (trait != null && trait.getName().Equals(traitToCheck.getName()))
-            {
-                return traitIndex;
-            }
-
-            traitIndex++;
-        }
-
-        return -1;
-    }
-
-    public bool hasTraitOfType(TraitType traitTypeToCheck)
-    {
-        Trait traitOfType = getTraitOfType(traitTypeToCheck);
-
-        return traitOfType != null && !(traitOfType is null);
-    }
-
-    public Trait getTraitOfType(TraitType traitTypeToCheck)
-    {
-        Trait[] traitList = getTraits();
-
-        foreach (Trait trait in traitList)
-        {
-            if (trait != null && trait.traitType == traitTypeToCheck)
-            {
-                return trait;
-            }
-        }
-
-        return null;
-    }
-    public void addHiddenTrait(Trait trait)
-    {
-        if (hiddenTraits == null || hiddenTraits is null)
-        {
-            hiddenTraits = new Trait[0];
-        }
-
-        hiddenTraits = Helpers.appendArray<Trait>(hiddenTraits, trait);
+        return Helpers.hasQuality<Trait>(traitContainer, t => t.traitType == traitType);
     }
 
     private void harmAllLinkedTargets(int damage)
     {
-        foreach (Trait trait in traits)
+        foreach (Trait trait in traitContainer)
         {
             if (trait != null)
             {
@@ -1010,17 +907,17 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual bool notResurrectable()
     {
-        return Helpers.hasQuality<Trait>(traits, t => t.preventsResurrection());
+        return Helpers.hasQuality<Trait>(traitContainer, t => t.preventsResurrection());
     } 
 
     public bool isBuffed()
     {
-        return Helpers.hasQuality<Trait>(traits, t => t.isBuff());
+        return Helpers.hasQuality<Trait>(traitContainer, t => t.isBuff());
     } 
 
     public bool isDebuffed()
     {
-        return Helpers.hasQuality<Trait>(traits, t => t.isDebuff());
+        return Helpers.hasQuality<Trait>(traitContainer, t => t.isDebuff());
     } 
 
     public bool isFrontline()
@@ -1042,23 +939,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public void removeAllZoneOfInfluenceTraits()
     {
-        if (traits == null)
-        {
-            traits = new Trait[0];
-            return;
-        }
-
-        Trait[] nonZOITraits = new Trait[0];
-
-        foreach (Trait trait in traits)
-        {
-            if (trait != null && !trait.fromZoneOfInfluence())
-            {
-                nonZOITraits = Helpers.appendArray<Trait>(nonZOITraits, trait);
-            }
-        }
-
-        traits = nonZOITraits;
+        traitContainer.removeAllTraitsOfType(TraitType.Influence);
     }
     
     #endregion
@@ -1069,7 +950,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public double getCurrentTotalArmorPercentage()
     {
-        double currentTotalArmorPercentage = 1.0 - Helpers.sum<Trait>(traits, t => t.getPercentageArmorLost());
+        double currentTotalArmorPercentage = 1.0 - Helpers.sum<Trait>(traitContainer, t => t.getPercentageArmorLost());
 
         if (currentTotalArmorPercentage < 0.0)
         {
@@ -1096,16 +977,20 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return 0;
     }
 
-    public virtual string getBonusCritChanceFromArmor()
-    {
-        return "";
-    }
-
     #endregion
 
     #region Miscellaneous
 
     public abstract GridCoords findLocationToSpawn();
+
+    public virtual List<StatBoostSource> getAllStatBoosts()
+    {
+        List<StatBoostSource> boosts = new List<StatBoostSource>();
+
+        boosts.AddRange(StatBoostSource.getAllStatBoosts(traitContainer));
+
+        return boosts;
+    }
 
     public override bool Equals(object obj)
     {
@@ -1174,28 +1059,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         clone.repositionClone = null;
         clone.position = position.clone();
 
-        if (traits == null)
-        {
-            traits = new Trait[0];
-        }
-
-        if (hiddenTraits == null)
-        {
-            hiddenTraits = new Trait[0];
-        }
-
-        clone.traits = new Trait[traits.Length];
-        clone.hiddenTraits = new Trait[hiddenTraits.Length];
-
-        for (int index = 0; index < clone.traits.Length; index++)
-        {
-            clone.traits[index] = traits[index].clone();
-        }
-
-        for (int index = 0; index < clone.hiddenTraits.Length; index++)
-        {
-            clone.hiddenTraits[index] = hiddenTraits[index].clone();
-        }
+        clone.traitContainer = traitContainer.clone(clone);
 
         return clone;
     }

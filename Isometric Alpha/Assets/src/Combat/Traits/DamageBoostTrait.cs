@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DamageBoostTrait : Trait
 {
-    private const string damageBoostTraitDescription = "";
+    private const string damageBoostTraitDescription = "This creature deals extra damage when it attacks.";
 
     public DamageBoostTrait
                 (string traitName, 

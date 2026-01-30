@@ -41,7 +41,7 @@ public class ChaoticTargetPriorityTrait : TargetPriorityTrait
 
 		foreach(Stats target in listOfTargets)
 		{
-			if(!target.wasSummoned())
+			if(!target.isSummon())
 			{
 				newListOfTargets.Add(target);
 			}

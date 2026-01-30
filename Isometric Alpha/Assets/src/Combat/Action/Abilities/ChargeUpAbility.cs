@@ -143,7 +143,7 @@ public class ChargeUpAbility : Ability
 
 	public virtual bool isCharged()
 	{
-		return getActorStats().hasTraitAtIndex(chargeUpTrait) >= 0;
+		return getActorStats().hasTrait(chargeUpTrait);
 	}
 	
 	public override CombatAction clone()

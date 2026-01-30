@@ -92,42 +92,27 @@ public class Attack : CombatAction, IJSONConvertable
 
 	public override string getDamageFormula()
 	{
-        AllyStats statSource = getStatSource() as AllyStats;
-
-		if (getMainHandWeapon().getIsTwoHanded() || statSource == null)
-		{
-            return getMainHandWeapon().getDamageFormula();
-		}
-		else
-		{
-            EquippedItems equippedItems = statSource.equippedItems;
-
-            if(equippedItems == null)
-            {
-                return getMainHandWeapon().getDamageFormula();
-            }
-
-			return DamageCalculator.combineFormulas(getMainHandWeapon().getDamageFormula(), equippedItems.getDamageFormula());
-		}
+        return getMainHandWeapon().getDamageFormula();
 	}
 
 	public override string getCritFormula()
 	{
-		if (inPreviewMode)
+        return getMainHandWeapon().getCritFormula();
+	}
+
+    protected override string gatherAllNonActionFormulas(FormulaDelegate<StatBoostSource> getFormula)
+    {
+        string allStats = base.gatherAllNonActionFormulas(getFormula);
+
+		if (getMainHandWeapon().getIsTwoHanded())
 		{
-			return "0";
+            string invertedOffHandWeaponFormula = DamageCalculator.invertFormula(getFormula(getOffHandWeapon()));
+
+            allStats = DamageCalculator.combineFormulas(invertedOffHandWeaponFormula, allStats);
 		}
 
-		if (getMainHandWeapon().getIsTwoHanded() || getOffHandWeapon() == null)
-		{
-			return getMainHandWeapon().getCritFormula() + getActorStats().getBonusCritChance();
-		}
-		else
-		{
-			string[] formulas = new string[] { getMainHandWeapon().getCritFormula(), getOffHandWeapon().getCritFormula(), getActorStats().getBonusCritChance() };
-			return DamageCalculator.combineFormulas(formulas);
-		}
-	}
+        return allStats;
+    }
 
 	public override bool takesAWeaponSlot()
 	{
@@ -185,9 +170,9 @@ public class Attack : CombatAction, IJSONConvertable
 		return (Weapon)getSourceItem();
 	}
 
-    private Weapon getOffHandWeapon()
+    private EquippableItem getOffHandWeapon()
     {
-        return getActorStats().getEquippedItems().getOffHand() as Weapon;
+        return getActorStats().getEquippedItems().getOffHand();
     }
 
 
@@ -294,9 +279,9 @@ public class Attack : CombatAction, IJSONConvertable
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType()));
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDamageBlock(getDamageTotalForDisplay(), getDamageFormulaForDisplayAlternate()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDamageBlock(getDamageTotalForDisplay(), getDamageFormulaForDisplay()));
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getCritBlock(getCritTotalForDisplay(), getCritFormulaForDisplayAlternate()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getCritBlock(getCritTotalForDisplay(), getCritFormulaForDisplay()));
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRangeTitle()));
 

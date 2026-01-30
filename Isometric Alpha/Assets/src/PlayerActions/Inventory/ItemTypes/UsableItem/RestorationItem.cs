@@ -42,14 +42,7 @@ public class RestorationItem : CombatItem, IJSONConvertable
             return;
         }
 
-        for (int traitIndex = 0; traitIndex < target.traits.Length; traitIndex++)
-        {
-            if (target.traits[traitIndex].traitType == traitTypeToRemove)
-            {
-                target.removeTrait(target.traits[traitIndex]);
-                return;
-            }
-        }
+        target.traitContainer.removeAllTraitsOfType(traitTypeToRemove);
     }
 
     public override bool fitsUseCriteria(Stats stats)

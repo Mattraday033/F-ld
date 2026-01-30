@@ -39,8 +39,7 @@ public class DeadCombatantManager : MonoBehaviour
 
                 deadCombatantList.Add(currentCombatant);
 
-                if (currentCombatant.traits != null &&
-                    currentCombatant.traits.Contains(TraitList.minion))
+                if (currentCombatant.isMinion())
                 {
                     EnemyCombatActionManager.applyLinkDamage();
                 }

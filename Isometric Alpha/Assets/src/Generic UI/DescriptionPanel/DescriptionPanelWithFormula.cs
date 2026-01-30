@@ -31,7 +31,7 @@ public class DescriptionPanelWithFormula : DescriptionPanel
     {
         base.setObjectBeingDescribed(describable);
 
-        IFormulaSource formulaSource = describable as IFormulaSource;
+        StatBoostSource formulaSource = describable as StatBoostSource;
 
         if (formulaSource != null)
         {

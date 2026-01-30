@@ -54,15 +54,7 @@ public class Ticker : MonoBehaviour
 	{
 		foreach(Stats combatant in allCombatants)
 		{
-			if(combatant.traits == null)
-			{
-				combatant.traits = new Trait[0];
-				continue;
-			}
-			
-            List<Trait> traits = new List<Trait>(combatant.traits);
-
-			foreach(Trait trait in traits)
+			foreach(Trait trait in combatant.traitContainer)
 			{
 				trait.tickDown();
 				
@@ -71,11 +63,6 @@ public class Ticker : MonoBehaviour
 					combatant.removeTrait(trait);
 				} 
 			}
-			
-            // if(combatant.animationManager != null)
-            // {
-            //     combatant.animationManager.playCurrentIdleAnimation();
-            // }
 		}
 	}
 }

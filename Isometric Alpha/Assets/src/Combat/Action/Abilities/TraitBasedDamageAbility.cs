@@ -45,7 +45,7 @@ public class TraitBasedDamageAbility: Ability
 	{
 		int numberOfEligibleTraits = 0;
 		
-		foreach(Trait trait in targetCombatant.traits)
+		foreach(Trait trait in targetCombatant.traitContainer)
 		{
 			if(!trait.isMandatoryTrait())
 			{

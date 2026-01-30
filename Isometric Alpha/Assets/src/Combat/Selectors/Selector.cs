@@ -324,7 +324,7 @@ public class Selector : ScriptableObject, ICloneable
 		{
 			Stats targetCombatant = CombatGrid.getCombatantAtCoords(targetTileCoord);
 
-			if (targetCombatant != null && Helpers.hasQuality<Trait>(targetCombatant.traits, t => t.isMandatoryTarget())
+			if (targetCombatant != null && Helpers.hasQuality<Trait>(targetCombatant.traitContainer, t => t.isMandatoryTarget())
                     && !targetCombatant.queuedToMove())
 			{
 				return true;
@@ -472,7 +472,7 @@ public class Selector : ScriptableObject, ICloneable
 				return false;
 			}
 
-			if(Helpers.hasQuality<Trait>(target.traits, t => t.isImmobile())) 
+			if(Helpers.hasQuality<Trait>(target.traitContainer, t => t.isImmobile())) 
 			{
 				return true;
 			}

@@ -83,7 +83,7 @@ public class EnemyStats : Stats
     {
         base.setToDeadSprite();
 
-        if (isMinion() || wasSummoned())
+        if (isMinion() || isSummon())
         {
             OnMinionSummonDeath.Invoke();
         }
@@ -94,7 +94,7 @@ public class EnemyStats : Stats
 
     public override void bringBackFromDeath()
     {
-        if (Helpers.hasQuality<Trait>(traits, t => t.preventsResurrection()))
+        if (Helpers.hasQuality<Trait>(traitContainer, t => t.preventsResurrection()))
         {
             return;
         }
@@ -165,11 +165,6 @@ public class EnemyStats : Stats
 
     #region Traits
 
-    public bool isMinion()
-    {
-        return hasTrait(TraitList.minion);
-    }
-
     public virtual bool isLarge()
     {
         return false;
@@ -177,8 +172,15 @@ public class EnemyStats : Stats
     
     public override bool notResurrectable()
     {
-        return isMinion() || wasSummoned() || base.notResurrectable();
+        return isMinion() || isSummon() || base.notResurrectable();
     } 
+
+    public double getLinkedPercentage()
+    {
+        Trait linkedTrait = Helpers.getObjectWithQuality<Trait>(traitContainer, t => t.getLinkedPercentage() > 0.0);
+
+        return linkedTrait.getLinkedPercentage();
+    }
 
     #endregion
 
@@ -211,7 +213,7 @@ public class EnemyStats : Stats
         {
             DescriptionPanel.setText(panel.typeText, TraitList.minion.getName());
         }
-        else if (wasSummoned())
+        else if (isSummon())
         {
             DescriptionPanel.setText(panel.typeText, TraitList.summoned.getName());
         }

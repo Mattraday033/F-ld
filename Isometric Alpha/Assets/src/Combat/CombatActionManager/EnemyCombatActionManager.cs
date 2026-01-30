@@ -25,7 +25,7 @@ public class EnemyCombatActionManager : MonoBehaviour
 
         foreach (EnemyStats enemy in listOfEnemies)
 		{			
-			if(Helpers.hasQuality<Trait>(enemy.traits, t => t.isPacifist()) || 
+			if(Helpers.hasQuality<Trait>(enemy.traitContainer, t => t.isPacifist()) || 
 				containsCombatActionFromPosition(enemy.position) || enemy.isPartOfVolley())
 			{
 				continue; //if enemy failed to find a target, it shouldn't do anything
@@ -96,16 +96,7 @@ public class EnemyCombatActionManager : MonoBehaviour
 		
 		foreach(EnemyStats enemy in listOfEnemies)
 		{
-			double linkedPercentage = 0.0;
-			
-			if(enemy.hasTraitAtIndex(TraitList.mobLinked) >= 0)
-			{
-				linkedPercentage = enemy.getTraits()[enemy.hasTraitAtIndex(TraitList.mobLinked)].getLinkedPercentage();
-				
-			} else if(enemy.hasTraitAtIndex(TraitList.bossLinked) >= 0)
-			{
-				linkedPercentage = enemy.getTraits()[enemy.hasTraitAtIndex(TraitList.bossLinked)].getLinkedPercentage();
-			}
+			double linkedPercentage = enemy.getLinkedPercentage();
 			
 			if(linkedPercentage > 0.0)
 			{

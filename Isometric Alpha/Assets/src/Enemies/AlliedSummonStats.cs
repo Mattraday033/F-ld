@@ -12,23 +12,15 @@ public class AlliedSummonStats : VolleyParticipantStats
 	public AlliedSummonStats(EnemyStats enemyStats): 
 		base(enemyStats.getName(), enemyStats.getTotalArmorRating(), enemyStats.getTotalHealth(), enemyStats.getCombatAction())
     {
-        addTraits(enemyStats.traits);
+        addTraits(enemyStats.traitContainer);
         setFoeTypeToSummoned();
     }
 
     private void setFoeTypeToSummoned()
     {
-        for(int index = 0; index < traits.Length; index++)
-        {
-            Trait trait = traits[index];
+        traitContainer.removeAllTraitsOfType(TraitType.FoeType);
 
-            if(trait != null && 
-                trait.traitType == TraitType.FoeType)
-            {
-                traits[index] = TraitList.summoned;
-                return;
-            }
-        }
+        traitContainer.addTrait(TraitList.summoned);
     }
 
     public override GridCoords findLocationToSpawn()

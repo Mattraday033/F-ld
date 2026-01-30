@@ -284,7 +284,7 @@ public class CompanionCombatActionDescriptionWrapper : IDescribable, IDescribabl
 		companionCombatAction.describeSelfFull(panel);
 
 		DescriptionPanel.setText(panel.damageText, companionCombatAction.getDamageFormulaTotal());
-		DescriptionPanel.setText(panel.critRatingText, companionCombatAction.getCritFormulaTotalForDisplay());
+		DescriptionPanel.setText(panel.critRatingText, companionCombatAction.getCritFormulaForDisplay());
 
 		panel.setObjectBeingDescribed(this);
 	}

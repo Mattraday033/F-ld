@@ -199,7 +199,7 @@ public static class CombatGrid
 		
 		foreach(Stats enemy in listOfEnemies)
 		{
-            foreach(Trait trait in enemy.traits)
+            foreach(Trait trait in enemy.traitContainer)
             {
                 if(trait.getName().Equals(typeTrait.getName()))
                 {
@@ -242,7 +242,7 @@ public static class CombatGrid
 		{
 			foreach(Stats combatantSlot in combatantStatsGrid[rowIndex].row)
 			{
-				if(combatantSlot != null && combatantSlot.isAlive() && combatantSlot.isTargetable() && !combatantSlot.wasSummoned())
+				if(combatantSlot != null && combatantSlot.isAlive() && combatantSlot.isTargetable() && !combatantSlot.isSummon())
 				{
 					allAllyCombatants.Add(combatantSlot);
 				}
@@ -260,7 +260,7 @@ public static class CombatGrid
 		{
 			foreach(Stats combatantSlot in combatantStatsGrid[rowIndex].row)
 			{
-				if(combatantSlot != null && combatantSlot.isAlive() && combatantSlot.isTargetable() && combatantSlot.wasSummoned())
+				if(combatantSlot != null && combatantSlot.isAlive() && combatantSlot.isTargetable() && combatantSlot.isSummon())
 				{
 					allAliveSummonedAllies.Add(combatantSlot);
 				}
@@ -278,7 +278,7 @@ public static class CombatGrid
 		{
 			foreach(Stats combatantSlot in combatantStatsGrid[rowIndex].row)
 			{
-				if(combatantSlot != null && combatantSlot.isAlive() && combatantSlot.isTargetable() && !combatantSlot.wasSummoned())
+				if(combatantSlot != null && combatantSlot.isAlive() && combatantSlot.isTargetable() && !combatantSlot.isSummon())
 				{
 					allAllyCombatants.Add(combatantSlot);
 				}
@@ -374,7 +374,7 @@ public static class CombatGrid
 		{
 			foreach (Stats combatantSlot in combatantStatsGrid[rowIndex].row)
 			{
-				if (combatantSlot != null && combatantSlot.isTargetable() && !combatantSlot.wasSummoned())
+				if (combatantSlot != null && combatantSlot.isTargetable() && !combatantSlot.isSummon())
 				{
 					allAllyCombatants.Add(combatantSlot);
 				}
@@ -558,7 +558,7 @@ public static class CombatGrid
 	{
 		foreach(Stats target in targets)
 		{
-			if(Helpers.hasQuality<Trait>(target.traits, t => t.isMandatoryTarget()))
+			if(Helpers.hasQuality<Trait>(target.traitContainer, t => t.isMandatoryTarget()))
 			{
 				return target;
 			}
@@ -576,7 +576,7 @@ public static class CombatGrid
 				Stats currentCombatant = CombatGrid.getCombatantAtCoords(rowIndex, colIndex);
 
 				if (currentCombatant != null && currentCombatant.isDead() &&
-					Helpers.hasQuality<Trait>(currentCombatant.traits, t => t.deleteIfDead()))
+					Helpers.hasQuality<Trait>(currentCombatant.traitContainer, t => t.deleteIfDead()))
 				{
 					CombatGrid.setCombatantAtCoords(rowIndex, colIndex, null);
 				}

@@ -170,35 +170,46 @@ public class Ability: CombatAction, IJSONConvertable
 	{
 		if(cannotDealDamage)
 		{
-			return "0";
+			return Constants.zeroRating;
 		}
 
-        if (getActorStats() == null)
-        {
-            return damageFormula;
-        }
-
-        // if (getActorStats().getBonusAbilityDamage() == 0)
-		// {
-		// 	return damageFormula + getActorStats().getBonusDamageFromArmor();
-		// }
-
-        return DamageCalculator.combineFormulas(new string[] { damageFormula, "" + getActorStats().getBonusAbilityDamage() });
+        return damageFormula;
 	}
 	
-	public override string getCritFormula()
-	{
-		if(inPreviewMode)
+    public override string getFinalDamageFormula()
+    {
+		if(cannotDealDamage)
 		{
-			return "0";
+			return Constants.zeroRating;
 		}
 
-        if (getActorStats() == null)
+        return gatherAllNonActionFormulas(a => a.getDamageFormula());
+    }
+
+    protected override string gatherAllNonActionFormulas(FormulaDelegate<StatBoostSource> getFormula)
+    {
+        string allStats = getAllOfOneStatFormula<StatBoostSource>(getStatSource().getAllStatBoosts(), t => getFormula(t));
+
+        AllyStats statSource = getStatSource() as AllyStats;
+
+        if(statSource !=  null)
         {
-            return critFormula;
+            string invertedOffHandWeaponFormula = DamageCalculator.invertFormula(getFormula(statSource.equippedItems.getOffHand()));
+
+            allStats = DamageCalculator.combineFormulas(invertedOffHandWeaponFormula, allStats);
         }
 
-        return critFormula + getActorStats().getBonusCritChance();
+        return DamageCalculator.combineFormulas(getFormula(this), allStats);
+    }
+
+	public override string getCritFormula()
+	{
+		if(cannotDealDamage)
+		{
+			return Constants.zeroRating;
+		}
+
+        return critFormula;
 	}
 	
 	public override int getRangeIndex()

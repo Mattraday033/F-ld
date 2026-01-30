@@ -5,6 +5,8 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
+public delegate bool QualityDelegate<T>(T t);
+
 public static class Helpers
 {
 
@@ -209,8 +211,6 @@ public static class Helpers
         }
     }
 
-    public delegate bool QualityDelegate<T>(T t);
-
     public static bool hasQuality<T>(IEnumerable enumerable, QualityDelegate<T> containsQuality)
     {
         if (enumerable == null || enumerable is null)
@@ -251,6 +251,26 @@ public static class Helpers
         }
 
         return default(T);
+    }
+
+    public static List<T> getAllObjectsWithQuality<T>(IEnumerable enumerable, QualityDelegate<T> containsQuality)
+    {
+        List<T> list = new List<T>();
+
+        if (enumerable == null || enumerable is null)
+        {
+            return list;
+        }
+
+        foreach (T t in enumerable)
+        {
+            if (t != null && containsQuality(t))
+            {
+                list.Add(t);
+            }
+        }
+
+        return list;
     }
 
     public delegate int SumDelegateInt<T>(T t);

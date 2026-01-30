@@ -14,7 +14,7 @@ public class SnapSelectorToMaster : TutorialSequenceStepScript
 
         foreach (EnemyStats enemy in allEnemies)
         {
-            if (enemy.traits.Contains(TraitList.master) && enemy.traits.Contains(TraitList.shielded))
+            if (enemy.isMaster() && enemy.hasTrait(TraitList.shielded))
             {
                 shieldedEnemy = enemy;
 

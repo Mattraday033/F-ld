@@ -826,7 +826,7 @@ public class SelectorManager : MonoBehaviour
 			Stats combatantAtCoords = CombatGrid.getCombatantAtCoords(rowIndex, colIndex);
 			Stats mandatoryTarget = CombatGrid.enemyHasMandatoryTarget();
 
-			if (combatantAtCoords != null && combatantAtCoords.isAlive() && !Helpers.hasQuality<Trait>(combatantAtCoords.hiddenTraits, hT => hT.isUntargetable()) &&
+			if (combatantAtCoords != null && combatantAtCoords.isAlive() && !Helpers.hasQuality<Trait>(combatantAtCoords.traitContainer, hT => hT.isUntargetable()) &&
 				(currentSelector == instance.selectors[0] || (mandatoryTarget == null || (mandatoryTarget != null && combatantAtCoords.isMandatoryTarget()))))
 			{
 				return new GridCoords(rowIndex, colIndex);
@@ -854,7 +854,7 @@ public class SelectorManager : MonoBehaviour
 			Stats combatantAtCoords = CombatGrid.getCombatantAtCoords(rowIndex, colIndex);
 			Stats mandatoryTarget = CombatGrid.enemyHasMandatoryTarget();
 
-			if (combatantAtCoords != null && combatantAtCoords.isAlive() && !Helpers.hasQuality<Trait>(combatantAtCoords.hiddenTraits, hT => hT.isUntargetable()) &&
+			if (combatantAtCoords != null && combatantAtCoords.isAlive() && !Helpers.hasQuality<Trait>(combatantAtCoords.traitContainer, hT => hT.isUntargetable()) &&
 				(currentSelector == instance.selectors[0] || (mandatoryTarget == null || (mandatoryTarget != null && combatantAtCoords.isMandatoryTarget()))))
 			{
 				return new GridCoords(rowIndex, colIndex);

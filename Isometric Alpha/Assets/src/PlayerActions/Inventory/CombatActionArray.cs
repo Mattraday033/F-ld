@@ -22,7 +22,7 @@ public enum CombatActionSlot
 	FourthPassiveSlot = 11,
 }
 
-public class CombatActionArray : IEnumerable
+public class CombatActionArray : StatBoostSourceCombiner
 {
     public const int numberOfActivatablePlayerCombatActions = 8;
     public const int maxPlayerCombatActions = 12;
@@ -367,9 +367,33 @@ public class CombatActionArray : IEnumerable
         return Helpers.sum<CombatAction>(this, t => t.getGreenStacksAtStart()) + actor.getBonusExuberances();
     }
 
-    public IEnumerator GetEnumerator()
+    public override string getName()
+    {
+        return actor.getName() + "'s Combat Action Array";
+    }
+
+    public override Stats getStatSource()
+    {
+        return actor;
+    }
+
+    public override IEnumerator GetEnumerator()
     {
         return combatActions.GetEnumerator();
+    }
+
+    public string getCombinedWeaponFormula(FormulaDelegate<StatBoostSource> getFormula)
+    {
+        List<CombatAction> attacksInCombatArray = Helpers.getAllObjectsWithQuality<CombatAction>(combatActions, a => a as Attack != null);
+
+        string combinedFormula = Constants.zeroBonus;
+
+        foreach(Attack attack in attacksInCombatArray)
+        {
+            combinedFormula = DamageCalculator.combineFormulas(combinedFormula, getFormula(attack));
+        }
+
+        return combinedFormula;
     }
 
     public bool allActionSlotsFull()

@@ -99,6 +99,11 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         }
     }
 
+    public virtual bool isHiddenTrait()
+    {
+        return false;
+    }
+
     public static string getPermanentDescription()
     {
         return "Permanent";
@@ -580,7 +585,7 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getMaxRoundsLeftForDisplay()));
 
-        buildingBlocks.AddRange(StatBoostSource.getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
+        buildingBlocks.AddRange(getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getDescription()));
 

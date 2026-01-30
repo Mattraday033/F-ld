@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using System;
 
 [System.Serializable]
-public abstract class EquippableItem : Item, IJSONConvertable, IFormulaSource
+public abstract class EquippableItem : Item, IJSONConvertable
 {
     public const string offHandSlotText = "Off Hand";
     public const string headSlotText = "Head";
@@ -48,7 +48,7 @@ public abstract class EquippableItem : Item, IJSONConvertable, IFormulaSource
         return DamageCalculator.calculateFormula(armorFormula, getStatSource());
     }
 
-    public virtual string getArmorFormula()
+    public override string getArmorFormula()
     {
         return armorFormula;
     }

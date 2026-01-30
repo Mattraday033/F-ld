@@ -11,7 +11,17 @@ public abstract class StatBoostSource : INameSource
 
     #region Generic Stats
 
-    public virtual string getBonusCritFormula()
+    public virtual string getArmorFormula()
+    {
+        switch (getName())
+        {
+
+        }
+
+        return "0";
+    }
+
+    public virtual string getCritFormula()
     {
         switch (getName())
         {
@@ -408,6 +418,21 @@ public abstract class StatBoostSource : INameSource
         return statBoosts;
     }
 
+    public static string getAllOfOneStatFormula<T>(IEnumerable enumerable, FormulaDelegate<T> getFormula)
+    {
+        string totalFormula = "+0";
+
+        foreach(T source in enumerable)
+        {
+            if(source != null)
+            {
+                totalFormula = DamageCalculator.combineFormulas(totalFormula, getFormula(source));
+            }
+        }
+
+        return totalFormula;   
+    }
+
     public static List<DescriptionPanelBuildingBlock> getStatBoostDescriptionBuildingBlocks(Stats statsSource, StatBoostSource boostSource)
     {
         List<DescriptionPanelBuildingBlock> blocks = new List<DescriptionPanelBuildingBlock>();
@@ -419,9 +444,14 @@ public abstract class StatBoostSource : INameSource
 
         #region Generic Stats
 
-        if (!boostSource.getBonusCritFormula().Equals(Constants.zeroRating))
+        if (!boostSource.getCritFormula().Equals(Constants.zeroRating))
         {
-            blocks.Add(DescriptionPanelBuildingBlock.getCritBlock(DamageCalculator.calculateFormula(boostSource.getBonusCritFormula(), statsSource).ToString(), boostSource.getBonusCritFormula()));
+            blocks.Add(DescriptionPanelBuildingBlock.getCritBlock(DamageCalculator.calculateFormula(boostSource.getCritFormula(), statsSource).ToString(), boostSource.getCritFormula()));
+        }
+
+        if (!boostSource.getDamageFormula().Equals(Constants.zeroRating))
+        {
+            blocks.Add(DescriptionPanelBuildingBlock.getDamageBlock(DamageCalculator.calculateFormula(boostSource.getDamageFormula(), statsSource).ToString(), boostSource.getDamageFormula()));
         }
 
         if (!boostSource.getBonusDamageFormula().Equals(Constants.zeroRating))

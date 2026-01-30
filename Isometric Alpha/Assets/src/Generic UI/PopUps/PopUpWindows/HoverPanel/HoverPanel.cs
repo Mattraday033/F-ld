@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class HoverPanel : PopUpWindow, IEscapable
@@ -30,10 +31,7 @@ public class HoverPanel : PopUpWindow, IEscapable
 	{
 		descriptionPanelSlot.setPrimaryDescribable(combatant);
 
-		List<Trait> traitList = new List<Trait>();
-		traitList.AddRange(combatant.traits);
-
-		traitDisplay.populatePanels(traitList);
+		traitDisplay.populatePanels(combatant.traitContainer.toList());
 		/*
 			deactivate();
 			combatant.describeStats(this);

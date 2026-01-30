@@ -52,24 +52,6 @@ public class AllyStats : Stats
         equippedItems = new EquippedItems(this);
     }
 
-    public AllyStats(string name, int Str, int Dex, int Wis, int Cha, int lvl, int xp, int cHP, int cunningsRemaining) : base(name)
-    {
-        this.name = name;
-
-        this.strength = Str;
-        this.dexterity = Dex;
-        this.wisdom = Wis;
-        this.charisma = Cha;
-
-        this.level = lvl;
-        this.xp = xp;
-
-        this.currentHealth = cHP;
-
-        combatActionArray = new CombatActionArray(this); 
-        equippedItems = new EquippedItems(this);
-    }
-
     public AllyStats(string name, int Str, int Dex, int Wis, int Cha) : base(name) 
     {
         this.name = name;
@@ -214,6 +196,9 @@ public class AllyStats : Stats
     #endregion
 
     #region Primary Stats
+
+    // public int getAllStatBoosts
+
     private int[] getStatsAsArray()
     {
         return new int[] { strength, dexterity, wisdom, charisma };
@@ -689,10 +674,10 @@ public class AllyStats : Stats
         return equippedItems;
     }
 
-    public override string getBonusCritChanceFromArmor()
-    {
-        return "" + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusCritFormula());
-    }
+    // public override string getBonusCritChanceFromArmor()
+    // {
+    //     return "" + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getCritFormula());
+    // }
 
     public override int getTotalArmorRating()
     {
@@ -729,20 +714,18 @@ public class AllyStats : Stats
         return new GridCoords(coords.row + CombatGrid.allyRowUpperBounds, coords.col);
     }
 
-    public List<StatBoostSource> getAllStatBoosts()
+    public override List<StatBoostSource> getAllStatBoosts()
     {
-        List<StatBoostSource> boosts = new List<StatBoostSource>();
+        List<StatBoostSource> boosts = base.getAllStatBoosts();
 
-        boosts.AddRange(StatBoostSource.getAllStatBoosts(combatActionArray));
         boosts.AddRange(StatBoostSource.getAllStatBoosts(equippedItems));
-        boosts.AddRange(StatBoostSource.getAllStatBoosts(traits));
 
         return boosts;
     }
 
     public override float getDevastatingCriticalPercentage()
     {
-        if (hasTraitAtIndex(TraitList.devastatingCriticals) < 0)
+        if (hasTrait(TraitList.devastatingCriticals))
         {
             return 0f;
         }

@@ -73,7 +73,7 @@ public class CombatActionManager : MonoBehaviour
 			actionBeingResolved.chargeActorActionCost();
 
             if (actionBeingResolved.getActorStats() != null && 
-				Helpers.hasQuality<Trait>(actionBeingResolved.getActorStats().traits, t => t.deleteIfDead()))
+				Helpers.hasQuality<Trait>(actionBeingResolved.getActorStats().traitContainer, t => t.deleteIfDead()))
 			{
 				CombatGrid.deleteDeadOnDeathEffectActors();
 			}

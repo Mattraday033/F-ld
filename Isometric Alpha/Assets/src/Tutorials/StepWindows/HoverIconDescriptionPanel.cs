@@ -50,6 +50,8 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
         setAnchorsAndPivot(direction);
         setPadding();
 
+        setDescriptionParentLayoutType(direction);
+
         StartCoroutine(checkAndSetWidth());
 
         if(canvas == null)
@@ -64,6 +66,35 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
         {
             canvas.sortingOrder = nonInspectingSortOrder;
         }
+    }
+
+    private void setDescriptionParentLayoutType(ArrowDirection direction)
+    {
+        HorizontalOrVerticalLayoutGroup layout = null;
+
+        switch(direction)
+        {
+            case ArrowDirection.Center:
+                layout = descPanelWindow.gameObject.AddComponent<HorizontalLayoutGroup>();
+                break;
+            default:
+                layout = descPanelWindow.gameObject.AddComponent<VerticalLayoutGroup>();
+                break;
+        }
+
+        if(layout == null)
+        {
+            return;
+        }
+
+        layout.childControlHeight = true;
+        layout.childControlWidth = true;
+        layout.childForceExpandHeight = true;
+        layout.childForceExpandWidth = true;
+
+        layout.spacing = 5;
+        // layout. = true;
+        // layout. = true;
     }
 
     private IEnumerator checkAndSetWidth()
@@ -102,7 +133,7 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
         if (mouseInWidthFirstSection(mousePos.x) && mouseInHeightThirdSection(mousePos.y)) { return ArrowDirection.TopLeft;}
 
         if (mouseInWidthSecondSection(mousePos.x) && mouseInHeightFirstSection(mousePos.y)) { return ArrowDirection.Bottom;}
-        if (mouseInWidthSecondSection(mousePos.x) && mouseInHeightSecondSection(mousePos.y)) { return ArrowDirection.Bottom;}
+        if (mouseInWidthSecondSection(mousePos.x) && mouseInHeightSecondSection(mousePos.y)) { return ArrowDirection.Top;}
         if (mouseInWidthSecondSection(mousePos.x) && mouseInHeightThirdSection(mousePos.y)) { return ArrowDirection.Top;}
 
         if (mouseInWidthThirdSection(mousePos.x) && mouseInHeightFirstSection(mousePos.y)) { return ArrowDirection.BottomRight;}

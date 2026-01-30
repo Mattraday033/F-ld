@@ -12,6 +12,11 @@ public class HiddenTrait : Trait
 		this.untargetable = untargetable;
 	}
 
+    public override bool isHiddenTrait()
+    {
+        return true;
+    }
+
 	public override bool isUntargetable()
 	{
 		return untargetable;

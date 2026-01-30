@@ -352,7 +352,7 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 		return "" + getDamageFormulaTotal();
 	}
 
-	public string getDamageFormulaForDisplayAlternate()
+	public string getDamageFormulaForDisplay()
 	{
 		return getDamageFormula();
 	}

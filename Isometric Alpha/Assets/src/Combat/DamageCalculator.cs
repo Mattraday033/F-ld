@@ -5,21 +5,322 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
+public class Formula
+{
+	public const char strChar = 'S';
+	public const char dexChar = 'D';
+	public const char wisChar = 'W';
+	public const char chaChar = 'C';
+	public const char plusChar = '+';
+	public const char minusChar = '-';
+
+    public Dictionary<PrimaryStat, int> formulaDict = new Dictionary<PrimaryStat, int>();
+
+    public Formula(string formula)
+    {
+        formula = formula.ToUpper().Replace(" ","");
+
+        if(formula.Length <= 0 ||
+           formula.Equals(Constants.zeroBonus)||
+           formula.Equals(Constants.zeroRating))
+        {
+            return;
+        }
+
+        List<string> sections = new List<string>();
+
+        for(int i = 0; i < formula.Length; i++)
+        {
+            if(characterIsStatMarker(formula[i]) || 
+                ((i+1) < formula.Length && characterIsSectionBreak(formula[i+1])))
+            {
+                sections.Add(formula.Substring(0, i+1));
+                formula = formula.Substring(i+1, formula.Length-(i+1));
+                i = -1;
+            }
+        }
+
+        if(formula.Length > 0) //Capturing final portion if there is anything left
+        {
+            sections.Add(formula);
+        }
+
+        foreach(string section in sections)
+        {
+            if(section.Length <= 0)
+            {
+                continue;
+            }
+
+            PrimaryStat key = PrimaryStat.None;
+            int value = 0;
+
+            switch(section[section.Length-1])
+            {
+                case strChar:
+                    key = PrimaryStat.Strength;
+                    break;
+                case dexChar:
+                    key = PrimaryStat.Dexterity;
+                    break;
+                case wisChar:
+                    key = PrimaryStat.Wisdom;
+                    break;
+                case chaChar:
+                    key = PrimaryStat.Charisma;
+                    break;
+            }
+
+            if(key == PrimaryStat.None)
+            {
+                try
+                {
+                    value = int.Parse(section);
+                } catch(Exception e)
+                {
+                    Debug.LogError("Exception found");
+                }
+                
+            } else if(section.Length == 1 || (section.Split(plusChar).Length > 1 && 
+                        section.Split(plusChar)[Constants.indexOne].Length == 1))
+            {
+                value = 1;
+            } else if(section.Split(minusChar).Length > 1 && 
+                        section.Split(minusChar)[Constants.indexOne].Length == 1)
+            {
+                value = -1;
+            } else
+            {
+                value = int.Parse(section.Substring(0, section.Length-1));
+            }
+
+            addSectionToDict(key, value);
+        }
+    }
+    
+    private void addSectionToDict(PrimaryStat key, int value)
+    {
+        if(!formulaDict.ContainsKey(key))
+        {
+            formulaDict.Add(key, value);
+            return;
+        }
+
+        formulaDict[key] += value;
+    }
+
+    public void combine(Formula other)
+    {
+        foreach(KeyValuePair<PrimaryStat, int> kvp in other.formulaDict)
+        {
+            addSectionToDict(kvp.Key, kvp.Value);
+        }
+    }
+
+    public string getFormula()
+    {
+        string output = "";
+
+        output += getSectionOfFormula(PrimaryStat.Strength, output.Length > 0);
+        output += getSectionOfFormula(PrimaryStat.Dexterity, output.Length > 0);
+        output += getSectionOfFormula(PrimaryStat.Wisdom, output.Length > 0);
+        output += getSectionOfFormula(PrimaryStat.Charisma, output.Length > 0);
+        output += getSectionOfFormula(PrimaryStat.None, output.Length > 0);
+
+        return output;
+    }
+
+    public string getFormulaInverted()
+    {
+        string output = "";
+
+        output += getSectionOfFormula(PrimaryStat.Strength, output.Length > 0);
+
+        if(output.Length > 0 && !output.Contains(plusChar) && !output.Contains(minusChar))
+        {
+            output = minusChar + output;
+        } else if(output.Contains(minusChar))
+        {
+            output = output.Replace(minusChar+"", "");
+        }
+
+        string dexSection = getSectionOfFormula(PrimaryStat.Dexterity, output.Length > 0);
+
+        if((dexSection.Length > 0 && !dexSection.Contains(plusChar) && !dexSection.Contains(minusChar)) || dexSection.Contains(plusChar))
+        {
+            output += minusChar + dexSection.Replace(plusChar+"", "");
+        } else if(dexSection.Contains(minusChar) && output.Length > 0)
+        {
+            output += plusChar + dexSection.Replace(minusChar+"", "");
+        } else if(dexSection.Contains(minusChar) && output.Length <= 0)
+        {
+            output += dexSection.Replace(minusChar+"", "");
+        }
+
+        string wisSection = getSectionOfFormula(PrimaryStat.Wisdom, output.Length > 0);
+
+        if(wisSection.Length > 0 && ((!wisSection.Contains(plusChar) && !wisSection.Contains(minusChar)) || wisSection.Contains(plusChar)))
+        {
+            output += minusChar + wisSection.Replace(plusChar+"", "");
+        } else if(wisSection.Contains(minusChar) && output.Length > 0)
+        {
+            output += plusChar + wisSection.Replace(minusChar+"", "");
+        } else if(wisSection.Contains(minusChar) && output.Length <= 0)
+        {
+            output += wisSection.Replace(minusChar+"", "");
+        }
+
+        string chaSection = getSectionOfFormula(PrimaryStat.Charisma, output.Length > 0);
+
+        if(chaSection.Length > 0 && ((!chaSection.Contains(plusChar) && !chaSection.Contains(minusChar)) || chaSection.Contains(plusChar)))
+        {
+            output += minusChar + chaSection.Replace(plusChar+"", "");
+        } else if(chaSection.Contains(minusChar) && output.Length > 0)
+        {
+            output += plusChar + chaSection.Replace(minusChar+"", "");
+        } else if(chaSection.Contains(minusChar) && output.Length <= 0)
+        {
+            output += chaSection.Replace(minusChar+"", "");
+        }
+
+        string bonusSection = getSectionOfFormula(PrimaryStat.None, output.Length > 0);
+
+        if(bonusSection.Length > 0 && ((!bonusSection.Contains(plusChar) && !bonusSection.Contains(minusChar)) || bonusSection.Contains(plusChar)))
+        {
+            output += minusChar + bonusSection.Replace(plusChar+"", "");
+        } else if(bonusSection.Contains(minusChar) && output.Length > 0)
+        {
+            output += plusChar + bonusSection.Replace(minusChar+"", "");
+        } else if(bonusSection.Contains(minusChar) && output.Length <= 0)
+        {
+            output += bonusSection.Replace(minusChar+"", "");
+        }
+
+        return output;
+    }
+
+    private string getSectionOfFormula(PrimaryStat key, bool sectionAdded)
+    {
+        string output = "";
+
+        if(formulaDict.ContainsKey(key) && 
+            formulaDict[key] != 0)
+        {
+            if(formulaDict[key] < 0)
+            {
+                output += minusChar;
+            } else if(sectionAdded && formulaDict[key] > 0)
+            {
+                output += plusChar;
+            }
+
+            if(formulaDict[key] != 1 && 
+                formulaDict[key] != -1)
+            {
+                output += formulaDict[key];
+            }
+
+            output += convertKeyToChar(key);
+        }
+
+        return output;
+    }
+
+    private string convertKeyToChar(PrimaryStat stat)
+    {
+        switch(stat)
+        {
+            case PrimaryStat.Strength:
+                return strChar.ToString();
+            case PrimaryStat.Dexterity:
+                return dexChar.ToString();
+            case PrimaryStat.Wisdom:
+                return wisChar.ToString();
+            case PrimaryStat.Charisma:
+                return chaChar.ToString();
+            default:
+                return "";
+        }
+    }
+
+
+    public int calculateFormula(Stats source)
+    {
+        int output = 0;
+
+        if(source == null)
+        {
+            return output;
+        }
+
+        foreach(KeyValuePair<PrimaryStat, int> kvp in formulaDict)
+        {
+            switch(kvp.Key)
+            {
+                case PrimaryStat.Strength:
+                    output += kvp.Value * source.getStrength();
+                    break;
+                case PrimaryStat.Dexterity:
+                    output += kvp.Value * source.getDexterity();
+                    break;
+                case PrimaryStat.Wisdom:
+                    output += kvp.Value * source.getWisdom();
+                    break;
+                case PrimaryStat.Charisma:
+                    output += kvp.Value * source.getCharisma();
+                    break;
+                case PrimaryStat.None:
+                    output += kvp.Value;
+                    break;
+            }
+        }
+
+        return output;
+    }
+
+    public int calculateBonusDamage()
+    {
+        if(!formulaDict.ContainsKey(PrimaryStat.None))
+        {
+            return 0;
+        }
+
+        return formulaDict[PrimaryStat.None];
+    }
+
+    private static bool characterIsStatMarker(char character)
+    {
+        switch(character)
+        {
+            case strChar:
+            case dexChar:
+            case wisChar:
+            case chaChar:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private static bool characterIsSectionBreak(char character)
+    {
+        switch(character)
+        {
+            case plusChar:
+            case minusChar:
+                return true;
+            default:
+                return false;
+        }
+    }
+}
+
 public static class DamageCalculator
 {	
 	public const int critAutoSuccessThreshold = 100;
 	public const int critAutoFailureThreshold = 0;
 
 	public const double baseCriticalDamage = 1.5;
-
-	private const char strChar = 's';
-	private const char dexChar = 'd';
-	private const char wisChar = 'w';
-	private const char chaChar = 'c';
-	private const char plusChar = '+';
-	private const char minusChar = '-';
-
-	private static string[] allUpperCaseLetters = new string[]{"S", "D", "W", "C", ""};
 
     public static Stats noStatsSource
     {
@@ -33,155 +334,13 @@ public static class DamageCalculator
 
     }
 
-    public static string combineFormulas(string[] damageFormulas)
-    {
-        if (damageFormulas == null || damageFormulas.Length == 0)
-        {
-            return "0";
-        }
-
-        string mainFormula = damageFormulas[0];
-
-        for (int index = 1; index < damageFormulas.Length; index++)
-        {
-            mainFormula = combineFormulas(mainFormula, damageFormulas[index]);
-        }
-
-        return mainFormula;
-    }
-
-	public static string combineFormulas(string formula1, string formula2)
+	public static string combineFormulas(string f1, string f2)
 	{
-		string newFormula = "";
+        Formula formula = new Formula(f1);
+        
+        formula.combine(new Formula(f2));
 
-		if((formula1 == null || formula1.Length <= 0) && formula2 != null)
-		{
-			return formula2;
-		} else if((formula2 == null || formula2.Length <= 0) && formula1 != null)
-		{
-			return formula1;
-		} else if((formula2 == null || formula2.Length <= 0) && (formula1 == null || formula1.Length <= 0))
-		{
-			return "0";
-		}
-
-		formula1 = formula1.Replace(" ", "").ToLower();
-		formula2 = formula2.Replace(" ", "").ToLower();
-
-		string[] allSections = new string[]{"", "", "", "", ""};
-
-		string[] formula1Sections = formula1.Split(plusChar);
-		string[] formula2Sections = formula2.Split(plusChar);
-
-		foreach(string formula1Section in formula1Sections)
-		{
-			// Debug.LogError("allSections: (" + string.Join("), (", allSections)+ ")");
-			allSections = addSectionToFormula(allSections, formula1Section);
-		}
-
-		foreach (string formula2Section in formula2Sections)
-		{
-			// Debug.LogError("allSections: (" + string.Join("), (", allSections)+ ")");
-			allSections = addSectionToFormula(allSections, formula2Section);
-		}
-
-			// Debug.LogError("allSections: (" + string.Join("), (", allSections)+ ")");
-
-
-		allSections = addCharactersToFormulaAndRemoveDeadSections(allSections);
-
-		// Debug.LogError("allSections after adding characters: (" + string.Join("), (", allSections)+ ")");
-
-		if (allSections.Length == 0)
-		{
-			return "0";
-		}
-
-		newFormula = allSections[0];
-
-		for(int index = 1; index < allSections.Length; index++)
-		{
-			newFormula += plusChar + allSections[index];
-		}
-
-		return newFormula;
-	}
-
-	private static string[] addCharactersToFormulaAndRemoveDeadSections(string[] allSections)
-	{
-		for(int index = 0; index < allSections.Length; index++)
-		{
-			if (allSections[index].Length > 0)
-			{
-				if (allSections[index].Equals("1"))
-				{
-					allSections[index] = allUpperCaseLetters[index];
-				}
-				else
-				{
-					allSections[index] += allUpperCaseLetters[index];
-				}
-			}
-		}
-
-		return allSections.Where(section => section.Length > 0).ToArray();
-	}
-
-	public static string[] addSectionToFormula(string[] formula, string section)
-	{
-
-		if (section.Length <= 0)
-		{
-			return formula;
-		}
-
-		// Debug.LogError("1Formula = (" + string.Join("), (", formula)+ ")");
-		// Debug.LogError("1Section = " + section);
-
-		char finalChar = section[section.Length - 1];
-		int sectionIndex = 0;
-
-		switch (finalChar)
-		{
-			case strChar:
-				sectionIndex = 0;
-				section = section.Replace(strChar + "", "");
-				break;
-			case dexChar:
-				sectionIndex = 1;
-				section = section.Replace(dexChar + "", "");
-				break;
-			case wisChar:
-				sectionIndex = 2;
-				section = section.Replace(wisChar + "", "");
-				break;	
-			case chaChar:
-				sectionIndex = 3;
-				section = section.Replace(chaChar + "", "");
-				break;
-			default:
-				sectionIndex = 4;
-				break;
-		}
-
-		if(section.Length <= 0)
-		{
-			section = "1";
-		}
-
-		if (formula[sectionIndex].Length <= 0)
-		{
-			formula[sectionIndex] = section;
-		}
-		else
-		{
-			formula[sectionIndex] = combineNumbers(formula[sectionIndex], section).Replace("+", "").Replace(" ", "");
-		}
-
-		// Debug.LogError("2Formula = (" + string.Join("), (", formula)+ ")");
-		// Debug.LogError("2Section = " + section);
-
-		return formula;
+		return formula.getFormula();
 	}
 
     private static int calculateFormula(string damageFormula)
@@ -191,163 +350,16 @@ public static class DamageCalculator
 
     public static int calculateFormula(string damageFormula, Stats statSource)
     {
-        if (damageFormula == null)
-        {
-            return -1;
-        }
+        Formula formula = new Formula(damageFormula);
 
-        currentStatSource = statSource;
-
-        int output = 0;
-
-        damageFormula = damageFormula.Replace(" ", "").ToLower();
-
-        string[] formulaSections = damageFormula.Split(plusChar);
-
-        foreach (string formulaSection in formulaSections)
-        {
-            output += calculateSection(formulaSection);
-        }
-
-        if (output <= 0)
-        {
-            return 0;
-        }
-        else
-        {
-            return output;
-        }
+        return formula.calculateFormula(statSource);
     }
 	
 	public static int calculateBonusDamage(string damageFormula)
     {
-		if(damageFormula == null)
-		{
-			return -1;
-		}
-		
-		int output = 0;
-		
-		damageFormula = damageFormula.Replace(" ", "").ToLower();
-		
-		string[] formulaSections = damageFormula.Split(plusChar);
-		
-		foreach(string formulaSection in formulaSections)
-		{
-			output += calculateSection(formulaSection, true);
-		}
-		
-		if(output <= 0)
-		{
-			return 0;
-		} else 
-		{
-			return output;
-		}
-	}
-	
-	public static int calculateSection(string formulaSection)
-	{
-		return calculateSection(formulaSection, false);
-	}
-	
-	public static int calculateSection(string formulaSection, bool onlyBonusDamage)
-	{
-		int output = 0;
-		
-		try
-		{
-			output = int.Parse(formulaSection);
-			return output;
-		} catch(FormatException e)
-		{
-					
-			if(formulaSection.Contains(minusChar))
-			{
-				
-				string[] formulaSections = formulaSection.Split(minusChar);
-				
-				output = calculateSection(formulaSections[0]);
-				
-				for(int i = 1; i < formulaSections.Length; i++)
-				{
-					output -= calculateSection(formulaSections[i]);
-				}
-				
-				return output;
-			}
-			
-			if(formulaSection.Contains(strChar))
-			{
-				if(onlyBonusDamage)
-				{
-					return 0;
-				}
-				
-				if(formulaSection.Length == 1)
-				{
-					return currentStatSource.getStrength();
-				} else
-				{
-					output = int.Parse(formulaSection.Split(strChar)[0]) * currentStatSource.getStrength();
-				
-					return output;
-				}
-				
-			} else if(formulaSection.Contains(dexChar))
-			{
-				if(onlyBonusDamage)
-				{
-					return 0;
-				}
-				
-				if(formulaSection.Length == 1)
-				{
-					return currentStatSource.getDexterity();
-				} else
-				{
-					output = int.Parse(formulaSection.Split(dexChar)[0]) * currentStatSource.getDexterity();
-				
-					return output;
-				}
-			} else if(formulaSection.Contains(wisChar))
-			{
-				if(onlyBonusDamage)
-				{
-					return 0;
-				}
-				
-				if(formulaSection.Length == 1)
-				{
-					return currentStatSource.getWisdom();
-				} else
-				{
-					output = int.Parse(formulaSection.Split(wisChar)[0]) * currentStatSource.getWisdom();
-				
-					return output;
-				}
-			} else if(formulaSection.Contains(chaChar))
-			{
-				if(onlyBonusDamage)
-				{
-					return 0;
-				}
-				
-				if(formulaSection.Length == 1)
-				{
-					return currentStatSource.getCharisma();
-				} else
-				{
-					output = int.Parse(formulaSection.Split(chaChar)[0]) * currentStatSource.getCharisma();
-				
-					return output;
-				}
-			} 
-			
-			
-		}
-		
-		return output;
+        Formula formula = new Formula(damageFormula);
+
+        return formula.calculateBonusDamage();
 	}
 	
 	public static bool isACrit(string critFormula, string critKey)
@@ -432,39 +444,13 @@ public static class DamageCalculator
 				return;
         }
     }
-
-    public static string combineNumbers(string firstNum, string secondNum)
-	{
-		return combineNumbers(new string[]{firstNum, secondNum});
-	}
 	
-	public static string combineNumbers(string[] numbers)
-	{
-		int output = 0;
+    public static string invertFormula(string f1)
+    {
+        Formula formula = new Formula(f1);
 
-		foreach (string number in numbers)
-		{
-			if (number.Length <= 0)
-			{
-				continue;
-			}
-
-            // Debug.LogError("number = " + number);
-            output += int.Parse(number.Replace("+",""));
-		}
-
-		// Debug.LogError("output = " + output);
-		
-		if (output >= 0)
-		{
-			return "+ " + output;
-		}
-		else
-		{
-			return "- " + Math.Abs(output);
-		}
-	}
-	
+        return formula.getFormulaInverted();
+    }
 
 	/* idea for universal findFinalDamage, may not use
     public static int[] findFinalDamage(Stats actor, Stats target, string damageFormula, bool isCrit)

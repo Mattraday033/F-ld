@@ -84,6 +84,7 @@ public static class Constants
 
     public const double autoSuccess = 1.0;
     public const string zeroRating = "0";
+    public const string zeroBonus = "+0";
 
     public const string emptyString = "";
 

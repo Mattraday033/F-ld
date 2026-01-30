@@ -98,19 +98,12 @@ public struct GridCoords
 
 public enum CombatActionSaveType { Attack = 0, Ability = 1, ItemCombatAction = 2}
 
-public interface IFormulaSource
-{
-    public string getDamageFormula();
-    public string getCritFormula();
-    public string getArmorFormula();
-}
-
 public enum CombatAnimationType{ None, Projectile, Effect }
 
 //a single thing that the player has selected themself or a party member to do during combat
 //Or a single thing the enemy has elected to do during their turn, typically based on logic explained in their trait descriptions
 [System.Serializable]
-public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertable, IDescribable, ISortable, IDescribableInBlocks, IFormulaSource
+public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertable, IDescribable, ISortable, IDescribableInBlocks
 {
 
     #region Constants
@@ -163,16 +156,6 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     #region Damage/Crit/Armor
 
-    public virtual string getArmorFormula()
-    {
-        return Constants.zeroRating;
-    }
-
-    public virtual string getDamageFormula()
-    {
-        throw new IOException("The base class version of getDamageFormula() was called extraneously");
-    }
-
     public virtual string getDamageTotalForDisplay()
     {
         if (cannotDealDamage || getDamageFormulaTotal() <= 0)
@@ -183,29 +166,56 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         return "" + getDamageFormulaTotal();
     }
 
-    public virtual string getDamageFormulaForDisplayAlternate()
+    public virtual string getDamageFormulaForDisplay()
     {
         if (cannotDealDamage || getDamageFormulaTotal() <= 0)
         {
             return harmlessMessage;
         }
 
-        return getDamageFormula();
+        return getFinalDamageFormula();
     }
 
     public virtual int getDamageFormulaTotal()
     {
-        return DamageCalculator.calculateFormula(getDamageFormula(), getActorStats());
+        return DamageCalculator.calculateFormula(getFinalDamageFormula(), getActorStats());
     }
 
-    public virtual string getCritFormula()
+    public virtual string getFinalDamageFormula()
     {
-        throw new IOException("The base class version of getCritFormula() was called extraneously");
+		if(cannotDealDamage)
+		{
+			return Constants.zeroRating;
+		}
+
+        return DamageCalculator.combineFormulas(getDamageFormula(), gatherAllNonActionFormulas(a => a.getDamageFormula()));
+    }
+
+    public virtual string getFinalCritFormula()
+    {
+        string finalCritFormula = DamageCalculator.combineFormulas(getCritFormula(), gatherAllNonActionFormulas(a => a.getCritFormula()));
+
+        int critChance = DamageCalculator.calculateFormula(finalCritFormula, getStatSource());
+
+        if (cannotDealDamage || 
+            (inPreviewMode && critChance < DamageCalculator.critAutoSuccessThreshold))
+		{
+			return Constants.zeroRating;
+		} 
+
+        return finalCritFormula;
+    }
+
+    protected virtual string gatherAllNonActionFormulas(FormulaDelegate<StatBoostSource> getFormula)
+    {
+        string allStats = getAllOfOneStatFormula<StatBoostSource>(getStatSource().getAllStatBoosts(), t => getFormula(t));
+
+        return DamageCalculator.combineFormulas(getFormula(this), allStats);
     }
 
     public virtual int getCritFormulaTotal()
     {
-        return DamageCalculator.calculateFormula(getCritFormula(), getActorStats());
+        return DamageCalculator.calculateFormula(getFinalCritFormula(), getActorStats());
     }
 
     public string getCritTotalForDisplay()
@@ -215,32 +225,17 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
             return cannotCritMessage;
         }
 
-        if (CombatStateManager.inCombat)
-        {
-            return getCritFormulaTotalForDisplay();
-        }
-
         return getCritFormulaTotal() + "%";
     }
 
-    public virtual string getCritFormulaForDisplayAlternate()
+    public virtual string getCritFormulaForDisplay()
     {
-        if (cannotDealDamage || getDamageFormulaTotal() <= 0)
-        {
-            return harmlessMessage;
-        }
-
-        return "(" + getCritFormula() + ")%";
-    }
-
-    public string getCritFormulaTotalForDisplay()
-    {
-        if (getCritFormulaTotal() <= 0)
+        if (cannotDealDamage || getCritFormulaTotal() <= 0)
         {
             return cannotCritMessage;
         }
 
-        return DamageCalculator.calculateFormula(getCritFormula(), getActorStats()) + " %";
+        return "(" + getFinalCritFormula() + ")%";
     }
 
     #endregion
@@ -249,7 +244,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public virtual int[] findFinalDamage(Stats targetCombatant, bool isCrit)
     {
-        int baseDamage = DamageCalculator.calculateFormula(getDamageFormula(), getActorStats());
+        int baseDamage = getDamageFormulaTotal();
 
         if (targetCombatant == null || baseDamage == 0)
         {
@@ -278,12 +273,6 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public virtual void performCombatAction() //virtual because some abilities target the ground below their targets, such as GroundEffectAbility
     {
-        if (getTargetCoords().Equals(GridCoords.getDefaultCoords()))
-        {
-            Debug.LogError("getTargetCoords() = " + getTargetCoords().ToString());
-            return;
-        }
-
         playActivationAnimation();
 
         performCombatAction(getSelector().getAllTargets());
@@ -645,26 +634,8 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
             selector.setToLocation(getActorCoords());
             return selector;
         }
-        //Debug.LogError(actor.getName() + " is at position " + actor.position.ToString());
 
-        Trait[] traits = actor.traits;
-
-        foreach (Trait trait in traits)
-        {
-            if (trait == null)
-            {
-                continue;
-            }
-
-            selector = trait.findTargetLocation(selectorManager.selectors[getRangeIndex()].clone(), listOfTargets);
-
-            if (selector != null)
-            {
-                break;
-            }
-        }
-
-        return selector;
+        return actor.traitContainer.findTargetLocation(selectorManager.selectors[getRangeIndex()].clone(), listOfTargets);
     }
 
     public void addPreviousTarget(GridCoords coords)
@@ -745,15 +716,9 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         throw new IOException("The base class version of setTertiaryCoords() was called extraneously");
     }
 
-    public virtual int getRangeIndex()
-    {
-        throw new IOException("The base class version of getRangeIndex() was called extraneously");
-    }
+    public abstract int getRangeIndex();
 
-    public virtual string getRangeTitle()
-    {
-        throw new IOException("The base class version of getRangeTitle() was called extraneously");
-    }
+    public abstract string getRangeTitle();
 
     public GameObject getSelectorObject()
     {
@@ -807,11 +772,6 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public Vector3 getTargetPosition()
     {
-        if (getTargetCoords().row < 0 || getTargetCoords().col < 0)
-        {
-            throw new IOException("Target Coords never set. Are you sure that this action has a target yet?");
-        }
-
         return CombatGrid.getPositionAt(getTargetCoords());
     }
 
@@ -1515,14 +1475,11 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getDamageBlock(getDamageTotalForDisplay(), getDamageFormulaForDisplayAlternate()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getDamageBlock(getDamageTotalForDisplay(), getDamageFormulaForDisplay()));
 
-        if (!CombatStateManager.inCombat)
-        {
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRangeTitle()));
-        }
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getCritBlock(getCritTotalForDisplay(), getCritFormulaForDisplay()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getCritBlock(getCritTotalForDisplay(), getCritFormulaForDisplayAlternate()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRangeTitle()));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getCooldownBlock(getMaximumCooldownForDisplay()));
 
