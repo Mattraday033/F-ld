@@ -119,7 +119,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
             {
                 if (Input.anyKeyDown)
                 {
-                    if (KeyBindingList.eitherBackoutKeyIsPressed())
+                    if (Input.GetKey(KeyBindingList.backOutKey2))
                     {
                         abilityButtons[currentlySelectedAbilityIndex].disableCombatActionSelectorPreview();
 
@@ -211,7 +211,8 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
                     }
                 }
             }
-            else if (CombatStateManager.currentActivity != CurrentActivity.Tutorial)
+            else if (CombatStateManager.currentActivity != CurrentActivity.Tutorial && 
+                    CombatStateManager.currentActivity != CurrentActivity.InEscapeMenu)
             {
                 disableAbilityButtonCanvas();
             }

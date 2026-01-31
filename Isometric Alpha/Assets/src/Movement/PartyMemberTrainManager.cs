@@ -15,6 +15,8 @@ public static class PartyMemberTrainManager
         MovementManager.OnMoveFinished.AddListener(hideOverlappingPartyMembersOnMoveEnded);
         MovementManager.OnMoveStarted.AddListener(showPartyMemberTrain);
 
+        PlayerOOCStateManager.OnStateChangeToInDialogue.AddListener(createPartyMemberTrain);
+
         PartyMemberPlacer.OnPartyMemberPlaced.AddListener(createPartyMemberTrain);
         PartyMemberPlacer.OnPartyMemberRemoved.AddListener(createPartyMemberTrain);
 

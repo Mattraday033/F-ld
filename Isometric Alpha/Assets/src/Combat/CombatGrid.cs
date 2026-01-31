@@ -605,4 +605,16 @@ public static class CombatGrid
 		
 		return combatantList;
 	}
+
+    public static bool combatantIsRepositionClone(GridCoords targetCoords)
+    {
+        Stats stats = getCombatantAtCoords(targetCoords);
+
+        if(stats == null)
+        {
+            return false;
+        }
+
+        return stats.isRepositionClone();
+    }
 }

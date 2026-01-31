@@ -413,6 +413,8 @@ public class DialogueManager : MonoBehaviour
         string partyMemberName = "";
         string tutorialKey = "";
         bool continueAfterTransparent = false;
+        int camTargetIndex = 0;
+        AnimationManager targetAnimationManager = null;
 
         if (currentStory.canContinue)
         {
@@ -801,8 +803,6 @@ public class DialogueManager : MonoBehaviour
                 case "changeplayerpos":
                 case "changeplayerposition":
 
-//                    Debug.LogError("changePosition section changed to use cells and not floats: " + buffer);
-
                     int xPos = getArgumentInt(buffer, Constants.indexZero);
                     int yPos = getArgumentInt(buffer, Constants.indexOne);
 
@@ -853,10 +853,10 @@ public class DialogueManager : MonoBehaviour
                 case "setnpcfacing":
                 case "changenpcfacing":
 
-                    int camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
+                    camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
                     string npcFacingArgs = getArgument(buffer, Constants.indexOne);
 
-                    AnimationManager targetAnimationManager = currentDialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
+                    targetAnimationManager = currentDialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
 
                     if(targetAnimationManager != null)
                     {
@@ -877,6 +877,27 @@ public class DialogueManager : MonoBehaviour
                             case "sw":
                             case "southwest":
                                 targetAnimationManager.setFacing(Facing.SouthWest);
+                                break;
+                        }
+                    }
+
+                    continueStory();
+
+                    break;
+
+                case "playanimation":
+
+                    camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
+                    string npcAnimationArgs = getArgument(buffer, Constants.indexOne);
+
+                    targetAnimationManager = currentDialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
+
+                    if(targetAnimationManager != null)
+                    {
+                        switch (npcAnimationArgs.ToLower().Replace(" ",""))
+                        {
+                            case "attack_normal_front":
+                                targetAnimationManager.playAttackAnimation();
                                 break;
                         }
                     }

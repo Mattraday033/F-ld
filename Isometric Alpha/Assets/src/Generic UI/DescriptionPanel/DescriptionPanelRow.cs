@@ -69,6 +69,8 @@ public class DescriptionPanelRow : MonoBehaviour
         {
             descriptionText.text = statTotal;
         }
+
+        DescriptionPanel.setTextAutoSize(descriptionText, OverallUIManager.showFormula);
     }
 
     public void setIcon(Sprite sprite)

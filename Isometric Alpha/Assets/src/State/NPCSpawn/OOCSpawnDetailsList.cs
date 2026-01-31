@@ -347,9 +347,9 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCSpawnDetails(NPCNameList.csalan, new Vector3Int(17, 17), LocationNameList.campCenter));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.temple, new Vector3Int(9, 11), LocationNameList.campCenter));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.temple, new Vector3Int(9, 11), LocationNameList.campCenter, facing: Facing.SouthEast));
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard + 1, new Vector3Int(6, 3), LocationNameList.campCenter, MonsterNameList.spearman, Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard + 1, new Vector3Int(6, 3), LocationNameList.campCenter, MonsterNameList.spearman, facing: Facing.SouthWest));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(4, 5), LocationNameList.campCenter, facing: Facing.SouthWest));
         list.Add(new NPCSpawnDetails(NPCNameList.branded, new Vector3Int(0, 6), LocationNameList.campCenter));

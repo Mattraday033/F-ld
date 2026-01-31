@@ -29,9 +29,6 @@ public static class PrefabNames
     public const string actionHoverDescriptionPanel = "Action Hover Description Panel";
     public const string harmlessCombatActionHoverDescriptionPanel = "Harmless Action Hover Description Panel";
 
-    public const string itemDecisionButtons = "Item Decision Buttons";
-    public const string equippableDecisionButtons = "Equippable Decision Buttons";
-
     public const string inventoryRow = "Inventory Row";
     public const string chestDescriptionPanel = "Chest Item Description Panel";
     public const string shopRow = "Shop Item Row";
@@ -129,7 +126,6 @@ public static class PrefabNames
     public const string traitSquareRowPanel = "Trait Square Row Panel";
     public const string stackableTraitSquareRowPanel = "Stackable Trait Square Row Panel";
     public const string multiStackableTraitSquareRowPanel = "MultiStackable Trait Square Row Panel";
-    public const string traitHoverDescriptionPanel = "Trait Hover Description Panel";
     public const string multiStackableTraitHoverDescriptionPanel = "MultiStackable Trait Hover Description Panel";
 
     public const string characterGenerationStatDescriptionPanel = "Chargen Mouse Hover";

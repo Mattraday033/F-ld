@@ -150,7 +150,6 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 279750565416078098}
   tutorialHash: Combat Action Wheel
-  useUIScale: 0
   disableArrow: 1
 --- !u!1 &8152736911496659909
 GameObject:
@@ -601,7 +600,6 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 6719318034856921408}
   tutorialHash: 
-  useUIScale: 0
   disableArrow: 0
 --- !u!1001 &2277986807921085070
 PrefabInstance:
@@ -1775,7 +1773,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 783193699
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &2953599936428186530
 MonoBehaviour:

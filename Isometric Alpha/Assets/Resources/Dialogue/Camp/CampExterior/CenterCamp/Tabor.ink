@@ -67,13 +67,17 @@ changeCamTarget({taborIndex})
 
 === 1c ===
 
-Good! Now I know what you must be asking. What is the purpose of a Correctional Officer, if the people he is supposed to correct all die before they are released? A short sighted question, but I will still answer it!
+Good! Now I know what you must be asking. What is the purpose of a Correctional Officer if the people he is supposed to correct all die before they are released? A short sighted question, but I will still answer it!
 
 The Gods, in their infinite wisdom, have decreed that after we die we all will be given a home in which to rest before we are reborn. There we will host every person we have ever met, every person we have ever wronged in our life, and will be given the opportunity to reconcile our differences. 
 
 You may all know this as 'the Posthumous Hearth', or simply 'going to one's hearth' after we die. I imagine my hearth will look something like Grammy Tabor's stead, and will smell of her wonderful cooking. Yours, if you're lucky, will be similarly homey and warm!
 
-But therein lies the rub. If we allow you murderers and miscreants to go to your hearth's as ill-mannered malefactors, we'll be clogging up the afterlife with evil men and poor conversation. You may be less than nothing now, but I promise by the time you leave this camp you will know the error of your ways and be able to be reborn as goodly, contributing members of society.
+But therein lies the rub. If we allow you miscreants to go to your hearths as you are, we'll be clogging up the afterlife with evil men and poor conversation. You may be less than nothing now, but I promise by the time you leave this camp you will know the error of your ways and be able to be reborn as goodly, contributing members of society.
+
+setNPCFacing({taborIndex},SE)
+
+playAnimation({taborIndex},Attack_Normal_Front)
 
 \*Tabor cracks his whip, and Feher suffers another lash across his back.*
 
@@ -82,6 +86,8 @@ Look at Feher here. Poor Feher. His latest crime was reminiscing about horsemeat
 changeCamTarget({feherIndex})
 
 \*Sobs.*
+
+setNPCFacing({taborIndex},SW)
 
 changeCamTarget({taborIndex})
 
@@ -145,6 +151,10 @@ Exactly right! Extra rations for you.
 
 Feher still lusts in his despicable heart for horseflesh. Despite the fact that the Gods have blessed horses, as they did us, with the gift of language. Despite the fact that horses have helped build the glorious Lovashi Confederation as much as humans have. Despite the fact that we have horses in this very camp! He thought only of his own hunger, and not of the merits of others.
 
+setNPCFacing({taborIndex},SE)
+
+playAnimation({taborIndex},Attack_Normal_Front)
+
 \*Tabor cracks his whip and strikes Feher again.*
 
 changeCamTarget({feherIndex})
@@ -152,6 +162,8 @@ changeCamTarget({feherIndex})
 \*Sobs.*
 
 changeCamTarget({taborIndex})
+
+setNPCFacing({taborIndex},SW)
 
 I don't care what you did before coming to this camp. That is of no consequence to me. What I care about is that you learn from the mistakes of your past and go to your hearth a better person. One who can see all of the Gods' creations as their equal. 
 

@@ -578,48 +578,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return !costsPayable.Contains(false);
     }
 
-    public int modifyOutgoingDamage(int baseDamage)
-    {
-        int bonusDamage = 0;
-
-        foreach (Trait trait in traitContainer)
-        {
-            if (trait != null)
-            {
-                bonusDamage += trait.getBonusDamageDealt();
-            }
-        }
-
-        bonusDamage += getSynergyModifier();
-
-        return baseDamage + bonusDamage;
-    }
-
     public int modifyIncomingDamage(int baseDamage)
     {
         int modifiedDamage = (int)(((double)baseDamage) * (1.0 - Armor.getDamageReduction(getTotalArmorRating())));
 
-        foreach (Trait trait in traitContainer)
-        {
-            if (trait != null)
-            {
-                modifiedDamage = trait.addBonusDamageTaken(modifiedDamage);
-            }
-        }
-
-        foreach (Trait trait in traitContainer)
-        {
-            if (trait != null &&
-              !(trait.getName().Equals(TraitList.repositioningInvulnerability.getName()) && CombatStateManager.whoseTurn != WhoseTurn.Resolving))
-            {
-                modifiedDamage = trait.reduceDamageByPercentage(modifiedDamage);
-
-                if (modifiedDamage == 0)
-                {
-                    return 0;
-                }
-            }
-        }
+        Debug.LogError("Add vulnerability to damage somewhere in this method");
 
         modifiedDamage -= getSynergyModifier();
 
@@ -985,11 +948,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual List<StatBoostSource> getAllStatBoosts()
     {
-        List<StatBoostSource> boosts = new List<StatBoostSource>();
-
-        boosts.AddRange(StatBoostSource.getAllStatBoosts(traitContainer));
-
-        return boosts;
+        return StatBoostSource.getAllStatBoosts(traitContainer);
     }
 
     public override bool Equals(object obj)
@@ -1169,7 +1128,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName().Replace(PartyManager.playerMarker, "")));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(currentHealth.ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(currentHealth, getTotalHealth()));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getTotalArmorRatingForDisplay()));
 

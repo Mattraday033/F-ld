@@ -135,9 +135,19 @@ public class TraitContainer : StatBoostSourceCombiner, ICloneable
 
     #endregion
 
-    public List<Trait> toList()
+    public List<Trait> toListForDisplay()
     {
-        return traits;
+        List<Trait> listForDisplay = new List<Trait>();
+
+        foreach(Trait trait in this)
+        {
+            if(!trait.isHiddenTrait())
+            {
+                listForDisplay.Add(trait);
+            }
+        }
+
+        return listForDisplay;
     }
 
 }

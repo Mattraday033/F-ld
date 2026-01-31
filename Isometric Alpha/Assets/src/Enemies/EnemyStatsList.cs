@@ -68,7 +68,8 @@ public static class EnemyStatsList
                                                                                             50,
 new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.bladeBlitzKey) as Ability),
                                                                 new Trait[] { TraitList.master,
-                                                                          TraitList.territorial
+                                                                          TraitList.territorial,
+                                                                          TraitList.frontLine
                                                                             }));
 
         enemyStatsDict.Add(NPCNameList.guardAndras, new EnemyStats(NPCNameList.guardAndras,

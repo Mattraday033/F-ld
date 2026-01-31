@@ -299,7 +299,8 @@ public static class HoverMessageList
     private const string charismaMessage = "Charisma. This Primary Stat increases your Synergy, gives access to Exuberances, and boosts a character's Zone of Influence. Charisma also governs the Leadership skill.";
 
     private const string usableItemInventoryTabMessage = "Usable Items Tab.";
-    private const string usableItemOOCSubMessage = " Usable Items that can be activated out of combat can be found here.";
+    private const string usableItemOOCSubMessage = " Usable Items that can be activated out of combat can be found here. <B>To Use a Usable Item, drag the Item onto the Party Member you want to use it on.</B>";
+    private const string howToUseItemMessage = " <B>To Use a Usable Item, drag the Item onto the Party Member you want to use it on.</B>";
     private const string offHandTabMessage = "Off Hand Tab.";
     private const string armorTabKey = "Armor Tab";
     private const string armorTabMessage = "Armor Tab. Equipping Armor is the main way to boost your Armor Score and reduce incoming damage. Some Armor provides additional benefits.";
@@ -389,11 +390,11 @@ public static class HoverMessageList
                 return questSubtypeMessage;
 
             case UsableItem.typeIconName:
-                return usableSubtypeMessage + usableSubMessage;
+                return usableSubtypeMessage + usableSubMessage + howToUseItemMessage;
             case BookItem.typeIconName:
-                return bookSubtypeMessage;
+                return bookSubtypeMessage + howToUseItemMessage;
             case HealingItem.typeIconName:
-                return healingSubtypeMessage;
+                return healingSubtypeMessage + howToUseItemMessage;
 
             case TreasureItem.typeIconName:
                 return treasureSubtypeMessage;

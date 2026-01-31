@@ -67,6 +67,8 @@ public abstract class StatBoostSource : INameSource
     {
         switch (getName())
         {
+            case StatSourceNameList.halfHandStanceKey:
+                return "1";
             default:
                 return Constants.zeroRating;
         }
@@ -444,11 +446,6 @@ public abstract class StatBoostSource : INameSource
 
         #region Generic Stats
 
-        if (!boostSource.getCritFormula().Equals(Constants.zeroRating))
-        {
-            blocks.Add(DescriptionPanelBuildingBlock.getCritBlock(DamageCalculator.calculateFormula(boostSource.getCritFormula(), statsSource).ToString(), boostSource.getCritFormula()));
-        }
-
         if (!boostSource.getDamageFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getDamageBlock(DamageCalculator.calculateFormula(boostSource.getDamageFormula(), statsSource).ToString(), boostSource.getDamageFormula()));
@@ -457,6 +454,11 @@ public abstract class StatBoostSource : INameSource
         if (!boostSource.getBonusDamageFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getBonusDamageBlock(DamageCalculator.calculateFormula(boostSource.getBonusDamageFormula(), statsSource).ToString()), boostSource.getBonusDamageFormula()));
+        }
+
+        if (!boostSource.getCritFormula().Equals(Constants.zeroRating))
+        {
+            blocks.Add(DescriptionPanelBuildingBlock.getCritBlock(DamageCalculator.calculateFormula(boostSource.getCritFormula(), statsSource).ToString(), boostSource.getCritFormula()));
         }
 
         if (!boostSource.getInvulnerableFormula().Equals(Constants.zeroRating))

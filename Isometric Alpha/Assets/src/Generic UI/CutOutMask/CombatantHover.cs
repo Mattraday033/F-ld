@@ -54,6 +54,13 @@ public class CombatantHover : CombatMouseHover, IRevealable
         SelectorManager.updateAllDamagePreviews();
     }
 
+    public static bool expectedHoveringOverAbilityMenuButtonFlagState = false;
+
+    public static void setExpectedFlagState()
+    {
+        expectedHoveringOverAbilityMenuButtonFlagState = AbilityMenuButton.hoveringOverAbilityMenuButton;
+    }
+
     public void OnMouseOver()
     {
         if(TutorialSequence.blockMouseHovers() || 
@@ -63,14 +70,22 @@ public class CombatantHover : CombatMouseHover, IRevealable
             return;
         }
 
-        if(AbilityMenuButton.hoveringOverAbilityMenuButton)
+        if(AbilityMenuButton.hoveringOverAbilityMenuButton == expectedHoveringOverAbilityMenuButtonFlagState)
         {
-            getTargetStats().removeOutline();
-            SelectorManager.displayCurrentHoverUI();
+            return;
         } else
         {
-            onReveal(Constants.reveal);
-            createHoverTag();
+            if(AbilityMenuButton.hoveringOverAbilityMenuButton)
+            {
+                getTargetStats().removeOutline();
+                SelectorManager.displayCurrentHoverUI();
+            } else
+            {
+                onReveal(Constants.reveal);
+                createHoverTag();
+            }
+
+            setExpectedFlagState();
         }
     }
 

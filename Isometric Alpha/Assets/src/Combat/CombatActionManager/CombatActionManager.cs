@@ -316,8 +316,12 @@ public class CombatActionManager : MonoBehaviour
 	{
 		PlayerCombatActionManager.playerCombatActionQueue = new List<CombatAction>();
         PlayerCombatActionManager.slowedPlayerCombatActionQueue = new List<CombatAction>();
+
+        PlayerCombatActionManager.orderOfActorsAddedToQueue = new List<Stats>();
+
 		EnemyCombatActionManager.enemyCombatActionQueue = new List<CombatAction>();
         EnemyCombatActionManager.slowedEnemyCombatActionQueue = new List<CombatAction>();
+        
         SummonsCombatActionManager.alliedSummonsCombatActionQueue = new List<CombatAction>();
 		SummonsCombatActionManager.enemySummonsCombatActionQueue = new List<CombatAction>();
 	}

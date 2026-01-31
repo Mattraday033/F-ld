@@ -97,8 +97,24 @@ public class CombatAnimationManager : MonoBehaviour
         }
     }
 
+    public static void loadInstantEffect(string animationType, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead,  ScriptOnLanding landingScript, GridCoords actorCoords)
+    {
+
+        loadInstantEffect(animationType, targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
+
+        if(landingScript != null)
+        {
+            loadInvisibleProjectile(actorCoords, targetCoords, false, -1, false, true, landingScript);
+        }
+    }
+
     public static void loadInstantEffect(string animationType, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
     {
+        if(CombatGrid.combatantIsRepositionClone(targetCoords))
+        {
+            return;
+        }
+
         Stats target = CombatGrid.getCombatantAtCoords(targetCoords);
 
         if(target == null || (target.isDead() && !targetCanBeDead))
@@ -128,6 +144,11 @@ public class CombatAnimationManager : MonoBehaviour
 
     public static Projectile loadProjectile(GridCoords actorCoords, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead, ScriptOnLanding script)
     {
+        if(CombatGrid.combatantIsRepositionClone(targetCoords))
+        {
+            return null;
+        }
+
         int key = getCurrentKey();
 
         Projectile currentProjectile = Projectile.instantiatePrefab();
@@ -191,9 +212,14 @@ public class CombatAnimationManager : MonoBehaviour
         }
     }
 
-    public static void loadInvisibleProjectile(GridCoords actorCoords, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
+    public static void loadInvisibleProjectile(GridCoords actorCoords, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead, ScriptOnLanding script = null)
     {
-        Projectile projectile = loadProjectile(actorCoords, targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
+        Projectile projectile = loadProjectile(actorCoords, targetCoords, crit, damageNumber, healsTarget, targetCanBeDead, script);
+
+        if(projectile == null)
+        {
+            return;
+        }
 
         projectile.gameObject.GetComponent<SpriteRenderer>().enabled = false;
     }

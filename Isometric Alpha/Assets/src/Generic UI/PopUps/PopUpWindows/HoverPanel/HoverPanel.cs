@@ -31,7 +31,7 @@ public class HoverPanel : PopUpWindow, IEscapable
 	{
 		descriptionPanelSlot.setPrimaryDescribable(combatant);
 
-		traitDisplay.populatePanels(combatant.traitContainer.toList());
+		traitDisplay.populatePanels(combatant.traitContainer.toListForDisplay());
 		/*
 			deactivate();
 			combatant.describeStats(this);

@@ -188,7 +188,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 			return Constants.zeroRating;
 		}
 
-        return DamageCalculator.combineFormulas(getDamageFormula(), gatherAllNonActionFormulas(a => a.getDamageFormula()));
+        return gatherAllNonActionFormulas(a => a.getDamageFormula());
     }
 
     public virtual string getFinalCritFormula()
@@ -252,8 +252,6 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         }
 
         Stats actor = getActorStats();
-
-        baseDamage = actor.modifyOutgoingDamage(baseDamage);
 
         if (isCrit)
         {
@@ -341,7 +339,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
                 CombatAnimationManager.loadProjectile(getActorCoords(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead, getLandingScript());
                 break;
             case CombatAnimationType.Effect:
-                CombatAnimationManager.loadInstantEffect(getEffectAnimationType(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
+                CombatAnimationManager.loadInstantEffect(getEffectAnimationType(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead, getLandingScript(), getActorCoords());
                 break;
         }
     }

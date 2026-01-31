@@ -784,12 +784,12 @@ MonoBehaviour:
   rectTransforms:
   - {fileID: 6726128619312266876}
   - {fileID: 2688031058333170376}
-  - {fileID: 0}
   - {fileID: 3062156804071585019}
   rowParent: {fileID: 6726128619312266876}
   iconParent: {fileID: 7485364326294441447}
   fitter: {fileID: 8042152148194035035}
   formatter: {fileID: 7296700196902700887}
+  statGridLayout: {fileID: 5668077790288948580}
   nextBuilder: {fileID: 0}
   setNamePivot: 1
   maxChildren: -1
@@ -1057,7 +1057,7 @@ MonoBehaviour:
   m_CellSize: {x: 136, y: 30}
   m_Spacing: {x: 0, y: 10}
   m_Constraint: 0
-  m_ConstraintCount: 2
+  m_ConstraintCount: 3
 --- !u!1 &7514882402020980256
 GameObject:
   m_ObjectHideFlags: 0

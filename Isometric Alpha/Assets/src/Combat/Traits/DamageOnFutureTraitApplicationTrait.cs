@@ -34,10 +34,10 @@ public class DamageOnFutureTraitApplicationTrait : Trait
 		this.triggerType = triggerType;
 	}
 	
-	public override int getBonusDamageDealt()
-	{
-		return -1*DamageCalculator.calculateFormula(damagePenaltyFormula, traitApplier);
-	}
+	// public override int getBonusDamageDealt()
+	// {
+	// 	return -1*DamageCalculator.calculateFormula(damagePenaltyFormula, traitApplier);
+	// }
 	
 	public override int damageOnDebuffApplication()
 	{

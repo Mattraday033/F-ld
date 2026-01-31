@@ -137,7 +137,7 @@ public static class TraitList
 	public readonly static Trait shoredUp = new ShieldTrait(StatSourceNameList.shoredUpKey, TraitType.Boost, "This creature only takes half of any damage dealt to it.", "Shielded", roundsLeft: Constants.twoRoundDuration, shieldedDamageReduction);
 	public readonly static Trait exitStrategy = new ShieldTrait(StatSourceNameList.exitStrategyKey, TraitType.Protection, "This creature and all of it's allies take 60% less damage until one round after the surprise round.", "ExitStrategy", roundsLeft: Constants.oneRoundDuration, exitStrategyDamageReduction); //exception to round duration rule because it's applied at the top of the first round and thus doesn't need to compensate for the first tick down.
 	public readonly static LinkTrait chokeholdLinkTrait = new LinkTrait(StatSourceNameList.chokeholdKey, "This creature deals half of all damage received to whoever it is linked to.", "Chokehold", Constants.twoRoundDuration, chokeholdDamagePercentage);
-	public readonly static Trait rallied = new DamageBoostTrait(StatSourceNameList.ralliedKey, iconName: "Rally", roundsLeft: Constants.fourRoundDuration);
+	public readonly static Trait rallied = new DamageBoostTrait(StatSourceNameList.ralliedKey, iconName: "Rally", roundsLeft: Constants.fourRoundDuration, permanent: false);
 	public readonly static Trait chew = new DamageBoostTrait(chewKey, iconName: chewKey, roundsLeft: Constants.threeRoundDuration);
 
 

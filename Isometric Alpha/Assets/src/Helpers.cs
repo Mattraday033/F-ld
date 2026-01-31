@@ -389,6 +389,11 @@ public static class Helpers
 
     public static Sprite loadSpriteFromResources(string spriteName)
     {
+        if(spriteName == null)
+        {
+            return null;
+        }
+
         if (spriteName.Equals(IconList.actionTypeIconName) ||
             spriteName.Equals(IconList.traitTypeIconName) ||
             spriteName.Equals(IconList.armorTypeIconName))

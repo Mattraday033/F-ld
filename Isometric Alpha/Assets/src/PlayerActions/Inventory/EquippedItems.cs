@@ -24,6 +24,8 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable
         this.owner = owner;
         this.equippedItems = equippedItems;
 
+        checForEmptyOffHandSlot();
+
         foreach (EquippableItem equippedItem in equippedItems)
         {
             if (equippedItem != null)
@@ -47,6 +49,15 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable
         }
 
         return ItemList.getOffHandFist();
+    }
+
+    public void checForEmptyOffHandSlot()
+    {
+        if(equippedItems[Weapon.offHandSlotIndex] == null)
+        {
+            equippedItems[Weapon.offHandSlotIndex] = ItemList.getOffHandFist();
+        }
+
     }
 
     public void equipItem(EquippableItem item)
@@ -128,6 +139,8 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable
                 equippedItems[item.getSlotID()].equipTarget = null;
                 equippedItems[item.getSlotID()] = null;
             }
+
+        checForEmptyOffHandSlot();
 
         OnEquipmentChange.Invoke();
     }

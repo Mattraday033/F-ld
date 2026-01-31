@@ -437,7 +437,7 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 
 	public virtual GameObject getDecisionPanel()
 	{
-		return Resources.Load<GameObject>(PrefabNames.itemDecisionButtons);
+		return null;
 	}
 
 	public virtual GameObject getDescriptionPanelFull()
@@ -547,7 +547,7 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 
     public bool requiresInspectNode()
     {
-        return false;
+        return true;
     }
 
     //Shopkeeping Methods

@@ -13,6 +13,8 @@ public class StatsDescriptionPanelBuilder : DescriptionPanelBuilder
 
     public GridLayoutGroup secondaryGridLayout;
 
+    private List<Transform> parents = new List<Transform>();
+
     public float numberOfTilesPerRow = 4f;
 
     protected virtual void Awake()
@@ -20,6 +22,22 @@ public class StatsDescriptionPanelBuilder : DescriptionPanelBuilder
         filter = new BuilderFilterWhiteList(new List<DescriptionPanelBuildingBlockType>() { DescriptionPanelBuildingBlockType.PrimaryStat, DescriptionPanelBuildingBlockType.SecondaryStat });
 
         setGridLayoutSize();
+    
+        parents.Add(primaryStatParent);
+        parents.Add(secondaryStatParent);
+    }
+
+    public override void buildDescriptionPanel(IDescribableInBlocks blockOrigin, BlockFormat format)
+    {
+        base.buildDescriptionPanel(blockOrigin, format);
+
+        foreach(Transform parentTransform in parents)
+        {
+            if(parentTransform != null && parentTransform.childCount == 0)
+            {
+                parentTransform.parent.gameObject.SetActive(false);
+            }
+        }
     }
 
     public override Transform getParent(DescriptionPanelBuildingBlock block)

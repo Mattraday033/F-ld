@@ -119,7 +119,7 @@ public class Formula
 
     public string getFormula()
     {
-        string output = "";
+        string output = Constants.emptyString;
 
         output += getSectionOfFormula(PrimaryStat.Strength, output.Length > 0);
         output += getSectionOfFormula(PrimaryStat.Dexterity, output.Length > 0);
@@ -127,12 +127,17 @@ public class Formula
         output += getSectionOfFormula(PrimaryStat.Charisma, output.Length > 0);
         output += getSectionOfFormula(PrimaryStat.None, output.Length > 0);
 
+        if(output.Equals(Constants.emptyString))
+        {
+            output = Constants.zeroRating;
+        }
+
         return output;
     }
 
     public string getFormulaInverted()
     {
-        string output = "";
+        string output = Constants.emptyString;
 
         output += getSectionOfFormula(PrimaryStat.Strength, output.Length > 0);
 
@@ -196,12 +201,17 @@ public class Formula
             output += bonusSection.Replace(minusChar+"", "");
         }
 
+        if(output.Equals(Constants.emptyString))
+        {
+            output = Constants.zeroRating;
+        }
+
         return output;
     }
 
     private string getSectionOfFormula(PrimaryStat key, bool sectionAdded)
     {
-        string output = "";
+        string output = Constants.emptyString;
 
         if(formulaDict.ContainsKey(key) && 
             formulaDict[key] != 0)
@@ -286,6 +296,20 @@ public class Formula
         }
 
         return formulaDict[PrimaryStat.None];
+    }
+
+    public string multiplyFormula(int multiplier)
+    {
+        Dictionary<PrimaryStat, int> newFormulaDict = new Dictionary<PrimaryStat, int>();
+
+        foreach(KeyValuePair<PrimaryStat, int> kvp in formulaDict)
+        {
+            newFormulaDict[kvp.Key] = formulaDict[kvp.Key] * multiplier;
+        }
+
+        formulaDict = newFormulaDict;
+
+        return getFormula();
     }
 
     private static bool characterIsStatMarker(char character)
@@ -450,6 +474,13 @@ public static class DamageCalculator
         Formula formula = new Formula(f1);
 
         return formula.getFormulaInverted();
+    }
+
+    public static string multiplyFormula(string f1, int multiplier)
+    {
+        Formula formula = new Formula(f1);
+
+        return formula.multiplyFormula(multiplier);
     }
 
 	/* idea for universal findFinalDamage, may not use

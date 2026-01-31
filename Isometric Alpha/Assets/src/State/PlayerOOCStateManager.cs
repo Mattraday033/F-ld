@@ -29,6 +29,8 @@ public static class PlayerOOCStateManager
     public static OOCActivity currentActivity { get; private set; }
     public static OOCActivity previousActivity { get; private set; }
 
+    public readonly static UnityEvent OnStateChange = new UnityEvent();
+
     public readonly static UnityEvent OnStateChangeToWalking = new UnityEvent();
     public readonly static UnityEvent OnStateChangeFromWalking = new UnityEvent();
 
@@ -154,16 +156,12 @@ public static class PlayerOOCStateManager
         {
             case OOCActivity.walking:
                 OnStateChangeToWalking.Invoke();
-                //EscapeStack.escapeAll();
-                OOCUIManager.updateOOCUI();
-                if(previousActivity != OOCActivity.inFade)
-                {
-                    PartyMemberTrainManager.showPartyMemberTrain();
-                }
+                // if(previousActivity != OOCActivity.inFade)
+                // {
+                //     PartyMemberTrainManager.showPartyMemberTrain();
+                // }
                 break;
             case OOCActivity.inDialogue:
-                PartyMemberTrainManager.createPartyMemberTrain();
-                PartyMemberTrainManager.hidePartyMemberTrain();
                 OnStateChangeToInDialogue.Invoke();
                 break;
             case OOCActivity.inUI:
@@ -202,6 +200,8 @@ public static class PlayerOOCStateManager
                 OnStateChangeToInWorldMap.Invoke();
                 break;
         }
+
+        OnStateChange.Invoke();
 
         PlayerObject.setButtonPromptVisibility(Constants.indexZero);
     }

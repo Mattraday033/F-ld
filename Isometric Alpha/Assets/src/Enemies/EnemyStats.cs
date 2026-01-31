@@ -179,6 +179,11 @@ public class EnemyStats : Stats
     {
         Trait linkedTrait = Helpers.getObjectWithQuality<Trait>(traitContainer, t => t.getLinkedPercentage() > 0.0);
 
+        if(linkedTrait == null)
+        {
+            return 0.0;
+        }
+
         return linkedTrait.getLinkedPercentage();
     }
 
@@ -234,7 +239,7 @@ public class EnemyStats : Stats
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(currentHealth + " / " + getTotalHealth()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(currentHealth, getTotalHealth()));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getTotalArmorRatingForDisplay()));
 

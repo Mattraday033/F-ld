@@ -34,6 +34,7 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
     private static void initializeOOCUIManager()
     {
         instance = null;
+        PlayerOOCStateManager.OnStateChangeToWalking.AddListener(updateOOCUI);
     }
 
     public static void updateCharacterLevelUpCounter()

@@ -106,7 +106,7 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKey(KeyBindingList.showHideKeyBindingsListKey) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             KeyPressManager.handlingPrimaryKeyPress = true;
-            OOCKeyBindingListDisplayManager.toggleKeyBindingList();
+            CombatInputManager.OnHideKeyBindingsList.Invoke();
         }
 
         if (KeyBindingList.quickLoadKeysPressed() && !KeyPressManager.handlingPrimaryKeyPress)

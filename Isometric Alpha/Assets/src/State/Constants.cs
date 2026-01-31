@@ -100,6 +100,7 @@ public static class Constants
 
     public const int resistanceBonusPerTier = 3;
 
+    public const float minFontSize = 12f;
 	public const float maxOpacity = 255f;
 
     #region Creature Amounts

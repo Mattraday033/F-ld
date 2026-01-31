@@ -175,7 +175,8 @@ public static class GateSpawnInfoList
                                     new Vector3Int(5, 1),
                                     PrefabNames.lowRubble,
                                     Constants.sizeThree,
-                                    Axis.DescendingY));
+                                    Axis.DescendingY,
+                                    useRubbleColor: useRubbleColor));
 
         gateSpawnInfoDict.Add(ZoneKeyList.mineLvl1 + LocationNameList.section1b, list);
 

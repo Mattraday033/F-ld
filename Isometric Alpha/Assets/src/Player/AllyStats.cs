@@ -331,7 +331,7 @@ public class AllyStats : Stats
     {
         int bonusFormulas = StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusCriticalDamageMultiplierFormula());
 
-        return (getStrength() * Strength.critDamMultPerStrength) + bonusFormulas + "%";
+        return (getStrength() * Strength.critDamMultPerStrength) + bonusFormulas + (DamageCalculator.baseCriticalDamage * 100) + "%";
     }
 
     public double getPhysicalResistance()

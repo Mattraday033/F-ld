@@ -84,11 +84,6 @@ public abstract class EquippableItem : Item, IJSONConvertable
         return false;
     }
 
-    public override GameObject getDecisionPanel()
-    {
-        return Resources.Load<GameObject>(PrefabNames.equippableDecisionButtons);
-    }
-
     public override void describeSelfFull(DescriptionPanel panel)
     {
         base.describeSelfFull(panel);

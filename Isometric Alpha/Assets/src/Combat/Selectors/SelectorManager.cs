@@ -295,8 +295,8 @@ public class SelectorManager : MonoBehaviour
 			{
 				if (loadedCombatAction.targetsAllySection())
 				{
-					if (currentSelector.hasAtLeastOneLivingTarget(allyTagCriteria) && 
-                        !(currentSelector.getAllSelectorCoords().Contains(loadedCombatAction.getActorCoords()) && !loadedCombatAction.repositionsCaster()))
+					if (currentSelector.hasAtLeastOneLivingTarget(allyTagCriteria))
+                    //  && !(currentSelector.getAllSelectorCoords().Contains(loadedCombatAction.getActorCoords()) && !loadedCombatAction.repositionsCaster()))
 					{
 						instance.finishChoosingLocation(loadedCombatAction);
 					}

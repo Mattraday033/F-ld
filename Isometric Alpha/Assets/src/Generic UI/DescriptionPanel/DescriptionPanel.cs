@@ -132,6 +132,20 @@ public class DescriptionPanel : MonoBehaviour
 		}
 	}
 
+	public static void setTextAutoSize(TextMeshProUGUI tmpTextObject, bool autoSize)
+	{
+		if(tmpTextObject != null && !(tmpTextObject is null))
+		{
+            if(autoSize)
+            {
+                tmpTextObject.fontSizeMax = tmpTextObject.fontSize;
+                tmpTextObject.fontSizeMin = Constants.minFontSize;
+            }
+
+			tmpTextObject.enableAutoSizing = autoSize;
+		}
+	}
+
     public static void setTextColor(TextMeshProUGUI tmpTextObject, Color color)
     {
         if (tmpTextObject != null && !(tmpTextObject is null))

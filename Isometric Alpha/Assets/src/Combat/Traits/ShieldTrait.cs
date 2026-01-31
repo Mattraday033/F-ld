@@ -43,6 +43,11 @@ public class HiddenShieldTrait : ShieldTrait
     {
     }
 
+    public override bool isHiddenTrait()
+    {
+        return true;
+    }
+
     public override void setIdleAnimationOnApplication(AnimationManager animationManager)
     {
         //empty on purpose

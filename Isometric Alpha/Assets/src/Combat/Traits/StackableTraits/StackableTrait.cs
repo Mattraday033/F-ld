@@ -172,15 +172,197 @@ public class StackableTrait: Trait
         }
     }
 
-    public override int getBonusDamageDealt()
+    #region Generic Stats
+
+    public override string getArmorFormula()
     {
-        return Helpers.sum<Trait>(baseTraits, t => t.getBonusDamageDealt() * getNumberOfStacks());
+        return DamageCalculator.multiplyFormula(base.getArmorFormula(), getNumberOfStacks());
     }
 
-    public override int getBonusDamageTaken()
-	{
-        return Helpers.sum<Trait>(baseTraits, t => t.getBonusDamageTaken() * getNumberOfStacks());
+    public override string getCritFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getCritFormula(), getNumberOfStacks());
     }
+
+    public override string getBonusDamageFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusDamageFormula(), getNumberOfStacks());
+    }
+
+    public override string getDamageFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getDamageFormula(), getNumberOfStacks());
+    }
+
+    public override string getInvulnerableFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getInvulnerableFormula(), getNumberOfStacks());
+    }
+
+    public override string getVulnerableFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getVulnerableFormula(), getNumberOfStacks());
+    }
+
+    #endregion
+
+    #region PrimaryStats
+
+    public override string getBonusStrengthFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusStrengthFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusDexterityFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusDexterityFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusWisdomFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusWisdomFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusCharismaFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusCharismaFormula(), getNumberOfStacks());
+    }
+
+    #endregion
+
+    #region Secondary Stats
+
+    //Strength Stats
+    public override string getBonusPhysicalResistanceFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusPhysicalResistanceFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusCriticalDamageMultiplierFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusCriticalDamageMultiplierFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusHealthFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusHealthFormula(), getNumberOfStacks());
+    }
+
+    //Dexterity Stats
+    public override string getBonusSurpriseRoundDamageFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusSurpriseRoundDamageFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusArmorFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusArmorFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusArmorPenetrationFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusArmorPenetrationFormula(), getNumberOfStacks());
+    }
+
+    //Wisdom Stats
+    public override string getBonusPassiveSlotsFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusPassiveSlotsFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusWeaponSlotsFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusWeaponSlotsFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusMentalResistanceFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusMentalResistanceFormula(), getNumberOfStacks());
+    }
+
+    //Charisma Stats
+    public override string getBonusSynergyFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusSynergyFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusExuberancesFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusExuberancesFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusZOIPotencyFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusZOIPotencyFormula(), getNumberOfStacks());
+    }
+
+    #endregion
+
+    #region Party Stats
+
+    public override string getBonusRegenFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusRegenFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusSurpriseRoundsFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusSurpriseRoundsFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusRetreatChanceFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusRetreatChanceFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusPartyActionsFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusPartyActionsFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusPartySlotsFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusPartySlotsFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusGoldMultiplierFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusGoldMultiplierFormula(), getNumberOfStacks());
+    }
+    
+    public override string getBonusDiscountFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusDiscountFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusVolleyAccuracyFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusVolleyAccuracyFormula(), getNumberOfStacks());
+    }
+
+    #endregion
+
+    #region Skills
+    public override string getBonusIntimidateChargesFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusIntimidateChargesFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusCunningChargesFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusCunningChargesFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusObservationLevelFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusObservationLevelFormula(), getNumberOfStacks());
+    }
+
+    public override string getBonusLeadershipUsesFormula()
+    {
+        return DamageCalculator.multiplyFormula(base.getBonusLeadershipUsesFormula(), getNumberOfStacks());
+    }
+    #endregion
 
     public override bool hasActionCostType(ActionCostType typeToCheckFor)
     {

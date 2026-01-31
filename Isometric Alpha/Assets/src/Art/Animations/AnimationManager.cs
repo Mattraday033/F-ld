@@ -100,8 +100,9 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public virtual bool spriteSetByHeartBeat()
     {
-        return (!CombatStateManager.inCombat && !PlayerMovement.getInstance().canPlayRunAnimation()) || 
-                (CombatStateManager.inCombat && !CombatAnimationManager.trackerBeingTracked(this) && !healthBarManager.linkedStats.isDead());
+        return !CombatAnimationManager.trackerBeingTracked(this) && 
+                ((!CombatStateManager.inCombat && !PlayerMovement.getInstance().canPlayRunAnimation()) || 
+                (CombatStateManager.inCombat && !healthBarManager.linkedStats.isDead()));
     }
 
     public void setCurrentIdle(CharacterAnimationType newIdle)
@@ -806,6 +807,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             case CharacterAnimationType.Attack_Normal_Back:
             case CharacterAnimationType.Attack_Special:
                 return CharacterAnimationType.Attack_Normal;
+            case CharacterAnimationType.Attack_Normal:
+                return CharacterAnimationType.Attack_Normal_Front;
             default:
                 Debug.LogError("No Animation Type in animationDict: " + animationType.ToString());
                 return animationType;

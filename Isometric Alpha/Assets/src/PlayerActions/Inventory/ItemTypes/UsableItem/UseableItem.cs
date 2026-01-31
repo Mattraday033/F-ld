@@ -189,7 +189,7 @@ public class UsableItem : Item, IJSONConvertable
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getUseDescription()));
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getLoreDescription()));
 
-        if (getIconName() != null && !(getIconName() is null) && getIconName().Length > 0)
+        if (getIconName() != null && getIconName().Length > 0 && !getIconName().Equals(getTypeIconName()))
         {
             buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getIconName()));
         }
@@ -199,7 +199,7 @@ public class UsableItem : Item, IJSONConvertable
         return buildingBlocks;
     }
 
-    public virtual bool fitsUseCriteria(Stats target)
+    public override bool fitsUseCriteria(Stats target)
     {
         return true;
     }

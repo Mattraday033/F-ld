@@ -197,7 +197,7 @@ You're the one who approached me and asked questions. If you're not willing to l
 
 setToTrue(knowBalintIsFromCarnassus)
 
-I was a scholar of some reknown back in Carnassus. I lived comfortably, and spent my days writing treatise on a variety of subjects. The Riding Folk conquests; new irrigation methods; proper quillwork technique. I even dabbled as a playwrite, if you'd believe it.
+I was a scholar of some reknown back in Carnassus. I lived comfortably, and spent my days writing essays on a variety of subjects. The Riding Folk conquests; new irrigation methods; proper quillwork technique. I even dabbled as a playwrite, if you'd believe it.
 
     +I already have questions.
         ->2ea

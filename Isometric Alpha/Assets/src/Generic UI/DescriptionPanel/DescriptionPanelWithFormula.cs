@@ -88,28 +88,25 @@ public class DescriptionPanelWithFormula : DescriptionPanel
             if (damageTotal == null || damageTotal.Length <= 0)
             {
                 damageTotal = damageText.text;
-                oldFontSize = damageText.fontSize;
             }
 
             if (critTotal == null || critTotal.Length <= 0)
             {
                 critTotal = critRatingText.text;
-                oldFontSize = critRatingText.fontSize;
             }
 
             if (armorTotal == null || armorTotal.Length <= 0)
             {
                 armorTotal = armorRatingText.text;
-                oldFontSize = armorRatingText.fontSize;
             }
 
             DescriptionPanel.setText(damageText, damageFormula);
             DescriptionPanel.setText(critRatingText, critFormula);
             DescriptionPanel.setText(armorRatingText, armorFormula);
 
-            DescriptionPanel.adjustTextFontSize(damageText, fontSizeModifier);
-            DescriptionPanel.adjustTextFontSize(critRatingText, fontSizeModifier);
-            DescriptionPanel.adjustTextFontSize(armorRatingText, fontSizeModifier);
+            // DescriptionPanel.adjustTextFontSize(damageText, fontSizeModifier);
+            // DescriptionPanel.adjustTextFontSize(critRatingText, fontSizeModifier);
+            // DescriptionPanel.adjustTextFontSize(armorRatingText, fontSizeModifier);
 
         }
         else
@@ -118,10 +115,14 @@ public class DescriptionPanelWithFormula : DescriptionPanel
             DescriptionPanel.setText(critRatingText, critTotal);
             DescriptionPanel.setText(armorRatingText, armorTotal);
 
-            DescriptionPanel.setTextFontSize(damageText, oldFontSize);
-            DescriptionPanel.setTextFontSize(critRatingText, oldFontSize);
-            DescriptionPanel.setTextFontSize(armorRatingText, oldFontSize);
+            // DescriptionPanel.setTextFontSize(damageText, oldFontSize);
+            // DescriptionPanel.setTextFontSize(critRatingText, oldFontSize);
+            // DescriptionPanel.setTextFontSize(armorRatingText, oldFontSize);
         }
+
+        DescriptionPanel.setTextAutoSize(damageText, OverallUIManager.showFormula);
+        DescriptionPanel.setTextAutoSize(critRatingText, OverallUIManager.showFormula);
+        DescriptionPanel.setTextAutoSize(armorRatingText, OverallUIManager.showFormula);
     }
 
 }

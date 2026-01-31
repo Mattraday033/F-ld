@@ -208,8 +208,8 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 55
-  m_PreferredHeight: 55
+  m_PreferredWidth: 50
+  m_PreferredHeight: 50
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
@@ -345,5 +345,7 @@ MonoBehaviour:
   disableArrow: 0
   image: {fileID: 7298907026656628428}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  secondaryImage: {fileID: 0}
+  skipCutOutMask: 0
   _UseUIScaleOverride: 1
   descriptionPanel: {fileID: 1315430121420685169}

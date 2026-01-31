@@ -151,7 +151,7 @@ public class BookItem : UsableItem
 
 	public override string getIconName()
 	{
-		return "";
+		return getTypeIconName();
 	}
 
 

@@ -82,7 +82,7 @@ public class CombatInputManager : MonoBehaviour
 
 			case CurrentActivity.ChoosingAbility:
 
-				if (SelectorManager.hasCurrentlyVisibleAbilityManager() && KeyBindingList.eitherBackoutKeyIsPressed())
+				if (SelectorManager.hasCurrentlyVisibleAbilityManager() && Input.GetKey(KeyBindingList.backOutKey2) && !KeyPressManager.handlingPrimaryKeyPress)
 				{
 					SelectorManager.deselectAlly();
 
@@ -90,6 +90,15 @@ public class CombatInputManager : MonoBehaviour
 
 					KeyPressManager.handlingPrimaryKeyPress = true;
 				}
+
+				if (Input.GetKey(KeyBindingList.backOutKey1) && !KeyPressManager.handlingPrimaryKeyPress)
+                {
+                    escapeButton.spawnPopUp();
+
+                    KeyPressManager.handlingPrimaryKeyPress = true;
+                    return;
+                }
+
 
 				break;
 
@@ -101,11 +110,19 @@ public class CombatInputManager : MonoBehaviour
 					KeyPressManager.handlingPrimaryKeyPress = true;
 				}
 
-				if (SelectorManager.hasCurrentAbilityManager() && KeyBindingList.eitherBackoutKeyIsPressed() && !KeyPressManager.handlingPrimaryKeyPress)
+				if (SelectorManager.hasCurrentAbilityManager() && Input.GetKey(KeyBindingList.backOutKey2) && !KeyPressManager.handlingPrimaryKeyPress)
                 {
                     SelectorManager.backOutOfAbilityMenu();
 
                     KeyPressManager.handlingPrimaryKeyPress = true;
+                }
+
+				if (Input.GetKey(KeyBindingList.backOutKey1) && !KeyPressManager.handlingPrimaryKeyPress)
+                {
+                    escapeButton.spawnPopUp();
+
+                    KeyPressManager.handlingPrimaryKeyPress = true;
+                    return;
                 }
 
 				break;
@@ -118,12 +135,20 @@ public class CombatInputManager : MonoBehaviour
 					KeyPressManager.handlingPrimaryKeyPress = true;
 				}
 
-				if (SelectorManager.hasCurrentlyVisibleAbilityManager() && KeyBindingList.eitherBackoutKeyIsPressed() && !KeyPressManager.handlingPrimaryKeyPress)
+				if (SelectorManager.hasCurrentlyVisibleAbilityManager() && Input.GetKey(KeyBindingList.backOutKey2) && !KeyPressManager.handlingPrimaryKeyPress)
 				{
                     SelectorManager.backOutOfTertiaryLocationSelection();
 
 					KeyPressManager.handlingPrimaryKeyPress = true;
 				}
+
+				if (Input.GetKey(KeyBindingList.backOutKey1) && !KeyPressManager.handlingPrimaryKeyPress)
+                {
+                    escapeButton.spawnPopUp();
+
+                    KeyPressManager.handlingPrimaryKeyPress = true;
+                    return;
+                }
 
 				break;
 

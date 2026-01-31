@@ -126,6 +126,8 @@ public static class ColorList
         rubbleColorDict.Add(LocationNameList.slaveShackEight, shackRubbleColor);
         rubbleColorDict.Add(LocationNameList.slaveShackNine, shackRubbleColor);
 
+        rubbleColorDict.Add(ZoneKeyList.mineLvl1, shackRubbleColor);
+
         rubbleColorDict.Add(ZoneKeyList.mineLvl2, mineLvl2RubbleColor);
 
         rubbleColorDict.Add(ZoneKeyList.mineLvl3, mineLvl3RubbleColor);

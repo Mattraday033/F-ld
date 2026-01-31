@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ public class PlayerCombatActionManager : MonoBehaviour
 {	
 	public static List<CombatAction> playerCombatActionQueue = new List<CombatAction>();
 	public static List<CombatAction> slowedPlayerCombatActionQueue = new List<CombatAction>();
-	public static List<Stats> orderOfActionsAddedToQueue = new List<Stats>();
+	public static List<Stats> orderOfActorsAddedToQueue = new List<Stats>();
 
 	public CombatStateManager combatStateManager;
 	
@@ -27,7 +28,7 @@ public class PlayerCombatActionManager : MonoBehaviour
     {
         playerCombatActionQueue = new List<CombatAction>();
 	    slowedPlayerCombatActionQueue = new List<CombatAction>();
-	    orderOfActionsAddedToQueue = new List<Stats>();
+	    orderOfActorsAddedToQueue = new List<Stats>();
 
         instance = null;
     }
@@ -56,7 +57,7 @@ public class PlayerCombatActionManager : MonoBehaviour
             playerCombatActionQueue.Add(action);
         }
 		
-        orderOfActionsAddedToQueue.Add(action.actorStats);
+        orderOfActorsAddedToQueue.Add(action.actorStats);
 
 		CombatUI.populateCombatActionPanels();
 		
@@ -73,7 +74,7 @@ public class PlayerCombatActionManager : MonoBehaviour
     public static bool playerHasActionsInQueue()
     {
         return playerCombatActionQueue.Count > 0 || slowedPlayerCombatActionQueue.Count > 0 || 
-            orderOfActionsAddedToQueue.Count > 0;
+            orderOfActorsAddedToQueue.Count > 0;
     }
 
 	public static void removeLastCombatActionFromPlayerCombatActionQueue()
@@ -83,8 +84,8 @@ public class PlayerCombatActionManager : MonoBehaviour
 			return;
 		}
 
-        Stats actorToRemoveFromQueue = orderOfActionsAddedToQueue[orderOfActionsAddedToQueue.Count-1];
-        orderOfActionsAddedToQueue.RemoveAt(orderOfActionsAddedToQueue.Count-1);
+        Stats actorToRemoveFromQueue = orderOfActorsAddedToQueue[orderOfActorsAddedToQueue.Count-1];
+        orderOfActorsAddedToQueue.RemoveAt(orderOfActorsAddedToQueue.Count-1);
 
         List<CombatAction> currentActionQueue;
 
@@ -96,22 +97,28 @@ public class PlayerCombatActionManager : MonoBehaviour
             currentActionQueue = playerCombatActionQueue;
         }
 
-		CombatAction actionToBeRemoved = currentActionQueue[currentActionQueue.Count - 1];
+        try
+        {
+            CombatAction actionToBeRemoved = currentActionQueue[currentActionQueue.Count - 1];
 
-		actionToBeRemoved.unqueueingAction();
+            actionToBeRemoved.unqueueingAction();
 
-		currentActionQueue.RemoveAt(currentActionQueue.Count - 1);
+            currentActionQueue.RemoveAt(currentActionQueue.Count - 1);
 
-		if (CombatStateManager.currentActivity == CurrentActivity.Finished)
-		{
-			CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
-		}
+            if (CombatStateManager.currentActivity == CurrentActivity.Finished)
+            {
+                CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
+            }
 
-		CombatUI.populateCombatActionPanels();
+            CombatUI.populateCombatActionPanels();
 
-		CombatUI.checkAndSetResolveTurnButtonInteractability();
-		
-		SelectorManager.createPressEPrompt();
+            CombatUI.checkAndSetResolveTurnButtonInteractability();
+            
+            SelectorManager.createPressEPrompt();
+        } catch(Exception e)
+        {
+            Debug.LogError("Exception found");
+        }
 	}
 
 	public void queueCombatActionWithTertiary(Selector actorSelector, Selector tertiarySelector, CombatAction action)
@@ -132,7 +139,7 @@ public class PlayerCombatActionManager : MonoBehaviour
             playerCombatActionQueue.Add(action);
         }
 		
-        orderOfActionsAddedToQueue.Add(action.actorStats);
+        orderOfActorsAddedToQueue.Add(action.actorStats);
 		
 		CombatUI.populateCombatActionPanels();
 		
@@ -143,14 +150,14 @@ public class PlayerCombatActionManager : MonoBehaviour
 
 	public static void removeAllPlayerActions()
 	{
-		for(int index = orderOfActionsAddedToQueue.Count-1; index >= 0 && orderOfActionsAddedToQueue.Count > 0; index--)
+		for(int index = orderOfActorsAddedToQueue.Count-1; index >= 0 && orderOfActorsAddedToQueue.Count > 0; index--)
 		{
 			removeLastCombatActionFromPlayerCombatActionQueue();
 		}
 
         playerCombatActionQueue = new List<CombatAction>();
 	    slowedPlayerCombatActionQueue = new List<CombatAction>();
-	    orderOfActionsAddedToQueue = new List<Stats>();
+	    orderOfActorsAddedToQueue = new List<Stats>();
 	}
 
     public static bool actorHasActionsInQueue(Stats actor)

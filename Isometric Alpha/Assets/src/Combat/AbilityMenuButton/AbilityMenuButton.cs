@@ -300,6 +300,8 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         abilityIcon.color = ColorList.greyedOutIconColor;
         iconBackground.color = ColorList.greyedOutBackgroundColor;
 
+        disableButtonComponent();
+
         Helpers.updateGameObjectPosition(abilityIcon.gameObject);
         Helpers.updateGameObjectPosition(iconBackground.gameObject);
     }
@@ -312,6 +314,8 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         abilityIcon.color = Color.white;
         iconBackground.color = Color.black;
+
+        enableButtonComponent();
 
         Helpers.updateGameObjectPosition(abilityIcon.gameObject);
         Helpers.updateGameObjectPosition(iconBackground.gameObject);

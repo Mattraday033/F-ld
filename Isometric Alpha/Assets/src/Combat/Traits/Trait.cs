@@ -197,39 +197,6 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         return false;
     }
 
-    public virtual int getBonusDamageDealt()
-    {
-        return 0;
-    }
-
-    public int addBonusDamageDealt(int damage)
-    {
-        int modifiedDamage = damage;
-
-        modifiedDamage += getBonusDamageDealt();
-
-        return modifiedDamage;
-    }
-
-    public virtual int getBonusCritChance()
-    {
-        return 0;
-    }
-
-    public virtual int getBonusDamageTaken()
-    {
-        return 0;
-    }
-
-    public int addBonusDamageTaken(int damage)
-    {
-        int modifiedDamage = damage;
-
-        modifiedDamage += getBonusDamageTaken();
-
-        return modifiedDamage;
-    }
-
     public virtual void removeStacks(ActionCostType costType, int stacksToRemove)
     {
         //empty on purpose
@@ -248,15 +215,6 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
     public virtual bool preventsCombatAction()
     {
         return false;
-    }
-
-    public int reduceDamageByPercentage(int damage)
-    {
-        int modifiedDamage = damage;
-
-        modifiedDamage = (int)(((double)modifiedDamage) * (1.0 - getPercentageDamageReduction()));
-
-        return modifiedDamage;
     }
 
     public virtual double getPercentageDamageReduction()
@@ -405,6 +363,11 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
             return OverallUIManager.getCurrentPartyMember();
         }
 
+        if(CombatStateManager.inCombat && traitApplier == null && SelectorManager.currentAbilityManager != null)
+        {
+            return SelectorManager.currentAbilityManager.actionArraySource;
+        }
+
         return traitApplier;
     }
 
@@ -510,16 +473,6 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
     {
         string panelTypeName = "";
 
-        switch (panelType)
-        {
-            case PanelType.Standard:
-            case PanelType.CombatHover:
-                panelTypeName = PrefabNames.traitHoverDescriptionPanel;
-                break;
-            default:
-                throw new IOException("Unknown PanelType: " + panelType);
-        }
-
         return DescriptionPanel.getDescriptionPanel(panelTypeName);
     }
 
@@ -583,9 +536,9 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getTraitTypeBlock(getType()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getMaxRoundsLeftForDisplay()));
-
         buildingBlocks.AddRange(getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
+
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getMaxRoundsLeftForDisplay()));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getDescription()));
 

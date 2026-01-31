@@ -95,12 +95,12 @@ public class KnockBackAbility : RepositionEnemyAbility
             return;
         }
 
-        Stats combatantToBeMoved = (Stats)targets[targetCombatantIndex];
+        Stats combatantToBeMoved = targets[targetCombatantIndex];
         Stats combatantLandedOn = null;
 
         if (targets.Count > 1)
         {
-            combatantLandedOn = (Stats)targets[landingCombatantIndex];
+            combatantLandedOn = targets[landingCombatantIndex];
         }
 
 
@@ -118,7 +118,7 @@ public class KnockBackAbility : RepositionEnemyAbility
                 applyTrait(combatantLandedOn);
                 sendProjectileAt(combatantLandedOn.position, combatantLandedOn, 1);
             }
-            projectileCount = 0;
+            // projectileCount = 0;
         }
     }
 
@@ -135,18 +135,23 @@ public class KnockBackAbility : RepositionEnemyAbility
         }
     }
 
-    private static int projectileCount = 0;
-    public override CombatAnimationType getCombatAnimationType()
+    public override string getEffectAnimationType()
     {
-        projectileCount++;
-        if(projectileCount % 2 == 0)
-        {
-            return CombatAnimationType.None;
-        } else
-        {
-            return CombatAnimationType.Projectile;   
-        }
+        return EffectAnimationType.Blunt.ToString();
     }
+
+    // private static int projectileCount = 0;
+    // public override CombatAnimationType getCombatAnimationType()
+    // {
+    //     projectileCount++;
+    //     if(projectileCount % 2 == 0)
+    //     {
+    //         return CombatAnimationType.None;
+    //     } else
+    //     {
+    //         return CombatAnimationType.Projectile;   
+    //     }
+    // }
 
     /*
 

@@ -254,6 +254,21 @@ public struct DescriptionPanelBuildingBlock
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.healthIconName);
     }
 
+    public static DescriptionPanelBuildingBlock getHealthBlock(int currentHealth)
+    {
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, currentHealth.ToString(), IconList.healthIconName);
+    }
+
+    public static DescriptionPanelBuildingBlock getHealthBlock(string currentHealth, string totalHealth)
+    {
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, currentHealth, IconList.healthIconName, currentHealth + "/" + totalHealth);
+    }
+
+    public static DescriptionPanelBuildingBlock getHealthBlock(int currentHealth, int totalHealth)
+    {
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, currentHealth.ToString(), IconList.healthIconName, currentHealth + "/" + totalHealth);
+    }
+
     public static DescriptionPanelBuildingBlock getLevelBlock(string text)
     {
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.levelIconName);
@@ -480,6 +495,7 @@ public struct DescriptionPanelBuildingBlock
 public class DescriptionPanelBuilder : MonoBehaviour
 {
     private const int descriptionTextTopPaddingAmount = 15;
+    private const int maxRowCount = 3;
 
     public readonly static UnityEvent OnFormulaSwap = new UnityEvent();
 
@@ -493,6 +509,8 @@ public class DescriptionPanelBuilder : MonoBehaviour
     public DescriptionPanelBlockFormatter formatter;
     public IBuilderFilter filter;
 
+    public GridLayoutGroup statGridLayout;
+
     private List<DescriptionPanelRow> rows = new List<DescriptionPanelRow>();
 
     public DescriptionPanelBuilder nextBuilder;
@@ -504,7 +522,7 @@ public class DescriptionPanelBuilder : MonoBehaviour
         buildDescriptionPanel(blockOrigin, null);
     }
 
-    public void buildDescriptionPanel(IDescribableInBlocks blockOrigin, BlockFormat format)
+    public virtual void buildDescriptionPanel(IDescribableInBlocks blockOrigin, BlockFormat format)
     {
         this.blockOrigin = blockOrigin;
 
@@ -527,6 +545,12 @@ public class DescriptionPanelBuilder : MonoBehaviour
             rows.Add(buildRow(block));
         }
 
+        if(statGridLayout != null && rowParent.childCount >= maxRowCount)
+        {
+            statGridLayout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            statGridLayout.constraintCount = maxRowCount;
+        }
+
         if(blockOrigin.requiresInspectNode())
         {
             activateInspectNode();
@@ -534,7 +558,7 @@ public class DescriptionPanelBuilder : MonoBehaviour
 
         } else if(CombatStateManager.inCombat)
         {
-            // setFitterToPreferredSize();
+            setFitterToPreferredSize();
         }
 
         rebuildLayouts();
@@ -547,6 +571,11 @@ public class DescriptionPanelBuilder : MonoBehaviour
         if(fitter != null)
         {
             fitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
+        }
+
+        if(fitter != null && CombatStateManager.inCombat)
+        {
+            fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
         }
     }
 
@@ -570,12 +599,14 @@ public class DescriptionPanelBuilder : MonoBehaviour
 
         DescriptionPanelRow row = Instantiate(getDescriptionPanelRowGameObject(block.type), getParent(block)).GetComponent<DescriptionPanelRow>();
 
-        switch(block.type)
-        {
-            case DescriptionPanelBuildingBlockType.Icon:
-                iconParent.gameObject.SetActive(true);
-                break;
-        }
+        getParent(block).gameObject.SetActive(true);
+
+        // switch(block.type)
+        // {
+        //     case DescriptionPanelBuildingBlockType.Icon:
+        //         iconParent.gameObject.SetActive(true);
+        //         break;
+        // }
 
         if (block.iconName != null)
         {

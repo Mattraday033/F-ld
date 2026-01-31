@@ -236,11 +236,11 @@ public class KnockBackOnLanding : ScriptOnLanding
                 combatantToBeMoved.updateHealthBar();
             }
 
-            if(combatantCollision != null && !collisionTargetSnapshot.isDead())
-            {
-                combatantCollision.updateHealthBar();
-                combatantCollision.playAnimationOnDamage();
-            }
+            // if(combatantCollision != null && !collisionTargetSnapshot.isDead())
+            // {
+            //     combatantCollision.updateHealthBar();
+            //     combatantCollision.playAnimationOnDamage();
+            // }
         }
     }
 }
