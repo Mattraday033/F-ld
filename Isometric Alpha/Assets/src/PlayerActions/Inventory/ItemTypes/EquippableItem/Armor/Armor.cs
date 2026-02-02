@@ -91,6 +91,23 @@ public abstract class Armor : EquippableItem, IJSONConvertable
         }
     }
 
+    public override string getInvulnerableFormula()
+    {
+        if(base.getInvulnerableFormula().Length > 0)
+        {
+            return base.getInvulnerableFormula();
+        }
+
+        int slotMod = 1;
+
+        if(getSlotID() == offHandSlotIndex)
+        {
+            slotMod = 2;
+        }
+
+        return ((getTier() + 1)*slotMod).ToString();
+    }
+
 	public override GameObject getDescriptionPanelFull(PanelType panelType)
 	{
 		string panelTypeName = "";

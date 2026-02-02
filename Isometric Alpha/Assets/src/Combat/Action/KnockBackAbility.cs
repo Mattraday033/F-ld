@@ -85,6 +85,8 @@ public class KnockBackAbility : RepositionEnemyAbility
             }
         }
 
+        playActivationAnimation();
+
         performCombatAction(targets);
     }
 

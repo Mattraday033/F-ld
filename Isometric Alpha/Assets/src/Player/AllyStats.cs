@@ -857,8 +857,11 @@ public class AllyStats : Stats
             buildingBlocks.Add(DescriptionPanelBuildingBlock.getWorthBlock(Purse.getCoinsInPurse().ToString()));
         }
 
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getInvulnerableBlock(getInvulnerability()));
+
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusDamageBlock(getBonusAbilityDamage().ToString()));
 
+        // buildingBlocks.Add(DescriptionPanelBuildingBlock.getVulnerableBlock(getVulnerability()));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getStrengthBlock(getStrength().ToString()));
 

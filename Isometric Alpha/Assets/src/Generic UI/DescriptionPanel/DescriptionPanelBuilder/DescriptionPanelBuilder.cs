@@ -179,9 +179,19 @@ public struct DescriptionPanelBuildingBlock
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.critIconName, formula);
     }
 
+    public static DescriptionPanelBuildingBlock getInvulnerableBlock(string text)
+    {
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.invulnerableIconName);
+    }
+
     public static DescriptionPanelBuildingBlock getInvulnerableBlock(string text, string formula)
     {
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.invulnerableIconName, formula);
+    }
+
+    public static DescriptionPanelBuildingBlock getVulnerableBlock(string text)
+    {
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.vulnerableIconName);
     }
 
     public static DescriptionPanelBuildingBlock getVulnerableBlock(string text, string formula)
@@ -592,14 +602,16 @@ public class DescriptionPanelBuilder : MonoBehaviour
 
     public virtual DescriptionPanelRow buildRow(DescriptionPanelBuildingBlock block)
     {
-        if (getParent(block) == null)
+        Transform blockParent = getParent(block);
+
+        if (blockParent == null)
         {
             return null;
         }
 
-        DescriptionPanelRow row = Instantiate(getDescriptionPanelRowGameObject(block.type), getParent(block)).GetComponent<DescriptionPanelRow>();
+        DescriptionPanelRow row = Instantiate(getDescriptionPanelRowGameObject(block.type), blockParent).GetComponent<DescriptionPanelRow>();
 
-        getParent(block).gameObject.SetActive(true);
+        blockParent.gameObject.SetActive(true);
 
         // switch(block.type)
         // {
@@ -815,8 +827,8 @@ public static class IconList
     public const string affinityIconName = "Affinity";
     public const string experienceIconName = "XP";
 
-    public const string invulnerableIconName = "Invulnerable";
-    public const string vulnerableIconName = "Vulnerable";
+    public const string invulnerableIconName = "Invulnerability";
+    public const string vulnerableIconName = "Vulnerability";
 
     public const string intimidateIconName = "Intimidate";
     public const string bonusHealthIconName = "Bonus Health";

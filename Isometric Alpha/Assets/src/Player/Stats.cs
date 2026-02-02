@@ -470,6 +470,20 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     #endregion
 
+    #region Tertiary Stats
+
+    public virtual string getInvulnerability()
+    {
+        return "" + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getInvulnerableFormula());
+    }
+
+    public virtual string getVulnerability()
+    {
+        return "" + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getVulnerableFormula());
+    }
+
+    #endregion
+
     #region Combat and Action Arrays
     
     public bool queuedToMove()
@@ -580,9 +594,12 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public int modifyIncomingDamage(int baseDamage)
     {
-        int modifiedDamage = (int)(((double)baseDamage) * (1.0 - Armor.getDamageReduction(getTotalArmorRating())));
+        int modifiedDamage = baseDamage;
+        // int modifiedDamage = (int)(((double)baseDamage) * (1.0 - Armor.getDamageReduction(getTotalArmorRating())));
 
-        Debug.LogError("Add vulnerability to damage somewhere in this method");
+        int vulnInvulnMod = int.Parse(getVulnerability()) - int.Parse(getInvulnerability());
+
+        modifiedDamage += vulnInvulnMod;
 
         modifiedDamage -= getSynergyModifier();
 

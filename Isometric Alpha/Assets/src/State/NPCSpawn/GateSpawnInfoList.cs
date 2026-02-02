@@ -138,7 +138,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexZero,
                                     NPCNameList.manseFrontDoor,
                                     LocationNameList.campManse,
-                                    new Vector3Int(3, 9),
+                                    new Vector3Int(3, 15),
                                     PrefabNames.portcullis2x1Path,
                                     Constants.sizeTwo,
                                     Axis.DescendingX));
@@ -147,7 +147,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexOne,
                                     NPCNameList.manseServiceEntrance,
                                     LocationNameList.campManse,
-                                    new Vector3Int(-6, 5),
+                                    new Vector3Int(-6, 6),
                                     PrefabNames.portcullis2x1Path,
                                     Constants.sizeTwo,
                                     Axis.DescendingX));

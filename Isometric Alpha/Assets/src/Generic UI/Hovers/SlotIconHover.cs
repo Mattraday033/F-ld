@@ -248,8 +248,8 @@ public static class HoverMessageList
     private const string worthIconMessage = "Gold Pieces";
     private const string goldIconMessage = "Gold Pieces";
 
-    private const string invulnerableIconMessage = "Invulnerable. A percentage of incoming damage that is ignored. Applied before Armor damage reduction.";
-    private const string vulnerableIconMessage = "Vulnerable. Extra damage that is applied when damage is taken. Applied after Armor damage reduction.";
+    private const string invulnerableIconMessage = ". How much damage your character ignores per hit. Can only reduce incoming damage down to 1. Applied before Armor damage reduction.";
+    private const string vulnerableIconMessage = ". Extra damage that is applied when damage is taken. Applied after Armor damage reduction.";
 
     public const string bonusDamageKey = "Bonus Damage";
     private const string bonusDamageMessage = "Bonus Damage. Bonus Damage is added to the damage of all of your Abilities. Your Bonus Damage is equal to the highest Base Damage of all of your equipped Weapons. For example, a weapon with a Damage Formula of '3S + 5' provides 5 Bonus Damage. Hold 'Alt' when viewing a Weapon's stats to reveal formulas.";
@@ -442,9 +442,9 @@ public static class HoverMessageList
                 return bonusDamageMessage;
 
             case IconList.invulnerableIconName:
-                return invulnerableIconMessage;
+                return IconList.invulnerableIconName + invulnerableIconMessage;
             case IconList.vulnerableIconName:
-                return vulnerableIconMessage;
+                return IconList.vulnerableIconName + vulnerableIconMessage;
 
             case IconList.stanceWeaponIconName:
                 return stanceWeaponMessage;
