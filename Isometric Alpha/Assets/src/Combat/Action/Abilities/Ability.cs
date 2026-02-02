@@ -183,7 +183,7 @@ public class Ability: CombatAction, IJSONConvertable
 			return Constants.zeroRating;
 		}
 
-        return gatherAllNonActionFormulas(a => a.getDamageFormula());
+        return DamageCalculator.combineFormulas(gatherAllNonActionFormulas(a => a.getDamageFormula()), "+" + getActorStats().getBonusAbilityDamage());
     }
 
     protected override string gatherAllNonActionFormulas(FormulaDelegate<StatBoostSource> getFormula)

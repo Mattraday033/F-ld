@@ -93,7 +93,7 @@ public abstract class Armor : EquippableItem, IJSONConvertable
 
     public override string getInvulnerableFormula()
     {
-        if(base.getInvulnerableFormula().Length > 0)
+        if(!base.getInvulnerableFormula().Equals(Constants.zeroRating))
         {
             return base.getInvulnerableFormula();
         }
@@ -214,14 +214,19 @@ public abstract class Armor : EquippableItem, IJSONConvertable
             buildingBlocks.Insert(1, DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getDamageBlock(getDamageFormulaTotal().ToString(), getDamageFormula()), getDamageFormula()));
         }
 
+        if (!getInvulnerableFormula().Equals(Constants.zeroRating))
+        {
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getInvulnerableBlock(DamageCalculator.calculateFormula(getInvulnerableFormula(), getStatSource()).ToString()), getInvulnerableFormula()));
+        }
+
         if (!getBonusPhysicalResistanceFormula().Equals(Constants.zeroRating))
         {
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getPhysicalResistBlock("+"+DamageCalculator.calculateFormula(getBonusPhysicalResistanceFormula(), getStatSource()).ToString()+"%"), getBonusPhysicalResistanceFormula()));
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getPhysicalResistBlock(DamageCalculator.calculateFormula(getBonusPhysicalResistanceFormula(), getStatSource()).ToString()+"%"), getBonusPhysicalResistanceFormula()));
         }
 
         if (!getBonusMentalResistanceFormula().Equals(Constants.zeroRating))
         {
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getMentalResistBlock("+"+DamageCalculator.calculateFormula(getBonusMentalResistanceFormula(), getStatSource()).ToString()+"%"), getBonusMentalResistanceFormula()));
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getMentalResistBlock(DamageCalculator.calculateFormula(getBonusMentalResistanceFormula(), getStatSource()).ToString()+"%"), getBonusMentalResistanceFormula()));
         }
 
         return buildingBlocks;

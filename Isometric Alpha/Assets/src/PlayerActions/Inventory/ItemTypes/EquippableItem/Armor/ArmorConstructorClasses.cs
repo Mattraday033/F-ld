@@ -18,6 +18,11 @@ public class OffHandWeapon : Armor
     {
         return iconName;
     }
+
+    public override string getInvulnerableFormula()
+    {
+        return Constants.zeroRating;
+    }
 }
 
 public class OffHandFist : OffHandWeapon

@@ -293,9 +293,9 @@ public static class AbilityList
         statAbilityDictionary.Add(currentKey, new EquippedPassive(CombatActionSettings.build(currentKey, TraitList.intimidatingPressence)));
 		statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
-		currentKey = "s-2-3";
-        statAbilityDictionary.Add(currentKey, new PassiveAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(minorRegenerationName, "Heal 5% of total health at the end of every combat."), FrequencyParams.build(zeroSlotMax, noCooldown))));
-        statAbilityDictionary[currentKey].setStatRequirements(currentKey);
+		// currentKey = "s-2-3";
+        // statAbilityDictionary.Add(currentKey, new PassiveAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(minorRegenerationName, "Heal 5% of total health at the end of every combat."), FrequencyParams.build(zeroSlotMax, noCooldown))));
+        // statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(strengthKeyChar);
         statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Make It Bleed", "You impale, bludgeon, or slash your enemy to the point of massive hemorrhaging. The enemy takes initial damage and every hit the enemy takes for the rest of combat deals additional damage.", "MakeItBleed"), DamageParams.build("3S + D", "D"), TargetParams.build(Range.boxOneIndex), FrequencyParams.build(twoSlotMax, fiveRoundCooldown), TraitList.wounded)));

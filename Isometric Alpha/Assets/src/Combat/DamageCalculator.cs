@@ -78,7 +78,7 @@ public class Formula
                     value = int.Parse(section);
                 } catch(Exception e)
                 {
-                    Debug.LogError("Exception found");
+                    Debug.LogError("Exception found: " + section);
                 }
                 
             } else if(section.Length == 1 || (section.Split(plusChar).Length > 1 && 
@@ -131,7 +131,7 @@ public class Formula
         {
             output = Constants.zeroRating;
         }
-
+        
         return output;
     }
 
@@ -218,7 +218,7 @@ public class Formula
         {
             if(formulaDict[key] < 0)
             {
-                output += minusChar;
+                // output += minusChar;
             } else if(sectionAdded && formulaDict[key] > 0)
             {
                 output += plusChar;

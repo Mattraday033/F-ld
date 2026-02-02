@@ -1149,6 +1149,9 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getTotalArmorRatingForDisplay()));
 
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getInvulnerableBlock(getInvulnerability()));
+
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getVulnerableBlock(getVulnerability()));
 
         return buildingBlocks;
     }

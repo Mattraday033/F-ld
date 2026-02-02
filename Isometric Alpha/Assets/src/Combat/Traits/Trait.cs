@@ -396,16 +396,6 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         //empty on purpose
     }
 
-    public override string getVulnerableFormula()
-    {
-        if(getName().Equals(StatSourceNameList.halfHandStanceKey))
-        {
-            return "-1";
-        }
-
-        return base.getVulnerableFormula();
-    }
-
     public static List<GlossaryEntry> getAllTraitTypeGlossaryEntries()
     {
         List<GlossaryEntry> allTraitTypesGlossaryEntries = new List<GlossaryEntry>();

@@ -463,7 +463,7 @@ public abstract class StatBoostSource : INameSource
 
         if (!boostSource.getInvulnerableFormula().Equals(Constants.zeroRating))
         {
-            blocks.Add(DescriptionPanelBuildingBlock.getInvulnerableBlock(DamageCalculator.calculateFormula(boostSource.getInvulnerableFormula(), statsSource).ToString()+ "%", boostSource.getInvulnerableFormula()));
+            blocks.Add(DescriptionPanelBuildingBlock.getInvulnerableBlock(DamageCalculator.calculateFormula(boostSource.getInvulnerableFormula(), statsSource).ToString(), boostSource.getInvulnerableFormula()));
         }
 
         if (!boostSource.getVulnerableFormula().Equals(Constants.zeroRating) && !boostSource.getName().Equals(StatSourceNameList.halfHandStanceKey))

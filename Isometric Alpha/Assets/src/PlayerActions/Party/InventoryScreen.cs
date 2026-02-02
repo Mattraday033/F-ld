@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using UnityEngine.UI;
 
 public class InventoryScreen : ScreenManager, ICounter
 {
+    public TextMeshProUGUI playerNameText;
+
+    public Image characterSprite;
+
     //ICounter methods
     private void OnEnable()
     {
@@ -25,8 +30,9 @@ public class InventoryScreen : ScreenManager, ICounter
 
     public override void updateCounter()
     {
-        // populateGrid(inventoryGridIndex);
-        // statsDescriptionSlot.setPrimaryDescribable(getCurrentPartyMember());
+        playerNameText.text = currentPartyMember.getName().Replace(PartyManager.playerMarker, "");
+        characterSprite.sprite = currentPartyMember.getSpriteIcon();
+        characterSprite.gameObject.SetActive(true);
     }
 
     public override List<UnityEvent> getUpdateEvents()
