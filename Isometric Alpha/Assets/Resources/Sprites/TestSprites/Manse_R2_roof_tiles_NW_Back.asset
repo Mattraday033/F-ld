@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Manse_R2_roof_tiles_NW_Back
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 256ac62fb277f584699f71b376983dfc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ea4f3a7a80abd6e48a53e22c4d389ec7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
