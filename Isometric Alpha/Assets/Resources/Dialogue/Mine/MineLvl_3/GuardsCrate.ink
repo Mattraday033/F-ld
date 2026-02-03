@@ -69,7 +69,7 @@ changeCamTarget({introducerIndex})
     \*A guard turns at the sound of the gate's lifting.* You there! Step into the light and identify yourself!
 -else:
 
-    \*A man wearing a guard uniform and holding a torch shouts at you from behind his barricade.* Halt! Stand and let me get a good look at you.
+    \*A man wearing a guard uniform shouts at you from behind his barricade.* Halt! Stand and let me get a good look at you.
 }
 
     {
@@ -281,7 +281,7 @@ I'm certain sir. This means the gate is open. We can leave!
 
 === 2c ===
 
-You apparently do not understand the predicament you are in. Protocal dictates that should a level of the mine be overrun, the survivors are to quarantine that level until they have the force to take it back. By opening that gate, you have violated the Director's orders that it should remain closed! And now you dare to give us orders?
+You apparently do not understand the predicament you are in. Protocal dictates that should a level of the mine be overrun, the survivors are to quarantine that level until they have the force to take it back. By opening that gate, you have violated the Director's orders that it should remain closed! And now you dare to give us commands?
 
 changeCamTarget({rekaIndex})
 

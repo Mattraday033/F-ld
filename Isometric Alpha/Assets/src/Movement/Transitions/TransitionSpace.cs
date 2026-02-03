@@ -7,6 +7,8 @@ using UnityEngine.Events;
 
 public class Transition
 {
+    public bool destinationOnly;
+
     public int index;
     public string currentAreaName;
     public string destinationName;
@@ -33,7 +35,7 @@ public class Transition
         this.outputMultiplier = 0; //to prevent autosave from moving player
     }
 
-    public Transition(string currentAreaName, string destinationName, Vector3Int cellCoords, int index, Facing playerSpawnDirection, bool usableForFastTravel, int outputMultiplier, PlayerInteractionScript scriptOnTransition)
+    public Transition(string currentAreaName, string destinationName, Vector3Int cellCoords, int index, Facing playerSpawnDirection, bool usableForFastTravel, int outputMultiplier, PlayerInteractionScript scriptOnTransition, bool destinationOnly = false)
     {
         this.currentAreaName = currentAreaName;
         this.destinationName = destinationName;
@@ -48,6 +50,7 @@ public class Transition
         this.outputMultiplier = outputMultiplier;
         
         this.scriptOnTransition = scriptOnTransition;
+        this.destinationOnly = destinationOnly;
     }
 
     public bool sharesHash(Transition transition)
@@ -137,7 +140,7 @@ public class TransitionSpace : MonoBehaviour, ICounter
         currentAreaName = transition.currentAreaName;
         destinationName = transition.destinationName;
 
-        if (transition.fastTravelCapable())
+        if (transition.fastTravelCapable() || transition.destinationOnly)
         {
             collider.enabled = false;
         }

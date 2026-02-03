@@ -4523,6 +4523,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 4805358836807214345}
   iconImage: {fileID: 4247231228388328086}
   primaryStat: 1
+  popUpParent: {fileID: 0}
 --- !u!1001 &1114601072215624781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5473,6 +5474,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 7758522087183966722}
   iconImage: {fileID: 1435219539015665053}
   primaryStat: 3
+  popUpParent: {fileID: 0}
 --- !u!114 &6901745004238655191 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9165398366177628583, guid: 73de9455b4cdb0b489830bc06ae8ff7c,
@@ -6673,6 +6675,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 3453952198679194123}
   iconImage: {fileID: 6318485490846010772}
   primaryStat: 0
+  popUpParent: {fileID: 0}
 --- !u!114 &1982363395794683614 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9165398366177628583, guid: 73de9455b4cdb0b489830bc06ae8ff7c,
@@ -7939,6 +7942,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 4003994782590762394}
   iconImage: {fileID: 5751147440131742213}
   primaryStat: 2
+  popUpParent: {fileID: 0}
 --- !u!114 &2794155917114108520 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6487982213553171072, guid: 73de9455b4cdb0b489830bc06ae8ff7c,

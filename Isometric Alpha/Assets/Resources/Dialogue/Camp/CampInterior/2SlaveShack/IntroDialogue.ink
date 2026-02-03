@@ -231,7 +231,7 @@ Give them a second, they haven't let me sweeten the pot yet.
 
 === 3e ===
 
-We can't have you telling the guards about the plan. If you don't go along with us, when the guards get here I'm gonna tell him *you* were the one who asked *me* for help escaping. After that, they won't believe anything you say.
+We can't have you telling the guards about the plan. If you don't go along with us, when the guards get here I'm gonna tell him <i>you</i> were the one who asked <i>me</i> for help escaping. After that, they won't believe anything you say.
 
     +Fine, you bastard. I'll help you.
         ->4a

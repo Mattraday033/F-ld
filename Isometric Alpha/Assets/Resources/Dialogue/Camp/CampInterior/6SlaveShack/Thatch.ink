@@ -133,7 +133,7 @@ Screaming? Damn it all. I didn't... I should have been here.
 
 I came back from my labors to find my hut ransacked. That's why there's all this rubble everywhere. These shacks are rickety at the best of times, and whatever the guards were doing in here while I was away has collapsed some of it.
 
-I have a hutmate, Slate, that I'm worried about. He's got a temper, and he's made some enemies among the guards. But the guards haven't done anything about it because a lot of them are afraid of me. My guess is that those cowards snuck in here while I was away and did something to Slate, but I'm too tired to do much about it on my own.
+I have a hutmate, Slate, that I'm worried about. He's got a temper, and he's made some enemies among the guards. But the guards haven't retaliated because a lot of them are afraid of me. My guess is that those cowards snuck in here while I was away and did something to Slate, but I'm too tired to do much about it on my own.
 
 ->divert
 

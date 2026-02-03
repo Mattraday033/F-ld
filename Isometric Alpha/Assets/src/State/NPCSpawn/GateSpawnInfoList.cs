@@ -610,6 +610,22 @@ public static class GateSpawnInfoList
 
         #region Manse-1f
 
+        #region Manse-1f-2a
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.ancientPortcullis,
+                                    ZoneKeyList.manseFirstFloor + LocationNameList.section2b,
+                                    new Vector3Int(-5, -2),
+                                    PrefabNames.portcullis2x1Path,
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+                                    
+        gateSpawnInfoDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2b, list);
+
+        #endregion
+
         #endregion
 
         #region Manse-2F

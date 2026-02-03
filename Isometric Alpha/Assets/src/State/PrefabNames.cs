@@ -247,14 +247,18 @@ public static class PrefabNames
     
     public const string spriteMapFolder = "SpriteMaps/";
 
-    public const string combatBackgroundFolderPath = PrefabNames.spriteMapFolder + "Combat Backgrounds/";
-    public const string OOCBackgroundFolderPath = PrefabNames.spriteMapFolder + "Backgrounds/";
+    public const string combatBackgroundFolderPath = spriteMapFolder + "Combat Backgrounds/";
+    public const string OOCBackgroundFolderPath = spriteMapFolder + "Backgrounds/";
     public const string backgroundTilemap = OOCBackgroundFolderPath + "BackgroundTilemap";
 
     #endregion
 
     #region Sprites
     public const string spriteFolder = "Sprites/";
+
+    public const string plantFolder = spriteFolder + "Plants/";
+    public const string forestFolder = plantFolder + "Forest/";
+    public const string leafPile = forestFolder + "LeafPile";
 
     public const string abilityEffectFolderPath = spriteFolder + "Ability Effects/";
 

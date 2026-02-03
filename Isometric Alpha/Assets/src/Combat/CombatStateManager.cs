@@ -574,6 +574,7 @@ public class CombatStateManager : MonoBehaviour
 		CombatAnimationManager.flushAnimations();
 
 		State.enteredCombatFromDialogue = false;
+		State.allyPackInfo = null;
 
 		StepCountScriptManager.reset();
 	}

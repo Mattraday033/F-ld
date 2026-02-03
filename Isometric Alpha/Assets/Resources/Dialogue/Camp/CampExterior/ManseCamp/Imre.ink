@@ -86,7 +86,7 @@ I'm Imre. I work in the Manse kitchens, but I'm on break right now. We're under 
         
 === 1d ===
 
-Oh I see. Need something?
+I see. Need something?
 
     +Why are you allowed to take a break alone, outside, while the camp is under lockdown?
         ->1da

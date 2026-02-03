@@ -25,13 +25,15 @@ public abstract class OOCSpawnDetails
                             Vector3Int cellCoords = new Vector3Int(), 
                             string spriteName = null, 
                             SortingLayerInfo sortingLayerInfo = null, 
-                            bool flipX = false)
+                            bool flipX = false, 
+                            string tutorialTargetHash = "")
     {
         this.npcName = npcName;
         this.cellCoords = cellCoords;
         this.spriteName = spriteName;
         this.sortingLayerInfo = sortingLayerInfo;
         this.flipX = flipX;
+        this.tutorialTargetHash = tutorialTargetHash;
     }
 
     public virtual string getSpriteName()
@@ -758,6 +760,8 @@ public class NPCSpawnDetails : OffSetSpawnDetails
     public Dialogue dialogue;
     public SpeakAtStartScript speakAtStartScript;
 
+    private bool ignoresSecretDoors;
+
     public NPCSpawnDetails( string npcName, 
                             Vector3Int cellCoords, 
                             string areaName = null, 
@@ -766,8 +770,10 @@ public class NPCSpawnDetails : OffSetSpawnDetails
                             float offset = 0f, 
                             bool flipX = false,
                             Vector3Int[] extraSpaces = null,
-                            SpeakAtStartScript speakAtStartScript = null) :
-    base(npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX)
+                            SpeakAtStartScript speakAtStartScript = null,
+                            string tutorialTargetHash = "",
+                            bool ignoresSecretDoors = true) :
+    base(npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX, tutorialTargetHash: tutorialTargetHash)
     {
         if(areaName == null)
         {
@@ -788,6 +794,7 @@ public class NPCSpawnDetails : OffSetSpawnDetails
         }
 
         this.speakAtStartScript = speakAtStartScript;
+        this.ignoresSecretDoors = ignoresSecretDoors;
     }
 
     public Dialogue getDialogue()
@@ -837,6 +844,13 @@ public class NPCSpawnDetails : OffSetSpawnDetails
         }
 
         spawnActions(dialogueTrigger);
+
+        NameTagGenerator nameTagGenerator = npc.GetComponent<NameTagGenerator>();
+
+        if(nameTagGenerator != null && ignoresSecretDoors)
+        {
+            nameTagGenerator.setToIgnoreSecretDoors();
+        }
     }
 
     public virtual void spawnActions(DialogueTrigger mainTrigger)
@@ -883,8 +897,9 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
                                          Facing facing = Facing.Random,
                                          Vector3Int[] extraSpaces = null,
                                          SpeakAtStartScript speakAtStartScript = null,
-                                         CharacterAnimationType animationType = CharacterAnimationType.None) :
-    base(npcName, cellCoords, areaName, extraSpaces: extraSpaces, speakAtStartScript: speakAtStartScript) 
+                                         CharacterAnimationType animationType = CharacterAnimationType.None, 
+                                         bool ignoresSecretDoors = true) :
+    base(npcName, cellCoords, areaName, extraSpaces: extraSpaces, speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors) 
     {
         if(animationName == null)
         {
@@ -932,10 +947,10 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
 public class NonDialogueNPCSpawnDetails : NPCWithAnimationsSpawnDetails
 {
 
-    public NonDialogueNPCSpawnDetails(string npcName, Vector3Int cellCoords, string animationName = null, Facing facing = Facing.Random) :
-    base(npcName, cellCoords, "", animationName, facing)
+    public NonDialogueNPCSpawnDetails(string npcName, Vector3Int cellCoords, string animationName = null, Facing facing = Facing.Random, bool ignoresSecretDoors = true) :
+    base(npcName, cellCoords, "", animationName, facing, ignoresSecretDoors: ignoresSecretDoors)
     {
-        
+
     }
 
     public override Dialogue getDialogue(string areaName)
@@ -954,18 +969,6 @@ public class NonDialogueNPCSpawnDetails : NPCWithAnimationsSpawnDetails
         } else
         {
             return spawnParams;
-        }
-    }
-
-    public override void spawnActions(GameObject npc)
-    {
-        base.spawnActions(npc);
-
-        NameTagGenerator nameTagGenerator = npc.GetComponent<NameTagGenerator>();
-
-        if(nameTagGenerator != null)
-        {
-            nameTagGenerator.setToIgnoreSecretDoors();
         }
     }
 }
@@ -1306,17 +1309,11 @@ public class GateWithHiddenTerrainSpawnDetails : GateSpawnDetails
     }
 }
 
-public class ShopkeeperSpawnDetails : NPCSpawnDetails
+public class ShopkeeperSpawnDetails : NPCWithAnimationsSpawnDetails
 {
 
-    public ShopkeeperSpawnDetails(string npcName, Vector3Int cellCoords, string areaName) :
-    base(npcName, cellCoords, areaName)
-    {
-
-    }
-
-    public ShopkeeperSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, Vector3Int[] extraSpaces) :
-    base(npcName, cellCoords, areaName, extraSpaces: extraSpaces)
+    public ShopkeeperSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string animationName = null, Vector3Int[] extraSpaces = null, bool ignoresSecretDoors = true) :
+    base(npcName, cellCoords, areaName, animationName: animationName, extraSpaces: extraSpaces, ignoresSecretDoors: ignoresSecretDoors)
     {
 
     }
@@ -1437,33 +1434,24 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
 
     public VaultableObject vaultableObject;
 
-    public VaultableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableObject vaultableObject) :
-    base(npcName, cellCoords, npcName)
+    public VaultableObjectSpawnDetails(string npcName, 
+                                        Vector3Int cellCoords, 
+                                        VaultableObject vaultableObject, 
+                                        string spriteName = null, 
+                                        float offset = 0f, 
+                                        SortingLayerInfo sortingLayerInfo = null, 
+                                        string tutorialTargetHash = "") :
+    base(npcName, 
+         cellCoords, 
+         spriteName: spriteName, 
+         offset: offset, 
+         sortingLayerInfo: sortingLayerInfo, 
+         tutorialTargetHash: tutorialTargetHash)
     {
         this.vaultableObject = vaultableObject;
         this.dialogue = getDialogue(npcName);
-    }
 
-    public VaultableObjectSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo, VaultableObject vaultableObject) :
-    base(npcName, cellCoords, spriteName: spriteName, sortingLayerInfo: sortingLayerInfo)
-    {
-        this.vaultableObject = vaultableObject;
-        this.dialogue = getDialogue(npcName);
-    }
-
-    public VaultableObjectSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, float offset, SortingLayerInfo sortingLayerInfo, VaultableObject vaultableObject) :
-    base(npcName, cellCoords, spriteName, offset: offset, sortingLayerInfo: sortingLayerInfo)
-    {
-        this.vaultableObject = vaultableObject;
-        this.dialogue = getDialogue(npcName);
-    }
-
-    public VaultableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableObject vaultableObject, string tutorialTargetHash) :
-    base(npcName, cellCoords)
-    {
-        this.vaultableObject = vaultableObject;
         this.tutorialTargetHash = tutorialTargetHash;
-        this.dialogue = getDialogue(npcName);
     }
 
     public override Dialogue getDialogue(string npcName)
@@ -1527,8 +1515,8 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
 public class VaultableRubbleSpawnDetails : VaultableObjectSpawnDetails
 {
 
-    public VaultableRubbleSpawnDetails(string npcName, Vector3Int cellCoords, int difficulty, int vaultDistance) :
-    base(npcName, cellCoords, new VaultableObject(difficulty, vaultDistance, VaultableObject.isPlural, VaultableObject.rockName))
+    public VaultableRubbleSpawnDetails(string npcName, Vector3Int cellCoords, int difficulty, int vaultDistance, string spriteName = null) :
+    base(npcName, cellCoords, new VaultableObject(difficulty, vaultDistance, VaultableObject.isPlural, VaultableObject.rockName), spriteName: spriteName)
     {
         useRubbleColor = true;
     }
@@ -1545,8 +1533,8 @@ public class VaultableOrDestroyableObjectSpawnDetails : VaultableObjectSpawnDeta
 
     public int index;
 
-    public VaultableOrDestroyableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableOrDestroyableObject vaultableOrDestroyableObject) :
-    base(npcName, cellCoords, vaultableOrDestroyableObject)
+    public VaultableOrDestroyableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableOrDestroyableObject vaultableOrDestroyableObject, string spriteName = null) :
+    base(npcName, cellCoords, vaultableOrDestroyableObject, spriteName: spriteName)
     {
     }
 
@@ -1637,8 +1625,14 @@ public class OffSetSpawnDetails : OOCSpawnDetails
 
     //npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX
 
-    public OffSetSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName = null, SortingLayerInfo sortingLayerInfo = null, float offset = 0f, bool flipX = false) :
-    base(npcName, cellCoords, spriteName, sortingLayerInfo, flipX)
+    public OffSetSpawnDetails(string npcName, 
+                              Vector3Int cellCoords, 
+                              string spriteName = null, 
+                              SortingLayerInfo sortingLayerInfo = null, 
+                              float offset = 0f, 
+                              bool flipX = false, 
+                              string tutorialTargetHash = "") :
+    base(npcName, cellCoords, spriteName, sortingLayerInfo, flipX, tutorialTargetHash: tutorialTargetHash)
     {
         this.offset = offset;
     }

@@ -11,40 +11,16 @@ public class MonsterSpawnDetails : OOCSpawnDetails
     public Facing facing;
     public MonsterMovementType movementType;
 
-    public MonsterSpawnDetails(string npcName, Vector3Int cellCoords) :
-    base(npcName, cellCoords)
+    public MonsterSpawnDetails(string npcName, Vector3Int cellCoords, Facing facing = Facing.Random, MonsterMovementType movementType = MonsterMovementType.Random, string tutorialTargetHash = "") :
+    base(npcName, cellCoords, tutorialTargetHash)
     {
-        this.facing = Facing.Random;
-        this.movementType = MonsterMovementType.Random;
-    }
-
-    public MonsterSpawnDetails(string npcName, Vector3Int cellCoords, Facing facing) :
-    base(npcName, cellCoords)
-    {
-        this.facing = facing;
-        this.movementType = MonsterMovementType.Random;
-    }
-
-    public MonsterSpawnDetails(string npcName, Vector3Int cellCoords, Facing facing, string tutorialTargetHash) :
-    base(npcName, cellCoords)
-    {
-        this.facing = facing;
-        this.movementType = MonsterMovementType.Stationary;
-        this.tutorialTargetHash = tutorialTargetHash;
-    }
-
-    public MonsterSpawnDetails(string npcName, Vector3Int cellCoords, MonsterMovementType movementType) :
-    base(npcName, cellCoords)
-    {
-        this.facing = Facing.Random;
+        this.facing =  facing;
         this.movementType = movementType;
-    }
 
-    public MonsterSpawnDetails(string npcName, Vector3Int cellCoords, MonsterMovementType movementType, Facing facing) :
-    base(npcName, cellCoords)
-    {
-        this.facing = facing;
-        this.movementType = movementType;
+        if(tutorialTargetHash.Length > 0)
+        {
+            this.movementType = MonsterMovementType.Stationary;
+        }
     }
 
     public override string getSpriteName()
@@ -135,15 +111,6 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
     public override void spawnActions(GameObject interactable)
     {
         // base.spawnActions(interactable);
-        
-    }
-}
-
-public class BossPackSpawnDetails: MonsterSpawnDetails
-{
-    public BossPackSpawnDetails(string npcName, Vector3Int cellCoords) :
-    base(npcName, cellCoords, MonsterMovementType.Stationary, Facing.Random)
-    {
         
     }
 }

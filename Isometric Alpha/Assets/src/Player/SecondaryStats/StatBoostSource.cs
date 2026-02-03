@@ -18,7 +18,7 @@ public abstract class StatBoostSource : INameSource
 
         }
 
-        return "0";
+        return Constants.zeroRating;
     }
 
     public virtual string getCritFormula()
@@ -31,7 +31,7 @@ public abstract class StatBoostSource : INameSource
                 return "D";
         }
 
-        return "0";
+        return Constants.zeroRating;
     }
 
 
@@ -147,7 +147,7 @@ public abstract class StatBoostSource : INameSource
                 return "10";
         }
 
-        return "0";
+        return Constants.zeroRating;
     }
 
     public virtual string getBonusCriticalDamageMultiplierFormula()
@@ -231,7 +231,7 @@ public abstract class StatBoostSource : INameSource
                 return "10";
         }
 
-        return "0";
+        return Constants.zeroRating;
     }
 
     //Charisma Stats
@@ -319,7 +319,7 @@ public abstract class StatBoostSource : INameSource
                 return "20";
         }
 
-        return "0";
+        return Constants.zeroRating;
     }
     
     public virtual string getBonusDiscountFormula()

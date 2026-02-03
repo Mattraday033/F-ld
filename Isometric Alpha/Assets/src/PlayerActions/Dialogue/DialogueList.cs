@@ -845,6 +845,8 @@ public static class DialogueList
                                 new Dialogue(new string[]   { NPCNameList.imre+1 }, 
                                  Resources.Load<TextAsset>(DialogueNameList.loyalImrePathName)));
 
+            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section2b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
+
             addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.beam,
                                 new Dialogue(new string[]   { 
                                                                 NPCNameList.playerNamePlaceHolder, 

@@ -311,6 +311,7 @@ activate({andrasIndex})
 changeCamTarget({andrasIndex})
 
 setFacing(SE)
+setNPCFacing({janosIndex},SE)
 
 fadeBackIn(60)
 

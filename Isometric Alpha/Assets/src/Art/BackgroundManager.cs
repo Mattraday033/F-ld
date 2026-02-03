@@ -164,6 +164,10 @@ public class BackgroundManager : MonoBehaviour
             case ZoneKeyList.pit:
                 return ZoneKeyList.mineLvl3;
 
+            case ZoneKeyList.manseFirstFloor:
+            case ZoneKeyList.manseSecondFloor:
+                return ZoneKeyList.lovashiCamp;
+
             default:
                 return zoneKey;
         }

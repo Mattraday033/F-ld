@@ -243,6 +243,8 @@ public static class EnemyPackInfoList
 
     private static Dictionary<string, List<EnemyPackInfo>> enemyPackInfoDict;
 
+    #region Bats
+
     private readonly static EnemyPackInfo twoGiantBatsTwoBatSwarms = new EnemyPackInfo(new CreatureAmount[] {  EnemyAmountList.twoGiantBats,
                                                                                                             EnemyAmountList.twoBatSwarms
                                                                                                             },
@@ -310,6 +312,7 @@ public static class EnemyPackInfoList
                                                                                                 EnemyAmountList.oneArmoredBat
                                                                                                 },
                                                                                                 DropTableList.slaveMineDT1Name);
+    #endregion
 
     public static EnemyPackInfo getEnemyPackInfo(string areaName, int index)
     {
@@ -502,6 +505,40 @@ public static class EnemyPackInfoList
         #endregion
 
         #region Manse-1F
+
+        #region Manse-1F-1c
+
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+
+        enemyPackInfoDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section1c, list);
+
+        #endregion
+
+        #region Manse-1F-2a
+
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+
+        enemyPackInfoDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2a, list);
+
+        #endregion
+
+        #region Manse-1F-2b
+
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+
+        enemyPackInfoDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2b, list);
+
+        #endregion
 
         #endregion
 

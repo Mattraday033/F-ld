@@ -125,7 +125,7 @@ public static class OOCSpawnDetailsList
                  new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(6, -2), PrefabNames.shackWallHalf),
                  TutorialSequenceList.tutorialCunningObjectTargetHash));
 
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(0, -4), VaultableObject.diffTwoVaultableBarrelsOneTile, TutorialSequenceList.vaultableBarrelsTargetHash));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(0, -4), VaultableObject.diffTwoVaultableBarrelsOneTile, tutorialTargetHash: TutorialSequenceList.vaultableBarrelsTargetHash));
 
         list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(3, -3), PrefabNames.shackWallHalf));
         list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(4, -3), PrefabNames.shackWallHalf));
@@ -198,7 +198,7 @@ public static class OOCSpawnDetailsList
         #region Mess Hall
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ShopkeeperSpawnDetails(NPCNameList.kende, new Vector3Int(3, 10), LocationNameList.messHall, new Vector3Int[] { new Vector3Int(3, 9) }));
+        list.Add(new ShopkeeperSpawnDetails(NPCNameList.kende, new Vector3Int(3, 10), LocationNameList.messHall, extraSpaces: new Vector3Int[] { new Vector3Int(3, 9) }));
 
         oocSpawnDetailsDict.Add(LocationNameList.messHall, list);
         #endregion
@@ -242,10 +242,10 @@ public static class OOCSpawnDetailsList
 
         list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campNorthEast, Constants.indexZero));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.leafPile, new Vector3Int(18, -4), LocationNameList.campNorthEast));
-        list.Add(new NPCSpawnDetails(NPCNameList.leafPile, new Vector3Int(18, -5), LocationNameList.campNorthEast));
-        list.Add(new NPCSpawnDetails(NPCNameList.leafPile, new Vector3Int(18, -7), LocationNameList.campNorthEast));
-        list.Add(new NPCSpawnDetails(NPCNameList.leafPile, new Vector3Int(17, -8), LocationNameList.campNorthEast));
+        list.Add(new NPCSpawnDetails(NPCNameList.leafPile, new Vector3Int(18, -4), LocationNameList.campNorthEast, spriteName: PrefabNames.leafPile));
+        list.Add(new NPCSpawnDetails(NPCNameList.leafPile, new Vector3Int(18, -5), LocationNameList.campNorthEast, spriteName: PrefabNames.leafPile));
+        list.Add(new NPCSpawnDetails(NPCNameList.leafPile, new Vector3Int(18, -7), LocationNameList.campNorthEast, spriteName: PrefabNames.leafPile));
+        list.Add(new NPCSpawnDetails(NPCNameList.leafPile, new Vector3Int(17, -8), LocationNameList.campNorthEast, spriteName: PrefabNames.leafPile));
 
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(0, 3), VaultableObject.diffTwoVaultableBarrelsOneTile));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(6, 1), VaultableObject.diffTwoVaultableBarrelsOneTile));
@@ -254,87 +254,87 @@ public static class OOCSpawnDetailsList
 
         #region Rallying Slaves Dialogue
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(8, 5), facing: Facing.NorthEast));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.nandor, new Vector3Int(8, 3), facing: Facing.NorthEast));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.garcha, new Vector3Int(11, 4), facing: Facing.SouthWest));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.janos, new Vector3Int(10, 6), facing: Facing.SouthEast));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.clay, new Vector3Int(9, 2), facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(8, 5), facing: Facing.NorthEast, ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.nandor, new Vector3Int(8, 3), facing: Facing.NorthEast, ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.garcha, new Vector3Int(11, 4), facing: Facing.SouthWest, ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.janos, new Vector3Int(10, 6), facing: Facing.SouthEast, ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.clay, new Vector3Int(9, 2), facing: Facing.NorthWest, ignoresSecretDoors: false));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveOne, new Vector3Int(11, 3)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveTwo, new Vector3Int(11, 6)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveThree, new Vector3Int(8, 2)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveFour, new Vector3Int(9, 6)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveOne, new Vector3Int(11, 3), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveTwo, new Vector3Int(11, 6), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveThree, new Vector3Int(8, 2), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveFour, new Vector3Int(9, 6), ignoresSecretDoors: false));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 2)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 1)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 0)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, -1)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 2), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 1), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 0), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, -1), ignoresSecretDoors: false));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 2)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 1)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 0)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, -1)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 2), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 1), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 0), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, -1), ignoresSecretDoors: false));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 1)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 0)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, -1)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 1), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 0), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, -1), ignoresSecretDoors: false));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 1)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 0)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, -1)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 1), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 0), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, -1), ignoresSecretDoors: false));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(7, 1)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(7, 1), ignoresSecretDoors: false));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(5, 3)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.crowd, new Vector3Int(5, 2))); //Crowd
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(5, 1)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(5, 0)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(5, -1)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(5, 3), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.crowd, new Vector3Int(5, 2), ignoresSecretDoors: false)); //Crowd
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(5, 1), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(5, 0), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(5, -1), ignoresSecretDoors: false));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(4, 3)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(4, 2)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(4, 1)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(4, 0)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(4, 3), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(4, 2), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(4, 1), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(4, 0), ignoresSecretDoors: false));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(3, 2)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(3, 2)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(3, 2), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(3, 2), ignoresSecretDoors: false));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 9)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 8)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 7)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 9), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 8), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 7), ignoresSecretDoors: false));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 10)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 9)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 8)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 7)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 10), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 9), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 8), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 7), ignoresSecretDoors: false));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 10)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 9)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 8)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 7)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 10), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 9), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 8), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 7), ignoresSecretDoors: false));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 9)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 8)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 7)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 9), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 8), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 7), ignoresSecretDoors: false));
 
         #endregion
 
         #region After Slaves Recruited
 
-        list.Add(new NPCSpawnDetails(NPCNameList.slave+5, new Vector3Int(-2, 9), LocationNameList.campNorthEast));
-        list.Add(new NPCSpawnDetails(NPCNameList.slave+6, new Vector3Int(6, 10), LocationNameList.campNorthEast));
-        list.Add(new NPCSpawnDetails(NPCNameList.slave+7, new Vector3Int(-3, -8), LocationNameList.campNorthEast));
-        list.Add(new NPCSpawnDetails(NPCNameList.slave+8, new Vector3Int(2, -3), LocationNameList.campNorthEast));
-        list.Add(new NPCSpawnDetails(NPCNameList.slave+9, new Vector3Int(-6, -1), LocationNameList.campNorthEast));
-        list.Add(new ShopkeeperSpawnDetails(NPCNameList.uros, new Vector3Int(-6, 2), LocationNameList.campNorthEast));
+        list.Add(new NPCSpawnDetails(NPCNameList.slave+5, new Vector3Int(-2, 9), LocationNameList.campNorthEast, ignoresSecretDoors: false));
+        list.Add(new NPCSpawnDetails(NPCNameList.slave+6, new Vector3Int(6, 10), LocationNameList.campNorthEast, ignoresSecretDoors: false));
+        list.Add(new NPCSpawnDetails(NPCNameList.slave+7, new Vector3Int(-3, -8), LocationNameList.campNorthEast, ignoresSecretDoors: false));
+        list.Add(new NPCSpawnDetails(NPCNameList.slave+8, new Vector3Int(2, -3), LocationNameList.campNorthEast, ignoresSecretDoors: false));
+        list.Add(new NPCSpawnDetails(NPCNameList.slave+9, new Vector3Int(-6, -1), LocationNameList.campNorthEast, ignoresSecretDoors: false));
+        list.Add(new ShopkeeperSpawnDetails(NPCNameList.uros, new Vector3Int(-6, 2), LocationNameList.campNorthEast, ignoresSecretDoors: false));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(11, 1), LocationNameList.campNorthEast, facing: Facing.SouthWest));
-        list.Add(new NPCSpawnDetails(NPCNameList.woundedSlave, new Vector3Int(11, 3), LocationNameList.campNorthEast));
-        list.Add(new NPCSpawnDetails(NPCNameList.woundedSlave+1, new Vector3Int(11, 6), LocationNameList.campNorthEast));
-        list.Add(new NPCSpawnDetails(NPCNameList.woundedSlave+2, new Vector3Int(11, 8), LocationNameList.campNorthEast));
+        list.Add(new NPCSpawnDetails(NPCNameList.woundedSlave, new Vector3Int(11, 3), LocationNameList.campNorthEast, ignoresSecretDoors: false));
+        list.Add(new NPCSpawnDetails(NPCNameList.woundedSlave+1, new Vector3Int(11, 6), LocationNameList.campNorthEast, ignoresSecretDoors: false));
+        list.Add(new NPCSpawnDetails(NPCNameList.woundedSlave+2, new Vector3Int(11, 8), LocationNameList.campNorthEast, ignoresSecretDoors: false));
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor, new Vector3Int(11, 2), LocationNameList.campNorthEast, facing: Facing.SouthEast));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.garcha+1, new Vector3Int(-2, 1), LocationNameList.campNorthEast, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor, new Vector3Int(11, 2), LocationNameList.campNorthEast, facing: Facing.SouthEast, ignoresSecretDoors: false));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.garcha+1, new Vector3Int(-2, 1), LocationNameList.campNorthEast, facing: Facing.SouthWest, ignoresSecretDoors: false));
 
         #endregion
 
@@ -969,8 +969,8 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(2, 4), PrefabNames.lavaVaultableGapHalf, SortingLayerManager.buttonSortingLayerInfo, VaultableObject.diffThreeVaultableGap));
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(2, 2), PrefabNames.lavaVaultableGapHalf, SortingLayerManager.groundSortingLayerInfo, VaultableObject.diffThreeVaultableGap));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(2, 4), VaultableObject.diffThreeVaultableGap, sortingLayerInfo: SortingLayerManager.buttonSortingLayerInfo, spriteName: PrefabNames.lavaVaultableGapHalf));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(2, 2), VaultableObject.diffThreeVaultableGap, sortingLayerInfo: SortingLayerManager.groundSortingLayerInfo, spriteName: PrefabNames.lavaVaultableGapHalf));
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(8, 9), Facing.SouthWest));  
 
@@ -1044,11 +1044,11 @@ public static class OOCSpawnDetailsList
 
         list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain, ZoneKeyList.mineLvl3,  LocationNameList.section6a, Constants.indexOne));
 
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(2, 4), PrefabNames.stoneVaultableGap, Constants.onTableHeightOffset*10, SortingLayerManager.groundSortingLayerInfo, VaultableObject.diffThreeVaultableGap));
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(0, 4), PrefabNames.stoneVaultableGap, Constants.onTableHeightOffset*10, SortingLayerManager.groundSortingLayerInfo, VaultableObject.diffThreeVaultableGap));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(2, 4), VaultableObject.diffThreeVaultableGap, spriteName: PrefabNames.stoneVaultableGap, offset: Constants.onTableHeightOffset*10, sortingLayerInfo: SortingLayerManager.groundSortingLayerInfo));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(0, 4), VaultableObject.diffThreeVaultableGap, spriteName: PrefabNames.stoneVaultableGap, offset: Constants.onTableHeightOffset*10, sortingLayerInfo: SortingLayerManager.groundSortingLayerInfo));
 
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-11, 2), PrefabNames.stoneVaultableGap, Constants.onTableHeightOffset*10, SortingLayerManager.groundSortingLayerInfo, VaultableObject.diffThreeVaultableGap));
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-13, 2), PrefabNames.stoneVaultableGap, Constants.onTableHeightOffset*10, SortingLayerManager.groundSortingLayerInfo, VaultableObject.diffThreeVaultableGap));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-11, 2), VaultableObject.diffThreeVaultableGap, spriteName: PrefabNames.stoneVaultableGap, offset: Constants.onTableHeightOffset*10, sortingLayerInfo: SortingLayerManager.groundSortingLayerInfo));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-13, 2), VaultableObject.diffThreeVaultableGap, spriteName: PrefabNames.stoneVaultableGap, offset: Constants.onTableHeightOffset*10, sortingLayerInfo: SortingLayerManager.groundSortingLayerInfo));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section6a, list);
 
@@ -1085,8 +1085,8 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(-5, -6), Facing.SouthWest));  
 
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-10, -9), PrefabNames.lavaVaultableGapHalf, SortingLayerManager.buttonSortingLayerInfo, VaultableObject.diffThreeVaultableGap));
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-10, -11), PrefabNames.lavaVaultableGapHalf, SortingLayerManager.groundSortingLayerInfo, VaultableObject.diffThreeVaultableGap));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-10, -9), VaultableObject.diffThreeVaultableGap, spriteName: PrefabNames.lavaVaultableGapHalf, sortingLayerInfo: SortingLayerManager.buttonSortingLayerInfo));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-10, -11), VaultableObject.diffThreeVaultableGap, spriteName: PrefabNames.lavaVaultableGapHalf, sortingLayerInfo: SortingLayerManager.groundSortingLayerInfo));
 
         list.Add(new NPCSpawnDetails(NPCNameList.rubble, new Vector3Int(-6, 9), ZoneKeyList.mineLvl3 + LocationNameList.section7, PrefabNames.lowStalagmite));
         list.Add(new NPCSpawnDetails(NPCNameList.rubble, new Vector3Int(-7, 9), ZoneKeyList.mineLvl3 + LocationNameList.section7, PrefabNames.lowStalagmite));
@@ -1132,8 +1132,50 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveFour, new Vector3Int(-5, 3))); 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveFive, new Vector3Int(-5, 4))); 
 
-
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, list);
+
+        #endregion
+
+        #region Manse-1F-1b
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ShelfSpawnDetails(Constants.indexZero, new Vector3Int(1, 3), Facing.SouthEast));
+        list.Add(new ShelfSpawnDetails(Constants.indexOne, new Vector3Int(0, 3), Facing.SouthEast));
+
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section1b, list);
+
+        #endregion
+
+        #region Manse-1F-1c
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(15, -2), Facing.SouthWest));
+        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(12, -2), Facing.NorthEast));
+
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section1c, list);
+
+        #endregion
+
+        #region Manse-1F-2a
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ShelfSpawnDetails(Constants.indexZero, new Vector3Int(8, 3), Facing.SouthWest));
+        list.Add(new ShelfSpawnDetails(Constants.indexOne, new Vector3Int(8, 2), Facing.SouthWest));
+
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2a, list);
+
+        #endregion
+
+        #region Manse-1F-2b
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ButtonSpawnDetails(new Vector3Int(-4, -4)));
+
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2b, list);
 
         #endregion
 

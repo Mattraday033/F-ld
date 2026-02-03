@@ -11,130 +11,84 @@ public enum ActionCostType { None = 1, Stance = 2, Bloodlust = 3, Predation = 4,
 
 public class StackableTrait: Trait
 {
+    private const int maximumStacksPossible = 99;
+
     private int startingStacks;
 	private int numberOfStacks;
-    private int maximumStacks = 99;
+    private int maximumStacks;
     private int stacksAppliedPerApplication;
 
-	private UnityEvent[] reapplicationEvents;
+	private List<UnityEvent> personalReapplicationEvents = new List<UnityEvent>();
+	private List<UnityEvent> impersonalReapplicationEvents = new List<UnityEvent>();
 
-	private Trait[] baseTraits;
     private ActionCostType costType; 
 	
-	public StackableTrait(int startingStacks, int stacksAppliedPerApplication, Trait baseTrait) :
-	base(baseTrait.getName(), baseTrait.traitType, traitDescription: baseTrait.getDescription(), baseTrait.getIconName())
+	public StackableTrait(string traitName, 
+                          TraitType traitType, 
+                          string traitDescription = "", 
+                          string iconName = "",
+                          bool immobile = false, 
+                          bool pacifistic = false,
+                          bool permanent = true,
+                          int roundsLeft = Constants.oneRoundDuration,
+                          int startingStacks = 1, 
+                          int stacksAppliedPerApplication = 1,
+                          int maximumStacks = maximumStacksPossible,
+                          ActionCostType costType = ActionCostType.None,
+                          List<UnityEvent> personalReapplicationEvents = null,
+                          List<UnityEvent> impersonalReapplicationEvents = null) :
+	base(traitName, 
+         traitType, 
+         traitDescription, 
+         iconName,
+         immobile,
+         pacifistic,
+         permanent,
+         roundsLeft)
 	{
         this.startingStacks = startingStacks;
         resetStacksToStartingAmount();
 
         this.stacksAppliedPerApplication = stacksAppliedPerApplication;
 
-        this.costType = ActionCostType.None;
-        this.baseTraits = new Trait[] { baseTrait };
-    }
-
-    public StackableTrait(int startingStacks, int stacksAppliedPerApplication, ActionCostType costType, Trait baseTrait) :
-    base(baseTrait.getName(), baseTrait.traitType, baseTrait.getDescription(), baseTrait.getIconName())
-    {
-        this.startingStacks = startingStacks;
-        resetStacksToStartingAmount();
-
-        this.stacksAppliedPerApplication = stacksAppliedPerApplication;
-
         this.costType = costType;
-        this.baseTraits = new Trait[] { baseTrait };
-    }
-
-    public StackableTrait(UnityEvent reapplicationEvent, int startingStacks, int stacksAppliedPerApplication, Trait baseTrait) :
-	base(baseTrait.getName(), baseTrait.traitType, baseTrait.getDescription(), baseTrait.getIconName())
-    {
-        this.reapplicationEvents = new UnityEvent[] { reapplicationEvent };
-        //this.stackChangeAction += reapply; removed so that the base version of the method in TraitList isn't subscribed. Each StackableTrait is subscribed in clone()
-
-        this.startingStacks = startingStacks;
-        resetStacksToStartingAmount();
-
-        this.stacksAppliedPerApplication = stacksAppliedPerApplication;
-
-        this.costType = ActionCostType.None;
-        this.baseTraits = new Trait[] { baseTrait };
-    }
-
-    public StackableTrait(UnityEvent reapplicationEvent, int startingStacks, int stacksAppliedPerApplication, ActionCostType costType, Trait baseTrait) :
-    base(baseTrait.getName(), baseTrait.traitType, baseTrait.getDescription(), baseTrait.getIconName())
-    {
-        this.reapplicationEvents = new UnityEvent[] { reapplicationEvent };
-        //this.stackChangeAction += reapply; removed so that the base version of the method in TraitList isn't subscribed. Each StackableTrait is subscribed in clone()
-
-        this.startingStacks = startingStacks;
-        resetStacksToStartingAmount();
-
-        this.stacksAppliedPerApplication = stacksAppliedPerApplication;
-
-        this.costType = costType;
-        this.baseTraits = new Trait[] { baseTrait };
-    }
-    public StackableTrait(UnityEvent reapplicationEvent, int startingStacks, int stacksAppliedPerApplication, ActionCostType costType, Trait[] baseTraits) :
-    base(baseTraits[0].getName(), baseTraits[0].traitType, baseTraits[0].getDescription(), baseTraits[0].getIconName())
-    {
-        this.reapplicationEvents = new UnityEvent[] { reapplicationEvent };
-        //this.stackChangeAction += reapply; removed so that the base version of the method in TraitList isn't subscribed. Each StackableTrait is subscribed in clone()
-
-        this.startingStacks = startingStacks;
-        resetStacksToStartingAmount();
-
-        this.stacksAppliedPerApplication = stacksAppliedPerApplication;
-
-        this.costType = costType;
-        this.baseTraits = baseTraits;
-    }
-
-    public StackableTrait(UnityEvent[] reapplicationEvents, int startingStacks, int stacksAppliedPerApplication, int maximumStacks, ActionCostType costType, Trait baseTraits) :
-    base(baseTraits.getName(), baseTraits.traitType, baseTraits.getDescription(), baseTraits.getIconName())
-    {
-        this.reapplicationEvents = reapplicationEvents;
-        //this.stackChangeAction += reapply; removed so that the base version of the method in TraitList isn't subscribed. Each StackableTrait is subscribed in clone()
-
-        this.startingStacks = startingStacks;
-        resetStacksToStartingAmount();
         this.maximumStacks = maximumStacks;
 
-        this.stacksAppliedPerApplication = stacksAppliedPerApplication;
+        if(personalReapplicationEvents != null)
+        {
+            this.personalReapplicationEvents = personalReapplicationEvents;
+        }
 
-        this.costType = costType;
-        this.baseTraits = new Trait[1] { baseTraits };
+        if(impersonalReapplicationEvents != null)
+        {
+            this.impersonalReapplicationEvents = impersonalReapplicationEvents;
+        }
     }
 
     private void setStackChangeActions()
     {
-        if (reapplicationEvents == null)
+        foreach (UnityEvent unityEvent in personalReapplicationEvents)
         {
-            return;
+            unityEvent.AddListener(onPersonalReapplicationEvent);
         }
 
-        foreach (UnityEvent unityEvent in reapplicationEvents)
+        foreach (UnityEvent unityEvent in impersonalReapplicationEvents)
         {
-            unityEvent.AddListener(onReapplicationEvent);
-        }
-    }
-
-    public void addStackChangeActions(UnityEvent reapplicationEvent)
-    {
-        this.reapplicationEvents = Helpers.appendArray<UnityEvent>(this.reapplicationEvents, reapplicationEvent);
-        reapplicationEvent.AddListener(onReapplicationEvent);
-    }
-
-    public virtual void onReapplicationEvent()
-    {
-        if(getTraitHolder() == CombatActionManager.currentActor)
-        {
-            reapply();
+            unityEvent.AddListener(reapply);
         }
     }
 
     public override void onApplication()
     {
         setStackChangeActions();
+    }
+
+    public void onPersonalReapplicationEvent()
+    {
+        if(getTraitHolder() == CombatActionManager.currentActor)
+        {
+            reapply();
+        }
     }
 
     public override void resetStacksToStartingAmount()

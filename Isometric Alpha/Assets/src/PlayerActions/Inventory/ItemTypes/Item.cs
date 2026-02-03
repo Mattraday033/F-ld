@@ -357,8 +357,13 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 		return getDamageFormula();
 	}
 
-	public virtual string getCritFormula()
+	public override string getCritFormula()
 	{
+        if(!base.getCritFormula().Equals(Constants.zeroRating))
+        {
+            return base.getCritFormula();
+        }
+
 		return critFormula;
 	}
 
@@ -472,6 +477,7 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 
         DescriptionPanel.setImageColor(panel.typeIconBackgroundPanel, getTypeIconBackgroundColor());
         DescriptionPanel.setImage(panel.typeIconPanel, Helpers.loadSpriteFromResources(getTypeIconName()));
+        DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getTypeIconName()));
     }
 
 	public virtual void describeSelfRow(DescriptionPanel panel)

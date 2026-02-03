@@ -182,7 +182,7 @@ Should we all be so lucky. When work resumes, we'll be certain to see another po
 
 {
 -goesWithBroglinsPlan:
-    +Things are afoot on the surface. There's only one way you make it out of this mine alive: if *you* surrender your weapons to *us* and come peacefully.
+    +Things are afoot on the surface. There's only one way you make it out of this mine alive: if <i>you</i> surrender your weapons to <i>us</i> and come peacefully.
         ~mineLvl3DealtWithGaspar = true
         setToTrue(mineLvl3DealtWithGaspar)
         ->3c

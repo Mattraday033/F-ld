@@ -241,6 +241,39 @@ public static class ChestItemIDList
 
         #region Manse-1F
 
+        #region Manse-1F-1b
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.treasureItemListIndex, ItemList.goldLocketIndex));
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rationsIndex, Constants.sizeThree));
+
+        chestItemIDList.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section1b, list);
+
+        #endregion
+
+        #region Manse-1F-1c
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.treasureItemListIndex, ItemList.smallCoinPurseIndex));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.salvagedGuardBootsIndex));
+
+        chestItemIDList.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section1c, list);
+
+        #endregion
+
+        #region Manse-1F-2a
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.properFoodIndex));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.salvagedGuardHelmIndex));
+
+        chestItemIDList.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2a, list);
+
+        #endregion
+
         #endregion
 
         #region Manse-2F

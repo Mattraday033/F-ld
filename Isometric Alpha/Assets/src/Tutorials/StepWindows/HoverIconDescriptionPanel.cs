@@ -42,6 +42,9 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
         if (alwaysTop)
         {
             direction = ArrowDirection.Top;
+        } else if(Flags.isInNewGameMode())
+        {
+            direction = ArrowDirection.Bottom;
         } else
         {
             direction = getDirectionOfHover(RectTransformUtility.WorldToScreenPoint(Camera.main, centerWorldPosition));    
