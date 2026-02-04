@@ -253,8 +253,8 @@ public static class DialogueList
                                                         }, 
                             Resources.Load<TextAsset>(DialogueNameList.slavesAfterKillingOverseerCampNEPathName)));
 
-        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.slave+5,
-                         new Dialogue(new string[] { NPCNameList.slave+5 }, 
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.temple+1,
+                         new Dialogue(new string[] { NPCNameList.temple+1 }, 
                             Resources.Load<TextAsset>(DialogueNameList.slaveFiveNECampPathName)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.slave+6,
@@ -269,8 +269,8 @@ public static class DialogueList
                          new Dialogue(new string[] { NPCNameList.slave+8 }, 
                             Resources.Load<TextAsset>(DialogueNameList.slaveEightNECampPathName)));
 
-        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.slave+9,
-                         new Dialogue(new string[] { NPCNameList.slave+9 }, 
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.clay+1,
+                         new Dialogue(new string[] { NPCNameList.clay+1 }, 
                             Resources.Load<TextAsset>(DialogueNameList.slaveNineNECampPathName)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.woundedSlave,

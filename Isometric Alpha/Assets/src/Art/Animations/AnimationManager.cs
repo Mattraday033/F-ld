@@ -280,6 +280,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         }
 
         addIdleSpritesOfType(characterToAnimate, folderPath, CharacterAnimationType.Death);
+        addIdleSpritesOfType(characterToAnimate, folderPath, CharacterAnimationType.Death_Back);
+        addIdleSpritesOfType(characterToAnimate, folderPath, CharacterAnimationType.Death_Front);
     }
 
     private static void addIdleSpritesOfType(string characterToAnimate, string folderPath, CharacterAnimationType type)

@@ -291,6 +291,13 @@ public static class PrefabNames
     public const string lowStalagmite = stalagmiteFolder + "Low Stalagmite";
 
     public const string furnitureFolder = spriteFolder + "Furniture/";
+
+    public const string bedFolder = furnitureFolder + "Beds/"; // Assets/Resources/Sprites/Furniture/Beds/Hay/SlaveBed.png
+
+    public const string hayBedFolder = bedFolder + "Hay/";
+
+    public const string slaveBed = hayBedFolder + "SlaveBed";
+
     public const string chestsFolder = furnitureFolder + "Chests/";
     public const string chestBackClosed = chestsFolder + "Chest_Back_Closed";
     public const string chestBackOpenFilled = chestsFolder + "Chest_Back_Opened_Filled";

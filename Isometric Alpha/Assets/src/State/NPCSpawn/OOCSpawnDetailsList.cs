@@ -260,78 +260,80 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.janos, new Vector3Int(10, 6), facing: Facing.SouthEast, ignoresSecretDoors: false));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.clay, new Vector3Int(9, 2), facing: Facing.NorthWest, ignoresSecretDoors: false));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveOne, new Vector3Int(11, 3), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveTwo, new Vector3Int(11, 6), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveThree, new Vector3Int(8, 2), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveFour, new Vector3Int(9, 6), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveOne, new Vector3Int(11, 3), ignoresSecretDoors: false, facing: Facing.SouthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveTwo, new Vector3Int(11, 6), ignoresSecretDoors: false, facing: Facing.SouthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveThree, new Vector3Int(8, 2), ignoresSecretDoors: false, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveFour, new Vector3Int(9, 6), ignoresSecretDoors: false, facing: Facing.SouthEast));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 2), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 1), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 0), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, -1), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.temple, new Vector3Int(11, 2), ignoresSecretDoors: false, facing: Facing.SouthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.kastor+1, new Vector3Int(11, 1), ignoresSecretDoors: false, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+12, new Vector3Int(11, 0), ignoresSecretDoors: false, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.balint, new Vector3Int(11, -1), ignoresSecretDoors: false, facing: Facing.NorthWest));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 2), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 1), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 0), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, -1), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+10, new Vector3Int(10, 2), ignoresSecretDoors: false, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.temple, new Vector3Int(10, 1), ignoresSecretDoors: false, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+12, new Vector3Int(10, 0), ignoresSecretDoors: false, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.clay, new Vector3Int(10, -1), ignoresSecretDoors: false, facing: Facing.NorthWest));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 1), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 0), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, -1), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.balint, new Vector3Int(9, 1), ignoresSecretDoors: false, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.ervin, new Vector3Int(9, 0), ignoresSecretDoors: false, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(9, -1), ignoresSecretDoors: false, facing: Facing.NorthWest));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 1), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 0), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, -1), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.uros+1, new Vector3Int(8, 1), ignoresSecretDoors: false, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+10, new Vector3Int(8, 0), ignoresSecretDoors: false, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.temple, new Vector3Int(8, -1), ignoresSecretDoors: false, facing: Facing.NorthWest));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(7, 1), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+12, new Vector3Int(7, 1), ignoresSecretDoors: false, facing: Facing.NorthWest));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(5, 3), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.crowd, new Vector3Int(5, 2), ignoresSecretDoors: false)); //Crowd
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(5, 1), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(5, 0), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(5, -1), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.ervin, new Vector3Int(5, 3), ignoresSecretDoors: false, facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.crowd, new Vector3Int(5, 2), ignoresSecretDoors: false, facing: Facing.NorthEast)); //Crowd
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+10, new Vector3Int(5, 1), ignoresSecretDoors: false, facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.garcha, new Vector3Int(5, 0), ignoresSecretDoors: false, facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.kastor+1, new Vector3Int(5, -1), ignoresSecretDoors: false, facing: Facing.NorthEast));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(4, 3), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(4, 2), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(4, 1), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(4, 0), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(4, 3), ignoresSecretDoors: false, facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+10, new Vector3Int(4, 2), ignoresSecretDoors: false, facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+11, new Vector3Int(4, 1), ignoresSecretDoors: false, facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+12, new Vector3Int(4, 0), ignoresSecretDoors: false, facing: Facing.NorthEast));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(3, 2), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(3, 2), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.kastor+1, new Vector3Int(3, 2), ignoresSecretDoors: false, facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+10, new Vector3Int(3, 1), ignoresSecretDoors: false, facing: Facing.NorthEast));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 9), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 8), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(11, 7), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.balint, new Vector3Int(11, 9), ignoresSecretDoors: false, facing: Facing.SouthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.ervin, new Vector3Int(11, 8), ignoresSecretDoors: false, facing: Facing.SouthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+10, new Vector3Int(11, 7), ignoresSecretDoors: false, facing: Facing.SouthEast));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 10), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 9), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 8), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(10, 7), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+11, new Vector3Int(10, 10), ignoresSecretDoors: false, facing: Facing.SouthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.uros+1, new Vector3Int(10, 9), ignoresSecretDoors: false, facing: Facing.SouthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+10, new Vector3Int(10, 8), ignoresSecretDoors: false, facing: Facing.SouthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.garcha, new Vector3Int(10, 7), ignoresSecretDoors: false, facing: Facing.SouthEast));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 10), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 9), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 8), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(9, 7), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+12, new Vector3Int(9, 10), ignoresSecretDoors: false, facing: Facing.SouthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.ervin, new Vector3Int(9, 9), ignoresSecretDoors: false, facing: Facing.SouthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+11, new Vector3Int(9, 8), ignoresSecretDoors: false, facing: Facing.SouthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+12, new Vector3Int(9, 7), ignoresSecretDoors: false, facing: Facing.SouthEast));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 9), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 8), ignoresSecretDoors: false));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(8, 7), ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.balint, new Vector3Int(8, 9), ignoresSecretDoors: false, facing: Facing.SouthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+11, new Vector3Int(8, 8), ignoresSecretDoors: false, facing: Facing.SouthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(8, 7), ignoresSecretDoors: false, facing: Facing.SouthEast));
 
         #endregion
 
         #region After Slaves Recruited
 
-        list.Add(new NPCSpawnDetails(NPCNameList.slave+5, new Vector3Int(-2, 9), LocationNameList.campNorthEast, ignoresSecretDoors: false));
-        list.Add(new NPCSpawnDetails(NPCNameList.slave+6, new Vector3Int(6, 10), LocationNameList.campNorthEast, ignoresSecretDoors: false));
-        list.Add(new NPCSpawnDetails(NPCNameList.slave+7, new Vector3Int(-3, -8), LocationNameList.campNorthEast, ignoresSecretDoors: false));
-        list.Add(new NPCSpawnDetails(NPCNameList.slave+8, new Vector3Int(2, -3), LocationNameList.campNorthEast, ignoresSecretDoors: false));
-        list.Add(new NPCSpawnDetails(NPCNameList.slave+9, new Vector3Int(-6, -1), LocationNameList.campNorthEast, ignoresSecretDoors: false));
-        list.Add(new ShopkeeperSpawnDetails(NPCNameList.uros, new Vector3Int(-6, 2), LocationNameList.campNorthEast, ignoresSecretDoors: false));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.temple+1, new Vector3Int(-2, 9), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+6, new Vector3Int(6, 10), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+7, new Vector3Int(-3, -8), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+8, new Vector3Int(2, -3), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.clay+1, new Vector3Int(-6, -1), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthWest));
+        list.Add(new ShopkeeperSpawnDetails(NPCNameList.uros, new Vector3Int(-6, 2), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthEast));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(11, 1), LocationNameList.campNorthEast, facing: Facing.SouthWest));
-        list.Add(new NPCSpawnDetails(NPCNameList.woundedSlave, new Vector3Int(11, 3), LocationNameList.campNorthEast, ignoresSecretDoors: false));
-        list.Add(new NPCSpawnDetails(NPCNameList.woundedSlave+1, new Vector3Int(11, 6), LocationNameList.campNorthEast, ignoresSecretDoors: false));
-        list.Add(new NPCSpawnDetails(NPCNameList.woundedSlave+2, new Vector3Int(11, 8), LocationNameList.campNorthEast, ignoresSecretDoors: false));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.woundedSlave, new Vector3Int(11, 3), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.woundedSlave+1, new Vector3Int(11, 6), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.woundedSlave+2, new Vector3Int(11, 8), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.NorthEast, animationType: CharacterAnimationType.Death_Back, offset: Constants.onTableHeightOffset*-2f));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.bed, new Vector3Int(11, 8), PrefabNames.slaveBed, offset: Constants.onTableHeightOffset*-3f, flipX: true));  
+
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor, new Vector3Int(11, 2), LocationNameList.campNorthEast, facing: Facing.SouthEast, ignoresSecretDoors: false));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.garcha+1, new Vector3Int(-2, 1), LocationNameList.campNorthEast, facing: Facing.SouthWest, ignoresSecretDoors: false));
@@ -1173,7 +1175,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ButtonSpawnDetails(new Vector3Int(-4, -4)));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(-4, -5)));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2b, list);
 
@@ -1216,7 +1218,7 @@ public static class OOCSpawnDetailsList
         #region Manse-2F-Office
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.director, new Vector3Int(2, -1), ZoneKeyList.manseSecondFloor + LocationNameList.office));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.director, new Vector3Int(2, -1), ZoneKeyList.manseSecondFloor + LocationNameList.office));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(-3, -3), facing: Facing.NorthEast)); 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.nandor, new Vector3Int(-3, 0), facing: Facing.NorthEast)); 

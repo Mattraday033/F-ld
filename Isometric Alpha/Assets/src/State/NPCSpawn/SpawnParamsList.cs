@@ -246,8 +246,28 @@ public static class SpawnParamsList
                                new InteractableSpawnParams(rallySlavesCampNE, spawnWhileHostile));
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.slaveFour),
                                new InteractableSpawnParams(rallySlavesCampNE, spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.slave+10),
+                               new InteractableSpawnParams(rallySlavesCampNE, spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.slave+11),
+                               new InteractableSpawnParams(rallySlavesCampNE, spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.slave+12),
+                               new InteractableSpawnParams(rallySlavesCampNE, spawnWhileHostile));
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.crowd),
                                new InteractableSpawnParams(rallySlavesCampNE, spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.thatch),
+                               new InteractableSpawnParams(rallySlavesCampNE, spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.ervin),
+                               new InteractableSpawnParams(rallySlavesCampNE, spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.kastor+1),
+                               new InteractableSpawnParams(rallySlavesCampNE, spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.uros+1),
+                               new InteractableSpawnParams(rallySlavesCampNE, spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.balint),
+                               new InteractableSpawnParams(rallySlavesCampNE, spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.temple),
+                               new InteractableSpawnParams(rallySlavesCampNE, spawnWhileHostile));
+
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.janos),
                                new InteractableSpawnParams(rallySlavesCampNE, spawnWhileHostile));
@@ -266,15 +286,16 @@ public static class SpawnParamsList
 
         #region After Successful Rally Convo
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.slave+5), slavesInNorthEastCamp);
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.temple+1), slavesInNorthEastCamp);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.slave+6), slavesInNorthEastCamp);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.slave+7), slavesInNorthEastCamp);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.slave+8), slavesInNorthEastCamp);
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.slave+9), slavesInNorthEastCamp);
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.clay+1), slavesInNorthEastCamp);
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.woundedSlave), slavesInNorthEastCamp);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.woundedSlave+1), slavesInNorthEastCamp);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.woundedSlave+2), slavesInNorthEastCamp);
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.bed), slavesInNorthEastCamp);
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.garcha+1), slavesInNorthEastCamp);
 

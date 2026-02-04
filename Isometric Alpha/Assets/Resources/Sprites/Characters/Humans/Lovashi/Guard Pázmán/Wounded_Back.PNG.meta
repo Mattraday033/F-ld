@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0b03b4e709f28e74a94c17248f1a8065
+guid: 94cd8707f9b3d304483e6f4c10003e96
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02189519ca2dba245830d237cb21c685
-      internalID: 838688121
+      spriteID: d97312063b438024d94f2cf505e9f492
+      internalID: 385565315
       vertices: []
       indices: 
       edges: []
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6020b5cac8a507147879ac8f4820a193
-      internalID: 1857232061
+      spriteID: 7f2e5db22e50d394c84b4c3e30b62cef
+      internalID: 846739078
       vertices: []
       indices: 
       edges: []
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c66eb62abf1068c46ad1e82f9b2fd678
-      internalID: 1387856608
+      spriteID: 1fc40cbd7ef9c3f4db8c8b797b0a8758
+      internalID: -1908777644
       vertices: []
       indices: 
       edges: []
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8bcc05a21ae2e104a8a3f9c000c58c7c
-      internalID: -1217419677
+      spriteID: c7ee75b21dd738140bf6a7c85b2e2044
+      internalID: -2089729536
       vertices: []
       indices: 
       edges: []
@@ -195,8 +195,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e6604b8a8716934cb7480cd8e8d404b
-      internalID: -1849865819
+      spriteID: 27c99e1c82558ef4ca532e98a8dbeb1c
+      internalID: 823952468
       vertices: []
       indices: 
       edges: []
@@ -212,11 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Wounded_Back_0: 838688121
-      Wounded_Back_1: 1857232061
-      Wounded_Back_2: 1387856608
-      Wounded_Back_3: -1217419677
-      Wounded_Back_4: -1849865819
+      Wounded_Back_0: 385565315
+      Wounded_Back_1: 846739078
+      Wounded_Back_2: -1908777644
+      Wounded_Back_3: -2089729536
+      Wounded_Back_4: 823952468
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

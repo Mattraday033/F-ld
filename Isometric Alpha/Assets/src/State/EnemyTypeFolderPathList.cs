@@ -26,6 +26,11 @@ public static class EnemyTypeFolderPathList
 
         if(!folderPathDict.ContainsKey(enemyType))
         {
+            enemyType = DialogueList.scrubNameOfEndNumbers(enemyType);
+        }
+
+        if(!folderPathDict.ContainsKey(enemyType))
+        {
             return folderPathDict[MonsterNameList.executioner];
         }
 
@@ -93,12 +98,42 @@ public static class EnemyTypeFolderPathList
 
         folderPathDict.Add(NPCNameList.seb, brandedFolderPath + MonsterNameList.brandedConscript + "/");
         folderPathDict.Add(NPCNameList.slate, brandedFolderPath + MonsterNameList.brandedConscript + "/");
+
+        folderPathDict.Add(MonsterNameList.brandedRioter +  MonsterNameList.pickMarker, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.pickMarker + "/");   
+        folderPathDict.Add(MonsterNameList.brandedRioter +  MonsterNameList.shivMarker, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.shivMarker + "/");   
+        folderPathDict.Add(MonsterNameList.brandedRioter +  MonsterNameList.shovelMarker, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.shovelMarker + "/");   
+
+        folderPathDict.Add(NPCNameList.slave, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.pickMarker + "/");   
+        folderPathDict.Add(NPCNameList.slave+1, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.shivMarker + "/");   
+        folderPathDict.Add(NPCNameList.slave+2, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.shovelMarker + "/");
+        folderPathDict.Add(NPCNameList.slave+3, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.pickMarker + "/");   
+        folderPathDict.Add(NPCNameList.slave+4, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.shivMarker + "/");   
+        folderPathDict.Add(NPCNameList.slave+5, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.shovelMarker + "/");
+        folderPathDict.Add(NPCNameList.slave+6, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.pickMarker + "/");   
+        folderPathDict.Add(NPCNameList.slave+7, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.shivMarker + "/");   
+        folderPathDict.Add(NPCNameList.slave+8, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.shovelMarker + "/");  
+        folderPathDict.Add(NPCNameList.slave+9, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.pickMarker + "/");   
+        folderPathDict.Add(NPCNameList.slave+10, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.shivMarker + "/");   
+        folderPathDict.Add(NPCNameList.slave+11, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.shovelMarker + "/");  
+        folderPathDict.Add(NPCNameList.slave+12, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.pickMarker + "/");
+
+        folderPathDict.Add(NPCNameList.woundedSlave, brandedFolderPath + NPCNameList.ervin + "/");
+        folderPathDict.Add(NPCNameList.woundedSlave+1, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.shivMarker + "/");
+        folderPathDict.Add(NPCNameList.woundedSlave+2, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.shovelMarker + "/");
+        
+        folderPathDict.Add(NPCNameList.crowd, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.pickMarker + "/");           
         #endregion
 
         #region Nonbranded Slaves
         folderPathDict.Add(NPCNameList.beam, nonbrandedFolderPath + NPCNameList.beam + "/");
         folderPathDict.Add(NPCNameList.imre, nonbrandedFolderPath + NPCNameList.imre + "/");
         folderPathDict.Add(NPCNameList.page, nonbrandedFolderPath + NPCNameList.page + "/");
+
+        folderPathDict.Add(MonsterNameList.noBrandLoyalist + Constants.maleMarker, nonbrandedFolderPath + MonsterNameList.noBrandLoyalist + Constants.maleMarker + "/");
+        folderPathDict.Add(MonsterNameList.noBrandLoyalist + Constants.femaleMarker, nonbrandedFolderPath + MonsterNameList.noBrandLoyalist + Constants.femaleMarker + "/");
+
+        folderPathDict.Add(MonsterNameList.noBrandRioter + Constants.femaleMarker, nonbrandedFolderPath + MonsterNameList.noBrandRioter + Constants.femaleMarker + "/");
+        folderPathDict.Add(MonsterNameList.noBrandRioter + Constants.maleMarker, nonbrandedFolderPath + MonsterNameList.noBrandRioter + Constants.maleMarker + "/");
         #endregion
 
         #endregion

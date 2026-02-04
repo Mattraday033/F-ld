@@ -403,7 +403,7 @@ public static class MonsterSpawnDetailsList
 
         list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-8, 5), Facing.Random));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-1, 1), Facing.Random, movementType: MonsterMovementType.Chases));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section1b, list);
 

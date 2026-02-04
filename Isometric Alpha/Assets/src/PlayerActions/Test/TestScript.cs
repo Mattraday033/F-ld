@@ -37,11 +37,11 @@ public static class TestScript
 
         // PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
 
-        //Inventory.addItem(ItemList.getItem(ItemList.usableItemListIndex, ItemList.bandagesIndex, 5));
+        // Inventory.addItem(ItemList.getItem(ItemList.usableItemListIndex, ItemList.bandagesIndex, 5));
 
-        //Inventory.addItem(ItemList.getItem(ItemList.treasureItemListIndex, ItemList.smallCoinPurseIndex));
+        // Inventory.addItem(ItemList.getItem(ItemList.treasureItemListIndex, ItemList.smallCoinPurseIndex));
 
-        //Inventory.addItem(ItemList.getItem(ItemList.weaponsListIndex, ItemList.shivIndex));
+        // Inventory.addItem(ItemList.getItem(ItemList.weaponsListIndex, ItemList.shivIndex));
         // Inventory.addItem(ItemList.getItem(ItemList.weaponsListIndex, ItemList.cudgelIndex));
 
         // Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.bronzeDirkIndex));

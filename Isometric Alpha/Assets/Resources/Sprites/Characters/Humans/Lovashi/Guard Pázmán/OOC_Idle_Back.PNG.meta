@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9fe7402575607484596fbcea84070bc3
+guid: aecfd8d70d3a36d44bb126270fa76dc5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73106312183dc34479533b3dca4d34e7
-      internalID: -823974403
+      spriteID: fc40df855bf01914e9dd3c9df7edd36f
+      internalID: 100928351
       vertices: []
       indices: 
       edges: []
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 038bf1de68f5e2c44a30537760a6e551
-      internalID: -178009836
+      spriteID: 71d7f4a5f7578c04793187230656cbd5
+      internalID: -666946601
       vertices: []
       indices: 
       edges: []
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 124be8d4d6f469b40b4ff414423a0805
-      internalID: 565982228
+      spriteID: a16a7634083d5d8448d4ed7430903a5a
+      internalID: 1174888277
       vertices: []
       indices: 
       edges: []
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b82626f78310a7141a4e53f0ea988d7a
-      internalID: 326741708
+      spriteID: a9fdf8906d8e1f942a53cffd2d3786f9
+      internalID: -1832792756
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      OOC_Idle_Back_0: -823974403
-      OOC_Idle_Back_1: -178009836
-      OOC_Idle_Back_2: 565982228
-      OOC_Idle_Back_3: 326741708
+      OOC_Idle_Back_0: 100928351
+      OOC_Idle_Back_1: -666946601
+      OOC_Idle_Back_2: 1174888277
+      OOC_Idle_Back_3: -1832792756
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

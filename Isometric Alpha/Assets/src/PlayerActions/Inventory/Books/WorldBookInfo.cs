@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldBookInfo : MonoBehaviour
+public class WorldBookInfo : MonoBehaviour, INameSource
 {
     public const bool giveCopyOfBook = true;
     public const bool doNotGiveCopyOfBook = true;
@@ -23,5 +23,9 @@ public class WorldBookInfo : MonoBehaviour
         getBook().use(PartyManager.getPlayerStats(), receivesBook, previousActivity, gameObject);
     }
     
+    public string getName()
+    {
+        return getBook().getName();
+    }
 
 }

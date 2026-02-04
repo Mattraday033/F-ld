@@ -4,6 +4,9 @@ using UnityEngine;
 
 public static class TransitionSpawnInfoList
 {
+    private const bool sendingMatrix = false;
+    private const bool receivingMatrix = true;
+
     private const int twoSpaceMultiplier = 2;
 
     private const int startingIndexOne = 1;
@@ -428,7 +431,7 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(ZoneKeyList.manseFirstFloor + LocationNameList.section2b, ZoneKeyList.manseFirstFloor + LocationNameList.section2c, new Vector3Int(3, -1), Facing.NorthWest, Constants.sizeTwo, Axis.DescendingX));
 
-        list.Add(new TransitionSpawnInfo(ZoneKeyList.manseFirstFloor + LocationNameList.section2b, ZoneKeyList.pit + LocationNameList.section1b, new Vector3Int(-4, -6), Facing.SouthWest));
+        list.Add(new TransitionSpawnInfo(ZoneKeyList.manseFirstFloor + LocationNameList.section2b, ZoneKeyList.pit + LocationNameList.section1b, new Vector3Int(-4, -7), Facing.SouthWest));
 
         transitionSpawnInfoDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2b, list);
 
@@ -439,23 +442,21 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(ZoneKeyList.manseFirstFloor + LocationNameList.section2c, ZoneKeyList.manseFirstFloor + LocationNameList.section2b, new Vector3Int(0, 4), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX));
 
-        list.Add(new TransitionSpawnInfo(ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(-3, 3), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingX));
-        list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(3, 2), Facing.SouthWest, Constants.sizeThree, Axis.DescendingX));
-        list.Add(new TransitionSpawnInfoWithCorner(5, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(-4, 2), Facing.SouthWest));
-        list.Add(new TransitionSpawnInfoWithCorner(6, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(0, 1), Facing.SouthWest));
-        list.Add(new TransitionSpawnInfoWithCorner(7, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(-2, 1), Facing.SouthWest));
-        list.Add(new TransitionSpawnInfoWithCorner(8, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(-4, 1), Facing.SouthWest));
-        list.Add(new TransitionSpawnInfoWithCorner(9, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(0, 0), Facing.SouthWest));
-        list.Add(new TransitionSpawnInfoWithCorner(10, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(-2, 0), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingX));
-        list.Add(new TransitionSpawnInfoWithCorner(12, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(1, -1), Facing.SouthWest));
-        list.Add(new TransitionSpawnInfoWithCorner(13, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(-1, -1), Facing.SouthWest));
-        list.Add(new TransitionSpawnInfoWithCorner(14, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(3, -2), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingX));
-        list.Add(new TransitionSpawnInfoWithCorner(16, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(0, -2), Facing.SouthWest));
-        list.Add(new TransitionSpawnInfoWithCorner(17, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(-4, -2), Facing.SouthWest));
-        list.Add(new TransitionSpawnInfoWithCorner(18, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(0, -3), Facing.SouthWest));
-        list.Add(new TransitionSpawnInfoWithCorner(19, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(-2, -3), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingX));
-        list.Add(new TransitionSpawnInfoWithCorner(21, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(-1, -4), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingX));
-        list.Add(new TransitionSpawnInfoWithCorner(23, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(-4, -4), Facing.SouthWest));
+        List<Vector3Int> m1F2CToP1aCoords = new List<Vector3Int>() { new Vector3Int(-3, 3), new Vector3Int(3, 2), new Vector3Int(2, 2), new Vector3Int(1, 2), new Vector3Int(-4, 2),
+                                                                     new Vector3Int(0, 1), new Vector3Int(-2, 1), new Vector3Int(-4, 1), new Vector3Int(0, 0), new Vector3Int(-2, 0), 
+                                                                     new Vector3Int(-3, 0), new Vector3Int(1, -1), new Vector3Int(-1,-1), new Vector3Int(3,-2),new Vector3Int(2,-2), 
+                                                                     new Vector3Int(0,-2), new Vector3Int(-4,-2), new Vector3Int(0,-3), new Vector3Int(-2,-3), new Vector3Int(-3,-3), 
+                                                                     new Vector3Int(-1,-4), new Vector3Int(-2,-4), new Vector3Int(-4,-4)};
+
+        list.Add(new TransitionSpawnInfoMatrix(ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1a, sendingMatrix, m1F2CToP1aCoords));
+
+        List<Vector3Int> m2F2bToM1F2cCoords = new List<Vector3Int>() { new Vector3Int(3,3), new Vector3Int(1,3), new Vector3Int(-2,3), new Vector3Int(-3,2), new Vector3Int(3,1),
+                                                                        new Vector3Int(1,1), new Vector3Int(-1,1), new Vector3Int(-3,1), new Vector3Int(1,0), new Vector3Int(-1,0),
+                                                                        new Vector3Int(-4,0), new Vector3Int(-2,-1), new Vector3Int(-4,-1), new Vector3Int(1,-2), new Vector3Int(-3,-2),
+                                                                        new Vector3Int(3,-3), new Vector3Int(1,-3), new Vector3Int(-1,-3), new Vector3Int(2,-4), new Vector3Int(0,-4)};
+
+        list.Add(new TransitionSpawnInfoMatrix(ZoneKeyList.manseFirstFloor + LocationNameList.section2c, ZoneKeyList.manseSecondFloor + LocationNameList.section2b, receivingMatrix, m2F2bToM1F2cCoords));
+
 
         transitionSpawnInfoDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2c, list);
 
@@ -541,7 +542,7 @@ public static class TransitionSpawnInfoList
 
         list = new List<TransitionSpawnInfo>();
 
-        list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.section1a, ZoneKeyList.manseSecondFloor + LocationNameList.section2a, new Vector3Int(4, 8), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX));
+        list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.section1a, ZoneKeyList.manseSecondFloor + LocationNameList.section2a, new Vector3Int(3, 8), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX));
 
         list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.section1a, ZoneKeyList.manseSecondFloor + LocationNameList.section1b, new Vector3Int(10, 5), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingY));
 
@@ -607,9 +608,11 @@ public static class TransitionSpawnInfoList
 
         list = new List<TransitionSpawnInfo>();
 
-        list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.section2b, ZoneKeyList.manseSecondFloor + LocationNameList.section2a, new Vector3Int(6, 10), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingY));
+        list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.section2b, ZoneKeyList.manseSecondFloor + LocationNameList.section2a, new Vector3Int(4, 8), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingY));
 
-        list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.section2b, ZoneKeyList.manseSecondFloor + LocationNameList.section3a, new Vector3Int(-3, 10), Facing.NorthEast, Constants.sizeTwo, Axis.DescendingY));
+        list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.section2b, ZoneKeyList.manseSecondFloor + LocationNameList.section3a, new Vector3Int(-5, 8), Facing.NorthEast, Constants.sizeTwo, Axis.DescendingY));
+
+        list.Add(new TransitionSpawnInfoMatrix(ZoneKeyList.manseSecondFloor + LocationNameList.section2b, ZoneKeyList.manseFirstFloor + LocationNameList.section2c, sendingMatrix, m2F2bToM1F2cCoords));
 
         transitionSpawnInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section2b, list);
 
@@ -636,7 +639,7 @@ public static class TransitionSpawnInfoList
 
         list = new List<TransitionSpawnInfo>();
 
-        list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.section3a, ZoneKeyList.manseFirstFloor + LocationNameList.section2b, new Vector3Int(9, 10), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingY));
+        list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.section3a, ZoneKeyList.manseSecondFloor + LocationNameList.section2b, new Vector3Int(9, 10), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingY));
 
         list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.section3a, ZoneKeyList.manseSecondFloor + LocationNameList.section3b, new Vector3Int(-12, 10), Facing.NorthEast, Constants.sizeTwo, Axis.DescendingY));
 
@@ -692,23 +695,15 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.stairsToPit, new Vector3Int(0, 4), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX));
 
-        list.Add(new TransitionSpawnInfo(ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, new Vector3Int(-3, 3), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingX, destinationOnly: true));
-        list.Add(new TransitionSpawnInfoWithCorner(startingIndexTwo, ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, new Vector3Int(3, 2), Facing.SouthWest, Constants.sizeThree, Axis.DescendingX, destinationOnly: true));
-        list.Add(new TransitionSpawnInfoWithCorner(5, ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, new Vector3Int(-4, 2), Facing.SouthWest, destinationOnly: true));
-        list.Add(new TransitionSpawnInfoWithCorner(6, ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, new Vector3Int(0, 1), Facing.SouthWest, destinationOnly: true));
-        list.Add(new TransitionSpawnInfoWithCorner(7, ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, new Vector3Int(-2, 1), Facing.SouthWest, destinationOnly: true));
-        list.Add(new TransitionSpawnInfoWithCorner(8, ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, new Vector3Int(-4, 1), Facing.SouthWest, destinationOnly: true));
-        list.Add(new TransitionSpawnInfoWithCorner(9, ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, new Vector3Int(0, 0), Facing.SouthWest, destinationOnly: true));
-        list.Add(new TransitionSpawnInfoWithCorner(10, ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, new Vector3Int(-2, 0), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingX, destinationOnly: true));
-        list.Add(new TransitionSpawnInfoWithCorner(12, ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, new Vector3Int(1, -1), Facing.SouthWest, destinationOnly: true));
-        list.Add(new TransitionSpawnInfoWithCorner(13, ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, new Vector3Int(-1, -1), Facing.SouthWest, destinationOnly: true));
-        list.Add(new TransitionSpawnInfoWithCorner(14, ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, new Vector3Int(3, -2), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingX, destinationOnly: true));
-        list.Add(new TransitionSpawnInfoWithCorner(16, ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, new Vector3Int(0, -2), Facing.SouthWest, destinationOnly: true));
-        list.Add(new TransitionSpawnInfoWithCorner(17, ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, new Vector3Int(-4, -2), Facing.SouthWest, destinationOnly: true));
-        list.Add(new TransitionSpawnInfoWithCorner(18, ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, new Vector3Int(0, -3), Facing.SouthWest, destinationOnly: true));
-        list.Add(new TransitionSpawnInfoWithCorner(19, ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, new Vector3Int(-2, -3), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingX, destinationOnly: true));
-        list.Add(new TransitionSpawnInfoWithCorner(21, ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, new Vector3Int(-1, -4), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingX, destinationOnly: true));
-        list.Add(new TransitionSpawnInfoWithCorner(23, ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, new Vector3Int(-4, -4), Facing.SouthWest, destinationOnly: true));
+        list.Add(new TransitionSpawnInfoMatrix(ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, receivingMatrix, m1F2CToP1aCoords));
+
+        List<Vector3Int> p1aToP1bCoords = new List<Vector3Int>() { new Vector3Int(3,3), new Vector3Int(2,3), new Vector3Int(-4,3), new Vector3Int(0,2), new Vector3Int(-2,2),
+                                                                   new Vector3Int(-3,2), new Vector3Int(1,1), new Vector3Int(-1,1), new Vector3Int(-3,1), new Vector3Int(3,0),
+                                                                   new Vector3Int(1,0), new Vector3Int(-4,0), new Vector3Int(3,-1), new Vector3Int(2,-1), new Vector3Int(0,-1),
+                                                                   new Vector3Int(-4,-1), new Vector3Int(1,-2), new Vector3Int(-1,-2), new Vector3Int(-2,-2), new Vector3Int(-3,-2),
+                                                                   new Vector3Int(0,-4), new Vector3Int(-2,-4), new Vector3Int(-3,-4)};
+
+        list.Add(new TransitionSpawnInfoMatrix(ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1b, sendingMatrix, p1aToP1bCoords));
 
         transitionSpawnInfoDict.Add(ZoneKeyList.pit + LocationNameList.section1a, list);
 
@@ -721,7 +716,9 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(ZoneKeyList.pit + LocationNameList.section1b, ZoneKeyList.pit + LocationNameList.section2a, new Vector3Int(4, -3), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingY));
 
-        list.Add(new TransitionSpawnInfo(ZoneKeyList.pit + LocationNameList.section1b, ZoneKeyList.manseFirstFloor + LocationNameList.section2b, new Vector3Int(-5, -3), Facing.NorthEast));
+        list.Add(new TransitionSpawnInfo(ZoneKeyList.pit + LocationNameList.section1b, ZoneKeyList.manseFirstFloor + LocationNameList.section2b, new Vector3Int(-9, -2), Facing.SouthEast));
+
+        list.Add(new TransitionSpawnInfoMatrix(ZoneKeyList.pit + LocationNameList.section1b, ZoneKeyList.pit + LocationNameList.section1a, receivingMatrix, p1aToP1bCoords));
 
         transitionSpawnInfoDict.Add(ZoneKeyList.pit + LocationNameList.section1b, list);
 
@@ -1127,19 +1124,19 @@ public static class TransitionSpawnInfoList
 
 public class TransitionSpawnInfo
 {
-    private string currentArea;
-    private string destinationLocation;
+    protected string currentArea;
+    protected string destinationLocation;
 
     private Vector3Int startCell;
 
-    private Facing playerSpawnDirection;
-    private int outputMultiplier;
+    protected Facing playerSpawnDirection;
+    protected int outputMultiplier;
 
     private int size;
     private Axis axis;
-    private bool destinationOnly;
+    protected bool destinationOnly;
 
-    private PlayerInteractionScript scriptOnTransition;
+    protected PlayerInteractionScript scriptOnTransition;
     
 
     public TransitionSpawnInfo(string currentArea, string destinationLocation, Vector3Int startCell, Facing playerSpawnDirection, int size = 1, Axis axis = Axis.DescendingX, int outputMultiplier = 1, bool destinationOnly = false, PlayerInteractionScript scriptOnTransition = null)
@@ -1178,7 +1175,7 @@ public class TransitionSpawnInfo
         return outputMultiplier;
     }
 
-    public List<Transition> getTransitions()
+    public virtual List<Transition> getTransitions()
     {
         List<Transition> list = new List<Transition>();
 
@@ -1246,4 +1243,40 @@ public class FastTravelTransitionSpawnInfo : TransitionSpawnInfo
         return 0;
     }
 
+}
+
+public class TransitionSpawnInfoMatrix : TransitionSpawnInfo
+{
+
+    private List<Vector3Int> listOfCoords;
+
+    public TransitionSpawnInfoMatrix(string currentArea,
+                               string destinationLocation,
+                               bool destinationOnly, 
+                               List<Vector3Int> listOfCoords,
+                               PlayerInteractionScript scriptOnTransition = null):
+    base(currentArea,
+         destinationLocation,
+         Vector3Int.zero, 
+         Facing.SouthWest,
+         outputMultiplier: Constants.sizeZero,
+         destinationOnly: destinationOnly)
+    {
+        this.listOfCoords = listOfCoords;
+    }
+
+
+    public override List<Transition> getTransitions()
+    {
+        List<Transition> list = new List<Transition>();
+
+        int index = 0;
+        foreach(Vector3Int coords in listOfCoords)
+        {
+            list.Add(new Transition(currentArea, destinationLocation, coords, index + getStartIndex(), playerSpawnDirection, fastTravelCapable(), getOutputMultiplier(), scriptOnTransition, destinationOnly));
+            index++;
+        }
+
+        return list;
+    }
 }

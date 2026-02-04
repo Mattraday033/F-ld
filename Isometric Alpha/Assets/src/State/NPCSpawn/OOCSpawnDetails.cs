@@ -459,16 +459,11 @@ public class DoubleCunningBlockerSpawnDetails : CunningBlockerSpawnDetails
     }
 }
 
-public class ObstacleSpawnDetails : OOCSpawnDetails
+public class ObstacleSpawnDetails : OffSetSpawnDetails
 {
 
-    public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName) :
-    base(npcName, cellCoords, spriteName)
-    {
-    }
-
-    public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo) :
-    base(npcName, cellCoords, spriteName, sortingLayerInfo)
+    public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo = null, float offset = 0f, bool flipX = false) :
+    base(npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX)
     {
     }
 
@@ -495,10 +490,17 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
 
     public override void spawnActions(GameObject interactable)
     {
+        base.spawnActions(interactable);
+
         Obstacle obstacle = interactable.GetComponent<Obstacle>();
         obstacle.setObstacleName(npcName);
 
         spawnActions(interactable.GetComponent<SpriteRenderer>());
+
+        if(flipSprite())
+        {
+            interactable.transform.localScale = Constants.flippedXScale;
+        }
     }
 
     public override void spawnActions(SpriteRenderer spriteRenderer)
@@ -898,12 +900,13 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
                                          Vector3Int[] extraSpaces = null,
                                          SpeakAtStartScript speakAtStartScript = null,
                                          CharacterAnimationType animationType = CharacterAnimationType.None, 
-                                         bool ignoresSecretDoors = true) :
-    base(npcName, cellCoords, areaName, extraSpaces: extraSpaces, speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors) 
+                                         bool ignoresSecretDoors = true,
+                                         float offset = 0f) :
+    base(npcName, cellCoords, areaName, extraSpaces: extraSpaces, speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors, offset: offset) 
     {
         if(animationName == null)
         {
-            this.animationName = DialogueList.scrubNameOfEndNumbers(npcName);
+            this.animationName = npcName;
         } else
         {
             this.animationName = animationName;
@@ -934,7 +937,7 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
             return;
         }
 
-        animationManager.setAnimations(DialogueList.scrubNameOfEndNumbers(animationName));
+        animationManager.setAnimations(animationName);
         animationManager.setFacing(facing);
 
         if(animationType != CharacterAnimationType.None)
@@ -1312,8 +1315,8 @@ public class GateWithHiddenTerrainSpawnDetails : GateSpawnDetails
 public class ShopkeeperSpawnDetails : NPCWithAnimationsSpawnDetails
 {
 
-    public ShopkeeperSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string animationName = null, Vector3Int[] extraSpaces = null, bool ignoresSecretDoors = true) :
-    base(npcName, cellCoords, areaName, animationName: animationName, extraSpaces: extraSpaces, ignoresSecretDoors: ignoresSecretDoors)
+    public ShopkeeperSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string animationName = null, Vector3Int[] extraSpaces = null, bool ignoresSecretDoors = true, Facing facing = Facing.Random) :
+    base(npcName, cellCoords, areaName, animationName: animationName, extraSpaces: extraSpaces, ignoresSecretDoors: ignoresSecretDoors, facing: facing)
     {
 
     }
@@ -1660,7 +1663,7 @@ public class BookSpawnDetails : OffSetSpawnDetails
     base(npcName, cellCoords, spriteName)
     {
         this.bookIndex = bookIndex;
-        offset = Constants.onTableHeightOffset;
+        offset = Constants.onTableHeightOffset*2;
     }
 
     public override string getPrefabName()

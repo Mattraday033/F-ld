@@ -107,6 +107,7 @@ public static class NPCNameList
     public const string diary = "Diary";
     public const string orders = "Orders";
     public const string rubble = "Rubble";
+    public const string bed = "Bed";
     public const string chest = "Chest";
     public const string shelf = "Shelf";
     public const string crate = "Crate";

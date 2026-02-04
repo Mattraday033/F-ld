@@ -24,7 +24,15 @@ public static class MonsterNameList
     public const string signaleer = "Signaleer";
     public const string spearman = "Spearman";
 
+    public const string noBrandLoyalist = "No-Brand Loyalist";
+    public const string noBrandRioter = "No-Brand Rioter";
+
     public const string brandedConscript = "Branded Conscript";
+    public const string brandedRioter = "Branded Rioter";
+    
+    public const string pickMarker = " (Pick)";
+    public const string shivMarker = " (Shiv)";
+    public const string shovelMarker = " (Shovel)";
 
     public const string movableObject = "Movable Object";
 

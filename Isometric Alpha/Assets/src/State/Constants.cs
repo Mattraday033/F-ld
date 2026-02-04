@@ -103,6 +103,9 @@ public static class Constants
     public const float minFontSize = 12f;
 	public const float maxOpacity = 255f;
 
+    public const string femaleMarker = " (F)";
+    public const string maleMarker = " (M)";
+
     #region Creature Amounts
     public const int oneCreature = 1;
     public const int twoCreatures = 2;

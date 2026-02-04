@@ -555,6 +555,20 @@ public static class EnemyPackInfoList
         #endregion
 
         #endregion
+
+        #region Pit
+
+        #region Pit-1b
+
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+
+        enemyPackInfoDict.Add(ZoneKeyList.pit + LocationNameList.section1b, list);
+
+        #endregion
+
+        #endregion
     }
 
 

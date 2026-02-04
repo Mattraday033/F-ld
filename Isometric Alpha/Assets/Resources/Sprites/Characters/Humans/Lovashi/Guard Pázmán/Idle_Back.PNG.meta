@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 240e1e1293fb56f42a13afef3120206b
+guid: 50d357c6efc79b6488064388d26689ac
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82877874d95a5a349bca895d07046835
-      internalID: 1566551800
+      spriteID: 12d2c4261c783814987bb61ec6d4722a
+      internalID: 82401565
       vertices: []
       indices: 
       edges: []
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f026092d64b1cfe41b4b1743758c5423
-      internalID: -65237273
+      spriteID: 861d75f3c6bc7a648b8c8fe9c200d834
+      internalID: 1690011472
       vertices: []
       indices: 
       edges: []
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49fb5a15f8ee9064db7b6049f73a6327
-      internalID: -450408587
+      spriteID: 347f578fc162a55499428943388bbc58
+      internalID: -398314771
       vertices: []
       indices: 
       edges: []
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2606708901fa0c8499cd46def1715339
-      internalID: -2016513120
+      spriteID: ddee93788a9d05346b708e8039fedce0
+      internalID: 1280387068
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Idle_Back_0: 1566551800
-      Idle_Back_1: -65237273
-      Idle_Back_2: -450408587
-      Idle_Back_3: -2016513120
+      Idle_Back_0: 82401565
+      Idle_Back_1: 1690011472
+      Idle_Back_2: -398314771
+      Idle_Back_3: 1280387068
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
