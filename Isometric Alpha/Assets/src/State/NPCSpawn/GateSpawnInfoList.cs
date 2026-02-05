@@ -630,6 +630,23 @@ public static class GateSpawnInfoList
 
         #region Manse-2F
 
+        #region Manse-2F-3c
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.liftableGate,
+                                    ZoneKeyList.manseSecondFloor + LocationNameList.section3b,
+                                     new Vector3Int(0, -3),
+                                    PrefabNames.portcullis2x1Path,
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY,
+                                    statDifficulty: new KeyValuePair<string, int>(InkVariableNameList.strDiffVarName, Constants.difficultyThree)));
+                                    
+        gateSpawnInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, list);
+
+        #endregion
+
         #region Manse-2F-Office
 
         list = new List<GateSpawnInfo>();
@@ -643,6 +660,26 @@ public static class GateSpawnInfoList
                                     Axis.DescendingY));
                                     
         gateSpawnInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.office, list);
+
+        #endregion
+
+        #endregion
+
+        #region Pit
+
+        #region Pit-2b
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.cellDoor,
+                                    ZoneKeyList.pit + LocationNameList.section2b,
+                                    new Vector3Int(0, -3),
+                                    PrefabNames.portcullis2x1Path,
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+                                    
+        gateSpawnInfoDict.Add(ZoneKeyList.pit + LocationNameList.section2b, list);
 
         #endregion
 

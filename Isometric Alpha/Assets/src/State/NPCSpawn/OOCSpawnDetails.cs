@@ -1659,11 +1659,11 @@ public class BookSpawnDetails : OffSetSpawnDetails
 
     private int bookIndex;
 
-    public BookSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, int bookIndex) :
+    public BookSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, int bookIndex, float offset = Constants.onTableHeightOffset*2) :
     base(npcName, cellCoords, spriteName)
     {
         this.bookIndex = bookIndex;
-        offset = Constants.onTableHeightOffset*2;
+        this.offset = offset;
     }
 
     public override string getPrefabName()

@@ -10,7 +10,6 @@ VAR broglinIndex = 1
 VAR gateIndex = 2
 
 VAR pitCellKeyIndex = 1
-VAR pitGateKey = "Pit-Gate"
 
 VAR gateFlagPitGate = false
 
@@ -32,7 +31,7 @@ searchInventoryFor(hasPitCellKey,Key,{pitCellKeyIndex})
 
 === 1a ===
 
-\*Broglin stands up from where he was leaning against the wall of the cavern. Even in the dim light you can see that the entire right side of his face is bruised and swollen. His injuries continue down beneath his rags; it is as if he was beaten by someone with only one arm. He smiles through a grin that has lost many teeth since the last time you saw him.* Oh thank the Mother, you're here. After the guards left I thought I'd starve in here!
+\*Broglin stands up from where he was leaning against the wall of the cavern. Even in the dim light you can see that the entire right side of his face is bruised and swollen. His injuries continue down beneath his rags; it is as if he was beaten by someone with only one arm. He smiles through a grin that has lost many teeth since the last time you saw him.* Thank the Mother. After the guards left I thought I'd starve down here!
 
 {
 -hasPitCellKey:
@@ -122,7 +121,7 @@ fadeToBlack()
 
 setToTrue(freedBroglin)
 
-openGate({pitGateKey})
+openGate({gateIndex})
 
 deactivate({broglinIndex})
 deactivate({gateIndex})

@@ -3,6 +3,8 @@ VAR dexterity = 0
 VAR wisdom = 0
 VAR charisma = 0
 
+VAR strDifficulty = 2
+
 VAR gateKey = ""
 
 VAR playerName = ""
@@ -14,9 +16,9 @@ VAR playerName = ""
 
 This gate rattles at your touch. With enough effort it could be lifted.
 
-    +Attempt to lift the gate. <Str {strength}/2>
+    +Attempt to lift the gate. <Str {strength}/{strDifficulty}>
         {
-        -strength >= 2:
+        -strength >= strDifficulty:
             ->1b
         -else:
             ->1c

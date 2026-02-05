@@ -50,6 +50,7 @@ public static class StatSourceNameList
     // Charge traits
     public const string chargedKey = "Charged";
     public const string shieldedKey = "Shielded";
+    public const string protectedKey = "Protected";
     public const string signalingKey = "Signaling";
     public const string observingKey = "Observing";
 

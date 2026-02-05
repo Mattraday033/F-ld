@@ -274,6 +274,18 @@ public static class ChestItemIDList
 
         #endregion
 
+        #region Manse-1F-3c
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.bookListIndex, ItemList.theInventionOfSinIndex));
+        list.Add(new ItemListID(ItemList.bookListIndex, ItemList.nightOfEmptyPlinthsIndex));
+        list.Add(new ItemListID(ItemList.bookListIndex, ItemList.saintsAndSaintsIndex));
+
+        chestItemIDList.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3c, list);
+
+        #endregion
+
         #endregion
 
         #region Manse-2F
@@ -285,6 +297,40 @@ public static class ChestItemIDList
         list.Add(new ItemListID(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyFrontIndex));
 
         chestItemIDList.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section2c, list);
+
+        #endregion
+
+        #region Manse-2F-3b
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.bronzeGreatspearIndex));
+
+        chestItemIDList.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, list);
+
+        #endregion
+
+        #endregion
+
+        #region Pit
+
+        #region Pit-1b
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.wardensShieldIndex));
+
+        chestItemIDList.Add(ZoneKeyList.pit + LocationNameList.section1b, list);
+
+        #endregion
+
+        #region Pit-2d
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.keyItemListIndex, ItemList.pitCellKeyIndex));
+
+        chestItemIDList.Add(ZoneKeyList.pit + LocationNameList.section2d, list);
 
         #endregion
 

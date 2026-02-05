@@ -403,9 +403,19 @@ public static class MonsterSpawnDetailsList
 
         list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-1, 1), Facing.Random, movementType: MonsterMovementType.Chases));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-1, 0), Facing.Random, movementType: MonsterMovementType.Chases));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section1b, list);
+
+        #endregion
+
+        #region Pit-2d
+
+        list = new List<MonsterSpawnDetails>();
+
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.saints, new Vector3Int(-6, 4), Facing.SouthEast, movementType: MonsterMovementType.Stationary));
+
+        monsterSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section2d, list);
 
         #endregion
 

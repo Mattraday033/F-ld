@@ -69,6 +69,11 @@ public abstract class StatBoostSource : INameSource
         {
             case StatSourceNameList.halfHandStanceKey:
                 return "1";
+            case StatSourceNameList.shieldedKey:
+                return "10";
+            case StatSourceNameList.exitStrategyKey:
+            case StatSourceNameList.protectedKey:
+                return "15";
             default:
                 return Constants.zeroRating;
         }

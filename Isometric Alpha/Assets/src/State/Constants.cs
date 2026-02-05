@@ -72,6 +72,7 @@ public static class Constants
 	public const int oneStackPerApplication = 1;
 
     public const float onTableHeightOffset = 0.05f;
+    public const float onGroundHeightOffset = 0.3f;
 
     public const string STRDesignator = "STR";
     public const string DEXDesignator = "DEX";

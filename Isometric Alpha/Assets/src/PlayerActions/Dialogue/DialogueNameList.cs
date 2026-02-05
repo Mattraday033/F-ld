@@ -269,8 +269,21 @@ public static class DialogueNameList
 
     public const string officeDoorPathName = manseSecondFloorPathName + NPCNameList.officeDoor;
     public const string directorPathName = manseSecondFloorPathName + NPCNameList.director;
-    public const string directorDefeatedPathName = manseSecondFloorPathName + NPCNameList.director+"DefeatedConvo";
+    public const string directorDefeatedPathName = manseSecondFloorPathName + NPCNameList.director + "DefeatedConvo";
 
+    #endregion
+
+    #endregion
+
+    #region Pit
+
+    public const string pitPathName =  mansePathName + ZoneKeyList.pit + Constants.seperatorChar;
+
+    #region Pit-2b
+
+    public const string pitGatePathName = pitPathName + "Pit Gate";
+
+    public const string pitBroglinPathName = pitPathName + NPCNameList.broglin;
     #endregion
 
     #endregion

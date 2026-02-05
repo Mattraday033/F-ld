@@ -826,7 +826,7 @@ public static class DialogueList
 
         #endregion
 
-        #region Manse
+        #region Manse-1f
 
             addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.kende,
                                 new Dialogue(new string[]   { 
@@ -859,6 +859,10 @@ public static class DialogueList
                                  Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName), 
                                  DialogueCombatInfoList.beamAndCsalanCombatInfo));
 
+        #endregion
+
+        #region Manse-2f
+
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section2c, NPCNameList.chiefTabor,
                                 new Dialogue(new string[]   { NPCNameList.chiefTabor }, 
                                  Resources.Load<TextAsset>(DialogueNameList.chiefTaborManseSecondFloorPathName),
@@ -878,6 +882,7 @@ public static class DialogueList
         // addDialogueToList(DialogueNameList.directorDefeatedConvoKey,
         //                  new Dialogue(new string[] { "", "Director", "Page", "Carter", "Nándor" }, new GameObject[5], Resources.Load<TextAsset>(DialogueNameList.directorDefeatedConvoKey)));
 
+            addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, NPCNameList.liftableGate, liftableGateDialogue);
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.office, DialogueNameList.directorDefeatedConvoKey,
                                 new Dialogue(new string[]   {   
@@ -894,6 +899,18 @@ public static class DialogueList
                                 Resources.Load<TextAsset>(DialogueNameList.officeDoorPathName)));
 
         #endregion
+
+        #region Pit
+
+            addDialogueToList(ZoneKeyList.pit + LocationNameList.section2b, NPCNameList.cellDoor,
+                                new Dialogue(new string[]   { NPCNameList.cellDoor }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.pitGatePathName)));
+
+            addDialogueToList(ZoneKeyList.pit + LocationNameList.section2b, NPCNameList.broglin,
+                                new Dialogue(new string[]   { Constants.emptyString, NPCNameList.broglin, NPCNameList.cellDoor }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.pitBroglinPathName)));
+
+        #endregion//Assets/Resources/Dialogue/Manse/Pit/Pit Gate.ink
 
     }
 

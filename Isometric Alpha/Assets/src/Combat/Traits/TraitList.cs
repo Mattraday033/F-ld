@@ -63,8 +63,6 @@ public static class TraitList
 	public const int demoralizeExtraDamage = 5;
 	private const int predationExtraDamage = 4;
 	private const int halfHandStanceExtraDamage = 1;
-	private const double shieldedDamageReduction = .5;
-	private const double extraShieldedDamageReduction = .75;
 	private const double stonewallDamageReduction = .75;
 	private const double daringSacrificeDamageReduction = 1.0;
 	private const double exitStrategyDamageReduction = .6;
@@ -112,8 +110,8 @@ public static class TraitList
 	public readonly static Trait fodder = new Trait(StatSourceNameList.fodderKey, TraitType.Interaction, "This creature dies after it attacks", "Fodder");
 
 	public readonly static Trait charged = new Trait(StatSourceNameList.chargedKey, TraitType.Charge, "This creature is capable of delivering a devastating attack.", "Charged");
-	public readonly static Trait shielded = new ShieldTrait(StatSourceNameList.shieldedKey, TraitType.Charge, "This creature is shielded and takes half damage.", "Shielded", Constants.oneRoundDuration, shieldedDamageReduction);
-	public readonly static Trait extraShielded = new ShieldTrait(StatSourceNameList.shieldedKey, TraitType.Charge, "This creature is shielded and takes a quarter damage. It will lose this trait if it is the last enemy alive.", "Shielded", Constants.oneRoundDuration, extraShieldedDamageReduction);
+	public readonly static Trait shielded = new Trait(StatSourceNameList.shieldedKey, TraitType.Charge, "This creature takes reduced damage.", StatSourceNameList.shieldedKey, roundsLeft: Constants.oneRoundDuration, permanent: false);
+	public readonly static Trait extraShielded = new Trait(StatSourceNameList.protectedKey, TraitType.Charge, "This creature takes a reduced damage. It will lose this trait if it is the last enemy alive.", StatSourceNameList.shieldedKey, roundsLeft: Constants.oneRoundDuration, permanent: false);
 	public readonly static Trait signaling = new Trait(StatSourceNameList.signalingKey, TraitType.Charge, "This guard is going to call signal an arrow tower to fire upon their assailants.", "Signaling");
 	public readonly static Trait observing = new Trait(StatSourceNameList.observingKey, TraitType.Charge, "The creature is observing it's troops and developing a strategy.", "Observing");
 
@@ -134,8 +132,8 @@ public static class TraitList
 	//temporary buffs
 	public readonly static Trait daringSacrifice = new MandatoryTargetTrait(StatSourceNameList.daringSacrificeKey, TraitType.Protection, "Become invulnerable for one turn. All enemy attack patterns must include this creature when possible, even if they normally would not.", "DaringSacrifice", Constants.endOfRoundDuration, daringSacrificeDamageReduction);
 	public readonly static Trait cohesion = new DamageBoostTrait(StatSourceNameList.cohesionKey, iconName:  "Cohesion", roundsLeft: Constants.twoRoundDuration);
-	public readonly static Trait shoredUp = new ShieldTrait(StatSourceNameList.shoredUpKey, TraitType.Boost, "This creature only takes half of any damage dealt to it.", "Shielded", roundsLeft: Constants.twoRoundDuration, shieldedDamageReduction);
-	public readonly static Trait exitStrategy = new ShieldTrait(StatSourceNameList.exitStrategyKey, TraitType.Protection, "This creature and all of it's allies take 60% less damage until one round after the surprise round.", "ExitStrategy", roundsLeft: Constants.oneRoundDuration, exitStrategyDamageReduction); //exception to round duration rule because it's applied at the top of the first round and thus doesn't need to compensate for the first tick down.
+	// public readonly static Trait shoredUp = new ShieldTrait(StatSourceNameList.shoredUpKey, TraitType.Boost, "This creature only takes half of any damage dealt to it.", "Shielded", roundsLeft: Constants.twoRoundDuration, shieldedDamageReduction);
+	public readonly static Trait exitStrategy = new Trait(StatSourceNameList.exitStrategyKey, TraitType.Protection, "This creature and all of it's allies take reduced damage until one round after the surprise round.", "ExitStrategy", roundsLeft: Constants.oneRoundDuration, permanent: false); //exception to round duration rule because it's applied at the top of the first round and thus doesn't need to compensate for the first tick down.
 	public readonly static LinkTrait chokeholdLinkTrait = new LinkTrait(StatSourceNameList.chokeholdKey, "This creature deals half of all damage received to whoever it is linked to.", "Chokehold", Constants.twoRoundDuration, chokeholdDamagePercentage);
 	public readonly static Trait rallied = new DamageBoostTrait(StatSourceNameList.ralliedKey, iconName: "Rally", roundsLeft: Constants.fourRoundDuration, permanent: false);
 	public readonly static Trait chew = new DamageBoostTrait(chewKey, iconName: chewKey, roundsLeft: Constants.threeRoundDuration);

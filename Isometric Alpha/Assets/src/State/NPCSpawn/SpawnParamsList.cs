@@ -801,10 +801,21 @@ public static class SpawnParamsList
 
         #region Manse-2F
 
-        #region Manse-2F-2b
+        #region Manse-2F-2c
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseSecondFloor + LocationNameList.section2c, NPCNameList.chiefTabor),
                                         new InteractableSpawnParams(new StopSpawningFlagList(new string[] { FlagNameList.acceptedTaborsSurrenderAfterDirectorFight, FlagNameList.killedTaborInManse}),spawnWhileHostile));
+
+        #endregion
+
+        #endregion
+
+        #region Pit
+
+        #region Pit-2b
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.pit + LocationNameList.section2b, NPCNameList.broglin),
+                                        new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.goesWithBroglinsPlan}), new StopSpawningFlagList(new string[] { FlagNameList.freedBroglin}),spawnWhileHostile));
 
         #endregion
 
