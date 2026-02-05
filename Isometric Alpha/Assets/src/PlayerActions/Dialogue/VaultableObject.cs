@@ -98,6 +98,8 @@ public class Ladder : IStoryVariableSource
 {
     public const string barracksLadderDescription = "This ladder is old and weather-worn. One false step could alert the guards, or prove fatal.";
 
+    public const string kitchensLadderDescription = "This ladder has had some rungs removed to make it more difficult to climb. A dexterous enough individual could leap the gap, however.";
+
     public Facing facing;
     public int dexDifficulty;
 

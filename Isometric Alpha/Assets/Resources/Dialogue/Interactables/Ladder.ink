@@ -6,6 +6,8 @@ VAR charisma = 0
 VAR description = ""
 VAR destinationName = ""
 
+VAR dexDifficulty = 2
+
 VAR playerName = ""
 
 ->1a
@@ -15,15 +17,15 @@ VAR playerName = ""
 {description}
 
 {
--dexterity >= 2:
-    +\*Climb the ladder* <Dex {dexterity}/2>
+-dexterity >= dexDifficulty:
+    +\*Climb the ladder* <Dex {dexterity}/{dexDifficulty}>
         ->1b
     +\*Leave.*
         ->Close
         
 -else:
 
-    +\*Leave.* <Dex {dexterity}/2>
+    +\*Leave.* <Dex {dexterity}/{dexDifficulty}>
         ->Close
 }
 

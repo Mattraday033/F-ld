@@ -39,6 +39,8 @@ VAR playerName = ""
 
 === 1a ===
 
+setNPCFacing({loyalImreIndex},NW)
+
 setToTrue(kendeUponEnteringKitchens)
 
 changeCamTarget({kendeIndex})

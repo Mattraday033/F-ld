@@ -1227,7 +1227,7 @@ public class DialogueManager : MonoBehaviour
 
                     endDialogue();
 
-                    TransitionManager.changeLocation(new Transition(AreaManager.locationName, destinationName));
+                    TransitionManager.changeLocation(new Transition(AreaManager.locationName, destinationName, Transition.ladderTransition));
 
                     return;
 

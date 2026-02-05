@@ -1405,14 +1405,8 @@ public class LadderSpawnDetails : NPCSpawnDetails
 
     public Ladder ladder;
 
-    public LadderSpawnDetails(Vector3Int cellCoords, string spriteName, Ladder ladder) :
-    base(NPCNameList.ladder, cellCoords, Constants.emptyString, spriteName, flipX: doNotFlipX, offset: offsetY)
-    {
-        this.ladder = ladder;
-    }
-
-    public LadderSpawnDetails(Vector3Int cellCoords, string spriteName, bool flipX, Ladder ladder) :
-    base(NPCNameList.ladder, cellCoords, Constants.emptyString, spriteName, flipX: flipX, offset: offsetY)
+    public LadderSpawnDetails(Vector3Int cellCoords, string spriteName, Ladder ladder, bool flipX = doNotFlipX, float offset = offsetY) :
+    base(NPCNameList.ladder, cellCoords, Constants.emptyString, spriteName, flipX: flipX, offset: offset)
     {
         this.ladder = ladder;
     }
@@ -1420,6 +1414,18 @@ public class LadderSpawnDetails : NPCSpawnDetails
     public override Dialogue getDialogue(string areaName)
     {
         return Ladder.getDialogue();
+    }
+
+    public override void spawnActions(GameObject npc)
+    {
+        base.spawnActions(npc);
+
+        AnimationManager animationManager = npc.GetComponent<AnimationManager>();
+
+        if(animationManager != null)
+        {
+            animationManager.disableExtras();
+        }
     }
 
     public override void spawnActions(DialogueTrigger mainTrigger)

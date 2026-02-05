@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public class Transition
 {
+    public const bool ladderTransition = false;
     public bool destinationOnly;
 
     public int index;
@@ -21,18 +22,22 @@ public class Transition
     public bool usableForFastTravel;
     public PlayerInteractionScript scriptOnTransition; 
 
+    public string whichConstructor = "";
+
     //used in fast traveling
-    public Transition(string currentAreaName, string destinationName)
+    public Transition(string currentAreaName, string destinationName, bool usableForFastTravel = true)
     {
         this.currentAreaName = currentAreaName;
         this.destinationName = destinationName;
-        this.usableForFastTravel = true;
+        this.usableForFastTravel = usableForFastTravel;
 
         this.cellCoords = PlayerMovement.getMovementGridCoords();
 
         this.index = 0;
         this.playerSpawnDirection = CharacterFacing.getOpposingFacing(State.playerFacing.getFacing());
         this.outputMultiplier = 0; //to prevent autosave from moving player
+
+        whichConstructor = "first";
     }
 
     public Transition(string currentAreaName, string destinationName, Vector3Int cellCoords, int index, Facing playerSpawnDirection, bool usableForFastTravel, int outputMultiplier, PlayerInteractionScript scriptOnTransition, bool destinationOnly = false)
@@ -51,6 +56,8 @@ public class Transition
         
         this.scriptOnTransition = scriptOnTransition;
         this.destinationOnly = destinationOnly;
+
+        whichConstructor = "second";
     }
 
     public bool sharesHash(Transition transition)

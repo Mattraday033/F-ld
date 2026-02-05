@@ -354,9 +354,9 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard + 1, new Vector3Int(6, 3), LocationNameList.campCenter, MonsterNameList.spearman, facing: Facing.SouthWest));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(4, 5), LocationNameList.campCenter, facing: Facing.SouthWest));
-        list.Add(new NPCSpawnDetails(NPCNameList.branded, new Vector3Int(0, 6), LocationNameList.campCenter));
-        list.Add(new NPCSpawnDetails(NPCNameList.branded, new Vector3Int(0, 4), LocationNameList.campCenter));
-        list.Add(new NPCSpawnDetails(NPCNameList.branded, new Vector3Int(0, 3), LocationNameList.campCenter));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.branded, new Vector3Int(0, 6), LocationNameList.campCenter, animationName: NPCNameList.slaveOne, facing: Facing.NorthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.branded+1, new Vector3Int(0, 4), LocationNameList.campCenter, animationName: NPCNameList.slaveTwo, facing: Facing.NorthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.branded+2, new Vector3Int(0, 3), LocationNameList.campCenter, animationName: NPCNameList.slaveThree, facing: Facing.NorthEast));
         list.Add(new NPCSpawnDetails(NPCNameList.feher, new Vector3Int(4, 4), LocationNameList.campCenter));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(8, 0), facing: Facing.SouthWest));
@@ -540,9 +540,9 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.imre, new Vector3Int(-6, -9), LocationNameList.campManse, facing: Facing.SouthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.imre+1, new Vector3Int(-8, 1), LocationNameList.campManse, facing: Facing.SouthEast));
 
-        list.Add(new LadderSpawnDetails(new Vector3Int(-5, -20), PrefabNames.ladderTallSW, Constants.flipX,
+        list.Add(new LadderSpawnDetails(new Vector3Int(-5, -20), PrefabNames.ladderTallSW,
                                         new Ladder(Constants.difficultyTwo, LocationNameList.campManse, LocationNameList.guardHouseTopFloor, 
-                                                    Ladder.barracksLadderDescription, Facing.SouthEast)));
+                                                    Ladder.barracksLadderDescription, Facing.SouthEast), flipX: Constants.flipX));
 
         oocSpawnDetailsDict.Add(LocationNameList.campManse, list);
         #endregion
@@ -1119,7 +1119,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCSpawnDetails(NPCNameList.kende, new Vector3Int(0, 1), ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, speakAtStartScript: new KendeInKitchenDuringRiotScript()));
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.imre+1, new Vector3Int(0, -3), ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, facing: Facing.NorthWest)); //loyal imre
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.imre+1, new Vector3Int(0, -3), ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, facing: Facing.SouthWest)); //loyal imre
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.imre+2, new Vector3Int(0, 0), facing: Facing.SouthEast)); //disloyal imre
 
@@ -1134,6 +1134,11 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveFour, new Vector3Int(-5, 3))); 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveFive, new Vector3Int(-5, 4))); 
 
+        list.Add(new LadderSpawnDetails(new Vector3Int(1, 4), PrefabNames.ladderTallNE,
+                                        new Ladder(Constants.difficultyThree, ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, 
+                                                    ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, 
+                                                    Ladder.kitchensLadderDescription, Facing.SouthWest))); //, flipX: Constants.flipX
+
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, list);
 
         #endregion
@@ -1142,8 +1147,12 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ObstacleSpawnDetails(NPCNameList.crate, new Vector3Int(2, 3), PrefabNames.squareCratesSmall));
-        list.Add(new ObstacleSpawnDetails(NPCNameList.crate, new Vector3Int(1, 3), PrefabNames.squareCratesSmall));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.crate, new Vector3Int(2, 3), PrefabNames.squareCratesSmall, offset: Constants.onTableHeightOffset*-1));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.crate, new Vector3Int(1, 3), PrefabNames.squareCratesSmall, offset: Constants.onTableHeightOffset*-1));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.crate, new Vector3Int(3, 2), PrefabNames.squareCratesSmall, offset: Constants.onTableHeightOffset*-1));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.crate, new Vector3Int(2, 2), PrefabNames.squareCratesSmall, offset: Constants.onTableHeightOffset*-1));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.crate, new Vector3Int(1, 2), PrefabNames.squareCratesSmall, offset: Constants.onTableHeightOffset*-1));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.crate, new Vector3Int(0, 2), PrefabNames.squareCratesSmall, offset: Constants.onTableHeightOffset*-1));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section1a, list);
 
@@ -1267,6 +1276,18 @@ public static class OOCSpawnDetailsList
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(1, 1), Facing.SouthEast));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, list);
+
+        #endregion
+
+        #region Manse-2F-Stockroom
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new LadderSpawnDetails(new Vector3Int(0, -2), PrefabNames.ladderShortNE,
+                                        new Ladder(Constants.difficultyThree, ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, 
+                                                    ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, 
+                                                    Ladder.kitchensLadderDescription, Facing.SouthWest))); //, flipX: Constants.flipX
+
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, list);
 
         #endregion
 

@@ -388,7 +388,7 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, ZoneKeyList.manseFirstFloor + LocationNameList.diningRoom, new Vector3Int(-2, 6), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX));
 
-        list.Add(new TransitionSpawnInfo(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, new Vector3Int(1, 4), Facing.SouthWest));
+        // list.Add(new TransitionSpawnInfo(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, new Vector3Int(1, 4), Facing.SouthWest));
 
         list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(0, 0), Facing.SouthWest));
 
@@ -680,7 +680,7 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, ZoneKeyList.manseSecondFloor + LocationNameList.section3c, new Vector3Int(2, 4), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingY));
 
-        list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, new Vector3Int(0, -2), Facing.SouthWest));
+        // list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, new Vector3Int(0, -2), Facing.SouthWest));
 
         transitionSpawnInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, list);
 

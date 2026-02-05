@@ -64,7 +64,8 @@ public class NotificationManager : MonoBehaviour
             if (AreaManager.getInstance().getAreaDescription().getName().Equals(describable.getName()) ||
                 describable.getName().Contains(SaveHandler.quickSaveName))
             {
-                if (PlayerOOCStateManager.currentActivity == OOCActivity.walking && !State.hasLoadedDialogueKey())
+                if ((PlayerOOCStateManager.currentActivity == OOCActivity.walking || PlayerOOCStateManager.currentActivity == OOCActivity.inFade) 
+                    && !State.hasLoadedDialogueKey())
                 {
                     instance.StartCoroutine(instance.spawnNotification(describable));
                 }

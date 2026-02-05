@@ -777,6 +777,12 @@ public static class SpawnParamsList
                                         new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
         #endregion
 
+        #region Manse-1F-1a
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.section1a, NPCNameList.crate),
+                                        new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.revoltStarted }), new StopSpawningFlagList(new string[]{ FlagNameList.directorDefeated }), spawnWhileHostile));
+        #endregion
+
         #region Manse-1F-3b
 
         StopSpawningFlagList killedHorses = new StopSpawningFlagList(new string[] { FlagNameList.foughtHorsesInManse });

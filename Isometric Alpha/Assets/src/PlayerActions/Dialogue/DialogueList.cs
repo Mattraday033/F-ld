@@ -318,10 +318,10 @@ public static class DialogueList
         addDialogueToList(LocationNameList.campCenter, NPCNameList.chiefTabor,
                             new Dialogue(new string[] { NPCNameList.chiefTabor,
                                                         NPCNameList.feher,
-                                                        NPCNameList.branded},
+                                                        NPCNameList.branded,
+                                                        NPCNameList.branded+1,
+                                                        NPCNameList.branded+2},
                             Resources.Load<TextAsset>(DialogueNameList.taborPath)));
-
-        // Dialogue slavesWatchingTaborDialogue = new Dialogue(new string[] { NPCNameList.branded }, Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.feher,
                             new Dialogue(new string[] { NPCNameList.feher },
@@ -330,8 +330,12 @@ public static class DialogueList
         addDialogueToList(LocationNameList.campCenter, NPCNameList.branded,
                             new Dialogue(new string[] { NPCNameList.branded },
                             Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
-        // addDialogueToList(LocationNameList.campCenter, NPCNameList.branded+1, slavesWatchingTaborDialogue);
-        // addDialogueToList(LocationNameList.campCenter, NPCNameList.branded+2, slavesWatchingTaborDialogue);
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.branded+1,
+                            new Dialogue(new string[] { NPCNameList.branded+1 },
+                            Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.branded+2,
+                            new Dialogue(new string[] { NPCNameList.branded+2 },
+                            Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.campGate, 
                             new Dialogue(new string[] { NPCNameList.campGate },

@@ -7,7 +7,9 @@ VAR heardTaborsLesson = false
 
 VAR taborIndex = 1
 VAR feherIndex = 2
-VAR otherSlavesIndex = 3
+VAR brandedIndex = 3
+VAR brandedOneIndex = 4
+VAR brandedTwoIndex = 5
 
 VAR playerName = ""
 
@@ -38,6 +40,10 @@ changeCamTarget({taborIndex})
 moveToPos(0,5)
 setFacing(NE)
 
+changeNPCFacing({brandedIndex},NE)
+changeNPCFacing({brandedOneIndex},NE)
+changeNPCFacing({brandedTwoIndex},NE)
+
 fadeBackIn(60)
 
 Now where was I... curses, lost my place. I guess that means I have to start over.
@@ -57,7 +63,7 @@ From the top: I am Chief Correctional Officer Tabor. I am in charge of rehabilit
 
 === 1ba ===
 
-changeCamTarget({otherSlavesIndex})
+changeCamTarget({brandedIndex})
 
 Yes, Chief Tabor!
 
@@ -137,7 +143,7 @@ giveItem(0,0,1)
 
 === 1ce ===
 
-changeCamTarget({otherSlavesIndex})
+changeCamTarget({brandedIndex})
 
 He wants to eat a horse?
 

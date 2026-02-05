@@ -382,6 +382,7 @@ WallPatchTall
     public const string mineMapTile = manMadeFolder + "mine";
 
     private const string ladderFolder = spriteFolder + "Ladders/";
+    public const string ladderShortNE = ladderFolder + "Ladder_Short_NE";
     public const string ladderTallNE = ladderFolder + "Ladder_Tall_NE";
     public const string ladderTallSW = ladderFolder + "Ladder_Tall_SW";
 
