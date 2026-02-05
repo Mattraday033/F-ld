@@ -654,7 +654,7 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, ZoneKeyList.manseSecondFloor + LocationNameList.section3a, new Vector3Int(1, 4), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingY));
 
-        list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, new Vector3Int(-4, -7), Facing.NorthWest, Constants.sizeTwo, Axis.DescendingX));
+        list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, new Vector3Int(-3, -7), Facing.NorthWest, Constants.sizeTwo, Axis.DescendingX));
 
         transitionSpawnInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, list);
 
