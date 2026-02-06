@@ -151,7 +151,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
         animationManager = list.animationManager;
         animationManager.healthBarManager = healthBarManager;
-        animationManager.setAnimations(getName());
+        animationManager.setAnimations(getName() + getGenderMarker() + getAnimationSuffixes());
 
         tutorialTarget = list.tutorialTarget;
         tutorialTarget.tutorialHash = getTutorialTargetHash();
@@ -189,7 +189,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public void instateEnvironmentalCombatAction()
     {
-        // EnvironmentalCombatActionManager.getInstance().instateEnvironmentalCombatAction(environmentalCombatActionKey, environmentalTargetingTraitKey, CombatGrid.getCombatantAtCoords(position));
+        EnvironmentalCombatActionManager.instateEnvironmentalCombatAction(this);
     }
 
     public virtual void removeFromGrid()
@@ -963,6 +963,16 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public abstract GridCoords findLocationToSpawn();
 
+    public virtual string getGenderMarker()
+    {
+        return "";
+    }
+
+    public virtual string getAnimationSuffixes()
+    {
+        return "";
+    }
+
     public virtual List<StatBoostSource> getAllStatBoosts()
     {
         return StatBoostSource.getAllStatBoosts(traitContainer);
@@ -1028,7 +1038,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return this.MemberwiseClone();
     }
 
-    public Stats clone()
+    public virtual Stats clone()
     {
         Stats clone = (Stats)Clone();
 

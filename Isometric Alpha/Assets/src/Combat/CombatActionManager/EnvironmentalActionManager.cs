@@ -17,11 +17,6 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 	
 	private void Awake()
 	{
-		if(instance != null)
-		{
-			throw new IOException("Duplicate instances of EnvironmentalCombatActionManager exist");
-		}
-		
 		instance = this;
 	}
 	
@@ -57,30 +52,29 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 			
 			envCombatAction.setSelector(envCombatActionSelector);
 			
-			//envCombatAction.setTargetCoords(new GridCoords(envCombatAction.getSelector().currentRow, envCombatAction.getSelector().currentCol));
-			
 			actionList.Add(envCombatAction);
 		}
 	
 		return actionList;
 	}
 	
-	public void instateEnvironmentalCombatAction(string environmentalCombatActionKey, string environmentalTargetingTraitKey, Stats actorStats)
+	public static void instateEnvironmentalCombatAction(Stats actorStats)
 	{
-		if((environmentalCombatActionKey == null || environmentalCombatActionKey.Length <= 0) ||
-			(environmentalTargetingTraitKey == null || environmentalTargetingTraitKey.Length <= 0))
-		{
-			return;
-		} else
-		{
-			CombatAction envCombatAction = AbilityList.getAbility(actorStats, environmentalCombatActionKey);
-			envCombatAction.setActor(actorStats);
-			
-            Debug.LogError("Environmental Action Targeting Trait unimplmented");
-			// Trait targetingTrait = TraitList.getTrait(environmentalTargetingTraitKey);
-			
-			// environmentalCombatActions[envCombatAction] = targetingTrait;
-		}
+        CombatAction envCombatAction;
+        Trait targetingTrait;
+
+        switch(actorStats.getName())
+        {
+            case NPCNameList.kende:
+                envCombatAction = AbilityList.getAbility(actorStats, AbilityList.turnUpTheHeatKey);
+                targetingTrait = TraitList.specificCheckeredLeftAlliedSide.clone();
+                break;
+            default:
+                return;
+        }
+
+        envCombatAction.setActor(actorStats);
+        environmentalCombatActions.Add(envCombatAction, targetingTrait);
 	}
 	
 	public void updateEnvironmentalCasterPosition(GridCoords oldPosition, GridCoords newPosition)
@@ -101,5 +95,5 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 		environmentalCombatActions = new Dictionary<CombatAction,Trait>();
 	}
 	
-        
+    
 }

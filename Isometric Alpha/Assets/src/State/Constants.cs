@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class Constants
 {
+    public readonly static Vector3 scaleChange = new Vector3(0.987758756f,1.15740716f);
+    public readonly static Vector3 reverseScaleChange = new Vector3(1.012393f,0.864000201f);
 
     public const int tierZero = 0;
     public const int tierOne = 1;

@@ -385,6 +385,19 @@ public static class MonsterSpawnDetailsList
 
         #region Manse-2F
 
+        #region Manse-2F-3a
+
+        list = new List<MonsterSpawnDetails>();
+
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-1, -3), Facing.SouthWest, movementType: MonsterMovementType.Stationary));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(2, 2), Facing.NorthWest, movementType: MonsterMovementType.Chases));
+
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-6, -3), PrefabNames.pushableCrate));
+
+        monsterSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3a, list);
+
+        #endregion
+
         #region Manse-2F-3b
 
         list = new List<MonsterSpawnDetails>();
@@ -406,6 +419,19 @@ public static class MonsterSpawnDetailsList
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-1, 0), Facing.Random, movementType: MonsterMovementType.Chases));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section1b, list);
+
+        #endregion
+
+        #region Pit-2c
+
+        list = new List<MonsterSpawnDetails>();
+
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(15, -8), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-4, 14), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-7, -8), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(14, 11), PrefabNames.pushableCrate));
+
+        monsterSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section2c, list);
 
         #endregion
 

@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class MinionStats : VolleyParticipantStats
 {
-    public MinionStats(string key, int armor, int tHP, CombatAction combatAction, Trait[] traits) :
-    base(key, armor, tHP, combatAction, traits)
+    public MinionStats(string key, int armor, int tHP, CombatAction combatAction, Trait[] traits, bool gendered = false, string[] animationSuffixes = null) :
+    base(key, armor, tHP, combatAction, traits, gendered: gendered, animationSuffixes: animationSuffixes)
     {
         addTraits(traits);
         setFoeTypeToMinion();

@@ -222,6 +222,16 @@ public class Ability: CombatAction, IJSONConvertable
 		return maximumSlots;
 	}
 	
+    public override void setActor(Stats actor)
+    {
+        base.setActor(actor);
+
+        if(appliedTrait != null && actor != null)
+        {
+            appliedTrait.traitApplier = actor;
+        }
+    }
+
 	public override Trait getAppliedTrait()
 	{
 		if (appliedTrait == null)

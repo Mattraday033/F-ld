@@ -1014,7 +1014,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.barricade, new Vector3Int(3, 3), ZoneKeyList.mineLvl3 + LocationNameList.minerCamp));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricade, new Vector3Int(3, 3), ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, facing: Facing.NorthWest));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.carter, new Vector3Int(1, 2), ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, facing: Facing.NorthEast));
 
@@ -1273,6 +1273,29 @@ public static class OOCSpawnDetailsList
 
         #endregion
 
+        #region Manse-2F-3a
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ShelfSpawnDetails(Constants.indexZero, new Vector3Int(5, 11), Facing.SouthEast));
+
+        list.Add(new ShelfSpawnDetails(Constants.indexOne, new Vector3Int(4, 3), Facing.SouthWest));
+        list.Add(new ShelfSpawnDetails(Constants.indexTwo, new Vector3Int(4, -1), Facing.SouthWest));
+        list.Add(new ShelfSpawnDetails(Constants.indexThree, new Vector3Int(4, -2), Facing.SouthWest));
+        list.Add(new ShelfSpawnDetails(Constants.indexFour, new Vector3Int(4, -3), Facing.SouthWest));
+
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(0, 6), VaultableObject.diffThreeVaultableBarrelsOneTile));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-1, 6), VaultableObject.diffThreeVaultableBarrelsOneTile));
+
+        list.Add(new ChestSpawnDetails(Constants.indexFive, new Vector3Int(4, 4), Facing.SouthWest));
+
+        list.Add(new ButtonSpawnDetails(new Vector3Int(-4, 5)));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(-4, 8)));
+
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3a, list);
+
+        #endregion
+
         #region Manse-2F-3b
 
         list = new List<OOCSpawnDetails>();
@@ -1332,6 +1355,23 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.broglin, new Vector3Int(1, -1), ZoneKeyList.pit + LocationNameList.section2b, facing: Facing.SouthWest, extraSpaces: new Vector3Int[]{new Vector3Int(0, -1)}));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section2b, list);
+
+        #endregion
+
+        #region Pit-2c
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ButtonSpawnDetails(new Vector3Int(12, -8)));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(-5, -4)));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(-8, 5)));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(16, 2)));
+
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(5, 19), Facing.SouthEast));
+        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(4, 19), Facing.SouthEast));
+        list.Add(new ChestSpawnDetails(Constants.indexTwo, new Vector3Int(3, 19), Facing.SouthEast));
+
+        oocSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section2c, list);
 
         #endregion
 

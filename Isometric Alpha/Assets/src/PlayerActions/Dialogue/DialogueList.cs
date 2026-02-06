@@ -894,6 +894,10 @@ public static class DialogueList
         // addDialogueToList(DialogueNameList.directorDefeatedConvoKey,
         //                  new Dialogue(new string[] { "", "Director", "Page", "Carter", "Nándor" }, new GameObject[5], Resources.Load<TextAsset>(DialogueNameList.directorDefeatedConvoKey)));
 
+            addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section3a, NPCNameList.ancientPortcullis,
+                                new Dialogue(new string[]   { NPCNameList.ancientPortcullis }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath)));
+
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, NPCNameList.liftableGate, liftableGateDialogue);
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.office, DialogueNameList.directorDefeatedConvoKey,
@@ -921,6 +925,10 @@ public static class DialogueList
             addDialogueToList(ZoneKeyList.pit + LocationNameList.section2b, NPCNameList.broglin,
                                 new Dialogue(new string[]   { Constants.emptyString, NPCNameList.broglin, NPCNameList.cellDoor }, 
                                  Resources.Load<TextAsset>(DialogueNameList.pitBroglinPathName)));
+
+            addDialogueToList(ZoneKeyList.pit + LocationNameList.section2c, NPCNameList.ancientPortcullis,
+                                new Dialogue(new string[]   { NPCNameList.ancientPortcullis }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath)));
 
         #endregion//Assets/Resources/Dialogue/Manse/Pit/Pit Gate.ink
 

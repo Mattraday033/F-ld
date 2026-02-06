@@ -209,6 +209,34 @@ public static class ButtonScriptList
 
         #endregion
 
+        #region Manse-2f
+
+        #region Manse-2f-3a
+
+        list = new List<ButtonLogicScript>();
+
+        list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeTwo, NPCNameList.ancientPortcullis));
+
+        scriptDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3a, list);
+
+        #endregion
+
+        #endregion
+
+        #region Pit
+
+        #region Pit-2c
+
+        list = new List<ButtonLogicScript>();
+
+        list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeFour, NPCNameList.ancientPortcullis));
+
+        scriptDict.Add(ZoneKeyList.pit + LocationNameList.section2c, list);
+
+        #endregion
+
+        #endregion
+
     }
 
 

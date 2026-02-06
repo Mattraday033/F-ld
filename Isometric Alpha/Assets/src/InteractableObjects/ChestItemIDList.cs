@@ -300,6 +300,23 @@ public static class ChestItemIDList
 
         #endregion
 
+        #region Manse-2F-3a
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.treasureItemListIndex, ItemList.smallCoinPurseIndex));
+
+        list.Add(new ItemListID(ItemList.treasureItemListIndex, ItemList.goldLocketIndex));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.salvagedGuardArmorIndex));
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.bandagesIndex, Constants.sizeFour));
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.properFoodIndex));
+
+        list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.wornBowIndex));
+
+        chestItemIDList.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3a, list);
+
+        #endregion
+
         #region Manse-2F-3b
 
         list = new List<ItemListID>();
@@ -321,6 +338,18 @@ public static class ChestItemIDList
         list.Add(new ItemListID(ItemList.armorListIndex, ItemList.wardensShieldIndex));
 
         chestItemIDList.Add(ZoneKeyList.pit + LocationNameList.section1b, list);
+
+        #endregion
+
+        #region Pit-2c
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.ancientClawIndex));
+        list.Add(new ItemListID(ItemList.treasureItemListIndex, ItemList.ironNuggetIndex));
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rockCakeIndex, Constants.sizeTwo));
+
+        chestItemIDList.Add(ZoneKeyList.pit + LocationNameList.section2c, list);
 
         #endregion
 

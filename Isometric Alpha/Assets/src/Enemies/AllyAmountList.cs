@@ -17,9 +17,9 @@ public static class AllyAmountList
     #endregion
 
     #region Lovashi Guards
-    public readonly static CreatureAmount southEastSlaves = new CreatureAmount(Constants.fourCreatures, AlliedSummonStatsList.getSummonStats(NPCNameList.guardVirag));
-    public readonly static CreatureAmount northEastSlaves = new CreatureAmount(Constants.sixCreatures, AlliedSummonStatsList.getSummonStats(NPCNameList.overseerGaspar));
-    public readonly static CreatureAmount manseSlaves = new CreatureAmount(Constants.fiveCreatures, AlliedSummonStatsList.getSummonStats(NPCNameList.guardPazman));
+    public readonly static CreatureAmount southEastSlaves = new CreatureAmount(Constants.fourCreatures, AlliedSummonStatsList.getSummonStats(MonsterNameList.brandedRioter));
+    public readonly static CreatureAmount northEastSlaves = new CreatureAmount(Constants.sixCreatures, AlliedSummonStatsList.getSummonStats(MonsterNameList.brandedRioter));
+    public readonly static CreatureAmount manseSlaves = new CreatureAmount(Constants.fiveCreatures, AlliedSummonStatsList.getSummonStats(MonsterNameList.noBrandRioter));
     #endregion
 
 }

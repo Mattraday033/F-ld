@@ -40,7 +40,6 @@ public static class GateSpawnInfoList
                                     TutorialSequenceList.interactableRubbleTargetHash,
                                     useRubbleColor));
 
-
         list.Add(new GateSpawnInfo(Constants.indexZero,
                                     NPCNameList.awkwardRubble,
                                     LocationNameList.slaveShackSix,
@@ -635,6 +634,22 @@ public static class GateSpawnInfoList
         list = new List<GateSpawnInfo>();
 
         list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.ancientPortcullis,
+                                    ZoneKeyList.manseSecondFloor + LocationNameList.section3a,
+                                     new Vector3Int(-3, -1),
+                                    PrefabNames.portcullis2x1Path,
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+                                    
+        gateSpawnInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3a, list);
+
+        #endregion
+
+        #region Manse-2F-3c
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
                                     NPCNameList.liftableGate,
                                     ZoneKeyList.manseSecondFloor + LocationNameList.section3b,
                                      new Vector3Int(0, -3),
@@ -680,6 +695,22 @@ public static class GateSpawnInfoList
                                     Axis.DescendingY));
                                     
         gateSpawnInfoDict.Add(ZoneKeyList.pit + LocationNameList.section2b, list);
+
+        #endregion
+
+        #region Pit-2c
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.ancientPortcullis,
+                                    ZoneKeyList.pit + LocationNameList.section2c,
+                                    new Vector3Int(4, 12),
+                                    PrefabNames.portcullis2x1Path,
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+                                    
+        gateSpawnInfoDict.Add(ZoneKeyList.pit + LocationNameList.section2c, list);
 
         #endregion
 

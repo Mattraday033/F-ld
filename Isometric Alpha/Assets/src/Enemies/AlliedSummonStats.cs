@@ -14,6 +14,8 @@ public class AlliedSummonStats : VolleyParticipantStats
     {
         addTraits(enemyStats.traitContainer);
         setFoeTypeToSummoned();
+        animationSuffixes = enemyStats.animationSuffixes;
+        gendered = enemyStats.gendered;
     }
 
     private void setFoeTypeToSummoned()

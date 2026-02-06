@@ -10,20 +10,10 @@ public static class EnemyStatsList
 
     private const string smallStoneMaterials = "StoneSaintBuildingMaterialsSmall";
 
-    // public readonly static EnemyStats[][] pupSpawnCombos =  {new EnemyStats[] {Resources.Load<EnemyStats>(explosiveBat), Resources.Load<EnemyStats>(chargedBat)},
-    //                                                         new EnemyStats[] {Resources.Load<EnemyStats>(armoredBat), Resources.Load<EnemyStats>(giantBat)},
-    //                                                         new EnemyStats[] {Resources.Load<EnemyStats>(spawnerBat), Resources.Load<EnemyStats>(spawnerBat)},
-    //                                                         new EnemyStats[] {Resources.Load<EnemyStats>(explosiveBat), Resources.Load<EnemyStats>(explosiveBat)},
-    //                                                         new EnemyStats[] {Resources.Load<EnemyStats>(chargedBat), Resources.Load<EnemyStats>(giantBat)}};
-
     public readonly static EnemyStats[] wormSplitSpawnCombo = new EnemyStats[] { Resources.Load<EnemyStats>(wormMinionAcid), Resources.Load<EnemyStats>(wormMinionAcid) };
 
     public readonly static EnemyStats[] wormSplitBossSpawnCombo = new EnemyStats[] {Resources.Load<EnemyStats>(wormMinionAcid), Resources.Load<EnemyStats>(wormMinionAcid),
                                                                                     Resources.Load<EnemyStats>(wormMinionAcid), Resources.Load<EnemyStats>(wormMinionAcid)};
-
-    public readonly static EnemyStats[] slaveWarriorCombo = new EnemyStats[] {Resources.Load<EnemyStats>(slaveWarrior),
-                                                                            Resources.Load<EnemyStats>(slaveWarrior),
-                                                                            Resources.Load<EnemyStats>(slaveWarrior)};
 
     public readonly static EnemyStats[] smallStonesCombo = new EnemyStats[] {Resources.Load<EnemyStats>(smallStoneMaterials),
                                                                             Resources.Load<EnemyStats>(smallStoneMaterials),
@@ -111,6 +101,16 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                             new Trait[] { TraitList.master,
                                                                         TraitList.territorial
                                                                         }));
+
+        enemyStatsDict.Add(NPCNameList.kende, new EnemyStats(NPCNameList.kende,
+                                                                    Constants.sixtyArmor,
+                                                                                    160,
+                            AbilityList.getAbility(null, AbilityList.guardWarriorSummonKey) as Ability,
+                                                                new Trait[] { 
+                                                                                TraitList.master,
+                                                                                TraitList.emptyGenerated2,
+                                                                                TraitList.backLine
+                                                                            }));
 
         SpawnDetails spawnDetails = new SpawnDetails(new GridCoords[] {
                                                                         new GridCoords(Constants.indexThree, Constants.indexZero),
@@ -235,17 +235,56 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
 
         #endregion
 
+        #region NonBranded Slaves
+
+        enemyStatsDict.Add(MonsterNameList.noBrandLoyalist, new MinionStats(MonsterNameList.noBrandLoyalist,
+                                                                            Constants.tenArmor,
+                                                                                    20,
+                        AbilityList.getAbility(null, AbilityList.guardJavelinKey) as Ability,
+                                                            new Trait[] { 
+                                                                            TraitList.minion,
+                                                                            TraitList.chaotic,
+                                                                            TraitList.frontLine
+                                                                        }, 
+                                                                        gendered: true));
+
+        enemyStatsDict.Add(MonsterNameList.noBrandRioter, new MinionStats(MonsterNameList.noBrandRioter,
+                                                                            Constants.tenArmor,
+                                                                                    20,
+                    AbilityList.getAbility(null, AbilityList.guardJavelinKey) as Ability,
+                                                        new Trait[] { 
+                                                                        TraitList.minion,
+                                                                        TraitList.chaotic
+                                                                    },
+                                                                    gendered: true));
+        #endregion
+
         #region Branded Slaves
 
         enemyStatsDict.Add(MonsterNameList.brandedConscript, new MinionStats(MonsterNameList.brandedConscript,
                                                                             Constants.tenArmor,
                                                                                     15,
                     AbilityList.getAbility(null, AbilityList.guardJavelinKey) as Ability,
-                                                        new Trait[] { TraitList.minion,
-                                                                    TraitList.chaotic,
-                                                                    TraitList.blocker,
-                                                                    TraitList.frontLine
+                                                        new Trait[] { 
+                                                                        TraitList.minion,
+                                                                        TraitList.chaotic,
+                                                                        TraitList.blocker,
+                                                                        TraitList.frontLine
                                                                     }));
+
+        enemyStatsDict.Add(MonsterNameList.brandedRioter, new MinionStats(MonsterNameList.brandedRioter,
+                                                                                            Constants.tenArmor,
+                                                                                                    15,
+                                    AbilityList.getAbility(null, AbilityList.guardJavelinKey) as Ability,
+                                                                        new Trait[] { 
+                                                                                        TraitList.minion,
+                                                                                        TraitList.chaotic
+                                                                                    },
+                                                    animationSuffixes: new string[] {
+                                                                                        MonsterNameList.pickMarker,
+                                                                                        MonsterNameList.shivMarker,
+                                                                                        MonsterNameList.shovelMarker
+                                                                                    }));
         #endregion
 
         #region Bats

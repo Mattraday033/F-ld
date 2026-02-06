@@ -384,10 +384,12 @@ changeCamTarget({theCrowdIndex})
                     ~crowdFervor+=5
                 }
                 ->3d
+        -else:
+            *Uh... well, I just thought...
+                ->3aa
         }
 
-        *Uh... well, I just thought...
-            ->3aa
+
     }
     
 === 3aa ===

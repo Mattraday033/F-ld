@@ -471,7 +471,7 @@ public abstract class StatBoostSource : INameSource
             blocks.Add(DescriptionPanelBuildingBlock.getInvulnerableBlock(DamageCalculator.calculateFormula(boostSource.getInvulnerableFormula(), statsSource).ToString(), boostSource.getInvulnerableFormula()));
         }
 
-        if (!boostSource.getVulnerableFormula().Equals(Constants.zeroRating) && !boostSource.getName().Equals(StatSourceNameList.halfHandStanceKey))
+        if (!boostSource.getVulnerableFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getVulnerableBlock(DamageCalculator.calculateFormula(boostSource.getVulnerableFormula(), statsSource).ToString(), boostSource.getVulnerableFormula()));
         }

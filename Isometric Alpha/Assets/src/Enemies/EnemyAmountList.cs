@@ -16,6 +16,8 @@ public static class EnemyAmountList
     public readonly static CreatureAmount guardVirag = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.guardVirag));
     public readonly static CreatureAmount overseerGaspar = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.overseerGaspar));
 
+    public readonly static CreatureAmount kende = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.kende));
+
     #endregion
 
     #region Lovashi Guards
@@ -38,8 +40,8 @@ public static class EnemyAmountList
     public readonly static CreatureAmount oneLieutenant = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.lieutenant));
     public readonly static CreatureAmount twoLieutenants = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.lieutenant));
 
-    public readonly static CreatureAmount oneLineBreaker = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.linebreaker));
-    public readonly static CreatureAmount twoLineBreakers = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.linebreaker));
+    public readonly static CreatureAmount oneLinebreaker = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.linebreaker));
+    public readonly static CreatureAmount twoLinebreakers = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.linebreaker));
 
     public readonly static CreatureAmount oneOverseer = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.overseer));
 
@@ -49,6 +51,11 @@ public static class EnemyAmountList
     public readonly static CreatureAmount oneSpearman = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.spearman));
     public readonly static CreatureAmount twoSpearmen = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.spearman));
 
+    #endregion
+
+    #region NonBranded Slaves
+    public readonly static CreatureAmount fourNonBrandedLoyalists = new CreatureAmount(Constants.fourCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.noBrandLoyalist));
+    public readonly static CreatureAmount eightNonBrandedLoyalists = new CreatureAmount(Constants.eightCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.noBrandLoyalist));
     #endregion
 
     #region Branded Slaves

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class EnemyTypeFolderPathList
@@ -11,6 +13,8 @@ public static class EnemyTypeFolderPathList
     private const string nonbrandedFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/Nonbranded Slaves/";
 
     private const string lovashiFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/" + EnemyCategoryNameList.lovashi + "/";
+
+    private const string miscFolderPath = PrefabNames.charactersFolder + "Misc/";
 
     private const string partyMembersFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/PartyMembers/";
 
@@ -147,6 +151,12 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(MonsterNameList.noBrandRioter + Constants.femaleMarker, nonbrandedFolderPath + MonsterNameList.noBrandRioter + Constants.femaleMarker + "/");
         folderPathDict.Add(MonsterNameList.noBrandRioter + Constants.maleMarker, nonbrandedFolderPath + MonsterNameList.noBrandRioter + Constants.maleMarker + "/");
         #endregion
+
+        #endregion
+
+        #region Misc
+    
+        folderPathDict.Add(NPCNameList.barricade, miscFolderPath + NPCNameList.barricade + "/");
 
         #endregion
 

@@ -224,8 +224,8 @@ public class Formula
                 output += plusChar;
             }
 
-            if(formulaDict[key] != 1 && 
-                formulaDict[key] != -1)
+            if((formulaDict[key] != 1 && 
+                formulaDict[key] != -1) || key == PrimaryStat.None)
             {
                 output += formulaDict[key];
             }

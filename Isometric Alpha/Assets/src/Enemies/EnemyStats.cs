@@ -23,19 +23,25 @@ public class EnemyStats : Stats
     private bool lowPriorityAttacker;
     public int armor;
 
+    public bool gendered;
+
+    public string[] animationSuffixes;
+
     private CombatAction combatAction;
 
     #endregion
 
     #region Constructors
 
-    public EnemyStats(string key, int armor, int tHP, CombatAction combatAction = null, Trait[] traits = null) :
+    public EnemyStats(string key, int armor, int tHP, CombatAction combatAction = null, Trait[] traits = null, bool gendered = false, string[] animationSuffixes = null) :
     base(key)
     {
         this.armor = armor;
 
         this.totalHealth = tHP;
         this.currentHealth = totalHealth;
+
+        this.gendered = gendered;
 
         if(combatAction != null)
         {
@@ -48,6 +54,11 @@ public class EnemyStats : Stats
             {
                 addTrait(trait);
             }
+        }
+
+        if(animationSuffixes != null)
+        {
+            this.animationSuffixes = animationSuffixes;
         }
     }
 
@@ -191,6 +202,34 @@ public class EnemyStats : Stats
 
     #region Miscellanious
     
+    public override string getGenderMarker()
+    {
+        if(!gendered)
+        {
+            return base.getGenderMarker();
+        }
+
+        int gender = UnityEngine.Random.Range(0, 2);
+
+        if(gender == Constants.indexZero)
+        {
+            return Constants.maleMarker;
+        } else
+        {
+            return Constants.femaleMarker;
+        }
+    }
+
+    public override string getAnimationSuffixes()
+    {
+        if(animationSuffixes == null || animationSuffixes.Length <= 0)
+        {
+            return base.getAnimationSuffixes();
+        }
+
+        return animationSuffixes.OrderBy(a => Guid.NewGuid()).ToList()[0];
+    }
+
     public override GridCoords findLocationToSpawn()
     {
         if(isFrontline())
@@ -204,6 +243,19 @@ public class EnemyStats : Stats
         }
 
         return CombatGrid.findRandomOpenSpaceInEnemyZone();
+    }
+
+    #endregion
+
+    #region ICloneable
+
+    public override Stats clone()
+    {
+        EnemyStats cloneStats = base.clone() as EnemyStats;
+
+        cloneStats.animationSuffixes = animationSuffixes;
+
+        return cloneStats;
     }
 
     #endregion

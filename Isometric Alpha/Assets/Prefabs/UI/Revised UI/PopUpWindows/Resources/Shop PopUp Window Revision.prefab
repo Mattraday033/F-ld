@@ -1231,7 +1231,7 @@ MonoBehaviour:
   closeButton: {fileID: 7645947039440295021}
   popupProgenitor: {fileID: 0}
   shopNameTag: {fileID: 8205464814676208680}
-  totalPlayerDiscount: {fileID: 0}
+  totalPlayerDiscount: {fileID: 752854787197339482}
   totalPlayerGold: {fileID: 16137523319707724}
   sellAllJunkButton: {fileID: 8264366556609074695}
   sellAllJunkIconImageBackground: {fileID: 4376538958919552112}
@@ -1837,7 +1837,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a434aa7bbcf0fb14698b1d57694b318d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabIndex: 1
   openTabPanel: {fileID: 6946016253998656589}
   closedButton: {fileID: 4811255341695408075}
   listToChoose: 0
@@ -2387,7 +2386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a434aa7bbcf0fb14698b1d57694b318d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabIndex: 0
   openTabPanel: {fileID: 8217597116745247289}
   closedButton: {fileID: 5812725240887153087}
   listToChoose: 0
@@ -3265,7 +3263,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e35d739885bc34db317609b26b3e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabIndex: 0
   openTabPanel: {fileID: 278671015096006699}
   closedButton: {fileID: 2413434658913502125}
   listToChoose: 21
@@ -5636,7 +5633,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e35d739885bc34db317609b26b3e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabIndex: 4
   openTabPanel: {fileID: 2018767454944193135}
   closedButton: {fileID: 4513782802340647401}
   listToChoose: 25
@@ -5678,7 +5674,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e35d739885bc34db317609b26b3e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabIndex: 2
   openTabPanel: {fileID: 2126792114111098841}
   closedButton: {fileID: 4549715267196343391}
   listToChoose: 23
@@ -5715,10 +5710,12 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 3353973917266415998}
   tutorialHash: Item Grid
-  useUIScale: 0
   disableArrow: 0
   image: {fileID: 1612279693628936686}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  secondaryImage: {fileID: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
 --- !u!114 &4513782802340647401 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3466856151006524911, guid: 759b43fed655b7d4396032f231270a28,
@@ -5793,7 +5790,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e35d739885bc34db317609b26b3e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabIndex: 1
   openTabPanel: {fileID: 6308027607848692986}
   closedButton: {fileID: 8442747878966089596}
   listToChoose: 22
@@ -5870,7 +5866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e35d739885bc34db317609b26b3e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabIndex: 5
   openTabPanel: {fileID: 8329699993681314092}
   closedButton: {fileID: 5852777103743498922}
   listToChoose: 2
@@ -6911,17 +6906,17 @@ PrefabInstance:
     - target: {fileID: 363021961046771135, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 363021961046771135, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 363021961046771135, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 363021961046771135, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
@@ -6931,12 +6926,12 @@ PrefabInstance:
     - target: {fileID: 363021961046771135, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 363021961046771135, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 778000800760666301, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
@@ -7177,7 +7172,7 @@ PrefabInstance:
     - target: {fileID: 7689014671010806953, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 36.29
+      value: 41.29
       objectReference: {fileID: 0}
     - target: {fileID: 7689014671010806953, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
@@ -7233,6 +7228,18 @@ PrefabInstance:
       addedObject: {fileID: 6136437333968018677}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 954a5d66f34d2364c91e9c0179e6ed73, type: 3}
+--- !u!114 &752854787197339482 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6487982213553171072, guid: 954a5d66f34d2364c91e9c0179e6ed73,
+    type: 3}
+  m_PrefabInstance: {fileID: 5799330110536035802}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4237748816384070003 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7689014671010806953, guid: 954a5d66f34d2364c91e9c0179e6ed73,
@@ -7256,17 +7263,17 @@ PrefabInstance:
     - target: {fileID: 363021961046771135, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 363021961046771135, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 363021961046771135, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 363021961046771135, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
@@ -7276,12 +7283,12 @@ PrefabInstance:
     - target: {fileID: 363021961046771135, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 363021961046771135, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 778000800760666301, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
@@ -7522,7 +7529,7 @@ PrefabInstance:
     - target: {fileID: 7689014671010806953, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 13.4
+      value: 18.4
       objectReference: {fileID: 0}
     - target: {fileID: 7689014671010806953, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
@@ -8262,7 +8269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e35d739885bc34db317609b26b3e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabIndex: 3
   openTabPanel: {fileID: 7357099681215253846}
   closedButton: {fileID: 4952161789562386128}
   listToChoose: 24

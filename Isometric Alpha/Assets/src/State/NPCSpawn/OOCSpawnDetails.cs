@@ -918,6 +918,11 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
 
     public override Transform getParent()
     {
+        if(npcName.Contains(NPCNameList.barricade))
+        {
+            return AreaManager.getNPCParentWithScale();
+        }
+
         return AreaManager.getNPCParentWithoutScale();
     }
 
@@ -986,11 +991,13 @@ public class DependantSpawnDetails : NPCWithAnimationsSpawnDetails
 
     private string parentName;
     private Transform parent;
+    private bool normalScale;
 
-    public DependantSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string parentName, Facing facing = Facing.Random) :
+    public DependantSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string parentName, Facing facing = Facing.Random, bool normalScale = false) :
     base(npcName, cellCoords, areaName, facing: facing)
     {
         this.parentName = parentName;
+        this.normalScale = normalScale;
     }
 
     public override Transform getParent()
@@ -1013,7 +1020,13 @@ public class DependantSpawnDetails : NPCWithAnimationsSpawnDetails
 
         npc.transform.SetParent(getParent());
 
-        npc.transform.localScale = Vector3.one;
+        if(normalScale)
+        {
+            npc.transform.localScale = Vector3.one;
+        } else
+        {
+            npc.transform.localScale = Constants.scaleChange;
+        }
 
         // npc.transform.position = worldPos;
 

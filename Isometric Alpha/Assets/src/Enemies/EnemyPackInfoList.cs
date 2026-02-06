@@ -13,7 +13,7 @@ public static class EnemyPackInfoList
                                                                                                 // EnemyAmountList.twoJavelineers,
                                                                                                 // EnemyAmountList.twoLancers,
                                                                                                 // EnemyAmountList.twoLieutenants,
-                                                                                                // EnemyAmountList.twoLineBreakers,
+                                                                                                // EnemyAmountList.twoLinebreakers,
                                                                                                 // EnemyAmountList.twoSignaleers,
                                                                                                 EnemyAmountList.twoSpearmen
                                                                                                 },
@@ -137,28 +137,34 @@ public static class EnemyPackInfoList
                                                                                                         DialogueNameList.slavesAfterKillingOverseerCampNEKey);
 
     public readonly static BossPackInfo kendeKitchensHalfSlavesNoGuard = new BossPackInfo(new CreatureAmount[] { 
-                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                        EnemyAmountList.kende,
+                                                                                                        EnemyAmountList.fourNonBrandedLoyalists
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                                         FlagNameList.kendeUponEnteringKitchens,
                                                                                                         new KendeFightQuestScript());
 
     public readonly static BossPackInfo kendeKitchensHalfSlaves = new BossPackInfo(new CreatureAmount[] { 
-                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                        EnemyAmountList.kende,
+                                                                                                        EnemyAmountList.fourNonBrandedLoyalists,
+                                                                                                        EnemyAmountList.oneLinebreaker
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                                         FlagNameList.kendeUponEnteringKitchens,
                                                                                                         new KendeFightQuestScript());
 
     public readonly static BossPackInfo kendeKitchensFullSlavesNoGuard = new BossPackInfo(new CreatureAmount[] { 
-                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                        EnemyAmountList.kende,
+                                                                                                        EnemyAmountList.eightNonBrandedLoyalists
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                                         FlagNameList.kendeUponEnteringKitchens,
                                                                                                         new KendeFightQuestScript());
 
     public readonly static BossPackInfo kendeKitchensFullSlaves = new BossPackInfo(new CreatureAmount[] { 
-                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                        EnemyAmountList.kende,
+                                                                                                        EnemyAmountList.eightNonBrandedLoyalists,
+                                                                                                        EnemyAmountList.oneLinebreaker
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                                         FlagNameList.kendeUponEnteringKitchens,
@@ -545,6 +551,17 @@ public static class EnemyPackInfoList
         #endregion
 
         #region Manse-2F
+
+        #region Manse-2F-3a
+
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+
+        enemyPackInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3a, list);
+
+        #endregion
 
         #region Manse-2F-3b
 

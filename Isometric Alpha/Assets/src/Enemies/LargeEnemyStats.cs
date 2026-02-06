@@ -79,8 +79,15 @@ public class LargeEnemyStats : EnemyStats
         {
             combatSprites[coords] = Instantiate(Resources.Load<GameObject>(getCombatSpriteName()), CombatStateManager.getCreatureParent());
 
+            if(getName().Contains(NPCNameList.barricade))
+            {
+                combatSprites[coords].transform.localScale = Constants.reverseScaleChange;
+            } else
+            {
+                combatSprites[coords].transform.localScale = Vector3.one;
+            }
+
             combatSprites[coords].transform.position = CombatGrid.getPositionAt(coords);
-            combatSprites[coords].transform.localScale = Vector3.one;
 
             ComponentList componentList = combatSprites[coords].GetComponent<ComponentList>();
 

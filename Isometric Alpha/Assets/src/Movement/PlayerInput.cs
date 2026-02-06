@@ -623,6 +623,8 @@ public class PlayerInput : MonoBehaviour
 
     private void handleShopStateKeyPresses()
     {
+        showFormulaToggleCheck();
+
         if (KeyBindingList.eitherBackoutKeyIsPressed() && !KeyPressManager.handlingPrimaryKeyPress)
         {
             EscapeStack.escapeAll();

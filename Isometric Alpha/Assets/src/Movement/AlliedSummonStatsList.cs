@@ -36,6 +36,14 @@ public static class AlliedSummonStatsList
         allyStatsDict.Add(NPCNameList.overseerGaspar, new AlliedSummonStats(EnemyStatsList.getEnemyStats(NPCNameList.overseerGaspar)));
         #endregion
         #endregion
+
+        #region Branded Slaves
+        allyStatsDict.Add(MonsterNameList.brandedRioter, new AlliedSummonStats(EnemyStatsList.getEnemyStats(MonsterNameList.brandedRioter)));
+        #endregion
+
+        #region NonBranded Slaves
+        allyStatsDict.Add(MonsterNameList.noBrandRioter, new AlliedSummonStats(EnemyStatsList.getEnemyStats(MonsterNameList.noBrandRioter)));
+        #endregion
     }
 
 }

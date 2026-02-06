@@ -177,7 +177,7 @@ setToTrue(askedKendeWhoHeIs)
 
 I'm Kende. I'm the cook. I spend all of my time slaving away preparing meals for you branded and before you ask, yes, my parents are very proud. Now if you're done bothering me, get moving.
 
-    +So you are the one who makes the rations we get?
+    +So you are the one who prepares the rations we get?
         ->2b
     +Alright, I'll be going.
         ->Close
@@ -188,7 +188,7 @@ Yeah that's me. What about it?
 
     +They were good. Thank you.
         ->2c
-    +Do you put the maggots in yourself or do they find their way there after?
+    +Did you figure out how to make them taste like dirt yourself or did your mother teach you?
         setToTrue(insultedKendesCooking)
         You little shit! Get out of here before I decide you're worth caning.
         ->Close
@@ -208,7 +208,7 @@ Oh, um... thanks.
 
 setToTrue(kendeWillSellToPlayer)
 
-Wait, you aren't ungrateful like all of the other slaves. I make a little money on the side selling stuff to the other guards. If you happen to "find" any coins lying around out there, I'll give you something for them.
+Wait, you aren't ungrateful like the other slaves. I make a little money on the side selling stuff to the other guards. If you happen to "find" any coins lying around out there, I'll give you something for them.
 
     +I have some money on me right now.
         enterShopMode()
