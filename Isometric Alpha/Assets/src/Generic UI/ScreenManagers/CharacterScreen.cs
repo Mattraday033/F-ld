@@ -81,28 +81,9 @@ public class CharacterScreen : ScreenManager, ICounter
         return DescribableList.MainHandWeaponsAsActions;
     }
 
-    // public override void revealDescriptionPanelSet(IDescribable objectToDescribe)
-    // {
-    //     AllyStats statsToDescribe = Stats.convertIDescribableToStats(objectToDescribe) as AllyStats;
-
-    //     if (statsToDescribe == null)
-    //     {
-    //         return;
-    //     }
-
-    //     currentPartyMember = statsToDescribe;
-
-    //     playerNameText.text = getCurrentPartyMember().getName().Replace(PartyManager.playerMarker, "");
-    //     characterSprite.color = currentPartyMember.getSpriteColor();
-
-    //     abilityMenuManager.actionArraySource = getCurrentPartyMember();
-
-    //     abilityMenuManager.populateAbilityMenuFromCombatActionArray();
-    //     abilityMenuManager.disableLockedPassiveButtons();
-
-    //     descriptionPanelSlots[sideStatsSlotIndex].setPrimaryDescribable(getCurrentPartyMember());
-
-    //     // setAbilityGridToDefaultTab();
-    // }
+    public override KeyCode getExitKeyCode()
+    {
+        return KeyBindingList.characterScreenKey;
+    }
 
 }

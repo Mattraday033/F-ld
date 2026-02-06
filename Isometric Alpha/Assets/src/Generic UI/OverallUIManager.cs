@@ -80,6 +80,16 @@ public static class OverallUIManager
         // currentScreenManager.setToScreenState(getScreenState(newScreenType));
     }
 
+    public static KeyCode getCurrentScreenExitKey()
+    {
+        if(currentScreenManager == null)
+        {
+            return KeyCode.None;
+        }
+
+        return currentScreenManager.getExitKeyCode();
+    }
+
     public static void setCurrentScreenType(ScreenManager screenManager)
     {
         currentScreenManager = screenManager;

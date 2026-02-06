@@ -59,4 +59,9 @@ public class SettingsManager : ScreenManager, IEscapable
         EscapeStack.removeTopObjectFromStack();
         Destroy(gameObject);
     }
+
+    public override KeyCode getExitKeyCode()
+    {
+        return KeyBindingList.settingsScreenKey1;
+    }
 }

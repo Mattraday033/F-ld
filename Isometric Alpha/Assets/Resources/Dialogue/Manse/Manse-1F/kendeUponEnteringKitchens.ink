@@ -28,6 +28,8 @@ VAR fullSlavesFightIndex = 3
 VAR playerIndex = 0
 VAR playerName = ""
 
+setNPCFacing({kendeIndex},SW)
+
 {
 -convincedImre:
     ->1a

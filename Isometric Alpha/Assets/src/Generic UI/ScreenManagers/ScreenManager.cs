@@ -260,4 +260,6 @@ public abstract class ScreenManager : MonoBehaviour, ITabParent
         }
     }
 
+    public abstract KeyCode getExitKeyCode();
+
 }

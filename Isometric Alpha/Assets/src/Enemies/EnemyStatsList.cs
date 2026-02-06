@@ -6,7 +6,6 @@ public static class EnemyStatsList
 {
     private const string wormMinionAcid = "WormMinionAcid";
 
-    private const string slaveBlocker = "Slave Conscript";
     private const string slaveWarrior = "Slave Warrior";
 
     private const string smallStoneMaterials = "StoneSaintBuildingMaterialsSmall";
@@ -22,7 +21,6 @@ public static class EnemyStatsList
     public readonly static EnemyStats[] wormSplitBossSpawnCombo = new EnemyStats[] {Resources.Load<EnemyStats>(wormMinionAcid), Resources.Load<EnemyStats>(wormMinionAcid),
                                                                                     Resources.Load<EnemyStats>(wormMinionAcid), Resources.Load<EnemyStats>(wormMinionAcid)};
 
-    public readonly static EnemyStats[] slaveBlockerCombo = new EnemyStats[] { Resources.Load<EnemyStats>(slaveBlocker), Resources.Load<EnemyStats>(slaveBlocker) };
     public readonly static EnemyStats[] slaveWarriorCombo = new EnemyStats[] {Resources.Load<EnemyStats>(slaveWarrior),
                                                                             Resources.Load<EnemyStats>(slaveWarrior),
                                                                             Resources.Load<EnemyStats>(slaveWarrior)};
@@ -200,14 +198,23 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                           TraitList.territorial
                                                                             }));
 
-        enemyStatsDict.Add(MonsterNameList.lineBreaker, new EnemyStats(MonsterNameList.lineBreaker,
+        enemyStatsDict.Add(MonsterNameList.linebreaker, new EnemyStats(MonsterNameList.linebreaker,
                                                                                     Constants.fortyArmor,
                                                                                             60,
                             AbilityList.getAbility(null, AbilityList.skullBashKey) as Ability,
                                                                 new Trait[] { TraitList.master,
                                                                           TraitList.chaotic
                                                                             }));        
-        
+    
+        enemyStatsDict.Add(MonsterNameList.overseer, new EnemyStats(MonsterNameList.overseer,
+                                                                                    Constants.seventyArmor,
+                                                                                            145,
+                            AbilityList.getAbility(null, AbilityList.guardSlaveSummonKey) as Ability,
+                                                                new Trait[] { TraitList.master,
+                                                                          TraitList.empty,
+                                                                          TraitList.backLine
+                                                                            }));
+
         enemyStatsDict.Add(MonsterNameList.signaleer, new EnemyStats(MonsterNameList.signaleer,
                                                                                     Constants.thirtyArmor,
                                                                                             45,
@@ -226,6 +233,19 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             TraitList.territorial
                                                                             }));
 
+        #endregion
+
+        #region Branded Slaves
+
+        enemyStatsDict.Add(MonsterNameList.brandedConscript, new MinionStats(MonsterNameList.brandedConscript,
+                                                                            Constants.tenArmor,
+                                                                                    15,
+                    AbilityList.getAbility(null, AbilityList.guardJavelinKey) as Ability,
+                                                        new Trait[] { TraitList.minion,
+                                                                    TraitList.chaotic,
+                                                                    TraitList.blocker,
+                                                                    TraitList.frontLine
+                                                                    }));
         #endregion
 
         #region Bats

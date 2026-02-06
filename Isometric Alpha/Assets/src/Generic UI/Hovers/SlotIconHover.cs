@@ -289,9 +289,9 @@ public static class HoverMessageList
 
     private const string compassKey = "Compass";
     private const string hostilityKey = "Hostility";
-    private const string hostilityMessage = hostilityKey + ". Areas with green Hostility means that you cannot be attacked by random monsters. Areas with red Hostility may contain random Monsters. Yellow Hosility means you have committed a crime. When the bars of an area fill up with yellow, they will turn red and guards will be set after you.";
+    private const string hostilityMessage = hostilityKey + ". Areas with green Hostility means that you cannot be attacked by random monsters. Areas with red Hostility may contain random Monsters. Yellow Hosility means you have committed a crime. When the bars of an area fill up with yellow, they will turn red and guards will be sent after you.";
     private const string footingKey = "Footing";
-    private const string footingMessage = footingKey + ". Some enemies will chase you when you get too close. These enemies only move half as fast as you. When the Left Foot is highlighted Green, enemies chasing you will move the next time you take a step.";
+    private const string footingMessage = footingKey + ". Some enemies will chase you when you get too close. These enemies only move half as fast as you. When the Left Foot is visibile, enemies chasing you will move the next time you take a step.";
 
     private const string strengthMessage = "Strength. This Primary Stat bolsters a character's Maximum Health, Critical Hit Damage, and Physical Resistance. Strength also governs the Intimidate skill.";
     private const string dexterityMessage = "Dexterity. This Primary Stat bolsters a character's Armor, Surprise Round Damage Modifier, and Armor Penetration. Dexterity also governs the Cunning skill.";
@@ -356,6 +356,19 @@ public static class HoverMessageList
 
     private const string questJournalTabKey = "Quest Tab";
     private const string glossaryJournalTabKey = "Glossary Tab";
+
+    private const string characterScreenKey = "Character Screen";
+    private const string characterScreenMessage = characterScreenKey + ". Here you can check your Character's Stats, change equipped Abilities, and spend Exp to Level Up.";
+    private const string inventoryScreenKey = "Inventory Screen";
+    private const string inventoryScreenMessage = inventoryScreenKey + ". Here you can see what Items you have picked up, or change your Character's Equipment";
+    private const string partyScreenKey = "Party Screen";
+    private const string partyScreenMessage = partyScreenKey + ". Here you can see your Party's Stats and Skills, swap out Party Members, and change your Party's starting Formation.";
+    private const string journalScreenKey = "Journal Screen";
+    private const string journalScreenMessage = journalScreenKey + ". Here you can see what quests you have, and look up Terms in the Glossary.";
+    private const string saveAndLoadScreenKey = "Save/Load Screen";
+    private const string saveAndLoadScreenMessage = saveAndLoadScreenKey + ". Here you can save your game. Remember, you can also Quick Save with 'Q', and the game will take an Autosave whenever you enter an area. You can have up to three Autosaves at a time.";
+    private const string settingsScreenKey = "Settings Screen";
+    private const string settingsScreenMessage = settingsScreenKey + ". Here you can change the Game's Settings, or Quit the Game.";
 
     public static string getMessage(string iconName)
     {
@@ -580,6 +593,19 @@ public static class HoverMessageList
             
             case actionOrderKey:
                 return actionOrderMessage;
+
+            case characterScreenKey:
+                return characterScreenMessage;
+            case inventoryScreenKey:
+                return inventoryScreenMessage;
+            case partyScreenKey:
+                return partyScreenMessage;
+            case journalScreenKey:
+                return journalScreenMessage;
+            case saveAndLoadScreenKey:
+                return saveAndLoadScreenMessage;
+            case settingsScreenKey:
+                return settingsScreenMessage;
 
             default:
 

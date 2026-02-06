@@ -251,7 +251,7 @@ public static class AbilityList
         enemyAbilityDictionary.Add(guardLashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardLashKey, "The bane of slaves everywhere.", "Lashings"), DamageParams.build("8", "40"), TargetParams.build(Range.verticalThreeIndex))));
         enemyAbilityDictionary.Add(guardCoordinateKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardCoordinateKey, "A leader takes charge and directs their troops in battle, increasing their damage.", "Cohesion"), TargetParams.build(Range.boxThreeIndex), TraitList.cohesion)));
         enemyAbilityDictionary.Add(guardSlingAttackKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardSlingAttackKey, "The slinger whips a bullet towards it's target."), DamageParams.build("6", "4"))));
-        // enemyAbilityDictionary.Add(guardSlaveSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(guardSlaveSummonKey, "The slave driver calls forth more slaves to act as fodder.")), EnemyStatsList.slaveBlockerCombo));
+        enemyAbilityDictionary.Add(guardSlaveSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(guardSlaveSummonKey, "The slave driver calls forth more slaves to act as fodder.")), MonsterNameList.brandedConscript));
         // enemyAbilityDictionary.Add(guardWarriorSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(guardWarriorSummonKey, "The slave driver calls forth more slaves to act as fodder.")), EnemyStatsList.slaveWarriorCombo));
 
 

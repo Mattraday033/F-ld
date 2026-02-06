@@ -128,7 +128,9 @@ public static class EnemyPackInfoList
     #endregion
 
     public readonly static BossPackInfo campNorthEastOverseerBoss = new BossPackInfo(new CreatureAmount[] { 
-                                                                                                        EnemyAmountList.oneDisciplinarian
+                                                                                                        EnemyAmountList.oneOverseer,
+                                                                                                        EnemyAmountList.eightBrandedConscripts,
+                                                                                                        EnemyAmountList.twoSpearmen
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                                         FlagNameList.neCampOverseerKilled,

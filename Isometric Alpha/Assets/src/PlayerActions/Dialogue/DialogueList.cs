@@ -226,6 +226,10 @@ public static class DialogueList
         #endregion
         #region Mess Hall
 
+        addDialogueToList(LocationNameList.messHall, NPCNameList.noBrand+1,
+                            new Dialogue(new string[] { NPCNameList.noBrand+1 },
+                            Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
+
         addDialogueToList(LocationNameList.messHall, NPCNameList.kende,
                             new Dialogue(new string[] { NPCNameList.kende },
                             Resources.Load<TextAsset>(DialogueNameList.kendePath)));
@@ -236,6 +240,10 @@ public static class DialogueList
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.leafPile,
                             new Dialogue(new string[] { NPCNameList.leafPile },
                             Resources.Load<TextAsset>(DialogueNameList.leafPilePath)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.overseer,
+                            new Dialogue(new string[] { NPCNameList.overseer },
+                            Resources.Load<TextAsset>(DialogueNameList.overseerPath)));
 
         addDialogueToList(LocationNameList.campNorthEast, DialogueNameList.slavesAfterKillingOverseerCampNEKey,
                          new Dialogue(new string[] { 
@@ -840,7 +848,7 @@ public static class DialogueList
                                                                 NPCNameList.imre+2, 
                                                                 NPCNameList.pan, 
                                                                 NPCNameList.guard, 
-                                                                NPCNameList.slave
+                                                                NPCNameList.noBrand+2
                                                             }, 
                                  Resources.Load<TextAsset>(DialogueNameList.kendeUponEnteringKitchensPathName), 
                                  DialogueCombatInfoList.kendeInKitchensCombatInfo));

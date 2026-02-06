@@ -99,7 +99,7 @@ public static class KeyBindingList
                  Input.GetKey(inventoryScreenKey) || 
                  Input.GetKey(partyScreenKey) || 
                  Input.GetKey(journalScreenKey) || 
-                 saveLoadScreenKeyIsPressed() || 
+                 Input.GetKey(loadScreenKey) || 
                  settingsScreenKeyKeyIsPressed());
     }
 
@@ -131,18 +131,11 @@ public static class KeyBindingList
     public const KeyCode inventoryScreenKey = KeyCode.I;
     public const KeyCode partyScreenKey = KeyCode.P;
     public const KeyCode journalScreenKey = KeyCode.J;
-    public const KeyCode saveScreenKey = KeyCode.V;
     public const KeyCode loadScreenKey = KeyCode.L;
     public const KeyCode settingsScreenKey1 = KeyCode.Escape;
     public const KeyCode settingsScreenKey2 = KeyCode.R;
 
     public static Dictionary<KeyCode, ScreenType> keyToScreenDictionary;
-
-    public static bool saveLoadScreenKeyIsPressed()
-    {
-        return Input.GetKey(saveScreenKey) ||
-                Input.GetKey(loadScreenKey);
-    }
 
     public static bool settingsScreenKeyKeyIsPressed()
     {
@@ -178,7 +171,6 @@ public static class KeyBindingList
             { inventoryScreenKey, ScreenType.Inventory },
             { partyScreenKey, ScreenType.Party },
             { journalScreenKey, ScreenType.Journal },
-            { saveScreenKey, ScreenType.SaveAndLoad },
             { loadScreenKey, ScreenType.SaveAndLoad },
             { settingsScreenKey1, ScreenType.Settings },
             { settingsScreenKey2, ScreenType.Settings }

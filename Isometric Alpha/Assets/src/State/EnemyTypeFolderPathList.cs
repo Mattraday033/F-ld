@@ -63,9 +63,10 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(MonsterNameList.javelineer, lovashiFolderPath + MonsterNameList.javelineer + "/");
         folderPathDict.Add(MonsterNameList.lancer, lovashiFolderPath + MonsterNameList.lancer + "/");
         folderPathDict.Add(MonsterNameList.lieutenant, lovashiFolderPath + MonsterNameList.lieutenant + "/");
-        folderPathDict.Add(MonsterNameList.lineBreaker, lovashiFolderPath + MonsterNameList.lineBreaker + "/");
-        folderPathDict.Add(MonsterNameList.signaleer, lovashiFolderPath + MonsterNameList.signaleer + "/");        
-        folderPathDict.Add(MonsterNameList.spearman, lovashiFolderPath + MonsterNameList.spearman + "/");        
+        folderPathDict.Add(MonsterNameList.linebreaker, lovashiFolderPath + MonsterNameList.linebreaker + "/");
+        folderPathDict.Add(MonsterNameList.overseer, lovashiFolderPath + MonsterNameList.overseer + "/");
+        folderPathDict.Add(MonsterNameList.signaleer, lovashiFolderPath + MonsterNameList.signaleer + "/");
+        folderPathDict.Add(MonsterNameList.spearman, lovashiFolderPath + MonsterNameList.spearman + "/");
 
         //Named Lovashi
         folderPathDict.Add(NPCNameList.andras, lovashiFolderPath + NPCNameList.guardAndras + "/");
@@ -74,6 +75,7 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.quartermasterEmese, lovashiFolderPath + NPCNameList.quartermasterEmese + "/");
         folderPathDict.Add(NPCNameList.guardLaszlo, lovashiFolderPath + NPCNameList.guardLaszlo + "/");
         folderPathDict.Add(NPCNameList.guardMuzsa, lovashiFolderPath + NPCNameList.guardMuzsa + "/");
+        folderPathDict.Add(NPCNameList.kende, lovashiFolderPath + NPCNameList.kende + "/");
         folderPathDict.Add(NPCNameList.marcos, lovashiFolderPath + NPCNameList.marcos + "/");
         folderPathDict.Add(NPCNameList.guardMarcos, lovashiFolderPath + NPCNameList.guardMarcos + "/");
         folderPathDict.Add(NPCNameList.pazman, lovashiFolderPath + NPCNameList.guardPazman + "/");
@@ -91,6 +93,7 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.balint, brandedFolderPath + NPCNameList.balint + "/");
         folderPathDict.Add(NPCNameList.clay, brandedFolderPath + NPCNameList.clay + "/");
         folderPathDict.Add(NPCNameList.ervin, brandedFolderPath + NPCNameList.ervin + "/");
+        folderPathDict.Add(NPCNameList.feher, brandedFolderPath + NPCNameList.feher + "/");
         folderPathDict.Add(NPCNameList.garcha, brandedFolderPath + NPCNameList.garcha + "/");
         folderPathDict.Add(NPCNameList.janos, brandedFolderPath + NPCNameList.janos + "/");
         folderPathDict.Add(NPCNameList.kastor, brandedFolderPath + NPCNameList.kastor + "/");
@@ -98,6 +101,8 @@ public static class EnemyTypeFolderPathList
 
         folderPathDict.Add(NPCNameList.seb, brandedFolderPath + MonsterNameList.brandedConscript + "/");
         folderPathDict.Add(NPCNameList.slate, brandedFolderPath + MonsterNameList.brandedConscript + "/");
+
+        folderPathDict.Add(MonsterNameList.brandedConscript, brandedFolderPath + MonsterNameList.brandedConscript + "/");   
 
         folderPathDict.Add(MonsterNameList.brandedRioter +  MonsterNameList.pickMarker, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.pickMarker + "/");   
         folderPathDict.Add(MonsterNameList.brandedRioter +  MonsterNameList.shivMarker, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.shivMarker + "/");   
@@ -129,9 +134,16 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.imre, nonbrandedFolderPath + NPCNameList.imre + "/");
         folderPathDict.Add(NPCNameList.page, nonbrandedFolderPath + NPCNameList.page + "/");
 
+        folderPathDict.Add(NPCNameList.noBrand, nonbrandedFolderPath + MonsterNameList.noBrandLoyalist + Constants.maleMarker + "/");
+        folderPathDict.Add(NPCNameList.noBrand+1, nonbrandedFolderPath + MonsterNameList.noBrandLoyalist + Constants.femaleMarker + "/");
+        folderPathDict.Add(NPCNameList.noBrand+4, nonbrandedFolderPath + MonsterNameList.noBrandLoyalist + Constants.femaleMarker + "/");
         folderPathDict.Add(MonsterNameList.noBrandLoyalist + Constants.maleMarker, nonbrandedFolderPath + MonsterNameList.noBrandLoyalist + Constants.maleMarker + "/");
         folderPathDict.Add(MonsterNameList.noBrandLoyalist + Constants.femaleMarker, nonbrandedFolderPath + MonsterNameList.noBrandLoyalist + Constants.femaleMarker + "/");
 
+        folderPathDict.Add(NPCNameList.pan, nonbrandedFolderPath + MonsterNameList.noBrandRioter + Constants.maleMarker + "/");
+        folderPathDict.Add(NPCNameList.noBrand+2, nonbrandedFolderPath + MonsterNameList.noBrandRioter + Constants.maleMarker + "/");
+        folderPathDict.Add(NPCNameList.noBrand+3, nonbrandedFolderPath + MonsterNameList.noBrandRioter + Constants.femaleMarker + "/");
+        folderPathDict.Add(NPCNameList.noBrand+5, nonbrandedFolderPath + MonsterNameList.noBrandRioter + Constants.maleMarker + "/");
         folderPathDict.Add(MonsterNameList.noBrandRioter + Constants.femaleMarker, nonbrandedFolderPath + MonsterNameList.noBrandRioter + Constants.femaleMarker + "/");
         folderPathDict.Add(MonsterNameList.noBrandRioter + Constants.maleMarker, nonbrandedFolderPath + MonsterNameList.noBrandRioter + Constants.maleMarker + "/");
         #endregion

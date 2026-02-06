@@ -24,7 +24,7 @@ public class CombatAnimationManager : MonoBehaviour
 
     private const float defaultMaxTime = .5f;
 
-    private int currentKey = 0;
+    private static int currentKey = 0;
 
 
     [RuntimeInitializeOnLoadMethod]
@@ -61,7 +61,7 @@ public class CombatAnimationManager : MonoBehaviour
 
     public static int getCurrentKey()
     {
-        return getInstance().currentKey++;
+        return currentKey++;
     }
 
     public static void trackAnimation(int key, IAnimationTracker tracker)

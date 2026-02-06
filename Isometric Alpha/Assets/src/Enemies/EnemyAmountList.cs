@@ -38,15 +38,21 @@ public static class EnemyAmountList
     public readonly static CreatureAmount oneLieutenant = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.lieutenant));
     public readonly static CreatureAmount twoLieutenants = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.lieutenant));
 
-    public readonly static CreatureAmount oneLineBreaker = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.lineBreaker));
-    public readonly static CreatureAmount twoLineBreakers = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.lineBreaker));
+    public readonly static CreatureAmount oneLineBreaker = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.linebreaker));
+    public readonly static CreatureAmount twoLineBreakers = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.linebreaker));
 
+    public readonly static CreatureAmount oneOverseer = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.overseer));
 
     public readonly static CreatureAmount oneSignaleer = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.signaleer));
     public readonly static CreatureAmount twoSignaleers = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.signaleer));
 
     public readonly static CreatureAmount oneSpearman = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.spearman));
     public readonly static CreatureAmount twoSpearmen = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.spearman));
+
+    #endregion
+
+    #region Branded Slaves
+    public readonly static CreatureAmount eightBrandedConscripts = new CreatureAmount(Constants.eightCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.brandedConscript));
 
     #endregion
 

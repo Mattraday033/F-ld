@@ -7,6 +7,8 @@ using Ink.Runtime;
 using Cinemachine;
 using System.Linq;
 
+public delegate void AnimationDelegate<T>(T t);
+
 public class DialogueManager : MonoBehaviour
 {
     private string quantitySymbol = " x";
@@ -414,6 +416,9 @@ public class DialogueManager : MonoBehaviour
         string tutorialKey = "";
         bool continueAfterTransparent = false;
         int camTargetIndex = 0;
+        int intParameter = 0;
+        string parameter = "";
+        string[] args = new string[0];
         AnimationManager targetAnimationManager = null;
 
         if (currentStory.canContinue)
@@ -906,6 +911,35 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
+                case "playdelayedanimation":
+                case "playanimationwithdelay":
+
+                    camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
+                    parameter = getArgument(buffer, Constants.indexOne);
+                    intParameter = getArgumentInt(buffer, Constants.indexTwo);
+
+                    float secondsToWait = ((float) intParameter)/1000f;
+
+                    targetAnimationManager = currentDialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
+
+                    AnimationDelegate<AnimationManager> animationDelegate = null;
+
+                    switch (parameter.ToLower().Replace(" ",""))
+                    {
+                        case "wounded":
+                            animationDelegate = t => t.playWoundedAnimation();
+                            break;
+                    }
+
+                    if(animationDelegate != null && targetAnimationManager != null)
+                    {
+                        StartCoroutine(waitThenPlayAnimation(secondsToWait, animationDelegate, targetAnimationManager));
+                    }
+
+                    continueStory();
+
+                    break;
+
                 case "adjustgridsquare":
 
                     Facing facingDirection = State.playerFacing.getFacing();
@@ -1370,10 +1404,10 @@ public class DialogueManager : MonoBehaviour
 
     private TextAsset getSecondaryStoryJSON(int secondaryInkFileIndex)
     {
-        Helpers.debugNullCheck("currentDialogue.secondaryInkJSONs",currentDialogue.secondaryInkJSONs);
-        Debug.LogError("currentDialogue.secondaryInkJSONs.Length = " + currentDialogue.secondaryInkJSONs.Length);
-        Debug.LogError("secondaryInkFileIndex = " + secondaryInkFileIndex);
-        Helpers.debugNullCheck("currentDialogue.secondaryInkJSONs[secondaryInkFileIndex]", currentDialogue.secondaryInkJSONs[secondaryInkFileIndex]);
+        // Helpers.debugNullCheck("currentDialogue.secondaryInkJSONs",currentDialogue.secondaryInkJSONs);
+        // Debug.LogError("currentDialogue.secondaryInkJSONs.Length = " + currentDialogue.secondaryInkJSONs.Length);
+        // Debug.LogError("secondaryInkFileIndex = " + secondaryInkFileIndex);
+        // Helpers.debugNullCheck("currentDialogue.secondaryInkJSONs[secondaryInkFileIndex]", currentDialogue.secondaryInkJSONs[secondaryInkFileIndex]);
 
         if (currentDialogue.secondaryInkJSONs == null || currentDialogue.secondaryInkJSONs.Length <= secondaryInkFileIndex || currentDialogue.secondaryInkJSONs[secondaryInkFileIndex] == null)
         {
@@ -1521,6 +1555,20 @@ public class DialogueManager : MonoBehaviour
 
         return story;
 	}
+
+    private static IEnumerator waitThenPlayAnimation(float secondsToWait, AnimationDelegate<AnimationManager> playAnimation, AnimationManager animationManager)
+    {
+        float timeWaited = 0f;
+
+        while(timeWaited <= secondsToWait)
+        {
+            yield return null;
+
+            timeWaited += Time.deltaTime;
+        }
+
+        playAnimation(animationManager);
+    }
 }
 
 public class Conversation

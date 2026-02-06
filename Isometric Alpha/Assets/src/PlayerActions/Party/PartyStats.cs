@@ -406,7 +406,8 @@ public static class PartyStats
                 (maxInt > 0 && maxLea > 0) ||
                 (maxCun > 0 && maxObs > 0) ||
                 (maxInt > 0 && maxLea > 0) ||
-                (maxObs > 0 && maxLea > 0);
+                (maxObs > 0 && maxLea > 0) ||
+                (maxCun > 0 && maxLea > 0);
     }
 
     #endregion

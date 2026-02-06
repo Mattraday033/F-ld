@@ -203,6 +203,8 @@ public static class SpawnParamsList
 
         #region MessHall
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.messHall, NPCNameList.noBrand+1),
+                                new InteractableSpawnParams(revoltStartedStopSpawning));
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.messHall, NPCNameList.kende),
                                 new InteractableSpawnParams(revoltStartedStopSpawning));
 
@@ -234,6 +236,9 @@ public static class SpawnParamsList
 
         #region Camp North East
         
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.overseer),
+                               new InteractableSpawnParams(revoltStartedStopSpawning));
+
         #region Rally Slaves Convo
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.slave),
@@ -720,7 +725,11 @@ public static class SpawnParamsList
 
         InteractableSpawnParams rubbleConvoSpawnParams = new InteractableSpawnParams(new StartSpawningFlagList(new string[] { 
                                                                                                             FlagNameList.mineLvl3InRubbleConversation
-                                                                                                          }), spawnWhileHostile);
+                                                                                                                            }),
+                                                                                    new StopSpawningFlagList(new string[]   {
+                                                                                                                                FlagNameList.mineLvl3SlavesBackToSurface,
+                                                                                                                                FlagNameList.mineLvl3GuardsBackToSurface
+                                                                                                                            }), spawnWhileHostile);
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.section7, NPCNameList.guardReka), rubbleConvoSpawnParams);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.section7, NPCNameList.guardVirag), rubbleConvoSpawnParams);
@@ -763,17 +772,17 @@ public static class SpawnParamsList
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.guard),
                                         new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slave),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.noBrand),
                                         new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveOne),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.noBrand+1),
                                         new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveTwo),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.noBrand+2),
                                         new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveThree),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.noBrand+3),
                                         new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveFour),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.noBrand+4),
                                         new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.slaveFive),
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.noBrand+5),
                                         new InteractableSpawnParams(stopSpawningAfterKendeKitchenConvo, spawnWhileHostile));
         #endregion
 

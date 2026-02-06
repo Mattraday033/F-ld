@@ -950,8 +950,13 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
 public class NonDialogueNPCSpawnDetails : NPCWithAnimationsSpawnDetails
 {
 
-    public NonDialogueNPCSpawnDetails(string npcName, Vector3Int cellCoords, string animationName = null, Facing facing = Facing.Random, bool ignoresSecretDoors = true) :
-    base(npcName, cellCoords, "", animationName, facing, ignoresSecretDoors: ignoresSecretDoors)
+    public NonDialogueNPCSpawnDetails(string npcName, 
+                                        Vector3Int cellCoords, 
+                                        string animationName = null,
+                                        Facing facing = Facing.Random, 
+                                        bool ignoresSecretDoors = true,
+                                         CharacterAnimationType animationType = CharacterAnimationType.None) :
+    base(npcName, cellCoords, "", animationName, facing, ignoresSecretDoors: ignoresSecretDoors, animationType: animationType)
     {
 
     }

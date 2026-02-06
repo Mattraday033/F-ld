@@ -35,4 +35,9 @@ public class JournalHandler : ScreenManager
         return DescribableList.Quests;
     }
 
+    public override KeyCode getExitKeyCode()
+    {
+        return KeyBindingList.journalScreenKey;
+    }
+
 }

@@ -9,7 +9,7 @@ VAR playerName = ""
 
 === 1a ===
 
-\*The slave sobs weakly.*
+\*Feher sobs weakly.*
 
         ->Close
 

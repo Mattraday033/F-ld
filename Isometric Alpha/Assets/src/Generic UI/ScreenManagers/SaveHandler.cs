@@ -121,16 +121,6 @@ public class SaveHandler : ScreenManager, IEscapable
 		return Flags.getFlag(FlagNameList.newGameFlagName) || CombatStateManager.inCombat;
 	}
 
-	public static bool ignoreNavigationKeyPressedDuringInputFieldSelection()
-	{
-		if(getInstance() == null || EventSystem.current == null)
-		{
-			return false;
-		}
-
-		return EventSystem.current.currentSelectedGameObject == getInstance().saveNameField.gameObject;
-	}
-
     public void removeInvalidFileNameCharacter()
     {
         string saveName = saveNameField.text;
@@ -564,5 +554,10 @@ public class SaveHandler : ScreenManager, IEscapable
         }
 
         currentSaveFile = describable as SaveBlueprint;
+    }
+    
+    public override KeyCode getExitKeyCode()
+    {
+        return KeyBindingList.loadScreenKey;
     }
 }

@@ -29,7 +29,7 @@ setToTrue(gotMessHallInstructionsFromKende)
 
 prepForItem()
 
-You new? I guess it doesn't matter, everyone's got the same rules. Take a plate and a cup and wait in line 'til it's your turn for your ration. Don't take a seat, those are for the off-duty guards. Head out to the yard through the big doors and eat quickly; if you have a thirst get some water from the well. When whichever guard brought you here calls for you, stack your plate outside before coming back in. Now, here you go.
+You new? I guess it doesn't matter, everyone's got the same rules. Take a plate and a cup and wait in line 'til it's your turn for your rations. Don't take a seat, those are for the off-duty guards. Head out to the yard through the big doors and eat quickly; if you have a thirst get some water from the well. When whichever guard brought you here calls for you, stack your plate outside before coming back in. Now, here you go.
 
 giveItem(0,0,1)
 }

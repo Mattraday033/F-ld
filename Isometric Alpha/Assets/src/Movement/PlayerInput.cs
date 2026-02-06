@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -278,7 +279,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if (KeyBindingList.saveLoadScreenKeyIsPressed() && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.loadScreenKey) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             EscapeStack.escapeAll();
 
@@ -372,15 +373,19 @@ public class PlayerInput : MonoBehaviour
     {
         showFormulaToggleCheck();
 
-        if (KeyBindingList.eitherBackoutKeyIsPressed() && EscapeStack.getEscapableObjectsCount() > 0 && !KeyPressManager.handlingPrimaryKeyPress)
+        if (KeyBindingList.eitherBackoutKeyIsPressed() && 
+            EscapeStack.getEscapableObjectsCount() > 0 &&
+            !KeyPressManager.handlingPrimaryKeyPress)
         {
             EscapeStack.handleEscapePress();
 
             KeyPressManager.handlingPrimaryKeyPress = true;
             return;
         }
-        else if ((Input.GetKey(KeyBindingList.lastScreenKey) || KeyBindingList.eitherBackoutKeyIsPressed())
-                    && !KeyPressManager.handlingPrimaryKeyPress)
+        else if ((((Input.GetKey(OverallUIManager.getCurrentScreenExitKey()) || KeyBindingList.eitherBackoutKeyIsPressed()) && 
+                    !SaveHandler.saveNameFieldIsSelected()) || 
+                    Input.GetKey(KeyBindingList.lastScreenKey)) && 
+                    !KeyPressManager.handlingPrimaryKeyPress)
         {
             if (backOutOfUI())
             {
@@ -399,39 +404,47 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        bool passedbackOutCheck = false;
-
-        switch (OverallUIManager.lastScreenType)
+        if(SaveHandler.saveNameFieldIsSelected() && 
+            Input.GetKey(KeyBindingList.backOutKey1) && 
+            !KeyPressManager.handlingPrimaryKeyPress)
         {
-            case ScreenType.Character:
-                passedbackOutCheck = backOutCheck(KeyBindingList.characterScreenKey);
-                break;
-            case ScreenType.Inventory:
-                passedbackOutCheck = backOutCheck(KeyBindingList.inventoryScreenKey);
-                break;
-            case ScreenType.Party:
-                passedbackOutCheck = backOutCheck(KeyBindingList.partyScreenKey);
-                break;
-            case ScreenType.Journal:
-                passedbackOutCheck = backOutCheck(KeyBindingList.journalScreenKey);
-                break;
-            case ScreenType.SaveAndLoad:
-                if (backOutCheck(KeyBindingList.saveScreenKey) ||
-                    backOutCheck(KeyBindingList.loadScreenKey))
-                {
-                    return;
-                }
-                break;
-            default:
-                break;
-        }
-
-        if (passedbackOutCheck)
-        {
+            EventSystem.current.SetSelectedGameObject(null);
+            KeyPressManager.handlingPrimaryKeyPress = true;
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.moveLeftKey) && !SaveHandler.ignoreNavigationKeyPressedDuringInputFieldSelection() && !KeyPressManager.handlingPrimaryKeyPress)
+        // bool passedbackOutCheck = false;
+
+        // switch (OverallUIManager.lastScreenType)
+        // {
+        //     case ScreenType.Character:
+        //         passedbackOutCheck = backOutCheck(KeyBindingList.characterScreenKey);
+        //         break;
+        //     case ScreenType.Inventory:
+        //         passedbackOutCheck = backOutCheck(KeyBindingList.inventoryScreenKey);
+        //         break;
+        //     case ScreenType.Party:
+        //         passedbackOutCheck = backOutCheck(KeyBindingList.partyScreenKey);
+        //         break;
+        //     case ScreenType.Journal:
+        //         passedbackOutCheck = backOutCheck(KeyBindingList.journalScreenKey);
+        //         break;
+        //     case ScreenType.SaveAndLoad:
+        //         if (  backOutCheck(KeyBindingList.loadScreenKey))
+        //         {
+        //             return;
+        //         }
+        //         break;
+        //     default:
+        //         break;
+        // }
+
+        // if (passedbackOutCheck)
+        // {
+        //     return;
+        // }
+
+        if (Input.GetKey(KeyBindingList.moveLeftKey) && !SaveHandler.saveNameFieldIsSelected() && !KeyPressManager.handlingPrimaryKeyPress)
         {
             OverallUIManager.moveToScreenToTheLeft();
 
@@ -439,7 +452,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.moveRightKey) && !SaveHandler.ignoreNavigationKeyPressedDuringInputFieldSelection() && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.moveRightKey) && !SaveHandler.saveNameFieldIsSelected() && !KeyPressManager.handlingPrimaryKeyPress)
         {
             OverallUIManager.moveToScreenToTheRight();
 
@@ -456,7 +469,7 @@ public class PlayerInput : MonoBehaviour
 
         if (Input.GetKey(keyCode) && !KeyPressManager.handlingPrimaryKeyPress)
         {
-            if ((keyCode == KeyBindingList.saveScreenKey || keyCode == KeyBindingList.loadScreenKey) && SaveHandler.ignoreNavigationKeyPressedDuringInputFieldSelection())
+            if ((keyCode == KeyBindingList.loadScreenKey) && SaveHandler.saveNameFieldIsSelected())
             {
                 return false;
             }

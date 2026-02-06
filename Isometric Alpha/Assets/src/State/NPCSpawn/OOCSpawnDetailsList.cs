@@ -198,7 +198,9 @@ public static class OOCSpawnDetailsList
         #region Mess Hall
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ShopkeeperSpawnDetails(NPCNameList.kende, new Vector3Int(3, 10), LocationNameList.messHall, extraSpaces: new Vector3Int[] { new Vector3Int(3, 9) }));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.noBrand+1, new Vector3Int(2, 12), LocationNameList.messHall, facing: Facing.NorthEast));
+
+        list.Add(new ShopkeeperSpawnDetails(NPCNameList.kende, new Vector3Int(3, 10), LocationNameList.messHall, extraSpaces: new Vector3Int[] { new Vector3Int(3, 9) }, facing: Facing.SouthEast));
 
         oocSpawnDetailsDict.Add(LocationNameList.messHall, list);
         #endregion
@@ -241,6 +243,8 @@ public static class OOCSpawnDetailsList
         list = new List<OOCSpawnDetails>();
 
         list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campNorthEast, Constants.indexZero));
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.overseer, new Vector3Int(-11, 6), LocationNameList.campNorthEast, facing: Facing.SouthEast));
 
         list.Add(new NPCSpawnDetails(NPCNameList.leafPile, new Vector3Int(18, -4), LocationNameList.campNorthEast, spriteName: PrefabNames.leafPile));
         list.Add(new NPCSpawnDetails(NPCNameList.leafPile, new Vector3Int(18, -5), LocationNameList.campNorthEast, spriteName: PrefabNames.leafPile));
@@ -354,10 +358,10 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard + 1, new Vector3Int(6, 3), LocationNameList.campCenter, MonsterNameList.spearman, facing: Facing.SouthWest));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(4, 5), LocationNameList.campCenter, facing: Facing.SouthWest));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.branded, new Vector3Int(0, 6), LocationNameList.campCenter, animationName: NPCNameList.slaveOne, facing: Facing.NorthEast));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.branded+1, new Vector3Int(0, 4), LocationNameList.campCenter, animationName: NPCNameList.slaveTwo, facing: Facing.NorthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.branded, new Vector3Int(0, 6), LocationNameList.campCenter, animationName: NPCNameList.slaveTwo, facing: Facing.NorthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.branded+1, new Vector3Int(0, 4), LocationNameList.campCenter, animationName: NPCNameList.ervin, facing: Facing.NorthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.branded+2, new Vector3Int(0, 3), LocationNameList.campCenter, animationName: NPCNameList.slaveThree, facing: Facing.NorthEast));
-        list.Add(new NPCSpawnDetails(NPCNameList.feher, new Vector3Int(4, 4), LocationNameList.campCenter));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.feher, new Vector3Int(4, 4), LocationNameList.campCenter, facing: Facing.SouthWest));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(8, 0), facing: Facing.SouthWest));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.page, new Vector3Int(6, 1), LocationNameList.campCenter, facing: Facing.SouthEast));
@@ -1117,22 +1121,22 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.kende, new Vector3Int(0, 1), ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, speakAtStartScript: new KendeInKitchenDuringRiotScript()));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kende, new Vector3Int(0, 1), ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, speakAtStartScript: new KendeInKitchenDuringRiotScript(), facing: Facing.SouthWest));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.imre+1, new Vector3Int(0, -3), ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, facing: Facing.SouthWest)); //loyal imre
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.imre+2, new Vector3Int(0, 0), facing: Facing.SouthEast)); //disloyal imre
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.pan, new Vector3Int(0, 2)));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.pan, new Vector3Int(0, 2), facing: Facing.SouthWest, animationType: CharacterAnimationType.Death_Back));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard, new Vector3Int(0, 3)));
-
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(-5, -1))); 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveOne, new Vector3Int(-5, 0))); 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveTwo, new Vector3Int(-5, 1)));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveThree, new Vector3Int(-5, 2))); 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveFour, new Vector3Int(-5, 3))); 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slaveFive, new Vector3Int(-5, 4))); 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard, new Vector3Int(0, 3), facing: Facing.SouthWest, animationName: MonsterNameList.linebreaker));
+ 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.noBrand+1, new Vector3Int(-5, -1), facing: Facing.NorthEast)); 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.noBrand, new Vector3Int(-5, 0), facing: Facing.NorthEast)); 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.noBrand+2, new Vector3Int(-5, 1), facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.noBrand+3, new Vector3Int(-5, 2), facing: Facing.NorthEast)); 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.noBrand+4, new Vector3Int(-5, 3), facing: Facing.NorthEast)); 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.noBrand+3, new Vector3Int(-5, 4), facing: Facing.NorthEast)); 
 
         list.Add(new LadderSpawnDetails(new Vector3Int(1, 4), PrefabNames.ladderTallNE,
                                         new Ladder(Constants.difficultyThree, ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, 

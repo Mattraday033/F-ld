@@ -111,6 +111,7 @@ public static class DialogueNameList
 
     #region Camp North East
     public const string leafPilePath = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + "LeafPile";
+    public const string overseerPath = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + MonsterNameList.overseer;
     public const string slavesAfterKillingOverseerCampNEKey = "slavesAfterKillingOverseerCampNE";
     public const string slavesAfterKillingOverseerCampNEPathName = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + slavesAfterKillingOverseerCampNEKey;
     

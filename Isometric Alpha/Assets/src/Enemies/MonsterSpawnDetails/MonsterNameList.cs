@@ -20,7 +20,8 @@ public static class MonsterNameList
     public const string javelineer = "Javelineer";
     public const string lancer = "Lancer";
     public const string lieutenant = "Lieutenant";
-    public const string lineBreaker = "Line Breaker";
+    public const string linebreaker = "Linebreaker";
+    public const string overseer = "Overseer";
     public const string signaleer = "Signaleer";
     public const string spearman = "Spearman";
 
@@ -53,7 +54,7 @@ public static class MonsterNameList
             case javelineer:
             case lancer:
             case lieutenant:
-            case lineBreaker:
+            case linebreaker:
             case signaleer:
             case spearman:
                 return lovashiPackName;

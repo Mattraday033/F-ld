@@ -13,7 +13,6 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
 
     public HostilityBarManager hostilityBarManager;
 
-    public Image bottomOOCUIBackground;
     public GameObject oocUIParent;
 
     public SkillButtonManager skillButtonManager;
@@ -126,14 +125,12 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
 
         State.oocUIManager = this;
         oocUIParent.SetActive(false);
-        bottomOOCUIBackground.color = Color.clear;
     }
 
     public void enableOOCUI()
     {
         State.oocUIManager = this;
         oocUIParent.SetActive(true);
-        bottomOOCUIBackground.color = Color.black;
     }
 
     public void testAddXP()
@@ -145,13 +142,13 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
     {
         if (State.onLeftFoot)
         {
-            leftFootImage.color = Color.green;
-            rightFootImage.color = Color.red;
+            leftFootImage.color = Color.white;
+            rightFootImage.color = Color.clear;
         }
         else
         {
-            rightFootImage.color = Color.green;
-            leftFootImage.color = Color.red;
+            leftFootImage.color = Color.clear;
+            rightFootImage.color = Color.white;
         }
     }
 

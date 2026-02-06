@@ -22,7 +22,7 @@ VAR playerName = ""
 
 === 1a ===
 
-... and that's why it's imperative that the lesson be delivered in this manner. The pain conveys import, the blood pounding in your ears lets in only the sound of the teacher's voic- what's this? Another student here to learn at the feet of the teacher? Sit with the others, and don't make a sound.
+... and that's why it's imperative that the lesson be delivered in this manner. The pain conveys import, the blood pounding in your ears lets in only the sound of the instructor's voic- what's this? Another student here to learn at the feet of the teacher? Sit with the others, and don't make a sound.
 
     +Yessir!
         ->1b
@@ -84,6 +84,7 @@ But therein lies the rub. If we allow you miscreants to go to your hearths as yo
 setNPCFacing({taborIndex},SE)
 
 playAnimation({taborIndex},Attack_Normal_Front)
+playDelayedAnimation({feherIndex},Wounded,700)
 
 \*Tabor cracks his whip, and Feher suffers another lash across his back.*
 
@@ -160,6 +161,7 @@ Feher still lusts in his despicable heart for horseflesh. Despite the fact that 
 setNPCFacing({taborIndex},SE)
 
 playAnimation({taborIndex},Attack_Normal_Front)
+playDelayedAnimation({feherIndex},Wounded,700)
 
 \*Tabor cracks his whip and strikes Feher again.*
 

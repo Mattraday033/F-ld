@@ -58,4 +58,9 @@ public class InventoryScreen : ScreenManager, ICounter
     {
         return DescribableList.MainHandWeaponsAsItems;
     }
+
+    public override KeyCode getExitKeyCode()
+    {
+        return KeyBindingList.inventoryScreenKey;
+    }
 }

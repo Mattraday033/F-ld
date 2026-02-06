@@ -163,10 +163,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     private void Awake()
     {
-        if(CombatStateManager.inCombat)
-        {
-            key = CombatAnimationManager.getCurrentKey();
-        } 
+        key = CombatAnimationManager.getCurrentKey();
     }
 
     public GameObject getGameObject()
@@ -176,16 +173,16 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public virtual void removeAnimation()
     {
-        if(!CombatStateManager.inCombat)
-        {
-            return;
-        }
-
         CombatAnimationManager.removeAnimation(key);
 
         if(spriteSetByHeartBeat())
         {
             enableExtras();
+        }
+
+        if(!CombatStateManager.inCombat)
+        {
+            return;
         }
 
         CombatAnimationManager.checkAllAnimationsFinished();

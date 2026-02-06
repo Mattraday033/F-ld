@@ -108,4 +108,9 @@ public class FormationHandler : ScreenManager, IPartyEditor, ICounter
     {
         return DescribableList.Unnecessary;
     }
+
+    public override KeyCode getExitKeyCode()
+    {
+        return KeyBindingList.partyScreenKey;
+    }
 }
