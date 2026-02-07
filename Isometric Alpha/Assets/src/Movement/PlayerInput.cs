@@ -38,6 +38,12 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
+        if (Input.GetKey(KeyBindingList.showHideKeyBindingsListKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        {
+            KeyPressManager.handlingPrimaryKeyPress = true;
+            CombatInputManager.OnHideKeyBindingsList.Invoke();
+        }
+
         if (!KeyPressManager.handlingPrimaryKeyPress || PlayerOOCStateManager.currentActivity == OOCActivity.inTutorialSequence)
         {
             switch (PlayerOOCStateManager.currentActivity)
@@ -102,12 +108,6 @@ public class PlayerInput : MonoBehaviour
         if (handleWASDMovement())
         {
             return;
-        }
-
-        if (Input.GetKey(KeyBindingList.showHideKeyBindingsListKey) && !KeyPressManager.handlingPrimaryKeyPress)
-        {
-            KeyPressManager.handlingPrimaryKeyPress = true;
-            CombatInputManager.OnHideKeyBindingsList.Invoke();
         }
 
         if (KeyBindingList.quickLoadKeysPressed() && !KeyPressManager.handlingPrimaryKeyPress)

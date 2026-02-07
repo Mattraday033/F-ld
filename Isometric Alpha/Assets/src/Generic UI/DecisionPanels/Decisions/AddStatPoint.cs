@@ -41,6 +41,7 @@ public class AddStatPoint : IDecision
         targetStats.fullHeal();
 
         Stats.OnStatsChange.Invoke();
+        AllyStats.OnPartyMemberUpgraded.Invoke();
 
         if (!Flags.getFlag(TutorialSequenceList.addingAbilitiesTutorialSeenFlag))
         {

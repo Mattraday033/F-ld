@@ -42,6 +42,45 @@ public class StoryStatRequirementVariableSource : IStoryVariableSource
     }
 }
 
+public class StoryFlagList : IStoryVariableSource
+{
+    private List<KeyValuePair<string, string>> flagList = new List<KeyValuePair<string, string>>();
+
+    public StoryFlagList(string variableName = null,
+                            string variableContents = null, 
+                            KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(), 
+                            List<KeyValuePair<string, string>> kvps = null)
+    {
+        if(variableName != null && variableContents != null)
+        {
+            flagList.Add(new KeyValuePair<string, string>(variableName, variableContents));
+        }
+
+        if(kvp.Key != null && kvp.Key.Length > 0 && kvp.Value != null && kvp.Value.Length > 0)
+        {
+            flagList.Add(kvp);
+        }
+
+        if(kvps != null && kvps.Count > 0)
+        {
+            flagList.AddRange(kvps);
+        }
+    }
+
+    public Story addVariables(Story story)
+    {
+        foreach(KeyValuePair<string, string> flag in flagList)
+        {
+            if(story.variablesState[flag.Key] != null)
+            {
+                story.variablesState[flag.Key] = flag.Value;
+            }
+        }
+
+        return story;
+    }
+}
+
 [System.Serializable]
 public class Dialogue : ICloneable
 {
@@ -118,6 +157,16 @@ public class Dialogue : ICloneable
         this.cameraFoci = new GameObject[this.names.Length];
 		this.inkJSON = inkJSON;
 		this.npcCombatInfo = npcCombatInfo;
+	}
+
+    public Dialogue(string[] names, TextAsset inkJSON, NPCCombatInfo npcCombatInfo, IStoryVariableSource variableSource)
+	{
+        this.names = createNameArray(names);
+
+        this.cameraFoci = new GameObject[this.names.Length];
+		this.inkJSON = inkJSON;
+		this.npcCombatInfo = npcCombatInfo;
+        this.variableSources.Add(variableSource);
 	}
 
 	public Dialogue(string[] names, TextAsset inkJSON, NPCCombatInfo npcCombatInfo, TextAsset[] secondaryInkJSONs)
@@ -221,6 +270,12 @@ public class SingleCharacterDialogue : Dialogue
 
     public SingleCharacterDialogue(string name, TextAsset inkJSON, NPCCombatInfo npcCombatInfo) : 
     base(new string[]{name}, inkJSON, npcCombatInfo)
+    {
+        
+    }
+
+    public SingleCharacterDialogue(string name, TextAsset inkJSON, NPCCombatInfo npcCombatInfo, IStoryVariableSource variableSource) : 
+    base(new string[]{name}, inkJSON, npcCombatInfo, variableSource)
     {
         
     }

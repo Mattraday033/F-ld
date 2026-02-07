@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class DragAndDropItem : DragAndDropUIObject
 {
-    public override void handleTargetObject(Collider2D collision)
+    public override bool handleTargetObject(Collider2D collision)
     {
         GameObject target = collision.gameObject;
 
@@ -13,15 +13,15 @@ public class DragAndDropItem : DragAndDropUIObject
         {
             case LayerAndTagManager.junkSlotTargetTag:
             case LayerAndTagManager.equipmentDisplayTag:
-                handleEquipmentDrop(target);
-                return;
+                return handleEquipmentDrop(target);
             case LayerAndTagManager.itemUseTargetTag:
-                handleUsableItemDrop(target);
-                return;
+                return handleUsableItemDrop(target);
+            default:
+                return false;
         }
     }
 
-    private void handleUsableItemDrop(GameObject target)
+    private bool handleUsableItemDrop(GameObject target)
     {
         DescriptionPanel partyMemberGridRow = target.GetComponent<DescriptionPanel>();
 
@@ -29,14 +29,14 @@ public class DragAndDropItem : DragAndDropUIObject
 
         if (item == null)
         {
-            return;
+            return false;
         }
 
         Stats targetStats = Stats.convertIDescribableToStats(partyMemberGridRow.getObjectBeingDescribed());
 
         if (!item.fitsUseCriteria(targetStats))
         {
-            return;
+            return false;
         }
 
         item.use(targetStats);
@@ -45,9 +45,11 @@ public class DragAndDropItem : DragAndDropUIObject
         {
             Inventory.removeItem(item, 1);
         }
+
+        return true;
     }
 
-    private void handleEquipmentDrop(GameObject target)
+    private bool handleEquipmentDrop(GameObject target)
     {
         EquipmentDisplayEditorSlot equipmentSlot = target.gameObject.GetComponent<EquipmentDisplayEditorSlot>();
 
@@ -59,27 +61,26 @@ public class DragAndDropItem : DragAndDropUIObject
             {
                 case DragDrogItemSlotType.Junk:
                     equipmentSlot.moveAllItemToJunk(item);
-                    return;
+                    return true;
                 case DragDrogItemSlotType.Inventory:
                     equipmentSlot.moveAllItemOutOfJunk(item);
-                    return;
+                    return true;
                 case DragDrogItemSlotType.Buy:
                     equipmentSlot.buyItem(item);
-                    return;
+                    return true;
                 case DragDrogItemSlotType.Sell:
                     equipmentSlot.sellItem(item);
-                    return;
+                    return true;
+                default:
+                    return false;
             }
-
-
-            return;
         }
 
         EquippableItem equippableItem = item as EquippableItem;
 
         if (equippableItem == null)
         {
-            return;
+            return false;
         }
 
         if (equipmentSlot.slotIndex >= Weapon.mainHandSlotIndex &&
@@ -87,11 +88,15 @@ public class DragAndDropItem : DragAndDropUIObject
         {
             equipmentSlot.unequipInCurrentSlot();
             OverallUIManager.getCurrentActionArray().equipCombatAction(equippableItem.getCombatAction(OverallUIManager.getCurrentPartyMember()));
+            return true;
         }
         else if (equippableItem.getSlotID() == equipmentSlot.slotIndex)
         {
             OverallUIManager.getCurrentEquippedItems().equipItem(equippableItem);
+            return true;
         }
+
+        return false;
     }
 
     public override string getTargetTag()

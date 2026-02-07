@@ -26,7 +26,6 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
     public Button[] allOOCUIButtons;
 
     public QuestCounter questCounter;
-    public PartyMemberUpgradeCounter partyMemberUpgradeCounter;
     public CharacterLevelCounter characterLevelCounter;
 
     [RuntimeInitializeOnLoadMethod]
@@ -41,14 +40,6 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
         if (instance != null && instance.characterLevelCounter != null)
         {
             instance.characterLevelCounter.setCounter();
-        }
-    }
-
-    public static void updatePartyMemberUpgradeCounter()
-    {
-        if (instance != null && instance.partyMemberUpgradeCounter != null)
-        {
-            instance.partyMemberUpgradeCounter.setCounter();
         }
     }
 
@@ -84,10 +75,8 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
         
         updateQuestCounter();
 
-        updatePartyMemberUpgradeCounter();
         updateCharacterLevelUpCounter();
     }
-
 
     private void updateSkillUI()
     {
@@ -253,14 +242,15 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
     {
         updateUI();
     }
+
     public List<UnityEvent> getUpdateEvents()
     {
         List<UnityEvent> listOfEvents = new List<UnityEvent>();
 
         listOfEvents.Add(CombatActionArray.OnCombatActionArrayChange);
         listOfEvents.Add(Stats.OnStatsChange);
+        listOfEvents.Add(AllyStats.OnPartyMemberUpgraded);
         listOfEvents.Add(SkillManager.OnSkillUse);
-        listOfEvents.Add(UpgradePartyMemberDecisionPanel.OnPartyMemberUpgraded);
         listOfEvents.Add(AreaManager.OnAreaSpawn);
         listOfEvents.Add(Formation.OnFormationChange);
 

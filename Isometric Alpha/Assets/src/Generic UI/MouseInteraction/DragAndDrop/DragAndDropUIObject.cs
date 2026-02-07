@@ -61,15 +61,18 @@ public class DragAndDropUIObject : MonoBehaviour, IDragAndDropContainer
                 if (collision.gameObject.tag.Equals(getTargetTag()) ||
                     (collision.gameObject.tag.Equals(LayerAndTagManager.junkSlotTargetTag) && handlesJunkSlot()))
                 {
-                    handleTargetObject(collision);
+                    if(handleTargetObject(collision))
+                    {
+                        return;
+                    }
                 }
             }
         }
     }
 
-    public virtual void handleTargetObject(Collider2D collision)
+    public virtual bool handleTargetObject(Collider2D collision)
     {
-        //empty on purpose
+        return false;
     }
 
     public virtual string getTargetTag()

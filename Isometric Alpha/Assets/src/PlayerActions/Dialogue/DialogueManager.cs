@@ -1045,7 +1045,7 @@ public class DialogueManager : MonoBehaviour
                 case "addtoparty":
                 case "addtopartywithoutpopup":          
 
-                    partyMemberName = currentDialogue.names[getArgumentInt(buffer, Constants.indexZero)];
+                    partyMemberName = DialogueList.scrubNameOfEndNumbers(currentDialogue.names[getArgumentInt(buffer, Constants.indexZero)]);
 
                     PartyManager.getPartyMember(partyMemberName).canJoinParty = true;
 
@@ -1067,6 +1067,15 @@ public class DialogueManager : MonoBehaviour
 
                     continueStory();
 
+                    break;
+            
+                case "addtopartybutnotformation":
+
+                    partyMemberName = DialogueList.scrubNameOfEndNumbers(currentDialogue.names[getArgumentInt(buffer, Constants.indexZero)]);
+
+                    PartyManager.getPartyMember(partyMemberName).canJoinParty = true;
+
+                    continueStory();
                     break;
 
                 case "removefromparty":

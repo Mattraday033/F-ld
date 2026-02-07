@@ -6,6 +6,8 @@ VAR charisma = 0
 VAR speakerIndex = 1
 VAR barricadeParentIndex = 2
 
+VAR defeatFlag = ""
+
 VAR barricadeGuardDeathFlagNameIndex = 2
 
 VAR withBarricadeFightIndex = 0
@@ -44,7 +46,7 @@ Blast, the rioters got behind us! To arms!
     
 === combat(fightIndex) ===
 
-killWithoutDeactivation({speakerIndex})
+setToTrue({defeatFlag})
 enterCombat({fightIndex})
 
 ->Close

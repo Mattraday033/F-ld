@@ -211,7 +211,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (nameSourceRevealable() && (!ignoreHover && (eventData == null || !eventData.used)))
+        if (nameSourceRevealable() && (!ignoreHover && (eventData == null || !eventData.used)) && !spriteRenderer.color.Equals(Color.clear))
         {
             if (eventData != null)
             {

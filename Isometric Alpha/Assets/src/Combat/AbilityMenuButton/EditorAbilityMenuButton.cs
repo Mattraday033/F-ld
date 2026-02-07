@@ -7,17 +7,17 @@ public class EditorAbilityMenuButton : AbilityMenuButton
 
     public bool isPassiveSlot;
 
-    public void setPlayerCombatActionAtIndex(CombatAction combatAction)
+    public bool setPlayerCombatActionAtIndex(CombatAction combatAction)
     {
         if (isPassiveSlot && !combatAction.canBePlacedInPassiveSlot())
         {
-            return;
+            return false;
         }
 
         if (combatAction.hasAvailableSlots(abilityMenuManager))
         {
             insertCombatAction(combatAction);
-            return;
+            return true;
         }
 
         CombatActionArray combatActionArray = abilityMenuManager.getStoredCombatActionArray();
@@ -29,10 +29,11 @@ public class EditorAbilityMenuButton : AbilityMenuButton
         if (combatAction.hasAvailableSlots(abilityMenuManager))
         {
             insertCombatAction(combatAction);
-            return;
+            return true;
         }
 
         insertCombatAction(oldAction);
+        return false;
     }
 
     private void insertCombatAction(CombatAction combatAction)

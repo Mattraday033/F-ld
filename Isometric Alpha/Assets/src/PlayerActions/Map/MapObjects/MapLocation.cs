@@ -55,7 +55,7 @@ public class MapLocation : IMapObject
     {
         this.zoneKey = zoneKey;
         this.locationName = locationName;
-        this.displayName = displayName;
+		setDisplayName(displayName);
 
         this.isFastTravelDestination = isFastTravelDestination;
 
@@ -71,7 +71,7 @@ public class MapLocation : IMapObject
 	{
 		this.zoneKey = zoneKey;
 		this.locationName = locationName;
-		this.displayName = displayName;
+		setDisplayName(displayName);
 		
 		this.isFastTravelDestination = isFastTravelDestination;
 		
@@ -87,7 +87,7 @@ public class MapLocation : IMapObject
 	{
 		this.zoneKey = zoneKey;
 		this.locationName = locationName;
-		this.displayName = displayName;
+		setDisplayName(displayName);
 		
 		this.isFastTravelDestination = isFastTravelDestination;
 		
@@ -99,6 +99,17 @@ public class MapLocation : IMapObject
 		this.interiorDisplayStatRequirements = interiorDisplayStatRequirements;
 	} 
 	
+    public void setDisplayName(string newDisplayName)
+    {
+        if(newDisplayName[0] == '-')
+        {
+            displayName = newDisplayName.Substring(1);
+        } else
+        {
+            displayName = newDisplayName;
+        }
+    }
+
 	public bool hasBeenDiscovered()
 	{
 		if (State.debugDiscoverAllLocations)
@@ -269,7 +280,7 @@ public class MapLocation : IMapObject
 		}
 		else
 		{
-			return getZoneMapUIDisplayName() + " - " + getMapUIDisplayName();
+			return getZoneMapUIDisplayName() + " - " + getMapUIDisplayName(); //.Replace("-","")
 		}
 	}
 }

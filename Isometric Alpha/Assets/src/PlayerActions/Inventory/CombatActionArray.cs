@@ -68,20 +68,35 @@ public class CombatActionArray : StatBoostSourceCombiner
     {
         int highestBonusAbilityDamage = 0;
 
+        int offHandBonusDamage = calculateAllStatFormulas(getStatSource(), 
+                                                          getStatSource().getAllStatBoosts(),
+                                                          b => b.getBonusDamageFormula());
+
         foreach (CombatAction action in combatActions)
         {
             if (action != null && action.getSourceItem() != null && action.getSourceItem().isEquippable())
             {
                 int currentBonusDamage = DamageCalculator.calculateBonusDamage(action.getDamageFormula());
 
-                if (currentBonusDamage > highestBonusAbilityDamage)
+                Weapon sourceWeapon = action.getSourceItem() as Weapon;
+
+                if(sourceWeapon != null && sourceWeapon.getIsTwoHanded() && currentBonusDamage > highestBonusAbilityDamage)
                 {
                     highestBonusAbilityDamage = currentBonusDamage;
+                } else if(currentBonusDamage + offHandBonusDamage > highestBonusAbilityDamage)
+                {
+                    highestBonusAbilityDamage = currentBonusDamage + offHandBonusDamage;
                 }
             }
         }
 
-        return highestBonusAbilityDamage;
+        if(highestBonusAbilityDamage < offHandBonusDamage)
+        {
+            return offHandBonusDamage;
+        } else
+        {
+            return highestBonusAbilityDamage;
+        }
     }
 
     public void unequipCombatAction(string actionName)

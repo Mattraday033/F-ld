@@ -78,6 +78,11 @@ public class TutorialSequenceStepTargetButton : TutorialSequenceStepTargetUIObje
 		currentButton = buttonTarget;
 
 		currentButton.interactable = true;
+
+        if(skip)
+        {
+            PlayerOOCStateManager.OnLeavingTutorialSequenceState.AddListener(unhighlight);
+        }
 	}
 
 	public override void unhighlight(bool skip)
@@ -86,5 +91,7 @@ public class TutorialSequenceStepTargetButton : TutorialSequenceStepTargetUIObje
 
 		advanceSequenceOnButtonPress = false;
 		currentButton = null;
+        
+        PlayerOOCStateManager.OnLeavingTutorialSequenceState.RemoveListener(unhighlight);
 	}
 }

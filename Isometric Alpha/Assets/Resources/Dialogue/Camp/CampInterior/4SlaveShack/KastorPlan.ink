@@ -93,9 +93,11 @@ VAR kastorIndex = 1
 VAR nandorIndex = 2
 VAR carterIndex = 3
 VAR marcosIndex = 4
+VAR marcosSleepingIndex = 5
 
 VAR itemTutorialKey = "Item Tutorial"
 
+VAR slaveShack4SceneName = "4SlaveShack"
 VAR southEasternCampSceneName = "SECamp"
 VAR manseKitchensSceneName = "Manse-1F-Kitchens"
 VAR manseStockroomSceneName = "Manse-2F-Stockroom"
@@ -2160,6 +2162,8 @@ Are you ready to begin our revolution? After we kick things off, we won't be abl
         
         {
         -not deathFlagGuardMárcos:
+            deactivate({marcosSleepingIndex})
+            setToFalse(marcosSleepingSS4)
             activate({marcosIndex})
         }
         
@@ -2373,6 +2377,7 @@ setToTrue(kastorStartedRevolt)
 activateQuestStep(The Plan,Free the others.)
 }
 
+setAreaToHostile({slaveShack4SceneName})
 setAreaToHostile({southEasternCampSceneName})
 setAreaToHostile({manseKitchensSceneName})
 setAreaToHostile({manseStockroomSceneName})
@@ -2415,6 +2420,13 @@ deactivate({nandorIndex})
 {
 -formationFlagCarter:
 deactivate({carterIndex})
+}
+
+{
+-(kastorStartedRevolt or kastorReadyToStartRevolt) and not deathFlagGuardMárcos:
+deactivate({marcosIndex})
+activate({marcosSleepingIndex})
+setToTrue(marcosSleepingSS4)
 }
 
 {

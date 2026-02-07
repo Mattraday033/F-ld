@@ -102,6 +102,16 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                         TraitList.territorial
                                                                         }));
 
+
+        enemyStatsDict.Add(NPCNameList.director, new EnemyStats(NPCNameList.director,
+                                                                                    Constants.eightyFiveArmor,
+                                                                                            25,
+                            AbilityList.getAbility(null, AbilityList.guardSpearKey) as Ability,
+                                                                new Trait[] { TraitList.master,
+                                                                            TraitList.territorial,
+                                                                            TraitList.backLine
+                                                                            }));
+
         enemyStatsDict.Add(NPCNameList.kende, new EnemyStats(NPCNameList.kende,
                                                                     Constants.sixtyArmor,
                                                                                     160,

@@ -9,12 +9,14 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
 
     public bool setNamePivot;
 
+    private const int nameFontSize = 36;
     private const float namePivotY = 1f;
     private const float typePivotY = 1.35f;
 
     public int maxChildren = -1;
 
     public Transform nameParent;
+    public Transform healthParent;
     public Transform levelParent;
     public Transform descriptionParent;
 
@@ -27,22 +29,20 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
 
     public override Transform getParent(DescriptionPanelBuildingBlock block)
     {
-
         switch (block.type)
         {
             case DescriptionPanelBuildingBlockType.Name:
                 return nameParent;
             case DescriptionPanelBuildingBlockType.Text:
-
-                if (block.iconName != null)
+                switch (block.iconName)
                 {
-                    if (block.iconName.Equals(IconList.levelIconName))
-                    {
+                    case IconList.healthIconName:
+                        return healthParent;
+                    case IconList.levelIconName:
                         return levelParent;
-                    }
+                    default:
+                        return base.getParent(block);
                 }
-
-                return base.getParent(block);
             case DescriptionPanelBuildingBlockType.DescriptionText:
                 return descriptionParent;
         }
@@ -72,6 +72,18 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
         else if (blockIsTypeBlock(block))
         {
             setPivotY(row.gameObject, typePivotY);
+        }
+
+        if(block.iconName != null && block.iconName.Equals(IconList.healthIconName))
+        {
+            DescriptionPanel.setTextAutoSize(row.descriptionText, true);
+        }
+
+        if(block.type == DescriptionPanelBuildingBlockType.Name && blockOrigin as Stats != null)
+        {
+            DescriptionPanel.setTextFontSize(row.descriptionText, nameFontSize);
+            row.transform.SetAsLastSibling();
+            row.descriptionText.margin = new Vector4(0f,0f,10f,0f);
         }
 
         return row;

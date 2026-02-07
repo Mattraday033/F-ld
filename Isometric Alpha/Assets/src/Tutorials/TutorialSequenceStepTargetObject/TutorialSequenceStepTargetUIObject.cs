@@ -105,6 +105,8 @@ public class TutorialSequenceStepTargetUIObject : TutorialSequenceStepTargetObje
         {
             secondaryImage.color = ColorList.cutOutFade;
         }
+        
+        PlayerOOCStateManager.OnLeavingTutorialSequenceState.AddListener(unhighlight);
 	}
 
 	public override void unhighlight(bool skip)
@@ -128,6 +130,8 @@ public class TutorialSequenceStepTargetUIObject : TutorialSequenceStepTargetObje
         {
             secondaryImage.color = Color.clear;
         }
+        
+        PlayerOOCStateManager.OnLeavingTutorialSequenceState.RemoveListener(unhighlight);
 	}
 
 	public override bool isUI()

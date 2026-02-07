@@ -20,10 +20,10 @@ public class DragAndDropCombatAction : DragAndDropUIObject
         return LayerAndTagManager.abilityEditorTag;
     }
 
-    public override void handleTargetObject(Collider2D collision)
+    public override bool handleTargetObject(Collider2D collision)
     {
         EditorAbilityMenuButton menuButton = collision.gameObject.GetComponent<EditorAbilityMenuButton>();
 
-        menuButton.setPlayerCombatActionAtIndex(getObjectBeingDragged() as CombatAction);
+        return menuButton.setPlayerCombatActionAtIndex(getObjectBeingDragged() as CombatAction);
     }
 }

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public static class PartyMemberList
 {
 
-
+    private const string biffName = "Biff the Understudy";
 
     private const int higherStrength = 2;
     private const int higherDexterity = 2;
@@ -50,6 +50,15 @@ public static class PartyMemberList
                 return carter;
         }
 
-        throw new IOException("No PartyMember by the name " + allyName + " exists");
+        PartyMember defaultPartyMember = getResetPartyMember(NPCNameList.carter);
+
+        defaultPartyMember.stats.name = biffName;
+
+        return defaultPartyMember;
+    }
+
+    public static bool characterIsPartyMember(string name)
+    {
+        return !getResetPartyMember(name).getName().Equals(biffName);
     }
 }

@@ -114,6 +114,9 @@ public static class PlayerOOCStateManager
 
         currentActivity = newActivity;
 
+        Debug.LogError("previousActivity = " + previousActivity);
+        Debug.LogError("currentActivity = " + currentActivity);
+
         switch (previousActivity)
         {
             case OOCActivity.walking:

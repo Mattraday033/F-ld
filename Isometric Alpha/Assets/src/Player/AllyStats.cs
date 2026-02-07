@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Events;
 using Ink.Runtime;
 using System.Linq;
 
@@ -24,6 +25,12 @@ public class AllyStats : Stats
 
     public const int defaultStartingRow = 0;
     public const int defaultStartingCol = 1;
+
+    #endregion
+
+    #region UnityEvents
+
+    public readonly static UnityEvent OnPartyMemberUpgraded = new UnityEvent();
 
     #endregion
 
@@ -605,7 +612,7 @@ public class AllyStats : Stats
 
     public override int getBonusAbilityDamage()
     {
-        return combatActionArray.calculateBonusAbilityDamage() + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusDamageFormula());
+        return combatActionArray.calculateBonusAbilityDamage();
     }
 
     public override AbilityMenuManager getAbilityMenuManager()

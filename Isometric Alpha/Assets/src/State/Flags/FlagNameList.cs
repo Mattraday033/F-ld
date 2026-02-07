@@ -81,7 +81,10 @@ public static class FlagNameList
         public const string duringSlaveRallyConversation = "duringSlaveRallyConversation";
         public const string waitingOnGarchaToSpeak = "waitingOnGarchaToSpeak"; //flag that allows garcha to still be visible after rally conversation
         public const string haveManseSlaveHelp = "haveManseSlaveHelp";
-
+        public const string marcosSleepingSS4 = "marcosSleepingSS4";
+        public const string barricadeGuardDefeatKey1 = "barricadeGuardDefeatKey1";
+        public const string barricadeGuardDefeatKey2 = "barricadeGuardDefeatKey2";
+        public const string barricadeGuardDefeatKey3 = "barricadeGuardDefeatKey3";
 
         //Nándor Flags
         public const string nandorStartedGuardPunishmentConvo = "nandorStartedGuardPunishmentConvo";

@@ -23,6 +23,11 @@ public class OffHandWeapon : Armor
     {
         return Constants.zeroRating;
     }
+
+    public override string getBonusDamageFormula()
+    {
+        return DamageCalculator.calculateBonusDamage(getDamageFormula()).ToString();
+    }
 }
 
 public class OffHandFist : OffHandWeapon

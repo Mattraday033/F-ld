@@ -16,6 +16,8 @@ public class TutorialSequenceStepTargetCombatZone : TutorialSequenceStepTargetOb
         }
 
 		cutOutMask.gameObject.SetActive(true);
+        
+        PlayerOOCStateManager.OnLeavingTutorialSequenceState.AddListener(unhighlight);
 	}
 
 	public override void unhighlight(bool skip)
@@ -26,5 +28,6 @@ public class TutorialSequenceStepTargetCombatZone : TutorialSequenceStepTargetOb
         }
 
 		cutOutMask.gameObject.SetActive(false);
+        PlayerOOCStateManager.OnLeavingTutorialSequenceState.RemoveListener(unhighlight);
 	}
 }

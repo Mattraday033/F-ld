@@ -554,7 +554,7 @@ public static class TutorialSequenceList
                                                                  createPopUpScreenBlocker: createPopUpScreenBlocker);
         stepFour.blockInternalRaycastsOnCutOutMask = true;
 
-        TutorialSequence questCounterTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, questCounterTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree, stepFour});
+        TutorialSequence questCounterTutorialSequence = new TutorialSequence(OOCActivity.inMap, doNoSkipCurrentActivityChange, questCounterTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree, stepFour});
 
         questCounterTutorialSequence.setSkipScript(new SkipMapTutorialScript());
         tutorialSequenceDictionary.Add(questCounterTutorialSequenceKey, questCounterTutorialSequence);

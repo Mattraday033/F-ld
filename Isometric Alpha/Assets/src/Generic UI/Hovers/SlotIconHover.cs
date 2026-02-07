@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+//class SlotHoverIcon
 public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IHoverIconSource, IDescribable
 {
     [SerializeField]
@@ -183,7 +184,21 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
 	public List<IDescribable> getRelatedDescribables()
     {
-        return new List<IDescribable>();
+        List<IDescribable> relatedDescribables = new List<IDescribable>();
+
+        switch(hoverText)
+        {
+            case HoverMessageList.zoneOfInfluenceMessage:
+
+                if(OverallUIManager.getCurrentPartyMember() != null)
+                {
+                    relatedDescribables.Add(OverallUIManager.getCurrentPartyMember().getZoneOfInfluenceTrait());
+                }
+
+                break;
+        }
+
+        return relatedDescribables;
     }
 
 	public bool buildableWithBlocks()
@@ -199,7 +214,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 public static class HoverMessageList
 {
     public const string zoneOfInfluenceKey = "ZOI-Icon";
-    private const string zoneOfInfluenceMessage = "Zone of Influence. A Trait applied to the Zone's owner and all allies directly infront, behind, or beside this creature. Is not applied diagonally.";
+    public const string zoneOfInfluenceMessage = "Zone of Influence. A Trait applied to the Zone's owner and all allies directly infront, behind, or beside this creature. Zones of Influence are not applied diagonally.";
     
     private const string actionWheelKey = "Action Wheel";
     private const string actionWheelMessage = "The Action Wheel contains all of the Actions a character can bring into battle. With the exception of Passive Abilities, if an Action is not on the Action Wheel, the character is gaining no benefits from it.";

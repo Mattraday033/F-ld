@@ -186,14 +186,14 @@ public static class EnemyPackInfoList
 
     public readonly static BossPackInfo directorWithBarricades = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.barricade,
-                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                        EnemyAmountList.director
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                                         FlagNameList.directorDefeated,
                                                                                                         DialogueNameList.directorDefeatedConvoKey);
 
     public readonly static BossPackInfo directorWithoutBarricades = new BossPackInfo(new CreatureAmount[] { 
-                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                        EnemyAmountList.director
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                                         FlagNameList.directorDefeated,

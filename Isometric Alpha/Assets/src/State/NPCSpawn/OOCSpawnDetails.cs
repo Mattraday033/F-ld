@@ -918,7 +918,9 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
 
     public override Transform getParent()
     {
-        if(npcName.Contains(NPCNameList.barricade))
+        string npcNameScrubbed = DialogueList.scrubNameOfEndNumbers(npcName);
+
+        if(npcNameScrubbed.Equals(NPCNameList.barricade))
         {
             return AreaManager.getNPCParentWithScale();
         }
@@ -931,6 +933,13 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
         base.spawnActions(npc);
 
         spawnActions(npc.GetComponent<AnimationManager>());
+
+        if(PartyMemberList.characterIsPartyMember(npcName))
+        {
+            PartyMemberDespawnListener listener = npc.AddComponent<PartyMemberDespawnListener>();
+
+            listener.partyMemberName = npcName;
+        }
 
         // npc.transform.localScale = Constants.antiAngleAdjustmentScale;
     }
@@ -993,8 +1002,14 @@ public class DependantSpawnDetails : NPCWithAnimationsSpawnDetails
     private Transform parent;
     private bool normalScale;
 
-    public DependantSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string parentName, Facing facing = Facing.Random, bool normalScale = false) :
-    base(npcName, cellCoords, areaName, facing: facing)
+    public DependantSpawnDetails(string npcName, 
+                                    Vector3Int cellCoords, 
+                                    string areaName, 
+                                    string parentName, 
+                                    Facing facing = Facing.Random, 
+                                    bool normalScale = false,
+                                    CharacterAnimationType animationType = CharacterAnimationType.None) :
+    base(npcName, cellCoords, areaName, facing: facing, animationType: animationType)
     {
         this.parentName = parentName;
         this.normalScale = normalScale;
@@ -1226,6 +1241,13 @@ public class GateSpawnDetails : CustomMouseHoverNPCSpawnDetails
         if (hasTutorialTargetHash())
         {
             addTutorialTargetComponent(gateGameObject, gate.spriteRenderer, tutorialTargetHash);
+        }
+
+        AnimationManager animationManager = gateGameObject.GetComponent<AnimationManager>();
+
+        if(animationManager != null)
+        {
+            animationManager.disableExtras();
         }
 
         if(!hasSprite())

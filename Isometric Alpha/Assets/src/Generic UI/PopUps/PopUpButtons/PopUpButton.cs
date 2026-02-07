@@ -6,7 +6,6 @@ using UnityEngine;
 
 public enum PopUpType	{
 							FormationEditor = 1, 
-							UseItemOnPartyMember = 2, 
 							BinaryPanel = 3, 
 							DialogueTrackerWithoutChoices = 4, 
 							FullEditAbilityWheel = 5, 
@@ -105,9 +104,6 @@ public abstract class PopUpButton : MonoBehaviour
 		{
 			case PopUpType.FormationEditor:
 				return PrefabNames.formationEditorPanel;
-				
-			case PopUpType.UseItemOnPartyMember:
-				return PrefabNames.outOfCombatHealPartyMemberPopUp;
 				
 			case PopUpType.BinaryPanel:
 				return PrefabNames.binaryDecisionPanel;

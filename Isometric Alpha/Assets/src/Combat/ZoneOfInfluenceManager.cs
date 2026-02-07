@@ -27,6 +27,8 @@ public class ZoneOfInfluenceManager: MonoBehaviour
         equippedPassiveTraitManager.addEquippedPassiveTraits();
 		
 		applyAllZOITraits();
+
+        SelectorManager.displayCurrentHoverUI();
     }
 
 	public void applyAllZOITraits()

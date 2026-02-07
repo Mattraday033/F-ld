@@ -53,8 +53,6 @@ public static class PrefabNames
     public const string singleEditAbilityWheelPopUp = "Single Edit Ability Wheel PopUp";
     public const string abilityWheelEditorFull = "Full Edit Ability Wheel Popup";
 
-    public const string outOfCombatHealPartyMemberPopUp = "Healing Party Members Screen";
-
     public const string dragAndDropCombatActionIcon = "Drag And Drop Action Icon";
     public const string slotIcon = "Slot Icon";
 

@@ -76,6 +76,11 @@ public class TutorialSequenceStepTargetMultiButton : TutorialSequenceStepTargetU
 				button.interactable = false;
 			}
 		}
+
+        if(skip)
+        {
+            PlayerOOCStateManager.OnLeavingTutorialSequenceState.AddListener(unhighlight);
+        }
 	}
 
 	public override void unhighlight(bool skip)
@@ -88,6 +93,8 @@ public class TutorialSequenceStepTargetMultiButton : TutorialSequenceStepTargetU
 		{
 			button.interactable = true;
 		}
+
+        PlayerOOCStateManager.OnLeavingTutorialSequenceState.RemoveListener(unhighlight);
 	}
 
 	public Button getFilledButton()

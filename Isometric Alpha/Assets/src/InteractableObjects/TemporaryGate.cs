@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TemporaryGate : Gate
 {
-
+    private NameTagGenerator nameTagGenerator;
     private Collider2D colliderTileMap;
 
     protected override void Awake()
@@ -12,6 +12,7 @@ public class TemporaryGate : Gate
         base.Awake();
 
         colliderTileMap = GetComponent<Collider2D>();
+        nameTagGenerator = GetComponent<NameTagGenerator>();
     }
 
     public override void checkGateStatus()
@@ -55,6 +56,10 @@ public class TemporaryGate : Gate
     {
         colliderTileMap.enabled = false;
         spriteRenderer.color = Color.clear;
+        if(nameTagGenerator != null)
+        {
+            nameTagGenerator.onReveal(false);
+        }
     }
 
     private void showSelf()

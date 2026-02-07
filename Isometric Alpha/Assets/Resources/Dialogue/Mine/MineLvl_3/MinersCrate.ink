@@ -285,7 +285,7 @@ I can use the jelly if we truly need, but with my wounds I may make a mistake. I
         But if they should stand between us and the safety of the camp simply because the plan came from the mouth of a slave? Then the needs of the many demand we act. I will mourn their deaths in my own time. Does that satisfy your question?
         
         +For now. But I will be watching.
-            Of course.
+            I understand.
             ->1lb
         +No. I don't buy it. Get in the way of the plan and I will remove you from our path. Believe me.
             I understand. I won't give you cause.
@@ -310,19 +310,22 @@ Are you ready to set out?
 {
 -takingCarterNandorWithYou:
     fadeToBlack(true, false)
-        
+
     deactivate({carterIndex})
     addToParty({carterIndex})
     deactivate({nandorIndex})
     addToParty({nandorIndex})
-    //startUITutorial({formationScreenTutorialKey})
-    setToTrue(mineLvl3CarterAndNandorInParty)
-    changeCamTarget({marcosIndex})
+
     fadeBackIn(60)
-    -else:
-        changeCamTarget({marcosIndex})
+-else:
+    addtopartybutNotFormation({nandorIndex})
+    addtopartybutNotFormation({carterIndex})
 }
     
+    setFacing(SE)
+    setToTrue(mineLvl3CarterAndNandorInParty)
+    changeCamTarget({marcosIndex})
+
 {
 -not mineLvl3MarcosAgreedToIgniteJelly:
     activateQuestStep(Sealing the Breach,Convince the Guards.)

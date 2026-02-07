@@ -92,7 +92,6 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
 	public virtual void createListeners()
 	{
 		TutorialSequence.TutorialSequenceTargetFinder.AddListener(assignToTutorialSequence);
-        PlayerOOCStateManager.OnLeavingTutorialSequenceState.AddListener(unhighlight);
 	}
 
 	public virtual void destroyListeners()
@@ -173,6 +172,8 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
         SpriteOutline spriteOutline = revealable.getSpriteOutline();
 
         spriteOutline.createOutline(ColorList.tutorialDefault);
+        
+        PlayerOOCStateManager.OnLeavingTutorialSequenceState.AddListener(unhighlight);
 	}
 	
     public void unhighlight()
@@ -197,5 +198,7 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
         SpriteOutline spriteOutline = revealable.getSpriteOutline();
 
         spriteOutline.removeOutline();
+
+        PlayerOOCStateManager.OnLeavingTutorialSequenceState.RemoveListener(unhighlight);
 	}
 }

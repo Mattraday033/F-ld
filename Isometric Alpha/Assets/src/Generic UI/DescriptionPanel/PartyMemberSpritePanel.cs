@@ -12,12 +12,12 @@ public class PartyMemberSpritePanel : DescriptionPanel
 
     private void OnEnable()
     {
-        UpgradePartyMemberDecisionPanel.OnPartyMemberUpgraded.AddListener(levelUpSymbolVisibilityCheck);
+        AllyStats.OnPartyMemberUpgraded.AddListener(levelUpSymbolVisibilityCheck);
     }
 
     private void OnDisable()
     {
-        UpgradePartyMemberDecisionPanel.OnPartyMemberUpgraded.RemoveListener(levelUpSymbolVisibilityCheck);
+        AllyStats.OnPartyMemberUpgraded.RemoveListener(levelUpSymbolVisibilityCheck);
     }
 
     private void levelUpSymbolVisibilityCheck()
@@ -37,6 +37,8 @@ public class PartyMemberSpritePanel : DescriptionPanel
         {
             levelUpSymbol.SetActive(false);
         }
+
+        setText(levelText, stats.getLevel());
     }
 
     private void zoiTraitCheck()
@@ -60,7 +62,7 @@ public class PartyMemberSpritePanel : DescriptionPanel
 
         levelUpSymbolVisibilityCheck();
 
-        zoiTraitCheck();
+        // zoiTraitCheck();
 
         if (abilityMenuManager != null)
         {

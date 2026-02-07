@@ -56,10 +56,12 @@ public static class OOCSpawnDetailsList
         #endregion
         #region 4SlaveShack
         list = new List<OOCSpawnDetails>();
+
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor, new Vector3Int(11, 13), LocationNameList.slaveShackFour, facing: Facing.SouthWest));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.nandor, new Vector3Int(9, 15), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.carter, new Vector3Int(9, 13), LocationNameList.slaveShackFour, facing: Facing.NorthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(11, 15), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMarcos+1, new Vector3Int(11, 17), LocationNameList.slaveShackFour, facing: Facing.SouthEast, animationType: CharacterAnimationType.Death_Back, offset: Constants.onTableHeightOffset*-2f));
 
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackFour, list);
         #endregion
@@ -220,7 +222,7 @@ public static class OOCSpawnDetailsList
         #region Stockhouse
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.uros, new Vector3Int(7, -1), LocationNameList.stockhouse));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.uros, new Vector3Int(7, -1), LocationNameList.stockhouse, facing: Facing.SouthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.quartermasterEmese, new Vector3Int(11, 1), LocationNameList.stockhouse, facing: Facing.SouthWest, extraSpaces: new Vector3Int[] { new Vector3Int(10, 1) }));
 
         list.Add(new NPCSpawnDetails(NPCNameList.crate, new Vector3Int(10, 4), LocationNameList.stockhouse, PrefabNames.squareCratesSmall));
@@ -333,7 +335,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ShopkeeperSpawnDetails(NPCNameList.uros, new Vector3Int(-6, 2), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthEast));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(11, 1), LocationNameList.campNorthEast, facing: Facing.SouthWest));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.woundedSlave, new Vector3Int(11, 3), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.woundedSlave, new Vector3Int(11, 3), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthWest, animationType: CharacterAnimationType.Death_Back));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.woundedSlave+1, new Vector3Int(11, 6), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthWest));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.woundedSlave+2, new Vector3Int(11, 8), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.NorthEast, animationType: CharacterAnimationType.Death_Back, offset: Constants.onTableHeightOffset*-2f));
         list.Add(new ObstacleSpawnDetails(NPCNameList.bed, new Vector3Int(11, 8), PrefabNames.slaveBed, offset: Constants.onTableHeightOffset*-3f, flipX: true));  
@@ -369,14 +371,14 @@ public static class OOCSpawnDetailsList
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-16, -6), VaultableObject.diffTwoVaultableBarrelsOneTile));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-7, -10), VaultableObject.diffTwoVaultableBarrelsOneTile));
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-8, 3), LocationNameList.campCenter, MonsterNameList.axeman, Facing.SouthWest));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-9, 3), LocationNameList.campCenter, MonsterNameList.disciplinarian, Facing.SouthWest));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-8, 2), LocationNameList.campCenter, MonsterNameList.signaleer, Facing.SouthWest));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-9, 2), LocationNameList.campCenter, MonsterNameList.spearman, Facing.SouthWest));
-        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-8, 1), LocationNameList.campCenter));
-        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-9, 1), LocationNameList.campCenter));
-        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-8, 0), LocationNameList.campCenter));
-        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-9, 0), LocationNameList.campCenter));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-7, 3), LocationNameList.campCenter, MonsterNameList.axeman, Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-7, 2), LocationNameList.campCenter, MonsterNameList.disciplinarian, Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-7, 1), LocationNameList.campCenter, MonsterNameList.signaleer, Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+1, new Vector3Int(-7, 0), LocationNameList.campCenter, MonsterNameList.spearman, Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricade+1, new Vector3Int(-8, 3), LocationNameList.campCenter, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricade+1, new Vector3Int(-8, 2), LocationNameList.campCenter, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricade+1, new Vector3Int(-8, 1), LocationNameList.campCenter, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricade+1, new Vector3Int(-8, 0), LocationNameList.campCenter, facing: Facing.SouthWest));
 
         list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(10, 11), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
         list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(10, 10), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
@@ -515,7 +517,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMuzsa + 1, new Vector3Int(7, 10), LocationNameList.campMineEntrance, facing: Facing.SouthEast));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.uros, new Vector3Int(13, -1), LocationNameList.campMineEntrance));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.uros, new Vector3Int(13, -1), LocationNameList.campMineEntrance, facing: Facing.SouthWest));
 
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(12, 13), VaultableObject.diffTwoVaultableBarrelsOneTile));
 
@@ -526,19 +528,19 @@ public static class OOCSpawnDetailsList
 
         list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campManse, Constants.indexZero));
 
-        list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(6, -18), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
-        list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(5, -18), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
+        list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(6, -19), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
+        list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(5, -19), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+2, new Vector3Int(2, -18), LocationNameList.campManse, MonsterNameList.signaleer, Facing.SouthEast));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+2, new Vector3Int(2, -19), LocationNameList.campManse, MonsterNameList.spearman, Facing.SouthEast));
-        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+2, new Vector3Int(1, -18), LocationNameList.campManse));
-        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+2, new Vector3Int(1, -19), LocationNameList.campManse));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+2, new Vector3Int(2, -18), LocationNameList.campManse, MonsterNameList.signaleer, facing: Facing.SouthEast, ignoresSecretDoors: false));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+2, new Vector3Int(1, -18), LocationNameList.campManse, MonsterNameList.spearman, facing: Facing.SouthEast, ignoresSecretDoors: false));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricade+2, new Vector3Int(2, -19), LocationNameList.campManse, facing: Facing.SouthEast, ignoresSecretDoors: false));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricade+2, new Vector3Int(1, -19), LocationNameList.campManse, facing: Facing.SouthEast, ignoresSecretDoors: false));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardAndras+2, new Vector3Int(3, -21), facing: Facing.NorthEast)); 
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+3, new Vector3Int(3, 3), LocationNameList.campManse, MonsterNameList.axeman, Facing.SouthEast));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+3, new Vector3Int(3, 2), LocationNameList.campManse, MonsterNameList.signaleer, Facing.SouthEast));
-        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+3, new Vector3Int(2, 3), LocationNameList.campManse));
-        list.Add(new NPCSpawnDetails(NPCNameList.barricadeGuards+3, new Vector3Int(2, 2), LocationNameList.campManse));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+3, new Vector3Int(3, 3), LocationNameList.campManse, MonsterNameList.axeman, facing: Facing.SouthEast, ignoresSecretDoors: false));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+3, new Vector3Int(2, 3), LocationNameList.campManse, MonsterNameList.signaleer, facing: Facing.SouthEast, ignoresSecretDoors: false));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricade+3, new Vector3Int(3, 2), LocationNameList.campManse, facing: Facing.SouthEast, ignoresSecretDoors: false));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricade+3, new Vector3Int(2, 2), LocationNameList.campManse, facing: Facing.SouthEast, ignoresSecretDoors: false));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardAndras+3, new Vector3Int(3, -2), facing: Facing.NorthEast)); 
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.imre, new Vector3Int(-6, -9), LocationNameList.campManse, facing: Facing.SouthEast));
@@ -1018,7 +1020,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.carter, new Vector3Int(1, 2), ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, facing: Facing.NorthEast));
 
-        list.Add(new DependantSpawnDetails(NPCNameList.carter+1, new Vector3Int(3, 2), ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.barricade, facing: Facing.NorthWest));
+        list.Add(new DependantSpawnDetails(NPCNameList.carter+1, new Vector3Int(3, 2), ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.barricade, facing: Facing.NorthWest, animationType: CharacterAnimationType.Idle_Back));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(3, -1), ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, facing: Facing.NorthWest));
 
@@ -1326,6 +1328,13 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(-3, -3), facing: Facing.NorthEast)); 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.nandor, new Vector3Int(-3, 0), facing: Facing.NorthEast)); 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.page, new Vector3Int(2, 2), facing: Facing.SouthWest));
+
+
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(1, 2), VaultableObject.diffTwoVaultableBarrelsOneTile));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(1, 1), VaultableObject.diffTwoVaultableBarrelsOneTile));
+
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(1, -4), VaultableObject.diffTwoVaultableBarrelsOneTile));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(1, -5), VaultableObject.diffTwoVaultableBarrelsOneTile));
 
         list.Add(new BookSpawnDetails(NPCNameList.orders, new Vector3Int(-6, 0), PrefabNames.note, ItemList.orderTranscriptIndex));
         

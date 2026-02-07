@@ -33,7 +33,20 @@ public class DescriptionPanelRow : MonoBehaviour
     {
         this.type = type;
 
-        StartCoroutine(setPlusButtonVisibility());
+        if (plusButton != null &&
+            type == DescriptionPanelBuildingBlockType.PrimaryStat &&
+            !CombatStateManager.inCombat)
+        {
+            // yield return new WaitForEndOfFrame();
+
+            if (OverallUIManager.currentScreenManager != null &&
+                CharacterScreen.levelUpCapable())
+            {
+                plusButton.SetActive(true);
+            }
+        }
+
+        // StartCoroutine(setPlusButtonVisibility());
     }
 
     private void OnDestroy()

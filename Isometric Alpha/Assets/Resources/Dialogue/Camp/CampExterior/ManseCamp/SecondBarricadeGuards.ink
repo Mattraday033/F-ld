@@ -9,6 +9,8 @@ VAR andrasIndex = 2
 VAR withBarricadeFightIndex = 0
 VAR withoutBarricadeFightIndex = 1
 
+VAR defeatFlag = ""
+
 VAR facingNE = false
 VAR facingNW = false
 VAR facingSW = false
@@ -46,11 +48,11 @@ Halt! Approach the barricade at your own peril!
         ->Str
     }
 
-    {
-    -not wisdomBarricadePassUsed && acceptingGuardPrisoners && wisdom >= 3:
-    +We have you outmanned by an enormous margin. Surrender, and we will leave you unhurt. <Wis {wisdom}/3>
-        ->Wis
-    }
+    //{
+    //-not wisdomBarricadePassUsed && acceptingGuardPrisoners && wisdom >= 3:
+    //+We have you outmanned by an enormous margin. Surrender, and we will leave you unhurt. <Wis {wisdom}/3>
+    //    ->Wis
+    //}
 
     {
     -not charismaBarricadePassUsed && acceptingGuardPrisoners && charisma >= 3:
@@ -65,7 +67,7 @@ Halt! Approach the barricade at your own peril!
     }    
 
     +I'm getting through this barricade whether you man it or not. For freedom! <Attack>
-        killWithoutDeactivation({speakerIndex})
+        setToTrue({defeatFlag})
         enterCombat({withBarricadeFightIndex})
         ->Close
     +\*Leave without fighting.*
@@ -75,7 +77,7 @@ Halt! Approach the barricade at your own peril!
 
 Blast, the rioters got behind us! To arms!
 
-killWithoutDeactivation({speakerIndex})
+setToTrue({defeatFlag})
 
 enterCombat({withoutBarricadeFightIndex})
 ->Close
@@ -144,7 +146,7 @@ changeCamTarget({andrasIndex})
         That'll do. Lower your weapons, we're coming out.
         ->deactivateExtras
     +On second thought, I think I'd rather just kill you guys. <Combat>
-        killWithoutDeactivation({speakerIndex})
+        setToTrue({defeatFlag})
         enterCombat({withBarricadeFightIndex})
         ->Close
 
@@ -152,7 +154,7 @@ changeCamTarget({andrasIndex})
 
 fadeToBlack()
 
-kill({speakerIndex})
+setToTrue({defeatFlag})
 
 updateNPCVisibility()
 

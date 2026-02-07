@@ -116,7 +116,7 @@ public static class MapObjectList
 		{
 			case LocationNameList.campNorthEast:
 
-				return new MapLocation(ZoneKeyList.lovashiCamp, LocationNameList.campNorthEast, "Camp - North East", fastTravelAccessible, threeInteriors, new string[] { LocationNameList.campCenter, LocationNameList.slaveShackTwo, LocationNameList.slaveShackThree, LocationNameList.slaveShackSeven });
+				return new MapLocation(ZoneKeyList.lovashiCamp, LocationNameList.campNorthEast, "North East", fastTravelAccessible, threeInteriors, new string[] { LocationNameList.campCenter, LocationNameList.slaveShackTwo, LocationNameList.slaveShackThree, LocationNameList.slaveShackSeven });
 
 			case LocationNameList.slaveShackTwo:
 
@@ -132,7 +132,7 @@ public static class MapObjectList
 
 			case LocationNameList.campCenter:
 
-				return new MapLocation(ZoneKeyList.lovashiCamp, LocationNameList.campCenter, "Camp - Center", notFastTravelAccessible, fourInteriors, new string[] { LocationNameList.campNorthEast, LocationNameList.campManse, LocationNameList.campSouthEast, LocationNameList.slaveShackOne, LocationNameList.stables, LocationNameList.temple, LocationNameList.guardShack }, new ZoneButtonInfo[] { new ZoneButtonInfo(ZoneKeyList.forest, MapPopUpWindow.eastButtonIndex) });
+				return new MapLocation(ZoneKeyList.lovashiCamp, LocationNameList.campCenter, "Center", notFastTravelAccessible, fourInteriors, new string[] { LocationNameList.campNorthEast, LocationNameList.campManse, LocationNameList.campSouthEast, LocationNameList.slaveShackOne, LocationNameList.stables, LocationNameList.temple, LocationNameList.guardShack }, new ZoneButtonInfo[] { new ZoneButtonInfo(ZoneKeyList.forest, MapPopUpWindow.eastButtonIndex) });
 
 			case LocationNameList.slaveShackOne:
 
@@ -152,7 +152,7 @@ public static class MapObjectList
 
 			case LocationNameList.campManse:
 
-				return new MapLocation(ZoneKeyList.lovashiCamp, LocationNameList.campManse, "Camp - Manse", notFastTravelAccessible, fourInteriors, new string[] { LocationNameList.campCenter, LocationNameList.guardHouseTopFloor, LocationNameList.guardHouseNorthEast, LocationNameList.slaveShackEight, LocationNameList.slaveShackNine}, new ZoneButtonInfo[] { new ZoneButtonInfo(ZoneKeyList.manseFirstFloor, MapPopUpWindow.westButtonIndex) });
+				return new MapLocation(ZoneKeyList.lovashiCamp, LocationNameList.campManse, "Manse", notFastTravelAccessible, fourInteriors, new string[] { LocationNameList.campCenter, LocationNameList.guardHouseTopFloor, LocationNameList.guardHouseNorthEast, LocationNameList.slaveShackEight, LocationNameList.slaveShackNine}, new ZoneButtonInfo[] { new ZoneButtonInfo(ZoneKeyList.manseFirstFloor, MapPopUpWindow.westButtonIndex) });
 
 			case LocationNameList.slaveShackEight:
 
@@ -164,11 +164,11 @@ public static class MapObjectList
 
 			case LocationNameList.guardHouseNorthEast:
 
-				return new MapInterior(ZoneKeyList.lovashiCamp, LocationNameList.guardHouseNorthEast, "Guardhouse 1F - North East", interiorIndexTwo, LocationNameList.campManse);
+				return new MapInterior(ZoneKeyList.lovashiCamp, LocationNameList.guardHouseNorthEast, "Barracks 1F - North East", interiorIndexTwo, LocationNameList.campManse);
 
 			case LocationNameList.campSouthEast:
 
-				return new MapLocation(ZoneKeyList.lovashiCamp, LocationNameList.campSouthEast, "Camp - South East", fastTravelAccessible, fourInteriors, new string[] { LocationNameList.campCenter, LocationNameList.campMineEntrance, LocationNameList.messHall, LocationNameList.slaveShackFour, LocationNameList.slaveShackFive, LocationNameList.slaveShackSix});
+				return new MapLocation(ZoneKeyList.lovashiCamp, LocationNameList.campSouthEast, "South East", fastTravelAccessible, fourInteriors, new string[] { LocationNameList.campCenter, LocationNameList.campMineEntrance, LocationNameList.messHall, LocationNameList.slaveShackFour, LocationNameList.slaveShackFive, LocationNameList.slaveShackSix});
 
 			case LocationNameList.messHall:
 
@@ -188,7 +188,7 @@ public static class MapObjectList
 
 			case LocationNameList.campMineEntrance:
 
-				return new MapLocation(ZoneKeyList.lovashiCamp, LocationNameList.campMineEntrance, "Camp - Mine Entrance", notFastTravelAccessible, twoInteriors, new string[] { LocationNameList.campSouthEast, LocationNameList.stockhouse, LocationNameList.guardHouseSouthWest}, new ZoneButtonInfo[] { new ZoneButtonInfo(ZoneKeyList.mineLvl1, MapPopUpWindow.westNorthButtonIndex) });
+				return new MapLocation(ZoneKeyList.lovashiCamp, LocationNameList.campMineEntrance, "Mine Entrance", notFastTravelAccessible, twoInteriors, new string[] { LocationNameList.campSouthEast, LocationNameList.stockhouse, LocationNameList.guardHouseSouthWest}, new ZoneButtonInfo[] { new ZoneButtonInfo(ZoneKeyList.mineLvl1, MapPopUpWindow.westNorthButtonIndex) });
 
 			case LocationNameList.stockhouse:
 
@@ -196,11 +196,11 @@ public static class MapObjectList
 
 			case LocationNameList.guardHouseSouthWest:
 			
-				return new MapInterior(ZoneKeyList.lovashiCamp, LocationNameList.guardHouseSouthWest, "Guardhouse 1F - South West", interiorIndexOne, LocationNameList.campMineEntrance);
+				return new MapInterior(ZoneKeyList.lovashiCamp, LocationNameList.guardHouseSouthWest, "Barracks 1F - South West", interiorIndexOne, LocationNameList.campMineEntrance);
 			
 			case LocationNameList.guardHouseTopFloor:
 			
-				return new MapInterior(ZoneKeyList.lovashiCamp, LocationNameList.guardHouseTopFloor, "Guardhouse 2F", interiorIndexTwo, LocationNameList.campManse);
+				return new MapInterior(ZoneKeyList.lovashiCamp, LocationNameList.guardHouseTopFloor, "Barracks 2F", interiorIndexTwo, LocationNameList.campManse);
 		}
 
         string mineLvl1SceneName = name;

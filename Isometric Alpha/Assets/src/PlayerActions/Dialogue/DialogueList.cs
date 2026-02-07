@@ -104,11 +104,15 @@ public static class DialogueList
         #region Slave Shack 4
 
         addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.kastor,
-                            new Dialogue(new string[] { NPCNameList.kastor, NPCNameList.nandor, NPCNameList.carter, NPCNameList.guardMarcos },
+                            new Dialogue(new string[] { NPCNameList.kastor, NPCNameList.nandor, NPCNameList.carter, NPCNameList.guardMarcos, NPCNameList.guardMarcos+1 },
                             Resources.Load<TextAsset>(DialogueNameList.kastorPlanPath)));
 
         addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.guardMarcos,
                             new Dialogue(new string[] { NPCNameList.guardMarcos },
+                            Resources.Load<TextAsset>(DialogueNameList.ml3MarcosPath)));
+
+        addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.guardMarcos+1,
+                            new Dialogue(new string[] { NPCNameList.guardMarcos+1 },
                             Resources.Load<TextAsset>(DialogueNameList.ml3MarcosPath)));
 
         addPartyMemberDialogue(LocationNameList.slaveShackFour, NPCNameList.nandor);
@@ -354,7 +358,14 @@ public static class DialogueList
         addDialogueToList(LocationNameList.campCenter, NPCNameList.barricadeGuards+1,
                                 new SingleCharacterDialogue(NPCNameList.barricadeGuards+1,
                                 Resources.Load<TextAsset>(DialogueNameList.firstBarricadeGuardsPath),
-                                DialogueCombatInfoList.barricadeGuardsCombatInfo));
+                                DialogueCombatInfoList.barricadeGuardsCombatInfo,
+                                new StoryFlagList(InkVariableNameList.defeatFlag, FlagNameList.barricadeGuardDefeatKey1)));
+
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.barricade+1,
+                                new SingleCharacterDialogue(NPCNameList.barricade+1,
+                                Resources.Load<TextAsset>(DialogueNameList.firstBarricadeGuardsPath),
+                                DialogueCombatInfoList.barricadeGuardsCombatInfo,
+                                new StoryFlagList(InkVariableNameList.defeatFlag, FlagNameList.barricadeGuardDefeatKey1)));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.page,
                                 new Dialogue(new string[] { 
@@ -573,7 +584,18 @@ public static class DialogueList
                                                         NPCNameList.guardAndras+2
                                                       },
                                 Resources.Load<TextAsset>(DialogueNameList.secondBarricadeGuardsPath),
-                                DialogueCombatInfoList.barricadeGuardsCombatInfo));
+                                DialogueCombatInfoList.barricadeGuardsCombatInfo,
+                                new StoryFlagList(InkVariableNameList.defeatFlag, FlagNameList.barricadeGuardDefeatKey2)));
+
+        addDialogueToList(LocationNameList.campManse, NPCNameList.barricade+2,
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.barricadeGuards+2,
+                                                        NPCNameList.guardAndras+2
+                                                      },
+                                Resources.Load<TextAsset>(DialogueNameList.secondBarricadeGuardsPath),
+                                DialogueCombatInfoList.barricadeGuardsCombatInfo,
+                                new StoryFlagList(InkVariableNameList.defeatFlag, FlagNameList.barricadeGuardDefeatKey2)));
 
         addDialogueToList(LocationNameList.campManse, NPCNameList.barricadeGuards+3,
                             new Dialogue(new string[] { 
@@ -582,7 +604,18 @@ public static class DialogueList
                                                         NPCNameList.guardAndras+3
                                                       },
                                 Resources.Load<TextAsset>(DialogueNameList.secondBarricadeGuardsPath),
-                                DialogueCombatInfoList.barricadeGuardsCombatInfo));
+                                DialogueCombatInfoList.barricadeGuardsCombatInfo,
+                                new StoryFlagList(InkVariableNameList.defeatFlag, FlagNameList.barricadeGuardDefeatKey3)));
+
+        addDialogueToList(LocationNameList.campManse, NPCNameList.barricade+3,
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.barricadeGuards+3,
+                                                        NPCNameList.guardAndras+3
+                                                      },
+                                Resources.Load<TextAsset>(DialogueNameList.secondBarricadeGuardsPath),
+                                DialogueCombatInfoList.barricadeGuardsCombatInfo,
+                                new StoryFlagList(InkVariableNameList.defeatFlag, FlagNameList.barricadeGuardDefeatKey3)));
 
         addDialogueToList(LocationNameList.campManse, NPCNameList.barracksGate+2,
                             new SingleCharacterDialogue(NPCNameList.barracksGate+2,
@@ -752,13 +785,14 @@ public static class DialogueList
                                                             },
                                                              Resources.Load<TextAsset>(DialogueNameList.ml3MinerBarricadePath)));
 
-        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter, 
-                                                            new Dialogue(new string[] 
-                                                            { 
-                                                                "", 
-                                                                NPCNameList.carter
-                                                            },
-                                                             Resources.Load<TextAsset>(DialogueNameList.ml3CarterPath)));
+        // addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter, 
+        //                                                     new Dialogue(new string[] 
+        //                                                     { 
+        //                                                         "", 
+        //                                                         NPCNameList.carter, 
+        //                                                         NPCNameList.nandor
+        //                                                     },
+        //                                                      Resources.Load<TextAsset>(DialogueNameList.ml3CarterPath)));
 
         addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter+1, 
                                                             new Dialogue(new string[] 
@@ -776,13 +810,17 @@ public static class DialogueList
                                                             },
                                                              Resources.Load<TextAsset>(DialogueNameList.ml3MarcosPath)));
 
-        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.nandor, 
-                                                            new Dialogue(new string[] 
-                                                            { 
-                                                                "", 
-                                                                NPCNameList.nandor
-                                                            },
-                                                             Resources.Load<TextAsset>(DialogueNameList.ml3NandorPath)));
+        addPartyMemberDialogue(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.nandor);
+        addPartyMemberDialogue(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter);
+
+        // addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.nandor, 
+        //                                                     new Dialogue(new string[] 
+        //                                                     { 
+        //                                                         "", 
+        //                                                         NPCNameList.nandor,
+        //                                                         NPCNameList.carter
+        //                                                     },
+        //                                                      Resources.Load<TextAsset>(DialogueNameList.ml3NandorPath)));
 
         #endregion
 
@@ -953,7 +991,7 @@ public static class DialogueList
     {
         addDialogueToList(areaName, partyMemberName,
                     new Dialogue(new string[] { partyMemberName},
-                    Resources.Load<TextAsset>(DialogueNameList.partyMemberFolderPathName + partyMemberName)));
+                    Resources.Load<TextAsset>(DialogueNameList.defaultPartyMemberDialoguePathName)));
     }
 
     public static Dialogue getDialogue(string areaName, string npcName)

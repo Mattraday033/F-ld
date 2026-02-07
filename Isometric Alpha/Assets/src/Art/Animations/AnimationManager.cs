@@ -389,6 +389,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     public void playSpawnAnimation()
     {
         disableExtras();
+        CombatAnimationManager.trackAnimation(key, this);
         playAnimation(createClipTransitionToIdle(CharacterAnimationType.Spawn));
     }
 

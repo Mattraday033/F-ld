@@ -105,7 +105,7 @@ public struct Tab
                 return Inventory.getAllMainHandWeaponsInPocketAsCombatActions(State.inventory);
             case DescribableList.Armor:
 
-                return Inventory.getPocketForDisplayGenericUI(State.inventory, new string[]{Armor.subtype}, new NameComparer());
+                return Inventory.getAllArmorInPocket(State.inventory);
             case DescribableList.Usable:
                 
                 return Inventory.getPocketForDisplayGenericUI(State.inventory, new string[]{UsableItem.type}, new NameComparer());
@@ -159,7 +159,7 @@ public struct Tab
 
                 if (ShopPopUpWindow.currentShopMode == ShopMode.Buy)
                 {
-                    return Inventory.getPocketForDisplayGenericUI(ShopPopUpWindow.getCurrentShopkeeper().getInventory(), new string[]{Armor.subtype}, new NameComparer());
+                    return Inventory.getAllArmorInPocket(ShopPopUpWindow.getCurrentShopkeeper().getInventory());
                 }
                 else
                 {

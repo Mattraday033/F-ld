@@ -478,19 +478,32 @@ public static class Inventory
 
     public static List<Item> getAllOffHandWeaponsInPocket(Dictionary<string, Item> pocket)
     {
-        List<Item> allWeapons = getAllItemsOfSubtypeInPocket(pocket, Weapon.subtype);
+        List<Item> allArmor = getAllItemsOfSubtypeInPocket(pocket, Armor.subtype);
 
-        for (int index = allWeapons.Count - 1; index >= 0; index--)
+        for (int index = allArmor.Count - 1; index >= 0; index--)
         {
-            EquippableItem item = (EquippableItem)allWeapons[index]; ;
-
-            if (item.getSlotID() == Weapon.mainHandSlotIndex)
+            if (allArmor[index] as OffHandWeapon == null)
             {
-                allWeapons.RemoveAt(index);
+                allArmor.RemoveAt(index);
             }
         }
 
-        return allWeapons;
+        return allArmor;
+    }
+
+    public static List<Item> getAllArmorInPocket(Dictionary<string, Item> pocket)
+    {
+        List<IDescribable> allArmor = getPocketForDisplayGenericUI(pocket, new string[]{Armor.subtype}, new NameComparer());
+
+        for (int index = allArmor.Count - 1; index >= 0; index--)
+        {
+            if (allArmor[index] as OffHandWeapon != null)
+            {
+                allArmor.RemoveAt(index);
+            }
+        }
+
+        return allArmor.Cast<Item>().ToList();
     }
 
     public static List<CombatAction> getAllItemsUsableInCombat()

@@ -13,90 +13,27 @@ public class InteractableSpawnParams : SpawnParams
     public const bool doNotSpawn = false;
     public const bool doSpawn = true;
 
-    public StartSpawningFlagList startSpawningFlagList;
-    public StopSpawningFlagList stopSpawningFlagList;
+    public StartSpawningFlagList startSpawningFlagList = new StartSpawningFlagList();
+    public StopSpawningFlagList stopSpawningFlagList = new StopSpawningFlagList();
 
     public bool spawnWhileHostile;
     public bool onlySpawnWhileHostile;
 
-    public InteractableSpawnParams()
+    public InteractableSpawnParams(StartSpawningFlagList startSpawningFlagList = null,
+                                    StopSpawningFlagList stopSpawningFlagList = null,
+                                    bool spawnWhileHostile = true,
+                                    bool onlySpawnWhileHostile = false)
     {
-        this.startSpawningFlagList = new StartSpawningFlagList();
-        this.stopSpawningFlagList = new StopSpawningFlagList();
-        spawnWhileHostile = true;
-    }
+        if(startSpawningFlagList != null)
+        {
+            this.startSpawningFlagList = startSpawningFlagList;
+        }
 
-    public InteractableSpawnParams(bool spawnWhileHostile)
-    {
-        this.startSpawningFlagList = new StartSpawningFlagList();
-        this.stopSpawningFlagList = new StopSpawningFlagList();
-        this.spawnWhileHostile = spawnWhileHostile;
-        this.onlySpawnWhileHostile = false;
-    }
+        if(stopSpawningFlagList != null)
+        {
+            this.stopSpawningFlagList = stopSpawningFlagList;
+        }
 
-    public InteractableSpawnParams(bool spawnWhileHostile, bool spawnOnlyWhileHostile)
-    {
-        this.startSpawningFlagList = new StartSpawningFlagList();
-        this.stopSpawningFlagList = new StopSpawningFlagList();
-        this.spawnWhileHostile = spawnWhileHostile;
-        this.onlySpawnWhileHostile = spawnOnlyWhileHostile;
-    }
-
-
-    public InteractableSpawnParams(StartSpawningFlagList startSpawningFlagList)
-    {
-        this.startSpawningFlagList = startSpawningFlagList;
-        this.stopSpawningFlagList = new StopSpawningFlagList();
-    }
-
-    public InteractableSpawnParams(StopSpawningFlagList stopSpawningFlagList)
-    {
-        this.startSpawningFlagList = new StartSpawningFlagList();
-        this.stopSpawningFlagList = stopSpawningFlagList;
-    }
-
-    public InteractableSpawnParams(StartSpawningFlagList startSpawningFlagList, bool spawnWhileHostile)
-    {
-        this.startSpawningFlagList = startSpawningFlagList;
-        this.stopSpawningFlagList = new StopSpawningFlagList();
-        this.spawnWhileHostile = spawnWhileHostile;
-        this.onlySpawnWhileHostile = false;
-    }
-
-    public InteractableSpawnParams(StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile)
-    {
-        this.startSpawningFlagList = new StartSpawningFlagList();
-        this.stopSpawningFlagList = stopSpawningFlagList;
-        this.spawnWhileHostile = spawnWhileHostile;
-        this.onlySpawnWhileHostile = false;
-    }
-
-    public InteractableSpawnParams(StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile, bool onlySpawnWhileHostile)
-    {
-        this.startSpawningFlagList = new StartSpawningFlagList();
-        this.stopSpawningFlagList = stopSpawningFlagList;
-        this.spawnWhileHostile = spawnWhileHostile;
-        this.onlySpawnWhileHostile = onlySpawnWhileHostile;
-    }
-
-    public InteractableSpawnParams(StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList)
-    {
-        this.startSpawningFlagList = startSpawningFlagList;
-        this.stopSpawningFlagList = stopSpawningFlagList;
-    }
-
-    public InteractableSpawnParams(StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile)
-    {
-        this.startSpawningFlagList = startSpawningFlagList;
-        this.stopSpawningFlagList = stopSpawningFlagList;
-        this.spawnWhileHostile = spawnWhileHostile;
-        this.onlySpawnWhileHostile = false;
-    }
-
-    public InteractableSpawnParams(StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile, bool onlySpawnWhileHostile)
-    {
-        this.startSpawningFlagList = startSpawningFlagList;
-        this.stopSpawningFlagList = stopSpawningFlagList;
         this.spawnWhileHostile = spawnWhileHostile;
         this.onlySpawnWhileHostile = onlySpawnWhileHostile;
     }
@@ -166,7 +103,7 @@ public class StatBasedSpawnParams : InteractableSpawnParams
     private int statLevelRequirement;
 
     public StatBasedSpawnParams(PrimaryStat primaryStat, int statLevelRequirement, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile) :
-    base(stopSpawningFlagList, spawnWhileHostile)
+    base(stopSpawningFlagList: stopSpawningFlagList, spawnWhileHostile: spawnWhileHostile)
     {
         this.primaryStat = primaryStat;
         this.statLevelRequirement = statLevelRequirement;
@@ -228,7 +165,7 @@ public class MonsterSpawnParams : InteractableSpawnParams
     }
 
     public MonsterSpawnParams(StopSpawningFlagList stopSpawningFlagList) :
-    base(stopSpawningFlagList)
+    base(stopSpawningFlagList: stopSpawningFlagList)
     {
         spawnWhileHostile = true;
         onlySpawnWhileHostile = true;
@@ -274,20 +211,20 @@ public class PartyMemberSpawnParams : InteractableSpawnParams
     }
 
     public PartyMemberSpawnParams(StartSpawningFlagList startSpawningFlagList, bool spawnWhileHostile) :
-    base(startSpawningFlagList, spawnWhileHostile)
+    base(startSpawningFlagList: startSpawningFlagList, spawnWhileHostile: spawnWhileHostile)
     {
         this.ignoreInParty = false;
     }
 
     public PartyMemberSpawnParams(StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile) :
-    base(stopSpawningFlagList, spawnWhileHostile)
+    base(stopSpawningFlagList: stopSpawningFlagList, spawnWhileHostile: spawnWhileHostile)
     {
         this.ignoreInParty = false;
     }
 
 
     public PartyMemberSpawnParams(bool ignoreInParty, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile) :
-    base(stopSpawningFlagList, spawnWhileHostile)
+    base(stopSpawningFlagList: stopSpawningFlagList, spawnWhileHostile: spawnWhileHostile)
     {
         this.ignoreInParty = ignoreInParty;
     }

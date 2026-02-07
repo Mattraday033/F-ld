@@ -102,6 +102,7 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.janos, brandedFolderPath + NPCNameList.janos + "/");
         folderPathDict.Add(NPCNameList.kastor, brandedFolderPath + NPCNameList.kastor + "/");
         folderPathDict.Add(NPCNameList.temple, brandedFolderPath + NPCNameList.temple + "/");
+        folderPathDict.Add(NPCNameList.uros, brandedFolderPath + NPCNameList.uros + "/");
 
         folderPathDict.Add(NPCNameList.seb, brandedFolderPath + MonsterNameList.brandedConscript + "/");
         folderPathDict.Add(NPCNameList.slate, brandedFolderPath + MonsterNameList.brandedConscript + "/");

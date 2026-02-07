@@ -20,6 +20,8 @@ public static class PartyMemberTrainManager
         PartyMemberPlacer.OnPartyMemberPlaced.AddListener(createPartyMemberTrain);
         PartyMemberPlacer.OnPartyMemberRemoved.AddListener(createPartyMemberTrain);
 
+        Formation.OnFormationChange.AddListener(createPartyMemberTrain);
+
         partyMemberTrain = new List<PartyMemberMovement>();
         stepCounter = 1;
     }
@@ -29,7 +31,7 @@ public static class PartyMemberTrainManager
         stepCounter = 1;
         destroyPartyMemberTrain();
 
-        if(AreaManager.locationName == null || AreaManager.locationName.Length == 0 || AreaList.currentAreaIsHostile())
+        if(AreaManager.locationName == null || AreaManager.locationName.Length == 0 || AreaList.currentAreaIsHostile() || AreaManager.getPlayerParent() == null)
         {
             return;
         }

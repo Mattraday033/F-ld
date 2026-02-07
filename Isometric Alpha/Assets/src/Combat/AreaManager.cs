@@ -128,6 +128,11 @@ public class AreaManager : MonoBehaviour
 
     public static Transform getPlayerParent()
     {
+        if(instance == null)
+        {
+            return null;
+        }
+
         return instance.playerParent;
     }
 

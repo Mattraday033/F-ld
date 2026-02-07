@@ -271,12 +271,12 @@ public struct DescriptionPanelBuildingBlock
 
     public static DescriptionPanelBuildingBlock getHealthBlock(string currentHealth, string totalHealth)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, currentHealth, IconList.healthIconName, currentHealth + "/" + totalHealth);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text,  currentHealth + "/" + totalHealth, IconList.healthIconName);
     }
 
     public static DescriptionPanelBuildingBlock getHealthBlock(int currentHealth, int totalHealth)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, currentHealth.ToString(), IconList.healthIconName, currentHealth + "/" + totalHealth);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, currentHealth + "/" + totalHealth, IconList.healthIconName);
     }
 
     public static DescriptionPanelBuildingBlock getLevelBlock(string text)

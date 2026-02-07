@@ -39,6 +39,8 @@ public static class InkVariableNameList
 
     public const string attitude = "attitude";
 
+    public const string defeatFlag = "defeatFlag";
+
     public static Story setStoryVariable(Story story, string variableName, int value)
     {
         if (story.variablesState[variableName] != null)

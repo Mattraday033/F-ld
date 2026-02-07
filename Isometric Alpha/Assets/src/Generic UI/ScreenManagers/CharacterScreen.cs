@@ -55,6 +55,7 @@ public class CharacterScreen : ScreenManager, ICounter
     public override List<UnityEvent> getUpdateEvents()
     {
         List<UnityEvent> listOfEvents = new List<UnityEvent>();
+        
         listOfEvents.Add(CombatActionArray.OnCombatActionArrayChange);
         listOfEvents.Add(Inventory.OnInventoryChange);
         listOfEvents.Add(EquippedItems.OnEquipmentChange);
