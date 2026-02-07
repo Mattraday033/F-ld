@@ -72,12 +72,15 @@ public class OpenGateButtonLogicScript : ButtonLogicScript
     private int pressedCount = 0;
     private string gateKey;
 
-    public OpenGateButtonLogicScript(int scriptIndex, int requiredButtons, string gateKey)
+    private PlayerInteractionScript script;
+
+    public OpenGateButtonLogicScript(int scriptIndex, int requiredButtons, string gateKey, PlayerInteractionScript script = null)
     {
         this.scriptIndex = scriptIndex;
         this.requiredButtons = requiredButtons;
         this.gateKey = gateKey;
 
+        this.script = script;
     }
 
     public override void getFloorButtonStatus(FloorButton floorButton)
@@ -97,6 +100,11 @@ public class OpenGateButtonLogicScript : ButtonLogicScript
         else
         {
             GateAndChestManager.addKey(AreaManager.locationName + gateKey + scriptIndex);
+        }
+
+        if(script != null)
+        {
+            script.runScript();
         }
     }
 

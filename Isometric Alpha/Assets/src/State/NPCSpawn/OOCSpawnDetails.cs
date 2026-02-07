@@ -1582,9 +1582,10 @@ public class VaultableOrDestroyableObjectSpawnDetails : VaultableObjectSpawnDeta
 
     public int index;
 
-    public VaultableOrDestroyableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableOrDestroyableObject vaultableOrDestroyableObject, string spriteName = null) :
+    public VaultableOrDestroyableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableOrDestroyableObject vaultableOrDestroyableObject, string spriteName = null, int index = 0) :
     base(npcName, cellCoords, vaultableOrDestroyableObject, spriteName: spriteName)
     {
+        this.index = index;
     }
 
     public override void spawnActions(GameObject gameObject)

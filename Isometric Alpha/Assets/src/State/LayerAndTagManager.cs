@@ -154,6 +154,7 @@ public static class LayerAndTagManager
 		blocksEnemyMovementLayerMask |= (1 << colliderLayer);
 		blocksEnemyMovementLayerMask |= (1 << npcLayer);
 		blocksEnemyMovementLayerMask |= (1 << objectLayer);
+		blocksEnemyMovementLayerMask |= (1 << movableObjectLayer);
 		blocksEnemyMovementLayerMask |= (1 << enemyLayer);
 		blocksEnemyMovementLayerMask |= (1 << cunningableObjectLayer);
 		blocksEnemyMovementLayerMask |= (1 << openableDoorLayer);

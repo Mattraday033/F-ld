@@ -29,7 +29,8 @@ public static class DialogueNameList
     public const string liftableRubblePath = gatesPath + "LiftableRubble";
     public const string fallenBeamPath = gatesPath + "FallenBeam";
     public const string awkwardRubblePath = gatesPath + NPCNameList.awkwardRubble;
-    public const string ancientPortcullisPath = gatesPath + NPCNameList.ancientPortcullis;
+    public const string ancientPortcullisPath = gatesPath + NPCNameList.ancientPortcullis; 
+    public const string heavyBarrelsPath = gatesPath + NPCNameList.heavyBarrels; 
     public const string liftableGatePath = gatesPath + NPCNameList.liftableGate;
     public const string cellDoorPath = gatesPath + NPCNameList.cellDoor;
     public const string unstablePillarPath = gatesPath + NPCNameList.unstablePillar;

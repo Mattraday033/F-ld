@@ -1182,7 +1182,23 @@ public static class OOCSpawnDetailsList
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(15, -2), Facing.SouthWest));
         list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(12, -2), Facing.NorthEast));
 
+        list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(8, -2), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
+        list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(8, -3), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
+        
+        list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(14, -8), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero, index: Constants.indexOne));
+        list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(13, -8), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero, index: Constants.indexOne));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section1c, list);
+
+        #endregion
+
+        #region Manse-1F-Dining Room
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ButtonSpawnDetails(new Vector3Int(-4, -1)));
+
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.diningRoom, list);
 
         #endregion
 
@@ -1215,7 +1231,19 @@ public static class OOCSpawnDetailsList
 
         list.Add(new BookSpawnDetails(NPCNameList.orders, new Vector3Int(3, 3), PrefabNames.note, ItemList.pitSecondEntranceNoteIndex, offset: Constants.onGroundHeightOffset));
 
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(3, 0), Facing.SouthWest));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2c, list);
+
+        #endregion
+
+        #region Manse-1F-3a
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new BookSpawnDetails(NPCNameList.orders, new Vector3Int(6, 0), PrefabNames.note, ItemList.orderTranscriptIndex));
+
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3a, list);
 
         #endregion
 
@@ -1234,16 +1262,6 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.horse+2, new Vector3Int(1, 6)));  
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, list);
-
-        #endregion
-
-        #region Manse-1F-3a
-
-        list = new List<OOCSpawnDetails>();
-
-        list.Add(new BookSpawnDetails(NPCNameList.orders, new Vector3Int(6, 0), PrefabNames.note, ItemList.orderTranscriptIndex));
-
-        oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3a, list);
 
         #endregion
 
@@ -1316,6 +1334,22 @@ public static class OOCSpawnDetailsList
                                                     ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, 
                                                     Ladder.kitchensLadderDescription, Facing.SouthWest))); //, flipX: Constants.flipX
 
+        list.Add(new ButtonSpawnDetails(new Vector3Int(0, -9)));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(-7, -11)));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(0, -6)));
+
+        list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(-1, -7), Facing.NorthWest, Facing.SouthEast, CunningObjectSpriteCategory.Statue,
+                 new List<ObstacleSpawnDetails>(){new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(-1, -6), PrefabNames.shackWallHalf)}));
+
+        list.Add(new ButtonSpawnDetails(new Vector3Int(-4, 4), Constants.indexOne));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(-5, 4), Constants.indexOne));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(-6, 4), Constants.indexOne));
+        // list.Add(new CunningBlockerSpawnDetails(Constants.indexTwo, new Vector3Int(-4, -2), Facing.NorthWest, Facing.SouthEast, CunningObjectSpriteCategory.Statue,
+        //          new List<ObstacleSpawnDetails>(){new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(-4, -2), PrefabNames.shackWallHalf)}));
+
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(-7, 7), Facing.SouthEast));
+        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(-8, 6), Facing.NorthEast));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, list);
 
         #endregion
@@ -1348,11 +1382,22 @@ public static class OOCSpawnDetailsList
 
         #region Pit
 
+        #region Pit-1a
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(2, 0), Facing.NorthWest));
+        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(3, -3), Facing.SouthWest));
+        list.Add(new ChestSpawnDetails(Constants.indexTwo, new Vector3Int(-3, -1), Facing.NorthWest));
+
+        oocSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section1a, list);
+
+        #endregion
+
         #region Pit-1b
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(3, 1), Facing.SouthWest));
-        list.Add(new BookSpawnDetails(NPCNameList.orders, new Vector3Int(3, 0), PrefabNames.note, ItemList.pitClosureNoteIndex, offset: Constants.onGroundHeightOffset));
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(3, 2), Facing.SouthWest));
+        list.Add(new BookSpawnDetails(NPCNameList.orders, new Vector3Int(3, 1), PrefabNames.note, ItemList.pitClosureNoteIndex, offset: Constants.onGroundHeightOffset));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section1b, list);
 

@@ -895,6 +895,14 @@ public static class DialogueList
                                 new Dialogue(new string[]   { NPCNameList.imre+1 }, 
                                  Resources.Load<TextAsset>(DialogueNameList.loyalImrePathName)));
 
+            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.diningRoom, NPCNameList.ancientPortcullis,
+                                new Dialogue(new string[]   { NPCNameList.ancientPortcullis }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath)));
+
+            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section2a, NPCNameList.ancientPortcullis,
+                                new Dialogue(new string[]   { NPCNameList.ancientPortcullis }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath)));
+
             addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section2b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
 
             addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.beam,
@@ -937,6 +945,14 @@ public static class DialogueList
                                  Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath)));
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, NPCNameList.liftableGate, liftableGateDialogue);
+
+            addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, NPCNameList.heavyBarrels,
+                                new Dialogue(new string[]   { NPCNameList.heavyBarrels }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.heavyBarrelsPath)));
+
+            addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, NPCNameList.heavyBarrels+1,
+                                new Dialogue(new string[]   { NPCNameList.heavyBarrels+1 }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.heavyBarrelsPath)));
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.office, DialogueNameList.directorDefeatedConvoKey,
                                 new Dialogue(new string[]   {   

@@ -159,6 +159,7 @@ public static class NPCNameList
     public const string awkwardRubble = "Awkward Rubble";
     public const string portcullis = "Portcullis";
     public const string ancientPortcullis = "Ancient " + portcullis;
+    public const string heavyBarrels = "Heavy Barrels";
     public const string officeDoor = "Office Door";
     public const string cellDoor = "Cell Door";    
     public const string campGate = "Camp Gate";

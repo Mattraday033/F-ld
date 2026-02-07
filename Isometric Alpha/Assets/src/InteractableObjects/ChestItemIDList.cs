@@ -274,6 +274,16 @@ public static class ChestItemIDList
 
         #endregion
 
+        #region Manse-1F-2c
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.chewIndex, Constants.sizeThree));
+
+        chestItemIDList.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2c, list);
+
+        #endregion
+
         #region Manse-1F-3c
 
         list = new List<ItemListID>();
@@ -327,9 +337,32 @@ public static class ChestItemIDList
 
         #endregion
 
+        #region Manse-2F-Stockroom
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.bronzeHelmetIndex));
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.chokegrassBombIndex, Constants.sizeTwo));
+
+        chestItemIDList.Add(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, list);
+
+        #endregion
+
         #endregion
 
         #region Pit
+
+        #region Pit-1a
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.bandagesIndex, Constants.sizeThree));
+        list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.fightingCapeIndex));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.silverSpoonIndex));
+
+        chestItemIDList.Add(ZoneKeyList.pit + LocationNameList.section1a, list);
+
+        #endregion
 
         #region Pit-1b
 

@@ -527,6 +527,16 @@ public static class EnemyPackInfoList
 
         #endregion
 
+        #region Manse-1F-Dining Room
+
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+
+        enemyPackInfoDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.diningRoom, list);
+
+        #endregion
+
         #region Manse-1F-2a
 
         list = new List<EnemyPackInfo>();
@@ -570,6 +580,19 @@ public static class EnemyPackInfoList
         list.Add(honorguardCaptainBossFight);
 
         enemyPackInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, list);
+
+        #endregion
+
+        #region Manse-2F-Stockroom
+
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+
+        enemyPackInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, list);
 
         #endregion
 

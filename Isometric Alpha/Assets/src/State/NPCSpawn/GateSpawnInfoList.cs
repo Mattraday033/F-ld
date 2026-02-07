@@ -609,7 +609,39 @@ public static class GateSpawnInfoList
 
         #region Manse-1f
 
+        #region Manse-1f-Dining Room
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.ancientPortcullis,
+                                    ZoneKeyList.manseFirstFloor + LocationNameList.diningRoom,
+                                    new Vector3Int(-1, 6),
+                                    PrefabNames.portcullis2x1Path,
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+                                    
+        gateSpawnInfoDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.diningRoom, list);
+
+        #endregion
+
         #region Manse-1f-2a
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.ancientPortcullis,
+                                    ZoneKeyList.manseFirstFloor + LocationNameList.section2a,
+                                    new Vector3Int(2, -4),
+                                    PrefabNames.portcullis2x1Path,
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+                                    
+        gateSpawnInfoDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2a, list);
+
+        #endregion
+
+        #region Manse-1f-2b
 
         list = new List<GateSpawnInfo>();
 
@@ -629,7 +661,7 @@ public static class GateSpawnInfoList
 
         #region Manse-2F
 
-        #region Manse-2F-3c
+        #region Manse-2F-3a
 
         list = new List<GateSpawnInfo>();
 
@@ -645,7 +677,7 @@ public static class GateSpawnInfoList
 
         #endregion
 
-        #region Manse-2F-3c
+        #region Manse-2F-3b
 
         list = new List<GateSpawnInfo>();
 
@@ -659,6 +691,46 @@ public static class GateSpawnInfoList
                                     statDifficulty: new KeyValuePair<string, int>(InkVariableNameList.strDiffVarName, Constants.difficultyThree)));
                                     
         gateSpawnInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, list);
+
+        #endregion
+
+        #region Manse-2F-Stockroom
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.heavyBarrels,
+                                    ZoneKeyList.manseSecondFloor + LocationNameList.stockroom,
+                                     new Vector3Int(-3, -3),
+                                    PrefabNames.tripleBarrel,
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.heavyBarrels,
+                                    ZoneKeyList.manseSecondFloor + LocationNameList.stockroom,
+                                     new Vector3Int(-3, -4),
+                                    PrefabNames.tripleBarrel,
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
+
+        list.Add(new GateSpawnInfo(Constants.indexOne, 
+                                    NPCNameList.heavyBarrels,
+                                    ZoneKeyList.manseSecondFloor + LocationNameList.stockroom,
+                                     new Vector3Int(-3, 2),
+                                    PrefabNames.tripleBarrel,
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
+
+        list.Add(new GateSpawnInfo(Constants.indexOne, 
+                                    NPCNameList.heavyBarrels,
+                                    ZoneKeyList.manseSecondFloor + LocationNameList.stockroom,
+                                     new Vector3Int(-3, 1),
+                                    PrefabNames.tripleBarrel,
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
+
+        gateSpawnInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, list);
 
         #endregion
 
