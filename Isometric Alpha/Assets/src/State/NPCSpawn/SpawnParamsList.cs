@@ -176,7 +176,7 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.halfWall + Constants.DEXDesignator), dexTutorial);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.rubble + Constants.DEXDesignator), dexTutorial);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.vaultableBarrels), dexTutorial);
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, CunningObjectSpriteCategory.Statue.ToString()), dexTutorial);
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, CunningObjectSpriteCategory.Crank.ToString()), dexTutorial);
 
         #endregion
         #region Wis Tutorial (Empty)
@@ -817,6 +817,12 @@ public static class SpawnParamsList
                                         new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.revoltStarted }), stopSpawningFlagList: new StopSpawningFlagList(new string[]{ FlagNameList.directorDefeated }), spawnWhileHostile: spawnWhileHostile));
         #endregion
 
+        #region Manse-1F-3a
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.section3a, NPCNameList.orders),
+                                        new StatBasedSpawnParams(PrimaryStat.Wisdom, Constants.statLevelThree,
+                                        stopSpawningFlagList: new StopSpawningFlagList(new string[] { BookList.ordersTranscriptReadFlag }), spawnWhileHostile: spawnWhileHostile));
+        #endregion
+
         #region Manse-1F-3b
 
         StopSpawningFlagList killedHorses = new StopSpawningFlagList(new string[] { FlagNameList.foughtHorsesInManse });
@@ -837,6 +843,17 @@ public static class SpawnParamsList
                                         new InteractableSpawnParams(stopSpawningFlagList: killedHorses, spawnWhileHostile: spawnWhileHostile));
         #endregion
 
+        #region Manse-1F-2a
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.section2a, NPCNameList.orders),
+                                        new StatBasedSpawnParams(PrimaryStat.Wisdom, Constants.statLevelThree,
+                                        stopSpawningFlagList: new StopSpawningFlagList(new string[] { BookList.ordersTranscriptReadFlag }), spawnWhileHostile: spawnWhileHostile));
+        #endregion
+
+        #region Manse-1F-2c
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.section2c, NPCNameList.orders),
+                                        new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { BookList.pitSecondEntranceNoteReadFlag }), spawnWhileHostile: spawnWhileHostile));
+        #endregion
+
         #endregion
 
         #region Manse-2F
@@ -848,9 +865,24 @@ public static class SpawnParamsList
 
         #endregion
 
+        #region Manse-2F-Office
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.orders),
+                                        new StatBasedSpawnParams(PrimaryStat.Wisdom, Constants.statLevelThree,
+                                        stopSpawningFlagList: new StopSpawningFlagList(new string[] { BookList.ordersTranscriptReadFlag }), spawnWhileHostile: spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.director),
+                                        new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.keptDirectorAlive}),spawnWhileHostile: spawnWhileHostile));
+        #endregion
+
         #endregion
 
         #region Pit
+
+        #region Pit-1b
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.pit + LocationNameList.section1b, NPCNameList.orders),
+                                        new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { BookList.pitClosureNoteReadFlag }),spawnWhileHostile: spawnWhileHostile));
+        #endregion
 
         #region Pit-2b
 

@@ -713,6 +713,14 @@ public class AllyStats : Stats
         return combatActionArray.hasAvailableWeaponSlots();
     }
 
+    public void checkStatsAfterEquipmentRemoval()
+    {
+        if(currentHealth > getTotalHealth())
+        {
+            currentHealth = getTotalHealth();
+        }
+    }
+
     #endregion
 
     #region Miscellaneous

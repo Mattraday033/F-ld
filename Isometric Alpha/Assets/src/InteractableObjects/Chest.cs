@@ -27,18 +27,6 @@ public interface INonRevealableNameSource: INameSource
 public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationObject
 {
 
-    private const string tagText = "Chest";
-
-    private readonly static Vector2 mouseHoverOffsetNE = new Vector2(0.11f, -0.025f);
-    private readonly static Vector2 mouseHoverOffsetNW = new Vector2(-0.11f,-0.025f);
-    private readonly static Vector2 mouseHoverOffsetSE = new Vector2(-0.075f,0.075f);
-    private readonly static Vector2 mouseHoverOffsetSW = new Vector2(0.075f,0.075f);
-
-    private readonly static Vector2 mouseHoverOffsetLarge = new Vector2(-0.075f,0.475f);
-
-    private readonly static Vector2 mouseHoverSmallSize = new Vector2(0.65f,0.65f);
-    private readonly static Vector2 mouseHoverLargeSize = new Vector2(0.7f,1.35f);
-
     private static Dictionary<KeyValuePair<Facing, ChestState>, string> chestSprites;
     private static Dictionary<KeyValuePair<Facing, ChestState>, string> shelfSprites;
 
@@ -93,6 +81,8 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
     public SpriteRenderer spriteRenderer;
     public SpriteOutline outline;
 
+    public string secretDoorFlag;
+
     public int chestIndex;
     //public bool FooBar { get; protected set; }
 
@@ -126,17 +116,29 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
         return !GateAndChestManager.hasBeenOpened(getChestKey());
     }
 
+    private void Awake()
+    {
+        SecretDoorFlags.OnSecretDoorDiscovery.AddListener(show);
+    }
+
     private void OnEnable()
     {
-        // createListeners();
         outline = new SpriteOutline();
         outline.setSpriteRenderer(spriteRenderer);
     }
 
-    // private void OnDisable()
-    // {
-    //     destroyListeners();
-    // }
+    private void OnDestroy()
+    {
+        SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(show);
+    }
+
+    private void show(string secretDoorFlag)
+    {
+        if(this.secretDoorFlag != null && this.secretDoorFlag.Equals(secretDoorFlag))
+        {
+            gameObject.SetActive(true);
+        }
+    }
 
     public void populate(int index, Facing facing, ChestType type)
     {

@@ -6,8 +6,13 @@ VAR charisma = 0
 VAR hasOfficeKeyFrontHalf = false
 VAR hasOfficeKeyBackHalf = false
 
-VAR playerName = ""
+VAR wisDifficulty = 2
 
+VAR description = "*The wall looks formidable, but you can feel a slight draft.*"
+
+VAR secretDoorKey = ""
+
+VAR playerName = ""
 
 ->1a
 
@@ -18,138 +23,53 @@ searchInventoryFor(hasOfficeKeyBackHalf,Key,3)
 
 The wall looks formidable, but you can feel a slight draft. 
 
-    +Search around for anything suspicious. <Wis {wisdom}/2>
-        ->1b
+
+    +Search around for anything suspicious. <Wis {wisdom}/{wisDifficulty}>
+        {
+        -wisdom >=wisDifficulty:
+            ->1c
+        -else:
+            ->1b
+        }
+
     +Leave the wall alone.
         ->Close
 
 === 1b ===
+
+\*You find nothing interesting.*
+
+    +\*Leave.*
+        ->Close
+
+=== 1c ===
 
 You search around for anything that catches your eye, and notice that between two of the bricks there is a section of mortar missing in the shape of a keyhole.
 
 {
 -hasOfficeKeyFrontHalf and hasOfficeKeyBackHalf:
     +Combine both key halfs and open the door.
-        ->1c
+        ->1d
 }
     +Don't touch anything.
         ->Close
 
-=== 1c ===
+=== 1d ===
 
-deactivate(1)
-deactivate(2)
-activate(3)
+
+fadeToBlack(true, false)
+
+openGate()
+addSecretDoorFlag({secretDoorKey})
+
+fadeBackIn(60)
+
 setToTrue(manseOfficeSecretDoorsOpened)
 setToTrue(manseHiddenStairsFound)
 
 You insert the key into the lock and turn it. The wall is pulled to the side by a hidden mechanism.
     ->Close
     
-=== 1d ===
-
-->Close
-
-=== 1e ===
-
-->Close
-
-=== 1f ===
-
-->Close
-
-=== 1g ===
-
-->Close
-
-=== 1h ===
-
-->Close
-
-=== 1i ===
-
-->Close
-
-=== 1j ===
-
-->Close
-
-=== 1k ===
-
-->Close
-
-=== 1l ===
-
-->Close
-
-=== 1m ===
-
-->Close
-
-=== 1n ===
-
-->Close
-
-=== 2a === 
-
-->Close
-    
-=== 2b ===
-
-->Close
-
-=== 2c ===
-
-->Close
-
-=== 2d ===
-
-->Close
-
-=== 2e ===
-
-->Close
-
-=== 2f ===
-
-->Close
-
-=== 2h ===
-
-->Close
-
-=== 2i ===
-
-->Close
-
-=== 2j ===
-
-->Close
-
-=== 2k ===
-
-->Close
-
-=== 2l ===
-
-->Close
-
-=== 2m ===
-
-->Close
-
-=== 2n ===
-
-->Close
-
-=== 3a ===
-
-->Close
-
-=== 3b ===
-
-->Close
-
 === Close ===
 
 close()

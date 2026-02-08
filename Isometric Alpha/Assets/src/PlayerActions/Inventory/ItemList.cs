@@ -84,6 +84,7 @@ public static class ItemList
 	// public const int wickedKnifeIndex = 17; //Mine lvl 2 5b (dexterity room)
 	public const int plankIndex = 18;
 	public const int sharpRockIndex = 19;
+	public const int thinBladeIndex = 20;
 
     public const int slaveRagsIndex = 0;
 	public const int clothGlovesIndex = 1;
@@ -112,6 +113,7 @@ public static class ItemList
 	public const int bronzeDirkIndex = 24;
 	public const int ancientClawIndex = 25; //Pit 2c
     public const int wickedKnifeIndex = 26; //Mine lvl 2 5b (dexterity room)
+    public const int leatherArmorIndex = 27;
 
 	public const int leafSamplesIndex = 0;
 	public const int guardDiaryIndex = 1;
@@ -168,11 +170,37 @@ public static class ItemList
 	public const string wardensShieldKey = "Warden's Shield";
 	public const string silverSpoonKey = "Silver Spoon";
 	
-	public const string salvagedGuardHelmKey = "Salvaged Guard Helm";
-	public const string salvagedGuardArmorKey = "Salvaged Guard Armor";
-	public const string salvagedGuardGlovesKey = "Salvaged Guard Gloves";
-	public const string salvagedGuardBootsKey = "Salvaged Guard Boots";
+    #region Armor Set Keys
+
+    private const string helmSuffix = "Helm";
+    private const string helmetSuffix = "Helmet";
+    private const string armorSuffix = "Armor";
+    private const string cuirassSuffix = "Cuirass";
+    private const string torsoSuffix = "Torso";
+    private const string glovesSuffix = "Gloves";
+    private const string guantletsSuffix = "Gauntlets";
+    private const string bootsSuffix = "Boots";
+    private const string sandalsSuffix = "Sandals";
+
+    private const string cavalryArmorDescriptor = "Cavalry ";
+
+    private const string salvagedGuardSetPrefix = "Salvaged Guard ";
+	public const string salvagedGuardHelmKey = salvagedGuardSetPrefix + helmSuffix;
+	public const string salvagedGuardArmorKey = salvagedGuardSetPrefix + armorSuffix;
+	public const string salvagedGuardGlovesKey = salvagedGuardSetPrefix + glovesSuffix;
+	public const string salvagedGuardBootsKey = salvagedGuardSetPrefix + bootsSuffix;
 	
+	public const string leatherSetPrefix = "Leather ";
+	public const string leatherArmorKey = leatherSetPrefix + armorSuffix;
+	public const string leatherGlovesKey = leatherSetPrefix + glovesSuffix;
+	public const string leatherBootsKey = leatherSetPrefix + bootsSuffix;
+
+    public const string bronzeSetPrefix = "Bronze ";
+    public const string bronzeCuirassKey = bronzeSetPrefix + cuirassSuffix;
+    public const string bronzeCavalryHelmetKey = bronzeSetPrefix + cavalryArmorDescriptor + helmetSuffix;
+
+    #endregion
+
 	public const string luckyTalismanKey = "Lucky Talisman";
 	public const string delversDreamKey = "Delver's Dream";
 	public const string bronzeBadgeKey = "Bronze Badge";
@@ -190,6 +218,7 @@ public static class ItemList
 	public const string paddedArmorArmorValue = "5";
 	public const string bronzeCuirassArmorValue = "10";
 	public const string salvagedGuardArmorArmorValue = "10";
+	public const string leatherArmorArmorValue = "8";
 
 	//hands slot armor values
 	public const string clothGlovesArmorValue = "1";
@@ -259,6 +288,7 @@ public static class ItemList
 		weapons.Add(null);
 		weapons.Add(new Staff (new ItemListID(weaponsListIndex, plankIndex), "Plank", "A long piece of wood, pulled from a shack wall. Poorly balanced, but it'll do in a pinch.", "2W + 2", "W+D", "Plank", Range.singleTargetIndex, 3, Weapon.mainHandSlotIndex, isOneHanded));
 		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, sharpRockIndex), "Sharp Rock", "A stone, chipped to have a meager edge. ", "2C + 3", "C+D", "SharpRock", Range.singleTargetIndex, 1, Weapon.mainHandSlotIndex, isOneHanded, EffectAnimationType.Pierce));
+        weapons.Add(new StanceWeapon(new ItemListID(weaponsListIndex, thinBladeIndex), "Bronze Thin-Blade", "A long, slender, double-edged blade with no crossguard. Favored by swordsmen for its long reach, they are either wielded solo or with a matching dagger.", "2W+2D+6", "D+W+1", "Thinblade", Range.verticalOneIndex, worth: 55, Weapon.mainHandSlotIndex, isOneHanded, EffectAnimationType.Slash));
 		
 
 		//Armor(string key, string loreDescription, int worth, int armorRating, int slotID)
@@ -268,21 +298,21 @@ public static class ItemList
 		armor.Add(new TierOneFeet(new ItemListID(armorListIndex, rottenSandalsIndex), "Rotten Sandals", "A pair of ankle high leather sandals whose soles have seen better days.", rottenSandalsArmorValue));
 		armor.Add(new TierOneShield(new ItemListID(armorListIndex, potLidIndex), "Pot Lid", "The lid to a large bronze cauldron, sufficiently sturdy and wide to be used as a haphazard shield.", potLidArmorValue));
 		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, minersHelmetIndex), "Miner's Helmet", "A cheaply made copper head cover with a thin layer of cloth padding inside and a scrap of leather for a chin strap. Useful for protecting against the odd bat or falling rock, but not much else.", minersHelmetArmorValue));
-		armor.Add(new TierOneHands(new ItemListID(armorListIndex, leatherGlovesIndex), "Leather Gloves", "Gloves made to be worn with armor, but still suitable for protecting the hands during hard labor.", leatherGlovesArmorValue));
-		armor.Add(new TierOneBody(new ItemListID(armorListIndex, paddedArmorIndex), "Padded Armor", "Armor made of heavy cloth.", paddedArmorArmorValue));
+		armor.Add(new TierOneHands(new ItemListID(armorListIndex, leatherGlovesIndex), leatherGlovesKey, "Gloves made to be worn with armor, but still suitable for protecting the hands during hard labor.", leatherGlovesArmorValue));
+		armor.Add(new TierOneBody(new ItemListID(armorListIndex, paddedArmorIndex), "Padded Armor", "Armor made of heavy cloth. It feels sturdier than it sounds.", paddedArmorArmorValue));
 		armor.Add(new Trinket(new ItemListID(armorListIndex, thatchNecklaceIndex), "Thatch's Silver Necklace", "A necklace made of a silver medalion attached to a thin silver chain. A sun rising over the horizon is etched into the medalion's disk.", thatchNecklaceArmorValue));
 		armor.Add(new Trinket(new ItemListID(armorListIndex, martialArtistsBeltIndex), martialArtistsBeltKey, "A simple belt made of rope. Unadorned and unburdened.", "2W+6"));
 		armor.Add(new TierOneShield(new ItemListID(armorListIndex, wardensShieldIndex), wardensShieldKey, "A shield made from bands of bronze fitted over a hard wooden core.", "2S + 10"));
 		armor.Add(new Trinket(new ItemListID(armorListIndex, silverSpoonIndex), silverSpoonKey, "The holder of this spoon accumulates wealth at a faster rate. Monsters drop 20% more gold.", Constants.zeroRating));
-		armor.Add(new TierOneFeet(new ItemListID(armorListIndex, leatherBootsIndex), "Leather Boots", "Solid boots made of cowhide. Meant to be worn with armor.", leatherBootsArmorValue));
-		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, bronzeHelmetIndex), "Bronze Cavalry Helmet", "A bronze helmet in the Lovashi style. Well padded and comfortable to wear.", bronzeHelmetArmorValue));
-		armor.Add(new TierOneBody(new ItemListID(armorListIndex, bronzeCuirassIndex), "Bronze Cuirass", "Armor made of interlocking bronze scales.", bronzeCuirassArmorValue));
+		armor.Add(new TierOneFeet(new ItemListID(armorListIndex, leatherBootsIndex), leatherBootsKey, "Solid boots made of cowhide. Meant to be worn with armor.", leatherBootsArmorValue));
+		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, bronzeHelmetIndex), bronzeCavalryHelmetKey, "A bronze helmet in the Lovashi style. Well padded and comfortable to wear.", bronzeHelmetArmorValue));
+		armor.Add(new TierOneBody(new ItemListID(armorListIndex, bronzeCuirassIndex), bronzeCuirassKey, "Armor made of interlocking bronze scales.", bronzeCuirassArmorValue));
 		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, salvagedGuardHelmIndex), salvagedGuardHelmKey, "A helm taken from a slain guard. Buff out that dent and it's good as new.", salvagedGuardHelmArmorValue));
 		armor.Add(new TierOneBody(new ItemListID(armorListIndex, salvagedGuardArmorIndex), salvagedGuardArmorKey, "A set of armor stripped off a dead guard. Don't mind whatever that smell is.", salvagedGuardArmorArmorValue));
 		armor.Add(new TierOneHands(new ItemListID(armorListIndex, salvagedGuardGlovesIndex), salvagedGuardGlovesKey, "A pair of gloves taken from a guard's cold, dead hands.", salvagedGuardGlovesArmorValue));
 		armor.Add(new TierOneFeet(new ItemListID(armorListIndex, salvagedGuardBootsIndex), salvagedGuardBootsKey, "A pair of boots taken from a dead guard. His soles have left his body.", salvagedGuardBootsArmorValue));
 		armor.Add(new Trinket(new ItemListID(armorListIndex, luckyTalismanIndex), luckyTalismanKey, "András's lucky talisman. Let's hope it serves you better than it served him.", Constants.zeroRating, "4", "2"));
-		armor.Add(new Trinket(new ItemListID(armorListIndex, delversDreamIndex), delversDreamKey, "A gem, finely cut, with a deep blue hue. The longer you stare, the more certain you become that you do not hold the gem, but it holds you. 10% bonus mental resistance when equipped.", delversDreamArmorValue));
+		armor.Add(new Trinket(new ItemListID(armorListIndex, delversDreamIndex), delversDreamKey, "A gem, finely cut, with a deep blue hue. The longer you stare, the more certain you become that you do not hold the gem, but it holds you.", delversDreamArmorValue));
 		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, cookingPotIndex), cookingPotKey, "A pot from the kitchens. Worn about the head, it could provide some meager protection.", cookingPotArmorValue));
 		armor.Add(new Trinket(new ItemListID(armorListIndex, bronzeBadgeIndex), bronzeBadgeKey, "This bronze badge looks bruised and worn, as if it was just pulled from a fire.", bronzeBadgeArmorValue));
 		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, plumedHelmetIndex), "Ancient Plumed Helmet", "A battered helmet, with a ragged plume made of dyed hair from an unknown beast.", "C + 2"));
@@ -290,7 +320,7 @@ public static class ItemList
         armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, bronzeDirkIndex), "Bronze Dirk", "A curved bronze blade, held in the off hand.", "S + D + 3", "D+2", "CurvedDagger"));
 		armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, ancientClawIndex), "Ancient Claw", "This battered gauntlet has sharp spikes protruding from its knuckles, which immitate an animal's claw. Its main use is to catch and hold an opponent, helping to line up a strike from your other hand or an ally.", "2S + 2D + 3", "D+2", "Claw"));
 		armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, wickedKnifeIndex), "Wicked Knife", "A barbed knife, meant for gouging.", "2D + 3", "2D + 1", "WickedKnife"));
-		
+		armor.Add(new TierOneBody(new ItemListID(armorListIndex, leatherArmorIndex), leatherArmorKey, "Leather pads of tanned oxhide that cover the torso.", leatherArmorArmorValue));
 
 		//QuestItem(string key, string loreDescription, int ID)
 

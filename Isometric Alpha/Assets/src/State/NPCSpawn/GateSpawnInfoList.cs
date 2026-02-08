@@ -745,7 +745,7 @@ public static class GateSpawnInfoList
                                     PrefabNames.portcullis2x1Path,
                                     Constants.sizeTwo,
                                     Axis.DescendingY));
-                                    
+
         gateSpawnInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.office, list);
 
         #endregion

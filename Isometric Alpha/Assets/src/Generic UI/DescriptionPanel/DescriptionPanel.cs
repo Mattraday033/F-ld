@@ -140,6 +140,9 @@ public class DescriptionPanel : MonoBehaviour
             {
                 tmpTextObject.fontSizeMax = tmpTextObject.fontSize;
                 tmpTextObject.fontSizeMin = Constants.minFontSize;
+            } else
+            {
+                tmpTextObject.fontSize = tmpTextObject.fontSizeMax;
             }
 
 			tmpTextObject.enableAutoSizing = autoSize;

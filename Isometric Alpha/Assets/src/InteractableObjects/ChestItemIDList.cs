@@ -269,8 +269,19 @@ public static class ChestItemIDList
 
         list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.properFoodIndex));
         list.Add(new ItemListID(ItemList.armorListIndex, ItemList.salvagedGuardHelmIndex));
+        list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.thinBladeIndex));
 
         chestItemIDList.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2a, list);
+
+        #endregion
+
+        #region Manse-1F-3e
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.martialArtistsBeltIndex));
+
+        chestItemIDList.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3e, list);
 
         #endregion
 
@@ -300,6 +311,16 @@ public static class ChestItemIDList
 
         #region Manse-2F
 
+        #region Manse-2F-1c
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.bronzeCuirassIndex));
+
+        chestItemIDList.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section1c, list);
+
+        #endregion
+
         #region Manse-2F-2c
 
         list = new List<ItemListID>();
@@ -307,6 +328,16 @@ public static class ChestItemIDList
         list.Add(new ItemListID(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyFrontIndex));
 
         chestItemIDList.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section2c, list);
+
+        #endregion
+
+        #region Manse-2F-2d
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.leatherArmorIndex));
+
+        chestItemIDList.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section2d, list);
 
         #endregion
 

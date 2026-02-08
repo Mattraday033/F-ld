@@ -28,7 +28,11 @@ public abstract class StatBoostSource : INameSource
             case StatSourceNameList.chewKey:
                 return "4";
             case ItemList.salvagedGuardGlovesKey:
-                return "D";
+                return "D";            
+            case ItemList.salvagedGuardArmorKey:
+            case ItemList.salvagedGuardBootsKey:
+            case ItemList.salvagedGuardHelmKey:
+                return "2";
         }
 
         return Constants.zeroRating;
@@ -51,6 +55,8 @@ public abstract class StatBoostSource : INameSource
             case StatSourceNameList.halfHandStanceKey:
             case StatSourceNameList.bloodlustKey:
                 return "1";
+            case ItemList.martialArtistsBeltKey:
+                return "2";
             case StatSourceNameList.predationKey:
             case StatSourceNameList.chewKey:
                 return "4";
@@ -159,6 +165,13 @@ public abstract class StatBoostSource : INameSource
     {
         switch (getName())
         {
+            case ItemList.leatherArmorKey:
+                return "S+1";
+            case ItemList.leatherGlovesKey:
+            case ItemList.leatherBootsKey:
+                return "3";
+            case ItemList.martialArtistsBeltKey:
+                return "5";
             default:
                 return Constants.zeroRating;
         }
@@ -168,6 +181,10 @@ public abstract class StatBoostSource : INameSource
     {
         switch (getName())
         {
+            case ItemList.bronzeCavalryHelmetKey:
+                return "3";
+            case ItemList.bronzeCuirassKey:
+                return "S+1";
             default:
                 return Constants.zeroRating;
         }
@@ -602,7 +619,7 @@ public abstract class StatBoostSource : INameSource
 
         if (!boostSource.getBonusGoldMultiplierFormula().Equals(Constants.zeroRating))
         {
-            blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getGoldMultiplierBlock(DamageCalculator.calculateFormula(boostSource.getBonusGoldMultiplierFormula(), statsSource).ToString()), boostSource.getBonusGoldMultiplierFormula()));
+            blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getGoldMultiplierBlock(DamageCalculator.calculateFormula(boostSource.getBonusGoldMultiplierFormula(), statsSource).ToString()+"%"), boostSource.getBonusGoldMultiplierFormula()));
         }
 
         if (!boostSource.getBonusDiscountFormula().Equals(Constants.zeroRating))

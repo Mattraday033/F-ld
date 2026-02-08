@@ -193,13 +193,7 @@ public abstract class QuestActivationObjectSpawnDetails : OOCSpawnDetails
 
     protected QuestStepActivationScript script;
 
-    public QuestActivationObjectSpawnDetails(string npcName, Vector3Int cellCoords) :
-    base(npcName, cellCoords)
-    {
-
-    }
-
-    public QuestActivationObjectSpawnDetails(string npcName, Vector3Int cellCoords, QuestStepActivationScript script) :
+    public QuestActivationObjectSpawnDetails(string npcName, Vector3Int cellCoords, QuestStepActivationScript script = null) :
     base(npcName, cellCoords)
     {
         this.script = script;
@@ -311,7 +305,7 @@ public abstract class CunningObjectSpawnDetails : OOCSpawnDetails
 
     public override Transform getParent()
     {
-        return AreaManager.getNPCParentWithScale();
+        return AreaManager.getNPCParentWithoutScale();
     }
 
     public override void spawnActions(GameObject gameObject)
@@ -1388,6 +1382,18 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
 
         this.tutorialTargetHash = tutorialTargetHash;
         this.terrainSpriteName = terrainSpriteName;
+
+        dialogue = getDialogue(areaName);
+    }
+
+    public override Dialogue getDialogue(string areaName)
+    {
+        if(secretDoorInfo != null && secretDoorInfo.customDialoguePath != null)
+        {
+            return new Dialogue(new string[] { Constants.emptyString, NPCNameList.suspiciousWall }, Resources.Load<TextAsset>(secretDoorInfo.customDialoguePath));
+        }
+
+        return new Dialogue(new string[] { Constants.emptyString, NPCNameList.suspiciousWall }, Resources.Load<TextAsset>(DialogueNameList.suspiciousWallPath));
     }
 
     public override bool interactable()
@@ -1602,19 +1608,14 @@ public class ChestSpawnDetails : QuestActivationObjectSpawnDetails
 {
     private int index;
     private Facing facing;
+    private string secretDoorFlag;
 
-    public ChestSpawnDetails(int index, Vector3Int cellCoords, Facing facing) :
-    base(generateName(index), cellCoords)
-    {
-        this.index = index;
-        this.facing = facing;
-    }
-
-    public ChestSpawnDetails(int index, Vector3Int cellCoords, Facing facing, QuestStepActivationScript script) :
+    public ChestSpawnDetails(int index, Vector3Int cellCoords, Facing facing, QuestStepActivationScript script = null, string secretDoorFlag = null) :
     base(generateName(index), cellCoords, script)
     {
         this.index = index;
         this.facing = facing;
+        this.secretDoorFlag = secretDoorFlag;
     }
 
     public override string getPrefabName()
@@ -1644,6 +1645,8 @@ public class ChestSpawnDetails : QuestActivationObjectSpawnDetails
         chest.populate(index, facing, getType());
 
         setScript(chest);
+
+        chest.secretDoorFlag = secretDoorFlag;
     }
 
     protected override void setScript(IQuestActivationObject questActivationObject)

@@ -123,7 +123,7 @@ public static class OOCSpawnDetailsList
                                 new StartSpawningAllTrueFlagList(new string[] { TutorialSequenceList.cunningTutorialSeenFlag }),
                                                                           Constants.indexOne));
 
-        list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), Facing.SouthEast, Facing.NorthEast, CunningObjectSpriteCategory.Statue,
+        list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), Facing.SouthEast, Facing.NorthEast, CunningObjectSpriteCategory.Crank,
                  new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(6, -2), PrefabNames.shackWallHalf),
                  TutorialSequenceList.tutorialCunningObjectTargetHash));
 
@@ -719,7 +719,7 @@ public static class OOCSpawnDetailsList
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 6)));
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 5)));
 
-        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(8, 8), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Statue, blockerSpawnDetails, Constants.indexTwo));
+        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(8, 8), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexTwo));
 
         blockerSpawnDetails = new List<ObstacleSpawnDetails>();
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(7, 11)));
@@ -732,7 +732,7 @@ public static class OOCSpawnDetailsList
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 13)));
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 14)));
 
-        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexOne, new Vector3Int(8, 11), Facing.SouthWest, Facing.NorthWest, CunningObjectSpriteCategory.Statue, blockerSpawnDetails, Constants.indexThree));
+        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexOne, new Vector3Int(8, 11), Facing.SouthWest, Facing.NorthWest, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexThree));
 
         blockerSpawnDetails = new List<ObstacleSpawnDetails>();
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(12, 8)));
@@ -745,7 +745,7 @@ public static class OOCSpawnDetailsList
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 6)));
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 5)));
 
-        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexTwo, new Vector3Int(11, 8), Facing.NorthEast, Facing.SouthEast, CunningObjectSpriteCategory.Statue, blockerSpawnDetails, Constants.indexZero));
+        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexTwo, new Vector3Int(11, 8), Facing.NorthEast, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexZero));
         
         blockerSpawnDetails = new List<ObstacleSpawnDetails>();
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 12)));
@@ -758,7 +758,7 @@ public static class OOCSpawnDetailsList
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(13, 11)));
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(14, 11)));
 
-        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexThree, new Vector3Int(11, 11), Facing.NorthEast, Facing.NorthWest, CunningObjectSpriteCategory.Statue, blockerSpawnDetails, Constants.indexOne));
+        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexThree, new Vector3Int(11, 11), Facing.NorthEast, Facing.NorthWest, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexOne));
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(8, 10), Facing.SouthWest));
         list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(8, 9), Facing.SouthWest));
@@ -919,7 +919,7 @@ public static class OOCSpawnDetailsList
         deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(1, 2)));
         deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(1, 1)));
 
-        list.Add(new DoubleCunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(4, -1), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Statue, blockerSpawnDetails, deactivatedblockerSpawnDetails));
+        list.Add(new DoubleCunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(4, -1), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, deactivatedblockerSpawnDetails));
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(-1, -1), Facing.SouthEast));
         list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(0, -2), Facing.SouthWest));
@@ -1089,7 +1089,7 @@ public static class OOCSpawnDetailsList
         deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(-12, -6)));
         deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(-13, -6)));
 
-        list.Add(new DoubleCunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(-12, -5), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Statue, blockerSpawnDetails, deactivatedblockerSpawnDetails));
+        list.Add(new DoubleCunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(-12, -5), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, deactivatedblockerSpawnDetails));
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(-5, -6), Facing.SouthWest));  
 
@@ -1206,10 +1206,14 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.manseHiddenGardenFlag, ZoneKeyList.manseFirstFloor, LocationNameList.section2a, Constants.indexOne));
+
         list.Add(new BookSpawnDetails(NPCNameList.orders, new Vector3Int(7, 0), PrefabNames.note, ItemList.orderTranscriptIndex, offset: Constants.onGroundHeightOffset));
 
         list.Add(new ShelfSpawnDetails(Constants.indexZero, new Vector3Int(8, 3), Facing.SouthWest));
         list.Add(new ShelfSpawnDetails(Constants.indexOne, new Vector3Int(8, 2), Facing.SouthWest));
+
+        list.Add(new ChestSpawnDetails(Constants.indexTwo, new Vector3Int(-4, 21), Facing.SouthEast, secretDoorFlag: SecretDoorKeyList.manseHiddenGardenFlag));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2a, list);
 
@@ -1243,6 +1247,8 @@ public static class OOCSpawnDetailsList
 
         list.Add(new BookSpawnDetails(NPCNameList.orders, new Vector3Int(6, 0), PrefabNames.note, ItemList.orderTranscriptIndex));
 
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.meetingRoomSecretEntrance, ZoneKeyList.manseFirstFloor, LocationNameList.section3a, Constants.indexOne));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3a, list);
 
         #endregion
@@ -1273,13 +1279,38 @@ public static class OOCSpawnDetailsList
         list.Add(new ShelfSpawnDetails(Constants.indexOne, new Vector3Int(3, 3), Facing.SouthEast));
         list.Add(new ShelfSpawnDetails(Constants.indexTwo, new Vector3Int(8, 3), Facing.SouthWest));
 
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.secretBookShelfFlag, ZoneKeyList.manseFirstFloor, LocationNameList.section3c, Constants.indexOne));
+
+        list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.halfWall, new Vector3Int(3, -1), PrefabNames.manseHalfWallSecretDoor, SecretDoorKeyList.secretBookShelfFlag));
+        list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.halfWall, new Vector3Int(2, -1), PrefabNames.manseHalfWallSecretDoor, SecretDoorKeyList.secretBookShelfFlag));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3c, list);
+
+        #endregion
+
+        #region Manse-1F-3e
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(1, 2), Facing.SouthEast));
+
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3e, list);
 
         #endregion
 
         #endregion
 
         #region Manse-2F
+
+        #region Manse-2F-1c
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ShelfSpawnDetails(Constants.indexZero, new Vector3Int(-2, -3), Facing.SouthWest));
+
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section1c, list);
+
+        #endregion
 
         #region Manse-2F-2c
 
@@ -1290,6 +1321,16 @@ public static class OOCSpawnDetailsList
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(3, -4), Facing.SouthWest, new KeyHalfScript()));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section2c, list);
+
+        #endregion
+
+        #region Manse-2F-2d
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ShelfSpawnDetails(Constants.indexZero, new Vector3Int(-4, -2), Facing.SouthEast));
+
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section2d, list);
 
         #endregion
 
@@ -1338,17 +1379,17 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(-7, -11)));
         list.Add(new ButtonSpawnDetails(new Vector3Int(0, -6)));
 
-        list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(-1, -7), Facing.NorthWest, Facing.SouthEast, CunningObjectSpriteCategory.Statue,
+        list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(-1, -7), Facing.NorthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank,
                  new List<ObstacleSpawnDetails>(){new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(-1, -6), PrefabNames.shackWallHalf)}));
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(-4, 4), Constants.indexOne));
         list.Add(new ButtonSpawnDetails(new Vector3Int(-5, 4), Constants.indexOne));
         list.Add(new ButtonSpawnDetails(new Vector3Int(-6, 4), Constants.indexOne));
-        // list.Add(new CunningBlockerSpawnDetails(Constants.indexTwo, new Vector3Int(-4, -2), Facing.NorthWest, Facing.SouthEast, CunningObjectSpriteCategory.Statue,
+        // list.Add(new CunningBlockerSpawnDetails(Constants.indexTwo, new Vector3Int(-4, -2), Facing.NorthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank,
         //          new List<ObstacleSpawnDetails>(){new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(-4, -2), PrefabNames.shackWallHalf)}));
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(-7, 7), Facing.SouthEast));
-        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(-8, 6), Facing.NorthEast));
+        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(-8, -6), Facing.NorthEast));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, list);
 
@@ -1361,8 +1402,9 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(-3, -3), facing: Facing.NorthEast)); 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.nandor, new Vector3Int(-3, 0), facing: Facing.NorthEast)); 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.page, new Vector3Int(2, 2), facing: Facing.SouthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.page, new Vector3Int(2, 2), facing: Facing.SouthEast));
 
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.officeSecretEntranceFlag, ZoneKeyList.manseSecondFloor, LocationNameList.office, Constants.indexOne));
 
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(1, 2), VaultableObject.diffTwoVaultableBarrelsOneTile));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(1, 1), VaultableObject.diffTwoVaultableBarrelsOneTile));

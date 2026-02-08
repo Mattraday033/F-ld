@@ -2,10 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using TMPro;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using UnityEngine.Scripting;
 
 public enum StartingMenuState { OnMainMenu = 1, Loading = 2, CharacterCreation = 3 }

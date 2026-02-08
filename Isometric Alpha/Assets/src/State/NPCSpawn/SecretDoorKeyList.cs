@@ -66,5 +66,34 @@ public static class SecretDoorKeyList
     #endregion
 
     #endregion
+
+    #region Manse
+
+    #region Manse-1f-2a
+
+    public const string manseHiddenGardenFlag = ZoneKeyList.manseFirstFloor + LocationNameList.section2a + NPCNameList.suspiciousWall;
+
+    #endregion
+
+    #region Manse-1f-3a
+
+    public const string meetingRoomSecretEntrance = ZoneKeyList.manseFirstFloor + LocationNameList.section3a + NPCNameList.suspiciousWall;
+
+    #endregion
+
+    #region Manse-1f-3c
+
+    public const string secretBookShelfFlag = ZoneKeyList.manseFirstFloor + LocationNameList.section3c + NPCNameList.suspiciousShelf;
+
+    #endregion
+
+    #region Manse-2f-Office
+
+    public const string officeSecretEntranceFlag = ZoneKeyList.manseSecondFloor + LocationNameList.office + NPCNameList.suspiciousWall;
+
+    #endregion
+
+    #endregion
+
 }
 

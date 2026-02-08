@@ -17,6 +17,8 @@ public static class InkVariableNameList
     public const string wisDiffVarName = "wisDifficulty";
     public const string chaDiffVarName = "chaDifficulty";
 
+    public const string secretDoorKey = "secretDoorKey";
+
     public const string facingNE = "facingNE";
     public const string facingNW = "facingNW";
     public const string facingSW = "facingSW";

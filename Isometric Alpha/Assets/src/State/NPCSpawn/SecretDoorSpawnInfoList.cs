@@ -91,6 +91,51 @@ public static class SecretDoorSpawnInfoList
         secretDoorSpawnDetailsDict.Add(LocationNameList.campSouthEast, list);
         #endregion
 
+        #region Manse-1f
+
+        #region Manse-1f-2a
+        list = new List<SecretDoorSpawnInfo>();
+
+        list.Add(new SecretDoorSpawnInfo(ZoneKeyList.manseFirstFloor + LocationNameList.section2a, NPCNameList.suspiciousWall, PrefabNames.manseWallSecretDoor, new Vector3Int(-1, 10),
+                                            new SecretDoorInfo(SecretDoorKeyList.manseHiddenGardenFlag, difficulty: Constants.difficultyThree), Constants.sizeFive, Axis.DescendingX));
+
+        secretDoorSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2a, list);
+        #endregion
+
+        #region Manse-1f-3a
+        list = new List<SecretDoorSpawnInfo>();
+
+        list.Add(new SecretDoorSpawnInfo(ZoneKeyList.manseFirstFloor + LocationNameList.section3a, NPCNameList.suspiciousWall, PrefabNames.manseWallSecretDoor, new Vector3Int(9, -3),
+                                            new SecretDoorInfo(SecretDoorKeyList.meetingRoomSecretEntrance, difficulty: Constants.difficultyThree), Constants.sizeThree, Axis.DescendingY));
+
+        secretDoorSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3a, list);
+        #endregion
+
+        #region Manse-1f-3c
+        list = new List<SecretDoorSpawnInfo>();
+
+        list.Add(new SecretDoorSpawnInfo(ZoneKeyList.manseFirstFloor + LocationNameList.section3c, NPCNameList.suspiciousWall, PrefabNames.secretShelfNWSecretDoor, new Vector3Int(3, 0),
+                                            new SecretDoorInfo(SecretDoorKeyList.secretBookShelfFlag, difficulty: Constants.difficultyThree, description: "*These bookshelfs look exactly like the others, except for a distinct lack of dust.*"), Constants.sizeTwo, Axis.DescendingX));
+
+        secretDoorSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3c, list);
+        #endregion
+
+        #endregion
+
+        #region Manse-2f
+
+        #region Manse-2f-Office
+        list = new List<SecretDoorSpawnInfo>();
+
+        list.Add(new SecretDoorSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.suspiciousWall, PrefabNames.manseWallSecretDoor, new Vector3Int(4, 2),
+                                            new SecretDoorInfo(SecretDoorKeyList.officeSecretEntranceFlag, difficulty: Constants.difficultyThree, customDialoguePath: DialogueNameList.officeSecretDoorPathName),
+                                            Constants.sizeFour, Axis.DescendingY));
+
+        secretDoorSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.office, list);
+        #endregion
+
+        #endregion
+
         #region MineLvl_2
 
         #region MineLvl_2-1a

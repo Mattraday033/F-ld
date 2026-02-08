@@ -98,11 +98,19 @@ public abstract class Armor : EquippableItem, IJSONConvertable
             return base.getInvulnerableFormula();
         }
 
-        int slotMod = 1;
+        int slotMod;
 
-        if(getSlotID() == offHandSlotIndex)
+        switch(getSlotID())
         {
-            slotMod = 2;
+            case offHandSlotIndex:
+                slotMod = 2;
+                break;
+            case trinketSlotIndex:
+                slotMod = 0;
+                break; 
+            default:
+                slotMod = 1;
+                break;
         }
 
         return ((getTier() + 1)*slotMod).ToString();
@@ -159,7 +167,7 @@ public abstract class Armor : EquippableItem, IJSONConvertable
 
 	public override string getSlotIconName()
 	{
-        return Armor.getSlotIconName(getSlotID());
+        return getSlotIconName(getSlotID());
 	}
 
     public override int getSlotID()
@@ -171,23 +179,23 @@ public abstract class Armor : EquippableItem, IJSONConvertable
 	{
 		switch (slotIndex)
 		{
-			case Armor.offHandSlotIndex:
-				return EquippableItem.offHandSlotIconName;
+			case offHandSlotIndex:
+				return offHandSlotIconName;
 
-			case Armor.headSlotIndex:
-				return EquippableItem.headSlotIconName;
+			case headSlotIndex:
+				return headSlotIconName;
 
-			case Armor.bodySlotIndex:
-				return EquippableItem.bodySlotIconName;
+			case bodySlotIndex:
+				return bodySlotIconName;
 
-			case Armor.handsSlotIndex:
-				return EquippableItem.handsSlotIconName;
+			case handsSlotIndex:
+				return handsSlotIconName;
 
-			case Armor.feetSlotIndex:
-				return EquippableItem.feetSlotIconName;
+			case feetSlotIndex:
+				return feetSlotIconName;
 
-			case Armor.trinketSlotIndex:
-				return EquippableItem.trinketSlotIconName;
+			case trinketSlotIndex:
+				return trinketSlotIconName;
 
 			default:
 				throw new IOException("Unexpected slotID: " + slotIndex);
@@ -197,39 +205,27 @@ public abstract class Armor : EquippableItem, IJSONConvertable
 	//IBuildableWithBlocks methods
     public override List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
     {
-        List<DescriptionPanelBuildingBlock> buildingBlocks = base.getDescriptionBuildingBlocks();
+        List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
+
+        // if (!getDamageFormula().Equals(Constants.zeroRating))
+        // {
+        //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getDamageBlock(getDamageFormulaTotal().ToString(), getDamageFormula()), getDamageFormula()));
+        // }
+
+        // if (!getCritFormula().Equals(Constants.zeroRating))
+        // {
+        //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getCritBlock(getCritFormulaTotal().ToString(), getCritFormula()), getCritFormula()));
+        // }
+
+        buildingBlocks.AddRange(base.getDescriptionBuildingBlocks());
 
         if (getArmorRating() > Constants.sizeZero)
         {
             buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getArmorRatingForDisplay(), armorFormula));
         }
 
-        if (!getCritFormula().Equals(Constants.zeroRating))
-        {
-            buildingBlocks.Insert(1, DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getCritBlock(getCritFormulaTotal().ToString(), getCritFormula()), getCritFormula()));
-        }
-
-        if (!getDamageFormula().Equals(Constants.zeroRating))
-        {
-            buildingBlocks.Insert(1, DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getDamageBlock(getDamageFormulaTotal().ToString(), getDamageFormula()), getDamageFormula()));
-        }
-
-        if (!getInvulnerableFormula().Equals(Constants.zeroRating))
-        {
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getInvulnerableBlock(DamageCalculator.calculateFormula(getInvulnerableFormula(), getStatSource()).ToString()), getInvulnerableFormula()));
-        }
-
-        if (!getBonusPhysicalResistanceFormula().Equals(Constants.zeroRating))
-        {
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getPhysicalResistBlock(DamageCalculator.calculateFormula(getBonusPhysicalResistanceFormula(), getStatSource()).ToString()+"%"), getBonusPhysicalResistanceFormula()));
-        }
-
-        if (!getBonusMentalResistanceFormula().Equals(Constants.zeroRating))
-        {
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getMentalResistBlock(DamageCalculator.calculateFormula(getBonusMentalResistanceFormula(), getStatSource()).ToString()+"%"), getBonusMentalResistanceFormula()));
-        }
+        buildingBlocks.AddRange(getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
 
         return buildingBlocks;
     }
 }
-

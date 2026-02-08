@@ -108,7 +108,7 @@ public class Trinket : Armor
 {
     public Trinket(ItemListID listID, string key, string loreDescription, string armorFormula = Constants.zeroRating, string damageFormula = Constants.zeroRating, 
                                                                                                                       string critFormula = Constants.zeroRating)  : 
-    base(listID, key, loreDescription, armorFormula, feetSlotIndex, Constants.tierZero, damageFormula, critFormula) 
+    base(listID, key, loreDescription, armorFormula, trinketSlotIndex, Constants.tierZero, damageFormula, critFormula) 
     {
 
     }

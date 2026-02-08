@@ -319,13 +319,16 @@ public static class PrefabNames
     public const string brokenDirectorStatuePath = statueFolder + "Broken"+directorStatueSpriteName;
 
     public const string cunningObjectsFolder = spriteFolder + "CunningObjects/";
-    public const string statueBack = cunningObjectsFolder + "Statue Back";
-    public const string statueFront = cunningObjectsFolder + "Statue Front";
+    public const string crankSW = cunningObjectsFolder + "Crank_SW";
+    public const string crankSE = cunningObjectsFolder + "Crank_SE";
 
     public const string secretDoorsFolder = spriteFolder + "SecretDoors/";
     public const string mineLvl2WallSecretDoor = secretDoorsFolder + "MineLvl_2 Wall";
     public const string mineLvl3WallSecretDoor = secretDoorsFolder + "MineLvl_3-SecretDoor";
     public const string mineLvl3GroundSecretDoor = secretDoorsFolder + "MineLvl_3-Ground";
+    public const string manseWallSecretDoor = secretDoorsFolder + "Manse Wall";
+    public const string manseHalfWallSecretDoor = secretDoorsFolder + "Manse Half Wall";
+    public const string secretShelfNWSecretDoor = secretDoorsFolder + "Secret Shelf NW";
     public const string wallPatch = secretDoorsFolder + "WallPatch";
     public const string wallPatchTall = secretDoorsFolder + "WallPatchTall";
 

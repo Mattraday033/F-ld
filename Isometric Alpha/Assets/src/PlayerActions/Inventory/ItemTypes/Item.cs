@@ -331,7 +331,7 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 	{
         if(!base.getDamageFormula().Equals(Constants.zeroRating))
         {
-            base.getDamageFormula();
+            return base.getDamageFormula();
         }
 
 		return damageFormula;

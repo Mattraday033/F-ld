@@ -104,6 +104,7 @@ public static class NPCNameList
     public const string mineLvl2Wall = "MineLvl_2 Wall";
     public const string mineLvl3Wall = "MineLvl_3 Wall";
     public const string suspiciousWall = "Suspicious Wall";
+    public const string suspiciousShelf = "Suspicious Shelf";
     public const string diary = "Diary";
     public const string orders = "Orders";
     public const string rubble = "Rubble";
@@ -122,6 +123,7 @@ public static class NPCNameList
     public const string manseFrontDoor = "Manse Front Door";
     public const string manseServiceEntrance = "Service Entrance";
     public const string mineArmoryGate = "Mine Armory Gate";
+    public const string crank = "Crank";
     public const string statue = "Statue";
     public const string toppledStatue = "Toppled Statue";
     public const string spike = "Spike";

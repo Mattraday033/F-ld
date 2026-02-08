@@ -7,10 +7,16 @@ public class SecretDoorInfo : IStoryVariableSource
 {
 
     public string secretDoorKey;
+    public int difficulty;
+    public string description;
+    public string customDialoguePath;
 
-    public SecretDoorInfo(string secretDoorKey)
+    public SecretDoorInfo(string secretDoorKey, int difficulty = Constants.difficultyTwo, string description = null, string customDialoguePath = null)
     {
         this.secretDoorKey = secretDoorKey;
+        this.difficulty = difficulty;
+        this.description = description;
+        this.customDialoguePath = customDialoguePath;
     }
 
     public virtual bool hasBeenDiscovered()
@@ -20,10 +26,22 @@ public class SecretDoorInfo : IStoryVariableSource
 
     public Story addVariables(Story story)
     {
-        if (story.variablesState[nameof(secretDoorKey)] != null)
+        if (story.variablesState[InkVariableNameList.secretDoorKey] != null)
         {
-            story.variablesState[nameof(secretDoorKey)] = secretDoorKey;
+            story.variablesState[InkVariableNameList.secretDoorKey] = secretDoorKey;
         }
+
+        if (story.variablesState[InkVariableNameList.wisDiffVarName] != null)
+        {
+            story.variablesState[InkVariableNameList.wisDiffVarName] = difficulty;
+        }
+
+        if (description != null && 
+            story.variablesState[InkVariableNameList.description] != null)
+        {
+            story.variablesState[InkVariableNameList.description] = description;
+        }
+
 
         return story;
     }
@@ -35,7 +53,7 @@ public class TutorialSecretDoorInfo : SecretDoorInfo
     private StartSpawningAllTrueFlagList tutorialFlagList;
 
     public TutorialSecretDoorInfo(string secretDoorKey, StartSpawningAllTrueFlagList tutorialFlagList) :
-    base(secretDoorKey)
+    base(secretDoorKey, Constants.difficultyTwo)
     {
         this.tutorialFlagList = tutorialFlagList;
     }

@@ -99,8 +99,6 @@ public static class Constants
 
     public readonly static Vector3 flippedXScale = new Vector3(-1f, 1f, 1f);
 
-    public readonly static Vector3 antiAngleAdjustmentScale = new Vector3(0.98776f,1.15741f,1f);
-
     public const int resistanceBonusPerTier = 3;
 
     public const float minFontSize = 12f;

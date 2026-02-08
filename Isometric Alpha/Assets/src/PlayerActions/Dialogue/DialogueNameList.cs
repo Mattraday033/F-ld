@@ -37,6 +37,10 @@ public static class DialogueNameList
     public const string gateWithKeyPath = gatesPath + "Gate With Key";
     #endregion
 
+    #region Secret Doors
+    public const string suspiciousWallPath = interactablesPath + NPCNameList.suspiciousWall;
+    #endregion
+
     #region Vaultable Objects
     public const string vaultableObjectPath = interactablesPath + "VaultableObject";
     public const string vaultableOrDestroyableObjectPath = interactablesPath + "VaultableOrDestroyableObject";
@@ -270,6 +274,7 @@ public static class DialogueNameList
     #region Manse-2F-Office
 
     public const string officeDoorPathName = manseSecondFloorPathName + NPCNameList.officeDoor;
+    public const string officeSecretDoorPathName = manseSecondFloorPathName + "OfficeSecretDoor";
     public const string directorPathName = manseSecondFloorPathName + NPCNameList.director;
     public const string directorDefeatedPathName = manseSecondFloorPathName + NPCNameList.director + "DefeatedConvo";
 

@@ -24,7 +24,7 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable
         this.owner = owner;
         this.equippedItems = equippedItems;
 
-        checForEmptyOffHandSlot();
+        checkForEmptyOffHandSlot();
 
         foreach (EquippableItem equippedItem in equippedItems)
         {
@@ -51,7 +51,7 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable
         return ItemList.getOffHandFist();
     }
 
-    public void checForEmptyOffHandSlot()
+    public void checkForEmptyOffHandSlot()
     {
         if(equippedItems[Weapon.offHandSlotIndex] == null)
         {
@@ -140,7 +140,14 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable
                 equippedItems[item.getSlotID()] = null;
             }
 
-        checForEmptyOffHandSlot();
+        checkForEmptyOffHandSlot();
+
+        AllyStats equipmentOwner = getStatSource() as AllyStats;
+
+        if(equipmentOwner != null)
+        {
+            equipmentOwner.checkStatsAfterEquipmentRemoval();
+        }
 
         OnEquipmentChange.Invoke();
     }
@@ -183,20 +190,6 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable
     {
         return equippedItems.GetEnumerator();
     }
-
-    /*
-        private static bool isDualWielding()
-        {
-            if(equippedItems[Weapon.offHandSlotIndex] == null || 
-                !equippedItems[Weapon.offHandSlotIndex].getSubtype().Equals(Weapon.subtype))
-            {
-                return false;
-            } else
-            {
-                return true;
-            }
-        }
-    */
 
     #region ICloneable
 

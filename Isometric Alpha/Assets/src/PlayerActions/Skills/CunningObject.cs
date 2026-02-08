@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public enum CunningObjectSpriteCategory { Statue = 0 }
+public enum CunningObjectSpriteCategory { Crank = 0 }
 
 public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
 {
@@ -54,18 +54,6 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
     public void setToCurrentSprite()
     {
         spriteRenderer.sprite = CunningObjectSpriteList.getCurrentSprite(getCurrentFacing(), category);
-
-        switch (getCurrentFacing())
-        {
-            case Facing.NorthWest:
-            case Facing.SouthWest:
-                spriteRenderer.flipX = true;
-                break;
-            case Facing.NorthEast:
-            case Facing.SouthEast:
-                spriteRenderer.flipX = false;
-                break;
-        }
     }
 
     public int getChargeCost(SkillType skillType)
@@ -188,10 +176,10 @@ public static class CunningObjectSpriteList
     {
         cunningObjectSprites = new Dictionary<KeyValuePair<Facing, CunningObjectSpriteCategory>, string>();
 
-        cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.NorthEast, CunningObjectSpriteCategory.Statue), PrefabNames.statueBack);
-        cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.NorthWest, CunningObjectSpriteCategory.Statue), PrefabNames.statueBack);
+        cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.NorthWest, CunningObjectSpriteCategory.Crank), PrefabNames.crankSE);
+        cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.SouthWest, CunningObjectSpriteCategory.Crank), PrefabNames.crankSE);
 
-        cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.SouthEast, CunningObjectSpriteCategory.Statue), PrefabNames.statueFront);
-        cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.SouthWest, CunningObjectSpriteCategory.Statue), PrefabNames.statueFront);
+        cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.NorthEast, CunningObjectSpriteCategory.Crank), PrefabNames.crankSW);
+        cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.SouthEast, CunningObjectSpriteCategory.Crank), PrefabNames.crankSW);
     }
 }
