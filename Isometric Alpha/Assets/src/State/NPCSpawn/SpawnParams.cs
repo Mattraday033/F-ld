@@ -255,16 +255,23 @@ public class PartyMemberSpawnParams : InteractableSpawnParams
 
 public class HiddenTerrainSpawnParams : SpawnParams
 {
-    private string secretDoorFlag;
-
-    public HiddenTerrainSpawnParams(string secretDoorFlag)
+    private List<string> secretDoorKeys = new List<string>();
+    public HiddenTerrainSpawnParams(List<string> secretDoorKeys)
     {
-        this.secretDoorFlag = secretDoorFlag;
+        this.secretDoorKeys = secretDoorKeys;
     }
 
     public override bool canSpawn(string npcName)
     {
-        return SecretDoorFlags.secretDoorHasBeenDiscovered(secretDoorFlag);
+        foreach(string key in secretDoorKeys)
+        {
+            if(SecretDoorFlags.secretDoorHasBeenDiscovered(key))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
 
@@ -286,7 +293,7 @@ public class HostilitySpawnParams : SpawnParams
 public class SecretDoorObstacleSpawnParams : HiddenTerrainSpawnParams
 {
     public SecretDoorObstacleSpawnParams(string secretDoorFlag):
-    base(secretDoorFlag)
+    base(new List<string>(){secretDoorFlag})
     {
         
     }

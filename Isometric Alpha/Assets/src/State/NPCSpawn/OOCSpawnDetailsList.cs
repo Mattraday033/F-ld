@@ -68,7 +68,7 @@ public static class OOCSpawnDetailsList
         #region 5SlaveShack
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchThree, LocationNameList.slaveShackFive, Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchThree, locationName: LocationNameList.slaveShackFive, index: Constants.indexOne));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.ervin, new Vector3Int(3, -2), LocationNameList.slaveShackFive, facing: Facing.SouthWest));
 
@@ -77,8 +77,8 @@ public static class OOCSpawnDetailsList
         #region 6SlaveShack
         list = new List<OOCSpawnDetails>();
         
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchOne, LocationNameList.slaveShackSix, Constants.indexOne));
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchTwo, LocationNameList.slaveShackSix, Constants.indexTwo));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchOne, locationName: LocationNameList.slaveShackSix, index: Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchTwo, locationName: LocationNameList.slaveShackSix, index: Constants.indexTwo));
         
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.thatch, new Vector3Int(-1, 1), LocationNameList.slaveShackSix, facing: Facing.SouthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slate, new Vector3Int(9, 1), LocationNameList.slaveShackSix, animationType: CharacterAnimationType.Death_Front));
@@ -209,7 +209,7 @@ public static class OOCSpawnDetailsList
         #region Stables
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.centerCampWallPatchOne, LocationNameList.stables, Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.centerCampWallPatchOne, locationName: LocationNameList.stables, index: Constants.indexOne));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.beam, new Vector3Int(5, 5), LocationNameList.stables, facing: Facing.SouthEast));
 
@@ -236,7 +236,7 @@ public static class OOCSpawnDetailsList
         #region Temple
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.centerCampWallPatchTwo, LocationNameList.temple, Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.centerCampWallPatchTwo, locationName: LocationNameList.temple, index: Constants.indexOne));
 
         oocSpawnDetailsDict.Add(LocationNameList.temple, list);
         #endregion
@@ -589,7 +589,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl2FirstSecretDoor, ZoneKeyList.mineLvl2, LocationNameList.section1a, Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl2FirstSecretDoor, areaName: ZoneKeyList.mineLvl2, sectionName: LocationNameList.section1a, index: Constants.indexOne));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -3), TutorialSequenceList.firstHostilityTutorialSequenceKey,
                                                                           TutorialSequenceList.firstHostitilityTutorialSeenFlag));
@@ -836,7 +836,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3PuzzleDoor, ZoneKeyList.mineLvl3,  LocationNameList.section1b, Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3PuzzleDoor, areaName: ZoneKeyList.mineLvl3, sectionName:LocationNameList.section1b, index: Constants.indexOne));
 
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.mineLvl3Wall, new Vector3Int(0, -6), PrefabNames.mineLvl3WallSecretDoor, SecretDoorKeyList.mineLvl3PuzzleDoor));
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.mineLvl3Wall, new Vector3Int(1, -3), PrefabNames.mineLvl3WallSecretDoor, SecretDoorKeyList.mineLvl3PuzzleDoor));
@@ -865,7 +865,7 @@ public static class OOCSpawnDetailsList
         list.Add(new HiddenButtonSpawnDetails(new Vector3Int(9, -3), Constants.indexTwo, SecretDoorKeyList.mineLvl3PuzzleDoor));
         list.Add(new HiddenButtonSpawnDetails(new Vector3Int(7, 1), Constants.indexThree, SecretDoorKeyList.mineLvl3PuzzleDoor));
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3PuzzleFinished, ZoneKeyList.mineLvl3,  LocationNameList.section1b, Constants.indexTwo));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3PuzzleFinished, areaName: ZoneKeyList.mineLvl3, sectionName: LocationNameList.section1b, index: Constants.indexTwo));
 
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(new Vector3Int(12, -8), SecretDoorKeyList.mineLvl3PuzzleFinished));
   
@@ -1050,7 +1050,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.water, new Vector3Int(-7, -4), PrefabNames.water, SortingLayerManager.groundSortingLayerInfo, SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain));
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.water, new Vector3Int(-7, -5), PrefabNames.water, SortingLayerManager.groundSortingLayerInfo, SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain));
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain, ZoneKeyList.mineLvl3,  LocationNameList.section6a, Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain, areaName: ZoneKeyList.mineLvl3, sectionName: LocationNameList.section6a, index: Constants.indexOne));
 
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(2, 4), VaultableObject.diffThreeVaultableGap, spriteName: PrefabNames.stoneVaultableGap, offset: Constants.onTableHeightOffset*10, sortingLayerInfo: SortingLayerManager.groundSortingLayerInfo));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(0, 4), VaultableObject.diffThreeVaultableGap, spriteName: PrefabNames.stoneVaultableGap, offset: Constants.onTableHeightOffset*10, sortingLayerInfo: SortingLayerManager.groundSortingLayerInfo));
@@ -1075,7 +1075,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(new Vector3Int(-9, 1), SecretDoorKeyList.mineLvl3_7UnstablePillarHiddenTerrain));
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_7UnstablePillarHiddenTerrain, ZoneKeyList.mineLvl3,  LocationNameList.section7, Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_7UnstablePillarHiddenTerrain, areaName:ZoneKeyList.mineLvl3,  sectionName: LocationNameList.section7, index: Constants.indexOne));
 
         blockerSpawnDetails = new List<ObstacleSpawnDetails>();
 
@@ -1109,7 +1109,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(-9, 3), facing: Facing.NorthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardMarcos+1, new Vector3Int(-6, 6), facing: Facing.NorthWest));
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_7PocketSealedRubble, ZoneKeyList.mineLvl3,  LocationNameList.section7, Constants.indexTwo));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_7PocketSealedRubble, areaName:ZoneKeyList.mineLvl3,  sectionName: LocationNameList.section7, index: Constants.indexTwo));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section7, list);
 
@@ -1206,7 +1206,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.manseHiddenGardenFlag, ZoneKeyList.manseFirstFloor, LocationNameList.section2a, Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.manseHiddenGardenFlag, areaName:ZoneKeyList.manseFirstFloor, sectionName: LocationNameList.section2a, index: Constants.indexOne));
 
         list.Add(new BookSpawnDetails(NPCNameList.orders, new Vector3Int(7, 0), PrefabNames.note, ItemList.orderTranscriptIndex, offset: Constants.onGroundHeightOffset));
 
@@ -1247,7 +1247,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new BookSpawnDetails(NPCNameList.orders, new Vector3Int(6, 0), PrefabNames.note, ItemList.orderTranscriptIndex));
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.meetingRoomSecretEntrance, ZoneKeyList.manseFirstFloor, LocationNameList.section3a, Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(secretDoorKeys: new List<string>(){SecretDoorKeyList.meetingRoomSecretEntrance, SecretDoorKeyList.officeSecretEntranceFlag}, areaName:ZoneKeyList.manseFirstFloor, sectionName: LocationNameList.section3a, index: Constants.indexOne));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3a, list);
 
@@ -1279,7 +1279,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ShelfSpawnDetails(Constants.indexOne, new Vector3Int(3, 3), Facing.SouthEast));
         list.Add(new ShelfSpawnDetails(Constants.indexTwo, new Vector3Int(8, 3), Facing.SouthWest));
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.secretBookShelfFlag, ZoneKeyList.manseFirstFloor, LocationNameList.section3c, Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.secretBookShelfFlag, areaName: ZoneKeyList.manseFirstFloor, sectionName: LocationNameList.section3c, index: Constants.indexOne));
 
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.halfWall, new Vector3Int(3, -1), PrefabNames.manseHalfWallSecretDoor, SecretDoorKeyList.secretBookShelfFlag));
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.halfWall, new Vector3Int(2, -1), PrefabNames.manseHalfWallSecretDoor, SecretDoorKeyList.secretBookShelfFlag));
@@ -1404,7 +1404,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.nandor, new Vector3Int(-3, 0), facing: Facing.NorthEast)); 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.page, new Vector3Int(2, 2), facing: Facing.SouthEast));
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.officeSecretEntranceFlag, ZoneKeyList.manseSecondFloor, LocationNameList.office, Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(secretDoorKeys: new List<string>(){SecretDoorKeyList.meetingRoomSecretEntrance, SecretDoorKeyList.officeSecretEntranceFlag}, areaName: ZoneKeyList.manseSecondFloor, sectionName: LocationNameList.office, index: Constants.indexOne));
 
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(1, 2), VaultableObject.diffTwoVaultableBarrelsOneTile));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(1, 1), VaultableObject.diffTwoVaultableBarrelsOneTile));

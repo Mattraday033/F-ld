@@ -6,14 +6,23 @@ using Ink.Runtime;
 public class SecretDoorInfo : IStoryVariableSource
 {
 
-    public string secretDoorKey;
+    public List<string> secretDoorKeys = new List<string>();
     public int difficulty;
     public string description;
     public string customDialoguePath;
 
-    public SecretDoorInfo(string secretDoorKey, int difficulty = Constants.difficultyTwo, string description = null, string customDialoguePath = null)
+    public SecretDoorInfo(string secretDoorKey = null, List<string> secretDoorKeys = null, int difficulty = Constants.difficultyTwo, string description = null, string customDialoguePath = null)
     {
-        this.secretDoorKey = secretDoorKey;
+        if(secretDoorKey != null)
+        {
+            this.secretDoorKeys.Add(secretDoorKey);
+        }
+
+        if(secretDoorKeys != null)
+        {
+            this.secretDoorKeys.AddRange(secretDoorKeys);
+        }
+
         this.difficulty = difficulty;
         this.description = description;
         this.customDialoguePath = customDialoguePath;
@@ -21,14 +30,22 @@ public class SecretDoorInfo : IStoryVariableSource
 
     public virtual bool hasBeenDiscovered()
     {
-        return SecretDoorFlags.secretDoorHasBeenDiscovered(secretDoorKey);
+        foreach(string key in secretDoorKeys)
+        {
+            if(SecretDoorFlags.secretDoorHasBeenDiscovered(key))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public Story addVariables(Story story)
     {
         if (story.variablesState[InkVariableNameList.secretDoorKey] != null)
         {
-            story.variablesState[InkVariableNameList.secretDoorKey] = secretDoorKey;
+            story.variablesState[InkVariableNameList.secretDoorKey] = secretDoorKeys[0];
         }
 
         if (story.variablesState[InkVariableNameList.wisDiffVarName] != null)
@@ -53,7 +70,7 @@ public class TutorialSecretDoorInfo : SecretDoorInfo
     private StartSpawningAllTrueFlagList tutorialFlagList;
 
     public TutorialSecretDoorInfo(string secretDoorKey, StartSpawningAllTrueFlagList tutorialFlagList) :
-    base(secretDoorKey, Constants.difficultyTwo)
+    base(secretDoorKey, difficulty: Constants.difficultyTwo)
     {
         this.tutorialFlagList = tutorialFlagList;
     }
@@ -67,7 +84,7 @@ public class TutorialSecretDoorInfo : SecretDoorInfo
 public class ObservableObject : MonoBehaviour, INonRevealableNameSource
 {
     public bool observed = false;
-    public string secretDoorKey;
+    public List<string> secretDoorKeys = new List<string>();
     public SpriteRenderer spriteRenderer;
     public SpriteRenderer terrainRenderer;
 
@@ -170,12 +187,10 @@ public class ObservableObject : MonoBehaviour, INonRevealableNameSource
 
     public void hideSecretDoor(string doorToBeHidden)
     {
-        if (!doorToBeHidden.Equals(secretDoorKey))
+        if (secretDoorKeys.Contains(doorToBeHidden))
         {
-            return;
+            GameObject.DestroyImmediate(gameObject);
         }
-
-        GameObject.DestroyImmediate(gameObject);
     }
 
 }

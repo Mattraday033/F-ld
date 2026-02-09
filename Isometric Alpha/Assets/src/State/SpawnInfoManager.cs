@@ -181,7 +181,7 @@ public static class SpawnInfoManager
 
             HiddenTerrainSpawnDetails hiddenTerrainDetails = details as HiddenTerrainSpawnDetails;
 
-            if (hiddenTerrainDetails.secretDoorFlag.Equals(secretDoorFlag))
+            if (hiddenTerrainDetails.secretDoorKeys.Contains(secretDoorFlag))
             {
                 GameObject spawnedObject = spawnInteractable(details);
                 allSpawnedObjects.Add(spawnedObject);

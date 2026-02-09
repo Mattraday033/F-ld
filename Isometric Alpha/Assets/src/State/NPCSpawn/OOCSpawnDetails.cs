@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public abstract class OOCSpawnDetails
 {
@@ -1422,7 +1421,7 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
 
         ObservableObject observableObject = secretDoor.GetComponent<ObservableObject>();
 
-        observableObject.secretDoorKey = secretDoorInfo.secretDoorKey;
+        observableObject.secretDoorKeys = secretDoorInfo.secretDoorKeys;
 
         if(terrainSpriteName != null && terrainSpriteName.Length > 0)
         {
@@ -1739,7 +1738,9 @@ public class BookSpawnDetails : OffSetSpawnDetails
 public class HiddenTerrainSpawnDetails : OOCSpawnDetails
 {
 
-    public string secretDoorFlag;
+
+    public List<string> secretDoorKeys = new List<string>();
+
     protected string areaName;
     protected string sectionName;
 
@@ -1747,10 +1748,18 @@ public class HiddenTerrainSpawnDetails : OOCSpawnDetails
 
     protected int index;
 
-    public HiddenTerrainSpawnDetails(string secretDoorFlag, string locationName, int index) :
+    public HiddenTerrainSpawnDetails(string secretDoorKey = null, List<string> secretDoorKeys = null, string locationName = "", int index = 0) :
     base()
     {
-        this.secretDoorFlag = secretDoorFlag;
+        if(secretDoorKey != null)
+        {
+            this.secretDoorKeys.Add(secretDoorKey);
+        }
+
+        if(secretDoorKeys != null)
+        {
+            this.secretDoorKeys.AddRange(secretDoorKeys);
+        }
 
         this.locationName = locationName;
 
@@ -1760,10 +1769,19 @@ public class HiddenTerrainSpawnDetails : OOCSpawnDetails
         this.sectionName = null;
     }
 
-    public HiddenTerrainSpawnDetails(string secretDoorFlag, string areaName, string sectionName, int index) :
+    public HiddenTerrainSpawnDetails(string secretDoorKey = null, List<string> secretDoorKeys = null, string areaName = "", string sectionName = "", int index = 0) :
     base()
     {
-        this.secretDoorFlag = secretDoorFlag;
+
+        if(secretDoorKey != null)
+        {
+            this.secretDoorKeys.Add(secretDoorKey);
+        }
+
+        if(secretDoorKeys != null)
+        {
+            this.secretDoorKeys.AddRange(secretDoorKeys);
+        }
 
         this.areaName = areaName;
         this.sectionName = sectionName;
@@ -1792,7 +1810,7 @@ public class HiddenTerrainSpawnDetails : OOCSpawnDetails
 
     public override SpawnParams getSpawnParams()
     {
-        return new HiddenTerrainSpawnParams(secretDoorFlag);
+        return new HiddenTerrainSpawnParams(secretDoorKeys);
     }
 
     public override Transform getParent()
@@ -1815,7 +1833,7 @@ public class HostilityTerrainSpawnDetails : HiddenTerrainSpawnDetails
     private const string hostilitySecretDoorFlagPlaceholder = "Hostility-";
 
     public HostilityTerrainSpawnDetails(string locationName, int index) :
-    base(hostilitySecretDoorFlagPlaceholder+index, locationName, index)
+    base(hostilitySecretDoorFlagPlaceholder+index, locationName: locationName, index: index)
     {
     }
 
