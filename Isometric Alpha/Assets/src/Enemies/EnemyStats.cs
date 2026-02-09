@@ -52,6 +52,7 @@ public class EnemyStats : Stats
         {
             foreach (Trait trait in traits)
             {
+                trait.traitApplier = this;
                 addTrait(trait);
             }
         }
@@ -130,9 +131,8 @@ public class EnemyStats : Stats
 
     public override int getTotalArmorRating()
     {
-        return (int)((double)armor * getCurrentTotalArmorPercentage());
+        return armor + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getArmorFormula());
     }
-
 
     public virtual void spawningCombatAction()
     {
@@ -285,22 +285,22 @@ public class EnemyStats : Stats
 
     #region IDescribableInBlocks
 
-    public override List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
-    {
-        List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
+    // public override List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
+    // {
+    //     List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+    //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(currentHealth, getTotalHealth()));
+    //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(currentHealth, getTotalHealth()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getTotalArmorRatingForDisplay()));
+    //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getTotalArmorRatingForDisplay()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getInvulnerableBlock(getInvulnerability()));
+    //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getInvulnerableBlock(getInvulnerability()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getVulnerableBlock(getVulnerability()));
+    //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getVulnerableBlock(getVulnerability()));
 
-        return buildingBlocks;
-    }
+    //     return buildingBlocks;
+    // }
 
     #endregion
 

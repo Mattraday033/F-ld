@@ -426,6 +426,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return 0;
     }
 
+    public virtual int getArmorPenetration()
+    {
+        return StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusArmorPenetrationFormula());
+    }
+
     public virtual bool rollAgainstMentalResistance()
     {
         return failedToResist;
@@ -535,10 +540,20 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     }
 
     public abstract int getTotalArmorRating();
+    public virtual int getTotalArmorShred()
+    {
+        return StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getArmorShredFormula());
+    }
 
     public string getTotalArmorRatingForDisplay()
     {
-        return getTotalArmorRating() + "";
+        if(getTotalArmorRating() - getTotalArmorShred() < 0)
+        {
+            return Constants.zeroRating + "%";
+        } else
+        {
+            return (getTotalArmorRating() - getTotalArmorShred()).ToString() + "%";
+        }
     }
 
     public virtual double getCritDamageMultiplier()
@@ -592,10 +607,10 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return !costsPayable.Contains(false);
     }
 
-    public int modifyIncomingDamage(int baseDamage)
+    public int modifyIncomingDamage(int baseDamage, int armorPen)
     {
-        int modifiedDamage = baseDamage;
-        // int modifiedDamage = (int)(((double)baseDamage) * (1.0 - Armor.getDamageReduction(getTotalArmorRating())));
+        // int modifiedDamage = baseDamage;
+        int modifiedDamage = (int)(((double)baseDamage) * (1.0 - Armor.getDamageReduction(getTotalArmorRating() - (getTotalArmorShred() + armorPen))));
 
         int vulnInvulnMod = int.Parse(getVulnerability()) - int.Parse(getInvulnerability());
 
@@ -928,20 +943,6 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     #region Equipment
 
-    public double getCurrentTotalArmorPercentage()
-    {
-        double currentTotalArmorPercentage = 1.0 - Helpers.sum<Trait>(traitContainer, t => t.getPercentageArmorLost());
-
-        if (currentTotalArmorPercentage < 0.0)
-        {
-            return 0.0;
-        }
-        else
-        {
-            return currentTotalArmorPercentage;
-        }
-    }
-
     public virtual EquippedItems getEquippedItems()
     {
         return null;
@@ -1152,12 +1153,17 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
         List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName().Replace(PartyManager.playerMarker, "")));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(currentHealth, getTotalHealth()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getTotalArmorRatingForDisplay()));
+        if(getTotalArmorShred() > 0)
+        {
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getTotalArmorRatingForDisplay(), getTotalArmorRating() + " - " + getTotalArmorShred()));
+        } else
+        {
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getTotalArmorRatingForDisplay()));
+        }
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getInvulnerableBlock(getInvulnerability()));
 

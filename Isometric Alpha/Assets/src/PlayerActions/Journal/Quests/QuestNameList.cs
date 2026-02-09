@@ -109,7 +109,7 @@ public static class QuestNameList
     public const string delvingDeeperStepTitleZero = "The first breadcrumb.";
     public const string delvingDeeperStepTitleOne = "First passage found.";
     public const string delvingDeeperStepTitleTwo = "The second breadcrumb.";
-    public const string delvingDeeperStepTitleThree = "Second passage pound.";
+    public const string delvingDeeperStepTitleThree = "Second passage found.";
 
     // Explore the Mine
     public const string exploreTheMineQuestTitle = "Explore the Mine";

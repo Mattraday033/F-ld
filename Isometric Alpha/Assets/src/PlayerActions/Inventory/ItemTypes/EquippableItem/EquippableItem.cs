@@ -28,29 +28,15 @@ public abstract class EquippableItem : Item, IJSONConvertable
 
     public const string type = "Equip";
 
-    protected string armorFormula;
-
-    public EquippableItem(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string armorFormula, string subtype, int worth) : 
+    public EquippableItem(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string subtype, int worth = 0) : 
     base(listId, key, loreDescription, damageFormula, critFormula, type, subtype, worth)
     {
-        this.armorFormula = armorFormula;
-    }
-
-    [JsonConstructor]
-    public EquippableItem(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string armorFormula, string subtype, int worth, int quantity) : 
-    base(listId, key, loreDescription, damageFormula, critFormula, type, subtype, worth, quantity)
-    {
-        this.armorFormula = armorFormula;
+        
     }
 
     public int getArmorRating()
     {
-        return DamageCalculator.calculateFormula(armorFormula, getStatSource());
-    }
-
-    public override string getArmorFormula()
-    {
-        return armorFormula;
+        return DamageCalculator.calculateFormula(getArmorFormula(), getStatSource());
     }
 
     public string getArmorRatingForDisplay()

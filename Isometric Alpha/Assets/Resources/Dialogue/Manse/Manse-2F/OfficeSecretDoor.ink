@@ -59,8 +59,9 @@ You search around for anything that catches your eye, and notice that between tw
 
 fadeToBlack(true, false)
 
-openGate()
+//openGate()
 addSecretDoorFlag({secretDoorKey})
+finishQuest(Delving Deeper, true, Second passage found.)
 
 fadeBackIn(60)
 

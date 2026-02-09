@@ -19,6 +19,11 @@ public class InspectNode : MonoBehaviour
     [SerializeField]
     private Transform hover;
 
+    // private void Awake()
+    // {
+    //     gameObject.SetActive(PlayerOOCStateManager.currentActivity != OOCActivity.inChestUI);
+    // }
+
     private void OnEnable()
     {
         gameObject.SetActive(!CombatStateManager.inCombat);

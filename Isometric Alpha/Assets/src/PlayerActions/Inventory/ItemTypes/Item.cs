@@ -18,7 +18,7 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
     protected string damageFormula;
     protected string critFormula;
 
-	private int worth;
+	protected int worth;
 	private int quantity;
 
     public Stats equipTarget;
@@ -392,6 +392,16 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 		return false;
 	}
 
+    public virtual Trait getAppliedTrait()
+    {
+        return null;
+    }
+
+    public virtual bool targetsAllySection()
+    {
+        return false;
+    }
+
 	public object Clone()
 	{
 		return this.MemberwiseClone();
@@ -521,7 +531,12 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 
 	public List<IDescribable> getRelatedDescribables()
 	{
-		return new List<IDescribable>();
+        if(getAppliedTrait() == null)
+        {
+		    return new List<IDescribable>();
+        }
+
+		return new List<IDescribable>() { getAppliedTrait() };
 	}
 
 	public bool buildableWithBlocks()

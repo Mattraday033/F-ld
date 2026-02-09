@@ -187,7 +187,14 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
     private string getName()
     {
-        return DialogueList.scrubNameOfEndNumbers(nameSource.getName());
+        string name = nameSource.getName();
+
+        if(name.Contains("#"))
+        {
+            return name;
+        }
+
+        return DialogueList.scrubNameOfEndNumbers(name);
     }
 
     public void destroyNameTag()

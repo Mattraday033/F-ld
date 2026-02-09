@@ -25,13 +25,14 @@ public abstract class Armor : EquippableItem, IJSONConvertable
     private int armorTier;
     private int slotID;
 
-	public Armor(ItemListID listID, string key, string loreDescription, string armorFormula, int slotID, int armorTier, 
+	public Armor(ItemListID listID, string key, string loreDescription, int slotID, int armorTier, 
                                                                                                          string damageFormula = Constants.zeroRating, 
                                                                                                          string critFormula = Constants.zeroRating) : 
-    base(listID, key, loreDescription, damageFormula, critFormula, armorFormula, subtype, calculateWorth(DamageCalculator.calculateFormula(armorFormula, worthStatsSource), slotID))
+    base(listID, key, loreDescription, damageFormula, critFormula, subtype) 
     {
         this.slotID = slotID;
         this.armorTier = armorTier;
+        this.worth = calculateWorth(DamageCalculator.calculateFormula(getArmorFormula(), worthStatsSource), slotID);
     }
 
     public override string getIconName()
@@ -51,7 +52,12 @@ public abstract class Armor : EquippableItem, IJSONConvertable
 
 	public static double getDamageReduction(int armorRating)
 	{
-		double damageReduction = (double)(armorRating / 2);
+        if(armorRating < 0)
+        {
+            armorRating = 0;
+        }
+
+		double damageReduction = (double) armorRating;
 
 		if (damageReduction > maximumArmorDamageReduction)
 		{
@@ -157,7 +163,6 @@ public abstract class Armor : EquippableItem, IJSONConvertable
         DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getIconName()));
         DescriptionPanel.setImage(panel.typeIconPanel, Helpers.loadSpriteFromResources(getTypeIconName()));
         DescriptionPanel.setImageColor(panel.typeIconBackgroundPanel, getTypeIconBackgroundColor());
-
 	}
 
 	public override string getTypeIconName()
@@ -207,22 +212,7 @@ public abstract class Armor : EquippableItem, IJSONConvertable
     {
         List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-        // if (!getDamageFormula().Equals(Constants.zeroRating))
-        // {
-        //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getDamageBlock(getDamageFormulaTotal().ToString(), getDamageFormula()), getDamageFormula()));
-        // }
-
-        // if (!getCritFormula().Equals(Constants.zeroRating))
-        // {
-        //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getCritBlock(getCritFormulaTotal().ToString(), getCritFormula()), getCritFormula()));
-        // }
-
         buildingBlocks.AddRange(base.getDescriptionBuildingBlocks());
-
-        if (getArmorRating() > Constants.sizeZero)
-        {
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getArmorRatingForDisplay(), armorFormula));
-        }
 
         buildingBlocks.AddRange(getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
 

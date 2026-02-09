@@ -211,7 +211,7 @@ public static class AbilityList
 
 		//bat abilities
 		enemyAbilityDictionary.Add(flurryKey, new Ability(CombatActionSettings.build(DescriptionParams.build(flurryKey, "A devastating surge of claws and jaws."), DamageParams.build("10", "5"), AnimationParams.build(EffectAnimationType.BatSwarm))));
-        enemyAbilityDictionary.Add(screechKey, new Ability(CombatActionSettings.build(DescriptionParams.build(screechKey, "A howl so loud it draws blood.", TraitList.caveMadnessKey), DamageParams.build("6", "2"), TargetParams.build(Range.boxOneIndex), TraitList.caveMadness)));
+        enemyAbilityDictionary.Add(screechKey, new Ability(CombatActionSettings.build(DescriptionParams.build(screechKey, "A howl so loud it draws blood.", StatSourceNameList.caveMadnessKey), DamageParams.build("6", "2"), TargetParams.build(Range.boxOneIndex), TraitList.caveMadness)));
         enemyAbilityDictionary.Add(spawnPupsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(spawnPupsKey, "The bat calls forth it's pups to fight for it.")), MonsterNameList.batSwarm));
         enemyAbilityDictionary.Add(swarmRushKey, new Ability(CombatActionSettings.build(DescriptionParams.build(swarmRushKey, "The swarm flutters about their target, clawing and biting ferociously.", colonyCrushKey), DamageParams.build("3", "2"), AnimationParams.build(EffectAnimationType.BatSwarm))));
         enemyAbilityDictionary.Add(batClawName, new Ability(CombatActionSettings.build(batClawName, batClawDescription, DamageParams.build("6", "8"), AnimationParams.build(EffectAnimationType.Pierce))));
@@ -364,7 +364,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		currentKey = generateAbilityKey(wisdomKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build(crushingBlowName, "A slam that shakes the enemy to their core, leaving them vulnerable. Until the end of the turn they can only muster half of their normal armor value. Costs three Stacks of any Stance."), DamageParams.build("4W + 2S", "W + D"), TargetParams.build(Range.horizontalTwoIndex), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), CostParams.build(ActionCostType.Stance, fiveStackCastCost), AnimationParams.build(EffectAnimationType.Blunt), TraitList.crushingBlow)));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build(crushingBlowName, "A slam that shakes the enemy to their core, leaving them vulnerable. Until the end of the turn they can only muster half of their normal armor value. Costs five Stacks of any Stance."), DamageParams.build("4W + 2S", "W + D"), TargetParams.build(Range.horizontalTwoIndex), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), CostParams.build(ActionCostType.Stance, fiveStackCastCost), AnimationParams.build(EffectAnimationType.Blunt), TraitList.crushingBlow)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(wisdomKeyChar);

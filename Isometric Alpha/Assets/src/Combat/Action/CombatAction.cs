@@ -264,7 +264,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
             baseDamage = (int)((float)baseDamage * actor.getSurpriseDamageMultiplier());
         }
 
-        int finalDamage = targetCombatant.modifyIncomingDamage(baseDamage);
+        int finalDamage = targetCombatant.modifyIncomingDamage(baseDamage, actor.getArmorPenetration());
 
         return new int[] { finalDamage };
     }
@@ -1431,7 +1431,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         }
     }
 
-    public List<IDescribable> getRelatedDescribables()
+    public virtual List<IDescribable> getRelatedDescribables()
     {
         return getTraitsToDescribe().Cast<IDescribable>().ToList();
     }

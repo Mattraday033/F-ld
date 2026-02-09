@@ -32,10 +32,6 @@ public class SquadAbility : Ability
 		int baseDamage = DamageCalculator.calculateFormula(damageFormulaToUse, getActorStats());
 		Stats actor = getActorStats();
 		
-        Debug.LogError("Squad Ability may not be adding bonus damage");
-
-		// baseDamage = actor.modifyOutgoingDamage(baseDamage);
-		
 		if(isCrit)
 		{	
 			baseDamage = (int) (baseDamage * actor.getCritDamageMultiplier());
@@ -47,7 +43,7 @@ public class SquadAbility : Ability
 			baseDamage = (int) (baseDamage * actor.getSurpriseDamageMultiplier());
 		}
 		
-		int finalDamage = targetCombatant.modifyIncomingDamage(baseDamage);
+		int finalDamage = targetCombatant.modifyIncomingDamage(baseDamage, actor.getArmorPenetration());
 		
 		return new int[]{finalDamage};
 	}

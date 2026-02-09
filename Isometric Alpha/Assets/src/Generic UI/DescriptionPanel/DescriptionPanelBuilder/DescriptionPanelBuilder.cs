@@ -242,6 +242,16 @@ public struct DescriptionPanelBuildingBlock
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.armorScoreIconName, formula);
     }
 
+    public static DescriptionPanelBuildingBlock getArmorShredBlock(string text)
+    {
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.armorShredIconName);
+    }
+
+    public static DescriptionPanelBuildingBlock getArmorShredBlock(string text, string formula)
+    {
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.armorShredIconName, formula);
+    }
+
     public static DescriptionPanelBuildingBlock getAmountBlock(string text)
     {
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.amountIconName);
@@ -837,6 +847,7 @@ public static class IconList
     public const string regenIconName = "Minor Regeneration";
     public const string cunningIconName = "Cunning";
     public const string extraArmorIconName = "Extra Armor";
+    public const string armorShredIconName = "Armor Shred";
     public const string surpriseRoundDamageMultiplierIconName = "Surprise Round Damage";
     public const string surpriseRoundAmountIconName = "Surprise Round Amount";
     public const string armorPenetrationIconName = "ArmorPenetration";

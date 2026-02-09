@@ -37,16 +37,6 @@ public static class TraitList
 	public const bool isBuff = true;
 	public const bool isDebuff = false;
 
-	private const double crushingBlowArmorShred = .5;
-
-	public const string roastedKey = StatSourceNameList.roastedKey;
-
-	public const string devastatingCriticalsKey = StatSourceNameList.devastatingCriticalsKey;
-
-    public const string caveMadnessKey = StatSourceNameList.caveMadnessKey;
-	public const string chokingKey = StatSourceNameList.chokingKey;
-	public const string chewKey = StatSourceNameList.chewKey;
-
     public static Dictionary<string, Trait> dictionaryOfTraits;
     public static Dictionary<string, Trait> dictionaryOfHiddenTraits;
 
@@ -136,7 +126,7 @@ public static class TraitList
 	public readonly static Trait exitStrategy = new Trait(StatSourceNameList.exitStrategyKey, TraitType.Protection, "This creature and all of it's allies take reduced damage until one round after the surprise round.", "ExitStrategy", roundsLeft: Constants.oneRoundDuration, permanent: false); //exception to round duration rule because it's applied at the top of the first round and thus doesn't need to compensate for the first tick down.
 	public readonly static LinkTrait chokeholdLinkTrait = new LinkTrait(StatSourceNameList.chokeholdKey, "This creature deals half of all damage received to whoever it is linked to.", "Chokehold", Constants.twoRoundDuration, chokeholdDamagePercentage);
 	public readonly static Trait rallied = new DamageBoostTrait(StatSourceNameList.ralliedKey, iconName: "Rally", roundsLeft: Constants.fourRoundDuration, permanent: false);
-	public readonly static Trait chew = new DamageBoostTrait(chewKey, iconName: chewKey, roundsLeft: Constants.threeRoundDuration);
+	public readonly static Trait chewBuzz = new DamageBoostTrait(StatSourceNameList.chewBuzzKey, iconName: StatSourceNameList.chewKey, roundsLeft: Constants.threeRoundDuration);
 
 
 	//temporary debuffs
@@ -146,16 +136,16 @@ public static class TraitList
 	public readonly static Trait tripped = new CrowdControlTrait(StatSourceNameList.tripKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Trip", roundsLeft: Constants.endOfRoundDuration);
 	public readonly static Trait countered = new CrowdControlTrait(StatSourceNameList.counteredKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Trip", roundsLeft: Constants.endOfRoundDuration);
 	public readonly static Trait acidVomit = new Trait(StatSourceNameList.acidVomitKey, TraitType.Wound, "This creature takes extra damage whenever it is hit", "Acid Vomit", roundsLeft: Constants.threeRoundDuration);
-	public readonly static Trait roasted = new StackableTrait(roastedKey, TraitType.Wound, "Roasted to perfection. This creature takes an extra point of damage per stack", roastedKey, startingStacks: Constants.oneStackAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication);
+	public readonly static Trait roasted = new StackableTrait(StatSourceNameList.roastedKey, TraitType.Wound, "Roasted to perfection. This creature takes an extra point of damage per stack", StatSourceNameList.roastedKey, startingStacks: Constants.oneStackAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication);
 	public readonly static Trait crippled = new DamageOnFutureTraitApplicationTrait(StatSourceNameList.crippledKey, TraitType.Wound, "This creature has suffered a crippling blow and takes " + crippledDamageFormula + " whenever a debuff is applied to it.", "Cripple", crippledDamageFormula, TriggerType.Debuff);
 	public readonly static Trait whiplash = new CrowdControlTrait(StatSourceNameList.whiplashKey, TraitType.Wound, "This creature is stunned until the end of the round", "Lashings", roundsLeft: Constants.endOfRoundDuration);
 	public readonly static Trait afraid = new CrowdControlTrait(StatSourceNameList.afraidKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Afraid", roundsLeft: Constants.oneRoundDuration);
-	public readonly static Trait crushingBlow = new ArmorShredTrait(AbilityList.crushingBlowName, TraitType.Wound, "Until the end of the turn this creature can only muster half of their normal armor value.", AbilityList.crushingBlowName, roundsLeft: Constants.endOfRoundDuration, crushingBlowArmorShred);
+	public readonly static Trait crushingBlow = new Trait(AbilityList.crushingBlowName, TraitType.Wound, "Until the end of the turn the damage reduction from this creature's armor is reduced.", AbilityList.crushingBlowName, roundsLeft: Constants.endOfRoundDuration, permanent: true);
 	public readonly static Trait chokehold = new CrowdControlTrait(StatSourceNameList.chokeholdKey, TraitType.Interaction, "This creature is stunned and receives half of all damage dealt to whoever stunned it.", "Chokehold", roundsLeft: Constants.twoRoundDuration);
 	public readonly static Trait insecure = new Trait(StatSourceNameList.insecureKey, TraitType.Mental, "This creature is no longer sure of it's own defenses. This creature takes extra damage whenever it is hit.", "Victimize");
 	public readonly static Trait demoralized = new SlowingTrait(StatSourceNameList.demoralizedKey, TraitType.Mental, "This creature is reluctant to fight. It takes extra damage and always attacks last in the action order.", "Demoralize", Constants.fourRoundDuration);
-	public readonly static Trait choking = new CrowdControlTrait(chokingKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "SmokeBomb", roundsLeft: Constants.oneRoundDuration);
-    public readonly static Trait caveMadness = new SlowingTrait(caveMadnessKey, TraitType.Mental, "The ringing won't stop! The afflicted creature always moves last in the action order, and takes " + caveMadnessExtraDamage + " extra damage when struck.", caveMadnessKey, Constants.twoRoundDuration);
+	public readonly static Trait choking = new CrowdControlTrait(StatSourceNameList.chokingKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "SmokeBomb", roundsLeft: Constants.oneRoundDuration);
+    public readonly static Trait caveMadness = new SlowingTrait(StatSourceNameList.caveMadnessKey, TraitType.Mental, "The ringing won't stop! The afflicted creature always moves last in the action order, and takes " + caveMadnessExtraDamage + " extra damage when struck.", StatSourceNameList.caveMadnessKey, Constants.twoRoundDuration);
 	
 
 	//permanent debuffs
@@ -164,7 +154,7 @@ public static class TraitList
 
 	//EquippedPassiveBuffs
 	public readonly static Trait wearyHeart = new Trait(StatSourceNameList.wearyHeartKey, TraitType.EquippedPassive, "This creature's Armor is increased by 5 and your chance to successfully retreat is increased by 20%.", "WearyHeart");
-	public readonly static Trait devastatingCriticals = new TraitWithRelatedTraits(devastatingCriticalsKey, TraitType.EquippedPassive, new List<IDescribable>(){ afraid }, "This creature's critical hits deal D% of the victim's health as extra damage normally, and 2D% during a surprise round. Critical hits caused by single target actions can cause a random enemy to receive the '" + afraid.getName() + "' trait.", devastatingCriticalsKey);
+	public readonly static Trait devastatingCriticals = new TraitWithRelatedTraits(StatSourceNameList.devastatingCriticalsKey, TraitType.EquippedPassive, new List<IDescribable>(){ afraid }, "This creature's critical hits deal D% of the victim's health as extra damage normally, and 2D% during a surprise round. Critical hits caused by single target actions can cause a random enemy to receive the '" + afraid.getName() + "' trait.", StatSourceNameList.devastatingCriticalsKey);
 	public readonly static Trait intimidatingPressence = new MandatoryTargetTrait(StatSourceNameList.intimidatingPressenceKey, TraitType.EquippedPassive, "All enemy attack patterns must include this creature when possible. Useful for preventing enemies from attacking weaker or hurt allies.", "InitmidatingPressence");
 	public readonly static Trait bloodlust = new StackableTrait(StatSourceNameList.bloodlustKey, TraitType.EquippedPassive, "The red mist descends, causing the creature to deal more damage per stack. Gain a stack at the start of every turn, and whenever you slay a minion or summoned enemy. Maximum of " + bloodlustMaximumStacks + " stacks.", StatSourceNameList.bloodlustKey, startingStacks: Constants.oneStackAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication, costType: ActionCostType.Bloodlust, maximumStacks: bloodlustMaximumStacks, personalReapplicationEvents: new List<UnityEvent>() { EnemyStats.OnMinionSummonDeath }, impersonalReapplicationEvents: new List<UnityEvent>() { CombatStateManager.OnNewTurn });
     public readonly static Trait halfHandStance = new StackableTrait(StatSourceNameList.halfHandStanceKey, TraitType.Stance, "A balanced stance, increasing damage dealt by " + halfHandStanceExtraDamage + " and decreasing damage taken by " + halfHandStanceExtraDamage + " per stack. Starts with " + halfHandStanceStartingStacks + " stacks. Gain stacks by attacking with fists or staffs. Only one stance can be active at a time.", StatSourceNameList.halfHandStanceKey, startingStacks: Constants.fourStacksAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication, costType: ActionCostType.Stance, personalReapplicationEvents: new List<UnityEvent>() { Stance.OnStanceApplyingWeaponAttack });
@@ -238,7 +228,7 @@ public static class TraitList
 		dictionaryOfTraits.Add(StatSourceNameList.extraShieldedKey, extraShielded);
 		dictionaryOfTraits.Add(signaling.getName(), signaling);
 		dictionaryOfTraits.Add(observing.getName(), observing);
-		dictionaryOfTraits.Add(chewKey, chew);
+		dictionaryOfTraits.Add(StatSourceNameList.chewBuzzKey, chewBuzz);
 		
 		dictionaryOfTraits.Add(spawner.getName(), spawner);
 		dictionaryOfTraits.Add(fodder.getName(), fodder);
@@ -254,7 +244,7 @@ public static class TraitList
 		mobLinked.setLinkedPercentage(.40);
 		bossLinked.setLinkedPercentage(.075);
 		
-		dictionaryOfTraits.Add(chokingKey, choking);
+		dictionaryOfTraits.Add(StatSourceNameList.chokingKey, choking);
 
 		dictionaryOfTraits.Add(mobLinked.getName(), mobLinked);
 		dictionaryOfTraits.Add(bossLinked.getName(), bossLinked);

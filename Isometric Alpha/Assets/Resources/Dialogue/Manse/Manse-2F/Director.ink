@@ -141,7 +141,7 @@ All my life, I've fought to keep my people safe from those that would do them ha
 
     I understand your apprehension. I couldn't fathom it either, in yesteryears, the similarities between the Craft and Riding Folks. Only recently, did it dawn on me. 
 
-    I fought in the last war between our peoples. The Confederation, despite it's faults, spends all of it's energies, makes each of it's decisions, with one goal in mind: the freeing of every horse that the Craft Folk keep as slaves on their farms, or in their armies. The Emancipation Conflict is what we call the series of wars we have waged to that end.
+    I fought in the last war between our peoples. The Confederation, despite it's faults, spends all of it's energies with one goal in mind: the freeing of every horse that the Craft Folk keep as slaves. The Emancipation Conflict is what we call the series of wars we have waged to that end.
 
     Fifteen years ago, I had the privilege of leading a horde of our riders against the Kingdom of Masons. We struck deep into their land, freeing the feral horses they kept as we went. The ones that were too old to rehabilitate, we sent to sanctuaries, to live out their days as honored guests of the Counts. Those that could be taught to speak, we welcomed home as freed prisoners of war.
         ->2ca

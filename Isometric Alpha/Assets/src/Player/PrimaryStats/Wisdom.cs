@@ -10,12 +10,6 @@ public static class Wisdom
 	public const int greaterStrikesLevel = 6;
 	public const int ruinousStrikesLevel = 10;
 
-	public const int minorArmorPenetrationLevel = 2;
-	public const int lesserArmorPenetrationLevel = 4;
-	public const int improvedArmorPenetrationLevel = 6;
-	public const int greaterArmorPenetrationLevel = 8;
-	public const int majorArmorPenetrationLevel = 10;
-
 	public const int oneRepositionLevel = 2;
 	public const int twoRepositionLevel = 4;
 	public const int threeRepositionLevel = 6;
@@ -90,18 +84,26 @@ public static class Wisdom
 		return new CombatAction[] { new FistAttack(statSource), AbilityList.getAbility(statSource,"w-2-2"), AbilityList.getAbility(statSource,"w-2-2"), null, null, null, null, null, AbilityList.getAbility(statSource,"w-2-1"), null, null, null, };
 	}
 	
-	public static int getPartyMemberWisdomAtLevel(string partyMemberName, int level)
+	public static int getArmorPenFromWisdom(int wisdom)
 	{
-		switch (partyMemberName)
+		switch (wisdom)
 		{
-			case NPCNameList.carter:
-				return 1;
-			case NPCNameList.thatch:
-				return PrimaryStats.getStatAtLevelSlowProgression(level);
-			case NPCNameList.nandor:
-				return PrimaryStats.getStatAtLevelFastProgression(level);
+			case 2:
+			case 3:
+                return 5;
+			case 4:
+			case 5:
+                return 10;
+			case 6:
+			case 7:
+                return 15;
+			case 8:
+			case 9:
+                return 20;
+			case >= 10:
+				return 25;
 			default:
-				return 1;
+				return 0;
 		}
 	}
 }

@@ -202,11 +202,6 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         //empty on purpose
     }
 
-    public virtual double getPercentageArmorLost()
-    {
-        return 0.0;
-    }
-
     public virtual bool hasActionCostType(ActionCostType typeToCheckFor)
     {
         return false;
@@ -528,7 +523,13 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
 
         buildingBlocks.AddRange(getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getMaxRoundsLeftForDisplay()));
+        if(CombatStateManager.inCombat)
+        {
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getRoundsLeftForDisplay()));
+        } else
+        {
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getMaxRoundsLeftForDisplay()));
+        }
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getDescription()));
 

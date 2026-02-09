@@ -50,18 +50,17 @@ public static class BookList
 						"stalwart material, and decayed to the point of invisibility since the site was abandoned.\n" +
 						"\tMasonic command has given Carter and myself complete autonomy on this venture, so I think I'm " +
 						"going to take my time familiarizing myself with the mansion. Should an attack be warranted from " +
-						"outside the camp, it would be good to know exactly how to exploit it's layout since it and the barracks" +
-						" are the most easily defended points in the camp. From my brief time studying other Delving Folk complexes, " +
-						" I know how much they liked to place hidden passages within their underground networks. I expect their " +
-						"aboveground structures to be no different. The room the Director has turned into a library looks to be a good place" +
+						"outside the camp, it would be good to know exactly how to exploit its layout. From my brief time studying other Delving Folk complexes, " +
+						"I know how much they liked to place hidden passages within their underground networks. I expect their " +
+						"aboveground structures to be no different. The room the Director has turned into a library seems to be a good place" +
 						" to start looking. I'll be spending long hours in there tutoring the kids, so I will have plenty of oppurtunities to " +
 						"continue my search.";
 			case pageSecondDiaryEntryKey:
 				return "I was correct! There was a section of bookshelves that had been around since before the Lovashi had moved in. " +
-						"Studying then showed me that there was a hidden lever built into the back of one, and pulling it revealed a small room. " +
+						"After some time I was able to find a hidden passage that led to a small room. " +
 						"Within, I found a trove of records from the original builders of this place. Most of the scrolls would only have value" +
 						" to someone interested in the minutiate of everyday Delver life (like myself), but included in these records were the " +
-						"original building designs. Studying them showed a passage that leads from the northeastern most corner of the meeting room " +
+						"original building designs. Rifling through them revealed another passage that leads from the northeastern most corner of the meeting room " +
 						"on the first floor to the Director's office on the second! So well hidden was this route that I doubt even the Director" +
 						" himself is aware of it's existence.\n" +
 						"\tWorking at night, I have explored the passage and discovered how the entry mechanism works. While it was deceptively " +

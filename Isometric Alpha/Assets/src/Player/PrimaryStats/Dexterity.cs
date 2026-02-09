@@ -8,7 +8,7 @@ public static class Dexterity
 
 	public const int extraSurpriseRoundLevel = 10;
 
-	public const int extraArmorMultiplier = 4;
+	public const int extraArmorMultiplier = 2;
 
     public const float surpriseDamMultCoefficient = .1f; 
     public const float surpriseDamMultBase = 1f;

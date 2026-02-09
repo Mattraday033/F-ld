@@ -36,10 +36,16 @@ public class HealingItem: UsableItem, IJSONConvertable
         {
             return;
         }
-
-		target.modifyCurrentHealth(getAmountToHeal(), treatAmountAsHealing);
+ 
+        target.modifyCurrentHealth(getAmountToHeal(), treatAmountAsHealing);
 	}
 	
+
+	public override string getEffectAnimationType()
+	{
+		return EffectAnimationType.Healing.ToString();
+	}
+
 	public override bool usableOutOfCombat()
 	{
 		return true;
@@ -49,6 +55,11 @@ public class HealingItem: UsableItem, IJSONConvertable
 	{
 		return true;
 	}
+
+    public override bool targetsAllySection()
+    {
+        return true;
+    }
 
     public override bool fitsUseCriteria(Stats target)
     {

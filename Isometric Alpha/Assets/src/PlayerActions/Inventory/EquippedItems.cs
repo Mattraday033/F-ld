@@ -42,10 +42,10 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable
 
     public EquippableItem getOffHand()
     {
-        if (equippedItems[Weapon.offHandSlotIndex] != null &&
-            !(equippedItems[Weapon.offHandSlotIndex] is null))
+        if (equippedItems[Armor.offHandSlotIndex] != null &&
+            !(equippedItems[Armor.offHandSlotIndex] is null))
         {
-            return equippedItems[Weapon.offHandSlotIndex];
+            return equippedItems[Armor.offHandSlotIndex];
         }
 
         return ItemList.getOffHandFist();
@@ -53,9 +53,9 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable
 
     public void checkForEmptyOffHandSlot()
     {
-        if(equippedItems[Weapon.offHandSlotIndex] == null)
+        if(equippedItems[Armor.offHandSlotIndex] == null)
         {
-            equippedItems[Weapon.offHandSlotIndex] = ItemList.getOffHandFist();
+            equippedItems[Armor.offHandSlotIndex] = ItemList.getOffHandFist();
         }
 
     }
@@ -113,7 +113,7 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable
         }
         
         if (item.getSlotID() == Weapon.mainHandSlotIndex ||
-                item.getSlotID() < Weapon.offHandSlotIndex)
+                item.getSlotID() < Armor.offHandSlotIndex)
             {
                 owner.getActionArray().unequipCombatAction(item.getKey());
             }
@@ -205,9 +205,9 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable
         clonedObject.equippedItems = equippedItems;
         clonedObject.owner = owner;
 
-        if(clonedObject.equippedItems[Weapon.offHandSlotIndex] == null)
+        if(clonedObject.equippedItems[Armor.offHandSlotIndex] == null)
         {
-            clonedObject.equippedItems[Weapon.offHandSlotIndex] = ItemList.getOffHandFist();
+            clonedObject.equippedItems[Armor.offHandSlotIndex] = ItemList.getOffHandFist();
         }
 
         return clonedObject;

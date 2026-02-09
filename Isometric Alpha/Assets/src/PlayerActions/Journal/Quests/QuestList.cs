@@ -181,6 +181,11 @@ public static class QuestList
     public static void finishQuest(string questTitle, string questStepName, bool questSuccessful)
     {
 		Quest questToFinish = activateQuestStep(questTitle, questStepName); 
+        if(questToFinish == null)
+        {
+            return;
+        }
+
 		questToFinish.finished = true;
         questToFinish.succeeded = questSuccessful;
     }

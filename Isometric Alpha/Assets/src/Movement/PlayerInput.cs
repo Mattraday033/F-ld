@@ -599,7 +599,7 @@ public class PlayerInput : MonoBehaviour
 
     private void handleChestStateKeyPresses()
     {
-        if ((KeyBindingList.eitherBackoutKeyIsPressed() || Input.GetKey(KeyBindingList.interactKey)) && !KeyPressManager.handlingPrimaryKeyPress)
+        if ((KeyBindingList.eitherBackoutKeyIsPressed() || KeyBindingList.continueUIKeyIsPressed()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             KeyPressManager.handlingPrimaryKeyPress = true;
             PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);

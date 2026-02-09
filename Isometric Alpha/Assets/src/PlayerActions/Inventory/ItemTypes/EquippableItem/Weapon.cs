@@ -10,16 +10,14 @@ public class Weapon : EquippableItem, IJSONConvertable
 	public const string typeIconName = "Weapon";
 	public const string subtype = "Weapon";
 	public const int mainHandSlotIndex = 6;
-    public const int offHandSlotIndex = 0;  //Both the Armor and Weapon classes have an offHandSlotIndex because both types of item can go in
-											//this slot. They're the same index, it doesn't matter which one is called but to prevent confusion the 
-											//Armor index should be called for Armors and the Weapon index for Weapons.
+
     private int rangeIndex;
     private string iconName;
     private bool isTwoHanded;
     private EffectAnimationType effectAnimationType;
 
-	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, int slotID, bool isTwoHanded, EffectAnimationType effectAnimationType = EffectAnimationType.Slash) :
-    base(listId, key, loreDescription, damageFormula, critFormula, Constants.zeroRating, subtype, worth, slotID)
+	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, bool isTwoHanded, EffectAnimationType effectAnimationType = EffectAnimationType.Slash) :
+    base(listId, key, loreDescription, damageFormula, critFormula, subtype, worth)
 	{
 		this.isTwoHanded = isTwoHanded;
 		this.iconName = iconName;
@@ -59,11 +57,6 @@ public class Weapon : EquippableItem, IJSONConvertable
 
 	public override bool isUnequippable()
 	{
-		if (getSlotID() == offHandSlotIndex && getKey().Equals(ItemList.getOffHandFist().getKey()))
-		{
-			return false;
-		}
-
 		return true;
 	}
 
@@ -157,44 +150,19 @@ public class Weapon : EquippableItem, IJSONConvertable
 
 	public override string getTypeIconName()
 	{
-		switch (getSlotID())
-		{
-			case mainHandSlotIndex:
-
-				if (isTwoHanded)
-				{
-					return twoHandedSlotIconName;
-				}
-				else
-				{
-					return oneHandedSlotIconName;
-				}
-
-			case offHandSlotIndex:
-				return offHandSlotIconName;
-
-			default:
-				throw new IOException("Unexpected slotID: " + getSlotID());
-		}
+        if (isTwoHanded)
+        {
+            return twoHandedSlotIconName;
+        }
+        else
+        {
+            return oneHandedSlotIconName;
+        }
 	}
 
 	public override string getSlotIconName()
 	{
-        return getSlotIconName(getSlotID());
-	}
-    
-    public static string getSlotIconName(int slotIndex)
-	{
-		switch (slotIndex)
-		{
-			case mainHandSlotIndex:
-                return mainHandSlotIconName;
-			case offHandSlotIndex:
-				return offHandSlotIconName;
-
-			default:
-				throw new IOException("Unexpected slotID: " + slotIndex);
-		}
+        return mainHandSlotIconName;
 	}
 
 	//IBuildableWithBlocks methods
@@ -205,12 +173,13 @@ public class Weapon : EquippableItem, IJSONConvertable
 
         buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Name, getName()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getDamageBlock(getDamageTotalForDisplay(), getDamageFormulaForDisplay()));
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getCritBlock(getCritTotalForDisplay(), getCritFormulaForDisplay()));
+        buildingBlocks.AddRange(getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
 
-        if (getArmorRating() > Constants.sizeZero)
+        if (getSlotID() == mainHandSlotIndex)
         {
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getArmorRatingForDisplay(), armorFormula));
+            // buildingBlocks.Insert(3, DescriptionPanelBuildingBlock.getRangeBlock(getRangeIndex()));
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRangeIndex()));
+            buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getTypeIconName()));
         }
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getWorthBlock(getWorthForDisplay()));
@@ -220,13 +189,6 @@ public class Weapon : EquippableItem, IJSONConvertable
         buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getSlotIconName()));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getLoreDescription()));
-
-        if (getSlotID() == mainHandSlotIndex)
-        {
-            // buildingBlocks.Insert(3, DescriptionPanelBuildingBlock.getRangeBlock(getRangeIndex()));
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRangeIndex()));
-            buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getTypeIconName()));
-        }
 
         if (appliesStanceStacks())
         {

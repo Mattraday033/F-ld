@@ -18,4 +18,14 @@ public class InventoryItemGridRow : GridRow, IPointerDownHandler, IDragAndDropSo
 
         StartCoroutine(DragAndDropManager.waitForMouseRelease(this, item));
     }
+
+    public void OnMouseEnter()
+    {
+        OnPointerEnter(null);
+    }
+
+    public void OnMouseExit()
+    {
+        OnPointerExit(null);
+    }
 }

@@ -424,43 +424,18 @@ public class AllyStats : Stats
         wisdom++;
     }
 
-    public float getArmorPenetration()
+    public override int getArmorPenetration()
     {
-        float baseArmorPen = 0;
+        int baseArmorPen = base.getArmorPenetration();
 
-        if (getWisdom() < Wisdom.minorArmorPenetrationLevel)
-        {
-            baseArmorPen = 0;
-        }
-        else if (getWisdom() < Wisdom.lesserArmorPenetrationLevel)
-        {
-            baseArmorPen = .05f;
-        }
-        else if (getWisdom() < Wisdom.improvedArmorPenetrationLevel)
-        {
-            baseArmorPen = .10f;
-        }
-        else if (getWisdom() < Wisdom.greaterArmorPenetrationLevel)
-        {
-            baseArmorPen = .15f;
-        }
-        else if (getWisdom() < Wisdom.majorArmorPenetrationLevel)
-        {
-            baseArmorPen = .20f;
-        }
-        else
-        {
-            baseArmorPen = .25f;
-        }
+        baseArmorPen += Wisdom.getArmorPenFromWisdom(getWisdom());
 
-        float bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageFloat(this, getAllStatBoosts(), b => b.getBonusArmorPenetrationFormula());
-
-        return (baseArmorPen + bonusFormulas);
+        return baseArmorPen;
     }
 
     public string getArmorPenetrationForDisplay()
     {
-        return (getArmorPenetration() * 100f) + "%";
+        return getArmorPenetration() + "%";
     }
 
     public double getMentalResistance()
@@ -705,7 +680,7 @@ public class AllyStats : Stats
 
         totalArmorRating += getExtraArmorFromDexterity();
 
-        return (int)((double)totalArmorRating * getCurrentTotalArmorPercentage());
+        return totalArmorRating;
     }
 
     public override bool hasAvailableWeaponSlots()

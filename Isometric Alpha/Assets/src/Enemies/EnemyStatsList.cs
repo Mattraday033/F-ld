@@ -6,8 +6,6 @@ public static class EnemyStatsList
 {
     private const string wormMinionAcid = "WormMinionAcid";
 
-    private const string slaveWarrior = "Slave Warrior";
-
     private const string smallStoneMaterials = "StoneSaintBuildingMaterialsSmall";
 
     public readonly static EnemyStats[] wormSplitSpawnCombo = new EnemyStats[] { Resources.Load<EnemyStats>(wormMinionAcid), Resources.Load<EnemyStats>(wormMinionAcid) };
@@ -52,7 +50,7 @@ public static class EnemyStatsList
         #region Named NPCs
         #region Lovashi Guards
         enemyStatsDict.Add(NPCNameList.guardVazul, new EnemyStats(NPCNameList.guardVazul,
-                                                                                    Constants.fiftyArmor,
+                                                                                    Constants.twentyFiveArmor,
                                                                                             50,
 new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.bladeBlitzKey) as Ability),
                                                                 new Trait[] { TraitList.master,
@@ -61,7 +59,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             }));
 
         enemyStatsDict.Add(NPCNameList.guardAndras, new EnemyStats(NPCNameList.guardAndras,
-                                                                                    Constants.thirtyArmor,
+                                                                                    Constants.fifteenArmor,
                                                                                             40,
                                     AbilityList.getAbility(null, AbilityList.slashKey) as Ability,
                                                                 new Trait[] { TraitList.master,
@@ -69,7 +67,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             }));
 
         enemyStatsDict.Add(NPCNameList.guardReka, new EnemyStats(NPCNameList.guardReka,
-                                                                        Constants.fortyFiveArmor,
+                                                                        Constants.twentyFiveArmor,
                                                                                     95,
                         AbilityList.getAbility(null, AbilityList.guardAxeKey) as Ability,
                                                             new Trait[] { TraitList.master,
@@ -78,7 +76,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                         }));
 
         enemyStatsDict.Add(NPCNameList.guardVirag, new EnemyStats(NPCNameList.guardVirag,
-                                                                            Constants.thirtyArmor,
+                                                                            Constants.fifteenArmor,
                                                                                     75,
                     AbilityList.getAbility(null, AbilityList.guardJavelinKey) as Ability,
                                                         new Trait[] { TraitList.master,
@@ -87,7 +85,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                     }));
 
         enemyStatsDict.Add(NPCNameList.overseerGaspar, new EnemyStats(NPCNameList.overseerGaspar,
-                                                                                    Constants.fortyArmor,
+                                                                                    Constants.twentyArmor,
                                                                                             130,
                             AbilityList.getAbility(null, AbilityList.guardLashKey) as Ability,
                                                                 new Trait[] { TraitList.master,
@@ -95,7 +93,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             }));
 
         enemyStatsDict.Add(NPCNameList.guardPazman, new EnemyStats(NPCNameList.guardPazman,
-                                                                                Constants.thirtyArmor,
+                                                                                Constants.fifteenArmor,
                                                                                         95,
                         AbilityList.getAbility(null, AbilityList.guardSpearKey) as Ability,
                                                             new Trait[] { TraitList.master,
@@ -104,7 +102,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
 
 
         enemyStatsDict.Add(NPCNameList.director, new EnemyStats(NPCNameList.director,
-                                                                                    Constants.eightyFiveArmor,
+                                                                                    Constants.fortyArmor,
                                                                                             25,
                             AbilityList.getAbility(null, AbilityList.guardSpearKey) as Ability,
                                                                 new Trait[] { TraitList.master,
@@ -113,7 +111,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             }));
 
         enemyStatsDict.Add(NPCNameList.kende, new EnemyStats(NPCNameList.kende,
-                                                                    Constants.sixtyArmor,
+                                                                    Constants.thirtyArmor,
                                                                                     160,
                             AbilityList.getAbility(null, AbilityList.guardWarriorSummonKey) as Ability,
                                                                 new Trait[] { 
@@ -133,7 +131,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                        true);
 
         enemyStatsDict.Add(NPCNameList.barricade, new LargeEnemyStats(NPCNameList.barricade,
-                                                                                Constants.fiftyArmor,
+                                                                                Constants.twentyFiveArmor,
                                                                                         125,
                                                             new Trait[] { 
                                                                             TraitList.minion,
@@ -147,7 +145,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
 
         #region Brandless Slaves
         enemyStatsDict.Add(NPCNameList.imre, new EnemyStats(NPCNameList.imre,
-                                                                            Constants.zeroArmor,
+                                                                            Constants.fiveArmor,
                                                                                     50,
                     AbilityList.getAbility(null, AbilityList.punchKey) as Ability,
                                                         new Trait[] { TraitList.master,
@@ -159,7 +157,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #region Lovashi Guards
 
         enemyStatsDict.Add(MonsterNameList.axeman, new EnemyStats(MonsterNameList.axeman,
-                                                                                    Constants.fiftyFiveArmor,
+                                                                                    Constants.twentyFiveArmor,
                                                                                             55,
                             AbilityList.getAbility(null, AbilityList.guardAxeKey) as Ability,
                                                                 new Trait[] { TraitList.master,
@@ -168,7 +166,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             }));
 
         enemyStatsDict.Add(MonsterNameList.disciplinarian, new EnemyStats(MonsterNameList.disciplinarian,
-                                                                                    Constants.fortyArmor,
+                                                                                    Constants.twentyArmor,
                                                                                             55,
                             AbilityList.getAbility(null, AbilityList.guardLashKey) as Ability,
                                                                 new Trait[] { TraitList.master,
@@ -176,7 +174,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             }));
 
         enemyStatsDict.Add(MonsterNameList.executioner, new EnemyStats(MonsterNameList.executioner,
-                                                                                    Constants.fortyArmor,
+                                                                                    Constants.twentyArmor,
                                                                                             70,
                             AbilityList.getAbility(null, AbilityList.executeKey) as Ability,
                                                                 new Trait[] { TraitList.master,
@@ -184,7 +182,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             }));
 
         enemyStatsDict.Add(MonsterNameList.javelineer, new MinionStats(MonsterNameList.javelineer,
-                                                                                    Constants.thirtyArmor,
+                                                                                    Constants.fifteenArmor,
                                                                                             25,
                             AbilityList.getAbility(null, AbilityList.guardJavelinKey) as Ability,
                                                                 new Trait[] { 
@@ -193,7 +191,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             }));
 
         enemyStatsDict.Add(MonsterNameList.lancer, new EnemyStats(MonsterNameList.lancer,
-                                                                                    Constants.fortyArmor,
+                                                                                    Constants.twentyArmor,
                                                                                             60,
                             AbilityList.getAbility(null, AbilityList.skewerKey) as Ability,
                                                                 new Trait[] { TraitList.master,
@@ -201,7 +199,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             }));
 
         enemyStatsDict.Add(MonsterNameList.lieutenant, new EnemyStats(MonsterNameList.lieutenant,
-                                                                                    Constants.fortyArmor,
+                                                                                    Constants.twentyArmor,
                                                                                             60,
                             AbilityList.getAbility(null, AbilityList.squadStrikeKey) as Ability,
                                                                 new Trait[] { TraitList.master,
@@ -209,7 +207,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             }));
 
         enemyStatsDict.Add(MonsterNameList.linebreaker, new EnemyStats(MonsterNameList.linebreaker,
-                                                                                    Constants.fortyArmor,
+                                                                                    Constants.twentyArmor,
                                                                                             60,
                             AbilityList.getAbility(null, AbilityList.skullBashKey) as Ability,
                                                                 new Trait[] { TraitList.master,
@@ -217,7 +215,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             }));        
     
         enemyStatsDict.Add(MonsterNameList.overseer, new EnemyStats(MonsterNameList.overseer,
-                                                                                    Constants.seventyArmor,
+                                                                                    Constants.thirtyFiveArmor,
                                                                                             145,
                             AbilityList.getAbility(null, AbilityList.guardSlaveSummonKey) as Ability,
                                                                 new Trait[] { TraitList.master,
@@ -226,7 +224,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             }));
 
         enemyStatsDict.Add(MonsterNameList.signaleer, new EnemyStats(MonsterNameList.signaleer,
-                                                                                    Constants.thirtyArmor,
+                                                                                    Constants.fifteenArmor,
                                                                                             45,
 new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.guardArrowBarrageKey) as Ability),
                                                                 new Trait[] { 
@@ -236,7 +234,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             }));
 
         enemyStatsDict.Add(MonsterNameList.spearman, new EnemyStats(MonsterNameList.spearman,
-                                                                                    Constants.thirtyArmor,
+                                                                                    Constants.fifteenArmor,
                                                                                             40,
                             AbilityList.getAbility(null, AbilityList.guardSpearKey) as Ability,
                                                                 new Trait[] { TraitList.master,
@@ -248,7 +246,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #region NonBranded Slaves
 
         enemyStatsDict.Add(MonsterNameList.noBrandLoyalist, new MinionStats(MonsterNameList.noBrandLoyalist,
-                                                                            Constants.tenArmor,
+                                                                            Constants.fiveArmor,
                                                                                     20,
                         AbilityList.getAbility(null, AbilityList.guardJavelinKey) as Ability,
                                                             new Trait[] { 
@@ -259,7 +257,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                         gendered: true));
 
         enemyStatsDict.Add(MonsterNameList.noBrandRioter, new MinionStats(MonsterNameList.noBrandRioter,
-                                                                            Constants.tenArmor,
+                                                                            Constants.fiveArmor,
                                                                                     20,
                     AbilityList.getAbility(null, AbilityList.guardJavelinKey) as Ability,
                                                         new Trait[] { 
@@ -272,7 +270,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #region Branded Slaves
 
         enemyStatsDict.Add(MonsterNameList.brandedConscript, new MinionStats(MonsterNameList.brandedConscript,
-                                                                            Constants.tenArmor,
+                                                                            Constants.fiveArmor,
                                                                                     15,
                     AbilityList.getAbility(null, AbilityList.guardJavelinKey) as Ability,
                                                         new Trait[] { 
@@ -283,7 +281,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                     }));
 
         enemyStatsDict.Add(MonsterNameList.brandedRioter, new MinionStats(MonsterNameList.brandedRioter,
-                                                                                            Constants.tenArmor,
+                                                                                            Constants.fiveArmor,
                                                                                                     15,
                                     AbilityList.getAbility(null, AbilityList.guardJavelinKey) as Ability,
                                                                         new Trait[] { 
@@ -300,7 +298,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #region Bats
         #region Giant Bat
         enemyStatsDict.Add(MonsterNameList.giantBat, new EnemyStats(MonsterNameList.giantBat,
-                                                                                      Constants.tenArmor,
+                                                                                      Constants.fiveArmor,
                                                                                             25,
                                                AbilityList.getAbility(null, AbilityList.batClawName),
                                                                 new Trait[] { TraitList.master,
@@ -319,7 +317,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
 
         #region Screecher
         enemyStatsDict.Add(MonsterNameList.screecher, new EnemyStats(MonsterNameList.screecher,
-                                                                                      Constants.twentyArmor,
+                                                                                      Constants.tenArmor,
                                                                                             45,
   new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.screechKey) as Ability),
                                                                     new Trait[] { TraitList.master,
@@ -328,7 +326,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #endregion
         #region Armored Bat
         enemyStatsDict.Add(MonsterNameList.armoredBat, new EnemyStats(MonsterNameList.armoredBat,
-                                                                                      Constants.thirtyArmor,
+                                                                                      Constants.fifteenArmor,
                                                                                             45,
   new ChargeUpAbility(TraitList.shielded, AbilityList.getAbility(null, AbilityList.flurryKey) as Ability),
                                                                     new Trait[] { TraitList.master,
@@ -336,7 +334,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                                 }));
                                                                                 
         enemyStatsDict.Add(MonsterNameList.armoredBatShielded, new EnemyStats(MonsterNameList.armoredBat,
-                                                                                      Constants.thirtyArmor,
+                                                                                      Constants.fifteenArmor,
                                                                                             45,
   new ChargeUpAbility(TraitList.shielded, AbilityList.getAbility(null, AbilityList.flurryKey) as Ability),
                                                                     new Trait[] { TraitList.master,
@@ -346,7 +344,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #endregion
         #region Den Mother
         enemyStatsDict.Add(MonsterNameList.denMother, new EnemyStats(MonsterNameList.denMother,
-                                                                                      Constants.twentyArmor,
+                                                                                      Constants.tenArmor,
                                                                                             35,
                                             AbilityList.getAbility(null, AbilityList.spawnPupsKey),
                                                                     new Trait[] { TraitList.master,
@@ -355,7 +353,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #endregion
         #region Cave Matron
         enemyStatsDict.Add(MonsterNameList.caveMatron, new EnemyStats(MonsterNameList.caveMatron,
-                                                                                      Constants.twentyArmor,
+                                                                                      Constants.tenArmor,
                                                                                             155,
     new LastManStandingAbility(TraitList.extraShielded, AbilityList.getAbility(null, AbilityList.rouseColonyKey) as Ability),
                                                                     new Trait[] { TraitList.master,

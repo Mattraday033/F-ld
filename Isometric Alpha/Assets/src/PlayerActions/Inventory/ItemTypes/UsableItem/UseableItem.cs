@@ -33,17 +33,10 @@ public class UsableItem : Item, IJSONConvertable
         this.iconName = iconName;
     }
 
-    public override string getDamageFormula()
-    {
-        if (getAmountToHeal() >= 1)
-        {
-            return "" + getAmountToHeal();
-        }
-        else
-        {
-            return Constants.zeroRating;
-        }
-    }
+    // public override string getDamageFormula()
+    // {
+    //     retu
+    // }
 
     public override string getCritFormula()
     {

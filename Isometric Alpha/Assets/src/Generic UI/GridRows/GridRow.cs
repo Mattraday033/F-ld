@@ -119,7 +119,7 @@ public class GridRow : MonoBehaviour,
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        if (!canSeeHover() || eventData.used)
+        if (!canSeeHover() || (eventData != null && eventData.used))
         {
             return;
         }

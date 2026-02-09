@@ -27,6 +27,7 @@ public static class StatSourceNameList
     public const string caveMadnessKey = "Cave Madness";
     public const string chokingKey = "Choking";
     public const string chewKey = "Chew";
+    public const string chewBuzzKey = "Chew Buzz";
     public const string bufferKey = "Buffer";
     public const string healerKey = "Healer";
     public const string singleTargetBuffKey = "Single Target Buff";

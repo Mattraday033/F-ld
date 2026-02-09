@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -246,7 +247,7 @@ public static class HoverMessageList
     private const string armorSubtypeMessage = "Armor. Wearing it provides Armor Points, which blocks .5% of damage per point. Some pieces of Armor also provide additional benefits.";
 
     private const string armorScoreKey = "Armor Score";
-    private const string armorScoreMessage = armorScoreKey + ". You gain armor from the items you have equipped, your Dexterity Stat, and some Abilities. For every point of Armor you have, you block .5% of incoming damage.";
+    private const string armorScoreMessage = armorScoreKey + ". You gain armor from the items you have equipped, your Dexterity Stat, and some Traits/Abilities. Armor reduces incoming damage by a percentage. Armor cannot reduce incoming damage below 1.";
 
 
     private const string actionTypeIconMessage = "This Action's Type. A complete list of Action Types can be found in the Journal's Glossary.";

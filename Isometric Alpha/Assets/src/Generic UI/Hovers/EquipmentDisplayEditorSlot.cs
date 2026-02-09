@@ -157,7 +157,7 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
         backgroundImage.color = Color.black;
         iconImage.color = Color.white;
 
-        if (getItemInSlot() != null && getItemInSlot().getSlotID() == Weapon.offHandSlotIndex)
+        if (getItemInSlot() != null && getItemInSlot().getSlotID() == Armor.offHandSlotIndex)
         {
             iconImage.sprite = Helpers.loadSpriteFromResources(getItemInSlot().getIconName());
         }
@@ -178,7 +178,7 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
         backgroundImage.color = Color.black;
         iconImage.color = ColorList.filledIconFadeOutLevel;
 
-        if (getItemInSlot() != null && getItemInSlot().getSlotID() == Weapon.offHandSlotIndex)
+        if (getItemInSlot() != null && getItemInSlot().getSlotID() == Armor.offHandSlotIndex)
         {
             iconImage.sprite = Helpers.loadSpriteFromResources(getItemInSlot().getIconName());
         }
@@ -285,9 +285,8 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
         }
         else if (slotIndex >= Weapon.mainHandSlotIndex)
         {
-            iconImage.sprite = Helpers.loadSpriteFromResources(Weapon.getSlotIconName(slotIndex));
+            iconImage.sprite = Helpers.loadSpriteFromResources(Weapon.mainHandSlotIconName);
         }
-
     }
 
     public void buyItem(Item item)

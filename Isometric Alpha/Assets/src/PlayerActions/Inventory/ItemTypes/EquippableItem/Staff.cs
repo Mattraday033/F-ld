@@ -8,8 +8,8 @@ using Newtonsoft.Json;
 public class StanceWeapon : Weapon
 {
 
-	public StanceWeapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, int slotID, bool isTwoHanded, EffectAnimationType effectAnimationType = EffectAnimationType.Slash)
-	: base(listId, key, loreDescription, damageFormula, critFormula, iconName, rangeIndex, worth, slotID, isTwoHanded, effectAnimationType)
+	public StanceWeapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, bool isTwoHanded, EffectAnimationType effectAnimationType = EffectAnimationType.Slash)
+	: base(listId, key, loreDescription, damageFormula, critFormula, iconName, rangeIndex, worth, isTwoHanded, effectAnimationType)
 	{
 
 	}
@@ -21,12 +21,42 @@ public class StanceWeapon : Weapon
 
 }
 
+public class Fist : Weapon
+{
+	public Fist(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex) :
+	base(listId, key, loreDescription, damageFormula, critFormula, iconName, rangeIndex, ItemList.itemHasNoWorth, false)
+	{
+
+	}
+
+	public override bool canBeJunk()
+	{
+		return false;
+	}
+
+	public override CombatAction getCombatAction(AllyStats stats)
+	{
+		return new FistAttack(stats);
+	}
+	
+	public override bool appliesStanceStacks()
+	{
+		return true;
+	}
+
+	public override string getEffectAnimationType()
+	{
+		return EffectAnimationType.Blunt.ToString();
+	}
+
+}
+
 [System.Serializable]
 public class Staff : StanceWeapon
 {
 
-	public Staff(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, int slotID, bool isTwoHanded)
-	: base(listId, key, loreDescription, damageFormula, critFormula, iconName, rangeIndex, worth, slotID, isTwoHanded, EffectAnimationType.Blunt)
+	public Staff(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, bool isTwoHanded)
+	: base(listId, key, loreDescription, damageFormula, critFormula, iconName, rangeIndex, worth, isTwoHanded, EffectAnimationType.Blunt)
 	{
 
 	}

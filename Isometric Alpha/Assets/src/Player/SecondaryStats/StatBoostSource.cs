@@ -15,7 +15,55 @@ public abstract class StatBoostSource : INameSource
     {
         switch (getName())
         {
+            case ItemList.minersHelmetKey:
+            case ItemList.rottenSandalsKey:
+            case ItemList.clothGlovesKey:
+            case ItemList.slaveRagsKey:
+                return "1";
+            case ItemList.thatchNecklaceKey:
+            case ItemList.bronzeBadgeKey:
+            case ItemList.delversDreamKey:
+            case ItemList.leatherGlovesKey:
+            case ItemList.leatherBootsKey:
+            case ItemList.salvagedGuardGlovesKey:
+            case ItemList.salvagedGuardBootsKey:
+            case ItemList.paddedArmorKey:
+            case ItemList.cookingPotKey:
+                return "2";
+            case ItemList.salvagedGuardHelmKey:
+            case ItemList.bronzeCavalryHelmetKey:
+            case ItemList.leatherArmorKey:
+                return "3";
+            case ItemList.potLidKey:
+            case ItemList.bronzeCuirassKey:
+            case ItemList.salvagedGuardArmorKey:
+                return "4";
+            // case "":
+            //     return "5";
+            // case "":
+            //     return "6";
+            case ItemList.plumedHelmetKey:
+                return "C";
+            case ItemList.wardensShieldKey:
+                return "2S+4";
+            case ItemList.martialArtistsBeltKey:
+                return "W";
+            case StatSourceNameList.shieldedKey:
+                return "30";
+            case StatSourceNameList.exitStrategyKey:
+            case StatSourceNameList.protectedKey:
+                return "60";
+        }
 
+        return Constants.zeroRating;
+    }
+
+    public virtual string getArmorShredFormula()
+    {
+        switch (getName())
+        {
+            case AbilityList.crushingBlowName:
+                return "50";
         }
 
         return Constants.zeroRating;
@@ -25,10 +73,11 @@ public abstract class StatBoostSource : INameSource
     {
         switch (getName())
         {
-            case StatSourceNameList.chewKey:
+            case StatSourceNameList.chewBuzzKey:
                 return "4";
             case ItemList.salvagedGuardGlovesKey:
                 return "D";            
+            case ItemList.luckyTalismanKey:
             case ItemList.salvagedGuardArmorKey:
             case ItemList.salvagedGuardBootsKey:
             case ItemList.salvagedGuardHelmKey:
@@ -58,11 +107,13 @@ public abstract class StatBoostSource : INameSource
             case ItemList.martialArtistsBeltKey:
                 return "2";
             case StatSourceNameList.predationKey:
-            case StatSourceNameList.chewKey:
+            case ItemList.luckyTalismanKey:
+            case StatSourceNameList.chewBuzzKey:
                 return "4";
             case StatSourceNameList.cohesionKey:
                 return "6";
             case StatSourceNameList.ralliedKey:
+            case StatSourceNameList.chewKey:
                 return "8";
             default:
                 return Constants.zeroRating;
@@ -76,7 +127,7 @@ public abstract class StatBoostSource : INameSource
             case StatSourceNameList.halfHandStanceKey:
                 return "1";
             case StatSourceNameList.shieldedKey:
-                return "10";
+                return "5";
             case StatSourceNameList.exitStrategyKey:
             case StatSourceNameList.protectedKey:
                 return "15";
@@ -171,7 +222,7 @@ public abstract class StatBoostSource : INameSource
             case ItemList.leatherBootsKey:
                 return "3";
             case ItemList.martialArtistsBeltKey:
-                return "5";
+                return "1";
             default:
                 return Constants.zeroRating;
         }
@@ -184,7 +235,9 @@ public abstract class StatBoostSource : INameSource
             case ItemList.bronzeCavalryHelmetKey:
                 return "3";
             case ItemList.bronzeCuirassKey:
-                return "S+1";
+                return "S+1";            
+            case ItemList.wardensShieldKey:
+                return "4";
             default:
                 return Constants.zeroRating;
         }
@@ -467,6 +520,16 @@ public abstract class StatBoostSource : INameSource
         }
 
         #region Generic Stats
+
+        if (!boostSource.getArmorFormula().Equals(Constants.zeroRating))
+        {
+            blocks.Add(DescriptionPanelBuildingBlock.getArmorBlock((DamageCalculator.calculateFormula(boostSource.getArmorFormula(), statsSource)).ToString() + "%", boostSource.getArmorFormula()));
+        }
+
+        if (!boostSource.getArmorShredFormula().Equals(Constants.zeroRating))
+        {
+            blocks.Add(DescriptionPanelBuildingBlock.getArmorShredBlock(DamageCalculator.calculateFormula(boostSource.getArmorShredFormula(), statsSource).ToString() + "%", boostSource.getArmorShredFormula()));
+        }
 
         if (!boostSource.getDamageFormula().Equals(Constants.zeroRating))
         {

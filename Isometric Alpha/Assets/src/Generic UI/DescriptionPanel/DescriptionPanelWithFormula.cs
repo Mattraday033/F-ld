@@ -51,7 +51,10 @@ public class DescriptionPanelWithFormula : DescriptionPanel
     {
         Item item = getObjectBeingDescribed() as Item;
 
-        if (item == null)
+        if (item == null || 
+            damageText == null || 
+            critRatingText == null || 
+            armorRatingText == null)
         {
             return;
         }

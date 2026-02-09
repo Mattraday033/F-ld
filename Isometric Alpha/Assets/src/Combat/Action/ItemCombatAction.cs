@@ -10,13 +10,15 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 	public ItemCombatAction(Stats actor, UsableItem sourceItem):
     base(actor, null)
 	{
-		this.sourceItem = sourceItem;
+		this.sourceItem = sourceItem.clone() as UsableItem;
+        this.sourceItem.equipTarget = actor;
 	}
 
 	public ItemCombatAction(Stats actor, Selector selector, UsableItem sourceItem) :
 	base(actor, selector)
 	{
-		this.sourceItem = sourceItem;
+		this.sourceItem = sourceItem.clone() as UsableItem;
+        this.sourceItem.equipTarget = actor;
 	}
 
 	public override string getDisplayType()
@@ -26,7 +28,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 
 	public override bool targetsAllySection()
 	{
-		return true;
+		return sourceItem.targetsAllySection();
 	}
 
 	public override string getKey()
@@ -93,16 +95,31 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 	{
 		if (inPreviewMode)
 		{
-			return "0";
+			return Constants.zeroRating;
 		}
 
 		return this.sourceItem.getCritFormula();
 	}
 
+    public override string getFinalCritFormula()
+    {
+        return Constants.zeroRating;
+    }
+
 	public override bool requiresAnAction()
 	{
 		return sourceItem.useRequiresAnAction();
 	}
+
+    public override int[] findFinalDamage(Stats targetCombatant, bool isCrit)
+    {
+        if(healsTarget())
+        {
+            return new int[] { sourceItem.getAmountToHeal() };
+        }
+
+        return new int[] { -1 };
+    }
 
 	public override void performCombatAction(List<Stats> targets)
 	{
@@ -111,6 +128,10 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 			if (targetCombatant != null)
 			{
 				sourceItem.use(targetCombatant);
+                if(!inPreviewMode)
+                {
+                    CombatAnimationManager.loadInstantEffect(getEffectAnimationType(), targetCombatant.position, false, findFinalDamage(targetCombatant, false)[0], healsTarget(), false, null, getActorCoords());
+                }
 			}
 		}
 
@@ -122,12 +143,19 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		if (Inventory.inventoryContainsItem(sourceItem.getKey()))
 		{
 			sourceItem = (UsableItem)Inventory.getItem(sourceItem.getKey());
+            sourceItem.equipTarget = getActorStats();
 		}
 		else
 		{
 			sourceItem.setQuantity(0);
 		}
 	}
+
+    public override string getEffectAnimationType()
+    {
+        return sourceItem.getEffectAnimationType();
+    }
+
 	public override void onAddToAbilityMenu() //for updating things like checking for source item quantity
 	{
 		updateSourceItemQuantity();
@@ -152,7 +180,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 
 	public override bool healsTarget()
 	{
-		return true;
+		return sourceItem.getAmountToHeal() > 0;
 	}
 
 	public override int getSaveType()
@@ -179,6 +207,11 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 
 		}
 	}
+
+    public override List<IDescribable> getRelatedDescribables()
+    {
+        return sourceItem.getRelatedDescribables();
+    }
 
 	//convertToJson is for save files, you will never need to save an actions coords so actor/target coords are not saved
 	public override string convertToJson()
@@ -239,7 +272,10 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType()));
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDamageBlock(getDamageTotalForDisplay(), getDamageFormulaForDisplay()));
+        if(!getDamageFormula().Equals(Constants.zeroRating))
+        {
+		    buildingBlocks.Add(DescriptionPanelBuildingBlock.getDamageBlock(getDamageTotalForDisplay(), getDamageFormulaForDisplay()));
+        }
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRangeTitle()));
 
@@ -255,6 +291,11 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getIconName()));
 
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getSourceItem().getTypeIconName()));
+
+        if(CombatStateManager.inCombat)
+        {
+		    buildingBlocks.Add(DescriptionPanelBuildingBlock.getAmountBlock(getSourceItem().getQuantityForDisplay()));
+        }
 
 		//buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getCritTotalForDisplay()));
 
