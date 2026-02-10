@@ -2,19 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using TMPro;
-using UnityEngine.EventSystems;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine;
 
 public class CombatResultsUI : PopUpWindow
 {
+    public readonly static UnityEvent OnCombatResultsUICreation = new UnityEvent();
+
 	private const bool defeatedEnemy = true;
 
     public TextMeshProUGUI goldText;
 	public TextMeshProUGUI xpText;
-	public TextMeshProUGUI affinityText;
-	public TextMeshProUGUI itemsText;
 
 	private static CombatResultsUI instance;
 
@@ -31,6 +32,7 @@ public class CombatResultsUI : PopUpWindow
 		}
 
 		instance = this;
+        OnCombatResultsUICreation.Invoke();
     }
 
 	void Update()
@@ -63,60 +65,154 @@ public class CombatResultsUI : PopUpWindow
             xpDropped = 0;
         }
 
-        xpText.text += xpDropped + " XP";
+        xpText.text = xpDropped + "";
 
-        goldText.text += goldDropped + " " + Purse.moneySymbol;
+        goldText.text = goldDropped + " " + Purse.moneySymbol;
 
-        string itemDropsText = "";
+        CombatResults combatResults = new CombatResults(itemDrops);
 
-        if (itemDrops.Count <= 0)
-        {
-            itemDropsText = "None";
-        }
-        else
-        {
-            foreach (Item item in itemDrops)
-            {
-                itemDropsText += item.getKey() + ": x" + item.getQuantity() + "\n";
-            }
-        }
-
-        itemsText.text = getRegenerationResultsText();
-        itemsText.text += itemDropsText;
-    }
-
-    private string getRegenerationResultsText()
-    {
-        string regenText = "";
-
-        foreach (AllyStats ally in State.formation)
-        {
-            if (ally == null)
-            {
-                continue;
-            }
-
-            int regenAmount = Strength.getCurrentRegenerationAmount(ally);
-
-            if (regenAmount > 0)
-            {
-                regenText = ally.getName().Replace(PartyManager.playerMarker, "") + " has healed for " + regenAmount + " HP.\n";
-            }
-        }
-
-        if (regenText.Length > 0)
-        {
-            regenText += "\n";
-        }
-
-        return regenText;
+        descriptionPanelSlot.setPrimaryDescribable(combatResults);
     }
     
+    public void applyRegenerationToParty()
+    {
+        foreach(AllyStats ally in State.formation)
+        {
+            if(ally != null && Strength.getCurrentRegenerationAmount(ally) > 0)
+            {
+                Strength.applyRegeneration(ally);
+            }
+        }
+    }
+
 	public override void acceptButtonPress()
     {
         EscapeStack.handleEscapePress();
 
+        applyRegenerationToParty();
+
         CombatStateManager.returnToOverworld(defeatedEnemy);
     }
+
+}
+
+public class CombatResults : IDescribable, IDescribableInBlocks
+{
+    public List<Item> loot;
+
+    public CombatResults(List<Item> loot)
+    {
+        this.loot = loot;
+    }
+
+    public List<DescriptionPanelBuildingBlock> getRegenerationDescription()
+    {
+        List<DescriptionPanelBuildingBlock> blocks = new List<DescriptionPanelBuildingBlock>();
+
+        foreach(AllyStats ally in State.formation)
+        {
+            if(ally != null && Strength.getCurrentRegenerationAmount(ally) > 0)
+            {
+                int regen = Strength.getCurrentRegenerationAmount(ally);
+
+                blocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(ally.getName().Replace(PartyManager.playerMarker, "") + " heals " + regen + " health."));
+            }
+        }
+
+        return blocks;
+    }
+
+    #region IDescribable
+
+    public string getName()
+    {
+        return "Combat Results";
+    }
+
+	public bool ineligible()
+    {
+        return false;
+    }
+	public GameObject getRowType(RowType rowType)
+    {
+        return null;
+    }
+
+	public GameObject getDescriptionPanelFull()
+    {
+        return null;
+    }
+
+	public GameObject getDescriptionPanelFull(PanelType type)
+    {
+        return null;
+    }
+
+	public GameObject getDecisionPanel()
+    {
+        return null;
+    }
+
+	public bool withinFilter(string[] filterParameters)
+    {
+        return true;
+    }
+
+	public void describeSelfFull(DescriptionPanel panel)
+    {
+        
+    }
+
+	public void describeSelfRow(DescriptionPanel panel)
+    {
+        
+    }
+
+	public void setUpDecisionPanel(IDecisionPanel descisionPanel)
+    {
+        
+    }
+
+	public List<IDescribable> getRelatedDescribables()
+    {
+        return new List<IDescribable>();
+    }
+
+	public bool buildableWithBlocks()
+    {
+        return true;
+    }
+
+	public bool buildableWithBlocksRows()
+    {
+        return true;
+    }
+
+#endregion
+
+#region IDescribableInBlocks
+
+    public List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
+    {
+        List<DescriptionPanelBuildingBlock> blocks = new List<DescriptionPanelBuildingBlock>();
+
+        blocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+
+        blocks.AddRange(getRegenerationDescription());
+
+        foreach(Item item in loot)
+        {
+            blocks.Add(new DescriptionPanelBuildingBlock(item));
+        }
+
+        return blocks;
+    }
+
+    public bool requiresInspectNode() 
+    { 
+        return false; 
+    }
+
+#endregion
 
 }

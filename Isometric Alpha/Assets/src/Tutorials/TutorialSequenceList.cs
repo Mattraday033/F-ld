@@ -667,7 +667,8 @@ public static class TutorialSequenceList
         TutorialSequenceStep itemStepOne = new TutorialSequenceStep(TutorialMessageList.equippableItemTutorialMessagePrefix + 1,
                                                                     inventoryButtonTargetHash,
                                                                     ArrowDirection.Left,
-                                                                    new KeyCode[] { KeyCode.I });
+                                                                    new KeyCode[] { KeyCode.I },
+                                                                    scriptAtEnd: new OpenScreenScript(ScreenType.Inventory));
         TutorialSequenceStep itemStepTwo = new TutorialSequenceStep(TutorialMessageList.equippableItemTutorialMessagePrefix + 2,
                                                                     equipmentGridTargetHash,
                                                                     ArrowDirection.Top,
@@ -978,5 +979,20 @@ public class OpenRelevantAbilityTabScript : TutorialSequenceStepScript
                 AbilityGridSideTab.chooseTab(DescribableList.Charisma);
                 return;
         }
+    }
+}
+
+public class OpenScreenScript : TutorialSequenceStepScript
+{
+    private ScreenType screenType;
+
+    public OpenScreenScript(ScreenType screenType)
+    {
+        this.screenType = screenType;
+    }
+
+    public override void runScript(GameObject targetObject)
+    {
+        SideScreenButtonManager.getInstance().setCurrentScreenType(screenType);
     }
 }

@@ -91,6 +91,8 @@ public static class Constants
 
     public const string emptyString = "";
 
+    public const bool skipAutosave = true;
+
     public const bool reveal = true;
     public const bool removeReveal = false;
 

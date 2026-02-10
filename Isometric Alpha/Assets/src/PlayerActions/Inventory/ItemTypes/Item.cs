@@ -321,6 +321,9 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
         } else if(equipTarget == null && !CombatStateManager.inCombat && OverallUIManager.getCurrentPartyMember() == null)
         {
             return PartyManager.getPlayerStats();
+        } else if(equipTarget == null && CombatStateManager.inCombat)
+        {
+            return PartyManager.getPlayerStats();
         }
 
         return equipTarget;

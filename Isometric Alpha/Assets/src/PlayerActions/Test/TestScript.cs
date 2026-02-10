@@ -12,8 +12,8 @@ public static class TestScript
         }
 
         // State.debugStopMonsterSpawning = true;
-        // State.debugDiscoverAllLocations = true;
-        // State.allLocationsFastTravelAvailable = true;
+        State.debugDiscoverAllLocations = true;
+        State.allLocationsFastTravelAvailable = true;
         // State.debugRetreatAutoSucceed = true;
         // State.enableGridDebugger = true;
 
@@ -21,10 +21,10 @@ public static class TestScript
 
         // PartyManager.getPlayerStats().setLevel(1);
         // PartyManager.getPlayerStats().currentHealth = 1;
-        // PartyManager.getPlayerStats().strength = 1;
+        PartyManager.getPlayerStats().strength = 4;
         PartyManager.getPlayerStats().dexterity = 4;
-        // PartyManager.getPlayerStats().wisdom = 4;
-        // PartyManager.getPlayerStats().charisma = 1;
+        PartyManager.getPlayerStats().wisdom = 4;
+        PartyManager.getPlayerStats().charisma = 4;
 
         // PartyManager.addXP(1050);
 

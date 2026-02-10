@@ -1,6 +1,8 @@
 VAR hostileAreaName = ""
 VAR hostilityScriptKey = ""
 
+VAR fadeOutAndIn = true
+
 VAR hasKey = false
 
 VAR keyName = ""
@@ -63,7 +65,8 @@ fadeBackIn(60)
 Unlocking this gate will turn {hostileAreaName} hostile. This will affect the outcome of certain quests, cause enemies to attack you in previously safe areas, and may be irreversible. Are you certain you wish to proceed?
 
     +\*Open the gate anyways.* <{keyName}>
-        ->1b
+        activateHostilityScript({hostilityScriptKey})
+        ->Close
     +\*Leave.*
         ->Close
 

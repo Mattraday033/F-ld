@@ -35,6 +35,8 @@ VAR playerName = ""
 === 1a ===
 
 setToTrue(metThatch)
+playAnimation({thatchIndex}, OOC_Idle_Front)
+faceOppositePlayer({thatchIndex})
 
 \*This man is toweringly tall, with the hard muscles one acquires after years of labor. He has deep circles under his eyes, and a weariness about him that you must work hard at to keep from catching. He regards you for a moment.* Who are you? 
 

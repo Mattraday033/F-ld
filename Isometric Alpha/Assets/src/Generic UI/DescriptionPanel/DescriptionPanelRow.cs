@@ -190,4 +190,15 @@ public class DescriptionPanelRow : MonoBehaviour
         }
     }
 
+    public void centerText()
+    {
+        if(descriptionText == null)
+        {
+            return;
+        }
+
+        descriptionText.horizontalAlignment = HorizontalAlignmentOptions.Center;
+        descriptionText.margin = Vector4.zero;
+    }
+
 }

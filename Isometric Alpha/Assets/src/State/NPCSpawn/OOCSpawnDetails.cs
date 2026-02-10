@@ -882,7 +882,7 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
 {
 
     private string animationName;
-    private Facing facing;
+    protected Facing facing;
     private CharacterAnimationType animationType;
 
     public NPCWithAnimationsSpawnDetails(string npcName,
@@ -950,6 +950,76 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
         if(animationType != CharacterAnimationType.None)
         {
             animationManager.setCurrentIdle(AnimationManager.getFallBackIdleType(npcName, animationType));
+        }
+    }
+}
+
+public class HorseSpawnDetails : NPCWithAnimationsSpawnDetails
+{
+
+    public HorseSpawnDetails(string npcName,
+                                         Vector3Int cellCoords, 
+                                         Facing facing,
+                                         string areaName = "", 
+                                         string animationName = null,
+                                         Vector3Int[] extraSpaces = null,
+                                         SpeakAtStartScript speakAtStartScript = null,
+                                         CharacterAnimationType animationType = CharacterAnimationType.None, 
+                                         bool ignoresSecretDoors = true,
+                                         float offset = 0f) :
+    base(npcName, cellCoords, areaName, extraSpaces: extraSpaces, speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors, offset: offset, animationName: animationName, facing: facing, animationType: animationType) 
+    {
+        List<Vector3Int> extraCoords = new List<Vector3Int>();
+
+        if(extraSpaces != null)
+        {
+            extraCoords.AddRange(extraSpaces);
+        }
+
+        extraCoords.Add(getExtraSpace());
+
+        this.extraSpaces = extraCoords.ToArray();
+    }
+
+    private Vector3Int getExtraSpace()
+    {
+        switch(facing)
+        {
+            case Facing.NorthEast:
+                return cellCoords + MovementManager.distance1TileSouthWestGrid;
+            case Facing.NorthWest:
+                return cellCoords + MovementManager.distance1TileSouthEastGrid;
+            case Facing.SouthEast:
+                return cellCoords + MovementManager.distance1TileNorthWestGrid;
+            default:
+                return cellCoords + MovementManager.distance1TileNorthEastGrid;
+        }
+    }
+
+    // public override void spawnActions(GameObject npc)
+    // {
+    //     base.spawnActions(npc);
+
+    //     spawnActions(npc.GetComponent<AnimationManager>());
+
+    //     if(PartyMemberList.characterIsPartyMember(npcName))
+    //     {
+    //         PartyMemberDespawnListener listener = npc.AddComponent<PartyMemberDespawnListener>();
+
+    //         listener.partyMemberName = npcName;
+    //     }
+
+    //     // npc.transform.localScale = Constants.antiAngleAdjustmentScale;
+    // }
+
+    public override void spawnActions(AnimationManager animationManager)
+    {
+        base.spawnActions(animationManager);
+        
+        if(animationManager != null)
+        {
+            animationManager.changesFacing = false;
+            animationManager.disableExtras();
         }
     }
 }

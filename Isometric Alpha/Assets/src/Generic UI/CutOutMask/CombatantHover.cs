@@ -200,6 +200,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
         SelectorManager.SelectorMoved.AddListener(updateOutlineFromSelectors);
         DamagePreviewManager.UpdateDamagePreviews.AddListener(addDamagePreview);
         HoverPanelPopUpButton.HoverPriorityRequest.AddListener(answerCurrentCombatantPriorityRequest);
+        CombatResultsUI.OnCombatResultsUICreation.AddListener(disableCollider);
     }
 
 	public void destroyListeners()
@@ -207,6 +208,15 @@ public class CombatantHover : CombatMouseHover, IRevealable
         SelectorManager.SelectorMoved.RemoveListener(updateOutlineFromSelectors);
         DamagePreviewManager.UpdateDamagePreviews.RemoveListener(addDamagePreview);
         HoverPanelPopUpButton.HoverPriorityRequest.RemoveListener(answerCurrentCombatantPriorityRequest);
+        CombatResultsUI.OnCombatResultsUICreation.RemoveListener(disableCollider);
+    }
+
+    public void disableCollider()
+    {
+        if(linkedStats != null)
+        {
+            linkedStats.disablePolygonCollider();
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)

@@ -40,11 +40,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
       CharacterAnimationType.Spawn
     };
 
-    public bool changesFacing
-    {
-        get;
-        private set;
-    }
+    public bool changesFacing;
+    
     public CharacterFacing _Facing = new CharacterFacing();
 
     public CharacterFacing facing

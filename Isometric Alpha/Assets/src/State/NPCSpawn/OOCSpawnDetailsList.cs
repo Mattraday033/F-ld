@@ -80,7 +80,7 @@ public static class OOCSpawnDetailsList
         list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchOne, locationName: LocationNameList.slaveShackSix, index: Constants.indexOne));
         list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchTwo, locationName: LocationNameList.slaveShackSix, index: Constants.indexTwo));
         
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.thatch, new Vector3Int(-1, 1), LocationNameList.slaveShackSix, facing: Facing.SouthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.thatch, new Vector3Int(-1, 1), LocationNameList.slaveShackSix, facing: Facing.SouthEast, animationType: CharacterAnimationType.Death_Front));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slate, new Vector3Int(9, 1), LocationNameList.slaveShackSix, animationType: CharacterAnimationType.Death_Front));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardVazul, new Vector3Int(9, 0), LocationNameList.slaveShackSix, facing: Facing.NorthWest));
         list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble, new Vector3Int(-1, -3), PrefabNames.tutorialRubble));
@@ -213,9 +213,9 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.beam, new Vector3Int(5, 5), LocationNameList.stables, facing: Facing.SouthEast));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.horse, new Vector3Int(3, -1), LocationNameList.stables));
-        list.Add(new NPCSpawnDetails(NPCNameList.horse + 1, new Vector3Int(12, 9), LocationNameList.stables));
-        list.Add(new NPCSpawnDetails(NPCNameList.horse + 2, new Vector3Int(3, 8), LocationNameList.stables));
+        list.Add(new HorseSpawnDetails(NPCNameList.horse, new Vector3Int(3, -1), Facing.NorthWest, LocationNameList.stables));
+        list.Add(new HorseSpawnDetails(NPCNameList.horse + 1, new Vector3Int(12, 9), Facing.SouthEast, LocationNameList.stables));
+        list.Add(new HorseSpawnDetails(NPCNameList.horse + 2, new Vector3Int(3, 8), Facing.SouthEast, LocationNameList.stables));
 
         oocSpawnDetailsDict.Add(LocationNameList.stables, list);
         #endregion
@@ -353,7 +353,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campCenter, Constants.indexZero));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.csalan, new Vector3Int(17, 17), LocationNameList.campCenter));
+        list.Add(new HorseSpawnDetails(NPCNameList.csalan, new Vector3Int(17, 17), Facing.SouthEast, LocationNameList.campCenter));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.temple, new Vector3Int(9, 11), LocationNameList.campCenter, facing: Facing.SouthEast));
 
@@ -1259,13 +1259,13 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.beam, new Vector3Int(3, 9), ZoneKeyList.manseFirstFloor + LocationNameList.section3b, facing: Facing.SouthEast, speakAtStartScript: new BeamAndCsalanInManseScript()));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.csalan, new Vector3Int(5, 8))); 
+        list.Add(new HorseSpawnDetails(NPCNameList.csalan, new Vector3Int(5, 8), Facing.SouthEast, ZoneKeyList.manseFirstFloor + LocationNameList.section3b)); 
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.horse, new Vector3Int(6, 4))); 
+        list.Add(new HorseSpawnDetails(NPCNameList.horse, new Vector3Int(6, 4), Facing.SouthEast, ZoneKeyList.manseFirstFloor + LocationNameList.section3b)); 
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.horse+1, new Vector3Int(3, 3)));  
+        list.Add(new HorseSpawnDetails(NPCNameList.horse+1, new Vector3Int(3, 3), Facing.SouthEast, ZoneKeyList.manseFirstFloor + LocationNameList.section3b));  
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.horse+2, new Vector3Int(1, 6)));  
+        list.Add(new HorseSpawnDetails(NPCNameList.horse+2, new Vector3Int(1, 6), Facing.SouthEast, ZoneKeyList.manseFirstFloor + LocationNameList.section3b));  
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, list);
 

@@ -499,12 +499,12 @@ public class DialogueManager : MonoBehaviour
 
                     int j = getArgumentInt(buffer, Constants.indexZero);
 
-                    NPCSpawnChecker npcSpawnChecker = currentDialogue.cameraFoci[j].GetComponent<NPCSpawnChecker>();
+                    // NPCSpawnChecker npcSpawnChecker = currentDialogue.cameraFoci[j].GetComponent<NPCSpawnChecker>();
 
-                    if (npcSpawnChecker != null && !(npcSpawnChecker is null))
-                    {
-                        npcSpawnChecker.ignoreInPartyForSpawning = true;
-                    }
+                    // if (npcSpawnChecker != null && !(npcSpawnChecker is null))
+                    // {
+                    //     npcSpawnChecker.ignoreInPartyForSpawning = true;
+                    // }
 
                     currentDialogue.cameraFoci[j].SetActive(true);
 
@@ -890,6 +890,19 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
+                case "faceoppositeplayer":
+
+                    camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
+                    DialogueTrigger dialogueTrigger = currentDialogue.cameraFoci[camTargetIndex].GetComponent<DialogueTrigger>();
+
+                    if(dialogueTrigger != null)
+                    {
+                        dialogueTrigger.setFacing();
+                    }
+
+                    continueStory();
+
+                    break;
                 case "playanimation":
 
                     camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
@@ -903,6 +916,9 @@ public class DialogueManager : MonoBehaviour
                         {
                             case "attack_normal_front":
                                 targetAnimationManager.playAttackAnimation();
+                                break;
+                            case "ooc_idle_front":
+                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.OOC_Idle_Front);
                                 break;
                         }
                     }
@@ -1188,6 +1204,15 @@ public class DialogueManager : MonoBehaviour
                 case "activatehostilityscript":
 
                     HostilityScriptList.runScript(getArgument(buffer));
+
+                    continueStory();
+                    break;
+
+
+                case "setareatosafe":
+                    string locationToBecomeSafe = getArgument(buffer);
+
+                    AreaList.setAreaToSafe(locationToBecomeSafe);
 
                     continueStory();
                     break;

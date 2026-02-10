@@ -12,7 +12,7 @@ public class MonsterSpawnDetails : OOCSpawnDetails
     public MonsterMovementType movementType;
 
     public MonsterSpawnDetails(string npcName, Vector3Int cellCoords, Facing facing = Facing.Random, MonsterMovementType movementType = MonsterMovementType.Random, string tutorialTargetHash = "") :
-    base(npcName, cellCoords, tutorialTargetHash)
+    base(npcName, cellCoords, tutorialTargetHash: tutorialTargetHash)
     {
         this.facing =  facing;
         this.movementType = movementType;

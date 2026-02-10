@@ -594,7 +594,7 @@ public static class SpawnParamsList
         #region Camp Manse
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campManse, NPCNameList.imre),
-                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated })));
+                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated }), spawnWhileHostile: doesNotSpawnWhileHostile));
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campManse, NPCNameList.imre+1),
                                new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.convincedImre }),
                                 stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.askedImreToLeadTheWay, FlagNameList.directorDefeated }), spawnWhileHostile: spawnWhileHostile));
@@ -858,7 +858,7 @@ public static class SpawnParamsList
                                         stopSpawningFlagList: new StopSpawningFlagList(new string[] { BookList.pageFirstDiaryEntryReadFlag }), spawnWhileHostile: spawnWhileHostile));
         #endregion
 
-        #region Manse-1F-33
+        #region Manse-1F-3e
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.section3e, NPCNameList.diary),
                                         new StatBasedSpawnParams(PrimaryStat.Wisdom, Constants.statLevelThree,
                                         stopSpawningFlagList: new StopSpawningFlagList(new string[] { BookList.pageSecondDiaryEntryReadFlag }), spawnWhileHostile: spawnWhileHostile));
@@ -881,6 +881,10 @@ public static class SpawnParamsList
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.director),
                                         new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.keptDirectorAlive}),spawnWhileHostile: spawnWhileHostile));
+        
+         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.vaultableBarrels),
+                                        new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }), spawnWhileHostile: spawnWhileHostile, onlySpawnWhileHostile: onlySpawnWhileHostile));
+        
         #endregion
 
         #endregion

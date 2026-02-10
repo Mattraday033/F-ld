@@ -917,6 +917,37 @@ public static class DialogueList
                                  Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName), 
                                  DialogueCombatInfoList.beamAndCsalanCombatInfo));
 
+            Dialogue horseMansePlaceHolderDialogue = new Dialogue(new string[]   { 
+                                                                NPCNameList.playerNamePlaceHolder, 
+                                                                NPCNameList.beam,
+                                                                NPCNameList.csalan,
+                                                                NPCNameList.horse,
+                                                                NPCNameList.horse+1,
+                                                                NPCNameList.horse+2
+                                                            }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName));
+
+            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse, new Dialogue(new string[]   { 
+                                                                NPCNameList.playerNamePlaceHolder, 
+                                                                NPCNameList.horse
+                                                            }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName)));
+            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse+1, new Dialogue(new string[]   { 
+                                                                NPCNameList.playerNamePlaceHolder, 
+                                                                NPCNameList.horse+1
+                                                            }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName)));
+            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse+2, new Dialogue(new string[]   { 
+                                                                NPCNameList.playerNamePlaceHolder, 
+                                                                NPCNameList.horse+2
+                                                            }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName)));
+            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.csalan, new Dialogue(new string[]   { 
+                                                                NPCNameList.playerNamePlaceHolder, 
+                                                                NPCNameList.csalan
+                                                            }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName)));
+
         #endregion
 
         #region Manse-2f

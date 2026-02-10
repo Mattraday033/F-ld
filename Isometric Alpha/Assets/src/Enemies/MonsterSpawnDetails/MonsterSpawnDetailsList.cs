@@ -448,6 +448,16 @@ public static class MonsterSpawnDetailsList
 
         #endregion
 
+        #region Manse-2F-Office
+
+        list = new List<MonsterSpawnDetails>();
+
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-5, -2), Facing.SouthWest, movementType: MonsterMovementType.Chases));
+
+        monsterSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.office, list);
+
+        #endregion
+
         #endregion
 
         #region Pit

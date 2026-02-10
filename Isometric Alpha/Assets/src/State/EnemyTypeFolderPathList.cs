@@ -15,6 +15,7 @@ public static class EnemyTypeFolderPathList
     private const string lovashiFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/" + EnemyCategoryNameList.lovashi + "/";
 
     private const string miscFolderPath = PrefabNames.charactersFolder + "Misc/";
+    private const string horsesFolderPath = PrefabNames.charactersFolder + "Horses/";
 
     private const string partyMembersFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/PartyMembers/";
 
@@ -158,6 +159,16 @@ public static class EnemyTypeFolderPathList
         #region Misc
     
         folderPathDict.Add(NPCNameList.barricade, miscFolderPath + NPCNameList.barricade + "/");
+
+        #endregion
+
+        #region Horses
+
+        folderPathDict.Add(NPCNameList.horse, horsesFolderPath + MonsterNameList.horseCharger + "/");
+        folderPathDict.Add(NPCNameList.horse+1, horsesFolderPath + MonsterNameList.horseCharger + "/");
+        folderPathDict.Add(NPCNameList.horse+2, horsesFolderPath + MonsterNameList.horseStomper + "/");
+
+        folderPathDict.Add(NPCNameList.csalan, horsesFolderPath + MonsterNameList.horseStomper + "/");
 
         #endregion
 

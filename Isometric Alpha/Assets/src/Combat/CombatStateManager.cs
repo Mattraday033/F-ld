@@ -634,6 +634,8 @@ public class CombatStateManager : MonoBehaviour
 
         announceCombatFinished();
 
+        MovementManager.initializeMovementManager();
+
         SceneChange.changeSceneToOverworld();
 	}
 

@@ -35,6 +35,9 @@ public static class MonsterNameList
     public const string shivMarker = " (Shiv)";
     public const string shovelMarker = " (Shovel)";
 
+    public const string horseCharger = "Horse Charger";
+    public const string horseStomper = "Horse Stomper";
+
     public const string movableObject = "Movable Object";
 
     public static string getPackName(string enemyType)

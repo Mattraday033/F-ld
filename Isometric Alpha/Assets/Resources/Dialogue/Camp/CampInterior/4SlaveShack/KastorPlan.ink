@@ -139,6 +139,8 @@ searchInventoryFor(hasToolBundle,Tool Bundle)
     {
     -kastorReadyToStartRevolt:
         ->7ab
+    -broughtNandorToKastor:
+        ->HR_BroughtNandorToKastor
     -mineLvl3CarterAndNandorInParty:
         ->6c
     -else:
@@ -182,6 +184,40 @@ searchInventoryFor(hasToolBundle,Tool Bundle)
     setToTrue(metKastor)
     ->1a
 }
+
+=== HR_BroughtNandorToKastor ===
+
+You're back. Were you successful? And what is going on outside?
+
+{
+-convincedSlavesToHelpYou:
+    +No. However, I've convinced the north section of the camp to follow my lead. Now I come to liberate the southern half.
+        ->HR_HaveNotMetYet_1b
+-else:
+    +We've had some complications.
+    ->HR_BroughtNandorToKastor_1a
+}
+
+=== HR_BroughtNandorToKastor_1a ===
+
+What kind of complications?
+
+    +The guards are after me. They've set up barricades and posted extra guards to ferret me out.
+        ->HR_BroughtNandorToKastor_1b
+
+=== HR_BroughtNandorToKastor_1b ===
+
+\*Kastor's eyes grow large and he shoots you a worried expression.* This is terrible news. We are not as prepared as I had hoped to fight the guards. But we have you and Nándor with us. We must act now, or everything we have worked for will be in jeopardy.
+
+setToTrue(kastorReadyToStartRevolt)
+
+Are you ready to begin our revolution? After we kick things off, we won't be able to turn back.
+
+    +I'm ready. Let us finally start this thing.
+            ->7ac
+    +I just thought of something I must take care of. I will be back shortly.
+        The longer you take, the better the guards' defenses will be. Prepare as you need, but hurry!
+        ->deactivateExtras
 
 === HR_WorkingOnPlan ===
 
@@ -2000,7 +2036,7 @@ Even in death, he helps our cause. I am once more in his debt.
     
     changeCamTarget({kastorIndex})
     
-    Excellent. Then if you haven't been informed already, Nándor was the first among us to work on the plan. He enlisted my and Carter's help in the days leading up to the lockdown, and we decided between the three of us who else to recruit. Then I was the one to recruit them to the cause and set them with on their individual tasks. Who recruited you?
+    Excellent. Then if you haven't been informed already, Nándor was the first among us to work on the plan. He enlisted my and Carter's help in the days leading up to the lockdown, and we decided between the three of us who else to recruit. Then I was the one to recruit the others and set them on their individual tasks. Who recruited you?
 
     +Broglin and Garcha. They needed a way to communicate during the lockdown and helped me gain the trust of Guard László so I could leave my hut. *Show badge*
         ->6caa    
@@ -2044,7 +2080,7 @@ Even in death, he helps our cause. I am once more in his debt.
     ->campHostileBeforeDiscussingPlan
 
     -else:
-    We certainly were lucky that they were able to recruit such a capable member to our cause, then. Not many could have braved the mine and brought Nándor back to us.
+    We certainly were lucky that they were able to recruit such a resourceful individual, then. Not many could have braved the mine and brought Nándor back to us.
     }
     ->6cab
 
@@ -2129,7 +2165,6 @@ It looks like everything is finished. We are ready to move on to the final part 
 === 7a ===
 
 setToTrue(kastorReadyToStartRevolt)
-~kastorReadyToStartRevolt = true
 
 Are you ready to begin our revolution? After we kick things off, we won't be able to turn back.
 
@@ -2423,13 +2458,6 @@ deactivate({carterIndex})
 }
 
 {
--(kastorStartedRevolt or kastorReadyToStartRevolt) and not deathFlagGuardMárcos:
-deactivate({marcosIndex})
-activate({marcosSleepingIndex})
-setToTrue(marcosSleepingSS4)
-}
-
-{
 -restAfterDeactivatingExtras:
     ~restAfterDeactivatingExtras = false
     restParty()
@@ -2440,6 +2468,14 @@ fadeBackIn(60,false)
 ->Close
 
 === Close ===
+
+{
+-broughtNandorToKastor and not deathFlagGuardMárcos and not (kastorStartedRevolt and convincedSlavesToHelpYou):
+deactivate({marcosIndex})
+activate({marcosSleepingIndex})
+setToTrue(marcosSleepingSS4)
+}
+
 
 close()
 

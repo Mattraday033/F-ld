@@ -134,7 +134,8 @@ public static class EnemyPackInfoList
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                                         FlagNameList.neCampOverseerKilled,
-                                                                                                        DialogueNameList.slavesAfterKillingOverseerCampNEKey);
+                                                                                                        DialogueNameList.slavesAfterKillingOverseerCampNEKey,
+                                                                                                        xpDrop: 100);
 
     public readonly static BossPackInfo kendeKitchensHalfSlavesNoGuard = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.kende,
@@ -142,7 +143,8 @@ public static class EnemyPackInfoList
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                                         FlagNameList.kendeUponEnteringKitchens,
-                                                                                                        new KendeFightQuestScript());
+                                                                                                        script: new KendeFightQuestScript(),
+                                                                                                        xpDrop: 100);
 
     public readonly static BossPackInfo kendeKitchensHalfSlaves = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.kende,
@@ -151,7 +153,7 @@ public static class EnemyPackInfoList
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                                         FlagNameList.kendeUponEnteringKitchens,
-                                                                                                        new KendeFightQuestScript());
+                                                                                                        script: new KendeFightQuestScript());
 
     public readonly static BossPackInfo kendeKitchensFullSlavesNoGuard = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.kende,
@@ -159,7 +161,7 @@ public static class EnemyPackInfoList
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                                         FlagNameList.kendeUponEnteringKitchens,
-                                                                                                        new KendeFightQuestScript());
+                                                                                                        script: new KendeFightQuestScript());
 
     public readonly static BossPackInfo kendeKitchensFullSlaves = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.kende,
@@ -168,7 +170,7 @@ public static class EnemyPackInfoList
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                                         FlagNameList.kendeUponEnteringKitchens,
-                                                                                                        new KendeFightQuestScript());
+                                                                                                        script: new KendeFightQuestScript());
 
     public readonly static BossPackInfo taborManseSecondFloorFight = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.oneExecutioner
@@ -180,9 +182,10 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.oneExecutioner
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
-                                                                                                        new ItemListID[]  {new ItemListID(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyBackIndex)},
                                                                                                         FlagNameList.honorguardCaptainKilled,
-                                                                                                        new KeyHalfScript());
+                                                                                                        guaranteedDrops: new ItemListID[]  {new ItemListID(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyBackIndex)},
+                                                                                                        script: new KeyHalfScript(),
+                                                                                                        xpDrop: 100);
 
     public readonly static BossPackInfo directorWithBarricades = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.barricade,
@@ -190,27 +193,31 @@ public static class EnemyPackInfoList
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                                         FlagNameList.directorDefeated,
-                                                                                                        DialogueNameList.directorDefeatedConvoKey);
+                                                                                                        DialogueNameList.directorDefeatedConvoKey,
+                                                                                                        xpDrop: 400);
 
     public readonly static BossPackInfo directorWithoutBarricades = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.director
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                                         FlagNameList.directorDefeated,
-                                                                                                        DialogueNameList.directorDefeatedConvoKey);
+                                                                                                        DialogueNameList.directorDefeatedConvoKey,
+                                                                                                        xpDrop: 400);
 
     public readonly static BossPackInfo beamAndCsalanFight = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.oneExecutioner
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
-                                                                                                        FlagNameList.foughtHorsesInManse);
+                                                                                                        FlagNameList.foughtHorsesInManse, 
+                                                                                                        xpDrop: 100);
 
     public readonly static BossPackInfo clayFightForTabor = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.oneExecutioner
                                                                                                        },
                                                                                                         DropTableList.slaveMineDT1Name,
                                                                                                         FlagNameList.foughtCrowdForTabor,
-                                                                                                        DialogueNameList.taborAfterClayFightKey);
+                                                                                                        DialogueNameList.taborAfterClayFightKey,
+                                                                                                        xpDrop: 100);
 
     // //used in the dialogue started upon entering the Manse kitchens
     // public readonly static EnemyPackInfo halfSlavesNoGuardFight = new EnemyPackInfo(new int[] { 1, 6 }, new int[] { 1, 6 }, new EnemyStats[]{loadEnemyStatsFromResources(kendeTheCookWithoutSummon),
@@ -310,16 +317,18 @@ public static class EnemyPackInfoList
                                                                                                                             },
                                                                                                                     DropTableList.slaveMineDT1Name);
 
-    private readonly static EnemyPackInfo caveMatronBatBoss = new EnemyPackInfo(new CreatureAmount[] { EnemyAmountList.caveMatron },
+    private readonly static EnemyPackInfo caveMatronBatBoss = new BossPackInfo(new CreatureAmount[] { EnemyAmountList.caveMatron },
                                                                                                     DropTableList.slaveMineDT1Name,
-                                                                                                    new ItemListID[] { new ItemListID(  ItemList.keyItemListIndex,
-                                                                                                                                        ItemList.mineArmoryKeyIndex) });
+                                                                                                    guaranteedDrops: new ItemListID[] { new ItemListID(  ItemList.keyItemListIndex,
+                                                                                                                                        ItemList.mineArmoryKeyIndex) }, 
+                                                                                                                                        xpDrop: 100);
 
-    private readonly static EnemyPackInfo wormBoss = new EnemyPackInfo(new CreatureAmount[] {  EnemyAmountList.threeDenMothers,
+    private readonly static EnemyPackInfo wormBoss = new BossPackInfo(new CreatureAmount[] {  EnemyAmountList.threeDenMothers,
                                                                                                 EnemyAmountList.threeBatSwarms,
                                                                                                 EnemyAmountList.oneArmoredBat
                                                                                                 },
-                                                                                                DropTableList.slaveMineDT1Name);
+                                                                                                DropTableList.slaveMineDT1Name, 
+                                                                                                xpDrop: 100);
     #endregion
 
     public static EnemyPackInfo getEnemyPackInfo(string areaName, int index)
@@ -593,6 +602,16 @@ public static class EnemyPackInfoList
         list.Add(twoSpearmenTwoAxemenTwoJavalineers);
 
         enemyPackInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, list);
+
+        #endregion
+
+        #region Manse-2F-Office
+
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoSpearmenTwoAxemenTwoJavalineers);
+
+        enemyPackInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.office, list);
 
         #endregion
 

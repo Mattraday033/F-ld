@@ -105,7 +105,7 @@ What have you decided?
 
     +You have misjudged us: that will not happen. I will see to it. 
         ->csalanSpeaksAndBeamTranslates("<I would hear you swear this to me. Swear on whatever you hold most dear that you will burn our bodies to ash rather than eat from them.>", "Csalan wants to hear an oath from you declaring you will allow fire to consume their bodies rather than consume them yourselves. Swear it, lest whatever you hold most dear be forfeit to the Gods.", ->1e)
-    +I have no intention of allowing a being I have spoken with be eaten. 
+    +I have no intention of allowing a being I have spoken with to be eaten. 
         ->csalanSpeaksAndBeamTranslates("<I would hear you swear this to me. Swear on whatever you hold most dear that you will burn our bodies to ash rather than eat from them.>", "Csalan wants to hear an oath from you declaring you will allow fire to consume their bodies rather than consume them yourselves. Swear it, lest whatever you hold most dear be forfeit to the Gods.", ->1e)
     +I won't partake, but my fellows are starving. I will not order them to go without the meat your bodies would provide.
         ->csalanSpeaksAndBeamTranslates("<You disgust me branded. Never have I been more sure that our cause is righteous.>", "Csalan says that you disgust him, and your words only serve to prove him superior to you.", ->Combat)

@@ -18,9 +18,12 @@ VAR sitting = true
 
 VAR dialogueKeyForAfterDefeatingDirector = "directorDefeatedConvo"
 
+VAR slaveShack4SceneName = "4SlaveShack"
+VAR southEasternCampSceneName = "SECamp"
+VAR manseKitchensSceneName = "Manse-1F-Kitchens"
+VAR manseStockroomSceneName = "Manse-2F-Stockroom"
+
 VAR playerName = ""
-
-
 
 ->1a
 
@@ -36,7 +39,7 @@ activate({nandorIndex})
 
 fadeBackIn(60)
 
-    \*A man, his hair grey, his armor made for someone larger, sits behind a desk. He stares at a large banner, hung on the wall and made of cloth as green as steppe grass with the golden symbol of the Lovashi Confederation emblazoned upon it. After a moment, he turns to you.* To have made it past my guards is impressive. You'll forgive me if I don't stand to greet you. It's my leg, you see. It took a spear beneath the walls at Rudra, and it's been flaring up again.
+    \*A man, his hair grey, his armor made for someone larger, sits behind a desk. He stares at the steppe green and gold of the Lovashi banner that adorns the office wall. After a moment, he turns to you.* To have made it past my guards is impressive. You'll forgive me if I don't stand to greet you. It's my leg, you see. It took a spear beneath the walls at Rudra, and it's been flaring up again.
 
         +You're the Director? I expected someone a bit more... regal.
             ->1aa
@@ -487,6 +490,13 @@ No wait a moment! I would rather die than submit to your custody. And while I am
 === Combat ===
 
 setToTrue(directorDefeated)
+
+openGateWithKey(Office Door)
+
+setAreaToSafe({slaveShack4SceneName})
+setAreaToSafe({southEasternCampSceneName})
+setAreaToSafe({manseKitchensSceneName})
+setAreaToSafe({manseStockroomSceneName})
 
 enterCombat(0,{dialogueKeyForAfterDefeatingDirector})
 

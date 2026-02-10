@@ -189,8 +189,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 30, y: 0}
-  m_SizeDelta: {x: 30, y: 0}
+  m_AnchoredPosition: {x: 20, y: 0}
+  m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &7931728615944211806
 CanvasRenderer:
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 797.5
+  m_PreferredWidth: 790
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
@@ -543,6 +543,7 @@ MonoBehaviour:
     currentAreaHostilities: []
     secretDoors: []
     partyMemberStats: []
+    currentSkillType: 0
     currentShopkeeperInventories: []
     currentBuyBackInventories: []
     monsterLocations: []
@@ -565,7 +566,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 30
+  m_Spacing: 20
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
@@ -1268,7 +1269,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 797.5
+  m_PreferredWidth: 790
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
@@ -1318,6 +1319,7 @@ GameObject:
   - component: {fileID: 4037687853469856683}
   - component: {fileID: 7640597295082896027}
   - component: {fileID: 6967380466031319944}
+  - component: {fileID: 7431933163175015675}
   m_Layer: 5
   m_Name: Decision Panel Parent
   m_TagString: Untagged
@@ -1390,6 +1392,14 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!222 &7431933163175015675
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4867348813873538019}
+  m_CullTransparentMesh: 1
 --- !u!1 &4899136010640689450
 GameObject:
   m_ObjectHideFlags: 0
@@ -1518,7 +1528,7 @@ MonoBehaviour:
   m_MinWidth: -1
   m_MinHeight: -1
   m_PreferredWidth: -1
-  m_PreferredHeight: 10000
+  m_PreferredHeight: 765
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1

@@ -43,7 +43,7 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
         DialogueManager.getInstance().startDialogue(dialogue);
     }
 
-    protected void setFacing()
+    public void setFacing()
     {
         if(animationManager == null || !animationManager.changesFacing)
         {

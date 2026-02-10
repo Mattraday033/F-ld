@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public enum DescriptionPanelBuildingBlockType
 {
     Name = 1, Icon = 2, Text = 3, DamageText = 4, BonusDamageText = 5, Range = 6,
-    DescriptionText = 7, PrimaryStat = 8, SecondaryStat = 9, Skills = 10, Exuberances = 11
+    DescriptionText = 7, PrimaryStat = 8, SecondaryStat = 9, Skills = 10, Exuberances = 11, Item = 12
 };
 
 public enum DescriptionPanelBuilderType {Standard = 0, CombatStats = 1, Stats = 2, UpgradeStatsDifference = 3, PlayerSideStats = 4, CombatActionsAndTraits = 5};
@@ -64,6 +64,7 @@ public struct DescriptionPanelBuildingBlock
     public string symbolCharacter;
     public string text;
     public string formula;
+    public Item item;
 
     public DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType type, string text)
     {
@@ -82,6 +83,7 @@ public struct DescriptionPanelBuildingBlock
 
         this.symbolCharacter = null;
         this.formula = null;
+        this.item = null;
     }
 
     public DescriptionPanelBuildingBlock(string formula, DescriptionPanelBuildingBlockType type, string text)
@@ -101,6 +103,7 @@ public struct DescriptionPanelBuildingBlock
 
         this.symbolCharacter = null;
         this.formula = formula;
+        this.item = null;
     }
 
     public DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType type, string text, string iconName)
@@ -111,6 +114,7 @@ public struct DescriptionPanelBuildingBlock
 
         this.symbolCharacter = null;
         this.formula = null;
+        this.item = null;
     }
 
     public DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType type, string text, char symbolChar)
@@ -121,6 +125,7 @@ public struct DescriptionPanelBuildingBlock
 
         this.iconName = null;
         this.formula = null;
+        this.item = null;
     }
 
     public DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType type, string text, string iconName, char symbolChar)
@@ -131,6 +136,7 @@ public struct DescriptionPanelBuildingBlock
         this.iconName = iconName;
 
         this.formula = null;
+        this.item = null;
     }
 
 
@@ -142,8 +148,19 @@ public struct DescriptionPanelBuildingBlock
         this.text = text;
         this.formula = formula;
         this.symbolCharacter = null;
+        this.item = null;
     }
 
+    public DescriptionPanelBuildingBlock(Item item)
+    {
+        this.type = DescriptionPanelBuildingBlockType.Item;
+        this.iconName = null;
+
+        this.text = null;
+        this.formula = null;
+        this.symbolCharacter = null;
+        this.item = item;
+    }
     public Sprite getIcon()
     {
         return Helpers.loadSpriteFromResources(iconName);
@@ -764,6 +781,8 @@ public class DescriptionPanelBuilder : MonoBehaviour
                 return Resources.Load<GameObject>(PrefabNames.descriptionPanelBuildingBlockDamageText);
             case DescriptionPanelBuildingBlockType.BonusDamageText:
                 return Resources.Load<GameObject>(PrefabNames.descriptionPanelBuildingBlockBonusDamageText);
+            case DescriptionPanelBuildingBlockType.Item:
+                return Resources.Load<GameObject>(PrefabNames.descriptionPanelBuildingBlockItem);
             default:
                 return Resources.Load<GameObject>(PrefabNames.descriptionPanelBuildingBlockName);
         }

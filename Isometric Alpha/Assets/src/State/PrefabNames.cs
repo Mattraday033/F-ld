@@ -170,6 +170,7 @@ public static class PrefabNames
     public const string descriptionPanelBuildingBlockRange = "Range Building Block";
     public const string descriptionPanelBuildingBlockDamageText = "Damage Text Building Block";
     public const string descriptionPanelBuildingBlockBonusDamageText = "Bonus Damage Text Building Block";
+    public const string descriptionPanelBuildingBlockItem = "Combat Results Description Panel";
 
     public const string combatPressEPrompt = "Combat Press E Prompt";
 

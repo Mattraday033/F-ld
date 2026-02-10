@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public enum BlockFormatType {None = 0, PartyMemberStats = 1, CombatHover = 2, PlayerStats = 3}
+public enum BlockFormatType {None = 0, PartyMemberStats = 1, CombatHover = 2, PlayerStats = 3, CombatResults = 4}
 
 public class BlockFormat
 {
@@ -101,6 +101,8 @@ public class BlockFormat
 
             case BlockFormatType.PartyMemberStats: 
                 return new BlockFormat(false, Color.white, Color.black);
+            case BlockFormatType.CombatResults: 
+                return new BlockFormat(Color.clear, Color.clear, Color.clear, Color.black);
             default:
                 return null;
         }
@@ -120,6 +122,8 @@ public class DescriptionPanelBlockFormatter : MonoBehaviour
 
     [SerializeField]
     public BlockFormat format;
+
+    public bool centerAllText = false;
 
     public void setFormat(BlockFormat format)
     {
@@ -164,6 +168,11 @@ public class DescriptionPanelBlockFormatter : MonoBehaviour
         if (flipDirection)
         {
             row.flipDirection();
+        }
+
+        if(centerAllText)
+        {
+            row.centerText();
         }
 
     }

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: BenchMainSlab
+  m_Name: Back_Ladder_Tall
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: f28658eeb6320664c8b546571ebd1bb1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d5b6cba826e7e3241827f235f7c20fcf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

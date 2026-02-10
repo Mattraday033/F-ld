@@ -12,6 +12,8 @@ public class NotificationManager : MonoBehaviour
 
     private static bool skipNextSpawn;
 
+    private static string previousLocation = "";
+
     private const float timeBetweenNotifications = 1f;
     private float elapsedTime = 0f;
 
@@ -134,7 +136,11 @@ public class NotificationManager : MonoBehaviour
 
         // if (AreaManager.getInstance() != null)
         // {
-        addToNotificationQueue(AreaManager.getInstance().getAreaDescription(), 0);
+        if(!AreaManager.locationName.Equals(previousLocation))
+        {
+            addToNotificationQueue(AreaManager.getInstance().getAreaDescription(), 0);
+            previousLocation = AreaManager.locationName;
+        }
 
         startSpawningNotifications();
         // }
@@ -147,11 +153,19 @@ public class NotificationManager : MonoBehaviour
         PlayerOOCStateManager.OnLeavingTutorialSequenceState.AddListener(startSpawningNotifications);
         AreaManager.OnAreaSpawn.AddListener(spawnNotificationsOnAreaChange);
 
+        LoadSaveFile.OnLoad.AddListener(resetPreviousLocation);
+
         notificationQueue = new List<IDescribable>();
         
         notificationPopUpButton = null;
         instance = null;
         skipNextSpawn = false;
+        previousLocation = "";
+    }
+
+    private static void resetPreviousLocation()
+    {
+        previousLocation = "";
     }
 
     public void Awake()

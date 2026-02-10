@@ -56,7 +56,7 @@ public class TransitionManager : MonoBehaviour
         fadeToBlackOnTransition = true;
     }
 
-    public static void changeLocation(Transition transition)
+    public static void changeLocation(Transition transition, bool skipAutosave = false)
     {
         if(currentCoroutine != null)
         {
@@ -68,7 +68,7 @@ public class TransitionManager : MonoBehaviour
             fadeToBlackManager.setAndStartFadeToBlack();
         }
 
-        currentCoroutine = instance.StartCoroutine(instance.waitForBlackScreenThenTransition(transition));
+        currentCoroutine = instance.StartCoroutine(instance.waitForBlackScreenThenTransition(transition, skipAutosave));
     }
     
     public static void addTransition(Transition transition)
@@ -81,7 +81,7 @@ public class TransitionManager : MonoBehaviour
         changeLocation(new Transition(AreaManager.locationName, targetLocationName));
 	}
 
-    private IEnumerator waitForBlackScreenThenTransition(Transition transition)
+    private IEnumerator waitForBlackScreenThenTransition(Transition transition, bool skipAutosave)
     {
         NotificationManager.OnDeleteAllNotifications.Invoke();
 
@@ -90,7 +90,10 @@ public class TransitionManager : MonoBehaviour
             yield return null;
         }
 
-        SaveHandler.autosave(transition);
+        if(!skipAutosave)
+        {
+            SaveHandler.autosave(transition);
+        }
 
         transition.playScript();
 

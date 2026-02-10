@@ -385,6 +385,11 @@ public static class AreaList
         }
 	}
 
+	public static void setAreaToSafe(string locationName)
+	{
+		getArea(locationName).setHostility(Constants.sizeZero);
+	}
+
     public static void setAreaHostility(string locationName, int hostility)
     {
         getArea(locationName).setHostility(hostility);

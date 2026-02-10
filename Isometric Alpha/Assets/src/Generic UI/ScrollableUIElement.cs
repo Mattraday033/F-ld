@@ -295,7 +295,6 @@ public class ScrollableUIElement : MonoBehaviour
 		descriptionPanelBuilder.buildDescriptionPanel(describableInBlocks);
 
 		return blockDescriptionRow.GetComponent<BlockGridRow>();
-
 	}
 
 	public string getDisabledRowName()

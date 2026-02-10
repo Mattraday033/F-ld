@@ -37,16 +37,25 @@ public class OpenBarracksGateScript : PlayerInteractionScript
     private static Vector3Int transitionSpawnCoords = new Vector3Int(6, -2);
     private static TransitionSpace transitionSpace;
 
+    public void openGate()
+    {
+        GateAndChestManager.addKey(AreaManager.locationName + NPCNameList.barracksArmoryGate+1);
+        TransitionManager.BeforeTransition.RemoveListener(openGate);
+    }
+
     public override void runScript()
     {
         AreaList.setAreaToHostile(LocationNameList.guardHouseSouthWest);
         AreaList.setAreaToHostile(LocationNameList.campCenter);
+        AreaList.setAreaToHostile(ZoneKeyList.manseFirstFloor + LocationNameList.section1a);
+        AreaList.setAreaToHostile(ZoneKeyList.manseSecondFloor + LocationNameList.section1a);
 
         transitionSpawnCoords = MovementManager.getPlayerCell() + MovementManager.distance1TileSouthEastGrid;
 
         TransitionManager.CollectTransitionSpaces.AddListener(createTransitionCopy);
+        TransitionManager.BeforeTransition.AddListener(openGate);
 
-        TransitionManager.changeLocation(new LadderTransition(LocationNameList.guardHouseSouthWest, LocationNameList.guardHouseSouthWest, transitionSpawnCoords, Facing.NorthWest));
+        TransitionManager.changeLocation(new LadderTransition(LocationNameList.guardHouseSouthWest, LocationNameList.guardHouseSouthWest, transitionSpawnCoords, Facing.NorthWest), Constants.skipAutosave);
     }
 
     private void createTransitionCopy()

@@ -168,17 +168,8 @@ public class BossPackInfo : EnemyPackInfo
 
     public QuestStepActivationScript script;
 
-    public BossPackInfo(CreatureAmount[] FoeTypes, string dropTableName, string killFlagKey):
-    base(FoeTypes, dropTableName)
-    {
-        this.FoeTypes = FoeTypes;
-
-        this.dropTableName = dropTableName;
-        this.killFlagKey = killFlagKey;
-    }
-
-    public BossPackInfo(CreatureAmount[] FoeTypes, string dropTableName, string killFlagKey, string dialogueUponSceneLoadKey):
-    base(FoeTypes, dropTableName)
+    public BossPackInfo(CreatureAmount[] FoeTypes, string dropTableName, string killFlagKey = "", string dialogueUponSceneLoadKey = null, ItemListID[] guaranteedDrops = null, QuestStepActivationScript script = null, int xpDrop = 0):
+    base(FoeTypes, dropTableName, guaranteedDrops)
     {
         this.FoeTypes = FoeTypes;
 
@@ -186,49 +177,9 @@ public class BossPackInfo : EnemyPackInfo
         this.killFlagKey = killFlagKey;
         
         this.dialogueUponSceneLoadKey = dialogueUponSceneLoadKey;
-    }
-
-    public BossPackInfo(CreatureAmount[] FoeTypes, string dropTableName, ItemListID[] guaranteedDrops, string killFlagKey):
-    base(FoeTypes, dropTableName, guaranteedDrops)
-    {
-        this.FoeTypes = FoeTypes;
-
-        this.dropTableName = dropTableName;
-        this.killFlagKey = killFlagKey;
-    }
-
-    public BossPackInfo(CreatureAmount[] FoeTypes, string dropTableName, string killFlagKey, QuestStepActivationScript script):
-    base(FoeTypes, dropTableName)
-    {
-        this.FoeTypes = FoeTypes;
-
-        this.dropTableName = dropTableName;
-
-        this.killFlagKey = killFlagKey;
-
         this.script = script;
-    }
 
-    public BossPackInfo(CreatureAmount[] FoeTypes, string dropTableName, ItemListID[] guaranteedDrops, string killFlagKey, QuestStepActivationScript script):
-    base(FoeTypes, dropTableName, guaranteedDrops)
-    {
-        this.FoeTypes = FoeTypes;
-
-        this.dropTableName = dropTableName;
-
-        this.killFlagKey = killFlagKey;
-
-        this.script = script;
-    }
-
-    public BossPackInfo(CreatureAmount[] FoeTypes, string dropTableName, QuestStepActivationScript script):
-    base(FoeTypes, dropTableName)
-    {
-        this.FoeTypes = FoeTypes;
-
-        this.dropTableName = dropTableName;
-
-        this.script = script;
+        this.xpDrop = xpDrop;
     }
 
     public override string getQuestStep()

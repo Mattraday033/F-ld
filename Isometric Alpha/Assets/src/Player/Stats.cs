@@ -964,6 +964,14 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public abstract GridCoords findLocationToSpawn();
 
+    public void disablePolygonCollider()
+    {
+        if(animationManager != null && animationManager.polygonCollider2D != null)
+        {
+            animationManager.polygonCollider2D.enabled = false;
+        }
+    }
+
     public virtual string getGenderMarker()
     {
         return "";
