@@ -17,6 +17,7 @@ public class DescriptionPanelRow : MonoBehaviour
 
     public GameObject iconObject;
     public Image iconImage;
+    public Image iconOutline;
     public Image iconBackground;
     public LayoutElement iconLayoutElement;
 
@@ -87,7 +88,7 @@ public class DescriptionPanelRow : MonoBehaviour
 
     public void setIcon(Sprite sprite)
     {
-        if (iconObject == null || iconImage == null || sprite == null)
+        if (iconObject == null || iconImage == null)
         {
             return;
         }
@@ -100,15 +101,7 @@ public class DescriptionPanelRow : MonoBehaviour
         {
             iconSymbolText.enabled = false;
         }
-
-        if(IconList.iconNeedsBackground(sprite.name))
-        {
-            iconBackground.sprite = Helpers.loadSpriteFromResources(IconList.getIconBackgroundName(sprite.name));
-            iconBackground.color = Color.black;
-        }
     }
-
-    
 
     public void setIcon(string symbol)
     {
@@ -124,8 +117,6 @@ public class DescriptionPanelRow : MonoBehaviour
         iconSymbolText.enabled = true;
         iconSymbolText.text = symbol.ToString();
 
-        iconBackground.color = Color.black;
-
         setIconHoverText(HoverMessageList.getMessage(symbol.ToString()));
     }
 
@@ -136,6 +127,11 @@ public class DescriptionPanelRow : MonoBehaviour
             iconLayoutElement.preferredWidth = sizeX;
             iconLayoutElement.preferredHeight = sizeY;
         }
+    }
+
+    public void setIconOutlineColor(Color color)
+    {
+        DescriptionPanel.setImageColor(iconOutline, color);
     }
 
     public void setIconBackgroundColor(Color color)
