@@ -37,6 +37,7 @@ public static class ColorList
     public readonly static Color32 grey100Transparent = new Color32(100, 100, 100, 125);
     public readonly static Color32 grey125 = new Color32(125, 125, 125, 255);
     public readonly static Color32 grey155 = new Color32(155, 155, 155, 255);
+    public readonly static Color32 grey175 = new Color32(175, 175, 175, 255);
     public readonly static Color32 grey215 = new Color32(215, 215, 215, 255);
     public readonly static Color32 grey245 = new Color32(245, 245, 245, 255);
     #endregion
@@ -65,9 +66,9 @@ public static class ColorList
     public readonly static Color ineligibleColor = grey125; //Should be a light grey/red for now
     public readonly static Color alternateRowColor = grey215;
 
-    public readonly static Color colorIndicatingChosenBefore = grey100Transparent; //turns choice text gray and a bit transparent if it has been chosen before
+    public readonly static Color colorIndicatingChosenBefore = grey155; 
 
-    public readonly static Color combatHoverOutlineGrey = grey155;
+    public readonly static Color combatHoverOutlineGrey = grey175;
 
     public readonly static Color blueShieldTextColor = new Color32(25, 100, 255, 255); // color is a lighter blue than default Color.blue
 	public readonly static Color greenLeafTextColor = new Color32(25, 255, 0, 255); // color is a lighter green than default Color.green

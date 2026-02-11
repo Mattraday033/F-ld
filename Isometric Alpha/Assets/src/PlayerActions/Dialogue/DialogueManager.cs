@@ -149,9 +149,11 @@ public class DialogueManager : MonoBehaviour
         if(dialogue == null)
         {
             Debug.LogError("dialogue == null");
+            return;
         } else if(dialogue.inkJSON == null)
         {
             Debug.LogError("dialogue.inkJSON == null");
+            return;
         }
 
 		if (RevealManager.currentlyRevealed)

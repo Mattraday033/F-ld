@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d72aaaac55a410f48ab948b7bddb7460
+guid: 8fb9e16bcbec3824f881bc8bdaf4f428
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Sherwood
+  - JuniusIrish
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

@@ -257,7 +257,7 @@ public class ScrollableUIElement : MonoBehaviour
 
 		gridRow.setParentGrid(this);
 
-		gridRow.gameObject.name = panelNamePrefix + rowIndex;
+		gridRow.gameObject.name = gridRow.gameObject.name + "_" + rowIndex;
 
 		if (describable != null && !(describable is null))
 		{
