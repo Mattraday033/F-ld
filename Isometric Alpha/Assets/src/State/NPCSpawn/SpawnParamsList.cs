@@ -813,8 +813,15 @@ public static class SpawnParamsList
 
         #region Manse-1F-1a
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.section1a, NPCNameList.barricadeGuards+4),
+                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[]{FlagNameList.directorDefeated, FlagNameList.barricadeGuardDefeatKey4}), onlySpawnWhileHostile: onlySpawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.section1a, NPCNameList.barricade+4),
+                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[]{FlagNameList.directorDefeated, FlagNameList.barricadeGuardDefeatKey4}), onlySpawnWhileHostile: onlySpawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.section1a, NPCNameList.guardAndras+4),
+                               new InteractableSpawnParams(new NeverSpawnFlagList()));
+
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseFirstFloor + LocationNameList.section1a, NPCNameList.crate),
-                                        new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.revoltStarted }), stopSpawningFlagList: new StopSpawningFlagList(new string[]{ FlagNameList.directorDefeated }), spawnWhileHostile: spawnWhileHostile));
+                                        new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[]{ FlagNameList.directorDefeated }), spawnWhileHostile: spawnWhileHostile, onlySpawnWhileHostile: onlySpawnWhileHostile));
         #endregion
 
         #region Manse-1F-2a

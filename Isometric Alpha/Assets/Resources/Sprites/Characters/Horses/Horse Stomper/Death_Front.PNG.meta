@@ -168,7 +168,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 9
-      pivot: {x: 0.425, y: 0.345}
+      pivot: {x: 0.435, y: 0.355}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -189,7 +189,7 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 9
-      pivot: {x: 0.425, y: 0.345}
+      pivot: {x: 0.445, y: 0.365}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -205,12 +205,12 @@ TextureImporter:
       name: Death_Front_5
       rect:
         serializedVersion: 2
-        x: 1280
+        x: 1279
         y: 0
         width: 256
         height: 256
       alignment: 9
-      pivot: {x: 0.425, y: 0.345}
+      pivot: {x: 0.455, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

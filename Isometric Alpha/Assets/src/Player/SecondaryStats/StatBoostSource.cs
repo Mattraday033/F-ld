@@ -236,8 +236,6 @@ public abstract class StatBoostSource : INameSource
                 return "3";
             case ItemList.bronzeCuirassKey:
                 return "S+1";            
-            case ItemList.wardensShieldKey:
-                return "4";
             default:
                 return Constants.zeroRating;
         }

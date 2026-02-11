@@ -878,6 +878,26 @@ public static class DialogueList
 
         #region Manse-1f
 
+        addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section1a, NPCNameList.barricadeGuards+4,
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.barricadeGuards+4,
+                                                        NPCNameList.guardAndras+4
+                                                      },
+                                Resources.Load<TextAsset>(DialogueNameList.secondBarricadeGuardsPath),
+                                DialogueCombatInfoList.barricadeGuardsCombatInfo,
+                                new StoryFlagList(InkVariableNameList.defeatFlag, FlagNameList.barricadeGuardDefeatKey4)));
+
+        addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section1a, NPCNameList.barricade+4,
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.barricadeGuards+4,
+                                                        NPCNameList.guardAndras+4
+                                                      },
+                                Resources.Load<TextAsset>(DialogueNameList.secondBarricadeGuardsPath),
+                                DialogueCombatInfoList.barricadeGuardsCombatInfo,
+                                new StoryFlagList(InkVariableNameList.defeatFlag, FlagNameList.barricadeGuardDefeatKey4)));
+                                
             addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.kende,
                                 new Dialogue(new string[]   { 
                                                                 NPCNameList.playerNamePlaceHolder, 

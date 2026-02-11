@@ -120,17 +120,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                                 TraitList.backLine
                                                                             }));
 
-        SpawnDetails spawnDetails = new SpawnDetails(new GridCoords[] {
-                                                                        new GridCoords(Constants.indexThree, Constants.indexZero),
-                                                                        new GridCoords(Constants.indexThree, Constants.indexOne),
-                                                                        new GridCoords(Constants.indexThree, Constants.indexTwo),
-                                                                        new GridCoords(Constants.indexThree, Constants.indexThree)
-                                                                      }, 
-                                                                       new GridCoords(Constants.indexThree, Constants.indexOne),
-                                                                       new GridCoords(Constants.indexThree, Constants.indexOne), 
-                                                                       true);
-
-        enemyStatsDict.Add(NPCNameList.barricade, new LargeEnemyStats(NPCNameList.barricade,
+        enemyStatsDict.Add(NPCNameList.barricade, new MultiAnimationEnemyStats(NPCNameList.barricade,
                                                                                 Constants.twentyFiveArmor,
                                                                                         125,
                                                             new Trait[] { 
@@ -138,8 +128,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             TraitList.large,
                                                                             TraitList.blocker,
                                                                             TraitList.frontLine
-                                                                        },
-                                                                        spawnDetails));
+                                                                        }));
 
         #endregion
 
@@ -265,6 +254,15 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                         TraitList.chaotic
                                                                     },
                                                                     gendered: true));
+                                                                
+        enemyStatsDict.Add(NPCNameList.beam, new EnemyStats(NPCNameList.beam,
+                                                                            Constants.fifteenArmor,
+                                                                                    110,
+                    AbilityList.getAbility(null, AbilityList.feedKey) as Ability,
+                                                        new Trait[] { 
+                                                                        TraitList.minion,
+                                                                        TraitList.healer
+                                                                    }));
         #endregion
 
         #region Branded Slaves
@@ -360,6 +358,38 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                                   TraitList.emptyGenerated2
                                                                                 }));
         #endregion
+        #endregion
+
+        #region Horses
+        enemyStatsDict.Add(MonsterNameList.horseCharger, new LargeEnemyStats(MonsterNameList.horseCharger,
+                                                                                Constants.twentyArmor,
+                                                                                        215,
+                                                            new Trait[] { 
+                                                                            TraitList.master,
+                                                                            TraitList.large,
+                                                                            TraitList.territorial
+                                                                        },
+                    AbilityList.getAbility(null, AbilityList.chargeKey) as Ability));
+
+        enemyStatsDict.Add(MonsterNameList.horseStomper, new LargeEnemyStats(MonsterNameList.horseStomper,
+                                                                                Constants.twentyFiveArmor,
+                                                                                        215,
+                                                            new Trait[] { 
+                                                                            TraitList.master,
+                                                                            TraitList.large,
+                                                                            TraitList.chaotic
+                                                                        },
+new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.stompKey) as Ability)));
+                                                            
+        enemyStatsDict.Add(NPCNameList.csalan, new LargeEnemyStats(NPCNameList.csalan,
+                                                                                Constants.thirtyArmor,
+                                                                                        250,
+                                                            new Trait[] { 
+                                                                            TraitList.master,
+                                                                            TraitList.large,
+                                                                            TraitList.predatory
+                                                                        },
+                    AbilityList.getAbility(null, AbilityList.chargeKey) as Ability));
         #endregion
 
         AlliedSummonStatsList.addEnemyBasedSummons();

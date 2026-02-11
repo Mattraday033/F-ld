@@ -389,11 +389,36 @@ public static class MonsterSpawnDetailsList
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2b, list);
 
+        #endregion 
+
+        #region Manse-1F-3a
+
+        list = new List<MonsterSpawnDetails>();
+
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(4, 0), facing: Facing.SouthWest, movementType: MonsterMovementType.Chases));
+
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(1, 0), PrefabNames.pushableCrate));
+
+        monsterSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3a, list);
+
         #endregion
 
         #endregion
 
         #region Manse-2F
+
+        #region Manse-2F-2a
+
+        list = new List<MonsterSpawnDetails>();
+
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(1, -2), Facing.SouthEast, movementType: MonsterMovementType.Chases));
+
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, -3), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-3, -2), PrefabNames.pushableCrate));
+
+        monsterSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section2a, list);
+
+        #endregion
 
         #region Manse-2F-3a
 
@@ -417,7 +442,15 @@ public static class MonsterSpawnDetailsList
         monsterSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, list);
 
         #endregion
+        #region Manse-2F-3c
 
+        list = new List<MonsterSpawnDetails>();
+
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(3, -2), Facing.SouthEast, movementType: MonsterMovementType.Stationary));
+
+        monsterSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3c, list);
+
+        #endregion
         #region Manse-2F-Stockroom
 
         list = new List<MonsterSpawnDetails>();

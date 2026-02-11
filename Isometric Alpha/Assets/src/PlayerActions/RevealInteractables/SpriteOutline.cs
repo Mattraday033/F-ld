@@ -36,7 +36,7 @@ public class SpriteOutline
 
     public void createOutline(Color color)
     {
-        if(spriteRenderer.material.color.Equals(color))
+        if(spriteRenderer.material.color.Equals(color) || !spriteRenderer.gameObject.activeInHierarchy)
         {
             return;
         }
@@ -54,12 +54,19 @@ public class SpriteOutline
         spriteRenderer.material = outlineMaterial;
 
 
-        float width = spriteRenderer.sprite.texture.width;
-        float height = spriteRenderer.sprite.texture.height;
+        try
+        {
+            
+            float width = spriteRenderer.sprite.texture.width;
+            float height = spriteRenderer.sprite.texture.height;
 
-        float sizeMod = 4f; //amount of pixels
+            float sizeMod = 4f; //amount of pixels
 
-        setMaterialOutlineSize(spriteRenderer.material, sizeMod/width, sizeMod/height);
+            setMaterialOutlineSize(spriteRenderer.material, sizeMod/width, sizeMod/height);
+        } catch(Exception e)
+        {
+            Debug.LogError("Caught exception null sprite");
+        }
     }
 
     private static void setMaterialOutlineSize(Material material, float sizeX, float sizeY)

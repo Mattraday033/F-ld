@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public struct CreatureAmount
+public class CreatureAmount
 {
     public int amount;
     public Stats enemyStats;
@@ -31,32 +31,23 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks, ICreatureSpawn
 
     public ItemListID[] guaranteedDrops;
 
+    public List<SpawnDetails> spawnDetailsList;
+    private int currentSpawnDetailsIndex = 0;
+
     public int numberOfDrops = 1; //number of rolls on their drop table
 
 
-    public EnemyPackInfo(CreatureAmount[] FoeTypes, string dropTableName)
-    {
-        this.FoeTypes = FoeTypes;
-
-        this.dropTableName = dropTableName;
-    }
-
-    public EnemyPackInfo(CreatureAmount[] FoeTypes, string dropTableName, string tutorialSequenceKey)
+    public EnemyPackInfo(CreatureAmount[] FoeTypes, string dropTableName, ItemListID[] guaranteedDrops = null, string tutorialSequenceKey = "", List<SpawnDetails> spawnDetailsList = null)
     {
         this.FoeTypes = FoeTypes;
 
         this.dropTableName = dropTableName;
 
         this.tutorialSequenceKey = tutorialSequenceKey;
-    }
-
-    public EnemyPackInfo(CreatureAmount[] FoeTypes, string dropTableName, ItemListID[] guaranteedDrops)
-    {
-        this.FoeTypes = FoeTypes;
-
-        this.dropTableName = dropTableName;
 
         this.guaranteedDrops = guaranteedDrops;
+
+        this.spawnDetailsList = spawnDetailsList;
     }
 
     public virtual string getQuestStep()
@@ -154,6 +145,25 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks, ICreatureSpawn
     {
         return false;
     }
+
+    public SpawnDetails getNextSpawnDetails()
+    {
+        if(spawnDetailsList.Count == 0)
+        {
+            return null;
+        }
+
+        if(currentSpawnDetailsIndex < 0 || currentSpawnDetailsIndex >= spawnDetailsList.Count)
+        {
+            currentSpawnDetailsIndex = 0;
+        }
+
+        SpawnDetails spawnDetails = spawnDetailsList[currentSpawnDetailsIndex];
+
+        currentSpawnDetailsIndex++;
+
+        return spawnDetails;
+    }
 }
 
 //info about a pack of enemies on the overworld, such as how many of them there are and of what type. Stored in State
@@ -168,8 +178,8 @@ public class BossPackInfo : EnemyPackInfo
 
     public QuestStepActivationScript script;
 
-    public BossPackInfo(CreatureAmount[] FoeTypes, string dropTableName, string killFlagKey = "", string dialogueUponSceneLoadKey = null, ItemListID[] guaranteedDrops = null, QuestStepActivationScript script = null, int xpDrop = 0):
-    base(FoeTypes, dropTableName, guaranteedDrops)
+    public BossPackInfo(CreatureAmount[] FoeTypes, string dropTableName, string killFlagKey = "", string dialogueUponSceneLoadKey = null, ItemListID[] guaranteedDrops = null, QuestStepActivationScript script = null, int xpDrop = 0, List<SpawnDetails> spawnDetailsList = null):
+    base(FoeTypes, dropTableName, guaranteedDrops, spawnDetailsList: spawnDetailsList)
     {
         this.FoeTypes = FoeTypes;
 

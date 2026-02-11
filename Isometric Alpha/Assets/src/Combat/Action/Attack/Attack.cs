@@ -33,7 +33,7 @@ public class Attack : CombatAction, IJSONConvertable
 
 		foreach (Stats targetCombatant in targets)
 		{
-			if (targetCombatant != null)
+			if (targetCombatant != null && targetCombatant.isAlive())
 			{
 				Exuberances.addExuberance(MultiStackProcType.RedKnife, singleExuberanceStack);
 			}
@@ -42,6 +42,16 @@ public class Attack : CombatAction, IJSONConvertable
 		if(CombatStateManager.whoseTurn == WhoseTurn.Resolving && getSourceItem().appliesStanceStacks())
 		{
             Stance.OnStanceApplyingWeaponAttack?.Invoke();
+        }
+
+        if(mainHandWeapon != null && mainHandWeapon.getIsTwoHanded())
+		{
+            AllyStats actor = getActorStats() as AllyStats;
+
+            if(actor != null && actor.equippedItems != null && actor.equippedItems.getOffHand() != null)
+            {
+                getActorStats().addTrait(new AntiShieldTrait(actor.equippedItems.getOffHand()));
+            }
         }
 	}
 

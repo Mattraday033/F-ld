@@ -164,6 +164,9 @@ public static class EnemyTypeFolderPathList
 
         #region Horses
 
+        folderPathDict.Add(MonsterNameList.horseCharger, horsesFolderPath + MonsterNameList.horseCharger + "/");
+        folderPathDict.Add(MonsterNameList.horseStomper, horsesFolderPath + MonsterNameList.horseStomper + "/");
+
         folderPathDict.Add(NPCNameList.horse, horsesFolderPath + MonsterNameList.horseCharger + "/");
         folderPathDict.Add(NPCNameList.horse+1, horsesFolderPath + MonsterNameList.horseCharger + "/");
         folderPathDict.Add(NPCNameList.horse+2, horsesFolderPath + MonsterNameList.horseStomper + "/");

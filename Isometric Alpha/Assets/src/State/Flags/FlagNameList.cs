@@ -85,6 +85,7 @@ public static class FlagNameList
         public const string barricadeGuardDefeatKey1 = "barricadeGuardDefeatKey1";
         public const string barricadeGuardDefeatKey2 = "barricadeGuardDefeatKey2";
         public const string barricadeGuardDefeatKey3 = "barricadeGuardDefeatKey3";
+        public const string barricadeGuardDefeatKey4 = "barricadeGuardDefeatKey4";
 
         //Nándor Flags
         public const string nandorStartedGuardPunishmentConvo = "nandorStartedGuardPunishmentConvo";

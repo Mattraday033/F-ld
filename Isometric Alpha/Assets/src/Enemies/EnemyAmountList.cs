@@ -24,6 +24,7 @@ public static class EnemyAmountList
     #region Lovashi Guards
     public readonly static CreatureAmount oneAxeman = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.axeman));
     public readonly static CreatureAmount twoAxemen = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.axeman));
+    public readonly static CreatureAmount threeAxemen = new CreatureAmount(Constants.threeCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.axeman));
 
     public readonly static CreatureAmount oneDisciplinarian = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.disciplinarian));
     public readonly static CreatureAmount twoDisciplinarians = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.disciplinarian));
@@ -34,6 +35,7 @@ public static class EnemyAmountList
     public readonly static CreatureAmount oneJavelineer = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
     public readonly static CreatureAmount twoJavelineers = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
     public readonly static CreatureAmount threeJavelineers = new CreatureAmount(Constants.threeCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
+    public readonly static CreatureAmount tenJavelineers = new CreatureAmount(Constants.tenCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
 
     public readonly static CreatureAmount oneLancer = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.lancer));
     public readonly static CreatureAmount twoLancers = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.lancer));
@@ -55,8 +57,11 @@ public static class EnemyAmountList
     #endregion
 
     #region NonBranded Slaves
+    public readonly static CreatureAmount beam = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.beam));
+
     public readonly static CreatureAmount fourNonBrandedLoyalists = new CreatureAmount(Constants.fourCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.noBrandLoyalist));
     public readonly static CreatureAmount eightNonBrandedLoyalists = new CreatureAmount(Constants.eightCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.noBrandLoyalist));
+    public readonly static CreatureAmount tenNonBrandedLoyalists = new CreatureAmount(Constants.tenCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.noBrandLoyalist));
     #endregion
 
     #region Branded Slaves
@@ -87,6 +92,18 @@ public static class EnemyAmountList
     public readonly static CreatureAmount threeDenMothers = new CreatureAmount(Constants.threeCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.denMother));
 
     public readonly static CreatureAmount caveMatron = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.caveMatron));
+
+    #endregion
+
+    #region Horses
+
+    public readonly static CreatureAmount oneHorseCharger = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.horseCharger));
+    public readonly static CreatureAmount twoHorseChargers = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.horseCharger));
+
+    public readonly static CreatureAmount oneHorseStomper = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.horseStomper));
+    public readonly static CreatureAmount twoHorseStompers = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.horseStomper));
+
+    public readonly static CreatureAmount csalan = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.csalan));
 
     #endregion
 }

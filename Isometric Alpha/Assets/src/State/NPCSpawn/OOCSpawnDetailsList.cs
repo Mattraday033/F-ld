@@ -1160,6 +1160,16 @@ public static class OOCSpawnDetailsList
         list.Add(new ObstacleSpawnDetails(NPCNameList.crate, new Vector3Int(1, 2), PrefabNames.squareCratesSmall, offset: Constants.onTableHeightOffset*-1));
         list.Add(new ObstacleSpawnDetails(NPCNameList.crate, new Vector3Int(0, 2), PrefabNames.squareCratesSmall, offset: Constants.onTableHeightOffset*-1));
 
+        list.Add(new ObstacleSpawnDetails(NPCNameList.crate, new Vector3Int(3, -4), PrefabNames.squareCratesSmall, offset: Constants.onTableHeightOffset*-1));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.crate, new Vector3Int(0, -3), PrefabNames.squareCratesSmall, offset: Constants.onTableHeightOffset*-1));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.crate, new Vector3Int(0, -4), PrefabNames.squareCratesSmall, offset: Constants.onTableHeightOffset*-1));
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+4, new Vector3Int(2, -3), ZoneKeyList.manseFirstFloor + LocationNameList.section1a, MonsterNameList.axeman, facing: Facing.SouthEast, ignoresSecretDoors: false));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricadeGuards+4, new Vector3Int(1, -3), ZoneKeyList.manseFirstFloor + LocationNameList.section1a, MonsterNameList.javelineer, facing: Facing.SouthEast, ignoresSecretDoors: false));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricade+4, new Vector3Int(2, -4), ZoneKeyList.manseFirstFloor + LocationNameList.section1a, facing: Facing.SouthEast, ignoresSecretDoors: false));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricade+4, new Vector3Int(1, -4), ZoneKeyList.manseFirstFloor + LocationNameList.section1a, facing: Facing.SouthEast, ignoresSecretDoors: false));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardAndras+4, new Vector3Int(3, -6), facing: Facing.NorthWest)); 
+
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section1a, list);
 
         #endregion
@@ -1376,6 +1386,16 @@ public static class OOCSpawnDetailsList
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(1, 1), Facing.SouthEast));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, list);
+
+        #endregion
+
+        #region Manse-2F-3c
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ShelfSpawnDetails(Constants.indexZero, new Vector3Int(-1, 0), Facing.SouthEast));
+
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3c, list);
 
         #endregion
 

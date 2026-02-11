@@ -7,8 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-[System.Serializable]
-public struct SpawnDetails
+public class SpawnDetails
 {
 	public bool hasSpawnDetails;
 	public bool dontSpawnWhenSurprised;
@@ -17,11 +16,11 @@ public struct SpawnDetails
 	public GridCoords baseStatsPosition;   //the coords put into the "position" of the base class
 	public GridCoords spritePosition;      //the coords that the sprite is placed at on the grid
 	
-	public SpawnDetails(GridCoords[] allSpawnPositions, GridCoords baseStatsPosition, GridCoords spritePosition, bool dontSpawnWhenSurprised)
+	public SpawnDetails(GridCoords[] allSpawnPositions, bool dontSpawnWhenSurprised = false)
 	{
 		this.allSpawnPositions = allSpawnPositions;
-		this.baseStatsPosition = baseStatsPosition;
-		this.spritePosition = spritePosition;
+		this.baseStatsPosition = allSpawnPositions[0];
+		this.spritePosition = allSpawnPositions[0];
 		this.dontSpawnWhenSurprised = dontSpawnWhenSurprised;
 		
 		this.hasSpawnDetails = true;
@@ -34,12 +33,6 @@ public class LargeEnemyStats : EnemyStats
     #region Global Variables
     public SpawnDetails spawnDetails;
 
-    public Dictionary<GridCoords, GameObject> combatSprites;
-    public Dictionary<GridCoords, SpriteRenderer> spriteRenderers;
-    public Dictionary<GridCoords, AnimationManager> animationManagers;
-    public Dictionary<GridCoords, SpriteOutline> outlines;
-    public Dictionary<GridCoords, CombatantHover> combatantHovers;
-
     #endregion
 
     #region Unity Events
@@ -49,13 +42,13 @@ public class LargeEnemyStats : EnemyStats
 
     #region Constructors
 
-    //There is a difference between multi-sprite enemies (barricades) and large single sprited enemies (large worms, horses, etc). 
-    //Currently set up for multi-sprited enemies, will eventually need to decouple when re-implementing worms/horses
-    public LargeEnemyStats(string key, int armor, int tHP, Trait[] traits, SpawnDetails spawnDetails) :
-    base(key, armor, tHP, traits: traits)
+    public LargeEnemyStats(string key, int armor, int tHP, Trait[] traits, CombatAction combatAction = null) :
+    base(key, armor, tHP, traits: traits, combatAction: combatAction)
     {
-        this.spawnDetails = spawnDetails;
-        position = spawnDetails.baseStatsPosition;
+        if(!traits.Contains(TraitList.large) && !traits.Contains(TraitList.immobile))
+        {
+            traitContainer.addTrait(TraitList.large);
+        }
     }
 
     #endregion
@@ -67,81 +60,27 @@ public class LargeEnemyStats : EnemyStats
         return instantiateCombatSprite();
     }
 
-    private GameObject instantiateCombatSprite()
+    protected virtual GameObject instantiateCombatSprite()
     {
-        combatSprites = new Dictionary<GridCoords, GameObject>();
-        animationManagers = new Dictionary<GridCoords, AnimationManager>();
-        spriteRenderers = new Dictionary<GridCoords, SpriteRenderer>();
-        outlines = new Dictionary<GridCoords, SpriteOutline>();
-        combatantHovers = new Dictionary<GridCoords, CombatantHover>();
+        if(spawnDetails == null)
+        {
+            spawnDetails = State.enemyPackInfo.getNextSpawnDetails();
+            if(spawnDetails == null)
+            {
+                return null;
+            }
+        }
 
         foreach(GridCoords coords in spawnDetails.allSpawnPositions)
         {
-            combatSprites[coords] = Instantiate(Resources.Load<GameObject>(getCombatSpriteName()), CombatStateManager.getCreatureParent());
-
-            if(getName().Contains(NPCNameList.barricade))
-            {
-                combatSprites[coords].transform.localScale = Constants.reverseScaleChange;
-            } else
-            {
-                combatSprites[coords].transform.localScale = Vector3.one;
-            }
-
-            combatSprites[coords].transform.position = CombatGrid.getPositionAt(coords);
-
-            ComponentList componentList = combatSprites[coords].GetComponent<ComponentList>();
-
-            if(coords.Equals(spawnDetails.baseStatsPosition))
-            {
-                setUpComponents(componentList);
-            } else
-            {
-                componentList.healthBarManager.hide();
-            }
-
-            setUpComponents(coords, componentList);
-
             CombatGrid.setCombatantAtCoords(coords, this);
         }
 
-        foreach(AnimationManager animationManager in animationManagers.Values)
-        {
-            animationManager.healthBarManager = healthBarManager;
-            animationManager.setAnimations(getName());
-        }
-
-        combatSprite = combatSprites[spawnDetails.baseStatsPosition];
+        position = spawnDetails.baseStatsPosition;
 
         OnLargeEnemySpawn.Invoke();
 
-        return combatSprite;
-    }
-
-    public override void setUpComponents(ComponentList list)
-    {
-        healthBarManager = list.healthBarManager;
-        updateHealthBar();
-    }
-
-    public void setUpComponents(GridCoords coords, ComponentList list)
-    {
-        animationManagers[coords] = list.animationManager;
-        
-        spriteRenderers[coords] = list.spriteRenderer;
-
-        outlines[coords] = new SpriteOutline();
-        outlines[coords].setSpriteRenderer(spriteRenderers[coords]);
-
-        combatantHovers[coords] = list.combatantHover;
-        combatantHovers[coords].linkedStats = this;
-    }
-
-    public override void destroyCombatSprite()
-    {
-        foreach(GameObject gameObject in combatSprites.Values)
-        {
-            Destroy(gameObject);
-        }
+        return base.instantiateCombatSprite(spawnDetails.baseStatsPosition);
     }
 
     public override void removeFromGrid()
@@ -175,21 +114,6 @@ public class LargeEnemyStats : EnemyStats
         }
     }
 
-    public override void setOutline()
-    {
-        foreach(SpriteOutline outline in outlines.Values)
-        {
-            outline.createOutline(getOutlineColor());
-        }
-    }
-    public override void removeOutline()
-    {
-        foreach(SpriteOutline outline in outlines.Values)
-        {
-            outline.removeOutline();
-        }
-    }
-
     public override bool isInsideCoordinates(GridCoords coords)
     {
         return spawnDetails.allSpawnPositions.Contains(coords);
@@ -203,25 +127,6 @@ public class LargeEnemyStats : EnemyStats
     #endregion
 
     #region AnimationManager
-
-    public override void playAnimationOnDamage()
-    {
-        if (isDead())
-        {
-            foreach(AnimationManager animationManager in animationManagers.Values)
-            {
-                animationManager.playDeathAnimation();
-            }
-
-            healthBarManager.hide();
-        } else
-        {
-            foreach(AnimationManager animationManager in animationManagers.Values)
-            {
-                animationManager.playWoundedAnimation();
-            }
-        }
-    }
 
     #endregion
 
@@ -243,3 +148,118 @@ public class LargeEnemyStats : EnemyStats
     #endregion
 
 }
+
+    // public override GameObject instantiateCombatSprite(GridCoords coords)
+    // {
+    //     return instantiateCombatSprite();
+    // }
+
+    // private GameObject instantiateCombatSprite()
+    // {
+    //     combatSprites = new Dictionary<GridCoords, GameObject>();
+    //     animationManagers = new Dictionary<GridCoords, AnimationManager>();
+    //     spriteRenderers = new Dictionary<GridCoords, SpriteRenderer>();
+    //     outlines = new Dictionary<GridCoords, SpriteOutline>();
+    //     combatantHovers = new Dictionary<GridCoords, CombatantHover>();
+
+    //     foreach(GridCoords coords in spawnDetails.allSpawnPositions)
+    //     {
+    //         combatSprites[coords] = Instantiate(Resources.Load<GameObject>(getCombatSpriteName()), CombatStateManager.getCreatureParent());
+
+    //         if(getName().Contains(NPCNameList.barricade))
+    //         {
+    //             combatSprites[coords].transform.localScale = Constants.reverseScaleChange;
+    //         } else
+    //         {
+    //             combatSprites[coords].transform.localScale = Vector3.one;
+    //         }
+
+    //         combatSprites[coords].transform.position = CombatGrid.getPositionAt(coords);
+
+    //         ComponentList componentList = combatSprites[coords].GetComponent<ComponentList>();
+
+    //         if(coords.Equals(spawnDetails.baseStatsPosition))
+    //         {
+    //             setUpComponents(componentList);
+    //         } else
+    //         {
+    //             componentList.healthBarManager.hide();
+    //         }
+
+    //         setUpComponents(coords, componentList);
+
+    //         CombatGrid.setCombatantAtCoords(coords, this);
+    //     }
+
+    //     foreach(AnimationManager animationManager in animationManagers.Values)
+    //     {
+    //         animationManager.healthBarManager = healthBarManager;
+    //         animationManager.setAnimations(getName());
+    //     }
+
+    //     combatSprite = combatSprites[spawnDetails.baseStatsPosition];
+
+    //     OnLargeEnemySpawn.Invoke();
+
+    //     return combatSprite;
+    // }
+
+    // public override void setUpComponents(ComponentList list)
+    // {
+    //     healthBarManager = list.healthBarManager;
+    //     updateHealthBar();
+    // }
+
+    // public void setUpComponents(GridCoords coords, ComponentList list)
+    // {
+    //     animationManagers[coords] = list.animationManager;
+        
+    //     spriteRenderers[coords] = list.spriteRenderer;
+
+    //     outlines[coords] = new SpriteOutline();
+    //     outlines[coords].setSpriteRenderer(spriteRenderers[coords]);
+
+    //     combatantHovers[coords] = list.combatantHover;
+    //     combatantHovers[coords].linkedStats = this;
+    // }
+
+    // public override void destroyCombatSprite()
+    // {
+    //     foreach(GameObject gameObject in combatSprites.Values)
+    //     {
+    //         Destroy(gameObject);
+    //     }
+    // }
+
+    // public override void setOutline()
+    // {
+    //     foreach(SpriteOutline outline in outlines.Values)
+    //     {
+    //         outline.createOutline(getOutlineColor());
+    //     }
+    // }
+    // public override void removeOutline()
+    // {
+    //     foreach(SpriteOutline outline in outlines.Values)
+    //     {
+    //         outline.removeOutline();
+    //     }
+    // }
+    // public override void playAnimationOnDamage()
+    // {
+    //     if (isDead())
+    //     {
+    //         foreach(AnimationManager animationManager in animationManagers.Values)
+    //         {
+    //             animationManager.playDeathAnimation();
+    //         }
+
+    //         healthBarManager.hide();
+    //     } else
+    //     {
+    //         foreach(AnimationManager animationManager in animationManagers.Values)
+    //         {
+    //             animationManager.playWoundedAnimation();
+    //         }
+    //     }
+    // }

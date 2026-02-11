@@ -25,12 +25,14 @@ public class EnemyCombatActionManager : MonoBehaviour
 
         foreach (EnemyStats enemy in listOfEnemies)
 		{			
-			if(Helpers.hasQuality<Trait>(enemy.traitContainer, t => t.isPacifist()) || 
+			CombatAction enemyCombatAction = enemy.getCombatAction();
+
+			if(enemyCombatAction == null || 
+                Helpers.hasQuality<Trait>(enemy.traitContainer, t => t.isPacifist()) || 
 				containsCombatActionFromPosition(enemy.position) || enemy.isPartOfVolley())
 			{
 				continue; //if enemy failed to find a target, it shouldn't do anything
 			}
-			CombatAction enemyCombatAction = enemy.getCombatAction();
 			enemyCombatAction.setActor(enemy);
 			Selector selector = enemyCombatAction.getTargetSelector(); 
 			

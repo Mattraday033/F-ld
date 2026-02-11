@@ -368,6 +368,16 @@ public static class ChestItemIDList
 
         #endregion
 
+        #region Manse-2F-3c
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.properFoodIndex, Constants.sizeTwo));
+
+        chestItemIDList.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3c, list);
+
+        #endregion
+
         #region Manse-2F-Stockroom
 
         list = new List<ItemListID>();
