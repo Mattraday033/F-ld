@@ -39,6 +39,7 @@ public static class ColorList
     public readonly static Color32 grey155 = new Color32(155, 155, 155, 255);
     public readonly static Color32 grey175 = new Color32(175, 175, 175, 255);
     public readonly static Color32 grey215 = new Color32(215, 215, 215, 255);
+    public readonly static Color32 grey225 = new Color32(225, 225, 225, 255);
     public readonly static Color32 grey245 = new Color32(245, 245, 245, 255);
     #endregion
 

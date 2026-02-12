@@ -153,11 +153,13 @@ public class DescriptionPanelRow : MonoBehaviour
     {
         descriptionText.text = text;
         descriptionText.fontSize = fontSize;
+        descriptionText.color = ColorList.grey25;
     }
 
     public void setText(string text)
     {
         descriptionText.text = text;
+        descriptionText.color = ColorList.grey25;
     }
 
     public void setLayoutGroupSpacing(int spacing)

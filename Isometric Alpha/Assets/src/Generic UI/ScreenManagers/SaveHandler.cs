@@ -13,6 +13,8 @@ using UnityEngine.Events;
 [System.Serializable]
 public class SaveHandler : ScreenManager, IEscapable
 {
+    public readonly static UnityEvent<IDescribable> OnSaveCreated = new UnityEvent<IDescribable>();
+
 	private static Dictionary<string, SaveBlueprint> saveGameList;
 
     public const int saveNameCharacterLimit = 20;
@@ -34,11 +36,7 @@ public class SaveHandler : ScreenManager, IEscapable
 	private const string fileExtension = ".json";
     private const string fileExtensionWithoutPeriod = "json";
 
-    //[SerializeField] 
     public TMP_InputField saveNameField;
-    //[SerializeField] 
-    public GameObject newSaveInputPanel; //panel behind saveNameField
-	//[SerializeField] 
     public Button saveButton;
     public BinaryPanelPopUpButton overwriteButton;
 
@@ -374,6 +372,8 @@ public class SaveHandler : ScreenManager, IEscapable
 		File.WriteAllText(Application.persistentDataPath + "/" + blueprint.saveName + fileExtension, json);
 
 		createSavedGameList();
+
+        OnSaveCreated.Invoke(blueprint);
 	}
 
 	public static SaveBlueprint getCleanSlateSave()
