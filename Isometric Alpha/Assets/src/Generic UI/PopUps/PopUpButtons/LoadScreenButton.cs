@@ -47,6 +47,17 @@ public class LoadScreenButton : PopUpButton
         {
 		    OverallUIManager.UIParentPanel.SetActive(true); 
         }
+
+        // Transform parent;
+
+        // if(CombatStateManager.inCombat || Flags.isInNewGameMode())
+        // {
+        //     GameObject outline = Instantiate(Resources.Load<GameObject>(PrefabNames.screenOutline), PopUpScreenBlockerManager.getPopUpParent(PopUpType.LoadOnlyScreen));
+        //     parent = outline.transform;
+        // } else
+        // {
+        //     parent = PopUpScreenBlockerManager.getPopUpParent(PopUpType.LoadOnlyScreen);
+        // }
 		
 		Instantiate(Resources.Load<GameObject>(PrefabNames.saveScreen), PopUpScreenBlockerManager.getPopUpParent(PopUpType.LoadOnlyScreen)); 
 		

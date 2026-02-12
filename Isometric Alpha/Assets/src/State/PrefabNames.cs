@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Cinemachine.DocumentationSortingAttribute;
 
 public static class PrefabNames
 {
     #region UI
+    public const string screenOutline = "Screen Outline";
+
     public const string inventoryScreen = "Inventory Screen Revision"; //Inventory Screen
     public const string characterScreen = "Character Screen Revision"; // Character Screen
     public const string partyScreen = "Party Screen";

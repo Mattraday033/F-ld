@@ -1449,10 +1449,12 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 3711891182735312112}
   tutorialHash: Screen Background
-  useUIScale: 0
   disableArrow: 0
   image: {fileID: 1307367543200351530}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  secondaryImage: {fileID: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
 --- !u!114 &4673871813833597581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1781,10 +1783,12 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 7700368906540083096}
   tutorialHash: Screen Tabs
-  useUIScale: 0
   disableArrow: 0
   image: {fileID: 3656811529676925022}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  secondaryImage: {fileID: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
 --- !u!1 &6239994124065093782
 GameObject:
   m_ObjectHideFlags: 0
@@ -2694,10 +2698,12 @@ MonoBehaviour:
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 3976497193184768189}
   tutorialHash: Screen Tabs
-  useUIScale: 0
   disableArrow: 0
   image: {fileID: 1346125666900335738}
   previousColor: {r: 0, g: 0, b: 0, a: 0}
+  secondaryImage: {fileID: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
 --- !u!1 &8359337547789323811
 GameObject:
   m_ObjectHideFlags: 0
@@ -2974,7 +2980,7 @@ PrefabInstance:
     - target: {fileID: 1321592957435864203, guid: 09f88e62fec00f7479330211a16078e0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -66.04567
+      value: -250
       objectReference: {fileID: 0}
     - target: {fileID: 3954666630456159467, guid: 09f88e62fec00f7479330211a16078e0,
         type: 3}
@@ -3270,6 +3276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ad4f30901fb964995d835a1529a5e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  describableListType: 0
   grid: {fileID: 1865000455609133147}
 --- !u!224 &7125329538519445705 stripped
 RectTransform:
