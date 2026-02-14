@@ -52,6 +52,13 @@ public static class ColorList
 	public readonly static Color tutorialDefault = Color.cyan;
     #endregion
 
+    #region UI Colors
+
+    public readonly static Color lightUICyan = new Color32(160,180,183,255);
+    public readonly static Color darkUICyan = new Color32(100,125,130,255);
+
+    #endregion
+
     public readonly static Color surpriseIconGrey = grey155;
 
     public readonly static Color skillButtonOutlineHighlight = Color.yellow;
@@ -64,7 +71,7 @@ public static class ColorList
 
     public readonly static Color shopUnbuyable = grey125;
 
-    public readonly static Color ineligibleColor = grey125; //Should be a light grey/red for now
+    public readonly static Color ineligibleColor = grey175;
     public readonly static Color alternateRowColor = grey215;
 
     public readonly static Color colorIndicatingChosenBefore = grey155; 

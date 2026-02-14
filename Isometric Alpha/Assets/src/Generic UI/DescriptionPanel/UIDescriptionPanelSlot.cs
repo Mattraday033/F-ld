@@ -10,7 +10,7 @@ public class UIDescriptionPanelSlot : DescriptionPanelSlot, ICounter
     [SerializeField]
     private bool listeningForGridRows = false;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         addListeners();
     }

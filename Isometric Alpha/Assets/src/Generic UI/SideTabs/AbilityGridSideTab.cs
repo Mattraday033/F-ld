@@ -59,6 +59,14 @@ public class AbilityGridSideTab : MonoBehaviour
         currentTabDict[getCurrentDictKey()] = listToChoose;
         
         OnSideTabChosen.Invoke();
+
+        closedButton.interactable = false;
+
+        if (openTabPanel == null || openTabPanel is null)
+        {
+            return;
+        }
+
         openTabPanel.SetActive(true);
     }
 

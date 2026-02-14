@@ -85,7 +85,7 @@ public class QuestStep : IJournalSubcategory, IDescribableInBlocks
 			case RowType.MapWithoutHover:
 				return Resources.Load<GameObject>(PrefabNames.mapQuestObjectiveRowWithoutHover);
 			default:
-				return Resources.Load<GameObject>(PrefabNames.glossaryEntryRow);
+				return Resources.Load<GameObject>(PrefabNames.glossaryCategoryRow);
 		}
 	}
 

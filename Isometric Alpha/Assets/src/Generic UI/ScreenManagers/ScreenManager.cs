@@ -21,7 +21,7 @@ public enum DescribableList
     Saves = 8,
     PartyMembers = 9,
     Quests = 10,
-    GlossaryCategories = 11,
+    Glossary = 11,
     MainHandWeaponsAsActions = 13,
     Armor = 14,
     Usable = 15,
@@ -41,6 +41,8 @@ public enum DescribableList
 [System.Serializable]
 public struct Tab
 {
+    public readonly static UnityEvent<DescribableList> OnListRetrieved = new UnityEvent<DescribableList>();
+
     public static IEnumerable<IDescribable> getList(DescribableList describableList)
     {
 		return getList(describableList, null);
@@ -48,7 +50,7 @@ public struct Tab
 
     public static IEnumerable<IDescribable> getList(DescribableList describableList, string[] filterParameters)
     {
-
+        OnListRetrieved.Invoke(describableList);
         
         switch (describableList)
         {
@@ -96,7 +98,7 @@ public struct Tab
 
                 return QuestList.getActiveQuests();
 
-            case DescribableList.GlossaryCategories:
+            case DescribableList.Glossary:
 
                 return GlossaryCategoryList.getAllGlossaryCategories();
 

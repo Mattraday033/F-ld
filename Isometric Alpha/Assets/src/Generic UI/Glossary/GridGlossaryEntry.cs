@@ -45,7 +45,7 @@ public class GridGlossaryEntry : GlossaryEntry
 		
 		foreach(GridCoords coord in coords)
 		{
-			formationDisplay.setColorOfGridSquare(coord, Color.red);
+			formationDisplay.setColorOfGridSquare(coord, ColorList.lightUICyan);
 		}
 	}
 

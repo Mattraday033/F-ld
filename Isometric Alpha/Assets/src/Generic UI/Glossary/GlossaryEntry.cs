@@ -25,7 +25,7 @@ public class GlossaryEntry : IJournalSubcategory
 
 	public GameObject getRowType(RowType rowType)
 	{
-		return Resources.Load<GameObject>(PrefabNames.glossaryEntryRow);
+		return Resources.Load<GameObject>(PrefabNames.glossaryCategoryRow);
 	}
 
 	public virtual GameObject getDescriptionPanelFull()

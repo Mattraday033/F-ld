@@ -1193,7 +1193,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         List<GlossaryEntry> allActionTypesGlossaryEntries = new List<GlossaryEntry>();
 
         allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Ability", "Action Types", "An Action gained through leveling up. Abilities are the only type of Action that benefits from your Bonus Damage. Every time you level up and raise your Primary Stats, you will gain at least two new Abilities. Remember to add your new Abilities to your Action Wheel, or else you won't be able to use them in Combat."));
-        allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Attack", "Action Types", "Attacks are gained by equipping Weapons to the Action Wheel. Attacks never have a cooldown, and the amount of Action Wheel Slots you can use for Attacks is determined by your Strength. An Attack acquired from a one handed weapon will add your off hand weapon's damage to it's damage. Using an Attack from a two handed weapon will not add your off hand weapon's damage, and will remove your shield's armor bonus for the rest of the turn."));
+        allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Attack", "Action Types", "Attacks are gained by equipping Weapons to the Action Wheel. Attacks never have a cooldown, and the amount of Action Wheel Slots you can use for Attacks is determined by your Wisdom. An Attack acquired from a one handed weapon will add your off hand weapon's damage to it's damage. Using an Attack from a two handed weapon will not add your off hand weapon's damage, and will remove your shield's armor bonus for the rest of the turn."));
         allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Item", "Action Types", "Item Actions are gained by equipping Usable Items to the Action Wheel. Some Item Actions can be performed before the end of a Round, such as Bandages, allowing you to use them and still use another Action that turn. Most Item Actions destroy the Item after use. Item's rarely have a cooldown, but some do."));
         allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Passive", "Action Types", "Passive Abilities are Abilities that provide a constant effect without requiring activation. Unlike all other Action Types, Passives do not need to be equipped to the Action Wheel to be benefited from."));
         allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Equipped Passive", "Action Types", "An Equipped Passive is an Ability that generates a unique Trait at the start of Combat. Unlike normal Passive Abilities, Equipped Passives must be added to your Action Wheel to benefit from them. The Traits Equipped Passives generate are permanent, so long as the Equipped Passive remains on your Action Wheel."));
@@ -1295,7 +1295,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         switch (rowType)
         {
             case RowType.JournalCategory:
-                rowTypeName = PrefabNames.glossaryEntryRow;
+                rowTypeName = PrefabNames.glossaryCategoryRow;
                 break;
             case RowType.Standard:
                 rowTypeName = PrefabNames.actionRow;

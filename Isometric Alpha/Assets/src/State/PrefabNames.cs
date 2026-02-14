@@ -72,7 +72,6 @@ public static class PrefabNames
 
     public const string glossaryCategoryNameFull = "Glossary Category Name Full";
     public const string glossaryCategoryRow = "Glossary Category Row";
-    public const string glossaryEntryRow = "Glossary Entry Row";
     public const string mapQuestObjectiveRow = "Map Quest Objective Row";
     public const string mapQuestObjectiveRowWithoutHover = "Map Quest Objective Row Without Hover";
     public const string multiStackPerkEntryRow = "MultiStack Trait Perk Entry Row";

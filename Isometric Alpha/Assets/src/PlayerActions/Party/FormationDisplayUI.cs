@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class FormationDisplayUI : MonoBehaviour, ICounter
 {
+    public readonly static UnityEvent OnFormationDisplayUICreation = new UnityEvent();
+
 	public PartyPositionGridRow[] formationUIGrid;
 	
     #region ICounter
@@ -12,11 +14,27 @@ public class FormationDisplayUI : MonoBehaviour, ICounter
     private void Awake()
     {
         addListeners();
+        OnFormationDisplayUICreation.Invoke();
+
+        GridRow.OnDescribableToDisplay.AddListener(destroy);
+        OnFormationDisplayUICreation.AddListener(destroy);
     }
 
     private void OnDestroy()
     {
         removeListeners();
+        GridRow.OnDescribableToDisplay.RemoveListener(destroy);
+        OnFormationDisplayUICreation.RemoveListener(destroy);
+    }
+
+    private void destroy()
+    {
+        Destroy(gameObject);
+    }
+
+    private void destroy(IDescribable describable)
+    {
+        destroy();
     }
 
     public void addListeners()
