@@ -447,7 +447,8 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 				rowTypeName = PrefabNames.shopRow;
 				break;
 			default:
-				throw new IOException("Incompatible RowType: " + rowType);
+				Debug.LogError("Incompatible RowType: " + rowType);
+                break;
 		}
 
 		return Resources.Load<GameObject>(rowTypeName);

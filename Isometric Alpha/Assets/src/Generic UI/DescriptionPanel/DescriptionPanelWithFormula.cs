@@ -59,7 +59,14 @@ public class DescriptionPanelWithFormula : DescriptionPanel
             return;
         }
 
-        switch (item.getSubtype())
+        string subtype = item.getSubtype();
+
+        if(item as OffHandWeapon != null)
+        {
+            subtype = Weapon.subtype;
+        }
+
+        switch (subtype)
         {
             case Armor.subtype:
                 damageText.gameObject.SetActive(false);

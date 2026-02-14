@@ -20,8 +20,6 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     public int slotIndex;
     public int displayIndex;
 
-    public Image outline;
-
     public DragDrogItemSlotType slotType;
 
     public EquippableItem getItemInSlot()
@@ -154,7 +152,7 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     {
         this.combatActionSlotIndex = combatActionSlotIndex;
 
-        backgroundImage.color = Color.black;
+        backgroundImage.color = ColorList.grey25;
         iconImage.color = Color.white;
 
         if (getItemInSlot() != null && getItemInSlot().getSlotID() == Armor.offHandSlotIndex)
@@ -175,7 +173,7 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     {
         this.combatActionSlotIndex = combatActionSlotIndex;
 
-        backgroundImage.color = Color.black;
+        backgroundImage.color = ColorList.grey25;
         iconImage.color = ColorList.filledIconFadeOutLevel;
 
         if (getItemInSlot() != null && getItemInSlot().getSlotID() == Armor.offHandSlotIndex)
@@ -308,13 +306,13 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
         if (itemBeingDragged != null && itemBeingDragged.getSlotID() >= 0 &&
             itemBeingDragged.getSlotID() == slotIndex)
         {
-            outline.color = Color.yellow;
+            outlineImage.color = Color.yellow;
         }
     }
 
     public void unhighlight(IDescribable describable)
     {
-        outline.color = Color.black;
+        outlineImage.color = ColorList.darkUICyan;
     }
 
     private void OnEnable()

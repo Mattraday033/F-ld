@@ -111,7 +111,7 @@ MonoBehaviour:
   type: 0
   iconObject: {fileID: 8528698774818041592}
   iconImage: {fileID: 3683673269459016429}
-  iconOutline: {fileID: 9165398366177628583}
+  iconOutline: {fileID: 0}
   iconBackground: {fileID: 5430825995178425714}
   iconLayoutElement: {fileID: 778000800760666301}
   layoutGroup: {fileID: 3570832857258024294}
@@ -228,8 +228,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 9
@@ -588,15 +588,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
---- !u!114 &9165398366177628583 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1726697119777815960, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
-    type: 3}
-  m_PrefabInstance: {fileID: 7549295907317836863}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8528698774818041592}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

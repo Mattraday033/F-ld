@@ -28,6 +28,14 @@ public class OffHandWeapon : Armor
     {
         return DamageCalculator.calculateBonusDamage(getDamageFormula()).ToString();
     }
+
+    public override void describeSelfFull(DescriptionPanel panel)
+	{
+		base.describeSelfFull(panel);
+
+        DescriptionPanel.setText(panel.damageText, getDamageFormulaTotal());
+        DescriptionPanel.setText(panel.critRatingText, getCritTotalForDisplay());
+	}
 }
 
 public class OffHandFist : OffHandWeapon

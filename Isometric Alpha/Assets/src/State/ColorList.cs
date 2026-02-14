@@ -54,7 +54,7 @@ public static class ColorList
 
     #region UI Colors
 
-    public readonly static Color lightUICyan = new Color32(160,180,183,255);
+    public readonly static Color lightUICyan = new Color32(160,183,188,255);
     public readonly static Color darkUICyan = new Color32(100,125,130,255);
 
     #endregion
@@ -63,7 +63,7 @@ public static class ColorList
 
     public readonly static Color skillButtonOutlineHighlight = Color.yellow;
 
-    public readonly static Color availableEquipmentIcon = grey100;
+    public readonly static Color availableEquipmentIcon = lightUICyan;
     public readonly static Color unavailableEquipmentIcon = grey35;
     public readonly static Color availableIconFadeOutLevel = blackFadeOut75;
     public readonly static Color unavailableIconFadeOutLevel = grey75;
