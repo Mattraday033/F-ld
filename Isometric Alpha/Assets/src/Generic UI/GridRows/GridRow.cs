@@ -129,12 +129,12 @@ public class GridRow : MonoBehaviour,
 
 	public virtual void OnPointerExit(PointerEventData eventData)
 	{
-		// if (!canSeeHover())
-        // {
-        //     return;
-        // }
+		if (!canSeeHover())
+        {
+            return;
+        }
 
-        // MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldDestroyHoverIcon));
+        MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldDestroyHoverIcon));
 	}
 
     public GameObject getDescriptionPanelType()
