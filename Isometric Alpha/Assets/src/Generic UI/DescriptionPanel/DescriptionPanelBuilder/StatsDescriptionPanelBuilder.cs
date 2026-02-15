@@ -21,7 +21,7 @@ public class StatsDescriptionPanelBuilder : DescriptionPanelBuilder
     {
         filter = new BuilderFilterWhiteList(new List<DescriptionPanelBuildingBlockType>() { DescriptionPanelBuildingBlockType.PrimaryStat, DescriptionPanelBuildingBlockType.SecondaryStat });
 
-        setGridLayoutSize();
+        // setGridLayoutSize();
     
         parents.Add(primaryStatParent);
         parents.Add(secondaryStatParent);

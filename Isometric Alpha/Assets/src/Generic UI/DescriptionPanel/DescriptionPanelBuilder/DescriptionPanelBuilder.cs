@@ -570,6 +570,8 @@ public class DescriptionPanelBuilder : MonoBehaviour
 
         addToAdditionalBuilders(blockOrigin, format);
 
+        destroyRows();
+
         List<DescriptionPanelBuildingBlock> buildingBlocks = blockOrigin.getDescriptionBuildingBlocks();
 
         foreach (DescriptionPanelBuildingBlock block in buildingBlocks)

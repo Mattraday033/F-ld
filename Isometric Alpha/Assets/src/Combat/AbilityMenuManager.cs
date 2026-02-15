@@ -459,7 +459,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
             abilityButtons[index].loadCombatAction(action);
             abilityButtons[index].enable();
-            abilityButtons[index].enable(Helpers.loadSpriteFromResources(action.getIconName()), Color.clear, action);
+            abilityButtons[index].enable(Helpers.loadSpriteFromResources(action.getIconName()), ColorList.lightUICyan, action);
 
             index++;
         }

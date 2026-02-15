@@ -63,7 +63,12 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
     public void updateAppearance()
     {
-        setDisplay(loadedCombatAction.getIconSprite(), Color.black);
+        if(loadedCombatAction == null)
+        {
+            return;
+        }
+
+        setDisplay(loadedCombatAction.getIconSprite(), ColorList.grey25);
     }
 
     public void setDisplay(Sprite abilityIconSprite, Color iconBackgroundColor)
@@ -109,7 +114,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
     public void deselectButton()
     {
-        iconOutline.color = Color.black;
+        iconOutline.color = ColorList.grey25;
         Helpers.updateSpritePosition(iconOutline.gameObject);
     }
 
@@ -157,7 +162,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         abilityIcon.enabled = false;
 
         iconOutline.enabled = false;
-        iconBackground.color = Color.black;
+        iconBackground.color = ColorList.grey25;
 
         loadedCombatAction = null;
     }
@@ -313,7 +318,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         iconOutline.enabled = true;
 
         abilityIcon.color = Color.white;
-        iconBackground.color = Color.black;
+        iconBackground.color = ColorList.grey25;
 
         enableButtonComponent();
 
@@ -410,8 +415,6 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         abilityIcon.gameObject.SetActive(false);
 
-        iconOutline.color = Color.black;
-        iconBackground.color = ColorList.lockedBackgroundColor;
         abilityMenuButton.enabled = false;
     }
 
@@ -420,9 +423,6 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         lockedIcon.gameObject.SetActive(false);
 
         abilityIcon.gameObject.SetActive(true);
-
-        iconOutline.color = Color.black;
-        iconBackground.color = Color.black;
 
         if (!abilityMenuManager.displayOnly)
         {

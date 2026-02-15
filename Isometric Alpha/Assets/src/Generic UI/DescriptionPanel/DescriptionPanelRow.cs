@@ -115,9 +115,14 @@ public class DescriptionPanelRow : MonoBehaviour
         iconImage.enabled = false;
         iconSymbolText.gameObject.SetActive(true);
         iconSymbolText.enabled = true;
-        iconSymbolText.text = symbol.ToString();
+        iconSymbolText.text = symbol;
 
-        setIconHoverText(HoverMessageList.getMessage(symbol.ToString()));
+        if(symbol.Equals(Dexterity.symbolChar))
+        {
+            iconSymbolText.margin = new Vector4(iconSymbolText.fontSize/10f + 1f, iconSymbolText.margin.y, iconSymbolText.margin.z, iconSymbolText.margin.w);
+        }
+
+        setIconHoverText(HoverMessageList.getMessage(symbol));
     }
 
     public void setIconSize(int sizeX, int sizeY)

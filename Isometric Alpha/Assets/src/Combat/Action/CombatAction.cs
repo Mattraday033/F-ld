@@ -1158,6 +1158,18 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         return -1;
     }
 
+    public string getRequiredStatLevelForDisplay()
+    {
+        int reqLevel = getRequiredStatLevel();
+
+        if(reqLevel <= 1)
+        {
+            return Constants.emptyString;
+        }
+
+        return reqLevel.ToString();
+    }
+
     //convertToJson is for save files, you will never need to save an actions coords so actor/target coords are not saved
     public abstract string convertToJson();
 
@@ -1298,8 +1310,6 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
                 rowTypeName = PrefabNames.glossaryCategoryRow;
                 break;
             case RowType.Standard:
-                rowTypeName = PrefabNames.actionRow;
-                break;
             case RowType.StatRequirements:
                 rowTypeName = PrefabNames.playerAbilityRow;
                 break;

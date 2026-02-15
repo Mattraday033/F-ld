@@ -310,7 +310,7 @@ public class Ability: CombatAction, IJSONConvertable
 		
 		if(panel.statText != null && !(panel.statText is null) && getRequiredStatLevel() >= 0)
 		{
-			panel.statText.text = "" + getRequiredStatLevel();
+			panel.statText.text = "" + getRequiredStatLevelForDisplay();
 		}
 	}
 	

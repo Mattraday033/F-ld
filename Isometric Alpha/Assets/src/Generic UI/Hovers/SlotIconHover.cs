@@ -222,7 +222,7 @@ public static class HoverMessageList
     private const string passiveSlotsKey = "Passive Slots";
 
     private const string mainHandWeaponSlotKey = "Main Hand Weapon Slot";
-    private const string mainHandWeaponSlotMessage = "Main Hand Weapon Slot. You can equip Main Hand Weapons from the Character Screen.";
+    private const string mainHandWeaponSlotMessage = "Main Hand Weapon Slot. You can equip Main Hand Weapons from the Character and Inventory Screens.";
     private const string mainHandWeaponMessage = "Main Hand Weapon. Unlike Offhand weapons, equipping it gives you a new Attack Action on your Action Wheel in Combat.";
     private const string twoHandedWeaponMessage = "This weapon requires two hands to wield. Two handed weapons have larger ranges and deal more damage than one handed ones, but don't benefit from the damage of your offhand. Using a two handed weapon forfeits the armor from your shield for the rest of the turn.";
     private const string oneHandedWeaponMessage = "You only need one hand to wield this weapon. One handed weapons have shorter ranges and deal less damage than two handed ones, but add the damage of your offhand weapon to their damage.";
@@ -327,7 +327,7 @@ public static class HoverMessageList
     private const string junkSubMessage = " All Items marked as Junk can be sold simultaneously to a Merchant. Treasure Items are always marked as Junk.";
 
     public const string junkSlotKey = "Junk Slot";
-    private const string junkSlotMessage = "Drag Items here to mark them as Junk. Junk Items can be sold more easily.";
+    private const string junkSlotMessage = "Drag Items here to mark them as Junk.";
     public const string toInvSlotKey = "To Inv Slot";
     private const string toInvSlotMessage = "Drag items here to remove them from Junk. Treasure Items cannot be removed from Junk.";
     public const string buySlotKey = "Buy Slot";

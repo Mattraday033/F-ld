@@ -59,7 +59,6 @@ public class EditorAbilityMenuButton : AbilityMenuButton
     {
         enabled = true;
         abilityIcon.enabled = true;
-        iconOutline.enabled = true;
 
         if (!abilityMenuManager.displayOnly)
         {
@@ -74,8 +73,7 @@ public class EditorAbilityMenuButton : AbilityMenuButton
         abilityIcon.sprite = null;
         abilityIcon.enabled = false;
 
-        iconOutline.enabled = false;
-        iconBackground.color = Color.black;
+        iconBackground.color = ColorList.lightUICyan;
 
         loadedCombatAction = null;
     }
