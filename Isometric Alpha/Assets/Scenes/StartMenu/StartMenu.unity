@@ -795,6 +795,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3415665300291312995, guid: 089375df8284bf148bd9ed7a383d6d60,
         type: 3}
+      propertyPath: field of view
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3415665300291312995, guid: 089375df8284bf148bd9ed7a383d6d60,
+        type: 3}
+      propertyPath: far clip plane
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3415665300291312995, guid: 089375df8284bf148bd9ed7a383d6d60,
+        type: 3}
+      propertyPath: near clip plane
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3415665300291312995, guid: 089375df8284bf148bd9ed7a383d6d60,
+        type: 3}
+      propertyPath: orthographic size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3415665300291312995, guid: 089375df8284bf148bd9ed7a383d6d60,
+        type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 116375351
       objectReference: {fileID: 0}

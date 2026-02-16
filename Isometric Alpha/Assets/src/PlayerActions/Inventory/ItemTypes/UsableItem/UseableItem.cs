@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class UsableItem : Item, IJSONConvertable
 {
-    public const string typeIconName = "UsableItem";
+    public const string typeIconName = "Usable Item";
     public const string type = "Use";
 
     private string useDescription;

@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class Key: EssentialItem, IJSONConvertable
 {
-	public const string typeIconName = "KeyItem";
+	public const string typeIconName = "Key";
 	public const string subtype = "Key";
 	private int ID;
 	

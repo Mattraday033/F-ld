@@ -7,6 +7,8 @@ public class InspectNode : MonoBehaviour
 {
     public static bool inspecting;
 
+    public static InspectNode instance;
+
     public readonly static UnityEvent OnInspect = new UnityEvent();
 
     [RuntimeInitializeOnLoadMethod]
@@ -19,16 +21,22 @@ public class InspectNode : MonoBehaviour
     [SerializeField]
     private Transform hover;
 
-    // private void Awake()
-    // {
-    //     gameObject.SetActive(PlayerOOCStateManager.currentActivity != OOCActivity.inChestUI);
-    // }
-
-    private void OnEnable()
+    private void Awake()
     {
-        gameObject.SetActive(!CombatStateManager.inCombat);
+        if(CombatStateManager.inCombat)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+        
+        if(instance == null)
+        {
+            instance = this;
+        } else
+        {
+            gameObject.SetActive(false);
+        }
     }
-
 
     void Update()
     {

@@ -847,7 +847,7 @@ public class AllyStats : Stats
 
         if (!CombatStateManager.inCombat)
         {
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getWorthBlock(Purse.getCoinsInPurse().ToString()));
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getPartyGoldBlock(Purse.getCoinsInPurse().ToString()));
         }
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusDamageBlock(getBonusAbilityDamage().ToString()));

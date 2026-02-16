@@ -16,15 +16,15 @@ public abstract class EquippableItem : Item, IJSONConvertable
     public const string trinketSlotText = "Trinket";
     public const string mainHandSlotText = "Main Hand";
 
-    public const string offHandSlotIconName = "OffHandSlot";
-    public const string headSlotIconName = "HeadSlot";
-    public const string bodySlotIconName = "BodySlot";
-    public const string handsSlotIconName = "HandsSlot";
-    public const string feetSlotIconName = "FeetSlot";
-    public const string trinketSlotIconName = "TrinketSlot";
-    public const string mainHandSlotIconName = "MainHandSlot";
-    public const string twoHandedSlotIconName = "TwoHanded";
-    public const string oneHandedSlotIconName = "OneHanded";
+    public const string offHandSlotIconName = "Off Hand Slot";
+    public const string headSlotIconName = "Head Slot";
+    public const string bodySlotIconName = "Body Slot";
+    public const string handsSlotIconName = "Hands Slot";
+    public const string feetSlotIconName = "Feet Slot";
+    public const string trinketSlotIconName = "Trinket Slot";
+    public const string mainHandSlotIconName = "Main Hand Slot";
+    public const string twoHandedSlotIconName = "Two Handed";
+    public const string oneHandedSlotIconName = "One Handed";
 
     public const string type = "Equip";
 

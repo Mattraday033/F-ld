@@ -170,7 +170,34 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         panel.setObjectBeingDescribed(this);
 
+        DescriptionPanel.setText(panel.nameText, getHoverMessageKeyForDisplay());
         DescriptionPanel.setText(panel.useDescriptionText, hoverText);
+    }
+
+    private string getHoverMessageKeyForDisplay()
+    {
+        switch(hoverMessageKey)
+        {
+            case "S":
+                return PrimaryStat.Strength.ToString();
+            case "D":
+                return PrimaryStat.Dexterity.ToString();
+            case "W":
+                return PrimaryStat.Wisdom.ToString();
+            case "C":
+                return PrimaryStat.Charisma.ToString();
+            case Constants.emptyString:
+            case null:
+                if(iconImage != null && iconImage.sprite != null)
+                {
+                    return iconImage.sprite.name;
+                } else
+                {
+                    return Constants.emptyString;
+                }
+            default:
+                return hoverMessageKey.Replace(".","");
+        }
     }
 
 	public void describeSelfRow(DescriptionPanel panel)
@@ -223,62 +250,61 @@ public static class HoverMessageList
 
     private const string mainHandWeaponSlotKey = "Main Hand Weapon Slot";
     private const string mainHandWeaponSlotMessage = "Main Hand Weapon Slot. You can equip Main Hand Weapons from the Character and Inventory Screens.";
-    private const string mainHandWeaponMessage = "Main Hand Weapon. Unlike Offhand weapons, equipping it gives you a new Attack Action on your Action Wheel in Combat.";
-    private const string twoHandedWeaponMessage = "This weapon requires two hands to wield. Two handed weapons have larger ranges and deal more damage than one handed ones, but don't benefit from the damage of your offhand. Using a two handed weapon forfeits the armor from your shield for the rest of the turn.";
-    private const string oneHandedWeaponMessage = "You only need one hand to wield this weapon. One handed weapons have shorter ranges and deal less damage than two handed ones, but add the damage of your offhand weapon to their damage.";
+    private const string mainHandWeaponMessage = "Equipping a Main Hand Weapon gives you a new Attack Action on your Action Wheel in Combat.";
+    private const string twoHandedWeaponMessage = "This weapon requires two hands to wield. Two Handed Weapons have larger ranges and deal more damage than one handed ones, but don't benefit from the damage of your offhand. Using a Two Handed Weapon forfeits the armor from your shield for the rest of the turn.";
+    private const string oneHandedWeaponMessage = "You only need one hand to wield this weapon. One Handed Weapons have shorter ranges and deal less damage than two handed ones, but add the damage of your Offhand Weapon to their damage.";
 
-    private const string offhandSlotMessage = "Offhand Slot.";
-    private const string offhandSubMessage = " Offhand weapons give you extra Damage and Crit Chance when you attack with a One Handed Weapon. Shields give extra Armor as long as you haven't attacked with a Two Handed Weapon this turn.";
+    private const string offhandSlotMessage = "Offhand Slot";
+    private const string offhandSubMessage = "Offhand Weapons give you extra Damage and Crit Chance when you attack with a One Handed Weapon. Shields give extra Armor as long as you haven't attacked with a Two Handed Weapon this turn.";
     private const string headSlotMessage = "Head Slot";
     private const string bodySlotMessage = "Body Slot";
     private const string handsSlotMessage = "Hand Slot";
     private const string feetSlotMessage = "Feet Slot";
     private const string trinketSlotMessage = "Trinket Slot";
 
-    private const string keySubtypeMessage = "Key. Keys can be used to open locks on chests and doors. It can't be sold.";
-    private const string questSubtypeMessage = "Quest Item. It can't be sold.";
-    private const string treasureSubtypeMessage = "Treasure. It's only purpose is to be sold.";
-    private const string bookSubtypeMessage = "Book. Using it will let your character read it.";
-    private const string healingSubtypeMessage = "Healing Item. This item can be used to heal your character or your allies, in or out of combat.";
-    private const string usableSubtypeMessage = "Usable Item.";
-    private const string usableSubMessage = " Some Usable Items heal, apply Traits in combat, or provide you with information. Most Usable Items are destroyed when used.";
+    private const string keySubtypeMessage = "Keys can be used to open locks on chests and doors. Keys cannot be sold.";
+    private const string questSubtypeMessage = "Quest Items are needed to complete specific Quest objectives. Quest Items cannot be sold.";
+    private const string treasureSubtypeMessage = "The only purpose of a Treasure Item is to be sold. Treasure Items cannot be removed from your Junk pocket.";
+    private const string bookSubtypeMessage = "Using a book will let you read its contents.";
+    private const string healingSubtypeMessage = "This item can be used to heal you or your allies, in or out of combat.";
+    private const string usableSubtypeMessage = "Usable Item";
+    private const string usableSubMessage = "Some Usable Items heal, apply Traits in combat, or provide you with information. Most Usable Items are destroyed when used.";
 
-    private const string weaponSubtypeMessage = "Weapon. Main hand weapons provide a new Attack Action on your Action Wheel in Combat. Offhand weapons provide extra damage and crit chance when you attack with a one handed weapon.";
-    private const string armorSubtypeMessage = "Armor. Wearing it provides Armor Points, which blocks .5% of damage per point. Some pieces of Armor also provide additional benefits.";
+    private const string weaponSubtypeMessage = "Main hand weapons provide a new Attack Action on your Action Wheel in Combat. Offhand weapons provide extra damage and crit chance when you attack with a one handed weapon.";
+    private const string armorSubtypeMessage = "Wearing Armor provides Armor Score, which blocks a percentage of incoming damage. Some pieces of Armor also provide additional benefits.";
 
     private const string armorScoreKey = "Armor Score";
-    private const string armorScoreMessage = armorScoreKey + ". You gain armor from the items you have equipped, your Dexterity Stat, and some Traits/Abilities. Armor reduces incoming damage by a percentage. Armor cannot reduce incoming damage below 1.";
+    private const string armorScoreMessage = "You gain Armor Score from the Items you have equipped, your Dexterity Stat, and some Traits/Abilities. Armor reduces incoming damage by a percentage. Armor cannot reduce incoming damage below 1.";
 
 
     private const string actionTypeIconMessage = "This Action's Type. A complete list of Action Types can be found in the Journal's Glossary.";
     private const string traitTypeIconMessage = "This Trait's Type. A complete list of Trait Types can be found in the Journal's Glossary.";
     public const string damageKey = "Damage";
     private const string damageIconMessage = "The amount of damage this Action deals. Hold 'Alt' to see the Action's Damage Formula. A Damage Formula calculates an Action's damage based on your stats. For example: an Action with a Damage Formula of '3S + 5' deals 3 times your Strength, plus 5.";
-    private const string critIconMessage = "The Critical Hit chance of this Action. Hold 'Alt' to see this Action's Crit Formula. A Crit Formula calculates an Action's Critical Hit chance based on your stats. For example: an Action with a Crit Formula of '3D + 5' has a Critical Hit chance of 3 times your Dexterity, plus 5.";
+    private const string critIconMessage = "The Critical Hit chance of this Action. Hold 'Alt' to see an Action's Crit Formula. A Crit Formula calculates an Action's Critical Hit chance based on your stats. For example: an Action with a Crit Formula of '3D + 5' has a Critical Hit chance of 3 times your Dexterity, plus 5.";
     private const string rangeIconMessage = "The Range of this Action. An Action's Range determines how many spaces it affects, and in what shape.";
     private const string cooldownIconMessage = "The Action's Cooldown. Actions with a Cooldown period are unavailable for a number of rounds after use.";
     private const string slotsIconMessage = "The maximum amount of Action Wheel Slots this Action can take up. Each Slot has it's own Cooldown period: assigning an Action to multiple Slots lets you use it more often.";
     private const string durationIconMessage = "This Action has an effect that lasts multiple rounds, such as applying a Trait to it's target.";
 
     private const string amountIconMessage = "Quantity";
-    private const string worthIconMessage = "Gold Pieces";
-    private const string goldIconMessage = "Gold Pieces";
+    private const string worthIconMessage = "An Item's worth in Gold Pieces. A shopkeeper may buy items for more than their worth based on their current Discount.";
+    private const string goldIconMessage = "Your Party's total Gold Pieces";
 
-    private const string invulnerableIconMessage = ". How much damage your character ignores per hit. Can only reduce incoming damage down to 1. Applied before Armor damage reduction.";
-    private const string vulnerableIconMessage = ". Extra damage that is applied when damage is taken. Applied after Armor damage reduction.";
+    private const string invulnerableIconMessage = "Invulnerability provides a flat reduction to incoming damage per hit. Can only reduce incoming damage down to 1. Applied before the damage reduction from Armor Score.";
+    private const string vulnerableIconMessage = "Extra damage that is applied when damage is taken. Applied before the damage reduction from Armor Score.";
 
     public const string bonusDamageKey = "Bonus Damage";
-    private const string bonusDamageMessage = "Bonus Damage. Bonus Damage is added to the damage of all of your Abilities. Your Bonus Damage is equal to the highest Base Damage of all of your equipped Weapons. For example, a weapon with a Damage Formula of '3S + 5' provides 5 Bonus Damage. Hold 'Alt' when viewing a Weapon's stats to reveal formulas.";
+    private const string bonusDamageMessage = "Bonus Damage is added to the damage of all of your Abilities. Your Bonus Damage is equal to the highest Base Damage of all of your equipped Weapons. For example, a weapon with a Damage Formula of '3S + 5' provides 5 Bonus Damage. Hold 'Alt' when viewing a Weapon's stats to reveal formulas.";
 
     private const string weaponSlotKey = "Weapon Slots";
-    private const string weaponSlotMessage = "Weapon Slots. Weapon Slots are used to assign your equipped weapons to your Action Wheel.";
+    private const string weaponSlotMessage = "Weapon Slots are used to assign your equipped weapons to your Action Wheel.";
 
-    private const string stanceWeaponMessage = "Stance Weapon. Attacks made with Stance Weapons, such as fists and staffs, give the attacker additional stacks of their current Stance.";
+    private const string stanceWeaponMessage = "Attacks made with Stance Weapons, such as fists and staffs, give the attacker additional stacks of their current Stance.";
 
-    private const string levelMessage = "Level. Leveling up a character costs 1000 Experience. Gaining a level will increase their Maximum Health, heal them to full, and boost one of their Primary Stats. The highest level a character can reach is 20.";
-    private const string healthMessage = "Health. A Party Member reduced to 0 health is knocked unconscious, and needs special abilities or items to be awakened in combat. Normal healing items can awaken a Party Member out of combat. If your character loses all of their health, however, they will die.";
-    private const string affinityMessage = "Affinity. Affinity is gained whenever you defeat a creature in combat; the more creatures in combat you defeat, the more Affinity you will gain per fight. A higher Charisma also contributes to the amount of Affinity you gain. Spend Affinity to upgrade your companions.";
-    private const string experienceMessage = "Experience. Your progress towards your next level up. Gain Experience from completing quests and defeating some boss monsters. For every 1000 Experience you gain, you can level up.";
+    private const string levelMessage = "Leveling up a character costs 1000 Experience. Gaining a level will increase Maximum Health, return all missing health, and boost one Primary Stat. The highest level a character can reach is 20.";
+    private const string healthMessage = "A Party Member reduced to 0 health is knocked unconscious, and needs special abilities or items to be awakened in combat. Normal healing items can awaken a Party Member out of combat. If your character loses all of their health, however, they will die and you will lose the game.";
+    private const string experienceMessage = "Your progress towards your next level up. Gain Experience from completing quests and defeating some boss monsters. For every 1000 Experience you gain, you can level up.";
 
 
     private const string bonusHealthMessage = "Bonus Health. Extra Health added to your Total Health. Determined by your Strength.";
@@ -343,10 +369,10 @@ public static class HoverMessageList
     private const string exuberancesMessage = "Exuberances are resources that you can spend to activate powerful abilities during combat. To unlock Exuberances, at least one of your Party Members must have two or more Charisma.";
 
 
-    private const string intimidateMessage = "Intimidate. This ability can be used to stop enemies from ambushing you, but prevents you from ambushing them in turn. Your Intimidate charges are determined by your character's Strength.";
-    private const string cunningMessage = "Cunning. Cunning is used out of combat to fool enemies, turning them around and stunning them for a few steps, allowing you to ambush them or sneak around them. Some objects in the overworld can be activated with Cunning as well. Your Cunning charges are determined by your character's Dexterity.";
-    private const string observationMessage = "Observation. This skill allows you to find secret doors and hidden secrets. Determined by your character's Wisdom.";
-    private const string leadershipMessage = "Leadership. This skill allows you to command your followers out of combat, telling them to stand on buttons or in doorways to block enemy movement. The number of Party Members you can command with Leadership is determined by your character's Charisma.";
+    private const string intimidateMessage = "This Skill can be used to stop enemies from ambushing you, but prevents you from ambushing them in turn. Your Intimidate charges are determined by the highest Strength of all Party Members.";
+    private const string cunningMessage = "This Skill is used out of combat to fool enemies, turning them around and stunning them for a few steps, allowing you to ambush them or sneak around them. Some objects in the overworld can be activated with Cunning as well. Your Cunning charges are determined by the highest Dexterity of all Party Members.";
+    private const string observationMessage = "This Skill allows you to find secret doors and hidden secrets. Determined by the highest Wisdom of all Party Members.";
+    private const string leadershipMessage = "This Skill allows you to command your followers out of combat, telling them to stand on buttons or in doorways to block enemy movement. The number of Party Members you can command with Leadership is determined by the highest Charisma of all Party Members.";
 
     private const string redKnifeMessage = "This shows the amount of the Red Knife exuberance your Party will gain at the start of Combat.";
     private const string blueShieldMessage = "This shows the amount of the Blue Shield exuberance your Party will gain at the start of Combat.";
@@ -354,15 +380,15 @@ public static class HoverMessageList
     private const string greenLeafMessage = "This shows the amount of the Grean Leaf exuberance your Party will gain at the start of Combat.";
     
 
-    private const string regenMessage = "Regeneration. How much health each of your party members will heal after every combat. Determined by your Party's total Strength and Wisdom.";
-    private const string surpriseRoundAmountMessage = "Surprise Duration. The number of rounds of extra Actions you will receive whenever you surprise an enemy. Determined by your Party's total Dexterity.";
-    private const string retreatChanceMessage = "Retreat Chance. Your chance to successfully retreat from combat. Determined by your Party's total Dexterity and Wisdom.";
-    private const string volleyAccuracyMessage = "Volley Accuracy Bonus. Extra accuracy applied whenever your party performs a Volley action. Determined by your Party's total Wisdom and Charisma.";
-    private const string goldMultiplierMessage = "Gold Multiplier. Extra Gold received from combat. Can be gained by equipping certain Items and Abilities.";
-    private const string partySlotsMessage = "Party Slots. The number of Party Members you can bring with you into combat. Determined by the highest level of any of your Party Members, as well as your Party's total Wisdom and Charisma.";
-    private const string partyActionsMessage = "Party Actions. The number of Actions your Party can perform each round in combat. Determined by the highest level of any of your Party Members, as well as your Party's total Dexterity and Charisma.";
+    private const string regenMessage = "How much health each of your party members will heal after every combat. Determined by your Party's total Strength and Wisdom.";
+    private const string surpriseRoundAmountMessage = "The number of rounds of extra Actions you will receive whenever you surprise an enemy. Determined by your Party's total Dexterity.";
+    private const string retreatChanceMessage = "Your chance to successfully retreat from combat. Determined by your Party's total Dexterity and Wisdom.";
+    private const string volleyAccuracyMessage = "Extra accuracy applied whenever your party performs a Volley action. Determined by your Party's total Wisdom and Charisma.";
+    private const string goldMultiplierMessage = "Extra Gold received from combat. Can be gained by equipping certain Items and Abilities.";
+    private const string partySlotsMessage = "The number of Party Members you can bring with you into combat. Determined by the highest level of any of your Party Members, as well as your Party's total Wisdom and Charisma.";
+    private const string partyActionsMessage = "The number of Actions your Party can perform each round in combat. Determined by the highest level of any of your Party Members, as well as your Party's total Dexterity and Charisma.";
     public const string discountKey = "Discount";
-    private const string discountMessage = "Discount. The total difference in an item's price, based on your Party's total Charisma. Sometimes merchants will give extra discounts or penalties based on what you've done for them or to them. A negative discount means the merchant is making their goods more expensive.";
+    private const string discountMessage = "The total difference in an item's price, based on your Party's total Charisma. Sometimes merchants will give extra discounts or penalties based on what you've done for them or to them. A negative discount means the merchant is making their goods more expensive.";
 
     public const string retreatButtonKey = "Retreat Button";
     private const string retreatButtonMessage = "Click here to Retreat. The percentage is your success chance. If you fail, the enemy will take their entire turn before you get to act again. Even if you succeed, the enemy will be fully restored when you return. Combat entered through dialogue cannot be retreated from. Be careful who you pick a fight with!";
@@ -374,17 +400,17 @@ public static class HoverMessageList
     private const string glossaryJournalTabKey = "Glossary Tab";
 
     private const string characterScreenKey = "Character Screen";
-    private const string characterScreenMessage = characterScreenKey + ". Here you can check your Character's Stats, change equipped Abilities, and spend Exp to Level Up.";
+    private const string characterScreenMessage = "Here you can check your Character's Stats, change equipped Abilities, and spend Exp to Level Up.";
     private const string inventoryScreenKey = "Inventory Screen";
-    private const string inventoryScreenMessage = inventoryScreenKey + ". Here you can see what Items you have picked up, or change your Character's Equipment";
+    private const string inventoryScreenMessage = "Here you can see what Items you have picked up, or change your Character's Equipment";
     private const string partyScreenKey = "Party Screen";
-    private const string partyScreenMessage = partyScreenKey + ". Here you can see your Party's Stats and Skills, swap out Party Members, and change your Party's starting Formation.";
+    private const string partyScreenMessage = "Here you can see your Party's Stats and Skills, swap out Party Members, and change your Party's starting Formation.";
     private const string journalScreenKey = "Journal Screen";
-    private const string journalScreenMessage = journalScreenKey + ". Here you can see what quests you have, and look up Terms in the Glossary.";
+    private const string journalScreenMessage = "Here you can see what quests you have, and look up Terms in the Glossary.";
     private const string saveAndLoadScreenKey = "Save/Load Screen";
-    private const string saveAndLoadScreenMessage = saveAndLoadScreenKey + ". Here you can save your game. Remember, you can also Quick Save with 'Q', and the game will take an Autosave whenever you enter an area. You can have up to three Autosaves at a time.";
+    private const string saveAndLoadScreenMessage = "Here you can save your game. Remember, you can also Quick Save with 'Q', and the game will take an Autosave whenever you enter an area. You can have up to three Autosaves at a time.";
     private const string settingsScreenKey = "Settings Screen";
-    private const string settingsScreenMessage = settingsScreenKey + ". Here you can change the Game's Settings, or Quit the Game.";
+    private const string settingsScreenMessage = "Here you can change the Game's Settings, or Quit the Game.";
 
     public static string getMessage(string iconName)
     {
@@ -419,7 +445,7 @@ public static class HoverMessageList
                 return questSubtypeMessage;
 
             case UsableItem.typeIconName:
-                return usableSubtypeMessage + usableSubMessage + howToUseItemMessage;
+                return usableSubMessage + howToUseItemMessage;
             case BookItem.typeIconName:
                 return bookSubtypeMessage + howToUseItemMessage;
             case HealingItem.typeIconName:
@@ -471,9 +497,9 @@ public static class HoverMessageList
                 return bonusDamageMessage;
 
             case IconList.invulnerableIconName:
-                return IconList.invulnerableIconName + invulnerableIconMessage;
+                return invulnerableIconMessage;
             case IconList.vulnerableIconName:
-                return IconList.vulnerableIconName + vulnerableIconMessage;
+                return vulnerableIconMessage;
 
             case IconList.stanceWeaponIconName:
                 return stanceWeaponMessage;
@@ -483,7 +509,6 @@ public static class HoverMessageList
             case IconList.healthIconName:
                 return healthMessage;
             case IconList.affinityIconName:
-                return affinityMessage;
             case IconList.experienceIconName:
                 return experienceMessage;
 
@@ -568,15 +593,15 @@ public static class HoverMessageList
                 return actionWheelMessage;
 
             case usableItemInventoryTabMessage:
-                return usableItemInventoryTabMessage + usableSubMessage + usableItemOOCSubMessage;
+                return usableSubMessage + usableItemOOCSubMessage;
             case offHandTabMessage:
-                return offHandTabMessage + offhandSubMessage;
+                return offhandSubMessage;
             case armorTabKey:
                 return armorTabMessage;
             case essentialTabKey:
                 return essentialTabMessage;
             case junkTabKey:
-                return junkTabMessage + junkSubMessage;
+                return junkSubMessage;
 
             case junkSlotKey:
                 return junkSlotMessage + junkSubMessage;

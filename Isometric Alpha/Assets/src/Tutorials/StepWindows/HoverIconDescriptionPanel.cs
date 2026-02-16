@@ -77,6 +77,8 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
 
         switch(direction)
         {
+            case ArrowDirection.Top:
+            case ArrowDirection.Bottom:
             case ArrowDirection.Center:
                 layout = descPanelWindow.gameObject.AddComponent<HorizontalLayoutGroup>();
                 break;
@@ -95,7 +97,7 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
         layout.childForceExpandHeight = true;
         layout.childForceExpandWidth = true;
 
-        layout.spacing = 5;
+        layout.spacing = -6;
         // layout. = true;
         // layout. = true;
     }

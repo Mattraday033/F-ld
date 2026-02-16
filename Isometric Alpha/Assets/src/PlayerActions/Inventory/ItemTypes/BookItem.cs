@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BookItem : UsableItem
 {
-	public const string typeIconName = "BookItem";
+	public const string typeIconName = "Book";
 	public const string subtype = "Book";
 	
 	public const int bookWorth = 5;

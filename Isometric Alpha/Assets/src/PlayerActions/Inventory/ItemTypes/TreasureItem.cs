@@ -7,7 +7,7 @@ using UnityEngine;
 public class TreasureItem: Item, IJSONConvertable
 {
 	
-	public const string typeIconName = "TreasureItem";
+	public const string typeIconName = "Treasure";
 
     public const string type = "Treasure";
     public const string subtype = "Treasure";

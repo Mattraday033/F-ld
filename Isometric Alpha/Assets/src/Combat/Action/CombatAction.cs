@@ -1491,10 +1491,10 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getCooldownBlock(getMaximumCooldownForDisplay()));
 
-        if (getAppliedTrait() != null)
-        {
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getAppliedTrait().getMaxRoundsLeftForDisplay()));
-        }
+        // if (getAppliedTrait() != null)
+        // {
+        //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getAppliedTrait().getMaxRoundsLeftForDisplay()));
+        // }
 
         if (!CombatStateManager.inCombat)
         {

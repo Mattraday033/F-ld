@@ -208,4 +208,12 @@ public class DescriptionPanelRow : MonoBehaviour
         descriptionText.margin = Vector4.zero;
     }
 
+    public void setDescriptionTextColor(Color? color)
+    {
+        if(descriptionText != null && color != null)
+        {
+            descriptionText.color = (Color) color;
+        }
+    }
+
 }

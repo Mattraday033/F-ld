@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class QuestItem: EssentialItem,IJSONConvertable
 {
-	public const string typeIconName = "QuestItem";
+	public const string typeIconName = "Quest Item";
 	public const string subtype = "Quest";
 	private int questID;
 	

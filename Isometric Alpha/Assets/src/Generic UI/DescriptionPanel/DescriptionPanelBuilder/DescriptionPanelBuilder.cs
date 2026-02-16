@@ -279,6 +279,11 @@ public struct DescriptionPanelBuildingBlock
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.worthIconName);
     }
 
+    public static DescriptionPanelBuildingBlock getPartyGoldBlock(string text)
+    {
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.partyGoldIconName);
+    }
+
     public static DescriptionPanelBuildingBlock getDescriptionBlock(string text)
     {
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.DescriptionText, text);
@@ -671,7 +676,7 @@ public class DescriptionPanelBuilder : MonoBehaviour
         {
             if (hasFormatToFollow() && formatter.format.hasFontSizeParams())
             {
-                row.setText(block.text, formatter.format.fontsize);
+                row.setText(block.text, formatter.format.fontSize);
             }
             else
             {
@@ -850,6 +855,7 @@ public static class IconList
     public const string armorScoreIconName = "Armor Score";
     public const string amountIconName = "Amount";
     public const string worthIconName = "Worth";
+    public const string partyGoldIconName = "Total Party Gold";
     public const string junkIconName = "Junk";
 
     //Stats Icons
@@ -863,29 +869,28 @@ public static class IconList
 
     public const string intimidateIconName = "Intimidate";
     public const string bonusHealthIconName = "Bonus Health";
-    public const string criticalHitDamageIconName = "Crit Dam Mult";
-    public const string physicalResistIconName = "PhysicalResist";
-    public const string regenIconName = "Minor Regeneration";
+    public const string criticalHitDamageIconName = "Crit Damagae Multiplier";
+    public const string physicalResistIconName = "Physical Resist";
+    public const string regenIconName = "Regeneration";
     public const string cunningIconName = "Cunning";
     public const string extraArmorIconName = "Extra Armor";
     public const string armorShredIconName = "Armor Shred";
     public const string surpriseRoundDamageMultiplierIconName = "Surprise Round Damage";
-    public const string surpriseRoundAmountIconName = "Surprise Round Amount";
-    public const string armorPenetrationIconName = "ArmorPenetration";
+    public const string surpriseRoundAmountIconName = "Surprise Round Duration";
+    public const string armorPenetrationIconName = "Armor Penetration";
     public const string observationIconName = "Observation";
-    public const string mentalResistIconName = "MentalResist";
-    public const string retreatChanceIconName = "RetreatChance";
+    public const string mentalResistIconName = "Mental Resist";
+    public const string retreatChanceIconName = "Retreat Chance";
     public const string passiveSlotsIconName = "Bonus Slots";
     public const string bonusWeaponSlotsIconName = "Bonus Weapon Slots";
     public const string synergyIconName = "Synergy";
     public const string leadershipIconName = "Leadership";
-    public const string affinityMultiplierIconName = "AffinityMultiplier";
     public const string partySlotsIconName = "Party Slots";
     public const string partyActionsIconName = "Party Actions";
-    public const string goldMultiplierIconName = "GoldMultiplier";
+    public const string goldMultiplierIconName = "Gold Multiplier";
 
 
-    public const string allExuberancesIconName = "All Exuberances";
+    public const string allExuberancesIconName = "Starting Exuberances";
     public const string redKnifeIconName = "Red Knife";
     public const string blueShieldIconName = "Blue Shield";
     public const string yellowThornIconName = "Yellow Thorn";

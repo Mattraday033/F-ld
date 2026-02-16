@@ -175,20 +175,17 @@ public class Weapon : EquippableItem, IJSONConvertable
 
         buildingBlocks.AddRange(getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
 
-        if (getSlotID() == mainHandSlotIndex)
-        {
-            // buildingBlocks.Insert(3, DescriptionPanelBuildingBlock.getRangeBlock(getRangeIndex()));
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRangeIndex()));
-            buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getTypeIconName()));
-        }
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRangeIndex()));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getWorthBlock(getWorthForDisplay()));
+
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getLoreDescription()));
 
         buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getIconName()));
 
         buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getSlotIconName()));
-
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getLoreDescription()));
+        
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getTypeIconName()));
 
         if (appliesStanceStacks())
         {

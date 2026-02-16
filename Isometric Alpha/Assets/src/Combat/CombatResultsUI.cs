@@ -67,7 +67,7 @@ public class CombatResultsUI : PopUpWindow
 
         xpText.text = xpDropped + "";
 
-        goldText.text = goldDropped + " " + Purse.moneySymbol;
+        goldText.text = goldDropped + Purse.moneySymbol;
 
         CombatResults combatResults = new CombatResults(itemDrops);
 

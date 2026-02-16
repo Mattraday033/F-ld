@@ -65,8 +65,6 @@ public static class AbilityList
     public const string godSpellAbilityKey = "God Spell";
 	public const string moveAllyAbilityKey = "Master Move Ally Ability";
 
-    public const string minorRegenerationName = "Minor Regeneration";
-
     public const string waylayName = "Waylay";
 	public const string crippleName = "Cripple";
 	public const string flenseName = "Flense";

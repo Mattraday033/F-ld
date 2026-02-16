@@ -8,69 +8,31 @@ public enum BlockFormatType {None = 0, PartyMemberStats = 1, CombatHover = 2, Pl
 
 public class BlockFormat
 {
-    public bool disableImages;
-
-    public Color outlineColor;
-    public Color interiorColor;
+    public Color ?fontColor;
 
     public Color iconOutlineColor;
     public Color iconBackgroundColor;
 
     public Vector2Int iconSizeParams = Vector2Int.zero;
-    public int fontsize = -1;
+    public int fontSize = -1;
     public int spaceBetweenIconAndText = -1;
 
 
-    public BlockFormat(bool disableImages)
+    public BlockFormat(Color iconOutlineColor, Color iconBackgroundColor, Color ?fontColor = null, Vector2Int iconSizeParams = new Vector2Int(), int fontSize = -1, int spaceBetweenIconAndText = -1)
     {
-        this.disableImages = disableImages;
-
-        this.outlineColor = ColorList.combatHoverOutlineGrey;
-        this.interiorColor = ColorList.combatHoverOutlineGrey;
-    }
-
-    public BlockFormat(Color outlineColor, Color interiorColor)
-    {
-        this.disableImages = false;
-
-        this.outlineColor = outlineColor;
-        this.interiorColor = interiorColor;
-    }
-
-    public BlockFormat(bool disableImages, Color iconOutlineColor, Color iconBackgroundColor)
-    {
-        this.disableImages = disableImages;
-
-        this.outlineColor = ColorList.combatHoverOutlineGrey;
-        this.interiorColor = ColorList.combatHoverOutlineGrey;
-        
-        this.iconOutlineColor = iconOutlineColor;
-        this.iconBackgroundColor = iconBackgroundColor;
-    }
-
-    public BlockFormat(Color outlineColor, Color interiorColor, Color iconOutlineColor, Color iconBackgroundColor)
-    {
-        this.disableImages = false;
-
-        this.outlineColor = outlineColor;
-        this.interiorColor = interiorColor;
-        
-        this.iconOutlineColor = iconOutlineColor;
-        this.iconBackgroundColor = iconBackgroundColor;
-    }
-
-    public BlockFormat(Color outlineColor, Color interiorColor, Color iconOutlineColor, Color iconBackgroundColor, Vector2Int iconSizeParams, int fontsize, int spaceBetweenIconAndText)
-    {
-        this.disableImages = false;
-
-        this.outlineColor = outlineColor;
-        this.interiorColor = interiorColor;
+        if(fontColor == null)
+        {
+            this.fontColor = ColorList.grey25;
+        } else
+        {
+            this.fontColor = fontColor;
+        }
 
         this.iconOutlineColor = iconOutlineColor;
         this.iconBackgroundColor = iconBackgroundColor;
-        
+
         this.iconSizeParams = iconSizeParams;
-        this.fontsize = fontsize;
+        this.fontSize = fontSize;
         this.spaceBetweenIconAndText = spaceBetweenIconAndText;
     }
 
@@ -81,7 +43,7 @@ public class BlockFormat
 
     public bool hasFontSizeParams()
     {
-        return fontsize >= 0;
+        return fontSize >= 0;
     }
 
     public bool hasSpacingSizeParams()
@@ -94,15 +56,16 @@ public class BlockFormat
         switch (type)
         {
             case BlockFormatType.PlayerStats:
-                return new BlockFormat(Color.clear, Color.clear, Color.clear, Color.black, new Vector2Int(45, 45), 26, 5);
+                return new BlockFormat(ColorList.darkUICyan, ColorList.grey25, iconSizeParams: new Vector2Int(45, 45), fontSize: 26, spaceBetweenIconAndText: 5);
 
             case BlockFormatType.CombatHover:
-                return new BlockFormat(ColorList.combatHoverOutlineGrey, ColorList.combatHoverOutlineGrey, Color.clear, Color.clear);
+                return new BlockFormat(ColorList.darkUICyan, ColorList.grey25, ColorList.grey245);
 
             case BlockFormatType.PartyMemberStats: 
-                return new BlockFormat(false, Color.white, Color.black);
+                return new BlockFormat(ColorList.darkUICyan, ColorList.grey25);
+
             case BlockFormatType.CombatResults: 
-                return new BlockFormat(Color.clear, Color.clear, Color.clear, Color.black);
+                return new BlockFormat(ColorList.darkUICyan, ColorList.grey25);
             default:
                 return null;
         }
@@ -120,32 +83,19 @@ public class DescriptionPanelBlockFormatter : MonoBehaviour
 
     public Transform rowParent;
 
-    [SerializeField]
+    public BlockFormatType formatOverride = BlockFormatType.None;
     public BlockFormat format;
 
     public bool centerAllText = false;
 
     public void setFormat(BlockFormat format)
     {
-        this.format = format;
-
-        if (format.disableImages)
+        if(formatOverride == BlockFormatType.None)
         {
-            setImageEnabled(panelOutline, false);
-            setImageEnabled(panelInterior, false);
-        }
-        else
+            this.format = format;
+        } else
         {
-            DescriptionPanel.setImageColor(panelOutline, format.outlineColor);
-            DescriptionPanel.setImageColor(panelInterior, format.interiorColor);
-        }
-    }
-
-    private void setImageEnabled(Image image, bool isEnabled)
-    {
-        if (image != null)
-        {
-            image.enabled = isEnabled;
+            this.format = BlockFormat.getBlockFormat(formatOverride);
         }
     }
 
@@ -174,6 +124,8 @@ public class DescriptionPanelBlockFormatter : MonoBehaviour
         {
             row.centerText();
         }
+
+        row.setDescriptionTextColor(format.fontColor);
 
     }
 

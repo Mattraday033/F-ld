@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class HealingItem: UsableItem, IJSONConvertable
 {
-	public const string typeIconName = "HealingItem";
+	public const string typeIconName = "Healing Item";
 	public const string subtype = "Healing";
 	public const bool treatAmountAsHealing = true;
 	private int amountToHeal;
