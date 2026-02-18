@@ -117,6 +117,11 @@ public class DescriptionPanelRow : MonoBehaviour
         iconSymbolText.enabled = true;
         iconSymbolText.text = symbol;
 
+        if(iconHover != null)
+        {
+            iconHover.hoverMessageKey = symbol;
+        }
+
         if(symbol.Equals(Dexterity.symbolChar))
         {
             iconSymbolText.margin = new Vector4(iconSymbolText.fontSize/10f + 1f, iconSymbolText.margin.y, iconSymbolText.margin.z, iconSymbolText.margin.w);

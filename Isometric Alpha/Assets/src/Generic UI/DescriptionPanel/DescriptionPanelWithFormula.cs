@@ -16,9 +16,6 @@ public class DescriptionPanelWithFormula : DescriptionPanel
     private bool hasListener = false;
     private bool hasFormula = false;
 
-    private float oldFontSize = 28f;
-    private const float fontSizeModifier = .75f;
-
     private void OnDestroy()
     {
         if (hasListener)

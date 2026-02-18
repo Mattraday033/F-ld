@@ -213,7 +213,10 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
     private void createChestItemUI()
     {
-        chestItemDescriptionPanel = Instantiate(Resources.Load<GameObject>(PrefabNames.chestDescriptionPanel), PlayerObject.getUIParentTransform()).GetComponent<DescriptionPanel>();
+        RectTransform rectTransform = Instantiate(Resources.Load<GameObject>(PrefabNames.descriptionPanelBuildingBlockItem), PlayerObject.getUIParentTransform()).GetComponent<RectTransform>();
+        rectTransform.localScale = new Vector3(.0075f, .0075f);
+
+        chestItemDescriptionPanel = rectTransform.GetComponent<DescriptionPanel>();
         chestContents.describeSelfRow(chestItemDescriptionPanel);
     }
 

@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IHoverIconSource, IDescribable
 {
     [SerializeField]
-    protected string hoverMessageKey;
+    public string hoverMessageKey;
     protected string hoverText;
 
     [SerializeField]
@@ -118,6 +118,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (hoverText != null && hoverText.Length > 0)
         {
             MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldSpawnHoverIcon));
+            eventData.Use();
         }
     }
 
@@ -176,21 +177,35 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private string getHoverMessageKeyForDisplay()
     {
+        if(bonusDamageIcon)
+        {
+            return "Bonus Damage";
+        }
+
         switch(hoverMessageKey)
         {
-            case "S":
+            case IconList.surpriseIconName:
+                return "Surprise Status";
+            case HoverMessageList.passiveSlotsKey:
+                return "Bonus Slots";
+            case HoverMessageList.zoneOfInfluenceKey:
+                return "Zone of Influence";
+            case Strength.symbolChar:
                 return PrimaryStat.Strength.ToString();
-            case "D":
+            case Dexterity.symbolChar:
                 return PrimaryStat.Dexterity.ToString();
-            case "W":
+            case Wisdom.symbolChar:
                 return PrimaryStat.Wisdom.ToString();
-            case "C":
+            case Charisma.symbolChar:
                 return PrimaryStat.Charisma.ToString();
             case Constants.emptyString:
             case null:
-                if(iconImage != null && iconImage.sprite != null)
+                if(iconImage != null && 
+                    iconImage.sprite != null && 
+                    !iconImage.sprite.name.Equals(Constants.emptyString))
                 {
-                    return iconImage.sprite.name;
+                    hoverMessageKey = iconImage.sprite.name;
+                    return getHoverMessageKeyForDisplay();
                 } else
                 {
                     return Constants.emptyString;
@@ -242,20 +257,21 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 public static class HoverMessageList
 {
     public const string zoneOfInfluenceKey = "ZOI-Icon";
-    public const string zoneOfInfluenceMessage = "Zone of Influence. A Trait applied to the Zone's owner and all allies directly infront, behind, or beside this creature. Zones of Influence are not applied diagonally.";
+    public const string zoneOfInfluenceMessage = "A Trait applied to the Zone's owner and all allies directly infront, behind, or beside this creature. Zones of Influence are not applied diagonally.";
     
     private const string actionWheelKey = "Action Wheel";
     private const string actionWheelMessage = "The Action Wheel contains all of the Actions a character can bring into battle. With the exception of Passive Abilities, if an Action is not on the Action Wheel, the character is gaining no benefits from it.";
-    private const string passiveSlotsKey = "Passive Slots";
+    public const string passiveSlotsKey = "Passive Slots";
 
-    private const string mainHandWeaponSlotKey = "Main Hand Weapon Slot";
-    private const string mainHandWeaponSlotMessage = "Main Hand Weapon Slot. You can equip Main Hand Weapons from the Character and Inventory Screens.";
-    private const string mainHandWeaponMessage = "Equipping a Main Hand Weapon gives you a new Attack Action on your Action Wheel in Combat.";
-    private const string twoHandedWeaponMessage = "This weapon requires two hands to wield. Two Handed Weapons have larger ranges and deal more damage than one handed ones, but don't benefit from the damage of your offhand. Using a Two Handed Weapon forfeits the armor from your shield for the rest of the turn.";
-    private const string oneHandedWeaponMessage = "You only need one hand to wield this weapon. One Handed Weapons have shorter ranges and deal less damage than two handed ones, but add the damage of your Offhand Weapon to their damage.";
+    private const string mainHandWeaponTabKey = "Main Hand Tab";
+    private const string mainHandWeaponSlotMessage = "You can equip Main-Hand Weapons from the Character and Inventory Screens.";
+    private const string mainHandWeaponTabMessage = "Here you can find all the Main-Hand Weapons you have in your Inventory. " + mainHandWeaponMessage;
+    private const string mainHandWeaponMessage = "Equipping a Main-Hand Weapon gives you a new Attack Action on your Action Wheel in Combat.";
+    private const string twoHandedWeaponMessage = "This weapon requires two hands to wield. Two-Handed Weapons have larger ranges and deal more damage than one handed ones, but don't benefit from the damage of your Off Hand. Using a Two-Handed Weapon forfeits the benefits from your Shield for the rest of the turn.";
+    private const string oneHandedWeaponMessage = "You only need one hand to wield this weapon. One-Handed Weapons have shorter ranges and deal less damage than Two-Handed ones, but add the damage of your Off-Hand Weapon to their damage.";
 
-    private const string offhandSlotMessage = "Offhand Slot";
-    private const string offhandSubMessage = "Offhand Weapons give you extra Damage and Crit Chance when you attack with a One Handed Weapon. Shields give extra Armor as long as you haven't attacked with a Two Handed Weapon this turn.";
+    private const string offhandSlotMessage = "Off Hand Slot";
+    private const string offhandSubMessage = "Off-Hand Weapons give you extra Damage and Crit Chance when you attack with a One-Handed Weapon. Shields give extra Armor as long as you haven't attacked with a Two-Handed Weapon this turn.";
     private const string headSlotMessage = "Head Slot";
     private const string bodySlotMessage = "Body Slot";
     private const string handsSlotMessage = "Hand Slot";
@@ -270,7 +286,7 @@ public static class HoverMessageList
     private const string usableSubtypeMessage = "Usable Item";
     private const string usableSubMessage = "Some Usable Items heal, apply Traits in combat, or provide you with information. Most Usable Items are destroyed when used.";
 
-    private const string weaponSubtypeMessage = "Main hand weapons provide a new Attack Action on your Action Wheel in Combat. Offhand weapons provide extra damage and crit chance when you attack with a one handed weapon.";
+    private const string weaponSubtypeMessage = "Main-Hand Weapons provide a new Attack Action on your Action Wheel in Combat. Off-Hand weapons provide extra damage and crit chance when you attack with a One-Handed Weapon.";
     private const string armorSubtypeMessage = "Wearing Armor provides Armor Score, which blocks a percentage of incoming damage. Some pieces of Armor also provide additional benefits.";
 
     private const string armorScoreKey = "Armor Score";
@@ -282,7 +298,7 @@ public static class HoverMessageList
     public const string damageKey = "Damage";
     private const string damageIconMessage = "The amount of damage this Action deals. Hold 'Alt' to see the Action's Damage Formula. A Damage Formula calculates an Action's damage based on your stats. For example: an Action with a Damage Formula of '3S + 5' deals 3 times your Strength, plus 5.";
     private const string critIconMessage = "The Critical Hit chance of this Action. Hold 'Alt' to see an Action's Crit Formula. A Crit Formula calculates an Action's Critical Hit chance based on your stats. For example: an Action with a Crit Formula of '3D + 5' has a Critical Hit chance of 3 times your Dexterity, plus 5.";
-    private const string rangeIconMessage = "The Range of this Action. An Action's Range determines how many spaces it affects, and in what shape.";
+    private const string rangeIconMessage = "The Range of this Action. An Action's Range determines how many spaces it affects, and in what shape. Hold 'Alt' or check the Glossary to see a Range's shape.";
     private const string cooldownIconMessage = "The Action's Cooldown. Actions with a Cooldown period are unavailable for a number of rounds after use.";
     private const string slotsIconMessage = "The maximum amount of Action Wheel Slots this Action can take up. Each Slot has it's own Cooldown period: assigning an Action to multiple Slots lets you use it more often.";
     private const string durationIconMessage = "This Action has an effect that lasts multiple rounds, such as applying a Trait to it's target.";
@@ -298,7 +314,7 @@ public static class HoverMessageList
     private const string bonusDamageMessage = "Bonus Damage is added to the damage of all of your Abilities. Your Bonus Damage is equal to the highest Base Damage of all of your equipped Weapons. For example, a weapon with a Damage Formula of '3S + 5' provides 5 Bonus Damage. Hold 'Alt' when viewing a Weapon's stats to reveal formulas.";
 
     private const string weaponSlotKey = "Weapon Slots";
-    private const string weaponSlotMessage = "Weapon Slots are used to assign your equipped weapons to your Action Wheel.";
+    private const string weaponSlotMessage = "The number of Main-Hand Weapons you can have equipped to your Action Wheel. The higher a Character's Wisdom, the more Weapon Slots that Character has.";
 
     private const string stanceWeaponMessage = "Attacks made with Stance Weapons, such as fists and staffs, give the attacker additional stacks of their current Stance.";
 
@@ -316,40 +332,40 @@ public static class HoverMessageList
     private const string armorPenetrationMessage = "Armor Penetration. The percentage of an enemy's armor your Actions will ignore. Determined by a character's Dexterity.";
 
     private const string mentalResistMessage = "Mental Resistance. Your chance to ignore a Mental Trait applied to you in combat. Determined by a character's Wisdom.";
-    private const string passiveSlotsMessage = "Passive Slots. Passive Slots are Action Slots that can only be occupied by Equipped Passives, Stances, and Weapons, saving you space on your Action Wheel for Actions you wish to activate. Actions equippable to Passive Slots can still be equipped to the Action Wheel if desired. Determined by a character's Wisdom.";
-    private const string bonusWeaponSlotsMessage = "Bonus Weapon Slots. You are able to carry more than the usual amount of weapons on your Action Wheel. Determined by a character's Wisdom.";
+    private const string passiveSlotsMessage = "Bonus Slots are Action Slots that can only be occupied by Equipped Passives, Stances, and Weapons, saving you space on your Action Wheel for Actions you wish to activate. Actions equippable to Bonus Slots can still be equipped to the Action Wheel if desired. Determined by a character's Wisdom.";
+    private const string bonusWeaponSlotsMessage = "You are able to carry more than the usual amount of weapons on your Action Wheel. Determined by a character's Wisdom.";
 
-    private const string synergyMessage = "Synergy. Party Members get to add their Synergy to the damage they deal, and subtract it from the damage they take, per Zone of Influence they are inside. Determined by a character's Charisma.";
-    private const string bonusExuberancesMessage = "Bonus Exuberances. Bonus Exuberances are added at the start of Combat, letting you use Abilities with Exuberance costs faster and more often. Determined by a character's Charisma.";
-    private const string zoiMessage = "Zone of Influence. A Zone of Influence is a bonus applied to all allies adjacent to this character in Combat. Each character's Zone of Influence is different, but the potency of that bonus is determined by a character's Charisma.";
+    private const string synergyMessage = "Party Members get to add their Synergy to the damage they deal, and subtract it from the damage they take, per Zone of Influence they are inside. Determined by a character's Charisma.";
+    private const string bonusExuberancesMessage = "The number of Exuberances your Party has at the start of Combat. Having more Starting Exuberances allows you to use Abilities with Exuberance costs faster and more often. Determined by a character's Charisma.";
+    private const string zoiMessage = "A Zone of Influence is a bonus applied to all allies adjacent to this character in Combat. Each character's Zone of Influence is different, but the potency of that bonus is determined by a character's Charisma.";
 
     private const string characterAbilityKey = "Character Abilities";
-    private const string characterAbilityMessage = characterAbilityKey + ". Each Party Member gets a number of unique Abilities they unlock at certain levels.";
+    private const string characterAbilityMessage = "Each Party Member gets a number of unique Abilities they unlock at certain levels.";
 
     private const string statPointKey = "Stat Points";
-    private const string statPointMessage = "Stat Points. This shows how many times you can increase your Primary Stats. The four Primary Stats are Strength, Dexterity, Wisdom, and Charisma.";
+    private const string statPointMessage = "This shows how many times you can increase your Primary Stats. The four Primary Stats are Strength, Dexterity, Wisdom, and Charisma.";
 
     private const string compassKey = "Compass";
     private const string hostilityKey = "Hostility";
-    private const string hostilityMessage = hostilityKey + ". Areas with green Hostility means that you cannot be attacked by random monsters. Areas with red Hostility may contain random Monsters. Yellow Hosility means you have committed a crime. When the bars of an area fill up with yellow, they will turn red and guards will be sent after you.";
+    private const string hostilityMessage = "Areas with green Hostility means that you cannot be attacked by random monsters. Areas with red Hostility may contain random Monsters. Yellow Hosility means you have committed a crime. When the bars of an area fill up with yellow, they will turn red and guards will be sent after you.";
     private const string footingKey = "Footing";
-    private const string footingMessage = footingKey + ". Some enemies will chase you when you get too close. These enemies only move half as fast as you. When the Left Foot is visibile, enemies chasing you will move the next time you take a step.";
+    private const string footingMessage = "Some enemies will chase you when you get too close. These enemies only move half as fast as you. When the Left Foot is visibile, enemies chasing you will move the next time you take a step.";
 
-    private const string strengthMessage = "Strength. This Primary Stat bolsters a character's Maximum Health, Critical Hit Damage, and Physical Resistance. Strength also governs the Intimidate skill.";
-    private const string dexterityMessage = "Dexterity. This Primary Stat bolsters a character's Armor, Surprise Round Damage Modifier, and Armor Penetration. Dexterity also governs the Cunning skill.";
-    private const string wisdomMessage = "Wisdom. This Primary Stat bolsters a character's Mental Resistance. Wisdom also provides bonus Passive Slots, increases the number of Weapons you can have equipped, and governs the Observation skill.";
-    private const string charismaMessage = "Charisma. This Primary Stat increases your Synergy, gives access to Exuberances, and boosts a character's Zone of Influence. Charisma also governs the Leadership skill.";
+    private const string strengthMessage = "This Primary Stat bolsters a character's Maximum Health, Critical Hit Damage, and Physical Resistance. Strength also governs the Intimidate skill.";
+    private const string dexterityMessage = "This Primary Stat bolsters a character's Armor, Surprise Round Damage Modifier, and Armor Penetration. Dexterity also governs the Cunning skill.";
+    private const string wisdomMessage = "This Primary Stat bolsters a character's Mental Resistance. Wisdom also provides bonus Passive Slots, increases the number of Weapons you can have equipped, and governs the Observation skill.";
+    private const string charismaMessage = "This Primary Stat increases your Synergy, gives access to Exuberances, and boosts a character's Zone of Influence. Charisma also governs the Leadership skill.";
 
     private const string usableItemInventoryTabMessage = "Usable Items Tab.";
-    private const string usableItemOOCSubMessage = " Usable Items that can be activated out of combat can be found here. <B>To Use a Usable Item, drag the Item onto the Party Member you want to use it on.</B>";
-    private const string howToUseItemMessage = " <B>To Use a Usable Item, drag the Item onto the Party Member you want to use it on.</B>";
+    private const string usableItemOOCSubMessage = "Usable Items that can be activated out of combat can be found here." + howToUseItemMessage;
+    private const string howToUseItemMessage = " <B>To Use a Usable Item, drag the Item onto the Party Member you want to use it on while on the Inventory Screen.</B>";
     private const string offHandTabMessage = "Off Hand Tab.";
     private const string armorTabKey = "Armor Tab";
-    private const string armorTabMessage = "Armor Tab. Equipping Armor is the main way to boost your Armor Score and reduce incoming damage. Some Armor provides additional benefits.";
+    private const string armorTabMessage = "Equipping Armor is the main way to boost your Armor Score and reduce incoming damage. Some Armor provides additional benefits.";
     private const string essentialTabKey = "Essential Tab";
-    private const string essentialTabMessage = "Essential Tab. Essential Items such as Quest Items and Keys cannot be sold to a Merchant.";
+    private const string essentialTabMessage = "Essential Items such as Quest Items and Keys cannot be sold to a Merchant.";
     private const string junkTabKey = "Junk Tab";
-    private const string junkTabMessage = "Junk Tab.";
+    private const string junkTabMessage = "Here you can see all the Items you have marked as Junk.";
     private const string junkSubMessage = " All Items marked as Junk can be sold simultaneously to a Merchant. Treasure Items are always marked as Junk.";
 
     public const string junkSlotKey = "Junk Slot";
@@ -431,9 +447,9 @@ public static class HoverMessageList
                 return offhandSlotMessage;
 
             case EquippableItem.mainHandSlotIconName:
-                return mainHandWeaponMessage;
-            case mainHandWeaponSlotKey:
-                return mainHandWeaponSlotMessage;
+                return mainHandWeaponMessage + " " + mainHandWeaponSlotMessage;
+            case mainHandWeaponTabKey:
+                return mainHandWeaponTabMessage;
             case EquippableItem.twoHandedSlotIconName:
                 return twoHandedWeaponMessage;
             case EquippableItem.oneHandedSlotIconName:
@@ -601,7 +617,7 @@ public static class HoverMessageList
             case essentialTabKey:
                 return essentialTabMessage;
             case junkTabKey:
-                return junkSubMessage;
+                return junkTabMessage + junkSubMessage;
 
             case junkSlotKey:
                 return junkSlotMessage + junkSubMessage;

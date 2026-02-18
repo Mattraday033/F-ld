@@ -419,7 +419,7 @@ MonoBehaviour:
   additionalSlots: []
   collectionTabIndex: 0
   panelType: 1
-  formatType: 0
+  formatType: 5
   descriptionPanelParent: {fileID: 0}
   decisionPanelParent: {fileID: 1040040577291651730}
   grid: {fileID: 8687953845625788173}
@@ -881,7 +881,7 @@ GameObject:
   - component: {fileID: 2982887157826923436}
   - component: {fileID: 6178087485429325141}
   m_Layer: 5
-  m_Name: Combat Results Messages
+  m_Name: Save Description Interior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4241,6 +4241,7 @@ MonoBehaviour:
   panelOutline: {fileID: 0}
   panelInterior: {fileID: 0}
   rowParent: {fileID: 0}
+  formatOverride: 0
   centerAllText: 1
 --- !u!114 &8031087938434045010
 MonoBehaviour:
@@ -4290,6 +4291,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3676077586126620262}
     m_Modifications:
+    - target: {fileID: 1858867877573687010, guid: c682e00441168064c8b07b09fbd70a16,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1858867877573687010, guid: c682e00441168064c8b07b09fbd70a16,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -4925,12 +4931,12 @@ PrefabInstance:
     - target: {fileID: 6127520479215709649, guid: c6139e6344190eb4ca076cb6c7b51e79,
         type: 3}
       propertyPath: m_Size
-      value: 0.969697
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6127520479215709649, guid: c6139e6344190eb4ca076cb6c7b51e79,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7025675502511789827, guid: c6139e6344190eb4ca076cb6c7b51e79,
         type: 3}

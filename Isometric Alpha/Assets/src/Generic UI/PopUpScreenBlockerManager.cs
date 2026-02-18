@@ -42,10 +42,10 @@ public static class PopUpScreenBlockerManager
 
 	public static Transform getPopUpParent(PopUpType type)
 	{
-		if(type == PopUpType.LoadOnlyScreen && CombatStateManager.whoseTurn == WhoseTurn.Lost)
-		{
-			return OverallUIManager.screenBackground;
-		}
+		// if(type == PopUpType.LoadOnlyScreen && CombatStateManager.whoseTurn == WhoseTurn.Lost)
+		// {
+		// 	return OverallUIManager.screenBackground;
+		// }
 
 		return popUpParent;
 	}

@@ -95,7 +95,7 @@ SpriteRenderer:
   m_SortingLayerID: 877229515
   m_SortingLayer: 6
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 823b5c85b5503fa4e9777dff62059cd9, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -148,6 +148,7 @@ MonoBehaviour:
   terrainCollider: {fileID: 6050226065271995509}
   UIParent: {fileID: 8349594426262021622}
   pressButtonPrompt: {fileID: 5917703585907860635}
+  pressButtonPromptBackgroundLayout: {fileID: 6451966914035060883}
   pressButtonPromptText: {fileID: 7201376879852185141}
   animationManager: {fileID: 2281003143300886050}
   mapPopUpButton: {fileID: 4296566724507772205}
@@ -165,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3584462627e7c4ba6323639e9738e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  changesFacing: 0
   spriteRenderer: {fileID: 3312928677131579550}
   shadowSprite: {fileID: 2782578090679091297}
   polygonCollider2D: {fileID: 8448093679278581172}
@@ -677,15 +679,70 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3312928677131579616}
     m_Modifications:
+    - target: {fileID: 1457742195708142816, guid: e1cfa8daf0a9e1a4392ac64e6262f9b6,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457742195708142816, guid: e1cfa8daf0a9e1a4392ac64e6262f9b6,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470397436741712565, guid: e1cfa8daf0a9e1a4392ac64e6262f9b6,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470397436741712565, guid: e1cfa8daf0a9e1a4392ac64e6262f9b6,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470397436741712565, guid: e1cfa8daf0a9e1a4392ac64e6262f9b6,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470397436741712565, guid: e1cfa8daf0a9e1a4392ac64e6262f9b6,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470397436741712565, guid: e1cfa8daf0a9e1a4392ac64e6262f9b6,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470397436741712565, guid: e1cfa8daf0a9e1a4392ac64e6262f9b6,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 2563339351960691459, guid: e1cfa8daf0a9e1a4392ac64e6262f9b6,
         type: 3}
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2563339351960691459, guid: e1cfa8daf0a9e1a4392ac64e6262f9b6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3966802899858506930, guid: e1cfa8daf0a9e1a4392ac64e6262f9b6,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3966802899858506930, guid: e1cfa8daf0a9e1a4392ac64e6262f9b6,
         type: 3}
       propertyPath: m_SortingLayerID
-      value: 592294213
+      value: 510581953
+      objectReference: {fileID: 0}
+    - target: {fileID: 5084667099385798319, guid: e1cfa8daf0a9e1a4392ac64e6262f9b6,
+        type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6250860163039796588, guid: e1cfa8daf0a9e1a4392ac64e6262f9b6,
         type: 3}
@@ -792,6 +849,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Press Button Prompt Background
       objectReference: {fileID: 0}
+    - target: {fileID: 8610842739646045185, guid: e1cfa8daf0a9e1a4392ac64e6262f9b6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -803,6 +865,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2693209578451859610}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6451966914035060883 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9000952305489504265, guid: e1cfa8daf0a9e1a4392ac64e6262f9b6,
+    type: 3}
+  m_PrefabInstance: {fileID: 2693209578451859610}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5917703585907860635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7201376879852185141 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5084667099385798319, guid: e1cfa8daf0a9e1a4392ac64e6262f9b6,

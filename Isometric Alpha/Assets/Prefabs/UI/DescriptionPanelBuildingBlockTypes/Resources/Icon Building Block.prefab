@@ -213,9 +213,9 @@ MonoBehaviour:
   bonusDamageIcon: 0
   damageIcon: 0
   descriptionPanel: {fileID: 0}
-  outlineImage: {fileID: 0}
-  backgroundImage: {fileID: 0}
-  iconImage: {fileID: 0}
+  outlineImage: {fileID: 4413458273422036387}
+  backgroundImage: {fileID: 5007689153625827900}
+  iconImage: {fileID: 7310202546522398837}
 --- !u!1 &6840832873674876519
 GameObject:
   m_ObjectHideFlags: 0

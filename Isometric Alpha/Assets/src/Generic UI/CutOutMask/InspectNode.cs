@@ -16,6 +16,8 @@ public class InspectNode : MonoBehaviour
     {
         inspecting = false;
         PlayerOOCStateManager.OnStateChangeFromInUI.AddListener(endInspectingOnStateChange);
+        PlayerOOCStateManager.OnStateChangeFromInChestUI.AddListener(endInspectingOnStateChange);
+        PlayerOOCStateManager.OnStateChangeToWalking.AddListener(endInspectingOnStateChange);
     }
 
     [SerializeField]
@@ -28,13 +30,22 @@ public class InspectNode : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
-        
+
         if(instance == null)
         {
             instance = this;
         } else
         {
             gameObject.SetActive(false);
+        }
+    }
+
+    public void OnEnable()
+    {
+        if(CombatStateManager.inCombat)
+        {
+            gameObject.SetActive(false);
+            return;
         }
     }
 

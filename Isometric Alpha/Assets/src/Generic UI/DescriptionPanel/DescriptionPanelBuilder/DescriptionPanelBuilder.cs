@@ -571,6 +571,12 @@ public class DescriptionPanelBuilder : MonoBehaviour
         if (format != null && formatter != null)
         {
             formatter.setFormat(format);
+        } else if(formatter != null && formatter.formatOverride != BlockFormatType.None)
+        {
+            formatter.setFormat(BlockFormat.getBlockFormat(formatter.formatOverride));
+        } else if(CombatStateManager.inCombat && format == null && formatter != null)
+        {
+            formatter.setFormat(BlockFormat.getBlockFormat(BlockFormatType.CombatHover));
         }
 
         addToAdditionalBuilders(blockOrigin, format);
@@ -674,7 +680,7 @@ public class DescriptionPanelBuilder : MonoBehaviour
 
         if (block.text != null)
         {
-            if (hasFormatToFollow() && formatter.format.hasFontSizeParams())
+            if (hasFormatToFollow() && formatter.format.hasFontSizeParams() && block.type != DescriptionPanelBuildingBlockType.Name)
             {
                 row.setText(block.text, formatter.format.fontSize);
             }
@@ -869,7 +875,7 @@ public static class IconList
 
     public const string intimidateIconName = "Intimidate";
     public const string bonusHealthIconName = "Bonus Health";
-    public const string criticalHitDamageIconName = "Crit Damagae Multiplier";
+    public const string criticalHitDamageIconName = "Crit Damage Multiplier";
     public const string physicalResistIconName = "Physical Resist";
     public const string regenIconName = "Regeneration";
     public const string cunningIconName = "Cunning";
@@ -898,4 +904,6 @@ public static class IconList
 
     public const string discountIconName = "Discount";
     public const string volleyIconName = "Volley";
+
+    public const string surpriseIconName = "SurpriseIcon";
 }

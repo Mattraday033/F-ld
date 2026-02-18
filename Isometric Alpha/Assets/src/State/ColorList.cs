@@ -59,7 +59,9 @@ public static class ColorList
 
     #endregion
 
-    public readonly static Color surpriseIconGrey = grey155;
+    public readonly static Color surpriseIconGrey = blackFadeOut75;
+    public readonly static Color surpriseIconGreen = new Color32(25,185,25,255);
+    public readonly static Color surpriseIconRed = new Color32(225,35,35,255);
 
     public readonly static Color skillButtonOutlineHighlight = Color.yellow;
 

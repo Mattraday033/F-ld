@@ -492,13 +492,13 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 			}
 			else if (legalMoves.Count == 1)
 			{
-				return (Vector3Int)legalMoves[0];
+				return legalMoves[0];
 			}
 			else
 			{
 				int moveIndex = UnityEngine.Random.Range(0, legalMoves.Count);
 
-				return (Vector3Int)legalMoves[moveIndex];
+				return legalMoves[moveIndex];
 			}
 		}
 	}
@@ -809,7 +809,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 		blocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName() + "\n"));
 
-        blocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock("  Movement: " + movementType.ToString()+"  \n\n"));
+        blocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(" Movement: " + movementType.ToString()+"  \n\n"));
 
         blocks.AddRange(getEnemyPackInfo().getDescriptionBuildingBlocks());
 

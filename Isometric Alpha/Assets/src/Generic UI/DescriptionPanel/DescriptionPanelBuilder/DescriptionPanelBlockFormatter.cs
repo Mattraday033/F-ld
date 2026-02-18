@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public enum BlockFormatType {None = 0, PartyMemberStats = 1, CombatHover = 2, PlayerStats = 3, CombatResults = 4}
+public enum BlockFormatType {None = 0, PartyMemberStats = 1, CombatHover = 2, PlayerStats = 3, CombatResults = 4, SaveBlueprint = 5}
 
 public class BlockFormat
 {
@@ -62,10 +62,10 @@ public class BlockFormat
                 return new BlockFormat(ColorList.darkUICyan, ColorList.grey25, ColorList.grey245);
 
             case BlockFormatType.PartyMemberStats: 
-                return new BlockFormat(ColorList.darkUICyan, ColorList.grey25);
-
             case BlockFormatType.CombatResults: 
                 return new BlockFormat(ColorList.darkUICyan, ColorList.grey25);
+            case BlockFormatType.SaveBlueprint: 
+                return new BlockFormat(ColorList.darkUICyan, ColorList.grey25, fontSize: 18);
             default:
                 return null;
         }

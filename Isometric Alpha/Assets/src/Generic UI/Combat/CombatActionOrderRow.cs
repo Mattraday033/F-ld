@@ -44,7 +44,15 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 
 		CombatAction actionBeingDescribed = getCombatActionBeingDescribed();
 
-		rowBackground.color = Color.red;
+        if(actionBeingDescribed != null && 
+            actionBeingDescribed.getActorStats() != null && 
+            CombatGrid.positionIsOnAlliedSide(actionBeingDescribed.getActorStats().position))
+        {
+		    rowBackground.color = Color.green;
+        } else
+        {
+		    rowBackground.color = Color.red;
+        }
 
 		actionBeingDescribed.highlightActorSprites();
 
@@ -82,7 +90,7 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 
 	public void removeHoverDataFromScreen()
 	{
-		rowBackground.color = Color.black;
+		rowBackground.color = Color.white;
 		
 		CombatAction actionBeingDescribed = getCombatActionBeingDescribed();
 		

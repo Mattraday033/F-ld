@@ -82,6 +82,8 @@ public class SaveHandler : ScreenManager, IEscapable
         saveButton.gameObject.SetActive(!Flags.isInNewGameMode() && !CombatStateManager.inCombat);
 
         base.Awake();
+
+        setSaveButtonInteractibility();
 	}
 
     protected override void Start()

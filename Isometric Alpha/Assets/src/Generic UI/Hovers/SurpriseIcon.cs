@@ -13,6 +13,9 @@ public class SurpriseIcon : SlotIconHover
     private const string enemySurprisedMessage = "You have surprised the enemy! They will not get to attack during the surprise round.";
     private const string playerSurprisedMessage = "The enemy has surprised you! You will not get to attack during the surprise round.";
 
+    public GameObject backgroundOne;
+    public GameObject backgroundTwo;
+
     public override void Awake()
     {
         CombatStateManager.OnNewTurn.AddListener(setSurpriseIcon);
@@ -26,34 +29,46 @@ public class SurpriseIcon : SlotIconHover
     private void setSurpriseIcon()
     {
         // outlineImage.color = getSurpriseColor();
-        iconImage.color = getSurpriseColor();
-
-        setHoverMessage(getHoverMessage());
-    }
-
-    private Color getSurpriseColor()
-    {
         switch (CombatStateManager.whoIsSurprised)
         {
             case SurpriseState.PlayerSurprised:
+
                 if(CombatStateManager.turnNumber > Constants.sizeOne)
                 {
-                    return ColorList.surpriseIconGrey;
+                    iconImage.color = ColorList.surpriseIconGrey;
+                    backgroundOne.SetActive(false);
+                    backgroundTwo.SetActive(false);
                 } else
                 {
-                    return Color.red;
+                    iconImage.color = ColorList.surpriseIconRed;
+                    backgroundOne.SetActive(true);
+                    backgroundTwo.SetActive(true);
                 }
+
+                break;
             case SurpriseState.EnemySurprised:
+
                 if(CombatStateManager.turnNumber > PartyStats.getPartySurpriseRounds())
                 {
-                    return ColorList.surpriseIconGrey;
+                    iconImage.color = ColorList.surpriseIconGrey;
+                    backgroundOne.SetActive(false);
+                    backgroundTwo.SetActive(false);
                 } else
                 {
-                return Color.green;
+                    iconImage.color = ColorList.surpriseIconGreen;
+                    backgroundOne.SetActive(true);
+                    backgroundTwo.SetActive(true);
                 }
+
+                break;
             default:
-                return ColorList.surpriseIconGrey;
+                iconImage.color = ColorList.surpriseIconGrey;
+                backgroundOne.SetActive(false);
+                backgroundTwo.SetActive(false);
+                break;
         }
+
+        setHoverMessage(getHoverMessage());
     }
 
     private string getHoverMessage()

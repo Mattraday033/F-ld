@@ -1440,6 +1440,7 @@ MonoBehaviour:
   panelOutline: {fileID: 0}
   panelInterior: {fileID: 0}
   rowParent: {fileID: 2663307973672754763}
+  formatOverride: 0
   centerAllText: 0
 --- !u!1 &3012546332022637642
 GameObject:
@@ -6555,7 +6556,7 @@ PrefabInstance:
     - target: {fileID: 3825275441988267460, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
       propertyPath: hoverMessageKey
-      value: JunkSlot
+      value: Junk Slot
       objectReference: {fileID: 0}
     - target: {fileID: 5311501905831558017, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
@@ -6983,7 +6984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f877509a99a954981d2ca8d4aa0110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverMessageKey: MainHandSlot
+  hoverMessageKey: Main Hand Tab
   bonusDamageIcon: 0
   damageIcon: 0
   descriptionPanel: {fileID: 0}
@@ -7166,7 +7167,7 @@ PrefabInstance:
     - target: {fileID: 3825275441988267460, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
       propertyPath: hoverMessageKey
-      value: BodySlot
+      value: Body Slot
       objectReference: {fileID: 0}
     - target: {fileID: 5311501905831558017, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
@@ -7386,7 +7387,7 @@ PrefabInstance:
     - target: {fileID: 3825275441988267460, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
       propertyPath: hoverMessageKey
-      value: TrinketSlot
+      value: Trinket Slot
       objectReference: {fileID: 0}
     - target: {fileID: 5311501905831558017, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
@@ -7621,7 +7622,7 @@ PrefabInstance:
     - target: {fileID: 3825275441988267460, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
       propertyPath: hoverMessageKey
-      value: Main Hand Weapon Slot
+      value: Main Hand Slot
       objectReference: {fileID: 0}
     - target: {fileID: 5311501905831558017, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
@@ -8800,7 +8801,7 @@ PrefabInstance:
     - target: {fileID: 3825275441988267460, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
       propertyPath: hoverMessageKey
-      value: HandsSlot
+      value: Hands Slot
       objectReference: {fileID: 0}
     - target: {fileID: 5311501905831558017, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
@@ -9240,7 +9241,7 @@ PrefabInstance:
     - target: {fileID: 3825275441988267460, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
       propertyPath: hoverMessageKey
-      value: Main Hand Weapon Slot
+      value: Main Hand Slot
       objectReference: {fileID: 0}
     - target: {fileID: 5311501905831558017, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
@@ -9460,7 +9461,7 @@ PrefabInstance:
     - target: {fileID: 3825275441988267460, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
       propertyPath: hoverMessageKey
-      value: HeadSlot
+      value: Head Slot
       objectReference: {fileID: 0}
     - target: {fileID: 5311501905831558017, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
@@ -10205,7 +10206,7 @@ PrefabInstance:
     - target: {fileID: 3825275441988267460, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
       propertyPath: hoverMessageKey
-      value: Main Hand Weapon Slot
+      value: Main Hand Slot
       objectReference: {fileID: 0}
     - target: {fileID: 5311501905831558017, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
@@ -10430,7 +10431,7 @@ PrefabInstance:
     - target: {fileID: 3825275441988267460, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
       propertyPath: hoverMessageKey
-      value: FeetSlot
+      value: Feet Slot
       objectReference: {fileID: 0}
     - target: {fileID: 5311501905831558017, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}

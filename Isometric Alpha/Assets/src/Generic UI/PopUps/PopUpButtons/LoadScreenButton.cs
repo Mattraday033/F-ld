@@ -26,7 +26,7 @@ public class LoadScreenButton : PopUpButton
 	
 	private void Awake()
 	{
-        SceneChange.addOOCUIScene();
+            SceneChange.addOOCUIScene();
 	}
 
     private void OnDestroy()

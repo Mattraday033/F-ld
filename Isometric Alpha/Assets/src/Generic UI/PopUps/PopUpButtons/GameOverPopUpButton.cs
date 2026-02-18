@@ -18,6 +18,8 @@ public class GameOverPopUpButton : PopUpButton
         setPopUpWindow(getCurrentPopUpGameObject().GetComponent<PopUpWindow>()); 
 		
 		getPopUpWindow().setProgenitor(this);
+
+        CombatResultsUI.OnCombatResultsUICreation.Invoke();
     }
 
     public override GameObject getCurrentPopUpGameObject()

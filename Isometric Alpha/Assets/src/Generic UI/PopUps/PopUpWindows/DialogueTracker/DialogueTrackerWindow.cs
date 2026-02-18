@@ -20,12 +20,12 @@ public class DialogueTrackerWindow : PopUpWindow, IEscapable
 
 	private void Awake()
 	{
-		if (instance != null)
-		{
-			throw new IOException("Duplicate instances of DialogueTrackerWindow exist");
-		}
-
 		instance = this;
+
+        if(PlayerOOCStateManager.currentActivity == OOCActivity.inDialoguePopUp)
+        {
+            TutorialSequenceStepTargetUIObject.createCutOutMask(transform);
+        }
 	}
 
 	public void populateDialogue()

@@ -47,7 +47,7 @@ activate({horseThreeIndex})
 
 changeCamTarget({beamIndex})
 
-Hail, branded. I have been beseeched by the glorious Csalan, steed to the Director, to serve as his translator while he parlays with you.
+Hail, branded. I have been commanded by the glorious Csalan, steed to the Director, to serve as his translator while he parlays with you.
 
     +I will hear his words.
         ->csalanSpeaksAndBeamTranslates("\*The horse speaks aloud in the horsetongue.* <Excellent. I had doubts you would be so agreeable.>", "Csalan appreciates your willingness to speak.", ->1b)

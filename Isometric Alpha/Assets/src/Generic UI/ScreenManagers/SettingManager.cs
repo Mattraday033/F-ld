@@ -22,10 +22,10 @@ public class SettingsManager : ScreenManager, IEscapable
 
         instance = this;
 
-        if(quitMenu != null && CombatStateManager.inCombat)
-        {
-            quitMenu.SetActive(false);
-        }
+        // if(quitMenu != null && CombatStateManager.inCombat)
+        // {
+        //     quitMenu.SetActive(false);
+        // }
 
         if (CombatStateManager.inCombat)
         {

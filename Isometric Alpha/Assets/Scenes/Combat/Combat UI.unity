@@ -1596,7 +1596,7 @@ MonoBehaviour:
   additionalSlots: []
   collectionTabIndex: 0
   panelType: 0
-  formatType: 0
+  formatType: 2
   descriptionPanelParent: {fileID: 1808240643}
   decisionPanelParent: {fileID: 0}
   grid: {fileID: 0}

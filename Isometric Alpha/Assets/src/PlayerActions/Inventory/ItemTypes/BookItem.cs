@@ -65,9 +65,9 @@ public class BookItem : UsableItem
 
     public void use(Stats target, bool giveCopyOfBook, OOCActivity previousActivity, GameObject bookGameObject)
     {
-        setAllReadFlags();
-
         setQuestStepOnRead();
+        
+        setAllReadFlags();
 
         bookPopUpButton.spawnPopUp(this, giveCopyOfBook, previousActivity, bookGameObject);
     }
@@ -114,12 +114,35 @@ public class BookItem : UsableItem
 	
 	public void setQuestStepOnRead()
 	{
+        if(hasBeenRead())
+        {
+            return;
+        }
+
 		if(questName != null && questStepName != null)
 		{
 			QuestList.activateQuestStep(questName, questStepName);
 		}
 	}
 	
+    private bool hasBeenRead()
+    {
+        if(flagsFlippedWhenRead != null && !(flagsFlippedWhenRead is null))
+		{
+			foreach(string flag in flagsFlippedWhenRead)
+			{
+                bool flagStatus = Flags.getFlag(flag);
+
+				if(!flagStatus)
+                {
+                    return false;
+                }
+			}
+		}
+
+        return true;
+    }
+
 	public override bool usableOutOfCombat()
 	{
 		return true;

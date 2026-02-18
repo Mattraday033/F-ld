@@ -159,6 +159,8 @@ public class LoadSaveFile : IDecision
 
             SpawnInfoManager.lastSaveBlueprint = saveBlueprint;
 
+            CombatStateManager.whoseTurn = WhoseTurn.Start;
+
             OnLoad.Invoke();
             
             SceneChange.changeSceneToOverworld();

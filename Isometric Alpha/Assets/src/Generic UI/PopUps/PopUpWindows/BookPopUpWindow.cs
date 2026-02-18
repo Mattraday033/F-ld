@@ -29,6 +29,8 @@ public class BookPopUpWindow : PopUpWindow
         }
 
         instance = this;
+
+        TutorialSequenceStepTargetUIObject.createCutOutMask(transform);
     }
 
     public void setPreviousActivity(OOCActivity previousActivity)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerObject : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class PlayerObject : MonoBehaviour
     public CapsuleCollider2D terrainCollider;
     public Transform UIParent;
     public GameObject pressButtonPrompt;
+    public LayoutElement pressButtonPromptBackgroundLayout;
     public TextMeshProUGUI pressButtonPromptText;
     public AnimationManager animationManager;
 
@@ -135,12 +137,30 @@ public class PlayerObject : MonoBehaviour
             player.pressButtonPrompt.SetActive(true);
             player.pressButtonPromptText.text = promptMessage;
 
+            rebuildPromptBackground();
+
             hasCustomPromptMessage = true;
         }
         else
         {
             player.pressButtonPrompt.SetActive(false);
         }
+    }
+
+    private static void rebuildPromptBackground()
+    {
+        PlayerObject player = getInstance();
+
+        if (player == null)
+        {
+            return;
+        }
+
+        RectTransform textRect = player.pressButtonPromptText.GetComponent<RectTransform>();
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(textRect);
+        player.pressButtonPromptBackgroundLayout.preferredWidth = textRect.rect.width;
+        player.pressButtonPromptBackgroundLayout.preferredHeight = textRect.rect.height;
     }
 
     public static void setButtonPromptVisibility()
@@ -168,6 +188,8 @@ public class PlayerObject : MonoBehaviour
 
                 player.pressButtonPrompt.SetActive(true);
                 player.pressButtonPromptText.text = promptMessage;
+
+                rebuildPromptBackground();
 
                 hasCustomPromptMessage = false;
             }

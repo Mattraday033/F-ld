@@ -75,16 +75,33 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
     {
         HorizontalOrVerticalLayoutGroup layout = null;
 
-        switch(direction)
+        VerticalLayoutGroup vertLayout = descPanelWindow.gameObject.GetComponent<VerticalLayoutGroup>();
+        HorizontalLayoutGroup horiLayout = descPanelWindow.gameObject.GetComponent<HorizontalLayoutGroup>();
+
+        if(vertLayout != null)
         {
-            case ArrowDirection.Top:
-            case ArrowDirection.Bottom:
-            case ArrowDirection.Center:
-                layout = descPanelWindow.gameObject.AddComponent<HorizontalLayoutGroup>();
-                break;
-            default:
-                layout = descPanelWindow.gameObject.AddComponent<VerticalLayoutGroup>();
-                break;
+            layout = vertLayout;
+        } else if(horiLayout != null)
+        {
+            layout = horiLayout;
+        } else
+        {
+            switch(direction)
+            {
+                case ArrowDirection.Top:
+                case ArrowDirection.Bottom:
+                case ArrowDirection.Center:
+                    layout = descPanelWindow.gameObject.AddComponent<HorizontalLayoutGroup>();
+                    break;
+                case ArrowDirection.BottomRight:
+                case ArrowDirection.BottomLeft:
+                    layout = descPanelWindow.gameObject.AddComponent<VerticalLayoutGroup>();
+                    layout.reverseArrangement = true;
+                    break;
+                default:
+                    layout = descPanelWindow.gameObject.AddComponent<VerticalLayoutGroup>();
+                    break;
+            }
         }
 
         if(layout == null)
@@ -98,6 +115,7 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
         layout.childForceExpandWidth = true;
 
         layout.spacing = -6;
+
         // layout. = true;
         // layout. = true;
     }

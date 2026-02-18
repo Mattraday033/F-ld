@@ -31,7 +31,6 @@ public static class PrefabNames
     public const string harmlessCombatActionHoverDescriptionPanel = "Harmless Action Hover Description Panel";
 
     public const string inventoryRow = "Inventory Row";
-    public const string chestDescriptionPanel = "Chest Item Description Panel";
     public const string shopRow = "Shop Item Row";
     public const string amountPanel = "Amount Panel";
 

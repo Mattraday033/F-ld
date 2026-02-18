@@ -639,7 +639,16 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 
         for(int index = partyMemberStats.Length-1; index >= 0; index--)
         {
-            buildingBlocks.AddRange(partyMemberStats[index].getDescriptionBuildingBlocks());
+            List<DescriptionPanelBuildingBlock> partyMemberBlocks = partyMemberStats[index].getDescriptionBuildingBlocks();
+
+            if(partyMemberBlocks.Count > 0)
+            {
+                buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, ""));
+                buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, ""));
+                buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, ""));
+
+                buildingBlocks.AddRange(partyMemberBlocks);
+            }
         }
 
 		return buildingBlocks;

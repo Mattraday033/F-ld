@@ -69,17 +69,17 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
         {
             setPivotY(row.gameObject, namePivotY);
         }
-        else if (blockIsTypeBlock(block))
-        {
-            setPivotY(row.gameObject, typePivotY);
-        }
+        // else if (blockIsTypeBlock(block))
+        // {
+        //     setPivotY(row.gameObject, typePivotY);
+        // }
 
         if(block.iconName != null && block.iconName.Equals(IconList.healthIconName))
         {
             DescriptionPanel.setTextAutoSize(row.descriptionText, true);
         }
 
-        if(block.type == DescriptionPanelBuildingBlockType.Name && blockOrigin as Stats != null)
+        if(block.type == DescriptionPanelBuildingBlockType.Name && (blockOrigin as Stats != null || blockOrigin as PartyMember != null))
         {
             DescriptionPanel.setTextFontSize(row.descriptionText, nameFontSize);
             row.transform.SetAsLastSibling();

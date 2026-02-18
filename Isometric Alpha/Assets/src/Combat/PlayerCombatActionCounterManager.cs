@@ -7,7 +7,7 @@ public class PlayerCombatActionCounterManager : MonoBehaviour
 {
 
 	
-	public Image[] partyMemberCombatActionPanels;
+	public PlayerCombatActionCounterIcon[] partyMemberCombatActionPanels;
 	
     void Start()
     {
@@ -32,7 +32,7 @@ public class PlayerCombatActionCounterManager : MonoBehaviour
 
 			if (combatant.costsPartyCombatActions())
 			{
-				partyMemberCombatActionPanels[panelIndex].color = ColorList.usedCombatActionSlotColor;
+				partyMemberCombatActionPanels[panelIndex].setToGreen();
 				panelIndex++;
 			}
 		}
@@ -55,10 +55,10 @@ public class PlayerCombatActionCounterManager : MonoBehaviour
 		{
 			if(panelIndex < PartyStats.getPartyMemberCombatActionSlots())
 			{
-				partyMemberCombatActionPanels[panelIndex].color = ColorList.unusedCombatActionSlotColor;
+				partyMemberCombatActionPanels[panelIndex].setToRed();
 			} else
 			{
-				partyMemberCombatActionPanels[panelIndex].color = ColorList.dormantCombatActionSlotColor;
+				partyMemberCombatActionPanels[panelIndex].setToInvisble();
 			}
 		}
 	}

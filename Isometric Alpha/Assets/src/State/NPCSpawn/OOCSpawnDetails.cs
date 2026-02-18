@@ -136,7 +136,10 @@ public abstract class OOCSpawnDetails
 
     public static void addTutorialTargetComponent(GameObject gameObject, SpriteRenderer spriteRenderer, string tutorialTargetHash)
     {
-        gameObject.AddComponent<RectTransform>();
+        if(gameObject.GetComponent<RectTransform>() == null)
+        {
+            gameObject.AddComponent<RectTransform>();
+        }
 
         GameObject targetRect = GameObject.Instantiate(new GameObject("Target Rect"), gameObject.transform);
 

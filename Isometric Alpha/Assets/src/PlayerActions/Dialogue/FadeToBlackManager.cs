@@ -37,7 +37,7 @@ public class FadeToBlackManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogError("Found more than one Fade To Black Manager in the scene.");
+            Destroy(instance);
         }
 
         currentCoroutine = null;
@@ -54,6 +54,11 @@ public class FadeToBlackManager : MonoBehaviour
 	void Start()
 	{
 		setCameras();
+
+        if(CombatStateManager.inCombat && CombatStateManager.whoseTurn == WhoseTurn.Lost)
+        {
+           return;
+        }
 
         if(CombatStateManager.inCombat)
         {
