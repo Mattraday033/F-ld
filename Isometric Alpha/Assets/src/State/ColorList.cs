@@ -40,6 +40,7 @@ public static class ColorList
     public readonly static Color32 grey175 = new Color32(175, 175, 175, 255);
     public readonly static Color32 grey215 = new Color32(215, 215, 215, 255);
     public readonly static Color32 grey225 = new Color32(225, 225, 225, 255);
+    public readonly static Color32 grey240 = new Color32(240, 240, 240, 255);
     public readonly static Color32 grey245 = new Color32(245, 245, 245, 255);
     #endregion
 
@@ -54,6 +55,7 @@ public static class ColorList
 
     #region UI Colors
 
+    public readonly static Color questCounterCyan = new Color32(200,232,240,255);
     public readonly static Color lightUICyan = new Color32(160,183,188,255);
     public readonly static Color darkUICyan = new Color32(100,125,130,255);
 

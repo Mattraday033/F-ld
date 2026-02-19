@@ -44,7 +44,7 @@ public class MapJournalEntryHover : MonoBehaviour, IPointerEnterHandler, IPointe
             }
             else
             {
-                text.color = Color.white;
+                text.color = ColorList.grey240;
             }
         }
     }

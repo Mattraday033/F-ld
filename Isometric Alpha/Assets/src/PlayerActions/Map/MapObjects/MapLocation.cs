@@ -101,7 +101,9 @@ public class MapLocation : IMapObject
 	
     public void setDisplayName(string newDisplayName)
     {
-        if(newDisplayName[0] == '-')
+        if(newDisplayName != null && 
+            newDisplayName.Length > 0 && 
+            newDisplayName[0] == '-')
         {
             displayName = newDisplayName.Substring(1);
         } else

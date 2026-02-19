@@ -201,6 +201,8 @@ public class KeyBindingDisplay : MonoBehaviour
                 addSpace();
                 break;
             case OOCActivity.inMap:
+                displayText.text += worldMapKeyBinding;
+                addSpace();
                 displayText.text += leaveMapKeyBinding;
                 addSpace();
                 break;
@@ -245,6 +247,8 @@ public class KeyBindingDisplay : MonoBehaviour
             case OOCActivity.inTutorialSequence:
                 break;
             case OOCActivity.inWorldMap:
+                displayText.text += mapKeyBinding;
+                addSpace();
                 displayText.text += leaveWorldMapKeyBinding;
                 addSpace();
                 break;

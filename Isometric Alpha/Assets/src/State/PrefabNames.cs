@@ -376,12 +376,6 @@ WallPatchTall
     public const string portcullis3x1SpriteName = "3x1Portcullis";
     public const string portcullis3x1Path =  doorsFolder + portcullis3x1SpriteName;
 
-    public const string mapTilesFolder = tilesFolder + "MapTiles/";
-
-    public const string manMadeFolder = mapTilesFolder + "manmade/";
-    public const string lovashiCampMapTile = manMadeFolder + "Lovashi Camp";
-    public const string mineMapTile = manMadeFolder + "mine";
-
     private const string ladderFolder = spriteFolder + "Ladders/";
     public const string ladderShortNE = ladderFolder + "Ladder_Short_NE";
     public const string ladderTallNE = ladderFolder + "Ladder_Tall_NE";
@@ -393,4 +387,67 @@ WallPatchTall
     public const string pickRack = testSpriteFolder + "PickRack";
 
     #endregion
+}
+
+
+public static class MapTileSpriteList
+{
+    public const string mapTilesFolder = PrefabNames.tilesFolder + "MapTiles/";
+
+    public const string manMadeFolder = mapTilesFolder + "manmade/";
+    public const string campWithManseMapTile = "Camp With Manse";
+    public const string campMapTile = "Camp";
+    public const string mineMapTile = "mine";
+    public const string towerOneMapTile = "Tower 1";
+
+    public const string propsFolder = mapTilesFolder + "props/";
+
+    public const string mountainFolder = propsFolder + "mountains/";
+    public const string snowTippedMountainOneMapTile = "Snow Tipped Mountain 1";
+    public const string snowTippedMountainTwoMapTile = "Snow Tipped Mountain 2";
+    
+    public const string foliageFolder = propsFolder + "foliage/";
+    public const string forestTreesMapTile = "foliage (7)";
+
+    public const string groundTileFolder = mapTilesFolder + "Ground Tiles/";
+
+    public const string grassFolder = groundTileFolder + "Grass/";
+    public const string brownGrassTile = "Brown Grass";
+    public const string dullGreenGrassTile = "Dull Green Grass";
+    public const string forestFloorGrassTile = "Forest Floor Grass";
+    public const string greenGrassTile = "Green Grass";
+
+    public const string dirtFolder = groundTileFolder + "Dirt/";
+    public const string dirtOneTile = "Dirt 1";
+
+    public static string getSpriteFullPath(string spriteFileName)
+    {
+        switch(spriteFileName)
+        {
+            case forestTreesMapTile:
+                return foliageFolder + spriteFileName;
+
+            case snowTippedMountainOneMapTile:
+            case snowTippedMountainTwoMapTile:
+                return mountainFolder + spriteFileName;
+
+            case towerOneMapTile:
+            case mineMapTile:
+            case campMapTile:
+            case campWithManseMapTile:
+                return manMadeFolder + spriteFileName;
+
+            case brownGrassTile:
+            case dullGreenGrassTile:
+            case forestFloorGrassTile:
+            case greenGrassTile:
+                return grassFolder + spriteFileName;
+
+            case dirtOneTile:
+                return dirtFolder + spriteFileName;
+
+            default:
+                return Constants.emptyString;
+        }
+    }
 }

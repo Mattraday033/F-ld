@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class FastTravelIcon : MonoBehaviour
 {
 
-    public Image backgroundImage;
+    public Image interiorImage;
     public Image arrowIconImage;
 
     public void disableFastTravelIcon()
@@ -16,14 +16,14 @@ public class FastTravelIcon : MonoBehaviour
 
     public void setToFastTravelAllowed()
     {
-        backgroundImage.color = Color.black;
-        arrowIconImage.color = Color.green;
+        interiorImage.color = ColorList.surpriseIconGreen;
+        // arrowIconImage.color = ColorList.grey25;
     }
 
     public void setToFastTravelNotAllowed()
     {
-        backgroundImage.color = Color.red;
-        arrowIconImage.color = Color.black;
+        interiorImage.color = ColorList.surpriseIconRed;
+        // arrowIconImage.color = ColorList.grey25;
     }
 
 }

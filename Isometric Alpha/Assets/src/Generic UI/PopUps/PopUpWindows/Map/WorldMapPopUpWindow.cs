@@ -201,9 +201,9 @@ public static class WorldMapLandmarkList
     {
         allLandmarks = new List<LandmarkSpawnDetails>();
 
-        allLandmarks.Add(new LandmarkSpawnDetails(new Vector3Int(5, 4), MapDisplayNameList.lovashiCamp, PrefabNames.lovashiCampMapTile, ZoneKeyList.lovashiCamp, 
+        allLandmarks.Add(new LandmarkSpawnDetails(new Vector3Int(5, 4), MapDisplayNameList.lovashiCamp, MapTileSpriteList.campWithManseMapTile, ZoneKeyList.lovashiCamp, 
                                                     new string[]{ZoneKeyList.manseFirstFloor, ZoneKeyList.manseSecondFloor}));
-        allLandmarks.Add(new HighSortPriortyLandmarkSpawnDetails(new Vector3Int(5, 5), MapDisplayNameList.lovashiMine, PrefabNames.mineMapTile, 
+        allLandmarks.Add(new HighSortPriortyLandmarkSpawnDetails(new Vector3Int(5, 5), MapDisplayNameList.lovashiMine, MapTileSpriteList.mineMapTile, 
                                                                   ZoneKeyList.mineLvl1, new string[]{ZoneKeyList.mineLvl2, ZoneKeyList.mineLvl3}));
 
     }
@@ -240,7 +240,7 @@ public class LandmarkSpawnDetails
 
     public Sprite getSprite()
     {
-        return Resources.Load<Sprite>(spriteName);
+        return Resources.Load<Sprite>(MapTileSpriteList.getSpriteFullPath(spriteName));
     }
 
     public virtual int getSortPriority()

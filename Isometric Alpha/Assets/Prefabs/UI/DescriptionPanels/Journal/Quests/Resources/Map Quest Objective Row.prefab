@@ -128,10 +128,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2361217185412108585}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 197.5, y: 0}
-  m_SizeDelta: {x: 375, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 197.5, y: -32.68}
+  m_SizeDelta: {x: 365, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6255348557214565234
 MonoBehaviour:
@@ -181,17 +181,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Hi
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8de0735d922614849973bc70134d168a, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8de0735d922614849973bc70134d168a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bc19d54b9deb610499f4e4470c4659e9, type: 2}
+  m_sharedMaterial: {fileID: 2866278993134135635, guid: bc19d54b9deb610499f4e4470c4659e9,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4293980400
+  m_fontColor: {r: 0.9411765, g: 0.9411765, b: 0.9411765, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -367,6 +368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc2e7e94585c2a4f9960856fa0b6567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amountPrefix: 
+  additionalSlots: []
   showingShopkeeperInventory: 0
   iconBackgroundPanel: {fileID: 0}
   iconPanel: {fileID: 0}
@@ -386,7 +389,6 @@ MonoBehaviour:
   loreDescriptionText: {fileID: 0}
   useDescriptionText: {fileID: 0}
   contentsText: {fileID: 0}
-  worthTitleText: {fileID: 0}
   worthText: {fileID: 0}
   slotText: {fileID: 0}
   weaponNameText: {fileID: 0}
@@ -399,7 +401,6 @@ MonoBehaviour:
   timerText: {fileID: 0}
   levelText: {fileID: 0}
   experienceText: {fileID: 0}
-  affinityText: {fileID: 0}
   partyText: {fileID: 0}
   strText: {fileID: 0}
   dexText: {fileID: 0}
@@ -429,8 +430,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 10
-    m_Right: 10
+    m_Left: 15
+    m_Right: 15
     m_Top: 10
     m_Bottom: 10
   m_ChildAlignment: 0
@@ -468,6 +469,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e40b236dd1570479d57c1ef44f08a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverEnabled: 0
+  useFloatingHover: 0
   rowTypeToUse: 1
   tabCollection: 0
   buttons: []
@@ -555,10 +558,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 3266918281227287262}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 200, y: 0}
-  m_SizeDelta: {x: 350, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 195, y: -12.6}
+  m_SizeDelta: {x: 340, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8750428973028387247
 MonoBehaviour:
@@ -608,17 +611,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Hello
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8de0735d922614849973bc70134d168a, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8de0735d922614849973bc70134d168a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bc19d54b9deb610499f4e4470c4659e9, type: 2}
+  m_sharedMaterial: {fileID: 2866278993134135635, guid: bc19d54b9deb610499f4e4470c4659e9,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4293980400
+  m_fontColor: {r: 0.9411765, g: 0.9411765, b: 0.9411765, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

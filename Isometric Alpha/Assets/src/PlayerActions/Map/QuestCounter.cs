@@ -86,8 +86,8 @@ public class QuestCounter : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void unhighlightStar()
     {
-        starOutlineImage.color = Color.black;
-        starInteriorImage.color = Color.white;
+        starOutlineImage.color = ColorList.grey25;
+        starInteriorImage.color = ColorList.questCounterCyan;
     }
 
     public bool sourceIsUnsafe()

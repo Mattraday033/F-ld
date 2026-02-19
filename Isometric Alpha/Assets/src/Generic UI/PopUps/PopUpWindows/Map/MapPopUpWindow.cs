@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class MapPopUpWindow : PopUpWindow, IEscapable
 {
@@ -223,12 +222,12 @@ public class MapPopUpWindow : PopUpWindow, IEscapable
 
 	public static Sprite getDefaultFloorImage()
 	{
-		return Helpers.loadSpriteFromResources(getInstance().currentMapFormat.defaultFloorImage);
+		return Helpers.loadSpriteFromResources(MapTileSpriteList.getSpriteFullPath(getInstance().currentMapFormat.defaultFloorImage));
 	}
 
 	public static Sprite getDefaultMapIcon()
 	{
-		return Helpers.loadSpriteFromResources(getInstance().currentMapFormat.defaultMapIcon);
+		return Helpers.loadSpriteFromResources(MapTileSpriteList.getSpriteFullPath(getInstance().currentMapFormat.defaultMapIcon));
 	}
 
 	public static MapPopUpWindow getInstance()

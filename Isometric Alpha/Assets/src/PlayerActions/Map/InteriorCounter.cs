@@ -21,11 +21,11 @@ public class InteriorCounter : MonoBehaviour
         {
             if (index < interiorsToSpawn)
             {
-                interiorCounters[index].color = Color.white;
+                interiorCounters[index].gameObject.SetActive(true);
             }
             else
             {
-                interiorCounters[index].color = Color.black;
+                interiorCounters[index].gameObject.SetActive(false);
             }
         }
     }
