@@ -395,14 +395,36 @@ public static class MapTileSpriteList
     public const string mapTilesFolder = PrefabNames.tilesFolder + "MapTiles/";
 
     public const string manMadeFolder = mapTilesFolder + "manmade/";
+    public const string bridgeTwoMapTile = "bridge (2)";
     public const string campWithManseMapTile = "Camp With Manse";
     public const string campMapTile = "Camp";
-    public const string mineMapTile = "mine";
+    public const string mapMineMapTile = "Map Mine";
+    public const string worldMapMineMapTile = "World Map Mine";
     public const string towerOneMapTile = "Tower 1";
+    public const string ruinOneMapTile = "Ruin 1";
+    public const string ruinTwoMapTile = "Ruin 2";
+    public const string manseWallMapTile = "Manse Wall Map Tile";
 
     public const string propsFolder = mapTilesFolder + "props/";
 
+    public const string pitTile = "Pit";
+
     public const string mountainFolder = propsFolder + "mountains/";
+
+    public const string darkMountainMapTile = "Dark Mountain";
+
+    public const string darkPurpleMountainOneMapTile = "Dark Purple Mountain 1";
+    public const string darkPurpleMountainTwoMapTile = "Dark Purple Mountain 2";
+
+    public const string lightPurpleMountainOneMapTile = "Light Purple Mountain 1";
+    public const string lightPurpleMountainTwoMapTile = "Light Purple Mountain 2";
+
+    public const string normalMountainOneMapTile = "Normal Mountain 1";
+    public const string normalMountainTwoMapTile = "Normal Mountain 2";
+
+    public const string sandMountainOneMapTile = "Sand Mountain 1";
+    public const string sandMountainTwoMapTile = "Sand Mountain 2";
+
     public const string snowTippedMountainOneMapTile = "Snow Tipped Mountain 1";
     public const string snowTippedMountainTwoMapTile = "Snow Tipped Mountain 2";
     
@@ -411,30 +433,64 @@ public static class MapTileSpriteList
 
     public const string groundTileFolder = mapTilesFolder + "Ground Tiles/";
 
+    public const string dirtFolder = groundTileFolder + "Dirt/";
+    public const string dirtOneTile = "Dirt 1";
+
     public const string grassFolder = groundTileFolder + "Grass/";
     public const string brownGrassTile = "Brown Grass";
     public const string dullGreenGrassTile = "Dull Green Grass";
     public const string forestFloorGrassTile = "Forest Floor Grass";
     public const string greenGrassTile = "Green Grass";
 
-    public const string dirtFolder = groundTileFolder + "Dirt/";
-    public const string dirtOneTile = "Dirt 1";
+    public const string sandFolder = groundTileFolder + "Sand/";
+    public const string sandTile = "Sand";
+    public const string sandWithDunesTile = "Sand With Dunes";
 
+    public const string stoneFolder = groundTileFolder + "Stone/";
+    public const string darkStoneTile = "Dark Stone";
+    public const string darkPurpleStoneTile = "Dark Purple Stone";
+    public const string lightPurpleStoneTile = "Light Purple Stone";
+    public const string stoneOneTile = "Stone 1";
+    public const string stoneTwoTile = "Stone 2";
+
+    public const string waterFolder = groundTileFolder + "Water/";
+    public const string lakeTile = "Lake";
+
+    public const string woodFolder = groundTileFolder + "Wood/";
+    public const string woodFloorTile = "Wood Floor";
+    
     public static string getSpriteFullPath(string spriteFileName)
     {
         switch(spriteFileName)
         {
+            case pitTile:            
+                return propsFolder + spriteFileName;            
+
             case forestTreesMapTile:
                 return foliageFolder + spriteFileName;
 
+            case darkMountainMapTile:
+            case darkPurpleMountainOneMapTile:
+            case darkPurpleMountainTwoMapTile:
+            case lightPurpleMountainOneMapTile:
+            case lightPurpleMountainTwoMapTile:
+            case normalMountainOneMapTile:
+            case normalMountainTwoMapTile:
+            case sandMountainOneMapTile:
+            case sandMountainTwoMapTile:
             case snowTippedMountainOneMapTile:
             case snowTippedMountainTwoMapTile:
                 return mountainFolder + spriteFileName;
 
-            case towerOneMapTile:
-            case mineMapTile:
+            case bridgeTwoMapTile:
             case campMapTile:
             case campWithManseMapTile:
+            case mapMineMapTile:
+            case ruinOneMapTile:
+            case ruinTwoMapTile:
+            case towerOneMapTile:
+            case worldMapMineMapTile:
+            case manseWallMapTile:
                 return manMadeFolder + spriteFileName;
 
             case brownGrassTile:
@@ -446,6 +502,23 @@ public static class MapTileSpriteList
             case dirtOneTile:
                 return dirtFolder + spriteFileName;
 
+            case sandTile:
+            case sandWithDunesTile:
+                return sandFolder + spriteFileName;
+
+            case darkStoneTile:            
+            case darkPurpleStoneTile:            
+            case lightPurpleStoneTile:            
+            case stoneOneTile:            
+            case stoneTwoTile:            
+                return stoneFolder + spriteFileName;
+
+            case lakeTile:            
+                return waterFolder + spriteFileName;            
+            
+            case woodFloorTile:            
+                return woodFolder + spriteFileName;            
+            
             default:
                 return Constants.emptyString;
         }

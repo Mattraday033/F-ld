@@ -69,7 +69,7 @@
 			"row": "6",
 			"col": "2",
 			"floorImage": "Brown Grass",
-			"mapIcon": "mine",
+			"mapIcon": "Map Mine",
 			"northWestSouthEastMarker": false,
 			"northEastSouthWestMarker": false,
 			"flipMapIcon": false

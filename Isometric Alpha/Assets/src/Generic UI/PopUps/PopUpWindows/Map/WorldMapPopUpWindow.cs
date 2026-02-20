@@ -203,7 +203,7 @@ public static class WorldMapLandmarkList
 
         allLandmarks.Add(new LandmarkSpawnDetails(new Vector3Int(5, 4), MapDisplayNameList.lovashiCamp, MapTileSpriteList.campWithManseMapTile, ZoneKeyList.lovashiCamp, 
                                                     new string[]{ZoneKeyList.manseFirstFloor, ZoneKeyList.manseSecondFloor}));
-        allLandmarks.Add(new HighSortPriortyLandmarkSpawnDetails(new Vector3Int(5, 5), MapDisplayNameList.lovashiMine, MapTileSpriteList.mineMapTile, 
+        allLandmarks.Add(new HighSortPriortyLandmarkSpawnDetails(new Vector3Int(5, 5), MapDisplayNameList.lovashiMine, MapTileSpriteList.worldMapMineMapTile, 
                                                                   ZoneKeyList.mineLvl1, new string[]{ZoneKeyList.mineLvl2, ZoneKeyList.mineLvl3}));
 
     }

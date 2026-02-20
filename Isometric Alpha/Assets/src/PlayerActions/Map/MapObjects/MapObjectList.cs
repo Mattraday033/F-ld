@@ -261,11 +261,11 @@ public static class MapObjectList
 		{
 			case LocationNameList.section1a:
 				
-				return new MapLocation(ZoneKeyList.mineLvl3, ZoneKeyList.mineLvl3+LocationNameList.section1a, "1a - Stairs", fastTravelAccessible, zeroInteriors, new string[]{ZoneKeyList.mineLvl3+LocationNameList.section1b, ZoneKeyList.mineLvl3+LocationNameList.section2a, ZoneKeyList.mineLvl3+LocationNameList.section4a}, new ZoneButtonInfo[]{new ZoneButtonInfo(ZoneKeyList.mineLvl2, MapPopUpWindow.eastNorthButtonIndex)});
+				return new MapLocation(ZoneKeyList.mineLvl3, ZoneKeyList.mineLvl3+LocationNameList.section1a, "1a - Stairs", fastTravelAccessible, oneInterior, new string[]{ZoneKeyList.mineLvl3+LocationNameList.section1b, ZoneKeyList.mineLvl3+LocationNameList.section2a, ZoneKeyList.mineLvl3+LocationNameList.section4a}, new ZoneButtonInfo[]{new ZoneButtonInfo(ZoneKeyList.mineLvl2, MapPopUpWindow.eastNorthButtonIndex)});
 			
 			case LocationNameList.section1b:
 				
-				return new MapLocation(ZoneKeyList.mineLvl3, ZoneKeyList.mineLvl3+LocationNameList.section1b, "1b", notFastTravelAccessible, zeroInteriors, new string[]{ZoneKeyList.mineLvl3+LocationNameList.section1a});
+				return new MapInterior(ZoneKeyList.mineLvl3, ZoneKeyList.mineLvl3+LocationNameList.section1b, "1b", interiorIndexZero, ZoneKeyList.mineLvl3+LocationNameList.section1a);
 			
 			case LocationNameList.section2a:
 				
@@ -277,7 +277,7 @@ public static class MapObjectList
 			
 			case LocationNameList.section3a:
 				
-				return new MapLocation(ZoneKeyList.mineLvl3, ZoneKeyList.mineLvl3+LocationNameList.section3a, "3a", fastTravelAccessible, zeroInteriors, new string[]{ZoneKeyList.mineLvl3+LocationNameList.section2b, ZoneKeyList.mineLvl3+LocationNameList.section3b, ZoneKeyList.mineLvl3+LocationNameList.section6a, ZoneKeyList.mineLvl3+LocationNameList.section7});
+				return new MapLocation(ZoneKeyList.mineLvl3, ZoneKeyList.mineLvl3+LocationNameList.section3a, "3a", fastTravelAccessible, oneInterior, new string[]{ZoneKeyList.mineLvl3+LocationNameList.section2b, ZoneKeyList.mineLvl3+LocationNameList.section3b, ZoneKeyList.mineLvl3+LocationNameList.section6a, ZoneKeyList.mineLvl3+LocationNameList.section7});
 			
 			case LocationNameList.section3b:
 				
