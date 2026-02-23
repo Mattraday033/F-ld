@@ -253,6 +253,8 @@ public struct TutorialSequenceStep : IDescribable
 
         // Debug.LogError("Tutorial window parent = " + tutorialTarget.getTransform().name);
 
+
+
         currentTutorialMessageWindow = GameObject.Instantiate(getDescriptionPanelFull(getPanelType(useUltraWideTutorialWindow)), tutorialTarget.getTransform()).GetComponent<TutorialSequenceStepWindow>();
 
         if (!tutorialTarget.isUI())

@@ -44,21 +44,21 @@ public static class ColorList
     public readonly static Color32 grey245 = new Color32(245, 245, 245, 255);
     #endregion
 
-    #region Outline Colors
-	public readonly static Color attacksOnSight = Color.red;
-	public readonly static Color canBeInteractedWith = Color.green;
-	public readonly static Color canBePushed = Color.blue;
-	public readonly static Color canBeCunninged = Color.yellow;
-	public readonly static Color defaultWhenNotRevealed = Color.clear;
-	public readonly static Color tutorialDefault = Color.cyan;
-    #endregion
-
     #region UI Colors
 
     public readonly static Color questCounterCyan = new Color32(200,232,240,255);
     public readonly static Color lightUICyan = new Color32(160,183,188,255);
     public readonly static Color darkUICyan = new Color32(100,125,130,255);
 
+    #endregion
+
+    #region Outline Colors
+	public readonly static Color attacksOnSight = Color.red;
+	public readonly static Color canBeInteractedWith = Color.green;
+	public readonly static Color canBePushed = Color.blue;
+	public readonly static Color canBeCunninged = Color.yellow;
+	public readonly static Color defaultWhenNotRevealed = Color.clear;
+	public readonly static Color tutorialDefault = questCounterCyan;
     #endregion
 
     public readonly static Color surpriseIconGrey = blackFadeOut75;

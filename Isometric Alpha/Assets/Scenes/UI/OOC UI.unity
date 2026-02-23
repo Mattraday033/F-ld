@@ -1798,10 +1798,11 @@ GameObject:
   - component: {fileID: 659375178}
   - component: {fileID: 659375184}
   - component: {fileID: 659375183}
-  - component: {fileID: 659375182}
+  - component: {fileID: 659375186}
   - component: {fileID: 659375181}
   - component: {fileID: 659375180}
   - component: {fileID: 659375179}
+  - component: {fileID: 659375185}
   m_Layer: 5
   m_Name: Inventory Screen Button
   m_TagString: Untagged
@@ -1930,27 +1931,6 @@ MonoBehaviour:
   outlineImage: {fileID: 659375183}
   backgroundImage: {fileID: 1323314493}
   iconImage: {fileID: 589610997}
---- !u!114 &659375182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 659375177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df7e0b42142bafa41b0eb154b8633843, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useUltraWideTutorialWindow: 0
-  rectTransform: {fileID: 659375178}
-  tutorialHash: Inventory Button
-  disableArrow: 0
-  image: {fileID: 659375183}
-  previousColor: {r: 0, g: 0, b: 0, a: 0}
-  secondaryImage: {fileID: 0}
-  skipCutOutMask: 0
-  _UseUIScaleOverride: 1
 --- !u!114 &659375183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1989,6 +1969,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 659375177}
   m_CullTransparentMesh: 1
+--- !u!114 &659375185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659375177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df7e0b42142bafa41b0eb154b8633843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useUltraWideTutorialWindow: 0
+  rectTransform: {fileID: 659375178}
+  tutorialHash: Inventory Button
+  disableArrow: 0
+  image: {fileID: 659375183}
+  previousColor: {r: 0, g: 0, b: 0, a: 0}
+  secondaryImage: {fileID: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
+--- !u!114 &659375186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659375177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f081d818d1540d4db8a388c9465208a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useUltraWideTutorialWindow: 0
+  rectTransform: {fileID: 659375178}
+  tutorialHash: Inventory Button
+  disableArrow: 0
+  image: {fileID: 659375183}
+  previousColor: {r: 0, g: 0, b: 0, a: 0}
+  secondaryImage: {fileID: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
+  advanceSequenceOnButtonPress: 1
+  buttonTarget: {fileID: 659375179}
 --- !u!1 &741845129
 GameObject:
   m_ObjectHideFlags: 0
@@ -3095,7 +3119,7 @@ GameObject:
   - component: {fileID: 1031361189}
   - component: {fileID: 1031361195}
   - component: {fileID: 1031361194}
-  - component: {fileID: 1031361193}
+  - component: {fileID: 1031361198}
   - component: {fileID: 1031361190}
   - component: {fileID: 1031361196}
   - component: {fileID: 1031361197}
@@ -3146,27 +3170,6 @@ MonoBehaviour:
   outlineImage: {fileID: 1031361194}
   backgroundImage: {fileID: 858748678}
   iconImage: {fileID: 414780029}
---- !u!114 &1031361193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1031361188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df7e0b42142bafa41b0eb154b8633843, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useUltraWideTutorialWindow: 0
-  rectTransform: {fileID: 1031361189}
-  tutorialHash: Character Screen Button
-  disableArrow: 0
-  image: {fileID: 1031361194}
-  previousColor: {r: 0, g: 0, b: 0, a: 0}
-  secondaryImage: {fileID: 0}
-  skipCutOutMask: 0
-  _UseUIScaleOverride: 1
 --- !u!114 &1031361194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3287,6 +3290,29 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1031361198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031361188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f081d818d1540d4db8a388c9465208a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useUltraWideTutorialWindow: 0
+  rectTransform: {fileID: 1031361189}
+  tutorialHash: Character Screen Button
+  disableArrow: 0
+  image: {fileID: 1031361194}
+  previousColor: {r: 0, g: 0, b: 0, a: 0}
+  secondaryImage: {fileID: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
+  advanceSequenceOnButtonPress: 1
+  buttonTarget: {fileID: 1031361197}
 --- !u!114 &1077860897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3483,7 +3509,7 @@ GameObject:
   - component: {fileID: 1103353920}
   - component: {fileID: 1103353926}
   - component: {fileID: 1103353925}
-  - component: {fileID: 1103353924}
+  - component: {fileID: 1103353927}
   - component: {fileID: 1103353923}
   - component: {fileID: 1103353922}
   - component: {fileID: 1103353921}
@@ -3615,27 +3641,6 @@ MonoBehaviour:
   outlineImage: {fileID: 1103353925}
   backgroundImage: {fileID: 1851843740}
   iconImage: {fileID: 1154822021}
---- !u!114 &1103353924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1103353919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df7e0b42142bafa41b0eb154b8633843, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useUltraWideTutorialWindow: 0
-  rectTransform: {fileID: 1103353920}
-  tutorialHash: Party Screen Button
-  disableArrow: 0
-  image: {fileID: 1103353925}
-  previousColor: {r: 0, g: 0, b: 0, a: 0}
-  secondaryImage: {fileID: 0}
-  skipCutOutMask: 0
-  _UseUIScaleOverride: 1
 --- !u!114 &1103353925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3674,6 +3679,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103353919}
   m_CullTransparentMesh: 1
+--- !u!114 &1103353927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103353919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f081d818d1540d4db8a388c9465208a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useUltraWideTutorialWindow: 0
+  rectTransform: {fileID: 1103353920}
+  tutorialHash: Party Screen Button
+  disableArrow: 0
+  image: {fileID: 1103353925}
+  previousColor: {r: 0, g: 0, b: 0, a: 0}
+  secondaryImage: {fileID: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
+  advanceSequenceOnButtonPress: 1
+  buttonTarget: {fileID: 1103353921}
 --- !u!1 &1144867985
 GameObject:
   m_ObjectHideFlags: 0
@@ -7324,6 +7352,21 @@ PrefabInstance:
       propertyPath: m_PreferredWidth
       value: 1600
       objectReference: {fileID: 0}
+    - target: {fileID: 484947310212529007, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 484947310212529007, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 484947310212529007, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.8627451
+      objectReference: {fileID: 0}
     - target: {fileID: 549262720321033359, guid: 69523d00fc7043d43aabc247bd7af2fe,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -7514,6 +7557,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -20
       objectReference: {fileID: 0}
+    - target: {fileID: 952252610872699208, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 952252610872699208, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 952252610872699208, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.8627451
+      objectReference: {fileID: 0}
     - target: {fileID: 977500724723920689, guid: 69523d00fc7043d43aabc247bd7af2fe,
         type: 3}
       propertyPath: m_Interactable
@@ -7569,6 +7627,21 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4279834905
       objectReference: {fileID: 0}
+    - target: {fileID: 1203478785254604752, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203478785254604752, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203478785254604752, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.8627451
+      objectReference: {fileID: 0}
     - target: {fileID: 1307367543200351530, guid: 69523d00fc7043d43aabc247bd7af2fe,
         type: 3}
       propertyPath: m_Enabled
@@ -7598,6 +7671,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4279834905
+      objectReference: {fileID: 0}
+    - target: {fileID: 2010812119542849110, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 2010812119542849110, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 2010812119542849110, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.8627451
       objectReference: {fileID: 0}
     - target: {fileID: 2105925595226079264, guid: 69523d00fc7043d43aabc247bd7af2fe,
         type: 3}
@@ -8064,6 +8152,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5329645271935253308, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 5329645271935253308, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 5329645271935253308, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.8627451
+      objectReference: {fileID: 0}
     - target: {fileID: 5613146890387852316, guid: 69523d00fc7043d43aabc247bd7af2fe,
         type: 3}
       propertyPath: m_IsActive
@@ -8178,6 +8281,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: RedCloseButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8250664808554191756, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 8250664808554191756, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 8250664808554191756, guid: 69523d00fc7043d43aabc247bd7af2fe,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.8627451
       objectReference: {fileID: 0}
     - target: {fileID: 8268035558227386943, guid: 69523d00fc7043d43aabc247bd7af2fe,
         type: 3}

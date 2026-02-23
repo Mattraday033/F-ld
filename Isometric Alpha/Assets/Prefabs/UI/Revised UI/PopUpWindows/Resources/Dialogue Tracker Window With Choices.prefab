@@ -1307,7 +1307,7 @@ PrefabInstance:
     - target: {fileID: 3032145193570215608, guid: c700b6769b786404ebd653bfa6decec9,
         type: 3}
       propertyPath: setScrollBarToBottomOnPopulate
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3032145193570215608, guid: c700b6769b786404ebd653bfa6decec9,
         type: 3}

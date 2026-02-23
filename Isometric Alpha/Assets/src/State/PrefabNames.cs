@@ -404,6 +404,15 @@ public static class MapTileSpriteList
     public const string ruinOneMapTile = "Ruin 1";
     public const string ruinTwoMapTile = "Ruin 2";
     public const string manseWallMapTile = "Manse Wall Map Tile";
+    public const string shelvesMapTile = "Shelves Map Tile";
+    public const string largeWoodenStairsMapTile = "Large Wooden Stairs";
+    public const string stockroomMapTile = "Stockroom Map Tile";
+    public const string gardenMapTile = "Garden Map Tile";
+    public const string tableMapTile = "Table Map Tile";
+    public const string blueCarpetMapTile = "Blue Carpet";
+    public const string greenCarpetMapTile = "Green Carpet";
+    public const string redCarpetMapTile = "Red Carpet";
+        
 
     public const string propsFolder = mapTilesFolder + "props/";
 
@@ -463,8 +472,8 @@ public static class MapTileSpriteList
     {
         switch(spriteFileName)
         {
-            case pitTile:            
-                return propsFolder + spriteFileName;            
+            case pitTile:
+                return propsFolder + spriteFileName;
 
             case forestTreesMapTile:
                 return foliageFolder + spriteFileName;
@@ -482,6 +491,7 @@ public static class MapTileSpriteList
             case snowTippedMountainTwoMapTile:
                 return mountainFolder + spriteFileName;
 
+            case shelvesMapTile:
             case bridgeTwoMapTile:
             case campMapTile:
             case campWithManseMapTile:
@@ -491,6 +501,13 @@ public static class MapTileSpriteList
             case towerOneMapTile:
             case worldMapMineMapTile:
             case manseWallMapTile:
+            case largeWoodenStairsMapTile:
+            case stockroomMapTile:
+            case gardenMapTile:
+            case tableMapTile:            
+            case blueCarpetMapTile:            
+            case greenCarpetMapTile:            
+            case redCarpetMapTile:            
                 return manMadeFolder + spriteFileName;
 
             case brownGrassTile:

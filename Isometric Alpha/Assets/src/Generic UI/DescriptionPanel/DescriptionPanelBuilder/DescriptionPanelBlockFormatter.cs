@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public enum BlockFormatType {None = 0, PartyMemberStats = 1, CombatHover = 2, PlayerStats = 3, CombatResults = 4, SaveBlueprint = 5}
+public enum BlockFormatType {None = 0, PartyMemberStats = 1, CombatHover = 2, PlayerStats = 3, CombatResults = 4, SaveBlueprint = 5, PlayerStatsUpgrade = 6}
 
 public class BlockFormat
 {
@@ -16,7 +16,6 @@ public class BlockFormat
     public Vector2Int iconSizeParams = Vector2Int.zero;
     public int fontSize = -1;
     public int spaceBetweenIconAndText = -1;
-
 
     public BlockFormat(Color iconOutlineColor, Color iconBackgroundColor, Color ?fontColor = null, Vector2Int iconSizeParams = new Vector2Int(), int fontSize = -1, int spaceBetweenIconAndText = -1)
     {
@@ -55,6 +54,8 @@ public class BlockFormat
     {
         switch (type)
         {
+            case BlockFormatType.PlayerStatsUpgrade:
+                return new BlockFormat(ColorList.darkUICyan, ColorList.grey25, iconSizeParams: new Vector2Int(37, 37), fontSize: 20, spaceBetweenIconAndText: 1);
             case BlockFormatType.PlayerStats:
                 return new BlockFormat(ColorList.darkUICyan, ColorList.grey25, iconSizeParams: new Vector2Int(45, 45), fontSize: 26, spaceBetweenIconAndText: 5);
 

@@ -18,11 +18,11 @@
 			"locationName": "Manse-1F-Kitchens",
 			"row": "7",
 			"col": "6",
-			"floorImage": "Wood Floor",
-			"mapIcon": "Ruin 1",
+			"floorImage": "Dirt 1",
+			"mapIcon": "Stockroom Map Tile",
 			"northWestSouthEastMarker": false,
 			"northEastSouthWestMarker": false,
-			"flipMapIcon": true
+			"flipMapIcon": false
 		},
 		{
 			"locationName": "",
@@ -38,8 +38,8 @@
 			"locationName": "Manse-1F-Dining Room",
 			"row": "7",
 			"col": "4",
-			"floorImage": "Wood Floor",
-			"mapIcon": "Ruin 1",
+			"floorImage": "Blue Carpet",
+			"mapIcon": "Table Map Tile",
 			"northWestSouthEastMarker": false,
 			"northEastSouthWestMarker": false,
 			"flipMapIcon": false
@@ -68,8 +68,8 @@
 			"locationName": "Manse-1F-2a",
 			"row": "7",
 			"col": "1",
-			"floorImage": "Wood Floor",
-			"mapIcon": "Ruin 1",
+			"floorImage": "Green Grass",
+			"mapIcon": "Garden Map Tile",
 			"northWestSouthEastMarker": false,
 			"northEastSouthWestMarker": false,
 			"flipMapIcon": false
@@ -88,18 +88,18 @@
 			"locationName": "Manse-1F-2b",
 			"row": "5",
 			"col": "1",
-			"floorImage": "Wood Floor",
-			"mapIcon": "Ruin 1",
+			"floorImage": "Blue Carpet",
+			"mapIcon": "Large Wooden Stairs",
 			"northWestSouthEastMarker": false,
 			"northEastSouthWestMarker": false,
-			"flipMapIcon": false
+			"flipMapIcon": true
 		},
 		{
 			"locationName": "Manse-1F-2c",
 			"row": "5",
 			"col": "2",
-			"floorImage": "Wood Floor",
-			"mapIcon": "Ruin 1",
+			"floorImage": "Blue Carpet",
+			"mapIcon": "Pit",
 			"northWestSouthEastMarker": false,
 			"northEastSouthWestMarker": false,
 			"flipMapIcon": false
@@ -118,8 +118,8 @@
 			"locationName": "Manse-1F-3c",
 			"row": "3",
 			"col": "1",
-			"floorImage": "Wood Floor",
-			"mapIcon": "Ruin 1",
+			"floorImage": "Green Carpet",
+			"mapIcon": "Shelves Map Tile",
 			"northWestSouthEastMarker": false,
 			"northEastSouthWestMarker": false,
 			"flipMapIcon": false
@@ -148,8 +148,8 @@
 			"locationName": "Manse-1F-3b",
 			"row": "1",
 			"col": "1",
-			"floorImage": "Wood Floor",
-			"mapIcon": "Ruin 1",
+			"floorImage": "Green Carpet",
+			"mapIcon": "",
 			"northWestSouthEastMarker": false,
 			"northEastSouthWestMarker": false,
 			"flipMapIcon": false
@@ -178,8 +178,8 @@
 			"locationName": "Manse-1F-3a",
 			"row": "1",
 			"col": "4",
-			"floorImage": "Wood Floor",
-			"mapIcon": "Ruin 1",
+			"floorImage": "Green Carpet",
+			"mapIcon": "Table Map Tile",
 			"northWestSouthEastMarker": false,
 			"northEastSouthWestMarker": false,
 			"flipMapIcon": false
@@ -198,8 +198,8 @@
 			"locationName": "Manse-1F-1a",
 			"row": "3",
 			"col": "4",
-			"floorImage": "Wood Floor",
-			"mapIcon": "Ruin 1",
+			"floorImage": "Red Carpet",
+			"mapIcon": "Large Wooden Stairs",
 			"northWestSouthEastMarker": false,
 			"northEastSouthWestMarker": false,
 			"flipMapIcon": true
@@ -218,11 +218,11 @@
 			"locationName": "Manse-1F-1b",
 			"row": "5",
 			"col": "4",
-			"floorImage": "Wood Floor",
-			"mapIcon": "Ruin 1",
+			"floorImage": "Red Carpet",
+			"mapIcon": "",
 			"northWestSouthEastMarker": false,
 			"northEastSouthWestMarker": false,
-			"flipMapIcon": true
+			"flipMapIcon": false
 		},
 		{
 			"locationName": "",
@@ -248,8 +248,8 @@
 			"locationName": "Manse-1F-1c",
 			"row": "5",
 			"col": "6",
-			"floorImage": "Wood Floor",
-			"mapIcon": "Ruin 1",
+			"floorImage": "Green Grass",
+			"mapIcon": "Garden Map Tile",
 			"northWestSouthEastMarker": false,
 			"northEastSouthWestMarker": false,
 			"flipMapIcon": false

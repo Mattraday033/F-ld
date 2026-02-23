@@ -26,6 +26,7 @@ public class DescriptionPanelRow : MonoBehaviour
     public TextMeshProUGUI iconSymbolText;
     public SlotIconHover iconHover;
     public TextMeshProUGUI descriptionText;
+    public LayoutElement descriptionTextLayoutElement;
 
     public GameObject plusButton;
 
@@ -43,6 +44,12 @@ public class DescriptionPanelRow : MonoBehaviour
                 CharacterScreen.levelUpCapable())
             {
                 plusButton.SetActive(true);
+            }
+        } else
+        {
+            if(descriptionTextLayoutElement != null)
+            {
+                descriptionTextLayoutElement.preferredWidth = 55;
             }
         }
 

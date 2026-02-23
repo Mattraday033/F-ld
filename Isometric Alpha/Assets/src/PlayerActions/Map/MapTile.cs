@@ -16,7 +16,7 @@ public class MapTile : MonoBehaviour, IQuestListSource
 
     public string locationName;
 
-    public MultiTargetButton multiTargetButton;
+    public MultiTargetButton[] multiTargetButtons;
 
     public IMapObject mapObject;
 
@@ -116,9 +116,22 @@ public class MapTile : MonoBehaviour, IQuestListSource
         mapIcon.color = Color.black;
         floorImage.color = Color.black;
 
-        if (multiTargetButton != null)
+        setButtonActive(false);
+    }
+
+    private void setButtonActive(bool active)
+    {
+        if(multiTargetButtons == null)
         {
-            multiTargetButton.enabled = false;
+            return;
+        }
+
+        foreach(MultiTargetButton button in multiTargetButtons)
+        {
+            if (button != null)
+            {
+                button.enabled = active;
+            }
         }
     }
 
@@ -130,11 +143,11 @@ public class MapTile : MonoBehaviour, IQuestListSource
            AreaList.areaOutsideAllowedFastTravelAreas(mapObject.getLocationName()) ||
            (AreaList.areaIsHostile(locationName) && !AreaList.areaAlwaysAllowsFastTravel(locationName)))
         {
-            multiTargetButton.enabled = false;
+            setButtonActive(false);
         }
         else
         {
-            multiTargetButton.enabled = true;
+            setButtonActive(true);
         }
     }
 

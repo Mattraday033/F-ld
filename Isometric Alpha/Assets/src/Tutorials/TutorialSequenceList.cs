@@ -539,7 +539,7 @@ public static class TutorialSequenceList
                                                                 scriptAtEnd: new OpenMap());
         TutorialSequenceStep stepThree = new TutorialSequenceStep(TutorialMessageList.questCounterTutorialMessagePrefix + 3,
                                                                   mapPopUpWindow,
-                                                                  ArrowDirection.TopRight,
+                                                                  ArrowDirection.Right,
                                                                   new KeyCode[] { KeyCode.Space },
                                                                   skipHighlight: skipHighlight,
                                                                   skipUnhighlight: skipUnhighlight,

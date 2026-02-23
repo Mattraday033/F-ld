@@ -12,19 +12,19 @@ public static class TestScript
         }
 
         // State.debugStopMonsterSpawning = true;
-        State.debugDiscoverAllLocations = true;
-        State.allLocationsFastTravelAvailable = true;
+        // State.debugDiscoverAllLocations = true;
+        // State.allLocationsFastTravelAvailable = true;
         // State.debugRetreatAutoSucceed = true;
         // State.enableGridDebugger = true;
 
         // PartyManager.getPartyMember(NPCNameList.thatch).canJoinParty = true;
 
         // PartyManager.getPlayerStats().setLevel(1);
-        PartyManager.getPlayerStats().currentHealth = 1;
-        PartyManager.getPlayerStats().strength = 4;
-        PartyManager.getPlayerStats().dexterity = 4;
-        PartyManager.getPlayerStats().wisdom = 4;
-        PartyManager.getPlayerStats().charisma = 4;
+        // PartyManager.getPlayerStats().currentHealth = 1;
+        // PartyManager.getPlayerStats().strength = 4;
+        // PartyManager.getPlayerStats().dexterity = 4;
+        // PartyManager.getPlayerStats().wisdom = 4;
+        // PartyManager.getPlayerStats().charisma = 4;
 
         // PartyManager.addXP(1050);
 
@@ -35,7 +35,7 @@ public static class TestScript
         // Flags.flags["charismaBarricadePassUsed"] = false;
         // Flags.flags["andrasBarricadePassUsed"] = false;
 
-        PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
+        // PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
 
         // Inventory.addItem(ItemList.getItem(ItemList.usableItemListIndex, ItemList.bandagesIndex, 5));
 
@@ -45,7 +45,7 @@ public static class TestScript
         // Inventory.addItem(ItemList.getItem(ItemList.weaponsListIndex, ItemList.cudgelIndex));
 
         // Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.bronzeDirkIndex));
-        Inventory.addItem(ItemList.getItem(ItemList.weaponsListIndex, ItemList.heavyPickIndex));
+        // Inventory.addItem(ItemList.getItem(ItemList.weaponsListIndex, ItemList.heavyPickIndex));
 
         // Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.wardensShieldIndex, 2));
 
