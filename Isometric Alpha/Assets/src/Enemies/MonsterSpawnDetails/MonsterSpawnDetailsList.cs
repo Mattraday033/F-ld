@@ -37,6 +37,24 @@ public static class MonsterSpawnDetailsList
         monsterSpawnDetailsDict.Add(LocationNameList.slaveShackSix, list);
         #endregion
 
+        #region GuardHouse Top Floor
+        list = new List<MonsterSpawnDetails>();
+
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-14, -5), movementType: MonsterMovementType.Chases));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-7, -4), movementType: MonsterMovementType.Chases));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(4, -5), movementType: MonsterMovementType.Chases));
+
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, 4), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, 3), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(5, 3), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(5, 2), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(6, 2), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(4, 2), PrefabNames.pushableCrate));
+
+
+        monsterSpawnDetailsDict.Add(LocationNameList.guardHouseTopFloor, list);
+        #endregion    
+
         #region GuardHouse NE
         list = new List<MonsterSpawnDetails>();
 

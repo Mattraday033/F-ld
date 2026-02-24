@@ -99,7 +99,7 @@ public static class TraitList
 	public readonly static Trait spawner = new Trait(StatSourceNameList.spawnerKey, TraitType.Interaction, "This creature creates minions.", "Egg");
 	public readonly static Trait fodder = new Trait(StatSourceNameList.fodderKey, TraitType.Interaction, "This creature dies after it attacks", "Fodder");
 
-	public readonly static Trait charged = new Trait(StatSourceNameList.chargedKey, TraitType.Charge, "This creature is capable of delivering a devastating attack.", "Charged");
+	public readonly static Trait charged = new Trait(StatSourceNameList.chargedKey, TraitType.Charge, "This creature is capable of delivering a devastating attack.", "Charged", roundsLeft: Constants.oneRoundDuration, permanent: false);
 	public readonly static Trait shielded = new Trait(StatSourceNameList.shieldedKey, TraitType.Charge, "This creature takes reduced damage.", StatSourceNameList.shieldedKey, roundsLeft: Constants.oneRoundDuration, permanent: false);
 	public readonly static Trait extraShielded = new Trait(StatSourceNameList.protectedKey, TraitType.Charge, "This creature takes a reduced damage. It will lose this trait if it is the last enemy alive.", StatSourceNameList.shieldedKey, roundsLeft: Constants.oneRoundDuration, permanent: false);
 	public readonly static Trait signaling = new Trait(StatSourceNameList.signalingKey, TraitType.Charge, "This guard is going to call signal an arrow tower to fire upon their assailants.", "Signaling");

@@ -11,7 +11,7 @@ VAR toldToInvestigateScreamingInThatchsHut = false
 VAR kastorReactedToHostility = false
 
 VAR metThatch = false
-VAR slateFound = false
+VAR foundSlate = false
 
 VAR thatchRemovedTutorialRubble = false
 VAR toldThatchAboutSlate = false
@@ -118,10 +118,10 @@ Escape? *Thatch considers it.* Maybe it's the lack of sleep talking, but never h
 Screaming? Damn it all. I didn't... I should have been here.
 
     +I'm guessing the screams weren't from you then?
-        No, I wasn't the one screaming. I've been working all night, I only got back less than an hour ago. But I can guess what happened.
+        No, I've been working all night and I got back less than an hour ago. But I can guess what happened.
         ->explanationOfHutState(->2b)
     +Do you know what happened?
-        I've been working all night, I only got back less than an hour ago, so I wasn't here for it all. But I can guess what happened.
+        I've been working all night and I got back less than an hour ago. But I can guess what happened.
         ->explanationOfHutState(->2b)
 
 === 2b ===
@@ -150,6 +150,8 @@ With the two of us together, we might be able to get to the back of the hut and 
 \*Thatch is slumped against the hut wall. His eyes are closed and soft snoring can be heard.*
 
     +\*Wake Thatch.*
+        playAnimation({thatchIndex}, OOC_Idle_Front)
+        faceOppositePlayer({thatchIndex})
         \*Thatch startles awake and looks up at you.* You're back, and just as I got in a good position, too. Are you ready to begin? 
             ->tutorialChoices
     +\*Leave.*
@@ -165,13 +167,15 @@ With the two of us together, we might be able to get to the back of the hut and 
 === tutorialChoices ===
 
 {
--slateFound:
+-foundSlate:
     +I've actually already found your friend. He was killed by a guard named Vazul.
         ->skippedTutorial
 -else:
     +I'll help you get to your friend.
         ->acceptedTutorial
     +I will need to think about it. I'll be back.
+        playAnimation({thatchIndex}, Death_Back)
+        setNPCFacing({thatchIndex},NW)
         ->Close
 }
 

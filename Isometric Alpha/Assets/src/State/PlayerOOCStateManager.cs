@@ -205,8 +205,6 @@ public static class PlayerOOCStateManager
         }
 
         OnStateChange.Invoke();
-
-        PlayerObject.setButtonPromptVisibility(Constants.indexZero);
     }
 
     public static bool waitingOnHostilityTutorial;

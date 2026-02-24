@@ -69,10 +69,10 @@ public static class SecretDoorSpawnInfoList
         list = new List<SecretDoorSpawnInfo>();
 
         list.Add(new SecretDoorSpawnInfo(LocationNameList.campCenter, NPCNameList.wallPatch, PrefabNames.wallPatchTall, new Vector3Int(8, 12),
-                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchOne), Constants.sizeTwo, Axis.DescendingX, terrainSpriteName: PrefabNames.wallPatch));
+                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchOne, addHostilityIfOutside: true), Constants.sizeTwo, Axis.DescendingX, terrainSpriteName: PrefabNames.wallPatch));
 
         list.Add(new SecretDoorSpawnInfo(LocationNameList.campCenter, NPCNameList.wallPatch, PrefabNames.wallPatchTall, new Vector3Int(-7, 14),
-                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchTwo), Constants.sizeTwo, Axis.DescendingY, terrainSpriteName: PrefabNames.wallPatch));
+                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchTwo, addHostilityIfOutside: true), Constants.sizeTwo, Axis.DescendingY, terrainSpriteName: PrefabNames.wallPatch));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.campCenter, list);
         #endregion
@@ -80,13 +80,13 @@ public static class SecretDoorSpawnInfoList
         list = new List<SecretDoorSpawnInfo>();
 
         list.Add(new SecretDoorSpawnInfo(LocationNameList.campSouthEast, NPCNameList.wallPatch, PrefabNames.wallPatchTall, new Vector3Int(18, 15),
-                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchThree), Constants.sizeTwo, Axis.DescendingX, terrainSpriteName: PrefabNames.wallPatch));
+                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchThree, addHostilityIfOutside: true), Constants.sizeTwo, Axis.DescendingX, terrainSpriteName: PrefabNames.wallPatch));
 
         list.Add(new SecretDoorSpawnInfo(LocationNameList.campSouthEast, NPCNameList.wallPatch, PrefabNames.wallPatchTall, new Vector3Int(19, 8),
-                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchTwo), Constants.sizeTwo, Axis.DescendingX, terrainSpriteName: PrefabNames.wallPatch));
+                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchTwo, addHostilityIfOutside: true), Constants.sizeTwo, Axis.DescendingX, terrainSpriteName: PrefabNames.wallPatch));
 
         list.Add(new SecretDoorSpawnInfo(LocationNameList.campSouthEast, NPCNameList.wallPatch, PrefabNames.wallPatchTall, new Vector3Int(20, 4),
-                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchOne), Constants.sizeTwo, Axis.DescendingX, terrainSpriteName: PrefabNames.wallPatch));
+                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchOne, addHostilityIfOutside: true), Constants.sizeTwo, Axis.DescendingX, terrainSpriteName: PrefabNames.wallPatch));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.campSouthEast, list);
         #endregion

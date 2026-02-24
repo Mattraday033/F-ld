@@ -10,3 +10,16 @@ public class QuestStepActivationScript: PlayerInteractionScript
     }
 
 }
+
+public class PreventTutorialsAfterBatsKilledScript : QuestStepActivationScript
+{
+    public override void runScript()
+    {
+        Flags.setFlag(TutorialSequenceList.firstHostitilityTutorialSeenFlag, true);
+
+        if(SecretDoorFlags.secretDoorHasBeenDiscovered(SecretDoorKeyList.wisTutorialSecretDoor))
+        {
+            Flags.setFlag(TutorialSequenceList.observationTutorialSeenFlag, true);
+        }
+    }
+}

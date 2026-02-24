@@ -50,6 +50,8 @@ public class PlayerObject : MonoBehaviour
 
         MovementManager.OnMoveFinished.AddListener(setButtonPromptVisibility);
         FadeToBlackManager.OnFadeBackInFinished.AddListener(setButtonPromptVisibility);
+        PlayerOOCStateManager.OnStateChange.AddListener(setButtonPromptVisibility);
+
     }
 
     void Start()
@@ -70,6 +72,8 @@ public class PlayerObject : MonoBehaviour
     private void OnDestroy()
     {
         MovementManager.OnMoveFinished.RemoveListener(setButtonPromptVisibility);
+        FadeToBlackManager.OnFadeBackInFinished.RemoveListener(setButtonPromptVisibility);
+        PlayerOOCStateManager.OnStateChange.RemoveListener(setButtonPromptVisibility);
     }
 
     private void setAsCameraTarget()

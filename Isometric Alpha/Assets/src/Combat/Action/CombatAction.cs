@@ -1280,7 +1280,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
     }
     public virtual int getLevel()
     {
-        throw new NotImplementedException("CombatActions cannot be sorted by Level.");
+        return 1;
     }
     public int getNumber()
     {

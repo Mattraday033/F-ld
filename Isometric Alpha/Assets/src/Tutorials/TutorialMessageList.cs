@@ -141,7 +141,7 @@ public static class TutorialMessageList
 
         tutorialDictionary.Add(questCounterTutorialMessagePrefix + 1, "This is the Quest Counter. It appears when you enter an area with a Quest Objective.");
         tutorialDictionary.Add(questCounterTutorialMessagePrefix + 2, "You can view the Quests with Objectives in the current area on your Map.");
-        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 3, "This is your Map. It will only show you places you've been before. Nearby places will be silhouetted in black.");
+        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 3, "This is your Map. It will only show you places you've been before. Nearby locations will be silhouetted in black.");
         tutorialDictionary.Add(questCounterTutorialMessagePrefix + 4, "The Quest Symbol next to an area name means a quest wants you to go there. If you cannot find the Quest Objective it is indicating, try looking inside buildings in that area.");
 
         tutorialDictionary.Add(partyMemberUpgradeTutorialMessagePrefix + 1, "You have earned enough affinity to upgrade a companion.");

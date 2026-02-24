@@ -146,11 +146,11 @@ Whatever Guard László has you doing, he wouldn't want you wandering around. Ma
     +If I was lucky, I wouldn't have a brand.
         Watch that tongue of yours. The last slave to talk like that was ol' Slate over there.
 
-        ->vazulTauntsThatchAndLeaves
+        ->showSlatesBody(->2b, vazulIndex)
     +No, sir. Not lucky, sir.
         I'm glad you see it that way. But you're still luckier than ol' Slate over there.
 
-        ->vazulTauntsThatchAndLeaves
+        ->showSlatesBody(->2b, vazulIndex)
 }
 
 === 2b ===
@@ -481,7 +481,9 @@ fadeToBlack()
 
 deactivate({vazulIndex})
 
-fadeBackIn()
+setFacing(SE)
+
+fadeBackIn(60)
 
 changeCamTarget({thatchIndex})
 
@@ -553,7 +555,7 @@ One of the branded was giving us too much back talk. Some of the other guards an
 
 Oh, Slate? He talked when he should have worked a few too many times. Now he does neither. *Vazul chuckles to himself.*
 
-    +I don't know who this Slate guy was, but if you didn't like him he must have been a saint. <Combat>
+    +I don't know who this 'Slate' was, but if you didn't like him he must have been a saint. <Combat>
             ->CombatWithoutDialogue
     +Sorry, I think I hear someone calling for me. *Leave.*
         Not so fast. You've made more work for someone by tearing that hole in the wall. And I can't abide an unproductive slave.

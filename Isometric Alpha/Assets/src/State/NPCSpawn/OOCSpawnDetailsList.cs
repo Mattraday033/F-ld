@@ -174,6 +174,10 @@ public static class OOCSpawnDetailsList
         #region GuardHouse Top Floor
         list = new List<OOCSpawnDetails>();
 
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), Facing.SouthWest));
+        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(-5, -4), Facing.SouthEast));
+        list.Add(new ChestSpawnDetails(Constants.indexTwo, new Vector3Int(-13, -1), Facing.SouthWest));
+
         list.Add(new LadderSpawnDetails(new Vector3Int(7, -4), PrefabNames.ladderTallSW,
                                         new Ladder(Constants.difficultyTwo, LocationNameList.guardHouseTopFloor, LocationNameList.campManse, 
                                                     Ladder.barracksLadderDescription, Facing.SouthWest)));

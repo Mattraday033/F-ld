@@ -25,6 +25,7 @@ public static class MonsterNameList
     public const string signaleer = "Signaleer";
     public const string spearman = "Spearman";
 
+    public const string slavePackName = "Slaves";
     public const string noBrandLoyalist = "No-Brand Loyalist";
     public const string noBrandRioter = "No-Brand Rioter";
 
@@ -51,6 +52,8 @@ public static class MonsterNameList
 
         switch(enemyType)
         {
+            case NPCNameList.imre:
+                return slavePackName;
             case axeman:            
             case disciplinarian:
             case executioner:

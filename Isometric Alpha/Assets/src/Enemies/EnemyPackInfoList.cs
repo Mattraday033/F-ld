@@ -71,6 +71,23 @@ public static class EnemyPackInfoList
 
     #region  Generic Lovashi Guard Fights
 
+    #region Barracks Top Floor
+
+    public readonly static EnemyPackInfo oneAxemanOneSpearmanTwoJavalineers = new EnemyPackInfo(new CreatureAmount[] {      
+                                                                                                        EnemyAmountList.oneAxeman,
+                                                                                                        EnemyAmountList.oneSpearman,
+                                                                                                        EnemyAmountList.twoJavelineers
+                                                                                                     },
+                                                                                    DropTableList.slaveMineDT1Name);
+
+    public readonly static EnemyPackInfo oneExecutionerTwoJavalineers = new EnemyPackInfo(new CreatureAmount[] {      
+                                                                                                        EnemyAmountList.oneExecutioner,
+                                                                                                        EnemyAmountList.twoJavelineers
+                                                                                                     },
+                                                                                    DropTableList.slaveMineDT1Name);
+
+    #endregion
+
     #region Barricade Guards
     public readonly static EnemyPackInfo barricadeGuardsFront = new EnemyPackInfo(new CreatureAmount[] {      
                                                                                                 EnemyAmountList.barricade,
@@ -342,6 +359,13 @@ public static class EnemyPackInfoList
 
     #region Bats
 
+    private readonly static EnemyPackInfo twoGiantBatsTwoBatSwarmsFirstTutorial = new BossPackInfo(new CreatureAmount[] {  EnemyAmountList.twoGiantBats,
+                                                                                                            EnemyAmountList.twoBatSwarms
+                                                                                                            },
+                                                                                                          DropTableList.slaveMineDT1Name, 
+                                                                                                          script: new PreventTutorialsAfterBatsKilledScript());
+
+
     private readonly static EnemyPackInfo twoGiantBatsTwoBatSwarms = new EnemyPackInfo(new CreatureAmount[] {  EnemyAmountList.twoGiantBats,
                                                                                                             EnemyAmountList.twoBatSwarms
                                                                                                             },
@@ -433,10 +457,20 @@ public static class EnemyPackInfoList
         #region Slave Shack Six
         list = new List<EnemyPackInfo>();
 
-        list.Add(twoGiantBatsTwoBatSwarms);
+        list.Add(twoGiantBatsTwoBatSwarmsFirstTutorial);
         list.Add(twoGiantBatsTwoBatSwarms);
 
         enemyPackInfoDict.Add(LocationNameList.slaveShackSix, list);
+        #endregion
+
+        #region GuardHouse TopF loor
+        list = new List<EnemyPackInfo>();
+
+        list.Add(oneAxemanOneSpearmanTwoJavalineers);
+        list.Add(oneAxemanOneSpearmanTwoJavalineers);
+        list.Add(oneExecutionerTwoJavalineers);
+
+        enemyPackInfoDict.Add(LocationNameList.guardHouseTopFloor, list);
         #endregion
 
         #region GuardHouse NE

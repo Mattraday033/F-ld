@@ -15,23 +15,14 @@ public struct DeadNameList
 
 public class NPCCombatInfo : MonoBehaviour
 {
-	//[SerializeField]
-	private bool fightable;
-	//[SerializeField]
 	public bool ignoreDeathFlags = false;
 	
-	//[SerializeField]
 	private EnemyPackInfo[] enemyPackInfo;
 	
-	//[SerializeField]
 	public DeadNameList[] deadNameList;
 	
-	//[SerializeField]
 	public bool isRestNPC;
-	//[SerializeField]
 	public bool isCompanion;
-	
-	public int hostility;
 	
 	public NPCCombatInfo(EnemyPackInfo[] enemyPackInfo)
 	{
@@ -42,11 +33,6 @@ public class NPCCombatInfo : MonoBehaviour
 	{
 		this.enemyPackInfo = enemyPackInfo;
 		this.deadNameList = deadNameList;
-	}
-	
-	public bool canBeFought()
-	{
-		return fightable;
 	}
 	
 	public bool hasDeadNames()

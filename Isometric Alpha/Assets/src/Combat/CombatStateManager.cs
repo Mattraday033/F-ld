@@ -41,6 +41,9 @@ public interface INeedsUpdateOnStateChange
 
 public class CombatStateManager : MonoBehaviour
 {
+    private const float resolvingTurnTimeScale = 1.2f;
+    private const float normalTimeScale = 1f;
+
 	public static int deadMonsterCount = 0;
 
 	public Transform combatBackgroundGrid;
@@ -330,17 +333,22 @@ public class CombatStateManager : MonoBehaviour
         switch(wT)
         {
             case WhoseTurn.Start:
+                Time.timeScale = normalTimeScale;
                 break;
             case WhoseTurn.Player:
+                Time.timeScale = normalTimeScale;
                 OnTurnChangeToPlayer.Invoke();
                 break;
             case WhoseTurn.Resolving:
+                Time.timeScale = resolvingTurnTimeScale;
                 OnTurnChangeToResolving.Invoke();
                 break;
             case WhoseTurn.Won:
+                Time.timeScale = normalTimeScale;
                 OnTurnChangeToWon.Invoke();
                 break;
             case WhoseTurn.Lost:
+                Time.timeScale = normalTimeScale;
                 OnTurnChangeToLost.Invoke();
                 break;
             default:

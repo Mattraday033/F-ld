@@ -67,19 +67,22 @@ public class Area
 		this.alwaysAllowsFastTravel = true;
 	}
 
-	public void addHostility()
+	public void addHostility(int hostilityToAdd = -1)
 	{
-		addHostility(true);
+		addHostility(true, hostilityToAdd);
 	}
 	
-	internal void addHostility(bool addToSharedHositilityAreas)
+	internal void addHostility(bool addToSharedHositilityAreas, int hostilityToAdd = -1)
 	{
         if(isHostile())
         {
             return;
         }
 
-		if (MapObjectList.getMapObject(AreaManager.locationName).isInterior())
+        if(hostilityToAdd > 0)
+        {
+            hostility += hostilityToAdd;
+        } else if (MapObjectList.getMapObject(AreaManager.locationName).isInterior())
 		{
 			hostility += interiorHostilityPerCombat;
 		}
@@ -92,7 +95,7 @@ public class Area
 		{
 			foreach(string sharedHostilityAreaKey in areasSharingHostility)
 			{
-				AreaList.allAreas[sharedHostilityAreaKey].addHostility(false);
+				AreaList.allAreas[sharedHostilityAreaKey].addHostility(false, hostilityToAdd);
 			}
 		}
 
@@ -363,6 +366,11 @@ public static class AreaList
 		return getCurrentArea().hostility;
 	}
 	
+	public static void incrementHostility()
+	{
+		getCurrentArea().addHostility(Constants.sizeOne);
+	}
+
 	public static void addHostility()
 	{
 		getCurrentArea().addHostility();
@@ -389,11 +397,6 @@ public static class AreaList
 	{
 		getArea(locationName).setHostility(Constants.sizeZero);
 	}
-
-    public static void setAreaHostility(string locationName, int hostility)
-    {
-        getArea(locationName).setHostility(hostility);
-    }
 
     public static void setAreaToPassive(string locationName)
     {

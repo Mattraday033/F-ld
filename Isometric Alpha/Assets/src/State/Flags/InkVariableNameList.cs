@@ -34,6 +34,7 @@ public static class InkVariableNameList
 
     public const string hostileAreaName = "hostileAreaName";
     public const string hostilityScriptKey = "hostilityScriptKey";
+    public const string addHostilityIfOutside = "addHostilityIfOutside";
 
     public const string plural = "plural";
     public const string objectName = "objectName";

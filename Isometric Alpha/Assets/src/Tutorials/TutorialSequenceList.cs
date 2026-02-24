@@ -114,8 +114,8 @@ public static class TutorialSequenceList
     public const string leadershipTutorialSequenceKey = "Leadership Tutorial";
     public const string questCounterTutorialSequenceKey = "Quest Counter Tutorial";
     public const string hiddenObjectTutorialSequenceKey = "Hidden Object Tutorial";
-    public const string partyMemberUpgradeTutorialSequenceKey = "Party Member Upgrade Tutorial";
-    public const string partyMemberUpgradeTutorialSeenFlag = "partyMemberUpgradeTutorialSequenceEntered";
+    // public const string partyMemberUpgradeTutorialSequenceKey = "Party Member Upgrade Tutorial";
+    // public const string partyMemberUpgradeTutorialSeenFlag = "partyMemberUpgradeTutorialSequenceEntered";
     public const string playerLevelUpTutorialSequenceKey = "Player Level Up Tutorial";
     public const string playerLevelUpTutorialSeenFlag = "playerLevelUpTutorialSequenceEntered";
     public const string playerSpriteOOCTargetHash = "Player";
@@ -156,7 +156,7 @@ public static class TutorialSequenceList
         
         initializeTraitTutorial();
         initializeMovableObjectTutorial();
-        initializePartyMemberUpgradeTutorial();
+        // initializePartyMemberUpgradeTutorial();
         initializePlayerLevelUpTutorial();
     }
 
@@ -577,34 +577,34 @@ public static class TutorialSequenceList
         tutorialSequenceDictionary.Add(hiddenObjectTutorialSequenceKey, hiddenObjectsTutorialSequence);
     }
 
-    public static void initializePartyMemberUpgradeTutorial()
-    {
-        TutorialSequenceStep partyMemberUpgradeStepOne = new TutorialSequenceStep(TutorialMessageList.partyMemberUpgradeTutorialMessagePrefix + 1,
-                                                                                  playerSpriteOOCTargetHash,
-                                                                                  ArrowDirection.Top,
-                                                                                  new KeyCode[] { KeyCode.Space },
-                                                                                  skipHighlight: skipHighlight,
-                                                                                  skipUnhighlight: skipUnhighlight,
-                                                                                  createPopUpScreenBlocker: createPopUpScreenBlocker);
-        TutorialSequenceStep partyMemberUpgradeStepTwo = new TutorialSequenceStep(TutorialMessageList.partyMemberUpgradeTutorialMessagePrefix + 2,
-                                                                                  partyScreenButtonTargetHash,
-                                                                                  ArrowDirection.Left,
-                                                                                  new KeyCode[] { KeyCode.P },
-                                                                                  createPopUpScreenBlocker: createPopUpScreenBlocker);
-        TutorialSequenceStep partyMemberUpgradeStepThree = new TutorialSequenceStep(TutorialMessageList.partyMemberUpgradeTutorialMessagePrefix + 3,
-                                                                                    affinityCounterTargetHash,
-                                                                                    ArrowDirection.Top,
-                                                                                    new KeyCode[] { KeyCode.Space });
-        TutorialSequenceStep partyMemberUpgradeStepFour = new TutorialSequenceStep(TutorialMessageList.partyMemberUpgradeTutorialMessagePrefix + 4,
-                                                                                   affinityCounterTargetHash,
-                                                                                   ArrowDirection.Top,
-                                                                                   new KeyCode[] { KeyCode.Space });
+    // public static void initializePartyMemberUpgradeTutorial()
+    // {
+    //     TutorialSequenceStep partyMemberUpgradeStepOne = new TutorialSequenceStep(TutorialMessageList.partyMemberUpgradeTutorialMessagePrefix + 1,
+    //                                                                               playerSpriteOOCTargetHash,
+    //                                                                               ArrowDirection.Top,
+    //                                                                               new KeyCode[] { KeyCode.Space },
+    //                                                                               skipHighlight: skipHighlight,
+    //                                                                               skipUnhighlight: skipUnhighlight,
+    //                                                                               createPopUpScreenBlocker: createPopUpScreenBlocker);
+    //     TutorialSequenceStep partyMemberUpgradeStepTwo = new TutorialSequenceStep(TutorialMessageList.partyMemberUpgradeTutorialMessagePrefix + 2,
+    //                                                                               partyScreenButtonTargetHash,
+    //                                                                               ArrowDirection.Left,
+    //                                                                               new KeyCode[] { KeyCode.P },
+    //                                                                               createPopUpScreenBlocker: createPopUpScreenBlocker);
+    //     TutorialSequenceStep partyMemberUpgradeStepThree = new TutorialSequenceStep(TutorialMessageList.partyMemberUpgradeTutorialMessagePrefix + 3,
+    //                                                                                 affinityCounterTargetHash,
+    //                                                                                 ArrowDirection.Top,
+    //                                                                                 new KeyCode[] { KeyCode.Space });
+    //     TutorialSequenceStep partyMemberUpgradeStepFour = new TutorialSequenceStep(TutorialMessageList.partyMemberUpgradeTutorialMessagePrefix + 4,
+    //                                                                                affinityCounterTargetHash,
+    //                                                                                ArrowDirection.Top,
+    //                                                                                new KeyCode[] { KeyCode.Space });
 
-        TutorialSequence partyMemberUpgradeTutorialSequence = new TutorialSequence(OOCActivity.inUI, doNoSkipCurrentActivityChange, partyMemberUpgradeTutorialSeenFlag, new TutorialSequenceStep[] { partyMemberUpgradeStepOne, partyMemberUpgradeStepTwo, partyMemberUpgradeStepThree, partyMemberUpgradeStepFour });
+    //     TutorialSequence partyMemberUpgradeTutorialSequence = new TutorialSequence(OOCActivity.inUI, doNoSkipCurrentActivityChange, partyMemberUpgradeTutorialSeenFlag, new TutorialSequenceStep[] { partyMemberUpgradeStepOne, partyMemberUpgradeStepTwo, partyMemberUpgradeStepThree, partyMemberUpgradeStepFour });
 
-        partyMemberUpgradeTutorialSequence.setSkipScript(new SkipUpgradingPartyMemberTutorialScript());
-        tutorialSequenceDictionary.Add(partyMemberUpgradeTutorialSequenceKey, partyMemberUpgradeTutorialSequence);
-    }
+    //     partyMemberUpgradeTutorialSequence.setSkipScript(new SkipUpgradingPartyMemberTutorialScript());
+    //     tutorialSequenceDictionary.Add(partyMemberUpgradeTutorialSequenceKey, partyMemberUpgradeTutorialSequence);
+    // }
 
     public static void initializePlayerLevelUpTutorial()
     {
@@ -622,7 +622,7 @@ public static class TutorialSequenceList
                                                                                new KeyCode[] { },
                                                                                scriptAtStart: new EnableButtonsScript());
 
-        TutorialSequence playerLevelUpTutorialSequence = new TutorialSequence(OOCActivity.inUI, doNoSkipCurrentActivityChange, partyMemberUpgradeTutorialSeenFlag, new TutorialSequenceStep[] { playerLevelUpStepOne, playerLevelUpStepTwo, playerLevelUpStepThree });
+        TutorialSequence playerLevelUpTutorialSequence = new TutorialSequence(OOCActivity.inUI, doNoSkipCurrentActivityChange, playerLevelUpTutorialSeenFlag, new TutorialSequenceStep[] { playerLevelUpStepOne, playerLevelUpStepTwo, playerLevelUpStepThree });
 
         playerLevelUpTutorialSequence.endOfSequenceEvent = PrimaryStatIncreaseButton.PrimaryStatsIncreaseButtonPressed;
 
@@ -737,7 +737,7 @@ public static class TutorialSequenceList
                                                                                  scriptAtStart: new OpenRelevantAbilityTabScript());
         TutorialSequenceStep addingAbilitiesStepFour = new TutorialSequenceStep(TutorialMessageList.addingAbilitiesTutorialMessagePrefix + 4,
                                                                                 characterScreenBackground,
-                                                                                ArrowDirection.Left,
+                                                                                ArrowDirection.Top,
                                                                                 new KeyCode[] { },
                                                                                 skipHighlight: skipHighlight,
                                                                                 skipUnhighlight: skipUnhighlight,
@@ -769,7 +769,7 @@ public static class TutorialSequenceList
 
         traitTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTraitTutorialMessagePrefix + 2,
                                                         bottomRightHoverPanelTargetHash,
-                                                        ArrowDirection.Left,
+                                                        ArrowDirection.Top,
                                                         new KeyCode[] { KeyCode.Space }));
 
         TutorialSequenceStep traitTutorialStepThree = new TutorialSequenceStep(TutorialMessageList.combatTraitTutorialMessagePrefix + 3,

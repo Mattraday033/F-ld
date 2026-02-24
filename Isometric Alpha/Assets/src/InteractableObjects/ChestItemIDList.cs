@@ -33,6 +33,17 @@ public static class ChestItemIDList
 
         #endregion
 
+        #region GuardHouse Top Floor
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.keyItemListIndex, ItemList.mineArmoryKeyIndex));
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.thistleTeaIndex, Constants.sizeThree));
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.properFoodIndex, Constants.sizeTwo));
+
+        chestItemIDList.Add(LocationNameList.guardHouseTopFloor, list);
+
+        #endregion
         #region GuardHouse SW
 
         list = new List<ItemListID>();

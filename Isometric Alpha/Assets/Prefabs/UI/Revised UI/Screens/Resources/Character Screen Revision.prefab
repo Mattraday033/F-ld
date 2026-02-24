@@ -4118,6 +4118,7 @@ GameObject:
   - component: {fileID: 799145393009971978}
   - component: {fileID: 6195176407959565203}
   - component: {fileID: 7099665680070017891}
+  - component: {fileID: 2152194981095912011}
   m_Layer: 5
   m_Name: Character Screen Revision
   m_TagString: Untagged
@@ -4244,6 +4245,27 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &2152194981095912011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2742540288025929346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df7e0b42142bafa41b0eb154b8633843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useUltraWideTutorialWindow: 0
+  rectTransform: {fileID: 3632398392065802028}
+  tutorialHash: Character Screen Background
+  disableArrow: 1
+  image: {fileID: 799145393009971978}
+  previousColor: {r: 0, g: 0, b: 0, a: 0}
+  secondaryImage: {fileID: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
 --- !u!1 &2802788262787939949
 GameObject:
   m_ObjectHideFlags: 0
@@ -7557,6 +7579,7 @@ GameObject:
   - component: {fileID: 5944951997166287462}
   - component: {fileID: 4960780294758052391}
   - component: {fileID: 6533192296003782078}
+  - component: {fileID: 4022531195632014316}
   m_Layer: 5
   m_Name: Left Section Parent
   m_TagString: Untagged
@@ -7585,9 +7608,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 25, y: 0}
+  m_AnchoredPosition: {x: 395, y: 0}
   m_SizeDelta: {x: 740, y: -50}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7505411821381988688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7675,6 +7698,27 @@ MonoBehaviour:
   armorIcon: {fileID: 897465606388041777}
   damageIcon: {fileID: 5513865776143591000}
   critIcon: {fileID: 5644652747908035879}
+--- !u!114 &4022531195632014316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6284543860056330059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df7e0b42142bafa41b0eb154b8633843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useUltraWideTutorialWindow: 0
+  rectTransform: {fileID: 5099380154145908271}
+  tutorialHash: Character Screen Ability List
+  disableArrow: 0
+  image: {fileID: 5944951997166287462}
+  previousColor: {r: 0, g: 0, b: 0, a: 0}
+  secondaryImage: {fileID: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
 --- !u!1 &6326981312166017443
 GameObject:
   m_ObjectHideFlags: 0
@@ -8939,7 +8983,7 @@ MonoBehaviour:
   specificRowType: 
   columnHeader: {fileID: 0}
   sortPanels: 1
-  defaultSortBy: 1
+  defaultSortBy: 5
   listOfRows: []
   objectsDisabledWithSlider: []
 --- !u!1 &6986805173940635396
@@ -9137,7 +9181,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  defaultSortBy: 0
+  defaultSortBy: 6
   clickDefaultHeader: 0
   setAllHeadersToUninteractable: 1
 --- !u!1 &7014691061110959074
@@ -10026,7 +10070,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 180, y: 2.5}
+  m_AnchoredPosition: {x: 180, y: 35}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &7835634418609134007

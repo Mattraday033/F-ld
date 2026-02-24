@@ -865,7 +865,7 @@ public class TutorialSequence
 
     public static bool startTutorialSequence(TutorialSequence tutorialSequence)
     {
-        if (currentlyInTutorialSequence())
+        if (currentlyInTutorialSequence() && !tutorialSequence.tutorialSeenFlagName.Equals(currentTutorialSequence.tutorialSeenFlagName))
         {
             tutorialSequenceQueue.Add(tutorialSequence);
             return false;

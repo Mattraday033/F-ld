@@ -922,6 +922,9 @@ public class DialogueManager : MonoBehaviour
                             case "ooc_idle_front":
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.OOC_Idle_Front);
                                 break;
+                            case "death_back":
+                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Back);
+                                break;
                         }
                     }
 
@@ -1187,7 +1190,6 @@ public class DialogueManager : MonoBehaviour
                     }
 
                     QuestList.checkForDeadNames();
-                    // AreaList.addHostility();
 
                     CombatStateManager.locationBeforeCombat = AreaManager.locationName;
 
@@ -1231,6 +1233,12 @@ public class DialogueManager : MonoBehaviour
                     string sceneToBecomePassive = getArgument(buffer);
 
                     AreaList.setAreaToPassive(sceneToBecomePassive);
+
+                    continueStory();
+                    break;
+
+                case "addhostilitytocurrentarea":
+                    AreaList.incrementHostility();
 
                     continueStory();
                     break;
@@ -1399,7 +1407,7 @@ public class DialogueManager : MonoBehaviour
         return getAllArgs(buffer)[argIndex];
     }
 
-    private int getArgumentInt(string buffer, int argIndex)
+    private int getArgumentInt(string buffer, int argIndex = 0)
     {
         string[] args = getAllArgs(buffer);
 

@@ -671,6 +671,7 @@ MonoBehaviour:
   iconSymbolText: {fileID: 0}
   iconHover: {fileID: 0}
   descriptionText: {fileID: 4048341154534582838}
+  descriptionTextLayoutElement: {fileID: 0}
   plusButton: {fileID: 0}
 --- !u!114 &786713196492246898
 MonoBehaviour:
@@ -699,7 +700,7 @@ MonoBehaviour:
   inputText: {fileID: 0}
   hpText: {fileID: 0}
   typeText: {fileID: 0}
-  amountText: {fileID: 0}
+  amountText: {fileID: 768249611148449015}
   statText: {fileID: 0}
   locationText: {fileID: 0}
   loreDescriptionText: {fileID: 0}

@@ -10,8 +10,9 @@ public class SecretDoorInfo : IStoryVariableSource
     public int difficulty;
     public string description;
     public string customDialoguePath;
+    public bool addHostilityIfOutside;
 
-    public SecretDoorInfo(string secretDoorKey = null, List<string> secretDoorKeys = null, int difficulty = Constants.difficultyTwo, string description = null, string customDialoguePath = null)
+    public SecretDoorInfo(string secretDoorKey = null, List<string> secretDoorKeys = null, int difficulty = Constants.difficultyTwo, string description = null, string customDialoguePath = null, bool addHostilityIfOutside = false)
     {
         if(secretDoorKey != null)
         {
@@ -26,6 +27,7 @@ public class SecretDoorInfo : IStoryVariableSource
         this.difficulty = difficulty;
         this.description = description;
         this.customDialoguePath = customDialoguePath;
+        this.addHostilityIfOutside = addHostilityIfOutside;
     }
 
     public virtual bool hasBeenDiscovered()
@@ -59,6 +61,10 @@ public class SecretDoorInfo : IStoryVariableSource
             story.variablesState[InkVariableNameList.description] = description;
         }
 
+        if(story.variablesState[InkVariableNameList.addHostilityIfOutside] != null)
+        {
+            story.variablesState[InkVariableNameList.addHostilityIfOutside] = addHostilityIfOutside;
+        }
 
         return story;
     }

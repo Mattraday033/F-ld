@@ -7,6 +7,8 @@ VAR wisDifficulty = 2
 
 VAR description = "*The wall looks formidable, but you can feel a slight draft.*"
 
+VAR addHostilityIfOutside = false
+
 VAR secretDoorKey = ""
 
 VAR playerName = ""
@@ -50,6 +52,11 @@ VAR playerName = ""
 fadeToBlack(true, false)
 
 addSecretDoorFlag({secretDoorKey})
+
+{
+-addHostilityIfOutside:
+    addHostilityToCurrentArea()
+}
 
 fadeBackIn(60)
 

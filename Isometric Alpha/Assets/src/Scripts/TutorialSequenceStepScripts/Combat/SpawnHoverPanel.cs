@@ -7,6 +7,7 @@ public class SpawnHoverPanel : TutorialSequenceStepScript
 {
     public override void runScript(GameObject target)
     {
+        SelectorManager.deactivateCombatantInfoUIHoverPanel();
 
         SelectorManager.displayCurrentHoverUI();
 
