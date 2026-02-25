@@ -14,6 +14,18 @@ public class ReviveAbility : HealingAbility
 
 	public override void performCombatAction(List<Stats> targets)
 	{
+        List<Stats> targetsExludingSelf = new List<Stats>();
+
+        foreach(Stats target in targets)
+        {
+            if(target != null && !getActorStats().Equals(target) && !target.notResurrectable())
+            {
+                targetsExludingSelf.Add(target);
+            }
+        }
+
+        targets = targetsExludingSelf;
+
 		foreach(Stats targetCombatant in targets)
 		{
 			if(targetCombatant != null && getDamageFormula() != null && !targetCombatant.isAlive())

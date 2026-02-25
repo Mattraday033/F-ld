@@ -439,7 +439,19 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     public void playSpecialAttackAnimation()
     {
         CombatAnimationManager.trackAnimation(key, this);
-        playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Special));
+
+        if(CombatStateManager.inCombat &&
+            healthBarManager!= null && 
+            healthBarManager.linkedStats != null && 
+            healthBarManager.linkedStats.isDead() && 
+            healthBarManager.linkedStats.notResurrectable())
+        {
+            healthBarManager.linkedStats.outline.createOutline(Color.clear);
+            playAnimation(createClipTransitionSpecialAnimationThenHide());
+        } else
+        {
+            playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Special));
+        }
     }
 
     public void playWoundedAnimation()
@@ -577,6 +589,15 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         return clipTransition;
     }
 
+    private ClipTransition createClipTransitionSpecialAnimationThenHide()
+    {
+        ClipTransition clipTransition = new ClipTransition();
+        clipTransition.Clip = animationDict[CharacterAnimationType.Attack_Special];
+        clipTransition.Events.OnEnd = () => removeObjectFromBoard();
+
+        return clipTransition;
+    }
+
     private CharacterAnimationType getDeathAnimationType()
     {
         CharacterAnimationType deathAnimationType = CharacterAnimationType.Death;
@@ -595,8 +616,17 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         return getFallBackAnimationType(deathAnimationType);
     }
 
+    private void removeObjectFromBoard()
+    {
+        hideObject();
+
+        CombatGrid.setCombatantAtCoords(healthBarManager.linkedStats.position, null);
+    }
+
+
     private void hideObject()
     {
+        haltAllAnimations();
         gameObject.SetActive(false);
     }
 

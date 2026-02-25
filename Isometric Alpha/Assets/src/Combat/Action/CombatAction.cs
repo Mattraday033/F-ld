@@ -141,6 +141,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
     public bool inPreviewMode { get; private set; } = false;
 
     public bool cannotDealDamage;
+    public bool useSpecialAttackAnimation = false;
 
     #endregion
 
@@ -308,7 +309,13 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public virtual void playActivationAnimation()
     {
-        getActorStats().playAttackAnimation();
+        if(useSpecialAttackAnimation)
+        {
+            getActorStats().playSpecialAttackAnimation();
+        } else
+        {
+            getActorStats().playAttackAnimation();
+        }
     }
 
     public virtual string getEffectAnimationType()
@@ -846,16 +853,19 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         return null;
     }
 
-    public virtual void applyTrait(Stats target)
+    public virtual void applyTrait(Stats target, Trait traitToApply = null)
     {
-        Trait traitToApply = getAppliedTrait();
+        if(traitToApply == null)
+        {
+            traitToApply = getAppliedTrait();
+        }
 
         if (target == null || traitToApply == null)
         {
             return;
         }
 
-        if(checkForResistance(target))
+        if(checkForResistance(target, traitToApply))
         {
             DamageNumberPopup.createResistPopUp(CombatGrid.getPositionAt(target.position), CombatAnimationManager.getInstance().damageNumberCanvas);
             return;
@@ -876,9 +886,12 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         target.addTrait(traitToApply);
     }
 
-    private bool checkForResistance(Stats target)
+    private bool checkForResistance(Stats target, Trait traitToApply = null)
     {
-        Trait traitToApply = getAppliedTrait();
+        if(traitToApply == null)
+        {
+            traitToApply = getAppliedTrait();
+        }
 
         if(!traitToApply.isDebuff())
         {

@@ -36,7 +36,7 @@ public class SpriteOutline
 
     public void createOutline(Color color)
     {
-        if(spriteRenderer.material.color.Equals(color) || !spriteRenderer.gameObject.activeInHierarchy)
+        if(!spriteRenderer.gameObject.activeInHierarchy)
         {
             return;
         }

@@ -7,6 +7,7 @@ public class OnDeathEffectTrait : Trait
 	private string abilityKey;
 	private TargetPriorityTrait targetPriority;
 	public bool deleteIfIsDead {private get; set;}
+    private bool usedEffect = false;
 	
 	public OnDeathEffectTrait(string traitName, string traitDescription, string iconName, string abilityKey, TargetPriorityTrait targetPriority, TraitType traitType = TraitType.OnDeath):
 	base(traitName, traitType, traitDescription, iconName)
@@ -17,8 +18,14 @@ public class OnDeathEffectTrait : Trait
 	
 	public override void onDeathEffect(Stats actor)
 	{
+        if(usedEffect)
+        {
+            return;
+        }
+
 		CombatAction actionOnDeath = ((CombatAction) AbilityList.enemyAbilityDictionary[abilityKey].clone());
 		actionOnDeath.setActorCoords(actor.position);
+        actor.inOnDeathEffect = true;
 		Selector actionSelector = SelectorManager.getInstance().selectors[actionOnDeath.getRangeIndex()].clone();
 		
 		List<Stats> listOfTargets;
@@ -42,8 +49,14 @@ public class OnDeathEffectTrait : Trait
 		}
 		
 		CombatActionManager.addOnDeathCombatAction(actionOnDeath);
+        usedEffect = true;
 	}
 	
+    public override bool hasUnusedOnDeathEffect()
+    {
+        return !usedEffect;
+    }
+
 	public override bool deleteIfDead()
 	{
 		return deleteIfIsDead;

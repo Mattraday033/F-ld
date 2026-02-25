@@ -6,17 +6,15 @@ public class SelfTargetAOEOnDeathTrait : OnDeathEffectTrait
 {
 	private bool thisTraitPreventsResurrection;
 	
-	public SelfTargetAOEOnDeathTrait(string traitName, string traitDescription, string iconName, string abilityKey):
+	public SelfTargetAOEOnDeathTrait(string traitName, string traitDescription, string iconName, string abilityKey, bool thisTraitPreventsResurrection = true):
 	base(traitName, traitDescription, iconName, abilityKey, null)
 	{
-		this.thisTraitPreventsResurrection = false;
-	}
-	
-	public SelfTargetAOEOnDeathTrait(string traitName, string traitDescription, string iconName, string abilityKey, bool thisTraitPreventsResurrection):
-	base(traitName, traitDescription, iconName, abilityKey, null)
-	{
-		this.thisTraitPreventsResurrection = thisTraitPreventsResurrection;
-		this.deleteIfIsDead = true;
+        this.thisTraitPreventsResurrection = thisTraitPreventsResurrection;
+
+        if(thisTraitPreventsResurrection)
+        {
+            this.deleteIfIsDead = true;
+        }
 	}
 	
 	public override bool preventsResurrection()

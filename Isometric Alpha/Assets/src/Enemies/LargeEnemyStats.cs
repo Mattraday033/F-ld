@@ -9,6 +9,14 @@ using UnityEngine.Events;
 
 public class SpawnDetails
 {
+    public readonly static SpawnDetails topLeft2x2 = new SpawnDetails(new GridCoords[]{ new GridCoords(1,1), new GridCoords(1,0),
+                                                                                        new GridCoords(0,1), new GridCoords(0,0) });
+    public readonly static SpawnDetails topRight2x2 =  new SpawnDetails(new GridCoords[]{ new GridCoords(1,3), new GridCoords(0,3),
+                                                                                        new GridCoords(1,2), new GridCoords(0,2) });
+
+    public readonly static SpawnDetails middle2x2 =  new SpawnDetails(new GridCoords[]{ new GridCoords(2,2), new GridCoords(2,1),
+                                                                                        new GridCoords(1,2), new GridCoords(1,1) });
+
 	public bool hasSpawnDetails;
 	public bool dontSpawnWhenSurprised;
 	

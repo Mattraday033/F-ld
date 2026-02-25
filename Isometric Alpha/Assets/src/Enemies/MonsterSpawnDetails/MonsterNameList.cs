@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class MonsterNameList
 {
+    #region Bats
     public const string batsPackName = "Bats";
     public const string denMother = "Den Mother";
     public const string giantBat = "Giant Bat";
@@ -12,7 +13,19 @@ public static class MonsterNameList
     public const string armoredBatShielded = "Armored Bat (Shielded)";
     public const string screecher = "Screecher";
     public const string caveMatron = "Cave Matron";
+    #endregion
 
+    #region Worms
+    public const string armoredWorm = "Armored Worm";
+    public const string broodling = "Broodling";
+    public const string direWorm = "Dire Worm";
+    public const string hiveHerald = "Hive Herald";
+    public const string martyrWorm = "Martyr Worm";
+    public const string toxicWorm = "Toxic Worm";
+    public const string worm = "Worm";
+    #endregion
+
+    #region Lovashi
     public const string lovashiPackName = "Lovashi";
     public const string axeman = "Axeman";
     public const string disciplinarian = "Disciplinarian";
@@ -24,7 +37,9 @@ public static class MonsterNameList
     public const string overseer = "Overseer";
     public const string signaleer = "Signaleer";
     public const string spearman = "Spearman";
+    #endregion
 
+    #region Slaves
     public const string slavePackName = "Slaves";
     public const string noBrandLoyalist = "No-Brand Loyalist";
     public const string noBrandRioter = "No-Brand Rioter";
@@ -35,9 +50,12 @@ public static class MonsterNameList
     public const string pickMarker = " (Pick)";
     public const string shivMarker = " (Shiv)";
     public const string shovelMarker = " (Shovel)";
+    #endregion
 
+    #region Horses
     public const string horseCharger = "Horse Charger";
     public const string horseStomper = "Horse Stomper";
+    #endregion
 
     public const string movableObject = "Movable Object";
 

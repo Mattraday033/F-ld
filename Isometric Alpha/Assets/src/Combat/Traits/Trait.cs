@@ -341,6 +341,11 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         return immobile;
     }
 
+    public virtual bool hasUnusedOnDeathEffect()
+    {
+        return false;
+    }
+
     public void setTraitHolder(Stats traitHolder)
     {
         this.traitHolder = traitHolder;

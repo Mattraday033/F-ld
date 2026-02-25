@@ -180,6 +180,20 @@ public static class IdleDictionary
             return null;
         }
 
+        if(!CombatStateManager.inCombat && alwaysUseOOCIdleOutsideOfCombat(monsterName))
+        {
+            switch(animationType)
+            {
+                case CharacterAnimationType.Idle_Front:
+                    animationType = CharacterAnimationType.OOC_Idle_Front;
+                    break;
+                case CharacterAnimationType.Idle_Back:    
+                    animationType = CharacterAnimationType.OOC_Idle_Back;
+                    break;
+            } 
+        }
+
+
         Sprite[] currentIdleSprites = idleDict[new KeyValuePair<string, CharacterAnimationType>(monsterName, animationType)];
 
         int beats = HeartBeatManager.getHeartBeatsSentToRow(monsterName, row);
@@ -187,6 +201,17 @@ public static class IdleDictionary
         int currentSpriteIndex = beats % currentIdleSprites.Length;
 
         return currentIdleSprites[currentSpriteIndex];
+    }
+
+    private static bool alwaysUseOOCIdleOutsideOfCombat(string monsterName)
+    {
+        switch(monsterName)
+        {
+            case MonsterNameList.direWorm:
+                return true;
+            default:
+                return false;
+        }
     }
 
     [RuntimeInitializeOnLoadMethod]

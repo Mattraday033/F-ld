@@ -12,5 +12,6 @@ public enum EffectAnimationType
     Negative,
     Healing,
     Explosive,
-    BatSwarm
+    BatSwarm,
+    Acid
 }

@@ -33,13 +33,7 @@ public class GeneratedTargetPriorityTrait : TargetPriorityTrait
 		List<GridCoords> placeHolderGridCoords = new List<GridCoords>();
 		int spacesLeft = 0;
 		
-		// if(targetParameters.targetsOnlyEmptySpace())
-		// {
-		// 	spacesLeft = CombatGrid.howManyEmptyEnemySpaces();
-		// } else
-		// {
         spacesLeft = amountOfTargets;
-		// }
 		
 		for(int currentSelector = 0; currentSelector < spacesLeft; currentSelector++)
 		{	
@@ -50,8 +44,6 @@ public class GeneratedTargetPriorityTrait : TargetPriorityTrait
 				continue;
 			}
 
-			allTargetSelectors.Add(selector);
-			
 			if(targetParameters.targetsOnlyEmptySpace())
 			{
 				GridCoords currentCoords = selector.getCoords();
@@ -63,9 +55,19 @@ public class GeneratedTargetPriorityTrait : TargetPriorityTrait
                     Debug.LogError("Setting placeholder would overwrite an existing combatant");
                 }
 
+                List<GridCoords> emptyCoords = CombatGrid.getAllEmptySpacesInEnemyZone().ToList();
+
+                if(emptyCoords.Count > 0)
+                {
+                   selector.setToLocation(emptyCoords.OrderBy(a => Guid.NewGuid()).ToList()[0]);
+                   CombatStateManager.allQueuedSummonLocations.Add(selector.getCoords());
+                }
+
                 // // Debug.LogError("Setting Combatant At Coords : "+currentCoords.ToString()+" disallowed because EnemyStats constructors have changed");
 				// CombatGrid.setCombatantAtCoords(currentCoords, new EnemyStats());
 			}
+
+            allTargetSelectors.Add(selector);
 		}
 		
 		foreach(GridCoords coords in placeHolderGridCoords)

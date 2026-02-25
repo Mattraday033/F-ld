@@ -38,6 +38,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     public Color previousColor = Color.clear;
 
     public bool inPreviewMode = false;
+    public bool inOnDeathEffect = false;
 
     public GameObject combatSprite;
     public Stats repositionClone;
@@ -89,7 +90,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
             return;
         }
 
-        if (notResurrectable())
+        if (notResurrectable() && !hasUnusedDeathEffect())
         {
             destroyCombatSprite();
             removeFromGrid();
@@ -898,6 +899,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
                 trait.harmAllLinkedTargets(damage);
             }
         }
+    }
+
+    public bool hasUnusedDeathEffect()
+    {
+        return Helpers.hasQuality<Trait>(traitContainer, t => t.hasUnusedOnDeathEffect()) || inOnDeathEffect;
     }
 
     public virtual bool notResurrectable()

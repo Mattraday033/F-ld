@@ -101,6 +101,7 @@ public static class AbilityList
 
 	public const string wallopKey = "Wallop";	
 	public const string trampleKey = "Trample";
+    public const string spawnBroodlingKey = "Spawn Broodling";
 	public const string splitSpawnWormsKey = "Split Spawn Worms";
 	public const string splitBossSpawnWormsKey = "Split Boss Spawn Worms";
 	public const string acidVomitKey = "Acid Vomit";
@@ -108,7 +109,7 @@ public static class AbilityList
 	public const string wormBossExplosionKey = "Worm Boss Explosion";
 	public const string wormRestorativeKey = "Worm Restorative";
 	public const string wormBossRestorativeKey = "Worm Boss Restorative";
-	public const string wormFumesKey = "Worm Fumes";
+	public const string wormAcidBarrageKey = "Acid Barrage";
 	public const string wormOnDeathFumesKey = "Worm Fumes On Death";
 
     public const string slashKey = "Slash";
@@ -153,7 +154,7 @@ public static class AbilityList
 	public const string greenLeafAcquisitionMethodExplanation = "You will collect this exuberance whenever a Party Member heals or revives one another.";
       
 
-	public const string wormFumesIndicatorName = "WormFumesIndicator";
+	public const string wormFumesIndicatorName = "AcidPoolIndicator";
 	public readonly static GroundEffect wormFumesGroundEffect = new GroundEffect("6", 4, GridCoords.getDefaultCoords(), Resources.Load<GameObject>(wormFumesIndicatorName));
 	
 	public static Dictionary<string,Ability> statAbilityDictionary;
@@ -162,19 +163,6 @@ public static class AbilityList
 	public static Dictionary<string,Ability> miscAbilityDictionary;
 
     public static Dictionary<string, List<CombatAction>> companionAbilityDictionary;
-	
-    private static void initializeAbilityListAtRunTime()
-    {
-        strAbilityLevel = 2;
-        dexAbilityLevel = 2;
-        wisAbilityLevel = 2;
-        chaAbilityLevel = 2;
-        
-        strAbilityIndex = 1;
-        dexAbilityIndex = 1;
-        wisAbilityIndex = 1;
-        chaAbilityIndex = 1;
-    }
 
     public static void initialize()
     {
@@ -227,17 +215,21 @@ public static class AbilityList
                                                                                                             }));
         
         //worm abilities
-        // enemyAbilityDictionary.Add(splitSpawnWormsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(splitSpawnWormsKey, "The worm splits to spawn two smaller worms.")), EnemyStatsList.wormSplitSpawnCombo));
+
         enemyAbilityDictionary.Add(wallopKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wallopKey, "The worm drives forward, using the weight of it's body and it's intense bite to rip apart it's foe."), DamageParams.build("2", "1"))));
         enemyAbilityDictionary.Add(trampleKey, new Ability(CombatActionSettings.build(DescriptionParams.build(trampleKey, "The monster crashes into the target, using the size and weight of it's body to crush it's prey."), DamageParams.build("12", "5"))));
         // enemyAbilityDictionary.Add(splitBossSpawnWormsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(splitBossSpawnWormsKey, "The worm splits to spawn four smaller worms."), TargetParams.build(Range.boxOneIndex)), EnemyStatsList.wormSplitBossSpawnCombo));
-        enemyAbilityDictionary.Add(acidVomitKey, new Ability(CombatActionSettings.build(DescriptionParams.build(acidVomitKey, "The worm spits acidic bile at it's enemy, making them more vulnerable to attacks."), DamageParams.build("2", "0"), TraitList.acidVomit)));
-        enemyAbilityDictionary.Add(wormExplosionKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wormExplosionKey, "The worm explodes on death, spraying everything around it in burning guts.", "Volatile"), DamageParams.build("5", "0"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), TraitList.acidVomit)));
+        enemyAbilityDictionary.Add(acidVomitKey, new Ability(CombatActionSettings.build(DescriptionParams.build(acidVomitKey, "The worm spits acidic bile at it's enemy, making them more vulnerable to attacks."), DamageParams.build("2", "0"), AnimationParams.build(EffectAnimationType.Acid), TraitList.acidVomit)));
+        enemyAbilityDictionary.Add(wormExplosionKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wormExplosionKey, "The worm explodes on death, spraying everything around it in burning guts.", "Volatile"), DamageParams.build("5", "0"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), AnimationParams.build(EffectAnimationType.Acid, AnimationParams.useSpecialAttack), TraitList.acidVomit)));
         enemyAbilityDictionary.Add(wormBossExplosionKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wormBossExplosionKey, "The worm explodes on death, spraying everything around it in burning guts.", "Volatile"), DamageParams.build("30", "0"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), TraitList.acidVomit)));
-        enemyAbilityDictionary.Add(wormRestorativeKey, new ReviveAbility(CombatActionSettings.build(DescriptionParams.build(wormRestorativeKey, "The worm disolves into many smaller worms on death, which leave it's carcass in search of new corpses to inhabit.", "Restorative"), DamageParams.build("50"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting))));
+        enemyAbilityDictionary.Add(wormRestorativeKey, new ReviveAbility(CombatActionSettings.build(DescriptionParams.build(wormRestorativeKey, "The worm disolves into many smaller worms on death, which leave it's carcass in search of new corpses to inhabit.", "Restorative"), DamageParams.build("50"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), AnimationParams.build(AnimationParams.useSpecialAttack))));
         enemyAbilityDictionary.Add(wormBossRestorativeKey, new ReviveAbility(CombatActionSettings.build(DescriptionParams.build(wormBossRestorativeKey, "The worm disolves into many smaller worms on death, which leave it's carcass in search of new corpses to inhabit.", "Restorative"), DamageParams.build("100"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting))));
-        enemyAbilityDictionary.Add(wormFumesKey, new GroundEffectAbility(CombatActionSettings.build(DescriptionParams.build(wormFumesKey, "The worm belches toxic fumes that cloud the tunnel and gnaw at the skin of assailants.", "Fumes")), wormFumesGroundEffect));
-        enemyAbilityDictionary.Add(wormOnDeathFumesKey, new GroundEffectAbility(CombatActionSettings.build(DescriptionParams.build(wormOnDeathFumesKey, "The worm belches toxic fumes that cloud the tunnel and gnaw at the skin of assailants.", "Fumes"), TargetParams.build(Range.checkeredLeftIndex)), wormFumesGroundEffect));
+        enemyAbilityDictionary.Add(wormAcidBarrageKey, new GroundEffectAbility(CombatActionSettings.build(DescriptionParams.build(wormAcidBarrageKey, "The worm belches toxic acid that gnaws at the skin of prey.", "DeathFumes"), AnimationParams.build(EffectAnimationType.Acid)), wormFumesGroundEffect));
+        enemyAbilityDictionary.Add(wormOnDeathFumesKey, new GroundEffectAbility(CombatActionSettings.build(DescriptionParams.build(wormOnDeathFumesKey, "The worm belches toxic acid that gnaws at the skin of prey.", "DeathFumes"), TargetParams.build(Range.checkeredLeftIndex)), wormFumesGroundEffect));
+        
+        string[] pairOfBroodlings = new string[]{MonsterNameList.broodling, MonsterNameList.broodling};
+        enemyAbilityDictionary.Add(splitSpawnWormsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(splitSpawnWormsKey, "The worm splits into two smaller worms."), AnimationParams.build(AnimationParams.useSpecialAttack)), pairOfBroodlings));
+        enemyAbilityDictionary.Add(spawnBroodlingKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(spawnBroodlingKey, "The Herald summons broodlings to fight its battles.")), pairOfBroodlings));
 
         //guard abilities
         enemyAbilityDictionary.Add(slashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(slashKey, "The bite of a sword swung quick."), DamageParams.build("4", "3"))));

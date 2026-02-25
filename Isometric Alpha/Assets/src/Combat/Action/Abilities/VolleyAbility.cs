@@ -83,6 +83,7 @@ public class VolleyAbility : Ability
 		GridCoords[] targetTileCoords = getSelector().getAllSelectorCoords();
 		int coordIndex = 0;
 		int projectileNumber = 1;
+        List<Trait> appliedTraits = getAllAppliedTraits();
 		
 		foreach(Stats actor in allActors)
 		{
@@ -113,11 +114,45 @@ public class VolleyAbility : Ability
 			
             projectileNumber++;
 			
-			applyTrait(targetCombatant);
+            foreach(Trait trait in appliedTraits)
+            {
+                applyTrait(targetCombatant, trait);
+            }
 			
 			coordIndex++;
 		}
 	}
+
+
+	public List<Trait> getAllAppliedTraits()
+	{
+        List<Trait> appliedTraits = new List<Trait>();
+
+        foreach(Stats stats in allActors)
+        {
+            VolleyParticipantStats participant = stats as VolleyParticipantStats;
+
+            if(participant == null || 
+                stats.isDead())
+            {
+                continue;
+            }
+
+            CombatAction action = participant.getCombatAction();
+
+            if(action == null || 
+                action.getAppliedTrait() == null || 
+                appliedTraits.Contains(action.getAppliedTrait()))
+            {
+                continue;
+            }
+
+            appliedTraits.Add(action.getAppliedTrait());
+        }
+
+        return appliedTraits;
+	}
+	
 
     private bool isParticipating(Stats actor)
     {

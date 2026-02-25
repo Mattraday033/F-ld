@@ -5,7 +5,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-public struct GroundEffect
+public class GroundEffect
 {
 	public string damageFormula;
 	public int turnsRemaining;
@@ -56,7 +56,7 @@ public class GroundEffectManager : MonoBehaviour
 	
 	public Transform indicatorParent;
 	public Transform damageNumberCanvas;
-	public List<GroundEffect> allGroundEffects = new List<GroundEffect>();
+	public Dictionary<GridCoords, GroundEffect> allGroundEffects = new Dictionary<GridCoords, GroundEffect>();
 
 	public static void createNewGroundEffect(GroundEffect template, GridCoords coords)
 	{
@@ -68,34 +68,27 @@ public class GroundEffectManager : MonoBehaviour
 		
 		newGroundEffect.instantiate();
 		
-		getInstance().allGroundEffects.Add(newGroundEffect);
+		getInstance().allGroundEffects.Add(coords, newGroundEffect);
 	}
 	
 	public static void removeGroundEffect(GridCoords positionToRemoveAt)
 	{
-		for(int effectIndex = 0; effectIndex < getAllGroundEffects().Count; effectIndex++)
-		{
-			if(((GroundEffect) getAllGroundEffects()[effectIndex]).position.Equals(positionToRemoveAt))
-			{
-				GroundEffect removedGroundEffect = (GroundEffect) getAllGroundEffects()[effectIndex];
-				
-				getAllGroundEffects().RemoveAt(effectIndex);
-				
-				removedGroundEffect.destroy();
-				
-				return;
-			}
-		}
+        if(getAllGroundEffects().ContainsKey(positionToRemoveAt))
+        {
+            getAllGroundEffects()[positionToRemoveAt].destroy();
+
+            getAllGroundEffects().Remove(positionToRemoveAt);
+        }
 	}
 	
-	public static List<GroundEffect> getAllGroundEffects()
+	public static Dictionary<GridCoords, GroundEffect> getAllGroundEffects()
 	{
 		return getInstance().allGroundEffects;
 	}
 	
 	public static void applyAllGroundEffectDamage()
 	{
-		foreach(GroundEffect groundEffect in getInstance().allGroundEffects)
+		foreach(GroundEffect groundEffect in getInstance().allGroundEffects.Values)
 		{
 			Stats target = CombatGrid.getCombatantAtCoords(groundEffect.position);
 			
@@ -117,16 +110,23 @@ public class GroundEffectManager : MonoBehaviour
 	
 	public static void removeAllFinishedGroundEffects()
 	{
-		for(int effectIndex = 0; effectIndex < getAllGroundEffects().Count; effectIndex++)
-		{
-			GroundEffect currentGroundEffect = (GroundEffect) getAllGroundEffects()[effectIndex];
-			
-			if(currentGroundEffect.turnsRemaining <= 0)
-			{
-				getAllGroundEffects().RemoveAt(effectIndex);
-				effectIndex--;
-			}
-		}
+        List<GroundEffect> finishedGroundEffects = new List<GroundEffect>();
+        
+        foreach(GroundEffect groundEffect in getAllGroundEffects().Values)
+        {
+            if(groundEffect.turnsRemaining <= 0)
+            {
+                finishedGroundEffects.Add(groundEffect);
+            }
+        }
+
+        foreach(GroundEffect groundEffect in finishedGroundEffects)
+        {
+            if(groundEffect.turnsRemaining <= 0)
+            {
+                removeGroundEffect(groundEffect.position);
+            }
+        }
 	}
 	
 	public static GroundEffectManager getInstance()

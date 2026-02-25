@@ -8,6 +8,7 @@ public static class EnemyTypeFolderPathList
 {
 
     private const string batsFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.bats + "/";
+    private const string wormFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.worms + "/";
 
     private const string brandedFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/Branded Slaves/";
     private const string nonbrandedFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/Nonbranded Slaves/";
@@ -59,6 +60,16 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(MonsterNameList.screecher, batsFolderPath + MonsterNameList.screecher + "/");
         folderPathDict.Add(MonsterNameList.denMother, batsFolderPath + MonsterNameList.denMother + "/");
         folderPathDict.Add(MonsterNameList.caveMatron, batsFolderPath + MonsterNameList.caveMatron + "/");
+        #endregion
+
+        #region Worms
+        folderPathDict.Add(MonsterNameList.armoredWorm, wormFolderPath + MonsterNameList.armoredWorm + "/");
+        folderPathDict.Add(MonsterNameList.broodling, wormFolderPath + MonsterNameList.broodling + "/");
+        folderPathDict.Add(MonsterNameList.direWorm, wormFolderPath + MonsterNameList.direWorm + "/");
+        folderPathDict.Add(MonsterNameList.hiveHerald, wormFolderPath + MonsterNameList.hiveHerald + "/");
+        folderPathDict.Add(MonsterNameList.martyrWorm, wormFolderPath + MonsterNameList.martyrWorm + "/");
+        folderPathDict.Add(MonsterNameList.toxicWorm, wormFolderPath + MonsterNameList.toxicWorm + "/");
+        folderPathDict.Add(MonsterNameList.worm, wormFolderPath + MonsterNameList.worm + "/");
         #endregion
 
         #region Lovashi

@@ -4,20 +4,6 @@ using UnityEngine;
 
 public static class EnemyStatsList
 {
-    private const string wormMinionAcid = "WormMinionAcid";
-
-    private const string smallStoneMaterials = "StoneSaintBuildingMaterialsSmall";
-
-    public readonly static EnemyStats[] wormSplitSpawnCombo = new EnemyStats[] { Resources.Load<EnemyStats>(wormMinionAcid), Resources.Load<EnemyStats>(wormMinionAcid) };
-
-    public readonly static EnemyStats[] wormSplitBossSpawnCombo = new EnemyStats[] {Resources.Load<EnemyStats>(wormMinionAcid), Resources.Load<EnemyStats>(wormMinionAcid),
-                                                                                    Resources.Load<EnemyStats>(wormMinionAcid), Resources.Load<EnemyStats>(wormMinionAcid)};
-
-    public readonly static EnemyStats[] smallStonesCombo = new EnemyStats[] {Resources.Load<EnemyStats>(smallStoneMaterials),
-                                                                            Resources.Load<EnemyStats>(smallStoneMaterials),
-                                                                            Resources.Load<EnemyStats>(smallStoneMaterials)};
-
-
     private static Dictionary<string, EnemyStats> enemyStatsDict;
 
     public static EnemyStats getEnemyStats(string key)
@@ -356,6 +342,88 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
     new LastManStandingAbility(TraitList.extraShielded, AbilityList.getAbility(null, AbilityList.rouseColonyKey) as Ability),
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.emptyGenerated2
+                                                                                }));
+        #endregion
+        #endregion
+
+        #region Worms
+
+        #region Armored Worm
+        enemyStatsDict.Add(MonsterNameList.armoredWorm, new EnemyStats(MonsterNameList.armoredWorm,
+                                                                              Constants.fiftyArmor,
+                                                                                                25,
+                                               AbilityList.getAbility(null, AbilityList.wallopKey),
+                                                                    new Trait[] { 
+                                                                                    TraitList.master,
+                                                                                    TraitList.territorial,
+                                                                                    TraitList.frontLine
+                                                                                }));
+        #endregion
+        #region Broodling
+        enemyStatsDict.Add(MonsterNameList.broodling, new MinionStats(MonsterNameList.broodling,
+                                                                              Constants.zeroArmor,
+                                                                                                25,
+                                               AbilityList.getAbility(null, AbilityList.acidVomitKey),
+                                                                    new Trait[] { 
+                                                                                  TraitList.chaotic
+                                                                            }));
+        #endregion
+        #region Dire Worm
+        enemyStatsDict.Add(MonsterNameList.direWorm, new LargeEnemyStats(MonsterNameList.direWorm,
+                                                                                Constants.fifteenArmor,
+                                                                                        25,
+                                                            new Trait[] { 
+                                                                            TraitList.master,
+                                                                            TraitList.large,
+                                                                            TraitList.territorial
+                                                                        },
+                    AbilityList.getAbility(null, AbilityList.trampleKey) as Ability));
+        #endregion
+        #region Hive Herald
+        enemyStatsDict.Add(MonsterNameList.hiveHerald, new EnemyStats(MonsterNameList.hiveHerald,
+                                                                              Constants.fifteenArmor,
+                                                                                                25,
+                                               AbilityList.getAbility(null, AbilityList.spawnBroodlingKey),
+                                                                    new Trait[] { 
+                                                                                    TraitList.master,
+                                                                                    TraitList.emptyGenerated2,
+                                                                                    TraitList.frontLine,
+                                                                                    TraitList.wormExplodes
+                                                                                }));
+        #endregion
+        #region Martyr Worm
+        enemyStatsDict.Add(MonsterNameList.martyrWorm, new EnemyStats(MonsterNameList.martyrWorm,
+                                                                              Constants.fifteenArmor,
+                                                                                                1,
+                                               AbilityList.getAbility(null, AbilityList.wallopKey),
+                                                                    new Trait[] { 
+                                                                                    TraitList.master,
+                                                                                    TraitList.chaotic,
+                                                                                    TraitList.frontLine,
+                                                                                    TraitList.wormRevive
+                                                                                }));
+        #endregion
+        #region Toxic Worm
+        enemyStatsDict.Add(MonsterNameList.toxicWorm, new EnemyStats(MonsterNameList.toxicWorm,
+                                                                              Constants.tenArmor,
+                                                                                                1,
+                                               AbilityList.getAbility(null, AbilityList.wormAcidBarrageKey),
+                                                                    new Trait[] { 
+                                                                                    TraitList.master,
+                                                                                    TraitList.chaotic,
+                                                                                    TraitList.frontLine
+                                                                                }));
+        #endregion
+        #region Worm
+        enemyStatsDict.Add(MonsterNameList.worm, new EnemyStats(MonsterNameList.worm,
+                                                                              Constants.tenArmor,
+                                                                                                1,
+                                               AbilityList.getAbility(null, AbilityList.wallopKey),
+                                                                    new Trait[] { 
+                                                                                    TraitList.master,
+                                                                                    TraitList.territorial,
+                                                                                    TraitList.frontLine,
+                                                                                    TraitList.wormSplits
                                                                                 }));
         #endregion
         #endregion

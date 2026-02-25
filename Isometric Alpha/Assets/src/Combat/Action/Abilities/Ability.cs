@@ -80,6 +80,7 @@ public class Ability: CombatAction, IJSONConvertable
 
         animationType = settings.animationParams.animationType;
         effectAnimationType = settings.animationParams.effectAnimationType;
+        useSpecialAttackAnimation = settings.animationParams.useSpecialAttackAnimation;
 
         appliedTrait = settings.appliedTrait;
     }

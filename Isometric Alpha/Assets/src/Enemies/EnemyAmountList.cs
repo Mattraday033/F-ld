@@ -95,6 +95,30 @@ public static class EnemyAmountList
 
     #endregion
 
+    #region Worms
+
+    public readonly static CreatureAmount oneArmoredWorm = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.armoredWorm));
+
+    public readonly static CreatureAmount oneBroodling = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.broodling));
+    public readonly static CreatureAmount twoBroodlings = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.broodling));
+
+    public readonly static CreatureAmount oneDireWorm = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.direWorm));
+    public readonly static CreatureAmount twoDireWorms = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.direWorm));
+
+    public readonly static CreatureAmount oneHiveHerald = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.hiveHerald));
+    public readonly static CreatureAmount twoHiveHeralds = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.hiveHerald));
+
+    public readonly static CreatureAmount oneMartyrWorm = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.martyrWorm));
+    public readonly static CreatureAmount twoMartyrWorms = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.martyrWorm));
+
+    public readonly static CreatureAmount oneToxicWorm = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.toxicWorm));
+    public readonly static CreatureAmount twoToxicWorms = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.toxicWorm));
+
+    public readonly static CreatureAmount oneWorm = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.worm));
+    public readonly static CreatureAmount fourWorms = new CreatureAmount(Constants.fourCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.worm));
+
+    #endregion
+
     #region Horses
 
     public readonly static CreatureAmount oneHorseCharger = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.horseCharger));

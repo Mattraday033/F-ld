@@ -7128,6 +7128,7 @@ MonoBehaviour:
   panelOutline: {fileID: 813179848574176452}
   panelInterior: {fileID: 0}
   rowParent: {fileID: 3894617699159485576}
+  formatOverride: 0
   centerAllText: 0
 --- !u!114 &7390998423358381172
 MonoBehaviour:
@@ -8840,6 +8841,7 @@ MonoBehaviour:
   panelOutline: {fileID: 7782275503086804900}
   panelInterior: {fileID: 1762820263653561666}
   rowParent: {fileID: 3888704425183753390}
+  formatOverride: 0
   centerAllText: 0
 --- !u!114 &3047993858615607483
 MonoBehaviour:
@@ -9457,6 +9459,7 @@ MonoBehaviour:
   panelOutline: {fileID: 5914211711820849013}
   panelInterior: {fileID: 0}
   rowParent: {fileID: 2249836390182096667}
+  formatOverride: 0
   centerAllText: 0
 --- !u!1 &5406916898494984426
 GameObject:
@@ -11075,6 +11078,7 @@ MonoBehaviour:
   panelOutline: {fileID: 8013158478673222670}
   panelInterior: {fileID: 0}
   rowParent: {fileID: 8745454256718948434}
+  formatOverride: 0
   centerAllText: 0
 --- !u!114 &4703985194985718817
 MonoBehaviour:

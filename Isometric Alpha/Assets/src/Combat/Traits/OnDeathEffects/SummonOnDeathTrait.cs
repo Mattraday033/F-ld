@@ -10,14 +10,14 @@ public class SummonOnDeathTrait : OnDeathEffectTrait
 	
 	private bool thisTraitPreventsResurrection;
 	
-	public SummonOnDeathTrait(string abilityKey, GeneratedTargetPriorityTrait targetPriority):
+	public SummonOnDeathTrait(string abilityKey, GeneratedTargetPriorityTrait targetPriority, bool preventsResurrection = true):
 	base(initialTraitName, initialTraitDescription, initialTraitIconName, abilityKey, targetPriority)
 	{
-		thisTraitPreventsResurrection = false;
+		thisTraitPreventsResurrection = preventsResurrection;
 		deleteIfIsDead = false;
 	}
 	
-	public SummonOnDeathTrait(string abilityKey, EmptyTargetSpecificPriorityTrait targetPriority, bool preventsResurrection):
+	public SummonOnDeathTrait(string abilityKey, EmptyTargetSpecificPriorityTrait targetPriority, bool preventsResurrection = true):
 	base(initialTraitName, initialTraitDescription, initialTraitIconName, abilityKey, targetPriority)
 	{
 		thisTraitPreventsResurrection = preventsResurrection;

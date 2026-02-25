@@ -172,13 +172,25 @@ public class CostParams
 
 public class AnimationParams
 {
+    public const bool useSpecialAttack = true;
+
     public CombatAnimationType animationType;
     public EffectAnimationType effectAnimationType;
+    public bool useSpecialAttackAnimation = false;
 
 
     public static AnimationParams build()
     {
         return build(CombatAnimationType.Effect);
+    }
+
+    public static AnimationParams build(bool useSpecialAttackAnimation)
+    {
+        AnimationParams animationParams = build();
+
+        animationParams.useSpecialAttackAnimation = useSpecialAttackAnimation;
+
+        return animationParams;
     }
 
     public static AnimationParams build(CombatAnimationType animationType)
@@ -191,12 +203,13 @@ public class AnimationParams
         return animationParams;
     }
 
-    public static AnimationParams build(EffectAnimationType effectAnimationType)
+    public static AnimationParams build(EffectAnimationType effectAnimationType, bool useSpecialAttackAnimation = false)
     {
         AnimationParams animationParams = new AnimationParams();
 
         animationParams.animationType = CombatAnimationType.Effect;
         animationParams.effectAnimationType = effectAnimationType;
+        animationParams.useSpecialAttackAnimation = useSpecialAttackAnimation;
 
         return animationParams;
     }
@@ -265,6 +278,11 @@ public class CombatActionSettings
         return CombatActionSettings.build(descriptionParams.name, descriptionParams, DamageParams.build(), targetParams, FrequencyParams.build(), CostParams.build(), AnimationParams.build(), null, null);
     }
 
+    public static CombatActionSettings build(DescriptionParams descriptionParams, AnimationParams animationParams)
+    {
+        return CombatActionSettings.build(descriptionParams.name, descriptionParams, DamageParams.build(), TargetParams.build(), FrequencyParams.build(), CostParams.build(), animationParams, null, null);
+    }
+
     public static CombatActionSettings build(DescriptionParams descriptionParams, DamageParams damageParams, Trait appliedTrait)
     {
         return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, TargetParams.build(), FrequencyParams.build(), CostParams.build(), AnimationParams.build(), appliedTrait, null);
@@ -305,6 +323,11 @@ public class CombatActionSettings
     public static CombatActionSettings build(DescriptionParams descriptionParams, DamageParams damageParams, AnimationParams animationParams)
     {
         return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, TargetParams.build(), FrequencyParams.build(), CostParams.build(), animationParams, null, null);
+    }
+
+    public static CombatActionSettings build(DescriptionParams descriptionParams, DamageParams damageParams, AnimationParams animationParams, Trait appliedTrait)
+    {
+        return CombatActionSettings.build(descriptionParams.name, descriptionParams, damageParams, TargetParams.build(), FrequencyParams.build(), CostParams.build(), animationParams, appliedTrait, null);
     }
 
     public static CombatActionSettings build(string key, DescriptionParams descriptionParams, DamageParams damageParams, FrequencyParams frequencyParams)
