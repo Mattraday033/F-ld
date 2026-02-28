@@ -82,6 +82,8 @@ public struct TutorialSequenceStep : IDescribable
 
     public KeyCode[] nextStepKeyCode;
 
+    public ConditionDelegate condition;
+
     public TutorialSequenceStep( string tutorialMessageKey,
                                  string tutorialTargetHash,
                                  ArrowDirection arrowDirection, 
@@ -92,7 +94,8 @@ public struct TutorialSequenceStep : IDescribable
                                  bool skipHighlight = false, 
                                  bool skipUnhighlight = false, 
                                  bool createPopUpScreenBlocker = false,
-                                 bool allowsMovementKeys = false)
+                                 bool allowsMovementKeys = false,
+                                 ConditionDelegate condition = null)
     {
         this.tutorialMessageKey = tutorialMessageKey;
         this.tutorialTargetHash = tutorialTargetHash;
@@ -113,6 +116,8 @@ public struct TutorialSequenceStep : IDescribable
         this.blockInternalRaycastsOnCutOutMask = false;
         this.dragWeaponContinueMessage = false;
         this.dragActionContinueMessage = false;
+
+        this.condition = condition;
 
         if(additionalScripts == null)
         {
@@ -984,5 +989,15 @@ public class TutorialSequence
     {
         return (PlayerOOCStateManager.currentActivity == OOCActivity.inTutorialSequence || CombatStateManager.currentActivity == CurrentActivity.Tutorial)
                  && currentTutorialSequence != null && currentTutorialSequence.preventMouseHovers;
+    }
+
+    public static bool conditionFulfilled()
+    {
+        if(currentTutorialSequence == null || currentTutorialSequence.getCurrentTutorialSequenceStep().condition == null)
+        {
+            return true;
+        }
+
+        return currentTutorialSequence.getCurrentTutorialSequenceStep().condition();
     }
 }

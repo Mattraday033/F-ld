@@ -37,6 +37,21 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
     public CombatAction loadedCombatAction;
     public GameObject previewSelectorObject;
 
+    private void Awake()
+    {
+        if(CombatStateManager.inCombat)
+        {
+            CombatStateManager.OnActivityChangeToTutorial.AddListener(disableButtonComponent);
+            CombatStateManager.OnActivityChangeFromTutorial.AddListener(enableButtonComponent);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        CombatStateManager.OnActivityChangeToTutorial.RemoveListener(disableButtonComponent);
+        CombatStateManager.OnActivityChangeFromTutorial.RemoveListener(enableButtonComponent);
+    }
+
     public void handleCombatMouseClick()
     {
         abilityMenuManager.setCurrentlySelectedAbilityIndex(index);

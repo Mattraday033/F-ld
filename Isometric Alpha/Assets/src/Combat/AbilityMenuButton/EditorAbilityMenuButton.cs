@@ -14,26 +14,34 @@ public class EditorAbilityMenuButton : AbilityMenuButton
             return false;
         }
 
-        if (combatAction.hasAvailableSlots(abilityMenuManager))
-        {
-            insertCombatAction(combatAction);
-            return true;
-        }
-
         CombatActionArray combatActionArray = abilityMenuManager.getStoredCombatActionArray();
 
-        CombatAction oldAction = combatActionArray.getActionInSlot(index);
-        combatActionArray.unequipCombatAction(index);
-        abilityMenuManager.populateAbilityMenuFromCombatActionArray();
+        if(combatAction.takesAWeaponSlot() && loadedCombatAction != null && loadedCombatAction.takesAWeaponSlot())
+        {
+            combatActionArray.unequipCombatAction(index);
 
-        if (combatAction.hasAvailableSlots(abilityMenuManager))
+            insertCombatAction(combatAction);
+            return true;
+        } else if(combatAction.hasAvailableSlots(abilityMenuManager))
         {
             insertCombatAction(combatAction);
             return true;
+        } else
+        {
+            return false;
         }
 
-        insertCombatAction(oldAction);
-        return false;
+        // combatActionArray.unequipCombatAction(index);
+        // abilityMenuManager.populateAbilityMenuFromCombatActionArray();
+
+        // if(combatAction.hasAvailableSlots(abilityMenuManager))
+        // {
+        //     insertCombatAction(combatAction);
+        //     return true;
+        // }
+
+        // insertCombatAction(oldAction);
+        // return false;
     }
 
     private void insertCombatAction(CombatAction combatAction)

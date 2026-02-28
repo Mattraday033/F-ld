@@ -84,6 +84,7 @@ public class MapJournalEntryHover : MonoBehaviour, IPointerEnterHandler, IPointe
 
         MapPopUpWindow.showJournalEntryDescription(step);
         MapPopUpWindow.highlightQuestStar(step.mapLocation);
+        highlightText(step.mapLocation, true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -92,5 +93,6 @@ public class MapJournalEntryHover : MonoBehaviour, IPointerEnterHandler, IPointe
 
         MapPopUpWindow.hideJournalEntryDescription();
         MapPopUpWindow.unhighlightQuestStar(step.mapLocation);
+        highlightText(step.mapLocation, false);
     }
 }

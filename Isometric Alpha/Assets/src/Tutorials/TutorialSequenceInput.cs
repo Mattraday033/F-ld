@@ -10,7 +10,12 @@ public static class TutorialSequenceInput
 		if (TutorialSequence.shouldAdvanceCurrentTutorialSequence() && !KeyPressManager.handlingPrimaryKeyPress)
 		{
 			KeyPressManager.handlingPrimaryKeyPress = true;
-			TutorialSequence.advanceCurrentTutorialSequence();
+            
+            if(TutorialSequence.conditionFulfilled())
+            {
+			    TutorialSequence.advanceCurrentTutorialSequence();
+            }
+
 			return;
 		}
 

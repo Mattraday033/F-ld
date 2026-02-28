@@ -164,11 +164,17 @@ public class CombatInputManager : MonoBehaviour
                 }
 
                 break;
-			case CurrentActivity.Repositioning:
+
 			case CurrentActivity.Tutorial:
+
+                TutorialSequenceInput.handleCombatTutorialInput();
+                break;
+
+			case CurrentActivity.Repositioning:
 			case CurrentActivity.Retreating:
 
 				break;
+                
 			default:
 				throw new IOException("Unrecognized CurrentActivity: " + CombatStateManager.currentActivity.ToString());
 		}

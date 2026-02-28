@@ -176,4 +176,16 @@ public class HealthBarManager : MonoBehaviour
         }
     }
 
+    public void setPosition(Vector3 worldPosition)
+    {
+        if(worldPosition.Equals(Vector3.zero))
+        {
+            return;
+        }
+
+        transform.position = worldPosition;
+
+        Helpers.updateGameObjectPosition(gameObject);
+    }
+
 }

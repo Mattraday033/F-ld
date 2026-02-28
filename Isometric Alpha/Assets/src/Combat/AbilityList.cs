@@ -150,8 +150,8 @@ public static class AbilityList
 
 	public const string redKnifeAcquisitionMethodExplanation = "You will collect this exuberance whenever a Party Member attacks with any weapon.";
 	public const string blueShieldAcquisitionMethodExplanation = "You will collect this exuberance whenever a Party Member applies a beneficial trait, as well as whenever a Party Member repositions themselves or an enemy.";
-	public const string yellowThornAcquisitionMethodExplanation = "You will collect this exuberance whenever a Party Member applies a harmful trait to a target, as well as whenevera Party Member performs a Critical Hit.";
-	public const string greenLeafAcquisitionMethodExplanation = "You will collect this exuberance whenever a Party Member heals or revives one another.";
+	public const string yellowThornAcquisitionMethodExplanation = "You will collect this exuberance whenever a Party Member applies a harmful trait to a target, as well as whenever a Party Member performs a Critical Hit.";
+	public const string greenLeafAcquisitionMethodExplanation = "You will collect this exuberance whenever a Party Member heals or revives another Party Member.";
       
 
 	public const string wormFumesIndicatorName = "AcidPoolIndicator";

@@ -386,6 +386,10 @@ WallPatchTall
     public const string shovelRack = testSpriteFolder + "ShovelRack";
     public const string pickRack = testSpriteFolder + "PickRack";
 
+    private const string shadowFolder = charactersFolder + "Shadows/";
+    public const string shadow256x256 = shadowFolder + "256_Shadow";
+    public const string shadow512x512 = shadowFolder + "512_Shadow";
+
     #endregion
 }
 

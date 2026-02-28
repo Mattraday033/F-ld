@@ -599,6 +599,8 @@ public class PlayerInput : MonoBehaviour
 
     private void handleChestStateKeyPresses()
     {
+        showFormulaToggleCheck();
+
         if ((KeyBindingList.eitherBackoutKeyIsPressed() || KeyBindingList.continueUIKeyIsPressed()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             KeyPressManager.handlingPrimaryKeyPress = true;

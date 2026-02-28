@@ -193,7 +193,6 @@ public static class IdleDictionary
             } 
         }
 
-
         Sprite[] currentIdleSprites = idleDict[new KeyValuePair<string, CharacterAnimationType>(monsterName, animationType)];
 
         int beats = HeartBeatManager.getHeartBeatsSentToRow(monsterName, row);

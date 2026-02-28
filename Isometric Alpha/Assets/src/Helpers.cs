@@ -5,6 +5,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
+public delegate bool ConditionDelegate();
 public delegate bool QualityDelegate<T>(T t);
 
 public static class Helpers
@@ -543,5 +544,22 @@ public static class Helpers
         polygonCollider2D.points = pointsList.ToArray();
     }
 
+
+    public static Vector3 getAveragePosition(List<Vector3> positions)
+    {
+        if(positions.Count <= 0)
+        {
+            return Vector3.zero;
+        }
+
+        Vector3 averagePosition = new Vector3(0f, 0f, 0f);
+
+        foreach(Vector3 position in positions)
+        {
+            averagePosition += position;
+        }
+
+        return new Vector3(averagePosition.x / positions.Count, averagePosition.y / positions.Count, averagePosition.z / positions.Count);
+    }
 
 } 

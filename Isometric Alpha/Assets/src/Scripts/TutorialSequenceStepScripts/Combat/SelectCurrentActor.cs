@@ -9,8 +9,30 @@ public class SelectCurrentActor : TutorialSequenceStepScript
     {
         Selector currentSelector = SelectorManager.currentSelector;
 
-        AbilityMenuManager currentAbilityManager = CombatGrid.getCombatantAtCoords(currentSelector.getCoords()).getAbilityMenuManager();
+        Stats combatant = CombatGrid.getCombatantAtCoords(currentSelector.getCoords());
+
+        if(combatant == null)
+        {
+            return;
+        }
+
+        AbilityMenuManager currentAbilityManager = combatant.getAbilityMenuManager();
 
         currentAbilityManager.enableAbilityButtonCanvas();
+    }
+
+    public static bool hasActorTarget()
+    {
+        Selector currentSelector = SelectorManager.currentSelector;
+
+        Stats combatant = CombatGrid.getCombatantAtCoords(currentSelector.getCoords());
+
+        if(combatant == null)
+        {
+            return false;
+        } else
+        {
+            return true;
+        }
     }
 }

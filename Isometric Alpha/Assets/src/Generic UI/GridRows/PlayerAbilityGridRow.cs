@@ -50,14 +50,14 @@ public class PlayerAbilityGridRow : GridRow, IPointerDownHandler, IDragAndDropSo
     {
         CombatAction action = descriptionPanel.getObjectBeingDescribed() as CombatAction;
 
-        if (action == null || !action.canBePlacedInActionSlot() || action.getMaximumSlots() <= 0)
-        {
-            return false;
-        }
-
         if (action.alternateActionWhenPlacedInActionSlot() != null)
         {
             action = action.alternateActionWhenPlacedInActionSlot();
+        }
+
+        if (action == null || !action.canBePlacedInActionSlot() || action.getMaximumSlots() <= 0)
+        {
+            return false;
         }
 
         int statRequirement = action.getRequiredStatLevel();

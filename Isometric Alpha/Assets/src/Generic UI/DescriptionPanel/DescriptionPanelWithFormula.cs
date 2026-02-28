@@ -92,17 +92,17 @@ public class DescriptionPanelWithFormula : DescriptionPanel
 
         if (OverallUIManager.showFormula)
         {
-            if (damageTotal == null || damageTotal.Length <= 0)
+            if ((damageTotal == null || damageTotal.Length <= 0) && damageText != null)
             {
                 damageTotal = damageText.text;
             }
 
-            if (critTotal == null || critTotal.Length <= 0)
+            if ((critTotal == null || critTotal.Length <= 0) && critRatingText != null)
             {
                 critTotal = critRatingText.text;
             }
 
-            if (armorTotal == null || armorTotal.Length <= 0)
+            if ((armorTotal == null || armorTotal.Length <= 0)&& armorRatingText != null)
             {
                 armorTotal = armorRatingText.text;
             }

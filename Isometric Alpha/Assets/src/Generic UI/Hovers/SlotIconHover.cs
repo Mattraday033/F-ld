@@ -390,10 +390,10 @@ public static class HoverMessageList
     private const string observationMessage = "This Skill allows you to find secret doors and hidden secrets. Determined by the highest Wisdom of all Party Members.";
     private const string leadershipMessage = "This Skill allows you to command your followers out of combat, telling them to stand on buttons or in doorways to block enemy movement. The number of Party Members you can command with Leadership is determined by the highest Charisma of all Party Members.";
 
-    private const string redKnifeMessage = "This shows the amount of the Red Knife exuberance your Party will gain at the start of Combat.";
-    private const string blueShieldMessage = "This shows the amount of the Blue Shield exuberance your Party will gain at the start of Combat.";
-    private const string yellowThornMessage = "This shows the amount of the Yellow Thorn exuberance your Party will gain at the start of Combat.";
-    private const string greenLeafMessage = "This shows the amount of the Grean Leaf exuberance your Party will gain at the start of Combat.";
+    private const string redKnifeMessage = "This shows the amount of the Red Knife exuberance your Party will gain at the start of Combat.\n\n" + AbilityList.redKnifeAcquisitionMethodExplanation;
+    private const string blueShieldMessage = "This shows the amount of the Blue Shield exuberance your Party will gain at the start of Combat.\n\n" + AbilityList.blueShieldAcquisitionMethodExplanation;
+    private const string yellowThornMessage = "This shows the amount of the Yellow Thorn exuberance your Party will gain at the start of Combat.\n\n" + AbilityList.yellowThornAcquisitionMethodExplanation;
+    private const string greenLeafMessage = "This shows the amount of the Grean Leaf exuberance your Party will gain at the start of Combat.\n\n" + AbilityList.greenLeafAcquisitionMethodExplanation;
     
 
     private const string regenMessage = "How much health each of your party members will heal after every combat. Determined by your Party's total Strength and Wisdom.";

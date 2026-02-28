@@ -96,6 +96,9 @@ public static class TutorialSequenceList
     private const string actionOrderTargetHash = "Action Order";
     private const string actionSlotIconsTargetHash = "Action Slot Icons";
     public const string traitMonsterTargetHash = "Trait Monster";
+    public const string exuberancesParentTargetHash = "Exuberances Parent";
+    public const string combatActionDescriptionPanelTargetHash = "Combat Action Description Panel";
+
 
     public const string movableObjectTutorialSequenceKey = "Movable Object Tutorial";
     public const string movableObjectTutorialSeenFlag = "movableObjectTutorialSequenceEntered";
@@ -120,8 +123,12 @@ public static class TutorialSequenceList
     public const string playerLevelUpTutorialSeenFlag = "playerLevelUpTutorialSequenceEntered";
     public const string playerSpriteOOCTargetHash = "Player";
     public const string playerSpriteOOCNoArrowTargetHash = "PlayerNoArrow";
-    public const string partyScreenButtonTargetHash = "Party Screen Button";
-    public const string affinityCounterTargetHash = "Affinity Counter";
+
+    public const string exuberanceCostTutorialSequenceKey = "Exuberance Cost Tutorial";
+    public const string exuberanceCostTutorialSeenFlag = "exuberanceCostTutorialSequenceEntered";
+    public const string traitCostTutorialSequenceKey = "Trait Cost Tutorial";
+    public const string traitCostTutorialSeenFlag = "traitCostTutorialSequenceEntered";
+
 
     private const bool doNoSkipCurrentActivityChange = false;
 
@@ -158,6 +165,9 @@ public static class TutorialSequenceList
         initializeMovableObjectTutorial();
         // initializePartyMemberUpgradeTutorial();
         initializePlayerLevelUpTutorial();
+
+        initializeExuberanceCostTutorial();
+        initializeTraitCostTutorial();
     }
 
     public static void initializeFirstHostilityTutorial()
@@ -526,15 +536,15 @@ public static class TutorialSequenceList
                                                                 questCounterUIPanel,
                                                                 ArrowDirection.BottomLeft,
                                                                 new KeyCode[] { KeyCode.Space },
-                                                                skipHighlight: highlight,
-                                                                skipUnhighlight: unhighlight,
+                                                                skipHighlight: skipHighlight,
+                                                                skipUnhighlight: skipUnhighlight,
                                                                 createPopUpScreenBlocker: createPopUpScreenBlocker);
         TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.questCounterTutorialMessagePrefix + 2,
                                                                 questCounterUIPanel,
                                                                 ArrowDirection.BottomLeft,
                                                                 new KeyCode[] { KeyCode.M },
-                                                                skipHighlight: highlight,
-                                                                skipUnhighlight: unhighlight,
+                                                                skipHighlight: skipHighlight,
+                                                                skipUnhighlight: skipUnhighlight,
                                                                 createPopUpScreenBlocker: createPopUpScreenBlocker,
                                                                 scriptAtEnd: new OpenMap());
         TutorialSequenceStep stepThree = new TutorialSequenceStep(TutorialMessageList.questCounterTutorialMessagePrefix + 3,
@@ -549,8 +559,8 @@ public static class TutorialSequenceList
                                                                  mapTileQuestCounter,
                                                                  ArrowDirection.Top,
                                                                  new KeyCode[] { KeyCode.Space },
-                                                                 skipHighlight: highlight,
-                                                                 skipUnhighlight: unhighlight,
+                                                                 skipHighlight: skipHighlight,
+                                                                 skipUnhighlight: skipUnhighlight,
                                                                  createPopUpScreenBlocker: createPopUpScreenBlocker);
         stepFour.blockInternalRaycastsOnCutOutMask = true;
 
@@ -847,14 +857,16 @@ public static class TutorialSequenceList
                                                          createPopUpScreenBlocker: createPopUpScreenBlocker,
                                                          scriptAtEnd: new SelectCurrentActor(),
                                                          additionalScripts: combatTutorialStepFiveAndSevenAdditionalScripts,
-                                                         allowsMovementKeys: allowsMovementKeys));
+                                                         allowsMovementKeys: allowsMovementKeys,
+                                                         condition: () => SelectCurrentActor.hasActorTarget()));
         combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 6,
                                                          combatActionWheelTargetHash,
                                                          ArrowDirection.BottomRight,
                                                          new KeyCode[] { KeyCode.E },
                                                          createPopUpScreenBlocker: createPopUpScreenBlocker,
                                                          scriptAtEnd: new AbilityWheelChooseAbility(),
-                                                         additionalScripts: combatTutorialStepFourteenAdditionalScripts));
+                                                         additionalScripts: combatTutorialStepFourteenAdditionalScripts,
+                                                         condition: () => SelectTarget.canPayCost()));
         combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 7,
                                                          topThirdOfCombatUITargetHash,
                                                          ArrowDirection.Center,
@@ -863,7 +875,8 @@ public static class TutorialSequenceList
                                                          scriptAtStart: new DestroyHoverPanel(),
                                                          scriptAtEnd: new SelectTarget(),
                                                          additionalScripts: combatTutorialStepFiveAndSevenAdditionalScripts,
-                                                         allowsMovementKeys: allowsMovementKeys));
+                                                         allowsMovementKeys: allowsMovementKeys,
+                                                         condition: () => SelectTarget.hasTargets()));
 
         combatTutorialSteps = getFinalCombatTutorialSteps(combatTutorialSteps);
 
@@ -917,6 +930,82 @@ public static class TutorialSequenceList
                                                          new KeyCode[] { KeyCode.E }));
 
         return combatTutorialSteps;
+    }
+
+    public static void initializeExuberanceCostTutorial()
+    {
+        List<TutorialSequenceStep> exuberanceCostTutorialSteps = new List<TutorialSequenceStep>();
+
+        TutorialSequenceStep exuberanceCostTutorialStepOne = new TutorialSequenceStep(TutorialMessageList.exuberanceCostTutorialMessagePrefix + 1,
+                                                                             combatActionWheelTargetHash,
+                                                                             ArrowDirection.Right,
+                                                                             new KeyCode[] { KeyCode.Space },
+                                                                             createPopUpScreenBlocker: createPopUpScreenBlocker);
+        exuberanceCostTutorialSteps.Add(exuberanceCostTutorialStepOne);
+
+        TutorialSequenceStep exuberanceCostTutorialStepTwo = new TutorialSequenceStep(TutorialMessageList.exuberanceCostTutorialMessagePrefix + 2,
+                                                                             exuberancesParentTargetHash,
+                                                                             ArrowDirection.Right,
+                                                                             new KeyCode[] { KeyCode.Space });
+        exuberanceCostTutorialSteps.Add(exuberanceCostTutorialStepTwo);
+
+        TutorialSequenceStep exuberanceCostTutorialStepThree = new TutorialSequenceStep(TutorialMessageList.exuberanceCostTutorialMessagePrefix + 3,
+                                                                             combatActionDescriptionPanelTargetHash,
+                                                                             ArrowDirection.Bottom,
+                                                                             new KeyCode[] { KeyCode.Space });
+        exuberanceCostTutorialSteps.Add(exuberanceCostTutorialStepThree);
+
+        TutorialSequenceStep exuberanceCostTutorialStepFour = new TutorialSequenceStep(TutorialMessageList.exuberanceCostTutorialMessagePrefix + 4,
+                                                                             combatActionWheelTargetHash,
+                                                                             ArrowDirection.Right,
+                                                                             new KeyCode[] { KeyCode.Space },
+                                                                             createPopUpScreenBlocker: createPopUpScreenBlocker);
+        exuberanceCostTutorialSteps.Add(exuberanceCostTutorialStepFour);
+
+        TutorialSequence exuberanceCostTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingAbility, doNoSkipCurrentActivityChange, exuberanceCostTutorialSequenceKey, exuberanceCostTutorialSteps);
+        exuberanceCostTutorialSequence.preventMouseHovers = true;
+
+        exuberanceCostTutorialSequence.setSkipScript(new SkipCombatTutorialScript());
+
+        tutorialSequenceDictionary.Add(exuberanceCostTutorialSequenceKey, exuberanceCostTutorialSequence);
+    }
+
+    public static void initializeTraitCostTutorial()
+    {
+        List<TutorialSequenceStep> traitCostTutorialSteps = new List<TutorialSequenceStep>();
+
+        TutorialSequenceStep traitCostTutorialStepOne = new TutorialSequenceStep(TutorialMessageList.traitCostTutorialMessagePrefix + 1,
+                                                                             combatActionWheelTargetHash,
+                                                                             ArrowDirection.Right,
+                                                                             new KeyCode[] { KeyCode.Space },
+                                                                             createPopUpScreenBlocker: createPopUpScreenBlocker);
+        traitCostTutorialSteps.Add(traitCostTutorialStepOne);
+
+        TutorialSequenceStep traitCostTutorialStepTwo = new TutorialSequenceStep(TutorialMessageList.traitCostTutorialMessagePrefix + 2,
+                                                                             traitDisplayTargetHash,
+                                                                             ArrowDirection.Top,
+                                                                             new KeyCode[] { KeyCode.Space });
+        traitCostTutorialSteps.Add(traitCostTutorialStepTwo);
+
+
+        TutorialSequenceStep traitCostTutorialStepThree = new TutorialSequenceStep(TutorialMessageList.traitCostTutorialMessagePrefix + 3,
+                                                                             traitDisplayTargetHash,
+                                                                             ArrowDirection.Top,
+                                                                             new KeyCode[] { KeyCode.Space });
+        traitCostTutorialSteps.Add(traitCostTutorialStepThree);
+
+        TutorialSequenceStep traitCostTutorialStepFour = new TutorialSequenceStep(TutorialMessageList.traitCostTutorialMessagePrefix + 4,
+                                                                             combatActionDescriptionPanelTargetHash,
+                                                                             ArrowDirection.Bottom,
+                                                                             new KeyCode[] { KeyCode.Space });
+        traitCostTutorialSteps.Add(traitCostTutorialStepFour);
+
+        TutorialSequence traitCostTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingAbility, doNoSkipCurrentActivityChange, traitCostTutorialSequenceKey, traitCostTutorialSteps);
+        traitCostTutorialSequence.preventMouseHovers = true;
+
+        traitCostTutorialSequence.setSkipScript(new SkipCombatTutorialScript());
+
+        tutorialSequenceDictionary.Add(traitCostTutorialSequenceKey, traitCostTutorialSequence);
     }
 
     public static TutorialSequence getTutorialSequence(string key)

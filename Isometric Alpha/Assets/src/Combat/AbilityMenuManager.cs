@@ -223,6 +223,8 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
     {
         if (!abilityButtons[currentlySelectedAbilityIndex].casterCanPayActionCost())
         {
+            checkForPaymentTutorial();
+
             return;
         }
 
@@ -230,6 +232,42 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         abilityButtons[currentlySelectedAbilityIndex].enableCombatActionSelector();
 
         CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingLocation);
+    }
+
+    private void checkForPaymentTutorial()
+    {
+        ActionCostType[] costTypes = abilityButtons[currentlySelectedAbilityIndex].loadedCombatAction.getActionCostTypes();
+
+        bool playExuberanceTutorial = false;
+        bool playTraitCostTutorial = false;
+
+        foreach(ActionCostType type in costTypes)
+        {
+            switch(type)
+            {
+                case ActionCostType.RedKnife:
+                case ActionCostType.BlueShield:
+                case ActionCostType.YellowThorn:
+                case ActionCostType.GreenLeaf:
+                    playExuberanceTutorial = true;
+                    break;
+                case ActionCostType.Bloodlust:
+                case ActionCostType.Predation:
+                case ActionCostType.Stance:
+                    playTraitCostTutorial = true;
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        if(playExuberanceTutorial && !Flags.getFlag(TutorialSequenceList.exuberanceCostTutorialSeenFlag))
+        {
+            TutorialSequence.startTutorialSequence(TutorialSequenceList.getTutorialSequence(TutorialSequenceList.exuberanceCostTutorialSequenceKey));
+        } else if(playTraitCostTutorial && !Flags.getFlag(TutorialSequenceList.traitCostTutorialSeenFlag))
+        {
+            TutorialSequence.startTutorialSequence(TutorialSequenceList.getTutorialSequence(TutorialSequenceList.traitCostTutorialSequenceKey));
+        }
     }
 
     public AbilityMenuButton getCurrentlySelectedAbilityMenuButton()

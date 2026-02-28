@@ -94,6 +94,8 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
 
         combatSprite = combatSprites[spawnDetails.baseStatsPosition];
 
+        setHealthBarToAverageWorldPosition();
+
         OnLargeEnemySpawn.Invoke();
 
         return combatSprite;

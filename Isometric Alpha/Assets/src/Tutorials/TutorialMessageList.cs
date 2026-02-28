@@ -27,6 +27,11 @@ public static class TutorialMessageList
 
     public const string combatTraitTutorialMessagePrefix = "Combat Trait Tutorial Message ";
 
+
+    public const string exuberanceCostTutorialMessagePrefix = "Exuberance Cost Tutorial Message ";
+    public const string traitCostTutorialMessagePrefix = "Trait Cost Tutorial Message ";
+
+
     public const string movableObjectTutorialMessagePrefix = "Movable Object Tutorial Message ";
 
     public const string questCounterTutorialMessagePrefix = "Quest Counter Tutorial Message ";
@@ -127,6 +132,15 @@ public static class TutorialMessageList
         tutorialDictionary.Add(combatTutorialMessagePrefix + 9, "You and your companions can each perfom a single action per round. You can only perform as many total Actions as you have Action Slots, shown here.");
         tutorialDictionary.Add(combatTutorialMessagePrefix + 10, "When you are finished choosing your Actions, click the 'Resolve Turn' button, or press 'Space'. Press 'E' to end this tutorial.");
 
+        tutorialDictionary.Add(exuberanceCostTutorialMessagePrefix + 1, "You have tried to activate an Ability that costs Exuberances, but you don't have the required amount.");
+        tutorialDictionary.Add(exuberanceCostTutorialMessagePrefix + 2, "The number of Exuberances your party has is shown here. Hover over each Icon to learn how to earn more of each type.");
+        tutorialDictionary.Add(exuberanceCostTutorialMessagePrefix + 3, "You can learn an Ability's Exuberance cost by reading it's description...");
+        tutorialDictionary.Add(exuberanceCostTutorialMessagePrefix + 4, "... or by selecting it on the Action Wheel.");
+
+        tutorialDictionary.Add(traitCostTutorialMessagePrefix + 1, "You have tried to activate an Ability that costs Stacks of a certain Trait, but you don't have the required amount.");
+        tutorialDictionary.Add(traitCostTutorialMessagePrefix + 2, "The number of Trait Stacks each character has is shown here. Hover over each Trait to learn how to earn more of each type.");
+        tutorialDictionary.Add(traitCostTutorialMessagePrefix + 3, "If you do not see the correct Icon in the Trait Display, you have not equipped the correct Equippable Passive to your Action Wheel.");
+        tutorialDictionary.Add(traitCostTutorialMessagePrefix + 4, "You can learn an Ability's Trait cost by reading it's description.");
 
         //tutorialDictionary.Add(combatTutorialMessagePrefix + 15, "Now use the 'WASD' keys to move the targeting selector beneath the creature you want to target. Press 'E' to target the creature. If you can't target a specific creature, it may be because the Action you have chosen has a special targeting restriction, such as only being able to target allies. To back out of targeting, press 'Escape'.");
         tutorialDictionary.Add(combatTutorialRepositionMessagePrefix + 1, "Notice the indicator has turned yellow. This means the Action you've chosen allows you to choose a secondary target. Move the selector with 'WASD' and choose the second location with 'E'.");

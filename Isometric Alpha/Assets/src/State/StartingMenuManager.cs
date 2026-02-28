@@ -12,7 +12,7 @@ public class StartingMenuManager : MonoBehaviour
 
 	public GameObject mainMenuBackground; 
 
-	private static StartingMenuManager instance; //Don't instantiate, somehow Awake runs after [RuntimeInitializeOnLoadMethod]
+	private static StartingMenuManager instance; 
 
     public static StartingMenuManager getInstance()
     {
@@ -79,6 +79,6 @@ public class StartingMenuManager : MonoBehaviour
             return;
         }
 
-        currentState = (StartingMenuState)newState;
+        currentState = (StartingMenuState) newState;
     }
 } 

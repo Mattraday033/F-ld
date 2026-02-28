@@ -113,6 +113,8 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     public virtual void bringBackFromDeath()
     {
         healthBarManager.show();
+        animationManager.setToDefaultIdle();
+        animationManager.playSpawnAnimation();
     }
 
     public virtual GridCoords getPositionToHit(Selector selector, int skips)
@@ -570,6 +572,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     public bool canPayActionCost(ActionCostType[] costTypes, int[] actionCosts)
     {
         bool[] costsPayable = new bool[costTypes.Length];
+        List<ActionCostType> actionCostTypesUnpayable = new List<ActionCostType>();
 
         int index = -1;
         foreach (ActionCostType costType in costTypes)
@@ -588,6 +591,12 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
                 )
             {
                 costsPayable[index] = Exuberances.canPayCost(costType, actionCosts[index]);
+
+                if(!costsPayable[index])
+                {
+                    actionCostTypesUnpayable.Add(costType);
+                }
+
                 continue;
             }
 
@@ -601,9 +610,16 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
                 if (trait.getNumberOfStacks(costType) >= actionCosts[index])
                 {
                     costsPayable[index] = true;
+                    
+                    if(!costsPayable[index])
+                    {
+                        actionCostTypesUnpayable.Add(costType);
+                    }
                 }
             }
         }
+
+        ExuberanceTracker.ActionCostCannotBePaid.Invoke(actionCostTypesUnpayable);
 
         return !costsPayable.Contains(false);
     }

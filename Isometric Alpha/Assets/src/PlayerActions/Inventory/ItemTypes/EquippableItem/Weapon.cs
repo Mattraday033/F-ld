@@ -25,6 +25,22 @@ public class Weapon : EquippableItem, IJSONConvertable
         this.effectAnimationType = effectAnimationType;
 	}
 
+	public override string convertToJson()
+	{
+        int quantity = getQuantity();
+
+        if(quantity <= 0)
+        {
+            Debug.LogError("Quantiy = " + quantity);
+        }
+
+		return "{\"listIndex\":\"" + listID.listIndex + "\"," +
+				"\"itemIndex\":\"" + listID.itemIndex + "\"," +
+				"\"quantity\":\"" + quantity + "\"" +
+				"}";
+
+	}
+
     public override int getSlotID()
     {
         return mainHandSlotIndex;
@@ -164,6 +180,11 @@ public class Weapon : EquippableItem, IJSONConvertable
 	{
         return mainHandSlotIconName;
 	}
+
+    public override string getBonusDamageFormula()
+    {
+        return DamageCalculator.calculateBonusDamage(getDamageFormula()).ToString();
+    }
 
 	//IBuildableWithBlocks methods
 

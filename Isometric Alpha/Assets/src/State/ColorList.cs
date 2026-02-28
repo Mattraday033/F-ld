@@ -29,19 +29,19 @@ public static class ColorList
     #endregion
 
     #region Greys
-    public readonly static Color32 grey25 = new Color32(25, 25, 25, 255);
-    public readonly static Color32 grey35 = new Color32(35, 35, 35, 255);
-    public readonly static Color32 grey55 = new Color32(55, 55, 55, 255);
-    public readonly static Color32 grey75 = new Color32(75, 75, 75, 255);
-    public readonly static Color32 grey100 = new Color32(100, 100, 100, 255);
-    public readonly static Color32 grey100Transparent = new Color32(100, 100, 100, 125);
-    public readonly static Color32 grey125 = new Color32(125, 125, 125, 255);
-    public readonly static Color32 grey155 = new Color32(155, 155, 155, 255);
-    public readonly static Color32 grey175 = new Color32(175, 175, 175, 255);
-    public readonly static Color32 grey215 = new Color32(215, 215, 215, 255);
-    public readonly static Color32 grey225 = new Color32(225, 225, 225, 255);
-    public readonly static Color32 grey240 = new Color32(240, 240, 240, 255);
-    public readonly static Color32 grey245 = new Color32(245, 245, 245, 255);
+    public readonly static Color grey25 = new Color32(25, 25, 25, 255);
+    public readonly static Color grey35 = new Color32(35, 35, 35, 255);
+    public readonly static Color grey55 = new Color32(55, 55, 55, 255);
+    public readonly static Color grey75 = new Color32(75, 75, 75, 255);
+    public readonly static Color grey100 = new Color32(100, 100, 100, 255);
+    public readonly static Color grey100Transparent = new Color32(100, 100, 100, 125);
+    public readonly static Color grey125 = new Color32(125, 125, 125, 255);
+    public readonly static Color grey155 = new Color32(155, 155, 155, 255);
+    public readonly static Color grey175 = new Color32(175, 175, 175, 255);
+    public readonly static Color grey215 = new Color32(215, 215, 215, 255);
+    public readonly static Color grey225 = new Color32(225, 225, 225, 255);
+    public readonly static Color grey240 = new Color32(240, 240, 240, 255);
+    public readonly static Color grey245 = new Color32(245, 245, 245, 255);
     #endregion
 
     #region UI Colors

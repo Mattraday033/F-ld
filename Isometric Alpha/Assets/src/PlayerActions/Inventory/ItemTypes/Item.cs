@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 [System.Serializable]
 public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDescribable, ISortable, IDescribableInBlocks
 {
-	private ItemListID listID;
+	protected ItemListID listID;
 
 	private string key;
 	private string type;
@@ -419,7 +419,7 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 		return cloneOfItem;
 	}
 
-	public string convertToJson()
+	public virtual string convertToJson()
 	{
 		return "{\"listIndex\":\"" + listID.listIndex + "\"," +
 				"\"itemIndex\":\"" + listID.itemIndex + "\"," +

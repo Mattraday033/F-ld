@@ -100,7 +100,7 @@ public class MapTile : MonoBehaviour, IQuestListSource
             return;
         }
 
-        IMapObject currentSceneMapObject = MapObjectList.getMapObject(SceneManager.GetActiveScene().name);
+        IMapObject currentSceneMapObject = MapObjectList.getMapObject(AreaManager.locationName);
 
         if (mapObject != null && currentSceneMapObject.isInterior() && currentSceneMapObject.getExteriorLocationName().Equals(mapObject.getLocationName()))
         {

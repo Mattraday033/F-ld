@@ -32,4 +32,33 @@ public class SelectTarget : TutorialSequenceStepScript
         }
 
     }
+
+    public static bool hasTargets()
+    {
+        Selector currentSelector = SelectorManager.currentSelector;
+
+        if (CombatStateManager.findingEmptySpaceForReposition())
+        {
+            if(currentSelector.hasAtLeastOneTarget(SelectorManager.allyAndEnemyTagCriteria))
+            {
+                return false;
+            } else
+            {
+                return true;
+            }
+        }
+        else
+        {
+            return currentSelector.hasAtLeastOneTarget(SelectorManager.allyAndEnemyTagCriteria);
+        }
+
+    }
+
+    public static bool canPayCost()
+    {
+        AbilityMenuManager currentAbilityManager = AbilityMenuManager.getInstance();
+        CombatAction loadedCombatAction = currentAbilityManager.getCurrentlySelectedAction();
+
+        return loadedCombatAction.canPayActionCost(currentAbilityManager.actionArraySource);
+    }
 }

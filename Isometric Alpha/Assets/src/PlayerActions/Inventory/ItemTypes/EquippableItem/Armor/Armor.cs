@@ -212,9 +212,9 @@ public abstract class Armor : EquippableItem, IJSONConvertable
     {
         List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-        buildingBlocks.AddRange(base.getDescriptionBuildingBlocks());
-
         buildingBlocks.AddRange(getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
+        
+        buildingBlocks.AddRange(base.getDescriptionBuildingBlocks());
 
         return buildingBlocks;
     }

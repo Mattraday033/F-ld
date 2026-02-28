@@ -122,6 +122,11 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
 
 	public virtual void assignToTutorialSequence(TutorialSequenceStep tutorialSequenceStep)
 	{
+        if(!gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
 		if (tutorialSequenceStep.isTutorialTarget(getTutorialHash()))
 		{
 			addToHashDictionary(this); 

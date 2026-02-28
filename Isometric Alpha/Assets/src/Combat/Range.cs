@@ -91,6 +91,7 @@ public static class Range
 				return new GridCoords(1,1);
 			case reverseL_OneIndex:
 			case horizontalThreeIndex:
+            case horizontalFourIndex:
 				return new GridCoords(2,1);
 			default:
 				return new GridCoords(2,2);

@@ -20,7 +20,6 @@ public static class EnemyTypeFolderPathList
 
     private const string partyMembersFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/PartyMembers/";
 
-
     private static Dictionary<string, string> folderPathDict;
 
     public static string getEnemyTypeFolderPath(string enemyType)
@@ -202,6 +201,17 @@ public static class EnemyTypeFolderPathList
 
         #endregion
 
+    }
+
+    public static string getShadowPrefabName(string enemyType)
+    {
+        switch(enemyType)
+        {
+            case MonsterNameList.direWorm:
+                return PrefabNames.shadow512x512;
+            default:
+                return PrefabNames.shadow256x256;
+        }
     }
 
 }

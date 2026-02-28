@@ -82,6 +82,7 @@ public class CombatStateManager : MonoBehaviour
 
 
     public readonly static UnityEvent OnActivityChangeFromInEscapeMenu = new UnityEvent();
+    public readonly static UnityEvent OnActivityChangeFromTutorial = new UnityEvent();
 
 
     public readonly static UnityEvent OnCurrentActivityChange = new UnityEvent();
@@ -447,6 +448,7 @@ public class CombatStateManager : MonoBehaviour
             case CurrentActivity.ChoosingTertiary:
                 break;
             case CurrentActivity.Tutorial:
+                OnActivityChangeFromTutorial.Invoke();
                 break;
             case CurrentActivity.Retreating:
                 break;

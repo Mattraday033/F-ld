@@ -179,14 +179,17 @@ public class AllyStats : Stats
 
     public override int getTotalHealth()
     {
-        int healthFromLevel = playerBaseHealth + (playerHealthPerLevelAboveOne * (level - 1));
+        return playerBaseHealth + (playerHealthPerLevelAboveOne * (level - 1)) + getBonusHealthFromAllSources();
+    }
+
+    private int getBonusHealthFromAllSources()
+    {
         int healthFromStrength = Strength.getHealthFromStrength(strength);
 
         int bonusFormulas = StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusHealthFormula());
 
-        return healthFromLevel + healthFromStrength +  bonusFormulas;
+        return healthFromStrength + bonusFormulas;
     }
-
 
     public static int calculateTotalHealth(int potentialLevel, int potentialStrength, List<StatBoostSource> statBoostSources)
     {
@@ -821,21 +824,6 @@ public class AllyStats : Stats
 
         List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-        // if (!CombatStateManager.inCombat)
-        // {
-        //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getIntimidateBlock(getMaxIntimidateCount().ToString()));
-        //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getCunningBlock(getMaxCunningCount().ToString()));
-        //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getObservationBlock(getObservationLevel().ToString()));
-        //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getLeadershipBlock(getMaxPlacablePartyMembers().ToString()));
-        // }
-
-        // buildingBlocks.Add(DescriptionPanelBuildingBlock.getPartySlotsBlock(getMaximumPartyMemberSlots().ToString()));
-
-
-
-        // buildingBlocks.Add(DescriptionPanelBuildingBlock.getAffinityMultiplierBlock((State.playerStats.getAffinityCoefficient() *
-        //                      (PartyManager.getCurrentPartyMemberSlotsUsed() - 1)).ToString()));
-
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getLevelBlock(getLevel().ToString()));
 
         if (!CombatStateManager.inCombat)
@@ -856,7 +844,7 @@ public class AllyStats : Stats
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getCriticalHitDamageBlock(getExtraCritDamageForDisplay().ToString()));
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getPhysicalResistBlock(getPhysicalResistanceForDisplay().ToString()));
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusHealthBlock(Strength.getHealthFromStrength(getStrength()).ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusHealthBlock(getBonusHealthFromAllSources().ToString()));
 
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDexterityBlock(getDexterity().ToString()));

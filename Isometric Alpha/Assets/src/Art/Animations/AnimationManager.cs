@@ -192,6 +192,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         characterToAnimate = monsterName;
         string folderPath = EnemyTypeFolderPathList.getEnemyTypeFolderPath(characterToAnimate);
 
+        instantiateShadow();
+
         if (folderPath == null)
         {
             animationDict = new Dictionary<CharacterAnimationType, AnimationClip>();
@@ -216,6 +218,13 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         setToDefaultIdle();
     }
 
+    private void instantiateShadow()
+    {
+        GameObject shadow = Instantiate(Resources.Load<GameObject>(EnemyTypeFolderPathList.getShadowPrefabName(characterToAnimate)), transform);
+        shadow.transform.SetAsFirstSibling();
+        shadowSprite = shadow.GetComponent<SpriteRenderer>();
+    }
+
     private void setHeartBeatRow()
     {
         if(CombatStateManager.inCombat)
@@ -227,7 +236,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         }
     }
 
-    private void setToDefaultIdle()
+    public void setToDefaultIdle()
     {
         if(CombatStateManager.inCombat)
         {
@@ -575,6 +584,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         clipTransition.Clip = animationDict[deathAnimationType];
         clipTransition.Events.OnEnd = () => haltAllAnimations();
 
+        currentIdle = deathAnimationType;
+
         return clipTransition;
     }
 
@@ -585,6 +596,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         ClipTransition clipTransition = new ClipTransition();
         clipTransition.Clip = animationDict[deathAnimationType];
         clipTransition.Events.OnEnd = () => hideObject();
+
+        currentIdle = deathAnimationType;
 
         return clipTransition;
     }

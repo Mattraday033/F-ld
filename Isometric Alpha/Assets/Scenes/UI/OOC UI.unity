@@ -4857,7 +4857,7 @@ PrefabInstance:
     - target: {fileID: 2562913346979540550, guid: 18eb8e657bf536841bcd78a4b9da15c5,
         type: 3}
       propertyPath: disableHover
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3324001911687522215, guid: 18eb8e657bf536841bcd78a4b9da15c5,
         type: 3}

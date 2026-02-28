@@ -407,7 +407,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         enemyStatsDict.Add(MonsterNameList.toxicWorm, new EnemyStats(MonsterNameList.toxicWorm,
                                                                               Constants.tenArmor,
                                                                                                 1,
-                                               AbilityList.getAbility(null, AbilityList.wormAcidBarrageKey),
+new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.wormAcidBarrageKey) as Ability),
                                                                     new Trait[] { 
                                                                                     TraitList.master,
                                                                                     TraitList.chaotic,

@@ -25,7 +25,7 @@ public class InspectNode : MonoBehaviour
 
     private void Awake()
     {
-        if(CombatStateManager.inCombat)
+        if(CombatStateManager.inCombat && CombatStateManager.whoseTurn != WhoseTurn.Won)
         {
             gameObject.SetActive(false);
             return;
@@ -37,15 +37,6 @@ public class InspectNode : MonoBehaviour
         } else
         {
             gameObject.SetActive(false);
-        }
-    }
-
-    public void OnEnable()
-    {
-        if(CombatStateManager.inCombat)
-        {
-            gameObject.SetActive(false);
-            return;
         }
     }
 

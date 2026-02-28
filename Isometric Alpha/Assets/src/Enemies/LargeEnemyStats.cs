@@ -33,6 +33,18 @@ public class SpawnDetails
 		
 		this.hasSpawnDetails = true;
 	}
+
+    public List<Vector3> getAllSpawnWorldPositions()
+    {
+        List<Vector3> worldPositions = new List<Vector3>();
+
+        foreach(GridCoords coords in allSpawnPositions)
+        {
+            worldPositions.Add(CombatGrid.getPositionAt(coords));
+        }
+
+        return worldPositions;
+    }
 }
 
 public class LargeEnemyStats : EnemyStats
@@ -86,9 +98,18 @@ public class LargeEnemyStats : EnemyStats
 
         position = spawnDetails.baseStatsPosition;
 
+        GameObject combatSpriteGameObject = base.instantiateCombatSprite(spawnDetails.baseStatsPosition);
+
+        setHealthBarToAverageWorldPosition();
+
         OnLargeEnemySpawn.Invoke();
 
-        return base.instantiateCombatSprite(spawnDetails.baseStatsPosition);
+        return combatSpriteGameObject;
+    }
+
+    public void setHealthBarToAverageWorldPosition()
+    {
+        healthBarManager.setPosition(Helpers.getAveragePosition(spawnDetails.getAllSpawnWorldPositions()));
     }
 
     public override void removeFromGrid()
