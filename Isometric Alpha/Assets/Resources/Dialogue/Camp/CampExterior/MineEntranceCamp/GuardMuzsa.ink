@@ -14,6 +14,8 @@ VAR mentionedGoodReasonForGoingInsideMine = false
 VAR mentionedBadReasonForGoingInsideMine = false
 VAR gaveSnipeHuntExcuseToMuzsa = false
 
+VAR mentionedGoingInsideMine = false
+
 VAR playerName = ""
 
 VAR muzsaIndex = 1
@@ -55,6 +57,7 @@ Whoa there slave! The mine's off limits right now. Where do you think you're goi
     +I was just curious about the barricade. It seems strange for the mine to be sealed up like this.
         ->1b
     +I wanted to take a look inside the mine.
+        ~mentionedGoingInsideMine = true
         ->2a
 
 === 1b ===
@@ -102,12 +105,18 @@ I can't leave my post because I have to watch the mine, but I'm dying for someth
 
 If you run over and buy some candy off him, I won't tell anyone I caught you goofing off near the barricade. Plus, I'll let you keep the change. What do you say?
 
+{
+-not mentionedGoingInsideMine:
     +I don't know. It's suspicious that you're offering to pay me instead of just ordering me to do it.
         ->1db
     +I want to look around the mine a little. If I do this for you, will you let me by?
         keepDialogue()
         Hmmm, I really shouldn't... Fine. Help me out, and I'll let you take a quick look around in there.
         ->1da
+-else:
+    +I don't know. It's suspicious that you're offering to pay me instead of just ordering me to do it.
+        ->1db
+}
     +Yes ma'am. Right away, ma'am.
         ->1e
     +That's mighty generous of you. Sure, I'm game.
@@ -246,6 +255,8 @@ You're the first slave I've ever met who wanted to go <i>inside</i> the mine. Es
         ->2c
     
 === 2b ===
+
+~mentionedGoingInsideMine = true
 
 You're quite the little opportunist, aren't you? A sharp, enterprising slave like yourself can go far in this camp with the right friends. 
 

@@ -25,12 +25,21 @@ public class SkillButtonManager : MonoBehaviour
     {
         PlayerOOCStateManager.OnStateChangeToSkill.AddListener(highlightSkillOutline);
         PlayerOOCStateManager.OnStateChangeFromSkill.AddListener(unhighlightSkillOutline);
+
+        Formation.OnFormationChange.AddListener(setToNextSkill);
     }
 
     private void OnDisable()
     {
         PlayerOOCStateManager.OnStateChangeToSkill.RemoveListener(highlightSkillOutline);
         PlayerOOCStateManager.OnStateChangeFromSkill.RemoveListener(unhighlightSkillOutline);
+        
+        Formation.OnFormationChange.RemoveListener(setToNextSkill);
+    }
+
+    public static void setToNextSkill()
+    {
+        changeSkill(true);
     }
 
     public static void highlightSkillOutline()

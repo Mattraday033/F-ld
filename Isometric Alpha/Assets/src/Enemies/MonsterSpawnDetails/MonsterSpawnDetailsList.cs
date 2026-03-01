@@ -127,6 +127,7 @@ public static class MonsterSpawnDetailsList
 
         #endregion
 
+        #region MineLvl_2
         #region MineLvl_2-1a
 
         list = new List<MonsterSpawnDetails>();
@@ -217,6 +218,7 @@ public static class MonsterSpawnDetailsList
         monsterSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section5, list);
 
         #endregion
+
         #region MineLvl_2-7b
 
         list = new List<MonsterSpawnDetails>();
@@ -230,7 +232,8 @@ public static class MonsterSpawnDetailsList
         monsterSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section7b, list);
 
         #endregion
-
+        #endregion
+        
         #region MineLvl_3-1a
 
         list = new List<MonsterSpawnDetails>();
@@ -313,7 +316,7 @@ public static class MonsterSpawnDetailsList
 
         list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(1, 1), movementType: MonsterMovementType.Chases));
+        // list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(1, 1), movementType: MonsterMovementType.Chases));
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(16, 3), movementType: MonsterMovementType.Chases));
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(15, -1), movementType: MonsterMovementType.Chases));
 
@@ -346,8 +349,8 @@ public static class MonsterSpawnDetailsList
 
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-7, 7), Facing.SouthEast, MonsterMovementType.Stationary)); //boss
 
-        // list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-8, -2)));
-        // list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-4, -6)));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-5, -13), Facing.NorthEast, MonsterMovementType.Chases));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-16, -2), Facing.SouthEast, MonsterMovementType.Chases));
         
         list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(8, 0), PrefabNames.pushableCrate));
         list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(6, 2), PrefabNames.pushableCrate));

@@ -65,8 +65,9 @@ changeCamTarget({introducerIndex})
 
 {
 -mineLvl3SpeakingFromBrokenGate:
-
+    setNPCFacing({introducerIndex},SE)
     \*A guard turns at the sound of the gate's lifting.* You there! Step into the light and identify yourself!
+    
 -else:
 
     \*A man wearing a guard uniform shouts at you from behind his barricade.* Halt! Stand and let me get a good look at you.
@@ -79,16 +80,6 @@ changeCamTarget({introducerIndex})
     }
 
     +\*Comply.*
-
-    {
-    -mineLvl3SpeakingFromBrokenGate:
-        changeCamTarget({playerIndex})
-        fadeToBlack()
-        moveToPos(4,7)
-        setFacing(NE)
-        fadeBackIn(60)
-        changeCamTarget({introducerIndex})
-    }
         ->1b
     +This ain't the surface. I'm gonna make you eat those orders. <Combat>
         ->combatPrep
@@ -241,6 +232,11 @@ fadeToBlack(true, false)
 moveToPos(4,7)
 
 setFacing(NE)
+
+{
+-mineLvl3SpeakingFromBrokenGate:
+setNPCFacing({introducerIndex},NW)
+}
 
 setToTrue(mineLvl3MetGaspar)
 changeCamTarget({gasparIndex})

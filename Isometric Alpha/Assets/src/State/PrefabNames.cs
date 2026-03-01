@@ -100,7 +100,7 @@ public static class PrefabNames
     public const string actionLevelUpDescriptionPanels = "Action LevelUp Description Panels";
     public const string skillLevelUpDescriptionPanels = "Skill LevelUp Description Panels";
 
-    public const string shopPopUpWindow = "Shop PopUp Window Revision";
+    public const string shopPopUpWindow = "Shop PopUp Window";
 
     public const string gameOverPopUpWindow = "Game Over PopUp Window";
 

@@ -259,7 +259,7 @@ If we plan on getting out of this alive, the breach must be sealed.
 
 === 1k ===
 
-We do, but it will be tricky. Some of the guards are trained in the use of blasting jelly; we use it to clear rubble sometimes. The guards that remain on this level are holed up within the chamber we use to store the jelly and other provisions. We will need to convince them to help us, or failing that, kill them and take the jelly for ourselves.
+We do, but it will be tricky. Some of the guards are trained in the use of blasting jelly; we use it to clear rubble sometimes. I was not the only guard to be trapped on this level when the evacuation was sounded. Those guards that remain on this level are barricaded within the chamber we use to store the jelly and other provisions, to the southeast of here. We will need to convince them to help us, or failing that, kill them and take the jelly for ourselves.
 {
 -mineLvl3KilledGuards:
 +I have actually already taken care of the guards. 
@@ -337,6 +337,7 @@ Are you ready to set out?
     
     
     While you are out there, remember: you can come back to me if you are hurt. I will stand watch while you rest.
+        healParty()
         ->Close
 -else:
     //deactivate({marcosIndex})

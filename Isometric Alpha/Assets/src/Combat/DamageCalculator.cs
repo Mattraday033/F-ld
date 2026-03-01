@@ -258,28 +258,39 @@ public class Formula
     {
         int output = 0;
 
-        if(source == null)
-        {
-            return output;
-        }
-
         foreach(KeyValuePair<PrimaryStat, int> kvp in formulaDict)
         {
             switch(kvp.Key)
             {
                 case PrimaryStat.Strength:
+
+                    if(source == null) continue;
+
                     output += kvp.Value * source.getStrength();
                     break;
+
                 case PrimaryStat.Dexterity:
+
+                    if(source == null) continue;
+
                     output += kvp.Value * source.getDexterity();
                     break;
+
                 case PrimaryStat.Wisdom:
+                    if(source == null) continue;
+
                     output += kvp.Value * source.getWisdom();
                     break;
+
                 case PrimaryStat.Charisma:
+
+                    if(source == null) continue;
+
                     output += kvp.Value * source.getCharisma();
                     break;
+
                 case PrimaryStat.None:
+
                     output += kvp.Value;
                     break;
             }

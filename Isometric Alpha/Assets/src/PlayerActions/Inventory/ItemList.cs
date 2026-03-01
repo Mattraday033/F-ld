@@ -284,7 +284,7 @@ public static class ItemList
 		armor.Add(new Trinket(new ItemListID(armorListIndex, delversDreamIndex), delversDreamKey, "A gem, finely cut, with a deep blue hue. The longer you stare, the more certain you become that you do not hold the gem, but it holds you."));
 		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, cookingPotIndex), cookingPotKey, "A pot from the kitchens. Worn about the head, it could provide some meager protection."));
 		armor.Add(new Trinket(new ItemListID(armorListIndex, bronzeBadgeIndex), bronzeBadgeKey, "This bronze badge looks bruised and worn, as if it was just pulled from a fire."));
-		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, plumedHelmetIndex), plumedHelmetKey, "A battered helmet, with a ragged plume made of hair from an unknown beast.", "C + 2"));
+		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, plumedHelmetIndex), plumedHelmetKey, "A battered helmet, with a ragged plume made of hair from an unknown beast."));
 		armor.Add(new OffHandFist(new ItemListID(armorListIndex, offHandFistIndex), fistKey, "Good old fashioned meat bludgeons.", "S+D+W", "D+W"));
         armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, bronzeDirkIndex), bronzeDirkKey, "A curved bronze blade, held in the off hand.", "S + D + 3", "D+2", "CurvedDagger"));
 		armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, ancientClawIndex), ancientClawKey, "This battered gauntlet has sharp spikes protruding from its knuckles, which immitate an animal's claw. Its main use is to catch and hold an opponent, helping to line up a strike from your other hand or an ally.", "2S + 2D + 3", "D+2", "Claw"));

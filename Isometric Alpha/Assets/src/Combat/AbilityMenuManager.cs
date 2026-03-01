@@ -104,11 +104,6 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
         KeyPressManager.updateKeyBools();
 
-        if (KeyPressManager.handlingPrimaryKeyPress)
-        {
-            return;
-        }
-
         if (CombatStateManager.inCombat)
         {
             if (CombatStateManager.currentActivity == CurrentActivity.Retreating)
@@ -117,6 +112,11 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
             }
             else if (CombatStateManager.currentActivity == CurrentActivity.ChoosingAbility)
             {
+                if (KeyPressManager.handlingPrimaryKeyPress)
+                {
+                    return;
+                }
+
                 if (Input.anyKeyDown)
                 {
                     if (Input.GetKey(KeyBindingList.backOutKey2))

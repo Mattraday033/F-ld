@@ -1,9 +1,6 @@
-VAR strength = 0
-VAR dexterity = 0
-VAR wisdom = 0
-VAR charisma = 0
+VAR observationLevel = 0
 
-VAR wisDifficulty = 2
+VAR observationDifficulty = 2
 
 VAR description = "*The wall looks formidable, but you can feel a slight draft.*"
 
@@ -19,10 +16,10 @@ VAR playerName = ""
 
 {description}
 
-    +Search around for anything suspicious. <Wis {wisdom}/{wisDifficulty}>
+    +Search around for anything suspicious. <Observation {observationLevel}/{observationDifficulty}>
     
     {
-    -wisdom >= wisDifficulty:
+    -observationLevel >= observationDifficulty:
         ->1b
     -else:
         ->1c

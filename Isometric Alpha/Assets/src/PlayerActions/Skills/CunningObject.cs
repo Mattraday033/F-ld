@@ -176,10 +176,11 @@ public static class CunningObjectSpriteList
     {
         cunningObjectSprites = new Dictionary<KeyValuePair<Facing, CunningObjectSpriteCategory>, string>();
 
-        cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.NorthWest, CunningObjectSpriteCategory.Crank), PrefabNames.crankSE);
-        cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.SouthWest, CunningObjectSpriteCategory.Crank), PrefabNames.crankSE);
+        cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.Random, CunningObjectSpriteCategory.Crank), PrefabNames.crankSW);
+        cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.NorthWest, CunningObjectSpriteCategory.Crank), PrefabNames.crankSW);
+        cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.SouthWest, CunningObjectSpriteCategory.Crank), PrefabNames.crankSW);
 
-        cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.NorthEast, CunningObjectSpriteCategory.Crank), PrefabNames.crankSW);
-        cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.SouthEast, CunningObjectSpriteCategory.Crank), PrefabNames.crankSW);
+        cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.NorthEast, CunningObjectSpriteCategory.Crank), PrefabNames.crankSE);
+        cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.SouthEast, CunningObjectSpriteCategory.Crank), PrefabNames.crankSE);
     }
 }

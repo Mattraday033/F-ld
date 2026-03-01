@@ -409,7 +409,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     public void playDeathAnimationThenHide()
     {
         playAnimation(createClipTransitionToDeathThenHide());
-        removeAnimation();
+        // removeAnimation();
     }
 
     public void playAttackAnimation()
@@ -671,8 +671,9 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         {
             removeAnimation();
             Debug.Log("No such animation for type: " + clipTransition.Clip.name);
-        } else
+        } else if(!CombatStateManager.inCombat)
         {
+            CombatAnimationManager.trackAnimation(key, this);
             // Debug.Log("Play Animation: " + clipTransition.Clip.name);
         }
     }

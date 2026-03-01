@@ -56,9 +56,7 @@ public class AbilityGridSideTab : MonoBehaviour
             return;
         }
 
-        currentTabDict[getCurrentDictKey()] = listToChoose;
-        
-        OnSideTabChosen.Invoke();
+        setCurrentTabDict(getCurrentDictKey(), listToChoose);
 
         closedButton.interactable = false;
 
@@ -92,6 +90,11 @@ public class AbilityGridSideTab : MonoBehaviour
         {
             setToClosed();
         }
+
+        if(currentTabDict[getCurrentDictKey()] == listToChoose)
+        {
+            closedButton.interactable = false;
+        }
     }
 
     public static void chooseTab(DescribableList list)
@@ -104,6 +107,13 @@ public class AbilityGridSideTab : MonoBehaviour
     private static void initializeAbilityGridSideTab()
     {
         currentTabDict = new Dictionary<ITabParent,DescribableList>();
+    }
+
+    public static void setCurrentTabDict(ITabParent tabParent, DescribableList newList)
+    {
+        currentTabDict[tabParent] = newList;
+
+        OnSideTabChosen.Invoke();
     }
 
     public static ITabParent getCurrentDictKey()

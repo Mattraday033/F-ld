@@ -45,14 +45,20 @@ public class SecretDoorInfo : IStoryVariableSource
 
     public Story addVariables(Story story)
     {
+
         if (story.variablesState[InkVariableNameList.secretDoorKey] != null)
         {
             story.variablesState[InkVariableNameList.secretDoorKey] = secretDoorKeys[0];
         }
 
-        if (story.variablesState[InkVariableNameList.wisDiffVarName] != null)
+        if (story.variablesState[InkVariableNameList.obsLvlVarName] != null)
         {
-            story.variablesState[InkVariableNameList.wisDiffVarName] = difficulty;
+            story.variablesState[InkVariableNameList.obsLvlVarName] = PartyStats.getObservationLevel();
+        }
+
+        if (story.variablesState[InkVariableNameList.obsDiffVarName] != null)
+        {
+            story.variablesState[InkVariableNameList.obsDiffVarName] = difficulty;
         }
 
         if (description != null && 

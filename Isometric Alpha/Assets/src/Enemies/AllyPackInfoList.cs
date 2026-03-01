@@ -51,7 +51,14 @@ public static class AllyPackInfoList
             return defaultAllyPackInfoByZone();
         }
 
-        return allyPackInfoDict[areaName][index];
+        List<AllyPackInfo> allyPacksInArea = allyPackInfoDict[areaName];
+
+        if(index >= allyPacksInArea.Count)
+        {
+            return defaultAllyPackInfoByZone();
+        }
+
+        return allyPacksInArea[index];
     }
 
     [RuntimeInitializeOnLoadMethod]
@@ -71,6 +78,8 @@ public static class AllyPackInfoList
         #region MineLvl_3-7
         list = new List<AllyPackInfo>();
 
+        list.Add(mineLevel3Guards);
+        list.Add(mineLevel3Guards);
         list.Add(mineLevel3Guards);
 
         allyPackInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section7, list);

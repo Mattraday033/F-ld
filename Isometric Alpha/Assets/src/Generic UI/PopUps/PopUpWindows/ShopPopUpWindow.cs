@@ -92,24 +92,25 @@ public class ShopPopUpWindow : PopUpWindow, ITabParent
     {
         currentShopMode = newMode;
 
+        int currentListCount = Tab.getList(currentDescribableList).Count();
+
+        if(currentListCount <= 0)
+        {
+            currentDescribableList = getDefaultDescribableList();
+            AbilityGridSideTab.setCurrentTabDict(this, currentDescribableList);
+        }
+
         ScreenManager.OnScreenInteriorUpdate.Invoke();
     }
-
     private void updateSellAllJunkButtonInteractability()
     {
         if (State.junkPocket.Count > 0)
         {
             sellAllJunkButton.interactable = true;
-            sellAllJunkIconImageBackground.color = Color.black;
-            sellAllJunkIconImage.color = Color.white;
-            sellAllJunkText.color = ColorList.grey35;
         }
         else
         {
             sellAllJunkButton.interactable = false;
-            sellAllJunkIconImageBackground.color = ColorList.grey100;
-            sellAllJunkIconImage.color = ColorList.grey155;
-            sellAllJunkText.color = ColorList.grey155;
         }
     }
 
@@ -245,7 +246,10 @@ public static class ShopItemQuestChecker
         switch (item.getKey())
         {
             case "Candy":
-                QuestList.activateQuestStep(QuestNameList.muzsasSweetToothQuestTitle, QuestNameList.muzsasSweetToothStepTitleFour);
+                if(Flags.getFlag(FlagNameList.givenTaskByMuzsa))
+                {
+                    QuestList.activateQuestStep(QuestNameList.muzsasSweetToothQuestTitle, QuestNameList.muzsasSweetToothStepTitleFour);
+                }
                 break;
             case "Lost Iron Nugget":
                 QuestList.finishQuest("Stockhouse Stash", QuestNameList.stockhouseStashStepTitleTwelve, questSuccessful);

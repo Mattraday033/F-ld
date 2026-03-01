@@ -437,18 +437,62 @@ public static class EnemyPackInfoList
 
     #region Worms
 
-    private readonly static EnemyPackInfo oneArmoredWormFourWorms = new BossPackInfo(new CreatureAmount[] {
+    private readonly static EnemyPackInfo oneArmoredWormFourWorms = new EnemyPackInfo(new CreatureAmount[] {
+                                                                                                    EnemyAmountList.oneArmoredWorm,
+                                                                                                    EnemyAmountList.threeWorms
+                                                                                                    },
+                                                                                                    DropTableList.slaveMineDT1Name);
+
+    private readonly static EnemyPackInfo twoWormsTwoToxicWorms = new EnemyPackInfo(new CreatureAmount[] {
                                                                                                     EnemyAmountList.twoToxicWorms,
-                                                                                                    EnemyAmountList.twoMartyrWorms,
-                                                                                                    EnemyAmountList.oneDireWorm 
-                                                                                                    // EnemyAmountList.oneArmoredWorm,
-                                                                                                    // EnemyAmountList.twoHiveHeralds
+                                                                                                    EnemyAmountList.twoWorms
+                                                                                                    },
+                                                                                                    DropTableList.slaveMineDT1Name);
+
+    private readonly static EnemyPackInfo oneWormTwoHiveHeraldsTwoBroodlings = new EnemyPackInfo(new CreatureAmount[] {
+                                                                                                    EnemyAmountList.twoHiveHeralds,
+                                                                                                    EnemyAmountList.oneWorm,
+                                                                                                    EnemyAmountList.twoBroodlings
+                                                                                                    },
+                                                                                                    DropTableList.slaveMineDT1Name);
+
+    private readonly static EnemyPackInfo oneDireWormTwoHiveHeraldsThreeWorms = new EnemyPackInfo(new CreatureAmount[] {
+                                                                                                    EnemyAmountList.oneDireWorm,
+                                                                                                    EnemyAmountList.twoHiveHeralds,
+                                                                                                    EnemyAmountList.threeWorms
                                                                                                     },
                                                                                                     DropTableList.slaveMineDT1Name,
                                                                                                     spawnDetailsList: new List<SpawnDetails>()
                                                                                                     {
                                                                                                         SpawnDetails.middle2x2
                                                                                                     });
+
+    private readonly static EnemyPackInfo twoMartyWormsOneToxicWormOneHiveHeraldOneArmoredWorm = new EnemyPackInfo(new CreatureAmount[] {
+                                                                                                    EnemyAmountList.twoMartyrWorms,
+                                                                                                    EnemyAmountList.oneHiveHerald,
+                                                                                                    EnemyAmountList.oneToxicWorm,
+                                                                                                    EnemyAmountList.oneArmoredWorm
+                                                                                                    },
+                                                                                                    DropTableList.slaveMineDT1Name);
+
+    private readonly static EnemyPackInfo oneDireWormTwoToxicWormsTwoMartyrWormsOneHiveHerald = new EnemyPackInfo(new CreatureAmount[] {
+                                                                                                    EnemyAmountList.oneDireWorm,
+                                                                                                    EnemyAmountList.twoToxicWorms,
+                                                                                                    EnemyAmountList.twoMartyrWorms,
+                                                                                                    EnemyAmountList.oneHiveHerald
+                                                                                                    },
+                                                                                                    DropTableList.slaveMineDT1Name,
+                                                                                                    spawnDetailsList: new List<SpawnDetails>()
+                                                                                                    {
+                                                                                                        SpawnDetails.middle2x2
+                                                                                                    });
+
+    private readonly static EnemyPackInfo twoArmoredWormsFourHiveHeralds = new EnemyPackInfo(new CreatureAmount[] {
+                                                                                                    EnemyAmountList.oneHiveHerald,
+                                                                                                    EnemyAmountList.twoArmoredWorms,
+                                                                                                    EnemyAmountList.threeHiveHeralds
+                                                                                                    },
+                                                                                                    DropTableList.slaveMineDT1Name);
 
     #endregion
 
@@ -653,10 +697,81 @@ public static class EnemyPackInfoList
         enemyPackInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section1a, list);
         #endregion
 
+        #region MineLvl_3-1b
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoArmoredWormsFourHiveHeralds);
+
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section1b, list);
+        #endregion
+
+        #region MineLvl_3-2a
+        list = new List<EnemyPackInfo>();
+
+        list.Add(oneWormTwoHiveHeraldsTwoBroodlings);
+
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section2a, list);
+        #endregion
+
+        #region MineLvl_3-2b
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoMartyWormsOneToxicWormOneHiveHeraldOneArmoredWorm);
+        list.Add(twoMartyWormsOneToxicWormOneHiveHeraldOneArmoredWorm);
+
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section2b, list);
+        #endregion
+
+        #region MineLvl_3-3a
+        list = new List<EnemyPackInfo>();
+
+        list.Add(oneDireWormTwoToxicWormsTwoMartyrWormsOneHiveHerald);
+
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section3a, list);
+        #endregion
+
+        #region MineLvl_3-4a
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoWormsTwoToxicWorms);
+
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section4a, list);
+        #endregion
+
+        #region MineLvl_3-4b
+        list = new List<EnemyPackInfo>();
+
+        list.Add(oneDireWormTwoHiveHeraldsThreeWorms);
+
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section4b, list);
+        #endregion
+
+        #region MineLvl_3-5 
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoWormsTwoToxicWorms);
+        list.Add(twoWormsTwoToxicWorms);
+
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section5, list);
+        #endregion
+
+        #region MineLvl_3-6a
+        list = new List<EnemyPackInfo>();
+
+        list.Add(oneArmoredWormFourWorms);
+        list.Add(oneDireWormTwoHiveHeraldsThreeWorms);
+        list.Add(twoMartyWormsOneToxicWormOneHiveHeraldOneArmoredWorm);
+
+        enemyPackInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section6a, list);
+        #endregion
+
         #region MineLvl_3-7
         list = new List<EnemyPackInfo>();
 
         list.Add(wormBoss);
+        
+        list.Add(twoMartyWormsOneToxicWormOneHiveHeraldOneArmoredWorm);
+        list.Add(oneDireWormTwoToxicWormsTwoMartyrWormsOneHiveHerald);
 
         enemyPackInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section7, list);
         #endregion

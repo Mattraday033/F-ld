@@ -309,7 +309,7 @@ public static class PartyStats
 
     public static int getMaxIntimidateCount()
     {
-        int playerStrength = PartyManager.getPlayerStats().getStrength();
+        int playerStrength = getHighestStrength();
 
         if (playerStrength >= SkillManager.skillUnlockLevel)
         {
@@ -323,7 +323,7 @@ public static class PartyStats
 
     public static int getMaxCunningCount()
     {
-        int playerDexterity = PartyManager.getPlayerStats().getDexterity();
+        int playerDexterity = getHighestDexterity();
         int baseDexCharges;
 
         if (playerDexterity >= SkillManager.skillExtraordinaryLevel)
@@ -357,7 +357,7 @@ public static class PartyStats
 
     public static int getObservationLevel()
     {
-        int playerWisdom = PartyManager.getPlayerStats().getWisdom();
+        int playerWisdom = getHighestWisdom();
 
         if (playerWisdom < 2)
         {
@@ -371,7 +371,7 @@ public static class PartyStats
 
     public static int getMaxPlacablePartyMembers()
     {
-        int playerCharisma = PartyManager.getPlayerStats().getCharisma();
+        int playerCharisma = getHighestCharisma();
         int skillLevelFromCharisma;
 
         if (playerCharisma >= SkillManager.skillExtraordinaryLevel)

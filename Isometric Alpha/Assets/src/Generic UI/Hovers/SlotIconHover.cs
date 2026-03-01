@@ -307,6 +307,9 @@ public static class HoverMessageList
     private const string worthIconMessage = "An Item's worth in Gold Pieces. A shopkeeper may buy items for more than their worth based on their current Discount.";
     private const string goldIconMessage = "Your Party's total Gold Pieces";
 
+    private const string goldRewardKey = "Reward";
+    private const string goldRewardMessage = "The amount of Gold your Party earned in Combat.";
+
     private const string invulnerableIconMessage = "Invulnerability provides a flat reduction to incoming damage per hit. Can only reduce incoming damage down to 1. Applied before the damage reduction from Armor Score.";
     private const string vulnerableIconMessage = "Extra damage that is applied when damage is taken. Applied before the damage reduction from Armor Score.";
 
@@ -321,6 +324,8 @@ public static class HoverMessageList
     private const string levelMessage = "Leveling up a character costs 1000 Experience. Gaining a level will increase Maximum Health, return all missing health, and boost one Primary Stat. The highest level a character can reach is 20.";
     private const string healthMessage = "A Party Member reduced to 0 health is knocked unconscious, and needs special abilities or items to be awakened in combat. Normal healing items can awaken a Party Member out of combat. If your character loses all of their health, however, they will die and you will lose the game.";
     private const string experienceMessage = "Your progress towards your next level up. Gain Experience from completing quests and defeating some boss monsters. For every 1000 Experience you gain, you can level up.";
+    private const string experienceRewardKey = "Combat Experience";
+    private const string experienceRewardMessage = "The amount of Experience each Party Member gained from this Combat, whether they participated in it or not. You will only earn Combat Experience if a fight is particularly challenging, or if it was related to a Quest.";
 
 
     private const string bonusHealthMessage = "Bonus Health. Extra Health added to your Total Health. Determined by your Strength.";
@@ -501,6 +506,10 @@ public static class HoverMessageList
                 {
                     return worthIconMessage;
                 }
+            case goldRewardKey:
+                return goldRewardMessage;
+            case experienceRewardKey:
+                return experienceRewardMessage;
 
             case weaponSlotKey:
                 return weaponSlotMessage;

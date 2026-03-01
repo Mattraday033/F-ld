@@ -6,11 +6,11 @@ public class EnteredMineLvl3 : QuestStepActivationScript
 {
     public override void runScript()
     {
-        if (!Flags.getFlag(FlagNameList.enteredMineLvl3))
+        if (Flags.getFlag(FlagNameList.toldToFindNandor) &&
+             !Flags.getFlag(FlagNameList.enteredMineLvl3))
         {
-            QuestList.activateQuestStep(QuestNameList.exploreTheMineQuestTitle, QuestNameList.exploreTheMineStepTitleFive);
+            QuestList.finishQuest(QuestNameList.exploreTheMineQuestTitle, QuestNameList.exploreTheMineStepTitleFive, true);
             Flags.setFlag(FlagNameList.enteredMineLvl3, true);
         }
     }
-
 }

@@ -248,7 +248,6 @@ public class SelectorManager : MonoBehaviour
 
 	public static void handleChoosingLocation()
 	{
-
 		if (instance == null || isMoving)
 		{
 			return;

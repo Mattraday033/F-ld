@@ -4,23 +4,15 @@ using UnityEngine;
 
 public class ShieldTrait : Trait
 {
-    private double percentageDamageReduction = 0.0;
 
-    public ShieldTrait(string traitName, TraitType traitType, string traitDescription, string iconName, double percentageDamageReduction):
+    public ShieldTrait(string traitName, TraitType traitType, string traitDescription, string iconName):
     base(traitName, traitType, traitDescription, iconName)
     {
-        this.percentageDamageReduction = percentageDamageReduction;
     }
 
-    public ShieldTrait(string traitName, TraitType traitType, string traitDescription, string iconName, int roundsLeft, double percentageDamageReduction):
-    base(traitName, traitType, traitDescription, iconName, roundsLeft: roundsLeft)
+    public ShieldTrait(string traitName, TraitType traitType, string traitDescription, string iconName, int roundsLeft, bool permanent):
+    base(traitName, traitType, traitDescription, iconName, roundsLeft: roundsLeft, permanent: permanent)
     {
-        this.percentageDamageReduction = percentageDamageReduction;
-    }
-
-    public override double getPercentageDamageReduction()
-    {
-        return percentageDamageReduction;
     }
 
     public override void setIdleAnimationOnApplication(AnimationManager animationManager)
@@ -38,8 +30,8 @@ public class ShieldTrait : Trait
 public class HiddenShieldTrait : ShieldTrait
 {
 
-    public HiddenShieldTrait(string traitName, TraitType traitType, string traitDescription, string iconName, double percentageDamageReduction) :
-    base(traitName, traitType, traitDescription, iconName, percentageDamageReduction)
+    public HiddenShieldTrait(string traitName, TraitType traitType, string traitDescription, string iconName) :
+    base(traitName, traitType, traitDescription, iconName)
     {
     }
 

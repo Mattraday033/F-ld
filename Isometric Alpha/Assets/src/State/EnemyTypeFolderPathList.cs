@@ -208,7 +208,13 @@ public static class EnemyTypeFolderPathList
         switch(enemyType)
         {
             case MonsterNameList.direWorm:
-                return PrefabNames.shadow512x512;
+                if(CombatStateManager.inCombat)
+                {
+                    return PrefabNames.shadow512x512;
+                } else
+                {
+                    return PrefabNames.shadow256x256;
+                }
             default:
                 return PrefabNames.shadow256x256;
         }

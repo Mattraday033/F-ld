@@ -75,6 +75,7 @@ public class TraitContainer : StatBoostSourceCombiner, ICloneable
         foreach(Trait trait in traitsToRemove)
         {
             traits.Remove(trait);
+            trait.setIdleAnimationOnRemoval(owner.animationManager);
         }
     }
 
@@ -85,6 +86,7 @@ public class TraitContainer : StatBoostSourceCombiner, ICloneable
         foreach(Trait trait in traitsToRemove)
         {
             traits.Remove(trait);
+            trait.setIdleAnimationOnRemoval(owner.animationManager);
         }
     }
 

@@ -736,7 +736,7 @@ public static class OOCSpawnDetailsList
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 13)));
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 14)));
 
-        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexOne, new Vector3Int(8, 11), Facing.SouthWest, Facing.NorthWest, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexThree));
+        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexOne, new Vector3Int(8, 11), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexThree));
 
         blockerSpawnDetails = new List<ObstacleSpawnDetails>();
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(12, 8)));
@@ -749,7 +749,7 @@ public static class OOCSpawnDetailsList
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 6)));
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 5)));
 
-        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexTwo, new Vector3Int(11, 8), Facing.NorthEast, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexZero));
+        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexTwo, new Vector3Int(11, 8), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexZero));
         
         blockerSpawnDetails = new List<ObstacleSpawnDetails>();
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 12)));
@@ -762,7 +762,7 @@ public static class OOCSpawnDetailsList
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(13, 11)));
         blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(14, 11)));
 
-        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexThree, new Vector3Int(11, 11), Facing.NorthEast, Facing.NorthWest, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexOne));
+        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexThree, new Vector3Int(11, 11), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexOne));
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(8, 10), Facing.SouthWest));
         list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(8, 9), Facing.SouthWest));
@@ -958,7 +958,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCSpawnDetails(NPCNameList.barricade, new Vector3Int(5, 11), ZoneKeyList.mineLvl3 + LocationNameList.section3b));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.barricade, new Vector3Int(5, 11), ZoneKeyList.mineLvl3 + LocationNameList.section3b, facing: Facing.NorthWest));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardPazman, new Vector3Int(3, 10), ZoneKeyList.mineLvl3 + LocationNameList.section3b, facing: Facing.NorthEast));
 
@@ -966,7 +966,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardReka, new Vector3Int(2, 7), ZoneKeyList.mineLvl3 + LocationNameList.section3b, facing: Facing.NorthEast));
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardVirag, new Vector3Int(4, 5), ZoneKeyList.mineLvl3 + LocationNameList.section3b, facing: Facing.NorthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardVirag, new Vector3Int(4, 5), ZoneKeyList.mineLvl3 + LocationNameList.section3b, facing: Facing.NorthWest));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.overseerGaspar, new Vector3Int(6, 7), ZoneKeyList.mineLvl3 + LocationNameList.section3b, facing: Facing.SouthWest));
 
@@ -981,8 +981,8 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(2, 4), VaultableObject.diffThreeVaultableGap, sortingLayerInfo: SortingLayerManager.buttonSortingLayerInfo, spriteName: PrefabNames.lavaVaultableGapHalf));
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(2, 2), VaultableObject.diffThreeVaultableGap, sortingLayerInfo: SortingLayerManager.groundSortingLayerInfo, spriteName: PrefabNames.lavaVaultableGapHalf));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(2, 4), VaultableObject.diffThreeVaultableGap, sortingLayerInfo: SortingLayerManager.groundSortingLayerInfo, spriteName: PrefabNames.stoneVaultableGap, offset: Constants.onTableHeightOffset*10));
+        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(2, 2), VaultableObject.diffThreeVaultableGap, sortingLayerInfo: SortingLayerManager.groundSortingLayerInfo, spriteName: PrefabNames.stoneVaultableGap, offset: Constants.onTableHeightOffset*10));
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(8, 9), Facing.SouthWest));  
 

@@ -312,6 +312,11 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
 
     public void unhighlight(IDescribable describable)
     {
+        if(outlineImage == null)
+        {
+            return;
+        }
+
         outlineImage.color = ColorList.darkUICyan;
     }
 
@@ -329,9 +334,27 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        if (((hoverText != null && hoverText.Length > 0) || isFilled()) && PlayerOOCStateManager.currentActivity == OOCActivity.inUI && !InspectNode.inspecting)
+        if (((hoverText != null && hoverText.Length > 0) || isFilled()) && 
+            (PlayerOOCStateManager.currentActivity == OOCActivity.inUI || 
+            PlayerOOCStateManager.currentActivity == OOCActivity.inShopUI) &&
+             !InspectNode.inspecting)
         {
             MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldSpawnHoverIcon));
         }
+    }
+
+    public override void OnPointerExit(PointerEventData eventData)
+    {
+        MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldDestroyHoverIcon));
+    }
+
+    public void OnMouseEnter()
+    {
+        OnPointerEnter(null);
+    }
+
+    public void OnMouseExit()
+    {
+        OnPointerExit(null);
     }
 }

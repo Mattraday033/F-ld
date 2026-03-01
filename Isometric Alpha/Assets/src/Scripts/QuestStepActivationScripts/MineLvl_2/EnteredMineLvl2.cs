@@ -6,7 +6,10 @@ public class EnteredMineLvl2 : QuestStepActivationScript
 {
     public override void runScript()
     {
-        if (!Flags.getFlag(FlagNameList.enteredMineLvl2))
+        if (Flags.getFlag(FlagNameList.toldToFindNandor) &&
+             !Flags.getFlag(FlagNameList.enteredMineLvl2) && 
+             !Flags.getFlag(FlagNameList.enteredMineLvl2_2a) &&
+             !Flags.getFlag(FlagNameList.enteredMineLvl3))
         {
             QuestList.activateQuestStep(QuestNameList.exploreTheMineQuestTitle, QuestNameList.exploreTheMineStepTitleTwo);
             Flags.setFlag(FlagNameList.enteredMineLvl2, true);

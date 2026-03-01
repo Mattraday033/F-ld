@@ -30,7 +30,7 @@ public class RepositionAbility : Ability, IJSONConvertable
         CombatAnimationManager.getInstance().StartCoroutine(waitForAttackAnimationToStop(getActorStats().animationManager, combatantToBeMoved));
     }
 
-    private IEnumerator waitForAttackAnimationToStop(AnimationManager animationManager, Stats combatantToBeMoved)
+    public virtual IEnumerator waitForAttackAnimationToStop(AnimationManager animationManager, Stats combatantToBeMoved)
     {
 
         while(CombatAnimationManager.trackerBeingTracked(animationManager))

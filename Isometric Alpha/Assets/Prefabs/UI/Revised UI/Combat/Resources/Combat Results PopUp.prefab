@@ -1115,7 +1115,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 260, y: -40}
-  m_SizeDelta: {x: 520, y: 60}
+  m_SizeDelta: {x: 520, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1905192003435884871
 MonoBehaviour:
@@ -1507,7 +1507,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 2, y: -50}
-  m_SizeDelta: {x: 508, y: 5}
+  m_SizeDelta: {x: 508, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &368770422989570101
 MonoBehaviour:
@@ -2218,7 +2218,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 2, y: -25}
-  m_SizeDelta: {x: 508, y: 5}
+  m_SizeDelta: {x: 508, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &6343360418638934816
 MonoBehaviour:
@@ -2832,6 +2832,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2252950377472326055, guid: 954a5d66f34d2364c91e9c0179e6ed73,
+        type: 3}
+      propertyPath: hoverMessageKey
+      value: Reward
+      objectReference: {fileID: 0}
     - target: {fileID: 3079557916129460880, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -3307,6 +3312,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252950377472326055, guid: 954a5d66f34d2364c91e9c0179e6ed73,
+        type: 3}
+      propertyPath: hoverMessageKey
+      value: Combat Experience
       objectReference: {fileID: 0}
     - target: {fileID: 3079557916129460880, guid: 954a5d66f34d2364c91e9c0179e6ed73,
         type: 3}

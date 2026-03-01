@@ -27,9 +27,9 @@ public abstract class StatBoostSource : INameSource
             case ItemList.leatherBootsKey:
             case ItemList.salvagedGuardGlovesKey:
             case ItemList.salvagedGuardBootsKey:
-            case ItemList.paddedArmorKey:
             case ItemList.cookingPotKey:
                 return "2";
+            case ItemList.paddedArmorKey:
             case ItemList.salvagedGuardHelmKey:
             case ItemList.bronzeCavalryHelmetKey:
             case ItemList.leatherArmorKey:
@@ -43,7 +43,7 @@ public abstract class StatBoostSource : INameSource
             // case "":
             //     return "6";
             case ItemList.plumedHelmetKey:
-                return "C";
+                return "C + 2";
             case ItemList.wardensShieldKey:
                 return "2S+4";
             case ItemList.martialArtistsBeltKey:
@@ -105,6 +105,7 @@ public abstract class StatBoostSource : INameSource
             case StatSourceNameList.bloodlustKey:
                 return "1";
             case ItemList.martialArtistsBeltKey:
+            case ItemList.plumedHelmetKey:
                 return "2";
             case StatSourceNameList.predationKey:
             case ItemList.luckyTalismanKey:
@@ -519,16 +520,6 @@ public abstract class StatBoostSource : INameSource
 
         #region Generic Stats
 
-        if (!boostSource.getArmorFormula().Equals(Constants.zeroRating))
-        {
-            blocks.Add(DescriptionPanelBuildingBlock.getArmorBlock((DamageCalculator.calculateFormula(boostSource.getArmorFormula(), statsSource)).ToString() + "%", boostSource.getArmorFormula()));
-        }
-
-        if (!boostSource.getArmorShredFormula().Equals(Constants.zeroRating))
-        {
-            blocks.Add(DescriptionPanelBuildingBlock.getArmorShredBlock(DamageCalculator.calculateFormula(boostSource.getArmorShredFormula(), statsSource).ToString() + "%", boostSource.getArmorShredFormula()));
-        }
-
         if (!boostSource.getDamageFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getDamageBlock(DamageCalculator.calculateFormula(boostSource.getDamageFormula(), statsSource).ToString(), boostSource.getDamageFormula()));
@@ -543,10 +534,20 @@ public abstract class StatBoostSource : INameSource
         {
             blocks.Add(DescriptionPanelBuildingBlock.getCritBlock(DamageCalculator.calculateFormula(boostSource.getCritFormula(), statsSource).ToString(), boostSource.getCritFormula()));
         }
+        
+        if (!boostSource.getArmorFormula().Equals(Constants.zeroRating))
+        {
+            blocks.Add(DescriptionPanelBuildingBlock.getArmorBlock((DamageCalculator.calculateFormula(boostSource.getArmorFormula(), statsSource)).ToString() + "%", boostSource.getArmorFormula()));
+        }
 
         if (!boostSource.getInvulnerableFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getInvulnerableBlock(DamageCalculator.calculateFormula(boostSource.getInvulnerableFormula(), statsSource).ToString(), boostSource.getInvulnerableFormula()));
+        }
+
+        if (!boostSource.getArmorShredFormula().Equals(Constants.zeroRating))
+        {
+            blocks.Add(DescriptionPanelBuildingBlock.getArmorShredBlock(DamageCalculator.calculateFormula(boostSource.getArmorShredFormula(), statsSource).ToString() + "%", boostSource.getArmorShredFormula()));
         }
 
         if (!boostSource.getVulnerableFormula().Equals(Constants.zeroRating))

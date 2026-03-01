@@ -12,10 +12,14 @@ public static class InkVariableNameList
     public const string wisdomVarName = "wisdom";
     public const string charismaVarName = "charisma";
 
+    public const string obsLvlVarName = "observationLevel";
+
     public const string strDiffVarName = "strDifficulty";
     public const string dexDiffVarName = "dexDifficulty";
     public const string wisDiffVarName = "wisDifficulty";
     public const string chaDiffVarName = "chaDifficulty";
+
+    public const string obsDiffVarName = "observationDifficulty";
 
     public const string secretDoorKey = "secretDoorKey";
 

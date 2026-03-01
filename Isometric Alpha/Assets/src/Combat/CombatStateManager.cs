@@ -327,6 +327,11 @@ public class CombatStateManager : MonoBehaviour
 		{
 			getInstance().ticker.tickDownEverything();
 			SelectorManager.displayCurrentHoverUI();
+
+            if(whoseTurn == WhoseTurn.Won)
+            {
+                return;
+            }
 		}
 
 		whoseTurn = wT;

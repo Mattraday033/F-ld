@@ -7,6 +7,8 @@ public class InterruptAbility : Ability
     public TraitType traitTypeToPurge;
     private static bool critChanceSnapShot;
 
+    private bool shouldApplyTrait = false;
+
     public InterruptAbility(CombatActionSettings settings):
         base(settings)
     {
@@ -22,6 +24,7 @@ public class InterruptAbility : Ability
     public override void applySettings(CombatActionSettings settings)
     {
         settings.targetParams.rangeIndex = Range.singleTargetIndex;
+
         settings.appliedTrait = TraitList.countered;
 
         base.applySettings(settings);
@@ -31,7 +34,9 @@ public class InterruptAbility : Ability
     {
         takeCritSnapShot();
 
-        if (traitTypeToPurge != null)
+        shouldApplyTrait = targetHasChargeTrait();
+
+        if (!inPreviewMode && traitTypeToPurge != null)
         {
             foreach(Stats target in targets)
             {
@@ -61,6 +66,7 @@ public class InterruptAbility : Ability
     private void resetSnapShot()
     {
         critChanceSnapShot = false;
+        shouldApplyTrait = false;
     }
 
     public override string getCritFormula()
@@ -86,9 +92,7 @@ public class InterruptAbility : Ability
     }
     public override Trait getAppliedTrait()
     {
-        Stats target = CombatGrid.getCombatantAtCoords(getTargetCoords());
-
-        if (target != null && target.hasTraitOfType(TraitType.Charge))
+        if (shouldApplyTrait)
         {
             return base.getAppliedTrait();
         }
@@ -96,5 +100,12 @@ public class InterruptAbility : Ability
         {
             return null;
         }
+    }
+
+    private bool targetHasChargeTrait()
+    {
+        Stats target = CombatGrid.getCombatantAtCoords(getTargetCoords());
+
+        return target != null && target.hasTraitOfType(TraitType.Charge);
     }
 }

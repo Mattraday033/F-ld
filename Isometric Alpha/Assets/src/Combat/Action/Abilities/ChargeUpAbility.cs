@@ -126,7 +126,7 @@ public class ChargeUpAbility : Ability
             return EffectAnimationType.Positive.ToString();
         }
 
-        return base.getEffectAnimationType();
+        return actionWhenCharged.getEffectAnimationType();
     }
 
     public override string getIconName()

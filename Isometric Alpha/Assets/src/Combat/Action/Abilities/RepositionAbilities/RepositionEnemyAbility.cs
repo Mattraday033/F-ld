@@ -20,7 +20,17 @@ public class RepositionEnemyAbility : RepositionAbility
 		
 		return CombatGrid.getPositionAt(tertiaryCoords); 
 	}
-	
+
+    public override IEnumerator waitForAttackAnimationToStop(AnimationManager animationManager, Stats combatantToBeMoved)
+    {
+        yield return base.waitForAttackAnimationToStop(animationManager, combatantToBeMoved);
+
+        if(combatantToBeMoved != null)
+        {
+            combatantToBeMoved.playAnimationOnDamage();
+        }
+    }
+
     public override void unqueueingAction()
     {
         if (getStatsClone() != null && !getCombatantToBeMoved().position.Equals(getStatsClone().position))

@@ -211,12 +211,7 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
     {
         return false;
     }
-
-    public virtual double getPercentageDamageReduction()
-    {
-        return 0.0;
-    }
-
+    
     public virtual bool isPacifist()
     {
         return pacifistic;
@@ -319,6 +314,7 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         if (getTickDownDamage() > 0)
         {
             traitHolder.modifyCurrentHealth(getTickDownDamage());
+            traitHolder.playAnimationOnDamage();
 
             if (CombatStateManager.whoseTurn == WhoseTurn.Resolving)
             {

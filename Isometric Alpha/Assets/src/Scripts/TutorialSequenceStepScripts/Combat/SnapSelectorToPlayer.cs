@@ -8,7 +8,10 @@ public class SnapSelectorToPlayer : TutorialSequenceStepScript
     public override void runScript(GameObject target)
     {
         SelectorManager.currentSelector.setToLocation(PartyManager.getPlayerStats().position);
-        
+
         SpawnHoverPanel.runInstanceOfScript();
+
+        KeyPressManager.handlingPrimaryKeyPress = true;
+        KeyPressManager.handlingSecondaryKeyPress = true;
     }
 }

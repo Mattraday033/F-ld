@@ -283,7 +283,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #region Giant Bat
         enemyStatsDict.Add(MonsterNameList.giantBat, new EnemyStats(MonsterNameList.giantBat,
                                                                                       Constants.fiveArmor,
-                                                                                            25,
+                                                                                            20,
                                                AbilityList.getAbility(null, AbilityList.batClawName),
                                                                 new Trait[] { TraitList.master,
                                                                              TraitList.chaotic
@@ -302,7 +302,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #region Screecher
         enemyStatsDict.Add(MonsterNameList.screecher, new EnemyStats(MonsterNameList.screecher,
                                                                                       Constants.tenArmor,
-                                                                                            45,
+                                                                                            30,
   new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.screechKey) as Ability),
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.chaotic
@@ -311,7 +311,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #region Armored Bat
         enemyStatsDict.Add(MonsterNameList.armoredBat, new EnemyStats(MonsterNameList.armoredBat,
                                                                                       Constants.fifteenArmor,
-                                                                                            45,
+                                                                                            32,
   new ChargeUpAbility(TraitList.shielded, AbilityList.getAbility(null, AbilityList.flurryKey) as Ability),
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.territorial
@@ -319,7 +319,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                                 
         enemyStatsDict.Add(MonsterNameList.armoredBatShielded, new EnemyStats(MonsterNameList.armoredBat,
                                                                                       Constants.fifteenArmor,
-                                                                                            45,
+                                                                                            32,
   new ChargeUpAbility(TraitList.shielded, AbilityList.getAbility(null, AbilityList.flurryKey) as Ability),
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.territorial,
@@ -329,7 +329,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #region Den Mother
         enemyStatsDict.Add(MonsterNameList.denMother, new EnemyStats(MonsterNameList.denMother,
                                                                                       Constants.tenArmor,
-                                                                                            35,
+                                                                                            26,
                                             AbilityList.getAbility(null, AbilityList.spawnPupsKey),
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.empty
@@ -337,8 +337,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #endregion
         #region Cave Matron
         enemyStatsDict.Add(MonsterNameList.caveMatron, new EnemyStats(MonsterNameList.caveMatron,
-                                                                                      Constants.tenArmor,
-                                                                                            155,
+                                                                                      Constants.zeroArmor,
+                                                                                            130,
     new LastManStandingAbility(TraitList.extraShielded, AbilityList.getAbility(null, AbilityList.rouseColonyKey) as Ability),
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.emptyGenerated2
@@ -351,7 +351,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #region Armored Worm
         enemyStatsDict.Add(MonsterNameList.armoredWorm, new EnemyStats(MonsterNameList.armoredWorm,
                                                                               Constants.fiftyArmor,
-                                                                                                25,
+                                                                                                45,
                                                AbilityList.getAbility(null, AbilityList.wallopKey),
                                                                     new Trait[] { 
                                                                                     TraitList.master,
@@ -362,7 +362,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #region Broodling
         enemyStatsDict.Add(MonsterNameList.broodling, new MinionStats(MonsterNameList.broodling,
                                                                               Constants.zeroArmor,
-                                                                                                25,
+                                                                                                5,
                                                AbilityList.getAbility(null, AbilityList.acidVomitKey),
                                                                     new Trait[] { 
                                                                                   TraitList.chaotic
@@ -370,8 +370,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #endregion
         #region Dire Worm
         enemyStatsDict.Add(MonsterNameList.direWorm, new LargeEnemyStats(MonsterNameList.direWorm,
-                                                                                Constants.fifteenArmor,
-                                                                                        25,
+                                                                                Constants.twentyArmor,
+                                                                                        145,
                                                             new Trait[] { 
                                                                             TraitList.master,
                                                                             TraitList.large,
@@ -382,7 +382,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #region Hive Herald
         enemyStatsDict.Add(MonsterNameList.hiveHerald, new EnemyStats(MonsterNameList.hiveHerald,
                                                                               Constants.fifteenArmor,
-                                                                                                25,
+                                                                                                30,
                                                AbilityList.getAbility(null, AbilityList.spawnBroodlingKey),
                                                                     new Trait[] { 
                                                                                     TraitList.master,
@@ -394,7 +394,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #region Martyr Worm
         enemyStatsDict.Add(MonsterNameList.martyrWorm, new EnemyStats(MonsterNameList.martyrWorm,
                                                                               Constants.fifteenArmor,
-                                                                                                1,
+                                                                                                20,
                                                AbilityList.getAbility(null, AbilityList.wallopKey),
                                                                     new Trait[] { 
                                                                                     TraitList.master,
@@ -405,8 +405,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #endregion
         #region Toxic Worm
         enemyStatsDict.Add(MonsterNameList.toxicWorm, new EnemyStats(MonsterNameList.toxicWorm,
-                                                                              Constants.tenArmor,
-                                                                                                1,
+                                                                              Constants.fifteenArmor,
+                                                                                                45,
 new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.wormAcidBarrageKey) as Ability),
                                                                     new Trait[] { 
                                                                                     TraitList.master,
@@ -417,7 +417,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #region Worm
         enemyStatsDict.Add(MonsterNameList.worm, new EnemyStats(MonsterNameList.worm,
                                                                               Constants.tenArmor,
-                                                                                                1,
+                                                                                                23,
                                                AbilityList.getAbility(null, AbilityList.wallopKey),
                                                                     new Trait[] { 
                                                                                     TraitList.master,

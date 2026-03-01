@@ -155,7 +155,7 @@ public static class AbilityList
       
 
 	public const string wormFumesIndicatorName = "AcidPoolIndicator";
-	public readonly static GroundEffect wormFumesGroundEffect = new GroundEffect("6", 4, GridCoords.getDefaultCoords(), Resources.Load<GameObject>(wormFumesIndicatorName));
+	public readonly static GroundEffect wormFumesGroundEffect = new GroundEffect("8", 4, GridCoords.getDefaultCoords(), Resources.Load<GameObject>(wormFumesIndicatorName));
 	
 	public static Dictionary<string,Ability> statAbilityDictionary;
 	public static Dictionary<string,Ability> summonAbilityDictionary;
@@ -196,14 +196,14 @@ public static class AbilityList
 		enemyAbilityDictionary.Add(swapKey, new SwapAbility(CombatActionSettings.build(DescriptionParams.build(swapKey, "The creature swaps places with it's target. If successful, the creature heals itself.", swapKey), DamageParams.build("25"))));
 
 		//bat abilities
-		enemyAbilityDictionary.Add(flurryKey, new Ability(CombatActionSettings.build(DescriptionParams.build(flurryKey, "A devastating surge of claws and jaws."), DamageParams.build("10", "5"), AnimationParams.build(EffectAnimationType.BatSwarm))));
-        enemyAbilityDictionary.Add(screechKey, new Ability(CombatActionSettings.build(DescriptionParams.build(screechKey, "A howl so loud it draws blood.", StatSourceNameList.caveMadnessKey), DamageParams.build("6", "2"), TargetParams.build(Range.boxOneIndex), TraitList.caveMadness)));
+		enemyAbilityDictionary.Add(flurryKey, new Ability(CombatActionSettings.build(DescriptionParams.build(flurryKey, "A devastating surge of claws and jaws."), DamageParams.build("14", "5"), TargetParams.build(Range.boxOneIndex), AnimationParams.build(EffectAnimationType.BatSwarm))));
+        enemyAbilityDictionary.Add(screechKey, new Ability(CombatActionSettings.build(DescriptionParams.build(screechKey, "A howl so loud it draws blood.", StatSourceNameList.caveMadnessKey), DamageParams.build("12", "2"), TargetParams.build(Range.boxOneIndex), TraitList.caveMadness)));
         enemyAbilityDictionary.Add(spawnPupsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(spawnPupsKey, "The bat calls forth it's pups to fight for it.")), MonsterNameList.batSwarm));
         enemyAbilityDictionary.Add(swarmRushKey, new Ability(CombatActionSettings.build(DescriptionParams.build(swarmRushKey, "The swarm flutters about their target, clawing and biting ferociously.", colonyCrushKey), DamageParams.build("3", "2"), AnimationParams.build(EffectAnimationType.BatSwarm))));
         enemyAbilityDictionary.Add(batClawName, new Ability(CombatActionSettings.build(batClawName, batClawDescription, DamageParams.build("6", "8"), AnimationParams.build(EffectAnimationType.Pierce))));
         enemyAbilityDictionary.Add(bossBatClawKey, new Ability(CombatActionSettings.build(batClawName, batClawDescription, DamageParams.build("12", "12"), AnimationParams.build(EffectAnimationType.Pierce))));
         enemyAbilityDictionary.Add(diveBombKey, new SuicideAbility(CombatActionSettings.build(DescriptionParams.build(diveBombKey, "The bat dives straight for an enemy at lightning speed and collides with it, spraying everyone close by with viscera and guano.", "DiveBomb"), DamageParams.build("5", "1"), TargetParams.build(Range.boxOneIndex))));
-        enemyAbilityDictionary.Add(rouseColonyKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(rouseColonyKey, "The Matron calls her children to war.")), 
+        enemyAbilityDictionary.Add(rouseColonyKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(rouseColonyKey, "The Matron calls her children to war."), AnimationParams.build(EffectAnimationType.Positive)), 
                                                                                                 new string[][]
                                                                                                             {
                                                                                                                 new string[]{MonsterNameList.armoredBat, MonsterNameList.screecher},
@@ -342,7 +342,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(wisdomKeyChar);
-        statAbilityDictionary.Add(currentKey, new InterruptAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(throatJabName, "A swift jab in the throat that interrupts the enemy's plans. Guaranteed to critically hit if used on an enemy with a '" + TraitType.Charge.ToString() + "' type trait. Removes 1 '" + TraitType.Charge.ToString() + "' type trait from the target."), DamageParams.build("4W + 2S + 2D"), FrequencyParams.build(oneSlotMax, sixRoundCooldown), AnimationParams.build(EffectAnimationType.Blunt), TraitList.tripped), TraitType.Charge));
+        statAbilityDictionary.Add(currentKey, new InterruptAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(throatJabName, "A swift jab in the throat that interrupts the enemy's plans. Guaranteed to critically hit if used on an enemy with a '" + TraitType.Charge.ToString() + "' type trait. Removes 1 '" + TraitType.Charge.ToString() + "' type trait from the target."), DamageParams.build("4W + 2S + 2D"), FrequencyParams.build(oneSlotMax, sixRoundCooldown), AnimationParams.build(EffectAnimationType.Blunt)), TraitType.Charge));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(wisdomKeyChar);

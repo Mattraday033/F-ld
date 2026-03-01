@@ -887,6 +887,9 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public void prepareOnDeathEffects()
     {
+        removeAllTraitsOfType(TraitType.Mental);
+        removeAllTraitsOfType(TraitType.Wound);
+
         foreach (Trait trait in traitContainer)
         {
             if (trait != null)

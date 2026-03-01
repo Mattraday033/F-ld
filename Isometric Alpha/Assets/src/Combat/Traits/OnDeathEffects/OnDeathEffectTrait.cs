@@ -23,8 +23,8 @@ public class OnDeathEffectTrait : Trait
             return;
         }
 
-		CombatAction actionOnDeath = ((CombatAction) AbilityList.enemyAbilityDictionary[abilityKey].clone());
-		actionOnDeath.setActorCoords(actor.position);
+		CombatAction actionOnDeath = AbilityList.enemyAbilityDictionary[abilityKey].clone();
+		actionOnDeath.setActor(actor);
         actor.inOnDeathEffect = true;
 		Selector actionSelector = SelectorManager.getInstance().selectors[actionOnDeath.getRangeIndex()].clone();
 		

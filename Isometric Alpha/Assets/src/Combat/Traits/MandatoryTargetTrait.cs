@@ -23,9 +23,4 @@ public class MandatoryTargetTrait: Trait
 	{
 		return true;
 	}
-
-    public override double getPercentageDamageReduction()
-    {
-        return percentageDamageReduction;
-    }
 }

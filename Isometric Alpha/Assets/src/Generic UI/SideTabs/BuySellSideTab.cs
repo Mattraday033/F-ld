@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class BuySellSideTab : AbilityGridSideTab
 {
     public BuySellSideTab otherTab;
+    public GameObject depositGameObject;
     public ShopMode shopMode;
 
     private void Awake()
@@ -16,11 +17,18 @@ public class BuySellSideTab : AbilityGridSideTab
         }
     }
 
+    public override void setToClosed()
+    {
+        depositGameObject.SetActive(false);
+        closedButton.interactable = true;
+    }
+
     public override void setToOpen()
     {
-        openTabPanel.SetActive(true);
-
         otherTab.setToClosed();
+
+        depositGameObject.SetActive(true);
+        closedButton.interactable = false;
 
         ShopPopUpWindow.getInstance().setShopMode(shopMode);
     }

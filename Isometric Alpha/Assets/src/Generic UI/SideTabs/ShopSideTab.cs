@@ -10,11 +10,6 @@ public class ShopSideTab : AbilityGridSideTab
     {
         int currentListCount = Tab.getList(listToChoose).Count();
 
-        if(currentListCount <= 0 && listToChoose == ShopPopUpWindow.currentDescribableList)
-        {
-            return;
-        } 
-    
         setVisibility(currentListCount > 0);
 
         base.setToDefaultState();
