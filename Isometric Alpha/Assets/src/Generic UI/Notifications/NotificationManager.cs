@@ -85,7 +85,7 @@ public class NotificationManager : MonoBehaviour
 
     private IEnumerator spawnNotification(IDescribable describable)
     {
-        while (FadeToBlackManager.isMidFade())
+        while (FadeToBlackManager.isMidScreenFade())
         {
             yield return null;
         }

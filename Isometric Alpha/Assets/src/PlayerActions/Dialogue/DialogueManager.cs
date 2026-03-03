@@ -81,13 +81,13 @@ public class DialogueManager : MonoBehaviour
 
 	void Update() //here for Animation
 	{
-		if (waitingOnFadeToBlack && !FadeToBlackManager.isMidFade())
+		if (waitingOnFadeToBlack && !FadeToBlackManager.isMidScreenFade())
 		{
 			waitingOnFadeToBlack = false;
 			continueStory();
 		}
 
-		if (waitingOnFadeBackIn && !FadeToBlackManager.isMidFade())
+		if (waitingOnFadeBackIn && !FadeToBlackManager.isMidScreenFade())
 		{
 			waitingOnFadeBackIn = false;
 
@@ -735,7 +735,7 @@ public class DialogueManager : MonoBehaviour
 
                     PartyManager.healFullAllPartyMembers();
 
-                    if (!FadeToBlackManager.isMidFade())
+                    if (!FadeToBlackManager.isMidScreenFade())
                     {
                         fadeToBlackManager.setAndStartFadeBackIn();
                     }
@@ -1531,12 +1531,12 @@ public class DialogueManager : MonoBehaviour
 			yield break;
 		}
 
-		while (!FadeToBlackManager.isMidFade())
+		while (!FadeToBlackManager.isMidScreenFade())
 		{
 			yield return null;
 		}
 
-		while (FadeToBlackManager.isMidFade())
+		while (FadeToBlackManager.isMidScreenFade())
 		{
 			yield return null;
 		}
@@ -1570,7 +1570,7 @@ public class DialogueManager : MonoBehaviour
 
 		if (continueAfterTransparent)
 		{
-			while (FadeToBlackManager.isMidFade())
+			while (FadeToBlackManager.isMidScreenFade())
 			{
 				yield return null;
 			}

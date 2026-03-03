@@ -7,6 +7,8 @@ using UnityEngine.Events;
 
 public class TransitionManager : MonoBehaviour
 {
+    public readonly static UnityEvent<string> ChangeAreaMusic = new UnityEvent<string>();
+
     public readonly static UnityEvent BeforeTransition = new UnityEvent();
 
     public readonly static UnityEvent CollectTransitionSpaces = new UnityEvent();
@@ -63,9 +65,10 @@ public class TransitionManager : MonoBehaviour
             return;
         }
 
-        if (fadeToBlackOnTransition && !FadeToBlackManager.isMidFade())
+        if (fadeToBlackOnTransition && !FadeToBlackManager.isMidScreenFade())
         {
             fadeToBlackManager.setAndStartFadeToBlack();
+            ChangeAreaMusic.Invoke(transition.destinationName);
         }
 
         currentCoroutine = instance.StartCoroutine(instance.waitForBlackScreenThenTransition(transition, skipAutosave));
@@ -85,7 +88,7 @@ public class TransitionManager : MonoBehaviour
     {
         NotificationManager.OnDeleteAllNotifications.Invoke();
 
-        while (FadeToBlackManager.isMidFade())
+        while (FadeToBlackManager.isMidScreenFade())
         {
             yield return null;
         }
@@ -171,7 +174,7 @@ public class TransitionManager : MonoBehaviour
 
     // public static void changeLocation(TransitionInfo sourceTransitionInfo)
     // {
-    //     if (fadeToBlackOnTransition && FadeToBlackManager.isMidFade() && !fadeToBlackManager.currentlyFadingToBlack())
+    //     if (fadeToBlackOnTransition && FadeToBlackManager.isMidScreenFade() && !fadeToBlackManager.currentlyFadingToBlack())
     //     {
     //         fadeToBlackManager.setAndStartFadeToBlack();
     //     }
@@ -222,7 +225,7 @@ public class TransitionManager : MonoBehaviour
 
 	// private IEnumerator waitForBlackScreenThenTransition(TransitionInfo sourceTransitionInfo)
 	// {
-	// 	while (FadeToBlackManager.isMidFade())
+	// 	while (FadeToBlackManager.isMidScreenFade())
 	// 	{
 	// 		yield return null;
 	// 	}

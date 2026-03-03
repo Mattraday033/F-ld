@@ -33,7 +33,7 @@ public class PlayerInput : MonoBehaviour
 
         if ((KeyPressManager.handlingPrimaryKeyPress && PlayerOOCStateManager.currentActivity != OOCActivity.inChestUI &&
                                                 PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence)
-        || FadeToBlackManager.isMidFade())
+        || FadeToBlackManager.isMidScreenFade())
         {
             return;
         }

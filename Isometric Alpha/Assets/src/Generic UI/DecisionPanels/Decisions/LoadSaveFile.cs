@@ -80,11 +80,10 @@ public class LoadSaveFile : IDecision
             {
                 saveBlueprint = SaveHandler.getCleanSlateSave();
             }
-            else
-            {
-                Flags.exitNewGameMode();
-            }
+                
+            Flags.exitNewGameMode();
 
+            TransitionManager.ChangeAreaMusic.Invoke(saveBlueprint.currentLocation);
             Flags.resetAllFlags();
             Flags.overwriteFlags(saveBlueprint.currentFlags);
 

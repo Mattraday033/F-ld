@@ -117,6 +117,8 @@ public class KeyBindingDisplay : MonoBehaviour
                 displayText.text += selectKeyBinding;
                 addSpace();
                 displayText.text += removeAbilityKeyBinding;
+                addSpace();                
+                displayText.text += nextTurnButtonPress;
                 addSpace();
                 displayText.text += escapeMenuKeyBinding;
                 addSpace();

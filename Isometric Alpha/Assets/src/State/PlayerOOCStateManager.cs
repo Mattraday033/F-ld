@@ -236,7 +236,7 @@ public static class PlayerOOCStateManager
         do
 		{
             yield return null;
-		} while (FadeToBlackManager.isMidFade());
+		} while (FadeToBlackManager.isMidScreenFade());
 
 		while (currentActivity != OOCActivity.walking)
 		{

@@ -30,6 +30,8 @@ TagManager:
   - ItemUseTarget
   - JunkSlotTarget
   - ShownWhileTerrainHidden
+  - Music
+  - FadeToBlack
   layers:
   - Default
   - TransparentFX

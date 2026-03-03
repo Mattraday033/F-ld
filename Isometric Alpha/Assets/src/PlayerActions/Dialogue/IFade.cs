@@ -3,16 +3,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-public interface IFadeTransition
+public interface IFade
 {
     public bool isFinished();
 
-    public IEnumerator getCoroutine();
+    public IEnumerator getCoroutineTemplate();
+    public void stopActiveCoroutine();
+
+    public void setActiveCoroutine(Coroutine coroutine);
+    public Coroutine getActiveCoroutine();
+
+    public FadeType getFadeType();
 }
 
-public abstract class FullScreenTransition : IFadeTransition
+public abstract class ScreenFade : IFade
+{
+    private Coroutine activeCoroutine;
+
+    public abstract bool isFinished();
+
+    public abstract IEnumerator getCoroutineTemplate();
+
+    public void setActiveCoroutine(Coroutine coroutine)
+    {
+        activeCoroutine = coroutine;
+    }
+
+    public void stopActiveCoroutine()
+    {
+        if(activeCoroutine != null)
+        {
+            FadeToBlackManager.StopFade(getFadeType());
+        }
+    }
+
+    public Coroutine getActiveCoroutine()
+    {
+        return activeCoroutine;
+    }
+
+    public FadeType getFadeType()
+    {
+        return FadeType.Screen;
+    }
+}
+
+public abstract class FullScreenTransition : ScreenFade
 {
 	protected float frameCount = 0;
     protected const float slowFadeInSpeed = 3.5f;
@@ -31,10 +67,6 @@ public abstract class FullScreenTransition : IFadeTransition
 	{
 		FadeToBlackManager.getInstance().fadeToBlackImage.color = Color.black;
 	}
-
-	public abstract bool isFinished();
-
-    public abstract IEnumerator getCoroutine();
 
     public abstract void setFrameCountAtStart();
 }
@@ -61,7 +93,7 @@ public class FadeToBlackTransition : FullScreenTransition
         updateFadeToBlackImageOpacity();
     }
 
-    public override IEnumerator getCoroutine()
+    public override IEnumerator getCoroutineTemplate()
     {
         if(PlayerOOCStateManager.currentActivity == OOCActivity.walking ||
             PlayerOOCStateManager.currentActivity == OOCActivity.inMap )
@@ -113,7 +145,7 @@ public class FadeToBlackTransition : FullScreenTransition
 
         while(!fadeBackIn.isFinished())
         {
-            yield return fadeBackIn.getCoroutine();
+            yield return fadeBackIn.getCoroutineTemplate();
         }
     }
 }
@@ -131,7 +163,7 @@ public class FadeBackInTransition : FullScreenTransition
         updateFadeToBlackImageOpacity();
     }
 
-    public override IEnumerator getCoroutine()
+    public override IEnumerator getCoroutineTemplate()
     {
         setFrameCountAtStart();
         float timeWaited = 0f;
@@ -181,7 +213,7 @@ public class FadeBackInTransition : FullScreenTransition
 	}
 }
 
-public abstract class CircleTransition : IFadeTransition
+public abstract class CircleTransition : ScreenFade
 {
     protected const float minimumScale = 0.01f;
     protected const float maximumScale = 22.5f;
@@ -214,9 +246,7 @@ public abstract class CircleTransition : IFadeTransition
         return new Vector3(currentScale, currentScale, 1f);
     }
 
-    public abstract bool isFinished();
-
-    public IEnumerator getCoroutine()
+    public override IEnumerator getCoroutineTemplate()
     {
         Transform circleTransitionObject = createCircleTransition();
 

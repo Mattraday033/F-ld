@@ -57,7 +57,7 @@ public class SlideShowManager : MonoBehaviour
     private IEnumerator executeSlideShow()
     {
 
-        // while (FadeToBlackManager.isMidFade())
+        // while (FadeToBlackManager.isMidScreenFade())
         // {
             yield return null;
         // }
@@ -82,7 +82,7 @@ public class SlideShowManager : MonoBehaviour
 
         // FadeToBlackManager.getInstance().setAndStartFadeToBlack();
 
-        // while (FadeToBlackManager.isMidFade())
+        // while (FadeToBlackManager.isMidScreenFade())
         // {
         //     yield return null;
         // }

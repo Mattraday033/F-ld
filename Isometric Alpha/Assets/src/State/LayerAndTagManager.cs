@@ -45,6 +45,8 @@ public static class LayerAndTagManager
 	public const string bookTag = "Book";
 	public const string shownWhileTerrainHiddenTag = "ShownWhileTerrainHidden";
     public const string mainVirtualCameraTag = "MainVirtualCamera";
+    public const string musicTag = "Music";
+    public const string fadeToBlackTag = "FadeToBlack";
 
 	// public static LayerMask allInteractableLayers;
 	public readonly static LayerMask playerLayerMask = initializePlayerLayerMask();

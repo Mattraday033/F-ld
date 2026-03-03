@@ -48,8 +48,8 @@ public struct TutorialSequenceAdditionalScript
 [Serializable]
 public struct TutorialSequenceStep : IDescribable 
 {
-    private const string pressToContinueMessagePrefix = "Press '";
-    private const string pressToContinueMessageSuffix = "' to continue...";
+    private const string pressToContinueMessagePrefix = "Press ' ";
+    private const string pressToContinueMessageSuffix = " ' to continue...";
 
     private const string buttonOnlyContinueMessage = "Click the button to continue...";
     private const string dragWeaponToContinueMessage = "Equip a Weapon to continue...";

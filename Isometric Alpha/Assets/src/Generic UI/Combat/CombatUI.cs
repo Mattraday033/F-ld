@@ -60,6 +60,11 @@ public class CombatUI : MonoBehaviour
 		}
 	}
 	
+    public void resolveTurnButtonPress()
+    {
+        CombatStateManager.resolveTurn();
+    }
+
 	public static CombatUI getInstance()
 	{
 		return instance;

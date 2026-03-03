@@ -7326,18 +7326,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1858867877573687010, guid: c682e00441168064c8b07b09fbd70a16,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7836620438024053888}
+    - target: {fileID: 1858867877573687010, guid: c682e00441168064c8b07b09fbd70a16,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1858867877573687010, guid: c682e00441168064c8b07b09fbd70a16,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: resolveTurn
+      value: resolveTurnButtonPress
       objectReference: {fileID: 0}
     - target: {fileID: 1858867877573687010, guid: c682e00441168064c8b07b09fbd70a16,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ResolveTurnButton, Assembly-CSharp
+      value: CombatUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1858867877573687010, guid: c682e00441168064c8b07b09fbd70a16,
         type: 3}
