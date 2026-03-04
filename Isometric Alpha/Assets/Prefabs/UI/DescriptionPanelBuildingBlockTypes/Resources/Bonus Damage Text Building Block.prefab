@@ -110,7 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   iconObject: {fileID: 7242211937547396722}
-  iconImage: {fileID: 2432663334491345511}
+  iconImage: {fileID: 1753453087188442996}
   iconOutline: {fileID: 0}
   iconBackground: {fileID: 6450188497895339512}
   iconLayoutElement: {fileID: 1734313156735569975}
@@ -118,6 +118,7 @@ MonoBehaviour:
   iconSymbolText: {fileID: 5274723830565441478}
   iconHover: {fileID: 979974188743553325}
   descriptionText: {fileID: 6487982213553171072}
+  descriptionTextLayoutElement: {fileID: 0}
   plusButton: {fileID: 0}
 --- !u!114 &3354098078984432497
 MonoBehaviour:
@@ -437,6 +438,12 @@ PrefabInstance:
       propertyPath: m_PreferredHeight
       value: 35
       objectReference: {fileID: 0}
+    - target: {fileID: 1789580045113222625, guid: aef499a57fca6894990e1350eb94b65f,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: abc04718d25662b4e864f8eaf2214d54,
+        type: 3}
     - target: {fileID: 6414240329794883437, guid: aef499a57fca6894990e1350eb94b65f,
         type: 3}
       propertyPath: m_Enabled
@@ -487,16 +494,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2432663334491345511 stripped
+--- !u!114 &1753453087188442996 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2396715114847627506, guid: aef499a57fca6894990e1350eb94b65f,
+  m_CorrespondingSourceObject: {fileID: 1789580045113222625, guid: aef499a57fca6894990e1350eb94b65f,
     type: 3}
   m_PrefabInstance: {fileID: 36127594926848661}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: b28ca76a5754e2d4188067494789cbc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &5274723830565441478 stripped

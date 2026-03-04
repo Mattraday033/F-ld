@@ -13,6 +13,8 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public string hoverMessageKey;
     protected string hoverText;
 
+    public bool ignoreHover = false;
+
     [SerializeField]
     private bool bonusDamageIcon = false;
     [SerializeField]
@@ -21,12 +23,24 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public HoverIconDescriptionPanel descriptionPanel;
 
     public Image outlineImage;
+    public RectTransform backgroundTransform;
     public Image backgroundImage;
     public Image iconImage;
+    public Image bubble;
 
     public virtual void Awake()
     {
-        // spawnHoverMessagePanel();
+        SlotIconImage slotIconImage = iconImage as SlotIconImage;
+
+        if(slotIconImage != null)
+        {
+            slotIconImage.parentIcon = this;
+        }
+
+        if(ignoreHover)
+        {
+            return;
+        }
 
         if (bonusDamageIcon)
         {
@@ -110,7 +124,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        if(eventData == null || eventData.used)
+        if(ignoreHover || eventData == null || eventData.used)
         {
             return;
         }
@@ -124,12 +138,29 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        if(eventData == null || eventData.used)
+        if(ignoreHover || eventData == null || eventData.used)
         {
             return;
         }
 
         MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldDestroyHoverIcon));
+    }
+
+    public void revealBubble()
+    {
+        if(bubble != null)
+        {
+            backgroundImage.color = ColorList.bubbleBackgroundColor;
+            bubble.sprite = Helpers.loadSpriteFromResources(PrefabNames.UIBubble);
+            bubble.gameObject.SetActive(true);
+            backgroundTransform.offsetMax = new Vector2(-3,-3);
+            backgroundTransform.offsetMin = new Vector2(3,3);
+        }
+
+        if(outlineImage != null)
+        {
+            outlineImage.color = ColorList.bubbleOutlineColor;
+        }
     }
 
     //IDescribable methods
@@ -252,6 +283,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         return false;
     }
+
 }
 
 public static class HoverMessageList

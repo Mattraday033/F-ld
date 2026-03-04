@@ -114,6 +114,8 @@ public class DescriptionPanelBlockFormatter : MonoBehaviour
         {
             Destroy(row.plusButton);
             row.plusButton = null;
+            row.descriptionTextLayoutElement.preferredWidth = -1;
+            row.descriptionTextLayoutElement.flexibleWidth = 1;
         }
 
         if (flipDirection)

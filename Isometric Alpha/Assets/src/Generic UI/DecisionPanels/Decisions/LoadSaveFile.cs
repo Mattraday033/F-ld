@@ -70,12 +70,6 @@ public class LoadSaveFile : IDecision
             ChoiceManager.resetChoices();
             QuestList.buildQuestListFromScratch();
 
-            if (CombatStateManager.inCombat)
-            {
-                CombatStateManager.resetCombat();
-                CombatStateManager.inCombat = false;
-            }
-
             if (saveBlueprint == null)
             {
                 saveBlueprint = SaveHandler.getCleanSlateSave();
@@ -83,7 +77,16 @@ public class LoadSaveFile : IDecision
                 
             Flags.exitNewGameMode();
 
-            TransitionManager.ChangeAreaMusic.Invoke(saveBlueprint.currentLocation);
+            if (CombatStateManager.inCombat)
+            {
+                CombatStateManager.resetCombat();
+                CombatStateManager.inCombat = false;
+                TransitionManager.ChangeAreaMusic.Invoke(saveBlueprint.currentLocation);
+            } else
+            {
+                TransitionManager.ChangeAreaMusic.Invoke(saveBlueprint.currentLocation);
+            }
+            
             Flags.resetAllFlags();
             Flags.overwriteFlags(saveBlueprint.currentFlags);
 

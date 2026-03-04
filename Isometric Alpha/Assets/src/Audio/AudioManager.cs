@@ -120,7 +120,10 @@ public class AudioManager : MonoBehaviour
 
     public static void playBattleMusic()
     {
+        FadeToBlackManager.StopFade(FadeType.Music);
+        setMusicSourceVolume(musicVolumePlayerSetting);
         loadAndPlayClip(instance.musicSource, AudioClipList.campBattle);
+        setCurrentMusicPath(AudioClipList.campBattle);
     }
 
     private static void loadAndPlayCurrentMusicClip()

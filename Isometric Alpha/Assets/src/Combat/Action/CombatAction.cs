@@ -1418,22 +1418,9 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
     {
         panel.setObjectBeingDescribed(this);
 
-        if (panel.nameText != null && !(panel.nameText is null))
-        {
-            panel.nameText.text = getName();
-        }
+        DescriptionPanel.setText(panel.nameText, getName());
 
-        /* commented out because apparently getIconBackgroundColor() doesn't exist (was thinking fo traits
-			may implement later
-		if(panel.iconBackgroundPanel != null && !(panel.iconBackgroundPanel is null))
-		{
-			panel.iconBackgroundPanel.color = getIconBackgroundColor();
-		}*/
-
-        if (panel.iconPanel != null && !(panel.iconPanel is null))
-        {
-            panel.iconPanel.sprite = Helpers.loadSpriteFromResources(getIconName());
-        }
+        DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getIconName()));
     }
 
     public virtual void setUpDecisionPanel(IDecisionPanel descisionPanel)

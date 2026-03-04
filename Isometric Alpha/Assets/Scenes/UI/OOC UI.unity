@@ -670,8 +670,10 @@ MonoBehaviour:
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 385846769}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 576423055}
+  bubble: {fileID: 0}
 --- !u!114 &385846773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -851,89 +853,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 414780024}
   m_CullTransparentMesh: 1
---- !u!1001 &446193375
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2242844086586556482, guid: 42d30c97df7128f4a8551300263b2a23,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4439407750964857103, guid: 42d30c97df7128f4a8551300263b2a23,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4439407750964857103, guid: 42d30c97df7128f4a8551300263b2a23,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4439407750964857103, guid: 42d30c97df7128f4a8551300263b2a23,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4439407750964857103, guid: 42d30c97df7128f4a8551300263b2a23,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4439407750964857103, guid: 42d30c97df7128f4a8551300263b2a23,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4439407750964857103, guid: 42d30c97df7128f4a8551300263b2a23,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4439407750964857103, guid: 42d30c97df7128f4a8551300263b2a23,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4439407750964857103, guid: 42d30c97df7128f4a8551300263b2a23,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4439407750964857103, guid: 42d30c97df7128f4a8551300263b2a23,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4439407750964857103, guid: 42d30c97df7128f4a8551300263b2a23,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5783721407195441788, guid: 42d30c97df7128f4a8551300263b2a23,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -500
-      objectReference: {fileID: 0}
-    - target: {fileID: 7813916725302394605, guid: 42d30c97df7128f4a8551300263b2a23,
-        type: 3}
-      propertyPath: m_Name
-      value: FadeToBlack
-      objectReference: {fileID: 0}
-    - target: {fileID: 7813916725302394605, guid: 42d30c97df7128f4a8551300263b2a23,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 42d30c97df7128f4a8551300263b2a23, type: 3}
 --- !u!1001 &471464081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1317,8 +1236,10 @@ MonoBehaviour:
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 498462904}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 134409780}
-  iconImage: {fileID: 957796292}
+  iconImage: {fileID: 0}
+  bubble: {fileID: 0}
 --- !u!114 &498462904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1934,8 +1855,10 @@ MonoBehaviour:
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 659375183}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 1323314493}
-  iconImage: {fileID: 589610997}
+  iconImage: {fileID: 0}
+  bubble: {fileID: 0}
 --- !u!114 &659375183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3173,8 +3096,10 @@ MonoBehaviour:
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 1031361194}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 858748678}
-  iconImage: {fileID: 414780029}
+  iconImage: {fileID: 0}
+  bubble: {fileID: 0}
 --- !u!114 &1031361194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3644,8 +3569,10 @@ MonoBehaviour:
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 1103353925}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 1851843740}
-  iconImage: {fileID: 1154822021}
+  iconImage: {fileID: 0}
+  bubble: {fileID: 0}
 --- !u!114 &1103353925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4469,8 +4396,10 @@ MonoBehaviour:
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 1310036499}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 1004703174}
-  iconImage: {fileID: 1677274321}
+  iconImage: {fileID: 0}
+  bubble: {fileID: 0}
 --- !u!114 &1310036499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5410,8 +5339,10 @@ MonoBehaviour:
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 1375430183}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 1310155441}
-  iconImage: {fileID: 1098069518}
+  iconImage: {fileID: 0}
+  bubble: {fileID: 0}
 --- !u!114 &1375430183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6531,6 +6462,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillButton: {fileID: 385846773}
+  leftArrow: {fileID: 953777218}
+  rightArrow: {fileID: 741845131}
+  skillButtonHover: {fileID: 385846772}
   skillButtonOutline: {fileID: 385846769}
 --- !u!114 &1728826369
 MonoBehaviour:
@@ -8614,8 +8548,10 @@ MonoBehaviour:
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 3432560956765814435}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 0}
+  bubble: {fileID: 0}
 --- !u!224 &5699087656598704594
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8923,8 +8859,10 @@ MonoBehaviour:
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 338446504275253783}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 0}
+  bubble: {fileID: 0}
 --- !u!222 &8534943910552932422
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8939,7 +8877,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1579629659}
   - {fileID: 39231797}
-  - {fileID: 446193375}
   - {fileID: 1144867990}
   - {fileID: 1370356218}
   - {fileID: 200155844}

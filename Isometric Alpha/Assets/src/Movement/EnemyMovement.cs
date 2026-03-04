@@ -287,6 +287,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         }
 
         SpawnInfoManager.lastSaveBlueprint = SaveHandler.save("Before Combat", skipFileCreation);
+        AudioManager.playBattleMusic();
         State.enemyPackInfo = getEnemyPackInfo();
         State.allyPackInfo = getAllyPackInfo();
         CombatStateManager.currentDefeatKey = AreaManager.locationName + "-" + monsterPackIndex;

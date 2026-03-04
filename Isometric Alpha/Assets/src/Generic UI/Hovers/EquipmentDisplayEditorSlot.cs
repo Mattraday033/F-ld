@@ -75,7 +75,7 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
                 setToFilledAndUnusable(currentAttackIndex);
             }
 
-            iconImage.sprite = Helpers.loadSpriteFromResources(getItemInSlot().getIconName());
+            DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(getItemInSlot().getIconName()));
         }
 
         if (!item.isUnequippable())
@@ -94,11 +94,11 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
         {
             if (getItemInSlot().getSubtype().Equals(Weapon.subtype))
             {
-                iconImage.sprite = Helpers.loadSpriteFromResources(getItemInSlot().getIconName());
+                DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(getItemInSlot().getIconName()));
             }
             else
             {
-                iconImage.sprite = Helpers.loadSpriteFromResources(getItemInSlot().getSlotIconName());
+                DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(getItemInSlot().getSlotIconName()));
             }
         }
     }
@@ -152,12 +152,14 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     {
         this.combatActionSlotIndex = combatActionSlotIndex;
 
+        outlineImage.color = ColorList.darkUICyan;
         backgroundImage.color = ColorList.grey25;
         iconImage.color = Color.white;
+        bubble.gameObject.SetActive(false);
 
         if (getItemInSlot() != null && getItemInSlot().getSlotID() == Armor.offHandSlotIndex)
         {
-            iconImage.sprite = Helpers.loadSpriteFromResources(getItemInSlot().getIconName());
+            DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(getItemInSlot().getIconName()));
         }
 
         boxCollider.enabled = true;
@@ -173,12 +175,15 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     {
         this.combatActionSlotIndex = combatActionSlotIndex;
 
+
+        outlineImage.color = ColorList.darkUICyan;
         backgroundImage.color = ColorList.grey25;
         iconImage.color = ColorList.filledIconFadeOutLevel;
+        bubble.gameObject.SetActive(false);
 
         if (getItemInSlot() != null && getItemInSlot().getSlotID() == Armor.offHandSlotIndex)
         {
-            iconImage.sprite = Helpers.loadSpriteFromResources(getItemInSlot().getIconName());
+            DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(getItemInSlot().getIconName()));
         }
 
         boxCollider.enabled = true;
@@ -194,8 +199,10 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     {
         this.combatActionSlotIndex = combatActionSlotIndex;
 
+        outlineImage.color = ColorList.darkUICyan;
         backgroundImage.color = ColorList.availableEquipmentIcon;
         iconImage.color = ColorList.availableIconFadeOutLevel;
+        bubble.gameObject.SetActive(false);
 
         setToSlotSprite();
 
@@ -212,8 +219,10 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     {
         this.combatActionSlotIndex = combatActionSlotIndex;
 
+        outlineImage.color = ColorList.darkUICyan;
         backgroundImage.color = ColorList.unavailableEquipmentIcon;
         iconImage.color = ColorList.unavailableIconFadeOutLevel;
+        bubble.gameObject.SetActive(false);
 
         setToSlotSprite();
 
@@ -233,7 +242,7 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     public void setToJunk()
     {
         slotType = DragDrogItemSlotType.Junk;
-        iconImage.sprite = Helpers.loadSpriteFromResources(IconList.junkIconName);
+        DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(IconList.junkIconName));
 
         setHoverMessage(HoverMessageList.getMessage(HoverMessageList.junkSlotKey));
     }
@@ -241,7 +250,7 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     public void setToInventory()
     {
         slotType = DragDrogItemSlotType.Inventory;
-        iconImage.sprite = Helpers.loadSpriteFromResources(IconList.amountIconName);
+        DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(IconList.amountIconName));
 
         setHoverMessage(HoverMessageList.getMessage(HoverMessageList.toInvSlotKey));
     }
@@ -279,11 +288,11 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     {
         if (slotIndex >= Armor.offHandSlotIndex && slotIndex <= Armor.trinketSlotIndex)
         {
-            iconImage.sprite = Helpers.loadSpriteFromResources(Armor.getSlotIconName(slotIndex));
+            DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(Armor.getSlotIconName(slotIndex)));
         }
         else if (slotIndex >= Weapon.mainHandSlotIndex)
         {
-            iconImage.sprite = Helpers.loadSpriteFromResources(Weapon.mainHandSlotIconName);
+            DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(Weapon.mainHandSlotIconName));
         }
     }
 
@@ -317,7 +326,14 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
             return;
         }
 
-        outlineImage.color = ColorList.darkUICyan;
+        if(iconImage.sprite != null && SlotIconImage.spriteNameShouldBeInBubble(iconImage.sprite.name))
+        {
+            outlineImage.color = ColorList.bubbleOutlineColor;
+        } else
+        {
+            outlineImage.color = ColorList.darkUICyan;
+        }
+
     }
 
     private void OnEnable()

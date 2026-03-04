@@ -45,7 +45,14 @@ public class OnDeathEffectTrait : Trait
 			//actionOnDeath.setTargetCoords(actor.position);
 		} else
 		{
-			actionOnDeath.setSelector(targetPriority.findTargetLocation(actionSelector, listOfTargets).clone());
+            Selector targetSelector = targetPriority.findTargetLocation(actionSelector, listOfTargets);
+
+            if(targetSelector == null)
+            {
+                return;
+            }
+
+			actionOnDeath.setSelector(targetSelector.clone());
 		}
 		
 		CombatActionManager.addOnDeathCombatAction(actionOnDeath);

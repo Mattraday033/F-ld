@@ -90,13 +90,19 @@ public class DescriptionPanel : MonoBehaviour
 	
 	public Canvas gameObjectDisplayCanvas;
 	public int[] displayAdjustmentCoords = new int[2];
-	private GameObject gameObjectToDisplay;
 
 	public static void setImage(Image image, Sprite sprite)
 	{
 		if(image != null && !(image is null))
 		{
-			image.sprite = sprite;
+            SlotIconImage slotIconImage = image as SlotIconImage;
+            if(slotIconImage != null)
+            {
+			    slotIconImage.setSprite(sprite);
+            } else
+            {
+			    image.sprite = sprite;
+            }
 		}
 	}
 

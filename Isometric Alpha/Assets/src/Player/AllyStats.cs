@@ -431,7 +431,28 @@ public class AllyStats : Stats
     {
         int baseArmorPen = base.getArmorPenetration();
 
-        baseArmorPen += Wisdom.getArmorPenFromWisdom(getWisdom());
+		switch (getDexterity())
+		{
+			case 2:
+			case 3:
+                baseArmorPen += 5;
+                break;
+			case 4:
+			case 5:
+                baseArmorPen += 10;
+                break;
+			case 6:
+			case 7:
+                baseArmorPen += 15;
+                break;
+			case 8:
+			case 9:
+                baseArmorPen += 20;
+                break;
+			case >= 10:
+                baseArmorPen += 25;
+                break;
+		}
 
         return baseArmorPen;
     }

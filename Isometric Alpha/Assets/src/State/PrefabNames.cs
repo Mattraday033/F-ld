@@ -195,6 +195,11 @@ public static class PrefabNames
     public const string fadeFolder = UIFolder + "Fade/";
     public const string circleTransitionObject = fadeFolder + "Circle Transition";
 
+    public const string UITexturesFolder = UIFolder + "UI Textures/";
+
+    public const string UIBubble = UITexturesFolder + "Bubble";
+
+    public const string portraitFolder = UIFolder + "Portraits/";
     #endregion
 
     public const string playerPrefab = "PlayerOOC";

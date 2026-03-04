@@ -29,9 +29,9 @@ public static class LoadingTipList
 
         loadingTips.Add(new LoadingTip("An Autosave is taken every time you enter a new area. You can have up to three Autosaves."));
 
-        loadingTips.Add(new LoadingTip("Press '"+KeyBindingList.hideTerrainKey.ToString() + "' to remove terrain that may be blocking your view."));
+        loadingTips.Add(new LoadingTip("Press ' "+KeyBindingList.hideTerrainKey.ToString() + " ' to remove terrain that may be blocking your view."));
 
-        loadingTips.Add(new LoadingTip("Press 'Shift' to highlight interactable people and objects."));
+        loadingTips.Add(new LoadingTip("Press ' Shift ' to highlight interactable people and objects."));
 
         loadingTips.Add(new LoadingTip("You only need to kill every Master creature to win in Combat. All Minion creatures will flee after the last Master creature is slain."));
 

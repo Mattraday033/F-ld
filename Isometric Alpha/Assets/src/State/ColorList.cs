@@ -50,6 +50,9 @@ public static class ColorList
     public readonly static Color lightUICyan = new Color32(160,183,188,255);
     public readonly static Color darkUICyan = new Color32(100,125,130,255);
 
+    public readonly static Color bubbleOutlineColor = new Color32(60, 35, 25, 255);
+    public readonly static Color bubbleBackgroundColor = new Color32(35, 25, 15, 255);
+
     #endregion
 
     #region Outline Colors

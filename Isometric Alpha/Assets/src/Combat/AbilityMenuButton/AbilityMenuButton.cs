@@ -88,7 +88,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
     public void setDisplay(Sprite abilityIconSprite, Color iconBackgroundColor)
     {
-        abilityIcon.sprite = abilityIconSprite;
+        DescriptionPanel.setImage(abilityIcon, abilityIconSprite);
         iconBackground.color = iconBackgroundColor;
     }
 

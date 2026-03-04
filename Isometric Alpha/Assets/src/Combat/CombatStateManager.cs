@@ -651,6 +651,8 @@ public class CombatStateManager : MonoBehaviour
 
         MovementManager.initializeMovementManager();
 
+        TransitionManager.ChangeAreaMusic.Invoke(AreaManager.locationName);
+
         SceneChange.changeSceneToOverworld();
 	}
 

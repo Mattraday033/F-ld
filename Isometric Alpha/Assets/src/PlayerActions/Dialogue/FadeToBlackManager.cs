@@ -53,10 +53,10 @@ public class FadeToBlackManager : MonoBehaviour
 
         setCameras();
 
-        if(CombatStateManager.inCombat)
+        if(CombatStateManager.inCombat && !LoadSaveFile.midLoad)
         {
-            
-            StartCoroutine(waitTwoFramesThenStartFadeBackIn(new CircleTransitionReduce(mainCamera.transform, OOCActivity.walking)));
+            instance = this;
+            createFade(new CircleTransitionReduce(mainCamera.transform, OOCActivity.walking));
         } else
         {
             if(PlayerOOCStateManager.currentActivity == OOCActivity.walking && !Flags.isInNewGameMode())

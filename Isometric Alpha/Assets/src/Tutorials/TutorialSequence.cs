@@ -370,7 +370,7 @@ public struct TutorialSequenceStep : IDescribable
         }
         else if (addShiftToKeyCodeMessage)
         {
-            DescriptionPanel.setText(panel.inputText, pressToContinueMessagePrefix + "Shift' + '" + getNextStepKeyCodesAsString() + pressToContinueMessageSuffix);
+            DescriptionPanel.setText(panel.inputText, pressToContinueMessagePrefix + "Shift ' + ' " + getNextStepKeyCodesAsString() + pressToContinueMessageSuffix);
         }
         else
         {

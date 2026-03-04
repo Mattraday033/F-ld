@@ -100,6 +100,7 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
                 break;
         }
 
+        skillIconHover.hoverMessageKey = State.currentSkillType.ToString();
         skillIconHover.setHoverMessage(HoverMessageList.getMessage(State.currentSkillType.ToString()));
 
         skillButtonManager.setSkillButtonInteractability();

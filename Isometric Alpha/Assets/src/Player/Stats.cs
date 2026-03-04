@@ -850,7 +850,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     {
         if(traitContainer.removeTrait(traitToRemove))
         {
-            traitToRemove.setIdleAnimationOnRemoval(animationManager);
+            if(!isDead())
+            {
+                traitToRemove.setIdleAnimationOnRemoval(animationManager);
+            }
+            
             Trait.OnTraitRemoval.Invoke(traitToRemove);
         }
     }

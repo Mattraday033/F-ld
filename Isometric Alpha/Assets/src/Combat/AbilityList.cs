@@ -338,7 +338,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(wisdomKeyChar);
-        statAbilityDictionary.Add(currentKey, new RepositionEnemyAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Rolling Throw", "Leverage the enemy's body as a fulcrum and fling them to the ground. The enemy cannot act this turn. Costs two Stacks of any Stance.", "Trip"), DamageParams.build("W + D", "2W + 2D"), FrequencyParams.build(twoSlotMax, threeRoundCooldown), CostParams.build(ActionCostType.Stance, twoStackCastCost), AnimationParams.build(EffectAnimationType.Blunt), TraitList.tripped)));
+        statAbilityDictionary.Add(currentKey, new RepositionEnemyAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Rolling Throw", "Throw an Enemy to a Tile of your choice. The enemy cannot act this turn. Costs two Stacks of any Stance.", "Trip"), DamageParams.build("W + D", "2W + 2D"), FrequencyParams.build(twoSlotMax, threeRoundCooldown), CostParams.build(ActionCostType.Stance, twoStackCastCost), AnimationParams.build(EffectAnimationType.Blunt), TraitList.tripped)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(wisdomKeyChar);

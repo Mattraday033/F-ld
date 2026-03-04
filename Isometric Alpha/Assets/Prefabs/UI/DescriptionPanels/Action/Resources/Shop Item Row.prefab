@@ -949,7 +949,7 @@ MonoBehaviour:
   additionalSlots: []
   showingShopkeeperInventory: 0
   iconBackgroundPanel: {fileID: 0}
-  iconPanel: {fileID: 6616856143210625496}
+  iconPanel: {fileID: 7080997518065710283}
   slotIconPanel: {fileID: 0}
   slotIconBackgroundPanel: {fileID: 0}
   typeIconPanel: {fileID: 0}
@@ -3043,16 +3043,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
---- !u!114 &6616856143210625496 stripped
+--- !u!114 &7080997518065710283 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6619013765722126034, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
+  m_CorrespondingSourceObject: {fileID: 7083176847208168385, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
     type: 3}
   m_PrefabInstance: {fileID: 2461160756973322}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: b28ca76a5754e2d4188067494789cbc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &7909856157135611530 stripped

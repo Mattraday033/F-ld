@@ -135,7 +135,7 @@ public class CombatInputManager : MonoBehaviour
 					KeyPressManager.handlingPrimaryKeyPress = true;
 				}
 
-				if (SelectorManager.hasCurrentlyVisibleAbilityManager() && Input.GetKey(KeyBindingList.backOutKey2) && !KeyPressManager.handlingPrimaryKeyPress)
+				if (Input.GetKey(KeyBindingList.backOutKey2) && !KeyPressManager.handlingPrimaryKeyPress)
 				{
                     SelectorManager.backOutOfTertiaryLocationSelection();
 

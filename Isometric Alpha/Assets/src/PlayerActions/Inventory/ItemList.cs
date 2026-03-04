@@ -225,39 +225,39 @@ public static class ItemList
 		List<Item> books = new List<Item>();
 
 		//HealingItem(string key, string loreDescription, string useDescription, int worth, int amountToHeal)
-		usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, rationsIndex), "Rations", "Moldy bread and grimy pemmican.", "Rations", 5, rationsHealingAmount));
-		usableItems.Add(new RestorationItem(new ItemListID(usableItemListIndex, bandagesIndex), "Bandages", "Wrappings made from a coarse, firm cloth.", "Used to remove all " + TraitType.Wound.ToString() + " Traits from a friendly target.", "Bandages", 15, Range.boxThreeIndex, TraitType.Wound));
-		usableItems.Add(new SkillReplenishItem(new ItemListID(usableItemListIndex, thistleTeaIndex), "Thistle Tea", "Tea made from the flower of local thistle plants. Sharpens the senses and reinvigorates the mind.", "Used to replenish a use of the Cunning Skill. Can not be used to increase your cunning uses above your maximum.", "Tea", 25));
-		usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, properFoodIndex), "Proper Food", "Food worth eating. It'll fill you up and more so.", "Rations", 15, properFoodHealingAmount));
-		usableItems.Add(new TraitApplicationItem(new ItemListID(usableItemListIndex, chokegrassBombIndex), "Chokegrass Bomb", "A small tin casing filled with a powder that ignites when exposed to air. The smoke from this bomb attacks the eyes and lungs, preventing it's victims from attacking or defending themselves.", "Stuns all targets for 1 round.", "SmokeBomb", 50, Range.boxThreeIndex, TraitList.choking, CombatItem.useDoesRequireAnAction, targetsEnemySection: true));
+		usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, rationsIndex), "Rations", "Moldy bread and grimy pemmican.", ItemSpriteList.rationsSprite, 5, rationsHealingAmount));
+		usableItems.Add(new RestorationItem(new ItemListID(usableItemListIndex, bandagesIndex), "Bandages", "Wrappings made from a coarse, firm cloth.", "Used to remove all " + TraitType.Wound.ToString() + " Traits from a friendly target.", ItemSpriteList.bandagesSprite, 15, Range.boxThreeIndex, TraitType.Wound));
+		usableItems.Add(new SkillReplenishItem(new ItemListID(usableItemListIndex, thistleTeaIndex), "Thistle Tea", "Tea made from the flower of local thistle plants. Sharpens the senses and reinvigorates the mind.", "Used to replenish a use of the Cunning Skill. Can not be used to increase your cunning uses above your maximum.", ItemSpriteList.teaSprite, 25));
+		usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, properFoodIndex), "Proper Food", "Food worth eating. It'll fill you up and more so.", ItemSpriteList.properFoodSprite, 15, properFoodHealingAmount));
+		usableItems.Add(new TraitApplicationItem(new ItemListID(usableItemListIndex, chokegrassBombIndex), "Chokegrass Bomb", "A small tin casing filled with a powder that ignites when exposed to air. The smoke from this bomb attacks the eyes and lungs, preventing it's victims from attacking or defending themselves.", "Stuns all targets for 1 round.", ItemSpriteList.smokeBombSprite, 50, Range.boxThreeIndex, TraitList.choking, CombatItem.useDoesRequireAnAction, targetsEnemySection: true));
 		usableItems.Add(new TraitApplicationItem(new ItemListID(usableItemListIndex, chewIndex), "Chew", "A leaf that is ground between one's teeth to get at the juices within. These secretions provide an energetic numbness that removes the ache from wounds and fatigue from muscles.", "Heals the user and increases their damage and crit chance.", StatSourceNameList.chewKey, 35, Range.singleTargetIndex, TraitList.chewBuzz, CombatItem.useDoesNotRequireAnAction, healsTarget: true));
-        usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, rockCakeIndex), "Rock Cake", "A brittle roll that looks like a grey stone. Surprisingly, it appears to still be edible.", "Rations", 8, rockCakeHealingAmount));
-        usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, horseFleshIndex), "Horse Flesh", "Strips of cooked and salted horsemeat. Chewier than beef, but no less nutritious.", "Rations", 10, horseFleshHealingAmount));
+        usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, rockCakeIndex), "Rock Cake", "A brittle roll that looks like a grey stone. Surprisingly, it appears to still be edible.", ItemSpriteList.rockCakeSprite, 8, rockCakeHealingAmount));
+        usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, horseFleshIndex), "Horse Flesh", "Strips of salted horsemeat. Chewier than beef, but no less nutritious.", ItemSpriteList.meatSprite, 10, horseFleshHealingAmount));
 
 		//Weapon(string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, int slotID)
 		//Weapon(string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, int slotID, bool isTwoHanded)
 
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, cudgelIndex), "Cudgel", "A wooden club made from a fallen tree branch.", "2S + 5", "S+D", "Cudgel", Range.verticalOneIndex, 3, isOneHanded, EffectAnimationType.Blunt));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, shivIndex), "Shiv", "A weapon made from a bronze nail tied to a small piece of wood.", "2D + 7", "3D", "Shiv", Range.singleTargetIndex, 3, isOneHanded, EffectAnimationType.Pierce));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, cudgelIndex), "Cudgel", "A wooden club made from a fallen tree branch.", "2S + 5", "S+D", ItemSpriteList.cudgelSprite, Range.verticalOneIndex, 3, isOneHanded, EffectAnimationType.Blunt));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, shivIndex), "Shiv", "A weapon made from a bronze nail tied to a small piece of wood.", "2D + 7", "3D", ItemSpriteList.shivSprite, Range.singleTargetIndex, 3, isOneHanded, EffectAnimationType.Pierce));
 		weapons.Add(new Fist(new ItemListID(weaponsListIndex, mainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "S+D+W", "D+W", "FistIcon", Range.singleTargetIndex));
         weapons.Add(null);
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, malletIndex), "Mallet", "A large hammer used to beat pitons into rock walls.", "3S + 6", "D", "MalletIcon", Range.horizontalOneIndex, 15, isOneHanded, EffectAnimationType.Blunt));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, lightPickIndex), "Light Pick", "A bronze pick meant to be used in one hand.", "3D + 8", "3D", "OneHandedPick", Range.horizontalOneIndex, 15, isOneHanded, EffectAnimationType.Pierce));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, heavyPickIndex), "Heavy Pick", "A large bronze pick meant to be used in two hands.", "4S + 7", "D", "TwoHandedPick", Range.hookOneIndex, 15, isTwoHanded, EffectAnimationType.Pierce));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, bronzeBarIndex), "Bronze Bar", "A long thin bronze ingot. A bit oxidized, but hefty.", "2S + 5", "D", "BronzeBar", Range.horizontalThreeIndex, 5, isTwoHanded, EffectAnimationType.Blunt));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, malletIndex), "Mallet", "A large hammer used to beat pitons into rock walls.", "3S + 6", "D", ItemSpriteList.malletSprite, Range.horizontalOneIndex, 15, isOneHanded, EffectAnimationType.Blunt));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, lightPickIndex), "Light Pick", "A bronze pick meant to be used in one hand.", "3D + 8", "3D", ItemSpriteList.oneHandedPickSprite, Range.horizontalOneIndex, 15, isOneHanded, EffectAnimationType.Pierce));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, heavyPickIndex), "Heavy Pick", "A large bronze pick meant to be used in two hands.", "4S + 7", "D", ItemSpriteList.twoHandedPickSprite, Range.hookOneIndex, 15, isTwoHanded, EffectAnimationType.Pierce));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, bronzeBarIndex), "Bronze Bar", "A long thin bronze ingot. A bit oxidized, but hefty.", "2S + 5", "D", ItemSpriteList.bronzeBarSprite, Range.horizontalThreeIndex, 5, isTwoHanded, EffectAnimationType.Blunt));
 		weapons.Add(null);
 		weapons.Add(new Fist(new ItemListID(weaponsListIndex, improvedMainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "2W+S+D+4", "W+D+2", "ImprovedFistIcon", Range.verticalOneIndex));
 		weapons.Add(new Fist(new ItemListID(weaponsListIndex, greaterMainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "3W+S+D+8", "W+D+4", "GreaterFistIcon", Range.boxOneIndex));
 		weapons.Add(new Fist(new ItemListID(weaponsListIndex, ruinousMainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "4W+S+D+16", "W+D+8", "RuinousFistIcon", Range.singleTargetIndex)); //When implementing 6 range selectors, this gets Sextuple Box/Horizontal
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, bronzeGreatspearIndex), "Bronze Greatspear", "A long spear with a bronze tip, made to be wielded in two hands.", "6S+12", "S+D", "BronzeSpear", Range.verticalThreeIndex, 50, isTwoHanded, EffectAnimationType.Pierce));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, wornBowIndex), "Worn Bow", "This bow is a little weathered, but can still answer the call of it's wielder", "7D+16", "3D", "WornBow", Range.verticalOneIndex, 55, isTwoHanded, EffectAnimationType.Pierce));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, fightingCapeIndex), "Fighting Cape", "A cape rapped around the mainhand, used to both deflect small blows and disorient the opponent. Often paired with a dagger in the offhand.", "3C", "C", "Cape", Range.singleTargetIndex, 35, isOneHanded, EffectAnimationType.Slash));
-		weapons.Add(new Staff (new ItemListID(weaponsListIndex, staffIndex), "Staff", "A weathered length of oak-spar. It would serve as well as a walking aid or a bludgeon. Has high Base Damage.", "10", "D+W", "Staff", Range.horizontalOneIndex, 10, isTwoHanded));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, bronzeGreatspearIndex), "Bronze Greatspear", "A long spear with a bronze tip, made to be wielded in two hands.", "6S+12", "S+D", ItemSpriteList.bronzeSpearSprite, Range.verticalThreeIndex, 50, isTwoHanded, EffectAnimationType.Pierce));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, wornBowIndex), "Worn Bow", "This bow is a little weathered, but can still answer the call of it's wielder", "7D+16", "3D", ItemSpriteList.wornBowSprite, Range.verticalOneIndex, 55, isTwoHanded, EffectAnimationType.Pierce));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, fightingCapeIndex), "Fighting Cape", "A cape rapped around the mainhand, used to both deflect small blows and disorient the opponent. Often paired with a dagger in the offhand.", "3C", "C", ItemSpriteList.capeSprite, Range.singleTargetIndex, 35, isOneHanded, EffectAnimationType.Slash));
+		weapons.Add(new Staff (new ItemListID(weaponsListIndex, staffIndex), "Staff", "A weathered length of oak-spar. It would serve as well as a walking aid or a bludgeon. Has high Base Damage.", "10", "D+W", ItemSpriteList.staffSprite, Range.horizontalOneIndex, 10, isTwoHanded));
 		weapons.Add(null);
 		weapons.Add(null);
-		weapons.Add(new Staff (new ItemListID(weaponsListIndex, plankIndex), "Plank", "A long piece of wood, pulled from a shack wall. Poorly balanced, but it'll do in a pinch.", "2W + 2", "W+D", "Plank", Range.singleTargetIndex, 3, isOneHanded));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, sharpRockIndex), "Sharp Rock", "A stone, chipped to have a meager edge. ", "2C + 3", "C+D", "SharpRock", Range.singleTargetIndex, 1, isOneHanded, EffectAnimationType.Pierce));
-        weapons.Add(new StanceWeapon(new ItemListID(weaponsListIndex, thinBladeIndex), "Bronze Thin-Blade", "A long, slender, double-edged blade with no crossguard. Favored by swordsmen for its long reach, they are either wielded solo or with a matching dagger.", "2W+2D+6", "D+W+1", "Thinblade", Range.verticalOneIndex, worth: 55, isOneHanded, EffectAnimationType.Slash));
+		weapons.Add(new Staff (new ItemListID(weaponsListIndex, plankIndex), "Plank", "A long piece of wood, pulled from a shack wall. Poorly balanced, but it'll do in a pinch.", "2W + 2", "W+D", ItemSpriteList.plankSprite, Range.singleTargetIndex, 3, isOneHanded));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, sharpRockIndex), "Sharp Rock", "A stone, chipped to have a meager edge. ", "2C + 3", "C+D", ItemSpriteList.sharpRockSprite, Range.singleTargetIndex, 1, isOneHanded, EffectAnimationType.Pierce));
+        weapons.Add(new StanceWeapon(new ItemListID(weaponsListIndex, thinBladeIndex), "Bronze Thin-Blade", "A long, slender, double-edged blade with no crossguard. Favored by swordsmen for its long reach, they are either wielded solo or with a matching dagger.", "2W+2D+6", "D+W+1", ItemSpriteList.thinbladeSprite, Range.verticalOneIndex, worth: 55, isOneHanded, EffectAnimationType.Slash));
 		
 
 		//Armor(string key, string loreDescription, int worth, int armorRating, int slotID)
@@ -459,4 +459,31 @@ public static class ItemList
 		return (Armor) getItem(armorListIndex, offHandFistIndex, 1);
 	}
 
+}
+
+public static class ItemSpriteList
+{
+    public const string bandagesSprite = "Bandages";
+    public const string bronzeBarSprite = "BronzeBar";
+    public const string bronzeSpearSprite = "BronzeSpear";
+    public const string capeSprite = "Cape";
+    public const string cudgelSprite = "Cudgel";
+    public const string curvedDaggerSprite = "CurvedDagger";
+    public const string malletSprite = "Mallet";
+    public const string meatSprite = "Meat";
+    public const string oneHandedPickSprite = "OneHandedPick";
+    public const string plankSprite = "Plank";
+    public const string properFoodSprite = "ProperFood";
+    public const string rationsSprite = "Rations";
+    public const string rockCakeSprite = "Rock Cake";
+    public const string sharpRockSprite = "SharpRock";
+    public const string shivSprite = "Shiv";
+    public const string smallCoinPurseSprite = "Small Coin Purse";
+    public const string smokeBombSprite = "SmokeBomb";
+    public const string staffSprite = "Staff";
+    public const string teaSprite = "Tea";
+    public const string thinbladeSprite = "Thinblade";
+    public const string twoHandedPickSprite = "TwoHandedPick";
+    public const string wickedKnifeSprite = "WickedKnife";
+    public const string wornBowSprite = "WornBow";
 }

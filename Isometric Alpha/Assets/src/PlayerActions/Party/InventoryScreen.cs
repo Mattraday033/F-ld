@@ -31,7 +31,7 @@ public class InventoryScreen : ScreenManager, ICounter
     public override void updateCounter()
     {
         playerNameText.text = currentPartyMember.getName().Replace(PartyManager.playerMarker, "");
-        characterSprite.sprite = currentPartyMember.getSpriteIcon();
+        characterSprite.sprite = PartyMember.getPortrait(currentPartyMember.getName());
         characterSprite.gameObject.SetActive(true);
     }
 

@@ -83,29 +83,6 @@ public static class Wisdom
 	{
 		return new CombatAction[] { new FistAttack(statSource), AbilityList.getAbility(statSource,"w-2-2"), AbilityList.getAbility(statSource,"w-2-2"), null, null, null, null, null, AbilityList.getAbility(statSource,"w-2-1"), null, null, null, };
 	}
-	
-	public static int getArmorPenFromWisdom(int wisdom)
-	{
-		switch (wisdom)
-		{
-			case 2:
-			case 3:
-                return 5;
-			case 4:
-			case 5:
-                return 10;
-			case 6:
-			case 7:
-                return 15;
-			case 8:
-			case 9:
-                return 20;
-			case >= 10:
-				return 25;
-			default:
-				return 0;
-		}
-	}
 }
 
 /*

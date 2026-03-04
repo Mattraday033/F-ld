@@ -91,6 +91,19 @@ public class PartyMember : IDescribable, IDescribableInBlocks
 		}
 	}
 
+    public static Sprite getPortrait(string name)
+    {
+        Sprite portrait = Resources.Load<Sprite>(PrefabNames.portraitFolder + name);
+
+        if(portrait != null)
+        {
+            return portrait;
+        } else
+        {
+            return Resources.Load<Sprite>(PrefabNames.portraitFolder + NPCNameList.thatch);
+        }
+    }
+
     //IDescribable Methods
     public bool ineligible()
     {

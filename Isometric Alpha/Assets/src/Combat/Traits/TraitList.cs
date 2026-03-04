@@ -126,7 +126,7 @@ public static class TraitList
 	public readonly static Trait exitStrategy = new Trait(StatSourceNameList.exitStrategyKey, TraitType.Protection, "This creature and all of it's allies take reduced damage until one round after the surprise round.", "ExitStrategy", roundsLeft: Constants.oneRoundDuration, permanent: false); //exception to round duration rule because it's applied at the top of the first round and thus doesn't need to compensate for the first tick down.
 	public readonly static LinkTrait chokeholdLinkTrait = new LinkTrait(StatSourceNameList.chokeholdKey, "This creature deals half of all damage received to whoever it is linked to.", "Chokehold", Constants.twoRoundDuration, chokeholdDamagePercentage);
 	public readonly static Trait rallied = new DamageBoostTrait(StatSourceNameList.ralliedKey, iconName: "Rally", roundsLeft: Constants.fourRoundDuration, permanent: false);
-	public readonly static Trait chewBuzz = new DamageBoostTrait(StatSourceNameList.chewBuzzKey, iconName: StatSourceNameList.chewKey, roundsLeft: Constants.threeRoundDuration);
+	public readonly static Trait chewBuzz = new DamageBoostTrait(StatSourceNameList.chewBuzzKey, iconName: StatSourceNameList.chewBuzzKey, roundsLeft: Constants.threeRoundDuration);
 
 
 	//temporary debuffs

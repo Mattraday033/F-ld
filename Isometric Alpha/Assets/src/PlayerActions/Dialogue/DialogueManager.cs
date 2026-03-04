@@ -1174,6 +1174,8 @@ public class DialogueManager : MonoBehaviour
                     State.enemyPackInfo = npcCombatInfo.getEnemyInfo(enemyPackInfoIndex);
                     State.allyPackInfo = AllyPackInfoList.defaultAllyPackInfoByZone();
 
+                    AudioManager.playBattleMusic();
+
                     NotificationManager.skipNextNotificationSpawn();
                     CombatStateManager.whoIsSurprised = SurpriseState.NoOneSurprised;
 

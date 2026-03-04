@@ -78,10 +78,12 @@ public class EditorAbilityMenuButton : AbilityMenuButton
     {
         abilityMenuButton.enabled = false;
 
-        abilityIcon.sprite = null;
+        DescriptionPanel.setImage(abilityIcon, null);
         abilityIcon.enabled = false;
 
+        iconOutline.color = ColorList.darkUICyan;
         iconBackground.color = ColorList.lightUICyan;
+        
 
         loadedCombatAction = null;
     }

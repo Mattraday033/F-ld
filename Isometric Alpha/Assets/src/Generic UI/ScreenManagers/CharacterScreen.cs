@@ -49,7 +49,7 @@ public class CharacterScreen : ScreenManager, ICounter
     public override void updateCounter()
     {
         playerNameText.text = currentPartyMember.getName().Replace(PartyManager.playerMarker, "");
-        characterSprite.sprite = currentPartyMember.getSpriteIcon();
+        characterSprite.sprite = PartyMember.getPortrait(currentPartyMember.getName());
     }
 
     public override List<UnityEvent> getUpdateEvents()

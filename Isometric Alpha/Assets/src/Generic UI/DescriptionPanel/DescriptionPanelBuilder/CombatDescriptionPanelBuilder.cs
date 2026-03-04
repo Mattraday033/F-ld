@@ -98,18 +98,6 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
         Helpers.updateGameObjectPosition(rowObject);
     }
 
-    private bool blockIsTypeBlock(DescriptionPanelBuildingBlock block)
-    {
-        if (block.iconName != null &&
-        (block.iconName.Equals(IconList.actionTypeIconName) ||
-                block.iconName.Equals(IconList.traitTypeIconName)))
-        {
-            return true;
-        }
-
-        return false;
-    }
-
     public override void activateInspectNode()
     {
         if(inspectNode != null)

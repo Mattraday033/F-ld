@@ -7147,8 +7147,10 @@ MonoBehaviour:
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 0}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 0}
+  bubble: {fileID: 0}
 --- !u!1 &4185481774307089526
 GameObject:
   m_ObjectHideFlags: 0
@@ -8860,8 +8862,10 @@ MonoBehaviour:
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 0}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 0}
+  bubble: {fileID: 0}
 --- !u!1 &5103203007859461201
 GameObject:
   m_ObjectHideFlags: 0
@@ -11097,8 +11101,10 @@ MonoBehaviour:
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 0}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 0}
+  bubble: {fileID: 0}
 --- !u!1 &6290071875317011070
 GameObject:
   m_ObjectHideFlags: 0
@@ -12696,8 +12702,10 @@ MonoBehaviour:
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 0}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 0}
+  bubble: {fileID: 0}
 --- !u!114 &8529930565373970017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14628,6 +14636,12 @@ PrefabInstance:
       propertyPath: m_PreferredHeight
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 7083176847208168385, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5cc0ac08a82ad414abbeac656e008b8d,
+        type: 3}
     - target: {fileID: 7912202418776353152, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
         type: 3}
       propertyPath: m_Pivot.x

@@ -19,12 +19,20 @@ public class SkillButtonManager : MonoBehaviour
 
     public Button skillButton;
 
+    public Button leftArrow;
+    public Button rightArrow;
+
+    public SlotIconHover skillButtonHover;
+
+
     public Image skillButtonOutline;
 
     private void OnEnable()
     {
         PlayerOOCStateManager.OnStateChangeToSkill.AddListener(highlightSkillOutline);
+        PlayerOOCStateManager.OnStateChangeToSkill.AddListener(disableButtons);
         PlayerOOCStateManager.OnStateChangeFromSkill.AddListener(unhighlightSkillOutline);
+        PlayerOOCStateManager.OnStateChangeFromSkill.AddListener(enableButtons);
 
         Formation.OnFormationChange.AddListener(setToNextSkill);
     }
@@ -32,9 +40,25 @@ public class SkillButtonManager : MonoBehaviour
     private void OnDisable()
     {
         PlayerOOCStateManager.OnStateChangeToSkill.RemoveListener(highlightSkillOutline);
+        PlayerOOCStateManager.OnStateChangeToSkill.RemoveListener(disableButtons);
         PlayerOOCStateManager.OnStateChangeFromSkill.RemoveListener(unhighlightSkillOutline);
+        PlayerOOCStateManager.OnStateChangeFromSkill.RemoveListener(enableButtons);
         
         Formation.OnFormationChange.RemoveListener(setToNextSkill);
+    }
+
+    private void disableButtons()
+    {
+        skillButton.enabled = false;
+        leftArrow.enabled = false;
+        rightArrow.enabled = false;
+    }
+
+    private void enableButtons()
+    {
+        skillButton.enabled = true;
+        leftArrow.enabled = true;
+        rightArrow.enabled = true;
     }
 
     public static void setToNextSkill()
