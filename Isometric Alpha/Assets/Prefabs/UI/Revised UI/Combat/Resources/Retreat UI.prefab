@@ -84,12 +84,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverMessageKey: Retreat Button
+  ignoreHover: 0
   bonusDamageIcon: 0
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 4695641849108684989}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 9160983164529529933}
-  iconImage: {fileID: 532405025980822482}
+  iconImage: {fileID: 0}
+  bubble: {fileID: 0}
   retreatButton: {fileID: 3014053869112202209}
   retreatChanceText: {fileID: 8039594411394690675}
 --- !u!114 &1345747690931978783
@@ -411,6 +414,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 318bc77f74e54a449b414286102a42c6,
         type: 3}
+    - target: {fileID: 7083176847208168385, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 318bc77f74e54a449b414286102a42c6,
+        type: 3}
     - target: {fileID: 7912202418776353152, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
         type: 3}
       propertyPath: m_Pivot.x
@@ -526,18 +535,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8499f1c5249e4cb4fb0b21d8c0d24202, type: 3}
---- !u!114 &532405025980822482 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6619013765722126034, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
-    type: 3}
-  m_PrefabInstance: {fileID: 6681105988234347776}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &3563970538434407552 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7912202418776353152, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,

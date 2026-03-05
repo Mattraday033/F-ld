@@ -129,6 +129,10 @@ public class HeartBeatManager : MonoBehaviour
     {
         switch(enemyType)
         {
+            case MonsterNameList.hiveHeraldNest:
+            case MonsterNameList.martyrWormNest:
+            case MonsterNameList.toxicWormNest:
+            case MonsterNameList.wormNest:
             case MonsterNameList.denMother:
             case MonsterNameList.batSwarm:
             case MonsterNameList.giantBat:         
@@ -206,10 +210,11 @@ public static class IdleDictionary
     {
         switch(monsterName)
         {
-            case MonsterNameList.direWorm:
-                return true;
-            default:
-                return false;
+            case MonsterNameList.wormNest:    
+            case MonsterNameList.direWorm:    
+                return true;    
+            default:    
+                return false;    
         }
     }
 

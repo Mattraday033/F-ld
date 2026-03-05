@@ -60,10 +60,6 @@ public class StartingMenuManager : MonoBehaviour
 			case StartingMenuState.OnMainMenu:
 				return;
 			case StartingMenuState.Loading:
-
-                mainMenuBackground.SetActive(true);
-
-                break;
             case StartingMenuState.CharacterCreation:
 
                 mainMenuBackground.SetActive(true);

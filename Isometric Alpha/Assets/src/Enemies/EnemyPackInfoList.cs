@@ -43,6 +43,32 @@ public static class EnemyPackInfoList
 
     #endregion
 
+    #region Mine Boss Fights
+
+    private readonly static EnemyPackInfo caveMatronBatBoss = new BossPackInfo(new CreatureAmount[] { EnemyAmountList.caveMatron },
+                                                                                                    DropTableList.slaveMineDT1Name,
+                                                                                                    guaranteedDrops: new ItemListID[] { new ItemListID(  ItemList.keyItemListIndex,
+                                                                                                                                        ItemList.mineArmoryKeyIndex) }, 
+                                                                                                                                        xpDrop: 100);
+
+    private readonly static EnemyPackInfo wormBoss = new BossPackInfo(new CreatureAmount[] {  
+                                                                                              EnemyAmountList.wormNest,
+                                                                                              EnemyAmountList.hiveHeraldNest,
+                                                                                              EnemyAmountList.martyrWormNest,
+                                                                                              EnemyAmountList.toxicWormNest
+                                                                                                },
+                                                                                                DropTableList.slaveMineDT1Name, 
+                                                                                                xpDrop: 100,
+                                                                                                spawnDetailsList: new List<SpawnDetails>()
+                                                                                                    {
+                                                                                                        SpawnDetails.bottomRight2x2,
+                                                                                                        SpawnDetails.topLeft2x2,
+                                                                                                        SpawnDetails.topRight2x2,
+                                                                                                        SpawnDetails.bottomLeft2x2
+                                                                                                    });
+
+    #endregion
+
     #region Manse Boss Fights
 
     public readonly static BossPackInfo kendeKitchensHalfSlavesNoGuard = new BossPackInfo(new CreatureAmount[] { 
@@ -421,18 +447,6 @@ public static class EnemyPackInfoList
                                                                                                                             },
                                                                                                                     DropTableList.slaveMineDT1Name);
 
-    private readonly static EnemyPackInfo caveMatronBatBoss = new BossPackInfo(new CreatureAmount[] { EnemyAmountList.caveMatron },
-                                                                                                    DropTableList.slaveMineDT1Name,
-                                                                                                    guaranteedDrops: new ItemListID[] { new ItemListID(  ItemList.keyItemListIndex,
-                                                                                                                                        ItemList.mineArmoryKeyIndex) }, 
-                                                                                                                                        xpDrop: 100);
-
-    private readonly static EnemyPackInfo wormBoss = new BossPackInfo(new CreatureAmount[] {  EnemyAmountList.threeDenMothers,
-                                                                                                EnemyAmountList.threeBatSwarms,
-                                                                                                EnemyAmountList.oneArmoredBat
-                                                                                                },
-                                                                                                DropTableList.slaveMineDT1Name, 
-                                                                                                xpDrop: 100);
     #endregion
 
     #region Worms
@@ -621,7 +635,7 @@ public static class EnemyPackInfoList
         #region MineLvl_2-1c
         list = new List<EnemyPackInfo>();
 
-        list.Add(oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat);
+        // list.Add(oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat);
         list.Add(twoGiantBatsThreeBatSwarmsOneArmoredBat);
 
         enemyPackInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1c, list);
@@ -646,9 +660,9 @@ public static class EnemyPackInfoList
         #region MineLvl_2-3b
         list = new List<EnemyPackInfo>();
 
-        list.Add(oneArmoredBatOneScreecherOneDenMother);
-        list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
-        list.Add(oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat);
+        // list.Add(oneArmoredBatOneScreecherOneDenMother);
+        // list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
+        // list.Add(oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat);
 
         enemyPackInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section3b, list);
         #endregion
@@ -759,7 +773,7 @@ public static class EnemyPackInfoList
         list = new List<EnemyPackInfo>();
 
         list.Add(oneArmoredWormFourWorms);
-        list.Add(oneDireWormTwoHiveHeraldsThreeWorms);
+        // list.Add(oneDireWormTwoHiveHeraldsThreeWorms);
         list.Add(twoMartyWormsOneToxicWormOneHiveHeraldOneArmoredWorm);
 
         enemyPackInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section6a, list);

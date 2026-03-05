@@ -19,6 +19,8 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 	private const string dividerCharacter = "~";
 
 	public int saveNumber;
+    public string playerPortraitName;
+    public string playerSpriteName;
 
 	public string currentLocation;
 	public float[] playerPosition;
@@ -72,6 +74,9 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 
 		saveBlueprint.onLeftFoot = State.onLeftFoot;
 		saveBlueprint.saveNumber = saveNumber;
+
+        saveBlueprint.playerPortraitName = State.playerPortraitName;
+        saveBlueprint.playerSpriteName = State.playerSpriteName;
 
 		saveBlueprint.terrainHidden = State.terrainHidden;
 
@@ -142,6 +147,9 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 
 		this.saveName = GetFromJson.getElementFromJson(SaveDefaultValues.badSaveName, nameof(saveName), jsonDynamic, SaveDefaultValues.badSaveName);
 		this.saveNumber = GetFromJson.getElementFromJson(this.saveName, nameof(saveNumber), jsonDynamic, SaveDefaultValues.badSaveNumber);
+
+        this.playerPortraitName = GetFromJson.getElementFromJson(this.saveName, nameof(playerPortraitName), jsonDynamic, SaveDefaultValues.defaultPortraitName);
+        this.playerSpriteName = GetFromJson.getElementFromJson(this.saveName, nameof(playerSpriteName), jsonDynamic, SaveDefaultValues.defaultSpriteName);
 
 		this.currentLocation = GetFromJson.getElementFromJson(this.saveName, nameof(currentLocation), jsonDynamic, SaveDefaultValues.defaultSceneName);
 		this.playerPosition = GetFromJson.getElementFromJson(this.saveName, nameof(playerPosition), jsonDynamic, SaveDefaultValues.defaultPlayerPosition);

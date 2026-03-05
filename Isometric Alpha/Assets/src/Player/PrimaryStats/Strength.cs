@@ -71,14 +71,14 @@ public static class Strength
 	public const string startingDescription = "Strength enhances your physical prowess, furiosity, and intimidation. " +
 									 "Strong characters can take powerful attacks on the chin and then hit back harder. " +
 									 "They tend to throw their weight around, using threats to get their way. " +
-									 "And if things turn violent anyways? Perhaps that is what they wanted all along.";
+									 "And if things turn violent? They must decide for themselves if that is what they wanted all along.";
 
 	public static string getDescription()
 	{
 		string startingDescription = "Strength is the Primary Stat of physical prowess, furiosity, and intimidation. " +
 									 "Strong characters can take powerful attacks on the chin and then hit back harder. " +
 									 "They tend to throw their weight around, using threats both implicit and explicit to get their way. " +
-									 "And if things turn violent anyways? Perhaps that is what they wanted all along.\n\n";
+									 "And if things turn violent? They must decide for themselves if that is what they wanted all along.\n\n";
 
 		string combatDescription = "Combat: Characters that rely on their Strength in combat have access to more weapons than other characters, and can hit more enemies at a time. " +
 								   "They also have more health and heal after every combat, allowing them to rarely need to avoid battle. " +

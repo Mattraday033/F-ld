@@ -197,6 +197,8 @@ public static class PrefabNames
 
     public const string UITexturesFolder = UIFolder + "UI Textures/";
 
+    public const string blankTexture = UITexturesFolder + "Blank";
+
     public const string UIBubble = UITexturesFolder + "Bubble";
 
     public const string portraitFolder = UIFolder + "Portraits/";

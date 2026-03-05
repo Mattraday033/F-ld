@@ -1629,6 +1629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverMessageKey: Usable Items Tab.
+  ignoreHover: 0
   bonusDamageIcon: 0
   damageIcon: 0
   descriptionPanel: {fileID: 0}
@@ -3299,6 +3300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverMessageKey: Armor Tab
+  ignoreHover: 0
   bonusDamageIcon: 0
   damageIcon: 0
   descriptionPanel: {fileID: 0}
@@ -3814,6 +3816,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverMessageKey: Essential Tab
+  ignoreHover: 0
   bonusDamageIcon: 0
   damageIcon: 0
   descriptionPanel: {fileID: 0}
@@ -4711,82 +4714,6 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.39215687, g: 0.49019608, b: 0.50980395, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: dc56b40ee3fb65f498c78b09d8e37506,
-    type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!1 &5191419730217644600
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7977646520197101243}
-  - component: {fileID: 3918681643836871351}
-  - component: {fileID: 3787187697550359649}
-  m_Layer: 5
-  m_Name: Place Holder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &7977646520197101243
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5191419730217644600}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1006703655102498199}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.1557, y: -0.5325}
-  m_SizeDelta: {x: 29.7735, y: 28.1949}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &3918681643836871351
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5191419730217644600}
-  m_CullTransparentMesh: 1
---- !u!114 &3787187697550359649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5191419730217644600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.41960788, g: 0.4784314, b: 0.4901961, a: 1}
-  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -6252,6 +6179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverMessageKey: Off Hand Tab.
+  ignoreHover: 0
   bonusDamageIcon: 0
   damageIcon: 0
   descriptionPanel: {fileID: 0}
@@ -7482,6 +7410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverMessageKey: Junk Tab
+  ignoreHover: 0
   bonusDamageIcon: 0
   damageIcon: 0
   descriptionPanel: {fileID: 0}
@@ -8422,82 +8351,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
---- !u!1 &8885118737097840030
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4465159207303141775}
-  - component: {fileID: 5285612870065305334}
-  - component: {fileID: 2521292944311142754}
-  m_Layer: 5
-  m_Name: Place Holder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &4465159207303141775
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8885118737097840030}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1006703655102498199}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11, y: 8.565}
-  m_SizeDelta: {x: 10, y: 10}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &5285612870065305334
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8885118737097840030}
-  m_CullTransparentMesh: 1
---- !u!114 &2521292944311142754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8885118737097840030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.41960788, g: 0.4784314, b: 0.4901961, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: dc56b40ee3fb65f498c78b09d8e37506,
-    type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8889554827410232537
 GameObject:
   m_ObjectHideFlags: 0
@@ -8721,6 +8574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverMessageKey: Main Hand Tab
+  ignoreHover: 0
   bonusDamageIcon: 0
   damageIcon: 0
   descriptionPanel: {fileID: 0}
@@ -10075,8 +9929,13 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 603507496288981261, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
-      propertyPath: m_Color.b
+      propertyPath: m_Color.a
       value: 0.29411766
+      objectReference: {fileID: 0}
+    - target: {fileID: 603507496288981261, guid: e8b312289d6018b4ba510ae594d13a06,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 603507496288981261, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
@@ -10238,26 +10097,12 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8578552847065222088}
-    - targetCorrespondingSourceObject: {fileID: 2906189776788178019, guid: e8b312289d6018b4ba510ae594d13a06,
-        type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 7977646520197101243}
-    - targetCorrespondingSourceObject: {fileID: 2906189776788178019, guid: e8b312289d6018b4ba510ae594d13a06,
-        type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 4465159207303141775}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8409368354747443211, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7014322389680387602}
   m_SourcePrefab: {fileID: 100100000, guid: e8b312289d6018b4ba510ae594d13a06, type: 3}
---- !u!224 &1006703655102498199 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2906189776788178019, guid: e8b312289d6018b4ba510ae594d13a06,
-    type: 3}
-  m_PrefabInstance: {fileID: 2714645382501761524}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2471905226458694328 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 567914400332940108, guid: e8b312289d6018b4ba510ae594d13a06,

@@ -20,9 +20,13 @@ public static class MonsterNameList
     public const string broodling = "Broodling";
     public const string direWorm = "Dire Worm";
     public const string hiveHerald = "Hive Herald";
+    public const string hiveHeraldNest = "Hive Herald Nest";
     public const string martyrWorm = "Martyr Worm";
+    public const string martyrWormNest = "Martyr Worm Nest";
     public const string toxicWorm = "Toxic Worm";
+    public const string toxicWormNest = "Toxic Worm Nest";
     public const string worm = "Worm";
+    public const string wormNest = "Worm Nest";
     #endregion
 
     #region Lovashi

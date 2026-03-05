@@ -62,6 +62,7 @@ public static class FlagNameList
         public const string learnedAboutMuszasSweetToothFromKastor = "learnedAboutMuszasSweetToothFromKastor"; //needed to be told about M�zsa's sweet tooth from Kastor because you gave her a bad reason to enter the mine
         public const string toldToFindNandor = "toldToFindNandor"; //if you've been told to find Nandor by kastor 
         public const string toldToFindTools = "toldToFindTools"; //If kastor has told you to find the tools in the armory
+        public const string hasToolBundle = "hasToolBundle"; //obtained tool bundle in mine armory or guard barracks
         public const string gaveKastorToolBundle = "gaveKastorToolBundle"; //if you've given Kastor the tools from the armory
         public const string broughtNandorToKastor = "broughtNandorToKastor"; //if you've brought Nandor to Kastor after being told to
         public const string kastorReadyToStartRevolt = "kastorReadyToStartRevolt"; //if Kastor is ready to move the plan to the actual revolt

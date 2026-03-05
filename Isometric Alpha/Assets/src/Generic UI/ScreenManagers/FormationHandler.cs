@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using TMPro;
 
 public class FormationHandler : ScreenManager, IPartyEditor, ICounter
@@ -11,6 +12,8 @@ public class FormationHandler : ScreenManager, IPartyEditor, ICounter
     public TextMeshProUGUI slotTracker;
 
     public DescriptionPanelSlot primaryStatSlot;
+
+    public Image[] portraitImages;
 
     public override bool enableSpriteRowDragAndDrop()
     {
@@ -22,6 +25,27 @@ public class FormationHandler : ScreenManager, IPartyEditor, ICounter
     public void updateSlotTracker()
     {
         slotTracker.text = State.formation.getSizeOfFormation() + " / " + PartyStats.getPartySizeMaximum();
+    }
+
+    public void updatePortraits()
+    {
+        List<AllyStats> partyMembers = State.formation.getAllPartyStatsInFormation();
+
+        for(int index = 0; index < portraitImages.Length; index++)
+        {
+            if(index >= partyMembers.Count)
+            {
+                portraitImages[index].sprite = Resources.Load<Sprite>(PrefabNames.blankTexture);
+            } else
+            {
+                if(partyMembers[index] == null)
+                {
+                    continue;
+                }
+
+                portraitImages[index].sprite = PartyMember.getPortrait(partyMembers[index].getName());
+            }
+        }
     }
 
     public void addCharacterToFormation(AllyStats characterToAdd, int row, int col)
@@ -86,6 +110,7 @@ public class FormationHandler : ScreenManager, IPartyEditor, ICounter
     public override void updateCounter()
     {
         updateSlotTracker();
+        updatePortraits();
     }
 
     public override List<UnityEvent> getUpdateEvents()

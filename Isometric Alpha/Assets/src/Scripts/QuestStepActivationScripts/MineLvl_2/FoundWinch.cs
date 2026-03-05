@@ -10,3 +10,19 @@ public class FoundWinch : QuestStepActivationScript
     }
 
 }
+
+public class FoundToolBundle : QuestStepActivationScript
+{
+    public override void runScript()
+    {
+        if(Flags.getFlag(FlagNameList.toldToFindTools) && 
+            !(Flags.getFlag(FlagNameList.hasToolBundle) || 
+                Flags.getFlag(FlagNameList.gaveKastorToolBundle) || 
+                Flags.getFlag(FlagNameList.convincedSlavesToHelpYou)))
+        {
+            QuestList.activateQuestStep(QuestNameList.thePlanQuestTitle, QuestNameList.thePlanStepTitleNine);
+            Flags.setFlag(FlagNameList.hasToolBundle, true);
+        }
+    }
+
+}

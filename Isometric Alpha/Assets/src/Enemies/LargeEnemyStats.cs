@@ -13,6 +13,10 @@ public class SpawnDetails
                                                                                         new GridCoords(0,1), new GridCoords(0,0) });
     public readonly static SpawnDetails topRight2x2 =  new SpawnDetails(new GridCoords[]{ new GridCoords(1,3), new GridCoords(0,3),
                                                                                         new GridCoords(1,2), new GridCoords(0,2) });
+    public readonly static SpawnDetails bottomLeft2x2 = new SpawnDetails(new GridCoords[]{ new GridCoords(3,1), new GridCoords(3,0),
+                                                                                        new GridCoords(2,1), new GridCoords(2,0) });
+    public readonly static SpawnDetails bottomRight2x2 =  new SpawnDetails(new GridCoords[]{ new GridCoords(3,3), new GridCoords(3,3),
+                                                                                        new GridCoords(2,2), new GridCoords(2,2) });
 
     public readonly static SpawnDetails middle2x2 =  new SpawnDetails(new GridCoords[]{ new GridCoords(2,2), new GridCoords(2,1),
                                                                                         new GridCoords(1,2), new GridCoords(1,1) });
@@ -102,6 +106,8 @@ public class LargeEnemyStats : EnemyStats
 
         setHealthBarToAverageWorldPosition();
 
+        setHeartBeatRowByName();
+
         OnLargeEnemySpawn.Invoke();
 
         return combatSpriteGameObject;
@@ -156,6 +162,31 @@ public class LargeEnemyStats : EnemyStats
     #endregion
 
     #region AnimationManager
+
+    public void setHeartBeatRowByName()
+    {
+        int heartBeatRow = 0;
+
+        switch(getName())
+        {
+            case MonsterNameList.hiveHeraldNest:
+                heartBeatRow = 0;
+                break;
+            case MonsterNameList.martyrWormNest:
+                heartBeatRow = 1;
+                break;
+            case MonsterNameList.toxicWormNest:
+                heartBeatRow = 2;
+                break;
+            case MonsterNameList.wormNest:
+                heartBeatRow = 3;
+                break;
+            default:
+                return;
+        }
+
+        animationManager.heartBeatRow = heartBeatRow;
+    }
 
     #endregion
 

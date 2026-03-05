@@ -187,7 +187,7 @@ public static class OOCSpawnDetailsList
         #region GuardHouse SW
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(-5,1), Facing.SouthWest));
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(-5,1), Facing.SouthWest, script: new FoundToolBundle()));
         list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(-6,3), Facing.SouthEast));
         list.Add(new ChestSpawnDetails(Constants.indexTwo, new Vector3Int(-7,3), Facing.SouthEast));
         list.Add(new ChestSpawnDetails(Constants.indexThree, new Vector3Int(-8,1), Facing.NorthEast));
@@ -652,7 +652,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(11, 4), Facing.SouthWest));
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(11, 4), Facing.SouthWest, script: new FoundToolBundle()));
         list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(11, -2), Facing.SouthWest));
         list.Add(new ChestSpawnDetails(Constants.indexTwo, new Vector3Int(1, 5), Facing.SouthEast));
         list.Add(new ChestSpawnDetails(Constants.indexThree, new Vector3Int(1, -3), Facing.NorthWest));

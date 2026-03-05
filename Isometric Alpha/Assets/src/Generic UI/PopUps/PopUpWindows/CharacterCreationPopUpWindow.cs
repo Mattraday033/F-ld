@@ -12,6 +12,7 @@ using UnityEngine.EventSystems;
 public class CharacterCreationPopUpWindow : PopUpWindow
 {
     private static CharacterCreationPopUpWindow instance;
+    public readonly static string[] portraitSpriteNameList = new string[]{ NPCNameList.thatch, NPCNameList.nandor };
 
     public TMP_InputField nameField;
 
@@ -27,6 +28,11 @@ public class CharacterCreationPopUpWindow : PopUpWindow
 
     public PrimaryStatsPanel primaryStatsPanel;
 
+    public int portraitNameIndex = 0;
+    public int spriteNameIndex = 0;
+
+    public Image portraitImage;
+    public Image spriteImage;
 
     [RuntimeInitializeOnLoadMethod]
     private static void intitializeCharacterCreationWindow()
@@ -164,21 +170,13 @@ public class CharacterCreationPopUpWindow : PopUpWindow
 
         pointsToSpendDisplay.text = "" + pointsToSpend;
 
-        // if(pointsToSpend == 1)
-        // {
-        //     statTitleImage.color = disabledColor;
-        //     statDescriptionImage.color = disabledColor;
-        //     statTitle.text = "";
-        //     statDescription.text = "";
-        // } else
-        // {
-        //     statTitleImage.color = Color.white;
-        //     statDescriptionImage.color = Color.white;
-        //     statTitle.text = getStatTitle();
-        //     statDescription.text = getStatDescription();
-        // }
+        updatePortraitSpriteImages();
+    }
 
-        // statDescriptionScroll.disableScrollCheck();
+    private void updatePortraitSpriteImages()
+    {
+        portraitImage.sprite = getPortrait();
+        spriteImage.sprite = getSprite();
     }
 
     public void setInteractability()
@@ -232,6 +230,8 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         PartyManager.addPlayerStatsToDict(playerStats);
 
         State.formation = new Formation();
+        State.playerPortraitName = portraitSpriteNameList[portraitNameIndex];
+        State.playerSpriteName = portraitSpriteNameList[spriteNameIndex];
 
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.inDialogue);
         OverallUIManager.resetScreenStates();
@@ -322,5 +322,69 @@ public class CharacterCreationPopUpWindow : PopUpWindow
             default:
                 return;
         }
+    }
+
+    private Sprite getSprite()
+    {
+        Sprite[] sprites = Resources.LoadAll<Sprite>(EnemyTypeFolderPathList.getEnemyTypeFolderPath(portraitSpriteNameList[spriteNameIndex])+CharacterAnimationType.Idle_Front.ToString());
+
+        return sprites[Constants.indexZero];
+    }
+
+    private Sprite getPortrait()
+    {
+        return Helpers.loadSpriteFromResources(PrefabNames.portraitFolder + portraitSpriteNameList[portraitNameIndex]);
+    }
+
+    public void incrementSpriteIndex()
+    {
+        if(spriteNameIndex >= portraitSpriteNameList.Length-1)
+        {
+            spriteNameIndex = 0;
+        } else
+        {
+            spriteNameIndex++;
+        }
+
+        updatePortraitSpriteImages();
+    }
+
+    public void decrementSpriteIndex()
+    {
+        if(spriteNameIndex <= 0)
+        {
+            spriteNameIndex = portraitSpriteNameList.Length-1;
+        } else
+        {
+            spriteNameIndex--;
+        }
+
+        updatePortraitSpriteImages();
+    }
+
+    public void incrementPortraitIndex()
+    {
+        if(portraitNameIndex >= portraitSpriteNameList.Length-1)
+        {
+            portraitNameIndex = 0;
+        } else
+        {
+            portraitNameIndex++;
+        }
+
+        updatePortraitSpriteImages();
+    }
+
+    public void decrementPortraitIndex()
+    {
+        if(portraitNameIndex <= 0)
+        {
+            portraitNameIndex = portraitSpriteNameList.Length-1;
+        } else
+        {
+            portraitNameIndex--;
+        }
+
+        updatePortraitSpriteImages();
     }
 }

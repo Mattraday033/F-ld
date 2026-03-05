@@ -663,7 +663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   iconObject: {fileID: 0}
-  iconImage: {fileID: 7539613208175984549}
+  iconImage: {fileID: 5851614520475693750}
   iconOutline: {fileID: 611451911661329014}
   iconBackground: {fileID: 1216873973385123898}
   iconLayoutElement: {fileID: 5868503182628879861}
@@ -689,7 +689,7 @@ MonoBehaviour:
   additionalSlots: []
   showingShopkeeperInventory: 0
   iconBackgroundPanel: {fileID: 0}
-  iconPanel: {fileID: 7539613208175984549}
+  iconPanel: {fileID: 5851614520475693750}
   slotIconPanel: {fileID: 0}
   slotIconBackgroundPanel: {fileID: 0}
   typeIconPanel: {fileID: 0}
@@ -1034,6 +1034,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &5851614520475693750 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7083176847208168385, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
+    type: 3}
+  m_PrefabInstance: {fileID: 3709105406893984119}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b28ca76a5754e2d4188067494789cbc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5868503182628879861 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7064035902878807170, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
@@ -1052,15 +1064,3 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3709105406893984119}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7539613208175984549 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6619013765722126034, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
-    type: 3}
-  m_PrefabInstance: {fileID: 3709105406893984119}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

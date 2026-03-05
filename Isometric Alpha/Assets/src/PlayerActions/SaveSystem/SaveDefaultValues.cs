@@ -18,6 +18,9 @@ public static class SaveDefaultValues
     public const string defaultOverworldSpriteSortingLayer = "First";
     public const string defaultPlayerName = "Brandon";
 
+    public const string defaultPortraitName = NPCNameList.thatch;
+    public const string defaultSpriteName = NPCNameList.thatch;
+
     public const int defaultIndexNegativeOne = -1;
     public const int defaultStatZero = 0;
     public const int defaultStatOne = 1;

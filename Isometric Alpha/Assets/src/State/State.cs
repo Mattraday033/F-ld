@@ -13,6 +13,9 @@ public static class State
 	public static bool debugRetreatAutoSucceed = false;
 	public static bool enableGridDebugger = false;
 
+    public static string playerPortraitName = NPCNameList.thatch;
+    public static string playerSpriteName = NPCNameList.thatch;
+
 	public static OOCUIManager oocUIManager;
 
 	public static bool terrainHidden;

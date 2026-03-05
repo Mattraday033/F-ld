@@ -26,7 +26,7 @@ public static class EnemyTypeFolderPathList
     {
         if(enemyType.Contains(PartyManager.playerMarker))
         {
-            enemyType = NPCNameList.thatch;
+            enemyType = State.playerSpriteName;
         }
 
         if(!folderPathDict.ContainsKey(enemyType))
@@ -66,9 +66,13 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(MonsterNameList.broodling, wormFolderPath + MonsterNameList.broodling + "/");
         folderPathDict.Add(MonsterNameList.direWorm, wormFolderPath + MonsterNameList.direWorm + "/");
         folderPathDict.Add(MonsterNameList.hiveHerald, wormFolderPath + MonsterNameList.hiveHerald + "/");
+        folderPathDict.Add(MonsterNameList.hiveHeraldNest, wormFolderPath + MonsterNameList.hiveHeraldNest + "/");
         folderPathDict.Add(MonsterNameList.martyrWorm, wormFolderPath + MonsterNameList.martyrWorm + "/");
+        folderPathDict.Add(MonsterNameList.martyrWormNest, wormFolderPath + MonsterNameList.martyrWormNest + "/");
         folderPathDict.Add(MonsterNameList.toxicWorm, wormFolderPath + MonsterNameList.toxicWorm + "/");
+        folderPathDict.Add(MonsterNameList.toxicWormNest, wormFolderPath + MonsterNameList.toxicWormNest + "/");
         folderPathDict.Add(MonsterNameList.worm, wormFolderPath + MonsterNameList.worm + "/");
+        folderPathDict.Add(MonsterNameList.wormNest, wormFolderPath + MonsterNameList.wormNest + "/");
         #endregion
 
         #region Lovashi
@@ -181,7 +185,7 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.horse+1, horsesFolderPath + MonsterNameList.horseCharger + "/");
         folderPathDict.Add(NPCNameList.horse+2, horsesFolderPath + MonsterNameList.horseStomper + "/");
 
-        folderPathDict.Add(NPCNameList.csalan, horsesFolderPath + MonsterNameList.horseStomper + "/");
+        folderPathDict.Add(NPCNameList.csalan, horsesFolderPath + NPCNameList.csalan + "/");
 
         #endregion
 
@@ -207,6 +211,10 @@ public static class EnemyTypeFolderPathList
     {
         switch(enemyType)
         {
+            case MonsterNameList.hiveHeraldNest:
+            case MonsterNameList.martyrWormNest:
+            case MonsterNameList.toxicWormNest:
+            case MonsterNameList.wormNest:
             case MonsterNameList.direWorm:
                 if(CombatStateManager.inCombat)
                 {

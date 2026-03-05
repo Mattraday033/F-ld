@@ -120,6 +120,11 @@ public static class EnemyAmountList
     public readonly static CreatureAmount twoWorms = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.worm));
     public readonly static CreatureAmount threeWorms = new CreatureAmount(Constants.threeCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.worm));
 
+    public readonly static CreatureAmount hiveHeraldNest = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.hiveHeraldNest));
+    public readonly static CreatureAmount martyrWormNest = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.martyrWormNest));
+    public readonly static CreatureAmount toxicWormNest = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.toxicWormNest));
+    public readonly static CreatureAmount wormNest = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.wormNest));
+
     #endregion
 
     #region Horses

@@ -210,6 +210,8 @@ public static class ItemList
     public const string plumedHelmetKey = "Ancient Plumed " + helmetSuffix;
 	public const string cookingPotKey = "Cooking Pot";
 
+    public const string toolBundleKey = "Tool Bundle";
+
 	[RuntimeInitializeOnLoadMethod]
 	private static void initializeItemList()
 	{
@@ -299,7 +301,7 @@ public static class ItemList
 		"is he going? Maybe he knows something I don't.\"", guardDiaryIndex));
 		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, winchIndex), "Winch", "A piece of bent bronze with a wooden handle. Perhaps it fits some mechanism?", winchIndex));
 		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, candyIndex), "Candy", "A few pieces of hardened honey and ginger, kept inside a small stoppered clay jar.", 35, candyIndex));
-		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, toolBundleIndex), "Tool Bundle", "A large amount of picks, mattocks, axes, and shovels. An array of improvised weapons waiting for wielders.", toolBundleIndex));
+		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, toolBundleIndex), toolBundleKey, "A large amount of picks, mattocks, axes, and shovels. An array of improvised weapons waiting for wielders.", toolBundleIndex));
 		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, blastingJellyIndex), "Blasting Jelly", "A small barrel containing a strange smelling, gelatinous mixture. Inert without it's primer and igniting agent.", blastingJellyIndex));
 		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, claysNoteIndex), "Clay's Note", "", claysNoteIndex));
 		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, laszloBadgeIndex), "Guard László's Badge", "This bronze badge is in the shape of a large coin, with the Lovashi symbol of a horse and it's rider etched into it.", laszloBadgeIndex));

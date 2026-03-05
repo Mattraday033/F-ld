@@ -229,7 +229,24 @@ public class ButtonOrderLogicScript : ButtonLogicScript
 
         for(int index = 0; index < obstacleCoords.Length && index < spriteNames.Length; index++)
         {
-            obstacleSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.obstacle, obstacleCoords[index], spriteNames[index]));
+            obstacleSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.obstacle, obstacleCoords[index], spriteNames[index], getColorBySpriteName(spriteNames[index])));
+        }
+    }
+
+    private static Color getColorBySpriteName(string spriteName)
+    {
+        switch(spriteName)
+        {
+            case PrefabNames.tripleStalagmite:
+                return new Color32(135,255,125,255);
+            case PrefabNames.singleStalagmite:
+                return new Color32(255,150,175,255);
+            case PrefabNames.mediumBushStalagmite:
+                return new Color32(235,135,255,255);
+            case PrefabNames.lowStalagmite:
+                return new Color32(255,245,100,255);
+            default:
+                return Color.white;
         }
     }
 
@@ -243,7 +260,10 @@ public class ButtonOrderLogicScript : ButtonLogicScript
             GameObject gameObject = SpawnInfoManager.spawnInteractable(spawnDetails);
             Obstacle obstacle = gameObject.GetComponent<Obstacle>();
 
-            obstacle.spriteRenderer.color = tint;
+            if(obstacle.spriteRenderer.color.Equals(Color.white))
+            {
+                obstacle.spriteRenderer.color = tint;
+            }
 
             obstacle.setToDown();
 

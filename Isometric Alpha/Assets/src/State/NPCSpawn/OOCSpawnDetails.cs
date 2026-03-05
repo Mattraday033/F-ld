@@ -461,6 +461,7 @@ public class ObstacleSpawnDetails : OffSetSpawnDetails
     public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo = null, float offset = 0f, bool flipX = false) :
     base(npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX)
     {
+        this.tint = Color.white;
     }
 
     public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, Color tint) :
@@ -509,7 +510,7 @@ public class ObstacleSpawnDetails : OffSetSpawnDetails
         base.spawnActions(spriteRenderer);
 
         spriteRenderer.sprite = Helpers.loadSpriteFromResources(getSpriteName());
-        // spriteRenderer.color = tint;
+        spriteRenderer.color = tint;
 
         if(sortingLayerInfo != null)
         {
