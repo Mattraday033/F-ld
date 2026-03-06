@@ -129,6 +129,8 @@ public class EquippedPassive : Ability
 
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getIconName()));
 
+        buildingBlocks.AddRange(getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
+
 		return buildingBlocks;
 	}
 }

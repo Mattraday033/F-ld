@@ -85,7 +85,9 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual void setToDeadSprite()
     {
-        if (CombatStateManager.whoseTurn != WhoseTurn.Resolving && CombatStateManager.whoseTurn != WhoseTurn.Start )
+        if (CombatStateManager.whoseTurn != WhoseTurn.TickDown && 
+            CombatStateManager.whoseTurn != WhoseTurn.Resolving && 
+            CombatStateManager.whoseTurn != WhoseTurn.Start )
         {
             return;
         }
@@ -163,6 +165,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         {
             trait.setIdleAnimationOnApplication(animationManager);
         }
+    }
+
+    public virtual void spawningActions()
+    {
+        //Empty on Purpose
     }
 
     public virtual AbilityMenuManager getAbilityMenuManager()
@@ -811,7 +818,8 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
             if (CombatStateManager.whoseTurn == WhoseTurn.Resolving)
             {
-                DamageNumberPopup.create(traitApplicationDamage,
+                DamageNumberPopup.create(position,
+                                         traitApplicationDamage,
                                      CombatGrid.getPositionAt(position),
                                      DamageNumberPopup.getDirectionByTargetCoords(position),
                                      CombatAnimationManager.getInstance().damageNumberCanvas,

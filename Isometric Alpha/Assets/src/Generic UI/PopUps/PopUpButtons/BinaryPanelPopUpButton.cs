@@ -3,7 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public enum BinaryDescisionType {LoadSaveFile = 1, OverwriteSaveFile = 2, DeleteSaveFile = 3, QuitToDesktop = 4, ReturnToMainMenu = 5, Retreat = 6, FastTravel = 7, RaiseStats = 8}
+public enum BinaryDescisionType {
+                                    LoadSaveFile = 1, 
+                                    OverwriteSaveFile = 2, 
+                                    DeleteSaveFile = 3, 
+                                    QuitToDesktop = 4, 
+                                    ReturnToMainMenu = 5, 
+                                    Retreat = 6, 
+                                    FastTravel = 7, 
+                                    RaiseStats = 8, 
+                                    ResolveWithoutActionsWarning = 9
+                                }
 
 public class BinaryPanelPopUpButton : PopUpButton
 {
@@ -66,6 +76,8 @@ public class BinaryPanelPopUpButton : PopUpButton
                 return new FastTravel(MapPopUpWindow.getInstance().fastTravelTarget);
             case BinaryDescisionType.RaiseStats:
                 return new AddStatPoint(OverallUIManager.getCurrentPartyMember());
+            case BinaryDescisionType.ResolveWithoutActionsWarning:
+                return new ResolveTurnWithNoActions();
             default:
 				throw new IOException("Unknown BinaryDescisionType: " + decisionType.ToString());
 		}

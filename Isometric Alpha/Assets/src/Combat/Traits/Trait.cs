@@ -177,14 +177,14 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         }
     }
 
-    public void tickDown()
+    public bool tickDown()
     {
-        dealTickDownDamage();
-
         if (!isPermanent() && roundsLeft > 0)
         {
             roundsLeft--;
         }
+
+        return dealTickDownDamage();
     }
 
     public virtual bool stackInFront()
@@ -304,21 +304,22 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         return 0;
     }
 
-    public virtual void dealTickDownDamage()
+    public virtual bool dealTickDownDamage()
     {
         if (getTraitHolder() == null || getTraitHolder().isDead())
         {
-            return;
+            return false;
         }
 
         if (getTickDownDamage() > 0)
         {
             traitHolder.modifyCurrentHealth(getTickDownDamage());
-            traitHolder.playAnimationOnDamage();
 
-            if (CombatStateManager.whoseTurn == WhoseTurn.Resolving)
+            if (CombatStateManager.whoseTurn == WhoseTurn.Resolving || 
+                CombatStateManager.whoseTurn == WhoseTurn.TickDown)
             {
-                DamageNumberPopup.create(getTickDownDamage(),
+                DamageNumberPopup.create(traitHolder.position,
+                                         getTickDownDamage(),
                                          CombatGrid.getPositionAt(traitHolder.position),
                                          DamageNumberPopup.getDirectionByTargetCoords(traitHolder.position),
                                          CombatAnimationManager.getInstance().damageNumberCanvas,
@@ -327,9 +328,10 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
                                          traitTickDownDamageFrameDelay);
             }
 
-            DeadCombatantManager.getInstance().cleanUpAllDeadCombatants();
-            CombatStateManager.getInstance().checkForWinOrLossStates();
+            return true;
         }
+
+        return false;
     }
 
     public bool isImmobile()

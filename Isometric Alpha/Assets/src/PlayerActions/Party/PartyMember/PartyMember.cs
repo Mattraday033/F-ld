@@ -96,6 +96,17 @@ public class PartyMember : IDescribable, IDescribableInBlocks
         if(name != null && name.Contains(PartyManager.playerMarker))
         {
             name = State.playerPortraitName;
+        } else
+        {
+            switch(name)
+            {
+                case NPCNameList.chiefTabor:
+                    name = NPCNameList.tabor;
+                    break;
+                case NPCNameList.overseerGaspar:
+                    name = NPCNameList.gaspar;
+                    break;
+            }
         }
 
         Sprite portrait = Resources.Load<Sprite>(PrefabNames.portraitFolder + name);

@@ -99,7 +99,7 @@ public class VolleyAbility : Ability
 			bool crit = false;
 			int finalDamage;
 			
-			if(targetCombatant != null && !(targetCombatant is null))
+			if(targetCombatant != null && !(targetCombatant is null) && targetCombatant.isAlive())
 			{
 				crit = DamageCalculator.isACrit(getCritFormula(), getName());
 				finalDamage = findFinalDamage(targetCombatant, crit)[0];
@@ -110,7 +110,7 @@ public class VolleyAbility : Ability
 				finalDamage = -1;
 			}
 
-            CombatAnimationManager.loadInstantEffect(actor.getVolleyAnimationType(), targetTileCoords[targetCoordsIndex], crit, finalDamage, healsTarget(), targetMustBeDead());
+            CombatAnimationManager.loadInstantEffect(actor.getVolleyAnimationType(), targetTileCoords[targetCoordsIndex], crit, finalDamage, healsTarget(), targetMustBeDead(), false);
 			
             projectileNumber++;
 			

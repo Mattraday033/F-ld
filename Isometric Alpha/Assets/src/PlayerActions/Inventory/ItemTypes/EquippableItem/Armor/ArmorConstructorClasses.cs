@@ -12,6 +12,7 @@ public class OffHandWeapon : Armor
     base(listID, key, loreDescription, offHandSlotIndex, Constants.tierZero, damageFormula, critFormula) 
     {
         this.iconName = iconName;
+        worth = DamageCalculator.calculateFormula(getDamageFormula(), worthStatsSource);
     }
 
     public override string getIconName()
@@ -36,6 +37,17 @@ public class OffHandWeapon : Armor
         DescriptionPanel.setText(panel.damageText, getDamageFormulaTotal());
         DescriptionPanel.setText(panel.critRatingText, getCritTotalForDisplay());
 	}
+
+    public override List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
+    {
+        List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
+
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getIconName()));
+        
+        buildingBlocks.AddRange(base.getDescriptionBuildingBlocks());
+
+        return buildingBlocks;
+    }
 }
 
 public class OffHandFist : OffHandWeapon

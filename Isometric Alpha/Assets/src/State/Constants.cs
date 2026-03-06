@@ -148,16 +148,6 @@ public static class Constants
     public const int eightyArmor = 80;
     public const int eightyFiveArmor = 85;
     public const int ninetyArmor = 90;
-    public const int ninetyFiveArmor = 95;
-    public const int oneHundredArmor = 100;
-    public const int oneHundredFiveArmor = 105;
-    public const int oneHundredTenArmor = 110;
-    public const int oneHundredFifteenArmor = 115;
-    public const int oneHundredTwentyArmor = 120;
-    public const int oneHundredTwentyFiveArmor = 125;
-    public const int oneHundredThirtyArmor = 130;
-    public const int oneHundredThirtyFiveArmor = 135;
-    public const int oneHundredFortyArmor = 140;
 
     #endregion
 }

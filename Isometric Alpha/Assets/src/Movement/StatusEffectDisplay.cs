@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
@@ -21,6 +22,17 @@ public class StatusEffectDisplay : SlotIconHover
         canvas.worldCamera = Camera.main;
         MovementManager.OnMoveFinished.AddListener(updateDisplay);
         SkillManager.OnSkillUse.AddListener(updateDisplay);
+
+        StartCoroutine(waitFourFramesThenUpdateDisplay());
+    }
+
+    private IEnumerator waitFourFramesThenUpdateDisplay()
+    {
+        yield return null;
+        yield return null;
+        yield return null;
+        yield return null;
+
         updateDisplay();
     }
 
@@ -92,8 +104,10 @@ public class StatusEffectDisplay : SlotIconHover
                 hoverMessageKey = IconList.retreatChanceIconName;
                 break;
             default:
-                break;
+                return;
         }
+
+        setHoverMessage(HoverMessageList.getMessage(hoverMessageKey));
     }
 
     private OOCStatusEffect getStatusEffect()
@@ -124,6 +138,21 @@ public class StatusEffectDisplay : SlotIconHover
         }
 
         return OOCStatusEffect.None;
+    }
+
+    public override void spawnHoverIcon()
+    {
+        MouseHoverManager.spawnHoverIcon(this, transform, setToWorldScale: true);
+    }
+
+    public override void OnPointerExit(PointerEventData eventData)
+    {
+        if(ignoreHover || eventData == null)
+        {
+            return;
+        }
+
+        MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldDestroyHoverIcon));
     }
 
 }

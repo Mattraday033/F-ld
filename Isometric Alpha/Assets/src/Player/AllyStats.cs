@@ -111,6 +111,11 @@ public class AllyStats : Stats
         lastCombatAbilityMenuManager.actionArraySource = this;
     }
 
+    public override void spawningActions()
+    {
+        Dexterity.addExitStrategy(this);
+    }
+
     #endregion
 
     #region Animation Manager

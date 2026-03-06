@@ -139,7 +139,11 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         HeartBeatManager.getHeartBeat(characterToAnimate).RemoveListener(updateIdleAnimation);
         CombatStateManager.OnActivityChangeToInEscapeMenu.RemoveListener(disablePolygonCollider);
+        CombatStateManager.OnActivityChangeToResolveTurnWarning.RemoveListener(disablePolygonCollider);
         CombatStateManager.OnActivityChangeFromInEscapeMenu.RemoveListener(enablePolygonCollider);
+        CombatStateManager.OnActivityChangeFromResolveTurnWarning.RemoveListener(enablePolygonCollider);
+        CombatTraitColliderDisabler.OnCombatTraitHoverEnter.RemoveListener(disablePolygonCollider);
+        CombatTraitColliderDisabler.OnCombatTraitHoverExit.RemoveListener(enablePolygonCollider);
     }
 
     private void disablePolygonCollider()
@@ -213,7 +217,11 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
         HeartBeatManager.getHeartBeat(characterToAnimate).AddListener(updateIdleAnimation);
         CombatStateManager.OnActivityChangeToInEscapeMenu.AddListener(disablePolygonCollider);
+        CombatStateManager.OnActivityChangeToResolveTurnWarning.AddListener(disablePolygonCollider);
         CombatStateManager.OnActivityChangeFromInEscapeMenu.AddListener(enablePolygonCollider);
+        CombatStateManager.OnActivityChangeFromResolveTurnWarning.AddListener(enablePolygonCollider);
+        CombatTraitColliderDisabler.OnCombatTraitHoverEnter.AddListener(disablePolygonCollider);
+        CombatTraitColliderDisabler.OnCombatTraitHoverExit.AddListener(enablePolygonCollider);
 
         setToDefaultIdle();
     }
@@ -401,6 +409,11 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public void playDeathAnimation()
     {
+        if(currentIdle == getDeathAnimationType())
+        {
+            return;
+        }
+
         disableExtras();
         playAnimation(createClipTransitionToDeath());
         removeAnimation();
@@ -465,6 +478,11 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public void playWoundedAnimation()
     {
+        if(currentIdle == getDeathAnimationType())
+        {
+            return;
+        }
+
         CharacterAnimationType woundedAnimationType = CharacterAnimationType.Wounded;
 
         if(CombatStateManager.inCombat)

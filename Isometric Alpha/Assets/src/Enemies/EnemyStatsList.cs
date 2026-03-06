@@ -351,7 +351,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #region Worm Nests
         enemyStatsDict.Add(MonsterNameList.hiveHeraldNest, new LargeEnemyStats(MonsterNameList.hiveHeraldNest,
                                                                               Constants.tenArmor,
-                                                                                                1,
+                                                                                                200,
                                                                     new Trait[] { 
                                                                                     TraitList.master,
                                                                                     TraitList.territorial,
@@ -360,7 +360,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                AbilityList.getAbility(null, AbilityList.wallopKey)));
         enemyStatsDict.Add(MonsterNameList.martyrWormNest, new LargeEnemyStats(MonsterNameList.martyrWormNest,
                                                                               Constants.tenArmor,
-                                                                                                1,
+                                                                                                200,
                                                                     new Trait[] { 
                                                                                     TraitList.master,
                                                                                     TraitList.territorial,
@@ -369,7 +369,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                AbilityList.getAbility(null, AbilityList.wallopKey)));
         enemyStatsDict.Add(MonsterNameList.toxicWormNest, new LargeEnemyStats(MonsterNameList.toxicWormNest,
                                                                               Constants.tenArmor,
-                                                                                                1,
+                                                                                                200,
                                                                     new Trait[] { 
                                                                                     TraitList.master,
                                                                                     TraitList.territorial,
@@ -378,7 +378,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                AbilityList.getAbility(null, AbilityList.wallopKey)));
         enemyStatsDict.Add(MonsterNameList.wormNest, new LargeEnemyStats(MonsterNameList.wormNest,
                                                                               Constants.tenArmor,
-                                                                                                1,
+                                                                                                200,
                                                                     new Trait[] { 
                                                                                     TraitList.master,
                                                                                     TraitList.territorial,
@@ -417,6 +417,18 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             TraitList.territorial
                                                                         },
                     AbilityList.getAbility(null, AbilityList.trampleKey) as Ability));
+        #endregion
+        #region Guardian Worm
+        enemyStatsDict.Add(MonsterNameList.guardianWorm, new EnemyStats(MonsterNameList.guardianWorm,
+                                                                              Constants.seventyFiveArmor,
+                                                                                                120,
+                                               AbilityList.getAbility(null, AbilityList.wallopKey),
+                                                                    new Trait[] { 
+                                                                                    TraitList.master,
+                                                                                    TraitList.predatory,
+                                                                                    TraitList.frontLine,
+                                                                                    TraitList.mobLinked
+                                                                                }));
         #endregion
         #region Hive Herald
         enemyStatsDict.Add(MonsterNameList.hiveHerald, new EnemyStats(MonsterNameList.hiveHerald,

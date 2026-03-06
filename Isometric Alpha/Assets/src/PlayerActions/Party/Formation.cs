@@ -69,7 +69,13 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
 
     public void setCharacterAtCoords(int row, int col, AllyStats newStats)
     {
-        if (row < 0 || col < 0 || row >= grid.Length || col >= grid[row].Length)
+        if (row < 0 ||
+            col < 0 ||
+            row >= grid.Length ||
+            col >= grid[row].Length ||
+            (grid[row][col] != null && 
+             grid[row][col].getName().Contains(PartyManager.playerMarker) && 
+             newStats != null))
         {
             return;
         }
@@ -77,6 +83,19 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
         grid[row][col] = newStats;
 
         OnFormationChange.Invoke();
+    }
+
+    public bool isVacant()
+    {
+        foreach(AllyStats stats in this)
+        {
+            if(stats != null)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public AllyStats getStatsAtCoords(int row, int col)

@@ -3,22 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum HeartBeatSpeed { Slow, Medium, Fast }
+
 public class HeartBeatManager : MonoBehaviour
 {
 
     private static HeartBeatManager fastHeartBeatManager;
+    private static HeartBeatManager mediumHeartBeatManager;
     private static HeartBeatManager slowHeartBeatManager;
 
     public const float slowBeatLengthSeconds = .75f;
+    public const float mediumBeatLengthSeconds = .25f;
     public const float fastBeatLengthSeconds = .05f;
     private bool beatIsEven = false;
     public int currentRow = 0;
     public float timestamp = 0f;
-    public bool isFast = false;
+    public HeartBeatSpeed speed;
 
     private Dictionary<int, int> beatsPerRow;
 
     public readonly static UnityEvent<int> SlowHeartBeat = new UnityEvent<int>();
+    public readonly static UnityEvent<int> MediumHeartBeat = new UnityEvent<int>();
     public readonly static UnityEvent<int> FastHeartBeat = new UnityEvent<int>();
 
     public void Awake()
@@ -32,12 +37,17 @@ public class HeartBeatManager : MonoBehaviour
             beatsPerRow[rowIndex] = 0;
         }
 
-        if(isFast)
+        switch(speed)
         {
-            fastHeartBeatManager = this;
-        } else
-        {
-            slowHeartBeatManager = this;
+            case HeartBeatSpeed.Fast:
+                fastHeartBeatManager = this;
+                break;
+            case HeartBeatSpeed.Medium:
+                mediumHeartBeatManager = this;
+                break;
+            case HeartBeatSpeed.Slow:
+                slowHeartBeatManager = this;
+                break;
         }
     }
 
@@ -58,7 +68,7 @@ public class HeartBeatManager : MonoBehaviour
     {
         trackBeatsPerRow(currentRow);
 
-        UnityEvent<int> heartBeat = getHeartBeat(isFast);
+        UnityEvent<int> heartBeat = getHeartBeat(speed);
 
         heartBeat.Invoke(currentRow);
         heartBeat.Invoke(currentRow+CombatGrid.allyRowUpperBounds);
@@ -74,12 +84,14 @@ public class HeartBeatManager : MonoBehaviour
 
     private float getBeatLength()
     {
-        if(isFast)
+        switch(speed)
         {
-            return fastBeatLengthSeconds;
-        } else
-        {
-            return slowBeatLengthSeconds;
+            case HeartBeatSpeed.Fast:
+                return fastBeatLengthSeconds;
+            case HeartBeatSpeed.Medium:
+                return mediumBeatLengthSeconds;
+            default:
+                return slowBeatLengthSeconds;
         }
     }
 
@@ -91,12 +103,12 @@ public class HeartBeatManager : MonoBehaviour
 
     public static int getHeartBeatsSentToRow(string monsterName, int row)
     {
-        if(useFastHeartBeatInAnimation(monsterName))
+        switch(useFastHeartBeatInAnimation(monsterName))
         {
-            return fastHeartBeatManager.getBeatsSentToRow(row);
-        } else
-        {
-            return slowHeartBeatManager.getBeatsSentToRow(row);
+            case HeartBeatSpeed.Fast:
+                return fastHeartBeatManager.getBeatsSentToRow(row);;
+            default:
+                return slowHeartBeatManager.getBeatsSentToRow(row);
         }
     }
 
@@ -110,14 +122,16 @@ public class HeartBeatManager : MonoBehaviour
         return beatsPerRow[row];
     }
 
-    private static UnityEvent<int> getHeartBeat(bool isFast)
+    private static UnityEvent<int> getHeartBeat(HeartBeatSpeed speed)
     {
-        if(isFast)
+        switch(speed)
         {
-            return FastHeartBeat;
-        }else
-        {
-            return SlowHeartBeat;
+            case HeartBeatSpeed.Fast:
+                return FastHeartBeat;
+            case HeartBeatSpeed.Medium:
+                return MediumHeartBeat;
+            default:
+                return SlowHeartBeat;
         }
     }
     public static UnityEvent<int> getHeartBeat(string enemyType)
@@ -125,7 +139,7 @@ public class HeartBeatManager : MonoBehaviour
         return getHeartBeat(useFastHeartBeatInAnimation(enemyType));
     }
 
-    private static bool useFastHeartBeatInAnimation(string enemyType)
+    private static HeartBeatSpeed useFastHeartBeatInAnimation(string enemyType)
     {
         switch(enemyType)
         {
@@ -136,9 +150,9 @@ public class HeartBeatManager : MonoBehaviour
             case MonsterNameList.denMother:
             case MonsterNameList.batSwarm:
             case MonsterNameList.giantBat:         
-                return true;
+                return HeartBeatSpeed.Fast;
             default:
-                return false;
+                return HeartBeatSpeed.Slow;
         }
     }
 }

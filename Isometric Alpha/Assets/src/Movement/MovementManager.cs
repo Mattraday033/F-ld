@@ -305,37 +305,6 @@ public class MovementManager : MonoBehaviour
 
     }
 
-    private Vector3Int getFirstPartyMemberEndingPosition()
-    {
-        return grid.WorldToCell(PlayerMovement.getInstance().startingPosition);
-    }
-
-    // public void movePartyMembers(int partyMemberIndex, Vector3 endingPosition)
-    // {
-
-    //     // if (PartyMemberMovement.partyMemberTrain == null)
-    //     // {
-    //     //     return;
-    //     // }
-
-    //     // if (partyMemberIndex < PartyMemberMovement.partyMemberTrain.Length &&
-    //     //     partyMemberIndex < (PartyMemberMovement.stepCounter))
-    //     // {
-    //     //     Vector3 startingPosition = PartyMemberMovement.partyMemberTrain[partyMemberIndex].position;
-
-    //     //     StartCoroutine(moveSprite(PartyMemberMovement.partyMemberTrain[partyMemberIndex]));
-
-    //     //     endingPosition = startingPosition;
-
-    //     //     movePartyMembers(partyMemberIndex + 1, endingPosition);
-    //     // }
-    //     // else
-    //     // {
-    //     //     PartyMemberMovement.stepCounter++;
-    //     //     return;
-    //     // }
-    // }
-
     private void preventMonstersFromMovingAwayFromPlayer()
     {
         for (int positionIndex = 1; positionIndex < allMovementTrackers.Count; positionIndex++)

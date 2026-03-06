@@ -13,6 +13,7 @@ public class KeyBindingDisplay : MonoBehaviour
     private const string escapeMenuKeyBinding = "Esc: Settings";
     private const string exitKeyBinding = "Esc/R: Exit";
     private const string backOutOfActionKeyBinding = "R: Back";
+    private const string backOutOfPopUpKeyBinding = "Esc/R: Back";
 
     #region In Combat Constants
 
@@ -144,6 +145,12 @@ public class KeyBindingDisplay : MonoBehaviour
                 displayText.text += removeAbilityKeyBinding;
                 addSpace();
                 displayText.text += nextTurnButtonPress;
+                addSpace();
+                break;
+            case CurrentActivity.ResolveActionWarning:
+                displayText.text += continueKeyBinding;
+                addSpace();
+                displayText.text += backOutOfPopUpKeyBinding;
                 addSpace();
                 break;
         }

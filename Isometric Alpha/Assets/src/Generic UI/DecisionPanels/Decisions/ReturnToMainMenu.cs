@@ -20,7 +20,9 @@ public class ReturnToMainMenu : IDecision
 	{
         Flags.resetAllFlags(true);
         PartyManager.resetPartyMembers();
-		CombatStateManager.inCombat = false;
+		
+        CombatStateManager.inCombat = false;
+        CombatStateManager.useReturnCell();
 
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
 

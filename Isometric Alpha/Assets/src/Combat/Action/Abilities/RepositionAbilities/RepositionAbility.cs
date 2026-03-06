@@ -65,7 +65,9 @@ public class RepositionAbility : Ability, IJSONConvertable
 
             statsClone.position = getDestinationCoords().clone();
             statsClone.addTrait(TraitList.repositioningInvulnerability);
+            statsClone.inPreviewMode = true;
             statsClone.addTrait(getAppliedTrait());
+            statsClone.inPreviewMode = false;
             statsClone.addTrait(TraitList.untargetable);
 
             CombatGrid.setCombatantAtCoords(statsClone.position, statsClone);

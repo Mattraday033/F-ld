@@ -48,9 +48,9 @@ public abstract class StatBoostSource : INameSource
                 return "2S+4";
             case ItemList.martialArtistsBeltKey:
                 return "W";
+            case StatSourceNameList.exitStrategyKey:
             case StatSourceNameList.shieldedKey:
                 return "30";
-            case StatSourceNameList.exitStrategyKey:
             case StatSourceNameList.protectedKey:
                 return "60";
         }
@@ -130,6 +130,7 @@ public abstract class StatBoostSource : INameSource
             case StatSourceNameList.shieldedKey:
                 return "5";
             case StatSourceNameList.exitStrategyKey:
+                return "10";
             case StatSourceNameList.protectedKey:
                 return "15";
             default:

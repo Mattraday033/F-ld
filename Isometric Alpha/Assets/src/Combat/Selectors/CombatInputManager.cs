@@ -170,6 +170,30 @@ public class CombatInputManager : MonoBehaviour
                 TutorialSequenceInput.handleCombatTutorialInput();
                 break;
 
+            case CurrentActivity.ResolveActionWarning:
+
+                if(KeyBindingList.eitherBackoutKeyIsPressed() && 
+                    !KeyPressManager.handlingPrimaryKeyPress)
+                {
+                    ResolveTurnWithNoActions.backOutOfCurrentDecision();
+                    
+                    EscapeStack.handleEscapePress();
+
+                    KeyPressManager.handlingPrimaryKeyPress = true;
+                    return;
+                }
+
+				if ((Input.GetKey(KeyBindingList.combatAcceptChoiceKey) || 
+                        Input.GetKey(KeyBindingList.resolveTurnKey)) &&
+                         !KeyPressManager.handlingPrimaryKeyPress)
+				{
+					ResolveTurnWithNoActions.executeCurrentDecision();
+
+					KeyPressManager.handlingPrimaryKeyPress = true;
+				}
+
+                break;
+
 			case CurrentActivity.Repositioning:
 			case CurrentActivity.Retreating:
 

@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitHandler
 {
+    public readonly static UnityEvent<Stats, bool> HighlightRow = new UnityEvent<Stats, bool>();
+
 	public NestedDescriptionPanelMouseListener nestedDescriptionPanelMouseListener;
 
 	private GameObject targetDisplaySelector;
@@ -14,6 +17,44 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 	
 	public Image rowBackground;
     public Image[] panelSections;
+
+    private void Awake()
+    {
+        HighlightRow.AddListener(setRowHighlight);
+    }
+
+    private void OnDestroy()
+    {
+        HighlightRow.RemoveListener(setRowHighlight);
+    }
+
+    public void setRowHighlight(Stats actor, bool highlightRow)
+    {
+        CombatAction actionBeingDescribed = getCombatActionBeingDescribed();
+
+        if(actionBeingDescribed != null)
+        {
+            Stats currentActor = actionBeingDescribed.getActorStats();
+
+            if(currentActor != null && 
+                currentActor.Equals(actor))
+            {
+                if(highlightRow)
+                {
+                    if(CombatGrid.positionIsOnAlliedSide(actionBeingDescribed.getActorStats().position))
+                    {
+                        rowBackground.color = Color.green;
+                    } else
+                    {
+                        rowBackground.color = Color.red;
+                    }
+                } else
+                {
+                    rowBackground.color = Color.white;
+                }
+            }
+        }
+    }
 
     private CombatAction getCombatActionBeingDescribed()
 	{

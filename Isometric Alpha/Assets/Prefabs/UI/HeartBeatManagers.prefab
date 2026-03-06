@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9091333298415119705}
   - component: {fileID: 7304464953282911147}
   - component: {fileID: 4003566295674792344}
+  - component: {fileID: 5598396315764254240}
   m_Layer: 0
   m_Name: HeartBeatManagers
   m_TagString: Untagged
@@ -45,7 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09b30557a8e040429f0e26ea173f305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFast: 0
+  currentRow: 0
+  timestamp: 0
+  speed: 0
 --- !u!114 &4003566295674792344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,4 +61,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09b30557a8e040429f0e26ea173f305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFast: 1
+  currentRow: 0
+  timestamp: 0
+  speed: 1
+--- !u!114 &5598396315764254240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927179125485224261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f09b30557a8e040429f0e26ea173f305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentRow: 0
+  timestamp: 0
+  speed: 2

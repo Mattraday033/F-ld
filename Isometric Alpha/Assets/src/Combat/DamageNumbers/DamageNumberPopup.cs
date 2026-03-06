@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public enum PopUpMoveDirection { Up, UpLeft, UpRight }
 
@@ -47,6 +48,17 @@ public class DamageNumberPopup : MonoBehaviour
 		}
 	}
 
+    public bool isVisible()
+    {
+        return gameObject != null && gameObject.activeInHierarchy;
+    }
+
+    public void setToVisible()
+    {
+        gameObject.SetActive(true);
+        enabled = true;
+    }
+
     public float getMoveSpeedX()
     {
         switch(direction)
@@ -77,17 +89,17 @@ public class DamageNumberPopup : MonoBehaviour
 		this.frameDelay = frameDelay;
 	}
 	
-	public static DamageNumberPopup createResistPopUp(Vector3 newPosition, Transform canvas)
+	public static DamageNumberPopup createResistPopUp(GridCoords targetCoords, Vector3 newPosition, Transform canvas)
 	{
-		return create(Constants.resist, newPosition, PopUpMoveDirection.Up, canvas, false, false);
+		return create(targetCoords, Constants.resist, newPosition, PopUpMoveDirection.Up, canvas, false, false);
 	}
     
-	public static DamageNumberPopup create(int damageAmount, Vector3 newPosition, PopUpMoveDirection direction, Transform canvas, bool crit, bool healsTarget)
+	public static DamageNumberPopup create(GridCoords targetCoords, int damageAmount, Vector3 newPosition, PopUpMoveDirection direction, Transform canvas, bool crit, bool healsTarget)
 	{
-		return create(damageAmount.ToString(), newPosition, direction, canvas, crit, healsTarget);
+		return create(targetCoords, damageAmount.ToString(), newPosition, direction, canvas, crit, healsTarget);
 	}
 
-	public static DamageNumberPopup create(string damageAmount, Vector3 newPosition, PopUpMoveDirection direction, Transform canvas, bool crit, bool healsTarget)
+	public static DamageNumberPopup create(GridCoords targetCoords, string damageAmount, Vector3 newPosition, PopUpMoveDirection direction, Transform canvas, bool crit, bool healsTarget)
 	{
 		GameObject damageNumberObject;
 		
@@ -106,20 +118,22 @@ public class DamageNumberPopup : MonoBehaviour
 		popup.populate(damageAmount);
 		popup.moveTo(newPosition);
         popup.direction = direction;
-		
-		damageNumberObject.SetActive(true);
+        popup.enabled = false;
+
+		damageNumberObject.SetActive(false);
+        DamageNumberPopupQueue.addDamageNumberToQueue(targetCoords, popup);
 		
 		return popup;
 	}
 	
-	public static DamageNumberPopup create(int damageAmount, Vector3 newPosition, PopUpMoveDirection direction, Transform canvas, bool crit, bool healsTarget, int frameDelay)
+	public static DamageNumberPopup create(GridCoords targetCoords, int damageAmount, Vector3 newPosition, PopUpMoveDirection direction, Transform canvas, bool crit, bool healsTarget, int frameDelay)
 	{
-		return create(damageAmount.ToString(), newPosition, direction, canvas, crit, healsTarget, frameDelay);
+		return create(targetCoords, damageAmount.ToString(), newPosition, direction, canvas, crit, healsTarget, frameDelay);
 	}
 
-	public static DamageNumberPopup create(string damageAmount, Vector3 newPosition, PopUpMoveDirection direction, Transform canvas, bool crit, bool healsTarget, int frameDelay)
+	public static DamageNumberPopup create(GridCoords targetCoords, string damageAmount, Vector3 newPosition, PopUpMoveDirection direction, Transform canvas, bool crit, bool healsTarget, int frameDelay)
 	{
-		DamageNumberPopup popup = create(damageAmount, newPosition, direction, canvas, crit, healsTarget);
+		DamageNumberPopup popup = create(targetCoords, damageAmount, newPosition, direction, canvas, crit, healsTarget);
 		
 		popup.setFrameDelay(frameDelay);
 		
@@ -139,3 +153,4 @@ public class DamageNumberPopup : MonoBehaviour
         }
     }
 }
+

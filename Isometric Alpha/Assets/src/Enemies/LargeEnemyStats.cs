@@ -15,8 +15,8 @@ public class SpawnDetails
                                                                                         new GridCoords(1,2), new GridCoords(0,2) });
     public readonly static SpawnDetails bottomLeft2x2 = new SpawnDetails(new GridCoords[]{ new GridCoords(3,1), new GridCoords(3,0),
                                                                                         new GridCoords(2,1), new GridCoords(2,0) });
-    public readonly static SpawnDetails bottomRight2x2 =  new SpawnDetails(new GridCoords[]{ new GridCoords(3,3), new GridCoords(3,3),
-                                                                                        new GridCoords(2,2), new GridCoords(2,2) });
+    public readonly static SpawnDetails bottomRight2x2 =  new SpawnDetails(new GridCoords[]{ new GridCoords(3,3), new GridCoords(2,3),
+                                                                                        new GridCoords(3,2), new GridCoords(2,2) });
 
     public readonly static SpawnDetails middle2x2 =  new SpawnDetails(new GridCoords[]{ new GridCoords(2,2), new GridCoords(2,1),
                                                                                         new GridCoords(1,2), new GridCoords(1,1) });

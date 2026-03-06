@@ -160,8 +160,8 @@ public abstract class Armor : EquippableItem, IJSONConvertable
 
         DescriptionPanel.setText(panel.armorRatingText, getArmorRating());
         DescriptionPanel.setText(panel.slotText, getSlotIDForDisplay());
-        DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getIconName()));
         DescriptionPanel.setImage(panel.typeIconPanel, Helpers.loadSpriteFromResources(getTypeIconName()));
+        DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getIconName()));
         DescriptionPanel.setImageColor(panel.typeIconBackgroundPanel, getTypeIconBackgroundColor());
 	}
 

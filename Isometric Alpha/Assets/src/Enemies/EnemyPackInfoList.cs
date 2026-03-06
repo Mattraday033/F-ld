@@ -451,6 +451,21 @@ public static class EnemyPackInfoList
 
     #region Worms
 
+    private readonly static EnemyPackInfo oneGuardianWormTwoHiveHeralds = new EnemyPackInfo(new CreatureAmount[] {  
+                                                                                                                    EnemyAmountList.oneGuardianWorm,
+                                                                                                                    EnemyAmountList.twoHiveHeralds,
+                                                                                                                    EnemyAmountList.twoBroodlings
+                                                                                                                 },
+                                                                                                                 DropTableList.slaveMineDT1Name);
+
+    private readonly static EnemyPackInfo twoGuardianWormsOneArmoredWormTwoHiveHeralds = new EnemyPackInfo(new CreatureAmount[] {  
+                                                                                                                    EnemyAmountList.twoGuardianWorms,
+                                                                                                                    EnemyAmountList.oneArmoredWorm,
+                                                                                                                    EnemyAmountList.twoHiveHeralds
+                                                                                                                 },
+                                                                                                                 DropTableList.slaveMineDT1Name);
+
+
     private readonly static EnemyPackInfo oneArmoredWormFourWorms = new EnemyPackInfo(new CreatureAmount[] {
                                                                                                     EnemyAmountList.oneArmoredWorm,
                                                                                                     EnemyAmountList.threeWorms
@@ -670,9 +685,9 @@ public static class EnemyPackInfoList
         #region MineLvl_2-4
         list = new List<EnemyPackInfo>();
 
-        list.Add(twoGiantBatsThreeBatSwarmsOneScreecher);
-        list.Add(twoArmoredBatsOneDenMotherOneGiantBatTwoBatSwarm);
-        list.Add(threeDenMothersThreeBatSwarmsOneArmoredBat);
+        list.Add(oneGuardianWormTwoHiveHeralds);
+        list.Add(twoGuardianWormsOneArmoredWormTwoHiveHeralds);
+        list.Add(oneGuardianWormTwoHiveHeralds);
 
         enemyPackInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section4, list);
         #endregion

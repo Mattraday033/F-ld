@@ -73,6 +73,8 @@ public static class CreatureSpawner
         {
             stats.playSpawnAnimation();
         }
+
+        stats.spawningActions();
 	}
 
     #region Find Spawn Space

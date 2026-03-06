@@ -25,6 +25,8 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
             onReveal(Constants.reveal);
 
+            CombatActionOrderRow.HighlightRow.Invoke(getTargetStats(), true);
+
             createHoverTag();
 
             SelectorManager.updateAllDamagePreviews();
@@ -49,6 +51,8 @@ public class CombatantHover : CombatMouseHover, IRevealable
             }
 
             SelectorManager.displayCurrentHoverUI();
+
+            CombatActionOrderRow.HighlightRow.Invoke(getTargetStats(), false);
         }
 
         SelectorManager.updateAllDamagePreviews();

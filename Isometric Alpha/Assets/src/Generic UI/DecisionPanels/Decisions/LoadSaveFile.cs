@@ -104,6 +104,8 @@ public class LoadSaveFile : IDecision
                 saveBlueprint.extractPartyMemberDetails();
                 State.formation.implementGridFromCoordSet(saveBlueprint.partyMemberStats);
                 AreaManager.saveBlueprint = saveBlueprint;
+                State.playerPortraitName = saveBlueprint.playerPortraitName;
+                State.playerSpriteName = saveBlueprint.playerSpriteName;
             }
             else
             {

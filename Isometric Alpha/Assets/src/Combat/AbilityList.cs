@@ -196,8 +196,8 @@ public static class AbilityList
 		enemyAbilityDictionary.Add(swapKey, new SwapAbility(CombatActionSettings.build(DescriptionParams.build(swapKey, "The creature swaps places with it's target. If successful, the creature heals itself.", swapKey), DamageParams.build("25"))));
 
 		//bat abilities
-		enemyAbilityDictionary.Add(flurryKey, new Ability(CombatActionSettings.build(DescriptionParams.build(flurryKey, "A devastating surge of claws and jaws."), DamageParams.build("14", "5"), TargetParams.build(Range.boxOneIndex), AnimationParams.build(EffectAnimationType.BatSwarm))));
-        enemyAbilityDictionary.Add(screechKey, new Ability(CombatActionSettings.build(DescriptionParams.build(screechKey, "A howl so loud it draws blood.", StatSourceNameList.caveMadnessKey), DamageParams.build("12", "2"), TargetParams.build(Range.boxOneIndex), TraitList.caveMadness)));
+		enemyAbilityDictionary.Add(flurryKey, new Ability(CombatActionSettings.build(DescriptionParams.build(flurryKey, "A devastating surge of claws and jaws."), DamageParams.build("12", "6"), TargetParams.build(Range.boxOneIndex), AnimationParams.build(EffectAnimationType.BatSwarm))));
+        enemyAbilityDictionary.Add(screechKey, new Ability(CombatActionSettings.build(DescriptionParams.build(screechKey, "A howl so loud it draws blood.", StatSourceNameList.caveMadnessKey), DamageParams.build("10", "2"), TargetParams.build(Range.boxOneIndex), TraitList.caveMadness)));
         enemyAbilityDictionary.Add(spawnPupsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(spawnPupsKey, "The bat calls forth it's pups to fight for it.")), MonsterNameList.batSwarm));
         enemyAbilityDictionary.Add(swarmRushKey, new Ability(CombatActionSettings.build(DescriptionParams.build(swarmRushKey, "The swarm flutters about their target, clawing and biting ferociously.", colonyCrushKey), DamageParams.build("3", "2"), AnimationParams.build(EffectAnimationType.BatSwarm))));
         enemyAbilityDictionary.Add(batClawName, new Ability(CombatActionSettings.build(batClawName, batClawDescription, DamageParams.build("6", "8"), AnimationParams.build(EffectAnimationType.Pierce))));

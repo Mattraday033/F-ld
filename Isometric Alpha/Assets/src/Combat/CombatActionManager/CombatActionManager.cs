@@ -37,7 +37,7 @@ public class CombatActionManager : MonoBehaviour
         } else if(onDeathCombatActionQueue.Count > 0)
 		{
 			nextCombatAction = removeNextCombatActionFromQueue(onDeathCombatActionQueue);
-		} else
+		} else if(CombatStateManager.whoseTurn == WhoseTurn.Resolving)
 		{
 			List<CombatAction> actions = getCombatActionOrder();
 			
@@ -47,7 +47,10 @@ public class CombatActionManager : MonoBehaviour
 			}
 			
 			nextCombatAction = removeNextCombatActionFromQueue(actions);
-		}
+		} else
+        {
+            return null;
+        }
 
 		nextCombatAction.activatingAction();
 
@@ -101,12 +104,11 @@ public class CombatActionManager : MonoBehaviour
 
 		CombatUI.populateCombatActionPanels();
 		
-		if(CombatStateManager.whoseTurn == WhoseTurn.Resolving)
+		if(CombatStateManager.whoseTurn == WhoseTurn.Resolving || 
+            CombatStateManager.whoseTurn == WhoseTurn.TickDown)
 		{
 			resolveACombatAction();
 		}
-		
-		yield break;
     }
 	
 	public void decideAndShowEnemyCombatActions()

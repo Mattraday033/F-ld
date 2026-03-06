@@ -108,7 +108,7 @@ public class CombatAnimationManager : MonoBehaviour
         }
     }
 
-    public static void loadInstantEffect(string animationType, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
+    public static void loadInstantEffect(string animationType, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead, bool ignoreMissingTargets = true)
     {
         if(CombatGrid.combatantIsRepositionClone(targetCoords))
         {
@@ -117,7 +117,8 @@ public class CombatAnimationManager : MonoBehaviour
 
         Stats target = CombatGrid.getCombatantAtCoords(targetCoords);
 
-        if(target == null || (target.isDead() && !targetCanBeDead))
+        if(ignoreMissingTargets && 
+            (target == null || (target.isDead() && !targetCanBeDead)))
         {
             return;
         }

@@ -25,24 +25,6 @@ public class PlayerMovement : MovementTracker
         return PartyManager.getPlayerStats().getName();
 	}
 
-    // public override Vector3 startingPosition
-    // {
-    //     get => _StartingPosition;
-    //     set
-    //     {
-    //         _StartingPosition = value;
-    //     }
-    // }
-
-    // public override Vector3 endingPosition
-    // {
-    //     get => _EndingPosition;
-    //     set
-    //     {
-    //         _EndingPosition = value;
-    //     }
-    // }
-
     public override void cancelMovement()
     {
         directionMod = Vector3Int.zero;
@@ -58,7 +40,6 @@ public class PlayerMovement : MovementTracker
     {
         return MovementManager.playerSpriteIndex;
     }
-
     public override AnimationManager getAnimationManager()
     {
         return PlayerObject.getAnimationManager();

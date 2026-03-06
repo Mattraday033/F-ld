@@ -53,9 +53,7 @@ public static class TraitList
 	public const int demoralizeExtraDamage = 5;
 	private const int predationExtraDamage = 4;
 	private const int halfHandStanceExtraDamage = 1;
-	private const double stonewallDamageReduction = .75;
 	private const double daringSacrificeDamageReduction = 1.0;
-	private const double exitStrategyDamageReduction = .6;
 	private const double chokeholdDamagePercentage = .5;
 
 	private const int bloodlustMaximumStacks = 6;
@@ -241,7 +239,7 @@ public static class TraitList
 		dictionaryOfTraits.Add(StatSourceNameList.wormBossReviveTraitKey, wormBossRevive);
 		dictionaryOfTraits.Add(wormBossFumesOnDeath.getName(), wormBossFumesOnDeath);
 		
-		mobLinked.setLinkedPercentage(.40);
+		mobLinked.setLinkedPercentage(.15);
 		bossLinked.setLinkedPercentage(.075);
 		
 		dictionaryOfTraits.Add(StatSourceNameList.chokingKey, choking);

@@ -18,7 +18,8 @@ public enum WhoseTurn   {
                             Player = 2, 
                             Resolving = 3, 
                             Won = 4, 
-                            Lost = 5
+                            Lost = 5,
+                            TickDown = 6
                         }
 
 public enum CurrentActivity {
@@ -31,7 +32,8 @@ public enum CurrentActivity {
                                 Tutorial = 7, 
                                 Retreating = 8, 
                                 InEscapeMenu = 9,
-                                Finished = 10
+                                Finished = 10,
+                                ResolveActionWarning = 11
                             }
 
 public interface INeedsUpdateOnStateChange
@@ -69,7 +71,6 @@ public class CombatStateManager : MonoBehaviour
     public readonly static UnityEvent OnTurnChangeToLost = new UnityEvent();
 
     public readonly static UnityEvent OnActivityChangeToWaiting = new UnityEvent();
-    public readonly static UnityEvent OnActivityChangeTo = new UnityEvent();
     public readonly static UnityEvent OnActivityChangeToChoosingActor = new UnityEvent();
     public readonly static UnityEvent OnActivityChangeToChoosingAbility = new UnityEvent();
     public readonly static UnityEvent OnActivityChangeToChoosingLocation = new UnityEvent();
@@ -79,10 +80,12 @@ public class CombatStateManager : MonoBehaviour
     public readonly static UnityEvent OnActivityChangeToRetreating = new UnityEvent();
     public readonly static UnityEvent OnActivityChangeToInEscapeMenu = new UnityEvent();
     public readonly static UnityEvent OnActivityChangeToFinished = new UnityEvent();
+    public readonly static UnityEvent OnActivityChangeToResolveTurnWarning = new UnityEvent();
 
 
     public readonly static UnityEvent OnActivityChangeFromInEscapeMenu = new UnityEvent();
     public readonly static UnityEvent OnActivityChangeFromTutorial = new UnityEvent();
+    public readonly static UnityEvent OnActivityChangeFromResolveTurnWarning = new UnityEvent();
 
 
     public readonly static UnityEvent OnCurrentActivityChange = new UnityEvent();
@@ -110,6 +113,7 @@ public class CombatStateManager : MonoBehaviour
 	public static CombatStateManager instance;
 
 	private GameOverPopUpButton gameOverPopUpButton;
+    private BinaryPanelPopUpButton binaryPanelPopUpButton;
 
 	private static bool resolvingTurnDuringTutorial;
 
@@ -193,6 +197,7 @@ public class CombatStateManager : MonoBehaviour
 		}
 
 		gameOverPopUpButton = new GameOverPopUpButton();
+        binaryPanelPopUpButton = new BinaryPanelPopUpButton();
 
 		CombatUI.setCurrentActivityText(currentActivity);
         OnNewTurn.Invoke();
@@ -325,10 +330,11 @@ public class CombatStateManager : MonoBehaviour
 		if (whoseTurn == WhoseTurn.Resolving && wT == WhoseTurn.Player &&
 			getInstance() != null && getInstance().ticker != null)
 		{
-			getInstance().ticker.tickDownEverything();
+            whoseTurn = WhoseTurn.TickDown;
+			bool onDeathEffectsBeingHandled = getInstance().ticker.tickDownEverything();
 			SelectorManager.displayCurrentHoverUI();
 
-            if(whoseTurn == WhoseTurn.Won)
+            if(whoseTurn == WhoseTurn.Won || onDeathEffectsBeingHandled)
             {
                 return;
             }
@@ -380,7 +386,15 @@ public class CombatStateManager : MonoBehaviour
 		if (currentActivity == CurrentActivity.Tutorial)
 		{
 			resolvingTurnDuringTutorial = true;
-		}
+		} else if(!PlayerCombatActionManager.playerHasActionsInQueue() && 
+                currentActivity != CurrentActivity.ResolveActionWarning)
+        {
+            spawnResolveTurnWarning();
+            if(currentActivity == CurrentActivity.ResolveActionWarning)
+            {
+                return;
+            }
+        }
 
 		updateTurnState(WhoseTurn.Resolving);
 		CombatActionManager.lockInCombatActionOrder();
@@ -388,6 +402,15 @@ public class CombatStateManager : MonoBehaviour
 		setCurrentActivity(CurrentActivity.Waiting);
         instance.StartCoroutine(waitBeforeFirstResolve());
 	}
+
+    private static void spawnResolveTurnWarning()
+    {
+        if(instance != null)
+        {
+            instance.binaryPanelPopUpButton.spawnPopUp(new ResolveTurnWithNoActions());
+            setCurrentActivity(CurrentActivity.ResolveActionWarning);
+        }
+    }
 
     private static IEnumerator waitBeforeFirstResolve()
     {
@@ -405,12 +428,18 @@ public class CombatStateManager : MonoBehaviour
 
     public void endResolvingPhase()
     {
+        updateTurnState(WhoseTurn.Player);
+
+        if(whoseTurn == WhoseTurn.TickDown)
+        {
+            return;
+        }
+
         turnNumber++;
         resetAllQueuedSummonLocations();
         combatActionManager.decideAndShowEnemyCombatActions();
         combatActionManager.decideAndShowSummonedCombatActions();
         CombatUI.setCombatActionCounterPanelsToDefault();
-        updateTurnState(WhoseTurn.Player);
 
         if (resolvingTurnDuringTutorial)
         {
@@ -462,6 +491,9 @@ public class CombatStateManager : MonoBehaviour
                 break;
             case CurrentActivity.Finished:
                 break;
+            case CurrentActivity.ResolveActionWarning:
+                OnActivityChangeFromResolveTurnWarning.Invoke();
+                break;
             default:
                 Debug.LogError("Unknown CurrentActivity State: " + currentActivity.ToString());
                 break;
@@ -497,6 +529,9 @@ public class CombatStateManager : MonoBehaviour
                 break;
             case CurrentActivity.Finished:
                 OnActivityChangeToFinished.Invoke();
+                break;
+            case CurrentActivity.ResolveActionWarning:
+                OnActivityChangeToResolveTurnWarning.Invoke();
                 break;
             default:
                 Debug.LogError("Unknown CurrentActivity State: " + newActivity.ToString());

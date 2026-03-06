@@ -49,4 +49,9 @@ public class AlliedSummonStats : VolleyParticipantStats
     {
         return PartyStats.getVolleyAccuracy();
     }
+
+    public override void spawningActions()
+    {
+        Dexterity.addExitStrategy(this);
+    }
 }

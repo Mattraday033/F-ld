@@ -146,7 +146,7 @@ public static class MouseHoverManager
         }
     }
 
-    public static void spawnHoverIcon(IHoverIconSource source, Transform parent)
+    public static void spawnHoverIcon(IHoverIconSource source, Transform parent, bool setToWorldScale = false)
     {
         if (source.getObjectBeingDescribed() == null)
         {
@@ -162,6 +162,11 @@ public static class MouseHoverManager
 
         hoverDescriptionPanelSlot.setPrimaryDescribable(source.getObjectBeingDescribed());
         hoverDescriptionPanelObject.SetActive(true);
+
+        if(setToWorldScale)
+        {
+            hoverDescriptionPanelObject.transform.localScale = new Vector3(.007f, .007f);
+        }
     }
 
     public static void spawnCustomHover(IHoverIconSource source, Transform parent, string prefabName)

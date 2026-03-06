@@ -102,7 +102,12 @@ public class EnemyCombatActionManager : MonoBehaviour
 			
 			if(linkedPercentage > 0.0)
 			{
-				enemy.modifyCurrentHealth((int) ((double) enemy.getTotalHealth() * linkedPercentage));
+                int linkDamage = (int) ((double) enemy.getTotalHealth() * linkedPercentage);
+
+                DamageNumberPopup.create(enemy.position, linkDamage, enemy.combatSprite.transform.position, DamageNumberPopup.getDirectionByTargetCoords(enemy.position),
+                                        CombatAnimationManager.getInstance().damageNumberCanvas, false, false);
+				enemy.modifyCurrentHealth(linkDamage);
+                enemy.playAnimationOnDamage();
 			}
 		}
 	}

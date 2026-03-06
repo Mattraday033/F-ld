@@ -22,16 +22,23 @@ public class Ticker : MonoBehaviour
 		instance = this;
 	}
 	
-	public void tickDownEverything()
+	public bool tickDownEverything()
 	{
 		tickDownAllNonPermanentTraits(CombatGrid.getAllCombatants());
 		tickDownAllCooldowns(CombatGrid.getAllNonsummonedAllyCombatants());
 		
 		GroundEffectManager.applyAllGroundEffectDamage();
 		GroundEffectManager.removeAllFinishedGroundEffects();
-		
-		CombatUI.populateCombatActionPanels();
-		
+
+        if(CombatActionManager.onDeathCombatActionQueue.Count > 0)
+        {
+            CombatActionManager.getInstance().resolveACombatAction();
+            return true;
+        } else
+        {
+		    CombatUI.populateCombatActionPanels();
+            return false;
+        }
 	}
 	
 	public void tickDownAllCooldowns(List<Stats> allAllies)
@@ -53,12 +60,16 @@ public class Ticker : MonoBehaviour
 	public void tickDownAllNonPermanentTraits(List<Stats> allCombatants)
 	{
         List<KeyValuePair<Stats, Trait>> traitsToRemove = new  List<KeyValuePair<Stats, Trait>>();
+        List<Stats> hurtCombatants = new List<Stats>();
 
 		foreach(Stats combatant in allCombatants)
 		{
 			foreach(Trait trait in combatant.traitContainer)
 			{
-				trait.tickDown();
+				if(trait.tickDown())
+                {
+                    hurtCombatants.Add(trait.getTraitHolder());
+                }
 				
 				if(!trait.isPermanent() && trait.getRoundsLeft() <= 0)
 				{
@@ -71,7 +82,13 @@ public class Ticker : MonoBehaviour
         {
             kvp.Key.removeTrait(kvp.Value);
         }
+        
+        foreach(Stats combatant in hurtCombatants)
+        {
+            combatant.playAnimationOnDamage();
+        }
 
-        //combatant.removeTrait(trait);
+        DeadCombatantManager.getInstance().cleanUpAllDeadCombatants();
+        CombatStateManager.getInstance().checkForWinOrLossStates();
 	}
 }

@@ -29,7 +29,6 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 
 	public string overworldSpriteSortingLayer;
     public int gold;
-	public int affinity;
 	public int cunningsRemaining;
 	public int intimidatesRemaining;
 
@@ -83,7 +82,6 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 		saveBlueprint.cunningsRemaining = CunningManager.getCunningsRemaining();
 		saveBlueprint.intimidatesRemaining = IntimidateManager.getIntimidatesRemaining();
 
-		saveBlueprint.affinity = AffinityManager.getTotalAffinity();
         saveBlueprint.gold = Purse.getCoinsInPurse();
 
 		saveBlueprint.playerPosition = new float[3];
@@ -158,7 +156,6 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 		this.overworldSpriteSortingLayer = GetFromJson.getElementFromJson(this.saveName, nameof(overworldSpriteSortingLayer), jsonDynamic, SaveDefaultValues.defaultOverworldSpriteSortingLayer);
 
 		this.gold = GetFromJson.getElementFromJson(this.saveName, nameof(gold), jsonDynamic, SaveDefaultValues.defaultStatZero);
-		this.affinity = GetFromJson.getElementFromJson(this.saveName, nameof(affinity), jsonDynamic, SaveDefaultValues.defaultStatZero);
 
 		this.cunningsRemaining = GetFromJson.getElementFromJson(this.saveName, nameof(cunningsRemaining), jsonDynamic, SaveDefaultValues.defaultStatTwo);
 		this.intimidatesRemaining = GetFromJson.getElementFromJson(this.saveName, nameof(intimidatesRemaining), jsonDynamic, SaveDefaultValues.defaultStatTwo);

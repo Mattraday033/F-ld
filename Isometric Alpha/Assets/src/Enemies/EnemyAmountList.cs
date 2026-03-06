@@ -106,6 +106,9 @@ public static class EnemyAmountList
     public readonly static CreatureAmount oneDireWorm = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.direWorm));
     public readonly static CreatureAmount twoDireWorms = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.direWorm));
 
+    public readonly static CreatureAmount oneGuardianWorm = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.guardianWorm));
+    public readonly static CreatureAmount twoGuardianWorms = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.guardianWorm));
+
     public readonly static CreatureAmount oneHiveHerald = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.hiveHerald));
     public readonly static CreatureAmount twoHiveHeralds = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.hiveHerald));
     public readonly static CreatureAmount threeHiveHeralds = new CreatureAmount(Constants.threeCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.hiveHerald));

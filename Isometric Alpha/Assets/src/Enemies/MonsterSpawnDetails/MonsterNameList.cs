@@ -16,9 +16,11 @@ public static class MonsterNameList
     #endregion
 
     #region Worms
+    public const string wormsPackName = "Worms";
     public const string armoredWorm = "Armored Worm";
     public const string broodling = "Broodling";
     public const string direWorm = "Dire Worm";
+    public const string guardianWorm = "Guardian Worm";
     public const string hiveHerald = "Hive Herald";
     public const string hiveHeraldNest = "Hive Herald Nest";
     public const string martyrWorm = "Martyr Worm";
@@ -65,7 +67,8 @@ public static class MonsterNameList
 
     public static string getPackName(string enemyType)
     {
-        if(enemyType.Contains(NPCNameList.guard) ||
+        if(enemyType.Equals(NPCNameList.guard) ||
+            enemyType.Contains(NPCNameList.guard + " ") ||
             enemyType.Contains(NPCNameList.overseer) ||
             enemyType.Contains(NPCNameList.chief)  )
         {
@@ -74,20 +77,64 @@ public static class MonsterNameList
 
         switch(enemyType)
         {
-            case NPCNameList.imre:
-                return slavePackName;
-            case axeman:            
+            // Bats
+            case denMother:
+            case giantBat:
+            case batSwarm:
+            case armoredBat:
+            case armoredBatShielded:
+            case screecher:
+            case caveMatron:
+                return batsPackName;
+
+            // Worms
+            case armoredWorm:
+            case broodling:
+            case direWorm:
+            case guardianWorm:
+            case hiveHerald:
+            case hiveHeraldNest:
+            case martyrWorm:
+            case martyrWormNest:
+            case toxicWorm:
+            case toxicWormNest:
+            case worm:
+            case wormNest:
+                return wormsPackName;
+
+            // Lovashi
+            case axeman:
             case disciplinarian:
             case executioner:
             case javelineer:
             case lancer:
             case lieutenant:
             case linebreaker:
+            case overseer:
             case signaleer:
             case spearman:
                 return lovashiPackName;
+
+            // Slaves
+            case NPCNameList.imre:
+            case noBrandLoyalist:
+            case noBrandRioter:
+            case brandedConscript:
+            case brandedRioter:
+                return slavePackName;
+
+            // Horses
+            case NPCNameList.csalan:
+            case horseCharger:
+            case horseStomper:
+                return lovashiPackName;
+
+            // Movable Object
+            case movableObject:
+                return movableObject;
+
             default:
-                return batsPackName;
+                return "???";
         }
     }
 

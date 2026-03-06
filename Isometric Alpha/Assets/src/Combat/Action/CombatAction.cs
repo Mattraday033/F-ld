@@ -867,7 +867,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
         if(checkForResistance(target, traitToApply))
         {
-            DamageNumberPopup.createResistPopUp(CombatGrid.getPositionAt(target.position), CombatAnimationManager.getInstance().damageNumberCanvas);
+            DamageNumberPopup.createResistPopUp(target.position, CombatGrid.getPositionAt(target.position), CombatAnimationManager.getInstance().damageNumberCanvas);
             return;
         }
 

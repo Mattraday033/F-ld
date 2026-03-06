@@ -63,6 +63,11 @@ public class SkillButtonManager : MonoBehaviour
 
     public static void setToNextSkill()
     {
+        if(State.formation.isVacant())
+        {
+            return;
+        }
+
         changeSkill(true);
     }
 

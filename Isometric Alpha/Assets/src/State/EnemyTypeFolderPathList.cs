@@ -65,6 +65,7 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(MonsterNameList.armoredWorm, wormFolderPath + MonsterNameList.armoredWorm + "/");
         folderPathDict.Add(MonsterNameList.broodling, wormFolderPath + MonsterNameList.broodling + "/");
         folderPathDict.Add(MonsterNameList.direWorm, wormFolderPath + MonsterNameList.direWorm + "/");
+        folderPathDict.Add(MonsterNameList.guardianWorm, wormFolderPath + MonsterNameList.guardianWorm + "/");
         folderPathDict.Add(MonsterNameList.hiveHerald, wormFolderPath + MonsterNameList.hiveHerald + "/");
         folderPathDict.Add(MonsterNameList.hiveHeraldNest, wormFolderPath + MonsterNameList.hiveHeraldNest + "/");
         folderPathDict.Add(MonsterNameList.martyrWorm, wormFolderPath + MonsterNameList.martyrWorm + "/");

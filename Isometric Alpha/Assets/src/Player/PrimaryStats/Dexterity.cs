@@ -43,35 +43,19 @@ public static class Dexterity
     public static void addExitStrategy(Stats target)
     {
 
-        if (!CombatStateManager.isPlayerSurpriseRound() || CombatStateManager.whoIsSurprised != SurpriseState.EnemySurprised)
+        if (target == null || 
+            !CombatStateManager.isPlayerSurpriseRound() || 
+            CombatStateManager.whoIsSurprised != SurpriseState.EnemySurprised)
         {
             return;
         }
 
-        bool hasExitStrategy = false;
-
-        //getPartySurpriseRounds()
-
-        foreach (AllyStats allyStats in State.formation)
-        {
-            if (allyStats == null || allyStats.isDead())
-            {
-                continue;
-            }
-
-
-            if (allyStats.getDexterity() >= exitStrategyLevel)
-            {
-                hasExitStrategy = true;
-                break;
-            }
-        }
-
-        if(hasExitStrategy)
+        if(PartyStats.getHighestDexterity() >= exitStrategyLevel)
         {
             Trait exitStrategy = TraitList.exitStrategy.clone();
 
             exitStrategy.setRoundsLeft(PartyStats.getPartySurpriseRounds() + 1);
+            exitStrategy.traitApplier = target;
 
             target.addTrait(exitStrategy);  
         }

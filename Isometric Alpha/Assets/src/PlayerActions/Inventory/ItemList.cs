@@ -246,7 +246,7 @@ public static class ItemList
 		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, malletIndex), "Mallet", "A large hammer used to beat pitons into rock walls.", "3S + 6", "D", ItemSpriteList.malletSprite, Range.horizontalOneIndex, 15, isOneHanded, EffectAnimationType.Blunt));
 		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, lightPickIndex), "Light Pick", "A bronze pick meant to be used in one hand.", "3D + 8", "3D", ItemSpriteList.oneHandedPickSprite, Range.horizontalOneIndex, 15, isOneHanded, EffectAnimationType.Pierce));
 		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, heavyPickIndex), "Heavy Pick", "A large bronze pick meant to be used in two hands.", "4S + 7", "D", ItemSpriteList.twoHandedPickSprite, Range.hookOneIndex, 15, isTwoHanded, EffectAnimationType.Pierce));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, bronzeBarIndex), "Bronze Bar", "A long thin bronze ingot. A bit oxidized, but hefty.", "2S + 5", "D", ItemSpriteList.bronzeBarSprite, Range.horizontalThreeIndex, 5, isTwoHanded, EffectAnimationType.Blunt));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, bronzeBarIndex), "Bronze Bar", "A long thin bronze ingot. A bit oxidized, but hefty.", "3S + 8", "D + 2", ItemSpriteList.bronzeBarSprite, Range.horizontalThreeIndex, 5, isTwoHanded, EffectAnimationType.Blunt));
 		weapons.Add(null);
 		weapons.Add(new Fist(new ItemListID(weaponsListIndex, improvedMainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "2W+S+D+4", "W+D+2", "ImprovedFistIcon", Range.verticalOneIndex));
 		weapons.Add(new Fist(new ItemListID(weaponsListIndex, greaterMainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "3W+S+D+8", "W+D+4", "GreaterFistIcon", Range.boxOneIndex));
