@@ -180,6 +180,11 @@ public abstract class Armor : EquippableItem, IJSONConvertable
         return slotID;
     }
     
+    public override void playEquipSFX()
+    {
+        AudioManager.playArmorChangeSFX();
+    }
+
     public static string getSlotIconName(int slotIndex)
 	{
 		switch (slotIndex)

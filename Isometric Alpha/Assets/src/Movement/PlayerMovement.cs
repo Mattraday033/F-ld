@@ -72,6 +72,11 @@ public class PlayerMovement : MovementTracker
         return PlayerInput.canMove() && (isMoving() || KeyBindingList.movementKeyPressed()) && !KeyPressManager.handlingPrimaryKeyPress;
     }
 
+    public override void playFootstepSFX()
+    {
+        // AudioManager.playFootStep();
+    }
+
     #endregion
 
     private static PlayerMovement instance;

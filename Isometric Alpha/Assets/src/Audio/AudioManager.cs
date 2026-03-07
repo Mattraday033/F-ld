@@ -8,12 +8,15 @@ using UnityEngine.SceneManagement;
 public class AudioManager : MonoBehaviour
 {
     public const bool fadeOut = true;
+    public static bool playLeftFootstep = true;
 
     #region Music Volume Values
     public const float musicVolumeMaximum = 1f;
     public const float musicVolumeMinimum = 0f;
 
     public static float musicVolumePlayerSetting = 1f; 
+    public static float footstepPlayerSetting = 1f;
+    public const float footstepMufflePercent = .6f;
     #endregion
 
     private static AudioManager instance;
@@ -22,9 +25,11 @@ public class AudioManager : MonoBehaviour
     public static string currentMusicPath;
 
     [SerializeField]
-    private AudioSource musicSource;
+    private AudioSource musicSource;    
     [SerializeField]
     private AudioSource SFXSource;
+    [SerializeField]
+    private AudioSource footStepSource;
 
     void Awake()
     {
@@ -90,7 +95,7 @@ public class AudioManager : MonoBehaviour
         instance.musicSource.volume = volumePercent;
     }
 
-    public static void setSFXSourceVolume(float volumePercent)
+    public static void setFootStepSourceVolume(float volumePercent)
     {
         if(volumePercent < 0)
         {
@@ -100,7 +105,7 @@ public class AudioManager : MonoBehaviour
             volumePercent = 1f;
         }
 
-        instance.SFXSource.volume = volumePercent;
+        instance.footStepSource.volume = volumePercent*footstepMufflePercent;
     }
 
     public static void playNextAreaMusic(string newAreaName)
@@ -145,6 +150,79 @@ public class AudioManager : MonoBehaviour
         FadeToBlackManager.createFade(fade);
     }
 
+    public static void playSFX(string SFXClipPath)
+    {
+        AudioClip SFXClip = Resources.Load<AudioClip>(SFXClipPath);
+
+        if(SFXClip == null)
+        {
+            return;
+        }
+
+        instance.SFXSource.clip = SFXClip;
+        instance.SFXSource.Play();
+    }
+
+    public static void playCoinSFX()
+    {
+        playSFX(AudioClipList.coinSFXPrefix + 
+                Random.Range(Constants.indexOne, AudioClipList.coinSFXCount + 1));
+    }
+
+    public static void playArmorChangeSFX()
+    {
+        playSFX(AudioClipList.armorChangePrefix + 
+                Random.Range(Constants.indexOne, AudioClipList.armorChangeSFXCount + 1));
+    }
+
+    public static void playFootStep(int row)
+    {
+        if(CombatStateManager.inCombat || (PlayerMovement.getInstance() != null && 
+            !PlayerMovement.getInstance().isMoving()))
+        {
+            return;
+        }
+
+        AudioSource footStepSource = instance.footStepSource;
+
+        if(playLeftFootstep)
+        {
+            footStepSource.pitch = .8f;
+        } else
+        {
+           footStepSource.pitch = 1.2f;
+        }
+
+        playLeftFootstep = !playLeftFootstep;
+
+        FootStepType footStepType = AreaList.getAreaFootStepType();
+        string footstepSFXFolderPath = AudioClipList.footstepFolderPath + footStepType.ToString() + "/" + AudioClipList.footstepSFXFilePrefix;
+        int highestFootStepSFX = 2;
+
+        switch(footStepType)
+        {
+            case FootStepType.Dirt:
+                highestFootStepSFX = 7;
+                break;
+            case FootStepType.WoodFloor:
+                highestFootStepSFX = 5;
+                break;
+            default:
+                highestFootStepSFX = 9;
+                break;
+        }
+
+        int soundEffectNumber = Random.Range(Constants.indexOne, highestFootStepSFX + 1);
+
+        AudioClip footstepClip = Resources.Load<AudioClip>(footstepSFXFolderPath + soundEffectNumber);
+
+        if(footstepClip != null)
+        {
+            footStepSource.clip = footstepClip;
+            footStepSource.Play();
+        }
+    }
+
     [RuntimeInitializeOnLoadMethod]
     private static void instantiateAudioManager()
     {
@@ -153,9 +231,16 @@ public class AudioManager : MonoBehaviour
         currentMusicPath = "";
         TransitionManager.ChangeAreaMusic.AddListener(playNextAreaMusic);
         musicVolumePlayerSetting = musicVolumeMaximum;
+        footstepPlayerSetting = musicVolumeMaximum; 
+
+        playLeftFootstep = true;
+
+        HeartBeatManager.MediumHeartBeat.AddListener(playFootStep);
     }
 
 }
+
+public enum FootStepType { Dirt, Cave, WoodFloor }
 
 public static class AudioClipList
 {
@@ -169,4 +254,24 @@ public static class AudioClipList
     public const string deathMusic = musicFolderPath + "Dead";
     public const string caveOne = musicFolderPath + "Cave 1";
 
+    public const string SFXFolderPath = audioFolderPath + "Sound Effects/";
+
+    public const string footstepFolderPath = SFXFolderPath + "Footsteps/";
+
+    public const string footstepSFXFilePrefix = "FS";
+
+    public const string miscSFXFolder = SFXFolderPath + "Misc/";
+
+    public const string chestOpen = miscSFXFolder + "ChestOpen";
+    public const string placeInInventory = miscSFXFolder + "PlaceInInventory";
+
+    public const string coinSFXFolder = SFXFolderPath + "Coin/";
+
+    public const string coinSFXPrefix = coinSFXFolder + "Coin";
+    public const int coinSFXCount = 5;
+
+    public const string armorSFXFolder = SFXFolderPath + "Armor/";
+
+    public const string armorChangePrefix = armorSFXFolder + "ArmorChange";
+    public const int armorChangeSFXCount = 2;
 }

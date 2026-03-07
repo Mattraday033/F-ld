@@ -256,6 +256,8 @@ public static class PrefabNames
     public const string OOCBackgroundFolderPath = spriteMapFolder + "Backgrounds/";
     public const string backgroundTilemap = OOCBackgroundFolderPath + "BackgroundTilemap";
 
+    public const string ground = "Ground";
+
     #endregion
 
     #region Sprites

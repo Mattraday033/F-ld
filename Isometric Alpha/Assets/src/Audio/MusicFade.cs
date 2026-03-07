@@ -78,7 +78,6 @@ public class BetweenAreaFade : MusicFade
         float fadePercent = getCurrentFadePercent();
 
 		AudioManager.setMusicSourceVolume(fadePercent);
-        AudioManager.setSFXSourceVolume(fadePercent);
 	} 
 
     public float getCurrentFadePercent()
@@ -95,12 +94,12 @@ public class BetweenAreaFade : MusicFade
     protected void setToFull()
 	{
         AudioManager.setMusicSourceVolume(AudioManager.musicVolumePlayerSetting);
-        AudioManager.setSFXSourceVolume(AudioManager.musicVolumePlayerSetting);
+        AudioManager.setFootStepSourceVolume(AudioManager.footstepPlayerSetting);
 	}
     protected void setToMute()
 	{
         AudioManager.setMusicSourceVolume(0f);
-        AudioManager.setSFXSourceVolume(0f);
+        // AudioManager.setFootStepSourceVolume(0f);
 	}
 
     public override bool isFinished()

@@ -122,12 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!82 &166362039 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 3768872536267438277, guid: 89ca9784cbedc7346a728dcfb19427b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1005193206}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &509302525
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,6 +472,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3768872536267438277, guid: 89ca9784cbedc7346a728dcfb19427b9,
         type: 3}
+      propertyPath: Mute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3768872536267438277, guid: 89ca9784cbedc7346a728dcfb19427b9,
+        type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
@@ -486,16 +485,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio Listener
       objectReference: {fileID: 0}
-    - target: {fileID: 8804511094128674756, guid: 89ca9784cbedc7346a728dcfb19427b9,
+    - target: {fileID: 7584638191082086071, guid: 89ca9784cbedc7346a728dcfb19427b9,
         type: 3}
-      propertyPath: SFXSource
-      value: 
-      objectReference: {fileID: 1822652619}
-    - target: {fileID: 8804511094128674756, guid: 89ca9784cbedc7346a728dcfb19427b9,
-        type: 3}
-      propertyPath: musicSource
-      value: 
-      objectReference: {fileID: 166362039}
+      propertyPath: m_Name
+      value: Footsteps
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -731,12 +725,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &1822652619 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 3395437771147713883, guid: 89ca9784cbedc7346a728dcfb19427b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1005193206}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1988795610 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1667094941188342107, guid: 891ef4bf54f18df4a8c16ea502d358ec,

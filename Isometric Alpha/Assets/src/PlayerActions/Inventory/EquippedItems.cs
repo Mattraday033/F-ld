@@ -89,6 +89,8 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable
 
         equippedItems[item.getSlotID()] = itemToEquip;
 
+        itemToEquip.playEquipSFX();
+
         OnEquipmentChange.Invoke();
     }
 
@@ -114,31 +116,31 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable
         
         if (item.getSlotID() == Weapon.mainHandSlotIndex ||
                 item.getSlotID() < Armor.offHandSlotIndex)
+        {
+            owner.getActionArray().unequipCombatAction(item.getKey());
+        }
+        else
+        {
+            Dictionary<string, Item> currentPocket;
+
+            if (item.isJunk())
             {
-                owner.getActionArray().unequipCombatAction(item.getKey());
+                currentPocket = State.junkPocket;
             }
             else
             {
-                Dictionary<string, Item> currentPocket;
-
-                if (item.isJunk())
-                {
-                    currentPocket = State.junkPocket;
-                }
-                else
-                {
-                    currentPocket = State.inventory;
-                }
-
-                if (equippedItems[item.getSlotID()] != null)
-                {
-                    Inventory.addItem(equippedItems[item.getSlotID()], currentPocket);
-                }
-
-
-                equippedItems[item.getSlotID()].equipTarget = null;
-                equippedItems[item.getSlotID()] = null;
+                currentPocket = State.inventory;
             }
+
+            if (equippedItems[item.getSlotID()] != null)
+            {
+                Inventory.addItem(equippedItems[item.getSlotID()], currentPocket);
+            }
+
+
+            equippedItems[item.getSlotID()].equipTarget = null;
+            equippedItems[item.getSlotID()] = null;
+        }
 
         checkForEmptyOffHandSlot();
 
@@ -148,6 +150,8 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable
         {
             equipmentOwner.checkStatsAfterEquipmentRemoval();
         }
+
+        item.playEquipSFX();
 
         OnEquipmentChange.Invoke();
     }

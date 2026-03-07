@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.Events;
 
 public class MovementManager : MonoBehaviour
@@ -227,6 +228,7 @@ public class MovementManager : MonoBehaviour
             yield break;
         }
 
+        // movement.playFootstepSFX();
         float elapsedTime = 0;
 
         movement.updateFacing();
@@ -239,6 +241,7 @@ public class MovementManager : MonoBehaviour
                 yield break;
             }
             movement.getTransform().position = Vector3.Lerp(movement.startingPosition, movement.endingPosition, elapsedTime / timeToMove);
+
             elapsedTime += Time.deltaTime;  
             yield return null;
         }

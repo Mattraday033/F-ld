@@ -30,6 +30,11 @@ public class OffHandWeapon : Armor
         return DamageCalculator.calculateBonusDamage(getDamageFormula()).ToString();
     }
 
+    public override void playEquipSFX()
+    {
+        
+    }
+
     public override void describeSelfFull(DescriptionPanel panel)
 	{
 		base.describeSelfFull(panel);

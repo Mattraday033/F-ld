@@ -73,6 +73,26 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
         }
     }
 
+    private static string getChestOpenSFX(ChestType type)
+    {
+        switch(type)
+        {
+            case ChestType.Shelf:
+                return "";
+            default:
+                return AudioClipList.chestOpen;
+        }
+    }
+
+    private static string getChestTakeSFX(ChestType type)
+    {
+        switch(type)
+        {
+            default:
+                return AudioClipList.placeInInventory;
+        }
+    }
+
     public PolygonCollider2D mouseHoverCollider;
     public Facing facing = Facing.NorthEast;
     public ChestState chestState = ChestState.Closed;
@@ -191,6 +211,8 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
         NotificationManager.OnDeleteAllNotifications.Invoke();
 
+        AudioManager.playSFX(getChestOpenSFX(chestType));
+
         createChestItemUI();
 
         Inventory.addItem(chestContents);
@@ -244,6 +266,11 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
         setToCurrentSprite();
         PlayerOOCStateManager.OnStateChangeFromInChestUI.RemoveListener(destroyUI);
         PlayerOOCStateManager.OnStateChangeFromInChestUI.RemoveListener(setSpriteToOpenEmpty);
+
+        if(PlayerOOCStateManager.currentActivity != OOCActivity.inFade)
+        {
+            AudioManager.playSFX(getChestTakeSFX(chestType));
+        }
     }
 
     private string getChestKey()

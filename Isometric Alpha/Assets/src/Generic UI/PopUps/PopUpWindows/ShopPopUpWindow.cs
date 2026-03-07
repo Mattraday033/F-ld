@@ -10,8 +10,6 @@ public enum ShopMode { Buy = 0, Sell = 1, BuyBack = 2, Junk = 3 }
 
 public class ShopPopUpWindow : PopUpWindow, ITabParent
 {
-    public readonly static Dictionary<string, Item> junkDestinationPocket = null; //junk that gets sold gets send to the void
-
     public TextMeshProUGUI shopNameTag;
     public TextMeshProUGUI totalPlayerDiscount;
     public TextMeshProUGUI totalPlayerGold;
@@ -96,12 +94,17 @@ public class ShopPopUpWindow : PopUpWindow, ITabParent
 
         if(currentListCount <= 0)
         {
-            currentDescribableList = getDefaultDescribableList();
-            AbilityGridSideTab.setCurrentTabDict(this, currentDescribableList);
+            setToDefaultList();
         }
 
         ScreenManager.OnScreenInteriorUpdate.Invoke();
     }
+
+    private void setToDefaultList()
+    {
+        AbilityGridSideTab.setCurrentTabDict(this, getDefaultDescribableList());
+    }
+
     private void updateSellAllJunkButtonInteractability()
     {
         if (State.junkPocket.Count > 0)
@@ -131,7 +134,7 @@ public class ShopPopUpWindow : PopUpWindow, ITabParent
         exchangeItem(item, startPocket, getCurrentShopkeeper().getInventory());
     }
 
-    private static void handleMoneyExchange(Item item)
+    private static void handleMoneyExchange(Item item, bool updateScreen = false)
     {
         if (currentShopMode == ShopMode.Buy || currentShopMode == ShopMode.BuyBack)
         {
@@ -142,32 +145,47 @@ public class ShopPopUpWindow : PopUpWindow, ITabParent
             Purse.addCoins(Item.getTotalWorth(item, currentShopMode));
         }
 
-        ScreenManager.OnScreenInteriorUpdate.Invoke();
+        if(updateScreen)
+        {
+            ScreenManager.OnScreenInteriorUpdate.Invoke();
+        }
     }
 
-    private static void exchangeItem(Item item, Dictionary<string, Item> startPocket, Dictionary<string, Item> destinationPocket)
+    private static void exchangeItem(Item item, Dictionary<string, Item> startPocket, Dictionary<string, Item> destinationPocket, bool updateScreen = true)
     {
-        handleMoneyExchange(item);
+        handleMoneyExchange(item, updateScreen);
 
-        Inventory.removeItem(item, item.getQuantity(), startPocket);
         Item newItem = item.clone();
         newItem.setQuantity(item.getQuantity());
 
+        Inventory.removeItem(item, item.getQuantity(), startPocket);
         Inventory.addItem(newItem, destinationPocket);
+
+        AudioManager.playCoinSFX();
 
         ShopItemQuestChecker.QuestStepActivationOnItemTransation(item);
 
-        ScreenManager.OnScreenInteriorUpdate.Invoke();
+        if(updateScreen)
+        {
+            ScreenManager.OnScreenInteriorUpdate.Invoke();
+        }
     }
 
     public void sellAllJunkButtonPress()
     {
+        ShopMode oldShopMode = currentShopMode;
+        currentShopMode = ShopMode.Sell;
+
         IEnumerable<IDescribable> junkList = Tab.getList(DescribableList.Junk);
 
         foreach (Item item in junkList)
         {
-            exchangeItem(item, State.junkPocket, junkDestinationPocket);
+            exchangeItem(item, State.junkPocket, getCurrentShopkeeper().getInventory(), updateScreen: false);
         }
+
+        currentShopMode = oldShopMode;
+
+        setToDefaultList();
 
         ScreenManager.OnScreenInteriorUpdate.Invoke();
     }

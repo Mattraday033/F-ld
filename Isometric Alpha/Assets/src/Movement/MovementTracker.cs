@@ -308,4 +308,9 @@ public abstract class MovementTracker : MonoBehaviour
             return movementOne;
         }
     }
+
+    public virtual void playFootstepSFX()
+    {
+        //Empty on purpose
+    }
 }

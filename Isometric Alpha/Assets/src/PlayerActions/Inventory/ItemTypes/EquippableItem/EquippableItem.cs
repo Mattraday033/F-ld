@@ -85,6 +85,8 @@ public abstract class EquippableItem : Item, IJSONConvertable
         }
     }
 
+    public abstract void playEquipSFX();
+
     public string getSlotIDForDisplay()
     {
         switch (getSlotID())

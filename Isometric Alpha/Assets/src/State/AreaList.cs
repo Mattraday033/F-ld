@@ -14,65 +14,30 @@ public class Area
 	public string[] areasSharingHostility {get; private set;}
 	public bool alwaysAllowsFastTravel { get; private set; }
 	public string musicPath { get; private set; }
+	public FootStepType footStepType { get; private set; }
 	
 	public const int hostilityThreshold = 5;
 	private const int interiorHostilityPerCombat = 1;
 	private const int exteriorHostilityPerCombat = 2;
 	
-	public Area(string areaKey, string[] scenesInArea, string[] areasSharingHostility, string musicPath)
+	public Area(string areaKey, string[] scenesInArea, string[] areasSharingHostility, string musicPath, string combatBackgroundName = null, int hostility = 0, bool alwaysAllowsFastTravel = true, FootStepType footStepType = FootStepType.Cave)
 	{
 		this.areaKey = areaKey;
-		this.combatBackgroundName = areaKey;
-		this.hostility = 0;
-		this.scenesInArea = scenesInArea;
-		this.areasSharingHostility = areasSharingHostility;
-		this.alwaysAllowsFastTravel = true;
-		this.musicPath = musicPath;
-	}
-	
-	public Area(string areaKey, string[] scenesInArea, string[] areasSharingHostility, bool alwaysAllowsFastTravel, string musicPath)
-	{
-		this.areaKey = areaKey;
-		this.combatBackgroundName = areaKey;
-		this.hostility = 0;
+        if(combatBackgroundName == null)
+        {
+		    this.combatBackgroundName = areaKey;
+        } else
+        {
+		    this.combatBackgroundName = combatBackgroundName;
+        }
+		this.hostility = hostility;
 		this.scenesInArea = scenesInArea;
 		this.areasSharingHostility = areasSharingHostility;
 		this.alwaysAllowsFastTravel = alwaysAllowsFastTravel;
 		this.musicPath = musicPath;
+        this.footStepType = footStepType;
 	}
-
-    public Area(string areaKey, int startingHostility, string[] scenesInArea, string[] areasSharingHostility, string musicPath)
-    {
-        this.areaKey = areaKey;
-        this.combatBackgroundName = areaKey;
-        this.hostility = startingHostility;
-        this.scenesInArea = scenesInArea;
-        this.areasSharingHostility = areasSharingHostility;
-        this.alwaysAllowsFastTravel = true;
-		this.musicPath = musicPath;
-    }
 	
-    public Area(string areaKey, string combatBackgroundName, string[] scenesInArea, string[] areasSharingHostility, string musicPath)
-	{
-		this.areaKey = areaKey;
-		this.combatBackgroundName = combatBackgroundName;
-		this.scenesInArea = scenesInArea;
-		this.areasSharingHostility = areasSharingHostility;
-		this.alwaysAllowsFastTravel = true;
-		this.musicPath = musicPath;
-	}
-
-    public Area(string areaKey, string combatBackgroundName, int startingHostility, string[] scenesInArea, string[] areasSharingHostility, string musicPath)
-	{
-		this.areaKey = areaKey;
-		this.combatBackgroundName = combatBackgroundName;
-		this.hostility = startingHostility;
-		this.scenesInArea = scenesInArea;
-		this.areasSharingHostility = areasSharingHostility;
-		this.alwaysAllowsFastTravel = true;
-		this.musicPath = musicPath;
-	}
-
 	public void addHostility(int hostilityToAdd = -1)
 	{
 		addHostility(true, hostilityToAdd);
@@ -175,7 +140,13 @@ public static class AreaList
             ZoneKeyList.pit
         };
 
-        allAreas.Add(AreaNameList.lovashiCampExterior, new Area(AreaNameList.lovashiCampExterior, scenesInCampExterior, areasSharingHostilityWithCampExterior, fastTravelContingentOnHostility, AudioClipList.campOverworld));
+        allAreas.Add(AreaNameList.lovashiCampExterior, 
+                    new Area(   AreaNameList.lovashiCampExterior, 
+                                scenesInCampExterior, 
+                                areasSharingHostilityWithCampExterior, 
+                                AudioClipList.campOverworld, 
+                                alwaysAllowsFastTravel: fastTravelContingentOnHostility,
+                                footStepType: FootStepType.Dirt));
 
         string[] scenesInCampInterior = new string[]
         {
@@ -206,7 +177,7 @@ public static class AreaList
             ZoneKeyList.pit
         };
 
-        allAreas.Add(AreaNameList.lovashiCampInterior, new Area(AreaNameList.lovashiCampInterior, scenesInCampInterior, areasSharingHostilityWithCampInterior, AudioClipList.campInterior));
+        allAreas.Add(AreaNameList.lovashiCampInterior, new Area(AreaNameList.lovashiCampInterior, scenesInCampInterior, areasSharingHostilityWithCampInterior, AudioClipList.campInterior, footStepType: FootStepType.Dirt));
 
         string[] scenesInMineLvl1 = new string[]
         {
@@ -220,7 +191,7 @@ public static class AreaList
 
         };
 
-        allAreas.Add(ZoneKeyList.mineLvl1, new Area(ZoneKeyList.mineLvl1, startsHostile, scenesInMineLvl1, areasSharingHostilityWithMineLvl1, AudioClipList.caveOne));
+        allAreas.Add(ZoneKeyList.mineLvl1, new Area(ZoneKeyList.mineLvl1, scenesInMineLvl1, areasSharingHostilityWithMineLvl1, AudioClipList.caveOne, hostility: startsHostile));
 
         string[] scenesInMineLvl2 = new string[]
         {
@@ -243,7 +214,7 @@ public static class AreaList
 
         };
 
-        allAreas.Add(ZoneKeyList.mineLvl2, new Area(ZoneKeyList.mineLvl2, startsHostile, scenesInMineLvl2, areasSharingHostilityWithMineLvl2, AudioClipList.caveOne));
+        allAreas.Add(ZoneKeyList.mineLvl2, new Area(ZoneKeyList.mineLvl2, scenesInMineLvl2, areasSharingHostilityWithMineLvl2, AudioClipList.caveOne, hostility: startsHostile));
 
         string[] scenesInMineLvl3 = new string[]
         {
@@ -266,7 +237,7 @@ public static class AreaList
 
         };
 
-        allAreas.Add(ZoneKeyList.mineLvl3, new Area(ZoneKeyList.mineLvl3, startsHostile, scenesInMineLvl3, areasSharingHostilityWithMineLvl3, AudioClipList.caveOne));
+        allAreas.Add(ZoneKeyList.mineLvl3, new Area(ZoneKeyList.mineLvl3, scenesInMineLvl3, areasSharingHostilityWithMineLvl3, AudioClipList.caveOne, hostility: startsHostile));
 
         string[] scenesInManseFirstFloor = new string[]
         {
@@ -295,7 +266,7 @@ public static class AreaList
             ZoneKeyList.pit
         };
 
-        allAreas.Add(ZoneKeyList.manseFirstFloor, new Area(ZoneKeyList.manseFirstFloor, scenesInManseFirstFloor, areasSharingHostilityWithManseFirstFloor, AudioClipList.campInterior));
+        allAreas.Add(ZoneKeyList.manseFirstFloor, new Area(ZoneKeyList.manseFirstFloor, scenesInManseFirstFloor, areasSharingHostilityWithManseFirstFloor, AudioClipList.campInterior, footStepType: FootStepType.WoodFloor));
 
         string[] scenesInManseSecondFloor = new string[]
         {
@@ -322,7 +293,7 @@ public static class AreaList
             ZoneKeyList.pit
         };
 
-        allAreas.Add(ZoneKeyList.manseSecondFloor, new Area(ZoneKeyList.manseSecondFloor, ZoneKeyList.manseFirstFloor, scenesInManseSecondFloor, areasSharingHostilityWithManseSecondFloor, AudioClipList.campInterior));
+        allAreas.Add(ZoneKeyList.manseSecondFloor, new Area(ZoneKeyList.manseSecondFloor, scenesInManseSecondFloor, areasSharingHostilityWithManseSecondFloor, AudioClipList.campInterior, combatBackgroundName: ZoneKeyList.manseFirstFloor, footStepType: FootStepType.WoodFloor));
 
         string[] scenesInPit = new string[]
         {
@@ -343,7 +314,7 @@ public static class AreaList
             ZoneKeyList.manseSecondFloor
         };
 
-        allAreas.Add(ZoneKeyList.pit, new Area(ZoneKeyList.pit, ZoneKeyList.mineLvl3, startsHostile, scenesInPit, areasSharingHostilityWithPit, AudioClipList.caveOne));
+        allAreas.Add(ZoneKeyList.pit, new Area(ZoneKeyList.pit, scenesInPit, areasSharingHostilityWithPit, AudioClipList.caveOne, combatBackgroundName: ZoneKeyList.mineLvl3, hostility: startsHostile));
 
     }
 
@@ -366,6 +337,21 @@ public static class AreaList
 		
 		return getCurrentArea().isHostile();
 	}
+
+    public static FootStepType getAreaFootStepType()
+    {
+        switch(AreaManager.locationName)
+        {
+            case LocationNameList.guardHouseNorthEast:
+            case LocationNameList.guardHouseSouthWest:
+            case LocationNameList.guardHouseTopFloor:
+                return FootStepType.Cave;
+            default:
+                Area area = getCurrentArea();
+
+                return area.footStepType;
+        }
+    }
 
 	public static int getCurrentAreaHostility()
 	{
