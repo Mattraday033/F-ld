@@ -76,11 +76,6 @@ public class Weapon : EquippableItem, IJSONConvertable
 		return true;
 	}
 
-    public override void playEquipSFX()
-    {
-        
-    }
-
 	public override CombatAction getCombatAction(AllyStats stats)
 	{
 		return new Attack(stats, this);

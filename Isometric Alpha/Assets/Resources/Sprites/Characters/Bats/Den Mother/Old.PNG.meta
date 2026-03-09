@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d8174855ac029a8439b8746465b1b291
+guid: c2aecd5dd20547c43ae0b0682897f928
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -46,9 +46,9 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 128
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,127 +97,173 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Den Mother 128x128_0
+      name: Idle_Front_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
+        width: 256
+        height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.33}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 37, y: 106}
+        - {x: -20, y: 107}
+        - {x: -52, y: 84}
+        - {x: -94, y: 59}
+        - {x: -111, y: 8}
+        - {x: -43, y: -57}
+        - {x: 108, y: -69}
+        - {x: 92, y: 21}
       tessellationDetail: 0
       bones: []
-      spriteID: 292f27adba8ed724b93aec512c164671
-      internalID: -1272793572
+      spriteID: 18d6872aaf5cd054a8ed81cb0a479d0d
+      internalID: -1938000467
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Den Mother 128x128_1
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a5e703f7387c1d5488fbe896470d17d7
-      internalID: 838456613
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Den Mother 128x128_2
+      name: Idle_Front_1
       rect:
         serializedVersion: 2
         x: 256
         y: 0
-        width: 128
-        height: 128
+        width: 256
+        height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.33}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 29, y: 104}
+        - {x: -70, y: 92}
+        - {x: -107, y: 49}
+        - {x: -40, y: -69}
+        - {x: -24, y: -70}
+        - {x: 82, y: -70}
+        - {x: 100, y: -38}
+        - {x: 88, y: 59}
       tessellationDetail: 0
       bones: []
-      spriteID: d1b34d402e31473498485c373a6cad6d
-      internalID: 191332605
+      spriteID: 18ff87987b853fb47bec565f19d5ae93
+      internalID: -890348784
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Den Mother 128x128_3
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3a14865c737f7254a9478ab6a81dc582
-      internalID: -971125720
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Den Mother 128x128_4
+      name: Idle_Front_2
       rect:
         serializedVersion: 2
         x: 512
         y: 0
-        width: 128
-        height: 128
+        width: 256
+        height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.33}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -111, y: 9}
+        - {x: -45, y: -47}
+        - {x: -21, y: -55}
+        - {x: 106, y: -64}
+        - {x: 95, y: 38}
+        - {x: 55, y: 106}
+        - {x: -41, y: 96}
+        - {x: -89, y: 71}
       tessellationDetail: 0
       bones: []
-      spriteID: a9bb3ca3cd419b84e97f55631898a680
-      internalID: 710127241
+      spriteID: 5748a4bb030305741a3b1ee32d7b5b6a
+      internalID: 1936395950
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Den Mother 128x128_5
+      name: Idle_Front_3
       rect:
         serializedVersion: 2
-        x: 640
+        x: 768
         y: 0
-        width: 128
-        height: 128
+        width: 256
+        height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.33}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -88, y: -12}
+        - {x: -77, y: -37}
+        - {x: -22, y: -54}
+        - {x: 45, y: -76}
+        - {x: 114, y: -61}
+        - {x: 76, y: 44}
+        - {x: 33, y: 104}
+        - {x: -105, y: 50}
       tessellationDetail: 0
       bones: []
-      spriteID: a7c4545574a7fbb46a75479aa8b6357f
-      internalID: -2140481567
+      spriteID: 074cda64c72d43b44810d51d3cb072e7
+      internalID: -1801997509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_Front_4
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -15, y: 102}
+        - {x: -102, y: 63}
+        - {x: -91, y: -3}
+        - {x: -7, y: -58}
+        - {x: 78, y: -65}
+        - {x: 111, y: -14}
+        - {x: 55, y: 101}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e899942328ec364198d41f1d59b1fb3
+      internalID: -1036298821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_Front_5
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -24, y: 104}
+        - {x: -99, y: 73}
+        - {x: -93, y: -2}
+        - {x: -29, y: -56}
+        - {x: 105, y: -62}
+        - {x: 98, y: 22}
+        - {x: 47, y: 97}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c73fd74d71f64e34389a6209883a8683
+      internalID: -1183338908
       vertices: []
       indices: 
       edges: []
@@ -233,12 +279,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Den Mother 128x128_0: -1272793572
-      Den Mother 128x128_1: 838456613
-      Den Mother 128x128_2: 191332605
-      Den Mother 128x128_3: -971125720
-      Den Mother 128x128_4: 710127241
-      Den Mother 128x128_5: -2140481567
+      Idle_Front_0: -1938000467
+      Idle_Front_1: -890348784
+      Idle_Front_2: 1936395950
+      Idle_Front_3: -1801997509
+      Idle_Front_4: -1036298821
+      Idle_Front_5: -1183338908
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

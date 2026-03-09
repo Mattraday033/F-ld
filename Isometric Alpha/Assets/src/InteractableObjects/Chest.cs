@@ -172,7 +172,7 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
         if (GateAndChestManager.hasBeenOpened(getChestKey()))
         {
-            setSpriteToOpenEmpty();
+            setSpriteToOpenEmpty(ignoreSFX: true);
         }
         else
         {
@@ -262,12 +262,17 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
     public void setSpriteToOpenEmpty()
     {
+        setSpriteToOpenEmpty(false);
+    }
+
+    public void setSpriteToOpenEmpty(bool ignoreSFX = false)
+    {
         chestState = ChestState.OpenEmpty;
         setToCurrentSprite();
         PlayerOOCStateManager.OnStateChangeFromInChestUI.RemoveListener(destroyUI);
         PlayerOOCStateManager.OnStateChangeFromInChestUI.RemoveListener(setSpriteToOpenEmpty);
 
-        if(PlayerOOCStateManager.currentActivity != OOCActivity.inFade)
+        if(!ignoreSFX)
         {
             AudioManager.playSFX(getChestTakeSFX(chestType));
         }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9228ffafdf7045542b8e2d048f09d53f
+guid: 0b1c3cf52aee49d46b5fcc7a99d94081
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -46,9 +46,9 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
+  alignment: 9
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,190 +97,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Idle_Front_0
+      name: Small Bats 128x128_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 256
+        width: 128
+        height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.33}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -40, y: 80}
-        - {x: -61, y: 66}
-        - {x: -76, y: 46}
-        - {x: -70, y: -10}
-        - {x: -57, y: -69}
-        - {x: 5, y: -69}
-        - {x: 83, y: -67}
-        - {x: 95, y: 29}
-        - {x: 37, y: 50}
-        - {x: 4, y: 80}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a7b43460a262c14faf3859ca8ee7bed
-      internalID: 473461843
+      spriteID: d5377b9e6242b57449a07bb33b346ade
+      internalID: -1165686296
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_Front_1
+      name: Small Bats 128x128_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c606be8853bbf54db0698e0b1d6c143
+      internalID: 285529279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Small Bats 128x128_2
       rect:
         serializedVersion: 2
         x: 256
         y: 0
-        width: 256
-        height: 256
+        width: 128
+        height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.33}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -51, y: -72}
-        - {x: 0, y: -78}
-        - {x: 62, y: -80}
-        - {x: 83, y: -56}
-        - {x: 102, y: 9}
-        - {x: 35, y: 67}
-        - {x: -17, y: 84}
-        - {x: -63, y: 66}
-        - {x: -82, y: 36}
-        - {x: -73, y: -19}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3fdca5bc283d0f4181ddc124641c57f
-      internalID: -1765776876
+      spriteID: b11783c0ef7f29b4a9bea329a86095b7
+      internalID: -1686676415
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_Front_2
+      name: Small Bats 128x128_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d31ff0b45bb4ade4abc4a26f238ce7fb
+      internalID: 2076561404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Small Bats 128x128_4
       rect:
         serializedVersion: 2
         x: 512
         y: 0
-        width: 256
-        height: 256
+        width: 128
+        height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.33}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -59, y: 55}
-        - {x: -74, y: 38}
-        - {x: -87, y: 7}
-        - {x: -97, y: -33}
-        - {x: -56, y: -68}
-        - {x: 25, y: -77}
-        - {x: 86, y: -69}
-        - {x: 104, y: -7}
-        - {x: 54, y: 45}
-        - {x: 3, y: 78}
-        - {x: -42, y: 80}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2a9b550373e6b04ea18e2fdf5f5b175
-      internalID: 1972239452
+      spriteID: 52201e75b413f6a479e39e5aef7ec415
+      internalID: 1018052175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_Front_3
+      name: Small Bats 128x128_5
       rect:
         serializedVersion: 2
-        x: 768
+        x: 640
         y: 0
-        width: 256
-        height: 256
+        width: 128
+        height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.33}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: 23, y: 78}
-        - {x: -41, y: 90}
-        - {x: -61, y: 62}
-        - {x: -80, y: 35}
-        - {x: -87, y: -15}
-        - {x: -81, y: -61}
-        - {x: -23, y: -89}
-        - {x: 38, y: -70}
-        - {x: 85, y: -50}
-        - {x: 96, y: -24}
-        - {x: 75, y: 23}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28704fbec2e26b44383e7ae24e84cecc
-      internalID: 1713885437
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Idle_Front_4
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.33}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -64, y: 79}
-        - {x: -76, y: 51}
-        - {x: -94, y: 9}
-        - {x: -80, y: -41}
-        - {x: -50, y: -70}
-        - {x: -21, y: -71}
-        - {x: 35, y: -71}
-        - {x: 80, y: -55}
-        - {x: 108, y: -9}
-        - {x: 85, y: 30}
-        - {x: 33, y: 74}
-        - {x: -36, y: 104}
-      tessellationDetail: 0
-      bones: []
-      spriteID: cd4e09b37b6269b46a96f6df1d39f3fb
-      internalID: -1055012876
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Idle_Front_5
-      rect:
-        serializedVersion: 2
-        x: 1280
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.33}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: 32, y: 71}
-        - {x: -41, y: 93}
-        - {x: -78, y: 59}
-        - {x: -89, y: 11}
-        - {x: -82, y: -39}
-        - {x: -51, y: -69}
-        - {x: 20, y: -71}
-        - {x: 81, y: -58}
-        - {x: 105, y: 11}
-      tessellationDetail: 0
-      bones: []
-      spriteID: a0d4fe58dc0c1844295633fa2b7ff4a5
-      internalID: -338619665
+      spriteID: 63ba5e8078ea1454aa2857e397e3d3b6
+      internalID: -1500749446
       vertices: []
       indices: 
       edges: []
@@ -296,12 +233,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Idle_Front_0: 473461843
-      Idle_Front_1: -1765776876
-      Idle_Front_2: 1972239452
-      Idle_Front_3: 1713885437
-      Idle_Front_4: -1055012876
-      Idle_Front_5: -338619665
+      Small Bats 128x128_0: -1165686296
+      Small Bats 128x128_1: 285529279
+      Small Bats 128x128_2: -1686676415
+      Small Bats 128x128_3: 2076561404
+      Small Bats 128x128_4: 1018052175
+      Small Bats 128x128_5: -1500749446
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

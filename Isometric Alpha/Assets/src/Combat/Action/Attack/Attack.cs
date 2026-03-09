@@ -129,6 +129,18 @@ public class Attack : CombatAction, IJSONConvertable
 		return true;
 	}
 
+    public override void playEquipSFX()
+    {
+        Weapon sourceWeapon = getSourceItem() as Weapon;
+
+        sourceWeapon.playEquipSFX();
+    }
+
+    public override void playUnequipSFX()
+    {
+        playEquipSFX();
+    }
+
 	public override string getDisplayType()
 	{
 		return "Attack";

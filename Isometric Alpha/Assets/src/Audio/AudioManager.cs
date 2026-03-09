@@ -169,10 +169,10 @@ public class AudioManager : MonoBehaviour
                 Random.Range(Constants.indexOne, AudioClipList.coinSFXCount + 1));
     }
 
-    public static void playArmorChangeSFX()
+    public static void playWeaponChangeSFX()
     {
-        playSFX(AudioClipList.armorChangePrefix + 
-                Random.Range(Constants.indexOne, AudioClipList.armorChangeSFXCount + 1));
+        playSFX(AudioClipList.weaponPrefix + 
+                Random.Range(Constants.indexOne, AudioClipList.weaponSFXCount + 1));
     }
 
     public static void playFootStep(int row)
@@ -270,8 +270,22 @@ public static class AudioClipList
     public const string coinSFXPrefix = coinSFXFolder + "Coin";
     public const int coinSFXCount = 5;
 
-    public const string armorSFXFolder = SFXFolderPath + "Armor/";
+    public const string equipUnequipSFXFolder = SFXFolderPath + "EquipUnequip/";
 
-    public const string armorChangePrefix = armorSFXFolder + "ArmorChange";
-    public const int armorChangeSFXCount = 2;
+    public const string actionsEquipSFXFolder = equipUnequipSFXFolder + "Actions/";
+    public const string actionEquipSFX = actionsEquipSFXFolder + "ActionEquip";
+    public const string actionUnequipSFX = actionsEquipSFXFolder + "ActionUnequip";
+
+    public const string armorEquipSFXFolder = equipUnequipSFXFolder + "Armor/";
+
+    public const string headSlotChangeSFX = armorEquipSFXFolder + "Head";
+    public const string bodySlotChangeSFX = armorEquipSFXFolder + "Body";
+    public const string handsSlotChangeSFX = armorEquipSFXFolder + "Hands";
+    public const string feetSlotChangeSFX = armorEquipSFXFolder + "Feet";
+    public const string trinketSlotChangeSFX = armorEquipSFXFolder + "Trinket";
+
+    public const string weaponEquipSFXFolder = equipUnequipSFXFolder + "Weapon/";
+
+    public const string weaponPrefix = weaponEquipSFXFolder + "Weapon";
+    public const int weaponSFXCount = 3;
 }

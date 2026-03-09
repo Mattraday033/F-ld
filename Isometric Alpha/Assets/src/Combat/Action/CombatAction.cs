@@ -1096,6 +1096,17 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     #region Miscellaneous
 
+    public virtual void playEquipSFX()
+    {
+        AudioManager.playSFX(AudioClipList.actionEquipSFX);
+    }
+
+    public virtual void playUnequipSFX()
+    {
+        AudioManager.playSFX(AudioClipList.actionUnequipSFX);
+    }
+
+
     public virtual void applySettings(CombatActionSettings settings)
     {
         //empty on purpose

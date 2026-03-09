@@ -136,7 +136,7 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
                 OverallUIManager.getCurrentEquippedItems().unequipItem(itemInSlot);
             }
 
-            combatActionSlotIndex = -1;
+            // combatActionSlotIndex = -1;
 
             destroyHoverIcon();
         }

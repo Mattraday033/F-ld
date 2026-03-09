@@ -136,6 +136,12 @@ public class CombatActionArray : StatBoostSourceCombiner
             EquippedItems.OnEquipmentChange.Invoke();
         }
 
+        if(!Flags.isInNewGameMode() &&
+            PlayerOOCStateManager.currentActivity == OOCActivity.inUI)
+        {
+            combatActions[slotIndex].playUnequipSFX();
+        }
+
         combatActions[slotIndex] = null;
 
         OnCombatActionArrayChange.Invoke();
@@ -235,6 +241,12 @@ public class CombatActionArray : StatBoostSourceCombiner
         else
         {
             combatActions[slotIndex] = null;
+        }
+
+        if(!Flags.isInNewGameMode() &&
+            PlayerOOCStateManager.currentActivity == OOCActivity.inUI)
+        {
+            newCombatAction.playEquipSFX();
         }
 
         OnCombatActionArrayChange.Invoke();

@@ -85,7 +85,35 @@ public abstract class EquippableItem : Item, IJSONConvertable
         }
     }
 
-    public abstract void playEquipSFX();
+    public void playEquipSFX()
+    {
+        switch (getSlotID())
+        {
+            case Armor.headSlotIndex:
+                AudioManager.playSFX(AudioClipList.headSlotChangeSFX);
+                break;
+
+            case Armor.bodySlotIndex:
+                AudioManager.playSFX(AudioClipList.bodySlotChangeSFX);
+                break;
+
+            case Armor.handsSlotIndex:
+                AudioManager.playSFX(AudioClipList.handsSlotChangeSFX);
+                break;
+
+            case Armor.feetSlotIndex:
+                AudioManager.playSFX(AudioClipList.feetSlotChangeSFX);
+                break;
+
+            case Armor.trinketSlotIndex:
+                AudioManager.playSFX(AudioClipList.trinketSlotChangeSFX);
+                break;
+
+            default:
+                AudioManager.playWeaponChangeSFX();
+                break;
+        }
+    }
 
     public string getSlotIDForDisplay()
     {
