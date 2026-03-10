@@ -193,12 +193,12 @@ public class AnimationParams
         return animationParams;
     }
 
-    public static AnimationParams build(CombatAnimationType animationType)
+    public static AnimationParams build(CombatAnimationType animationType, EffectAnimationType effectAnimationType = EffectAnimationType.Default)
     {
         AnimationParams animationParams = new AnimationParams();
 
         animationParams.animationType = animationType;
-        animationParams.effectAnimationType = EffectAnimationType.Default;
+        animationParams.effectAnimationType = effectAnimationType;
 
         return animationParams;
     }

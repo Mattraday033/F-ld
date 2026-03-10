@@ -287,7 +287,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                AbilityList.getAbility(null, AbilityList.batClawName),
                                                                 new Trait[] { TraitList.master,
                                                                              TraitList.chaotic
-                                                                            }));
+                                                                            },
+                                                animationAudioClipDicionary : AnimationSFXDictionaryList.largeBatAudioDictionary));
         #endregion
         #region Bat Swarm
         enemyStatsDict.Add(MonsterNameList.batSwarm, new MinionStats(MonsterNameList.batSwarm,
@@ -296,7 +297,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                AbilityList.getAbility(null, AbilityList.swarmRushKey),
                                                                 traits: new Trait[] { 
                                                                                         TraitList.chaotic
-                                                                                    }));
+                                                                                    },
+                                                animationAudioClipDicionary : AnimationSFXDictionaryList.batSwarmAudioDicionary));
         #endregion
 
         #region Screecher
@@ -306,7 +308,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
   new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.screechKey) as Ability),
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.chaotic
-                                                                                }));
+                                                                                },
+                                                animationAudioClipDicionary : AnimationSFXDictionaryList.bipedalBatAudioDictionary));
         #endregion
         #region Armored Bat
         enemyStatsDict.Add(MonsterNameList.armoredBat, new EnemyStats(MonsterNameList.armoredBat,
@@ -315,7 +318,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
   new ChargeUpAbility(TraitList.shielded, AbilityList.getAbility(null, AbilityList.flurryKey) as Ability),
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.territorial
-                                                                                }));
+                                                                                },
+                                                animationAudioClipDicionary : AnimationSFXDictionaryList.bipedalBatAudioDictionary));
                                                                                 
         enemyStatsDict.Add(MonsterNameList.armoredBatShielded, new EnemyStats(MonsterNameList.armoredBat,
                                                                                       Constants.fifteenArmor,
@@ -324,7 +328,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.territorial,
                                                                                   TraitList.shielded
-                                                                                }));
+                                                                                },
+                                                animationAudioClipDicionary : AnimationSFXDictionaryList.bipedalBatAudioDictionary));
         #endregion
         #region Den Mother
         enemyStatsDict.Add(MonsterNameList.denMother, new EnemyStats(MonsterNameList.denMother,
@@ -333,7 +338,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                             AbilityList.getAbility(null, AbilityList.spawnPupsKey),
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.empty
-                                                                                }));
+                                                                                },
+                                                animationAudioClipDicionary : AnimationSFXDictionaryList.largeBatAudioDictionary));
         #endregion
         #region Cave Matron
         enemyStatsDict.Add(MonsterNameList.caveMatron, new EnemyStats(MonsterNameList.caveMatron,
@@ -342,7 +348,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
     new LastManStandingAbility(TraitList.extraShielded, AbilityList.getAbility(null, AbilityList.rouseColonyKey) as Ability),
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.emptyGenerated2
-                                                                                }));
+                                                                                },
+                                                animationAudioClipDicionary : AnimationSFXDictionaryList.bipedalBatAudioDictionary));
         #endregion
         #endregion
 
@@ -396,7 +403,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                                     TraitList.master,
                                                                                     TraitList.territorial,
                                                                                     TraitList.frontLine
-                                                                                }));
+                                                                                },
+                                                animationAudioClipDicionary : AnimationSFXDictionaryList.biteWormAudioDictionary));
         #endregion
         #region Broodling
         enemyStatsDict.Add(MonsterNameList.broodling, new MinionStats(MonsterNameList.broodling,
@@ -405,7 +413,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                AbilityList.getAbility(null, AbilityList.acidVomitKey),
                                                                     new Trait[] { 
                                                                                   TraitList.chaotic
-                                                                            }));
+                                                                            },
+                                                animationAudioClipDicionary : AnimationSFXDictionaryList.vomitWormAudioDictionary));
         #endregion
         #region Dire Worm
         enemyStatsDict.Add(MonsterNameList.direWorm, new LargeEnemyStats(MonsterNameList.direWorm,
@@ -428,7 +437,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                                     TraitList.predatory,
                                                                                     TraitList.frontLine,
                                                                                     TraitList.mobLinked
-                                                                                }));
+                                                                                },
+                                                animationAudioClipDicionary : AnimationSFXDictionaryList.biteWormAudioDictionary));
         #endregion
         #region Hive Herald
         enemyStatsDict.Add(MonsterNameList.hiveHerald, new EnemyStats(MonsterNameList.hiveHerald,
@@ -440,7 +450,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                                     TraitList.emptyGenerated2,
                                                                                     TraitList.frontLine,
                                                                                     TraitList.wormExplodes
-                                                                                }));
+                                                                                },
+                                                animationAudioClipDicionary : AnimationSFXDictionaryList.summonWormAudioDictionary));
         #endregion
         #region Martyr Worm
         enemyStatsDict.Add(MonsterNameList.martyrWorm, new EnemyStats(MonsterNameList.martyrWorm,
@@ -452,7 +463,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                                     TraitList.chaotic,
                                                                                     TraitList.frontLine,
                                                                                     TraitList.wormRevive
-                                                                                }));
+                                                                                },
+                                                animationAudioClipDicionary : AnimationSFXDictionaryList.biteWormAudioDictionary));
         #endregion
         #region Toxic Worm
         enemyStatsDict.Add(MonsterNameList.toxicWorm, new EnemyStats(MonsterNameList.toxicWorm,
@@ -463,7 +475,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                                     TraitList.master,
                                                                                     TraitList.chaotic,
                                                                                     TraitList.frontLine
-                                                                                }));
+                                                                                },
+                                                animationAudioClipDicionary : AnimationSFXDictionaryList.vomitWormAudioDictionary));
         #endregion
         #region Worm
         enemyStatsDict.Add(MonsterNameList.worm, new EnemyStats(MonsterNameList.worm,
@@ -475,7 +488,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                                     TraitList.territorial,
                                                                                     TraitList.frontLine,
                                                                                     TraitList.wormSplits
-                                                                                }));
+                                                                                },
+                                                animationAudioClipDicionary : AnimationSFXDictionaryList.biteWormAudioDictionary));
         #endregion
         #endregion
 

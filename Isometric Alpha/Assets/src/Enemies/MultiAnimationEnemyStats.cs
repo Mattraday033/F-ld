@@ -90,6 +90,8 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
         {
             animationManager.healthBarManager = healthBarManager;
             animationManager.setAnimations(getName());
+
+            animationManager.linkedStats = this;
         }
 
         combatSprite = combatSprites[spawnDetails.baseStatsPosition];

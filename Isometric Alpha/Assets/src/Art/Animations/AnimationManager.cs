@@ -62,6 +62,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     private SpriteRenderer shadowSprite;
     public PolygonCollider2D polygonCollider2D;
     public HealthBarManager healthBarManager;
+    public Stats linkedStats;
     public string characterToAnimate = "";
     public int heartBeatRow = 0;
 
@@ -99,7 +100,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         return !CombatAnimationManager.trackerBeingTracked(this) && 
                 ((!CombatStateManager.inCombat && !PlayerMovement.getInstance().canPlayRunAnimation()) || 
-                (CombatStateManager.inCombat && !healthBarManager.linkedStats.isDead()));
+                (CombatStateManager.inCombat && !linkedStats.isDead()));
     }
 
     public void setCurrentIdle(CharacterAnimationType newIdle)
@@ -113,7 +114,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             return;
         } 
 
-        bool isAlly = CombatGrid.positionIsOnAlliedSide(healthBarManager.linkedStats.position);
+        bool isAlly = CombatGrid.positionIsOnAlliedSide(linkedStats.position);
         bool containsSprites = IdleDictionary.idleDictContainsSprites(characterToAnimate, newIdle);
 
         if((newIdle == CharacterAnimationType.Secondary_Idle || newIdle == CharacterAnimationType.Death) &&
@@ -237,7 +238,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         if(CombatStateManager.inCombat)
         {
-            heartBeatRow = healthBarManager.linkedStats.position.row;
+            heartBeatRow = linkedStats.position.row;
         } else
         {
             heartBeatRow = UnityEngine.Random.Range(CombatGrid.enemyRowUpperBounds,CombatGrid.allyRowLowerBounds);
@@ -405,6 +406,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         disableExtras();
         CombatAnimationManager.trackAnimation(key, this);
         playAnimation(createClipTransitionToIdle(CharacterAnimationType.Spawn));
+        linkedStats.playAnimationSFX(CharacterAnimationType.Spawn);
     }
 
     public void playDeathAnimation()
@@ -417,11 +419,13 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         disableExtras();
         playAnimation(createClipTransitionToDeath());
         removeAnimation();
+        linkedStats.playAnimationSFX(CharacterAnimationType.Death);
     }
 
     public void playDeathAnimationThenHide()
     {
         playAnimation(createClipTransitionToDeathThenHide());
+        linkedStats.playAnimationSFX(CharacterAnimationType.Death);
         // removeAnimation();
     }
 
@@ -431,7 +435,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
         if(CombatStateManager.inCombat)
         {
-            if(CombatGrid.positionIsOnAlliedSide(healthBarManager.linkedStats.position))
+            if(CombatGrid.positionIsOnAlliedSide(linkedStats.position))
             {
                 attackAnimationType = CharacterAnimationType.Attack_Normal_Back;
             } else
@@ -441,7 +445,9 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         }
 
         CombatAnimationManager.trackAnimation(key, this);
-        playAnimation(createClipTransitionToIdle(attackAnimationType));
+        playAnimation(createClipTransitionToIdle(attackAnimationType));        
+
+        linkedStats.playAnimationSFX(CharacterAnimationType.Attack_Normal);
     }
 
     public void playAttackIntoFrontIdleAnimation()
@@ -449,6 +455,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         CombatAnimationManager.trackAnimation(key, this);
         setCurrentIdle(CharacterAnimationType.Idle_Front);
         playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Normal));
+        
+        linkedStats.playAnimationSFX(CharacterAnimationType.Attack_Normal);
     }
 
     public void playAttackIntoSecondaryIdleAnimation()
@@ -456,6 +464,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         CombatAnimationManager.trackAnimation(key, this);
         setCurrentIdle(CharacterAnimationType.Secondary_Idle);
         playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Special));
+        linkedStats.playAnimationSFX(CharacterAnimationType.Attack_Normal);
     }
 
     public void playSpecialAttackAnimation()
@@ -464,16 +473,18 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
         if(CombatStateManager.inCombat &&
             healthBarManager!= null && 
-            healthBarManager.linkedStats != null && 
-            healthBarManager.linkedStats.isDead() && 
-            healthBarManager.linkedStats.notResurrectable())
+            linkedStats != null && 
+            linkedStats.isDead() && 
+            linkedStats.notResurrectable())
         {
-            healthBarManager.linkedStats.outline.createOutline(Color.clear);
+            linkedStats.outline.createOutline(Color.clear);
             playAnimation(createClipTransitionSpecialAnimationThenHide());
         } else
         {
             playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Special));
         }
+        
+        linkedStats.playAnimationSFX(CharacterAnimationType.Attack_Special);
     }
 
     public void playWoundedAnimation()
@@ -487,7 +498,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
         if(CombatStateManager.inCombat)
         {
-            if(CombatGrid.positionIsOnAlliedSide(healthBarManager.linkedStats.position))
+            if(CombatGrid.positionIsOnAlliedSide(linkedStats.position))
             {
                 woundedAnimationType = CharacterAnimationType.Wounded_Back;
             } else
@@ -635,7 +646,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
         if(CombatStateManager.inCombat)
         {
-            if(CombatGrid.positionIsOnAlliedSide(healthBarManager.linkedStats.position))
+            if(CombatGrid.positionIsOnAlliedSide(linkedStats.position))
             {
                 deathAnimationType = CharacterAnimationType.Death_Back;
             } else
@@ -651,7 +662,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         hideObject();
 
-        CombatGrid.setCombatantAtCoords(healthBarManager.linkedStats.position, null);
+        CombatGrid.setCombatantAtCoords(linkedStats.position, null);
     }
 
 

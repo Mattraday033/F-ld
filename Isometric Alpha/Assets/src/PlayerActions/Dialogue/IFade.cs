@@ -263,7 +263,7 @@ public abstract class CircleTransition : ScreenFade
 
         PlayerOOCStateManager.setCurrentActivity(endingState);
 
-        if(CombatStateManager.inCombat)
+        if(CombatStateManager.inCombat && circleTransitionObject != null)
         {
             GameObject.DestroyImmediate(circleTransitionObject.gameObject);
         }

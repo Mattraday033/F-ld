@@ -53,6 +53,8 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     // public Trait[] hiddenTraits = new Trait[0];
     public TraitContainer traitContainer;
 
+    protected Dictionary<CharacterAnimationType, string> animationAudioClipDicionary;
+
     #endregion
 
     #region Constructors
@@ -155,6 +157,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         outline.setSpriteRenderer(spriteRenderer);
 
         animationManager = list.animationManager;
+        animationManager.linkedStats = this;
         animationManager.healthBarManager = healthBarManager;
         animationManager.setAnimations(getName() + getGenderMarker() + getAnimationSuffixes());
 
@@ -215,6 +218,21 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     public virtual bool isInsideCoordinates(GridCoords[] coords)
     {
         return coords.Contains(position);
+    }
+
+    #endregion
+
+    #region Audio
+
+    public virtual void playAnimationSFX(CharacterAnimationType animationType)
+    {
+        if(animationAudioClipDicionary == null || 
+            !animationAudioClipDicionary.ContainsKey(animationType))
+        {
+            return;
+        }
+        
+        AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(animationAudioClipDicionary[animationType]));
     }
 
     #endregion

@@ -3,8 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using Animancer;
 using Animancer.FSM;
+
+public enum EffectAnimationType
+{
+    Default,
+    Slash,
+    Blunt,
+    Pierce,
+    Positive,
+    Negative,
+    Healing,
+    BatSwarm,
+    Acid
+}
+
+
 public class EffectAnimationManager : AnimationManager
 {
+    private const float timeToWaitBeforeSFX = .3f;
+
     public GridCoords targetCoords;
 
     public int damage;
@@ -22,6 +39,22 @@ public class EffectAnimationManager : AnimationManager
         spawnDamageNumbersTime = animationClip.length * (3f/4f);
 
         animancer.Play(createClipTransitionThenDelete(animationClip));
+
+        StartCoroutine(waitThenPlaySFX(effectType));
+    }
+
+    private IEnumerator waitThenPlaySFX(string effectType)
+    {
+        float timeWaited = 0f;
+
+        while(timeWaited < timeToWaitBeforeSFX)
+        {
+            yield return null;
+
+            timeWaited += Time.deltaTime;
+        }
+
+        AudioManager.playEffectAnimationSFX(effectType);
     }
     
     private IEnumerator spawnDamageNumbers()

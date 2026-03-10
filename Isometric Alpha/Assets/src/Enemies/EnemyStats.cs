@@ -33,7 +33,7 @@ public class EnemyStats : Stats
 
     #region Constructors
 
-    public EnemyStats(string key, int armor, int tHP, CombatAction combatAction = null, Trait[] traits = null, bool gendered = false, string[] animationSuffixes = null) :
+    public EnemyStats(string key, int armor, int tHP, CombatAction combatAction = null, Trait[] traits = null, bool gendered = false, string[] animationSuffixes = null, Dictionary<CharacterAnimationType, string> animationAudioClipDicionary = null) :
     base(key)
     {
         this.armor = armor;
@@ -61,6 +61,8 @@ public class EnemyStats : Stats
         {
             this.animationSuffixes = animationSuffixes;
         }
+
+        this.animationAudioClipDicionary = animationAudioClipDicionary;
     }
 
     #endregion

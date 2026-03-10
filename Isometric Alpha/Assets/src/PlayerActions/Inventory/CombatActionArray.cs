@@ -244,7 +244,8 @@ public class CombatActionArray : StatBoostSourceCombiner
         }
 
         if(!Flags.isInNewGameMode() &&
-            PlayerOOCStateManager.currentActivity == OOCActivity.inUI)
+            PlayerOOCStateManager.currentActivity == OOCActivity.inUI && 
+            OverallUIManager.lastScreenType != ScreenType.SaveAndLoad)
         {
             newCombatAction.playEquipSFX();
         }

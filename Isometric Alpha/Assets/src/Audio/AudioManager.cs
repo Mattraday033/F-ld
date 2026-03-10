@@ -17,12 +17,19 @@ public class AudioManager : MonoBehaviour
     public static float musicVolumePlayerSetting = 1f; 
     public static float footstepPlayerSetting = 1f;
     public const float footstepMufflePercent = .6f;
+
+    public static float sfxVolumePlayerSetting = 1f;
+    public const float sfxMufflePercent = .6f;
+
     #endregion
 
+    private static bool playSFXOnNextHeartBeat;
     private static AudioManager instance;
 
     public static string previousMusicPath;
     public static string currentMusicPath;
+
+    public Coroutine playingQueuedAudioClips;
 
     [SerializeField]
     private AudioSource musicSource;    
@@ -30,6 +37,9 @@ public class AudioManager : MonoBehaviour
     private AudioSource SFXSource;
     [SerializeField]
     private AudioSource footStepSource;
+
+    public static List<string> audioClipPathQueue;
+    public static Dictionary<AudioClip, AudioSource> singletonAudioClips;
 
     void Awake()
     {
@@ -50,9 +60,27 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
+        destroyAllSingletonAudioSources();
+
         DontDestroyOnLoad(gameObject);
 
         StartCoroutine(waitTwoFramesThenStartMusic());
+    }
+
+    private static void destroyAllSingletonAudioSources()
+    {
+        if(singletonAudioClips == null)
+        {
+            singletonAudioClips = new Dictionary<AudioClip, AudioSource>();
+        }
+
+        foreach(AudioSource source in singletonAudioClips.Values)
+        {
+            if(source != null)
+            {
+                Destroy(source.gameObject);
+            }
+        }
     }
 
     private IEnumerator waitTwoFramesThenStartMusic()
@@ -175,6 +203,22 @@ public class AudioManager : MonoBehaviour
                 Random.Range(Constants.indexOne, AudioClipList.weaponSFXCount + 1));
     }
 
+    public static void playEffectAnimationSFX(string effectType)
+    {
+        if(effectType.Equals(EffectAnimationType.Default.ToString()) || 
+            effectType.Equals(EffectAnimationType.BatSwarm.ToString()))
+        {
+            return;
+        }
+
+        queueAudioClip(AudioClipList.hitSFXFolder + effectType + "/" + effectType);
+    }
+
+    public static void queueSFX(string audioClipPath)
+    {
+        queueAudioClip(audioClipPath);
+    }
+
     public static void playFootStep(int row)
     {
         if(CombatStateManager.inCombat || (PlayerMovement.getInstance() != null && 
@@ -223,6 +267,101 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    private static float getSFXVolume()
+    {
+        return sfxVolumePlayerSetting * sfxMufflePercent;
+    }
+
+    private static void queueAudioClip(string audioClipPath)
+    {
+        audioClipPathQueue.Add(audioClipPath);
+
+        if(instance != null && 
+            instance.playingQueuedAudioClips == null)
+        {
+            instance.playingQueuedAudioClips = instance.StartCoroutine(playAllQueuedAudioClips());
+        }
+    }
+
+    private static IEnumerator playAllQueuedAudioClips()
+    {
+        float timeWaited = 0f;
+        
+        while(audioClipPathQueue.Count > 0)
+        {
+            yield return null;
+
+            timeWaited += Time.deltaTime;
+
+            if(timeWaited >= HeartBeatManager.fastBeatLengthSeconds*1.5f)
+            {
+                AudioClip currentClip = Resources.Load<AudioClip>(audioClipPathQueue[0]);
+                audioClipPathQueue.RemoveAt(0);
+
+                instance.StartCoroutine(playQueuedAudioClip(currentClip));
+                timeWaited = 0f;
+            }
+        }
+
+        if(instance != null)
+        {
+            instance.playingQueuedAudioClips = null;
+        }
+    }
+
+    private static IEnumerator playQueuedAudioClip(AudioClip currentClip, AudioSource source = null)
+    {
+        if(currentClip == null || instance == null)
+        {
+            yield break;
+        }
+
+        if(source == null)
+        {
+            source = createOneOffAudioSource();
+        }
+
+        source.clip = currentClip;
+        source.volume = getSFXVolume();
+        source.Play();
+
+        float timeWaited = 0f;
+
+        while(timeWaited < currentClip.length)
+        {
+            yield return null;
+
+            timeWaited += Time.deltaTime;
+        }
+
+        Destroy(source.gameObject);
+    }
+
+    private static AudioSource createOneOffAudioSource()
+    {
+        GameObject audioPlayer = new GameObject("AudioClip Player");
+        audioPlayer.transform.parent = instance.transform;
+
+        return audioPlayer.AddComponent<AudioSource>();
+    }
+
+    public static void playAudioClipAsSingleton(AudioClip clip)
+    {
+        if(clip == null || instance == null)
+        {
+            return;
+        }
+
+        if(!singletonAudioClips.ContainsKey(clip) || singletonAudioClips[clip]== null)
+        {
+            singletonAudioClips[clip] = createOneOffAudioSource();
+        }
+
+        AudioSource source = singletonAudioClips[clip];
+
+        instance.StartCoroutine(playQueuedAudioClip(clip, source: source));
+    }
+
     [RuntimeInitializeOnLoadMethod]
     private static void instantiateAudioManager()
     {
@@ -234,6 +373,11 @@ public class AudioManager : MonoBehaviour
         footstepPlayerSetting = musicVolumeMaximum; 
 
         playLeftFootstep = true;
+        playSFXOnNextHeartBeat = true;
+
+        audioClipPathQueue = new List<string>();
+
+        singletonAudioClips = new Dictionary<AudioClip, AudioSource>();
 
         HeartBeatManager.MediumHeartBeat.AddListener(playFootStep);
     }
@@ -288,4 +432,32 @@ public static class AudioClipList
 
     public const string weaponPrefix = weaponEquipSFXFolder + "Weapon";
     public const int weaponSFXCount = 3;
+
+    public const string hitSFXFolder = SFXFolderPath + "Hit/";
+
+    public const string attackSoundsSFXFolder = SFXFolderPath + "Attack Sounds/";
+
+    public const string miscAttackSoundFolder = attackSoundsSFXFolder + "Misc/";
+    public const string biteAttackSound = miscAttackSoundFolder + "Bite";
+
+    public const string weaponAttackSoundFolder = attackSoundsSFXFolder + "Weapons/";
+    public const string weaponSwingAttackSound = weaponAttackSoundFolder + "WeaponSwing";
+
+    public const string batAttackSoundsSFXFolder = attackSoundsSFXFolder + "Bats/";
+    public const string batSwarmAttackSound = batAttackSoundsSFXFolder + "Bat Swarm";
+    public const string batAttackSound = batAttackSoundsSFXFolder + "Bat Attack";
+    public const string batHowelAttackSound = batAttackSoundsSFXFolder + "Bat Howl";
+
+    public const string wormAttackSoundsSFXFolder = attackSoundsSFXFolder + "Worms/";
+    public const string wormVomitAttackSound = wormAttackSoundsSFXFolder + "WormAcidVomit";
+    public const string wormExplodeOnDeathSound = wormAttackSoundsSFXFolder + "WormExplodeOnDeath";
+    public const string wormSummonSound = wormAttackSoundsSFXFolder + "WormSummon";
+
+    public const string deathSoundsSFXFolder = SFXFolderPath + "Death Sounds/";
+
+    public const string batDeathSoundsFolder = deathSoundsSFXFolder + "Bats/";
+    public const string batDeathSFXOne = batDeathSoundsFolder + "Bat Death 1";
+    public const string batDeathSFXTwo = batDeathSoundsFolder + "Bat Death 2";
+
+
 }
