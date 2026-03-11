@@ -14,6 +14,9 @@ public static class DialogueCombatInfoList
     public readonly static NPCCombatInfo imreCombatInfo = new NPCCombatInfo(new EnemyPackInfo[] { EnemyPackInfoList.imreFight },
                                                                             new DeadNameList[] { new DeadNameList(new string[] { NPCNameList.imre }) });
 
+    public readonly static NPCCombatInfo muzsaCombatInfo = new NPCCombatInfo(new EnemyPackInfo[] { EnemyPackInfoList.muzsaFight },
+                                                                            new DeadNameList[] { new DeadNameList(new string[] { NPCNameList.guardMuzsa }) });
+
     public readonly static DeadNameList allMineGuardsDead = new DeadNameList(new string[] { 
                                                                                             NPCNameList.guardPazman, 
                                                                                             NPCNameList.pazman, 

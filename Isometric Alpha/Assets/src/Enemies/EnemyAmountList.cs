@@ -9,6 +9,8 @@ public static class EnemyAmountList
     public readonly static CreatureAmount guardAndras = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.guardAndras));
     public readonly static CreatureAmount imre = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.imre));
 
+    public readonly static CreatureAmount muzsa = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.guardMuzsa));
+
     public readonly static CreatureAmount barricade = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.barricade));
 
     public readonly static CreatureAmount guardReka = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.guardReka));

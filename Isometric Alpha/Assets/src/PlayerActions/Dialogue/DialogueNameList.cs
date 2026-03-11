@@ -5,6 +5,16 @@ using UnityEngine;
 
 public static class DialogueNameList
 {
+    public const string dialogueResourcesPathName = "Dialogue" + Constants.seperatorChar; 
+
+    #region Misc
+
+    private const string miscDialogueFolder = dialogueResourcesPathName + "Misc/";
+
+    public const string genericGuardDialoguePath = miscDialogueFolder + "GenericGuard";
+
+    #endregion
+
 
     #region Dialogues Without Area Names
     public const string taborManse2F2BKey = "taborManse-2F-2B";
@@ -14,8 +24,6 @@ public static class DialogueNameList
 
     public const string chiefTaborPunishmentDialogueKey = "ChiefTabor";
     #endregion
-
-    public const string dialogueResourcesPathName = "Dialogue" + Constants.seperatorChar; 
 
     public const string campPathName = dialogueResourcesPathName + ZoneKeyList.lovashiCamp + Constants.seperatorChar;
     public const string campInteriorPathName = campPathName + AreaNameList.lovashiCampInterior + Constants.seperatorChar;

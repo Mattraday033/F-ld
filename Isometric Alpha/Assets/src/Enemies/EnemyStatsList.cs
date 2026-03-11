@@ -106,6 +106,15 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                                 TraitList.backLine
                                                                             }));
 
+        enemyStatsDict.Add(NPCNameList.guardMuzsa, new EnemyStats(NPCNameList.guardMuzsa,
+                                                                Constants.twentyFiveArmor,
+                                                                                        85,
+new BuffChargeUpAbility(TraitList.coordinated, AbilityList.getAbility(null, AbilityList.bladeBlitzKey) as Ability),
+                                                                    new Trait[] { TraitList.master,
+                                                                            TraitList.territorial,
+                                                                                TraitList.frontLine
+                                                                                }));
+
         enemyStatsDict.Add(NPCNameList.barricade, new MultiAnimationEnemyStats(NPCNameList.barricade,
                                                                                 Constants.twentyFiveArmor,
                                                                                         125,

@@ -542,9 +542,17 @@ public static class DialogueList
         #endregion
         #region MineEntranceCamp
 
+        addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.guard,
+                            new SingleCharacterDialogue(NPCNameList.guard,
+                            Resources.Load<TextAsset>(DialogueNameList.genericGuardDialoguePath)));
+        addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.guard+1,
+                            new SingleCharacterDialogue(NPCNameList.guard+1,
+                            Resources.Load<TextAsset>(DialogueNameList.genericGuardDialoguePath)));
+
         addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.guardMuzsa,
                             new Dialogue(new string[] { NPCNameList.guardMuzsa, NPCNameList.barricade, NPCNameList.guardMuzsa + 1 },
-                            Resources.Load<TextAsset>(DialogueNameList.muszaPath)));
+                            Resources.Load<TextAsset>(DialogueNameList.muszaPath),
+                            DialogueCombatInfoList.muzsaCombatInfo));
         addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.guardMuzsa + 1,
                             new Dialogue(new string[] { NPCNameList.guardMuzsa + 1, NPCNameList.barricade, NPCNameList.guardMuzsa + 1 },
                             Resources.Load<TextAsset>(DialogueNameList.muszaPath)));

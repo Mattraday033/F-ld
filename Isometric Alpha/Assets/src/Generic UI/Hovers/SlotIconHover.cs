@@ -384,7 +384,7 @@ public static class HoverMessageList
 
     private const string compassKey = "Compass";
     private const string hostilityKey = "Hostility";
-    private const string hostilityMessage = "Areas with green Hostility means that you cannot be attacked by random monsters. Areas with red Hostility may contain random Monsters. Yellow Hosility means you have committed a crime. When the bars of an area fill up with yellow, they will turn red and guards will be sent after you.";
+    private const string hostilityMessage = "If an Area's Hostility is green, that means that you cannot be attacked by random monsters. Areas with red Hostility may contain random Monsters. Yellow Hosility means you have committed a crime. When the bars of an area fill up with yellow, they will turn red and guards will be sent after you.";
     private const string footingKey = "Footing";
     private const string footingMessage = "Some enemies will chase you when you get too close. These enemies only move half as fast as you. When the Left Foot is visibile, enemies chasing you will move the next time you take a step.";
 

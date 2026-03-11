@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 052d4f513fa1f5f46a885e63686e4b53
+guid: 95f6af32aefe9544d8fc24d58257d033
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OOC_Idle_Front_0
+      name: Wounded_Front_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62937b7b18f526e4490d647b29da399d
-      internalID: 624036441
+      spriteID: daf0b2f4a62d55443942d2814f8f9255
+      internalID: 597765936
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OOC_Idle_Front_1
+      name: Wounded_Front_1
       rect:
         serializedVersion: 2
         x: 128
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 335115b3f96521c4291222a42dc8371c
-      internalID: -1853147424
+      spriteID: 3a4f86a2e453f4f4c809d06e293390ef
+      internalID: -1131052873
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OOC_Idle_Front_2
+      name: Wounded_Front_2
       rect:
         serializedVersion: 2
         x: 256
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cb30c37bc19b9549a8518273b05f74d
-      internalID: 846718038
+      spriteID: d246e7b2476669e409987027aea8be53
+      internalID: -1502872673
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OOC_Idle_Front_3
+      name: Wounded_Front_3
       rect:
         serializedVersion: 2
         x: 384
@@ -174,8 +174,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4c1ac43d1ed41542ba285af083cc7b0
-      internalID: -835292962
+      spriteID: 6e73f6bf9bed51146a57c5b33cb2ad5a
+      internalID: 1349619434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wounded_Front_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df5ffc1b07c063f44a650e28ca0d7237
+      internalID: 905718097
       vertices: []
       indices: 
       edges: []
@@ -191,10 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      OOC_Idle_Front_0: 624036441
-      OOC_Idle_Front_1: -1853147424
-      OOC_Idle_Front_2: 846718038
-      OOC_Idle_Front_3: -835292962
+      Wounded_Front_0: 597765936
+      Wounded_Front_1: -1131052873
+      Wounded_Front_2: -1502872673
+      Wounded_Front_3: 1349619434
+      Wounded_Front_4: 905718097
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

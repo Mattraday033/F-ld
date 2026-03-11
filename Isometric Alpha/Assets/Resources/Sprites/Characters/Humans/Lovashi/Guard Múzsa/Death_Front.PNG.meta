@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 052d4f513fa1f5f46a885e63686e4b53
+guid: 2ef4810f3ab48994e85368b922e2be47
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 105
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OOC_Idle_Front_0
+      name: Death_Front_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62937b7b18f526e4490d647b29da399d
-      internalID: 624036441
+      spriteID: 41468e771d3bb264491ecfc67c63637c
+      internalID: -1978870202
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OOC_Idle_Front_1
+      name: Death_Front_1
       rect:
         serializedVersion: 2
         x: 128
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 335115b3f96521c4291222a42dc8371c
-      internalID: -1853147424
+      spriteID: b98eb56876731af4cbc1ee42a42c9a0b
+      internalID: 1651220062
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OOC_Idle_Front_2
+      name: Death_Front_2
       rect:
         serializedVersion: 2
         x: 256
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cb30c37bc19b9549a8518273b05f74d
-      internalID: 846718038
+      spriteID: be9ebc2e1817e7c478852d7ebc009da5
+      internalID: -1022016234
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OOC_Idle_Front_3
+      name: Death_Front_3
       rect:
         serializedVersion: 2
         x: 384
@@ -168,14 +168,77 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.27}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4c1ac43d1ed41542ba285af083cc7b0
-      internalID: -835292962
+      spriteID: bedf8f02ba4081d4a8eb2d02e1a7acc6
+      internalID: 2044651384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_Front_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.29}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4aa0fb89b5692ac47bd1f4ef04e63bf6
+      internalID: -238228444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_Front_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.31}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f1ad71dc5ee90843815640f231f3676
+      internalID: -1192563538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_Front_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.34}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 308c722dc6379824d9962c9cafd9b068
+      internalID: 1244892880
       vertices: []
       indices: 
       edges: []
@@ -191,10 +254,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      OOC_Idle_Front_0: 624036441
-      OOC_Idle_Front_1: -1853147424
-      OOC_Idle_Front_2: 846718038
-      OOC_Idle_Front_3: -835292962
+      Death_Front_0: -1978870202
+      Death_Front_1: 1651220062
+      Death_Front_2: -1022016234
+      Death_Front_3: 2044651384
+      Death_Front_4: -238228444
+      Death_Front_5: -1192563538
+      Death_Front_6: 1244892880
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

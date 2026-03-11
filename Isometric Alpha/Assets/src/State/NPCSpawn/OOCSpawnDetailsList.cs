@@ -515,6 +515,9 @@ public static class OOCSpawnDetailsList
         #region MineEntranceCamp
         list = new List<OOCSpawnDetails>();
 
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard, new Vector3Int(5, 12), LocationNameList.campMineEntrance, facing: Facing.SouthEast, animationName: MonsterNameList.spearman));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(5, 11), LocationNameList.campMineEntrance, facing: Facing.NorthWest, animationName: MonsterNameList.spearman));
+
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMuzsa, new Vector3Int(9, 10), LocationNameList.campMineEntrance, facing: Facing.SouthEast));
 
         list.Add(new ObstacleSpawnDetails(NPCNameList.barricade, new Vector3Int(9, 11), PrefabNames.squareCratesSmall));

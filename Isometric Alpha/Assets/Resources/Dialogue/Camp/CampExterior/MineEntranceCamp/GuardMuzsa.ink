@@ -59,6 +59,8 @@ Whoa there slave! The mine's off limits right now. Where do you think you're goi
     +I wanted to take a look inside the mine.
         ~mentionedGoingInsideMine = true
         ->2a
+    +Wherever I want, Lovashi pig. <Combat>
+        ->Combat
 
 === 1b ===
 
@@ -410,6 +412,16 @@ How's the snipe hunt going? *Múzsa chuckles and shakes her head.*
     activate({muszaAwayFromBarricadeIndex})
     
     fadeBackIn(60)
+
+->Close
+
+=== Combat ===
+
+setToTrue(muzsaFaught)
+
+addHostilityToCurrentArea()
+
+enterCombat(0)
 
 ->Close
 

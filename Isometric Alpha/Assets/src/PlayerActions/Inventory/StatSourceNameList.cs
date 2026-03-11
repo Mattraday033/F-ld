@@ -54,6 +54,7 @@ public static class StatSourceNameList
     public const string protectedKey = "Protected";
     public const string signalingKey = "Signaling";
     public const string observingKey = "Observing";
+    public const string coordinatedKey = "Coordinated";
 
     // On Death traits
     public const string volatileKey = "Volatile";

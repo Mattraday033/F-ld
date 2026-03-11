@@ -184,6 +184,10 @@ public static class EnemyPackInfoList
                                                                                                         new ItemListID(ItemList.keyItemListIndex, ItemList.barracksArmoryKeyIndex)});
     public readonly static EnemyPackInfo imreFight = new EnemyPackInfo(new CreatureAmount[] { EnemyAmountList.imre }, DropTableList.slaveMineDT1Name);
 
+    public readonly static EnemyPackInfo muzsaFight = new EnemyPackInfo(new CreatureAmount[] { EnemyAmountList.muzsa, EnemyAmountList.twoSpearmen },
+                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                        new ItemListID[] { new ItemListID(ItemList.armorListIndex, ItemList.bronzeCuirassIndex)});
+
     public readonly static EnemyPackInfo ml3GuardsWithBarricades = new EnemyPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.barricade, 
                                                                                                         EnemyAmountList.guardReka, 

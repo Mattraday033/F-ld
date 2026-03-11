@@ -19,8 +19,8 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 	private const string dividerCharacter = "~";
 
 	public int saveNumber;
-    public string playerPortraitName;
-    public string playerSpriteName;
+    public string playerPortraitName = NPCNameList.thatch;
+    public string playerSpriteName = NPCNameList.thatch;
 
 	public string currentLocation;
 	public float[] playerPosition;

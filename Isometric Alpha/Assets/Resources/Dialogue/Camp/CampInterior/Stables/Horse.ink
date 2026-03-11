@@ -9,7 +9,7 @@ VAR playerName = ""
 
 === 1a ===
 
-\*The horse looks at you and begins to speak. The words are in a language you're not familiar with.* <What is it? Do you have a message for me?>
+\*The horse looks at you and begins to speak. The words are in a language you are not familiar with.* <What is it? Do you have a message for me?>
 
     +What?
         ->1b
@@ -20,8 +20,7 @@ VAR playerName = ""
 
 <Of course they'd send a slave that didn't understand the horsetongue. Begone, you're bothering me.>
 
-    +\*Leave.*
-        ->Close
+    ->Close
 
 === 1c ===
 
