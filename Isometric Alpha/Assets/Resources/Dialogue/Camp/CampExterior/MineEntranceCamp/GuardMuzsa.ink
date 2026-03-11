@@ -14,6 +14,9 @@ VAR mentionedGoodReasonForGoingInsideMine = false
 VAR mentionedBadReasonForGoingInsideMine = false
 VAR gaveSnipeHuntExcuseToMuzsa = false
 
+VAR snitchedOnUros = false
+VAR foughtMuzsaAfterSnitchedOnUros = false
+
 VAR mentionedGoingInsideMine = false
 
 VAR playerName = ""
@@ -417,9 +420,18 @@ How's the snipe hunt going? *Múzsa chuckles and shakes her head.*
 
 === Combat ===
 
-setToTrue(muzsaFaught)
+setToTrue(muzsaFought)
 
+{
+-snitchedOnUros:
+setToTrue(foughtMuzsaAfterSnitchedOnUros)
+setAreaToHostile(MineEntranceCamp)
+setAreaToHostile(GuardHouseSW)
+setAreaToHostile(Manse-1F-1a)
+setAreaToHostile(Manse-2F-1a)
+-else:
 addHostilityToCurrentArea()
+}
 
 enterCombat(0)
 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: eb748723ae8d3d8499ccc97598422de5
+guid: b668564046f8a92419aed4ede7862875
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 128
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,253 +97,148 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Spawn_Front_0
+      name: Death_Front_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 256
+        width: 512
+        height: 512
       alignment: 9
-      pivot: {x: 0.5, y: 0.115}
+      pivot: {x: 0.5, y: 0.285}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b985a8234d3b80445bdebb257f26aa79
-      internalID: -484779515
+      spriteID: 6c7b38c654e14604ab349daf9df01f32
+      internalID: 1222617384
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spawn_Front_1
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.115}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f174838d40535284297242bb908fb1df
-      internalID: -591407508
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spawn_Front_2
+      name: Death_Front_1
       rect:
         serializedVersion: 2
         x: 512
         y: 0
-        width: 256
-        height: 256
+        width: 512
+        height: 512
       alignment: 9
-      pivot: {x: 0.5, y: 0.115}
+      pivot: {x: 0.5, y: 0.285}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b07b3fa33657f5409e2455ecacf7845
-      internalID: -1561150118
+      spriteID: 75c44e3eec56a3842a275d9873b28df7
+      internalID: -1951566000
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spawn_Front_3
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.115}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 852d493c2cbfae94b85ea360ffe7ecbc
-      internalID: -183792422
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spawn_Front_4
+      name: Death_Front_2
       rect:
         serializedVersion: 2
         x: 1024
         y: 0
-        width: 256
-        height: 256
+        width: 512
+        height: 512
       alignment: 9
-      pivot: {x: 0.5, y: 0.115}
+      pivot: {x: 0.5, y: 0.285}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91f39ebb577687b49b4dd6a3bba4e9b9
-      internalID: 374743438
+      spriteID: 3a2b738143810bc459d13739e7f6619a
+      internalID: -1448476124
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spawn_Front_5
-      rect:
-        serializedVersion: 2
-        x: 1280
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.115}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b1923d83a796ccc46bf24d495faed24f
-      internalID: 256011550
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spawn_Front_6
+      name: Death_Front_3
       rect:
         serializedVersion: 2
         x: 1536
         y: 0
-        width: 256
-        height: 256
+        width: 512
+        height: 512
       alignment: 9
-      pivot: {x: 0.5, y: 0.115}
+      pivot: {x: 0.5, y: 0.285}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1faf82e3d61b9e04783bd05de434ff8a
-      internalID: -1588618779
+      spriteID: 0a2c19c2f39fba54c8a3ec4df6889671
+      internalID: -2013749252
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spawn_Front_7
-      rect:
-        serializedVersion: 2
-        x: 1792
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.115}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4f9e3b8d82aa29d4da052d2e9334ff50
-      internalID: -1660649980
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spawn_Front_8
+      name: Death_Front_4
       rect:
         serializedVersion: 2
         x: 2048
         y: 0
-        width: 256
-        height: 256
+        width: 512
+        height: 512
       alignment: 9
-      pivot: {x: 0.5, y: 0.115}
+      pivot: {x: 0.5, y: 0.285}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a09a33e8cbd8ac4e93c7bd3301b598d
-      internalID: -1553083718
+      spriteID: ab5c3c25a63b6bd41b3dd0c20af70d92
+      internalID: 1903198165
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spawn_Front_9
-      rect:
-        serializedVersion: 2
-        x: 2304
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.115}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 56474f0727abb184c8637170c0cb3994
-      internalID: -432350989
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spawn_Front_10
+      name: Death_Front_5
       rect:
         serializedVersion: 2
         x: 2560
         y: 0
-        width: 256
-        height: 256
+        width: 512
+        height: 512
       alignment: 9
-      pivot: {x: 0.5, y: 0.115}
+      pivot: {x: 0.5, y: 0.285}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3a22b36c4c9a984fbd1661f7bf55057
-      internalID: 2101292402
+      spriteID: 9a0a8d1e112152e4f890e4bb923a2ed2
+      internalID: 963464150
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spawn_Front_11
+      name: Death_Front_6
       rect:
         serializedVersion: 2
-        x: 2816
+        x: 3072
         y: 0
-        width: 256
-        height: 256
+        width: 512
+        height: 512
       alignment: 9
-      pivot: {x: 0.5, y: 0.115}
+      pivot: {x: 0.5, y: 0.285}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b85473d5daa94ee4b8121fddedf12d21
-      internalID: 61780259
+      spriteID: a866cdd0eaaab784a9d0d814cbff0765
+      internalID: -1078576046
       vertices: []
       indices: 
       edges: []
@@ -359,18 +254,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Spawn_Front_0: -484779515
-      Spawn_Front_1: -591407508
-      Spawn_Front_10: 2101292402
-      Spawn_Front_11: 61780259
-      Spawn_Front_2: -1561150118
-      Spawn_Front_3: -183792422
-      Spawn_Front_4: 374743438
-      Spawn_Front_5: 256011550
-      Spawn_Front_6: -1588618779
-      Spawn_Front_7: -1660649980
-      Spawn_Front_8: -1553083718
-      Spawn_Front_9: -432350989
+      Death_Front_0: 1222617384
+      Death_Front_1: -1951566000
+      Death_Front_2: -1448476124
+      Death_Front_3: -2013749252
+      Death_Front_4: 1903198165
+      Death_Front_5: 963464150
+      Death_Front_6: -1078576046
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

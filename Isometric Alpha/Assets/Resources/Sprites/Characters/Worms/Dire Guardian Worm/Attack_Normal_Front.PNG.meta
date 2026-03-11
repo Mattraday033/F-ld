@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 29f8d53bc5ed0924e8b484c8f921829f
+guid: 30fdc2515144a10418d30ad136752351
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -46,9 +46,9 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.5, y: 0.425}
-  spritePixelsToUnits: 128
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,64 +97,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Explosion_0
+      name: Attack_Normal_Front_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
+        width: 512
+        height: 512
       alignment: 9
-      pivot: {x: 0.5, y: 0.425}
+      pivot: {x: 0.5, y: 0.285}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfcc6d0518529b64fb94eb0219fe2367
-      internalID: -116590710
+      spriteID: f9853d8bab318f145af8d9005995c44d
+      internalID: 1351167205
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Explosion_1
+      name: Attack_Normal_Front_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 512
         y: 0
-        width: 128
-        height: 128
+        width: 512
+        height: 512
       alignment: 9
-      pivot: {x: 0.5, y: 0.425}
+      pivot: {x: 0.5, y: 0.285}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30ea2d9228d674b41aa5bf23f0dd7010
-      internalID: 643445455
+      spriteID: a84e5cae8df992e4491418f019795d32
+      internalID: -453214625
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Explosion_2
+      name: Attack_Normal_Front_2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 1024
         y: 0
-        width: 128
-        height: 128
+        width: 512
+        height: 512
       alignment: 9
-      pivot: {x: 0.5, y: 0.425}
+      pivot: {x: 0.5, y: 0.285}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe79ada3caa900e449b4264c0f55f3eb
-      internalID: -963483749
+      spriteID: aa34405ef53cf4c46b643ea0f4aa3a4d
+      internalID: 725465068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack_Normal_Front_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.5, y: 0.285}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45fe5430485c5fc4b97add840242ab02
+      internalID: 2077345599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack_Normal_Front_4
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.5, y: 0.285}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46da7e0ecce23e445827bbf5427f78ca
+      internalID: 1410845949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack_Normal_Front_5
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.5, y: 0.285}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81303ecaefecdac4fb7e21d2078dca5a
+      internalID: 71592973
       vertices: []
       indices: 
       edges: []
@@ -170,9 +233,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Explosion_0: -116590710
-      Explosion_1: 643445455
-      Explosion_2: -963483749
+      Attack_Normal_Front_0: 1351167205
+      Attack_Normal_Front_1: -453214625
+      Attack_Normal_Front_2: 725465068
+      Attack_Normal_Front_3: 2077345599
+      Attack_Normal_Front_4: 1410845949
+      Attack_Normal_Front_5: 71592973
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

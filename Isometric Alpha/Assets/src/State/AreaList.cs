@@ -375,13 +375,20 @@ public static class AreaList
 	
 	public static void setAreaToHostile(string locationName)
 	{
-        bool areaWasHostile = getArea(locationName).isHostile();
+        Area area = getArea(locationName);
+        
+        bool areaWasHostile = area.isHostile();
 
-		getArea(locationName).setHostility(Area.hostilityThreshold);
+		area.setHostility(Area.hostilityThreshold);
 
-        if(!areaWasHostile && getArea(locationName).isHostile())
+        if(area.isHostile() && area.contains(AreaManager.locationName))
         {
-            AreaBecameHostile.Invoke(getArea(locationName));
+            NotificationManager.addHostilityAlertToNotificationQueue();
+        }
+
+        if(!areaWasHostile && area.isHostile())
+        {
+            AreaBecameHostile.Invoke(area);
         }
 	}
 

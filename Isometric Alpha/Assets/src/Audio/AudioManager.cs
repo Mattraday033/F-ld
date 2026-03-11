@@ -334,7 +334,10 @@ public class AudioManager : MonoBehaviour
             timeWaited += Time.deltaTime;
         }
 
-        Destroy(source.gameObject);
+        if(source != null)
+        {
+            Destroy(source.gameObject);
+        }
     }
 
     private static AudioSource createOneOffAudioSource()

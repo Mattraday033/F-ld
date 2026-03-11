@@ -11,14 +11,20 @@ VAR snitchedOnUros = false
 VAR hasIronNugget = false
 VAR showedUrosTheNuggetWithoutGivingItBack = false
 VAR gaveUrosTheNugget = false
+VAR foughtMuzsaAfterSnitchedOnUros = false
 
 VAR lostIronNuggetName = "Lost Iron Nugget"
+
+VAR urosIndex = 1
+VAR emeseIndex = 2
 
 VAR playerName = ""
 
 searchInventoryFor(hasIronNugget,{lostIronNuggetName})
 
 {
+-snitchedOnUros and foughtMuzsaAfterSnitchedOnUros:
+->4b
 -snitchedOnUros:
 ->4a
 -gaveUrosTheNugget:
@@ -156,7 +162,7 @@ You snitch scum, you wouldn't dare!
 
 === 1i ===
 
-changeCamTarget(2)
+changeCamTarget({emeseIndex})
 
 \*Quartermaster Emese looks up from her work.* What is it?
 
@@ -165,11 +171,13 @@ changeCamTarget(2)
 
 === 1j ===
 
-changeCamTarget(1)
+changeCamTarget({urosIndex})
+
+changeNPCFacing({urosIndex},NE)
 
 That's a lie, ma'am. I'm working as hard as I can!
 
-changeCamTarget(2)
+changeCamTarget({emeseIndex})
 
 \*Emese looks around the stockhouse.*
 
@@ -178,7 +186,7 @@ I believe it, you're clearly behind on your tasks. Wait for your lashing outside
 fadeToBlack(true, false)
 
 setToTrue(snitchedOnUros)
-deactivate(1)
+deactivate({urosIndex})
 
 fadeBackIn(60)
 
@@ -307,6 +315,12 @@ Get out of here you rat.
 === 4a ===
 
 You disgust me. I won't forget this. Ever!
+
+    ->Close
+
+=== 4b ===
+
+\*Uros looks at you with wide eyes.* I-I won't tell anyone you killed Múzsa. I swear!
 
     ->Close
 

@@ -29,6 +29,11 @@ public class NotificationManager : MonoBehaviour
         skipNextSpawn = true;
     }
 
+    public static void addHostilityAlertToNotificationQueue()
+    {
+        notificationQueue.Insert(Constants.indexZero, new Notification("The current Area is now Hostile.", "This may affect the outcome of certain quests."));
+    }
+
     public static void addToNotificationQueue(IDescribable notification)
     {
         notificationQueue.Add(notification);
@@ -173,4 +178,129 @@ public class NotificationManager : MonoBehaviour
         instance = this;
     }
 
+}
+
+public enum GenericNotificationType { Alert, Update }
+
+public class Notification : IDescribable
+{
+    private GenericNotificationType type;
+    private string notificationName;
+    private string notificationDescription;
+
+    public Notification(string notificationName, string notificationDescription, GenericNotificationType type = GenericNotificationType.Alert)
+    {
+        this.type = type;
+        this.notificationName = notificationName;
+        this.notificationDescription = notificationDescription;
+    }
+
+	public string getName()
+	{
+		return notificationName;
+	}
+
+    public bool ineligible()
+    {
+        return false;
+    }
+
+	public GameObject getRowType(RowType rowType)
+	{
+		switch (rowType)
+		{
+			case RowType.Map:
+				return Resources.Load<GameObject>(PrefabNames.mapQuestObjectiveRow);
+			case RowType.MapWithoutHover:
+				return Resources.Load<GameObject>(PrefabNames.mapQuestObjectiveRowWithoutHover);
+			default:
+				return Resources.Load<GameObject>(PrefabNames.glossaryCategoryRow);
+		}
+	}
+
+	public GameObject getDescriptionPanelFull()
+	{
+		return getDescriptionPanelFull(PanelType.Standard);
+	}
+
+	public GameObject getDescriptionPanelFull(PanelType type)
+	{
+		string panelTypeName = "";
+
+		switch (type)
+		{
+			case PanelType.Notification:
+                panelTypeName = PrefabNames.questStepNotificationDescriptionPanel;
+				break;
+			default:
+				panelTypeName = PrefabNames.writtenGlossaryEntryFull;
+				break;
+		}
+
+		return DescriptionPanel.getDescriptionPanel(panelTypeName);
+	}
+
+	public GameObject getDecisionPanel()
+	{
+		return null;
+	}
+
+	public bool withinFilter(string[] filterParameters)
+	{
+		return false;
+	}
+
+	public void describeSelfFull(DescriptionPanel panel)
+	{
+		panel.setObjectBeingDescribed(this);
+
+        DescriptionPanel.setText(panel.notificationNameText, type.ToString() + "!");
+
+		DescriptionPanel.setText(panel.secondaryNameText, getName());
+		DescriptionPanel.setText(panel.loreDescriptionText, notificationDescription);
+	}
+
+	public void describeSelfRow(DescriptionPanel panel)
+	{
+		panel.setObjectBeingDescribed(this);
+
+		DescriptionPanel.setText(panel.nameText, DialogueList.scrubNameOfEndNumbers(getName()));
+		DescriptionPanel.setText(panel.secondaryNameText, notificationDescription);
+	}
+
+	public void setUpDecisionPanel(IDecisionPanel descisionPanel)
+	{
+
+	}
+
+	public List<IDescribable> getRelatedDescribables()
+	{
+		return new List<IDescribable>();
+	}
+
+	public bool buildableWithBlocks()
+	{
+		return true;
+	}
+	
+	public bool buildableWithBlocksRows()
+    {
+        return true;
+    }
+	public List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
+	{
+		List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
+
+		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Name, "Update"));
+		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Name, DialogueList.scrubNameOfEndNumbers(getName())));
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, ""));
+		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, notificationDescription));
+
+		return buildingBlocks;
+	}
+
+    public bool requiresInspectNode()
+    {
+        return false;
+    }
 }

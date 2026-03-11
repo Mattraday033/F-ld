@@ -17,11 +17,11 @@ public class SummonOnDeathTrait : OnDeathEffectTrait
 		deleteIfIsDead = false;
 	}
 	
-	public SummonOnDeathTrait(string abilityKey, EmptyTargetSpecificPriorityTrait targetPriority, bool preventsResurrection = true):
+	public SummonOnDeathTrait(string abilityKey, EmptyTargetSpecificPriorityTrait targetPriority, bool preventsResurrection = true, bool deleteIfIsDead = false):
 	base(initialTraitName, initialTraitDescription, initialTraitIconName, abilityKey, targetPriority)
 	{
 		thisTraitPreventsResurrection = preventsResurrection;
-		deleteIfIsDead = true;
+		this.deleteIfIsDead = deleteIfIsDead;
 	}
 	
 	public override bool preventsResurrection()

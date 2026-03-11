@@ -8,21 +8,26 @@ public class SummonAbility: Ability
 {
 	private const string summonIconName = "Egg";
 
+
+    private bool activatesAfterDeath = false;
 	private SummonCombos creaturesToSpawn;
 
-	public SummonAbility(CombatActionSettings settings, string creatureKey): base(settings)
+	public SummonAbility(CombatActionSettings settings, string creatureKey, bool activatesAfterDeath = false): base(settings)
 	{
 		this.creaturesToSpawn = new SummonCombos(new string[][]{new string[]{creatureKey}});
+        this.activatesAfterDeath = activatesAfterDeath;
 	}
 
-    public SummonAbility(CombatActionSettings settings, string[] creatureComboToSpawn) : base(settings)
+    public SummonAbility(CombatActionSettings settings, string[] creatureComboToSpawn, bool activatesAfterDeath = false) : base(settings)
     {
 		this.creaturesToSpawn = new SummonCombos(new string[][]{ creatureComboToSpawn });
+        this.activatesAfterDeath = activatesAfterDeath;
     }
 
-    public SummonAbility(CombatActionSettings settings, string[][] creatureCombosToSpawn) : base(settings)
+    public SummonAbility(CombatActionSettings settings, string[][] creatureCombosToSpawn, bool activatesAfterDeath = false) : base(settings)
     {
         this.creaturesToSpawn = new SummonCombos(creatureCombosToSpawn);
+        this.activatesAfterDeath = activatesAfterDeath;
     }
 
     public override void queueingAction()
@@ -62,6 +67,11 @@ public class SummonAbility: Ability
 		Selector selector = getSelector();
 		GridCoords[] targetCoords = selector.getAllSelectorCoords();
 		
+        if(activatesAfterDeath)
+        {
+            getActorStats().removeFromGrid();
+        }
+
 		int comboIndex = 0;
 
 		foreach(GridCoords coords in targetCoords)

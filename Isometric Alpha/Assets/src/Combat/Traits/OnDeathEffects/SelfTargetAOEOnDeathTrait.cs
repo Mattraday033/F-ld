@@ -6,7 +6,7 @@ public class SelfTargetAOEOnDeathTrait : OnDeathEffectTrait
 {
 	private bool thisTraitPreventsResurrection;
 	
-	public SelfTargetAOEOnDeathTrait(string traitName, string traitDescription, string iconName, string abilityKey, bool thisTraitPreventsResurrection = true):
+	public SelfTargetAOEOnDeathTrait(string traitName, string traitDescription, string iconName, string abilityKey, bool thisTraitPreventsResurrection = true, TargetPriorityTrait targetPriority = null):
 	base(traitName, traitDescription, iconName, abilityKey, null)
 	{
         this.thisTraitPreventsResurrection = thisTraitPreventsResurrection;
@@ -14,6 +14,11 @@ public class SelfTargetAOEOnDeathTrait : OnDeathEffectTrait
         if(thisTraitPreventsResurrection)
         {
             this.deleteIfIsDead = true;
+        }
+
+        if(targetPriority != null)
+        {
+            this.targetPriority = targetPriority;
         }
 	}
 	

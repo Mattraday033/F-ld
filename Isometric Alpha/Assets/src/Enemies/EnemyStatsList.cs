@@ -38,7 +38,7 @@ public static class EnemyStatsList
         enemyStatsDict.Add(NPCNameList.guardVazul, new EnemyStats(NPCNameList.guardVazul,
                                                                                     Constants.twentyFiveArmor,
                                                                                             50,
-new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.bladeBlitzKey) as Ability),
+new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.skewerKey) as Ability),
                                                                 new Trait[] { TraitList.master,
                                                                           TraitList.territorial,
                                                                           TraitList.frontLine
@@ -108,7 +108,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
 
         enemyStatsDict.Add(NPCNameList.guardMuzsa, new EnemyStats(NPCNameList.guardMuzsa,
                                                                 Constants.twentyFiveArmor,
-                                                                                        85,
+                                                                                        65,
 new BuffChargeUpAbility(TraitList.coordinated, AbilityList.getAbility(null, AbilityList.bladeBlitzKey) as Ability),
                                                                     new Trait[] { TraitList.master,
                                                                             TraitList.territorial,
@@ -367,40 +367,43 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #region Worm Nests
         enemyStatsDict.Add(MonsterNameList.hiveHeraldNest, new LargeEnemyStats(MonsterNameList.hiveHeraldNest,
                                                                               Constants.tenArmor,
-                                                                                                200,
+                                                                                                185,
                                                                     new Trait[] { 
                                                                                     TraitList.master,
-                                                                                    TraitList.territorial,
-                                                                                    TraitList.frontLine
+                                                                                    TraitList.chaotic,
+                                                                                    TraitList.wormBossExplodes
                                                                                 },
-                                               AbilityList.getAbility(null, AbilityList.wallopKey)));
+                                               AbilityList.getAbility(null, AbilityList.trampleKey),
+                    animationAudioClipDicionary : AnimationSFXDictionaryList.biteWormAudioDictionary));
         enemyStatsDict.Add(MonsterNameList.martyrWormNest, new LargeEnemyStats(MonsterNameList.martyrWormNest,
                                                                               Constants.tenArmor,
-                                                                                                200,
+                                                                                                150,
                                                                     new Trait[] { 
                                                                                     TraitList.master,
                                                                                     TraitList.territorial,
-                                                                                    TraitList.frontLine
+                                                                                    TraitList.wormBossRevive
                                                                                 },
-                                               AbilityList.getAbility(null, AbilityList.wallopKey)));
+                                               AbilityList.getAbility(null, AbilityList.wallopKey),
+                    animationAudioClipDicionary : AnimationSFXDictionaryList.biteWormAudioDictionary));
         enemyStatsDict.Add(MonsterNameList.toxicWormNest, new LargeEnemyStats(MonsterNameList.toxicWormNest,
                                                                               Constants.tenArmor,
-                                                                                                200,
+                                                                                                225,
                                                                     new Trait[] { 
                                                                                     TraitList.master,
-                                                                                    TraitList.territorial,
-                                                                                    TraitList.frontLine
+                                                                                    TraitList.rapidInaccurateBombardment
                                                                                 },
-                                               AbilityList.getAbility(null, AbilityList.wallopKey)));
+new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.wormAcidBarrageKey) as Ability),
+animationAudioClipDicionary : AnimationSFXDictionaryList.vomitWormAudioDictionary));
         enemyStatsDict.Add(MonsterNameList.wormNest, new LargeEnemyStats(MonsterNameList.wormNest,
                                                                               Constants.tenArmor,
-                                                                                                200,
+                                                                                                185,
                                                                     new Trait[] { 
                                                                                     TraitList.master,
-                                                                                    TraitList.territorial,
-                                                                                    TraitList.frontLine
+                                                                                    TraitList.predatory,
+                                                                                    TraitList.wormBossSplits
                                                                                 },
-                                               AbilityList.getAbility(null, AbilityList.wallopKey)));
+                                               AbilityList.getAbility(null, AbilityList.slamKey),
+                animationAudioClipDicionary : AnimationSFXDictionaryList.biteWormAudioDictionary));
         #endregion
 
         #region Armored Worm
@@ -433,6 +436,18 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             TraitList.master,
                                                                             TraitList.large,
                                                                             TraitList.territorial
+                                                                        },
+                    AbilityList.getAbility(null, AbilityList.trampleKey) as Ability));
+        #endregion
+        #region Dire Guardian Worm
+        enemyStatsDict.Add(MonsterNameList.direGuardianWorm, new LargeEnemyStats(MonsterNameList.direGuardianWorm,
+                                                                                Constants.ninetyArmor,
+                                                                                        250,
+                                                            new Trait[] { 
+                                                                            TraitList.master,
+                                                                            TraitList.large,
+                                                                            TraitList.chaotic,
+                                                                            TraitList.bossLinked
                                                                         },
                     AbilityList.getAbility(null, AbilityList.trampleKey) as Ability));
         #endregion

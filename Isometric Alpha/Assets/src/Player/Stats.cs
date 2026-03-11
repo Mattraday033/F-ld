@@ -207,7 +207,10 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual void removeFromGrid()
     {
-        CombatGrid.setCombatantAtCoords(position, null);
+        if(CombatGrid.getCombatantAtCoords(position) == this)
+        {
+            CombatGrid.setCombatantAtCoords(position, null);
+        }
     }
 
     public virtual bool isInsideCoordinates(GridCoords coords)

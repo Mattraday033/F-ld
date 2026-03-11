@@ -619,7 +619,6 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
     public virtual Selector getTargetSelector() //used for finding selectors when enemies are targeting
     {
         SelectorManager selectorManager = SelectorManager.getInstance();
-        Selector selector = null;
         Stats actor = getActorStats();
 
         List<Stats> listOfTargets;
@@ -635,7 +634,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
         if (isSelfTargeting())
         {
-            selector = selectorManager.selectors[getRangeIndex()].clone();
+            Selector selector = selectorManager.selectors[getRangeIndex()].clone();
             selector.setToLocation(getActorCoords());
             return selector;
         }
@@ -650,7 +649,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public GridCoords getPreviousTarget()
     {
-        GridCoords previousTarget = (GridCoords)previousTargets[previousTargets.Count - 1];
+        GridCoords previousTarget = previousTargets[previousTargets.Count - 1];
 
         previousTargets.RemoveAt(previousTargets.Count - 1);
 

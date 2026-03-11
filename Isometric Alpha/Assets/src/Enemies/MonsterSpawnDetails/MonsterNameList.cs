@@ -20,6 +20,7 @@ public static class MonsterNameList
     public const string armoredWorm = "Armored Worm";
     public const string broodling = "Broodling";
     public const string direWorm = "Dire Worm";
+    public const string direGuardianWorm = "Dire Guardian Worm";
     public const string guardianWorm = "Guardian Worm";
     public const string hiveHerald = "Hive Herald";
     public const string hiveHeraldNest = "Hive Herald Nest";

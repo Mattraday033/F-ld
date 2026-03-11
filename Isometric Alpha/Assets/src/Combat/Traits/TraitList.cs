@@ -76,13 +76,14 @@ public static class TraitList
 	//all specific target priorities
 	public readonly static SpecificTargetPriorityTrait specificCheckeredLeftAlliedSide = new SpecificTargetPriorityTrait("(6,2)", "SpecificTargetPriorityTrait", "", new GridCoords(6, 2));
 	public readonly static SpecificTargetPriorityTrait specificHexadecupleBoxEnemySide = new SpecificTargetPriorityTrait("(2,2)", "SpecificTargetPriorityTrait", "", new GridCoords(2, 2));
+	public readonly static SpecificTargetPriorityTrait specificBoxTwoTwoRightCornerEnemySide = new SpecificTargetPriorityTrait("(1,2)", "SpecificTargetPriorityTrait", "", new GridCoords(1, 2));
 
 	public readonly static Trait chaotic = new ChaoticTargetPriorityTrait();
 	public readonly static Trait clockwiseFourCornersEnemySide = new ClockwiseTargetPriorityTrait(fourCornersEnemySide);
 	public readonly static Trait empty = new EmptyTargetPriorityTrait();
 	public readonly static Trait emptyGenerated2 = new GeneratedTargetPriorityTrait((TargetPriorityTrait)empty, 2);
 	public readonly static Trait emptyGenerated3 = new GeneratedTargetPriorityTrait((TargetPriorityTrait)empty, 3);
-	public readonly static Trait bottomRightEnemySideEmptyTargetingTrait = new EmptyTargetSpecificPriorityTrait(new GridCoords(CombatGrid.enemyRowLowerBounds, CombatGrid.colRightBounds));
+	public readonly static Trait bottomRightMiddleEnemySideEmptyTargetingTrait = new EmptyTargetSpecificPriorityTrait(new GridCoords(Constants.indexTwo, Constants.indexTwo));
 	public readonly static Trait territorial = new TerritorialTargetPriorityTrait();
 	public readonly static Trait predatory = new PredatoryTargetPriorityTrait();
 	public readonly static Trait closeRanged = new CloseRangedTargetPriorityTrait();
@@ -107,11 +108,11 @@ public static class TraitList
 
 	//on Death Effects
 	public readonly static Trait wormSplits = new SummonOnDeathTrait(AbilityList.splitSpawnWormsKey, (GeneratedTargetPriorityTrait)emptyGenerated2);
-	public readonly static Trait wormBossSplits = new SummonOnDeathTrait(AbilityList.splitBossSpawnWormsKey, (EmptyTargetSpecificPriorityTrait)bottomRightEnemySideEmptyTargetingTrait, preventsResurrection);
-	public readonly static Trait wormExplodes = new SelfTargetAOEOnDeathTrait(StatSourceNameList.volatileKey, "When this creature is killed, it damages all creates near it.", "Volatile", AbilityList.wormExplosionKey);
-	public readonly static Trait wormBossExplodes = new SelfTargetAOEOnDeathTrait(StatSourceNameList.volatileKey, "When this creature is killed, it damages all creates near it.", "Volatile", AbilityList.wormBossExplosionKey);
-	public readonly static Trait wormRevive = new SelfTargetAOEOnDeathTrait(StatSourceNameList.restorativeKey, "When this creature is killed, it brings back all downed creatures near it.", "Restorative", AbilityList.wormRestorativeKey, preventsResurrection);
-	public readonly static Trait wormBossRevive = new SelfTargetAOEOnDeathTrait(StatSourceNameList.restorativeKey, "When this creature is killed, it brings back all downed creatures near it.", "Restorative", AbilityList.wormBossRestorativeKey, preventsResurrection);
+	public readonly static Trait wormBossSplits = new SummonOnDeathTrait(AbilityList.splitBossSpawnWormsKey, (EmptyTargetSpecificPriorityTrait)bottomRightMiddleEnemySideEmptyTargetingTrait);
+	public readonly static Trait wormExplodes = new SelfTargetAOEOnDeathTrait(StatSourceNameList.volatileKey, "When this creature is killed, it damages all creatures near it.", "Volatile", AbilityList.wormExplosionKey);
+	public readonly static Trait wormBossExplodes = new SelfTargetAOEOnDeathTrait(StatSourceNameList.volatileKey, "When this creature is killed, it damages all creatures near it.", "Volatile", AbilityList.wormBossExplosionKey);
+	public readonly static Trait wormRevive = new SelfTargetAOEOnDeathTrait(StatSourceNameList.restorativeKey, "When this creature is killed, it brings back all downed creatures near it.", "Restorative", AbilityList.wormRestorativeKey);
+	public readonly static Trait wormBossRevive = new SelfTargetAOEOnDeathTrait(StatSourceNameList.restorativeKey, "When this creature is killed, it brings back all downed creatures near it.", "Restorative", AbilityList.wormBossRestorativeKey, targetPriority: specificBoxTwoTwoRightCornerEnemySide);
 	public readonly static Trait wormBossFumesOnDeath = new OnDeathEffectTrait(StatSourceNameList.miasmicKey, "When this creature is killed, it releases a toxic gas as a final retribution against it's enemies.", "DeathFumes", AbilityList.wormOnDeathFumesKey, specificCheckeredLeftAlliedSide);
 
 

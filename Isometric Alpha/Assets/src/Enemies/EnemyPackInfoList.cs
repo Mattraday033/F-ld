@@ -469,6 +469,21 @@ public static class EnemyPackInfoList
                                                                                                                  },
                                                                                                                  DropTableList.slaveMineDT1Name);
 
+    private readonly static EnemyPackInfo oneGuardianDireWormTwoArmoredWormTwoHiveHeralds = new BossPackInfo(new CreatureAmount[] {  
+                                                                                                                    EnemyAmountList.oneDireGuardianWorm,
+                                                                                                                    EnemyAmountList.twoArmoredWorms,
+                                                                                                                    EnemyAmountList.twoHiveHeralds
+                                                                                                                 },
+                                                                                                                 DropTableList.slaveMineDT1Name,
+                                                                                                                 spawnDetailsList: new List<SpawnDetails>()
+                                                                                                                 {
+                                                                                                                    SpawnDetails.middle2x2
+                                                                                                                 }, xpDrop: 100,
+                                                                                                                 guaranteedDrops: new ItemListID[]
+                                                                                                                 {
+                                                                                                                     new ItemListID(ItemList.armorListIndex, ItemList.bronzeHelmetIndex, Constants.indexOne)
+                                                                                                                 });
+
 
     private readonly static EnemyPackInfo oneArmoredWormFourWorms = new EnemyPackInfo(new CreatureAmount[] {
                                                                                                     EnemyAmountList.oneArmoredWorm,
@@ -691,7 +706,7 @@ public static class EnemyPackInfoList
 
         list.Add(oneGuardianWormTwoHiveHeralds);
         list.Add(twoGuardianWormsOneArmoredWormTwoHiveHeralds);
-        list.Add(oneGuardianWormTwoHiveHeralds);
+        list.Add(oneGuardianDireWormTwoArmoredWormTwoHiveHeralds);
 
         enemyPackInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section4, list);
         #endregion

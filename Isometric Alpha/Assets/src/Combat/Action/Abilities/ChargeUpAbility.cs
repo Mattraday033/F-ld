@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ChargeUpAbility : Ability
 {
+    public string currentEffectType = null;
 	public CombatAction actionWhenCharged { get; private set; }
 	public Trait chargeUpTrait { get; private set; }
 	public const string chargingUpName = "Charging Up";
@@ -128,12 +129,28 @@ public class ChargeUpAbility : Ability
 
     public override string getEffectAnimationType()
     {
-        if(!isCharged())
+        if(currentEffectType == null)
         {
-            return EffectAnimationType.Positive.ToString();
+            if(!isCharged())
+            {
+                currentEffectType = EffectAnimationType.Positive.ToString();
+            } else
+            {
+                currentEffectType = actionWhenCharged.getEffectAnimationType();
+            }
+
+            CombatStateManager.OnNewTurn.AddListener(removeCurrentEffectType);
+            CombatStateManager.OnCombatEnd.AddListener(removeCurrentEffectType);
         }
 
-        return actionWhenCharged.getEffectAnimationType();
+        return currentEffectType;
+    }
+
+    private void removeCurrentEffectType()
+    {
+        currentEffectType = null;
+        CombatStateManager.OnNewTurn.RemoveListener(removeCurrentEffectType);
+        CombatStateManager.OnCombatEnd.RemoveListener(removeCurrentEffectType);
     }
 
     public override string getIconName()

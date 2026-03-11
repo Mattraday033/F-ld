@@ -21,7 +21,7 @@ public static class TestScript
 
         // PartyManager.getPlayerStats().setLevel(1);
         // PartyManager.getPlayerStats().currentHealth = 1;
-        // PartyManager.getPlayerStats().strength = 4;
+        // PartyManager.getPlayerStats().strength = 1;
         // PartyManager.getPlayerStats().dexterity = 2;
         // PartyManager.getPlayerStats().wisdom = 3;
         // PartyManager.getPlayerStats().charisma = 2;

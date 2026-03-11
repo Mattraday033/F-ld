@@ -467,6 +467,7 @@ public class ObstacleSpawnDetails : OffSetSpawnDetails
     public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, Color tint) :
     base(npcName, cellCoords, spriteName)
     {
+        useRubbleColor = false;
         this.tint = tint;
     }
 
@@ -510,7 +511,6 @@ public class ObstacleSpawnDetails : OffSetSpawnDetails
         base.spawnActions(spriteRenderer);
 
         spriteRenderer.sprite = Helpers.loadSpriteFromResources(getSpriteName());
-        spriteRenderer.color = tint;
 
         if(sortingLayerInfo != null)
         {

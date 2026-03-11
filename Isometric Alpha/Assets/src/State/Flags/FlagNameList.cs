@@ -193,7 +193,8 @@ public static class FlagNameList
         public const string mentionedBadReasonForGoingInsideMine = "mentionedBadReasonForGoingInsideMine"; //gave bad reason for going inside the mine.
         public const string gaveCandyToMuzsa = "gaveCandyToMuzsa"; //Finished Muzsa's Sweet Tooth by handing her candy.
         public const string gaveSnipeHuntExcuseToMuzsa = "gaveSnipeHuntExcuseToMuzsa";
-        public const string muszaFought = "muszaFought";
+        public const string muzsaFought = "muzsaFought";
+        public const string foughtMuzsaAfterSnitchedOnUros = "foughtMuzsaAfterSnitchedOnUros";
 
         //Kende the Cook flags
         public const string gotMessHallInstructionsFromKende = "gotMessHallInstructionsFromKende"; //spoke with Kende

@@ -66,8 +66,8 @@ public class LargeEnemyStats : EnemyStats
 
     #region Constructors
 
-    public LargeEnemyStats(string key, int armor, int tHP, Trait[] traits, CombatAction combatAction = null) :
-    base(key, armor, tHP, traits: traits, combatAction: combatAction)
+    public LargeEnemyStats(string key, int armor, int tHP, Trait[] traits, CombatAction combatAction = null, Dictionary<CharacterAnimationType, string> animationAudioClipDicionary = null) :
+    base(key, armor, tHP, traits: traits, combatAction: combatAction, animationAudioClipDicionary: animationAudioClipDicionary)
     {
         if(!traits.Contains(TraitList.large) && !traits.Contains(TraitList.immobile))
         {
@@ -122,7 +122,10 @@ public class LargeEnemyStats : EnemyStats
     {
         foreach(GridCoords coords in spawnDetails.allSpawnPositions)
         {
-            CombatGrid.setCombatantAtCoords(coords, null);
+            if(CombatGrid.getCombatantAtCoords(coords) == this)
+            {
+                CombatGrid.setCombatantAtCoords(coords, null);
+            }
         }
     }
 

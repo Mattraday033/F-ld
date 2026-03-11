@@ -100,6 +100,7 @@ public static class AbilityList
 	public const string rouseColonyKey = "Rouse Colony";
 
 	public const string wallopKey = "Wallop";	
+    public const string slamKey = "Slam";	
 	public const string trampleKey = "Trample";
     public const string spawnBroodlingKey = "Spawn Broodling";
 	public const string splitSpawnWormsKey = "Split Spawn Worms";
@@ -216,24 +217,26 @@ public static class AbilityList
         
         //worm abilities
 
-        enemyAbilityDictionary.Add(wallopKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wallopKey, "The worm drives forward, using the weight of it's body and it's intense bite to rip apart it's foe."), DamageParams.build("2", "1"))));
-        enemyAbilityDictionary.Add(trampleKey, new Ability(CombatActionSettings.build(DescriptionParams.build(trampleKey, "The monster crashes into the target, using the size and weight of it's body to crush it's prey."), DamageParams.build("12", "5"))));
-        // enemyAbilityDictionary.Add(splitBossSpawnWormsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(splitBossSpawnWormsKey, "The worm splits to spawn four smaller worms."), TargetParams.build(Range.boxOneIndex)), EnemyStatsList.wormSplitBossSpawnCombo));
+        enemyAbilityDictionary.Add(wallopKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wallopKey, "The worm drives forward, using the weight of it's body and it's intense bite to rip apart it's foe."), DamageParams.build("7", "5"))));
+        enemyAbilityDictionary.Add(trampleKey, new Ability(CombatActionSettings.build(DescriptionParams.build(trampleKey, "The creature crashes into the target, using the size and weight of it's body to crush it's prey."), DamageParams.build("12", "5"), TargetParams.build(Range.verticalThreeIndex))));
+        enemyAbilityDictionary.Add(slamKey, new Ability(CombatActionSettings.build(DescriptionParams.build(slamKey, "The creature crashes into the target, using the size and weight of it's body to crush it's prey."), DamageParams.build("16", "20"), TargetParams.build(Range.boxOneIndex), AnimationParams.build(EffectAnimationType.Blunt), TraitList.wounded)));
         enemyAbilityDictionary.Add(acidVomitKey, new Ability(CombatActionSettings.build(DescriptionParams.build(acidVomitKey, "The worm spits acidic bile at it's enemy, making them more vulnerable to attacks."), DamageParams.build("2", "0"), AnimationParams.build(EffectAnimationType.Acid), TraitList.acidVomit)));
         enemyAbilityDictionary.Add(wormExplosionKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wormExplosionKey, "The worm explodes on death, spraying everything around it in burning guts.", "Volatile"), DamageParams.build("5", "0"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), AnimationParams.build(EffectAnimationType.Acid, AnimationParams.useSpecialAttack), TraitList.acidVomit)));
-        enemyAbilityDictionary.Add(wormBossExplosionKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wormBossExplosionKey, "The worm explodes on death, spraying everything around it in burning guts.", "Volatile"), DamageParams.build("30", "0"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), TraitList.acidVomit)));
+        enemyAbilityDictionary.Add(wormBossExplosionKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wormBossExplosionKey, "The worm explodes on death, spraying everything around it in burning guts.", "Volatile"), DamageParams.build("30", "0"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), AnimationParams.build(EffectAnimationType.Acid, AnimationParams.useSpecialAttack), TraitList.acidVomit)));
         enemyAbilityDictionary.Add(wormRestorativeKey, new ReviveAbility(CombatActionSettings.build(DescriptionParams.build(wormRestorativeKey, "The worm disolves into many smaller worms on death, which leave it's carcass in search of new corpses to inhabit.", "Restorative"), DamageParams.build("50"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), AnimationParams.build(AnimationParams.useSpecialAttack))));
-        enemyAbilityDictionary.Add(wormBossRestorativeKey, new ReviveAbility(CombatActionSettings.build(DescriptionParams.build(wormBossRestorativeKey, "The worm disolves into many smaller worms on death, which leave it's carcass in search of new corpses to inhabit.", "Restorative"), DamageParams.build("100"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting))));
+        enemyAbilityDictionary.Add(wormBossRestorativeKey, new ReviveAbility(CombatActionSettings.build(DescriptionParams.build(wormBossRestorativeKey, "The worm disolves into many smaller worms on death, which leave it's carcass in search of new corpses to inhabit.", "Restorative"), DamageParams.build("100"), TargetParams.build(Range.boxTwoIndex), AnimationParams.build(AnimationParams.useSpecialAttack))));
         enemyAbilityDictionary.Add(wormAcidBarrageKey, new GroundEffectAbility(CombatActionSettings.build(DescriptionParams.build(wormAcidBarrageKey, "The worm belches toxic acid that gnaws at the skin of prey.", "DeathFumes"), AnimationParams.build(EffectAnimationType.Acid)), wormFumesGroundEffect));
         enemyAbilityDictionary.Add(wormOnDeathFumesKey, new GroundEffectAbility(CombatActionSettings.build(DescriptionParams.build(wormOnDeathFumesKey, "The worm belches toxic acid that gnaws at the skin of prey.", "DeathFumes"), TargetParams.build(Range.checkeredLeftIndex)), wormFumesGroundEffect));
         
         string[] pairOfBroodlings = new string[]{MonsterNameList.broodling, MonsterNameList.broodling};
         enemyAbilityDictionary.Add(splitSpawnWormsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(splitSpawnWormsKey, "The worm splits into two smaller worms."), AnimationParams.build(AnimationParams.useSpecialAttack)), pairOfBroodlings));
         enemyAbilityDictionary.Add(spawnBroodlingKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(spawnBroodlingKey, "The Herald summons broodlings to fight its battles.")), pairOfBroodlings));
+        string[] twoArmoredWorms = new string[]{MonsterNameList.armoredWorm, MonsterNameList.armoredWorm};
+        enemyAbilityDictionary.Add(splitBossSpawnWormsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(splitBossSpawnWormsKey, "The worm splits to spawn four smaller worms."), TargetParams.build(Range.horizontalOneIndex), AnimationParams.build(AnimationParams.useSpecialAttack)), twoArmoredWorms, activatesAfterDeath: true));
 
         //guard abilities
-        enemyAbilityDictionary.Add(slashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(slashKey, "The bite of a sword swung quick."), DamageParams.build("4", "3"))));
-        enemyAbilityDictionary.Add(bladeBlitzKey, new Ability(CombatActionSettings.build(DescriptionParams.build(bladeBlitzKey, "Two axe strikes, lightning fast."), DamageParams.build("20", "15"), TargetParams.build(Range.horizontalTwoIndex))));
+        enemyAbilityDictionary.Add(slashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(slashKey, "The bite of a sword swung quick."), DamageParams.build("5", "5"))));
+        enemyAbilityDictionary.Add(bladeBlitzKey, new Ability(CombatActionSettings.build(DescriptionParams.build(bladeBlitzKey, "Two axe strikes, lightning fast.", executeKey), DamageParams.build("16", "15"), TargetParams.build(Range.horizontalTwoIndex))));
         enemyAbilityDictionary.Add(guardSpearKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardSpearKey, "A piercing blow capable of skewering multiple foes."), DamageParams.build("11", "4"), TargetParams.build(Range.verticalOneIndex), AnimationParams.build(EffectAnimationType.Pierce))));
         enemyAbilityDictionary.Add(guardAxeKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardAxeKey, "A wide sweep from a sharp axe."), DamageParams.build("8", "10"), TargetParams.build(Range.horizontalTwoIndex))));
         enemyAbilityDictionary.Add(guardArrowBarrageKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardArrowBarrageKey, "A hail of deadly missles called from nearby arrow towers."), DamageParams.build("10", "15"))));
@@ -248,7 +251,7 @@ public static class AbilityList
         enemyAbilityDictionary.Add(eviscerateKey, new BacklashAbility(CombatActionSettings.build(DescriptionParams.build(eviscerateKey, "A devastating cut capable of unseaming an enemy. This attack hurts the attacker as well as the target.", "MakeItBleed"), DamageParams.build("16", "5"), TargetParams.build(Range.boxOneIndex), TraitList.wounded), oneHundredPercentBacklash));
         enemyAbilityDictionary.Add(skullBashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(skullBashKey, "A blow to the temple that disorients the target.", "Upside the Head"), DamageParams.build("5", "10"), TargetParams.build(Range.verticalOneIndex), TraitList.upsideTheHead)));
         enemyAbilityDictionary.Add(squadStrikeKey, new SquadAbility(CombatActionSettings.build(DescriptionParams.build(squadStrikeKey, "An attack that utilizes the cooperation of other squad members. Deals more damage if the attacker is adjacent to one or more allies."), DamageParams.build("3", "5"), TargetParams.build(Range.boxOneIndex)), "15"));
-        enemyAbilityDictionary.Add(skewerKey, new Ability(CombatActionSettings.build(DescriptionParams.build(skewerKey, "The lancer pierces multiple targets in a row."), DamageParams.build("10", "10"), TargetParams.build(Range.verticalThreeIndex), AnimationParams.build(EffectAnimationType.Pierce))));
+        enemyAbilityDictionary.Add(skewerKey, new Ability(CombatActionSettings.build(DescriptionParams.build(skewerKey, "The lancer pierces multiple targets in a row."), DamageParams.build("14", "10"), TargetParams.build(Range.verticalThreeIndex), AnimationParams.build(EffectAnimationType.Pierce))));
         enemyAbilityDictionary.Add(executeKey, new Ability(CombatActionSettings.build(DescriptionParams.build(executeKey, "A chop so quick, it may very well be the last thing you ever see."), DamageParams.build("9", "50"), TargetParams.build(Range.horizontalThreeIndex))));
         enemyAbilityDictionary.Add(turnUpTheHeatKey, new Ability(CombatActionSettings.build(DescriptionParams.build(turnUpTheHeatKey, "Kende cooks his targets until they're seared on the outside but pink in the middle, making them delectable targets for his allies.", "Roasted"), DamageParams.build("2"), TargetParams.build(Range.boxThreeIndex), TraitList.roasted)));
         // enemyAbilityDictionary.Add(shoreUpKey, new MissesArePunishedAbility(CombatActionSettings.build(DescriptionParams.build(shoreUpKey, "The Captain shores up the defenses of her subordinates. If she has a target, she will heal and protect them. If she has no target, she will hurt herself instead.", "Shielded"), DamageParams.build("10", "15"), TraitList.shoredUp)));
@@ -282,12 +285,8 @@ public static class AbilityList
         statAbilityDictionary.Add(currentKey, new EquippedPassive(CombatActionSettings.build(currentKey, TraitList.intimidatingPressence)));
 		statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
-		// currentKey = "s-2-3";
-        // statAbilityDictionary.Add(currentKey, new PassiveAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(minorRegenerationName, "Heal 5% of total health at the end of every combat."), FrequencyParams.build(zeroSlotMax, noCooldown))));
-        // statAbilityDictionary[currentKey].setStatRequirements(currentKey);
-
         currentKey = generateAbilityKey(strengthKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Make It Bleed", "You impale, bludgeon, or slash your enemy to the point of massive hemorrhaging. The enemy takes initial damage and every hit the enemy takes for the rest of combat deals additional damage.", "MakeItBleed"), DamageParams.build("3S + D", "D"), TargetParams.build(Range.boxOneIndex), FrequencyParams.build(twoSlotMax, fiveRoundCooldown), TraitList.wounded)));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Make It Bleed", "You impale, bludgeon, or slash your enemy to the point of massive hemorrhaging. The enemy takes initial damage and every hit the enemy takes for the rest of combat deals additional damage.", "MakeItBleed"), DamageParams.build("3S + D", "D"), TargetParams.build(Range.boxOneIndex), FrequencyParams.build(twoSlotMax, fiveRoundCooldown), AnimationParams.build(EffectAnimationType.Blunt), TraitList.wounded)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(strengthKeyChar);

@@ -5,7 +5,7 @@ using UnityEngine;
 public class OnDeathEffectTrait : Trait
 {
 	private string abilityKey;
-	private TargetPriorityTrait targetPriority;
+	protected TargetPriorityTrait targetPriority;
 	public bool deleteIfIsDead {private get; set;}
     private bool usedEffect = false;
 	

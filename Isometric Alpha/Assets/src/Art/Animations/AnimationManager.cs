@@ -662,7 +662,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         hideObject();
 
-        CombatGrid.setCombatantAtCoords(linkedStats.position, null);
+        linkedStats.removeFromGrid();
     }
 
 
@@ -823,12 +823,22 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             case Facing.NorthEast:
             case Facing.SouthWest:
                 spriteRenderer.flipX = false;
+                if(polygonCollider2D.transform != transform)
+                {
+                    polygonCollider2D.transform.localScale = Vector3.one;
+                }
                 break;
             case Facing.NorthWest:
             case Facing.SouthEast:
-                spriteRenderer.flipX = true;
+                spriteRenderer.flipX = true;                
+                if(polygonCollider2D.transform != transform)
+                {
+                    polygonCollider2D.transform.localScale = new Vector3(-1, 1, 1);
+                }
                 break;
         }
+
+        Helpers.updatePolygonCollider(spriteRenderer, polygonCollider2D);
     }
 
     public void disableExtras()
