@@ -1097,12 +1097,12 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public virtual void playEquipSFX()
     {
-        AudioManager.playSFX(AudioClipList.actionEquipSFX);
+        AudioManager.playAudioClipAsSingleton(AudioClipList.actionEquipSFX);
     }
 
     public virtual void playUnequipSFX()
     {
-        AudioManager.playSFX(AudioClipList.actionUnequipSFX);
+        AudioManager.playAudioClipAsSingleton(AudioClipList.actionUnequipSFX);
     }
 
 

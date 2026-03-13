@@ -94,12 +94,10 @@ public class BetweenAreaFade : MusicFade
     protected void setToFull()
 	{
         AudioManager.setMusicSourceVolume(AudioManager.musicVolumePlayerSetting);
-        AudioManager.setFootStepSourceVolume(AudioManager.footstepPlayerSetting);
 	}
     protected void setToMute()
 	{
         AudioManager.setMusicSourceVolume(0f);
-        // AudioManager.setFootStepSourceVolume(0f);
 	}
 
     public override bool isFinished()

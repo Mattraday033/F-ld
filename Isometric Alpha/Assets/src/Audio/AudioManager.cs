@@ -5,21 +5,147 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
+public enum VolumeType { Music, SFX, Voice, Footstep}
+
 public class AudioManager : MonoBehaviour
 {
     public const bool fadeOut = true;
     public static bool playLeftFootstep = true;
 
-    #region Music Volume Values
-    public const float musicVolumeMaximum = 1f;
-    public const float musicVolumeMinimum = 0f;
+    #region Volume Values
+    public const float volumeMaximum = 1f;
+    public const float volumeMinimum = 0f;
 
-    public static float musicVolumePlayerSetting = 1f; 
-    public static float footstepPlayerSetting = 1f;
+    public static float masterVolumePlayerSetting;
+
+    public static float _MusicVolumePlayerSetting;
+    public static float musicVolumePlayerSetting
+    {
+        get => _MusicVolumePlayerSetting * masterVolumePlayerSetting;
+        set
+        {
+            if(value > volumeMaximum)
+            {
+                value = volumeMaximum;
+            } else if(value < volumeMinimum)
+            {
+                value = volumeMinimum;
+            }
+
+            _MusicVolumePlayerSetting = value;
+
+            setMusicSourceVolume(musicVolumePlayerSetting);
+        }
+    }
+
+    public static void setMusicSourceVolume(float volumePercent)
+    {
+        if(instance == null || instance.musicSource == null)
+        {
+            return;
+        }
+
+        if(volumePercent < 0)
+        {
+            volumePercent = 0f;
+        } else if(volumePercent > 1f)
+        {
+            volumePercent = 1f;
+        }
+
+        instance.musicSource.volume = volumePercent;
+    }
+
+    public static float _SFXVolumePlayerSetting;
+    public static float sfxVolumePlayerSetting
+    {
+        get => _SFXVolumePlayerSetting * masterVolumePlayerSetting * sfxMufflePercent;
+        set
+        {
+            if(value > volumeMaximum)
+            {
+                value = volumeMaximum;
+            } else if(value < volumeMinimum)
+            {
+                value = volumeMinimum;
+            }
+
+            _SFXVolumePlayerSetting = value;
+        }
+    }
+    public const float sfxMufflePercent = .7f;
+
+    public static float _VoiceVolumePlayerSetting;
+    public static float voiceVolumePlayerSetting
+    {
+        get => _VoiceVolumePlayerSetting * masterVolumePlayerSetting * voiceMufflePercent;
+        set
+        {
+            if(value > volumeMaximum)
+            {
+                value = volumeMaximum;
+            } else if(value < volumeMinimum)
+            {
+                value = volumeMinimum;
+            }
+
+            _VoiceVolumePlayerSetting = value;
+        }
+    }
+    public const float voiceMufflePercent = .7f;
+
+    public static float _FootstepVolumePlayerSetting;
+    public static float footstepVolumePlayerSetting
+    {
+        get => _FootstepVolumePlayerSetting * masterVolumePlayerSetting * footstepMufflePercent;
+        set
+        {
+            if(value > volumeMaximum)
+            {
+                value = volumeMaximum;
+            } else if(value < volumeMinimum)
+            {
+                value = volumeMinimum;
+            }
+
+            _FootstepVolumePlayerSetting = value;            
+            setFootstepSourceVolume(footstepVolumePlayerSetting);
+        }
+    }
     public const float footstepMufflePercent = .6f;
 
-    public static float sfxVolumePlayerSetting = 1f;
-    public const float sfxMufflePercent = .7f;
+    public static void setFootstepSourceVolume(float volumePercent)
+    {
+        if(instance == null || instance.footStepSource == null)
+        {
+            return;
+        }
+
+        if(volumePercent < 0)
+        {
+            volumePercent = 0f;
+        } else if(volumePercent > 1f)
+        {
+            volumePercent = 1f;
+        }
+
+        instance.footStepSource.volume = volumePercent;
+    }
+
+    public static float getVolumeByType(VolumeType type)
+    {
+        switch(type)
+        {
+            case VolumeType.Music:
+                return musicVolumePlayerSetting;
+            case VolumeType.Voice:
+                return voiceVolumePlayerSetting;
+            case VolumeType.Footstep:
+                return footstepVolumePlayerSetting;
+            default:
+                return sfxVolumePlayerSetting;
+        }
+    }
 
     #endregion
 
@@ -34,11 +160,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private AudioSource musicSource;    
     [SerializeField]
-    private AudioSource SFXSource;
-    [SerializeField]
     private AudioSource footStepSource;
 
-    public static List<string> audioClipPathQueue;
+    public static List<KeyValuePair<string, VolumeType>> audioClipPathQueue;
     public static Dictionary<AudioClip, AudioSource> singletonAudioClips;
 
     void Awake()
@@ -89,7 +213,7 @@ public class AudioManager : MonoBehaviour
         yield return null;
 
         instance = this;
-        setMusicSourceVolume(musicVolumePlayerSetting);
+        instance.musicSource.volume = getVolumeByType(VolumeType.Music);
 
         if(Flags.isInNewGameMode())
         {
@@ -110,32 +234,6 @@ public class AudioManager : MonoBehaviour
         currentMusicPath = newMusicPath;
     }
 
-    public static void setMusicSourceVolume(float volumePercent)
-    {
-        if(volumePercent < 0)
-        {
-            volumePercent = 0f;
-        } else if(volumePercent > 1f)
-        {
-            volumePercent = 1f;
-        }
-
-        instance.musicSource.volume = volumePercent;
-    }
-
-    public static void setFootStepSourceVolume(float volumePercent)
-    {
-        if(volumePercent < 0)
-        {
-            volumePercent = 0f;
-        } else if(volumePercent > 1f)
-        {
-            volumePercent = 1f;
-        }
-
-        instance.footStepSource.volume = volumePercent*footstepMufflePercent;
-    }
-
     public static void playNextAreaMusic(string newAreaName)
     {
         string newAreaMusicPath = AreaList.getArea(newAreaName).musicPath;
@@ -153,13 +251,14 @@ public class AudioManager : MonoBehaviour
 
     private static void loadAndPlayCurrentMusicClip()
     {
-        loadAndPlayClip(instance.musicSource, currentMusicPath);
+        loadAndPlayClip(instance.musicSource, currentMusicPath, VolumeType.Music);
         MusicFade.OnMusicMidFade.RemoveListener(loadAndPlayCurrentMusicClip);
     }
 
-    private static void loadAndPlayClip(AudioSource source, string clipPath)
+    private static void loadAndPlayClip(AudioSource source, string clipPath, VolumeType type)
     {
         source.clip = Resources.Load<AudioClip>(clipPath);
+        source.volume = getVolumeByType(type);
         source.Play();
     }
 
@@ -170,19 +269,6 @@ public class AudioManager : MonoBehaviour
         FadeToBlackManager.createFade(fade);
     }
 
-    public static void playSFX(string SFXClipPath)
-    {
-        AudioClip SFXClip = Resources.Load<AudioClip>(SFXClipPath);
-
-        if(SFXClip == null)
-        {
-            return;
-        }
-
-        instance.SFXSource.clip = SFXClip;
-        instance.SFXSource.Play();
-    }
-
     public static void playEffectAnimationSFX(string effectType)
     {
         if(effectType.Equals(EffectAnimationType.Default.ToString()) || 
@@ -191,12 +277,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        queueAudioClip(AudioClipList.hitSFXFolder + effectType + "/" + effectType);
-    }
-
-    public static void queueSFX(string audioClipPath)
-    {
-        queueAudioClip(audioClipPath);
+        queueAudioClip(AudioClipList.hitSFXFolder + effectType + "/" + effectType, VolumeType.SFX);
     }
 
     public static void playFootStep(int row)
@@ -243,18 +324,14 @@ public class AudioManager : MonoBehaviour
         if(footstepClip != null)
         {
             footStepSource.clip = footstepClip;
+            footStepSource.volume = getVolumeByType(VolumeType.Footstep);
             footStepSource.Play();
         }
     }
 
-    private static float getSFXVolume()
+    private static void queueAudioClip(string audioClipPath, VolumeType type = VolumeType.SFX)
     {
-        return sfxVolumePlayerSetting * sfxMufflePercent;
-    }
-
-    private static void queueAudioClip(string audioClipPath)
-    {
-        audioClipPathQueue.Add(audioClipPath);
+        audioClipPathQueue.Add(new KeyValuePair<string, VolumeType>(audioClipPath, type));
 
         if(instance != null && 
             instance.playingQueuedAudioClips == null)
@@ -275,10 +352,10 @@ public class AudioManager : MonoBehaviour
 
             if(timeWaited >= HeartBeatManager.fastBeatLengthSeconds*1.5f)
             {
-                AudioClip currentClip = Resources.Load<AudioClip>(audioClipPathQueue[0]);
-                audioClipPathQueue.RemoveAt(0);
+                AudioClip currentClip = Resources.Load<AudioClip>(audioClipPathQueue[0].Key);
 
-                instance.StartCoroutine(playQueuedAudioClip(currentClip));
+                instance.StartCoroutine(playQueuedAudioClip(currentClip, audioClipPathQueue[0].Value));
+                audioClipPathQueue.RemoveAt(0);
                 timeWaited = 0f;
             }
         }
@@ -289,7 +366,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private static IEnumerator playQueuedAudioClip(AudioClip currentClip, AudioSource source = null, bool destroy = true)
+    private static IEnumerator playQueuedAudioClip(AudioClip currentClip, VolumeType type, AudioSource source = null, bool destroy = true)
     {
         if(currentClip == null || instance == null)
         {
@@ -307,7 +384,7 @@ public class AudioManager : MonoBehaviour
         }
 
         source.clip = currentClip;
-        source.volume = getSFXVolume();
+        source.volume = getVolumeByType(type);
         source.Play();
 
         float timeWaited = 0f;
@@ -333,7 +410,12 @@ public class AudioManager : MonoBehaviour
         return audioPlayer.AddComponent<AudioSource>();
     }
 
-    public static void playAudioClipAsSingleton(AudioClip clip)
+    public static void playAudioClipAsSingleton(string clipPath, VolumeType type = VolumeType.SFX)
+    {
+        playAudioClipAsSingleton(Resources.Load<AudioClip>(clipPath), type);
+    }
+
+    public static void playAudioClipAsSingleton(AudioClip clip, VolumeType type = VolumeType.SFX)
     {
         if(clip == null || instance == null)
         {
@@ -349,29 +431,40 @@ public class AudioManager : MonoBehaviour
 
         source.priority = 256;
 
-        instance.StartCoroutine(playQueuedAudioClip(clip, source: source, destroy: false));
+        instance.StartCoroutine(playQueuedAudioClip(clip, type, source: source, destroy: false));
     }
 
     #region Play Specific SFX/Music
 
+    public static void playDefeatMusic()
+    {
+        playMusicWithoutFade(AudioClipList.deathMusic);
+    }
+
+
     public static void playBattleMusic()
     {
+        playMusicWithoutFade(AudioClipList.campBattle);
+    }
+
+    public static void playMusicWithoutFade(string musicPath)
+    {
         FadeToBlackManager.StopFade(FadeType.Music);
-        setMusicSourceVolume(musicVolumePlayerSetting);
-        loadAndPlayClip(instance.musicSource, AudioClipList.campBattle);
-        setCurrentMusicPath(AudioClipList.campBattle);
+        instance.musicSource.volume = getVolumeByType(VolumeType.Music);
+        loadAndPlayClip(instance.musicSource, musicPath, VolumeType.Music);
+        setCurrentMusicPath(musicPath);
     }
 
     public static void playCoinSFX()
     {
-        playSFX(AudioClipList.coinSFXPrefix + 
-                Random.Range(Constants.indexOne, AudioClipList.coinSFXCount + 1));
+        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.coinSFXPrefix + 
+                Random.Range(Constants.indexOne, AudioClipList.coinSFXCount + 1)));
     }
 
     public static void playWeaponChangeSFX()
     {
-        playSFX(AudioClipList.weaponPrefix + 
-                Random.Range(Constants.indexOne, AudioClipList.weaponSFXCount + 1));
+        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.weaponPrefix + 
+                Random.Range(Constants.indexOne, AudioClipList.weaponSFXCount + 1)));
     }
 
     public static void playSelectorMovedSFX()
@@ -429,13 +522,18 @@ public class AudioManager : MonoBehaviour
         previousMusicPath = "";
         currentMusicPath = "";
         TransitionManager.ChangeAreaMusic.AddListener(playNextAreaMusic);
-        musicVolumePlayerSetting = musicVolumeMaximum;
-        footstepPlayerSetting = musicVolumeMaximum; 
+
+        masterVolumePlayerSetting = volumeMaximum;
+
+        musicVolumePlayerSetting = volumeMaximum;
+        sfxVolumePlayerSetting = volumeMaximum;
+        voiceVolumePlayerSetting = volumeMaximum;
+        footstepVolumePlayerSetting = volumeMaximum; 
 
         playLeftFootstep = true;
         playSFXOnNextHeartBeat = true;
 
-        audioClipPathQueue = new List<string>();
+        audioClipPathQueue = new List<KeyValuePair<string, VolumeType>>();
 
         singletonAudioClips = new Dictionary<AudioClip, AudioSource>();
 
@@ -568,12 +666,12 @@ public static class AudioClipList
     public const string eatingSFXFolder = itemsSFXFolder + "Eating/";
     public const string eatingSFXPrefix = eatingSFXFolder + "Eating";
     public const int eatingSFXCount = 6;
-    public readonly static PlaySFXLogic playEatingSFX = () => AudioManager.playSFX(eatingSFXPrefix + Random.Range(Constants.indexOne, eatingSFXCount + 1));
+    public readonly static PlaySFXLogic playEatingSFX = () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(eatingSFXPrefix + Random.Range(Constants.indexOne, eatingSFXCount + 1)));
 
 
     public const string drinkingSFXFolder = itemsSFXFolder + "Drinking/";
     public const string sipSFX = drinkingSFXFolder + "Sip";
-    public readonly static PlaySFXLogic playSipSFX = () => AudioManager.playSFX(sipSFX);
+    public readonly static PlaySFXLogic playSipSFX = () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(sipSFX));
 
     #endregion
 
@@ -598,6 +696,8 @@ public static class AudioClipList
     public const string rockIntroSFX = objectsDialogueSFXFolder + "Rock" + dialogueIntroPrefix;
     public const string gateIntroSFX = objectsDialogueSFXFolder + "Gate" + dialogueIntroPrefix;
 
+    public readonly static PlaySFXLogic playEatingRockCakeSFX = () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(rockIntroSFX + Random.Range(Constants.indexOne, eatingSFXCount + 1)));
+
     public const string sleepingDialogueSFXFolder = dialogueSFXFolder + "Sleeping/";
 
     public const string snoringDialogueSFX = sleepingDialogueSFXFolder + "Snoring";
@@ -606,7 +706,7 @@ public static class AudioClipList
     {
         if(sleeping)
         {
-            return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(snoringDialogueSFX));
+            return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(snoringDialogueSFX), VolumeType.Voice);
         }
 
         switch(DialogueList.scrubNameOfEndNumbers(npcName))
@@ -620,14 +720,15 @@ public static class AudioClipList
             case NPCNameList.vaultableBarrels:
             case NPCNameList.hastilyBuiltBarricade:
             case NPCNameList.suspiciousShelf:
-                return () =>  AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(crateIntroSFX));
+                return () =>  AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(crateIntroSFX), VolumeType.Voice);
             case NPCNameList.barracksGate:
             case NPCNameList.manseFrontDoor:
             case NPCNameList.manseServiceEntrance:
             case NPCNameList.gate:
             case NPCNameList.liftableGate:
             case NPCNameList.ancientPortcullis:
-                return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(gateIntroSFX));
+            case NPCNameList.campGate:
+                return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(gateIntroSFX), VolumeType.Voice);
             case NPCNameList.rubble:
             case NPCNameList.awkwardRubble:
             case NPCNameList.liftableRubble:
@@ -637,12 +738,12 @@ public static class AudioClipList
             case NPCNameList.unstablePillar:
             case NPCNameList.toppledStatue:
             case ItemSpriteList.rockCakeSprite:
-                return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(rockIntroSFX));
+                return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(rockIntroSFX), VolumeType.Voice);
             case NPCNameList.slate:
                 return () => { };
             case NPCNameList.csalan:
             case NPCNameList.horse:
-                return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(horseIntroSFX));     
+                return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(horseIntroSFX), VolumeType.Voice);     
             case NPCNameList.guardVirag:
             case NPCNameList.guardReka:
             case NPCNameList.guardMuzsa:
@@ -651,13 +752,13 @@ public static class AudioClipList
                 return () =>
                 {
                     AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(humanFemaleDialogueSFXFolder + dialogueIntroPrefix +
-                                 Random.Range(Constants.indexOne, humanFemaleIntroCount + 1)));
+                                 Random.Range(Constants.indexOne, humanFemaleIntroCount + 1)), VolumeType.Voice);
                 };
             default:
                 return () =>
                 {
                     AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(humanMaleDialogueSFXFolder + dialogueIntroPrefix +
-                                 Random.Range(Constants.indexOne, humanMaleIntroCount + 1)));
+                                 Random.Range(Constants.indexOne, humanMaleIntroCount + 1)), VolumeType.Voice);
                 };
         }
     }

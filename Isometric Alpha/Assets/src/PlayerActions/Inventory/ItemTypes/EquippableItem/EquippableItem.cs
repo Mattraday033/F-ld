@@ -90,23 +90,23 @@ public abstract class EquippableItem : Item, IJSONConvertable
         switch (getSlotID())
         {
             case Armor.headSlotIndex:
-                AudioManager.playSFX(AudioClipList.headSlotChangeSFX);
+                AudioManager.playAudioClipAsSingleton(AudioClipList.headSlotChangeSFX);
                 break;
 
             case Armor.bodySlotIndex:
-                AudioManager.playSFX(AudioClipList.bodySlotChangeSFX);
+                AudioManager.playAudioClipAsSingleton(AudioClipList.bodySlotChangeSFX);
                 break;
 
             case Armor.handsSlotIndex:
-                AudioManager.playSFX(AudioClipList.handsSlotChangeSFX);
+                AudioManager.playAudioClipAsSingleton(AudioClipList.handsSlotChangeSFX);
                 break;
 
             case Armor.feetSlotIndex:
-                AudioManager.playSFX(AudioClipList.feetSlotChangeSFX);
+                AudioManager.playAudioClipAsSingleton(AudioClipList.feetSlotChangeSFX);
                 break;
 
             case Armor.trinketSlotIndex:
-                AudioManager.playSFX(AudioClipList.trinketSlotChangeSFX);
+                AudioManager.playAudioClipAsSingleton(AudioClipList.trinketSlotChangeSFX);
                 break;
 
             default:

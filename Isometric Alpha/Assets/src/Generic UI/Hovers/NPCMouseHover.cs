@@ -30,17 +30,28 @@ public class NPCMouseHover : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if(PlayerOOCStateManager.currentActivity != OOCActivity.walking || npc == null)
+        switch(PlayerOOCStateManager.currentActivity)
         {
-            return;
+            case OOCActivity.walking:
+            case OOCActivity.cunning:
+            case OOCActivity.observing:
+            case OOCActivity.intimidating:
+            case OOCActivity.inChestUI:
+            
+                if(npc != null)
+                {
+                    npc.OnPointerEnter(null);
+                }
+                
+                return;
+            default:
+                return;
         }
-
-        npc.OnPointerEnter(null);
     }
 
     private void OnMouseExit()
     {
-        if(PlayerOOCStateManager.currentActivity != OOCActivity.walking || npc == null)
+        if(npc == null)
         {
             return;
         }

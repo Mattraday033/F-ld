@@ -65,6 +65,12 @@ public class TransitionManager : MonoBehaviour
             return;
         }
 
+        if(transition.destinationName.Equals(ZoneKeyList.forest))
+        {
+            SceneChange.changeSceneToEndOfDemo();
+            return;
+        }
+
         if (fadeToBlackOnTransition && !FadeToBlackManager.isMidScreenFade())
         {
             fadeToBlackManager.setAndStartFadeToBlack();

@@ -240,4 +240,16 @@ public static class MouseHoverManager
         hoverDescriptionPanelSlot = null;
     }
 
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeMouseHoverManager()
+    {
+        PlayerOOCStateManager.OnStateChange.AddListener(destroyHoverIcon);
+
+        mouseHoverBase = null;
+        coroutineParent = null;
+        hoverCoroutine = null;
+        hoverDescriptionPanelObject = null;
+        hoverDescriptionPanelSlot = null;
+    }
+
 }

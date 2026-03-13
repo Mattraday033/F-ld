@@ -1654,7 +1654,7 @@ public class DialogueManager : MonoBehaviour
             timeWaited += Time.deltaTime;
         }
 
-        AudioManager.playSFX(audioClip);
+        AudioManager.playAudioClipAsSingleton(audioClip);
     }
 }
 

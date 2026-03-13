@@ -360,6 +360,7 @@ public class CombatStateManager : MonoBehaviour
                 OnTurnChangeToWon.Invoke();
                 break;
             case WhoseTurn.Lost:
+                AudioManager.playDefeatMusic();
                 Time.timeScale = normalTimeScale;
                 OnTurnChangeToLost.Invoke();
                 break;

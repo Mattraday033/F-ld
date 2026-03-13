@@ -340,7 +340,7 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
         NotificationManager.OnDeleteAllNotifications.Invoke();
 
-        AudioManager.playSFX(getChestOpenSFX(chestType));
+        AudioManager.playAudioClipAsSingleton(getChestOpenSFX(chestType));
 
         createChestItemUI();
 
@@ -403,7 +403,7 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
         if(!ignoreSFX)
         {
-            AudioManager.playSFX(getChestTakeSFX(chestType));
+            AudioManager.playAudioClipAsSingleton(getChestTakeSFX(chestType));
         }
     }
 

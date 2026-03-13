@@ -316,6 +316,14 @@ public static class AreaList
 
         allAreas.Add(ZoneKeyList.pit, new Area(ZoneKeyList.pit, scenesInPit, areasSharingHostilityWithPit, AudioClipList.caveOne, combatBackgroundName: ZoneKeyList.mineLvl3, hostility: startsHostile));
 
+        string[] locationsInForest = new string[]
+        {
+            ZoneKeyList.forest
+
+        };
+
+        allAreas.Add(ZoneKeyList.forest, new Area(ZoneKeyList.forest, locationsInForest, new string[0], AudioClipList.caveOne, combatBackgroundName: ZoneKeyList.mineLvl3, footStepType: FootStepType.Dirt));
+
     }
 
 	private static Area getCurrentArea()

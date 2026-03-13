@@ -369,6 +369,13 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.barricade+1),
                                new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[]{FlagNameList.directorDefeated, FlagNameList.barricadeGuardDefeatKey1}), onlySpawnWhileHostile: onlySpawnWhileHostile));
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.campGate),
+                                        new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[]  { 
+                                                                                                                FlagNameList.revoltStarted,
+                                                                                                                FlagNameList.kastorStartedRevolt,
+                                                                                                                FlagNameList.directorDefeated
+                                                                                                            })));
+
         #endregion
 
         #region Camp South East
@@ -408,9 +415,9 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.clay),
                                new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
 
-            #region Pazman Ervin Reka
+        #region Pazman Ervin Reka
 
-                InteractableSpawnParams pazmanErvinPunishmentSpawnParams = new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
+            InteractableSpawnParams pazmanErvinPunishmentSpawnParams = new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
                                                                                                             { 
                                                                                                                 MetaFlagNameList.guardPazmanAndRekaAtTrial,
                                                                                                                 MetaFlagNameList.pazmanNeedsHandling
@@ -421,23 +428,23 @@ public static class SpawnParamsList
                                                                                                                 FlagNameList.mineLvl3CarterAndNandorInParty
                                                                                                             })));
 
-                interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.ervin),
-                                        pazmanErvinPunishmentSpawnParams);
+            interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.ervin),
+                                    pazmanErvinPunishmentSpawnParams);
 
-                interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.pazman),
-                                                pazmanErvinPunishmentSpawnParams);
-                
-                interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.reka),
-                                new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
-                                                                                                            { 
-                                                                                                                MetaFlagNameList.guardPazmanAndRekaAtTrial,
-                                                                                                                MetaFlagNameList.rekaNeedsHandling
-                                                                                                            },
-                                                            new StartSpawningAllTrueFlagList(new string[]   { 
-                                                                                                                FlagNameList.directorDefeated, 
-                                                                                                                FlagNameList.mineLvl3CarterAndNandorInParty
-                                                                                                            }))));
-            #endregion
+            interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.pazman),
+                                            pazmanErvinPunishmentSpawnParams);
+            
+            interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.reka),
+                            new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
+                                                                                                        { 
+                                                                                                            MetaFlagNameList.guardPazmanAndRekaAtTrial,
+                                                                                                            MetaFlagNameList.rekaNeedsHandling
+                                                                                                        },
+                                                        new StartSpawningAllTrueFlagList(new string[]   { 
+                                                                                                            FlagNameList.directorDefeated, 
+                                                                                                            FlagNameList.mineLvl3CarterAndNandorInParty
+                                                                                                        }))));
+        #endregion
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.marcos),
                                 new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
