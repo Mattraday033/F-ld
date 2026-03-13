@@ -410,6 +410,16 @@ public class AudioManager : MonoBehaviour
         playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.whipAttackSound));
     }
 
+    public static void playPlacePartyMemberSFX()
+    {
+        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.placePartyMemberSFX));
+    }
+
+    public static void playSmokebombSFX()
+    {
+        queueAudioClip(AudioClipList.smokeBombSFX);
+    }
+
     #endregion
 
     [RuntimeInitializeOnLoadMethod]
@@ -509,6 +519,9 @@ public static class AudioClipList
     public const string horseAttackSoundsSFXFolder = attackSoundsSFXFolder + "Horse/";
     public const string horseAttackSound = horseAttackSoundsSFXFolder + "Horse Whinny";
 
+    public const string placePartyMemberSFX = miscAttackSoundFolder + "PlacePartyMember";
+    public const string smokeBombSFX = miscAttackSoundFolder + "Smokebomb";
+
     #endregion
 
     #region Death Sounds
@@ -548,6 +561,22 @@ public static class AudioClipList
 
     #endregion
 
+    #region Items
+
+    public const string itemsSFXFolder = SFXFolderPath + "Items/";
+
+    public const string eatingSFXFolder = itemsSFXFolder + "Eating/";
+    public const string eatingSFXPrefix = eatingSFXFolder + "Eating";
+    public const int eatingSFXCount = 6;
+    public readonly static PlaySFXLogic playEatingSFX = () => AudioManager.playSFX(eatingSFXPrefix + Random.Range(Constants.indexOne, eatingSFXCount + 1));
+
+
+    public const string drinkingSFXFolder = itemsSFXFolder + "Drinking/";
+    public const string sipSFX = drinkingSFXFolder + "Sip";
+    public readonly static PlaySFXLogic playSipSFX = () => AudioManager.playSFX(sipSFX);
+
+    #endregion
+
     #region Dialogue
 
     public const string dialogueSFXFolder = SFXFolderPath + "Dialogue/";
@@ -569,13 +598,51 @@ public static class AudioClipList
     public const string rockIntroSFX = objectsDialogueSFXFolder + "Rock" + dialogueIntroPrefix;
     public const string gateIntroSFX = objectsDialogueSFXFolder + "Gate" + dialogueIntroPrefix;
 
-    public static GetIntroAudioClip getIntroAudioClipLogic(string npcName)
+    public const string sleepingDialogueSFXFolder = dialogueSFXFolder + "Sleeping/";
+
+    public const string snoringDialogueSFX = sleepingDialogueSFXFolder + "Snoring";
+
+    public static PlaySFXLogic getDialogueIntroSFXLogic(string npcName, bool sleeping = false)
     {
+        if(sleeping)
+        {
+            return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(snoringDialogueSFX));
+        }
+
         switch(DialogueList.scrubNameOfEndNumbers(npcName))
         {
+            case NPCNameList.barrels:
+            case NPCNameList.crates:
+            case NPCNameList.crate:
+            case NPCNameList.barricade:
+            case NPCNameList.wallPatch:
+            case NPCNameList.ladder:
+            case NPCNameList.vaultableBarrels:
+            case NPCNameList.hastilyBuiltBarricade:
+            case NPCNameList.suspiciousShelf:
+                return () =>  AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(crateIntroSFX));
+            case NPCNameList.barracksGate:
+            case NPCNameList.manseFrontDoor:
+            case NPCNameList.manseServiceEntrance:
+            case NPCNameList.gate:
+            case NPCNameList.liftableGate:
+            case NPCNameList.ancientPortcullis:
+                return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(gateIntroSFX));
+            case NPCNameList.rubble:
+            case NPCNameList.awkwardRubble:
+            case NPCNameList.liftableRubble:
+            case NPCNameList.vaultableRocks:
+            case NPCNameList.suspiciousWall:
+            case NPCNameList.statue:
+            case NPCNameList.unstablePillar:
+            case NPCNameList.toppledStatue:
+            case ItemSpriteList.rockCakeSprite:
+                return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(rockIntroSFX));
+            case NPCNameList.slate:
+                return () => { };
             case NPCNameList.csalan:
             case NPCNameList.horse:
-                return () => horseIntroSFX;
+                return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(horseIntroSFX));     
             case NPCNameList.guardVirag:
             case NPCNameList.guardReka:
             case NPCNameList.guardMuzsa:
@@ -583,30 +650,14 @@ public static class AudioClipList
             case NPCNameList.page:
                 return () =>
                 {
-                    return humanFemaleDialogueSFXFolder + dialogueIntroPrefix +
-                                 Random.Range(Constants.indexOne, humanFemaleIntroCount + 1);
+                    AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(humanFemaleDialogueSFXFolder + dialogueIntroPrefix +
+                                 Random.Range(Constants.indexOne, humanFemaleIntroCount + 1)));
                 };
-            case NPCNameList.barrels:
-            case NPCNameList.crates:
-            case NPCNameList.crate:
-            case NPCNameList.barricade:
-            case NPCNameList.wallPatch:
-                return () => crateIntroSFX;
-            case NPCNameList.barracksGate:
-            case NPCNameList.manseFrontDoor:
-            case NPCNameList.manseServiceEntrance:
-            case NPCNameList.gate:
-            case NPCNameList.liftableGate:
-                return () => gateIntroSFX;
-            case NPCNameList.rubble:
-            case NPCNameList.awkwardRubble:
-            case NPCNameList.liftableRubble:
-                return () => rockIntroSFX;
             default:
                 return () =>
                 {
-                    return humanMaleDialogueSFXFolder + dialogueIntroPrefix +
-                                 Random.Range(Constants.indexOne, humanMaleIntroCount + 1);
+                    AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(humanMaleDialogueSFXFolder + dialogueIntroPrefix +
+                                 Random.Range(Constants.indexOne, humanMaleIntroCount + 1)));
                 };
         }
     }

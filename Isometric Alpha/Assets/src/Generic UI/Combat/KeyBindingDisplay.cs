@@ -287,6 +287,11 @@ public class KeyBindingDisplay : MonoBehaviour
 
     private void onHideKeyBindingsButtonPress()
     {
+        if(SaveHandler.saveNameFieldIsSelected())
+        {
+            return;
+        }
+
         if(CombatStateManager.inCombat)
         {
             hideKeyBindingsInCombat = !hideKeyBindingsInCombat;

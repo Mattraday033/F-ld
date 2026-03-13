@@ -10,15 +10,22 @@ public class RestorationItem : CombatItem, IJSONConvertable
 
     private TraitType traitTypeToRemove;
 
-    public RestorationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int rangeIndex, TraitType traitTypeToRemove) : base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeIndex, CombatItem.useDoesNotRequireAnAction)
+    public RestorationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int rangeIndex, TraitType traitTypeToRemove, PlaySFXLogic OOCOnUseSFX = null) : 
+    base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeIndex, useDoesNotRequireAnAction, OOCOnUseSFX: OOCOnUseSFX)
     {
         this.traitTypeToRemove = traitTypeToRemove;
     }
 
-    public RestorationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int rangeIndex, TraitType traitTypeToRemove, int quantity) : base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeIndex, CombatItem.useDoesNotRequireAnAction, quantity)
+    public RestorationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int rangeIndex, TraitType traitTypeToRemove, int quantity, PlaySFXLogic OOCOnUseSFX = null) : 
+     base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeIndex, useDoesNotRequireAnAction, quantity, OOCOnUseSFX: OOCOnUseSFX)
     {
         this.traitTypeToRemove = traitTypeToRemove;
     }
+
+	public override string getEffectAnimationType()
+	{
+		return EffectAnimationType.Healing.ToString();
+	}
 
     public string getTraitTypeToRemove()
     {
@@ -42,6 +49,8 @@ public class RestorationItem : CombatItem, IJSONConvertable
             return;
         }
 
+        PlaySFXLogic();
+        
         target.traitContainer.removeAllTraitsOfType(traitTypeToRemove);
     }
 

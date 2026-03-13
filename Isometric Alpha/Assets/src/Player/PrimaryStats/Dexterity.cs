@@ -61,7 +61,7 @@ public static class Dexterity
         }
     }
 
-	public const string startingDescription = "Dexterity is all about agility, stealth, and trickery. " +
+	public const string startingDescription = "Dexterity determines a Character's agility, subtlety, and cunning. " +
 									 "Dextrous characters stalk the shadows, patiently striking when their opponents are most vulnerable. " +
 									 "Clever solutions and dirty tactics allow these pragmatists to succeed where other's falter, winning the day through wits over brawn.";
 

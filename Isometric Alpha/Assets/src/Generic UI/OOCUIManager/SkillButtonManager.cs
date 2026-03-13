@@ -223,10 +223,12 @@ public class SkillButtonManager : MonoBehaviour
         if (PlayerOOCStateManager.currentActivity != OOCActivity.intimidating)
         {
             IntimidateManager.enterIntimidateMode();
+            AudioManager.playChooseActorAbilityLocationSFX();
         }
         else
         {
-            IntimidateManager.leaveIntimidateMode();            
+            IntimidateManager.leaveIntimidateMode();         
+            AudioManager.playChooseActorAbilityLocationSFX();   
         }
     }
 
@@ -241,10 +243,12 @@ public class SkillButtonManager : MonoBehaviour
         if (PlayerOOCStateManager.currentActivity != OOCActivity.cunning)
         {
             CunningManager.enterCunningMode(); 
+            AudioManager.playChooseActorAbilityLocationSFX();
         }
         else
         {
-            CunningManager.leaveCunningMode();            
+            CunningManager.leaveCunningMode();      
+            AudioManager.playChooseActorAbilityLocationSFX();      
         }
     }
 
@@ -257,11 +261,13 @@ public class SkillButtonManager : MonoBehaviour
 
         if (PlayerOOCStateManager.currentActivity != OOCActivity.observing)
         {
-            ObservationManager.enterObservationMode();            
+            ObservationManager.enterObservationMode();  
+            AudioManager.playChooseActorAbilityLocationSFX();          
         }
         else
         {
-            ObservationManager.leaveObservationMode();            
+            ObservationManager.leaveObservationMode();    
+            AudioManager.playChooseActorAbilityLocationSFX();        
         }
     }
 
@@ -275,6 +281,7 @@ public class SkillButtonManager : MonoBehaviour
 
         if (PartyMemberPlacer.getPlacedPartyMemberCount() < PartyStats.getMaxPlacablePartyMembers())
 		{
+            AudioManager.playPlacePartyMemberSFX();
 			PartyMemberPlacer.placeNextPartyMember();
 		}
     }

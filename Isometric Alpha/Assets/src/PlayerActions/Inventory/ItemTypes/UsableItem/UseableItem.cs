@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+public delegate void PlaySFXLogic();
+
 [System.Serializable]
-public class UsableItem : Item, IJSONConvertable
+public abstract class UsableItem : Item, IJSONConvertable
 {
     public const string typeIconName = "Usable Item";
     public const string type = "Use";
@@ -12,31 +14,35 @@ public class UsableItem : Item, IJSONConvertable
     private string useDescription;
     private string iconName;
 
-    public UsableItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth) : 
+    protected PlaySFXLogic OOCOnUseSFX;
+
+    public UsableItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth, PlaySFXLogic OOCOnUseSFX = null) : 
     base(listID, key, loreDescription, type, subtype, worth)
     {
         this.useDescription = useDescription;
         this.iconName = iconName;
+
+        this.OOCOnUseSFX = OOCOnUseSFX;
     }
 
-    public UsableItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth, int quantity) : 
+    public UsableItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth, int quantity, PlaySFXLogic OOCOnUseSFX = null) : 
     base(listID, key, loreDescription, Constants.zeroRating, Constants.zeroRating, type, subtype, worth, quantity)
     {
         this.useDescription = useDescription;
         this.iconName = iconName;
+
+        this.OOCOnUseSFX = OOCOnUseSFX;
     }
 
-    public UsableItem(ItemListID listID, string key, string loreDescription, string useDescription, string damageFormula, string critFormula, string subtype, string iconName, int worth, int quantity) : 
-    base(listID, key, loreDescription, damageFormula, critFormula, type, subtype, worth, quantity) 
+    public virtual void PlaySFXLogic()
     {
-        this.useDescription = useDescription;
-        this.iconName = iconName;
-    }
+        if(CombatStateManager.inCombat)
+        {
+            return;
+        }
 
-    // public override string getDamageFormula()
-    // {
-    //     retu
-    // }
+        OOCOnUseSFX();
+    }
 
     public override string getCritFormula()
     {
@@ -68,10 +74,7 @@ public class UsableItem : Item, IJSONConvertable
         return Range.getRangeTitle(getRangeIndex());
     }
 
-    public virtual void use(Stats target)
-    {
-        throw new IOException("Base version of use() was called");
-    }
+    public abstract void use(Stats target);
 
     public virtual string getUseDescription()
     {

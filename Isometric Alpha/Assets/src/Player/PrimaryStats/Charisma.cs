@@ -41,7 +41,7 @@ public static class Charisma
 	// 	return displayStats;
 	// }
 
-    public const string startingDescription = "Charisma governs the skills of oration, barter, and leadership. " +
+    public const string startingDescription = "Charisma increases a Character's skill at speaking, bartering, and leadership. " +
                                      "Charismatic characters are recognized by their peers as standing above the rest, and attract followers to their cause more easily. " +
                                      "Use your words to enhance others or degrade them, to befriend or belittle; calm your enemies' passions, or provoke them to folly.";
 

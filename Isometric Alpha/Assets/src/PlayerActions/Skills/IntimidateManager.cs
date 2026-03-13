@@ -183,6 +183,7 @@ public class IntimidateManager : CunningManager
             foreach (ISkillTarget target in listOfTargets)
             {
                 target.intimidate();
+                AudioManager.playSmokebombSFX();
             }
 
             destroySkillArea();

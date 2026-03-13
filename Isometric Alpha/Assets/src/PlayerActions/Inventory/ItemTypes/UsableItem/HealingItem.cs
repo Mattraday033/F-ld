@@ -11,15 +11,15 @@ public class HealingItem: UsableItem, IJSONConvertable
 	public const bool treatAmountAsHealing = true;
 	private int amountToHeal;
 	
-	public HealingItem(ItemListID listId, string key, string loreDescription, string iconName, int worth, int amountToHeal): 
-    base(listId, key, loreDescription, generateUseDescription(amountToHeal), subtype, iconName, worth) 
+	public HealingItem(ItemListID listId, string key, string loreDescription, string iconName, int worth, int amountToHeal, PlaySFXLogic OOCOnUseSFX = null): 
+    base(listId, key, loreDescription, generateUseDescription(amountToHeal), subtype, iconName, worth, OOCOnUseSFX) 
 	{
 
 		this.amountToHeal = amountToHeal;
 	}
 	
-	public HealingItem(ItemListID listId, string key, string loreDescription, string iconName, int worth, int amountToHeal, int quantity): 
-    base(listId, key, loreDescription, generateUseDescription(amountToHeal), subtype, iconName, worth, quantity) 
+	public HealingItem(ItemListID listId, string key, string loreDescription, string iconName, int worth, int amountToHeal, int quantity, PlaySFXLogic OOCOnUseSFX = null): 
+    base(listId, key, loreDescription, generateUseDescription(amountToHeal), subtype, iconName, worth, quantity, OOCOnUseSFX) 
 	{
 		
 		this.amountToHeal = amountToHeal;
@@ -36,6 +36,8 @@ public class HealingItem: UsableItem, IJSONConvertable
         {
             return;
         }
+
+        PlaySFXLogic();
  
         target.modifyCurrentHealth(getAmountToHeal(), treatAmountAsHealing);
 	}

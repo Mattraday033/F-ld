@@ -16,7 +16,8 @@ public class CombatItem : UsableItem, IJSONConvertable
 	private int rangeIndex;
 	private bool itemUseRequiresAnAction;
 
-	public CombatItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth, int rangeIndex, bool useRequiresAnAction, bool targetsEnemySection = false, bool healsTarget = false) : base(listID, key, loreDescription, useDescription, subtype, iconName, worth)
+	public CombatItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth, int rangeIndex, bool useRequiresAnAction, bool targetsEnemySection = false, bool healsTarget = false, PlaySFXLogic OOCOnUseSFX = null) : 
+    base(listID, key, loreDescription, useDescription, subtype, iconName, worth, OOCOnUseSFX)
 	{
 		this.rangeIndex = rangeIndex;
 		this.itemUseRequiresAnAction = useRequiresAnAction;
@@ -24,13 +25,19 @@ public class CombatItem : UsableItem, IJSONConvertable
 		this.healsTarget = healsTarget;		
 	}
 
-	public CombatItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth, int rangeIndex, bool useRequiresAnAction, int quantity, bool targetsEnemySection = false, bool healsTarget = false) : base(listID, key, loreDescription, useDescription, subtype, iconName, worth, quantity)
+	public CombatItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth, int rangeIndex, bool useRequiresAnAction, int quantity, bool targetsEnemySection = false, bool healsTarget = false, PlaySFXLogic OOCOnUseSFX = null) : 
+    base(listID, key, loreDescription, useDescription, subtype, iconName, worth, quantity, OOCOnUseSFX)
 	{
 		this.rangeIndex = rangeIndex;
 		this.itemUseRequiresAnAction = useRequiresAnAction;
 		this.targetsEnemySection = targetsEnemySection;		
 		this.healsTarget = healsTarget;		
 	}
+
+    public override void use(Stats stats)
+    {
+        //Empty on purpose
+    }
 
 	public override int getRangeIndex()
 	{

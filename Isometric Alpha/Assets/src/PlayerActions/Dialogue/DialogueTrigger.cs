@@ -18,7 +18,7 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
     public Dialogue dialogue;
     public SpeakAtStartScript speakAtStartScript;
 
-    public GetIntroAudioClip introAudioClipLogic;
+    public PlaySFXLogic introAudioClipLogic;
 
     public AnimationManager animationManager;
 
@@ -51,7 +51,7 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
     {
         if(introAudioClipLogic != null)
         {
-            AudioManager.playSFX(introAudioClipLogic());
+            introAudioClipLogic();
         }
     }
 

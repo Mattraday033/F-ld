@@ -11,7 +11,7 @@ VAR playerName = ""
 
 === 1a ===
 
-This looks to be a journal kept by one of the guards. The pages of this book are thick with writing, most of it about the mundane. You leaf through it and linger a while on the final entry: "I've seen Ond leaving the second level of the mine many times, but when I get to the first level he's gone. Where the hell is he going? Maybe he knows something I don't."
+This looks to be a journal kept by one of the guards. The pages of this book are thick with writing, most of it about the mundane. You leaf through it and linger a while on the final entry: "I've seen Ond leaving the second level of the mine many times, but when I get to the first level he's gone. Where is he going? Maybe he knows something I don't."
 
 //add message about secret door in journal
 

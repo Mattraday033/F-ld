@@ -295,6 +295,8 @@ public class CunningManager : SkillManager
         oldColor = skillGrid[selectorPosition.x, selectorPosition.y].GetComponent<SpriteRenderer>().color;
 
         skillGrid[selectorPosition.x, selectorPosition.y].GetComponent<SpriteRenderer>().color = Color.green;
+
+        AudioManager.playSelectorMovedSFX();
     }
 
     public void setSelectorOriginTile()
@@ -423,6 +425,7 @@ public class CunningManager : SkillManager
             removeCunningsRemaining(target.getChargeCost(SkillType.Cunning));
             destroySkillArea();
             OnSkillUse.Invoke();
+            AudioManager.playSmokebombSFX();
             return true;
         }
         else

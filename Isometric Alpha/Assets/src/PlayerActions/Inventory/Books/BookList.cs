@@ -39,7 +39,7 @@ public static class BookList
 			case mineGuardsJournalKey:
 				return "<i>You leaf through the journal and linger a while on the final entry: </i>" +
 					   "\"I've seen Ond leaving the second level of the mine many times, but " +
-					   "when I get to the first level he\'s gone. Where the hell is he going? " +
+					   "when I get to the first level he\'s gone. Where is he going? " +
 					   "Maybe he knows something I don\'t.\"";
 			case pageFirstDiaryEntryKey:
 				return "...the architecture of the mansion seems to be of Delver origin. Perhaps " +

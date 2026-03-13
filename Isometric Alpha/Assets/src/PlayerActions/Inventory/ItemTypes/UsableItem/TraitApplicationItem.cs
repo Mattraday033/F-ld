@@ -28,6 +28,8 @@ public class TraitApplicationItem : CombatItem, IJSONConvertable
             return;
         }
 
+        PlaySFXLogic();
+
         if(healsTarget)
         {
             target.modifyCurrentHealth(getAmountToHeal(), healsTarget); 

@@ -149,9 +149,9 @@ public static class NPCNameList
 
     public const string vaultablePrefix = "Vaultable ";
     public const string hastilyBuiltBarricade = "Hastily Built Barricade";
-    public const string vaultableBarrels = vaultablePrefix + " Barrels";
-    public const string vaultableRocks = vaultablePrefix + " Rocks";
-    public const string vaultableGap = vaultablePrefix + " Gap";
+    public const string vaultableBarrels = vaultablePrefix + barrels;
+    public const string vaultableRocks = vaultablePrefix + "Rocks";
+    public const string vaultableGap = vaultablePrefix + "Gap";
 
     #endregion
 

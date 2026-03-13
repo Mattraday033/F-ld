@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public delegate string GetIntroAudioClip(); 
-
 public abstract class OOCSpawnDetails
 {
 
@@ -774,7 +772,7 @@ public class NPCSpawnDetails : OffSetSpawnDetails
     public Dialogue dialogue;
     public SpeakAtStartScript speakAtStartScript;
 
-    public GetIntroAudioClip introAudioClipLogic;
+    public bool sleepingDialogueIntro;
 
     private bool ignoresSecretDoors;
 
@@ -789,7 +787,7 @@ public class NPCSpawnDetails : OffSetSpawnDetails
                             SpeakAtStartScript speakAtStartScript = null,
                             string tutorialTargetHash = "",
                             bool ignoresSecretDoors = true,
-                            GetIntroAudioClip introAudioClipLogic = null) :
+                            bool sleepingDialogueIntro = false) :
     base(npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX, tutorialTargetHash: tutorialTargetHash)
     {
         if(areaName == null)
@@ -812,8 +810,7 @@ public class NPCSpawnDetails : OffSetSpawnDetails
 
         this.speakAtStartScript = speakAtStartScript;
         this.ignoresSecretDoors = ignoresSecretDoors;
-
-        this.introAudioClipLogic = introAudioClipLogic;
+        this.sleepingDialogueIntro = sleepingDialogueIntro;
     }
 
     public Dialogue getDialogue()
@@ -841,9 +838,9 @@ public class NPCSpawnDetails : OffSetSpawnDetails
         return AreaManager.getNPCParentWithScale();
     }
 
-    public GetIntroAudioClip getDialogueIntroSFXLogic()
+    public PlaySFXLogic getDialogueIntroSFXLogic()
     {
-        return AudioClipList.getIntroAudioClipLogic(npcName);
+        return AudioClipList.getDialogueIntroSFXLogic(npcName, sleepingDialogueIntro);
     }
 
     public override void spawnActions(GameObject npc)
@@ -926,8 +923,8 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
                                          CharacterAnimationType animationType = CharacterAnimationType.None, 
                                          bool ignoresSecretDoors = true,
                                          float offset = 0f,
-                                         GetIntroAudioClip introAudioClipLogic = null) :
-    base(npcName, cellCoords, areaName, extraSpaces: extraSpaces, speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors, offset: offset, introAudioClipLogic: introAudioClipLogic) 
+                                         bool sleepingDialogueIntro = false) :
+    base(npcName, cellCoords, areaName, extraSpaces: extraSpaces, speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors, offset: offset, sleepingDialogueIntro: sleepingDialogueIntro) 
     {
         if(animationName == null)
         {
@@ -1169,42 +1166,6 @@ public class NPCOffGridSpawnDetails : NPCSpawnDetails
     {
         return AreaManager.getNPCParentWithoutScale();
     }
-
-    public override void spawnActions(GameObject gameObject)
-    {
-        base.spawnActions(gameObject);
-
-        // setMouseHoverTileMap(spriteName, gameObject.transform);
-    }
-
-    // public override void spawnActions(DialogueTrigger mainTrigger)
-    // {
-    //     List<GameObject> listOfExtraSpaces = new List<GameObject>();
-
-    //     int index = 0;
-    //     foreach (Vector3Int extraSpace in extraSpaces)
-    //     {
-    //         GameObject extraSpaceGameObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.npcExtraSpace), getParent());
-
-    //         extraSpaceGameObject.name = npcName + extraSpaceNameSuffix + " #" + (index + 1);
-
-    //         DialogueTriggerLink linkTrigger = extraSpaceGameObject.GetComponent<DialogueTriggerLink>();
-
-    //         linkTrigger.linkedDialogue = mainTrigger;
-
-    //         extraSpaceGameObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(extraSpace);
-
-    //         Helpers.updateColliderPosition(extraSpaceGameObject);
-
-    //         SpawnInfoManager.addGameObject(extraSpaceGameObject);
-
-    //         listOfExtraSpaces.Add(extraSpaceGameObject);
-
-    //         index++;
-    //     }
-
-    //     mainTrigger.extraSpaces = listOfExtraSpaces.ToArray();
-    // }
 }
 
 public class CustomMouseHoverNPCSpawnDetails : NPCSpawnDetails
@@ -1542,6 +1503,8 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
         Dialogue dialogue = dialogueTrigger.dialogue;
 
         dialogue.variableSources.Add(secretDoorInfo);
+
+        dialogueTrigger.introAudioClipLogic = getDialogueIntroSFXLogic();
     }
 }
 
@@ -1664,6 +1627,8 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
     public override void spawnActions(DialogueTrigger dialogueTrigger)
     {
         dialogueTrigger.dialogue.variableSources.Add(vaultableObject);
+        
+        dialogueTrigger.introAudioClipLogic = getDialogueIntroSFXLogic();
     }
 
 }
