@@ -43,6 +43,8 @@ public static class OverallUIManager
             return;
         }
 
+        AudioManager.playChangeScreenSFX();
+
         MouseHoverManager.destroyMouseHoverBase();
 
         UIParentPanel.SetActive(true);

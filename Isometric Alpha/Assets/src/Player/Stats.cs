@@ -53,7 +53,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     // public Trait[] hiddenTraits = new Trait[0];
     public TraitContainer traitContainer;
 
-    protected Dictionary<CharacterAnimationType, string> animationAudioClipDicionary;
+    protected Dictionary<CharacterAnimationType, string> animationAudioClipDictionary;
 
     #endregion
 
@@ -229,13 +229,13 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual void playAnimationSFX(CharacterAnimationType animationType)
     {
-        if(animationAudioClipDicionary == null || 
-            !animationAudioClipDicionary.ContainsKey(animationType))
+        if(animationAudioClipDictionary == null || 
+            !animationAudioClipDictionary.ContainsKey(animationType))
         {
             return;
         }
         
-        AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(animationAudioClipDicionary[animationType]));
+        AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(animationAudioClipDictionary[animationType]));
     }
 
     #endregion

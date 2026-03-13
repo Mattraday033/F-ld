@@ -121,10 +121,15 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
     }
 
 
-    public void selectButton()
+    public void selectButton(bool playSFX = true)
     {
         iconOutline.color = Color.yellow;
         Helpers.updateSpritePosition(iconOutline.gameObject);
+
+        if(playSFX)
+        {
+            AudioManager.playChangeSelectedActionFX();
+        }
     }
 
     public void deselectButton()

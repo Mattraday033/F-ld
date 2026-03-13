@@ -21,6 +21,9 @@ public static class Constants
     public const int sizeFive = 5;
     public const int sizeSix = 6;
     public const int sizeSeven = 7;
+    public const int sizeEight = 8;
+    public const int sizeNine = 9;
+    public const int sizeTen = 10;
 
     public const int indexZero = 0;
     public const int indexOne = 1;

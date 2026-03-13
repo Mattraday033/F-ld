@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour
     public const float footstepMufflePercent = .6f;
 
     public static float sfxVolumePlayerSetting = 1f;
-    public const float sfxMufflePercent = .6f;
+    public const float sfxMufflePercent = .7f;
 
     #endregion
 
@@ -151,14 +151,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public static void playBattleMusic()
-    {
-        FadeToBlackManager.StopFade(FadeType.Music);
-        setMusicSourceVolume(musicVolumePlayerSetting);
-        loadAndPlayClip(instance.musicSource, AudioClipList.campBattle);
-        setCurrentMusicPath(AudioClipList.campBattle);
-    }
-
     private static void loadAndPlayCurrentMusicClip()
     {
         loadAndPlayClip(instance.musicSource, currentMusicPath);
@@ -189,18 +181,6 @@ public class AudioManager : MonoBehaviour
 
         instance.SFXSource.clip = SFXClip;
         instance.SFXSource.Play();
-    }
-
-    public static void playCoinSFX()
-    {
-        playSFX(AudioClipList.coinSFXPrefix + 
-                Random.Range(Constants.indexOne, AudioClipList.coinSFXCount + 1));
-    }
-
-    public static void playWeaponChangeSFX()
-    {
-        playSFX(AudioClipList.weaponPrefix + 
-                Random.Range(Constants.indexOne, AudioClipList.weaponSFXCount + 1));
     }
 
     public static void playEffectAnimationSFX(string effectType)
@@ -309,7 +289,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private static IEnumerator playQueuedAudioClip(AudioClip currentClip, AudioSource source = null)
+    private static IEnumerator playQueuedAudioClip(AudioClip currentClip, AudioSource source = null, bool destroy = true)
     {
         if(currentClip == null || instance == null)
         {
@@ -319,6 +299,11 @@ public class AudioManager : MonoBehaviour
         if(source == null)
         {
             source = createOneOffAudioSource();
+        }
+
+        if(!destroy)
+        {
+            source.Stop();
         }
 
         source.clip = currentClip;
@@ -334,7 +319,7 @@ public class AudioManager : MonoBehaviour
             timeWaited += Time.deltaTime;
         }
 
-        if(source != null)
+        if(source != null && destroy)
         {
             Destroy(source.gameObject);
         }
@@ -362,8 +347,70 @@ public class AudioManager : MonoBehaviour
 
         AudioSource source = singletonAudioClips[clip];
 
-        instance.StartCoroutine(playQueuedAudioClip(clip, source: source));
+        source.priority = 256;
+
+        instance.StartCoroutine(playQueuedAudioClip(clip, source: source, destroy: false));
     }
+
+    #region Play Specific SFX/Music
+
+    public static void playBattleMusic()
+    {
+        FadeToBlackManager.StopFade(FadeType.Music);
+        setMusicSourceVolume(musicVolumePlayerSetting);
+        loadAndPlayClip(instance.musicSource, AudioClipList.campBattle);
+        setCurrentMusicPath(AudioClipList.campBattle);
+    }
+
+    public static void playCoinSFX()
+    {
+        playSFX(AudioClipList.coinSFXPrefix + 
+                Random.Range(Constants.indexOne, AudioClipList.coinSFXCount + 1));
+    }
+
+    public static void playWeaponChangeSFX()
+    {
+        playSFX(AudioClipList.weaponPrefix + 
+                Random.Range(Constants.indexOne, AudioClipList.weaponSFXCount + 1));
+    }
+
+    public static void playSelectorMovedSFX()
+    {
+        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.moveSelectorSFX));
+    }
+
+    public static void playChangeSelectedActionFX()
+    {
+        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.changeSelectedActionSFX));
+    }
+
+    public static void playChooseActorAbilityLocationSFX()
+    {
+        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.chooseActorAbilityLocationSFX));
+    }
+
+    public static void playCannotChooseActorAbilityLocationSFX()
+    {
+        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.cannotChooseActorAbilityLocationSFX));
+    }
+
+    public static void playChangeScreenSFX()
+    {
+        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.changeScreenSFXPrefix + 
+                                 Random.Range(Constants.indexOne, AudioClipList.changeScreenSFXCount + 1)));
+    }
+
+    public static void playOnTransitionSFX()
+    {
+        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.onTransitionSFX));
+    }
+
+    public static void playWhipSFX()
+    {
+        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.whipAttackSound));
+    }
+
+    #endregion
 
     [RuntimeInitializeOnLoadMethod]
     private static void instantiateAudioManager()
@@ -438,6 +485,8 @@ public static class AudioClipList
 
     public const string hitSFXFolder = SFXFolderPath + "Hit/";
 
+    #region Attack Sounds
+
     public const string attackSoundsSFXFolder = SFXFolderPath + "Attack Sounds/";
 
     public const string miscAttackSoundFolder = attackSoundsSFXFolder + "Misc/";
@@ -445,6 +494,7 @@ public static class AudioClipList
 
     public const string weaponAttackSoundFolder = attackSoundsSFXFolder + "Weapons/";
     public const string weaponSwingAttackSound = weaponAttackSoundFolder + "WeaponSwing";
+    public const string whipAttackSound = weaponAttackSoundFolder + "Whip";
 
     public const string batAttackSoundsSFXFolder = attackSoundsSFXFolder + "Bats/";
     public const string batSwarmAttackSound = batAttackSoundsSFXFolder + "Bat Swarm";
@@ -456,11 +506,111 @@ public static class AudioClipList
     public const string wormExplodeOnDeathSound = wormAttackSoundsSFXFolder + "WormExplodeOnDeath";
     public const string wormSummonSound = wormAttackSoundsSFXFolder + "WormSummon";
 
+    public const string horseAttackSoundsSFXFolder = attackSoundsSFXFolder + "Horse/";
+    public const string horseAttackSound = horseAttackSoundsSFXFolder + "Horse Whinny";
+
+    #endregion
+
+    #region Death Sounds
+
     public const string deathSoundsSFXFolder = SFXFolderPath + "Death Sounds/";
 
     public const string batDeathSoundsFolder = deathSoundsSFXFolder + "Bats/";
     public const string batDeathSFXOne = batDeathSoundsFolder + "Bat Death 1";
     public const string batDeathSFXTwo = batDeathSoundsFolder + "Bat Death 2";
 
+    public const string horseDeathSoundsFolder = deathSoundsSFXFolder + "Horse/";
+    public const string horseDeathSFX = horseDeathSoundsFolder + "Death";
+
+    public const string maleHumanDeathSoundsFolder = deathSoundsSFXFolder + "Male Human/";
+    public const string maleHumanDeathSound = maleHumanDeathSoundsFolder + "Death";
+
+    public const string femaleHumanDeathSoundsFolder = deathSoundsSFXFolder + "Female Human/";
+    public const string femaleHumanDeathSound = femaleHumanDeathSoundsFolder + "Death";
+
+    #endregion
+
+    #region UI
+
+    public const string UISFXFolder = SFXFolderPath + "UI/";
+
+    public const string moveSelectorSFX = UISFXFolder + "MoveSelector";
+    public const string changeSelectedActionSFX = UISFXFolder + "ChangeSelectedAction";
+    public const string chooseActorAbilityLocationSFX = UISFXFolder + "ChooseActorAbilityLocation";
+    public const string cannotChooseActorAbilityLocationSFX = UISFXFolder + "CannotChooseActorAbilityLocation";
+    public const string changeScreenSFXFolder = UISFXFolder + "ChangeScreen/";
+    public const string changeScreenSFXPrefix = changeScreenSFXFolder + "ChangeScreen";
+    public const int changeScreenSFXCount = 3;
+
+    public const string betweeenAreasSFXFolder = SFXFolderPath + "BetweenAreas/";
+
+    public const string onTransitionSFX = betweeenAreasSFXFolder + "OnTransition";
+
+    #endregion
+
+    #region Dialogue
+
+    public const string dialogueSFXFolder = SFXFolderPath + "Dialogue/";
+
+    public const string humanMaleDialogueSFXFolder = dialogueSFXFolder + "Male Human/";
+    public const int humanMaleIntroCount = 3;
+    public const string humanFemaleDialogueSFXFolder = dialogueSFXFolder + "Female Human/";
+    public const int humanFemaleIntroCount = 3;
+
+    public const string dialogueIntroPrefix = "Intro";
+
+    public const string horseDialogueSFXFolder = dialogueSFXFolder + "Horse/";
+
+    public const string horseIntroSFX = horseDialogueSFXFolder + dialogueIntroPrefix;
+
+    public const string objectsDialogueSFXFolder = dialogueSFXFolder + "Objects/";
+
+    public const string crateIntroSFX = objectsDialogueSFXFolder + "Crate" + dialogueIntroPrefix;
+    public const string rockIntroSFX = objectsDialogueSFXFolder + "Rock" + dialogueIntroPrefix;
+    public const string gateIntroSFX = objectsDialogueSFXFolder + "Gate" + dialogueIntroPrefix;
+
+    public static GetIntroAudioClip getIntroAudioClipLogic(string npcName)
+    {
+        switch(DialogueList.scrubNameOfEndNumbers(npcName))
+        {
+            case NPCNameList.csalan:
+            case NPCNameList.horse:
+                return () => horseIntroSFX;
+            case NPCNameList.guardVirag:
+            case NPCNameList.guardReka:
+            case NPCNameList.guardMuzsa:
+            case NPCNameList.quartermasterEmese:
+            case NPCNameList.page:
+                return () =>
+                {
+                    return humanFemaleDialogueSFXFolder + dialogueIntroPrefix +
+                                 Random.Range(Constants.indexOne, humanFemaleIntroCount + 1);
+                };
+            case NPCNameList.barrels:
+            case NPCNameList.crates:
+            case NPCNameList.crate:
+            case NPCNameList.barricade:
+            case NPCNameList.wallPatch:
+                return () => crateIntroSFX;
+            case NPCNameList.barracksGate:
+            case NPCNameList.manseFrontDoor:
+            case NPCNameList.manseServiceEntrance:
+            case NPCNameList.gate:
+            case NPCNameList.liftableGate:
+                return () => gateIntroSFX;
+            case NPCNameList.rubble:
+            case NPCNameList.awkwardRubble:
+            case NPCNameList.liftableRubble:
+                return () => rockIntroSFX;
+            default:
+                return () =>
+                {
+                    return humanMaleDialogueSFXFolder + dialogueIntroPrefix +
+                                 Random.Range(Constants.indexOne, humanMaleIntroCount + 1);
+                };
+        }
+    }
+
+    #endregion
 
 }

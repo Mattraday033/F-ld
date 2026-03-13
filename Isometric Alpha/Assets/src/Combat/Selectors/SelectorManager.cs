@@ -266,6 +266,7 @@ public class SelectorManager : MonoBehaviour
 
 		if (loadedCombatAction.movesTarget() && currentSelector.targetsImmobileTarget())
 		{
+            AudioManager.playCannotChooseActorAbilityLocationSFX();
 			return;
 		}
 
@@ -274,7 +275,11 @@ public class SelectorManager : MonoBehaviour
 			if (!currentSelector.hasAtLeastOneTarget(allyAndEnemyTagCriteria))
 			{
 				instance.finishChoosingLocation(loadedCombatAction);
-			}
+			} else
+            {
+                AudioManager.playCannotChooseActorAbilityLocationSFX();
+                return;
+            }
 		}
 		else
 		{
@@ -284,11 +289,16 @@ public class SelectorManager : MonoBehaviour
 				{
 					if (CombatGrid.enemyHasMandatoryTarget() && !currentSelector.hasAtLeastOneMandatoryTarget() && !loadedCombatAction.isSelfTargeting())
 					{
+                        AudioManager.playCannotChooseActorAbilityLocationSFX();
 						return;
 					}
 
 					instance.finishChoosingLocation(loadedCombatAction);
-				}
+				} else
+                {
+                    AudioManager.playCannotChooseActorAbilityLocationSFX();
+                    return;
+                }
 			}
 			else
 			{
@@ -306,11 +316,16 @@ public class SelectorManager : MonoBehaviour
 					{
 						if (CombatGrid.enemyHasMandatoryTarget() && !currentSelector.hasAtLeastOneMandatoryTarget() && !loadedCombatAction.isSelfTargeting())
 						{
+                            AudioManager.playCannotChooseActorAbilityLocationSFX();
 							return;
 						}
 
 						instance.finishChoosingLocation(loadedCombatAction);
-					}
+					} else
+                    {
+                        AudioManager.playCannotChooseActorAbilityLocationSFX();
+                        return;
+                    }
 				}
 			}
 		}
@@ -325,6 +340,7 @@ public class SelectorManager : MonoBehaviour
 			if (loadedCombatAction.requiresAnAction())
 			{
 				playerCombatActionManager.queueCombatAction(selectors[0], currentSelector, loadedCombatAction);
+                AudioManager.playChooseActorAbilityLocationSFX();
 			}
 			else
 			{
@@ -354,6 +370,8 @@ public class SelectorManager : MonoBehaviour
 				tertiarySelector.setToLocation(currentSelector.getCoords());
 			}
 
+            AudioManager.playChooseActorAbilityLocationSFX();
+
 			setCurrentSelector(tertiarySelector);
 
 			currentSelector.setToSecondaryColor();
@@ -373,6 +391,7 @@ public class SelectorManager : MonoBehaviour
 
 		if (loadedCombatAction.tertiaryCoordsRequiresEmptySpace() && CombatGrid.getCombatantAtCoords(currentSelector.getCoords()) != null)
 		{
+            AudioManager.playCannotChooseActorAbilityLocationSFX();
 			return;
 		}
 
@@ -407,6 +426,8 @@ public class SelectorManager : MonoBehaviour
 		resetAllSelectors();
 
 		currentSelector.setToLocation(loadedCombatAction.getActorCoords());
+
+        AudioManager.playChooseActorAbilityLocationSFX();
 
 		CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
 
@@ -624,6 +645,8 @@ public class SelectorManager : MonoBehaviour
 
 		if (moved)
 		{
+            AudioManager.playSelectorMovedSFX();
+
             updateAllDamagePreviews();
 
 			displayCurrentHoverUI();
@@ -729,6 +752,8 @@ public class SelectorManager : MonoBehaviour
 				destroyPressEPrompt();
 
 				currentSelector.setToLocation(targetPosition);
+
+                AudioManager.playSelectorMovedSFX();
 
                 updateAllDamagePreviews();
                 declareSelectors();

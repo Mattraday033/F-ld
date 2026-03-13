@@ -88,6 +88,13 @@ public class TransitionManager : MonoBehaviour
     {
         NotificationManager.OnDeleteAllNotifications.Invoke();
 
+        for(int i = 0; i < Constants.sizeTen; i++)
+        {
+            yield return null;
+        }
+        
+        AudioManager.playOnTransitionSFX();
+
         while (FadeToBlackManager.isMidScreenFade())
         {
             yield return null;

@@ -13,7 +13,7 @@ public interface IHandlesAbilityWheelSelectionInput
 	public CombatAction getCurrentlySelectedAction();
 	public void moveSelectedButtonClockwise();
 	public void moveSelectedButtonCounterClockwise();
-	public void chooseAbility(int abilityIndex);
+	public void chooseAbility(int abilityIndex, bool playSelectButtonSFX = true);
 }
 
 public interface IActionArrayStorage 
@@ -224,12 +224,14 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         if (!abilityButtons[currentlySelectedAbilityIndex].casterCanPayActionCost())
         {
             checkForPaymentTutorial();
-
+            AudioManager.playCannotChooseActorAbilityLocationSFX();
             return;
         }
 
         abilityButtons[currentlySelectedAbilityIndex].disableCombatActionSelectorPreview();
         abilityButtons[currentlySelectedAbilityIndex].enableCombatActionSelector();
+
+        AudioManager.playChooseActorAbilityLocationSFX();
 
         CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingLocation);
     }
@@ -513,7 +515,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         {
             if (abilityButton.isSelectable())
             {
-                chooseAbility(currentIndex);
+                chooseAbility(currentIndex, playSelectButtonSFX: false);
                 return;
             }
             else
@@ -663,7 +665,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
                     || (displayOnly && !canPlaceWeaponHere());
     }
 
-    public void chooseAbility(int abilityIndex)
+    public void chooseAbility(int abilityIndex, bool playSelectButtonSFX = true)
     {
         if (!abilityButtons[abilityIndex].enabled ||
             abilityButtons[abilityIndex].loadedCombatAction == null ||
@@ -674,7 +676,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
         deselectAllAbilityButtons();
         setCurrentlySelectedAbilityIndex(abilityIndex);
-        abilityButtons[currentlySelectedAbilityIndex].selectButton();
+        abilityButtons[currentlySelectedAbilityIndex].selectButton(playSelectButtonSFX);
         updateItemQuantityPanel();
     }
 
@@ -739,6 +741,11 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
     //ICounter
     private void OnEnable()
     {
+        if (CombatStateManager.inCombat && CombatStateManager.whoseTurn != WhoseTurn.Start)
+        {
+            AudioManager.playChooseActorAbilityLocationSFX();
+        }
+
         addListeners();
     }
 

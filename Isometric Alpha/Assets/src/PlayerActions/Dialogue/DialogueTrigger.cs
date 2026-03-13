@@ -18,6 +18,8 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
     public Dialogue dialogue;
     public SpeakAtStartScript speakAtStartScript;
 
+    public GetIntroAudioClip introAudioClipLogic;
+
     public AnimationManager animationManager;
 
     public GameObject[] extraSpaces;
@@ -40,7 +42,17 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
     {
         setFacing();
 
+        playIntroAudioClip();
+
         DialogueManager.getInstance().startDialogue(dialogue);
+    }
+
+    public void playIntroAudioClip()
+    {
+        if(introAudioClipLogic != null)
+        {
+            AudioManager.playSFX(introAudioClipLogic());
+        }
     }
 
     public void setFacing()

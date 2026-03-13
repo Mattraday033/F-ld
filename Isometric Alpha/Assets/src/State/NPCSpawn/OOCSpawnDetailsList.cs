@@ -655,10 +655,29 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(11, 4), Facing.SouthWest, script: new FoundToolBundle()));
-        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(11, -2), Facing.SouthWest));
-        list.Add(new ChestSpawnDetails(Constants.indexTwo, new Vector3Int(1, 5), Facing.SouthEast));
-        list.Add(new ChestSpawnDetails(Constants.indexThree, new Vector3Int(1, -3), Facing.NorthWest));
+        list.Add(new WeaponRackSpawnDetails(Constants.indexTwo, new Vector3Int(11, 4), Facing.SouthWest, ChestType.PickaxeTable));
+        // list.Add(new WeaponRackSpawnDetails(Constants.indexZero, new Vector3Int(11, 2), Facing.SouthWest, ChestType.ShovelRack, script: new FoundToolBundle()));
+        // list.Add(new WeaponRackSpawnDetails(Constants.indexZero, new Vector3Int(11, 1), Facing.SouthWest, ChestType.ShovelRack, script: new FoundToolBundle()));
+        // list.Add(new ObstacleSpawnDetails(NPCNameList.table, new Vector3Int(11, -1), PrefabNames.emptyWeaponTable, flipX: true, withScale: false));
+        list.Add(new WeaponRackSpawnDetails(Constants.indexOne, new Vector3Int(11, -2), Facing.SouthWest, ChestType.PickaxeTable));
+
+        // list.Add(new WeaponRackSpawnDetails(Constants.indexZero, new Vector3Int(9, 3), Facing.SouthWest, ChestType.PickaxeTable, script: new FoundToolBundle()));
+        // list.Add(new WeaponRackSpawnDetails(Constants.indexZero, new Vector3Int(9, 2), Facing.SouthWest, ChestType.PickaxeTable, script: new FoundToolBundle()));
+        // list.Add(new ObstacleSpawnDetails(NPCNameList.table, new Vector3Int(9, 1), PrefabNames.emptyWeaponTable, flipX: true, withScale: false));
+        // list.Add(new WeaponRackSpawnDetails(Constants.indexZero, new Vector3Int(9, -1), Facing.SouthWest, ChestType.PickaxeTable, script: new FoundToolBundle()));
+
+        // list.Add(new ObstacleSpawnDetails(NPCNameList.table, new Vector3Int(7, 3), PrefabNames.emptyWeaponTable, flipX: true, withScale: false));
+        // list.Add(new WeaponRackSpawnDetails(Constants.indexZero, new Vector3Int(7, 2), Facing.SouthWest, ChestType.PickaxeTable, script: new FoundToolBundle()));
+        list.Add(new WeaponRackSpawnDetails(Constants.indexZero, new Vector3Int(7, 0), Facing.SouthWest, ChestType.PickaxeTable, script: new FoundToolBundle()));
+        // list.Add(new ObstacleSpawnDetails(NPCNameList.table, new Vector3Int(7, -1), PrefabNames.emptyWeaponTable, flipX: true, withScale: false));
+
+        // list.Add(new WeaponRackSpawnDetails(Constants.indexZero, new Vector3Int(9, 5), Facing.SouthEast, ChestType.HammerRack, script: new FoundToolBundle()));
+        // list.Add(new WeaponRackSpawnDetails(Constants.indexZero, new Vector3Int(8, 5), Facing.SouthEast, ChestType.HammerRack, script: new FoundToolBundle()));
+        // list.Add(new ObstacleSpawnDetails(NPCNameList.rack, new Vector3Int(7, 5), PrefabNames.emptyShortRack, withScale: false));
+        // list.Add(new ObstacleSpawnDetails(NPCNameList.table, new Vector3Int(4, 5), PrefabNames.emptyMattockRack, withScale: false));
+        // list.Add(new ObstacleSpawnDetails(NPCNameList.table, new Vector3Int(3, 5), PrefabNames.emptyMattockRack, withScale: false));
+
+        list.Add(new ChestSpawnDetails(Constants.indexThree, new Vector3Int(9, -3), Facing.NorthWest));
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(7, -5)));
 

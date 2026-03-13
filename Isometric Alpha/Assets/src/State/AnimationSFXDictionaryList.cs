@@ -6,16 +6,28 @@ public static class AnimationSFXDictionaryList
 {
     #region Humans
 
-    public readonly static Dictionary<CharacterAnimationType, string> humanAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    public readonly static Dictionary<CharacterAnimationType, string> maleHumanAudioDictionary = new Dictionary<CharacterAnimationType, string>
     {
-        [CharacterAnimationType.Attack_Normal] = AudioClipList.weaponSwingAttackSound
+        [CharacterAnimationType.Attack_Normal] = AudioClipList.weaponSwingAttackSound,
+        [CharacterAnimationType.Death] = AudioClipList.maleHumanDeathSound 
+    };
+
+    public readonly static Dictionary<CharacterAnimationType, string> femaleHumanAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    {
+        [CharacterAnimationType.Attack_Normal] = AudioClipList.weaponSwingAttackSound,
+        [CharacterAnimationType.Death] = AudioClipList.femaleHumanDeathSound 
+    };
+
+    public readonly static Dictionary<CharacterAnimationType, string> whipAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    {
+        [CharacterAnimationType.Attack_Normal] = AudioClipList.whipAttackSound
     };
 
     #endregion
 
     #region Bats
 
-    public readonly static Dictionary<CharacterAnimationType, string> batSwarmAudioDicionary = new Dictionary<CharacterAnimationType, string>
+    public readonly static Dictionary<CharacterAnimationType, string> batSwarmAudioDictionary = new Dictionary<CharacterAnimationType, string>
     {
         [CharacterAnimationType.Attack_Normal] = AudioClipList.batSwarmAttackSound,
         [CharacterAnimationType.Death] = AudioClipList.batDeathSFXOne
@@ -67,7 +79,8 @@ public static class AnimationSFXDictionaryList
 
     public readonly static Dictionary<CharacterAnimationType, string> horseAudioDictionary = new Dictionary<CharacterAnimationType, string>
     {
-        [CharacterAnimationType.Attack_Normal] = AudioClipList.batSwarmAttackSound
+        [CharacterAnimationType.Attack_Normal] = AudioClipList.horseAttackSound,
+        [CharacterAnimationType.Death] = AudioClipList.horseDeathSFX
     };
 
     #endregion

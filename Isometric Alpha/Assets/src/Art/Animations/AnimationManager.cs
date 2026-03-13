@@ -447,7 +447,10 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         CombatAnimationManager.trackAnimation(key, this);
         playAnimation(createClipTransitionToIdle(attackAnimationType));        
 
-        linkedStats.playAnimationSFX(CharacterAnimationType.Attack_Normal);
+        if(CombatStateManager.inCombat)
+        {
+            linkedStats.playAnimationSFX(CharacterAnimationType.Attack_Normal);
+        }
     }
 
     public void playAttackIntoFrontIdleAnimation()
@@ -890,7 +893,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             case CharacterAnimationType.Attack_Normal:
                 return CharacterAnimationType.Attack_Normal_Front;
             default:
-                Debug.LogError("No Animation Type in animationDict: " + animationType.ToString());
+                // Debug.LogError("No Animation Type in animationDict: " + animationType.ToString());
                 return animationType;
         }
     }

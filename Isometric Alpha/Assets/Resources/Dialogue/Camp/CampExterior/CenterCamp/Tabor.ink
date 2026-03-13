@@ -85,6 +85,7 @@ setNPCFacing({taborIndex},SE)
 
 playAnimation({taborIndex},Attack_Normal_Front)
 playDelayedAnimation({feherIndex},Wounded,700)
+playDelayedSFX(Whip, 650)
 
 \*Tabor cracks his whip, and Feher suffers another lash across his back.*
 
@@ -162,6 +163,7 @@ setNPCFacing({taborIndex},SE)
 
 playAnimation({taborIndex},Attack_Normal_Front)
 playDelayedAnimation({feherIndex},Wounded,700)
+playDelayedSFX(Whip, 650)
 
 \*Tabor cracks his whip and strikes Feher again.*
 

@@ -64,6 +64,8 @@ public abstract class PopUpButton : MonoBehaviour
         {
             TutorialSequenceStepTargetUIObject.createCutOutMask(popUpWindow.transform);
         }
+
+        playOpenSFX(type);
     }
 
 	public virtual void destroyPopUp()
@@ -158,4 +160,18 @@ public abstract class PopUpButton : MonoBehaviour
 				throw new IOException("Unknown PopUpType: " + type.ToString());
 		}
 	}
+
+    private static void playOpenSFX(PopUpType type)
+    {
+        switch(type)
+        {
+            case PopUpType.DialogueTrackerWithChoices:
+            case PopUpType.BinaryPanel:
+                return;
+            default:
+                AudioManager.playChangeScreenSFX();
+                return;
+        }
+
+    }
 }

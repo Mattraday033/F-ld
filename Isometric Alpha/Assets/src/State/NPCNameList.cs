@@ -132,6 +132,8 @@ public static class NPCNameList
     public const string water = "Water";
     public const string stalagmite = "Stalagmite";
     public const string obstacle = "Obstacle";
+    public const string table = "Table";
+    public const string rack = "Rack";
 
     #endregion
 

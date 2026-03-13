@@ -319,6 +319,23 @@ public static class PrefabNames
     public const string shelfFrontFull = itemContainersFolder + "Shelf_Front_Full";
     public const string shelfFrontEmpty = itemContainersFolder + "Shelf_Front_Empty";
 
+    
+    public const string axeRack = itemContainersFolder + "Axe Rack";
+    public const string hammerRack = itemContainersFolder + "Hammer Rack";
+    public const string emptyShortRack = itemContainersFolder + "Empty Short Rack";
+    
+    public const string swordTable = itemContainersFolder + "Sword Table";
+    public const string pickaxeTable = itemContainersFolder + "Pickaxe Table";
+    public const string emptyWeaponTable = itemContainersFolder + "Empty Weapon Table";
+
+    public const string spearRack = itemContainersFolder + "Spear Rack";
+    public const string shovelRack = itemContainersFolder + "Shovel Rack";
+    public const string emptyPolearmRack = itemContainersFolder + "Empty Polearm Rack";
+
+    public const string mattockRack = itemContainersFolder + "Mattock Rack";
+    public const string emptyMattockRack = itemContainersFolder + "Empty Mattock Rack";
+
+
     public const string waterFolder = spriteFolder + "Water/";
     public const string water = waterFolder + "Water";
 
@@ -389,11 +406,6 @@ WallPatchTall
     public const string ladderShortNE = ladderFolder + "Ladder_Short_NE";
     public const string ladderTallNE = ladderFolder + "Ladder_Tall_NE";
     public const string ladderTallSW = ladderFolder + "Ladder_Tall_SW";
-
-    private const string testSpriteFolder = spriteFolder + "TestSprites/";
-    public const string hammerRack = testSpriteFolder + "HammerRack";
-    public const string shovelRack = testSpriteFolder + "ShovelRack";
-    public const string pickRack = testSpriteFolder + "PickRack";
 
     private const string shadowFolder = charactersFolder + "Shadows/";
     public const string shadow256x256 = shadowFolder + "256_Shadow";

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public delegate string GetIntroAudioClip(); 
+
 public abstract class OOCSpawnDetails
 {
 
@@ -458,10 +461,13 @@ public class DoubleCunningBlockerSpawnDetails : CunningBlockerSpawnDetails
 public class ObstacleSpawnDetails : OffSetSpawnDetails
 {
 
-    public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo = null, float offset = 0f, bool flipX = false) :
+    private bool withScale;
+
+    public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo = null, float offset = 0f, bool flipX = false, bool withScale = true) :
     base(npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX)
     {
         this.tint = Color.white;
+        this.withScale = withScale;
     }
 
     public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, Color tint) :
@@ -483,7 +489,14 @@ public class ObstacleSpawnDetails : OffSetSpawnDetails
 
     public override Transform getParent()
     {
-        return AreaManager.getNPCParentWithScale();
+        if(withScale)
+        {
+            return AreaManager.getNPCParentWithScale();
+        }
+        else
+        {
+            return AreaManager.getNPCParentWithoutScale();
+        }
     }
 
     public override void spawnActions(GameObject interactable)
@@ -750,6 +763,8 @@ public class HiddenButtonSpawnDetails : ButtonSpawnDetails
     }
 }
 
+
+
 public class NPCSpawnDetails : OffSetSpawnDetails
 {
 
@@ -758,6 +773,8 @@ public class NPCSpawnDetails : OffSetSpawnDetails
     public Vector3Int[] extraSpaces = new Vector3Int[0];
     public Dialogue dialogue;
     public SpeakAtStartScript speakAtStartScript;
+
+    public GetIntroAudioClip introAudioClipLogic;
 
     private bool ignoresSecretDoors;
 
@@ -771,7 +788,8 @@ public class NPCSpawnDetails : OffSetSpawnDetails
                             Vector3Int[] extraSpaces = null,
                             SpeakAtStartScript speakAtStartScript = null,
                             string tutorialTargetHash = "",
-                            bool ignoresSecretDoors = true) :
+                            bool ignoresSecretDoors = true,
+                            GetIntroAudioClip introAudioClipLogic = null) :
     base(npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX, tutorialTargetHash: tutorialTargetHash)
     {
         if(areaName == null)
@@ -794,6 +812,8 @@ public class NPCSpawnDetails : OffSetSpawnDetails
 
         this.speakAtStartScript = speakAtStartScript;
         this.ignoresSecretDoors = ignoresSecretDoors;
+
+        this.introAudioClipLogic = introAudioClipLogic;
     }
 
     public Dialogue getDialogue()
@@ -819,6 +839,11 @@ public class NPCSpawnDetails : OffSetSpawnDetails
     public override Transform getParent()
     {
         return AreaManager.getNPCParentWithScale();
+    }
+
+    public GetIntroAudioClip getDialogueIntroSFXLogic()
+    {
+        return AudioClipList.getIntroAudioClipLogic(npcName);
     }
 
     public override void spawnActions(GameObject npc)
@@ -878,6 +903,8 @@ public class NPCSpawnDetails : OffSetSpawnDetails
             index++;
         }
 
+        mainTrigger.introAudioClipLogic = getDialogueIntroSFXLogic();
+
         mainTrigger.extraSpaces = listOfExtraSpaces.ToArray();
     }
 }
@@ -898,8 +925,9 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
                                          SpeakAtStartScript speakAtStartScript = null,
                                          CharacterAnimationType animationType = CharacterAnimationType.None, 
                                          bool ignoresSecretDoors = true,
-                                         float offset = 0f) :
-    base(npcName, cellCoords, areaName, extraSpaces: extraSpaces, speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors, offset: offset) 
+                                         float offset = 0f,
+                                         GetIntroAudioClip introAudioClipLogic = null) :
+    base(npcName, cellCoords, areaName, extraSpaces: extraSpaces, speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors, offset: offset, introAudioClipLogic: introAudioClipLogic) 
     {
         if(animationName == null)
         {
@@ -1741,6 +1769,27 @@ public class ShelfSpawnDetails : ChestSpawnDetails
     public override ChestType getType()
     {
         return ChestType.Shelf;
+    }
+}
+
+public class WeaponRackSpawnDetails : ChestSpawnDetails
+{
+    private ChestType type;
+
+    public WeaponRackSpawnDetails(int index, Vector3Int cellCoords, Facing facing, ChestType type, QuestStepActivationScript script = null) :
+    base(index, cellCoords, facing, script)
+    {
+        this.type = type;
+    }
+
+    public override ChestType getType()
+    {
+        return type;
+    }
+
+    public override Transform getParent()
+    {
+        return AreaManager.getNPCParentWithoutScale();
     }
 }
 

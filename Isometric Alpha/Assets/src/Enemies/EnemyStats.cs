@@ -24,6 +24,7 @@ public class EnemyStats : Stats
     public int armor;
 
     public bool gendered;
+    protected string genderMarker;
 
     public string[] animationSuffixes;
 
@@ -33,7 +34,7 @@ public class EnemyStats : Stats
 
     #region Constructors
 
-    public EnemyStats(string key, int armor, int tHP, CombatAction combatAction = null, Trait[] traits = null, bool gendered = false, string[] animationSuffixes = null, Dictionary<CharacterAnimationType, string> animationAudioClipDicionary = null) :
+    public EnemyStats(string key, int armor, int tHP, CombatAction combatAction = null, Trait[] traits = null, bool gendered = false, string[] animationSuffixes = null, Dictionary<CharacterAnimationType, string> animationAudioClipDictionary = null) :
     base(key)
     {
         this.armor = armor;
@@ -62,7 +63,7 @@ public class EnemyStats : Stats
             this.animationSuffixes = animationSuffixes;
         }
 
-        this.animationAudioClipDicionary = animationAudioClipDicionary;
+        this.animationAudioClipDictionary = animationAudioClipDictionary;
     }
 
     #endregion
@@ -202,6 +203,37 @@ public class EnemyStats : Stats
 
     #endregion
 
+    #region Audio
+
+    public override void playAnimationSFX(CharacterAnimationType animationType)
+    {
+        if(animationAudioClipDictionary == null || 
+            !animationAudioClipDictionary.ContainsKey(animationType))
+        {
+            return;
+        }
+
+        if(gendered)
+        {
+            switch(getGenderMarker())
+            {
+                case Constants.maleMarker:
+                    animationAudioClipDictionary = AnimationSFXDictionaryList.maleHumanAudioDictionary;
+                    break;
+                case Constants.femaleMarker:
+                    animationAudioClipDictionary = AnimationSFXDictionaryList.femaleHumanAudioDictionary;
+                    break;
+            }
+
+            AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(animationAudioClipDictionary[animationType]));
+        } else
+        {
+            base.playAnimationSFX(animationType);
+        }
+    }
+
+    #endregion
+
     #region Miscellanious
     
     public override string getGenderMarker()
@@ -211,14 +243,24 @@ public class EnemyStats : Stats
             return base.getGenderMarker();
         }
 
+        if(genderMarker == null || genderMarker.Length <= 0)
+        {
+            setGenderMarker();
+        }
+        
+        return genderMarker;
+    }
+
+    public void setGenderMarker()
+    {
         int gender = UnityEngine.Random.Range(0, 2);
 
         if(gender == Constants.indexZero)
         {
-            return Constants.maleMarker;
+            genderMarker = Constants.maleMarker;
         } else
         {
-            return Constants.femaleMarker;
+            genderMarker = Constants.femaleMarker;
         }
     }
 

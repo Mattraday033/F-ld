@@ -57,7 +57,7 @@ public class AllyStats : Stats
     {
         combatActionArray = new CombatActionArray(this); 
         equippedItems = new EquippedItems(this);
-        this.animationAudioClipDicionary = AnimationSFXDictionaryList.humanAudioDictionary;
+        this.animationAudioClipDictionary = AnimationSFXDictionaryList.maleHumanAudioDictionary;
     }
 
     public AllyStats(string name, int Str, int Dex, int Wis, int Cha) : base(name) 
@@ -76,7 +76,7 @@ public class AllyStats : Stats
         equippedItems = new EquippedItems(this);
 
         this.currentHealth = getTotalHealth();
-        this.animationAudioClipDicionary = AnimationSFXDictionaryList.humanAudioDictionary;
+        this.animationAudioClipDictionary = AnimationSFXDictionaryList.maleHumanAudioDictionary;
     }
 
     public AllyStats(StatsWrapper wrapper) : base(wrapper.key)
@@ -94,7 +94,7 @@ public class AllyStats : Stats
 
         combatActionArray = new CombatActionArray(this, SaveBlueprint.extractCombatActionsFromJson(this, wrapper.combatActions));
         equippedItems = new EquippedItems(this, SaveBlueprint.extractEquippedItemsFromJson(wrapper.currentEquipment));
-        this.animationAudioClipDicionary = AnimationSFXDictionaryList.humanAudioDictionary;
+        this.animationAudioClipDictionary = AnimationSFXDictionaryList.maleHumanAudioDictionary;
     }
 
     #endregion

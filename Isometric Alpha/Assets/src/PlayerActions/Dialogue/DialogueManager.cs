@@ -961,6 +961,33 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
+                case "playdelayedsfx":
+                case "playsfxwithdelay":
+
+                    string npcSFXArgs = getArgument(buffer, Constants.indexZero);
+                    intParameter = getArgumentInt(buffer, Constants.indexOne);
+
+                    string audioClip = "";
+
+                    switch (npcSFXArgs.ToLower().Replace(" ",""))
+                    {
+                        case "whip":
+                            audioClip = AudioClipList.whipAttackSound;
+                            break;
+                        default:
+                            audioClip = npcSFXArgs;
+                            break;
+                    }
+
+                    secondsToWait = ((float) intParameter)/1000f;
+
+                    StartCoroutine(waitThenPlaySFX(secondsToWait, audioClip));
+
+                    continueStory();
+
+                    break;
+
+
                 case "adjustgridsquare":
 
                     Facing facingDirection = State.playerFacing.getFacing();
@@ -1614,6 +1641,20 @@ public class DialogueManager : MonoBehaviour
         }
 
         playAnimation(animationManager);
+    }
+
+    private static IEnumerator waitThenPlaySFX(float secondsToWait, string audioClip)
+    {
+        float timeWaited = 0f;
+
+        while(timeWaited <= secondsToWait)
+        {
+            yield return null;
+
+            timeWaited += Time.deltaTime;
+        }
+
+        AudioManager.playSFX(audioClip);
     }
 }
 
