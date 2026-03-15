@@ -523,12 +523,7 @@ public class AudioManager : MonoBehaviour
         currentMusicPath = "";
         TransitionManager.ChangeAreaMusic.AddListener(playNextAreaMusic);
 
-        masterVolumePlayerSetting = volumeMaximum;
-
-        musicVolumePlayerSetting = volumeMaximum;
-        sfxVolumePlayerSetting = volumeMaximum;
-        voiceVolumePlayerSetting = volumeMaximum;
-        footstepVolumePlayerSetting = volumeMaximum; 
+        Config.readConfig();
 
         playLeftFootstep = true;
         playSFXOnNextHeartBeat = true;

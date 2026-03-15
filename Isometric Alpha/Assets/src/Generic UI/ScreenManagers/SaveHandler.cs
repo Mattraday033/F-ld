@@ -33,9 +33,6 @@ public class SaveHandler : ScreenManager, IEscapable
 		return sWhitespace.Replace(input, replacement);
 	}
 
-	private const string fileExtension = ".json";
-    private const string fileExtensionWithoutPeriod = "json";
-
     public TMP_InputField saveNameField;
     public Button saveButton;
     public BinaryPanelPopUpButton overwriteButton;
@@ -371,7 +368,7 @@ public class SaveHandler : ScreenManager, IEscapable
 	{
 		string json = JsonConvert.SerializeObject(blueprint);
 
-		File.WriteAllText(Application.persistentDataPath + "/" + blueprint.saveName + fileExtension, json);
+		File.WriteAllText(PrefabNames.savesFolder + blueprint.saveName + Constants.jsonFileExtension, json);
 
 		createSavedGameList();
 
@@ -400,29 +397,29 @@ public class SaveHandler : ScreenManager, IEscapable
 		new LoadSaveFile(topSave).execute();
 	}	
 
-	public static SaveBlueprint getDataFromSaveFile(string saveName)
-	{
-        SaveBlueprint output = null;
+	// public static SaveBlueprint getDataFromSaveFile(string saveName)
+	// {
+    //     SaveBlueprint output = null;
 
-		if (File.Exists(Application.persistentDataPath + "/" + saveName + fileExtension))
-		{
-			string jsonString = File.ReadAllText(Application.persistentDataPath + "/" + saveName + fileExtension);
+	// 	if (File.Exists(Application.persistentDataPath + "/" + saveName + Constants.jsonFileExtension))
+	// 	{
+	// 		string jsonString = File.ReadAllText(Application.persistentDataPath + "/" + saveName + Constants.jsonFileExtension);
 
-            try
-            {
-                output = JsonConvert.DeserializeObject<SaveBlueprint>(jsonString);
-            } catch(Exception e)
-            {
+    //         try
+    //         {
+    //             output = JsonConvert.DeserializeObject<SaveBlueprint>(jsonString);
+    //         } catch(Exception e)
+    //         {
                 
-            }
-		}
+    //         }
+	// 	}
 
-        return output;
-	}
+    //     return output;
+	// }
 
     public static void deleteSaveFile(string saveFileName)
     {
-        File.Delete(Application.persistentDataPath + "/" + saveFileName + fileExtension);
+        File.Delete(Application.persistentDataPath + "/" + saveFileName + Constants.jsonFileExtension);
 
         saveGameList.Remove(saveFileName);
 	}
@@ -444,29 +441,54 @@ public class SaveHandler : ScreenManager, IEscapable
 		return saveGameBluepreints;
 	}
 
-	public static void createSavedGameList(bool skipInvokeCall = false) //side effect: will update all saveblueprint.saveName's
-	{
-		string[] saveFiles = Directory.GetFiles(Application.persistentDataPath + "/");
-		saveGameList = new Dictionary<string, SaveBlueprint>();
-
-		foreach (string saveFilePath in saveFiles)
-		{
-			if (!String.Equals(saveFilePath.Split(".")[1], fileExtensionWithoutPeriod, StringComparison.OrdinalIgnoreCase))
+    private static void moveSaveFilesToSaveFolder() // Temporary
+    {
+        string[] filesInRootFolder = Directory.GetFiles(PrefabNames.rootGameFolder);
+    
+        foreach(string filePath in filesInRootFolder)
+        {
+            if (!Json.fileIsJson(filePath))
 			{
 				continue;
 			}
 
-			string[] saveFilePathParts = saveFilePath.Split("/");
-			string saveFileName = saveFilePathParts[saveFilePathParts.Length - 1];
+            string[] filePathParts = filePath.Split("/");
 
-			SaveBlueprint blueprint = getDataFromSaveFile(saveFileName.Split(".")[0]);
+            try
+            {
+                File.Move(filePath, PrefabNames.savesFolder + filePathParts[filePathParts.Length-1]);
+            } catch(Exception e)
+            {
+                
+            }
+        }
+    }
+
+	public static void createSavedGameList(bool skipInvokeCall = false) //side effect: will update all saveblueprint.saveName's
+	{
+        moveSaveFilesToSaveFolder();
+
+		string[] saveFiles = Directory.GetFiles(PrefabNames.savesFolder);
+		saveGameList = new Dictionary<string, SaveBlueprint>();
+
+		foreach (string saveFilePath in saveFiles)
+		{
+			if (!String.Equals(saveFilePath.Split(".")[1], Constants.jsonFileExtensionWithoutPeriod, StringComparison.OrdinalIgnoreCase))
+			{
+				continue;
+			}
+
+			// string[] saveFilePathParts = saveFilePath.Split("/");
+			// string saveFileName = saveFilePathParts[saveFilePathParts.Length - 1];
+
+			SaveBlueprint blueprint = Json.getObjectFromJSON<SaveBlueprint>(saveFilePath);
 
             if(blueprint == null)
             {
                 continue;
             }
 
-			blueprint.saveName = saveFileName.Replace(fileExtension, ""); 
+			// blueprint.saveName = saveFileName.Replace(Constants.jsonFileExtension, ""); 
 
 			if (nameMeetsAutosaveCriteria(blueprint.saveName) && blueprint.saveNumber >= 0)
 			{
@@ -561,5 +583,14 @@ public class SaveHandler : ScreenManager, IEscapable
     public override KeyCode getExitKeyCode()
     {
         return KeyBindingList.loadScreenKey;
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeSaveHandler()
+    {
+        if(!Directory.Exists(PrefabNames.savesFolder))
+        {
+            Directory.CreateDirectory(PrefabNames.savesFolder);
+        }
     }
 }

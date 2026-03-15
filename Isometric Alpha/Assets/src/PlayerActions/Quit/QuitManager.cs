@@ -7,8 +7,7 @@ public class QuitManager : MonoBehaviour
 
 	public void quitButtonPress()  
 	{
-		Debug.Log("Quitting");
-
+        Config.writeConfig();
 
         Application.Quit();
 	}

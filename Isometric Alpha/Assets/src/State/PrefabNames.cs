@@ -188,6 +188,19 @@ public static class PrefabNames
 
     #endregion
 
+    public readonly static string rootGameFolder = Application.persistentDataPath + "/";
+
+    #region Saves
+    public readonly static string savesFolder = rootGameFolder + "Saves/";
+
+    #endregion
+
+    #region Config
+    public readonly static string configFolder = rootGameFolder + "Config/";
+    public readonly static string configFile = configFolder + "Config" + Constants.jsonFileExtension;
+
+    #endregion
+
     #region UI
 
     public const string UIFolder = "UI/";

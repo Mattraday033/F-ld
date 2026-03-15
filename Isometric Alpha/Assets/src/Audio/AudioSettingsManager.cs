@@ -18,7 +18,7 @@ public class AudioSettingsManager : MonoBehaviour
 
     private bool duringAwake = false;
 
-    private void Awake()
+    private void OnEnable()
     {
         duringAwake = true;
 
