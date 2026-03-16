@@ -36,6 +36,7 @@ public class KeyBindingSettingsManager : MonoBehaviour
     public static KeyBind keybindToOverwrite = null;
 
     public GameObject unassignedKeybindsWarning;
+    public GameObject clickToExitMessage;
 
     private void Awake()
     {
@@ -87,72 +88,87 @@ public class KeyBindingSettingsManager : MonoBehaviour
 
         combatKeySection.createKeybindButtons("Combat", KeyBindingList.getCombatKeybindSection());
 
-        scrollbar.size = 0.1f;
+        GameObject actionWheelKeybindSectionGO = Instantiate(Resources.Load<GameObject>(PrefabNames.keybindSection), scrollableArea);
+        KeybindingSection actionWheelKeySection = actionWheelKeybindSectionGO.GetComponent<KeybindingSection>();
+
+        actionWheelKeySection.createKeybindButtons("Action Wheel", KeyBindingList.getActionWheelKeybindSection());
     }
 
     void Update()
     {
+        scrollbar.size = 0.1f;
         KeyPressManager.updateKeyBools();
 
         if(listeningForKeyBinding() && !KeyPressManager.handlingPrimaryKeyPress)
         {
-            if(EscapeStack.getEscapableObjectsCount() > 0)
+            clickToExitMessage.SetActive(true);   
+
+            if((!CombatStateManager.inCombat && EscapeStack.getEscapableObjectsCount() > 0) || 
+                (CombatStateManager.inCombat && EscapeStack.getEscapableObjectsCount() > 2))
             {
+                clickToExitMessage.SetActive(false);   
+
                 if(KeyBindingList.continueUIKeyIsPressed())
                 {
                     BinaryDescisionPanel.AcceptBinaryDecision.Invoke();
+                    KeyPressManager.handlingPrimaryKeyPress = true;
                 } else if(KeyBindingList.settingsScreenOrBackKeyPressed())
                 {
                     EscapeStack.handleEscapePress();
+                    exitListeningModeWithoutChange();
+                    KeyPressManager.handlingPrimaryKeyPress = true;
                 }
 
                 return;
+            } else if(Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse1))
+            {
+                exitListeningModeWithoutChange();
             }
 
             KeyCode newKey = KeyCode.None;
 
-            if(Input.GetKeyDown(KeyCode.LeftAlt))
+            if(Input.GetKey(KeyCode.LeftAlt))
             {
                 newKey = KeyCode.LeftAlt;
             }
-            else if(Input.GetKeyDown(KeyCode.RightAlt))
+            else if(Input.GetKey(KeyCode.RightAlt))
             {
                 newKey = KeyCode.RightAlt;
             }
-            else if(Input.GetKeyDown(KeyCode.LeftShift))
+            else if(Input.GetKey(KeyCode.LeftShift))
             {
                 newKey = KeyCode.LeftShift;
             }
-            else if(Input.GetKeyDown(KeyCode.RightShift))
+            else if(Input.GetKey(KeyCode.RightShift))
             {
                 newKey = KeyCode.RightShift;
             }
-            else if(Input.GetKeyDown(KeyCode.LeftControl))
+            else if(Input.GetKey(KeyCode.LeftControl))
             {
                 newKey = KeyCode.LeftControl;
             }
-            else if(Input.GetKeyDown(KeyCode.RightControl))
+            else if(Input.GetKey(KeyCode.RightControl))
             {
                 newKey = KeyCode.RightControl;
-            } else if(Input.GetKeyDown(KeyCode.CapsLock))
+            } else if(Input.GetKey(KeyCode.CapsLock))
             {
                 newKey = KeyCode.CapsLock;
-            } else if(Input.GetKeyDown(KeyCode.Tab))
+            } else if(Input.GetKey(KeyCode.Tab))
             {
                 newKey = KeyCode.Tab;
-            } else if(Input.GetKeyDown(KeyCode.Escape))
+            } else if(Input.GetKey(KeyCode.Escape))
             {
                 newKey = KeyCode.Escape;
-            } else if(Input.GetKeyDown(KeyCode.UpArrow))
+            } else if(Input.GetKey(KeyCode.UpArrow))
             {
                 newKey = KeyCode.UpArrow;
-            } else if(Input.GetKeyDown(KeyCode.DownArrow))
+            } else if(Input.GetKey(KeyCode.DownArrow))
             {
                 newKey = KeyCode.DownArrow;
-            } else if(Input.GetKeyDown(KeyCode.LeftArrow))
+            } else if(Input.GetKey(KeyCode.LeftArrow))
             {
                 newKey = KeyCode.LeftArrow;
-            } else if(Input.GetKeyDown(KeyCode.RightArrow))
+            } else if(Input.GetKey(KeyCode.RightArrow))
             {
                 newKey = KeyCode.RightArrow;
             } else if(Input.inputString.Length > 0)
@@ -165,6 +181,9 @@ public class KeyBindingSettingsManager : MonoBehaviour
                 newKeyCode = newKey;
                 endListening();
             }
+        } else
+        {
+            clickToExitMessage.SetActive(false);   
         }
     }
 
@@ -183,6 +202,14 @@ public class KeyBindingSettingsManager : MonoBehaviour
     public static bool listeningForKeyBinding()
     {
         return currentKeyIndex != default(int);
+    }
+
+    public static void exitListeningModeWithoutChange()
+    {
+        currentKeyIndex = default;
+        newKeyCode = KeyCode.None;
+        keybindToOverwrite = null;
+        EnableAllKeyBindButtons.Invoke();
     }
 
     public void endListening()

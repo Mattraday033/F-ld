@@ -158,7 +158,8 @@ public enum KeyBindType {
                             Overworld = 1,
                             Dialogue = 2,
                             UI = 3,
-                            Combat = 4
+                            Combat = 4,
+                            ActionWheel = 5
 
                         }
 
@@ -255,7 +256,7 @@ public static class KeyBindingList
     {
         return new List<KeyBind>()
         {
-            acceptKey, acceptInputKey, lastScreenKey, characterScreenKey, inventoryScreenKey, partyScreenKey, journalScreenKey, loadScreenKey, settingsScreenKey, moveLeftKey, inspectKey, mapKey, worldMapKey, showFormulaKey, maxAmountKey, multiplyByTenAmountKey 
+            acceptKey, acceptInputKey, lastScreenKey, characterScreenKey, inventoryScreenKey, partyScreenKey, journalScreenKey, loadScreenKey, settingsScreenKey, moveLeftKey, moveRightKey, inspectKey, mapKey, worldMapKey, showFormulaKey, maxAmountKey, multiplyByTenAmountKey 
         };
     }
     #endregion
@@ -267,19 +268,30 @@ public static class KeyBindingList
     public readonly static KeyBind jumpMoveKey = new KeyBind("Jump Move", KeyCode.LeftShift, KeyBindType.Combat);
     public readonly static KeyBind combatSettingsScreenKey = new KeyBind("Settings Menu", KeyCode.Escape, KeyBindType.Combat); 
  
-    public readonly static KeyBind moveCounterClockwiseKey = new KeyBind("Action Wheel Counter Clockwise", KeyCode.A, KeyBindType.Combat);
-    public readonly static KeyBind moveClockwiseKey  = new KeyBind("Action Wheel Clockwise", KeyCode.D, KeyBindType.Combat);
-
     public static List<KeyBind> getCombatKeybindSection()
     {
         return new List<KeyBind>()
         {
-            combatSelectKey, combatDeselectKey, resolveTurnKey, jumpMoveKey, combatSettingsScreenKey, moveCounterClockwiseKey, moveClockwiseKey
+            combatSelectKey, combatDeselectKey, resolveTurnKey, jumpMoveKey, combatSettingsScreenKey
         };
     }
 
     #endregion
 
+    #region Action Wheel
+
+    public readonly static KeyBind moveCounterClockwiseKey = new KeyBind("Action Wheel Counter Clockwise", KeyCode.A, KeyBindType.ActionWheel);
+    public readonly static KeyBind moveClockwiseKey  = new KeyBind("Action Wheel Clockwise", KeyCode.D, KeyBindType.ActionWheel);
+
+    public static List<KeyBind> getActionWheelKeybindSection()
+    {
+        return new List<KeyBind>()
+        {
+            moveCounterClockwiseKey, moveClockwiseKey
+        };
+    }
+
+    #endregion
     public static bool settingsScreenOrBackKeyPressed()
     {
         if(CombatStateManager.inCombat)
@@ -306,9 +318,16 @@ public static class KeyBindingList
 
     public static bool continueUIKeyIsPressed()
     {
-        return Input.GetKey(interactKey.getCurrentKeyCode()) ||
-                Input.GetKey(acceptKey.getCurrentKeyCode()) ||
-                Input.GetKey(acceptInputKey.getCurrentKeyCode());
+        if(CombatStateManager.inCombat)
+        {
+            return Input.GetKey(combatSelectKey.getCurrentKeyCode());
+            
+        } else
+        {
+            return Input.GetKey(interactKey.getCurrentKeyCode()) ||
+                    Input.GetKey(acceptKey.getCurrentKeyCode()) ||
+                    Input.GetKey(acceptInputKey.getCurrentKeyCode());
+        }
     }
 
     public static bool screenNavigationButtonIsPressed()

@@ -123,7 +123,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
                 if (Input.anyKeyDown)
                 {
-                    if (Input.GetKey(KeyBindingList.backOutKey.getCurrentKeyCode()))
+                    if (Input.GetKey(KeyBindingList.combatDeselectKey.getCurrentKeyCode()))
                     {
                         abilityButtons[currentlySelectedAbilityIndex].disableCombatActionSelectorPreview();
 
@@ -748,6 +748,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         if (CombatStateManager.inCombat && CombatStateManager.whoseTurn != WhoseTurn.Start)
         {
             AudioManager.playChooseActorAbilityLocationSFX();
+            setPrompts();
         }
 
         addListeners();
@@ -772,7 +773,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
         if(selectPrompt != null)
         {
-            selectPrompt.text = "Select [" + KeyBindingList.combatSettingsScreenKey + "]";
+            selectPrompt.text = "Select [" + KeyBindingList.combatSelectKey + "]";
         }
     }
 

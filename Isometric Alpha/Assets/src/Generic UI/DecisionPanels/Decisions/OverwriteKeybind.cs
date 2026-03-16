@@ -46,10 +46,7 @@ public class OverwriteKeybind : IDecision
 
     public void backOut()
     {
-        KeyBindingSettingsManager.currentKeyIndex = default;
-        KeyBindingSettingsManager.newKeyCode = KeyCode.None;
         overwriteKeybindMessage = "";
-        KeyBindingSettingsManager.keybindToOverwrite = null;
-        KeyBindingSettingsManager.EnableAllKeyBindButtons.Invoke();
+        KeyBindingSettingsManager.exitListeningModeWithoutChange();
     }
 }

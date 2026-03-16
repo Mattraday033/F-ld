@@ -226,7 +226,7 @@ public class SelectorManager : MonoBehaviour
 		{
 			if (CombatStateManager.currentActivity == CurrentActivity.ChoosingActor)
 			{
-				instance.pressEPrompt = Instantiate(Resources.Load<GameObject>(PrefabNames.combatPressEPrompt), sprite.transform.GetChild(sprite.transform.childCount - 1));
+				instance.pressEPrompt = Instantiate(Resources.Load<GameObject>(PrefabNames.combatSelectPrompt), sprite.transform.GetChild(sprite.transform.childCount - 1));
 			}
 		}
 

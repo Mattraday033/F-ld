@@ -136,6 +136,7 @@ public static class KeyPressManager
                                         KeyBindingList.moveEastKey.getCurrentKeyCode() 
                                     };      
 
+        KeyBindingSettingsManager.EnableAllKeyBindButtons.RemoveListener(initializeKeyPressManager); 
         KeyBindingSettingsManager.EnableAllKeyBindButtons.AddListener(initializeKeyPressManager);  
     }
 
