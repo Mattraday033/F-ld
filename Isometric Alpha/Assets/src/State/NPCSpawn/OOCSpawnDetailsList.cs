@@ -88,7 +88,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch + 1, new Vector3Int(6, -2), facing: Facing.NorthEast));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -3), TutorialSequenceList.firstHostilityTutorialSequenceKey,
-                                                                          TutorialSequenceList.firstHostitilityTutorialSeenFlag));
+                                                                          TutorialSequenceList.firstHostilityTutorialSeenFlag));
 
         #region Str Tutorial
 
@@ -111,7 +111,7 @@ public static class OOCSpawnDetailsList
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -4), TutorialSequenceList.vaultableObjectTutorialSequenceKey,
                                                                           TutorialSequenceList.interactableObjectTutorialSeenFlag,
                                 new StartSpawningAllTrueFlagList(new string[] {  FlagNameList.choseDexterityAtStart,
-                                                                          TutorialSequenceList.firstHostitilityTutorialSeenFlag}),
+                                                                          TutorialSequenceList.firstHostilityTutorialSeenFlag}),
                                                                           Constants.indexZero));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -3), TutorialSequenceList.firstCunningTutorialSequenceKey,
@@ -142,7 +142,7 @@ public static class OOCSpawnDetailsList
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -4), TutorialSequenceList.observationTutorialSequenceKey,
                                                                           TutorialSequenceList.observationTutorialSeenFlag,
                         new StartSpawningAllTrueFlagList(new string[] {   FlagNameList.choseWisdomAtStart,
-                                                                          TutorialSequenceList.firstHostitilityTutorialSeenFlag}),
+                                                                          TutorialSequenceList.firstHostilityTutorialSeenFlag}),
                                                                           Constants.indexZero));
         #endregion
         #region Cha Tutorial
@@ -152,7 +152,7 @@ public static class OOCSpawnDetailsList
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(3, -4), TutorialSequenceList.leadershipTutorialSequenceKey,
                                                                           TutorialSequenceList.leadershipTutorialSeenFlag,
                         new StartSpawningAllTrueFlagList(new string[] {   FlagNameList.choseCharismaAtStart,
-                                                                          TutorialSequenceList.firstHostitilityTutorialSeenFlag}),
+                                                                          TutorialSequenceList.firstHostilityTutorialSeenFlag}),
                                                                           Constants.indexZero));
 
         list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(0, -6), PrefabNames.southDescendingRubble));
@@ -600,7 +600,7 @@ public static class OOCSpawnDetailsList
         list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl2FirstSecretDoor, areaName: ZoneKeyList.mineLvl2, sectionName: LocationNameList.section1a, index: Constants.indexOne));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -3), TutorialSequenceList.firstHostilityTutorialSequenceKey,
-                                                                          TutorialSequenceList.firstHostitilityTutorialSeenFlag));
+                                                                          TutorialSequenceList.firstHostilityTutorialSeenFlag));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1a, list);
 

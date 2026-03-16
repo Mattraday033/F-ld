@@ -70,7 +70,7 @@ public class Area
 			}
 		}
 
-        if(!Flags.getFlag(TutorialSequenceList.secondHostitilityTutorialSeenFlag))
+        if(!Flags.getFlag(TutorialSequenceList.secondHostilityTutorialSeenFlag))
         {
             PlayerOOCStateManager.waitingOnHostilityTutorial = true;
         }

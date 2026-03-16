@@ -43,7 +43,7 @@ public static class TutorialColliderSpawnDetailsList
         #region SECamp
         list = new List<MultiTutorialColliderSpawnInfo>();
 
-        list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campSouthEast, new Vector3Int(10,26),
+        list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campSouthEast, new Vector3Int(9,26),
                                                     TutorialSequenceList.questCounterTutorialSequenceKey,
                                                     TutorialSequenceList.questCounterTutorialSeenFlag,
                                                     Constants.sizeThree, Axis.DescendingX));

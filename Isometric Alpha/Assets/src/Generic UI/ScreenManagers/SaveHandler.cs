@@ -26,13 +26,6 @@ public class SaveHandler : ScreenManager, IEscapable
 
 	public const string cleanSlateSaveName = "cleanSlateSave";
 
-    private readonly static Regex sWhitespace = new Regex(@"\s+");
-	
-	public static string ReplaceWhitespace(string input, string replacement) 
-	{
-		return sWhitespace.Replace(input, replacement);
-	}
-
     public TMP_InputField saveNameField;
     public Button saveButton;
     public BinaryPanelPopUpButton overwriteButton;
@@ -396,26 +389,6 @@ public class SaveHandler : ScreenManager, IEscapable
 
 		new LoadSaveFile(topSave).execute();
 	}	
-
-	// public static SaveBlueprint getDataFromSaveFile(string saveName)
-	// {
-    //     SaveBlueprint output = null;
-
-	// 	if (File.Exists(Application.persistentDataPath + "/" + saveName + Constants.jsonFileExtension))
-	// 	{
-	// 		string jsonString = File.ReadAllText(Application.persistentDataPath + "/" + saveName + Constants.jsonFileExtension);
-
-    //         try
-    //         {
-    //             output = JsonConvert.DeserializeObject<SaveBlueprint>(jsonString);
-    //         } catch(Exception e)
-    //         {
-                
-    //         }
-	// 	}
-
-    //     return output;
-	// }
 
     public static void deleteSaveFile(string saveFileName)
     {

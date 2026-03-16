@@ -135,6 +135,7 @@ MonoBehaviour:
   acceptButton: {fileID: 0}
   closeButton: {fileID: 8663341281327413221}
   popupProgenitor: {fileID: 0}
+  doNoBold: 1
   dialogueGrid: {fileID: 8797329835569285508}
   choicesGrid: {fileID: 0}
 --- !u!114 &1780953927673760552
@@ -1023,7 +1024,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7939805721222443196}
   m_HandleRect: {fileID: 5261651320814444667}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

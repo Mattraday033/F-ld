@@ -183,7 +183,7 @@ With the two of us together, we might be able to get to the back of the hut and 
 
 === acceptedTutorial ===
 
-Good. I shall move the first bit of rubble so we can get past, then I'll follow your lead. And you'd best be ready for a fight, I'm not about to let them get away with hurting Slate.
+Good. I shall move the first bit of rubble so we can get past, then I'll follow your lead. And you'd best be ready for a fight. I'm not about to let them get away with hurting Slate.
 
 setToTrue(thatchRemovedTutorialRubble)
 activateQuestStep(Look for Thatch, Slate's fate.)

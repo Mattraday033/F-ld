@@ -91,7 +91,7 @@ public class PartyMember : IDescribable, IDescribableInBlocks
 		}
 	}
 
-    public static Sprite getPortrait(string name)
+    public static Sprite getPortrait(string name, bool allowNull = false)
     {
         if(name != null && name.Contains(PartyManager.playerMarker))
         {
@@ -110,6 +110,11 @@ public class PartyMember : IDescribable, IDescribableInBlocks
         }
 
         Sprite portrait = Resources.Load<Sprite>(PrefabNames.portraitFolder + name);
+
+        if(allowNull)
+        {
+            return portrait;
+        }
 
         if(portrait != null)
         {

@@ -89,6 +89,7 @@ public class LoadSaveFile : IDecision
             
             Flags.resetAllFlags();
             Flags.overwriteFlags(saveBlueprint.currentFlags);
+            TutorialFlags.checkForTutorialFlagsInNormalFlags();
 
             MovementManager.setFooting(saveBlueprint.onLeftFoot);
 

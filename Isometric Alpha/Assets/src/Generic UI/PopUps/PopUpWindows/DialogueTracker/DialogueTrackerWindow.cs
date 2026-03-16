@@ -8,6 +8,13 @@ using TMPro;
 
 public class DialogueTrackerWindow : PopUpWindow, IEscapable
 {
+    public bool doNoBold = false;
+
+    public GameObject speakerPortraitFrame;
+    public Image speakerPortrait;
+    public GameObject playerPortraitFrame;
+    public Image playerPortrait;
+
 	public ScrollableUIElement dialogueGrid;
 	public ScrollableUIElement choicesGrid;
 
@@ -26,25 +33,45 @@ public class DialogueTrackerWindow : PopUpWindow, IEscapable
         {
             TutorialSequenceStepTargetUIObject.createCutOutMask(transform);
         }
+
+        setPlayerPortrait();
 	}
+
+    public void setPlayerPortrait()
+    {
+        if(playerPortraitFrame != null && playerPortrait != null)
+        {
+            playerPortraitFrame.SetActive(true);
+            playerPortrait.sprite = PartyMember.getPortrait(State.playerPortraitName);
+        }
+    }
 
 	public void populateDialogue()
 	{
-		dialogueGrid.populatePanels(SpeechLog.getDialogueList());
+		populateDialogue(SpeechLog.getDialogueList());
 	}
 
 	public void populateDialogue(Conversation conversation)
 	{
-		dialogueGrid.populatePanels(conversation.getDialogueList());
+		populateDialogue(conversation.getDialogueList());
 	}
 
 	public void populateDialogue(List<DialogueLine> dialogueList)
 	{
+        updateSpeakerPortrait(dialogueList);
+
+        boldFirstLine(dialogueList);
+
 		dialogueGrid.populatePanels(dialogueList);
 	}
 
 	public void appendDialogue(List<DialogueLine> dialogueList)
 	{
+
+        updateSpeakerPortrait(dialogueList);
+
+        boldFirstLine(dialogueList);
+
 		dialogueGrid.appendPanels(dialogueList);
 	}
 
@@ -53,11 +80,51 @@ public class DialogueTrackerWindow : PopUpWindow, IEscapable
 		choicesGrid.populatePanels(choicesList);
 	}
 
+    public void updateSpeakerPortrait(List<DialogueLine> dialogueList)
+    {
+        if(dialogueList == null || 
+            dialogueList.Count <= 0 || 
+            Conversation.nameIsUpdate(dialogueList[0].speakerName))
+        {
+            return;
+        }
+
+        if(speakerPortraitFrame != null && speakerPortrait != null)
+        {
+            Sprite portrait = PartyMember.getPortrait(dialogueList[0].speakerName, allowNull: true);
+
+            if(portrait == null)
+            {
+                speakerPortraitFrame.SetActive(false);
+                return;
+            }
+
+            speakerPortraitFrame.SetActive(true);
+            speakerPortrait.sprite = portrait;
+        }
+    }
+
 	public override void closeButtonPress()
 	{
 		base.closeButtonPress();
 
 		PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+    }
+
+    private void boldFirstLine(List<DialogueLine> dialogueList)
+    {
+        if(doNoBold)
+        {
+            return;
+        }
+
+        if(dialogueList != null && dialogueList.Count > 0 && 
+            dialogueList[0].isBoldable())
+        {
+            DialogueLine.UnboldAllText.Invoke();
+
+            dialogueList[0].boldText();
+        }
     }
 
 	/*

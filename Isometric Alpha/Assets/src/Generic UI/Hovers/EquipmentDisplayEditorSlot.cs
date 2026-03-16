@@ -361,7 +361,10 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
 
     public override void OnPointerExit(PointerEventData eventData)
     {
-        MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldDestroyHoverIcon));
+        if(!InspectNode.inspecting)
+        {
+            MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldDestroyHoverIcon));
+        }
     }
 
     public void OnMouseEnter()

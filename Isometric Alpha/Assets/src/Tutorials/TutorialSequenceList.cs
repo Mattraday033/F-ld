@@ -28,7 +28,7 @@ public static class TutorialSequenceList
     public const string traitTutorialSeenFlag = "traitTutorialSequenceEntered";
 
     public const string skipThatchShackTutorialsFlag = "skipThatchShackTutorials";
-    public const string firstHostitilityTutorialSeenFlag = "firstHostitilityTutorialSequenceEntered";
+    public const string firstHostilityTutorialSeenFlag = "firstHostilityTutorialSequenceEntered";
 	public const string intimidateTutorialSeenFlag = "intimidateTutorialSequenceEntered";
 	public const string cunningTutorialSeenFlag = "cunningTutorialSequenceEntered";
 	public const string secondCunningTutorialSeenFlag = "secondCunningTutorialSequenceEntered";
@@ -36,7 +36,7 @@ public static class TutorialSequenceList
 	public const string leadershipTutorialSeenFlag = "leadershipTutorialSequenceEntered";
 	public const string interactableObjectTutorialSeenFlag = "interactableObjectTutorialSequenceEntered";
     public const string hiddenObjectsTutorialSeenFlag = "hiddenObjectsTutorialSequenceEntered";
-    public const string secondHostitilityTutorialSeenFlag = "secondHostitilityTutorialSequenceEntered";
+    public const string secondHostilityTutorialSeenFlag = "secondHostilityTutorialSequenceEntered";
 
     private const string characterScreenStatsTargetHash = "Character Screen Stats";
 
@@ -217,7 +217,7 @@ public static class TutorialSequenceList
 
         TutorialSequence firstHostilityTutorialSequence = new TutorialSequence(OOCActivity.walking, 
                                                                               doNoSkipCurrentActivityChange, 
-                                                                              firstHostitilityTutorialSeenFlag, 
+                                                                              firstHostilityTutorialSeenFlag, 
                                                                               new TutorialSequenceStep[] { 
                                                                                                             stepOne, 
                                                                                                             stepTwo, 
@@ -246,7 +246,7 @@ public static class TutorialSequenceList
                                                                 skipUnhighlight: unhighlight,
                                                                 createPopUpScreenBlocker: createPopUpScreenBlocker);
 
-        TutorialSequence secondHostilityTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, secondHostitilityTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo});
+        TutorialSequence secondHostilityTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, secondHostilityTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo});
 
         secondHostilityTutorialSequence.setSkipScript(new SkipTutorialScript());
         tutorialSequenceDictionary.Add(secondHostilityTutorialSequenceKey, secondHostilityTutorialSequence);

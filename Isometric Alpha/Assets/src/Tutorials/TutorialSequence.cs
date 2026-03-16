@@ -625,7 +625,7 @@ public class TutorialSequence
 
     public bool hasBeenSeen()
     {
-        return started || Flags.getFlag(tutorialSeenFlagName);
+        return started || TutorialFlags.getFlag(tutorialSeenFlagName);
     }
 
     public void moveToNextStep()
@@ -702,7 +702,7 @@ public class TutorialSequence
 
             OOCUIManager.enableAllOOCUIButtons();
 
-            Flags.setFlag(tutorialSeenFlagName, true);
+            TutorialFlags.setFlag(tutorialSeenFlagName, true);
 
             currentTutorialSequence = null;
             TutorialSequenceStep.hashFound = false;
@@ -960,27 +960,27 @@ public class TutorialSequence
 
         switch (tutorialSeenFlagName)
         {
-            case TutorialSequenceList.firstHostitilityTutorialSeenFlag:
+            case TutorialSequenceList.firstHostilityTutorialSeenFlag:
             case TutorialSequenceList.intimidateTutorialSeenFlag:
             case TutorialSequenceList.cunningTutorialSeenFlag:
             case TutorialSequenceList.secondCunningTutorialSeenFlag:
             case TutorialSequenceList.observationTutorialSeenFlag:
             case TutorialSequenceList.leadershipTutorialSeenFlag:
             case TutorialSequenceList.interactableObjectTutorialSeenFlag:
-                return Flags.getFlag(TutorialSequenceList.skipThatchShackTutorialsFlag);
+                return TutorialFlags.getFlag(TutorialSequenceList.skipThatchShackTutorialsFlag);
             case TutorialSequenceList.hiddenObjectsTutorialSeenFlag:
 
-                if (Flags.getFlag(FlagNameList.gotLeavesForBalint) || State.terrainHidden)
+                if (TutorialFlags.getFlag(FlagNameList.gotLeavesForBalint) || State.terrainHidden)
                 {
-                    Flags.setFlag(TutorialSequenceList.hiddenObjectsTutorialSeenFlag, true);
+                    TutorialFlags.setFlag(TutorialSequenceList.hiddenObjectsTutorialSeenFlag, true);
                 }
 
-                if (!Flags.getFlag(FlagNameList.givenTaskByBalint))
+                if (!TutorialFlags.getFlag(FlagNameList.givenTaskByBalint))
                 {
                     return true;
                 }
 
-                return Flags.getFlag(TutorialSequenceList.hiddenObjectsTutorialSeenFlag);
+                return TutorialFlags.getFlag(TutorialSequenceList.hiddenObjectsTutorialSeenFlag);
         }
 
         return false;

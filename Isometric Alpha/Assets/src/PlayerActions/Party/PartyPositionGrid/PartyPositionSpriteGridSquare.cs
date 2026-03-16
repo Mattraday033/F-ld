@@ -44,14 +44,14 @@ public class PartyPositionSpriteGridSquare : PartyPositionGridSquare, IPointerDo
 
     public override void determineButtonEnabled()
     {
-        if (characterInSquare != null && characterInSquare != PartyManager.getPlayerStats())
-        {
+        // if (characterInSquare != null && characterInSquare != PartyManager.getPlayerStats())
+        // {
             button.enabled = true;
-        }
-        else
-        {
-            button.enabled = false;
-        }
+        // }
+        // else
+        // {
+            // button.enabled = false;
+        // }
     }
 
     private void resizeCollider()
@@ -91,7 +91,7 @@ public class PartyPositionSpriteGridSquare : PartyPositionGridSquare, IPointerDo
 
     public override void handleButtonPress()
     {
-        if (characterInSquare != null)
+        if (characterInSquare != null && !characterInSquare.getName().Contains(PartyManager.playerMarker))
         {
             partyEditor.removeCharacter(characterInSquare);
         }

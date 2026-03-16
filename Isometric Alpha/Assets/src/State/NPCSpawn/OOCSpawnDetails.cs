@@ -270,7 +270,7 @@ public class TutorialColliderSpawnDetails : OOCSpawnDetails
 
     private bool shouldNotSpawn()
     {
-        return Flags.getFlag(seenFlagName) ||
+        return TutorialFlags.getFlag(seenFlagName) ||
                 (startSpawningFlagList != null && !startSpawningFlagList.evaluateFlags())
                 || (monsterDefeatKeyIndex >= 0 && !MonsterDefeatKeysList.monsterIsDefeated(monsterDefeatKeyIndex));
     }

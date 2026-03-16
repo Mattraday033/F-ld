@@ -15,7 +15,7 @@ public class PreventTutorialsAfterBatsKilledScript : QuestStepActivationScript
 {
     public override void runScript()
     {
-        Flags.setFlag(TutorialSequenceList.firstHostitilityTutorialSeenFlag, true);
+        Flags.setFlag(TutorialSequenceList.firstHostilityTutorialSeenFlag, true);
 
         if(SecretDoorFlags.secretDoorHasBeenDiscovered(SecretDoorKeyList.wisTutorialSecretDoor))
         {

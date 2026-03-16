@@ -6,6 +6,107 @@ using System.Linq;
 using UnityEngine;
 using Newtonsoft.Json;
 
+public struct TutorialFlagWrapper
+{
+
+    public bool equippableItemTutorialSeen;
+    public bool formationPopUpTutorialSeen;
+    public bool addingAbilitiesTutorialSeen;
+
+    public bool combatTutorialSeen;
+    public bool traitTutorialSeen;
+
+    public bool skipThatchShackTutorialsFlag;
+	public bool intimidateTutorialSeen;
+	public bool cunningTutorialSeen;
+	public bool secondCunningTutorialSeen;
+	public bool observationTutorialSeen;
+	public bool leadershipTutorialSeen;
+	public bool interactableObjectTutorialSeen;
+    public bool hiddenObjectsTutorialSeen;
+    public bool firstHostilityTutorialSeen;
+    public bool secondHostilityTutorialSeen;
+
+    public bool movableObjectTutorialSeen;
+
+    public bool questCounterTutorialSeen;
+
+    public bool playerLevelUpTutorialSeen;
+
+    public bool exuberanceCostTutorialSeen;
+    public bool traitCostTutorialSeen;
+
+    public static TutorialFlagWrapper buildFromCurrentSettings()
+    {
+        return new TutorialFlagWrapper()
+        {
+            equippableItemTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.equippableItemTutorialSeenFlag),
+            formationPopUpTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.formationPopUpTutorialSeenFlag),
+            addingAbilitiesTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.addingAbilitiesTutorialSeenFlag),
+
+            combatTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.combatTutorialSeenFlag),
+            traitTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.traitTutorialSeenFlag),
+
+            skipThatchShackTutorialsFlag = TutorialFlags.getFlag(TutorialSequenceList.skipThatchShackTutorialsFlag),
+            intimidateTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.intimidateTutorialSeenFlag),
+            cunningTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.cunningTutorialSeenFlag),
+            secondCunningTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.secondCunningTutorialSeenFlag),
+            observationTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.observationTutorialSeenFlag),
+            leadershipTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.leadershipTutorialSeenFlag),
+            interactableObjectTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.interactableObjectTutorialSeenFlag),
+            hiddenObjectsTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.hiddenObjectsTutorialSeenFlag),
+            firstHostilityTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.firstHostilityTutorialSeenFlag),
+            secondHostilityTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.secondHostilityTutorialSeenFlag),
+
+            movableObjectTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.movableObjectTutorialSeenFlag),
+
+            questCounterTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.questCounterTutorialSeenFlag),
+
+            playerLevelUpTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.playerLevelUpTutorialSeenFlag),
+
+            exuberanceCostTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.exuberanceCostTutorialSeenFlag),
+            traitCostTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.traitCostTutorialSeenFlag),
+        };
+    }
+
+    public void useForSettings()
+    {
+        Dictionary<string, bool> newTutorialFlags = new Dictionary<string, bool>()
+        {
+            [TutorialSequenceList.equippableItemTutorialSeenFlag] = equippableItemTutorialSeen,
+            [TutorialSequenceList.formationPopUpTutorialSeenFlag] = formationPopUpTutorialSeen,
+            [TutorialSequenceList.addingAbilitiesTutorialSeenFlag] = addingAbilitiesTutorialSeen,
+
+            [TutorialSequenceList.combatTutorialSeenFlag] = combatTutorialSeen,
+            [TutorialSequenceList.traitTutorialSeenFlag] = traitTutorialSeen,
+            [TutorialSequenceList.skipThatchShackTutorialsFlag] = skipThatchShackTutorialsFlag,
+            [TutorialSequenceList.intimidateTutorialSeenFlag] = intimidateTutorialSeen,
+            [TutorialSequenceList.cunningTutorialSeenFlag] = cunningTutorialSeen,
+            [TutorialSequenceList.secondCunningTutorialSeenFlag] = secondCunningTutorialSeen,
+            [TutorialSequenceList.observationTutorialSeenFlag] = observationTutorialSeen,
+            [TutorialSequenceList.leadershipTutorialSeenFlag] = leadershipTutorialSeen,
+            [TutorialSequenceList.interactableObjectTutorialSeenFlag] = interactableObjectTutorialSeen,
+            [TutorialSequenceList.hiddenObjectsTutorialSeenFlag] = hiddenObjectsTutorialSeen,
+
+            [TutorialSequenceList.firstHostilityTutorialSeenFlag] = firstHostilityTutorialSeen,
+            [TutorialSequenceList.secondHostilityTutorialSeenFlag] = secondHostilityTutorialSeen,
+
+            [TutorialSequenceList.movableObjectTutorialSeenFlag] = movableObjectTutorialSeen,
+
+            [TutorialSequenceList.questCounterTutorialSeenFlag] = questCounterTutorialSeen,
+
+            [TutorialSequenceList.playerLevelUpTutorialSeenFlag] = playerLevelUpTutorialSeen,
+
+            [TutorialSequenceList.exuberanceCostTutorialSeenFlag] = exuberanceCostTutorialSeen,
+            [TutorialSequenceList.traitCostTutorialSeenFlag] = traitCostTutorialSeen
+        };
+
+        TutorialFlags.overwriteFlags(newTutorialFlags);
+
+    }
+
+}
+
 public struct AudioSettingsWrapper
 {
     public float masterVolumePlayerSetting;
@@ -23,6 +124,16 @@ public struct AudioSettingsWrapper
         this.voiceVolumePlayerSetting = voiceVolumePlayerSetting;        
         this.footstepVolumePlayerSetting = footstepVolumePlayerSetting;    
     }    
+
+    public void useForSettings()
+    {
+        AudioManager.masterVolumePlayerSetting = masterVolumePlayerSetting;
+
+        AudioManager.musicVolumePlayerSetting = musicVolumePlayerSetting;        
+        AudioManager.sfxVolumePlayerSetting = sfxVolumePlayerSetting;        
+        AudioManager.voiceVolumePlayerSetting = voiceVolumePlayerSetting;        
+        AudioManager.footstepVolumePlayerSetting = footstepVolumePlayerSetting;   
+    }
 
 }
 
@@ -118,7 +229,7 @@ public struct KeyBindingSettingsWrapper
             resolveTurnKey = KeyBindingList.resolveTurnKey.getCurrentKeyCode(),
             jumpMoveKey = KeyBindingList.jumpMoveKey.getCurrentKeyCode(),
             combatSettingsScreenKey = KeyBindingList.combatSettingsScreenKey.getCurrentKeyCode(),
-            
+
             moveCounterClockwiseKey = KeyBindingList.moveCounterClockwiseKey.getCurrentKeyCode(),
             moveClockwiseKey = KeyBindingList.moveClockwiseKey.getCurrentKeyCode()
         };
@@ -179,25 +290,26 @@ public struct KeyBindingSettingsWrapper
 
 public class ConfigFile
 {
+    public TutorialFlagWrapper tutorialFlags;
     public AudioSettingsWrapper audioSettings;
 
     public KeyBindingSettingsWrapper keybindSettings;
 
     public void useForSettings()
     {
-        AudioManager.masterVolumePlayerSetting = audioSettings.masterVolumePlayerSetting;
+        tutorialFlags.useForSettings();
 
-        AudioManager.musicVolumePlayerSetting = audioSettings.musicVolumePlayerSetting;        
-        AudioManager.sfxVolumePlayerSetting = audioSettings.sfxVolumePlayerSetting;        
-        AudioManager.voiceVolumePlayerSetting = audioSettings.voiceVolumePlayerSetting;        
-        AudioManager.footstepVolumePlayerSetting = audioSettings.footstepVolumePlayerSetting;        
+        audioSettings.useForSettings();
 
         keybindSettings.useForSettings();
+
     }
 
     public static ConfigFile build()
     {
         ConfigFile config = new ConfigFile();
+
+        config.tutorialFlags = TutorialFlagWrapper.buildFromCurrentSettings();
 
         config.audioSettings = new AudioSettingsWrapper(AudioManager.masterVolumePlayerSetting,
                                                         AudioManager._MusicVolumePlayerSetting,
@@ -214,6 +326,8 @@ public class ConfigFile
     {
         ConfigFile config = new ConfigFile();
 
+        config.tutorialFlags = TutorialFlagWrapper.buildFromCurrentSettings();
+
         config.audioSettings = new AudioSettingsWrapper(AudioManager.volumeMaximum,
                                                         AudioManager.volumeMaximum,
                                                         AudioManager.volumeMaximum,
@@ -221,6 +335,7 @@ public class ConfigFile
                                                         AudioManager.volumeMaximum);
 
         config.keybindSettings = KeyBindingSettingsWrapper.buildFromCurrentSettings();
+
 
         string json = JsonConvert.SerializeObject(config);
 

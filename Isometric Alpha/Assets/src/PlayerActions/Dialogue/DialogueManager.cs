@@ -118,7 +118,7 @@ public class DialogueManager : MonoBehaviour
 		mainCamera = Camera.main;
 		mainCM = GameObject.FindWithTag("MainVirtualCamera").GetComponent<CinemachineVirtualCamera>();
 		framingTransposer = mainCM.GetCinemachineComponent<CinemachineFramingTransposer>();
-//mainCM.m_Follow = PlayerMovement.getInstance().gameObject.transform;
+        //mainCM.m_Follow = PlayerMovement.getInstance().gameObject.transform;
 		//dialogueCanvas.worldCamera = mainCamera;
 	}
 
@@ -1660,13 +1660,13 @@ public class DialogueManager : MonoBehaviour
 
 public class Conversation
 {	
-	private const int maxLineCount = 500;
-	private const string infoName = "Info";
-	private const string earnedName = "Earned";
-	private const string obtainedName = "Obtained";
-	private const string removedName = "Removed";
-	private const string endOfDialogueMessage = "End of Dialogue";
-    private const string leftPartyMessage = " has left your party.";
+	public const int maxLineCount = 500;
+	public const string infoName = "Info";
+	public const string earnedName = "Earned";
+	public const string obtainedName = "Obtained";
+	public const string removedName = "Removed";
+	public const string endOfDialogueMessage = "End of Dialogue";
+    public const string leftPartyMessage = " has left your party.";
 
     private DialogueTrackerWindow attachedWindow;
 	
@@ -1773,6 +1773,19 @@ public class Conversation
 		return (DialogueLine) dialogueList[dialogueList.Count - 1];
 	}
 	
+    public static bool nameIsUpdate(string name)
+    {
+        switch(name)
+        {
+            case infoName:
+            case obtainedName:
+            case removedName:
+            case earnedName:
+                return true;
+            default:
+                return false;
+        }
+    }
 	
 }
 

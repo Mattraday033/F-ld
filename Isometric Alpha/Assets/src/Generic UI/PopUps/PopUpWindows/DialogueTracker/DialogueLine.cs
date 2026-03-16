@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DialogueLine : IDescribable
 {
+    public readonly static UnityEvent UnboldAllText = new UnityEvent();
+
+    private const string boldTextStart = "<b>";
+    private const string boldTextEnd = "</b>";
+
+    private DialogueDescriptionPanel dialoguePanel;
+
 	public string speakerName;
 	public string contents;
 
@@ -29,6 +37,32 @@ public class DialogueLine : IDescribable
 	{
 		return speakerName;
 	}
+
+    public bool isBoldable()
+    {
+        return !Conversation.nameIsUpdate(speakerName);
+    }
+
+    public void boldText()
+    {
+        speakerName = boldTextStart + speakerName + boldTextEnd;
+        contents = boldTextStart + contents + boldTextEnd;
+
+        UnboldAllText.AddListener(unboldText);
+    }
+
+    public void unboldText()
+    {
+        UnboldAllText.RemoveListener(unboldText);
+    
+        speakerName = speakerName.Replace(boldTextStart, "").Replace(boldTextEnd, "");
+        contents = contents.Replace(boldTextStart, "").Replace(boldTextEnd, "");
+
+        if(dialoguePanel != null)
+        {
+            describeSelfRow(dialoguePanel);
+        }
+    }
 
 	public bool ineligible()
 	{
@@ -67,7 +101,7 @@ public class DialogueLine : IDescribable
 
 	public void describeSelfRow(DescriptionPanel panel)
 	{
-		DialogueDescriptionPanel dialoguePanel = (DialogueDescriptionPanel)panel;
+		dialoguePanel = (DialogueDescriptionPanel)panel;
 
 		dialoguePanel.setObjectBeingDescribed(this);
 		DescriptionPanel.setText(dialoguePanel.loreDescriptionText, getName() + " :  " + contents);
