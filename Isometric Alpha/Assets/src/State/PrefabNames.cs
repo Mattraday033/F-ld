@@ -184,6 +184,10 @@ public static class PrefabNames
     public const string dragAndDropItemIcon = "Drag And Drop Item Icon";
     public const string dragAndDropItemShopIcon = "Drag And Drop Item Shop Icon";
 
+    public const string keybindFolder = "KeyBinds/";
+    public const string keybindSection = keybindFolder + "KeyBinding Section";
+    public const string keybindButton = keybindFolder + "Keybind Buttons";
+
     public const string outlineMaterial = "Sprite-Outline-Material";
 
     #endregion

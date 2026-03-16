@@ -445,7 +445,7 @@ public class SelectorManager : MonoBehaviour
 	// 	}
 
 	// 	if (currentTarget.combatSprite.tag.Equals(LayerAndTagManager.playerTag) &&
-	// 	   Input.GetKey(KeyBindingList.combatAcceptChoiceKey) && !isMoving && !KeyPressManager.handlingPrimaryKeyPress)
+	// 	   Input.GetKey(KeyBindingList.combatSelectKey) && !isMoving && !KeyPressManager.handlingPrimaryKeyPress)
 	// 	{
 	// 		if (CombatStateManager.choosingRepositionTarget())
 	// 		{
@@ -482,7 +482,7 @@ public class SelectorManager : MonoBehaviour
 		}
 
 		if (currentTarget.combatSprite.tag.Equals(LayerAndTagManager.npcTag) &&
-		   Input.GetKey(KeyBindingList.combatAcceptChoiceKey) && !isMoving && !KeyPressManager.handlingPrimaryKeyPress)
+		   Input.GetKey(KeyBindingList.combatSelectKey.getCurrentKeyCode()) && !isMoving && !KeyPressManager.handlingPrimaryKeyPress)
 		{
 
 			if (CombatActionManager.finishedChoosingPartyMemberCombatActions() ||
@@ -576,7 +576,7 @@ public class SelectorManager : MonoBehaviour
                 return;
         }
 
-        if(heartBeatCount < heartBeatsToWait && !KeyBindingList.jumpMoveKeyIsPressed())
+        if(heartBeatCount < heartBeatsToWait && !Input.GetKey(KeyBindingList.jumpMoveKey.getCurrentKeyCode()))
         {
             heartBeatCount++;
             return;
@@ -593,7 +593,7 @@ public class SelectorManager : MonoBehaviour
         heartBeatCount = 0;
         isMoving = true;
 
-		if (KeyBindingList.jumpMoveKeyIsPressed() &&
+		if (Input.GetKey(KeyBindingList.jumpMoveKey.getCurrentKeyCode()) &&
 			currentSelector.singleTile &&
 			CombatStateManager.snappingToTargetDuringReposition())
 		{
@@ -609,25 +609,25 @@ public class SelectorManager : MonoBehaviour
 		if (isMoving)
 		{
 
-			if (Input.GetKey(KeyBindingList.moveNorthKey) && canMoveUp())
+			if (Input.GetKey(KeyBindingList.moveNorthKey.getCurrentKeyCode()) && canMoveUp())
 			{
 				currentSelector.setToLocation(new GridCoords(currentSelector.currentRow - 1, currentSelector.currentCol));
 				moved = true;
 
 			}
-			else if (Input.GetKey(KeyBindingList.moveSouthKey) && canMoveDown())
+			else if (Input.GetKey(KeyBindingList.moveSouthKey.getCurrentKeyCode()) && canMoveDown())
 			{
 				currentSelector.setToLocation(new GridCoords(currentSelector.currentRow + 1, currentSelector.currentCol));
 				moved = true;
 
 			}
-			else if (Input.GetKey(KeyBindingList.moveWestKey) && canMoveLeft())
+			else if (Input.GetKey(KeyBindingList.moveWestKey.getCurrentKeyCode()) && canMoveLeft())
 			{
 				currentSelector.setToLocation(new GridCoords(currentSelector.currentRow, currentSelector.currentCol - 1));
 				moved = true;
 
 			}
-			else if (Input.GetKey(KeyBindingList.moveEastKey) && canMoveRight())
+			else if (Input.GetKey(KeyBindingList.moveEastKey.getCurrentKeyCode()) && canMoveRight())
 			{
 				currentSelector.setToLocation(new GridCoords(currentSelector.currentRow, currentSelector.currentCol + 1));
 				moved = true;
@@ -699,7 +699,7 @@ public class SelectorManager : MonoBehaviour
 			GridCoords targetPosition = GridCoords.getDefaultCoords();
 			bool dontWrap = true;
 
-			if (Input.GetKey(KeyBindingList.moveSouthKey))
+			if (Input.GetKey(KeyBindingList.moveSouthKey.getCurrentKeyCode()))
 			{
 				verticalPriority = true;
 
@@ -711,7 +711,7 @@ public class SelectorManager : MonoBehaviour
 				}
 
 			}
-			else if (Input.GetKey(KeyBindingList.moveWestKey))
+			else if (Input.GetKey(KeyBindingList.moveWestKey.getCurrentKeyCode()))
 			{
 				verticalPriority = false;
 
@@ -723,7 +723,7 @@ public class SelectorManager : MonoBehaviour
 				}
 
 			}
-			else if (Input.GetKey(KeyBindingList.moveEastKey))
+			else if (Input.GetKey(KeyBindingList.moveEastKey.getCurrentKeyCode()))
 			{
 				verticalPriority = false;
 
@@ -1004,7 +1004,7 @@ public class SelectorManager : MonoBehaviour
 		Selector testSelector = currentSelector.clone();
 		bool dontMoveGameObject = false;
 
-		if (Input.GetKey(KeyBindingList.moveNorthKey))
+		if (Input.GetKey(KeyBindingList.moveNorthKey.getCurrentKeyCode()))
 		{
 			if (currentSelector.currentRow - 1 < CombatGrid.enemyRowUpperBounds)
 			{
@@ -1013,7 +1013,7 @@ public class SelectorManager : MonoBehaviour
 
 			testSelector.setToLocation(new GridCoords(currentSelector.currentRow - 1, currentSelector.currentCol), dontMoveGameObject);
 		}
-		else if (Input.GetKey(KeyBindingList.moveWestKey))
+		else if (Input.GetKey(KeyBindingList.moveWestKey.getCurrentKeyCode()))
 		{
 			if (currentSelector.currentCol - 1 < CombatGrid.colLeftBounds)
 			{
@@ -1023,7 +1023,7 @@ public class SelectorManager : MonoBehaviour
 			testSelector.setToLocation(new GridCoords(currentSelector.currentRow, currentSelector.currentCol - 1), dontMoveGameObject);
 
 		}
-		else if (Input.GetKey(KeyBindingList.moveSouthKey))
+		else if (Input.GetKey(KeyBindingList.moveSouthKey.getCurrentKeyCode()))
 		{
 			if (currentSelector.currentRow + 1 > CombatGrid.enemyRowLowerBounds)
 			{
@@ -1032,7 +1032,7 @@ public class SelectorManager : MonoBehaviour
 
 			testSelector.setToLocation(new GridCoords(currentSelector.currentRow + 1, currentSelector.currentCol), dontMoveGameObject);
 		}
-		else if (Input.GetKey(KeyBindingList.moveEastKey))
+		else if (Input.GetKey(KeyBindingList.moveEastKey.getCurrentKeyCode()))
 		{
 			if (currentSelector.currentCol + 1 > CombatGrid.colRightBounds)
 			{

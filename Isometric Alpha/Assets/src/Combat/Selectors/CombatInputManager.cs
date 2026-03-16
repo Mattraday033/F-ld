@@ -20,6 +20,11 @@ public class CombatInputManager : MonoBehaviour
     // Update is called once per frame
 	void Update()   //here for Key Input
 	{
+        if(KeyBindingSettingsManager.listeningForKeyBinding())
+        {
+            return;
+        }
+
 		KeyPressManager.updateKeyBools();
 
 		if (KeyPressManager.handlingPrimaryKeyPress || CombatStateManager.whoseTurn != WhoseTurn.Player)
@@ -29,7 +34,7 @@ public class CombatInputManager : MonoBehaviour
 
         PlayerInput.showFormulaToggleCheck();
 
-        if (Input.GetKey(KeyBindingList.showHideKeyBindingsListKey) && 
+        if (Input.GetKey(KeyBindingList.showHideKeyBindingsListKey.getCurrentKeyCode()) && 
             !KeyPressManager.handlingPrimaryKeyPress)
         {
             OnHideKeyBindingsList.Invoke();
@@ -46,7 +51,7 @@ public class CombatInputManager : MonoBehaviour
 			case CurrentActivity.Finished:
 			case CurrentActivity.ChoosingActor:
 
-                if (Input.GetKey(KeyBindingList.backOutKey2) && 
+                if (Input.GetKey(KeyBindingList.backOutKey.getCurrentKeyCode()) && 
                     PlayerCombatActionManager.playerHasActionsInQueue() && 
                     !KeyPressManager.handlingPrimaryKeyPress)
                 {
@@ -55,8 +60,8 @@ public class CombatInputManager : MonoBehaviour
                     return;
                 }
 
-                if((Input.GetKey(KeyBindingList.backOutKey1) || 
-                    (Input.GetKey(KeyBindingList.backOutKey2) && !PlayerCombatActionManager.playerHasActionsInQueue())) && 
+                if((Input.GetKey(KeyBindingList.settingsScreenKey.getCurrentKeyCode()) || 
+                    (Input.GetKey(KeyBindingList.backOutKey.getCurrentKeyCode()) && !PlayerCombatActionManager.playerHasActionsInQueue())) && 
                     !KeyPressManager.handlingPrimaryKeyPress)
                 {
                     escapeButton.spawnPopUp();
@@ -65,13 +70,13 @@ public class CombatInputManager : MonoBehaviour
                     return;
                 }
 
-                if (Input.GetKey(KeyBindingList.resolveTurnKey) && !KeyPressManager.handlingPrimaryKeyPress)
+                if (Input.GetKey(KeyBindingList.resolveTurnKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
                 {
                     KeyPressManager.handlingPrimaryKeyPress = true;
                     CombatStateManager.resolveTurn();
                 }
 
-				if (Input.GetKey(KeyBindingList.combatAcceptChoiceKey) && !SelectorManager.isMoving && !KeyPressManager.handlingPrimaryKeyPress)
+				if (Input.GetKey(KeyBindingList.combatSelectKey.getCurrentKeyCode()) && !SelectorManager.isMoving && !KeyPressManager.handlingPrimaryKeyPress)
 				{
 					SelectorManager.handleAllySelection();
 
@@ -82,7 +87,7 @@ public class CombatInputManager : MonoBehaviour
 
 			case CurrentActivity.ChoosingAbility:
 
-				if (SelectorManager.hasCurrentlyVisibleAbilityManager() && Input.GetKey(KeyBindingList.backOutKey2) && !KeyPressManager.handlingPrimaryKeyPress)
+				if (SelectorManager.hasCurrentlyVisibleAbilityManager() && Input.GetKey(KeyBindingList.backOutKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
 				{
 					SelectorManager.deselectAlly();
 
@@ -91,7 +96,7 @@ public class CombatInputManager : MonoBehaviour
 					KeyPressManager.handlingPrimaryKeyPress = true;
 				}
 
-				if (Input.GetKey(KeyBindingList.backOutKey1) && !KeyPressManager.handlingPrimaryKeyPress)
+				if (Input.GetKey(KeyBindingList.settingsScreenKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
                 {
                     escapeButton.spawnPopUp();
 
@@ -104,20 +109,20 @@ public class CombatInputManager : MonoBehaviour
 
 			case CurrentActivity.ChoosingLocation:
 
-				if (Input.GetKey(KeyBindingList.combatAcceptChoiceKey) && !KeyPressManager.handlingPrimaryKeyPress)
+				if (Input.GetKey(KeyBindingList.combatSelectKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
 				{
 					SelectorManager.handleChoosingLocation();
 					KeyPressManager.handlingPrimaryKeyPress = true;
 				}
 
-				if (SelectorManager.hasCurrentAbilityManager() && Input.GetKey(KeyBindingList.backOutKey2) && !KeyPressManager.handlingPrimaryKeyPress)
+				if (SelectorManager.hasCurrentAbilityManager() && Input.GetKey(KeyBindingList.backOutKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
                 {
                     SelectorManager.backOutOfAbilityMenu();
 
                     KeyPressManager.handlingPrimaryKeyPress = true;
                 }
 
-				if (Input.GetKey(KeyBindingList.backOutKey1) && !KeyPressManager.handlingPrimaryKeyPress)
+				if (Input.GetKey(KeyBindingList.settingsScreenKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
                 {
                     escapeButton.spawnPopUp();
 
@@ -129,20 +134,20 @@ public class CombatInputManager : MonoBehaviour
 
 			case CurrentActivity.ChoosingTertiary:
 
-				if (Input.GetKey(KeyBindingList.combatAcceptChoiceKey) && !KeyPressManager.handlingPrimaryKeyPress)
+				if (Input.GetKey(KeyBindingList.combatSelectKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
 				{
 					SelectorManager.handleChoosingTertiary();
 					KeyPressManager.handlingPrimaryKeyPress = true;
 				}
 
-				if (Input.GetKey(KeyBindingList.backOutKey2) && !KeyPressManager.handlingPrimaryKeyPress)
+				if (Input.GetKey(KeyBindingList.backOutKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
 				{
                     SelectorManager.backOutOfTertiaryLocationSelection();
 
 					KeyPressManager.handlingPrimaryKeyPress = true;
 				}
 
-				if (Input.GetKey(KeyBindingList.backOutKey1) && !KeyPressManager.handlingPrimaryKeyPress)
+				if (Input.GetKey(KeyBindingList.settingsScreenKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
                 {
                     escapeButton.spawnPopUp();
 
@@ -154,7 +159,7 @@ public class CombatInputManager : MonoBehaviour
 
 			case CurrentActivity.InEscapeMenu:
 
-                if(KeyBindingList.eitherBackoutKeyIsPressed() && 
+                if(KeyBindingList.settingsScreenOrBackKeyPressed() && 
                     !KeyPressManager.handlingPrimaryKeyPress)
                 {
                     EscapeStack.handleEscapePress();
@@ -172,7 +177,7 @@ public class CombatInputManager : MonoBehaviour
 
             case CurrentActivity.ResolveActionWarning:
 
-                if(KeyBindingList.eitherBackoutKeyIsPressed() && 
+                if(KeyBindingList.settingsScreenOrBackKeyPressed() && 
                     !KeyPressManager.handlingPrimaryKeyPress)
                 {
                     ResolveTurnWithNoActions.backOutOfCurrentDecision();
@@ -183,8 +188,8 @@ public class CombatInputManager : MonoBehaviour
                     return;
                 }
 
-				if ((Input.GetKey(KeyBindingList.combatAcceptChoiceKey) || 
-                        Input.GetKey(KeyBindingList.resolveTurnKey)) &&
+				if ((Input.GetKey(KeyBindingList.combatSelectKey.getCurrentKeyCode()) || 
+                        Input.GetKey(KeyBindingList.resolveTurnKey.getCurrentKeyCode())) &&
                          !KeyPressManager.handlingPrimaryKeyPress)
 				{
 					ResolveTurnWithNoActions.executeCurrentDecision();

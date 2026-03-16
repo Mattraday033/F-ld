@@ -38,7 +38,7 @@ public class StartingMenuManager : MonoBehaviour
 	{
 		KeyPressManager.updateKeyBools();
 
-        if (KeyBindingList.eitherBackoutKeyIsPressed() && !KeyPressManager.handlingPrimaryKeyPress && !CharacterCreationPopUpWindow.inNameInputField())
+        if (KeyBindingList.settingsScreenOrBackKeyPressed() && !KeyPressManager.handlingPrimaryKeyPress && !CharacterCreationPopUpWindow.inNameInputField())
 		{
             KeyPressManager.handlingPrimaryKeyPress = true;
 

@@ -22,31 +22,12 @@ public static class KeyPressManager
     }
 
 
-    public readonly static KeyCode[] WASDKeys = new KeyCode[] { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D };
+    public static KeyCode[] movementKeys;
 
-    public static bool WOnlyKeyPressed()
-    {
-        return Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D);
-    }
-	
-	public static bool AOnlyKeyPressed()
-	{
-		return !Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D);
-	}
-	
-	public static bool SOnlyKeyPressed()
-	{
-		return !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D);
-	}
-	
-	public static bool DOnlyKeyPressed()
-	{
-		return !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D);
-	}
 
 	public static KeyCode getFirstMovementKeyPressedDetectedInWASDOrder()
 	{
-        foreach(KeyCode keyCode in WASDKeys)
+        foreach(KeyCode keyCode in movementKeys)
         {
             if(Input.GetKey(keyCode))
             {
@@ -59,7 +40,7 @@ public static class KeyPressManager
 
     public static KeyCode getFirstNonBarredMovementKeyPressedDetectedInWASDOrder(List<KeyCode> barredMovementKeyCodes)
     {
-        foreach (KeyCode keyCode in WASDKeys)
+        foreach (KeyCode keyCode in movementKeys)
         {
             if (Input.GetKey(keyCode) && !barredMovementKeyCodes.Contains(keyCode))
             {
@@ -72,7 +53,7 @@ public static class KeyPressManager
 
     public static KeyCode getFirstMovementKeyPressedDetectedInWASDOrderSkippingGivenKey(KeyCode givenKey)
     {
-        foreach (KeyCode keyCode in WASDKeys)
+        foreach (KeyCode keyCode in movementKeys)
         {
             if (Input.GetKey(keyCode) && givenKey != keyCode)
             {
@@ -87,7 +68,7 @@ public static class KeyPressManager
     {
 		int movementKeysPressed = 0;
 
-		foreach(KeyCode keyCode in WASDKeys)
+		foreach(KeyCode keyCode in movementKeys)
 		{
 			if(Input.GetKey(keyCode))
 			{
@@ -109,7 +90,7 @@ public static class KeyPressManager
         {
             case OOCActivity.walking:
             case OOCActivity.inDialogue:
-                return KeyBindingList.revealKeyIsPressed() || Input.GetKey(KeyBindingList.hideTerrainKey);
+                return Input.GetKey(KeyBindingList.revealKey.getCurrentKeyCode()) || Input.GetKey(KeyBindingList.hideTerrainKey.getCurrentKeyCode());
             case OOCActivity.inUI:
             case OOCActivity.inMap:
             case OOCActivity.cunning:
@@ -143,4 +124,19 @@ public static class KeyPressManager
         }
     }
 	
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeKeyPressManager()
+    {
+        Config.initializeSettingsFromConfigFile();
+
+        movementKeys = new KeyCode[] { 
+                                        KeyBindingList.moveNorthKey.getCurrentKeyCode(), 
+                                        KeyBindingList.moveWestKey.getCurrentKeyCode(), 
+                                        KeyBindingList.moveSouthKey.getCurrentKeyCode(), 
+                                        KeyBindingList.moveEastKey.getCurrentKeyCode() 
+                                    };      
+
+        KeyBindingSettingsManager.EnableAllKeyBindButtons.AddListener(initializeKeyPressManager);  
+    }
+
 }

@@ -222,12 +222,12 @@ public class CunningManager : SkillManager
     {
         if (current > getMiddleOfRange())
         {
-            return (current - 1);
+            return current - 1;
         }
 
         if (current < getMiddleOfRange())
         {
-            return (current + 1);
+            return current + 1;
         }
 
         return current;
@@ -235,19 +235,19 @@ public class CunningManager : SkillManager
 
     public virtual void handleWASDMovement()
     {
-        if (Input.GetKey(KeyBindingList.moveNorthKey))
+        if (Input.GetKey(KeyBindingList.moveNorthKey.getCurrentKeyCode()))
         {
             moveCurrentSelectorNorthEast();
         }
-        else if (Input.GetKey(KeyBindingList.moveWestKey))
+        else if (Input.GetKey(KeyBindingList.moveWestKey.getCurrentKeyCode()))
         {
             moveCurrentSelectorNorthWest();
         }
-        else if (Input.GetKey(KeyBindingList.moveSouthKey))
+        else if (Input.GetKey(KeyBindingList.moveSouthKey.getCurrentKeyCode()))
         {
             moveCurrentSelectorSouthWest();
         }
-        else if (Input.GetKey(KeyBindingList.moveEastKey))
+        else if (Input.GetKey(KeyBindingList.moveEastKey.getCurrentKeyCode()))
         {
             moveCurrentSelectorSouthEast();
         }

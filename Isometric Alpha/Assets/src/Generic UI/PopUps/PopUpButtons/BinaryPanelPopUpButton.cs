@@ -12,7 +12,9 @@ public enum BinaryDescisionType {
                                     Retreat = 6, 
                                     FastTravel = 7, 
                                     RaiseStats = 8, 
-                                    ResolveWithoutActionsWarning = 9
+                                    ResolveWithoutActionsWarning = 9,
+                                    ResetKeybinds = 10,
+                                    OverwriteKeybind = 11
                                 }
 
 public class BinaryPanelPopUpButton : PopUpButton
@@ -78,6 +80,10 @@ public class BinaryPanelPopUpButton : PopUpButton
                 return new AddStatPoint(OverallUIManager.getCurrentPartyMember());
             case BinaryDescisionType.ResolveWithoutActionsWarning:
                 return new ResolveTurnWithNoActions();
+            case BinaryDescisionType.ResetKeybinds:
+                return new ResetKeybinds();                
+            case BinaryDescisionType.OverwriteKeybind:
+                return new OverwriteKeybind();
             default:
 				throw new IOException("Unknown BinaryDescisionType: " + decisionType.ToString());
 		}

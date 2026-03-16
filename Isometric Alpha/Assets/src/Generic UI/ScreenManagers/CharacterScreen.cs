@@ -84,7 +84,7 @@ public class CharacterScreen : ScreenManager, ICounter
 
     public override KeyCode getExitKeyCode()
     {
-        return KeyBindingList.characterScreenKey;
+        return KeyBindingList.characterScreenKey.getCurrentKeyCode();
     }
 
 }

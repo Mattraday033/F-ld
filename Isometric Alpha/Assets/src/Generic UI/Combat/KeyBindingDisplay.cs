@@ -6,55 +6,307 @@ using TMPro;
 
 public class KeyBindingDisplay : MonoBehaviour
 {
-    private const string hideKeyBindingListMessage = "Backspace: Hide Key Bindings";
-    private const string showKeyBindingListMessage = "Backspace: Show Key Bindings";    
-    private const string spaceBetweenKeyBindings = "   ";
-    private const string selectKeyBinding = "E: Select";
-    private const string escapeMenuKeyBinding = "Esc: Settings";
-    private const string exitKeyBinding = "Esc/R: Exit";
-    private const string backOutOfActionKeyBinding = "R: Back";
-    private const string backOutOfPopUpKeyBinding = "Esc/R: Back";
+    private static string hideKeyBindingListMessage
+    {
+        get
+        {
+            return KeyBindingList.showHideKeyBindingsListKey.ToString() + ": Hide Key Bindings";
+        }
+    }
+
+    private static string showKeyBindingListMessage
+    {
+        get
+        {
+            return KeyBindingList.showHideKeyBindingsListKey.ToString() + ": Show Key Bindings";
+        }
+    }
+
+    private static string spaceBetweenKeyBindings
+    {
+        get
+        {
+            return "   ";
+        }
+    }
+
+    private static string selectKeyBinding
+    {
+        get
+        {
+            string select = ": Select";
+
+            if(CombatStateManager.inCombat)
+            {
+                return KeyBindingList.combatSelectKey.ToString() + select;
+            } else
+            {
+                return KeyBindingList.interactKey.ToString() + select;
+            }
+        }
+    }
+
+    private static string escapeMenuKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.combatSettingsScreenKey.ToString() + ": Settings";
+        }
+    }
+
+    private static string exitKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.settingsScreenKey.ToString() + "/" + KeyBindingList.backOutKey.ToString() + ": Exit";
+        }
+    }
+
+    private static string deselectKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.combatDeselectKey.ToString() + ": Deselect";
+        }
+    }
+
+    private static string backOutOfActionKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.backOutKey.ToString() + ": Back";
+        }
+    }
+
+    private static string backOutOfPopUpKeyBinding
+    {
+        get
+        {
+            string back = ": Back";
+
+            if(CombatStateManager.inCombat)
+            {
+                return KeyBindingList.combatSettingsScreenKey.ToString() + "/" + KeyBindingList.combatDeselectKey.ToString() + back;
+            } else
+            {
+                return KeyBindingList.settingsScreenKey.ToString() + "/" + KeyBindingList.backOutKey.ToString() + back;
+            }
+        }
+    }
 
     #region In Combat Constants
 
-    private const string removeAbilityKeyBinding = "R: Unqueue Action";
-    private const string movementKeyBinding = "WASD: Move Selector";
+    private static string removeAbilityKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.combatDeselectKey.ToString() + ": Unqueue Action";
+        }
+    }
 
-    private const string cycleKeyBinding = "A/D/1-8: Cycle Actions";
-    private const string deselectAllyKeyBinding = "R: Deselect Ally";
-    private const string selectActionKeyBinding = "E: Select Action";
+    private static string movementKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.moveNorthKey.ToString() + "/" + 
+                    KeyBindingList.moveWestKey.ToString() + "/" + 
+                    KeyBindingList.moveSouthKey.ToString() + "/" + 
+                    KeyBindingList.moveEastKey.ToString() + ": Move Selector";
+        }
+    }
 
-    private const string nextTurnButtonPress = "Space: Resolve Turn";
+    private static string cycleKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.moveCounterClockwiseKey.ToString() + "/" + 
+                    KeyBindingList.moveClockwiseKey.ToString() + "/1-8: Cycle Actions";
+        }
+    }
+
+    private static string selectActionKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.combatSelectKey.ToString() + ": Select Action";
+        }
+    }
+
+    private static string nextTurnButtonPress
+    {
+        get
+        {
+            return KeyBindingList.resolveTurnKey.ToString() + ": Resolve Turn";
+        }
+    }
 
     #endregion
 
     #region Out Of Combat Constants
 
-    private const string useSkillKeyBinding = "Space: Use Skill";
-    private const string changeSkillKeyBinding = "1-2: Change Skill";
-    private const string quicksaveKeyBinding = "Q: Quicksave";
-    private const string mapKeyBinding = "M: Map";
-    private const string worldMapKeyBinding = "N: World Map";
-    private const string toggleTerrainKeyBinding = "F: Toggle Terrain"; 
-    private const string transcriptKeyBinding = "T: Transcript"; 
-    private const string highlightKeyBinding = "Shift: Highlight"; 
+    private static string useSkillKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.skillKey.ToString() + ": Use Skill";
+        }
+    }
 
-    private const string characterScreenKeyBinding = "C: Character"; 
-    private const string inventoryScreenKeyBinding = "I: Inventory"; 
-    private const string partyScreenKeyBinding = "P: Party"; 
-    private const string saveLoadKeyBinding = "L: Save/Load"; 
+    private static string changeSkillKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.cycleSkillAscendingKey.ToString() + "-" + KeyBindingList.cycleSkillDescendingKey.ToString() + ": Change Skill";
+        }
+    }
 
-    private const string continueKeyBinding = "E/Space: Continue";
-    private const string dialogueChoicesKeyBinding = "1-8: Select Dialogue"; 
+    private static string quicksaveKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.quicksaveKey.ToString() + ": Quicksave";
+        }
+    }
 
-    private const string leaveMapKeyBinding = "M/Esc: Exit";
-    private const string leaveWorldMapKeyBinding = "N/Esc: Exit";
+    private static string mapKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.mapKey.ToString() + ": Map";
+        }
+    }
 
-    private const string useActivatedSkillKeyBinding = "E: Use Skill";
+    private static string worldMapKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.worldMapKey.ToString() + ": World Map";
+        }
+    }
 
-    private const string moveSkillTargetKeyBinding = "WASD: Move Target";
+    private static string toggleTerrainKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.hideTerrainKey.ToString() + ": Toggle Terrain";
+        }
+    }
 
-    private const string leaveSkillKeyBinding = "Esc/Space: Exit Skill Mode";
+    private static string transcriptKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.transcriptKey.ToString() + ": Transcript";
+        }
+    }
+
+    private static string highlightKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.revealKey.ToString() + ": Highlight";
+        }
+    }
+
+    private static string characterScreenKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.characterScreenKey.ToString() + ": Character";
+        }
+    }
+
+    private static string inventoryScreenKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.inventoryScreenKey.ToString() + ": Inventory";
+        }
+    }
+
+    private static string partyScreenKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.partyScreenKey.ToString() + ": Party";
+        }
+    }
+
+    private static string saveLoadKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.loadScreenKey.ToString() + ": Save/Load";
+        }
+    }
+
+    private static string continueKeyBinding
+    {
+        get
+        {
+            string continueMsg = ": Continue";
+
+            if(CombatStateManager.inCombat)
+            {
+                return KeyBindingList.combatSelectKey.ToString() + "/" + KeyBindingList.resolveTurnKey.ToString() + continueMsg;
+            } else
+            {
+                return KeyBindingList.interactKey.ToString() + "/" + KeyBindingList.acceptKey.ToString() + continueMsg;
+            }
+        }
+    }
+
+    private static string dialogueChoicesKeyBinding
+    {
+        get
+        {
+            return "1-8: Select Dialogue";
+        }
+    }
+
+    private static string leaveMapKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.mapKey.ToString() + "/" + KeyBindingList.settingsScreenKey.ToString() + ": Exit";
+        }
+    }
+
+    private static string leaveWorldMapKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.worldMapKey.ToString() + "/" + KeyBindingList.settingsScreenKey.ToString() + ": Exit";
+        }
+    }
+
+    private static string useActivatedSkillKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.interactKey.ToString() + ": Use Skill";
+        }
+    }
+
+    private static string moveSkillTargetKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.moveNorthKey.ToString() + "/" + 
+                    KeyBindingList.moveWestKey.ToString() + "/" + 
+                    KeyBindingList.moveSouthKey.ToString() + "/" + 
+                    KeyBindingList.moveEastKey.ToString() + ": Move Selector";
+        }
+    }
+
+    private static string leaveSkillKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.settingsScreenKey.ToString() + "/" + 
+                    KeyBindingList.skillKey.ToString() + ": Exit Skill Mode";
+        }
+    }
 
     #endregion
 
@@ -129,7 +381,7 @@ public class KeyBindingDisplay : MonoBehaviour
                 addSpace();
                 displayText.text += selectActionKeyBinding;
                 addSpace();
-                displayText.text += deselectAllyKeyBinding;
+                displayText.text += deselectKeyBinding;
                 addSpace();
                 break;
             case CurrentActivity.ChoosingLocation:
@@ -138,7 +390,7 @@ public class KeyBindingDisplay : MonoBehaviour
                 addSpace();
                 displayText.text += selectKeyBinding;
                 addSpace();
-                displayText.text += backOutOfActionKeyBinding;
+                displayText.text += deselectKeyBinding;
                 addSpace();
                 break;
             case CurrentActivity.Finished:

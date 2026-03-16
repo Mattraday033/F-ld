@@ -67,7 +67,7 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 			{
 				if(currentRepositionActivity == CurrentRepositionActivity.ChoosingRepositionTarget)
 				{
-					if(KeyBindingList.eitherBackoutKeyIsPressed())
+					if(KeyBindingList.settingsScreenOrBackKeyPressed())
 					{
 						resetCurrentActivity();
 						resetRepositioningTypeAndActivity();
@@ -76,7 +76,7 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 					}
 				} else if(currentRepositionActivity == CurrentRepositionActivity.ChoosingNewLocation)
 				{
-					if(KeyBindingList.eitherBackoutKeyIsPressed()) 
+					if(KeyBindingList.settingsScreenOrBackKeyPressed()) 
 					{
 						deselectSingleAllyToMove();
 						
@@ -90,11 +90,11 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 			{
 				if(currentRepositionActivity == CurrentRepositionActivity.ChoosingNewLocation && 
 					combatantsRemainingToReposition() > 0 &&
-					Input.GetKey(KeyBindingList.combatAcceptChoiceKey))
+					Input.GetKey(KeyBindingList.combatSelectKey.getCurrentKeyCode()))
 				{
 					placeNextRepositionDetailsInList();
 					KeyPressManager.handlingPrimaryKeyPress = true;
-				} else if(KeyBindingList.eitherBackoutKeyIsPressed())
+				} else if(KeyBindingList.settingsScreenOrBackKeyPressed())
 				{
 					if(repositionDetailsList.Count == 0)
 					{

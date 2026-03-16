@@ -136,6 +136,6 @@ public class FormationHandler : ScreenManager, IPartyEditor, ICounter
 
     public override KeyCode getExitKeyCode()
     {
-        return KeyBindingList.partyScreenKey;
+        return KeyBindingList.partyScreenKey.getCurrentKeyCode();
     }
 }

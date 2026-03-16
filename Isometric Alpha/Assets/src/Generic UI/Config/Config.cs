@@ -52,7 +52,7 @@ public class ConfigFile
         AudioManager.voiceVolumePlayerSetting = audioSettings.voiceVolumePlayerSetting;        
         AudioManager.footstepVolumePlayerSetting = audioSettings.footstepVolumePlayerSetting;        
 
-        KeyBindingList.interactKey = keybindSettings.interactKey;
+        KeyBindingList.interactKey.setCurrentKeyCode(keybindSettings.interactKey);
     }
 
     public static ConfigFile build()
@@ -65,7 +65,7 @@ public class ConfigFile
                                                         AudioManager._VoiceVolumePlayerSetting,
                                                         AudioManager._FootstepVolumePlayerSetting);
 
-        config.keybindSettings = new KeyBindingSettingsWrapper(KeyBindingList.interactKey);
+        config.keybindSettings = new KeyBindingSettingsWrapper(KeyBindingList.interactKey.getCurrentKeyCode());
 
         return config;
     }

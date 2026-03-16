@@ -44,7 +44,7 @@ public class RetreatUIManager : SlotIconHover
         {
             KeyPressManager.updateKeyBools();
 
-            if (KeyBindingList.eitherBackoutKeyIsPressed() && !KeyPressManager.handlingPrimaryKeyPress)
+            if (KeyBindingList.settingsScreenOrBackKeyPressed() && !KeyPressManager.handlingPrimaryKeyPress)
             {
                 EscapeStack.handleEscapePress();
 

@@ -28,13 +28,13 @@ public class TutorialPopUpWindow : PageReaderPopUpWindow
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyBindingList.moveRightKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKeyDown(KeyBindingList.moveRightKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             KeyPressManager.handlingPrimaryKeyPress = true;
             populateNextPage();
         }
 
-        if (Input.GetKeyDown(KeyBindingList.moveLeftKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKeyDown(KeyBindingList.moveLeftKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             KeyPressManager.handlingPrimaryKeyPress = true;
             populatePreviousPage();
@@ -47,7 +47,7 @@ public class TutorialPopUpWindow : PageReaderPopUpWindow
 
         KeyPressManager.updateKeyBools();
 
-        if (KeyBindingList.eitherBackoutKeyIsPressed() && !KeyPressManager.handlingPrimaryKeyPress)
+        if (KeyBindingList.settingsScreenOrBackKeyPressed() && !KeyPressManager.handlingPrimaryKeyPress)
         {
             KeyPressManager.handlingPrimaryKeyPress = true;
             closeButtonPress();

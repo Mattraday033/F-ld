@@ -18,7 +18,7 @@ public class LoadScreenButton : PopUpButton
     {
 		KeyPressManager.updateKeyBools();
 		
-		if(KeyBindingList.eitherBackoutKeyIsPressed() && !KeyPressManager.handlingPrimaryKeyPress)
+		if(KeyBindingList.settingsScreenOrBackKeyPressed() && !KeyPressManager.handlingPrimaryKeyPress)
 		{
 			EscapeStack.handleEscapePress();
 		}

@@ -46,6 +46,10 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
     public DescriptionPanel parentDescriptionPanel;
     public Stats actionArraySource;
 
+    public TextMeshProUGUI counterClockwisePrompt;
+    public TextMeshProUGUI clockwisePrompt;
+    public TextMeshProUGUI selectPrompt;
+
     private int currentlySelectedAbilityIndex = 0;
 
     //[SerializeField]
@@ -119,7 +123,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
                 if (Input.anyKeyDown)
                 {
-                    if (Input.GetKey(KeyBindingList.backOutKey2))
+                    if (Input.GetKey(KeyBindingList.backOutKey.getCurrentKeyCode()))
                     {
                         abilityButtons[currentlySelectedAbilityIndex].disableCombatActionSelectorPreview();
 
@@ -187,14 +191,14 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
                         return;
                     }
 
-                    if (Input.GetKey(KeyBindingList.moveCounterClockwiseKey))
+                    if (Input.GetKey(KeyBindingList.moveCounterClockwiseKey.getCurrentKeyCode()))
                     {
                         moveSelectedButtonCounterClockwise();
                         KeyPressManager.handlingPrimaryKeyPress = true;
                         return;
                     }
 
-                    if (Input.GetKey(KeyBindingList.moveClockwiseKey))
+                    if (Input.GetKey(KeyBindingList.moveClockwiseKey.getCurrentKeyCode()))
                     {
                         moveSelectedButtonClockwise();
                         KeyPressManager.handlingPrimaryKeyPress = true;
@@ -747,6 +751,29 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         }
 
         addListeners();
+    }
+
+    private void setPrompts()
+    {
+        if(!CombatStateManager.inCombat)
+        {
+            return;
+        }
+
+        if(counterClockwisePrompt != null)
+        {
+            counterClockwisePrompt.text = "<< " + KeyBindingList.moveCounterClockwiseKey.ToString();
+        }
+
+        if(clockwisePrompt != null)
+        {
+            clockwisePrompt.text = KeyBindingList.moveClockwiseKey.ToString() + " >>";
+        }
+
+        if(selectPrompt != null)
+        {
+            selectPrompt.text = "Select [" + KeyBindingList.combatSettingsScreenKey + "]";
+        }
     }
 
     private void OnDestroy()

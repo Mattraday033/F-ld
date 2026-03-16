@@ -47,7 +47,7 @@ public class SlideShowManager : MonoBehaviour
 
     void Update()
     {
-        if ((KeyBindingList.continueUIKeyIsPressed() || KeyBindingList.eitherBackoutKeyIsPressed()) && !KeyPressManager.handlingPrimaryKeyPress)
+        if ((KeyBindingList.continueUIKeyIsPressed() || KeyBindingList.settingsScreenOrBackKeyPressed()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             KeyPressManager.handlingPrimaryKeyPress = true;
             toMainMenu.execute();

@@ -219,14 +219,14 @@ public class PlayerObject : MonoBehaviour
             case OOCActivity.walking:
                 if (PlayerMovement.canInteract())
                 {
-                    return "E: Interact";
+                    return KeyBindingList.interactKey.ToString() + ": Interact";
                 }
 
                 Collider2D npcCollider = PositionQuery.npcAtPosition(PlayerMovement.getColliderWorldPosition());
 
                 if (npcCollider != null && npcCollider.gameObject.tag.Equals(LayerAndTagManager.partyMemberTag))
                 {
-                    return "Z: Remove";
+                    return KeyBindingList.removePlacedCompanionMovableObjectKey.ToString() + ": Remove";
                 }
 
                 Collider2D moveableObjectCollider = PositionQuery.moveableObjectAtPosition(PlayerMovement.getColliderWorldPosition());
@@ -237,25 +237,28 @@ public class PlayerObject : MonoBehaviour
 
                     if (movableObject != null && movableObject.canBePutBackToStartingPosition())
                     {
-                        return "Z: Return";
+                        return KeyBindingList.removePlacedCompanionMovableObjectKey.ToString() + ": Return";
                     }
                 }
                 break;
             case OOCActivity.cunning:
                 if (CunningManager.getInstance().canUseSkill())
                 {
-                    return "E: Cunning";
+                    return KeyBindingList.interactKey.ToString() + ": Cunning";
                 } else if(CunningManager.getInstance().hasTooExpensiveTarget())
                 {
                     return "Need More Charges";
                 } else
                 {
-                    return "WASD: Move";
+            return KeyBindingList.moveNorthKey.ToString() + "/" + 
+                    KeyBindingList.moveWestKey.ToString() + "/" + 
+                    KeyBindingList.moveSouthKey.ToString() + "/" + 
+                    KeyBindingList.moveEastKey.ToString() + ": Move";
                 }
             case OOCActivity.intimidating:
                 if (IntimidateManager.getInstance().canUseSkill())
                 {
-                    return "E: Intimidate";
+                    return KeyBindingList.interactKey.ToString() + ": Intimidate";
                 }
 
                 if(IntimidateManager.getIntimidatesRemaining() <= 0)

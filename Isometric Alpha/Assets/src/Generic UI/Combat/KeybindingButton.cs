@@ -8,14 +8,31 @@ public class KeybindingButton : MonoBehaviour
 {
     private const string blankButtonText = "___";
 
+    public TextMeshProUGUI keybindingTitle;
+
     public TextMeshProUGUI keybindingButtonLabel;
     public Button keybindingButton;
 
-    public KeyUse keyUse;
+    public int _KeyIndex = default;
 
-    private void Awake()
+    public int keyIndex
     {
-        keybindingButtonLabel.text = KeyBindingSettingsManager.keyUseDictionary[keyUse](KeyCode.None).ToString();
+        get
+        {
+            return _KeyIndex;
+        }
+        set
+        {
+            _KeyIndex = value;
+        }
+    }
+
+    public void populate(KeyBind keyBind)
+    {
+        keyIndex = keyBind.keybindIndex;
+
+        keybindingTitle.text = keyBind.getTitle();
+        keybindingButtonLabel.text = keyBind.ToString();
 
         KeyBindingSettingsManager.EnableAllKeyBindButtons.AddListener(enableButton);
         KeyBindingSettingsManager.DisableAllKeyBindButtons.AddListener(disableButton);
@@ -32,19 +49,19 @@ public class KeybindingButton : MonoBehaviour
         keybindingButton.enabled = true;
         keybindingButton.interactable = true;
 
-        keybindingButtonLabel.text = KeyBindingSettingsManager.keyUseDictionary[keyUse](KeyCode.None).ToString();
+        keybindingButtonLabel.text = KeyBindingSettingsManager.keyIndexDictionary[keyIndex].ToString();
     }
 
     public void listenForKeyPress()
     {
-        KeyBindingSettingsManager.DisableAllKeyBindButtons.Invoke(keyUse);
-        KeyBindingSettingsManager.listening = true;
+        KeyBindingSettingsManager.DisableAllKeyBindButtons.Invoke(keyIndex);
+        KeyBindingSettingsManager.currentKeyIndex = keyIndex;
         keybindingButtonLabel.text = blankButtonText;
     }
 
-    public void disableButton(KeyUse use)
+    public void disableButton(int keyIndexToDisable)
     {
-        if(use == keyUse)
+        if(keyIndex == keyIndexToDisable)
         {
             keybindingButton.enabled = false;
             keybindingButton.interactable = true;

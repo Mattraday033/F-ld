@@ -14,6 +14,11 @@ public class PlayerInput : MonoBehaviour
 
     void Update() 
     {
+        if(KeyBindingSettingsManager.listeningForKeyBinding())
+        {
+            return;
+        }
+
         KeyPressManager.updateKeyBools();
 
         if (PlayerObject.onTopOfTransitionOrTutorial())
@@ -21,7 +26,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if (KeyBindingList.eitherBackoutKeyIsPressed() && PlayerOOCStateManager.currentActivity != OOCActivity.inChestUI)
+        if (KeyBindingList.settingsScreenOrBackKeyPressed() && PlayerOOCStateManager.currentActivity != OOCActivity.inChestUI)
         {
             if (NotificationManager.getCurrentNotificationPopUpWindowGameObject() != null &&
                  !KeyPressManager.handlingPrimaryKeyPress)
@@ -38,7 +43,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.showHideKeyBindingsListKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.showHideKeyBindingsListKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             KeyPressManager.handlingPrimaryKeyPress = true;
             CombatInputManager.OnHideKeyBindingsList.Invoke();
@@ -117,7 +122,7 @@ public class PlayerInput : MonoBehaviour
             KeyPressManager.handlingPrimaryKeyPress = true;
         }
 
-        if (Input.GetKey(KeyBindingList.quicksaveKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.quicksaveKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             SaveHandler.quickSave();
 
@@ -126,7 +131,7 @@ public class PlayerInput : MonoBehaviour
 
         toggleTerrainKeyCheck();
 
-        if (Input.GetKey(KeyBindingList.interactKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.interactKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             KeyPressManager.handlingPrimaryKeyPress = true;
 
@@ -134,31 +139,30 @@ public class PlayerInput : MonoBehaviour
             {
                 interact();
             }
-
         }
 
-        if (Input.GetKey(KeyBindingList.skillKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.skillKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             SkillButtonManager.useSkill();
             KeyPressManager.handlingPrimaryKeyPress = true;
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.cycleSkillAscendingKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.cycleSkillAscendingKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             SkillButtonManager.changeSkill(false);
             KeyPressManager.handlingPrimaryKeyPress = true;
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.cycleSkillDecendingKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.cycleSkillDescendingKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             SkillButtonManager.changeSkill(true);
             KeyPressManager.handlingPrimaryKeyPress = true;
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.mapKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.mapKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             PlayerObject.getMapPopUpButton().spawnPopUp();
 
@@ -166,7 +170,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.worldMapKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.worldMapKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             PlayerObject.getWorldMapPopUpButton().spawnPopUp();
 
@@ -174,14 +178,14 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.transcriptKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.transcriptKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             DialogueManager.getInstance().spawnDialogueTrackerWindowWithoutChoices();
 
             KeyPressManager.handlingPrimaryKeyPress = true;
         }
 
-        if (Input.GetKey(KeyBindingList.removePlacedCompanionMovableObjectKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.removePlacedCompanionMovableObjectKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             Collider2D npcCollider = PositionQuery.npcAtPosition(PlayerMovement.getColliderWorldPosition());
             Collider2D moveableObjectCollider = PositionQuery.moveableObjectAtPosition(PlayerMovement.getColliderWorldPosition());
@@ -213,13 +217,13 @@ public class PlayerInput : MonoBehaviour
             KeyPressManager.handlingPrimaryKeyPress = true;
         }
 
-        if (KeyBindingList.revealKeyIsPressed() && !KeyPressManager.handlingSecondaryKeyPress)
+        if (Input.GetKey(KeyBindingList.revealKey.getCurrentKeyCode()) && !KeyPressManager.handlingSecondaryKeyPress)
         {
             RevealManager.toggleReveal();
             KeyPressManager.handlingSecondaryKeyPress = true;
         }
 
-        if (Input.GetKey(KeyBindingList.lastScreenKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.lastScreenKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             EscapeStack.escapeAll();
 
@@ -235,7 +239,7 @@ public class PlayerInput : MonoBehaviour
 
     private void handleScreenSelection()
     {
-        if (Input.GetKey(KeyBindingList.characterScreenKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.characterScreenKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             EscapeStack.escapeAll();
 
@@ -246,7 +250,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.inventoryScreenKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.inventoryScreenKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             EscapeStack.escapeAll();
 
@@ -257,7 +261,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.partyScreenKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.partyScreenKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             EscapeStack.escapeAll();
 
@@ -268,7 +272,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.journalScreenKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.journalScreenKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             EscapeStack.escapeAll();
 
@@ -279,7 +283,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.loadScreenKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.loadScreenKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             EscapeStack.escapeAll();
 
@@ -290,7 +294,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if (KeyBindingList.settingsScreenKeyKeyIsPressed() && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.settingsScreenKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             EscapeStack.escapeAll();
 
@@ -373,7 +377,7 @@ public class PlayerInput : MonoBehaviour
     {
         showFormulaToggleCheck();
 
-        if (KeyBindingList.eitherBackoutKeyIsPressed() && 
+        if (KeyBindingList.settingsScreenOrBackKeyPressed() && 
             EscapeStack.getEscapableObjectsCount() > 0 &&
             !KeyPressManager.handlingPrimaryKeyPress)
         {
@@ -382,9 +386,10 @@ public class PlayerInput : MonoBehaviour
             KeyPressManager.handlingPrimaryKeyPress = true;
             return;
         }
-        else if ((((Input.GetKey(OverallUIManager.getCurrentScreenExitKey()) || KeyBindingList.eitherBackoutKeyIsPressed()) && 
+        else if ((((Input.GetKey(OverallUIManager.getCurrentScreenExitKey()) || 
+                    KeyBindingList.settingsScreenOrBackKeyPressed()) && 
                     !SaveHandler.saveNameFieldIsSelected()) || 
-                    Input.GetKey(KeyBindingList.lastScreenKey)) && 
+                    Input.GetKey(KeyBindingList.lastScreenKey.getCurrentKeyCode())) && 
                     !KeyPressManager.handlingPrimaryKeyPress)
         {
             if (backOutOfUI())
@@ -398,14 +403,14 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if(KeyBindingList.screenNavigationbuttonIsPressed() && !KeyPressManager.handlingPrimaryKeyPress)
+        if(KeyBindingList.screenNavigationButtonIsPressed() && !KeyPressManager.handlingPrimaryKeyPress)
         {
             handleScreenSelection();
             return;
         }
 
         if(SaveHandler.saveNameFieldIsSelected() && 
-            Input.GetKey(KeyBindingList.backOutKey1) && 
+            Input.GetKey(KeyBindingList.settingsScreenKey.getCurrentKeyCode()) && 
             !KeyPressManager.handlingPrimaryKeyPress)
         {
             EventSystem.current.SetSelectedGameObject(null);
@@ -413,38 +418,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        // bool passedbackOutCheck = false;
-
-        // switch (OverallUIManager.lastScreenType)
-        // {
-        //     case ScreenType.Character:
-        //         passedbackOutCheck = backOutCheck(KeyBindingList.characterScreenKey);
-        //         break;
-        //     case ScreenType.Inventory:
-        //         passedbackOutCheck = backOutCheck(KeyBindingList.inventoryScreenKey);
-        //         break;
-        //     case ScreenType.Party:
-        //         passedbackOutCheck = backOutCheck(KeyBindingList.partyScreenKey);
-        //         break;
-        //     case ScreenType.Journal:
-        //         passedbackOutCheck = backOutCheck(KeyBindingList.journalScreenKey);
-        //         break;
-        //     case ScreenType.SaveAndLoad:
-        //         if (  backOutCheck(KeyBindingList.loadScreenKey))
-        //         {
-        //             return;
-        //         }
-        //         break;
-        //     default:
-        //         break;
-        // }
-
-        // if (passedbackOutCheck)
-        // {
-        //     return;
-        // }
-
-        if (Input.GetKey(KeyBindingList.moveLeftKey) && !SaveHandler.saveNameFieldIsSelected() && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.moveLeftKey.getCurrentKeyCode()) && !SaveHandler.saveNameFieldIsSelected() && !KeyPressManager.handlingPrimaryKeyPress)
         {
             OverallUIManager.moveToScreenToTheLeft();
 
@@ -452,7 +426,7 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.moveRightKey) && !SaveHandler.saveNameFieldIsSelected() && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.moveRightKey.getCurrentKeyCode()) && !SaveHandler.saveNameFieldIsSelected() && !KeyPressManager.handlingPrimaryKeyPress)
         {
             OverallUIManager.moveToScreenToTheRight();
 
@@ -460,25 +434,6 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-    }
-
-
-    private bool backOutCheck(KeyCode keyCode)
-    {
-        ScreenType correspondingScreen = KeyBindingList.getScreenType(keyCode);
-
-        if (Input.GetKey(keyCode) && !KeyPressManager.handlingPrimaryKeyPress)
-        {
-            if ((keyCode == KeyBindingList.loadScreenKey) && SaveHandler.saveNameFieldIsSelected())
-            {
-                return false;
-            }
-
-            backOutOfUI();
-            return true;
-        }
-
-        return false;
     }
 
     public static bool backOutOfUI()
@@ -499,20 +454,20 @@ public class PlayerInput : MonoBehaviour
 
     private void handleMapStateKeyPresses()
     {
-        if (MapPopUpWindow.hasFastTravelTarget() && KeyBindingList.eitherBackoutKeyIsPressed())
+        if (MapPopUpWindow.hasFastTravelTarget() && KeyBindingList.settingsScreenOrBackKeyPressed())
         {
             MapPopUpWindow.fastTravelPanelCloseButtonPress();
 
             KeyPressManager.handlingPrimaryKeyPress = true;
             return;
         }
-        else if (!MapPopUpWindow.hasFastTravelTarget() && Input.GetKey(KeyBindingList.mapKey) || KeyBindingList.eitherBackoutKeyIsPressed())
+        else if (!MapPopUpWindow.hasFastTravelTarget() && Input.GetKey(KeyBindingList.mapKey.getCurrentKeyCode()) || KeyBindingList.settingsScreenOrBackKeyPressed())
         {
 
             PlayerObject.getMapPopUpButton().destroyPopUp();
 
             KeyPressManager.handlingPrimaryKeyPress = true;
-        }else if(!MapPopUpWindow.hasFastTravelTarget() && Input.GetKey(KeyBindingList.worldMapKey))
+        }else if(!MapPopUpWindow.hasFastTravelTarget() && Input.GetKey(KeyBindingList.worldMapKey.getCurrentKeyCode()))
         {
             PlayerObject.getMapPopUpButton().destroyPopUp();
             PlayerObject.getWorldMapPopUpButton().spawnPopUp();
@@ -523,12 +478,12 @@ public class PlayerInput : MonoBehaviour
 
     private void handleWorldMapStateKeyPresses()
     {
-        if (Input.GetKey(KeyBindingList.worldMapKey) || KeyBindingList.eitherBackoutKeyIsPressed())
+        if (Input.GetKey(KeyBindingList.worldMapKey.getCurrentKeyCode()) || KeyBindingList.settingsScreenOrBackKeyPressed())
         {
             PlayerObject.getWorldMapPopUpButton().destroyPopUp();
 
             KeyPressManager.handlingPrimaryKeyPress = true;
-        } else if(Input.GetKey(KeyBindingList.mapKey))
+        } else if(Input.GetKey(KeyBindingList.mapKey.getCurrentKeyCode()))
         {
             PlayerObject.getWorldMapPopUpButton().destroyPopUp();
             PlayerObject.getMapPopUpButton().spawnPopUp();
@@ -539,7 +494,7 @@ public class PlayerInput : MonoBehaviour
 
     private void handleCunningStateKeyPresses()
     {
-        if ((KeyBindingList.eitherBackoutKeyIsPressed() || Input.GetKey(KeyBindingList.skillKey)) && !KeyPressManager.handlingPrimaryKeyPress)
+        if ((KeyBindingList.settingsScreenOrBackKeyPressed() || Input.GetKey(KeyBindingList.skillKey.getCurrentKeyCode())) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             CunningManager.leaveCunningMode();
             KeyPressManager.handlingPrimaryKeyPress = true;
@@ -552,7 +507,7 @@ public class PlayerInput : MonoBehaviour
             KeyPressManager.handlingPrimaryKeyPress = true;
         }
 
-        if (Input.GetKey(KeyBindingList.interactKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.interactKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             KeyPressManager.handlingPrimaryKeyPress = true;
 
@@ -567,7 +522,7 @@ public class PlayerInput : MonoBehaviour
 
     private void handleObservingStateKeyPresses()
     {
-        if ((KeyBindingList.eitherBackoutKeyIsPressed() || Input.GetKey(KeyBindingList.skillKey)) && !KeyPressManager.handlingPrimaryKeyPress)
+        if ((KeyBindingList.settingsScreenOrBackKeyPressed() || Input.GetKey(KeyBindingList.skillKey.getCurrentKeyCode())) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             ObservationManager.leaveObservationMode();
             KeyPressManager.handlingPrimaryKeyPress = true;
@@ -577,14 +532,14 @@ public class PlayerInput : MonoBehaviour
 
     private void handleIntimidateStateKeyPresses()
     {
-        if ((KeyBindingList.eitherBackoutKeyIsPressed() || Input.GetKey(KeyBindingList.skillKey)) && !KeyPressManager.handlingPrimaryKeyPress)
+        if ((KeyBindingList.settingsScreenOrBackKeyPressed() || Input.GetKey(KeyBindingList.skillKey.getCurrentKeyCode())) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             IntimidateManager.leaveIntimidateMode();
             KeyPressManager.handlingPrimaryKeyPress = true;
             return;
         }
 
-        if (Input.GetKey(KeyBindingList.interactKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if (Input.GetKey(KeyBindingList.interactKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             KeyPressManager.handlingPrimaryKeyPress = true;
 
@@ -601,7 +556,7 @@ public class PlayerInput : MonoBehaviour
     {
         showFormulaToggleCheck();
 
-        if ((KeyBindingList.eitherBackoutKeyIsPressed() || KeyBindingList.continueUIKeyIsPressed()) && !KeyPressManager.handlingPrimaryKeyPress)
+        if ((KeyBindingList.settingsScreenOrBackKeyPressed() || KeyBindingList.continueUIKeyIsPressed()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             KeyPressManager.handlingPrimaryKeyPress = true;
             PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
@@ -611,11 +566,9 @@ public class PlayerInput : MonoBehaviour
 
     private void handleBookStateKeyPresses()
     {
-        if ((KeyBindingList.eitherBackoutKeyIsPressed() || KeyBindingList.continueUIKeyIsPressed())
+        if ((KeyBindingList.settingsScreenOrBackKeyPressed() || KeyBindingList.continueUIKeyIsPressed())
                 && !KeyPressManager.handlingPrimaryKeyPress)
         {
-            //BookManager.getInstance().deactivate();
-
             EscapeStack.escapeAll();
 
             KeyPressManager.handlingPrimaryKeyPress = true;
@@ -627,7 +580,7 @@ public class PlayerInput : MonoBehaviour
     {
         showFormulaToggleCheck();
 
-        if (KeyBindingList.eitherBackoutKeyIsPressed() && !KeyPressManager.handlingPrimaryKeyPress)
+        if (KeyBindingList.settingsScreenOrBackKeyPressed() && !KeyPressManager.handlingPrimaryKeyPress)
         {
             EscapeStack.escapeAll();
 
@@ -639,7 +592,7 @@ public class PlayerInput : MonoBehaviour
 
     private void handleDialoguePopUpStateKeyPresses()
     {
-        if ((Input.GetKey(KeyBindingList.transcriptKey) || KeyBindingList.eitherBackoutKeyIsPressed()) && !KeyPressManager.handlingPrimaryKeyPress)
+        if ((Input.GetKey(KeyBindingList.transcriptKey.getCurrentKeyCode()) || KeyBindingList.settingsScreenOrBackKeyPressed()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             EscapeStack.escapeAll();
 
@@ -656,7 +609,7 @@ public class PlayerInput : MonoBehaviour
 
     private void handleTutorialPopUpStateKeyPresses()
     {
-        if (KeyBindingList.eitherBackoutKeyIsPressed() && !KeyPressManager.handlingPrimaryKeyPress)
+        if (KeyBindingList.settingsScreenOrBackKeyPressed() && !KeyPressManager.handlingPrimaryKeyPress)
         {
             EscapeStack.escapeAll();
 
@@ -769,23 +722,21 @@ public class PlayerInput : MonoBehaviour
 
         if (currentMovementKeyCode != KeyCode.None && Input.GetKey(currentMovementKeyCode) && !PlayerMovement.playerIsMoving() && !KeyPressManager.handlingPrimaryKeyPress)
         {
-            switch (currentMovementKeyCode)
+            if(currentMovementKeyCode == KeyBindingList.moveNorthKey.getCurrentKeyCode())
             {
-                case KeyBindingList.moveNorthKey:
-                    PlayerMovement.adjustPlayerDirectionalMod(MovementManager.distance1TileNorthEastGrid);
-                    break;
+                PlayerMovement.adjustPlayerDirectionalMod(MovementManager.distance1TileNorthEastGrid);
 
-                case KeyBindingList.moveWestKey:
-                    PlayerMovement.adjustPlayerDirectionalMod(MovementManager.distance1TileNorthWestGrid);
-                    break;
-
-                case KeyBindingList.moveSouthKey:
-                    PlayerMovement.adjustPlayerDirectionalMod(MovementManager.distance1TileSouthWestGrid);
-                    break;
-
-                case KeyBindingList.moveEastKey:
-                    PlayerMovement.adjustPlayerDirectionalMod(MovementManager.distance1TileSouthEastGrid);
-                    break;
+            } else if(currentMovementKeyCode == KeyBindingList.moveWestKey.getCurrentKeyCode())
+            {
+                PlayerMovement.adjustPlayerDirectionalMod(MovementManager.distance1TileNorthWestGrid);
+                
+            } else if(currentMovementKeyCode == KeyBindingList.moveSouthKey.getCurrentKeyCode())
+            {
+                PlayerMovement.adjustPlayerDirectionalMod(MovementManager.distance1TileSouthWestGrid);
+                
+            } else if(currentMovementKeyCode == KeyBindingList.moveEastKey.getCurrentKeyCode())
+            {
+                PlayerMovement.adjustPlayerDirectionalMod(MovementManager.distance1TileSouthEastGrid);
             }
 
             PlayerMovement.updatePlayerFacing();
@@ -908,7 +859,7 @@ public class PlayerInput : MonoBehaviour
     
     public static void toggleTerrainKeyCheck()
     {
-        if (Input.GetKey(KeyBindingList.hideTerrainKey) && !KeyPressManager.handlingSecondaryKeyPress)
+        if (Input.GetKey(KeyBindingList.hideTerrainKey.getCurrentKeyCode()) && !KeyPressManager.handlingSecondaryKeyPress)
         {
             TerrainVisibilityManager.toggleTerrainVisibility();
 
@@ -918,13 +869,13 @@ public class PlayerInput : MonoBehaviour
 
     public static void showFormulaToggleCheck()
     {
-        if (KeyBindingList.eitherAltKeyIsPressed() && !OverallUIManager.showFormula)
+        if (Input.GetKey(KeyBindingList.showFormulaKey.getCurrentKeyCode()) && !OverallUIManager.showFormula)
         {
             OverallUIManager.showFormula = true;
             DescriptionPanelBuilder.OnFormulaSwap.Invoke();
             KeyPressManager.handlingPrimaryKeyPress = true;
         }
-        else if (!KeyBindingList.eitherAltKeyIsPressed() && OverallUIManager.showFormula)
+        else if (!Input.GetKey(KeyBindingList.showFormulaKey.getCurrentKeyCode()) && OverallUIManager.showFormula)
         {
             OverallUIManager.showFormula = false;
             DescriptionPanelBuilder.OnFormulaSwap.Invoke();

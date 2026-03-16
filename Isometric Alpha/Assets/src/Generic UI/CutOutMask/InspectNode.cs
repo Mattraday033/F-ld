@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class InspectNode : MonoBehaviour
 {
     public static bool inspecting;
 
     public static InspectNode instance;
+
+    public TextMeshProUGUI keybindText;
 
     public readonly static UnityEvent OnInspect = new UnityEvent();
 
@@ -38,20 +41,22 @@ public class InspectNode : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+
+        keybindText.text = "[" + KeyBindingList.inspectKey.ToString() + "]";
     }
 
     void Update()
     {
         KeyPressManager.updateKeyBools();
 
-        if(!inspecting && Input.GetKey(KeyBindingList.inspectKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if(!inspecting && Input.GetKey(KeyBindingList.inspectKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             KeyPressManager.handlingPrimaryKeyPress = true;
             setToInspectingMode();
             return;
         }
 
-        if(inspecting && Input.GetKey(KeyBindingList.inspectKey) && !KeyPressManager.handlingPrimaryKeyPress)
+        if(inspecting && Input.GetKey(KeyBindingList.inspectKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             KeyPressManager.handlingPrimaryKeyPress = true;
             exitInspectingMode();

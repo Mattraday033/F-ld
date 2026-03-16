@@ -39,7 +39,7 @@ public class CombatResultsUI : PopUpWindow
 	{
 		KeyPressManager.updateKeyBools();
 
-		if ((KeyBindingList.continueUIKeyIsPressed() || KeyBindingList.eitherBackoutKeyIsPressed())
+		if ((KeyBindingList.continueUIKeyIsPressed() || KeyBindingList.settingsScreenOrBackKeyPressed())
 			&& !KeyPressManager.handlingPrimaryKeyPress)
 		{
 			acceptButtonPress();

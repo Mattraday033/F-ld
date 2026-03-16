@@ -80,14 +80,15 @@ public struct TutorialSequenceStep : IDescribable
 
     public ArrowDirection arrowDirection;
 
-    public KeyCode[] nextStepKeyCode;
+    public KeyBind nextStepKey;
+    public bool useButtonPress;
 
     public ConditionDelegate condition;
 
     public TutorialSequenceStep( string tutorialMessageKey,
                                  string tutorialTargetHash,
                                  ArrowDirection arrowDirection, 
-                                 KeyCode[] nextStepKeyCode, 
+                                 KeyBind nextStepKey = null, 
                                  TutorialSequenceStepScript scriptAtStart = null, 
                                  TutorialSequenceStepScript scriptAtEnd = null,
                                  TutorialSequenceAdditionalScript[] additionalScripts = null, 
@@ -95,12 +96,22 @@ public struct TutorialSequenceStep : IDescribable
                                  bool skipUnhighlight = false, 
                                  bool createPopUpScreenBlocker = false,
                                  bool allowsMovementKeys = false,
+                                 bool useButtonPress = false,
                                  ConditionDelegate condition = null)
     {
         this.tutorialMessageKey = tutorialMessageKey;
         this.tutorialTargetHash = tutorialTargetHash;
         this.arrowDirection = arrowDirection;
-        this.nextStepKeyCode = nextStepKeyCode;
+
+        if(nextStepKey == null)
+        {
+            this.nextStepKey = KeyBindingList.acceptKey;
+        } else
+        {
+            this.nextStepKey = nextStepKey;
+        }
+
+        this.useButtonPress = useButtonPress;
 
         this.skipHighlight = skipHighlight;
         this.skipUnhighlight = skipUnhighlight;
@@ -145,15 +156,7 @@ public struct TutorialSequenceStep : IDescribable
 
     public bool nextStepKeyCodePressed()
     {
-        foreach (KeyCode keyCode in nextStepKeyCode)
-        {
-            if (Input.GetKey(keyCode))
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return Input.GetKey(nextStepKey.getCurrentKeyCode());
     }
 
     public void activateStartingScript(ITutorialSequenceTarget tutorialTarget)
@@ -356,7 +359,7 @@ public struct TutorialSequenceStep : IDescribable
     {
         panel.setObjectBeingDescribed(this);
 
-        DescriptionPanel.setText(panel.useDescriptionText, TutorialMessageList.getTutorialMessage(tutorialMessageKey));
+        DescriptionPanel.setText(panel.useDescriptionText, TutorialMessageList.getTutorialMessage(tutorialMessageKey, nextStepKey));
 
         if (dragWeaponContinueMessage)
         {
@@ -364,13 +367,13 @@ public struct TutorialSequenceStep : IDescribable
         } else if (dragActionContinueMessage)
         {
             DescriptionPanel.setText(panel.inputText, dragActionToContinueMessage);
-        } else if (nextStepKeyCode.Length == 0)
+        } else if (useButtonPress)
         {
             DescriptionPanel.setText(panel.inputText, buttonOnlyContinueMessage);
         }
         else if (addShiftToKeyCodeMessage)
         {
-            DescriptionPanel.setText(panel.inputText, pressToContinueMessagePrefix + "Shift ' + ' " + getNextStepKeyCodesAsString() + pressToContinueMessageSuffix);
+            DescriptionPanel.setText(panel.inputText, pressToContinueMessagePrefix + KeyBindingList.jumpMoveKey.ToString() + " ' + ' " + getNextStepKeyCodesAsString() + pressToContinueMessageSuffix);
         }
         else
         {
@@ -380,14 +383,12 @@ public struct TutorialSequenceStep : IDescribable
 
     private string getNextStepKeyCodesAsString()
     {
-        if (nextStepKeyCode.Length == 0)
+        if (useButtonPress)
         {
             return "";
         }
 
-        string keyCodes = nextStepKeyCode[0].ToString();
-
-        return keyCodes.Replace("Left", "").Replace("Right", "").Replace("Alpha", "");
+        return nextStepKey.ToString();
     }
 
     public void describeSelfRow(DescriptionPanel panel)
@@ -439,13 +440,13 @@ public struct TutorialSequenceStep : IDescribable
 
 
                 // if (Helpers.getCollision(SelectorManager.currentSelector.getCollider()).gameObject.tag.Equals(LayerAndTagManager.playerTag) &&
-                //     Input.GetKey(KeyBindingList.combatAcceptChoiceKey) && !SelectorManager.getInstance().isMoving)
+                //     Input.GetKey(KeyBindingList.combatSelectKey) && !SelectorManager.getInstance().isMoving)
                 // {
                 //     return true;
                 // }
 
                 // if (Helpers.getCollision(SelectorManager.currentSelector.getCollider()).gameObject.tag.Equals(LayerAndTagManager.npcTag) &&
-                //     Input.GetKey(KeyBindingList.combatAcceptChoiceKey) && !SelectorManager.getInstance().isMoving)
+                //     Input.GetKey(KeyBindingList.combatSelectKey) && !SelectorManager.getInstance().isMoving)
                 // {
                 //     return true;
                 // }

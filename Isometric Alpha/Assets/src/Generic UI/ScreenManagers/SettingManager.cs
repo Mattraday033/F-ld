@@ -5,7 +5,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public enum SettingsManagerState { Keybinds, Audio, Video }
+public enum SettingsManagerState { 
+                                    Gameplay = 0, 
+                                    Keybinds = 1, 
+                                    Audio = 2, 
+                                    Video = 3
+                                }
 
 [System.Serializable]
 public class SettingsManager : ScreenManager, IEscapable
@@ -36,7 +41,7 @@ public class SettingsManager : ScreenManager, IEscapable
 
         instance = this;
 
-        setToState(state);
+        setToState((int) state);
 
         if (CombatStateManager.inCombat)
         {
@@ -44,16 +49,16 @@ public class SettingsManager : ScreenManager, IEscapable
         }
     }
 
-    public static void setToState(SettingsManagerState state)
+    public static void setToState(int state)
     {
-        SettingsManager.state = state;
+        SettingsManager.state = (SettingsManagerState) state;
 
         if(instance == null)
         {
             return;
         }
 
-        switch(state)
+        switch(SettingsManager.state)
         {
             case SettingsManagerState.Audio:
                 instance.keybindsButton.interactable = true;
@@ -102,6 +107,6 @@ public class SettingsManager : ScreenManager, IEscapable
 
     public override KeyCode getExitKeyCode()
     {
-        return KeyBindingList.settingsScreenKey1;
+        return KeyBindingList.settingsScreenKey.getCurrentKeyCode();
     }
 }

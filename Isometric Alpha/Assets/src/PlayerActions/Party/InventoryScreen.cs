@@ -61,6 +61,6 @@ public class InventoryScreen : ScreenManager, ICounter
 
     public override KeyCode getExitKeyCode()
     {
-        return KeyBindingList.inventoryScreenKey;
+        return KeyBindingList.inventoryScreenKey.getCurrentKeyCode();
     }
 }

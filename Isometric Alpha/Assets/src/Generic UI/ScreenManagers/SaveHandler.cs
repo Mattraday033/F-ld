@@ -92,7 +92,7 @@ public class SaveHandler : ScreenManager, IEscapable
 	{
 		KeyPressManager.updateKeyBools();
 
-		if (Input.GetKey(KeyBindingList.acceptInputKey) && !KeyPressManager.handlingPrimaryKeyPress)
+		if (Input.GetKey(KeyBindingList.acceptInputKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
 		{
 			KeyPressManager.handlingPrimaryKeyPress = true;
 			saveButtonPress();
@@ -582,7 +582,7 @@ public class SaveHandler : ScreenManager, IEscapable
     
     public override KeyCode getExitKeyCode()
     {
-        return KeyBindingList.loadScreenKey;
+        return KeyBindingList.loadScreenKey.getCurrentKeyCode();
     }
 
     [RuntimeInitializeOnLoadMethod]

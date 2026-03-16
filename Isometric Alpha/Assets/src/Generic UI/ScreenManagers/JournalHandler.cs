@@ -37,7 +37,7 @@ public class JournalHandler : ScreenManager
 
     public override KeyCode getExitKeyCode()
     {
-        return KeyBindingList.journalScreenKey;
+        return KeyBindingList.journalScreenKey.getCurrentKeyCode();
     }
 
 }
