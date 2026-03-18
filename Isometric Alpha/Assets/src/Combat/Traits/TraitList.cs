@@ -21,7 +21,10 @@ public enum TraitType
     Size = 11,
     Stance = 12,
     TargetPriority = 13,
-    Wound = 14
+    Wound = 14,
+    InteractionBuff = 15,
+    
+    InteractionDebuff = 16
 }
 
 public static class TraitList
@@ -33,9 +36,6 @@ public static class TraitList
                                                                                     new GridCoords(0,3),
                                                                                     new GridCoords(3,3)
                                                                                 };
-
-	public const bool isBuff = true;
-	public const bool isDebuff = false;
 
     public static Dictionary<string, Trait> dictionaryOfTraits;
     public static Dictionary<string, Trait> dictionaryOfHiddenTraits;
@@ -141,7 +141,7 @@ public static class TraitList
 	public readonly static Trait whiplash = new CrowdControlTrait(StatSourceNameList.whiplashKey, TraitType.Wound, "This creature is stunned until the end of the round", "Lashings", roundsLeft: Constants.endOfRoundDuration);
 	public readonly static Trait afraid = new CrowdControlTrait(StatSourceNameList.afraidKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Afraid", roundsLeft: Constants.oneRoundDuration);
 	public readonly static Trait crushingBlow = new Trait(AbilityList.crushingBlowName, TraitType.Wound, "Until the end of the turn the damage reduction from this creature's armor is reduced.", AbilityList.crushingBlowName, roundsLeft: Constants.endOfRoundDuration, permanent: true);
-	public readonly static Trait chokehold = new CrowdControlTrait(StatSourceNameList.chokeholdKey, TraitType.Interaction, "This creature is stunned and receives half of all damage dealt to whoever stunned it.", "Chokehold", roundsLeft: Constants.twoRoundDuration);
+	public readonly static Trait chokehold = new CrowdControlTrait(StatSourceNameList.chokeholdKey, TraitType.InteractionDebuff, "This creature is stunned and receives half of all damage dealt to whoever stunned it.", "Chokehold", roundsLeft: Constants.twoRoundDuration);
 	public readonly static Trait insecure = new Trait(StatSourceNameList.insecureKey, TraitType.Mental, "This creature is no longer sure of it's own defenses. This creature takes extra damage whenever it is hit.", "Victimize");
 	public readonly static Trait demoralized = new SlowingTrait(StatSourceNameList.demoralizedKey, TraitType.Mental, "This creature is reluctant to fight. It takes extra damage and always attacks last in the action order.", "Demoralize", Constants.fourRoundDuration);
 	public readonly static Trait choking = new CrowdControlTrait(StatSourceNameList.chokingKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "SmokeBomb", roundsLeft: Constants.oneRoundDuration);

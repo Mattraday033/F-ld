@@ -4,7 +4,15 @@ using UnityEngine;
 
 public static class TutorialMessageList
 {
-    private const string keyCodePlaceHolder = "###";
+    private const string keyCodePlaceHolder = "##";
+
+    private const string revealKeyCodePlaceHolder = "::";
+    private const string jumpKeyCodePlaceHolder = "--";
+
+    private const string clockwiseKeyCodePlaceHolder = "<<";
+    private const string counterClockwiseKeyCodePlaceHolder = ">>";
+    private const string resolveTurnKeyCodePlaceHolder = "??";
+
 
     public const string hostileTargetTutorialMessagePrefix = "Hostile Target Tutorial Message ";
     public const string hostilityBarsTutorialMessagePrefix = "Hostility Bars Tutorial Message ";
@@ -75,7 +83,7 @@ public static class TutorialMessageList
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 6, "You have limited uses of Cunning, shown here. Your charges are replenished when you enter a new area, or by using certain items. Press ' " + keyCodePlaceHolder + " ' to target the object.");
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 7, "Press ' " + keyCodePlaceHolder + " ' to activate the object.");
 
-        tutorialDictionary.Add(observationTutorialMessagePrefix + 1, "Your path is blocked by a hidden door. Hidden doors are not highlighted by pressing ' " + keyCodePlaceHolder + " '. Instead, use the Observation skill to reveal them. Press ' " + keyCodePlaceHolder + " ' to face the door.");
+        tutorialDictionary.Add(observationTutorialMessagePrefix + 1, "Your path is blocked by a hidden door. Hidden doors are not highlighted by pressing ' " + revealKeyCodePlaceHolder + " '. Instead, use the Observation skill to reveal them. Press ' " + keyCodePlaceHolder + " ' to face the door.");
         tutorialDictionary.Add(observationTutorialMessagePrefix + 2, "Now press ' " + keyCodePlaceHolder + " ' to activate the Observation Skill.");
         tutorialDictionary.Add(observationTutorialMessagePrefix + 3, "The pink tiles show where you are observing. The hidden doors are now also shaded pink. This means that you can now interact with them. Press ' " + keyCodePlaceHolder + " ' to exit the Observation Skill.");
         // tutorialDictionary.Add(observationTutorialMessagePrefix + 4, "When the Observation Symbol is outlined in yellow, that means you are observing. When you are not observing, it will darken.");
@@ -119,11 +127,11 @@ public static class TutorialMessageList
         tutorialDictionary.Add(combatTutorialMessagePrefix + 4 + " NoSurpriseRound", "This is the Surprise Round Icon. It is grey, meaning no one is surprised, and no one will get any free attacks.");
 
         tutorialDictionary.Add(combatTutorialMessagePrefix + 5, "It is your turn. Move the white selector square with the Movement keys. When it is under an ally, press ' " + keyCodePlaceHolder + " '.");
-        tutorialDictionary.Add(combatTutorialMessagePrefix + 6, "This is this character's Action Wheel. Use the ' " + keyCodePlaceHolder + " ' and ' " + keyCodePlaceHolder + " ' keys to cycle through your choices. Press ' " + keyCodePlaceHolder + " ' to select an Action.");
+        tutorialDictionary.Add(combatTutorialMessagePrefix + 6, "This is this character's Action Wheel. Use the ' " + counterClockwiseKeyCodePlaceHolder + " ' and ' " + clockwiseKeyCodePlaceHolder + " ' keys to cycle through your choices. Press ' " + keyCodePlaceHolder + " ' to select an Action.");
         tutorialDictionary.Add(combatTutorialMessagePrefix + 7, "Use the Movement keys to target a creature. Press ' " + keyCodePlaceHolder + " ' to queue your action.");
         tutorialDictionary.Add(combatTutorialMessagePrefix + 8, "Most Actions can only be performed between rounds. When you resolve the turn, all Actions in the Action Order will occur in order, starting at the top.");
         tutorialDictionary.Add(combatTutorialMessagePrefix + 9, "You and your companions can each perfom a single action per round. You can only perform as many total Actions as you have Action Slots, shown here.");
-        tutorialDictionary.Add(combatTutorialMessagePrefix + 10, "When you are finished choosing your Actions, click the ' Resolve Turn ' button, or press ' " + keyCodePlaceHolder + " '. Press ' " + keyCodePlaceHolder + " ' to end this tutorial.");
+        tutorialDictionary.Add(combatTutorialMessagePrefix + 10, "When you are finished choosing your Actions, click the ' Resolve Turn ' button, or press ' " + resolveTurnKeyCodePlaceHolder + " '. Press ' " + keyCodePlaceHolder + " ' to end this tutorial.");
 
         tutorialDictionary.Add(exuberanceCostTutorialMessagePrefix + 1, "You have tried to activate an Ability that costs Exuberances, but you don't have the required amount.");
         tutorialDictionary.Add(exuberanceCostTutorialMessagePrefix + 2, "The number of Exuberances your party has is shown here. Hover over each Icon to learn how to earn more of each type.");
@@ -141,7 +149,7 @@ public static class TutorialMessageList
         tutorialDictionary.Add(movableObjectTutorialMessagePrefix + 2, "If your character walks into it they will push it, so long as nothing is behind it.");
         tutorialDictionary.Add(movableObjectTutorialMessagePrefix + 3, "If a movable object is stuck, face it and press ' " + keyCodePlaceHolder + " ' to put it back where you found it.");
 
-        tutorialDictionary.Add(combatTraitTutorialMessagePrefix + 1, "This creature has a trait that makes it take less damage. Press ' " + keyCodePlaceHolder + " ' + ' " + keyCodePlaceHolder + " ' to quickly select it.");
+        tutorialDictionary.Add(combatTraitTutorialMessagePrefix + 1, "This creature has a trait that makes it take less damage. Press ' " + jumpKeyCodePlaceHolder + " ' + ' " + keyCodePlaceHolder + " ' to quickly select it.");
         tutorialDictionary.Add(combatTraitTutorialMessagePrefix + 2, "When your selector is under a single creature, that creature's stats will be displayed here.");
         tutorialDictionary.Add(combatTraitTutorialMessagePrefix + 3, "These icons show the enemy's traits. Traits are special boosts or penalties that have been applied to a creature. Hover over them to learn more about them.");
 
@@ -158,7 +166,25 @@ public static class TutorialMessageList
 
     public static string getTutorialMessage(string key, KeyBind keyBind)
     {
-        return tutorialDictionary[key].Replace(keyCodePlaceHolder, keyBind.ToString());
+        string message = tutorialDictionary[key];
+
+        switch(key)
+        {
+            case observationTutorialMessagePrefix + "1":
+                message = message.Replace(revealKeyCodePlaceHolder, KeyBindingList.revealKey.ToString());
+                break;
+            case combatTraitTutorialMessagePrefix + "1":
+                message = message.Replace(jumpKeyCodePlaceHolder, KeyBindingList.jumpMoveKey.ToString());
+                break;
+            case combatTutorialMessagePrefix + "10":
+                message = message.Replace(resolveTurnKeyCodePlaceHolder, KeyBindingList.resolveTurnKey.ToString());
+                break;
+            case combatTutorialMessagePrefix + "6":
+                message = message.Replace(counterClockwiseKeyCodePlaceHolder, KeyBindingList.moveCounterClockwiseKey.ToString()).Replace(clockwiseKeyCodePlaceHolder, KeyBindingList.moveClockwiseKey.ToString());
+                break;
+        }
+
+        return message.Replace(keyCodePlaceHolder, keyBind.ToString());
     }
 
 

@@ -11,7 +11,7 @@ public class LinkTrait : Trait
     private double percentageOfDamageDealt;
 
     public LinkTrait(string traitName, string traitDescription, string iconName, int duration, double percentageOfDamageDealt) :
-    base(traitName, TraitType.Interaction, traitDescription, iconName, roundsLeft: duration)
+    base(traitName, TraitType.InteractionBuff, traitDescription, iconName, roundsLeft: duration)
     {
         this.percentageOfDamageDealt = percentageOfDamageDealt;
     }

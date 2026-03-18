@@ -768,7 +768,7 @@ MonoBehaviour:
     scriptAtEnd: {fileID: 0}
     additionalScripts: []
     arrowDirection: 0
-    nextStepKeyCode: 
+    useButtonPress: 0
   parentRect: {fileID: 0}
   topRectTransform: {fileID: 5539818740903857738}
   topLayoutGroup: {fileID: 4818019481917658862}
@@ -1406,8 +1406,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 10
@@ -1577,8 +1577,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22
-  m_fontSizeBase: 22
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 10

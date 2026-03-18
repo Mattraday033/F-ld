@@ -41,6 +41,9 @@ public class LoadScreenButton : PopUpButton
         if (CombatStateManager.inCombat && CombatStateManager.whoseTurn == WhoseTurn.Lost)
         {
             SceneManager.UnloadSceneAsync("Combat UI"); 
+        } else
+        {
+            AudioManager.playChangeScreenSFX();
         }
 
         if(!CombatStateManager.inCombat)

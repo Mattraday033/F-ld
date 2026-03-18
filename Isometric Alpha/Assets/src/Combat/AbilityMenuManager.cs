@@ -337,6 +337,8 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
             abilityButtonCanvas.SetActive(true);
         }
 
+        AudioManager.playChooseActorAbilityLocationSFX();
+
         enabled = true;
 
         checkForAbilitiesOnCooldown();
@@ -373,6 +375,11 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
         if (CombatStateManager.inCombat)
         {
+            if(!FadeToBlackManager.isMidScreenFade())
+            {
+                AudioManager.playChooseActorAbilityLocationSFX();
+            }
+
             if (CombatStateManager.currentActivity != CurrentActivity.ChoosingAbility &&
                 CombatStateManager.currentActivity != CurrentActivity.ChoosingLocation &&
                 CombatStateManager.currentActivity != CurrentActivity.ChoosingTertiary)

@@ -41,7 +41,8 @@ public static class AnimationSFXDictionaryList
 
     public readonly static Dictionary<CharacterAnimationType, string> bipedalBatAudioDictionary = new Dictionary<CharacterAnimationType, string>
     {
-        [CharacterAnimationType.Attack_Special] = AudioClipList.batHowelAttackSound,
+        [CharacterAnimationType.Attack_Normal] = AudioClipList.batHowlAttackSound,
+        [CharacterAnimationType.Attack_Special] = AudioClipList.batHowlAttackSound,
         [CharacterAnimationType.Death] = AudioClipList.batDeathSFXTwo
     };
 

@@ -30,12 +30,12 @@ public static class TutorialColliderSpawnDetailsList
                                                     TutorialSequenceList.hiddenObjectTutorialSequenceKey,
                                                     TutorialSequenceList.hiddenObjectsTutorialSeenFlag,
                                                     Constants.sizeSix, Axis.DescendingY,
-                                                    new StartSpawningAllTrueFlagList(new string[] {FlagNameList.givenTaskByBalint})));
+                                                    new StartSpawningAllTrueFlagList(new string[] {FlagNameList.givenTaskByBalint}, useTutorialFlags: true)));
 
         list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campNorthEast, new Vector3Int(-2, -1),
                                                     TutorialSequenceList.hiddenObjectTutorialSequenceKey,
                                                     TutorialSequenceList.hiddenObjectsTutorialSeenFlag,
-                                                    new StartSpawningAllTrueFlagList(new string[] {FlagNameList.givenTaskByBalint})));
+                                                    new StartSpawningAllTrueFlagList(new string[] {FlagNameList.givenTaskByBalint}, useTutorialFlags: true)));
 
         tutorialSpawnDetailsDict.Add(LocationNameList.campNorthEast, list);
         #endregion
@@ -111,7 +111,7 @@ public class MultiTutorialColliderSpawnInfo : AxisSpawnInfo
 
     public override bool shouldSpawn()
     {
-        return startSpawningFlagList.evaluateFlags() && !Flags.getFlag(seenFlagName);
+        return startSpawningFlagList.evaluateFlags() && !TutorialFlags.getFlag(seenFlagName);
     }
 
     public override List<OOCSpawnDetails> getSpawnDetails()

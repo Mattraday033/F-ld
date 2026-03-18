@@ -441,15 +441,18 @@ public class NeverSpawnFlagList : StartSpawningFlagList
 
 public class StartSpawningAllTrueFlagList : StartSpawningFlagList
 {
+    private bool useTutorialFlags;
+
     public StartSpawningAllTrueFlagList():
     base()
     {
         
     }
 
-    public StartSpawningAllTrueFlagList(string[] flags) :
+    public StartSpawningAllTrueFlagList(string[] flags, bool useTutorialFlags = false) :
     base(flags)
     {
+        this.useTutorialFlags = useTutorialFlags;
     }
 
     public override bool evaluateFlags()
@@ -461,9 +464,18 @@ public class StartSpawningAllTrueFlagList : StartSpawningFlagList
         
         foreach (string flag in this)
         {
-            if (!Flags.getFlag(flag))
+            if(useTutorialFlags)
             {
-                return false;
+                if (!Flags.getFlag(flag) && !TutorialFlags.getFlag(flag))
+                {
+                    return false;
+                }
+            } else
+            {
+                if (!Flags.getFlag(flag))
+                {
+                    return false;
+                }
             }
         }
         

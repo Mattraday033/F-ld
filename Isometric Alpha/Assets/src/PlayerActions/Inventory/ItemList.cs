@@ -143,7 +143,7 @@ public static class ItemList
 	public const int pageDiarySecondEntryIndex = 2;
     public const int orderTranscriptIndex = 3;
     public const int theInventionOfSinIndex = 4;
-	public const int keybindingInfoIndex = 5;
+	public const int guideToSkillsIndex = 5;
 	public const int horsetonguePronunciationGuideIndex = 6;
 	public const int nightOfEmptyPlinthsIndex = 7;
 	public const int saintsAndSaintsIndex = 8;
@@ -327,7 +327,7 @@ public static class ItemList
 		books.Add(new BookItem(new ItemListID(bookListIndex, pageDiarySecondEntryIndex), BookList.pageSecondDiaryEntryKey, "A piece of parchment serving as a portion of the diary of Page the scholar.", pageDiarySecondEntryIndex, new string[] { BookList.pageSecondDiaryEntryReadFlag }, QuestNameList.delvingDeeperQuestTitle, QuestNameList.delvingDeeperStepTitleTwo));
 		books.Add(new BookItem(new ItemListID(bookListIndex, orderTranscriptIndex), BookList.ordersTranscriptKey, "A long wax tablet with quickly marked characters imprinted upon it, detailing orders to be relayed to the Lovashi guards.", orderTranscriptIndex, new string[] { BookList.ordersTranscriptReadFlag }, QuestNameList.thePlanQuestTitle, QuestNameList.thePlanStepTitleFifteen));
 		books.Add(new BookItem(new ItemListID(bookListIndex, theInventionOfSinIndex), BookList.theInventionOfSinKey, "A large treatise, bound in hide and well-leafed.", theInventionOfSinIndex, new string[] { }));
-		books.Add(new BookItem(new ItemListID(bookListIndex, keybindingInfoIndex), BookList.keybindingInfoKey, "All keybindings, laid out.", keybindingInfoIndex, new string[] { }));
+		books.Add(new BookItem(new ItemListID(bookListIndex, guideToSkillsIndex), BookList.guideToSkillsKey, "A description of the various Skills each of your Party Members can learn.", guideToSkillsIndex, new string[] { }));
 		books.Add(new BookItem(new ItemListID(bookListIndex, horsetonguePronunciationGuideIndex), BookList.horsetonguePronunciationGuideKey, "A small scrap of animal hide with the phonetic alphabet of the horsetongue scratched into it.", horsetonguePronunciationGuideIndex, new string[] { }));
 		books.Add(new BookItem(new ItemListID(bookListIndex, nightOfEmptyPlinthsIndex), BookList.theNightOfEmptyPlinthsKey, "A rolled piece of tanned bark. To read the contents hidden within, it must be unrolled carefully to prevent it from tearing.", nightOfEmptyPlinthsIndex, new string[] { }));
 		books.Add(new BookItem(new ItemListID(bookListIndex, saintsAndSaintsIndex), BookList.saintsAndSaintsKey, "A rolled piece of tanned bark. To read the contents hidden within, it must be unrolled carefully to prevent it from tearing.", saintsAndSaintsIndex, new string[] { }));

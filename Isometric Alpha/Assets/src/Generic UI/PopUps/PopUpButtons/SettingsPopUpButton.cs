@@ -12,7 +12,8 @@ public class SettingsPopUpButton : PopUpButton
 
     public override void spawnPopUp()
 	{
-		
+		AudioManager.playChangeScreenSFX();
+
 		Instantiate(Resources.Load<GameObject>(PrefabNames.settingsScreen), PopUpScreenBlockerManager.getPopUpParent(PopUpType.SettingsScreen)); 
 		
 		OverallUIManager.setCurrentScreenType(getCurrentPopUpGameObject().GetComponent<SettingsManager>());

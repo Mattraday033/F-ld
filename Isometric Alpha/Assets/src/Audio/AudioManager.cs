@@ -602,7 +602,7 @@ public static class AudioClipList
     public const string batAttackSoundsSFXFolder = attackSoundsSFXFolder + "Bats/";
     public const string batSwarmAttackSound = batAttackSoundsSFXFolder + "Bat Swarm";
     public const string batAttackSound = batAttackSoundsSFXFolder + "Bat Attack";
-    public const string batHowelAttackSound = batAttackSoundsSFXFolder + "Bat Howl";
+    public const string batHowlAttackSound = batAttackSoundsSFXFolder + "Bat Howl";
 
     public const string wormAttackSoundsSFXFolder = attackSoundsSFXFolder + "Worms/";
     public const string wormVomitAttackSound = wormAttackSoundsSFXFolder + "WormAcidVomit";

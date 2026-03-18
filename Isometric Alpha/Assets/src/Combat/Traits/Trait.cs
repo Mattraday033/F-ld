@@ -274,6 +274,7 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
     {
         switch(traitType)
         {
+            case TraitType.InteractionDebuff:
             case TraitType.Mental:
             case TraitType.Wound:
                 return true;
@@ -286,6 +287,7 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
     {
         switch(traitType)
         {
+            case TraitType.InteractionBuff:
             case TraitType.Boost:
             case TraitType.Charge:
             case TraitType.Protection:
@@ -561,6 +563,9 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
     {
         switch(traitType)
         {
+            case TraitType.InteractionBuff:
+            case TraitType.InteractionDebuff:
+                return TraitType.Interaction.ToString();
             case TraitType.FoeType:
                 return "Foe Type";
             case TraitType.EquippedPassive:

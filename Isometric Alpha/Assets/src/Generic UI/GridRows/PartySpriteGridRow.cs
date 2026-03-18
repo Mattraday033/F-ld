@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using TMPro;
@@ -16,7 +17,15 @@ public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSour
     public TextMeshProUGUI healthText;
     public HealthBarManager healthBar;
 
+    public ImageOutline imageOutline;
+
     public readonly static UnityEvent OnPartyMemberSelected = new UnityEvent();
+
+    private void Awake()
+    {
+        imageOutline = new ImageOutline();
+        imageOutline.setImage(descriptionPanel.iconPanel);
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -45,6 +54,23 @@ public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSour
         MouseHoverManager.spawnCustomHover(this, transform, PrefabNames.oocStatsHoverDescriptionPanelBuilder);
     }
 
+    private void handlePortraitHover(string allyName, bool highlight)
+    {
+        if(!highlight)
+        {
+            imageOutline.removeOutline();
+            return;
+        }
+
+        if(descriptionPanel.getObjectBeingDescribed().getName().Equals(allyName))
+        {
+            imageOutline.createOutline(ColorList.canBeInteractedWith);
+        } else
+        {
+            imageOutline.removeOutline();
+        }
+    }
+
     //ICounter
     private void OnEnable()
     {
@@ -66,6 +92,8 @@ public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSour
         {
             unityEvent.AddListener(updateCounter);
         }
+
+        PartyGridSection.OnPortraitHover.AddListener(handlePortraitHover);
     }
     public void removeListeners()
     {
@@ -75,6 +103,8 @@ public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSour
         {
             unityEvent.RemoveListener(updateCounter);
         }
+        
+        PartyGridSection.OnPortraitHover.RemoveListener(handlePortraitHover);
     }
 
     public void updateCounter()

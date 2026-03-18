@@ -97,13 +97,13 @@ public static class OOCSpawnDetailsList
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -3), TutorialSequenceList.intimidateTutorialSequenceKey,
                                                                           TutorialSequenceList.intimidateTutorialSeenFlag,
-                         new StartSpawningAllTrueFlagList(new string[] { FlagNameList.choseStrengthAtStart })));
+                         new StartSpawningAllTrueFlagList(new string[] { FlagNameList.choseStrengthAtStart }, useTutorialFlags: true)));
 
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -2), TutorialSequenceList.interactableRubbleTutorialSequenceKey,
                                                                           TutorialSequenceList.interactableObjectTutorialSeenFlag,
                         new StartSpawningAllTrueFlagList(new string[] {  FlagNameList.choseStrengthAtStart,
-                                                                          TutorialSequenceList.intimidateTutorialSeenFlag}),
+                                                                          TutorialSequenceList.intimidateTutorialSeenFlag}, useTutorialFlags: true),
                                                                           Constants.indexOne));
         #endregion
         #region Dex Tutorial
@@ -111,16 +111,16 @@ public static class OOCSpawnDetailsList
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -4), TutorialSequenceList.vaultableObjectTutorialSequenceKey,
                                                                           TutorialSequenceList.interactableObjectTutorialSeenFlag,
                                 new StartSpawningAllTrueFlagList(new string[] {  FlagNameList.choseDexterityAtStart,
-                                                                          TutorialSequenceList.firstHostilityTutorialSeenFlag}),
+                                                                          TutorialSequenceList.firstHostilityTutorialSeenFlag}, useTutorialFlags: true),
                                                                           Constants.indexZero));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -3), TutorialSequenceList.firstCunningTutorialSequenceKey,
                                                                           TutorialSequenceList.cunningTutorialSeenFlag,
-                                new StartSpawningAllTrueFlagList(new string[] { FlagNameList.choseDexterityAtStart })));
+                                new StartSpawningAllTrueFlagList(new string[] { FlagNameList.choseDexterityAtStart }, useTutorialFlags: true)));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -2), TutorialSequenceList.secondCunningTutorialSequenceKey,
                                                                           TutorialSequenceList.secondCunningTutorialSeenFlag,
-                                new StartSpawningAllTrueFlagList(new string[] { TutorialSequenceList.cunningTutorialSeenFlag }),
+                                new StartSpawningAllTrueFlagList(new string[] { TutorialSequenceList.cunningTutorialSeenFlag }, useTutorialFlags: true),
                                                                           Constants.indexOne));
 
         list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), Facing.SouthEast, Facing.NorthEast, CunningObjectSpriteCategory.Crank,
@@ -142,7 +142,7 @@ public static class OOCSpawnDetailsList
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -4), TutorialSequenceList.observationTutorialSequenceKey,
                                                                           TutorialSequenceList.observationTutorialSeenFlag,
                         new StartSpawningAllTrueFlagList(new string[] {   FlagNameList.choseWisdomAtStart,
-                                                                          TutorialSequenceList.firstHostilityTutorialSeenFlag}),
+                                                                          TutorialSequenceList.firstHostilityTutorialSeenFlag}, useTutorialFlags: true),
                                                                           Constants.indexZero));
         #endregion
         #region Cha Tutorial
@@ -152,7 +152,7 @@ public static class OOCSpawnDetailsList
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(3, -4), TutorialSequenceList.leadershipTutorialSequenceKey,
                                                                           TutorialSequenceList.leadershipTutorialSeenFlag,
                         new StartSpawningAllTrueFlagList(new string[] {   FlagNameList.choseCharismaAtStart,
-                                                                          TutorialSequenceList.firstHostilityTutorialSeenFlag}),
+                                                                          TutorialSequenceList.firstHostilityTutorialSeenFlag}, useTutorialFlags: true),
                                                                           Constants.indexZero));
 
         list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(0, -6), PrefabNames.southDescendingRubble));

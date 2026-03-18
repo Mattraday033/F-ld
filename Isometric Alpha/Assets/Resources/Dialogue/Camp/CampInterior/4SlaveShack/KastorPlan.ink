@@ -113,6 +113,9 @@ VAR shivIndex = 1
 VAR plankIndex = 18
 VAR sharpRockIndex = 19
 
+VAR bookListIndex = 7
+VAR guideToSkillsIndex = 5
+
 VAR playerName = ""
 
 searchInventoryFor(obtainedMineArmoryKey,Key,0)
@@ -1717,7 +1720,7 @@ The chances that he is still breathing are slim. But the last time I saw Guard M
 
 I understand your apprehension, but you're the only one capable of leaving their hut without being stopped by the guards. If you do not do this, no one can. The whole plan will fall apart.
 
-    +I understand what is at risk. I'll do it.
+    +I know what is at risk. I'll do it.
         ->4f
     +I said no. I'm not getting myself killed.
         ->4faa
@@ -1755,7 +1758,13 @@ activateQuestStep(The Plan, Raid the armory.)
 activateQuestStep(Finding Nándor, Find Nándor.)
 activateQuestStep(Explore the Mine, Enter the mine.)
 
-If you do not believe you are ready to face what is down there, I would recommend looking around the camp for any advantage you can bring with you. I believe the guards will have barricaded the mine entrance as well, so you may need to talk or sneak your way past them to get inside. If you need assistance, you can come back to me and I will help however I can. Take care.
+If you do not believe you are ready to face what is down there, I would recommend looking around the camp for any advantage you can bring with you. I believe the guards will have barricaded the mine entrance as well, so you may need to talk or sneak your way past them to get inside. If you need assistance, you can come back to me and I will help however I can. 
+
+prepItem()
+
+And take this. While you were executing the plan, I took the time to jot down some things I know about working in a unit. You might find it useful while delving through the mines. Good luck.
+
+giveItem({bookListIndex},{guideToSkillsIndex},1)
     ->Close
     
 === 5a ===

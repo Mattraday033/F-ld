@@ -19,7 +19,7 @@ public static class BookList
     public const string theInventionOfSinKey = "The Invention of Sin";
     public const string memoRegardingTheBrandedKey = "Memo Regarding the Branded";
 	
-	public const string keybindingInfoKey = "Keybindings";
+	public const string guideToSkillsKey = "Guide to Skills";
 
 	public const string horsetonguePronunciationGuideKey = "Horsetongue Pronunciation Guide";
 	public const string theNightOfEmptyPlinthsKey = "The Night of Empty Plinths";
@@ -131,28 +131,21 @@ public static class BookList
 						"2)In the majority of cases it is difficult to determine whether a prisoner is actually of Lovashi decent. Many Craft Folk have taken to giving their children Lovashi names because they think it will incentivize their " +
 						"lords to offer them better treatment. As there is little way to tell the difference between someone of Craft Folk and Lovashi decent aside from accent, and even that can be faked or misinterpreted, it is camp policy to " +
 						"treat all prisoners the same, regardless of lineage.\n\n" +
-						"Any camp personnel suspected of continuing this practice will be give severe reprocussions. If I have to flog you in front of the entire camp, the slaves included, I will do so. Test my resolve at your peril.\n\n" +
+						"Any camp personnel suspected of continuing this practice will be given severe repercussions. If I have to flog you in front of the entire camp, the slaves included, I will do so. Test my resolve at your peril.\n\n" +
 						"- Chief Correctional Officer Tabor";
-			case keybindingInfoKey:
-				return "\nMove: 'WASD'\n" +
-						"Interact: 'E'\n" +
-						"Hide/Show Terrain: 'F'\n" +
-						"Highlight Interactables: 'Shift'\n" +
-						"Map: 'M'\n" +
-						"World Map: 'N'\n" +
-						"View Dialogue: 'T'\n" +
-						"Statistics: 'Tab'\n" +
-						"Character Screen: 'C' \n" +
-						"Inventory Screen: 'I' \n" +
-						"Party Screen: 'P' \n" +
-						"Journal Screen: 'J' \n" +
-						"Save/Load Screen: 'L' \n" +
-						"Settings Screen: 'Escape' \n" +
-						"Intimidate: '1' \n" +
-						"Cunning: '2' \n" +
-						"Observation: '3' \n" +
-						"Place Companion: '4' \n" +
-						"Return object/Remove placed Companion: 'Z'";
+			case guideToSkillsKey:
+				return "Skills are Abilities that are usable outside of Combat. A Party Member unlocks a Skill by having a 2 or higher in that Skill's corresponding Primary Stat. The four Skills are Intimidate (Strength), Cunning (Dexterity), Observation (Wisdom), " + 
+                        "and Leadership (Charisma). If multiple Party Members have unlocked a Skill, then the highest Primary Stat among all Party Members will be used. To use a Skill, press ' "+ KeyBindingList.skillKey.ToString() +" ' while out of Combat. " + 
+                        "To change the currently selected Skill, press  ' " + KeyBindingList.cycleSkillAscendingKey.ToString() + " ' or ' " + KeyBindingList.cycleSkillDescendingKey.ToString() + " '.\n\n" + 
+                        "Intimidate: Use Intimidate to scare packs of Enemies while in the Overworld. Intimidated Enemies cannot Surprise you or be Surprised by you. Use this to prevent Enemies from Surprising you around corners. " + 
+                        "All Enemies within the target area will be Intimidated. A use of Intimidate will cost a single charge, regardless of how many packs of Enemies were affected. You regain charges when you enter a new area.\n\n" + 
+                        "Cunning: Cunning can be used to distract Enemies while in the Overworld. A distracted Enemy cannot move for a short time and will turn around, exposing their back. Use this to either Surprise your Enemies or slip by them unnoticed. " + 
+                        "Distracting an Enemy costs two charges of Cunning. Regain charges of Cunning by entering a new area. Cunning can also be used to activate certain objects in the Overworld. If Cunning can be used on an object, then that object will have a yellow " + 
+                        "highlight when you press '" + KeyBindingList.revealKey.ToString() + " '. Using Cunning on an object only costs a single charge.\n\n" + 
+                        "Observation: Observation helps find hidden doors and objects. If a hidden object is found, it will be shaded pink. Hidden objects are not shown when you press '" + KeyBindingList.revealKey.ToString() + " ' so be on the lookout " + 
+                        "for anything that looks suspicious. Observation requires no charges to use.\n\n" + 
+                        "Leadership: Leadership allows the Party to place it's Members on specific tiles. This can be useful for holding down buttons or blocking passageways. To remove a Party Member from a tile, face that Party Member and press ' " 
+                        + KeyBindingList.removePlacedCompanionMovableObjectKey.ToString() + " '. The better your Leadership Skill, the more Party Members you can place at once. You can never place more Party Members than the amount of characters in your Party minus one.";
 			case horsetonguePronunciationGuideKey:
 				return "This short guide is meant to help someone pronounce the words of the horsetongue.\n\n" +
 						"A: like the 'o' in 'honest'\n" +

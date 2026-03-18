@@ -970,12 +970,12 @@ public class TutorialSequence
                 return TutorialFlags.getFlag(TutorialSequenceList.skipThatchShackTutorialsFlag);
             case TutorialSequenceList.hiddenObjectsTutorialSeenFlag:
 
-                if (TutorialFlags.getFlag(FlagNameList.gotLeavesForBalint) || State.terrainHidden)
+                if (Flags.getFlag(FlagNameList.gotLeavesForBalint) || State.terrainHidden)
                 {
                     TutorialFlags.setFlag(TutorialSequenceList.hiddenObjectsTutorialSeenFlag, true);
                 }
 
-                if (!TutorialFlags.getFlag(FlagNameList.givenTaskByBalint))
+                if (!Flags.getFlag(FlagNameList.givenTaskByBalint))
                 {
                     return true;
                 }

@@ -13,7 +13,7 @@ public class FormationHandler : ScreenManager, IPartyEditor, ICounter
 
     public DescriptionPanelSlot primaryStatSlot;
 
-    public Image[] portraitImages;
+    public DescriptionPanel[] portraitPanels;
 
     public override bool enableSpriteRowDragAndDrop()
     {
@@ -31,11 +31,12 @@ public class FormationHandler : ScreenManager, IPartyEditor, ICounter
     {
         List<AllyStats> partyMembers = State.formation.getAllPartyStatsInFormation();
 
-        for(int index = 0; index < portraitImages.Length; index++)
+        for(int index = 0; index < portraitPanels.Length; index++)
         {
             if(index >= partyMembers.Count)
             {
-                portraitImages[index].sprite = Resources.Load<Sprite>(PrefabNames.blankTexture);
+                portraitPanels[index].iconPanel.sprite = Resources.Load<Sprite>(PrefabNames.blankTexture);
+                portraitPanels[index].setObjectBeingDescribed(null);
             } else
             {
                 if(partyMembers[index] == null)
@@ -43,7 +44,8 @@ public class FormationHandler : ScreenManager, IPartyEditor, ICounter
                     continue;
                 }
 
-                portraitImages[index].sprite = PartyMember.getPortrait(partyMembers[index].getName());
+                portraitPanels[index].iconPanel.sprite = PartyMember.getPortrait(partyMembers[index].getName());
+                portraitPanels[index].setObjectBeingDescribed(partyMembers[index]);
             }
         }
     }
