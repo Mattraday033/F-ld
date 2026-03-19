@@ -15,6 +15,7 @@ public struct TutorialFlagWrapper
 
     public bool combatTutorialSeen;
     public bool traitTutorialSeen;
+    public bool mandatoryTargetTutorialSeen;
 
     public bool skipThatchShackTutorialsFlag;
 	public bool intimidateTutorialSeen;
@@ -46,6 +47,7 @@ public struct TutorialFlagWrapper
 
             combatTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.combatTutorialSeenFlag),
             traitTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.traitTutorialSeenFlag),
+            mandatoryTargetTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.mandatoryTargetTutorialSeenFlag),
 
             skipThatchShackTutorialsFlag = TutorialFlags.getFlag(TutorialSequenceList.skipThatchShackTutorialsFlag),
             intimidateTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.intimidateTutorialSeenFlag),
@@ -79,6 +81,8 @@ public struct TutorialFlagWrapper
 
             [TutorialSequenceList.combatTutorialSeenFlag] = combatTutorialSeen,
             [TutorialSequenceList.traitTutorialSeenFlag] = traitTutorialSeen,
+            [TutorialSequenceList.mandatoryTargetTutorialSeenFlag] = mandatoryTargetTutorialSeen,
+            
             [TutorialSequenceList.skipThatchShackTutorialsFlag] = skipThatchShackTutorialsFlag,
             [TutorialSequenceList.intimidateTutorialSeenFlag] = intimidateTutorialSeen,
             [TutorialSequenceList.cunningTutorialSeenFlag] = cunningTutorialSeen,

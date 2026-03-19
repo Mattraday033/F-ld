@@ -9,6 +9,14 @@ public class CharacterScreen : ScreenManager, ICounter
 {
     public TextMeshProUGUI playerNameText;
 
+    public TextMeshProUGUI abilityGridTitleHeader;
+
+    public GameObject lvlIconColHeader;
+    public GameObject strIconColHeader;
+    public GameObject dexIconColHeader;
+    public GameObject wisIconColHeader;
+    public GameObject chaIconColHeader;
+
     public Image characterSprite;
     public DescriptionPanelSlot upgradeDescriptionPanelSlot;
 
@@ -28,6 +36,8 @@ public class CharacterScreen : ScreenManager, ICounter
     {
         switch (AbilityGridSideTab.getDescribableListType())
         {
+            case DescribableList.CharacterSpecificAbilities:
+                return OverallUIManager.getCurrentPartyMember().getLevel();
             case DescribableList.Strength:
                 return OverallUIManager.getCurrentPartyMember().getStrength();
             case DescribableList.Dexterity:
@@ -50,6 +60,78 @@ public class CharacterScreen : ScreenManager, ICounter
     {
         playerNameText.text = currentPartyMember.getName().Replace(PartyManager.playerMarker, "");
         characterSprite.sprite = PartyMember.getPortrait(currentPartyMember.getName());
+
+        setAbilityGridHeaders();
+    }
+
+    private void setAbilityGridHeaders()
+    {
+        DescribableList currentList = AbilityGridSideTab.getDescribableListType();
+
+        switch(currentList)
+        {
+            case DescribableList.CombatUsableItems:
+                abilityGridTitleHeader.text = "Combat Items";
+                break;
+            case DescribableList.CharacterSpecificAbilities:
+                abilityGridTitleHeader.text = "Companion Abilities";
+                break;
+            case DescribableList.Strength:
+            case DescribableList.Dexterity:
+            case DescribableList.Wisdom:
+            case DescribableList.Charisma:
+                abilityGridTitleHeader.text = currentList.ToString() + " Abilities";
+                break;
+            default:
+                abilityGridTitleHeader.text = "Weapons";
+                break;
+        }
+
+        switch(currentList)
+        {
+            case DescribableList.CharacterSpecificAbilities:
+                lvlIconColHeader.SetActive(true);
+                strIconColHeader.SetActive(false);
+                dexIconColHeader.SetActive(false);
+                wisIconColHeader.SetActive(false);
+                chaIconColHeader.SetActive(false);
+                break;
+            case DescribableList.Strength:
+                lvlIconColHeader.SetActive(false);
+                strIconColHeader.SetActive(true);
+                dexIconColHeader.SetActive(false);
+                wisIconColHeader.SetActive(false);
+                chaIconColHeader.SetActive(false);
+                break;
+            case DescribableList.Dexterity:
+                lvlIconColHeader.SetActive(false);
+                strIconColHeader.SetActive(false);
+                dexIconColHeader.SetActive(true);
+                wisIconColHeader.SetActive(false);
+                chaIconColHeader.SetActive(false);
+                break;
+            case DescribableList.Wisdom:
+                lvlIconColHeader.SetActive(false);
+                strIconColHeader.SetActive(false);
+                dexIconColHeader.SetActive(false);
+                wisIconColHeader.SetActive(true);
+                chaIconColHeader.SetActive(false);
+                break;
+            case DescribableList.Charisma:
+                lvlIconColHeader.SetActive(false);
+                strIconColHeader.SetActive(false);
+                dexIconColHeader.SetActive(false);
+                wisIconColHeader.SetActive(false);
+                chaIconColHeader.SetActive(true);
+                break;
+            default:
+                lvlIconColHeader.SetActive(false);
+                strIconColHeader.SetActive(false);
+                dexIconColHeader.SetActive(false);
+                wisIconColHeader.SetActive(false);
+                chaIconColHeader.SetActive(false);
+                break;
+        }
     }
 
     public override List<UnityEvent> getUpdateEvents()

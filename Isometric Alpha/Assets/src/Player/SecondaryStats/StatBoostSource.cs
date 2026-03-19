@@ -118,6 +118,8 @@ public abstract class StatBoostSource : INameSource
             case StatSourceNameList.ralliedKey:
             case StatSourceNameList.chewKey:
                 return "8";
+            case StatSourceNameList.standTogetherKey:
+                return "W + C";
             default:
                 return Constants.zeroRating;
         }
@@ -262,7 +264,16 @@ public abstract class StatBoostSource : INameSource
         switch (getName())
         {
             case NPCNameList.thatch + ZoneOfInfluenceTrait.zoiTraitName:
-                return Dexterity.extraArmorMultiplier + "C";
+                int chaArmor = DamageCalculator.calculateFormula(Dexterity.extraArmorMultiplier + "C", PartyManager.getPartyMember(NPCNameList.thatch).stats);
+                int strArmor = DamageCalculator.calculateFormula(Dexterity.extraArmorMultiplier + "S", PartyManager.getPartyMember(NPCNameList.thatch).stats);
+
+                if(chaArmor > strArmor)
+                {
+                    return chaArmor.ToString();
+                } else
+                {
+                    return strArmor.ToString();
+                }
             default:
                 return Constants.zeroRating;
         }

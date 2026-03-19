@@ -175,6 +175,16 @@ public class ZoneOfInfluenceDescriptorAbility : PassiveAbility
         return 1;
     }
 
+	public override void describeSelfRow(DescriptionPanel panel)
+	{
+		base.describeSelfRow(panel);
+		
+		if(panel.statText != null && !(panel.statText is null) && getRequiredStatLevel() >= 0)
+		{
+			panel.statText.text = "" + getRequiredStatLevelForDisplay();
+		}
+	}
+
     public override List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
     {
         return zoiTrait.getDescriptionBuildingBlocks();

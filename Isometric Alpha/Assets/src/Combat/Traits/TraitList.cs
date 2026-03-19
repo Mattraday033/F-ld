@@ -127,6 +127,7 @@ public static class TraitList
 	public readonly static LinkTrait chokeholdLinkTrait = new LinkTrait(StatSourceNameList.chokeholdKey, "This creature deals half of all damage received to whoever it is linked to.", "Chokehold", Constants.twoRoundDuration, chokeholdDamagePercentage);
 	public readonly static Trait rallied = new DamageBoostTrait(StatSourceNameList.ralliedKey, iconName: "Rally", roundsLeft: Constants.fourRoundDuration, permanent: false);
 	public readonly static Trait chewBuzz = new DamageBoostTrait(StatSourceNameList.chewBuzzKey, iconName: StatSourceNameList.chewBuzzKey, roundsLeft: Constants.threeRoundDuration);
+    public readonly static Trait standTogether = new Trait(StatSourceNameList.standTogetherKey, TraitType.Boost ,"This Creature attacks in unison with it's allies, dealing extra damage.", iconName: StatSourceNameList.standTogetherKey, permanent: true);
 
 
 	//temporary debuffs
@@ -134,6 +135,7 @@ public static class TraitList
 	public readonly static Trait bristled = new Trait(StatSourceNameList.bristledKey, TraitType.Wound, "This creature takes extra damage whenever it is hit", "Bristled", roundsLeft: Constants.fourRoundDuration);
 	public readonly static Trait upsideTheHead = new CrowdControlTrait(StatSourceNameList.upsideTheHeadKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "UpsideTheHead", roundsLeft: Constants.oneRoundDuration);
 	public readonly static Trait tripped = new CrowdControlTrait(StatSourceNameList.tripKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Trip", roundsLeft: Constants.endOfRoundDuration);
+	public readonly static Trait aliveBarely = new CrowdControlTrait(StatSourceNameList.aliveBarelyKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Rip Apart", roundsLeft: Constants.endOfRoundDuration);
 	public readonly static Trait countered = new CrowdControlTrait(StatSourceNameList.counteredKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Trip", roundsLeft: Constants.endOfRoundDuration);
 	public readonly static Trait acidVomit = new Trait(StatSourceNameList.acidVomitKey, TraitType.Wound, "This creature takes extra damage whenever it is hit", "Acid Vomit", roundsLeft: Constants.threeRoundDuration);
 	public readonly static Trait roasted = new StackableTrait(StatSourceNameList.roastedKey, TraitType.Wound, "Roasted to perfection. This creature takes an extra point of damage per stack", StatSourceNameList.roastedKey, startingStacks: Constants.oneStackAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication);

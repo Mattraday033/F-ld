@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Ability: CombatAction, IJSONConvertable
 {
-	private int requiredStatLevel = -1;
+	private int requiredStatLevel = 1;
 	private string statKey = "";
 	
 	private string key;
@@ -30,6 +30,7 @@ public class Ability: CombatAction, IJSONConvertable
 	public EnemyStats spawnType;
 
     public bool selfTargeting;
+    public bool targetsOnlyAllies;
     
     private bool _OnlyUsableDuringSurpriseRound; 
     public override bool onlyUsableDuringSurpriseRound
@@ -70,6 +71,7 @@ public class Ability: CombatAction, IJSONConvertable
         rangeIndex = settings.targetParams.rangeIndex;
 
         selfTargeting = settings.targetParams.selfTargeting;
+        targetsOnlyAllies = settings.targetParams.targetsOnlyAllies;
 
 		maximumSlots = settings.frequencyParams.maximumSlots;
 		maximumCooldown = settings.frequencyParams.maximumCooldown;
@@ -250,6 +252,11 @@ public class Ability: CombatAction, IJSONConvertable
 		return selfTargeting;
 	}
 	
+    public override bool targetsAllySection()
+    {
+        return targetsOnlyAllies;
+    }
+
 	public override string getDisplayType()
 	{
 		return "Ability";
@@ -338,29 +345,26 @@ public class Ability: CombatAction, IJSONConvertable
 
 			int currentStat = 0;
 
-			if (statKey.Contains(AbilityList.strengthKeyChar))
-			{
-				currentStat = OverallUIManager.getCurrentPartyMember().getStrength();
+            char statKeyChar = statKey[0];
 
-			}
-			else if (statKey.Contains(AbilityList.dexterityKeyChar))
-			{
-				currentStat = OverallUIManager.getCurrentPartyMember().getDexterity();
-
-			}
-			else if (statKey.Contains(AbilityList.wisdomKeyChar))
-			{
-				currentStat = OverallUIManager.getCurrentPartyMember().getWisdom();
-
-			}
-			else if (statKey.Contains(AbilityList.charismaKeyChar))
-			{
-				currentStat = OverallUIManager.getCurrentPartyMember().getCharisma();
-			}
-			else
-			{
-				throw new IOException("Unknown statKey: " + statKey);
-			}
+            switch(statKeyChar)
+            {
+                case AbilityList.levelKeyChar:
+				    currentStat = OverallUIManager.getCurrentPartyMember().getLevel();
+                    break;
+                case AbilityList.strengthKeyChar:
+				    currentStat = OverallUIManager.getCurrentPartyMember().getStrength();
+                    break;
+                case AbilityList.dexterityKeyChar:
+				    currentStat = OverallUIManager.getCurrentPartyMember().getDexterity();
+                    break;
+                case AbilityList.wisdomKeyChar:
+				    currentStat = OverallUIManager.getCurrentPartyMember().getWisdom();
+                    break;
+                case AbilityList.charismaKeyChar:
+				    currentStat = OverallUIManager.getCurrentPartyMember().getCharisma();
+                    break;
+            }
 
 			if (getRequiredStatLevel() > currentStat)
 			{

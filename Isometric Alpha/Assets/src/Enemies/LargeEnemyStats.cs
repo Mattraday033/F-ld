@@ -162,6 +162,11 @@ public class LargeEnemyStats : EnemyStats
         return coords.Any(x => spawnDetails.allSpawnPositions.Contains(x));
     }
 
+    public override bool multiSpaceEnemy()
+    {
+        return true;
+    }
+
     #endregion
 
     #region AnimationManager

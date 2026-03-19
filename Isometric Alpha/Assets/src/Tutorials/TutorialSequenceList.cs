@@ -27,6 +27,11 @@ public static class TutorialSequenceList
     public const string traitTutorialSequenceKey = "Trait Tutorial";
     public const string traitTutorialSeenFlag = "traitTutorialSequenceEntered";
 
+
+    public const string mandatoryTargetMonsterTargetHash = "Mandatory Target Monster";
+    public const string mandatoryTargetTutorialSequenceKey = "Mandatory Target Tutorial";
+    public const string mandatoryTargetTutorialSeenFlag = "mandatoryTargetTutorialSequenceEntered";
+
     public const string skipThatchShackTutorialsFlag = "skipThatchShackTutorials";
     public const string firstHostilityTutorialSeenFlag = "firstHostilityTutorialSequenceEntered";
 	public const string intimidateTutorialSeenFlag = "intimidateTutorialSequenceEntered";
@@ -162,6 +167,7 @@ public static class TutorialSequenceList
         initializeAddingAbilitiesTutorial();
         
         initializeTraitTutorial();
+        initializeMandatoryTargetTutorial();
         initializeMovableObjectTutorial();
         // initializePartyMemberUpgradeTutorial();
         initializePlayerLevelUpTutorial();
@@ -735,12 +741,46 @@ public static class TutorialSequenceList
         traitTutorialSteps.Add(traitTutorialStepThree);
 
 
-        TutorialSequence traitTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingActor, doNoSkipCurrentActivityChange, traitTutorialSequenceKey, traitTutorialSteps);
+        TutorialSequence traitTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingActor, doNoSkipCurrentActivityChange, traitTutorialSeenFlag, traitTutorialSteps);
         traitTutorialSequence.preventMouseHovers = true;
 
         traitTutorialSequence.setSkipScript(new SkipCombatTutorialScript());
 
         tutorialSequenceDictionary.Add(traitTutorialSequenceKey, traitTutorialSequence);
+    }
+
+    public static void initializeMandatoryTargetTutorial()
+    {
+        List<TutorialSequenceStep> mandatoryTargetTutorialSteps = new List<TutorialSequenceStep>();
+
+        TutorialSequenceStep mandatoryTargetTutorialStepOne = new TutorialSequenceStep(TutorialMessageList.mandatoryTargetTutorialMessagePrefix + 1,
+                                                                             mandatoryTargetMonsterTargetHash,
+                                                                             ArrowDirection.Left,
+                                                                             KeyBindingList.moveNorthKey,
+                                                                             createPopUpScreenBlocker: createPopUpScreenBlocker,
+                                                                             scriptAtEnd: new SnapSelectorToMandatoryTarget());
+        mandatoryTargetTutorialStepOne.addShiftToKeyCodeMessage = true;
+        mandatoryTargetTutorialSteps.Add(mandatoryTargetTutorialStepOne);
+
+        mandatoryTargetTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.mandatoryTargetTutorialMessagePrefix + 2,
+                                                        traitDisplayTargetHash,
+                                                        ArrowDirection.Top));
+
+        TutorialSequenceStep mandatoryTargetTutorialStepThree = new TutorialSequenceStep(TutorialMessageList.mandatoryTargetTutorialMessagePrefix + 3,
+                                                                               traitDisplayTargetHash,
+                                                                               ArrowDirection.Left,
+                                                                               KeyBindingList.moveSouthKey,
+                                                                               scriptAtEnd: new SnapSelectorToPlayer());
+        mandatoryTargetTutorialStepThree.addShiftToKeyCodeMessage = true;
+        mandatoryTargetTutorialSteps.Add(mandatoryTargetTutorialStepThree);
+
+
+        TutorialSequence mandatoryTargetTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingActor, doNoSkipCurrentActivityChange, mandatoryTargetTutorialSeenFlag, mandatoryTargetTutorialSteps);
+        mandatoryTargetTutorialSequence.preventMouseHovers = true;
+
+        mandatoryTargetTutorialSequence.setSkipScript(new SkipCombatTutorialScript());
+
+        tutorialSequenceDictionary.Add(mandatoryTargetTutorialSequenceKey, mandatoryTargetTutorialSequence);
     }
 
     public static TutorialSequence getCombatTutorialSequence()

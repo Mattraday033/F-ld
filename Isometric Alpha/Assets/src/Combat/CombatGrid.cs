@@ -589,6 +589,11 @@ public static class CombatGrid
 		for(int combatantIndex = 0; combatantIndex < combatantList.Count; combatantIndex++)
 		{
 			Stats currentCombatant = combatantList[combatantIndex];
+
+            if(currentCombatant.multiSpaceEnemy())
+            {
+                continue;
+            }
 			
 			for(int priorCombatantIndex = combatantIndex-1; priorCombatantIndex >= 0; priorCombatantIndex--)
 			{

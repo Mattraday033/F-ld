@@ -72,12 +72,14 @@ public static class StatSourceNameList
     public const string exitStrategyKey = "Exit Strategy";
     public const string chokeholdKey = "Chokehold";
     public const string ralliedKey = "Rallied";
+    public const string standTogetherKey = "Stand Together";
 
     // Debuff traits
     public const string woundedKey = "Wounded";
     public const string bristledKey = "Bristled";
     public const string upsideTheHeadKey = "Upside The Head";
     public const string tripKey = "Tripped";
+    public const string aliveBarelyKey = "Alive, Barely";
     public const string counteredKey = "Countered";
     public const string acidVomitKey = "Acid Vomit";
     public const string crippledKey = "Crippled";

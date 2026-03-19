@@ -36,6 +36,7 @@ public static class TutorialMessageList
     public const string repositionStepKey = "Combat Tutorial Reposition Message 1";
 
     public const string combatTraitTutorialMessagePrefix = "Combat Trait Tutorial Message ";
+    public const string mandatoryTargetTutorialMessagePrefix = "Mandatory Target Tutorial Message ";
 
 
     public const string exuberanceCostTutorialMessagePrefix = "Exuberance Cost Tutorial Message ";
@@ -153,6 +154,10 @@ public static class TutorialMessageList
         tutorialDictionary.Add(combatTraitTutorialMessagePrefix + 2, "When your selector is under a single creature, that creature's stats will be displayed here.");
         tutorialDictionary.Add(combatTraitTutorialMessagePrefix + 3, "These icons show the enemy's traits. Traits are special boosts or penalties that have been applied to a creature. Hover over them to learn more about them.");
 
+        tutorialDictionary.Add(mandatoryTargetTutorialMessagePrefix + 1, "This creature has a trait that makes it the Mandatory Target. Press ' " + jumpKeyCodePlaceHolder + " ' + ' " + keyCodePlaceHolder + " ' to quickly select it.");
+        tutorialDictionary.Add(mandatoryTargetTutorialMessagePrefix + 2, "Being the Mandatory Target means every effect that targets something on it's side of the field must include it.");
+        tutorialDictionary.Add(mandatoryTargetTutorialMessagePrefix + 3, "Actions that do not include at least one Mandatory Target will be prevented from being added to the Action Queue.");
+
         tutorialDictionary.Add(questCounterTutorialMessagePrefix + 1, "This is the Quest Counter. It appears when you enter an area with a Quest Objective.");
         tutorialDictionary.Add(questCounterTutorialMessagePrefix + 2, "You can view the Quests with Objectives in the current area on your Map.");
         tutorialDictionary.Add(questCounterTutorialMessagePrefix + 3, "This is your Map. It will only show you places you've been before. Nearby locations will be silhouetted in black.");
@@ -173,6 +178,7 @@ public static class TutorialMessageList
             case observationTutorialMessagePrefix + "1":
                 message = message.Replace(revealKeyCodePlaceHolder, KeyBindingList.revealKey.ToString());
                 break;
+            case mandatoryTargetTutorialMessagePrefix + "1":
             case combatTraitTutorialMessagePrefix + "1":
                 message = message.Replace(jumpKeyCodePlaceHolder, KeyBindingList.jumpMoveKey.ToString());
                 break;

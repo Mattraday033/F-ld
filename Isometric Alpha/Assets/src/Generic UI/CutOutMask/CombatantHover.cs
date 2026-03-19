@@ -196,7 +196,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     public SpriteOutline getSpriteOutline()
     {
-        return getTargetStats().outline;
+        return getTargetStats().getOutlines()[0];
     }
     
 	public void createListeners()

@@ -591,6 +591,24 @@ public class AllyStats : Stats
         return charisma + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusCharismaFormula());
     }
 
+    public override int getZOIStat()
+    {
+        switch(getName())
+        {
+            case NPCNameList.thatch:
+
+                if(getStrength() > getCharisma())
+                {
+                    return getStrength();
+                } else
+                {
+                    return getCharisma();
+                }
+            default:
+                return getCharisma();
+        }
+    }
+
     public void incrementCharisma()
     {
         charisma++;
@@ -896,7 +914,7 @@ public class AllyStats : Stats
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusExuberancesBlock(getBonusExuberances().ToString()));
         if(getZoneOfInfluenceTrait() != null)
         {
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getZOIBlock(getCharisma().ToString(), getZoneOfInfluenceTrait().getIconName()));
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getZOIBlock(getZOIStat().ToString(), getZoneOfInfluenceTrait().getIconName()));
         }
         // buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getZoneOfInfluenceTrait().getIconName()));
 

@@ -198,7 +198,7 @@ public class SelectorManager : MonoBehaviour
 	public static void displayCurrentHoverUI()
 	{
 		if (!currentSelector.singleTile ||
-			(!Flags.getFlag(TutorialSequenceList.combatTutorialSeenFlag) &&
+			(!TutorialFlags.getFlag(TutorialSequenceList.combatTutorialSeenFlag) &&
 			CombatStateManager.currentActivity != CurrentActivity.Tutorial))
 		{
 			instance.hoverPanelPopUpButton.destroyPopUp();

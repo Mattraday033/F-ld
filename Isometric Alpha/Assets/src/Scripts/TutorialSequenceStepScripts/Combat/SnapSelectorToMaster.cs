@@ -29,3 +29,30 @@ public class SnapSelectorToMaster : TutorialSequenceStepScript
     }
 
 }
+
+public class SnapSelectorToMandatoryTarget : TutorialSequenceStepScript
+{
+    public override void runScript(GameObject target) 
+    {
+        // snaps to master with shielded trait
+        List<Stats> allEnemies = CombatGrid.getAllAliveEnemyCombatants();
+
+        Stats mandatoryTarget;
+
+        foreach (EnemyStats enemy in allEnemies)
+        {
+            if (enemy.isMandatoryTarget())
+            {
+                mandatoryTarget = enemy;
+
+                SelectorManager.currentSelector.setToLocation(mandatoryTarget.position);
+
+                SelectorManager.declareSelectors();
+
+                SpawnHoverPanel.runInstanceOfScript();
+                return;
+            }
+        }
+    }
+
+}

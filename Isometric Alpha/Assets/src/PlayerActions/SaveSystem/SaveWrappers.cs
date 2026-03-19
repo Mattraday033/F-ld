@@ -198,6 +198,8 @@ public struct QuestWrapper
 
         for(int stepIndex = 0; stepIndex < quest.steps.Count && stepIndex < steps.Length; stepIndex++)
         {
+            steps[stepIndex].stepName = stepNameEdits(steps[stepIndex].stepName);
+
             quest.steps[steps[stepIndex].stepName] = steps[stepIndex].unwrapQuestStep(quest.steps[steps[stepIndex].stepName]);
         }
 
@@ -207,6 +209,18 @@ public struct QuestWrapper
         }
 
         return quest;
+    }
+
+    private static string stepNameEdits(string stepName)
+    {
+        switch(stepName)
+        {
+            case "Find the key to the Director's office.":
+                return QuestNameList.thePlanStepTitleFifteen;
+
+            default:
+                return stepName;
+        }
     }
 }
 

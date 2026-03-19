@@ -10,6 +10,7 @@ public static class AbilityList
 	public const int minimumNumberOfAbilitiesPerLevel = 1;
     public const int maximumNumberOfAbilitiesPerLevel = 10;
 
+	public const char levelKeyChar 	= 'l';
     public const char strengthKeyChar 	= 's';
 	public const char dexterityKeyChar 	= 'd';
 	public const char wisdomKeyChar 	= 'w';
@@ -158,6 +159,8 @@ public static class AbilityList
 	public const string wormFumesIndicatorName = "AcidPoolIndicator";
 	public readonly static GroundEffect wormFumesGroundEffect = new GroundEffect("8", 4, GridCoords.getDefaultCoords(), Resources.Load<GameObject>(wormFumesIndicatorName));
 	
+    public const string chokeholdKey = "Chokehold";
+
 	public static Dictionary<string,Ability> statAbilityDictionary;
 	public static Dictionary<string,Ability> summonAbilityDictionary;
 	public static Dictionary<string,Ability> enemyAbilityDictionary;
@@ -290,7 +293,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(strengthKeyChar);
-        statAbilityDictionary.Add(currentKey, new EstablishLinkAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Chokehold", "Grapple with the enemy, preventing them from acting and making them take half of any damage taken by the caster."), DamageParams.build("S", "D"), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), TraitList.chokehold), TraitList.chokeholdLinkTrait));
+        statAbilityDictionary.Add(currentKey, new EquippedPassive(CombatActionSettings.build(currentKey, TraitList.bloodlust)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(strengthKeyChar);
@@ -298,7 +301,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(strengthKeyChar);
-        statAbilityDictionary.Add(currentKey, new EquippedPassive(CombatActionSettings.build(currentKey, TraitList.bloodlust)));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Rip Apart", "Focus all of your fury into a single target. Deals massive damage. If the target survives, they cannot act until the next turn."), DamageParams.build("9S+D+W", "10S"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), CostParams.build(ActionCostType.Bloodlust, fiveStackCastCost), AnimationParams.build(EffectAnimationType.Slash), TraitList.aliveBarely)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         //start of Dex Abilities
@@ -410,9 +413,14 @@ public static class AbilityList
 
         // listOfNandorAbilities.Add(new EquippedPassive(CombatActionSettings.build(NPCNameList.nandor, TraitList.persistentInfluence)));
 
-        ReviveAbility nandorRevive = new ReviveAbility(CombatActionSettings.build(NPCNameList.nandor+1, DescriptionParams.build("On Your Feet!", "Cutting an inspiring figure, the companion brings some of the formation back from the brink of submission. Every companion in this ability's area that is downed is healed and put back on their feet.", "OnYourFeet"), DamageParams.build("50"), FrequencyParams.build(oneSlotMax, fiveRoundCooldown)));
-        miscAbilityDictionary.Add(nandorRevive.getKey(), nandorRevive);
-        listOfNandorAbilities.Add(nandorRevive);
+        // ReviveAbility nandorRevive = new ReviveAbility(CombatActionSettings.build(NPCNameList.nandor+1, DescriptionParams.build("On Your Feet!", "Cutting an inspiring figure, the companion brings some of the formation back from the brink of submission. Every companion in this ability's area that is downed is healed and put back on their feet.", "OnYourFeet"), DamageParams.build("50"), FrequencyParams.build(oneSlotMax, fiveRoundCooldown)));
+        // miscAbilityDictionary.Add(nandorRevive.getKey(), nandorRevive);
+        // listOfNandorAbilities.Add(nandorRevive);
+
+        Ability standTogether = new Ability(CombatActionSettings.build(StatSourceNameList.standTogetherKey, DescriptionParams.build(StatSourceNameList.standTogetherKey, "The caster calls for all of his allies to act as one. Allies in the area deal extra damage for the rest of Combat"), TargetParams.build(Range.boxThreeIndex, targetsOnlyAllies: true), FrequencyParams.build(oneSlotMax, eightRoundCooldown), TraitList.standTogether));
+        standTogether.setStatRequirements("l-3");
+        listOfNandorAbilities.Add(standTogether);
+        miscAbilityDictionary.Add(standTogether.getKey(), standTogether); // here for loading, if not here then this ability will be replaced with default fist ability on load
 
 		companionAbilityDictionary.Add(NPCNameList.nandor,listOfNandorAbilities);
 		
@@ -427,25 +435,38 @@ public static class AbilityList
 
 		// listOfThatchAbilities.Add(new EquippedPassive(CombatActionSettings.build(NPCNameList.thatch, TraitList.stalwartInfluence)));
 
-        RepositionSelfAbility thatchSacrifice = new RepositionSelfAbility(CombatActionSettings.build(NPCNameList.thatch+1, DescriptionParams.build("Daring Sacrifice", "This creature repositions themselves and becomes invulnerable for one turn. All enemy attack patterns must include this creature when possible, even if they normally would not.", "DaringSacrifice"), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), TraitList.daringSacrifice));
-        miscAbilityDictionary.Add(thatchSacrifice.getKey(), thatchSacrifice);
-        listOfThatchAbilities.Add(thatchSacrifice);
+        // RepositionSelfAbility thatchSacrifice = new RepositionSelfAbility(CombatActionSettings.build(NPCNameList.thatch+1, DescriptionParams.build("Daring Sacrifice", "This creature repositions themselves and becomes invulnerable for one turn. All enemy attack patterns must include this creature when possible, even if they normally would not.", "DaringSacrifice"), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), TraitList.daringSacrifice));
+        // miscAbilityDictionary.Add(thatchSacrifice.getKey(), thatchSacrifice);
+        // listOfThatchAbilities.Add(thatchSacrifice);
 		
+        PassiveAbility influentialStrength = new PassiveAbility(CombatActionSettings.build(DescriptionParams.build("Influential Strength", "This Companion's Zone of Influence scales with either their Strength or Charisma, whichever is higher.")));
+        influentialStrength.setStatRequirements("l-1");
+        listOfThatchAbilities.Add(influentialStrength);
+
+        EstablishLinkAbility chokehold = new EstablishLinkAbility(CombatActionSettings.build(chokeholdKey, DescriptionParams.build(chokeholdKey, "You grapple with the enemy, preventing both yourself and the target from acting. Whenever you take damage while stunned in this way, you only take half of that damage and the target takes the other half."), DamageParams.build("S", "D"), FrequencyParams.build(oneSlotMax, eightRoundCooldown), TraitList.chokehold), TraitList.chokeholdLinkTrait);
+        chokehold.setStatRequirements("l-3");
+        listOfThatchAbilities.Add(chokehold);
+        miscAbilityDictionary.Add(chokehold.getKey(), chokehold); // here for loading, if not here then this ability will be replaced with default fist ability on load
+
+
 		companionAbilityDictionary.Add(NPCNameList.thatch,listOfThatchAbilities);
 		
 		
 		List<CombatAction> listOfCarterAbilities = new List<CombatAction>();
 
-        Ability carterBomb = new Ability(CombatActionSettings.build(NPCNameList.carter+1, DescriptionParams.build("Bristle Bomb", "The caster throws a bomb, damaging the targets and leaving them bristling with needles."), DamageParams.build("2 + 2C", "4 + C"), TargetParams.build(Range.boxOneIndex), FrequencyParams.build(oneSlotMax, fourRoundCooldown), TraitList.bristled));
-        miscAbilityDictionary.Add(carterBomb.getKey(), carterBomb);
-        listOfCarterAbilities.Add(carterBomb);
+        // Ability carterBomb = new Ability(CombatActionSettings.build(NPCNameList.carter+1, DescriptionParams.build("Bristle Bomb", "The caster throws a bomb, damaging the targets and leaving them bristling with needles."), DamageParams.build("2 + 2C", "4 + C"), TargetParams.build(Range.boxOneIndex), FrequencyParams.build(oneSlotMax, fourRoundCooldown), TraitList.bristled));
+        // miscAbilityDictionary.Add(carterBomb.getKey(), carterBomb);
+        // listOfCarterAbilities.Add(carterBomb);
 
         // listOfCarterAbilities.Add(new Ability(CombatActionSettings.build(NPCNameList.carter, DescriptionParams.build("Upside The Head", "The caster gives the target a good thwacking, taking it out of commision for three rounds. Only usable in the suprise round."), DamageParams.build("2 + 2C", "4 + C"), FrequencyParams.build(oneSlotMax, noCooldown, !FrequencyParams.usableOutsideSurpriseRound), TraitList.upsideTheHead)));
 
         // listOfCarterAbilities.Add(new EquippedPassive(CombatActionSettings.build(NPCNameList.carter, TraitList.cleverInfluence))); 
 
-        // listOfCarterAbilities.Add(new TraitBasedDamageAbility(CombatActionSettings.build(NPCNameList.carter, DescriptionParams.build("Bouncing Blade", "The companion throws his blade, striking multiple targets in a line and dealing extra damage per additional trait applied to the target.", "BouncingBlade"), DamageParams.build("25 + 3C", "28"), TargetParams.build(Range.verticalThreeIndex), FrequencyParams.build(oneSlotMax, fiveRoundCooldown)), 0.25));
-		
+        TraitBasedDamageAbility bouncingBlade = new TraitBasedDamageAbility(CombatActionSettings.build("Bouncing Blade", DescriptionParams.build("Bouncing Blade", "The caster throws their blade, striking multiple targets in a line and dealing extra damage per additional trait applied to the target.", "BouncingBlade"), DamageParams.build("6D+W+C", "4D"), TargetParams.build(Range.verticalThreeIndex), FrequencyParams.build(oneSlotMax, fiveRoundCooldown)), 0.25);
+        bouncingBlade.setStatRequirements("l-3");
+        listOfCarterAbilities.Add(bouncingBlade);
+        miscAbilityDictionary.Add(bouncingBlade.getKey(), bouncingBlade);
+
 		companionAbilityDictionary.Add(NPCNameList.carter, listOfCarterAbilities);
 		
 	}

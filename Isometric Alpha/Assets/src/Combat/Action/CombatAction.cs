@@ -194,7 +194,8 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public virtual string getFinalCritFormula()
     {
-        string finalCritFormula = DamageCalculator.combineFormulas(getCritFormula(), gatherAllNonActionFormulas(a => a.getCritFormula()));
+        string finalCritFormula = gatherAllNonActionFormulas(a => a.getCritFormula());
+        //DamageCalculator.combineFormulas(getCritFormula(), );
 
         int critChance = DamageCalculator.calculateFormula(finalCritFormula, getStatSource());
 
@@ -1185,7 +1186,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
     {
         int reqLevel = getRequiredStatLevel();
 
-        if(reqLevel <= 1)
+        if(reqLevel < 1)
         {
             return Constants.emptyString;
         }

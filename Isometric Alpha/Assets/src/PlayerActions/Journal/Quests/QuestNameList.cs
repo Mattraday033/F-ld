@@ -246,7 +246,7 @@ public static class QuestNameList
     public const string thePlanStepTitleTwelve = "Free the others.";
     public const string thePlanStepTitleThirteen = "Take your revenge.";
     public const string thePlanStepTitleFourteen = "Take your revenge.1";
-    public const string thePlanStepTitleFifteen = "Find the key to the Director's office.";
+    public const string thePlanStepTitleFifteen = "Find the Director's office key.";
     public const string thePlanStepTitleSixteen = "Found half a key.";
     public const string thePlanStepTitleSeventeen = "Found both parts of the key.";
     public const string thePlanStepTitleEighteen = "I killed the Director.";

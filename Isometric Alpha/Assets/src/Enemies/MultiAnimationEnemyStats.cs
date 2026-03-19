@@ -22,6 +22,7 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
     public Dictionary<GridCoords, AnimationManager> animationManagers;
     public Dictionary<GridCoords, SpriteOutline> outlines;
     public Dictionary<GridCoords, CombatantHover> combatantHovers;
+    public Dictionary<GridCoords, TutorialSequenceStepTargetObject> tutorialTargets;
 
     #endregion
 
@@ -56,6 +57,7 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
         spriteRenderers = new Dictionary<GridCoords, SpriteRenderer>();
         outlines = new Dictionary<GridCoords, SpriteOutline>();
         combatantHovers = new Dictionary<GridCoords, CombatantHover>();
+        tutorialTargets = new Dictionary<GridCoords, TutorialSequenceStepTargetObject>();
 
         foreach(GridCoords coords in spawnDetails.allSpawnPositions)
         {
@@ -88,13 +90,14 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
 
         foreach(AnimationManager animationManager in animationManagers.Values)
         {
+            animationManager.linkedStats = this;
             animationManager.healthBarManager = healthBarManager;
             animationManager.setAnimations(getName());
-
-            animationManager.linkedStats = this;
         }
 
         combatSprite = combatSprites[spawnDetails.baseStatsPosition];
+
+        position = spawnDetails.baseStatsPosition;
 
         setHealthBarToAverageWorldPosition();
 
@@ -120,6 +123,9 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
 
         combatantHovers[coords] = list.combatantHover;
         combatantHovers[coords].linkedStats = this;
+
+        tutorialTargets[coords] = list.tutorialTarget;
+        tutorialTargets[coords].tutorialHash = getTutorialTargetHash();
     }
 
     public override void destroyCombatSprite()
@@ -174,6 +180,11 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
         {
             outline.removeOutline();
         }
+    }
+
+    public override SpriteOutline[] getOutlines()
+    {
+        return outlines.Values.ToArray();
     }
 
     // public override bool isInsideCoordinates(GridCoords coords)

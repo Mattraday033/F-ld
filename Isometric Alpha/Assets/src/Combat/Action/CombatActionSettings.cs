@@ -72,23 +72,20 @@ public class TargetParams
 
     public int rangeIndex;
     public bool selfTargeting;
+    public bool targetsOnlyAllies;
 
     public static TargetParams build()
     {
         return build(Range.singleTargetIndex, notSelfTargeting);
     }
 
-    public static TargetParams build(int rangeIndex)
-    {
-        return build(rangeIndex, notSelfTargeting);
-    }
-
-    public static TargetParams build(int rangeIndex, bool selfTargeting)
+    public static TargetParams build(int rangeIndex, bool selfTargeting = false, bool targetsOnlyAllies = false)
     {
         TargetParams parameters = new TargetParams();
 
         parameters.rangeIndex = rangeIndex;
         parameters.selfTargeting = selfTargeting;
+        parameters.targetsOnlyAllies = targetsOnlyAllies;
 
         return parameters;
     }

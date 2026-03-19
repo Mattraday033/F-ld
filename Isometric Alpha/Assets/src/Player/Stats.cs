@@ -77,6 +77,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return ColorList.canBeInteractedWith;
     }
 
+    public virtual SpriteOutline[] getOutlines()
+    {
+        return new SpriteOutline[]{outline};
+    }
+
     public void setPreviousColor(Color newColor)
     {
         if (previousColor.Equals(Color.clear) && !newColor.Equals(Color.clear))
@@ -190,6 +195,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         outline.removeOutline();
     }
 
+    public virtual bool multiSpaceEnemy()
+    {
+        return false;
+    }
+
     public virtual void destroyCombatSprite()
     {
         Destroy(combatSprite);
@@ -242,13 +252,18 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     #region Tutorial
     
-    public TutorialSequenceStepTargetObject tutorialTarget;
+    public TutorialSequenceStepTargetObject  tutorialTarget;
 
     public string getTutorialTargetHash()
     {
         if(getName().Equals(PartyManager.getPlayerStats().getName()))
         {
             return TutorialSequenceList.playerCombatSpriteTargetHash;
+        }
+
+        if(isMandatoryTarget())
+        {
+            return TutorialSequenceList.mandatoryTargetMonsterTargetHash;
         }
 
         switch(getName())
@@ -474,6 +489,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     public virtual int getCharisma()
     {
         return 1;
+    }
+
+    public virtual int getZOIStat()
+    {
+        return getCharisma();
     }
 
     public virtual int getSynergyCoefficient()

@@ -760,7 +760,7 @@ public class CombatStateManager : MonoBehaviour
 	private static string getCombatTutorialKey()
 	{
 
-		if (!Flags.getFlag(TutorialSequenceList.combatTutorialSeenFlag))
+		if (!TutorialFlags.getFlag(TutorialSequenceList.combatTutorialSeenFlag))
 		{
 			return TutorialSequenceList.combatTutorialSeenFlag;
 		}

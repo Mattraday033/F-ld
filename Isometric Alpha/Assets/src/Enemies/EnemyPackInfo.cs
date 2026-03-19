@@ -20,8 +20,30 @@ public class CreatureAmount
 //info about a pack of enemies on the overworld, such as how many of them there are and of what type. Stored in State
 public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks, ICreatureSpawnPackage
 {
+    private string _TutorialSequenceKey;
 
-    public string tutorialSequenceKey;
+    public string tutorialSequenceKey
+    {
+        get
+        {
+            if(!TutorialFlags.getFlag(TutorialSequenceList.mandatoryTargetTutorialSeenFlag))
+            {
+                foreach(CreatureAmount creatureAmount in FoeTypes)
+                {
+                    if(creatureAmount.enemyStats.isMandatoryTarget())
+                    {
+                        return TutorialSequenceList.mandatoryTargetTutorialSequenceKey;
+                    }
+                }
+            }
+            
+            return _TutorialSequenceKey;
+        } 
+        private set
+        {
+            _TutorialSequenceKey = value;
+        }
+    }
 
     public CreatureAmount[] FoeTypes;
 
