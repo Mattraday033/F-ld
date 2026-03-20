@@ -193,6 +193,11 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         }
     }
 
+    public virtual void Start()
+    {
+        animationManager.linkedStats = EnemyPackInfoList.getEnemyPackInfo(AreaManager.locationName, getMonsterPackIndex()).FoeTypes[0].enemyStats.clone();
+    }
+
     #region MovementTracker Overrides
 
     public override bool isDefeated()

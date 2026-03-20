@@ -2,13 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
-
 public class CombatantHover : CombatMouseHover, IRevealable
 {
+    public readonly static UnityEvent HighlightAllMandatoryTargets = new UnityEvent();
+    public readonly static UnityEvent<Stats> StopHighlightFadeMandatoryTarget = new UnityEvent<Stats>();
+
+    private const float timeToWaitFull = .5f;
+    private const float timeToWaitFade = 1f;
+
     public bool revealPriorityHeld = false;
     public Stats linkedStats;
     private List<Selector> selectors = new List<Selector>();
+
+    private Coroutine highlightAndFadeCoroutine;
+
+    private void stopHighlightAndFade(Stats stats)
+    {
+        if(stats == linkedStats)
+        {
+            StopCoroutine(highlightAndFadeCoroutine);
+            highlightAndFadeCoroutine = null;
+            linkedStats.removeOutline();
+        }
+    }
+
+    private void highlightMandatoryTarget()
+    {
+        if(linkedStats != null && linkedStats as AllyStats == null && linkedStats.isMandatoryTarget())
+        {
+            if(highlightAndFadeCoroutine != null)
+            {
+                StopCoroutine(highlightAndFadeCoroutine);
+            }
+
+            highlightAndFadeCoroutine = StartCoroutine(highlightAndFade());
+        } 
+    }
+
+    private IEnumerator highlightAndFade()
+    {
+        getTargetStats().setOutline();
+
+        float timeWaited = 0f;
+
+        while(timeWaited < timeToWaitFull)
+        {
+            yield return null;
+            timeWaited += Time.deltaTime;
+        }
+
+        timeWaited = 0f;
+
+        while(timeWaited < timeToWaitFade)
+        {
+            yield return null;
+            timeWaited += Time.deltaTime;
+
+            getTargetStats().setOutline((byte) Mathf.Lerp(254f, 0f, timeWaited/timeToWaitFade));
+        }
+
+        getTargetStats().removeOutline();
+
+    }
 
     public void OnMouseEnter()
     {
@@ -110,9 +167,13 @@ public class CombatantHover : CombatMouseHover, IRevealable
         return linkedStats.position;
     }
 
-
     public void onReveal(bool toggleReveal)
     {
+        if(highlightAndFadeCoroutine != null)
+        {
+            StopHighlightFadeMandatoryTarget.Invoke(linkedStats);
+        }
+
         if(toggleReveal && (!linkedStats.isDead() || revealPriorityHeld))
         {
             getTargetStats().setOutline();
@@ -205,6 +266,8 @@ public class CombatantHover : CombatMouseHover, IRevealable
         DamagePreviewManager.UpdateDamagePreviews.AddListener(addDamagePreview);
         HoverPanelPopUpButton.HoverPriorityRequest.AddListener(answerCurrentCombatantPriorityRequest);
         CombatResultsUI.OnCombatResultsUICreation.AddListener(disableCollider);
+        HighlightAllMandatoryTargets.AddListener(highlightMandatoryTarget);
+        StopHighlightFadeMandatoryTarget.AddListener(stopHighlightAndFade);
     }
 
 	public void destroyListeners()
@@ -213,6 +276,8 @@ public class CombatantHover : CombatMouseHover, IRevealable
         DamagePreviewManager.UpdateDamagePreviews.RemoveListener(addDamagePreview);
         HoverPanelPopUpButton.HoverPriorityRequest.RemoveListener(answerCurrentCombatantPriorityRequest);
         CombatResultsUI.OnCombatResultsUICreation.RemoveListener(disableCollider);
+        HighlightAllMandatoryTargets.RemoveListener(highlightMandatoryTarget);
+        StopHighlightFadeMandatoryTarget.RemoveListener(stopHighlightAndFade);
     }
 
     public void disableCollider()

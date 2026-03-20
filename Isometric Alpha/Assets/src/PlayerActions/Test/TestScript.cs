@@ -12,8 +12,8 @@ public static class TestScript
         }
 
         // State.debugStopMonsterSpawning = true;
-        State.debugDiscoverAllLocations = true;
-        State.allLocationsFastTravelAvailable = true;
+        // State.debugDiscoverAllLocations = true;
+        // State.allLocationsFastTravelAvailable = true;
         // State.debugRetreatAutoSucceed = true;
         // State.enableGridDebugger = true;
 

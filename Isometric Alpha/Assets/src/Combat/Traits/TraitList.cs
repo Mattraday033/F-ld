@@ -113,7 +113,7 @@ public static class TraitList
 	public readonly static Trait wormBossExplodes = new SelfTargetAOEOnDeathTrait(StatSourceNameList.volatileKey, "When this creature is killed, it damages all creatures near it.", "Volatile", AbilityList.wormBossExplosionKey);
 	public readonly static Trait wormRevive = new SelfTargetAOEOnDeathTrait(StatSourceNameList.restorativeKey, "When this creature is killed, it brings back all downed creatures near it.", "Restorative", AbilityList.wormRestorativeKey);
 	public readonly static Trait wormBossRevive = new SelfTargetAOEOnDeathTrait(StatSourceNameList.restorativeKey, "When this creature is killed, it brings back all downed creatures near it.", "Restorative", AbilityList.wormBossRestorativeKey, targetPriority: specificBoxTwoTwoRightCornerEnemySide);
-	public readonly static Trait wormBossFumesOnDeath = new OnDeathEffectTrait(StatSourceNameList.miasmicKey, "When this creature is killed, it releases a toxic gas as a final retribution against it's enemies.", "DeathFumes", AbilityList.wormOnDeathFumesKey, specificCheckeredLeftAlliedSide);
+	public readonly static Trait wormBossFumesOnDeath = new OnDeathEffectTrait(StatSourceNameList.miasmicKey, "When this creature is killed, it releases a toxic gas as a final retribution against it's enemies.", "DeathFumes", AbilityList.bossWormFumesKey, specificCheckeredLeftAlliedSide);
 
 
 	public readonly static Trait mobLinked = new Trait(StatSourceNameList.weaklyLinkedKey, TraitType.Passive, "This creature takes a percentage of it's total health as damage when a minion dies.", "Chain");

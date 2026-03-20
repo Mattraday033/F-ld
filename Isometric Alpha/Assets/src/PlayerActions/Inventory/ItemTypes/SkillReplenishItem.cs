@@ -44,7 +44,7 @@ public class SkillReplenishItem: UsableItem, IJSONConvertable
 	
 	public override bool fitsUseCriteria(Stats stats)
 	{
-		return stats == PartyManager.getPlayerStats() && CunningManager.getCunningsRemaining() < PartyStats.getMaxCunningCount();
+		return stats as AllyStats != null && CunningManager.getCunningsRemaining() < PartyStats.getMaxCunningCount();
 	}
 	
 	public override void describeSelfFull(DescriptionPanel panel)

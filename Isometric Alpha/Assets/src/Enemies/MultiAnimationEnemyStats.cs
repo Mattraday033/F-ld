@@ -174,6 +174,19 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
             outline.createOutline(getOutlineColor());
         }
     }
+
+    public override void setOutline(byte alpha)
+    {
+        Color32 color = getOutlineColor();
+
+        color.a = alpha;
+
+        foreach(SpriteOutline outline in outlines.Values)
+        {
+            outline.createOutline(color);
+        }
+    }
+
     public override void removeOutline()
     {
         foreach(SpriteOutline outline in outlines.Values)

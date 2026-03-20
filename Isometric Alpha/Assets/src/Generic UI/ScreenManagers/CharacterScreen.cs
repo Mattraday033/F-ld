@@ -11,6 +11,7 @@ public class CharacterScreen : ScreenManager, ICounter
 
     public TextMeshProUGUI abilityGridTitleHeader;
 
+    public GameObject amountIconColHeader;
     public GameObject lvlIconColHeader;
     public GameObject strIconColHeader;
     public GameObject dexIconColHeader;
@@ -89,7 +90,16 @@ public class CharacterScreen : ScreenManager, ICounter
 
         switch(currentList)
         {
+            case DescribableList.CombatUsableItems:
+                amountIconColHeader.SetActive(true);
+                lvlIconColHeader.SetActive(false);
+                strIconColHeader.SetActive(false);
+                dexIconColHeader.SetActive(false);
+                wisIconColHeader.SetActive(false);
+                chaIconColHeader.SetActive(false);
+                break;
             case DescribableList.CharacterSpecificAbilities:
+                amountIconColHeader.SetActive(false);
                 lvlIconColHeader.SetActive(true);
                 strIconColHeader.SetActive(false);
                 dexIconColHeader.SetActive(false);
@@ -97,6 +107,7 @@ public class CharacterScreen : ScreenManager, ICounter
                 chaIconColHeader.SetActive(false);
                 break;
             case DescribableList.Strength:
+                amountIconColHeader.SetActive(false);
                 lvlIconColHeader.SetActive(false);
                 strIconColHeader.SetActive(true);
                 dexIconColHeader.SetActive(false);
@@ -104,6 +115,7 @@ public class CharacterScreen : ScreenManager, ICounter
                 chaIconColHeader.SetActive(false);
                 break;
             case DescribableList.Dexterity:
+                amountIconColHeader.SetActive(false);
                 lvlIconColHeader.SetActive(false);
                 strIconColHeader.SetActive(false);
                 dexIconColHeader.SetActive(true);
@@ -111,6 +123,7 @@ public class CharacterScreen : ScreenManager, ICounter
                 chaIconColHeader.SetActive(false);
                 break;
             case DescribableList.Wisdom:
+                amountIconColHeader.SetActive(false);
                 lvlIconColHeader.SetActive(false);
                 strIconColHeader.SetActive(false);
                 dexIconColHeader.SetActive(false);
@@ -118,6 +131,7 @@ public class CharacterScreen : ScreenManager, ICounter
                 chaIconColHeader.SetActive(false);
                 break;
             case DescribableList.Charisma:
+                amountIconColHeader.SetActive(false);
                 lvlIconColHeader.SetActive(false);
                 strIconColHeader.SetActive(false);
                 dexIconColHeader.SetActive(false);
@@ -125,6 +139,7 @@ public class CharacterScreen : ScreenManager, ICounter
                 chaIconColHeader.SetActive(true);
                 break;
             default:
+                amountIconColHeader.SetActive(false);
                 lvlIconColHeader.SetActive(false);
                 strIconColHeader.SetActive(false);
                 dexIconColHeader.SetActive(false);

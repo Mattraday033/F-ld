@@ -163,6 +163,8 @@ public class CombatStateManager : MonoBehaviour
         CreatureSpawner.spawnEnemyPackInfo();
         CreatureSpawner.spawnAllyPackInfo();
 
+        EquippedPassiveTraitManager.ApplyAllEquippedPassiveTraits.Invoke();
+
 		// enemySpawner.spawn();
 		// partySpawner.spawnFormation();
 		// summonSpawner.spawn();

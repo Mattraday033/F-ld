@@ -13,6 +13,16 @@ public class TutorialSequenceStepTargetTraitRow : TutorialSequenceStepTargetUIOb
 	{
 		Trait traitBeingDescribed = descriptionPanel.getObjectBeingDescribed() as Trait;
 
+        if(traitBeingDescribed == null)
+        {
+            return "";
+        }
+
+        if(traitBeingDescribed.isMandatoryTarget())
+        {
+            return TutorialSequenceList.mandatoryTargetTraitIconTargetHash;
+        }
+
 		return traitBeingDescribed.getName() + " Trait Icon";
 	}
 

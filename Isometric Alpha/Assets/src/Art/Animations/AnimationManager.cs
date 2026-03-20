@@ -424,8 +424,12 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public void playDeathAnimationThenHide()
     {
+        if(currentIdle != getDeathAnimationType())
+        {
+            linkedStats.playAnimationSFX(CharacterAnimationType.Death);
+        }
+
         playAnimation(createClipTransitionToDeathThenHide());
-        linkedStats.playAnimationSFX(CharacterAnimationType.Death);
         // removeAnimation();
     }
 

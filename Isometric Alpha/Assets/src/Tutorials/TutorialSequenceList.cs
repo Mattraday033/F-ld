@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class TutorialSequenceList
 {
+    #region Flags and Hash's
     private const bool createPopUpScreenBlocker = true;
     private const bool enableAllDisabledRowButtons = true;
     private const bool skipHighlight = true;
@@ -29,6 +30,7 @@ public static class TutorialSequenceList
 
 
     public const string mandatoryTargetMonsterTargetHash = "Mandatory Target Monster";
+    public const string mandatoryTargetTraitIconTargetHash = "Mandatory Target Trait Icon";
     public const string mandatoryTargetTutorialSequenceKey = "Mandatory Target Tutorial";
     public const string mandatoryTargetTutorialSeenFlag = "mandatoryTargetTutorialSequenceEntered";
 
@@ -50,6 +52,9 @@ public static class TutorialSequenceList
     private const string equipmentGridTargetHash = "Equipment Grid";
     private const string itemGridTargetHash = "Item Grid";
     private const string inventoryScreenTargetHash = "Inventory Screen";
+
+    
+    private const string companionAbilityButtonTargetHash = "Companion Ability Button";
 
     private const string characterScreenBackground = "Character Screen Background";
     private const string characterScreenAbilityList = "Character Screen Ability List";
@@ -129,11 +134,15 @@ public static class TutorialSequenceList
     public const string playerSpriteOOCTargetHash = "Player";
     public const string playerSpriteOOCNoArrowTargetHash = "PlayerNoArrow";
 
+    public const string companionSpecificAbilitiesTutorialSequenceKey = "Companion Specific Abilities Tutorial";
+    public const string companionSpecificAbilitiesTutorialSeenFlag = "companionSpecificAbilitiesTutorialSequenceEntered";
+
     public const string exuberanceCostTutorialSequenceKey = "Exuberance Cost Tutorial";
     public const string exuberanceCostTutorialSeenFlag = "exuberanceCostTutorialSequenceEntered";
     public const string traitCostTutorialSequenceKey = "Trait Cost Tutorial";
     public const string traitCostTutorialSeenFlag = "traitCostTutorialSequenceEntered";
 
+    #endregion
 
     private const bool doNoSkipCurrentActivityChange = false;
 
@@ -164,13 +173,14 @@ public static class TutorialSequenceList
 
         initializeEquippableItemTutorial();
         initializeFormationPopUpItemTutorial();
-        initializeAddingAbilitiesTutorial();
         
         initializeTraitTutorial();
         initializeMandatoryTargetTutorial();
         initializeMovableObjectTutorial();
-        // initializePartyMemberUpgradeTutorial();
+        
         initializePlayerLevelUpTutorial();
+        initializeAddingAbilitiesTutorial();
+        initializeCompanionSpecificAbilitiesTutorial();
 
         initializeExuberanceCostTutorial();
         initializeTraitCostTutorial();
@@ -599,6 +609,22 @@ public static class TutorialSequenceList
         tutorialSequenceDictionary.Add(playerLevelUpTutorialSequenceKey, playerLevelUpTutorialSequence);
     }
 
+    public static void initializeCompanionSpecificAbilitiesTutorial()
+    {
+        TutorialSequenceStep companionSpecificAbilitiesStepOne = new TutorialSequenceStep(TutorialMessageList.companionSpecificAbiltiesTutorialMessagePrefix + 1,
+                                                                             companionAbilityButtonTargetHash,
+                                                                             ArrowDirection.Right);
+
+        TutorialSequence companionSpecificAbilitiesTutorialSequence = new TutorialSequence(OOCActivity.inUI, doNoSkipCurrentActivityChange, companionSpecificAbilitiesTutorialSeenFlag, new TutorialSequenceStep[] { 
+                                                                                                                                                                                            companionSpecificAbilitiesStepOne
+                                                                                                                                                                                        });
+
+        companionSpecificAbilitiesTutorialSequence.endOfSequenceEvent = AbilityGridSideTab.OnSideTabChosen;
+
+        companionSpecificAbilitiesTutorialSequence.setSkipScript(new SkipUpgradingPartyMemberTutorialScript());
+        tutorialSequenceDictionary.Add(companionSpecificAbilitiesTutorialSequenceKey, companionSpecificAbilitiesTutorialSequence);
+    }
+
     public static void initializeMovableObjectTutorial()
     {
         TutorialSequenceStep movableObjectStepOne = new TutorialSequenceStep(TutorialMessageList.movableObjectTutorialMessagePrefix + 1,
@@ -757,17 +783,19 @@ public static class TutorialSequenceList
                                                                              mandatoryTargetMonsterTargetHash,
                                                                              ArrowDirection.Left,
                                                                              KeyBindingList.moveNorthKey,
+                                                                             skipHighlight: false,
+                                                                             skipUnhighlight: true,
                                                                              createPopUpScreenBlocker: createPopUpScreenBlocker,
                                                                              scriptAtEnd: new SnapSelectorToMandatoryTarget());
         mandatoryTargetTutorialStepOne.addShiftToKeyCodeMessage = true;
         mandatoryTargetTutorialSteps.Add(mandatoryTargetTutorialStepOne);
 
         mandatoryTargetTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.mandatoryTargetTutorialMessagePrefix + 2,
-                                                        traitDisplayTargetHash,
-                                                        ArrowDirection.Top));
+                                                        mandatoryTargetTraitIconTargetHash,
+                                                        ArrowDirection.Left));
 
         TutorialSequenceStep mandatoryTargetTutorialStepThree = new TutorialSequenceStep(TutorialMessageList.mandatoryTargetTutorialMessagePrefix + 3,
-                                                                               traitDisplayTargetHash,
+                                                                               mandatoryTargetTraitIconTargetHash,
                                                                                ArrowDirection.Left,
                                                                                KeyBindingList.moveSouthKey,
                                                                                scriptAtEnd: new SnapSelectorToPlayer());

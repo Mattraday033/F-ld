@@ -778,7 +778,7 @@ public static class DialogueList
         addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section4b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
         addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section4b, NPCNameList.ancientPortcullis+1, ancientPortcullisDialogue);
 
-        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section5, NPCNameList.liftableRubble, liftableRubbleDialogue);
+        addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section5, NPCNameList.liftableGate, liftableGateDialogue);
 
         #region MineLvl_3-Miner Camp
 

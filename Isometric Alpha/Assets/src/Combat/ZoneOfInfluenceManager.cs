@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ZoneOfInfluenceManager: MonoBehaviour
 {
-	private EquippedPassiveTraitManager equippedPassiveTraitManager;
 	private static ZoneOfInfluenceManager instance;
 	
 	
@@ -22,10 +21,6 @@ public class ZoneOfInfluenceManager: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		equippedPassiveTraitManager = EquippedPassiveTraitManager.getInstance();
-		
-        equippedPassiveTraitManager.addEquippedPassiveTraits();
-		
 		applyAllZOITraits();
 
         SelectorManager.displayCurrentHoverUI();

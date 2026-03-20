@@ -10,6 +10,12 @@ public class GateWithHiddenTerrain : Gate
     {
         if (GateAndChestManager.hasBeenOpened(getGateKey()))
         {
+            if(playSFX)
+            {
+                playSFX = false;
+                playOpeningAudioClip();
+            }
+
             gameObject.SetActive(false);
             SecretDoorFlags.addSecretDoorFlag(hiddenTerrainFlag);
         }

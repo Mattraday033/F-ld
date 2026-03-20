@@ -30,7 +30,7 @@ public class CharacterLevelCounter : MonoBehaviour
 
     private void playerLevelUpTutorialSequenceCheck()
     {
-        if (!Flags.getFlag(TutorialSequenceList.playerLevelUpTutorialSeenFlag))
+        if (!TutorialFlags.getFlag(TutorialSequenceList.playerLevelUpTutorialSeenFlag))
         {
             TutorialSequence.startTutorialSequence(getPlayerLevelUpTutorialSequence());
         }

@@ -60,12 +60,22 @@ public class TemporaryGate : Gate
         {
             nameTagGenerator.onReveal(false);
         }
+
+        if(PlayerOOCStateManager.currentActivity != OOCActivity.inFade)
+        {
+            AudioManager.playAudioClipAsSingleton(AudioClipList.gateOpenShort);
+        }
     }
 
     private void showSelf()
     {
         colliderTileMap.enabled = true;
         spriteRenderer.color = Color.white;
+
+        if(PlayerOOCStateManager.currentActivity != OOCActivity.inFade)
+        {
+            AudioManager.playAudioClipAsSingleton(AudioClipList.gateOpenShort);
+        }
     }
 
 }

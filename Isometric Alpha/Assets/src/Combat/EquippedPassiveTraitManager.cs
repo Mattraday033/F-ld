@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EquippedPassiveTraitManager : MonoBehaviour
 {
+    public readonly static UnityEvent ApplyAllEquippedPassiveTraits = new UnityEvent();
+
 	private static EquippedPassiveTraitManager instance;
 	
 	private void Awake()
@@ -15,8 +18,15 @@ public class EquippedPassiveTraitManager : MonoBehaviour
 		}
 		
 		instance = this;
+
+        ApplyAllEquippedPassiveTraits.AddListener(addEquippedPassiveTraits);
 	}
 	
+    private void OnDestroy()
+    {
+        ApplyAllEquippedPassiveTraits.RemoveListener(addEquippedPassiveTraits);
+    }
+
 	public static EquippedPassiveTraitManager getInstance()
 	{
 		return instance;

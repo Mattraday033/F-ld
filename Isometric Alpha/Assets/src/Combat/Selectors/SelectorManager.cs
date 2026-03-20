@@ -290,6 +290,7 @@ public class SelectorManager : MonoBehaviour
 					if (CombatGrid.enemyHasMandatoryTarget() && !currentSelector.hasAtLeastOneMandatoryTarget() && !loadedCombatAction.isSelfTargeting())
 					{
                         AudioManager.playCannotChooseActorAbilityLocationSFX();
+                        CombatantHover.HighlightAllMandatoryTargets.Invoke();
 						return;
 					}
 
@@ -317,6 +318,7 @@ public class SelectorManager : MonoBehaviour
 						if (CombatGrid.enemyHasMandatoryTarget() && !currentSelector.hasAtLeastOneMandatoryTarget() && !loadedCombatAction.isSelfTargeting())
 						{
                             AudioManager.playCannotChooseActorAbilityLocationSFX();
+                            CombatantHover.HighlightAllMandatoryTargets.Invoke();
 							return;
 						}
 

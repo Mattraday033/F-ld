@@ -11,7 +11,6 @@ public struct TutorialFlagWrapper
 
     public bool equippableItemTutorialSeen;
     public bool formationPopUpTutorialSeen;
-    public bool addingAbilitiesTutorialSeen;
 
     public bool combatTutorialSeen;
     public bool traitTutorialSeen;
@@ -33,6 +32,8 @@ public struct TutorialFlagWrapper
     public bool questCounterTutorialSeen;
 
     public bool playerLevelUpTutorialSeen;
+    public bool addingAbilitiesTutorialSeen;
+    public bool companionSpecificAbilitiesTutorialSeen;
 
     public bool exuberanceCostTutorialSeen;
     public bool traitCostTutorialSeen;
@@ -43,7 +44,6 @@ public struct TutorialFlagWrapper
         {
             equippableItemTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.equippableItemTutorialSeenFlag),
             formationPopUpTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.formationPopUpTutorialSeenFlag),
-            addingAbilitiesTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.addingAbilitiesTutorialSeenFlag),
 
             combatTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.combatTutorialSeenFlag),
             traitTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.traitTutorialSeenFlag),
@@ -65,6 +65,8 @@ public struct TutorialFlagWrapper
             questCounterTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.questCounterTutorialSeenFlag),
 
             playerLevelUpTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.playerLevelUpTutorialSeenFlag),
+            addingAbilitiesTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.addingAbilitiesTutorialSeenFlag),
+            companionSpecificAbilitiesTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.companionSpecificAbilitiesTutorialSeenFlag),
 
             exuberanceCostTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.exuberanceCostTutorialSeenFlag),
             traitCostTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.traitCostTutorialSeenFlag),
@@ -77,7 +79,6 @@ public struct TutorialFlagWrapper
         {
             [TutorialSequenceList.equippableItemTutorialSeenFlag] = equippableItemTutorialSeen,
             [TutorialSequenceList.formationPopUpTutorialSeenFlag] = formationPopUpTutorialSeen,
-            [TutorialSequenceList.addingAbilitiesTutorialSeenFlag] = addingAbilitiesTutorialSeen,
 
             [TutorialSequenceList.combatTutorialSeenFlag] = combatTutorialSeen,
             [TutorialSequenceList.traitTutorialSeenFlag] = traitTutorialSeen,
@@ -100,6 +101,8 @@ public struct TutorialFlagWrapper
             [TutorialSequenceList.questCounterTutorialSeenFlag] = questCounterTutorialSeen,
 
             [TutorialSequenceList.playerLevelUpTutorialSeenFlag] = playerLevelUpTutorialSeen,
+            [TutorialSequenceList.addingAbilitiesTutorialSeenFlag] = addingAbilitiesTutorialSeen,
+            [TutorialSequenceList.companionSpecificAbilitiesTutorialSeenFlag] = companionSpecificAbilitiesTutorialSeen,
 
             [TutorialSequenceList.exuberanceCostTutorialSeenFlag] = exuberanceCostTutorialSeen,
             [TutorialSequenceList.traitCostTutorialSeenFlag] = traitCostTutorialSeen

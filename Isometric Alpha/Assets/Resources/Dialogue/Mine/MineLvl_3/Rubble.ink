@@ -667,9 +667,11 @@ activate({rubbleMarcosIndex})
 changeCamTarget({rubbleMarcosIndex})
 setToTrue(mineLvl3BreachSealed)
 
+setFacing(SE)
+
 fadeBackIn(60)
     
-I'll do my best, but it's getting colder. And I can't keep myself from shivering. It may be that I slip and spill the timer. Should this happen, I must know something.
+I'll do my best, but I'm so cold. I can't keep myself from shivering. It may be that I slip and spill the timer. Should this happen, I must know something.
     
     +Of course. Ask.
         ->6b

@@ -28,6 +28,7 @@ public static class TutorialMessageList
     public const string hiddenObjectTutorialMessagePrefix = "Hidden Object Tutorial Message ";
     public const string addingAbilitiesTutorialMessagePrefix = "Adding Abilities Tutorial Message ";
     public const string playerLevelUpTutorialMessagePrefix = "Player Level Up Tutorial Message ";
+    public const string companionSpecificAbiltiesTutorialMessagePrefix = "Companion Specific Abilities Tutorial Message ";
     public const string combatTutorialMessagePrefix = "Combat Tutorial Message ";
     public const string selectingAllyKey = "Combat Tutorial Message 11";
     public const string selectingAbilityFromWheelKey = "Combat Tutorial Message 14";
@@ -118,6 +119,7 @@ public static class TutorialMessageList
         tutorialDictionary.Add(playerLevelUpTutorialMessagePrefix + 2, "These are your Character's Stats. Hover over them to learn more about them.");
         tutorialDictionary.Add(playerLevelUpTutorialMessagePrefix + 3, "Hover over one of the Plus Buttons to learn what your Character will gain from increasing that Stat. Press a Plus Button to Level Up.");
         
+        tutorialDictionary.Add(companionSpecificAbiltiesTutorialMessagePrefix + 1, "This Party Member has just reached Level 3. At this Level, Party Members gain special Abilities available only to them. Click here to learn this Party Member's unique moves.");
 
         tutorialDictionary.Add(combatTutorialMessagePrefix + 1, "This is your character. As the leader of your party, if you fall in combat you will lose the game.");
         tutorialDictionary.Add(combatTutorialMessagePrefix + 2, "All creatures on this side of the battlefield are your allies.");

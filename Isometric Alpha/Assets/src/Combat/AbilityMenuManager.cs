@@ -267,10 +267,10 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
             }
         }
 
-        if(playExuberanceTutorial && !Flags.getFlag(TutorialSequenceList.exuberanceCostTutorialSeenFlag))
+        if(playExuberanceTutorial && !TutorialFlags.getFlag(TutorialSequenceList.exuberanceCostTutorialSeenFlag))
         {
             TutorialSequence.startTutorialSequence(TutorialSequenceList.getTutorialSequence(TutorialSequenceList.exuberanceCostTutorialSequenceKey));
-        } else if(playTraitCostTutorial && !Flags.getFlag(TutorialSequenceList.traitCostTutorialSeenFlag))
+        } else if(playTraitCostTutorial && !TutorialFlags.getFlag(TutorialSequenceList.traitCostTutorialSeenFlag))
         {
             TutorialSequence.startTutorialSequence(TutorialSequenceList.getTutorialSequence(TutorialSequenceList.traitCostTutorialSequenceKey));
         }

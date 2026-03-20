@@ -576,7 +576,7 @@ public static class EnemyPackInfoList
         enemyPackInfoDict.Add(LocationNameList.slaveShackSix, list);
         #endregion
 
-        #region GuardHouse TopF loor
+        #region GuardHouse TopFloor
         list = new List<EnemyPackInfo>();
 
         list.Add(oneAxemanOneSpearmanTwoJavalineers);

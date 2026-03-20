@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public interface IDragAndDropContainer
@@ -32,6 +33,19 @@ public class DragAndDropUIObject : MonoBehaviour, IDragAndDropContainer
         return objectBeingDragged;
     }
 
+    public Item getItemBeingDragged()
+    {
+        ItemCombatAction itemCombatAction = getObjectBeingDragged() as ItemCombatAction;
+
+        if(itemCombatAction != null)
+        {
+            return itemCombatAction.getSourceItem();
+        } else
+        {
+            return getObjectBeingDragged() as Item;
+        }
+    }
+
     public virtual void setObjectBeingDragged(IDescribable objectBeingDragged)
     {
         this.objectBeingDragged = objectBeingDragged;
@@ -58,10 +72,10 @@ public class DragAndDropUIObject : MonoBehaviour, IDragAndDropContainer
 
             foreach (Collider2D collision in collisions)
             {
-                if (collision.gameObject.tag.Equals(getTargetTag()) ||
+                if (getTargetTags().Contains(collision.gameObject.tag) ||
                     (collision.gameObject.tag.Equals(LayerAndTagManager.junkSlotTargetTag) && handlesJunkSlot()))
                 {
-                    if(handleTargetObject(collision))
+                    if(handleTargetObject(collision, collision.gameObject.tag))
                     {
                         return;
                     }
@@ -70,14 +84,14 @@ public class DragAndDropUIObject : MonoBehaviour, IDragAndDropContainer
         }
     }
 
-    public virtual bool handleTargetObject(Collider2D collision)
+    public virtual bool handleTargetObject(Collider2D collision, string tag)
     {
         return false;
     }
 
-    public virtual string getTargetTag()
+    public virtual string[] getTargetTags()
     {
-        return "";
+        return new string[]{};
     }
 
     public virtual bool handlesJunkSlot()
@@ -93,6 +107,34 @@ public class DragAndDropUIObject : MonoBehaviour, IDragAndDropContainer
     public void OnDestroy()
     {
         DragAndDropManager.OnDragAndDropDestroyed.Invoke(objectBeingDragged);
+    }
+
+    public bool handleUsableItemDrop(GameObject target)
+    {
+        DescriptionPanel partyMemberGridRow = target.GetComponent<DescriptionPanel>();
+
+        UsableItem item = getItemBeingDragged() as UsableItem;
+
+        if (item == null)
+        {
+            return false;
+        }
+
+        Stats targetStats = Stats.convertIDescribableToStats(partyMemberGridRow.getObjectBeingDescribed());
+
+        if (!item.fitsUseCriteria(targetStats))
+        {
+            return false;
+        }
+
+        item.use(targetStats);
+
+        if (!item.infiniteUses())
+        {
+            Inventory.removeItem(item, 1);
+        }
+
+        return true;
     }
 
 }

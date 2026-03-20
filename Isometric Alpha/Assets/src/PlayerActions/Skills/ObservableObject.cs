@@ -197,10 +197,31 @@ public class ObservableObject : MonoBehaviour, INonRevealableNameSource
         terrainRenderer.color = Color.magenta;
     }
 
+    private static void playAudioClip()
+    {
+        string sfxPath = "";
+
+        switch(MapObjectList.getCurrentZoneKey())
+        {
+            case ZoneKeyList.mineLvl1:
+            case ZoneKeyList.mineLvl2:
+            case ZoneKeyList.mineLvl3:
+                sfxPath = AudioClipList.rockIntroSFX;
+                break;
+            default:
+                
+                sfxPath = AudioClipList.gateOpen;
+                break;
+        }
+
+        AudioManager.playAudioClipAsSingleton(sfxPath);
+    }   
+
     public void hideSecretDoor(string doorToBeHidden)
     {
         if (secretDoorKeys.Contains(doorToBeHidden))
         {
+            playAudioClip();
             GameObject.DestroyImmediate(gameObject);
         }
     }

@@ -33,6 +33,9 @@ public class CombatResultsUI : PopUpWindow
 
 		instance = this;
         OnCombatResultsUICreation.Invoke();
+
+        AudioManager.playNoMusic();
+        AudioManager.playAudioClipAsSingleton(AudioClipList.winMusic);
     }
 
 	void Update()
@@ -95,6 +98,10 @@ public class CombatResultsUI : PopUpWindow
         applyRegenerationToParty();
 
         CombatStateManager.returnToOverworld(defeatedEnemy);
+        
+        AudioManager.setMusicSourceVolume(0f);
+        
+        MusicFade.OnMusicMidFade.Invoke();
     }
 
 }

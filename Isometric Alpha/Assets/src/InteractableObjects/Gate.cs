@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class Gate : MonoBehaviour, IRevealable, INameSource
 {
+    protected bool playSFX = false;
+
     private string gateKey;
     public string hoverName;
 
@@ -16,6 +18,8 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
         outline = new SpriteOutline();
         spriteRenderer = GetComponent<SpriteRenderer>();
         outline.setSpriteRenderer(spriteRenderer);
+
+        playSFX = !GateAndChestManager.hasBeenOpened(getGateKey());
     }
 
     public void setKey(string gateKey)
@@ -29,7 +33,31 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
     {
         if (GateAndChestManager.hasBeenOpened(getGateKey()))
         {
+            if(playSFX)
+            {
+                playSFX = false;
+                playOpeningAudioClip();
+            }
+
             gameObject.SetActive(false);
+        }
+    }
+
+    protected void playOpeningAudioClip()
+    {
+        AudioManager.playAudioClipAsSingleton(getAudioClipPath(getName()));
+    }
+
+    private static string getAudioClipPath(string gateKey)
+    {
+        switch(DialogueList.scrubNameOfEndNumbers(gateKey))
+        {
+            case NPCNameList.unstablePillar:
+            case NPCNameList.awkwardRubble:
+            case NPCNameList.liftableRubble:
+                return AudioClipList.rockIntroSFX;
+            default:
+                return AudioClipList.gateOpen;
         }
     }
 

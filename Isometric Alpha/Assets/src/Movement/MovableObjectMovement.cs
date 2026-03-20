@@ -17,6 +17,11 @@ public class MovableObjectMovement : EnemyMovement
         set { }
     }
 
+    public override void Start()
+    {
+        //prevents setting linked stats
+    }
+
     public override SpriteRenderer getSpriteRenderer()
     {
         return spriteRenderer;

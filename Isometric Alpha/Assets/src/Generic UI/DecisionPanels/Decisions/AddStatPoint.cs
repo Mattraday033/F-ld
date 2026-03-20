@@ -43,9 +43,20 @@ public class AddStatPoint : IDecision
         Stats.OnStatsChange.Invoke();
         AllyStats.OnPartyMemberUpgraded.Invoke();
 
-        if (!Flags.getFlag(TutorialSequenceList.addingAbilitiesTutorialSeenFlag))
+        if (!TutorialFlags.getFlag(TutorialSequenceList.addingAbilitiesTutorialSeenFlag))
         {
             TutorialSequence.startTutorialSequence(TutorialSequenceList.addingAbilitiesTutorialSequenceKey);
+        } 
+        else if(!TutorialFlags.getFlag(TutorialSequenceList.companionSpecificAbilitiesTutorialSeenFlag) && 
+                    !targetStats.getName().Contains(PartyManager.playerMarker) && targetStats.getLevel() >= Constants.sizeThree)
+        {
+            if(AbilityGridSideTab.getDescribableListType() == DescribableList.CharacterSpecificAbilities)
+            {
+                TutorialFlags.setFlag(TutorialSequenceList.companionSpecificAbilitiesTutorialSeenFlag, true);
+            } else
+            {
+                TutorialSequence.startTutorialSequence(TutorialSequenceList.companionSpecificAbilitiesTutorialSequenceKey);
+            }
         }
     }
 

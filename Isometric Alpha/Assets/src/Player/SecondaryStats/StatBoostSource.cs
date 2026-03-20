@@ -148,14 +148,13 @@ public abstract class StatBoostSource : INameSource
         {
             case StatSourceNameList.roastedKey:
                 return "1";
-            case StatSourceNameList.caveMadnessKey:
-                return "3";
             case StatSourceNameList.acidVomitKey:
                 return "4";
             case StatSourceNameList.bristledKey:
             case StatSourceNameList.woundedKey:
                 return "5";
             case StatSourceNameList.insecureKey:
+            case StatSourceNameList.caveMadnessKey:
                 return "7";
             default:
                 return Constants.zeroRating;

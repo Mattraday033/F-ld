@@ -262,6 +262,13 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		}*/
 	}
 	
+    public override void describeSelfRow(DescriptionPanel panel)
+    {
+        base.describeSelfRow(panel);
+
+        DescriptionPanel.setText(panel.statText, sourceItem.getQuantityForDisplay());
+    }
+
 	//IDescribableInBlocks methods
 	public override List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
 	{
@@ -292,10 +299,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getSourceItem().getTypeIconName()));
 
-        if(CombatStateManager.inCombat)
-        {
-		    buildingBlocks.Add(DescriptionPanelBuildingBlock.getAmountBlock(getSourceItem().getQuantityForDisplay()));
-        }
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getAmountBlock(getSourceItem().getQuantityForDisplay()));
 
 		//buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getCritTotalForDisplay()));
 

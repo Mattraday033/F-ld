@@ -264,11 +264,11 @@ public static class ItemList
 
 		//Armor(string key, string loreDescription, int worth, int armorRating, int slotID)
 
-		armor.Add(new TierOneBody(new ItemListID(armorListIndex, slaveRagsIndex), slaveRagsKey, "A set of ratty burlap tunic and pants."));
-		armor.Add(new TierOneHands(new ItemListID(armorListIndex, clothGlovesIndex), clothGlovesKey, "Gloves made of a thick cloth. Useful for hard labor."));
-		armor.Add(new TierOneFeet(new ItemListID(armorListIndex, rottenSandalsIndex), rottenSandalsKey, "A pair of ankle high leather sandals whose soles have seen better days."));
-		armor.Add(new TierOneShield(new ItemListID(armorListIndex, potLidIndex), potLidKey, "The lid to a large bronze cauldron, sufficiently sturdy and wide to be used as a haphazard shield."));
-		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, minersHelmetIndex), minersHelmetKey, "A cheaply made copper head cover with a thin layer of cloth padding inside and a scrap of leather for a chin strap. Useful for protecting against the odd bat or falling rock, but not much else."));
+		armor.Add(new TierZeroBody(new ItemListID(armorListIndex, slaveRagsIndex), slaveRagsKey, "A set of ratty burlap tunic and pants."));
+		armor.Add(new TierZeroHands(new ItemListID(armorListIndex, clothGlovesIndex), clothGlovesKey, "Gloves made of a thick cloth. Useful for hard labor."));
+		armor.Add(new TierZeroFeet(new ItemListID(armorListIndex, rottenSandalsIndex), rottenSandalsKey, "A pair of ankle high leather sandals whose soles have seen better days."));
+		armor.Add(new TierZeroShield(new ItemListID(armorListIndex, potLidIndex), potLidKey, "The lid to a large bronze cauldron, sufficiently sturdy and wide to be used as a haphazard shield."));
+		armor.Add(new TierZeroHelmet(new ItemListID(armorListIndex, minersHelmetIndex), minersHelmetKey, "A cheaply made copper head cover with a thin layer of cloth padding inside and a scrap of leather for a chin strap. Useful for protecting against the odd bat or falling rock, but not much else."));
 		armor.Add(new TierOneHands(new ItemListID(armorListIndex, leatherGlovesIndex), leatherGlovesKey, "Gloves made to be worn with armor, but still suitable for protecting the hands during hard labor."));
 		armor.Add(new TierOneBody(new ItemListID(armorListIndex, paddedArmorIndex), paddedArmorKey, "Armor made of heavy cloth. It feels sturdier than it sounds."));
 		armor.Add(new Trinket(new ItemListID(armorListIndex, thatchNecklaceIndex), thatchNecklaceKey, "A necklace made of a silver medalion attached to a thin silver chain. A sun rising over the horizon is etched into the medalion's disk."));

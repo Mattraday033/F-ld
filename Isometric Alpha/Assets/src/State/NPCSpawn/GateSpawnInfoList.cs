@@ -518,9 +518,9 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexOne, 
                                     NPCNameList.ancientPortcullis,
                                     ZoneKeyList.mineLvl3 + LocationNameList.section4b,
-                                    new Vector3Int(-6, 2),
-                                    PrefabNames.portcullis1x1Path,
-                                    Constants.sizeOne,
+                                    new Vector3Int(-6, 1),
+                                    PrefabNames.portcullis2x1Path,
+                                    Constants.sizeTwo,
                                     Axis.DescendingY));
 
         gateSpawnInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section4b, list);
@@ -532,7 +532,7 @@ public static class GateSpawnInfoList
         list = new List<GateSpawnInfo>();
 
         list.Add(new GateSpawnInfo(Constants.indexZero, 
-                                    NPCNameList.liftableRubble,
+                                    NPCNameList.liftableGate,
                                     ZoneKeyList.mineLvl3 + LocationNameList.section5,
                                     new Vector3Int(7, 2),
                                     PrefabNames.portcullis2x1Path,

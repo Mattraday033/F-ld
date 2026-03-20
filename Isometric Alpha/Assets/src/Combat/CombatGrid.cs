@@ -590,10 +590,10 @@ public static class CombatGrid
 		{
 			Stats currentCombatant = combatantList[combatantIndex];
 
-            if(currentCombatant.multiSpaceEnemy())
-            {
-                continue;
-            }
+            // if(currentCombatant.multiSpaceEnemy())
+            // {
+            //     continue;
+            // }
 			
 			for(int priorCombatantIndex = combatantIndex-1; priorCombatantIndex >= 0; priorCombatantIndex--)
 			{

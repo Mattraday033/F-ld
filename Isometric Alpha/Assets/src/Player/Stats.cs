@@ -190,6 +190,15 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         outline.createOutline(getOutlineColor());
     }
 
+    public virtual void setOutline(byte alpha)
+    {
+        Color32 color = getOutlineColor();
+
+        color.a = alpha;
+
+        outline.createOutline(color);
+    }
+
     public virtual void removeOutline()
     {
         outline.removeOutline();

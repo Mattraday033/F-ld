@@ -444,7 +444,12 @@ public class AudioManager : MonoBehaviour
 
     public static void playBattleMusic()
     {
-        playMusicWithoutFade(AudioClipList.campBattle);
+        playMusicWithoutFade(AudioClipList.campBattle + Random.Range(Constants.indexOne, AudioClipList.campBattleCount + 1));
+    }
+
+    public static void playNoMusic()
+    {
+        playMusicWithoutFade("");
     }
 
     public static void playMusicWithoutFade(string musicPath)
@@ -547,9 +552,13 @@ public static class AudioClipList
 
     public const string campOverworld = musicFolderPath + "Camp Overworld";
     public const string campInterior = musicFolderPath + "Camp Interior";
-    public const string campBattle = musicFolderPath + "Camp Battle";
     public const string deathMusic = musicFolderPath + "Dead";
     public const string caveOne = musicFolderPath + "Cave 1";
+    public const string winMusic = musicFolderPath + "Win";
+
+    public const string battleFolderPath = musicFolderPath + "Battle/";
+    public const string campBattle = battleFolderPath + "Camp Battle";
+    public const int campBattleCount = 3;
 
     public const string SFXFolderPath = audioFolderPath + "Sound Effects/";
 
@@ -560,6 +569,8 @@ public static class AudioClipList
     public const string miscSFXFolder = SFXFolderPath + "Misc/";
 
     public const string chestOpen = miscSFXFolder + "ChestOpen";
+    public const string gateOpen = miscSFXFolder + "GateOpen";
+    public const string gateOpenShort = miscSFXFolder + "GateOpenShort";
     public const string placeInInventory = miscSFXFolder + "PlaceInInventory";
 
     public const string coinSFXFolder = SFXFolderPath + "Coin/";
@@ -691,7 +702,7 @@ public static class AudioClipList
     public const string rockIntroSFX = objectsDialogueSFXFolder + "Rock" + dialogueIntroPrefix;
     public const string gateIntroSFX = objectsDialogueSFXFolder + "Gate" + dialogueIntroPrefix;
 
-    public readonly static PlaySFXLogic playEatingRockCakeSFX = () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(rockIntroSFX + Random.Range(Constants.indexOne, eatingSFXCount + 1)));
+    public readonly static PlaySFXLogic playEatingRockCakeSFX = () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(rockIntroSFX));
 
     public const string sleepingDialogueSFXFolder = dialogueSFXFolder + "Sleeping/";
 
@@ -732,6 +743,7 @@ public static class AudioClipList
             case NPCNameList.statue:
             case NPCNameList.unstablePillar:
             case NPCNameList.toppledStatue:
+            case NPCNameList.vaultableGap:
             case ItemSpriteList.rockCakeSprite:
                 return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(rockIntroSFX), VolumeType.Voice);
             case NPCNameList.slate:

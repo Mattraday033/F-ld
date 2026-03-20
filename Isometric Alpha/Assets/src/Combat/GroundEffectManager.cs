@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class GroundEffect
 {
+	private const bool isNotACrit = false;
+	private const bool doesNotHealTarget = false;
+
 	public string damageFormula;
 	public int turnsRemaining;
 	public GridCoords position;
@@ -25,9 +28,29 @@ public class GroundEffect
 		if(turnsRemaining > 0)
 		{
 			turnsRemaining--;
+            applyDamage();
 		}
 	}
 	
+    public void applyDamage()
+    {
+        Stats target = CombatGrid.getCombatantAtCoords(position);
+        
+        if(target == null || target is null)
+        {
+            return;
+        } else
+        {
+            int damageDealt = DamageCalculator.calculateFormula(damageFormula, DamageCalculator.noStatsSource);
+            
+            DamageNumberPopup.create(position, damageDealt, CombatGrid.getPositionAt(position), DamageNumberPopup.getDirectionByTargetCoords(position),
+                                    GroundEffectManager.getInstance().damageNumberCanvas, isNotACrit, doesNotHealTarget);
+            
+            target.modifyCurrentHealth(DamageCalculator.calculateFormula(damageFormula, DamageCalculator.noStatsSource));
+            target.playAnimationOnDamage();
+        }
+    }
+
 	public void instantiate()
 	{
 		indicator = GameObject.Instantiate(indicator, GroundEffectManager.getInstance().indicatorParent);
@@ -51,8 +74,6 @@ public class GroundEffect
 public class GroundEffectManager : MonoBehaviour
 {
 	private static GroundEffectManager instance;
-	private const bool isNotACrit = false;
-	private const bool doesNotHealTarget = false;
 	
 	public Transform indicatorParent;
 	public Transform damageNumberCanvas;
@@ -69,6 +90,8 @@ public class GroundEffectManager : MonoBehaviour
 		newGroundEffect.instantiate();
 		
 		getInstance().allGroundEffects.Add(coords, newGroundEffect);
+
+        newGroundEffect.applyDamage();
 	}
 	
 	public static void removeGroundEffect(GridCoords positionToRemoveAt)
@@ -90,22 +113,6 @@ public class GroundEffectManager : MonoBehaviour
 	{
 		foreach(GroundEffect groundEffect in getInstance().allGroundEffects.Values)
 		{
-			Stats target = CombatGrid.getCombatantAtCoords(groundEffect.position);
-			
-			if(target == null || target is null)
-			{
-				continue;
-			} else
-			{
-				int damageDealt = DamageCalculator.calculateFormula(groundEffect.damageFormula, DamageCalculator.noStatsSource);
-				
-				DamageNumberPopup.create(groundEffect.position, damageDealt, CombatGrid.getPositionAt(groundEffect.position), DamageNumberPopup.getDirectionByTargetCoords(groundEffect.position),
-                                        getInstance().damageNumberCanvas, isNotACrit, doesNotHealTarget);
-				
-				target.modifyCurrentHealth(DamageCalculator.calculateFormula(groundEffect.damageFormula, DamageCalculator.noStatsSource));
-                target.playAnimationOnDamage();
-			}
-			
 			groundEffect.tickDown();
 		}
 	}

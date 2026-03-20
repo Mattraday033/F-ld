@@ -1444,7 +1444,6 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         if (CombatStateManager.inCombat && getActorStats().isStunned())
         {
             return true;
-
         }
         else
         {

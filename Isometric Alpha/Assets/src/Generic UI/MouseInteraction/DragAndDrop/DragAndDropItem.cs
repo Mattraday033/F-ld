@@ -5,11 +5,11 @@ using UnityEngine.Events;
 
 public class DragAndDropItem : DragAndDropUIObject
 {
-    public override bool handleTargetObject(Collider2D collision)
+    public override bool handleTargetObject(Collider2D collision, string tag)
     {
         GameObject target = collision.gameObject;
 
-        switch (target.tag)
+        switch (tag)
         {
             case LayerAndTagManager.junkSlotTargetTag:
             case LayerAndTagManager.equipmentDisplayTag:
@@ -19,34 +19,6 @@ public class DragAndDropItem : DragAndDropUIObject
             default:
                 return false;
         }
-    }
-
-    private bool handleUsableItemDrop(GameObject target)
-    {
-        DescriptionPanel partyMemberGridRow = target.GetComponent<DescriptionPanel>();
-
-        UsableItem item = getObjectBeingDragged() as UsableItem;
-
-        if (item == null)
-        {
-            return false;
-        }
-
-        Stats targetStats = Stats.convertIDescribableToStats(partyMemberGridRow.getObjectBeingDescribed());
-
-        if (!item.fitsUseCriteria(targetStats))
-        {
-            return false;
-        }
-
-        item.use(targetStats);
-
-        if (!item.infiniteUses())
-        {
-            Inventory.removeItem(item, 1);
-        }
-
-        return true;
     }
 
     private bool handleEquipmentDrop(GameObject target)
@@ -99,17 +71,17 @@ public class DragAndDropItem : DragAndDropUIObject
         return false;
     }
 
-    public override string getTargetTag()
+    public override string[] getTargetTags()
     {
         Item item = descriptionPanel.getObjectBeingDescribed() as Item;
 
         if (item.isEquippable())
         {
-            return LayerAndTagManager.equipmentDisplayTag;
+            return new string[] { LayerAndTagManager.equipmentDisplayTag };
         }
         else
         {
-            return LayerAndTagManager.itemUseTargetTag;
+            return new string[] { LayerAndTagManager.itemUseTargetTag };
         }
     }
 
