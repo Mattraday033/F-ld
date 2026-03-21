@@ -465,7 +465,8 @@ public static class DialogueList
                                                             NPCNameList.clay,
                                                             NPCNameList.nandor+1
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.guardPunishmentStartConvoPath)));
+                            Resources.Load<TextAsset>(DialogueNameList.guardPunishmentStartConvoPath),
+                            new TextAsset[]{Resources.Load<TextAsset>(DialogueNameList.nandorGuardPunishmentPath)}));
 
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.nandor+1,

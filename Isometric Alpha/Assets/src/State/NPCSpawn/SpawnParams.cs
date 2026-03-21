@@ -40,6 +40,8 @@ public class InteractableSpawnParams : SpawnParams
 
     public override bool canSpawn(string npcName)
     {
+        npcName = DialogueList.scrubNameOfEndNumbers(npcName);
+
         if (DeathFlagManager.isDead(npcName))
         {
             return doNotSpawn;

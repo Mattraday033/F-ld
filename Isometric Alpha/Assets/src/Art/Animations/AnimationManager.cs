@@ -17,7 +17,9 @@ public enum CharacterAnimationType {
                                     Death, Death_Front, Death_Back, 
                                     Attack_Normal, Attack_Normal_Front, Attack_Normal_Back, 
                                     Attack_Special, 
-                                    Spawn }
+                                    StandUp, 
+                                    Spawn 
+                                    }
 
 public class AnimationManager : MonoBehaviour, IAnimationTracker
 {
@@ -37,7 +39,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
       CharacterAnimationType.Death,         CharacterAnimationType.Death_Front,         CharacterAnimationType.Death_Back,   
       CharacterAnimationType.Attack_Normal, CharacterAnimationType.Attack_Normal_Front, CharacterAnimationType.Attack_Normal_Back, 
       CharacterAnimationType.Attack_Special,
-      CharacterAnimationType.Spawn
+      CharacterAnimationType.Spawn,
+      CharacterAnimationType.StandUp
     };
 
     public bool changesFacing;
@@ -407,6 +410,13 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         CombatAnimationManager.trackAnimation(key, this);
         playAnimation(createClipTransitionToIdle(CharacterAnimationType.Spawn));
         linkedStats.playAnimationSFX(CharacterAnimationType.Spawn);
+    }
+
+    public void playStandUpAnimation()
+    {
+        setCurrentIdle(CharacterAnimationType.OOC_Idle_Front);
+        playAnimation(createClipTransitionToIdle(CharacterAnimationType.StandUp));
+        // removeAnimation();
     }
 
     public void playDeathAnimation()

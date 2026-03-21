@@ -46,7 +46,7 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Giant Bat 128x128_0
+      name: Idle_Front_0
       rect:
         serializedVersion: 2
         x: 0
@@ -105,20 +105,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63abd3bd2fdb8ee4289156fdc14089bb
-      internalID: 1894257114
+      spriteID: 975d942a81d0f6844ab94f433be55c2c
+      internalID: -988224342
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Giant Bat 128x128_1
+      name: Idle_Front_1
       rect:
         serializedVersion: 2
         x: 128
@@ -126,20 +126,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efc8580769a5cc540b1b2b6143d8f1d7
-      internalID: -1258401740
+      spriteID: c3a05c75fc00a604aa26ecf66974f0da
+      internalID: 1477346175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Giant Bat 128x128_2
+      name: Idle_Front_2
       rect:
         serializedVersion: 2
         x: 256
@@ -147,20 +147,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5dc357acaaf04546ae6a2e84af90565
-      internalID: 2092041162
+      spriteID: 620dd21a359d94d45900d26f26be560b
+      internalID: 765865598
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Giant Bat 128x128_3
+      name: Idle_Front_3
       rect:
         serializedVersion: 2
         x: 384
@@ -168,20 +168,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ff138e06187c7ae449bf50795db64148
-      internalID: 865504915
+      spriteID: 3adbf16fc2dfdb845a99574d4a8cd44c
+      internalID: -1625797914
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Giant Bat 128x128_4
+      name: Idle_Front_4
       rect:
         serializedVersion: 2
         x: 512
@@ -189,20 +189,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4cd9b5eb7876d634b85f77a1206310e2
-      internalID: 1039508270
+      spriteID: 620ec8d9a2f20654aa5675e3b6ec789f
+      internalID: -918414163
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Giant Bat 128x128_5
+      name: Idle_Front_5
       rect:
         serializedVersion: 2
         x: 640
@@ -210,14 +210,14 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bad247a19eff0cd40950e4473078b54e
-      internalID: -236282619
+      spriteID: 268c20f06a78adf44895d17c06466eba
+      internalID: 624137576
       vertices: []
       indices: 
       edges: []
@@ -233,12 +233,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Giant Bat 128x128_0: 1894257114
-      Giant Bat 128x128_1: -1258401740
-      Giant Bat 128x128_2: 2092041162
-      Giant Bat 128x128_3: 865504915
-      Giant Bat 128x128_4: 1039508270
-      Giant Bat 128x128_5: -236282619
+      Idle_Front_0: -988224342
+      Idle_Front_1: 1477346175
+      Idle_Front_2: 765865598
+      Idle_Front_3: -1625797914
+      Idle_Front_4: -918414163
+      Idle_Front_5: 624137576
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

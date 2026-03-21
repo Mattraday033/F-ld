@@ -34,6 +34,8 @@ public class EffectAnimationManager : AnimationManager
     {
         string folderPath = PrefabNames.abilityEffectFolderPath + effectType;
 
+        determineOutline(effectType);
+
         AnimationClip animationClip = Resources.Load<AnimationClip>(folderPath);
 
         spawnDamageNumbersTime = animationClip.length * (3f/4f);
@@ -41,6 +43,16 @@ public class EffectAnimationManager : AnimationManager
         animancer.Play(createClipTransitionThenDelete(animationClip));
 
         StartCoroutine(waitThenPlaySFX(effectType));
+    }
+
+    private void determineOutline(string effectType)
+    {
+        if(EffectAnimationType.BatSwarm.ToString().Equals(effectType))
+        {
+            return;
+        }
+
+        spriteRenderer.material = Resources.Load<Material>(PrefabNames.outlineMaterial);
     }
 
     private IEnumerator waitThenPlaySFX(string effectType)
