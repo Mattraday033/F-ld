@@ -221,7 +221,7 @@ public static class AbilityList
         
         //worm abilities
 
-        enemyAbilityDictionary.Add(wallopKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wallopKey, "The worm drives forward, using the weight of it's body and it's intense bite to rip apart it's foe."), DamageParams.build("17", "5"))));
+        enemyAbilityDictionary.Add(wallopKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wallopKey, "The worm drives forward, using the weight of its body and an intense bite to rip apart its foe."), DamageParams.build("17", "5"))));
         enemyAbilityDictionary.Add(trampleKey, new Ability(CombatActionSettings.build(DescriptionParams.build(trampleKey, "The creature crashes into the target, using the size and weight of it's body to crush it's prey."), DamageParams.build("22", "10"), TargetParams.build(Range.verticalThreeIndex))));
         enemyAbilityDictionary.Add(slamKey, new Ability(CombatActionSettings.build(DescriptionParams.build(slamKey, "The creature crashes into the target, using the size and weight of it's body to crush it's prey."), DamageParams.build("27", "15"), TargetParams.build(Range.boxOneIndex), AnimationParams.build(EffectAnimationType.Blunt), TraitList.wounded)));
         enemyAbilityDictionary.Add(acidVomitKey, new Ability(CombatActionSettings.build(DescriptionParams.build(acidVomitKey, "The worm spits acidic bile at it's enemy, making them more vulnerable to attacks."), DamageParams.build("14", "0"), AnimationParams.build(EffectAnimationType.Acid), TraitList.acidVomit)));

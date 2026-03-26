@@ -122,4 +122,9 @@ public class CunningBlocker : CunningObject
             }
         }
     }
+
+    public override Vector3 getTargetPosition()
+	{
+		return transform.position;
+	}
 }

@@ -425,7 +425,8 @@ public class CunningManager : SkillManager
             removeCunningsRemaining(target.getChargeCost(SkillType.Cunning));
             destroySkillArea();
             OnSkillUse.Invoke();
-            AudioManager.playSmokebombSFX();
+            // AudioManager.playSmokebombSFX();
+            createEffect(target.getTargetPosition());
             return true;
         }
         else

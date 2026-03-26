@@ -9,7 +9,7 @@ using TMPro;
 public class SurpriseIcon : SlotIconHover
 {
 
-    private const string noOneSurprisedMessage = "Neither party is surprise. Combat will proceed normally.";
+    private const string noOneSurprisedMessage = "Neither party is surprised. Combat will proceed normally.";
     private const string enemySurprisedMessage = "You have surprised the enemy! They will not get to attack during the surprise round.";
     private const string playerSurprisedMessage = "The enemy has surprised you! You will not get to attack during the surprise round.";
 

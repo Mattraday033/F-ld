@@ -144,7 +144,7 @@ public static class BookList
                         "highlight when you press '" + KeyBindingList.revealKey.ToString() + " '. Using Cunning on an object only costs a single charge.\n\n" + 
                         "Observation: Observation helps find hidden doors and objects. If a hidden object is found, it will be shaded pink. Hidden objects are not shown when you press '" + KeyBindingList.revealKey.ToString() + " ' so be on the lookout " + 
                         "for anything that looks suspicious. Observation requires no charges to use.\n\n" + 
-                        "Leadership: Leadership allows the Party to place it's Members on specific tiles. This can be useful for holding down buttons or blocking passageways. To remove a Party Member from a tile, face that Party Member and press ' " 
+                        "Leadership: Leadership allows the Party to place its Members on specific tiles. This can be useful for holding down buttons or blocking passageways. To remove a Party Member from a tile, face that Party Member and press ' " 
                         + KeyBindingList.removePlacedCompanionMovableObjectKey.ToString() + " '. The better your Leadership Skill, the more Party Members you can place at once. You can never place more Party Members than the amount of characters in your Party minus one.";
 			case horsetonguePronunciationGuideKey:
 				return "This short guide is meant to help someone pronounce the words of the horsetongue.\n\n" +

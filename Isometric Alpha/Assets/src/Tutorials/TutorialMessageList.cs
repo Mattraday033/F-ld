@@ -13,6 +13,8 @@ public static class TutorialMessageList
     private const string counterClockwiseKeyCodePlaceHolder = ">>";
     private const string resolveTurnKeyCodePlaceHolder = "??";
 
+    private const string returnObjectKeyCodePlaceHolder = "[]";
+
 
     public const string hostileTargetTutorialMessagePrefix = "Hostile Target Tutorial Message ";
     public const string hostilityBarsTutorialMessagePrefix = "Hostility Bars Tutorial Message ";
@@ -150,7 +152,7 @@ public static class TutorialMessageList
 
         tutorialDictionary.Add(movableObjectTutorialMessagePrefix + 1, "This crate is movable. Movable objects highlight in blue.");
         tutorialDictionary.Add(movableObjectTutorialMessagePrefix + 2, "If your character walks into it they will push it, so long as nothing is behind it.");
-        tutorialDictionary.Add(movableObjectTutorialMessagePrefix + 3, "If a movable object is stuck, face it and press ' " + keyCodePlaceHolder + " ' to put it back where you found it.");
+        tutorialDictionary.Add(movableObjectTutorialMessagePrefix + 3, "If a movable object is stuck, face it and press ' " + returnObjectKeyCodePlaceHolder + " ' to put it back where you found it.");
 
         tutorialDictionary.Add(combatTraitTutorialMessagePrefix + 1, "This creature has a trait that makes it take less damage. Press ' " + jumpKeyCodePlaceHolder + " ' + ' " + keyCodePlaceHolder + " ' to quickly select it.");
         tutorialDictionary.Add(combatTraitTutorialMessagePrefix + 2, "When your selector is under a single creature, that creature's stats will be displayed here.");
@@ -177,6 +179,9 @@ public static class TutorialMessageList
 
         switch(key)
         {
+            case movableObjectTutorialMessagePrefix + "3":
+                message = message.Replace(returnObjectKeyCodePlaceHolder, KeyBindingList.removePlacedCompanionMovableObjectKey.ToString());
+                break;
             case observationTutorialMessagePrefix + "1":
                 message = message.Replace(revealKeyCodePlaceHolder, KeyBindingList.revealKey.ToString());
                 break;

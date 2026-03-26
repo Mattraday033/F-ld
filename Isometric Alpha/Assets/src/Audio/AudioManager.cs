@@ -277,6 +277,17 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
+        if(effectType.Equals(EffectAnimationType.SmokeBomb.ToString()))
+        {
+            playSmokebombSFX();
+            return;
+        }
+
+        if(effectType.Equals(EffectAnimationType.Intimidate.ToString()))
+        {
+            effectType = EffectAnimationType.Negative.ToString();
+        }
+
         queueAudioClip(AudioClipList.hitSFXFolder + effectType + "/" + effectType, VolumeType.SFX);
     }
 

@@ -14,6 +14,7 @@ public interface ISkillTarget
     public bool validTarget(SkillType skillType);
     public void cunning();
     public void intimidate();
+    public Vector3 getTargetPosition();
 }
 public abstract class SkillManager
 {
@@ -189,6 +190,21 @@ public abstract class SkillManager
             default:
                 return SkillType.Intimidate;
         }
+    }
+
+    public void createEffect(Vector3 targetWorldPos)
+    {
+        EffectAnimationManager effect = EffectAnimationManager.instantiatePrefab();
+        Transform effectTransform = effect.transform;
+        effectTransform.position = targetWorldPos;
+
+        effect.waitBeforeSFX = false;
+        effect.setAnimations(getEffectType());
+    }
+
+    public virtual string getEffectType()
+    {
+        return EffectAnimationType.SmokeBomb.ToString();
     }
 
     /*

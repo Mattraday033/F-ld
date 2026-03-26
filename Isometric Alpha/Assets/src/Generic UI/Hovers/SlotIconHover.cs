@@ -289,7 +289,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 public static class HoverMessageList
 {
     public const string zoneOfInfluenceKey = "ZOI-Icon";
-    public const string zoneOfInfluenceMessage = "A Trait applied to the Zone's owner and all allies directly infront, behind, or beside this creature. Zones of Influence are not applied diagonally.";
+    public const string zoneOfInfluenceMessage = "A Trait applied to the Zone's owner and all allies directly adjacent to this creature. Zones of Influence are not applied diagonally.";
     
     private const string actionWheelKey = "Action Wheel";
     private const string actionWheelMessage = "The Action Wheel contains all of the Actions a character can bring into battle. With the exception of Passive Abilities, if an Action is not on the Action Wheel, the character is gaining no benefits from it.";

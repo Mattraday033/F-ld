@@ -14,12 +14,15 @@ public enum EffectAnimationType
     Negative,
     Healing,
     BatSwarm,
-    Acid
+    Acid,
+    SmokeBomb,
+    Intimidate
 }
 
 
 public class EffectAnimationManager : AnimationManager
 {
+    public bool waitBeforeSFX = true;
     private const float timeToWaitBeforeSFX = .3f;
 
     public GridCoords targetCoords;
@@ -42,7 +45,13 @@ public class EffectAnimationManager : AnimationManager
 
         animancer.Play(createClipTransitionThenDelete(animationClip));
 
-        StartCoroutine(waitThenPlaySFX(effectType));
+        if(waitBeforeSFX)
+        {
+            StartCoroutine(waitThenPlaySFX(effectType));
+        } else
+        {
+            AudioManager.playEffectAnimationSFX(effectType);
+        }
     }
 
     private void determineOutline(string effectType)

@@ -161,6 +161,11 @@ public class IntimidateManager : CunningManager
 
     public override bool executeSkill()
     {
+        if(!canUseSkill())
+        {
+            return false;
+        }
+
         List<ISkillTarget> listOfTargets = new List<ISkillTarget>();
 
         foreach (GameObject tile in skillGrid)
@@ -183,7 +188,8 @@ public class IntimidateManager : CunningManager
             foreach (ISkillTarget target in listOfTargets)
             {
                 target.intimidate();
-                AudioManager.playSmokebombSFX();
+                // AudioManager.playSmokebombSFX();
+                createEffect(target.getTargetPosition());
             }
 
             destroySkillArea();
@@ -199,6 +205,11 @@ public class IntimidateManager : CunningManager
         }
     }
     
+    public override string getEffectType()
+    {
+        return EffectAnimationType.Intimidate.ToString();
+    }
+
     public static void destroyIntimdiateSkillArea()
     {
         if (getInstance() != null)

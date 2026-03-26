@@ -547,6 +547,11 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         return list[monsterPackIndex].cellCoords;
     }
 
+	public Vector3 getTargetPosition()
+	{
+		return transform.position;
+	}
+
 	public void putBackToStartingPosition()
 	{
 		if (!canBePutBackToStartingPosition())

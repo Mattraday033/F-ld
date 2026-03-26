@@ -160,6 +160,8 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
             outline.removeOutline();
         }
     }
+
+    public abstract Vector3 getTargetPosition();
 }
 
 public static class CunningObjectSpriteList
