@@ -123,7 +123,7 @@ public abstract class OOCSpawnDetails
             spriteRenderer.color = tint;
         }
 
-        if(sortingLayerInfo != null)
+        if(sortingLayerInfo != null) 
         {
             sortingLayerInfo.setSpriteRendererSortingLayer(spriteRenderer);
         }
@@ -1754,7 +1754,7 @@ public class WeaponRackSpawnDetails : ChestSpawnDetails
 
     public override Transform getParent()
     {
-        return AreaManager.getNPCParentWithoutScale();
+        return AreaManager.getNPCParentWithScale();
     }
 }
 

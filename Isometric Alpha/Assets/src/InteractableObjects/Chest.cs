@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum ChestType {Chest, Shelf, HammerRack, MattockRack, AxeRack, ShovelRack, SpearRack, SwordTable, PickaxeTable }
+public enum ChestType {Chest, Shelf, MattockRack, AxeRack, ShovelRack, SpearRack, SwordTable, PickaxeTable }
 public enum ChestState { Closed, OpenFilled, OpenEmpty }
 
 public interface INonRevealableNameSource: INameSource
@@ -29,7 +29,6 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
     private static Dictionary<KeyValuePair<Facing, ChestState>, string> chestSprites;
     private static Dictionary<KeyValuePair<Facing, ChestState>, string> shelfSprites;
-    private static Dictionary<KeyValuePair<Facing, ChestState>, string> hammerRackSprites;
     private static Dictionary<KeyValuePair<Facing, ChestState>, string> mattockRackSprites;
     private static Dictionary<KeyValuePair<Facing, ChestState>, string> axeRackSprites;
     private static Dictionary<KeyValuePair<Facing, ChestState>, string> shovelRackSprites;
@@ -76,31 +75,17 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
         #endregion
     
-        #region HammerRack
-
-        hammerRackSprites = new Dictionary<KeyValuePair<Facing, ChestState>, string>();
-
-        hammerRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthEast, ChestState.Closed), PrefabNames.hammerRack);
-        hammerRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthEast, ChestState.OpenFilled), PrefabNames.hammerRack);
-        hammerRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthEast, ChestState.OpenEmpty), PrefabNames.emptyShortRack);
-
-        hammerRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthWest, ChestState.Closed), PrefabNames.hammerRack);
-        hammerRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthWest, ChestState.OpenFilled), PrefabNames.hammerRack);
-        hammerRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthWest, ChestState.OpenEmpty), PrefabNames.emptyShortRack);
-
-        #endregion
-    
         #region MattockRack
 
         mattockRackSprites = new Dictionary<KeyValuePair<Facing, ChestState>, string>();
 
         mattockRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthEast, ChestState.Closed), PrefabNames.mattockRack);
         mattockRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthEast, ChestState.OpenFilled), PrefabNames.mattockRack);
-        mattockRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthEast, ChestState.OpenEmpty), PrefabNames.emptyMattockRack);
+        mattockRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthEast, ChestState.OpenEmpty), PrefabNames.emptyHorizontalRack);
 
         mattockRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthWest, ChestState.Closed), PrefabNames.mattockRack);
         mattockRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthWest, ChestState.OpenFilled), PrefabNames.mattockRack);
-        mattockRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthWest, ChestState.OpenEmpty), PrefabNames.emptyMattockRack);
+        mattockRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthWest, ChestState.OpenEmpty), PrefabNames.emptyHorizontalRack);
 
         #endregion
 
@@ -110,11 +95,11 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
         axeRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthEast, ChestState.Closed), PrefabNames.axeRack);
         axeRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthEast, ChestState.OpenFilled), PrefabNames.axeRack);
-        axeRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthEast, ChestState.OpenEmpty), PrefabNames.emptyShortRack);
+        axeRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthEast, ChestState.OpenEmpty), PrefabNames.emptyHorizontalRack);
 
         axeRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthWest, ChestState.Closed), PrefabNames.axeRack);
         axeRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthWest, ChestState.OpenFilled), PrefabNames.axeRack);
-        axeRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthWest, ChestState.OpenEmpty), PrefabNames.emptyShortRack);
+        axeRackSprites.Add(new KeyValuePair<Facing, ChestState>(Facing.SouthWest, ChestState.OpenEmpty), PrefabNames.emptyHorizontalRack);
 
         #endregion
 
@@ -181,8 +166,6 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
         {
             case ChestType.Shelf:
                 return Helpers.loadSpriteFromResources(shelfSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)]);
-            case ChestType.HammerRack:
-                return Helpers.loadSpriteFromResources(hammerRackSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)]);
             case ChestType.MattockRack:
                 return Helpers.loadSpriteFromResources(mattockRackSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)]);
             case ChestType.AxeRack:

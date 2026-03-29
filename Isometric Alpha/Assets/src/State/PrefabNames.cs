@@ -337,10 +337,6 @@ public static class PrefabNames
     public const string shelfFrontEmpty = itemContainersFolder + "Shelf_Front_Empty";
 
     
-    public const string axeRack = itemContainersFolder + "Axe Rack";
-    public const string hammerRack = itemContainersFolder + "Hammer Rack";
-    public const string emptyShortRack = itemContainersFolder + "Empty Short Rack";
-    
     public const string swordTable = itemContainersFolder + "Sword Table";
     public const string pickaxeTable = itemContainersFolder + "Pickaxe Table";
     public const string emptyWeaponTable = itemContainersFolder + "Empty Weapon Table";
@@ -349,8 +345,10 @@ public static class PrefabNames
     public const string shovelRack = itemContainersFolder + "Shovel Rack";
     public const string emptyPolearmRack = itemContainersFolder + "Empty Polearm Rack";
 
+
+    public const string axeRack = itemContainersFolder + "Axe Rack";
     public const string mattockRack = itemContainersFolder + "Mattock Rack";
-    public const string emptyMattockRack = itemContainersFolder + "Empty Mattock Rack";
+    public const string emptyHorizontalRack = itemContainersFolder + "Empty Horizontal Rack";
 
 
     public const string waterFolder = spriteFolder + "Water/";
