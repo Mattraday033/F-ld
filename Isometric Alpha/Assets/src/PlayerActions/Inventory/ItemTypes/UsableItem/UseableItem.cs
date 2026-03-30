@@ -177,7 +177,7 @@ public abstract class UsableItem : Item, IJSONConvertable
     {
         List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Name, getName()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getAmountBlock(getQuantityForDisplay()));
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getWorthBlock(getWorthForDisplay()));
@@ -187,10 +187,10 @@ public abstract class UsableItem : Item, IJSONConvertable
 
         if (getIconName() != null && getIconName().Length > 0 && !getIconName().Equals(getTypeIconName()))
         {
-            buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getIconName()));
+            buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getIconName()));
         }
 
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getTypeIconName()));
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getTypeIconName()));
 
         return buildingBlocks;
     }

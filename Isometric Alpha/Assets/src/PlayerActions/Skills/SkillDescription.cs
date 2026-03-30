@@ -153,7 +153,7 @@ public class SkillDescription : IDescribable, IDescribableInBlocks
     {
         List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Name, getName()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType()));
 
@@ -161,7 +161,7 @@ public class SkillDescription : IDescribable, IDescribableInBlocks
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getUseDescription()));
 
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getIconName()));
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getIconName()));
 
         return buildingBlocks;
         

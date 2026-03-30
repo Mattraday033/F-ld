@@ -267,6 +267,8 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
         base.describeSelfRow(panel);
 
         DescriptionPanel.setText(panel.statText, sourceItem.getQuantityForDisplay());
+
+        addSlotsTextToRow(panel);
     }
 
 	//IDescribableInBlocks methods
@@ -275,7 +277,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 
 		List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Name, getName()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType()));
 
@@ -295,9 +297,9 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getUseDescription()));
 
-		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getIconName()));
+		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getIconName()));
 
-		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getSourceItem().getTypeIconName()));
+		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getSourceItem().getTypeIconName()));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getAmountBlock(getSourceItem().getQuantityForDisplay()));
 

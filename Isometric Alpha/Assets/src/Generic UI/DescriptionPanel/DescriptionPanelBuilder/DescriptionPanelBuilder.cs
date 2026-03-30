@@ -66,88 +66,22 @@ public struct DescriptionPanelBuildingBlock
     public string formula;
     public Item item;
 
-    public DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType type, string text)
+    public DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType type, string text = null, string iconName = null, string formula = null, char symbolChar = ' ')
     {
         this.type = type;
 
-        if (type == DescriptionPanelBuildingBlockType.Icon)
-        {
-            this.iconName = text;
-            this.text = null;
-        }
-        else
-        {
-            this.text = text;
-            this.iconName = null;
-        }
+        this.text = text;
+        this.iconName = iconName;
 
-        this.symbolCharacter = null;
-        this.formula = null;
-        this.item = null;
-    }
-
-    public DescriptionPanelBuildingBlock(string formula, DescriptionPanelBuildingBlockType type, string text)
-    {
-        this.type = type;
-
-        if (type == DescriptionPanelBuildingBlockType.Icon)
+        if(symbolChar == ' ')
         {
-            this.iconName = text;
-            this.text = null;
-        }
-        else
+            this.symbolCharacter = null;
+        } else
         {
-            this.text = text;
-            this.iconName = null;
+            this.symbolCharacter = symbolChar + "";
         }
 
-        this.symbolCharacter = null;
         this.formula = formula;
-        this.item = null;
-    }
-
-    public DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType type, string text, string iconName)
-    {
-        this.type = type;
-        this.iconName = iconName;
-        this.text = text;
-
-        this.symbolCharacter = null;
-        this.formula = null;
-        this.item = null;
-    }
-
-    public DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType type, string text, char symbolChar)
-    {
-        this.type = type;
-        this.symbolCharacter = symbolChar.ToString();
-        this.text = text;
-
-        this.iconName = null;
-        this.formula = null;
-        this.item = null;
-    }
-
-    public DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType type, string text, string iconName, char symbolChar)
-    {
-        this.type = type;
-        this.symbolCharacter = symbolChar.ToString();
-        this.text = text;
-        this.iconName = iconName;
-
-        this.formula = null;
-        this.item = null;
-    }
-
-
-    public DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType type, string text, string iconName, string formula)
-    {
-        this.type = type;
-        this.iconName = iconName;
-
-        this.text = text;
-        this.formula = formula;
-        this.symbolCharacter = null;
         this.item = null;
     }
 
@@ -169,26 +103,26 @@ public struct DescriptionPanelBuildingBlock
     #region 
     public static DescriptionPanelBuildingBlock getNameBlock(string text)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Name, text);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Name, text: text);
     }
     public static DescriptionPanelBuildingBlock getActionTypeBlock(string text)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.actionTypeIconName);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text: text, iconName: IconList.actionTypeIconName);
     }
 
     public static DescriptionPanelBuildingBlock getDamageBlock(string text, string formula)
     {
-        return new DescriptionPanelBuildingBlock(formula, DescriptionPanelBuildingBlockType.DamageText, text);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.DamageText, text: text,formula: formula);
     }
 
     public static DescriptionPanelBuildingBlock getBonusDamageBlock(string text)
     {
-        return new DescriptionPanelBuildingBlock(text, DescriptionPanelBuildingBlockType.BonusDamageText, text);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.BonusDamageText, text: text, formula: text);
     }
 
     public static DescriptionPanelBuildingBlock getBonusDamageBlock(string text, string formula)
     {
-        return new DescriptionPanelBuildingBlock(text, DescriptionPanelBuildingBlockType.BonusDamageText, formula);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.BonusDamageText, text: text, formula: formula);
     }
 
     public static DescriptionPanelBuildingBlock getCritBlock(string text, string formula)
@@ -329,7 +263,7 @@ public struct DescriptionPanelBuildingBlock
 
     public static DescriptionPanelBuildingBlock getCharBlock(string text, string symbolChar)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.PrimaryStat, text, symbolChar[0]);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.PrimaryStat, text, symbolChar: symbolChar[0]);
     }
 
     public static DescriptionPanelBuildingBlock getBlockWithFormula(DescriptionPanelBuildingBlock block, string formula)
@@ -349,17 +283,17 @@ public struct DescriptionPanelBuildingBlock
 
     public static DescriptionPanelBuildingBlock getBonusHealthBlock(string text)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.bonusHealthIconName, Strength.symbolChar[0]);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.bonusHealthIconName, symbolChar: Strength.symbolChar[0]);
     }
 
     public static DescriptionPanelBuildingBlock getCriticalHitDamageBlock(string text)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.criticalHitDamageIconName, Strength.symbolChar[0]);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.criticalHitDamageIconName, symbolChar: Strength.symbolChar[0]);
     }
 
     public static DescriptionPanelBuildingBlock getPhysicalResistBlock(string text)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.physicalResistIconName, Strength.symbolChar[0]);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.physicalResistIconName, symbolChar: Strength.symbolChar[0]);
     }
 
     #endregion
@@ -373,17 +307,17 @@ public struct DescriptionPanelBuildingBlock
 
     public static DescriptionPanelBuildingBlock getExtraArmorBlock(string text)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.extraArmorIconName, Dexterity.symbolChar[0]);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.bonusArmorIconName, symbolChar: Dexterity.symbolChar[0]);
     }
 
     public static DescriptionPanelBuildingBlock getSurpriseRoundDamageMultiplierBlock(string text)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.surpriseRoundDamageMultiplierIconName, Dexterity.symbolChar[0]);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.surpriseRoundDamageMultiplierIconName, symbolChar: Dexterity.symbolChar[0]);
     }
 
     public static DescriptionPanelBuildingBlock getArmorPenetrationBlock(string text)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.armorPenetrationIconName, Dexterity.symbolChar[0]);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.armorPenetrationIconName, symbolChar: Dexterity.symbolChar[0]);
     }
 
     #endregion
@@ -397,17 +331,17 @@ public struct DescriptionPanelBuildingBlock
 
     public static DescriptionPanelBuildingBlock getMentalResistBlock(string text)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.mentalResistIconName, Wisdom.symbolChar[0]);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.mentalResistIconName, symbolChar: Wisdom.symbolChar[0]);
     }
 
     public static DescriptionPanelBuildingBlock getPassiveSlotsBlock(string text)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.passiveSlotsIconName, Wisdom.symbolChar[0]);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.passiveSlotsIconName, symbolChar: Wisdom.symbolChar[0]);
     }
 
     public static DescriptionPanelBuildingBlock getBonusWeaponSlotsBlock(string text)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.bonusWeaponSlotsIconName, Wisdom.symbolChar[0]);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.bonusWeaponSlotsIconName, symbolChar: Wisdom.symbolChar[0]);
     }
     #endregion
 
@@ -420,17 +354,17 @@ public struct DescriptionPanelBuildingBlock
 
     public static DescriptionPanelBuildingBlock getSynergyBlock(string text)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.synergyIconName, Charisma.symbolChar[0]);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.synergyIconName, symbolChar: Charisma.symbolChar[0]);
     }
 
     public static DescriptionPanelBuildingBlock getBonusExuberancesBlock(string text)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.allExuberancesIconName, Charisma.symbolChar[0]);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.allExuberancesIconName, symbolChar: Charisma.symbolChar[0]);
     }
 
     public static DescriptionPanelBuildingBlock getZOIBlock(string text, string zoiIconName)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, zoiIconName, Charisma.symbolChar[0]);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, zoiIconName, symbolChar: Charisma.symbolChar[0]);
     }
 
     #endregion
@@ -459,7 +393,7 @@ public struct DescriptionPanelBuildingBlock
 
     public static DescriptionPanelBuildingBlock getRetreatChanceBlock(string text)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.retreatChanceIconName, Dexterity.symbolChar[0]);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.retreatChanceIconName, symbolChar: Dexterity.symbolChar[0]);
     }
 
     public static DescriptionPanelBuildingBlock getDiscountBlock(string text)
@@ -879,7 +813,7 @@ public static class IconList
     public const string physicalResistIconName = "Physical Resist";
     public const string regenIconName = "Regeneration";
     public const string cunningIconName = "Cunning";
-    public const string extraArmorIconName = "Extra Armor";
+    public const string bonusArmorIconName = "Bonus Armor";
     public const string armorShredIconName = "Armor Shred";
     public const string surpriseRoundDamageMultiplierIconName = "Surprise Round Damage";
     public const string surpriseRoundAmountIconName = "Surprise Round Duration";
@@ -906,4 +840,8 @@ public static class IconList
     public const string volleyIconName = "Volley";
 
     public const string surpriseIconName = "SurpriseIcon";
+
+    //Status Icons
+    public const string mandatoryTargetIcon = "Mandatory Target";
+    public const string stunnedIcon = "Stunned";
 }

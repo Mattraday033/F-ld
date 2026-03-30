@@ -35,7 +35,7 @@ public static class TestScript
         // Flags.flags["charismaBarricadePassUsed"] = false;
         // Flags.flags["andrasBarricadePassUsed"] = false;
 
-        PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
+        // PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
 
         // Inventory.addItem(ItemList.getItem(ItemList.usableItemListIndex, ItemList.bandagesIndex, 5));
 
@@ -47,7 +47,7 @@ public static class TestScript
         // Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.bronzeDirkIndex));
         // Inventory.addItem(ItemList.getItem(ItemList.weaponsListIndex, ItemList.heavyPickIndex));
 
-        // Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.wardensShieldIndex, 2));
+        // Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.wardensShieldIndex, 1));
 
         // Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.bronzeHelmetIndex));
 

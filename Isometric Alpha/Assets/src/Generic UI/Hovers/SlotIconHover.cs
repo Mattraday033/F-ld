@@ -213,6 +213,11 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             return "Bonus Damage";
         }
 
+        if(hoverMessageKey.Split("-").Length > Constants.sizeTwo)
+        {
+            hoverMessageKey = hoverMessageKey.Split("-")[1] + "-" + hoverMessageKey.Split("-")[2];
+        }
+
         switch(hoverMessageKey)
         {
             case IconList.surpriseIconName:
@@ -220,7 +225,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             case HoverMessageList.passiveSlotsKey:
                 return "Bonus Slots";
             case HoverMessageList.zoneOfInfluenceKey:
-                return "Zone of Influence";
+                return HoverMessageList.zoiKey;
             case Strength.symbolChar:
                 return PrimaryStat.Strength.ToString();
             case Dexterity.symbolChar:
@@ -262,6 +267,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         switch(hoverText)
         {
+            case HoverMessageList.zoiMessage:
             case HoverMessageList.zoneOfInfluenceMessage:
 
                 if(OverallUIManager.getCurrentPartyMember() != null)
@@ -318,6 +324,9 @@ public static class HoverMessageList
     private const string usableSubtypeMessage = "Usable Item";
     private const string usableSubMessage = "Some Usable Items heal, apply Traits in combat, or provide you with information. Most Usable Items are destroyed when used.";
 
+    private const string allItemsTabKey = "All Items Tab";
+    private const string allItemsTabMessage = "Every Item your party is currently carrying, except for those equipped to a Party Member or marked as Junk.";
+
     private const string weaponSubtypeMessage = "Main-Hand Weapons provide a new Attack Action on your Action Wheel in Combat. Off-Hand weapons provide extra damage and crit chance when you attack with a One-Handed Weapon.";
     private const string armorSubtypeMessage = "Wearing Armor provides Armor Score, which blocks a percentage of incoming damage. Some pieces of Armor also provide additional benefits.";
 
@@ -359,12 +368,14 @@ public static class HoverMessageList
     private const string experienceRewardKey = "Combat Experience";
     private const string experienceRewardMessage = "The amount of Experience each Party Member gained from this Combat, whether they participated in it or not. You will only earn Combat Experience if a fight is particularly challenging, or if it was related to a Quest.";
 
+    private const string mandatoryTargetMessage = "This creature must be targeted by all Actions that affect it's side of the field. This creature's allies ignore this restriction. If more than one Mandatory Target share the same side of the field, only one Mandatory Target must be targeted for an Action to be allowed.";
+    private const string stunnedTargetMessage = "This creature cannot take Actions while this Trait is applied.";
 
     private const string bonusHealthMessage = "Bonus Health. Extra Health added to your Total Health. Determined by your Strength.";
-    private const string criticalHitDamageMessage = "Critical Damage Multiplier. How much extra damage is dealt whenever critical hit is scored. Determined by a character's Strength.";
+    private const string criticalHitDamageMessage = "Critical Damage Multiplier. How much extra damage is dealt whenever a critical hit is scored. Determined by a character's Strength.";
     private const string physicalResistMessage = "Physical Resistance. Your chance to ignore a Wound Trait applied to you in combat. Determined by a character's Strength.";
 
-    private const string extraArmorMessage = "Bonus Armor. An extra amount of Armor in addition to the Armor gained from equipment. Determined by a character's Dexterity.";
+    private const string extraArmorMessage = "Extra Armor, in addition to that gained from your equipment. Determined by a character's Dexterity.";
     private const string surpriseRoundDamageMultiplierMessage = "Surprise Damage Multiplier. This is the percentage of extra damage dealt when in a surprise round. Determined by a character's Dexterity.";
     private const string armorPenetrationMessage = "Armor Penetration. The percentage of an enemy's armor your Actions will ignore. Determined by a character's Dexterity.";
 
@@ -374,7 +385,9 @@ public static class HoverMessageList
 
     private const string synergyMessage = "Party Members get to add their Synergy to the damage they deal, and subtract it from the damage they take, per Zone of Influence they are inside. Determined by a character's Charisma.";
     private const string bonusExuberancesMessage = "The number of Exuberances your Party has at the start of Combat. Having more Starting Exuberances allows you to use Abilities with Exuberance costs faster and more often. Determined by a character's Charisma.";
-    private const string zoiMessage = "A Zone of Influence is a bonus applied to all allies adjacent to this character in Combat. Each character's Zone of Influence is different, but the potency of that bonus is determined by a character's Charisma.";
+    public const string zoiMessage = "A Zone of Influence is a bonus applied to all allies adjacent to this character in Combat. Each character's Zone of Influence is different, but the potency of that bonus is determined by a character's Charisma.";
+
+    public const string zoiKey = "Zone of Influence";
 
     private const string characterAbilityKey = "Character Abilities";
     private const string characterAbilityMessage = "Each Party Member gets a number of unique Abilities they unlock at certain levels.";
@@ -483,6 +496,10 @@ public static class HoverMessageList
             case EquippableItem.offHandSlotIconName:
                 return offhandSlotMessage;
 
+
+            case allItemsTabKey:
+                return allItemsTabMessage;
+
             case EquippableItem.mainHandSlotIconName:
                 return mainHandWeaponMessage + " " + mainHandWeaponSlotMessage;
             case mainHandWeaponTabKey:
@@ -572,6 +589,11 @@ public static class HoverMessageList
             case characterAbilityKey:
                 return characterAbilityMessage;
 
+            case IconList.mandatoryTargetIcon:
+                return mandatoryTargetMessage;
+            case IconList.stunnedIcon:
+                return stunnedTargetMessage;
+
             case Strength.symbolChar:
                 return strengthMessage;
             case Dexterity.symbolChar:
@@ -600,7 +622,7 @@ public static class HoverMessageList
                 return regenMessage;
             case IconList.cunningIconName:
                 return cunningMessage;
-            case IconList.extraArmorIconName:
+            case IconList.bonusArmorIconName:
                 return extraArmorMessage;
             case IconList.surpriseRoundDamageMultiplierIconName:
                 return surpriseRoundDamageMultiplierMessage;
@@ -642,9 +664,6 @@ public static class HoverMessageList
                 return yellowThornMessage;
             case IconList.greenLeafIconName:
                 return greenLeafMessage;
-
-            case zoneOfInfluenceKey:
-                return zoneOfInfluenceMessage;
 
             case actionWheelKey:
                 return actionWheelMessage;
@@ -704,6 +723,10 @@ public static class HoverMessageList
                 return saveAndLoadScreenMessage;
             case settingsScreenKey:
                 return settingsScreenMessage;
+
+            case zoneOfInfluenceKey:
+            case zoiKey:
+                return zoiMessage;
 
             default:
 

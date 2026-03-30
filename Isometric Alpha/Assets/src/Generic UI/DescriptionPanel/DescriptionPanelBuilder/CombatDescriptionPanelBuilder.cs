@@ -21,6 +21,7 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
     public Transform descriptionParent;
 
     public GameObject inspectNode;
+    public GameObject moreInfoNode;
 
     private void Awake()
     {
@@ -84,6 +85,11 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
             DescriptionPanel.setTextFontSize(row.descriptionText, nameFontSize);
             row.transform.SetAsLastSibling();
             row.descriptionText.margin = new Vector4(0f,0f,10f,0f);
+        }
+
+        if(!CombatStateManager.inCombat && row.hasFormula && moreInfoNode != null)
+        {
+            moreInfoNode.SetActive(true);
         }
 
         return row;

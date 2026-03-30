@@ -70,6 +70,7 @@ public class DescriptionPanel : MonoBehaviour
     public TextMeshProUGUI contentsText;
 	public TextMeshProUGUI worthText;
 	public TextMeshProUGUI slotText;
+    public TextMeshProUGUI slotsUsedText;
 	public TextMeshProUGUI weaponNameText;
 	public TextMeshProUGUI rangeText;
 	public TextMeshProUGUI armorRatingText;
@@ -88,9 +89,6 @@ public class DescriptionPanel : MonoBehaviour
 	
 	public DescriptionPanel nestedDescriptionPanel;
 	
-	public Canvas gameObjectDisplayCanvas;
-	public int[] displayAdjustmentCoords = new int[2];
-
 	public static void setImage(Image image, Sprite sprite)
 	{
 		if(image != null && !(image is null))
@@ -119,6 +117,14 @@ public class DescriptionPanel : MonoBehaviour
 				image.enabled = true;
 				image.color = color;
 			}
+		}
+	}
+
+    public static void disableText(TextMeshProUGUI tmpTextObject)
+	{
+		if(tmpTextObject != null && !(tmpTextObject is null))
+		{
+			tmpTextObject.gameObject.SetActive(false);
 		}
 	}
 

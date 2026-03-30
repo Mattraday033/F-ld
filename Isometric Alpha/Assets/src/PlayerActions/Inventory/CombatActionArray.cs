@@ -278,6 +278,26 @@ public class CombatActionArray : StatBoostSourceCombiner
         return true;
     }
 
+    public int getSlotsUsedOnAction(CombatAction newAction)
+    {
+        int actionSlots = 0;
+
+        foreach (CombatAction action in combatActions)
+        {
+            if (action == null)
+            {
+                continue;
+            }
+
+            if (String.Equals(newAction.getKey(), action.getKey(), StringComparison.OrdinalIgnoreCase))
+            {
+                actionSlots++;
+            }
+        }
+
+        return actionSlots;
+    }
+
     public bool hasAvailableWeaponSlots()
     {
         return getAmountOfWeaponCombatActions() < actor.getWeaponSlots();

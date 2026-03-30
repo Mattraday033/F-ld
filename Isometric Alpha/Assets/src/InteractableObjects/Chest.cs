@@ -27,6 +27,8 @@ public interface INonRevealableNameSource: INameSource
 public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationObject
 {
 
+    public readonly static UnityEvent<int> OpenChestsSharingIndex = new UnityEvent<int>();
+
     private static Dictionary<KeyValuePair<Facing, ChestState>, string> chestSprites;
     private static Dictionary<KeyValuePair<Facing, ChestState>, string> shelfSprites;
     private static Dictionary<KeyValuePair<Facing, ChestState>, string> mattockRackSprites;
@@ -216,27 +218,15 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
     public string secretDoorFlag;
 
     public int chestIndex;
-    //public bool FooBar { get; protected set; }
 
-    public int chestContentsItemType;
-    public int chestContentsItemID;
-    public int chestContentsItemQuantity;
     private Item chestContents;
 
-    public Vector3 position;
-
     public DescriptionPanel chestItemDescriptionPanel;
-
-    public bool activateQuestOnPickup;
-    public string questName;
-    public int questStep;
-    public string flagOnPickUp;
 
     private QuestStepActivationScript script;
 
     public PlayerInteractionScript[] scripts;
 
-    public GameObject targetCanvas;
 
     public string getName()
     {
@@ -388,6 +378,9 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
         {
             AudioManager.playAudioClipAsSingleton(getChestTakeSFX(chestType));
         }
+
+        OpenChestsSharingIndex.RemoveListener(openWithoutActivatingScripts);
+        OpenChestsSharingIndex.Invoke(chestIndex);
     }
 
     private string getChestKey()
@@ -403,6 +396,18 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
     public void setScript(QuestStepActivationScript script)
     {
         this.script = script;
+        OpenChestsSharingIndex.AddListener(openWithoutActivatingScripts);
+    }
+
+    private void openWithoutActivatingScripts(int index)
+    {
+        if(chestIndex != index)
+        {
+            return;
+        }
+
+        setSpriteToOpenEmpty(ignoreSFX: true);
+        OpenChestsSharingIndex.RemoveListener(openWithoutActivatingScripts);
     }
 
 }

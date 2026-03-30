@@ -12,7 +12,11 @@ public class DescriptionPanelRow : MonoBehaviour
     private string statTotal;
     private string statFormula;
     private bool hasListener = false;
-    private bool hasFormula = false;
+    public bool hasFormula
+    {
+        get;
+        private set;   
+    }
 
 
     public GameObject iconObject;

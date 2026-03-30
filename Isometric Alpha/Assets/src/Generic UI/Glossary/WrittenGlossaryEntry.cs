@@ -22,7 +22,7 @@ public class WrittenGlossaryEntry : GlossaryEntry, IDescribableInBlocks
 	{
 		List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Name, getName()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
 
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, journalDescription));
 

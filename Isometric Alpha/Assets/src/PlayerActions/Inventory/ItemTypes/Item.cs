@@ -497,6 +497,14 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 	public virtual void describeSelfRow(DescriptionPanel panel)
 	{
 		describeSelfFull(panel);
+
+        if(PlayerOOCStateManager.currentActivity == OOCActivity.inUI && 
+            AbilityGridSideTab.getDescribableListType() == DescribableList.AllItems)
+        {
+            DescriptionPanel.disableText(panel.damageText);
+            DescriptionPanel.disableText(panel.critRatingText);
+            DescriptionPanel.disableText(panel.armorRatingText);
+        }
 	}
 
 	public bool hasDescisionPanelType()
@@ -558,14 +566,14 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 	{
 		List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Name, getName()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getAmountBlock(getQuantityForDisplay()));
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getWorthBlock(getWorthForDisplay()));
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getLoreDescription()));
 
-		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getTypeIconName()));
+		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getTypeIconName()));
 
 		return buildingBlocks;
 	}

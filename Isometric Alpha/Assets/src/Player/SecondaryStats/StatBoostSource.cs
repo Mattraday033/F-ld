@@ -35,11 +35,10 @@ public abstract class StatBoostSource : INameSource
             case ItemList.leatherArmorKey:
                 return "3";
             case ItemList.potLidKey:
-            case ItemList.bronzeCuirassKey:
             case ItemList.salvagedGuardArmorKey:
                 return "4";
-            // case "":
-            //     return "5";
+            case ItemList.bronzeCuirassKey:
+                return "5";
             // case "":
             //     return "6";
             case ItemList.plumedHelmetKey:
@@ -238,9 +237,9 @@ public abstract class StatBoostSource : INameSource
         switch (getName())
         {
             case ItemList.bronzeCavalryHelmetKey:
-                return "3";
+                return "5";
             case ItemList.bronzeCuirassKey:
-                return "S+1";            
+                return "S+4";            
             default:
                 return Constants.zeroRating;
         }

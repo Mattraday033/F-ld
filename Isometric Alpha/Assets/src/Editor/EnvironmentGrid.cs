@@ -1,27 +1,17 @@
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public static class EnvironmentGrid
 {
-    private const string EnvironmentObjectName = "Environment Grid";
-
     [UnityEditor.InitializeOnLoadMethod]
     private static void CreateEnvironmentGridListener()
     {
         PrefabStage.prefabStageOpened -= HandlePrefabStageOpened;
         PrefabStage.prefabStageOpened += HandlePrefabStageOpened;
-
-        CreateEnvironmentObjectIfNeeded(PrefabStageUtility.GetCurrentPrefabStage());
     }
 
     private static void HandlePrefabStageOpened(PrefabStage prefabStage)
-    {
-        CreateEnvironmentObjectIfNeeded(prefabStage);
-    }
-
-    private static void CreateEnvironmentObjectIfNeeded(PrefabStage prefabStage)
     {
         if (prefabStage == null)
         {
@@ -30,17 +20,20 @@ public static class EnvironmentGrid
 
         foreach (GameObject rootObject in prefabStage.scene.GetRootGameObjects())
         {
-            if (rootObject.name == EnvironmentObjectName)
+            if(rootObject.name.Contains("Environment"))
             {
-                return;
+                Grid grid = rootObject.GetComponent<Grid>();
+
+                if(grid == null)
+                {
+                    continue;
+                }
+                
+                grid.transform.localScale = new Vector3(1.012393f, 0.864012301f, 1f);
+
+                grid.cellSize = new Vector3(1f, .5f, 1f);
+                grid.cellLayout = GridLayout.CellLayout.IsometricZAsY;
             }
         }
-
-        GameObject environmentObject = new GameObject(EnvironmentObjectName)
-        {
-            hideFlags = HideFlags.DontSaveInEditor
-        };
-
-        SceneManager.MoveGameObjectToScene(environmentObject, prefabStage.scene);
     }
 }

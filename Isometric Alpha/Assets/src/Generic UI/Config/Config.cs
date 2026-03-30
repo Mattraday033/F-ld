@@ -309,7 +309,6 @@ public class ConfigFile
         audioSettings.useForSettings();
 
         keybindSettings.useForSettings();
-
     }
 
     public static ConfigFile build()

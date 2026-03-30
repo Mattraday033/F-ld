@@ -35,6 +35,9 @@ public static class EscapeStack
             if(escapableObject != null && !(escapableObject is null))
             {
                 escapableObject.handleEscapePress();
+            } else
+            {
+                removeAllNullObjectsFromStack();
             }
 
             if(Flags.isInNewGameMode())

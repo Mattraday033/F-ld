@@ -291,7 +291,6 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                     AbilityList.getAbility(null, AbilityList.guardJavelinKey) as Ability,
                                                         new Trait[] { 
                                                                         TraitList.minion,
-                                                                        TraitList.chaotic,
                                                                         TraitList.blocker,
                                                                         TraitList.frontLine
                                                                     },

@@ -340,8 +340,6 @@ MonoBehaviour:
   wisText: {fileID: 0}
   chaText: {fileID: 0}
   nestedDescriptionPanel: {fileID: 0}
-  gameObjectDisplayCanvas: {fileID: 0}
-  displayAdjustmentCoords: 0000000000000000
   levelUpSymbol: {fileID: 379327830531365417}
   abilityMenuManager: {fileID: 0}
   zoneOfInfluenceIcon: {fileID: 0}
@@ -521,12 +519,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6314409397681156558}
+  m_Father: {fileID: 8652601202645939937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -10, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2114967666216789469
 CanvasRenderer:
@@ -566,8 +564,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279834905
-  m_fontColor: {r: 0.09803922, g: 0.09803922, b: 0.09803922, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -584,10 +582,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 24.6
+  m_fontSizeBase: 30
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 1
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -1196,6 +1194,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4632535450442840713, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6619013765722126034, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
         type: 3}
       propertyPath: m_Sprite
@@ -1317,7 +1320,7 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8509011031940444526}
-    - targetCorrespondingSourceObject: {fileID: 7912202418776353152, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
+    - targetCorrespondingSourceObject: {fileID: 4789777468512726703, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4619836667772734313}
@@ -1326,6 +1329,12 @@ PrefabInstance:
 --- !u!224 &6314409397681156558 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7912202418776353152, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
+    type: 3}
+  m_PrefabInstance: {fileID: 4209884654100731982}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &8652601202645939937 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4789777468512726703, guid: 8499f1c5249e4cb4fb0b21d8c0d24202,
     type: 3}
   m_PrefabInstance: {fileID: 4209884654100731982}
   m_PrefabAsset: {fileID: 0}

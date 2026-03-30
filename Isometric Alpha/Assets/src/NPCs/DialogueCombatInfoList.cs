@@ -41,7 +41,7 @@ public static class DialogueCombatInfoList
                                                                                                  gasparViragDead
                                                                                                });
 
-    public readonly static DeadNameList kendeKitchenDeadNames = new DeadNameList(new string[]{NPCNameList.kende, NPCNameList.pan, NPCNameList.imre});
+    public readonly static DeadNameList kendeKitchenDeadNames = new DeadNameList(new string[]{NPCNameList.kende});
 
     public readonly static NPCCombatInfo kendeInKitchensCombatInfo = new NPCCombatInfo( 
                                                                      new EnemyPackInfo[]   {   

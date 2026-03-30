@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class PlayerAbilityGridRow : GridRow, IPointerDownHandler, IDragAndDropSource
@@ -103,4 +104,24 @@ public class PlayerAbilityGridRow : GridRow, IPointerDownHandler, IDragAndDropSo
 
         EventSystem.current.SetSelectedGameObject(null);
     }
+
+    
+	public override void setToIneligible()
+    {
+        CombatAction combatAction = getObjectBeingDescribed() as CombatAction;
+
+        if(combatAction == null || 
+            !combatAction.getDisplayType().Equals(PassiveAbility.passiveAbilityType) || 
+            !combatAction.meetsStatRequirement())
+        {
+            base.setToIneligible();
+            return;
+        } 
+
+        foreach (Button button in buttons)
+		{
+            button.enabled = false;
+		}
+    }
+
 }

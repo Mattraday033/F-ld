@@ -12,9 +12,9 @@ public abstract class Armor : EquippableItem, IJSONConvertable
 
 	public const int trinketBaseWorthWithoutArmor = 75;
 
-	public const int offHandSlotIndex = 0;  //Both the Armor and Weapon classes have an offHandSlotIndex because both types of item can go in
-	public const int headSlotIndex = 1;     //this slot. They're the same index, it doesn't matter which one is called but to prevent confusion the 
-	public const int bodySlotIndex = 2;     //Armor index should be called for Armors and the Weapon index for Weapons.
+	public const int offHandSlotIndex = 0;  
+	public const int headSlotIndex = 1;     
+	public const int bodySlotIndex = 2;     
 	public const int handsSlotIndex = 3;
 	public const int feetSlotIndex = 4;
 	public const int trinketSlotIndex = 5;

@@ -629,7 +629,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 	{
 		List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Name, "Save Name: " + getName()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock("Save Name: " + getName()));
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Save Number: " + getSaveNumberForDisplay()));
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Location: " + getLocationUIDisplayName()));
 

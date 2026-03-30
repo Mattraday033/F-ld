@@ -43,6 +43,11 @@ public class PassiveAbility : EquippedPassive //passives are (currently) mostly 
 
     //IDescribable
 
+    public override bool ineligible()
+    {
+        return true;
+    }   
+
     public override GameObject getDescriptionPanelFull(PanelType panelType)
     {
         if (multiStackTrait != null)
@@ -133,6 +138,8 @@ public class PassiveAbility : EquippedPassive //passives are (currently) mostly 
     public override void describeSelfRow(DescriptionPanel panel)
     {
         base.describeSelfRow(panel);
+        
+        addSlotsTextToRow(panel);
 
         if(multiStackTrait == null)
         {
@@ -145,6 +152,11 @@ public class PassiveAbility : EquippedPassive //passives are (currently) mostly 
         {
             DescriptionPanel.setImage(multiPanel.iconPanels[index], Helpers.loadSpriteFromResources(multiStackTrait.stackableTraits[index].getIconName()));
         }
+    }
+
+    public override void addSlotsTextToRow(DescriptionPanel panel)
+    {
+        DescriptionPanel.setText(panel.slotsUsedText, "Passive");
     }
 
     //ISortable Methods

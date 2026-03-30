@@ -52,7 +52,7 @@ public class DamageOverTimeTrait : Trait
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getDescription()));
 
-		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getIconName()));
+		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getIconName()));
 
 		return buildingBlocks;
 	}

@@ -56,7 +56,7 @@ public class InventoryScreen : ScreenManager, ICounter
 
     public override DescribableList getDefaultDescribableList()
     {
-        return DescribableList.MainHandWeaponsAsItems;
+        return DescribableList.AllItems;
     }
 
     public override KeyCode getExitKeyCode()

@@ -245,6 +245,15 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.overseer),
                                new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning));
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, MonsterNameList.brandedConscript),
+                               new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.revoltStarted }),
+                                stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.neCampOverseerKilled, FlagNameList.convincedSlavesToHelpYou, FlagNameList.directorDefeated })));
+
+                                
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, MonsterNameList.spearman),
+                               new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.revoltStarted }),
+                                stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.neCampOverseerKilled, FlagNameList.convincedSlavesToHelpYou, FlagNameList.directorDefeated })));
+
         #region Rally Slaves Convo
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.slave),
@@ -609,7 +618,7 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campManse, NPCNameList.imre),
                                new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated }), spawnWhileHostile: doesNotSpawnWhileHostile));
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campManse, NPCNameList.imre+1),
-                               new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.convincedImre }),
+                               new InteractableSpawnParams(new StartSpawningAllTrueFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.convincedImre }),
                                 stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.askedImreToLeadTheWay, FlagNameList.directorDefeated }), spawnWhileHostile: spawnWhileHostile));
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campManse, NPCNameList.barracksGate+2),
                                new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.revoltStarted }),

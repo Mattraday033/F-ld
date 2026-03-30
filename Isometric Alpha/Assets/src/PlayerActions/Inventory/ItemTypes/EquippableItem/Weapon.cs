@@ -155,13 +155,14 @@ public class Weapon : EquippableItem, IJSONConvertable
 
 	public override void describeSelfRow(DescriptionPanel panel)
 	{
-		base.describeSelfFull(panel);
+		base.describeSelfRow(panel);
 
 		DescriptionPanel.setText(panel.slotText, getSlotIDForDisplay());
 		DescriptionPanel.setText(panel.damageText, getDamageFormulaTotal());
 		DescriptionPanel.setText(panel.critRatingText, getCritTotalForDisplay());
 
 		DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getIconName()));
+
 	}
 
 	public override string getTypeIconName()
@@ -192,7 +193,7 @@ public class Weapon : EquippableItem, IJSONConvertable
     {
         List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Name, getName()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
 
         buildingBlocks.AddRange(getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
 
@@ -202,11 +203,11 @@ public class Weapon : EquippableItem, IJSONConvertable
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getLoreDescription()));
 
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getIconName()));
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getIconName()));
 
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getSlotIconName()));
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getSlotIconName()));
         
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getTypeIconName()));
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getTypeIconName()));
 
         if (appliesStanceStacks())
         {

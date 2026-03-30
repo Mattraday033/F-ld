@@ -65,6 +65,8 @@
         "build/": true,
         "Build/": true,
         "Builds/": true,
+        "library/": true,
+        "Library/": true,
         "logs/": true,
         "Logs/": true,
         "MonoBleedingEdge/": true,

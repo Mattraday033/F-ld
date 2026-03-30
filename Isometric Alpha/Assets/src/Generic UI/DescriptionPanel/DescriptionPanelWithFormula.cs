@@ -58,7 +58,7 @@ public class DescriptionPanelWithFormula : DescriptionPanel
 
         string subtype = item.getSubtype();
 
-        if(item as OffHandWeapon != null)
+        if(item as OffHandWeapon != null || item as Shield != null)
         {
             subtype = Weapon.subtype;
         }

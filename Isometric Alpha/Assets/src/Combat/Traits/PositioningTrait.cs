@@ -16,24 +16,17 @@ public class PositioningTrait : Trait
 	
 	public override bool stackInFront()
 	{
-		if(positioningType == PositioningType.Frontline)
-		{
-			return true;
-		} else
-		{
-			return false;
-		}
+        return positioningType == PositioningType.Frontline;
 	}
 	
 	public override bool stackInBack()
 	{
-		if(positioningType == PositioningType.Backline)
-		{
-			return true;
-		} else
-		{
-			return false;
-		}
+		return positioningType == PositioningType.Backline;
 	}
+
+    public override bool isHiddenTrait()
+    {
+        return true;
+    }
 
 }

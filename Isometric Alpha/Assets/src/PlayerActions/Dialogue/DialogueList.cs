@@ -312,6 +312,14 @@ public static class DialogueList
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.garcha+1,
                          new Dialogue(new string[] { NPCNameList.garcha+1 }, 
                             Resources.Load<TextAsset>(DialogueNameList.garchaNECampPathName)));
+
+        addDialogueToList(LocationNameList.campNorthEast, MonsterNameList.brandedConscript,
+                        new SingleCharacterDialogue(MonsterNameList.brandedConscript,
+                        Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
+
+        addDialogueToList(LocationNameList.campNorthEast, MonsterNameList.spearman,
+                        new SingleCharacterDialogue(MonsterNameList.spearman,
+                        Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
         #endregion
         #region CenterCamp
 

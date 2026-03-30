@@ -889,15 +889,15 @@ public class AllyStats : Stats
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getStrengthBlock(getStrength().ToString()));
 
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusHealthBlock(getBonusHealthFromAllSources().ToString()));
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getCriticalHitDamageBlock(getExtraCritDamageForDisplay().ToString()));
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getPhysicalResistBlock(getPhysicalResistanceForDisplay().ToString()));
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusHealthBlock(getBonusHealthFromAllSources().ToString()));
 
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDexterityBlock(getDexterity().ToString()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getSurpriseRoundDamageMultiplierBlock(getSurpriseDamageMultiplierForDisplay()));
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getExtraArmorBlock(getExtraArmorFromDexterity().ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getSurpriseRoundDamageMultiplierBlock(getSurpriseDamageMultiplierForDisplay()));
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorPenetrationBlock(getArmorPenetrationForDisplay()));
 
 

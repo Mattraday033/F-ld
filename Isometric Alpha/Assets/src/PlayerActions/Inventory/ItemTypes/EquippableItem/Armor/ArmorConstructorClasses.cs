@@ -42,7 +42,7 @@ public class OffHandWeapon : Armor
     {
         List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getIconName()));
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getIconName()));
         
         buildingBlocks.AddRange(base.getDescriptionBuildingBlocks());
 
@@ -74,11 +74,51 @@ public class OffHandFist : OffHandWeapon
 	}
 }
 
-public class TierZeroShield : Armor
+public class Shield : Armor
+{
+    public Shield(ItemListID listID, string key, string loreDescription, int armorTier, string damageFormula = Constants.zeroRating, 
+                                                                                                      string critFormula = Constants.zeroRating)  : 
+    base(listID, key, loreDescription, offHandSlotIndex, armorTier, damageFormula, critFormula) 
+    {
+
+    }
+
+    public override void describeSelfFull(DescriptionPanel panel)
+	{
+		base.describeSelfFull(panel);
+
+        DescriptionPanel.setText(panel.damageText, getDamageFormulaTotal());
+        DescriptionPanel.setText(panel.critRatingText, getCritTotalForDisplay());
+	}
+
+    public override void describeSelfRow(DescriptionPanel panel)
+	{
+		panel.setObjectBeingDescribed(this);
+        
+        DescriptionPanel.setText(panel.nameText, getName());
+
+        DescriptionPanel.setImage(panel.iconPanel, Resources.Load<Sprite>(getSlotIconName()));
+
+        DescriptionPanel.setText(panel.damageText, getDamageFormulaTotal());
+        DescriptionPanel.setText(panel.critRatingText, getCritTotalForDisplay());
+        DescriptionPanel.setText(panel.amountText, getQuantityForDisplay());
+        DescriptionPanel.setText(panel.worthText, getWorthForDisplay());
+
+        if(PlayerOOCStateManager.currentActivity == OOCActivity.inUI && 
+            AbilityGridSideTab.getDescribableListType() == DescribableList.AllItems)
+        {
+            DescriptionPanel.disableText(panel.damageText);
+            DescriptionPanel.disableText(panel.critRatingText);
+            DescriptionPanel.disableText(panel.armorRatingText);
+        }
+	}
+}
+
+public class TierZeroShield : Shield
 {
     public TierZeroShield(ItemListID listID, string key, string loreDescription, string damageFormula = Constants.zeroRating, 
                                                                                                       string critFormula = Constants.zeroRating)  : 
-    base(listID, key, loreDescription, offHandSlotIndex, Constants.tierZero, damageFormula, critFormula) 
+    base(listID, key, loreDescription, Constants.tierZero, damageFormula, critFormula) 
     {
 
     }
@@ -134,11 +174,11 @@ public class Trinket : Armor
     }
 }
 
-public class TierOneShield : Armor
+public class TierOneShield : Shield
 {
     public TierOneShield(ItemListID listID, string key, string loreDescription, string damageFormula = Constants.zeroRating, 
                                                                                                       string critFormula = Constants.zeroRating)  : 
-    base(listID, key, loreDescription, offHandSlotIndex, Constants.tierOne, damageFormula, critFormula) 
+    base(listID, key, loreDescription, Constants.tierZero, damageFormula, critFormula) 
     {
 
     }
@@ -184,11 +224,11 @@ public class TierOneFeet : Armor
     }
 }
 
-public class TierTwoShield : Armor
+public class TierTwoShield : Shield
 {
     public TierTwoShield(ItemListID listID, string key, string loreDescription, string damageFormula = Constants.zeroRating, 
                                                                                                       string critFormula = Constants.zeroRating)  : 
-    base(listID, key, loreDescription, offHandSlotIndex, Constants.tierTwo, damageFormula, critFormula) 
+    base(listID, key, loreDescription, Constants.tierZero, damageFormula, critFormula) 
     {
 
     }
@@ -234,11 +274,11 @@ public class TierTwoFeet : Armor
     }
 }
 
-public class TierThreeShield : Armor
+public class TierThreeShield : Shield
 {
     public TierThreeShield(ItemListID listID, string key, string loreDescription, string damageFormula = Constants.zeroRating, 
                                                                                                       string critFormula = Constants.zeroRating)  : 
-    base(listID, key, loreDescription, offHandSlotIndex, Constants.tierThree, damageFormula, critFormula) 
+    base(listID, key, loreDescription, Constants.tierZero, damageFormula, critFormula) 
     {
 
     }
@@ -284,11 +324,11 @@ public class TierThreeFeet : Armor
     }
 }
 
-public class TierFourShield : Armor
+public class TierFourShield : Shield
 {
     public TierFourShield(ItemListID listID, string key, string loreDescription, string damageFormula = Constants.zeroRating, 
                                                                                                       string critFormula = Constants.zeroRating)  : 
-    base(listID, key, loreDescription, offHandSlotIndex, Constants.tierFour, damageFormula, critFormula) 
+    base(listID, key, loreDescription, Constants.tierZero, damageFormula, critFormula) 
     {
 
     }

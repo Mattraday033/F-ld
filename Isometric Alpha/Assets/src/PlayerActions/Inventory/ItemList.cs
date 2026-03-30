@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct ItemListID
+public class ItemListID
 {
 	public const string listIndexElementName = "listIndex";
 	public const string itemIndexElementName = "itemIndex";
@@ -13,18 +13,27 @@ public struct ItemListID
 	public int itemIndex;
 	public int quantity;
 	
-	public ItemListID(int listIndex, int itemIndex)
-	{
-		this.listIndex = listIndex;
-		this.itemIndex = itemIndex;
-		this.quantity = 1;
-	}
-	
-	public ItemListID(int listIndex, int itemIndex, int quantity)
+	public ItemListID(int listIndex, int itemIndex, int quantity = 1)
 	{
 		this.listIndex = listIndex;
 		this.itemIndex = itemIndex;
 		this.quantity = quantity;
+	}
+}
+
+public class ArmorListID : ItemListID
+{
+	public ArmorListID(int itemIndex, int quantity = 1):
+    base(ItemList.armorListIndex, itemIndex, quantity)
+	{
+	}
+}
+
+public class WeaponListID : ItemListID
+{
+	public WeaponListID(int itemIndex, int quantity = 1):
+    base(ItemList.weaponsListIndex, itemIndex, quantity)
+	{
 	}
 }
 
@@ -253,7 +262,7 @@ public static class ItemList
 		weapons.Add(new Fist(new ItemListID(weaponsListIndex, ruinousMainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "4W+S+D+16", "W+D+8", "RuinousFistIcon", Range.singleTargetIndex)); //When implementing 6 range selectors, this gets Sextuple Box/Horizontal
 		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, bronzeGreatspearIndex), "Bronze Greatspear", "A long spear with a bronze tip, made to be wielded in two hands.", "6S+12", "S+D", ItemSpriteList.bronzeSpearSprite, Range.verticalThreeIndex, 50, isTwoHanded, EffectAnimationType.Pierce));
 		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, wornBowIndex), "Worn Bow", "This bow is a little weathered, but can still answer the call of it's wielder", "7D+16", "3D", ItemSpriteList.wornBowSprite, Range.verticalOneIndex, 55, isTwoHanded, EffectAnimationType.Pierce));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, fightingCapeIndex), "Fighting Cape", "A cape rapped around the mainhand, used to both deflect small blows and disorient the opponent. Often paired with a dagger in the offhand.", "3C", "C", ItemSpriteList.capeSprite, Range.singleTargetIndex, 35, isOneHanded, EffectAnimationType.Slash));
+		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, fightingCapeIndex), "Fighting Cape", "A cape wrapped around the mainhand, used to both deflect small blows and disorient the opponent. Often paired with a dagger in the offhand.", "3C+4", "C", ItemSpriteList.capeSprite, Range.singleTargetIndex, 35, isOneHanded, EffectAnimationType.Slash));
 		weapons.Add(new Staff (new ItemListID(weaponsListIndex, staffIndex), "Staff", "A weathered length of oak-spar. It would serve as well as a walking aid or a bludgeon. Has high Base Damage.", "10", "D+W", ItemSpriteList.staffSprite, Range.horizontalOneIndex, 10, isTwoHanded));
 		weapons.Add(null);
 		weapons.Add(null);
@@ -273,11 +282,11 @@ public static class ItemList
 		armor.Add(new TierOneBody(new ItemListID(armorListIndex, paddedArmorIndex), paddedArmorKey, "Armor made of heavy cloth. It feels sturdier than it sounds."));
 		armor.Add(new Trinket(new ItemListID(armorListIndex, thatchNecklaceIndex), thatchNecklaceKey, "A necklace made of a silver medalion attached to a thin silver chain. A sun rising over the horizon is etched into the medalion's disk."));
 		armor.Add(new Trinket(new ItemListID(armorListIndex, martialArtistsBeltIndex), martialArtistsBeltKey, "A simple belt made of rope. Unadorned and unburdened.", "2W+6"));
-		armor.Add(new TierOneShield(new ItemListID(armorListIndex, wardensShieldIndex), wardensShieldKey, "A shield made from bands of bronze fitted over a hard wooden core.", "2S + 10"));
+		armor.Add(new TierOneShield(new ItemListID(armorListIndex, wardensShieldIndex), wardensShieldKey, "A shield made from bands of bronze fitted over a hard wooden core."));
 		armor.Add(new Trinket(new ItemListID(armorListIndex, silverSpoonIndex), silverSpoonKey, "The holder of this spoon accumulates wealth at a faster rate. Monsters drop 20% more gold."));
 		armor.Add(new TierOneFeet(new ItemListID(armorListIndex, leatherBootsIndex), leatherBootsKey, "Solid boots made of cowhide. Meant to be worn with armor."));
 		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, bronzeHelmetIndex), bronzeCavalryHelmetKey, "A bronze helmet in the Lovashi style. Well padded and comfortable to wear."));
-		armor.Add(new TierOneBody(new ItemListID(armorListIndex, bronzeCuirassIndex), bronzeCuirassKey, "Armor made of interlocking bronze scales."));
+		armor.Add(new TierTwoBody(new ItemListID(armorListIndex, bronzeCuirassIndex), bronzeCuirassKey, "Armor made of interlocking bronze scales."));
 		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, salvagedGuardHelmIndex), salvagedGuardHelmKey, "A helm taken from a slain guard. Buff out that dent and it's good as new."));
 		armor.Add(new TierOneBody(new ItemListID(armorListIndex, salvagedGuardArmorIndex), salvagedGuardArmorKey, "A set of armor stripped off a dead guard. Don't mind whatever that smell is."));
 		armor.Add(new TierOneHands(new ItemListID(armorListIndex, salvagedGuardGlovesIndex), salvagedGuardGlovesKey, "A pair of gloves taken from a guard's cold, dead hands."));

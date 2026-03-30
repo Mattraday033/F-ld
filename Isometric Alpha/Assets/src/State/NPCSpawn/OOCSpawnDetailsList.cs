@@ -262,6 +262,21 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(3, 5), Facing.SouthEast));
 
+        #region Overseer Fight
+        
+        list.Add(new NPCWithAnimationsSpawnDetails(MonsterNameList.brandedConscript, new Vector3Int(-3, 5), LocationNameList.campNorthEast, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(MonsterNameList.brandedConscript, new Vector3Int(-6, 4), LocationNameList.campNorthEast, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(MonsterNameList.spearman, new Vector3Int(-2, 4), LocationNameList.campNorthEast, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(MonsterNameList.brandedConscript, new Vector3Int(-4, 3), LocationNameList.campNorthEast, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(MonsterNameList.brandedConscript, new Vector3Int(-2, 2), LocationNameList.campNorthEast, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(MonsterNameList.brandedConscript, new Vector3Int(-4, 1), LocationNameList.campNorthEast, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(MonsterNameList.brandedConscript, new Vector3Int(-4, -1), LocationNameList.campNorthEast, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(MonsterNameList.brandedConscript, new Vector3Int(-6, -1), LocationNameList.campNorthEast, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(MonsterNameList.spearman, new Vector3Int(-2, -2), LocationNameList.campNorthEast, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(MonsterNameList.brandedConscript, new Vector3Int(-5, -4), LocationNameList.campNorthEast, facing: Facing.SouthWest));
+
+        #endregion
+
         #region Rallying Slaves Dialogue
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(8, 5), facing: Facing.NorthEast, ignoresSecretDoors: false));

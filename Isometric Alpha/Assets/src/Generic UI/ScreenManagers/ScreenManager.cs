@@ -35,7 +35,8 @@ public enum DescribableList
     ShopKeeperOffHandWeapons = 23,
     ShopKeeperArmor = 24,
     ShopKeeperEssentialItems = 25,
-    CharacterSpecificAbilities = 26
+    CharacterSpecificAbilities = 26,
+    AllItems = 27
 }
 
 [System.Serializable]
@@ -186,6 +187,8 @@ public struct Tab
                 {
                     return AbilityList.getCompanionAbilities(OverallUIManager.getCurrentPartyMember().getName());
                 }
+            case DescribableList.AllItems:
+                    return State.inventory.Values;
             default:
 
                 throw new IOException("Unknown DescribableList = " + describableList.ToString());

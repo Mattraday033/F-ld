@@ -1159,6 +1159,16 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         return 1;
     }
 
+    public virtual void addSlotsTextToRow(DescriptionPanel panel)
+    {
+        CombatActionArray combatActionArray = OverallUIManager.getCurrentActionArray();
+
+        if(!ineligible() && getMaximumSlots() > 0 && combatActionArray != null)
+        {
+            DescriptionPanel.setText(panel.slotsUsedText, combatActionArray.getSlotsUsedOnAction(this) + "/" + getMaximumSlots());
+        }
+    }
+
     public virtual string getMaximumSlotsForDisplay()
     {
         if (getMaximumSlots() <= 0)
@@ -1451,6 +1461,11 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         }
     }
 
+    public virtual bool meetsStatRequirement()
+    {
+        return true;
+    }
+
     public virtual List<IDescribable> getRelatedDescribables()
     {
         return getTraitsToDescribe().Cast<IDescribable>().ToList();
@@ -1513,7 +1528,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getUseDescription()));
 
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getIconName()));
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getIconName()));
 
         //buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getCritTotalForDisplay()));
 

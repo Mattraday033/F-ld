@@ -311,15 +311,11 @@ public class Ability: CombatAction, IJSONConvertable
 		
 		panel.setObjectBeingDescribed(this);
 		
-		if(panel.nameText != null && !(panel.nameText is null))
-		{
-			panel.nameText.text = getName();
-		}
-		
-		if(panel.statText != null && !(panel.statText is null) && getRequiredStatLevel() >= 0)
-		{
-			panel.statText.text = "" + getRequiredStatLevelForDisplay();
-		}
+        DescriptionPanel.setText(panel.nameText, getName());
+
+        DescriptionPanel.setText(panel.statText, "" + getRequiredStatLevelForDisplay());
+
+        addSlotsTextToRow(panel);
 	}
 	
 	public override bool ineligible()
@@ -338,44 +334,42 @@ public class Ability: CombatAction, IJSONConvertable
 		}
 		else
 		{
-			if (statKey.Length <= 0 || getRequiredStatLevel() < 0)
-			{
-				return false;
-			}
-
-			int currentStat = 0;
-
-            char statKeyChar = statKey[0];
-
-            switch(statKeyChar)
-            {
-                case AbilityList.levelKeyChar:
-				    currentStat = OverallUIManager.getCurrentPartyMember().getLevel();
-                    break;
-                case AbilityList.strengthKeyChar:
-				    currentStat = OverallUIManager.getCurrentPartyMember().getStrength();
-                    break;
-                case AbilityList.dexterityKeyChar:
-				    currentStat = OverallUIManager.getCurrentPartyMember().getDexterity();
-                    break;
-                case AbilityList.wisdomKeyChar:
-				    currentStat = OverallUIManager.getCurrentPartyMember().getWisdom();
-                    break;
-                case AbilityList.charismaKeyChar:
-				    currentStat = OverallUIManager.getCurrentPartyMember().getCharisma();
-                    break;
-            }
-
-			if (getRequiredStatLevel() > currentStat)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+            return !meetsStatRequirement();
 		}
 	}
+
+    public override bool meetsStatRequirement()
+    {
+        if (statKey.Length <= 0 || getRequiredStatLevel() < 0)
+        {
+            return true;
+        }
+
+        int currentStat = 0;
+
+        char statKeyChar = statKey[0];
+
+        switch(statKeyChar)
+        {
+            case AbilityList.levelKeyChar:
+                currentStat = OverallUIManager.getCurrentPartyMember().getLevel();
+                break;
+            case AbilityList.strengthKeyChar:
+                currentStat = OverallUIManager.getCurrentPartyMember().getStrength();
+                break;
+            case AbilityList.dexterityKeyChar:
+                currentStat = OverallUIManager.getCurrentPartyMember().getDexterity();
+                break;
+            case AbilityList.wisdomKeyChar:
+                currentStat = OverallUIManager.getCurrentPartyMember().getWisdom();
+                break;
+            case AbilityList.charismaKeyChar:
+                currentStat = OverallUIManager.getCurrentPartyMember().getCharisma();
+                break;
+        }
+
+        return getRequiredStatLevel() <= currentStat;
+    }
 
     //ISortable Methods
 

@@ -392,7 +392,8 @@ public class SaveHandler : ScreenManager, IEscapable
 
     public static void deleteSaveFile(string saveFileName)
     {
-        File.Delete(Application.persistentDataPath + "/" + saveFileName + Constants.jsonFileExtension);
+        
+        File.Delete(PrefabNames.savesFolder + saveFileName + Constants.jsonFileExtension);
 
         saveGameList.Remove(saveFileName);
 	}
