@@ -2,27 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct DropTableEntry
+{
+    public Item item;
+    public float dropChance;
+
+    public DropTableEntry(Item item, float dropChance)
+    {
+        this.item = item;
+        this.dropChance = dropChance;
+    }
+}
+
 public class DropTable
 {
-	public string name;
-
 	public int goldMin;
 	public int goldMax;
 
-	public Item[] items;
-	
-	public float[] dropChances; //all drop chances should add up to 1
+    public DropTableEntry[] entries;
 
-	public DropTable(string name, int goldMin, int goldMax, Item[] items, float[] dropChances)
+	public DropTable(int goldMin, int goldMax, DropTableEntry[] entries)
 	{
-		this.name = name;
-		
 		this.goldMin = goldMin;
 		this.goldMax = goldMax;
 		
-		this.items = items;
-		
-		this.dropChances = dropChances;
+		this.entries = entries;
 	}
 
 }

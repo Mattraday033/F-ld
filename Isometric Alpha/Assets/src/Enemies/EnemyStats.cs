@@ -179,11 +179,6 @@ public class EnemyStats : Stats
 
     #region Traits
 
-    public virtual bool isLarge()
-    {
-        return false;
-    }
-    
     public override bool notResurrectable()
     {
         return isMinion() || isSummon() || base.notResurrectable();

@@ -39,6 +39,12 @@ public abstract class EquippableItem : Item, IJSONConvertable
         return DamageCalculator.calculateFormula(getArmorFormula(), getStatSource());
     }
 
+
+    public string getInvulnerabilityForDisplay()
+    {
+        return DamageCalculator.calculateFormula(getInvulnerableFormula(), getStatSource()) + "";
+    }
+
     public string getArmorRatingForDisplay()
     {
         return "" + getArmorRating();

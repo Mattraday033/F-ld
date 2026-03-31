@@ -143,6 +143,9 @@ public class LoadSaveFile : IDecision
 
             MonsterDefeatKeysList.extractAllMonsterDefeatKeys(saveBlueprint);
 
+            NewAbilityManager.resetNewAbilityManager(saveBlueprint.newAbilityWrappers);  
+            NewPartyMemberManager.resetNewPartyMemberManager(saveBlueprint.newPartyMemberNames);    
+            
             CombatStateManager.inCombat = false;
 
             State.currentSkillType = SkillManager.getHighestSkillType(PartyManager.getPlayerStats());
@@ -191,7 +194,7 @@ public class LoadSaveFile : IDecision
         Flags.setFlag("seenAbilityWheelTutorial", true);
 
         // Flags.flags[TutorialSequenceList.equippableItemTutorialSeenFlag] = true;
-        Flags.setFlag(TutorialSequenceList.formationPopUpTutorialSeenFlag, true);
+        Flags.setFlag(TutorialSequenceList.formationTutorialSeenFlag, true);
         // Flags.flags[TutorialSequenceList.addingAbilitiesTutorialSeenFlag] = true;
     }
 }

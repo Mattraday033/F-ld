@@ -16,13 +16,16 @@ public class Weapon : EquippableItem, IJSONConvertable
     private bool isTwoHanded;
     private EffectAnimationType effectAnimationType;
 
-	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, bool isTwoHanded, EffectAnimationType effectAnimationType = EffectAnimationType.Slash) :
+    public Trait traitToApply;
+
+	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, bool isTwoHanded, EffectAnimationType effectAnimationType = EffectAnimationType.Slash, Trait traitToApply = null) :
     base(listId, key, loreDescription, damageFormula, critFormula, subtype, worth)
 	{
 		this.isTwoHanded = isTwoHanded;
 		this.iconName = iconName;
 		this.rangeIndex = rangeIndex;
         this.effectAnimationType = effectAnimationType;
+        this.traitToApply = traitToApply;
 	}
 
 	public override string convertToJson()
@@ -75,6 +78,18 @@ public class Weapon : EquippableItem, IJSONConvertable
 	{
 		return true;
 	}
+
+    public override Trait getAppliedTrait()
+    {
+        if(traitToApply == null)
+        {
+            return null;
+        }
+
+        Trait traitClone = traitToApply.clone();
+
+        return traitClone;
+    }
 
 	public override CombatAction getCombatAction(AllyStats stats)
 	{

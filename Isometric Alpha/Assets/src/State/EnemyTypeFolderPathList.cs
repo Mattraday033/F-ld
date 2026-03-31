@@ -145,8 +145,8 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.slave+12, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.pickMarker + "/");
 
         folderPathDict.Add(NPCNameList.woundedSlave, brandedFolderPath + NPCNameList.ervin + "/");
-        folderPathDict.Add(NPCNameList.woundedSlave+1, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.shivMarker + "/");
-        folderPathDict.Add(NPCNameList.woundedSlave+2, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.shovelMarker + "/");
+        folderPathDict.Add(NPCNameList.woundedSlave+1, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.shovelMarker + "/");
+        folderPathDict.Add(NPCNameList.woundedSlave+2, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.shivMarker + "/");
         
         folderPathDict.Add(NPCNameList.crowd, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.pickMarker + "/");           
         #endregion
@@ -211,8 +211,14 @@ public static class EnemyTypeFolderPathList
 
     public static string getShadowPrefabName(string enemyType)
     {
-        switch(enemyType)
+        switch(DialogueList.scrubNameOfEndNumbers(enemyType))
         {
+            case MonsterNameList.horseCharger:
+            case MonsterNameList.horseStomper:
+            case NPCNameList.csalan:
+            case NPCNameList.horse:
+                return PrefabNames.shadow256x128;
+
             case MonsterNameList.hiveHeraldNest:
             case MonsterNameList.martyrWormNest:
             case MonsterNameList.toxicWormNest:
@@ -225,6 +231,7 @@ public static class EnemyTypeFolderPathList
                 {
                     return PrefabNames.shadow256x256;
                 }
+
             default:
                 return PrefabNames.shadow256x256;
         }

@@ -7,29 +7,29 @@ public class StrengthBoost : SecondaryStatBoost, IJSONConvertable
 
 	private double extraCritDamageMultiplier = 0.0;
 	private int extraHealth = 0;
-	private double physicalResistance = 0.0;
+	private double woundResistance = 0.0;
     private int extraIntimidateCharges = 0;
 
-    public StrengthBoost(string key, double extraCritDamageMultiplier, int extraHealth, double physicalResistance, int extraIntimidateCharges)
+    public StrengthBoost(string key, double extraCritDamageMultiplier, int extraHealth, double woundResistance, int extraIntimidateCharges)
 	{
 		this.key = key;
 
 		this.extraCritDamageMultiplier = extraCritDamageMultiplier;
 		this.extraHealth = extraHealth;
-		this.physicalResistance = physicalResistance;
+		this.woundResistance = woundResistance;
 		this.extraIntimidateCharges = extraIntimidateCharges;
 
         this.affectsZone = false;
 
 	}
 	
-	public StrengthBoost(string key, double extraCritDamageMultiplier, int extraHealth, double physicalResistance, int extraIntimidateCharges, string sourceName)
+	public StrengthBoost(string key, double extraCritDamageMultiplier, int extraHealth, double woundResistance, int extraIntimidateCharges, string sourceName)
 	{
 		this.key = key;
 
 		this.extraCritDamageMultiplier = extraCritDamageMultiplier;
 		this.extraHealth = extraHealth;
-		this.physicalResistance = physicalResistance;
+		this.woundResistance = woundResistance;
         this.extraIntimidateCharges = extraIntimidateCharges;
 
         this.sourceName = sourceName;
@@ -46,9 +46,9 @@ public class StrengthBoost : SecondaryStatBoost, IJSONConvertable
 		return extraHealth;
 	}
 
-	public override double getPhysicalResistance()
+	public override double getWoundResistance()
 	{
-		return physicalResistance;
+		return woundResistance;
 	}
     public override int getMaxIntimidateCharges()
     {
@@ -61,7 +61,7 @@ public class StrengthBoost : SecondaryStatBoost, IJSONConvertable
 				"\"key\":\"" + key + "\"," +
 				"\"extraCritDamageMultiplier\":\"" + getExtraCritDamageMultiplier() + "\"," +
 				"\"extraHealth\":\"" + getExtraHealth() + "\"," +
-				"\"physicalResistance\":\"" + getPhysicalResistance() + "\"," +
+				"\"woundResistance\":\"" + getWoundResistance() + "\"," +
 				"\"affectsZone\":\"" + affectsZone + "\"" +
 				"}";
 	}

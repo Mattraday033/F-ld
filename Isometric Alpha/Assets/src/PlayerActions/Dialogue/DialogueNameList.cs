@@ -257,6 +257,7 @@ public static class DialogueNameList
     public const string kendeUponEnteringKitchensPathName = manseFirstFloorPathName + "kendeUponEnteringKitchens";
 
     public const string loyalImrePathName = manseFirstFloorPathName + "LoyalImre";
+    public const string panPathName = manseFirstFloorPathName + "Pan";
 
     #endregion
 

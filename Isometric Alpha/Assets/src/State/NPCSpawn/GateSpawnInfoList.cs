@@ -854,18 +854,18 @@ public class GateSpawnInfo : AxisSpawnInfo
         }
     }
 
-    protected bool skewed()
-    {
-        switch(spriteName)
-        {
-            case PrefabNames.portcullis1x1Path:
-            case PrefabNames.portcullis2x1Path:
-            case PrefabNames.portcullis3x1Path:
-                return false;
-            default:
-                return true;
-        }
-    }
+    // protected bool skewed()
+    // {
+    //     switch(spriteName)
+    //     {
+    //         case PrefabNames.portcullis1x1Path:
+    //         case PrefabNames.portcullis2x1Path:
+    //         case PrefabNames.portcullis3x1Path:
+    //             return false;
+    //         default:
+    //             return true;
+    //     }
+    // }
 
     public override bool shouldSpawn()
     {
@@ -874,7 +874,8 @@ public class GateSpawnInfo : AxisSpawnInfo
 
     public virtual GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
     {
-        return new GateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, skewed(),  indexHasSprite(spriteName, index), axis, statDifficulties, useRubbleColor);
+        return new GateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, //skewed(),
+          indexHasSprite(spriteName, index), axis, statDifficulties, useRubbleColor);
     }
 
     public static bool indexHasSprite(string spriteName, int index)
@@ -930,7 +931,8 @@ public class TemporaryGateSpawnInfo : GateSpawnInfo
 
     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
     {
-        return new TemporaryGateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, skewed(), axis, statDifficulties);
+        return new TemporaryGateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, //skewed(),
+         axis, statDifficulties);
     }
 
 }
@@ -968,7 +970,8 @@ public class GateWithHiddenTerrainSpawnInfo : GateSpawnInfo
 
     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
     {
-        return new GateWithHiddenTerrainSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, skewed(), statDifficulties, hiddenTerrainFlag, tint);
+        return new GateWithHiddenTerrainSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, //skewed(),
+         statDifficulties, hiddenTerrainFlag, tint);
     }
 
 }
@@ -1023,6 +1026,7 @@ public class GateWithKeySpawnInfo : GateSpawnInfo
 
     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
     {
-        return new GateWithKeySpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), skewed(),  indexHasSprite(spriteName, index), axis, gateKeyDetails);
+        return new GateWithKeySpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), //skewed(),  
+        indexHasSprite(spriteName, index), axis, gateKeyDetails);
     }
 }

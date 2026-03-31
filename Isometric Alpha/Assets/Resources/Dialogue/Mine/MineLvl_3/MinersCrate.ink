@@ -31,9 +31,6 @@ VAR backFromMarcosDialogue = false
 
 VAR playerName = ""
 
-
-
-
 {
 -backFromMarcosDialogue:
     ->2c
@@ -306,7 +303,7 @@ Are you ready to set out?
         ->1m
 
 === 1m ===
-
+/*
 {
 -takingCarterNandorWithYou:
     fadeToBlack(true, false)
@@ -318,10 +315,13 @@ Are you ready to set out?
 
     fadeBackIn(60)
 -else:
-    addtopartybutNotFormation({nandorIndex})
-    addtopartybutNotFormation({carterIndex})
-}
+    addToPartybutNotFormation({nandorIndex})
+    addToPartybutNotFormation({carterIndex})
+}*/
     
+    addToPartybutNotFormation({nandorIndex})
+    addToPartybutNotFormation({carterIndex})
+    startTutorial({formationScreenTutorialKey})
     setFacing(SE)
     setToTrue(mineLvl3CarterAndNandorInParty)
     changeCamTarget({marcosIndex})
@@ -388,7 +388,7 @@ deactivate({nandorIndex})
 deactivate({marcosIndex})
 addToParty({carterIndex})
 addToParty({nandorIndex})
-startUITutorial({formationScreenTutorialKey})
+//startUITutorial({formationScreenTutorialKey})
 setToTrue(mineLvl3CarterAndNandorInParty)
 
 fadeBackIn(60)

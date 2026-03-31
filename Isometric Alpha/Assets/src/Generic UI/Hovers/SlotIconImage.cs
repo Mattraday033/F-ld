@@ -33,6 +33,7 @@ public class SlotIconImage : Image
             case ItemSpriteList.capeSprite:
             case ItemSpriteList.cudgelSprite:
             case ItemSpriteList.curvedDaggerSprite:
+            case ItemSpriteList.fryingPanSprite:
             case ItemSpriteList.malletSprite:
             case ItemSpriteList.meatSprite:
             case ItemSpriteList.oneHandedPickSprite:

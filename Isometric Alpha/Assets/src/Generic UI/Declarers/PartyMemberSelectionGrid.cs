@@ -27,14 +27,17 @@ public class PartyMemberSelectionGrid : UIListenerGrid
             return;
         }
 
-        base.updateCounter();
+        if(!grid.populated())
+        {
+            base.updateCounter();
+        }
 
         if(ScreenManager.currentPartyMember == null)
         {
             grid.disableGridRowAndClick(0);
         } else
         {
-            grid.disableGridRowAndClick(ScreenManager.currentPartyMember.getName());
+            grid.disableGridRow(ScreenManager.currentPartyMember.getName());
         }
     }
 

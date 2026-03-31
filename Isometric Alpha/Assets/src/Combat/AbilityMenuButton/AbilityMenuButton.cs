@@ -8,9 +8,10 @@ using System.Linq;
 using System;
 using UnityEngine.EventSystems;
 
-public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
+public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler, 
     IPointerExitHandler, IHoverIconSource
 {
+    public SlotIconHover parentHover;
 
     public int index;
     public bool greyedOut = false;
@@ -496,6 +497,11 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         else
         {
             MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldDestroyHoverIcon));
+
+            if(parentHover != null)
+            {
+                parentHover.OnPointerEnter(eventData);
+            }
         }
     }
 

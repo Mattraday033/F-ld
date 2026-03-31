@@ -55,7 +55,7 @@ public class PlayerSideStatsDescriptionPanelBuilder : DescriptionPanelBuilder
                 switch (block.iconName)
                 {
                     case IconList.mentalResistIconName:
-                    case IconList.physicalResistIconName:
+                    case IconList.woundResistIconName:
                         return resistanceParent;
                 }
                 break;

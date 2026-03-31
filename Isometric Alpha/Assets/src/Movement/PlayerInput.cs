@@ -14,7 +14,7 @@ public class PlayerInput : MonoBehaviour
 
     void Update() 
     {
-        if(KeyBindingSettingsManager.listeningForKeyBinding())
+        if(KeyBindingSettingsManager.listeningForKeyBinding() || InspectNode.inspecting)
         {
             return;
         }

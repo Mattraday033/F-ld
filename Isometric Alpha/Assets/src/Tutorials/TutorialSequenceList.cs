@@ -16,8 +16,8 @@ public static class TutorialSequenceList
     private const string itemTutorialSequenceKey = "Item Tutorial";
     public const string equippableItemTutorialSeenFlag = "equippableItemTutorialSequenceEntered";
 
-    private const string formationPopUpTutorialSequenceKey = "Formation Tutorial";
-    public const string formationPopUpTutorialSeenFlag = "formationPopUpTutorialSequenceEntered";
+    private const string formationTutorialSequenceKey = "Formation Tutorial";
+    public const string formationTutorialSeenFlag = "formationTutorialSequenceEntered";
 
     public const string addingAbilitiesTutorialSequenceKey = "Adding Abilities Tutorial";
     public const string addingAbilitiesTutorialSeenFlag = "addingAbilitiesTutorialSequenceEntered";
@@ -59,11 +59,11 @@ public static class TutorialSequenceList
     private const string characterScreenBackground = "Character Screen Background";
     private const string characterScreenAbilityList = "Character Screen Ability List";
 
-    private const string formationPopUpTitleTargetHash = "Formation Pop Up Title";
-    private const string partySlotTracker = "Party Slot Tracker";
+    private const string partyScreenButton = "Party Screen Button";
     private const string partyMemberList = "Party Member List";
+    private const string partySlotTracker = "Party Slot Tracker";
     private const string formationGrid = "Formation Grid";
-    private const string acceptButton = "Accept Button";
+    private const string partyScreen = "Party Screen";
 
     private const string descriptionPanelNameText = "Name Text";
     private const string descriptionPanelDamageText = "Damage Text";
@@ -591,7 +591,8 @@ public static class TutorialSequenceList
         TutorialSequenceStep playerLevelUpStepOne = new TutorialSequenceStep(TutorialMessageList.playerLevelUpTutorialMessagePrefix + 1,
                                                                              characterScreenButtonTargetHash,
                                                                              ArrowDirection.Left,
-                                                                             KeyBindingList.characterScreenKey);
+                                                                             KeyBindingList.characterScreenKey,
+                                                                             scriptAtStart: new PickFirstCharacterWithLevelUpScript());
         TutorialSequenceStep playerLevelUpStepTwo = new TutorialSequenceStep(TutorialMessageList.playerLevelUpTutorialMessagePrefix + 2,
                                                                              characterScreenStatsTargetHash,
                                                                              ArrowDirection.Top);
@@ -687,31 +688,38 @@ public static class TutorialSequenceList
 
     public static void initializeFormationPopUpItemTutorial()
     {
-        TutorialSequenceStep formationPopUpStepOne = new TutorialSequenceStep(TutorialMessageList.formationPopUpTutorialMessagePrefix + 1,
-                                                                              formationPopUpTitleTargetHash,
-                                                                              ArrowDirection.Left);
-        TutorialSequenceStep formationPopUpStepTwo = new TutorialSequenceStep(TutorialMessageList.formationPopUpTutorialMessagePrefix + 2,
-                                                                              partySlotTracker,
-                                                                              ArrowDirection.Right);
-        TutorialSequenceStep formationPopUpStepThree = new TutorialSequenceStep(TutorialMessageList.formationPopUpTutorialMessagePrefix + 3,
-                                                                                partyMemberList,
+        TutorialSequenceStep formationStepOne = new TutorialSequenceStep(TutorialMessageList.formationTutorialMessagePrefix + 1,
+                                                                              partyScreenButton,
+                                                                              ArrowDirection.Left,
+                                                                              nextStepKey: KeyBindingList.partyScreenKey);
+        TutorialSequenceStep formationStepTwo = new TutorialSequenceStep(TutorialMessageList.formationTutorialMessagePrefix + 2,
+                                                                              formationGrid, 
+                                                                              ArrowDirection.Right,
+                                                                              skipHighlight: true,
+                                                                              skipUnhighlight: true);
+        TutorialSequenceStep formationStepThree = new TutorialSequenceStep(TutorialMessageList.formationTutorialMessagePrefix + 3,
+                                                                                partyMemberList, 
+                                                                                ArrowDirection.Bottom,
+                                                                                skipHighlight: true,
+                                                                                skipUnhighlight: true);
+        TutorialSequenceStep formationStepFour = new TutorialSequenceStep(TutorialMessageList.formationTutorialMessagePrefix + 4,
+                                                                                partySlotTracker,
                                                                                 ArrowDirection.Right,
-                                                                                useButtonPress: true);
-        TutorialSequenceStep formationPopUpStepFour = new TutorialSequenceStep(TutorialMessageList.formationPopUpTutorialMessagePrefix + 4,
-                                                                               formationGrid,
-                                                                               ArrowDirection.Right,
-                                                                               useButtonPress: true);
-        TutorialSequenceStep formationPopUpStepFive = new TutorialSequenceStep(TutorialMessageList.formationPopUpTutorialMessagePrefix + 5,
-                                                                               acceptButton,
-                                                                               ArrowDirection.Right,
-                                                                               KeyBindingList.interactKey,
-                                                                               scriptAtEnd: new AcceptFormation());
+                                                                                skipHighlight: true,
+                                                                                skipUnhighlight: true);
+        TutorialSequenceStep formationStepFive = new TutorialSequenceStep(TutorialMessageList.formationTutorialMessagePrefix + 5,
+                                                                                partyScreen,
+                                                                                ArrowDirection.Center,
+                                                                                skipHighlight: true,
+                                                                                skipUnhighlight: true);
 
-        TutorialSequence formationPopUpTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, formationPopUpTutorialSeenFlag, new TutorialSequenceStep[] { formationPopUpStepOne, formationPopUpStepTwo, formationPopUpStepThree,
-                                                                                                                                                                                             formationPopUpStepFour, formationPopUpStepFive });
+        TutorialSequence formationTutorialSequence = new TutorialSequence(OOCActivity.inUI, doNoSkipCurrentActivityChange, formationTutorialSeenFlag, new TutorialSequenceStep[] { formationStepOne, formationStepTwo, formationStepThree,
+                                                                                                                                                                                             formationStepFour, formationStepFive });
 
-        formationPopUpTutorialSequence.setSkipScript(new SkipFormationTutorialScript());
-        tutorialSequenceDictionary.Add(formationPopUpTutorialSequenceKey, formationPopUpTutorialSequence);
+        formationTutorialSequence.endOfSequenceEvent = Formation.OnFormationChange;
+
+        formationTutorialSequence.setSkipScript(new SkipFormationTutorialScript());
+        tutorialSequenceDictionary.Add(formationTutorialSequenceKey, formationTutorialSequence);
     }
 
     public static void initializeAddingAbilitiesTutorial()
@@ -1043,11 +1051,37 @@ public class EnableButtonsScript : TutorialSequenceStepScript
     }
 }
 
+public class PickFirstCharacterWithLevelUpScript : TutorialSequenceStepScript
+{
+    public override void runScript(GameObject targetObject)
+    {
+        
+        if(PartyManager.getPlayerStats().canLevelUp())
+        {
+            ScreenManager.currentPartyMember = PartyManager.getPlayerStats();
+            return;
+        }
+
+        List<PartyMember> joinablePartyMembers = PartyManager.getAllJoinablePartyMembers();
+
+        foreach(PartyMember partyMember in joinablePartyMembers)
+        {
+            if(partyMember != null && partyMember.stats != null && 
+                partyMember.stats.canLevelUp())
+            {
+                ScreenManager.currentPartyMember = partyMember.stats;
+                return;
+            }
+        }
+
+    }
+}
+
 public class OpenRelevantAbilityTabScript : TutorialSequenceStepScript
 {
     public override void runScript(GameObject targetObject)
     {
-        PrimaryStat type = PrimaryStatIncreaseButton.currentStatType;
+        PrimaryStat type = PrimaryStatIncreaseButton.currentPrimaryStat;
 
         switch (type)
         {

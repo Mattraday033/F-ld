@@ -461,15 +461,15 @@ public class ObstacleSpawnDetails : OffSetSpawnDetails
 
     private bool withScale;
 
-    public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo = null, float offset = 0f, bool flipX = false, bool withScale = true) :
-    base(npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX)
+    public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo = null, float offset = 0f, bool flipX = false, bool withScale = true, bool ignoresSecretDoors = true) :
+    base(npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX, ignoresSecretDoors: ignoresSecretDoors)
     {
         this.tint = Color.white;
         this.withScale = withScale;
     }
 
-    public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, Color tint) :
-    base(npcName, cellCoords, spriteName)
+    public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, Color tint, bool ignoresSecretDoors = true) :
+    base(npcName, cellCoords, spriteName, ignoresSecretDoors: ignoresSecretDoors)
     {
         useRubbleColor = false;
         this.tint = tint;
@@ -526,6 +526,16 @@ public class ObstacleSpawnDetails : OffSetSpawnDetails
         if(sortingLayerInfo != null)
         {
             sortingLayerInfo.setSpriteRendererSortingLayer(spriteRenderer);
+        }
+    }
+
+    protected override void setIgnoresSecretDoors(GameObject interactable)
+    {
+        Obstacle obstacle = interactable.GetComponent<Obstacle>();
+
+        if(obstacle != null && ignoresSecretDoors)
+        {
+            obstacle.setToIgnoreSecretDoors();
         }
     }
 
@@ -774,8 +784,6 @@ public class NPCSpawnDetails : OffSetSpawnDetails
 
     public bool sleepingDialogueIntro;
 
-    private bool ignoresSecretDoors;
-
     public NPCSpawnDetails( string npcName, 
                             Vector3Int cellCoords, 
                             string areaName = null, 
@@ -788,7 +796,7 @@ public class NPCSpawnDetails : OffSetSpawnDetails
                             string tutorialTargetHash = "",
                             bool ignoresSecretDoors = true,
                             bool sleepingDialogueIntro = false) :
-    base(npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX, tutorialTargetHash: tutorialTargetHash)
+    base(npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX, ignoresSecretDoors: ignoresSecretDoors, tutorialTargetHash: tutorialTargetHash)
     {
         if(areaName == null)
         {
@@ -809,7 +817,6 @@ public class NPCSpawnDetails : OffSetSpawnDetails
         }
 
         this.speakAtStartScript = speakAtStartScript;
-        this.ignoresSecretDoors = ignoresSecretDoors;
         this.sleepingDialogueIntro = sleepingDialogueIntro;
     }
 
@@ -865,13 +872,6 @@ public class NPCSpawnDetails : OffSetSpawnDetails
         }
 
         spawnActions(dialogueTrigger);
-
-        NameTagGenerator nameTagGenerator = npc.GetComponent<NameTagGenerator>();
-
-        if(nameTagGenerator != null && ignoresSecretDoors)
-        {
-            nameTagGenerator.setToIgnoreSecretDoors();
-        }
     }
 
     public virtual void spawnActions(DialogueTrigger mainTrigger)
@@ -1218,7 +1218,7 @@ public class CustomMouseHoverNPCSpawnDetails : NPCSpawnDetails
 
 public class GateSpawnDetails : CustomMouseHoverNPCSpawnDetails
 {
-    private bool skewed;
+    // private bool skewed;
     private bool showSprite;
     private Axis axis;
     private Dictionary<string, int> statDifficulties;
@@ -1228,7 +1228,7 @@ public class GateSpawnDetails : CustomMouseHoverNPCSpawnDetails
                             string currentArea, 
                             string spriteName, 
                             string tutorialTargetHash, 
-                            bool skewed, 
+                            // bool skewed, 
                             bool showSprite, 
                             Axis axis, 
                             Dictionary<string, int> statDifficulties, 
@@ -1236,7 +1236,7 @@ public class GateSpawnDetails : CustomMouseHoverNPCSpawnDetails
     base(npcName, cellCoords, currentArea, spriteName)
     {
         this.tutorialTargetHash = tutorialTargetHash;
-        this.skewed = skewed;
+        // this.skewed = skewed;
         this.showSprite = showSprite;
         this.axis = axis;
         this.statDifficulties = statDifficulties;
@@ -1254,14 +1254,14 @@ public class GateSpawnDetails : CustomMouseHoverNPCSpawnDetails
 
     public override Transform getParent()
     {
-        if (skewed)
-        {
+        // if (skewed)
+        // {
             return AreaManager.getNPCParentWithScale();
-        }
-        else
-        {
-            return AreaManager.getNPCParentWithoutScale();
-        }
+        // }
+        // else
+        // {
+        //     return AreaManager.getNPCParentWithoutScale();
+        // }
     }
 
     public override bool hasSprite()
@@ -1341,8 +1341,10 @@ public class GateWithKeySpawnDetails : GateSpawnDetails
 {
     private GateKeyDetails gateKeyDetails;
 
-    public GateWithKeySpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, bool skewed, bool showSprite, Axis axis, GateKeyDetails gateKeyDetails) :
-    base(npcName, cellCoords, currentArea, spriteName, noTutorialTargetHash, skewed, showSprite, axis, new Dictionary<string, int>(), useRubbleColor: false)
+    public GateWithKeySpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName,// bool skewed,
+     bool showSprite, Axis axis, GateKeyDetails gateKeyDetails) :
+    base(npcName, cellCoords, currentArea, spriteName, noTutorialTargetHash, //skewed, 
+    showSprite, axis, new Dictionary<string, int>(), useRubbleColor: false)
     {
         this.gateKeyDetails = gateKeyDetails;
     }
@@ -1362,8 +1364,10 @@ public class GateWithKeySpawnDetails : GateSpawnDetails
 
 public class TemporaryGateSpawnDetails : GateSpawnDetails
 {
-    public TemporaryGateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed, Axis axis, Dictionary<string, int> statDifficulties) :
-    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, skewed, true, axis, statDifficulties, useRubbleColor: false)
+    public TemporaryGateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, //bool skewed,
+     Axis axis, Dictionary<string, int> statDifficulties) :
+    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, //skewed,
+     true, axis, statDifficulties, useRubbleColor: false)
     {
 
     }
@@ -1384,8 +1388,10 @@ public class GateWithHiddenTerrainSpawnDetails : GateSpawnDetails
 {
     private string hiddenTerrainFlag;
 
-    public GateWithHiddenTerrainSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, bool skewed, Dictionary<string, int> statDifficulties, string hiddenTerrainFlag, Color tint) :
-    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, skewed, true, Axis.DescendingX, statDifficulties, useRubbleColor: false)
+    public GateWithHiddenTerrainSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, //bool skewed, 
+    Dictionary<string, int> statDifficulties, string hiddenTerrainFlag, Color tint) :
+    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, //skewed, 
+    true, Axis.DescendingX, statDifficulties, useRubbleColor: false)
     {
         this.hiddenTerrainFlag = hiddenTerrainFlag;
         this.tint = tint;
@@ -1762,6 +1768,7 @@ public class WeaponRackSpawnDetails : ChestSpawnDetails
 public class OffSetSpawnDetails : OOCSpawnDetails
 {
     protected float offset = 0f;
+    protected bool ignoresSecretDoors;
 
     //npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX
 
@@ -1771,10 +1778,12 @@ public class OffSetSpawnDetails : OOCSpawnDetails
                               SortingLayerInfo sortingLayerInfo = null, 
                               float offset = 0f, 
                               bool flipX = false, 
+                              bool ignoresSecretDoors = true,
                               string tutorialTargetHash = "") :
     base(npcName, cellCoords, spriteName, sortingLayerInfo, flipX, tutorialTargetHash: tutorialTargetHash)
     {
         this.offset = offset;
+        this.ignoresSecretDoors = ignoresSecretDoors;
     }
 
     public override void spawnActions(GameObject interactable)
@@ -1788,6 +1797,18 @@ public class OffSetSpawnDetails : OOCSpawnDetails
         collider2D.offset += new Vector2(0f, offset);
 
         interactable.transform.position = currentPosition;
+
+        setIgnoresSecretDoors(interactable);
+    }
+
+    protected virtual void setIgnoresSecretDoors(GameObject interactable)
+    {
+        NameTagGenerator nameTagGenerator = interactable.GetComponent<NameTagGenerator>();
+
+        if(nameTagGenerator != null && ignoresSecretDoors)
+        {
+            nameTagGenerator.setToIgnoreSecretDoors();
+        }
     }
 }
 

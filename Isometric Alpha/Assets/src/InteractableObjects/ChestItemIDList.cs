@@ -306,6 +306,18 @@ public static class ChestItemIDList
 
         #endregion
 
+        #region Manse-1f-StairsToPit
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.bandagesIndex, Constants.sizeThree));
+        list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.fightingCapeIndex));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.silverSpoonIndex));
+
+        chestItemIDList.Add(ZoneKeyList.manseFirstFloor + LocationNameList.stairsToPit, list);
+
+        #endregion
+
         #region Manse-1F-3c
 
         list = new List<ItemListID>();
@@ -404,25 +416,25 @@ public static class ChestItemIDList
 
         #region Pit
 
-        #region Pit-1a
+        #region Pit-1a Old
 
-        list = new List<ItemListID>();
+        // list = new List<ItemListID>();
 
-        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.bandagesIndex, Constants.sizeThree));
-        list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.fightingCapeIndex));
-        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.silverSpoonIndex));
+        // list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.bandagesIndex, Constants.sizeThree));
+        // list.Add(new ItemListID(ItemList.weaponsListIndex, ItemList.fightingCapeIndex));
+        // list.Add(new ItemListID(ItemList.armorListIndex, ItemList.silverSpoonIndex));
 
-        chestItemIDList.Add(ZoneKeyList.pit + LocationNameList.section1a, list);
+        // chestItemIDList.Add(ZoneKeyList.pit + LocationNameList.section1a, list);
 
         #endregion
 
-        #region Pit-1b
+        #region Pit-1a
 
         list = new List<ItemListID>();
 
         list.Add(new ItemListID(ItemList.armorListIndex, ItemList.wardensShieldIndex));
 
-        chestItemIDList.Add(ZoneKeyList.pit + LocationNameList.section1b, list);
+        chestItemIDList.Add(ZoneKeyList.pit + LocationNameList.section1a, list);
 
         #endregion
 

@@ -529,6 +529,12 @@ public class AudioManager : MonoBehaviour
         queueAudioClip(AudioClipList.smokeBombSFX);
     }
 
+    public static void playRestSFX()
+    {
+        playAudioClipAsSingleton(AudioClipList.snoringDialogueSFX);
+        playAudioClipAsSingleton(AudioClipList.restSFX);
+    }
+
     #endregion
 
     [RuntimeInitializeOnLoadMethod]
@@ -583,6 +589,7 @@ public static class AudioClipList
     public const string gateOpen = miscSFXFolder + "GateOpen";
     public const string gateOpenShort = miscSFXFolder + "GateOpenShort";
     public const string placeInInventory = miscSFXFolder + "PlaceInInventory";
+    public const string restSFX = miscSFXFolder + "Rest";
 
     public const string coinSFXFolder = SFXFolderPath + "Coin/";
 

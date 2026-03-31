@@ -14,6 +14,7 @@ using UnityEngine.Events;
 public class SaveHandler : ScreenManager, IEscapable
 {
     public readonly static UnityEvent<IDescribable> OnSaveCreated = new UnityEvent<IDescribable>();
+    public readonly static UnityEvent<IDescribable> OnSaveDeleted = new UnityEvent<IDescribable>();
 
 	private static Dictionary<string, SaveBlueprint> saveGameList;
 
@@ -245,6 +246,11 @@ public class SaveHandler : ScreenManager, IEscapable
 
     public static void autosave(Transition transition)
     {
+        if(transition == null || !transition.allowAutosave)
+        {
+            return;
+        }
+
 		int saveNumber = getHighestSaveNumber() + 1;
 
         saveNumber *= -1;
@@ -392,9 +398,10 @@ public class SaveHandler : ScreenManager, IEscapable
 
     public static void deleteSaveFile(string saveFileName)
     {
-        
         File.Delete(PrefabNames.savesFolder + saveFileName + Constants.jsonFileExtension);
 
+        OnSaveDeleted.Invoke(saveGameList[saveFileName]);
+        
         saveGameList.Remove(saveFileName);
 	}
 	

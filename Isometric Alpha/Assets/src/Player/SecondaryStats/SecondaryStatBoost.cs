@@ -15,7 +15,7 @@ public interface ISecondaryStatBoost
 
     public string getBonusIntimidateChargesFormula();
 
-    public string getBonusPhysicalResistanceFormula();
+    public string getBonusWoundResistanceFormula();
 
     public string getBonusCriticalDamageMultiplierFormula();
 
@@ -83,7 +83,7 @@ public class SecondaryStatBoost : IJSONConvertable
         return 0;
     }
 
-    public virtual double getPhysicalResistance()
+    public virtual double getWoundResistance()
     {
         return 0.0;
     }

@@ -180,6 +180,11 @@ public class CombatStateManager : MonoBehaviour
 
 		selectorManager.instantiateAllSelectors();
 
+        if(State.enemyPackInfo.alwaysSurprised)
+        {
+            whoIsSurprised = SurpriseState.EnemySurprised;
+        }
+
 		switch (whoIsSurprised)
 		{
 			case SurpriseState.EnemySurprised:

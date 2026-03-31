@@ -107,6 +107,7 @@ public class DragAndDropUIObject : MonoBehaviour, IDragAndDropContainer
     public void OnDestroy()
     {
         DragAndDropManager.OnDragAndDropDestroyed.Invoke(objectBeingDragged);
+        ScrollableUIElement.ContinueAllScrolling.Invoke();
     }
 
     public bool handleUsableItemDrop(GameObject target)

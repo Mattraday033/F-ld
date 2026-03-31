@@ -511,12 +511,17 @@ PrefabInstance:
     - target: {fileID: 3415665300291312995, guid: 089375df8284bf148bd9ed7a383d6d60,
         type: 3}
       propertyPath: orthographic size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5160164686759357259, guid: 089375df8284bf148bd9ed7a383d6d60,
         type: 3}
       propertyPath: m_Follow
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5160164686759357259, guid: 089375df8284bf148bd9ed7a383d6d60,
+        type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5383041725967514909, guid: 089375df8284bf148bd9ed7a383d6d60,
         type: 3}

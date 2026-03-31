@@ -516,13 +516,13 @@ public static class MonsterSpawnDetailsList
 
         #region Pit
 
-        #region Pit-1b
+        #region Pit-1a
 
         list = new List<MonsterSpawnDetails>();
 
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-2, -1), Facing.Random, movementType: MonsterMovementType.Chases));
 
-        monsterSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section1b, list);
+        monsterSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section1a, list);
 
         #endregion
 

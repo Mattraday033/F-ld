@@ -99,9 +99,9 @@ public class AntiShieldTrait : Trait
     #region Secondary Stats
 
     //Strength Stats
-    public override string getBonusPhysicalResistanceFormula()
+    public override string getBonusWoundResistanceFormula()
     {
-        return getInvertedStatFormula(t => t.getBonusPhysicalResistanceFormula(), shield);
+        return getInvertedStatFormula(t => t.getBonusWoundResistanceFormula(), shield);
     }
 
     public override string getBonusCriticalDamageMultiplierFormula()

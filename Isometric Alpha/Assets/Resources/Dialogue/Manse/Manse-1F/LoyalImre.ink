@@ -15,7 +15,7 @@ VAR playerName = ""
 
 We wooped them good, didn't we? Pan and I will stay behind with some of the more hurt slaves and make sure no one gets in behind you, but the rest of our fellows will follow you in. Talk to me if you need to rest at all, I'll see you good as new.
 
-    +The nonbranded conducted themselves admirably. I'm glad to have you on our side in this.
+    +The nonbranded conducted themselves admirably. I'm glad to have your support.
         ->1b
     +I will rest.
         restParty()

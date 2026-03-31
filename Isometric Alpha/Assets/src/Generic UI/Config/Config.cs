@@ -10,7 +10,7 @@ public struct TutorialFlagWrapper
 {
 
     public bool equippableItemTutorialSeen;
-    public bool formationPopUpTutorialSeen;
+    public bool formationTutorialSeen;
 
     public bool combatTutorialSeen;
     public bool traitTutorialSeen;
@@ -43,7 +43,7 @@ public struct TutorialFlagWrapper
         return new TutorialFlagWrapper()
         {
             equippableItemTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.equippableItemTutorialSeenFlag),
-            formationPopUpTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.formationPopUpTutorialSeenFlag),
+            formationTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.formationTutorialSeenFlag),
 
             combatTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.combatTutorialSeenFlag),
             traitTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.traitTutorialSeenFlag),
@@ -78,7 +78,7 @@ public struct TutorialFlagWrapper
         Dictionary<string, bool> newTutorialFlags = new Dictionary<string, bool>()
         {
             [TutorialSequenceList.equippableItemTutorialSeenFlag] = equippableItemTutorialSeen,
-            [TutorialSequenceList.formationPopUpTutorialSeenFlag] = formationPopUpTutorialSeen,
+            [TutorialSequenceList.formationTutorialSeenFlag] = formationTutorialSeen,
 
             [TutorialSequenceList.combatTutorialSeenFlag] = combatTutorialSeen,
             [TutorialSequenceList.traitTutorialSeenFlag] = traitTutorialSeen,

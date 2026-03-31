@@ -94,9 +94,16 @@ public class SkipFormationTutorialScript : SkipTutorialScript
 {
     public override void runScript()
     {
-        PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
-        TutorialSequence.endCurrentTutorialSequence();
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inUI);
+        if (OverallUIManager.currentScreenManager != null)
+        {
+            TutorialSequence.endCurrentTutorialSequence();
+            PlayerOOCStateManager.setCurrentActivity(OOCActivity.inUI);
+        }
+        else
+        {
+            TutorialSequence.endCurrentTutorialSequence();
+            PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        }
     }
 }
 

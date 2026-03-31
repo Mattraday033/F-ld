@@ -9,7 +9,7 @@ public class BookItem : UsableItem
 	public const string subtype = "Book";
 	
 	public const int bookWorth = 5;
-	public const string bookUseDescription = "Use this book to read it's contents.";
+	public const string bookUseDescription = "Use this book by dragging it onto a Party Member to read it's contents.";
 	public const string bookIconName = "Book";
 	
 	public int index;

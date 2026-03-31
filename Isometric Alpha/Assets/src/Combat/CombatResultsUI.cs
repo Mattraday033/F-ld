@@ -42,6 +42,11 @@ public class CombatResultsUI : PopUpWindow
 	{
 		KeyPressManager.updateKeyBools();
 
+        if(InspectNode.inspecting)
+        {
+            return;
+        }
+
 		if ((Input.GetKey(KeyBindingList.combatSelectKey.getCurrentKeyCode()) || 
                 Input.GetKey(KeyBindingList.acceptKey.getCurrentKeyCode()) || 
                 Input.GetKey(KeyBindingList.acceptInputKey.getCurrentKeyCode())
@@ -56,15 +61,14 @@ public class CombatResultsUI : PopUpWindow
     public void displayDrops(EnemyPackInfo packInfo)
 	{
 		displayDrops(DropTableList.getDropTable(packInfo.dropTableName),
-					 packInfo.numberOfDrops,
 					 packInfo.guaranteedDrops,
 					 packInfo.getXPDrops());
 	}
 
-    private void displayDrops(DropTable dropTable, int numberOfDrops, ItemListID[] guaranteedDrops, int xpDropped)
+    private void displayDrops(DropTable dropTable, ItemListID[] guaranteedDrops, int xpDropped)
     {
-        List<Item> itemDrops = CombatResultsManager.determineItemDrops(dropTable, numberOfDrops, guaranteedDrops);
-        int goldDropped = CombatResultsManager.determineGoldDrops(dropTable, numberOfDrops);
+        List<Item> itemDrops = CombatResultsManager.determineItemDrops(dropTable, guaranteedDrops);
+        int goldDropped = CombatResultsManager.determineGoldDrops(dropTable);
 
         if (xpDropped < 0)
         {

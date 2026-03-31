@@ -87,7 +87,10 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
             row.descriptionText.margin = new Vector4(0f,0f,10f,0f);
         }
 
-        if(!CombatStateManager.inCombat && row.hasFormula && moreInfoNode != null)
+        if((!CombatStateManager.inCombat || 
+            (CombatStateManager.inCombat && CombatStateManager.whoseTurn == WhoseTurn.Won))
+             && row.hasFormula && moreInfoNode != null && inspectNode != null && 
+             inspectNode.activeSelf)
         {
             moreInfoNode.SetActive(true);
         }
@@ -106,7 +109,9 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
 
     public override void activateInspectNode()
     {
-        if(inspectNode != null)
+        if(inspectNode != null && 
+            (!CombatStateManager.inCombat || 
+            (CombatStateManager.inCombat && CombatStateManager.whoseTurn == WhoseTurn.Won)))
         {
             inspectNode.SetActive(true);
         }

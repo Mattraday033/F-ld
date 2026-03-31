@@ -273,8 +273,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                     animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
                                                                 
         enemyStatsDict.Add(NPCNameList.beam, new EnemyStats(NPCNameList.beam,
-                                                                            Constants.fifteenArmor,
-                                                                                    110,
+                                                                            Constants.tenArmor,
+                                                                                    70,
                     AbilityList.getAbility(null, AbilityList.feedKey) as Ability,
                                                         new Trait[] { 
                                                                         TraitList.minion,
@@ -291,6 +291,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                     AbilityList.getAbility(null, AbilityList.guardJavelinKey) as Ability,
                                                         new Trait[] { 
                                                                         TraitList.minion,
+                                                                        TraitList.chaotic,
                                                                         TraitList.blocker,
                                                                         TraitList.frontLine
                                                                     },
@@ -543,8 +544,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
 
         #region Horses
         enemyStatsDict.Add(MonsterNameList.horseCharger, new LargeEnemyStats(MonsterNameList.horseCharger,
-                                                                                Constants.twentyArmor,
-                                                                                        215,
+                                                                                Constants.fifteenArmor,
+                                                                                        170,
                                                             new Trait[] { 
                                                                             TraitList.master,
                                                                             TraitList.large,
@@ -554,8 +555,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                 animationAudioClipDictionary: AnimationSFXDictionaryList.horseAudioDictionary));
 
         enemyStatsDict.Add(MonsterNameList.horseStomper, new LargeEnemyStats(MonsterNameList.horseStomper,
-                                                                                Constants.twentyFiveArmor,
-                                                                                        215,
+                                                                                Constants.twentyArmor,
+                                                                                        170,
                                                             new Trait[] { 
                                                                             TraitList.master,
                                                                             TraitList.large,
@@ -565,8 +566,8 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                 animationAudioClipDictionary: AnimationSFXDictionaryList.horseAudioDictionary));
                                                             
         enemyStatsDict.Add(NPCNameList.csalan, new LargeEnemyStats(NPCNameList.csalan,
-                                                                                Constants.thirtyArmor,
-                                                                                        250,
+                                                                                Constants.twentyFiveArmor,
+                                                                                        210,
                                                             new Trait[] { 
                                                                             TraitList.master,
                                                                             TraitList.large,

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PartyMemberSpritePanel : DescriptionPanel
 {
-
+    public GameObject newPartyMemberText;
     public GameObject levelUpSymbol;
     public AbilityMenuManagerWithPassives abilityMenuManager;
 
@@ -18,6 +18,11 @@ public class PartyMemberSpritePanel : DescriptionPanel
     private void OnDisable()
     {
         AllyStats.OnPartyMemberUpgraded.RemoveListener(levelUpSymbolVisibilityCheck);
+    }
+
+    private void OnDestroy()
+    {
+        NewPartyMemberManager.PartyMemberNoLongerNew.RemoveListener(determineNewPartyMemberTextVisibility);
     }
 
     private void levelUpSymbolVisibilityCheck()
@@ -53,6 +58,8 @@ public class PartyMemberSpritePanel : DescriptionPanel
     {
         base.setObjectBeingDescribed(describable);
 
+        determineNewPartyMemberTextVisibility();
+
         PartyMember partyMember = (PartyMember) describable;
 
         // if (iconPanel != null && !(iconPanel is null))
@@ -82,5 +89,16 @@ public class PartyMemberSpritePanel : DescriptionPanel
         iconPanel.color = Color.white;
     }
 
-
+    private void determineNewPartyMemberTextVisibility()
+    {
+        if(NewPartyMemberManager.partyMemberIsNew(getObjectBeingDescribed() as PartyMember))
+        {
+            NewPartyMemberManager.PartyMemberNoLongerNew.AddListener(determineNewPartyMemberTextVisibility);
+            newPartyMemberText.SetActive(true);
+        } else
+        {
+            NewPartyMemberManager.PartyMemberNoLongerNew.RemoveListener(determineNewPartyMemberTextVisibility);
+            newPartyMemberText.SetActive(false);
+        }
+    }
 }

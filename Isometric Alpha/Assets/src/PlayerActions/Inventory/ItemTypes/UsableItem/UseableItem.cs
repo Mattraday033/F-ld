@@ -104,11 +104,11 @@ public abstract class UsableItem : Item, IJSONConvertable
 
         if (usableInCombat() && useRequiresAnAction())
         {
-            useDescriptionAdditions[1] = "Requires an action. ";
+            useDescriptionAdditions[1] = "<b>Requires an action.</b> ";
         }
         else if (usableInCombat() && !useRequiresAnAction())
         {
-            useDescriptionAdditions[1] = "Does not require an action. ";
+            useDescriptionAdditions[1] = "<b>Does not require an action.</b> ";
         }
         else
         {

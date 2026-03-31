@@ -145,7 +145,7 @@ public static class AreaList
                                 scenesInCampExterior, 
                                 areasSharingHostilityWithCampExterior, 
                                 AudioClipList.campOverworld, 
-                                alwaysAllowsFastTravel: fastTravelContingentOnHostility,
+                                // alwaysAllowsFastTravel: fastTravelContingentOnHostility,
                                 footStepType: FootStepType.Dirt));
 
         string[] scenesInCampInterior = new string[]
@@ -422,7 +422,13 @@ public static class AreaList
 	
 	public static bool areaAlwaysAllowsFastTravel(string locationName)
 	{
-		return getArea(locationName).alwaysAllowsFastTravel;
+        switch(locationName)
+        {
+            case LocationNameList.campNorthEast:
+                return Flags.getFlag(FlagNameList.neCampOverseerKilled);
+            default:
+		        return getArea(locationName).alwaysAllowsFastTravel;
+        }
 	}
 
     public static Area getArea(string locationName)

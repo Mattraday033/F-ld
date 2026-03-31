@@ -93,8 +93,6 @@ Hail, branded. I have been commanded by the glorious Csalan, steed to the Direct
             ->csalanSpeaksAndBeamTranslates("\*If horses can scoff, then this one did.* <We are resolved to fight to the death, no matter your answer.>","Csalan says no horse would allow themselves to be captured. The horses will fight you, whatever your decision is.",->1ca)
         +Why does this worry him?
             ->csalanSpeaksAndBeamTranslates("<It is not dignified for a horse to allow themselves to be eaten like chattle.>","Csalan says the indignity of it concerns them. He does not wish such a fate for himself or his subordinates.",->1ca)
-        +I have made my decision
-            ->1d
     }
 
 === 1d ===

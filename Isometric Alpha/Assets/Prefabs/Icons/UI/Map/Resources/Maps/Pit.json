@@ -6,26 +6,6 @@
 	"Tiles": [
 		{
 			"locationName": "",
-			"row": "1",
-			"col": "0",
-			"floorImage": "Light Purple Stone",
-			"mapIcon": "",
-			"northWestSouthEastMarker": true,
-			"northEastSouthWestMarker": false,
-			"flipMapIcon": false
-		},			
-		{
-			"locationName": "Pit-1a",
-			"row": "1",
-			"col": "1",
-			"floorImage": "Light Purple Stone",
-			"mapIcon": "Pit",
-			"northWestSouthEastMarker": false,
-			"northEastSouthWestMarker": false,
-			"flipMapIcon": false
-		},
-		{
-			"locationName": "",
 			"row": "5",
 			"col": "0",
 			"floorImage": "Light Purple Stone",
@@ -65,7 +45,7 @@
 			"flipMapIcon": false
 		},
 		{
-			"locationName": "Pit-1b",
+			"locationName": "Pit-1a",
 			"row": "5",
 			"col": "4",
 			"floorImage": "Light Purple Stone",

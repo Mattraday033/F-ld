@@ -17,7 +17,7 @@ public static class EnemyPackInfoList
                                                                                                 // EnemyAmountList.twoSignaleers,
                                                                                                 EnemyAmountList.twoSpearmen
                                                                                                 },
-                                                                                                DropTableList.slaveMineDT1Name);
+                                                                                                DropTableList.slaveMineDTKey);
 
     #region Bosses
 
@@ -28,7 +28,7 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.eightBrandedConscripts,
                                                                                                         EnemyAmountList.twoSpearmen
                                                                                                        },
-                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        DropTableList.lovashiGuardsDTKey,
                                                                                                         FlagNameList.neCampOverseerKilled,
                                                                                                         DialogueNameList.slavesAfterKillingOverseerCampNEKey,
                                                                                                         xpDrop: 100);
@@ -36,7 +36,7 @@ public static class EnemyPackInfoList
     public readonly static BossPackInfo clayFightForTabor = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.oneExecutioner
                                                                                                        },
-                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        DropTableList.slaveMineDTKey,
                                                                                                         FlagNameList.foughtCrowdForTabor,
                                                                                                         DialogueNameList.taborAfterClayFightKey,
                                                                                                         xpDrop: 100);
@@ -46,7 +46,7 @@ public static class EnemyPackInfoList
     #region Mine Boss Fights
 
     private readonly static EnemyPackInfo caveMatronBatBoss = new BossPackInfo(new CreatureAmount[] { EnemyAmountList.caveMatron },
-                                                                                                    DropTableList.slaveMineDT1Name,
+                                                                                                    DropTableList.slaveMineDTKey,
                                                                                                     guaranteedDrops: new ItemListID[] { new ItemListID(  ItemList.keyItemListIndex,
                                                                                                                                         ItemList.mineArmoryKeyIndex) }, 
                                                                                                                                         xpDrop: 100);
@@ -57,7 +57,7 @@ public static class EnemyPackInfoList
                                                                                               EnemyAmountList.martyrWormNest,
                                                                                               EnemyAmountList.toxicWormNest
                                                                                                 },
-                                                                                                DropTableList.slaveMineDT1Name, 
+                                                                                                DropTableList.slaveMineDTKey, 
                                                                                                 xpDrop: 100,
                                                                                                 spawnDetailsList: new List<SpawnDetails>()
                                                                                                     {
@@ -75,8 +75,9 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.kende,
                                                                                                         EnemyAmountList.fourNonBrandedLoyalists
                                                                                                        },
-                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        DropTableList.lovashiGuardsDTKey,
                                                                                                         FlagNameList.kendeUponEnteringKitchens,
+                                                                                                        guaranteedDrops: new WeaponListID[]{ new WeaponListID(ItemList.scaldIndex) },
                                                                                                         script: new KendeFightQuestScript(),
                                                                                                         xpDrop: 100);
 
@@ -85,37 +86,43 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.fourNonBrandedLoyalists,
                                                                                                         EnemyAmountList.oneLinebreaker
                                                                                                        },
-                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        DropTableList.lovashiGuardsDTKey,
                                                                                                         FlagNameList.kendeUponEnteringKitchens,
-                                                                                                        script: new KendeFightQuestScript());
+                                                                                                        guaranteedDrops: new WeaponListID[]{ new WeaponListID(ItemList.scaldIndex) },
+                                                                                                        script: new KendeFightQuestScript(),
+                                                                                                        xpDrop: 100);
 
     public readonly static BossPackInfo kendeKitchensFullSlavesNoGuard = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.kende,
                                                                                                         EnemyAmountList.eightNonBrandedLoyalists
                                                                                                        },
-                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        DropTableList.lovashiGuardsDTKey,
                                                                                                         FlagNameList.kendeUponEnteringKitchens,
-                                                                                                        script: new KendeFightQuestScript());
+                                                                                                        guaranteedDrops: new WeaponListID[]{ new WeaponListID(ItemList.scaldIndex) },
+                                                                                                        script: new KendeFightQuestScript(),
+                                                                                                        xpDrop: 100);
 
     public readonly static BossPackInfo kendeKitchensFullSlaves = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.kende,
                                                                                                         EnemyAmountList.eightNonBrandedLoyalists,
                                                                                                         EnemyAmountList.oneLinebreaker
                                                                                                        },
-                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        DropTableList.lovashiGuardsDTKey,
                                                                                                         FlagNameList.kendeUponEnteringKitchens,
-                                                                                                        script: new KendeFightQuestScript());
+                                                                                                        guaranteedDrops: new WeaponListID[]{ new WeaponListID(ItemList.scaldIndex) },
+                                                                                                        script: new KendeFightQuestScript(),
+                                                                                                        xpDrop: 100);
 
     public readonly static BossPackInfo taborManseSecondFloorFight = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.oneExecutioner
                                                                                                        },
-                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        DropTableList.lovashiGuardsDTKey,
                                                                                                         FlagNameList.killedTaborInManse);
 
     public readonly static BossPackInfo honorguardCaptainBossFight = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.oneExecutioner
                                                                                                        },
-                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        DropTableList.lovashiGuardsDTKey,
                                                                                                         FlagNameList.honorguardCaptainKilled,
                                                                                                         guaranteedDrops: new ItemListID[]  {new ItemListID(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyBackIndex)},
                                                                                                         script: new KeyHalfScript(),
@@ -125,7 +132,7 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.barricade,
                                                                                                         EnemyAmountList.director
                                                                                                        },
-                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        DropTableList.lovashiGuardsDTKey,
                                                                                                         FlagNameList.directorDefeated,
                                                                                                         DialogueNameList.directorDefeatedConvoKey,
                                                                                                         xpDrop: 400);
@@ -133,7 +140,7 @@ public static class EnemyPackInfoList
     public readonly static BossPackInfo directorWithoutBarricades = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.director
                                                                                                        },
-                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        DropTableList.lovashiGuardsDTKey,
                                                                                                         FlagNameList.directorDefeated,
                                                                                                         DialogueNameList.directorDefeatedConvoKey,
                                                                                                         xpDrop: 400);
@@ -144,7 +151,7 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.twoHorseChargers,
                                                                                                         EnemyAmountList.beam
                                                                                                        },
-                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        DropTableList.lovashiGuardsDTKey,
                                                                                                         FlagNameList.foughtHorsesInManse, 
                                                                                                         xpDrop: 100,
                                                                                                         spawnDetailsList: new List<SpawnDetails>()
@@ -162,7 +169,7 @@ public static class EnemyPackInfoList
     public readonly static BossPackInfo stoneSaintPitBoss = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.oneExecutioner
                                                                                                        },
-                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        DropTableList.slaveMineDTKey,
                                                                                                         xpDrop: 100);
 
     #endregion
@@ -171,21 +178,21 @@ public static class EnemyPackInfoList
 
     #region Named Lovashi Guard Fights
 
-    public readonly static EnemyPackInfo guardVazulFight = new EnemyPackInfo(new CreatureAmount[] { EnemyAmountList.guardVazul }, DropTableList.slaveMineDT1Name,
+    public readonly static EnemyPackInfo guardVazulFight = new EnemyPackInfo(new CreatureAmount[] { EnemyAmountList.guardVazul }, DropTableList.slaveMineDTKey,
                                                                                     new ItemListID[]  {new ItemListID(ItemList.usableItemListIndex, ItemList.chewIndex, Constants.sizeThree),
                                                                                                         new ItemListID(ItemList.armorListIndex, ItemList.bronzeDirkIndex)});
 
-    public readonly static EnemyPackInfo guardAndrasWithKeyFight = new EnemyPackInfo(new CreatureAmount[] { EnemyAmountList.guardAndras }, DropTableList.slaveMineDT1Name,
+    public readonly static EnemyPackInfo guardAndrasWithKeyFight = new EnemyPackInfo(new CreatureAmount[] { EnemyAmountList.guardAndras }, DropTableList.slaveMineDTKey,
                                                                                     new ItemListID[]  {new ItemListID(ItemList.armorListIndex, ItemList.luckyTalismanIndex),
                                                                                                         new ItemListID(ItemList.keyItemListIndex, ItemList.mineArmoryKeyIndex),
                                                                                                         new ItemListID(ItemList.keyItemListIndex, ItemList.barracksArmoryKeyIndex)});
-    public readonly static EnemyPackInfo guardAndrasWithOutKeyFight = new EnemyPackInfo(new CreatureAmount[] { EnemyAmountList.guardAndras }, DropTableList.slaveMineDT1Name,
+    public readonly static EnemyPackInfo guardAndrasWithOutKeyFight = new EnemyPackInfo(new CreatureAmount[] { EnemyAmountList.guardAndras }, DropTableList.slaveMineDTKey,
                                                                                         new ItemListID[] { new ItemListID(ItemList.armorListIndex, ItemList.luckyTalismanIndex),
                                                                                                         new ItemListID(ItemList.keyItemListIndex, ItemList.barracksArmoryKeyIndex)});
-    public readonly static EnemyPackInfo imreFight = new EnemyPackInfo(new CreatureAmount[] { EnemyAmountList.imre }, DropTableList.slaveMineDT1Name);
+    public readonly static EnemyPackInfo imreFight = new EnemyPackInfo(new CreatureAmount[] { EnemyAmountList.imre }, DropTableList.slaveMineDTKey);
 
     public readonly static EnemyPackInfo muzsaFight = new EnemyPackInfo(new CreatureAmount[] { EnemyAmountList.muzsa, EnemyAmountList.twoSpearmen },
-                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                        DropTableList.lovashiGuardsDTKey,
                                                                                         new ItemListID[] { new ItemListID(ItemList.armorListIndex, ItemList.bronzeCuirassIndex)});
 
     public readonly static EnemyPackInfo ml3GuardsWithBarricades = new EnemyPackInfo(new CreatureAmount[] { 
@@ -195,7 +202,7 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.overseerGaspar, 
                                                                                                         EnemyAmountList.guardVirag 
                                                                                                        },
-                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        DropTableList.lovashiGuardsDTKey,
                                                                                     new ItemListID[]  {new ItemListID(ItemList.questItemListIndex, ItemList.blastingJellyIndex)});
 
     public readonly static EnemyPackInfo ml3GuardsWithoutBarricades = new EnemyPackInfo(new CreatureAmount[] { 
@@ -204,7 +211,7 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.overseerGaspar, 
                                                                                                         EnemyAmountList.guardVirag 
                                                                                                        },
-                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                        DropTableList.lovashiGuardsDTKey,
                                                                                     new ItemListID[]  {new ItemListID(ItemList.questItemListIndex, ItemList.blastingJellyIndex)});
 
     public readonly static EnemyPackInfo ml3GuardsNoSurrenders = new EnemyPackInfo(new CreatureAmount[] { 
@@ -213,13 +220,13 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.overseerGaspar, 
                                                                                                         EnemyAmountList.guardVirag 
                                                                                                        },
-                                                                                                        DropTableList.slaveMineDT1Name);
+                                                                                                        DropTableList.lovashiGuardsDTKey);
 
     public readonly static EnemyPackInfo ml3GuardsRekaPazmanSurrender = new EnemyPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.overseerGaspar, 
                                                                                                         EnemyAmountList.guardVirag 
                                                                                                        },
-                                                                                                        DropTableList.slaveMineDT1Name);
+                                                                                                        DropTableList.lovashiGuardsDTKey);
 
     #endregion
 
@@ -232,13 +239,13 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.oneSpearman,
                                                                                                         EnemyAmountList.twoJavelineers
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.slaveMineDTKey);
 
-    public readonly static EnemyPackInfo oneExecutionerTwoJavalineers = new EnemyPackInfo(new CreatureAmount[] {      
-                                                                                                        EnemyAmountList.oneExecutioner,
+    public readonly static EnemyPackInfo oneLancerTwoJavalineers = new EnemyPackInfo(new CreatureAmount[] {      
+                                                                                                        EnemyAmountList.oneLancer,
                                                                                                         EnemyAmountList.twoJavelineers
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.slaveMineDTKey);
 
     #endregion
 
@@ -250,7 +257,7 @@ public static class EnemyPackInfoList
                                                                                                 EnemyAmountList.twoSpearmen,
                                                                                                 EnemyAmountList.twoAxemen
                                                                                                 },
-                                                                                                DropTableList.slaveMineDT1Name);
+                                                                                                DropTableList.lovashiGuardsDTKey);
 
     public readonly static EnemyPackInfo barricadeGuardsBehind = new EnemyPackInfo(new CreatureAmount[] {      
                                                                                                         EnemyAmountList.oneSignaleer,
@@ -258,7 +265,8 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.twoSpearmen,
                                                                                                         EnemyAmountList.twoAxemen
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.lovashiGuardsDTKey,
+                                                                                    alwaysSurprised: true);
     #endregion
     
     #region Camp Packs
@@ -268,14 +276,14 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.oneSpearman,
                                                                                                         EnemyAmountList.twoJavelineers
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.lovashiGuardsDTKey);
 
     public readonly static EnemyPackInfo oneDisciplinarianTwoSpearmenTwoJavalineers = new EnemyPackInfo(new CreatureAmount[] {      
                                                                                                         EnemyAmountList.oneDisciplinarian,
                                                                                                         EnemyAmountList.twoSpearmen,
                                                                                                         EnemyAmountList.twoJavelineers
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.lovashiGuardsDTKey);
 
     public readonly static EnemyPackInfo oneLieutenantOneAxemanOneSpearmanThreeJavalineers = new EnemyPackInfo(new CreatureAmount[] {     
                                                                                                         EnemyAmountList.oneLieutenant, 
@@ -283,21 +291,21 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.oneSpearman,
                                                                                                         EnemyAmountList.threeJavelineers
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.lovashiGuardsDTKey);
 
     public readonly static EnemyPackInfo twoSpearmenTwoAxemenTwoJavalineers = new EnemyPackInfo(new CreatureAmount[] {      
                                                                                                         EnemyAmountList.twoSpearmen,
                                                                                                         EnemyAmountList.twoAxemen,
                                                                                                         EnemyAmountList.twoJavelineers
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.lovashiGuardsDTKey);
 
     public readonly static EnemyPackInfo twoAxemenTwoSpearmenTwoJavalineers = new EnemyPackInfo(new CreatureAmount[] {      
                                                                                                         EnemyAmountList.twoAxemen,
                                                                                                         EnemyAmountList.twoSpearmen,
                                                                                                         EnemyAmountList.twoJavelineers
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.lovashiGuardsDTKey);
     #endregion
 
     #region Manse 1F Packs
@@ -307,7 +315,7 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.oneDisciplinarian,
                                                                                                         EnemyAmountList.oneLieutenant
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.lovashiGuardsDTKey);
 
     public readonly static EnemyPackInfo oneExecutionerOneAxemanTwoSpearmanThreeJavelineers = new EnemyPackInfo(new CreatureAmount[] {
                                                                                                         EnemyAmountList.oneLinebreaker,
@@ -315,7 +323,7 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.twoSpearmen,
                                                                                                         EnemyAmountList.twoJavelineers
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.lovashiGuardsDTKey);
 
     public readonly static EnemyPackInfo oneLinebreakerOneAxemanOneSpearmanThreeJavelineers = new EnemyPackInfo(new CreatureAmount[] {
                                                                                                         EnemyAmountList.oneLinebreaker,
@@ -323,7 +331,7 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.oneSpearman,
                                                                                                         EnemyAmountList.threeJavelineers
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.lovashiGuardsDTKey);
 
     public readonly static EnemyPackInfo oneLinebreakerOneAxemanOneSpearmanOneDisciplinarion = new EnemyPackInfo(new CreatureAmount[] {
                                                                                                         EnemyAmountList.oneLinebreaker,
@@ -331,7 +339,7 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.oneSpearman,
                                                                                                         EnemyAmountList.oneDisciplinarian
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.lovashiGuardsDTKey);
 
     public readonly static EnemyPackInfo oneLancerThreeAxemenTwoJavelineers = new EnemyPackInfo(new CreatureAmount[] {
                                                                                                         EnemyAmountList.oneLancer,
@@ -339,21 +347,21 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.oneSpearman,
                                                                                                         EnemyAmountList.twoJavelineers
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.lovashiGuardsDTKey);
 
     public readonly static EnemyPackInfo oneLieutenantOneDisciplinarianTenJavelineers = new EnemyPackInfo(new CreatureAmount[] {
                                                                                                         EnemyAmountList.oneLieutenant,
                                                                                                         EnemyAmountList.oneDisciplinarian,
                                                                                                         EnemyAmountList.tenJavelineers
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.lovashiGuardsDTKey);
 
     public readonly static EnemyPackInfo oneLieutenantOneDisciplinarianTenLoyalists = new EnemyPackInfo(new CreatureAmount[] {
                                                                                                         EnemyAmountList.oneLieutenant,
                                                                                                         EnemyAmountList.oneDisciplinarian,
                                                                                                         EnemyAmountList.tenNonBrandedLoyalists
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.lovashiGuardsDTKey);
 
     #endregion
 
@@ -363,14 +371,14 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.oneLancer,
                                                                                                         EnemyAmountList.oneOverseer
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.lovashiGuardsDTKey);
 
     public readonly static EnemyPackInfo oneLancerOneExecutionerOneLineBreaker = new EnemyPackInfo(new CreatureAmount[] {
                                                                                                         EnemyAmountList.oneLancer,
                                                                                                         EnemyAmountList.oneExecutioner,
                                                                                                         EnemyAmountList.oneLinebreaker
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.lovashiGuardsDTKey);
 
     public readonly static EnemyPackInfo oneExecutionerOneLancerOneOverseerOneLieutenantOneLinebreaker = new EnemyPackInfo(new CreatureAmount[] {
                                                                                                         EnemyAmountList.oneExecutioner,
@@ -379,7 +387,7 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.oneLinebreaker,
                                                                                                         EnemyAmountList.oneLieutenant
                                                                                                      },
-                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                    DropTableList.lovashiGuardsDTKey);
 
     #endregion
 
@@ -390,21 +398,21 @@ public static class EnemyPackInfoList
     private readonly static EnemyPackInfo twoGiantBatsTwoBatSwarmsFirstTutorial = new BossPackInfo(new CreatureAmount[] {  EnemyAmountList.twoGiantBats,
                                                                                                             EnemyAmountList.twoBatSwarms
                                                                                                             },
-                                                                                                          DropTableList.slaveMineDT1Name, 
+                                                                                                          DropTableList.slaveMineDTKey, 
                                                                                                           script: new PreventTutorialsAfterBatsKilledScript());
 
 
     private readonly static EnemyPackInfo twoGiantBatsTwoBatSwarms = new EnemyPackInfo(new CreatureAmount[] {  EnemyAmountList.twoGiantBats,
                                                                                                             EnemyAmountList.twoBatSwarms
                                                                                                             },
-                                                                                                          DropTableList.slaveMineDT1Name);
+                                                                                                          DropTableList.slaveMineDTKey);
 
     private readonly static EnemyPackInfo twoGiantBatsThreeBatSwarmsOneArmoredBat = new EnemyPackInfo(new CreatureAmount[] {  
                                                                                                                             EnemyAmountList.oneArmoredBatShielded,
                                                                                                                             EnemyAmountList.twoGiantBats,
                                                                                                                             EnemyAmountList.threeBatSwarms
                                                                                                                         },
-                                                                                                                        DropTableList.slaveMineDT1Name,
+                                                                                                                        DropTableList.slaveMineDTKey,
                                                                                                                         tutorialSequenceKey: TutorialSequenceList.traitTutorialSequenceKey);
 
     private readonly static EnemyPackInfo oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat = new EnemyPackInfo(new CreatureAmount[] {  EnemyAmountList.oneDenMother,
@@ -412,20 +420,20 @@ public static class EnemyPackInfoList
                                                                                                                                     EnemyAmountList.oneArmoredBatShielded,
                                                                                                                                     EnemyAmountList.threeBatSwarms
                                                                                                                                  },
-                                                                                                                                DropTableList.slaveMineDT1Name,
+                                                                                                                                DropTableList.slaveMineDTKey,
                                                                                                                                 tutorialSequenceKey: TutorialSequenceList.traitTutorialSequenceKey);
 
     private readonly static EnemyPackInfo twoGiantBatsThreeBatSwarmsOneScreecher = new EnemyPackInfo(new CreatureAmount[] {  EnemyAmountList.oneScreecherBat,
                                                                                                                             EnemyAmountList.twoGiantBats,
                                                                                                                             EnemyAmountList.threeBatSwarms
                                                                                                                             },
-                                                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                                                    DropTableList.slaveMineDTKey);
 
     private readonly static EnemyPackInfo oneArmoredBatOneScreecherOneDenMother = new EnemyPackInfo(new CreatureAmount[] {  EnemyAmountList.oneArmoredBat,
                                                                                                                             EnemyAmountList.oneScreecherBat,
                                                                                                                             EnemyAmountList.oneDenMother
                                                                                                                             },
-                                                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                                                    DropTableList.slaveMineDTKey);
 
     private readonly static EnemyPackInfo twoArmoredBatsOneDenMotherOneGiantBatTwoBatSwarm = new EnemyPackInfo(new CreatureAmount[] { 
                                                                                                                                     EnemyAmountList.oneArmoredBat,
@@ -434,7 +442,7 @@ public static class EnemyPackInfoList
                                                                                                                                     EnemyAmountList.oneGiantBat,
                                                                                                                                     EnemyAmountList.twoBatSwarms
                                                                                                                                   },
-                                                                                                                                    DropTableList.slaveMineDT1Name,
+                                                                                                                                    DropTableList.slaveMineDTKey,
                                                                                                                                     tutorialSequenceKey: TutorialSequenceList.traitTutorialSequenceKey);
 
     private readonly static EnemyPackInfo twoGiantBatsTwoBatSwarmsTwoArmoredBats = new EnemyPackInfo(new CreatureAmount[] {  EnemyAmountList.twoGiantBats,
@@ -442,14 +450,14 @@ public static class EnemyPackInfoList
                                                                                                                             EnemyAmountList.oneArmoredBat,
                                                                                                                             EnemyAmountList.oneArmoredBatShielded,
                                                                                                                             },
-                                                                                                                            DropTableList.slaveMineDT1Name,
+                                                                                                                            DropTableList.slaveMineDTKey,
                                                                                                                                 tutorialSequenceKey: TutorialSequenceList.traitTutorialSequenceKey);
 
     private readonly static EnemyPackInfo threeDenMothersThreeBatSwarmsOneArmoredBat = new EnemyPackInfo(new CreatureAmount[] {  EnemyAmountList.threeDenMothers,
                                                                                                                             EnemyAmountList.threeBatSwarms,
                                                                                                                             EnemyAmountList.oneArmoredBat
                                                                                                                             },
-                                                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                                                    DropTableList.slaveMineDTKey);
 
     #endregion
 
@@ -460,21 +468,21 @@ public static class EnemyPackInfoList
                                                                                                                     EnemyAmountList.twoHiveHeralds,
                                                                                                                     EnemyAmountList.twoBroodlings
                                                                                                                  },
-                                                                                                                 DropTableList.slaveMineDT1Name);
+                                                                                                                 DropTableList.slaveMineDTKey);
 
     private readonly static EnemyPackInfo twoGuardianWormsOneArmoredWormTwoHiveHeralds = new EnemyPackInfo(new CreatureAmount[] {  
                                                                                                                     EnemyAmountList.twoGuardianWorms,
                                                                                                                     EnemyAmountList.oneArmoredWorm,
                                                                                                                     EnemyAmountList.twoHiveHeralds
                                                                                                                  },
-                                                                                                                 DropTableList.slaveMineDT1Name);
+                                                                                                                 DropTableList.slaveMineDTKey);
 
     private readonly static EnemyPackInfo oneGuardianDireWormTwoArmoredWormTwoHiveHeralds = new BossPackInfo(new CreatureAmount[] {  
                                                                                                                     EnemyAmountList.oneDireGuardianWorm,
                                                                                                                     EnemyAmountList.twoArmoredWorms,
                                                                                                                     EnemyAmountList.twoHiveHeralds
                                                                                                                  },
-                                                                                                                 DropTableList.slaveMineDT1Name,
+                                                                                                                 DropTableList.slaveMineDTKey,
                                                                                                                  spawnDetailsList: new List<SpawnDetails>()
                                                                                                                  {
                                                                                                                     SpawnDetails.middle2x2
@@ -489,27 +497,27 @@ public static class EnemyPackInfoList
                                                                                                     EnemyAmountList.oneArmoredWorm,
                                                                                                     EnemyAmountList.threeWorms
                                                                                                     },
-                                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                                    DropTableList.slaveMineDTKey);
 
     private readonly static EnemyPackInfo twoWormsTwoToxicWorms = new EnemyPackInfo(new CreatureAmount[] {
                                                                                                     EnemyAmountList.twoToxicWorms,
                                                                                                     EnemyAmountList.twoWorms
                                                                                                     },
-                                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                                    DropTableList.slaveMineDTKey);
 
     private readonly static EnemyPackInfo oneWormTwoHiveHeraldsTwoBroodlings = new EnemyPackInfo(new CreatureAmount[] {
                                                                                                     EnemyAmountList.twoHiveHeralds,
                                                                                                     EnemyAmountList.oneWorm,
                                                                                                     EnemyAmountList.twoBroodlings
                                                                                                     },
-                                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                                    DropTableList.slaveMineDTKey);
 
     private readonly static EnemyPackInfo oneDireWormTwoHiveHeraldsThreeWorms = new EnemyPackInfo(new CreatureAmount[] {
                                                                                                     EnemyAmountList.oneDireWorm,
                                                                                                     EnemyAmountList.twoHiveHeralds,
                                                                                                     EnemyAmountList.threeWorms
                                                                                                     },
-                                                                                                    DropTableList.slaveMineDT1Name,
+                                                                                                    DropTableList.slaveMineDTKey,
                                                                                                     spawnDetailsList: new List<SpawnDetails>()
                                                                                                     {
                                                                                                         SpawnDetails.middle2x2
@@ -521,7 +529,7 @@ public static class EnemyPackInfoList
                                                                                                     EnemyAmountList.oneToxicWorm,
                                                                                                     EnemyAmountList.oneArmoredWorm
                                                                                                     },
-                                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                                    DropTableList.slaveMineDTKey);
 
     private readonly static EnemyPackInfo oneDireWormTwoToxicWormsTwoMartyrWormsOneHiveHerald = new EnemyPackInfo(new CreatureAmount[] {
                                                                                                     EnemyAmountList.oneDireWorm,
@@ -529,7 +537,7 @@ public static class EnemyPackInfoList
                                                                                                     EnemyAmountList.twoMartyrWorms,
                                                                                                     EnemyAmountList.oneHiveHerald
                                                                                                     },
-                                                                                                    DropTableList.slaveMineDT1Name,
+                                                                                                    DropTableList.slaveMineDTKey,
                                                                                                     spawnDetailsList: new List<SpawnDetails>()
                                                                                                     {
                                                                                                         SpawnDetails.middle2x2
@@ -540,11 +548,11 @@ public static class EnemyPackInfoList
                                                                                                     EnemyAmountList.twoArmoredWorms,
                                                                                                     EnemyAmountList.threeHiveHeralds
                                                                                                     },
-                                                                                                    DropTableList.slaveMineDT1Name);
+                                                                                                    DropTableList.slaveMineDTKey);
 
     #endregion
 
-    // public readonly static EnemyPackInfo taborFight = new EnemyPackInfo(new int[] { 1 }, new int[] { 1 }, new EnemyStats[] { loadEnemyStatsFromResources(chiefTabor) }, flagsToCheckForSlaveAllies, DropTableList.slaveMineDT1Name);
+    // public readonly static EnemyPackInfo taborFight = new EnemyPackInfo(new int[] { 1 }, new int[] { 1 }, new EnemyStats[] { loadEnemyStatsFromResources(chiefTabor) }, flagsToCheckForSlaveAllies, DropTableList.slaveMineDTKey);
 
 
     private static Dictionary<string, List<EnemyPackInfo>> enemyPackInfoDict;
@@ -581,7 +589,7 @@ public static class EnemyPackInfoList
 
         list.Add(oneAxemanOneSpearmanTwoJavalineers);
         list.Add(oneAxemanOneSpearmanTwoJavalineers);
-        list.Add(oneExecutionerTwoJavalineers);
+        list.Add(oneLancerTwoJavalineers);
 
         enemyPackInfoDict.Add(LocationNameList.guardHouseTopFloor, list);
         #endregion
@@ -953,13 +961,13 @@ public static class EnemyPackInfoList
 
         #region Pit
 
-        #region Pit-1b
+        #region Pit-1a
 
         list = new List<EnemyPackInfo>();
 
         list.Add(oneLinebreakerOneAxemanOneSpearmanOneDisciplinarion);
 
-        enemyPackInfoDict.Add(ZoneKeyList.pit + LocationNameList.section1b, list);
+        enemyPackInfoDict.Add(ZoneKeyList.pit + LocationNameList.section1a, list);
 
         #endregion
 

@@ -63,9 +63,9 @@ public abstract class StatBoostSourceCombiner : StatBoostSource, IEnumerable
     #region Secondary Stats
 
     //Strength Stats
-    public override string getBonusPhysicalResistanceFormula()
+    public override string getBonusWoundResistanceFormula()
     {
-        return getAllOfOneStatFormula<StatBoostSource>(this, t => t.getBonusPhysicalResistanceFormula());
+        return getAllOfOneStatFormula<StatBoostSource>(this, t => t.getBonusWoundResistanceFormula());
     }
     public override string getBonusCriticalDamageMultiplierFormula()
     {

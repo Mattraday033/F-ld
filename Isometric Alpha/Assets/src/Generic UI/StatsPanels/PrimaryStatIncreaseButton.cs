@@ -9,7 +9,7 @@ public class PrimaryStatIncreaseButton : BinaryPanelPopUpButton, IPointerEnterHa
 {
     private const string noAttachedIconMessage = "No Attached Icon";
     public static PrimaryStatIncreaseButton currentButton;
-    public static PrimaryStat currentStatType;
+    public static PrimaryStat currentPrimaryStat;
 
     public static UnityEvent PrimaryStatsIncreaseButtonPressed = new UnityEvent();
 
@@ -34,7 +34,7 @@ public class PrimaryStatIncreaseButton : BinaryPanelPopUpButton, IPointerEnterHa
     public void setCurrentButton()
     {
         currentButton = this;
-        currentStatType = getPrimaryStatType();
+        currentPrimaryStat = getPrimaryPrimaryStat();
         PrimaryStatsIncreaseButtonPressed.Invoke();
     }
 
@@ -78,7 +78,7 @@ public class PrimaryStatIncreaseButton : BinaryPanelPopUpButton, IPointerEnterHa
         return noAttachedIconMessage;
     }
 
-    public PrimaryStat getPrimaryStatType()
+    public PrimaryStat getPrimaryPrimaryStat()
     {
         if (attachedIconText != null)
         {
@@ -102,7 +102,7 @@ public class PrimaryStatIncreaseButton : BinaryPanelPopUpButton, IPointerEnterHa
     {
         if(CharacterScreen.getUpgradeDescriptionPanelSlot() != null)
         {
-            CharacterScreen.getUpgradeDescriptionPanelSlot().setPrimaryDescribable(new AllyStatsUpgradeDifference(OverallUIManager.getCurrentPartyMember(), getPrimaryStatType())); 
+            CharacterScreen.getUpgradeDescriptionPanelSlot().setPrimaryDescribable(new AllyStatsUpgradeDifference(OverallUIManager.getCurrentPartyMember(), getPrimaryPrimaryStat())); 
         }
     }
 

@@ -379,9 +379,9 @@ public static class MapObjectList
 		switch(pitSceneName.Replace(ZoneKeyList.pit,""))
 		{
 			case LocationNameList.section1a:
-				return new MapLocation(ZoneKeyList.pit, ZoneKeyList.pit+LocationNameList.section1a, LocationNameList.section1a, notFastTravelAccessible, zeroInteriors, new string[]{ZoneKeyList.pit+LocationNameList.section1b}, new ZoneButtonInfo[]{new ZoneButtonInfo(ZoneKeyList.manseFirstFloor, MapPopUpWindow.northWestButtonIndex)});
-			case LocationNameList.section1b:
-				return new MapLocation(ZoneKeyList.pit, ZoneKeyList.pit+LocationNameList.section1b, LocationNameList.section1b, notFastTravelAccessible, zeroInteriors, new string[]{ZoneKeyList.pit+LocationNameList.section1a}, new ZoneButtonInfo[]{new ZoneButtonInfo(ZoneKeyList.manseFirstFloor, MapPopUpWindow.westNorthButtonIndex)});
+				return new MapLocation(ZoneKeyList.pit, ZoneKeyList.pit+LocationNameList.section1a, LocationNameList.section1a, notFastTravelAccessible, zeroInteriors, new string[]{ZoneKeyList.pit+LocationNameList.section2a}, new ZoneButtonInfo[]{new ZoneButtonInfo(ZoneKeyList.manseFirstFloor, MapPopUpWindow.westButtonIndex)});
+			// case LocationNameList.section1b:
+			// 	return new MapLocation(ZoneKeyList.pit, ZoneKeyList.pit+LocationNameList.section1b, LocationNameList.section1b, notFastTravelAccessible, zeroInteriors, new string[]{ZoneKeyList.pit+LocationNameList.section1a}, new ZoneButtonInfo[]{new ZoneButtonInfo(ZoneKeyList.manseFirstFloor, MapPopUpWindow.westNorthButtonIndex)});
 			case LocationNameList.section2a:
 				return new MapLocation(ZoneKeyList.pit, ZoneKeyList.pit+LocationNameList.section2a, LocationNameList.section2a, notFastTravelAccessible, zeroInteriors, new string[]{ZoneKeyList.pit+LocationNameList.section1b,ZoneKeyList.pit+LocationNameList.section2b,ZoneKeyList.pit+LocationNameList.section2c});
 			case LocationNameList.section2b:

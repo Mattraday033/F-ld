@@ -932,6 +932,10 @@ public static class DialogueList
                                 new Dialogue(new string[]   { NPCNameList.imre+1 }, 
                                  Resources.Load<TextAsset>(DialogueNameList.loyalImrePathName)));
 
+            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.pan,
+                                new SingleCharacterDialogue(NPCNameList.pan, 
+                                Resources.Load<TextAsset>(DialogueNameList.panPathName)));
+
             addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.diningRoom, NPCNameList.ancientPortcullis,
                                 new Dialogue(new string[]   { NPCNameList.ancientPortcullis }, 
                                  Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath)));

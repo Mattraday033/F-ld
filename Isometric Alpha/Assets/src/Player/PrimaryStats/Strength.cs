@@ -62,20 +62,20 @@ public static class Strength
 
 	// 	string[] displayStats = {""+stats.getExtraCritDamageForDisplay(),
 	// 							 ""+getHealthFromStrength(stat),
-	// 							 ""+stats.getPhysicalResistanceForDisplay(),
+	// 							 ""+stats.getWoundResistanceForDisplay(),
 	// 							 ""+stats.getWeaponSlots()};
 
 	// 	return displayStats;
 	// }
 
-	public const string startingDescription = "Strength enhances your physical prowess, furiosity, and intimidation. " +
+	public const string startingDescription = "Strength enhances your wound prowess, furiosity, and intimidation. " +
 									 "Strong characters can take powerful attacks on the chin and then hit back harder. " +
 									 "They tend to throw their weight around, using threats to get their way. " +
 									 "And if things turn violent? They must decide for themselves if that is what they wanted all along.";
 
 	public static string getDescription()
 	{
-		string startingDescription = "Strength is the Primary Stat of physical prowess, furiosity, and intimidation. " +
+		string startingDescription = "Strength is the Primary Stat of wound prowess, furiosity, and intimidation. " +
 									 "Strong characters can take powerful attacks on the chin and then hit back harder. " +
 									 "They tend to throw their weight around, using threats both implicit and explicit to get their way. " +
 									 "And if things turn violent? They must decide for themselves if that is what they wanted all along.\n\n";
@@ -126,7 +126,7 @@ Secondary Stats:
 	Health
 	Weapon Slots
 	Extra Crit Damage
-	Physical Resistance Chance
+	Wound Resistance Chance
 
 Abilities / Toggles: 
 	Toggle: Intimidating Presence (All enemy attack patterns must include the target, even if they wouldn't otherwise)

@@ -425,7 +425,10 @@ WallPatchTall
     private const string shadowFolder = charactersFolder + "Shadows/";
     public const string shadow256x256 = shadowFolder + "256_Shadow";
     public const string shadow512x512 = shadowFolder + "512_Shadow";
+    public const string shadow256x128 = shadowFolder + "256x128_Shadow";
 
+
+//256x128_Shadow
     #endregion
 }
 

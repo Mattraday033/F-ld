@@ -7,8 +7,6 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-[Serializable] public enum StatType {Str = 1, Dex = 2, Wis = 3, Cha = 4}
-
 public class CharacterCreationPopUpWindow : PopUpWindow
 {
     private static CharacterCreationPopUpWindow instance;
@@ -102,22 +100,22 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         pointsToSpend--;
         pointsSpent++;
 
-        switch (passer.statType)
+        switch (passer.PrimaryStat)
         {
-            case StatType.Str:
+            case PrimaryStat.Strength:
                 currentStats.strength = currentStats.getStrength() + 1;
                 break;
-            case StatType.Dex:
+            case PrimaryStat.Dexterity:
                 currentStats.dexterity = currentStats.getDexterity() + 1;
                 break;
-            case StatType.Wis:
+            case PrimaryStat.Wisdom:
                 currentStats.wisdom = currentStats.getWisdom() + 1;
                 break;
-            case StatType.Cha:
+            case PrimaryStat.Charisma:
                 currentStats.charisma = currentStats.getCharisma() + 1;
                 break;
             default:
-                throw new IOException("Unknown StatType: " + passer.statType.ToString());
+                throw new IOException("Unknown PrimaryStat: " + passer.PrimaryStat.ToString());
         }
 
         populate();
@@ -128,22 +126,22 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         pointsToSpend++;
         pointsSpent--;
 
-        switch (passer.statType)
+        switch (passer.PrimaryStat)
         {
-            case StatType.Str:
+            case PrimaryStat.Strength:
                 currentStats.strength = currentStats.getStrength() - 1;
                 break;
-            case StatType.Dex:
+            case PrimaryStat.Dexterity:
                 currentStats.dexterity = currentStats.getDexterity() - 1;
                 break;
-            case StatType.Wis:
+            case PrimaryStat.Wisdom:
                 currentStats.wisdom = currentStats.getWisdom() - 1;
                 break;
-            case StatType.Cha:
+            case PrimaryStat.Charisma:
                 currentStats.charisma = currentStats.getCharisma() - 1;
                 break;
             default:
-                throw new IOException("Unknown StatType: " + passer.statType.ToString());
+                throw new IOException("Unknown PrimaryStat: " + passer.PrimaryStat.ToString());
         }
 
         populate();
@@ -192,18 +190,18 @@ public class CharacterCreationPopUpWindow : PopUpWindow
                 incrementButtons[buttonIndex].gameObject.SetActive(false);
             }
 
-            switch ((StatType)buttonIndex + 1)
+            switch ((PrimaryStat) buttonIndex)
             {
-                case StatType.Str:
+                case PrimaryStat.Strength:
                     decrementButtons[buttonIndex].gameObject.SetActive(currentStats.getStrength() > 1);
                     break;
-                case StatType.Dex:
+                case PrimaryStat.Dexterity:
                     decrementButtons[buttonIndex].gameObject.SetActive(currentStats.getDexterity() > 1);
                     break;
-                case StatType.Wis:
+                case PrimaryStat.Wisdom:
                     decrementButtons[buttonIndex].gameObject.SetActive(currentStats.getWisdom() > 1);
                     break;
-                case StatType.Cha:
+                case PrimaryStat.Charisma:
                     decrementButtons[buttonIndex].gameObject.SetActive(currentStats.getCharisma() > 1);
                     break;
             }

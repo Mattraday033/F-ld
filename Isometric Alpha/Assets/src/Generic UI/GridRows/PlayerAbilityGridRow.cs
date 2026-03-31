@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class PlayerAbilityGridRow : GridRow, IPointerDownHandler, IDragAndDropSource
@@ -79,6 +80,13 @@ public class PlayerAbilityGridRow : GridRow, IPointerDownHandler, IDragAndDropSo
     public override bool canSeeHover()
     {
         return hoverEnabled;
+    }
+
+    public override void OnPointerEnter(PointerEventData eventData)
+    {
+        PlayerAbilityGridRowDescriptionPanel.AbilityNoLongerNew.Invoke(descriptionPanel.getObjectBeingDescribed() as Ability);
+
+        base.OnPointerEnter(eventData);
     }
 
     public virtual void OnPointerDown(PointerEventData eventData)

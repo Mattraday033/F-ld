@@ -45,10 +45,25 @@ public struct GridCoords
 		return new Vector3Int(col, row, 0);
 	}
 
-	public bool Equals(GridCoords coords)
+	public override bool Equals(object obj)
 	{
-		return ((coords.row == row) && (coords.col == col));
+        GridCoords coords = getDefaultCoords();
+
+        try
+        {
+            coords = (GridCoords) obj;
+        } catch
+        {   
+            return false;
+        }
+
+		return (coords.row == row) && (coords.col == col);
 	}
+
+    public override int GetHashCode()
+    {
+        return (row.ToString() + "," + col.ToString()).GetHashCode();
+    }
 
 	public bool isWithinAllySection()
 	{
@@ -898,7 +913,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
             return false;
         }
 
-        if(traitToApply.traitType == TraitType.Wound && target.rollAgainstPhysicalResistance())
+        if(traitToApply.traitType == TraitType.Wound && target.rollAgainstWoundResistance())
         {
             return true;
         } 
@@ -1120,6 +1135,29 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
     public virtual string getKey()
     {
         throw new IOException("The base class version of getKey() was called extraneously");
+    }
+
+	public override bool Equals(object obj)
+	{
+        CombatAction action = obj as CombatAction;
+
+        if(action == null)
+        {
+            return false;
+        }
+
+        if(CombatStateManager.inCombat && actorStats != null)
+        {
+		    return action.getName().Equals(getName()) && actorStats.Equals(action.actorStats);            
+        } else
+        {
+		    return action.getName().Equals(getName());           
+        }
+	}
+
+    public override int GetHashCode()
+    {
+        return getName().GetHashCode();
     }
 
     public virtual void onAddToAbilityMenu() //for updating things like checking for source item quantity

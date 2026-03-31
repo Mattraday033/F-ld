@@ -544,6 +544,7 @@ public class TutorialSequence
     private const bool bypassTutorialSequenceCheck = true;
 
     public UnityEvent endOfSequenceEvent;
+    public bool eventEndsSequenceOnlyOnFinalStep = true;
 
     public static bool fromButton;
     public static TutorialSequence currentTutorialSequence;
@@ -615,7 +616,7 @@ public class TutorialSequence
         previousStep = -1;
         currentStepIndex = 0;
 
-        if (endOfSequenceEvent != null)
+        if (endOfSequenceEvent != null && !eventEndsSequenceOnlyOnFinalStep)
         {
             endOfSequenceEvent.AddListener(endSequence);
         }
@@ -644,11 +645,9 @@ public class TutorialSequence
         TutorialSequenceStep.hashFound = false;
         TutorialSequence.fromButton = fromButton;
 
-        // Debug.LogError("1");
 
         if (tutorialSequenceSteps.Length > currentStepIndex + 1)
         {
-            // Debug.LogError("2");
             previousStep = currentStepIndex;
 
             TutorialSequence sequenceSnapShot = currentTutorialSequence;
@@ -661,6 +660,14 @@ public class TutorialSequence
             }
 
             currentStepIndex++;
+
+            if (currentStepIndex == tutorialSequenceSteps.Length - 1 && 
+                endOfSequenceEvent != null && 
+                eventEndsSequenceOnlyOnFinalStep)
+            {
+                endOfSequenceEvent.RemoveListener(endSequence);
+                endOfSequenceEvent.AddListener(endSequence);
+            }
 
             if (CombatStateManager.inCombat && CombatStateManager.whoseTurn == WhoseTurn.Resolving)
             {

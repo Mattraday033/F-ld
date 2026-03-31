@@ -10,9 +10,11 @@ public class DescriptionPanelWithFormula : DescriptionPanel
     private string damageTotal = "";
     private string critTotal = "";
     private string armorTotal = "";
+    private string invulnerabilityTotal = "";
     private string damageFormula;
     private string critFormula;
     private string armorFormula;
+    private string invulnerabilityFormula;
     private bool hasListener = false;
     private bool hasFormula = false;
 
@@ -35,6 +37,7 @@ public class DescriptionPanelWithFormula : DescriptionPanel
             damageFormula = formulaSource.getDamageFormula().Replace(" ", "");
             critFormula = formulaSource.getCritFormula().Replace(" ", "");
             armorFormula = formulaSource.getArmorFormula().Replace(" ", "");
+            invulnerabilityFormula = formulaSource.getInvulnerableFormula().Replace(" ", "");
 
             DescriptionPanelBuilder.OnFormulaSwap.AddListener(swapStatText);
             hasListener = true;
@@ -51,7 +54,8 @@ public class DescriptionPanelWithFormula : DescriptionPanel
         if (item == null || 
             damageText == null || 
             critRatingText == null || 
-            armorRatingText == null)
+            armorRatingText == null|| 
+            invulnerabilityText == null)
         {
             return;
         }
@@ -69,16 +73,19 @@ public class DescriptionPanelWithFormula : DescriptionPanel
                 damageText.gameObject.SetActive(false);
                 critRatingText.gameObject.SetActive(false);
                 armorRatingText.gameObject.SetActive(true);
+                invulnerabilityText.gameObject.SetActive(true);
                 return;
             case Weapon.subtype:
                 damageText.gameObject.SetActive(true);
                 critRatingText.gameObject.SetActive(true);
                 armorRatingText.gameObject.SetActive(false);
+                invulnerabilityText.gameObject.SetActive(false);
                 return;
             default:
                 damageText.gameObject.SetActive(false);
                 critRatingText.gameObject.SetActive(false);
                 armorRatingText.gameObject.SetActive(false);
+                invulnerabilityText.gameObject.SetActive(false);
                 return;
         }
     }
@@ -107,29 +114,38 @@ public class DescriptionPanelWithFormula : DescriptionPanel
                 armorTotal = armorRatingText.text;
             }
 
-            DescriptionPanel.setText(damageText, damageFormula);
-            DescriptionPanel.setText(critRatingText, critFormula);
-            DescriptionPanel.setText(armorRatingText, armorFormula);
+            if ((invulnerabilityTotal == null || invulnerabilityTotal.Length <= 0)&& invulnerabilityText != null)
+            {
+                invulnerabilityTotal = invulnerabilityText.text;
+            }
 
-            // DescriptionPanel.adjustTextFontSize(damageText, fontSizeModifier);
-            // DescriptionPanel.adjustTextFontSize(critRatingText, fontSizeModifier);
-            // DescriptionPanel.adjustTextFontSize(armorRatingText, fontSizeModifier);
+
+            setText(damageText, damageFormula);
+            setText(critRatingText, critFormula);
+            setText(armorRatingText, armorFormula);
+            setText(invulnerabilityText, invulnerabilityFormula);
+
+            // adjustTextFontSize(damageText, fontSizeModifier);
+            // adjustTextFontSize(critRatingText, fontSizeModifier);
+            // adjustTextFontSize(armorRatingText, fontSizeModifier);
 
         }
         else
         {
-            DescriptionPanel.setText(damageText, damageTotal);
-            DescriptionPanel.setText(critRatingText, critTotal);
-            DescriptionPanel.setText(armorRatingText, armorTotal);
+            setText(damageText, damageTotal);
+            setText(critRatingText, critTotal);
+            setText(armorRatingText, armorTotal);
+            setText(invulnerabilityText, invulnerabilityTotal);
 
-            // DescriptionPanel.setTextFontSize(damageText, oldFontSize);
-            // DescriptionPanel.setTextFontSize(critRatingText, oldFontSize);
-            // DescriptionPanel.setTextFontSize(armorRatingText, oldFontSize);
+            // setTextFontSize(damageText, oldFontSize);
+            // setTextFontSize(critRatingText, oldFontSize);
+            // setTextFontSize(armorRatingText, oldFontSize);
         }
 
-        DescriptionPanel.setTextAutoSize(damageText, OverallUIManager.showFormula);
-        DescriptionPanel.setTextAutoSize(critRatingText, OverallUIManager.showFormula);
-        DescriptionPanel.setTextAutoSize(armorRatingText, OverallUIManager.showFormula);
+        setTextAutoSize(damageText, OverallUIManager.showFormula);
+        setTextAutoSize(critRatingText, OverallUIManager.showFormula);
+        setTextAutoSize(armorRatingText, OverallUIManager.showFormula);
+        setTextAutoSize(invulnerabilityText, OverallUIManager.showFormula);
     }
 
 }

@@ -235,6 +235,34 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         GameObject shadow = Instantiate(Resources.Load<GameObject>(EnemyTypeFolderPathList.getShadowPrefabName(characterToAnimate)), transform);
         shadow.transform.SetAsFirstSibling();
         shadowSprite = shadow.GetComponent<SpriteRenderer>();
+
+        if(CombatStateManager.inCombat)
+        {
+            setFacing(facing.getFacing());
+        }
+
+        setAllShadowDirections(shadowSprite);
+    }
+
+    public void setAllShadowDirections(SpriteRenderer shadow)
+    {
+        if(shadow == null || !canChangeShadowFacing())
+        {
+            return;
+        }
+
+        shadow.flipX = facing.getFacing() == Facing.NorthWest || 
+                        facing.getFacing() == Facing.SouthEast;
+
+        foreach(Transform transform in shadow.transform)
+        {
+            setAllShadowDirections(transform.GetComponent<SpriteRenderer>());
+        }
+    }
+
+    private bool canChangeShadowFacing()
+    {
+        return EnemyTypeFolderPathList.getShadowPrefabName(characterToAnimate).Equals(PrefabNames.shadow256x128);
     }
 
     private void setHeartBeatRow()
@@ -805,11 +833,20 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             case CharacterAnimationType.Death_Back:
                 return;
         }
-
-        if(!changesFacing || CombatStateManager.inCombat)
+        if(CombatStateManager.inCombat)
+        {
+            if(CombatGrid.positionIsOnAlliedSide(linkedStats.position))
+            {
+                newFacing = Facing.NorthEast;
+            } else
+            {
+                newFacing = Facing.SouthWest;
+            }
+        }
+        else if(!changesFacing)
         {
             return;
-        }
+        }  
 
         facing.setFacing(newFacing);
 
@@ -830,7 +867,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     private void handleFacingChange()
     {
-        if(!changesFacing || CombatStateManager.inCombat)
+        if(!changesFacing)
         {
             return;
         }
@@ -855,6 +892,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
                 break;
         }
 
+        
+        setAllShadowDirections(shadowSprite);
         Helpers.updatePolygonCollider(spriteRenderer, polygonCollider2D);
     }
 

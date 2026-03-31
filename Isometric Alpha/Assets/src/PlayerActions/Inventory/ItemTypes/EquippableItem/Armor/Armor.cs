@@ -72,9 +72,9 @@ public abstract class Armor : EquippableItem, IJSONConvertable
         return armorTier;
     }
     
-    public override string getBonusPhysicalResistanceFormula()
+    public override string getBonusWoundResistanceFormula()
     {
-        string resistanceFormula = base.getBonusPhysicalResistanceFormula();
+        string resistanceFormula = base.getBonusWoundResistanceFormula();
 
         if(resistanceFormula.Equals(Constants.zeroRating) && (getSlotID() != headSlotIndex || getSlotID() == offHandSlotIndex))
         {
@@ -159,6 +159,7 @@ public abstract class Armor : EquippableItem, IJSONConvertable
 		base.describeSelfFull(panel);
 
         DescriptionPanel.setText(panel.armorRatingText, getArmorRating());
+        DescriptionPanel.setText(panel.invulnerabilityText, getInvulnerabilityForDisplay());
         DescriptionPanel.setText(panel.slotText, getSlotIDForDisplay());
         DescriptionPanel.setImage(panel.typeIconPanel, Helpers.loadSpriteFromResources(getTypeIconName()));
         DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getIconName()));

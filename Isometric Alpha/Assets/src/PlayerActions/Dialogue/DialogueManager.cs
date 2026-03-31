@@ -735,6 +735,8 @@ public class DialogueManager : MonoBehaviour
 
                     PartyManager.healFullAllPartyMembers();
 
+                    AudioManager.playRestSFX();
+
                     if (!FadeToBlackManager.isMidScreenFade())
                     {
                         fadeToBlackManager.setAndStartFadeBackIn();

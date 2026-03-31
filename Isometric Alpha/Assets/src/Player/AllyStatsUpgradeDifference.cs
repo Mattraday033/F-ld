@@ -8,26 +8,26 @@ public class AllyStatsUpgradeDifference: IDescribable, IDescribableInBlocks
     private AllyStats lowerLevelStats;
     private AllyStats upperLevelStats;
 
-    public AllyStatsUpgradeDifference(AllyStats lowerLevelStats, PrimaryStat statType)
+    public AllyStatsUpgradeDifference(AllyStats lowerLevelStats, PrimaryStat PrimaryStat)
     {
         this.lowerLevelStats = lowerLevelStats;
 
         this.upperLevelStats = (AllyStats)lowerLevelStats.clone();
-        upperLevelStats.incrementLevel();
+        upperLevelStats.incrementLevel(displayOnly: true);
 
-        switch (statType)
+        switch (PrimaryStat)
         {
             case PrimaryStat.Strength:
-                upperLevelStats.incrementStrength();
+                upperLevelStats.incrementStrength(displayOnly: true);
                 break;
             case PrimaryStat.Dexterity:
-                upperLevelStats.incrementDexterity();
+                upperLevelStats.incrementDexterity(displayOnly: true);
                 break;
             case PrimaryStat.Wisdom:
-                upperLevelStats.incrementWisdom();
+                upperLevelStats.incrementWisdom(displayOnly: true);
                 break;
             case PrimaryStat.Charisma:
-                upperLevelStats.incrementCharisma();
+                upperLevelStats.incrementCharisma(displayOnly: true);
                 break;
         }
     }
@@ -147,9 +147,9 @@ public class AllyStatsUpgradeDifference: IDescribable, IDescribableInBlocks
             listOfBlocks.Add(DescriptionPanelBuildingBlock.getCriticalHitDamageBlock(getDifferencePercentageForDisplay(upperLevelStats.getCritDamageMultiplier(), lowerLevelStats.getCritDamageMultiplier())));
         }
 
-        if (upperLevelStats.getPhysicalResistance() > lowerLevelStats.getPhysicalResistance())
+        if (upperLevelStats.getWoundResistance() > lowerLevelStats.getWoundResistance())
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getPhysicalResistBlock(getDifferencePercentageForDisplay(upperLevelStats.getPhysicalResistance(), lowerLevelStats.getPhysicalResistance())));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getWoundResistBlock(getDifferencePercentageForDisplay(upperLevelStats.getWoundResistance(), lowerLevelStats.getWoundResistance())));
         }
 
         #endregion

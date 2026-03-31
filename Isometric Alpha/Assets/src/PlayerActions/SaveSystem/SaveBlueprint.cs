@@ -65,6 +65,9 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
     public EnemyStatWrapper[] monsterLocations;
 	public FlagWrapper[] currentMonsterDefeatKeys;
 
+    public NewAbilityWrapper[] newAbilityWrappers;
+    public string[] newPartyMemberNames;
+
 	public static SaveBlueprint build(string saveName, int saveNumber)
 	{
 		SaveBlueprint saveBlueprint = new SaveBlueprint();
@@ -120,6 +123,9 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 
         saveBlueprint.currentPuzzleIndex = PuzzleFlags.currentPuzzleIndex;
 
+        saveBlueprint.newAbilityWrappers = NewAbilityManager.getAllNewAbilityWrappers();
+        saveBlueprint.newPartyMemberNames = NewPartyMemberManager.getAllNewPartyMembersForSave();
+
 		return saveBlueprint;
 	}
 
@@ -128,16 +134,12 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 		return new SaveBlueprint(textAsset.ToString());
 	}
 
-	public static SaveBlueprint build(string json)
-	{
-		return new SaveBlueprint(json);
-	}
-
 	public SaveBlueprint()
 	{
 
 	}
 
+    //used in new games/clean slate saves only
 	public SaveBlueprint(string jsonString)
 	{
 
@@ -189,6 +191,9 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 		this.monsterLocations = GetFromJson.getElementFromJson(this.saveName, nameof(monsterLocations), jsonDynamic, SaveDefaultValues.defaultEmptyEnemyStatsWrapperArray);
         this.currentMonsterDefeatKeys = GetFromJson.getElementFromJson(this.saveName, nameof(currentMonsterDefeatKeys), jsonDynamic, SaveDefaultValues.defaultEmptyFlagWrapperArray);
         this.currentActivatedTrapsAndButtons =  GetFromJson.getElementFromJson(this.saveName, nameof(currentActivatedTrapsAndButtons), jsonDynamic, SaveDefaultValues.defaultEmptyFlagWrapperArray);
+        
+        this.newAbilityWrappers = GetFromJson.getElementFromJson(this.saveName, nameof(newAbilityWrappers), jsonDynamic, SaveDefaultValues.defaultEmptyNewAbilityWrapperArray);
+        this.newPartyMemberNames = GetFromJson.getElementFromJson(this.saveName, nameof(newPartyMemberNames), jsonDynamic, SaveDefaultValues.defaultEmptyStringArray);
 	}
 
 	public static string[] convertToJson(IJSONConvertable[] arrayOfJSONConvertableObjects)

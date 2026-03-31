@@ -10,6 +10,8 @@ public class Transition
     public const bool ladderTransition = false;
     public bool destinationOnly;
 
+    public bool allowAutosave = false;
+
     public int index;
     public string currentAreaName;
     public string destinationName;
@@ -40,7 +42,7 @@ public class Transition
         whichConstructor = "first";
     }
 
-    public Transition(string currentAreaName, string destinationName, Vector3Int cellCoords, int index, Facing playerSpawnDirection, bool usableForFastTravel, int outputMultiplier, PlayerInteractionScript scriptOnTransition, bool destinationOnly = false)
+    public Transition(string currentAreaName, string destinationName, Vector3Int cellCoords, int index, Facing playerSpawnDirection, bool usableForFastTravel, int outputMultiplier, PlayerInteractionScript scriptOnTransition, bool destinationOnly = false, bool allowAutosave = true)
     {
         this.currentAreaName = currentAreaName;
         this.destinationName = destinationName;
@@ -56,6 +58,7 @@ public class Transition
         
         this.scriptOnTransition = scriptOnTransition;
         this.destinationOnly = destinationOnly;
+        this.allowAutosave = allowAutosave;
 
         whichConstructor = "second";
     }

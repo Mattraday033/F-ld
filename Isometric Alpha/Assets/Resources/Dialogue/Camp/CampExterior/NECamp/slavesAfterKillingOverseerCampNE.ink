@@ -91,13 +91,13 @@ Hear me! We have slain the overseer in this section, so you do not need to fear 
 {
 -agreedToBeLeader:
 
-You all know me, but you may not know my friend here.{hasTools(): They are the one who has secured the equipment you see before you.} They are the one who has already slain many guards. And they are the one who personally saved myself and others from being trapped below the earth. Hear them now and know they have more than earned your trust!
+You all know me, but you may not know my friend here.{hasTools(): They are the one who has secured the equipment you see before you.} They have already slain many guards. And they are the one who personally saved myself and others from being trapped below the earth. Hear them now and know they have more than earned your trust!
 
     ->1b
 
 -else:
 
-You all have suffered under this lockdown, but you may not know for what reason. Days ago, while digging on the lowest level of the mine, my team and I ran afoul of a cavern beneath the earth filled with packs of deadly monsters. A horde of enormous, ravenous worms flooded the mine, which forced the guards to call for the evacuation you all remember.
+You all have suffered under this lockdown, but you may not know for what reason. Days ago, while digging on the lowest level of the mine, my team and I ran afoul of a cavern filled with packs of deadly monsters. A horde of enormous, ravenous worms flooded the mine, which forced the guards to call for the evacuation you all remember.
 
 During the initial confusion many guards were slain, or trapped as I had been, deep within the mine. *Nándor grabs your wrist and raises it high for all to see.* And had it not been for the efforts of {playerName}, I would still be trapped there. 
 
@@ -114,23 +114,34 @@ I would not ask what I ask of you now if I was not sure it would succeed. The gu
 === 1b ===
 
     +I am {playerName}. Everything Nándor said is true. We have come to liberate the branded, and to break the guards' hold on the camp.
+    {
+    -gainedFervorFromNandorExplanation:
+        ->1bd
+    -else:        
+        ->1ba
+    }
+
+    +We have slain some guards, but there are more. Who here will fight to save themselves?
+    {
+    -gainedFervorFromNandorExplanation:
+        ->1bd
+    -else:        
+        ->1bb
+    }
         
+=== 1ba ===
         changeCamTarget({theCrowdIndex})
         
         \*Some of the slaves exchange glances. There is a mood of doubtfulness about them.*
         
-         changeCamTarget({slave1Index})
-         
-        ->1ba
-    +We have slain some guards, but there are more. Who here will fight to save themselves?
-        
-        changeCamTarget({theCrowdIndex})
-        
-        \*A few halfhearted hands linger in the air, but the rest of the slaves look to you with pitiful expressions.*
-        
-        ->1ba
-        
-=== 1ba ===
+         ->1bc
+=== 1bb ===
+    changeCamTarget({theCrowdIndex})
+    
+    \*A few halfhearted hands linger in the air, but the rest of the slaves look to you with pitiful expressions.*
+        ->1bc
+
+=== 1bc ===
     //{
     //-crowdFervor >= 1 and not clayInterjected and ((gotKnifeFromClay and not deathFlagThatch) or not deathFlagClay):
     //    ~clayInterjected = true
@@ -140,6 +151,12 @@ I would not ask what I ask of you now if I was not sure it would succeed. The gu
         ->3a
     //}
 
+=== 1bd ===
+
+    keepDialogue()
+
+    \*Eagerness unfamiliar to the crowd's sullen faces creeps through your audience. They begin to chatter excitedly among themselves.*
+        ->3a
 
 === 1c ===
 
@@ -285,7 +302,7 @@ changeCamTarget({theCrowdIndex})
     
     \*The crowd gives a cheer, but it is yet to be seen if they will hold to your command.*
         ->3a
-    +\*Address the crowd.* Any guards who surrender should be protected! If they think they may live by surrendering, we may be able to defeat them without cost!
+    +\*Address the crowd.* Surrendering guards should be preserved! If they think they will live by surrendering, we may be able to defeat them without cost!
     setToTrue(acceptingGuardPrisoners)
     
     keepDialogue()

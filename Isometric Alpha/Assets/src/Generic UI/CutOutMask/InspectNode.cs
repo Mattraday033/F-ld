@@ -56,7 +56,11 @@ public class InspectNode : MonoBehaviour
             return;
         }
 
-        if(inspecting && Input.GetKey(KeyBindingList.inspectKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
+        if(inspecting && 
+            (Input.GetKey(KeyBindingList.inspectKey.getCurrentKeyCode()) || 
+            Input.GetKey(KeyBindingList.settingsScreenKey.getCurrentKeyCode()) || 
+            KeyBindingList.continueUIKeyIsPressed()) &&
+             !KeyPressManager.handlingPrimaryKeyPress)
         {
             KeyPressManager.handlingPrimaryKeyPress = true;
             exitInspectingMode();

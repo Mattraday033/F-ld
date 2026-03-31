@@ -411,7 +411,7 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Size", "Trait Types", "A Size trait means that a creature takes up multiple squares. Attacking more than one square the creature occupies will hurt that creature multiple times."));
         allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Stance", "Trait Types", "Stance traits are traits that give a stackable buff. Gain stacks of your stance by attacking with a Stance Weapon, such as your fists or a staff. Only one Stance can be equipped at a time."));
         allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Target Priority", "Trait Types", "These traits determine who and where a creature is allowed to attack, such as prioritizing closer targets, or attacking randomly."));
-        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Wound", "Trait Types", "Wound traits are harmful effects applied to a creature. You and your allies have a chance to resist wounds with your Physical Resistance."));
+        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Wound", "Trait Types", "Wound traits are harmful effects applied to a creature. You and your allies have a chance to resist wounds with your Wound Resistance."));
 
         return allTraitTypesGlossaryEntries;
     }

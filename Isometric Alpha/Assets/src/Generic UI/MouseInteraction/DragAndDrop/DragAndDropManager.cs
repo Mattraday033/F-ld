@@ -12,6 +12,7 @@ public static class DragAndDropManager
     public static void createDragAndDrop(IDragAndDropSource source, IDescribable objectBeingDragged)
     {
         OnDragAndDropCreated.Invoke(objectBeingDragged);
+        ScrollableUIElement.HaltAllScrolling.Invoke();
         
         IDragAndDropContainer dragAndDrop = GameObject.Instantiate(Resources.Load<GameObject>(source.getDragAndDropPrefabName()), MouseHoverManager.getDragAndDropBase().transform).GetComponent<IDragAndDropContainer>();
 

@@ -264,9 +264,9 @@ public static class AbilityList
         enemyAbilityDictionary.Add(backHandKey, new Ability(CombatActionSettings.build(DescriptionParams.build(backHandKey, "A painful flurry of lashes.", "Lashings"), DamageParams.build("12", "50"), TargetParams.build(Range.horizontalThreeIndex))));
 
 		//Horse Abilities
-		enemyAbilityDictionary.Add(chargeKey, new Ability(CombatActionSettings.build(DescriptionParams.build(chargeKey, "The creature rushes headlong at it's foe, crushing them underfoot."), DamageParams.build("28", "25"), TargetParams.build(Range.verticalThreeIndex), AnimationParams.build(EffectAnimationType.Blunt))));
-		enemyAbilityDictionary.Add(stompKey, new Ability(CombatActionSettings.build(DescriptionParams.build(stompKey, "The creature stamps down on it's target, damaging and stunning it."), DamageParams.build("35", "5"), TraitList.upsideTheHead)));
-		enemyAbilityDictionary.Add(feedKey, new HealingAbility(CombatActionSettings.build(DescriptionParams.build(feedKey, "The combatant provides sustenance to their allies, healing them."), DamageParams.build("30"))));
+		enemyAbilityDictionary.Add(chargeKey, new Ability(CombatActionSettings.build(DescriptionParams.build(chargeKey, "The creature rushes headlong at it's foe, crushing them underfoot."), DamageParams.build("26", "20"), TargetParams.build(Range.verticalThreeIndex), AnimationParams.build(EffectAnimationType.Blunt))));
+		enemyAbilityDictionary.Add(stompKey, new Ability(CombatActionSettings.build(DescriptionParams.build(stompKey, "The creature stamps down on it's target, damaging and stunning it."), DamageParams.build("31", "5"), TraitList.upsideTheHead)));
+		enemyAbilityDictionary.Add(feedKey, new HealingAbility(CombatActionSettings.build(DescriptionParams.build(feedKey, "The combatant provides sustenance to their allies, healing them."), DamageParams.build("22"))));
 
 		//Saint Abilities
 		enemyAbilityDictionary.Add(boulderRollKey, new Ability(CombatActionSettings.build(DescriptionParams.build(boulderRollKey, "A massive rock tumbling quickly towards you.", "BoulderRoll"), DamageParams.build("12", "10"), TargetParams.build(Range.verticalThreeIndex), AnimationParams.build(EffectAnimationType.Blunt))));
@@ -357,7 +357,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		currentKey = generateAbilityKey(wisdomKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build(crushingBlowName, "A slam that shakes the enemy to their core, leaving them vulnerable. Until the end of the turn they can only muster half of their normal armor value. Costs five Stacks of any Stance."), DamageParams.build("4W + 2S", "W + D"), TargetParams.build(Range.horizontalTwoIndex), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), CostParams.build(ActionCostType.Stance, fiveStackCastCost), AnimationParams.build(EffectAnimationType.Blunt), TraitList.crushingBlow)));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build(crushingBlowName, "A slam that shakes the enemy to their core, leaving them vulnerable. Until the end of the turn their Armor Score is reduced by 50. Costs five Stacks of any Stance."), DamageParams.build("4W + 2S", "W + D"), TargetParams.build(Range.horizontalTwoIndex), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), CostParams.build(ActionCostType.Stance, fiveStackCastCost), AnimationParams.build(EffectAnimationType.Blunt), TraitList.crushingBlow)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(wisdomKeyChar);
@@ -419,7 +419,7 @@ public static class AbilityList
         // listOfNandorAbilities.Add(nandorRevive);
 
         Ability standTogether = new Ability(CombatActionSettings.build(StatSourceNameList.standTogetherKey, DescriptionParams.build(StatSourceNameList.standTogetherKey, "The caster calls for all of his allies to act as one. Allies in the area deal extra damage for the rest of Combat"), TargetParams.build(Range.boxThreeIndex, targetsOnlyAllies: true), FrequencyParams.build(oneSlotMax, eightRoundCooldown), TraitList.standTogether));
-        standTogether.setStatRequirements("l-3");
+        standTogether.setStatRequirements(levelKeyChar + "-3");
         listOfNandorAbilities.Add(standTogether);
         miscAbilityDictionary.Add(standTogether.getKey(), standTogether); // here for loading, if not here then this ability will be replaced with default fist ability on load
 
@@ -441,11 +441,11 @@ public static class AbilityList
         // listOfThatchAbilities.Add(thatchSacrifice);
 		
         PassiveAbility influentialStrength = new PassiveAbility(CombatActionSettings.build(DescriptionParams.build("Influential Strength", "This Companion's Zone of Influence scales with either their Strength or Charisma, whichever is higher.")));
-        influentialStrength.setStatRequirements("l-1");
+        influentialStrength.setStatRequirements(levelKeyChar + "-1");
         listOfThatchAbilities.Add(influentialStrength);
 
         EstablishLinkAbility chokehold = new EstablishLinkAbility(CombatActionSettings.build(chokeholdKey, DescriptionParams.build(chokeholdKey, "You grapple with the enemy, preventing both yourself and the target from acting. Whenever you take damage while stunned in this way, you only take half of that damage and the target takes the other half."), DamageParams.build("S", "D"), FrequencyParams.build(oneSlotMax, eightRoundCooldown), TraitList.chokehold), TraitList.chokeholdLinkTrait);
-        chokehold.setStatRequirements("l-3");
+        chokehold.setStatRequirements(levelKeyChar + "-3");
         listOfThatchAbilities.Add(chokehold);
         miscAbilityDictionary.Add(chokehold.getKey(), chokehold); // here for loading, if not here then this ability will be replaced with default fist ability on load
 
@@ -464,7 +464,7 @@ public static class AbilityList
         // listOfCarterAbilities.Add(new EquippedPassive(CombatActionSettings.build(NPCNameList.carter, TraitList.cleverInfluence))); 
 
         TraitBasedDamageAbility bouncingBlade = new TraitBasedDamageAbility(CombatActionSettings.build("Bouncing Blade", DescriptionParams.build("Bouncing Blade", "The caster throws their blade, striking multiple targets in a line and dealing extra damage per additional trait applied to the target.", "BouncingBlade"), DamageParams.build("6D+W+C", "4D"), TargetParams.build(Range.verticalThreeIndex), FrequencyParams.build(oneSlotMax, fiveRoundCooldown)), 0.25);
-        bouncingBlade.setStatRequirements("l-3");
+        bouncingBlade.setStatRequirements(levelKeyChar + "-3");
         listOfCarterAbilities.Add(bouncingBlade);
         miscAbilityDictionary.Add(bouncingBlade.getKey(), bouncingBlade);
 
@@ -615,20 +615,37 @@ public static class AbilityList
         return getAllAvailableAbilitiesOfStat(keyChar, lowestLevelForAbilities, highestLevel);
     }
 
-    public static List<CombatAction> getAllAvailableAbilitiesOfStat(StatType type, int lowestLevel, int highestLevel)
+    public static char getPrimaryStatCharacter(PrimaryStat stat)
+    {
+        switch(stat)
+        {
+            case PrimaryStat.Strength:
+                return strengthKeyChar;
+            case PrimaryStat.Dexterity:
+                return dexterityKeyChar;
+            case PrimaryStat.Wisdom:
+                return wisdomKeyChar;
+            case PrimaryStat.Charisma:
+                return charismaKeyChar;
+            default:
+                return levelKeyChar;
+        }
+    }
+
+    public static List<CombatAction> getAllAvailableAbilitiesOfStat(PrimaryStat type, int lowestLevel, int highestLevel)
 	{
         switch (type)
 		{
-			case StatType.Str:
+			case PrimaryStat.Strength:
 				return getAllAvailableAbilitiesOfStat(strengthKeyChar, lowestLevel, highestLevel);
-            case StatType.Dex:
+            case PrimaryStat.Dexterity:
                 return getAllAvailableAbilitiesOfStat(dexterityKeyChar, lowestLevel, highestLevel);
-            case StatType.Wis:
+            case PrimaryStat.Wisdom:
                 return getAllAvailableAbilitiesOfStat(wisdomKeyChar, lowestLevel, highestLevel);
-            case StatType.Cha:
+            case PrimaryStat.Charisma:
                 return getAllAvailableAbilitiesOfStat(charismaKeyChar, lowestLevel, highestLevel);
             default:
-				throw new IOException("Unknown StatType: " + type.ToString());
+				throw new IOException("Unknown PrimaryStat: " + type.ToString());
 		}
     }
 

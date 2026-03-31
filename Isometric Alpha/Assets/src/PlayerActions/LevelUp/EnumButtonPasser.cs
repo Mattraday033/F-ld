@@ -5,6 +5,6 @@ using UnityEngine;
 public class EnumButtonPasser : MonoBehaviour
 {
 
-    public StatType statType;
+    public PrimaryStat PrimaryStat;
 
 }

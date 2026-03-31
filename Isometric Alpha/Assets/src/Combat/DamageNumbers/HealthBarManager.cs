@@ -170,7 +170,7 @@ public class HealthBarManager : MonoBehaviour
 	
     private void cleanUpHiddenHealthBars()
     {
-        if(!gameObject.activeInHierarchy)
+        if(!gameObject.activeInHierarchy && linkedStats.isLarge())
         {
             DestroyImmediate(gameObject);
         }

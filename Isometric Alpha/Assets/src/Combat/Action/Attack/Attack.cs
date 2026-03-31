@@ -85,6 +85,22 @@ public class Attack : CombatAction, IJSONConvertable
 		mainHandWeapon = (Weapon)sourceItem;
 	}
 
+	public override Trait getAppliedTrait()
+	{
+		if (mainHandWeapon == null || mainHandWeapon.getAppliedTrait() == null)
+		{
+			return null;
+		}
+		else
+		{
+
+            Trait traitToApply = mainHandWeapon.getAppliedTrait();
+            traitToApply.traitApplier = getActorStats();
+
+			return traitToApply;	
+		}
+	}
+
 	public override int getRangeIndex()
 	{
 		return getMainHandWeapon().getRangeIndex();

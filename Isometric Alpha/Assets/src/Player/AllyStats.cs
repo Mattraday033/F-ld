@@ -136,19 +136,14 @@ public class AllyStats : Stats
         xp += earnedXP;
     }
 
-    public void removeXPFromLevelUp()
-    {
-        xp = xp % xpNeededToLevelUp;
-    }
-
     public void removeXPFromLevelUpOnce()
     {
         xp -= xpNeededToLevelUp;
     }
 
-    public int getLevelUpsAvailable()
+    public bool canLevelUp()
     {
-        return xp / xpNeededToLevelUp;
+        return xp >= xpNeededToLevelUp;
     }
 
     public int getLevel()
@@ -161,9 +156,14 @@ public class AllyStats : Stats
         this.level = newLevel;
     }
 
-    public void incrementLevel()
+    public void incrementLevel(bool displayOnly = false)
     {
         level++;
+
+        if(!displayOnly)
+        {
+            setAbilitiesAsNew(PrimaryStat.None);
+        }
     }
 
     public virtual int getLevelMaximum()
@@ -261,9 +261,9 @@ public class AllyStats : Stats
         }
     }
 
-    public bool meetsStatRequirements(PrimaryStat statType, int statLevel)
+    public bool meetsStatRequirements(PrimaryStat PrimaryStat, int statLevel)
     {
-        switch (statType)
+        switch (PrimaryStat)
         {
             case PrimaryStat.Strength:
 
@@ -333,10 +333,17 @@ public class AllyStats : Stats
         return strength + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusStrengthFormula());
     }
 
-    public void incrementStrength()
+    public void incrementStrength(bool displayOnly = false)
     {
         strength++;
+
+        if(!displayOnly)
+        {
+            setAbilitiesAsNew(PrimaryStat.Strength);
+        }
     }
+
+
 
     public override double getCritDamageMultiplier()
     {
@@ -352,28 +359,28 @@ public class AllyStats : Stats
         return (getStrength() * Strength.critDamMultPerStrength) + bonusFormulas + (DamageCalculator.baseCriticalDamage * 100) + "%";
     }
 
-    public double getPhysicalResistance()
+    public double getWoundResistance()
     {
-        double bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageDouble(this, getAllStatBoosts(), b => b.getBonusPhysicalResistanceFormula());
+        double bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageDouble(this, getAllStatBoosts(), b => b.getBonusWoundResistanceFormula());
 
         return Strength.physResistBaseDouble + (((double)getStrength()) * Strength.physResistPerStrengthDouble) + bonusFormulas;
     }
 
-    public string getPhysicalResistanceForDisplay()
+    public string getWoundResistanceForDisplay()
     {
-        int bonusFormulas = StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusPhysicalResistanceFormula());
+        int bonusFormulas = StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusWoundResistanceFormula());
 
         return Strength.physResistBase + (getStrength() * Strength.physResistPerStrength) + bonusFormulas + "%";
     }
 
-    public override bool rollAgainstPhysicalResistance()
+    public override bool rollAgainstWoundResistance()
     {
-        if(getPhysicalResistance() >= Constants.autoSuccess)
+        if(getWoundResistance() >= Constants.autoSuccess)
         {
             return true;
         }
 
-        return UnityEngine.Random.Range(0f, 1f) <= getPhysicalResistance();
+        return UnityEngine.Random.Range(0f, 1f) <= getWoundResistance();
     }
 
     #endregion
@@ -390,23 +397,14 @@ public class AllyStats : Stats
         return dexterity + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusDexterityFormula());
     }
 
-    public void incrementDexterity()
+    public void incrementDexterity(bool displayOnly = false)
     {
         dexterity++;
-    }
 
-    public override float getSurpriseDamageMultiplier()
-    {
-        float bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageFloat(this, getAllStatBoosts(), b => b.getBonusSurpriseRoundDamageFormula());
-
-        return Dexterity.surpriseDamMultBase + (((float)getDexterity()) * Dexterity.surpriseDamMultCoefficient) + bonusFormulas;
-    }
-
-    public string getSurpriseDamageMultiplierForDisplay()
-    {
-        float bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageFloat(this, getAllStatBoosts(), b => b.getBonusSurpriseRoundDamageFormula());
-
-        return (((float)getDexterity()) * Dexterity.surpriseDamMultCoefficient + bonusFormulas) * 100f + "%";
+        if(!displayOnly)
+        {
+            setAbilitiesAsNew(PrimaryStat.Dexterity);
+        }
     }
 
     public override int getExtraArmorFromDexterity()
@@ -414,25 +412,6 @@ public class AllyStats : Stats
         // int bonusFormulas = StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusArmorFormula());
 
         return getDexterity() * Dexterity.extraArmorMultiplier;
-    }
-
-    #endregion
-
-    #region Wisdom + Secondaries
-
-    public int getWisdomWithoutBoosts()
-    {
-        return wisdom;
-    }
-
-    public override int getWisdom()
-    {
-        return wisdom + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusWisdomFormula());
-    }
-
-    public void incrementWisdom()
-    {
-        wisdom++;
     }
 
     public override int getArmorPenetration()
@@ -470,6 +449,44 @@ public class AllyStats : Stats
         return getArmorPenetration() + "%";
     }
 
+    public override float getSurpriseDamageMultiplier()
+    {
+        float bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageFloat(this, getAllStatBoosts(), b => b.getBonusSurpriseRoundDamageFormula());
+
+        return Dexterity.surpriseDamMultBase + (((float)getDexterity()) * Dexterity.surpriseDamMultCoefficient) + bonusFormulas;
+    }
+
+    public string getSurpriseDamageMultiplierForDisplay()
+    {
+        float bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageFloat(this, getAllStatBoosts(), b => b.getBonusSurpriseRoundDamageFormula());
+
+        return (((float)getDexterity()) * Dexterity.surpriseDamMultCoefficient + bonusFormulas) * 100f + "%";
+    }
+
+    #endregion
+
+    #region Wisdom + Secondaries
+
+    public int getWisdomWithoutBoosts()
+    {
+        return wisdom;
+    }
+
+    public override int getWisdom()
+    {
+        return wisdom + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusWisdomFormula());
+    }
+
+    public void incrementWisdom(bool displayOnly = false)
+    {
+        wisdom++;
+        
+        if(!displayOnly)
+        {
+            setAbilitiesAsNew(PrimaryStat.Wisdom);
+        }
+    }
+
     public double getMentalResistance()
     {
         double bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageDouble(this, getAllStatBoosts(), b => b.getBonusMentalResistanceFormula());
@@ -486,12 +503,12 @@ public class AllyStats : Stats
 
     public override bool rollAgainstMentalResistance()
     {
-        if(getPhysicalResistance() >= Constants.autoSuccess)
+        if(getWoundResistance() >= Constants.autoSuccess)
         {
             return true;
         }
 
-        return UnityEngine.Random.Range(0f, 1f) <= getPhysicalResistance();
+        return UnityEngine.Random.Range(0f, 1f) <= getWoundResistance();
     }
 
 
@@ -609,9 +626,14 @@ public class AllyStats : Stats
         }
     }
 
-    public void incrementCharisma()
+    public void incrementCharisma(bool displayOnly = false)
     {
         charisma++;
+
+        if(!displayOnly)
+        {
+            setAbilitiesAsNew(PrimaryStat.Charisma);
+        }
     }
 
     public override int getBonusExuberances()
@@ -663,6 +685,50 @@ public class AllyStats : Stats
     public override string getVolleyAnimationType()
     {
         return EffectAnimationType.Pierce.ToString();
+    }
+
+    private void setAbilitiesAsNew(PrimaryStat primaryStat)
+    {
+        List<CombatAction> newCombatActions;
+
+        switch(primaryStat)
+        {
+            case PrimaryStat.Strength:
+                newCombatActions = AbilityList.getAllAvailableAbilitiesOfStat(primaryStat, strength, strength);
+                break;
+            case PrimaryStat.Dexterity:
+                newCombatActions = AbilityList.getAllAvailableAbilitiesOfStat(primaryStat, dexterity, dexterity);
+                break;
+            case PrimaryStat.Wisdom:
+                newCombatActions = AbilityList.getAllAvailableAbilitiesOfStat(primaryStat, wisdom, wisdom);
+                break;
+            case PrimaryStat.Charisma:
+                newCombatActions = AbilityList.getAllAvailableAbilitiesOfStat(primaryStat, charisma, charisma);
+                break;
+            default:
+                newCombatActions = new List<CombatAction>();
+                List<CombatAction> companionAbilities = AbilityList.getCompanionAbilities(getName());
+
+                foreach(CombatAction companionAbility in companionAbilities)
+                {
+                    if(companionAbility.getRequiredStatLevel() == getLevel())
+                    {
+                        newCombatActions.Add(companionAbility);
+                    }
+                }
+
+                break;
+        }
+
+        foreach(CombatAction action in newCombatActions)
+        {
+            Ability ability = action as Ability;
+
+            if(ability != null)
+            {
+                NewAbilityManager.setAbilityAsNew(this, ability);
+            }
+        }
     }
 
     #endregion
@@ -891,7 +957,7 @@ public class AllyStats : Stats
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusHealthBlock(getBonusHealthFromAllSources().ToString()));
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getCriticalHitDamageBlock(getExtraCritDamageForDisplay().ToString()));
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getPhysicalResistBlock(getPhysicalResistanceForDisplay().ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getWoundResistBlock(getWoundResistanceForDisplay().ToString()));
 
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDexterityBlock(getDexterity().ToString()));

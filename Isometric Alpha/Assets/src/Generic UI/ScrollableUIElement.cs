@@ -29,6 +29,11 @@ public class ScrollableUIElement : MonoBehaviour
 {
 	public const string panelNamePrefix = "Panel_";
 
+    public readonly static UnityEvent HaltAllScrolling = new UnityEvent();
+    public readonly static UnityEvent ContinueAllScrolling = new UnityEvent();
+
+    public readonly static UnityEvent PanelsPopulated = new UnityEvent();
+
 	public GameObject grid;
 	public GameObject scrollContainer;
 	public GameObject scrollableArea;
@@ -69,7 +74,39 @@ public class ScrollableUIElement : MonoBehaviour
 		{
 			scrollableComponent.verticalScrollbar.size = 0.1f;
 		}
+
+        HaltAllScrolling.AddListener(haltScrolling);
+        ContinueAllScrolling.AddListener(continueScrolling);
 	}
+
+    private void OnDestroy()
+    {
+        HaltAllScrolling.RemoveListener(haltScrolling);
+        ContinueAllScrolling.RemoveListener(continueScrolling);
+    }
+
+    private void haltScrolling()
+    {
+        if(scrollableComponent == null)
+        {
+            return;
+        }
+
+        scrollableComponent.enabled = false;
+    }
+
+    private void continueScrolling()
+    {
+        if(scrollableComponent != null)
+        {
+            scrollableComponent.enabled = true;
+
+            if(scrollableComponent.verticalScrollbar != null)
+            {
+			    scrollableComponent.verticalScrollbar.size = 0.1f;
+            }
+        }
+    }
 
 	public void setRowType(RowType newRowType)
 	{
@@ -168,7 +205,14 @@ public class ScrollableUIElement : MonoBehaviour
         {
             updateScrollComp = StartCoroutine(updateScrollComponent(scrollableComponent.verticalScrollbar));
         }
+
+        PanelsPopulated.Invoke();
 	}
+
+    public bool populated()
+    {
+        return listOfRows.Count > 0;
+    }
 
     private Coroutine updateScrollComp;
 
@@ -381,12 +425,7 @@ public class ScrollableUIElement : MonoBehaviour
 		return (float)(rowNumber / (float)listOfRows.Count);
 	}
 
-	public bool disableGridRowAndClick(string name)
-	{
-		return disableGridRowAndClick(name, true);
-	}
-
-	public bool disableGridRowAndClick(string name, bool enableRows)
+	public bool disableGridRowAndClick(string name, bool enableRows = true)
 	{
 		if (enableRows)
 		{
@@ -405,6 +444,25 @@ public class ScrollableUIElement : MonoBehaviour
         }
 
 		return false;
+	}
+
+	public void disableGridRow(string name, bool enableRows = true)
+	{
+		if (enableRows)
+		{
+			enableAllGridRows();
+		}
+
+        foreach (GridRow row in listOfRows)
+        {
+            if (row.descriptionPanel.getObjectBeingDescribed() != null &&
+                String.Equals(row.descriptionPanel.getObjectBeingDescribed().getName(), name, StringComparison.OrdinalIgnoreCase))
+            {
+                row.nameButton.interactable = false;
+
+                return;
+            }
+        }
 	}
 
 	public void disableGridRowAndClick(int rowIndex)

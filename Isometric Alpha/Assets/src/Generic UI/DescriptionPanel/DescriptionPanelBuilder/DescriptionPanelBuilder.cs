@@ -291,9 +291,9 @@ public struct DescriptionPanelBuildingBlock
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.criticalHitDamageIconName, symbolChar: Strength.symbolChar[0]);
     }
 
-    public static DescriptionPanelBuildingBlock getPhysicalResistBlock(string text)
+    public static DescriptionPanelBuildingBlock getWoundResistBlock(string text)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.physicalResistIconName, symbolChar: Strength.symbolChar[0]);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.woundResistIconName, symbolChar: Strength.symbolChar[0]);
     }
 
     #endregion
@@ -810,7 +810,7 @@ public static class IconList
     public const string intimidateIconName = "Intimidate";
     public const string bonusHealthIconName = "Bonus Health";
     public const string criticalHitDamageIconName = "Crit Damage Multiplier";
-    public const string physicalResistIconName = "Physical Resist";
+    public const string woundResistIconName = "Wound Resist";
     public const string regenIconName = "Regeneration";
     public const string cunningIconName = "Cunning";
     public const string bonusArmorIconName = "Bonus Armor";

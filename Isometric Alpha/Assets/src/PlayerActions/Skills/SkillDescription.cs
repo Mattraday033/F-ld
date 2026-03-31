@@ -9,17 +9,17 @@ public class SkillDescription : IDescribable, IDescribableInBlocks
     private string useDescription;
     private string iconName;
 
-    private StatType requiredStatType;
+    private PrimaryStat requiredPrimaryStat;
     private int requiredStatLevel;
 
-    public SkillDescription(string name, string useDescription, string iconName, StatType requiredStatType, int requiredStatLevel)
+    public SkillDescription(string name, string useDescription, string iconName, PrimaryStat requiredPrimaryStat, int requiredStatLevel)
     {
         this.name = name;
         this.useDescription = useDescription;
         this.iconName = iconName;
 
 
-        this.requiredStatType = requiredStatType;
+        this.requiredPrimaryStat = requiredPrimaryStat;
         this.requiredStatLevel = requiredStatLevel;
     }
 
@@ -41,22 +41,22 @@ public class SkillDescription : IDescribable, IDescribableInBlocks
     }
     public string getRange()
     {
-        switch (requiredStatType)
+        switch (requiredPrimaryStat)
         {
-            case StatType.Str:
+            case PrimaryStat.Strength:
                 return 3 + " Tiles";
 
-            case StatType.Dex:
+            case PrimaryStat.Dexterity:
                 return ((CunningManager.cunningRange - 1) / 2) + " Tiles";
 
-            case StatType.Wis:
+            case PrimaryStat.Wisdom:
                 return ((ObservationManager.observeRange - 1) / 2) + " Tiles";
                 
-            case StatType.Cha:
+            case PrimaryStat.Charisma:
                 return "1 Tile";
 
             default:
-                throw new IOException("Unknown StatType: " + requiredStatType.ToString());
+                throw new IOException("Unknown PrimaryStat: " + requiredPrimaryStat.ToString());
         }
     }
     public int getRequiredStatLevel()

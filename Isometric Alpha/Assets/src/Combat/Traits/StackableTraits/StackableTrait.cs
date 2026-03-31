@@ -187,9 +187,9 @@ public class StackableTrait: Trait
     #region Secondary Stats
 
     //Strength Stats
-    public override string getBonusPhysicalResistanceFormula()
+    public override string getBonusWoundResistanceFormula()
     {
-        return DamageCalculator.multiplyFormula(base.getBonusPhysicalResistanceFormula(), getNumberOfStacks());
+        return DamageCalculator.multiplyFormula(base.getBonusWoundResistanceFormula(), getNumberOfStacks());
     }
 
     public override string getBonusCriticalDamageMultiplierFormula()

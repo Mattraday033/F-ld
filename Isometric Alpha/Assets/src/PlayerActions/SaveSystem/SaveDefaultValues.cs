@@ -45,6 +45,7 @@ public static class SaveDefaultValues
     public readonly static FlagWrapper[] defaultEmptyFlagWrapperArray = new FlagWrapper[0];
     public readonly static QuestWrapper[] defaultEmptyQuestWrapperArray = new QuestWrapper[0];
     public readonly static string[] defaultEmptyMonsterPackList = new string[0];
+    public readonly static NewAbilityWrapper[] defaultEmptyNewAbilityWrapperArray = new NewAbilityWrapper[0];
 
     public readonly static string[] defaultEmptyEquimentArray = new string[6] {
                                                                         null,

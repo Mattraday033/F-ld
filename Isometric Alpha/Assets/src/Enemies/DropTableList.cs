@@ -6,28 +6,18 @@ using System;
 
 public static class DropTableList
 {
-	public static List<DropTable> allDropTables;
+	public const string slaveMineDTKey = "slaveMineDT";
+	public const string lovashiGuardsDTKey = "lovashiGuardsDT";
 
-	public const string slaveMineDT1Name = "slaveMineDT1";
-
-	public static DropTable slaveMineDT1;
-	
 	public static DropTable getDropTable(string name)
 	{
-		if(name == null || name is null)
-		{
-			throw new IOException("DropTable name was null.");
-		}
-		
-		foreach(DropTable dropTable in allDropTables)
-		{
-			if(String.Equals(name, dropTable.name, StringComparison.OrdinalIgnoreCase))
-			{
-				return dropTable;
-			}
-		}
-
-		return (DropTable) allDropTables[0];
+        switch(name)
+        {
+            case lovashiGuardsDTKey:
+                return ItemList.lovashiGuardsDT;
+            default:
+                return ItemList.slaveMineDT;
+        }
 
     }
 

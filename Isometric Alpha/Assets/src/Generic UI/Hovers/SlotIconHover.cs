@@ -124,7 +124,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        if(ignoreHover || eventData == null || eventData.used)
+        if(ignoreHover || (eventData != null && eventData.used))
         {
             return;
         }
@@ -138,7 +138,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        if(ignoreHover || eventData == null || eventData.used)
+        if(ignoreHover || (eventData != null && eventData.used))
         {
             return;
         }
@@ -333,7 +333,6 @@ public static class HoverMessageList
     private const string armorScoreKey = "Armor Score";
     private const string armorScoreMessage = "You gain Armor Score from the Items you have equipped, your Dexterity Stat, and some Traits/Abilities. Armor reduces incoming damage by a percentage. Armor cannot reduce incoming damage below 1.";
 
-
     private const string actionTypeIconMessage = "This Action's Type. A complete list of Action Types can be found in the Journal's Glossary.";
     private const string traitTypeIconMessage = "This Trait's Type. A complete list of Trait Types can be found in the Journal's Glossary.";
     public const string damageKey = "Damage";
@@ -371,15 +370,15 @@ public static class HoverMessageList
     private const string mandatoryTargetMessage = "This creature must be targeted by all Actions that affect it's side of the field. This creature's allies ignore this restriction. If more than one Mandatory Target share the same side of the field, only one Mandatory Target must be targeted for an Action to be allowed.";
     private const string stunnedTargetMessage = "This creature cannot take Actions while this Trait is applied.";
 
-    private const string bonusHealthMessage = "Bonus Health. Extra Health added to your Total Health. Determined by your Strength.";
-    private const string criticalHitDamageMessage = "Critical Damage Multiplier. How much extra damage is dealt whenever a critical hit is scored. Determined by a character's Strength.";
-    private const string physicalResistMessage = "Physical Resistance. Your chance to ignore a Wound Trait applied to you in combat. Determined by a character's Strength.";
+    private const string bonusHealthMessage = "Extra Health added to your Total Health. Determined by your Strength.";
+    private const string criticalHitDamageMessage = "How much extra damage is dealt whenever a critical hit is scored. Determined by a character's Strength.";
+    private const string woundResistMessage = "Your chance to ignore a Wound Trait applied to you in Combat. Determined by a character's Strength.";
 
     private const string extraArmorMessage = "Extra Armor, in addition to that gained from your equipment. Determined by a character's Dexterity.";
-    private const string surpriseRoundDamageMultiplierMessage = "Surprise Damage Multiplier. This is the percentage of extra damage dealt when in a surprise round. Determined by a character's Dexterity.";
-    private const string armorPenetrationMessage = "Armor Penetration. The percentage of an enemy's armor your Actions will ignore. Determined by a character's Dexterity.";
+    private const string surpriseRoundDamageMultiplierMessage = "This is the percentage of extra damage dealt when in a surprise round. Determined by a character's Dexterity.";
+    private const string armorPenetrationMessage = "The percentage of an enemy's armor your Actions will ignore. Determined by a character's Dexterity.";
 
-    private const string mentalResistMessage = "Mental Resistance. Your chance to ignore a Mental Trait applied to you in combat. Determined by a character's Wisdom.";
+    private const string mentalResistMessage = "Your chance to ignore a Mental Trait applied to you in combat. Determined by a character's Wisdom.";
     private const string passiveSlotsMessage = "Bonus Slots are Action Slots that can only be occupied by Equipped Passives, Stances, and Weapons, saving you space on your Action Wheel for Actions you wish to activate. Actions equippable to Bonus Slots can still be equipped to the Action Wheel if desired. Determined by a character's Wisdom.";
     private const string bonusWeaponSlotsMessage = "You are able to carry more than the usual amount of weapons on your Action Wheel. Determined by a character's Wisdom.";
 
@@ -401,7 +400,7 @@ public static class HoverMessageList
     private const string footingKey = "Footing";
     private const string footingMessage = "Some enemies will chase you when you get too close. These enemies only move half as fast as you. When the Left Foot is visibile, enemies chasing you will move the next time you take a step.";
 
-    private const string strengthMessage = "This Primary Stat bolsters a character's Maximum Health, Critical Hit Damage, and Physical Resistance. Strength also governs the Intimidate skill.";
+    private const string strengthMessage = "This Primary Stat bolsters a character's Maximum Health, Critical Hit Damage, and Wound Resistance. Strength also governs the Intimidate skill.";
     private const string dexterityMessage = "This Primary Stat bolsters a character's Armor, Surprise Round Damage Modifier, and Armor Penetration. Dexterity also governs the Cunning skill.";
     private const string wisdomMessage = "This Primary Stat bolsters a character's Mental Resistance. Wisdom also provides bonus Passive Slots, increases the number of Weapons you can have equipped, and governs the Observation skill.";
     private const string charismaMessage = "This Primary Stat increases your Synergy, gives access to Exuberances, and boosts a character's Zone of Influence. Charisma also governs the Leadership skill.";
@@ -616,8 +615,8 @@ public static class HoverMessageList
                 return bonusHealthMessage;
             case IconList.criticalHitDamageIconName:
                 return criticalHitDamageMessage;
-            case IconList.physicalResistIconName:
-                return physicalResistMessage;
+            case IconList.woundResistIconName:
+                return woundResistMessage;
             case IconList.regenIconName:
                 return regenMessage;
             case IconList.cunningIconName:

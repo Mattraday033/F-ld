@@ -123,7 +123,7 @@ public static class OOCSpawnDetailsList
                                 new StartSpawningAllTrueFlagList(new string[] { TutorialSequenceList.cunningTutorialSeenFlag }, useTutorialFlags: true),
                                                                           Constants.indexOne));
 
-        list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), Facing.SouthEast, Facing.NorthEast, CunningObjectSpriteCategory.Crank,
+        list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), Facing.SouthEast, Facing.NorthWest, CunningObjectSpriteCategory.Crank,
                  new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(6, -2), PrefabNames.shackWallHalf),
                  TutorialSequenceList.tutorialCunningObjectTargetHash));
 
@@ -313,7 +313,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.ervin, new Vector3Int(5, 3), ignoresSecretDoors: false, facing: Facing.NorthEast));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.crowd, new Vector3Int(5, 2), ignoresSecretDoors: false, facing: Facing.NorthEast)); //Crowd
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+10, new Vector3Int(5, 1), ignoresSecretDoors: false, facing: Facing.NorthEast));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.garcha, new Vector3Int(5, 0), ignoresSecretDoors: false, facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.uros+1, new Vector3Int(5, 0), ignoresSecretDoors: false, facing: Facing.NorthEast));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.kastor+1, new Vector3Int(5, -1), ignoresSecretDoors: false, facing: Facing.NorthEast));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(4, 3), ignoresSecretDoors: false, facing: Facing.NorthEast));
@@ -331,7 +331,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+11, new Vector3Int(10, 10), ignoresSecretDoors: false, facing: Facing.SouthEast));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.uros+1, new Vector3Int(10, 9), ignoresSecretDoors: false, facing: Facing.SouthEast));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+10, new Vector3Int(10, 8), ignoresSecretDoors: false, facing: Facing.SouthEast));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.garcha, new Vector3Int(10, 7), ignoresSecretDoors: false, facing: Facing.SouthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(10, 7), ignoresSecretDoors: false, facing: Facing.SouthEast));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave+12, new Vector3Int(9, 10), ignoresSecretDoors: false, facing: Facing.SouthEast));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.ervin, new Vector3Int(9, 9), ignoresSecretDoors: false, facing: Facing.SouthEast));
@@ -353,12 +353,12 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.clay+1, new Vector3Int(-6, -1), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthWest));
         list.Add(new ShopkeeperSpawnDetails(NPCNameList.uros, new Vector3Int(-6, 2), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthEast));
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(11, 1), LocationNameList.campNorthEast, facing: Facing.SouthWest, animationType: CharacterAnimationType.Death_Back, offset: Constants.onTableHeightOffset*-2f, sleepingDialogueIntro: true));
-        list.Add(new ObstacleSpawnDetails(NPCNameList.bed, new Vector3Int(11, 1), PrefabNames.slaveBed, offset: Constants.onTableHeightOffset*-3f, flipX: true));  
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.woundedSlave, new Vector3Int(11, 3), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthWest));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.woundedSlave+1, new Vector3Int(11, 6), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthEast));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.woundedSlave+2, new Vector3Int(11, 8), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.NorthEast, animationType: CharacterAnimationType.Death_Back, offset: Constants.onTableHeightOffset*-2f, sleepingDialogueIntro: true));
-        list.Add(new ObstacleSpawnDetails(NPCNameList.bed, new Vector3Int(11, 8), PrefabNames.slaveBed, offset: Constants.onTableHeightOffset*-3f, flipX: true));  
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(11, 1), LocationNameList.campNorthEast, facing: Facing.SouthWest, ignoresSecretDoors: false, animationType: CharacterAnimationType.Death_Back, offset: Constants.onTableHeightOffset*-2f, sleepingDialogueIntro: true));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.bed, new Vector3Int(11, 1), PrefabNames.slaveBed, offset: Constants.onTableHeightOffset*-3f, flipX: true, ignoresSecretDoors: false));  
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.woundedSlave, new Vector3Int(11, 3), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.woundedSlave+1, new Vector3Int(11, 6), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.woundedSlave+2, new Vector3Int(11, 8), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.NorthEast, animationType: CharacterAnimationType.Death_Back, offset: Constants.onTableHeightOffset*-2.5f, sleepingDialogueIntro: true));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.bed, new Vector3Int(11, 8), PrefabNames.slaveBed, offset: Constants.onTableHeightOffset*-3f, flipX: true, ignoresSecretDoors: false));  
 
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor, new Vector3Int(11, 2), LocationNameList.campNorthEast, facing: Facing.NorthWest, ignoresSecretDoors: false));
@@ -1172,7 +1172,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.imre+2, new Vector3Int(0, 0), facing: Facing.SouthEast)); //disloyal imre
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.pan, new Vector3Int(0, 2), facing: Facing.SouthWest, animationType: CharacterAnimationType.Death_Back));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.pan, new Vector3Int(0, 2), ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, facing: Facing.SouthWest, animationType: CharacterAnimationType.Death_Back));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard, new Vector3Int(0, 3), facing: Facing.SouthWest, animationName: MonsterNameList.linebreaker));
  
@@ -1291,6 +1291,18 @@ public static class OOCSpawnDetailsList
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(3, 0), Facing.SouthWest));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2c, list);
+
+        #endregion
+
+        #region Manse-1F-StairsToPit
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(2, 0), Facing.NorthWest));
+        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(3, -3), Facing.SouthWest));
+        list.Add(new ChestSpawnDetails(Constants.indexTwo, new Vector3Int(-3, -1), Facing.NorthWest));
+
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.stairsToPit, list);
 
         #endregion
 
@@ -1499,24 +1511,24 @@ public static class OOCSpawnDetailsList
 
         #region Pit
 
-        #region Pit-1a
-        list = new List<OOCSpawnDetails>();
+        #region Pit-1a Old
+        // list = new List<OOCSpawnDetails>();
 
-        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(2, 0), Facing.NorthWest));
-        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(3, -3), Facing.SouthWest));
-        list.Add(new ChestSpawnDetails(Constants.indexTwo, new Vector3Int(-3, -1), Facing.NorthWest));
+        // list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(2, 0), Facing.NorthWest));
+        // list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(3, -3), Facing.SouthWest));
+        // list.Add(new ChestSpawnDetails(Constants.indexTwo, new Vector3Int(-3, -1), Facing.NorthWest));
 
-        oocSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section1a, list);
+        // oocSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section1a, list);
 
         #endregion
 
-        #region Pit-1b
+        #region Pit-1a
         list = new List<OOCSpawnDetails>();
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(3, 2), Facing.SouthWest));
         list.Add(new BookSpawnDetails(NPCNameList.orders, new Vector3Int(3, 1), PrefabNames.note, ItemList.pitClosureNoteIndex, offset: Constants.onGroundHeightOffset));
 
-        oocSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section1b, list);
+        oocSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section1a, list);
 
         #endregion
 

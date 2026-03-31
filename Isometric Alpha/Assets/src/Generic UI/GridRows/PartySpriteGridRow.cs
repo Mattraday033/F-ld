@@ -37,6 +37,16 @@ public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSour
         StartCoroutine(DragAndDropManager.waitForMouseRelease(this, descriptionPanel.getObjectBeingDescribed()));
     }
 
+    public override void OnPointerEnter(PointerEventData eventData)
+    {
+        base.OnPointerEnter(eventData);
+
+        if(descriptionPanel != null)
+        {
+            NewPartyMemberManager.removePartyMember(descriptionPanel.getObjectBeingDescribed() as PartyMember);
+        }
+    }
+
     public string getDragAndDropPrefabName()
     {
         return PrefabNames.partyMemberSpriteDragAndDrop;

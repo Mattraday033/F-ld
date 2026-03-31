@@ -26,13 +26,12 @@ public class CombatInputManager : MonoBehaviour
         }
 
 		KeyPressManager.updateKeyBools();
+        PlayerInput.showFormulaToggleCheck();
 
 		if (KeyPressManager.handlingPrimaryKeyPress || CombatStateManager.whoseTurn != WhoseTurn.Player)
 		{
 			return;
 		}
-
-        PlayerInput.showFormulaToggleCheck();
 
         if (Input.GetKey(KeyBindingList.showHideKeyBindingsListKey.getCurrentKeyCode()) && 
             !KeyPressManager.handlingPrimaryKeyPress)

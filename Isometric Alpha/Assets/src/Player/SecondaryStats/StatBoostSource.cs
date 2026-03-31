@@ -136,6 +136,8 @@ public abstract class StatBoostSource : INameSource
                 return "10";
             case StatSourceNameList.protectedKey:
                 return "15";
+            case ItemList.wardensShieldKey:
+                return "S+1";
             default:
                 return Constants.zeroRating;
         }
@@ -146,7 +148,7 @@ public abstract class StatBoostSource : INameSource
         switch (getName())
         {
             case StatSourceNameList.roastedKey:
-                return "1";
+                return "2";
             case StatSourceNameList.acidVomitKey:
                 return "4";
             case StatSourceNameList.bristledKey:
@@ -205,7 +207,7 @@ public abstract class StatBoostSource : INameSource
     #region Secondary Stats
 
     //Strength Stats
-    public virtual string getBonusPhysicalResistanceFormula()
+    public virtual string getBonusWoundResistanceFormula()
     {
         switch (getName())
         {
@@ -547,14 +549,14 @@ public abstract class StatBoostSource : INameSource
             blocks.Add(DescriptionPanelBuildingBlock.getCritBlock(DamageCalculator.calculateFormula(boostSource.getCritFormula(), statsSource).ToString(), boostSource.getCritFormula()));
         }
         
-        if (!boostSource.getArmorFormula().Equals(Constants.zeroRating))
-        {
-            blocks.Add(DescriptionPanelBuildingBlock.getArmorBlock((DamageCalculator.calculateFormula(boostSource.getArmorFormula(), statsSource)).ToString() + "%", boostSource.getArmorFormula()));
-        }
-
         if (!boostSource.getInvulnerableFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getInvulnerableBlock(DamageCalculator.calculateFormula(boostSource.getInvulnerableFormula(), statsSource).ToString(), boostSource.getInvulnerableFormula()));
+        }
+
+        if (!boostSource.getArmorFormula().Equals(Constants.zeroRating))
+        {
+            blocks.Add(DescriptionPanelBuildingBlock.getArmorBlock((DamageCalculator.calculateFormula(boostSource.getArmorFormula(), statsSource)).ToString() + "%", boostSource.getArmorFormula()));
         }
 
         if (!boostSource.getArmorShredFormula().Equals(Constants.zeroRating))
@@ -606,9 +608,9 @@ public abstract class StatBoostSource : INameSource
             blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getCriticalHitDamageBlock(DamageCalculator.calculateFormula(boostSource.getBonusCriticalDamageMultiplierFormula(), statsSource).ToString() + "%"), boostSource.getBonusCriticalDamageMultiplierFormula()));
         }
 
-        if (!boostSource.getBonusPhysicalResistanceFormula().Equals(Constants.zeroRating))
+        if (!boostSource.getBonusWoundResistanceFormula().Equals(Constants.zeroRating))
         {
-            blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getPhysicalResistBlock(DamageCalculator.calculateFormula(boostSource.getBonusPhysicalResistanceFormula(), statsSource).ToString() + "%"), boostSource.getBonusPhysicalResistanceFormula()));
+            blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getWoundResistBlock(DamageCalculator.calculateFormula(boostSource.getBonusWoundResistanceFormula(), statsSource).ToString() + "%"), boostSource.getBonusWoundResistanceFormula()));
         }
 
         //Dexterity Stats

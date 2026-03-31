@@ -73,6 +73,7 @@ public class DescriptionPanel : MonoBehaviour
     public TextMeshProUGUI slotsUsedText;
 	public TextMeshProUGUI weaponNameText;
 	public TextMeshProUGUI rangeText;
+	public TextMeshProUGUI invulnerabilityText;
 	public TextMeshProUGUI armorRatingText;
 	public TextMeshProUGUI damageText;
 	public TextMeshProUGUI offHandDamageText;

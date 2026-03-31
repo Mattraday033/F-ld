@@ -448,7 +448,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return 1;
     }
 
-    public virtual bool rollAgainstPhysicalResistance()
+    public virtual bool rollAgainstWoundResistance()
     {
         return failedToResist;
     }
@@ -827,6 +827,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return hasTrait(TraitList.summoned);
     }
 
+    public virtual bool isLarge()
+    {
+        return hasTrait(TraitList.large);
+    }
+
     public void addTrait(Trait newTrait)
     {
         if (newTrait == null || isDead())
@@ -1090,6 +1095,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         {
             return stats.getName().Equals(getName());
         }
+    }
+
+    public override int GetHashCode()
+    {
+        return getName().GetHashCode();
     }
 
     public virtual bool removableFromFormation()

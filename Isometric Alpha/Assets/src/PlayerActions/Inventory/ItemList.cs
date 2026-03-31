@@ -41,6 +41,11 @@ public static class ItemList
 {
     public static List<List<Item>> allItems;
 
+    #region Drop Tables
+	public static DropTable slaveMineDT;
+	public static DropTable lovashiGuardsDT;
+    #endregion
+
 	public const int onlyAcceptableEquippedItemQuantity = 1;
 	public const string dominantFistKey = "Dominant Fist";
 	public const string fistKey = "Fist";
@@ -94,6 +99,7 @@ public static class ItemList
 	public const int plankIndex = 18;
 	public const int sharpRockIndex = 19;
 	public const int thinBladeIndex = 20;
+	public const int scaldIndex = 21;
 
     public const int slaveRagsIndex = 0;
 	public const int clothGlovesIndex = 1;
@@ -248,28 +254,28 @@ public static class ItemList
 		//Weapon(string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, int slotID)
 		//Weapon(string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, int slotID, bool isTwoHanded)
 
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, cudgelIndex), "Cudgel", "A wooden club made from a fallen tree branch.", "2S + 5", "S+D", ItemSpriteList.cudgelSprite, Range.verticalOneIndex, 3, isOneHanded, EffectAnimationType.Blunt));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, shivIndex), "Shiv", "A weapon made from a bronze nail tied to a small piece of wood.", "2D + 7", "3D", ItemSpriteList.shivSprite, Range.singleTargetIndex, 3, isOneHanded, EffectAnimationType.Pierce));
-		weapons.Add(new Fist(new ItemListID(weaponsListIndex, mainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "S+D+W", "D+W", "FistIcon", Range.singleTargetIndex));
+		weapons.Add(new Weapon(new WeaponListID(cudgelIndex), "Cudgel", "A wooden club made from a fallen tree branch.", "2S + 5", "S+D", ItemSpriteList.cudgelSprite, Range.verticalOneIndex, 3, isOneHanded, EffectAnimationType.Blunt));
+		weapons.Add(new Weapon(new WeaponListID(shivIndex), "Shiv", "A weapon made from a bronze nail tied to a small piece of wood.", "2D + 7", "3D", ItemSpriteList.shivSprite, Range.singleTargetIndex, 3, isOneHanded, EffectAnimationType.Pierce));
+		weapons.Add(new Fist(new WeaponListID(mainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "S+D+W", "D+W", "FistIcon", Range.singleTargetIndex));
         weapons.Add(null);
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, malletIndex), "Mallet", "A large hammer used to beat pitons into rock walls.", "3S + 6", "D", ItemSpriteList.malletSprite, Range.horizontalOneIndex, 15, isOneHanded, EffectAnimationType.Blunt));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, lightPickIndex), "Light Pick", "A bronze pick meant to be used in one hand.", "3D + 8", "3D", ItemSpriteList.oneHandedPickSprite, Range.horizontalOneIndex, 15, isOneHanded, EffectAnimationType.Pierce));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, heavyPickIndex), "Heavy Pick", "A large bronze pick meant to be used in two hands.", "4S + 7", "D", ItemSpriteList.twoHandedPickSprite, Range.hookOneIndex, 15, isTwoHanded, EffectAnimationType.Pierce));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, bronzeBarIndex), "Bronze Bar", "A long thin bronze ingot. A bit oxidized, but hefty.", "3S + 8", "D + 2", ItemSpriteList.bronzeBarSprite, Range.horizontalThreeIndex, 5, isTwoHanded, EffectAnimationType.Blunt));
+		weapons.Add(new Weapon(new WeaponListID(malletIndex), "Mallet", "A large hammer used to beat pitons into rock walls.", "3S + 6", "D", ItemSpriteList.malletSprite, Range.horizontalOneIndex, 15, isOneHanded, EffectAnimationType.Blunt));
+		weapons.Add(new Weapon(new WeaponListID(lightPickIndex), "Light Pick", "A bronze pick meant to be used in one hand.", "3D + 8", "3D", ItemSpriteList.oneHandedPickSprite, Range.horizontalOneIndex, 15, isOneHanded, EffectAnimationType.Pierce));
+		weapons.Add(new Weapon(new WeaponListID(heavyPickIndex), "Heavy Pick", "A large bronze pick meant to be used in two hands.", "4S + 7", "D", ItemSpriteList.twoHandedPickSprite, Range.hookOneIndex, 15, isTwoHanded, EffectAnimationType.Pierce));
+		weapons.Add(new Weapon(new WeaponListID(bronzeBarIndex), "Bronze Bar", "A long thin bronze ingot. A bit oxidized, but hefty.", "3S + 8", "D + 2", ItemSpriteList.bronzeBarSprite, Range.horizontalThreeIndex, 5, isTwoHanded, EffectAnimationType.Blunt));
 		weapons.Add(null);
-		weapons.Add(new Fist(new ItemListID(weaponsListIndex, improvedMainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "2W+S+D+4", "W+D+2", "ImprovedFistIcon", Range.verticalOneIndex));
-		weapons.Add(new Fist(new ItemListID(weaponsListIndex, greaterMainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "3W+S+D+8", "W+D+4", "GreaterFistIcon", Range.boxOneIndex));
-		weapons.Add(new Fist(new ItemListID(weaponsListIndex, ruinousMainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "4W+S+D+16", "W+D+8", "RuinousFistIcon", Range.singleTargetIndex)); //When implementing 6 range selectors, this gets Sextuple Box/Horizontal
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, bronzeGreatspearIndex), "Bronze Greatspear", "A long spear with a bronze tip, made to be wielded in two hands.", "6S+12", "S+D", ItemSpriteList.bronzeSpearSprite, Range.verticalThreeIndex, 50, isTwoHanded, EffectAnimationType.Pierce));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, wornBowIndex), "Worn Bow", "This bow is a little weathered, but can still answer the call of it's wielder", "7D+16", "3D", ItemSpriteList.wornBowSprite, Range.verticalOneIndex, 55, isTwoHanded, EffectAnimationType.Pierce));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, fightingCapeIndex), "Fighting Cape", "A cape wrapped around the mainhand, used to both deflect small blows and disorient the opponent. Often paired with a dagger in the offhand.", "3C+4", "C", ItemSpriteList.capeSprite, Range.singleTargetIndex, 35, isOneHanded, EffectAnimationType.Slash));
-		weapons.Add(new Staff (new ItemListID(weaponsListIndex, staffIndex), "Staff", "A weathered length of oak-spar. It would serve as well as a walking aid or a bludgeon. Has high Base Damage.", "10", "D+W", ItemSpriteList.staffSprite, Range.horizontalOneIndex, 10, isTwoHanded));
+		weapons.Add(new Fist(new WeaponListID(improvedMainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "2W+S+D+4", "W+D+2", "ImprovedFistIcon", Range.verticalOneIndex));
+		weapons.Add(new Fist(new WeaponListID(greaterMainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "3W+S+D+8", "W+D+4", "GreaterFistIcon", Range.boxOneIndex));
+		weapons.Add(new Fist(new WeaponListID(ruinousMainHandFistIndex), dominantFistKey, "Good old fashioned meat bludgeons.", "4W+S+D+16", "W+D+8", "RuinousFistIcon", Range.singleTargetIndex)); //When implementing 6 range selectors, this gets Sextuple Box/Horizontal
+		weapons.Add(new Weapon(new WeaponListID(bronzeGreatspearIndex), "Bronze Greatspear", "A long spear with a bronze tip, made to be wielded in two hands.", "6S+12", "S+D", ItemSpriteList.bronzeSpearSprite, Range.verticalThreeIndex, 50, isTwoHanded, EffectAnimationType.Pierce));
+		weapons.Add(new Weapon(new WeaponListID(wornBowIndex), "Worn Bow", "This bow is a little weathered, but can still answer the call of it's wielder", "7D+16", "3D", ItemSpriteList.wornBowSprite, Range.verticalOneIndex, 55, isTwoHanded, EffectAnimationType.Pierce));
+		weapons.Add(new Weapon(new WeaponListID(fightingCapeIndex), "Fighting Cape", "A cape wrapped around the mainhand, used to both deflect small blows and disorient the opponent. Often paired with a dagger in the offhand.", "3C+4", "C", ItemSpriteList.capeSprite, Range.singleTargetIndex, 35, isOneHanded, EffectAnimationType.Slash));
+		weapons.Add(new Staff (new WeaponListID(staffIndex), "Staff", "A weathered length of oak-spar. It would serve as well as a walking aid or a bludgeon. Has high Base Damage.", "10", "D+W", ItemSpriteList.staffSprite, Range.horizontalOneIndex, 10, isTwoHanded));
 		weapons.Add(null);
 		weapons.Add(null);
-		weapons.Add(new Staff (new ItemListID(weaponsListIndex, plankIndex), "Plank", "A long piece of wood, pulled from a shack wall. Poorly balanced, but it'll do in a pinch.", "2W + 2", "W+D", ItemSpriteList.plankSprite, Range.singleTargetIndex, 3, isOneHanded));
-		weapons.Add(new Weapon(new ItemListID(weaponsListIndex, sharpRockIndex), "Sharp Rock", "A stone, chipped to have a meager edge. ", "2C + 3", "C+D", ItemSpriteList.sharpRockSprite, Range.singleTargetIndex, 1, isOneHanded, EffectAnimationType.Pierce));
-        weapons.Add(new StanceWeapon(new ItemListID(weaponsListIndex, thinBladeIndex), "Bronze Thin-Blade", "A long, slender, double-edged blade with no crossguard. Favored by swordsmen for its long reach, they are either wielded solo or with a matching dagger.", "2W+2D+6", "D+W+1", ItemSpriteList.thinbladeSprite, Range.verticalOneIndex, worth: 55, isOneHanded, EffectAnimationType.Slash));
-		
+		weapons.Add(new Staff (new WeaponListID(plankIndex), "Plank", "A long piece of wood, pulled from a shack wall. Poorly balanced, but it'll do in a pinch.", "2W + 2", "W+D", ItemSpriteList.plankSprite, Range.singleTargetIndex, 3, isOneHanded));
+		weapons.Add(new Weapon(new WeaponListID(sharpRockIndex), "Sharp Rock", "A stone, chipped to have a meager edge. ", "2C + 3", "C+D", ItemSpriteList.sharpRockSprite, Range.singleTargetIndex, 1, isOneHanded, EffectAnimationType.Pierce));
+        weapons.Add(new StanceWeapon(new WeaponListID(thinBladeIndex), "Bronze Thin-Blade", "A long, slender, double-edged blade with no crossguard. Favored by swordsmen for its long reach, they are either wielded solo or with a matching dagger.", "2W+2D+6", "D+W+1", ItemSpriteList.thinbladeSprite, Range.verticalOneIndex, worth: 55, isOneHanded, EffectAnimationType.Slash));
+		weapons.Add(new Weapon(new WeaponListID(scaldIndex), "Scald", "Kende's trusty frying pan. Those struck with it come away burned.", "2S+2D+2C+9", "S+D+C", ItemSpriteList.fryingPanSprite, Range.horizontalOneIndex, worth: 75, isOneHanded, EffectAnimationType.Blunt, traitToApply: TraitList.roasted));
 
 		//Armor(string key, string loreDescription, int worth, int armorRating, int slotID)
 
@@ -277,7 +283,7 @@ public static class ItemList
 		armor.Add(new TierZeroHands(new ItemListID(armorListIndex, clothGlovesIndex), clothGlovesKey, "Gloves made of a thick cloth. Useful for hard labor."));
 		armor.Add(new TierZeroFeet(new ItemListID(armorListIndex, rottenSandalsIndex), rottenSandalsKey, "A pair of ankle high leather sandals whose soles have seen better days."));
 		armor.Add(new TierZeroShield(new ItemListID(armorListIndex, potLidIndex), potLidKey, "The lid to a large bronze cauldron, sufficiently sturdy and wide to be used as a haphazard shield."));
-		armor.Add(new TierZeroHelmet(new ItemListID(armorListIndex, minersHelmetIndex), minersHelmetKey, "A cheaply made copper head cover with a thin layer of cloth padding inside and a scrap of leather for a chin strap. Useful for protecting against the odd bat or falling rock, but not much else."));
+		armor.Add(new TierZeroHelmet(new ItemListID(armorListIndex, minersHelmetIndex), minersHelmetKey, "A copper head cover with a thin layer of cloth padding inside. Useful for protecting against the odd bat or falling rock, but not much else."));
 		armor.Add(new TierOneHands(new ItemListID(armorListIndex, leatherGlovesIndex), leatherGlovesKey, "Gloves made to be worn with armor, but still suitable for protecting the hands during hard labor."));
 		armor.Add(new TierOneBody(new ItemListID(armorListIndex, paddedArmorIndex), paddedArmorKey, "Armor made of heavy cloth. It feels sturdier than it sounds."));
 		armor.Add(new Trinket(new ItemListID(armorListIndex, thatchNecklaceIndex), thatchNecklaceKey, "A necklace made of a silver medalion attached to a thin silver chain. A sun rising over the horizon is etched into the medalion's disk."));
@@ -353,22 +359,26 @@ public static class ItemList
 		allItems.Add(partyMemberWeapons);   // listIndex = 6
 		allItems.Add(books);                // listIndex = 7
 
-        DropTableList.slaveMineDT1 = new DropTable(DropTableList.slaveMineDT1Name, 3, 9,
-														 new Item[]{
-                                                                        ItemList.getItem(ItemList.usableItemListIndex, ItemList.rationsIndex, 1),
-                                                                        ItemList.getItem(ItemList.weaponsListIndex, ItemList.malletIndex, 1),
-                                                                        ItemList.getItem(ItemList.armorListIndex, ItemList.clothGlovesIndex, 1),
-                                                                        ItemList.getItem(ItemList.armorListIndex, ItemList.rottenSandalsIndex, 1),
-                                                                        ItemList.getItem(ItemList.armorListIndex, ItemList.potLidIndex, 1),
-                                                                        ItemList.getItem(ItemList.armorListIndex, ItemList.minersHelmetIndex, 1),
-                                                                        ItemList.getItem(ItemList.treasureItemListIndex, ItemList.ironNuggetIndex, 1),
-																	    null
-                                                                    },
-														 new float[]{.1f,.025f,.025f,.025f,.025f,.025f,.025f,.75f});	
+        slaveMineDT = new DropTable(3, 5, new DropTableEntry[]{
+                                                                    new DropTableEntry(getItem(usableItemListIndex, rationsIndex),      .1f),
+                                                                    new DropTableEntry(getItem(weaponsListIndex, malletIndex),          .025f),
+                                                                    new DropTableEntry(getItem(armorListIndex, clothGlovesIndex),       .025f),
+                                                                    new DropTableEntry(getItem(armorListIndex, rottenSandalsIndex),     .025f),
+                                                                    new DropTableEntry(getItem(armorListIndex, potLidIndex),            .025f),
+                                                                    new DropTableEntry(getItem(armorListIndex, minersHelmetIndex),      .025f),
+                                                                    new DropTableEntry(getItem(treasureItemListIndex, ironNuggetIndex), .025f)
+                                                            });	
 
-        DropTableList.allDropTables = new List<DropTable>();
 
-		DropTableList.allDropTables.Add(DropTableList.slaveMineDT1);
+	    lovashiGuardsDT =  new DropTable(6, 10, new DropTableEntry[]{
+                                                                        new DropTableEntry(getItem(usableItemListIndex, properFoodIndex),        .05f),
+                                                                        new DropTableEntry(getItem(armorListIndex, salvagedGuardArmorIndex),     .03f),
+                                                                        new DropTableEntry(getItem(armorListIndex, salvagedGuardHelmIndex),      .03f),
+                                                                        new DropTableEntry(getItem(armorListIndex, salvagedGuardBootsIndex),     .03f),
+                                                                        new DropTableEntry(getItem(armorListIndex, salvagedGuardGlovesIndex),    .03f),
+                                                                        new DropTableEntry(getItem(armorListIndex, bronzeDirkIndex),             .03f),
+                                                                        new DropTableEntry(getItem(treasureItemListIndex, smallCoinPurseIndex),  .05f)
+                                                                    });	
 	}
 	
 	public static Item getItem(string listIndex, string itemIndex)
@@ -395,13 +405,8 @@ public static class ItemList
 		return getItem(intListIndex, intItemIndex, intQuantity);
 	}
 	
-	public static Item getItem(int listIndex, int itemIndex)
-	{
-		return getItem(listIndex, itemIndex, 1);
-	}
-	
-	public static Item getItem(int listIndex, int itemIndex, int quantity){
-		
+	public static Item getItem(int listIndex, int itemIndex, int quantity = 1)
+    {
 		List<Item> currentItemList = allItems[listIndex];
 		
 		Item itemTemplate = currentItemList[itemIndex];
@@ -480,6 +485,7 @@ public static class ItemSpriteList
     public const string capeSprite = "Cape";
     public const string cudgelSprite = "Cudgel";
     public const string curvedDaggerSprite = "CurvedDagger";
+    public const string fryingPanSprite = "FryingPan";
     public const string malletSprite = "Mallet";
     public const string meatSprite = "Meat";
     public const string oneHandedPickSprite = "OneHandedPick";

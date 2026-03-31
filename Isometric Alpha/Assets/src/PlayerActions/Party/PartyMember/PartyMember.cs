@@ -20,6 +20,13 @@ public class PartyMember : IDescribable, IDescribableInBlocks
         {
             _CanJoinParty = value;
             PartyManager.OnPartyChange.Invoke();
+            if(_CanJoinParty)
+            {
+                NewPartyMemberManager.setPartyMemberAsNew(getName());
+            } else
+            {
+                NewPartyMemberManager.removePartyMember(getName());
+            }
         }
     }
 

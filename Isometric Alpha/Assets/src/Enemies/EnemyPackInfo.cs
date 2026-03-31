@@ -58,8 +58,9 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks, ICreatureSpawn
 
     public int numberOfDrops = 1; //number of rolls on their drop table
 
+    public bool alwaysSurprised;
 
-    public EnemyPackInfo(CreatureAmount[] FoeTypes, string dropTableName, ItemListID[] guaranteedDrops = null, string tutorialSequenceKey = "", List<SpawnDetails> spawnDetailsList = null)
+    public EnemyPackInfo(CreatureAmount[] FoeTypes, string dropTableName, ItemListID[] guaranteedDrops = null, string tutorialSequenceKey = "", List<SpawnDetails> spawnDetailsList = null, bool alwaysSurprised = false)
     {
         this.FoeTypes = FoeTypes;
 
@@ -70,6 +71,8 @@ public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks, ICreatureSpawn
         this.guaranteedDrops = guaranteedDrops;
 
         this.spawnDetailsList = spawnDetailsList;
+
+        this.alwaysSurprised = alwaysSurprised;
     }
 
     public virtual string getQuestStep()

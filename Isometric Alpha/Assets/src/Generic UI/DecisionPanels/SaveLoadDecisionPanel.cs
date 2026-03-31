@@ -14,12 +14,14 @@ public class SaveLoadDecisionPanel : MonoBehaviour, IDecisionPanel
     {
         GridRow.OnDescribableToDisplay.AddListener(destroySelf);
         SaveHandler.OnSaveCreated.AddListener(destroySelf);
+        SaveHandler.OnSaveDeleted.AddListener(destroySelf);
     }
 
     private void OnDestroy()
     {
         GridRow.OnDescribableToDisplay.RemoveListener(destroySelf);
         SaveHandler.OnSaveCreated.RemoveListener(destroySelf);
+        SaveHandler.OnSaveDeleted.RemoveListener(destroySelf);
     }
 
     private void destroySelf(IDescribable describable)

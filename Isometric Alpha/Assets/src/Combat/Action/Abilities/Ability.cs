@@ -7,7 +7,7 @@ using UnityEngine;
 public class Ability: CombatAction, IJSONConvertable
 {
 	private int requiredStatLevel = 1;
-	private string statKey = "";
+	public string statKey = "";
 	
 	private string key;
 	

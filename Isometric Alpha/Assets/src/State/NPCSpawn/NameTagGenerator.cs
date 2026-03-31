@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class NameTagGenerator : MonoBehaviour, IRevealable
 {
@@ -216,7 +217,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
         return INonRevealableNameSource.nameSourceIsRevealable(nameSource);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerEnter(PointerEventData eventData) 
     {
         if (nameSourceRevealable() && (!ignoreHover && (eventData == null || !eventData.used)) && !spriteRenderer.color.Equals(Color.clear))
         {
