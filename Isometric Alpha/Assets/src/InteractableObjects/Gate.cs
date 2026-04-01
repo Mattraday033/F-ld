@@ -33,7 +33,11 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
     {
         if (GateAndChestManager.hasBeenOpened(getGateKey()))
         {
-            if(playSFX)
+            if(PlayerOOCStateManager.currentActivity == OOCActivity.inFade)
+            {
+                playSFX = false;
+                
+            } else if(playSFX )
             {
                 playSFX = false;
                 playOpeningAudioClip();
@@ -102,7 +106,7 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
 
 	public void onReveal(bool toggleReveal)
 	{
-        if(toggleReveal)
+        if(toggleReveal && !spriteRenderer.color.Equals(Color.clear))
         {
             outline.createOutline(getRevealColor());
         } else

@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 
 public enum CunningObjectSpriteCategory { Crank = 0 }
 
-public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
+public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, INameSource
 {
     public const string tagText = "Device";
+    public const string nameOnTag = "Cunning Target";
 
     private const bool trackChangeInStateManager = true;
 
@@ -39,6 +40,11 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable
 
     public abstract void setStatus(string key, bool status);
     
+    public string getName()
+    {
+        return nameOnTag;
+    }
+
     protected Facing getCurrentFacing()
     {
         if (!activated)

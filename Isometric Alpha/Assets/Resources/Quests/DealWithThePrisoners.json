@@ -4,11 +4,11 @@
 	"steps": [
 		{
 			"stepName": "To the Mess Hall.",
-			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "It's over. We won. All that's left is to raid the Director's wine, dole out his bread, and deal with any prisoners the rioters took during the revolution. I should make my way to the yard attached to the mess hall in the southeastern part of the camp to decide their fate."
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "It's over. We won. All that's left is to raid the Director's wine, dole out his bread, and deal with any prisoners the rioters took during the revolution. <B>I should make my way to the yard attached to the mess hall in the southeastern part of the camp to decide their fate.</B>"
 		},
 		{
 			"stepName": "The precipice.",
-			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I spoke with Nándor and he has asked me to pass judgement on the prisoners. I must speak with each of them and then decide their fates. Once I am finished I should speak with Nándor again."
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I spoke with Nándor and he has asked me to pass judgement on the prisoners. <B>I must speak with each of the prisoners and then decide their fates. Once I am finished I should speak with Nándor again.</B>"
 		},
 		{
 			"stepName": "Recompense, finally.",
@@ -80,7 +80,7 @@
 		},
 		{
 			"stepName": "That is that.",
-			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "The verdicts are finally over. I should speak with Nándor to discuss what comes next."
+			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "The verdicts are finally over. <B>I should speak with Nándor in the southeast portion of the camp to discuss what comes next.</B>"
 		},
 		{
 			"stepName": "Nándor's fury.",

@@ -37,8 +37,10 @@ public class SpriteOutline
 
     public void createOutline(Color color)
     {
-        if(!spriteRenderer.gameObject.activeInHierarchy)
+        if(!spriteRenderer.gameObject.activeInHierarchy || 
+            spriteRenderer.color.Equals(Color.clear))
         {
+            removeOutline();
             return;
         }
 

@@ -63,7 +63,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
     private void enableButtonComponent()
     {
-        if (CombatStateManager.inCombat && abilityMenuButton != null && !abilityMenuManager.displayOnly)
+        if (CombatStateManager.inCombat && abilityMenuButton != null && !abilityMenuManager.displayOnly && loadedCombatAction != null && !loadedCombatAction.unactivatable())
         {
             abilityMenuButton.enabled = true;
         }

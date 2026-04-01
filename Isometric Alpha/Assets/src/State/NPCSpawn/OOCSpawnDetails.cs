@@ -137,6 +137,11 @@ public abstract class OOCSpawnDetails
 
     public static void addTutorialTargetComponent(GameObject gameObject, SpriteRenderer spriteRenderer, string tutorialTargetHash)
     {
+        if(gameObject == null)
+        {
+            return;
+        }
+
         if(gameObject.GetComponent<RectTransform>() == null)
         {
             gameObject.AddComponent<RectTransform>();
@@ -165,6 +170,21 @@ public abstract class OOCSpawnDetails
     {
         target.setTutorialHash(tutorialTargetHash);
         target.getGameObject().AddComponent<RectTransform>();
+    }
+
+    protected static void addNameTagGenerator(GameObject targetObject, INameSource nameSource, bool cunningTarget = false)
+    {
+        NameTagGenerator nameTagGenerator;
+        
+        if(cunningTarget) 
+        {
+            nameTagGenerator = targetObject.GetComponent<CunningNameTagGenerator>();
+        } else
+        {
+            nameTagGenerator = targetObject.GetComponent<NameTagGenerator>();
+        }
+
+        nameTagGenerator.nameSource = nameSource;
     }
 
     // public static void setMouseHoverTileMap(string spriteName, Transform transform)
@@ -374,6 +394,8 @@ public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
 
         cunningBlocker.build(startFacing,endFacing, category);
 
+        addNameTagGenerator(cunningBlocker.gameObject, cunningBlocker, cunningTarget: true);
+
         List<GameObject> blockers = buildBlockers(cunningBlocker, allBlockerSpawnDetails);
 
         foreach(GameObject blocker in blockers)
@@ -424,6 +446,8 @@ public class LinkedCunningBlockerSpawnDetails : CunningBlockerSpawnDetails
         linkedBlocker.spriteRenderer = cunningObject.spriteRenderer;
         linkedBlocker.linkedIndex = linkedIndex;
 
+        addNameTagGenerator(gameObject, linkedBlocker, cunningTarget: true);
+
         GameObject.Destroy(cunningObject);
 
         base.spawnActions(linkedBlocker);
@@ -447,6 +471,8 @@ public class DoubleCunningBlockerSpawnDetails : CunningBlockerSpawnDetails
 
         DoubleCunningBlocker doubleBlocker = gameObject.AddComponent<DoubleCunningBlocker>();
         doubleBlocker.spriteRenderer = cunningObject.spriteRenderer;
+
+        addNameTagGenerator(gameObject, doubleBlocker, cunningTarget: true);
 
         GameObject.Destroy(cunningObject);
 

@@ -44,6 +44,7 @@ public class ScrollableUIElement : MonoBehaviour
 	public GameObject scrollBar;
 	public GameObject slidingArea;
 	public ScrollRect scrollableComponent;
+    public Slider slider;
 
 	public bool clickFirstPanel;
 	public bool clickLastPanel;
@@ -258,7 +259,7 @@ public class ScrollableUIElement : MonoBehaviour
 	{
 		for (int index = listOfRows.Count - 1; index >= 0; index--)
 		{
-			GridRow gridRow = (GridRow)listOfRows[index];
+			GridRow gridRow = listOfRows[index];
 
 			if (!gridRow.buttonTexts[0].text.Equals(""))
 			{
@@ -270,8 +271,15 @@ public class ScrollableUIElement : MonoBehaviour
 
 	private IEnumerator buildThenScrollToBottom()
 	{
-		yield return new WaitForEndOfFrame();
-		scrollableComponent.verticalNormalizedPosition = 0f;
+		yield return null;
+		yield return null;
+
+        scrollableComponent.verticalNormalizedPosition = 0f;
+        
+        if(slider != null)
+        {
+            slider.value = 0f;
+        }
 	}
 
 	public GridRow populatePanel(IDescribable describable, int rowIndex)

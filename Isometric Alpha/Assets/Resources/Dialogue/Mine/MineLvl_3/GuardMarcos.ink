@@ -139,12 +139,48 @@ fadeToBlack(true, false)
 
 fadeBackIn(60)
 
+{
+-wisdom < 2:
+->2aa
+}
+
 I think you're getting the hang of how to measure out the primer. So long as you continue mixing with the pattern I've shown you, you shouldn't have any trouble getting the right consistancy. Now, for the timer.
 
 The ignition method for blasting jelly is the application of water. Even a single drop is enough to cause the mixed jelly and primer to ignite, resulting in a large explosion.
 
     +Water? But the guards were storing the blasting jelly in a cavern with a stream flowing through it. Isn't that risky?
         ->2b
+
+=== 2aa === 
+
+That's not... no! You're applying the mixture all wrong. At this rate you're going to waste the whole barrel!
+
+    +Fine then. You prime the jelly.
+        ->2ab
+    +Maybe if I didn't have a baying ass for a teacher, I could have learned it by now!
+        ->2ac
+
+=== 2ab ===
+
+setToTrue(mineLvl3MarcosAgreedToIgniteJelly)
+activateQuestStep(Sealing the Breach, The Jelly's Secrets.)
+
+keepDialogue()
+
+I think that would be for the best. When its time, I shall place the barrels to seal the tunnel. And whatever comes shall come.
+
+->2c
+
+=== 2ac ===
+
+setToTrue(mineLvl3MarcosAgreedToIgniteJelly)
+activateQuestStep(Sealing the Breach, The Jelly's Secrets.)
+
+keepDialogue()
+
+\*Márcos glares at you.* Fighting will get us nowhere. Let us move on to what is important: sealing the breach. When its time, I shall place the barrels. Make your way to the southern tunnel. I shall be right behind you.
+
+->2c
 
 === 2b ===
 

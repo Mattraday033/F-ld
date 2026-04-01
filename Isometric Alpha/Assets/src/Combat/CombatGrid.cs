@@ -316,7 +316,13 @@ public static class CombatGrid
 			{
 				if(combatantSlot != null && combatantSlot.isAlive() && combatantSlot.isTargetable())
 				{	
-					allEnemyCombatants.Add(combatantSlot);
+                    if(combatantSlot.repositionClone != null)
+                    {
+					    allEnemyCombatants.Add(combatantSlot.repositionClone);
+                    } else
+                    {
+					    allEnemyCombatants.Add(combatantSlot);
+                    }
 				}
 			}
 		}

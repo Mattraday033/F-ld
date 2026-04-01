@@ -42,23 +42,6 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 		destroyListeners();
 	}
 
-	public void handleNameTagOnReveal(bool toggleReveal)
-	{
-		if (noNameTag)
-		{
-			return;
-		}
-
-		if (RevealManager.currentlyRevealed)
-		{   //create nameTag and label npc on reveal
-			spawnNameTag();
-		}
-		else if (nameTag != null && !(nameTag is null))
-		{   //if revealedInteractables is false, then we need to hide interactables
-			destroyNameTag();
-		}
-	}
-
 	//IRevealable interface methods
 
 	public void createListeners()
@@ -116,7 +99,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
             return;
         }
 
-        if(toggleReveal)
+        if(toggleReveal && spriteRenderer != null && !spriteRenderer.color.Equals(Color.clear))
         {
             outline.createOutline(getRevealColor());
 
@@ -166,13 +149,19 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
         return false;
     }
 
-	public Color getRevealColor()
+	public virtual Color getRevealColor()
 	{
 		return ColorList.canBeInteractedWith;
 	}
 
 	public void spawnNameTag()
 	{
+        if(!gameObject.activeInHierarchy || (spriteRenderer != null && spriteRenderer.color.Equals(Color.clear)))
+        { 
+            destroyNameTag();
+            return;
+        }
+
         if(gameObject.GetComponent<RectTransform>() == null)
         {
             gameObject.AddComponent<RectTransform>();
@@ -183,6 +172,18 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 			nameTag = Instantiate(Resources.Load<GameObject>(PrefabNames.npcNameTag), transform).GetComponent<DescriptionPanel>();
 
 			nameTag.nameText.text = getName();
+
+            if(PlayerOOCStateManager.currentActivity == OOCActivity.inWorldMap)
+            {
+                Canvas canvas = nameTag.GetComponent<Canvas>();
+
+                if(canvas != null)
+                {
+                    canvas.overrideSorting = true;
+                    canvas.sortingLayerName = LayerAndTagManager.mapSortingLayerName;
+                    canvas.sortingOrder = Constants.indexTwelve;
+                }
+            }
 		}
 	}
 

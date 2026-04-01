@@ -359,11 +359,9 @@ changeCamTarget({marcosIndex})
 
 I am not as wounded as I appear. I can perform the detonation as I have a dozen times before.
 
-{
--wisdom >= 2:
+
     +Your bravado is fooling no one. I am a quick learner, teach me how to perform the detonation and I will carry it out. <Wis {wisdom}/2>
         ->2b
-}
 
     +There is little time to argue. Márcos will do what needs to be done. Let us move before the worm situation gets worse.
         setToTrue(mineLvl3MarcosAgreedToIgniteJelly)

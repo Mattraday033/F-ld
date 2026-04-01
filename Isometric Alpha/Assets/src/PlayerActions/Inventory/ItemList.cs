@@ -50,10 +50,10 @@ public static class ItemList
 	public const string dominantFistKey = "Dominant Fist";
 	public const string fistKey = "Fist";
 
-    public const int rationsHealingAmount = 20;
-    public const int rockCakeHealingAmount = 25;
-	public const int horseFleshHealingAmount = 35;
-	public const int properFoodHealingAmount = 40;
+    public const int rationsHealingAmount = 30;
+    public const int rockCakeHealingAmount = 40;
+	public const int properFoodHealingAmount = 50;
+	public const int horseFleshHealingAmount = 75;
 
 	public const bool isOneHanded = false; //what you in the constructor when you want a weapon to be one handed
 	public const bool isTwoHanded = true; 	//what you in the constructor when you want a weapon to be two handed

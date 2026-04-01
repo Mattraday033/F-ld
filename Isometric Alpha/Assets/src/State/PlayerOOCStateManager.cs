@@ -207,6 +207,20 @@ public static class PlayerOOCStateManager
         OnStateChange.Invoke();
     }
 
+    public static bool enemyHoversLegal()
+    {
+        switch(currentActivity)
+        {
+            case OOCActivity.walking:
+            case OOCActivity.cunning:
+            case OOCActivity.intimidating:
+            case OOCActivity.inChestUI:
+                return true;
+            default: 
+                return false;
+        }
+    }
+
     public static bool waitingOnHostilityTutorial;
 
     private static void checkIfWaitingOnSecondHostilityTutorial()

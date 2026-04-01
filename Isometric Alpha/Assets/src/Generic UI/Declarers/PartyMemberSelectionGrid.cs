@@ -27,10 +27,7 @@ public class PartyMemberSelectionGrid : UIListenerGrid
             return;
         }
 
-        if(!grid.populated())
-        {
-            base.updateCounter();
-        }
+        base.updateCounter();
 
         if(ScreenManager.currentPartyMember == null)
         {

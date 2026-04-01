@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class SliderScrollRectConnector : MonoBehaviour
 {
+    public bool valueChangedByScrollRect = false; //if the scroll rect is being moved with the mouse wheel
+    public bool valueChangedBySlider = false; //if the slider is being dragged
     public GameObject handle;
     public GameObject background;
 
@@ -49,8 +51,31 @@ public class SliderScrollRectConnector : MonoBehaviour
 
     public void setScrollRectVerticalPosition()
     {
+        if(valueChangedByScrollRect)
+        {
+            return;
+        }
+
+        valueChangedBySlider = true;
+
         scrollRect.verticalNormalizedPosition = slider.value;
+
+        valueChangedBySlider = false;
     }
 
+    public void setSliderValue()
+    {
+        if(valueChangedBySlider)
+        {
+            return;
+        }
+
+        valueChangedByScrollRect = true;
+
+        slider.value = scrollRect.verticalNormalizedPosition;
+
+        valueChangedByScrollRect = false;
+
+    }
 
 }

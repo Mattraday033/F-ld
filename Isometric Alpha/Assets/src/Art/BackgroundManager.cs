@@ -141,8 +141,8 @@ public class BackgroundManager : MonoBehaviour
     private string getCurrentPrefabFolderPath()
     {
         return PrefabNames.OOCBackgroundFolderPath + 
-                                backgroundKey + Constants.seperatorChar +
-                                backgroundKey + backgroundAbbreviationCharacter + currentBGPrefabIndex;
+                        backgroundKey + Constants.seperatorChar +
+                        backgroundKey + backgroundAbbreviationCharacter + currentBGPrefabIndex;
     }
 	
     private void OnEnable()
@@ -157,6 +157,14 @@ public class BackgroundManager : MonoBehaviour
 
     private static string getBackgroundKey()
     {
+        Area area = AreaList.getCurrentArea();
+
+        switch(area.areaKey)
+        {
+            case AreaNameList.lovashiCampInterior:
+                return AreaNameList.lovashiCampInterior;
+        }
+
         string zoneKey = MapObjectList.getCurrentZoneKey();
 
         switch(zoneKey)

@@ -307,8 +307,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 314695509
-  m_SortingOrder: 1
+  m_SortingLayerID: 783193699
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!114 &1586294673063044057
 MonoBehaviour:
@@ -365,8 +365,10 @@ MonoBehaviour:
   contentsText: {fileID: 0}
   worthText: {fileID: 0}
   slotText: {fileID: 0}
+  slotsUsedText: {fileID: 0}
   weaponNameText: {fileID: 0}
   rangeText: {fileID: 0}
+  invulnerabilityText: {fileID: 0}
   armorRatingText: {fileID: 0}
   damageText: {fileID: 0}
   offHandDamageText: {fileID: 0}
@@ -381,8 +383,6 @@ MonoBehaviour:
   wisText: {fileID: 0}
   chaText: {fileID: 0}
   nestedDescriptionPanel: {fileID: 0}
-  gameObjectDisplayCanvas: {fileID: 0}
-  displayAdjustmentCoords: 0000000000000000
   skipText: {fileID: 0}
   tutorialSequenceStep:
     tutorialMessageKey: 
@@ -399,7 +399,7 @@ MonoBehaviour:
     scriptAtEnd: {fileID: 0}
     additionalScripts: []
     arrowDirection: 0
-    nextStepKeyCode: 
+    useButtonPress: 0
   parentRect: {fileID: 0}
   topRectTransform: {fileID: 5539818740903857738}
   topLayoutGroup: {fileID: 0}

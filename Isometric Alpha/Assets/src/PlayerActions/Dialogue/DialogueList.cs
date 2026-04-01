@@ -800,7 +800,11 @@ public static class DialogueList
                                                                 NPCNameList.nandor,
                                                                 NPCNameList.guardMarcos
                                                             },
-                                                             Resources.Load<TextAsset>(DialogueNameList.ml3MinerBarricadePath)));
+                                                             Resources.Load<TextAsset>(DialogueNameList.ml3MinerBarricadePath),
+                                                             new TextAsset[]{ 
+                                                                                Resources.Load<TextAsset>(DialogueNameList.ml3MarcosPath),
+                                                                                Resources.Load<TextAsset>(DialogueNameList.ml3MinerBarricadePath)
+                                                                            }));
 
         // addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter, 
         //                                                     new Dialogue(new string[] 

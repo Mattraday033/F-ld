@@ -779,7 +779,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
-        if(eventData != null && eventData.used)
+        if((eventData != null && eventData.used) || !PlayerOOCStateManager.enemyHoversLegal())
         {
             return;
         }
@@ -794,7 +794,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
-        if(eventData != null && eventData.used)
+        if((eventData != null && eventData.used) || !PlayerOOCStateManager.enemyHoversLegal())
         {
             return;
         }

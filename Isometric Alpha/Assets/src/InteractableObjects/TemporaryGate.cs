@@ -56,6 +56,7 @@ public class TemporaryGate : Gate
     {
         colliderTileMap.enabled = false;
         spriteRenderer.color = Color.clear;
+
         if(nameTagGenerator != null)
         {
             nameTagGenerator.onReveal(false);
@@ -63,18 +64,23 @@ public class TemporaryGate : Gate
 
         if(PlayerOOCStateManager.currentActivity != OOCActivity.inFade)
         {
-            AudioManager.playAudioClipAsSingleton(AudioClipList.gateOpenShort);
+            AudioManager.playGateOpenShortSFX();
         }
     }
 
-    private void showSelf()
+    private void showSelf() 
     {
         colliderTileMap.enabled = true;
         spriteRenderer.color = Color.white;
 
+        if(nameTagGenerator != null)
+        {
+            nameTagGenerator.onReveal(RevealManager.currentlyRevealed);
+        }
+
         if(PlayerOOCStateManager.currentActivity != OOCActivity.inFade)
         {
-            AudioManager.playAudioClipAsSingleton(AudioClipList.gateOpenShort);
+            AudioManager.playGateOpenShortSFX();
         }
     }
 

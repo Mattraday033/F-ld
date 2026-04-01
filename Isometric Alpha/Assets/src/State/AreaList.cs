@@ -106,7 +106,19 @@ public class Area
 	
 	public GameObject getCombatBackgroundObject()
     {
-		return Resources.Load<GameObject>(PrefabNames.combatBackgroundFolderPath + combatBackgroundName);
+        string prefabName = "";
+
+        switch(AreaManager.locationName)
+        {
+            case ZoneKeyList.pit + LocationNameList.section1a:
+                prefabName = ZoneKeyList.manseFirstFloor;
+                break;
+            default:
+                prefabName = combatBackgroundName;
+		        break;
+        }
+
+        return Resources.Load<GameObject>(PrefabNames.combatBackgroundFolderPath + prefabName);
 	}
 }
 
@@ -326,7 +338,7 @@ public static class AreaList
 
     }
 
-	private static Area getCurrentArea()
+	public static Area getCurrentArea()
 	{
         return getArea(AreaManager.locationName);
 	}

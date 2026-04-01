@@ -59,6 +59,7 @@ public class LoadSaveFile : IDecision
         TutorialSequenceList.initializeTutorials();
         MovementManager.initializeMovementManager();
         State.dialogueUponSceneLoadKey = null;
+        ScreenManager.currentPartyMember = null;
 
         if (!SceneManager.GetActiveScene().name.Equals(SceneNameList.loadingScreen))
         {

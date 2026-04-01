@@ -136,7 +136,7 @@ public struct AudioSettingsWrapper
     {
         AudioManager.masterVolumePlayerSetting = masterVolumePlayerSetting;
 
-        AudioManager.musicVolumePlayerSetting = musicVolumePlayerSetting;        
+        AudioManager.musicVolumePlayerSetting = musicVolumePlayerSetting;     
         AudioManager.sfxVolumePlayerSetting = sfxVolumePlayerSetting;        
         AudioManager.voiceVolumePlayerSetting = voiceVolumePlayerSetting;        
         AudioManager.footstepVolumePlayerSetting = footstepVolumePlayerSetting;   

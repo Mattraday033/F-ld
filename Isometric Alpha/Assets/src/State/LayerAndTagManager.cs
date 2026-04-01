@@ -25,6 +25,7 @@ public static class LayerAndTagManager
 
 	public const string firstSortingLayerName = "First";
 	public const string thirdSortingLayerName = "Third";
+    public const string mapSortingLayerName = "Map";
 
 	public const string playerTag = "Player";
 	public const string enemyTag = "Enemy";

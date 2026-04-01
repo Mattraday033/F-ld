@@ -416,7 +416,6 @@ public class DialogueManager : MonoBehaviour
         Item itemToGive;
         string partyMemberName = "";
         string tutorialKey = "";
-        bool continueAfterTransparent = false;
         int camTargetIndex = 0;
         int intParameter = 0;
         string parameter = "";
@@ -747,31 +746,14 @@ public class DialogueManager : MonoBehaviour
                     }
 
                     return;
-
-                case "fadetoblack":
-                    string[] fadeToBlackArgs = getAllArgs(buffer);
-
-                    bool setDialogueUIActiveAfterFadeIn = true;
-                    continueAfterTransparent = true;
-
-                    if (fadeToBlackArgs.Length > 0 && fadeToBlackArgs[Constants.indexZero].Length > 0)
-                    {
-                        setDialogueUIActiveAfterFadeIn = bool.Parse(fadeToBlackArgs[Constants.indexZero]);
-                    }
-
-                    if (fadeToBlackArgs.Length > 1 && fadeToBlackArgs[Constants.indexOne].Length > 1)
-                    {
-                        continueAfterTransparent = bool.Parse(fadeToBlackArgs[Constants.indexOne]);
-                    }
-
-                    setCameraToDefaultSpeed();
-
-                    fadeToBlackManager.setAndStartFadeToBlack();
-                    waitingOnFadeToBlack = true;
-
-                    StartCoroutine(handleDialogueUIDuringFadeOut(setDialogueUIActiveAfterFadeIn, continueAfterTransparent));
-
+                case "quickfadetoblack":
+                    fadeToBlackCommand(quickFade: true);
                     return;
+                case "fadetoblack":
+
+                    fadeToBlackCommand();
+                    return;
+
                 case "fadebackin": //fadeBackIn(int framesToWait), 
                                    //fadeBackIn(int framesToWait, bool continueAfterTransparent)
 
@@ -789,7 +771,7 @@ public class DialogueManager : MonoBehaviour
 
                     frames = 0;
 
-                    continueAfterTransparent = false;
+                    bool continueAfterTransparent = false;
 
                     if (fadeBackInArgs.Length > 1)
                     {
@@ -1364,6 +1346,37 @@ public class DialogueManager : MonoBehaviour
 
             displayChoices();
         }
+    }
+
+    private void fadeToBlackCommand(bool quickFade = false)
+    {
+        string[] fadeToBlackArgs = getAllArgs(buffer);
+
+        bool setDialogueUIActiveAfterFadeIn = true;
+        bool continueAfterTransparent = true;
+
+        if (fadeToBlackArgs.Length > 0 && fadeToBlackArgs[Constants.indexZero].Length > 0)
+        {
+            setDialogueUIActiveAfterFadeIn = bool.Parse(fadeToBlackArgs[Constants.indexZero]);
+        }
+
+        if (fadeToBlackArgs.Length > 1 && fadeToBlackArgs[Constants.indexOne].Length > 1)
+        {
+            continueAfterTransparent = bool.Parse(fadeToBlackArgs[Constants.indexOne]);
+        }
+
+        setCameraToDefaultSpeed();
+
+        if(quickFade)
+        {
+            fadeToBlackManager.quickFadeToBlack();
+        } else
+        {
+            fadeToBlackManager.setAndStartFadeToBlack();
+        }
+        waitingOnFadeToBlack = true;
+
+        StartCoroutine(handleDialogueUIDuringFadeOut(setDialogueUIActiveAfterFadeIn, continueAfterTransparent));
     }
 
     private void playerHasItem(string buffer)

@@ -19,7 +19,7 @@ public class AllyStats : Stats
 
     public const int playerLevelMaximum = 20;
     private const int playerHealthPerLevelAboveOne = 10;
-    private const int playerBaseHealth = 90;
+    private const int playerBaseHealth = 140;
 
     public const int statMaximum = 10;
 

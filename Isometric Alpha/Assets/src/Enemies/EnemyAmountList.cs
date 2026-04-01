@@ -37,6 +37,8 @@ public static class EnemyAmountList
     public readonly static CreatureAmount oneJavelineer = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
     public readonly static CreatureAmount twoJavelineers = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
     public readonly static CreatureAmount threeJavelineers = new CreatureAmount(Constants.threeCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
+    public readonly static CreatureAmount fourJavelineers = new CreatureAmount(Constants.fourCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
+    public readonly static CreatureAmount fiveJavelineers = new CreatureAmount(Constants.fiveCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
     public readonly static CreatureAmount tenJavelineers = new CreatureAmount(Constants.tenCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.javelineer));
 
     public readonly static CreatureAmount oneLancer = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.lancer));

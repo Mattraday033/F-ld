@@ -241,9 +241,9 @@ public static class EnemyPackInfoList
                                                                                                      },
                                                                                     DropTableList.slaveMineDTKey);
 
-    public readonly static EnemyPackInfo oneLancerTwoJavalineers = new EnemyPackInfo(new CreatureAmount[] {      
-                                                                                                        EnemyAmountList.oneLancer,
-                                                                                                        EnemyAmountList.twoJavelineers
+    public readonly static EnemyPackInfo oneSpearmanFiveJavalineers = new EnemyPackInfo(new CreatureAmount[] {      
+                                                                                                        EnemyAmountList.oneSpearman//,
+                                                                                                        // EnemyAmountList.fiveJavelineers
                                                                                                      },
                                                                                     DropTableList.slaveMineDTKey);
 
@@ -589,7 +589,7 @@ public static class EnemyPackInfoList
 
         list.Add(oneAxemanOneSpearmanTwoJavalineers);
         list.Add(oneAxemanOneSpearmanTwoJavalineers);
-        list.Add(oneLancerTwoJavalineers);
+        list.Add(oneSpearmanFiveJavalineers);
 
         enemyPackInfoDict.Add(LocationNameList.guardHouseTopFloor, list);
         #endregion

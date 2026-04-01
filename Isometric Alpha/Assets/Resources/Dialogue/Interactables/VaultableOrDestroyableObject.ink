@@ -57,7 +57,7 @@ fadeBackIn(60)
 
 === 1c ===
 
-fadeToBlack()
+quickFadeToBlack()
 
 adjustGridSquare({size})
 

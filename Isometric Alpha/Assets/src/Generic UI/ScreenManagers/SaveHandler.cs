@@ -493,7 +493,7 @@ public class SaveHandler : ScreenManager, IEscapable
 				}
 			}*/
 
-			saveGameList.Add(blueprint.saveName, blueprint);
+			saveGameList[blueprint.saveName] = blueprint;
 		}
 
         if(!skipInvokeCall)

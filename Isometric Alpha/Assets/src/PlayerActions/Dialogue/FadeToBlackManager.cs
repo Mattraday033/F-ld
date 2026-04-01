@@ -119,6 +119,15 @@ public class FadeToBlackManager : MonoBehaviour
 		createFade(new FadeToBlackTransition());
 	}
 	
+	public void quickFadeToBlack()
+	{
+        FadeToBlackTransition quickFade = new FadeToBlackTransition();
+
+        quickFade.setToQuickFadeTime();
+
+		createFade(quickFade);
+	}
+
     public static void startCombatTransition(Transform monsterTransform)
     {
         if(instance == null)

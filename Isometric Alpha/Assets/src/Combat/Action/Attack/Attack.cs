@@ -18,7 +18,7 @@ public class Attack : CombatAction, IJSONConvertable
     base(actor, null)
     {
         this.mainHandWeapon = (Weapon) mainHandWeapon.clone();
-        mainHandWeapon.setQuantity(1);
+        this.mainHandWeapon.setQuantity(1);
         this.mainHandWeapon.equipTarget = actor;
     }
 
@@ -340,6 +340,9 @@ public class Attack : CombatAction, IJSONConvertable
 		{
 			buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: IconList.stanceWeaponIconName));
 		}
+
+
+		// buildingBlocks.Add(DescriptionPanelBuildingBlock.getAmountBlock(getSourceItem().getQuantityForDisplay())); // for testing purposes
 
 		//buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getCritTotalForDisplay()));
 

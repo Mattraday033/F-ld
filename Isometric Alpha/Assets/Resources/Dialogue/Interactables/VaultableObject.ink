@@ -36,7 +36,7 @@ This {objectName} looks traversable. A sufficiently dexterous person could vault
 
 === 1b ===
 
-fadeToBlack()
+quickFadeToBlack()
 
 adjustGridSquare({size})
 

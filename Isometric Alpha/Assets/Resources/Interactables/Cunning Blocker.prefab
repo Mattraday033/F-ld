@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7872798132638286613}
   - component: {fileID: 6300749075816664860}
   - component: {fileID: 3580143163903074102}
+  - component: {fileID: 6760920263293288241}
   m_Layer: 25
   m_Name: Cunning Blocker
   m_TagString: CunningTarget
@@ -86,7 +87,7 @@ SpriteRenderer:
   m_Size: {x: 1.15625, y: 2.1640625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
 --- !u!114 &5589421925696882970
@@ -229,6 +230,22 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 2
   m_CellSwizzle: 0
+--- !u!114 &6760920263293288241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2152023602233523719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5bc4a5ae4cba964b875ec182f3a410a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreHover: 0
+  noNameTag: 0
+  spriteRenderer: {fileID: 3868892900884546479}
+  nameTag: {fileID: 0}
 --- !u!1001 &5790972736350243900
 PrefabInstance:
   m_ObjectHideFlags: 0

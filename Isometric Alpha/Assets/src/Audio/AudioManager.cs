@@ -535,6 +535,16 @@ public class AudioManager : MonoBehaviour
         playAudioClipAsSingleton(AudioClipList.restSFX);
     }
 
+    public static void playGateOpenSFX()
+    {
+        playAudioClipAsSingleton(AudioClipList.gateOpen);
+    }
+
+    public static void playGateOpenShortSFX()
+    {
+        playAudioClipAsSingleton(AudioClipList.gateOpenShort);
+    }
+
     #endregion
 
     [RuntimeInitializeOnLoadMethod]
@@ -769,6 +779,8 @@ public static class AudioClipList
             case NPCNameList.csalan:
             case NPCNameList.horse:
                 return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(horseIntroSFX), VolumeType.Voice);     
+            case NPCNameList.leafPile:
+                return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(onTransitionSFX), VolumeType.Voice);     
             case NPCNameList.guardVirag:
             case NPCNameList.guardReka:
             case NPCNameList.guardMuzsa:

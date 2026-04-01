@@ -8,13 +8,13 @@ public class NPCMouseHover : MonoBehaviour
 
     //Needs to be attached to an object with a 2DCollider Component
 
-    public IRevealable npc;
+    public IRevealable[] revealables;
     public PolygonCollider2D polygonCollider2D;
     public SpriteRenderer spriteRenderer;
 
     void Start()
     {
-        npc = transform.parent.GetComponent<IRevealable>();
+        revealables = transform.parent.GetComponents<IRevealable>();
         
         Vector3Int currentCell = AreaManager.getMasterGrid().WorldToCell(transform.parent.position);
 
@@ -38,11 +38,16 @@ public class NPCMouseHover : MonoBehaviour
             case OOCActivity.intimidating:
             case OOCActivity.inChestUI:
             
-                if(npc != null)
+                foreach(IRevealable revealable in revealables)
                 {
-                    npc.OnPointerEnter(null);
+                    if(revealable == null)
+                    {
+                        continue;
+                    }
+
+                    revealable.OnPointerEnter(null);
                 }
-                
+
                 return;
             default:
                 return;
@@ -51,11 +56,14 @@ public class NPCMouseHover : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if(npc == null)
+        foreach(IRevealable revealable in revealables)
         {
-            return;
-        }
+            if(revealable == null)
+            {
+                continue;
+            }
 
-        npc.OnPointerExit(null);
+            revealable.OnPointerExit(null);
+        }
     }
 }

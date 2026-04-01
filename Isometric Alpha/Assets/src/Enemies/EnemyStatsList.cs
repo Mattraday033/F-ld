@@ -179,7 +179,7 @@ new BuffChargeUpAbility(TraitList.coordinated, AbilityList.getAbility(null, Abil
                                                                             animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
 
         enemyStatsDict.Add(MonsterNameList.javelineer, new MinionStats(MonsterNameList.javelineer,
-                                                                                    Constants.fifteenArmor,
+                                                                                    Constants.fiveArmor,
                                                                                             25,
                             AbilityList.getAbility(null, AbilityList.guardJavelinKey) as Ability,
                                                                 new Trait[] { 

@@ -52,6 +52,7 @@ public abstract class FullScreenTransition : ScreenFade
 {
 	protected float frameCount = 0;
     protected const float slowFadeInSpeed = 3.5f;
+    protected const float quickFadeInSpeed = .15f;
     public float fadeTime = .5f;
 
 	protected void updateFadeToBlackImageOpacity()
@@ -69,6 +70,11 @@ public abstract class FullScreenTransition : ScreenFade
 	}
 
     public abstract void setFrameCountAtStart();
+
+    public void setToQuickFadeTime()
+    {
+        fadeTime = quickFadeInSpeed;
+    }
 }
 
 public class FadeToBlackTransition : FullScreenTransition

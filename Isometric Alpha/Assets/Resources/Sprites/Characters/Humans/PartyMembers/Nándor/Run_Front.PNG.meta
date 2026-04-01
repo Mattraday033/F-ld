@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d5a50b6c2b9ff5a46884e6d796761f32
+guid: 023dc0c14a505a644ac593c1f40edace
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Run_Front_0
+      name: New_Run_Front_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35e267133a0645745b781d8e08aba743
-      internalID: 1622908669
+      spriteID: 9be6b6d96a2681e4f912625cbf59fa6c
+      internalID: -1561043997
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_Front_1
+      name: New_Run_Front_1
       rect:
         serializedVersion: 2
         x: 128
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 120bbbba43254554c90a84a32591aaef
-      internalID: 1958209623
+      spriteID: de62c229909b5194c9460463d3199e1b
+      internalID: -874069935
       vertices: []
       indices: 
       edges: []
@@ -149,8 +149,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Run_Front_0: 1622908669
-      Run_Front_1: 1958209623
+      New_Run_Front_0: -1561043997
+      New_Run_Front_1: -874069935
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

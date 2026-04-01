@@ -35,6 +35,12 @@ public class LoadingBarProgressTracker : MonoBehaviour
 		waitInSeconds = getNewWait();
 
         speed = UnityEngine.Random.Range(speedMin, speedMax);
+
+        if(CombatStateManager.inCombat)
+        {
+            CombatStateManager.resetCombat();
+            CombatStateManager.inCombat = false;
+        }
 	}
 
 	void Update()
