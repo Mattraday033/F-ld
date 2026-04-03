@@ -7,17 +7,12 @@ using UnityEngine;
 //Subclasses will handle individual behaviours 
 public class PlayerInteractionScript : ScriptableObject
 {
-    public virtual void runScript()
-    {
-        //empty on purpose
-    }
-    
     public virtual bool evaluateScript()
     {
         return false;
     }
     
-    public virtual void runScript(GameObject target)
+    public virtual void runScript(GameObject target = null)
     {
         //empty on purpose
     }

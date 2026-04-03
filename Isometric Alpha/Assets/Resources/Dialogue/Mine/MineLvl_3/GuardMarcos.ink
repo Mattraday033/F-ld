@@ -194,7 +194,7 @@ setToTrue(mineLvl3MarcosAgreedToIgniteJelly)
 setToTrue(mineLvl3MarcosTaughtHowToIgniteJelly)
 activateQuestStep(Sealing the Breach, The Jelly's Secrets.)
 
-Be careful not to knock over either of the cups as you hurry away from the barrel. We've lost more than one guard to that mistake.
+Be careful not to knock over either of the cups as you move away from the barrel. We've lost more than one guard to that mistake.
 
     +I understand. Thank you.
         ->2c

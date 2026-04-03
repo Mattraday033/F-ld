@@ -119,6 +119,11 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
 
     public void enableOOCUI()
     {
+        if(oocUIParent == null || oocUIParent is null || PlayerOOCStateManager.currentActivity == OOCActivity.Defeat)
+        {
+            return;
+        }
+
         State.oocUIManager = this;
         oocUIParent.SetActive(true);
     }

@@ -90,7 +90,7 @@ public abstract class PopUpButton : MonoBehaviour
 	
 	public virtual bool shouldReturnToWalkingMode()
 	{ 
-        if (OverallUIManager.currentScreenManager == null && OverallUIManager.currentScreenManager is null && EscapeStack.getEscapableObjectsCount() == 0 && !TutorialSequence.currentlyInTutorialSequence())
+        if (OverallUIManager.currentScreenManager == null && OverallUIManager.currentScreenManager is null && EscapeStack.getEscapableObjectsCount() == 0 && !TutorialSequence.currentlyInTutorialSequence() && PlayerOOCStateManager.currentActivity != OOCActivity.Defeat)
 		{
 			//Helpers.debugNullCheck("OverallUIManager.currentScreen", OverallUIManager.currentScreen);
 			return true;

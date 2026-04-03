@@ -5,7 +5,7 @@ using UnityEngine;
 public class ActivateIntimidateScript : TutorialSequenceStepScript
 {
 
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
         IntimidateManager.getInstance().executeSkill();
         SkillButtonManager.unhighlightSkillOutline();

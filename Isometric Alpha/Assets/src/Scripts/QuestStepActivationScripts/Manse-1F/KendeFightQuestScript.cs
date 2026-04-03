@@ -4,7 +4,7 @@ public class KendeFightQuestScript : QuestStepActivationScript
 {
     private const bool questSucceeded = true;
 
-    public override void runScript()
+    public override void runScript(GameObject target = null)
     {
         if (Flags.getFlag(FlagNameList.convincedImre))
         {

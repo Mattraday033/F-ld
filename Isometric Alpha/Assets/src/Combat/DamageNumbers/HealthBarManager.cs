@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class HealthBarManager : MonoBehaviour
 {
     
+    public GameObject mandatoryTargetSymbol;
+    public GameObject stunnedSymbol;
 
 	public Image backgroundImage; //starts green
 
@@ -39,6 +41,10 @@ public class HealthBarManager : MonoBehaviour
         {
             return;
         }
+
+
+        stunnedSymbol.SetActive(linkedStats.isStunned());
+        mandatoryTargetSymbol.SetActive(linkedStats.isMandatoryTarget());
         
         if(linkedStats.isDebuffed() && linkedStats.isBuffed())
         {

@@ -77,7 +77,6 @@ public static class TutorialMessageList
         tutorialDictionary.Add(interactableObjectTutorialMessagePrefix + 1, "Rubble blocks your path. If you highlight interactables, the rubble will be shown in green. This means you can interact with it like you would an NPC. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to interact with it.");
         tutorialDictionary.Add(interactableObjectTutorialMessagePrefix + 2, "Barrels block your path. If you highlight interactables, the barrels will be shown in green. This means you can interact with them like you would an NPC. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to interact with it.");
 
-
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 1, "This creature is hiding around a blind corner. This is a good opportunity to use the Cunning skill. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to begin to activate the Cunning Skill.");
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 2, "The yellow tiles show the Cunning skill's range. A red tile shows a target. You are currently targeting the green tile. Use the Movement keys to change the tile you are targeting. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to target the creature.");
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 3, "You are now targeting the creature. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to use Cunning on the creature.");
@@ -112,7 +111,9 @@ public static class TutorialMessageList
         tutorialDictionary.Add(formationTutorialMessagePrefix + 4, "This shows your Party Size. You cannot have more Companions in your Party than your Party Size will allow. Your Party Size is determined by your Level and your Party's total combined Wisdom and Charisma.");
         tutorialDictionary.Add(formationTutorialMessagePrefix + 5, "To add a Companion, click and drag them onto the Formation Grid. To end this Tutorial, press <nobr>' " + keyCodePlaceHolder + " '</nobr>");
 
-        tutorialDictionary.Add(hiddenObjectTutorialMessagePrefix + 1, "Bálint has asked for you to gather leaves in this area. Sometimes, quest objectives and other important objects are hidden behind terrain. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to remove the tops of buildings and scenery to get a better look behind them.");
+        tutorialDictionary.Add(hiddenObjectTutorialMessagePrefix + 1, "This is the Quest Counter. It appears when you enter an area with a Quest Objective.");
+        tutorialDictionary.Add(hiddenObjectTutorialMessagePrefix + 2, "If you cannot find the Quest Objective it is indicating, try looking inside buildings in that area.");
+        tutorialDictionary.Add(hiddenObjectTutorialMessagePrefix + 3, "The entrances to some buildings will be hidden behind terrain. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to hide terrain.");
 
         tutorialDictionary.Add(addingAbilitiesTutorialMessagePrefix + 3, "You have unlocked new Abilities. All available Abilities are listed here. To learn more about an Ability, hover over it.");
         tutorialDictionary.Add(addingAbilitiesTutorialMessagePrefix + 4, "To add an Action to the Action Wheel, click the Ability, or drag it into an open slot on the Action Wheel.");
@@ -162,10 +163,15 @@ public static class TutorialMessageList
         tutorialDictionary.Add(mandatoryTargetTutorialMessagePrefix + 2, "Being the Mandatory Target means every effect that targets something on it's side of the field must include it.");
         tutorialDictionary.Add(mandatoryTargetTutorialMessagePrefix + 3, "Actions that do not include at least one Mandatory Target will be prevented from being added to the Action Queue.");
 
-        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 1, "This is the Quest Counter. It appears when you enter an area with a Quest Objective.");
-        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 2, "You can view the Quests with Objectives in the current area on your Map.");
-        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 3, "This is your Map. It will only show you places you've been before. Nearby locations will be silhouetted in black.");
-        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 4, "The Quest Symbol next to an area name means a quest wants you to go there. If you cannot find the Quest Objective it is indicating, try looking inside buildings in that area.");
+        // tutorialDictionary.Add(questCounterTutorialMessagePrefix + 1, "This is the Quest Counter. It appears when you enter an area with a Quest Objective.");
+        // tutorialDictionary.Add(questCounterTutorialMessagePrefix + 2, "You can view the Quests with Objectives in the current area on your Map.");
+        // tutorialDictionary.Add(questCounterTutorialMessagePrefix + 3, "This is your Map. It will only show you places you've been before. Nearby locations will be silhouetted in black.");
+        // tutorialDictionary.Add(questCounterTutorialMessagePrefix + 4, "The Quest Symbol next to an area name means a quest wants you to go there. If you cannot find the Quest Objective it is indicating, try looking inside buildings in that area.");
+
+        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 1, "You have been given multiple Quest Objectives at once. You can view the Quests with Objectives in the current area on your Map. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to open your Map.");
+        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 2, "This is your Map. It will only show you places you've been before. Nearby locations will be silhouetted in black.");
+        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 3, "The Quest Symbol next to an area name means a quest wants you to go there.");
+        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 4, "You can see the names of your current Quests here. Hover over them to learn more about them.");
 
         tutorialDictionary.Add(partyMemberUpgradeTutorialMessagePrefix + 1, "You have earned enough affinity to upgrade a companion.");
         tutorialDictionary.Add(partyMemberUpgradeTutorialMessagePrefix + 2, "You can tell you have enough affinity because the party screen button has a counter next to it.");

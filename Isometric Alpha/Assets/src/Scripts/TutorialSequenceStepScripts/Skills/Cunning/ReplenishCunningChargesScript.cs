@@ -5,7 +5,7 @@ using UnityEngine;
 public class ReplenishCunningChargesScript : TutorialSequenceStepScript
 {
 
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
         CunningManager.resetCunningsRemaining();
         (new SetToSkillScript(SkillType.Cunning)).runScript();

@@ -55,6 +55,16 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
     public void handleCombatMouseClick()
     {
+        if(CombatStateManager.currentActivity == CurrentActivity.Tutorial)
+        {
+            AbilityWheelChooseAbility chooseAbilityScript = new AbilityWheelChooseAbility();
+
+            chooseAbilityScript.runScript();
+
+            TutorialSequence.currentTutorialSequence.moveToNextStep();
+            return;
+        }
+
         abilityMenuManager.setCurrentlySelectedAbilityIndex(index);
 
         abilityMenuManager.selectAction();
@@ -250,6 +260,9 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         loadedCombatAction = setCombatActionSelectorStartingPosition(loadedCombatAction);
         loadedCombatAction.setActor(CombatGrid.getCombatantAtCoords(SelectorManager.getInstance().selectors[0].getCoords()));
+
+        getDescriptionPanelSlot().revertToPrimaryDescribable();
+        getDescriptionPanelSlot().setPrimaryDescribable(loadedCombatAction);
 
         SelectorManager.updateAllDamagePreviews();
 

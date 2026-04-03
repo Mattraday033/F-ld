@@ -43,7 +43,7 @@ public class OpenBarracksGateScript : PlayerInteractionScript
         TransitionManager.BeforeTransition.RemoveListener(openGate);
     }
 
-    public override void runScript()
+    public override void runScript(GameObject target = null)
     {
         AreaList.setAreaToHostile(LocationNameList.guardHouseSouthWest);
         AreaList.setAreaToHostile(LocationNameList.campCenter);

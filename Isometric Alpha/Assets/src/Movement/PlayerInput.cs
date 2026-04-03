@@ -100,6 +100,7 @@ public class PlayerInput : MonoBehaviour
                     break;
                 case OOCActivity.inFade:
                 case OOCActivity.preCombat:
+                case OOCActivity.Defeat:
                     return;
                 default:
                     Debug.LogError("Unrecognized OOCActivity: " + PlayerOOCStateManager.currentActivity.ToString());

@@ -21,7 +21,8 @@ public enum OOCActivity {
                             inTutorialSequence = 14,
                             inWorldMap = 15,
                             inFade = 16,
-                            preCombat = 17
+                            preCombat = 17,
+                            Defeat = 18
 						};
 //class OOCPlayer
 public static class PlayerOOCStateManager
@@ -153,6 +154,8 @@ public static class PlayerOOCStateManager
                 break;
             case OOCActivity.inWorldMap:
                 break;
+            case OOCActivity.Defeat:
+                break;
         }
 
         switch (currentActivity)
@@ -201,6 +204,8 @@ public static class PlayerOOCStateManager
                 break;
             case OOCActivity.inWorldMap:
                 OnStateChangeToInWorldMap.Invoke();
+                break;
+            case OOCActivity.Defeat:
                 break;
         }
 

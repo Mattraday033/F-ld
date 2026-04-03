@@ -7,7 +7,7 @@ public class SpeakAtStartScript : PlayerInteractionScript
 {
     public DialogueTrigger dialogueTrigger;
 
-    public override void runScript()
+    public override void runScript(GameObject target = null)
     {
         //empty on purpose
     }
@@ -16,7 +16,7 @@ public class SpeakAtStartScript : PlayerInteractionScript
 public class BeginningConversationScript: SpeakAtStartScript //Broglin + Garcha in the Starting Hut
 {
 
-    public override void runScript()
+    public override void runScript(GameObject target = null)
     {
         if (!Flags.getFlag(FlagNameList.finishedFirstDialogue))
         {
@@ -29,7 +29,7 @@ public class BeginningConversationScript: SpeakAtStartScript //Broglin + Garcha 
 public class KendeInKitchenDuringRiotScript: SpeakAtStartScript
 {
 
-    public override void runScript()
+    public override void runScript(GameObject target = null)
     {
         if (Flags.getFlag(FlagNameList.revoltStarted) && !Flags.getFlag(FlagNameList.kendeUponEnteringKitchens))
         {
@@ -42,7 +42,7 @@ public class KendeInKitchenDuringRiotScript: SpeakAtStartScript
 public class ChiefTaborManseSecondFloorScript: SpeakAtStartScript
 {
 
-    public override void runScript()
+    public override void runScript(GameObject target = null)
     {
         if ((Flags.getFlag(FlagNameList.revoltStarted) && !Flags.getFlag(FlagNameList.letTaborLive) && !Flags.getFlag(FlagNameList.killedTaborInManse)) ||
             (Flags.getFlag(FlagNameList.directorDefeated) && !Flags.getFlag(FlagNameList.acceptedTaborsSurrenderAfterDirectorFight) && !Flags.getFlag(FlagNameList.killedTaborInManse)))
@@ -56,7 +56,7 @@ public class ChiefTaborManseSecondFloorScript: SpeakAtStartScript
 public class BeamAndCsalanInManseScript : SpeakAtStartScript
 {
 
-    public override void runScript()
+    public override void runScript(GameObject target = null)
     {
         if (!DeathFlagManager.isDead(NPCNameList.beam))
         {
@@ -69,7 +69,7 @@ public class BeamAndCsalanInManseScript : SpeakAtStartScript
 public class GuardPunishmentNandorStartScript : SpeakAtStartScript
 {
 
-    public override void runScript()
+    public override void runScript(GameObject target = null)
     {
         if (Flags.getFlag(FlagNameList.enteredMessHallYardAfterRevolt) && !Flags.getFlag(FlagNameList.nandorStartedGuardPunishmentConvo))
         {

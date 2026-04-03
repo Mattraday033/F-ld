@@ -5,7 +5,7 @@ using UnityEngine;
 public class DiningRoomGateScript : PlayerInteractionScript
 {
 
-    public override void runScript()
+    public override void runScript(GameObject target = null)
     {
         GateAndChestManager.addKey(ZoneKeyList.manseFirstFloor + LocationNameList.section2a + NPCNameList.ancientPortcullis);
     }

@@ -243,7 +243,7 @@ changeCamTarget({gasparIndex})
 
 fadeBackIn(60)
 
-{mineLvl3SpeakingFromGuardCrates:Pázmán|Virág}, why is there a slave in my stockroom? My orders were clear: we don't know how long we're going to be down here and we can't afford any extra mouths.
+{mineLvl3SpeakingFromGuardCrates:Pázmán|Virág}, why is there a slave in my stockroom? My orders were clear: we can't afford the extra mouths.
     
 changeCamTarget({introducerIndex})
 
@@ -268,7 +268,7 @@ I'm certain sir. This means the gate is open. We can leave!
         ->2c
 }
 
-    +And I am the one who opened the gate to the upper levels. I suppose a reward is in order?
+    +And <i>I</i> am the one who opened the gate to the upper levels. I suppose a reward is in order?
         ~askedForReward = true
         -> 3a
 
@@ -361,7 +361,7 @@ Oh, I doubt it: I can count to twelve on a good day and there's no way you've ki
 
 changeCamTarget({gasparIndex})
 
-{askedForReward:A reward?|Thank you?} That gate was closed to prevent any of these worms from getting through to the higher levels! You opening it is in direction violation of standing camp orders! If you're looking for a reward for your transgressions, the only thing you'll receive is a trip to the pit, scum!
+{askedForReward:A reward?|Thank you?} That gate was closed to prevent any of these worms from getting through to the higher levels! You opening it is in direction violation of standing camp orders! If you're looking for a reward, the only thing you'll receive is a trip to the pit, scum!
 
     +I've saved you and your guards from this death trap! A 'thank you' isn't too much to ask!
         ->3b
@@ -442,7 +442,7 @@ So, that stubborn fool made it after all. What was his condition?
 
 === 3fb ===
 
-finishQuest(Find Guard Márcos, true, Returned to Gáspár)
+finishQuest(Find Guard Márcos, true, Returned to Gáspár.)
 
 prepForItem()
 

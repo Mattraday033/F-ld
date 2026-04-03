@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GuardPunishmentTransitionScript : PlayerInteractionScript
 {
-    public override void runScript()
+    public override void runScript(GameObject target = null)
     {
         if (Flags.getFlag(FlagNameList.directorDefeated) && Flags.getFlag(FlagNameList.mineLvl3CarterAndNandorInParty))
         {

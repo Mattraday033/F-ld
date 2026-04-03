@@ -89,7 +89,7 @@ public static class MouseHoverManager
 
     public static void createHoverTag(string text)
     {
-        if (getHoverObjectParent() != null)
+        if (getHoverObjectParent() != null && text != null && text.Length > 0)
         {
             MouseHoverTag tag = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.mouseHoverTag), getHoverObjectParent()).GetComponent<MouseHoverTag>();
             tag.fillOutTag(text);
@@ -146,7 +146,7 @@ public static class MouseHoverManager
         }
     }
 
-    public static void spawnHoverIcon(IHoverIconSource source, Transform parent, bool setToWorldScale = false)
+    public static void spawnHoverIcon(IHoverIconSource source, Transform parent, float scale = 1f)
     {
         if (source.getObjectBeingDescribed() == null)
         {
@@ -163,10 +163,7 @@ public static class MouseHoverManager
         hoverDescriptionPanelSlot.setPrimaryDescribable(source.getObjectBeingDescribed());
         hoverDescriptionPanelObject.SetActive(true);
 
-        if(setToWorldScale)
-        {
-            hoverDescriptionPanelObject.transform.localScale = new Vector3(.007f, .007f);
-        }
+        hoverDescriptionPanelObject.transform.localScale = new Vector3(scale, scale);
     }
 
     public static void spawnCustomHover(IHoverIconSource source, Transform parent, string prefabName)

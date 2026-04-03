@@ -6,7 +6,7 @@ public class EnteredPit2a : QuestStepActivationScript
 {
     public const string enteredPit2aFlag = "enteredPit-2a";
 
-    public override void runScript()
+    public override void runScript(GameObject target = null)
     {
         if (!Flags.getFlag(enteredPit2aFlag))
         {

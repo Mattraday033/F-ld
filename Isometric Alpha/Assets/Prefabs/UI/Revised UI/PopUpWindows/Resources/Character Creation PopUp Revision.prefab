@@ -4199,7 +4199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c490f8037758d5045bbe698094478972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statType: 2
+  PrimaryStat: 1
 --- !u!114 &3018930178238018848 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2309042718949109083, guid: 73de9455b4cdb0b489830bc06ae8ff7c,
@@ -5338,7 +5338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c490f8037758d5045bbe698094478972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statType: 4
+  PrimaryStat: 3
 --- !u!1 &6244772609399517576 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8528698774818041592, guid: 73de9455b4cdb0b489830bc06ae8ff7c,
@@ -5772,7 +5772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c490f8037758d5045bbe698094478972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statType: 2
+  PrimaryStat: 1
 --- !u!114 &3427738237356843211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6373,7 +6373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c490f8037758d5045bbe698094478972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statType: 4
+  PrimaryStat: 3
 --- !u!114 &2735088327927494649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7006,7 +7006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c490f8037758d5045bbe698094478972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statType: 1
+  PrimaryStat: 0
 --- !u!1001 &7279128092792343967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7598,7 +7598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c490f8037758d5045bbe698094478972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statType: 3
+  PrimaryStat: 2
 --- !u!114 &1060161493930146491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8008,7 +8008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c490f8037758d5045bbe698094478972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statType: 1
+  PrimaryStat: 0
 --- !u!114 &6781290988167388081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8624,7 +8624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c490f8037758d5045bbe698094478972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statType: 3
+  PrimaryStat: 2
 --- !u!224 &8347003834567569105 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1088081865362828857, guid: 73de9455b4cdb0b489830bc06ae8ff7c,

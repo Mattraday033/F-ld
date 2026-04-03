@@ -25,7 +25,7 @@ public class MovePlayerScript : TutorialSequenceStepScript
 
 public class MovePlayerNorthWestScript  : MovePlayerScript
 {
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
         PlayerMovement.getInstance().StartCoroutine(movePlayer(new FaceNorthWestScript(), MovementManager.distance1TileNorthWestGrid));
     }
@@ -33,7 +33,7 @@ public class MovePlayerNorthWestScript  : MovePlayerScript
 
 public class MovePlayerNorthEastScript  : MovePlayerScript
 {
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
         PlayerMovement.getInstance().StartCoroutine(movePlayer(new FaceNorthEastScript(), MovementManager.distance1TileNorthEastGrid));
     }
@@ -41,7 +41,7 @@ public class MovePlayerNorthEastScript  : MovePlayerScript
 
 public class MovePlayerSouthWestScript  : MovePlayerScript
 {
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
         PlayerMovement.getInstance().StartCoroutine(movePlayer(new FaceSouthWestScript(), MovementManager.distance1TileSouthWestGrid));
     }
@@ -49,7 +49,7 @@ public class MovePlayerSouthWestScript  : MovePlayerScript
 
 public class MovePlayerSouthEastScript  : MovePlayerScript
 {
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
         PlayerMovement.getInstance().StartCoroutine(movePlayer(new FaceSouthEastScript(), MovementManager.distance1TileSouthEastGrid));
     }

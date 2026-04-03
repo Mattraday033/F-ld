@@ -18,7 +18,7 @@ public class CreatureAmount
 }
 
 //info about a pack of enemies on the overworld, such as how many of them there are and of what type. Stored in State
-public class EnemyPackInfo : MonoBehaviour, IDescribableInBlocks, ICreatureSpawnPackage
+public class EnemyPackInfo : IDescribableInBlocks, ICreatureSpawnPackage
 {
     private string _TutorialSequenceKey;
 

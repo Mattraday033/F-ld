@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveCunningTargetNorthEastScript : TutorialSequenceStepScript
 {
 
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
         CunningManager.getInstance().moveCurrentSelectorNorthEast(); 
     }

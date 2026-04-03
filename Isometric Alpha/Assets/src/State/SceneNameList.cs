@@ -75,6 +75,11 @@ public static class SceneChange
 
     public static void addOOCUIScene()
     {
+        if(PlayerOOCStateManager.currentActivity == OOCActivity.Defeat)
+        {
+            return;
+        }
+
         SceneManager.LoadScene(SceneNameList.OOCUserInterface, LoadSceneMode.Additive);
     }
 

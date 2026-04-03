@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OpenMap : TutorialSequenceStepScript
 {
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
         if (PlayerObject.getInstance() != null)
         {

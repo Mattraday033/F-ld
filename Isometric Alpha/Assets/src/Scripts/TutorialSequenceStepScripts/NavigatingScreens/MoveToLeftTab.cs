@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveToLeftTab : TutorialSequenceStepScript
 {
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
         OverallUIManager.moveToScreenToTheLeft();
     }

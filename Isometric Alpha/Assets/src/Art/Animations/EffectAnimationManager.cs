@@ -16,7 +16,8 @@ public enum EffectAnimationType
     BatSwarm,
     Acid,
     SmokeBomb,
-    Intimidate
+    Intimidate,
+    BlastingJelly
 }
 
 
@@ -32,6 +33,11 @@ public class EffectAnimationManager : AnimationManager
     public bool healsTarget;
 
     float spawnDamageNumbersTime;
+
+    public void setAnimations(EffectAnimationType effectType)
+    {
+        setAnimations(effectType.ToString());
+    }
 
     public override void setAnimations(string effectType)
     {

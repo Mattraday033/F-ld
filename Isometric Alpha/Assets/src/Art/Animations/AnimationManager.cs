@@ -102,7 +102,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     public virtual bool spriteSetByHeartBeat()
     {
         return !CombatAnimationManager.trackerBeingTracked(this) && 
-                ((!CombatStateManager.inCombat && !PlayerMovement.getInstance().canPlayRunAnimation()) || 
+                ((!CombatStateManager.inCombat && !PlayerMovement.getInstance().canPlayRunAnimation() && PlayerOOCStateManager.currentActivity != OOCActivity.Defeat) || 
                 (CombatStateManager.inCombat && !linkedStats.isDead()));
     }
 
@@ -457,7 +457,11 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         disableExtras();
         playAnimation(createClipTransitionToDeath());
         removeAnimation();
-        linkedStats.playAnimationSFX(CharacterAnimationType.Death);
+
+        if(linkedStats != null)
+        {
+            linkedStats.playAnimationSFX(CharacterAnimationType.Death);
+        }
     }
 
     public void playDeathAnimationThenHide()

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SnapSelectorToPlayer : TutorialSequenceStepScript
 {
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
         SelectorManager.currentSelector.setToLocation(PartyManager.getPlayerStats().position);
 

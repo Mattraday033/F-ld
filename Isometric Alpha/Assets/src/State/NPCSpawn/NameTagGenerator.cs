@@ -64,7 +64,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
         PlayerOOCStateManager.OnStateChangeToWalking.RemoveListener(displayNameTagBasedOnStateChange);
 	}
 
-    private void checkSpawnParams(string secretDoorFlag)
+    public virtual void checkSpawnParams(string secretDoorFlag)
     {
         if(!SpawnParamsList.getSpawnParams(AreaManager.locationName, nameSource.getName()).canSpawn(nameSource.getName()))
         {

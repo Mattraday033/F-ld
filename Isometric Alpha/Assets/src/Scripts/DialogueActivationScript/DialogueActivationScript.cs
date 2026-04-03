@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DialogueActivationScript : PlayerInteractionScript
 {
-    public override void runScript()
+    public override void runScript(GameObject target = null)
     {
         //empty on purpose
     }

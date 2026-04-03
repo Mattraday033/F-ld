@@ -28,6 +28,8 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public Image iconImage;
     public Image bubble;
 
+    public bool inWorldSpace = false;
+
     public virtual void Awake()
     {
         SlotIconImage slotIconImage = iconImage as SlotIconImage;
@@ -94,7 +96,14 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public virtual void spawnHoverIcon()
     {
-        MouseHoverManager.spawnHoverIcon(this, transform);
+        float scale = 1f;
+
+        if(inWorldSpace)
+        {
+            scale = .36f;
+        }
+
+        MouseHoverManager.spawnHoverIcon(this, transform, scale);
     }
 
     public void destroyHoverIcon()

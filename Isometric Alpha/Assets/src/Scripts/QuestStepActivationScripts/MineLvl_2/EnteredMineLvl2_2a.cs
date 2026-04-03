@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnteredMineLvl2_2a : QuestStepActivationScript
 {
-    public override void runScript()
+    public override void runScript(GameObject target = null)
     {
         if (Flags.getFlag(FlagNameList.toldToFindNandor) &&
              !Flags.getFlag(FlagNameList.enteredMineLvl2_2a) &&

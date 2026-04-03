@@ -634,6 +634,11 @@ public class CombatStateManager : MonoBehaviour
 		State.enteredCombatFromDialogue = false;
 		State.allyPackInfo = null;
 
+        if(AreaManager.locationName.Equals(LocationNameList.slaveShackSix))
+        {
+            CunningManager.resetCunningsRemaining();
+        }
+
 		StepCountScriptManager.reset();
 	}
 

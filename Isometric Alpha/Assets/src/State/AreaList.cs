@@ -463,7 +463,10 @@ public static class AreaList
 
 	public static bool areaOutsideAllowedFastTravelAreas(string locationName)
 	{
-		if (Flags.getFlag(FlagNameList.mineLvl2GuardsFinishedMove) && !Flags.getFlag(FlagNameList.mineLvl3BreachSealed))
+		if (!Flags.getFlag(FlagNameList.mineLvl3GuardsInParty) &&
+             Flags.getFlag(FlagNameList.mineLvl2GuardsFinishedMove) && 
+             !Flags.getFlag(FlagNameList.mineLvl3BreachSealed) && 
+             !Flags.getFlag(FlagNameList.mineLvl3KilledGuards))
 		{
 			if (!locationName.Contains(ZoneKeyList.mineLvl3))
 			{

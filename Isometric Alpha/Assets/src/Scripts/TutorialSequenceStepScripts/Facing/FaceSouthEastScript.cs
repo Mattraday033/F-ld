@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FaceSouthEastScript : TutorialSequenceStepScript
 {
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
         PlayerMovement.setPlayerFacing(Facing.SouthEast);
     }

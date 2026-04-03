@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AbilityWheelCycleCounterClockwise : TutorialSequenceStepScript
 {
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
         AbilityMenuManager abilityMenuManager = AbilityMenuManager.getInstance();
 

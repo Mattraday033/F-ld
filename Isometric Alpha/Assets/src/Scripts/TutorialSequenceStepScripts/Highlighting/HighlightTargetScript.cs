@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HighlightTargetScript : TutorialSequenceStepScript
 {
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
         IRevealable revealable = target.GetComponent<IRevealable>();
 

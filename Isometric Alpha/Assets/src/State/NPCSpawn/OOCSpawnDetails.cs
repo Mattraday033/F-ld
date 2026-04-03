@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class OOCSpawnDetails
 {
 
-    private const string gameObjectNameSuffix = "'s GameObject";
+    public const string gameObjectNameSuffix = "'s GameObject";
     private const string gameObjectPlaceHolderName = "PlaceHolder GameObject";
     protected const string noTutorialTargetHash = Constants.emptyString;
 
@@ -135,7 +135,7 @@ public abstract class OOCSpawnDetails
         addTutorialTargetComponent(gameObject, spriteRenderer, tutorialTargetHash);
     }
 
-    public static void addTutorialTargetComponent(GameObject gameObject, SpriteRenderer spriteRenderer, string tutorialTargetHash)
+    public static void addTutorialTargetComponent(GameObject gameObject, SpriteRenderer spriteRenderer, string tutorialTargetHash, IRevealable revealable = null)
     {
         if(gameObject == null)
         {
@@ -164,6 +164,7 @@ public abstract class OOCSpawnDetails
         targetSprite.tutorialHash = tutorialTargetHash;
 
         targetSprite.spriteRenderer = spriteRenderer;
+        targetSprite.revealable = revealable;
     }
 
     public static void addTutorialTargetComponent(ITutorialSequenceTarget target, string tutorialTargetHash)
@@ -405,7 +406,7 @@ public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
 
         if (hasTutorialTargetHash())
         {
-            addTutorialTargetComponent(cunningBlocker.gameObject, cunningBlocker.spriteRenderer, tutorialTargetHash);
+            addTutorialTargetComponent(cunningBlocker.gameObject, cunningBlocker.spriteRenderer, tutorialTargetHash, cunningBlocker);
         }
     }
 
@@ -567,6 +568,59 @@ public class ObstacleSpawnDetails : OffSetSpawnDetails
 
 }
 
+public class DeadBodySpawnDetails : ObstacleSpawnDetails
+{
+
+    private Facing facing;
+
+    public DeadBodySpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, Facing facing = Facing.NorthEast, SortingLayerInfo sortingLayerInfo = null, float offset = 0f, bool flipX = false, bool withScale = false, bool ignoresSecretDoors = true) :
+    base(npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX, withScale: withScale, ignoresSecretDoors: ignoresSecretDoors)
+    {
+        this.facing = facing;
+    }
+
+    public Sprite getSprite()
+    {
+        string path = EnemyTypeFolderPathList.getEnemyTypeFolderPath(spriteName);
+        string sheetName = "";
+
+        switch(facing)
+        {
+            case Facing.SouthEast:
+            case Facing.SouthWest:
+                sheetName = CharacterAnimationType.Death_Front.ToString();
+                break;
+            default:
+                sheetName = CharacterAnimationType.Death_Back.ToString();
+                break;
+        }
+
+        Sprite[] sprites = Resources.LoadAll<Sprite>(path+sheetName);
+
+        if(sprites == null || sprites.Length <= 0)
+        {
+            sprites = Resources.LoadAll<Sprite>(path+CharacterAnimationType.Death.ToString());
+        }
+
+        return sprites[sprites.Length - 1];
+    }
+
+    public override void spawnActions(SpriteRenderer spriteRenderer)
+    {
+        if (spriteRenderer == null)
+        {
+            return;
+        }
+
+        if(sortingLayerInfo != null) 
+        {
+            sortingLayerInfo.setSpriteRendererSortingLayer(spriteRenderer);
+        }
+
+        spriteRenderer.sprite = getSprite();
+    }
+}
+
 public class ObstacleWithSecretDoorFlagSpawnDetails : ObstacleSpawnDetails
 {
 
@@ -696,41 +750,15 @@ public class ButtonSpawnDetails : OOCSpawnDetails
 
     private int index;
     private int weight;
+    private int charismaRequirement;
 
-    public ButtonSpawnDetails(Vector3Int cellCoords) :
-    base(NPCNameList.button, cellCoords)
-    {
-        this.index = 0;
-        this.weight = 1;
-    }
-
-    public ButtonSpawnDetails(Vector3Int cellCoords, int index) :
-    base(NPCNameList.button, cellCoords)
-    {
-        this.index = index;
-        this.weight = 1;
-    }
-
-    public ButtonSpawnDetails(int weight, Vector3Int cellCoords) :
-    base(NPCNameList.button, cellCoords)
-    {
-        this.index = 0;
-        this.weight = weight;
-    }
-
-    public ButtonSpawnDetails(int weight, Vector3Int cellCoords, int index) :
+    public ButtonSpawnDetails(Vector3Int cellCoords, int index = 0, int weight = 1, int charismaRequirement = 1, string tutorialTargetHash = null) :
     base(NPCNameList.button, cellCoords)
     {
         this.index = index;
         this.weight = weight;
-    }
-
-    public ButtonSpawnDetails(Vector3Int cellCoords, string tutorialTargetHash) :
-    base(NPCNameList.button, cellCoords)
-    {
+        this.charismaRequirement = charismaRequirement;
         this.tutorialTargetHash = tutorialTargetHash;
-        this.index = 0;
-        this.weight = 1;
     }
 
     public override string getPrefabName()
@@ -759,6 +787,7 @@ public class ButtonSpawnDetails : OOCSpawnDetails
     {
         floorButton.index = index;
         floorButton.weight = weight;
+        floorButton.charismaRequirement = charismaRequirement;
     }
 
 }
@@ -767,14 +796,8 @@ public class HiddenButtonSpawnDetails : ButtonSpawnDetails
 {
     private string secretDoorFlag;
 
-    public HiddenButtonSpawnDetails(Vector3Int cellCoords, string secretDoorFlag) :
-    base(Constants.sizeOne, cellCoords, Constants.indexZero)
-    {
-        this.secretDoorFlag = secretDoorFlag;
-    }
-
-    public HiddenButtonSpawnDetails(Vector3Int cellCoords, int index, string secretDoorFlag) :
-    base(Constants.sizeOne, cellCoords, index)
+    public HiddenButtonSpawnDetails(Vector3Int cellCoords, string secretDoorFlag, int index = 0) :
+    base(cellCoords, index: index)
     {
         this.secretDoorFlag = secretDoorFlag;
     }

@@ -12,12 +12,70 @@ public static class MonsterSpawnDetailsList
     {
         string key = AreaManager.locationName;
 
+        List<MonsterSpawnDetails> conditionalList = getConditionalMonsterSpawnList(key);
+
+        if(conditionalList != null)
+        {
+            return conditionalList;
+        }
+
         if (!monsterSpawnDetailsDict.ContainsKey(key))
         {
             return new List<MonsterSpawnDetails>();
         }
 
         return monsterSpawnDetailsDict[key];
+    }
+
+    public static List<MonsterSpawnDetails> getConditionalMonsterSpawnList(string locationName)
+    {
+        List<MonsterSpawnDetails> conditionalList = new List<MonsterSpawnDetails>();        
+
+        switch(locationName)
+        {       
+            case LocationNameList.campMineEntrance:
+                
+                if(!MonsterSpawnConditionsList.wormsSpawnInsideCamp())
+                {
+                    return null;
+                }
+
+                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-5, 19), movementType: MonsterMovementType.Chases));
+                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-5, 18), movementType: MonsterMovementType.Chases));
+
+                return conditionalList;
+
+            case LocationNameList.campSouthEast:
+                
+                if(!MonsterSpawnConditionsList.wormsSpawnInsideCamp())
+                {
+                    return null;
+                }
+
+                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(10, 0), movementType: MonsterMovementType.Chases));
+                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(11, 18), movementType: MonsterMovementType.Chases));                
+                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(4, 17), movementType: MonsterMovementType.Chases));
+                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(21, -1), movementType: MonsterMovementType.Chases));
+
+                return conditionalList;
+
+            case LocationNameList.campCenter:
+
+                if(!MonsterSpawnConditionsList.wormsSpawnInsideCamp())
+                {
+                    return null;
+                }
+
+                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-5, 19), movementType: MonsterMovementType.Chases));
+                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-5, 18), movementType: MonsterMovementType.Chases));                
+                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-5, 17), movementType: MonsterMovementType.Chases));
+                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-5, 16), movementType: MonsterMovementType.Chases));
+
+                return conditionalList;
+                
+            default:
+                return null;
+        }
     }
 
     [RuntimeInitializeOnLoadMethod]

@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class AbilityWheelChooseAbility : TutorialSequenceStepScript
 {
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
         AbilityMenuManager abilityMenuManager = AbilityMenuManager.getInstance();
 
         abilityMenuManager.getCurrentlySelectedAbilityMenuButton().disableCombatActionSelectorPreview();
         abilityMenuManager.getCurrentlySelectedAbilityMenuButton().enableCombatActionSelector();
+        abilityMenuManager.disableAbilityButtonCanvas();
     }
 }

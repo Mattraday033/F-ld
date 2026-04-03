@@ -18,6 +18,8 @@ public interface IQuestListSource
 
 public class QuestCounter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IHoverIconSource
 {
+    public Canvas canvas;
+
     public bool disableHover = false;
 
     public IQuestListSource questListSource;
@@ -82,12 +84,28 @@ public class QuestCounter : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         starOutlineImage.color = Color.blue;
         starInteriorImage.color = Color.yellow;
+
+        if(canvas == null)
+        {
+            return;
+        }
+
+        canvas.sortingLayerName = LayerAndTagManager.tutorialSequenceWindowSortingLayerName;
+        canvas.sortingOrder = 100;
     }
 
     public void unhighlightStar()
     {
         starOutlineImage.color = ColorList.grey25;
         starInteriorImage.color = ColorList.questCounterCyan;
+        
+        if(canvas == null)
+        {
+            return;
+        }
+
+        canvas.sortingLayerName = LayerAndTagManager.mapSortingLayerName;
+        canvas.sortingOrder = Constants.indexThree;
     }
 
     public bool sourceIsUnsafe()

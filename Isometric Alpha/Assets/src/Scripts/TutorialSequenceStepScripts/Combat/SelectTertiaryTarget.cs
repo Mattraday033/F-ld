@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SelectTertiaryTarget : TutorialSequenceStepScript
 {
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
         Selector currentSelector = SelectorManager.currentSelector;
         CombatAction loadedCombatAction = AbilityMenuManager.getInstance().getCurrentlySelectedAction();

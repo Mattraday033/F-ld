@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DisablePartyTrainScript : PlayerInteractionScript
 {
-    public override void runScript()
+    public override void runScript(GameObject target = null)
     {
         Flags.stopPartyTrainSpawning();
     }

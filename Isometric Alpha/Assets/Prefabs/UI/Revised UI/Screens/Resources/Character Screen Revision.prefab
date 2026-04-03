@@ -1227,6 +1227,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!1 &771104000587342404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1851,6 +1852,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!1 &1065105418438077045
 GameObject:
   m_ObjectHideFlags: 0
@@ -2562,6 +2564,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!1 &1864287244367932916
 GameObject:
   m_ObjectHideFlags: 0
@@ -2683,6 +2686,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!1 &1899434063041277837
 GameObject:
   m_ObjectHideFlags: 0
@@ -3031,6 +3035,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!1 &2315698443800240813
 GameObject:
   m_ObjectHideFlags: 0
@@ -3564,6 +3569,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!1 &2941423588948013006
 GameObject:
   m_ObjectHideFlags: 0
@@ -4981,6 +4987,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!1 &4882042501955046058
 GameObject:
   m_ObjectHideFlags: 0
@@ -5524,6 +5531,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 3616516573084246240}
   iconImage: {fileID: 5436799143486358879}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &3315586145867273015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5865,6 +5873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce8d95793a8748d4c8dd4004f1be1b19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invulnerabilityIcon: {fileID: 0}
   armorIcon: {fileID: 897465606388041777}
   damageIcon: {fileID: 5513865776143591000}
   critIcon: {fileID: 5644652747908035879}
@@ -6085,6 +6094,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!1 &6642456946123486098
 GameObject:
   m_ObjectHideFlags: 0
@@ -6522,6 +6532,7 @@ MonoBehaviour:
   scrollBar: {fileID: 0}
   slidingArea: {fileID: 0}
   scrollableComponent: {fileID: 757018538115970243}
+  slider: {fileID: 0}
   clickFirstPanel: 0
   clickLastPanel: 0
   useBlockDescriptionsInRows: 0
@@ -7630,6 +7641,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!1 &8005819557195265794
 GameObject:
   m_ObjectHideFlags: 0
@@ -7641,7 +7653,6 @@ GameObject:
   - component: {fileID: 467372312536318435}
   - component: {fileID: 7037253845815716391}
   - component: {fileID: 4080572101446156295}
-  - component: {fileID: 5616041070856382188}
   m_Layer: 5
   m_Name: Action Slots Interior
   m_TagString: Untagged
@@ -7709,18 +7720,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5616041070856382188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8005819557195265794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddebba213809599459b79271410bd776, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8049552620699988201
 GameObject:
   m_ObjectHideFlags: 0
@@ -10046,6 +10045,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 4490959285090874663}
   iconImage: {fileID: 8464089342350469441}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!224 &6694097114925377534 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6600302386269410421, guid: c682e00441168064c8b07b09fbd70a16,
@@ -10803,6 +10803,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 8986137738450189620}
   iconImage: {fileID: 3540360210871315385}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!224 &4775321338563763565 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6600302386269410421, guid: c682e00441168064c8b07b09fbd70a16,
@@ -12581,6 +12582,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 2504890603113258924}
   iconImage: {fileID: 8499721852825566229}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &2494088986261225195 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1858867877573687010, guid: c682e00441168064c8b07b09fbd70a16,
@@ -12956,6 +12958,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 7823629404644820773}
   iconImage: {fileID: 5738779015826158646}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &2740355157153526336 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1858867877573687010, guid: c682e00441168064c8b07b09fbd70a16,
@@ -13375,6 +13378,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 5832875940947336711}
   iconImage: {fileID: 7825440454264684494}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &5223468002290846166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15517,6 +15521,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 5121789430380471228}
   iconImage: {fileID: 7537723686375216681}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!224 &7213374411569863251 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 43536659693745583, guid: c682e00441168064c8b07b09fbd70a16,
@@ -15892,6 +15897,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 8646371322672922893}
   iconImage: {fileID: 7681237065021403896}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!224 &7383599812516984830 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 43536659693745583, guid: c682e00441168064c8b07b09fbd70a16,

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class TutorialSequenceStepTargetSprite : TutorialSequenceStepTargetObject 
 {
+    public IRevealable revealable;
 	public SpriteRenderer spriteRenderer;
+    public SpriteOutline spriteOutline;
 	public Color previousColor = Color.white;
 
     public override void highlight(bool skip)
@@ -14,21 +16,28 @@ public class TutorialSequenceStepTargetSprite : TutorialSequenceStepTargetObject
             return;
         }
 
-        //        Debug.LogError("Outlines temporarily disabled");
+        if(spriteOutline == null)
+        {
+            spriteOutline = new SpriteOutline();
+            spriteOutline.setSpriteRenderer(spriteRenderer);
+        }
 
-        // previousColor = spriteRenderer.color;
-        // spriteRenderer.color = ColorList.tutorialDefault;
+        if(revealable != null)
+        {
+            spriteOutline.createOutline(revealable.getRevealColor());
+        } else
+        {
+            spriteOutline.createOutline(ColorList.tutorialDefault);
+        }
     }
 	
     public override void unhighlight(bool skip)
 	{
-		if(skip)
+		if(skip || spriteOutline == null)
 		{
 			return;
 		}
 
-        //        Debug.LogError("Outlines temporarily disabled");
-
-        // spriteRenderer.color = previousColor;
+        spriteOutline.removeOutline();
 	}
 }

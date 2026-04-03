@@ -23,34 +23,17 @@ public static class TutorialColliderSpawnDetailsList
         tutorialSpawnDetailsDict = new Dictionary<string, List<MultiTutorialColliderSpawnInfo>>();
         List<MultiTutorialColliderSpawnInfo> list;
 
-        #region NECamp
-        list = new List<MultiTutorialColliderSpawnInfo>();
-
-        list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campNorthEast, new Vector3Int(-7, 3),
-                                                    TutorialSequenceList.hiddenObjectTutorialSequenceKey,
-                                                    TutorialSequenceList.hiddenObjectsTutorialSeenFlag,
-                                                    Constants.sizeSix, Axis.DescendingY,
-                                                    new StartSpawningAllTrueFlagList(new string[] {FlagNameList.givenTaskByBalint}, useTutorialFlags: true)));
-
-        list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campNorthEast, new Vector3Int(-2, -1),
-                                                    TutorialSequenceList.hiddenObjectTutorialSequenceKey,
-                                                    TutorialSequenceList.hiddenObjectsTutorialSeenFlag,
-                                                    new StartSpawningAllTrueFlagList(new string[] {FlagNameList.givenTaskByBalint}, useTutorialFlags: true)));
-
-        tutorialSpawnDetailsDict.Add(LocationNameList.campNorthEast, list);
-        #endregion
-
         #region SECamp
         list = new List<MultiTutorialColliderSpawnInfo>();
 
         list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campSouthEast, new Vector3Int(9,26),
-                                                    TutorialSequenceList.questCounterTutorialSequenceKey,
-                                                    TutorialSequenceList.questCounterTutorialSeenFlag,
+                                                    TutorialSequenceList.hiddenObjectsTutorialSequenceKey,
+                                                    TutorialSequenceList.hiddenObjectsTutorialSeenFlag,
                                                     Constants.sizeThree, Axis.DescendingX));
 
         list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campSouthEast, new Vector3Int(28,1),
-                                                    TutorialSequenceList.questCounterTutorialSequenceKey,
-                                                    TutorialSequenceList.questCounterTutorialSeenFlag,
+                                                    TutorialSequenceList.hiddenObjectsTutorialSequenceKey,
+                                                    TutorialSequenceList.hiddenObjectsTutorialSeenFlag,
                                                     Constants.sizeThree, Axis.DescendingY));
 
         tutorialSpawnDetailsDict.Add(LocationNameList.campSouthEast, list);

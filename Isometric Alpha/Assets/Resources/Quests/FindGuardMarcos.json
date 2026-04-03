@@ -8,7 +8,7 @@
 		},
 		{
 			"stepName": "Márcos has been found.",
-			"MapZone":"MineLvl_3","MapLocation":"MineLvl_3-3b","journalDescription": "I found Guard Márcos. <B>I should return to Overseer Gáspár, who has taken up a new post at the gate between the mine's second and third levels.</B>"
+			"MapZone":"MineLvl_2","MapLocation":"MineLvl_2-2a","journalDescription": "I found Guard Márcos. <B>I should return to Overseer Gáspár, who has taken up a new post at the gate between the mine's second and third levels.</B>"
 		},
 		{
 			"stepName": "Returned to Gáspár.",

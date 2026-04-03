@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 public class CharacterCreationPopUpWindow : PopUpWindow
 {
     private static CharacterCreationPopUpWindow instance;
-    public readonly static string[] portraitSpriteNameList = new string[]{ NPCNameList.thatch, NPCNameList.nandor };
+    public readonly static string[] portraitSpriteNameList = new string[]{ NPCNameList.protagPrefix+1, NPCNameList.protagPrefix+2 };
 
     public TMP_InputField nameField;
 

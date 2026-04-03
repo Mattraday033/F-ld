@@ -1148,6 +1148,29 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
+                case "explodeanddie":
+
+                    GameObject effectGO = Instantiate(Resources.Load<GameObject>(PrefabNames.effect), PlayerObject.getInstanceTransform());
+
+                    EffectAnimationManager effect = effectGO.GetComponent<EffectAnimationManager>();
+
+                    effect.setAnimations(EffectAnimationType.BlastingJelly);
+                    
+                    PlayerObject.playDeathAnimation();
+
+                    AudioManager.playJellyMisfireSFX();
+
+                    AudioManager.playDefeatMusic();
+
+                    NotificationManager.purgeNotifications();
+                    
+                    PlayerOOCStateManager.setCurrentActivity(OOCActivity.Defeat);
+                    
+                    continueStory();
+                    
+                    PlayerObject.spawnGameOverPopUp();
+                    break;
+
                 case "swapinkfile": //swapInkFiles(int secondaryInkFileIndex, string startingBoolName)
                 case "swapinkfiles": //swapInkFiles(int secondaryInkFileIndex, string startingBoolName, bool safeToSwapDialogueObjects)
 

@@ -1326,6 +1326,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 576423055}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &385846773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1840,6 +1841,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 134409780}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &498462904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2212,6 +2214,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 1323314493}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &659375183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3281,6 +3284,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 858748678}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &1031361194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3756,6 +3760,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 1851843740}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &1103353925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4659,6 +4664,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 1004703174}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &1310036499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5049,6 +5055,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2562913346979540550, guid: 18eb8e657bf536841bcd78a4b9da15c5,
         type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562913346979540550, guid: 18eb8e657bf536841bcd78a4b9da15c5,
+        type: 3}
       propertyPath: disableHover
       value: 0
       objectReference: {fileID: 0}
@@ -5192,7 +5203,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8324532985967532731, guid: 18eb8e657bf536841bcd78a4b9da15c5, type: 3}
+    - {fileID: 2827455230535324075, guid: 18eb8e657bf536841bcd78a4b9da15c5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -5603,6 +5616,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 1310155441}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &1375430183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9010,6 +9024,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!224 &5699087656598704594
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9322,6 +9337,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 0}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!222 &8534943910552932422
 CanvasRenderer:
   m_ObjectHideFlags: 0

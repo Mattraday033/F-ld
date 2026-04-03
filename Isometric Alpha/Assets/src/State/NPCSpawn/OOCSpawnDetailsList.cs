@@ -146,8 +146,8 @@ public static class OOCSpawnDetailsList
                                                                           Constants.indexZero));
         #endregion
         #region Cha Tutorial
-        list.Add(new ButtonSpawnDetails(new Vector3Int(3, -3), TutorialSequenceList.tutorialButtonOneTargetHash));
-        list.Add(new ButtonSpawnDetails(new Vector3Int(5, -3), TutorialSequenceList.tutorialButtonTwoTargetHash));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(3, -3), tutorialTargetHash: TutorialSequenceList.tutorialButtonOneTargetHash));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(5, -3), tutorialTargetHash: TutorialSequenceList.tutorialButtonTwoTargetHash));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(3, -4), TutorialSequenceList.leadershipTutorialSequenceKey,
                                                                           TutorialSequenceList.leadershipTutorialSeenFlag,
@@ -430,6 +430,32 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(19, 14), Facing.SouthEast));
 
+        #region Dead Bodies (Worm Attack)
+        
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(25, -1), MonsterNameList.lieutenant, facing: Facing.SouthEast));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(24, 2), NPCNameList.slave));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(21, 3), NPCNameList.slave+1));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(16, 1), MonsterNameList.javelineer, facing: Facing.SouthEast));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(14, 23), NPCNameList.slave));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(13, 13), NPCNameList.slave+1));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(12, 15), NPCNameList.slave+2));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(12, 24), MonsterNameList.signaleer, facing: Facing.SouthEast));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(12, 7), MonsterNameList.lancer, facing: Facing.SouthEast));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(10, -5), NPCNameList.slave+1));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(8, -3), NPCNameList.slave+2));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(7, 20), NPCNameList.slave));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(6, 22), MonsterNameList.spearman, facing: Facing.SouthEast));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(6, 3), NPCNameList.slave+1));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(5, 7), NPCNameList.slave+2));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(4, 11), NPCNameList.slave));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(3, 1), MonsterNameList.spearman, facing: Facing.SouthEast));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(3, -3), NPCNameList.slave));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(1, 16), NPCNameList.slave+1));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(-1, 22), MonsterNameList.axeman, facing: Facing.SouthEast));
+        // list.Add(new DeadBodySpawnDetails(NPCNameList.body, new Vector3Int(-4, 12), NPCNameList.slave));
+
+        #endregion
+
         #region Guard Punishment Scene
 
             #region Nameless Slaves
@@ -585,8 +611,8 @@ public static class OOCSpawnDetailsList
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(13, 7), VaultableObject.diffTwoVaultableBarrelsOneTile));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(10, 9), VaultableObject.diffTwoVaultableBarrelsOneTile));
 
-        list.Add(new ButtonSpawnDetails(new Vector3Int(6, 1)));
-        list.Add(new ButtonSpawnDetails(new Vector3Int(6, -1)));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(6, 1), charismaRequirement: 2));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(6, -1), charismaRequirement: 2));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl1 + LocationNameList.section1b, list);
 
@@ -653,15 +679,16 @@ public static class OOCSpawnDetailsList
         list = new List<OOCSpawnDetails>();
 
         list.Add(new CustomMouseHoverNPCSpawnDetails(NPCNameList.controlPanel, new Vector3Int(5, 3), ZoneKeyList.mineLvl2 + LocationNameList.section2a, PrefabNames.controlPanel, flipX, Constants.onTableHeightOffset*2));
+
         list.Add(new ShelfSpawnDetails(Constants.indexZero, new Vector3Int(5, 7), Facing.SouthWest));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.guardPazman, new Vector3Int(-1, 4), ZoneKeyList.mineLvl2 + LocationNameList.section2a));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardPazman, new Vector3Int(-1, 4), ZoneKeyList.mineLvl2 + LocationNameList.section2a, facing: Facing.NorthWest));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.guardReka, new Vector3Int(3, 9), ZoneKeyList.mineLvl2 + LocationNameList.section2a));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardReka, new Vector3Int(3, 9), ZoneKeyList.mineLvl2 + LocationNameList.section2a, facing: Facing.SouthWest));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.guardVirag, new Vector3Int(3, 6), ZoneKeyList.mineLvl2 + LocationNameList.section2a));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardVirag, new Vector3Int(3, 6), ZoneKeyList.mineLvl2 + LocationNameList.section2a, facing: Facing.SouthWest));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.overseerGaspar, new Vector3Int(0, 9), ZoneKeyList.mineLvl2 + LocationNameList.section2a));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.overseerGaspar, new Vector3Int(0, 9), ZoneKeyList.mineLvl2 + LocationNameList.section2a, facing: Facing.SouthWest));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section2a, list);
 
@@ -711,11 +738,11 @@ public static class OOCSpawnDetailsList
         list.Add(new VaultableRubbleSpawnDetails(NPCNameList.vaultableRocks, new Vector3Int(0, -2), Constants.difficultyTwo, Constants.sizeFour));
         list.Add(new VaultableRubbleSpawnDetails(NPCNameList.vaultableRocks, new Vector3Int(-1, -2), Constants.difficultyTwo, Constants.sizeFour));
 
-        list.Add(new ButtonSpawnDetails(new Vector3Int(2, 8)));
-        list.Add(new ButtonSpawnDetails(new Vector3Int(2, 5)));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(2, 8), charismaRequirement: 2));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(2, 5), charismaRequirement: 2));
 
-        list.Add(new ButtonSpawnDetails(new Vector3Int(9, 8), Constants.indexOne));
-        list.Add(new ButtonSpawnDetails(new Vector3Int(9, 5), Constants.indexOne));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(9, 8), Constants.indexOne, charismaRequirement: 2));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(9, 5), Constants.indexOne, charismaRequirement: 2));
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(8, 9), Facing.SouthEast));
 
@@ -904,9 +931,9 @@ public static class OOCSpawnDetailsList
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.mineLvl3Wall+2, new Vector3Int(4, -4), PrefabNames.mineLvl3GroundSecretDoor, SortingLayerManager.secondSortingLayerInfo, SecretDoorKeyList.mineLvl3PuzzleDoor));
 
         list.Add(new HiddenButtonSpawnDetails(new Vector3Int(14, 0), SecretDoorKeyList.mineLvl3PuzzleDoor));
-        list.Add(new HiddenButtonSpawnDetails(new Vector3Int(13, -4), Constants.indexOne, SecretDoorKeyList.mineLvl3PuzzleDoor));
-        list.Add(new HiddenButtonSpawnDetails(new Vector3Int(9, -3), Constants.indexTwo, SecretDoorKeyList.mineLvl3PuzzleDoor));
-        list.Add(new HiddenButtonSpawnDetails(new Vector3Int(7, 1), Constants.indexThree, SecretDoorKeyList.mineLvl3PuzzleDoor));
+        list.Add(new HiddenButtonSpawnDetails(new Vector3Int(13, -4), SecretDoorKeyList.mineLvl3PuzzleDoor, Constants.indexOne));
+        list.Add(new HiddenButtonSpawnDetails(new Vector3Int(9, -3), SecretDoorKeyList.mineLvl3PuzzleDoor, Constants.indexTwo));
+        list.Add(new HiddenButtonSpawnDetails(new Vector3Int(7, 1), SecretDoorKeyList.mineLvl3PuzzleDoor, Constants.indexThree));
 
         list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3PuzzleFinished, areaName: ZoneKeyList.mineLvl3, sectionName: LocationNameList.section1b, index: Constants.indexTwo));
 
@@ -1033,13 +1060,13 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ButtonSpawnDetails(Constants.sizeFive, new Vector3Int(-2, 16)));  
+        list.Add(new ButtonSpawnDetails(new Vector3Int(-2, 16), weight: Constants.sizeFive));  
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(0, -4)));  
         list.Add(new ButtonSpawnDetails(new Vector3Int(-2, -4)));  
 
-        list.Add(new ButtonSpawnDetails(new Vector3Int(1, 13), Constants.indexOne));  
-        list.Add(new ButtonSpawnDetails(new Vector3Int(3, 11), Constants.indexOne));  
+        list.Add(new ButtonSpawnDetails(new Vector3Int(1, 13), index: Constants.indexOne));  
+        list.Add(new ButtonSpawnDetails(new Vector3Int(3, 11), index: Constants.indexOne));  
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section4b, list);
 
@@ -1139,8 +1166,8 @@ public static class OOCSpawnDetailsList
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-10, -9), VaultableObject.diffThreeVaultableGap, spriteName: PrefabNames.lavaVaultableGapHalf, sortingLayerInfo: SortingLayerManager.buttonSortingLayerInfo));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-10, -11), VaultableObject.diffThreeVaultableGap, spriteName: PrefabNames.lavaVaultableGapHalf, sortingLayerInfo: SortingLayerManager.groundSortingLayerInfo));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.rubble, new Vector3Int(-6, 9), ZoneKeyList.mineLvl3 + LocationNameList.section7, PrefabNames.lowStalagmite));
-        list.Add(new NPCSpawnDetails(NPCNameList.rubble, new Vector3Int(-7, 9), ZoneKeyList.mineLvl3 + LocationNameList.section7, PrefabNames.lowStalagmite));
+        list.Add(new NPCSpawnDetails(NPCNameList.rubble, new Vector3Int(-6, 10), ZoneKeyList.mineLvl3 + LocationNameList.section7, PrefabNames.lowStalagmite));
+        list.Add(new NPCSpawnDetails(NPCNameList.rubble, new Vector3Int(-7, 10), ZoneKeyList.mineLvl3 + LocationNameList.section7, PrefabNames.lowStalagmite));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardPazman, new Vector3Int(-6, 6), facing: Facing.SouthEast));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardReka, new Vector3Int(-8, 7), facing: Facing.SouthEast));

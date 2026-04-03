@@ -11,7 +11,7 @@ public class SetToSkillScript : TutorialSequenceStepScript
         this.skillType = skillType;
     }
 
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
         SkillButtonManager.setToSkill(skillType);
     }

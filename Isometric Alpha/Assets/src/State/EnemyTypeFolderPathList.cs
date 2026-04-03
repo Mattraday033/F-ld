@@ -205,6 +205,9 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.gaspar, partyMembersFolderPath + NPCNameList.gaspar + "/");  
         folderPathDict.Add(NPCNameList.overseerGaspar, partyMembersFolderPath + NPCNameList.gaspar + "/");         
 
+        folderPathDict.Add(NPCNameList.protagPrefix+1, partyMembersFolderPath + NPCNameList.protagPrefix+1 + "/");  
+        folderPathDict.Add(NPCNameList.protagPrefix+2, partyMembersFolderPath + NPCNameList.protagPrefix+2 + "/");
+
         #endregion
 
     }

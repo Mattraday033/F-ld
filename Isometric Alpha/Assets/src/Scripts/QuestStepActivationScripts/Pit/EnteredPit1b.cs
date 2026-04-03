@@ -9,7 +9,7 @@ public class EnteredPit1b : QuestStepActivationScript
 
     public const string enteredPit1bFlag = "enteredPit-1b";
 
-    public override void runScript()
+    public override void runScript(GameObject target = null)
     {
         if (!Flags.getFlag(enteredPit1bFlag) && !Flags.getFlag(BookList.pitSecondEntranceNoteReadFlag))
         {

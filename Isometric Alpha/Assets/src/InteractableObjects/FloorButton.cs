@@ -15,7 +15,6 @@ public class FloorButton : MonoBehaviour, INameSource
 {
     public string secretDoorFlag;
 
-
 	public Collider2D collider;
     public SpriteRenderer spriteRenderer;
 
@@ -23,13 +22,28 @@ public class FloorButton : MonoBehaviour, INameSource
 
     public int weight = 1;
 
+    public int charismaRequirement = 1;
+
     private void Awake()
     {
+        Formation.OnFormationChange.AddListener(checkCharismaRequirement);
         SecretDoorFlags.OnSecretDoorDiscovery.AddListener(show);
+        
     }
     private void OnDestroy()
     {
+        Formation.OnFormationChange.RemoveListener(checkCharismaRequirement);
         SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(show);
+    }
+
+    private void checkCharismaRequirement()
+    {
+        gameObject.SetActive(PartyStats.getHighestCharisma() >= charismaRequirement);
+
+        if(gameObject.activeInHierarchy)
+        {
+            StartCoroutine(waitThreeFramesThenSetSprite());
+        }
     }
 
     private void show(string discoveredSecretDoorFlag)
@@ -42,7 +56,7 @@ public class FloorButton : MonoBehaviour, INameSource
 
     void Start()
     {
-        StartCoroutine(waitThreeFramesThenSetSprite());
+        checkCharismaRequirement();
     }
 
     public string getName()

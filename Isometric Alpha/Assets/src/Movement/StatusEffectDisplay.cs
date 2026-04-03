@@ -142,7 +142,7 @@ public class StatusEffectDisplay : SlotIconHover
 
     public override void spawnHoverIcon()
     {
-        MouseHoverManager.spawnHoverIcon(this, transform, setToWorldScale: true);
+        MouseHoverManager.spawnHoverIcon(this, transform, scale: .007f);
     }
 
     public override void OnPointerExit(PointerEventData eventData)

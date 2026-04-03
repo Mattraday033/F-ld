@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 7992971974720730464}
   - component: {fileID: 8448093679278581172}
   - component: {fileID: 98894172240438418}
+  - component: {fileID: 6091515165164501469}
   m_Layer: 0
   m_Name: PlayerOOC
   m_TagString: Player
@@ -152,6 +153,7 @@ MonoBehaviour:
   animationManager: {fileID: 2281003143300886050}
   mapPopUpButton: {fileID: 4296566724507772205}
   worldMapPopUpButton: {fileID: 2115896759193237329}
+  gameOverPopUpButton: {fileID: 6091515165164501469}
   playerMovement: {fileID: 3312928677131579551}
 --- !u!114 &2281003143300886050
 MonoBehaviour:
@@ -170,6 +172,7 @@ MonoBehaviour:
   shadowSprite: {fileID: 0}
   polygonCollider2D: {fileID: 8448093679278581172}
   healthBarManager: {fileID: 0}
+  linkedStats: {fileID: 0}
   characterToAnimate: 
   heartBeatRow: 0
   animancer: {fileID: 3094158370434555424}
@@ -354,6 +357,19 @@ MonoBehaviour:
   rectTransform: {fileID: 3312928677131579616}
   tutorialHash: PlayerNoArrow
   disableArrow: 1
+--- !u!114 &6091515165164501469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312928677131579617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112ec2758521b8e40abd506ad8593081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 15
 --- !u!1 &4129230569518797910
 GameObject:
   m_ObjectHideFlags: 0

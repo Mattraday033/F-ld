@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KeyHalfScript : QuestStepActivationScript
 {
-    public override void runScript()
+    public override void runScript(GameObject target = null)
     {
         bool hasFirstKeyHalf = Inventory.inventoryContainsItem(ItemList.getItem(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyFrontIndex).getKey());
         bool hasSecondKeyHalf = Inventory.inventoryContainsItem(ItemList.getItem(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyBackIndex).getKey());

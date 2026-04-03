@@ -29,6 +29,8 @@ public class MovementManager : MonoBehaviour
     public static List<MovementTracker> allMovementTrackers;
     public static Dictionary<MovementTracker, Coroutine> currentMovements;
 
+    public static CombatWait combatWait;
+
     private const float timeToMove = .15f;
 
     public const int playerSpriteIndex = 0;
@@ -53,6 +55,7 @@ public class MovementManager : MonoBehaviour
     {
         allMovementTrackers = new List<MovementTracker>();
         currentMovements = new Dictionary<MovementTracker, Coroutine>();
+        combatWait = null;
     }
 
     public static Vector3Int getPlayerCell()
@@ -204,21 +207,6 @@ public class MovementManager : MonoBehaviour
         GameObject.Destroy(oldMovement.gameObject);
     }
 
-    private IEnumerator prepCombatAfterMovesFinish(MovementTracker movement)
-    {
-        do
-        {
-            yield return null;
-        } while (PlayerMovement.getInstance().isMoving());
-
-        EnemyMovement enemyMovement = movement as EnemyMovement;
-
-        if (enemyMovement != null)
-        {
-            enemyMovement.prepCombat();
-        }
-    }
-
     private IEnumerator moveSprite(MovementTracker movement)
     {
         if (movement.getMovementIndex() != playerSpriteIndex && MonsterDefeatKeysList.monsterIsDefeated(movement.getMovementIndex() - 1))
@@ -325,7 +313,7 @@ public class MovementManager : MonoBehaviour
             if (allMovementTrackers[positionIndex].gameObject.activeSelf == true &&
                 cellsAreAdjacent(PlayerMovement.getInstance().endingPosition, allMovementTrackers[positionIndex].endingPosition))
             {
-                StartCoroutine(prepCombatAfterMovesFinish(allMovementTrackers[positionIndex]));
+                combatWait = new CombatWait(allMovementTrackers[positionIndex] as EnemyMovement);
             }
         }
     }
@@ -531,5 +519,31 @@ public class MovementManager : MonoBehaviour
     public static Vector3Int getCellWorld(Vector3 position)
     {
         return AreaManager.getMasterGrid().WorldToCell(position);
+    }
+}
+
+public class CombatWait
+{
+    private EnemyMovement enemyMovement;
+
+    public CombatWait(EnemyMovement enemyMovement)
+    {
+        this.enemyMovement = enemyMovement;
+
+        MovementManager.OnMoveFinished.AddListener(prepCombat);
+    }
+
+    private void prepCombat(int movementIndex)
+    {
+        if(movementIndex != MovementManager.playerSpriteIndex)
+        {
+            return;
+        }
+
+        
+        enemyMovement.prepCombat();
+
+        MovementManager.combatWait = null;
+        MovementManager.OnMoveFinished.RemoveListener(prepCombat);
     }
 }

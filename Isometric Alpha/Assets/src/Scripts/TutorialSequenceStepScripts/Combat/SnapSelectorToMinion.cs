@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SnapSelectorToMinion : TutorialSequenceStepScript
 {
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
 
         List<Stats> allEnemies = CombatGrid.getAllAliveEnemyCombatants();

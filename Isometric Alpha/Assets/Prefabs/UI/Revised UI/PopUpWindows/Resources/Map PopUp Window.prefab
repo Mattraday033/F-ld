@@ -321,7 +321,7 @@ Tilemap:
       e33: 1
   m_TileColorArray:
   - m_RefCount: 1
-    m_Data: {r: 0.88748115, g: 0.49876374, b: 0.544736, a: 1}
+    m_Data: {r: 0.8236814, g: 0.40177408, b: 0.4212989, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1980,6 +1980,7 @@ GameObject:
   - component: {fileID: 4295667606485957826}
   - component: {fileID: 6063208259361021271}
   - component: {fileID: 4431306112497514831}
+  - component: {fileID: 3267471903460436384}
   m_Layer: 0
   m_Name: Map PopUp Window Interior Right
   m_TagString: Untagged
@@ -2006,7 +2007,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.3}
 --- !u!222 &4967064379216168928
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2100,7 +2101,7 @@ Tilemap:
       e33: 1
   m_TileColorArray:
   - m_RefCount: 1
-    m_Data: {r: 0.70059675, g: 0.39586374, b: 0.49697995, a: 1}
+    m_Data: {r: 0.9375055, g: 0.37844342, b: 0.477089, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2145,6 +2146,27 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &3267471903460436384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3382743341821402428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df7e0b42142bafa41b0eb154b8633843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useUltraWideTutorialWindow: 0
+  rectTransform: {fileID: 5654144103364426214}
+  tutorialHash: Map Quest List
+  disableArrow: 1
+  image: {fileID: 0}
+  previousColor: {r: 0, g: 0, b: 0, a: 0}
+  secondaryImage: {fileID: 0}
+  skipCutOutMask: 0
+  _UseUIScaleOverride: 1
 --- !u!1 &3411490801267985864
 GameObject:
   m_ObjectHideFlags: 0
@@ -4229,6 +4251,7 @@ GameObject:
   - component: {fileID: 4851778941356298900}
   - component: {fileID: 6113304455254961752}
   - component: {fileID: 7865682293167544323}
+  - component: {fileID: 4358421757139709129}
   m_Layer: 0
   m_Name: Journal Entry Description Dropdown
   m_TagString: Untagged
@@ -4354,6 +4377,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!223 &4358421757139709129
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5863012364476566701}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 314695509
+  m_SortingOrder: 100
+  m_TargetDisplay: 0
 --- !u!1 &6004396991740928607
 GameObject:
   m_ObjectHideFlags: 0

@@ -134,10 +134,13 @@ public static class NPCNameList
     public const string obstacle = "Obstacle";
     public const string table = "Table";
     public const string rack = "Rack";
+    public const string body = "Body";
 
     #endregion
 
     #region Party Member Names
+
+    public const string protagPrefix = "Protag";
 
     public const string thatch = "Thatch";
     public const string nandor = "Nándor";

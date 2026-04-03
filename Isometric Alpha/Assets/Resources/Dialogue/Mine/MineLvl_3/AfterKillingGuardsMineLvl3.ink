@@ -143,7 +143,7 @@ Fat lot of good it did him in the end.
             setToTrue(mineLvl3PromisedToProtectRekaAndPazman)
             ->4aca
             
-        +Give me any excuse to harm you and I'll take it. Test me at your peril.
+        +Give me any excuse to harm you and I'll take it. Do not risk testing me.
             ->4ac
 
 === 4ac ===
@@ -182,6 +182,7 @@ There's a room on the first floor the guards would keep slaves in when they didn
 
         setNPCFacing({nandorIndex},NW)
         setNPCFacing({carterIndex},SW)
+        setNPCFacing({marcosIndex},NE)
 
         changeCamTarget({nandorIndex})
 

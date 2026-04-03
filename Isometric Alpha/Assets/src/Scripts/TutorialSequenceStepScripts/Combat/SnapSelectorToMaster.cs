@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SnapSelectorToMaster : TutorialSequenceStepScript
 {
-    public override void runScript(GameObject target) 
+    public override void runScript(GameObject target = null) 
     {
         // snaps to master with shielded trait
         List<Stats> allEnemies = CombatGrid.getAllAliveEnemyCombatants();
@@ -32,7 +32,7 @@ public class SnapSelectorToMaster : TutorialSequenceStepScript
 
 public class SnapSelectorToMandatoryTarget : TutorialSequenceStepScript
 {
-    public override void runScript(GameObject target) 
+    public override void runScript(GameObject target = null) 
     {
         // snaps to master with shielded trait
         List<Stats> allEnemies = CombatGrid.getAllAliveEnemyCombatants();

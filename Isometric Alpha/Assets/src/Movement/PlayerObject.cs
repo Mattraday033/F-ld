@@ -25,6 +25,7 @@ public class PlayerObject : MonoBehaviour
 
     public MapPopUpButton mapPopUpButton;
     public WorldMapPopUpButton worldMapPopUpButton;
+    public GameOverPopUpButton gameOverPopUpButton;
 
     public PlayerMovement playerMovement;
 
@@ -285,6 +286,41 @@ public class PlayerObject : MonoBehaviour
     public static AnimationManager getAnimationManager()
     {
         return instance.animationManager;
+    }
+
+    public static void playDeathAnimation()
+    {
+        if(instance == null || instance.animationManager == null)
+        {
+            return;
+        }
+
+        AnimationManager animationManager = getAnimationManager();
+
+        animationManager.playDeathAnimation();
+    }
+
+    public static void spawnGameOverPopUp()
+    {
+        if(instance != null && instance.gameOverPopUpButton != null)
+        {
+            instance.StartCoroutine(waitThenSpawnGameOverPopUpButton());
+        }
+    }
+
+    private static IEnumerator waitThenSpawnGameOverPopUpButton()
+    {
+        float wait = 4f;
+        float timeWaited = 0f;
+
+        while(timeWaited <= wait)
+        {
+            yield return null;
+
+            timeWaited += Time.deltaTime;
+        }
+
+        instance.gameOverPopUpButton.spawnPopUp();
     }
 
 }

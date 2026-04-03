@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 3962008355126114766}
   - component: {fileID: 2562913346979540550}
   - component: {fileID: 6673358563340498450}
+  - component: {fileID: 2827455230535324075}
+  - component: {fileID: 8324532985967532731}
   m_Layer: 0
   m_Name: Quest Counter
   m_TagString: Untagged
@@ -112,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2794bc1cd69f08a42a359f255ff591a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 2827455230535324075}
   disableHover: 0
   parentObject: {fileID: 0}
   questStepGrid: {fileID: 5973936697268802715}
@@ -139,6 +142,46 @@ MonoBehaviour:
   secondaryImage: {fileID: 0}
   skipCutOutMask: 0
   _UseUIScaleOverride: 1
+--- !u!223 &2827455230535324075
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2295644504403190058}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 510581953
+  m_SortingOrder: 3
+  m_TargetDisplay: 0
+--- !u!114 &8324532985967532731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2295644504403190058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &2972242460170955612
 GameObject:
   m_ObjectHideFlags: 0

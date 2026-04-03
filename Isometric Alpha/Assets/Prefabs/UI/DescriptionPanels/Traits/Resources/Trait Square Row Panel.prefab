@@ -318,7 +318,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 37760a7a43f289d4aad622d49eb0238b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5d5701d6de12f864c9ed31b84a1a757f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -491,7 +491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b91376cfefe134242950f63f19f8f51a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4075f74775aa31e42aba04a1a5d5e2de, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -913,8 +913,10 @@ MonoBehaviour:
   contentsText: {fileID: 0}
   worthText: {fileID: 0}
   slotText: {fileID: 0}
+  slotsUsedText: {fileID: 0}
   weaponNameText: {fileID: 0}
   rangeText: {fileID: 0}
+  invulnerabilityText: {fileID: 0}
   armorRatingText: {fileID: 0}
   damageText: {fileID: 0}
   offHandDamageText: {fileID: 0}
@@ -952,4 +954,4 @@ MonoBehaviour:
   secondaryImage: {fileID: 0}
   skipCutOutMask: 0
   _UseUIScaleOverride: 1
-  descriptionPanel: {fileID: 0}
+  descriptionPanel: {fileID: 3444726787422063740}

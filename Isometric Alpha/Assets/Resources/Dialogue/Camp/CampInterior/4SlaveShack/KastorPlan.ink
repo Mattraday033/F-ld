@@ -70,6 +70,8 @@ VAR toldDirectorIsAWarHero = false
 VAR convincedSlavesToHelpYou = false
 VAR hadSlavesAfterKillingOverseerCampNEConvo = false
 VAR hadLeaderConversation = false
+VAR mineLvl2GateToLevel3Opened = false
+VAR mineLvl3BreachSealed = false
 
 VAR explainingPlan = false
 VAR backTo6cza = false
@@ -96,6 +98,7 @@ VAR marcosIndex = 4
 VAR marcosSleepingIndex = 5
 
 VAR itemTutorialKey = "Item Tutorial"
+VAR mapTutorialKey = "Quest Counter Tutorial"
 
 VAR slaveShack4SceneName = "4SlaveShack"
 VAR southEasternCampSceneName = "SECamp"
@@ -1125,6 +1128,8 @@ addXP(250)
 That's it for now. There is one final part that comes after, but it doesn't matter unless the rest is achieved. We'll discuss it when you return. Farewell.
 
 setToTrue(gotThePlanFromKastor)
+
+startTutorial({mapTutorialKey})
 
 activateQuestStep(The Plan, Help the cells.)
 
@@ -2416,6 +2421,12 @@ activateQuestStep(Assist the Nonbranded,Find Imre.)
 
 setToTrue(revoltStarted)
 setToTrue(kastorStartedRevolt)
+
+{
+-mineLvl2GateToLevel3Opened and not mineLvl3BreachSealed:
+setToTrue(wormsAttackedCamp)
+}
+
 {
 -not hadSlavesAfterKillingOverseerCampNEConvo:
 activateQuestStep(The Plan,Free the others.)

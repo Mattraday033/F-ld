@@ -8,4 +8,11 @@ public class CunningNameTagGenerator : NameTagGenerator
 	{
 		return ColorList.canBeCunninged;
 	}
+
+    public override void checkSpawnParams(string secretDoorFlag)
+    {
+        string nameToCheck = gameObject.name.Replace(OOCSpawnDetails.gameObjectNameSuffix, "");
+
+        gameObject.SetActive(SpawnParamsList.getSpawnParams(AreaManager.locationName, nameToCheck).canSpawn(nameToCheck));
+    }
 }

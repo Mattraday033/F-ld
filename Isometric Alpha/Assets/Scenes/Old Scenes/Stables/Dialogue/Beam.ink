@@ -59,7 +59,7 @@ setToTrue(metBeam)
 
 === 1c ===
 
-This? *The man shows you his work. The figurine is of a man astride a horse, with armor in the Lovashi style. The legs of the horse have yet to be hewn from the rest of the block.* It's the Director, on his horse Csalan.
+This? *The man shows you his progress. The figurine is of a man astride a horse, with armor in the Lovashi style. The legs of the horse have yet to be hewn from the rest of the block.* It's the Director, on his horse Csalan.
     ->1ca
 
 === 1ca ===

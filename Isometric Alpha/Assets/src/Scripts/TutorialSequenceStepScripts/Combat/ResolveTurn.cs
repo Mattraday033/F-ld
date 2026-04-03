@@ -5,7 +5,7 @@ using UnityEngine;
 public class ResolveTurn : TutorialSequenceStepScript
 {
 
-    public override void runScript(GameObject target)
+    public override void runScript(GameObject target = null)
     {
         CombatStateManager.resolveTurn();
     }

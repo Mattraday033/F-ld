@@ -238,6 +238,7 @@ public static class IdleDictionary
         idleDict = new Dictionary<KeyValuePair<string, CharacterAnimationType>, Sprite[]>();
 
         CombatStateManager.OnCombatStart.AddListener(purgeIdleDictionary);
+        LoadSaveFile.OnLoad.AddListener(purgeIdleDictionary);
     }
 
     private static void purgeIdleDictionary()

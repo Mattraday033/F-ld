@@ -242,8 +242,8 @@ public static class EnemyPackInfoList
                                                                                     DropTableList.slaveMineDTKey);
 
     public readonly static EnemyPackInfo oneSpearmanFiveJavalineers = new EnemyPackInfo(new CreatureAmount[] {      
-                                                                                                        EnemyAmountList.oneSpearman//,
-                                                                                                        // EnemyAmountList.fiveJavelineers
+                                                                                                        EnemyAmountList.oneSpearman,
+                                                                                                        EnemyAmountList.fiveJavelineers
                                                                                                      },
                                                                                     DropTableList.slaveMineDTKey);
 
@@ -557,14 +557,79 @@ public static class EnemyPackInfoList
 
     private static Dictionary<string, List<EnemyPackInfo>> enemyPackInfoDict;
 
-    public static EnemyPackInfo getEnemyPackInfo(string areaName, int index)
+    public static EnemyPackInfo getEnemyPackInfo(string locationName, int index)
     {
-        if (!enemyPackInfoDict.ContainsKey(areaName))
+        EnemyPackInfo conditionalPackInfo = getConditionalEnemyPackInfo(locationName, index);
+
+        if(conditionalPackInfo != null)
+        {
+            return conditionalPackInfo;
+        }
+
+        if (!enemyPackInfoDict.ContainsKey(locationName))
         {
             return twoGiantBatsTwoBatSwarmsTwoArmoredBats;
         }
 
-        return enemyPackInfoDict[areaName][index];
+        return enemyPackInfoDict[locationName][index];
+    }
+
+    public static EnemyPackInfo getConditionalEnemyPackInfo(string locationName, int index)
+    {
+        List<MonsterSpawnDetails> conditionalList = new List<MonsterSpawnDetails>();        
+
+        switch(locationName)
+        {       
+            case LocationNameList.campMineEntrance:
+            
+                if(!MonsterSpawnConditionsList.wormsSpawnInsideCamp())
+                {
+                    return null;
+                }
+
+                switch(index)
+                {       
+                    case Constants.indexZero: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
+                    case Constants.indexOne: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
+                    default:
+                        return null;
+                }            
+            case LocationNameList.campSouthEast:
+
+                if(!MonsterSpawnConditionsList.wormsSpawnInsideCamp())
+                {
+                    return null;
+                }
+
+                switch(index)
+                {       
+                    case Constants.indexZero: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
+                    case Constants.indexOne: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
+                    case Constants.indexTwo: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
+                    case Constants.indexThree: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
+                    default:
+                        return null;
+                }
+            case LocationNameList.campCenter:
+
+                if(!MonsterSpawnConditionsList.wormsSpawnInsideCamp())
+                {
+                    return null;
+                }
+
+                switch(index)
+                {       
+                    case Constants.indexZero: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
+                    case Constants.indexOne: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
+                    case Constants.indexTwo: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
+                    case Constants.indexThree: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
+                    default:
+                        return null;
+                }
+
+            default:
+                return null;
+        }
     }
 
     [RuntimeInitializeOnLoadMethod]

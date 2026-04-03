@@ -136,6 +136,8 @@ moveToPos(-7,4)
     activate({rekaIndex})
     activate({viragIndex})
     setFacing(NW)
+    setNPCFacing({viragIndex},NE)
+    setNPCFacing({gasparIndex},SW)
 
     {
     -not deathFlagGuardPázmán:
@@ -178,7 +180,12 @@ Good riddance. May I never see one of those things again for as long as I live.
 
 changeCamTarget({gasparIndex})
 
-Should we all be so lucky. When work resumes, we'll be certain to see another pocket. But at least this time we'll be ready. Fun's over slaves, hand over any tools you may be holding and place your hands on each other's shoulders. We're heading back to the surface.
+Should we all be so lucky. When work resumes, we'll be certain to see another pocket. But at least this time we'll be ready. 
+
+setNPCFacing({viragIndex},SE)
+setNPCFacing({gasparIndex},SE)
+
+Fun's over slaves, hand over any tools you may be holding and place your hands on each other's shoulders. We're heading back up to camp.
 
 {
 -goesWithBroglinsPlan:
@@ -221,7 +228,7 @@ What's this? Insurrection? I'll die before any of you see the light of day.
         
         Formidable you may be, but our duty is to stop you from escaping. We cannot let you leave this mine without being in our custody.
         ->3ca
-    +You may be ready to die, but I sense your subordinates are not so eager.
+    +I sense your subordinates are not so eager.
         ->3ca
 
 === 3ca ===
@@ -706,6 +713,7 @@ deactivate({rubbleMarcosIndex})
 \*The water begins dripping out of the spout and seeps into the barrel. A loud hissing sound begins to be emitted from it.*
 
     +Uh oh...
+        explodeAndDie()
         ->Close
 
 === combatPrep ===

@@ -46,7 +46,7 @@ public class LoadScreenButton : PopUpButton
             AudioManager.playChangeScreenSFX();
         }
 
-        if(!CombatStateManager.inCombat)
+        if(!CombatStateManager.inCombat && PlayerOOCStateManager.currentActivity != OOCActivity.Defeat)
         {
 		    OverallUIManager.UIParentPanel.SetActive(true); 
         }

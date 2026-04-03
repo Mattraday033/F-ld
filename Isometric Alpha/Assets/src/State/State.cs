@@ -14,7 +14,19 @@ public static class State
 	public static bool enableGridDebugger = false;
 
     public static string playerPortraitName = NPCNameList.thatch;
-    public static string playerSpriteName = NPCNameList.thatch;
+    public static string _PlayerSpriteName = NPCNameList.thatch;
+
+    public static string playerSpriteName
+    {
+        get
+        {
+            return _PlayerSpriteName;
+        }
+        set
+        {
+            _PlayerSpriteName = value;
+        }
+    }
 
 	public static OOCUIManager oocUIManager;
 

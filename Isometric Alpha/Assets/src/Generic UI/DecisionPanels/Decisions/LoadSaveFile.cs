@@ -170,6 +170,8 @@ public class LoadSaveFile : IDecision
 
             CombatStateManager.whoseTurn = WhoseTurn.Start;
 
+			PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+
             OnLoad.Invoke();
             
             SceneChange.changeSceneToOverworld();
