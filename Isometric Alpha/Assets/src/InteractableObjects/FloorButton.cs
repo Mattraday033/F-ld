@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+//b4 Claude
+
 public interface IFloorButton
 {
 	
