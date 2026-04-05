@@ -3037,6 +3037,11 @@ PrefabInstance:
       propertyPath: parentObject
       value: 
       objectReference: {fileID: 353949702303041746}
+    - target: {fileID: 2827455230535324075, guid: 18eb8e657bf536841bcd78a4b9da15c5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3962008355126114766, guid: 18eb8e657bf536841bcd78a4b9da15c5,
         type: 3}
       propertyPath: m_MinWidth

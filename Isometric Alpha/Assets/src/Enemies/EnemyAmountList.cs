@@ -103,6 +103,7 @@ public static class EnemyAmountList
 
     public readonly static CreatureAmount oneArmoredWorm = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.armoredWorm));
     public readonly static CreatureAmount twoArmoredWorms = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.armoredWorm));
+    public readonly static CreatureAmount threeArmoredWorms = new CreatureAmount(Constants.threeCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.armoredWorm));
 
     public readonly static CreatureAmount oneBroodling = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.broodling));
     public readonly static CreatureAmount twoBroodlings = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.broodling));
@@ -124,10 +125,12 @@ public static class EnemyAmountList
 
     public readonly static CreatureAmount oneToxicWorm = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.toxicWorm));
     public readonly static CreatureAmount twoToxicWorms = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.toxicWorm));
+    public readonly static CreatureAmount threeToxicWorms = new CreatureAmount(Constants.threeCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.toxicWorm));
 
     public readonly static CreatureAmount oneWorm = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.worm));
     public readonly static CreatureAmount twoWorms = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.worm));
     public readonly static CreatureAmount threeWorms = new CreatureAmount(Constants.threeCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.worm));
+
 
     public readonly static CreatureAmount hiveHeraldNest = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.hiveHeraldNest));
     public readonly static CreatureAmount martyrWormNest = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.martyrWormNest));

@@ -6,6 +6,10 @@ VAR description = "*The wall looks formidable, but you can feel a slight draft.*
 
 VAR addHostilityIfOutside = false
 
+VAR completeQuest = false
+VAR questName = ""
+VAR questStepName = ""
+
 VAR secretDoorKey = ""
 
 VAR playerName = ""
@@ -53,6 +57,16 @@ addSecretDoorFlag({secretDoorKey})
 {
 -addHostilityIfOutside:
     addHostilityToCurrentArea()
+}
+
+{
+-questName != "" && questStepName != "":
+    {
+    -completeQuest:
+        finishQuest({questName}, true, {questStepName})
+    -else:
+        activateQuestStep({questName},{questStepName})
+    }
 }
 
 fadeBackIn(60)

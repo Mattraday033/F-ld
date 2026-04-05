@@ -175,6 +175,7 @@ public static class GateSpawnInfoList
                                     PrefabNames.lowRubble,
                                     Constants.sizeThree,
                                     Axis.DescendingY,
+                                    tutorialTargetHash: TutorialSequenceList.awkwardRubbleHash,
                                     useRubbleColor: useRubbleColor));
 
         gateSpawnInfoDict.Add(ZoneKeyList.mineLvl1 + LocationNameList.section1b, list);
@@ -248,6 +249,7 @@ public static class GateSpawnInfoList
                                     PrefabNames.blockRubble,
                                     Constants.sizeTwo,
                                     Axis.DescendingY,
+                                    tutorialTargetHash: TutorialSequenceList.awkwardRubbleHash,
                                     useRubbleColor: useRubbleColor));
 
         list.Add(new GateSpawnInfo(Constants.indexOne,
@@ -257,6 +259,7 @@ public static class GateSpawnInfoList
                                     PrefabNames.blockRubble,
                                     Constants.sizeTwo,
                                     Axis.DescendingY,
+                                    tutorialTargetHash: TutorialSequenceList.awkwardRubbleHash,
                                     useRubbleColor: useRubbleColor));
 
         gateSpawnInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section3a, list);
@@ -439,6 +442,7 @@ public static class GateSpawnInfoList
                                     PrefabNames.blockRubble,
                                     Constants.sizeThree,
                                     Axis.DescendingX,
+                                    tutorialTargetHash: TutorialSequenceList.awkwardRubbleHash,
                                     useRubbleColor: useRubbleColor));
 
         list.Add(new GateSpawnInfo(Constants.indexOne,

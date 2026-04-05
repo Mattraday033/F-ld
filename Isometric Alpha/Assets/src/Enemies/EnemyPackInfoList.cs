@@ -550,6 +550,53 @@ public static class EnemyPackInfoList
                                                                                                     },
                                                                                                     DropTableList.slaveMineDTKey);
 
+    #region Worm Camp Attack
+    private readonly static EnemyPackInfo oneDireWormTwoArmoredWormsThreeHiveHeralds = new EnemyPackInfo(new CreatureAmount[] {
+                                                                                                    EnemyAmountList.oneDireWorm,
+                                                                                                    EnemyAmountList.twoArmoredWorms,
+                                                                                                    EnemyAmountList.threeHiveHeralds
+                                                                                                    },
+                                                                                                    DropTableList.lovashiGuardsDTKey,
+                                                                                                    spawnDetailsList: new List<SpawnDetails>()
+                                                                                                    {
+                                                                                                        SpawnDetails.middle2x2
+                                                                                                    });
+
+    private readonly static EnemyPackInfo oneGuardianWormTwoHiveHeraldsThreeToxicWorms = new EnemyPackInfo(new CreatureAmount[] {
+                                                                                                    EnemyAmountList.threeToxicWorms,
+                                                                                                    EnemyAmountList.oneGuardianWorm,
+                                                                                                    EnemyAmountList.twoHiveHeralds
+                                                                                                    },
+                                                                                                    DropTableList.lovashiGuardsDTKey);
+
+    private readonly static EnemyPackInfo threeArmoredWormsOneMartyrWormOneToxicWormOneHiveHerald = new EnemyPackInfo(new CreatureAmount[] {
+                                                                                                    EnemyAmountList.threeArmoredWorms,
+                                                                                                    EnemyAmountList.oneMartyrWorm,
+                                                                                                    EnemyAmountList.oneToxicWorm,
+                                                                                                    EnemyAmountList.oneHiveHerald
+                                                                                                    },
+                                                                                                    DropTableList.lovashiGuardsDTKey);
+
+    private readonly static EnemyPackInfo oneOfEachWorm = new EnemyPackInfo(new CreatureAmount[] {
+                                                                                                    EnemyAmountList.oneMartyrWorm,
+                                                                                                    EnemyAmountList.oneGuardianWorm,
+                                                                                                    EnemyAmountList.oneToxicWorm,
+                                                                                                    EnemyAmountList.oneHiveHerald,
+                                                                                                    EnemyAmountList.oneWorm,
+                                                                                                    EnemyAmountList.oneArmoredWorm
+                                                                                                    },
+                                                                                                    DropTableList.lovashiGuardsDTKey);
+
+    private readonly static EnemyPackInfo twoGuardianWormsOneArmoredWormTwoHiveHeraldsOneToxicWormTwoBroodlings = new EnemyPackInfo(new CreatureAmount[] {  
+                                                                                                                    EnemyAmountList.twoGuardianWorms,
+                                                                                                                    EnemyAmountList.oneArmoredWorm,
+                                                                                                                    EnemyAmountList.twoHiveHeralds,
+                                                                                                                    EnemyAmountList.twoToxicWorms,
+                                                                                                                    EnemyAmountList.twoBroodlings
+                                                                                                            },
+                                                                                                            DropTableList.lovashiGuardsDTKey);
+    #endregion
+
     #endregion
 
     // public readonly static EnemyPackInfo taborFight = new EnemyPackInfo(new int[] { 1 }, new int[] { 1 }, new EnemyStats[] { loadEnemyStatsFromResources(chiefTabor) }, flagsToCheckForSlaveAllies, DropTableList.slaveMineDTKey);
@@ -589,8 +636,8 @@ public static class EnemyPackInfoList
 
                 switch(index)
                 {       
-                    case Constants.indexZero: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
-                    case Constants.indexOne: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
+                    case Constants.indexZero: return oneDireWormTwoArmoredWormsThreeHiveHeralds;
+                    case Constants.indexOne: return oneGuardianWormTwoHiveHeraldsThreeToxicWorms;
                     default:
                         return null;
                 }            
@@ -603,10 +650,10 @@ public static class EnemyPackInfoList
 
                 switch(index)
                 {       
-                    case Constants.indexZero: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
-                    case Constants.indexOne: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
-                    case Constants.indexTwo: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
-                    case Constants.indexThree: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
+                    case Constants.indexZero: return oneGuardianWormTwoHiveHeraldsThreeToxicWorms;
+                    case Constants.indexOne: return threeArmoredWormsOneMartyrWormOneToxicWormOneHiveHerald;
+                    case Constants.indexTwo: return oneOfEachWorm;
+                    case Constants.indexThree: return oneDireWormTwoArmoredWormsThreeHiveHeralds;
                     default:
                         return null;
                 }
@@ -619,10 +666,11 @@ public static class EnemyPackInfoList
 
                 switch(index)
                 {       
-                    case Constants.indexZero: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
-                    case Constants.indexOne: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
-                    case Constants.indexTwo: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
-                    case Constants.indexThree: return twoGuardianWormsOneArmoredWormTwoHiveHeralds;
+                    case Constants.indexZero: return  oneGuardianWormTwoHiveHeraldsThreeToxicWorms;
+                    case Constants.indexOne: return oneOfEachWorm;
+                    case Constants.indexTwo: return oneDireWormTwoArmoredWormsThreeHiveHeralds;
+                    case Constants.indexThree: return twoGuardianWormsOneArmoredWormTwoHiveHeraldsOneToxicWormTwoBroodlings;
+                    case Constants.indexFour: return threeArmoredWormsOneMartyrWormOneToxicWormOneHiveHerald;
                     default:
                         return null;
                 }

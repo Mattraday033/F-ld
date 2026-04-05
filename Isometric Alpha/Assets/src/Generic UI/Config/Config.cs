@@ -20,8 +20,11 @@ public struct TutorialFlagWrapper
 	public bool intimidateTutorialSeen;
 	public bool cunningTutorialSeen;
 	public bool secondCunningTutorialSeen;
+	public bool thirdCunningTutorialSeen;
 	public bool observationTutorialSeen;
+	public bool secondObservationTutorialSeen;
 	public bool leadershipTutorialSeen;
+	public bool secondLeadershipTutorialSeen;
 	public bool interactableObjectTutorialSeen;
     public bool hiddenObjectsTutorialSeen;
     public bool firstHostilityTutorialSeen;
@@ -53,8 +56,11 @@ public struct TutorialFlagWrapper
             intimidateTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.intimidateTutorialSeenFlag),
             cunningTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.cunningTutorialSeenFlag),
             secondCunningTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.secondCunningTutorialSeenFlag),
+            thirdCunningTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.thirdCunningTutorialSeenFlag),
             observationTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.observationTutorialSeenFlag),
+            secondObservationTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.secondObservationTutorialSeenFlag),
             leadershipTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.leadershipTutorialSeenFlag),
+            secondLeadershipTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.secondLeadershipTutorialSeenFlag),
             interactableObjectTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.interactableObjectTutorialSeenFlag),
             hiddenObjectsTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.hiddenObjectsTutorialSeenFlag),
             firstHostilityTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.firstHostilityTutorialSeenFlag),
@@ -88,8 +94,11 @@ public struct TutorialFlagWrapper
             [TutorialSequenceList.intimidateTutorialSeenFlag] = intimidateTutorialSeen,
             [TutorialSequenceList.cunningTutorialSeenFlag] = cunningTutorialSeen,
             [TutorialSequenceList.secondCunningTutorialSeenFlag] = secondCunningTutorialSeen,
+            [TutorialSequenceList.thirdCunningTutorialSeenFlag] = thirdCunningTutorialSeen,
             [TutorialSequenceList.observationTutorialSeenFlag] = observationTutorialSeen,
+            [TutorialSequenceList.secondObservationTutorialSeenFlag] = secondObservationTutorialSeen,
             [TutorialSequenceList.leadershipTutorialSeenFlag] = leadershipTutorialSeen,
+            [TutorialSequenceList.secondLeadershipTutorialSeenFlag] = secondLeadershipTutorialSeen,
             [TutorialSequenceList.interactableObjectTutorialSeenFlag] = interactableObjectTutorialSeen,
             [TutorialSequenceList.hiddenObjectsTutorialSeenFlag] = hiddenObjectsTutorialSeen,
 

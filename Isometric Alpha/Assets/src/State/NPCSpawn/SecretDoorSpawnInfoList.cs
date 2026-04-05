@@ -142,7 +142,7 @@ public static class SecretDoorSpawnInfoList
         list = new List<SecretDoorSpawnInfo>();
 
         list.Add(new SecretDoorSpawnInfo(ZoneKeyList.mineLvl2 + LocationNameList.section1a, NPCNameList.suspiciousWall, PrefabNames.mineLvl2WallSecretDoor, new Vector3Int(5, 1),
-                                            new SecretDoorInfo(SecretDoorKeyList.mineLvl2FirstSecretDoor), Constants.sizeTwo, Axis.DescendingY));
+                                            new SecretDoorInfo(SecretDoorKeyList.mineLvl2FirstSecretDoor, questName: QuestNameList.hiddenAwayQuestTitle, questStepName: QuestNameList.hiddenAwayStepTitleOne, completeQuest: true), Constants.sizeTwo, Axis.DescendingY));
 
         secretDoorSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1a, list);
         #endregion

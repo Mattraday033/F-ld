@@ -1,5 +1,15 @@
 {
   "dependencies": {
+    "com.coplaydev.unity-mcp": {
+      "version": "https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity#main",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.0.2",
+        "com.unity.test-framework": "1.1.31"
+      },
+      "hash": "940831fe8a474e92b96a5c183298b45843cf067e"
+    },
     "com.kybernetik.animancer": {
       "version": "file:com.kybernetik.animancer",
       "depth": 0,
@@ -9,7 +19,7 @@
       }
     },
     "com.unity.2d.animation": {
-      "version": "9.2.1",
+      "version": "9.2.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {

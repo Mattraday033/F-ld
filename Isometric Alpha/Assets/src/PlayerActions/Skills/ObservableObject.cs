@@ -11,8 +11,11 @@ public class SecretDoorInfo : IStoryVariableSource
     public string description;
     public string customDialoguePath;
     public bool addHostilityIfOutside;
+    public string questName;
+    public string questStepName;
+    public bool completeQuest;
 
-    public SecretDoorInfo(string secretDoorKey = null, List<string> secretDoorKeys = null, int difficulty = Constants.difficultyTwo, string description = null, string customDialoguePath = null, bool addHostilityIfOutside = false)
+    public SecretDoorInfo(string secretDoorKey = null, List<string> secretDoorKeys = null, int difficulty = Constants.difficultyTwo, string description = null, string customDialoguePath = null, bool addHostilityIfOutside = false, string questName = null, string questStepName = null, bool completeQuest = false)
     {
         if(secretDoorKey != null)
         {
@@ -28,6 +31,9 @@ public class SecretDoorInfo : IStoryVariableSource
         this.description = description;
         this.customDialoguePath = customDialoguePath;
         this.addHostilityIfOutside = addHostilityIfOutside;
+        this.questName = questName;
+        this.questStepName = questStepName;
+        this.completeQuest = completeQuest;
     }
 
     public virtual bool hasBeenDiscovered()
@@ -70,6 +76,21 @@ public class SecretDoorInfo : IStoryVariableSource
         if(story.variablesState[InkVariableNameList.addHostilityIfOutside] != null)
         {
             story.variablesState[InkVariableNameList.addHostilityIfOutside] = addHostilityIfOutside;
+        }
+
+        if (questName != null && story.variablesState[InkVariableNameList.questName] != null)
+        {
+            story.variablesState[InkVariableNameList.questName] = questName;
+        }
+
+        if (questStepName != null && story.variablesState[InkVariableNameList.questStepName] != null)
+        {
+            story.variablesState[InkVariableNameList.questStepName] = questStepName;
+        }
+
+        if (story.variablesState[InkVariableNameList.completeQuest] != null)
+        {
+            story.variablesState[InkVariableNameList.completeQuest] = completeQuest;
         }
 
         return story;

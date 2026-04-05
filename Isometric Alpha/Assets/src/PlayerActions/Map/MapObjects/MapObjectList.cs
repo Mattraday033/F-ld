@@ -235,7 +235,7 @@ public static class MapObjectList
 				return new MapLocation(ZoneKeyList.mineLvl2, ZoneKeyList.mineLvl2+LocationNameList.section2b, "2b - Armory", notFastTravelAccessible, zeroInteriors, new string[]{ZoneKeyList.mineLvl2+LocationNameList.section2a, ZoneKeyList.mineLvl2+LocationNameList.section3a});
 			
 			case LocationNameList.section3a:
-				return new MapLocation(ZoneKeyList.mineLvl2, ZoneKeyList.mineLvl2+LocationNameList.section3a, "3a", notFastTravelAccessible, zeroInteriors, new string[]{ZoneKeyList.mineLvl2+LocationNameList.section2b, ZoneKeyList.mineLvl2+LocationNameList.section3b});
+				return new MapLocation(ZoneKeyList.mineLvl2, ZoneKeyList.mineLvl2+LocationNameList.section3a, "3a", fastTravelAccessible, zeroInteriors, new string[]{ZoneKeyList.mineLvl2+LocationNameList.section2b, ZoneKeyList.mineLvl2+LocationNameList.section3b});
 			case LocationNameList.section3b:
 				return new MapLocation(ZoneKeyList.mineLvl2, ZoneKeyList.mineLvl2+LocationNameList.section3b, "3b", notFastTravelAccessible, zeroInteriors, new string[]{ZoneKeyList.mineLvl2+LocationNameList.section3a, ZoneKeyList.mineLvl2+LocationNameList.section4, ZoneKeyList.mineLvl2+LocationNameList.section7a});
 			

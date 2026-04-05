@@ -28,7 +28,7 @@ public class CombatInputManager : MonoBehaviour
 		KeyPressManager.updateKeyBools();
         PlayerInput.showFormulaToggleCheck();
 
-		if (KeyPressManager.handlingPrimaryKeyPress || CombatStateManager.whoseTurn != WhoseTurn.Player)
+		if (KeyPressManager.handlingPrimaryKeyPress || (CombatStateManager.whoseTurn != WhoseTurn.Player && CombatStateManager.currentActivity != CurrentActivity.Tutorial))
 		{
 			return;
 		}

@@ -48,6 +48,10 @@ public static class InkVariableNameList
 
     public const string defeatFlag = "defeatFlag";
 
+    public const string questName = "questName";
+    public const string questStepName = "questStepName";
+    public const string completeQuest = "completeQuest";
+
     public static Story setStoryVariable(Story story, string variableName, int value)
     {
         if (story.variablesState[variableName] != null)

@@ -374,14 +374,22 @@ public static class SpawnParamsList
 
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.barricadeGuards+1),
-                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[]{FlagNameList.directorDefeated, FlagNameList.barricadeGuardDefeatKey1}), onlySpawnWhileHostile: onlySpawnWhileHostile));
+                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[]{FlagNameList.directorDefeated, FlagNameList.barricadeGuardDefeatKey1, FlagNameList.wormsAttackedCamp}), onlySpawnWhileHostile: onlySpawnWhileHostile));
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.barricade+1),
-                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[]{FlagNameList.directorDefeated, FlagNameList.barricadeGuardDefeatKey1}), onlySpawnWhileHostile: onlySpawnWhileHostile));
+                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[]{FlagNameList.directorDefeated, FlagNameList.barricadeGuardDefeatKey1, FlagNameList.wormsAttackedCamp}), onlySpawnWhileHostile: onlySpawnWhileHostile));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.campGate),
                                         new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[]  { 
                                                                                                                 FlagNameList.revoltStarted,
                                                                                                                 FlagNameList.kastorStartedRevolt,
+                                                                                                                FlagNameList.directorDefeated
+                                                                                                            })));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.body),
+                                        new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] {
+                                                                                                                                FlagNameList.wormsAttackedCamp
+                                                                                                                                 }),
+                                                                    stopSpawningFlagList: new StopSpawningFlagList(new string[]  { 
                                                                                                                 FlagNameList.directorDefeated
                                                                                                             })));
 
@@ -400,6 +408,14 @@ public static class SpawnParamsList
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.toppledStatue),
                                         new InteractableSpawnParams(new StartSpawningFlagList(directorStatueBrokenConditions)));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.body),
+                                        new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] {
+                                                                                                                                FlagNameList.wormsAttackedCamp
+                                                                                                                                 }),
+                                                                    stopSpawningFlagList: new StopSpawningFlagList(new string[]  { 
+                                                                                                                FlagNameList.directorDefeated
+                                                                                                            })));
 
         #region Guard Punishment Scene
 
@@ -610,6 +626,14 @@ public static class SpawnParamsList
                                             stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.foughtMuzsaAfterSnitchedOnUros })));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.barracksGate), barracksGateSpawnParams);
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.body),
+                                        new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] {
+                                                                                                                                FlagNameList.wormsAttackedCamp
+                                                                                                                                 }),
+                                                                    stopSpawningFlagList: new StopSpawningFlagList(new string[]  { 
+                                                                                                                FlagNameList.directorDefeated
+                                                                                                            })));
 
         #endregion
 

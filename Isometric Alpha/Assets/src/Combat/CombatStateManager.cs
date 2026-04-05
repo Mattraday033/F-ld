@@ -395,7 +395,8 @@ public class CombatStateManager : MonoBehaviour
 		{
 			resolvingTurnDuringTutorial = true;
 		} else if(!PlayerCombatActionManager.playerHasActionsInQueue() && 
-                currentActivity != CurrentActivity.ResolveActionWarning)
+                currentActivity != CurrentActivity.ResolveActionWarning && 
+                whoseTurn != WhoseTurn.Start)
         {
             spawnResolveTurnWarning();
             if(currentActivity == CurrentActivity.ResolveActionWarning)

@@ -267,13 +267,23 @@ public struct TutorialSequenceStep : IDescribable
 
         if (!tutorialTarget.isUI())
         {
+            Transform grandParent = tutorialTarget.getTransform().parent.parent;
+            float scaleMultiplierX = 1f;
+            float scaleMultiplierY = 1f;
+
+            if (grandParent != null && grandParent.name.Equals("NPCs With Scale"))
+            {
+                scaleMultiplierX = 0.9877588f;
+                scaleMultiplierY = 1.157407f;
+            }
+
             if (CombatStateManager.inCombat)
             {
-                currentTutorialMessageWindow.transform.localScale = new Vector3(0.007f, 0.007f, 1f);
+                currentTutorialMessageWindow.transform.localScale = new Vector3(0.007f * scaleMultiplierX, 0.007f * scaleMultiplierY, 1f);
             }
             else
             {
-                currentTutorialMessageWindow.transform.localScale = new Vector3(0.008f, 0.008f, 1f);
+                currentTutorialMessageWindow.transform.localScale = new Vector3(0.008f * scaleMultiplierX, 0.008f * scaleMultiplierY, 1f);
             }
 
             Canvas.ForceUpdateCanvases();
@@ -967,6 +977,30 @@ public class TutorialSequence
 
         switch (tutorialSeenFlagName)
         {
+            case TutorialSequenceList.thirdCunningTutorialSeenFlag:
+                if(TutorialFlags.getFlag(TutorialSequenceList.secondCunningTutorialSeenFlag))
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            case TutorialSequenceList.secondObservationTutorialSeenFlag:
+                if(TutorialFlags.getFlag(TutorialSequenceList.observationTutorialSeenFlag) || !Flags.getFlag(BookList.mineGuardsJournalReadFlag))
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            case TutorialSequenceList.secondLeadershipTutorialSeenFlag:
+                if(TutorialFlags.getFlag(TutorialSequenceList.leadershipTutorialSeenFlag))
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
             case TutorialSequenceList.firstHostilityTutorialSeenFlag:
             case TutorialSequenceList.intimidateTutorialSeenFlag:
             case TutorialSequenceList.cunningTutorialSeenFlag:
@@ -976,12 +1010,6 @@ public class TutorialSequence
             case TutorialSequenceList.interactableObjectTutorialSeenFlag:
                 return TutorialFlags.getFlag(TutorialSequenceList.skipThatchShackTutorialsFlag);
             case TutorialSequenceList.hiddenObjectsTutorialSeenFlag:
-
-                // if (!Flags.getFlag(FlagNameList.givenTaskByBalint))
-                // {
-                //     return true;
-                // }
-
                 return TutorialFlags.getFlag(TutorialSequenceList.hiddenObjectsTutorialSeenFlag);
         }
 

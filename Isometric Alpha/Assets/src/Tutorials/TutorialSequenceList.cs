@@ -39,8 +39,11 @@ public static class TutorialSequenceList
 	public const string intimidateTutorialSeenFlag = "intimidateTutorialSequenceEntered";
 	public const string cunningTutorialSeenFlag = "cunningTutorialSequenceEntered";
 	public const string secondCunningTutorialSeenFlag = "secondCunningTutorialSequenceEntered";
+	public const string thirdCunningTutorialSeenFlag = "thirdCunningTutorialSequenceEntered";
 	public const string observationTutorialSeenFlag = "observationTutorialSequenceEntered";
+	public const string secondObservationTutorialSeenFlag = "secondObservationTutorialSequenceEntered";
 	public const string leadershipTutorialSeenFlag = "leadershipTutorialSequenceEntered";
+	public const string secondLeadershipTutorialSeenFlag = "secondLeadershipTutorialSequenceEntered";
 	public const string interactableObjectTutorialSeenFlag = "interactableObjectTutorialSequenceEntered";
     public const string hiddenObjectsTutorialSeenFlag = "hiddenObjectsTutorialSequenceEntered";
     public const string secondHostilityTutorialSeenFlag = "secondHostilityTutorialSequenceEntered";
@@ -83,6 +86,7 @@ public static class TutorialSequenceList
 
     public const string secretDoorTargetHash = "Secret Door";
 
+    public const string awkwardRubbleHash = "Awkward Rubble";
     public const string fallenBeamTargetHash = "Fallen Beam";
     public const string tutorialButtonOneTargetHash = "Tutorial Button 1";
     public const string tutorialButtonTwoTargetHash = "Tutorial Button 2";
@@ -124,8 +128,11 @@ public static class TutorialSequenceList
     public const string vaultableObjectTutorialSequenceKey = "Vaultable Object Tutorial";
     public const string firstCunningTutorialSequenceKey = "First Cunning Tutorial";
     public const string secondCunningTutorialSequenceKey = "Second Cunning Tutorial";
+    public const string thirdCunningTutorialSequenceKey = "Third Cunning Tutorial";
     public const string observationTutorialSequenceKey = "Observation Tutorial";
+    public const string secondObservationTutorialSequenceKey = "Second Observation Tutorial";
     public const string leadershipTutorialSequenceKey = "Leadership Tutorial";
+    public const string secondLeadershipTutorialSequenceKey = "Secondary Leadership Tutorial";
     public const string questCounterTutorialSequenceKey = "Quest Counter Tutorial";
     public const string hiddenObjectsTutorialSequenceKey = "Hidden Object Tutorial";
     // public const string partyMemberUpgradeTutorialSequenceKey = "Party Member Upgrade Tutorial";
@@ -163,10 +170,13 @@ public static class TutorialSequenceList
         initializeVaultableObjectTutorial();
         initializeFirstCunningTutorial();
         initializeSecondCunningTutorial();
+        initializeThirdCunningTutorial();
 
         initializeObservationTutorial();
+        initializeSecondObservationTutorial();
 
         initializeLeadershipTutorial();
+        initializesecondLeadershipTutorial();
 
         initializeQuestSymbolTutorial();
 
@@ -415,6 +425,28 @@ public static class TutorialSequenceList
         tutorialSequenceDictionary.Add(secondCunningTutorialSequenceKey, secondCunningTutorialSequence);
     }
 
+    public static void initializeThirdCunningTutorial()
+    {
+        TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.thirdCunningTutorialMessagePrefix + 1,
+                                                                tutorialCunningObjectTargetHash,
+                                                                ArrowDirection.Left,
+                                                                skipHighlight: highlight,
+                                                                skipUnhighlight: unhighlight,
+                                                                createPopUpScreenBlocker: createPopUpScreenBlocker);
+        TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.thirdCunningTutorialMessagePrefix + 2,
+                                                                skillUIPanelTargetHash,
+                                                                ArrowDirection.Left,
+                                                                skipHighlight: highlight,
+                                                                skipUnhighlight: unhighlight);
+
+        TutorialSequence thirdCunningTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, thirdCunningTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo });
+
+        thirdCunningTutorialSequence.endOfSequenceEvent = SkillManager.OnSkillUse;
+
+        thirdCunningTutorialSequence.setSkipScript(new SkipTutorialScript());
+        tutorialSequenceDictionary.Add(thirdCunningTutorialSequenceKey, thirdCunningTutorialSequence);
+    }
+
     public static void initializeObservationTutorial()
     {
         TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.observationTutorialMessagePrefix + 1,
@@ -480,6 +512,27 @@ public static class TutorialSequenceList
         tutorialSequenceDictionary.Add(observationTutorialSequenceKey, observationTutorialSequence);
     }
 
+    public static void initializeSecondObservationTutorial()
+    {
+        TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.secondObservationTutorialMessagePrefix + 1,
+                                                                playerSpriteOOCNoArrowTargetHash,
+                                                                ArrowDirection.Top,
+                                                                skipHighlight: skipHighlight,
+                                                                skipUnhighlight: skipUnhighlight,
+                                                                createPopUpScreenBlocker: createPopUpScreenBlocker);
+        TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.secondObservationTutorialMessagePrefix + 2,
+                                                                skillUIPanelTargetHash,
+                                                                ArrowDirection.Left,
+                                                                skipHighlight: skipHighlight,
+                                                                skipUnhighlight: skipUnhighlight,
+                                                                createPopUpScreenBlocker: createPopUpScreenBlocker);
+
+        TutorialSequence secondObservationTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, secondObservationTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo });
+
+        secondObservationTutorialSequence.setSkipScript(new SkipTutorialScript());
+        tutorialSequenceDictionary.Add(secondObservationTutorialSequenceKey, secondObservationTutorialSequence);
+    }
+
     public static void initializeLeadershipTutorial()
     {
         TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.leadershipTutorialMessagePrefix + 1,
@@ -531,6 +584,27 @@ public static class TutorialSequenceList
 
         leadershipTutorialSequence.setSkipScript(new SkipTutorialScript());
         tutorialSequenceDictionary.Add(leadershipTutorialSequenceKey, leadershipTutorialSequence);
+    }
+
+    public static void initializesecondLeadershipTutorial()
+    {
+        TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.multiMemberObstacleTutorialMessagePrefix + 1,
+                                                                awkwardRubbleHash,
+                                                                ArrowDirection.Top,
+                                                                skipHighlight: highlight,
+                                                                skipUnhighlight: unhighlight,
+                                                                createPopUpScreenBlocker: createPopUpScreenBlocker);
+        TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.multiMemberObstacleTutorialMessagePrefix + 2,
+                                                                skillUIPanelTargetHash,
+                                                                ArrowDirection.Left,
+                                                                skipHighlight: highlight,
+                                                                skipUnhighlight: unhighlight,
+                                                                createPopUpScreenBlocker: createPopUpScreenBlocker);
+
+        TutorialSequence secondLeadershipTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, secondLeadershipTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo });
+
+        secondLeadershipTutorialSequence.setSkipScript(new SkipTutorialScript());
+        tutorialSequenceDictionary.Add(secondLeadershipTutorialSequenceKey, secondLeadershipTutorialSequence);
     }
 
     public static void initializeQuestSymbolTutorial()

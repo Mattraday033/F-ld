@@ -22,7 +22,9 @@ public static class TutorialMessageList
     public const string interactableObjectTutorialMessagePrefix = "Interactable Object Tutorial Message ";
 
     public const string cunningTutorialMessagePrefix = "Cunning Tutorial Message ";
+    public const string thirdCunningTutorialMessagePrefix = "Third Cunning Tutorial Message ";
     public const string observationTutorialMessagePrefix = "Observation Tutorial Message ";
+    public const string secondObservationTutorialMessagePrefix = "Second Observation Tutorial Message ";
     public const string leadershipTutorialMessagePrefix = "Leadership Tutorial Message ";
 
     public const string equippableItemTutorialMessagePrefix = "Equippable Item Tutorial Message ";
@@ -51,6 +53,8 @@ public static class TutorialMessageList
     public const string questCounterTutorialMessagePrefix = "Quest Counter Tutorial Message ";
 
     public const string partyMemberUpgradeTutorialMessagePrefix = "Party Member Upgrade Tutorial Message ";
+
+    public const string multiMemberObstacleTutorialMessagePrefix = "Multi Member Obstacle Tutorial Message ";
 
     private static Dictionary<string, string> tutorialDictionary;
 
@@ -172,6 +176,15 @@ public static class TutorialMessageList
         tutorialDictionary.Add(questCounterTutorialMessagePrefix + 2, "This is your Map. It will only show you places you've been before. Nearby locations will be silhouetted in black.");
         tutorialDictionary.Add(questCounterTutorialMessagePrefix + 3, "The Quest Symbol next to an area name means a quest wants you to go there.");
         tutorialDictionary.Add(questCounterTutorialMessagePrefix + 4, "You can see the names of your current Quests here. Hover over them to learn more about them.");
+
+        tutorialDictionary.Add(multiMemberObstacleTutorialMessagePrefix + 1, "Some obstacles require two or more Party Members to remove. Directing your Party Members requires the 'Leadership' skill.");
+        tutorialDictionary.Add(multiMemberObstacleTutorialMessagePrefix + 2, "You can only use the 'Leadership' skill if you have a Party Member with two or more Charisma. If you have a qualified Party Member, the 'Leadership' skill will appear as an option on your Skills bar. Click the Arrow Buttons to cycle through your available Skills.");
+
+        tutorialDictionary.Add(secondObservationTutorialMessagePrefix + 1, "Some doors are hidden from sight. Finding these doors requires the 'Observation' skill.");
+        tutorialDictionary.Add(secondObservationTutorialMessagePrefix + 2, "You can only use the 'Observation' skill if you have a Party Member with two or more Wisdom. If you have a qualified Party Member, the 'Wisdom' skill will appear as an option on your Skills bar. Click the Arrow Buttons to cycle through your available Skills.");
+
+        tutorialDictionary.Add(thirdCunningTutorialMessagePrefix + 1, "Some obstacles can be activated with the 'Cunning' Skill. Cunning targets have a yellow border when you highlight interactables.");
+        tutorialDictionary.Add(thirdCunningTutorialMessagePrefix + 2, "You can only use the 'Cunning' skill if you have a Party Member with two or more Dexterity. If you have a qualified Party Member, the 'Cunning' skill will appear as an option on your Skills bar. Click the Arrow Buttons to cycle through your available Skills.");
 
         tutorialDictionary.Add(partyMemberUpgradeTutorialMessagePrefix + 1, "You have earned enough affinity to upgrade a companion.");
         tutorialDictionary.Add(partyMemberUpgradeTutorialMessagePrefix + 2, "You can tell you have enough affinity because the party screen button has a counter next to it.");

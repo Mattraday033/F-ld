@@ -40,8 +40,8 @@ public static class MonsterSpawnDetailsList
                     return null;
                 }
 
-                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-5, 19), movementType: MonsterMovementType.Chases));
-                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-5, 18), movementType: MonsterMovementType.Chases));
+                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(9, 8), movementType: MonsterMovementType.Chases));
+                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(8, -12), movementType: MonsterMovementType.Chases));
 
                 return conditionalList;
 
@@ -66,10 +66,11 @@ public static class MonsterSpawnDetailsList
                     return null;
                 }
 
+                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-7, 3), movementType: MonsterMovementType.Chases));
+                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-3, 2), movementType: MonsterMovementType.Chases));                
+                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(11, 6), movementType: MonsterMovementType.Chases));
+                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(2, 10), movementType: MonsterMovementType.Chases));
                 conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-5, 19), movementType: MonsterMovementType.Chases));
-                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-5, 18), movementType: MonsterMovementType.Chases));                
-                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-5, 17), movementType: MonsterMovementType.Chases));
-                conditionalList.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-5, 16), movementType: MonsterMovementType.Chases));
 
                 return conditionalList;
                 

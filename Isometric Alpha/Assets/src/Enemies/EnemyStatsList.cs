@@ -216,8 +216,8 @@ new BuffChargeUpAbility(TraitList.coordinated, AbilityList.getAbility(null, Abil
                                                                             animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));        
     
         enemyStatsDict.Add(MonsterNameList.overseer, new EnemyStats(MonsterNameList.overseer,
-                                                                                    Constants.thirtyFiveArmor,
-                                                                                            145,
+                                                                                    Constants.twentyArmor,
+                                                                                            120,
                             AbilityList.getAbility(null, AbilityList.guardSlaveSummonKey) as Ability,
                                                                 new Trait[] { TraitList.master,
                                                                           TraitList.empty,

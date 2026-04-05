@@ -897,6 +897,8 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(ZoneKeyList.mineLvl2 + LocationNameList.section3a, ZoneKeyList.mineLvl2 + LocationNameList.section5, new Vector3Int(0, -11), Facing.NorthWest, Constants.sizeTwo, Axis.DescendingX));
 
+        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(-1, 7), Facing.NorthEast));
+
         transitionSpawnInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section3a, list);
 
         #endregion

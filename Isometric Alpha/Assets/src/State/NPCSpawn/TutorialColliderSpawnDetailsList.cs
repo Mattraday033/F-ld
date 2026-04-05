@@ -39,6 +39,18 @@ public static class TutorialColliderSpawnDetailsList
         tutorialSpawnDetailsDict.Add(LocationNameList.campSouthEast, list);
         #endregion
 
+        #region MineLvl_1-1b
+        list = new List<MultiTutorialColliderSpawnInfo>();
+
+        list.Add(new MultiTutorialColliderSpawnInfo(ZoneKeyList.mineLvl1 + LocationNameList.section1b, 
+                                                    new Vector3Int(9,-3),
+                                                    TutorialSequenceList.secondLeadershipTutorialSequenceKey,
+                                                    TutorialSequenceList.secondLeadershipTutorialSeenFlag,
+                                                    Constants.sizeFour, Axis.DescendingX));
+
+        tutorialSpawnDetailsDict.Add(ZoneKeyList.mineLvl1 + LocationNameList.section1b, list);
+        #endregion
+
         #region MineLvl_2-1a
         list = new List<MultiTutorialColliderSpawnInfo>();
 
@@ -48,7 +60,31 @@ public static class TutorialColliderSpawnDetailsList
                                                     TutorialSequenceList.movableObjectTutorialSeenFlag,
                                                     Constants.sizeFive, Axis.DescendingX));
 
+        list.Add(new MultiTutorialColliderSpawnInfo(ZoneKeyList.mineLvl2 + LocationNameList.section1a, 
+                                                    new Vector3Int(4,7),
+                                                    TutorialSequenceList.secondObservationTutorialSequenceKey,
+                                                    TutorialSequenceList.secondObservationTutorialSeenFlag,
+                                                    Constants.sizeFive, Axis.DescendingX));
+
+        list.Add(new MultiTutorialColliderSpawnInfo(ZoneKeyList.mineLvl2 + LocationNameList.section1a, 
+                                                    new Vector3Int(4,-2),
+                                                    TutorialSequenceList.secondObservationTutorialSequenceKey,
+                                                    TutorialSequenceList.secondObservationTutorialSeenFlag,
+                                                    Constants.sizeFive, Axis.DescendingX));
+
         tutorialSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1a, list);
+        #endregion
+
+        #region MineLvl_2-5
+        list = new List<MultiTutorialColliderSpawnInfo>();
+
+        list.Add(new MultiTutorialColliderSpawnInfo(ZoneKeyList.mineLvl2 + LocationNameList.section5, 
+                                                    new Vector3Int(3, 10),
+                                                    TutorialSequenceList.thirdCunningTutorialSequenceKey,
+                                                    TutorialSequenceList.thirdCunningTutorialSeenFlag,
+                                                    Constants.sizeTwo, Axis.DescendingY));
+
+        tutorialSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section5, list);
         #endregion
     }
 }
