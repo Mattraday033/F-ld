@@ -12,21 +12,22 @@ public class CanvasScalerSetToResolution : CanvasScaler
         {
             Vector2 resolution = Vector2.one;
 
-            if (Camera.main.aspect >= 3.5f)
-            {
-                resolution = new Vector2(3440f, 1440f);
-            }
-            else if (Camera.main.aspect >= 2.3f)
-            {
-                resolution = new Vector2(2560f, 1080f);
-            }
-            else
-            {
+            // if (Camera.main.aspect >= 3.5f)
+            // {
+            //     resolution = new Vector2(3440f, 1440f);
+            // }
+            // else if (Camera.main.aspect >= 2.3f)
+            // {
+            //     resolution = new Vector2(2560f, 1080f);
+            // }
+            // else
+            // {
                 resolution = new Vector2(1920f, 1080f);
-            }
+            // }
 
             m_ReferenceResolution = resolution;
-            Screen.SetResolution((int) resolution.x, (int) resolution.y, true);
+            // Screen.SetResolution((int) resolution.x, (int) resolution.y, true);
+            Screen.SetResolution((int) Screen.width, (int) Screen.height, true);
         }
 
 

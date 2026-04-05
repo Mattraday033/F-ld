@@ -96,8 +96,10 @@ public class SaveHandler : ScreenManager, IEscapable
 
 	public static bool saveNameFieldIsSelected()
 	{
-		return EventSystem.current != null && getInstance() != null &&
+        bool isSelected = EventSystem.current != null && getInstance() != null &&
 				EventSystem.current.currentSelectedGameObject == getInstance().saveNameField.gameObject;
+
+		return isSelected;
 	}
 
 	public static bool nameMeetsAutosaveCriteria(string saveName)
