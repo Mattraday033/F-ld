@@ -50,3 +50,39 @@ public class HiddenShieldTrait : ShieldTrait
         //empty on purpose
     }
 }
+
+public class CaveMatronShieldTrait : ShieldTrait
+{
+
+    public CaveMatronShieldTrait(string traitName, TraitType traitType, string traitDescription, string iconName, int roundsLeft):
+    base(traitName, traitType, traitDescription, iconName, roundsLeft: roundsLeft, permanent: false)
+    {
+    }
+
+    public override void onApplication()
+    {
+        EnemyStats.OnEnemyDeath.RemoveListener(checkForNoOtherCreatures);
+        EnemyStats.OnEnemyDeath.AddListener(checkForNoOtherCreatures);
+    }
+
+    public override void setIdleAnimationOnApplication(AnimationManager animationManager)
+    {
+        if(CombatGrid.getEnemyMasterCount() == 1 && CombatGrid.getEnemyMinionCount() == 0)
+        {
+            animationManager.setCurrentIdle(CharacterAnimationType.Idle_Front);
+        } else
+        {
+            animationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle);
+        }
+    }
+
+    private void checkForNoOtherCreatures()
+    {
+        if(CombatGrid.getEnemyMasterCount() == 1 && CombatGrid.getEnemyMinionCount() == 0)
+        {
+            traitHolder.removeTrait(this);
+            EnemyStats.OnEnemyDeath.RemoveListener(checkForNoOtherCreatures);
+        }
+    }
+
+}

@@ -17,6 +17,7 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
 
     public Transform nameParent;
     public Transform healthParent;
+    public Transform bonusDamageParent;
     public Transform levelParent;
     public Transform descriptionParent;
 
@@ -38,7 +39,7 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
                 switch (block.iconName)
                 {
                     case IconList.healthIconName:
-                        return healthParent;
+                        return rowParent;
                     case IconList.levelIconName:
                         return levelParent;
                     default:
@@ -46,6 +47,8 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
                 }
             case DescriptionPanelBuildingBlockType.DescriptionText:
                 return descriptionParent;
+            case DescriptionPanelBuildingBlockType.BonusDamageText:
+                return bonusDamageParent;
         }
 
         return base.getParent(block);
@@ -60,10 +63,15 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
             return null;
         }
 
-        if(maxChildren > 0 && row.transform.parent.childCount > maxChildren && block.type != DescriptionPanelBuildingBlockType.BonusDamageText)
+        if(maxChildren > 0 && row.transform.parent.childCount > maxChildren)
         {
-            Destroy(row.gameObject);
-            return null;
+            if(block.getIcon() == null || 
+                (CombatStateManager.inCombat && !block.getIcon().name.Equals(IconList.vulnerableIconName)) || 
+                (!CombatStateManager.inCombat && !block.getIcon().name.Equals(IconList.invulnerableIconName)))
+            {
+                Destroy(row.gameObject);
+                return null;
+            }
         }
 
         if (setNamePivot && block.type == DescriptionPanelBuildingBlockType.Name)

@@ -718,6 +718,8 @@ deactivate({rubbleMarcosIndex})
 
 === combatPrep ===
 
+setToFalse(mineLvl3GuardsInParty)
+
 {
 -mineLvl3ConvincedRekaAndPazman:
 

@@ -100,10 +100,10 @@ public static class TraitList
 
 	public readonly static Trait charged = new Trait(StatSourceNameList.chargedKey, TraitType.Charge, "This creature is capable of delivering a devastating attack.", "Charged", roundsLeft: Constants.oneRoundDuration, permanent: false);
 	public readonly static Trait shielded = new ShieldTrait(StatSourceNameList.shieldedKey, TraitType.Charge, "This creature takes reduced damage.", StatSourceNameList.shieldedKey, roundsLeft: Constants.oneRoundDuration, permanent: false);
-    public readonly static Trait extraShielded = new ShieldTrait(StatSourceNameList.protectedKey, TraitType.Charge, "This creature takes a reduced damage. It will lose this trait if it is the last enemy alive.", StatSourceNameList.shieldedKey, roundsLeft: Constants.oneRoundDuration, permanent: false);
+    public readonly static Trait extraShielded = new CaveMatronShieldTrait(StatSourceNameList.protectedKey, TraitType.Charge, "This creature takes a reduced damage. <B>It will lose this trait if it is the last enemy alive.</B>", StatSourceNameList.protectedKey, roundsLeft: Constants.oneRoundDuration);
 	public readonly static Trait signaling = new Trait(StatSourceNameList.signalingKey, TraitType.Charge, "This guard is going to call signal an arrow tower to fire upon their assailants.", "Signaling");
 	public readonly static Trait coordinated = new Trait(StatSourceNameList.coordinatedKey, TraitType.Charge, "This creature is taking part in a plan directed by another creature.", StatSourceNameList.coordinatedKey, roundsLeft: Constants.twoRoundDuration, permanent: false);
-    public readonly static Trait observing = new Trait(StatSourceNameList.observingKey, TraitType.Charge, "The creature is observing it's troops and developing a strategy.", "Observing");
+    public readonly static Trait observing = new Trait(StatSourceNameList.observingKey, TraitType.Charge, "The creature is observing it's troops and developing a strategy.", "Observing"); 
 
 
 	//on Death Effects

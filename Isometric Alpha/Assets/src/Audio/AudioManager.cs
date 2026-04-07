@@ -776,6 +776,7 @@ public static class AudioClipList
             case NPCNameList.liftableGate:
             case NPCNameList.ancientPortcullis:
             case NPCNameList.campGate:
+            case NPCNameList.mineArmoryGate:
                 return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(gateIntroSFX), VolumeType.Voice);
             case NPCNameList.rubble:
             case NPCNameList.awkwardRubble:
@@ -792,7 +793,8 @@ public static class AudioClipList
                 return () => { };
             case NPCNameList.csalan:
             case NPCNameList.horse:
-                return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(horseIntroSFX), VolumeType.Voice);     
+                return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(horseIntroSFX), VolumeType.Voice);
+            case NPCNameList.controlPanel:  
             case NPCNameList.leafPile:
                 return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(onTransitionSFX), VolumeType.Voice);     
             case NPCNameList.guardVirag:

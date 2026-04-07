@@ -1091,7 +1091,7 @@ public class HorseSpawnDetails : NPCWithAnimationsSpawnDetails
         if(animationManager != null)
         {
             animationManager.changesFacing = false;
-            animationManager.disableExtras();
+            // animationManager.disableExtras();
         }
     }
 }

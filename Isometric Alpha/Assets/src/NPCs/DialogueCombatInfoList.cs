@@ -9,7 +9,8 @@ public static class DialogueCombatInfoList
                                                                             new DeadNameList[] { new DeadNameList(new string[] { NPCNameList.guardVazul }) });
 
     public readonly static NPCCombatInfo andrasCombatInfo = new NPCCombatInfo(new EnemyPackInfo[] { EnemyPackInfoList.guardAndrasWithKeyFight, EnemyPackInfoList.guardAndrasWithOutKeyFight},
-                                                                            new DeadNameList[] { new DeadNameList(new string[] { NPCNameList.guardAndras, NPCNameList.andras }) });
+                                                                            new DeadNameList[] { new DeadNameList(new string[] { NPCNameList.guardAndras, NPCNameList.andras }),
+                                                                                                 new DeadNameList(new string[] { NPCNameList.guardAndras, NPCNameList.andras }) });
 
     public readonly static NPCCombatInfo imreCombatInfo = new NPCCombatInfo(new EnemyPackInfo[] { EnemyPackInfoList.imreFight },
                                                                             new DeadNameList[] { new DeadNameList(new string[] { NPCNameList.imre }) });

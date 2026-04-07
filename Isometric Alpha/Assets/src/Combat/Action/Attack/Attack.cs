@@ -24,19 +24,22 @@ public class Attack : CombatAction, IJSONConvertable
 
 	public override void performCombatAction(List<Stats> targets)
 	{
+		if (!inPreviewMode)
+		{
+            foreach (Stats targetCombatant in targets)
+            {
+                if (targetCombatant != null && targetCombatant.isAlive())
+                {
+                    Exuberances.addExuberance(MultiStackProcType.RedKnife, singleExuberanceStack);
+                }
+            }
+        }
+        
 		base.performCombatAction(targets);
 
 		if (inPreviewMode)
 		{
 			return;
-		}
-
-		foreach (Stats targetCombatant in targets)
-		{
-			if (targetCombatant != null && targetCombatant.isAlive())
-			{
-				Exuberances.addExuberance(MultiStackProcType.RedKnife, singleExuberanceStack);
-			}
 		}
 
 		if(CombatStateManager.whoseTurn == WhoseTurn.Resolving && getSourceItem().appliesStanceStacks())

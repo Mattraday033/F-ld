@@ -13,6 +13,8 @@ public class StatsDescriptionPanelBuilder : DescriptionPanelBuilder
 
     public GridLayoutGroup secondaryGridLayout;
 
+    public GameObject moreInfoNode;
+
     private List<Transform> parents = new List<Transform>();
 
     public float numberOfTilesPerRow = 4f;
@@ -25,17 +27,39 @@ public class StatsDescriptionPanelBuilder : DescriptionPanelBuilder
     
         parents.Add(primaryStatParent);
         parents.Add(secondaryStatParent);
+
+        if(CombatStateManager.inCombat)
+        {
+            OnFormulaSwap.AddListener(revealExtraDescriptionPanels);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        OnFormulaSwap.RemoveListener(revealExtraDescriptionPanels);
     }
 
     public override void buildDescriptionPanel(IDescribableInBlocks blockOrigin, BlockFormat format)
     {
         base.buildDescriptionPanel(blockOrigin, format);
 
-        foreach(Transform parentTransform in parents)
+        int parentTransformsToShow = 0;
+
+        if(CombatStateManager.inCombat)
         {
-            if(parentTransform != null && parentTransform.childCount == 0)
+            foreach(Transform parentTransform in parents)
             {
                 parentTransform.parent.gameObject.SetActive(false);
+
+                if(parentTransform != null && parentTransform.childCount > 0)
+                {
+                    parentTransformsToShow++;
+                }
+            }
+
+            if(parentTransformsToShow > 0 && moreInfoNode != null)
+            {
+                moreInfoNode.SetActive(true);
             }
         }
     }
@@ -62,6 +86,17 @@ public class StatsDescriptionPanelBuilder : DescriptionPanelBuilder
         }
 
         return base.getParent(block);
+    }
+
+    private void revealExtraDescriptionPanels()
+    {
+        foreach(Transform parentTransform in parents)
+        {
+            if(parentTransform != null && parentTransform.childCount > 0)
+            {
+                parentTransform.parent.gameObject.SetActive(OverallUIManager.showFormula);
+            }
+        }
     }
 
     private void setGridLayoutSize()

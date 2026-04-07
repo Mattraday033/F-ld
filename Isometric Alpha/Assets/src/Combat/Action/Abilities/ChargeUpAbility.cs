@@ -64,14 +64,14 @@ public class ChargeUpAbility : Ability
     
     public override void playActivationAnimation()
     {
-        if (!isCharged())
-        {
-            getActorStats().playAttackIntoSecondaryIdleAnimation();
-        }
-        else
-        {
+        // if (!isCharged())
+        // {
+            // getActorStats().playAttackIntoSecondaryIdleAnimation();
+        // }
+        // else
+        // {
             getActorStats().playAttackIntoFrontIdleAnimation();
-        }
+        // }
     }
 
 	public override bool isSelfTargeting()

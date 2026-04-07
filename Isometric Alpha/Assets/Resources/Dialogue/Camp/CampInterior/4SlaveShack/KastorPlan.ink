@@ -2479,6 +2479,15 @@ deactivate({carterIndex})
 
 {
 -restAfterDeactivatingExtras:
+
+    {
+    -broughtNandorToKastor and not deathFlagGuardMárcos and not (kastorStartedRevolt and convincedSlavesToHelpYou):
+
+    deactivate({marcosIndex})
+    activate({marcosSleepingIndex})
+    setToTrue(marcosSleepingSS4)
+    }
+
     ~restAfterDeactivatingExtras = false
     restParty()
 }
@@ -2491,6 +2500,7 @@ fadeBackIn(60,false)
 
 {
 -broughtNandorToKastor and not deathFlagGuardMárcos and not (kastorStartedRevolt and convincedSlavesToHelpYou):
+
 deactivate({marcosIndex})
 activate({marcosSleepingIndex})
 setToTrue(marcosSleepingSS4)

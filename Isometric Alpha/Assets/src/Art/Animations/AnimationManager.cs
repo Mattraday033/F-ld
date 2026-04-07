@@ -77,6 +77,11 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     private void updateIdleAnimation(int rowToUpdate)
     {
+        if(linkedStats != null && linkedStats.isDead())
+        {
+            return;
+        }
+
         if(spriteSetByHeartBeat() && animancer.enabled)
         {
             haltAllAnimations();
@@ -253,6 +258,20 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
         shadow.flipX = facing.getFacing() == Facing.NorthWest || 
                         facing.getFacing() == Facing.SouthEast;
+
+        switch(facing.getFacing())
+        {
+            case Facing.SouthEast:
+            case Facing.SouthWest:
+                shadowSprite.transform.localPosition = Vector3.zero;
+                break;
+            case Facing.NorthWest:
+                shadowSprite.transform.localPosition = new Vector3(.5f, -.225f);
+                break;
+            case Facing.NorthEast:
+                shadowSprite.transform.localPosition = new Vector3(-.5f, -.225f);
+                break;
+        }
 
         foreach(Transform transform in shadow.transform)
         {

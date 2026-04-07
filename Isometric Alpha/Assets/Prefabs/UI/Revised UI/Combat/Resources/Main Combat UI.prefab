@@ -935,12 +935,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverMessageKey: Green Leaf
+  ignoreHover: 0
   bonusDamageIcon: 0
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 2884638689865329436}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 3501319679018936656}
   iconImage: {fileID: 5248397365725351631}
+  bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &2884638689865329436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1138,12 +1142,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverMessageKey: 
+  ignoreHover: 0
   bonusDamageIcon: 0
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 3514914105270048324}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 6348296280204389251}
   iconImage: {fileID: 4336853444868021039}
+  bubble: {fileID: 0}
+  inWorldSpace: 0
   backgroundOne: {fileID: 6468649006080307686}
   backgroundTwo: {fileID: 3027626116356396874}
 --- !u!1 &1248494344842620772
@@ -2475,9 +2483,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6316390918719152273}
   - component: {fileID: 2309499618284526177}
-  - component: {fileID: 3540403428492141108}
   - component: {fileID: 426892114671791806}
   - component: {fileID: 6902729015194865770}
+  - component: {fileID: 936119624965482236}
   m_Layer: 5
   m_Name: Exuberances Parent
   m_TagString: Untagged
@@ -2505,7 +2513,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 37.5, y: 137.5}
+  m_AnchoredPosition: {x: 72.5, y: 67.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2309499618284526177
@@ -2522,32 +2530,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
---- !u!114 &3540403428492141108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3627599717066728670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 5
-    m_Right: 5
-    m_Top: 5
-    m_Bottom: 5
-  m_ChildAlignment: 0
-  m_Spacing: 5
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!114 &426892114671791806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2590,6 +2572,30 @@ MonoBehaviour:
   secondaryImage: {fileID: 0}
   skipCutOutMask: 0
   _UseUIScaleOverride: 1
+--- !u!114 &936119624965482236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3627599717066728670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 65, y: 65}
+  m_Spacing: {x: 5, y: 5}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &3664154554696825313
 GameObject:
   m_ObjectHideFlags: 0
@@ -3650,7 +3656,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 225, y: 0}
+  m_AnchoredPosition: {x: 190, y: 0}
   m_SizeDelta: {x: 350, y: 900}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6937575404539210454
@@ -3863,12 +3869,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverMessageKey: Red Knife
+  ignoreHover: 0
   bonusDamageIcon: 0
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 1877163500681155309}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 185318743233695905}
   iconImage: {fileID: 8850488336696964926}
+  bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &1877163500681155309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4058,12 +4068,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverMessageKey: Blue Shield
+  ignoreHover: 0
   bonusDamageIcon: 0
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 6983733135122631753}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 8679650757963369989}
   iconImage: {fileID: 15043840146581914}
+  bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &6983733135122631753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4810,12 +4824,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverMessageKey: Party Actions
+  ignoreHover: 0
   bonusDamageIcon: 0
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 8425301055843824060}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 7814812444832576496}
   iconImage: {fileID: 1455481445390341231}
+  bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &8425301055843824060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5914,12 +5932,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverMessageKey: Yellow Thorn
+  ignoreHover: 0
   bonusDamageIcon: 0
   damageIcon: 0
   descriptionPanel: {fileID: 0}
   outlineImage: {fileID: 5618018920668491794}
+  backgroundTransform: {fileID: 0}
   backgroundImage: {fileID: 6154259433076109918}
   iconImage: {fileID: 3254255846405494209}
+  bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &5618018920668491794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6932,11 +6954,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3014053869112202209, guid: 5e3fd68f997c64b4a9ad9706aef8ef29,
-        type: 3}
-      propertyPath: m_TargetGraphic
-      value: 
-      objectReference: {fileID: 4348122265398880639}
     - target: {fileID: 3563970538434407552, guid: 5e3fd68f997c64b4a9ad9706aef8ef29,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -7249,18 +7266,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4019812573116898024}
   m_SourcePrefab: {fileID: 100100000, guid: 5e3fd68f997c64b4a9ad9706aef8ef29, type: 3}
---- !u!114 &4348122265398880639 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 532405025980822482, guid: 5e3fd68f997c64b4a9ad9706aef8ef29,
-    type: 3}
-  m_PrefabInstance: {fileID: 4266274051316062893}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &7745768585615229542 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5785620119007844555, guid: 5e3fd68f997c64b4a9ad9706aef8ef29,

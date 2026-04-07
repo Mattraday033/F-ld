@@ -1,0 +1,399 @@
+Resources/Sprites/Bones/GSS_Foliage_desert_skull_01.png — PPU 256
+Resources/Sprites/Bones/GSS_Foliage_desert_skull_02.png — PPU 256
+Resources/Sprites/Bones/GSS_Foliage_desert_skull_03.png — PPU 256
+Resources/Sprites/Characters/Humans/NPC Sprite.png — PPU 256
+Resources/Sprites/Characters/Shadows/256_Shadow.PNG — PPU 256
+Resources/Sprites/Characters/Shadows/512_Shadow.PNG — PPU 256
+Resources/Sprites/Furniture/Storage/Containers/Empty Weapon Table.PNG — PPU 256
+Resources/Sprites/Furniture/Storage/Containers/Pickaxe Table.PNG — PPU 256
+Resources/Sprites/Furniture/Storage/Containers/Sword Table.PNG — PPU 256
+Resources/Sprites/Plants/Alpine/GSS_Foliage_Forest_big_tree_needle_03.png — PPU 256
+Resources/Sprites/Plants/Alpine/GSS_Foliage_Forest_big_tree_needle_04.png — PPU 256
+Resources/Sprites/Plants/Arid/GSS_Foliage_Desert_small_Bush_01.png — PPU 256
+Resources/Sprites/Plants/Arid/GSS_Foliage_Desert_small_Bush_02.png — PPU 256
+Resources/Sprites/Plants/Arid/GSS_Foliage_Forest_big_cypress_01.png — PPU 256
+Resources/Sprites/Plants/Arid/GSS_Foliage_Forest_big_cypress_02.png — PPU 256
+Resources/Sprites/Plants/Arid/GSS_Foliage_Forest_big_cypress_03.png — PPU 256
+Resources/Sprites/Plants/Bamboo/GSS_Foliage_bamboo (1).png — PPU 256
+Resources/Sprites/Plants/Bamboo/GSS_Foliage_bamboo (2).png — PPU 256
+Resources/Sprites/Plants/Bamboo/GSS_Foliage_bamboo (3).png — PPU 256
+Resources/Sprites/Plants/Bamboo/GSS_Foliage_bamboo (4).png — PPU 256
+Resources/Sprites/Plants/Bamboo/GSS_Foliage_bamboo (5).png — PPU 256
+Resources/Sprites/Plants/Bamboo/GSS_Foliage_bamboo (6).png — PPU 256
+Resources/Sprites/Plants/Bamboo/GSS_Foliage_bamboo (7).png — PPU 256
+Resources/Sprites/Plants/Bamboo/GSS_Foliage_bamboo (8).png — PPU 256
+Resources/Sprites/Plants/Dead/GSS_Foliage_Forest_deadBush (3).png — PPU 256
+Resources/Sprites/Plants/Dead/GSS_Foliage_Forest_deadTree (1).png — PPU 256
+Resources/Sprites/Plants/Dead/GSS_Foliage_Forest_deadTree (2).png — PPU 256
+Resources/Sprites/Plants/Dead/GSS_Foliage_Forest_deadTree (4).png — PPU 256
+Resources/Sprites/Plants/Dead/GSS_Foliage_Forest_deadbush(5).png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_big_cactus_02.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_big_cactus_03.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_big_cactus_04.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_big_flower_01.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Agave_Cactus_01.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Agave_Cactus_02.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Agave_Cactus_03.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Agave_Cactus_04.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Cactus_02.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Cactus_03.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Cactus_04.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Cactus_05.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Cactus_06.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Cactus_07.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Cactus_09.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Cactus_10.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Cactus_11.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Cactus_12.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Cactus_13.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Cactus_14.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Cactus_15.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Flower_01.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Flower_02.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Flower_03.png — PPU 256
+Resources/Sprites/Plants/Desert/GSS_Foliage_Desert_small_Flower_04.png — PPU 256
+Resources/Sprites/Plants/Forest/GSS_Foliage_Forest_big_tree_leaf_01.png — PPU 256
+Resources/Sprites/Plants/Forest/GSS_Foliage_Forest_small_bush_01.png — PPU 256
+Resources/Sprites/Plants/Forest/GSS_Foliage_Forest_small_bush_02.png — PPU 256
+Resources/Sprites/Plants/Forest/GSS_Foliage_Forest_small_clover_01.png — PPU 256
+Resources/Sprites/Plants/Forest/GSS_Foliage_Forest_small_clover_02.png — PPU 256
+Resources/Sprites/Plants/Forest/GSS_Foliage_Forest_small_clover_03.png — PPU 256
+Resources/Sprites/Plants/Forest/GSS_Foliage_Forest_small_fern_01.png — PPU 256
+Resources/Sprites/Plants/Forest/GSS_Foliage_Forest_small_fern_02.png — PPU 256
+Resources/Sprites/Plants/Forest/GSS_Foliage_Forest_small_tree_log_01.png — PPU 256
+Resources/Sprites/Plants/Forest/GSS_Foliage_Forest_small_tree_log_02.png — PPU 256
+Resources/Sprites/Plants/Forest/GSS_Foliage_Forest_small_tree_log_03.png — PPU 256
+Resources/Sprites/Plants/Forest/GSS_Foliage_Forest_small_tree_stump_01.png — PPU 256
+Resources/Sprites/Plants/Forest/GSS_Foliage_Forest_small_tree_stump_02.png — PPU 256
+Resources/Sprites/Plants/Forest/GSS_Foliage_Forest_small_tree_stump_03.png — PPU 256
+Resources/Sprites/Plants/Forest/GSS_Foliage_forest_berrybush.png — PPU 256
+Resources/Sprites/Plants/Forest/GSS_Foliage_forest_bush (4).png — PPU 256
+Resources/Sprites/Plants/Forest/GSS_Foliage_forest_bush (5).png — PPU 256
+Resources/Sprites/Plants/Grass/GSS_Foliage_Forest_small_grass_01.png — PPU 256
+Resources/Sprites/Plants/Grass/GSS_Foliage_Forest_small_grass_02.png — PPU 256
+Resources/Sprites/Plants/Grass/GSS_Foliage_Forest_small_grass_03.png — PPU 256
+Resources/Sprites/Plants/Grass/GSS_Foliage_Forest_small_grass_04.png — PPU 256
+Resources/Sprites/Plants/Grass/GSS_Foliage_Forest_small_grass_05.png — PPU 256
+Resources/Sprites/Plants/Grass/GSS_Foliage_Forest_small_grass_06.png — PPU 256
+Resources/Sprites/Plants/Grass/GSS_Foliage_Forest_small_grass_07.png — PPU 256
+Resources/Sprites/Plants/Grass/GSS_Foliage_Forest_small_grass_08.png — PPU 256
+Resources/Sprites/Plants/Grass/GSS_Foliage_reed (6).png — PPU 256
+Resources/Sprites/Plants/Grass/GSS_Foliage_reed (7).png — PPU 256
+Resources/Sprites/Plants/Grass/GSS_Foliage_reed (8).png — PPU 256
+Resources/Sprites/Plants/Mushrooms/GSS_Foliage_Forest_small_mushroom_01.png — PPU 256
+Resources/Sprites/Plants/Mushrooms/GSS_Foliage_Forest_small_mushroom_02.png — PPU 256
+Resources/Sprites/Plants/Mushrooms/GSS_Foliage_Forest_small_mushroom_03.png — PPU 256
+Resources/Sprites/Plants/Mushrooms/GSS_Foliage_Forest_small_mushroom_04.png — PPU 256
+Resources/Sprites/Plants/Water/GSS_Foliage_Forest_small_flower_01.png — PPU 256
+Resources/Sprites/Plants/Water/GSS_Foliage_Forest_small_flower_02.png — PPU 256
+Resources/Sprites/Plants/Water/GSS_Foliage_Forest_small_flower_03.png — PPU 256
+Resources/Sprites/Plants/Water/GSS_Foliage_reed (1).png — PPU 256
+Resources/Sprites/Plants/Water/GSS_Foliage_reed (2).png — PPU 256
+Resources/Sprites/Plants/Water/GSS_Foliage_reed (3).png — PPU 256
+Resources/Sprites/Plants/Water/GSS_Foliage_reed (4).png — PPU 256
+Resources/Sprites/Plants/Water/GSS_Foliage_reed (5).png — PPU 256
+Resources/Sprites/Plants/Water/GSS_Foliage_waterbuds.png — PPU 256
+Resources/Sprites/Plants/Water/GSS_Foliage_waterplant (2).png — PPU 256
+Resources/Sprites/Plants/Water/GSS_Foliage_waterplant 1.png — PPU 256
+Resources/Sprites/Plants/Water/GSS_Foliage_waterplant 2.png — PPU 256
+Resources/Sprites/Plants/Water/GSS_Foliage_waterplant 3.png — PPU 256
+Resources/Sprites/Plants/Water/GSS_Foliage_waterplant 4.png — PPU 256
+Resources/Sprites/Plants/Water/GSS_Foliage_waterplant 5.png — PPU 256
+Resources/Sprites/Plants/Water/GSS_Foliage_waterplant 6.png — PPU 256
+Resources/Sprites/Plants/Water/GSS_Foliage_waterplant.png — PPU 256
+Resources/Sprites/Rocks/GSS_Foliage_Forest_big_stone_01.png — PPU 256
+Resources/Sprites/Rocks/GSS_Foliage_Forest_big_stone_02.png — PPU 256
+Resources/Sprites/Rocks/GSS_Foliage_stone (1).png — PPU 256
+Resources/Sprites/Rocks/GSS_Foliage_stone (2).png — PPU 256
+Resources/Sprites/Rocks/GSS_Foliage_stone (3).png — PPU 256
+Resources/Sprites/Wells/Blue_Well_Large.png — PPU 256
+Resources/Sprites/Wells/Brown_Well_Large.png — PPU 256
+Resources/Sprites/CratesAndBarrels/Barrel.png — PPU 275
+Resources/Sprites/CratesAndBarrels/RainBarrel.png — PPU 275
+Resources/Sprites/Camp Exterior Spritesheet/Fence2.png — PPU 290
+Resources/Sprites/Camp Exterior Spritesheet/FenceWithOutline2.png — PPU 290
+Resources/Sprites/Camp Exterior Spritesheet/FenceWithOutline3.png — PPU 300
+Resources/Sprites/Forge/Forge.png — PPU 300
+Resources/Sprites/Misc/Control Panel.png — PPU 300
+Resources/Sprites/Selectors/GridCollider.psd — PPU 300
+Resources/Sprites/Camp Exterior Spritesheet/Camp Exterior SpriteSheet.png — PPU 320
+Resources/Sprites/Camp Exterior Spritesheet/Fences Spritesheet.png — PPU 320
+Resources/Sprites/Barricades/barricadespikes1.png — PPU 325
+Resources/Sprites/Barricades/barricadespikes2.png — PPU 325
+Resources/Sprites/Barricades/barricadespikes3.png — PPU 325
+Resources/Sprites/Barricades/barricadespikes4.png — PPU 325
+Resources/Sprites/Barricades/barricadespikes4Alternate.png — PPU 325
+Resources/Sprites/Barricades/barricadespikes5.png — PPU 325
+Resources/Sprites/Barricades/barricadespikes6 Alternate.png — PPU 325
+Resources/Sprites/Barricades/barricadespikes6.png — PPU 325
+Resources/Sprites/Barricades/barricadespikes7.png — PPU 325
+Resources/Sprites/Barricades/barricadespikes8.png — PPU 325
+Resources/Sprites/Barricades/barricadewithcrates1.png — PPU 325
+Resources/Sprites/Barricades/barricadewithcrates2.png — PPU 325
+Resources/Sprites/Barricades/barricadewithcrates3.png — PPU 325
+Resources/Sprites/Barricades/barricadewithcrates4.png — PPU 325
+Resources/Sprites/Barricades/barricadewithcrates5.png — PPU 325
+Resources/Sprites/Barricades/barricadewithcrates6.png — PPU 325
+Resources/Sprites/Barricades/barricadewithcrates7.png — PPU 325
+Resources/Sprites/Barricades/barricadewithcrates8.png — PPU 325
+Resources/Sprites/CratesAndBarrels/Crate.png — PPU 325
+Resources/Sprites/Furniture/Beds/Hay/Haybed.png — PPU 325
+Resources/Sprites/Furniture/Beds/Hay/HaybedBloody.png — PPU 325
+Resources/Sprites/Furniture/Beds/Hay/HaybedDirty.png — PPU 325
+Resources/Sprites/Furniture/Beds/Hay/HaybedPBBloody.png — PPU 325
+Resources/Sprites/Furniture/Beds/Hay/HaybedPBDirty.png — PPU 325
+Resources/Sprites/Furniture/Beds/Hay/Haybedcleanpillow.png — PPU 325
+Resources/Sprites/Furniture/Beds/Hay/HaybedcleanpillowwithBlanket.png — PPU 325
+Resources/Sprites/Furniture/Beds/Hay/SlaveBed.png — PPU 325
+Resources/Sprites/Furniture/Storage/Containers/Empty Horizontal Rack.PNG — PPU 325
+Resources/Sprites/Furniture/Storage/Containers/Empty Polearm Rack.PNG — PPU 325
+Resources/Sprites/Furniture/Storage/Containers/Mattock Rack.PNG — PPU 325
+Resources/Sprites/Furniture/Storage/Containers/Shovel Rack.PNG — PPU 325
+Resources/Sprites/Furniture/Storage/Containers/Spear Rack.PNG — PPU 325
+Resources/Sprites/Furniture/Storage/Containers/Wide_Rack_LongAxe.PNG — PPU 325
+Resources/Sprites/Tiles/MapTiles/props/river/river (1).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (10).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (11).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (12).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (13).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (14).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (15).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (16).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (17).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (18).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (19).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (2).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (20).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (3).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (4).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (5).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (6).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (7).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (8).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/props/river/river (9).png — PPU 340
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Water/Lake With Sand.png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (1).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (10).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (11).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (12).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (13).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (14).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (15).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (16).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (17).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (18).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (19).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (2).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (20).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (21).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (22).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (23).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (24).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (25).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (26).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (27).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (28).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (29).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (3).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (30).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (31).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (32).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (33).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (34).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (35).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (36).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (37).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (38).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (39).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (4).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (40).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (41).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (42).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (43).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (44).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (45).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (46).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (47).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (48).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (5).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (6).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (7).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (8).png — PPU 345
+Resources/Sprites/Tiles/MapTiles/props/shores/shore (9).png — PPU 345
+Resources/Sprites/CratesAndBarrels/TripleBarrels.png — PPU 350
+Resources/Sprites/Plants/Forest/LeafPile.png — PPU 350
+Resources/Sprites/Tiles/MapTiles/props/foliage/forest_autotile/forest_tile (1).png — PPU 350
+Resources/Sprites/Tiles/MapTiles/props/foliage/forest_autotile/forest_tile (3).png — PPU 350
+Resources/Sprites/Tiles/MapTiles/props/foliage/forest_autotile/forest_tile (4).png — PPU 350
+Resources/Sprites/Tiles/MapTiles/manmade/Map Mine.png — PPU 365
+Resources/Sprites/Camp Exterior Spritesheet/Smaller Forges.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/0020FOW.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/003017.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/003626.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/003727.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/004433.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/004534.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/004635.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/01757.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/01767_2.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/0214PropTest_37.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Dirt/Dirt 1.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Grass/Brown Grass.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Grass/Dull Green Grass.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Grass/Forest Floor Grass.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Grass/Grass_terrain_tile_3.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Grass/Grass_terrain_tile_6.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Grass/Green Grass.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Layer 0-0-1024.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Layer 0-0-1536.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Layer 0-1024-1024.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Layer 0-1536-1024.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Layer 0-2048-0.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Layer 0-2048-512.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Layer 0-2560-0.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Layer 0-2560-1024.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Layer 0-2560-512.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Layer 0-3072-0.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Layer 0-512-0.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Layer 0-512-1024.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Layer 0-512-1536.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Layer 0-512-512.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Mine lvl flat rough ground w grass.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Mine lvl flat rough ground.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Mine lvl flat smooth ground w moss 1.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Mine lvl flat smooth ground w moss 2.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Mine lvl flat smooth ground w moss 3.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Mine lvl flat smooth ground.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Sand/Sand With Dunes.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Sand/Sand.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Stone/Dark Purple Stone.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Stone/Dark Stone.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Stone/Light Purple Stone.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Stone/Stone 1.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Stone/Stone 2.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Water/Lake.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/Ground Tiles/Wood/Wood Floor.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/manmade/Manse Wall Map Tile.png — PPU 375
+Resources/Sprites/Tiles/MapTiles/props/Pit.png — PPU 375
+Resources/Sprites/Furniture/Misc/Stockade.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/Camp With Manse.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/Camp.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/Garden Map Tile.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/Large Wooden Stairs.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/Ruin 1.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/Ruin 2.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/Ruin With Sand.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/Stockroom Map Tile.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/Table Map Tile.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/Tower 1.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/World Map Mine.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/bridge (1).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/bridge (2).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/bridge (3).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/farm.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/farmhouse.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/fishing_net.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/lighthouse.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/road/road (1).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/road/road (10).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/road/road (11).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/road/road (12).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/road/road (13).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/road/road (14).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/road/road (15).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/road/road (16).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/road/road (2).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/road/road (3).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/road/road (4).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/road/road (5).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/road/road (6).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/road/road (7).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/road/road (8).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/road/road (9).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/tower (1).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/tower (2).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village (1).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village (2).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village (3).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village (4).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village (5).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village (6).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village (7).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village (8).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village (9).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village_asian.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village_delver (1).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village_delver (2).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village_delver (3).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village_delver.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village_egypt.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village_tileable/village_tileable (1).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village_tileable/village_tileable (2).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village_tileable/village_tileable (3).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village_tileable/village_tileable (4).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village_tileable/village_tileable (5).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village_tileable/village_tileable (6).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/village_viking (1).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/walls (1).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/walls (2).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/walls (3).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/walls (4).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/walls (5).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/walls (6).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/walls (7).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/walls (8).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/windmill.png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/wizard_tower (1).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/manmade/wizard_tower (2).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/props/shores/new/shore_new (1).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/props/shores/new/shore_new (10).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/props/shores/new/shore_new (11).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/props/shores/new/shore_new (12).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/props/shores/new/shore_new (2).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/props/shores/new/shore_new (3).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/props/shores/new/shore_new (4).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/props/shores/new/shore_new (5).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/props/shores/new/shore_new (6).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/props/shores/new/shore_new (7).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/props/shores/new/shore_new (8).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/props/shores/new/shore_new (9).png — PPU 400
+Resources/Sprites/Tiles/MapTiles/props/foliage/foliage (7).png — PPU 425
+Resources/Sprites/Plants/Alpine/GSS_Foliage_Forest_big_tree_needle_04 1.png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/cloud.png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/foliage/foliage (1).png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/foliage/foliage (10).png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/foliage/foliage (11).png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/foliage/foliage (2).png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/foliage/foliage (3).png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/foliage/foliage (4).png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/foliage/foliage (5).png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/foliage/foliage (6).png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/foliage/foliage (8).png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/foliage/foliage (9).png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/foliage/forest_autotile/forest_tile (2).png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/mountains/Dark Mountain.png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/mountains/Dark Purple Mountain 1.png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/mountains/Dark Purple Mountain 2.png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/mountains/Light Purple Mountain 1.png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/mountains/Light Purple Mountain 2.png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/mountains/Mine_lvl_1_mountain_1_v2.png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/mountains/Mine_lvl_1_mountain_2_v2.png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/mountains/Normal Mountain 1.png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/mountains/Normal Mountain 2.png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/mountains/Sand Mountain 1.png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/mountains/Sand Mountain 2.png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/mountains/Snow Tipped Mountain 1.png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/mountains/Snow Tipped Mountain 2.png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/mountains/mountain_snow (1).png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/mountains/mountain_snow (2).png — PPU 450
+Resources/Sprites/Tiles/MapTiles/props/mountains/mountain_volcano.png — PPU 450
+Resources/Sprites/Tiles/Ground/Transition/Collider.png — PPU 500
+Prefabs/Icons/UI/Stat Symbols/Resources/XP.png — PPU 512
+Prefabs/Icons/UI/UI/left-arrow.png — PPU 512
+Resources/UI/UI Textures/CrackedborderBox842.png — PPU 740
+Resources/UI/UI Textures/DistressedBoxTransparent.png — PPU 768
+Resources/UI/UI Textures/InvertedBox2.png — PPU 768
+Resources/UI/UI Textures/InvertedBox2Transparent.png — PPU 768
+Resources/UI/UI Textures/Texture256x3.png — PPU 768
+src/URP/Lovashi Test Guard/Lov_Body_Colors.PNG — PPU 1000
+src/URP/Lovashi Test Guard/Lov_Body_Lines.PNG — PPU 1000

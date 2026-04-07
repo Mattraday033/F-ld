@@ -70,6 +70,18 @@ public class LastManStandingAbility : ChargeUpAbility
 		}
 	}
 	
+    public override void playActivationAnimation()
+    {
+        if (shouldApplyTrait())
+        {
+            getActorStats().playAttackIntoSecondaryIdleAnimation();
+        }
+        else
+        {
+            getActorStats().playAttackIntoFrontIdleAnimation();
+        }
+    }
+
 	public bool shouldApplyTrait()
 	{
 		return CombatGrid.getTotalAliveEnemyCount() > 1;

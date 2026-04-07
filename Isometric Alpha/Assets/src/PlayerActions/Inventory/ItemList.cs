@@ -269,7 +269,7 @@ public static class ItemList
 		weapons.Add(new Weapon(new WeaponListID(bronzeGreatspearIndex), "Bronze Greatspear", "A long spear with a bronze tip, made to be wielded in two hands.", "6S+12", "S+D", ItemSpriteList.bronzeSpearSprite, Range.verticalThreeIndex, 50, isTwoHanded, EffectAnimationType.Pierce));
 		weapons.Add(new Weapon(new WeaponListID(wornBowIndex), "Worn Bow", "This bow is a little weathered, but can still answer the call of it's wielder", "7D+16", "3D", ItemSpriteList.wornBowSprite, Range.verticalOneIndex, 55, isTwoHanded, EffectAnimationType.Pierce));
 		weapons.Add(new Weapon(new WeaponListID(fightingCapeIndex), "Fighting Cape", "A cape wrapped around the mainhand, used to both deflect small blows and disorient the opponent. Often paired with a dagger in the offhand.", "3C+4", "C", ItemSpriteList.capeSprite, Range.singleTargetIndex, 35, isOneHanded, EffectAnimationType.Slash));
-		weapons.Add(new Staff (new WeaponListID(staffIndex), "Staff", "A weathered length of oak-spar. It would serve as well as a walking aid or a bludgeon. Has high Base Damage.", "10", "D+W", ItemSpriteList.staffSprite, Range.horizontalOneIndex, 10, isTwoHanded));
+		weapons.Add(new Staff (new WeaponListID(staffIndex), "Staff", "A weathered length of oak-spar. It would serve as well as a walking aid or a bludgeon. Has high Base Damage.", "W+12", "D+W", ItemSpriteList.staffSprite, Range.horizontalOneIndex, 10, isTwoHanded));
 		weapons.Add(null);
 		weapons.Add(null);
 		weapons.Add(new Staff (new WeaponListID(plankIndex), "Plank", "A long piece of wood, pulled from a shack wall. Poorly balanced, but it'll do in a pinch.", "2W + 2", "W+D", ItemSpriteList.plankSprite, Range.singleTargetIndex, 3, isOneHanded));

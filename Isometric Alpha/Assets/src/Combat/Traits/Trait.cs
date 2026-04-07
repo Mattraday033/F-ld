@@ -20,7 +20,7 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         private set;
     }
     private string traitDescription;
-    private Stats traitHolder;
+    protected Stats traitHolder;
     public Stats traitApplier;
 
     private bool pacifistic = false;
