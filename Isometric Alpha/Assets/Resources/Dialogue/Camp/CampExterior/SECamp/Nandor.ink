@@ -166,7 +166,7 @@ And Márcos... why? Of all the guards, he was the one I most trusted to have und
 
 === 2a ===
 
-You allowed the crowd to decide? That was the entire reason for gathering all of the prisoners here in the first place! So we wouldn't give in to such depravity!
+You allowed the crowd to get involved? That was the entire reason for gathering all of the prisoners here in the first place! So we wouldn't give in to such depravity!
 
 {
 -gaveMarcosToTheCrowd:
@@ -177,8 +177,8 @@ And Márcos... why? Of all the guards, he was the one I most trusted to have und
 }
     +The slaves have suffered too much at the guards hands to be denied their revenge. All I did was give it to them.
         ->2aa
-    +Why direct your anger at me? I never told the crowd to kill, only to decide the punishment.
-        ->2ab
+//    +Why direct your anger at me? I never told the crowd to kill, only to decide the punishment.
+//        ->2ab
 
 === 2aa ===
 

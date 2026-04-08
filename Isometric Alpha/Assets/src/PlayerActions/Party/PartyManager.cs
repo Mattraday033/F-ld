@@ -30,6 +30,8 @@ public static class PartyManager
 
     public static PartyMember getPartyMember(string partyMemberName)
     {
+        partyMemberName = DialogueList.scrubNameOfEndNumbers(partyMemberName);
+
         if (partyMemberName == null || !partyMemberDict.ContainsKey(partyMemberName))
         {
             Debug.LogError(partyMemberName + " is not a valid party member name.");
@@ -257,4 +259,5 @@ public static class PartyManager
     {
         return getPlayerStats().getName().Replace(playerMarker,"");
     }
+
 }

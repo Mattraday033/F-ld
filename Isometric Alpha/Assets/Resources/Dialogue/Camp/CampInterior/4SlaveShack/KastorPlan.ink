@@ -943,7 +943,7 @@ Correct. I am not Carter, the Confederation serf branded for horse-smuggling, bu
     
     setToTrue(carterSaidBrandedWouldBeTreatedLikeGuests)
     
-    If we can make it out of this camp, you would be treated much better than you were in the Confederation. You would not be the first escaped branded to seek asylum in the Kingdom, and should you survive the journey we would make a point of treating you like an honored guest. In my home city of Efesus, it was considered a privilege and symbol of status to host a branded in your house and teach them your trade.
+    If we can make it out of this camp, you would be treated much better than you were in the Confederation. You would not be the first escaped branded to seek asylum in the Kingdom, and should you survive the journey we would make a point of treating you like an honored guest. In my home city of Phesus, it was considered a privilege and symbol of status to host a branded in your house and teach them your trade.
     
     +Anywhere would be better than here.
         keepDialogue()

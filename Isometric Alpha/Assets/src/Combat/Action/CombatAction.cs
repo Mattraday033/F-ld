@@ -1462,7 +1462,6 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         DescriptionPanel.setText(panel.timerText, getMaximumCooldownForDisplay());
         DescriptionPanel.setText(panel.useDescriptionText, getUseDescription());
 
-
         DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getIconName()));
 
         /* commented out because apparently getIconBackgroundColor() doesn't exist (was thinking fo traits
@@ -1480,6 +1479,11 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         DescriptionPanel.setText(panel.nameText, getName());
 
         DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getIconName()));
+
+        if(getActorStats() != null)
+        {
+            getActorStats().setHeadSprite(panel);
+        }
     }
 
     public virtual void setUpDecisionPanel(IDecisionPanel descisionPanel)

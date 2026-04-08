@@ -39,7 +39,7 @@ activate({nandorIndex})
 
 fadeBackIn(60)
 
-    \*A man, his hair grey, his armor made for someone larger, sits behind a desk. He stares at the steppe green and gold of the Lovashi banner that adorns the office wall. After a moment, he turns to you.* To have made it past my guards is impressive. You'll forgive me if I don't stand to greet you. It's my leg, you see. It took a spear beneath the walls at Rudra, and it's been flaring up again.
+    \*A man, his hair grey, his armor made for someone larger, sits behind a desk. He stares at the steppe green and gold of the Lovashi banner that adorns the office wall. After a moment, he turns to you.* To have made it past my guards is impressive. You'll forgive me if I don't stand to greet you. It's my leg, you see. It took a spear beneath the walls at Wudra, and it's been flaring up again.
 
         +You're the Director? I expected someone a bit more... regal.
             ->1aa
@@ -160,11 +160,11 @@ All my life, I've fought to keep my people safe from those that would do them ha
 
 === 2cb ===
 
-At first, the war went well. We had struck with little warning, and swept aside the meager resistance the Masons could offer. My horde had traveled west, and got as far as the great city of Rudra, on the Wandering Roil river. Then, things began to go wrong.
+At first, the war went well. We had struck with little warning, and swept aside the meager resistance the Masons could offer. My horde had traveled west, and got as far as the great city of Wudra, on the Wandering Roil river. Then, things began to go wrong.
 
-My force could not take the city. We were kept from fully encircling it by the great river the city was built upon. Without encircling it, we couldn't prevent the city from restocking it's provisions. We were stuck beneath it's walls, forced to take the time to build the war machines necessary to break them. And while we waited, the Masons sprung their trap.
+My force could not take the city. We were kept from fully surrounding it by the great river the city was built upon. Without an encirclement, we couldn't prevent the city from restocking it's provisions. We were stuck beneath it's walls, forced to take the time to build the war machines necessary to break them. And while we waited, the Masons sprung their trap.
 
-A clever Mason general attacked our camp at night, and somehow had alerted Rudra to his plans. Rudra's defenders joined the fighting and, assaulted on both sides, my horde was badly pressed. I managed to extract a large portion of them from the jaws of the trap, but not before I received the wound that still plagues my left leg. Gone was any chance of taking the city. Bloodied and demoralized, I was forced to retreat.
+A clever Mason general attacked our camp at night, and somehow had alerted Wudra to his plans. Wudra's defenders joined the fighting and, assaulted on both sides, my horde was badly pressed. I managed to extract a large portion of them from the jaws of the trap, but not before I received the wound that still plagues my left leg. Gone was any chance of taking the city. Bloodied and demoralized, I was forced to retreat.
 
 Never again would our forces venture that far west. The Kingdom of Smiths, neighbor to the Masons, entered the war shortly after. They quickly took the Masonic Gap from us, and trapped our hordes inside the Kingdom of Masons. With no way home for my riders, and enemies on all sides, we hid away like rats within a captured Mason fort. After weeks of horrific fighting, the news came that our side had sued for peace, and we were allowed to return home.
 

@@ -68,6 +68,7 @@ public static class FlagNameList
         public const string kastorReadyToStartRevolt = "kastorReadyToStartRevolt"; //if Kastor is ready to move the plan to the actual revolt
         public const string agreedToBeLeader = "agreedToBeLeader"; //told Nandor you would lead the revolt
         public const string kastorStartedRevolt = "kastorStartedRevolt"; //kastor has started the revolt
+        public const string broughtToolsToConvinceSlaves = "broughtToolsToConvinceSlaves";
         public const string convincedSlavesToHelpYou = "convincedSlavesToHelpYou"; // convinced slaves to help you during convo after killing slavedriver in CampNE
         public const string hadSlavesAfterKillingOverseerCampNEConvo = "hadSlavesAfterKillingOverseerCampNEConvo"; //entered slavesAfterKillingOverseerCampNE conversation
         public const string acceptingGuardPrisoners = "acceptingGuardPrisoners"; // accepted Janos's call to accept prisoners during convo after killing slavedriver in CampNE
@@ -83,6 +84,7 @@ public static class FlagNameList
         public const string waitingOnGarchaToSpeak = "waitingOnGarchaToSpeak"; //flag that allows garcha to still be visible after rally conversation
         public const string haveManseSlaveHelp = "haveManseSlaveHelp";
         public const string marcosSleepingSS4 = "marcosSleepingSS4";
+        public const string attackedBarricadeHeadOn = "attackedBarricadeHeadOn";
         public const string barricadeGuardDefeatKey1 = "barricadeGuardDefeatKey1";
         public const string barricadeGuardDefeatKey2 = "barricadeGuardDefeatKey2";
         public const string barricadeGuardDefeatKey3 = "barricadeGuardDefeatKey3";
@@ -116,6 +118,7 @@ public static class FlagNameList
         public const string heardTaborsLesson = "heardTaborsLesson";
         public const string letTaborLive = "letTaborLive"; //walked into Tabor's room and didn't kill him
         public const string killedTaborInManse = "killedTaborInManse"; //killed Tabor during conversation in Manse
+        public const string attackedTabor = "attackedTabor"; //faught Tabor in combat in Manse
         public const string acceptedTaborsSurrenderAfterDirectorFight = "acceptedTaborsSurrenderAfterDirectorFight"; //went back to get Tabor after defeating the Director and accepted his surrender
 
         //seb flags
@@ -180,6 +183,7 @@ public static class FlagNameList
         public const string vazulMentionedSlatesFate = "vazulMentionedSlatesFate";
         public const string toldThatchAboutSlate = "toldThatchAboutSlate";
         public const string thatchBeginsStranglingVazul = "thatchBeginsStranglingVazul";
+        public const string angeredThatchInHisHut = "angeredThatchInHisHut";
 
         //Broglin Flags
         public const string toldAboutCellKey = "toldAboutCellKey"; //Broglin has explained where the cell key is

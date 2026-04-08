@@ -298,6 +298,9 @@ public static class PrefabNames
     public const string tripleBarrel = cratesAndBarrelsFolder + "TripleBarrels";
 
     public const string charactersFolder = spriteFolder + "Characters/";
+
+    public const string headsFolder = charactersFolder + "Heads/";
+
     public const string humansFolder = charactersFolder + "Humans/";
     public const string defaultNPCSprite = humansFolder + "NPC Sprite";
 

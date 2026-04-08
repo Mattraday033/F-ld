@@ -71,7 +71,7 @@ This? *The man shows you his work. The figurine is of a man astride a horse, wit
     
 === 1d ===
 
-He's well known in the Confederation. He fought in the Emancipation Conflict between the Lovashi and the Craft kingdoms. His warriors cut deep into the western regions of the Kingdom of Masons, going so far as to set seige to the city of Rudra, on the Wandering Roil river.
+He's well known in the Confederation. He fought in the Emancipation Conflict between the Lovashi and the Craft kingdoms. His warriors cut deep into the western regions of the Kingdom of Masons, going so far as to set seige to the city of Wudra, on the Wandering Roil river.
 
 Another story I heard tells that at the end of the war, when things weren't going so well for us, his soldiers held out in a captured Craft Folk fort for many weeks against a much larger force. I've heard it said the Craft Folk made over a dozen attempts take the fort back, and each time they were turned away.
     ->1da
@@ -81,7 +81,7 @@ Another story I heard tells that at the end of the war, when things weren't goin
     +I meant more of what is he like as a person.
         ->1e
     +How did he make it out?
-        The war ended. The story goes that we negotiated a peace that allowed for our soldiers to come home, and that included the warriors under his command.
+        The war ended. The story goes that we negotiated a peace that allowed for our soldiers to come home, and that included those under his command.
         ->1da
     +Why is it called the Emancipation Conflict?
         The Lovashi fight to emancipate all horses in bondage in Craft Folk lands. I've heard that the horses that the Craft Folk raise can't even speak. They're treated like dumb animals, attached to yokes like oxen and made to plow their fields or pull their wagons.

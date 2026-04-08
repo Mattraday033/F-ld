@@ -264,6 +264,8 @@ giveItem(1,8,1)
 
 === 4cb ===
 
+setToTrue(angeredThatchInHisHut)
+
 No. He didn't. Whatever, lets get going. I don't want to stay here any longer than I have to.
 
     +\*Leave.*
@@ -317,6 +319,7 @@ changeCamTarget({thatchIndex})
     +Stop being bullheaded. What were you to do, fight all the guards by yourself?
         ->4eb
     +I just hope you will watch my back better than you watched his.
+        setToTrue(angeredThatchInHisHut)
         You're a real piece of work, you know that? Whatever, let's stop wasting time here and get moving.
         ->Close
     +You're angry at yourself, but that anger serves no purpose. Be angry at the guards instead. That at least will motivate you to escape.

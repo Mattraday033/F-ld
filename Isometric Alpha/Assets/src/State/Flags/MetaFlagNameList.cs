@@ -11,6 +11,29 @@ public static class MetaFlagNameList
     #endregion
 
     #region Guard Trial Flags
+
+    #region Slave Crowd Spawn Group Flags
+
+    //1 = didnt attack a barricade from the front that could be avoided by conversation (all but first)
+    public const string attackedBarricadeSlaveSpawnGroup1 = "attackedBarricadeSlaveSpawnGroup1";
+
+    //2 = got Tabor to surrender (whether you killed him or didn't)
+    public const string taborSurrenderedSlaveSpawnGroup2 = "taborSurrenderedSlaveSpawnGroup2";
+
+    //3 = used secret passage way to get into director's office
+    public const string secretPassageIntoOfficeSlaveSpawnGroup3 = "secretPassageIntoOfficeSlaveSpawnGroup3";
+
+    //4 = said that you were accepting prisoners in conversation with Janos
+    public const string janosAcceptingPrisonersSlaveSpawnGroup4 = "janosAcceptingPrisonersSlaveSpawnGroup4";
+
+    //5 = got tool bundle
+    public const string toolBundleSlaveSpawnGroup5 = "toolBundleSlaveSpawnGroup5";
+
+    //6 = convinced Imre to help (Done)
+    public const string convincedImreSlaveSpawnGroup6 = "convincedImreSlaveSpawnGroup6";
+
+    #endregion
+
     public const string marcosIsAtTrial = "marcosIsAtTrial";
     public const string taborIsAtTrial = "taborIsAtTrial";
     public const string andrasIsAtTrial = "andrasIsAtTrial"; 

@@ -31,7 +31,7 @@ public static class PartyMemberTrainManager
         stepCounter = 1;
         destroyPartyMemberTrain();
 
-        if(AreaManager.locationName == null || AreaManager.locationName.Length == 0 || AreaList.currentAreaIsHostile() || AreaManager.getPlayerParent() == null)
+        if(AreaManager.locationName == null || AreaManager.locationName.Length == 0 || AreaList.currentAreaIsHostile() || AreaManager.getPlayerParent() == null || cannotCreateTrainInArea())
         {
             return;
         }
@@ -74,6 +74,21 @@ public static class PartyMemberTrainManager
         }
 
         hidePartyMemberTrain();
+    }
+
+    public static bool cannotCreateTrainInArea()
+    {
+        switch(AreaManager.locationName)
+        {
+            case LocationNameList.slaveShackFour:
+            case LocationNameList.slaveShackFive:
+            case LocationNameList.slaveShackSix:
+            case LocationNameList.messHall:
+            case LocationNameList.campSouthEast:
+                return SpawnParamsList.getSpawnParams(LocationNameList.campSouthEast, NPCNameList.thatch).canSpawn(NPCNameList.thatch);
+            default:
+                return false;
+        }
     }
 
     public static void incrementStepCounter(int movementIndex)

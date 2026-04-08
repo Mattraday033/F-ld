@@ -96,6 +96,7 @@ public class MapTile : MonoBehaviour, IQuestListSource
     {
         if (locationName.Equals(AreaManager.locationName))
         {
+            PartyManager.getPlayerStats().setHeadSprite(playerIndicator);
             playerIndicator.gameObject.SetActive(true);
             return;
         }
@@ -104,6 +105,7 @@ public class MapTile : MonoBehaviour, IQuestListSource
 
         if (mapObject != null && currentSceneMapObject.isInterior() && currentSceneMapObject.getExteriorLocationName().Equals(mapObject.getLocationName()))
         {
+            PartyManager.getPlayerStats().setHeadSprite(playerIndicator);
             playerIndicator.gameObject.SetActive(true);
             return;
         }

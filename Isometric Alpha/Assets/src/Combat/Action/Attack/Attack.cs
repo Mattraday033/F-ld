@@ -302,6 +302,11 @@ public class Attack : CombatAction, IJSONConvertable
 	{
 		getSourceItem().describeSelfRow(panel);
 
+        if(getActorStats() != null)
+        {
+            getActorStats().setHeadSprite(panel);
+        }
+
 		panel.setObjectBeingDescribed(this);
 	}
 

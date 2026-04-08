@@ -430,6 +430,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         switch(currentIdle)
         {
+            case CharacterAnimationType.Secondary_Idle:
             case CharacterAnimationType.Death:
             case CharacterAnimationType.Death_Back:
             case CharacterAnimationType.Death_Front:
@@ -784,6 +785,9 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
         switch(animationType)
         {
+            case CharacterAnimationType.StandUp:
+                playStandUpAnimation();
+                break;
             case CharacterAnimationType.Secondary_Idle:
                 haltAllAnimations();
                 setSpriteToCurrentIdle();
@@ -851,6 +855,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         switch(currentIdle)
         {
+            case CharacterAnimationType.Secondary_Idle:
             case CharacterAnimationType.Death:
             case CharacterAnimationType.Death_Front:
             case CharacterAnimationType.Death_Back:

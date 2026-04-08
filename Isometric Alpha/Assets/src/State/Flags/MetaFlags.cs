@@ -37,6 +37,13 @@ public static class MetaFlags
         metaFlags[MetaFlagNameList.nandorReadyToSpeakAfterTrial] = !(metaFlags[MetaFlagNameList.marcosNeedsHandling] || metaFlags[MetaFlagNameList.andrasNeedsHandling] || metaFlags[MetaFlagNameList.pazmanNeedsHandling] || metaFlags[MetaFlagNameList.rekaNeedsHandling] || metaFlags[MetaFlagNameList.taborNeedsHandling]);
     
         metaFlags[MetaFlagNameList.failedToConvinceSlavesToHelpYou] =  !Flags.getFlag(FlagNameList.convincedSlavesToHelpYou) && Flags.getFlag(FlagNameList.hadSlavesAfterKillingOverseerCampNEConvo);
+    
+        metaFlags[MetaFlagNameList.attackedBarricadeSlaveSpawnGroup1] = !Flags.getFlag(FlagNameList.attackedBarricadeHeadOn);
+        metaFlags[MetaFlagNameList.taborSurrenderedSlaveSpawnGroup2] = Flags.getFlag(FlagNameList.acceptedTaborsSurrenderAfterDirectorFight) || (Flags.getFlag(FlagNameList.killedTaborInManse) && !Flags.getFlag(FlagNameList.attackedTabor));
+        metaFlags[MetaFlagNameList.secretPassageIntoOfficeSlaveSpawnGroup3] = !MonsterDefeatKeysList.monsterDefeatKeysDict.ContainsKey(ZoneKeyList.manseSecondFloor + LocationNameList.office +"-"+ 0);
+        metaFlags[MetaFlagNameList.janosAcceptingPrisonersSlaveSpawnGroup4] = Flags.getFlag(FlagNameList.acceptingGuardPrisoners);
+        metaFlags[MetaFlagNameList.toolBundleSlaveSpawnGroup5] = Flags.getFlag(FlagNameList.broughtToolsToConvinceSlaves) && Flags.getFlag(FlagNameList.convincedSlavesToHelpYou);
+        metaFlags[MetaFlagNameList.convincedImreSlaveSpawnGroup6] = Flags.getFlag(FlagNameList.convincedImre) && Flags.getFlag(FlagNameList.foughtKendeInManseKitchen);
     }
 
     public static bool getMetaFlag(string flagName)

@@ -218,6 +218,45 @@ public struct QuestWrapper
             case "Find the key to the Director's office.":
                 return QuestNameList.thePlanStepTitleFifteen;
 
+            case "Recompense, finally.":
+                return QuestNameList.dealWithThePrisonersStepTitleTwo;
+
+            case "Márcos, free.":
+                return QuestNameList.dealWithThePrisonersStepTitleThree;
+            case "Márcos, punished.":
+                return QuestNameList.dealWithThePrisonersStepTitleFour;
+            case "Márcos, executed.":
+                return QuestNameList.dealWithThePrisonersStepTitleFive;
+            case "Márcos, mobbed.":
+                return QuestNameList.dealWithThePrisonersStepTitleSix;
+            
+            case "András, free.":
+                return QuestNameList.dealWithThePrisonersStepTitleSeven;
+            case "András, punished.":
+                return QuestNameList.dealWithThePrisonersStepTitleEight;
+            case "András, executed.":
+                return QuestNameList.dealWithThePrisonersStepTitleNine;
+            case "András, mobbed.":
+                return QuestNameList.dealWithThePrisonersStepTitleTen;
+            
+            case "Réka, free.":
+                return QuestNameList.dealWithThePrisonersStepTitleEleven;
+            case "Réka, punished.":
+                return QuestNameList.dealWithThePrisonersStepTitleTwelve;
+            case "Réka, executed.":
+                return QuestNameList.dealWithThePrisonersStepTitleThirteen;
+            case "Réka, mobbed.":
+                return QuestNameList.dealWithThePrisonersStepTitleFourteen;
+            
+            case "Pázmán, free.":
+                return QuestNameList.dealWithThePrisonersStepTitleFifteen;
+            case "Pázmán, punished.":
+                return QuestNameList.dealWithThePrisonersStepTitleSixteen;
+            case "Pázmán, executed.":
+                return QuestNameList.dealWithThePrisonersStepTitleSeventeen;
+            case "Pázmán, mobbed.":
+                return QuestNameList.dealWithThePrisonersStepTitleEighteen;
+
             default:
                 return stepName;
         }

@@ -1135,6 +1135,26 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return false;
     }
 
+    public virtual void setHeadSprite(DescriptionPanel panel)
+    {
+        string headName = MonsterNameList.getPackName(getName());
+
+        if(headName != null && !headName.Contains("?"))
+        {
+            DescriptionPanel.setImage(panel.typeIconPanel, Resources.Load<Sprite>(PrefabNames.headsFolder + headName));
+        }
+    }
+
+    public virtual void setHeadSprite(Image image)
+    {
+        string headName = MonsterNameList.getPackName(getName());
+
+        if(headName != null && !headName.Contains("?"))
+        {
+            image.sprite = Resources.Load<Sprite>(PrefabNames.headsFolder + headName);
+        }
+    }
+
     #endregion
 
     #region ICloneable

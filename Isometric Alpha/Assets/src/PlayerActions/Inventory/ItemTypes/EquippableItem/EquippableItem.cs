@@ -80,15 +80,15 @@ public abstract class EquippableItem : Item, IJSONConvertable
     {
         base.describeSelfFull(panel);
 
-        if (panel.slotIconPanel != null && !(panel.slotIconPanel is null))
-        {
-            panel.slotIconPanel.sprite = Helpers.loadSpriteFromResources(getSlotIconName());
-        }
+        // if (panel.slotIconPanel != null && !(panel.slotIconPanel is null))
+        // {
+        //     panel.slotIconPanel.sprite = Helpers.loadSpriteFromResources(getSlotIconName());
+        // }
 
-        if (panel.slotIconBackgroundPanel != null && !(panel.slotIconBackgroundPanel is null))
-        {
-            panel.slotIconBackgroundPanel.color = getSlotIconBackgroundColor();
-        }
+        // if (panel.slotIconBackgroundPanel != null && !(panel.slotIconBackgroundPanel is null))
+        // {
+        //     panel.slotIconBackgroundPanel.color = getSlotIconBackgroundColor();
+        // }
     }
 
     public void playEquipSFX()

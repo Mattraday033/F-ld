@@ -186,6 +186,8 @@ Janos will, I'm sure of it. And I had hoped you would as well.
 
 === 2a === //Your aid to the rebellion has earned you your freedom. Rise as a friend, András. *Undo András's bonds.*
 
+playAnimation({andrasIndex},StandUp)
+
 \*András gets to his feet.* Oh thank the Mother. I thought... I'm just glad it's all over.
 
 {
@@ -212,7 +214,7 @@ setToTrue(didNotExecuteAndras)
 
 changeCamTarget({crowdIndex})
 
-activateQuestStep(Deal With the Prisoners, András, free.)
+activateQuestStep(Deal With the Prisoners, András was freed.)
 
 \*The crowd erupts in cheers.*
 
@@ -257,7 +259,7 @@ Wait! Wait, please!
 setToTrue(didNotExecuteAndras)
 setToTrue(gaveAndrasFiftyLashes)
 
-activateQuestStep(Deal With the Prisoners, András, punished.)
+activateQuestStep(Deal With the Prisoners, András was punished.)
 
 changeCamTarget({janosIndex})
 
@@ -279,7 +281,7 @@ fadeBackIn(60)
 
 setToTrue(executedAndras)
 
-activateQuestStep(Deal With the Prisoners, András, executed.)
+activateQuestStep(Deal With the Prisoners, András was executed.)
 
 changeCamTarget({janosIndex})
 
@@ -297,7 +299,7 @@ fadeBackIn(60)
 
 setToTrue(gaveAndrasToTheCrowd)
 
-activateQuestStep(Deal With the Prisoners, András, mobbed.)
+activateQuestStep(Deal With the Prisoners, András was given to the mob.)
 
 changeCamTarget({janosIndex})
 

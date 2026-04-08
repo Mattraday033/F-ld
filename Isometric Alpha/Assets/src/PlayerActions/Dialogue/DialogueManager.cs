@@ -379,7 +379,8 @@ public class DialogueManager : MonoBehaviour
 
             if (npcDialogueTrigger != null)
             {
-                if (npcName.Equals(npcDialogueTrigger.getName()))
+                if (npcName.Equals(npcDialogueTrigger.getName()) || 
+                    child.gameObject.name.Replace(OOCSpawnDetails.gameObjectNameSuffix, "").Equals(npcName))
                 {
                     return child.gameObject;
                 }
@@ -908,6 +909,9 @@ public class DialogueManager : MonoBehaviour
                                 break;
                             case "death_back":
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Back);
+                                break;
+                            case "standup":
+                                targetAnimationManager.playAnimation(CharacterAnimationType.StandUp);
                                 break;
                         }
                     }

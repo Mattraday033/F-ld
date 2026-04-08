@@ -276,7 +276,7 @@ I was in the kitchens because the miners had finished their work for the day and
 
 changeCamTarget({pazmanIndex})
 
-Not unless Kende is still alive. He and I were the only ones to witness Ervin place the poison in the food, and we kept the entire thing hushed up to protect Kende's side business. Kende gave permission for Ervin to be branded and moved into the miners under my care so no one would cause a fuss.
+Not unless Kende is still alive. He and I were the only ones to witness Ervin place the poison in the food, and we kept the entire thing hushed up to protect Kende's side business. Kende gave permission for Ervin to be branded and moved under my care so no one would cause a fuss.
 
 {
 -wisdom >= 3:
@@ -328,6 +328,7 @@ Then what is to be your decision?
 
 === 2f ===
 
+playAnimation({pazmanIndex},StandUp)
 changeCamTarget({pazmanIndex})
 
 Thank you. You do your people credit, branded. I will not forget your conduct as long as I live.
@@ -338,7 +339,7 @@ changeCamTarget({ervinCloserIndex})
 
 setToTrue(didNotExecutePazman)
 
-activateQuestStep(Deal With the Prisoners, Pázmán, free.)
+activateQuestStep(Deal With the Prisoners, Pázmán was freed.)
 
 changeCamTarget({crowdIndex})
 
@@ -415,7 +416,7 @@ No... please! Don't do this!
 
 setToTrue(gavePazmanToTheCrowd)
 
-activateQuestStep(Deal With the Prisoners, Pázmán, mobbed.)
+activateQuestStep(Deal With the Prisoners, Pázmán was given to the mob.)
 
 changeCamTarget({crowdIndex})
 
@@ -439,7 +440,7 @@ No... please! Don't do this!
 
 setToTrue(executedPazman)
 
-activateQuestStep(Deal With the Prisoners, Pázmán, executed.)
+activateQuestStep(Deal With the Prisoners, Pázmán was executed.)
 
 changeCamTarget({crowdIndex})
 
@@ -472,7 +473,7 @@ changeCamTarget({pazmanIndex})
 
 setToTrue(gavePazmanFiftyLashes)
 
-activateQuestStep(Deal With the Prisoners, Pázmán, punished.)
+activateQuestStep(Deal With the Prisoners, Pázmán was punished.)
 
 changeCamTarget({crowdIndex})
 

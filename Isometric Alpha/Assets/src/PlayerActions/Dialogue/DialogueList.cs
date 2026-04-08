@@ -157,7 +157,6 @@ public static class DialogueList
 
         #endregion
 
-
         #region Guard House NE
 
         addDialogueToList(LocationNameList.guardHouseNorthEast, NPCNameList.barracksGate,
@@ -398,6 +397,10 @@ public static class DialogueList
 
         #region Guard Punishment Scene
 
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave,
+                            new SingleCharacterDialogue(NPCNameList.slave,
+                            Resources.Load<TextAsset>(DialogueNameList.crowdSlave1Path)));
+
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+1,
                             new SingleCharacterDialogue(NPCNameList.slave,
                             Resources.Load<TextAsset>(DialogueNameList.crowdSlave1Path)));
@@ -407,6 +410,22 @@ public static class DialogueList
                             Resources.Load<TextAsset>(DialogueNameList.crowdSlave2Path)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+3,
+                            new SingleCharacterDialogue(NPCNameList.slave ,
+                            Resources.Load<TextAsset>(DialogueNameList.crowdSlave3Path)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+4,
+                            new SingleCharacterDialogue(NPCNameList.slave ,
+                            Resources.Load<TextAsset>(DialogueNameList.crowdSlave3Path)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+5,
+                            new SingleCharacterDialogue(NPCNameList.slave ,
+                            Resources.Load<TextAsset>(DialogueNameList.crowdSlave3Path)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+6,
+                            new SingleCharacterDialogue(NPCNameList.slave ,
+                            Resources.Load<TextAsset>(DialogueNameList.crowdSlave3Path)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.crowd,
                             new SingleCharacterDialogue(NPCNameList.slave ,
                             Resources.Load<TextAsset>(DialogueNameList.crowdSlave3Path)));
 
@@ -460,9 +479,6 @@ public static class DialogueList
                                                             NPCNameList.janos,
                                                             NPCNameList.broglin,
                                                             NPCNameList.garcha,
-                                                            NPCNameList.slaveFour,
-                                                            NPCNameList.slaveFive,
-                                                            NPCNameList.slaveSix,
                                                             NPCNameList.crowd,
                                                             NPCNameList.chiefTabor,
                                                             NPCNameList.marcos,
@@ -1036,7 +1052,8 @@ public static class DialogueList
                                                                 NPCNameList.director,
                                                                 NPCNameList.page,
                                                                 NPCNameList.carter,
-                                                                NPCNameList.nandor
+                                                                NPCNameList.nandor,
+                                                                NPCNameList.thatch
                                                             }, 
                                  Resources.Load<TextAsset>(DialogueNameList.directorDefeatedPathName)));
 

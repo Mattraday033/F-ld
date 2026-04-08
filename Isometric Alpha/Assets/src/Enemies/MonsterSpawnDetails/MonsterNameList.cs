@@ -62,6 +62,11 @@ public static class MonsterNameList
     #region Horses
     public const string horseCharger = "Horse Charger";
     public const string horseStomper = "Horse Stomper";
+    public const string horsesPackName = "Horses";
+    #endregion
+
+    #region Saints
+    public const string stoneSaint = "Stone Saint";
     #endregion
 
     public const string movableObject = "Movable Object";
@@ -92,6 +97,7 @@ public static class MonsterNameList
             case armoredWorm:
             case broodling:
             case direWorm:
+            case direGuardianWorm:
             case guardianWorm:
             case hiveHerald:
             case hiveHeraldNest:
@@ -114,10 +120,13 @@ public static class MonsterNameList
             case overseer:
             case signaleer:
             case spearman:
+            case NPCNameList.director:
+            case NPCNameList.kende:
                 return lovashiPackName;
 
             // Slaves
             case NPCNameList.imre:
+            case NPCNameList.beam:
             case noBrandLoyalist:
             case noBrandRioter:
             case brandedConscript:
@@ -128,7 +137,10 @@ public static class MonsterNameList
             case NPCNameList.csalan:
             case horseCharger:
             case horseStomper:
-                return lovashiPackName;
+                return horsesPackName;
+
+            case stoneSaint:
+                return stoneSaint;
 
             // Movable Object
             case movableObject:

@@ -148,6 +148,8 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
 
     public void removePartyMember(string partyMemberName)
     {
+        partyMemberName = DialogueList.scrubNameOfEndNumbers(partyMemberName);
+
         for (int rowIndex = 0; rowIndex < grid.Length; rowIndex++)
         {
             for (int colIndex = 0; colIndex < grid[rowIndex].Length; colIndex++)

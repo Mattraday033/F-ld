@@ -160,6 +160,8 @@ keepDialogue()
 
 === 2a === 
 
+playAnimation({rekaIndex},StandUp)
+
     {
     -gaveAGuardToTheCrowd or executedAnyGuard:
         You're letting me go? But- \*Réka abruptly reconsiders whatever she was about to say, and simply nods instead.*
@@ -177,7 +179,7 @@ changeCamTarget({crowdIndex})
 
 \*Your words are met with encouragement from a portion of the crowd. Others look about in mild confusion, or shake their heads.*
 
-activateQuestStep(Deal With the Prisoners, Réka, free.)
+activateQuestStep(Deal With the Prisoners, Réka was freed.)
         
     fadeToBlack()
 
@@ -258,7 +260,7 @@ You bastard. If Gáspár could see me now, I know he would laugh.
 setToTrue(didNotExecuteReka)
 setToTrue(gaveRekaFiftyLashes)
 
-activateQuestStep(Deal With the Prisoners, Réka, punished.)
+activateQuestStep(Deal With the Prisoners, Réka was punished.)
 
 {
 -gaveAGuardToTheCrowd:
@@ -283,7 +285,7 @@ fadeBackIn(60)
 
 setToTrue(executedReka)
 
-activateQuestStep(Deal With the Prisoners, Réka, executed.)
+activateQuestStep(Deal With the Prisoners, Réka was executed.)
 
 {
 -gaveAGuardToTheCrowd:
@@ -304,7 +306,7 @@ fadeBackIn(60)
 
 setToTrue(gaveRekaToTheCrowd)
 
-activateQuestStep(Deal With the Prisoners, Réka, mobbed.)
+activateQuestStep(Deal With the Prisoners, Réka was given to the mob.)
 
 Stay back you scum, stay back! The first to approach I will bleed with my teeth!
 

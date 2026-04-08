@@ -11,71 +11,71 @@
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I spoke with Nándor and he has asked me to pass judgement on the prisoners. <B>I must speak with each of the prisoners and then decide their fates. Once I am finished I should speak with Nándor again.</B>"
 		},
 		{
-			"stepName": "Recompense, finally.",
+			"stepName": "Recompense.",
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I spoke with Nándor and he has asked me to pass judgement on the prisoners. There could be but one punishment fit to their crimes: death. With that, we can finally leave this cursed camp."
 		},
 		{
-			"stepName": "Márcos, free.",
+			"stepName": "Márcos was freed.",
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I set Márcos free. His contributions and demeanor speak of a man changed, and I thought him worthy of leaving this camp alive."
 		},
 		{
-			"stepName": "Márcos, punished.",
+			"stepName": "Márcos was punished.",
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I set Márcos free, with the caveat that he be dealt fifty lashes. While he did disobey his Overseer to save Nándor and Carter, he still was guilty of supporting the system that kept us in chains, and for that he deserved punishment. Márcos accepted his sentence with grace."
 		},
 		{
-			"stepName": "Márcos, executed.",
+			"stepName": "Márcos was executed.",
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I had Márcos executed. While he did disobey his Overseer to save Nándor and Carter, he still was guilty of supporting the system that kept us in chains, and that cannot be forgiven. He seemed to understand this, in his final moments."
 		},
 		{
-			"stepName": "Márcos, mobbed.",
+			"stepName": "Márcos was given to the mob.",
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I allowed the crowd of freed slaves to carry out Márcos's sentence. They killed him in gruesome fashion."
 		},
 		{
-			"stepName": "András, free.",
+			"stepName": "András was freed.",
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I set András free. Janos seems to think him worthy of forgiveness, and I did not disagree."
 		},
 		{
-			"stepName": "András, punished.",
+			"stepName": "András was punished.",
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I set András free, with the caveat that he be dealt fifty lashes. Janos seems to think him worthy of forgiveness, but I could not in good conscience allow him to walk away without at least some form of punishment. May he take it as a lesson to reform his ways."
 		},
 		{
-			"stepName": "András, executed.",
+			"stepName": "András was executed.",
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I had András executed. Janos protested to the end, but I could find no reason to let him live."
 		},
 		{
-			"stepName": "András, mobbed.",
+			"stepName": "András was given to the mob.",
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I allowed the crowd of freed slaves to carry out András's sentence. They killed him in gruesome fashion."
 		},		
         {
-			"stepName": "Réka, free.",
+			"stepName": "Réka was freed.",
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I set Réka free. Surrender must be rewarded, or it will lose it's usefulness. The other slaves were of mixed opinions regarding my choice."
 		},
 		{
-			"stepName": "Réka, punished.",
+			"stepName": "Réka was punished.",
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I set Réka free, with the caveat that she be dealt fifty lashes. To slay those who surrender may keep others from doing the same, but simply letting Réka go without consequences may have set the wrong example."
 		},
 		{
-			"stepName": "Réka, executed.",
+			"stepName": "Réka was executed.",
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I had Réka executed. Her surrender has no bearing on what justice demanded be done. I could not allow her to go free after her contributions to our captivity."
 		},
 		{
-			"stepName": "Réka, mobbed.",
+			"stepName": "Réka was given to the mob.",
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I allowed the crowd of freed slaves to carry out Réka's sentence. They killed her in gruesome fashion."
 		},        
         {
-			"stepName": "Pázmán, free.",
+			"stepName": "Pázmán was freed.",
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I set Pázmán free. Surrender must be rewarded, or it will lose it's usefulness. The other slaves were of mixed opinions regarding my choice."
 		},
 		{
-			"stepName": "Pázmán, punished.",
+			"stepName": "Pázmán was punished.",
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I set Pázmán free, with the caveat that he be dealt fifty lashes. To slay those who surrender may keep others from doing the same, but simply letting Pázmán go without consequences may have set the wrong example."
 		},
 		{
-			"stepName": "Pázmán, executed.",
+			"stepName": "Pázmán was executed.",
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I had Pázmán executed. His surrender has no bearing on what justice demanded be done. I could not allow him to go free after his contributions to our captivity."
 		},
 		{
-			"stepName": "Pázmán, mobbed.",
+			"stepName": "Pázmán was given to the mob.",
 			"MapZone":"Camp","MapLocation":"SECamp","journalDescription": "I allowed the crowd of freed slaves to carry out Pázmán's sentence. They killed him in gruesome fashion."
 		},
 		{

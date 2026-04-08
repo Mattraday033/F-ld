@@ -287,7 +287,7 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(LocationNameList.campSouthEast, LocationNameList.campMineEntrance, new Vector3Int(9, 27), Facing.SouthEast, Constants.sizeThree, Axis.DescendingX));
 
-        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(11, 2), Facing.SouthWest));
+        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(12, 2), Facing.SouthWest));
 
         transitionSpawnInfoDict.Add(LocationNameList.campSouthEast, list);
 

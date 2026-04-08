@@ -68,6 +68,7 @@ Halt! Approach the barricade at your own peril!
 
     +I'm getting through this barricade whether you man it or not. For freedom! <Attack>
         setToTrue({defeatFlag})
+        setToTrue(attackedBarricadeHeadOn)
         enterCombat({withBarricadeFightIndex})
         ->Close
     +\*Leave without fighting.*

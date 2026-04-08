@@ -13,18 +13,15 @@ VAR kastorIndex = 3
 VAR janosIndex = 4
 VAR broglinIndex = 5
 VAR garchaIndex = 6
-VAR slaveOneIndex = 7
-VAR slaveTwoIndex = 8
-VAR slaveThreeIndex = 9
-VAR crowdIndex = 10
-VAR taborIndex = 11
-VAR marcosIndex = 12
-VAR andrasIndex = 13
-VAR rekaIndex = 14
-VAR pazmanIndex = 15
-VAR ervinIndex = 16
-VAR clayIndex = 17
-VAR otherNandorIndex = 18
+VAR crowdIndex = 7
+VAR taborIndex = 8
+VAR marcosIndex = 9
+VAR andrasIndex = 10
+VAR rekaIndex = 11
+VAR pazmanIndex = 12
+VAR ervinIndex = 13
+VAR clayIndex = 14
+VAR otherNandorIndex = 15
 
 VAR letTaborLive = false
 VAR acceptedTaborsSurrenderAfterDirectorFight = false
@@ -86,6 +83,7 @@ deactivate({crowdIndex})
 
 movePosition(7,-9)
 setfacing(NW)
+setNPCFacing({nandorIndex},NW)
 
 ->1a
 
@@ -104,6 +102,7 @@ changeCamTarget({crowdIndex})
 \*The gathered former slaves erupt in cheers. The air is electric with their joy.*
 
 setfacing(SW)
+setNPCFacing({nandorIndex},NE)
 changeCamTarget({nandorIndex})
 
 {
@@ -849,7 +848,7 @@ Very well. I will see that your judgement is carried out. Speak with me again on
 
 fadeToBlack()
 
-finishQuest(Deal With the Prisoners, true, Recompense, finally.)
+finishQuest(Deal With the Prisoners, true, Recompense.)
 
 {
 -marcosIsAtTrial:

@@ -227,6 +227,7 @@ public static class EnemyTypeFolderPathList
             case MonsterNameList.toxicWormNest:
             case MonsterNameList.wormNest:
             case MonsterNameList.direWorm:
+            case MonsterNameList.direGuardianWorm:
                 if(CombatStateManager.inCombat)
                 {
                     return PrefabNames.shadow512x512;
@@ -239,5 +240,6 @@ public static class EnemyTypeFolderPathList
                 return PrefabNames.shadow256x256;
         }
     }
+
 
 }

@@ -507,6 +507,7 @@ setToTrue(killedTaborInManse)
 
 {
 -attackedTabor:
+    setToTrue(attackedTabor)
     ->Combat
 -else:
     ->Close

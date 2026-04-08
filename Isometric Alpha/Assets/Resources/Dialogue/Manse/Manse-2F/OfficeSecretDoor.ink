@@ -1,7 +1,6 @@
-VAR strength = 0
-VAR dexterity = 0
-VAR wisdom = 0
-VAR charisma = 0
+VAR observationLevel = 0
+
+VAR observationDifficulty = 2
 
 VAR hasOfficeKeyFrontHalf = false
 VAR hasOfficeKeyBackHalf = false
@@ -24,9 +23,9 @@ searchInventoryFor(hasOfficeKeyBackHalf,Key,3)
 The wall looks formidable, but you can feel a slight draft. 
 
 
-    +Search around for anything suspicious. <Wis {wisdom}/{wisDifficulty}>
+    +Search around for anything suspicious. <Observation {observationLevel}/{observationDifficulty}>
         {
-        -wisdom >=wisDifficulty:
+        -observationLevel >= observationDifficulty:
             ->1c
         -else:
             ->1b

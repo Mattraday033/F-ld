@@ -127,7 +127,7 @@ changeCamTarget({taborIndex})
 
 === 1a === 
 
-\*Tabor is shirtless, and his entire upper torso is covered in bruises. Some bandages have been applied to his stomach and face, and he holds himself as if some of his ribs are broken. His breathing is obviously labored as he speaks* Come to finish me off yourself, you dogsbody scum?
+\*Tabor's entire upper torso is covered in bruises. Some bandages have been applied to his stomach and face, and he holds himself as if some of his ribs are broken. His breathing is obviously labored as he speaks.* Come to finish me off yourself, you dogsbody scum?
 
     +I wish we had the opportunity to speak before you were attacked. Alas, it was not meant to be.
         ->1b
@@ -183,7 +183,7 @@ If you are here to gloat, save it for after my head leaves my shoulders.
 
 === 1ba ===
 
-\*Tabor stares up at you, his face contorted in the firmest grimace it can muster. His bloodshot eyes stare hatefully from behind swollen eyelids*
+\*Tabor looks up at you, his face contorted in the firmest grimace it can muster. His bloodshot eyes stare hatefully from between swollen eyelids.*
 
     {
     -not acceptedTaborsSurrenderAfterDirectorFight:

@@ -70,6 +70,11 @@ setToTrue(duringSlaveRallyConversation)
 setToTrue(waitingOnGarchaToSpeak)
 searchInventoryFor(hasToolBundle,Tool Bundle)
 
+{
+-hasTools():
+setToTrue(broughtToolsToConvinceSlaves)
+}
+
 updateNPCVisibility()
 
 moveToPos(8,4)
@@ -382,7 +387,7 @@ changeCamTarget({theCrowdIndex})
         }
         
         {
-        -gaveKastorToolBundle:
+        -hasTools():
             *Who among you can say that you do not know a pick backwards and forwards? Or a shovel, or a mattock? The tools in front of you can be mighty in even a slave's hands. Perhaps especially a slave's!
                 {
                 -not gainedFervorFromToolsMention:

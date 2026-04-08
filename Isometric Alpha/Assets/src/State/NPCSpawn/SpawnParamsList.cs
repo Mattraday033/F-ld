@@ -424,21 +424,41 @@ public static class SpawnParamsList
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave),
                                new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+1),
-                               new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+2),
-                               new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+3),
-                               new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+4),
-                               new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+5),
-                               new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+6),
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.crowd),
                                new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.clay),
                                new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
+
+        #region Conditional Slave Spawn Groups
+
+        StartSpawningAllTrueMetaFlagList firstSlaveSpawnGroupStartSpawning = new StartSpawningAllTrueMetaFlagList(new string[] {MetaFlagNameList.attackedBarricadeSlaveSpawnGroup1}, guardPunishmentCrowdStartSpawning);
+        StartSpawningAllTrueMetaFlagList secondSlaveSpawnGroupStartSpawning = new StartSpawningAllTrueMetaFlagList(new string[] {MetaFlagNameList.taborSurrenderedSlaveSpawnGroup2}, guardPunishmentCrowdStartSpawning);
+        StartSpawningAllTrueMetaFlagList thirdSlaveSpawnGroupStartSpawning = new StartSpawningAllTrueMetaFlagList(new string[] {MetaFlagNameList.secretPassageIntoOfficeSlaveSpawnGroup3}, guardPunishmentCrowdStartSpawning);
+        StartSpawningAllTrueMetaFlagList fourthSlaveSpawnGroupStartSpawning = new StartSpawningAllTrueMetaFlagList(new string[] {MetaFlagNameList.janosAcceptingPrisonersSlaveSpawnGroup4}, guardPunishmentCrowdStartSpawning);
+        StartSpawningAllTrueMetaFlagList fifthSlaveSpawnGroupStartSpawning = new StartSpawningAllTrueMetaFlagList(new string[] {MetaFlagNameList.toolBundleSlaveSpawnGroup5}, guardPunishmentCrowdStartSpawning);
+        StartSpawningAllTrueMetaFlagList sixthSlaveSpawnGroupStartSpawning = new StartSpawningAllTrueMetaFlagList(new string[] {MetaFlagNameList.convincedImreSlaveSpawnGroup6}, guardPunishmentCrowdStartSpawning);
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+1),
+                               new InteractableSpawnParams(firstSlaveSpawnGroupStartSpawning, guardPunishmentCrowdStopSpawning));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+2),
+                               new InteractableSpawnParams(secondSlaveSpawnGroupStartSpawning, guardPunishmentCrowdStopSpawning));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+3),
+                               new InteractableSpawnParams(thirdSlaveSpawnGroupStartSpawning, guardPunishmentCrowdStopSpawning));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+4),
+                               new InteractableSpawnParams(fourthSlaveSpawnGroupStartSpawning, guardPunishmentCrowdStopSpawning));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+5),
+                               new InteractableSpawnParams(fifthSlaveSpawnGroupStartSpawning, guardPunishmentCrowdStopSpawning));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+6),
+                               new InteractableSpawnParams(sixthSlaveSpawnGroupStartSpawning, guardPunishmentCrowdStopSpawning));
+
+        #endregion
 
         #region Pazman Ervin Reka
 
@@ -655,6 +675,8 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campManse, NPCNameList.guardAndras+2),
                                new InteractableSpawnParams(new NeverSpawnFlagList()));
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campManse, NPCNameList.manseFrontDoor),
+                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }), spawnWhileHostile: spawnWhileHostile));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campManse, NPCNameList.barricadeGuards+3),
                                new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[]{FlagNameList.directorDefeated, FlagNameList.barricadeGuardDefeatKey3}), onlySpawnWhileHostile: onlySpawnWhileHostile));

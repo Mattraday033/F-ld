@@ -40,7 +40,7 @@ setToTrue(spokeWithMarcosAtPunishment)
 
 === 1a === 
 
-\*Márcos looks up at you from his position on his knees. He has been stripped of his armor, and you can see fresh bandages have been applied to his many wounds.* Hello, {playerName}. I am glad to see you made it through the riot relatively unhurt. 
+\*Márcos looks up at you from his position on his knees. You can see fresh bandages have been applied to his many wounds.* Hello, {playerName}. I am glad to see you made it through the riot relatively unhurt. 
 
     +And I am glad to see you have recovered some from your wounds.
         ->1b
@@ -53,13 +53,13 @@ setToTrue(spokeWithMarcosAtPunishment)
 
 keepDialogue()
 
-\*Márcos looks up at you from his position on his knees. He has been stripped of his armor, and you can see fresh bandages have been applied to his many wounds.* There was a part of me that knew supporting your plans would lead us here. What is to be my fate, then? I will not shy from it, whatever your decision.
+\*Márcos looks up at you from his position on his knees. You can see fresh bandages have been applied to his many wounds.* There was a part of me that knew supporting your plans would lead us here. What is to be my fate, then? I will not shy from it, whatever your decision.
 
         ->1b
 
 === 1ab === //gaveAGuardToTheCrowd
 
-\*Márcos looks up at you from his position on his knees. He has been stripped of his armor, and you can see fresh bandages have been applied to his many wounds.* Are all of our fates to be so bloody? Are we to all be thrown to the mob, like meat to dogs?
+\*Márcos looks up at you from his position on his knees. You can see fresh bandages have been applied to his many wounds.* Are all of our fates to be so bloody? Are we to all be thrown to the mob, like meat to dogs?
 
     +Each of your verdicts will be determined independent of anyone else's actions.
         keepDialogue()
@@ -230,6 +230,8 @@ Yes, I believe Kastor, Carter, and Nándor would. There may be more, but those a
 
 === 2a === //*Undo Márcos's bonds.*
 
+playAnimation({marcosIndex},StandUp)
+
 \*Márcos gets to his feet.* Thank you. I had wondered until this moment whether any of you could find me worthy of forgiveness. I suppose I will never stop wondering if you were right to.
 
     +\*Address the crowd.* This is Márcos. His actions were integral to our victory. If you hold any esteem for Carter or Nándor, hold that same esteem for him as they owe him their lives.
@@ -241,7 +243,7 @@ Yes, I believe Kastor, Carter, and Nándor would. There may be more, but those a
 
         \*The crowd erupts in cheers.*
 
-        activateQuestStep(Deal With the Prisoners, Márcos, free.)
+        activateQuestStep(Deal With the Prisoners, Márcos was freed.)
         
         fadeToBlack()
 
@@ -282,7 +284,7 @@ Yes, I believe Kastor, Carter, and Nándor would. There may be more, but those a
 setToTrue(didNotExecuteMarcos)
 setToTrue(gaveMarcosFiftyLashes)
 
-activateQuestStep(Deal With the Prisoners, Márcos, punished.)
+activateQuestStep(Deal With the Prisoners, Márcos was punished.)
 
 Were our places reversed, and you were in the hands of a younger me, your fate would not have been this merciful. I find your verdict more than fair.
 
@@ -298,7 +300,7 @@ fadeBackIn(60)
 
 setToTrue(executedMarcos)
 
-activateQuestStep(Deal With the Prisoners, Márcos, executed.)
+activateQuestStep(Deal With the Prisoners, Márcos was executed.)
 
 My death has been a long time coming. I know what I have done to deserve this punishment, although some part of me had hoped it would not come to this. I will not resist.
 
@@ -314,7 +316,7 @@ fadeBackIn(60)
 
 setToTrue(gaveMarcosToTheCrowd)
 
-activateQuestStep(Deal With the Prisoners, Márcos, mobbed.)
+activateQuestStep(Deal With the Prisoners, Márcos was given to the mob.)
 
 \*Márcos looks up at you. You can see true fear in his eyes.*
 
