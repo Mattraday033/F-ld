@@ -316,7 +316,7 @@ Your duties as leader are many. You have a duty to uphold the peace: Clay threat
 
 === 2cc ===
 
-You spared Márcos. Thank you. You may not realize it, but the branded look up to you because of what you've done for them. Your words will go a long way towards helping him integrate with the other prisoners.
+You spared Márcos. Thank you. You may not realize it, but the branded look up to you because of what you've done for them. Your words will go a long way towards helping him integrate with the others.
 
     ->2ca
 

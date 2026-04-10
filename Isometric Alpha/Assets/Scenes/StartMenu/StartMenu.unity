@@ -548,14 +548,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.09803922, g: 0.09803922, b: 0.09803922, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e1e34210407b34d418115e4409d96146, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -716,7 +716,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -92.5, y: -65}
+  m_AnchoredPosition: {x: -65, y: -65}
   m_SizeDelta: {x: 275, y: 275}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1387101182
@@ -1165,7 +1165,12 @@ PrefabInstance:
     - target: {fileID: 6782926800286271230, guid: 891ef4bf54f18df4a8c16ea502d358ec,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -85
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6782926800286271230, guid: 891ef4bf54f18df4a8c16ea502d358ec,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6782926800286271230, guid: 891ef4bf54f18df4a8c16ea502d358ec,
         type: 3}

@@ -34,7 +34,7 @@ public class EquippedPassiveTraitManager : MonoBehaviour
 	
 	public void addEquippedPassiveTraits()
 	{
-		List<Stats> allAllies = CombatGrid.getAllAliveAllyCombatants();
+		List<Stats> allAllies = CombatGrid.getAllAllyCombatants();
 
         foreach (Stats ally in allAllies)
 		{
@@ -44,7 +44,7 @@ public class EquippedPassiveTraitManager : MonoBehaviour
 	
 	public static void removeAllTraits()
 	{
-		List<Stats> allAllies = CombatGrid.getAllAliveAllyCombatants();
+		List<Stats> allAllies = CombatGrid.getAllAllyCombatants();
 		
 		foreach(Stats ally in allAllies)
 		{

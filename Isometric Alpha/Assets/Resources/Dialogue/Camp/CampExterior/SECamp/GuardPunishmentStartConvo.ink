@@ -43,6 +43,7 @@ VAR deathFlagNándor = false
 VAR deathFlagGuardMárcos = false
 VAR deathFlagGuardAndrás = false
 VAR deathFlagChiefTabor = false
+VAR deathFlagJanos = false
 
 VAR noPrisoners = false
 VAR marcosIsAtTrial = false
@@ -112,6 +113,8 @@ changeCamTarget({nandorIndex})
 
 \*Nándor turns to you and speaks so only you can hear him beneath the noise of the crowd.* I have gathered all of the guards that were taken as prisoners that I could find, so that we may pass judgement on them. This way, the other branded can see who has helped us and who has hindered us, and will know who to treat as a friend once we exit the camp.
 {
+-deathFlagJanos:
+    ->killedJanos_1a
 -agreedToBeLeader:
     ->2a
 -else:
@@ -131,6 +134,73 @@ As our leader, it should fall to you to pass judgement on them. The others may w
     +I shall lead the branded in our revenge. These guards are powerless now; we can finally have a little fun with them.
         ->5a
 
+
+=== killedJanos_1a ===
+
+When we addressed the branded previously, you instructed them to kill Janos when he spoke against you. At the time, fear both for my own safety and for the safety of the other branded kept my tongue still. That cowardice has weighed heavily on my mind ever since. {agreedToBeLeader:I agreed to follow you when we started this revolution. However, your behaviour as leader has proved that decision to be an unwise one. |As leader of this revolution, the responsibility for Janos's death rests solely on me, as you were actng as my subordinate. }
+
+Now I will remedy my mistakes. I will perform the role of judge during these proceedings, to prevent any more mob justice from being carried out.
+
+{
+-agreedToBeLeader:
++No. You swore to follow my lead. I shall be judge, and you will adhere to my decisions.
+    ->Close
+}
++When I killed Janos, it was to keep cohesion among the branded. A divided revolution would have killed more of our people than it would have saved.
+    ->killedJanos_1d
++Janos was a traitor. He sympathized with the guards. Why linger on that trash?
+    ->killedJanos_1c 
++Janos's death was regrettable. I take full responsibility for how the mob acted.
+    ->killedJanos_1b
+
+=== killedJanos_1b ===
+
+Then you understand why I must do this. A repeat of what happened to Janos would see the branded descend into barbarity.
+
++I will stand aside. Do what you believe needs doing.
+    ->killedJanos_nandorIsJudge2
+
++No. It was my execution of the plan that has lead us to this moment. I will see it concluded.
+    ->killedJanos_playerIsJudge1
+
+=== killedJanos_1c ===
+
+Whatever Janos's crimes, he did not deserve what happened to him. To be beaten to death like that... I cannot think of it without tasting bile.
+
+    +Perhaps this is why you should sit in judgement. It requires a kinder hand than I can muster.
+        ->killedJanos_nandorIsJudge1
+    +Then you are too weak for what must be done. Stand aside or be put aside.
+        ->killedJanos_playerIsJudge2
+
+
+=== killedJanos_1d ===
+
+Division before battle can be dangerous. On that we can agree. But if your intent is to save lives, then it should be easy to relinquish any claim you have to the role of judge and trust in me to see it done rightly.
+
+    +I trust you, Nándor. I will stand behind whatever decisions you make.
+        ->killedJanos_nandorIsJudge1
+    +We are of the same mind on this: I must see this delicate moment concluded correctly. I cannot stand aside.
+    ->killedJanos_playerIsJudge1
+
+=== killedJanos_playerIsJudge1 ===
+
+\*Nándor eyes you for a moment, but then relents.* Fine. But know this: should the mob turn violent again at your behest, you can consider our collaboration to be ended. I will not be so forgiving a second time.
+    ->agreedToBeJudge
+
+=== killedJanos_playerIsJudge2 ===
+
+\*Nándor gives you a look of stern contempt.* I will not fight you. But know this: should the mob turn violent again at your behest, you can consider our collaboration to be ended. I cannot continue to fight along someone who comes to such evil so readily.
+    ->agreedToBeJudge
+
+=== killedJanos_nandorIsJudge1 ===
+
+Thank you for not fighting this. It makes things easier on us all.
+    ->nandorIsJudge
+
+=== killedJanos_nandorIsJudge2 ===
+
+\*Nándor nods.* Thank you for understanding.
+    ->nandorIsJudge
 
 === 2b(->divert) === //why not kill them all
 
@@ -376,6 +446,9 @@ fadeBackIn(60)
 
 === 3c ===
 
+changeFacing(NW)
+changeNPCFacing({nandorIndex},NW)
+
 \*Nándor addresses the crowd.* I shall now pass sentencing. Listen well, and heed my verdicts, for those that contradict them shall be seen as enemies of this court!
 
 changeCamTarget({crowdIndex})
@@ -387,9 +460,10 @@ changeCamTarget({crowdIndex})
 
 changeCamTarget({nandorIndex})
 
-\*Nándor points at Márcos.* This is Guard Márcos! Down in the mine, I came the closest to death I have ever been. Had he not stood between me and my fate, I would not be speaking these words to you now. I now bid him rise to his feet and hold his head high, just as I bid you to treat him as a true comrade. 
+\*Nándor points at Márcos.* This is Guard Márcos! Down in the mine, I came the closest to death I have ever been. Had he not stood between me and my fate, I would not be speaking these words to you now. I bid him rise to his feet and hold his head high, just as I bid you to treat him as a true comrade. 
 
 changeCamTarget({crowdIndex})
+playAnimation({marcosIndex},StandUp)
 
 \*The crowd voices it's elation as Márcos stands up.*
 
@@ -405,6 +479,7 @@ changeCamTarget({nandorIndex})
 
 \*Nándor points at András.* This is Guard András! After the Director was defeated, I took the time to discuss his actions with Kastor and Janos. Each of them has spoken at length of both András's sympathy for our plight, and his aid to our cause. When approached to aid the revolution, András not only assisted our plans, but hid them when approached by other guards. For the assistance he rendered, as well as the danger he braved on our behalf, I bid him stand among greatful friends.
 
+playAnimation({andrasIndex},StandUp)
 changeCamTarget({crowdIndex})
 
 \*The crowd shouts joyously as András gets to his feet.*
@@ -427,6 +502,7 @@ changeCamTarget({crowdIndex})
 
 changeCamTarget({rekaIndex})
 
+playAnimation({rekaIndex},StandUp)
 \*Nándor assists Réka to her feet, and motions for two branded to take her away from the crowd. Réka's face is sullen, and she has trouble keeping her eyes off the jeering crowd.*
 
 fadeToBlack(true, false)
@@ -471,11 +547,8 @@ changeCamTarget({crowdIndex})
 
 \*The crowd continues it's cheers as Nándor has Pázmán's body removed from the yard.*
 
-fadeToBlack(true, false)
+execute({pazmanIndex})
 
-kill({pazmanIndex})
-
-fadeBackIn(60)
 }
 
 {
@@ -519,13 +592,17 @@ changeCamTarget({nandorIndex})
 
 \*Without waiting for the crowd's opinion, Nándor raises his sword and beheads Tabor with a powerful chop to the neck.*
 
+execute({taborIndex})
+
 changeCamTarget({crowdIndex})
 
 \*With the deed done, some of the crowd applaud weakly, while others begin to leave. After a time, it disperses.*
 
 fadeToBlack(true, false)
 
-kill({taborIndex})
+setToTrue(nandorDispersedCrowd)
+
+updateNPCVisibility()
 deactivate({clayIndex})
 deactivate({crowdIndex})
 
@@ -537,6 +614,9 @@ changeCamTarget({crowdIndex})
 \*With the verdicts over, the crowd begins to disperse.*
 
 fadeToBlack()
+
+setToTrue(nandorDispersedCrowd)
+updateNPCVisibility()
 
 deactivate({clayIndex})
 deactivate({crowdIndex})

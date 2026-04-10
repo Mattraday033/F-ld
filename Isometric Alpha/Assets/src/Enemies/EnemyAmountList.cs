@@ -150,4 +150,11 @@ public static class EnemyAmountList
     public readonly static CreatureAmount csalan = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.csalan));
 
     #endregion
+
+    #region Saints
+
+    public readonly static CreatureAmount oneStoneSaint = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.stoneSaint));
+    public readonly static CreatureAmount twoSmallRocks = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.smallRock));
+
+    #endregion
 }

@@ -287,11 +287,7 @@ changeCamTarget({janosIndex})
 
 Please! I'll vouch for him! Don't kill him!
 
-fadeToBlack()
-
-kill({andrasIndex})
-
-fadeBackIn(60)
+execute({andrasIndex})
 
 ->Close
 
@@ -307,10 +303,8 @@ Don't you dare touch him! Get your hands off him! Get-
 
 fadeToBlack()
 
-kill({andrasIndex})
 kill({janosIndex})
-
-fadeBackIn(60)
+mob({andrasIndex})
 
 ->Close
 

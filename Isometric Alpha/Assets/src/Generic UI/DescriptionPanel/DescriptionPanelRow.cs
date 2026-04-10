@@ -173,6 +173,11 @@ public class DescriptionPanelRow : MonoBehaviour
 
     public void setText(string text, int fontSize)
     {
+        if(descriptionText == null)
+        {
+            return;
+        }
+
         descriptionText.text = text;
         descriptionText.fontSize = fontSize;
         descriptionText.color = ColorList.grey25;
@@ -180,6 +185,11 @@ public class DescriptionPanelRow : MonoBehaviour
 
     public void setText(string text)
     {
+        if(descriptionText == null)
+        {
+            return;
+        }
+
         descriptionText.text = text;
         descriptionText.color = ColorList.grey25;
     }

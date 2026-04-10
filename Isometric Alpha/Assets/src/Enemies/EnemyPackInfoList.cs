@@ -166,11 +166,13 @@ public static class EnemyPackInfoList
 
     #region Pit Boss Fights
 
-    public readonly static BossPackInfo stoneSaintPitBoss = new BossPackInfo(new CreatureAmount[] { 
-                                                                                                        EnemyAmountList.oneExecutioner
-                                                                                                       },
-                                                                                                        DropTableList.slaveMineDTKey,
-                                                                                                        xpDrop: 100);
+    public readonly static BossPackInfo stoneSaintPitBoss = new BossPackInfo(new CreatureAmount[] {  
+                                                                                                                    EnemyAmountList.oneStoneSaint,
+                                                                                                                    EnemyAmountList.twoSmallRocks
+                                                                                                                 },
+                                                                                                                 DropTableList.lovashiGuardsDTKey,
+                                                                                                                 guaranteedDrops: new ItemListID[]{new ItemListID(ItemList.usableItemListIndex, ItemList.rockCakeIndex)},
+                                                                                                                 xpDrop: 100);
 
     #endregion
 
@@ -598,6 +600,7 @@ public static class EnemyPackInfoList
     #endregion
 
     #endregion
+
 
     // public readonly static EnemyPackInfo taborFight = new EnemyPackInfo(new int[] { 1 }, new int[] { 1 }, new EnemyStats[] { loadEnemyStatsFromResources(chiefTabor) }, flagsToCheckForSlaveAllies, DropTableList.slaveMineDTKey);
 

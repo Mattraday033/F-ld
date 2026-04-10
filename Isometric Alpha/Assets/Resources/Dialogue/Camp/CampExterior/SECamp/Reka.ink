@@ -294,11 +294,7 @@ That it could be worse is no comfort. I have no doubt Gáspár will be laughing 
 \*Réka hangs her head in defeat.* If I still had my weapon, I would bury it in your lying face. That I discarded it willingly just adds to my folly.
 }
 
-fadeToBlack()
-
-deactivate({rekaIndex})
-
-fadeBackIn(60)
+execute({rekaIndex})
 
 ->Close
 
@@ -310,11 +306,7 @@ activateQuestStep(Deal With the Prisoners, Réka was given to the mob.)
 
 Stay back you scum, stay back! The first to approach I will bleed with my teeth!
 
-fadeToBlack()
-
-kill({rekaIndex})
-
-fadeBackIn(60)
+mob({rekaIndex})
 
 ->Close
 

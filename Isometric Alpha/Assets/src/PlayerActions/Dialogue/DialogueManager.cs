@@ -519,15 +519,7 @@ public class DialogueManager : MonoBehaviour
 
                     int k = getArgumentInt(buffer, Constants.indexZero);
 
-                    if (k == 0)
-                    {
-                        mainCM.Follow = PlayerMovement.getInstance().gameObject.transform;
-                    }
-                    else
-                    {
-                        mainCM.Follow = currentDialogue.cameraFoci[k].transform;
-                    }
-                    nameText = DialogueList.scrubNameOfEndNumbers(currentDialogue.names[k]) + ":";
+                    changeCameraTarget(k);
                     continueStory();
 
                     break;
@@ -1049,9 +1041,33 @@ public class DialogueManager : MonoBehaviour
 
                     return;
 
-                case "kill":
+                case "execute":
 
                     int deadNameIndex = getArgumentInt(buffer, Constants.indexZero);
+
+                    GameObject executionTarget = changeCameraTarget(deadNameIndex);
+
+                    DeathFlagManager.addName(currentDialogue.names[deadNameIndex]);
+
+                    StartCoroutine(handleExecution(executionTarget));
+
+                    return;
+
+                case "mob":
+
+                    int mobDeadNameIndex = getArgumentInt(buffer, Constants.indexZero);
+
+                    GameObject mobTarget = changeCameraTarget(mobDeadNameIndex);
+
+                    DeathFlagManager.addName(currentDialogue.names[mobDeadNameIndex]);
+
+                    StartCoroutine(handleMob(mobTarget));
+
+                    return;
+
+                case "kill":
+
+                    deadNameIndex = getArgumentInt(buffer, Constants.indexZero);
 
                     DeathFlagManager.addName(currentDialogue.names[deadNameIndex]);
 
@@ -1375,6 +1391,22 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    private GameObject changeCameraTarget(int targetIndex)
+    {
+        nameText = DialogueList.scrubNameOfEndNumbers(currentDialogue.names[targetIndex]) + ":";
+        
+        if (targetIndex == 0)
+        {
+            mainCM.Follow = PlayerMovement.getInstance().gameObject.transform;
+        }
+        else
+        {
+            mainCM.Follow = currentDialogue.cameraFoci[targetIndex].transform;
+        }
+
+        return mainCM.Follow.gameObject;
+    }
+
     private void fadeToBlackCommand(bool quickFade = false)
     {
         string[] fadeToBlackArgs = getAllArgs(buffer);
@@ -1565,7 +1597,10 @@ public class DialogueManager : MonoBehaviour
 		if (!TutorialSequence.currentlyInTutorialSequence() && TutorialSequence.startTutorialSequence(tutorialSequenceKey))
 		{
 			PlayerOOCStateManager.setCurrentActivity(OOCActivity.inTutorialSequence);
-		}
+		} else
+        {
+            PlayerOOCStateManager.OnLeavingTutorialSequenceState.Invoke();
+        }
 	}
 
 	public static void stopTutorials()
@@ -1627,6 +1662,85 @@ public class DialogueManager : MonoBehaviour
 			// Debug.LogError("continueStory() inside handleDialogueUIDuringFadeOut");
 			continueStory();
 		}
+	}
+
+	private IEnumerator handleExecution(GameObject target)
+	{
+		if (dialogueTrackerWindow != null)
+		{
+			dialogueTrackerWindow.gameObject.SetActive(false);
+		}
+
+		fadeToBlackManager.setAndStartFadeToBlack();
+
+		while (FadeToBlackManager.isMidScreenFade())
+		{
+			yield return null;
+		}
+
+		AudioClip executionClip = Resources.Load<AudioClip>(AudioClipList.executionSFX);
+		AudioManager.playExecutionSFX();
+        target.SetActive(false);
+        
+		yield return new WaitForSeconds(executionClip.length);
+
+		fadeToBlackManager.setAndStartFadeBackIn();
+
+		while (FadeToBlackManager.isMidScreenFade())
+		{
+			yield return null;
+		}
+
+		if (dialogueTrackerWindow != null)
+		{
+		    dialogueTrackerWindow.gameObject.SetActive(true);
+		}
+
+		continueStory();
+	}
+
+	private IEnumerator handleMob(GameObject target)
+	{
+		bool alreadyBlack = FadeToBlackManager.isBlack();
+
+		if (!alreadyBlack)
+		{
+			if (dialogueTrackerWindow != null)
+			{
+				dialogueTrackerWindow.gameObject.SetActive(false);
+			}
+
+			fadeToBlackManager.setAndStartFadeToBlack();
+
+			while (FadeToBlackManager.isMidScreenFade())
+			{
+				yield return null;
+			}
+		}
+
+        target.SetActive(false);
+
+		AudioClip whipClip = Resources.Load<AudioClip>(AudioClipList.whipAttackSound);
+
+		for (int i = 0; i < 4; i++)
+		{
+			AudioManager.playWhipSFX();
+			yield return new WaitForSeconds(whipClip.length);
+		}
+
+		fadeToBlackManager.setAndStartFadeBackIn();
+
+		while (FadeToBlackManager.isMidScreenFade())
+		{
+			yield return null;
+		}
+
+		if (dialogueTrackerWindow != null)
+		{
+		    dialogueTrackerWindow.gameObject.SetActive(true);
+		}
+
+		continueStory();
 	}
 
 	private IEnumerator fadeBackIn(bool continueAfterTransparent)

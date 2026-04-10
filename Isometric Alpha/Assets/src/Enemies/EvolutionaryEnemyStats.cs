@@ -12,24 +12,18 @@ public class EvolutionaryEnemyStats : EnemyStats
 	//[SerializeField]
 	private EnemyStats devolutionEnemyType;
 
-	public EvolutionaryEnemyStats(string name, int armor, int tHP): 
-	base(name, armor, tHP)
+	public EvolutionaryEnemyStats(string name, int armor, int tHP, string evolutionEnemyType, Trait[] traits, Dictionary<CharacterAnimationType, string> animationAudioClipDictionary = null): 
+	base(name, armor, tHP, traits: traits, animationAudioClipDictionary: animationAudioClipDictionary)
 	{
-		
-	}
-
-	public EvolutionaryEnemyStats(string name, int armor, int tHP, string evolutionEnemyType): 
-	base(name, armor, tHP)
-	{
-		this.evolutionEnemyType = Resources.Load<EnemyStats>(evolutionEnemyType);
+		this.evolutionEnemyType = EnemyStatsList.getEnemyStats(evolutionEnemyType);
 		this.devolutionEnemyType = null;
 	}
 	
-	public EvolutionaryEnemyStats(string name, int armor, int tHP, string evolutionEnemyType, string devolutionEnemyType): 
-	base(name, armor, tHP)
+	public EvolutionaryEnemyStats(string name, int armor, int tHP, string evolutionEnemyType, string devolutionEnemyType, Trait[] traits, Dictionary<CharacterAnimationType, string> animationAudioClipDictionary = null): 
+	base(name, armor, tHP, traits: traits, animationAudioClipDictionary: animationAudioClipDictionary)
 	{
-		this.evolutionEnemyType = Resources.Load<EnemyStats>(evolutionEnemyType);
-		this.devolutionEnemyType = Resources.Load<EnemyStats>(devolutionEnemyType);
+		this.evolutionEnemyType = EnemyStatsList.getEnemyStats(evolutionEnemyType);
+		this.devolutionEnemyType = EnemyStatsList.getEnemyStats(devolutionEnemyType);
 	}
 
 	public override void setToDeadSprite()
@@ -68,7 +62,7 @@ public class EvolutionaryEnemyStats : EnemyStats
 		
 		setToDeadSprite(willEvolveOrDevolve);
 		
-		CreatureSpawner.spawn(evolutionEnemyType, position);
+		CreatureSpawner.spawn(evolutionEnemyType.clone(), position);
 	}
 
 	public override void devolve()
@@ -80,7 +74,7 @@ public class EvolutionaryEnemyStats : EnemyStats
 		
 		setToDeadSprite(willEvolveOrDevolve);
 		
-		CreatureSpawner.spawn(devolutionEnemyType, position);
+		CreatureSpawner.spawn(evolutionEnemyType.clone(), position);
 	}
 
 	public override bool notResurrectable()

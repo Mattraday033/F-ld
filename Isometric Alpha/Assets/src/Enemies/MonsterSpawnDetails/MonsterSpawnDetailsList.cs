@@ -286,7 +286,7 @@ public static class MonsterSpawnDetailsList
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(-3, 2)));
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(3, 9)));
 
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(-3, 9), Facing.SouthWest));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(-3, 9), Facing.SouthWest, movementType: MonsterMovementType.Stationary));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section7b, list);
 

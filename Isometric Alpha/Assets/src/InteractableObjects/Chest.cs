@@ -215,7 +215,7 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
     public SpriteRenderer spriteRenderer;
     public SpriteOutline outline;
 
-    public string secretDoorFlag;
+    private string secretDoorFlag;
 
     public int chestIndex;
 
@@ -240,7 +240,7 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
     private void Awake()
     {
-        SecretDoorFlags.OnSecretDoorDiscovery.AddListener(show);
+
     }
 
     private void OnEnable()
@@ -259,6 +259,22 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
         if(this.secretDoorFlag != null && this.secretDoorFlag.Equals(secretDoorFlag))
         {
             gameObject.SetActive(true);
+        }
+    }
+
+    public void setSecretDoorFlag(string secretDoorFlag)
+    {
+        if(secretDoorFlag == null || secretDoorFlag.Length <= 0)
+        {
+            return;
+        }
+
+        this.secretDoorFlag = secretDoorFlag;
+
+        if(!SecretDoorFlags.secretDoorHasBeenDiscovered(secretDoorFlag))
+        {
+            gameObject.SetActive(false);
+            SecretDoorFlags.OnSecretDoorDiscovery.AddListener(show);
         }
     }
 

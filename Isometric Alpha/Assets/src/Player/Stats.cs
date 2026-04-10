@@ -834,7 +834,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public void addTrait(Trait newTrait)
     {
-        if (newTrait == null || isDead())
+        if (newTrait == null || (isDead() && CombatStateManager.whoseTurn != WhoseTurn.Start))
         {
             return;
         }

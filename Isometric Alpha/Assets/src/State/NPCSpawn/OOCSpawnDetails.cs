@@ -1761,7 +1761,7 @@ public class ChestSpawnDetails : QuestActivationObjectSpawnDetails
 
         setScript(chest);
 
-        chest.secretDoorFlag = secretDoorFlag;
+        chest.setSecretDoorFlag(secretDoorFlag);
     }
 
     protected override void setScript(IQuestActivationObject questActivationObject)

@@ -471,6 +471,11 @@ public class AudioManager : MonoBehaviour
         setCurrentMusicPath(musicPath);
     }
 
+    public static void playExecutionSFX()
+    {
+        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.executionSFX));
+    }
+
     public static void playCoinSFX()
     {
         playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.coinSFXPrefix + 
@@ -556,6 +561,11 @@ public class AudioManager : MonoBehaviour
         playAudioClipAsSingleton(AudioClipList.gateOpenShort);
     }
 
+    public static void playLvlUpSFX()
+    {
+        playAudioClipAsSingleton(AudioClipList.lvlUpSFX);
+    }
+
     #endregion
 
     [RuntimeInitializeOnLoadMethod]
@@ -611,7 +621,9 @@ public static class AudioClipList
     public const string gateOpenShort = miscSFXFolder + "GateOpenShort";
     public const string placeInInventory = miscSFXFolder + "PlaceInInventory";
     public const string restSFX = miscSFXFolder + "Rest";
+    public const string executionSFX = miscSFXFolder + "Execution";
 
+    public const string lvlUpSFX = miscSFXFolder + "LvlUp";
     public const string tunnelExplosionSFX = miscSFXFolder + "TunnelExplosion";
     public const string jellyMisfireSFX = miscSFXFolder + "JellyMisfire";
 

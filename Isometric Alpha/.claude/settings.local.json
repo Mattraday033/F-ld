@@ -3,7 +3,8 @@
     "allow": [
       "Bash(sort -t= -k2 -n)",
       "Bash(grep -v \" PPU=100$\\\\| PPU=128$\\\\| PPU=200$\\\\| PPU=256$\" \"c:/Users/mattr/AppData/Local/Temp/sprite_ppu.txt\")",
-      "Bash(grep \" PPU=100$\" \"c:/Users/mattr/AppData/Local/Temp/sprite_ppu.txt\")"
+      "Bash(grep \" PPU=100$\" \"c:/Users/mattr/AppData/Local/Temp/sprite_ppu.txt\")",
+      "Bash(xargs grep:*)"
     ]
   }
 }

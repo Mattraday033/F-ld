@@ -47,6 +47,7 @@ public static class StatSourceNameList
     public const string largeKey = "Large";
     public const string spawnerKey = "Spawner";
     public const string fodderKey = "Fodder";
+    public const string cannotSummonKey = "Cannot Summon";
 
     // Charge traits
     public const string chargedKey = "Charged";

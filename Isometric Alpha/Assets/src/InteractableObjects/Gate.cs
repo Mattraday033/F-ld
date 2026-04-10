@@ -128,6 +128,18 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
+        switch(PlayerOOCStateManager.currentActivity)
+        {
+            case OOCActivity.walking:
+            case OOCActivity.inChestUI:
+            case OOCActivity.cunning:
+            case OOCActivity.intimidating:
+            case OOCActivity.observing:
+                break;
+            default:
+                return;
+        }
+
 		if (!RevealManager.currentlyRevealed)
 		{
             outline.createOutline(getRevealColor());
@@ -137,6 +149,18 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
+        switch(PlayerOOCStateManager.currentActivity)
+        {
+            case OOCActivity.walking:
+            case OOCActivity.inChestUI:
+            case OOCActivity.cunning:
+            case OOCActivity.intimidating:
+            case OOCActivity.observing:
+                break;
+            default:
+                return;
+        }
+
 		if (!RevealManager.currentlyRevealed)
 		{
 			outline.removeOutline();

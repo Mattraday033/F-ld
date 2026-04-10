@@ -102,6 +102,11 @@ public class FadeToBlackManager : MonoBehaviour
 		fadeToBlackCanvas.worldCamera = mainCamera;
 	}
 
+	public static bool isBlack()
+	{
+		return instance != null && instance.fadeToBlackImage.color.a >= 1f;
+	}
+
 	public static bool isMidScreenFade()
 	{
         return fadeDictionary.ContainsKey(FadeType.Screen) && 

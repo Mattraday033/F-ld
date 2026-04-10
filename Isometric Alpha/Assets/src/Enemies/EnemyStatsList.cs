@@ -577,6 +577,53 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                 animationAudioClipDictionary: AnimationSFXDictionaryList.horseAudioDictionary));
         #endregion
 
+        #region Saints
+
+        enemyStatsDict.Add(MonsterNameList.stoneSaint, new EnemyStats(MonsterNameList.stoneSaint,
+                                                                              Constants.sixtyFiveArmor,
+                                                                                                185,
+                                               AbilityList.getAbility(null, AbilityList.evolveKey),
+                                                                    new Trait[] { 
+                                                                                    TraitList.master,
+                                                                                    TraitList.saintly,
+                                                                                    TraitList.backLine
+                                                                                },
+                                                animationAudioClipDictionary : AnimationSFXDictionaryList.stoneSaintAudioDictionary));
+
+        enemyStatsDict.Add(MonsterNameList.lesserStoneSaint, new EnemyStats(MonsterNameList.stoneSaint,
+                                                                              Constants.sixtyFiveArmor,
+                                                                                                100,
+                                               AbilityList.getAbility(null, AbilityList.lesserBoulderRollKey),
+                                                                    new Trait[] { 
+                                                                                    TraitList.master,
+                                                                                    TraitList.territorial,
+                                                                                    TraitList.cannotSummon
+                                                                                },
+                                                animationAudioClipDictionary : AnimationSFXDictionaryList.stoneSaintAudioDictionary));
+
+
+        enemyStatsDict.Add(MonsterNameList.largeRock, new EvolutionaryEnemyStats(MonsterNameList.largeRock,
+                                                                                    Constants.zeroArmor,
+                                                                                                    1,
+                                                                                    MonsterNameList.lesserStoneSaint,
+                                                                    new Trait[] { 
+                                                                                    TraitList.minion,
+                                                                                    TraitList.immobile
+                                                                                },
+                                                animationAudioClipDictionary : AnimationSFXDictionaryList.stoneSaintAudioDictionary));
+
+        enemyStatsDict.Add(MonsterNameList.smallRock, new EvolutionaryEnemyStats(MonsterNameList.smallRock,
+                                                                              Constants.zeroArmor,
+                                                                                                1,
+                                                                                MonsterNameList.largeRock,
+                                                                    new Trait[] { 
+                                                                                    TraitList.minion,
+                                                                                    TraitList.immobile
+                                                                                },
+                                                animationAudioClipDictionary : AnimationSFXDictionaryList.stoneSaintAudioDictionary));
+
+        #endregion
+
         AlliedSummonStatsList.addEnemyBasedSummons();
     }
 

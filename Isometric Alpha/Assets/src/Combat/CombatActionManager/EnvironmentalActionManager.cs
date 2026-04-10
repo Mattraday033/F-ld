@@ -69,6 +69,16 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
                 envCombatAction = AbilityList.getAbility(actorStats, AbilityList.turnUpTheHeatKey);
                 targetingTrait = TraitList.specificCheckeredLeftAlliedSide.clone();
                 break;
+            case MonsterNameList.stoneSaint:
+
+                if(actorStats.hasTrait(TraitList.cannotSummon))
+                {
+                    return;
+                }
+
+                envCombatAction = AbilityList.getAbility(actorStats, AbilityList.stoneSaintMaterialsSummonKey);
+                targetingTrait = TraitList.emptyGenerated2;
+                break;
             default:
                 return;
         }

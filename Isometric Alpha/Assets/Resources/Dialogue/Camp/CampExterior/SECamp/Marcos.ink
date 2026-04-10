@@ -304,11 +304,11 @@ activateQuestStep(Deal With the Prisoners, Márcos was executed.)
 
 My death has been a long time coming. I know what I have done to deserve this punishment, although some part of me had hoped it would not come to this. I will not resist.
 
-fadeToBlack()
+//fadeToBlack()
 
-kill({marcosIndex})
+execute({marcosIndex})
 
-fadeBackIn(60)
+//fadeBackIn(60)
 
 ->Close
 
@@ -320,11 +320,7 @@ activateQuestStep(Deal With the Prisoners, Márcos was given to the mob.)
 
 \*Márcos looks up at you. You can see true fear in his eyes.*
 
-fadeToBlack()
-
-kill({marcosIndex})
-
-fadeBackIn(60)
+mob({marcosIndex})
 
 ->Close
 

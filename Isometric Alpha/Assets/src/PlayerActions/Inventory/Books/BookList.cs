@@ -31,6 +31,8 @@ public static class BookList
 	public const string pitClosureNoteKey = "Pit Closure Note";
 	public const string pitClosureNoteReadFlag = "pitClosureNoteRead";
 
+	public const string directorsJournalKey = "Director's Journal";
+	public const string directorsJournalReadFlag = "directorJournalRead";
 
 	public static string getBookContents(string key)
 	{
@@ -230,7 +232,13 @@ public static class BookList
 			case pitClosureNoteKey:
 				return "The Pit's warden has been saying he's been hearing movement down in the Pit, and it's not the slaves. No one's seen anything, but we're all on edge after what happened in the mine. With the slaves rioting upstairs, the warden ordered this section sealed up incase the worms managed to break in. " +
 						"Not sure whats going on up there: I've been stuck down here watching for worms for a while, and no one's come to relieve me yet.";
-
+			case directorsJournalKey:
+				return "... the count's chose me for this task for my adherence to our cause. I know my Confederation requires this act of sacrifice should a new campaign against the Masons ever be renewed. The mountains act as better walls than they could ever build. A way beneath them would be nothing less than transformative in our war planning. " + 
+                        "However, I confess my thoughts turn yet again to what the Great Mother would think of this expedition. A camp so close to Trónszék? Is it not some variety of sacrilege? We don't seek her domain at the top of the mountain, meerly to travel beneath it along the roads the Delver's made, but that excuse feels more and more threadbare with each passing week. " + 
+                        "I can feel Her eyes on us. Angyal knows why we are here and surely must disapprove. She expelled the Delvers of this mountain and took their home for it's remoteness, and yet here we are all the same. The worms that assaulted our dig teams can be nothing but a clear sign that we have ridden where we should not.\n\n" +
+                        "My leg has been hurting again. This place... it feels all too familiar. This morning I smelled smoke as I awoke. I lept from my bed and meant to race to the door, shouting for the guard to be raised and for my mount to be sent for. Had my leg not given out before I could make it across the room, my household may well have seen me " +
+                        "race about the Manse, shrieking as if I was still at Wudra. I don't think the sentries outside my doors heard what I was saying, they seemed more confused than alarmed as I picked myself off the floor. Perhaps it would be better if I <I>was</I> still there. At least then I could retreat. Here I am stuck under the Great Mother's wrathful gaze.\n\n" + 
+                        "Trapped against giant walls. Again the defenders come forth. We are not welcome.";
 		}
 
 		return "Book Contents Not Found.";

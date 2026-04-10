@@ -2328,7 +2328,7 @@ And on more practical grounds, the Manse contains most of the camp's food stores
 
 === 7c ===
 
-When we leave here and rally the slaves on the southern side of the camp, the guards will deploy in force to stop us. They may erect barricades to slow us, or channel us towards places where we will be at a disadvantage. 
+When we leave here and rally the slaves on the southern side of the camp, the guards will deploy in force to stop us. They may erect barricades to slow us, or channel us towards places where we will be at a disadvantage. If possible, going around their barricades rather than through them will save many lives on our side.
 
 They will also have guards trained to signal the arrow towers spread around the camp. Killing these guards quickly should be our highest priority, to lower our casualties.
 

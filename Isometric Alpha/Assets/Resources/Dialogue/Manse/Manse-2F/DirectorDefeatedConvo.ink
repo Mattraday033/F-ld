@@ -92,7 +92,7 @@ Likewise, Carter. I had wondered if you had a part in the riots. Command may not
 
 changeCamTarget({thatchIndex})
 
-Whomever she is, whatever her titles, she has no right to ask us to spare him. The Director founded this camp. Every atrocity committed here was committed in his name. Our revolution can only end in his death. 
+Whomever she is, she has no right to ask us to spare him. The Director founded this camp. Every atrocity committed here was committed in his name. Our revolution can only end in his death. 
 
 -else:
 
@@ -102,7 +102,7 @@ A stranger I may be, but I have also suffered at his hands. Were it my choice to
 
 changeCamTarget({thatchIndex})
 
-Whomever she is, whatever her reasons, she has no right to ask us to spare him. The Director founded this camp. Every atrocity committed here was committed in his name. Our revolution can only end in his death. 
+Whomever she is, she has no right to ask us to spare him. The Director founded this camp. Every atrocity committed here was committed in his name. Our revolution can only end in his death. 
 }
 
 ->1c

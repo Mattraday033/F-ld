@@ -28,12 +28,16 @@ public class PlayerObject : MonoBehaviour
     public GameOverPopUpButton gameOverPopUpButton;
 
     public PlayerMovement playerMovement;
+    public Coroutine levelUpRoutine;
+
+    public static bool playLevelUpOnSceneStart;
 
     [RuntimeInitializeOnLoadMethod]
     private static void initializePlayerMovement()
     {
         hasCustomPromptMessage = false;
         instance = null;
+        playLevelUpOnSceneStart = false;
     }
 
     private void Awake()
@@ -58,6 +62,11 @@ public class PlayerObject : MonoBehaviour
     void Start()
     {
         StartCoroutine(setCameraSpeed());
+
+        if(playLevelUpOnSceneStart)
+        {
+            playLevelUpEffect();
+        }
     }
 
     private IEnumerator setCameraSpeed()
@@ -286,6 +295,42 @@ public class PlayerObject : MonoBehaviour
     public static AnimationManager getAnimationManager()
     {
         return instance.animationManager;
+    }
+
+    public static void playLevelUpEffect()
+    {
+        if(CombatStateManager.inCombat)
+        {
+            playLevelUpOnSceneStart = true;
+            return;
+        } else if(getInstance() != null && getInstance().levelUpRoutine == null)
+        {
+            getInstance().levelUpRoutine =  getInstance().StartCoroutine(runLevelUpEffect());
+            playLevelUpOnSceneStart = false;
+        }
+    }
+
+    private static IEnumerator runLevelUpEffect()
+    {
+        do
+        {
+            yield return null;
+        } while(PlayerOOCStateManager.currentActivity == OOCActivity.inFade);
+
+        AudioManager.playLvlUpSFX();
+
+        EffectAnimationManager frontEffect = EffectAnimationManager.instantiatePrefab(instance.transform);
+        frontEffect.transform.position = instance.transform.position;
+        frontEffect.setAnimations(EffectAnimationType.FrontLvlUp);
+
+        EffectAnimationManager backEffect = EffectAnimationManager.instantiatePrefab(instance.transform);
+        backEffect.transform.position = instance.transform.position;
+        backEffect.setAnimations(EffectAnimationType.BackLvlUp);
+
+        while (frontEffect != null || backEffect != null)
+        {
+            yield return null;
+        }
     }
 
     public static void playDeathAnimation()

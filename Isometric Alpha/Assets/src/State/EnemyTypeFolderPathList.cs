@@ -18,6 +18,8 @@ public static class EnemyTypeFolderPathList
     private const string miscFolderPath = PrefabNames.charactersFolder + "Misc/";
     private const string horsesFolderPath = PrefabNames.charactersFolder + "Horses/";
 
+    private const string saintsFolderPath = PrefabNames.charactersFolder + "Saints/";
+
     private const string partyMembersFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/PartyMembers/";
 
     private static Dictionary<string, string> folderPathDict;
@@ -208,6 +210,14 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.protagPrefix+1, partyMembersFolderPath + NPCNameList.protagPrefix+1 + "/");  
         folderPathDict.Add(NPCNameList.protagPrefix+2, partyMembersFolderPath + NPCNameList.protagPrefix+2 + "/");
 
+        #endregion
+
+        #region Saints
+    
+        folderPathDict.Add(MonsterNameList.stoneSaint, saintsFolderPath + MonsterNameList.stoneSaint+ "/");
+        folderPathDict.Add(MonsterNameList.smallRock, saintsFolderPath + MonsterNameList.smallRock+ "/");
+        folderPathDict.Add(MonsterNameList.largeRock, saintsFolderPath + MonsterNameList.largeRock+ "/");
+        
         #endregion
 
     }

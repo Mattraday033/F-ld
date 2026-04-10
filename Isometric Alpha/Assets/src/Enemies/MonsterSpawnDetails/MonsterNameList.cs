@@ -67,6 +67,9 @@ public static class MonsterNameList
 
     #region Saints
     public const string stoneSaint = "Stone Saint";
+    public const string lesserStoneSaint = "Lesser Stone Saint";
+    public const string smallRock = "Small Rock";
+    public const string largeRock = "Large Rock";
     #endregion
 
     public const string movableObject = "Movable Object";
@@ -140,6 +143,8 @@ public static class MonsterNameList
                 return horsesPackName;
 
             case stoneSaint:
+            case smallRock:
+            case largeRock:
                 return stoneSaint;
 
             // Movable Object

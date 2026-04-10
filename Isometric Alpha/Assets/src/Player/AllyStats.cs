@@ -135,6 +135,11 @@ public class AllyStats : Stats
     public void addXP(int earnedXP)
     {
         xp += earnedXP;
+
+        if(canLevelUp())
+        {
+            PlayerObject.playLevelUpEffect();
+        }
     }
 
     public void removeXPFromLevelUpOnce()

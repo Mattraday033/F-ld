@@ -106,6 +106,7 @@ public static class FlagNameList
         public const string letNandorDecideGuardPunishments = "letNandorDecideGuardPunishments";
         public const string afterNandorDecidesGuardPunishments = "afterNandorDecidesGuardPunishments";
         public const string executedAllPrisoners = "executedAllPrisoners";
+        public const string nandorDispersedCrowd = "nandorDispersedCrowd";
 
 
         //Temple Flags

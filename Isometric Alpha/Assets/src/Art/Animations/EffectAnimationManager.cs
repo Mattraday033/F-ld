@@ -17,7 +17,9 @@ public enum EffectAnimationType
     Acid,
     SmokeBomb,
     Intimidate,
-    BlastingJelly
+    BlastingJelly,
+    FrontLvlUp,
+    BackLvlUp
 }
 
 
@@ -43,6 +45,7 @@ public class EffectAnimationManager : AnimationManager
     {
         string folderPath = PrefabNames.abilityEffectFolderPath + effectType;
 
+        setSpriteRenderer(effectType);
         determineOutline(effectType);
 
         AnimationClip animationClip = Resources.Load<AnimationClip>(folderPath);
@@ -57,6 +60,24 @@ public class EffectAnimationManager : AnimationManager
         } else
         {
             AudioManager.playEffectAnimationSFX(effectType);
+        }
+    }
+
+    private void setSpriteRenderer(string effectType)
+    {
+        switch(effectType)
+        {
+            case "FrontLvlUp":
+                spriteRenderer.sortingLayerName = LayerAndTagManager.firstSortingLayerName;
+                spriteRenderer.sortingOrder = Constants.indexOne;
+                spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
+                return;
+            case "BackLvlUp":
+                spriteRenderer.sortingLayerName = LayerAndTagManager.firstSortingLayerName;
+                spriteRenderer.sortingOrder = Constants.indexOne;
+                spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
+                spriteRenderer.transform.localPosition = new Vector3(0f, .15f, 0f);
+                return;
         }
     }
 
@@ -120,9 +141,9 @@ public class EffectAnimationManager : AnimationManager
         return clipTransition;
     }
 
-    public static EffectAnimationManager instantiatePrefab()
+    public static EffectAnimationManager instantiatePrefab(Transform parent = null)
     {
-        return Instantiate(Resources.Load<GameObject>(PrefabNames.effect)).GetComponent<EffectAnimationManager>();
+        return Instantiate(Resources.Load<GameObject>(PrefabNames.effect), parent).GetComponent<EffectAnimationManager>();
     }
 
     public override bool spriteSetByHeartBeat()

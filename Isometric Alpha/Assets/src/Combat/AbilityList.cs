@@ -269,10 +269,11 @@ public static class AbilityList
 		enemyAbilityDictionary.Add(feedKey, new HealingAbility(CombatActionSettings.build(DescriptionParams.build(feedKey, "The combatant provides sustenance to their allies, healing them."), DamageParams.build("22"))));
 
 		//Saint Abilities
-		enemyAbilityDictionary.Add(boulderRollKey, new Ability(CombatActionSettings.build(DescriptionParams.build(boulderRollKey, "A massive rock tumbling quickly towards you.", "BoulderRoll"), DamageParams.build("12", "10"), TargetParams.build(Range.verticalThreeIndex), AnimationParams.build(EffectAnimationType.Blunt))));
-        enemyAbilityDictionary.Add(lesserBoulderRollKey, new Ability(CombatActionSettings.build(lesserBoulderRollKey, boulderRollDescription, DamageParams.build("6", "5"), TargetParams.build(Range.verticalThreeIndex), AnimationParams.build(EffectAnimationType.Blunt))));
+		enemyAbilityDictionary.Add(boulderRollKey, new Ability(CombatActionSettings.build(DescriptionParams.build(boulderRollKey, "A massive rock tumbling quickly towards you.", "BoulderRoll"), DamageParams.build("31", "10"), TargetParams.build(Range.verticalThreeIndex), AnimationParams.build(EffectAnimationType.Blunt))));
+        enemyAbilityDictionary.Add(lesserBoulderRollKey, new Ability(CombatActionSettings.build(lesserBoulderRollKey, boulderRollDescription, DamageParams.build("25", "10"), TargetParams.build(Range.verticalThreeIndex), AnimationParams.build(EffectAnimationType.Blunt))));
         enemyAbilityDictionary.Add(evolveKey, new EvolveAbility(CombatActionSettings.build(DescriptionParams.build(evolveKey, "Evolves targets into more powerful versions of themselves."), TargetParams.build(Range.boxThreeIndex)), enemyAbilityDictionary[boulderRollKey]));
-        // enemyAbilityDictionary.Add(stoneSaintMaterialsSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(stoneSaintMaterialsSummonKey, "The Saint wills more rocks to come to it's aid.")), EnemyStatsList.smallStonesCombo));
+        enemyAbilityDictionary.Add(stoneSaintMaterialsSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(stoneSaintMaterialsSummonKey, "The Saint wills more rocks to come to it's aid.")), 
+                                                                                    new string[]{MonsterNameList.smallRock, MonsterNameList.smallRock}));
 	}
 	
 	private static void instantiateStatAbilities()

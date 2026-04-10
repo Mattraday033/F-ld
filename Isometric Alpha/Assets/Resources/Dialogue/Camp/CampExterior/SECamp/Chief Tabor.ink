@@ -1055,11 +1055,7 @@ finishQuest(An Uneasy Truce, true, Tabor's end.)
 
 setToTrue(executedTabor)
 
-fadeToBlack(true, false)
-
-kill({taborIndex})
-
-fadeBackIn(60)
+execute({taborIndex})
 
 ->divert
 
@@ -1100,11 +1096,7 @@ finishQuest(An Uneasy Truce, true, Communal revenge.)
 
 setToTrue(gaveTaborToTheCrowd)
 
-fadeToBlack()
-
-kill({taborIndex})
-
-fadeBackIn(60)
+mob({taborIndex})
 
 ->Close
 

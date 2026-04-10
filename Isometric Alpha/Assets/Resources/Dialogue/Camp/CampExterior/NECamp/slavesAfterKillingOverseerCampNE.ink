@@ -256,7 +256,7 @@ changeCamTarget({theCrowdIndex})
         I was mistaken before. I was not in my right mind to hold any love for a guard. {playerName} has brought me to my senses, and I am ready to follow them.
         ->3a
     +Janos is a traitor! My only mistake was to leave them alive so that they may continue to thwart the revolution! Let us now rectify that mistake! <Attack Janos>
-        kill({janosIndex})
+        mob({janosIndex})
         
         keepDialogue()
         \*Those in the crowd near Janos grab him and begin to beat him. Soon he is lost beneath the sea of bodies, his screams giving way to the sickening rhythm of landed blows.*

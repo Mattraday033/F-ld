@@ -422,15 +422,9 @@ changeCamTarget({crowdIndex})
 
 \*The crowd surges forward and pulls Pázmán within it like a wave submerging a raft. His shrill cries for his mother continue for only a moment, and then cease.*
 
-fadeToBlack()
+mob({pazmanIndex})
 
-deactivate({ervinIndex})
-deactivate({ervinCloserIndex})
-kill({pazmanIndex})
-
-fadeBackIn(60)
-
-->Close
+->ervinSaysThankYou 
 
 === 3d === //executed Pazman
 
@@ -446,11 +440,25 @@ changeCamTarget({crowdIndex})
 
 \*The crowd cheers as the executioner's sword rises and falls.*
 
+execute({pazmanIndex})
+
+->ervinSaysThankYou 
+
+=== ervinSaysThankYou ===
+
+{
+-allowedErvinToSpeakAtPazmansTrial:
+changeCamTarget({ervinCloserIndex})
+-else:
+changeCamTarget({ervinIndex})
+}
+
+Thank you. To have that bastard dead means more to me than you can know.
+
 fadeToBlack()
 
 deactivate({ervinIndex})
 deactivate({ervinCloserIndex})
-kill({pazmanIndex})
 
 fadeBackIn(60)
 

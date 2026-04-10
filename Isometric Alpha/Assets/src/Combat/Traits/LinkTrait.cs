@@ -9,11 +9,13 @@ public class LinkTrait : Trait
     private List<Stats> linkedTargets;
 
     private double percentageOfDamageDealt;
+    private bool stuns;
 
-    public LinkTrait(string traitName, string traitDescription, string iconName, int duration, double percentageOfDamageDealt) :
-    base(traitName, TraitType.InteractionBuff, traitDescription, iconName, roundsLeft: duration)
+    public LinkTrait(string traitName, string traitDescription, string iconName, int duration, double percentageOfDamageDealt, bool stuns = false) :
+    base(traitName, TraitType.InteractionBuff, traitDescription, iconName, roundsLeft: duration, permanent: false)
     {
         this.percentageOfDamageDealt = percentageOfDamageDealt;
+        this.stuns = stuns;
     }
 
     public void setLinkedTargets(List<Stats> targets)
@@ -38,5 +40,10 @@ public class LinkTrait : Trait
                 projectileNumber += linkAction.sendProjectileAt(target.position, target, projectileNumber, getDamageToDeal(incomingDamage), false);
             }
         }
+    }
+
+    public override bool preventsCombatAction()
+    {
+        return stuns;
     }
 }

@@ -164,6 +164,7 @@ public static class ItemList
 	public const int saintsAndSaintsIndex = 8;
 	public const int pitSecondEntranceNoteIndex = 9;
 	public const int pitClosureNoteIndex = 10;
+	public const int directorsJournalIndex = 11;
 
     #region Weapon Keys
 
@@ -348,6 +349,7 @@ public static class ItemList
 		books.Add(new BookItem(new ItemListID(bookListIndex, saintsAndSaintsIndex), BookList.saintsAndSaintsKey, "A rolled piece of tanned bark. To read the contents hidden within, it must be unrolled carefully to prevent it from tearing.", saintsAndSaintsIndex, new string[] { }));
 		books.Add(new BookItem(new ItemListID(bookListIndex, pitSecondEntranceNoteIndex), BookList.pitSecondEntranceNoteKey, "A quick note, jotted in a shaky hand.", pitSecondEntranceNoteIndex, new string[] {BookList.pitSecondEntranceNoteReadFlag}, QuestNameList.rescueBroglinQuestTitle, QuestNameList.rescueBroglinStepTitleThree));
 		books.Add(new BookItem(new ItemListID(bookListIndex, pitClosureNoteIndex), BookList.pitClosureNoteKey, "A quick note, jotted in a shaky hand.", pitClosureNoteIndex, new string[] {BookList.pitClosureNoteReadFlag}));
+		books.Add(new BookItem(new ItemListID(bookListIndex, directorsJournalIndex), BookList.directorsJournalKey, "A small, tidy journal. The pages are filled with long, caligraphic characters scrawled with much patience.", directorsJournalIndex, new string[] {BookList.directorsJournalReadFlag}));
 
 
 		allItems.Add(usableItems);          // listIndex = 0

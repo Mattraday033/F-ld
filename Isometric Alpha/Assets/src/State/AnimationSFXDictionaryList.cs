@@ -86,4 +86,14 @@ public static class AnimationSFXDictionaryList
 
     #endregion
 
+    #region Saints
+
+    public readonly static Dictionary<CharacterAnimationType, string> stoneSaintAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    {
+        [CharacterAnimationType.Attack_Normal] = AudioClipList.rockIntroSFX,
+        [CharacterAnimationType.Death] = AudioClipList.rockIntroSFX
+    };
+
+    #endregion
+
 }

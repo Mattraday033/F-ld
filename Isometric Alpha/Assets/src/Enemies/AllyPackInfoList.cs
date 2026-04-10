@@ -35,6 +35,13 @@ public static class AllyPackInfoList
         switch(MapObjectList.getCurrentZoneKey())
         {
             case ZoneKeyList.pit:
+                switch(AreaManager.locationName)
+                {
+                    case ZoneKeyList.pit + LocationNameList.section1a:
+                        return campSlaveAllies;
+                    default:
+                        return null;
+                }
             case ZoneKeyList.lovashiCamp:
             case ZoneKeyList.manseFirstFloor:
             case ZoneKeyList.manseSecondFloor:

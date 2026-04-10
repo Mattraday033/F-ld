@@ -84,10 +84,10 @@ public class EvolveAbility : Ability
 		base.setActor(actor);
 		actionWhenInAttackMode.setActor(actor);
 		
-		if (actor != null)
-		{
-			Debug.LogError("setActor to " + actor.position.ToString());
-		}
+		// if (actor != null)
+		// {
+		// 	Debug.LogError("setActor to " + actor.position.ToString());
+		// }
 	}
 	
 	/*public override void setTargetCoords(GridCoords newTargetCoords)

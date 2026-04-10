@@ -420,7 +420,8 @@ public static class SpawnParamsList
         #region Guard Punishment Scene
 
         StartSpawningAllTrueFlagList guardPunishmentCrowdStartSpawning = new StartSpawningAllTrueFlagList(new string[] { FlagNameList.directorDefeated, FlagNameList.mineLvl3CarterAndNandorInParty });
-        StopSpawningFlagList guardPunishmentCrowdStopSpawning = new StopSpawningFlagList(new string[] { FlagNameList.spokeWithNandorAfterPrisoners, FlagNameList.foughtCrowdForTabor });
+        StopSpawningFlagList guardPunishmentCrowdStopSpawning = new StopSpawningFlagList(new string[] { FlagNameList.spokeWithNandorAfterPrisoners, FlagNameList.foughtCrowdForTabor, FlagNameList.nandorDispersedCrowd });
+        StopSpawningFlagList crowdDispersed = new StopSpawningFlagList(new string[]{FlagNameList.nandorDispersedCrowd});
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave),
                                new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
@@ -471,7 +472,7 @@ public static class SpawnParamsList
                                                             new StartSpawningAllTrueFlagList(new string[]   { 
                                                                                                                 FlagNameList.directorDefeated, 
                                                                                                                 FlagNameList.mineLvl3CarterAndNandorInParty
-                                                                                                            })));
+                                                                                                            })), crowdDispersed);
 
             interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.ervin),
                                     pazmanErvinPunishmentSpawnParams);
@@ -488,7 +489,7 @@ public static class SpawnParamsList
                                                         new StartSpawningAllTrueFlagList(new string[]   { 
                                                                                                             FlagNameList.directorDefeated, 
                                                                                                             FlagNameList.mineLvl3CarterAndNandorInParty
-                                                                                                        }))));
+                                                                                                        })), crowdDispersed));
         #endregion
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.marcos),
@@ -501,7 +502,7 @@ public static class SpawnParamsList
                                                     new StartSpawningAllTrueFlagList(new string[]   { 
                                                                                                         FlagNameList.directorDefeated, 
                                                                                                         FlagNameList.mineLvl3CarterAndNandorInParty
-                                                                                                    }))));
+                                                                                                    })), crowdDispersed));
 
         InteractableSpawnParams andrasJanosPunishmentSpawnParams = new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
                                                                                                     { 
@@ -512,7 +513,7 @@ public static class SpawnParamsList
                                                     new StartSpawningAllTrueFlagList(new string[]   { 
                                                                                                         FlagNameList.directorDefeated, 
                                                                                                         FlagNameList.mineLvl3CarterAndNandorInParty
-                                                                                                    })));
+                                                                                                    })), crowdDispersed);
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.andras),
                                         new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
@@ -535,7 +536,7 @@ public static class SpawnParamsList
                                                     new StartSpawningAllTrueFlagList(new string[]   { 
                                                                                                         FlagNameList.directorDefeated, 
                                                                                                         FlagNameList.mineLvl3CarterAndNandorInParty,
-                                                                                                    }))));
+                                                                                                    })), crowdDispersed));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.chiefTabor),
                                         new InteractableSpawnParams(new StartSpawningAllTrueMetaFlagList(new string[]    
@@ -942,6 +943,13 @@ public static class SpawnParamsList
         #endregion
 
         #region Manse-2F
+
+        #region Manse-2F-1b
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseSecondFloor + LocationNameList.section1b, NPCNameList.diary),
+                                        new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { BookList.directorsJournalReadFlag}),spawnWhileHostile: spawnWhileHostile));
+
+        #endregion
 
         #region Manse-2F-2c
 
