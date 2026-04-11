@@ -182,7 +182,7 @@ public class NotificationManager : MonoBehaviour
 
 public enum GenericNotificationType { Alert, Update }
 
-public class Notification : IDescribable
+public class Notification : ISortable
 {
     private GenericNotificationType type;
     private string notificationName;
@@ -303,4 +303,44 @@ public class Notification : IDescribable
     {
         return false;
     }
+
+    #region ISortable
+
+    public int getQuantity()
+    {
+        return 1;
+    }
+
+    public int getWorth()
+    {
+        return 1;
+    }
+
+    public string getType()
+    {
+        return type.ToString();
+    }
+
+    public string getSubtype()
+    {
+        return type.ToString();
+    }
+
+    public int getLevel()
+    {
+        return 1;
+    }
+
+    public int getNumber()
+    {
+        switch(type)
+        {
+            case GenericNotificationType.Alert:
+                return Constants.sizeThree;
+            default:
+                return Constants.sizeOne;
+        }
+    }
+
+    #endregion
 }

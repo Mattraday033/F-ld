@@ -222,7 +222,7 @@ public class FadeBackInTransition : FullScreenTransition
 public abstract class CircleTransition : ScreenFade
 {
     protected const float minimumScale = 0.01f;
-    protected const float maximumScale = 22.5f;
+    protected const float maximumScale = 25.875f;
     protected const float transitionTimeSeconds = 1.25f;
     protected float currentScale = 0f;
 

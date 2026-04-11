@@ -8,7 +8,7 @@ public interface IJournalSubcategory : IDescribable
 }
 
 [System.Serializable]
-public class QuestStep : IJournalSubcategory, IDescribableInBlocks
+public class QuestStep : IJournalSubcategory, IDescribableInBlocks, ISortable
 {
 	private const string questCompletedPrefix = "Quest Complete: ";
 	private const string questFailedPrefix = "Quest Failed: ";
@@ -220,4 +220,47 @@ public class QuestStep : IJournalSubcategory, IDescribableInBlocks
     {
         return false;
     }
+
+    #region ISortable
+
+    public int getQuantity()
+    {
+        return 1;
+    }
+
+    public int getWorth()
+    {
+        return 1;
+    }
+
+    public string getType()
+    {
+        return "QuestStep";
+    }
+
+    public string getSubtype()
+    {
+        return "QuestStep";
+    }
+
+    public int getLevel()
+    {
+        return 1;
+    }
+
+    public int getNumber()
+    {
+        if(parentQuest.finished && !parentQuest.succeeded)
+        {
+            return Constants.sizeFour;
+        } else if(parentQuest.finished && parentQuest.succeeded)
+        {
+            return Constants.sizeTwo;
+        } else
+        {
+            return Constants.sizeOne;
+        }
+    }
+
+    #endregion
 }

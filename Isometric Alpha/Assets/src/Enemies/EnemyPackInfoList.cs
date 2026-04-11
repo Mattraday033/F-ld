@@ -114,7 +114,7 @@ public static class EnemyPackInfoList
                                                                                                         xpDrop: 100);
 
     public readonly static BossPackInfo taborManseSecondFloorFight = new BossPackInfo(new CreatureAmount[] { 
-                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                        EnemyAmountList.chiefTabor
                                                                                                        },
                                                                                                         DropTableList.lovashiGuardsDTKey,
                                                                                                         FlagNameList.killedTaborInManse);

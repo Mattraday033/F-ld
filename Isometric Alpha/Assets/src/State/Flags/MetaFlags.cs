@@ -38,11 +38,11 @@ public static class MetaFlags
     
         metaFlags[MetaFlagNameList.failedToConvinceSlavesToHelpYou] =  !Flags.getFlag(FlagNameList.convincedSlavesToHelpYou) && Flags.getFlag(FlagNameList.hadSlavesAfterKillingOverseerCampNEConvo);
     
-        metaFlags[MetaFlagNameList.attackedBarricadeSlaveSpawnGroup1] = !Flags.getFlag(FlagNameList.attackedBarricadeHeadOn);
-        metaFlags[MetaFlagNameList.taborSurrenderedSlaveSpawnGroup2] = Flags.getFlag(FlagNameList.acceptedTaborsSurrenderAfterDirectorFight) || (Flags.getFlag(FlagNameList.killedTaborInManse) && !Flags.getFlag(FlagNameList.attackedTabor));
-        metaFlags[MetaFlagNameList.secretPassageIntoOfficeSlaveSpawnGroup3] = !MonsterDefeatKeysList.monsterDefeatKeysDict.ContainsKey(ZoneKeyList.manseSecondFloor + LocationNameList.office +"-"+ 0);
-        metaFlags[MetaFlagNameList.janosAcceptingPrisonersSlaveSpawnGroup4] = Flags.getFlag(FlagNameList.acceptingGuardPrisoners);
-        metaFlags[MetaFlagNameList.toolBundleSlaveSpawnGroup5] = Flags.getFlag(FlagNameList.broughtToolsToConvinceSlaves) && Flags.getFlag(FlagNameList.convincedSlavesToHelpYou);
+        metaFlags[MetaFlagNameList.attackedBarricadeSlaveSpawnGroup1] = !Flags.getFlag(FlagNameList.attackedBarricadeHeadOn) && !Flags.getFlag(FlagNameList.wormsAttackedCamp);
+        metaFlags[MetaFlagNameList.taborSurrenderedSlaveSpawnGroup2] = (Flags.getFlag(FlagNameList.acceptedTaborsSurrenderAfterDirectorFight) || (Flags.getFlag(FlagNameList.killedTaborInManse) && !Flags.getFlag(FlagNameList.attackedTabor))) && !Flags.getFlag(FlagNameList.wormsAttackedCamp);
+        metaFlags[MetaFlagNameList.secretPassageIntoOfficeSlaveSpawnGroup3] = !MonsterDefeatKeysList.monsterDefeatKeysDict.ContainsKey(ZoneKeyList.manseSecondFloor + LocationNameList.office +"-"+ 0) && !Flags.getFlag(FlagNameList.wormsAttackedCamp);
+        metaFlags[MetaFlagNameList.janosAcceptingPrisonersSlaveSpawnGroup4] = Flags.getFlag(FlagNameList.acceptingGuardPrisoners) && !Flags.getFlag(FlagNameList.wormsAttackedCamp);
+        metaFlags[MetaFlagNameList.toolBundleSlaveSpawnGroup5] = Flags.getFlag(FlagNameList.broughtToolsToConvinceSlaves) && Flags.getFlag(FlagNameList.convincedSlavesToHelpYou) && !Flags.getFlag(FlagNameList.wormsAttackedCamp);
         metaFlags[MetaFlagNameList.convincedImreSlaveSpawnGroup6] = Flags.getFlag(FlagNameList.convincedImre) && Flags.getFlag(FlagNameList.foughtKendeInManseKitchen);
     }
 

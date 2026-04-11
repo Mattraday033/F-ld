@@ -210,6 +210,7 @@ public static class QuestNameList
     public const string sealingTheBreachStepTitleSeven = "Márcos Sealed the Breach.";
     public const string sealingTheBreachStepTitleEight = "Some Guards Surrendered.";
     public const string sealingTheBreachStepTitleNine = "The Guards Are Dead.1";
+    public const string sealingTheBreachStepTitleTen = "The worms are free.";
 
     // Stockhouse Stash
     public const string stockhouseStashQuestTitle = "Stockhouse Stash";

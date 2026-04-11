@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class ChaoticTargetPriorityTrait : TargetPriorityTrait
 {
-	private const string initialName = "Chaotic";
-	private const string initialTraitDescription = "This creature chooses it's targets at random. Ignores summons.";
-	private const string initialTraitIconName = "Dice";
+	public const string initialName = "Chaotic";
+	public const string initialTraitDescription = "This creature chooses it's targets at random. Ignores summons.";
+	public const string initialTraitIconName = "Dice";
 	
 	public ChaoticTargetPriorityTrait(): base(initialName, initialTraitDescription, initialTraitIconName)
 	{
@@ -29,7 +29,7 @@ public class ChaoticTargetPriorityTrait : TargetPriorityTrait
 		{
 			int index = UnityEngine.Random.Range(0, listOfTargets.Count);
 			
-			mandatoryTarget = (Stats) listOfTargets[index];
+			mandatoryTarget = listOfTargets[index];
 		} 
 		
 		return mandatoryTarget;
@@ -42,6 +42,48 @@ public class ChaoticTargetPriorityTrait : TargetPriorityTrait
 		foreach(Stats target in listOfTargets)
 		{
 			if(!target.isSummon())
+			{
+				newListOfTargets.Add(target);
+			}
+		}
+		
+		return newListOfTargets;
+	}
+}
+
+public class NonMasterChaoticTargetPriorityTrait : TargetPriorityTrait
+{
+	public NonMasterChaoticTargetPriorityTrait(): 
+    base( ChaoticTargetPriorityTrait.initialName,
+          ChaoticTargetPriorityTrait.initialTraitDescription,
+          ChaoticTargetPriorityTrait.initialTraitIconName)
+	{
+		
+	}
+	
+	public override Stats getMandatoryTarget(List<Stats> listOfTargets)
+	{
+		listOfTargets = scrubMastersFromTargetList(listOfTargets);
+		
+		Stats mandatoryTarget = base.getMandatoryTarget(listOfTargets);
+		
+		if(mandatoryTarget == null)
+		{
+			int index = UnityEngine.Random.Range(0, listOfTargets.Count);
+			
+			mandatoryTarget = listOfTargets[index];
+		} 
+
+		return mandatoryTarget;
+	}
+	
+	private List<Stats> scrubMastersFromTargetList(List<Stats> listOfTargets)
+	{
+		List<Stats> newListOfTargets = new List<Stats>();
+
+		foreach(Stats target in listOfTargets)
+		{
+			if(target != null && target.isSummon() || target.isMinion())
 			{
 				newListOfTargets.Add(target);
 			}

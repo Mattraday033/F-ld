@@ -60,6 +60,11 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 	
 	public static void instateEnvironmentalCombatAction(Stats actorStats)
 	{
+        if(actorStats == null)
+        {
+            return;
+        }
+
         CombatAction envCombatAction;
         Trait targetingTrait;
 
@@ -79,6 +84,19 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
                 envCombatAction = AbilityList.getAbility(actorStats, AbilityList.stoneSaintMaterialsSummonKey);
                 targetingTrait = TraitList.emptyGenerated2;
                 break;
+            case NPCNameList.chiefTabor:
+
+                envCombatAction = AbilityList.getAbility(actorStats, AbilityList.frontHandKey);
+                targetingTrait = TraitList.chaotic;
+
+                envCombatAction.setActor(actorStats);
+                environmentalCombatActions.Add(envCombatAction.clone(), targetingTrait.clone());
+
+                envCombatAction = AbilityList.getAbility(actorStats, AbilityList.backHandKey);
+                
+                envCombatAction.setActor(actorStats);
+                environmentalCombatActions.Add(envCombatAction.clone(), targetingTrait.clone());
+                return;
             default:
                 return;
         }

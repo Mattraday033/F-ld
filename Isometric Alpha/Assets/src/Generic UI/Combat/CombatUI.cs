@@ -38,6 +38,11 @@ public class CombatUI : MonoBehaviour
 		getInstance().resolveTurnButton.interactable = CombatStateManager.canResolveTurn();
 	}
 
+	public static void setResolveTurnButtonInteractable(bool interactable)
+	{
+		getInstance().resolveTurnButton.interactable = interactable;
+	}
+
     public static void setCurrentActivityText(CurrentActivity currentActivity)
     {
         

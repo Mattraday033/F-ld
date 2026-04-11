@@ -740,6 +740,15 @@ public class CombatStateManager : MonoBehaviour
 			yield break;
 		}
 
+		CombatUI.setResolveTurnButtonInteractable(false);
+
+		while(FadeToBlackManager.isMidScreenFade())
+		{
+			yield return null;
+		}
+
+		yield return new WaitForSeconds(0.1f);
+
 		updateTurnState(WhoseTurn.Resolving);
 		CombatActionManager.lockInCombatActionOrder();
 		SelectorManager.deactivateCombatantInfoUIHoverPanel();

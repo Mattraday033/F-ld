@@ -1014,7 +1014,14 @@ public static class DialogueList
         #region Manse-2f
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section2c, NPCNameList.chiefTabor,
-                                new Dialogue(new string[]   { NPCNameList.chiefTabor }, 
+                                new Dialogue(new string[]   {   
+                                                                NPCNameList.playerNamePlaceHolder,
+                                                                NPCNameList.chiefTabor,
+                                                                NPCNameList.nandor,
+                                                                NPCNameList.carter,
+                                                                NPCNameList.slave,
+                                                                NPCNameList.noBrand
+                                                                 }, 
                                  Resources.Load<TextAsset>(DialogueNameList.chiefTaborManseSecondFloorPathName),
                                  DialogueCombatInfoList.taborCombatInfo));
 

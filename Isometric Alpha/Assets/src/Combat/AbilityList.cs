@@ -134,8 +134,10 @@ public static class AbilityList
 	public const string turnUpTheHeatKey = "Turn Up The Heat";
 	public const string shoreUpKey = "Shore Up";
 	public const string shatterKey = "Shatter";
+
 	public const string frontHandKey = "Front Hand";
 	public const string backHandKey = "Back Hand";
+	public const string takeHostageKey = "Take Hostage";
 
 
 	public const string chargeKey = "Charge";
@@ -260,8 +262,9 @@ public static class AbilityList
         enemyAbilityDictionary.Add(turnUpTheHeatKey, new Ability(CombatActionSettings.build(DescriptionParams.build(turnUpTheHeatKey, "Kende cooks his targets until they're seared on the outside but pink in the middle, making them delectable targets for his allies.", "Roasted"), DamageParams.build("12"), TargetParams.build(Range.boxThreeIndex), TraitList.roasted)));
         // enemyAbilityDictionary.Add(shoreUpKey, new MissesArePunishedAbility(CombatActionSettings.build(DescriptionParams.build(shoreUpKey, "The Captain shores up the defenses of her subordinates. If she has a target, she will heal and protect them. If she has no target, she will hurt herself instead.", "Shielded"), DamageParams.build("10", "15"), TraitList.shoredUp)));
         enemyAbilityDictionary.Add(shatterKey, new Ability(CombatActionSettings.build(DescriptionParams.build(shatterKey, "A destructive strike with an enormous area."), DamageParams.build("38", "5"), TargetParams.build(Range.boxTwoIndex), AnimationParams.build(EffectAnimationType.Blunt))));
-        enemyAbilityDictionary.Add(frontHandKey, new Ability(CombatActionSettings.build(DescriptionParams.build(frontHandKey, "A torrent of blows that prevents its targets from attacking.", "Lashings"), DamageParams.build("6", "1"), TargetParams.build(Range.verticalThreeIndex), TraitList.whiplash)));
-        enemyAbilityDictionary.Add(backHandKey, new Ability(CombatActionSettings.build(DescriptionParams.build(backHandKey, "A painful flurry of lashes.", "Lashings"), DamageParams.build("12", "50"), TargetParams.build(Range.horizontalThreeIndex))));
+        enemyAbilityDictionary.Add(frontHandKey, new Ability(CombatActionSettings.build(DescriptionParams.build(frontHandKey, "A torrent of blows that prevents its targets from attacking.", "Lashings"), DamageParams.build("30", "1"), TargetParams.build(Range.verticalThreeIndex), TraitList.whiplash)));
+        enemyAbilityDictionary.Add(backHandKey, new Ability(CombatActionSettings.build(DescriptionParams.build(backHandKey, "A painful flurry of lashes.", "Lashings"), DamageParams.build("20", "50"), TargetParams.build(Range.horizontalThreeIndex), TraitList.wounded)));
+        enemyAbilityDictionary.Add(takeHostageKey, new TakeHostageAbility(CombatActionSettings.build(DescriptionParams.build(takeHostageKey, "Tabor grabs one of his enemies and uses them as a shield", "Lashings"), DamageParams.build("60", "50"))));
 
 		//Horse Abilities
 		enemyAbilityDictionary.Add(chargeKey, new Ability(CombatActionSettings.build(DescriptionParams.build(chargeKey, "The creature rushes headlong at it's foe, crushing them underfoot."), DamageParams.build("26", "20"), TargetParams.build(Range.verticalThreeIndex), AnimationParams.build(EffectAnimationType.Blunt))));
@@ -278,7 +281,7 @@ public static class AbilityList
 	
 	private static void instantiateStatAbilities()
 	{
-		statAbilityDictionary = new Dictionary<string,Ability>();
+		statAbilityDictionary = new Dictionary<string,Ability>();  
 		string currentKey;
 
         //start of Str Abilities

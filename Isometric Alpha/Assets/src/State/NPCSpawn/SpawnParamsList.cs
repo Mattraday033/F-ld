@@ -10,6 +10,9 @@ public static class SpawnParamsList
     private readonly static InteractableSpawnParams noNameParams = new InteractableSpawnParams(spawnWhileHostile: spawnWhileHostile);
     private readonly static InteractableSpawnParams spawnOnlyWhenHostileParams = new InteractableSpawnParams(spawnWhileHostile: spawnWhileHostile, onlySpawnWhileHostile: onlySpawnWhileHostile);
 
+    private readonly static StartSpawningAllTrueFlagList guardPunishmentCrowdStartSpawning = new StartSpawningAllTrueFlagList(new string[] { FlagNameList.directorDefeated, FlagNameList.mineLvl3CarterAndNandorInParty });
+    private readonly static StopSpawningFlagList guardPunishmentCrowdStopSpawning = new StopSpawningFlagList(new string[] { FlagNameList.spokeWithNandorAfterPrisoners, FlagNameList.foughtCrowdForTabor, FlagNameList.nandorDispersedCrowd });
+    public readonly static InteractableSpawnParams guardPunishmentCrowdSpawnParams = new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning);
     private static Dictionary<KeyValuePair<string, string>, InteractableSpawnParams> interactableSpawnParamsDict;
 
     #region Reusable Variables
@@ -198,7 +201,6 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.guardHouseNorthEast, NPCNameList.barracksGate), barracksGateSpawnParams);
 
         #endregion
-
         #region Guard House SW
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.guardHouseSouthWest, NPCNameList.barracksGate), barracksGateSpawnParams);
@@ -215,7 +217,6 @@ public static class SpawnParamsList
                                 new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning));
 
         #endregion
-
         #region Stables
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.stables, NPCNameList.beam),
@@ -229,7 +230,6 @@ public static class SpawnParamsList
                                 new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning));
 
         #endregion
-
         #region Stockhouse
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.stockhouse, NPCNameList.uros),
@@ -326,7 +326,6 @@ public static class SpawnParamsList
         #endregion
 
         #endregion
-
         #region Camp Center
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.csalan),
@@ -394,7 +393,6 @@ public static class SpawnParamsList
                                                                                                             })));
 
         #endregion
-
         #region Camp South East
 
         string[] directorStatueBrokenConditions = new string[]  { 
@@ -419,18 +417,16 @@ public static class SpawnParamsList
 
         #region Guard Punishment Scene
 
-        StartSpawningAllTrueFlagList guardPunishmentCrowdStartSpawning = new StartSpawningAllTrueFlagList(new string[] { FlagNameList.directorDefeated, FlagNameList.mineLvl3CarterAndNandorInParty });
-        StopSpawningFlagList guardPunishmentCrowdStopSpawning = new StopSpawningFlagList(new string[] { FlagNameList.spokeWithNandorAfterPrisoners, FlagNameList.foughtCrowdForTabor, FlagNameList.nandorDispersedCrowd });
         StopSpawningFlagList crowdDispersed = new StopSpawningFlagList(new string[]{FlagNameList.nandorDispersedCrowd});
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave),
-                               new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
+                               guardPunishmentCrowdSpawnParams);
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.crowd),
-                               new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
+                               guardPunishmentCrowdSpawnParams);
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.clay),
-                               new InteractableSpawnParams(guardPunishmentCrowdStartSpawning, guardPunishmentCrowdStopSpawning));
+                               guardPunishmentCrowdSpawnParams);
 
         #region Conditional Slave Spawn Groups
 

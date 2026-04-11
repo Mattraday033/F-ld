@@ -72,6 +72,8 @@ VAR hadSlavesAfterKillingOverseerCampNEConvo = false
 VAR hadLeaderConversation = false
 VAR mineLvl2GateToLevel3Opened = false
 VAR mineLvl3BreachSealed = false
+VAR mineLvl3ToldToFindMarcos = false
+VAR broughtMarcosToGaspar = false
 
 VAR explainingPlan = false
 VAR backTo6cza = false
@@ -2425,6 +2427,12 @@ setToTrue(kastorStartedRevolt)
 {
 -mineLvl2GateToLevel3Opened and not mineLvl3BreachSealed:
 setToTrue(wormsAttackedCamp)
+finishQuest(Sealing the Breach,false,The worms are free.) 
+
+    {
+    -mineLvl3ToldToFindMarcos and not broughtMarcosToGaspar:
+    finishQuest(Find Guard Márcos,false,Brought to Kastor.)
+    }
 }
 
 {

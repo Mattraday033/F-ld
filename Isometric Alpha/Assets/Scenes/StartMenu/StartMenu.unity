@@ -485,10 +485,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio Listener
       objectReference: {fileID: 0}
+    - target: {fileID: 6445371361917128788, guid: 89ca9784cbedc7346a728dcfb19427b9,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7584638191082086071, guid: 89ca9784cbedc7346a728dcfb19427b9,
         type: 3}
       propertyPath: m_Name
       value: Footsteps
+      objectReference: {fileID: 0}
+    - target: {fileID: 7987939131051227701, guid: 89ca9784cbedc7346a728dcfb19427b9,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

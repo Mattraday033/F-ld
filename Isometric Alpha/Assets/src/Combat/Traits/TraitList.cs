@@ -79,6 +79,7 @@ public static class TraitList
 	public readonly static SpecificTargetPriorityTrait specificBoxTwoTwoRightCornerEnemySide = new SpecificTargetPriorityTrait("(1,2)", "SpecificTargetPriorityTrait", "", new GridCoords(1, 2));
 
 	public readonly static Trait chaotic = new ChaoticTargetPriorityTrait();
+	public readonly static Trait nonMasterChaotic = new NonMasterChaoticTargetPriorityTrait();
 	public readonly static Trait clockwiseFourCornersEnemySide = new ClockwiseTargetPriorityTrait(fourCornersEnemySide);
 	public readonly static Trait empty = new EmptyTargetPriorityTrait();
 	public readonly static Trait emptyGenerated2 = new GeneratedTargetPriorityTrait((TargetPriorityTrait)empty, 2);

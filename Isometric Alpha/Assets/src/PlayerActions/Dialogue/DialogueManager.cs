@@ -896,11 +896,24 @@ public class DialogueManager : MonoBehaviour
                             case "attack_normal_front":
                                 targetAnimationManager.playAttackAnimation();
                                 break;
+                            case "idle_back":
+                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Idle_Back);
+                                break;
+                            case "ooc_idle_back":
+                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.OOC_Idle_Back);
+                                break;
+                            case "idle_front":
+                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Idle_Front);
+                                break;
                             case "ooc_idle_front":
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.OOC_Idle_Front);
                                 break;
                             case "death_back":
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Back);
+                                break;
+                            case "death_front":
+                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Front);
+                                targetAnimationManager.playDeathAnimationThenHide();
                                 break;
                             case "standup":
                                 targetAnimationManager.playAnimation(CharacterAnimationType.StandUp);
@@ -911,6 +924,60 @@ public class DialogueManager : MonoBehaviour
                     continueStory();
 
                     break;
+
+                case "playanimationthenfade":
+
+                    if (dialogueTrackerWindow != null)
+                    {
+                        dialogueTrackerWindow.gameObject.SetActive(false);
+                    }
+
+                    camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
+                    string animThenFadeArg = getArgument(buffer, Constants.indexOne);
+
+                    targetAnimationManager = currentDialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
+
+                    if(targetAnimationManager != null)
+                    {
+                        CharacterAnimationType animThenFadeType = CharacterAnimationType.None;
+
+                        switch (animThenFadeArg.ToLower().Replace(" ",""))
+                        {
+                            case "attack_normal_front":
+                                animThenFadeType = CharacterAnimationType.Attack_Normal_Front;
+                                break;
+                            case "attack_normal":
+                                animThenFadeType = CharacterAnimationType.Attack_Normal;
+                                break;
+                            case "death_front":
+                                animThenFadeType = CharacterAnimationType.Death_Front;
+                                break;
+                            case "death_back":
+                                animThenFadeType = CharacterAnimationType.Death_Back;
+                                break;
+                            case "standup":
+                                animThenFadeType = CharacterAnimationType.StandUp;
+                                break;
+                            case "wounded":
+                                animThenFadeType = CharacterAnimationType.Wounded;
+                                break;
+                        }
+
+                        if(animThenFadeType != CharacterAnimationType.None)
+                        {
+                            StartCoroutine(playAnimationThenFadeToBlack(targetAnimationManager, animThenFadeType));
+                        }
+                        else
+                        {
+                            continueStory();
+                        }
+                    }
+                    else
+                    {
+                        continueStory();
+                    }
+
+                    return;
 
                 case "playdelayedanimation":
                 case "playanimationwithdelay":
@@ -954,6 +1021,9 @@ public class DialogueManager : MonoBehaviour
                         case "whip":
                             audioClip = AudioClipList.whipAttackSound;
                             break;
+                        case "maledeath":
+                            audioClip = AudioClipList.maleHumanDeathSound;
+                            break;
                         default:
                             audioClip = npcSFXArgs;
                             break;
@@ -967,6 +1037,21 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
+                case "playcrowdambience":
+
+                    AudioManager.playCrowdAmbience();
+
+                    continueStory();
+
+                    break;
+
+                case "endambience":
+
+                    AudioManager.endAmbience();
+
+                    continueStory();
+
+                    break;
 
                 case "adjustgridsquare":
 
@@ -1258,7 +1343,10 @@ public class DialogueManager : MonoBehaviour
 
                     State.enteredCombatFromDialogue = true;
 
-                    SceneChange.changeSceneToCombat();
+                    framingTransposer.m_XDamping = dialogueXDamping * 1.75f;
+                    framingTransposer.m_YDamping = dialogueYDamping * 1.75f;
+                    mainCM.Follow = PlayerObject.getInstanceTransform();
+                    StartCoroutine(waitForCombatTransitionThenLoadCombat());
                     break;
 
                 case "activatehostilityscript":
@@ -1624,6 +1712,33 @@ public class DialogueManager : MonoBehaviour
 		StopCoroutine(getInstance().tutorialWaitCoroutine);
 	}
 
+	private IEnumerator waitForCombatTransitionThenLoadCombat()
+	{
+		Transform playerTransform = PlayerObject.getInstanceTransform();
+		Vector3 cameraPos = mainCamera.transform.position;
+		Vector3 playerPos = playerTransform.position;
+
+		while(Mathf.Abs(cameraPos.x - playerPos.x) > 0.23f || Mathf.Abs(cameraPos.y - playerPos.y) > 0.23f)
+		{
+			yield return null;
+			cameraPos = mainCamera.transform.position;
+			playerPos = playerTransform.position;
+		}
+
+		yield return new WaitForSeconds(0.05f);
+
+		FadeToBlackManager.startCombatTransition(playerTransform);
+
+		while(PlayerOOCStateManager.currentActivity != OOCActivity.preCombat)
+		{
+			yield return null;
+		}
+
+		setCameraToDefaultSpeed();
+		PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+		SceneChange.changeSceneToCombat();
+	}
+
 	private IEnumerator handleDialogueUIDuringFadeOut(bool setDialogueUIActiveAfterFadeIn, bool continueAfterTransparent)
 	{
 
@@ -1784,6 +1899,19 @@ public class DialogueManager : MonoBehaviour
 
         return story;
 	}
+
+    private IEnumerator playAnimationThenFadeToBlack(AnimationManager targetAnimationManager, CharacterAnimationType animationType)
+    {
+        float animLength = targetAnimationManager.getAnimationLength(animationType);
+        targetAnimationManager.playAnimation(animationType);
+
+        yield return new WaitForSeconds(animLength + 1f);
+
+        fadeToBlackManager.setAndStartFadeToBlack();
+        waitingOnFadeToBlack = true;
+
+        StartCoroutine(handleDialogueUIDuringFadeOut(true, true));
+    }
 
     private static IEnumerator waitThenPlayAnimation(float secondsToWait, AnimationDelegate<AnimationManager> playAnimation, AnimationManager animationManager)
     {

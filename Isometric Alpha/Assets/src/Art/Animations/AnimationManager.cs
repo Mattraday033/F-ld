@@ -82,6 +82,11 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             return;
         }
 
+        if(animancer.IsPlaying())
+        {
+            return;
+        }
+
         if(spriteSetByHeartBeat() && animancer.enabled)
         {
             haltAllAnimations();
@@ -460,6 +465,18 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         linkedStats.playAnimationSFX(CharacterAnimationType.Spawn);
     }
 
+    public float getAnimationLength(CharacterAnimationType type)
+    {
+        type = getFallBackAnimationType(type);
+
+        if (animationDict.ContainsKey(type))
+        {
+            return animationDict[type].length;
+        }
+
+        return 0f;
+    }
+
     public void playStandUpAnimation()
     {
         setCurrentIdle(CharacterAnimationType.OOC_Idle_Front);
@@ -486,7 +503,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public void playDeathAnimationThenHide()
     {
-        if(currentIdle != getDeathAnimationType())
+        if(currentIdle != getDeathAnimationType() && linkedStats != null)
         {
             linkedStats.playAnimationSFX(CharacterAnimationType.Death);
         }
@@ -964,6 +981,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             case CharacterAnimationType.Wounded_Front:
             case CharacterAnimationType.Wounded_Back:
                 return CharacterAnimationType.Wounded;
+            case CharacterAnimationType.Death:
+                return CharacterAnimationType.Death_Front;
             case CharacterAnimationType.Death_Front:
             case CharacterAnimationType.Death_Back:
                 return CharacterAnimationType.Death;

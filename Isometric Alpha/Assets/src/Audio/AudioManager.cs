@@ -160,7 +160,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private AudioSource musicSource;    
     [SerializeField]
-    private AudioSource footStepSource;
+    private AudioSource footStepSource;    
+    [SerializeField]
+    private AudioSource ambienceSource;
 
     public static List<KeyValuePair<string, VolumeType>> audioClipPathQueue;
     public static Dictionary<AudioClip, AudioSource> singletonAudioClips;
@@ -445,13 +447,41 @@ public class AudioManager : MonoBehaviour
         instance.StartCoroutine(playQueuedAudioClip(clip, type, source: source, destroy: false));
     }
 
+    public static void playSFXAsAmbience(string clipPath)
+    {
+        if(instance == null || instance.ambienceSource == null)
+        {
+            return;
+        }
+
+        instance.ambienceSource.volume = sfxVolumePlayerSetting * .9f;
+        instance.ambienceSource.clip = Resources.Load<AudioClip>(clipPath);
+        instance.ambienceSource.Play();
+    }
+
+    public static void endAmbience()
+    {
+        if(instance == null || instance.ambienceSource == null)
+        {
+            return;
+        }
+
+        instance.ambienceSource.Stop();
+        instance.ambienceSource.clip = null;
+    }
+
+
     #region Play Specific SFX/Music
+
+    public static void playCrowdAmbience()
+    {
+        playSFXAsAmbience(AudioClipList.crowdBackgroundSFX);
+    }
 
     public static void playDefeatMusic()
     {
         playMusicWithoutFade(AudioClipList.deathMusic);
     }
-
 
     public static void playBattleMusic()
     {
@@ -586,6 +616,8 @@ public class AudioManager : MonoBehaviour
         singletonAudioClips = new Dictionary<AudioClip, AudioSource>();
 
         HeartBeatManager.MediumHeartBeat.AddListener(playFootStep);
+
+        AreaManager.OnAreaSpawn.AddListener(AudioClipList.playLocationAmbience);
     }
 
 }
@@ -613,6 +645,10 @@ public static class AudioClipList
     public const string footstepFolderPath = SFXFolderPath + "Footsteps/";
 
     public const string footstepSFXFilePrefix = "FS";
+
+    public const string ambienceSFXFolder = SFXFolderPath + "Ambience/";
+
+    public const string crowdBackgroundSFX = ambienceSFXFolder + "Crowd";
 
     public const string miscSFXFolder = SFXFolderPath + "Misc/";
 
@@ -825,6 +861,21 @@ public static class AudioClipList
                     AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(humanMaleDialogueSFXFolder + dialogueIntroPrefix +
                                  Random.Range(Constants.indexOne, humanMaleIntroCount + 1)), VolumeType.Voice);
                 };
+        }
+    }
+
+    public static void playLocationAmbience()
+    {
+        switch(AreaManager.locationName)
+        {
+            case LocationNameList.campSouthEast:
+                if(SpawnParamsList.guardPunishmentCrowdSpawnParams.canSpawn(NPCNameList.slave))
+                {
+                    AudioManager.playCrowdAmbience();
+                } 
+                return;
+            default:
+                return;
         }
     }
 

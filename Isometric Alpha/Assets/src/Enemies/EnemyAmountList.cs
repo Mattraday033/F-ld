@@ -18,6 +18,7 @@ public static class EnemyAmountList
     public readonly static CreatureAmount guardVirag = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.guardVirag));
     public readonly static CreatureAmount overseerGaspar = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.overseerGaspar));
 
+    public readonly static CreatureAmount chiefTabor = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.chiefTabor));
     public readonly static CreatureAmount director = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.director));
     public readonly static CreatureAmount kende = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.kende));
 

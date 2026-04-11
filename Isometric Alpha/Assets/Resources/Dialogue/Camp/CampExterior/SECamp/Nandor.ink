@@ -726,6 +726,8 @@ deactivate({garchaIndex})
 deactivate({thatchIndex})
 
 setToTrue(crowdDispersed)
+updateNPCVisibility()
+endAmbience()
 
 fadeBackIn(60)
 

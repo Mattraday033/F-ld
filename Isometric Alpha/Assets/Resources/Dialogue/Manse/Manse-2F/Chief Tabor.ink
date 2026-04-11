@@ -11,7 +11,19 @@ VAR acceptedTaborsSurrenderAfterDirectorFight = false
 VAR directorDefeated = false
 VAR keptDirectorAlive = false
 
+VAR mineLvl3CarterAndNandorInParty = false
+VAR convincedSlavesToHelpYou = false
+VAR foughtKendeInManseKitchen = false
+VAR convincedImre = false
+
+
+VAR playerIndex = 0
 VAR taborIndex = 1
+VAR nandorIndex = 2
+VAR carterIndex = 3
+VAR slaveIndex = 4
+VAR noBrandIndex = 5
+
 VAR taborFightIndex = 0
 
 VAR playerName = ""
@@ -117,6 +129,25 @@ You're back, just as I thought. Stay where you are, or we're going to have a pro
         ->killTabor
 
 === 4a ===
+
+playAnimation({taborIndex},Idle_Front)
+playAnimation({playerIndex},Idle_Back)
+
+{
+-mineLvl3CarterAndNandorInParty:
+activate({nandorIndex})
+activate({carterIndex})
+}
+
+{
+-convincedSlavesToHelpYou:
+activate({slaveIndex})
+}
+
+{
+-convincedImre && foughtKendeInManseKitchen:
+activate({noBrandIndex})
+}
 
 You're back. And it sounds as if the fighting has stopped. The Director, is he...?
 
@@ -404,6 +435,7 @@ Of course I have. But your people have proven that there isn't.
 \*Tabor grits his teeth, and stays silent for an awkwardly long time.* 
 
     +\*Remove any weapons you are carrying.* Your method is pain. Mine is trust. Allow me to build it first by approaching, unarmed.
+        playAnimation({playerIndex},OOC_Idle_Back)
         ->9h
     +Fine. If you're not going to listen to reason then we will have it your way. <Combat>
         ~attackedTabor = true
@@ -443,6 +475,7 @@ fadeBackIn(60)
         
 === 9j ===
 
+playAnimation({taborIndex},OOC_Idle_Front)
 \*The Lovashi Chief looks as if every muscle in his body is fighting his mind as he turns his sword over and places it's hilt in your hand.*
 
     +Thank you. You are now my prisoner. Turn around and allow me to bind your hands. \*Lower your voice.* The others won't understand unless we make it look official.
@@ -484,7 +517,10 @@ fadeBackIn(60)
     activateQuestStep(An Uneasy Truce, Relinquish the power.)
 
     fadeToBlack()
-    
+    deactivate({nandorIndex})
+    deactivate({carterIndex})
+    deactivate({slaveIndex})
+    deactivate({noBrandIndex})
     deactivate({taborIndex})
     
     fadeBackIn(60)
@@ -497,12 +533,11 @@ setToFalse(letTaborLive)
 
 {
 -directorDefeated:
-    finishQuest(An Uneasy Truce, true, The hostilities never cease.1, true)
+    finishQuest(An Uneasy Truce, true, The hostilities never cease.1, {attackedTabor})
 -else:
-    finishQuest(An Uneasy Truce, true, The hostilities never cease., true)
+    finishQuest(An Uneasy Truce, true, The hostilities never cease., {attackedTabor})
 }
 
-kill({taborIndex})
 setToTrue(killedTaborInManse)
 
 {
@@ -510,6 +545,19 @@ setToTrue(killedTaborInManse)
     setToTrue(attackedTabor)
     ->Combat
 -else:
+killWithoutDeactivation({taborIndex})
+addDeathFlag(Tabor)
+
+playSFXWithDelay(MaleDeath,50)
+playAnimationThenFade({taborIndex},death_front)
+
+deactivate({nandorIndex})
+deactivate({carterIndex})
+deactivate({slaveIndex})
+deactivate({noBrandIndex})
+deactivate({taborIndex})
+
+fadeBackIn(60)
     ->Close
 }
 

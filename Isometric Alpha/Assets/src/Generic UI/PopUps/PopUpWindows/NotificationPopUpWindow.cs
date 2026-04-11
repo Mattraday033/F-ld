@@ -29,12 +29,25 @@ public class NotificationPopUpWindow : PageReaderPopUpWindow
 
     private void readInNotifications()
     {
+        List<ISortable> sortableNotificationQueue = new List<ISortable>();
+        List<IDescribable> nonsortableNotificationQueue = new List<IDescribable>();
         notificationQueue = new List<IDescribable>();
 
         foreach (IDescribable notification in NotificationManager.notificationQueue)
         {
-            notificationQueue.Add(notification);
+            if(notification as ISortable != null)
+            {
+                sortableNotificationQueue.Add(notification as ISortable);
+            } else
+            {
+                nonsortableNotificationQueue.Add(notification);
+            }
         }
+
+        sortableNotificationQueue.Sort(ComparerList.getComparer(SortBy.Number));
+
+        notificationQueue.AddRange(sortableNotificationQueue);
+        notificationQueue.AddRange(nonsortableNotificationQueue);
 
         NotificationManager.purgeNotifications();
     }
@@ -90,4 +103,5 @@ public class NotificationPopUpWindow : PageReaderPopUpWindow
 
         setCurrentPageObject(pageGameObject);
     }
+
 }

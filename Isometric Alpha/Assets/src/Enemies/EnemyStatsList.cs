@@ -124,6 +124,17 @@ new BuffChargeUpAbility(TraitList.coordinated, AbilityList.getAbility(null, Abil
                                                                                 },
                                                                                 animationAudioClipDictionary: AnimationSFXDictionaryList.femaleHumanAudioDictionary));
 
+        enemyStatsDict.Add(NPCNameList.chiefTabor, new EnemyStats(NPCNameList.chiefTabor,
+                                                                    Constants.fortyArmor,
+                                                                                            250,
+                                            AbilityList.getAbility(null, AbilityList.takeHostageKey),
+                                                                new Trait[] { 
+                                                                                TraitList.master,
+                                                                                TraitList.nonMasterChaotic,
+                                                                                TraitList.backLine
+                                                                            },
+                                                                            animationAudioClipDictionary: AnimationSFXDictionaryList.whipAudioDictionary));
+
         enemyStatsDict.Add(NPCNameList.barricade, new MultiAnimationEnemyStats(NPCNameList.barricade,
                                                                                 Constants.twentyFiveArmor,
                                                                                         125,

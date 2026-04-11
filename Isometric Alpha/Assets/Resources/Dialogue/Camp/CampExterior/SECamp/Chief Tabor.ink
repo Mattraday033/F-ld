@@ -479,6 +479,8 @@ We must not understand your meaning. You're not letting him go... are you?
     fadeToBlack(true, false)
 
     setToTrue(crowdDispersed)
+    endAmbience()
+    updateNPCVisibility()
     deactivate({crowdIndex})
     deactivate({clayIndex})
 
@@ -492,8 +494,9 @@ We must not understand your meaning. You're not letting him go... are you?
     \*The crowd seems happy enough to move on, and they begin to disperse.*
 
     fadeToBlack(true, false)
-
     setToTrue(crowdDispersed)
+    endAmbience()
+    updateNPCVisibility()
     deactivate({crowdIndex})
     deactivate({clayIndex})
 

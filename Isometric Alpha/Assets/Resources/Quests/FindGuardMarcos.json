@@ -13,6 +13,10 @@
 		{
 			"stepName": "Returned to Gáspár.",
 			"MapZone":"","MapLocation":"","journalDescription": "I have informed Overseer Gáspár that I located Márcos."
+		},
+		{
+			"stepName": "Brought to Kastor.",
+			"MapZone":"","MapLocation":"","journalDescription": "I brought Márcos to Kastor and have begun our revolution. I doubt  Gáspár will want to speak to Márcos now."
 		}
 	],
 

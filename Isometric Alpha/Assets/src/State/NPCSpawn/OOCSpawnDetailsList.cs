@@ -1495,6 +1495,11 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(3, -4), Facing.SouthWest, new KeyHalfScript()));
 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(-2,-3), NPCNameList.slave, Facing.NorthEast, animationType: CharacterAnimationType.Idle_Back));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.noBrand, new Vector3Int(-1,0), NPCNameList.noBrand, Facing.NorthEast, animationType: CharacterAnimationType.Idle_Back));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.nandor, new Vector3Int(-1,-4), NPCNameList.nandor, Facing.NorthEast, animationType: CharacterAnimationType.Idle_Back));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(-1,-1), NPCNameList.carter, Facing.NorthEast, animationType: CharacterAnimationType.Idle_Back));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section2c, list);
 
         #endregion

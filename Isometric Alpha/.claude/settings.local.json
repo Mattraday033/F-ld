@@ -4,7 +4,10 @@
       "Bash(sort -t= -k2 -n)",
       "Bash(grep -v \" PPU=100$\\\\| PPU=128$\\\\| PPU=200$\\\\| PPU=256$\" \"c:/Users/mattr/AppData/Local/Temp/sprite_ppu.txt\")",
       "Bash(grep \" PPU=100$\" \"c:/Users/mattr/AppData/Local/Temp/sprite_ppu.txt\")",
-      "Bash(xargs grep:*)"
+      "Bash(xargs grep:*)",
+      "Bash(xxd \"c:/Users/mattr/OneDrive/Documents/GitHub/F-ld/Isometric Alpha/Library/ScriptAssemblies/Assembly-CSharp.pdb\")",
+      "Bash(code --list-extensions)",
+      "Bash(code --list-extensions --show-versions)"
     ]
   }
 }

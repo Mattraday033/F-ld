@@ -278,6 +278,7 @@ public static class FlagNameList
         public const string mineLvl3GuardsBackToSurface = "mineLvl3GuardsBackToSurface";
         public const string mineLvl3SlavesBackToSurface = "mineLvl3SlavesBackToSurface";
         public const string mineLvl3ToldToFindMarcos = "mineLvl3ToldToFindMarcos";
+        public const string broughtMarcosToGaspar = "broughtMarcosToGaspar";
         public const string mineLvl3ThreatenedGaspar = "mineLvl3ThreatenedGaspar"; //took the strength dialogue option when convincing Overseer Gaspar to help you in the mine
         public const string mineLvl3ConvincedRekaAndPazman = "mineLvl3ConvincedRekaAndPazman"; //Convinced Guards Reka and Pazman to lay down their weapons
         public const string mineLvl3PromisedToProtectRekaAndPazman = "mineLvl3PromisedToProtectRekaAndPazman"; //Threatened Guard Reka and Pazman when taking them prisoner

@@ -442,6 +442,7 @@ So, that stubborn fool made it after all. What was his condition?
 
 === 3fb ===
 
+setToTrue(broughtMarcosToGaspar)
 finishQuest(Find Guard Márcos, true, Returned to Gáspár.)
 
 prepForItem()

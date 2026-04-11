@@ -63,6 +63,7 @@ VAR afterOverseerParentIndex = 11
 //depricated
 VAR thatchIndex = 11 
 
+playCrowdAmbience()
 
 setToTrue(hadSlavesAfterKillingOverseerCampNEConvo)
 
@@ -733,6 +734,8 @@ activateQuestStep(The Plan, Take your revenge.1)
 ->Close
 
 === Close ===
+
+endAmbience()
 
 close()
 
