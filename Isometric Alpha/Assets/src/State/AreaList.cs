@@ -249,7 +249,7 @@ public static class AreaList
 
         };
 
-        allAreas.Add(ZoneKeyList.mineLvl3, new Area(ZoneKeyList.mineLvl3, scenesInMineLvl3, areasSharingHostilityWithMineLvl3, AudioClipList.caveOne, hostility: startsHostile));
+        allAreas.Add(ZoneKeyList.mineLvl3, new Area(ZoneKeyList.mineLvl3, scenesInMineLvl3, areasSharingHostilityWithMineLvl3, AudioClipList.caveTwo, hostility: startsHostile));
 
         string[] scenesInManseFirstFloor = new string[]
         {
@@ -326,7 +326,7 @@ public static class AreaList
             ZoneKeyList.manseSecondFloor
         };
 
-        allAreas.Add(ZoneKeyList.pit, new Area(ZoneKeyList.pit, scenesInPit, areasSharingHostilityWithPit, AudioClipList.caveOne, combatBackgroundName: ZoneKeyList.mineLvl3, hostility: startsHostile));
+        allAreas.Add(ZoneKeyList.pit, new Area(ZoneKeyList.pit, scenesInPit, areasSharingHostilityWithPit, AudioClipList.caveTwo, combatBackgroundName: ZoneKeyList.mineLvl3, hostility: startsHostile));
 
         string[] locationsInForest = new string[]
         {
@@ -334,7 +334,7 @@ public static class AreaList
 
         };
 
-        allAreas.Add(ZoneKeyList.forest, new Area(ZoneKeyList.forest, locationsInForest, new string[0], AudioClipList.caveOne, combatBackgroundName: ZoneKeyList.mineLvl3, footStepType: FootStepType.Dirt));
+        allAreas.Add(ZoneKeyList.forest, new Area(ZoneKeyList.forest, locationsInForest, new string[0], AudioClipList.caveTwo, combatBackgroundName: ZoneKeyList.mineLvl3, footStepType: FootStepType.Dirt));
 
     }
 

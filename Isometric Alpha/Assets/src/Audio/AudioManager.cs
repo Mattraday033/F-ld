@@ -634,6 +634,7 @@ public static class AudioClipList
     public const string campInterior = musicFolderPath + "Camp Interior";
     public const string deathMusic = musicFolderPath + "Dead";
     public const string caveOne = musicFolderPath + "Cave 1";
+    public const string caveTwo = musicFolderPath + "Cave 2";
     public const string winMusic = musicFolderPath + "Win";
 
     public const string battleFolderPath = musicFolderPath + "Battle/";
