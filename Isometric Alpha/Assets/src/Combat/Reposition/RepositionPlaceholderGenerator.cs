@@ -29,6 +29,10 @@ public static class RepositionPlaceholderGenerator
         hover.linkedStats = combatantToBeMoved;
         placeHolderObject.AddComponent<PolygonCollider2D>();
 
+        SpriteOutline spriteOutline = new SpriteOutline();
+        spriteOutline.setSpriteRenderer(placeHolderSprite);
+        combatantToBeMoved.outline = spriteOutline;
+
 		return placeHolderObject;
 	}
 

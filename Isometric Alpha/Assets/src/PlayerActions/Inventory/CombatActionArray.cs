@@ -144,6 +144,7 @@ public class CombatActionArray : StatBoostSourceCombiner
 
         combatActions[slotIndex] = null;
 
+        MouseHoverManager.OnHoverPanelCreation.Invoke();
         OnCombatActionArrayChange.Invoke();
     }
 
@@ -250,6 +251,7 @@ public class CombatActionArray : StatBoostSourceCombiner
             newCombatAction.playEquipSFX();
         }
 
+        MouseHoverManager.OnHoverPanelCreation.Invoke();
         OnCombatActionArrayChange.Invoke();
     }
 

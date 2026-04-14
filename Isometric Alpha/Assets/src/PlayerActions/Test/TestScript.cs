@@ -12,8 +12,8 @@ public static class TestScript
         }
 
         // State.debugStopMonsterSpawning = true;
-        State.debugDiscoverAllLocations = true;
-        State.allLocationsFastTravelAvailable = true;
+        // State.debugDiscoverAllLocations = true;
+        // State.allLocationsFastTravelAvailable = true;
         // State.debugRetreatAutoSucceed = true;
         // State.enableGridDebugger = true;
 
@@ -35,7 +35,7 @@ public static class TestScript
         // Flags.flags["charismaBarricadePassUsed"] = false;
         // Flags.flags["andrasBarricadePassUsed"] = false;
 
-        PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
+        // PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
 
         // Inventory.addItem(ItemList.getItem(ItemList.usableItemListIndex, ItemList.bandagesIndex, 5));
 

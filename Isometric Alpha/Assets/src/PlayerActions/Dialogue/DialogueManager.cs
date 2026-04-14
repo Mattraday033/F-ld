@@ -1253,6 +1253,16 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
+                case "setgatetoopenwithoutopening":
+
+                    gateKey = getArgument(buffer, Constants.indexZero);
+
+                    GateAndChestManager.addKey(AreaManager.locationName + gateKey, invoke: false);
+
+                    continueStory();
+
+                    break;
+
                 case "explodeanddie":
 
                     GameObject effectGO = Instantiate(Resources.Load<GameObject>(PrefabNames.effect), PlayerObject.getInstanceTransform());

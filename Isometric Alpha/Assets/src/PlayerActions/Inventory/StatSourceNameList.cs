@@ -42,9 +42,10 @@ public static class StatSourceNameList
     public const string backLineKey = "Back Line";
 
     // Interaction traits
-    public const string evolutionaryKey = "Evolutionary";
+    public const string catalyticKey = "Catalytic";
     public const string immobileKey = "Immobile";
     public const string largeKey = "Large";
+    public const string indomitableKey = "Indomitable";
     public const string spawnerKey = "Spawner";
     public const string fodderKey = "Fodder";
     public const string cannotSummonKey = "Cannot Summon";
@@ -94,6 +95,7 @@ public static class StatSourceNameList
     // Equipped Passive traits
     public const string wearyHeartKey = "Weary Heart";
     public const string intimidatingPressenceKey = "Intimidating Pressence";
+    public const string protectTheWeakKey = "Protect the Weak";
     public const string bloodlustKey = "Bloodlust";
     public const string halfHandStanceKey = "Half Hand Stance";
     public const string predationKey = "Predation";

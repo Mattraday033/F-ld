@@ -69,9 +69,11 @@ public static class TraitList
 	public readonly static Trait frontLine = new PositioningTrait(StatSourceNameList.frontLineKey, TraitType.Positioning, "This creature always spawns at the front of the enemy field.", "Front Line", PositioningType.Frontline);
 	public readonly static Trait backLine = new PositioningTrait(StatSourceNameList.backLineKey, TraitType.Positioning, "This creature always spawns at the back of the enemy field.", "Back Line", PositioningType.Backline);
 
-	public readonly static Trait evolutionary = new Trait(StatSourceNameList.evolutionaryKey, TraitType.Interaction, "Can be evolved into a better version of itself.", "Evolve");
+	public readonly static Trait catalytic = new Trait(StatSourceNameList.catalyticKey, TraitType.Interaction, "Can be evolved into a better version of itself.", "Evolve");
 	public readonly static Trait immobile = new Trait(StatSourceNameList.immobileKey, TraitType.Interaction, "Takes no actions. Cannot be moved.", "Immobile", preventsMovementTrait, isPacifist);
 	public readonly static Trait large = new Trait(StatSourceNameList.largeKey, TraitType.Size, "And in charge. This creature takes up multiple spaces, and will take damage each time one of its spaces is hit by the same attack. Cannot be moved.", "Large", preventsMovementTrait);
+    public readonly static Trait indomitable = new PreventStunTrait(StatSourceNameList.indomitableKey, "This creature is immune to stuns. Traits that stun their targets can still be applied, but will not prevent this creature from acting.", StatSourceNameList.indomitableKey, permanent: true);
+
 
 	//all specific target priorities
 	public readonly static SpecificTargetPriorityTrait specificCheckeredLeftAlliedSide = new SpecificTargetPriorityTrait("(6,2)", "SpecificTargetPriorityTrait", "", new GridCoords(6, 2));
@@ -160,7 +162,8 @@ public static class TraitList
 	//EquippedPassiveBuffs
 	public readonly static Trait wearyHeart = new Trait(StatSourceNameList.wearyHeartKey, TraitType.EquippedPassive, "This creature's Armor is increased by 5 and your chance to successfully retreat is increased by 20%.", "WearyHeart");
 	public readonly static Trait devastatingCriticals = new TraitWithRelatedTraits(StatSourceNameList.devastatingCriticalsKey, TraitType.EquippedPassive, new List<IDescribable>(){ afraid }, "This creature's critical hits deal D% of the victim's health as extra damage normally, and 2D% during a surprise round. Critical hits caused by single target actions can cause a random enemy to receive the '" + afraid.getName() + "' trait.", StatSourceNameList.devastatingCriticalsKey);
-	public readonly static Trait intimidatingPressence = new MandatoryTargetTrait(StatSourceNameList.intimidatingPressenceKey, TraitType.EquippedPassive, "All enemy attack patterns must include this creature when possible. Useful for preventing enemies from attacking weaker or hurt allies.", "InitmidatingPressence");
+	public readonly static Trait intimidatingPressence = new Trait(StatSourceNameList.intimidatingPressenceKey, TraitType.EquippedPassive, "Attacks by Territorial Enemies must include this creature when possible. Useful for preventing enemies from attacking weaker or hurt allies.", TerritorialTargetPriorityTrait.initialTraitIconName);
+    public readonly static Trait protectTheWeak = new Trait(StatSourceNameList.protectTheWeakKey, TraitType.EquippedPassive, "Attacks by Predatory Enemies must include this creature when possible. Useful for preventing enemies from attacking weaker or hurt allies.", PredatoryTargetPriorityTrait.initialTraitIconName);
 	public readonly static Trait bloodlust = new StackableTrait(StatSourceNameList.bloodlustKey, TraitType.EquippedPassive, "The red mist descends, causing the creature to deal more damage per stack. Gain a stack at the start of every turn, and whenever you slay a minion or summoned enemy. Maximum of " + bloodlustMaximumStacks + " stacks.", StatSourceNameList.bloodlustKey, startingStacks: Constants.oneStackAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication, costType: ActionCostType.Bloodlust, maximumStacks: bloodlustMaximumStacks, personalReapplicationEvents: new List<UnityEvent>() { EnemyStats.OnMinionSummonDeath }, impersonalReapplicationEvents: new List<UnityEvent>() { CombatStateManager.OnNewTurn });
     public readonly static Trait halfHandStance = new StackableTrait(StatSourceNameList.halfHandStanceKey, TraitType.Stance, "A balanced stance, increasing damage dealt by " + halfHandStanceExtraDamage + " and decreasing damage taken by " + halfHandStanceExtraDamage + " per stack. Starts with " + halfHandStanceStartingStacks + " stacks. Gain stacks by attacking with fists or staffs. Only one stance can be active at a time.", StatSourceNameList.halfHandStanceKey, startingStacks: Constants.fourStacksAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication, costType: ActionCostType.Stance, personalReapplicationEvents: new List<UnityEvent>() { Stance.OnStanceApplyingWeaponAttack });
     public readonly static Trait predation = new StackableTrait(StatSourceNameList.predationKey, TraitType.EquippedPassive, "Your brutal strikes reinvigorate you. Whenever you deal 100% or more of a Master enemy's total health in one hit, you heal for D/2 health and gain 10% Armor Penetration and 4 extra damage per attack. The enemy does not need to be at full health to activate Predation.", StatSourceNameList.predationKey, startingStacks: Constants.zeroStacksAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication, costType: ActionCostType.Predation, personalReapplicationEvents: new List<UnityEvent>(){ Stats.PredationProc });
@@ -207,7 +210,7 @@ public static class TraitList
 		dictionaryOfTraits.Add(frontLine.getName(), frontLine);
 		dictionaryOfTraits.Add(backLine.getName(), backLine);
 		
-		dictionaryOfTraits.Add(evolutionary.getName(), evolutionary);
+		dictionaryOfTraits.Add(catalytic.getName(), catalytic);
 		dictionaryOfTraits.Add(immobile.getName(), immobile);
 		dictionaryOfTraits.Add(large.getName(), large);
 		

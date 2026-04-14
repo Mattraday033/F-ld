@@ -292,9 +292,9 @@ My duty is to prevent you from harming anyone ever again. Not to chase after the
     
 === 7f ===
 
-Because it takes conviction to face the evils of the world head on. To plant your feet and attempt to right them. You blame us for doing what's necessary, while lacking the conviction to do it yourself.
+Because it takes conviction to plant your feet and attempt to right the evils of the world. You blame us for doing what's necessary, while lacking the conviction to do it yourself.
 
-    +I believe we are equal in our conviction. You clearly consider yourself a man of morals. Haven't you ever wished there was another way?
+    +I believe we are equal in our conviction. You clearly consider yourself a man of morals. Forgive me for seeing in you a someone who has wished for another way.
         ->7g
     
 === 7g ===
@@ -302,6 +302,7 @@ Because it takes conviction to face the evils of the world head on. To plant you
 Of course I have. But your people have proven that there isn't.
 
     +\*Remove any weapons you are carrying.* Then you are faced with a choice: prove to me that the cycle cannot be broken by attacking while I am unarmed and professing peace, or allow me to prove to you I will not harm you by approaching peaceably.
+        playAnimation({playerIndex},OOC_Idle_Back)
         ->7h
     
     +Fine. If you're not going to listen to reason then we will have it your way. <Combat>

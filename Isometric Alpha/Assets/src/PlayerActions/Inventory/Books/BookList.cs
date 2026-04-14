@@ -50,7 +50,7 @@ public static class BookList
 						" structure in the area was the large stone building now serving as the " +
 						"guard barracks. Any other buildings must have been made of wood or another similarly less " +
 						"stalwart material, and decayed to the point of invisibility since the site was abandoned.\n" +
-						"\tMasonic command has given Carter and myself complete autonomy on this venture, so I think I'm " +
+						"\tMasonic Command has given Carter and myself complete autonomy on this venture, so I think I'm " +
 						"going to take my time familiarizing myself with the mansion. Should an attack be warranted from " +
 						"outside the camp, it would be good to know exactly how to exploit its layout. From my brief time studying other Delving Folk complexes, " +
 						"I know how much they liked to place hidden passages within their underground networks. I expect their " +

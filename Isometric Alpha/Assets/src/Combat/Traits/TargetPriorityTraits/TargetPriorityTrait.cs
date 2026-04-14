@@ -37,6 +37,11 @@ public class TargetPriorityTrait : Trait
 		Selector selectorOnTarget = selector.clone();
 		Stats mandatoryTarget = getMandatoryTarget(listOfTargets);
 		
+        if(mandatoryTarget == null)
+        {
+            return null;
+        }
+
 		selectorOnTarget.setToLocation(mandatoryTarget.position);
 		
 		if(!selectorOnTarget.allTilesAreLegal() || !selectorOnTarget.containsTarget(mandatoryTarget))

@@ -20,10 +20,14 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     private void stopHighlightAndFade(Stats stats)
     {
-        if(stats == linkedStats)
+        if(stats == linkedStats && linkedStats != null)
         {
-            StopCoroutine(highlightAndFadeCoroutine);
-            highlightAndFadeCoroutine = null;
+            if(highlightAndFadeCoroutine != null)
+            {
+                StopCoroutine(highlightAndFadeCoroutine);
+                highlightAndFadeCoroutine = null;
+            }
+
             linkedStats.removeOutline();
         }
     }
@@ -41,9 +45,32 @@ public class CombatantHover : CombatMouseHover, IRevealable
         } 
     }
 
+    public void createOutlineAndStartFade()
+    {
+        if(highlightAndFadeCoroutine != null)
+        {
+            StopCoroutine(highlightAndFadeCoroutine);
+        }
+
+        highlightAndFadeCoroutine = StartCoroutine(highlightAndFade());
+    }
+
+    private Stats getHighlightTarget()
+    {
+        Stats target = getTargetStats();
+
+        if(target.queuedToMove())
+        {
+            return target.repositionClone;
+        }
+
+        return target;
+    }
+
     private IEnumerator highlightAndFade()
     {
-        getTargetStats().setOutline();
+        Stats highlightTarget = getHighlightTarget();
+        highlightTarget.setOutline();
 
         float timeWaited = 0f;
 
@@ -60,10 +87,10 @@ public class CombatantHover : CombatMouseHover, IRevealable
             yield return null;
             timeWaited += Time.deltaTime;
 
-            getTargetStats().setOutline((byte) Mathf.Lerp(254f, 0f, timeWaited/timeToWaitFade));
+            highlightTarget.setOutline((byte) Mathf.Lerp(254f, 0f, timeWaited/timeToWaitFade));
         }
 
-        getTargetStats().removeOutline();
+        highlightTarget.removeOutline();
 
     }
 
@@ -213,7 +240,8 @@ public class CombatantHover : CombatMouseHover, IRevealable
         {
             GridCoords[] gridCoords = selector.getAllSelectorCoords();
 
-            if(linkedStats.isInsideCoordinates(gridCoords))
+            if(linkedStats.isInsideCoordinates(gridCoords) || 
+                (linkedStats.queuedToMove() && linkedStats.repositionClone.isInsideCoordinates(gridCoords)))
             {
                 return true;
             }

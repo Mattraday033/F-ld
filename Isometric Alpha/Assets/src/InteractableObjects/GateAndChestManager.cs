@@ -22,7 +22,7 @@ public static class GateAndChestManager
         openedGatesAndChests = newDict;
     }
 
-    public static void addKey(string key)
+    public static void addKey(string key, bool invoke = true)
     {
         if (openedGatesAndChests.ContainsKey(key))
         {
@@ -30,7 +30,11 @@ public static class GateAndChestManager
         }
 
         openedGatesAndChests[key] = true;
-        OnGateKeyAdd.Invoke();
+
+        if(invoke)
+        {
+            OnGateKeyAdd.Invoke();
+        }
     }
 
 	public static bool hasBeenOpened(string key)

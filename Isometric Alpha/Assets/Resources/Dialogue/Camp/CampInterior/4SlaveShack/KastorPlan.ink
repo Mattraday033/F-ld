@@ -1856,6 +1856,7 @@ You're back. Were you successful?
         ->mineExplanationDisclaimer(true,->6a)
 
 === 6b ===
+
 ~gaveKastorToolBundle = true
 setToTrue(gaveKastorToolBundle)
 
@@ -1925,8 +1926,13 @@ fadeToBlack(true, false)
 
 hideTrain()
 
+setNPCFacing({kastorIndex},NW)
+
 finishQuest(Finding Nándor, true, Nándor has returned.)
 setToTrue(broughtNandorToKastor)
+
+movePlayer(10,13)
+setFacing(NW)
 
 activate({nandorIndex})
 activate({carterIndex})
@@ -2004,6 +2010,9 @@ I am the one who should be glad that you survived. You were down there for days!
 
 {
 -not deathFlagGuardMárcos:
+
+setNPCFacing({kastorIndex},NW)
+
 And Márcos! You live as well? I can't imagine what it would take to kill you after something like this!
 
 changeCamTarget({marcosIndex})
@@ -2035,6 +2044,8 @@ Even in death, he helps our cause. I am once more in his debt.
 {
 -hasToolBundle and not gaveKastorToolBundle:
     +If I may interject, I also have these tools from the mine's armory. They should help our cause. *Hand over the Tool Bundle.*
+        setNPCFacing({kastorIndex},SW)
+        setFacing(NE)
         ->6b
 -else:
     +I think it is about time we made our move before the guards catch on to our return.
@@ -2211,6 +2222,10 @@ Are you ready to begin our revolution? After we kick things off, we won't be abl
         activate({nandorIndex})
         activate({carterIndex})
         
+        movePlayer(10,13)
+        setFacing(NW)
+        setNPCFacing({kastorIndex},NW)
+
         {
         -not deathFlagGuardMárcos:
             deactivate({marcosSleepingIndex})

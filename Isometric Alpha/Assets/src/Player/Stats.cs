@@ -750,6 +750,24 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return new CombatActionArray(null);
     }
 
+    public bool mandatoryTargetForTargetingType(Trait targetTrait)
+    {
+        if(targetTrait == null)
+        {
+            return false;
+        }
+
+        switch(targetTrait.getName())
+        {
+            case TerritorialTargetPriorityTrait.initialName:
+                return hasTrait(TraitList.intimidatingPressence);
+            case PredatoryTargetPriorityTrait.initialName:
+                return hasTrait(TraitList.protectTheWeak);
+            default:
+                return false;
+        }
+    }
+
     public bool isMandatoryTarget()
     {
         return Helpers.hasQuality<Trait>(traitContainer, t => t.isMandatoryTarget());
@@ -944,6 +962,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public bool isStunned()
     {
+        if(Helpers.hasQuality<Trait>(traitContainer, t => t.immuneToStun()))
+        {
+            return false;
+        }
+
         return Helpers.hasQuality<Trait>(traitContainer, t => t.preventsCombatAction());
     }
 

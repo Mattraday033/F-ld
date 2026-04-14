@@ -67,7 +67,7 @@ public class NonMasterChaoticTargetPriorityTrait : TargetPriorityTrait
 		
 		Stats mandatoryTarget = base.getMandatoryTarget(listOfTargets);
 		
-		if(mandatoryTarget == null)
+		if(mandatoryTarget == null && listOfTargets.Count > 0)
 		{
 			int index = UnityEngine.Random.Range(0, listOfTargets.Count);
 			

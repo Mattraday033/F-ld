@@ -131,6 +131,7 @@ new BuffChargeUpAbility(TraitList.coordinated, AbilityList.getAbility(null, Abil
                                                                 new Trait[] { 
                                                                                 TraitList.master,
                                                                                 TraitList.nonMasterChaotic,
+                                                                                TraitList.indomitable, 
                                                                                 TraitList.backLine
                                                                             },
                                                                             animationAudioClipDictionary: AnimationSFXDictionaryList.whipAudioDictionary));

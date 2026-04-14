@@ -293,6 +293,10 @@ public static class AbilityList
         statAbilityDictionary.Add(currentKey, new EquippedPassive(CombatActionSettings.build(currentKey, TraitList.intimidatingPressence)));
 		statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
+		currentKey = strengthKeyChar + "-2-3";
+        statAbilityDictionary.Add(currentKey, new EquippedPassive(CombatActionSettings.build(currentKey, TraitList.protectTheWeak)));
+		statAbilityDictionary[currentKey].setStatRequirements(currentKey);
+
         currentKey = generateAbilityKey(strengthKeyChar);
         statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Make It Bleed", "You impale, bludgeon, or slash your enemy to the point of massive hemorrhaging. The enemy takes initial damage and every hit the enemy takes for the rest of combat deals additional damage.", "MakeItBleed"), DamageParams.build("3S + D", "D"), TargetParams.build(Range.boxOneIndex), FrequencyParams.build(twoSlotMax, fiveRoundCooldown), AnimationParams.build(EffectAnimationType.Blunt), TraitList.wounded)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);

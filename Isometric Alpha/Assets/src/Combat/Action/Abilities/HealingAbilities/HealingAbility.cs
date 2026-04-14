@@ -27,7 +27,7 @@ public class HealingAbility : Ability
 			return new int[]{-1};
 		}
 		
-		return new int[]{DamageCalculator.calculateFormula(getDamageFormula(), getActorStats())};
+		return new int[]{getDamageFormulaTotal()};
 	}
 	
 	public override bool healsTarget()

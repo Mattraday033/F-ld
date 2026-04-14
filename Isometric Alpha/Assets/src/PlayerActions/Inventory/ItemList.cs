@@ -275,7 +275,7 @@ public static class ItemList
 		weapons.Add(null);
 		weapons.Add(new Staff (new WeaponListID(plankIndex), "Plank", "A long piece of wood, pulled from a shack wall. Poorly balanced, but it'll do in a pinch.", "2W + 2", "W+D", ItemSpriteList.plankSprite, Range.singleTargetIndex, 3, isOneHanded));
 		weapons.Add(new Weapon(new WeaponListID(sharpRockIndex), "Sharp Rock", "A stone, chipped to have a meager edge. ", "2C + 3", "C+D", ItemSpriteList.sharpRockSprite, Range.singleTargetIndex, 1, isOneHanded, EffectAnimationType.Pierce));
-        weapons.Add(new StanceWeapon(new WeaponListID(thinBladeIndex), "Bronze Thin-Blade", "A long, slender, double-edged blade with no crossguard. Favored by swordsmen for its long reach, they are either wielded solo or with a matching dagger.", "2W+2D+6", "D+W+1", ItemSpriteList.thinbladeSprite, Range.verticalOneIndex, worth: 55, isOneHanded, EffectAnimationType.Slash));
+        weapons.Add(new StanceWeapon(new WeaponListID(thinBladeIndex), "Bronze <nobr>Thin-Blade</nobr>", "A long, slender, double-edged blade with no crossguard. Favored by swordsmen for its long reach, they are either wielded solo or with a matching dagger.", "2W+2D+6", "D+W+1", ItemSpriteList.thinbladeSprite, Range.verticalOneIndex, worth: 55, isOneHanded, EffectAnimationType.Slash));
 		weapons.Add(new Weapon(new WeaponListID(scaldIndex), "Scald", "Kende's trusty frying pan. Those struck with it come away burned.", "2S+2D+2C+9", "S+D+C", ItemSpriteList.fryingPanSprite, Range.horizontalOneIndex, worth: 75, isOneHanded, EffectAnimationType.Blunt, traitToApply: TraitList.roasted));
 
 		//Armor(string key, string loreDescription, int worth, int armorRating, int slotID)

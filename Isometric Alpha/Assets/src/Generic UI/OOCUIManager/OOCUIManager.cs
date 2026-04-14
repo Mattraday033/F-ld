@@ -80,7 +80,10 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
 
     private void updateSkillUI()
     {
-        skillSwapArrowParent.SetActive(PartyStats.hasMoreThanOneSkill());
+        if(skillSwapArrowParent == null)
+        {
+            return;
+        }
 
         skillIconHover.iconImage.sprite = Resources.Load<Sprite>(State.currentSkillType.ToString());
 

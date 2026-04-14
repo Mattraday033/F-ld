@@ -59,8 +59,8 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor, new Vector3Int(11, 13), LocationNameList.slaveShackFour, facing: Facing.SouthWest));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.nandor, new Vector3Int(9, 15), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.carter, new Vector3Int(9, 13), LocationNameList.slaveShackFour, facing: Facing.NorthEast));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(11, 15), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(10, 15), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.carter, new Vector3Int(11, 15), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMarcos+1, new Vector3Int(11, 17), LocationNameList.slaveShackFour, facing: Facing.SouthEast, animationType: CharacterAnimationType.Death_Back, offset: Constants.onTableHeightOffset*-2f));
 
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackFour, list);

@@ -207,6 +207,11 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         return false;
     }
 
+    public virtual bool immuneToStun()
+    {
+        return false;
+    }
+
     public virtual bool preventsCombatAction()
     {
         return false;

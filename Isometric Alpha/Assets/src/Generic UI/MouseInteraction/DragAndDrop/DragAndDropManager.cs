@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public static class DragAndDropManager
 {
-    public const float timeToWait = .5f;
+    public const float timeToWait = .25f;
     public readonly static UnityEvent<IDescribable> OnDragAndDropCreated = new UnityEvent<IDescribable>();
     public readonly static UnityEvent<IDescribable> OnDragAndDropDestroyed = new UnityEvent<IDescribable>();
 

@@ -8,29 +8,8 @@ public class CanvasScalerSetToResolution : CanvasScaler
 
     protected override void Awake()
     {
-        if (Camera.main != null)
-        {
-            Vector2 resolution = Vector2.one;
-
-            // if (Camera.main.aspect >= 3.5f)
-            // {
-            //     resolution = new Vector2(3440f, 1440f);
-            // }
-            // else if (Camera.main.aspect >= 2.3f)
-            // {
-            //     resolution = new Vector2(2560f, 1080f);
-            // }
-            // else
-            // {
-                resolution = new Vector2(1920f, 1080f);
-            // }
-
-            m_ReferenceResolution = resolution;
-            // Screen.SetResolution((int) resolution.x, (int) resolution.y, true);
-            Screen.SetResolution((int) Screen.width, (int) Screen.height, true);
-        }
-
-
+        m_ReferenceResolution = new Vector2(1920f, 1080f);
+        Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
 
         base.Awake();
     }

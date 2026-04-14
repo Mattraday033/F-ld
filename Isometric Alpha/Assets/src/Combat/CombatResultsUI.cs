@@ -219,6 +219,11 @@ public class CombatResults : IDescribable, IDescribableInBlocks
             blocks.Add(new DescriptionPanelBuildingBlock(item));
         }
 
+        if(blocks.Count <= 1)
+        {
+            blocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock("None"));
+        }
+
         return blocks;
     }
 

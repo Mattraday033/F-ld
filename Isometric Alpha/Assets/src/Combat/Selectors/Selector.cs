@@ -281,15 +281,32 @@ public class Selector : ScriptableObject, ICloneable
 	{
 		List<Stats> allTargets = getAllTargets();
 
+        List<Stats> targetsQueuedToMove = new List<Stats>();
+
 		foreach (Stats stats in allTargets)
 		{
+            if(stats == null)
+            {
+                continue;
+            }
+
 			GameObject combatSprite = stats.combatSprite;
 
 			if (Helpers.tagMatchesCriteria(combatSprite, tagCriteria) && !stats.queuedToMove())
 			{
 				return true;
-			}
+			} else if(stats.queuedToMove())
+            {
+                targetsQueuedToMove.Add(stats);
+            }
 		}
+
+        foreach(Stats target in targetsQueuedToMove)
+        {
+            CombatantHover hover = target.repositionClone.combatSprite.GetComponent<CombatantHover>();
+
+            hover.createOutlineAndStartFade();
+        }
 
         return false;
 	}
@@ -297,6 +314,7 @@ public class Selector : ScriptableObject, ICloneable
 	public bool hasAtLeastOneLivingTarget(string[] tagCriteria)
 	{
 		List<Stats> allTargets = getAllTargets();
+        List<Stats> targetsQueuedToMove = new List<Stats>();
 
 		foreach (Stats stats in allTargets)
 		{
@@ -310,8 +328,18 @@ public class Selector : ScriptableObject, ICloneable
 			if (Helpers.tagMatchesCriteria(combatSprite, tagCriteria) && !stats.queuedToMove())
 			{
 				return true;
-			}
+			}else if(stats.queuedToMove())
+            {
+                targetsQueuedToMove.Add(stats);
+            }
 		}
+
+        foreach(Stats target in targetsQueuedToMove)
+        {
+            CombatantHover hover = target.repositionClone.combatSprite.GetComponent<CombatantHover>();
+
+            hover.createOutlineAndStartFade();
+        }
 
 		return false;
 	}

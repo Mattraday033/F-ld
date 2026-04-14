@@ -229,6 +229,8 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         switch(hoverMessageKey)
         {
+            case HoverMessageList.retreatButtonKey:
+                return "Retreat";
             case IconList.surpriseIconName:
                 return "Surprise Status";
             case HoverMessageList.passiveSlotsKey:
