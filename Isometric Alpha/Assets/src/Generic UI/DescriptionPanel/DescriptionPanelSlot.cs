@@ -157,6 +157,12 @@ public class DescriptionPanelSlot : MonoBehaviour
         }
     }
 
+    public bool hasTempDescribable()
+    {
+        return tempDescribables != null;
+    }
+
+
     public void revertToPrimaryDescribable()
     {
         tempDescribables = null;

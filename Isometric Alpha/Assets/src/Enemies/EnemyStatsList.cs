@@ -125,8 +125,8 @@ new BuffChargeUpAbility(TraitList.coordinated, AbilityList.getAbility(null, Abil
                                                                                 animationAudioClipDictionary: AnimationSFXDictionaryList.femaleHumanAudioDictionary));
 
         enemyStatsDict.Add(NPCNameList.chiefTabor, new EnemyStats(NPCNameList.chiefTabor,
-                                                                    Constants.fortyArmor,
-                                                                                            250,
+                                                                    Constants.thirtyArmor,
+                                                                                            220,
                                             AbilityList.getAbility(null, AbilityList.takeHostageKey),
                                                                 new Trait[] { 
                                                                                 TraitList.master,

@@ -540,5 +540,15 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
     private void OnDisable()
     {
         hoveringOverAbilityMenuButton = false;
+
+        if(CombatStateManager.inCombat)
+        {
+            DescriptionPanelSlot slot = getDescriptionPanelSlot();
+
+            if(slot != null && slot.hasTempDescribable())
+            {
+                slot.revertToPrimaryDescribable();
+            }
+        }
     }
 }
