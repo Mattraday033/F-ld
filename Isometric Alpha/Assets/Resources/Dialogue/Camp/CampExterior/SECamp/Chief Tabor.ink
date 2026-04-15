@@ -101,6 +101,9 @@ VAR playerName = ""
 
 changeCamTarget({taborIndex})
 
+//Test
+->5a
+
 {
 -fromFightDialogueFlag1:
     ->fromFightDialogueKnot1
@@ -127,7 +130,7 @@ changeCamTarget({taborIndex})
 
 === 1a === 
 
-\*Tabor's entire upper torso is covered in bruises. Some bandages have been applied to his stomach and face, and he holds himself as if some of his ribs are broken. His breathing is obviously labored as he speaks.* Come to finish me off yourself, you dogsbody scum?
+\*Tabor's entire upper torso is covered in bruises. Some bandages have been applied to his stomach and face, and he holds himself as if some of his ribs are broken. His breathing is obviously labored as he speaks.* You didn't come back for the children, I'll give you that. But your friends weren't so ammicable as you while I was making my exit. What's to be my fate? Come to finish me off yourself?
 
     +I wish we had the opportunity to speak before you were attacked. Alas, it was not meant to be.
         ->1b
@@ -270,12 +273,12 @@ We must not understand your meaning. You're not letting him go... are you?
 
 {
 -charisma >= 4:
-    +As the one who accepted his surrender, it is my right to chose his fate. If any of you harm him, I will take it as a personal insult. <Cha {charisma}/4>
+    *As the one who accepted his surrender, it is my right to chose his fate. If any of you harm him, I will take it as a personal insult. <Cha {charisma}/4>
         ->madeHighCharismaCheck1a
-    +\*Address the crowd.* I give you my word that I will answer all of your questions, but first we must have some peace so I can hear them! <Cha {charisma}/2>
+    *\*Address the crowd.* I give you my word that I will answer all of your questions, but first we must have some peace so I can hear them! <Cha {charisma}/2>
         ->madeLowCharismaCheck1a
 -charisma >= 2:
-    +\*Address the crowd.* I give you my word that I will answer all of your questions, but first we must have some peace so I can hear them! <Cha {charisma}/2>
+    *\*Address the crowd.* I give you my word that I will answer all of your questions, but first we must have some peace so I can hear them! <Cha {charisma}/2>
         ->madeLowCharismaCheck1a
     *No right? Without my contributions, you would still be in chains!  
         ~clayChoicesMade++

@@ -46,7 +46,7 @@ setToTrue(spokeWithPageBeforePrisoners)
 
 changeCamTarget({pageIndex})
 
-Carter and I are both ready to make our way through the forest. Are you ready to accompany us?
+Carter and I are both eager to make our way through the forest. Are you ready to accompany us?
 
 +Yes, lets discuss our route.
 	->2b
@@ -87,7 +87,7 @@ The closest settlement within the Kingdom of Masons is the soldier's colony at R
 	->2ba
 +Can they accommodate all of the branded?
 
-	Rice Hill should be large enough to provide for you all in the short term, and the majority of you in the long. Those that don't wish to stay at the colony can, of course, follow Page and I further south when we continue on to deliver {keptDirectorAlive:the Director and }our report to Masonic Command.
+	Rice Hill should be large enough to provide for all of you in the short term, and the majority of you in the long. Those that don't wish to stay at the colony can, of course, follow Page and I further south when we continue on to deliver {keptDirectorAlive:the Director and }our report to Masonic Command.
 
 	->2ba
 +How do we get there?

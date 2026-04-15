@@ -128,6 +128,7 @@ public static class Constants
     public const int tenCreatures = 10;
     public const int elevenCreatures = 11;
     public const int twelveCreatures = 12;
+    public const int fifteenCreatures = 15;
     public const int tooManyCreatures = 20;
     #endregion
 

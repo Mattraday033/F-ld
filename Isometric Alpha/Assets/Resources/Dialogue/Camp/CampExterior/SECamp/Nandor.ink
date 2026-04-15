@@ -53,6 +53,7 @@ VAR andrasIsDead = false
 VAR deathFlagGuardMárcos = false
 VAR deathFlagGuardAndrás = false
 VAR deathFlagChiefTabor = false
+VAR deathFlagJanos = false
 
 VAR mineLvl3ConvincedRekaAndPazman = false
 
@@ -366,13 +367,12 @@ Now that it's over, I don't mind telling you this. The plan to escape? When I cr
 When we were stuck in the mine together, Márcos asked me if I could forgive him for what he had done. Before I answered, I told him my tale and asked him if there was forgiveness enough in the world for me too. He said if there could be for him, then there certainly was for me. And that thought got me through everything that came after. I want to live long enough to find out if that kind of forgiveness exists.
 
 {
--letNandorDecideGuardPunishments:
+-letNandorDecideGuardPunishments and not deathFlagJanos:
     Why can't I bring myself to judge another? I have killed my own kin, a crime for which I can muster no forgiveness. I forgive the crimes of others so readily because so much of my energies are tied up in loathing for myself that I cannot bring myself to loath another. And until I can find a way to unclench my spirit, that way I will remain.
 
 -else:
-    You ask me of grudges? What are they now to me. No grudge can ever match the one I hold against myself. I forgive and forget so easily because so much of my energies are tied up in those feelings that I can hold no space in my mind for any others. And until I can find a way to unclench my spirit, that way I will remain.
+    You ask me of grudges... what are they now to me? No grudge can ever match the one I hold against myself. I forgive and forget so easily because so much of my energies are tied up in those feelings that I can hold no space in my mind for any others. And until I can find a way to unclench my spirit, that way I will remain.
 }
-
   
     +Your history of murdering your traveling companions unnerves me. Don't think I will be so easy a victim as your cousin.
     

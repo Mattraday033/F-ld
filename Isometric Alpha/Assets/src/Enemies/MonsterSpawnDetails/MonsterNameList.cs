@@ -52,6 +52,7 @@ public static class MonsterNameList
     public const string noBrandRioter = "No-Brand Rioter";
 
     public const string brandedConscript = "Branded Conscript";
+    public const string angryBranded = "Angry Branded";
     public const string brandedRioter = "Branded Rioter";
     
     public const string pickMarker = " (Pick)";
