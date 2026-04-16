@@ -14,7 +14,10 @@ public class BackgroundManager : MonoBehaviour
     private const int maxRows = 15;
     private const int maxCols = 15;
 
-    private Vector3Int currentTileCoords = new Vector3Int(-15,-15);
+    private const int startRow = -15;
+    private const int startCol = -15;
+
+    private Vector3Int currentTileCoords = Vector3Int.zero;
     private const int lengthMinusOne = 6;
 
     private List<List<Tilemap>> tilemapPrefabs = new List<List<Tilemap>>();
@@ -56,9 +59,9 @@ public class BackgroundManager : MonoBehaviour
 
     private void populateBackgroundTilemap()
     {
-        for(int row = -10; row <= maxRows; row++)
+        for(int row = startRow; row <= maxRows; row++)
         {
-            for(int col = -10; col <= maxCols; col++)
+            for(int col = startCol; col <= maxCols; col++)
             {
                 currentTileCoords = new Vector3Int(row, col);
                 populateSingleBackgroundTile();

@@ -181,7 +181,9 @@ public class AudioManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(mode == LoadSceneMode.Additive || scene.name.Equals(SceneNameList.loadingScreen))
+        if(mode == LoadSceneMode.Additive ||
+            scene.name.Equals(SceneNameList.loadingScreen) || 
+            scene.name.Equals(SceneNameList.endOfDemo))
         {
             return;
         }
@@ -295,8 +297,11 @@ public class AudioManager : MonoBehaviour
 
     public static void playFootStep(int row)
     {
-        if(CombatStateManager.inCombat || (PlayerMovement.getInstance() != null && 
-            !PlayerMovement.getInstance().isMoving()))
+        if(AreaManager.locationName == null || 
+            AreaManager.locationName.Length <= 0 || 
+            LoadingBarProgressTracker.loadingInProgress() ||
+             CombatStateManager.inCombat || 
+             (PlayerMovement.getInstance() != null && !PlayerMovement.getInstance().isMoving()))
         {
             return;
         }

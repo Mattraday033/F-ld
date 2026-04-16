@@ -180,6 +180,16 @@ public class LoadSaveFile : IDecision
         }
     }
 
+    public string getPlayerSpriteNameInSave()
+    {
+        if(saveBlueprint == null)
+        {
+            return State.playerSpriteName;
+        }
+
+        return saveBlueprint.playerSpriteName;
+    }
+
     public void backOut()
     {
 

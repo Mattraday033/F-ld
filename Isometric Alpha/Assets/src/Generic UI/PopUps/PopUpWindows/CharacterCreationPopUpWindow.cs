@@ -218,6 +218,10 @@ public class CharacterCreationPopUpWindow : PopUpWindow
             name = SaveDefaultValues.defaultPlayerName;
         }
 
+        //here for loading screen animation
+        State.playerPortraitName = portraitSpriteNameList[portraitNameIndex];
+        State.playerSpriteName = portraitSpriteNameList[spriteNameIndex];
+
         LoadSaveFile.loadCleanSlateSaveFile();
 
         AllyStats playerStats = new AllyStats(name + PartyManager.playerMarker, currentStats.getStrength(), currentStats.getDexterity(), currentStats.getWisdom(), currentStats.getCharisma());
@@ -228,6 +232,7 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         PartyManager.addPlayerStatsToDict(playerStats);
 
         State.formation = new Formation();
+        //reseting because gets wiped during loadCleanSlateSaveFile()
         State.playerPortraitName = portraitSpriteNameList[portraitNameIndex];
         State.playerSpriteName = portraitSpriteNameList[spriteNameIndex];
 

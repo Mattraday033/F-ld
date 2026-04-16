@@ -25,7 +25,7 @@ public static class LoadingTipList
     {
         loadingTips = new List<LoadingTip>();
 
-        loadingTips.Add(new LoadingTip("\"There is only one thing you must know here: the guards cannot break you. They can only trick you into breaking yourself.\" - Bálint the Sage"));
+        loadingTips.Add(new LoadingTip("\"There is only one thing you must know here: the guards cannot break you. They can only trick you into breaking yourself.\" <nobr>- Bálint the Sage</nobr>"));
 
         loadingTips.Add(new LoadingTip("An Autosave is taken every time you enter a new area. You can have up to three Autosaves."));
 

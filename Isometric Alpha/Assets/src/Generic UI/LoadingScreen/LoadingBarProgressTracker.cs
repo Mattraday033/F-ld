@@ -2,17 +2,42 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LoadingBarProgressTracker : MonoBehaviour
 {
 	public RectTransform loadProgressBar;
 	public GameObject pressAnyKeyMessage;
 
-	public static LoadSaveFile loadSaveFile;
+    public Image protagRunSprite;
+
+    private static LoadingBarProgressTracker instance;
+
+	private static LoadSaveFile _LoadSaveFile;
+
+	public static LoadSaveFile loadSaveFile
+    {
+        get
+        {
+            return _LoadSaveFile;
+        }
+        set
+        {
+            _LoadSaveFile = value;
+
+            if(_LoadSaveFile != null)
+            {
+                string folderPath = EnemyTypeFolderPathList.getEnemyTypeFolderPath(_LoadSaveFile.getPlayerSpriteNameInSave());
+                runFrontSprites = Resources.LoadAll<Sprite>(folderPath + CharacterAnimationType.Run_Front.ToString());
+
+                HeartBeatManager.MediumHeartBeat.AddListener(animateProtagRunSprite);
+                animateProtagRunSprite(0);
+            }
+        }
+    }
 
 	private static bool garbageCollectionHasOccured;
-
-	private int currentWaitUntilFrame;
 
 	private static bool canChangeScene = false;
 
@@ -26,9 +51,30 @@ public class LoadingBarProgressTracker : MonoBehaviour
 	private const float speedMin = 800f;
 	private const float speedMax = 1000f;
 
-	private const float offsetMinimum = -5f;
+	private const float offsetMinimum = 0f;
 
 	private float endWait = -1f;
+
+    private static Sprite[] runFrontSprites;
+
+    private static bool skipNextHeartBeat;
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void initializeLoadingBarProgressTracker()
+    {
+        instance = null;
+        _LoadSaveFile = null;
+        loadSaveFile = null;
+        garbageCollectionHasOccured = false;
+        canChangeScene = false;
+        runFrontSprites = null;
+        skipNextHeartBeat = false;
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
 	void Start()
 	{
@@ -43,9 +89,17 @@ public class LoadingBarProgressTracker : MonoBehaviour
         }
 	}
 
+    private void OnDestroy()
+    {
+        HeartBeatManager.MediumHeartBeat.RemoveListener(animateProtagRunSprite);
+        runFrontSprites = null;
+        loadSaveFile = null;
+    }
+
 	void Update()
 	{
-		if((canChangeScene && (KeyBindingList.continueUIKeyIsPressed() || Input.GetKey(KeyCode.Mouse0))) || Application.isEditor)
+		// if((canChangeScene && (KeyBindingList.continueUIKeyIsPressed() || Input.GetKey(KeyCode.Mouse0))) || Application.isEditor)
+		if(canChangeScene && (KeyBindingList.continueUIKeyIsPressed() || Input.GetKey(KeyCode.Mouse0)))
 		{
             garbageCollectionHasOccured = false;
             canChangeScene = false;
@@ -97,8 +151,36 @@ public class LoadingBarProgressTracker : MonoBehaviour
         canChangeScene = true;
 		pressAnyKeyMessage.SetActive(true);
     }
-    private float getNewWait() 
+    private float getNewWait()
 	{
 		return UnityEngine.Random.Range(waitMin, waitMax);
+    }
+
+    private static void animateProtagRunSprite(int row)
+    {
+        if(instance == null || runFrontSprites == null || runFrontSprites.Length < 2)
+        {
+            return;
+        } else if(skipNextHeartBeat)
+        {
+            skipNextHeartBeat = false;
+            return;
+        }
+
+        if(instance.protagRunSprite.sprite == runFrontSprites[0])
+        {
+            instance.protagRunSprite.sprite = runFrontSprites[1];
+        }
+        else
+        {
+            instance.protagRunSprite.sprite = runFrontSprites[0];
+        }
+
+        skipNextHeartBeat = true;
+    }
+
+    public static bool loadingInProgress()
+    {
+        return SceneManager.GetActiveScene().name.Equals(SceneNameList.loadingScreen);
     }
 }

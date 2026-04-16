@@ -45,6 +45,11 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
 
     public static void updateQuestCounter()
     {
+        if(instance == null || instance.questCounter == null)
+        {
+            return;
+        }
+
         if (instance.getNumberOfQuests() <= 0)
         {
             instance.questCounter.gameObject.SetActive(false);
@@ -57,12 +62,17 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
 
     public static void updateOOCUI()
     {
+        if(instance == null)
+        {
+            return;
+        }
+
         getInstance().updateUI();
     }
 
     public void updateUI()
     {
-        if (Flags.isInNewGameMode() || CombatStateManager.inCombat)
+        if (Flags.isInNewGameMode() || CombatStateManager.inCombat || gameObject == null)
         {
             disableOOCUI();
             return;
@@ -138,6 +148,8 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
 
     public void updateFooting()
     {
+
+
         if (State.onLeftFoot)
         {
             leftFootImage.color = Color.white;
