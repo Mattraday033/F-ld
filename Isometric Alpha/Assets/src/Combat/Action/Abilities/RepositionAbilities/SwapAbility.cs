@@ -22,7 +22,16 @@ public class SwapAbility : Ability
 	{
 		GridCoords tempCoords = getActorCoords().clone();
 
-		Stats target = CombatGrid.getCombatantAtCoords(getTargetCoords().clone());
+		Stats target = null;
+
+        foreach(Stats stats in targets)
+        {
+            if(stats != null)
+            {
+                target = stats;
+                break;
+            }
+        }
 
 		if (target == null)
 		{

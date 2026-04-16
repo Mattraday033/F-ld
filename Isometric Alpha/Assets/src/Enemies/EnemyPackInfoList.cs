@@ -34,7 +34,8 @@ public static class EnemyPackInfoList
                                                                                                         xpDrop: 100);
 
     public readonly static BossPackInfo clayFightForTabor = new BossPackInfo(new CreatureAmount[] { 
-                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                        EnemyAmountList.clay,
+                                                                                                        EnemyAmountList.fifteenAngryBranded
                                                                                                        },
                                                                                                         DropTableList.slaveMineDTKey,
                                                                                                         FlagNameList.foughtCrowdForTabor,

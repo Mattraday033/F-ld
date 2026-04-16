@@ -101,8 +101,6 @@ VAR playerName = ""
 
 changeCamTarget({taborIndex})
 
-//Test
-->5a
 
 {
 -fromFightDialogueFlag1:
@@ -684,7 +682,7 @@ We must not understand your meaning. You're not letting him go... are you?
             ->3ada
 }
 
-    +His punishment will be carried out when I can confirm it will be humane. I don't believe anyone here but myself can ensure that.
+    +I will carry out his punishment when I can confirm it will be humane. I don't believe anyone here but myself can ensure that.
             ->3ada
     +I suspended his sentence because I believe his actions were committed as an earnest attempt to teach morality to his victims. I wish to see if I can teach him the morality he himself lacked.
         ~saidYouWishToTeachTabor = true
@@ -1065,7 +1063,7 @@ execute({taborIndex})
 
 ->divert
 
-=== 6ca===
+=== 6ca ===
 
 changeCamTarget({crowdIndex}))
 
@@ -1077,6 +1075,8 @@ setToTrue(crowdDispersed)
 
 deactivate({clayIndex})
 deactivate({crowdIndex})
+updateNPCVisibility()
+endAmbience()
 
 fadeBackIn(60)
 

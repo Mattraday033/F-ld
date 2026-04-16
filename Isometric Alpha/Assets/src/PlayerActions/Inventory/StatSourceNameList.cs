@@ -22,7 +22,8 @@ public static class StatSourceNameList
     public const string wormBossReviveTraitKey = "Worm Boss Revive";
 
     // Misc keys
-    public const string roastedKey = "Roasted";
+    public const string roastedKey = "Roasted";    
+    public const string riledKey = "Riled";
     public const string devastatingCriticalsKey = "Devastating Criticals";
     public const string caveMadnessKey = "Cave Madness";
     public const string chokingKey = "Choking";

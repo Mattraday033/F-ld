@@ -89,13 +89,29 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
                 envCombatAction = AbilityList.getAbility(actorStats, AbilityList.frontHandKey);
                 targetingTrait = TraitList.chaotic;
 
-                envCombatAction.setActor(actorStats);
-                environmentalCombatActions.Add(envCombatAction.clone(), targetingTrait.clone());
+                environmentalCombatActions.Add(envCombatAction.clone(actorStats), targetingTrait.clone(actorStats));
 
                 envCombatAction = AbilityList.getAbility(actorStats, AbilityList.backHandKey);
                 
-                envCombatAction.setActor(actorStats);
-                environmentalCombatActions.Add(envCombatAction.clone(), targetingTrait.clone());
+                environmentalCombatActions.Add(envCombatAction.clone(actorStats), targetingTrait.clone(actorStats));
+                return;
+            case NPCNameList.clay:
+
+                envCombatAction = AbilityList.getAbility(actorStats, AbilityList.swapKey);
+                targetingTrait = TraitList.singleTargetBuffer;
+
+                environmentalCombatActions.Add(envCombatAction.clone(actorStats), targetingTrait.clone(actorStats));
+
+                envCombatAction = AbilityList.getAbility(actorStats, AbilityList.growMobKey);
+                targetingTrait = TraitList.emptyGenerated3;
+                
+                environmentalCombatActions.Add(envCombatAction.clone(actorStats), targetingTrait.clone(actorStats));
+
+                envCombatAction = AbilityList.getAbility(actorStats, AbilityList.rileKey);
+                targetingTrait = TraitList.buffer;
+                
+                environmentalCombatActions.Add(envCombatAction.clone(actorStats), targetingTrait.clone(actorStats));
+                
                 return;
             default:
                 return;

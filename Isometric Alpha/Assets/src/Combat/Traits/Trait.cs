@@ -20,7 +20,18 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         private set;
     }
     private string traitDescription;
-    protected Stats traitHolder;
+    protected Stats _TraitHolder;
+    protected virtual Stats traitHolder
+    {
+        get
+        {
+            return _TraitHolder;
+        }
+        set
+        {
+            _TraitHolder = value;
+        }
+    }
     public Stats traitApplier;
 
     private bool pacifistic = false;
@@ -440,6 +451,15 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
     public virtual Trait clone()
     {
         return (Trait)Clone();
+    }
+
+    public Trait clone(Stats newTraitHolder)
+    {
+        Trait traitClone = clone();
+
+        traitClone.traitHolder = newTraitHolder;
+
+        return traitClone;
     }
 
     #region IDescribable methods

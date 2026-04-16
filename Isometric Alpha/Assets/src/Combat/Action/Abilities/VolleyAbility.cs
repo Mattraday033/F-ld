@@ -6,10 +6,6 @@ public class VolleyAbility : Ability
 {
 	public const string volleyName = "Volley";
 	public const string volleyDescription = "A large group of combatants combine their attacks to bombard the enemy with many shots.";
-	public const string alliedVolleyDamageFormula = "6+4C";
-	public const string alliedVolleyCritFormula = "2+3C";
-	public const string enemyVolleyDamageFormula = "10";
-	public const string enemyVolleyCritFormula = "5";
 	
 	public BombardmentTargetPriorityTrait volleyTargetingPriority;
 	public List<Stats> allActors;
@@ -236,28 +232,41 @@ public class VolleyAbility : Ability
 		}
 	}
 
+    private delegate string Average<T>(T t);
+
+    private string getAverage(Average<CombatAction> average)
+    {
+        int totalDamage = 0;
+        int aliveVolleyers = 0;
+
+        foreach(Stats volleyer in allActors)
+        {
+            VolleyParticipantStats volleyParticipant = volleyer as VolleyParticipantStats;
+
+            if(volleyParticipant != null && volleyer.isAlive() && !volleyer.isStunned())
+            {
+                totalDamage += DamageCalculator.calculateFormula(average(volleyParticipant.getCombatAction()), volleyParticipant); //.getDamageFormulaTotal()
+                aliveVolleyers++;
+            }
+        }
+
+        if(aliveVolleyers > 0)
+        {
+            return (totalDamage/aliveVolleyers) + "";
+        } else
+        {
+            return Constants.zeroRating;
+        }
+    }
+
 	public override string getDamageFormula()
 	{
-		if (alliedSide)
-		{
-			return alliedVolleyDamageFormula;
-		}
-		else
-		{
-			return enemyVolleyDamageFormula;
-		}
+        return getAverage(t => t.getDamageFormula());
 	}
 
 	public override string getCritFormula()
 	{
-		if (alliedSide)
-		{
-			return alliedVolleyCritFormula;
-		}
-		else
-		{
-			return enemyVolleyCritFormula;
-		}
+        return getAverage(t => t.getCritFormula());
 	}
 
 	public static int numberOfVolleyActors(bool alliedSide)

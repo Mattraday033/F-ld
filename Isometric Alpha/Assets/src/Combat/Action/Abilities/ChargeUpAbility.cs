@@ -15,8 +15,8 @@ public class ChargeUpAbility : Ability
 																	DamageParams.build(actionWhenCharged.getDamageFormula(), actionWhenCharged.getCritFormula()),
 																	TargetParams.build(Range.singleTargetIndex, actionWhenCharged.selfTargeting),
 																	FrequencyParams.build(actionWhenCharged.getMaximumSlots(), actionWhenCharged.getMaximumCooldown()),
-																	CostParams.build(actionWhenCharged.getActionCostTypes(), actionWhenCharged.getActionCosts()),
-																	actionWhenCharged.getAppliedTrait()) //Left off relatedTraits
+																	costParams: CostParams.build(actionWhenCharged.getActionCostTypes(), actionWhenCharged.getActionCosts()),
+																	appliedTrait: actionWhenCharged.getAppliedTrait()) //Left off relatedTraits
 			)
 	{
 		this.chargeUpTrait = chargeUpTrait.clone();

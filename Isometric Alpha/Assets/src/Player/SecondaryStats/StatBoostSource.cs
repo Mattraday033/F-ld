@@ -72,6 +72,8 @@ public abstract class StatBoostSource : INameSource
     {
         switch (getName())
         {
+            case StatSourceNameList.riledKey:
+                return "3";
             case StatSourceNameList.coordinatedKey:
             case StatSourceNameList.chewBuzzKey:
                 return "4";
@@ -107,6 +109,8 @@ public abstract class StatBoostSource : INameSource
             case ItemList.martialArtistsBeltKey:
             case ItemList.plumedHelmetKey:
                 return "2";
+            case StatSourceNameList.riledKey:
+                return "3";
             case StatSourceNameList.coordinatedKey:
             case StatSourceNameList.predationKey:
             case ItemList.luckyTalismanKey:

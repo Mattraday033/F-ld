@@ -73,7 +73,7 @@ public static class EnemyAmountList
 
     #region Branded Slaves
     public readonly static CreatureAmount eightBrandedConscripts = new CreatureAmount(Constants.eightCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.brandedConscript));
-    public readonly static CreatureAmount fifteenBrandedConscripts = new CreatureAmount(Constants.fifteenCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.brandedConscript));
+    public readonly static CreatureAmount fifteenAngryBranded = new CreatureAmount(Constants.fifteenCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.angryBranded));
 
     #endregion
 

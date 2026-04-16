@@ -31,9 +31,21 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     #region Global Variables
 
-    private string characterName;
+    public string characterName;
 
-    public GridCoords position;
+    private GridCoords _Position;
+
+    public GridCoords position
+    {
+        get
+        {
+            return _Position;
+        }
+        set
+        {
+            _Position = value;
+        }
+    }
 
     public Color previousColor = Color.clear;
 
@@ -571,12 +583,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return false;
     }
 
-    public void moveTo(GridCoords newCoords)
-    {
-        moveTo(newCoords, true);
-    }
-
-    public void moveTo(GridCoords newCoords, bool moveSprite)
+    public void moveTo(GridCoords newCoords, bool moveSprite = true)
     {
         GridCoords oldCoords = position.clone();
 
@@ -596,7 +603,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
             CombatGrid.updateStatsSpritePosition(newCoords);
         }
 
-        EnvironmentalCombatActionManager.getInstance().updateEnvironmentalCasterPosition(oldCoords, newCoords);
+        // EnvironmentalCombatActionManager.getInstance().updateEnvironmentalCasterPosition(oldCoords, newCoords);
     }
 
     public abstract int getTotalArmorRating();

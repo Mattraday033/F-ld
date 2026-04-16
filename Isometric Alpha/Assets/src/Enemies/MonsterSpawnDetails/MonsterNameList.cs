@@ -133,7 +133,9 @@ public static class MonsterNameList
             case NPCNameList.beam:
             case noBrandLoyalist:
             case noBrandRioter:
+            case NPCNameList.clay:
             case brandedConscript:
+            case angryBranded:
             case brandedRioter:
                 return slavePackName;
 

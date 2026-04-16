@@ -126,6 +126,7 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.seb, brandedFolderPath + MonsterNameList.brandedConscript + "/");
         folderPathDict.Add(NPCNameList.slate, brandedFolderPath + MonsterNameList.brandedConscript + "/");
 
+        folderPathDict.Add(MonsterNameList.angryBranded, brandedFolderPath + MonsterNameList.brandedConscript + "/");   
         folderPathDict.Add(MonsterNameList.brandedConscript, brandedFolderPath + MonsterNameList.brandedConscript + "/");   
 
         folderPathDict.Add(MonsterNameList.brandedRioter +  MonsterNameList.pickMarker, brandedFolderPath + MonsterNameList.brandedRioter + MonsterNameList.pickMarker + "/");   

@@ -95,7 +95,7 @@ public static class TraitList
 	public readonly static Trait blocker = new BlockerTrait();
 	public readonly static Trait buffer = new BufferTargetPriorityTrait(specificHexadecupleBoxEnemySide);
 	public readonly static Trait healer = new BufferTargetPriorityTrait(new LowestHealthEnemySideTargetPriorityTrait());
-	public readonly static Trait singleTargetBuffer = new BufferTargetPriorityTrait(new RandomEnemyTargetPriorityTrait());
+	public readonly static Trait singleTargetBuffer = new BufferTargetPriorityTrait(new RandomEnemyBesidesSelfTargetPriorityTrait());
 	public readonly static Trait saintly = new CatalystTargetPriorityTrait(specificHexadecupleBoxEnemySide, new ChaoticTargetPriorityTrait());
 
 	public readonly static Trait spawner = new Trait(StatSourceNameList.spawnerKey, TraitType.Interaction, "This creature creates minions.", "Egg");
@@ -144,7 +144,8 @@ public static class TraitList
 	public readonly static Trait countered = new CrowdControlTrait(StatSourceNameList.counteredKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Trip", roundsLeft: Constants.endOfRoundDuration);
 	public readonly static Trait acidVomit = new Trait(StatSourceNameList.acidVomitKey, TraitType.Wound, "This creature takes extra damage whenever it is hit", "Acid Vomit", roundsLeft: Constants.threeRoundDuration);
 	public readonly static Trait roasted = new StackableTrait(StatSourceNameList.roastedKey, TraitType.Wound, "Roasted to perfection. This creature takes an extra point of damage per stack", StatSourceNameList.roastedKey, startingStacks: Constants.oneStackAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication);
-	public readonly static Trait crippled = new DamageOnFutureTraitApplicationTrait(StatSourceNameList.crippledKey, TraitType.Wound, "This creature has suffered a crippling blow and takes " + crippledDamageFormula + " whenever a debuff is applied to it.", "Cripple", crippledDamageFormula, TriggerType.Debuff);
+	public readonly static Trait riled = new StackableTrait(StatSourceNameList.riledKey, TraitType.Boost, "Provoked and ready to do something about it. This creature deals increased damage.", AbilityList.rileKey, startingStacks: Constants.oneStackAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication);
+    public readonly static Trait crippled = new DamageOnFutureTraitApplicationTrait(StatSourceNameList.crippledKey, TraitType.Wound, "This creature has suffered a crippling blow and takes " + crippledDamageFormula + " whenever a debuff is applied to it.", "Cripple", crippledDamageFormula, TriggerType.Debuff);
 	public readonly static Trait whiplash = new CrowdControlTrait(StatSourceNameList.whiplashKey, TraitType.Wound, "This creature is stunned until the end of the round", "Lashings", roundsLeft: Constants.oneRoundDuration);
 	public readonly static Trait afraid = new CrowdControlTrait(StatSourceNameList.afraidKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Afraid", roundsLeft: Constants.oneRoundDuration);
 	public readonly static Trait crushingBlow = new Trait(AbilityList.crushingBlowName, TraitType.Wound, "The damage reduction offered by this creature's Armor is reduced.", AbilityList.crushingBlowName, roundsLeft: Constants.oneRoundDuration, permanent: false);

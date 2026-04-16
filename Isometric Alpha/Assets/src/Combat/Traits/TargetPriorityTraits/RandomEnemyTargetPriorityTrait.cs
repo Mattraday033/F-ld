@@ -10,9 +10,28 @@ public class RandomEnemyTargetPriorityTrait : TargetPriorityTrait
     {
 
     }
+    
+    public override Stats getMandatoryTarget(List<Stats> listOfTargets)
+    {
+        listOfTargets = CombatGrid.getAllAliveEnemyCombatants();
 
-    public RandomEnemyTargetPriorityTrait(string traitName, string traitDescription, string iconName) :
-    base(traitName, traitDescription, iconName)
+        if(listOfTargets.Count == 0)
+        {
+            return null;
+        }
+
+        int index = Random.Range(0, listOfTargets.Count);
+        
+        return listOfTargets[index];
+    }
+
+}
+
+public class RandomEnemyBesidesSelfTargetPriorityTrait : TargetPriorityTrait
+{
+
+    public RandomEnemyBesidesSelfTargetPriorityTrait() : 
+    base("","","") //used when name/description/icon/background color are overridden, like with BufferTargetPriorityTrait
     {
 
     }
@@ -20,6 +39,8 @@ public class RandomEnemyTargetPriorityTrait : TargetPriorityTrait
     public override Stats getMandatoryTarget(List<Stats> listOfTargets)
     {
         listOfTargets = CombatGrid.getAllAliveEnemyCombatants();
+
+        listOfTargets.Remove(traitHolder);
 
         if(listOfTargets.Count == 0)
         {

@@ -165,9 +165,7 @@ public class CombatStateManager : MonoBehaviour
 
         EquippedPassiveTraitManager.ApplyAllEquippedPassiveTraits.Invoke();
 
-		// enemySpawner.spawn();
-		// partySpawner.spawnFormation();
-		// summonSpawner.spawn();
+        AudioManager.endAmbience();
 
 		ticker = Ticker.getInstance();
 

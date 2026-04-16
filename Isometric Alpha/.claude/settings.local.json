@@ -7,7 +7,10 @@
       "Bash(xargs grep:*)",
       "Bash(xxd \"c:/Users/mattr/OneDrive/Documents/GitHub/F-ld/Isometric Alpha/Library/ScriptAssemblies/Assembly-CSharp.pdb\")",
       "Bash(code --list-extensions)",
-      "Bash(code --list-extensions --show-versions)"
+      "Bash(code --list-extensions --show-versions)",
+      "Bash(python -c \"from PIL import Image; print\\('PIL available'\\)\")",
+      "Bash(pip install:*)",
+      "Bash(python fix_outlines.py)"
     ]
   }
 }

@@ -77,6 +77,27 @@ public class CombatAnimationManager : MonoBehaviour
         }
     }
 
+    public static void trackAnimation(int key, IAnimationTracker tracker, float animationDuration)
+    {
+        trackAnimation(key, tracker);
+
+        if(instance != null)
+        {
+            instance.StartCoroutine(instance.ensureAnimationCleanup(key, animationDuration));
+        }
+    }
+
+    private IEnumerator ensureAnimationCleanup(int key, float animationDuration)
+    {
+        yield return new WaitForSeconds(animationDuration + 0.1f);
+
+        if(currentAnimations.ContainsKey(key))
+        {
+            removeAnimation(key);
+            checkAllAnimationsFinished();
+        }
+    }
+
     public static void removeAnimation(int key)
     {
         if(currentAnimations.ContainsKey(key))
@@ -133,7 +154,9 @@ public class CombatAnimationManager : MonoBehaviour
 
         currentEffect.transform.position = CombatGrid.getEffectPositionAt(targetCoords);
 
-        currentAnimations.Add(currentEffect.key, currentEffect);
+        AnimationClip clip = Resources.Load<AnimationClip>(PrefabNames.abilityEffectFolderPath + animationType);
+        float effectDuration = clip != null ? clip.length : 2f;
+        trackAnimation(currentEffect.key, currentEffect, effectDuration);
 
         currentEffect.setAnimations(animationType);
     }
@@ -167,7 +190,7 @@ public class CombatAnimationManager : MonoBehaviour
 
         currentProjectile.maxTime = defaultMaxTime;
 
-        currentAnimations.Add(key, currentProjectile);
+        trackAnimation(key, currentProjectile, currentProjectile.maxTime * 4);
 
         if (CombatGrid.positionsAreOnSameSide(actorCoords, targetCoords))
         {

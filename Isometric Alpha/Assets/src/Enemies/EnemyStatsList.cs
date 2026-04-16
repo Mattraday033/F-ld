@@ -158,6 +158,18 @@ new BuffChargeUpAbility(TraitList.coordinated, AbilityList.getAbility(null, Abil
                                                                             },
                                                                             animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
         #endregion
+
+        #region Branded Slaves
+        enemyStatsDict.Add(NPCNameList.clay, new EnemyStats(NPCNameList.clay,
+                                                                            Constants.tenArmor,
+                                                                                    250,
+                    AbilityList.getAbility(null, AbilityList.gutKey) as Ability,
+                                                        new Trait[] { 
+                                                                      TraitList.master,
+                                                                      TraitList.territorial
+                                                                    },
+                                                                    animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
+        #endregion
         #endregion
 
         #region Lovashi Guards
@@ -296,6 +308,18 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #endregion
 
         #region Branded Slaves
+
+        enemyStatsDict.Add(MonsterNameList.angryBranded, new MinionStats(MonsterNameList.angryBranded,
+                                                                            Constants.fiveArmor,
+                                                                                    15,
+                    AbilityList.getAbility(null, AbilityList.brandedVolleyKey) as Ability,
+                                                        new Trait[] { 
+                                                                        TraitList.minion,
+                                                                        TraitList.chaotic,
+                                                                        TraitList.blocker,
+                                                                        TraitList.frontLine
+                                                                    },
+                                                                    animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
 
         enemyStatsDict.Add(MonsterNameList.brandedConscript, new MinionStats(MonsterNameList.brandedConscript,
                                                                             Constants.fiveArmor,

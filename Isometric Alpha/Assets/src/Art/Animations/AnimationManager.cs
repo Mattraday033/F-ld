@@ -460,7 +460,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     public void playSpawnAnimation()
     {
         disableExtras();
-        CombatAnimationManager.trackAnimation(key, this);
+        CombatAnimationManager.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Spawn));
         playAnimation(createClipTransitionToIdle(CharacterAnimationType.Spawn));
         linkedStats.playAnimationSFX(CharacterAnimationType.Spawn);
     }
@@ -527,8 +527,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             }
         }
 
-        CombatAnimationManager.trackAnimation(key, this);
-        playAnimation(createClipTransitionToIdle(attackAnimationType));        
+        CombatAnimationManager.trackAnimation(key, this, getAnimationLength(attackAnimationType));
+        playAnimation(createClipTransitionToIdle(attackAnimationType));
 
         if(CombatStateManager.inCombat)
         {
@@ -538,7 +538,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public void playAttackIntoFrontIdleAnimation()
     {
-        CombatAnimationManager.trackAnimation(key, this);
+        CombatAnimationManager.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Attack_Normal));
         setCurrentIdle(CharacterAnimationType.Idle_Front);
         playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Normal));
         
@@ -547,7 +547,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public void playAttackIntoSecondaryIdleAnimation()
     {
-        CombatAnimationManager.trackAnimation(key, this);
+        CombatAnimationManager.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Attack_Special));
         setCurrentIdle(CharacterAnimationType.Secondary_Idle);
         playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Special));
         linkedStats.playAnimationSFX(CharacterAnimationType.Attack_Normal);
@@ -555,7 +555,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public void playSpecialAttackAnimation()
     {
-        CombatAnimationManager.trackAnimation(key, this);
+        CombatAnimationManager.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Attack_Special));
 
         if(CombatStateManager.inCombat &&
             healthBarManager!= null && 
@@ -593,7 +593,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             }
         }
 
-        CombatAnimationManager.trackAnimation(key, this);
+        CombatAnimationManager.trackAnimation(key, this, getAnimationLength(woundedAnimationType));
         playAnimation(createClipTransitionToIdle(woundedAnimationType));
     }
 

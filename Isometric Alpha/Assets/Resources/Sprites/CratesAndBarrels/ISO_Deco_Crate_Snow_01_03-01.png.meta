@@ -110,7 +110,11 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline: []
+    outline:
+    - - {x: -99, y: 109}
+      - {x: -99, y: -109}
+      - {x: 99, y: -109}
+      - {x: 99, y: 109}
     physicsShape: []
     bones: []
     spriteID: c17202ed586f7c349aef86d6498a69dd
