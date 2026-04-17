@@ -562,4 +562,10 @@ public static class Helpers
         return new Vector3(averagePosition.x / positions.Count, averagePosition.y / positions.Count, averagePosition.z / positions.Count);
     }
 
+    private const float zPosMultiplier  = .0001f;
+    public static float calculateColliderZPosition(Vector3Int cellCoords)
+    {
+        return -1f + ((( zPosMultiplier * (float) cellCoords.x) + ( zPosMultiplier * (float) cellCoords.y))/2f);
+    }
+
 } 

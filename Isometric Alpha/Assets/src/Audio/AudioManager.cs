@@ -183,7 +183,8 @@ public class AudioManager : MonoBehaviour
     {
         if(mode == LoadSceneMode.Additive ||
             scene.name.Equals(SceneNameList.loadingScreen) || 
-            scene.name.Equals(SceneNameList.endOfDemo))
+            scene.name.Equals(SceneNameList.endOfDemo) || 
+            scene.name.Equals(SceneNameList.openingMonologue))
         {
             return;
         }
@@ -250,6 +251,14 @@ public class AudioManager : MonoBehaviour
             setCurrentMusicPath(newAreaMusicPath);
             addMusicFade();
             MusicFade.OnMusicMidFade.AddListener(loadAndPlayCurrentMusicClip);
+        }
+    }
+
+    public static void restartMusic()
+    {
+        if(instance != null && instance.musicSource != null)
+        {
+            instance.musicSource.Play();
         }
     }
 
@@ -601,6 +610,11 @@ public class AudioManager : MonoBehaviour
         playAudioClipAsSingleton(AudioClipList.lvlUpSFX);
     }
 
+    public static void playGongSFX()
+    {
+        playAudioClipAsSingleton(AudioClipList.gongSFX);
+    }
+
     #endregion
 
     [RuntimeInitializeOnLoadMethod]
@@ -668,6 +682,7 @@ public static class AudioClipList
     public const string lvlUpSFX = miscSFXFolder + "LvlUp";
     public const string tunnelExplosionSFX = miscSFXFolder + "TunnelExplosion";
     public const string jellyMisfireSFX = miscSFXFolder + "JellyMisfire";
+    public const string gongSFX = miscSFXFolder + "Gong";
 
     public const string coinSFXFolder = SFXFolderPath + "Coin/";
 

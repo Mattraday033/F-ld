@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Manse_bench_new_version
+  m_Name: GSS_Foliage_Forest_small_bush_02 (Test)
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: cc52d671cec5c8941a9e1d6ebea5452f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa9831fdbd55e4748b6351abad15dfdb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

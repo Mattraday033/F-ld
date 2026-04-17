@@ -343,7 +343,7 @@ public static class MonsterSpawnDetailsList
 
         list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(1, 6)));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(1, 6), Facing.NorthEast));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section3a, list);
 

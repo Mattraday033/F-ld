@@ -508,6 +508,7 @@ public class SaveHandler : ScreenManager, IEscapable
 	{
 		if (Flags.isInNewGameMode() && OverallUIManager.UIParentPanel && gameObject)
 		{
+            AudioManager.playChangeScreenSFX();
             OverallUIManager.UIParentPanel.SetActive(false);
             Destroy(gameObject);
 		} else if(CombatStateManager.inCombat && CombatStateManager.whoseTurn != WhoseTurn.Lost)

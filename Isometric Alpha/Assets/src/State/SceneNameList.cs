@@ -19,6 +19,8 @@ public static class SceneNameList
 
     public const string endOfDemo = "EndOfDemo";
 
+    public const string openingMonologue = "OpeningMonologue";
+
 }
 
 public static class SceneChange
@@ -59,6 +61,12 @@ public static class SceneChange
     public static void changeSceneToLoadingScreen()
     {
         SceneManager.LoadScene(SceneNameList.loadingScreen);
+    }
+
+
+    public static void changeSceneToOpeningMonologue()
+    {
+        SceneManager.LoadScene(SceneNameList.openingMonologue);
     }
 
     public static void changeSceneToOverworld()

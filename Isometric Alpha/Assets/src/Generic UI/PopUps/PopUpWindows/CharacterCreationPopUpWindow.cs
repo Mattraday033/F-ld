@@ -12,6 +12,8 @@ public class CharacterCreationPopUpWindow : PopUpWindow
     private static CharacterCreationPopUpWindow instance;
     public readonly static string[] portraitSpriteNameList = new string[]{ NPCNameList.protagPrefix+1, NPCNameList.protagPrefix+2 };
 
+    public static bool goToMonologue;
+
     public TMP_InputField nameField;
 
     public AllyStats currentStats;
@@ -32,10 +34,13 @@ public class CharacterCreationPopUpWindow : PopUpWindow
     public Image portraitImage;
     public Image spriteImage;
 
+    public Canvas windowCanvas;
+
     [RuntimeInitializeOnLoadMethod]
     private static void intitializeCharacterCreationWindow()
     {
         instance = null;
+        goToMonologue = false;
     }
 
 
@@ -64,6 +69,7 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         pointsToSpend = 1;
 
         populate();
+        AudioManager.playChangeScreenSFX();
     }
 
     void Update() //here for Key Input
@@ -209,7 +215,44 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         }
     }
 
+    private const float newGameFadeOutDuration = 6f;
+    private bool isFadingToMonologue;
+
     public void newGameSetCharacterNameAndStats()
+    {
+        if (isFadingToMonologue)
+        {
+            return;
+        }
+
+        isFadingToMonologue = true;
+        StartCoroutine(fadeOutThenStartMonologue());
+    }
+
+    private IEnumerator fadeOutThenStartMonologue()
+    {
+
+        FadeToBlackManager.StopFade(FadeType.Screen);
+        FadeToBlackManager.StopFade(FadeType.Music);
+
+        FadeToBlackTransition fadeOut = new(skipFadeIn: true);
+        fadeOut.fadeTime = 4.5f;
+        FadeToBlackManager.createFade(fadeOut);
+
+        AudioManager.setMusicSourceVolume(0f);
+
+        AudioManager.playGongSFX();
+
+        yield return null;
+
+        hideWindow();
+
+        yield return new WaitForSeconds(5.5f);
+
+        applyCharacterChoicesAndStartMonologue();
+    }
+
+    private void applyCharacterChoicesAndStartMonologue()
     {
         string name = nameField.text;
 
@@ -221,6 +264,8 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         //here for loading screen animation
         State.playerPortraitName = portraitSpriteNameList[portraitNameIndex];
         State.playerSpriteName = portraitSpriteNameList[spriteNameIndex];
+
+        goToMonologue = true;
 
         LoadSaveFile.loadCleanSlateSaveFile();
 
@@ -260,6 +305,7 @@ public class CharacterCreationPopUpWindow : PopUpWindow
     }
     public override void handleEscapePress()
     {
+        AudioManager.playChangeScreenSFX();
         destroyWindow();
     }
 
@@ -389,5 +435,13 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         }
 
         updatePortraitSpriteImages();
+    }
+
+    public static void hideWindow()
+    {
+        if(instance != null && instance.windowCanvas != null)
+        {
+            instance.windowCanvas.enabled = false;
+        }
     }
 }

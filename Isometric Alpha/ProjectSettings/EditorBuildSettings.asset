@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu/StartMenu.unity
     guid: 25f712fe4a6af2846813a83f18b34bbd
   - enabled: 0
-    path: Assets/Scenes/StartMenu/OpeningCutscene.unity
+    path: Assets/Scenes/StartMenu/(old) OpeningCutscene.unity
     guid: 20d2b8a210cd6ac479e028a879dc87e9
   - enabled: 1
     path: Assets/Scenes/Combat/Combat.unity
@@ -29,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Overworld/Overworld.unity
     guid: c4c60f184b818c3479b0508c69aad42c
+  - enabled: 1
+    path: Assets/Scenes/StartMenu/OpeningMonologue.unity
+    guid: d7ae3c7250c0d294abf3ea3c57b15405
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: a9a74e7783bd2f14799402861b2a8c52,
       type: 2}

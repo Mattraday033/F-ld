@@ -319,8 +319,10 @@ public static class SpawnInfoManager
             }
         }
         else
-        {
-            monsterGameObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(details.cellCoords);
+        {   
+            Vector3 newPos = AreaManager.getMasterGrid().GetCellCenterWorld(details.cellCoords);
+            newPos.z = Helpers.calculateColliderZPosition(details.cellCoords);
+            monsterGameObject.transform.position = newPos;
         }
 
         addGameObject(monsterGameObject);

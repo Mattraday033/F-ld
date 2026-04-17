@@ -559,20 +559,20 @@ public static class GateSpawnInfoList
                                     Constants.sizeThree,
                                     Axis.DescendingX));
 
-        list.Add(new GateWithHiddenTerrainSpawnInfo(Constants.indexOne, 
+        list.Add(new GateWithHiddenTerrainSpawnInfo(Constants.indexOne,
                                     NPCNameList.unstablePillar,
                                     ZoneKeyList.mineLvl3 + LocationNameList.section6a,
                                     PrefabNames.unstablePillar,
-                                    ColorList.mineLvl3RubbleColor,
+                                    Color.white,
                                     new Vector3Int(-6, -1),
                                     SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain,
                                     StatDifficultyList.strengthDifficultyThree));
 
-        list.Add(new GateWithHiddenTerrainSpawnInfo(Constants.indexOne, 
+        list.Add(new GateWithHiddenTerrainSpawnInfo(Constants.indexOne,
                                     NPCNameList.unstablePillar,
                                     ZoneKeyList.mineLvl3 + LocationNameList.section6a,
                                     PrefabNames.unstablePillar,
-                                    ColorList.mineLvl3RubbleColor,
+                                    Color.white,
                                     new Vector3Int(-6, -5),
                                     SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain,
                                     StatDifficultyList.strengthDifficultyThree));
@@ -593,11 +593,11 @@ public static class GateSpawnInfoList
                                     Constants.sizeThree,
                                     Axis.DescendingY));
 
-        list.Add(new GateWithHiddenTerrainSpawnInfo(Constants.indexOne, 
+        list.Add(new GateWithHiddenTerrainSpawnInfo(Constants.indexOne,
                                     NPCNameList.unstablePillar,
                                     ZoneKeyList.mineLvl3 + LocationNameList.section7,
                                     PrefabNames.unstablePillar,
-                                    ColorList.mineLvl3RubbleColor,
+                                    Color.white,
                                     new Vector3Int(-9, -2),
                                     SecretDoorKeyList.mineLvl3_7UnstablePillarHiddenTerrain,
                                     StatDifficultyList.strengthDifficultyThree));

@@ -739,7 +739,7 @@ public class RubbleObstacleSpawnDetails : ObstacleSpawnDetails
     }
 }
 
-public class ButtonSpawnDetails : OOCSpawnDetails
+public class ButtonSpawnDetails : OffSetSpawnDetails
 {
 
     private int index;
@@ -747,7 +747,7 @@ public class ButtonSpawnDetails : OOCSpawnDetails
     private int charismaRequirement;
 
     public ButtonSpawnDetails(Vector3Int cellCoords, int index = 0, int weight = 1, int charismaRequirement = 1, string tutorialTargetHash = null) :
-    base(NPCNameList.button, cellCoords)
+    base(NPCNameList.button, cellCoords, offset: Constants.onTableHeightOffset*-3)
     {
         this.index = index;
         this.weight = weight;
@@ -762,11 +762,13 @@ public class ButtonSpawnDetails : OOCSpawnDetails
 
     public override Transform getParent()
     {
-        return AreaManager.getNPCParentWithoutScale();
+        return AreaManager.getNPCParentWithScale();
     }
 
     public override void spawnActions(GameObject button)
     {
+        base.spawnActions(button);
+
         if (hasTutorialTargetHash())
         {
             SpriteRenderer spriteRenderer = button.GetComponent<SpriteRenderer>();
@@ -782,6 +784,13 @@ public class ButtonSpawnDetails : OOCSpawnDetails
         floorButton.index = index;
         floorButton.weight = weight;
         floorButton.charismaRequirement = charismaRequirement;
+
+        floorButton.setSprite(Constants.indexZero);
+
+        floorButton.transform.position = new Vector3(floorButton.transform.position.x, floorButton.transform.position.y, 0f);
+
+        NPCMouseHover mouseHover = floorButton.transform.GetComponentInChildren<NPCMouseHover>();
+        Helpers.updatePolygonCollider(mouseHover.spriteRenderer, mouseHover.polygonCollider2D);
     }
 
 }

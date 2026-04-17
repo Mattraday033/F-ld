@@ -8,6 +8,8 @@ public abstract class MusicFade : IFade
     public readonly static UnityEvent OnMusicMidFade = new UnityEvent();
 
     private Coroutine activeCoroutine;
+    public float timeWaited = 0;
+    public float fadeTime = 2.5f;
 
     public abstract bool isFinished();
 
@@ -17,6 +19,26 @@ public abstract class MusicFade : IFade
     {
         activeCoroutine = coroutine;
     }
+
+    public virtual void setTimeWaited(float newTimeWaited, bool incomingDirection = false)
+    {
+        timeWaited = newTimeWaited;
+    }
+
+    public virtual float getCurrentFadePercent()
+    {
+        return Mathf.Lerp(AudioManager.musicVolumePlayerSetting, 0f, timeWaited/fadeTime);
+    }
+
+    protected void setToFull()
+	{
+        AudioManager.setMusicSourceVolume(AudioManager.musicVolumePlayerSetting);
+	}
+    protected void setToMute()
+	{
+        AudioManager.setMusicSourceVolume(0f);
+	}
+
 
     public Coroutine getActiveCoroutine()
     {
@@ -40,9 +62,6 @@ public abstract class MusicFade : IFade
 public class BetweenAreaFade : MusicFade
 {
 
-    public float timeWaited = 0;
-    public float fadeTime = 2.5f;
-
     public string originalClipPath;
     public string newClipPath;
 
@@ -62,7 +81,7 @@ public class BetweenAreaFade : MusicFade
         this.newClipPath = newClipPath;
     }
 
-    public void setTimeWaited(float newTimeWaited, bool incomingDirection)
+    public override void setTimeWaited(float newTimeWaited, bool incomingDirection = false)
     {
         if(incomingDirection != fadeOut)
         {
@@ -80,7 +99,7 @@ public class BetweenAreaFade : MusicFade
 		AudioManager.setMusicSourceVolume(fadePercent);
 	} 
 
-    public float getCurrentFadePercent()
+    public override float getCurrentFadePercent()
     {
         if(fadeOut)
         {
@@ -143,6 +162,42 @@ public class BetweenAreaFade : MusicFade
         }
 		
         setToFull();
+        FadeToBlackManager.StopFade(getFadeType());
+    }
+}
+
+public class FadeToSilence : MusicFade
+{
+
+    public FadeToSilence(float fadeTime = 2.5f)
+    {
+        this.fadeTime = fadeTime;
+    }
+
+	protected void updateMusicVolume()
+	{
+        float fadePercent = getCurrentFadePercent();
+
+		AudioManager.setMusicSourceVolume(fadePercent);
+	} 
+
+    public override bool isFinished()
+    {
+        return timeWaited >= fadeTime;
+    }
+
+    public override IEnumerator getCoroutineTemplate()
+    {
+        while (!isFinished())
+        {
+            yield return null;
+
+            timeWaited += Time.deltaTime;
+
+            updateMusicVolume();
+        }
+		
+        setToMute();
         FadeToBlackManager.StopFade(getFadeType());
     }
 }

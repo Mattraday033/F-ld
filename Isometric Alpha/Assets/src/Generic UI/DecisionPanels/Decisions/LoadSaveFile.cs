@@ -61,7 +61,16 @@ public class LoadSaveFile : IDecision
         State.dialogueUponSceneLoadKey = null;
         ScreenManager.currentPartyMember = null;
 
-        if (!SceneManager.GetActiveScene().name.Equals(SceneNameList.loadingScreen))
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        if(!currentSceneName.Equals(SceneNameList.openingMonologue) && 
+            CharacterCreationPopUpWindow.goToMonologue)
+        {
+            SceneChange.changeSceneToOpeningMonologue();
+            CharacterCreationPopUpWindow.goToMonologue = false;
+            LoadingBarProgressTracker.loadSaveFile = this;
+            return;
+        } else if (!currentSceneName.Equals(SceneNameList.loadingScreen))
         {
             LoadingBarProgressTracker.loadSaveFile = this;
             SceneChange.changeSceneToLoadingScreen();

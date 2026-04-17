@@ -1043,7 +1043,7 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(ZoneKeyList.mineLvl3 + LocationNameList.section3a, ZoneKeyList.mineLvl3 + LocationNameList.section7, new Vector3Int(-20, 7), Facing.NorthEast, Constants.sizeTwo, Axis.DescendingY));
 
-        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(3, 5), Facing.SouthWest));
+        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(3, 6), Facing.SouthWest));
 
         transitionSpawnInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section3a, list);
 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class NPCMouseHover : MonoBehaviour
 {
-    private const float zPosMultiplier  = .0001f;
 
     //Needs to be attached to an object with a 2DCollider Component
 
@@ -18,7 +17,7 @@ public class NPCMouseHover : MonoBehaviour
         
         Vector3Int currentCell = AreaManager.getMasterGrid().WorldToCell(transform.parent.position);
 
-        transform.position = new Vector3(transform.position.x, transform.position.y, -1f + ((( zPosMultiplier * (float) currentCell.x) + ( zPosMultiplier * (float) currentCell.y))/2f));
+        transform.position = new Vector3(transform.position.x, transform.position.y, Helpers.calculateColliderZPosition(currentCell));
 
         if(spriteRenderer == null)
         {

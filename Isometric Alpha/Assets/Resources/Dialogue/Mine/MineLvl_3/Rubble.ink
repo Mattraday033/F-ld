@@ -286,7 +286,7 @@ What's this? Insurrection? I'll die before any of you see the light of day.
     
     changeCamTarget({marcosIndex})
 
-    For what it's worth, they have been nothing but kind to me. I may be wounded, but I can vouch that all of my wounds were inflicted by the worms.
+    For what it's worth, they have been nothing but kind to me. I may be injured, but I can vouch that all of my wounds were inflicted by the worms.
     
     changeCamTarget({pazmanIndex})
     

@@ -43,7 +43,7 @@ public class FadeToBlackManager : MonoBehaviour
     
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(mode == LoadSceneMode.Additive)
+        if(mode == LoadSceneMode.Additive || scene.name.Equals(SceneNameList.openingMonologue))
         {
             return;
         }
@@ -176,6 +176,18 @@ public class FadeToBlackManager : MonoBehaviour
             newFade.setTimeWaited(oldFade.timeWaited, oldFade.fadeOut);            
             StopFade(newFade.getFadeType());
         }
+
+        fadeDictionary[newFade.getFadeType()] = newFade;
+        fadeDictionary[newFade.getFadeType()].setActiveCoroutine(instance.StartCoroutine(newFade.getCoroutineTemplate()));
+    }
+
+    public static void createFade(MusicFade newFade)
+    {
+        if(newFade == null || 
+            instance == null)
+        {
+            return;
+        } 
 
         fadeDictionary[newFade.getFadeType()] = newFade;
         fadeDictionary[newFade.getFadeType()].setActiveCoroutine(instance.StartCoroutine(newFade.getCoroutineTemplate()));

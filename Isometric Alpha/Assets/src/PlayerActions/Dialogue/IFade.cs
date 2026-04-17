@@ -54,6 +54,7 @@ public abstract class FullScreenTransition : ScreenFade
     protected const float slowFadeInSpeed = 3.5f;
     protected const float quickFadeInSpeed = .15f;
     public float fadeTime = .5f;
+    public bool useCustomFadeTime = false;
 
 	protected void updateFadeToBlackImageOpacity()
 	{
@@ -75,10 +76,23 @@ public abstract class FullScreenTransition : ScreenFade
     {
         fadeTime = quickFadeInSpeed;
     }
+
+    public void setCustomFadeTime(float time)
+    {
+        fadeTime = time;
+        useCustomFadeTime = true;
+    }
 }
 
 public class FadeToBlackTransition : FullScreenTransition
 {
+
+    public bool skipFadeIn;
+
+    public FadeToBlackTransition(bool skipFadeIn = false)
+    {
+        this.skipFadeIn = skipFadeIn;
+    }
 
     private FadeBackInTransition fadeBackIn;
 
@@ -136,7 +150,7 @@ public class FadeToBlackTransition : FullScreenTransition
 
         DialogueManager.setCameraToDefaultSpeed();
 
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.inDialogue)
+        if(PlayerOOCStateManager.currentActivity == OOCActivity.inDialogue || skipFadeIn)
         {
             yield break;
         }

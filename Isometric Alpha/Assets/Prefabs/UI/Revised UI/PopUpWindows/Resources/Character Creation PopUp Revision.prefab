@@ -1069,6 +1069,7 @@ MonoBehaviour:
   spriteNameIndex: 0
   portraitImage: {fileID: 7828165097984690537}
   spriteImage: {fileID: 8927866156942414047}
+  windowCanvas: {fileID: 135817174433121649}
 --- !u!223 &135817174433121649
 Canvas:
   m_ObjectHideFlags: 0
@@ -4264,6 +4265,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 4805358836807214345}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
   primaryStat: 1
   popUpParent: {fileID: 0}
 --- !u!1001 &1114601072215624781
@@ -5367,6 +5369,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 7758522087183966722}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
   primaryStat: 3
   popUpParent: {fileID: 0}
 --- !u!114 &7758522087183966722 stripped
@@ -6944,6 +6947,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 3453952198679194123}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
   primaryStat: 0
   popUpParent: {fileID: 0}
 --- !u!114 &3453952198679194123 stripped
@@ -8568,6 +8572,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 4003994782590762394}
   iconImage: {fileID: 0}
   bubble: {fileID: 0}
+  inWorldSpace: 0
   primaryStat: 2
   popUpParent: {fileID: 0}
 --- !u!114 &2794155917114108520 stripped

@@ -92,7 +92,7 @@ public class FloorButton : MonoBehaviour, INameSource
         return Helpers.hasCollision(collider, LayerAndTagManager.pressesButtonsLayerMask); 
     }
 
-    private void setSprite(int movementIndex)
+    public void setSprite(int movementIndex)
     {
         if(isPressed())
         {

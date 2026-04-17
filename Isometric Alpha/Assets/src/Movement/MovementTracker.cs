@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//0.3486086
+
 public abstract class MovementTracker : MonoBehaviour
 {
     protected virtual void OnEnable()
@@ -24,7 +26,7 @@ public abstract class MovementTracker : MonoBehaviour
     public abstract string getName();
 
     protected Vector3 _StartingPosition;
-    public virtual Vector3 startingPosition
+    public Vector3 startingPosition
     {
         get => _StartingPosition;
         set
@@ -34,7 +36,7 @@ public abstract class MovementTracker : MonoBehaviour
     }
 
     protected Vector3 _EndingPosition;
-    public virtual Vector3 endingPosition
+    public Vector3 endingPosition
     {
         get => _EndingPosition;
         set
@@ -44,7 +46,7 @@ public abstract class MovementTracker : MonoBehaviour
     }
 
     protected Vector3 _PreviousCell;
-    public virtual Vector3 previousCell
+    public Vector3 previousCell
     {
         get => _PreviousCell;
         set

@@ -143,7 +143,7 @@ We've been meeting like this for a while. It's the best way to get some... priva
 
 He's confessed to me many times that he wishes us all to be free. Over all the time I've known him I've found him to be a good and caring person. I know he will help us.
 
-    +I find your empathy for this guard disturbing
+    +Your empathy for this guard disturbs me.
         ->2a
     +I do not think that is wise. Letting him live is a risk we shouldn't take.
         ->2b

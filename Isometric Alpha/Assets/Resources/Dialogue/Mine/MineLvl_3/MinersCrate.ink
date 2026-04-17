@@ -269,7 +269,7 @@ We do, but it will be tricky. Some of the guards are trained in the use of blast
 
 changeCamTarget({marcosIndex})
 
-I can use the jelly if we truly need, but with my wounds I may make a mistake. It would be best if we had another guard detonate the breach instead.
+I can use the jelly if we truly need, but with my injuries I may make a mistake. It would be best if we had another guard detonate the breach instead.
 
     +And killing your fellow guards doesn't bother you?
         ->1la

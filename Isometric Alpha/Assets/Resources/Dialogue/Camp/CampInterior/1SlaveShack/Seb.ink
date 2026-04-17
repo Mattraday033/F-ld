@@ -11,7 +11,7 @@ VAR balintsIndex = 2
 
 setToTrue(spokeToSeb)
 
-\*The man lies on the ground, prone. He wears only the tattered trousers of a slave, soaked some with blood. His back is choked with red brown lash wounds that look recently scarred over. His left side has a series of purple bruises, in the shape of a boot's toe. It looks like someone has taken care to place him in soft straw, and position him facing the wall. He mutters to himself occasionally, and gives no signs of noticing you.*
+\*The man lies on the ground, prone. He wears only the tattered trousers of a slave, soaked some with blood. His back is choked with red-brown lash wounds that look recently scarred over. His left side has a series of purple bruises, in the shape of a boot's toe. It looks like someone has taken care to place him in soft straw, and position him facing the wall. He mutters to himself occasionally, and gives no signs of noticing you.*
 
     {
     -acceptedClaysSecondJob:
