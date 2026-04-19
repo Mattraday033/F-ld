@@ -53,6 +53,12 @@ public class SliderScrollRectConnector : MonoBehaviour
 
         handle.SetActive(show);
         background.SetActive(show);
+
+        valueChangedByScrollRect = true;
+
+        slider.value = 1f;
+
+        valueChangedByScrollRect = false;
     }
 
     public void setScrollRectVerticalPosition()
