@@ -13,16 +13,24 @@ public class SliderScrollRectConnector : MonoBehaviour
     public Slider slider;
     public ScrollRect scrollRect;
 
-    private void Awake()
+    void Start()
     {
+        checkHandleVisibility();
         ScrollableUIElement.PanelsPopulated.AddListener(checkHandleVisibility);
         AbilityGridSideTab.OnSideTabChosen.AddListener(checkHandleVisibility);
+        GridRow.OnDescribableToDisplay.AddListener(checkHandleVisibility);
     }
 
     private void OnDestroy()
     {
         ScrollableUIElement.PanelsPopulated.RemoveListener(checkHandleVisibility);
         AbilityGridSideTab.OnSideTabChosen.RemoveListener(checkHandleVisibility);
+        GridRow.OnDescribableToDisplay.RemoveListener(checkHandleVisibility);
+    }
+
+    public void checkHandleVisibility(object obj)
+    {
+        checkHandleVisibility();
     }
 
     public void checkHandleVisibility()
@@ -37,7 +45,7 @@ public class SliderScrollRectConnector : MonoBehaviour
     }
     private IEnumerator waitThenCheckVisibility()
     {	
-        yield return null;
+        yield return new WaitForEndOfFrame();
         Canvas.ForceUpdateCanvases();
         LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
 
