@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BookPopUpWindow : PopUpWindow
 {
@@ -11,6 +12,10 @@ public class BookPopUpWindow : PopUpWindow
     private OOCActivity previousActivity;
     private bool giveCopyOfBook;
     private GameObject bookGameObject;
+    public ScrollableUIElement contentsGrid;
+    public Slider slider;
+    public GameObject contentsParent;
+    public CanvasGroup canvasGroup;
 
     private BookItem book;
 
@@ -30,7 +35,14 @@ public class BookPopUpWindow : PopUpWindow
 
         instance = this;
 
+        StartCoroutine(waitOneFrameThenShow());
+    }
+
+    private IEnumerator waitOneFrameThenShow()
+    {
+        yield return null;
         TutorialSequenceStepTargetUIObject.createCutOutMask(transform);
+        canvasGroup.alpha = Constants.sizeOne;
     }
 
     public void setPreviousActivity(OOCActivity previousActivity)
@@ -54,7 +66,14 @@ public class BookPopUpWindow : PopUpWindow
 
     public void populate()
     {
+        if(book.startAtTop())
+        {
+            contentsGrid.setScrollBarToBottomOnPopulate = false;
+            slider.value = 1;
+        }
+
         book.describeSelfFull(descriptionPanel);
+        slider.value = 1;
     }
 
     public override void handleEscapePress()
@@ -63,7 +82,7 @@ public class BookPopUpWindow : PopUpWindow
 
         pickUpBookOnUIClose();
 
-        PlayerOOCStateManager.returnToPreviousActivity();
+        PlayerOOCStateManager.setCurrentActivity(previousActivity);
     }
 
     public void pickUpBookOnUIClose()
@@ -76,6 +95,14 @@ public class BookPopUpWindow : PopUpWindow
             {
                 bookGameObject.SetActive(false);
             }
+        }
+    }
+
+    public static void disableDefaultContentsRow()
+    {
+        if(instance != null && instance.contentsParent != null)
+        {
+            instance.contentsParent.SetActive(false);
         }
     }
 }

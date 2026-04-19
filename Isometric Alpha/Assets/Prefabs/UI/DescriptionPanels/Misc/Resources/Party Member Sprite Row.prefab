@@ -498,6 +498,7 @@ MonoBehaviour:
   slotsUsedText: {fileID: 0}
   weaponNameText: {fileID: 0}
   rangeText: {fileID: 0}
+  invulnerabilityText: {fileID: 0}
   armorRatingText: {fileID: 0}
   damageText: {fileID: 0}
   offHandDamageText: {fileID: 0}
@@ -515,7 +516,10 @@ MonoBehaviour:
   newPartyMemberText: {fileID: 340836009139441106}
   levelUpSymbol: {fileID: 379327830531365417}
   abilityMenuManager: {fileID: 0}
+  partyMemberSpriteButton: {fileID: 5235567982660180143}
   zoneOfInfluenceIcon: {fileID: 0}
+  healthText: {fileID: 5657602684979559566}
+  healthBar: {fileID: 3757539147259705655}
 --- !u!114 &9080956482945836116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,8 +543,6 @@ MonoBehaviour:
   wipeIfIneligible: 0
   buttonTexts:
   - {fileID: 0}
-  healthText: {fileID: 5657602684979559566}
-  healthBar: {fileID: 3757539147259705655}
 --- !u!222 &4426734861697344549
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -865,8 +867,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 120 / 120
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0df13e2d0e0fcee4ebfaa720a9ee5729, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 0df13e2d0e0fcee4ebfaa720a9ee5729, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bc19d54b9deb610499f4e4470c4659e9, type: 2}
+  m_sharedMaterial: {fileID: 2866278993134135635, guid: bc19d54b9deb610499f4e4470c4659e9,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -890,8 +893,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 13
-  m_fontSizeBase: 13
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 1
@@ -1059,12 +1062,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7948102301806051711, guid: 918b9d6e1e9b4e74d915a601a480ff0d,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5820363516658302508, guid: 918b9d6e1e9b4e74d915a601a480ff0d,
         type: 3}
-      insertIndex: 0
+      insertIndex: -1
       addedObject: {fileID: 7477324411900012917}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 918b9d6e1e9b4e74d915a601a480ff0d, type: 3}

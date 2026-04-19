@@ -37,11 +37,9 @@ public class SliderScrollRectConnector : MonoBehaviour
     }
     private IEnumerator waitThenCheckVisibility()
     {	
-		// LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
-
-		// Canvas.ForceUpdateCanvases();
-
-        yield return new WaitForEndOfFrame();
+        yield return null;
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
 
         bool show = scrollRect.viewport.rect.height <= scrollRect.content.rect.height;
 

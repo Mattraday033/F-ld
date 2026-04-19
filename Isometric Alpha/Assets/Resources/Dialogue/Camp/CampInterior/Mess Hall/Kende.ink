@@ -57,7 +57,7 @@ giveItem(0,0,1)
         ->1c
 
 }
-    +Nothing, I need to be going.
+    +I need to be going.
         Then quit wasting my time.
         ->Close
 

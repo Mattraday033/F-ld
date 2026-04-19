@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7785354287628352035}
   - component: {fileID: 1780953927673760552}
   m_Layer: 5
-  m_Name: Dialogue Tracker Window
+  m_Name: Old_Dialogue Tracker Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1159,6 +1159,7 @@ MonoBehaviour:
   scrollBar: {fileID: 0}
   slidingArea: {fileID: 0}
   scrollableComponent: {fileID: 2905707002498436508}
+  slider: {fileID: 0}
   clickFirstPanel: 0
   clickLastPanel: 0
   useBlockDescriptionsInRows: 0

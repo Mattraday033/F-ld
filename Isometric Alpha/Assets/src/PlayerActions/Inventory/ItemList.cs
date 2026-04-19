@@ -412,6 +412,11 @@ public static class ItemList
 	
 	public static Item getItem(int listIndex, int itemIndex, int quantity = 1)
     {
+        if(listIndex == bookListIndex && itemIndex == DialogueBookItem.dialogueBookIndex)
+        {
+            return new DialogueBookItem();
+        }
+
 		List<Item> currentItemList = allItems[listIndex];
 		
 		Item itemTemplate = currentItemList[itemIndex];

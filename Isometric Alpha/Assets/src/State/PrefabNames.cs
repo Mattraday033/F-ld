@@ -83,7 +83,6 @@ public static class PrefabNames
     public const string dialogueLineRow = "Dialogue Line Row";
     public const string choiceRow = "Choice";
     public const string unimplementedChoice = "Unimplemented Choice";
-    public const string dialogueTrackerWindowPopUp = "Dialogue Tracker Window";
     public const string dialogueTrackerWindowWithChoicesPopUp = "Dialogue Tracker Window With Choices";
 
     public const string areaNameDescriptionPanel = "Area Name Description Panel";

@@ -11,11 +11,8 @@ public interface IDragAndDropSource
     public string getDragAndDropPrefabName();
 }
 
-public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSource, ICounter
+public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSource
 {
-
-    public TextMeshProUGUI healthText;
-    public HealthBarManager healthBar;
 
     public ImageOutline imageOutline;
 
@@ -25,6 +22,17 @@ public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSour
     {
         imageOutline = new ImageOutline();
         imageOutline.setImage(descriptionPanel.iconPanel);
+    }
+
+    
+    private void OnEnable()
+    {
+        PartyGridSection.OnPortraitHover.AddListener(handlePortraitHover);
+    }
+
+    private void OnDestroy()
+    {
+        PartyGridSection.OnPortraitHover.RemoveListener(handlePortraitHover);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -79,68 +87,6 @@ public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSour
         {
             imageOutline.removeOutline();
         }
-    }
-
-    //ICounter
-    private void OnEnable()
-    {
-        addListeners();
-
-        StartCoroutine(updateHealthBarAfterDescribableIsSet());
-    }
-
-    private void OnDestroy()
-    {
-        removeListeners();
-    }
-
-    public void addListeners()
-    {
-        List<UnityEvent> listOfEvents = getUpdateEvents();
-
-        foreach (UnityEvent unityEvent in listOfEvents)
-        {
-            unityEvent.AddListener(updateCounter);
-        }
-
-        PartyGridSection.OnPortraitHover.AddListener(handlePortraitHover);
-    }
-    public void removeListeners()
-    {
-        List<UnityEvent> listOfEvents = getUpdateEvents();
-
-        foreach (UnityEvent unityEvent in listOfEvents)
-        {
-            unityEvent.RemoveListener(updateCounter);
-        }
-        
-        PartyGridSection.OnPortraitHover.RemoveListener(handlePortraitHover);
-    }
-
-    public void updateCounter()
-    {
-        Stats stats = Stats.convertIDescribableToStats(descriptionPanel.getObjectBeingDescribed());
-
-        healthText.text = stats.currentHealth + "/" + stats.getTotalHealth();
-
-        healthBar.setTotalHealth(stats.getTotalHealth());
-        healthBar.setMissingHealth(stats.getTotalHealth() - stats.currentHealth);
-    }
-    public List<UnityEvent> getUpdateEvents()
-    {
-        List<UnityEvent> listOfEvents = new List<UnityEvent>();
-
-        listOfEvents.Add(Stats.OnHealthChange);
-        listOfEvents.Add(ScreenManager.OnScreenInteriorUpdate);
-
-        return listOfEvents;
-    }
-
-    private IEnumerator updateHealthBarAfterDescribableIsSet()
-    {
-        yield return new WaitForEndOfFrame();
-
-        updateCounter();
     }
 
 }

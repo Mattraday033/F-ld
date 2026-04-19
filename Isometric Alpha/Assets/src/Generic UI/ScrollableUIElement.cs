@@ -482,7 +482,7 @@ public class ScrollableUIElement : MonoBehaviour
 			return;
 		}
 
-		GridRow row = (GridRow)listOfRows[rowIndex];
+		GridRow row = listOfRows[rowIndex];
 
 		if (row.descriptionPanel.getObjectBeingDescribed() != null)
 		{
@@ -535,9 +535,9 @@ public class ScrollableUIElement : MonoBehaviour
 
 	public void disableScrollCheck()
 	{
-		if ((scrollContainer == null || scrollContainer is null) ||
-			(scrollableArea == null || scrollableArea is null) ||
-			(slidingArea == null || slidingArea is null) ||
+		if (scrollContainer == null || scrollContainer is null ||
+			scrollableArea == null || scrollableArea is null ||
+			slidingArea == null || slidingArea is null ||
 			!gameObject.activeInHierarchy)
 		{
 			return;
@@ -593,9 +593,9 @@ public class ScrollableUIElement : MonoBehaviour
 
 	private void disableScrollableComponentCheck()
 	{
-		if ((scrollContainer == null || scrollContainer is null) ||
-			(scrollableArea == null || scrollableArea is null) ||
-			(scrollBar == null || scrollBar is null))
+		if (scrollContainer == null || scrollContainer is null ||
+			scrollableArea == null || scrollableArea is null ||
+			scrollBar == null || scrollBar is null)
 		{
 			return;
 		}

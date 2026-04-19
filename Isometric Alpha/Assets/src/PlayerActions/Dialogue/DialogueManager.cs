@@ -2064,7 +2064,7 @@ public class Conversation
 	
 	public DialogueLine getLastLine()
 	{
-		return (DialogueLine) dialogueList[dialogueList.Count - 1];
+		return dialogueList[dialogueList.Count - 1];
 	}
 	
     public static bool nameIsUpdate(string name)

@@ -19,7 +19,8 @@ public class BookItem : UsableItem
 
 	public BookPopUpButton bookPopUpButton;
 
-    public BookItem(ItemListID listID, string key, string loreDescription, int index): base(listID, key, loreDescription, bookUseDescription, subtype, bookIconName, bookWorth) 
+    public BookItem(ItemListID listID, string key, string loreDescription, int index): 
+    base(listID, key, loreDescription, bookUseDescription, subtype, bookIconName, bookWorth) 
 	{
 		this.index = index;
 
@@ -96,11 +97,16 @@ public class BookItem : UsableItem
 		return false;
 	}
 	
-	public int getIndex()
+	public virtual int getIndex()
 	{
 		return index;
 	}
 	
+    public virtual bool startAtTop()
+    {
+        return true;
+    }
+
 	public void setAllReadFlags()
 	{
 		if(flagsFlippedWhenRead != null && !(flagsFlippedWhenRead is null))
@@ -177,12 +183,54 @@ public class BookItem : UsableItem
 		return getTypeIconName();
 	}
 
-
 	//IDescribable methods
 	public override void describeSelfFull(DescriptionPanel panel)
 	{
 		base.describeSelfFull(panel);
 
 		DescriptionPanel.setText(panel.contentsText, BookList.getBookContents(getKey()));
+	}
+}
+
+public class DialogueBookItem : BookItem
+{
+    public const int dialogueBookIndex = -10;
+
+    //(ItemListID listID, string key, string loreDescription, int index, string[] flagsFlippedWhenRead, string questName, string questStepName, int quantity)
+    public DialogueBookItem(): 
+    base(new ItemListID(ItemList.bookListIndex, dialogueBookIndex), "Dialogue", Constants.emptyString, dialogueBookIndex)
+    {
+        
+    }
+
+    public override string getName()
+    {
+        return "Transcript";
+    }
+
+    public override bool startAtTop()
+    {
+        return false;
+    }
+
+    public override void use(Stats target)
+	{
+        bookPopUpButton.spawnPopUp(this, false, OOCActivity.walking, null);
+    }
+
+	//IDescribable methods
+	public override void describeSelfFull(DescriptionPanel panel)
+	{
+        if(BookPopUpWindow.getInstance() == null || 
+            BookPopUpWindow.getInstance().contentsGrid == null)
+        {
+            return;
+        }
+
+        DescriptionPanel.setText(panel.nameText, getName());
+
+        BookPopUpWindow.disableDefaultContentsRow();
+
+        BookPopUpWindow.getInstance().contentsGrid.populatePanels(SpeechLog.getDialogueList());
 	}
 }

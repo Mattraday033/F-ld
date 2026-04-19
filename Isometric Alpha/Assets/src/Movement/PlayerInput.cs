@@ -181,7 +181,10 @@ public class PlayerInput : MonoBehaviour
 
         if (Input.GetKey(KeyBindingList.transcriptKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
         {
-            DialogueManager.getInstance().spawnDialogueTrackerWindowWithoutChoices();
+            DialogueBookItem dialogueBook = new DialogueBookItem();
+            dialogueBook.use(PartyManager.getPlayerStats());
+
+            PlayerOOCStateManager.setCurrentActivity(OOCActivity.inDialoguePopUp);
 
             KeyPressManager.handlingPrimaryKeyPress = true;
         }

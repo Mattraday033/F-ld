@@ -29,20 +29,19 @@ public class PartyMemberSelectionGrid : UIListenerGrid
 
         base.updateCounter();
 
-        if(ScreenManager.currentPartyMember == null)
-        {
-            grid.disableGridRowAndClick(0);
-        } else
-        {
-            grid.disableGridRow(ScreenManager.currentPartyMember.getName());
-        }
+        // if(ScreenManager.currentPartyMember == null)
+        // {
+        //     grid.disableGridRowAndClick(0);
+        // } else
+        // {
+        //     grid.disableGridRow(ScreenManager.currentPartyMember.getName());
+        // }
     }
 
     public override List<UnityEvent> getUpdateEvents()
     {
         List<UnityEvent> listOfEvents = new List<UnityEvent>();
 
-        // listOfEvents.Add(PartySpriteGridRow.OnPartyMemberSelected); listening to PartyGridRow.OnPartyMemberSelected creates infinite loop
         listOfEvents.Add(PartyManager.OnPartyChange);
         listOfEvents.Add(ScreenManager.OnScreenInteriorUpdate);
 

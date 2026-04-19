@@ -110,9 +110,6 @@ public abstract class PopUpButton : MonoBehaviour
 			case PopUpType.BinaryPanel:
 				return PrefabNames.binaryDecisionPanel;
 
-			case PopUpType.DialogueTrackerWithoutChoices:				
-				return PrefabNames.dialogueTrackerWindowPopUp;
-			
 			case PopUpType.LoadOnlyScreen:
 				return PrefabNames.saveScreen;
 				
