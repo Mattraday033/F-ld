@@ -105,7 +105,7 @@ public static class PartyStats
 
     public static int getVolleyAccuracy()
     {
-        return ((getTotalCharisma() + getTotalWisdom()) / 2) + alliedVolleyBaseAccuracy;
+        return ((getTotalCharisma() + getTotalWisdom()) / 2) + alliedVolleyBaseAccuracy + State.formation.getTotalBonusVolleyAccuracy();
     }
 
     public static int getPartySurpriseRounds()

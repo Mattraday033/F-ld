@@ -94,6 +94,16 @@ public static class GateSpawnInfoList
                                                        HostilityScriptList.openBarracksGateScriptKey,
                                                        "the " + MapDisplayNameList.lovashiCamp)));
 
+        list.Add(new GateWithKeySpawnInfo(Constants.indexTwo,
+                                            NPCNameList.barracksArmoryGate,
+                                            LocationNameList.guardHouseSouthWest,
+                                            PrefabNames.portcullis2x1Path,
+                                            new Vector3Int(-6, 0),
+                                            Constants.sizeTwo,
+                                            Axis.DescendingX,
+                                            new GateKeyDetails("*This is the gate to the Barracks' Armory. It is currently locked.*",
+                                                            ItemList.barracksArmoryKeyName)));
+
         gateSpawnInfoDict.Add(LocationNameList.guardHouseSouthWest, list);
 
         #endregion

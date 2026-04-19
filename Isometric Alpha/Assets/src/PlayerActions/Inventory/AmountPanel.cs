@@ -14,9 +14,6 @@ public interface IAcceptsAmounts
 
 public class AmountPanel : MonoBehaviour
 {
-	public const int greyRGB = 200;
-	private const string buyButtonMessage = "Buy";
-    private const string sellButtonMessage = "Sell";
     private const int incrementButtonIndex = 0;
     private const int decrementButtonIndex = 1;
 

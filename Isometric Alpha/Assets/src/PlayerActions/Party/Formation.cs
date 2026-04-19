@@ -325,18 +325,6 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
         return PartyManager.getPlayerStats().getName() + "'s Formation";
     }
 
-    public int getTotalStrength()
-    {
-        int total = 0;
-
-        foreach (AllyStats[] row in grid)
-        {
-            total += Helpers.sum<AllyStats>(row, t => t.getStrength());
-        }
-
-        return total;
-    }
-
     public delegate int HighestDelegateInt<T>(T t);
 
     public int getHighestStat(HighestDelegateInt<AllyStats> getStat)
@@ -357,40 +345,29 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
         return highest;
     }
 
+    public int getTotalStrength()
+    {
+        return Helpers.sum(grid, t => t.getStrength());
+    }
+
     public int getTotalDexterity()
     {
-        int total = 0;
-
-        foreach (AllyStats[] row in grid)
-        {
-            total += Helpers.sum<AllyStats>(row, t => t.getDexterity());
-        }
-
-        return total;
+        return Helpers.sum(grid, t => t.getDexterity());
     }
 
     public int getTotalWisdom()
     {
-        int total = 0;
-
-        foreach (AllyStats[] row in grid)
-        {
-            total += Helpers.sum<AllyStats>(row, t => t.getWisdom());
-        }
-
-        return total;
+        return Helpers.sum(grid, t => t.getWisdom());
     }
 
     public int getTotalCharisma()
     {
-        int total = 0;
+        return Helpers.sum(grid, t => t.getCharisma());
+    }
 
-        foreach (AllyStats[] row in grid)
-        {
-            total += Helpers.sum<AllyStats>(row, t => t.getCharisma());
-        }
-
-        return total;
+    public int getTotalBonusVolleyAccuracy()
+    {
+        return Helpers.sum(grid, t => t.getBonusVolleyAccuracy());
     }
 
     public int getHighestLevel()

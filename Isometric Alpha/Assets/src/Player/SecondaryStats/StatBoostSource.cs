@@ -427,6 +427,8 @@ public abstract class StatBoostSource : INameSource
     {
         switch (getName())
         {
+            case ItemList.signalTorchKey:
+                return "20";
             default:
                 return Constants.zeroRating;
         }
@@ -709,7 +711,7 @@ public abstract class StatBoostSource : INameSource
 
         if (!boostSource.getBonusVolleyAccuracyFormula().Equals(Constants.zeroRating))
         {
-            blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getVolleyBlock(DamageCalculator.calculateFormula(boostSource.getBonusVolleyAccuracyFormula(), statsSource).ToString()), boostSource.getBonusVolleyAccuracyFormula()));
+            blocks.Add(DescriptionPanelBuildingBlock.getBlockWithFormula(DescriptionPanelBuildingBlock.getVolleyBlock(DamageCalculator.calculateFormula(boostSource.getBonusVolleyAccuracyFormula(), statsSource).ToString() + "%"), boostSource.getBonusVolleyAccuracyFormula()));
         }
 
         #endregion

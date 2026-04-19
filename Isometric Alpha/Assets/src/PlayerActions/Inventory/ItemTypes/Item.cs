@@ -499,15 +499,6 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 		describeSelfFull(panel);
 
         if(PlayerOOCStateManager.currentActivity == OOCActivity.inUI && 
-            AbilityGridSideTab.getDescribableListType() == DescribableList.AllItems)
-        {
-            DescriptionPanel.disableText(panel.damageText);
-            DescriptionPanel.disableText(panel.critRatingText);
-            DescriptionPanel.disableText(panel.armorRatingText);
-            DescriptionPanel.disableText(panel.invulnerabilityText);
-        }
-
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.inUI && 
             AbilityGridSideTab.getDescribableListType() == DescribableList.MainHandWeaponsAsActions)
         {
             DescriptionPanel.disableText(panel.statText);

@@ -34,7 +34,6 @@ public class CursorController : MonoBehaviour
         {
             clicked = true;
             Cursor.SetCursor(cursorClickedSprite, clickPosition, CursorMode.Auto);
-            Debug.LogError("Set to Clicked");
             return;
         }
 
@@ -42,7 +41,6 @@ public class CursorController : MonoBehaviour
         {
             clicked = false;
             Cursor.SetCursor(cursorDefaultSprite, clickPosition, CursorMode.Auto);
-            Debug.LogError("Set to Default");
             return;
         }
     }

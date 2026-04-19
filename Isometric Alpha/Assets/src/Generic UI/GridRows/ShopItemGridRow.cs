@@ -40,20 +40,20 @@ public class ShopItemGridRow : InventoryItemGridRow
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        if (amountPanel.getMax() <= 0)
-        {
-            return;
-        }
+        // if (amountPanel.getMax() <= 0)
+        // {
+        //     return;
+        // }
 
-        Item item = descriptionPanel.getObjectBeingDescribed() as Item;
+        // Item item = descriptionPanel.getObjectBeingDescribed() as Item;
 
-        if (item != null)
-        {
-            ItemListID listID = item.getItemListID();
-            item = ItemList.getItem(listID.listIndex, listID.itemIndex, amountPanel.getAmount());
+        // if (item != null)
+        // {
+        //     ItemListID listID = item.getItemListID();
+        //     item = ItemList.getItem(listID.listIndex, listID.itemIndex, amountPanel.getAmount());
 
-            StartCoroutine(DragAndDropManager.waitForMouseRelease(this, item));
-        }
+        //     StartCoroutine(DragAndDropManager.waitForMouseRelease(this, item));
+        // }
     }
 
     public void setToUnbuyableDisplay()

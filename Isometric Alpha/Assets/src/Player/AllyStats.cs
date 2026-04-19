@@ -840,7 +840,7 @@ public class AllyStats : Stats
 
     public override float getDevastatingCriticalPercentage()
     {
-        if (hasTrait(TraitList.devastatingCriticals))
+        if (!hasTrait(TraitList.devastatingCriticals))
         {
             return 0f;
         }
@@ -905,6 +905,11 @@ public class AllyStats : Stats
         return PartyStats.getVolleyAccuracy();
     }
 
+    public override int getBonusVolleyAccuracy()
+    {
+        return StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusVolleyAccuracyFormula());
+    }
+
     public override void setHeadSprite(DescriptionPanel panel)
     {
         if(panel.typeIconBackgroundPanel != null)
@@ -939,6 +944,21 @@ public class AllyStats : Stats
         if(headName != null && !headName.Contains("?"))
         {
             image.sprite = Resources.Load<Sprite>(PrefabNames.headsFolder + headName);
+        }
+    }
+
+    public override void setHeadSprite(SpriteRenderer spriteRenderer)
+    {
+        string headName = getName();
+
+        if(headName.Contains(PartyManager.playerMarker))
+        {
+            headName = State.playerPortraitName;
+        }
+        
+        if(headName != null && !headName.Contains("?"))
+        {
+            spriteRenderer.sprite = Resources.Load<Sprite>(PrefabNames.headsFolder + headName);
         }
     }
 

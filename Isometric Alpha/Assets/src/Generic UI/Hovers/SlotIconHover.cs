@@ -336,7 +336,7 @@ public static class HoverMessageList
     private const string usableSubMessage = "Some Usable Items heal, apply Traits in combat, or provide you with information. Most Usable Items are destroyed when used.";
 
     private const string allItemsTabKey = "All Items Tab";
-    private const string allItemsTabMessage = "Every Item your party is currently carrying, except for those equipped to a Party Member or marked as Junk.";
+    private const string allItemsTabMessage = "Items of every type.";
 
     private const string weaponSubtypeMessage = "Main-Hand Weapons provide a new Attack Action on your Action Wheel in Combat. Off-Hand weapons provide extra damage and crit chance when you attack with a One-Handed Weapon.";
     private const string armorSubtypeMessage = "Wearing Armor provides Armor Score, which blocks a percentage of incoming damage. Some pieces of Armor also provide additional benefits.";
@@ -417,7 +417,7 @@ public static class HoverMessageList
     private const string charismaMessage = "This Primary Stat increases your Synergy, gives access to Exuberances, and boosts a character's Zone of Influence. Charisma also governs the Leadership skill.";
 
     private const string usableItemInventoryTabMessage = "Usable Items Tab.";
-    private const string usableItemOOCSubMessage = "Usable Items that can be activated out of combat can be found here." + howToUseItemMessage;
+    private const string usableItemOOCSubMessage = " Usable Items that can be activated out of combat can be found here." + howToUseItemMessage;
     private const string howToUseItemMessage = " <B>To Use a Usable Item, drag the Item onto the Party Member you want to use it on while on the Inventory Screen.</B>";
     private const string offHandTabMessage = "Off Hand Tab.";
     private const string armorTabKey = "Armor Tab";
@@ -506,10 +506,8 @@ public static class HoverMessageList
             case EquippableItem.offHandSlotIconName:
                 return offhandSlotMessage;
 
-
             case allItemsTabKey:
-                return allItemsTabMessage;
-
+                    return allItemsTabMessage;
             case EquippableItem.mainHandSlotIconName:
                 return mainHandWeaponMessage + " " + mainHandWeaponSlotMessage;
             case mainHandWeaponTabKey:

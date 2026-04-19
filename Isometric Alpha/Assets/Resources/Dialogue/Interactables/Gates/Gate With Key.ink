@@ -62,7 +62,7 @@ fadeBackIn(60)
 
 === 1c ===
 
-Unlocking this gate will turn {hostileAreaName} hostile. This will affect the outcome of certain quests, cause enemies to attack you in previously safe areas, and may be irreversible. Are you certain you wish to proceed?
+\*Unlocking this gate will turn {hostileAreaName} hostile. This will affect the outcome of certain quests, cause enemies to attack you in previously safe areas, and may be irreversible. Are you certain you wish to proceed?*
 
     +\*Open the gate anyways.* <{keyName}>
         activateHostilityScript({hostilityScriptKey})

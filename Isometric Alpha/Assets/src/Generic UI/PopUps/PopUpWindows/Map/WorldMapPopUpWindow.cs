@@ -14,7 +14,7 @@ public class WorldMapPopUpWindow : PopUpWindow, IEscapable
 
     public Grid worldMapLandmarkSpawnGrid;
     public Transform worldMapLandmarkParent;
-    private readonly static Vector3 posAdjustment = new Vector3(0.17f, 0.35f);
+    private readonly static Vector3 posAdjustment = new Vector3(0.22f, 0.45f);
 
 	private static WorldMapPopUpWindow instance;
 

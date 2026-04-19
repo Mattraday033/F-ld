@@ -205,8 +205,14 @@ public static class SpawnParamsList
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.guardHouseSouthWest, NPCNameList.barracksGate), barracksGateSpawnParams);
         
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.guardHouseSouthWest, NPCNameList.guard), new InteractableSpawnParams(spawnWhileHostile: doesNotSpawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.guardHouseSouthWest, NPCNameList.guard), new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning, spawnWhileHostile: doesNotSpawnWhileHostile));
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.guardHouseSouthWest, NPCNameList.barracksArmoryGate+1), 
+                                        new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }),
+                                                                     spawnWhileHostile: spawnWhileHostile, onlySpawnWhileHostile: onlySpawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.guardHouseSouthWest, NPCNameList.barracksArmoryGate+2), 
+                                        new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] { FlagNameList.directorDefeated }),
+                                                                     spawnWhileHostile: spawnWhileHostile));
         #endregion
 
         #region MessHall

@@ -187,10 +187,10 @@ public static class OOCSpawnDetailsList
         #region GuardHouse SW
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(-5,1), Facing.SouthWest, script: new FoundToolBundle()));
-        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(-6,3), Facing.SouthEast));
-        list.Add(new ChestSpawnDetails(Constants.indexTwo, new Vector3Int(-7,3), Facing.SouthEast));
-        list.Add(new ChestSpawnDetails(Constants.indexThree, new Vector3Int(-8,1), Facing.NorthEast));
+        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(-5, 1), Facing.SouthWest));
+        list.Add(new ChestSpawnDetails(Constants.indexTwo, new Vector3Int(-5,2), Facing.SouthWest));
+        list.Add(new WeaponRackSpawnDetails(Constants.indexZero, new Vector3Int(-6,3), Facing.SouthEast, ChestType.ShovelRack, script: new FoundToolBundle()));
+        list.Add(new WeaponRackSpawnDetails(Constants.indexThree, new Vector3Int(-7,3), Facing.SouthEast, ChestType.SpearRack));
 
         if(Application.isEditor)
         {
@@ -521,7 +521,7 @@ public static class OOCSpawnDetailsList
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(9, -1), LocationNameList.campSouthEast, animationName: NPCNameList.temple, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+6, new Vector3Int(8, -1), LocationNameList.campSouthEast, animationName: NPCNameList.noBrand+2, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(7, -1), LocationNameList.campSouthEast, animationName: NPCNameList.slave, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
-            list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(6, -1), LocationNameList.campSouthEast, animationName: NPCNameList.slave+2, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
+            list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(6, -1), LocationNameList.campSouthEast, animationName: NPCNameList.janos, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+4, new Vector3Int(5, -1), LocationNameList.campSouthEast, animationName: NPCNameList.slave, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.crowd, new Vector3Int(5, -1), LocationNameList.campSouthEast, animationName: NPCNameList.slave+1, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+3, new Vector3Int(4, -1), LocationNameList.campSouthEast, animationName: NPCNameList.temple, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
@@ -530,7 +530,7 @@ public static class OOCSpawnDetailsList
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(1, -1), LocationNameList.campSouthEast, animationName: NPCNameList.slave, facing: Facing.SouthEast, ignoresSecretDoors: false));
 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(12, 0), LocationNameList.campSouthEast, animationName: NPCNameList.slave+2, facing: Facing.SouthEast, ignoresSecretDoors: false));
-            list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(11, 0), LocationNameList.campSouthEast, animationName: NPCNameList.slave, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
+            list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(11, 0), LocationNameList.campSouthEast, animationName: NPCNameList.ervin, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+5, new Vector3Int(10, 0), LocationNameList.campSouthEast, animationName: NPCNameList.broglin, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(9, 0), LocationNameList.campSouthEast, animationName: NPCNameList.uros, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(8, 0), LocationNameList.campSouthEast, animationName: NPCNameList.slave+1, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
@@ -549,20 +549,20 @@ public static class OOCSpawnDetailsList
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+5, new Vector3Int(8, 1), LocationNameList.campSouthEast, animationName: NPCNameList.temple, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(7, 1), LocationNameList.campSouthEast, animationName: NPCNameList.slave, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+6, new Vector3Int(6, 1), LocationNameList.campSouthEast, animationName: NPCNameList.noBrand+4, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
-            list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(5, 1), LocationNameList.campSouthEast, animationName: NPCNameList.slave+2, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
+            list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(5, 1), LocationNameList.campSouthEast, animationName: NPCNameList.ervin, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+3, new Vector3Int(4, 1), LocationNameList.campSouthEast, animationName: NPCNameList.balint, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(3, 1), LocationNameList.campSouthEast, animationName: NPCNameList.slave, facing: Facing.SouthEast, ignoresSecretDoors: false));
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+2, new Vector3Int(2, 1), LocationNameList.campSouthEast, animationName: NPCNameList.slave+2, facing: Facing.SouthEast, ignoresSecretDoors: false));
 
-            list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(11, 2), LocationNameList.campSouthEast, animationName: NPCNameList.slave, facing: Facing.SouthEast, ignoresSecretDoors: false));
+            list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(11, 2), LocationNameList.campSouthEast, animationName: NPCNameList.janos, facing: Facing.SouthEast, ignoresSecretDoors: false));
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+2, new Vector3Int(10, 2), LocationNameList.campSouthEast, animationName: NPCNameList.temple, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+5, new Vector3Int(9, 2), LocationNameList.campSouthEast, animationName: NPCNameList.slave+1, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
-            list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(8, 2), LocationNameList.campSouthEast, animationName: NPCNameList.slave, facing: Facing.SouthEast, ignoresSecretDoors: false, offset: Constants.onTableHeightOffset/2)); 
+            list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(8, 2), LocationNameList.campSouthEast, animationName: NPCNameList.kastor, facing: Facing.SouthEast, ignoresSecretDoors: false, offset: Constants.onTableHeightOffset/2)); 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+4, new Vector3Int(7, 2), LocationNameList.campSouthEast, animationName: NPCNameList.temple, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(6, 2), LocationNameList.campSouthEast, animationName: NPCNameList.slave+2, facing: Facing.SouthEast, ignoresSecretDoors: false)); 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+3, new Vector3Int(5, 2), LocationNameList.campSouthEast, animationName: NPCNameList.broglin, facing: Facing.SouthEast, ignoresSecretDoors: false));
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+6, new Vector3Int(4, 2), LocationNameList.campSouthEast, animationName: NPCNameList.noBrand+5, facing: Facing.SouthEast, ignoresSecretDoors: false));
-            list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+1, new Vector3Int(3, 2), LocationNameList.campSouthEast, animationName: NPCNameList.kastor, facing: Facing.SouthEast, ignoresSecretDoors: false));
+            list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+1, new Vector3Int(3, 2), LocationNameList.campSouthEast, animationName: NPCNameList.slave, facing: Facing.SouthEast, ignoresSecretDoors: false));
 
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+2, new Vector3Int(10, 3), LocationNameList.campSouthEast, animationName: NPCNameList.broglin, facing: Facing.SouthEast, ignoresSecretDoors: false));
             list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+5, new Vector3Int(9, 3), LocationNameList.campSouthEast, animationName: NPCNameList.slave+2, facing: Facing.SouthEast, ignoresSecretDoors: false));
@@ -1541,7 +1541,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(1, 1), Facing.SouthEast));
+        list.Add(new WeaponRackSpawnDetails(Constants.indexZero, new Vector3Int(1, 1), Facing.SouthEast, ChestType.SpearRack));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, list);
 

@@ -129,6 +129,7 @@ public static class ItemList
 	public const int ancientClawIndex = 25; //Pit 2c
     public const int wickedKnifeIndex = 26; //Mine lvl 2 5b (dexterity room)
     public const int leatherArmorIndex = 27;
+    public const int signalTorchIndex = 28;
 
 	public const int leafSamplesIndex = 0;
 	public const int guardDiaryIndex = 1;
@@ -225,6 +226,7 @@ public static class ItemList
     public const string thatchNecklaceKey = "Thatch's Silver Necklace";
     public const string plumedHelmetKey = "Ancient Plumed " + helmetSuffix;
 	public const string cookingPotKey = "Cooking Pot";
+	public const string signalTorchKey = "Signal Torch";
 
     public const string toolBundleKey = "Tool Bundle";
 
@@ -308,6 +310,7 @@ public static class ItemList
 		armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, ancientClawIndex), ancientClawKey, "This battered gauntlet has sharp spikes protruding from its knuckles, which immitate an animal's claw. Its main use is to catch and hold an opponent, helping to line up a strike from your other hand or an ally.", "2S + 2D + 3", "D+2", "Claw"));
 		armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, wickedKnifeIndex), wickedKnifeKey, "A barbed knife, meant for gouging.", "2D + 3", "2D + 1", "WickedKnife"));
 		armor.Add(new TierOneBody(new ItemListID(armorListIndex, leatherArmorIndex), leatherArmorKey, "Leather pads of tanned oxhide that cover the torso."));
+		armor.Add(new Trinket(new ItemListID(armorListIndex, signalTorchIndex), signalTorchKey, "A large torch used to direct archers in combat."));
 
 		//QuestItem(string key, string loreDescription, int ID)
 

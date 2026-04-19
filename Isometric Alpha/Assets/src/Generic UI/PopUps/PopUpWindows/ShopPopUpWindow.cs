@@ -203,17 +203,7 @@ public class ShopPopUpWindow : PopUpWindow, ITabParent
     }
     public DescribableList getDefaultDescribableList()
     {
-        for(int index = (int) DescribableList.ShopKeeperMainHandWeapons; index <= (int) DescribableList.ShopKeeperEssentialItems; index++)
-        {
-            if(Tab.getList( (DescribableList) index).Count() <= 0)
-            {
-                continue;
-            }
-
-            return (DescribableList) index;
-        }
-
-        return DescribableList.ShopKeeperMainHandWeapons;
+        return DescribableList.ShopKeeperAllItems;
     }
 
     public void updateCounter()

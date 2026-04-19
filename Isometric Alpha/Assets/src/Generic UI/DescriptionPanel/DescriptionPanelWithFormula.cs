@@ -58,6 +58,16 @@ public class DescriptionPanelWithFormula : DescriptionPanel
             invulnerabilityText == null)
         {
             return;
+        } else if((PlayerOOCStateManager.currentActivity == OOCActivity.inUI && 
+            AbilityGridSideTab.getDescribableListType() == DescribableList.AllItems) || 
+            (PlayerOOCStateManager.currentActivity == OOCActivity.inShopUI && 
+            AbilityGridSideTab.getDescribableListType() == DescribableList.ShopKeeperAllItems))
+        {
+            damageText.gameObject.SetActive(false);
+            critRatingText.gameObject.SetActive(false);
+            armorRatingText.gameObject.SetActive(false);
+            invulnerabilityText.gameObject.SetActive(false);
+            return;
         }
 
         string subtype = item.getSubtype();

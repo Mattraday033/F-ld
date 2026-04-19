@@ -896,6 +896,7 @@ public static class AudioClipList
                 } 
                 return;
             default:
+                AudioManager.endAmbience();
                 return;
         }
     }

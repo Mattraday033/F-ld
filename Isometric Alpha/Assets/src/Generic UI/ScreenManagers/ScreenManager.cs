@@ -36,7 +36,9 @@ public enum DescribableList
     ShopKeeperArmor = 24,
     ShopKeeperEssentialItems = 25,
     CharacterSpecificAbilities = 26,
-    AllItems = 27
+    AllItems = 27,
+    
+    ShopKeeperAllItems = 28
 }
 
 [System.Serializable]
@@ -189,6 +191,15 @@ public struct Tab
                 }
             case DescribableList.AllItems:
                     return State.inventory.Values;
+            case DescribableList.ShopKeeperAllItems:
+                if (ShopPopUpWindow.currentShopMode == ShopMode.Buy)
+                {
+                    return ShopPopUpWindow.getCurrentShopkeeper().getInventory().Values;
+                }
+                else
+                {
+                    return State.inventory.Values;
+                }
             default:
 
                 throw new IOException("Unknown DescribableList = " + describableList.ToString());

@@ -831,6 +831,12 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return Constants.perfectVolleyAccuracy;
     }
 
+    public virtual int getBonusVolleyAccuracy()
+    {
+        return Constants.sizeZero;
+    }
+
+
     public abstract string getVolleyAnimationType();
     #endregion
     #endregion
@@ -1182,6 +1188,16 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         if(headName != null && !headName.Contains("?"))
         {
             image.sprite = Resources.Load<Sprite>(PrefabNames.headsFolder + headName);
+        }
+    }
+
+    public virtual void setHeadSprite(SpriteRenderer spriteRenderer)
+    {
+        string headName = MonsterNameList.getPackName(getName());
+
+        if(headName != null && !headName.Contains("?"))
+        {
+            spriteRenderer.sprite = Resources.Load<Sprite>(PrefabNames.headsFolder + headName);
         }
     }
 

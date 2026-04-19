@@ -298,6 +298,27 @@ public static class Helpers
         return sum;
     }
 
+    public static int sum<T>(IEnumerable<T>[] enumerables, SumDelegateInt<T> addend)
+    {
+        if (enumerables == null || enumerables is null)
+        {
+            return 0;
+        }
+
+        int sum = 0;
+
+        foreach (IEnumerable enumerable in enumerables)
+        {
+            if (enumerable != null)
+            {
+                sum += sum<T>(enumerable, t => addend(t));
+            }
+        }
+
+        return sum;
+    }
+
+
     public static double sum<T>(IEnumerable enumerable, SumDelegateDouble<T> addend)
     {
         if (enumerable == null || enumerable is null)

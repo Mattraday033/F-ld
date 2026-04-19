@@ -17,8 +17,6 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
 
     private int previousSortPriority = 1;
 
-    public GameObject playerIndicator;
-
     public RectTransform rectTransform;
     public SpriteRenderer spriteRenderer;
     public PolygonCollider2D polygonCollider2D;
@@ -28,6 +26,9 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
 
     public NameTagGenerator nameTagGenerator;
     public MapPopUpButton mapPopUpButton;
+
+    public GameObject playerIndicator;
+    public SpriteRenderer playerIndicatorSprite;
 
     public void setLandmark(LandmarkSpawnDetails spawnDetails)
     {
@@ -48,6 +49,7 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
 
     public void revealIndicator()
     {
+        PartyManager.getPlayerStats().setHeadSprite(playerIndicatorSprite);
         playerIndicator.SetActive(true);
     }
 

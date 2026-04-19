@@ -17,7 +17,7 @@ public class PartyGridSection : GridRow
     {
         FormationHandler formationHandler = OverallUIManager.currentScreenManager as FormationHandler;
 
-        if (formationHandler != null)
+        if (formationHandler != null && descriptionPanel.getObjectBeingDescribed() != null)
         {
             formationHandler.primaryStatSlot.setTempDescribable(descriptionPanel.getObjectBeingDescribed() as AllyStats);
 
