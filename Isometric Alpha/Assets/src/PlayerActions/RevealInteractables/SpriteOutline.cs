@@ -46,11 +46,12 @@ public class SpriteOutline
 
         spriteTransform = spriteRenderer.transform;
 
-        if(spriteTransform.position.z != 0f)
+        if((CombatStateManager.inCombat && spriteTransform.position.z > 0f) || 
+            (!CombatStateManager.inCombat && spriteTransform.position.z != 0f))
         {
             Vector3 oldPos = spriteTransform.position;
             spriteTransform.position = new Vector3(oldPos.x, oldPos.y, 0f);
-        }
+        } 
 
         outlineMaterial.color = color;
 

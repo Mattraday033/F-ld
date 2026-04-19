@@ -88,10 +88,6 @@ public static class CombatGrid
     {
 		return (positionIsOnAlliedSide(firstCoords) && positionIsOnAlliedSide(secondCoords)) || (positionIsOnEnemySide(firstCoords) && positionIsOnEnemySide(secondCoords));
     }
-    /*
-	public const int allyRowLowerBounds = 7;
-	public const int allyRowUpperBounds = 4;	
-	*/
 
     public static int getNumberOfRows()
 	{
@@ -113,18 +109,14 @@ public static class CombatGrid
 		}
 		
 		combatant.combatSprite.transform.position = getPositionAt(newCoords.row, newCoords.col);
-		Helpers.updateGameObjectPosition(combatant.combatSprite);
+		// Helpers.updateGameObjectPosition(combatant.combatSprite);
 	}
 	
-	//careful when using, if there is already something in the given grid space
-	//and you aren't setting it to null, this will throw an error
 	public static void setCombatantAtCoords(int rowIndex, int colIndex, Stats newCombatant)
 	{
 		setCombatantAtCoords(new GridCoords(rowIndex, colIndex), newCombatant);
 	}
 	
-	//careful when using, if there is already something in the given grid space
-	//and you aren't setting it to null, this will throw an error
 	public static void setCombatantAtCoords(GridCoords coords, Stats newCombatant)
 	{
 		combatantStatsGrid[coords.row].setCol(coords.col, newCombatant);

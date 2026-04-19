@@ -26,6 +26,8 @@ public class FloorButton : MonoBehaviour, INameSource
 
     public int charismaRequirement = 1;
 
+    public bool previousIsPressed = false;
+
     private void Awake()
     {
         Formation.OnFormationChange.AddListener(checkCharismaRequirement);
@@ -74,7 +76,7 @@ public class FloorButton : MonoBehaviour, INameSource
 
         yield return null;
 
-        setSprite(Constants.indexZero);
+        setSprite(Constants.indexZero, false);
     }
 
     public string getKey()
@@ -94,13 +96,30 @@ public class FloorButton : MonoBehaviour, INameSource
 
     public void setSprite(int movementIndex)
     {
+        setSprite(movementIndex, true);
+    }
+
+    public void setSprite(int movementIndex, bool withSFX)
+    {
         if(isPressed())
         {
+            if(withSFX && isPressed() != previousIsPressed)
+            {
+                AudioManager.playButtonOnSFX();
+            }
+
             spriteRenderer.sprite = Resources.Load<Sprite>(PrefabNames.buttonDownStoneFolderPath);            
         } else
         {
+            if(withSFX && isPressed() != previousIsPressed)
+            {
+                AudioManager.playButtonOffSFX();
+            }
+
             spriteRenderer.sprite = Resources.Load<Sprite>(PrefabNames.buttonUpStoneFolderPath);      
         }
+
+        previousIsPressed = isPressed();
     }
 
     private void OnEnable()

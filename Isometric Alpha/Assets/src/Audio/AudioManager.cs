@@ -615,6 +615,16 @@ public class AudioManager : MonoBehaviour
         playAudioClipAsSingleton(AudioClipList.gongSFX);
     }
 
+    public static void playButtonOnSFX()
+    {
+        playAudioClipAsSingleton(AudioClipList.buttonOnSFX);
+    }
+
+    public static void playButtonOffSFX()
+    {
+        playAudioClipAsSingleton(AudioClipList.buttonOffSFX);
+    }
+
     #endregion
 
     [RuntimeInitializeOnLoadMethod]
@@ -683,6 +693,8 @@ public static class AudioClipList
     public const string tunnelExplosionSFX = miscSFXFolder + "TunnelExplosion";
     public const string jellyMisfireSFX = miscSFXFolder + "JellyMisfire";
     public const string gongSFX = miscSFXFolder + "Gong";
+    public const string buttonOnSFX = miscSFXFolder + "ButtonOn";
+    public const string buttonOffSFX = miscSFXFolder + "ButtonOff";
 
     public const string coinSFXFolder = SFXFolderPath + "Coin/";
 
