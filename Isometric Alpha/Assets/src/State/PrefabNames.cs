@@ -218,6 +218,11 @@ public static class PrefabNames
     public const string UIBubble = UITexturesFolder + "Bubble";
 
     public const string portraitFolder = UIFolder + "Portraits/";
+    
+    public const string loadingScreenFolder = UIFolder + "Loading Screen/";
+
+    public const string caveLoadingScreenArt = loadingScreenFolder + "Cave";
+    public const string campLoadingScreenArt = loadingScreenFolder + "Camp";
     #endregion
 
     public const string playerPrefab = "PlayerOOC";

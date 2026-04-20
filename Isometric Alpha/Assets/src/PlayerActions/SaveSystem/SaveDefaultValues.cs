@@ -10,8 +10,8 @@ public static class SaveDefaultValues
     public const string badSaveName = "Bad Save";
     public const int badSaveNumber = 0;
 
-    //    public const string defaultSceneName = "2SlaveShack";
-    public const string defaultSceneName = LocationNameList.slaveShackTwo;
+    public const string defaultZoneName = ZoneKeyList.lovashiCamp;
+    public const string defaultLocationName = LocationNameList.slaveShackTwo;
     public const bool defaultBoolFalse = false;
     public const bool defaultBoolTrue = true;
 

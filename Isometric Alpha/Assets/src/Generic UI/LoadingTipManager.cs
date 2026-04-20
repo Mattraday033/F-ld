@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LoadingTip
 {
@@ -41,13 +42,30 @@ public static class LoadingTipList
     }
 }
 
+public static class LoadingScreenArtList
+{
+    public static Sprite getLoadingScreenArt(string zoneKey)
+    {
+        switch(zoneKey)
+        {
+            case ZoneKeyList.lovashiCamp:
+            case ZoneKeyList.manseFirstFloor:
+            case ZoneKeyList.manseSecondFloor:
+                return Resources.Load<Sprite>(PrefabNames.campLoadingScreenArt);
+            default:
+                return Resources.Load<Sprite>(PrefabNames.caveLoadingScreenArt);
+        }
+    }
+}
 
 public class LoadingTipManager : MonoBehaviour
 {
     public TextMeshProUGUI loadingTipMessage;
+    public Image loadingScreenArtImage;
 
     private void Awake()
     {
+        setLoadingScreenArt();
         setLoadingScreenTip();
     }
     private bool noTipsLeft()
@@ -83,6 +101,11 @@ public class LoadingTipManager : MonoBehaviour
             LoadingTip tip = (LoadingTip) LoadingTipList.loadingTips[index];
             tip.used = false;
         }
+    }
+
+    public void setLoadingScreenArt()
+    {
+        loadingScreenArtImage.sprite = LoadingScreenArtList.getLoadingScreenArt(LoadingBarProgressTracker.getZoneToLoadInto());
     }
 
     public void setLoadingScreenTip()

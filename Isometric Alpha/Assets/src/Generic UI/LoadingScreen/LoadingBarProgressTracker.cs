@@ -99,7 +99,7 @@ public class LoadingBarProgressTracker : MonoBehaviour
 	void Update()
 	{
 		// if((canChangeScene && (KeyBindingList.continueUIKeyIsPressed() || Input.GetKey(KeyCode.Mouse0))) || Application.isEditor)
-		if(canChangeScene && (KeyBindingList.continueUIKeyIsPressed() || Input.GetKey(KeyCode.Mouse0)))
+		if(canChangeScene && (KeyBindingList.continueUIKeyIsPressed()))// || Input.GetKey(KeyCode.Mouse0)))
 		{
             garbageCollectionHasOccured = false;
             canChangeScene = false;
@@ -182,5 +182,17 @@ public class LoadingBarProgressTracker : MonoBehaviour
     public static bool loadingInProgress()
     {
         return SceneManager.GetActiveScene().name.Equals(SceneNameList.loadingScreen);
+    }
+
+    public static string getZoneToLoadInto()
+    {
+        if(loadSaveFile == null || 
+            loadSaveFile.saveBlueprint == null || 
+            loadSaveFile.saveBlueprint.currentZone == null)
+        {
+            return SaveDefaultValues.defaultZoneName;
+        }
+
+        return loadSaveFile.saveBlueprint.currentZone;
     }
 }

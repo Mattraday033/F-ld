@@ -22,6 +22,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
     public string playerPortraitName = NPCNameList.thatch;
     public string playerSpriteName = NPCNameList.thatch;
 
+	public string currentZone;
 	public string currentLocation;
 	public float[] playerPosition;
 
@@ -106,6 +107,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 		saveBlueprint.currentChestAndGateFlags = GateAndChestManager.getAllGateAndChestFlagWrappers();
 		saveBlueprint.currentActivatedTrapsAndButtons = TrapAndButtonStateManager.getAllWrappers();
 		saveBlueprint.currentLocation = AreaManager.locationName;
+		saveBlueprint.currentZone = MapObjectList.getCurrentZoneKey();
 		saveBlueprint.saveName = saveName;
 
         saveBlueprint.currentSkillType = State.currentSkillType;
@@ -151,7 +153,8 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
         this.playerPortraitName = GetFromJson.getElementFromJson(this.saveName, nameof(playerPortraitName), jsonDynamic, SaveDefaultValues.defaultPortraitName);
         this.playerSpriteName = GetFromJson.getElementFromJson(this.saveName, nameof(playerSpriteName), jsonDynamic, SaveDefaultValues.defaultSpriteName);
 
-		this.currentLocation = GetFromJson.getElementFromJson(this.saveName, nameof(currentLocation), jsonDynamic, SaveDefaultValues.defaultSceneName);
+		this.currentZone = GetFromJson.getElementFromJson(this.saveName, nameof(currentLocation), jsonDynamic, SaveDefaultValues.defaultZoneName);
+		this.currentLocation = GetFromJson.getElementFromJson(this.saveName, nameof(currentLocation), jsonDynamic, SaveDefaultValues.defaultLocationName);
 		this.playerPosition = GetFromJson.getElementFromJson(this.saveName, nameof(playerPosition), jsonDynamic, SaveDefaultValues.defaultPlayerPosition);
 		this.terrainHidden = GetFromJson.getElementFromJson(this.saveName, nameof(terrainHidden), jsonDynamic, SaveDefaultValues.defaultBoolFalse);
 

@@ -30,7 +30,7 @@ public class LoadSaveFile : IDecision
 
     public readonly static UnityEvent OnLoad = new UnityEvent();
 
-    private SaveBlueprint saveBlueprint;
+    public SaveBlueprint saveBlueprint;
 
 
     public LoadSaveFile()
