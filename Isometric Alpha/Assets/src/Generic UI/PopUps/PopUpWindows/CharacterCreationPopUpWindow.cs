@@ -18,8 +18,8 @@ public class CharacterCreationPopUpWindow : PopUpWindow
 
     public AllyStats currentStats;
 
-    public Button[] incrementButtons;
-    public Button[] decrementButtons;
+    public GameObject[] incrementButtonParents;
+    public GameObject[] decrementButtonParents;
 
     public int pointsToSpend;
     public int pointsSpent;
@@ -185,30 +185,30 @@ public class CharacterCreationPopUpWindow : PopUpWindow
 
     public void setInteractability()
     {
-        for (int buttonIndex = 0; buttonIndex < incrementButtons.Length && buttonIndex < decrementButtons.Length; buttonIndex++)
+        for (int buttonIndex = 0; buttonIndex < incrementButtonParents.Length && buttonIndex < decrementButtonParents.Length; buttonIndex++)
         {
             if (pointsToSpend > 0)
             {
-                incrementButtons[buttonIndex].gameObject.SetActive(true);
+                incrementButtonParents[buttonIndex].SetActive(true);
             }
             else
             {
-                incrementButtons[buttonIndex].gameObject.SetActive(false);
+                incrementButtonParents[buttonIndex].SetActive(false);
             }
 
             switch ((PrimaryStat) buttonIndex)
             {
                 case PrimaryStat.Strength:
-                    decrementButtons[buttonIndex].gameObject.SetActive(currentStats.getStrength() > 1);
+                    decrementButtonParents[buttonIndex].SetActive(currentStats.getStrength() > 1);
                     break;
                 case PrimaryStat.Dexterity:
-                    decrementButtons[buttonIndex].gameObject.SetActive(currentStats.getDexterity() > 1);
+                    decrementButtonParents[buttonIndex].SetActive(currentStats.getDexterity() > 1);
                     break;
                 case PrimaryStat.Wisdom:
-                    decrementButtons[buttonIndex].gameObject.SetActive(currentStats.getWisdom() > 1);
+                    decrementButtonParents[buttonIndex].SetActive(currentStats.getWisdom() > 1);
                     break;
                 case PrimaryStat.Charisma:
-                    decrementButtons[buttonIndex].gameObject.SetActive(currentStats.getCharisma() > 1);
+                    decrementButtonParents[buttonIndex].SetActive(currentStats.getCharisma() > 1);
                     break;
             }
 

@@ -25,6 +25,21 @@ public class PrimaryStatIncreaseButton : BinaryPanelPopUpButton, IPointerEnterHa
         }
     }
 
+	public override void spawnPopUp()
+	{
+        StartCoroutine(waitTwoFrameThenSpawnPopUp());
+	}
+
+    private IEnumerator waitTwoFrameThenSpawnPopUp()
+    {
+        CharacterScreen.getUpgradeDescriptionPanelSlot().removePrimaryDescribable();
+
+        yield return null;
+        yield return null;
+
+        base.spawnPopUp();
+    }
+
     public void enableButton()
     {
         button.enabled = true;
