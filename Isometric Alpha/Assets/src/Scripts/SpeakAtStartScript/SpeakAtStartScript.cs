@@ -13,7 +13,7 @@ public class SpeakAtStartScript : PlayerInteractionScript
     }
 }
 
-public class BeginningConversationScript: SpeakAtStartScript //Broglin + Garcha in the Starting Hut
+public class BeginningConversationScript: SpeakAtStartScript //Brush + Géza in the Starting Hut
 {
 
     public override void runScript(GameObject target = null)

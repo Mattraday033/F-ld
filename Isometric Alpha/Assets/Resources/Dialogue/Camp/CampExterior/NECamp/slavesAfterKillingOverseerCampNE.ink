@@ -6,7 +6,7 @@ VAR charisma = 0
 VAR playerName = ""
 
 VAR duringSlaveRallyConversation = false
-VAR waitingOnGarchaToSpeak = false
+VAR waitingOnGézaToSpeak = false
 VAR kastorStartedRevolt = false
 VAR revoltStarted = false
 VAR agreedToBeLeader = false
@@ -33,7 +33,7 @@ VAR deathFlagGuardAndrás = false
 VAR deathFlagJanos = false
 VAR deathFlagClay = false
 VAR deathFlagThatch = false
-VAR deathFlagGarcha = false
+VAR deathFlagGéza = false
 
 VAR crowdFervor = 0
 VAR crowdAppeasementThreshold = 3
@@ -50,7 +50,7 @@ VAR janosInterjected = false
 VAR playerIndex = 0
 VAR nandorIndex = 1
 VAR carterIndex = 2
-VAR garchaIndex = 3
+VAR gézaIndex = 3
 VAR janosIndex  = 4
 VAR clayIndex   = 5
 VAR slave1Index = 6
@@ -68,7 +68,7 @@ playCrowdAmbience()
 setToTrue(hadSlavesAfterKillingOverseerCampNEConvo)
 
 setToTrue(duringSlaveRallyConversation)
-setToTrue(waitingOnGarchaToSpeak)
+setToTrue(waitingOnGézaToSpeak)
 searchInventoryFor(hasToolBundle,Tool Bundle)
 
 {
@@ -672,15 +672,15 @@ Ha! Well, perhaps you're right. But I want to know you've got a bigger plan goin
 
 === 7a ===
 
-changeCamTarget({garchaIndex})
+changeCamTarget({gézaIndex})
 
-It looks like everything is set. Remember, if things get tough in there you can always come back here and Kastor and I will patch you up. If you're in need of something a little more material, go find Uros by the barricade. I put him in charge of collecting things from the stores and dead guards in case we need them later. And don't you dare forget about rescuing Broglin!
+It looks like everything is set. Remember, if things get tough in there you can always come back here and Kastor and I will patch you up. If you're in need of something a little more material, go find Uros by the barricade. I put him in charge of collecting things from the stores and dead guards in case we need them later. And don't you dare forget about rescuing Brush!
 
 fadeToBlack()
 
-deactivate({garchaIndex})
+deactivate({gézaIndex})
 
-setToFalse(waitingOnGarchaToSpeak)
+setToFalse(waitingOnGézaToSpeak)
 
 updateNPCVisibility()
 
@@ -699,7 +699,7 @@ fadeBackIn(60)
     fadeToBlack(true, false)
     
 -else:
-    setToFalse(waitingOnGarchaToSpeak)
+    setToFalse(waitingOnGézaToSpeak)
     fadeToBlack()
 }
 

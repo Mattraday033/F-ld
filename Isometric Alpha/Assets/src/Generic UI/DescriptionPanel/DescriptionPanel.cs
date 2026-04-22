@@ -199,7 +199,7 @@ public class DescriptionPanel : MonoBehaviour
 	
 	public Item getItemBeingDescribed()
 	{
-		return (Item) objectBeingDescribed;
+		return objectBeingDescribed as Item;
 	}
 	
 	public IDescribable getObjectBeingDescribed()

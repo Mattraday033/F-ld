@@ -12,7 +12,7 @@ VAR andrasIndex = 5
 VAR taborIndex = 6
 VAR crowdIndex = 7
 VAR clayIndex = 8
-VAR garchaIndex = 9
+VAR gézaIndex = 9
 VAR thatchIndex = 10
 
 VAR gaveAGuardToTheCrowd = false
@@ -722,7 +722,7 @@ deactivate({andrasIndex})
 deactivate({taborIndex})
 deactivate({crowdIndex})
 deactivate({clayIndex})
-deactivate({garchaIndex})
+deactivate({gézaIndex})
 deactivate({thatchIndex})
 
 setToTrue(crowdDispersed)

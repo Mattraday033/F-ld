@@ -154,6 +154,7 @@ public class AudioManager : MonoBehaviour
 
     public static string previousMusicPath;
     public static string currentMusicPath;
+    public static string currentAmbiencePath;
 
     public Coroutine playingQueuedAudioClips;
 
@@ -463,12 +464,16 @@ public class AudioManager : MonoBehaviour
 
     public static void playSFXAsAmbience(string clipPath)
     {
-        if(instance == null || instance.ambienceSource == null)
+        if(instance == null || 
+            instance.ambienceSource == null || 
+            clipPath == null || 
+            currentAmbiencePath.Equals(clipPath))
         {
             return;
         }
 
-        instance.ambienceSource.volume = sfxVolumePlayerSetting * .9f;
+        currentAmbiencePath = clipPath;
+        instance.ambienceSource.volume = sfxVolumePlayerSetting * .6f;
         instance.ambienceSource.clip = Resources.Load<AudioClip>(clipPath);
         instance.ambienceSource.Play();
     }
@@ -482,6 +487,7 @@ public class AudioManager : MonoBehaviour
 
         instance.ambienceSource.Stop();
         instance.ambienceSource.clip = null;
+        currentAmbiencePath = "";
     }
 
 
@@ -490,6 +496,11 @@ public class AudioManager : MonoBehaviour
     public static void playCrowdAmbience()
     {
         playSFXAsAmbience(AudioClipList.crowdBackgroundSFX);
+    }
+
+    public static void playBirdsAmbience()
+    {
+        playSFXAsAmbience(AudioClipList.birdsBackgroundSFX);
     }
 
     public static void playDefeatMusic()
@@ -633,6 +644,7 @@ public class AudioManager : MonoBehaviour
         instance = null;
         previousMusicPath = "";
         currentMusicPath = "";
+        currentAmbiencePath = "";
         TransitionManager.ChangeAreaMusic.AddListener(playNextAreaMusic);
 
         Config.readConfig();
@@ -679,6 +691,7 @@ public static class AudioClipList
     public const string ambienceSFXFolder = SFXFolderPath + "Ambience/";
 
     public const string crowdBackgroundSFX = ambienceSFXFolder + "Crowd";
+    public const string birdsBackgroundSFX = ambienceSFXFolder + "Birds";
 
     public const string miscSFXFolder = SFXFolderPath + "Misc/";
 
@@ -899,14 +912,24 @@ public static class AudioClipList
 
     public static void playLocationAmbience()
     {
-        switch(AreaManager.locationName)
+        switch(MapObjectList.getCurrentZoneKey())
         {
-            case LocationNameList.campSouthEast:
-                if(SpawnParamsList.guardPunishmentCrowdSpawnParams.canSpawn(NPCNameList.slave))
+            case ZoneKeyList.lovashiCamp:
+                switch(AreaManager.locationName)
                 {
-                    AudioManager.playCrowdAmbience();
-                } 
-                return;
+                    case LocationNameList.campSouthEast:
+                        if(SpawnParamsList.guardPunishmentCrowdSpawnParams.canSpawn(NPCNameList.slave))
+                        {
+                            AudioManager.playCrowdAmbience();
+                        } else
+                        {
+                            AudioManager.playBirdsAmbience(); 
+                        }
+                        return;
+                    default:
+                        AudioManager.playBirdsAmbience(); 
+                        return;   
+                }
             default:
                 AudioManager.endAmbience();
                 return;

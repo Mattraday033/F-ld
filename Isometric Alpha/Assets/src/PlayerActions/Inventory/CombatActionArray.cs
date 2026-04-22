@@ -64,6 +64,23 @@ public class CombatActionArray : StatBoostSourceCombiner
         return combatActions[slotIndex];
     }
 
+    public int findFirstAttackSlot()
+    {
+        int index = 0;
+
+        foreach(CombatAction action in combatActions)
+        {
+            if(action is Attack)
+            {
+                return index;
+            }
+
+            index++;
+        }
+
+        return -1;
+    }
+
     public int calculateBonusAbilityDamage()
     {
         int highestBonusAbilityDamage = 0;
@@ -132,8 +149,8 @@ public class CombatActionArray : StatBoostSourceCombiner
 
         if (oldItem != null && oldItem.getQuantity() > 0 && !oldItem.usableInCombat())
         {
-            Inventory.addItem(oldItem);
-            EquippedItems.OnEquipmentChange.Invoke();
+            Inventory.addItem(oldItem, ignoreEvent: true);
+            // EquippedItems.OnEquipmentChange.Invoke();
         }
 
         if(!Flags.isInNewGameMode() &&
@@ -232,8 +249,7 @@ public class CombatActionArray : StatBoostSourceCombiner
                 !newItem.getKey().Equals(ItemList.getMainHandFist(actor as AllyStats).getKey()) &&
                 !newItem.getKey().Equals(ItemList.getOffHandFist().getKey()))
             {
-                Inventory.removeItem(newItem, 1);
-                EquippedItems.OnEquipmentChange.Invoke();
+                Inventory.removeItem(newItem, 1, ignoreEvent: true);
             }
 
             combatActions[slotIndex] = newCombatAction.clone();

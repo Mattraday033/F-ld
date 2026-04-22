@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class DescriptionPanelWithFormula : DescriptionPanel
 {
 
+    public Button inventoryGridRowButton;
+
     private string damageTotal = "";
     private string critTotal = "";
     private string armorTotal = "";
@@ -25,7 +27,6 @@ public class DescriptionPanelWithFormula : DescriptionPanel
             DescriptionPanelBuilder.OnFormulaSwap.RemoveListener(swapStatText);
         }
     }
-
     public override void setObjectBeingDescribed(IDescribable describable)
     {
         base.setObjectBeingDescribed(describable);
@@ -45,6 +46,25 @@ public class DescriptionPanelWithFormula : DescriptionPanel
         }
 
         setColumnVisibility();
+
+        setButtonInteractability();
+    }
+
+    private void setButtonInteractability()
+    {
+        Item item = getItemBeingDescribed();
+
+        if(item == null || 
+            inventoryGridRowButton == null)
+        {
+            return;
+        }
+        
+        if(!(item is EquippableItem) && 
+            !item.usableOutOfCombat())
+        {
+            inventoryGridRowButton.enabled = false;
+        } 
     }
 
     private void setColumnVisibility()

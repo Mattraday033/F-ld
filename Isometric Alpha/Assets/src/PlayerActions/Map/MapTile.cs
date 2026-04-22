@@ -32,6 +32,10 @@ public class MapTile : MonoBehaviour, IQuestListSource
 
     public Image playerIndicator;
 
+
+    public GameObject restPointIcon;
+    public GameObject shopIcon;
+
     public void readInFormat(MapTileFormat mapTileFormat)
     {
         setSceneAndLocationName(mapTileFormat.locationName);
@@ -72,6 +76,13 @@ public class MapTile : MonoBehaviour, IQuestListSource
         }
 
         setPlayerIndicatorVisibility();
+        checkRestPointAndShopIconVisibility();
+    }
+
+    private void checkRestPointAndShopIconVisibility()
+    {
+        restPointIcon.SetActive(RestAndShopMapLocationList.locationHasRestPoint(locationName));
+        shopIcon.SetActive(RestAndShopMapLocationList.locationHasShop(locationName));
     }
 
     public void setInteriorCounter()
@@ -249,4 +260,50 @@ public class MapTile : MonoBehaviour, IQuestListSource
 
 		return location.getAllQuestStepsInLocation();
     }
+}
+
+public static class RestAndShopMapLocationList
+{
+    
+    public static bool locationHasShop(string locationName) // locationName will always be a MapLocation, and never a MapInterior
+    {
+        switch(locationName)
+        {
+            case LocationNameList.campNorthEast:
+                return SpawnParamsList.slavesInNorthEastCamp.canSpawn(NPCNameList.uros);
+            case LocationNameList.campSouthEast:
+                return Flags.getFlag(FlagNameList.kendeWillSellToPlayer) && 
+                        SpawnParamsList.defaultBeforeRevoltSpawnParams.canSpawn(NPCNameList.kende);
+            default:
+                return false;
+        }
+    }
+
+    public static bool locationHasRestPoint(string locationName) // locationName will always be a MapLocation, and never a MapInterior
+    {
+        switch(locationName)
+        {
+            case LocationNameList.campNorthEast:
+                return !Flags.getFlag(FlagNameList.directorDefeated);
+            case LocationNameList.campSouthEast:
+                return Flags.getFlag(FlagNameList.kastorStartedRevolt) && 
+                        !Flags.getFlag(FlagNameList.convincedSlavesToHelpYou) &&
+                        !Flags.getFlag(FlagNameList.directorDefeated);
+            case ZoneKeyList.mineLvl3 + LocationNameList.section5:
+                return Flags.getFlag(FlagNameList.mineLvl3CarterAndNandorInParty) && 
+                        !Flags.getFlag(FlagNameList.mineLvl3BreachSealed) && 
+                        !Flags.getFlag(FlagNameList.broughtNandorToKastor);
+            case ZoneKeyList.mineLvl3 + LocationNameList.section3b:
+                return Flags.getFlag(FlagNameList.mineLvl3GuardsInParty) && 
+                        !Flags.getFlag(FlagNameList.mineLvl3BreachSealed) && 
+                        !Flags.getFlag(FlagNameList.mineLvl2GuardsFinishedMove);
+            case ZoneKeyList.mineLvl2 + LocationNameList.section2a:
+                return  Flags.getFlag(FlagNameList.mineLvl2GuardsFinishedMove) && 
+                        !Flags.getFlag(FlagNameList.mineLvl3BreachSealed);
+            default:
+                return false;
+        }
+    }
+
+
 }

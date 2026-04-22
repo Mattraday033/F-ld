@@ -16,10 +16,10 @@ public class ShopItemGridRow : InventoryItemGridRow
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        if (DragAndDropReenterZone.insideGoodZone)
-        {
+        // if (DragAndDropReenterZone.insideGoodZone)
+        // {
             base.OnPointerEnter(eventData);
-        }
+        // }
     }
 
     // public override void OnPointerExit(PointerEventData eventData)

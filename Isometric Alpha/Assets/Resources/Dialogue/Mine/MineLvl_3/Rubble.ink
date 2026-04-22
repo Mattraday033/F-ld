@@ -23,7 +23,7 @@ VAR deathFlagGuardPázmán = false
 
 VAR toldToFindNandor = false
 
-VAR goesWithBroglinsPlan = false
+VAR goesWithBrushsPlan = false
 VAR mineLvl3GuardsInParty = false
 VAR mineLvl3MarcosAgreedToIgniteJelly = false
 VAR mineLvl3MarcosTaughtHowToIgniteJelly = false
@@ -188,7 +188,7 @@ setNPCFacing({gasparIndex},SE)
 Fun's over slaves, hand over any tools you may be holding and place your hands on each other's shoulders. We're heading back up to camp.
 
 {
--goesWithBroglinsPlan:
+-goesWithBrushsPlan:
     +Things are afoot on the surface. There's only one way you make it out of this mine alive: if <i>you</i> surrender your weapons to <i>us</i> and come peacefully.
         ~mineLvl3DealtWithGaspar = true
         setToTrue(mineLvl3DealtWithGaspar)

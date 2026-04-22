@@ -159,7 +159,11 @@ public class ShopPopUpWindow : PopUpWindow, ITabParent
         newItem.setQuantity(item.getQuantity());
 
         Inventory.removeItem(item, item.getQuantity(), startPocket);
-        Inventory.addItem(newItem, destinationPocket);
+
+        if(!(item is TreasureItem))
+        {
+            Inventory.addItem(newItem, destinationPocket);
+        }
 
         AudioManager.playCoinSFX();
 

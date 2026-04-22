@@ -355,7 +355,7 @@ public static class HoverMessageList
     private const string durationIconMessage = "This Action has an effect that lasts multiple rounds, such as applying a Trait to it's target.";
 
     private const string amountIconMessage = "Quantity";
-    private const string worthIconMessage = "An Item's worth in Gold Pieces. A shopkeeper may buy items for more than their worth based on their current Discount.";
+    private const string worthIconMessage = "An Item's worth in Gold Pieces. A Shopkeeper's Discount affect's the cost of the Items they sell and how much they will pay for Items you sell to them.";
     private const string goldIconMessage = "Your Party's total Gold Pieces";
 
     private const string goldRewardKey = "Reward";
@@ -487,6 +487,9 @@ public static class HoverMessageList
     private const string saveAndLoadScreenMessage = "Here you can save your game. Remember, you can also Quick Save with 'Q', and the game will take an Autosave whenever you enter an area. You can have up to three Autosaves at a time.";
     private const string settingsScreenKey = "Settings Screen";
     private const string settingsScreenMessage = "Here you can change the Game's Settings, or Quit the Game.";
+
+    private const string restPointMessage = "This location has a Rest Point. Rest Points will restore the Health of all Party Members, as well as any expended skill charges.";
+    private const string shopIconMessage = "This location has a Shop. Shops sell useful items or equipment and buy unwanted loot.";
 
     public static string getMessage(string iconName)
     {
@@ -735,6 +738,11 @@ public static class HoverMessageList
             case zoneOfInfluenceKey:
             case zoiKey:
                 return zoiMessage;
+
+            case IconList.restPointIcon:
+                return restPointMessage;
+            case IconList.shopIcon:
+                return shopIconMessage;
 
             default:
 

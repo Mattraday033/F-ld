@@ -775,6 +775,32 @@ public class DialogueManager : MonoBehaviour
 
                     return;
 
+
+                case "slowfadebackin": //slowFadeBackIn(int fadeTimeMultiplier) 
+
+                    int multiplier = getArgumentInt(buffer);
+
+                    StartCoroutine(slowFadeBackIn(multiplier));
+
+                    return;
+
+                case "wait": //wait(int seconds) 
+
+                    int seconds = getArgumentInt(buffer);
+
+                    StartCoroutine(waitInSeconds(seconds));
+
+                    return;
+
+                case "stopfades": 
+                case "stopallfades": 
+
+                    FadeToBlackManager.StopFade(FadeType.Screen);
+                    
+                    continueStory();
+
+                    break;
+
                 case "movepos":
                 case "moveposition":
                 case "movetopos":
@@ -917,6 +943,9 @@ public class DialogueManager : MonoBehaviour
                                 break;
                             case "standup":
                                 targetAnimationManager.playAnimation(CharacterAnimationType.StandUp);
+                                break;
+                            case "death_back_weaponless":
+                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Back_Weaponless);
                                 break;
                         }
                     }
@@ -1107,6 +1136,23 @@ public class DialogueManager : MonoBehaviour
                     currentConversation.setAttachedWindow(dialogueTrackerWindow);
 
                     dialogueTrackerWindow.gameObject.SetActive(true);
+
+                    continueStory();
+
+                    break;
+
+                case "disabledialogueui":
+
+                    if (dialogueTrackerWindow == null)
+                    {
+                        // Debug.LogError("DialogueTrackerWindow is null in enableDialogueUI()");
+                        dialogueTrackerButton.spawnEmptyPopUp();
+                        dialogueTrackerWindow = (DialogueTrackerWindow) dialogueTrackerButton.getPopUpWindow();
+                    }
+
+                    currentConversation.setAttachedWindow(dialogueTrackerWindow);
+
+                    dialogueTrackerWindow.gameObject.SetActive(false);
 
                     continueStory();
 
@@ -1891,6 +1937,27 @@ public class DialogueManager : MonoBehaviour
 		}
 	}
 	
+	private IEnumerator slowFadeBackIn(int multiplier)
+	{
+		fadeToBlackManager.setAndStartFadeBackIn(multiplier);
+
+        yield return null;
+
+		yield return new WaitUntil(() => !FadeToBlackManager.isMidScreenFade());
+
+		setCameraToDialogueSpeed();
+
+        continueStory();
+	}
+
+	
+	private IEnumerator waitInSeconds(int seconds)
+	{
+		yield return new WaitForSeconds(seconds);
+
+        continueStory();
+	}
+
 	private static Story addAllVariables(Story story, List<IStoryVariableSource> variableSources)
 	{
 		story = Flags.addAllVariables(story);

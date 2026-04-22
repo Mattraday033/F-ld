@@ -3,20 +3,32 @@ VAR askedDoYouWantMeToDoThis = false
 VAR impressedGuard = false
 VAR needsABut = false
 VAR killedBAndG = false
-VAR peacefullyRefusedBroglin = false
+VAR peacefullyRefusedBrush = false
 VAR tellTheGuardTheTruth = false
-VAR takeGarchaAway = false
-VAR gotBroglinKilledByGuard = false
-VAR spokeToGarchaAboutPlan = false
+VAR takeGézaAway = false
+VAR gotBrushKilledByGuard = false
+VAR spokeToGézaAboutPlan = false
 VAR skipFirstDialogue = false
 VAR charisma = 0
 VAR wisdom = 0
 
-VAR broglinIndex = 1
-VAR garchaIndex = 2
+VAR rudeness = 0
+VAR rudenessThreshold = 3
+
+VAR playerIndex = 0
+VAR brushIndex = 1
+VAR gézaIndex = 2
 VAR laszloActualIndex = 3
 VAR laszloVoiceIndex = 4
-VAR garchaSecondLocationIndex = 5
+VAR gézaSecondLocationIndex = 5
+
+playAnimation({playerIndex},death_back_weaponless)
+setNPCFacing({brushIndex},SE)
+stopAllFades()
+disableDialogueUI()
+changeCamTarget({playerIndex})
+slowFadeBackIn(7)
+wait(2)
 
 {
 -skipFirstDialogue:
@@ -25,90 +37,170 @@ VAR garchaSecondLocationIndex = 5
     ->1a
 }
 
-=== 1a === //Broglin starts
+=== 1a === //Brush starts
 
 setFacing(sw)
-setNPCFacing({broglinIndex},SE)
+setNPCFacing({brushIndex},SE)
 
 setToTrue(finishedFirstDialogue)
 
-changeCamTarget({broglinIndex}) 
+changeCamTarget({brushIndex}) 
 
-changeCamTarget({broglinIndex}) 
+enableDialogueUI()
 
-Great Mother, my aching head. I sleep worse and worse every night I swear.
+changeCamTarget({brushIndex})
 
-//+Skip Dialogue
-//    ->Close
+... and you can still find ways to hurt my pride. It's a gift. 
 
-changeCamTarget({garchaIndex})
+changeCamTarget({gézaIndex})
 
-I know I'd sleep better if you'd shut up.
+Discusing the plan is getting us nowhere. Let's just get on with it.
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
-Oh, don't be that way. Sleep would evade you even if I was dead.
+What time do you think it is?
 
-changeCamTarget({garchaIndex})
+changeCamTarget({gézaIndex})
 
-I'm not so sure about that.
+I hear birds, but there's no sun yet.
 
-changeCamTarget({broglinIndex})
-
-Four months together sharing a shack and you find new ways to wound me. Incredible. What time do you think it is?
-
-changeCamTarget({garchaIndex})
-
-I hear birds, but no sun yet.
-
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
 How long does that give us until inspection?
 
-changeCamTarget({garchaIndex})
+changeCamTarget({gézaIndex})
 
 An hour at most. Probably less.
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
-Lets go over the plan again. Hey, newbie, you awake?
+Ok, you're right. We'd better wake the princess.
+
+setNPCFacing({brushIndex},NE)
+setNPCFacing({gézaIndex},NE)
+
+Hey, you awake?
 
     +Yeah, I'm awake.
+        playAnimation({playerIndex},ooc_idle_front)
      -> 1c
     
     +No one could sleep through all this talk.
+        playAnimation({playerIndex},ooc_idle_front)
      -> 1b
     
 === 1b ===
 
-You've been here for less than a day and you already sound like Garcha.
+My apologies. I've had my brand long enough to know how precious sleep can be.
 
--> 2a
+-> 1d
 
 === 1c ===
 
-Good, listen up. You're the most important part of this.
+Good, this conversation would be pretty one-sided if you weren't. \*Brush smiles.*
 
--> 2a
+-> 1d
 
-=== 2a === //still on Broglin
+=== 1d ===
 
-The whole camp's on lockdown right now, what with the mine out of commission. The guards aren't letting anyone out of their huts. Easier to deal with us that way. But sometimes they make exceptions for the slaves that suck up enough.
+I'm Brush, and this is Géza. We're your new hutmates. 
 
-changeCamTarget({garchaIndex})
+changeCamTarget({gézaIndex})
 
-Like Sampson, that prig.
+Pleasure to meet you.
 
-changeCamTarget({broglinIndex})
++The same to you.
 
-May the fleas of a thousand goats nest in his armpits. *spits*
+changeCamTarget({brushIndex})
+It's good that you're the amicable sort. Géza and I have been stuck in here for a few days now. We're just about sick of one another.
+    ->1e
 
-changeCamTarget({garchaIndex})
++We're not friends. Keep your distance. 
 
-Gods willing.
+~rudeness++
+changeCamTarget({brushIndex})
+We may not be friends, but that doesn't mean we can't be friendly. We're going to be stuck in here for a while, so we should at least learn to tolerate each other.
+    ->1e
 
-changeCamTarget({broglinIndex})
--> 2b
+
+=== 1e ===
+
++'Stuck'? Why is that?
+
+    ->1f
+
+=== 1f ===
+
+This camp was set up a few months ago to pull rocks out of a new mine. But the whole camp's on lockdown right now, 'cause the mine's been put out of commission. 
+
+The guards aren't letting anyone out of their huts. Easier to deal with us that way. But sometimes they make exceptions for the slaves that suck up enough.
+
+changeCamTarget({gézaIndex})
+
+Like Weft, that prig.
+
+changeCamTarget({brushIndex})
+
+May the fleas of a thousand goats nest in his armpits. *Brush spits.*
+
+changeCamTarget({gézaIndex})
+
+Gods willing. So, newling, what did you do to get your brand?
+
+changeCamTarget({brushIndex})
+
+\*Brush shoots Géza a glare.* We've all got our reasons for being here, so whatever the cause you'll get no judgement from us. Géza just wants to know if you're the violent sort is all.
+
++\*Shrug.* I only pick fights I can win. That just happens to be most of them.
+    changeCamTarget({gézaIndex})
+
+    That is good. Hutmates need to look out for one another. It's reassuring that you seem like the discerning type.
+    ->2a
++I'll be as violent as I'm called to be. And don't either of you forget it.
+    ~rudeness++
+    changeCamTarget({gézaIndex})
+
+    We're not likely to, and neither are the guards. A fight will earn all involved a flogging, so think before you throw a punch in anger.
+    ->2a
++Violence isn't my way. Never has been.
+    changeCamTarget({brushIndex})
+
+    Never has a way of arriving early in this camp. Don't expect the other branded to hold to the same principles.
+    ->2a
+
+=== 2a ===
+
+changeCamTarget({brushIndex})
+
+\*Brush briefly looks outside.* We still have some time to kill before inspection at sunrise. Maybe you can settle a small argument we were having before you arrived?
+
++I'm game. Tell me both sides.
+    ->Close
++What's this plan I heard you two discussing before? 
+    ->2ba
++This is a waste of my time. I'm going back to sleep.
+    ~rudeness++
+    ->Close
+
+=== 2ba === 
+
+setNPCFacing({gézaIndex},NW)
+
+changeCamTarget({gézaIndex})
+
+I told you you were too loud.
+
+changeCamTarget({brushIndex})
+setNPCFacing({brushIndex},SE)
+
+No, you said "I've seen sheep in heat bleat quieter than you", which I took offense to.
+
+setNPCFacing({brushIndex},NE)
+setNPCFacing({gézaIndex},NE)
+
+I'll level with you. 
+
+->Close
 
 === 2b ===  
 
@@ -125,7 +217,7 @@ So if you don't want to be stuck in this hut like we are, we need the guards to 
      -> 2g
     +I don't want the other slaves to think I'm a rat.
      -> 2e
-    +Who is Sampson?
+    +Who is Weft?
      -> 2d
 
     
@@ -133,35 +225,35 @@ So if you don't want to be stuck in this hut like we are, we need the guards to 
 
 === 2c ===
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
 There's an inspection every morning and night. The guards will check us for contraband, signs of disease, that sort of thing. If we pass, they'll give us our morning rations.
 
 -> 3a
 
-=== 2d === //Sampson
+=== 2d === //Weft
 
-changeCamTarget({garchaIndex})
+changeCamTarget({gézaIndex})
 
 keepDialogue()
 
-Every so often you get a slave that thinks they can carve out a little bit of power by dragging on his fellows. Sampson is one of them. He got his start by singing to the guards when a group of us stole extra rations from the mess. And he's only gotten slimier from there.
+Every so often you get a slave that thinks they can carve out a little bit of power by dragging on his fellows. Weft is one of them. He got his start by singing to the guards when a group of us stole extra rations from the mess. And he's only gotten slimier from there.
 
 -> 2b
 
 === 2e === //rat
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
 keepDialogue()
 
-Don't worry, we'll put out the good word once the lockdown's up that you aren't a bootlicker. Garcha and I have been around since the camp started; people listen to us.
+Don't worry, we'll put out the good word once the lockdown's up that you aren't a bootlicker. Géza and I have been around since the camp started; people listen to us.
 
 -> 2b
 
 === 2f ===//Why would we
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
 keepDialogue()
 
@@ -172,11 +264,11 @@ Before the lockdown started, some of the other slaves and I were trying to figur
 
 === 2g ===//why me
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
-The guards aren't about to hand out any special privileges to Garcha and me, we've been around too long. They know we're not the grovelling types. But you just got here. If we can give them a good first impression, they'll find a use for you. 
+The guards aren't about to hand out any special privileges to Géza and me, we've been around too long. They know we're not the grovelling types. But you just got here. If we can give them a good first impression, they'll find a use for you. 
 
-changeCamTarget({garchaIndex})
+changeCamTarget({gézaIndex})
 
 keepDialogue()
 
@@ -187,7 +279,7 @@ The guards are always antsy about the slaves plotting, so they try to find all t
 
 === 3a ===
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
 While they're doing that, you need to accuse me of trying to get you in on an escape plan.
 
@@ -198,7 +290,7 @@ While they're doing that, you need to accuse me of trying to get you in on an es
 
 === 3b ===
 
-\*Broglin chuckles.* Yeah, something like that. So are you in?
+\*Brush chuckles.* Yeah, something like that. So are you in?
 
     +I'm in. I'd do anything to get out of here.
         ->4a
@@ -207,7 +299,7 @@ While they're doing that, you need to accuse me of trying to get you in on an es
 
 === 3c === 
 
-Aye, they might. But they'll have to interrogate me first. And I only know one other person who's in on it besides Garcha and yourself. He told me that the rest are scattered all over the camp; each hut has to work on one part of the plan. It's separated that way so we can't ruin the whole plan if we're caught.
+Aye, they might. But they'll have to interrogate me first. And I only know one other person who's in on it besides Géza and yourself. He told me that the rest are scattered all over the camp; each hut has to work on one part of the plan. It's separated that way so we can't ruin the whole plan if we're caught.
 
 keepDialogue()
 
@@ -217,11 +309,11 @@ And if they end up killing me, at least I won't ever have to enter that blasted 
 
 === 3d ===
 
-changeCamTarget({garchaIndex})
+changeCamTarget({gézaIndex})
 
 Told you they wouldn't go for it.
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
 Give them a second, they haven't let me sweeten the pot yet.
 
@@ -240,35 +332,35 @@ We can't have you telling the guards about the plan. If you don't go along with 
     +Threatening me isn't wise, friend. <Combat>
         fadeToBlack()
         changeCamTarget({laszloVoiceIndex})
-        deactivate({broglinIndex})
-        deactivate({garchaIndex})
-        setToTrue(killedBroglinAndGarcha)
+        deactivate({brushIndex})
+        deactivate({gézaIndex})
+        setToTrue(killedBrushAndGéza)
         ~killedBAndG = true
         fadeBackIn(60)
         ->7a
 
 ->4a
-//Agreed to go along with Broglin's plan.
+//Agreed to go along with Brush's plan.
 === 4a ===
 
 changeCamTarget({laszloVoiceIndex})
 
 \*A voice barks orders from outside the hut* Up against the wall! It's inspection time!
 
-{peacefullyRefusedBroglin: ->4b}
+{peacefullyRefusedBrush: ->4b}
 
 activateQuestStep(The Plan, I just got here!)
 
-setToTrue(goesWithBroglinsPlan)
+setToTrue(goesWithBrushsPlan)
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
 Okay, this is it. Remember, you're ratting me out to the guard. Lay it on thick and he'll believe you. I'll follow your lead.
 
     +Right. Got it.
         ->4b
     
-    +What's Garcha's part?
+    +What's Géza's part?
         ->4c
 
 === 4b ===
@@ -283,9 +375,9 @@ fadeBackIn(60)
 
 I said back up against the walls, slaves, or I'm keeping your rations for myself.
   
-  {peacefullyRefusedBroglin: ->8b}
+  {peacefullyRefusedBrush: ->8b}
   
-    +Sir! Sir! Broglin here's been talking of escape.
+    +Sir! Sir! Brush here's been talking of escape.
         ->4d
     
     +<Not Implemented> *Say a prayer and attack the fully armed guard with nothing but your fists* 
@@ -302,20 +394,20 @@ He'll play crazy. Happens to some slaves, the guards won't bat an eye. Easy for 
 
 setNPCFacing({laszloActualIndex}, NW)
 
-What? Broglin, you treacherous dog!
+What? Brush, you treacherous dog!
 
     +It's true sir! I told him where he could shove that treasonous speech of his, but he kept moaning about it!
         ->4e
 
 === 4e ===
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
 Traitor! I should've known you were a rat!
 
 changeCamTarget({laszloActualIndex})
 
-Oh ho! I've been waiting for an excuse to lay into you, Broglin. Couldn't help but give it to me, eh?
+Oh ho! I've been waiting for an excuse to lay into you, Brush. Couldn't help but give it to me, eh?
 
     +Oh, please show some mercy. He's too simple to know what's good for him!
         ->4j
@@ -328,7 +420,7 @@ Oh ho! I've been waiting for an excuse to lay into you, Broglin. Couldn't help b
 
 === 4f ===
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
 \*Under his breath* Wow, they're really selling it.
 
@@ -347,7 +439,7 @@ How dare he!
 
 \*His eye twitches*
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
 \*Whispers* Hey, quit it! This guy's gonna mess me up good!
 
@@ -362,13 +454,13 @@ changeCamTarget({broglinIndex})
 
 changeCamTarget({laszloActualIndex})
 
-Hope you don't like the sun, Broglin, cause it doesn't shine where you're going. Boys! Get in here. We've got {takeGarchaAway:more traitors|another traitor} for the pit!
+Hope you don't like the sun, Brush, cause it doesn't shine where you're going. Boys! Get in here. We've got {takeGézaAway:more traitors|another traitor} for the pit!
 
 fadeToBlack()
 
-deactivate({broglinIndex})
+deactivate({brushIndex})
 
-{takeGarchaAway:deactivate({garchaIndex})}
+{takeGézaAway:deactivate({gézaIndex})}
 
 ~impressedGuard = true
 
@@ -387,30 +479,30 @@ Boys! Come on in, we got ourselves another one for the pit!
 
 fadeToBlack()
 
-deactivate({broglinIndex})
+deactivate({brushIndex})
 
 -> 5a
 
-//Guard Kills Broglin Outcome
+//Guard Kills Brush Outcome
 === 4k ===
 
 
-activateQuestStep(The Plan, The death of Broglin.)
+activateQuestStep(The Plan, The death of Brush.)
 
-setToTrue(gotBroglinKilledByGuard)
-~gotBroglinKilledByGuard = true
+setToTrue(gotBrushKilledByGuard)
+~gotBrushKilledByGuard = true
 
 changeCamTarget({laszloActualIndex})
 
 Oh that's it! You quipped your last, slave!
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
 No please!
 
 fadeToBlack()
 
-deactivate({broglinIndex})
+deactivate({brushIndex})
 
 ~impressedGuard = true
 
@@ -421,8 +513,8 @@ setToTrue(impressedGuardLaszlo)
 ->5a
 
 
-//Guard interactions after completing Broglin's plan.!
-//Broglin's alive, Guard is impressed
+//Guard interactions after completing Brush's plan.!
+//Brush's alive, Guard is impressed
 === 5a ===
 
 setNPCFacing({laszloActualIndex}, NE)
@@ -459,9 +551,9 @@ I can't be everywhere at once, and what happened with the mine has us short staf
 
 prepForItem()
 
-Well you earned it, so here you go. Here's Broglin's {takeGarchaAway + killedBAndG: and Garcha's }rations, and your own. It's not like {takeGarchaAway + killedBAndG:they need |he needs }it now. But seriously, back to business.
+Well you earned it, so here you go. Here's Brush's {takeGézaAway + killedBAndG: and Géza's }rations, and your own. It's not like {takeGézaAway + killedBAndG:they need |he needs }it now. But seriously, back to business.
     
-{takeGarchaAway + killedBAndG:giveItem(0,0,3)|giveItem(0,0,2)}
+{takeGézaAway + killedBAndG:giveItem(0,0,3)|giveItem(0,0,2)}
 
 ->5f
 
@@ -481,7 +573,7 @@ giveItem(0,0,1)
 
 setToTrue(givenTaskByLaszlo)
 
-I need you to take this bit of rations to Sampson. He's another slave like you: he knows what's good for him. {killedBAndG:You'll be living in his hut from now on; can't have you staying in this abattoir.|He's also your new hut-mate, so stay on his good side.} Just follow the road south from this hut then turn west past the stables. Sampson lives in the big shack in front of the Manse. 
+I need you to take this bit of rations to Weft. He's another slave like you: he knows what's good for him. {killedBAndG:You'll be living in his hut from now on; can't have you staying in this abattoir.|He's also your new hut-mate, so stay on his good side.} Just follow the road south from this hut then turn west past the stables. Weft lives in the big shack in front of the Manse. 
 
 prepItem()
 
@@ -491,9 +583,9 @@ giveItem(3,7,1)
 
 fadeToBlack()
 
-deactivate({garchaIndex})
+deactivate({gézaIndex})
 deactivate({laszloActualIndex})
-activate({garchaSecondLocationIndex})
+activate({gézaSecondLocationIndex})
 
 fadeBackIn(60)
 ->10aa
@@ -503,13 +595,13 @@ fadeToBlack()
 
 deactivate({laszloActualIndex})
 
-changeCamTarget({garchaIndex})
+changeCamTarget({gézaIndex})
 
 fadeBackIn(60)
 
 Mother preserve us! You killed him!
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
 You fool! Now they'll never trust you!
 
@@ -518,9 +610,9 @@ You fool! Now they'll never trust you!
     +Don't worry about that now, you'll be joining him soon. <Combat>
         fadeToBlack()
     
-        deactivate({broglinIndex})
-        deactivate({garchaIndex})
-        setToTrue(killedBroglinAndGarcha)
+        deactivate({brushIndex})
+        deactivate({gézaIndex})
+        setToTrue(killedBrushAndGéza)
         
         fadeBackIn(60)
         ->Close
@@ -528,7 +620,7 @@ You fool! Now they'll never trust you!
 
 === 6b ===
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
 Oh, is that so. And whats your plan for the dozens of other guards in the camp. You can't fight them all.
 
@@ -539,7 +631,7 @@ Oh, is that so. And whats your plan for the dozens of other guards in the camp. 
 
 === 6c ===
 
-changeCamTarget({garchaIndex})
+changeCamTarget({gézaIndex})
 
 Well, don't think it's gonna be as easy as walking out the front gate. It will look plenty suspicious if you left during a lockdown.
     
@@ -547,7 +639,7 @@ Well, don't think it's gonna be as easy as walking out the front gate. It will l
 
 === 6d ===
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
 I know the people here might not matter to you, but without someone to walk between the huts the escape plan we got cooking won't work. 
 
@@ -574,7 +666,7 @@ That's all I can ask, I suppose.
     
 ->Close
 
-//Killed Broglin and Garcha
+//Killed Brush and Géza
 === 7a ===
 
 \*You hear hurried footsteps outside the hut*
@@ -651,12 +743,12 @@ I can't imagine what's worse than this. You're covered in blood!
         fadeBackIn(60)
         ->Close
 
-//Peacefully refuse to help Broglin
+//Peacefully refuse to help Brush
 === 8a ===
 
-~peacefullyRefusedBroglin = true
+~peacefullyRefusedBrush = true
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
 Damn it, you stubborn ass. You're ruining-
 
@@ -664,7 +756,7 @@ Damn it, you stubborn ass. You're ruining-
 
 === 8b ===
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
 Sir, thank the Gods you're here. This slave is talking of escape!
 
@@ -677,10 +769,10 @@ Sir, thank the Gods you're here. This slave is talking of escape!
         
         fadeToBlack()
 
-        deactivate({broglinIndex})
-        deactivate({garchaIndex})
+        deactivate({brushIndex})
+        deactivate({gézaIndex})
         deactivate({laszloActualIndex})
-        setToTrue(killedBroglinAndGarcha)
+        setToTrue(killedBrushAndGéza)
         setToTrue(killedGuardLaszlo)
         
         fadeBackIn(60)
@@ -690,7 +782,7 @@ Sir, thank the Gods you're here. This slave is talking of escape!
 
 changeCamTarget({laszloActualIndex})
 
-{tellTheGuardTheTruth:Hmmm, I never did like you Broglin, but these new slaves are always the ones to cause trouble. I guess the only way to be sure I get the troublemaker is to send you both to the pit. |Oh is that so? Broglin may be a pain in my ass, but I know he doesn't have the spine to try to escape. New slaves, however... Sometimes they require breaking in.}
+{tellTheGuardTheTruth:Hmmm, I never did like you Brush, but these new slaves are always the ones to cause trouble. I guess the only way to be sure I get the troublemaker is to send you both to the pit. |Oh is that so? Brush may be a pain in my ass, but I know he doesn't have the spine to try to escape. New slaves, however... Sometimes they require breaking in.}
 
 {tellTheGuardTheTruth: ->8d | ->8e}
 
@@ -703,7 +795,7 @@ changeCamTarget({laszloActualIndex})
     setToTrue(sentToThePit)
     ->Close //Taken to the pit, in another scene
     
-+Broglin mentioned others: I can show you! <Cha {charisma}/2>
++Brush mentioned others: I can show you! <Cha {charisma}/2>
     ->8f
 
 -else:
@@ -722,7 +814,7 @@ changeCamTarget({laszloActualIndex})
     setToTrue(sentToThePit)
     ->Close //Taken to the pit, in another scene
     
-+Broglin mentioned others: I can show you! <Cha {charisma}/2>
++Brush mentioned others: I can show you! <Cha {charisma}/2>
     ->8f
 
 -else:
@@ -745,15 +837,15 @@ Others you say?
 
 Interesting... which other huts?
 
-    +Er... I'm not sure. I only know about the plan because Broglin told me. You'd need to get it out of him.
+    +Er... I'm not sure. I only know about the plan because Brush told me. You'd need to get it out of him.
         ->8h
     
         
 === 8h ===
 
-setToTrue(rattedOutBroglin)
+setToTrue(rattedOutBrush)
 
-changeCamTarget({broglinIndex})
+changeCamTarget({brushIndex})
 
 Damn your eyes, you've doomed us!
 
@@ -768,18 +860,18 @@ changeCamTarget({laszloActualIndex})
 
 This was a very clever plan for a bunch of slaves. Makes me wonder if you even came up with it yourselves. 
 
-~takeGarchaAway = true
+~takeGézaAway = true
 
     ->4i
 
 /////////////////////////////////////////////////////////////////////////////////////
-// Speaking to Garcha \/\/\/\/\/\/
+// Speaking to Géza \/\/\/\/\/\/
 /////////////////////////////////////////////////////////////////////////////////////
 === 10aa ===
 
-changeCamTarget({garchaSecondLocationIndex}) //change cam to Garcha at door
+changeCamTarget({gézaSecondLocationIndex}) //change cam to Géza at door
 
-{gotBroglinKilledByGuard: Broglin... no matter how many times I see an execution, I never get used to it. Couldn't just shut up, could ya. You had to keep talking, and now he's dead.| ->10a}
+{gotBrushKilledByGuard: Brush... no matter how many times I see an execution, I never get used to it. Couldn't just shut up, could ya. You had to keep talking, and now he's dead.| ->10a}
 
 
 {
@@ -788,7 +880,7 @@ changeCamTarget({garchaSecondLocationIndex}) //change cam to Garcha at door
         ->10ab
     *I'm sorry, I thought making that stuff up would help the guards warm up to me.
         ->10ac
-    *Broglin knew the risks of his plan. The best way to honor him is to finish what he started. <Cha {charisma}/2>
+    *Brush knew the risks of his plan. The best way to honor him is to finish what he started. <Cha {charisma}/2>
         ->10ad
     
 -else:
@@ -829,7 +921,7 @@ I suppose you're right. Lets get everyone out of here, and we can mourn those we
 
 keepDialogue()
 
-You... *Garcha grits his teeth.* I'm sorry. Lets work together for the good of the plan.
+You... *Géza grits his teeth.* I'm sorry. Lets work together for the good of the plan.
     
 ->10a
 
@@ -841,15 +933,15 @@ I look forward to seeing the back of you. But you're right, we have more importa
     
 ->10a
 
-=== 10a === //Talking to Garcha
+=== 10a === //Talking to Géza
 
-That went better than I expected. But I suppose we shouldn't celebrate Broglin being sent to the pit. 
+That went better than I expected. But I suppose we shouldn't celebrate Brush being sent to the pit. 
 
     {
-    -not gotBroglinKilledByGuard:
+    -not gotBrushKilledByGuard:
     *So what now? 
         ->20a
-    *Is Broglin going to be ok?
+    *Is Brush going to be ok?
         ->10g
     -else:
     *So what now?
@@ -884,13 +976,13 @@ Most slaves are.
 
 keepDialogue()
 
-I've done what I had to do in my life. Made some unseemly choices, which led me here. Let's just leave it at that. //Journal Entry (possible to recruit Garcha?)
+I've done what I had to do in my life. Made some unseemly choices, which led me here. Let's just leave it at that. //Journal Entry (possible to recruit Géza?)
         
 ->10a
 
 === 10j ===
 
-But enough about Broglin. I'd prefer not to waste time thinking about his fate that I could be using to rescue him.
+But enough about Brush. I'd prefer not to waste time thinking about his fate that I could be using to rescue him.
 
     *So what now?
         ->20a
@@ -900,7 +992,7 @@ But enough about Broglin. I'd prefer not to waste time thinking about his fate t
 
 activateQuestStep(The Plan,Make contact with Kastor.)
 
-Now, you run as quick as you can to Kastor. He's the one that got Broglin and I in on the escape plan; he should know others who are in on it. He's in a large hut in the southeastern part of the camp, along the southern wall. Just follow the road past the gate and you can't miss it.
+Now, you run as quick as you can to Kastor. He's the one that got Brush and I in on the escape plan; he should know others who are in on it. He's in a large hut in the southeastern part of the camp, along the southern wall. Just follow the road past the gate and you can't miss it.
 
 setToTrue(knowRevolutionPassword)
     
@@ -919,14 +1011,14 @@ East. The way the road leads out of this hellhole.
 
 === 20c ===
 
-setToTrue(spokeToGarchaAboutPlan)
+setToTrue(spokeToGézaAboutPlan)
 
 If for any reason you find yourself hurt or in need of respite, come back to me. I'll hide you for a time so you can rest. And please be careful. For all of our sakes.
 
 fadeToBlack()
 
-deactivate({garchaSecondLocationIndex})
-activate({garchaIndex})
+deactivate({gézaSecondLocationIndex})
+activate({gézaIndex})
 
 fadeBackIn(60)
     ->Close

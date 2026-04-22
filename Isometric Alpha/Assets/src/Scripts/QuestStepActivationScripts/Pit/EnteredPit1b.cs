@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnteredPit1b : QuestStepActivationScript
 {
-    private const string questName = "Rescue Broglin";
+    private const string questName = "Rescue Brush";
     private const string questStepName = "The way is blocked.";
 
     public const string enteredPit1bFlag = "enteredPit-1b";

@@ -10,7 +10,7 @@ public class EnteredPit2a : QuestStepActivationScript
     {
         if (!Flags.getFlag(enteredPit2aFlag))
         {
-            QuestList.activateQuestStep(QuestNameList.rescueBroglinQuestTitle, QuestNameList.rescueBroglinStepTitleFour);
+            QuestList.activateQuestStep(QuestNameList.rescueBrushQuestTitle, QuestNameList.rescueBrushStepTitleFour);
             Flags.setFlag(enteredPit2aFlag, true);
         }
     }

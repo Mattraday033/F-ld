@@ -13,7 +13,7 @@ VAR gotThePlanFromKastor = false
 VAR spokeToBalint = false
 VAR spokeToJanos = false
 VAR spokeToErvin = false
-VAR spokeToGarchaAboutPlan = false
+VAR spokeToGézaAboutPlan = false
 VAR metKastor = false
 
 VAR playerName = ""
@@ -154,9 +154,9 @@ Of course! This is a topic I enjoy, so ask away.
 
 {
 -true:
-    +Broglin?
+    +Brush?
         keepDialogue()
-        Oh, I'm not familiar with that name. It's not Lovashi, that's for sure. It doesn't sound Craft Folk, either. Song Folk perhaps? Or Farm Folk?  
+        \*Beam chuckles.* Brush is certainly a Craft Folk name. My mother would tell me we are meant to treasure our tools like our own children. I suppose some of the Craft Folk take that a little more literally than others, and name their children after their tools.
         ->1i
 }
 
@@ -168,15 +168,14 @@ Of course! This is a topic I enjoy, so ask away.
 
 {
 -true:
-    +Garcha?
-        setToTrue(askedAboutMangledName)
+    +Géza?
         keepDialogue()
-        I'm not sure, but I would guess that's a Lovashi name, but it's almost unrecognizable. If pressed, I would have to say it came from Géza. 
+        Géza is a Lovashi name. The first Lovashi king had a dozen riding companions as bodyguards, each with their own associated legends. The name Géza comes from one of those companions.
         ->1i
 }
 
 {
--spokeToGarchaAboutPlan or metKastor:
+-spokeToGézaAboutPlan or metKastor:
     +Kastor?
         setToTrue(askedAboutMangledName)
         keepDialogue()
@@ -190,6 +189,14 @@ Of course! This is a topic I enjoy, so ask away.
         setToTrue(askedAboutMangledName)
         keepDialogue()
         Hmm, I believe that's a Lovashi name, but it's been mangled some. János is the correct form. 
+        ->1i
+}
+
+{
+-true:
+    +Weft?
+        keepDialogue()
+        Weft is an old Craft Folk name. It comes from some technique involved with weaving, although to be frank I'm unsure on the particulars.
         ->1i
 }
 

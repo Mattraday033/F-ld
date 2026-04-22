@@ -9,7 +9,7 @@ VAR playerName = ""
 
 === 1a ===
 
-Glad to see you're still breathing. Not everyone is cut out to be a warrior like you, but I've patched my share of mining accidents, so if you speak to me or Garcha we'll put you back together again.
+Glad to see you're still breathing. Not everyone is cut out to be a warrior like you, but I've patched my share of mining accidents, so if you speak to me or Géza we'll put you back together again.
 
     +I could use some medical attention
         restParty()

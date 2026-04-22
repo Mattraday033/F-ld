@@ -232,6 +232,12 @@ public class CharacterCreationPopUpWindow : PopUpWindow
     private IEnumerator fadeOutThenStartMonologue()
     {
 
+        if(Application.isEditor)
+        {
+            applyCharacterChoicesAndStartMonologue();
+            yield break;
+        }
+
         FadeToBlackManager.StopFade(FadeType.Screen);
         FadeToBlackManager.StopFade(FadeType.Music);
 
@@ -265,7 +271,7 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         State.playerPortraitName = portraitSpriteNameList[portraitNameIndex];
         State.playerSpriteName = portraitSpriteNameList[spriteNameIndex];
 
-        goToMonologue = true;
+        goToMonologue = !Application.isEditor;
 
         LoadSaveFile.loadCleanSlateSaveFile();
 

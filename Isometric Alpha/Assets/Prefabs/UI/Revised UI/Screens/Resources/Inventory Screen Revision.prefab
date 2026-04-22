@@ -1360,6 +1360,7 @@ MonoBehaviour:
   scrollBar: {fileID: 0}
   slidingArea: {fileID: 0}
   scrollableComponent: {fileID: 2993645804624712132}
+  slider: {fileID: 0}
   clickFirstPanel: 0
   clickLastPanel: 0
   useBlockDescriptionsInRows: 0
@@ -5924,6 +5925,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 1474545385675635247}
   iconImage: {fileID: 5944839402151641620}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!224 &5045462675441780703 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6600302386269410421, guid: c682e00441168064c8b07b09fbd70a16,
@@ -6123,6 +6125,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: EquipmentDisplay
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745225660975033712, guid: e8b312289d6018b4ba510ae594d13a06,
+        type: 3}
+      propertyPath: m_Radius
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 586618267065933390, guid: e8b312289d6018b4ba510ae594d13a06, type: 3}
@@ -6689,6 +6696,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 6832933316964367189}
   iconImage: {fileID: 4323069186632822603}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!224 &2884717987765971186 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 43536659693745583, guid: c682e00441168064c8b07b09fbd70a16,
@@ -7069,6 +7077,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 2152312902264076309}
   iconImage: {fileID: 3798870152456536359}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!224 &3084606744337663798 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 43536659693745583, guid: c682e00441168064c8b07b09fbd70a16,
@@ -7449,6 +7458,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 7866298297528168457}
   iconImage: {fileID: 1317244364224349467}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &3201448931434946536 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1858867877573687010, guid: c682e00441168064c8b07b09fbd70a16,
@@ -7484,12 +7494,12 @@ PrefabInstance:
     - target: {fileID: 567914400332940108, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
       propertyPath: m_Pivot.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 567914400332940108, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 567914400332940108, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
@@ -7559,12 +7569,12 @@ PrefabInstance:
     - target: {fileID: 567914400332940108, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 567914400332940108, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 567914400332940108, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
@@ -7632,7 +7642,7 @@ PrefabInstance:
         type: 3}
       propertyPath: boxCollider
       value: 
-      objectReference: {fileID: 5184667157527521649}
+      objectReference: {fileID: 0}
     - target: {fileID: 3825275441988267460, guid: e8b312289d6018b4ba510ae594d13a06,
         type: 3}
       propertyPath: displayIndex
@@ -7693,15 +7703,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: JunkSlotTarget
       objectReference: {fileID: 0}
+    - target: {fileID: 8745225660975033712, guid: e8b312289d6018b4ba510ae594d13a06,
+        type: 3}
+      propertyPath: m_Radius
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8380376106774274993, guid: e8b312289d6018b4ba510ae594d13a06, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8409368354747443211, guid: e8b312289d6018b4ba510ae594d13a06,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5184667157527521649}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8b312289d6018b4ba510ae594d13a06, type: 3}
 --- !u!114 &215436496882246852 stripped
 MonoBehaviour:
@@ -7709,7 +7720,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 4029448318012508416}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4854715556148781323}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef62337ef606dae46957980709b443b1, type: 3}
@@ -7721,54 +7732,13 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4029448318012508416}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4854715556148781323 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8409368354747443211, guid: e8b312289d6018b4ba510ae594d13a06,
-    type: 3}
-  m_PrefabInstance: {fileID: 4029448318012508416}
-  m_PrefabAsset: {fileID: 0}
---- !u!58 &5184667157527521649
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4854715556148781323}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 42.5
 --- !u!114 &7404519334825914573 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5848305646123956685, guid: e8b312289d6018b4ba510ae594d13a06,
     type: 3}
   m_PrefabInstance: {fileID: 4029448318012508416}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4854715556148781323}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -8130,6 +8100,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 3698042236527608141}
   iconImage: {fileID: 3020213084245029370}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!114 &2479525129979876927 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1858867877573687010, guid: c682e00441168064c8b07b09fbd70a16,
@@ -8363,6 +8334,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: EquipmentDisplay
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745225660975033712, guid: e8b312289d6018b4ba510ae594d13a06,
+        type: 3}
+      propertyPath: m_Radius
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 586618267065933390, guid: e8b312289d6018b4ba510ae594d13a06, type: 3}
@@ -8609,6 +8585,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: EquipmentDisplay
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745225660975033712, guid: e8b312289d6018b4ba510ae594d13a06,
+        type: 3}
+      propertyPath: m_Radius
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 586618267065933390, guid: e8b312289d6018b4ba510ae594d13a06, type: 3}
@@ -8870,6 +8851,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: EquipmentDisplay
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745225660975033712, guid: e8b312289d6018b4ba510ae594d13a06,
+        type: 3}
+      propertyPath: m_Radius
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 586618267065933390, guid: e8b312289d6018b4ba510ae594d13a06, type: 3}
@@ -9287,6 +9273,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 8645485814989896794}
   iconImage: {fileID: 5585365410296775458}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!1001 &5110516840565868627
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9667,6 +9654,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 7179716656549651004}
   iconImage: {fileID: 6476193289687248220}
   bubble: {fileID: 0}
+  inWorldSpace: 0
 --- !u!1001 &5181758837932880647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10087,6 +10075,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: EquipmentDisplay
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745225660975033712, guid: e8b312289d6018b4ba510ae594d13a06,
+        type: 3}
+      propertyPath: m_Radius
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 586618267065933390, guid: e8b312289d6018b4ba510ae594d13a06, type: 3}
@@ -10927,6 +10920,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: EquipmentDisplay
       objectReference: {fileID: 0}
+    - target: {fileID: 8745225660975033712, guid: e8b312289d6018b4ba510ae594d13a06,
+        type: 3}
+      propertyPath: m_Radius
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 586618267065933390, guid: e8b312289d6018b4ba510ae594d13a06, type: 3}
     m_RemovedGameObjects: []
@@ -11172,6 +11170,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: EquipmentDisplay
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745225660975033712, guid: e8b312289d6018b4ba510ae594d13a06,
+        type: 3}
+      propertyPath: m_Radius
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11659,6 +11662,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: EquipmentDisplay
       objectReference: {fileID: 0}
+    - target: {fileID: 8745225660975033712, guid: e8b312289d6018b4ba510ae594d13a06,
+        type: 3}
+      propertyPath: m_Radius
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 586618267065933390, guid: e8b312289d6018b4ba510ae594d13a06, type: 3}
     m_RemovedGameObjects: []
@@ -11904,6 +11912,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: EquipmentDisplay
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745225660975033712, guid: e8b312289d6018b4ba510ae594d13a06,
+        type: 3}
+      propertyPath: m_Radius
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 586618267065933390, guid: e8b312289d6018b4ba510ae594d13a06, type: 3}

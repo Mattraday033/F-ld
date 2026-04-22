@@ -5,7 +5,7 @@ VAR charisma = 0
 VAR metTemple = false
 VAR templeMentionedBackground = false
 VAR templeExplainedPatches = false
-VAR askedTempleAboutSampson = false
+VAR askedTempleAboutWeft = false
 VAR heardTaborsLesson = false
 VAR campCenterFirstHiddenPassageFound = false
 
@@ -27,7 +27,7 @@ VAR playerName = ""
 Are you looking for somethin', kid?
 }
 
-    +I'm looking for Sampson. Do you know where he is?
+    +I'm looking for Weft. Do you know where he is?
         ->1b
     +Nothing specific, just curious what you're doing out during lockdown by yourself.
         ->1d
@@ -36,14 +36,14 @@ Are you looking for somethin', kid?
 
 === 1b ===
 
-~askedTempleAboutSampson = true
-setToTrue(askedTempleAboutSampson)
+~askedTempleAboutWeft = true
+setToTrue(askedTempleAboutWeft)
 
-Sampson? Why are you looking for that pisstain? 
+Weft? Why are you looking for that pisstain? 
     
     +I was told to by Guard László. 
         ->1ca
-    +That's between myself and Sampson.
+    +That's between myself and Weft.
         ->1cb
 
 === 1c ===
@@ -166,8 +166,8 @@ You're back. Did you get turned around?
 }
 
 {
--not askedTempleAboutSampson:
-    +I'm looking for Sampson. Do you know where he is?
+-not askedTempleAboutWeft:
+    +I'm looking for Weft. Do you know where he is?
         ->1b
 }
 

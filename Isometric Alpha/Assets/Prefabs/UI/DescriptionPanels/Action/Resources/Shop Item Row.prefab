@@ -1527,6 +1527,7 @@ MonoBehaviour:
   wisText: {fileID: 0}
   chaText: {fileID: 0}
   nestedDescriptionPanel: {fileID: 0}
+  inventoryGridRowButton: {fileID: 0}
   amountPanel: {fileID: 8128443930211714075}
   gridRow: {fileID: 4139477640826302217}
   buyButtonParent: {fileID: 3115750972021778277}
@@ -1554,6 +1555,7 @@ MonoBehaviour:
   descriptionPanel: {fileID: 1861395739806579555}
   wipeIfIneligible: 0
   buttonTexts: []
+  inventoryGridRowButton: {fileID: 0}
   amountPanel: {fileID: 8128443930211714075}
   interiorImage: {fileID: 6466259837274343904}
 --- !u!222 &7769537402992098589
@@ -2205,7 +2207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &994945462963282199
 RectTransform:
   m_ObjectHideFlags: 0

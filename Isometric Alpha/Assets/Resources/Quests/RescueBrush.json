@@ -1,0 +1,19 @@
+{
+	"title": "Rescue Brush",
+	"numberOfSteps": 7,
+	"steps":[	
+				{"stepName":"Finding the Pit.","MapZone":"","MapLocation":"","journalDescription":"The guards have taken Brush to somewhere called the Pit. <B>I must locate where the Pit is and find a way to free Brush.</B>"},
+				{"stepName":"Beneath the Manse.","MapZone":"Manse-1F","MapLocation":"","journalDescription":"The guards have taken Brush to somewhere called the Pit. <B>I must locate where the Pit is and find a way to free Brush. Kastor has said that the other slaves speculate that the Pit lies somewhere beneath the Manse.</B> This will make it more difficult to get Brush out, but not impossible."},
+				{"stepName":"The way is blocked.","MapZone":"Manse-1F","MapLocation":"","journalDescription":"I have found the Pit, but the guards have blocked the way. I will need to find another entrance."},	
+				{"stepName":"A clue.","MapZone":"Manse-2F","MapLocation":"Manse-2F-2b","journalDescription":"I picked up a note left by one of the guards. It seems that there is another way to get inside the Pit: <B>fall between the floorboards in the unfinished part of the Manse. I think I will need to begin my fall from the Manse's second floor.</B>"},	
+				{"stepName":"Entered the Pit.","MapZone":"Pit","MapLocation":"","journalDescription":"I have made my way into the Pit! Now to find Brush."},	
+				{"stepName":"Found Brush.","MapZone":"Pit","MapLocation":"Pit-2d","journalDescription":"I have Brush, but the door to his cell is locked. <B>Brush has said that he saw the warden throw the key into the garbage pit near Brush's cell.</B> I guess I'm going down there if I want to get Brush out."},	
+				{"stepName":"Brush is Free.","MapZone":"","MapLocation":"","journalDescription":"I have freed Brush from the Pit."}
+			],
+			
+	
+	"deathSteps":
+			[
+			]
+	
+}

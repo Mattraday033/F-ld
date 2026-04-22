@@ -44,7 +44,7 @@ public static class DialogueList
         //                                                                                                                                                        new DeadNameList[] { new DeadNameList(new string[] { NPCNameList.chiefTabor }) })));
 
         // addDialogueToList(DialogueNameList.guardPunishmentConvoKey,
-        //                  new Dialogue(new string[] { "", "Nándor", "Carter", "Kastor", "Janos", "Broglin", "Garcha", "Slave 1", "Slave 2", "Slave 3", "The Crowd", "Chief Tabor", "Guard Márcos", "Guard András", "Guard Réka", "Guard Pázmán", "Ervin", "Clay" }, new GameObject[18], Resources.Load<TextAsset>(DialogueNameList.guardPunishmentConvoKey)));
+        //                  new Dialogue(new string[] { "", "Nándor", "Carter", "Kastor", "Janos", "Brush", "Géza", "Slave 1", "Slave 2", "Slave 3", "The Crowd", "Chief Tabor", "Guard Márcos", "Guard András", "Guard Réka", "Guard Pázmán", "Ervin", "Clay" }, new GameObject[18], Resources.Load<TextAsset>(DialogueNameList.guardPunishmentConvoKey)));
 
 
         // addDialogueToList(DialogueNameList.afterKillingAndrasConvoKey, new Dialogue(new string[] { "", "Janos" }, new GameObject[2], Resources.Load<TextAsset>(DialogueNameList.afterKillingAndrasConvoKey)));
@@ -76,13 +76,13 @@ public static class DialogueList
         #endregion
         #region Slave Shack 2
 
-        addDialogueToList(LocationNameList.slaveShackTwo, NPCNameList.broglin,
-                            new Dialogue(new string[] { NPCNameList.broglin, NPCNameList.garcha, NPCNameList.guardLaszlo, NPCNameList.guardLaszlo + 1, NPCNameList.garcha + 1 },
+        addDialogueToList(LocationNameList.slaveShackTwo, NPCNameList.brush,
+                            new Dialogue(new string[] { NPCNameList.brush, NPCNameList.géza, NPCNameList.guardLaszlo, NPCNameList.guardLaszlo + 1, NPCNameList.géza + 1 },
                             Resources.Load<TextAsset>(DialogueNameList.introDialoguePath)));
 
-        addDialogueToList(LocationNameList.slaveShackTwo, NPCNameList.garcha,
-                            new Dialogue(new string[] { NPCNameList.garcha },
-                            Resources.Load<TextAsset>(DialogueNameList.garchaPath)));
+        addDialogueToList(LocationNameList.slaveShackTwo, NPCNameList.géza,
+                            new Dialogue(new string[] { NPCNameList.géza },
+                            Resources.Load<TextAsset>(DialogueNameList.gézaPath)));
 
         #endregion
         #region Slave Shack 3
@@ -154,6 +154,13 @@ public static class DialogueList
         addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.awkwardRubble,
                             new Dialogue(new string[] { NPCNameList.awkwardRubble },
                             Resources.Load<TextAsset>(DialogueNameList.fallenBeamPath)));
+
+        #endregion
+        #region Slave Shack 9
+
+        addDialogueToList(LocationNameList.slaveShackEight, NPCNameList.weft,
+                            new Dialogue(new string[] { NPCNameList.weft},
+                            Resources.Load<TextAsset>(DialogueNameList.weftPath)));
 
         #endregion
 
@@ -253,7 +260,7 @@ public static class DialogueList
                                                         "", 
                                                         NPCNameList.nandor, 
                                                         NPCNameList.carter, 
-                                                        NPCNameList.garcha, 
+                                                        NPCNameList.géza, 
                                                         NPCNameList.janos, 
                                                         NPCNameList.clay, 
                                                         NPCNameList.slaveOne, 
@@ -308,9 +315,9 @@ public static class DialogueList
                          new Dialogue(new string[] { NPCNameList.kastor }, 
                             Resources.Load<TextAsset>(DialogueNameList.kastorNECampPathName)));
 
-        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.garcha+1,
-                         new Dialogue(new string[] { NPCNameList.garcha+1 }, 
-                            Resources.Load<TextAsset>(DialogueNameList.garchaNECampPathName)));
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.géza+1,
+                         new Dialogue(new string[] { NPCNameList.géza+1 }, 
+                            Resources.Load<TextAsset>(DialogueNameList.gézaNECampPathName)));
 
         addDialogueToList(LocationNameList.campNorthEast, MonsterNameList.brandedConscript,
                         new SingleCharacterDialogue(MonsterNameList.brandedConscript,
@@ -440,19 +447,19 @@ public static class DialogueList
                                                             NPCNameList.chiefTabor,
                                                             NPCNameList.crowd,
                                                             NPCNameList.clay,
-                                                            NPCNameList.garcha,
+                                                            NPCNameList.géza,
                                                             NPCNameList.thatch
                                                         },
                             Resources.Load<TextAsset>(DialogueNameList.kastorGuardPunishmentPath),
                             new TextAsset[]{Resources.Load<TextAsset>(DialogueNameList.nandorGuardPunishmentPath)}));
 
-        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.broglin,
-                            new SingleCharacterDialogue(NPCNameList.broglin,
-                            Resources.Load<TextAsset>(DialogueNameList.broglinGuardPunishmentPath)));
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.brush,
+                            new SingleCharacterDialogue(NPCNameList.brush,
+                            Resources.Load<TextAsset>(DialogueNameList.brushGuardPunishmentPath)));
 
-        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.garcha,
-                            new SingleCharacterDialogue(NPCNameList.garcha,
-                            Resources.Load<TextAsset>(DialogueNameList.garchaGuardPunishmentPath)));
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.géza,
+                            new SingleCharacterDialogue(NPCNameList.géza,
+                            Resources.Load<TextAsset>(DialogueNameList.gézaGuardPunishmentPath)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.ervin,
                             new SingleCharacterDialogue(NPCNameList.ervin,
@@ -477,8 +484,8 @@ public static class DialogueList
                                                             NPCNameList.carter,
                                                             NPCNameList.kastor,
                                                             NPCNameList.janos,
-                                                            NPCNameList.broglin,
-                                                            NPCNameList.garcha,
+                                                            NPCNameList.brush,
+                                                            NPCNameList.géza,
                                                             NPCNameList.crowd,
                                                             NPCNameList.chiefTabor,
                                                             NPCNameList.marcos,
@@ -504,7 +511,7 @@ public static class DialogueList
                                                             NPCNameList.chiefTabor,
                                                             NPCNameList.crowd,
                                                             NPCNameList.clay,
-                                                            NPCNameList.garcha,
+                                                            NPCNameList.géza,
                                                             NPCNameList.thatch
                                                         },
                             Resources.Load<TextAsset>(DialogueNameList.nandorGuardPunishmentPath)));
@@ -1076,9 +1083,9 @@ public static class DialogueList
                                 new Dialogue(new string[]   { NPCNameList.cellDoor }, 
                                  Resources.Load<TextAsset>(DialogueNameList.pitGatePathName)));
 
-            addDialogueToList(ZoneKeyList.pit + LocationNameList.section2b, NPCNameList.broglin,
-                                new Dialogue(new string[]   { Constants.emptyString, NPCNameList.broglin, NPCNameList.cellDoor }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.pitBroglinPathName)));
+            addDialogueToList(ZoneKeyList.pit + LocationNameList.section2b, NPCNameList.brush,
+                                new Dialogue(new string[]   { Constants.emptyString, NPCNameList.brush, NPCNameList.cellDoor }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.pitBrushPathName)));
 
             addDialogueToList(ZoneKeyList.pit + LocationNameList.section2c, NPCNameList.ancientPortcullis,
                                 new Dialogue(new string[]   { NPCNameList.ancientPortcullis }, 

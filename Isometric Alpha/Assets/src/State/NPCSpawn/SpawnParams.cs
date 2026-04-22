@@ -206,44 +206,11 @@ public class PartyMemberSpawnParams : InteractableSpawnParams
 
     private bool ignoreInParty;
 
-    public PartyMemberSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList) :
-    base(startSpawningFlagList)
-    {
-        this.ignoreInParty = ignoreInParty;
-    }
-
-    public PartyMemberSpawnParams(StartSpawningFlagList startSpawningFlagList, bool spawnWhileHostile) :
-    base(startSpawningFlagList: startSpawningFlagList, spawnWhileHostile: spawnWhileHostile)
-    {
-        this.ignoreInParty = false;
-    }
-
-    public PartyMemberSpawnParams(StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile) :
-    base(stopSpawningFlagList: stopSpawningFlagList, spawnWhileHostile: spawnWhileHostile)
-    {
-        this.ignoreInParty = false;
-    }
-
-
-    public PartyMemberSpawnParams(bool ignoreInParty, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile) :
-    base(stopSpawningFlagList: stopSpawningFlagList, spawnWhileHostile: spawnWhileHostile)
-    {
-        this.ignoreInParty = ignoreInParty;
-    }
-
-    public PartyMemberSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList) :
-    base(startSpawningFlagList, stopSpawningFlagList)
-    {
-        this.ignoreInParty = ignoreInParty;
-    }
-
-    public PartyMemberSpawnParams(StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile) :
-    base(startSpawningFlagList, stopSpawningFlagList,spawnWhileHostile)
-    {
-        this.ignoreInParty = false;
-    }
-
-    public PartyMemberSpawnParams(bool ignoreInParty, StartSpawningFlagList startSpawningFlagList, StopSpawningFlagList stopSpawningFlagList, bool spawnWhileHostile, bool onlySpawnWhileHostile) :
+    public PartyMemberSpawnParams(StartSpawningFlagList startSpawningFlagList = null,
+                                    StopSpawningFlagList stopSpawningFlagList = null,
+                                    bool spawnWhileHostile = true,
+                                    bool onlySpawnWhileHostile = false,
+                                    bool ignoreInParty = false) :
     base(startSpawningFlagList, stopSpawningFlagList, spawnWhileHostile, onlySpawnWhileHostile)
     {
         this.ignoreInParty = ignoreInParty;

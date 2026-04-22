@@ -120,7 +120,7 @@ public static class MapObjectList
 
 			case LocationNameList.slaveShackTwo:
 
-				return new MapInterior(ZoneKeyList.lovashiCamp, LocationNameList.slaveShackTwo, "Garcha's Shack", interiorIndexZero, LocationNameList.campNorthEast);
+				return new MapInterior(ZoneKeyList.lovashiCamp, LocationNameList.slaveShackTwo, "Géza's Shack", interiorIndexZero, LocationNameList.campNorthEast);
 
 			case LocationNameList.slaveShackThree:
 
@@ -156,7 +156,7 @@ public static class MapObjectList
 
 			case LocationNameList.slaveShackEight:
 
-				return new MapInterior(ZoneKeyList.lovashiCamp, LocationNameList.slaveShackEight, "Sampson's Shack", interiorIndexZero, LocationNameList.campManse);
+				return new MapInterior(ZoneKeyList.lovashiCamp, LocationNameList.slaveShackEight, "Weft's Shack", interiorIndexZero, LocationNameList.campManse);
 
 			case LocationNameList.slaveShackNine:
 

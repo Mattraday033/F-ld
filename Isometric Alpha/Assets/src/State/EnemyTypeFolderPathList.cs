@@ -112,12 +112,12 @@ public static class EnemyTypeFolderPathList
         #region Slaves
 
         #region Branded Slaves
-        folderPathDict.Add(NPCNameList.broglin, brandedFolderPath + NPCNameList.broglin + "/");
+        folderPathDict.Add(NPCNameList.brush, brandedFolderPath + NPCNameList.brush + "/");
         folderPathDict.Add(NPCNameList.balint, brandedFolderPath + NPCNameList.balint + "/");
         folderPathDict.Add(NPCNameList.clay, brandedFolderPath + NPCNameList.clay + "/");
         folderPathDict.Add(NPCNameList.ervin, brandedFolderPath + NPCNameList.ervin + "/");
         folderPathDict.Add(NPCNameList.feher, brandedFolderPath + NPCNameList.feher + "/");
-        folderPathDict.Add(NPCNameList.garcha, brandedFolderPath + NPCNameList.garcha + "/");
+        folderPathDict.Add(NPCNameList.géza, brandedFolderPath + NPCNameList.géza + "/");
         folderPathDict.Add(NPCNameList.janos, brandedFolderPath + NPCNameList.janos + "/");
         folderPathDict.Add(NPCNameList.kastor, brandedFolderPath + NPCNameList.kastor + "/");
         folderPathDict.Add(NPCNameList.temple, brandedFolderPath + NPCNameList.temple + "/");
@@ -200,7 +200,7 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.carter, partyMembersFolderPath + NPCNameList.carter + "/");  
         folderPathDict.Add(NPCNameList.nandor, partyMembersFolderPath + NPCNameList.nandor + "/");     
 
-        folderPathDict.Add(NPCNameList.sampson, partyMembersFolderPath + NPCNameList.sampson + "/");     
+        folderPathDict.Add(NPCNameList.weft, partyMembersFolderPath + NPCNameList.weft + "/");     
 
         folderPathDict.Add(NPCNameList.tabor, partyMembersFolderPath + NPCNameList.tabor + "/");     
         folderPathDict.Add(NPCNameList.chiefTabor, partyMembersFolderPath + NPCNameList.tabor + "/");     

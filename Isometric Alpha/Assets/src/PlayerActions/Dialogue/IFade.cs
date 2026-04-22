@@ -172,6 +172,11 @@ public class FadeToBlackTransition : FullScreenTransition
 
 public class FadeBackInTransition : FullScreenTransition
 {
+    public FadeBackInTransition(float fadeTimeMultiplier = 1f)
+    {
+        fadeTime *= fadeTimeMultiplier;
+    }
+
 	public override bool isFinished()
 	{
 		return frameCount <= 0;

@@ -11,14 +11,14 @@ public static class Inventory
 
     public readonly static UnityEvent OnInventoryChange = new UnityEvent();
 
-    public static void addItem(Item item)
+    public static void addItem(Item item, bool ignoreEvent = false)
     {
-        addItem(item, State.inventory);
+        addItem(item, State.inventory, ignoreEvent);
     }
 
     //Sprite square = Helpers.loadSpriteFromResources("Square"); 
     //Packages/com.unity.2d.sprite/Editor/ObjectMenuCreation/DefaultAssets/Textures/v2/Square.png
-    public static void addItem(Item item, Dictionary<string, Item> pocket)
+    public static void addItem(Item item, Dictionary<string, Item> pocket, bool ignoreEvent = false)
     {
 
         if (item == null || pocket == null || !ItemList.addableToInventory(item))
@@ -48,7 +48,10 @@ public static class Inventory
             pocket.Add(item.getKey(), item);
         }
 
-        OnInventoryChange.Invoke();
+        if(!ignoreEvent)
+        {
+            OnInventoryChange.Invoke();
+        }
     }
 
 
@@ -114,7 +117,7 @@ public static class Inventory
         return oldItem.clone();
     }
 
-    public static Item removeItem(Item item, int amount)
+    public static Item removeItem(Item item, int amount, bool ignoreEvent = false)
     {
         if (item == null)
         {
@@ -122,37 +125,37 @@ public static class Inventory
         }
         if (item.isJunk())
         {
-            return removeItem(item.getKey(), amount, State.junkPocket);
+            return removeItem(item.getKey(), amount, State.junkPocket, ignoreEvent);
         }
         else
         {
-            return removeItem(item.getKey(), amount, State.inventory);
+            return removeItem(item.getKey(), amount, State.inventory, ignoreEvent);
         }
     }
 
-    public static Item removeItem(string key, int amount)
+    public static Item removeItem(string key, int amount, bool ignoreEvent = false)
     {
         if (key == null)
         {
             return null;
         }
 
-        return removeItem(key, amount, State.inventory);
+        return removeItem(key, amount, State.inventory, ignoreEvent);
     }
 
     //if amount specified, remove that amount
-    public static Item removeItem(Item item, int amount, Dictionary<string, Item> pocket)
+    public static Item removeItem(Item item, int amount, Dictionary<string, Item> pocket, bool ignoreEvent = false)
     {
         if (item == null || pocket == null)
         {
             return null;
         }
 
-        return removeItem(item.getKey(), amount, pocket);
+        return removeItem(item.getKey(), amount, pocket, ignoreEvent);
     }
 
     //if amount specified, remove that amount
-    public static Item removeItem(string key, int amount, Dictionary<string, Item> pocket)
+    public static Item removeItem(string key, int amount, Dictionary<string, Item> pocket, bool ignoreEvent = false)
     {
         if (key == null || pocket == null)
         {
@@ -172,7 +175,10 @@ public static class Inventory
                 pocket.Remove(key);
             }
 
-            OnInventoryChange.Invoke();
+            if(!ignoreEvent)
+            {
+                OnInventoryChange.Invoke();
+            }
 
             return removedItems;
         }

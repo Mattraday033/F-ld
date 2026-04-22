@@ -14,7 +14,7 @@ VAR deathFlagGuardPázmán = false
 
 VAR toldToFindNandor = false
 
-VAR goesWithBroglinsPlan = false
+VAR goesWithBrushsPlan = false
 VAR mineLvl3GuardsInParty = false
 VAR mineLvl3MarcosAgreedToIgniteJelly = false
 VAR mineLvl3MarcosTaughtHowToIgniteJelly = false

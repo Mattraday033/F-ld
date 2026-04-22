@@ -15,8 +15,8 @@ VAR metKastor = false
 VAR kastorReactedToHostility = false
 VAR kastorCalledPlayerMadReckless = false
 VAR failedToConvinceSlavesToHelpYou = false
-VAR gotBroglinKilledByGuard = false
-VAR spokeToGarchaAboutPlan = false
+VAR gotBrushKilledByGuard = false
+VAR spokeToGézaAboutPlan = false
 VAR askedKastorWhoHeIs = false
 VAR gaveKastorYourName = false
 VAR knowRevolutionPassword = false
@@ -314,7 +314,7 @@ I heard a lot of noise coming from outside. What's going on?
         A riot? *Kastor gives you a dubious expression.* Is it just you, or are there others involved?
         ->HR_HaveNotMetYet_1a
     }
-    +Who I am doesn't matter. Garcha sent me. And I got into a little trouble along the way.
+    +Who I am doesn't matter. Géza sent me. And I got into a little trouble along the way.
         Trouble that I can ill-afford. Do you fight alone?
         ->HR_HaveNotMetYet_1a
 
@@ -322,7 +322,7 @@ I heard a lot of noise coming from outside. What's going on?
 
     {
     -knowRevolutionPassword:
-        +I have friends throughout the camp. Garcha told me the wind blows eastward.
+        +I have friends throughout the camp. Géza told me the wind blows eastward.
             setToTrue(gaveKastorThePassword)
             ->HR_HaveNotMetYet_1ab
     }
@@ -381,7 +381,7 @@ You're back. Are you in need of my attention?
 
 === HR_HaveNotMetYet_1ca ===
 
-Was it not obvious that a more subtle approach to this is needed? It seems to me that Garcha judged you poorly. 
+Was it not obvious that a more subtle approach to this is needed? It seems to me that Géza judged you poorly. 
 
 keepDialogue()
 
@@ -447,11 +447,11 @@ restParty()
         *Are you Kastor?
             ->1b(->1aa)
     } 
-    +I'm {playerName}. Broglin helped me gain the trust of the guards.
+    +I'm {playerName}. Brush helped me gain the trust of the guards.
         ~gaveKastorYourName = true
         setToTrue(gaveKastorYourName)
         ->1c
-    +Who I am doesn't matter. Garcha sent me.
+    +Who I am doesn't matter. Géza sent me.
         ->1c
 
 === 1b(->divert) ===
@@ -464,7 +464,7 @@ I am. But I ask again, who are you?
 
 === 1c ===
 
-{gaveKastorYourName:Broglin you say? That is very interesting...|Garcha? What does he want from me?}
+{gaveKastorYourName:Brush you say? That is very interesting...|Géza? What does he want from me?}
 
 //    {
 //        -not askedKastorToHelpEscape:
@@ -477,7 +477,7 @@ I am. But I ask again, who are you?
         ->2a
     }
     
-    +Why is your hut so much bigger than Broglin and Garcha's?
+    +Why is your hut so much bigger than Brush and Géza's?
         ->keepDialogueB4HutSizeExplanation(->1c)
     +Do you know what happened to the mine?
         ->mineExplanationDisclaimer(true,->1c)
@@ -677,9 +677,9 @@ addXP(250)
     *I can move past the guards freely. What do you need of me?
         ->T1a
     }
-    +Broglin has been taken by the guards.
+    +Brush has been taken by the guards.
         ->2b
-    +Why is your hut so much bigger than Broglin and Garcha's?
+    +Why is your hut so much bigger than Brush and Géza's?
         ->hutSizeExplanation(->2aa)
     +Do you know what happened to the mine?
         ->mineExplanationDisclaimer(false,->2aa)
@@ -722,7 +722,7 @@ I appreciate you telling me this. Once we have dealt with the guards, we'll free
 
 === T1a ===
 
-\*Kastor considers you for a moment.* You seem no less capable than anyone else, I suppose. But I was not present for how you impressed Garcha. You'll need to prove you can be trusted to handle yourself out there before I divulge any more of the plan to you.
+\*Kastor considers you for a moment.* You seem no less capable than anyone else, I suppose. But I was not present for how you impressed Géza. You'll need to prove you can be trusted to handle yourself out there before I divulge any more of the plan to you.
 
     +I understand. What do I need to do?
         ->T1b
@@ -1082,7 +1082,7 @@ For this, you'll need to speak to Ervin in the hut directly across the street fr
 The next thing we must do is arm ourselves. The guards protect the keys to their armory well, of course, but the mine's closing affords us a rare opportunity. There is another armory within the mine, and I doubt the guards had time to raid it before they evacuated.
 
 
-I gave the job of obtaining a key to the armory to Janos. He lives in the hut to the west of Broglin's. Originally, he was supposed to acquire the key to the armory within the guardhouse. Inform him that the plan has changed and work with him to obtain the mine armory's key.
+I gave the job of obtaining a key to the armory to Janos. He lives in the hut to the west of Brush's. Originally, he was supposed to acquire the key to the armory within the guardhouse. Inform him that the plan has changed and work with him to obtain the mine armory's key.
 
 {
 -hasToolBundle and not gaveKastorToolBundle:
@@ -1157,7 +1157,7 @@ You're back. Were you successful?
 }
     +Not yet.
         ->3b
-    +Why is your hut so much bigger than Broglin and Garcha's?
+    +Why is your hut so much bigger than Brush and Géza's?
         ->keepDialogueB4HutSizeExplanation(->3a)
     +Tell me about what happened to the mine.
         ->mineExplanationDisclaimer(true,->3a)
@@ -1850,7 +1850,7 @@ You're back. Were you successful?
 
     +Not yet.
         ->3b
-    +Why is your hut so much bigger than Broglin and Garcha's?
+    +Why is your hut so much bigger than Brush and Géza's?
         ->keepDialogueB4HutSizeExplanation(->6a)
     +Do you know what happened to the mine?
         ->mineExplanationDisclaimer(true,->6a)
@@ -1984,7 +1984,7 @@ changeCamTarget({kastorIndex})
 
     Even in death, he continues to provide for us. I am once more in his debt as well.
     
-    +'Face the guards'? I was aware Kastor was involved with the plan that Broglin mentioned, but you two are as well?
+    +'Face the guards'? I was aware Kastor was involved with the plan that Brush mentioned, but you two are as well?
     
         changeCamTarget({nandorIndex})
         
@@ -2065,7 +2065,7 @@ Even in death, he helps our cause. I am once more in his debt.
     
     Excellent. Then if you haven't been informed already, Nándor was the first among us to work on the plan. He enlisted my and Carter's help in the days leading up to the lockdown, and we decided between the three of us who else to recruit. Then I was the one to recruit the others and set them on their individual tasks. Who recruited you?
 
-    +Broglin and Garcha. They needed a way to communicate during the lockdown and helped me gain the trust of Guard László so I could leave my hut. *Show badge*
+    +Brush and Géza. They needed a way to communicate during the lockdown and helped me gain the trust of Guard László so I could leave my hut. *Show badge*
         ->6caa    
                 
 -else:
@@ -2079,8 +2079,8 @@ Even in death, he helps our cause. I am once more in his debt.
     I agree.
     
     {
-    -spokeToGarchaAboutPlan:
-        +Actually, Broglin and Garcha already filled me in on some of the plan.
+    -spokeToGézaAboutPlan:
+        +Actually, Brush and Géza already filled me in on some of the plan.
         {
         -toldCarterWrongPassword:
             ->6cb
@@ -2309,9 +2309,9 @@ The next stage of the plan for the revolt was to fight our way to the northern s
 
 changeCamTarget({kastorIndex})
 
-activateQuestStep(Rescue Broglin,Beneath the Manse.)
+activateQuestStep(Rescue Brush,Beneath the Manse.)
 
-That is true, but the Manse is almost certainly where the Pit and it's prisoners reside. I would not leave Broglin and any other slaves held there to whatever fate the guards have in store for them.
+That is true, but the Manse is almost certainly where the Pit and it's prisoners reside. I would not leave Brush and any other slaves held there to whatever fate the guards have in store for them.
 
 ->7bc
 
@@ -2319,7 +2319,7 @@ That is true, but the Manse is almost certainly where the Pit and it's prisoners
 
 changeCamTarget({kastorIndex})
 
-activateQuestStep(Rescue Broglin,Beneath the Manse.)
+activateQuestStep(Rescue Brush,Beneath the Manse.)
 
 We could, but the Manse is almost certainly where the Pit and it's prisoners reside. {terrifiedImre or convincedImre:We also swore to help free the Manse slaves. }We owe it to anyone trapped there to at least attempt to free them.
 

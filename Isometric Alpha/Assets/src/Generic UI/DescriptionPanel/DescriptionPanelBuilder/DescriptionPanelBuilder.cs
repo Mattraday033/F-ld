@@ -844,4 +844,8 @@ public static class IconList
     //Status Icons
     public const string mandatoryTargetIcon = "Mandatory Target";
     public const string stunnedIcon = "Stunned";
+
+    //Map Icons
+    public const string restPointIcon = "Rest Point";
+    public const string shopIcon = "Shop";
 }

@@ -13,7 +13,7 @@ VAR gotThePlanFromKastor = false
 VAR spokeToBalint = false
 VAR spokeToJanos = false
 VAR spokeToErvin = false
-VAR spokeToGarchaAboutPlan = false
+VAR spokeToGézaAboutPlan = false
 VAR metKastor = false
 
 VAR foughtHorsesInManse = false

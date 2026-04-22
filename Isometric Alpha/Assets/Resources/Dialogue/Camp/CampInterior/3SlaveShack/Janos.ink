@@ -579,7 +579,7 @@ Please, leave me. I would like to be alone.
 
     A week or so after my arrival at this camp, myself and a few other branded snuck into the mess hall and stole some extra rations for ourselves. It was a foolish thing to do, but my life before my branding had ill-prepared me for the meager portions we are provided. The hunger in those first days was the hardest.
 
-    Once the theft was discovered, all of the thieves were quickly apprehended. One of our number, Sampson, chose to give the rest of us up in exchange for special treatment. When the punishments were being handed down, András spoke up on my behalf. I was given half the lashes my compatriots received. 
+    Once the theft was discovered, all of the thieves were quickly apprehended. One of our number, Weft, chose to give the rest of us up in exchange for special treatment. When the punishments were being handed down, András spoke up on my behalf. I was given half the lashes my compatriots received. 
 
     While I was recovering, he visited me. The care he showed me then, and since, has revealed to me he has a sensitive soul. That is how I know he will help us.
 

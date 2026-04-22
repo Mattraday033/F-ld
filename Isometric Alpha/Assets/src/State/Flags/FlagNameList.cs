@@ -5,8 +5,8 @@ using UnityEngine;
 public static class FlagNameList
 {
     	public const string newGameFlagName = "newGame";
-        public const string skipFirstDialogue = "skipFirstDialogue"; //Set to true if you want to skip the dialogue with broglin and co at the beginning. Only used for testing		
-        public const string finishedFirstDialogue = "finishedFirstDialogue"; //if the player finished the first dialogue with broglin/garcha normally
+        public const string skipFirstDialogue = "skipFirstDialogue"; //Set to true if you want to skip the dialogue with brush and co at the beginning. Only used for testing		
+        public const string finishedFirstDialogue = "finishedFirstDialogue"; //if the player finished the first dialogue with brush/géza normally
 
         //Tutorial Flags
         public const string seenCombatTutorial = "seenCombatTutorial"; //Used to check if the Combat Tutorial should appear at start of combat
@@ -30,16 +30,16 @@ public static class FlagNameList
         public const string toldKastorOfThatchsFate = "toldKastorOfThatchsFate"; //Finished Tutorial quest
 
         //first convo flags
-        public const string goesWithBroglinsPlan = "goesWithBroglinsPlan"; //if player chose to go along with broglin's plan in the first conversation
-        public const string gotBroglinKilledByGuard = "gotBroglinKilledByGuard"; // if the player got Broglin killed by guard.
+        public const string goesWithBrushsPlan = "goesWithBrushsPlan"; //if player chose to go along with brush's plan in the first conversation
+        public const string gotBrushKilledByGuard = "gotBrushKilledByGuard"; // if the player got Brush killed by guard.
         public const string impressedGuardLaszlo = "impressedGuardLaszlo";// if the player impressed Guard László
-        public const string rattedOutBroglin = "rattedOutBroglin"; // if the player ratted out broglin's plan to the guards
+        public const string rattedOutBrush = "rattedOutBrush"; // if the player ratted out brush's plan to the guards
         public const string sentToThePit = "sentToThePit";//if the player was sent to the pit in the first conversation
-        public const string killedBroglinAndGarcha = "killedBroglinAndGarcha"; //if the player killed Broglin and Garcha in the first conversation
-        public const string gotPasswordFromGarcha = "gotPasswordFromGarcha"; //if Garcha told the player about the "which way is the wind blowing/east" call and response
+        public const string killedBrushAndGéza = "killedBrushAndGéza"; //if the player killed Brush and Géza in the first conversation
+        public const string gotPasswordFromGéza = "gotPasswordFromGéza"; //if Géza told the player about the "which way is the wind blowing/east" call and response
         public const string killedGuardLaszlo = "killedGuardLaszlo"; //if the player killed Guard László in the first conversation
-        public const string spokeToGarchaAboutPlan = "spokeToGarchaAboutPlan"; //if the player has spoken to Garcha after the first conversation
-        public const string givenTaskByLaszlo = "givenTaskByLaszlo"; //if Guard László has told you to get Sampson his rations.
+        public const string spokeToGézaAboutPlan = "spokeToGézaAboutPlan"; //if the player has spoken to Géza after the first conversation
+        public const string givenTaskByLaszlo = "givenTaskByLaszlo"; //if Guard László has told you to get Weft his rations.
 
         //kastor convo flags
         public const string metKastor = "metKastor"; //if the player has spoken to Kastor before
@@ -81,7 +81,7 @@ public static class FlagNameList
         public const string revoltStarted = "revoltStarted"; //The camp is hostile
         public const string spawnWormsInsteadOfGuards = "spawnWormsInsteadOfGuards"; //if the revolt has started and you opened the way to the third level of the mine, but didn't seal the breach
         public const string duringSlaveRallyConversation = "duringSlaveRallyConversation";
-        public const string waitingOnGarchaToSpeak = "waitingOnGarchaToSpeak"; //flag that allows garcha to still be visible after rally conversation
+        public const string waitingOnGézaToSpeak = "waitingOnGézaToSpeak"; //flag that allows géza to still be visible after rally conversation
         public const string haveManseSlaveHelp = "haveManseSlaveHelp";
         public const string marcosSleepingSS4 = "marcosSleepingSS4";
         public const string attackedBarricadeHeadOn = "attackedBarricadeHeadOn";
@@ -113,7 +113,7 @@ public static class FlagNameList
         public const string metTemple = "metTemple"; //if the player met Temple
         public const string templeMentionedBackground = "templeMentionedBackground";
         public const string templeExplainedPatches = "templeExplainedPatches";
-        public const string askedTempleAboutSampson = "askedTempleAboutSampson";
+        public const string askedTempleAboutWeft = "askedTempleAboutWeft";
 
         //Tabor Flags
         public const string heardTaborsLesson = "heardTaborsLesson";
@@ -186,9 +186,9 @@ public static class FlagNameList
         public const string thatchBeginsStranglingVazul = "thatchBeginsStranglingVazul";
         public const string angeredThatchInHisHut = "angeredThatchInHisHut";
 
-        //Broglin Flags
-        public const string toldAboutCellKey = "toldAboutCellKey"; //Broglin has explained where the cell key is
-        public const string freedBroglin = "freedBroglin"; //Broglin has been freed from the pit
+        //Brush Flags
+        public const string toldAboutCellKey = "toldAboutCellKey"; //Brush has explained where the cell key is
+        public const string freedBrush = "freedBrush"; //Brush has been freed from the pit
 
         //Muzsa flags
         public const string metMuzsa = "metMuzsa";  //have interacted with Guard Muzsa before
@@ -231,7 +231,7 @@ public static class FlagNameList
 
         //Carter flags
         public const string toldCarterPassword = "toldCarterPassword"; // gave Carter the password on first meeting him 
-        public const string toldCarterWrongPassword = "toldCarterWrongPassword"; //If you said anything but 'East' to Carter when asked the password and you got the call/response from Garcha
+        public const string toldCarterWrongPassword = "toldCarterWrongPassword"; //If you said anything but 'East' to Carter when asked the password and you got the call/response from Géza
         public const string learnedCartersIdentity = "learnedCartersIdentity"; //Told about where Carter comes from and his mission in the camp 
         public const string learnedPagesIdentity = "learnedPagesIdentity"; //Told about where Page comes from and her mission in the camp 
         public const string toldDirectorIsAWarHero = "toldDirectorIsAWarHero"; //Told capturing the Director may start a war. Prompts a question about that later when talking to Carter

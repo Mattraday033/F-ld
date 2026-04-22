@@ -76,7 +76,7 @@ public static class DialogueNameList
     #endregion
     #region Slave Shack 2
     public const string introDialoguePath = campInteriorPathName + LocationNameList.slaveShackTwo + Constants.seperatorChar + "IntroDialogue";
-    public const string garchaPath = campInteriorPathName + LocationNameList.slaveShackTwo + Constants.seperatorChar + NPCNameList.garcha;
+    public const string gézaPath = campInteriorPathName + LocationNameList.slaveShackTwo + Constants.seperatorChar + NPCNameList.géza;
     #endregion
     #region Slave Shack 3
     public const string janosPath = campInteriorPathName + LocationNameList.slaveShackThree + Constants.seperatorChar + NPCNameList.janos;
@@ -95,6 +95,9 @@ public static class DialogueNameList
     public const string slatePath = campInteriorPathName + LocationNameList.slaveShackSix + Constants.seperatorChar + NPCNameList.slate;
     public const string vazulPath = campInteriorPathName + LocationNameList.slaveShackSix + Constants.seperatorChar + "Vazul";
     public const string immovableRubblePath = campInteriorPathName + LocationNameList.slaveShackSix + Constants.seperatorChar + "ImmovableRubble";
+    #endregion
+    #region Slave Shack 9
+    public const string weftPath = campInteriorPathName + LocationNameList.slaveShackEight + Constants.seperatorChar + NPCNameList.weft;
     #endregion
 
     #region Guard House SW
@@ -141,7 +144,7 @@ public static class DialogueNameList
     public const string duringRevolutionSuffix = "DuringRevolution";
     public const string kastorNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + NPCNameList.kastor+duringRevolutionSuffix;
     public const string urosNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + NPCNameList.uros+duringRevolutionSuffix;
-    public const string garchaNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + NPCNameList.garcha+duringRevolutionSuffix;
+    public const string gézaNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + NPCNameList.géza+duringRevolutionSuffix;
     public const string guardMarcosNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + NPCNameList.guardMarcos+duringRevolutionSuffix;
     #endregion
 
@@ -179,8 +182,8 @@ public static class DialogueNameList
     public const string crowdSlave3Path = campExteriorPathName + LocationNameList.campSouthEast + Constants.seperatorChar + "CrowdSlave3";
 
     public const string kastorGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + Constants.seperatorChar + NPCNameList.kastor;
-    public const string garchaGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + Constants.seperatorChar + NPCNameList.garcha;
-    public const string broglinGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + Constants.seperatorChar + NPCNameList.broglin;
+    public const string gézaGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + Constants.seperatorChar + NPCNameList.géza;
+    public const string brushGuardPunishmentPath = campExteriorPathName + LocationNameList.campSouthEast + Constants.seperatorChar + NPCNameList.brush;
 
 
     public const string guardPunishmentStartConvoPath = campExteriorPathName + LocationNameList.campSouthEast + Constants.seperatorChar + "GuardPunishmentStartConvo";
@@ -299,7 +302,7 @@ public static class DialogueNameList
 
     public const string pitGatePathName = pitPathName + "Pit Gate";
 
-    public const string pitBroglinPathName = pitPathName + NPCNameList.broglin;
+    public const string pitBrushPathName = pitPathName + NPCNameList.brush;
     #endregion
 
     #endregion

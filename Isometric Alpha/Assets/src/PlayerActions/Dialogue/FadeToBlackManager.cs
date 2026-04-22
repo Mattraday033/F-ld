@@ -75,7 +75,11 @@ public class FadeToBlackManager : MonoBehaviour
         yield return null;
 
         instance = this;
-        createFade(fade);
+
+        if(!isMidScreenFade())
+        {
+            createFade(fade);
+        }
     }
 
     private void OnDestroy()
@@ -114,9 +118,9 @@ public class FadeToBlackManager : MonoBehaviour
                 !fadeDictionary[FadeType.Screen].isFinished();
 	}
 
-	public void setAndStartFadeBackIn()
+	public void setAndStartFadeBackIn(float fadeTimeMultiplier = 1f)
 	{
-		createFade(new FadeBackInTransition());
+		createFade(new FadeBackInTransition(fadeTimeMultiplier));
 	}
 
 	public void setAndStartFadeToBlack()

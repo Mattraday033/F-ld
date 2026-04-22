@@ -14,7 +14,7 @@ public enum CharacterAnimationType {
                                     Run_Front, Run_Front_Left, Run_Front_Right, 
                                     Run_Back, Run_Back_Left, Run_Back_Right, 
                                     Wounded, Wounded_Front, Wounded_Back, 
-                                    Death, Death_Front, Death_Back, 
+                                    Death, Death_Front, Death_Back, Death_Back_Weaponless,
                                     Attack_Normal, Attack_Normal_Front, Attack_Normal_Back, 
                                     Attack_Special, 
                                     StandUp, 
@@ -27,7 +27,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {   
         CharacterAnimationType.Idle_Front, CharacterAnimationType.Idle_Back, 
         CharacterAnimationType.OOC_Idle_Front, CharacterAnimationType.OOC_Idle_Back, 
-        CharacterAnimationType.Secondary_Idle
+        CharacterAnimationType.Secondary_Idle,
+        CharacterAnimationType.Death_Back_Weaponless
     };
 
 
@@ -876,6 +877,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             case CharacterAnimationType.Death:
             case CharacterAnimationType.Death_Front:
             case CharacterAnimationType.Death_Back:
+            case CharacterAnimationType.Death_Back_Weaponless:
                 return;
         }
         if(CombatStateManager.inCombat)

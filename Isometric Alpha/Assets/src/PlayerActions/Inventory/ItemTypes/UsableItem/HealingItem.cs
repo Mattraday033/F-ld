@@ -65,7 +65,7 @@ public class HealingItem: UsableItem, IJSONConvertable
 
     public override bool fitsUseCriteria(Stats target)
     {
-        return target.currentHealth < target.getTotalHealth();
+        return target != null && target.currentHealth < target.getTotalHealth();
     }
 	
 	public override string getTypeIconName() 

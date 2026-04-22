@@ -12,14 +12,14 @@ public static class NPCNameList
     public const string branded = "Branded";
 
     public const string balint = "Bálint";
-    public const string broglin = "Broglin";
+    public const string brush = "Brush";
     public const string clay = "Clay";
     public const string ervin = "Ervin";
     public const string feher = "Feher";
-    public const string garcha = "Garcha";
+    public const string géza = "Géza";
     public const string janos = "Janos";
     public const string kastor = "Kastor";
-    public const string sampson = "Sampson";
+    public const string weft = "Weft";
     public const string seb = "Seb";
     public const string slate = "Slate";
     public const string temple = "Temple";

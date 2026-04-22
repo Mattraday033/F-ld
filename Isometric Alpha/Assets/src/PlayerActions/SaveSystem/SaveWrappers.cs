@@ -257,6 +257,17 @@ public struct QuestWrapper
             case "Pázmán, mobbed.":
                 return QuestNameList.dealWithThePrisonersStepTitleEighteen;
 
+            case "The death of Broglin.":
+                return QuestNameList.thePlanStepTitleOne;
+            case "Found Broglin.":
+                return QuestNameList.rescueBrushStepTitleFive;
+            case "Broglin is Free.":
+                return QuestNameList.rescueBrushStepTitleSix;
+                /*
+                
+    public const string rescueBrushStepTitleFive = "Found Brush.";
+    public const string rescueBrushStepTitleSix = "Brush is Free.";
+                */
             default:
                 return stepName;
         }

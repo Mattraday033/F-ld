@@ -186,16 +186,16 @@ public static class QuestNameList
     public const string muzsasSweetToothStepTitleFive = "Candy handed over.";
     public const string muzsasSweetToothStepTitleSix = "The way is clear.";
 
-    // Rescue Broglin
-    public const string rescueBroglinQuestTitle = "Rescue Broglin";
+    // Rescue Brush
+    public const string rescueBrushQuestTitle = "Rescue Brush";
 
-    public const string rescueBroglinStepTitleZero = "Finding the Pit.";
-    public const string rescueBroglinStepTitleOne = "Beneath the Manse.";
-    public const string rescueBroglinStepTitleTwo = "The way is blocked.";
-    public const string rescueBroglinStepTitleThree = "A clue.";
-    public const string rescueBroglinStepTitleFour = "Entered the Pit.";
-    public const string rescueBroglinStepTitleFive = "Found Broglin.";
-    public const string rescueBroglinStepTitleSix = "Broglin is Free.";
+    public const string rescueBrushStepTitleZero = "Finding the Pit.";
+    public const string rescueBrushStepTitleOne = "Beneath the Manse.";
+    public const string rescueBrushStepTitleTwo = "The way is blocked.";
+    public const string rescueBrushStepTitleThree = "A clue.";
+    public const string rescueBrushStepTitleFour = "Entered the Pit.";
+    public const string rescueBrushStepTitleFive = "Found Brush.";
+    public const string rescueBrushStepTitleSix = "Brush is Free.";
 
     // Sealing the Breach
     public const string sealingTheBreachQuestTitle = "Sealing the Breach";
@@ -233,7 +233,7 @@ public static class QuestNameList
     public const string thePlanQuestTitle = "The Plan";
 
     public const string thePlanStepTitleZero = "I just got here!";
-    public const string thePlanStepTitleOne = "The death of Broglin.";
+    public const string thePlanStepTitleOne = "The death of Brush.";
     public const string thePlanStepTitleTwo = "Making an impression.";
     public const string thePlanStepTitleThree = "Deemed trustworthy.";
     public const string thePlanStepTitleFour = "Make contact with Kastor.";
