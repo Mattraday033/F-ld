@@ -139,6 +139,7 @@ public static class ItemList
 	public const int blastingJellyIndex = 5;
 	public const int claysNoteIndex = 6;
 	public const int laszloBadgeIndex = 7;
+	public const int weftsRationsIndex = 8;
 	
 	public const int mineArmoryKeyIndex = 0;
 	public const int pitCellKeyIndex = 1;
@@ -324,6 +325,8 @@ public static class ItemList
 		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, blastingJellyIndex), "Blasting Jelly", "A small barrel containing a strange smelling, gelatinous mixture. Inert without it's primer and igniting agent.", blastingJellyIndex));
 		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, claysNoteIndex), "Clay's Note", "", claysNoteIndex));
 		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, laszloBadgeIndex), "Guard László's Badge", "This bronze badge is in the shape of a large coin, with the Lovashi symbol of a horse and it's rider etched into it.", laszloBadgeIndex));
+		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, weftsRationsIndex), "Weft's Rations", "These rations look much like all the others, except a little bit larger.", weftsRationsIndex));
+
 
 		//Key(string key, string loreDescription, int ID)
 

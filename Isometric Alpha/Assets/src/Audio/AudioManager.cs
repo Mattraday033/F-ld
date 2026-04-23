@@ -901,6 +901,19 @@ public static class AudioClipList
                     AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(humanFemaleDialogueSFXFolder + dialogueIntroPrefix +
                                  Random.Range(Constants.indexOne, humanFemaleIntroCount + 1)), VolumeType.Voice);
                 };
+            case NPCNameList.brush:
+                return () =>
+                {
+                    if(AreaManager.locationName.Equals(LocationNameList.slaveShackTwo))
+                    {
+                        AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(snoringDialogueSFX), VolumeType.Voice);
+                    } else
+                    {
+                        
+                        AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(humanMaleDialogueSFXFolder + dialogueIntroPrefix +
+                                 Random.Range(Constants.indexOne, humanMaleIntroCount + 1)), VolumeType.Voice);
+                    }
+                };
             default:
                 return () =>
                 {

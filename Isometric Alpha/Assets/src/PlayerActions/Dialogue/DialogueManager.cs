@@ -636,7 +636,6 @@ public class DialogueManager : MonoBehaviour
                 case "takeallofitem":
 
                     string itemName = getArgument(buffer);
-                    //Item(string key, string loreDescription, string type, string subtype)
 
                     int quantity = 0;
 
@@ -682,18 +681,29 @@ public class DialogueManager : MonoBehaviour
                     string itemKey = getArgument(buffer);
                     int itemQuantity = getArgumentInt(buffer, Constants.indexOne);
 
-                    Inventory.removeItem(itemKey, itemQuantity);
-                    Inventory.removeItem(itemKey, itemQuantity, State.junkPocket);
-
-                    newLine = itemKey + quantitySymbol + itemQuantity;
-
-                    currentConversation.addRemovedLine(newLine);
+                    takeItem(itemKey, itemQuantity);
 
                     break;
 
                 case "addxp":
 
                     string earnedXP = getArgument(buffer);
+
+                    PartyManager.addXP(earnedXP);
+
+                    newLine = earnedXP + " experience points";
+
+                    currentConversation.addEarnedLine(newLine);
+
+                    break;
+
+                case "exchangeitemforxp":
+
+                    itemKey = getArgument(buffer);
+                    itemQuantity = getArgumentInt(buffer, Constants.indexOne);
+                    earnedXP = getArgument(buffer, Constants.indexTwo);
+
+                    takeItem(itemKey, itemQuantity);
 
                     PartyManager.addXP(earnedXP);
 
@@ -1533,6 +1543,14 @@ public class DialogueManager : MonoBehaviour
 
             displayChoices();
         }
+    }
+
+    private void takeItem(string itemKey, int itemQuantity)
+    {
+        Inventory.removeItem(itemKey, itemQuantity);
+        Inventory.removeItem(itemKey, itemQuantity, State.junkPocket);
+
+        currentConversation.addRemovedLine(itemKey + quantitySymbol + itemQuantity);
     }
 
     private GameObject changeCameraTarget(int targetIndex)

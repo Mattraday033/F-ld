@@ -77,7 +77,7 @@ public static class DialogueList
         #region Slave Shack 2
 
         addDialogueToList(LocationNameList.slaveShackTwo, NPCNameList.brush,
-                            new Dialogue(new string[] { NPCNameList.brush, NPCNameList.géza, NPCNameList.guardLaszlo, NPCNameList.guardLaszlo + 1, NPCNameList.géza + 1 },
+                            new Dialogue(new string[] { NPCNameList.brush, NPCNameList.géza, NPCNameList.guardLaszlo, NPCNameList.guardLaszlo + 1, NPCNameList.géza + 1, NPCNameList.géza + 2},
                             Resources.Load<TextAsset>(DialogueNameList.introDialoguePath)));
 
         addDialogueToList(LocationNameList.slaveShackTwo, NPCNameList.géza,

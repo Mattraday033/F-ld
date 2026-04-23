@@ -47,7 +47,7 @@ public static class TransitionSpawnInfoList
 
         list = new List<TransitionSpawnInfo>();
 
-        list.Add(new TransitionSpawnInfo(LocationNameList.slaveShackTwo, LocationNameList.campNorthEast, new Vector3Int(2, 1), Facing.NorthEast));
+        list.Add(new TransitionSpawnInfo(LocationNameList.slaveShackTwo, LocationNameList.campNorthEast, new Vector3Int(1, 1), Facing.NorthEast));
 
         transitionSpawnInfoDict.Add(LocationNameList.slaveShackTwo, list);
 

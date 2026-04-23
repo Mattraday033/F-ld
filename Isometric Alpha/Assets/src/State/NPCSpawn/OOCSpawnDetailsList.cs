@@ -35,12 +35,13 @@ public static class OOCSpawnDetailsList
         #endregion
         #region 2SlaveShack
         list = new List<OOCSpawnDetails>();
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.brush, new Vector3Int(4, 4), LocationNameList.slaveShackTwo, facing: Facing.SouthEast, speakAtStartScript: new BeginningConversationScript()));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.géza, new Vector3Int(4, -1), LocationNameList.slaveShackTwo, facing: Facing.NorthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.brush, new Vector3Int(4, 2), LocationNameList.slaveShackTwo, facing: Facing.SouthEast, speakAtStartScript: new BeginningConversationScript()));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.géza, new Vector3Int(4, 0), LocationNameList.slaveShackTwo, facing: Facing.NorthWest));
 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardLaszlo, new Vector3Int(3, 1), facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardLaszlo, new Vector3Int(2, 1), facing: Facing.NorthEast));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardLaszlo + 1, new Vector3Int(-2, -1), facing: Facing.NorthEast));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.géza + 1, new Vector3Int(3, 1), facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.géza + 1, new Vector3Int(2, 1), facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.géza + 2, new Vector3Int(6, -2), facing: Facing.SouthEast));
 
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackTwo, list);
         #endregion

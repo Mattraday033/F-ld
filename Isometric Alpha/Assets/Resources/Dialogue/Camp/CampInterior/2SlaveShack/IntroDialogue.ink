@@ -21,6 +21,7 @@ VAR gézaIndex = 2
 VAR laszloActualIndex = 3
 VAR laszloVoiceIndex = 4
 VAR gézaSecondLocationIndex = 5
+VAR gézaPlayingCrazyIndex = 6
 
 playAnimation({playerIndex},death_back_weaponless)
 setNPCFacing({brushIndex},SE)
@@ -54,7 +55,7 @@ changeCamTarget({brushIndex})
 
 changeCamTarget({gézaIndex})
 
-Discusing the plan is getting us nowhere. Let's just get on with it.
+Discussing the plan is getting us nowhere. Let's just get on with it.
 
 changeCamTarget({brushIndex})
 
@@ -91,7 +92,7 @@ Hey, you awake?
     
 === 1b ===
 
-My apologies. I've had my brand long enough to know how precious sleep can be.
+My apologies. I've had my brand long enough to know how dear sleep can be.
 
 -> 1d
 
@@ -151,6 +152,17 @@ changeCamTarget({brushIndex})
 
 \*Brush shoots Géza a glare.* We've all got our reasons for being here, so whatever the cause you'll get no judgement from us. Géza just wants to know if you're the violent sort is all.
 
+->1fa
+
+=== 1fa ===
+
++Who is this Weft?
+    changeCamTarget({gézaIndex})
+
+    Every so often you get a slave that thinks they can carve out a little bit of power by dragging on his fellows. Weft is one of them. He got his start by singing to the guards when a group of us stole extra rations from the mess. And he's only gotten slimier from there.
+
+    -> 1fa
+
 +\*Shrug.* I only pick fights I can win. That just happens to be most of them.
     changeCamTarget({gézaIndex})
 
@@ -176,11 +188,14 @@ changeCamTarget({brushIndex})
 
 +I'm game. Tell me both sides.
     ->Close
-+What's this plan I heard you two discussing before? 
++What's this plan I heard you mention before? 
     ->2ba
 +This is a waste of my time. I'm going back to sleep.
-    ~rudeness++
-    ->Close
+
+    combineDialogue()
+
+    Wait a moment. Your time is precious, I understand that. I'll cut to the chase. 
+    ->2bb
 
 === 2ba === 
 
@@ -198,114 +213,82 @@ No, you said "I've seen sheep in heat bleat quieter than you", which I took offe
 setNPCFacing({brushIndex},NE)
 setNPCFacing({gézaIndex},NE)
 
-I'll level with you. 
+combineDialogue()
 
-->Close
+Fine, so we weren't making small talk because we enjoy your company. I'll get to the point. 
+    ->2bb
+
+=== 2bb ===
+
+The brand is a death sentence, as I'm sure you know. And some of the other branded and I aren't too keen on being worked to death. So we've come up with a plan to get us all out of here. But we need some help from you to pull it off.
+
+I'll level with you: we wouldn't be asking something like this of a complete stranger if we weren't desperate. Very desperate. That's why we were sizing you up before.
+
+changeCamTarget({gézaIndex})
+
+We don't know your quality, but neither do the guards. If you were to make a good first impression, they may give you some tasks outside this hut. That would mean you could move around during the lockdown, and maybe get some more of the plan done while we're trapped in here.
+    ->2b
 
 === 2b ===  
 
-So if you don't want to be stuck in this hut like we are, we need the guards to think you're trustworthy. And for that to happen, we need them to think you'll sell out your pals.
+//So if you don't want to be stuck in this hut like we are, we need the guards to think you're trustworthy. And for that to happen, we need them to think you'll sell out your pals.
 
-{ askedWhyMe && askedDoYouWantMeToDoThis:
-    +What exactly are you proposing?
-         -> 2c
-}
-     
-    +Slow down. Why would I want to do this?
-     -> 2f
-    +Why me? Why not either of you?
-     -> 2g
+    +How desperate are you?
+        changeCamTarget({brushIndex})
+
+        We've seen a lot of miners die. After a while, they just drop from exhaustion. And all of the guards act real cagey. They never talk about where this camp is, or why we're here.
+        changeCamTarget({gézaIndex})
+
+        We pull a lot of stone out of the mine, but never ore. And a few weeks back we found some ruins on the lower levels. Old rooms, buildings built directly into the stone. The guards are looking for something.
+        changeCamTarget({brushIndex})
+
+        We don't know what, but when they find it, it's a sure bet they'll kill the lot of us to keep their secret. So like I said, we're desperate to get out of here.
+        -> 2b
     +I don't want the other slaves to think I'm a rat.
-     -> 2e
-    +Who is Weft?
-     -> 2d
+        changeCamTarget({brushIndex})
 
-    
-        
+        Don't worry, we'll put out the good word once the lockdown's up that you aren't a bootlicker. Géza and I have been around since the camp started: they others will listen to us.
+        -> 2b
+    +Why me? Why not either of you?
+        changeCamTarget({brushIndex})
 
-=== 2c ===
+        The guards aren't about to hand out any special privileges to Géza and me, we've been around too long. They know we're not the grovelling types. But you just got here. If we can give them a good first impression, they'll find a use for you. 
 
-changeCamTarget({brushIndex})
+        changeCamTarget({gézaIndex})
 
-There's an inspection every morning and night. The guards will check us for contraband, signs of disease, that sort of thing. If we pass, they'll give us our morning rations.
-
--> 3a
-
-=== 2d === //Weft
-
-changeCamTarget({gézaIndex})
-
-keepDialogue()
-
-Every so often you get a slave that thinks they can carve out a little bit of power by dragging on his fellows. Weft is one of them. He got his start by singing to the guards when a group of us stole extra rations from the mess. And he's only gotten slimier from there.
-
--> 2b
-
-=== 2e === //rat
-
-changeCamTarget({brushIndex})
-
-keepDialogue()
-
-Don't worry, we'll put out the good word once the lockdown's up that you aren't a bootlicker. Géza and I have been around since the camp started; people listen to us.
-
--> 2b
-
-=== 2f ===//Why would we
-
-changeCamTarget({brushIndex})
-
-keepDialogue()
-
-Before the lockdown started, some of the other slaves and I were trying to figure out a plan to escape. When we heard we'd be confined to quarters, I got tasked with finding a way to communicate between huts. You're it.
-
-~ askedDoYouWantMeToDoThis = true
--> 2b
-
-=== 2g ===//why me
-
-changeCamTarget({brushIndex})
-
-The guards aren't about to hand out any special privileges to Géza and me, we've been around too long. They know we're not the grovelling types. But you just got here. If we can give them a good first impression, they'll find a use for you. 
-
-changeCamTarget({gézaIndex})
-
-keepDialogue()
-
-The guards are always antsy about the slaves plotting, so they try to find all the brown-nosers early and keep them on side. That way the slaves are too busy fighting among themselves and the guards don't feel so badly outnumbered.
-
-~askedWhyMe = true
--> 2b
+        The guards are always antsy about the slaves plotting, so they try to find all the brown-nosers early and keep them on side. That way the slaves are too busy fighting among themselves and the guards don't feel so badly outnumbered.
+        -> 2b
+    +<I>If</I> I did this, what exactly would I need to do?
+         -> 3a
 
 === 3a ===
 
 changeCamTarget({brushIndex})
 
+There's an inspection every morning and night. The guards will check us for contraband, signs of disease, that sort of thing. If we pass, they'll give us our morning rations.
+
 While they're doing that, you need to accuse me of trying to get you in on an escape plan.
 
     +Oh, so like you're doing now?
-    ->3b
-    +Won't they kill you for that?
-    ->3c
+        ->3b
 
 === 3b ===
 
-\*Brush chuckles.* Yeah, something like that. So are you in?
+\*Brush chuckles.* Yeah, something like that. Once you do, the guards will know you're a suck up. After they cart me off, you'll be sure to receive a nice reward: more work somewhere outside.
 
-    +I'm in. I'd do anything to get out of here.
-        ->4a
-    +<Not Implemented> No way I'm getting involved in a plan like this with someone I just met.
-        ->3d
+    +Won't they kill you for that?
+    ->3c
 
 === 3c === 
 
 Aye, they might. But they'll have to interrogate me first. And I only know one other person who's in on it besides Géza and yourself. He told me that the rest are scattered all over the camp; each hut has to work on one part of the plan. It's separated that way so we can't ruin the whole plan if we're caught.
 
-keepDialogue()
+And if they end up killing me, at least I won't ever have to enter that blasted mine again. Just don't leave me to their hospitality too long. So are you in?
 
-And if they end up killing me, at least I won't ever have to enter that blasted mine again. Just don't leave me to their hospitality too long, okay?
-
--> 3b
+    +I'm in. I'd do anything to get out of here.
+        ->4a
+    +<Not Implemented> No way I'm getting involved in a plan like this with someone I just met.
+        ->3d
 
 === 3d ===
 
@@ -319,7 +302,6 @@ Give them a second, they haven't let me sweeten the pot yet.
 
     +I'm listening.
         ->3e
-
 
 === 3e ===
 
@@ -345,7 +327,7 @@ We can't have you telling the guards about the plan. If you don't go along with 
 
 changeCamTarget({laszloVoiceIndex})
 
-\*A voice barks orders from outside the hut* Up against the wall! It's inspection time!
+\*A voice barks orders from outside the hut.* Up against the wall! It's inspection time!
 
 {peacefullyRefusedBrush: ->4b}
 
@@ -369,6 +351,13 @@ fadeToBlack()
 
 activate({laszloActualIndex})
 
+deactivate({gézaIndex})
+activate({gézaPlayingCrazyIndex})
+
+movePlayer(4,0)
+setFacing(NW)
+setNPCFacing({brushIndex},SE)
+
 changeCamTarget({laszloActualIndex})
 
 fadeBackIn(60)
@@ -378,6 +367,8 @@ I said back up against the walls, slaves, or I'm keeping your rations for myself
   {peacefullyRefusedBrush: ->8b}
   
     +Sir! Sir! Brush here's been talking of escape.
+    
+        setFacing(SW)
         ->4d
     
     +<Not Implemented> *Say a prayer and attack the fully armed guard with nothing but your fists* 
@@ -391,8 +382,6 @@ He'll play crazy. Happens to some slaves, the guards won't bat an eye. Easy for 
 ->4b
 
 === 4d ===
-
-setNPCFacing({laszloActualIndex}, NW)
 
 What? Brush, you treacherous dog!
 
@@ -466,6 +455,8 @@ deactivate({brushIndex})
 
 activateQuestStep(The Plan, Making an impression.)
 
+movePlayer(4,1)
+
 setToTrue(impressedGuardLaszlo)
 
 ->5a
@@ -479,13 +470,13 @@ Boys! Come on in, we got ourselves another one for the pit!
 
 fadeToBlack()
 
+movePlayer(4,1)
 deactivate({brushIndex})
 
 -> 5a
 
 //Guard Kills Brush Outcome
 === 4k ===
-
 
 activateQuestStep(The Plan, The death of Brush.)
 
@@ -572,8 +563,12 @@ giveItem(0,0,1)
 === 5f ===
 
 setToTrue(givenTaskByLaszlo)
+activateQuestStep(My New Hutmate,Deliver Rations to Weft.)
 
+prepItem()
 I need you to take this bit of rations to Weft. He's another slave like you: he knows what's good for him. {killedBAndG:You'll be living in his hut from now on; can't have you staying in this abattoir.|He's also your new hut-mate, so stay on his good side.} Just follow the road south from this hut then turn west past the stables. Weft lives in the big shack in front of the Manse. 
+
+giveItem(3,8,1)
 
 prepItem()
 
@@ -584,6 +579,7 @@ giveItem(3,7,1)
 fadeToBlack()
 
 deactivate({gézaIndex})
+deactivate({gézaPlayingCrazyIndex})
 deactivate({laszloActualIndex})
 activate({gézaSecondLocationIndex})
 
@@ -1019,6 +1015,7 @@ fadeToBlack()
 
 deactivate({gézaSecondLocationIndex})
 activate({gézaIndex})
+setNPCFacing({gézaIndex},NW)
 
 fadeBackIn(60)
     ->Close

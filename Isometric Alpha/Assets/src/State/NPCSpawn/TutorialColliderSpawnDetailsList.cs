@@ -39,6 +39,27 @@ public static class TutorialColliderSpawnDetailsList
         tutorialSpawnDetailsDict.Add(LocationNameList.campSouthEast, list);
         #endregion
 
+        #region ManseCamp
+        list = new List<MultiTutorialColliderSpawnInfo>();
+
+        list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campManse, new Vector3Int(5,-22),
+                                                    TutorialSequenceList.hiddenObjectsTutorialSequenceKey,
+                                                    TutorialSequenceList.hiddenObjectsTutorialSeenFlag,
+                                                    Constants.sizeFive, Axis.DescendingX));
+
+        list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campManse, new Vector3Int(-3,-6),
+                                                    TutorialSequenceList.hiddenObjectsTutorialSequenceKey,
+                                                    TutorialSequenceList.hiddenObjectsTutorialSeenFlag,
+                                                    Constants.sizeOne, Axis.DescendingY));
+
+        list.Add(new MultiTutorialColliderSpawnInfo(LocationNameList.campManse, new Vector3Int(0,-16),
+                                                    TutorialSequenceList.hiddenObjectsTutorialSequenceKey,
+                                                    TutorialSequenceList.hiddenObjectsTutorialSeenFlag,
+                                                    Constants.sizeTwo, Axis.DescendingY));
+
+        tutorialSpawnDetailsDict.Add(LocationNameList.campManse, list);
+        #endregion
+
         #region MineLvl_1-1b
         list = new List<MultiTutorialColliderSpawnInfo>();
 
