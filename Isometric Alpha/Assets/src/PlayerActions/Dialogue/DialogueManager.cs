@@ -455,11 +455,33 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
+                case "activate":
+
+                    intParameter = getArgumentInt(buffer, Constants.indexZero);
+
+                    if(intParameter == Constants.indexZero)
+                    {
+                        PlayerObject.showPlayerSprite();
+                    } else
+                    {
+                        currentDialogue.cameraFoci[intParameter].SetActive(true);
+                    }
+
+                    continueStory();
+
+                    break;
+
                 case "deactivate":
 
-                    int i = getArgumentInt(buffer, Constants.indexZero);
+                    intParameter = getArgumentInt(buffer, Constants.indexZero);
 
-                    currentDialogue.cameraFoci[i].SetActive(false);
+                    if(intParameter == Constants.indexZero)
+                    {
+                        PlayerObject.hidePlayerSprite();
+                    } else
+                    {
+                        currentDialogue.cameraFoci[intParameter].SetActive(false);
+                    }
 
                     continueStory();
 
@@ -492,23 +514,6 @@ public class DialogueManager : MonoBehaviour
                     QuestList.finishQuest(questTitle, finalQuestStep, questSuccessful);
 
                     OOCUIManager.updateQuestCounter();
-
-                    continueStory();
-
-                    break;
-
-                case "activate":
-
-                    int j = getArgumentInt(buffer, Constants.indexZero);
-
-                    // NPCSpawnChecker npcSpawnChecker = currentDialogue.cameraFoci[j].GetComponent<NPCSpawnChecker>();
-
-                    // if (npcSpawnChecker != null && !(npcSpawnChecker is null))
-                    // {
-                    //     npcSpawnChecker.ignoreInPartyForSpawning = true;
-                    // }
-
-                    currentDialogue.cameraFoci[j].SetActive(true);
 
                     continueStory();
 
@@ -756,6 +761,12 @@ public class DialogueManager : MonoBehaviour
 
                     fadeToBlackCommand();
                     return;
+
+                case "manualfadetoblack":
+
+                    fadeToBlackCommand(manual: true);
+                    return;
+
 
                 case "fadebackin": //fadeBackIn(int framesToWait), 
                                    //fadeBackIn(int framesToWait, bool continueAfterTransparent)
@@ -1569,7 +1580,7 @@ public class DialogueManager : MonoBehaviour
         return mainCM.Follow.gameObject;
     }
 
-    private void fadeToBlackCommand(bool quickFade = false)
+    private void fadeToBlackCommand(bool quickFade = false, bool manual = false)
     {
         string[] fadeToBlackArgs = getAllArgs(buffer);
 
@@ -1597,7 +1608,10 @@ public class DialogueManager : MonoBehaviour
         }
         waitingOnFadeToBlack = true;
 
-        StartCoroutine(handleDialogueUIDuringFadeOut(setDialogueUIActiveAfterFadeIn, continueAfterTransparent));
+        if(!manual)
+        {
+            StartCoroutine(handleDialogueUIDuringFadeOut(setDialogueUIActiveAfterFadeIn, continueAfterTransparent));
+        }
     }
 
     private void playerHasItem(string buffer)

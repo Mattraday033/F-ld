@@ -141,7 +141,8 @@ public static class AreaList
             LocationNameList.campCenter,
             LocationNameList.campManse,
             LocationNameList.campSouthEast,
-            LocationNameList.campMineEntrance
+            LocationNameList.campMineEntrance,
+            LocationNameList.campNorthWest
         };
 
         string[] areasSharingHostilityWithCampExterior = new string[]

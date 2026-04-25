@@ -22,6 +22,7 @@ public class PlayerObject : MonoBehaviour
     public LayoutElement pressButtonPromptBackgroundLayout;
     public TextMeshProUGUI pressButtonPromptText;
     public AnimationManager animationManager;
+    public SpriteRenderer playerSpriteRenderer;
 
     public MapPopUpButton mapPopUpButton;
     public WorldMapPopUpButton worldMapPopUpButton;
@@ -105,6 +106,32 @@ public class PlayerObject : MonoBehaviour
     public static Transform getUIParentTransform()
     {
         return instance.UIParent;
+    }
+
+    public static void hidePlayerSprite()
+    {
+        if(instance == null || 
+            instance.playerSpriteRenderer == null ||
+            instance.animationManager == null)
+        {
+            return;
+        }
+
+        instance.playerSpriteRenderer.color = Color.clear;
+        instance.animationManager.disableExtras();
+    }
+
+    public static void showPlayerSprite()
+    {
+        if(instance == null || 
+            instance.playerSpriteRenderer == null ||
+            instance.animationManager == null)
+        {
+            return;
+        }
+
+        instance.playerSpriteRenderer.color = Color.white;
+        instance.animationManager.enableExtras();
     }
 
     public static bool isBehindTerrain()

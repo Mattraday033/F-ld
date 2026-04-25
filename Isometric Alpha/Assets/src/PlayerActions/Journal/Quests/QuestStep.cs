@@ -255,10 +255,10 @@ public class QuestStep : IJournalSubcategory, IDescribableInBlocks, ISortable
             return Constants.sizeFour;
         } else if(parentQuest.finished && parentQuest.succeeded)
         {
-            return Constants.sizeTwo;
+            return Constants.sizeOne;
         } else
         {
-            return Constants.sizeOne;
+            return Constants.sizeTwo;
         }
     }
 

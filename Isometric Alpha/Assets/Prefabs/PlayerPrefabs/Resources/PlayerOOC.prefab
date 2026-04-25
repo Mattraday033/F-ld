@@ -151,6 +151,7 @@ MonoBehaviour:
   pressButtonPromptBackgroundLayout: {fileID: 6451966914035060883}
   pressButtonPromptText: {fileID: 7201376879852185141}
   animationManager: {fileID: 2281003143300886050}
+  playerSpriteRenderer: {fileID: 3312928677131579550}
   mapPopUpButton: {fileID: 4296566724507772205}
   worldMapPopUpButton: {fileID: 2115896759193237329}
   gameOverPopUpButton: {fileID: 6091515165164501469}

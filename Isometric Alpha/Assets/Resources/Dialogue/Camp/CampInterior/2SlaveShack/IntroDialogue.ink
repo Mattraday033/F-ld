@@ -182,16 +182,12 @@ changeCamTarget({brushIndex})
 
 === 2a ===
 
-changeCamTarget({brushIndex})
-
-\*Brush briefly looks outside.* We still have some time to kill before inspection at sunrise. Maybe you can settle a small argument we were having before you arrived?
-
-+I'm game. Tell me both sides.
-    ->Close
 +What's this plan I heard you mention before? 
     ->2ba
 +This is a waste of my time. I'm going back to sleep.
 
+    changeCamTarget({brushIndex})
+    
     combineDialogue()
 
     Wait a moment. Your time is precious, I understand that. I'll cut to the chase. 
@@ -247,12 +243,12 @@ We don't know your quality, but neither do the guards. If you were to make a goo
     +I don't want the other slaves to think I'm a rat.
         changeCamTarget({brushIndex})
 
-        Don't worry, we'll put out the good word once the lockdown's up that you aren't a bootlicker. Géza and I have been around since the camp started: they others will listen to us.
+        Don't worry, we'll put out the good word once the lockdown's up that you aren't a bootlicker. Géza and I have been around since the camp started: the others will listen to us.
         -> 2b
     +Why me? Why not either of you?
         changeCamTarget({brushIndex})
 
-        The guards aren't about to hand out any special privileges to Géza and me, we've been around too long. They know we're not the grovelling types. But you just got here. If we can give them a good first impression, they'll find a use for you. 
+        The guards aren't about to hand out any special privileges to Géza and me, we've been around too long. They know we're not the groveling types. But you just got here. If we can give them a good first impression, they'll find a use for you. 
 
         changeCamTarget({gézaIndex})
 
@@ -566,7 +562,7 @@ setToTrue(givenTaskByLaszlo)
 activateQuestStep(My New Hutmate,Deliver Rations to Weft.)
 
 prepItem()
-I need you to take this bit of rations to Weft. He's another slave like you: he knows what's good for him. {killedBAndG:You'll be living in his hut from now on; can't have you staying in this abattoir.|He's also your new hut-mate, so stay on his good side.} Just follow the road south from this hut then turn west past the stables. Weft lives in the big shack in front of the Manse. 
+I need you to take this bit of rations to Weft. He's another slave like you: he knows what's good for him. {killedBAndG:You'll be living in his hut from now on; can't have you staying in this abattoir.|He's also your new hutmate, so stay on his good side.} Just follow the road south from this hut then turn west past the stables. Weft lives in the big shack in front of the Manse. 
 
 giveItem(3,8,1)
 

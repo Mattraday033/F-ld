@@ -26,6 +26,19 @@ public class BeginningConversationScript: SpeakAtStartScript //Brush + Géza in 
 
 }
 
+public class WeftIntroScript: SpeakAtStartScript //Brush + Géza in the Starting Hut
+{
+
+    public override void runScript(GameObject target = null)
+    {
+        if (Flags.getFlag(FlagNameList.givenTaskByLaszlo) && !Flags.getFlag(FlagNameList.metWeft))
+        {
+            dialogueTrigger.triggerDialogue();
+        }
+    }
+
+}
+
 public class KendeInKitchenDuringRiotScript: SpeakAtStartScript
 {
 

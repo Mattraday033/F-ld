@@ -481,7 +481,7 @@ giveItem(0,0,1)
 
 setToTrue(givenTaskByLaszlo)
 
-I need you to take this bit of rations to Weft. He's another slave like you: he knows what's good for him. {killedBAndG:You'll be living in his hut from now on; can't have you staying in this abattoir.|He's also your new hut-mate, so stay on his good side.} Just follow the road south from this hut then turn west past the stables. Weft lives in the big shack in front of the Manse. 
+I need you to take this bit of rations to Weft. He's another slave like you: he knows what's good for him. {killedBAndG:You'll be living in his hut from now on; can't have you staying in this abattoir.|He's also your new hutmate, so stay on his good side.} Just follow the road south from this hut then turn west past the stables. Weft lives in the big shack in front of the Manse. 
 
 prepItem()
 

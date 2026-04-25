@@ -328,7 +328,19 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(LocationNameList.campManse, ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, new Vector3Int(-6, 7), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX, outputMultiplier: twoSpaceMultiplier));
 
+        list.Add(new TransitionSpawnInfo(LocationNameList.campManse, LocationNameList.campNorthWest, new Vector3Int(18,-6), Facing.SouthWest, Constants.sizeThree, Axis.DescendingY));
+
         transitionSpawnInfoDict.Add(LocationNameList.campManse, list);
+
+        #endregion
+
+        #region NWCamp
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(LocationNameList.campNorthWest, LocationNameList.campManse, new Vector3Int(-17, 1), Facing.NorthEast, Constants.sizeThree, Axis.DescendingY));
+
+        transitionSpawnInfoDict.Add(LocationNameList.campNorthWest, list);
 
         #endregion
 

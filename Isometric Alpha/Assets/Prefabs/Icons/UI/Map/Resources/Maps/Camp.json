@@ -96,6 +96,26 @@
 		},
 		{
 			"locationName": "",
+			"row": "3",
+			"col": "2",
+			"floorImage": "Brown Grass",
+			"mapIcon": "",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": true,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "NWCamp",
+			"row": "2",
+			"col": "2",
+			"floorImage": "Brown Grass",
+			"mapIcon":  "Camp",
+			"northWestSouthEastMarker": false,
+			"northEastSouthWestMarker": false,
+			"flipMapIcon": false
+		},
+		{
+			"locationName": "",
 			"row": "4",
 			"col": "5",
 			"floorImage": "Brown Grass",

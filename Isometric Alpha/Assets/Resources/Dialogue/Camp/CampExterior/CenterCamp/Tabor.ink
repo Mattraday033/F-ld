@@ -4,17 +4,21 @@ VAR wisdom = 0
 VAR charisma = 0
 
 VAR heardTaborsLesson = false
+VAR weftAddedToParty = false
 
 VAR taborIndex = 1
 VAR feherIndex = 2
 VAR brandedIndex = 3
 VAR brandedOneIndex = 4
 VAR brandedTwoIndex = 5
+VAR weftIndex = 6
 
 VAR playerName = ""
 
 {
--heardTaborsLesson:
+-heardTaborsLesson and weftAddedToParty:
+->3a
+-heardTaborsLesson and not weftAddedToParty:
 ->2a
 -else:
 ->1a
@@ -24,12 +28,21 @@ VAR playerName = ""
 
 ... and that's why it's imperative that the lesson be delivered in this manner. The pain conveys import, the blood pounding in your ears lets in only the sound of the instructor's voic- what's this? Another student here to learn at the feet of the teacher? Sit with the others, and don't make a sound.
 
+{
+-weftAddedToParty:
     +Yessir!
         ->1b
-
+    +I was told my hutmate and I were to be at your disposal.
+        I see. Since you're new, it will do you some good to hear this lesson. When we're finished I'll give you your assignment.
+        ->1b
+-else:
+    +Yessir!
+        ->1b
     +My apologies, sir, but I am on a task for Guard László and I can't be late. *Show badge*
         Fine then, move along.
         ->Close
+}
+
 
 
 === 1b ===
@@ -58,7 +71,7 @@ From the top: I am Chief Correctional Officer Tabor. I am in charge of rehabilit
 
     +Yes, Chief Tabor!
         ->1c
-    +\*Say nothing*.
+    +\*Say nothing.*
         ->1ba
 
 === 1ba ===
@@ -181,47 +194,12 @@ setToTrue(heardTaborsLesson)
 
 Feher is going to spend the rest of the day tied to this post unless, Gods forbid, one of you needs a lesson yourself. Now, Priest Rikard has asked me to remind you that his sermons are open to any volunteers. The Temple is behind you and on your right. Otherwise, stay with me and I will return you to your quarters. Dismissed!
 
-->Close
-
-=== 1e ===
-
-->Close
-
-=== 1f ===
-
-->Close
-
-=== 1g ===
-
-->Close
-
-=== 1h ===
-
-->Close
-
-=== 1i ===
-
-->Close
-
-=== 1j ===
-
-->Close
-
-=== 1k ===
-
-->Close
-
-=== 1l ===
-
-->Close
-
-=== 1m ===
-
-->Close
-
-=== 1n ===
-
-->Close
+{
+-weftAddedToParty:
+    ->3a
+-else:
+    ->Close
+}
 
 === 2a === 
 
@@ -229,59 +207,73 @@ What are you doing back here. Get back to work!
 
 ->Close
     
-=== 2b ===
-
-->Close
-
-=== 2c ===
-
-->Close
-
-=== 2d ===
-
-->Close
-
-=== 2e ===
-
-->Close
-
-=== 2f ===
-
-->Close
-
-=== 2h ===
-
-->Close
-
-=== 2i ===
-
-->Close
-
-=== 2j ===
-
-->Close
-
-=== 2k ===
-
-->Close
-
-=== 2l ===
-
-->Close
-
-=== 2m ===
-
-->Close
-
-=== 2n ===
-
-->Close
-
 === 3a ===
 
-->Close
+fadeToBlack()
+
+movePlayer(2,4)
+setFacing(NE)
+activate({weftIndex})
+
+deactivate({brandedIndex})
+deactivate({brandedOneIndex})
+deactivate({brandedTwoIndex})
+
+fadeBackIn(60)
+
+I'm familiar with Weft, of course, but what is your name, newling?
+
+    +I'm {playerName}, sir.
+        ->3b
 
 === 3b ===
+
+Well, {playerName}, you and Weft will be working with me today. We are expecting a large shipment of slaves in the coming weeks, to both replace our recent losses and to increase our work rate in the mines. You two will be building houses in the incomplete section of the camp to accomodate this new shipment.
+
+    +Losses? What losses?
+        That doesn't concern you. Do not interrupt again.
+        ->3c
+    +\*Say nothing.*
+        ->3c
+
+=== 3c ===
+
+The section of the camp you'll be working in is on the north west side of the camp. Just go back west until you pass Weft's hut again, and then turn north. If you pass the well, you've gone too far. I'll meet you there. You are dismissed.
+
+fadeToBlack()
+
+setFacing(NW)
+
+setNPCFacing({weftIndex},SE)
+
+changeCamTarget({weftIndex})
+
+deactivate({taborIndex})
+
+fadeBackIn(60)
+
+We'd best get a move on, before Tabor thinks we're slacking off.
+
+    ->3ca
+
+=== 3ca ===
+
+    +What did he mean by "losses"?
+        When the mine was closed, there was a rumor that was going around that some miners were trapped down there. Maybe some guards too. But the guards are keeping everything buttoned up tight, so I don't know much more than that.
+        ->3ca
+    +I don't know anything about building houses. Why did he pick me for this?
+        It's not so hard, it's more manual labor than actual carpentry. The Lovashi don't take pride in construction like the Craft Folk do, especially when it's building shacks for their slaves. You'll lay some mud bricks, put some thatch over some boards and we'll be done before you know it.
+        ->3ca
+    +Yes, let's go.
+        ->deactivateExtras
+
+=== deactivateExtras ===
+
+fadeToBlack()
+
+deactivate({weftIndex})
+
+fadeBackIn(60)
 
 ->Close
 

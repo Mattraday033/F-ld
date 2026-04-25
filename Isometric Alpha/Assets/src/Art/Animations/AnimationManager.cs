@@ -953,7 +953,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
         if(shadowSprite != null)
         {
-            shadowSprite.enabled = false;
+            // shadowSprite.enabled = false;
+            shadowSprite.gameObject.SetActive(false);
         }
     }
 
@@ -966,7 +967,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         
         if(shadowSprite != null)
         {
-            shadowSprite.enabled = true;
+            // shadowSprite.enabled = true;
+            shadowSprite.gameObject.SetActive(true);
         }
 
     }

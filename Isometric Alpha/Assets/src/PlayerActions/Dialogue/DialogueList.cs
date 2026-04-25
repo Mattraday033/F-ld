@@ -156,12 +156,24 @@ public static class DialogueList
                             Resources.Load<TextAsset>(DialogueNameList.fallenBeamPath)));
 
         #endregion
-        #region Slave Shack 9
+        #region Slave Shack 8
 
         addDialogueToList(LocationNameList.slaveShackEight, NPCNameList.weft,
-                            new Dialogue(new string[] { NPCNameList.weft},
+                            new Dialogue(new string[] { NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.weft,
+                                                        NPCNameList.overseer
+                                                        },
                             Resources.Load<TextAsset>(DialogueNameList.weftPath)));
 
+        #endregion
+
+        #region Guard Shack
+        addDialogueToList(LocationNameList.guardShack, NPCNameList.guardLaszlo,
+                            new Dialogue(new string[] { NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.guardLaszlo,
+                                                        NPCNameList.weft
+                                                        },
+                            Resources.Load<TextAsset>(DialogueNameList.laszloPath)));
         #endregion
 
         #region Guard House NE
@@ -346,7 +358,8 @@ public static class DialogueList
                                                         NPCNameList.feher,
                                                         NPCNameList.branded,
                                                         NPCNameList.branded+1,
-                                                        NPCNameList.branded+2},
+                                                        NPCNameList.branded+2,
+                                                        NPCNameList.weft},
                             Resources.Load<TextAsset>(DialogueNameList.taborPath)));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.feher,
@@ -660,6 +673,12 @@ public static class DialogueList
         addDialogueToList(LocationNameList.campManse, NPCNameList.barracksGate+2,
                             new SingleCharacterDialogue(NPCNameList.barracksGate+2,
                             Resources.Load<TextAsset>(DialogueNameList.barracksGatePath)));
+        #endregion
+        #region NWCamp
+
+        addDialogueToList(LocationNameList.campNorthWest, NPCNameList.guard,
+                            new SingleCharacterDialogue(NPCNameList.guard,
+                            Resources.Load<TextAsset>(DialogueNameList.guardNWPath)));
 
         #endregion
 

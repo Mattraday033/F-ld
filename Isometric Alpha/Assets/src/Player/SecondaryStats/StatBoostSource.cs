@@ -19,6 +19,7 @@ public abstract class StatBoostSource : INameSource
             case ItemList.rottenSandalsKey:
             case ItemList.clothGlovesKey:
             case ItemList.slaveRagsKey:
+            case ItemList.servantsClothesKey:
                 return "1";
             case ItemList.thatchNecklaceKey:
             case ItemList.bronzeBadgeKey:

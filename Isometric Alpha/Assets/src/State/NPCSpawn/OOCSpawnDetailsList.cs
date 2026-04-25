@@ -174,11 +174,19 @@ public static class OOCSpawnDetailsList
         #region 8SlaveShack
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.weft, new Vector3Int(3, -5), LocationNameList.slaveShackEight, facing: Facing.NorthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.weft, new Vector3Int(3, -5), LocationNameList.slaveShackEight, facing: Facing.NorthWest, speakAtStartScript: new WeftIntroScript()));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.overseer, new Vector3Int(3, -6), facing: Facing.NorthWest));
 
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackEight, list);
         #endregion
 
+        #region Guard Shack
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardLaszlo, new Vector3Int(12, 4), LocationNameList.guardShack, facing: Facing.NorthEast));
+
+        oocSpawnDetailsDict.Add(LocationNameList.guardShack, list);
+        #endregion
         #region GuardHouse Top Floor
         list = new List<OOCSpawnDetails>();
 
@@ -392,6 +400,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.branded+1, new Vector3Int(0, 4), LocationNameList.campCenter, animationName: NPCNameList.ervin, facing: Facing.NorthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.branded+2, new Vector3Int(0, 3), LocationNameList.campCenter, animationName: NPCNameList.slaveThree, facing: Facing.NorthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.feher, new Vector3Int(4, 4), LocationNameList.campCenter, facing: Facing.SouthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(2, 6), facing: Facing.NorthEast));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(8, -1), facing: Facing.SouthWest));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.page, new Vector3Int(5, 0), LocationNameList.campCenter, facing: Facing.SouthEast));
@@ -669,6 +678,13 @@ public static class OOCSpawnDetailsList
                                                     Ladder.barracksLadderDescription, Facing.SouthEast), flipX: Constants.flipX));
 
         oocSpawnDetailsDict.Add(LocationNameList.campManse, list);
+        #endregion
+        #region NWCamp
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard, new Vector3Int(-14, 0),LocationNameList.campNorthWest,  animationName: MonsterNameList.axeman, facing: Facing.SouthWest));
+
+        oocSpawnDetailsDict.Add(LocationNameList.campNorthWest, list);
         #endregion
 
         #region MineLvl_1

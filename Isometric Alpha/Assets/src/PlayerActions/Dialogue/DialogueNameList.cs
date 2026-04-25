@@ -96,9 +96,14 @@ public static class DialogueNameList
     public const string vazulPath = campInteriorPathName + LocationNameList.slaveShackSix + Constants.seperatorChar + "Vazul";
     public const string immovableRubblePath = campInteriorPathName + LocationNameList.slaveShackSix + Constants.seperatorChar + "ImmovableRubble";
     #endregion
-    #region Slave Shack 9
+    #region Slave Shack 8
     public const string weftPath = campInteriorPathName + LocationNameList.slaveShackEight + Constants.seperatorChar + NPCNameList.weft;
     #endregion
+
+    #region Guard Shack
+    public const string laszloPath = campInteriorPathName + LocationNameList.guardShack + Constants.seperatorChar + NPCNameList.guardLaszlo;
+    #endregion
+
 
     #region Guard House SW
 
@@ -205,7 +210,9 @@ public static class DialogueNameList
     public const string taborAfterClayFightPath = campExteriorPathName + LocationNameList.campSouthEast + Constants.seperatorChar + "TaborAfterClayFight";
 
     #endregion
-
+    #region Camp North West
+    public const string guardNWPath = campExteriorPathName + LocationNameList.campNorthWest + Constants.seperatorChar + "NWCamp Guard";
+    #endregion
     #endregion
 
     #region Mine

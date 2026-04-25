@@ -130,6 +130,7 @@ public static class ItemList
     public const int wickedKnifeIndex = 26; //Mine lvl 2 5b (dexterity room)
     public const int leatherArmorIndex = 27;
     public const int signalTorchIndex = 28;
+    public const int servantsClothesIndex = 29;
 
 	public const int leafSamplesIndex = 0;
 	public const int guardDiaryIndex = 1;
@@ -194,6 +195,7 @@ public static class ItemList
 	public const string clothGlovesKey = "Cloth " + glovesSuffix;
     public const string rottenSandalsKey = "Rotten " + sandalsSuffix;
     public const string potLidKey = "Pot Lid";
+	public const string servantsClothesKey = "Servants Clothes";
 
     private const string salvagedGuardSetPrefix = "Salvaged Guard ";
 	public const string salvagedGuardHelmKey = salvagedGuardSetPrefix + helmSuffix;
@@ -312,6 +314,7 @@ public static class ItemList
 		armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, wickedKnifeIndex), wickedKnifeKey, "A barbed knife, meant for gouging.", "2D + 3", "2D + 1", "WickedKnife"));
 		armor.Add(new TierOneBody(new ItemListID(armorListIndex, leatherArmorIndex), leatherArmorKey, "Leather pads of tanned oxhide that cover the torso."));
 		armor.Add(new Trinket(new ItemListID(armorListIndex, signalTorchIndex), signalTorchKey, "A large torch used to direct archers in combat."));
+		armor.Add(new TierZeroBody(new ItemListID(armorListIndex, servantsClothesIndex), slaveRagsKey, "A plain robe, bleached white and paired with a colored sash."));
 
 		//QuestItem(string key, string loreDescription, int ID)
 

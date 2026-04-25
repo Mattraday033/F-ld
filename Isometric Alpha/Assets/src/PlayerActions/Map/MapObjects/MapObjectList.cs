@@ -201,6 +201,11 @@ public static class MapObjectList
 			case LocationNameList.guardHouseTopFloor:
 			
 				return new MapInterior(ZoneKeyList.lovashiCamp, LocationNameList.guardHouseTopFloor, "Barracks 2F", interiorIndexTwo, LocationNameList.campManse);
+
+			case LocationNameList.campNorthWest:
+
+				return new MapLocation(ZoneKeyList.lovashiCamp, LocationNameList.campNorthWest, "North West", notFastTravelAccessible, zeroInteriors, new string[] { LocationNameList.campManse});
+
 		}
 
         string mineLvl1SceneName = name;

@@ -200,6 +200,11 @@ public static class SpawnParamsList
 
         #endregion
 
+        #region Guard Shack
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.guardShack, NPCNameList.guardLaszlo), defaultBeforeRevoltSpawnParams);
+
+        #endregion
         #region Guard House NE
 
         InteractableSpawnParams barracksGateSpawnParams = new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }), spawnWhileHostile: spawnWhileHostile, onlySpawnWhileHostile: onlySpawnWhileHostile);

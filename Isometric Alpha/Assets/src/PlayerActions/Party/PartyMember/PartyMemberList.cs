@@ -44,12 +44,38 @@ public static class PartyMemberList
                                                                                     null
                                                                                     };
 
+    private readonly static EquippableItem[] weftStartingArmor = new EquippableItem[] {
+                                                                                    null, 
+                                                                                    null,
+                                                                                    ItemList.getItem(new ArmorListID(ItemList.servantsClothesIndex)) as EquippableItem,
+                                                                                    null,
+                                                                                    null,
+                                                                                    null
+                                                                                    };
+
     public static PartyMember getResetPartyMember(string allyName)
     {
         AbilityList.initialize();
 
         switch (allyName)
         {
+            case NPCNameList.carter:
+
+                PartyMember carter = new PartyMember(new AllyStats(NPCNameList.carter, normalStat, higherDexterity, normalStat, normalStat));
+
+                carter.stats.combatActionArray = new CombatActionArray(carter.stats, Dexterity.getStartingActions(carter.stats));
+                carter.stats.combatActionArray.equipCombatAction(new Attack(carter.stats, ItemList.getItem(ItemList.weaponsListIndex, ItemList.lightPickIndex) as Weapon), 0);
+                carter.stats.equippedItems = new EquippedItems(carter.stats, carterStartingArmor);
+
+                return carter;
+            case NPCNameList.nandor:
+
+                PartyMember nandor = new PartyMember(new AllyStats(NPCNameList.nandor, normalStat, normalStat, higherWisdom, normalStat));
+
+                nandor.stats.combatActionArray = new CombatActionArray(nandor.stats, Wisdom.getStartingActions(nandor.stats));
+                nandor.stats.equippedItems = new EquippedItems(nandor.stats, nandorStartingArmor);
+
+                return nandor;
             case NPCNameList.thatch:
 
                 PartyMember thatch = new PartyMember(new AllyStats(NPCNameList.thatch, higherStrength, normalStat, normalStat, normalStat));
@@ -59,23 +85,16 @@ public static class PartyMemberList
                 thatch.stats.equippedItems = new EquippedItems(thatch.stats, thatchStartingArmor);
 
                 return thatch;
-            case NPCNameList.nandor:
 
-                PartyMember nandor = new PartyMember(new AllyStats(NPCNameList.nandor, normalStat, normalStat, higherWisdom, normalStat));
+            case NPCNameList.weft:
 
-                nandor.stats.combatActionArray = new CombatActionArray(nandor.stats, Wisdom.getStartingActions(nandor.stats));
-                nandor.stats.equippedItems = new EquippedItems(nandor.stats, nandorStartingArmor);
+                PartyMember weft = new PartyMember(new AllyStats(NPCNameList.weft, normalStat, normalStat, normalStat, higherCharisma));
 
-                return nandor;
-            case NPCNameList.carter:
+                weft.stats.combatActionArray = new CombatActionArray(weft.stats, Dexterity.getStartingActions(weft.stats));
+                weft.stats.combatActionArray.equipCombatAction(new Attack(weft.stats, ItemList.getItem(ItemList.weaponsListIndex, ItemList.sharpRockIndex) as Weapon), 0);
+                weft.stats.equippedItems = new EquippedItems(weft.stats, weftStartingArmor);
 
-                PartyMember carter =  new PartyMember(new AllyStats(NPCNameList.carter, normalStat, higherDexterity, normalStat, normalStat));
-
-                carter.stats.combatActionArray = new CombatActionArray(carter.stats, Dexterity.getStartingActions(carter.stats));
-                carter.stats.combatActionArray.equipCombatAction(new Attack(carter.stats, ItemList.getItem(ItemList.weaponsListIndex, ItemList.lightPickIndex) as Weapon), 0);
-                carter.stats.equippedItems = new EquippedItems(carter.stats, carterStartingArmor);
-
-                return carter;
+                return weft;
         }
 
         PartyMember defaultPartyMember = getResetPartyMember(NPCNameList.carter);

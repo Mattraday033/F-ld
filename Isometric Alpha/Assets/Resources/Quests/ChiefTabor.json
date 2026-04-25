@@ -1,0 +1,14 @@
+{
+	"title": "Chief Tabor",
+	"numberOfSteps": 2,
+	"steps":[	
+				{"stepName":"Find Chief Tabor.","MapZone":"Camp","MapLocation":"CenterCamp","journalDescription":"<B>Weft said that he was being summoned by Chief Tabor. I can find the chief in the center of camp.</B>"},
+	            {"stepName":"Quest Finished","MapZone":"","MapLocation":"","journalDescription":"Quest Finished"}
+            ],
+			
+	
+	"deathSteps":
+			[
+			]
+	
+}

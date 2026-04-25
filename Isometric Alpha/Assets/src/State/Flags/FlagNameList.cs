@@ -41,6 +41,12 @@ public static class FlagNameList
         public const string spokeToGézaAboutPlan = "spokeToGézaAboutPlan"; //if the player has spoken to Géza after the first conversation
         public const string givenTaskByLaszlo = "givenTaskByLaszlo"; //if Guard László has told you to get Weft his rations.
 
+        //weft flags
+        public const string metWeft = "metWeft";
+        public const string liedToWeftAboutHearingExtortion = "liedToWeftAboutHearingExtortion";
+        public const string weftAddedToParty = "weftAddedToParty";
+        public const string toldByTaborToBuildHouses = "toldByTaborToBuildHouses";
+
         //kastor convo flags
         public const string metKastor = "metKastor"; //if the player has spoken to Kastor before
         public const string kastorReactedToHostility = "kastorReactedToHostility";

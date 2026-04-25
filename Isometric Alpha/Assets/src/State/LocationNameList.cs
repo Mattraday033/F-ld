@@ -142,6 +142,7 @@ public static class LocationNameList
     public const string campManse = "Manse" + ZoneKeyList.lovashiCamp;
     public const string campSouthEast = "SE" + ZoneKeyList.lovashiCamp;
     public const string campMineEntrance = "MineEntrance" + ZoneKeyList.lovashiCamp;
+    public const string campNorthWest = "NW" + ZoneKeyList.lovashiCamp;
     #endregion
 
     #endregion

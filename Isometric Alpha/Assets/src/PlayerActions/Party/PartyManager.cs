@@ -76,9 +76,10 @@ public static class PartyManager
     {
         partyMemberDict = new Dictionary<string, PartyMember>();
 
-        partyMemberDict.Add(NPCNameList.thatch, PartyMemberList.getResetPartyMember(NPCNameList.thatch));
-        partyMemberDict.Add(NPCNameList.nandor, PartyMemberList.getResetPartyMember(NPCNameList.nandor));
         partyMemberDict.Add(NPCNameList.carter, PartyMemberList.getResetPartyMember(NPCNameList.carter));
+        partyMemberDict.Add(NPCNameList.nandor, PartyMemberList.getResetPartyMember(NPCNameList.nandor));
+        partyMemberDict.Add(NPCNameList.thatch, PartyMemberList.getResetPartyMember(NPCNameList.thatch));
+        partyMemberDict.Add(NPCNameList.weft, PartyMemberList.getResetPartyMember(NPCNameList.weft));
     }
 
     public static void removeAllPartyMembersFromCurrentParty()
@@ -220,7 +221,12 @@ public static class PartyManager
 
     public static void setPartyMemberDict(Dictionary<string, PartyMember> newDict)
     {
-        partyMemberDict = newDict;
+        resetPartyMembers();
+
+        foreach(KeyValuePair<string, PartyMember> kvp in newDict)
+        {
+            partyMemberDict[kvp.Key] = kvp.Value;
+        }
     }
 
     public static void addXP(string xpToAdd)
