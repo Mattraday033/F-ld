@@ -5,6 +5,7 @@ using UnityEngine;
 public static class LayerAndTagManager
 {
 
+    public readonly static int defaultLayer = LayerMask.NameToLayer("Default");
 	public readonly static int playerLayer = LayerMask.NameToLayer("Player");
 	public readonly static int colliderLayer = LayerMask.NameToLayer("Collider");
 	public readonly static int enemyBoundaryLayer = LayerMask.NameToLayer("EnemyBoundary");

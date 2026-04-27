@@ -544,12 +544,12 @@ public static class TutorialSequenceList
                                                                 createPopUpScreenBlocker: createPopUpScreenBlocker,
                                                                 scriptAtStart: new RemoveAllFollowersScript(),
                                                                 scriptAtEnd: new MovePlayerNorthWestScript());
-        TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.leadershipTutorialMessagePrefix + 2,
-                                                                tutorialButtonOneTargetHash,
-                                                                ArrowDirection.Left,
-                                                                skipHighlight: highlight,
-                                                                skipUnhighlight: unhighlight,
-                                                                createPopUpScreenBlocker: createPopUpScreenBlocker);
+        // TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.leadershipTutorialMessagePrefix + 2,
+        //                                                         tutorialButtonOneTargetHash,
+        //                                                         ArrowDirection.Left,
+        //                                                         skipHighlight: highlight,
+        //                                                         skipUnhighlight: unhighlight,
+        //                                                         createPopUpScreenBlocker: createPopUpScreenBlocker);
         TutorialSequenceStep stepThree = new TutorialSequenceStep(TutorialMessageList.leadershipTutorialMessagePrefix + 3,
                                                                   tutorialButtonOneTargetHash,
                                                                   ArrowDirection.Left,
@@ -580,7 +580,7 @@ public static class TutorialSequenceList
                                                                 createPopUpScreenBlocker: createPopUpScreenBlocker,
                                                                 scriptAtEnd: new MovePlayerNorthEastScript());
 
-        TutorialSequence leadershipTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, leadershipTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree, stepFour, stepFive, stepSix });
+        TutorialSequence leadershipTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, leadershipTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepThree, stepFour, stepFive, stepSix });
 
         leadershipTutorialSequence.setSkipScript(new SkipTutorialScript());
         tutorialSequenceDictionary.Add(leadershipTutorialSequenceKey, leadershipTutorialSequence);

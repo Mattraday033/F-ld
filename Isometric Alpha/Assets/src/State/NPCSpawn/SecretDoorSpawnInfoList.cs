@@ -90,6 +90,17 @@ public static class SecretDoorSpawnInfoList
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.campSouthEast, list);
         #endregion
+        #region NWCamp
+        list = new List<SecretDoorSpawnInfo>();
+
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.campNorthWest, NPCNameList.wallPatch, PrefabNames.wallPatchTall, new Vector3Int(4, 1),
+                                            new SecretDoorInfo(SecretDoorKeyList.northWestCampWallPatchOne, addHostilityIfOutside: false), Constants.sizeThree, Axis.DescendingY, 
+                                            terrainSpriteName: PrefabNames.wallPatch, observable: () => Flags.getFlag(FlagNameList.startedTaborObservationTutorial),
+                                            script: new TaborObservationTutorialScript(),
+                                            tutorialTargetHash: TutorialSequenceList.secretDoorTargetHash));
+
+        secretDoorSpawnDetailsDict.Add(LocationNameList.campNorthWest, list);
+        #endregion
 
         #region Manse-1f
 
@@ -202,6 +213,7 @@ public abstract class AxisSpawnInfo
 
 }
 
+public delegate bool ObservableDelegate();
 
 public class SecretDoorSpawnInfo : AxisSpawnInfo
 {
@@ -209,6 +221,8 @@ public class SecretDoorSpawnInfo : AxisSpawnInfo
     private SecretDoorInfo secretDoorInfo;
     private string spritePathName;
     private string terrainSpriteName;
+    private ObservableDelegate observable;
+    private QuestStepActivationScript script;
 
     public SecretDoorSpawnInfo( string currentArea,
                                 string secretDoorName,
@@ -218,7 +232,9 @@ public class SecretDoorSpawnInfo : AxisSpawnInfo
                                 int size = 1, 
                                 Axis axis = Axis.DescendingX, 
                                 string tutorialTargetHash = "", 
-                                string terrainSpriteName = ""):
+                                string terrainSpriteName = "",
+                                ObservableDelegate observable = null,
+                                QuestStepActivationScript script = null):
     base(currentArea, startCell, size, axis)
     {
         this.secretDoorName = secretDoorName;
@@ -227,6 +243,9 @@ public class SecretDoorSpawnInfo : AxisSpawnInfo
 
         this.tutorialTargetHash = tutorialTargetHash;
         this.terrainSpriteName = terrainSpriteName;
+
+        this.observable = observable;
+        this.script = script;
     }
     
 
@@ -252,7 +271,7 @@ public class SecretDoorSpawnInfo : AxisSpawnInfo
                 currentCell.y -= index;
             }
 
-            list.Add(new SecretDoorSpawnDetails(secretDoorName, currentCell, currentArea, secretDoorInfo, tutorialTargetHash, spritePathName, terrainSpriteName));
+            list.Add(new SecretDoorSpawnDetails(secretDoorName, currentCell, currentArea, secretDoorInfo, tutorialTargetHash, spritePathName, terrainSpriteName, observable, script));
         }
 
         return list;

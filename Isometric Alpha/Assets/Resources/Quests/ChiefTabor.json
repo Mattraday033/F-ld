@@ -1,9 +1,19 @@
 {
 	"title": "Chief Tabor",
-	"numberOfSteps": 2,
+	"numberOfSteps": 4,
 	"steps":[	
 				{"stepName":"Find Chief Tabor.","MapZone":"Camp","MapLocation":"CenterCamp","journalDescription":"<B>Weft said that he was being summoned by Chief Tabor. I can find the chief in the center of camp.</B>"},
-	            {"stepName":"Quest Finished","MapZone":"","MapLocation":"","journalDescription":"Quest Finished"}
+				{"stepName":"Building houses.","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"Chief Tabor has me working on a construction detail. <B>I'm to meet Tabor in the north west section of the camp, which is just north of the Manse.</B>"},
+				{"stepName":"To the mess hall.","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"Tabor was called away to handle a 'situation', leaving Weft and I to get our midday meals on our own. <B>I should head to the mess hall, which the Chief said was the large building with a wooden roof in the camp's southeast corner.</B>"},
+                {"stepName":"Kill the bat.","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"<B>Enter the unfinished shack in the northwest corner of the camp and kill the bat there.</B>"},
+                {"stepName":"Return to Tabor.1","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"<B>Return to Chief Tabor for your next assignment.</B>"},
+                {"stepName":"Use the crank.","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"<B>Use the Crank next to the unfinished shack in the northwest corner of the camp.</B>"},
+                {"stepName":"Return to Tabor.2","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"<B>Return to Chief Tabor for your next assignment.</B>"},
+                {"stepName":"Clear the rubble.","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"<B>Have two Party Members stand on the two buttons inside the shack to clear the rubble.</B>"},
+                {"stepName":"Return to Tabor.3","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"<B>Return to Chief Tabor for your next assignment.</B>"},
+                {"stepName":"Remove the wall patch.","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"<B>Remove the wall patch at the back of the unfinished shack in the northwest corner of the camp.</B>"},
+                {"stepName":"Return to Tabor.4","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"<B>Return to Chief Tabor for your next assignment.</B>"},
+                {"stepName":"Quest Finished","MapZone":"","MapLocation":"","journalDescription":"Quest Finished"}
             ],
 			
 	

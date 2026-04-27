@@ -172,6 +172,14 @@ public static class MonsterSpawnDetailsList
         monsterSpawnDetailsDict.Add(LocationNameList.campManse, list);
         #endregion
 
+        #region NWCamp
+        list = new List<MonsterSpawnDetails>();
+
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(-6, 1), Facing.NorthEast, MonsterMovementType.Stationary, tutorialTargetHash: TutorialSequenceList.secondTutorialEnemyTargetHash));
+
+        monsterSpawnDetailsDict.Add(LocationNameList.campNorthWest, list);
+        #endregion
+
         #endregion
 
         #region Mine Levels 1-3

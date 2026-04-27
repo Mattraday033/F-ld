@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Ink.Runtime;
 
 public class SecretDoorInfo : IStoryVariableSource
@@ -136,6 +137,10 @@ public class ObservableObject : MonoBehaviour, INonRevealableNameSource
     }
 
     public DialogueTrigger dialogueTrigger;
+    
+    public QuestStepActivationScript script;
+
+    public readonly static UnityEvent SetAllSecretDoorsObservable = new UnityEvent();
 
     public string getName()
     {
@@ -158,12 +163,19 @@ public class ObservableObject : MonoBehaviour, INonRevealableNameSource
     {
         SecretDoorFlags.OnSecretDoorDiscovery.AddListener(hideSecretDoor);
         TerrainVisibilityManager.OnTerrainVisibilityChange.AddListener(setTerrainSprite);
+        SetAllSecretDoorsObservable.AddListener(setGameObjectObservable);
     }
 
     private void OnDestroy()
     {
         SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(hideSecretDoor);
         TerrainVisibilityManager.OnTerrainVisibilityChange.RemoveListener(setTerrainSprite);
+        SetAllSecretDoorsObservable.RemoveListener(setGameObjectObservable);
+    }
+
+    private void setGameObjectObservable()
+    {
+        gameObject.layer = LayerAndTagManager.observableLayer;
     }
 
     public void setTerrainSprite(TerrainHiddenState terrainState)
@@ -242,6 +254,11 @@ public class ObservableObject : MonoBehaviour, INonRevealableNameSource
     {
         if (secretDoorKeys.Contains(doorToBeHidden))
         {
+            if(script != null)
+            {
+                script.runScript();
+            }
+
             playAudioClip();
             GameObject.DestroyImmediate(gameObject);
         }

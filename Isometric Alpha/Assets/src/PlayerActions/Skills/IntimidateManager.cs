@@ -42,6 +42,10 @@ public class IntimidateManager : CunningManager
 
     public static int getIntimidatesRemaining()
     {
+        if(PartyStats.inTutorialArea() && Flags.getFlag(FlagNameList.startedTaborIntimidateTutorial))
+        {
+            return 1;
+        }
 
         if (intimidatesRemaining < 0)
         {
@@ -136,7 +140,7 @@ public class IntimidateManager : CunningManager
 
     public override bool canUseSkill()
     {
-        return targetsFound > 0 && intimidatesRemaining > 0;
+        return targetsFound > 0 && getIntimidatesRemaining() > 0;
     }
 
     public override string getTilePrefabName()

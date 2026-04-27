@@ -492,6 +492,7 @@ public static class AreaList
 		{
 			case LocationNameList.slaveShackSix:
 			case LocationNameList.guardHouseTopFloor:
+			case LocationNameList.campNorthWest:
 				return true;
 			default:
 				return false;

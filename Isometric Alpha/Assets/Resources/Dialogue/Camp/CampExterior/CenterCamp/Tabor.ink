@@ -228,6 +228,8 @@ I'm familiar with Weft, of course, but what is your name, newling?
 
 === 3b ===
 
+setToTrue(toldByTaborToBuildHouses)
+
 Well, {playerName}, you and Weft will be working with me today. We are expecting a large shipment of slaves in the coming weeks, to both replace our recent losses and to increase our work rate in the mines. You two will be building houses in the incomplete section of the camp to accomodate this new shipment.
 
     +Losses? What losses?
@@ -258,7 +260,7 @@ We'd best get a move on, before Tabor thinks we're slacking off.
 
 === 3ca ===
 
-    +What did he mean by "losses"?
+    +What did he mean by 'losses'?
         When the mine was closed, there was a rumor that was going around that some miners were trapped down there. Maybe some guards too. But the guards are keeping everything buttoned up tight, so I don't know much more than that.
         ->3ca
     +I don't know anything about building houses. Why did he pick me for this?
@@ -270,6 +272,8 @@ We'd best get a move on, before Tabor thinks we're slacking off.
 === deactivateExtras ===
 
 fadeToBlack()
+
+activateQuestStep(Chief Tabor,Building houses.)
 
 deactivate({weftIndex})
 

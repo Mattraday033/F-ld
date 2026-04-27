@@ -163,6 +163,8 @@ public static class QuestList
                 NotificationManager.addToNotificationQueue(quest.steps[questStepName]);
             }
 
+            OOCUIManager.updateQuestCounter();
+            
 			return quest;
 		}
 		else if (quest.steps.ContainsKey(questStepName) &&
@@ -174,6 +176,8 @@ public static class QuestList
 		{
 			Debug.LogError("Unknown quest: " + questTitle + " or quest step: " + questStepName);
 		}
+
+        OOCUIManager.updateQuestCounter();
 
 		return null;
 	}

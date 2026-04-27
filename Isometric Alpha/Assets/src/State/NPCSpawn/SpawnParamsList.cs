@@ -353,7 +353,11 @@ public static class SpawnParamsList
                                                                                           FlagNameList.directorDefeated,
                                                                                           FlagNameList.heardTaborsLesson }), spawnWhileHostile: doesNotSpawnWhileHostile);
 
-        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.chiefTabor), taborLessonSpawnParams);
+        InteractableSpawnParams taborCenterCampSpawnParams = new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted,
+                                                                                          FlagNameList.directorDefeated,
+                                                                                          FlagNameList.toldByTaborToBuildHouses }), spawnWhileHostile: doesNotSpawnWhileHostile);
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.chiefTabor), taborCenterCampSpawnParams);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.branded), taborLessonSpawnParams);
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.branded + 1), taborLessonSpawnParams);
@@ -698,6 +702,83 @@ public static class SpawnParamsList
                                new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[]{FlagNameList.directorDefeated, FlagNameList.barricadeGuardDefeatKey3}), onlySpawnWhileHostile: onlySpawnWhileHostile));
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campManse, NPCNameList.guardAndras+3),
                                new InteractableSpawnParams(new NeverSpawnFlagList()));
+        #endregion
+
+        #region Camp North West
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.guard),
+                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, 
+                                                                                                                         FlagNameList.directorDefeated, 
+                                                                                                                         FlagNameList.canEnterCampNorthWest, 
+                                                                                                                         FlagNameList.toldToGetMealByTabor
+                                                                                                                         }),
+                                                            spawnWhileHostile: spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.chiefTabor),
+                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] { 
+                                                                                                                         FlagNameList.startedTaborObservationTutorial,
+                                                                                                                         }),
+                                                            stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                                                         FlagNameList.revoltStarted, 
+                                                                                                                         FlagNameList.directorDefeated,  
+                                                                                                                         FlagNameList.toldToGetMealByTabor
+                                                                                                                         }),
+                                                            spawnWhileHostile: spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.chiefTabor+1),
+                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] { 
+                                                                                                                         FlagNameList.toldByTaborToBuildHouses,
+                                                                                                                         }),
+                                                            stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                                                         FlagNameList.revoltStarted, 
+                                                                                                                         FlagNameList.directorDefeated, 
+                                                                                                                         FlagNameList.startedTaborIntimidateTutorial
+                                                                                                                         }),
+                                                            spawnWhileHostile: spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.chiefTabor+2),
+                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] { 
+                                                                                                                         FlagNameList.startedTaborIntimidateTutorial
+                                                                                                                         }),
+                                                            stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                                                         FlagNameList.revoltStarted, 
+                                                                                                                         FlagNameList.directorDefeated, 
+                                                                                                                         FlagNameList.startedTaborCunningTutorial
+                                                                                                                         }),
+                                                            spawnWhileHostile: spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.chiefTabor+3),
+                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] { 
+                                                                                                                         FlagNameList.finishedTaborCunningTutorial
+                                                                                                                         }),
+                                                            stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                                                         FlagNameList.revoltStarted, 
+                                                                                                                         FlagNameList.directorDefeated, 
+                                                                                                                         FlagNameList.startedTaborLeadershipTutorial
+                                                                                                                         }),
+                                                            spawnWhileHostile: spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.chiefTabor+4),
+                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] { 
+                                                                                                                         FlagNameList.startedTaborLeadershipTutorial
+                                                                                                                         }),
+                                                            stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                                                         FlagNameList.revoltStarted, 
+                                                                                                                         FlagNameList.directorDefeated, 
+                                                                                                                         FlagNameList.startedTaborObservationTutorial
+                                                                                                                         }),
+                                                            spawnWhileHostile: spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.crank),
+                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] { 
+                                                                                                                         FlagNameList.finishedTaborIntimidateTutorial
+                                                                                                                         }),
+                                                            spawnWhileHostile: spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.halfWall + Constants.DEXDesignator),
+                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                                                         FlagNameList.finishedTaborIntimidateTutorial
+                                                                                                                         }),
+                                                            spawnWhileHostile: spawnWhileHostile));
         #endregion
 
         #region Mine

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class PathSegment
@@ -154,6 +155,8 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 	public string tutorialHash;
 
+    public readonly static UnityEvent OnOOCMonsterDefeat = new UnityEvent();
+
     private MonsterMovementType _MovementType = MonsterMovementType.Random;
     public virtual MonsterMovementType movementType
     {
@@ -190,6 +193,14 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         {
             retreatStun();
             SkillManager.OnSkillUse.Invoke();
+        }
+    }
+
+    private void disableIfDefeated()
+    {
+        if(isDefeated())
+        {
+            gameObject.SetActive(false);
         }
     }
 
@@ -739,12 +750,14 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     {
         RevealManager.OnReveal.AddListener(onReveal);
         TutorialSequence.TutorialSequenceTargetFinder.AddListener(assignToTutorialSequence);
+        OnOOCMonsterDefeat.AddListener(disableIfDefeated);
     }
 
 	public void destroyListeners()
 	{
 		RevealManager.OnReveal.RemoveListener(onReveal);
 		TutorialSequence.TutorialSequenceTargetFinder.RemoveListener(assignToTutorialSequence);
+        OnOOCMonsterDefeat.RemoveListener(disableIfDefeated);
 	}
 
 	public void onReveal(bool toggleReveal)

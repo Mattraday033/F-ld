@@ -46,6 +46,18 @@ public static class FlagNameList
         public const string liedToWeftAboutHearingExtortion = "liedToWeftAboutHearingExtortion";
         public const string weftAddedToParty = "weftAddedToParty";
         public const string toldByTaborToBuildHouses = "toldByTaborToBuildHouses";
+        public const string canEnterCampNorthWest = "canEnterCampNorthWest";
+        public const string skippedTutorialInNWCamp = "skippedTutorialInNWCamp";
+        public const string toldToGetMealByTabor = "toldToGetMealByTabor";
+        public const string acceptedTaborSkillTutorial = "acceptedTaborSkillTutorial";
+        public const string startedTaborIntimidateTutorial = "startedTaborIntimidateTutorial";
+        public const string finishedTaborIntimidateTutorial = "finishedTaborIntimidateTutorial";
+        public const string startedTaborCunningTutorial = "startedTaborCunningTutorial";
+        public const string finishedTaborCunningTutorial = "finishedTaborCunningTutorial";
+        public const string startedTaborObservationTutorial = "startedTaborObservationTutorial";
+        public const string finishedTaborObservationTutorial = "finishedTaborObservationTutorial";
+        public const string startedTaborLeadershipTutorial = "startedTaborLeadershipTutorial";
+        public const string finishedTaborLeadershipTutorial = "finishedTaborLeadershipTutorial";
 
         //kastor convo flags
         public const string metKastor = "metKastor"; //if the player has spoken to Kastor before

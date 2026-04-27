@@ -54,6 +54,25 @@ public static class GateSpawnInfoList
 
         #endregion
 
+        #region NWCamp
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero,
+                                    NPCNameList.awkwardRubble,
+                                    LocationNameList.campNorthWest,
+                                    new Vector3Int(-1, 2),
+                                    PrefabNames.blockRubble,
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX,
+                                    TutorialSequenceList.fallenBeamTargetHash,
+                                    useRubbleColor));
+
+        gateSpawnInfoDict.Add(LocationNameList.campNorthWest, list);
+
+        #endregion
+
+
         #region Guard House NE
 
         list = new List<GateSpawnInfo>();

@@ -677,8 +677,70 @@ public static class DialogueList
         #region NWCamp
 
         addDialogueToList(LocationNameList.campNorthWest, NPCNameList.guard,
-                            new SingleCharacterDialogue(NPCNameList.guard,
-                            Resources.Load<TextAsset>(DialogueNameList.guardNWPath)));
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.guard,
+                                                        NPCNameList.chiefTabor+1
+                                                      },
+                            Resources.Load<TextAsset>(DialogueNameList.guardNWPath),
+                            new TextAsset[]
+                            {
+                                Resources.Load<TextAsset>(DialogueNameList.taborEndOfTutorialPath)
+                            }));
+
+        addDialogueToList(LocationNameList.campNorthWest, NPCNameList.chiefTabor,
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.chiefTabor,
+                                                        NPCNameList.weft,
+                                                        NPCNameList.guard,
+                                                        NPCNameList.chiefTabor+1
+                                                      },
+                                Resources.Load<TextAsset>(DialogueNameList.taborEndOfTutorialPath)));
+
+        addDialogueToList(LocationNameList.campNorthWest, NPCNameList.chiefTabor+1,
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.chiefTabor+1,
+                                                        NPCNameList.weft,
+                                                        NPCNameList.guard,
+                                                        NPCNameList.chiefTabor+2
+                                                      },
+                                Resources.Load<TextAsset>(DialogueNameList.taborIntimidateTutorialPath)));
+
+        addDialogueToList(LocationNameList.campNorthWest, NPCNameList.chiefTabor+2,
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.chiefTabor+2,
+                                                        NPCNameList.weft,
+                                                        NPCNameList.guard,
+                                                        NPCNameList.chiefTabor+3
+                                                      },
+                                Resources.Load<TextAsset>(DialogueNameList.taborCunningTutorialPath)));
+
+        addDialogueToList(LocationNameList.campNorthWest, NPCNameList.chiefTabor+3,
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.chiefTabor+3,
+                                                        NPCNameList.weft,
+                                                        NPCNameList.guard,
+                                                        NPCNameList.chiefTabor+4
+                                                      },
+                                Resources.Load<TextAsset>(DialogueNameList.taborLeadershipTutorialPath)));
+
+        addDialogueToList(LocationNameList.campNorthWest, NPCNameList.chiefTabor+4,
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.chiefTabor+4,
+                                                        NPCNameList.weft,
+                                                        NPCNameList.guard,
+                                                        NPCNameList.chiefTabor
+                                                      },
+                                Resources.Load<TextAsset>(DialogueNameList.taborObservationTutorialPath)));
+
+
+        addDialogueToList(LocationNameList.campNorthWest, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
+        addDialogueToList(LocationNameList.campNorthWest, NPCNameList.wallPatch, wallPatchDialogue);
 
         #endregion
 

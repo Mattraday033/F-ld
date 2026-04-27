@@ -26,6 +26,11 @@ public class CunningManager : SkillManager
 
     public static int getCunningsRemaining()
     {
+        if(PartyStats.inTutorialArea() && Flags.getFlag(FlagNameList.startedTaborCunningTutorial))
+        {
+            return 2;
+        }
+
         if (cunningsRemaining < 0)
         {
             resetCunningsRemaining();

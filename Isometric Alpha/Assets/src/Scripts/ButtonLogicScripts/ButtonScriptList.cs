@@ -34,6 +34,16 @@ public static class ButtonScriptList
 
         #endregion
 
+        #region NWCamp
+
+        list = new List<ButtonLogicScript>();
+
+        list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeTwo, NPCNameList.awkwardRubble, new TaborLeadershipTutorialScript()));
+
+        scriptDict.Add(LocationNameList.campNorthWest, list);
+
+        #endregion
+
         #region MineLvl_1
 
         #region MineLvl_1-1b

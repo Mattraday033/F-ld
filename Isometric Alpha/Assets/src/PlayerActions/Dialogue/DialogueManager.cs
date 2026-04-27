@@ -142,7 +142,7 @@ public class DialogueManager : MonoBehaviour
 		return instance;
 	}
 
-	public void startDialogue(Dialogue dialogue)
+	public void startDialogue(Dialogue dialogue, bool midDialogue = false)
 	{
 		//Flags.printAll();
 
@@ -212,21 +212,23 @@ public class DialogueManager : MonoBehaviour
 			currentStory.variablesState[InkVariableNameList.attitude] = 0;
 		}
 
-		if (!dialogue.startWithUIDisabled)
-		{
-			dialogueTrackerButton.spawnEmptyPopUp();
-			dialogueTrackerWindow = (DialogueTrackerWindow)dialogueTrackerButton.getPopUpWindow();
+        if(!midDialogue)
+        {
+            if (!dialogue.startWithUIDisabled)
+            {
+                dialogueTrackerButton.spawnEmptyPopUp();
+                dialogueTrackerWindow = (DialogueTrackerWindow)dialogueTrackerButton.getPopUpWindow();
 
-			currentConversation = new Conversation(dialogueTrackerWindow);
-		}
-		else
-		{
-			currentConversation = new Conversation();
-		}
+                currentConversation = new Conversation(dialogueTrackerWindow);
+            }
+            else
+            {
+                currentConversation = new Conversation();
+            }
 
-		continueStory();
-
-		PlayerOOCStateManager.OnStateChangeToWalking.AddListener(onStateChangeToWalkingEvent);
+		    continueStory();
+		    PlayerOOCStateManager.OnStateChangeToWalking.AddListener(onStateChangeToWalkingEvent);
+        }
 	}
 
 	public void endDialogue()
@@ -487,6 +489,14 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
+                case "setsecretdoorsobservable":
+
+                    ObservableObject.SetAllSecretDoorsObservable.Invoke();
+
+                    continueStory();
+
+                    break;
+
                 case "activatequeststep":
 
                     string questTitle3 = getArgument(buffer);
@@ -495,8 +505,6 @@ public class DialogueManager : MonoBehaviour
                     checkForHaltNotificationBoolArg(buffer, Constants.indexTwo);
 
                     QuestList.activateQuestStep(questTitle3, questStepTitle);
-
-                    OOCUIManager.updateQuestCounter();
 
                     continueStory();
 
@@ -554,6 +562,26 @@ public class DialogueManager : MonoBehaviour
                     {
                         currentStory.variablesState[buffer] = false;
                     }
+                    continueStory();
+
+                    break;
+
+                case "settutorialtoseen":
+
+                    buffer = getArgument(buffer);
+
+                    TutorialFlags.setFlag(buffer, true);
+
+                    continueStory();
+
+                    break;
+
+                case "resettutorial":
+
+                    buffer = getArgument(buffer);
+
+                    TutorialFlags.setFlag(buffer, false);
+
                     continueStory();
 
                     break;
@@ -1353,6 +1381,17 @@ public class DialogueManager : MonoBehaviour
                     PlayerObject.spawnGameOverPopUp();
                     break;
 
+                case "defeatmonster":
+
+                    string locationName = getArgument(buffer, Constants.indexZero);
+                    int monsterIndex = getArgumentInt(buffer, Constants.indexOne);
+                    bool defeated = getArgumentBool(buffer, Constants.indexTwo);
+
+			        MonsterDefeatKeysList.setDefeatKey(locationName + "-" + monsterIndex, defeated);
+                    EnemyMovement.OnOOCMonsterDefeat.Invoke();
+
+                    continueStory();
+                    break;
                 case "swapinkfile": //swapInkFiles(int secondaryInkFileIndex, string startingBoolName)
                 case "swapinkfiles": //swapInkFiles(int secondaryInkFileIndex, string startingBoolName, bool safeToSwapDialogueObjects)
 
@@ -1381,6 +1420,28 @@ public class DialogueManager : MonoBehaviour
                     continueStory();
 
                     break;
+                case "getnewdialoguefromlist":
+
+                    string dialogueKey = getArgument(buffer, Constants.indexZero);
+                    startingBoolName = getArgument(buffer, Constants.indexOne);
+                                                      //if you want to start at the correct knot, 
+                                                       //you need to create/give a bool that tells 
+                                                       //the dialogue at the start to move to that 
+                                                       //knot. see the transition between MinersDialogue
+                                                       // and MarcosDialoge in MineLvl_3-Miners Camp
+                    bool wipeConversation = getArgumentBool(buffer, Constants.indexTwo);
+
+                    if(wipeConversation)
+                    {
+                        DialogueTrackerWindow.wipeDialogue();
+                    }
+
+                    startDialogue(DialogueList.getDialogue(dialogueKey), midDialogue: true); 
+                    currentStory.variablesState[startingBoolName.Replace(" ", "")] = true;
+
+                    continueStory();
+
+                    return;
                 case "entercombat":
 
                     int enemyPackInfoIndex = getArgumentInt(buffer, Constants.indexZero);

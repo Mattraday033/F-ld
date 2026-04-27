@@ -307,8 +307,15 @@ public static class PartyStats
         CunningManager.resetCunningsRemaining();
     }
 
+    public static bool inTutorialArea()
+    {
+        return AreaManager.locationName != null && 
+            AreaManager.locationName.Equals(LocationNameList.campNorthWest);
+    }
+
     public static int getMaxIntimidateCount()
     {
+
         int playerStrength = getHighestStrength();
 
         if (playerStrength >= SkillManager.skillUnlockLevel)
@@ -316,13 +323,23 @@ public static class PartyStats
             return 1;
         }
         else
-        {
+        {          
+            if(inTutorialArea() && Flags.getFlag(FlagNameList.startedTaborIntimidateTutorial))
+            {
+                return 1;
+            }
+
             return 0;
         }
     }
 
     public static int getMaxCunningCount()
     {
+        if(inTutorialArea())
+        {
+            return 2;
+        }
+
         int playerDexterity = getHighestDexterity();
         int baseDexCharges;
 
@@ -345,6 +362,11 @@ public static class PartyStats
 
         if (baseDexCharges == 0)
         {
+            if(inTutorialArea() && Flags.getFlag(FlagNameList.startedTaborCunningTutorial))
+            {
+                return 2;
+            }
+
             return baseDexCharges;
         }
         else
@@ -361,6 +383,11 @@ public static class PartyStats
 
         if (playerWisdom < 2)
         {
+            if(inTutorialArea() && Flags.getFlag(FlagNameList.startedTaborObservationTutorial))
+            {
+                return 2;
+            }
+
             return 0;
         }
         else
@@ -371,6 +398,7 @@ public static class PartyStats
 
     public static int getMaxPlacablePartyMembers()
     {
+
         int playerCharisma = getHighestCharisma();
         int skillLevelFromCharisma;
 
@@ -388,6 +416,11 @@ public static class PartyStats
         }
         else
         {
+            if(inTutorialArea() && Flags.getFlag(FlagNameList.startedTaborLeadershipTutorial))
+            {
+                return 1;
+            }
+
             return 0;
         }
 

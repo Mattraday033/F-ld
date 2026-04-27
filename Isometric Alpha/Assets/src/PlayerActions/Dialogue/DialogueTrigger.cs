@@ -40,6 +40,20 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
 
     public virtual void triggerDialogue()
     {
+        if(dialogue == null)
+        {
+            Debug.LogError("dialogue == null");
+            return;
+        }
+
+        if(dialogue.inkJSON == null)
+        {
+            Debug.LogError("dialogue.inkJSON == null");
+            return;
+        }
+
+        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inDialogue);
+        
         setFacing();
 
         playIntroAudioClip();

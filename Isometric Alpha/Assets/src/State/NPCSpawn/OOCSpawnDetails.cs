@@ -240,32 +240,36 @@ public class TutorialColliderSpawnDetails : OOCSpawnDetails
     public string seenFlagName;
     public StartSpawningAllTrueFlagList startSpawningFlagList;
     public int monsterDefeatKeyIndex;
+    public bool alwaysSpawn;
 
-    public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName) :
+    public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName, bool alwaysSpawn = false) :
     base(cellCoords: cellCoords)
     {
         this.tutorialKey = tutorialKey;
         this.seenFlagName = seenFlagName;
         this.startSpawningFlagList = new StartSpawningAllTrueFlagList();
         this.monsterDefeatKeyIndex = -1;
+        this.alwaysSpawn = alwaysSpawn;
     }
 
-    public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName, StartSpawningAllTrueFlagList startSpawningFlagList) :
+    public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName, StartSpawningAllTrueFlagList startSpawningFlagList, bool alwaysSpawn = false) :
     base(cellCoords: cellCoords)
     {
         this.tutorialKey = tutorialKey;
         this.seenFlagName = seenFlagName;
         this.startSpawningFlagList = startSpawningFlagList;
         this.monsterDefeatKeyIndex = -1;
+        this.alwaysSpawn = alwaysSpawn;
     }
 
-    public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName, StartSpawningAllTrueFlagList startSpawningFlagList, int monsterDefeatKeyIndex) :
+    public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName, StartSpawningAllTrueFlagList startSpawningFlagList, int monsterDefeatKeyIndex, bool alwaysSpawn = false) :
     base(cellCoords: cellCoords)
     {
         this.tutorialKey = tutorialKey;
         this.seenFlagName = seenFlagName;
         this.startSpawningFlagList = startSpawningFlagList;
         this.monsterDefeatKeyIndex = monsterDefeatKeyIndex;
+        this.alwaysSpawn = alwaysSpawn;
     }
 
 
@@ -298,6 +302,11 @@ public class TutorialColliderSpawnDetails : OOCSpawnDetails
 
     private bool shouldNotSpawn()
     {
+        if(alwaysSpawn)
+        {
+            return false;
+        }
+
         return TutorialFlags.getFlag(seenFlagName) ||
                 (startSpawningFlagList != null && !startSpawningFlagList.evaluateFlags())
                 || (monsterDefeatKeyIndex >= 0 && !MonsterDefeatKeysList.monsterIsDefeated(monsterDefeatKeyIndex));
@@ -350,9 +359,10 @@ public abstract class CunningObjectSpawnDetails : OOCSpawnDetails
 public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
 {
 
+    private QuestStepActivationScript script;
     private List<ObstacleSpawnDetails> allBlockerSpawnDetails;
 
-    public CunningBlockerSpawnDetails(int index, Vector3Int cellCoords, Facing startFacing, CunningObjectSpriteCategory category, List<ObstacleSpawnDetails> allBlockerSpawnDetails = null, ObstacleSpawnDetails blockerSpawnDetails = null, Facing endFacing = Facing.Random, string tutorialTargetHash = null) :
+    public CunningBlockerSpawnDetails(int index, Vector3Int cellCoords, Facing startFacing, CunningObjectSpriteCategory category, List<ObstacleSpawnDetails> allBlockerSpawnDetails = null, ObstacleSpawnDetails blockerSpawnDetails = null, Facing endFacing = Facing.Random, QuestStepActivationScript script = null, string tutorialTargetHash = null) :
     base(index, cellCoords, startFacing, category, endFacing: endFacing, tutorialTargetHash: tutorialTargetHash)
     {
         if(allBlockerSpawnDetails == null)
@@ -367,6 +377,8 @@ public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
         {
             this.allBlockerSpawnDetails.Add(blockerSpawnDetails);
         } 
+
+        this.script = script;
     }
 
     public override string getPrefabName()
@@ -388,6 +400,7 @@ public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
         cunningBlocker.index = index;
 
         cunningBlocker.build(startFacing,endFacing, category);
+        cunningBlocker.script = script;
 
         addNameTagGenerator(cunningBlocker.gameObject, cunningBlocker, cunningTarget: true);
 
@@ -1494,8 +1507,10 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
 {
     private SecretDoorInfo secretDoorInfo;
     private string terrainSpriteName;
+    private ObservableDelegate observable;
+    private QuestStepActivationScript script;
 
-    public SecretDoorSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, SecretDoorInfo secretDoorInfo, string tutorialTargetHash, string spriteName, string terrainSpriteName) :
+    public SecretDoorSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, SecretDoorInfo secretDoorInfo, string tutorialTargetHash, string spriteName, string terrainSpriteName, ObservableDelegate observable = null, QuestStepActivationScript script = null) :
     base(npcName, cellCoords, areaName, spriteName)
     {
         this.secretDoorInfo = secretDoorInfo;
@@ -1504,6 +1519,9 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
         this.terrainSpriteName = terrainSpriteName;
 
         dialogue = getDialogue(areaName);
+    
+        this.observable = observable;
+        this.script = script;
     }
 
     public override Dialogue getDialogue(string areaName)
@@ -1554,6 +1572,16 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
             SpriteRenderer spriteRenderer = secretDoor.GetComponent<SpriteRenderer>();
             addTutorialTargetComponent(secretDoor, spriteRenderer, tutorialTargetHash);
         }
+
+        if(observable == null || observable())
+        {
+            secretDoor.layer = LayerAndTagManager.observableLayer;
+        } else
+        {
+            secretDoor.layer = LayerAndTagManager.objectLayer;
+        }
+
+        observableObject.script = script;
     }
 
     public override void spawnActions(DialogueTrigger dialogueTrigger)

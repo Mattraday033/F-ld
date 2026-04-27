@@ -682,7 +682,76 @@ public static class OOCSpawnDetailsList
         #region NWCamp
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard, new Vector3Int(-14, 0),LocationNameList.campNorthWest,  animationName: MonsterNameList.axeman, facing: Facing.SouthWest));
+        //front guard
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard, new Vector3Int(-14, 0), LocationNameList.campNorthWest,  animationName: MonsterNameList.axeman, facing: Facing.SouthWest));
+
+        #region End Of Tutorial
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(-7, -1), LocationNameList.campNorthWest, facing: Facing.SouthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(-9, -2), facing: Facing.NorthEast));
+
+        #endregion
+
+        #region Str Tutorial
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.chiefTabor+1, new Vector3Int(-7, -1), LocationNameList.campNorthWest, facing: Facing.SouthWest));
+
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-5, 0), TutorialSequenceList.intimidateTutorialSequenceKey,
+                                                                          TutorialSequenceList.intimidateTutorialSeenFlag,
+                                                                          alwaysSpawn: true));
+
+        #endregion
+
+        #region Dex Tutorial
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.chiefTabor+2, new Vector3Int(-4, -5), LocationNameList.campNorthWest, facing: Facing.SouthWest));
+
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-4, -4), TutorialSequenceList.secondCunningTutorialSequenceKey,
+                                                                          TutorialSequenceList.secondCunningTutorialSeenFlag,
+                                                                          alwaysSpawn: true));
+
+        list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(-3, -3), Facing.SouthEast, CunningObjectSpriteCategory.Crank, endFacing: Facing.NorthWest, allBlockerSpawnDetails:
+                 new List<ObstacleSpawnDetails>()
+                 {
+                    new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator+1, new Vector3Int(-3, -1), PrefabNames.shackWallHalf),
+                    new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator+1, new Vector3Int(-3, -2), PrefabNames.shackWallHalf),
+                    new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator+1, new Vector3Int(-4, 0), PrefabNames.shackWallHalf),
+                    new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator+1, new Vector3Int(-4, -1), PrefabNames.shackWallHalf),
+                    new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator+1, new Vector3Int(-4, -2), PrefabNames.shackWallHalf)
+                 },
+                 script: new TaborCunningTutorialScript(),
+                 tutorialTargetHash: TutorialSequenceList.tutorialCunningObjectTargetHash));
+
+        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-3, -1), PrefabNames.shackWallHalf));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-3, -2), PrefabNames.shackWallHalf));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-4, 0), PrefabNames.shackWallHalf));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-4, -1), PrefabNames.shackWallHalf));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-4, -2), PrefabNames.shackWallHalf));
+
+        #endregion
+
+        #region Wis Tutorial
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.chiefTabor+4, new Vector3Int(1, 0), LocationNameList.campNorthWest, facing: Facing.SouthWest));
+
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(1, 0), TutorialSequenceList.observationTutorialSequenceKey,
+                                                                          TutorialSequenceList.observationTutorialSeenFlag,
+                                                                          alwaysSpawn: true));
+
+        #endregion
+
+        #region Cha Tutorial
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.chiefTabor+3, new Vector3Int(-3, 0), LocationNameList.campNorthWest, facing: Facing.SouthWest));
+
+        list.Add(new ButtonSpawnDetails(new Vector3Int(-3, 1), tutorialTargetHash: TutorialSequenceList.tutorialButtonOneTargetHash));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(-1, 1), tutorialTargetHash: TutorialSequenceList.tutorialButtonTwoTargetHash));
+
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-3, 0), TutorialSequenceList.leadershipTutorialSequenceKey,
+                                                                          TutorialSequenceList.leadershipTutorialSeenFlag,
+                                                                          alwaysSpawn: true));
+
+        #endregion
 
         oocSpawnDetailsDict.Add(LocationNameList.campNorthWest, list);
         #endregion

@@ -792,7 +792,6 @@ public class PlayerInput : MonoBehaviour
             {                                                                   //If a transition is interactable (it would throw an error when interacted with)
                                                                                 //then it has it's layer set to NPC erroneously
                 speakToNPC(currentGameObject);
-                PlayerOOCStateManager.setCurrentActivity(OOCActivity.inDialogue);
                 return;
             }
             else if (currentGameObject.tag.Equals(LayerAndTagManager.bookTag))

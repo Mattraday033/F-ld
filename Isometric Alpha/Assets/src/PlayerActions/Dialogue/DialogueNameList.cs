@@ -212,6 +212,15 @@ public static class DialogueNameList
     #endregion
     #region Camp North West
     public const string guardNWPath = campExteriorPathName + LocationNameList.campNorthWest + Constants.seperatorChar + "NWCamp Guard";
+    
+    public const string taborEndOfTutorialPath = campExteriorPathName + LocationNameList.campNorthWest + Constants.seperatorChar + "TaborEndOfTutorial";
+
+
+    public const string taborIntimidateTutorialPath = campExteriorPathName + LocationNameList.campNorthWest + Constants.seperatorChar + "TaborIntimidateTutorial";
+    public const string taborCunningTutorialPath = campExteriorPathName + LocationNameList.campNorthWest + Constants.seperatorChar + "TaborCunningTutorial";
+    public const string taborObservationTutorialPath = campExteriorPathName + LocationNameList.campNorthWest + Constants.seperatorChar + "TaborObservationTutorial";
+    public const string taborLeadershipTutorialPath = campExteriorPathName + LocationNameList.campNorthWest + Constants.seperatorChar + "TaborLeadershipTutorial";
+
     #endregion
     #endregion
 

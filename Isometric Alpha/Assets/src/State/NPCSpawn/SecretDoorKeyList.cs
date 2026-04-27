@@ -28,6 +28,12 @@ public static class SecretDoorKeyList
 
     #endregion
 
+    #region NWCamp
+
+    public const string northWestCampWallPatchOne = LocationNameList.campNorthWest + NPCNameList.wallPatch + "1";
+
+    #endregion
+
     #endregion
 
     #region Mine

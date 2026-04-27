@@ -9,6 +9,7 @@ public class NotificationManager : MonoBehaviour
     private static NotificationManager instance;
 
     public readonly static UnityEvent OnDeleteAllNotifications = new UnityEvent();
+    public readonly static UnityEvent ManualNotificationSpawn = new UnityEvent();
 
     private static bool skipNextSpawn;
 
@@ -27,6 +28,11 @@ public class NotificationManager : MonoBehaviour
     public static void skipNextNotificationSpawn() 
     { 
         skipNextSpawn = true;
+    }
+
+    public static void preventSkipNextNotificationSpawn() 
+    { 
+        skipNextSpawn = false;
     }
 
     public static void addHostilityAlertToNotificationQueue()
@@ -156,6 +162,7 @@ public class NotificationManager : MonoBehaviour
     {
         PlayerOOCStateManager.OnStateChangeToWalking.AddListener(startSpawningNotifications);
         PlayerOOCStateManager.OnLeavingTutorialSequenceState.AddListener(startSpawningNotifications);
+        ManualNotificationSpawn.AddListener(startSpawningNotifications);
         AreaManager.OnAreaSpawn.AddListener(spawnNotificationsOnAreaChange);
 
         LoadSaveFile.OnLoad.AddListener(resetPreviousLocation);

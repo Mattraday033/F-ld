@@ -69,6 +69,22 @@ public static class QuestNameList
     public const string assistTheNonbrandedStepTitleFive = "Betrayal!";
     public const string assistTheNonbrandedStepTitleSix = "Left to their fate.";
 
+    // Chief Tabor
+    public const string chiefTaborQuestTitle = "Chief Tabor";
+
+    public const string chiefTaborStepTitleZero = "Find Chief Tabor.";
+    public const string chiefTaborStepTitleOne = "Building houses.";
+    public const string chiefTaborStepTitleTwo = "To the mess hall.";
+    public const string chiefTaborStepTitleThree = "Kill the bat.";
+    public const string chiefTaborStepTitleFour = "Return to Tabor.1";
+    public const string chiefTaborStepTitleFive = "Use the crank.";
+    public const string chiefTaborStepTitleSix = "Return to Tabor.2";
+    public const string chiefTaborStepTitleSeven = "Clear the rubble.";
+    public const string chiefTaborStepTitleEight = "Return to Tabor.3";
+    public const string chiefTaborStepTitleNine = "Remove the wall patch.";
+    public const string chiefTaborStepTitleTen = "Return to Tabor.4";
+    public const string chiefTaborStepTitleEleven = "Quest Finished";
+
     public const string convinceTheBrandedQuestTitle = "Convince the Branded";
 
     public const string convinceTheBrandedStepTitleZero = "Back to the North East.";

@@ -75,6 +75,14 @@ public class DialogueTrackerWindow : PopUpWindow, IEscapable
 		dialogueGrid.appendPanels(dialogueList);
 	}
 
+    public static void wipeDialogue()
+    {
+        if(instance != null)
+        {
+            instance.populateDialogue(new List<DialogueLine>());
+        }
+    }
+
 	public void populateChoices(List<ChoiceDescription> choicesList)
 	{
 		choicesGrid.populatePanels(choicesList);

@@ -90,7 +90,7 @@ public static class PartyMemberList
 
                 PartyMember weft = new PartyMember(new AllyStats(NPCNameList.weft, normalStat, normalStat, normalStat, higherCharisma));
 
-                weft.stats.combatActionArray = new CombatActionArray(weft.stats, Dexterity.getStartingActions(weft.stats));
+                weft.stats.combatActionArray = new CombatActionArray(weft.stats, Charisma.getStartingActions(weft.stats));
                 weft.stats.combatActionArray.equipCombatAction(new Attack(weft.stats, ItemList.getItem(ItemList.weaponsListIndex, ItemList.sharpRockIndex) as Weapon), 0);
                 weft.stats.equippedItems = new EquippedItems(weft.stats, weftStartingArmor);
 

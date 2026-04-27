@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CunningBlocker : CunningObject
 {
+    public QuestStepActivationScript script;
     public List<Obstacle> blockers = new List<Obstacle>();
     public List<Vector3Int> blockerCoords = new List<Vector3Int>();
 
@@ -82,6 +83,11 @@ public class CunningBlocker : CunningObject
         if (trackChangeInStateManager)
         {
             trackKey();
+        }
+
+        if(script != null)
+        {
+            script.runScript();
         }
     }
 

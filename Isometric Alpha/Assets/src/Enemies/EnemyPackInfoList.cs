@@ -410,6 +410,15 @@ public static class EnemyPackInfoList
                                                                                                             },
                                                                                                           DropTableList.slaveMineDTKey);
 
+    private readonly static EnemyPackInfo taborIntimidateTutorialBatPack = new BossPackInfo(new CreatureAmount[] {  EnemyAmountList.oneGiantBat,
+                                                                                                            EnemyAmountList.twoBatSwarms
+                                                                                                            },
+                                                                                                            DropTableList.slaveMineDTKey,
+                                                                                                            script: new TaborIntimidateTutorialScript()
+                                                                                                          );
+
+
+
     private readonly static EnemyPackInfo twoGiantBatsThreeBatSwarmsOneArmoredBat = new EnemyPackInfo(new CreatureAmount[] {  
                                                                                                                             EnemyAmountList.oneArmoredBatShielded,
                                                                                                                             EnemyAmountList.twoGiantBats,
@@ -768,7 +777,13 @@ public static class EnemyPackInfoList
 
         enemyPackInfoDict.Add(LocationNameList.campManse, list);
         #endregion
+        #region North West Camp
+        list = new List<EnemyPackInfo>();
 
+        list.Add(taborIntimidateTutorialBatPack);
+
+        enemyPackInfoDict.Add(LocationNameList.campNorthWest, list);
+        #endregion
         #endregion
 
         #region Mine
