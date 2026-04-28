@@ -92,12 +92,14 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
 	public virtual void createListeners()
 	{
 		TutorialSequence.TutorialSequenceTargetFinder.AddListener(assignToTutorialSequence);
+        TutorialSequence.OnTutorialTargetVisibilityCheck.AddListener(isVisible);
 	}
 
 	public virtual void destroyListeners()
 	{
 		TutorialSequence.TutorialSequenceTargetFinder.RemoveListener(assignToTutorialSequence);
         PlayerOOCStateManager.OnLeavingTutorialSequenceState.RemoveListener(unhighlight);
+        TutorialSequence.OnTutorialTargetVisibilityCheck.RemoveListener(isVisible);
 	}
 
 	public virtual Vector2 getDimensions()
@@ -206,4 +208,14 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
 
         PlayerOOCStateManager.OnLeavingTutorialSequenceState.RemoveListener(unhighlight);
 	}
+
+    public void isVisible(TutorialWindowTargetVisibility visibility)
+    {
+        if(visibility.visible)
+        {
+            return;
+        }
+
+        visibility.visible = visibility.tutorialHash.Equals(tutorialHash) && gameObject.activeInHierarchy;
+    }
 }

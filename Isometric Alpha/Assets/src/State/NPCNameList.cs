@@ -14,10 +14,12 @@ public static class NPCNameList
     public const string balint = "Bálint";
     public const string brush = "Brush";
     public const string clay = "Clay";
+    public const string dezso = "Dezso"; 
     public const string ervin = "Ervin";
     public const string feher = "Feher";
     public const string géza = "Géza";
     public const string janos = "Janos";
+    public const string loam = "Loam";
     public const string kastor = "Kastor";
     public const string weft = "Weft";
     public const string seb = "Seb";
@@ -56,6 +58,9 @@ public static class NPCNameList
     public const string guard = "Guard";
     public const string overseer = "Overseer";
     public const string chief = "Chief";
+    public const string honorguard = "Honorguard";
+
+    public const string captainAdela = "Captain Adéla";
 
     public const string guardMuzsa = "Guard Múzsa";
 

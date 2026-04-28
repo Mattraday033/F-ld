@@ -156,6 +156,21 @@ public static class DialogueList
                             Resources.Load<TextAsset>(DialogueNameList.fallenBeamPath)));
 
         #endregion
+        #region Slave Shack 7
+
+        addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.slave,
+                            new SingleCharacterDialogue(NPCNameList.slave,
+                            Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
+
+        addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.dezso,
+                            new Dialogue(new string[]{ NPCNameList.dezso},
+                            Resources.Load<TextAsset>(DialogueNameList.dezsoPath)));
+
+        addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.loam,
+                            new Dialogue(new string[]{ NPCNameList.loam},
+                            Resources.Load<TextAsset>(DialogueNameList.loamPath)));
+
+        #endregion
         #region Slave Shack 8
 
         addDialogueToList(LocationNameList.slaveShackEight, NPCNameList.weft,
@@ -253,7 +268,11 @@ public static class DialogueList
                             Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
 
         addDialogueToList(LocationNameList.messHall, NPCNameList.kende,
-                            new Dialogue(new string[] { NPCNameList.kende },
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.kende,
+                                                        NPCNameList.weft
+                                                        },
                             Resources.Load<TextAsset>(DialogueNameList.kendePath)));
         #endregion
 
@@ -338,6 +357,27 @@ public static class DialogueList
         addDialogueToList(LocationNameList.campNorthEast, MonsterNameList.spearman,
                         new SingleCharacterDialogue(MonsterNameList.spearman,
                         Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+1,
+                            new SingleCharacterDialogue(NPCNameList.guard,
+                            Resources.Load<TextAsset>(DialogueNameList.situationGuardPath)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.honorguard+1,
+                            new SingleCharacterDialogue(NPCNameList.honorguard,
+                            Resources.Load<TextAsset>(DialogueNameList.situationGuardPath)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.chiefTabor,
+                            new Dialogue(new string[]{ 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.chiefTabor,
+                                                        NPCNameList.captainAdela,
+                                                        NPCNameList.weft
+                                                    },
+                            Resources.Load<TextAsset>(DialogueNameList.taborNEPath)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.captainAdela,
+                            new Dialogue(new string[]{ NPCNameList.captainAdela},
+                            Resources.Load<TextAsset>(DialogueNameList.captainAdelaPathName)));
         #endregion
         #region CenterCamp
 

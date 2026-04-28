@@ -171,6 +171,19 @@ public static class OOCSpawnDetailsList
 
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackSix, list);
         #endregion
+        #region 7SlaveShack
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.dezso, new Vector3Int(5, 5), LocationNameList.slaveShackSeven, facing: Facing.SouthWest, speakAtStartScript: new DezsoLoamDialogueScript()));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.loam, new Vector3Int(5, 9), LocationNameList.slaveShackSeven, facing: Facing.SouthEast));
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(9, 9), LocationNameList.slaveShackSeven, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(3, 3), LocationNameList.slaveShackSeven, animationName: NPCNameList.slave+1, facing: Facing.NorthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(7, 12), LocationNameList.slaveShackSeven, animationName: NPCNameList.slave+2, facing: Facing.SouthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(7, 3), LocationNameList.slaveShackSeven, animationName: NPCNameList.temple, facing: Facing.SouthWest));
+
+        oocSpawnDetailsDict.Add(LocationNameList.slaveShackSeven, list);
+        #endregion
         #region 8SlaveShack
         list = new List<OOCSpawnDetails>();
 
@@ -223,6 +236,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.noBrand+1, new Vector3Int(2, 12), LocationNameList.messHall, facing: Facing.NorthEast));
 
         list.Add(new ShopkeeperSpawnDetails(NPCNameList.kende, new Vector3Int(3, 10), LocationNameList.messHall, extraSpaces: new Vector3Int[] { new Vector3Int(3, 9) }, facing: Facing.SouthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(4,8), facing: Facing.NorthWest));
 
         oocSpawnDetailsDict.Add(LocationNameList.messHall, list);
         #endregion
@@ -263,6 +277,29 @@ public static class OOCSpawnDetailsList
 
         #region NECamp
         list = new List<OOCSpawnDetails>();
+
+        #region Chief Tabor + Adela "Situation" quest
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(-8, -9), LocationNameList.campNorthEast, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.captainAdela, new Vector3Int(-9, -9), LocationNameList.campNorthEast, facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(-8, -11), facing: Facing.NorthWest));
+
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(-5, -11), LocationNameList.campNorthEast, animationName: MonsterNameList.spearman, animationType: CharacterAnimationType.Idle_Back, facing: Facing.NorthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(-5, -13), LocationNameList.campNorthEast, animationName: MonsterNameList.spearman, animationType: CharacterAnimationType.Idle_Back, facing: Facing.NorthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(-3, -14), LocationNameList.campNorthEast, animationName: MonsterNameList.axeman, animationType: CharacterAnimationType.Idle_Back, facing: Facing.NorthWest));
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.honorguard+1, new Vector3Int(-3, -8), LocationNameList.campNorthEast, animationName: MonsterNameList.linebreaker, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(-12, -8), LocationNameList.campNorthEast, animationName: MonsterNameList.spearman, facing: Facing.SouthEast));
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.honorguard+1, new Vector3Int(-7, -16), LocationNameList.campNorthEast, animationName: MonsterNameList.lieutenant, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(-8, -17), LocationNameList.campNorthEast, animationName: MonsterNameList.signaleer, facing: Facing.NorthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(-9, -16), LocationNameList.campNorthEast, animationName: MonsterNameList.axeman, facing: Facing.NorthEast));
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(-12, -13), LocationNameList.campNorthEast, animationName: MonsterNameList.disciplinarian, facing: Facing.SouthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.honorguard+1, new Vector3Int(-12, -14), LocationNameList.campNorthEast, animationName: MonsterNameList.lancer, facing: Facing.NorthWest));
+
+        #endregion
 
         list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campNorthEast, Constants.indexZero));
 
@@ -682,7 +719,9 @@ public static class OOCSpawnDetailsList
         #region NWCamp
         list = new List<OOCSpawnDetails>();
 
-        //front guard
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(2,11), Facing.SouthEast));
+        list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(-13,-10), Facing.SouthEast));
+
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard, new Vector3Int(-14, 0), LocationNameList.campNorthWest,  animationName: MonsterNameList.axeman, facing: Facing.SouthWest));
 
         #region End Of Tutorial

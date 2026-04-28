@@ -9,6 +9,7 @@ VAR overseerIndex = 2
 
 VAR heardTaborsLesson = false
 VAR weftAddedToParty = false
+VAR weftKnowsYouKnowHisSecret = false
 VAR liedToWeftAboutHearingExtortion = false
 
 VAR succeededCharismaCheck = false
@@ -84,6 +85,7 @@ changeCamTarget({weftIndex})
 
 
     +I did, but your secret is safe with me. <Cha {charisma}/2>
+        setToTrue(weftKnowsYouKnowHisSecret)
         {
         -charisma >= 2:
             ->1aa
@@ -94,6 +96,7 @@ changeCamTarget({weftIndex})
         setToTrue(liedToWeftAboutHearingExtortion)
         ->1ac
     +It sounds like you could get in a lot of trouble if the guards found out about your little secret.
+        setToTrue(weftKnowsYouKnowHisSecret)
         ->1ad
 
 === 1aa ===
@@ -179,6 +182,7 @@ After the others were punished, I got set up here with a larger portion for my r
 {
 -wisdom >= 2:
     +Ah, and the guards don't know you were really the ringleader of the group. That's how that overseer is blackmailing you.
+    setToTrue(weftKnowsYouKnowHisSecret)
     {
     -liedToWeftAboutHearingExtortion:
         ->1cba
@@ -190,6 +194,7 @@ After the others were punished, I got set up here with a larger portion for my r
         ->1cc
 -else:
     +Ah, and the guards don't know you were really the ringleader of the group. That's how that overseer is blackmailing you.
+    setToTrue(weftKnowsYouKnowHisSecret)
     {
     -liedToWeftAboutHearingExtortion:
         ->1cba

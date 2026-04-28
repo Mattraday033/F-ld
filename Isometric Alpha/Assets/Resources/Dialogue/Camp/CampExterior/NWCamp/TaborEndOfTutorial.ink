@@ -9,6 +9,8 @@ VAR guardIndex = 3
 VAR previousTaborIndex = 4
 
 VAR skippedTutorialInNWCamp = false
+VAR kendeWillSellToPlayer = false
+VAR situationStartedInNECamp = false
 
 VAR startedTaborIntimidateTutorial = false
 VAR finishedTaborIntimidateTutorial = false
@@ -62,10 +64,16 @@ That was good work for this morning. I'll escort you down to the mess hall for l
 setNPCFacing({guardIndex},NE)
 changeCamTarget({guardIndex})
 
-Chief Tabor! Captain Adéla sent a runner with a message for you! A situation is brewing in the northeast section of the camp. Your presence is requested.
+Chief Tabor! Captain Adéla sent a runner with a message for you! A situation is brewing in the camp's northeast section. Your presence is requested.
 
 setToTrue(toldToGetMealByTabor)
+setToTrue(situationStartedInNECamp)
 changeCamTarget({taborIndex})
+
+{
+-kendeWillSellToPlayer:
+->2a
+}
 
 Of course there is. I'd best go see what that is about. You two, go directly to the mess hall, and make no other stops. When you finish your meal, meet me in the northeast part of the camp. 
 
@@ -74,23 +82,35 @@ Of course there is. I'd best go see what that is about. You two, go directly to 
 
 === 1b ===
 
+activateQuestStep(Chief Tabor,Midday meal.)
+
 You did your work well today, I forgot you're new. It's the large building with the wooden roof in the southeast part of the camp. It's the one that opens up into a large yard with a well. Just head south from the center of camp and you can't miss it.
 
-fadeToBlack()
+->deactivateExtras
 
-activateQuestStep(Chief Tabor,To the mess hall.)
+=== 1c ===
+
+Don't come back until you've removed those boards.
+
+->Close
+
+=== 2a ===
+
+activateQuestStep(Chief Tabor,A situation brews.)
+
+Of course there is. Looks like lunch will have to wait, Adéla wouldn't have sent for me if it wasn't urgent. I will run ahead and see what needs my attention. Meet me in the camp's northeast quarter and I'll put you to work on whatever has come up.
+
+->deactivateExtras
+
+=== deactivateExtras ===
+
+fadeToBlack()
 
 deactivate({taborIndex})
 deactivate({guardIndex})
 deactivate({weftIndex})
 
 fadeBackIn(60)
-
-->Close
-
-=== 1c ===
-
-Don't come back until you've removed those boards.
 
 ->Close
 

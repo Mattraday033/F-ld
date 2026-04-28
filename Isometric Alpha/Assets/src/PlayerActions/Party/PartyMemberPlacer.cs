@@ -111,28 +111,29 @@ public class PartyMemberPlacer : MonoBehaviour
 
     private static string findNextPlaceablePartyMember()
     {
-        int skippedPartyMembers = 0;
-
         List<PartyMember> allPartyMembers = PartyManager.getAllPartyMembers();
+        List<PartyMember> placablePartyMembers = new List<PartyMember>();
+
+        allPartyMembers.Remove(PartyManager.getPlayer());
 
         foreach (PartyMember partyMember in allPartyMembers)
         {
-            if(partyMember.getName().Equals(PartyManager.getPlayer().getName()))
+            if (partyMember.isInParty())
             {
-                continue;
-            }
-
-            if (partyMember.isInParty() && skippedPartyMembers == placedPartyMembers.Count)
+                placablePartyMembers.Insert(Constants.indexZero, partyMember);
+            } else if(partyMember.canJoinParty)
             {
-                return partyMember.getName();
-            }
-            else if (partyMember.isInParty() && skippedPartyMembers != placedPartyMembers.Count)
-            {
-                skippedPartyMembers++;
+                placablePartyMembers.Add(partyMember);
             }
         }
 
-        return null;
+        if(placablePartyMembers.Count > placedPartyMembers.Count)
+        {
+            return placablePartyMembers[placedPartyMembers.Count].getName();
+        } else
+        {
+            return null;
+        }
     }
 
 	public static void removePlacedPartyMember(string targetPartyMemberName)

@@ -96,6 +96,10 @@ public static class DialogueNameList
     public const string vazulPath = campInteriorPathName + LocationNameList.slaveShackSix + Constants.seperatorChar + "Vazul";
     public const string immovableRubblePath = campInteriorPathName + LocationNameList.slaveShackSix + Constants.seperatorChar + "ImmovableRubble";
     #endregion
+    #region Slave Shack 7
+    public const string dezsoPath = campInteriorPathName + LocationNameList.slaveShackSeven + Constants.seperatorChar + NPCNameList.dezso;
+    public const string loamPath = campInteriorPathName + LocationNameList.slaveShackSeven + Constants.seperatorChar + NPCNameList.loam;
+    #endregion
     #region Slave Shack 8
     public const string weftPath = campInteriorPathName + LocationNameList.slaveShackEight + Constants.seperatorChar + NPCNameList.weft;
     #endregion
@@ -145,6 +149,11 @@ public static class DialogueNameList
     public const string slaveSevenNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + NPCNameList.slave+"7";
     public const string slaveEightNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + NPCNameList.slave+"8";
     public const string slaveNineNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + NPCNameList.slave+"9";
+
+
+    public const string captainAdelaPathName = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + "Adela";
+    public const string taborNEPath = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + NPCNameList.tabor;
+    public const string situationGuardPath = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + "SituationGuard";
 
     public const string duringRevolutionSuffix = "DuringRevolution";
     public const string kastorNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + NPCNameList.kastor+duringRevolutionSuffix;

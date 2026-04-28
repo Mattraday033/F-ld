@@ -13,6 +13,8 @@
                 {"stepName":"Return to Tabor.3","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"<B>Return to Chief Tabor for your next assignment.</B>"},
                 {"stepName":"Remove the wall patch.","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"<B>Remove the wall patch at the back of the unfinished shack in the northwest corner of the camp.</B>"},
                 {"stepName":"Return to Tabor.4","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"<B>Return to Chief Tabor for your next assignment.</B>"},
+                {"stepName":"Midday meal.","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"Chief Tabor sent me to get my lunch from the mess hall while he deals with something. <B>I should head to the mess hall in the southeast corner of the camp and speak to the cook there.</B> Once I'm finished with that, I should return to Chief Tabor in the northeast section of the camp."},
+                {"stepName":"A situation brews.","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"<B>I should meet with Chief Tabor in the northeast section of the camp.</B>"},
                 {"stepName":"Quest Finished","MapZone":"","MapLocation":"","journalDescription":"Quest Finished"}
             ],
 			

@@ -43,6 +43,7 @@ public static class FlagNameList
 
         //weft flags
         public const string metWeft = "metWeft";
+        public const string weftKnowsYouKnowHisSecret = "weftKnowsYouKnowHisSecret";
         public const string liedToWeftAboutHearingExtortion = "liedToWeftAboutHearingExtortion";
         public const string weftAddedToParty = "weftAddedToParty";
         public const string toldByTaborToBuildHouses = "toldByTaborToBuildHouses";
@@ -58,6 +59,8 @@ public static class FlagNameList
         public const string finishedTaborObservationTutorial = "finishedTaborObservationTutorial";
         public const string startedTaborLeadershipTutorial = "startedTaborLeadershipTutorial";
         public const string finishedTaborLeadershipTutorial = "finishedTaborLeadershipTutorial";
+        public const string situationStartedInNECamp = "situationStartedInNECamp";
+        public const string spokeToTaborAtBeginningOfSituation = "spokeToTaborAtBeginningOfSituation";
 
         //kastor convo flags
         public const string metKastor = "metKastor"; //if the player has spoken to Kastor before
@@ -224,7 +227,7 @@ public static class FlagNameList
         public const string knowsAboutKendesShop = "knowsAboutKendesShop"; //(unimplemented) Learned about Kende's shop from someone besides him or Muzsa (like Clay). Enables dialogue to ask about shop, but not shop itself
         public const string kendeWillSellToPlayer = "kendeWillSellToPlayer"; //Kende the cook has the option to sell items to the player
         public const string askedKendeWhoHeIs = "askedKendeWhoHeIs"; //chose the dialogue option about asking kende who he was
-
+        public const string toldKendeTaborSentForMeal = "toldKendeTaborSentForMeal";
 
         //Quartermaster Emese flags
         public const string metQuartermasterEmese = "metQuartermasterEmese"; //have interacted with Emese before

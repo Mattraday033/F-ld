@@ -1043,7 +1043,17 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
 
         if(animationType != CharacterAnimationType.None)
         {
-            animationManager.setCurrentIdle(AnimationManager.getFallBackIdleType(npcName, animationType));
+            string characterToAnimate = "";
+
+            if(animationName != null)
+            {
+                characterToAnimate = animationName;
+            } else
+            {
+                characterToAnimate = npcName;
+            }
+
+            animationManager.setCurrentIdle(AnimationManager.getFallBackIdleType(characterToAnimate, animationType));
         }
     }
 }

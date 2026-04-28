@@ -25,6 +25,14 @@ public interface ITutorialSequenceTarget
 
     public void highlight(bool skip);
     public void unhighlight(bool skip);
+
+    public void isVisible(TutorialWindowTargetVisibility visibility);
+}
+
+public class TutorialWindowTargetVisibility
+{
+    public string tutorialHash;
+    public bool visible;
 }
 
 [Serializable]
@@ -561,6 +569,8 @@ public class TutorialSequence
     public readonly static UnityEvent OnEnableButtons = new UnityEvent();
     public readonly static UnityEvent<TutorialSequenceStep> TutorialSequenceTargetFinder = new UnityEvent<TutorialSequenceStep>();
     public readonly static UnityEvent DestroyAllTutorialMessageWindows = new UnityEvent();
+    public readonly static UnityEvent<TutorialWindowTargetVisibility> OnTutorialTargetVisibilityCheck = new UnityEvent<TutorialWindowTargetVisibility>();
+    
 
     public static List<TutorialSequence> tutorialSequenceQueue = new List<TutorialSequence>();
 
@@ -1002,13 +1012,62 @@ public class TutorialSequence
                     return false;
                 }
             case TutorialSequenceList.firstHostilityTutorialSeenFlag:
-            case TutorialSequenceList.intimidateTutorialSeenFlag:
             case TutorialSequenceList.cunningTutorialSeenFlag:
+            case TutorialSequenceList.interactableObjectTutorialSeenFlag:
+                return TutorialFlags.getFlag(TutorialSequenceList.skipThatchShackTutorialsFlag);
+            case TutorialSequenceList.intimidateTutorialSeenFlag:
             case TutorialSequenceList.secondCunningTutorialSeenFlag:
             case TutorialSequenceList.observationTutorialSeenFlag:
             case TutorialSequenceList.leadershipTutorialSeenFlag:
-            case TutorialSequenceList.interactableObjectTutorialSeenFlag:
-                return TutorialFlags.getFlag(TutorialSequenceList.skipThatchShackTutorialsFlag);
+
+                if(AreaManager.locationName.Equals(LocationNameList.slaveShackSix) && 
+                    TutorialFlags.getFlag(TutorialSequenceList.skipThatchShackTutorialsFlag))
+                {
+                    return true;
+                }
+
+                TutorialWindowTargetVisibility visibility = new TutorialWindowTargetVisibility();
+
+                switch (tutorialSeenFlagName)
+                {
+                    case TutorialSequenceList.intimidateTutorialSeenFlag:
+
+                        visibility.tutorialHash = TutorialSequenceList.secondTutorialEnemyTargetHash;
+                        OnTutorialTargetVisibilityCheck.Invoke(visibility);
+
+                        return (Flags.getFlag(FlagNameList.startedTaborIntimidateTutorial) && 
+                                    Flags.getFlag(FlagNameList.finishedTaborIntimidateTutorial)) || 
+                                    !visibility.visible;
+
+                    case TutorialSequenceList.secondCunningTutorialSeenFlag:
+
+                        visibility.tutorialHash = TutorialSequenceList.tutorialCunningObjectTargetHash;
+                        OnTutorialTargetVisibilityCheck.Invoke(visibility);
+
+                        return (Flags.getFlag(FlagNameList.startedTaborCunningTutorial) && 
+                                    Flags.getFlag(FlagNameList.finishedTaborCunningTutorial)) ||
+                                    !visibility.visible;
+
+                    case TutorialSequenceList.observationTutorialSeenFlag:
+
+                        visibility.tutorialHash = TutorialSequenceList.secretDoorTargetHash;
+                        OnTutorialTargetVisibilityCheck.Invoke(visibility);
+
+                        return (Flags.getFlag(FlagNameList.startedTaborObservationTutorial) && 
+                                    Flags.getFlag(FlagNameList.finishedTaborObservationTutorial)) || 
+                                    !visibility.visible;
+
+                    case TutorialSequenceList.leadershipTutorialSeenFlag:
+                    
+                        visibility.tutorialHash = TutorialSequenceList.fallenBeamTargetHash;
+                        OnTutorialTargetVisibilityCheck.Invoke(visibility);
+
+                        return (Flags.getFlag(FlagNameList.startedTaborLeadershipTutorial) && 
+                                    Flags.getFlag(FlagNameList.finishedTaborLeadershipTutorial)) ||
+                                    !visibility.visible;
+                    default:
+                        return false;
+                }
             case TutorialSequenceList.hiddenObjectsTutorialSeenFlag:
                 return TutorialFlags.getFlag(TutorialSequenceList.hiddenObjectsTutorialSeenFlag);
         }

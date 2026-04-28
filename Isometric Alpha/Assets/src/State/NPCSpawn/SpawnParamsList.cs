@@ -259,6 +259,14 @@ public static class SpawnParamsList
 
         #region Camp North East
         
+        InteractableSpawnParams situationCampNESpawnParams = new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.situationStartedInNECamp }),
+                                                                                         new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated }));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.guard+1), situationCampNESpawnParams);
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.honorguard+1), situationCampNESpawnParams);
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.chiefTabor), situationCampNESpawnParams);
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.captainAdela), situationCampNESpawnParams);
+
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.overseer),
                                defaultBeforeRevoltSpawnParams);
 

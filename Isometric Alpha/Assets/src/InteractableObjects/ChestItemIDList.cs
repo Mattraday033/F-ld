@@ -33,6 +33,17 @@ public static class ChestItemIDList
 
         #endregion
 
+        #region NWCamp
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rationsIndex, 3));
+        list.Add(new ItemListID(ItemList.treasureItemListIndex, ItemList.smallCoinPurseIndex));
+
+        chestItemIDList.Add(LocationNameList.campNorthWest, list);
+
+        #endregion
+
         #region GuardHouse Top Floor
 
         list = new List<ItemListID>();

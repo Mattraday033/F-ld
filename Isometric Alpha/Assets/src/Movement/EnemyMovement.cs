@@ -751,6 +751,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         RevealManager.OnReveal.AddListener(onReveal);
         TutorialSequence.TutorialSequenceTargetFinder.AddListener(assignToTutorialSequence);
         OnOOCMonsterDefeat.AddListener(disableIfDefeated);
+        TutorialSequence.OnTutorialTargetVisibilityCheck.AddListener(isVisible);
     }
 
 	public void destroyListeners()
@@ -758,6 +759,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 		RevealManager.OnReveal.RemoveListener(onReveal);
 		TutorialSequence.TutorialSequenceTargetFinder.RemoveListener(assignToTutorialSequence);
         OnOOCMonsterDefeat.RemoveListener(disableIfDefeated);
+        TutorialSequence.OnTutorialTargetVisibilityCheck.RemoveListener(isVisible);
 	}
 
 	public void onReveal(bool toggleReveal)
@@ -904,4 +906,9 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	{
 		return new Vector2(getRectTransform().rect.width / 4f, getRectTransform().rect.height / 4f) * PlayerObject.getInstanceTransform().localScale;
 	}
+    
+    public void isVisible(TutorialWindowTargetVisibility visibility)
+    {
+        visibility.visible = visibility.tutorialHash.Equals(tutorialHash) && gameObject.activeInHierarchy;
+    }
 }
