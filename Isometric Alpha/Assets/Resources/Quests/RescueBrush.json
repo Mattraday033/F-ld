@@ -1,6 +1,5 @@
 {
 	"title": "Rescue Brush",
-	"numberOfSteps": 7,
 	"steps":[	
 				{"stepName":"Finding the Pit.","MapZone":"","MapLocation":"","journalDescription":"The guards have taken Brush to somewhere called the Pit. <B>I must locate where the Pit is and find a way to free Brush.</B>"},
 				{"stepName":"Beneath the Manse.","MapZone":"Manse-1F","MapLocation":"","journalDescription":"The guards have taken Brush to somewhere called the Pit. <B>I must locate where the Pit is and find a way to free Brush. Kastor has said that the other slaves speculate that the Pit lies somewhere beneath the Manse.</B> This will make it more difficult to get Brush out, but not impossible."},

@@ -151,7 +151,7 @@ Ah, I thought you were just another of the branded. I'm Weft. I take it you're n
 exchangeItemForXP(Weft's Rations,1,50)
 
     +That's right. Fresh off the cart this morning.
-        You move fast then, if you've already been sent <i>here</i>. And it's well you that you have been: this hut is for the branded that have a future. All the others aren't worth your time.
+        You move fast then, if you've already been sent <i>here</i>. And it's well for you that you have been: this hut is for the branded that have a future. All the others aren't worth your time.
         ->1c
 
 === 1c ===

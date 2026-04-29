@@ -1,6 +1,5 @@
 {
 	"title": "Look for Thatch",
-	"numberOfSteps": 9,
 	"steps":[
 				{"stepName":"Cross the road.","MapZone":"Camp","MapLocation":"6SlaveShack","journalDescription":"Kastor needs a little more convincing before he entrusts me with the knowledge of his plans and comrades. <B>Kastor has tasked me with investigating the shack just northeast of his.</B> He said he heard some screams coming from that direction last night and wishes to learn what happened."},
 				

@@ -189,8 +189,8 @@ You disgust me. I followed you. I thought you were someone who could be trusted 
         keepDialogue()
         I did, but I thought you understood the purpose of this gathering was to prevent exactly what you just did.
         ->2aa
-    +You would chose a dead guard over the fellow branded who freed you from servitude?
-        No. I chose to live my life apart from malicious pondscum like you.  
+    +You would choose a dead guard over the fellow branded who freed you from servitude?
+        No. I choose to live my life apart from malicious vermin like you.  
         ->nandorLeavesParty
     +Do me the same favor then. I'll give you a wide birth if you do so too.
         Gladly.

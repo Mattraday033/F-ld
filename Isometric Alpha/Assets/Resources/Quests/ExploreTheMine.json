@@ -1,6 +1,5 @@
 {
 	"title": "Explore the Mine",
-	"numberOfSteps": 6,
 	"steps":[
 				{"stepName":"Enter the mine.","MapZone":"Camp","MapLocation":"MineEntranceCamp","journalDescription":"For the good of the plan, <B>I must gain access to the camp's mine. Kastor said the mine was located in the southwestern portion of the camp, west of his hut.</B>"},
 				{"stepName":"Find the second floor.","MapZone":"MineLvl_1","MapLocation":"MineLvl_1-1b","journalDescription":"I have gained access to the mine. Now I must find my way deeper inside it."},

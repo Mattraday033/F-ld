@@ -891,6 +891,7 @@ public static class AudioClipList
             case NPCNameList.controlPanel:  
             case NPCNameList.leafPile:
                 return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(onTransitionSFX), VolumeType.Voice);     
+            case NPCNameList.captainAdela:
             case NPCNameList.guardVirag:
             case NPCNameList.guardReka:
             case NPCNameList.guardMuzsa:

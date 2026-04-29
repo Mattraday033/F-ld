@@ -1,6 +1,5 @@
 {
 	"title": "Sealing the Breach",
-	"numberOfSteps": 11,
 	"steps":[
 				{"stepName":"Convince the Guards.","MapZone":"MineLvl_3","MapLocation":"MineLvl_3-3b","journalDescription":"Nándor and Guard Márcos have explained that the best way to seal the breach is to <B>convince the guards stuck on the mine's third level to collapse it with blasting jelly.</B> If they are uncooperative, then we will instead need to kill them and take their blasting jelly for ourselves. <B>I can find the guards in a tunnel to the southeast of Nándor's camp.</B>"},
 				{"stepName":"The Guards Will Help.","MapZone":"MineLvl_3","MapLocation":"MineLvl_3-7","journalDescription":"I have convinced Overseer Gáspár and his guards to help close the tunnel that the worms are coming through. <B>I should proceed to the deepest part of the mine to the south</B> and with their help, finish this."},

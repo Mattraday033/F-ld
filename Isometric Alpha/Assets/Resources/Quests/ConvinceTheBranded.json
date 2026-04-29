@@ -1,6 +1,5 @@
 {
 	"title": "Convince the Branded",
-	"numberOfSteps": 4,
 	"steps":[
 				{"stepName":"Back to the North East.","MapZone":"Camp","MapLocation":"NECamp","journalDescription":"Now that I have raised the camp's alarm, Kastor will not help me without allies. Perhaps if I <B>defeat the guards that have locked down the north eastern section of the camp</B>, the branded there will join the fight. I should gather others to help me, it will surely be a tough fight."},
                 {"stepName":"The Branded have been convinced.","MapZone":"Camp","MapLocation":"SECamp","journalDescription":"The Branded have joined the fight. Now the riots can commence. <B>I should return to Kastor in the southeast portion of the camp to see if he will join us as well.</B>"},

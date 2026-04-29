@@ -1,6 +1,5 @@
 {
 	"title": "The Plan",
-	"numberOfSteps": 21,
 	"steps":[	
 				{"stepName":"I just got here!","MapZone":"","MapLocation":"","journalDescription":"Upon waking up for the first time at the work camp, I was approached by my fellow inmates to join a conspiracy to escape. I accepted, and now they are counting on me to be their messenger to other cells working on the same plan."},
 				{"stepName":"The death of Brush.","MapZone":"","MapLocation":"","journalDescription":"I may have over done it a little when trying to convince a guard of my 'trustworthiness'. The guard took exception to the words I put in Brush's mouth and executed him for it. A man is dead, and I am at least partly responsible. I will need to take more care in the future what I say and to whom."},

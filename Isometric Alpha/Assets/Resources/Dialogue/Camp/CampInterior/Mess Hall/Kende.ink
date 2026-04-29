@@ -191,7 +191,7 @@ fadeToBlack(false, false)
 
 setToTrue(toldKendeTaborSentForMeal)
 
-activateQuestStep(Chief Tabor,A situation brews.)
+activateQuestStep(A Situation Brews,Assess the situation.)
 
 ~weftActive = true
 activate({weftIndex})

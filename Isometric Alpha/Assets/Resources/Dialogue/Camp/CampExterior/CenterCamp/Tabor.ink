@@ -240,7 +240,7 @@ Well, {playerName}, you and Weft will be working with me today. We are expecting
 
 === 3c ===
 
-The section of the camp you'll be working in is on the north west side of the camp. Just go back west until you pass Weft's hut again, and then turn north. If you pass the well, you've gone too far. I'll meet you there. You are dismissed.
+The section of the camp you'll be working in is on the northwest side of the camp. Just go back west until you pass Weft's hut again, and then turn north. If you pass the well, you've gone too far. I'll meet you there. You are dismissed.
 
 fadeToBlack()
 

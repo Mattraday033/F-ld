@@ -174,7 +174,7 @@ Before the lockdown started, some of the other slaves and I were trying to figur
 
 changeCamTarget({brushIndex})
 
-The guards aren't about to hand out any special privileges to Géza and me, we've been around too long. They know we're not the grovelling types. But you just got here. If we can give them a good first impression, they'll find a use for you. 
+The guards aren't about to hand out any special privileges to Géza and I, we've been around too long. They know we're not the grovelling types. But you just got here. If we can give them a good first impression, they'll find a use for you. 
 
 changeCamTarget({gézaIndex})
 

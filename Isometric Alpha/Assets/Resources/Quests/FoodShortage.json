@@ -1,6 +1,5 @@
 {
 	"title": "Food Shortage",
-	"numberOfSteps": 7,
 	"steps":[
 				{"stepName":"Discuss with Kastor.","MapZone":"Camp","MapLocation":"SECamp","journalDescription":"Nándor no longer will travel with me. At the end of our final conversation, <B>Nándor told me Kastor could explain to me what needs to be done before the freed slaves can leave the camp. Kastor should still be in the Mess Hall's yard, in the southeastern corner of the camp.</B>"},
 				{"stepName":"I kept my word.","MapZone":"","MapLocation":"","journalDescription":"I was asked to break my oath and allow the horses to feed the starving slaves, but I stuck to my word. The horses' bodies have been burned and the Gods' wrath has been averted."},

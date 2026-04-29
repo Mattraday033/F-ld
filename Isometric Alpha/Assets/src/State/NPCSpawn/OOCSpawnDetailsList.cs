@@ -174,13 +174,19 @@ public static class OOCSpawnDetailsList
         #region 7SlaveShack
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.dezso, new Vector3Int(5, 5), LocationNameList.slaveShackSeven, facing: Facing.SouthWest, speakAtStartScript: new DezsoLoamDialogueScript()));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.dezso, new Vector3Int(6, 6), LocationNameList.slaveShackSeven, facing: Facing.SouthWest, speakAtStartScript: new DezsoLoamDialogueScript()));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.loam, new Vector3Int(5, 9), LocationNameList.slaveShackSeven, facing: Facing.SouthEast));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(9, 9), LocationNameList.slaveShackSeven, facing: Facing.SouthWest));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(3, 3), LocationNameList.slaveShackSeven, animationName: NPCNameList.slave+1, facing: Facing.NorthWest));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(7, 12), LocationNameList.slaveShackSeven, animationName: NPCNameList.slave+2, facing: Facing.SouthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(7, 3), LocationNameList.slaveShackSeven, animationName: NPCNameList.temple, facing: Facing.SouthWest));
+
+        
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(6, 5), LocationNameList.slaveShackSeven, animationName: MonsterNameList.spearman, animationType: CharacterAnimationType.Secondary_Idle, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+2, new Vector3Int(6, 7), LocationNameList.slaveShackSeven, animationName: MonsterNameList.axeman, animationType: CharacterAnimationType.Secondary_Idle, facing: Facing.SouthWest));
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+3, new Vector3Int(3, 11), LocationNameList.slaveShackSeven, animationName: MonsterNameList.javelineer, animationType: CharacterAnimationType.Death_Front, facing: Facing.SouthWest));
 
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackSeven, list);
         #endregion
@@ -196,7 +202,7 @@ public static class OOCSpawnDetailsList
         #region Guard Shack
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardLaszlo, new Vector3Int(12, 4), LocationNameList.guardShack, facing: Facing.NorthEast));
+        // list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardLaszlo, new Vector3Int(12, 4), LocationNameList.guardShack, facing: Facing.NorthEast));
 
         oocSpawnDetailsDict.Add(LocationNameList.guardShack, list);
         #endregion
@@ -284,9 +290,9 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.captainAdela, new Vector3Int(-9, -9), LocationNameList.campNorthEast, facing: Facing.NorthEast));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(-8, -11), facing: Facing.NorthWest));
 
-
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(-5, -11), LocationNameList.campNorthEast, animationName: MonsterNameList.spearman, animationType: CharacterAnimationType.Idle_Back, facing: Facing.NorthEast));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(-5, -13), LocationNameList.campNorthEast, animationName: MonsterNameList.spearman, animationType: CharacterAnimationType.Idle_Back, facing: Facing.NorthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(-4, -11), LocationNameList.campNorthEast, animationName: MonsterNameList.spearman, animationType: CharacterAnimationType.Idle_Back, facing: Facing.NorthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+2, new Vector3Int(-5, -12), LocationNameList.campNorthEast, animationName: MonsterNameList.javelineer, animationType: CharacterAnimationType.Idle_Back, facing: Facing.NorthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(-4, -13), LocationNameList.campNorthEast, animationName: MonsterNameList.spearman, animationType: CharacterAnimationType.Idle_Back, facing: Facing.NorthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(-3, -14), LocationNameList.campNorthEast, animationName: MonsterNameList.axeman, animationType: CharacterAnimationType.Idle_Back, facing: Facing.NorthWest));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.honorguard+1, new Vector3Int(-3, -8), LocationNameList.campNorthEast, animationName: MonsterNameList.linebreaker, facing: Facing.SouthWest));

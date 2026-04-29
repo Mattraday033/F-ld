@@ -1437,7 +1437,13 @@ public class DialogueManager : MonoBehaviour
                     }
 
                     startDialogue(DialogueList.getDialogue(dialogueKey), midDialogue: true); 
-                    currentStory.variablesState[startingBoolName.Replace(" ", "")] = true;
+                    
+                    startingBoolName = startingBoolName.Replace(" ", "");
+
+                    if(currentStory.variablesState[startingBoolName] != null)
+                    {
+                        currentStory.variablesState[startingBoolName] = true;
+                    }
 
                     continueStory();
 

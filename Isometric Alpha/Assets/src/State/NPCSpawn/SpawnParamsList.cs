@@ -262,6 +262,13 @@ public static class SpawnParamsList
         InteractableSpawnParams situationCampNESpawnParams = new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.situationStartedInNECamp }),
                                                                                          new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated }));
 
+//spokeToTaborAtBeginningOfSituation
+
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.guard+2), 
+                                                                        new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.situationStartedInNECamp }),
+                                                                                                    new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.spokeToTaborAtBeginningOfSituation })));
+
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.guard+1), situationCampNESpawnParams);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.honorguard+1), situationCampNESpawnParams);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.chiefTabor), situationCampNESpawnParams);

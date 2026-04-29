@@ -1,6 +1,5 @@
 {
 	"title": "An Uneasy Truce",
-	"numberOfSteps": 12,
 	"steps":[
 				{"stepName":"The truce is made.","MapZone":"Manse-2F","MapLocation":"","journalDescription":"I came across Chief Tabor within the Manse. He was protecting an escape hatch, which the Director's children and their bodyguards used to escape the riot. I spoke with him, and convinced him that we meant no harm to the children. I proposed a deal where I would keep the rioters away from the hatch, and in exchange he would not impede our progress. <B>I should return after the Director is defeated to see if he will surrender.</B>"},
 				{"stepName":"The hostilities never cease.","MapZone":"","MapLocation":"","journalDescription":"I came across Chief Tabor within the Manse. He was protecting an escape hatch, which the Director's children and their bodyguards used to escape the riot. I took my revenge on him, and he will never harm another of the branded."},

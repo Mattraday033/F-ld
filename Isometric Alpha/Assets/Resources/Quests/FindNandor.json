@@ -1,6 +1,5 @@
 {
 	"title": "Finding Nándor",
-	"numberOfSteps": 4,
 	"steps":[
 				{"stepName":"Find Nándor.","MapZone":"MineLvl_3","MapLocation":"MineLvl_3-MinerCamp","journalDescription":"Kastor has explained that the plan to escape cannot succeed without the man who came up with it: Nándor. The catch is that he never made it out of the mine in the south west part of the camp. <B>I will need to go down to the third floor and find him or his remains if I want Kastor to kick things off.</B>"},
 				{"stepName":"Nándor found.","MapZone":"MineLvl_3","MapLocation":"MineLvl_3-7","journalDescription":"I made contact with Nándor in the mine. I can bring him back to Kastor whenever I wish, but <B>Nándor has asked that we close the tunnel that the worms are coming from on the southern end of the mine's third level</B> before we return to the surface."},

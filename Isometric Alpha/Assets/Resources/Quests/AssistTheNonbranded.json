@@ -1,6 +1,5 @@
 {
 	"title": "Assist the Nonbranded",
-	"numberOfSteps": 7,
 	"steps":[
 				{"stepName":"Convinced Imre.","MapZone":"","MapLocation":"","journalDescription":"I spoke with Imre and convinced him to get the nonbranded slaves in on the escape plan. For now, <B>I should wait until the revolution begins in earnest, then go and find him.</B>"},
 				{"stepName":"Terrified Imre.","MapZone":"","MapLocation":"","journalDescription":"I spoke with Imre and intimidated him into joining our conspiracy. It'll be up to him to convince the other nonbranded slaves to help us. I can only hope he doesn't screw it up. <B>I should wait until the revolution begins in earnest, then go and find him.</B>"},

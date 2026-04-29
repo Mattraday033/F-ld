@@ -271,7 +271,7 @@ We must not understand your meaning. You're not letting him go... are you?
 
 {
 -charisma >= 4:
-    *As the one who accepted his surrender, it is my right to chose his fate. If any of you harm him, I will take it as a personal insult. <Cha {charisma}/4>
+    *As the one who accepted his surrender, it is my right to choose his fate. If any of you harm him, I will take it as a personal insult. <Cha {charisma}/4>
         ->madeHighCharismaCheck1a
     *\*Address the crowd.* I give you my word that I will answer all of your questions, but first we must have some peace so I can hear them! <Cha {charisma}/2>
         ->madeLowCharismaCheck1a

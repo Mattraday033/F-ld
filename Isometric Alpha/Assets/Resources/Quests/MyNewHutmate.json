@@ -1,6 +1,5 @@
 {
 	"title": "My New Hutmate",
-	"numberOfSteps": 2,
 	"steps":[	
 				{"stepName":"Deliver Rations to Weft.","MapZone":"Camp","MapLocation":"ManseCamp","journalDescription":"I impressed Guard László, who gave me a badge that allows me to move around the camp without being harassed. <B>László told me to deliver some rations to my new hutmate: a slave named Weft. He lives in a large hut, west of the center of camp in front a big house called the Manse.</B>"},
 	            {"stepName":"Rations delivered.","MapZone":"","MapLocation":"","journalDescription":"I gave the rations to Weft."}

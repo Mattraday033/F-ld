@@ -44,6 +44,8 @@ setTutorialToSeen(secondCunningTutorialSequenceEntered)
 setTutorialToSeen(observationTutorialSequenceEntered)
 setTutorialToSeen(leadershipTutorialSequenceEntered)
 
+finishQuest(Chief Tabor,true,Work complete.)
+
 deactivate({previousTaborIndex})
 
 defeatMonster(NWCamp,0,true)
@@ -82,7 +84,7 @@ Of course there is. I'd best go see what that is about. You two, go directly to 
 
 === 1b ===
 
-activateQuestStep(Chief Tabor,Midday meal.)
+activateQuestStep(A Situation Brews,Midday meal.)
 
 You did your work well today, I forgot you're new. It's the large building with the wooden roof in the southeast part of the camp. It's the one that opens up into a large yard with a well. Just head south from the center of camp and you can't miss it.
 
@@ -96,7 +98,7 @@ Don't come back until you've removed those boards.
 
 === 2a ===
 
-activateQuestStep(Chief Tabor,A situation brews.)
+activateQuestStep(A Situation Brews,Assess the situation.)
 
 Of course there is. Looks like lunch will have to wait, Adéla wouldn't have sent for me if it wasn't urgent. I will run ahead and see what needs my attention. Meet me in the camp's northeast quarter and I'll put you to work on whatever has come up.
 

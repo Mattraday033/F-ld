@@ -1,6 +1,5 @@
 {
 	"title": "Aiding Janos",
-	"numberOfSteps": 13,
 	"steps":[
 				{"stepName":"Change of plans.","MapZone":"Camp","MapLocation":"3SlaveShack","journalDescription":"The revolt won't get far without weapons. Kastor has tasked another slave named Janos with obtaining the key to the guard post's armory. However, with the mine's closing he now believes it will be less risky if we raid the armory within the mine itself. <B>I need to find Janos in the camp's northeast section and inform him of the change in plans.</B>"},
 				{"stepName":"An obvious trap.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"Janos has devised a plan to obtain the key to the mine's armory: just ask for it! He is delusional at best and actively working against us at worst. <B>I will need to find another way of obtaining the key. I should return to Kastor in the southeast part of the camp and see what he has to say.</B>"},

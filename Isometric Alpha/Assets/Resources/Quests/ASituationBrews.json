@@ -1,0 +1,15 @@
+{
+	"title": "A Situation Brews",
+	"steps":[	
+                {"stepName":"Midday meal.","MapZone":"Camp","MapLocation":"SECamp","journalDescription":"Chief Tabor sent me to get my lunch from the mess hall while he deals with something. <B>I should head to the mess hall in the southeast corner of the camp and speak to the cook there.</B> Once I'm finished with that, I should return to Chief Tabor in the northeast section of the camp."},
+                {"stepName":"Assess the situation.","MapZone":"Camp","MapLocation":"NECamp","journalDescription":"<B>I should meet with Chief Tabor in the northeast section of the camp.</B>"},
+                {"stepName":"Negotiate.","MapZone":"Camp","MapLocation":"NECamp","journalDescription":"Chief Tabor and Captain Adéla told me that a squad of guards have been taken hostage by a group of branded. The branded are digging a tunnel out of the camp and are using the hostages to stall for time. <B>I should enter the southern most hut in the northeast corner of the camp to begin the negotiations.</B>"},
+                {"stepName":"Quest complete.","MapZone":"","MapLocation":"","journalDescription":"Quest complete."}
+            ],
+			
+	
+	"deathSteps":
+			[
+			]
+	
+}

@@ -1,6 +1,5 @@
 {
 	"title": "Stockhouse Stash",
-	"numberOfSteps": 13,
 	"steps":[
 				{"stepName":"I found some iron","MapZone":"Camp","MapLocation":"Stockhouse","journalDescription":"I found an Iron Nugget behind a barrel in the stockhouse. Perhaps someone lost it?"},
 				{"stepName":"Uros is hiding something.","MapZone":"Camp","MapLocation":"Stockhouse","journalDescription":"I spoke with the branded slave Uros, who was looking for something in the camp's stockhouse. He wouldn't tell me what it was but he seemed frantic to find it so it must be valuable. <B>I should search the crates and barrels within the stockhouse near the mine's entrance to find what he has stashed.</B>"},

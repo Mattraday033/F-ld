@@ -94,6 +94,7 @@ public static class EnemyTypeFolderPathList
         //Named Lovashi
         folderPathDict.Add(NPCNameList.andras, lovashiFolderPath + NPCNameList.guardAndras + "/");
         folderPathDict.Add(NPCNameList.guardAndras, lovashiFolderPath + NPCNameList.guardAndras + "/");
+        folderPathDict.Add(NPCNameList.captainAdela, lovashiFolderPath + NPCNameList.captainAdela + "/");
         folderPathDict.Add(NPCNameList.director, lovashiFolderPath + NPCNameList.director + "/");
         folderPathDict.Add(NPCNameList.quartermasterEmese, lovashiFolderPath + NPCNameList.quartermasterEmese + "/");
         folderPathDict.Add(NPCNameList.guardLaszlo, lovashiFolderPath + NPCNameList.guardLaszlo + "/");
@@ -115,13 +116,13 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.brush, brandedFolderPath + NPCNameList.brush + "/");
         folderPathDict.Add(NPCNameList.balint, brandedFolderPath + NPCNameList.balint + "/");
         folderPathDict.Add(NPCNameList.clay, brandedFolderPath + NPCNameList.clay + "/");
-        folderPathDict.Add(NPCNameList.dezso, brandedFolderPath + NPCNameList.ervin + "/");
+        folderPathDict.Add(NPCNameList.dezso, brandedFolderPath + NPCNameList.kastor + "/");
         folderPathDict.Add(NPCNameList.ervin, brandedFolderPath + NPCNameList.ervin + "/");
         folderPathDict.Add(NPCNameList.feher, brandedFolderPath + NPCNameList.feher + "/");
         folderPathDict.Add(NPCNameList.géza, brandedFolderPath + NPCNameList.géza + "/");
         folderPathDict.Add(NPCNameList.janos, brandedFolderPath + NPCNameList.janos + "/");
         folderPathDict.Add(NPCNameList.kastor, brandedFolderPath + NPCNameList.kastor + "/");
-        folderPathDict.Add(NPCNameList.loam, brandedFolderPath + NPCNameList.kastor + "/");
+        folderPathDict.Add(NPCNameList.loam, brandedFolderPath + NPCNameList.ervin + "/");
         folderPathDict.Add(NPCNameList.temple, brandedFolderPath + NPCNameList.temple + "/");
         folderPathDict.Add(NPCNameList.uros, brandedFolderPath + NPCNameList.uros + "/");
 

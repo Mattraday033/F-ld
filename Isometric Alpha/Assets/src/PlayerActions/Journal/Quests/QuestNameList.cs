@@ -83,9 +83,12 @@ public static class QuestNameList
     public const string chiefTaborStepTitleEight = "Return to Tabor.3";
     public const string chiefTaborStepTitleNine = "Remove the wall patch.";
     public const string chiefTaborStepTitleTen = "Return to Tabor.4";
-    public const string chiefTaborStepTitleEleven = "Midday meal.";
-    public const string chiefTaborStepTitleTwelve = "A situation brews.";
-    public const string chiefTaborStepTitleFinal = "Quest Finished";
+    public const string chiefTaborStepTitleEleven = "Work complete.";
+
+    public const string aSituationBrewsQuestTitle = "A Situation Brews";
+
+    public const string aSituationBrewsStepTitleOne = "Midday meal.";
+    public const string aSituationBrewsStepTitleTwo = "Assess the situation.";
 
     public const string convinceTheBrandedQuestTitle = "Convince the Branded";
 
