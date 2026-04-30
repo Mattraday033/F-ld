@@ -46,10 +46,11 @@ public static class FlagNameList
         public const string weftKnowsYouKnowHisSecret = "weftKnowsYouKnowHisSecret";
         public const string liedToWeftAboutHearingExtortion = "liedToWeftAboutHearingExtortion";
         public const string weftAddedToParty = "weftAddedToParty";
+
+        //Tabor Skill Tutorial Flags
         public const string toldByTaborToBuildHouses = "toldByTaborToBuildHouses";
         public const string canEnterCampNorthWest = "canEnterCampNorthWest";
         public const string skippedTutorialInNWCamp = "skippedTutorialInNWCamp";
-        public const string toldToGetMealByTabor = "toldToGetMealByTabor";
         public const string acceptedTaborSkillTutorial = "acceptedTaborSkillTutorial";
         public const string startedTaborIntimidateTutorial = "startedTaborIntimidateTutorial";
         public const string finishedTaborIntimidateTutorial = "finishedTaborIntimidateTutorial";
@@ -59,8 +60,18 @@ public static class FlagNameList
         public const string finishedTaborObservationTutorial = "finishedTaborObservationTutorial";
         public const string startedTaborLeadershipTutorial = "startedTaborLeadershipTutorial";
         public const string finishedTaborLeadershipTutorial = "finishedTaborLeadershipTutorial";
+
+        //hostage negotiations flags
+        public const string toldToGetMealByTabor = "toldToGetMealByTabor";
         public const string situationStartedInNECamp = "situationStartedInNECamp";
         public const string spokeToTaborAtBeginningOfSituation = "spokeToTaborAtBeginningOfSituation";
+        public const string concludedHostageNegotiations = "concludedHostageNegotiations";
+        public const string declaredHostagesDead = "declaredHostagesDead";
+        public const string savedHostages = "savedHostages";
+        public const string hostagesDead = "hostagesDead";
+        public const string foughtDezsoAndLoam = "foughtDezsoAndLoam";
+        public const string mentionedStoneMan = "mentionedStoneMan";
+        public const string allowedYourselfToBeTakenHostage = "allowedYourselfToBeTakenHostage";
 
         //kastor convo flags
         public const string metKastor = "metKastor"; //if the player has spoken to Kastor before

@@ -177,16 +177,19 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.dezso, new Vector3Int(6, 6), LocationNameList.slaveShackSeven, facing: Facing.SouthWest, speakAtStartScript: new DezsoLoamDialogueScript()));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.loam, new Vector3Int(5, 9), LocationNameList.slaveShackSeven, facing: Facing.SouthEast));
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(9, 9), LocationNameList.slaveShackSeven, facing: Facing.SouthWest));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(3, 3), LocationNameList.slaveShackSeven, animationName: NPCNameList.slave+1, facing: Facing.NorthWest));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(7, 12), LocationNameList.slaveShackSeven, animationName: NPCNameList.slave+2, facing: Facing.SouthEast));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(7, 3), LocationNameList.slaveShackSeven, animationName: NPCNameList.temple, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(9, 9), LocationNameList.slaveShackSeven, facing: Facing.SouthWest, ignoresSecretDoors: false));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(3, 3), LocationNameList.slaveShackSeven, animationName: NPCNameList.slave+1, facing: Facing.NorthWest, ignoresSecretDoors: false));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(7, 12), LocationNameList.slaveShackSeven, animationName: NPCNameList.slave+2, facing: Facing.SouthEast, ignoresSecretDoors: false));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave, new Vector3Int(7, 3), LocationNameList.slaveShackSeven, animationName: NPCNameList.temple, facing: Facing.SouthWest, ignoresSecretDoors: false));
 
         
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(6, 5), LocationNameList.slaveShackSeven, animationName: MonsterNameList.spearman, animationType: CharacterAnimationType.Secondary_Idle, facing: Facing.SouthWest));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+2, new Vector3Int(6, 7), LocationNameList.slaveShackSeven, animationName: MonsterNameList.axeman, animationType: CharacterAnimationType.Secondary_Idle, facing: Facing.SouthWest));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+3, new Vector3Int(3, 11), LocationNameList.slaveShackSeven, animationName: MonsterNameList.javelineer, animationType: CharacterAnimationType.Death_Front, facing: Facing.SouthWest));
+        
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(3, 7), facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard, new Vector3Int(-1, 6)));
 
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackSeven, list);
         #endregion

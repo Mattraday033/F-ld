@@ -44,10 +44,10 @@ public class DezsoLoamDialogueScript: SpeakAtStartScript //Brush + Géza in the 
 
     public override void runScript(GameObject target = null)
     {
-        // if (Flags.getFlag(FlagNameList.givenTaskByLaszlo) && !Flags.getFlag(FlagNameList.metWeft))
-        // {
-        //     dialogueTrigger.triggerDialogue();
-        // }
+        if (Flags.getFlag(FlagNameList.spokeToTaborAtBeginningOfSituation) && !Flags.getFlag(FlagNameList.concludedHostageNegotiations))
+        {
+            dialogueTrigger.triggerDialogue();
+        }
     }
 
 }

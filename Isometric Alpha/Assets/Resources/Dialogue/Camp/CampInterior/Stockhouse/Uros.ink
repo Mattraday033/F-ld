@@ -255,7 +255,7 @@ finishQuest(Stockhouse Stash, true, The nugget stolen.)
 
 prepForItem()
 
-You little shit. I won't forget this. Ever!
+You little stain. I won't forget this. Ever!
 
 addXP(100)
 

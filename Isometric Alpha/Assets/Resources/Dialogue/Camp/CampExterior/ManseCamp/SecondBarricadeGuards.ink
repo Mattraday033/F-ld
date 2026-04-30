@@ -95,7 +95,7 @@ setToTrue(strengthBarricadePassUsed)
 
 setToTrue(wisdomBarricadePassUsed)
 
-\*Sigh* I can see that. Fine, we'll enter into your custody. Lower your weapons, we're coming out.
+\*The guard sighs.* I can see that. Fine, we'll enter into your custody. Lower your weapons, we're coming out.
 
     ->deactivateExtras
 

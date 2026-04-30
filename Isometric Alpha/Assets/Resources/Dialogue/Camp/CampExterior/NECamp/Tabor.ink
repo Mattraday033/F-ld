@@ -46,15 +46,17 @@ setNPCFacing({adelaIndex},SE)
 fadeBackIn(60)
 enableDialogueUI()
 
-The situation is this: inside the hut to my left is a group of branded who have been attempting to tunnel underneath their hut, below the wall and ditch, and out into the forest. They haven't completed it yet, or else they'd have already made their escape.
+The situation is this: inside the hut to my left is a group of branded who have taken a squad of guards hostage. We have confirmed they have killed at least one of them already.
 
 changeCamTarget({adelaIndex})
 
-We discovered this plot when a squad of my men didn't come back from their morning inspection. The scum disarmed them somehow and have killed at least one of them. The rest are their prisoners, and what little dialogue we have managed to coax from the group's leader has revealed they want to use them to barter for their freedom.
+The strange part is that the branded don't seem keen to negotiate. We only discovered this plot when my men didn't come back from their morning inspection, and any attempt to create a dialogue has ended in stalemate. 
+
+What use are hostages if they aren't used for leverage? Something is wrong here. They're stalling, but we aren't certain for what reason.
 
 changeCamTarget({weftIndex})
 
-Those leeches! They'll regret that soon, I'm sure.
+Those leeches! They'll regret this soon, I'm sure.
 
     +Where do we come into this?
         ->1b
@@ -68,15 +70,11 @@ Those leeches! They'll regret that soon, I'm sure.
 
 changeCamTarget({taborIndex})
 
-We don't think we can force the entrance of the hut without the branded killing the prisoners, and we haven't had much luck negotiating with them from out here.
+We don't think we can carry the entrance of the hut without the branded killing the prisoners, and we haven't had much luck negotiating with them from out here.
 
 changeCamTarget({adelaIndex})
 
-They're stalling. They must think they can complete their tunnel before we decide to storm their hut.
-
-changeCamTarget({taborIndex})
-
-You two are going to negotiate for us. I doubt they'd let a guard, even one who is unarmed, enter the hut without taking them hostage.
+So we've decided to force the issue. You two are going to go in there and negotiate for us. I doubt they'd let a guard, even one who is unarmed, enter the hut without taking them hostage as well.
 
     ->1c
 
@@ -117,7 +115,7 @@ You two are going to negotiate for us. I doubt they'd let a guard, even one who 
         
         changeCamTarget({taborIndex})
 
-        I am the Chief Correction Officer. I am the one who determines how we reprimand the slaves and for what reasons. You may be my superior, but the Director has given me this role and he will hear about anyone who encroaches on it.
+        I am the Chief Correctional Officer. I am the one who determines how we reprimand the slaves and for what reasons. You may be my superior, but the Director has given me this role and he will hear about anyone who encroaches on it.
         
         changeCamTarget({adelaIndex})
     

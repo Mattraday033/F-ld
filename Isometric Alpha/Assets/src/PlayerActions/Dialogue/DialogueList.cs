@@ -169,7 +169,9 @@ public static class DialogueList
                                                         NPCNameList.loam,
                                                         NPCNameList.guard+1,
                                                         NPCNameList.guard+2,
-                                                        NPCNameList.guard+3
+                                                        NPCNameList.guard+3,
+                                                        NPCNameList.weft,
+                                                        NPCNameList.guard
                                                         },
                             Resources.Load<TextAsset>(DialogueNameList.dezsoPath)));
 

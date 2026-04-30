@@ -1223,13 +1223,25 @@ public class DialogueManager : MonoBehaviour
 
                 case "execute":
 
-                    int deadNameIndex = getArgumentInt(buffer, Constants.indexZero);
+                    args = getAllArgs(buffer);
 
-                    GameObject executionTarget = changeCameraTarget(deadNameIndex);
+                    List<int> allIndexes = new List<int>();
+                    List<GameObject> executionTargets = new List<GameObject>();
 
-                    DeathFlagManager.addName(currentDialogue.names[deadNameIndex]);
+                    foreach(string index in args)
+                    {
+                        allIndexes.Add(getArgumentInt(index, Constants.indexZero));
+                    }
 
-                    StartCoroutine(handleExecution(executionTarget));
+                    changeCameraTarget(allIndexes[0]);
+
+                    foreach(int index in allIndexes)
+                    {
+                        executionTargets.Add(currentDialogue.cameraFoci[index]);    
+                        DeathFlagManager.addName(currentDialogue.names[index]);
+                    }
+
+                    StartCoroutine(handleExecution(executionTargets));
 
                     return;
 
@@ -1247,7 +1259,7 @@ public class DialogueManager : MonoBehaviour
 
                 case "kill":
 
-                    deadNameIndex = getArgumentInt(buffer, Constants.indexZero);
+                    int deadNameIndex = getArgumentInt(buffer, Constants.indexZero);
 
                     DeathFlagManager.addName(currentDialogue.names[deadNameIndex]);
 
@@ -1934,7 +1946,7 @@ public class DialogueManager : MonoBehaviour
 		}
 	}
 
-	private IEnumerator handleExecution(GameObject target)
+	private IEnumerator handleExecution(List<GameObject> targets)
 	{
 		if (dialogueTrackerWindow != null)
 		{
@@ -1950,7 +1962,11 @@ public class DialogueManager : MonoBehaviour
 
 		AudioClip executionClip = Resources.Load<AudioClip>(AudioClipList.executionSFX);
 		AudioManager.playExecutionSFX();
-        target.SetActive(false);
+
+        foreach(GameObject target in targets)
+        {
+            target.SetActive(false);
+        }
         
 		yield return new WaitForSeconds(executionClip.length);
 

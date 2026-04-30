@@ -191,6 +191,58 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.button), chaTutorial);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.rubble + Constants.CHADesignator), chaTutorial);
         #endregion
+
+        #region Slave Shack 7
+
+        StopSpawningFlagList deszoLoamStopSpawningList = new StopSpawningFlagList(new string[] { 
+                                                                                                                                    FlagNameList.savedHostages,
+                                                                                                                                    FlagNameList.hostagesDead,
+                                                                                                                                    FlagNameList.foughtDezsoAndLoam, 
+                                                                                                                                    FlagNameList.revoltStarted,
+                                                                                                                                    FlagNameList.directorDefeated
+                                                                                                                                    });
+
+        StartSpawningFlagList hostagesStartSpawningList = new StartSpawningFlagList(new string[] { 
+                                                                                                    FlagNameList.spokeToTaborAtBeginningOfSituation
+                                                                                                    });
+
+        StopSpawningFlagList hostagesStopSpawningList = new StopSpawningFlagList(new string[] { 
+                                                                                                FlagNameList.hostagesDead,
+                                                                                                FlagNameList.savedHostages,
+                                                                                                FlagNameList.foughtDezsoAndLoam, 
+                                                                                                FlagNameList.revoltStarted,
+                                                                                                FlagNameList.directorDefeated
+                                                                                                });
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSeven, NPCNameList.dezso),
+                                         new InteractableSpawnParams(stopSpawningFlagList: deszoLoamStopSpawningList,
+                                                                     spawnWhileHostile: doesNotSpawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSeven, NPCNameList.loam),
+                                         new InteractableSpawnParams(stopSpawningFlagList: deszoLoamStopSpawningList,
+                                                                     spawnWhileHostile: doesNotSpawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSeven, NPCNameList.slave),
+                                         new InteractableSpawnParams(stopSpawningFlagList: deszoLoamStopSpawningList,
+                                                                     spawnWhileHostile: doesNotSpawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSeven, NPCNameList.guard+1),
+                                         new InteractableSpawnParams( startSpawningFlagList: hostagesStartSpawningList,
+                                                                        stopSpawningFlagList: hostagesStopSpawningList,
+                                                                        spawnWhileHostile: doesNotSpawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSeven, NPCNameList.guard+2),
+                                         new InteractableSpawnParams( startSpawningFlagList: hostagesStartSpawningList,
+                                                                        stopSpawningFlagList: hostagesStopSpawningList,
+                                                                        spawnWhileHostile: doesNotSpawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSeven, NPCNameList.guard+3),
+                                         new InteractableSpawnParams( startSpawningFlagList: hostagesStartSpawningList,
+                                                                        stopSpawningFlagList: hostagesStopSpawningList,
+                                                                        spawnWhileHostile: doesNotSpawnWhileHostile));
+
+        #endregion
+
         #region Slave Shack 8
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackEight, NPCNameList.weft),
