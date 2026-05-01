@@ -163,7 +163,7 @@ public static class DialogueList
                             Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
 
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.dezso,
-                            new Dialogue(new string[]{ 
+                            new Dialogue(new string[]{
                                                         NPCNameList.playerNamePlaceHolder,
                                                         NPCNameList.dezso,
                                                         NPCNameList.loam,
@@ -173,7 +173,8 @@ public static class DialogueList
                                                         NPCNameList.weft,
                                                         NPCNameList.guard
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.dezsoPath)));
+                            Resources.Load<TextAsset>(DialogueNameList.dezsoPath),
+                            DialogueCombatInfoList.dezsoHostageFight));
 
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.loam,
                             new Dialogue(new string[]{ NPCNameList.loam},
@@ -188,6 +189,11 @@ public static class DialogueList
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.guard+3,
                             new SingleCharacterDialogue(NPCNameList.guard,
                             Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
+
+        addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.guard+4,
+                            new SingleCharacterDialogue(NPCNameList.guard,
+                            Resources.Load<TextAsset>(DialogueNameList.guardsAfterHostagesPath)));
+
 
         #endregion
         #region Slave Shack 8

@@ -26,6 +26,8 @@ public class ReturnToMainMenu : IDecision
 
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
 
+        AudioManager.endAmbience();
+
         EscapeStack.instantiateEscapeStack();
 
         SceneChange.changeSceneToStartMenu();

@@ -993,6 +993,9 @@ public class DialogueManager : MonoBehaviour
                             case "standup":
                                 targetAnimationManager.playAnimation(CharacterAnimationType.StandUp);
                                 break;
+                            case "death_front_weaponless":
+                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Front_Weaponless);
+                                break;
                             case "death_back_weaponless":
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Back_Weaponless);
                                 break;
@@ -1223,25 +1226,14 @@ public class DialogueManager : MonoBehaviour
 
                 case "execute":
 
-                    args = getAllArgs(buffer);
+                    execute(buffer);
 
-                    List<int> allIndexes = new List<int>();
-                    List<GameObject> executionTargets = new List<GameObject>();
+                    return;
 
-                    foreach(string index in args)
-                    {
-                        allIndexes.Add(getArgumentInt(index, Constants.indexZero));
-                    }
+                case "executeleavebody":
+                case "executeleavebodies":
 
-                    changeCameraTarget(allIndexes[0]);
-
-                    foreach(int index in allIndexes)
-                    {
-                        executionTargets.Add(currentDialogue.cameraFoci[index]);    
-                        DeathFlagManager.addName(currentDialogue.names[index]);
-                    }
-
-                    StartCoroutine(handleExecution(executionTargets));
+                    execute(buffer, leaveDeadBodies: true);
 
                     return;
 
@@ -1727,6 +1719,29 @@ public class DialogueManager : MonoBehaviour
         currentStory.variablesState[args[Constants.indexZero]] = flagStatus;
     }
 
+    private void execute(string buffer, bool leaveDeadBodies = false)
+    {
+        string [] args = getAllArgs(buffer);
+
+        List<int> allIndexes = new List<int>();
+        List<GameObject> executionTargets = new List<GameObject>();
+
+        foreach(string arg in args)
+        {
+            allIndexes.Add(int.Parse(arg));
+        }
+
+        changeCameraTarget(allIndexes[0]);
+
+        foreach(int index in allIndexes)
+        {
+            executionTargets.Add(currentDialogue.cameraFoci[index]);    
+            DeathFlagManager.addName(currentDialogue.names[index]);
+        }
+
+        StartCoroutine(handleExecution(executionTargets, leaveDeadBodies));
+    }
+
     private Item getItemFromArgs(string[] args)
     {
         return ItemList.getItem(int.Parse(args[Constants.indexZero]),
@@ -1946,7 +1961,7 @@ public class DialogueManager : MonoBehaviour
 		}
 	}
 
-	private IEnumerator handleExecution(List<GameObject> targets)
+	private IEnumerator handleExecution(List<GameObject> targets, bool leaveDeadBodies)
 	{
 		if (dialogueTrackerWindow != null)
 		{
@@ -1965,7 +1980,27 @@ public class DialogueManager : MonoBehaviour
 
         foreach(GameObject target in targets)
         {
-            target.SetActive(false);
+            if(target == null)
+            {
+                continue;
+            }
+
+            if(leaveDeadBodies)
+            {
+                AnimationManager animationManager = target.GetComponent<AnimationManager>();
+
+                if(animationManager == null)
+                {
+                    target.SetActive(false);
+                    continue;
+                }
+
+                animationManager.setCurrentIdle(CharacterAnimationType.Death_Front_Weaponless);
+
+            } else
+            {
+                target.SetActive(false);
+            }
         }
         
 		yield return new WaitForSeconds(executionClip.length);

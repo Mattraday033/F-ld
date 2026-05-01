@@ -154,6 +154,7 @@ public static class DialogueNameList
     public const string captainAdelaPathName = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + "Adela";
     public const string taborNEPath = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + NPCNameList.tabor;
     public const string situationGuardPath = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + "SituationGuard";
+    public const string guardsAfterHostagesPath = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + "GuardsAfterHostages";
 
     public const string duringRevolutionSuffix = "DuringRevolution";
     public const string kastorNECampPathName = campExteriorPathName + LocationNameList.campNorthEast + Constants.seperatorChar + NPCNameList.kastor+duringRevolutionSuffix;

@@ -131,6 +131,7 @@ public static class ItemList
     public const int leatherArmorIndex = 27;
     public const int signalTorchIndex = 28;
     public const int servantsClothesIndex = 29;
+    public const int unsentLettersIndex = 30;
 
 	public const int leafSamplesIndex = 0;
 	public const int guardDiaryIndex = 1;
@@ -230,6 +231,7 @@ public static class ItemList
     public const string plumedHelmetKey = "Ancient Plumed " + helmetSuffix;
 	public const string cookingPotKey = "Cooking Pot";
 	public const string signalTorchKey = "Signal Torch";
+    public const string unsentLettersKey = "Unsent Letters";
 
     public const string toolBundleKey = "Tool Bundle";
 
@@ -314,8 +316,9 @@ public static class ItemList
 		armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, wickedKnifeIndex), wickedKnifeKey, "A barbed knife, meant for gouging.", "2D + 3", "2D + 1", "WickedKnife"));
 		armor.Add(new TierOneBody(new ItemListID(armorListIndex, leatherArmorIndex), leatherArmorKey, "Leather pads of tanned oxhide that cover the torso."));
 		armor.Add(new Trinket(new ItemListID(armorListIndex, signalTorchIndex), signalTorchKey, "A large torch used to direct archers in combat."));
-		armor.Add(new TierZeroBody(new ItemListID(armorListIndex, servantsClothesIndex), slaveRagsKey, "A plain robe, bleached white and paired with a colored sash."));
-
+		armor.Add(new TierZeroBody(new ItemListID(armorListIndex, servantsClothesIndex), servantsClothesKey, "A plain robe, bleached white and paired with a colored sash."));
+        armor.Add(new Trinket(new ItemListID(armorListIndex, unsentLettersIndex), unsentLettersKey, "A small trove of paper scraps, scribbled with charcoal. Each contains a journal entry, addressed from Dezso to someone named 'Teréz'. Scattered across these smudged and grimy pages are one man's affection, fear, and loneliness."));
+		
 		//QuestItem(string key, string loreDescription, int ID)
 
 		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, leafSamplesIndex), "Leaf Samples", "An array of green leaves of all shapes and sizes.", leafSamplesIndex));

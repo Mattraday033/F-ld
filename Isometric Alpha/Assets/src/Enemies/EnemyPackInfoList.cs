@@ -42,6 +42,20 @@ public static class EnemyPackInfoList
                                                                                                         DialogueNameList.taborAfterClayFightKey,
                                                                                                         xpDrop: 100);
 
+    public readonly static BossPackInfo deszoFightWithSlaveBackup = new BossPackInfo(new CreatureAmount[] { 
+                                                                                                        EnemyAmountList.dezso,
+                                                                                                        EnemyAmountList.sixAngryBranded
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDTKey,
+                                                                                                        guaranteedDrops: new ItemListID[]{ new ArmorListID(ItemList.unsentLettersIndex) }
+                                                                                                        );
+
+    public readonly static BossPackInfo deszoFightAlone = new BossPackInfo(new CreatureAmount[] { 
+                                                                                                    EnemyAmountList.dezso
+                                                                                                },
+                                                                                                DropTableList.slaveMineDTKey,
+                                                                                                guaranteedDrops: new ItemListID[]{ new ArmorListID(ItemList.unsentLettersIndex) });
+
     #endregion
 
     #region Mine Boss Fights

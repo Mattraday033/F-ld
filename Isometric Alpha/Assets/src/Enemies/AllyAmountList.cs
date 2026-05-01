@@ -16,7 +16,7 @@ public static class AllyAmountList
 
     #endregion
 
-    #region Lovashi Guards
+    #region Slaves
     public readonly static CreatureAmount southEastSlaves = new CreatureAmount(Constants.fourCreatures, AlliedSummonStatsList.getSummonStats(MonsterNameList.brandedRioter));
     public readonly static CreatureAmount northEastSlaves = new CreatureAmount(Constants.sixCreatures, AlliedSummonStatsList.getSummonStats(MonsterNameList.brandedRioter));
     public readonly static CreatureAmount manseSlaves = new CreatureAmount(Constants.fiveCreatures, AlliedSummonStatsList.getSummonStats(MonsterNameList.noBrandRioter));

@@ -73,7 +73,11 @@ public static class MonsterNameList
     public const string largeRock = "Large Rock";
     #endregion
 
+    #region Misc
     public const string movableObject = "Movable Object";
+    public const string noHostilityDialoguePackName = "No Hostility";
+
+    #endregion
 
     public static string getPackName(string enemyType)
     {
@@ -85,7 +89,7 @@ public static class MonsterNameList
                 return lovashiPackName;
         }
 
-        switch(enemyType)
+        switch(DialogueList.scrubNameOfEndNumbers(enemyType))
         {
             // Bats
             case denMother:
@@ -154,6 +158,9 @@ public static class MonsterNameList
             case movableObject:
                 return movableObject;
 
+            case NPCNameList.dezso:
+                return noHostilityDialoguePackName;
+
             default:
                 return "???";
         }
@@ -168,6 +175,7 @@ public static class MonsterNameList
     {
         switch(packName)
         {
+            case noHostilityDialoguePackName:
             case batsPackName:
             case movableObject:
                 return true;

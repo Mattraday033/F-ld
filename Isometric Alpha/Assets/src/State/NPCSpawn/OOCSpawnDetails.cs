@@ -579,11 +579,13 @@ public class DeadBodySpawnDetails : ObstacleSpawnDetails
 {
 
     private Facing facing;
+    private bool weaponless;
 
-    public DeadBodySpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, Facing facing = Facing.NorthEast, SortingLayerInfo sortingLayerInfo = null, float offset = 0f, bool flipX = false, bool withScale = false, bool ignoresSecretDoors = true) :
+    public DeadBodySpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, Facing facing = Facing.NorthEast, SortingLayerInfo sortingLayerInfo = null, float offset = 0f, bool flipX = false, bool withScale = false, bool ignoresSecretDoors = true, bool weaponless = false) :
     base(npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX, withScale: withScale, ignoresSecretDoors: ignoresSecretDoors)
     {
         this.facing = facing;
+        this.weaponless = weaponless;
     }
 
     public Sprite getSprite()
@@ -600,6 +602,11 @@ public class DeadBodySpawnDetails : ObstacleSpawnDetails
             default:
                 sheetName = CharacterAnimationType.Death_Back.ToString();
                 break;
+        }
+
+        if(weaponless)
+        {
+            sheetName += "_Weaponless";
         }
 
         Sprite[] sprites = Resources.LoadAll<Sprite>(path+sheetName);

@@ -24,6 +24,9 @@ public static class EnemyAmountList
 
     public readonly static CreatureAmount clay = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.clay));
 
+
+    public readonly static CreatureAmount dezso = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.dezso));
+
     #endregion
 
     #region Lovashi Guards
@@ -73,6 +76,7 @@ public static class EnemyAmountList
 
     #region Branded Slaves
     public readonly static CreatureAmount eightBrandedConscripts = new CreatureAmount(Constants.eightCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.brandedConscript));
+    public readonly static CreatureAmount sixAngryBranded = new CreatureAmount(Constants.sixCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.angryBranded));
     public readonly static CreatureAmount fifteenAngryBranded = new CreatureAmount(Constants.fifteenCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.angryBranded));
 
     #endregion

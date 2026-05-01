@@ -65,11 +65,16 @@ public static class FlagNameList
         public const string toldToGetMealByTabor = "toldToGetMealByTabor";
         public const string situationStartedInNECamp = "situationStartedInNECamp";
         public const string spokeToTaborAtBeginningOfSituation = "spokeToTaborAtBeginningOfSituation";
+        public const string hostageTakersStandardPunishment = "hostageTakersStandardPunishment";
+        public const string hostageTakersNoPunishment = "hostageTakersNoPunishment";
+        public const string hostageTakersLaborPunishment = "hostageTakersLaborPunishment";
+        public const string hostageTakersLeaderPunished = "hostageTakersLeaderPunished";
         public const string concludedHostageNegotiations = "concludedHostageNegotiations";
         public const string declaredHostagesDead = "declaredHostagesDead";
         public const string savedHostages = "savedHostages";
         public const string hostagesDead = "hostagesDead";
         public const string foughtDezsoAndLoam = "foughtDezsoAndLoam";
+        public const string failedRushDezso = "failedRushDezso";
         public const string mentionedStoneMan = "mentionedStoneMan";
         public const string allowedYourselfToBeTakenHostage = "allowedYourselfToBeTakenHostage";
 

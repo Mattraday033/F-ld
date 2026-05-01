@@ -28,6 +28,29 @@ public static class AllyPackInfoList
                                                                                             FlagNameList.haveManseSlaveHelp
                                                                                         });
 
+//declaredHostagesDead
+
+    private readonly static AllyPackInfo dezsoAlliesGuards = new AllyPackInfo(new CreatureAmount[]   { 
+                                                                                                        AllyAmountList.guardReka,
+                                                                                                        AllyAmountList.guardPazman,
+                                                                                                        AllyAmountList.overseerGaspar,
+                                                                                                        AllyAmountList.guardVirag
+                                                                                                    }, 
+                                                                            new string[]
+                                                                                        {
+                                                                                            FlagNameList.hostagesDead
+                                                                                        });
+
+
+    private readonly static AllyPackInfo dezsoAlliesSlaves = new AllyPackInfo(new CreatureAmount[]   { 
+                                                                                                        AllyAmountList.northEastSlaves
+                                                                                                    }, 
+                                                                            new string[]
+                                                                                        {
+                                                                                            FlagNameList.failedRushDezso
+                                                                                        });
+
+
     private static Dictionary<string, List<AllyPackInfo>> allyPackInfoDict;
 
     public static AllyPackInfo defaultAllyPackInfoByZone()
@@ -43,6 +66,19 @@ public static class AllyPackInfoList
                         return null;
                 }
             case ZoneKeyList.lovashiCamp:
+                if(AreaManager.locationName.Equals(LocationNameList.slaveShackSeven))
+                {
+                    if(Flags.getFlag(FlagNameList.hostagesDead))
+                    {
+                        return dezsoAlliesGuards;
+                    } else
+                    {
+                        return dezsoAlliesSlaves;
+                    }
+                } else
+                {
+                    return campSlaveAllies;
+                }
             case ZoneKeyList.manseFirstFloor:
             case ZoneKeyList.manseSecondFloor:
                 return campSlaveAllies;

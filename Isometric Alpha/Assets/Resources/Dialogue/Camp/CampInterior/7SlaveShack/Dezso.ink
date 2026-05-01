@@ -13,9 +13,8 @@ VAR deadGuardIndex = 5
 VAR weftIndex = 6
 VAR outsideGuardsIndex = 7
 
-VAR partyFightsAloneCombatIndex = 0
-VAR partyFightsWithFriendlySlaves = 1
-VAR partyFightsWithFriendlyGuards = 2
+VAR dezsoAndSlavesFightIndex = 0
+VAR dezsoOnlyFightIndex = 1
 
 VAR declaredHostagesDead = false
 VAR savedHostages = false
@@ -28,6 +27,7 @@ VAR concludedHostageNegotiations = false
 VAR spokeToTaborAtBeginningOfSituation = false
 
 VAR mentionedStoneMan = false
+VAR failedRushDezso = false
 
 VAR hostageTakersStandardPunishment = false
 VAR hostageTakersNoPunishment = false
@@ -86,7 +86,7 @@ We will not surrender to the guards. We're through with the labors of slaves.
 
     +If you are so adamant that you have a chance at escape, why have you not made good on it already?
         ->1g
-    +The Lovashi await outside this hut in force. There is no escape.
+    +The Lovashi wait outside this hut in force. There is no escape.
         ->1e
     +Chief Tabor is keen to avoid bloodshed. He has given us an offer to bring to you if you are willing to hear it.
         ->2a(false)
@@ -387,7 +387,7 @@ You're speaking drivel. We killed a guard! There's no coming back from that!
 
 changeCamTarget({loamIndex})
 
-You were the one who started the brawl, I just followed what you said! Now we're stuck in this shack with two hostages and no way out, and you lead us here!
+You were the one who started the brawl, I just followed what you said! Now we're stuck in this shack with two hostages and no way out, and you led us here!
 
 changeCamTarget({dezsoIndex})
 
@@ -408,7 +408,9 @@ My plan would have worked, had the very earth not conspired to thwart us! That s
 setNPCFacing({dezsoIndex},SW)
 setToTrue(mentionedStoneMan)
 
-Sod your questions. You've done nothing but cause chaos since you arrived.
+Before we were forced to take the guards as hostages, the plan was to dig our way out of here. Just as we were close to finishing the tunnel we were attacked by a massive man made of stone, and forced to come back up to the surface.
+
+We took the guards hostage to buy more time to create a second tunnel, but now you've ruined any chance of that happening.
 
     ->2dba
 
@@ -423,16 +425,17 @@ changeCamTarget({loamIndex})
 
 \*Loam and the others nod their heads.*
 
-setNPCFacing({dezsoIndex},NW)
+setNPCFacing({dezsoIndex},SW)
 changeCamTarget({dezsoIndex})
 
-The lot of you are incompetants and traitors. You're forgetting I have the hostages!
+The lot of you are incompetents and traitors. You're forgetting I have the hostages!
 
     +\*Rush Dezso while his attention is on the others.* <Dex {dexterity}/2>
         {
         -dexterity >= 2:
             ->2de
         -else:
+            setToTrue(failedRushDezso)
             ->hostagesKilledCombat
         }
     +Don't do this. If the hostages die, the Lovashi will kill you and may not honor their deal with the others.
@@ -440,6 +443,7 @@ The lot of you are incompetants and traitors. You're forgetting I have the hosta
     +Clinging to a failed plan is lunacy. The others can see that, why can't you?
         ->2dd
     +The lot of you can do what you like. I've delivered the message. My work here is done.
+        setNPCFacing({dezsoIndex},SW)
         ->2dda
 
 === 2dca ===
@@ -478,13 +482,15 @@ setNPCFacing({dezsoIndex},SW)
 
 === 2dd === 
 
+setNPCFacing({dezsoIndex},SW)
+
 \*Dezso raises his weapon high.* I'm no lunatic, I'm simply too daft to tell friend from foe. A smarter man wouldn't have relied on these snakes!
 
 ->2dda
 
 === 2dda ===
 
-execute({hostageOneIndex},{hostageTwoIndex})
+executeLeaveBodies({hostageOneIndex},{hostageTwoIndex})
 
 I hope the lot of you are pleased. I'll see you at the executioner's block.
     
@@ -583,6 +589,13 @@ The negotiations failed! Get in there!
 }
 
 === combat ===
+
+{
+-failedRushDezso:
+    enterCombat({dezsoOnlyFightIndex})
+-else:
+    enterCombat({dezsoAndSlavesFightIndex})
+}
 
 ->Close
 

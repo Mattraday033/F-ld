@@ -62,6 +62,8 @@ public abstract class StatBoostSource : INameSource
     {
         switch (getName())
         {
+            case ItemList.unsentLettersKey:
+                return "S+4";       
             case AbilityList.crushingBlowName:
                 return "50";
         }
@@ -246,7 +248,9 @@ public abstract class StatBoostSource : INameSource
             case ItemList.bronzeCavalryHelmetKey:
                 return "5";
             case ItemList.bronzeCuirassKey:
-                return "S+4";            
+                return "S+4";     
+            case ItemList.unsentLettersKey:
+                return "C+4";       
             default:
                 return Constants.zeroRating;
         }

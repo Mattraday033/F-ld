@@ -92,14 +92,24 @@ public static class DialogueCombatInfoList
                                                                                             new DeadNameList(new string[]{NPCNameList.clay})
                                                                                         });
 
-    public readonly static NPCCombatInfo barricadeGuardsCombatInfo = new NPCCombatInfo( 
-                                                                     new EnemyPackInfo[]   {   
+    public readonly static NPCCombatInfo barricadeGuardsCombatInfo = new NPCCombatInfo(
+                                                                     new EnemyPackInfo[]   {
                                                                                                 EnemyPackInfoList.barricadeGuardsFront,
                                                                                                 EnemyPackInfoList.barricadeGuardsBehind
                                                                                             },
                                                                     new DeadNameList[]  {
                                                                                             new DeadNameList(new string[]{}),
                                                                                             new DeadNameList(new string[]{})
+                                                                                        });
+
+    public readonly static NPCCombatInfo dezsoHostageFight = new NPCCombatInfo(
+                                                                    new EnemyPackInfo[] {
+                                                                                            EnemyPackInfoList.deszoFightWithSlaveBackup,
+                                                                                            EnemyPackInfoList.deszoFightAlone
+                                                                                        },
+                                                                    new DeadNameList[]  {
+                                                                                            new DeadNameList(new string[]{NPCNameList.dezso, NPCNameList.loam}),
+                                                                                            new DeadNameList(new string[]{NPCNameList.dezso, NPCNameList.loam})
                                                                                         });
 
 }

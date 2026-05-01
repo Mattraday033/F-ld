@@ -226,6 +226,11 @@ public static class SpawnParamsList
                                          new InteractableSpawnParams(stopSpawningFlagList: deszoLoamStopSpawningList,
                                                                      spawnWhileHostile: doesNotSpawnWhileHostile));
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSeven, NPCNameList.slave+1),
+                                         new InteractableSpawnParams( new StartSpawningFlagList(new string[]{FlagNameList.hostagesDead}),
+                                                                    stopSpawningFlagList: revoltStartedStopSpawning,
+                                                                     spawnWhileHostile: doesNotSpawnWhileHostile));
+
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSeven, NPCNameList.guard+1),
                                          new InteractableSpawnParams( startSpawningFlagList: hostagesStartSpawningList,
                                                                         stopSpawningFlagList: hostagesStopSpawningList,
@@ -238,8 +243,13 @@ public static class SpawnParamsList
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSeven, NPCNameList.guard+3),
                                          new InteractableSpawnParams( startSpawningFlagList: hostagesStartSpawningList,
-                                                                        stopSpawningFlagList: hostagesStopSpawningList,
+                                                                        stopSpawningFlagList: revoltStartedStopSpawning,
                                                                         spawnWhileHostile: doesNotSpawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSeven, NPCNameList.guard+4),
+                                         new InteractableSpawnParams( new StartSpawningFlagList(new string[]{FlagNameList.hostagesDead}),
+                                                                    stopSpawningFlagList: revoltStartedStopSpawning,
+                                                                     spawnWhileHostile: doesNotSpawnWhileHostile));
 
         #endregion
 
