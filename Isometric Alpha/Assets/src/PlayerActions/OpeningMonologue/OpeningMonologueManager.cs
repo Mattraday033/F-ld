@@ -111,11 +111,11 @@ public class OpeningMonologueManager : MonoBehaviour
                                         "hooves thundering near\n\n" + 
 
                                         "These sounds your ancestors knew well, having fought the Lovashi for decades. But, for you, those times are over. " + 
-                                        "The cousin-kingdoms that still resist are distant now: far-flung embers of a conflict your kin no longer have the will to wage. " + 
+                                        "The <nobr>cousin-kingdoms</nobr> that still resist are distant now: far-flung embers of a conflict your kin no longer have the will to wage. " + 
                                         "The Folk of the Craft, heirs to what was once a proud culture, are now all but a conquered people.\n\n" + 
 
                                         "Forced to live in squalor in their own lands, most of the Craft Folk serve as serfs to their new Lords, the Counts of the Lovashi Confederation. " + 
-                                        "Only three banners still dare stand against their oppressors: those of the Kingdoms of the Masons, Smiths, and Jewelers. " + 
+                                        "Only three banners still blaze defiant against their oppressors: those of the Kingdoms of the Masons, Smiths, and Jewelers. " + 
                                         "Far away, and a generation ago, these last Craft Kingdoms rallied and won a great victory, putting the Rider Lords to route. " + 
                                         "Ever since, the Confederation has maintained an uneasy truce with the remnants of the free Craft Folk, and have turned their attentions inwards.\n\n" + 
 
