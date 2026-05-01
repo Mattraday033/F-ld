@@ -1239,7 +1239,7 @@ public class NPCOffGridSpawnDetails : NPCSpawnDetails
 
     public override Transform getParent()
     {
-        return AreaManager.getNPCParentWithoutScale();
+        return AreaManager.getNPCParentWithScale();
     }
 }
 
