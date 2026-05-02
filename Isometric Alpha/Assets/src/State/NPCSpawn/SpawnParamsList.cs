@@ -192,6 +192,7 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSix, NPCNameList.rubble + Constants.CHADesignator), chaTutorial);
         #endregion
 
+        #endregion
         #region Slave Shack 7
 
         StopSpawningFlagList deszoLoamStopSpawningList = new StopSpawningFlagList(new string[] { 
@@ -214,6 +215,10 @@ public static class SpawnParamsList
                                                                                                 FlagNameList.directorDefeated
                                                                                                 });
 
+        StopSpawningFlagList weftUnhurtStopSpawningList = new StopSpawningFlagList(new string[] { 
+                                                                                                FlagNameList.spokeToWeftAfterHostageSituation
+                                                                                                });
+
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSeven, NPCNameList.dezso),
                                          new InteractableSpawnParams(stopSpawningFlagList: deszoLoamStopSpawningList,
                                                                      spawnWhileHostile: doesNotSpawnWhileHostile));
@@ -230,6 +235,11 @@ public static class SpawnParamsList
                                          new InteractableSpawnParams( new StartSpawningFlagList(new string[]{FlagNameList.hostagesDead}),
                                                                     stopSpawningFlagList: revoltStartedStopSpawning,
                                                                      spawnWhileHostile: doesNotSpawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSeven, NPCNameList.weft),
+                                         new InteractableSpawnParams( startSpawningFlagList: hostagesStartSpawningList,
+                                                                        stopSpawningFlagList: weftUnhurtStopSpawningList,
+                                                                        spawnWhileHostile: doesNotSpawnWhileHostile));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackSeven, NPCNameList.guard+1),
                                          new InteractableSpawnParams( startSpawningFlagList: hostagesStartSpawningList,
@@ -260,7 +270,6 @@ public static class SpawnParamsList
 
         #endregion
 
-        #endregion
 
         #region Guard Shack
 
@@ -322,7 +331,7 @@ public static class SpawnParamsList
         #region Camp North East
         
         InteractableSpawnParams situationCampNESpawnParams = new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.situationStartedInNECamp }),
-                                                                                         new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated }));
+                                                                                         new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.hostageSituationGuardsLeft }));
 
 //spokeToTaborAtBeginningOfSituation
 
@@ -330,6 +339,10 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.guard+2), 
                                                                         new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.situationStartedInNECamp }),
                                                                                                     new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.spokeToTaborAtBeginningOfSituation })));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.guard+3), 
+                                                                        new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.situationStartedInNECamp }),
+                                                                                                    new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.concludedHostageNegotiations })));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.guard+1), situationCampNESpawnParams);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.honorguard+1), situationCampNESpawnParams);

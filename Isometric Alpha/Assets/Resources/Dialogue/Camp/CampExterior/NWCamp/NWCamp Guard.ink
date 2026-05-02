@@ -65,7 +65,7 @@ fadeBackIn(60)
 
 === 1d ===
 
-getNewDialogueFromList(NWCampChief Tabor,skippedTutorialInNWCamp,true)
+getNewDialogueFromList(NWCampChief Tabor,true,skippedTutorialInNWCamp)
 
 ->Close
 

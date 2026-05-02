@@ -181,20 +181,26 @@ public static class DialogueList
                             Resources.Load<TextAsset>(DialogueNameList.loamPath)));
 
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.guard+1,
-                            new SingleCharacterDialogue(NPCNameList.guard,
+                            new SingleCharacterDialogue(NPCNameList.guard+1,
                             Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.guard+2,
-                            new SingleCharacterDialogue(NPCNameList.guard,
+                            new SingleCharacterDialogue(NPCNameList.guard+2,
                             Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.guard+3,
-                            new SingleCharacterDialogue(NPCNameList.guard,
+                            new SingleCharacterDialogue(NPCNameList.guard+3,
                             Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
 
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.guard+4,
-                            new SingleCharacterDialogue(NPCNameList.guard,
+                            new SingleCharacterDialogue(NPCNameList.guard+4,
                             Resources.Load<TextAsset>(DialogueNameList.guardsAfterHostagesPath)));
 
-
+        addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.weft,
+                            new Dialogue(new string[]{
+                                                        NPCNameList.playerNamePlaceHolder, 
+                                                        NPCNameList.weft, 
+                                                        NPCNameList.weft+1
+                                                    },
+                            Resources.Load<TextAsset>(DialogueNameList.weftAfterHostagesPath)));
         #endregion
         #region Slave Shack 8
 
@@ -384,15 +390,19 @@ public static class DialogueList
                         Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+2,
-                            new SingleCharacterDialogue(NPCNameList.guard,
+                            new SingleCharacterDialogue(NPCNameList.guard+2,
+                            Resources.Load<TextAsset>(DialogueNameList.situationGuardPath)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+3,
+                            new SingleCharacterDialogue(NPCNameList.guard+3,
                             Resources.Load<TextAsset>(DialogueNameList.situationGuardPath)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+1,
-                            new SingleCharacterDialogue(NPCNameList.guard,
+                            new SingleCharacterDialogue(NPCNameList.guard+1,
                             Resources.Load<TextAsset>(DialogueNameList.situationGuardPath)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.honorguard+1,
-                            new SingleCharacterDialogue(NPCNameList.honorguard,
+                            new SingleCharacterDialogue(NPCNameList.honorguard+1,
                             Resources.Load<TextAsset>(DialogueNameList.situationGuardPath)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.chiefTabor,

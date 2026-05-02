@@ -782,6 +782,18 @@ public class DialogueManager : MonoBehaviour
                     }
 
                     return;
+
+                case "setpartymemberhealth":                    
+                    partyMemberName = getArgument(buffer, Constants.indexZero);
+                    int newHealth = getArgumentInt(buffer, Constants.indexOne);
+
+                    PartyMember companion = PartyManager.getPartyMember(partyMemberName);
+
+                    companion.stats.currentHealth = newHealth;
+
+                    continueStory();
+
+                    break;
                 case "quickfadetoblack":
                     fadeToBlackCommand(quickFade: true);
                     return;
@@ -1426,29 +1438,30 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case "getnewdialoguefromlist":
 
+                    int argAmount = getNumberOfArgs(buffer);
                     string dialogueKey = getArgument(buffer, Constants.indexZero);
-                    startingBoolName = getArgument(buffer, Constants.indexOne);
-                                                      //if you want to start at the correct knot, 
-                                                       //you need to create/give a bool that tells 
-                                                       //the dialogue at the start to move to that 
-                                                       //knot. see the transition between MinersDialogue
-                                                       // and MarcosDialoge in MineLvl_3-Miners Camp
-                    bool wipeConversation = getArgumentBool(buffer, Constants.indexTwo);
 
-                    if(wipeConversation)
+                    if(argAmount > 1)
                     {
-                        DialogueTrackerWindow.wipeDialogue();
+                    bool wipeConversation = getArgumentBool(buffer, Constants.indexTwo);
+                        if(wipeConversation)
+                        {
+                            DialogueTrackerWindow.wipeDialogue();
+                        }
+                    }
+
+                    if(argAmount > 2)
+                    {
+                        startingBoolName = getArgument(buffer, Constants.indexOne).Replace(" ", "");
+
+                        if(currentStory.variablesState[startingBoolName] != null)
+                        {
+                            currentStory.variablesState[startingBoolName] = true;
+                        }
                     }
 
                     startDialogue(DialogueList.getDialogue(dialogueKey), midDialogue: true); 
                     
-                    startingBoolName = startingBoolName.Replace(" ", "");
-
-                    if(currentStory.variablesState[startingBoolName] != null)
-                    {
-                        currentStory.variablesState[startingBoolName] = true;
-                    }
-
                     continueStory();
 
                     return;
@@ -1763,6 +1776,11 @@ public class DialogueManager : MonoBehaviour
         string newLine = itemToGive.getKey() + quantitySymbol + itemToGive.getQuantity();
 
         currentConversation.addObtainedLine(newLine);
+    }
+
+    private int getNumberOfArgs(string buffer)
+    {
+        return getAllArgs(buffer).Length;
     }
 
     private string[] getAllArgs(string buffer)

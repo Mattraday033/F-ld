@@ -15,7 +15,6 @@ public class SpeakAtStartScript : PlayerInteractionScript
 
 public class BeginningConversationScript: SpeakAtStartScript //Brush + Géza in the Starting Hut
 {
-
     public override void runScript(GameObject target = null)
     {
         if (!Flags.getFlag(FlagNameList.finishedFirstDialogue))
@@ -23,12 +22,10 @@ public class BeginningConversationScript: SpeakAtStartScript //Brush + Géza in 
             dialogueTrigger.triggerDialogue();
         }
     }
-
 }
 
-public class WeftIntroScript: SpeakAtStartScript //Brush + Géza in the Starting Hut
+public class WeftIntroScript: SpeakAtStartScript 
 {
-
     public override void runScript(GameObject target = null)
     {
         if (Flags.getFlag(FlagNameList.givenTaskByLaszlo) && !Flags.getFlag(FlagNameList.metWeft))
@@ -36,12 +33,10 @@ public class WeftIntroScript: SpeakAtStartScript //Brush + Géza in the Starting
             dialogueTrigger.triggerDialogue();
         }
     }
-
 }
 
-public class DezsoLoamDialogueScript: SpeakAtStartScript //Brush + Géza in the Starting Hut
+public class DezsoLoamDialogueScript: SpeakAtStartScript
 {
-
     public override void runScript(GameObject target = null)
     {
         if (Flags.getFlag(FlagNameList.spokeToTaborAtBeginningOfSituation) && !Flags.getFlag(FlagNameList.concludedHostageNegotiations))
@@ -49,7 +44,17 @@ public class DezsoLoamDialogueScript: SpeakAtStartScript //Brush + Géza in the 
             dialogueTrigger.triggerDialogue();
         }
     }
+}
 
+public class WeftAfterHostageCombatScript: SpeakAtStartScript //Brush + Géza in the Starting Hut
+{
+    public override void runScript(GameObject target = null)
+    {
+        if (Flags.getFlag(FlagNameList.foughtDezsoAndLoam) && !Flags.getFlag(FlagNameList.spokeToWeftAfterHostageSituation))
+        {
+            dialogueTrigger.triggerDialogue();
+        }
+    }
 }
 
 public class KendeInKitchenDuringRiotScript: SpeakAtStartScript

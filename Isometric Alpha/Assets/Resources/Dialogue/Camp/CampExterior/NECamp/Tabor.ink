@@ -17,14 +17,31 @@ VAR hostageTakersNoPunishment = false
 VAR hostageTakersLeaderPunished = false
 VAR hostageTakersLaborPunishment = false
 
+VAR gaveWeftCreditAfterHostages = false
+
+VAR mentionedStoneMan = false
+VAR hostageSituationGuardsLeft = false
+VAR insultedWeftAfterHostages = false
+
+VAR hostagesDead = false
+VAR declaredHostagesDead = false
+VAR concludedHostageNegotiations = false
+
 {
+-concludedHostageNegotiations:
+    {
+    -hostagesDead:
+        ->setUpSpeakers(->4a)
+    -else:
+        ->setUpSpeakers(->2a)
+    }
 -spokeToTaborAtBeginningOfSituation:
     ->alreadySpokeToTabor
 -else:
-    ->1a
+    ->setUpSpeakers(->1a)
 }
 
-=== 1a ===
+=== setUpSpeakers(->divert) ===
 
 changeCamTarget({taborIndex})
 setNPCFacing({taborIndex},SW)
@@ -45,6 +62,10 @@ setNPCFacing({adelaIndex},SE)
 
 fadeBackIn(60)
 enableDialogueUI()
+
+->divert
+
+=== 1a ===
 
 The situation is this: inside the hut to my left is a group of branded who have taken a squad of guards hostage. We have confirmed they have killed at least one of them already.
 
@@ -292,6 +313,246 @@ deactivate({guardIndex})
 
 setNPCFacing({taborIndex},SW)
 setNPCFacing({adelaIndex},NE)
+
+fadeBackIn(60)
+
+->Close
+
+
+=== 2a ===
+
+changeCamTarget({taborIndex})
+
+The hostages are safe, as are the both of you. Exceedingly well done.
+
+changeCamTarget({adelaIndex})
+
+Even I am impressed. No plan of mine accounted for a way forward without bloodshed.
+
+    +None of us wanted unnecessary bloodshed. I just proved to each party it was true.
+        ->2c
+    +They were at a cliff's edge and balked at the height. The cowards were glad for a way down.
+        changeCamTarget({adelaIndex})
+
+        That sounds right to me. Branded are always underestimating the hardness of my guards, to their own hazard.
+        ->3a
+    +This success couldn't have happened without Weft. His words swayed them to peace.
+        ->2b
+    +We were fortunate they believed your offer. Enough doubt and the dealings would have floundered.
+        ->2c
+
+=== 2b ===
+
+setToTrue(gaveWeftCreditAfterHostages)
+setNPCFacing({weftIndex},SW)
+changeCamTarget({weftIndex})
+
+\*Weft looks at you questioningly.*
+
+changeCamTarget({taborIndex})
+
+That is good to hear. He has served us well before, and I have no doubt will continue to for a long while.
+
+setNPCFacing({weftIndex},NW)
+
+->3a
+
+=== 2c ===
+
+    changeCamTarget({taborIndex})
+
+    This is why rapport with the branded is so important. They're a calculating bunch; you need to get through to them that working with us is how they survive, not against us. 
+    ->3a
+
+=== 3a ===
+
+changeCamTarget({taborIndex})
+
+The branded you negotiated with were attempting to dig a tunnel out of the camp: hence they needed the hostages to prevent us from attacking them before they could finish.
+
+The fools thought it would actually succeed. They must have underestimated the distance they would have needed to dig. Even if they had gotten past the walls, the archers in the arrow towers would have picked them off with ease.
+
+{
+-mentionedStoneMan:
+    +One of them mentioned a 'man made of stone' that attacked them while they were in the tunnel. It kept them from completing it.
+        ->stoneManExplanation(->3b)
+    +\*Say nothing.*
+        ->3b
+-else:
+    ->3b
+}
+
+=== stoneManExplanation(->divert) ===
+
+changeCamTarget({adelaIndex})
+
+A stone saint, surely. They're spirits of the rock that sometimes appear in mines or canyons. We've been lucky not to run into any yet while we dig, but I guess we'll need to be ready if there are more around.
+
+changeCamTarget({taborIndex})
+
+Stone saints are nasty business. It probably gave the branded a good scare when it came out of the dirt, and was more than the lot of them could handle.
+
+    ->divert
+
+=== 3b ===
+
+prepItem()
+
+Whatever the case, you two have earned a reward for a job well done. I can give you the rest of the extra rations I keep on me right now, and once I inform the Director of what has happened I will ask him to approve something extra.
+
+giveItem(0,0,5)
+
+changeCamTarget({adelaIndex})
+setNPCFacing({adelaIndex},NE)
+
+You spoil them, Tabor. The other branded will think these two your children if you give them much more.
+
+changeCamTarget({taborIndex})
+setNPCFacing({taborIndex},SW)
+
+Good behaviour should be as visibily rewarded as bad behaviour is punished, Captain. You know how the branded are: the baser comforts can be a better motivator to them than a hundred lashes.
+
+->3c
+
+=== 3c ===
+
+setNPCFacing({taborIndex},SE)
+setNPCFacing({adelaIndex},SE)
+
+changeCamTarget({taborIndex})
+
+We must give our reports to the Director. Once that is done, I will be back to give you two your next task. Take an extended midday break while I am up in the Manse, then come find me in front of Weft's hut when it is over.
+
+->deactivateGuards
+
+=== gaveWeftCreditConvo_1a ===
+
+activate({weftIndex})
+
+changeCamTarget({weftIndex})
+setNPCFacing({weftIndex},SW)
+setFacing(NE)
+
+fadeBackIn(60)
+
+I don't understand. Why did you praise me to Adéla and Tabor?
+
+{
+-insultedWeftAfterHostages:
+    +This feuding between us is getting us nowhere. Think of it as an olive branch.
+        \*Weft studies you while he considers your words.* I can understand that. Hutmates should stick together, after all. I'll calm my aggression as well.
+        ->deactivateWeft
+}
+    +You suck up to them for protection, but I can handle myself. I thought it would benefit you more than me.
+{
+-insultedWeftAfterHostages:
+        Maybe you need their protection, maybe you don't. This doesn't make us friends, but... thanks, I guess.
+        ->deactivateWeft
+-else:
+        Maybe you need their protection, maybe you don't. But I'm not about to seem ungrateful. Thank you.
+        ->deactivateWeft
+}
+    +The only real 'reward' they're going to give us is more work. I was trying to get you to take the brunt of it.
+        More work just means more opportunities to prove your usefulness. Your loss, my gain.
+        ->deactivateWeft
+
+=== 4a ===
+
+changeCamTarget({taborIndex})
+
+The hostages are dead, and so are the plotters. A worse outcome is hard to imagine.
+
+changeCamTarget({adelaIndex})
+setNPCFacing({adelaIndex},NE)
+
+I was against bringing the branded in from the start. I can't believe you thought they were equipped to handle this.
+
+changeCamTarget({taborIndex})
+setNPCFacing({taborIndex},SW)
+
+Captain, with respect, your solution was to attack the branded, hostages be damned. The plan we implemented instead at least had a chance the hostages would survive.
+
+changeCamTarget({adelaIndex})
+
+But now we've involved these branded here in our plans, and they've seen how we conduct ourselves: poorly. A branded who believes us incompetent...
+
+setNPCFacing({adelaIndex},SE)
+
+... is one prone to rebellion.
+
+changeCamTarget({weftIndex})
+
+\*Weft shivers.*
+
+changeCamTarget({adelaIndex})
+setNPCFacing({adelaIndex},NE)
+
+Chief Tabor, you and I will both brief the Director on what has happened here. And I will be certain to give him my recommendations for how these two branded will be punished for their failure.
+
+    +Captain Adéla, may I humbly request to speak?
+        ->4b
+    +\*Say nothing.*
+        ->Close
+
+=== 4b ===
+
+changeCamTarget({adelaIndex})
+
+\*Adéla's eyes glint maliciously.* Yes, please do. Make this worse for yourself.
+
+{
+-mentionedStoneMan:
+    +I feel it is my duty to inform you that during the negotiations, one of the branded mentioned being attacked by a stone man.        
+        ->stoneManExplanation(->3c)
+}
+
+    +Weft took charge of the negotiations. I tried to prevent him from ruining everything, but he couldn't help himself.
+        changeCamTarget({weftIndex})
+        setNPCFacing({weftIndex},SW)
+
+        setToTrue(blamedWeftForHostageDeath)
+
+        \*Weft looks at you with horror.* That's not true! I barely said a word!
+        
+        changeCamTarget({adelaIndex})
+
+        Pathetic. Just what I'd expect from the both of you: tripping over yourselves to blame the other.
+            ->3c
+
+    +I was the one whose words led to the death of the hostages. Weft should not be considered at fault for what were the results of my actions.
+        setToTrue(tookBlameForHostageDeath)
+        I see. Valiantly put, slave. I will add that to my report to the Director.
+            ->3c
+    +\*Say nothing.*
+        That's what I thought.
+            ->3c
+        
+=== deactivateWeft ===
+
+fadeToBlack()
+
+deactivate({weftIndex})
+
+fadeBackIn(60)
+
+->Close
+
+=== deactivateGuards ===
+
+setToTrue(hostageSituationGuardsLeft)
+
+fadeToBlack()
+
+deactivate({adelaIndex})
+deactivate({taborIndex})
+updateNPCVisibility()
+
+{
+-gaveWeftCreditAfterHostages:
+    ->gaveWeftCreditConvo_1a
+}
+
+deactivate({weftIndex})
 
 fadeBackIn(60)
 

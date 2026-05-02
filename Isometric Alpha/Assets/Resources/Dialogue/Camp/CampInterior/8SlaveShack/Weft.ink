@@ -49,7 +49,7 @@ This is getting out of hand. I'm sick of running errands for you. One of these d
 
 changeCamTarget({overseerIndex})
 
-Don't threaten me, scum. If it weren't for me, you'd have been done in for organizing that stunt you pulled with the mess hall. And you wouldn't have just gotten a hiding like the others neither. The ringleader gets the executioner's axe. That's always been the rule.
+Don't threaten me, scum. If it weren't for me, you'd have been done in for organizing that stunt you pulled with the mess hall. If the other guards found out you were the real leader and hid it from them, they'd make an example out of you in front of the whole camp.
 
 changeCamTarget({weftIndex})
 

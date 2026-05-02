@@ -150,7 +150,7 @@ changeCamTarget({kendeIndex})
 
 {
 -insultedKendesCooking:
-If it isn't the scum that insulted my cooking. I wonder if you'll be so mouthy after I've spitted and roasted you infront of your companions.
+If it isn't the scum that insulted my cooking. I wonder if you'll be so mouthy after I've spitted and roasted you in front of your companions.
 
 -else:
 The branded have breached the barricades, and now they've entered my kitchens? Don't come any closer, or you'll get scum on the pots!

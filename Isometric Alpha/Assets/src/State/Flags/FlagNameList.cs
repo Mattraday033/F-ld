@@ -46,6 +46,9 @@ public static class FlagNameList
         public const string weftKnowsYouKnowHisSecret = "weftKnowsYouKnowHisSecret";
         public const string liedToWeftAboutHearingExtortion = "liedToWeftAboutHearingExtortion";
         public const string weftAddedToParty = "weftAddedToParty";
+        public const string spokeToWeftAfterHostageSituation = "spokeToWeftAfterHostageSituation";
+        public const string insultedWeftAfterHostages = "insultedWeftAfterHostages";
+        public const string gaveWeftCreditAfterHostages = "gaveWeftCreditAfterHostages";
 
         //Tabor Skill Tutorial Flags
         public const string toldByTaborToBuildHouses = "toldByTaborToBuildHouses";
@@ -77,6 +80,9 @@ public static class FlagNameList
         public const string failedRushDezso = "failedRushDezso";
         public const string mentionedStoneMan = "mentionedStoneMan";
         public const string allowedYourselfToBeTakenHostage = "allowedYourselfToBeTakenHostage";
+        public const string hostageSituationGuardsLeft = "hostageSituationGuardsLeft";
+        public const string tookBlameForHostageDeath = "tookBlameForHostageDeath";
+        public const string blamedWeftForHostageDeath = "blamedWeftForHostageDeath";
 
         //kastor convo flags
         public const string metKastor = "metKastor"; //if the player has spoken to Kastor before

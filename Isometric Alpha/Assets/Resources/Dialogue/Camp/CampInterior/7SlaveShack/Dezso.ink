@@ -262,7 +262,7 @@ changeCamTarget({loamIndex})
 
 That's the one. After his first shift, he refused to work. They found him during inspection up in the rafters of his hut, and couldn't get him down.
 
-Eventually they had to call Tabor in to get him to the ground. Tabor talked with him for a long while, then said he'd give Awl a full pardon if he went back to work.
+Eventually they had to call Tabor in to bring him to the ground. Tabor talked with him for a long while, then said he'd give Awl a full pardon if he went back to work.
 
 changeCamTarget({dezsoIndex})
 
@@ -428,15 +428,15 @@ changeCamTarget({loamIndex})
 setNPCFacing({dezsoIndex},SW)
 changeCamTarget({dezsoIndex})
 
-The lot of you are incompetents and traitors. You're forgetting I have the hostages!
+The lot of you are traitors, and incompetents to boot. You're forgetting I have the hostages!
 
     +\*Rush Dezso while his attention is on the others.* <Dex {dexterity}/2>
         {
         -dexterity >= 2:
             ->2de
         -else:
-            setToTrue(failedRushDezso)
-            ->hostagesKilledCombat
+            setToTrue(failedRushDezso)    
+            ->hostagesKilled(->combat)
         }
     +Don't do this. If the hostages die, the Lovashi will kill you and may not honor their deal with the others.
         ->2dca
@@ -499,8 +499,7 @@ I hope the lot of you are pleased. I'll see you at the executioner's block.
         changeCamTarget({weftIndex})
 
         Guards! Guards! The hostages have been killed!
-
-        ->hostagesKilledCombat
+        ->hostagesKilled(->combat)
 
 === 2de ===
 
@@ -508,13 +507,13 @@ fadeToBlack()
 
 movePlayer(5,6)
 
-execute({dezsoIndex})
+executeLeaveBodies({dezsoIndex})
 
 changeCamTarget({loamIndex})
 
 Thank the Sun. I think he actually meant to do it.
 
-    +You should be thanking me. 
+    +You should be thanking <i>me</i>. 
         You're right, of course. Thank you.
         ->2dea
     +Finally, it's over.
@@ -524,7 +523,6 @@ Thank the Sun. I think he actually meant to do it.
 === 2dea ===
 
     +Untie the hostages and then lie on the ground with your hands behind your heads. After they are clear, I'll call the guards in.
-
         ->savedHostagesFinish
 
 === 3a ===
@@ -547,10 +545,10 @@ Thank the Sun. I think he actually meant to do it.
         ->3bb
     +Fine. I won't fight you. Take me as a hostage instead.
         ->3ba
-    +That is unfortunate. I had hoped to avoid violence. <Combat>
-        ->hostagesKilledCombat
-    +If you're threatening me, then you've brought this on yourself. <Combat>
-        ->hostagesKilledCombat
+    +That is unfortunate. I had hoped to avoid violence. <Combat>    
+        ->hostagesKilled(->combat)
+    +If you're threatening me, then you've brought this on yourself. <Combat>    
+        ->hostagesKilled(->combat)
 
 === 3ba ===
 
@@ -560,10 +558,10 @@ setNPCFacing({weftIndex},SE)
 \*Weft gives you a worried expression.* Wait a moment. If we submit, then won't the Lovashi be out of options? They'll attack the hut when they realize we failed.
 
     +I don't care. I'm not killing a fellow branded.
-        setToTrue(allowedYourselfToBeTakenHostage)
-        ->hostagesKilledNoCombat
-    +If that is true, then my hand is forced. <Combat>
-        ->hostagesKilledCombat
+        setToTrue(allowedYourselfToBeTakenHostage)    
+        ->hostagesKilled(->deactivateExtras)
+    +If that is true, then my hand is forced. <Combat>    
+        ->hostagesKilled(->combat)
 
 === 3bb ===
 
@@ -576,7 +574,7 @@ changeCamTarget({outsideGuardsIndex})
 
 The negotiations failed! Get in there!
 
-    ->hostagesKilledCombat
+    ->hostagesKilled(->combat)
 
 === 4a ===
 {
@@ -589,6 +587,8 @@ The negotiations failed! Get in there!
 }
 
 === combat ===
+
+setToTrue(foughtDezsoAndLoam)
 
 {
 -failedRushDezso:
@@ -605,17 +605,11 @@ setToTrue(savedHostages)
 
 ->deactivateExtras
 
-=== hostagesKilledCombat ===
+=== hostagesKilled(->divert) ===
 
 setToTrue(hostagesDead)
 
-->combat
-
-=== hostagesKilledNoCombat ===
-
-setToTrue(hostagesDead)
-
-->deactivateExtras
+    ->divert
 
 === deactivateExtras === 
 
@@ -625,12 +619,12 @@ deactivate({dezsoIndex})
 deactivate({loamIndex})
 deactivate({hostageOneIndex})
 deactivate({hostageTwoIndex})
-deactivate({deadGuardIndex})
 deactivate({weftIndex})
 
 updateNPCVisibility()
 
 fadeBackIn(60)
+getNewDialogueFromList(7SlaveShackWeft)
 
 ->Close
 

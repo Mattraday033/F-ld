@@ -84,7 +84,7 @@ public static class BookList
 					   "drudges probing the pickets. The odds and Gods alike look to be on the side of our enemies.\n" +
 					   "\tBut we survived the worst of that war, and we'll survive this. Our walls are thick. Our supplies are plentiful. Our comrades were already sent for even " +
 					   "before the riot began. The sons and daughters of the saddle do not buckle before such paltry foes as these cobblers in rags! These horse-eating mongrels! " +
-					   "Man your barricades, steel your hearts, and remember: every second you stand firm brings our inevitable victory ever closer.'";
+					   "Man your barricades, harden your hearts, and remember: every second you stand firm brings our inevitable victory ever closer.'";
 			case theInventionOfSinKey:
 				return "... but what may not be commonly known, is that the first accounts of humans on Föld committing the sins of slavery and cannibalism were recorded during the early years of " +
 						"what we now call 'The Emancipation Conflict.' At the outset of this inter-folk war between the peoples of the saddle and craft, the Craft Kingdoms were at " +

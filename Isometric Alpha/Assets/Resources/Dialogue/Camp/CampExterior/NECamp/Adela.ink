@@ -6,8 +6,11 @@ VAR charisma = 0
 VAR playerName = ""
 
 VAR spokeToTaborAtBeginningOfSituation = false
+VAR concludedHostageNegotiations = false
 
 {
+-concludedHostageNegotiations:
+->1a
 -spokeToTaborAtBeginningOfSituation:
 ->1b
 -else:
@@ -16,13 +19,13 @@ VAR spokeToTaborAtBeginningOfSituation = false
 
 === 1a ===
 
-getNewDialogueFromList(NECampChief Tabor,spokeToAdelaFirst,true)
+getNewDialogueFromList(NECampChief Tabor,true,spokeToAdelaFirst)
 
     ->Close
 
 === 1b ===
 
-Let's see how you do, slave. *Adéla chuckles.* Just don't get yourself killed, 'cause my guards won't be quick enough to save you.
+Let's see how you do, slave. Just don't get yourself killed, 'cause my guards won't be quick enough to save you.
 
     ->Close
 

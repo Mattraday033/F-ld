@@ -99,6 +99,7 @@ public static class DialogueNameList
     #region Slave Shack 7
     public const string dezsoPath = campInteriorPathName + LocationNameList.slaveShackSeven + Constants.seperatorChar + NPCNameList.dezso;
     public const string loamPath = campInteriorPathName + LocationNameList.slaveShackSeven + Constants.seperatorChar + NPCNameList.loam;
+    public const string weftAfterHostagesPath = campInteriorPathName + LocationNameList.slaveShackSeven + Constants.seperatorChar + "WeftAfterHostages";
     #endregion
     #region Slave Shack 8
     public const string weftPath = campInteriorPathName + LocationNameList.slaveShackEight + Constants.seperatorChar + NPCNameList.weft;
