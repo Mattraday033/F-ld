@@ -181,6 +181,7 @@ public static class EnemyTypeFolderPathList
 
         #region Misc
     
+        folderPathDict.Add(NPCNameList.takacs,  partyMembersFolderPath + NPCNameList.protagPrefix+2 + "/");
         folderPathDict.Add(NPCNameList.barricade, miscFolderPath + NPCNameList.barricade + "/");
 
         #endregion

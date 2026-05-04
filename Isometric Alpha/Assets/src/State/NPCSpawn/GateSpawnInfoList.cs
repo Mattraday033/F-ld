@@ -127,6 +127,7 @@ public static class GateSpawnInfoList
 
         #endregion
 
+
         #region CenterCamp
 
         list = new List<GateSpawnInfo>();
@@ -192,6 +193,8 @@ public static class GateSpawnInfoList
         gateSpawnInfoDict.Add(LocationNameList.campManse, list);
 
         #endregion
+
+        #region Mine
 
         #region MineLvl_1-1b
 
@@ -638,9 +641,35 @@ public static class GateSpawnInfoList
 
         #endregion
 
+        #endregion
+
         #region Manse
 
         #region Manse-1f
+
+        #region Manse-1f-1a
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.gate,
+                                    ZoneKeyList.manseFirstFloor + LocationNameList.section1a,
+                                    new Vector3Int(7, 1),
+                                    PrefabNames.portcullis2x1Path,
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.gate,
+                                    ZoneKeyList.manseFirstFloor + LocationNameList.section1a,
+                                    new Vector3Int(-4, 1),
+                                    PrefabNames.portcullis2x1Path,
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        gateSpawnInfoDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section1a, list);
+
+        #endregion
 
         #region Manse-1f-Dining Room
 
@@ -693,6 +722,30 @@ public static class GateSpawnInfoList
         #endregion
 
         #region Manse-2F
+
+        #region Manse-2f-1a
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.gate,
+                                    ZoneKeyList.manseSecondFloor + LocationNameList.section1a,
+                                    new Vector3Int(3, 8),
+                                    PrefabNames.portcullis2x1Path,
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+        list.Add(new GateSpawnInfo(Constants.indexZero, 
+                                    NPCNameList.gate,
+                                    ZoneKeyList.manseSecondFloor + LocationNameList.section1a,
+                                    new Vector3Int(-5, 6),
+                                    PrefabNames.portcullis2x1Path,
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        gateSpawnInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section1a, list);
+
+        #endregion
 
         #region Manse-2F-3a
 

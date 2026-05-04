@@ -49,6 +49,8 @@ public static class FlagNameList
         public const string spokeToWeftAfterHostageSituation = "spokeToWeftAfterHostageSituation";
         public const string insultedWeftAfterHostages = "insultedWeftAfterHostages";
         public const string gaveWeftCreditAfterHostages = "gaveWeftCreditAfterHostages";
+        public const string tookBlameForHostageDeath = "tookBlameForHostageDeath";
+        public const string blamedWeftForHostageDeath = "blamedWeftForHostageDeath";
 
         //Tabor Skill Tutorial Flags
         public const string toldByTaborToBuildHouses = "toldByTaborToBuildHouses";
@@ -81,8 +83,11 @@ public static class FlagNameList
         public const string mentionedStoneMan = "mentionedStoneMan";
         public const string allowedYourselfToBeTakenHostage = "allowedYourselfToBeTakenHostage";
         public const string hostageSituationGuardsLeft = "hostageSituationGuardsLeft";
-        public const string tookBlameForHostageDeath = "tookBlameForHostageDeath";
-        public const string blamedWeftForHostageDeath = "blamedWeftForHostageDeath";
+
+        //directors office convo flags
+        public const string summonedToDirectorsOffice = "summonedToDirectorsOffice";
+        public const string hadTakacsConvoInDirectorsOffice = "hadTakacsConvoInDirectorsOffice";
+        public const string sentIntoMineByDirector = "sentIntoMineByDirector"; //Met Director in prerevolt convo and was given task t
 
         //kastor convo flags
         public const string metKastor = "metKastor"; //if the player has spoken to Kastor before
@@ -132,6 +137,10 @@ public static class FlagNameList
         public const string barricadeGuardDefeatKey2 = "barricadeGuardDefeatKey2";
         public const string barricadeGuardDefeatKey3 = "barricadeGuardDefeatKey3";
         public const string barricadeGuardDefeatKey4 = "barricadeGuardDefeatKey4";
+        public const string manse1F1aGatesOpened = "manse1F1aGatesOpened";
+        public const string manse2F1aGatesOpened = "manse2F1aGatesOpened";
+        public const string manseFrontDoorsClosed = "manseFrontDoorsClosed";
+        public const string taborRoomShelfSetToNonHostile = "taborRoomShelfSetToNonHostile";
 
         //Nándor Flags
         public const string nandorStartedGuardPunishmentConvo = "nandorStartedGuardPunishmentConvo";

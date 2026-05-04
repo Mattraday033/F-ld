@@ -18,6 +18,7 @@ public static class BookList
 
     public const string theInventionOfSinKey = "The Invention of Sin";
     public const string memoRegardingTheBrandedKey = "Memo Regarding the Branded";
+	public const string memoRegardingTheBrandedReadFlag = "brandedMemoRead";
 	
 	public const string guideToSkillsKey = "Guide to Skills";
 
@@ -125,12 +126,12 @@ public static class BookList
 						"whichever came first. Those that were found guilty would work until they died from the exertion, and were given a burning brand about their face and necks to forever mark them as such. This " +
 						"is believed to be the origin of the use of branded slaves in Lovashi industry, and the act which marks the transition from the Early Period of the Emancipation Conflict to the Middle Period...";
 			case memoRegardingTheBrandedKey:
-				return "To all camp personnel of every rank:\n" +
+				return "<B>To all camp personnel of every rank:</B>\n\n" +
 						"The Director has asked me to disseminate the following orders regarding conduct when interacting with the branded of this camp. It has come to his attention that when bestowing tasks, punishments, " +
-						"and rewards to the branded, personnel are giving more favorable outcomes to the branded of Lovashi ethnicity. This is to be stopped immediately, for the following reasons.\n\n" +
-						"1) The brand is not meant to be a pleasant experience. It is a tool for correcting the mentalities and behaviors that lead to the crimes these prisoners are guilty of. This includes those that result in " +
+						"and rewards to the branded, personnel are giving more favorable outcomes to the branded of Lovashi birth. This is to be stopped immediately, for the following reasons.\n\n" +
+						"1) The brand is not meant to be a pleasant experience. It is a tool for correcting the mentalities and behaviors that led to the crimes these prisoners are guilty of. This includes those that result in " +
 						"traitorous activities that Lovashi prisoners have performed. Any leniency provided to a Lovashi branded is a disservice both to the prisoner and to the Confederation.\n\n" +
-						"2)In the majority of cases it is difficult to determine whether a prisoner is actually of Lovashi decent. Many Craft Folk have taken to giving their children Lovashi names because they think it will incentivize their " +
+						"2) In the majority of cases it is difficult to determine whether a prisoner is actually Lovashi. Many Craft Folk have taken to giving their children Lovashi names because they think it will incentivize their " +
 						"lords to offer them better treatment. As there is little way to tell the difference between someone of Craft Folk and Lovashi decent aside from accent, and even that can be faked or misinterpreted, it is camp policy to " +
 						"treat all prisoners the same, regardless of lineage.\n\n" +
 						"Any camp personnel suspected of continuing this practice will be given severe repercussions. If I have to flog you in front of the entire camp, the slaves included, I will do so. Test my resolve at your peril.\n\n" +

@@ -111,6 +111,7 @@ public static class NPCNameList
     public const string suspiciousWall = "Suspicious Wall";
     public const string suspiciousShelf = "Suspicious Shelf";
     public const string diary = "Diary";
+    public const string memo = "Memo";
     public const string orders = "Orders";
     public const string rubble = "Rubble";
     public const string bed = "Bed";
@@ -181,6 +182,7 @@ public static class NPCNameList
 
     #region Misc
 
+    public const string takacs = "Takács";
     public const string crowd = "The Crowd";
 
     #endregion

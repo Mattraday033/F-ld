@@ -32,6 +32,8 @@ VAR hostageTakersNoPunishment = false
 VAR hostageTakersLeaderPunished = false
 VAR hostageTakersLaborPunishment = false
 
+activateQuestStep(A Situation Brews,Return to Tabor.)
+
 setToTrue(concludedHostageNegotiations)
 setToTrue(spokeToWeftAfterHostageSituation)
 
@@ -219,7 +221,7 @@ Chief Tabor will keep to his word. He may even defend us to the Director. But Ca
 
 === 4a ===
 
-You- \*Weft looks about at all the guards and keeps his voice down.* You called the guards in before the hostages were killed. What were you thinking!
+You- \*Weft looks about at all the guards and keeps his voice down.* You called the guards in before the hostages were killed. What were you thinking?
 
     +The way I see it, more dead guards is a good thing.
         ->4b

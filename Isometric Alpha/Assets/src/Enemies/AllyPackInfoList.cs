@@ -38,7 +38,7 @@ public static class AllyPackInfoList
                                                                                                     }, 
                                                                             new string[]
                                                                                         {
-                                                                                            FlagNameList.hostagesDead
+                                                                                            FlagNameList.declaredHostagesDead
                                                                                         });
 
 

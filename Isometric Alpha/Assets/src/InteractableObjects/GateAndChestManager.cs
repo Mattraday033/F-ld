@@ -37,6 +37,22 @@ public static class GateAndChestManager
         }
     }
 
+    public static void removeKey(string key, bool invoke = true)
+    {
+        if (!openedGatesAndChests.ContainsKey(key))
+        {
+            return;
+        }
+
+        openedGatesAndChests.Remove(key);
+
+        if(invoke)
+        {
+            OnGateKeyAdd.Invoke();
+        }
+    }
+
+
 	public static bool hasBeenOpened(string key)
 	{
 		return openedGatesAndChests.ContainsKey(key);

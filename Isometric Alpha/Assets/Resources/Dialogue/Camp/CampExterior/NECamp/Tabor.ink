@@ -18,6 +18,8 @@ VAR hostageTakersLeaderPunished = false
 VAR hostageTakersLaborPunishment = false
 
 VAR gaveWeftCreditAfterHostages = false
+VAR tookBlameForHostageDeath = false
+VAR blamedWeftForHostageDeath = false
 
 VAR mentionedStoneMan = false
 VAR hostageSituationGuardsLeft = false
@@ -27,12 +29,18 @@ VAR hostagesDead = false
 VAR declaredHostagesDead = false
 VAR concludedHostageNegotiations = false
 
+
 {
 -concludedHostageNegotiations:
+
+    activateQuestStep(No Good Deed,Meet Tabor.)
+
     {
     -hostagesDead:
+        finishQuest(A Situation Brews,true,The hostages were saved.)
         ->setUpSpeakers(->4a)
     -else:
+        finishQuest(A Situation Brews,true,The hostages were killed.)
         ->setUpSpeakers(->2a)
     }
 -spokeToTaborAtBeginningOfSituation:
@@ -421,40 +429,9 @@ setNPCFacing({adelaIndex},SE)
 
 changeCamTarget({taborIndex})
 
-We must give our reports to the Director. Once that is done, I will be back to give you two your next task. Take an extended midday break while I am up in the Manse, then come find me in front of Weft's hut when it is over.
+We must give our reports to the Director. Once that is done, I will be back to give you two your next task. Take your midday break while I am up in the Manse, then come find me in front of Weft's hut when it is over.
 
 ->deactivateGuards
-
-=== gaveWeftCreditConvo_1a ===
-
-activate({weftIndex})
-
-changeCamTarget({weftIndex})
-setNPCFacing({weftIndex},SW)
-setFacing(NE)
-
-fadeBackIn(60)
-
-I don't understand. Why did you praise me to Adéla and Tabor?
-
-{
--insultedWeftAfterHostages:
-    +This feuding between us is getting us nowhere. Think of it as an olive branch.
-        \*Weft studies you while he considers your words.* I can understand that. Hutmates should stick together, after all. I'll calm my aggression as well.
-        ->deactivateWeft
-}
-    +You suck up to them for protection, but I can handle myself. I thought it would benefit you more than me.
-{
--insultedWeftAfterHostages:
-        Maybe you need their protection, maybe you don't. This doesn't make us friends, but... thanks, I guess.
-        ->deactivateWeft
--else:
-        Maybe you need their protection, maybe you don't. But I'm not about to seem ungrateful. Thank you.
-        ->deactivateWeft
-}
-    +The only real 'reward' they're going to give us is more work. I was trying to get you to take the brunt of it.
-        More work just means more opportunities to prove your usefulness. Your loss, my gain.
-        ->deactivateWeft
 
 === 4a ===
 
@@ -496,6 +473,7 @@ Chief Tabor, you and I will both brief the Director on what has happened here. A
 
 === 4b ===
 
+setNPCFacing({adelaIndex},SE)
 changeCamTarget({adelaIndex})
 
 \*Adéla's eyes glint maliciously.* Yes, please do. Make this worse for yourself.
@@ -526,7 +504,82 @@ changeCamTarget({adelaIndex})
     +\*Say nothing.*
         That's what I thought.
             ->3c
-        
+
+=== gaveWeftCreditConvo_1a ===
+
+I don't understand. Why did you praise me to Adéla and Tabor?
+
+{
+-insultedWeftAfterHostages:
+    +This feuding between us is getting us nowhere. Think of it as an olive branch.
+        \*Weft studies you while he considers your words.* I can understand that. Hutmates should stick together, after all. I'll calm my aggression as well.
+        ->deactivateWeft
+}
+    +You suck up to them for protection, but I can handle myself. I thought it would benefit you more than me.
+{
+-insultedWeftAfterHostages:
+        Maybe you need their protection, maybe you don't. This doesn't make us friends, but... thanks, I guess.
+        ->deactivateWeft
+-else:
+        Maybe you need their protection, maybe you don't. But I'm not about to seem ungrateful. Thank you.
+        ->deactivateWeft
+}
+    +The only real 'reward' they're going to give us is more work. I was trying to get you to take the brunt of it.
+        More work just means more opportunities to prove your usefulness. Your loss, my gain.
+        ->deactivateWeft
+
+=== tookBlameForHostages_1a ===
+
+I don't understand. Why tell Adéla and Tabor you were the one at fault?
+
+{
+-insultedWeftAfterHostages:
+    +This feuding between us is getting us nowhere. Think of it as an olive branch.
+        \*Weft studies you while he considers your words.* I can understand that. Hutmates should stick together, after all. I'll calm my aggression as well.
+        ->deactivateWeft
+}
+    +You suck up to them for protection, but I can handle myself. I thought it would benefit you more than me.
+{
+-insultedWeftAfterHostages:
+        Maybe you need their protection, maybe you don't. This doesn't make us friends, but... thanks, I guess.
+        ->deactivateWeft
+-else:
+        Maybe you need their protection, maybe you don't. But I'm not about to seem ungrateful. Thank you.
+        ->deactivateWeft
+}
+    +They will surely give the one they trust more work. I was just trying to avoid future labors.
+        More work just means more opportunities to prove your usefulness. Your loss, my gain.
+        ->deactivateWeft
+
+=== blamedWeftForHostages_1a ===
+
+You disgust me. Who could trust you now that they've seen you disgrace yourself like this?
+
+    +I never asked for your trust. The Lovashi can only favor one of us the most, and it's going to be me.
+        And it shall never be given. You've ruined any chance of cooperation between us.
+        ->deactivateWeft
+    +\*Smile and spread your hands.* Weft, my friend, you must understand it was a momentary slip of judgement. Nothing more, I swear it.
+        Like I'd believe that now, you rat. *Weft spits at your feet.*
+        ->deactivateWeft
+    +What would you have me say? We both play the same game, and I'm playing to win.
+        Think that if you like, but all you've done is reveal to everyone your vile nature. 
+        ->deactivateWeft
+    +How you're looking at me now? That's how every other branded looks at you.
+        \*Weft shudders.* Maybe you're right. But that doesn't mean we can't share the same revulsion.
+        ->deactivateWeft
+
+=== setUpPostScriptSpeakers(->divert) ===
+
+activate({weftIndex})
+
+changeCamTarget({weftIndex})
+setNPCFacing({weftIndex},SW)
+setFacing(NE)
+
+fadeBackIn(60)
+
+->divert
+
 === deactivateWeft ===
 
 fadeToBlack()
@@ -549,7 +602,11 @@ updateNPCVisibility()
 
 {
 -gaveWeftCreditAfterHostages:
-    ->gaveWeftCreditConvo_1a
+    ->setUpPostScriptSpeakers(->gaveWeftCreditConvo_1a) 
+-tookBlameForHostageDeath:
+    ->setUpPostScriptSpeakers(->tookBlameForHostages_1a)
+-blamedWeftForHostageDeath:
+    ->setUpPostScriptSpeakers(->blamedWeftForHostages_1a)
 }
 
 deactivate({weftIndex})

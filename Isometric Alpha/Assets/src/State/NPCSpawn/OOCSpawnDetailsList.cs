@@ -189,8 +189,8 @@ public static class OOCSpawnDetailsList
         list.Add(new DeadBodySpawnDetails(NPCNameList.slave+1, new Vector3Int(7, 12), NPCNameList.slave+2, facing: Facing.NorthWest, ignoresSecretDoors: false));
         list.Add(new DeadBodySpawnDetails(NPCNameList.slave+1, new Vector3Int(7, 3), NPCNameList.slave+3, facing: Facing.NorthWest, ignoresSecretDoors: false));
         
-        list.Add(new DeadBodySpawnDetails(NPCNameList.guard+4, new Vector3Int(6, 5), MonsterNameList.spearman, facing: Facing.SouthEast, weaponless: true, ignoresSecretDoors: false));
-        list.Add(new DeadBodySpawnDetails(NPCNameList.guard+4, new Vector3Int(6, 7), MonsterNameList.axeman, facing: Facing.SouthWest, ignoresSecretDoors: false));
+        list.Add(new DeadBodySpawnDetails(NPCNameList.guard+4, new Vector3Int(6, 5), MonsterNameList.spearman, facing: Facing.SouthWest, weaponless: true, ignoresSecretDoors: false));
+        list.Add(new DeadBodySpawnDetails(NPCNameList.guard+4, new Vector3Int(6, 7), MonsterNameList.axeman, facing: Facing.SouthWest, weaponless: true, ignoresSecretDoors: false));
         
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+4, new Vector3Int(6, 4), LocationNameList.slaveShackSeven, animationName: MonsterNameList.spearman, facing: Facing.NorthWest, ignoresSecretDoors: false));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+4, new Vector3Int(4, 3), LocationNameList.slaveShackSeven, animationName: MonsterNameList.axeman, facing: Facing.SouthWest, ignoresSecretDoors: false));
@@ -739,6 +739,9 @@ public static class OOCSpawnDetailsList
         list.Add(new LadderSpawnDetails(new Vector3Int(-5, -20), PrefabNames.ladderTallSW,
                                         new Ladder(Constants.difficultyTwo, LocationNameList.campManse, LocationNameList.guardHouseTopFloor, 
                                                     Ladder.barracksLadderDescription, Facing.SouthEast), flipX: Constants.flipX));
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(6, -16), LocationNameList.campManse, facing: Facing.SouthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(4, -17), facing: Facing.NorthEast));
 
         oocSpawnDetailsDict.Add(LocationNameList.campManse, list);
         #endregion
@@ -1625,6 +1628,17 @@ public static class OOCSpawnDetailsList
 
         #region Manse-2F
 
+        #region Manse-2F-1a
+
+        list = new List<OOCSpawnDetails>();
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.honorguard, new Vector3Int(9, 6), ZoneKeyList.manseSecondFloor + LocationNameList.section1a, animationName: MonsterNameList.linebreaker, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.honorguard, new Vector3Int(9, 5), ZoneKeyList.manseSecondFloor + LocationNameList.section1a, animationName: MonsterNameList.lancer, facing: Facing.SouthWest));
+
+        oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section1a, list);
+
+        #endregion
+
         #region Manse-2F-1b
 
         list = new List<OOCSpawnDetails>();
@@ -1640,6 +1654,9 @@ public static class OOCSpawnDetailsList
         list = new List<OOCSpawnDetails>();
 
         list.Add(new ShelfSpawnDetails(Constants.indexZero, new Vector3Int(-2, -3), Facing.SouthWest));
+        list.Add(new ShelfSpawnDetails(Constants.indexOne, new Vector3Int(-2, -2), Facing.SouthWest));
+        
+        list.Add(new BookSpawnDetails(NPCNameList.memo, new Vector3Int(-2, 1), PrefabNames.note, ItemList.brandedMemoIndex));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section1c, list);
 
@@ -1747,6 +1764,12 @@ public static class OOCSpawnDetailsList
         list = new List<OOCSpawnDetails>();
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.director, new Vector3Int(2, -1), ZoneKeyList.manseSecondFloor + LocationNameList.office, facing: Facing.SouthWest, extraSpaces: new Vector3Int[]{ new Vector3Int(0, -1) }));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.director+1, new Vector3Int(2, -1), ZoneKeyList.manseSecondFloor + LocationNameList.office, facing: Facing.SouthWest, extraSpaces: new Vector3Int[]{ new Vector3Int(0, -1) }, speakAtStartScript: new PreRevoltDirectorConvoScript()));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.page+1, new Vector3Int(-5, 1), ZoneKeyList.manseSecondFloor + LocationNameList.office, facing: Facing.SouthWest, extraSpaces: new Vector3Int[]{ new Vector3Int(-6, 1) })); 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.takacs, new Vector3Int(-1, -1), facing: Facing.NorthEast)); 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(-2, -3), facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(-2, 0), facing: Facing.NorthEast));  
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.captainAdela, new Vector3Int(2, 1), facing: Facing.SouthWest));  
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(-3, -3), facing: Facing.NorthEast)); 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.nandor, new Vector3Int(-3, 0), facing: Facing.NorthEast)); 

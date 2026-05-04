@@ -845,9 +845,9 @@ public class DialogueManager : MonoBehaviour
 
                     return;
 
-                case "wait": //wait(int seconds) 
+                case "wait": //wait(float seconds) 
 
-                    int seconds = getArgumentInt(buffer);
+                    float seconds = getArgumentFloat(buffer);
 
                     StartCoroutine(waitInSeconds(seconds));
 
@@ -1374,6 +1374,17 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
+                case "opengatewithkeyanylocation":
+                case "opengatefromkeyanylocation":
+
+                    gateKey = getArgument(buffer, Constants.indexZero);
+
+                    GateAndChestManager.addKey(gateKey);
+
+                    continueStory();
+
+                    break;
+
                 case "explodeanddie":
 
                     GameObject effectGO = Instantiate(Resources.Load<GameObject>(PrefabNames.effect), PlayerObject.getInstanceTransform());
@@ -1395,6 +1406,26 @@ public class DialogueManager : MonoBehaviour
                     continueStory();
                     
                     PlayerObject.spawnGameOverPopUp();
+                    break;
+
+                case "createeffect":
+
+                    string effectName = getArgument(buffer, Constants.indexZero);
+                    xPos = getArgumentInt(buffer, Constants.indexOne);
+                    yPos = getArgumentInt(buffer, Constants.indexTwo);
+
+                    targetCellCoords = new Vector3Int(xPos, yPos);
+
+                    effectGO = Instantiate(Resources.Load<GameObject>(PrefabNames.effect), PlayerObject.getInstanceTransform());
+
+                    effectGO.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(targetCellCoords);
+
+                    effect = effectGO.GetComponent<EffectAnimationManager>();
+
+                    effect.setAnimations(effectName);
+                    
+                    continueStory();
+                    
                     break;
 
                 case "defeatmonster":
@@ -1443,7 +1474,7 @@ public class DialogueManager : MonoBehaviour
 
                     if(argAmount > 1)
                     {
-                    bool wipeConversation = getArgumentBool(buffer, Constants.indexTwo);
+                        bool wipeConversation = getArgumentBool(buffer, Constants.indexOne);
                         if(wipeConversation)
                         {
                             DialogueTrackerWindow.wipeDialogue();
@@ -1452,7 +1483,7 @@ public class DialogueManager : MonoBehaviour
 
                     if(argAmount > 2)
                     {
-                        startingBoolName = getArgument(buffer, Constants.indexOne).Replace(" ", "");
+                        startingBoolName = getArgument(buffer, Constants.indexTwo).Replace(" ", "");
 
                         if(currentStory.variablesState[startingBoolName] != null)
                         {
@@ -1810,6 +1841,18 @@ public class DialogueManager : MonoBehaviour
         return int.Parse(getAllArgs(buffer)[argIndex]);
     }
 
+    private float getArgumentFloat(string buffer, int argIndex = 0)
+    {
+        string[] args = getAllArgs(buffer);
+
+        if(args.Length <= argIndex || args[argIndex].Length <= 0)
+        {
+            return Constants.indexOne;
+        }
+        
+        return float.Parse(getAllArgs(buffer)[argIndex]);
+    }
+
     private bool getArgumentBool(string buffer, int argIndex)
     {
         string[] args = getAllArgs(buffer);
@@ -2119,7 +2162,7 @@ public class DialogueManager : MonoBehaviour
 	}
 
 	
-	private IEnumerator waitInSeconds(int seconds)
+	private IEnumerator waitInSeconds(float seconds)
 	{
 		yield return new WaitForSeconds(seconds);
 

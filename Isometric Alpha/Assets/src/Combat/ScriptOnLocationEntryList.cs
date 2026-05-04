@@ -24,6 +24,30 @@ public static class ScriptOnLocationEntryList
         scriptOnLocationEntryDict = new Dictionary<string, List<PlayerInteractionScript>>();
         List<PlayerInteractionScript> list;
 
+        #region Manse Camp
+        list = new List<PlayerInteractionScript>();
+
+        list.Add(new EnteredCampManse());
+
+        scriptOnLocationEntryDict.Add(LocationNameList.campManse, list);
+        #endregion
+
+        #region Manse-1F-1a
+        list = new List<PlayerInteractionScript>();
+
+        list.Add(new EnteredManse1F1a());
+
+        scriptOnLocationEntryDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section1a, list);
+        #endregion
+
+        #region Manse-2F-1a
+        list = new List<PlayerInteractionScript>();
+
+        list.Add(new EnteredManse2F1a());
+
+        scriptOnLocationEntryDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section1a, list);
+        #endregion
+
         #region MineLvl_1-1a
         list = new List<PlayerInteractionScript>();
 
@@ -57,4 +81,67 @@ public static class ScriptOnLocationEntryList
         #endregion
     }
 
+}
+
+public class EnteredManse2F1a : PlayerInteractionScript
+{
+    private const string manse2F1AGateKey = ZoneKeyList.manseSecondFloor+LocationNameList.section1a+NPCNameList.gate;
+    private const string manse2F1cShelfIndexZeroKey = ZoneKeyList.manseSecondFloor+LocationNameList.section1c+Chest.chestKeyMarker+Constants.zeroRating;
+    private const string manse2F1cShelfIndexOneKey = ZoneKeyList.manseSecondFloor+LocationNameList.section1c+Chest.chestKeyMarker+"1";
+
+    public override void runScript(GameObject target = null)
+    {
+        if ((Flags.getFlag(FlagNameList.revoltStarted) || 
+            AreaList.getArea(ZoneKeyList.manseSecondFloor+LocationNameList.section1a).isHostile()) &&
+            !Flags.getFlag(FlagNameList.manse2F1aGatesOpened))
+        {
+            GateAndChestManager.addKey(manse2F1AGateKey);
+
+            GateAndChestManager.removeKey(manse2F1cShelfIndexZeroKey);
+            GateAndChestManager.addKey(manse2F1cShelfIndexOneKey);
+
+            Flags.setFlag(FlagNameList.manse2F1aGatesOpened, true);
+        } 
+        
+        if(!Flags.getFlag(FlagNameList.revoltStarted) && 
+            !Flags.getFlag(FlagNameList.taborRoomShelfSetToNonHostile))
+        {
+            GateAndChestManager.addKey(manse2F1cShelfIndexZeroKey);
+            GateAndChestManager.removeKey(manse2F1cShelfIndexOneKey);
+            
+            Flags.setFlag(FlagNameList.taborRoomShelfSetToNonHostile,true);
+        }
+    }
+}
+
+public class EnteredManse1F1a : PlayerInteractionScript
+{
+    private const string manse1F1AGateKey = ZoneKeyList.manseFirstFloor+LocationNameList.section1a+NPCNameList.gate;
+
+    public override void runScript(GameObject target = null)
+    {
+        if ((Flags.getFlag(FlagNameList.revoltStarted) || 
+            AreaList.getArea(ZoneKeyList.manseFirstFloor+LocationNameList.section1a).isHostile()) &&
+            !Flags.getFlag(FlagNameList.manse1F1aGatesOpened))
+        {
+            GateAndChestManager.addKey(manse1F1AGateKey);
+            Flags.setFlag(FlagNameList.manse1F1aGatesOpened, true);
+        }
+    }
+}
+
+public class EnteredCampManse : PlayerInteractionScript
+{
+    private const string manseFrontGateKey = LocationNameList.campManse+NPCNameList.manseFrontDoor;
+
+    public override void runScript(GameObject target = null)
+    {
+        if ((Flags.getFlag(FlagNameList.revoltStarted) || 
+            AreaList.getArea(LocationNameList.campManse).isHostile()) &&
+            !Flags.getFlag(FlagNameList.manseFrontDoorsClosed))
+        {
+            GateAndChestManager.removeKey(manseFrontGateKey);
+            Flags.setFlag(FlagNameList.manseFrontDoorsClosed, true);
+        }
+    }
 }

@@ -1,0 +1,13 @@
+{
+	"title": "No Good Deed",
+	"steps":[	
+                {"stepName":"Meet Tabor.","MapZone":"Camp","MapLocation":"ManseCamp","journalDescription":"I've been told to take my midday break, then to find Chief Tabor to receive my next assignment. <B> I can find Chief Tabor in front of Weft's hut: the largest hut in the western most part of the camp.</B>"},
+                {"stepName":"Go to the Director's office.","MapZone":"Manse-2F","MapLocation":"Office","journalDescription":"On account of my conduct during the hostage crisis, Chief Tabor said I have been summoned to the Director's office. <B>I should enter the Manse in the west section of the camp, then proceed to the second floor. The Director's office will be the last door on the right.</B>"}
+
+            ],
+			
+	"deathSteps":
+			[
+			]
+	
+}

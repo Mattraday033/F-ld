@@ -753,6 +753,15 @@ public static class DialogueList
         addDialogueToList(LocationNameList.campManse, NPCNameList.barracksGate+2,
                             new SingleCharacterDialogue(NPCNameList.barracksGate+2,
                             Resources.Load<TextAsset>(DialogueNameList.barracksGatePath)));
+
+        addDialogueToList(LocationNameList.campManse, NPCNameList.chiefTabor,
+                            new Dialogue( new string[]{ 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.chiefTabor,
+                                                        NPCNameList.weft
+                                                        },
+                            Resources.Load<TextAsset>(DialogueNameList.taborWeftHutPath)));
+
         #endregion
         #region NWCamp
 
@@ -1103,7 +1112,10 @@ public static class DialogueList
                                 DialogueCombatInfoList.barricadeGuardsCombatInfo,
                                 new StoryFlagList(InkVariableNameList.defeatFlag, FlagNameList.barricadeGuardDefeatKey4)));
                                 
-            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.kende,
+
+        addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section1a, NPCNameList.gate, ancientPortcullisDialogue);
+
+        addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.kende,
                                 new Dialogue(new string[]   { 
                                                                 NPCNameList.playerNamePlaceHolder, 
                                                                 NPCNameList.kende, 
@@ -1116,70 +1128,68 @@ public static class DialogueList
                                  Resources.Load<TextAsset>(DialogueNameList.kendeUponEnteringKitchensPathName), 
                                  DialogueCombatInfoList.kendeInKitchensCombatInfo));
 
-            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.imre+1,
-                                new Dialogue(new string[]   { NPCNameList.imre+1 }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.loyalImrePathName)));
+        addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.imre+1,
+                            new Dialogue(new string[]   { NPCNameList.imre+1 }, 
+                                Resources.Load<TextAsset>(DialogueNameList.loyalImrePathName)));
 
-            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.pan,
-                                new SingleCharacterDialogue(NPCNameList.pan, 
-                                Resources.Load<TextAsset>(DialogueNameList.panPathName)));
+        addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.pan,
+                            new SingleCharacterDialogue(NPCNameList.pan, 
+                            Resources.Load<TextAsset>(DialogueNameList.panPathName)));
 
-            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.diningRoom, NPCNameList.ancientPortcullis,
-                                new Dialogue(new string[]   { NPCNameList.ancientPortcullis }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath)));
+        addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.diningRoom, NPCNameList.ancientPortcullis,
+                            new Dialogue(new string[]   { NPCNameList.ancientPortcullis }, 
+                                Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath)));
 
-            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section2a, NPCNameList.ancientPortcullis,
-                                new Dialogue(new string[]   { NPCNameList.ancientPortcullis }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath)));
+        addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section2a, NPCNameList.ancientPortcullis,
+                            new Dialogue(new string[]   { NPCNameList.ancientPortcullis }, 
+                                Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath)));
 
-            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section2b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
+        addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section2b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
 
-            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.beam,
-                                new Dialogue(new string[]   { 
-                                                                NPCNameList.playerNamePlaceHolder, 
-                                                                NPCNameList.beam,
-                                                                NPCNameList.csalan,
-                                                                NPCNameList.horse,
-                                                                NPCNameList.horse+1,
-                                                                NPCNameList.horse+2
-                                                            }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName), 
-                                 DialogueCombatInfoList.beamAndCsalanCombatInfo));
+        addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.beam,
+                            new Dialogue(new string[]   { 
+                                                            NPCNameList.playerNamePlaceHolder, 
+                                                            NPCNameList.beam,
+                                                            NPCNameList.csalan,
+                                                            NPCNameList.horse,
+                                                            NPCNameList.horse+1,
+                                                            NPCNameList.horse+2
+                                                        }, 
+                                Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName), 
+                                DialogueCombatInfoList.beamAndCsalanCombatInfo));
 
-            Dialogue horseMansePlaceHolderDialogue = new Dialogue(new string[]   { 
-                                                                NPCNameList.playerNamePlaceHolder, 
-                                                                NPCNameList.beam,
-                                                                NPCNameList.csalan,
-                                                                NPCNameList.horse,
-                                                                NPCNameList.horse+1,
-                                                                NPCNameList.horse+2
-                                                            }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName));
-
-            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse, new Dialogue(new string[]   { 
-                                                                NPCNameList.playerNamePlaceHolder, 
-                                                                NPCNameList.horse
-                                                            }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName)));
-            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse+1, new Dialogue(new string[]   { 
-                                                                NPCNameList.playerNamePlaceHolder, 
-                                                                NPCNameList.horse+1
-                                                            }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName)));
-            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse+2, new Dialogue(new string[]   { 
-                                                                NPCNameList.playerNamePlaceHolder, 
-                                                                NPCNameList.horse+2
-                                                            }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName)));
-            addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.csalan, new Dialogue(new string[]   { 
-                                                                NPCNameList.playerNamePlaceHolder, 
-                                                                NPCNameList.csalan
-                                                            }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName)));
+        addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse, new Dialogue(new string[]   { 
+                                                            NPCNameList.playerNamePlaceHolder, 
+                                                            NPCNameList.horse
+                                                        }, 
+                                Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName)));
+        addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse+1, new Dialogue(new string[]   { 
+                                                            NPCNameList.playerNamePlaceHolder, 
+                                                            NPCNameList.horse+1
+                                                        }, 
+                                Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName)));
+        addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse+2, new Dialogue(new string[]   { 
+                                                            NPCNameList.playerNamePlaceHolder, 
+                                                            NPCNameList.horse+2
+                                                        }, 
+                                Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName)));
+        addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.csalan, new Dialogue(new string[]   { 
+                                                            NPCNameList.playerNamePlaceHolder, 
+                                                            NPCNameList.csalan
+                                                        }, 
+                                Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName)));
 
         #endregion
 
         #region Manse-2f
+
+
+            addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section1a, NPCNameList.gate, ancientPortcullisDialogue);
+
+
+            addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section1a, NPCNameList.honorguard,
+                                new SingleCharacterDialogue(NPCNameList.honorguard, 
+                                 Resources.Load<TextAsset>(DialogueNameList.directorsBedroomGuardsPath)));
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section2c, NPCNameList.chiefTabor,
                                 new Dialogue(new string[]   {   
@@ -1203,6 +1213,26 @@ public static class DialogueList
                                                             }, 
                                  Resources.Load<TextAsset>(DialogueNameList.directorPathName),
                                  DialogueCombatInfoList.directorCombatInfo));
+
+          addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.director+1,
+                                new Dialogue(new string[]   { 
+                                                                NPCNameList.playerNamePlaceHolder,
+                                                                NPCNameList.director+1,
+                                                                NPCNameList.takacs
+                                                            }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.prerevoltDirectorPathName)));
+
+          addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.page+1,
+                                new Dialogue(new string[]   { 
+                                                                NPCNameList.playerNamePlaceHolder,
+                                                                NPCNameList.page+1,
+                                                                NPCNameList.director+1,
+                                                                NPCNameList.chiefTabor,
+                                                                NPCNameList.weft,
+                                                                NPCNameList.captainAdela
+                                                            }, 
+                                 Resources.Load<TextAsset>(DialogueNameList.prerevoltPagePathName)));
+
 
         // addDialogueToList(DialogueNameList.directorDefeatedConvoKey,
         //                  new Dialogue(new string[] { "", "Director", "Page", "Carter", "Nándor" }, new GameObject[5], Resources.Load<TextAsset>(DialogueNameList.directorDefeatedConvoKey)));

@@ -189,6 +189,7 @@ public static class DialogueNameList
     public const string manseFrontDoorPath = campExteriorPathName + LocationNameList.campManse + Constants.seperatorChar + "ManseFrontDoor";
     public const string manseServiceEntrancePath = campExteriorPathName + LocationNameList.campManse + Constants.seperatorChar + "ManseServiceEntrance";
     public const string secondBarricadeGuardsPath = campExteriorPathName + LocationNameList.campManse + Constants.seperatorChar + "SecondBarricadeGuards";  
+    public const string taborWeftHutPath = campExteriorPathName + LocationNameList.campManse + Constants.seperatorChar + "TaborWeftHut";  
     #endregion
     #region Camp South East
     public const string directorStatuePath = campExteriorPathName + LocationNameList.campSouthEast + Constants.seperatorChar + "DirectorStatue";
@@ -304,6 +305,12 @@ public static class DialogueNameList
 
     #region Manse-2F
 
+    #region Manse-2F-1a
+
+    public const string directorsBedroomGuardsPath = manseSecondFloorPathName + NPCNameList.honorguard;
+
+    #endregion
+
     #region Manse-2F-2c
 
     public const string chiefTaborManseSecondFloorPathName = manseSecondFloorPathName + NPCNameList.chiefTabor;
@@ -315,6 +322,8 @@ public static class DialogueNameList
     public const string officeDoorPathName = manseSecondFloorPathName + NPCNameList.officeDoor;
     public const string officeSecretDoorPathName = manseSecondFloorPathName + "OfficeSecretDoor";
     public const string directorPathName = manseSecondFloorPathName + NPCNameList.director;
+    public const string prerevoltDirectorPathName = manseSecondFloorPathName + NPCNameList.director + "PreRevolt";
+    public const string prerevoltPagePathName = manseSecondFloorPathName + NPCNameList.page + "PreRevolt";
     public const string directorDefeatedPathName = manseSecondFloorPathName + NPCNameList.director + "DefeatedConvo";
 
     #endregion

@@ -8,7 +8,7 @@ public static class ChestItemIDList
     private static Dictionary<string, List<ItemListID>> chestItemIDList;
 
     [RuntimeInitializeOnLoadMethod]
-    private static void initializeChestItemIDList()
+    public static void initializeChestItemIDList()
     {
         chestItemIDList = new Dictionary<string, List<ItemListID>>();
         List<ItemListID> list;
@@ -350,6 +350,7 @@ public static class ChestItemIDList
         list = new List<ItemListID>();
 
         list.Add(new ItemListID(ItemList.armorListIndex, ItemList.bronzeCuirassIndex));
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.chokegrassBombIndex));
 
         chestItemIDList.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section1c, list);
 

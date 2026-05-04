@@ -27,6 +27,8 @@ public interface INonRevealableNameSource: INameSource
 public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationObject
 {
 
+    public const string chestKeyMarker = "-chest-";
+
     public readonly static UnityEvent<int> OpenChestsSharingIndex = new UnityEvent<int>();
 
     private static Dictionary<KeyValuePair<Facing, ChestState>, string> chestSprites;
@@ -401,7 +403,7 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
     private string getChestKey()
     {
-        return AreaManager.locationName + "-chest-" + chestIndex;
+        return AreaManager.locationName + chestKeyMarker  + chestIndex;
     }
 
     public bool hasBeenOpened()

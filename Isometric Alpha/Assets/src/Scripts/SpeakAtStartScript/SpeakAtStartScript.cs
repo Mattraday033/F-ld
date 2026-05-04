@@ -57,6 +57,19 @@ public class WeftAfterHostageCombatScript: SpeakAtStartScript //Brush + Géza in
     }
 }
 
+public class PreRevoltDirectorConvoScript : SpeakAtStartScript
+{
+
+    public override void runScript(GameObject target = null)
+    {
+        if (Flags.getFlag(FlagNameList.summonedToDirectorsOffice) && !Flags.getFlag(FlagNameList.revoltStarted) && !Flags.getFlag(FlagNameList.directorDefeated) && !Flags.getFlag(FlagNameList.hadTakacsConvoInDirectorsOffice))
+        {
+            dialogueTrigger.triggerDialogue();
+        }
+    }
+
+}
+
 public class KendeInKitchenDuringRiotScript: SpeakAtStartScript
 {
 
