@@ -87,7 +87,8 @@ public static class FlagNameList
         //directors office convo flags
         public const string summonedToDirectorsOffice = "summonedToDirectorsOffice";
         public const string hadTakacsConvoInDirectorsOffice = "hadTakacsConvoInDirectorsOffice";
-        public const string sentIntoMineByDirector = "sentIntoMineByDirector"; //Met Director in prerevolt convo and was given task t
+        public const string metDirectorAfterHostages = "metDirectorAfterHostages";
+        public const string sentIntoMineByDirector = "sentIntoMineByDirector"; //Accepted Director's task to enter mine 
 
         //kastor convo flags
         public const string metKastor = "metKastor"; //if the player has spoken to Kastor before

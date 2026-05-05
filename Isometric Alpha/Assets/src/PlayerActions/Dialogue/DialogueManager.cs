@@ -228,6 +228,8 @@ public class DialogueManager : MonoBehaviour
 
 		    continueStory();
 		    PlayerOOCStateManager.OnStateChangeToWalking.AddListener(onStateChangeToWalkingEvent);
+
+            AudioManager.duckMusicForDialogue();
         }
 	}
 
@@ -272,6 +274,8 @@ public class DialogueManager : MonoBehaviour
 		{
 			PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
 		}
+
+        AudioManager.unduckMusicAfterDialogue();
 	}
 
 	public void onStateChangeToWalkingEvent()
@@ -794,6 +798,30 @@ public class DialogueManager : MonoBehaviour
                     continueStory();
 
                     break;
+                case "dealdamagesafe":       
+
+                    partyMemberName = getArgument(buffer, Constants.indexZero);
+                    int damage = getArgumentInt(buffer, Constants.indexOne);
+
+                    if(partyMemberName.Equals(PartyManager.getPlayerNameForDisplay()))
+                    {
+                        companion = PartyManager.getPlayer();
+                    } else
+                    {
+                        companion = PartyManager.getPartyMember(partyMemberName);
+                    }
+
+                    if(companion.stats.currentHealth > damage)
+                    {
+                        companion.stats.modifyCurrentHealth(damage);
+                    } else
+                    {
+                        companion.stats.currentHealth = Constants.sizeOne;
+                    }
+
+                    continueStory();
+
+                    break;
                 case "quickfadetoblack":
                     fadeToBlackCommand(quickFade: true);
                     return;
@@ -981,7 +1009,10 @@ public class DialogueManager : MonoBehaviour
                         switch (npcAnimationArgs.ToLower().Replace(" ",""))
                         {
                             case "attack_normal_front":
-                                targetAnimationManager.playAttackAnimation();
+                                targetAnimationManager.playAttackFrontAnimation();
+                                break;
+                            case "attack_normal_back":
+                                targetAnimationManager.playAttackBackAnimation();
                                 break;
                             case "idle_back":
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Idle_Back);
@@ -1010,6 +1041,12 @@ public class DialogueManager : MonoBehaviour
                                 break;
                             case "death_back_weaponless":
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Back_Weaponless);
+                                break;
+                            case "wounded_back":
+                                targetAnimationManager.playAnimation(CharacterAnimationType.Wounded_Back);
+                                break;
+                            case "wounded_front":
+                                targetAnimationManager.playAnimation(CharacterAnimationType.Wounded_Front);
                                 break;
                         }
                     }

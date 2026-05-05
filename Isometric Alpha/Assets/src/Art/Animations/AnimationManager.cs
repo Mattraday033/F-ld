@@ -537,6 +537,28 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         }
     }
 
+    public void playAttackFrontAnimation()
+    {
+        CombatAnimationManager.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Attack_Normal_Front));
+        playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Normal_Front));
+
+        if(CombatStateManager.inCombat)
+        {
+            linkedStats.playAnimationSFX(CharacterAnimationType.Attack_Normal);
+        }
+    }
+
+    public void playAttackBackAnimation()
+    {
+        CombatAnimationManager.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Attack_Normal_Back));
+        playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Normal_Back));
+
+        if(CombatStateManager.inCombat)
+        {
+            linkedStats.playAnimationSFX(CharacterAnimationType.Attack_Normal);
+        }
+    }
+
     public void playAttackIntoFrontIdleAnimation()
     {
         CombatAnimationManager.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Attack_Normal));

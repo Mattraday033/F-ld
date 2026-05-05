@@ -1764,12 +1764,13 @@ public static class OOCSpawnDetailsList
         list = new List<OOCSpawnDetails>();
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.director, new Vector3Int(2, -1), ZoneKeyList.manseSecondFloor + LocationNameList.office, facing: Facing.SouthWest, extraSpaces: new Vector3Int[]{ new Vector3Int(0, -1) }));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.director+1, new Vector3Int(2, -1), ZoneKeyList.manseSecondFloor + LocationNameList.office, facing: Facing.SouthWest, extraSpaces: new Vector3Int[]{ new Vector3Int(0, -1) }, speakAtStartScript: new PreRevoltDirectorConvoScript()));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.director+1, new Vector3Int(2, -1), ZoneKeyList.manseSecondFloor + LocationNameList.office, facing: Facing.NorthWest, extraSpaces: new Vector3Int[]{ new Vector3Int(0, -1) }, speakAtStartScript: new PreRevoltDirectorConvoScript()));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.page+1, new Vector3Int(-5, 1), ZoneKeyList.manseSecondFloor + LocationNameList.office, facing: Facing.SouthWest, extraSpaces: new Vector3Int[]{ new Vector3Int(-6, 1) })); 
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.takacs, new Vector3Int(-1, -1), facing: Facing.NorthEast)); 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.takacs+1, new Vector3Int(-1, -1), facing: Facing.NorthEast)); 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.takacs+2, new Vector3Int(2, 0), facing: Facing.SouthEast)); 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(-2, -3), facing: Facing.NorthEast));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(-2, 0), facing: Facing.NorthEast));  
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.captainAdela, new Vector3Int(2, 1), facing: Facing.SouthWest));  
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(-2, 0), facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.captainAdela, new Vector3Int(2, 1), facing: Facing.SouthWest));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(-3, -3), facing: Facing.NorthEast)); 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.nandor, new Vector3Int(-3, 0), facing: Facing.NorthEast)); 

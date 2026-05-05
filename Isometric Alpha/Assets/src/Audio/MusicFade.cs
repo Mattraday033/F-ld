@@ -110,15 +110,6 @@ public class BetweenAreaFade : MusicFade
         }
     }
 
-    protected void setToFull()
-	{
-        AudioManager.setMusicSourceVolume(AudioManager.musicVolumePlayerSetting);
-	}
-    protected void setToMute()
-	{
-        AudioManager.setMusicSourceVolume(0f);
-	}
-
     public override bool isFinished()
     {
         return timeWaited >= fadeTime;

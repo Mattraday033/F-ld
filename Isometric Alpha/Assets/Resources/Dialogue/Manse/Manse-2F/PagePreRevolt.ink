@@ -13,16 +13,25 @@ VAR adelaIndex = 5
 VAR playerName = ""
 
 VAR hostagesDead = false
+VAR metDirectorAfterHostages = false
 VAR sentIntoMineByDirector = false
 
 VAR gaveWeftCreditAfterHostages = false
 VAR tookBlameForHostageDeath = false
 VAR blamedWeftForHostageDeath = false
 
+VAR knowsAboutTheMine = false
+
+VAR toldToAnswerQuestion = false
+VAR askedTheDirectorAQuestion = false
+VAR askedTheDirectorWhoHeIs = false
+VAR directorMentionedSurvivors = false
 
 {
+-metDirectorAfterHostages and not sentIntoMineByDirector:
+    ->alreadySpokeToDirector_1a
 -sentIntoMineByDirector:
-    ->alreadySpokeToDirector
+    ->alreadySpokeToDirector_1a
 -else:
     ->1a
 }
@@ -40,9 +49,9 @@ Hello. Are you here to see the Director?
 
 I see. You're expected, go on in.
 
-fadeToBlack()
+fadeToBlack(true, false)
 
-setToTrue(sentIntoMineByDirector)
+setToTrue(metDirectorAfterHostages)
 
 movePlayer(-2,-1)
 setFacing(NE)
@@ -65,67 +74,334 @@ Director, sir, these are the two branded that Captain Adéla and I spoke of. The
 -hostagesDead:
     ->2a
 -else:
-    ->Close
+    ->4a
 }
 
 === 2a ===
 
 changeCamTarget({adelaIndex})
 
-And they are the ones responsible for the deaths of those same hostages.
+And the ones responsible for their deaths.
 
 changeCamTarget({directorIndex})
 
-\*A man, his hair grey, his armor made for someone larger, sits behind a desk. He stares at the steppe green and gold of the Lovashi banner that adorns the office wall. After a moment, he turns to you.*
+\*A man, his hair grey, his armor made for someone larger, sits behind a desk. He stares past Adéla at the steppe green and gold of the Lovashi banner that adorns the office wall. After a moment, he speaks.*
+
+I have already heard your account of what happened, captain. I wish to listen to what they have to say.
 
 setNPCFacing({directorIndex},SW)
 
-I have already listened to your account of what happened, captain. I wish to listen to what they have to say.
+Captain Adéla wants you dead for your part in the deaths of her guards, but that choice is not hers to make. Chief Tabor lobbies for a pardon, but I am unsure of the affect that will have on this camp's morale. 
 
-{
--tookBlameForHostageDeath:
--blamedWeftForHostageDeath:
--else:
+Before I make my decision, I would know you. You are Weft, and you are {playerName}, are you not?
 
-}
+changeCamTarget({weftIndex})
 
-You are the branded known as {playerName}, are you not?
+Yes, sir. Weft is my name.
 
-    +I am, sir.
-        ->Close
+    +And I am {playerName}, sir.
+        ->2b
     +That is my name, yes.
-        ->Close
+        ->2b
     +\*Say nothing.*
-        changeCamTarget({taborIndex})
-
-        Answer the Director's question, branded.
-
-        changeCamTarget({directorIndex})
-
-        \*The Director holds up a hand.* No, let them answer how they like. I want to understand the branded I am assigning this duty to.
-
-        ->2b
+        ->taborSaysToAnswerQuestion(->2b)
     +You already know that. Why are you asking me?
-        ->2b
+        ->taborSaysToAnswerQuestion(->2b)
+
+=== taborSaysToAnswerQuestion(->divert) ===
+
+    ~toldToAnswerQuestion = true
+
+    changeCamTarget({taborIndex})
+    setNPCFacing({taborIndex},NW)
+
+    Answer the Director's question, branded.
+
+    changeCamTarget({directorIndex})
+
+    \*The Director holds up a hand.* No, let them answer how they like. I want to understand those I am assigning this duty to.
+    setNPCFacing({taborIndex},NE)
+
+    ->divert
 
 === 2b ===
 
-Your name was but a scratch in a ledger to me before. Now, it has a face to it. You've made yourself real, in a way.
+changeCamTarget({directorIndex})
+
+Your names were but scratches in a ledger to me before. Now, they have faces to them. You've made yourselves real, in a way.
 
 The names of the hostages have been removed from our ledgers, thanks to your actions. Two more names, buried along with their faces. How does that make you feel?
 
-    +I'm miserable over it, sir.
-        ->Close
     +Why should I lose sleep over a pair of dead slavers?
-        ->Close
+        Why would you, indeed.
+        ->2c
+    +I'm miserable over it, sir.
+        Are you? You'd be the first branded that <i>I</i> have met for that to be true.
+        ->2c
     +\*Say nothing.*
+        {
+        -not toldToAnswerQuestion:
+            ->taborSaysToAnswerQuestion(->2c)
+        -else:
+            Silence, perhaps, was the only answer. What words could you say that would satisfy me? What do I really want from you?
+            ->2c
+        }
+
+=== 2c ===
+
+I'll cut to the reason why I've called for you. The camp is stuck in lockdown while the mine is closed. Are you aware of why?
+
+{
+-knowsAboutTheMine:
+    +There are creatures inside that you haven't been able to remove.
+        setNPCFacing({directorIndex},NW)
+        \*The Director lifts an eye-brow, then looks to Captain Adéla.* Your lockdown is not as air-tight as we had believed, captain.
+
+        changeCamTarget({adelaIndex})
+
+        \*Adéla glares at you wordlessly.*
+
+        setNPCFacing({directorIndex},SW)
+        changeCamTarget({directorIndex})
+
+        ->2d
+}
+    +I am not.
+        Good, I had suspected not.
+        ->2da
+    +\*Say nothing.*
+        {
+        -not toldToAnswerQuestion:
+            ->taborSaysToAnswerQuestion(->2da)
+        -else:
+            ->2da
+        }
+
+=== 2da ===
+
+setToTrue(knowsAboutTheMine)
+
+A few days ago, the mine's lowest level was invaded by a swarm of creatures my guards are calling 'worms'. They came out of one of the shafts the dig teams were excavating. We believe they were living in a cavern, or 'pocket', deep below the surface. 
+
+When the worms had overwhelmed the guards on the bottom floor, the rest of them evacuated the mine and closed the gate to that floor to keep the worms from making any more progress. And that's when the lockdown began, so that we have order while the dig teams are unable to return to work.
+
+->2d
+
+=== 2d ===
+
+Work cannot continue until the worms are dealt with, and that cannot happen until the pocket they came from has been stoppered. That is the task I have for you: enter the mine, plug the tunnel, and return. 
+
+changeCamTarget({weftIndex})
+
+Yes, Director. On your orders we wi-
+
+changeCamTarget({directorIndex})
+
+\*The Director gestures for Weft to be silent.* You are not being commanded to do this. Rather, you are being given a choice.
+
+changeCamTarget({adelaIndex})
+setNPCFacing({adelaIndex},SE)
+
+Sir?
+
+changeCamTarget({directorIndex})
+
+I am a veteran of the Emancipation Conflict. Many battles have I fought against the Craft Folk where they ordered soldiers to die so that others may gain some advantage. 
+
+We are not like them. To execute a person for a crime is one thing. To expect those below you to march cheerily to their death is quite another. 
+
+Your choice is this, branded: brave the gauntlet of the mine to seal the tunnel that delivered these worm-things to us, and I shall grant you freedom and safe passage to Mason lands. 
+
+Or live as a slave to the Confederation, with Tabor's pardon for your failures. You won't be harmed for any previous crimes, but without another offer of freedom no doubt the captain will find her cause to punish you eventually.
+
+Before you make this choice, surely you have questions about what I have said. Ask them. 
+
+    ->2e(->3a)
+
+=== 2e(->divert) ===
+
+{
+-askedTheDirectorWhoHeIs and wisdom > 2:
+    +If you are a lord, why are you running a mine? That seems beneath you. <Wis {wisdom}/2>
+        An astute observation. Normally, it would be. Perform this task for me and I will provide you with your answer.
+        ->2e(divert)
+}
+
+    +I thought the brand was a death sentence. Who are you that you have the power to commute it?
+        ~askedTheDirectorAQuestion = true
+        setToTrue(askedTheDirectorWhoHeIs)
+        I am Lord Gábor Kálnoky, uncle to Count Béla Kálnoky, who rules from Pharos. A letter to my nephew would be all it would take to absolve you of your crimes.
+        ->2e(divert)
+    +Clearly, this will be dangerous or you would have done it already.
+        ~askedTheDirectorAQuestion = true
+        Unbelievably so. You will almost certainly perish in the attempt. Otherwise, I would not have made the reward so dear. Should you decide to do this, Captain Adéla will likely have been granted her request for execution.
+        ->2e(divert)
+    +What can I expect when I enter the mine?
+        ~askedTheDirectorAQuestion = true
+        setToTrue(directorMentionedSurvivors)
+        The worms are reported to be large. Some are the size of men, those that fought the creatures have said, although I am uncertain of whether to believe them. Some can spit acid, bite so hard they can crush stone, or split when cut down and rise again attacking from multiple directions.
+
+        There may also be survivors inside the mine, although I doubt it. Many of the bodies of our dead went unclaimed in the evacuation, so we cannot be certain of their fate, but I believe those left behind have become food for their assailants.
+        ->2e(divert)
+    +How would I close the breach?
+        ~askedTheDirectorAQuestion = true
+        The overseers of my mine employ blasting jelly to remove rubble. A barrel of such material would be placed at your disposal, and you would be trained in it's use.
+        ->2e(divert)
+    +Can I choose other slaves to come with us?
+        ~askedTheDirectorAQuestion = true
+        Any slaves assigned to your work party will be permitted to enter the mine with you, for the same reward.
+        ->2e(divert)
+    +I have no {askedTheDirectorAQuestion:more }questions.
+        ->divert
+
+=== 3a ===
+
+Then what is your decision?
+
+    +You Lovashi love your carrots and your sticks. You can shove both up your ass.
+        ->3b
+    +Can I have time to think on this?
+        ->3c
+    +I shall perform this task. How should I start?
+        ->5a
+
+=== 3b ===
+
+changeCamTarget({taborIndex})
+setNPCFacing({taborIndex},NW)
+playAnimation({taborIndex},Idle_Back)
+
+Such disrespect shall not be borne! 
+
+disableDialogueUI()
+
+playAnimation({taborIndex},Attack_Normal_Back)
+
+wait(.55)
+playDelayedSFX(Whip, 100)
+
+//playAnimation({playerIndex},Wounded_Back)
+dealDamageSafe({playerName},25)
+
+wait(2)
+
+enableDialogueUI()
+
+changeCamTarget({directorIndex})
+
+That will do, Tabor. I am not yet so fragile that I can be harmed by the words of an uppity slave.
+
+setNPCFacing({taborIndex},NE)
+playAnimation({taborIndex},OOC_Idle_Back)
+
+changeCamTarget({taborIndex})
+
+Yes sir.
+
+changeCamTarget({directorIndex})
+
+->3c
+
+=== 3c ===
+
+activateQuestStep(No Good Deed,Take time to think.)
+
+The two of you may take the rest of the day off to consider. If you should be brave enough to take my offer, I can have you sent in to the mine immediately. 
+
+->deactivateExtras
+
+=== 4a ===
+
+
+->Close
+
+=== 5a ===
+
+activateQuestStep(No Good Deed,Make for the stockhouse.)
+
+setToTrue(sentIntoMineByDirector)
+
+You are brave, branded. I've met few who would have made that choice. And what of you, Weft? What choice do you make?
+
+changeCamTarget({weftIndex})
+
+I will also enter the mines, sir. 
+
+changeCamTarget({directorIndex})
+
+Really? I had expected you to ask permission to cower back in your hut. Very well, you may both go together.
+
+prepItem()
+
+Take this. It will prove you are on an important task to my guards. Go to the camp's stockhouse, just north of the mine in the camp's southwest. Tell Quartermaster Emese that you are to be taught to use blasting jelly. You'll need it to close the pocket.
+
+giveItem(3,9,1)
+
+->deactivateExtras
+
+=== alreadySpokeToDirector_1a ===
+
+changeCamTarget({pageIndex})
+
+Yes? What is it?
+
+    {
+    -not sentIntoMineByDirector:
+    +The Director told me I should come back when I had an answer for him.
+        ->alreadySpokeToDirector_1b
+    }
+    +Nothing, I must be going.
         ->Close
 
+=== alreadySpokeToDirector_1b ===
+
+I'll ask him if he is available to receive you.
+
+fadeToBlack(true, false)
+
+setToTrue(metDirectorAfterHostages)
+
+movePlayer(-2,-1)
+setFacing(NE)
+setNPCFacing({directorIndex},SW)
+
+activate({weftIndex})
+
+changeCamTarget({directorIndex})
+
+fadeBackIn(60)
+
+keepDialogue()
+
+Have you made your decision?
+
+->alreadySpokeToDirector_1c
+
+=== alreadySpokeToDirector_1c ===
+
+Then what is your decision?
+
+    +I had more questions to ask you.
+        Ask them.
+        ->2e(->alreadySpokeToDirector_1c)
+    +I need more time to think about this.
+        ->deactivateExtras
+    +I shall perform this task. How should I start?
+        ->5a
 
 
-=== alreadySpokeToDirector ===
+=== deactivateExtras ===
 
-PH
+fadeToBlack()
+
+deactivate({weftIndex})
+deactivate({taborIndex})
+deactivate({adelaIndex})
+
+movePlayerPos(-6,-2)
+setFacing(SW)
+
+fadeBackIn(60)
 
 ->Close
 

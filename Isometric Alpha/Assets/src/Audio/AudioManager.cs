@@ -38,11 +38,21 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public const float dialogueMusicDuckMultiplier = .5f;
+    public const float dialogueMusicDuckDurationSeconds = 1f;
+    public static bool isMusicDuckedForDialogue;
+    private static Coroutine musicDuckCoroutine;
+
     public static void setMusicSourceVolume(float volumePercent)
     {
         if(instance == null || instance.musicSource == null)
         {
             return;
+        }
+
+        if(isMusicDuckedForDialogue)
+        {
+            volumePercent *= dialogueMusicDuckMultiplier;
         }
 
         if(volumePercent < 0)
@@ -54,6 +64,60 @@ public class AudioManager : MonoBehaviour
         }
 
         instance.musicSource.volume = volumePercent;
+    }
+
+    public static void duckMusicForDialogue()
+    {
+        if(isMusicDuckedForDialogue)
+        {
+            return;
+        }
+
+        isMusicDuckedForDialogue = true;
+        startMusicSourceVolumeFade(musicVolumePlayerSetting * dialogueMusicDuckMultiplier, dialogueMusicDuckDurationSeconds);
+    }
+
+    public static void unduckMusicAfterDialogue()
+    {
+        if(!isMusicDuckedForDialogue)
+        {
+            return;
+        }
+
+        isMusicDuckedForDialogue = false;
+        startMusicSourceVolumeFade(musicVolumePlayerSetting, dialogueMusicDuckDurationSeconds);
+    }
+
+    private static void startMusicSourceVolumeFade(float targetVolume, float duration)
+    {
+        if(instance == null || instance.musicSource == null || FadeToBlackManager.isMidScreenFade())
+        {
+            return;
+        }
+
+        if(musicDuckCoroutine != null)
+        {
+            instance.StopCoroutine(musicDuckCoroutine);
+        }
+
+        musicDuckCoroutine = instance.StartCoroutine(fadeMusicSourceVolumeCoroutine(targetVolume, duration));
+    }
+
+    private static IEnumerator fadeMusicSourceVolumeCoroutine(float targetVolume, float duration)
+    {
+        AudioSource source = instance.musicSource;
+        float startVolume = source.volume;
+        float elapsed = 0f;
+
+        while(elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            source.volume = Mathf.Lerp(startVolume, targetVolume, elapsed / duration);
+            yield return null;
+        }
+
+        source.volume = targetVolume;
+        musicDuckCoroutine = null;
     }
 
     public static float _SFXVolumePlayerSetting;
@@ -914,6 +978,17 @@ public static class AudioClipList
                         AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(humanMaleDialogueSFXFolder + dialogueIntroPrefix +
                                  Random.Range(Constants.indexOne, humanMaleIntroCount + 1)), VolumeType.Voice);
                     }
+                };
+            case NPCNameList.director:
+                return () =>
+                {
+                    if(Flags.getFlag(FlagNameList.summonedToDirectorsOffice) && !Flags.getFlag(FlagNameList.revoltStarted) && !AreaList.currentAreaIsHostile())
+                    {
+                        return;
+                    } 
+                        
+                    AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(humanMaleDialogueSFXFolder + dialogueIntroPrefix +
+                                 Random.Range(Constants.indexOne, humanMaleIntroCount + 1)), VolumeType.Voice);
                 };
             default:
                 return () =>

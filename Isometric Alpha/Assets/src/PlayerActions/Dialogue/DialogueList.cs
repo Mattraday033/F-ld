@@ -1218,7 +1218,8 @@ public static class DialogueList
                                 new Dialogue(new string[]   { 
                                                                 NPCNameList.playerNamePlaceHolder,
                                                                 NPCNameList.director+1,
-                                                                NPCNameList.takacs
+                                                                NPCNameList.takacs+1,
+                                                                NPCNameList.takacs+2
                                                             }, 
                                  Resources.Load<TextAsset>(DialogueNameList.prerevoltDirectorPathName)));
 

@@ -447,7 +447,7 @@ I was against bringing the branded in from the start. I can't believe you though
 changeCamTarget({taborIndex})
 setNPCFacing({taborIndex},SW)
 
-Captain, with respect, your solution was to attack the branded, hostages be damned. The plan we implemented instead at least had a chance the hostages would survive.
+Captain, with respect, no other way forward either of us proposed gave a better chance to the hostages for survival. They all involved some means of attack, which would have guaranteed their demise.
 
 changeCamTarget({adelaIndex})
 
@@ -469,7 +469,7 @@ Chief Tabor, you and I will both brief the Director on what has happened here. A
     +Captain Adéla, may I humbly request to speak?
         ->4b
     +\*Say nothing.*
-        ->Close
+        ->3c
 
 === 4b ===
 

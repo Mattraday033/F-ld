@@ -5,7 +5,8 @@ VAR charisma = 0
 
 VAR playerIndex = 0
 VAR directorIndex = 1
-VAR takacsIndex = 2
+VAR takacsFirstIndex = 2
+VAR takacsSecondIndex = 3
 
 VAR playerName = ""
 
@@ -14,25 +15,26 @@ VAR playerName = ""
 === 1a ===
 
 setToTrue(hadTakacsConvoInDirectorsOffice)
+setNPCFacing({directorIndex},SW)
 
 stopAllFades()
 deactivate({playerIndex})
 disableDialogueUI()
 changeCamTarget({directorIndex})
 slowFadeBackIn(5)
-wait(4)
+wait(2.5)
 
 createEffect(SmokeBomb,-1,-1)
 wait(0.25)
-activate({takacsIndex})
+activate({takacsFirstIndex})
 
-wait(3)
+wait(2.5)
 
 enableDialogueUI()
 
 Ah, Takács. You've made quite the journey to speak to me in person. What news from my nephew?
 
-changeCamTarget({takacsIndex})
+changeCamTarget({takacsFirstIndex})
 
 \*With a voice like a thousand chittering insects, Takács speaks.* This is not a social visit, Lord Kálnoky. The rider you sent reached Pharos yesterday morning. I am here to investigate your lack of progress, and give you my master's reply.
 
@@ -40,15 +42,15 @@ changeCamTarget({directorIndex})
 
 The situation is poor. We have halted all digging in the mines. We will not be able to continue until the count releases to me the requested soldiers.
 
-changeCamTarget({takacsIndex})
+changeCamTarget({takacsFirstIndex})
 
 The Confederation's movements are being watched by Mason spies. Count Kálnoky is reluctant to increase traffic across the border. 
 
 changeCamTarget({directorIndex})
 
-Stones cannot be bled, Vada. We will make no more gains unless we are given the means to produce them: more slaves, and more swords. Unless you have been sent in their place, of course.
+Stones cannot be bled, Vada. We will make no more gains until we are given the means to produce them: more swords, and more slaves. Unless you have been sent in their place, of course.
 
-changeCamTarget({takacsIndex})
+changeCamTarget({takacsFirstIndex})
 
 I have not been given permission to assist you in that manner.
 
@@ -56,25 +58,42 @@ changeCamTarget({directorIndex})
 
 Béla certainly keeps you on a short leash. Do the counts hold no love for their pets anymore?
 
-changeCamTarget({takacsIndex})
+disableDialogueUI()
 
-You play tough, old lord, but I can see the beads of sweat on your neck. Fear fills your stomach like rain does a grave.
+createEffect(SmokeBomb,-1,-1)
+wait(0.33)
+deactivate({takacsFirstIndex})
 
+wait(.5)
+
+createEffect(SmokeBomb,2,0)
+wait(0.33)
+activate({takacsSecondIndex})
+wait(0.5)
+
+changeCamTarget({takacsSecondIndex})
+enableDialogueUI()
+
+You feign toughness, old lord, but I can see the beads of sweat on your neck. Fear fills your stomach like rain does a grave.
+
+setNPCFacing({directorIndex},NW)
 changeCamTarget({directorIndex})
 
 Leave me be, spirit! Be useless to me somewhere else!
 
-changeCamTarget({takacsIndex})
+changeCamTarget({takacsSecondIndex})
 
-\*A noise unlike laughter escapes the figure's headdress.* My predecessor remembers you well. Since you were a boy, you've always been afraid of spiders.
+\*A noise unlike laughter escapes the figure's headdress.* My predecessor remembers you well. Even as a boy, you've always been afraid of spiders.
 
 disableDialogueUI()
-createEffect(SmokeBomb,-1,-1)
+createEffect(SmokeBomb,2,0)
 wait(0.33)
-deactivate({takacsIndex})
-wait(3)
+deactivate({takacsSecondIndex})
+wait(2.5)
 enableDialogueUI()
 changeCamTarget({directorIndex})
+
+setNPCFacing({directorIndex},SW)
 
 Blasted thing. Why send it at all if not with news of aid? 
 
