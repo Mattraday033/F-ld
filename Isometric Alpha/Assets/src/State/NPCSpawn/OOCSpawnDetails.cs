@@ -1618,8 +1618,8 @@ public class LadderSpawnDetails : NPCSpawnDetails
 
     public Ladder ladder;
 
-    public LadderSpawnDetails(Vector3Int cellCoords, string spriteName, Ladder ladder, bool flipX = doNotFlipX, float offset = offsetY) :
-    base(NPCNameList.ladder, cellCoords, Constants.emptyString, spriteName, flipX: flipX, offset: offset)
+    public LadderSpawnDetails(Vector3Int cellCoords, string spriteName, Ladder ladder, bool flipX = doNotFlipX, float offset = offsetY, SortingLayerInfo sortingLayerInfo = null) :
+    base(NPCNameList.ladder, cellCoords, Constants.emptyString, spriteName, flipX: flipX, offset: offset, sortingLayerInfo: sortingLayerInfo)
     {
         this.ladder = ladder;
     }

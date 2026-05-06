@@ -42,6 +42,7 @@ public static class Constants
     public const int indexEleven = 11;
     public const int indexTwelve = 12;
 
+    public const int noDifficulty = 1;
     public const int difficultyTwo = 2;
     public const int difficultyThree = 3;
     public const int difficultyFour = 4;

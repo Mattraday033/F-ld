@@ -17,6 +17,11 @@ VAR playerName = ""
 {description}
 
 {
+-dexDifficulty <= 1:
+    +\*Climb the ladder*
+        ->1b
+    +\*Leave.*
+        ->Close
 -dexterity >= dexDifficulty:
     +\*Climb the ladder* <Dex {dexterity}/{dexDifficulty}>
         ->1b

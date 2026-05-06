@@ -304,9 +304,9 @@ public class AudioManager : MonoBehaviour
         currentMusicPath = newMusicPath;
     }
 
-    public static void playNextAreaMusic(string newAreaName)
+    public static void playNextAreaMusic(string locationName)
     {
-        string newAreaMusicPath = AreaList.getArea(newAreaName).musicPath;
+        string newAreaMusicPath = AreaList.getAreaMusicPath(locationName);
 
         if(newAreaMusicPath.Equals(currentMusicPath))
         {

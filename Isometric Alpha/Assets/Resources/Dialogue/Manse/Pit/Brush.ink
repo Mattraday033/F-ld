@@ -115,7 +115,7 @@ prepForItem()
 
 Aye, but I won't be much use in a fight. I would have liked to get a few licks in on the Director before you put him out of our misery, but this eye is too swollen to see and my right arm is probably broken. I'll make my way back to the others on my own so I don't get in your way. And thanks again!
 
-addXP(250)
+addXP(250,1)
 
 fadeToBlack()
 

@@ -731,7 +731,17 @@ public class DialogueManager : MonoBehaviour
 
                 case "addxp":
 
-                    string earnedXP = getArgument(buffer);
+                    int earnedXP = getArgumentInt(buffer, Constants.indexZero);
+
+                    if(getNumberOfArgs(buffer) > 1)
+                    {
+                        int levelReq = getArgumentInt(buffer, Constants.indexOne);
+                        
+                        if(PartyStats.getPartyLevel() > levelReq)
+                        {
+                            earnedXP /= 2;
+                        }
+                    }
 
                     PartyManager.addXP(earnedXP);
 
@@ -745,7 +755,7 @@ public class DialogueManager : MonoBehaviour
 
                     itemKey = getArgument(buffer);
                     itemQuantity = getArgumentInt(buffer, Constants.indexOne);
-                    earnedXP = getArgument(buffer, Constants.indexTwo);
+                    earnedXP = getArgumentInt(buffer, Constants.indexTwo);
 
                     takeItem(itemKey, itemQuantity);
 
@@ -1543,6 +1553,8 @@ public class DialogueManager : MonoBehaviour
                         }
                     }
 
+                    startDialogue(DialogueList.getDialogue(dialogueKey), midDialogue: true); 
+                    
                     if(argAmount > 2)
                     {
                         startingBoolName = getArgument(buffer, Constants.indexTwo).Replace(" ", "");
@@ -1553,8 +1565,6 @@ public class DialogueManager : MonoBehaviour
                         }
                     }
 
-                    startDialogue(DialogueList.getDialogue(dialogueKey), midDialogue: true); 
-                    
                     continueStory();
 
                     return;

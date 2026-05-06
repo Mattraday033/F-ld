@@ -445,4 +445,14 @@ public static class PartyStats
 
     #endregion
 
+    public static int getPartyLevel() //party level is the level the game considers the player to be when determining xp rewards
+    {
+        AllyStats playerStats = PartyManager.getPlayerStats();
+        int playerLevel = playerStats.getLevel();
+
+        playerLevel += playerStats.xp / AllyStats.xpNeededToLevelUp;
+
+        return playerLevel;
+    }
+
 }

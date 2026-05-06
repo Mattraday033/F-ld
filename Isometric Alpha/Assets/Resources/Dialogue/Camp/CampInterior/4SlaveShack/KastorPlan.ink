@@ -75,6 +75,8 @@ VAR mineLvl3BreachSealed = false
 VAR mineLvl3ToldToFindMarcos = false
 VAR broughtMarcosToGaspar = false
 
+VAR trainedByEmeseToUseBlasingJelly = false
+
 VAR explainingPlan = false
 VAR backTo6cza = false
 VAR backTo3c = false
@@ -280,7 +282,10 @@ activateQuestStep(The Plan, I'm on my own.)
 
 setToTrue(toldToFindNandor)
 activateQuestStep(Finding Nándor, Find Nándor.)
+{
+-not trainedByEmeseToUseBlasingJelly:
 activateQuestStep(Explore the Mine, Enter the mine.)
+}
 
 I fear your capture by the guards, so before you leave I will impart no more of the plan to you than this: when the lockdown started, there were some branded trapped on the bottom level of the mine, whose entrance rests a ways to the west of my hut. If they still live, among them should be a man named Nándor. He was the original architect of the plan. Rescue him, and there may be a way to avert the plan's failure. Without him, we are lost. Good luck.
 
@@ -405,7 +410,11 @@ activateQuestStep(The Plan, I'm on my own.)
 
 setToTrue(toldToFindNandor)
 activateQuestStep(Finding Nándor, Find Nándor.)
+
+{
+-not trainedByEmeseToUseBlasingJelly:
 activateQuestStep(Explore the Mine, Enter the mine.)
+}
 
 {
 -not givenTutorialQuest:
@@ -661,7 +670,7 @@ prepForItem()
 
 \*Kastor smiles.* East, friend.
 
-addXP(250)
+addXP(250,1)
 
 ->2aa
 
@@ -853,7 +862,7 @@ prepForItem()
 
 Actually Kastor, I think I may be able to help with this one. I've already told Nándor and Márcos about this while we were stuck in the mine, but since I trust everyone here, I'll tell you and {playerName} about it as well.
 
-addXP(250)
+addXP(250,1)
 
 ->2iba
 
@@ -1121,7 +1130,7 @@ prepItem()
 
 Very well done. This means we can skip this part of the plan.
 
-addXP(250)
+addXP(250,1)
 
 ->2j
 
@@ -1223,7 +1232,7 @@ What happened?
 
                 This is good! Very good. There aren't as many of them as us, but their help will certainly make a difference.
 
-                addXP(250)
+                addXP(250,1)
 
                 keepDialogue()
 
@@ -1261,7 +1270,7 @@ What happened?
                 
                 This is good! Very good. There aren't as many of them as us, but their help will certainly make a difference.
                 
-                addXP(250)
+                addXP(250,1)
                 
                 keepDialogue()
                 
@@ -1359,7 +1368,7 @@ What happened?
 
     Damn it all. That means we have less time than I would have liked to get this plan moving. Did you leave any witnesses to what you were discussing?
     
-    addXP(250)
+    addXP(250,1)
     
     {
         -deathFlagImre:
@@ -1415,7 +1424,7 @@ What happened?
     
     Continue on with the other tasks you have been given. Do not worry, when the time comes we'll pay the guards back, blood for blood, tooth for tooth.
     
-    addXP(100)
+    addXP(100,1)
         ->Close
 
 
@@ -1452,7 +1461,7 @@ Excellent! Where are we?
     
             Not to take away from what you've accomplished, {playerName}, but I need to talk to everyone about that.
     
-            addXP(500)
+            addXP(500,1)
             
             keepDialogue()
             
@@ -1469,9 +1478,9 @@ finishQuest(Aiding Bálint, true, Returned to Kastor.)
 
 prepForItem()
 
-That is... That is not what I was hoping for.
+That is... that is not what I was hoping for.
 
-addXP(250)
+addXP(250,1)
 
     +Bálint seemed to think it was fantastic news.
         
@@ -1504,7 +1513,7 @@ prepForItem()
 
 Without the key to the mine's armory, accessing it will be difficult. But perhaps there is another way that we do not know about. For now, keep moving with the plan; let me know when you've made more headway and we'll discuss the next steps.
 
-addXP(100)
+addXP(100,1)
 
     ->Close
 
@@ -1514,7 +1523,7 @@ prepForItem()
 
 \*Kastor examines the key and then hands it back to you.* You should keep it. Not much I could do with it from in here anyways. Were there any complications with acquiring it?
 
-addXP(250)
+addXP(250,1)
 
 {
 -killedChiefIren and gotArmoryKeyFromGuardHouse:
@@ -1692,7 +1701,7 @@ That I was. But back to the plan. The final thing we need to do before rallying 
 
     \*Kastor's eyes go wide.* By all the Gods, you move fast. Incredible work.
 
-    addXP(400)
+    addXP(400,1)
 
     prepForItem()
 
@@ -1763,7 +1772,11 @@ I apologize, what I'm asking of you is an enormous undertaking. But because of y
 setToTrue(toldToFindNandor)
 activateQuestStep(The Plan, Raid the armory.)
 activateQuestStep(Finding Nándor, Find Nándor.)
+
+{
+-not trainedByEmeseToUseBlasingJelly:
 activateQuestStep(Explore the Mine, Enter the mine.)
+}
 
 If you do not believe you are ready to face what is down there, I would recommend looking around the camp for any advantage you can bring with you. I believe the guards will have barricaded the mine entrance as well, so you may need to talk or sneak your way past them to get inside. If you need assistance, you can come back to me and I will help however I can. 
 
@@ -1873,7 +1886,7 @@ prepForItem()
 
 With these tools, we stand an actual chance of facing the guards in a brawl. And the other slaves will know it too. This may convince more of them to join our cause than any simple combination of words could ever do. Outstanding work.
 
-addXP(650)
+addXP(650,1)
 
 {
 -backTo3c:
@@ -1894,7 +1907,7 @@ prepForItem()
 
 You have done everything I have asked of you, and I believe that we are ready to begin this revolt. And with you and Nándor at our sides, the branded will no doubt rally to our cause.
 
-addXP(400)
+addXP(400,1)
 
     ->7a
 
@@ -1904,7 +1917,7 @@ prepForItem()
 
 You have done everything I have asked of you, and I believe that we are ready to begin this revolt. But what of Nándor? Were you able to find him?
 
-addXP(400)
+addXP(400,1)
 
     {
     -mineLvl3CarterAndNandorInParty and not deathFlagNándor and not broughtNandorToKastor:
@@ -1951,7 +1964,7 @@ prepForItem()
     
 Nándor! Carter! Thank the Mother you've returned.
             
-addXP(400)
+addXP(400,1)
 
     ->6cz
 -else:
@@ -1960,7 +1973,7 @@ prepForItem()
     
 Nándor! Carter! Thank the Mother you've returned. But who is this with you?
             
-addXP(400)
+addXP(400,1)
 
 }
 

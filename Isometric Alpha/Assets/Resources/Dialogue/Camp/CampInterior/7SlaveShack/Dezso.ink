@@ -86,7 +86,7 @@ We will not surrender to the guards. We're through with the labors of slaves.
 
 === 1d ===
 
-    +If you are so adamant that you have a chance at escape, why have you not made good on it already?
+    +If you are so adamant that you have a chance at freedom, why have you not made good on it already?
         ->1g
     +The Lovashi wait outside this hut in force. There is no escape.
         ->1e
@@ -313,7 +313,7 @@ setToTrue(mentionedStoneMan)
 
 changeCamTarget({loamIndex})
 
-Our plan was to tunnel under the wall and out into the forest. We had been hiding and repairing bits of broken tools we smuggled from the mine for days.
+Our plan was to tunnel under the wall and out into the forest. We had been hiding and repairing bits of broken tools we smuggled from the mine before the lockdown.
 
 changeCamTarget({dezsoIndex})
 

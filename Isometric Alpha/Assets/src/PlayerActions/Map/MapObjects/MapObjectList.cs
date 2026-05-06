@@ -204,8 +204,11 @@ public static class MapObjectList
 
 			case LocationNameList.campNorthWest:
 
-				return new MapLocation(ZoneKeyList.lovashiCamp, LocationNameList.campNorthWest, "North West", notFastTravelAccessible, zeroInteriors, new string[] { LocationNameList.campManse});
+				return new MapLocation(ZoneKeyList.lovashiCamp, LocationNameList.campNorthWest, "North West", notFastTravelAccessible, oneInterior, new string[] { LocationNameList.campManse, LocationNameList.bodyPile});
 
+			case LocationNameList.bodyPile:
+			
+				return new MapInterior(ZoneKeyList.lovashiCamp, LocationNameList.bodyPile, LocationNameList.bodyPile, interiorIndexZero, LocationNameList.campNorthWest);
 		}
 
         string mineLvl1SceneName = name;

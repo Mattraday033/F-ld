@@ -19,12 +19,15 @@ VAR foughtMuzsaAfterSnitchedOnUros = false
 
 VAR mentionedGoingInsideMine = false
 
+VAR hasDirectorsSeal = false
+
 VAR playerName = ""
 
 VAR muzsaIndex = 1
 VAR barricadeIndex = 2
 VAR muszaAwayFromBarricadeIndex = 3
 
+searchInventoryFor(hasDirectorsSeal,Director's Seal)
 
 {
 -gaveSnipeHuntExcuseToMuzsa:
@@ -49,6 +52,11 @@ VAR muszaAwayFromBarricadeIndex = 3
 
 Whoa there slave! The mine's off limits right now. Where do you think you're going?
 
+{
+-hasDirectorsSeal:
+    +I am on a task for the Director. I need to enter the mines. \*Show Director's Seal.*
+        ->5a
+}
 {
 -charisma >= 2:
     +One of the guards told me the mine was full of snipes. He sent me to clear them out. *Show badge* <Cha {charisma}/2>
@@ -309,34 +317,6 @@ Those look like Kende's sweets. Fine, if he trusts you, I suppose I can too. Han
     +\*Pass Múzsa the candy.*
         ->3e
 
-=== 2h ===
-
-->Close
-
-=== 2i ===
-
-->Close
-
-=== 2j ===
-
-->Close
-
-=== 2k ===
-
-->Close
-
-=== 2l ===
-
-->Close
-
-=== 2m ===
-
-->Close
-
-=== 2n ===
-
-->Close
-
 === 3a ===
 
 searchInventoryFor(hasCandy,Candy)
@@ -356,7 +336,6 @@ Scram slave, I'm busy.
     +Alright, I'll go.
         ->Close
 }
-
 
 === 3b ===
 
@@ -404,17 +383,23 @@ How's the snipe hunt going? *Múzsa chuckles and shakes her head.*
 
 ->Close
 
+=== 5a ===
+
+\*Muzsa whistles.* Not many slaves are given the Director's seal. Alright, you can enter. If you need to rest, don't be afraid to come back here. The boys and I will keep the entrance clear for you.
+
+->moveMuzsaAndClose
+
 === moveMuzsaAndClose ===
 
-    setToTrue(mineCratesCleared)
+setToTrue(mineCratesCleared)
 
-    fadeToBlack()
-    
-    deactivate({muzsaIndex})
-    deactivate({barricadeIndex})
-    activate({muszaAwayFromBarricadeIndex})
-    
-    fadeBackIn(60)
+fadeToBlack()
+
+deactivate({muzsaIndex})
+deactivate({barricadeIndex})
+activate({muszaAwayFromBarricadeIndex})
+
+fadeBackIn(60)
 
 ->Close
 

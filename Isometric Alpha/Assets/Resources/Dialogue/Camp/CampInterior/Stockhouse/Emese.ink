@@ -11,6 +11,7 @@ VAR taborMentionedRewardForHostages = false
 VAR receivedTaborRewardFromEmese = false
 VAR sentIntoMineByDirector = false
 VAR trainedByEmeseToUseBlasingJelly = false
+VAR toldToFindNandor = false
 
 VAR playerName = ""
 
@@ -68,7 +69,7 @@ prepForItem()
 \*Quartermaster Emese examines the Iron Nugget.* Iron? Very interesting. When I tell the Director about this, Uros will be interogated to the fullest extent to find where he got it. You've done an excellent job.
 
 takeItem(Lost Iron Nugget, 1)&
-addXP(100)
+addXP(100,1)
 
 \*Quartermaster Emese rummages around in a crate she keeps below her desk.*
 
@@ -93,7 +94,7 @@ giveItem(2,29,1)
 
 prepItem()
 
-As well as a nice new pair of boots. Walking around barefoot you're bound to get your feet all cut up in the mines, but these will protect them nicely.
+As well as a nice new pair of boots. Walking around barefoot you're bound to get your feet all cut up, but these will protect them nicely.
 
 giveItem(2,11,1)
 
@@ -105,11 +106,11 @@ setToTrue(trainedByEmeseToUseBlasingJelly)
 
 \*Emese eyes the seal, then looks you up and down.* So you are. The Director sent a runner. It's quite unusual for one of the branded to be assigned for explosives training, but who am I to question the powers that be?
 
-The blasting jelly is a mixture of two components: the inert explosive gel, and the primer. I'll show you how to mix in the primer to make the gel volatile, it's not too hard.
+The blasting jelly is a mixture of two components: the inert explosive gel, and the primer. I'll show you how to mix in the primer to make the gel volatile. It's not too hard.
 
-fadeToBlack()
+fadeToBlack(true, false)
 
-wait(1.5)
+wait(1)
 
 fadeBackIn(60)
 
@@ -140,7 +141,7 @@ giveItem(7,13,1)
 
 === 1h ===
 
-Oh, we only keep the training kits in the camp. The blasting jelly that we use in the mines is stored in the stockroom on the third floor of the mine. You'll need to make it all the way down there before you'll have access to one.
+Oh, we only keep the training kits in the camp. The blasting jelly that we use for excavation is stored in the stockroom on the third floor of the mine. You'll need to make it all the way down there before you'll have access to one.
 
     +Understood.
         ->1i
@@ -149,7 +150,14 @@ Oh, we only keep the training kits in the camp. The blasting jelly that we use i
 
 === 1i ===
 
-Good luck... and be careful. I overheard some of the guards from the bottom floor talk about those worm things they encountered down there. I wouldn't wish them on anyone. Not even one of the branded.
+activateQuestStep(No Good Deed,Find the blasting jelly.)
+
+{
+-not toldToFindNandor:
+activateQuestStep(Explore the Mine,Enter the mine.)
+}
+
+Good luck... and be careful. I overheard some of the guards from the bottom floor talk about those worm things they encountered down there. I wouldn't wish them on anyone.
 
 ->1aa
 

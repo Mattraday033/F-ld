@@ -308,7 +308,7 @@ setNPCFacing({adelaIndex},SE)
 
 changeCamTarget({taborIndex})
 
-With the situation understood and our position clear, it's time for you to enter the lion's den. We have already informed the branded inside that you were sent for, so they will be expecting you.
+With our position clear, it's time for you to enter the lion's den. We have already informed the branded inside that you were sent for, so they will be expecting you.
 
 When you are inside, assess the condition of the hostages. We believe that two of them should still be alive, but if they have already been killed, you are free to leave and we will storm the hut after you are clear. 
 
@@ -331,7 +331,11 @@ fadeBackIn(60)
 
 changeCamTarget({taborIndex})
 
+prepItem()
+
 The hostages are safe, as are the both of you. Exceedingly well done.
+
+addXP(550,1)
 
 changeCamTarget({adelaIndex})
 
@@ -437,7 +441,11 @@ We must give our reports to the Director. Once that is done, I will be back to g
 
 changeCamTarget({taborIndex})
 
+prepItem()
+
 The hostages are dead, and so are the plotters. A worse outcome is hard to imagine.
+
+addXP(450,1)
 
 changeCamTarget({adelaIndex})
 setNPCFacing({adelaIndex},NE)

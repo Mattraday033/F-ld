@@ -97,6 +97,8 @@ public class VaultableOrDestroyableObject : VaultableObject
 public class Ladder : IStoryVariableSource
 {
     public const string barracksLadderDescription = "This ladder is old and weather-worn. One false step could alert the guards, or prove fatal.";
+    public const string bodyPileLadderDescription = "This ladder leads down into the crevace. The smell of decay wafts heavily up from below.";
+    public const string bodyPileExitLadderDescription = "This ladder leads up and out of the body pit, towards clear blue skies.";
 
     public const string kitchensLadderDescription = "This ladder has had some rungs removed to make it more difficult to climb. A dexterous enough individual could leap the gap, however.";
 

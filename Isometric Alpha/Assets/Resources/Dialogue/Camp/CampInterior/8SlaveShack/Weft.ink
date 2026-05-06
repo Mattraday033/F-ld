@@ -119,7 +119,7 @@ I doubt that. If you try to extort me like the overseer did, I'll make you pay d
 
 === 1ac ===
 
-Nevermind then. I'm Weft. Did someone send you looking for me?
+Nevermind. I'm Weft. Did someone send you looking for me?
 
     +My name is {playerName}. Guard László said we are to share a hut and to deliver you your rations. 
         ->1b
@@ -148,7 +148,7 @@ prepItem()
 
 Ah, I thought you were just another of the branded. I'm Weft. I take it you're new?
 
-exchangeItemForXP(Weft's Rations,1,50)
+exchangeItemForXP(Weft's Rations,1,250)
 
     +That's right. Fresh off the cart this morning.
         You move fast then, if you've already been sent <i>here</i>. And it's well for you that you have been: this hut is for the branded that have a future. All the others aren't worth your time.
@@ -173,7 +173,7 @@ exchangeItemForXP(Weft's Rations,1,50)
 
 === 1cb ===
 
-Months ago, when the camp was first founded, a few of us snuck out of our huts to grab some food from the Mess Hall. I didn't want to go, mind you, but my hutmate at the time said he'd kill me if I didn't come along.
+When the camp was founded a few of us snuck out of our huts to grab some food from the mess hall. I didn't want to go, mind you, but my hutmate at the time said he'd kill me if I didn't come along.
 
 Of course, we were found out after the food was reported missing. The writing was on the wall for the other conspirators, so I told the Lovashi who was involved. Don't forget that the guards are sure to reward such behavior, if you ever find yourself in the same predicament.
 

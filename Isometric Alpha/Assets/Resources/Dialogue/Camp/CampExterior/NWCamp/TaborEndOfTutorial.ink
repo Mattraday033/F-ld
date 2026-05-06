@@ -61,7 +61,11 @@ slowFadeBackIn(2)
 wait(1)
 enableDialogueUI()
 
+prepItem()
+
 That was good work for this morning. I'll escort you down to the mess hall for lunch, and then we'll start our afternoon session.
+
+addXP(200,1)
 
 setNPCFacing({guardIndex},NE)
 changeCamTarget({guardIndex})

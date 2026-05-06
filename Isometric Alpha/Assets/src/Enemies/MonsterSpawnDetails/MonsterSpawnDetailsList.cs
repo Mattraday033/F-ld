@@ -130,6 +130,15 @@ public static class MonsterSpawnDetailsList
         monsterSpawnDetailsDict.Add(LocationNameList.guardHouseSouthWest, list);
         #endregion    
 
+        #region Body Pile
+        list = new List<MonsterSpawnDetails>();
+
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(0, 1), Facing.NorthWest, MonsterMovementType.Chases));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(-1, -7), Facing.SouthWest, MonsterMovementType.Chases));
+
+        monsterSpawnDetailsDict.Add(LocationNameList.bodyPile, list);
+        #endregion    
+
         #region NECamp
         list = new List<MonsterSpawnDetails>();
 

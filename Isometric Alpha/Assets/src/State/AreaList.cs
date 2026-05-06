@@ -113,6 +113,9 @@ public class Area
             case ZoneKeyList.pit + LocationNameList.section1a:
                 prefabName = ZoneKeyList.manseFirstFloor;
                 break;
+            case LocationNameList.bodyPile:
+                prefabName = ZoneKeyList.mineLvl1;
+                break;
             default:
                 prefabName = combatBackgroundName;
 		        break;
@@ -179,7 +182,8 @@ public static class AreaList
             LocationNameList.messHall,
             LocationNameList.stables,
             LocationNameList.temple,
-            LocationNameList.stockhouse
+            LocationNameList.stockhouse,
+            LocationNameList.bodyPile
         };
 
         string[] areasSharingHostilityWithCampInterior = new string[]
@@ -366,6 +370,7 @@ public static class AreaList
             case LocationNameList.guardHouseNorthEast:
             case LocationNameList.guardHouseSouthWest:
             case LocationNameList.guardHouseTopFloor:
+            case LocationNameList.bodyPile:
                 return FootStepType.Cave;
             default:
                 Area area = getCurrentArea();
@@ -457,6 +462,19 @@ public static class AreaList
 		throw new IOException("No area contains the locationName: " + locationName);
 	}
 
+    public static string getAreaMusicPath(string locationName)
+	{
+        switch(locationName)
+        {
+            case LocationNameList.bodyPile:
+                return AudioClipList.caveOne;
+        }
+
+        Area area = getArea(locationName);
+
+        return area.musicPath;
+	}
+
     public static string getCurrentAreaMusicPath()
 	{
         return getCurrentArea().musicPath;
@@ -493,6 +511,7 @@ public static class AreaList
 			case LocationNameList.slaveShackSix:
 			case LocationNameList.guardHouseTopFloor:
 			case LocationNameList.campNorthWest:
+            case LocationNameList.bodyPile:
 				return true;
 			default:
 				return false;

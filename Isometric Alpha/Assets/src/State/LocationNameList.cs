@@ -132,6 +132,7 @@ public static class LocationNameList
     public const string stables = "Stables";
     public const string stockhouse = "Stockhouse";
     public const string temple = "Temple";
+    public const string bodyPile = "Body Pile";
 
     #endregion
 

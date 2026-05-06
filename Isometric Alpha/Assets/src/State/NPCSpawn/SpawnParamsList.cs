@@ -328,6 +328,13 @@ public static class SpawnParamsList
 
         #endregion
 
+        #region Stockhouse
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.bodyPile, NPCNameList.slave),
+                                            new InteractableSpawnParams(spawnWhileHostile: spawnWhileHostile));
+
+        #endregion
+
         #region Camp North East
         
         InteractableSpawnParams situationCampNESpawnParams = new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.situationStartedInNECamp }),
@@ -730,7 +737,6 @@ public static class SpawnParamsList
         #endregion
 
         #endregion
-
         #region Camp Mine Entrance
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.guard),
@@ -764,7 +770,6 @@ public static class SpawnParamsList
                                                                                                             })));
 
         #endregion
-
         #region Camp Manse
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campManse, NPCNameList.imre),
@@ -803,7 +808,6 @@ public static class SpawnParamsList
                                                                                                     }),
                                                             spawnWhileHostile: doesNotSpawnWhileHostile));
         #endregion
-
         #region Camp North West
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.guard),

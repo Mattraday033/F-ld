@@ -244,7 +244,7 @@ prepForItem()
 You're alright. I won't forget this. Ever!
 
 takeItem(Iron Nugget, 1)&
-addXP(200)
+addXP(200,1)
 
 ->Close
 
@@ -257,7 +257,7 @@ prepForItem()
 
 You little stain. I won't forget this. Ever!
 
-addXP(100)
+addXP(100,1)
 
 ->Close
 

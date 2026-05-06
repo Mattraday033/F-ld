@@ -230,7 +230,7 @@ I'm familiar with Weft, of course, but what is your name, newling?
 
 setToTrue(toldByTaborToBuildHouses)
 
-Well, {playerName}, you and Weft will be working with me today. We are expecting a large shipment of slaves in the coming weeks, to both replace our recent losses and to increase our work rate in the mines. You two will be building houses in the incomplete section of the camp to accomodate this new shipment.
+Well, {playerName}, you and Weft will be working with me today. We are expecting a large shipment of slaves in the coming weeks, to replace our recent losses. You two will be building houses in the incomplete section of the camp to accomodate this new shipment.
 
     +Losses? What losses?
         That doesn't concern you. Do not interrupt again.

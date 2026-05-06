@@ -441,6 +441,14 @@ public static class EnemyPackInfoList
                                                                                                                         DropTableList.slaveMineDTKey,
                                                                                                                         tutorialSequenceKey: TutorialSequenceList.traitTutorialSequenceKey);
 
+    private readonly static EnemyPackInfo twoArmoredBats = new EnemyPackInfo(new CreatureAmount[] {  
+                                                                                                        EnemyAmountList.oneArmoredBatShielded,
+                                                                                                        EnemyAmountList.oneArmoredBat
+                                                                                                    },
+                                                                                                    DropTableList.slaveMineDTKey,
+                                                                                                    tutorialSequenceKey: TutorialSequenceList.traitTutorialSequenceKey);
+
+
     private readonly static EnemyPackInfo oneGiantBatTwoBatSwarmsOneDenMotherOneArmoredBat = new EnemyPackInfo(new CreatureAmount[] {  EnemyAmountList.oneDenMother,
                                                                                                                                     EnemyAmountList.oneGiantBat,
                                                                                                                                     EnemyAmountList.oneArmoredBatShielded,
@@ -748,6 +756,15 @@ public static class EnemyPackInfoList
         list.Add(twoSpearmenTwoAxemenTwoJavalineers);
 
         enemyPackInfoDict.Add(LocationNameList.guardHouseSouthWest, list);
+        #endregion
+
+        #region Body Pile
+        list = new List<EnemyPackInfo>();
+
+        list.Add(twoArmoredBats);
+        list.Add(twoArmoredBats);
+
+        enemyPackInfoDict.Add(LocationNameList.bodyPile, list);
         #endregion
 
         #region North East Camp
