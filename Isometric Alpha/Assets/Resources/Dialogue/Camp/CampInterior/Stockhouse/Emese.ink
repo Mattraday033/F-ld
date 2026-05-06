@@ -7,79 +7,55 @@ VAR hasIronNugget = false
 VAR metQuartermasterEmese = false
 VAR gaveIronNuggetToEmese = false
 
+VAR taborMentionedRewardForHostages = false
+VAR receivedTaborRewardFromEmese = false
+VAR sentIntoMineByDirector = false
+VAR trainedByEmeseToUseBlasingJelly = false
+
 VAR playerName = ""
 
-{
--snitchedOnUros and not gaveIronNuggetToEmese:
-->1e
--else:
-    {
-    -metQuartermasterEmese:
-        ->1d
-    -else:
-        ->1a
-    }
-}
+searchInventoryFor(hasIronNugget,Lost Iron Nugget)
+
+->1a
 
 === 1a ===
 
-Hello slave. Got an order for me?
-
-    +No ma'am
-        ->1b
-
-=== 1b ===
-~metQuartermasterEmese = true
 setToTrue(metQuartermasterEmese)
 
-Then why are you bothering me?
+Hello slave. Got an order for me?
 
-    +I'm looking for Guard László. He is having me run an errand for him. *Show badge*
-        ->1c
+->1aa
 
-=== 1c ===
-
-I haven't seen him, but you should check the guard hut near the main entrance. That's where he is posted when he doesn't have duties to attend to.
-
-    +How is the lockdown treating you?
-        keepDialogue()
-        The lockdown? I barely notice it. Supply tallies and requisitions don't stop just because the slaves aren't working. The biggest difference is now that the branded are stuck inside all day they're begging for stockhouse duty just to have something to do. I've never had so many volunteers! *Emese chuckles to herself.*
-        ->1c
-    +If I need supplies, can I get them from you?
-        keepDialogue()
-        Not without a guard's approval you can't. It would be best if you didn't concern yourself with such things and get back to work.
-        ->1c
-    +Can you remind me where I can find Guard László? I'm looking for him.
-        keepDialogue()
-        I haven't seen him, but you should check the guard hut near the main entrance. That's where he is posted when he doesn't have duties to attend to.
-        ->1c
-    +Thank you for your time.
-        ->Close
-    
-=== 1d ===
-
-keepDialogue()
-
-You're back. Did you need something?
-    ->1c
-
-=== 1e ===
-searchInventoryFor(hasIronNugget,Lost Iron Nugget)
-
-Did you find whatever Uros hid in here?
+=== 1aa ===
 
 {
 -hasIronNugget:
-    +Yes, here you go. *Hand the Iron Nugget to Emese.*
+    +I found what Uros was hiding. *Hand the Iron Nugget to Emese.*
+        ->1e
+}
+
+{
+-taborMentionedRewardForHostages and not receivedTaborRewardFromEmese:
+    +Chief Tabor said you would have something for me?
         ->1f
 }
-    +No, not yet.
-        keepDialogue()
-        When you do, let me know.
-        ->1c
 
+{
+-sentIntoMineByDirector and not trainedByEmeseToUseBlasingJelly:
+    +I'm here to be trained to use blasting jelly. *Show seal.*
+        ->1g
+}
 
-=== 1f ===
+    +How is the lockdown treating you?
+        The lockdown? I barely notice it. Supply tallies and requisitions don't stop just because the slaves aren't working. The biggest difference is now that the branded are stuck inside all day they're begging for stockhouse duty just to have something to do. I've never had so many volunteers! *Emese chuckles to herself.*
+        ->1aa
+    +If I need supplies, can I get them from you?
+        Not without a guard's approval you can't. It would be best if you didn't concern yourself with such things and get back to work.
+        ->1aa
+    +\*Leave.*
+        ->Close
+
+=== 1e ===
 
 ~gaveIronNuggetToEmese = true
 
@@ -102,19 +78,80 @@ These gloves were meant to be distributed among the guards, but I think you've e
 
 giveItem(2,5,1)
 
-->Close
+->1aa
+
+=== 1f ===
+
+setToTrue(receivedTaborRewardFromEmese)
+finishQuest(Tabor's Reward,true,Reward received.)
+
+prepItem()
+
+Indeed. The chief told me to give you these. A clean robe, usually reserved for the kitchen servants. It should keep you warm much better than the rags they usually give the branded.
+
+giveItem(2,29,1)
+
+prepItem()
+
+As well as a nice new pair of boots. Walking around barefoot you're bound to get your feet all cut up in the mines, but these will protect them nicely.
+
+giveItem(2,11,1)
+
+->1aa
 
 === 1g ===
 
-->Close
+setToTrue(trainedByEmeseToUseBlasingJelly)
+
+\*Emese eyes the seal, then looks you up and down.* So you are. The Director sent a runner. It's quite unusual for one of the branded to be assigned for explosives training, but who am I to question the powers that be?
+
+The blasting jelly is a mixture of two components: the inert explosive gel, and the primer. I'll show you how to mix in the primer to make the gel volatile, it's not too hard.
+
+fadeToBlack()
+
+wait(1.5)
+
+fadeBackIn(60)
+
+Now for the actual detonation. This is the tricky part, and the most dangerous, so listen well. 
+
+The way you ignite the gel once it's been made volatile is to add water. The hard part is doing it from a safe distance.
+
+To give you time to get away from the jelly before it goes off, you must use a water clock. Every barrel of blasting jelly comes with it's own water clock.
+
+A water clock has two components: a big cup with a spout, and a little cup. First, place the small cup on top of the barrel. Then add water to the big cup, and tip it like so to keep the water from flowing out of the spout.
+
+Now, place the larger cup on the barrel, with the spout pouring into the small cup. Do not let the water spill into the barrel! This will ignite the jelly, and you'll just be a smear on the wall.
+
+If you did it right, you have until the water from the big cup fills the small cup to over flowing before the barrel will ignite, or about five minutes. Use that time to get somewhere safe. 
+
+prepItem()
+{
+-wisdom >= 2: 
+You seem pretty attentive, but I've been wrong before. Take these instructions for if you need a refresher before you set the water clock.
+-else:
+By the way your eyes are glazing over, you look like you'll need a refresher before you set the water clock. Take these instructions for when you need to use the jelly.
+}
+
+giveItem(7,13,1)
+
+    +Thanks. Which one of these barrels should I take with me?
+        ->1h
 
 === 1h ===
 
-->Close
+Oh, we only keep the training kits in the camp. The blasting jelly that we use in the mines is stored in the stockroom on the third floor of the mine. You'll need to make it all the way down there before you'll have access to one.
+
+    +Understood.
+        ->1i
+    +Typical. Very well, I'll make do.
+        ->1i
 
 === 1i ===
 
-->Close
+Good luck... and be careful. I overheard some of the guards from the bottom floor talk about those worm things they encountered down there. I wouldn't wish them on anyone. Not even one of the branded.
+
+->1aa
 
 === 1j ===
 

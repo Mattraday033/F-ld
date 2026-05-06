@@ -33,7 +33,7 @@ VAR concludedHostageNegotiations = false
 
     activateQuestStep(No Good Deed,Go to the Director's office.)
     
-    openGateFromKey(Manse Front Door)
+    openGateFromKey(Manse Front Door,true)
     {
     -hostagesDead:
         ->setUpSpeakers(->2a)

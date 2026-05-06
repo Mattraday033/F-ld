@@ -8,12 +8,12 @@ using System.Linq;
 
 public enum CharacterAnimationType { 
                                     None, 
-                                    Idle_Front, Idle_Back, 
-                                    OOC_Idle_Front, OOC_Idle_Back, 
-                                    Secondary_Idle, 
+                                    Idle_Front, Idle_Back,
+                                    OOC_Idle_Front, OOC_Idle_Back,
+                                    Secondary_Idle, Secondary_Idle_Front, Secondary_Idle_Back,
                                     Run_Front, Run_Front_Left, Run_Front_Right, 
                                     Run_Back, Run_Back_Left, Run_Back_Right, 
-                                    Wounded, Wounded_Front, Wounded_Back, 
+                                    Wounded, Wounded_Front, Wounded_Back, OOC_Wounded_Front, OOC_Wounded_Back,
                                     Death, Death_Front, Death_Back, Death_Front_Weaponless, Death_Back_Weaponless,
                                     Attack_Normal, Attack_Normal_Front, Attack_Normal_Back, 
                                     Attack_Special, 
@@ -25,9 +25,9 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 {
     public readonly static CharacterAnimationType[] loopedAnimationTypes = new CharacterAnimationType[]
     {   
-        CharacterAnimationType.Idle_Front, CharacterAnimationType.Idle_Back, 
-        CharacterAnimationType.OOC_Idle_Front, CharacterAnimationType.OOC_Idle_Back, 
-        CharacterAnimationType.Secondary_Idle, 
+        CharacterAnimationType.Idle_Front, CharacterAnimationType.Idle_Back,
+        CharacterAnimationType.OOC_Idle_Front, CharacterAnimationType.OOC_Idle_Back,
+        CharacterAnimationType.Secondary_Idle, CharacterAnimationType.Secondary_Idle_Front, CharacterAnimationType.Secondary_Idle_Back,
         CharacterAnimationType.Death_Front_Weaponless, CharacterAnimationType.Death_Back_Weaponless
     };
 
@@ -37,6 +37,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
       CharacterAnimationType.Run_Front,     CharacterAnimationType.Run_Front_Left,      CharacterAnimationType.Run_Front_Right, 
       CharacterAnimationType.Run_Back,      CharacterAnimationType.Run_Back_Left,       CharacterAnimationType.Run_Back_Right,  
       CharacterAnimationType.Wounded,       CharacterAnimationType.Wounded_Front,       CharacterAnimationType.Wounded_Back,
+      CharacterAnimationType.OOC_Wounded_Front, CharacterAnimationType.OOC_Wounded_Back,
       CharacterAnimationType.Death,         CharacterAnimationType.Death_Front,         CharacterAnimationType.Death_Back,   
       CharacterAnimationType.Attack_Normal, CharacterAnimationType.Attack_Normal_Front, CharacterAnimationType.Attack_Normal_Back, 
       CharacterAnimationType.Attack_Special,
@@ -669,6 +670,31 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         playIdleAnimation(CharacterAnimationType.OOC_Idle_Front);
     }
 
+
+    public void playNorthEastSecondaryIdle()
+    {
+        setFacing(Facing.NorthEast);
+        playIdleAnimation(CharacterAnimationType.Secondary_Idle_Back);
+    }
+
+    public void playNorthWestSecondaryIdle()
+    {
+        setFacing(Facing.NorthWest);
+        playIdleAnimation(CharacterAnimationType.Secondary_Idle_Back);
+    }
+
+    public void playSouthEastSecondaryIdle()
+    {
+        setFacing(Facing.SouthEast);
+        playIdleAnimation(CharacterAnimationType.Secondary_Idle_Front);
+    }
+
+    public void playSouthWestSecondaryIdle()
+    {
+        setFacing(Facing.SouthWest);
+        playIdleAnimation(CharacterAnimationType.Secondary_Idle_Front);
+    }
+
     public void playNorthEastIdle()
     {
         setFacing(Facing.NorthEast);
@@ -836,7 +862,9 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             case CharacterAnimationType.Idle_Front:
             case CharacterAnimationType.Idle_Back:
             case CharacterAnimationType.OOC_Idle_Front:
-            case CharacterAnimationType.OOC_Idle_Back: 
+            case CharacterAnimationType.OOC_Idle_Back:
+            case CharacterAnimationType.Secondary_Idle_Front:
+            case CharacterAnimationType.Secondary_Idle_Back:
                 haltAllAnimations();
                 setSpriteToCurrentIdle();
                 return;
@@ -858,6 +886,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         {
             switch(animationType)
             {
+                case CharacterAnimationType.OOC_Wounded_Front:
+                case CharacterAnimationType.OOC_Wounded_Back: 
                 case CharacterAnimationType.Wounded_Front:
                 case CharacterAnimationType.Wounded_Back: 
                     playAnimation(CharacterAnimationType.Wounded);
@@ -875,12 +905,14 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
                     playAnimation(CharacterAnimationType.Run_Back);
                     break;
                 case CharacterAnimationType.OOC_Idle_Front:
+                case CharacterAnimationType.Secondary_Idle_Front:
                 case CharacterAnimationType.Run_Front:
                 case CharacterAnimationType.Secondary_Idle:
                 case CharacterAnimationType.Spawn:
                     playIdleAnimation(CharacterAnimationType.Idle_Front);
                     break;
                 case CharacterAnimationType.OOC_Idle_Back:
+                case CharacterAnimationType.Secondary_Idle_Back:
                 case CharacterAnimationType.Run_Back:
                     playIdleAnimation(CharacterAnimationType.Idle_Back);
                     break;
@@ -924,11 +956,23 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         {
             case Facing.NorthEast:
             case Facing.NorthWest:
-                playIdleAnimation(CharacterAnimationType.OOC_Idle_Back);
+                if(currentIdle.ToString().Contains(CharacterAnimationType.Secondary_Idle.ToString()))
+                {
+                    playIdleAnimation(CharacterAnimationType.Secondary_Idle_Back);
+                } else
+                {
+                    playIdleAnimation(CharacterAnimationType.OOC_Idle_Back);
+                }
                 break;
             case Facing.SouthWest:
             case Facing.SouthEast:
-                playIdleAnimation(CharacterAnimationType.OOC_Idle_Front);
+                if(currentIdle.ToString().Contains(CharacterAnimationType.Secondary_Idle.ToString()))
+                {
+                    playIdleAnimation(CharacterAnimationType.Secondary_Idle_Front);
+                } else
+                {
+                    playIdleAnimation(CharacterAnimationType.OOC_Idle_Front);
+                }
                 break;
         }
 
@@ -1050,8 +1094,10 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             case CharacterAnimationType.Death_Back_Weaponless:
                 return getFallBackIdleType(characterToAnimate, CharacterAnimationType.Death, retry);
             case CharacterAnimationType.OOC_Idle_Front:
+            case CharacterAnimationType.Secondary_Idle_Front:
                 return getFallBackIdleType(characterToAnimate, CharacterAnimationType.Idle_Front, retry);
             case CharacterAnimationType.OOC_Idle_Back:
+            case CharacterAnimationType.Secondary_Idle_Back:
                 return getFallBackIdleType(characterToAnimate, CharacterAnimationType.Idle_Back, retry);
             case CharacterAnimationType.Idle_Front:
                 return getFallBackIdleType(characterToAnimate, CharacterAnimationType.OOC_Idle_Front, retry);

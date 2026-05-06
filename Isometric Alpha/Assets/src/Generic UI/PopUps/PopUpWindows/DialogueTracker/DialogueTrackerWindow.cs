@@ -135,7 +135,7 @@ public class DialogueTrackerWindow : PopUpWindow, IEscapable
         }
     }
 
-	/*
+    /*
 	public void setDialogueScrollRectToBottom(ScrollRect scrollRect)
 	{
 		Canvas.ForceUpdateCanvases();

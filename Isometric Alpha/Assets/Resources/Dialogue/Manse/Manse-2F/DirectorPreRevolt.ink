@@ -14,6 +14,7 @@ VAR playerName = ""
 
 === 1a ===
 
+duckMusic()
 setToTrue(hadTakacsConvoInDirectorsOffice)
 setNPCFacing({directorIndex},SW)
 

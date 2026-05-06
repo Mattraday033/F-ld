@@ -36,6 +36,8 @@ VAR mineLvl3SlavesBackToSurface = false
 VAR mineLvl3ToldPazmanToEatShit = false
 VAR mineLvl3ThreatenedGaspar = false
 
+VAR trainedByEmeseToUseBlasingJelly = false
+
 VAR mineLvl3InRubbleConversation = false
 VAR mineLvl3ConvincedRekaAndPazman = false
 VAR mineLvl3PromisedToProtectRekaAndPazman = false
@@ -59,7 +61,7 @@ setToTrue(mineLvl3InRubbleConversation)
 \*A large cave entrance looms before you. The loud squelching of many worms can be heard coming from the darkness within.*
 
 {
--mineLvl3MarcosTaughtHowToIgniteJelly:
+-mineLvl3MarcosTaughtHowToIgniteJelly or trainedByEmeseToUseBlasingJelly:
     +\*Make sure the tunnel is clear, then seal the breach yourself*.
     finishQuest(Sealing the Breach, true, Sealed the Breach Myself.)
         ->1d

@@ -171,6 +171,7 @@ public static class ItemList
 	public const int pitClosureNoteIndex = 10;
 	public const int directorsJournalIndex = 11;
 	public const int brandedMemoIndex = 12;
+	public const int blastingJellyInstructionsIndex = 13;
 
     #region Weapon Keys
 
@@ -366,6 +367,8 @@ public static class ItemList
 		books.Add(new BookItem(new ItemListID(bookListIndex, pitClosureNoteIndex), BookList.pitClosureNoteKey, "A quick note, jotted in a shaky hand.", pitClosureNoteIndex, new string[] {BookList.pitClosureNoteReadFlag}));
 		books.Add(new BookItem(new ItemListID(bookListIndex, directorsJournalIndex), BookList.directorsJournalKey, "A small, tidy journal. The pages are filled with long, caligraphic characters scrawled with much patience.", directorsJournalIndex, new string[] {BookList.directorsJournalReadFlag}));
 		books.Add(new BookItem(new ItemListID(bookListIndex, brandedMemoIndex), BookList.memoRegardingTheBrandedKey, "A rolled piece of tanned bark. To read the contents hidden within, it must be unrolled carefully to prevent it from tearing.", brandedMemoIndex, new string[] {BookList.memoRegardingTheBrandedReadFlag}));
+		books.Add(new BookItem(new ItemListID(bookListIndex, blastingJellyInstructionsIndex), BookList.blastingJellyInstructionsKey, "A small wax tablet with the instructions for blasting jelly detonation scratched into it.", blastingJellyInstructionsIndex, new string[] {}));
+
 
 		allItems.Add(usableItems);          // listIndex = 0
 		allItems.Add(weapons);              // listIndex = 1

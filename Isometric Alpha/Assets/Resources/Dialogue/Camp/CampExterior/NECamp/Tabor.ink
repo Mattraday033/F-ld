@@ -337,7 +337,7 @@ changeCamTarget({adelaIndex})
 
 Even I am impressed. No plan of mine accounted for a way forward without bloodshed.
 
-    +None of us wanted unnecessary bloodshed. I just proved to each party it was true.
+    +None of us wanted unnecessary killing. I just proved to each party it was true.
         ->2c
     +They were at a cliff's edge and balked at the height. The cowards were glad for a way down.
         changeCamTarget({adelaIndex})

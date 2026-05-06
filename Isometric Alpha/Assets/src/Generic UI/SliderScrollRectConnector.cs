@@ -7,6 +7,9 @@ public class SliderScrollRectConnector : MonoBehaviour
 {
     public bool valueChangedByScrollRect = false; //if the scroll rect is being moved with the mouse wheel
     public bool valueChangedBySlider = false; //if the slider is being dragged
+
+    public bool showing = false;
+
     public GameObject handle;
     public GameObject background;
 
@@ -16,6 +19,7 @@ public class SliderScrollRectConnector : MonoBehaviour
     void Start()
     {
         checkHandleVisibility();
+
         ScrollableUIElement.PanelsPopulated.AddListener(checkHandleVisibility);
         AbilityGridSideTab.OnSideTabChosen.AddListener(checkHandleVisibility);
         GridRow.OnDescribableToDisplay.AddListener(checkHandleVisibility);
@@ -56,9 +60,14 @@ public class SliderScrollRectConnector : MonoBehaviour
 
         valueChangedByScrollRect = true;
 
-        slider.value = 1f;
+        if(!showing && show)
+        {
+            slider.value = 1f;
+        }
 
         valueChangedByScrollRect = false;
+
+        showing = show;
     }
 
     public void setScrollRectVerticalPosition()

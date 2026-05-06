@@ -54,6 +54,8 @@ You aren't supposed to be here. Leave before the guards get the wrong impression
 
 === 1b === 
 
+playAnimation({dezsoIndex},Secondary_Idle_Front)
+
 The Lovashi's lapdogs have finally arrived. I'm not surprised to see Weft here, but I do not know you. 
 
     +I'm {playerName}. I'm here to negotiate your surrender.
@@ -427,6 +429,7 @@ changeCamTarget({loamIndex})
 
 setNPCFacing({dezsoIndex},SW)
 changeCamTarget({dezsoIndex})
+playAnimation({dezsoIndex},Idle_Front)
 
 The lot of you are traitors, and incompetents to boot. You're forgetting I have the hostages!
 
@@ -471,12 +474,13 @@ setNPCFacing({dezsoIndex},NW)
 \*Dezso looks from you to his hostages, then to Loam. Loam holds his gaze for long moment.*
 
 setNPCFacing({dezsoIndex},SW)
+playAnimation({dezsoIndex},OOC_Idle_Front)
 
 \*Finally, Dezso tears his eyes to you and drops his weapon.* I am no savior. But I can do one last right by these ungrateful louts.
 
     +Maybe you aren't, but I'm certain they will never forget this.
 
-        \*Dezso laughs without mirth.* Are your kidding? If you told them not to, they'd ask what they shouldn't forget.
+        \*Dezso laughs without mirth.* Are your kidding? They already have.
 
         ->savedHostagesFinish
 

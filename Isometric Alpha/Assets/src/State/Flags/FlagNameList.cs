@@ -89,6 +89,8 @@ public static class FlagNameList
         public const string hadTakacsConvoInDirectorsOffice = "hadTakacsConvoInDirectorsOffice";
         public const string metDirectorAfterHostages = "metDirectorAfterHostages";
         public const string sentIntoMineByDirector = "sentIntoMineByDirector"; //Accepted Director's task to enter mine 
+        public const string knowWhoTheDirectorIs = "knowWhoTheDirectorIs"; //know the Director's name
+        public const string taborMentionedRewardForHostages = "taborMentionedRewardForHostages";
 
         //kastor convo flags
         public const string metKastor = "metKastor"; //if the player has spoken to Kastor before
@@ -264,6 +266,8 @@ public static class FlagNameList
         //Quartermaster Emese flags
         public const string metQuartermasterEmese = "metQuartermasterEmese"; //have interacted with Emese before
         public const string gaveIronNuggetToEmese = "gaveIronNuggetToEmese";
+        public const string receivedTaborRewardFromEmese = "receivedTaborRewardFromEmese";
+        public const string trainedByEmeseToUseBlasingJelly = "trainedByEmeseToUseBlasingJelly";
 
         //Uros flags
         public const string startledUros = "startledUros"; //You spoke to Uros so he's no longer talking about looking for something.

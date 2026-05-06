@@ -116,14 +116,13 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.brush, brandedFolderPath + NPCNameList.brush + "/");
         folderPathDict.Add(NPCNameList.balint, brandedFolderPath + NPCNameList.balint + "/");
         folderPathDict.Add(NPCNameList.clay, brandedFolderPath + NPCNameList.clay + "/");
-        folderPathDict.Add(NPCNameList.dezso, brandedFolderPath + NPCNameList.kastor + "/");
-        folderPathDict.Add(NPCNameList.dezso+1, lovashiFolderPath + MonsterNameList.executioner + "/");
+        folderPathDict.Add(NPCNameList.dezso, brandedFolderPath + NPCNameList.dezso + "/");
         folderPathDict.Add(NPCNameList.ervin, brandedFolderPath + NPCNameList.ervin + "/");
         folderPathDict.Add(NPCNameList.feher, brandedFolderPath + NPCNameList.feher + "/");
         folderPathDict.Add(NPCNameList.géza, brandedFolderPath + NPCNameList.géza + "/");
         folderPathDict.Add(NPCNameList.janos, brandedFolderPath + NPCNameList.janos + "/");
         folderPathDict.Add(NPCNameList.kastor, brandedFolderPath + NPCNameList.kastor + "/");
-        folderPathDict.Add(NPCNameList.loam, brandedFolderPath + NPCNameList.ervin + "/");
+        folderPathDict.Add(NPCNameList.loam, brandedFolderPath + NPCNameList.loam + "/");
         folderPathDict.Add(NPCNameList.temple, brandedFolderPath + NPCNameList.temple + "/");
         folderPathDict.Add(NPCNameList.uros, brandedFolderPath + NPCNameList.uros + "/");
 

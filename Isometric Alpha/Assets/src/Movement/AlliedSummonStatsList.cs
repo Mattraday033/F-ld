@@ -37,6 +37,14 @@ public static class AlliedSummonStatsList
         #endregion
         #endregion
 
+        #region Lovashi Guards
+
+        allyStatsDict.Add(MonsterNameList.axeman, new AlliedSummonStats(EnemyStatsList.getEnemyStats(MonsterNameList.axeman)));
+        allyStatsDict.Add(MonsterNameList.javelineer, new AlliedSummonStats(EnemyStatsList.getEnemyStats(MonsterNameList.javelineer)));
+        allyStatsDict.Add(MonsterNameList.spearman, new AlliedSummonStats(EnemyStatsList.getEnemyStats(MonsterNameList.spearman)));
+
+        #endregion
+
         #region Branded Slaves
         allyStatsDict.Add(MonsterNameList.brandedRioter, new AlliedSummonStats(EnemyStatsList.getEnemyStats(MonsterNameList.brandedRioter)));
         #endregion

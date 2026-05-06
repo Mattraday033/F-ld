@@ -24,8 +24,10 @@ VAR knowsAboutTheMine = false
 
 VAR toldToAnswerQuestion = false
 VAR askedTheDirectorAQuestion = false
-VAR askedTheDirectorWhoHeIs = false
+VAR knowWhoTheDirectorIs = false
 VAR directorMentionedSurvivors = false
+
+VAR taborMentionedRewardForHostages = false
 
 {
 -metDirectorAfterHostages and not sentIntoMineByDirector:
@@ -59,11 +61,8 @@ setNPCFacing({directorIndex},NW)
 
 activate({taborIndex})
 activate({weftIndex})
-
-{
--hostagesDead:
 activate({adelaIndex})
-}
+
 changeCamTarget({taborIndex})
 
 fadeBackIn(60)
@@ -72,12 +71,12 @@ Director, sir, these are the two branded that Captain Adéla and I spoke of. The
 
 {
 -hostagesDead:
-    ->2a
+    ->hostagesDead_2a
 -else:
-    ->4a
+    ->hostagesSaved_2a
 }
 
-=== 2a ===
+=== hostagesDead_2a ===
 
 changeCamTarget({adelaIndex})
 
@@ -92,6 +91,31 @@ I have already heard your account of what happened, captain. I wish to listen to
 setNPCFacing({directorIndex},SW)
 
 Captain Adéla wants you dead for your part in the deaths of her guards, but that choice is not hers to make. Chief Tabor lobbies for a pardon, but I am unsure of the affect that will have on this camp's morale. 
+
+->2a
+
+=== hostagesSaved_2a ===
+
+changeCamTarget({directorIndex})
+
+\*A man, his hair grey, his armor made for someone larger, sits behind a desk. He stares past Adéla at the steppe green and gold of the Lovashi banner that adorns the office wall. After a moment, he speaks.*
+
+They have done what you could not it seems, Captain Adéla.
+
+changeCamTarget({adelaIndex})
+
+Yes, sir.
+
+changeCamTarget({directorIndex})
+setNPCFacing({directorIndex},SW)
+
+You two have performed admirably. It has made me realize you may be resourceful enough to solve an even greater issue we are plagued with. I have been mulling it over whether to present it to you.
+
+->2a
+
+=== 2a ===
+
+changeCamTarget({directorIndex})
 
 Before I make my decision, I would know you. You are Weft, and you are {playerName}, are you not?
 
@@ -130,6 +154,15 @@ changeCamTarget({directorIndex})
 
 Your names were but scratches in a ledger to me before. Now, they have faces to them. You've made yourselves real, in a way.
 
+{
+-hostagesDead:
+->hostagesDead_2b
+-else:
+->hostagesSaved_2b
+}
+
+=== hostagesDead_2b ===
+
 The names of the hostages have been removed from our ledgers, thanks to your actions. Two more names, buried along with their faces. How does that make you feel?
 
     +Why should I lose sleep over a pair of dead slavers?
@@ -146,6 +179,14 @@ The names of the hostages have been removed from our ledgers, thanks to your act
             Silence, perhaps, was the only answer. What words could you say that would satisfy me? What do I really want from you?
             ->2c
         }
+
+=== hostagesSaved_2b ===
+
+setToTrue(knowWhoTheDirectorIs)
+keepDialogue()
+I am Lord Gábor Kálnoky, uncle to Count Béla Kálnoky. Now that we are known to each other, allow me to cut to the reason I have summoned you here. The camp is stuck in lockdown while the mine is closed. Are you aware of why?
+
+->2c
 
 === 2c ===
 
@@ -212,7 +253,13 @@ We are not like them. To execute a person for a crime is one thing. To expect th
 
 Your choice is this, branded: brave the gauntlet of the mine to seal the tunnel that delivered these worm-things to us, and I shall grant you freedom and safe passage to Mason lands. 
 
+{
+-hostagesDead:
 Or live as a slave to the Confederation, with Tabor's pardon for your failures. You won't be harmed for any previous crimes, but without another offer of freedom no doubt the captain will find her cause to punish you eventually.
+-else:
+Or you may return to your hut with a belly full of food and the rest of the day off... but still a slave, never again to have a chance at a life not filled with toil.
+
+}
 
 Before you make this choice, surely you have questions about what I have said. Ask them. 
 
@@ -221,21 +268,35 @@ Before you make this choice, surely you have questions about what I have said. A
 === 2e(->divert) ===
 
 {
--askedTheDirectorWhoHeIs and wisdom > 2:
+-knowWhoTheDirectorIs and wisdom > 2:
     +If you are a lord, why are you running a mine? That seems beneath you. <Wis {wisdom}/2>
         An astute observation. Normally, it would be. Perform this task for me and I will provide you with your answer.
         ->2e(divert)
 }
 
+{
+-not hostagesDead:
+    +I save two of your guards, and I am rewarded with a suicide mission? Is this some shallow Lovashi jest?
+        ~askedTheDirectorAQuestion = true
+        You have been rewarded with a chance no other branded of this camp will ever be given, and one which you are free to turn down. Do not mistake this kindness for mockery.
+        ->2e(divert)
+-else:
     +I thought the brand was a death sentence. Who are you that you have the power to commute it?
         ~askedTheDirectorAQuestion = true
-        setToTrue(askedTheDirectorWhoHeIs)
+        setToTrue(knowWhoTheDirectorIs)
         I am Lord Gábor Kálnoky, uncle to Count Béla Kálnoky, who rules from Pharos. A letter to my nephew would be all it would take to absolve you of your crimes.
         ->2e(divert)
+}
+
     +Clearly, this will be dangerous or you would have done it already.
         ~askedTheDirectorAQuestion = true
-        Unbelievably so. You will almost certainly perish in the attempt. Otherwise, I would not have made the reward so dear. Should you decide to do this, Captain Adéla will likely have been granted her request for execution.
-        ->2e(divert)
+{
+-not hostagesDead:
+Unbelievably so. You will almost certainly perish in the attempt. Otherwise, I would not have made the reward so dear. 
+-else:
+Unbelievably so. You will almost certainly perish in the attempt. Otherwise, I would not have made the reward so dear. Should you decide to do this, Captain Adéla will likely have been granted her request for execution.
+}
+         ->2e(divert)
     +What can I expect when I enter the mine?
         ~askedTheDirectorAQuestion = true
         setToTrue(directorMentionedSurvivors)
@@ -277,10 +338,10 @@ disableDialogueUI()
 
 playAnimation({taborIndex},Attack_Normal_Back)
 
-wait(.55)
-playDelayedSFX(Whip, 100)
+wait(.625)
+playDelayedSFX(Whip, 10)
 
-//playAnimation({playerIndex},Wounded_Back)
+playAnimation({playerIndex},OOC_Wounded_Back)
 dealDamageSafe({playerName},25)
 
 wait(2)
@@ -309,11 +370,6 @@ activateQuestStep(No Good Deed,Take time to think.)
 The two of you may take the rest of the day off to consider. If you should be brave enough to take my offer, I can have you sent in to the mine immediately. 
 
 ->deactivateExtras
-
-=== 4a ===
-
-
-->Close
 
 === 5a ===
 
@@ -391,6 +447,19 @@ Then what is your decision?
 
 
 === deactivateExtras ===
+
+{
+-not hostagesDead and not taborMentionedRewardForHostages:
+setNPCFacing({taborIndex},NW)
+changeCamTarget({taborIndex})
+setToTrue(taborMentionedRewardForHostages)
+setToTrue(haveQuestForRewardFromTabor)
+
+activateQuestStep(Tabor's Reward,Meet with Quartermaster Emese)
+
+I have informed the Quartermaster Emese that you are to be given the reward I promised you. You can find her in the stockhouse next to the mine entrance, in the southwest corner of the camp.
+
+}
 
 fadeToBlack()
 

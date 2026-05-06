@@ -9,6 +9,8 @@ public static class GateAndChestManager
 {
     public readonly static UnityEvent OnGateKeyAdd = new UnityEvent();
 
+    public static bool preventSFX = false;
+
     private static Dictionary<string, bool> openedGatesAndChests = new Dictionary<string, bool>();
 
     [RuntimeInitializeOnLoadMethod]

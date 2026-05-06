@@ -173,10 +173,11 @@ new BuffChargeUpAbility(TraitList.coordinated, AbilityList.getAbility(null, Abil
         enemyStatsDict.Add(NPCNameList.dezso, new EnemyStats(NPCNameList.dezso+1,
                                                                             Constants.twentyFiveArmor,
                                                                                     95,
-                    AbilityList.getAbility(null, AbilityList.guardAxeKey) as Ability,
+new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.guardAxeKey) as Ability),
                                                         new Trait[] { 
                                                                       TraitList.master,
-                                                                      TraitList.territorial
+                                                                      TraitList.territorial,
+                                                                      TraitList.backLine
                                                                     },
                                                                     animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
         #endregion

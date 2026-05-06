@@ -49,6 +49,11 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
 
     protected void playOpeningAudioClip()
     {
+        if(GateAndChestManager.preventSFX)
+        {
+            return;
+        }
+
         AudioManager.playAudioClipAsSingleton(getAudioClipPath(getName()));
     }
 

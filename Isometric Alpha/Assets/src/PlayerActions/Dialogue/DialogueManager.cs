@@ -124,7 +124,7 @@ public class DialogueManager : MonoBehaviour
 
 	public bool storyCanContinue()
 	{
-		return currentStory.canContinue;
+		return currentStory.canContinue && dialogueTrackerWindow != null && dialogueTrackerWindow.gameObject.activeSelf && dialogueTrackerWindow.gameObject.activeInHierarchy;
 	}
 
 	public Dialogue getDialogue()
@@ -459,6 +459,13 @@ public class DialogueManager : MonoBehaviour
                     continueStory();
                     keepOldDialogue = false;
 
+                    break;
+
+                case "duckmusic":
+
+                    AudioManager.duckMusicForDialogue();
+
+                    continueStory();
                     break;
 
                 case "activate":
@@ -1017,14 +1024,23 @@ public class DialogueManager : MonoBehaviour
                             case "idle_back":
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Idle_Back);
                                 break;
-                            case "ooc_idle_back":
-                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.OOC_Idle_Back);
-                                break;
                             case "idle_front":
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Idle_Front);
                                 break;
+                            case "ooc_idle_back":
+                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.OOC_Idle_Back);
+                                break;
                             case "ooc_idle_front":
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.OOC_Idle_Front);
+                                break;
+                            case "secondary_idle":
+                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle);
+                                break;
+                            case "secondary_idle_back":
+                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle_Back);
+                                break;
+                            case "secondary_idle_front":
+                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle_Front);
                                 break;
                             case "death_back":
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Back);
@@ -1047,6 +1063,12 @@ public class DialogueManager : MonoBehaviour
                                 break;
                             case "wounded_front":
                                 targetAnimationManager.playAnimation(CharacterAnimationType.Wounded_Front);
+                                break;
+                            case "ooc_wounded_back":
+                                targetAnimationManager.playAnimation(CharacterAnimationType.OOC_Wounded_Back);
+                                break;
+                            case "ooc_wounded_front":
+                                targetAnimationManager.playAnimation(CharacterAnimationType.OOC_Wounded_Front);
                                 break;
                         }
                     }
@@ -1394,8 +1416,11 @@ public class DialogueManager : MonoBehaviour
                 case "opengatefromkey":
 
                     string gateKey = getArgument(buffer, Constants.indexZero);
+                    GateAndChestManager.preventSFX = getArgumentBool(buffer, Constants.indexOne);
 
                     GateAndChestManager.addKey(AreaManager.locationName + gateKey);
+
+                    GateAndChestManager.preventSFX = false;
 
                     continueStory();
 
@@ -2041,6 +2066,11 @@ public class DialogueManager : MonoBehaviour
 		{
 			yield return null;
 		}
+
+        if(PlayerOOCStateManager.currentActivity == OOCActivity.walking)
+        {
+            yield break;
+        }
 
 		if (dialogueTrackerWindow == null)
 		{

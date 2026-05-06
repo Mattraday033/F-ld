@@ -35,6 +35,8 @@ public static class BookList
 	public const string directorsJournalKey = "Director's Journal";
 	public const string directorsJournalReadFlag = "directorJournalRead";
 
+    public const string blastingJellyInstructionsKey = "Blasting Jelly Instructions";
+
 	public static string getBookContents(string key)
 	{
 		switch (key)
@@ -240,6 +242,13 @@ public static class BookList
                         "My leg has been hurting again. This place... it feels all too familiar. This morning I smelled smoke as I awoke. I lept from my bed and meant to race to the door, shouting for the guard to be raised and for my mount to be sent for. Had my leg not given out before I could make it across the room, my household may well have seen me " +
                         "race about the Manse, shrieking as if I was still at Wudra. I don't think the sentries outside my doors heard what I was saying, they seemed more confused than alarmed as I picked myself off the floor. Perhaps it would be better if I <I>was</I> still there. At least then I could retreat. Here I am stuck under the Great Mother's wrathful gaze.\n\n" + 
                         "Trapped against giant walls. Again the defenders come forth. We are not welcome.";
+            case blastingJellyInstructionsKey:
+                return  "Step 1: Place primed barrel of blasting jelly at intended ignition site.\n\n" + 
+                        "Step 2: Place small cup from water clock on top of barrel.\n\n" +
+                        "Step 3: Tip large cup on it's side enough that water will not flow out spout or top of cup when filled. Pour water into large cup until half way full.\n\n" + 
+                        "Step 4: Place large cup on top of barrel, with spout directly over small cup. WARNING: DO NOT SPILL WATER INTO BARREL OR IT WILL IGNITE.\n\n" + 
+                        "Step 5: Move safe distance away from barrel. If instruction were follow, detonation will occur five minutes after large cup was placed on top of barrel.\n\n" + 
+                        "Step 6: Wait.\n\n";
 		}
 
 		return "Book Contents Not Found.";
