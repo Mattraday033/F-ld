@@ -315,11 +315,16 @@ public static class OOCSpawnDetailsList
         list.Add(new DeadBodySpawnDetails(NPCNameList.slave, new Vector3Int(-1, -8), NPCNameList.slave, facing: Facing.NorthWest, weaponless: true));
         list.Add(new DeadBodySpawnDetails(NPCNameList.slave, new Vector3Int(-7, -8), NPCNameList.seb, facing: Facing.SouthWest, weaponless: true));
         list.Add(new DeadBodySpawnDetails(NPCNameList.slave, new Vector3Int(-9, -6), NPCNameList.slave+2, facing: Facing.NorthWest, weaponless: true));
-        list.Add(new DeadBodySpawnDetails(NPCNameList.slave, new Vector3Int(-6, -5), NPCNameList.slave+3, facing: Facing.NorthEast, weaponless: true));
         list.Add(new DeadBodySpawnDetails(NPCNameList.slave, new Vector3Int(1, -4), NPCNameList.slave+1, facing: Facing.NorthEast, weaponless: true));
         list.Add(new DeadBodySpawnDetails(NPCNameList.slave, new Vector3Int(4, -4), NPCNameList.slave+3, facing: Facing.NorthWest, weaponless: true));
-        list.Add(new DeadBodySpawnDetails(NPCNameList.slave, new Vector3Int(-2, -7), NPCNameList.slave+2, facing: Facing.NorthWest, weaponless: true));
-        list.Add(new DeadBodySpawnDetails(NPCNameList.slave, new Vector3Int(2, 0), NPCNameList.seb, facing: Facing.SouthWest, weaponless: true));
+
+        list.Add(new SingleSpriteChestSpawnDetails(Constants.indexZero, NPCNameList.body, new Vector3Int(-6, -5), Facing.NorthEast, NPCNameList.slave+3, deadBody: true, weaponless: true));
+        list.Add(new SingleSpriteChestSpawnDetails(Constants.indexOne, NPCNameList.body, new Vector3Int(-2, -7), Facing.NorthWest, NPCNameList.slave+2, deadBody: true, weaponless: true));
+        list.Add(new SingleSpriteChestSpawnDetails(Constants.indexTwo, NPCNameList.body, new Vector3Int(2, 0), Facing.SouthWest, NPCNameList.seb, deadBody: true, weaponless: true));
+        list.Add(new SingleSpriteChestSpawnDetails(Constants.indexThree, NPCNameList.body+1,  new Vector3Int(5, -2), Facing.NorthEast, NPCNameList.slave+1, deadBody: true, weaponless: true, script: new ThiefsBodyScript()));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(2, -2), facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(4, -3), facing: Facing.SouthWest));
 
         oocSpawnDetailsDict.Add(LocationNameList.bodyPile, list);
         #endregion
@@ -779,6 +784,15 @@ public static class OOCSpawnDetailsList
         list.Add(new LadderSpawnDetails(new Vector3Int(-8, 16), PrefabNames.ladderShortNE,
                                         new Ladder(Constants.noDifficulty, LocationNameList.campNorthWest, LocationNameList.bodyPile, 
                                                     Ladder.bodyPileLadderDescription, Facing.SouthEast), sortingLayerInfo: SortingLayerManager.groundSortingLayerInfo, offset: .70f));
+
+        #region Exiting body pile
+
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft+1, new Vector3Int(-6, 14), facing: Facing.SouthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.chiefTabor+5, new Vector3Int(-7, 12), facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+1, new Vector3Int(-7, 8), animationName: MonsterNameList.axeman, facing: Facing.NorthWest));
+
+        #endregion
 
         #region End Of Tutorial
 

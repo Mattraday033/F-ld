@@ -132,7 +132,10 @@ public static class DialogueNameList
     public const string dudCratePath = campInteriorPathName + LocationNameList.stockhouse + Constants.seperatorChar + "DudCrates";
     public const string dudBarrelPath = campInteriorPathName + LocationNameList.stockhouse + Constants.seperatorChar + "DudBarrels";
     public const string barrelsWithNuggetPath = campInteriorPathName + LocationNameList.stockhouse + Constants.seperatorChar + "BarrelsWithNugget";
+    #endregion
 
+    #region Body Pile
+    public const string thiefsBodyPath = campInteriorPathName + LocationNameList.bodyPile + Constants.seperatorChar + "ThiefBody";
     #endregion
 
     #region Camp North East
@@ -226,6 +229,7 @@ public static class DialogueNameList
     public const string guardNWPath = campExteriorPathName + LocationNameList.campNorthWest + Constants.seperatorChar + "NWCamp Guard";
     
     public const string taborEndOfTutorialPath = campExteriorPathName + LocationNameList.campNorthWest + Constants.seperatorChar + "TaborEndOfTutorial";
+    public const string taborBodyPilePath = campExteriorPathName + LocationNameList.campNorthWest + Constants.seperatorChar + "TaborAfterBodyPile";
 
 
     public const string taborIntimidateTutorialPath = campExteriorPathName + LocationNameList.campNorthWest + Constants.seperatorChar + "TaborIntimidateTutorial";

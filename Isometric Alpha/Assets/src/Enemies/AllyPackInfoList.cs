@@ -50,6 +50,13 @@ public static class AllyPackInfoList
                                                                                             FlagNameList.failedRushDezso
                                                                                         });
 
+    private readonly static AllyPackInfo taborBodyPile = new AllyPackInfo(new CreatureAmount[]   { 
+                                                                                                        AllyAmountList.chiefTabor
+                                                                                                    }, 
+                                                                            new string[]
+                                                                                        {
+                                                                                            FlagNameList.orderedIntoBodyPile
+                                                                                        });
 
     private static Dictionary<string, List<AllyPackInfo>> allyPackInfoDict;
 
@@ -66,19 +73,23 @@ public static class AllyPackInfoList
                         return null;
                 }
             case ZoneKeyList.lovashiCamp:
-                if(AreaManager.locationName.Equals(LocationNameList.slaveShackSeven))
+
+                switch(AreaManager.locationName)
                 {
-                    if(Flags.getFlag(FlagNameList.hostagesDead))
-                    {
-                        return dezsoAlliesGuards;
-                    } else
-                    {
-                        return dezsoAlliesSlaves;
-                    }
-                } else
-                {
-                    return campSlaveAllies;
+                    case LocationNameList.bodyPile:
+                        return taborBodyPile;
+                    case LocationNameList.slaveShackSeven:
+                        if(Flags.getFlag(FlagNameList.hostagesDead))
+                        {
+                            return dezsoAlliesGuards;
+                        } else
+                        {
+                            return dezsoAlliesSlaves;
+                        }
+                    default:
+                        return campSlaveAllies;
                 }
+
             case ZoneKeyList.manseFirstFloor:
             case ZoneKeyList.manseSecondFloor:
                 return campSlaveAllies;

@@ -86,14 +86,23 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
                 break;
             case NPCNameList.chiefTabor:
 
-                envCombatAction = AbilityList.getAbility(actorStats, AbilityList.frontHandKey);
-                targetingTrait = TraitList.chaotic;
+                if(CombatGrid.positionIsOnAlliedSide(actorStats.position))
+                {
+                    envCombatAction = AbilityList.getAbility(actorStats, AbilityList.guardLashKey);
+                    targetingTrait = TraitList.chaotic;
 
-                environmentalCombatActions.Add(envCombatAction.clone(actorStats), targetingTrait.clone(actorStats));
+                    environmentalCombatActions.Add(envCombatAction.clone(actorStats), targetingTrait.clone(actorStats));
+                } else
+                {
+                    envCombatAction = AbilityList.getAbility(actorStats, AbilityList.frontHandKey);
+                    targetingTrait = TraitList.chaotic;
 
-                envCombatAction = AbilityList.getAbility(actorStats, AbilityList.backHandKey);
-                
-                environmentalCombatActions.Add(envCombatAction.clone(actorStats), targetingTrait.clone(actorStats));
+                    environmentalCombatActions.Add(envCombatAction.clone(actorStats), targetingTrait.clone(actorStats));
+
+                    envCombatAction = AbilityList.getAbility(actorStats, AbilityList.backHandKey);
+                    
+                    environmentalCombatActions.Add(envCombatAction.clone(actorStats), targetingTrait.clone(actorStats));
+                }
                 return;
             case NPCNameList.clay:
 

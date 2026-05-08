@@ -27,6 +27,7 @@ public interface INonRevealableNameSource: INameSource
 public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationObject
 {
 
+    #region Chest Sprite Dictionary
     public const string chestKeyMarker = "-chest-";
 
     public readonly static UnityEvent<int> OpenChestsSharingIndex = new UnityEvent<int>();
@@ -187,12 +188,12 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
         }
     }
 
-    private static string getChestOpenSFX(ChestType type)
+    public virtual string getChestOpenSFX(ChestType type)
     {
         switch(type)
         {
             case ChestType.Shelf:
-                return "";
+                return AudioClipList.onTransitionSFX;
             case ChestType.Chest:
                 return AudioClipList.chestOpen;
             default:
@@ -209,6 +210,8 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
         }
     }
 
+    #endregion
+
     public PolygonCollider2D mouseHoverCollider;
     public Facing facing = Facing.NorthEast;
     public ChestState chestState = ChestState.Closed;
@@ -221,8 +224,6 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
     public int chestIndex;
 
-    private Item chestContents;
-
     public DescriptionPanel chestItemDescriptionPanel;
 
     private QuestStepActivationScript script;
@@ -230,7 +231,7 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
     public PlayerInteractionScript[] scripts;
 
 
-    public string getName()
+    public virtual string getName()
     {
         return chestType.ToString();
     }
@@ -247,6 +248,11 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
     private void OnEnable()
     {
+        if(spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
         outline = new SpriteOutline();
         outline.setSpriteRenderer(spriteRenderer);
     }
@@ -288,8 +294,6 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
         chestType = type;
         setMouseHoverPosition();
 
-        chestContents = ChestItemIDList.getChestItem(AreaManager.locationName, chestIndex);
-
         if (GateAndChestManager.hasBeenOpened(getChestKey()))
         {
             setSpriteToOpenEmpty(ignoreSFX: true);
@@ -300,7 +304,7 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
         }
     }
     
-    private void setToCurrentSprite()
+    protected virtual void setToCurrentSprite()
     {
         spriteRenderer.sprite = getCurrentSprite(facing, chestState, chestType);
 
@@ -319,7 +323,7 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
         setMouseHoverPosition();
     }
 
-    private void setMouseHoverPosition()
+    protected void setMouseHoverPosition()
     {
         Helpers.updatePolygonCollider(spriteRenderer, mouseHoverCollider);
         // Helpers.updateGameObjectPosition(gameObject);
@@ -335,7 +339,7 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
         createChestItemUI();
 
-        Inventory.addItem(chestContents);
+        Inventory.addItem(ChestItemIDList.getChestItem(AreaManager.locationName, chestIndex));
 
         setSpriteToOpenFilled();
         outline.removeOutline();
@@ -359,7 +363,7 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
         rectTransform.localScale = new Vector3(.0075f, .0075f);
 
         chestItemDescriptionPanel = rectTransform.GetComponent<DescriptionPanel>();
-        chestContents.describeSelfRow(chestItemDescriptionPanel);
+        ChestItemIDList.getChestItem(AreaManager.locationName, chestIndex).describeSelfRow(chestItemDescriptionPanel);
     }
 
     public void destroyUI()

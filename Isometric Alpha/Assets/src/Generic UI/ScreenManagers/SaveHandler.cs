@@ -253,15 +253,20 @@ public class SaveHandler : ScreenManager, IEscapable
             return;
         }
 
+        autosave(transition.getPositionOnSaveMultiplier(), CharacterFacing.getOpposingFacing(transition.playerSpawnDirection));
+    }
+
+    public static void autosave(Vector3Int cellCoords, Facing facing)
+    {
 		int saveNumber = getHighestSaveNumber() + 1;
 
         saveNumber *= -1;
 
-        Vector3 position = AreaManager.getMasterGrid().GetCellCenterWorld(transition.getPositionOnSaveMultiplier());
+        Vector3 position = AreaManager.getMasterGrid().GetCellCenterWorld(cellCoords);
 		SaveBlueprint blueprint = SaveBlueprint.build(determineCurrentAutosaveName(), saveNumber);
 
 		blueprint.playerPosition = new float[] { position.x, position.y, position.z};
-        blueprint.playerFacing = (int) CharacterFacing.getOpposingFacing(transition.playerSpawnDirection);
+        blueprint.playerFacing = (int) facing;
 
         createSave(blueprint);
     }

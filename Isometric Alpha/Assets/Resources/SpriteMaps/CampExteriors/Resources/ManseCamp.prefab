@@ -79,9 +79,10 @@ GameObject:
   m_Component:
   - component: {fileID: 749224464386666230}
   - component: {fileID: 6002796864209105910}
-  m_Layer: 0
+  - component: {fileID: 9105889143253057411}
+  m_Layer: 20
   m_Name: BarracksRoofBack
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,6 +154,163 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &9105889143253057411
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590246857692909280}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 9.67, y: 6}
+    newSize: {x: 9.67, y: 6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -2.145, y: -1.64}
+      - {x: -2.0249999, y: -1.61}
+      - {x: -1.9549999, y: -1.52}
+      - {x: -1.885, y: -1.53}
+      - {x: -1.735, y: -1.4399999}
+      - {x: -1.625, y: -1.39}
+      - {x: -1.505, y: -1.3299999}
+      - {x: -1.375, y: -1.26}
+      - {x: -1.225, y: -1.1999999}
+      - {x: -1.0849999, y: -1.12}
+      - {x: -0.955, y: -1.04}
+      - {x: -0.805, y: -0.96999997}
+      - {x: -0.715, y: -0.91999996}
+      - {x: -0.565, y: -0.85999995}
+      - {x: -0.42499998, y: -0.78}
+      - {x: -0.295, y: -0.7}
+      - {x: -0.24499999, y: -0.65999997}
+      - {x: -0.13499999, y: -0.63}
+      - {x: -0.044999998, y: -0.58}
+      - {x: -0.015, y: -0.55}
+      - {x: 0.105, y: -0.51}
+      - {x: 0.24499999, y: -0.42999998}
+      - {x: 0.375, y: -0.35999998}
+      - {x: 0.505, y: -0.29999998}
+      - {x: 0.66499996, y: -0.22999999}
+      - {x: 0.78499997, y: -0.17}
+      - {x: 0.92499995, y: -0.089999996}
+      - {x: 1.055, y: -0.02}
+      - {x: 1.185, y: 0.04}
+      - {x: 1.4449999, y: 0.17}
+      - {x: 1.5849999, y: 0.25}
+      - {x: 1.7149999, y: 0.32}
+      - {x: 1.8549999, y: 0.38}
+      - {x: 2.115, y: 0.51}
+      - {x: 2.2549999, y: 0.59}
+      - {x: 2.385, y: 0.65999997}
+      - {x: 2.5249999, y: 0.71999997}
+      - {x: 2.7849998, y: 0.84999996}
+      - {x: 2.925, y: 0.93}
+      - {x: 3.0549998, y: 1}
+      - {x: 3.185, y: 1.06}
+      - {x: 3.445, y: 1.1899999}
+      - {x: 3.585, y: 1.27}
+      - {x: 3.715, y: 1.3399999}
+      - {x: 3.855, y: 1.4}
+      - {x: 4.115, y: 1.53}
+      - {x: 4.255, y: 1.61}
+      - {x: 4.3849998, y: 1.68}
+      - {x: 4.515, y: 1.74}
+      - {x: 4.515, y: 1.8}
+      - {x: 4.4449997, y: 1.8199999}
+      - {x: 4.115, y: 1.8199999}
+      - {x: 3.7949998, y: 1.8299999}
+      - {x: 3.435, y: 1.8399999}
+      - {x: 3.115, y: 1.8499999}
+      - {x: 2.735, y: 1.86}
+      - {x: 2.365, y: 1.86}
+      - {x: 2.235, y: 1.79}
+      - {x: 1.985, y: 1.66}
+      - {x: 1.8249999, y: 1.5699999}
+      - {x: 1.7149999, y: 1.53}
+      - {x: 1.5949999, y: 1.4699999}
+      - {x: 1.4649999, y: 1.4}
+      - {x: 1.185, y: 1.25}
+      - {x: 1.055, y: 1.1899999}
+      - {x: 0.905, y: 1.11}
+      - {x: 0.775, y: 1.04}
+      - {x: 0.655, y: 0.97999996}
+      - {x: 0.49499997, y: 0.89}
+      - {x: 0.385, y: 0.84999996}
+      - {x: 0.265, y: 0.78999996}
+      - {x: 0.105, y: 0.7}
+      - {x: -0.145, y: 0.57}
+      - {x: -0.285, y: 0.51}
+      - {x: -0.405, y: 0.45}
+      - {x: -0.565, y: 0.35999998}
+      - {x: -0.815, y: 0.22999999}
+      - {x: -0.945, y: 0.17}
+      - {x: -1.095, y: 0.089999996}
+      - {x: -1.1949999, y: 0.04}
+      - {x: -1.475, y: -0.11}
+      - {x: -1.625, y: -0.17}
+      - {x: -1.875, y: -0.29999998}
+      - {x: -2.185, y: -0.47}
+      - {x: -2.2949998, y: -0.51}
+      - {x: -2.415, y: -0.57}
+      - {x: -2.5449998, y: -0.64}
+      - {x: -2.695, y: -0.71999997}
+      - {x: -2.855, y: -0.81}
+      - {x: -2.955, y: -0.84999996}
+      - {x: -3.105, y: -0.93}
+      - {x: -3.205, y: -0.97999996}
+      - {x: -3.3049998, y: -1.06}
+      - {x: -3.385, y: -1.0799999}
+      - {x: -3.485, y: -1.13}
+      - {x: -3.735, y: -1.26}
+      - {x: -3.855, y: -1.3199999}
+      - {x: -4.015, y: -1.41}
+      - {x: -4.265, y: -1.54}
+      - {x: -4.355, y: -1.61}
+      - {x: -4.355, y: -1.68}
+      - {x: -4.345, y: -1.73}
+      - {x: -4.315, y: -1.75}
+      - {x: -4.065, y: -1.76}
+      - {x: -3.7849998, y: -1.77}
+      - {x: -3.405, y: -1.78}
+      - {x: -2.745, y: -1.8}
+      - {x: -2.485, y: -1.81}
+      - {x: -2.2949998, y: -1.81}
+      - {x: -2.2849998, y: -1.79}
+      - {x: -2.235, y: -1.67}
+      - {x: -2.175, y: -1.67}
+  m_UseDelaunayMesh: 0
 --- !u!1 &3501460135206067676
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,9 +321,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5536218659782347694}
   - component: {fileID: 8815407173529805941}
-  m_Layer: 0
+  - component: {fileID: 4245698971111256946}
+  m_Layer: 20
   m_Name: Manse_Short_Roof_Front_1
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,7 +339,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -50.711002, y: 1.3130002, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1.01, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2686464176326239703}
@@ -228,7 +387,7 @@ SpriteRenderer:
   m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: 9bc41e8227e486045bb113af1da06af0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 7.36, y: 4.78}
@@ -237,6 +396,117 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &4245698971111256946
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3501460135206067676}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 7.36, y: 4.78}
+    newSize: {x: 7.36, y: 4.78}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.45, y: -1.81}
+      - {x: -0.32, y: -1.75}
+      - {x: -0.17, y: -1.68}
+      - {x: -0.07, y: -1.62}
+      - {x: 0.07, y: -1.56}
+      - {x: 0.19999999, y: -1.48}
+      - {x: 0.32999998, y: -1.42}
+      - {x: 0.48, y: -1.35}
+      - {x: 0.58, y: -1.29}
+      - {x: 0.71999997, y: -1.23}
+      - {x: 0.84999996, y: -1.15}
+      - {x: 0.97999996, y: -1.09}
+      - {x: 1.13, y: -1.02}
+      - {x: 1.23, y: -0.96}
+      - {x: 1.37, y: -0.9}
+      - {x: 1.5, y: -0.82}
+      - {x: 1.63, y: -0.76}
+      - {x: 1.78, y: -0.69}
+      - {x: 1.88, y: -0.63}
+      - {x: 2.02, y: -0.57}
+      - {x: 2.1499999, y: -0.48999998}
+      - {x: 2.28, y: -0.42999998}
+      - {x: 2.4299998, y: -0.35999998}
+      - {x: 2.53, y: -0.29999998}
+      - {x: 2.6599998, y: -0.22999999}
+      - {x: 2.84, y: -0.14}
+      - {x: 2.9399998, y: -0.099999994}
+      - {x: 3.1799998, y: 0.04}
+      - {x: 3.24, y: 0.099999994}
+      - {x: 3.33, y: 0.049999997}
+      - {x: 3.46, y: 0.099999994}
+      - {x: 3.46, y: 0.25}
+      - {x: 2.48, y: 1.13}
+      - {x: 1.9, y: 1.64}
+      - {x: 1.76, y: 1.76}
+      - {x: 1.24, y: 2.23}
+      - {x: 1.18, y: 2.32}
+      - {x: 1.09, y: 2.32}
+      - {x: 0.44, y: 2}
+      - {x: 0.41, y: 1.9699999}
+      - {x: 0.04, y: 1.79}
+      - {x: -0.21, y: 1.67}
+      - {x: -0.24, y: 1.64}
+      - {x: -0.62, y: 1.4699999}
+      - {x: -0.89, y: 1.3199999}
+      - {x: -1.35, y: 1.1}
+      - {x: -1.54, y: 0.98999995}
+      - {x: -2.1599998, y: 0.68}
+      - {x: -2.19, y: 0.65}
+      - {x: -2.56, y: 0.47}
+      - {x: -2.81, y: 0.35}
+      - {x: -2.85, y: 0.31}
+      - {x: -3.1999998, y: 0.14}
+      - {x: -3.48, y: 0}
+      - {x: -3.48, y: -0.19999999}
+      - {x: -3.23, y: -0.35}
+      - {x: -3.12, y: -0.45}
+      - {x: -2.62, y: -0.9}
+      - {x: -2.1399999, y: -1.3399999}
+      - {x: -1.6899999, y: -1.73}
+      - {x: -1.16, y: -2.21}
+      - {x: -1.15, y: -2.22}
+      - {x: -1.0799999, y: -2.22}
+      - {x: -0.95, y: -2.09}
+      - {x: -0.71999997, y: -1.9499999}
+      - {x: -0.58, y: -1.89}
+  m_UseDelaunayMesh: 0
 --- !u!1 &3964906058544789907
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,9 +601,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3835414570787219689}
   - component: {fileID: 8530837172016294220}
-  m_Layer: 0
+  - component: {fileID: 4497031125646035602}
+  m_Layer: 20
   m_Name: Manse_Roof_Short_Back_1
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -348,7 +619,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -48.518, y: 2.359, z: 0.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5669991704268475073}
@@ -397,7 +668,7 @@ SpriteRenderer:
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 68830566acbc420439c73e7d9d3f8008, type: 3}
   m_Color: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 6.63, y: 2.72}
@@ -406,6 +677,131 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &4497031125646035602
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215315579561147784}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.63, y: 2.72}
+    newSize: {x: 6.63, y: 2.72}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.755, y: -0.96}
+      - {x: -0.625, y: -0.88}
+      - {x: -0.49499997, y: -0.82}
+      - {x: -0.235, y: -0.68}
+      - {x: -0.095, y: -0.62}
+      - {x: 0.024999999, y: -0.57}
+      - {x: 0.16499999, y: -0.48999998}
+      - {x: 0.305, y: -0.42}
+      - {x: 0.435, y: -0.34}
+      - {x: 0.565, y: -0.28}
+      - {x: 0.685, y: -0.22999999}
+      - {x: 0.825, y: -0.14999999}
+      - {x: 0.965, y: -0.08}
+      - {x: 1.095, y: 0}
+      - {x: 1.225, y: 0.06}
+      - {x: 1.385, y: 0.13}
+      - {x: 1.495, y: 0.19}
+      - {x: 1.635, y: 0.26}
+      - {x: 1.765, y: 0.34}
+      - {x: 1.905, y: 0.39999998}
+      - {x: 2.0249999, y: 0.45999998}
+      - {x: 2.055, y: 0.48}
+      - {x: 2.175, y: 0.53}
+      - {x: 2.315, y: 0.59999996}
+      - {x: 2.445, y: 0.68}
+      - {x: 2.575, y: 0.72999996}
+      - {x: 2.725, y: 0.82}
+      - {x: 2.835, y: 0.87}
+      - {x: 2.975, y: 0.94}
+      - {x: 3.105, y: 1.02}
+      - {x: 3.245, y: 1.0799999}
+      - {x: 3.245, y: 1.11}
+      - {x: 3.225, y: 1.15}
+      - {x: 3.155, y: 1.15}
+      - {x: 2.5149999, y: 1.17}
+      - {x: 2.165, y: 1.1899999}
+      - {x: 1.8249999, y: 1.1899999}
+      - {x: 1.625, y: 1.1999999}
+      - {x: 1.0849999, y: 1.1999999}
+      - {x: 0.955, y: 1.14}
+      - {x: 0.825, y: 1.06}
+      - {x: 0.575, y: 0.93}
+      - {x: 0.445, y: 0.87}
+      - {x: 0.295, y: 0.78999996}
+      - {x: 0.16499999, y: 0.71999997}
+      - {x: 0.015, y: 0.64}
+      - {x: -0.114999995, y: 0.57}
+      - {x: -0.265, y: 0.52}
+      - {x: -0.385, y: 0.45999998}
+      - {x: -0.515, y: 0.38}
+      - {x: -0.635, y: 0.31}
+      - {x: -0.79499996, y: 0.24}
+      - {x: -0.905, y: 0.19}
+      - {x: -1.025, y: 0.13}
+      - {x: -1.155, y: 0.06}
+      - {x: -1.305, y: -0.02}
+      - {x: -1.4649999, y: -0.11}
+      - {x: -1.685, y: -0.21}
+      - {x: -1.8449999, y: -0.29999998}
+      - {x: -1.9649999, y: -0.35999998}
+      - {x: -2.125, y: -0.45}
+      - {x: -2.355, y: -0.55}
+      - {x: -2.5149999, y: -0.64}
+      - {x: -2.605, y: -0.69}
+      - {x: -2.725, y: -0.75}
+      - {x: -2.855, y: -0.82}
+      - {x: -3.0349998, y: -0.91999996}
+      - {x: -3.135, y: -0.96999997}
+      - {x: -3.235, y: -1.04}
+      - {x: -3.235, y: -1.1}
+      - {x: -3.225, y: -1.16}
+      - {x: -3.185, y: -1.18}
+      - {x: -2.935, y: -1.1899999}
+      - {x: -2.665, y: -1.1999999}
+      - {x: -2.0049999, y: -1.22}
+      - {x: -1.4549999, y: -1.24}
+      - {x: -1.165, y: -1.24}
+      - {x: -1.105, y: -1.1}
+      - {x: -1.035, y: -1.11}
+      - {x: -0.895, y: -1.03}
+  m_UseDelaunayMesh: 0
 --- !u!1 &4766970487639910241
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,9 +896,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5022193373581138547}
   - component: {fileID: 3729818238212446674}
-  m_Layer: 0
+  - component: {fileID: 3473643505588094355}
+  m_Layer: 20
   m_Name: Manse_Short_Roof_Front_2
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -516,8 +913,8 @@ Transform:
   m_GameObject: {fileID: 4812399453610473392}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -41.748005, y: 5.7840004, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -41.685, y: 5.757, z: 0}
+  m_LocalScale: {x: -1.01, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2686464176326239703}
@@ -565,7 +962,7 @@ SpriteRenderer:
   m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: 9bc41e8227e486045bb113af1da06af0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 7.36, y: 4.78}
@@ -574,6 +971,117 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &3473643505588094355
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4812399453610473392}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 7.36, y: 4.78}
+    newSize: {x: 7.36, y: 4.78}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.45, y: -1.81}
+      - {x: -0.32, y: -1.75}
+      - {x: -0.17, y: -1.68}
+      - {x: -0.07, y: -1.62}
+      - {x: 0.07, y: -1.56}
+      - {x: 0.19999999, y: -1.48}
+      - {x: 0.32999998, y: -1.42}
+      - {x: 0.48, y: -1.35}
+      - {x: 0.58, y: -1.29}
+      - {x: 0.71999997, y: -1.23}
+      - {x: 0.84999996, y: -1.15}
+      - {x: 0.97999996, y: -1.09}
+      - {x: 1.13, y: -1.02}
+      - {x: 1.23, y: -0.96}
+      - {x: 1.37, y: -0.9}
+      - {x: 1.5, y: -0.82}
+      - {x: 1.63, y: -0.76}
+      - {x: 1.78, y: -0.69}
+      - {x: 1.88, y: -0.63}
+      - {x: 2.02, y: -0.57}
+      - {x: 2.1499999, y: -0.48999998}
+      - {x: 2.28, y: -0.42999998}
+      - {x: 2.4299998, y: -0.35999998}
+      - {x: 2.53, y: -0.29999998}
+      - {x: 2.6599998, y: -0.22999999}
+      - {x: 2.84, y: -0.14}
+      - {x: 2.9399998, y: -0.099999994}
+      - {x: 3.1799998, y: 0.04}
+      - {x: 3.24, y: 0.099999994}
+      - {x: 3.33, y: 0.049999997}
+      - {x: 3.46, y: 0.099999994}
+      - {x: 3.46, y: 0.25}
+      - {x: 2.48, y: 1.13}
+      - {x: 1.9, y: 1.64}
+      - {x: 1.76, y: 1.76}
+      - {x: 1.24, y: 2.23}
+      - {x: 1.18, y: 2.32}
+      - {x: 1.09, y: 2.32}
+      - {x: 0.44, y: 2}
+      - {x: 0.41, y: 1.9699999}
+      - {x: 0.04, y: 1.79}
+      - {x: -0.21, y: 1.67}
+      - {x: -0.24, y: 1.64}
+      - {x: -0.62, y: 1.4699999}
+      - {x: -0.89, y: 1.3199999}
+      - {x: -1.35, y: 1.1}
+      - {x: -1.54, y: 0.98999995}
+      - {x: -2.1599998, y: 0.68}
+      - {x: -2.19, y: 0.65}
+      - {x: -2.56, y: 0.47}
+      - {x: -2.81, y: 0.35}
+      - {x: -2.85, y: 0.31}
+      - {x: -3.1999998, y: 0.14}
+      - {x: -3.48, y: 0}
+      - {x: -3.48, y: -0.19999999}
+      - {x: -3.23, y: -0.35}
+      - {x: -3.12, y: -0.45}
+      - {x: -2.62, y: -0.9}
+      - {x: -2.1399999, y: -1.3399999}
+      - {x: -1.6899999, y: -1.73}
+      - {x: -1.16, y: -2.21}
+      - {x: -1.15, y: -2.22}
+      - {x: -1.0799999, y: -2.22}
+      - {x: -0.95, y: -2.09}
+      - {x: -0.71999997, y: -1.9499999}
+      - {x: -0.58, y: -1.89}
+  m_UseDelaunayMesh: 0
 --- !u!1 &6118710784316997222
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,9 +1092,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5078906390542532352}
   - component: {fileID: 8352247299890710399}
-  m_Layer: 0
+  - component: {fileID: 251225215164923414}
+  m_Layer: 20
   m_Name: Manse_Roof_Short_Back_2
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -600,8 +1109,8 @@ Transform:
   m_GameObject: {fileID: 6118710784316997222}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -39.627003, y: 6.83, z: 0.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -39.549, y: 6.807, z: 0.5}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9104600463983725931}
@@ -650,7 +1159,7 @@ SpriteRenderer:
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 68830566acbc420439c73e7d9d3f8008, type: 3}
   m_Color: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 6.63, y: 2.72}
@@ -659,6 +1168,131 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &251225215164923414
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6118710784316997222}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.63, y: 2.72}
+    newSize: {x: 6.63, y: 2.72}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.755, y: -0.96}
+      - {x: -0.625, y: -0.88}
+      - {x: -0.49499997, y: -0.82}
+      - {x: -0.235, y: -0.68}
+      - {x: -0.095, y: -0.62}
+      - {x: 0.024999999, y: -0.57}
+      - {x: 0.16499999, y: -0.48999998}
+      - {x: 0.305, y: -0.42}
+      - {x: 0.435, y: -0.34}
+      - {x: 0.565, y: -0.28}
+      - {x: 0.685, y: -0.22999999}
+      - {x: 0.825, y: -0.14999999}
+      - {x: 0.965, y: -0.08}
+      - {x: 1.095, y: 0}
+      - {x: 1.225, y: 0.06}
+      - {x: 1.385, y: 0.13}
+      - {x: 1.495, y: 0.19}
+      - {x: 1.635, y: 0.26}
+      - {x: 1.765, y: 0.34}
+      - {x: 1.905, y: 0.39999998}
+      - {x: 2.0249999, y: 0.45999998}
+      - {x: 2.055, y: 0.48}
+      - {x: 2.175, y: 0.53}
+      - {x: 2.315, y: 0.59999996}
+      - {x: 2.445, y: 0.68}
+      - {x: 2.575, y: 0.72999996}
+      - {x: 2.725, y: 0.82}
+      - {x: 2.835, y: 0.87}
+      - {x: 2.975, y: 0.94}
+      - {x: 3.105, y: 1.02}
+      - {x: 3.245, y: 1.0799999}
+      - {x: 3.245, y: 1.11}
+      - {x: 3.225, y: 1.15}
+      - {x: 3.155, y: 1.15}
+      - {x: 2.5149999, y: 1.17}
+      - {x: 2.165, y: 1.1899999}
+      - {x: 1.8249999, y: 1.1899999}
+      - {x: 1.625, y: 1.1999999}
+      - {x: 1.0849999, y: 1.1999999}
+      - {x: 0.955, y: 1.14}
+      - {x: 0.825, y: 1.06}
+      - {x: 0.575, y: 0.93}
+      - {x: 0.445, y: 0.87}
+      - {x: 0.295, y: 0.78999996}
+      - {x: 0.16499999, y: 0.71999997}
+      - {x: 0.015, y: 0.64}
+      - {x: -0.114999995, y: 0.57}
+      - {x: -0.265, y: 0.52}
+      - {x: -0.385, y: 0.45999998}
+      - {x: -0.515, y: 0.38}
+      - {x: -0.635, y: 0.31}
+      - {x: -0.79499996, y: 0.24}
+      - {x: -0.905, y: 0.19}
+      - {x: -1.025, y: 0.13}
+      - {x: -1.155, y: 0.06}
+      - {x: -1.305, y: -0.02}
+      - {x: -1.4649999, y: -0.11}
+      - {x: -1.685, y: -0.21}
+      - {x: -1.8449999, y: -0.29999998}
+      - {x: -1.9649999, y: -0.35999998}
+      - {x: -2.125, y: -0.45}
+      - {x: -2.355, y: -0.55}
+      - {x: -2.5149999, y: -0.64}
+      - {x: -2.605, y: -0.69}
+      - {x: -2.725, y: -0.75}
+      - {x: -2.855, y: -0.82}
+      - {x: -3.0349998, y: -0.91999996}
+      - {x: -3.135, y: -0.96999997}
+      - {x: -3.235, y: -1.04}
+      - {x: -3.235, y: -1.1}
+      - {x: -3.225, y: -1.16}
+      - {x: -3.185, y: -1.18}
+      - {x: -2.935, y: -1.1899999}
+      - {x: -2.665, y: -1.1999999}
+      - {x: -2.0049999, y: -1.22}
+      - {x: -1.4549999, y: -1.24}
+      - {x: -1.165, y: -1.24}
+      - {x: -1.105, y: -1.1}
+      - {x: -1.035, y: -1.11}
+      - {x: -0.895, y: -1.03}
+  m_UseDelaunayMesh: 0
 --- !u!1 &6398261959712120713
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,9 +1303,10 @@ GameObject:
   m_Component:
   - component: {fileID: 9104600463983725931}
   - component: {fileID: 4349327578968809270}
-  m_Layer: 0
+  - component: {fileID: 1893286386524865641}
+  m_Layer: 20
   m_Name: Manse_Roof_Short_Back_2_Behind
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -685,7 +1320,7 @@ Transform:
   m_GameObject: {fileID: 6398261959712120713}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.13799667, y: 0.065, z: 0}
+  m_LocalPosition: {x: 0.136, y: 0.049, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -734,7 +1369,7 @@ SpriteRenderer:
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 68830566acbc420439c73e7d9d3f8008, type: 3}
   m_Color: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 6.63, y: 2.72}
@@ -743,6 +1378,131 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &1893286386524865641
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6398261959712120713}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.63, y: 2.72}
+    newSize: {x: 6.63, y: 2.72}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.755, y: -0.96}
+      - {x: -0.625, y: -0.88}
+      - {x: -0.49499997, y: -0.82}
+      - {x: -0.235, y: -0.68}
+      - {x: -0.095, y: -0.62}
+      - {x: 0.024999999, y: -0.57}
+      - {x: 0.16499999, y: -0.48999998}
+      - {x: 0.305, y: -0.42}
+      - {x: 0.435, y: -0.34}
+      - {x: 0.565, y: -0.28}
+      - {x: 0.685, y: -0.22999999}
+      - {x: 0.825, y: -0.14999999}
+      - {x: 0.965, y: -0.08}
+      - {x: 1.095, y: 0}
+      - {x: 1.225, y: 0.06}
+      - {x: 1.385, y: 0.13}
+      - {x: 1.495, y: 0.19}
+      - {x: 1.635, y: 0.26}
+      - {x: 1.765, y: 0.34}
+      - {x: 1.905, y: 0.39999998}
+      - {x: 2.0249999, y: 0.45999998}
+      - {x: 2.055, y: 0.48}
+      - {x: 2.175, y: 0.53}
+      - {x: 2.315, y: 0.59999996}
+      - {x: 2.445, y: 0.68}
+      - {x: 2.575, y: 0.72999996}
+      - {x: 2.725, y: 0.82}
+      - {x: 2.835, y: 0.87}
+      - {x: 2.975, y: 0.94}
+      - {x: 3.105, y: 1.02}
+      - {x: 3.245, y: 1.0799999}
+      - {x: 3.245, y: 1.11}
+      - {x: 3.225, y: 1.15}
+      - {x: 3.155, y: 1.15}
+      - {x: 2.5149999, y: 1.17}
+      - {x: 2.165, y: 1.1899999}
+      - {x: 1.8249999, y: 1.1899999}
+      - {x: 1.625, y: 1.1999999}
+      - {x: 1.0849999, y: 1.1999999}
+      - {x: 0.955, y: 1.14}
+      - {x: 0.825, y: 1.06}
+      - {x: 0.575, y: 0.93}
+      - {x: 0.445, y: 0.87}
+      - {x: 0.295, y: 0.78999996}
+      - {x: 0.16499999, y: 0.71999997}
+      - {x: 0.015, y: 0.64}
+      - {x: -0.114999995, y: 0.57}
+      - {x: -0.265, y: 0.52}
+      - {x: -0.385, y: 0.45999998}
+      - {x: -0.515, y: 0.38}
+      - {x: -0.635, y: 0.31}
+      - {x: -0.79499996, y: 0.24}
+      - {x: -0.905, y: 0.19}
+      - {x: -1.025, y: 0.13}
+      - {x: -1.155, y: 0.06}
+      - {x: -1.305, y: -0.02}
+      - {x: -1.4649999, y: -0.11}
+      - {x: -1.685, y: -0.21}
+      - {x: -1.8449999, y: -0.29999998}
+      - {x: -1.9649999, y: -0.35999998}
+      - {x: -2.125, y: -0.45}
+      - {x: -2.355, y: -0.55}
+      - {x: -2.5149999, y: -0.64}
+      - {x: -2.605, y: -0.69}
+      - {x: -2.725, y: -0.75}
+      - {x: -2.855, y: -0.82}
+      - {x: -3.0349998, y: -0.91999996}
+      - {x: -3.135, y: -0.96999997}
+      - {x: -3.235, y: -1.04}
+      - {x: -3.235, y: -1.1}
+      - {x: -3.225, y: -1.16}
+      - {x: -3.185, y: -1.18}
+      - {x: -2.935, y: -1.1899999}
+      - {x: -2.665, y: -1.1999999}
+      - {x: -2.0049999, y: -1.22}
+      - {x: -1.4549999, y: -1.24}
+      - {x: -1.165, y: -1.24}
+      - {x: -1.105, y: -1.1}
+      - {x: -1.035, y: -1.11}
+      - {x: -0.895, y: -1.03}
+  m_UseDelaunayMesh: 0
 --- !u!1 &6703495981304965800
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,9 +1552,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5669991704268475073}
   - component: {fileID: 7232408101530591179}
-  m_Layer: 0
+  - component: {fileID: 6956711955426476970}
+  m_Layer: 20
   m_Name: Manse_Roof_Short_Back_1_Behind
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -808,7 +1569,7 @@ Transform:
   m_GameObject: {fileID: 7584401933831351517}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.13799667, y: 0.065, z: 0}
+  m_LocalPosition: {x: 0.136, y: 0.049, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -857,7 +1618,7 @@ SpriteRenderer:
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 68830566acbc420439c73e7d9d3f8008, type: 3}
   m_Color: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 6.63, y: 2.72}
@@ -866,6 +1627,131 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &6956711955426476970
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7584401933831351517}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.63, y: 2.72}
+    newSize: {x: 6.63, y: 2.72}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.755, y: -0.96}
+      - {x: -0.625, y: -0.88}
+      - {x: -0.49499997, y: -0.82}
+      - {x: -0.235, y: -0.68}
+      - {x: -0.095, y: -0.62}
+      - {x: 0.024999999, y: -0.57}
+      - {x: 0.16499999, y: -0.48999998}
+      - {x: 0.305, y: -0.42}
+      - {x: 0.435, y: -0.34}
+      - {x: 0.565, y: -0.28}
+      - {x: 0.685, y: -0.22999999}
+      - {x: 0.825, y: -0.14999999}
+      - {x: 0.965, y: -0.08}
+      - {x: 1.095, y: 0}
+      - {x: 1.225, y: 0.06}
+      - {x: 1.385, y: 0.13}
+      - {x: 1.495, y: 0.19}
+      - {x: 1.635, y: 0.26}
+      - {x: 1.765, y: 0.34}
+      - {x: 1.905, y: 0.39999998}
+      - {x: 2.0249999, y: 0.45999998}
+      - {x: 2.055, y: 0.48}
+      - {x: 2.175, y: 0.53}
+      - {x: 2.315, y: 0.59999996}
+      - {x: 2.445, y: 0.68}
+      - {x: 2.575, y: 0.72999996}
+      - {x: 2.725, y: 0.82}
+      - {x: 2.835, y: 0.87}
+      - {x: 2.975, y: 0.94}
+      - {x: 3.105, y: 1.02}
+      - {x: 3.245, y: 1.0799999}
+      - {x: 3.245, y: 1.11}
+      - {x: 3.225, y: 1.15}
+      - {x: 3.155, y: 1.15}
+      - {x: 2.5149999, y: 1.17}
+      - {x: 2.165, y: 1.1899999}
+      - {x: 1.8249999, y: 1.1899999}
+      - {x: 1.625, y: 1.1999999}
+      - {x: 1.0849999, y: 1.1999999}
+      - {x: 0.955, y: 1.14}
+      - {x: 0.825, y: 1.06}
+      - {x: 0.575, y: 0.93}
+      - {x: 0.445, y: 0.87}
+      - {x: 0.295, y: 0.78999996}
+      - {x: 0.16499999, y: 0.71999997}
+      - {x: 0.015, y: 0.64}
+      - {x: -0.114999995, y: 0.57}
+      - {x: -0.265, y: 0.52}
+      - {x: -0.385, y: 0.45999998}
+      - {x: -0.515, y: 0.38}
+      - {x: -0.635, y: 0.31}
+      - {x: -0.79499996, y: 0.24}
+      - {x: -0.905, y: 0.19}
+      - {x: -1.025, y: 0.13}
+      - {x: -1.155, y: 0.06}
+      - {x: -1.305, y: -0.02}
+      - {x: -1.4649999, y: -0.11}
+      - {x: -1.685, y: -0.21}
+      - {x: -1.8449999, y: -0.29999998}
+      - {x: -1.9649999, y: -0.35999998}
+      - {x: -2.125, y: -0.45}
+      - {x: -2.355, y: -0.55}
+      - {x: -2.5149999, y: -0.64}
+      - {x: -2.605, y: -0.69}
+      - {x: -2.725, y: -0.75}
+      - {x: -2.855, y: -0.82}
+      - {x: -3.0349998, y: -0.91999996}
+      - {x: -3.135, y: -0.96999997}
+      - {x: -3.235, y: -1.04}
+      - {x: -3.235, y: -1.1}
+      - {x: -3.225, y: -1.16}
+      - {x: -3.185, y: -1.18}
+      - {x: -2.935, y: -1.1899999}
+      - {x: -2.665, y: -1.1999999}
+      - {x: -2.0049999, y: -1.22}
+      - {x: -1.4549999, y: -1.24}
+      - {x: -1.165, y: -1.24}
+      - {x: -1.105, y: -1.1}
+      - {x: -1.035, y: -1.11}
+      - {x: -0.895, y: -1.03}
+  m_UseDelaunayMesh: 0
 --- !u!1 &7827673913546225220
 GameObject:
   m_ObjectHideFlags: 0

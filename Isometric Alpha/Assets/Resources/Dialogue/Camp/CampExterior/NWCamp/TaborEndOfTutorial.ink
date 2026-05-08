@@ -53,7 +53,7 @@ movePlayer(-9,0)
 setFacing(NE)
 activate({weftIndex})
 activate({taborIndex})
-activate({guardIndex})
+//activate({guardIndex})
 changeCamTarget({taborIndex})
 setNPCFacing({taborIndex},SW)
 
@@ -63,9 +63,30 @@ enableDialogueUI()
 
 prepItem()
 
-That was good work for this morning. I'll escort you down to the mess hall for lunch, and then we'll start our afternoon session.
+That was good work for this morning. The sun is high in the sky now, we'll be able to take our midday break soon.
 
 addXP(200,1)
+
+setToTrue(orderedIntoBodyPile)
+activateQuestStep(Comb the Bodies,Enter the body pile.)
+
+Before we do, however, we have a task we must complete that is a little less... comfortable.
+
+The lockdown has only been going for a few days, but already one of the branded has tested our willingness to enforce it. He snuck out after sundown last night, but was caught by last night's watch.
+
+He resisted arrest, and was killed. In the morning it was discovered that a ring of some value was burgled from the Director's household, but by then the guards that killed our only suspect had already thrown his body in the body pile.
+
+You may be able to guess what our next task is: we have unfortunately been ordered to comb the body pile for the thief's body and check it for the ring. 
+
+I waited until now to start our search because the body pile tends to attract scavengers, but the sun should be shining fully into the crevace where we dispose of the dead branded by now, so there will be fewer bats about. And I'll be coming with you, just in case.
+
+The ladder down to the body pile is just to the west of us. All work is over the quicker it is begun, so let's get to it and afterwards we'll break for our midday meal.
+
+->deactivateExtras
+
+/*
+
+I'll escort you down to the mess hall for lunch, and then we'll start our afternoon session.
 
 setNPCFacing({guardIndex},NE)
 changeCamTarget({guardIndex})
@@ -94,12 +115,6 @@ You did your work well today, I forgot you're new. It's the large building with 
 
 ->deactivateExtras
 
-=== 1c ===
-
-Don't come back until you've removed those boards.
-
-->Close
-
 === 2a ===
 
 activateQuestStep(A Situation Brews,Assess the situation.)
@@ -107,6 +122,14 @@ activateQuestStep(A Situation Brews,Assess the situation.)
 Of course there is. Looks like lunch will have to wait, Adéla wouldn't have sent for me if it wasn't urgent. I will run ahead and see what needs my attention. Meet me in the camp's northeast quarter and I'll put you to work on whatever has come up.
 
 ->deactivateExtras
+
+*/
+
+=== 1c ===
+
+Don't come back until you've removed those boards.
+
+->Close
 
 === deactivateExtras ===
 

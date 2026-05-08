@@ -34,6 +34,7 @@ public static class AlliedSummonStatsList
         allyStatsDict.Add(NPCNameList.guardVirag, new AlliedSummonStats(EnemyStatsList.getEnemyStats(NPCNameList.guardVirag)));
         allyStatsDict.Add(NPCNameList.guardPazman, new AlliedSummonStats(EnemyStatsList.getEnemyStats(NPCNameList.guardPazman)));
         allyStatsDict.Add(NPCNameList.overseerGaspar, new AlliedSummonStats(EnemyStatsList.getEnemyStats(NPCNameList.overseerGaspar)));
+        allyStatsDict.Add(NPCNameList.chiefTabor, new AlliedSummonStats(EnemyStatsList.getEnemyStats(NPCNameList.chiefTabor), partOfVolley: false));
         #endregion
         #endregion
 

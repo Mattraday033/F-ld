@@ -307,6 +307,18 @@ public static class DialogueList
                             Resources.Load<TextAsset>(DialogueNameList.kendePath)));
         #endregion
 
+        #region Body Pile
+
+        addDialogueToList(LocationNameList.bodyPile, NPCNameList.body+1,
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.chiefTabor,
+                                                        NPCNameList.weft
+                                                     },
+                            Resources.Load<TextAsset>(DialogueNameList.thiefsBodyPath)));
+
+        #endregion
+
         #region NECamp
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.leafPile,
@@ -830,6 +842,15 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.campNorthWest, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
         addDialogueToList(LocationNameList.campNorthWest, NPCNameList.wallPatch, wallPatchDialogue);
+
+        addDialogueToList(LocationNameList.campNorthWest, NPCNameList.chiefTabor+5,
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.chiefTabor+5,
+                                                        NPCNameList.weft+1,
+                                                        NPCNameList.guard+1
+                                                      },
+                            Resources.Load<TextAsset>(DialogueNameList.taborBodyPilePath)));
 
         #endregion
 

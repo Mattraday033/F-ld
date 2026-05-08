@@ -90,6 +90,14 @@ public static class QuestNameList
     public const string aSituationBrewsStepTitleOne = "Midday meal.";
     public const string aSituationBrewsStepTitleTwo = "Assess the situation.";
 
+    // Comb the Bodies
+    public const string combTheBodiesQuestTitle = "Comb the Bodies";
+
+    public const string combTheBodiesStepTitleZero = "Enter the body pile.";
+    public const string combTheBodiesStepTitleOne = "Find the thief's body.";
+    public const string combTheBodiesStepTitleTwo = "Exit the body pile.";
+    public const string combTheBodiesStepTitleThree = "Found the ring.";
+
     public const string convinceTheBrandedQuestTitle = "Convince the Branded";
 
     public const string convinceTheBrandedStepTitleZero = "Back to the North East.";

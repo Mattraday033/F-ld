@@ -86,3 +86,29 @@ public class TaborObservationTutorialScript : QuestStepActivationScript
         }
     }
 }
+
+public class ThiefsBodyScript : QuestStepActivationScript
+{
+    public override void runScript(GameObject target = null)
+    {
+        PlayerObject.getInstance().StartCoroutine(waitForWalkingThenStartDialogue());
+    }
+
+    private IEnumerator waitForWalkingThenStartDialogue()
+    {
+
+        yield return null;
+        yield return null;
+        yield return null;
+        yield return null;
+        yield return null;
+
+        while (PlayerOOCStateManager.currentActivity != OOCActivity.walking)
+        {
+            yield return null;
+        }
+
+        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inDialogue);
+        DialogueManager.getInstance().startDialogue(DialogueList.getDialogue(LocationNameList.bodyPile, NPCNameList.body + 1));
+    }
+}

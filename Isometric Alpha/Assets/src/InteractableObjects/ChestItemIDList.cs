@@ -69,6 +69,19 @@ public static class ChestItemIDList
 
         #endregion
 
+        #region Body Pile
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.bronzeDirkIndex));
+        list.Add(new ItemListID(ItemList.treasureItemListIndex, ItemList.smallCoinPurseIndex));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.minersHelmetIndex));
+        list.Add(new ItemListID(ItemList.questItemListIndex, ItemList.lovashiRingIndex));
+
+        chestItemIDList.Add(LocationNameList.bodyPile, list);
+
+        #endregion
+
         #region MineLvl_1-1c
 
         list = new List<ItemListID>();

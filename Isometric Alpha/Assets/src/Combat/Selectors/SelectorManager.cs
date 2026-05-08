@@ -1148,25 +1148,19 @@ public static class SelectionInfo
 
 		return target != null && Helpers.tagMatchesCriteria(target.combatSprite, SelectorManager.allyTagCriteria);
 	}
-	public static bool selectionIsPlayer(GridCoords coords)
+
+	public static bool selectionIsPartyMember(GridCoords coords)
 	{
 		Stats target = CombatGrid.getCombatantAtCoords(coords);
 
 		return target != null && target.combatSprite.tag.Equals(LayerAndTagManager.playerTag);
 	}
 
-	public static bool selectionIsPartyMember(GridCoords coords)
-	{
-		Stats target = CombatGrid.getCombatantAtCoords(coords);
-
-		return target != null && target.combatSprite.tag.Equals(LayerAndTagManager.npcTag);
-	}
-
 	public static bool selectedAllyCanAct(GridCoords coords)
 	{
         Stats actor = CombatGrid.getCombatantAtCoords(coords);
 
-		return selectionIsAlly(coords) && actor.isAlive() && !PlayerCombatActionManager.actorHasActionsInQueue(actor) && PlayerCombatActionCounterManager.playerHasActionsLeft();
+		return selectionIsPartyMember(coords) && actor.isAlive() && !PlayerCombatActionManager.actorHasActionsInQueue(actor) && PlayerCombatActionCounterManager.playerHasActionsLeft();
 	}
 
 }

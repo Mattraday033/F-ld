@@ -24,12 +24,28 @@ public static class ScriptOnLocationEntryList
         scriptOnLocationEntryDict = new Dictionary<string, List<PlayerInteractionScript>>();
         List<PlayerInteractionScript> list;
 
+        #region Body Pile
+        list = new List<PlayerInteractionScript>();
+
+        list.Add(new EnteredBodyPile());
+
+        scriptOnLocationEntryDict.Add(LocationNameList.bodyPile, list);
+        #endregion
+
         #region Manse Camp
         list = new List<PlayerInteractionScript>();
 
         list.Add(new EnteredCampManse());
 
         scriptOnLocationEntryDict.Add(LocationNameList.campManse, list);
+        #endregion
+
+        #region Camp North West
+        list = new List<PlayerInteractionScript>();
+
+        list.Add(new EnteredCampNorthWest());
+
+        scriptOnLocationEntryDict.Add(LocationNameList.campNorthWest, list);
         #endregion
 
         #region Manse-1F-1a
@@ -143,5 +159,39 @@ public class EnteredCampManse : PlayerInteractionScript
             GateAndChestManager.removeKey(manseFrontGateKey);
             Flags.setFlag(FlagNameList.manseFrontDoorsClosed, true);
         }
+    }
+}
+
+public class EnteredBodyPile : PlayerInteractionScript
+{
+    public override void runScript(GameObject target = null)
+    {
+        if (Flags.getFlag(FlagNameList.orderedIntoBodyPile) &&
+            !Flags.getFlag(FlagNameList.givenBodyPileEntryQuestStep))
+        {
+            QuestList.activateQuestStep(QuestNameList.combTheBodiesQuestTitle, QuestNameList.combTheBodiesStepTitleOne);
+            Flags.setFlag(FlagNameList.givenBodyPileEntryQuestStep, true);
+        }
+    }
+}
+
+public class EnteredCampNorthWest : PlayerInteractionScript
+{
+    public override void runScript(GameObject target = null)
+    {       
+        if (Flags.getFlag(FlagNameList.foundThiefsRing) &&
+            !Flags.getFlag(FlagNameList.enteredCampNorthWestAfterBodyPile))
+        {
+            DialogueManager.getInstance().StartCoroutine(waitTwoFramesThenEnterDialogue());
+        }
+    }
+
+    private IEnumerator waitTwoFramesThenEnterDialogue()
+    {
+        yield return null;
+        yield return null;
+
+        DialogueManager.getInstance().startDialogue(DialogueList.getDialogue(LocationNameList.campNorthWest, NPCNameList.chiefTabor + 5));
+        Flags.setFlag(FlagNameList.enteredCampNorthWestAfterBodyPile, true);
     }
 }

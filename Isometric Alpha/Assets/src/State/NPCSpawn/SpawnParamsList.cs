@@ -328,11 +328,15 @@ public static class SpawnParamsList
 
         #endregion
 
-        #region Stockhouse
+        #region Body Pile
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.bodyPile, NPCNameList.slave),
                                             new InteractableSpawnParams(spawnWhileHostile: spawnWhileHostile));
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.bodyPile, NPCNameList.body+1),
+                                            new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.orderedIntoBodyPile }),
+                                                                        new StopSpawningFlagList(new string[]{ FlagNameList.revoltStarted, FlagNameList.directorDefeated }),
+                                                                        spawnWhileHostile: spawnWhileHostile));
         #endregion
 
         #region Camp North East
@@ -813,6 +817,7 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.guard),
                                new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, 
                                                                                                                          FlagNameList.directorDefeated, 
+                                                                                                                         FlagNameList.skippedTutorialInNWCamp,
                                                                                                                          FlagNameList.canEnterCampNorthWest, 
                                                                                                                          FlagNameList.toldToGetMealByTabor
                                                                                                                          }),
@@ -824,7 +829,9 @@ public static class SpawnParamsList
                                                             stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
                                                                                                                          FlagNameList.revoltStarted, 
                                                                                                                          FlagNameList.directorDefeated,  
-                                                                                                                         FlagNameList.toldToGetMealByTabor
+                                                                                                                         FlagNameList.skippedTutorialInNWCamp,
+                                                                                                                         FlagNameList.toldToGetMealByTabor,
+                                                                                                                         FlagNameList.orderedIntoBodyPile
                                                                                                                          }),
                                                             spawnWhileHostile: spawnWhileHostile));
 
@@ -835,7 +842,8 @@ public static class SpawnParamsList
                                                             stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
                                                                                                                          FlagNameList.revoltStarted, 
                                                                                                                          FlagNameList.directorDefeated, 
-                                                                                                                         FlagNameList.startedTaborIntimidateTutorial
+                                                                                                                         FlagNameList.startedTaborIntimidateTutorial,
+                                                                                                                         FlagNameList.skippedTutorialInNWCamp
                                                                                                                          }),
                                                             spawnWhileHostile: spawnWhileHostile));
 

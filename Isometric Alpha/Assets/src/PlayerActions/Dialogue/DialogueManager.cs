@@ -453,6 +453,13 @@ public class DialogueManager : MonoBehaviour
 
             switch (buffer.Split("(")[0].ToLower())
             {
+
+                case "autosave":
+
+                    SaveHandler.autosave(MovementManager.getPlayerCell(), State.playerFacing.getFacing());
+
+                    continueStory();
+                    break;
                 case "keepdialogue":
 
                     keepOldDialogue = true;

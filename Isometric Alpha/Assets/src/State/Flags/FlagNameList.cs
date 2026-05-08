@@ -66,6 +66,12 @@ public static class FlagNameList
         public const string startedTaborLeadershipTutorial = "startedTaborLeadershipTutorial";
         public const string finishedTaborLeadershipTutorial = "finishedTaborLeadershipTutorial";
 
+        //body pile quest flags
+        public const string orderedIntoBodyPile = "orderedIntoBodyPile";
+        public const string givenBodyPileEntryQuestStep = "givenBodyPileEntryQuestStep";
+        public const string foundThiefsRing = "foundThiefsRing";
+        public const string enteredCampNorthWestAfterBodyPile = "enteredCampNorthWestAfterBodyPile";
+
         //hostage negotiations flags
         public const string toldToGetMealByTabor = "toldToGetMealByTabor";
         public const string situationStartedInNECamp = "situationStartedInNECamp";

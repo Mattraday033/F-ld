@@ -1,0 +1,15 @@
+{
+	"title": "Comb the Bodies",
+	"steps":[	
+				{"stepName":"Enter the body pile.","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"Chief Tabor has said one of the branded has been killed for pilfering something from the Director's household. It's our job to search the body pile for what was stolen. <B>I should enter the body pile via a ladder on the west side of the northwestern quarter of the camp.</B>"},
+                {"stepName":"Find the thief's body.","MapZone":"Camp","MapLocation":"Body Pile","journalDescription":"I have entered the body pile. <B>Now I just have to find the correct body.</B>"},
+                {"stepName":"Exit the body pile.","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"I found the thief's body. <B>I should head back up the ladder to the camp.</B>"},
+                {"stepName":"Found the ring.","MapZone":"","MapLocation":"","journalDescription":"I found the thief's ring for Chief Tabor."}
+            ],
+			
+	
+	"deathSteps":
+			[
+			]
+	
+}

@@ -38,6 +38,7 @@ VAR playerName = ""
 
 You successfully climb the ladder.
 
+autosave()
 changeLocation({destinationName})
     
     ->Close

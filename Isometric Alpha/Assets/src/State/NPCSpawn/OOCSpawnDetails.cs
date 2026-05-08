@@ -1775,9 +1775,9 @@ public class VaultableOrDestroyableObjectSpawnDetails : VaultableObjectSpawnDeta
 
 public class ChestSpawnDetails : QuestActivationObjectSpawnDetails
 {
-    private int index;
-    private Facing facing;
-    private string secretDoorFlag;
+    protected int index;
+    protected Facing facing;
+    protected string secretDoorFlag;
 
     public ChestSpawnDetails(int index, Vector3Int cellCoords, Facing facing, QuestStepActivationScript script = null, string secretDoorFlag = null) :
     base(generateName(index), cellCoords, script)
@@ -1792,7 +1792,7 @@ public class ChestSpawnDetails : QuestActivationObjectSpawnDetails
         return PrefabNames.chest;
     }
 
-    private static string generateName(int index)
+    public static string generateName(int index)
     {
         return NPCNameList.chest + "-" + index;
     }
@@ -1821,6 +1821,111 @@ public class ChestSpawnDetails : QuestActivationObjectSpawnDetails
     protected override void setScript(IQuestActivationObject questActivationObject)
     {
         questActivationObject.setScript(script);
+    }
+}
+
+public class SingleSpriteChestSpawnDetails: ChestSpawnDetails
+{
+    private bool withScale;
+
+    private string chestName;
+
+    private bool deadBody;
+    private bool weaponless;
+
+    public SingleSpriteChestSpawnDetails(int index, string chestName, Vector3Int cellCoords, Facing facing, string spriteName, QuestStepActivationScript script = null, string secretDoorFlag = null, bool withScale = true, bool deadBody = false, bool weaponless = false) :
+    base(index, cellCoords, facing, script: script, secretDoorFlag: secretDoorFlag)
+    {
+        this.chestName = chestName;
+
+        this.withScale = withScale;
+        this.spriteName = spriteName;
+        
+        this.deadBody = deadBody;
+        this.weaponless = weaponless;
+    }
+
+    public override Transform getParent()
+    {
+        if(withScale)
+        {
+            return AreaManager.getNPCParentWithScale();
+        } else
+        {
+            return AreaManager.getNPCParentWithoutScale();
+        }
+    }
+
+    private Sprite getSprite()
+    {
+        if(deadBody)
+        {
+            string folderPath = EnemyTypeFolderPathList.getEnemyTypeFolderPath(spriteName);
+
+            if(weaponless)
+            {
+                switch(facing)
+                {
+                    case Facing.NorthEast:
+                    case Facing.NorthWest:
+                        return Resources.Load<Sprite>(folderPath + CharacterAnimationType.Death_Back_Weaponless);
+                    default:
+                        return Resources.Load<Sprite>(folderPath + CharacterAnimationType.Death_Front_Weaponless);
+                }
+            } else
+            {
+                Sprite[] deathSprites = null;
+
+                switch(facing)
+                {
+                    case Facing.NorthEast:
+                    case Facing.NorthWest:
+                        deathSprites = Resources.LoadAll<Sprite>(folderPath + CharacterAnimationType.Death_Back);
+                        break;
+                    default:
+                        deathSprites = Resources.LoadAll<Sprite>(folderPath + CharacterAnimationType.Death_Front);
+                        break;
+                }
+
+                if(deathSprites == null || deathSprites.Length <= 0)
+                {
+                    deathSprites = Resources.LoadAll<Sprite>(folderPath + CharacterAnimationType.Death);
+                }
+
+                return deathSprites[deathSprites.Length - 1];
+            }
+        }
+
+        return Resources.Load<Sprite>(spriteName);
+    }
+
+    public override void spawnActions(GameObject chestGameObject)
+    {
+        Chest chest = chestGameObject.GetComponent<Chest>();
+
+        SingleSpriteChest singleSpriteChest = chestGameObject.AddComponent<SingleSpriteChest>();
+
+        singleSpriteChest.sprite = getSprite();
+        singleSpriteChest.chestName = chestName;
+        singleSpriteChest.mouseHoverCollider = chest.mouseHoverCollider;
+
+        NameTagGenerator nameTagGenerator = chestGameObject.GetComponent<NameTagGenerator>();
+
+        if(nameTagGenerator != null)
+        {
+            nameTagGenerator.nameSource = singleSpriteChest;
+        }
+
+        if(chest != null)
+        {
+            GameObject.Destroy(chest);
+        }
+
+        singleSpriteChest.populate(index, facing, getType());
+
+        setScript(singleSpriteChest);
+
+        singleSpriteChest.setSecretDoorFlag(secretDoorFlag);
     }
 }
 

@@ -9,13 +9,17 @@ using UnityEngine;
 public class AlliedSummonStats : VolleyParticipantStats
 {
 	
-	public AlliedSummonStats(EnemyStats enemyStats): 
+    private bool partOfVolley;
+
+	public AlliedSummonStats(EnemyStats enemyStats, bool partOfVolley = true): 
 		base(enemyStats.getName(), enemyStats.getTotalArmorRating(), enemyStats.getTotalHealth(), enemyStats.getCombatAction())
     {
         addTraits(enemyStats.traitContainer);
         setFoeTypeToSummoned();
         animationSuffixes = enemyStats.animationSuffixes;
         gendered = enemyStats.gendered;
+        
+        this.partOfVolley = partOfVolley;
     }
 
     private void setFoeTypeToSummoned()
@@ -50,8 +54,15 @@ public class AlliedSummonStats : VolleyParticipantStats
         return PartyStats.getVolleyAccuracy();
     }
 
+	public override bool isPartOfVolley()
+	{
+		return partOfVolley;
+	}
+
     public override void spawningActions()
     {
         Dexterity.addExitStrategy(this);
+
+        combatSprite.tag = LayerAndTagManager.npcTag;
     }
 }

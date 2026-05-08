@@ -14,9 +14,6 @@ public static class TestScript
         // State.debugStopMonsterSpawning = true;
         // State.debugDiscoverAllLocations = true;
         // State.allLocationsFastTravelAvailable = true;
-
-        // Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.signalTorchIndex));
-        
         // State.debugRetreatAutoSucceed = true;
         // State.enableGridDebugger = true;
 
