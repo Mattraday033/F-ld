@@ -1008,6 +1008,7 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
+                case "faceplayer":
                 case "faceoppositeplayer":
 
                     camTargetIndex = getArgumentInt(buffer, Constants.indexZero);

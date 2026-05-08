@@ -457,7 +457,7 @@ setToTrue(haveQuestForRewardFromTabor)
 
 activateQuestStep(Tabor's Reward,Meet with Quartermaster Emese)
 
-I have informed the Quartermaster Emese that you are to be given the reward I promised you. You can find her in the stockhouse next to the mine entrance, in the southwest corner of the camp.
+I have informed Quartermaster Emese that you are to be given the reward I promised you. You can find her in the stockhouse next to the mine entrance, in the southwest corner of the camp.
 
 }
 

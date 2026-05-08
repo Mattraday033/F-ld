@@ -1,7 +1,7 @@
 {
 	"title": "Tabor's Reward",
 	"steps":[	
-                {"stepName":"Meet with Quartermaster Emese","MapZone":"Camp","MapLocation":"MineEntranceCamp","journalDescription":"<B>I need to walk down to the mine entrance in the camp's southwest and enter the mine's stockhouse. The quartermaster on duty there will give me my reward.</B>"},
+                {"stepName":"Meet with Quartermaster Emese","MapZone":"Camp","MapLocation":"Stockhouse","journalDescription":"<B>I need to walk down to the mine entrance in the camp's southwest and enter the mine's stockhouse. The quartermaster on duty there will give me my reward.</B>"},
                 {"stepName":"Reward received.","MapZone":"","MapLocation":"","journalDescription":"Quartermaster Emese gave me my reward."}
             ],
 			

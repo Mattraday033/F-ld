@@ -39,6 +39,8 @@ searchInventoryFor(hasIronNugget,{lostIronNuggetName})
 
 === 1a ===
 
+setNPCFacing({urosIndex},SE)
+
 \*The branded slave mutters under his breath.* Where is it? I know I hid it right here.
 
     +Looking for something?
@@ -50,6 +52,8 @@ searchInventoryFor(hasIronNugget,{lostIronNuggetName})
 
 ~startledUros = true
 setToTrue(startledUros)
+
+facePlayer({urosIndex})
 
 Oh! You startled me. I ain't lookin' for nothin', just movin' boxes around.
 
@@ -71,7 +75,7 @@ Oh! You startled me. I ain't lookin' for nothin', just movin' boxes around.
     +Don't lie to me. What did you hide? Was it valuable?
         I ain't gonna say nothin' to yer like. Now get!
         ->1c
-    +Tell me or I'm going to call the Quartermaster over. We'll see how interested she is in a slave stashing goods in her stockhouse.
+    +Tell me or I'm going to call the quartermaster over. We'll see how interested she is in a slave stashing goods in her stockhouse.
         ->1h
     +Fine, nevermind then.
         activateQuestStep(Stockhouse Stash, Uros is hiding something.)
@@ -181,7 +185,7 @@ changeCamTarget({emeseIndex})
 
 \*Emese looks around the stockhouse.*
 
-I believe it, you're clearly behind on your tasks. Wait for your lashing outside. If you're not there when I come looking for you, it'll be to the pit with you.
+You're clearly behind on your tasks. Wait for your lashing outside. If you're not there when I come looking for you, it'll be to the pit with you.
 
 fadeToBlack(true, false)
 

@@ -22,7 +22,6 @@ public static class ChestItemIDList
         chestItemIDList.Add(LocationNameList.campNorthEast, list);
 
         #endregion
-
         #region SECamp
 
         list = new List<ItemListID>();
@@ -32,7 +31,6 @@ public static class ChestItemIDList
         chestItemIDList.Add(LocationNameList.campSouthEast, list);
 
         #endregion
-
         #region NWCamp
 
         list = new List<ItemListID>();
@@ -68,7 +66,15 @@ public static class ChestItemIDList
         chestItemIDList.Add(LocationNameList.guardHouseSouthWest, list);
 
         #endregion
+        #region Mess Hall
 
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.usableItemListIndex, ItemList.rationsIndex, Constants.sizeFive));
+
+        chestItemIDList.Add(LocationNameList.messHall, list);
+
+        #endregion
         #region Body Pile
 
         list = new List<ItemListID>();

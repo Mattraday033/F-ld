@@ -36,7 +36,7 @@ searchInventoryFor(hasBlastingJelly,Blasting Jelly)
 
 changeCamTarget(1)
 
-I see you're back. Were you successful in enlisting the other guards?
+I see you're back. Were you successful?
     
 {
 - hasBlastingJelly:

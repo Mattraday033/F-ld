@@ -10,7 +10,8 @@
       "Bash(code --list-extensions --show-versions)",
       "Bash(python -c \"from PIL import Image; print\\('PIL available'\\)\")",
       "Bash(pip install:*)",
-      "Bash(python fix_outlines.py)"
+      "Bash(python fix_outlines.py)",
+      "Bash(sort -t: -k2 -n -u)"
     ]
   }
 }

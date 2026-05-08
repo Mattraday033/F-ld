@@ -259,10 +259,12 @@ public static class OOCSpawnDetailsList
         #region Mess Hall
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.noBrand+1, new Vector3Int(2, 12), LocationNameList.messHall, facing: Facing.NorthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.noBrand+1, new Vector3Int(3, 13), LocationNameList.messHall, facing: Facing.SouthEast));
 
         list.Add(new ShopkeeperSpawnDetails(NPCNameList.kende, new Vector3Int(3, 10), LocationNameList.messHall, extraSpaces: new Vector3Int[] { new Vector3Int(3, 9) }, facing: Facing.SouthEast));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(4,8), facing: Facing.NorthWest));
+
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(4, 13), Facing.SouthWest));
 
         oocSpawnDetailsDict.Add(LocationNameList.messHall, list);
         #endregion

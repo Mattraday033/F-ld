@@ -1826,7 +1826,7 @@ activateQuestStep(Finding Nándor, Find Nándor.)
 
 I was going to ask you to enter the mine once we had all of the other pieces in place. But now that everything has fallen apart you volunteer to go? If you would do this for us, you would be a hero to all of the branded, even more than you already are. 
 
-The chances that Nándor is still breathing are slim. But our chances of escaping without him to lead us are slimmer still. The other branded will not rise up if they believe the plan won't succeed, and he is the only one who can convince them to fight for their lives.
+The chance that Nándor is still breathing is slim. But our chances of escaping without him to lead us are slimmer still. The other branded will not rise up if they believe the plan won't succeed, and he is the only one who can convince them to fight for their lives.
 
 If you do not believe you are ready to face what is down there, I would recommend looking around the camp for any advantage you can bring with you. Perhaps if you find a way to convince the guards to let you into the mine, they may let you bring an ally or two with you. However, if you cannot, sneaking yourself and others inside may be your only option. And thank you.
 

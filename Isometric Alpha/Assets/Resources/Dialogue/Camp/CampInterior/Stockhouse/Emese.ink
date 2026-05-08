@@ -124,7 +124,7 @@ A water clock has two components: a big cup with a spout, and a little cup. Firs
 
 Now, place the larger cup on the barrel, with the spout pouring into the small cup. Do not let the water spill into the barrel! This will ignite the jelly, and you'll just be a smear on the wall.
 
-If you did it right, you have until the water from the big cup fills the small cup to over flowing before the barrel will ignite, or about five minutes. Use that time to get somewhere safe. 
+If you did it right, you have until the water from the big cup fills the small cup to overflowing before the barrel will ignite, or about five minutes. Use that time to get somewhere safe. 
 
 prepItem()
 {

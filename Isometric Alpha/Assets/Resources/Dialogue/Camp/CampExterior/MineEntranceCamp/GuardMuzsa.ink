@@ -18,6 +18,7 @@ VAR snitchedOnUros = false
 VAR foughtMuzsaAfterSnitchedOnUros = false
 
 VAR mentionedGoingInsideMine = false
+VAR toldToFindNandor = false
 
 VAR hasDirectorsSeal = false
 
@@ -94,6 +95,12 @@ You're new, so I'll give you the quick version of what happened. Some critters d
 Yeah, some kind of worms or whatever. We'll get rid of them soon enough but until then we all get to sit around with our thumbs up our asses in this lockdown.
 
 Which reminds me: what are you doing out of quarters?
+
+{
+-hasDirectorsSeal:
+    +I am on a task for the Director. I need to enter the mines. \*Show Director's Seal.*
+        ->5a
+}
 
 {
 -givenTaskByLaszlo:
@@ -174,6 +181,12 @@ Whatever. Now get out of here before I report you for laziness.
 === 1g ===
 
 You're back. Are you finished helping László yet?
+
+{
+-hasDirectorsSeal:
+    +I am on a task for the Director. I need to enter the mines. \*Show Director's Seal.*
+        ->5a
+}
 
     +I'm able to run your errand now.
         ->1e
@@ -280,10 +293,12 @@ How about this. Prove to me you can be trusted with a quick task and I'll enable
 
 === 2c ===
 
-~mentionedBadReasonForGoingInsideMine = true
 setToTrue(mentionedBadReasonForGoingInsideMine)
 
-activateQuestStep(Múzsa's Sweet Tooth, A dead end.)
+{
+-toldToFindNandor:
+    activateQuestStep(Múzsa's Sweet Tooth, A dead end.)
+}
 
 Well that's too bad, because I'm not getting in trouble just so you can take a look around in there. On your way, slave.
 
@@ -294,6 +309,12 @@ Well that's too bad, because I'm not getting in trouble just so you can take a l
 searchInventoryFor(hasCandy,Candy)
 
 You're back? What part of 'on your way' did you not understand?
+
+{
+-hasDirectorsSeal:
+    +I am on a task for the Director. I need to enter the mines. \*Show Director's Seal.*
+        ->5a
+}
 
 {
 -hasCandy:
