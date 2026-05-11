@@ -18,6 +18,19 @@ public class SpriteOutline
     private SpriteRenderer spriteRenderer;
     private Transform spriteTransform;
 
+    private float _NormalZPos;
+    public float normalZPos
+    {
+        get
+        {
+            return _NormalZPos;
+        }    
+        set
+        {
+            _NormalZPos = value;
+            setSpriteTransformZPos();
+        }
+    }
 
     public SpriteOutline()
     {
@@ -44,19 +57,12 @@ public class SpriteOutline
             return;
         }
 
-        spriteTransform = spriteRenderer.transform;
-
-        if((CombatStateManager.inCombat && spriteTransform.position.z > 0f) || 
-            (!CombatStateManager.inCombat && spriteTransform.position.z != 0f))
-        {
-            Vector3 oldPos = spriteTransform.position;
-            spriteTransform.position = new Vector3(oldPos.x, oldPos.y, 0f);
-        } 
 
         outlineMaterial.color = color;
 
         spriteRenderer.material = outlineMaterial;
 
+        setSpriteTransformZPos();
 
         try
         {
@@ -71,6 +77,23 @@ public class SpriteOutline
         {
             Debug.LogError("Caught exception null sprite");
         }
+    }
+
+    private void setSpriteTransformZPos()
+    {
+        spriteTransform = spriteRenderer.transform;
+
+        if(spriteTransform == null)
+        {
+            return;
+        }
+
+        if((CombatStateManager.inCombat && spriteTransform.position.z > normalZPos) || 
+            (!CombatStateManager.inCombat && spriteTransform.position.z != normalZPos))
+        {
+            Vector3 oldPos = spriteTransform.position;
+            spriteTransform.position = new Vector3(oldPos.x, oldPos.y, normalZPos);
+        } 
     }
 
     private static void setMaterialOutlineSize(Material material, float sizeX, float sizeY)

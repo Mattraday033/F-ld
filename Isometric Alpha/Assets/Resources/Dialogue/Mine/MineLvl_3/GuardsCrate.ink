@@ -31,11 +31,21 @@ VAR mineLvl3ToldPazmanToEatShit = false
 VAR mineLvl3ThreatenedGaspar = false
 VAR mineLvl3GuardsInParty = false
 
+VAR metBrandedSurvivors = false
+VAR mineLvl3MetMinersButDidNotAcceptHelp = false
+VAR mineLvl3CarterAndNandorInParty = false
 
 VAR mineLvl3SpeakingFromGuardCrates = false
 VAR mineLvl3SpeakingFromBrokenGate = false
 
 VAR toldPazmanAboutSealingBreach = false
+
+VAR sentIntoMineByDirector = false
+VAR mentionedDirectorGuardCrates = false
+
+VAR givenTaskByLaszlo = false
+
+VAR gasparMentionedConflictBetweenHimAndMarcos = false
 
 VAR playerName = ""
 
@@ -93,10 +103,236 @@ A slave? And not one of the other survivors. I don't recognize you. Explain why 
     +I'm helping Guard Márcos seal the breach that the worms are coming through. We need your help and some blasting jelly.
         ->1k
 }
+
+{
+-sentIntoMineByDirector:
+    +The Director has sent me on a mission to close the tunnel the worms are coming from. I was not expecting to find survivors. *Show Director's Seal*
+        ->showDirectorsSeal_1a
+-givenTaskByLaszlo:
     +I was let out of my hut by Guard László and I was trying to be helpful by looking for survivors. *Show badge*
         ->1i
-    *I got lost.
+}
+
+    +I got lost.
         ->1c
+
+=== showDirectorsSeal_1a ===
+
+setToTrue(mentionedDirectorGuardCrates)
+
+The Director's Seal? We believed we would be rescued by the camp's guards, not by some branded. Not that I'm ungrateful, mind you. Come with me, I'll show you to the overseer.
+
+{
+-mineLvl3SpeakingFromBrokenGate:
+        ->2a
+-else:
+    +Very well. I need to obtain some of your blasting jelly anyways.
+        ->2a
+    +Give me but a moment. I need to clear other sections of the mine first.
+        ->Close
+}
+
+=== showDirectorsSeal_1b ===
+
+changeCamTarget({gasparIndex})
+
+Humiliating that I should be rescued by one of the branded. Things must be dire on the surface indeed.
+
+->showDirectorsSeal_1ba
+
+=== showDirectorsSeal_1ba ===
+
+    +The entire camp is under lockdown. It seems the Director couldn't spare the personnel.
+        ->showDirectorsSeal_1ca
+    +I'm starting to think I was sent because of how expendible I am.
+        ->showDirectorsSeal_1cb
+
+=== showDirectorsSeal_1ca ===
+
+I see. I am eager to return to camp and learn what we can do to assist.
+
+    +We cannot return yet. Your rescue was not my main goal. I was trained in the use of blasting jelly. I will need one of your barrels to collapse the entrance the worms used.
+        ->showDirectorsSeal_1d
+
+=== showDirectorsSeal_1cb ===
+
+In that respect, the Director was wise to send you. To have made it down to this level would have been commendable even from members of the camp guard. But your loss would have been no reason to shed tears.
+
+    +\*Under your breath.* And I would not have cried to have found a stockroom full of corpses. 
+        What was that, slave?
+        ->showDirectorsSeal_1cba
+    +My mission is not yet completed. I was trained in the use of blasting jelly. I will need one of your barrels to collapse the entrance the worms used.
+        ->showDirectorsSeal_1d
+
+=== showDirectorsSeal_1cba ===
+
+    +I was saying that my mission is not yet completed. I was trained in the use of blasting jelly. I will need one of your barrels to collapse the entrance the worms used.
+        ->showDirectorsSeal_1d
+
+=== showDirectorsSeal_1d ===
+
+Preposterous. I will not allow a branded to be given charge of a barrel of blasting jelly. Your independence is at an end: you will accompany us as I lead this squad toward the breach, but you will be under my supervision. And a member of my squad will perform the demolition.
+    ->showDirectorsSeal_1da
+
+=== showDirectorsSeal_1da ===
+
+    +I was given orders to seal the breach, and that's what I intend to do. Unless you plan to explain to the Director why you stood in my way. <Cha {charisma}/3>
+        {
+        -charisma >= 3:
+            prepItem()
+
+            \*Gáspár considers you for a moment, then relents.* I can see that you are determined to do your duty. Chief Tabor would be quite proud to know one of his pupils was so dedicated.
+
+            giveItem(3,5,1)
+
+            You will seal the breach, but we will keep an eye on you as you handle the jelly. If you end up dying in the process, then we will simply have to make up for your failure afterwards.
+                ->showDirectorsSeal_1e
+        -else:
+            A slave who expects the Director would stoop to take their side over mine? \*Gáspár gives a deep laugh, straight from the gut.* I have never met a branded like you. Confident, yet so very confused about their place in this camp.
+
+            ->showDirectorsSeal_1da
+        }
+    +The Director has not learned of your survival yet. Test me, and he never will. <Str {strength}/3>
+        {
+        -strength >= 3:
+            ->2ca
+        -else:
+        ->insultGaspar("You dare threaten me? I don't care what you've achieved, a branded like you is a danger to the morale of the camp, and you will be dealt with accordingly!")
+        }
+    +You just want to take credit for what I've accomplished!
+
+        Everything you accomplish is in service to the Confederation! Credit is not your concern, and neither are rewards! You serve, and then you die, like the criminal you are!
+
+        ->showDirectorsSeal_1da
+    +Your ineptitude lost the Director this level. I don't trust your ability to take it back.
+        ->insultGaspar("Your trust is not required, just your obedience! Show me the respect deserved by an overseer, or submit to punishment!")
+    +If recognizing your leadership will allow us to continue apace, then so be it.
+        It is well for you how readily you return to your natural place. 
+        ->showDirectorsSeal_1e
+
+
+=== insultGaspar(answer) ===
+
+playAnimation({gasparIndex},Idle_Front)
+
+{answer}
+
+changeCamTarget({rekaIndex})
+
+Overseer, with respect, please forgive this branded. Surely our gratitude to them can outweigh a single remark said in haste?
+
+changeCamTarget({gasparIndex})
+
+I will forgive them if they recognize my leadership. Are you willing to follow my instruction, slave?
+
+->showDirectorsSeal_1eaa
+
+=== showDirectorsSeal_1e ===
+
+{
+-mineLvl3CarterAndNandorInParty:
+    +I recruited some of the other survivors from this floor. They will help us defeat the worms.
+        ->lookForSurvivors_1b(->lookForSurvivors_1c)
+-metBrandedSurvivors:
+    +I found some other survivors. Their camp is not far from here.
+        ->lookForSurvivors_1b(->lookForSurvivors_1ba)
+-else:
+    +Are you the only group of survivors on this floor?
+        ->showDirectorsSeal_1ea
+}
+    +Whatever. I'm ready to move out when you lot are.
+        ->2ea_MakeForBreach
+
+=== showDirectorsSeal_1ea ===
+setToTrue(gasparMentionedConflictBetweenHimAndMarcos)
+
+When we fought clear of the initial swarm of worms, we found ourselves trapped by the gate to the floor above which was closed when the rest of the guards evacuated. At the time, we had about a dozen branded with us.
+
+I decreed that the branded were to find their own shelter, to conserve the food in this stockroom. A guard named Márcos disobeyed my order and went with the other group. I am unaware of their fate.
+
+    +So many lives, snuffed out at your whim. You're a disgrace to your people, Gáspár.
+        That is 'Overseer' Gáspár, and you will show me respect or your will cease breathing!
+        ->showDirectorsSeal_1eaa
+    +Perhaps we should look for more survivors. Their assistance could make the difference in the fighting to come.
+        ->lookForSurvivors_1a
+    +It sounds like they are likely dead.
+        I agree. It would be a waste of our time to scour this floor looking for their bodies.
+        ->2ea_MakeForBreach
+
+=== showDirectorsSeal_1eaa ===
+
+    +I had hoped you'd give me an excuse to kill you. <Combat>
+        ->combatPrep
+    +\*Incline your head.* Of course, overseer. 
+        Good. Do not make a habit of testing my patience, slave. The Director's Seal or no, you will adhere to rank in my presence.
+        ->2ea_MakeForBreach
+
+=== showDirectorsSeal_1eab ===
+
+That would only be waste of time and effort. Márcos was hurt when he disobeyed me, and his charges were only equipped with tools and rags. They are certainly dead and mouldering by now.
+
+    +I made it to you with less. There's at least a chance they survived.
+        ->lookForSurvivors_1a
+    +Maybe you are right. It would not be worth our time to look for them.
+        Good. With that settled, we shall break camp and make for the breach.
+        ->2ea_MakeForBreach
+
+=== lookForSurvivors_1a ===
+
+changeCamTarget({rekaIndex})
+
+Overseer, with respect, the slave has a point. There could be others who could help us while we plug the gap the worms are coming through.
+
+changeCamTarget({gasparIndex})
+
+\*Gáspár sighs.* Very well. We shall make a cursory search for other survivors before we make our final push.
+
+        ->2eb_LookForSurvivors
+
+=== lookForSurvivors_1b(->divert) ===
+
+changeCamTarget({pazmanIndex})
+
+Márcos, that magnificent bastard. Did he manage to protect the other branded after all?
+
+changeCamTarget({gasparIndex})
+setNPCFacing({gasparIndex},NW)
+
+Pázmán, you will not show admiration for disobedient traitors.
+
+setNPCFacing({gasparIndex},SW)
+
+    ->divert
+
+=== lookForSurvivors_1ba ===
+
+setNPCFacing({gasparIndex},SW)
+
+As for you, slave, where did you see these survivors?
+
+    +North west of here. It's not that far, and I've cleared most of the worms between here and there.
+        changeCamTarget({gasparIndex})
+
+        Very well. We shall make a cursory search for other survivors before we make our final push. You will lead us to where you saw this camp and we will see what we find.
+
+        ->2eb_LookForSurvivors
+
+=== lookForSurvivors_1c ===
+
+We shall fight beside them for now, but Márcos's disobedience will be declared to the Director when we return to the surface. Let us make no more delays, I am eager to be rid of these worms, and this mine.
+
+    ->2ea_MakeForBreach
+
+=== showDirectorsSeal_1f ===
+
+That would only be waste of time and effort. Márcos was hurt when he disobeyed me, and his charges were only equipped with tools and rags. They are certainly dead and mouldering by now.
+
+    +I made it to you with less. There's at least a chance they survived.
+        ->lookForSurvivors_1a
+    +Maybe you are right. It would not be worth our time to look for them.
+        Good. With that settled, we shall break camp and make for the breach.
+        ->2ea_MakeForBreach
+
 
 === 1c ===
 
@@ -259,7 +495,13 @@ changeCamTarget({gasparIndex})
 
 changeCamTarget({introducerIndex})
 
-I'm certain sir. This means the gate is open. We can leave!
+{
+-mentionedDirectorGuardCrates:
+I'm certain, sir. They bear the Director's Seal. They have been sent to end the worm menace.
+    ->showDirectorsSeal_1b
+-else:
+I'm certain, sir. This means the gate is open. We can leave!
+}
     
 {
 -mineLvl3ToldAboutJelly || mineLvl3ToldAboutJelly:
@@ -321,7 +563,7 @@ changeCamTarget({gasparIndex})
 
 changeCamTarget({gasparIndex})
 
-\*Gáspár's eyes dart to the other guards. He reaches for the whip on his belt, but  his hand lingers on the hilt as he thinks better of it. Finally, he shakes his head.* Fine. But since you're so eager, you get to lead the way. Don't worry, when you inevitably get swarmed by the buggers we'll step over your corpse and finish the job.
+\*Gáspár's eyes dart to the other guards. He reaches for the whip on his belt, but his hand lingers on the hilt as he thinks better of it. Finally, he shakes his head.* Fine. But since you're so eager, you get to lead the way. Don't worry, when you inevitably get swarmed by the buggers we'll step over your corpse and finish the job.
     ->2e
 
 === 2d ===
@@ -333,6 +575,19 @@ Sir, the slave is right. We should strike now while we can still walk around dow
 changeCamTarget({gasparIndex})
 
 \*The overseer kneads his eyebrows.* Fine, everyone grab your gear and get ready to move. Slave, since you're so eager, you get to lead the way. Don't worry, when you inevitably get swarmed by the buggers we'll step over your corpse and finish the job.
+
+->2e
+
+=== 2ea_MakeForBreach ===
+
+activateQuestStep(No Good Deed,Make for the breach.)
+
+->2e
+
+=== 2eb_LookForSurvivors ===
+
+setToTrue(mineLvl3ToldToFindMarcos)
+activateQuestStep(No Good Deed,Look for survivors.)
 
 ->2e
 
@@ -482,6 +737,8 @@ I don't see Guard Márcos with you. Did you find his corpse or are you just tryi
 I'll allow you to ask your questions, but make them quick. I am loathe to stay here any longer than I must.
 
     +Who is Guard Márcos?
+    
+        setToTrue(gasparMentionedConflictBetweenHimAndMarcos)
         keepDialogue()
 
         He's one of my men. I ordered him to leave the branded that survived our first encounters with the worms, but he refused. He's either still out there somewhere, or he's worm food, but my superiors will want to know what happened to him. It's your job to bring me the answer.

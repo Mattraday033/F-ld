@@ -154,8 +154,10 @@ public static class QuestNameList
     public const string findGuardMarcosQuestTitle = "Find Guard Márcos";
 
     public const string findGuardMarcosStepTitleZero = "Find Guard Márcos";
-    public const string findGuardMarcosStepTitleOne = "Márcos has been found.";
-    public const string findGuardMarcosStepTitleTwo = "Returned to Gáspár.";
+    public const string findGuardMarcosStepTitleOne = "Find Guard Márcos1";
+    public const string findGuardMarcosStepTitleTwo = "Márcos has been found.";
+    public const string findGuardMarcosStepTitleThree = "Márcos has been found.1";
+    public const string findGuardMarcosStepTitleFour = "Returned to Gáspár.";
 
     // Finding Nándor
     public const string findingNandorQuestTitle = "Finding Nándor";

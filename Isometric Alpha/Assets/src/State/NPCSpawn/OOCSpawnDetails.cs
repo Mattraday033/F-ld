@@ -1217,6 +1217,10 @@ public class DependantSpawnDetails : NPCWithAnimationsSpawnDetails
             npc.transform.localScale = Constants.scaleChange;
         }
 
+        NameTagGenerator nameTagGenerator = npc.GetComponent<NameTagGenerator>();
+
+        nameTagGenerator.getSpriteOutline().normalZPos = -5f;
+
         // npc.transform.position = worldPos;
 
         base.spawnActions(npc);

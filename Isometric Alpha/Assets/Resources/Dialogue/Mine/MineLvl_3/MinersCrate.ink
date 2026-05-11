@@ -24,10 +24,15 @@ VAR saidYouMustBeJoking = false
 VAR mentionedKastorMinersCrates = false
 VAR mentionedDirectorMinersCrates = false
 VAR askedWhoMarcosIsMinersCrates = false
+VAR metBrandedSurvivors = false
+
+VAR gasparMentionedConflictBetweenHimAndMarcos = false
 
 VAR nandorSomethingToDiscuss = false
 
 VAR hostagesDead = false
+VAR mineLvl3GuardsInParty = false
+VAR hasBlastingJelly = false
 
 VAR formationScreenTutorialKey = "Formation Tutorial"
 
@@ -42,6 +47,9 @@ VAR marcosDialogueIndex = 0
 VAR backFromMarcosDialogue = false
 
 VAR playerName = ""
+
+setToTrue(metBrandedSurvivors)
+searchInventoryFor(hasBlastingJelly,Blasting Jelly)
 
 {
 -mineLvl3MetMinersButDidNotAcceptHelp:
@@ -66,15 +74,12 @@ You there! Step into the light, with your hands where I can see them. *A branded
 === 1b ===
 
 I have no idea who you are. You have the brand but you're not one of the slaves that normally works on this level. Did Gáspár send you?
-/*
-{
--mineLvl3MetGaspar:
-    +I have never met this Gáspár before. I'm a new arrival. <Lie>
-        ->5a //5a is a place holder
--else:
-    +I have never met this Gáspár before in my life. I'm a new arrival.
-        ->5a //5a is a place holder
-}*/
+
+    {
+    -mineLvl3ToldToFindMarcos:
+        +Yes, the overseer is looking for survivors.
+            ->6a
+    }
 
     {
     -sentIntoMineByDirector:
@@ -213,9 +218,9 @@ Yes, actually. How did you know that?
 
         The cavern was filled with these worm creatures. In moments, they had escaped the cavern and were ripping into the other slaves of our team. Some of the guards rushed to combat them, but it was quickly deemed a hopeless fight.
 
-        Overseer Gáspár, the guard who was in charge of work on this floor, led the guards in a retreat back to the surface, but when we reached the exit to this floor we found it already blocked. He then took the guards from our group and declared he would fight back to the stockroom which contained the food and supplies the guards keep for this level.
+        Overseer Gáspár, the man in charge of work on this floor, led the guards in a retreat back to the surface. When we reached the exit to this floor, however, we found it already blocked. Gáspár then took the guards from our group and declared he would fight back to the stockroom which contained the food and supplies the guards keep for this level.
         
-        Gáspár forbade the branded from following him, because he didn't want to share the stockrooms food with us for however long we'd be trapped for. Our group then split off from theirs and fought our way here. We three are the only ones that made it this far.
+        Gáspár forbade the branded from following him, because he didn't want to share the stockrooms food with us for however long we'd be stuck in here. Our group then split off from theirs and fought our way here. We three are the only ones that made it this far.
         ->1db
     +Where is the tunnel the worms are coming from? 
         The worms first entered the mine from the southern most shaft. At every opportunity turn south and you will find it eventually.
@@ -320,6 +325,32 @@ To keep it brief, these worm-things are growing in number. They are coming throu
         ->1g
 }
 {
+-hasBlastingJelly and trainedByEmeseToUseBlasingJelly:
+    +I have the blasting jelly from this floor's stockroom, and the knowledge of how to use it. All we must do now is proceed to where the worms are coming from and plant the barrel.
+
+        It is a good thing you came along, friend. I had worried that Márcos would be required to ignite the jelly despite how his hands shake from loss of blood.         
+        
+        changeCamTarget({carterIndex})
+        
+        And you saved us the humiliation of having to beg for Gáspár's assistance.
+        ->1lb
+    +I'm ready to leave if you are.
+        Yes. Let's go.
+        ~takingCarterNandorWithYou = true
+        ->1m
+-mineLvl3GuardsInParty:
+    +Overseer Gáspár will assist us in collapsing the breach. Is this going to be a problem?
+        No, and in fact it is fortunate that he agreed so easily. I had worried that Márcos would be required to ignite the jelly despite how his hands shake from loss of blood. 
+
+        changeCamTarget({carterIndex})
+        
+        And it will saves us the humiliation of having to beg for his assistance.
+
+        ->1lb
+    +I'm ready to leave if you are.
+        Yes. Let's go.
+        ~takingCarterNandorWithYou = true
+        ->1m
 -sentIntoMineByDirector:
     +I must make for the stockroom. I can use the blasting jelly stored there to collapse the tunnel.
         The stockroom is southeast of here. It's the last tunnel you can take before you reach the bridge over the underground stream.
@@ -525,15 +556,18 @@ Are you ready to set out?
 -not mineLvl3MarcosAgreedToIgniteJelly:
 
     {
-    -not sentIntoMineByDirector:
+    -not sentIntoMineByDirector and not mineLvl3GuardsInParty:
     activateQuestStep(Sealing the Breach,Convince the Guards.)
-    -else:
+    -not mineLvl3GuardsInParty:
     activateQuestStep(Sealing the Breach,Find blasting jelly.)
     }
 
     {
-    -mineLvl3ToldToFindMarcos:
+    -mineLvl3ToldToFindMarcos and not mineLvl3GuardsInParty:
         activateQuestStep(Find Guard Márcos,Márcos has been found.)
+    -mineLvl3ToldToFindMarcos and mineLvl3GuardsInParty:
+        finishQuest(Find Guard Márcos,true,Márcos has been found.1)
+        activateQuestStep(No Good Deed,Make for the breach.)
     }
     
     
@@ -712,6 +746,40 @@ You have returned. How did you fair against the worms?
 I'm glad you've decided to accept our help. This will make things much easier.
 
 ->1f
+
+=== 6a ===
+
+That filth. Lower than a roach's backside, that one. He wouldn't let us shelter in that stockroom of his, and now he sends branded to see if we still breath?
+
+    {
+    -gasparMentionedConflictBetweenHimAndMarcos:
+    +He told me there was a conflict between himself and a guard named Márcos. Is he with you?
+
+        combineDialogue()
+        
+        Márcos is still alive, but he is injured. 
+
+        ->3c
+    -sentIntoMineByDirector:
+
+    +I'm unaware of what transpired between you. I am simply looking for allies to help end this worm menace.
+        keepDialogue()
+
+        He betrayed us and left us for dead. However, you being here means that the way back up is no longer blocked, and the worms can escape to the upper levels endangering the rest of the camp. I'm not sure I can trust you yet, but we're not in a position to turn away help down here: Nándor will have something to discuss with you. Are you willing to stay with us for a time?
+        ->3c
+    -else:
+
+    +I'm unaware of what transpired between you. I am just glad to see more humans alive down here.
+
+        He betrayed us and left us for dead. But I am likewise happy you are no worm looking to make a meal of us.        
+        ->3c
+    }
+//In any case, 
+    +He's a real snake, to be certain. There's no love lost between him and I.
+        keepDialogue()
+
+        If you are no friend of Gáspár's, then perhaps you could be one of ours. Do you know which way the wind is blowing?
+        ->3a
 
 === Close ===
 
