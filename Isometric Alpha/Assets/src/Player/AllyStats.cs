@@ -910,58 +910,6 @@ public class AllyStats : Stats
         return StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusVolleyAccuracyFormula());
     }
 
-    public override void setHeadSprite(DescriptionPanel panel)
-    {
-        if(panel.typeIconBackgroundPanel != null)
-        {
-            panel.typeIconBackgroundPanel.enabled = false;
-        }
-
-        string headName = getName();
-
-        if(headName.Contains(PartyManager.playerMarker))
-        {
-            headName = State.playerPortraitName;
-        }
-
-        DescriptionPanel.setImage(panel.typeIconPanel, Resources.Load<Sprite>(PrefabNames.headsFolder + headName));
-
-        if(panel.typeIconPanel != null)
-        {
-            panel.typeIconPanel.gameObject.transform.localScale = new Vector3(2.25f,2.25f,2.25f);
-        }
-    }
-
-    public override void setHeadSprite(Image image)
-    {
-        string headName = getName();
-
-        if(headName.Contains(PartyManager.playerMarker))
-        {
-            headName = State.playerPortraitName;
-        }
-        
-        if(headName != null && !headName.Contains("?"))
-        {
-            image.sprite = Resources.Load<Sprite>(PrefabNames.headsFolder + headName);
-        }
-    }
-
-    public override void setHeadSprite(SpriteRenderer spriteRenderer)
-    {
-        string headName = getName();
-
-        if(headName.Contains(PartyManager.playerMarker))
-        {
-            headName = State.playerPortraitName;
-        }
-        
-        if(headName != null && !headName.Contains("?"))
-        {
-            spriteRenderer.sprite = Resources.Load<Sprite>(PrefabNames.headsFolder + headName);
-        }
-    }
-
     #endregion
 
     #region IDescribable

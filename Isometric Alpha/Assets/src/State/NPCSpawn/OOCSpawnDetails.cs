@@ -1975,8 +1975,7 @@ public class OffSetSpawnDetails : OOCSpawnDetails
 {
     protected float offset = 0f;
     protected bool ignoresSecretDoors;
-
-    //npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX
+    protected bool withScale;
 
     public OffSetSpawnDetails(string npcName, 
                               Vector3Int cellCoords, 
@@ -1985,6 +1984,7 @@ public class OffSetSpawnDetails : OOCSpawnDetails
                               float offset = 0f, 
                               bool flipX = false, 
                               bool ignoresSecretDoors = true,
+                              bool withScale = true,
                               string tutorialTargetHash = "") :
     base(npcName, cellCoords, spriteName, sortingLayerInfo, flipX, tutorialTargetHash: tutorialTargetHash)
     {

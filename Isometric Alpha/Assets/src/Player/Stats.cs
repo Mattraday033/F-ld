@@ -1171,33 +1171,29 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return false;
     }
 
-    public virtual void setHeadSprite(DescriptionPanel panel)
+    private Sprite getHeadSprite()
     {
-        string headName = MonsterNameList.getPackName(getName());
+        return EnemyTypeFolderPathList.getHeadSprite(getName());
+    }
 
-        if(headName != null && !headName.Contains("?"))
+    public void setHeadSprite(DescriptionPanel panel)
+    {
+        DescriptionPanel.setImage(panel.typeIconPanel, getHeadSprite());
+    }
+
+    public void setHeadSprite(Image image)
+    {
+        if(image != null)
         {
-            DescriptionPanel.setImage(panel.typeIconPanel, Resources.Load<Sprite>(PrefabNames.headsFolder + headName));
+            image.sprite = getHeadSprite();
         }
     }
 
-    public virtual void setHeadSprite(Image image)
+    public void setHeadSprite(SpriteRenderer spriteRenderer)
     {
-        string headName = MonsterNameList.getPackName(getName());
-
-        if(headName != null && !headName.Contains("?"))
+        if(spriteRenderer != null)
         {
-            image.sprite = Resources.Load<Sprite>(PrefabNames.headsFolder + headName);
-        }
-    }
-
-    public virtual void setHeadSprite(SpriteRenderer spriteRenderer)
-    {
-        string headName = MonsterNameList.getPackName(getName());
-
-        if(headName != null && !headName.Contains("?"))
-        {
-            spriteRenderer.sprite = Resources.Load<Sprite>(PrefabNames.headsFolder + headName);
+            spriteRenderer.sprite = getHeadSprite();
         }
     }
 

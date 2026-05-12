@@ -227,6 +227,30 @@ public static class EnemyTypeFolderPathList
 
     }
 
+    public static Sprite getHeadSprite(string enemyType)
+    {
+        enemyType = DialogueList.scrubNameOfEndNumbers(enemyType);
+
+        switch(enemyType)
+        {
+        case MonsterNameList.hiveHeraldNest:
+            enemyType = MonsterNameList.hiveHerald;
+                break;
+        case MonsterNameList.martyrWormNest:
+            enemyType = MonsterNameList.martyrWorm;
+                break;
+        case MonsterNameList.toxicWormNest:
+            enemyType = MonsterNameList.toxicWorm;
+                break;
+        case MonsterNameList.wormNest:
+            enemyType = MonsterNameList.worm;
+                break;
+        }
+
+        return Resources.Load<Sprite>(getEnemyTypeFolderPath(enemyType) + PrefabNames.headsSpriteName);
+    }
+
+
     public static string getShadowPrefabName(string enemyType)
     {
         switch(DialogueList.scrubNameOfEndNumbers(enemyType))
