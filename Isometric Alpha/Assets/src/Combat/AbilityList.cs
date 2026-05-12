@@ -83,6 +83,8 @@ public static class AbilityList
     public const string unflinchingName = "Unflinching";
 	public const string versatileName = "Versatile";
 
+    public const string avertBlameName = "Avert Blame";
+
     public const string batClawName = "Bat Claw";
 	public readonly static DescriptionParams batClawDescription = DescriptionParams.build(batClawName, "The sharp talons of a bat", "Claw");
     public const string swarmRushKey = "Swarm Rush";
@@ -450,6 +452,7 @@ public static class AbilityList
 		companionAbilityDictionary.Add(NPCNameList.nandor,listOfNandorAbilities);
 		
 		
+
 		List<CombatAction> listOfThatchAbilities = new List<CombatAction>();
 		
 		// listOfThatchAbilities.Add(new CompanionAttack(NPCNameList.thatch,"Backhanded Swing","TwoHandedPickReversed",Range.reverseHookOneIndex, "A swing of Thatch's pick in the opposite direction."));
@@ -473,9 +476,9 @@ public static class AbilityList
         listOfThatchAbilities.Add(chokehold);
         miscAbilityDictionary.Add(chokehold.getKey(), chokehold); // here for loading, if not here then this ability will be replaced with default fist ability on load
 
-
 		companionAbilityDictionary.Add(NPCNameList.thatch,listOfThatchAbilities);
 		
+
 		
 		List<CombatAction> listOfCarterAbilities = new List<CombatAction>();
 
@@ -494,6 +497,25 @@ public static class AbilityList
 
 		companionAbilityDictionary.Add(NPCNameList.carter, listOfCarterAbilities);
 		
+
+		List<CombatAction> listOfWeftAbilities = new List<CombatAction>();
+
+        HealingAbility avertBlame = new HealingAbility(CombatActionSettings.build(avertBlameName, DescriptionParams.build(avertBlameName, "The caster uses an ally as a shield, healing the ally and causing all Chaotic enemies to consider that ally a Mandatory Target.", avertBlameName), DamageParams.build("C", "0"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(oneSlotMax, fiveRoundCooldown)));
+        avertBlame.setStatRequirements(levelKeyChar + "-3");
+        listOfWeftAbilities.Add(avertBlame);
+        miscAbilityDictionary.Add(avertBlame.getKey(), avertBlame);
+
+		companionAbilityDictionary.Add(NPCNameList.weft, listOfWeftAbilities);
+
+
+		List<CombatAction> listOfGasparAbilities = new List<CombatAction>();
+
+        EstablishLinkAbility collectivePunishment = new EstablishLinkAbility(CombatActionSettings.build(StatSourceNameList.collectivePunishmentKey, DescriptionParams.build(StatSourceNameList.collectivePunishmentKey, "The caster decrees that pain should be shared, causing half of damage dealt to the caster to be dealt to an ally instead. Both the caster and the ally receive a boost to the damage they deal."), frequencyParams: FrequencyParams.build(oneSlotMax, eightRoundCooldown), appliedTrait: TraitList.collectivePunishment), TraitList.collectivePunishmentLinkTrait);
+        collectivePunishment.setStatRequirements(levelKeyChar + "-3");
+        listOfGasparAbilities.Add(collectivePunishment);
+        miscAbilityDictionary.Add(collectivePunishment.getKey(), collectivePunishment);
+
+		companionAbilityDictionary.Add(NPCNameList.gaspar, listOfGasparAbilities);
 	}
 	
 	private static void instantiateSummonAbilities()

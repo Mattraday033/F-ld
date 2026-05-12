@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"c:/Users/mattr/OneDrive/Documents/GitHub/F-ld/Isometric Alpha\" diff --stat -- \"Assets/src/State/NPCSpawn/OOCSpawnDetails.cs\")"
+    ]
+  }
+}

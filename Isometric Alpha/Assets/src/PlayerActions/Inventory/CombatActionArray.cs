@@ -85,8 +85,7 @@ public class CombatActionArray : StatBoostSourceCombiner
     {
         int highestBonusAbilityDamage = 0;
 
-        int offHandBonusDamage = calculateAllStatFormulas(getStatSource(), 
-                                                          getStatSource().getAllStatBoosts(),
+        int offHandBonusDamage = calculateAllStatFormulas(getStatSource().getAllStatBoosts(),
                                                           b => b.getBonusDamageFormula());
 
         foreach (CombatAction action in combatActions)

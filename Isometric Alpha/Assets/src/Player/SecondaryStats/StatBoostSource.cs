@@ -126,6 +126,8 @@ public abstract class StatBoostSource : INameSource
                 return "8";
             case StatSourceNameList.standTogetherKey:
                 return "W + C";
+            case StatSourceNameList.collectivePunishmentKey:
+                return "S + D";
             default:
                 return Constants.zeroRating;
         }
@@ -164,6 +166,17 @@ public abstract class StatBoostSource : INameSource
             case StatSourceNameList.insecureKey:
             case StatSourceNameList.caveMadnessKey:
                 return "7";
+            default:
+                return Constants.zeroRating;
+        }
+    }
+
+    public virtual string getHealingBoostFormula()
+    {
+        switch (getName())
+        {
+            case NPCNameList.weft + ZoneOfInfluenceTrait.zoiTraitName:
+                return "2C";
             default:
                 return Constants.zeroRating;
         }
@@ -218,6 +231,8 @@ public abstract class StatBoostSource : INameSource
     {
         switch (getName())
         {
+            case NPCNameList.gaspar + ZoneOfInfluenceTrait.zoiTraitName:
+                return Strength.woundResistPerStrength+"C";
             case ItemList.bronzeBadgeKey:
                 return "10";
         }
@@ -481,27 +496,55 @@ public abstract class StatBoostSource : INameSource
 
     public delegate string SumFormulaDelegate<T>(T t);
 
-    public static int calculateAllStatFormulas(Stats statSource, List<StatBoostSource> statBoostSources, SumFormulaDelegate<StatBoostSource> formulaDelegate)
+    public static int calculateAllStatFormulas(List<StatBoostSource> statBoostSources, SumFormulaDelegate<StatBoostSource> formulaDelegate)
     {
-        string allFormulas = statBoostSources.Aggregate("", (a, b) => a = DamageCalculator.combineFormulas(a, formulaDelegate(b)));
+        int sum = 0;
 
-        return DamageCalculator.calculateFormula(allFormulas, statSource);
+        foreach(StatBoostSource source in statBoostSources)
+        {
+            if(source == null || source.getStatSource() == null)
+            {
+                continue;
+            }
+
+            sum += DamageCalculator.calculateFormula(formulaDelegate(source), source.getStatSource());
+        }
+
+        return sum;
     }
 
-    public static double calculateAllStatFormulasAsPercentageDouble(Stats statSource, List<StatBoostSource> statBoostSources, SumFormulaDelegate<StatBoostSource> formulaDelegate)
+    public static double calculateAllStatFormulasAsPercentageDouble(List<StatBoostSource> statBoostSources, SumFormulaDelegate<StatBoostSource> formulaDelegate)
     {
-        string allFormulas = statBoostSources.Aggregate("", (a, b) => a = DamageCalculator.combineFormulas(a, formulaDelegate(b)));
-        double percentage = ((double)DamageCalculator.calculateFormula(allFormulas, statSource)) / 100.0;
+        double sum = 0;
 
-        return percentage;
+        foreach(StatBoostSource source in statBoostSources)
+        {
+            if(source == null || source.getStatSource() == null)
+            {
+                continue;
+            }
+
+            sum += DamageCalculator.calculateFormula(formulaDelegate(source), source.getStatSource());
+        }
+
+        return sum / 100.0;
     }
 
-    public static float calculateAllStatFormulasAsPercentageFloat(Stats statSource, List<StatBoostSource> statBoostSources, SumFormulaDelegate<StatBoostSource> formulaDelegate)
+    public static float calculateAllStatFormulasAsPercentageFloat(List<StatBoostSource> statBoostSources, SumFormulaDelegate<StatBoostSource> formulaDelegate)
     {
-        string allFormulas = statBoostSources.Aggregate("", (a, b) => a = DamageCalculator.combineFormulas(a, formulaDelegate(b)));
-        float percentage = ((float) DamageCalculator.calculateFormula(allFormulas, statSource)) / 100f;
+        float sum = 0;
 
-        return percentage;
+        foreach(StatBoostSource source in statBoostSources)
+        {
+            if(source == null || source.getStatSource() == null)
+            {
+                continue;
+            }
+
+            sum += DamageCalculator.calculateFormula(formulaDelegate(source), source.getStatSource());
+        }
+
+        return sum / 100.0f;
     }
 
     public static List<StatBoostSource> getAllStatBoosts(IEnumerable statBoostList)
@@ -578,6 +621,11 @@ public abstract class StatBoostSource : INameSource
         if (!boostSource.getVulnerableFormula().Equals(Constants.zeroRating))
         {
             blocks.Add(DescriptionPanelBuildingBlock.getVulnerableBlock(DamageCalculator.calculateFormula(boostSource.getVulnerableFormula(), statsSource).ToString(), boostSource.getVulnerableFormula()));
+        }
+
+        if (!boostSource.getHealingBoostFormula().Equals(Constants.zeroRating))
+        {
+            blocks.Add(DescriptionPanelBuildingBlock.getHealingBoostBlock(DamageCalculator.calculateFormula(boostSource.getHealingBoostFormula(), statsSource).ToString(), boostSource.getHealingBoostFormula()));
         }
 
         #endregion

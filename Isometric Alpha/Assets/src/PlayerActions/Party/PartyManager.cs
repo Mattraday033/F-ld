@@ -30,7 +30,20 @@ public static class PartyManager
 
     public static PartyMember getPartyMember(string partyMemberName)
     {
+        
+        if (partyMemberName == null)
+        {
+            Debug.LogError(partyMemberName + " is not a valid party member name.");
+            return partyMemberDict[NPCNameList.carter];
+        }
+
         partyMemberName = DialogueList.scrubNameOfEndNumbers(partyMemberName);
+
+        if(partyMemberName.Contains(NPCNameList.overseer) || 
+            partyMemberName.Contains(NPCNameList.chief))
+        {
+            partyMemberName = partyMemberName.Split(" ")[1];
+        }
 
         if (partyMemberName == null || !partyMemberDict.ContainsKey(partyMemberName))
         {
@@ -77,6 +90,7 @@ public static class PartyManager
         partyMemberDict = new Dictionary<string, PartyMember>();
 
         partyMemberDict.Add(NPCNameList.carter, PartyMemberList.getResetPartyMember(NPCNameList.carter));
+        partyMemberDict.Add(NPCNameList.gaspar, PartyMemberList.getResetPartyMember(NPCNameList.gaspar));
         partyMemberDict.Add(NPCNameList.nandor, PartyMemberList.getResetPartyMember(NPCNameList.nandor));
         partyMemberDict.Add(NPCNameList.thatch, PartyMemberList.getResetPartyMember(NPCNameList.thatch));
         partyMemberDict.Add(NPCNameList.weft, PartyMemberList.getResetPartyMember(NPCNameList.weft));

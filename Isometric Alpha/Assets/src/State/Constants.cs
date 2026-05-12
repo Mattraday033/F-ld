@@ -71,6 +71,8 @@ public static class Constants
 	public const int twoRoundDuration = 3;
 	public const int threeRoundDuration = 4;
 	public const int fourRoundDuration = 5;
+	public const int fiveRoundDuration = 6;
+	public const int sixRoundDuration = 7;
 
     public const int zeroStacksAtStart = 0;
 	public const int oneStackAtStart = 1;

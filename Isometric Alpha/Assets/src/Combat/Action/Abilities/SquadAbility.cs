@@ -42,9 +42,17 @@ public class SquadAbility : Ability
 		{
 			baseDamage = (int) (baseDamage * actor.getSurpriseDamageMultiplier());
 		}
-		
-		int finalDamage = targetCombatant.modifyIncomingDamage(baseDamage, actor.getArmorPenetration());
-		
+        
+        int finalDamage = 0;
+        
+        if(healsTarget())
+        {
+            finalDamage = targetCombatant.modifyIncomingHealing(baseDamage);
+        } else
+        {
+            finalDamage = targetCombatant.modifyIncomingDamage(baseDamage, actor.getArmorPenetration());
+        }
+
 		return new int[]{finalDamage};
 	}
 	

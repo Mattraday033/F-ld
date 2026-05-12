@@ -25,6 +25,10 @@ public class ZoneOfInfluenceTrait : Trait
                 return "Creature's in this companion's Zone of Influence gain extra damage during a surprise round.";
             case NPCNameList.nandor:
                 return "Creature's in this companion's Zone of Influence gain extra Mental Resistance.";
+            case NPCNameList.weft:
+                return "Creature's in this companion's Zone of Influence gain extra Healing.";
+            case NPCNameList.gaspar:
+                return "Creature's in this companion's Zone of Influence gain extra Wound Resistance.";
             default:
                 return zoiTraitDescription;
         }
@@ -44,6 +48,8 @@ public class ZoneOfInfluenceTrait : Trait
             case NPCNameList.thatch:
             case NPCNameList.nandor:
             case NPCNameList.carter:
+            case NPCNameList.gaspar:
+            case NPCNameList.weft:
                 return companionName + "-" + HoverMessageList.zoneOfInfluenceKey;
             default:
                 return base.getIconName();

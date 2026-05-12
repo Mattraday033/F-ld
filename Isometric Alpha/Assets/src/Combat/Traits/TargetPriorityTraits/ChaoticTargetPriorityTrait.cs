@@ -23,6 +23,14 @@ public class ChaoticTargetPriorityTrait : TargetPriorityTrait
 	{
 		listOfTargets = scrubSummonsFromTargetList(listOfTargets);
 		
+        foreach(Stats stats in listOfTargets)
+        {
+            if(stats != null && stats.isAlive() && stats.mandatoryTargetForTargetingType(this))
+            {
+                return stats;
+            }
+        }
+
 		Stats mandatoryTarget = base.getMandatoryTarget(listOfTargets);
 		
 		if(mandatoryTarget == null)

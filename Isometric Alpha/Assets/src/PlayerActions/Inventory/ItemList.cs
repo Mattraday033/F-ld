@@ -100,6 +100,7 @@ public static class ItemList
 	public const int sharpRockIndex = 19;
 	public const int thinBladeIndex = 20;
 	public const int scaldIndex = 21;
+	public const int whipIndex = 22;
 
     public const int slaveRagsIndex = 0;
 	public const int clothGlovesIndex = 1;
@@ -242,6 +243,11 @@ public static class ItemList
 	[RuntimeInitializeOnLoadMethod]
 	private static void initializeItemList()
 	{
+        if(allItems != null && allItems.Count > 0)
+        {
+            return;
+        }
+
         allItems = new List<List<Item>>();
 
 		List<Item> usableItems = new List<Item>();
@@ -288,6 +294,7 @@ public static class ItemList
 		weapons.Add(new Weapon(new WeaponListID(sharpRockIndex), "Sharp Rock", "A stone, chipped to have a meager edge. ", "2C + 3", "C+D", ItemSpriteList.sharpRockSprite, Range.singleTargetIndex, 1, isOneHanded, EffectAnimationType.Pierce));
         weapons.Add(new StanceWeapon(new WeaponListID(thinBladeIndex), "Bronze <nobr>Thin-Blade</nobr>", "A long, slender, double-edged blade with no crossguard. Favored by swordsmen for its long reach, they are either wielded solo or with a matching dagger.", "2W+2D+6", "D+W+1", ItemSpriteList.thinbladeSprite, Range.verticalOneIndex, worth: 55, isOneHanded, EffectAnimationType.Slash));
 		weapons.Add(new Weapon(new WeaponListID(scaldIndex), "Scald", "Kende's trusty frying pan. Those struck with it come away burned.", "2S+2D+2C+9", "S+D+C", ItemSpriteList.fryingPanSprite, Range.horizontalOneIndex, worth: 75, isOneHanded, EffectAnimationType.Blunt, traitToApply: TraitList.roasted));
+		weapons.Add(new Weapon(new WeaponListID(whipIndex), "Whip", "A coiled snake of pain.", "2S+2D+10", "S+D", ItemSpriteList.whipSprite, Range.verticalThreeIndex, worth: 35, isOneHanded, EffectAnimationType.Slash, traitToApply: TraitList.wounded));
 
 		//Armor(string key, string loreDescription, int worth, int armorRating, int slotID)
 
@@ -434,6 +441,11 @@ public static class ItemList
             return new DialogueBookItem();
         }
 
+        if(allItems == null || allItems.Count <= 0)
+        {
+            initializeItemList();
+        }
+
 		List<Item> currentItemList = allItems[listIndex];
 		
 		Item itemTemplate = currentItemList[itemIndex];
@@ -528,6 +540,7 @@ public static class ItemSpriteList
     public const string teaSprite = "Tea";
     public const string thinbladeSprite = "Thinblade";
     public const string twoHandedPickSprite = "TwoHandedPick";
+    public const string whipSprite = "Whip";
     public const string wickedKnifeSprite = "WickedKnife";
     public const string wornBowSprite = "WornBow";
 }

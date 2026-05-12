@@ -58,7 +58,7 @@ public class AllyStats : Stats
     {
         combatActionArray = new CombatActionArray(this); 
         equippedItems = new EquippedItems(this);
-        this.animationAudioClipDictionary = AnimationSFXDictionaryList.maleHumanAudioDictionary;
+        this.animationAudioClipDictionary = PartyMemberList.getAudioDictionary(getName());
     }
 
     public AllyStats(string name, int Str, int Dex, int Wis, int Cha) : base(name) 
@@ -77,7 +77,7 @@ public class AllyStats : Stats
         equippedItems = new EquippedItems(this);
 
         this.currentHealth = getTotalHealth();
-        this.animationAudioClipDictionary = AnimationSFXDictionaryList.maleHumanAudioDictionary;
+        this.animationAudioClipDictionary = PartyMemberList.getAudioDictionary(getName());
     }
 
     public AllyStats(StatsWrapper wrapper) : base(wrapper.key)
@@ -95,7 +95,7 @@ public class AllyStats : Stats
 
         combatActionArray = new CombatActionArray(this, SaveBlueprint.extractCombatActionsFromJson(this, wrapper.combatActions));
         equippedItems = new EquippedItems(this, SaveBlueprint.extractEquippedItemsFromJson(wrapper.currentEquipment));
-        this.animationAudioClipDictionary = AnimationSFXDictionaryList.maleHumanAudioDictionary;
+        this.animationAudioClipDictionary = PartyMemberList.getAudioDictionary(getName());
     }
 
     #endregion
@@ -200,7 +200,7 @@ public class AllyStats : Stats
     {
         int healthFromStrength = Strength.getHealthFromStrength(strength);
 
-        int bonusFormulas = StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusHealthFormula());
+        int bonusFormulas = StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusHealthFormula());
 
         return healthFromStrength + bonusFormulas;
     }
@@ -212,7 +212,7 @@ public class AllyStats : Stats
         dummyPlayer.level = potentialLevel;
         dummyPlayer.strength = potentialStrength;
 
-        int bonusFormulas = StatBoostSource.calculateAllStatFormulas(dummyPlayer, statBoostSources, b => b.getBonusHealthFormula());
+        int bonusFormulas = StatBoostSource.calculateAllStatFormulas(statBoostSources, b => b.getBonusHealthFormula());
 
         return dummyPlayer.getTotalHealth() + bonusFormulas;
     }
@@ -336,7 +336,7 @@ public class AllyStats : Stats
 
     public override int getStrength()
     {
-        return strength + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusStrengthFormula());
+        return strength + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusStrengthFormula());
     }
 
     public void incrementStrength(bool displayOnly = false)
@@ -353,30 +353,30 @@ public class AllyStats : Stats
 
     public override double getCritDamageMultiplier()
     {
-        double bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageDouble(this, getAllStatBoosts(), b => b.getBonusCriticalDamageMultiplierFormula());
+        double bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageDouble(getAllStatBoosts(), b => b.getBonusCriticalDamageMultiplierFormula());
 
         return (DamageCalculator.baseCriticalDamage + (Strength.critDamMultPerStrengthDouble * ((double)getStrength()))) + bonusFormulas;
     }
 
     public string getExtraCritDamageForDisplay()
     {
-        int bonusFormulas = StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusCriticalDamageMultiplierFormula());
+        int bonusFormulas = StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusCriticalDamageMultiplierFormula());
 
         return (getStrength() * Strength.critDamMultPerStrength) + bonusFormulas + (DamageCalculator.baseCriticalDamage * 100) + "%";
     }
 
     public double getWoundResistance()
     {
-        double bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageDouble(this, getAllStatBoosts(), b => b.getBonusWoundResistanceFormula());
+        double bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageDouble(getAllStatBoosts(), b => b.getBonusWoundResistanceFormula());
 
-        return Strength.physResistBaseDouble + (((double)getStrength()) * Strength.physResistPerStrengthDouble) + bonusFormulas;
+        return Strength.woundResistBaseDouble + (((double)getStrength()) * Strength.woundResistPerStrengthDouble) + bonusFormulas;
     }
 
     public string getWoundResistanceForDisplay()
     {
-        int bonusFormulas = StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusWoundResistanceFormula());
+        int bonusFormulas = StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusWoundResistanceFormula());
 
-        return Strength.physResistBase + (getStrength() * Strength.physResistPerStrength) + bonusFormulas + "%";
+        return Strength.woundResistBase + (getStrength() * Strength.woundResistPerStrength) + bonusFormulas + "%";
     }
 
     public override bool rollAgainstWoundResistance()
@@ -400,7 +400,7 @@ public class AllyStats : Stats
 
     public override int getDexterity()
     {
-        return dexterity + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusDexterityFormula());
+        return dexterity + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusDexterityFormula());
     }
 
     public void incrementDexterity(bool displayOnly = false)
@@ -415,7 +415,7 @@ public class AllyStats : Stats
 
     public override int getExtraArmorFromDexterity()
     {
-        // int bonusFormulas = StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusArmorFormula());
+        // int bonusFormulas = StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusArmorFormula());
 
         return getDexterity() * Dexterity.extraArmorMultiplier;
     }
@@ -457,14 +457,14 @@ public class AllyStats : Stats
 
     public override float getSurpriseDamageMultiplier()
     {
-        float bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageFloat(this, getAllStatBoosts(), b => b.getBonusSurpriseRoundDamageFormula());
+        float bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageFloat(getAllStatBoosts(), b => b.getBonusSurpriseRoundDamageFormula());
 
         return Dexterity.surpriseDamMultBase + (((float)getDexterity()) * Dexterity.surpriseDamMultCoefficient) + bonusFormulas;
     }
 
     public string getSurpriseDamageMultiplierForDisplay()
     {
-        float bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageFloat(this, getAllStatBoosts(), b => b.getBonusSurpriseRoundDamageFormula());
+        float bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageFloat(getAllStatBoosts(), b => b.getBonusSurpriseRoundDamageFormula());
 
         return (((float)getDexterity()) * Dexterity.surpriseDamMultCoefficient + bonusFormulas) * 100f + "%";
     }
@@ -480,7 +480,7 @@ public class AllyStats : Stats
 
     public override int getWisdom()
     {
-        return wisdom + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusWisdomFormula());
+        return wisdom + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusWisdomFormula());
     }
 
     public void incrementWisdom(bool displayOnly = false)
@@ -495,14 +495,14 @@ public class AllyStats : Stats
 
     public double getMentalResistance()
     {
-        double bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageDouble(this, getAllStatBoosts(), b => b.getBonusMentalResistanceFormula());
+        double bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageDouble(getAllStatBoosts(), b => b.getBonusMentalResistanceFormula());
 
         return Wisdom.mentalResistBaseDouble + (((double)getWisdom()) * Wisdom.mentalResistPerWisdomDouble) + (bonusFormulas / 100.0);
     }
 
     public string getMentalResistanceForDisplay()
     {
-        int bonusFormulas = StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusMentalResistanceFormula());
+        int bonusFormulas = StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusMentalResistanceFormula());
 
         return (Wisdom.mentalResistBase + (getWisdom() * Wisdom.mentalResistPerWisdom) + bonusFormulas) + "%";
     }
@@ -531,7 +531,7 @@ public class AllyStats : Stats
             weaponSlotsFromWisdom = Wisdom.maxNumberOfWeaponSlots;
         }
 
-        int bonusFormula = StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusWeaponSlotsFormula());
+        int bonusFormula = StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusWeaponSlotsFormula());
 
         if ((weaponSlotsFromWisdom + bonusFormula) > Wisdom.maxNumberOfWeaponSlots)
         {
@@ -560,7 +560,7 @@ public class AllyStats : Stats
                 break;
         }
 
-        int bonusFormula = StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusPassiveSlotsFormula());
+        int bonusFormula = StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusPassiveSlotsFormula());
 
         if (passivesUnlockedFromWisdom + bonusFormula > Wisdom.maximumPassiveSlots)
         {
@@ -611,7 +611,7 @@ public class AllyStats : Stats
 
     public override int getCharisma()
     {
-        return charisma + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusCharismaFormula());
+        return charisma + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusCharismaFormula());
     }
 
     public override int getZOIStat()
@@ -649,7 +649,7 @@ public class AllyStats : Stats
 
     public override int getSynergyCoefficient()
     {
-        return (getCharisma() * Charisma.playerSynergyModifierCoefficient) + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusSynergyFormula());
+        return (getCharisma() * Charisma.playerSynergyModifierCoefficient) + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusSynergyFormula());
     }
 
     public string getSynergyCoefficientForDisplay()
@@ -907,7 +907,7 @@ public class AllyStats : Stats
 
     public override int getBonusVolleyAccuracy()
     {
-        return StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusVolleyAccuracyFormula());
+        return StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusVolleyAccuracyFormula());
     }
 
     #endregion
@@ -966,14 +966,14 @@ public class AllyStats : Stats
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getStrengthBlock(getStrength().ToString()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusHealthBlock(getBonusHealthFromAllSources().ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusHealthBlock("+" + getBonusHealthFromAllSources().ToString()));
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getCriticalHitDamageBlock(getExtraCritDamageForDisplay().ToString()));
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getWoundResistBlock(getWoundResistanceForDisplay().ToString()));
 
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDexterityBlock(getDexterity().ToString()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getExtraArmorBlock(getExtraArmorFromDexterity().ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getExtraArmorBlock("+" + getExtraArmorFromDexterity().ToString()));
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getSurpriseRoundDamageMultiplierBlock(getSurpriseDamageMultiplierForDisplay()));
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorPenetrationBlock(getArmorPenetrationForDisplay()));
 
@@ -981,7 +981,7 @@ public class AllyStats : Stats
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getWisdomBlock(getWisdom().ToString()));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getPassiveSlotsBlock(getPassiveSlotsUnlocked().ToString()));
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusWeaponSlotsBlock((getWeaponSlots() - 1).ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusWeaponSlotsBlock(getWeaponSlots().ToString()));
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getMentalResistBlock(getMentalResistanceForDisplay()));
 
 

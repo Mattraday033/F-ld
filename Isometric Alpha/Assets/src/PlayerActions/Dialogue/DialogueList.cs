@@ -1366,6 +1366,10 @@ public static class DialogueList
 	
 	public static string scrubNameOfEndNumbers(string name)
 	{
+        if(name == null)
+        {
+            return name;
+        }
 		
 		int lowestCharDigitInInt = 48; //char dec val for 0
 		int highestCharDigitInInt = 57; //char dec val for 9

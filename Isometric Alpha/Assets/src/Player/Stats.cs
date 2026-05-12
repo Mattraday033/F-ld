@@ -495,7 +495,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual int getArmorPenetration()
     {
-        return StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getBonusArmorPenetrationFormula());
+        return StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusArmorPenetrationFormula());
     }
 
     public virtual bool rollAgainstMentalResistance()
@@ -551,12 +551,17 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual string getInvulnerability()
     {
-        return "" + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getInvulnerableFormula());
+        return "" + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getInvulnerableFormula());
     }
 
     public virtual string getVulnerability()
     {
-        return "" + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getVulnerableFormula());
+        return "" + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getVulnerableFormula());
+    }
+
+    public virtual string getHealingBoost()
+    {
+        return "" + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getHealingBoostFormula());
     }
 
     #endregion
@@ -609,7 +614,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     public abstract int getTotalArmorRating();
     public virtual int getTotalArmorShred()
     {
-        return StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getArmorShredFormula());
+        return StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getArmorShredFormula());
     }
 
     public string getTotalArmorRatingForDisplay()
@@ -707,6 +712,18 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return modifiedDamage;
     }
 
+    public int modifyIncomingHealing(int baseDamage)
+    {
+        string healingBoost = getHealingBoost();
+
+        if(healingBoost.Length <= 0)
+        {
+            return baseDamage;
+        }
+
+        return baseDamage + int.Parse(healingBoost);
+    }
+
     public virtual bool costsPartyCombatActions()
     {
         return false;
@@ -770,6 +787,8 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
                 return hasTrait(TraitList.intimidatingPressence);
             case PredatoryTargetPriorityTrait.initialName:
                 return hasTrait(TraitList.protectTheWeak);
+            case ChaoticTargetPriorityTrait.initialName:
+                return hasTrait(TraitList.protectTheWeak);
             default:
                 return false;
         }
@@ -792,7 +811,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual string getBonusCritChance()
     {
-        string bonusCritChance = "" + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getCritFormula());
+        string bonusCritChance = "" + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getCritFormula());
 
         if (bonusCritChance == null || 
             bonusCritChance.Length <= 0 || 

@@ -74,6 +74,7 @@ public static class StatSourceNameList
     public const string shoredUpKey = "Shored Up";
     public const string exitStrategyKey = "Exit Strategy";
     public const string chokeholdKey = "Chokehold";
+    public const string collectivePunishmentKey = "Collective Punishment";
     public const string ralliedKey = "Rallied";
     public const string standTogetherKey = "Stand Together";
 

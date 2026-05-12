@@ -290,8 +290,8 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.crate, new Vector3Int(10, 4), LocationNameList.stockhouse, PrefabNames.squareCratesSmall));
         list.Add(new NPCSpawnDetails(NPCNameList.crate + 1, new Vector3Int(5, 3), LocationNameList.stockhouse, PrefabNames.squareCratesSmall));
 
-        list.Add(new NPCSpawnDetails(NPCNameList.barrels, new Vector3Int(6, 5), LocationNameList.stockhouse, PrefabNames.tripleBarrel));
-        list.Add(new NPCSpawnDetails(NPCNameList.barrels + 1, new Vector3Int(6, -1), LocationNameList.stockhouse, PrefabNames.tripleBarrel));
+        list.Add(new NPCSpawnDetails(NPCNameList.barrels, new Vector3Int(6, 5), LocationNameList.stockhouse, PrefabNames.tripleBarrel, withScale: false));
+        list.Add(new NPCSpawnDetails(NPCNameList.barrels + 1, new Vector3Int(6, -1), LocationNameList.stockhouse, PrefabNames.tripleBarrel, withScale: false));
 
         oocSpawnDetailsDict.Add(LocationNameList.stockhouse, list);
         #endregion

@@ -134,7 +134,7 @@ public class EnemyStats : Stats
 
     public override int getTotalArmorRating()
     {
-        return armor + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getArmorFormula());
+        return armor + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getArmorFormula());
     }
 
     public virtual void spawningCombatAction()

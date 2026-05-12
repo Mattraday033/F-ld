@@ -233,8 +233,6 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 return "Retreat";
             case IconList.surpriseIconName:
                 return "Surprise Status";
-            case HoverMessageList.passiveSlotsKey:
-                return "Bonus Slots";
             case HoverMessageList.zoneOfInfluenceKey:
                 return HoverMessageList.zoiKey;
             case Strength.symbolChar:
@@ -363,11 +361,12 @@ public static class HoverMessageList
 
     private const string invulnerableIconMessage = "Invulnerability provides a flat reduction to incoming damage per hit. Can only reduce incoming damage down to 1. Applied before the damage reduction from Armor Score.";
     private const string vulnerableIconMessage = "Extra damage that is applied when damage is taken. Applied before the damage reduction from Armor Score.";
+    private const string healingBoostIconMessage = "";
 
     public const string bonusDamageKey = "Bonus Damage";
     private const string bonusDamageMessage = "Bonus Damage is added to the damage of all of your Abilities. Your Bonus Damage is equal to the highest Base Damage of all of your equipped Weapons. For example, a weapon with a Damage Formula of '3S + 5' provides 5 Bonus Damage. Hold 'Alt' when viewing a Weapon's stats to reveal formulas.";
 
-    private const string weaponSlotKey = "Weapon Slots";
+    public const string weaponSlotKey = "Weapon Slots";
     private const string weaponSlotMessage = "The number of Main-Hand Weapons you can have equipped to your Action Wheel. The higher a Character's Wisdom, the more Weapon Slots that Character has.";
 
     private const string stanceWeaponMessage = "Attacks made with Stance Weapons, such as fists and staffs, give the attacker additional stacks of their current Stance.";
@@ -390,8 +389,7 @@ public static class HoverMessageList
     private const string armorPenetrationMessage = "The percentage of an enemy's armor your Actions will ignore. Determined by a character's Dexterity.";
 
     private const string mentalResistMessage = "Your chance to ignore a Mental Trait applied to you in combat. Determined by a character's Wisdom.";
-    private const string passiveSlotsMessage = "Bonus Slots are Action Slots that can only be occupied by Equipped Passives, Stances, and Weapons, saving you space on your Action Wheel for Actions you wish to activate. Actions equippable to Bonus Slots can still be equipped to the Action Wheel if desired. Determined by a character's Wisdom.";
-    private const string bonusWeaponSlotsMessage = "You are able to carry more than the usual amount of weapons on your Action Wheel. Determined by a character's Wisdom.";
+    private const string passiveSlotsMessage = "Passive Slots are Action Slots that can only be occupied by Equipped Passives, Stances, and Weapons, saving you space on your Action Wheel for Actions you wish to activate. Actions equippable to Passive Slots can still be equipped to the Action Wheel if desired. Determined by a character's Wisdom.";
 
     private const string synergyMessage = "Party Members get to add their Synergy to the damage they deal, and subtract it from the damage they take, per Zone of Influence they are inside. Determined by a character's Charisma.";
     private const string bonusExuberancesMessage = "The number of Exuberances your Party has at the start of Combat. Having more Starting Exuberances allows you to use Abilities with Exuberance costs faster and more often. Determined by a character's Charisma.";
@@ -585,6 +583,8 @@ public static class HoverMessageList
                 return invulnerableIconMessage;
             case IconList.vulnerableIconName:
                 return vulnerableIconMessage;
+            case IconList.healingBoostIconName:
+                return healingBoostIconMessage;
 
             case IconList.stanceWeaponIconName:
                 return stanceWeaponMessage;
@@ -647,11 +647,8 @@ public static class HoverMessageList
                 return mentalResistMessage;
             case IconList.retreatChanceIconName:
                 return retreatChanceMessage;
-            case passiveSlotsKey:
             case IconList.passiveSlotsIconName:
                 return passiveSlotsMessage;
-            case IconList.bonusWeaponSlotsIconName:
-                return bonusWeaponSlotsMessage;
             case IconList.allExuberancesIconName:
                 return bonusExuberancesMessage;
             case IconList.synergyIconName:

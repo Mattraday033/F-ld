@@ -49,6 +49,7 @@ public class SlotIconImage : Image
             case ItemSpriteList.teaSprite:
             case ItemSpriteList.thinbladeSprite:
             case ItemSpriteList.twoHandedPickSprite:
+            case ItemSpriteList.whipSprite:
             case ItemSpriteList.wickedKnifeSprite:
             case ItemSpriteList.wornBowSprite:
                 return true;

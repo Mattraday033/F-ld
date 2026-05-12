@@ -12,10 +12,10 @@ public static class Strength
 	public const int healthPerStrength = 10;
     public const int critDamMultPerStrength = 5;
     public const double critDamMultPerStrengthDouble = .05;
-    public const int physResistBase = 10;
-    public const double physResistBaseDouble = .1;
-    public const int physResistPerStrength = 2;
-    public const double physResistPerStrengthDouble = .02;
+    public const int woundResistBase = 10;
+    public const double woundResistBaseDouble = .1;
+    public const int woundResistPerStrength = 2;
+    public const double woundResistPerStrengthDouble = .02;
 
 	public static int getHealthFromStrength(int strength)
     {
@@ -24,7 +24,7 @@ public static class Strength
 
     public static int getCurrentRegenerationAmount(AllyStats stats)
     {
-        int amountToHeal = (int)(stats.getTotalHealth() * PartyStats.getPartyRegenAmount()) + StatBoostSource.calculateAllStatFormulas(stats, stats.getAllStatBoosts(), b => b.getBonusStrengthFormula());
+        int amountToHeal = (int)(stats.getTotalHealth() * PartyStats.getPartyRegenAmount()) + StatBoostSource.calculateAllStatFormulas(stats.getAllStatBoosts(), b => b.getBonusStrengthFormula());
 
         int missingHealth = stats.getMissingHealth();
 

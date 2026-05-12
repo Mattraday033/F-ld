@@ -53,6 +53,16 @@ public static class PartyMemberList
                                                                                     null
                                                                                     };
 
+    private readonly static EquippableItem[] gasparStartingArmor = new EquippableItem[] {
+                                                                                    null, 
+                                                                                    ItemList.getItem(new ArmorListID(ItemList.bronzeHelmetIndex)) as EquippableItem,
+                                                                                    ItemList.getItem(new ArmorListID(ItemList.bronzeCuirassIndex)) as EquippableItem,
+                                                                                    ItemList.getItem(new ArmorListID(ItemList.leatherGlovesIndex)) as EquippableItem,
+                                                                                    ItemList.getItem(new ArmorListID(ItemList.leatherBootsIndex)) as EquippableItem,
+                                                                                    null
+                                                                                    };
+
+
     public static PartyMember getResetPartyMember(string allyName)
     {
         AbilityList.initialize();
@@ -68,6 +78,17 @@ public static class PartyMemberList
                 carter.stats.equippedItems = new EquippedItems(carter.stats, carterStartingArmor);
 
                 return carter;
+
+            case NPCNameList.gaspar:
+                PartyMember gaspar = new PartyMember(new AllyStats(NPCNameList.gaspar, higherStrength, higherDexterity, normalStat, normalStat));
+
+                gaspar.stats.combatActionArray = new CombatActionArray(gaspar.stats, new CombatAction[] { null, AbilityList.getAbility(gaspar.stats,"d-2-1"), AbilityList.getAbility(gaspar.stats,"s-2-1"), AbilityList.getAbility(gaspar.stats,"s-2-1"), null, null, null, null, AbilityList.getAbility(gaspar.stats, "d-2-2"), null, null, null });
+                gaspar.stats.combatActionArray.equipCombatAction(new Attack(gaspar.stats, ItemList.getItem(ItemList.weaponsListIndex, ItemList.whipIndex) as Weapon), 0);
+                gaspar.stats.equippedItems = new EquippedItems(gaspar.stats, gasparStartingArmor);
+                gaspar.stats.setLevel(Constants.sizeTwo);
+
+                return gaspar;
+
             case NPCNameList.nandor:
 
                 PartyMember nandor = new PartyMember(new AllyStats(NPCNameList.nandor, normalStat, normalStat, higherWisdom, normalStat));
@@ -76,6 +97,7 @@ public static class PartyMemberList
                 nandor.stats.equippedItems = new EquippedItems(nandor.stats, nandorStartingArmor);
 
                 return nandor;
+                
             case NPCNameList.thatch:
 
                 PartyMember thatch = new PartyMember(new AllyStats(NPCNameList.thatch, higherStrength, normalStat, normalStat, normalStat));
@@ -102,6 +124,23 @@ public static class PartyMemberList
         defaultPartyMember.stats.name = biffName;
 
         return defaultPartyMember;
+    }
+
+    public static Dictionary<CharacterAnimationType, string> getAudioDictionary(string allyName)
+    {
+        if(allyName == null || allyName.Contains(PartyManager.playerMarker))
+        {
+            return AnimationSFXDictionaryList.playerHumanAudioDictionary;
+        }
+
+        switch (allyName)
+        {
+            case NPCNameList.gaspar:
+            case NPCNameList.overseerGaspar:
+                return AnimationSFXDictionaryList.whipAudioDictionary;
+            default:
+                return AnimationSFXDictionaryList.maleHumanAudioDictionary;
+        }
     }
 
     public static bool characterIsPartyMember(string name)

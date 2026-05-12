@@ -159,7 +159,7 @@ public static class PartyStats
                 continue;
             }
 
-            goldMultiplier += StatBoostSource.calculateAllStatFormulasAsPercentageDouble(ally, ally.getAllStatBoosts(), b => b.getBonusGoldMultiplierFormula());
+            goldMultiplier += StatBoostSource.calculateAllStatFormulasAsPercentageDouble(ally.getAllStatBoosts(), b => b.getBonusGoldMultiplierFormula());
         }
 
         return goldMultiplier;
@@ -371,7 +371,7 @@ public static class PartyStats
         }
         else
         {
-            int bonusFormulas = StatBoostSource.calculateAllStatFormulas(PartyManager.getPlayerStats(), PartyManager.getPlayerStats().getAllStatBoosts(), b => b.getBonusCunningChargesFormula());
+            int bonusFormulas = StatBoostSource.calculateAllStatFormulas(PartyManager.getPlayerStats().getAllStatBoosts(), b => b.getBonusCunningChargesFormula());
 
             return baseDexCharges + bonusFormulas;
         }
@@ -392,7 +392,7 @@ public static class PartyStats
         }
         else
         {
-            return playerWisdom + StatBoostSource.calculateAllStatFormulas(PartyManager.getPlayerStats(), PartyManager.getPlayerStats().getAllStatBoosts(), b => b.getBonusObservationLevelFormula());
+            return playerWisdom + StatBoostSource.calculateAllStatFormulas(PartyManager.getPlayerStats().getAllStatBoosts(), b => b.getBonusObservationLevelFormula());
         }
     }
 

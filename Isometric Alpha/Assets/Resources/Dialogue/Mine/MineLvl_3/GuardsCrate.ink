@@ -43,13 +43,13 @@ VAR toldPazmanAboutSealingBreach = false
 VAR sentIntoMineByDirector = false
 VAR mentionedDirectorGuardCrates = false
 
+VAR formationScreenTutorialKey = "Formation Tutorial"
+
 VAR givenTaskByLaszlo = false
 
 VAR gasparMentionedConflictBetweenHimAndMarcos = false
 
 VAR playerName = ""
-
-
 
 {
 -mineLvl3SpeakingFromBrokenGate:
@@ -582,12 +582,19 @@ changeCamTarget({gasparIndex})
 
 activateQuestStep(No Good Deed,Make for the breach.)
 
-->2e
+->addGaspar
 
 === 2eb_LookForSurvivors ===
 
 setToTrue(mineLvl3ToldToFindMarcos)
 activateQuestStep(No Good Deed,Look for survivors.)
+
+->addGaspar
+
+=== addGaspar === 
+
+addToPartybutNotFormation({gasparIndex})
+startTutorial({formationScreenTutorialKey})
 
 ->2e
 

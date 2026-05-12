@@ -6,6 +6,12 @@ public static class AnimationSFXDictionaryList
 {
     #region Humans
 
+    public readonly static Dictionary<CharacterAnimationType, string> playerHumanAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    {
+        [CharacterAnimationType.Attack_Normal] = AudioClipList.weaponSwingAttackSound
+    };
+
+
     public readonly static Dictionary<CharacterAnimationType, string> maleHumanAudioDictionary = new Dictionary<CharacterAnimationType, string>
     {
         [CharacterAnimationType.Attack_Normal] = AudioClipList.weaponSwingAttackSound,
@@ -20,7 +26,8 @@ public static class AnimationSFXDictionaryList
 
     public readonly static Dictionary<CharacterAnimationType, string> whipAudioDictionary = new Dictionary<CharacterAnimationType, string>
     {
-        [CharacterAnimationType.Attack_Normal] = AudioClipList.whipAttackSound
+        [CharacterAnimationType.Attack_Normal] = AudioClipList.whipAttackSound,
+        [CharacterAnimationType.Death] = AudioClipList.maleHumanDeathSound 
     };
 
     #endregion

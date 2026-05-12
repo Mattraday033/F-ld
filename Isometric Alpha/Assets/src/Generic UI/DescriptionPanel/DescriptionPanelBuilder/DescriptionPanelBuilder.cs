@@ -150,6 +150,16 @@ public struct DescriptionPanelBuildingBlock
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.vulnerableIconName, formula);
     }
 
+    public static DescriptionPanelBuildingBlock getHealingBoostBlock(string text)
+    {
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.healingBoostIconName);
+    }
+
+    public static DescriptionPanelBuildingBlock getHealingBoostBlock(string text, string formula)
+    {
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.healingBoostIconName, formula);
+    }
+
     public static DescriptionPanelBuildingBlock getRangeBlock(string text)
     {
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Range, text, IconList.rangeIconName);
@@ -341,7 +351,7 @@ public struct DescriptionPanelBuildingBlock
 
     public static DescriptionPanelBuildingBlock getBonusWeaponSlotsBlock(string text)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.bonusWeaponSlotsIconName, symbolChar: Wisdom.symbolChar[0]);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text, IconList.weaponSlotsIconName, symbolChar: Wisdom.symbolChar[0]);
     }
     #endregion
 
@@ -807,6 +817,8 @@ public static class IconList
     public const string invulnerableIconName = "Invulnerability";
     public const string vulnerableIconName = "Vulnerability";
 
+    public const string healingBoostIconName = "Healing Boost";
+
     public const string intimidateIconName = "Intimidate";
     public const string bonusHealthIconName = "Bonus Health";
     public const string criticalHitDamageIconName = "Crit Damage Multiplier";
@@ -821,8 +833,8 @@ public static class IconList
     public const string observationIconName = "Observation";
     public const string mentalResistIconName = "Mental Resist";
     public const string retreatChanceIconName = "Retreat Chance";
-    public const string passiveSlotsIconName = "Bonus Slots";
-    public const string bonusWeaponSlotsIconName = "Bonus Weapon Slots";
+    public const string passiveSlotsIconName = "Passive Slots";
+    public const string weaponSlotsIconName = "Weapon Slots";
     public const string synergyIconName = "Synergy";
     public const string leadershipIconName = "Leadership";
     public const string partySlotsIconName = "Party Slots";
