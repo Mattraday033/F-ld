@@ -156,6 +156,14 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable
         OnEquipmentChange.Invoke();
     }
 
+    public void unequipAllItems()
+    {
+        for(int index = 0; index < totalEquipmentSlots; index++)
+        {
+            unequipItem(index);
+        }
+    }
+
     public IEnumerable<IDescribable> createEquippedItemList()
     {
         List<EquippableItem> allEquippedItems = new List<EquippableItem>();

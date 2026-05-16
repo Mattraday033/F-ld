@@ -112,3 +112,34 @@ public class ThiefsBodyScript : QuestStepActivationScript
         DialogueManager.getInstance().startDialogue(DialogueList.getDialogue(LocationNameList.bodyPile, NPCNameList.body + 1));
     }
 }
+
+public class KilledMineLvlThreeGuardsScript : QuestStepActivationScript
+{
+    public override void runScript(GameObject target = null)
+    {
+
+        if(Flags.getFlag(FlagNameList.sentIntoMineByDirector))
+        {
+            if(!Flags.getFlag(FlagNameList.trainedByEmeseToUseBlasingJelly))
+            {
+                QuestList.activateQuestStep(QuestNameList.noGoodDeedQuestTitle, QuestNameList.noGoodDeedStepTitleSeven);
+
+                if(Flags.getFlag(FlagNameList.mineLvl3ToldAboutJelly))
+                {
+                    QuestList.activateQuestStep(QuestNameList.sealingTheBreachQuestTitle, QuestNameList.sealingTheBreachStepTitleTwo);
+                } 
+            } else
+            {
+                QuestList.activateQuestStep(QuestNameList.noGoodDeedQuestTitle, QuestNameList.noGoodDeedStepTitleSix);
+
+                if(Flags.getFlag(FlagNameList.mineLvl3ToldAboutJelly))
+                {
+                    QuestList.activateQuestStep(QuestNameList.sealingTheBreachQuestTitle, QuestNameList.sealingTheBreachStepTitleFive);
+                }
+            }
+        } else if(Flags.getFlag(FlagNameList.mineLvl3ToldAboutJelly))
+        {
+            QuestList.activateQuestStep(QuestNameList.sealingTheBreachQuestTitle, QuestNameList.sealingTheBreachStepTitleTwo);
+        }
+    }
+}

@@ -262,14 +262,12 @@ public static class SpawnParamsList
                                                                      spawnWhileHostile: doesNotSpawnWhileHostile));
 
         #endregion
-
         #region Slave Shack 8
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackEight, NPCNameList.weft),
                                new PartyMemberSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning));
 
         #endregion
-
 
         #region Guard Shack
 
@@ -983,30 +981,34 @@ public static class SpawnParamsList
                                                                                                             FlagNameList.mineLvl3ClearedCratesToMiners
                                                                                                           }),
                                                                     stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
-                                                                                                            FlagNameList.directorDefeated, 
-                                                                                                            FlagNameList.mineLvl3BreachSealed
+                                                                                                            FlagNameList.broughtNandorToKastor,
+                                                                                                            FlagNameList.directorDefeated
                                                                                                           }), spawnWhileHostile: spawnWhileHostile));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter+1),
                                         new PartyMemberSpawnParams( stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.directorDefeated,
+                                                                                                            FlagNameList.broughtNandorToKastor,
                                                                                                             FlagNameList.mineLvl3ClearedCratesToMiners
                                                                                                           }), spawnWhileHostile: spawnWhileHostile));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.nandor),
                                         new PartyMemberSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
-                                                                                                            FlagNameList.directorDefeated, 
-                                                                                                            FlagNameList.mineLvl3BreachSealed
+                                                                                                            FlagNameList.broughtNandorToKastor,
+                                                                                                            FlagNameList.directorDefeated
                                                                                                            }), spawnWhileHostile: spawnWhileHostile));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.guardMarcos),
                                         new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.broughtNandorToKastor,
                                                                                                             FlagNameList.directorDefeated, 
-                                                                                                            FlagNameList.mineLvl3BreachSealed,
                                                                                                             FlagNameList.mineLvl3MarcosAgreedToIgniteJelly
                                                                                                            }), spawnWhileHostile: spawnWhileHostile));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.barricade),
                                         new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                                            FlagNameList.broughtNandorToKastor,
+                                                                                                            FlagNameList.directorDefeated,
                                                                                                             FlagNameList.mineLvl3ClearedCratesToMiners
                                                                                                            }), spawnWhileHostile: spawnWhileHostile));
         #endregion

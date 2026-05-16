@@ -17,28 +17,23 @@ public class TraitBasedDamageAbility: Ability
 		this.extraDamagePercentagePerTrait = extraDamagePercentagePerTrait;
 	}
 
-    public override int[] findFinalDamage(Stats targetCombatant, bool isCrit)
+    public override int findFinalDamage(Stats targetCombatant, bool isCrit)
 	{
-		int initialFinalDamage = base.findFinalDamage(targetCombatant, isCrit)[0];
-		int damageAfterAddingBonusDamage = 0;
+		int initialFinalDamage = base.findFinalDamage(targetCombatant, isCrit);
 		int numberOfTraitsOnTarget = getNumberOfEligibleTraits(targetCombatant);
 		
 		if(initialFinalDamage < 0 || targetCombatant == null)
 		{
-			return new int[]{-1};
+			return -1;
 		}		
-		
+
 		if(extraDamagePercentagePerTrait > 0.0)
 		{
-			double baseDamage = (double) initialFinalDamage;
-			
-			damageAfterAddingBonusDamage = (int) (baseDamage* (1.0 + (extraDamagePercentagePerTrait * (double) numberOfTraitsOnTarget)));
+			return (int) (((double) initialFinalDamage) * (1.0 + (extraDamagePercentagePerTrait * (double) numberOfTraitsOnTarget)));
 		} else
 		{
-			damageAfterAddingBonusDamage = initialFinalDamage*numberOfTraitsOnTarget;
+			return initialFinalDamage*numberOfTraitsOnTarget;
 		}
-		
-		return new int[]{damageAfterAddingBonusDamage};
 	}
 	
 	private int getNumberOfEligibleTraits(Stats targetCombatant)

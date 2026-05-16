@@ -7,13 +7,13 @@
 				{"stepName":"The Guards Are Dead.","MapZone":"MineLvl_3","MapLocation":"MineLvl_3-Miner Camp","journalDescription":"I have slain Overseer Gáspár and his guards, and taken their blasting jelly. <B>Now I should return to Guard Márcos in the northwest part of the third level of the mine</B> and have him prepare the jelly for use."},
 				{"stepName":"The Jelly's Secrets.","MapZone":"MineLvl_3","MapLocation":"MineLvl_3-7","journalDescription":"Guard Márcos has explained how to prepare and use the blasting jelly. I should proceed to the deepest part of the mine to the south and finish this."},
 				{"stepName":"Márcos Will Help.","MapZone":"MineLvl_3","MapLocation":"MineLvl_3-7","journalDescription":"Guard Márcos is the only one with the will and knowledge to close the pocket that the worms came from. <B>I should proceed to the deepest part of the mine to the south and finish this.</B>"},
-				{"stepName":"Sided With the Guards.","MapZone":"","MapLocation":"","journalDescription":"I fought my way to the tunnel the worms were coming from and, with the guards help, closed the tunnel for good. Afterwards, I sided with the guards after the other slaves attempted to escape their custody."},
 				{"stepName":"Sealed the Breach Myself.","MapZone":"","MapLocation":"","journalDescription":"I fought my way to the tunnel the worms were coming from and, using my wits and a little blasting jelly, closed the tunnel for good."},
 				{"stepName":"Márcos Sealed the Breach.","MapZone":"","MapLocation":"","journalDescription":"I fought my way to the tunnel the worms were coming from. Once there, Guard Márcos used the blasting jelly to close the tunnel for good, but died in the process."},
-				{"stepName":"Some Guards Surrendered.","MapZone":"","MapLocation":"","journalDescription":"I fought my way to the tunnel the worms were coming from and, with the guards help, closed the tunnel for good. Afterwards, I attempted to force the guards to surrender to me without a fight, but only two of them took my offer. I was forced to kill the rest."},
-                {"stepName":"The Guards Are Dead.1","MapZone":"","MapLocation":"","journalDescription":"I fought my way to the tunnel the worms were coming from and, with the guards help, closed the tunnel for good. Afterwards, I slew the guards when they attempted to apprehend me."},
-				{"stepName":"The worms are free.","MapZone":"","MapLocation":"","journalDescription":"I brought Nándor and the other survivors back to the surface without sealing the breach as they had asked. While we were preparing our revolution, the worms spilled from the cave and attacked the camp. We will now have to fight them and the guards at the same time."}
-			],
+				{"stepName":"The guards sealed the breach.","MapZone":"","MapLocation":"","journalDescription":"I fought my way to the tunnel the worms were coming from. Once there, Guard Virág used the blasting jelly to close the tunnel for good."},
+				{"stepName":"The worms are free.","MapZone":"","MapLocation":"","journalDescription":"I brought Nándor and the other survivors back to the surface without sealing the breach as they had asked. While we were preparing our revolution, the worms spilled from the cave and attacked the camp. We will now have to fight them and the guards at the same time."},
+				{"stepName":"Jelly acquired.","MapZone":"MineLvl_3","MapLocation":"MineLvl_3-7","journalDescription":"I have the blasting jelly and the training to use it. <B>I should proceed to the deepest part of the mine to the south and finish this.</B>"}
+
+            ],
 
 
 	"deathSteps":

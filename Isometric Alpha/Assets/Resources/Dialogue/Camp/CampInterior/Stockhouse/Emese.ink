@@ -12,6 +12,7 @@ VAR receivedTaborRewardFromEmese = false
 VAR sentIntoMineByDirector = false
 VAR trainedByEmeseToUseBlasingJelly = false
 VAR toldToFindNandor = false
+VAR mineLvl3KilledGuards = false
 
 VAR playerName = ""
 
@@ -150,7 +151,12 @@ Oh, we only keep the training kits in the camp. The blasting jelly that we use f
 
 === 1i ===
 
+{
+-mineLvl3KilledGuards:
+activateQuestStep(No Good Deed,Make for the breach.)
+-else:
 activateQuestStep(No Good Deed,Find the blasting jelly.)
+}
 
 {
 -not toldToFindNandor:
@@ -161,85 +167,6 @@ Good luck... and be careful. I overheard some of the guards from the bottom floo
 
 ->1aa
 
-=== 1j ===
-
-->Close
-
-=== 1k ===
-
-->Close
-
-=== 1l ===
-
-->Close
-
-=== 1m ===
-
-->Close
-
-=== 1n ===
-
-->Close
-
-=== 2a === 
-
-->Close
-    
-=== 2b ===
-
-->Close
-
-=== 2c ===
-
-->Close
-
-=== 2d ===
-
-->Close
-
-=== 2e ===
-
-->Close
-
-=== 2f ===
-
-->Close
-
-=== 2h ===
-
-->Close
-
-=== 2i ===
-
-->Close
-
-=== 2j ===
-
-->Close
-
-=== 2k ===
-
-->Close
-
-=== 2l ===
-
-->Close
-
-=== 2m ===
-
-->Close
-
-=== 2n ===
-
-->Close
-
-=== 3a ===
-
-->Close
-
-=== 3b ===
-
-->Close
 
 === Close ===
 

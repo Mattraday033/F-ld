@@ -12,50 +12,16 @@ public class SquadAbility : Ability
 		this.overridingDamageFormula = overridingDamageFormula;
 	}
 
-	public override int[] findFinalDamage(Stats targetCombatant, bool isCrit)
-	{
-		if(targetCombatant == null)
-		{
-			return new int[]{-1};
-		}
-		
-		string damageFormulaToUse = "";
-		
-		if(adjacentToAlly())
-		{
-			damageFormulaToUse = overridingDamageFormula;
-		} else
-		{
-			damageFormulaToUse = getDamageFormula();
-		}
-		
-		int baseDamage = DamageCalculator.calculateFormula(damageFormulaToUse, getActorStats());
-		Stats actor = getActorStats();
-		
-		if(isCrit)
-		{	
-			baseDamage = (int) (baseDamage * actor.getCritDamageMultiplier());
-			baseDamage += (int) ((float) targetCombatant.getTotalHealth() * actor.getDevastatingCriticalPercentage()); //will return 0f if not a devastatingCritical
-		}
-		
-		if(CombatStateManager.isPlayerSurpriseRound())
-		{
-			baseDamage = (int) (baseDamage * actor.getSurpriseDamageMultiplier());
-		}
-        
-        int finalDamage = 0;
-        
-        if(healsTarget())
+    public override string getDamageFormula()
+    {
+        if(adjacentToAlly())
         {
-            finalDamage = targetCombatant.modifyIncomingHealing(baseDamage);
-        } else
-        {
-            finalDamage = targetCombatant.modifyIncomingDamage(baseDamage, actor.getArmorPenetration());
-        }
+            return overridingDamageFormula;
+        } 
 
-		return new int[]{finalDamage};
-	}
-	
+        return base.getDamageFormula();
+    }
+
 	private bool adjacentToAlly()
 	{
 		if(checkTopCoords() || checkBottomCoords() || checkLeftCoords() || checkRightCoords())

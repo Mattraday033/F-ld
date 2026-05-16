@@ -21,6 +21,7 @@ public class PartyMember : IDescribable, IDescribableInBlocks
             _CanJoinParty = value;
             PartyManager.OnPartyChange.Invoke();
             ScreenManager.currentPartyMember = null;
+
             if(_CanJoinParty)
             {
                 NewPartyMemberManager.setPartyMemberAsNew(getName());

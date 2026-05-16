@@ -259,13 +259,13 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     #region Perform Combat Action
 
-    public virtual int[] findFinalDamage(Stats targetCombatant, bool isCrit)
+    public virtual int findFinalDamage(Stats targetCombatant, bool isCrit)
     {
         int baseDamage = getDamageFormulaTotal();
 
         if (targetCombatant == null || baseDamage == 0)
         {
-            return new int[] { -1 };
+            return -1;
         }
 
         Stats actor = getActorStats();
@@ -291,7 +291,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
             finalDamage = targetCombatant.modifyIncomingDamage(baseDamage, actor.getArmorPenetration());
         }
 
-        return new int[] { finalDamage };
+        return finalDamage;
     }
 
     public virtual void performCombatAction() //virtual because some abilities target the ground below their targets, such as GroundEffectAbility
@@ -386,7 +386,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
             ((!targetMustBeDead() && targetCombatant.isAlive()) || (targetMustBeDead() && !targetCombatant.isAlive())))
         {
             bool crit = DamageCalculator.isACrit(getCritFormula(), getName());
-            int finalDamage = findFinalDamage(targetCombatant, crit)[0];
+            int finalDamage = findFinalDamage(targetCombatant, crit);
 
             if (!inPreviewMode)
             {
@@ -420,7 +420,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
             ((!targetMustBeDead() && targetCombatant.isAlive()) || (targetMustBeDead() && !targetCombatant.isAlive())))
         {
             bool crit = DamageCalculator.isACrit(getCritFormula(), getName());
-            int finalDamage = findFinalDamage(targetCombatant, crit)[0];
+            int finalDamage = findFinalDamage(targetCombatant, crit);
 
             if (finalDamage >= 0)
             {
@@ -454,8 +454,8 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
             ((!targetMustBeDead() && targetCombatant.isAlive()) || (targetMustBeDead() && !targetCombatant.isAlive())))
         {
             bool crit = DamageCalculator.isACrit(getCritFormula(), getName());
-            int finalDamage = findFinalDamage(targetCombatant, crit)[0];
-
+            int finalDamage = findFinalDamage(targetCombatant, crit);
+            
             targetCombatant.modifyCurrentHealth(finalDamage, healsTarget());
 
             if (noDamage)

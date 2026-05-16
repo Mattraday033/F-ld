@@ -340,7 +340,7 @@ public static class HoverMessageList
     private const string armorSubtypeMessage = "Wearing Armor provides Armor Score, which blocks a percentage of incoming damage. Some pieces of Armor also provide additional benefits.";
 
     private const string armorScoreKey = "Armor Score";
-    private const string armorScoreMessage = "You gain Armor Score from the Items you have equipped, your Dexterity Stat, and some Traits/Abilities. Armor reduces incoming damage by a percentage. Armor cannot reduce incoming damage below 1.";
+    private const string armorScoreMessage = "Armor Score reduces incoming damage by a percentage. A character's Armor Score cannot reduce incoming damage below 1. You gain Armor Score from the Items you have equipped, your Dexterity Stat, and some Traits/Abilities.";
 
     private const string actionTypeIconMessage = "This Action's Type. A complete list of Action Types can be found in the Journal's Glossary.";
     private const string traitTypeIconMessage = "This Trait's Type. A complete list of Trait Types can be found in the Journal's Glossary.";

@@ -1439,6 +1439,12 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardVirag, new Vector3Int(-7, 8), facing: Facing.SouthEast));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.overseerGaspar, new Vector3Int(-6, 8), facing: Facing.SouthEast));
 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(-10, 5), facing: Facing.NorthEast));
+        // list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(-5, 5), facing: Facing.SouthWest));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft+1, new Vector3Int(-8,4), facing: Facing.NorthWest));
+        // list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch+1, new Vector3Int(-6,4), facing: Facing.NorthWest));
+
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(-6, 3), facing: Facing.NorthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.nandor, new Vector3Int(-8, 2), facing: Facing.NorthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(-9, 3), facing: Facing.NorthWest));

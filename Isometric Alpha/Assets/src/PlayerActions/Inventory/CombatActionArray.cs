@@ -164,6 +164,14 @@ public class CombatActionArray : StatBoostSourceCombiner
         OnCombatActionArrayChange.Invoke();
     }
 
+    public void unequipAllActions()
+    {
+        for(int index = 0; index < maxPlayerCombatActions; index++)
+        {
+            unequipCombatAction(index);
+        }
+    }
+
     private bool actionIsAttack(CombatAction action)
     {
         return action.getSourceItem() != null && action.getSourceItem().isEquippable();

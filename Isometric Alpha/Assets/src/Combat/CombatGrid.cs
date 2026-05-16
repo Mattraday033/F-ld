@@ -4,22 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Unity.Collections.LowLevel.Unsafe;
 
-public struct RowOfCombatants
-{
-	public Stats[] row;
-	
-	public Stats getCol(int index)
-	{
-		return row[index];
-	}
-	
-	public void setCol(int index, Stats newCombatant)
-	{
-		row[index] = newCombatant;
-	}
-}
+
+public delegate bool CombatantSearchCriteria(Stats stats);
 
 public static class CombatGrid
 {	
@@ -38,17 +25,13 @@ public static class CombatGrid
 	
 	public const int maximumNumberOfSpaces = 16;
 	
-	public static RowOfCombatants[] combatantStatsGrid = new RowOfCombatants[8];
+    public static Dictionary<GridCoords,Stats> combatantsDict = new Dictionary<GridCoords,Stats>();
 
-    //resets combat grid
+    
+    [RuntimeInitializeOnLoadMethod]
     public static void cleanCombatGrid()
     {
-        combatantStatsGrid = new RowOfCombatants[8];
-
-        for (int i = 0; i < combatantStatsGrid.Length; i++)
-        {
-            combatantStatsGrid[i].row = new Stats[4];
-        }
+        combatantsDict = new Dictionary<GridCoords,Stats>();
     }
 
 	public static Vector3 getPositionAt(GridCoords coords)
@@ -89,16 +72,6 @@ public static class CombatGrid
 		return (positionIsOnAlliedSide(firstCoords) && positionIsOnAlliedSide(secondCoords)) || (positionIsOnEnemySide(firstCoords) && positionIsOnEnemySide(secondCoords));
     }
 
-    public static int getNumberOfRows()
-	{
-		return combatantStatsGrid.Length;
-	}
-	
-	public static int getNumberOfCols()
-	{
-		return combatantStatsGrid[0].row.Length;
-	}
-	
 	public static void updateStatsSpritePosition(GridCoords newCoords)
 	{
 		Stats combatant = getCombatantAtCoords(newCoords);
@@ -119,7 +92,15 @@ public static class CombatGrid
 	
 	public static void setCombatantAtCoords(GridCoords coords, Stats newCombatant)
 	{
-		combatantStatsGrid[coords.row].setCol(coords.col, newCombatant);
+        if(newCombatant == null && combatantsDict.ContainsKey(coords))
+        {
+            combatantsDict.Remove(coords);
+        } else if(newCombatant == null)
+        {
+            return;
+        }
+
+        combatantsDict[coords] = newCombatant;
 	}
 	
 	//null means no one is at given coords
@@ -141,7 +122,13 @@ public static class CombatGrid
 			return null;
 		}
 		
-		return combatantStatsGrid[coords.row].getCol(coords.col);
+        if(combatantsDict.ContainsKey(coords))
+        {
+            return combatantsDict[coords];
+        } else
+        {
+            return null;
+        }
 	}
 	
 	public static int actualEnemyMinionCombatActionCount()
@@ -203,201 +190,76 @@ public static class CombatGrid
 		return enemyTypeCount;
 	}
 	
-	public static int howManyEmptyEnemySpaces()
-	{
-		return maximumNumberOfSpaces - getTotalEnemyCount();
-	}
-	
+    public static List<Stats> getAllCombatantsThatMeetCriteria(CombatantSearchCriteria meetsCriteria)
+    {
+        List<Stats> matches = new List<Stats>();
+
+        foreach(Stats combatant in combatantsDict.Values)
+        {
+            if(combatant != null && meetsCriteria(combatant))
+            {
+                matches.Add(combatant);
+            }
+        }
+		
+		return scrubDuplicatesFromList(matches);
+    }
+
 	public static List<Stats> getAllAliveSummonedEnemies()
 	{
-		List<Stats> allAliveSummonedEnemies = new List<Stats>();
-
-		for(int rowIndex = enemyRowUpperBounds; rowIndex <= enemyRowLowerBounds; rowIndex++)
-		{
-			foreach(Stats combatantSlot in combatantStatsGrid[rowIndex].row)
-			{
-				if(combatantSlot != null && combatantSlot.isAlive() && combatantSlot.isTargetable() && combatantSlot.isPartOfVolley())
-				{
-					allAliveSummonedEnemies.Add(combatantSlot);
-				}
-			}
-		}
-		
-		return scrubDuplicatesFromList(allAliveSummonedEnemies);
+		return getAllCombatantsThatMeetCriteria(c => positionIsOnEnemySide(c.position) && c.isAlive() && c.isTargetable() && c.isPartOfVolley());
 	}
 	
 	public static List<Stats> getAllAliveNonsummonedEnemies()
 	{
-		List<Stats> allAllyCombatants = new List<Stats>();
-
-		for(int rowIndex = enemyRowUpperBounds; rowIndex <= enemyRowLowerBounds; rowIndex++)
-		{
-			foreach(Stats combatantSlot in combatantStatsGrid[rowIndex].row)
-			{
-				if(combatantSlot != null && combatantSlot.isAlive() && combatantSlot.isTargetable() && !combatantSlot.isSummon())
-				{
-					allAllyCombatants.Add(combatantSlot);
-				}
-			}
-		}
-		
-		return scrubDuplicatesFromList(allAllyCombatants);
+		return getAllCombatantsThatMeetCriteria(c => positionIsOnEnemySide(c.position) && c.isAlive() && c.isTargetable() &&  !c.isPartOfVolley());
 	}
 	
 	public static List<Stats> getAllAliveSummonedAllies()
 	{
-		List<Stats> allAliveSummonedAllies = new List<Stats>();
-
-		for(int rowIndex = allyRowUpperBounds; rowIndex <= allyRowLowerBounds; rowIndex++)
-		{
-			foreach(Stats combatantSlot in combatantStatsGrid[rowIndex].row)
-			{
-				if(combatantSlot != null && combatantSlot.isAlive() && combatantSlot.isTargetable() && combatantSlot.isSummon())
-				{
-					allAliveSummonedAllies.Add(combatantSlot);
-				}
-			}
-		}
-		
-		return scrubDuplicatesFromList(allAliveSummonedAllies);
+		return getAllCombatantsThatMeetCriteria(c => positionIsOnAlliedSide(c.position) && c.isAlive() && c.isTargetable() && c.isSummon());
 	}
-	
+
 	public static List<Stats> getAllAliveNonsummonedAllies()
 	{
-		List<Stats> allAllyCombatants = new List<Stats>();
-
-		for(int rowIndex = allyRowUpperBounds; rowIndex <= allyRowLowerBounds; rowIndex++)
-		{
-			foreach(Stats combatantSlot in combatantStatsGrid[rowIndex].row)
-			{
-				if(combatantSlot != null && combatantSlot.isAlive() && combatantSlot.isTargetable() && !combatantSlot.isSummon())
-				{
-					allAllyCombatants.Add(combatantSlot);
-				}
-			}
-		}
-		
-		return scrubDuplicatesFromList(allAllyCombatants);
+		return getAllCombatantsThatMeetCriteria(c => positionIsOnAlliedSide(c.position) && c.isAlive() && c.isTargetable() && !c.isSummon());
 	}
-	
+
 	public static List<Stats> getAllAliveAllyCombatants()
 	{
-		List<Stats> allAllyCombatants = new List<Stats>();
-
-		for(int rowIndex = allyRowUpperBounds; rowIndex <= allyRowLowerBounds; rowIndex++)
-		{
-			foreach(Stats combatantSlot in combatantStatsGrid[rowIndex].row)
-			{
-				if(combatantSlot != null && combatantSlot.isAlive() && combatantSlot.isTargetable())
-				{
-					allAllyCombatants.Add(combatantSlot);
-				}
-			}
-		}
-		
-		return scrubDuplicatesFromList(allAllyCombatants);
+		return getAllCombatantsThatMeetCriteria(c => positionIsOnAlliedSide(c.position) && c.isAlive() && c.isTargetable());
 	}
-	
+
 	public static List<Stats> getAllAliveEnemyCombatants()
 	{
-		List<Stats> allEnemyCombatants = new List<Stats>();
-
-		for(int rowIndex = enemyRowUpperBounds; rowIndex <= enemyRowLowerBounds; rowIndex++)
-		{
-			foreach(Stats combatantSlot in combatantStatsGrid[rowIndex].row)
-			{
-				if(combatantSlot != null && combatantSlot.isAlive() && combatantSlot.isTargetable())
-				{	
-                    if(combatantSlot.repositionClone != null)
-                    {
-					    allEnemyCombatants.Add(combatantSlot.repositionClone);
-                    } else
-                    {
-					    allEnemyCombatants.Add(combatantSlot);
-                    }
-				}
-			}
-		}
-		
-		return scrubDuplicatesFromList(allEnemyCombatants);
+		return getAllCombatantsThatMeetCriteria(c => positionIsOnEnemySide(c.position) && c.isAlive() && c.isTargetable());
 	}
 
 	public static List<Stats> getAllAliveCombatants()
 	{
-		List<Stats> allCombatants = getAllAliveAllyCombatants();
-		
-		allCombatants.AddRange(getAllAliveEnemyCombatants());
-		
-		return allCombatants;
+		return getAllCombatantsThatMeetCriteria(c => c.isAlive() && c.isTargetable());
 	}
-	
+
 	public static List<Stats> getAllAllyCombatants()
 	{
-		List<Stats> allAllyCombatants = new List<Stats>();
-
-		for(int rowIndex = allyRowUpperBounds; rowIndex <= allyRowLowerBounds; rowIndex++)
-		{
-			foreach(Stats combatantSlot in combatantStatsGrid[rowIndex].row)
-			{
-				if(combatantSlot != null && combatantSlot.isTargetable())
-				{
-					allAllyCombatants.Add(combatantSlot);
-				}
-			}
-		}
-		
-		return scrubDuplicatesFromList(allAllyCombatants);
+		return getAllCombatantsThatMeetCriteria(c => positionIsOnAlliedSide(c.position) && c.isTargetable());
 	}
 
 	public static bool selectableAllyAtLocation(GridCoords coords)
 	{
-		List<Stats> allAllyCombatants = getAllAllyCombatants();
+		Stats ally = getCombatantAtCoords(coords);
 		
-		foreach(Stats ally in allAllyCombatants)
-		{
-			if(ally.position.Equals(coords) && ally.isAlive())
-			{
-				return true;
-			}
-		}
-		
-		return false;
+        return ally != null && ally.isAlive();
 	}
 
 	public static List<Stats> getAllNonsummonedAllyCombatants()
 	{
-		List<Stats> allAllyCombatants = new List<Stats>();
-
-		for (int rowIndex = allyRowUpperBounds; rowIndex <= allyRowLowerBounds; rowIndex++)
-		{
-			foreach (Stats combatantSlot in combatantStatsGrid[rowIndex].row)
-			{
-				if (combatantSlot != null && combatantSlot.isTargetable() && !combatantSlot.isSummon())
-				{
-					allAllyCombatants.Add(combatantSlot);
-				}
-			}
-		}
-
-		return scrubDuplicatesFromList(allAllyCombatants);
+		return getAllCombatantsThatMeetCriteria(c => positionIsOnAlliedSide(c.position) && c.isTargetable() && !c.isSummon());
 	}
-	
+
 	public static List<Stats> getAllEnemyCombatants()
 	{
-		List<Stats> allEnemyCombatants = new List<Stats>();
-
-		for(int rowIndex = enemyRowUpperBounds; rowIndex <= enemyRowLowerBounds; rowIndex++)
-		{
-			foreach(Stats combatantSlot in combatantStatsGrid[rowIndex].row)
-			{
-				if(combatantSlot != null && combatantSlot.isTargetable())
-				{	
-					allEnemyCombatants.Add(combatantSlot);
-				}
-			}
-		}
-		
-		return scrubDuplicatesFromList(allEnemyCombatants);
+		return getAllCombatantsThatMeetCriteria(c => positionIsOnEnemySide(c.position) && c.isTargetable());
 	}
 
     public static Stats findOriginalCombatant(Stats repositionClone)
@@ -417,46 +279,20 @@ public static class CombatGrid
 
 	public static List<Stats> getAllCombatants()
 	{
-		List<Stats> allCombatants = getAllAllyCombatants();
-		
-		allCombatants.AddRange(getAllEnemyCombatants());
-		
-		return allCombatants;
+		return getAllCombatantsThatMeetCriteria(c => c.isTargetable());
 	}
-	
+
 	public static List<Stats> getAllZOITargets(GridCoords coords)
 	{
-		if(coords.row > allyRowLowerBounds || 
+		if(coords.row > allyRowLowerBounds ||
 			coords.row < allyRowUpperBounds ||
 			coords.col < colLeftBounds ||
 			coords.col > colRightBounds)
-			{
-				throw new IOException("Given Coords not within Ally Bounds. Coords = " + coords.ToString());
-			}
+		{
+			return new List<Stats>();
+		}
 
-		List<Stats> allZOITargets = new List<Stats>();
-		
-		if(coords.row-1 >= allyRowUpperBounds && getCombatantAtCoords(coords.row-1,coords.col) != null)
-		{
-			allZOITargets.Add(getCombatantAtCoords(coords.row-1,coords.col));
-		}
-		
-		if(coords.row+1 <= allyRowLowerBounds && getCombatantAtCoords(coords.row+1,coords.col) != null)
-		{
-			allZOITargets.Add(getCombatantAtCoords(coords.row+1,coords.col));
-		}
-		
-		if(coords.col-1 >= colLeftBounds && getCombatantAtCoords(coords.row,coords.col-1) != null)
-		{
-			allZOITargets.Add(getCombatantAtCoords(coords.row,coords.col-1));
-		}
-		
-		if(coords.col+1 <= colRightBounds  && getCombatantAtCoords(coords.row,coords.col+1) != null)
-		{
-			allZOITargets.Add(getCombatantAtCoords(coords.row,coords.col+1));
-		}
-		
-		return allZOITargets;
+		return getAllCombatantsThatMeetCriteria(c => positionIsOnAlliedSide(c.position) && Math.Abs(c.position.row - coords.row) + Math.Abs(c.position.col - coords.col) == 1);
 	}
 	
 	public static GridCoords findRandomOpenSpace(int startRow, int endRow)
@@ -496,21 +332,24 @@ public static class CombatGrid
 
 	private static GridCoords[] getAllEmptySpacesInArea(int startRow, int endRow)
 	{
-		GridCoords[] allEmptySpaces = new GridCoords[0];
+		// GridCoords[] allEmptySpaces = new GridCoords[0];
 		
-		for(int rowIndex = startRow; rowIndex <= endRow; rowIndex++)
-		{
-			int colIndex = 0;
+		// for(int rowIndex = startRow; rowIndex <= endRow; rowIndex++)
+		// {
+        //     for(int colIndex = 0; colIndex <= colRightBounds; colIndex++)
+        //     {
 
-			foreach(Stats space in combatantStatsGrid[rowIndex].row)
-			{
-				if(space == null && space is null && !CombatStateManager.allQueuedSummonLocations.Contains(new GridCoords(rowIndex, colIndex)))
-				{
-					allEmptySpaces = Helpers.appendArray(allEmptySpaces, new GridCoords(rowIndex, colIndex));
-				}
-				colIndex++;
-			}
-		}
+        //         foreach(Stats space in combatantsDict.Values)
+        //         {
+        //             if(space == null && space is null && !CombatStateManager.allQueuedSummonLocations.Contains(new GridCoords(rowIndex, colIndex)))
+        //             {
+        //                 allEmptySpaces = Helpers.appendArray(allEmptySpaces, new GridCoords(rowIndex, colIndex));
+        //             }
+                    
+        //             colIndex++;
+        //         }
+        //     }
+		// }
 		
 		return allEmptySpaces;
 	}
@@ -567,16 +406,16 @@ public static class CombatGrid
 	
 	public static void deleteDeadOnDeathEffectActors()
 	{
-		for (int rowIndex = 0; rowIndex < CombatGrid.combatantStatsGrid.Length; rowIndex++)
+		for (int rowIndex = 0; rowIndex < combatantStatsGrid.Length; rowIndex++)
 		{
-			for (int colIndex = 0; colIndex < CombatGrid.combatantStatsGrid[rowIndex].row.Length; colIndex++)
+			for (int colIndex = 0; colIndex < combatantStatsGrid[rowIndex].row.Length; colIndex++)
 			{
-				Stats currentCombatant = CombatGrid.getCombatantAtCoords(rowIndex, colIndex);
+				Stats currentCombatant = getCombatantAtCoords(rowIndex, colIndex);
 
 				if (currentCombatant != null && currentCombatant.isDead() &&
 					Helpers.hasQuality<Trait>(currentCombatant.traitContainer, t => t.deleteIfDead()))
 				{
-					CombatGrid.setCombatantAtCoords(rowIndex, colIndex, null);
+					setCombatantAtCoords(rowIndex, colIndex, null);
 				}
 			}
 		}

@@ -1078,7 +1078,9 @@ public static class DialogueList
                                                                                                             NPCNameList.carter,
                                                                                                             NPCNameList.nandor,
                                                                                                             NPCNameList.guardMarcos,
-                                                                                                            NPCNameList.guardMarcos+1
+                                                                                                            NPCNameList.guardMarcos+1,
+                                                                                                            NPCNameList.weft//,
+                                                                                                            //NPCNameList.thatch
                                                                                                         },
                                                                                 Resources.Load<TextAsset>(DialogueNameList.pocketRubblePathML3),
                                                                                 DialogueCombatInfoList.breachRubbleCombatInfo));
@@ -1089,24 +1091,14 @@ public static class DialogueList
                                                                                                             NPCNameList.carter,
                                                                                                             NPCNameList.guardMarcos,
                                                                                                             NPCNameList.guardPazman,
-                                                                                                            NPCNameList.guardReka
+                                                                                                            NPCNameList.guardReka,
+                                                                                                            NPCNameList.guardVirag,
+                                                                                                            NPCNameList.overseerGaspar,
+                                                                                                            NPCNameList.weft+1//,
+                                                                                                            //NPCNameList.thatch+1
                                                                                                         },
                                                                                 Resources.Load<TextAsset>(DialogueNameList.afterKillingGuardsMineLvl3Path)));
 
-        // addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section7, NPCNameList.rubble+1, 
-        //                                                                         new Dialogue(new string[] { 
-        //                                                                                                     NPCNameList.rubble+1,
-        //                                                                                                     NPCNameList.rubble,
-        //                                                                                                     NPCNameList.guardPazman,
-        //                                                                                                     NPCNameList.guardReka,
-        //                                                                                                     NPCNameList.guardVirag,
-        //                                                                                                     NPCNameList.overseerGaspar,
-        //                                                                                                     NPCNameList.carter,
-        //                                                                                                     NPCNameList.nandor,
-        //                                                                                                     NPCNameList.guardMarcos,
-        //                                                                                                     NPCNameList.guardMarcos+1
-        //                                                                                                 },
-        //                                                                         Resources.Load<TextAsset>(DialogueNameList.pocketRubblePathML3)));
         #endregion
 
         #endregion

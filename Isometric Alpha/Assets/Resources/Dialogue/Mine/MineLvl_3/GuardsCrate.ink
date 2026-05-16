@@ -41,6 +41,7 @@ VAR mineLvl3SpeakingFromBrokenGate = false
 VAR toldPazmanAboutSealingBreach = false
 
 VAR sentIntoMineByDirector = false
+VAR trainedByEmeseToUseBlasingJelly = false
 VAR mentionedDirectorGuardCrates = false
 
 VAR formationScreenTutorialKey = "Formation Tutorial"
@@ -107,7 +108,7 @@ A slave? And not one of the other survivors. I don't recognize you. Explain why 
 {
 -sentIntoMineByDirector:
     +The Director has sent me on a mission to close the tunnel the worms are coming from. I was not expecting to find survivors. *Show Director's Seal*
-        ->showDirectorsSeal_1a
+        ->showDirectorsSeal_1aa
 -givenTaskByLaszlo:
     +I was let out of my hut by Guard László and I was trying to be helpful by looking for survivors. *Show badge*
         ->1i
@@ -116,11 +117,23 @@ A slave? And not one of the other survivors. I don't recognize you. Explain why 
     +I got lost.
         ->1c
 
-=== showDirectorsSeal_1a ===
+=== showDirectorsSeal_1aa ===
 
 setToTrue(mentionedDirectorGuardCrates)
 
 The Director's Seal? We believed we would be rescued by the camp's guards, not by some branded. Not that I'm ungrateful, mind you. Come with me, I'll show you to the overseer.
+
+->showDirectorsSeal_1a
+
+=== showDirectorsSeal_1ab ===
+
+setToTrue(mentionedDirectorGuardCrates)
+
+The Director's Seal? Then why by the Sun did you give me all of that nonsense before? *The guard sighs.* Not that I'm ungrateful, mind you. Come with me, I'll show you to the overseer.
+
+->showDirectorsSeal_1a
+
+=== showDirectorsSeal_1a ===
 
 {
 -mineLvl3SpeakingFromBrokenGate:
@@ -132,15 +145,34 @@ The Director's Seal? We believed we would be rescued by the camp's guards, not b
         ->Close
 }
 
-=== showDirectorsSeal_1b ===
+
+=== showDirectorsSeal_1ba ===
 
 changeCamTarget({gasparIndex})
 
 Humiliating that I should be rescued by one of the branded. Things must be dire on the surface indeed.
 
-->showDirectorsSeal_1ba
+->showDirectorsSeal_1b
 
-=== showDirectorsSeal_1ba ===
+=== showDirectorsSeal_1bb ===
+
+changeCamTarget({gasparIndex})
+
+\*Gáspár looks at the seal with surprise, then shakes his head.* I see. In that case, you've executed your orders as was expected of you. It is humiliating that I should be rescued by one of the branded. Things must be dire on the surface indeed.
+
+->showDirectorsSeal_1b
+
+=== showDirectorsSeal_1bc ===
+
+changeCamTarget({gasparIndex})
+
+\*Gáspár looks at the seal with surprise, then shakes his head.* I see. This would have gone a lot smoother had you simply shown that to begin with.
+
+Very well. This is what is going to happen: I will lead this squad toward the breach and Guard Virág will perform the demolition. You are going to be in the front ranks, and should you die, we will step over your corpse and finish the job.
+
+->showDirectorsSeal_1da
+
+=== showDirectorsSeal_1b ===
 
     +The entire camp is under lockdown. It seems the Director couldn't spare the personnel.
         ->showDirectorsSeal_1ca
@@ -149,7 +181,7 @@ Humiliating that I should be rescued by one of the branded. Things must be dire 
 
 === showDirectorsSeal_1ca ===
 
-I see. I am eager to return to camp and learn what we can do to assist.
+That is likely, considering the amount of guards we lost to the worms. I am eager to return to camp and learn what we can do to assist.
 
     +We cannot return yet. Your rescue was not my main goal. I was trained in the use of blasting jelly. I will need one of your barrels to collapse the entrance the worms used.
         ->showDirectorsSeal_1d
@@ -171,7 +203,9 @@ In that respect, the Director was wise to send you. To have made it down to this
 
 === showDirectorsSeal_1d ===
 
-Preposterous. I will not allow a branded to be given charge of a barrel of blasting jelly. Your independence is at an end: you will accompany us as I lead this squad toward the breach, but you will be under my supervision. And a member of my squad will perform the demolition.
+Preposterous. First you rescue us, and now you claim you can defeat these worms when an entire floor of guards could not? There could be no greater emasculation for a soldier of the Confederation. 
+
+I have a better idea: <i>you</i> will accompany <i>us</i> as I lead this squad toward the breach. And a member of my squad will perform the demolition.
     ->showDirectorsSeal_1da
 
 === showDirectorsSeal_1da ===
@@ -192,14 +226,14 @@ Preposterous. I will not allow a branded to be given charge of a barrel of blast
 
             ->showDirectorsSeal_1da
         }
-    +The Director has not learned of your survival yet. Test me, and he never will. <Str {strength}/3>
+    +You lost your authority when you failed to protect these tunnels. The Director has not learned of your survival yet. Test me, and he never will. <Str {strength}/3>
         {
         -strength >= 3:
             ->2ca
         -else:
         ->insultGaspar("You dare threaten me? I don't care what you've achieved, a branded like you is a danger to the morale of the camp, and you will be dealt with accordingly!")
         }
-    +You just want to take credit for what I've accomplished!
+    +How quickly your cowardice turns to confidence when you have me to hide behind. You just want to take credit for what I've accomplished!
 
         Everything you accomplish is in service to the Confederation! Credit is not your concern, and neither are rewards! You serve, and then you die, like the criminal you are!
 
@@ -223,7 +257,7 @@ Overseer, with respect, please forgive this branded. Surely our gratitude to the
 
 changeCamTarget({gasparIndex})
 
-I will forgive them if they recognize my leadership. Are you willing to follow my instruction, slave?
+I will forgive them if they recognize my leadership. Are you willing to follow my instructions, slave?
 
 ->showDirectorsSeal_1eaa
 
@@ -264,7 +298,7 @@ I decreed that the branded were to find their own shelter, to conserve the food 
     +I had hoped you'd give me an excuse to kill you. <Combat>
         ->combatPrep
     +\*Incline your head.* Of course, overseer. 
-        Good. Do not make a habit of testing my patience, slave. The Director's Seal or no, you will adhere to rank in my presence.
+        Good. Do not make a habit of testing my patience. The Director's Seal or no, you will adhere to rank in my presence.
         ->2ea_MakeForBreach
 
 === showDirectorsSeal_1eab ===
@@ -436,10 +470,16 @@ Incredible. If you were able to make it down here, maybe with your help we actua
 
 === 1m ===
 
-Slave, you will submit to my authority. Drop any tools you may be carrying and keep your hands where I can see them while I climb over this barricade and apprehend you.
+Slave, you will submit to my authority. Drop any tools you may be carrying and keep your hands where I can see them while I {mineLvl3SpeakingFromGuardCrates:climb over this barricade and }apprehend you.
 
 {
 -mineLvl3SpeakingFromGuardCrates:
+{
+-sentIntoMineByDirector:
+    +Actually, the Director has sent me on a mission to close the tunnel the worms are coming from. I was not expecting to find survivors. *Show Director's Seal*
+        setToTrue(mentionedDirectorGuardCrates)
+        ->showDirectorsSeal_1ab
+}
     +Eat shit, slaver. I'm not going anywhere with you. *Leave.*
         setToTrue(mineLvl3ToldPazmanToEatShit)
         ->Close
@@ -448,6 +488,12 @@ Slave, you will submit to my authority. Drop any tools you may be carrying and k
     +Yes, come to this side of the barricade. It'll be easier to bleed you that way. <Combat>
         ->combatPrep
 -else:
+{
+-sentIntoMineByDirector:
+    +Actually, the Director has sent me on a mission to close the tunnel the worms are coming from. I was not expecting to find survivors. *Show Director's Seal*
+        setToTrue(mentionedDirectorGuardCrates)
+        ->showDirectorsSeal_1ab
+}
     +Yes ma'am. I need to talk to someone about all the worms around here anyways.
         ->2a
     +Command me at your peril, slaver. <Combat>
@@ -498,7 +544,7 @@ changeCamTarget({introducerIndex})
 {
 -mentionedDirectorGuardCrates:
 I'm certain, sir. They bear the Director's Seal. They have been sent to end the worm menace.
-    ->showDirectorsSeal_1b
+    ->showDirectorsSeal_1ba
 -else:
 I'm certain, sir. This means the gate is open. We can leave!
 }
@@ -512,7 +558,7 @@ I'm certain, sir. This means the gate is open. We can leave!
 
     +And <i>I</i> am the one who opened the gate to the upper levels. I suppose a reward is in order?
         ~askedForReward = true
-        -> 3a
+        ->3a
 
     +Yeah that's right. No need to thank me. 
         ->3a
@@ -528,6 +574,13 @@ Overseer, with respect, this slave has risked their life considerably to get dow
 ->2caa
 
 === 2caa ===
+
+{
+-sentIntoMineByDirector:
+    +Because if you don't help us, the Director will learn of it. *Show Director's Seal*
+        setToTrue(mentionedDirectorGuardCrates)
+        ->showDirectorsSeal_1bc
+}
 
 {
 
@@ -593,14 +646,16 @@ activateQuestStep(No Good Deed,Look for survivors.)
 
 === addGaspar === 
 
+setToTrue(gasparAddedToParty)
 addToPartybutNotFormation({gasparIndex})
+healParty()
 startTutorial({formationScreenTutorialKey})
 
 ->2e
 
 === 2e ===
 
-Pázmán, stay here and keep manning the {mineLvl2GuardsFinishedMove:gate|barricade}. If we need to retreat and rest we will come back. Come find us once we've cleared the way.
+Pázmán, stay here and keep manning the {mineLvl2GuardsFinishedMove:gate|barricade}. If we need to retreat and rest we will return here. Come find us once we've cleared the way.
 
 changeCamTarget({pazmanIndex})
 
@@ -623,7 +678,14 @@ Oh, I doubt it: I can count to twelve on a good day and there's no way you've ki
 
 changeCamTarget({gasparIndex})
 
-{askedForReward:A reward?|Thank you?} That gate was closed to prevent any of these worms from getting through to the higher levels! You opening it is in direction violation of standing camp orders! If you're looking for a reward, the only thing you'll receive is a trip to the pit, scum!
+{askedForReward:A reward?|Thank you?} That gate was closed to prevent any of these worms from getting through to the higher levels! You opening it is in direction violation of standing camp orders! If you're looking for a reward, the only thing you'll receive is a trip to the Pit, scum!
+
+{
+-sentIntoMineByDirector:
+    +Actually, I was given orders to do exactly that. The Director has sent me on a mission to close the tunnel the worms are coming from. *Show Director's Seal*
+        setToTrue(mentionedDirectorGuardCrates)
+        ->showDirectorsSeal_1bb
+}
 
     +I've saved you and your guards from this death trap! A 'thank you' isn't too much to ask!
         ->3b
@@ -718,7 +780,7 @@ addXP(50)
 
 === 3fc ===
 
-    +Not good, he was bleeding all over the last I saw him. He wanted me to come get you and help you seal the breach the worms are coming out of.
+    +Not good, he was covered in wounds the last I saw him. He wanted me to come get you and help you seal the breach the worms are coming out of.
         Seal the breach? As far as I'm concerned, Márcos is a traitor for disobeying my orders to leave the workers to their fate, and you're just a slave. Give me any reason, any reason at all, I shouldn't just leave the lot of you here to drown in worms and bats.
             ->2caa
 
@@ -759,7 +821,7 @@ I'll allow you to ask your questions, but make them quick. I am loathe to stay h
         Bad luck, mostly. It was our shift to watch the miners in the newest tunnel we were digging, and one of them struck a pocket. These worm things swarmed out of a gap in the wall, making quick work of the team closest to the breach.
         
         keepDialogue()
-        In the confusion, some must have gotten around us out into the rest of this level because once we were able to extract ourselves from the first wave, the alarm had been sounded and the others had pulled out to the higher levels. Of course, protocol is to close the gate behind you during an evacuation, so we ended up trapped by our own comrades. 
+        In the confusion, some must have gotten past us because once we were able to extract ourselves from the first wave, the alarm had been sounded and the others had pulled out to the higher levels. Of course, protocol is to close the gate behind you during an evacuation, so we ended up trapped by our own comrades. 
         ->5a
 
     +I'm finished with my questions. 
@@ -769,11 +831,6 @@ I'll allow you to ask your questions, but make them quick. I am loathe to stay h
         ->3ea
 
 === combatPrep ===
-
-{
-    -mineLvl3ToldAboutJelly:
-    activateQuestStep(Sealing the Breach, The Guards Are Dead., true)
-}
 
 //deactivate({pazmanCratesIndex})
 setToTrue(mineLvl3ClearedCratesToGuards)
@@ -797,6 +854,8 @@ setToTrue(mineLvl3KilledGuards)
 {
 -(not mineLvl2GuardsFinishedMove) or mineLvl3GuardsInParty or (mineLvl2GuardsMovedToSecondLevelGate and not mineLvl2GuardsFinishedMove):
 fadeToBlack()
+-else:
+->Close
 }
 
 

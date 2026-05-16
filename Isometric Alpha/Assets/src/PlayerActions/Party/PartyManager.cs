@@ -64,7 +64,7 @@ public static class PartyManager
         return false;
     }
 
-    public static void healFullAllPartyMembers()
+    public static void healAllPartyMembersToFull()
     {
         foreach (PartyMember partyMember in partyMemberDict.Values)
         {
@@ -254,7 +254,10 @@ public static class PartyManager
 
         foreach (PartyMember partyMember in partyMembers)
         {
-            partyMember.stats.addXP(xpToAdd);
+            if(partyMember.canJoinParty)
+            {
+                partyMember.stats.addXP(xpToAdd);
+            }
         }
     }
 

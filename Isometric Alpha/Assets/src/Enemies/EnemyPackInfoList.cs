@@ -212,7 +212,7 @@ public static class EnemyPackInfoList
                                                                                         DropTableList.lovashiGuardsDTKey,
                                                                                         new ItemListID[] { new ItemListID(ItemList.armorListIndex, ItemList.bronzeCuirassIndex)});
 
-    public readonly static EnemyPackInfo ml3GuardsWithBarricades = new EnemyPackInfo(new CreatureAmount[] { 
+    public readonly static EnemyPackInfo ml3GuardsWithBarricades = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.barricade, 
                                                                                                         EnemyAmountList.guardReka, 
                                                                                                         EnemyAmountList.guardPazman, 
@@ -220,16 +220,20 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.guardVirag 
                                                                                                        },
                                                                                                         DropTableList.lovashiGuardsDTKey,
-                                                                                    new ItemListID[]  {new ItemListID(ItemList.questItemListIndex, ItemList.blastingJellyIndex)});
+                                                                                                        guaranteedDrops: new ItemListID[]  {new ItemListID(ItemList.questItemListIndex, ItemList.blastingJellyIndex)},
+                                                                                                        xpDrop: 150, 
+                                                                                                        script: new KilledMineLvlThreeGuardsScript());
 
-    public readonly static EnemyPackInfo ml3GuardsWithoutBarricades = new EnemyPackInfo(new CreatureAmount[] { 
+    public readonly static EnemyPackInfo ml3GuardsWithoutBarricades = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.guardReka, 
                                                                                                         EnemyAmountList.guardPazman, 
                                                                                                         EnemyAmountList.overseerGaspar, 
                                                                                                         EnemyAmountList.guardVirag 
                                                                                                        },
                                                                                                         DropTableList.lovashiGuardsDTKey,
-                                                                                    new ItemListID[]  {new ItemListID(ItemList.questItemListIndex, ItemList.blastingJellyIndex)});
+                                                                                                        guaranteedDrops: new ItemListID[]  {new ItemListID(ItemList.questItemListIndex, ItemList.blastingJellyIndex)},
+                                                                                                        xpDrop: 150, 
+                                                                                                        script: new KilledMineLvlThreeGuardsScript());
 
     public readonly static EnemyPackInfo ml3GuardsNoSurrenders = new EnemyPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.guardReka, 

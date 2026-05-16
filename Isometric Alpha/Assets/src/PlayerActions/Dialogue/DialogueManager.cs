@@ -784,7 +784,7 @@ public class DialogueManager : MonoBehaviour
 
                 case "healparty":
 
-                    PartyManager.healFullAllPartyMembers();
+                    PartyManager.healAllPartyMembersToFull();
 
                     continueStory();
 
@@ -796,7 +796,7 @@ public class DialogueManager : MonoBehaviour
 
                     // State.playerStats.modifyCurrentHealth(State.playerStats.getTotalHealth(), true);
 
-                    PartyManager.healFullAllPartyMembers();
+                    PartyManager.healAllPartyMembersToFull();
 
                     AudioManager.playRestSFX();
 
@@ -1372,7 +1372,10 @@ public class DialogueManager : MonoBehaviour
 
                     partyMemberName = DialogueList.scrubNameOfEndNumbers(currentDialogue.names[getArgumentInt(buffer, Constants.indexZero)]);
 
-                    PartyManager.getPartyMember(partyMemberName).canJoinParty = true;
+                    PartyMember newPartyMember = PartyManager.getPartyMember(partyMemberName);
+
+                    newPartyMember.canJoinParty = true;
+                    newPartyMember.stats.setXPToPlayerLevel();
 
                     Formation formation = State.formation;
 
@@ -1398,7 +1401,11 @@ public class DialogueManager : MonoBehaviour
 
                     partyMemberName = DialogueList.scrubNameOfEndNumbers(currentDialogue.names[getArgumentInt(buffer, Constants.indexZero)]);
 
-                    PartyManager.getPartyMember(partyMemberName).canJoinParty = true;
+
+                    newPartyMember = PartyManager.getPartyMember(partyMemberName);
+
+                    newPartyMember.canJoinParty = true;
+                    newPartyMember.stats.setXPToPlayerLevel();
 
                     continueStory();
                     break;
@@ -1409,7 +1416,17 @@ public class DialogueManager : MonoBehaviour
 
                     partyMemberName = currentDialogue.names[nameIndex2];
 
-                    PartyManager.getPartyMember(partyMemberName).canJoinParty = false;
+                    PartyMember partyMemberToRemove = PartyManager.getPartyMember(partyMemberName);
+
+                    if(!partyMemberToRemove.canJoinParty)
+                    {
+                        continueStory();
+                        break;
+                    }
+
+                    partyMemberToRemove.canJoinParty = false;
+                    partyMemberToRemove.stats.equippedItems.unequipAllItems();
+                    partyMemberToRemove.stats.combatActionArray.unequipAllActions();
 
                     if (State.formation != null)
                     {

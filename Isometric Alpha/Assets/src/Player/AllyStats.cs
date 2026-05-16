@@ -136,9 +136,19 @@ public class AllyStats : Stats
     {
         xp += earnedXP;
 
-        if(canLevelUp())
+        if(canLevelUp() && PartyManager.getPartyMember(getName()).canJoinParty)
         {
             PlayerObject.playLevelUpEffect();
+        }
+    }
+
+    public void setXPToPlayerLevel()
+    {
+        int playerLevel = PartyManager.getPlayerStats().level;
+
+        if(playerLevel > level)
+        {
+            xp = xpNeededToLevelUp * (playerLevel - level);
         }
     }
 

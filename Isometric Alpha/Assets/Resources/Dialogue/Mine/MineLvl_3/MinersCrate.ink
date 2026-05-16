@@ -36,6 +36,10 @@ VAR hasBlastingJelly = false
 
 VAR formationScreenTutorialKey = "Formation Tutorial"
 
+VAR mineLvl2GuardsMovedToSecondLevelGate = false
+
+VAR mineLvl3BreachSealed = false
+
 //camera Target index's
 VAR barricadeIndex = 1
 VAR carterIndex = 2
@@ -67,7 +71,12 @@ changeCamTarget({carterIndex})
 You there! Step into the light, with your hands where I can see them. *A branded slave, wielding a large mining pick in both hands, glares at you from behind a makeshift barricade.*
     
     +\*Comply.* I am {playerName}.
+    {
+    -mineLvl3BreachSealed:
+        ->sealedBreach_1a
+    -else:
         ->1b
+    }
     +\*Leave.*
         ->Close
 
@@ -99,7 +108,7 @@ I have no idea who you are. You have the brand but you're not one of the slaves 
         ->4a
     }
 
-    +I'm a new slave. I came down here looking for any survivors.
+    +I'm a new slave. I'm looking for any survivors.
         ->3a
 
 === 1ba ===
@@ -352,9 +361,16 @@ To keep it brief, these worm-things are growing in number. They are coming throu
         ~takingCarterNandorWithYou = true
         ->1m
 -sentIntoMineByDirector:
+
+{
+-mineLvl2GuardsMovedToSecondLevelGate:
+    +I am trained in the use of blasting jelly, but the guards in the stockroom were unhelpful. They now hold the gate to the second floor and took the blasting jelly with them.
+        ->1lba
+-else:
     +I must make for the stockroom. I can use the blasting jelly stored there to collapse the tunnel.
         The stockroom is southeast of here. It's the last tunnel you can take before you reach the bridge over the underground stream.
         ->1lb
+}
 -else:
     +Do we even have a way of sealing the tunnel?
         ->1k
@@ -516,8 +532,21 @@ I can use the jelly if we truly need, but with my injuries I may make a mistake.
         I understand. I won't give you cause.
         ->1lb
 
-=== 1lb ===
+=== 1lba ===
 
+That is unfortunate. They will need to be convinced to help us if we are to use the jelly to collapse the breach. Should they refuse to give it to us, we may be made to choose between preserving their safety, or the camp's.
+
+{
+-not mentionedKastorMinersCrates and not toldCarterPassword:
+    +Are you saying you would fight them for the jelly?
+        changeCamTarget({carterIndex})
+        Of course he isn't. Perish the thought.
+        ->1lb
+}
+    +I understand. We'll make that choice after they make theirs.
+        ->1lb
+
+=== 1lb ===
 
 changeCamTarget({nandorIndex})
 setToTrue(mineLvl3ToldAboutJelly)
@@ -673,7 +702,7 @@ setToTrue(toldCarterWrongPassword)
 
 Right, of course. It was a stupid question. 
 
-    ->3c
+    ->3ca
 
 === 3ba ===
 
@@ -681,16 +710,25 @@ setToTrue(toldCarterWrongPassword)
 
 Blast, nevermind it then. 
 
+->3ca
+
+=== 3ca ===
+
+In any case, you being here means that the way back up is no longer blocked. But that also means the worms can escape to the upper levels and endanger the rest of the camp. I'm not sure I can trust you yet, but we're not in a position to turn away help down here: Nándor will have something to discuss with you. Are you willing to stay with us for a time?
+
 ->3c
 
 === 3c ===
 
-In any case, you being here means that the way back up is no longer blocked. But that also means the worms can escape to the upper levels and endanger the rest of the camp. I'm not sure I can trust you yet, but we're not in a position to turn away help down here: Nándor will have something to discuss with you. Are you willing to stay with us for a time?
-
-    +Yes, I'll hear what you have to say. Which one of you is Nándor?
+    +Yes, I'll meet with him. Which one of you is Nándor?
 
     \*The man lowers his weapon and extends a hand over the barricade.* I'll show you to him. I'm Carter, by the way.
+    {
+    -mineLvl3BreachSealed:
+        ->clearCrates(->sealedBreach_1d)
+    -else:
         ->clearCrates(->1c)
+    }
         
     +I'm sorry but I must be going. I'll return when I am able.
         ->Close
@@ -721,7 +759,7 @@ East! Incredible, you're the first friendly face we've seen in days, *and* you'r
         ~toldCarterPassword = true
         ->clearCrates(->1c)
 -else:
-    +I'm here looking for survivors to help us in our cause. Are there more with you?
+    +I did. Are there more with you?
         
         Yes, a few of us are still alive. Quickly, come over the barrier and I'll introduce you.
         setToTrue(toldCarterPassword)
@@ -759,20 +797,20 @@ That filth. Lower than a roach's backside, that one. He wouldn't let us shelter 
         
         Márcos is still alive, but he is injured. 
 
-        ->3c
+        ->3ca
     -sentIntoMineByDirector:
 
     +I'm unaware of what transpired between you. I am simply looking for allies to help end this worm menace.
         keepDialogue()
 
         He betrayed us and left us for dead. However, you being here means that the way back up is no longer blocked, and the worms can escape to the upper levels endangering the rest of the camp. I'm not sure I can trust you yet, but we're not in a position to turn away help down here: Nándor will have something to discuss with you. Are you willing to stay with us for a time?
-        ->3c
+        ->3ca
     -else:
 
     +I'm unaware of what transpired between you. I am just glad to see more humans alive down here.
 
         He betrayed us and left us for dead. But I am likewise happy you are no worm looking to make a meal of us.        
-        ->3c
+        ->3ca
     }
 //In any case, 
     +He's a real snake, to be certain. There's no love lost between him and I.
@@ -780,6 +818,40 @@ That filth. Lower than a roach's backside, that one. He wouldn't let us shelter 
 
         If you are no friend of Gáspár's, then perhaps you could be one of ours. Do you know which way the wind is blowing?
         ->3a
+
+=== sealedBreach_1a ===
+
+I have no idea who you are. You have the brand but you're not one of the slaves that normally works on this level. We heard an explosion earlier. Do you know it's cause?
+
+    +That was me. I've sealed the pocket the worms were coming from. I also opened the gate to this floor, so the way to the surface is clear.
+        ->sealedBreach_1b
+
+=== sealedBreach_1b ===
+
+I... I don't know what to say. The worm threat is over? We can leave?
+
+    +That's correct.
+        Outstanding! Magnificent! You're the answer to all of our prayers, you are.
+        ->sealedBreach_1c
+    +Thanks would be a nice start.
+        Yes, of course. Thank you. From the bottom of my heart, thank you!
+        ->sealedBreach_1c
+
+=== sealedBreach_1c ===
+
+Nándor will want to meet you. Will you allow me to introduce you?
+
+->3c
+
+=== sealedBreach_1d ===
+
+changeCamTarget({nandorIndex})
+
+Carter tells me you've ended the worm threat. I'm sure he's already thanked you, but let me do so again. Thank you.
+
+    +You're welcome.
+
+->3c
 
 === Close ===
 

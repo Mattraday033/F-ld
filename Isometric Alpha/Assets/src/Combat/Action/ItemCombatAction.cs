@@ -111,14 +111,14 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		return sourceItem.useRequiresAnAction();
 	}
 
-    public override int[] findFinalDamage(Stats targetCombatant, bool isCrit)
+    public override int findFinalDamage(Stats targetCombatant, bool isCrit)
     {
         if(healsTarget())
         {
-            return new int[] { sourceItem.getAmountToHeal() };
+            return sourceItem.getAmountToHeal();
         }
 
-        return new int[] { -1 };
+        return -1;
     }
 
 	public override void performCombatAction(List<Stats> targets)
@@ -130,7 +130,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 				sourceItem.use(targetCombatant);
                 if(!inPreviewMode)
                 {
-                    CombatAnimationManager.loadInstantEffect(getEffectAnimationType(), targetCombatant.position, false, findFinalDamage(targetCombatant, false)[0], healsTarget(), false, null, getActorCoords());
+                    CombatAnimationManager.loadInstantEffect(getEffectAnimationType(), targetCombatant.position, false, findFinalDamage(targetCombatant, false), healsTarget(), false, null, getActorCoords());
                 }
 			}
 		}

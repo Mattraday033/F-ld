@@ -3,6 +3,7 @@ VAR dexterity = 0
 VAR wisdom = 0
 VAR charisma = 0
 
+VAR playerIndex = 0
 VAR initialRubbleIndex = 1
 VAR blastRubbleIndex = 2
 VAR pazmanIndex = 3
@@ -13,15 +14,20 @@ VAR carterIndex = 7
 VAR nandorIndex = 8
 VAR marcosIndex = 9
 VAR rubbleMarcosIndex = 10
+VAR weftIndex = 11
+VAR thatchIndex = 12
 
 VAR fullGuardFightIndex = 0
 VAR halfGuardFightIndex = 1
+VAR nandorCarterFightIndex = 2
+
 VAR dialogueKeyForAfterKillingGuards = "AfterKillingGuardsMineLvl3"
 
 VAR deathFlagGuardMárcos = false
 VAR deathFlagGuardPázmán = false
 
 VAR toldToFindNandor = false
+VAR toldCarterPassword = false
 
 VAR goesWithBrushsPlan = false
 VAR mineLvl3GuardsInParty = false
@@ -36,7 +42,10 @@ VAR mineLvl3SlavesBackToSurface = false
 VAR mineLvl3ToldPazmanToEatShit = false
 VAR mineLvl3ThreatenedGaspar = false
 
+VAR sentIntoMineByDirector = false
 VAR trainedByEmeseToUseBlasingJelly = false
+
+VAR hasBlastingJelly = false
 
 VAR mineLvl3InRubbleConversation = false
 VAR mineLvl3ConvincedRekaAndPazman = false
@@ -48,11 +57,18 @@ VAR sealedPocketRubbleFlagName = "MineLvl_3-7Rubble"
 VAR smallCupPlacedOnBarrel = false
 VAR largeCupFilledWithWater = false
 VAR largeCupPlacedOnBarrel = false
-VAR agreedToFightGaspar = false
+VAR mineLvl3AgreedToFightGaspar = false
+
+VAR weftAddedToParty = false
+
+VAR playerSealedBreachThemself = false
+
+VAR wormsAttackedCamp = false
 
 VAR playerName = ""
 
 setToTrue(mineLvl3InRubbleConversation)
+searchInventoryFor(hasBlastingJelly,Blasting Jelly)
 
 ->1a
 
@@ -61,26 +77,46 @@ setToTrue(mineLvl3InRubbleConversation)
 \*A large cave entrance looms before you. The loud squelching of many worms can be heard coming from the darkness within.*
 
 {
--mineLvl3MarcosTaughtHowToIgniteJelly or trainedByEmeseToUseBlasingJelly:
-    +\*Make sure the tunnel is clear, then seal the breach yourself*.
-    finishQuest(Sealing the Breach, true, Sealed the Breach Myself.)
-        ->1d
-}
+-not wormsAttackedCamp:
+    {
+    -hasBlastingJelly:
+        {
+        -mineLvl3MarcosTaughtHowToIgniteJelly or trainedByEmeseToUseBlasingJelly:
+            +\*Make sure the tunnel is clear, then seal the breach yourself*.
+            finishQuest(Sealing the Breach, true, Sealed the Breach Myself.)
 
-{
--not deathFlagGuardMárcos and mineLvl3MarcosAgreedToIgniteJelly:
-    +Alright Márcos, you're up. Seal the breach.
-    finishQuest(Sealing the Breach, true, Márcos Sealed the Breach.)
-        ->6a
-}
+            {
+            -sentIntoMineByDirector:
+                activateQuestStep(No Good Deed,Return to the Director's office.)
+            }
+            setToTrue(playerSealedBreachThemself)
+                ->1d
+        }
 
-{
--mineLvl3GuardsInParty:
-    +Overseer, the way is clear. The breach can be sealed.
-    setToTrue(mineLvl3BreachSealed)
-        ->2a
-}
+        {
+        -not deathFlagGuardMárcos and mineLvl3MarcosAgreedToIgniteJelly:
+            +Alright Márcos, you're up. Set the blasting jelly.
+            finishQuest(Sealing the Breach, true, Márcos Sealed the Breach.)
+            {
+            -sentIntoMineByDirector:
+                activateQuestStep(No Good Deed,Return to the Director's office.)
+            }
+                ->6a
+        }
+    }
 
+    {
+    -mineLvl3GuardsInParty:
+        +Overseer, the way is clear. The breach can be sealed.
+        setToTrue(mineLvl3BreachSealed)
+        finishQuest(Sealing the Breach, true, The guards sealed the breach.)
+        {
+        -sentIntoMineByDirector:
+            activateQuestStep(No Good Deed,Return to the Director's office.)
+        }
+            ->2a
+    }
+}
     +\*Leave the entrance alone.*
         ->Close
 
@@ -118,9 +154,9 @@ setToTrue(mineLvl3InRubbleConversation)
 
 === 1e ===
 
-The water begins to drip into the small cup. In a minute, the small cup will overflow.
+\*The water begins to drip into the small cup. You have a few minutes before the cup will overflow.*
 
-    +*\Seek cover farther down the tunnel.
+    +\*Seek cover farther down the tunnel.*
         setToTrue(mineLvl3BreachSealed)
         ->2a
 
@@ -131,6 +167,11 @@ fadeToBlack(true, false)
 addSecretDoorFlag({sealedPocketRubbleFlagName})
 
 moveToPos(-7,4)
+
+{
+-weftAddedToParty:
+activate({weftIndex})
+}
 
 {
 -mineLvl3GuardsInParty:
@@ -153,18 +194,18 @@ moveToPos(-7,4)
 -mineLvl3CarterAndNandorInParty:
     activate({nandorIndex})
     activate({carterIndex})
-}
-
-{
--not mineLvl3MarcosDiedSealingBreach:
-    activate({marcosIndex})
+    
+    {
+    -not mineLvl3MarcosDiedSealingBreach:
+        activate({marcosIndex})
+    }
 }
 
 fadeBackIn(60)
 
 
 {
--mineLvl3GuardsInParty and mineLvl3CarterAndNandorInParty:
+-mineLvl3GuardsInParty:
     ->3a
 -mineLvl3CarterAndNandorInParty:
     ->4a
@@ -187,27 +228,34 @@ Should we all be so lucky. When work resumes, we'll be certain to see another po
 setNPCFacing({viragIndex},SE)
 setNPCFacing({gasparIndex},SE)
 
-Fun's over slaves, hand over any tools you may be holding and place your hands on each other's shoulders. We're heading back up to camp.
+Fun's over, branded. Fall in line: we're heading back up to camp.
 
-{
--goesWithBrushsPlan:
-    +Things are afoot on the surface. There's only one way you make it out of this mine alive: if <i>you</i> surrender your weapons to <i>us</i> and come peacefully.
-        ~mineLvl3DealtWithGaspar = true
-        setToTrue(mineLvl3DealtWithGaspar)
-        ->3c
-}
+    {
+    -goesWithBrushsPlan:
+        +Things are afoot on the surface. There's only one way you make it out of this mine alive: if <i>you</i> surrender your weapons to <i>us</i> and come peacefully.
+            ~mineLvl3DealtWithGaspar = true
+            setToTrue(mineLvl3DealtWithGaspar)
+            ->3c
+    }
 
-
-    +There isn't going to be any more work, Gáspár. You're not going to make it back to the camp.
+    +There isn't going to be any more work, Gáspár. You're not going to make it back to the surface. <Combat>
         ~mineLvl3DealtWithGaspar = true
         setToTrue(mineLvl3DealtWithGaspar)
         ->3b
-    //+\*Hand over your weapon.*
-        //->3d
+    +Very well. I'm glad to be rid of this mine.
+    {
+    -mineLvl3CarterAndNandorInParty:
+        ->3d
+    -else:
+        ->Close
+    }
 
 
 
 === 3b ===
+
+changeCamTarget({gasparIndex})
+playAnimation({gasparIndex},Idle_Front)
 
 What's this? Insurrection? I'll die before any of you see the light of day.
 
@@ -216,13 +264,14 @@ What's this? Insurrection? I'll die before any of you see the light of day.
 === 3c ===
 
 {
--agreedToFightGaspar:
+-mineLvl3AgreedToFightGaspar:
 changeCamTarget({nandorIndex})
 
 Gáspár, we refuse! Lay down your own weapons, and we vow no harm will come to you once the slaves take up arms.
 }
 
 changeCamTarget({gasparIndex})
+playAnimation({gasparIndex},Idle_Front)
 
 What's this? Insurrection? I'll die before any of you see the light of day.
 
@@ -273,7 +322,7 @@ What's this? Insurrection? I'll die before any of you see the light of day.
         
         changeCamTarget({viragIndex})
         
-        The Overseer is right. You can never trust a slave's intentions. They will only ever have one thing on their mind: revenge.
+        The overseer is right. You can never trust a slave's intentions. They will only ever have one thing on their mind: revenge.
         
         changeCamTarget({pazmanIndex})
 
@@ -325,7 +374,7 @@ What's this? Insurrection? I'll die before any of you see the light of day.
     
     changeCamTarget({pazmanIndex})
     
-    Oh yeah, I'm sure that he got real teary-eyed as he signed our lives away. Come off it, Overseer. To him, we're barely better than the slaves.
+    Oh yeah, I'm sure that he got real teary-eyed as he signed our lives away. Come off it, overseer. To him, we're barely better than the slaves.
     
     changeCamTarget({gasparIndex})
     
@@ -347,15 +396,16 @@ What's this? Insurrection? I'll die before any of you see the light of day.
         
         changeCamTarget({rekaIndex})
 
-        I hate to admit it, but the Overseer has convinced me. I'm not becoming the prisoner of someone like that.
+        I hate to admit it, but the overseer has convinced me. I'm not becoming the prisoner of someone like that.
         
         changeCamTarget({gasparIndex})
 
         Take your punishment like a man and all will be forgiven, Pázmán. Become prisoner to this branded and you won't live to regret it.
         
         changeCamTarget({pazmanIndex})
+        playAnimation({viragIndex},Idle_Front)
 
-        \*Pázmán grimaces and unsheaths his blade.* Yes sir.
+        \*Pázmán grimaces and readies his weapon.* Yes sir.
         
             ->combatPrep
     }
@@ -365,7 +415,8 @@ What's this? Insurrection? I'll die before any of you see the light of day.
     Fool! You'll suffer much worse at their hands if you submit!
     
     changeCamTarget({rekaIndex})
-    
+    setNPCFacing({rekaIndex},NE)
+
     These slaves have given us no reason to suspect they would harm us. They fought with us to defeat the worms, despite the fact that the way to the surface was cleared. If they wanted us dead, why did they not leave us down here?
 
     changeCamTarget({gasparIndex})
@@ -373,6 +424,7 @@ What's this? Insurrection? I'll die before any of you see the light of day.
     I won't hear any more of your drivel. Turn traitor at your own peril.
 
     +It looks like the time for words has passed. Each of you must choose whether you want to surrender or die.
+        playAnimation({playerIndex},Idle_Back)
         ->3ccb
 
 === 3ccb ===
@@ -385,10 +437,12 @@ What's this? Insurrection? I'll die before any of you see the light of day.
     I surrender.
     
     changeCamTarget({rekaIndex})
+    setNPCFacing({rekaIndex},SE)
     
     I surrender as well.
     
     changeCamTarget({viragIndex})
+    playAnimation({viragIndex},Idle_Front)
     
     I won't chance becoming your prisoner.
     
@@ -423,7 +477,7 @@ I don't believe it. You just want us to drop our weapons so you can butcher us l
     changeCamTarget({rekaIndex})
     
     {
-    -agreedToFightGaspar:
+    -mineLvl3AgreedToFightGaspar:
         We owe your friend for opening the gate, but I don't trust you enough to become your prisoner. Not after their threats in the stockroom earlier.
     -else:
         We owe you for opening the gate, but I don't trust you enough to become your prisoner. Not after your threats in the stockroom earlier.
@@ -480,7 +534,7 @@ I don't believe it. You just want us to drop our weapons so you can butcher us l
 
 === PH1 ===
 
-I will not be lectured by a criminal on right and wrong! *The Overseer turns to the other guards.* You lot! Your choice is plain: kill them and stay free, or join them in their branding.
+I will not be lectured by a criminal on right and wrong! *The overseer turns to the other guards.* You lot! Your choice is plain: kill them and stay free, or join them in their branding.
 
 changeCamTarget({pazmanIndex})
     
@@ -518,7 +572,7 @@ changeCamTarget({gasparIndex})
 
 changeCamTarget({rekaIndex})
     
-Very true. \*Réka draws her weapon and points it at the Overseer.* I won't slay those who fought to free me. Not for you or the Director.
+Very true. \*Réka draws her weapon and points it at the overseer.* I won't slay those who fought to free me. Not for you or the Director.
 
 changeCamTarget({pazmanIndex})
     
@@ -535,7 +589,7 @@ You'll regret this. All of you! You may have deluded these fools, but I won't su
 
 changeCamTarget({rekaIndex})
     
-\*Réka draws her weapon and points it at the Overseer.* I'm taking my chances with them. I didn't wait this long in the dark to die here.
+\*Réka draws her weapon and points it at the overseer.* I'm taking my chances with them. I didn't wait this long in the dark to die here.
 
 changeCamTarget({pazmanIndex})
     
@@ -552,50 +606,58 @@ You'll regret this. All of you! You may have deluded these fools, but I won't su
 
 changeCamTarget({rekaIndex})
     
-\*Réka draws her weapon and points it at the Overseer.* I'm taking my chances with them. I didn't wait this long in the dark to die here.
+\*Réka draws her weapon and points it at the overseer.* I'm taking my chances with them. I didn't wait this long in the dark to die here.
 
 changeCamTarget({gasparIndex})
 Accepting terms from a slave now Réka? How low you've fallen. Kill them, one last bit of bloodshed before we can go home.
 
-changeCamTarget({pazmanIndex})
+changeCamTarget({pazmanIndex}) 
     
 \*Pázmán grimaces and unsheaths his blade.* Yes sir. 
 
 ->combatPrep
 
 === 3d ===
+
 changeCamTarget({nandorIndex})
 
-{
--toldToFindNandor:
+{ 
+-toldCarterPassword:
 \*Nandor whispers in your ear.* What are you doing? They're isolated. Now is our best time to remove them without any witnesses.
-
-    +I'm not fighting some armed guards, even with you at my back.
-        setToTrue(mineLvl3RefusedToFightGaspar)
-        ->3da
-    +If you're with me, I'll fight.
-    ~agreedToFightGaspar = true
-        ->3c
 -else:
-\*Nandor whispers in your ear.* I don't have time to explain, but I have no intention of going peacably to the surface. If we fight, will you join us?
-
-    +I'm not fighting some armed guards, even with you at my back.
-        setToTrue(mineLvl3RefusedToFightGaspar)
-        ->3da
-    +If you're with me, I'll fight.
-        ->3c
+\*Nandor whispers in your ear.* I don't have time to explain, but I have no intention of being made their prisoner. If we fight, will you join us?
 }
 
+    +\ {not toldCarterPassword:Are you mad? }I'm not fighting some armed guards, even with you at my back.
+        ->3daa
+    +If you're with me, I'll fight. 
+        setToTrue(mineLvl3AgreedToFightGaspar)
+        ->3c
+
+=== 3daa ===
+
+Carter and I will fight whether you're with us or not. If you treasure your freedom, you must make a stand!
+
+    +Very well. I'm with you.
+        setToTrue(mineLvl3AgreedToFightGaspar)
+        ->3c
+    +You're going to get yourself killed. I'll have none of it.
+        ->3da
+
 === 3da ===
+
+removeFromParty({carterIndex})
+removeFromParty({nandorIndex})
+
+playAnimation({nandorIndex},Idle_Back)
+playAnimation({carterIndex},Idle_Back)
+
+setToTrue(mineLvl3RefusedToFightGaspar)
 
 Gáspár, we refuse! I don't care if I die here, I will no longer be a slave!
 
     +I'm not with them!
-        kill({marcosIndex})
-        kill({nandorIndex})
-        kill({carterIndex})
-        finishQuest(Sealing the Breach, true, Sided With the Guards.)
-        ->4d
+        ->3b
 
 === 4a ===
 
@@ -661,7 +723,7 @@ setToTrue(mineLvl3GuardsBackToSurface)
 
 The rest of us are heading back up to the surface. Now that I know you can be trusted, and since you seem to be able to make your way around these mines without too much difficulty, you can either come back up with us now or take a rest down here first. You've definitely earned it.
 
-    +I'll return with you, Overseer.
+    +I'll return with you, overseer.
         Alright everyone, we're heading back to the surface. Check your packs and then get moving!
         ->Close
     +I'll take you up on that rest, sir.
@@ -720,32 +782,30 @@ deactivate({rubbleMarcosIndex})
 
 === combatPrep ===
 
-setToFalse(mineLvl3GuardsInParty)
-
 {
--mineLvl3ConvincedRekaAndPazman:
+-mineLvl3RefusedToFightGaspar:
+enterCombat({nandorCarterFightIndex},{dialogueKeyForAfterKillingGuards})
+    ->Close
 
-    deactivate({rekaIndex})
-    deactivate({pazmanIndex})
-    kill({viragIndex})
-    kill({gasparIndex})
-    enterCombat({halfGuardFightIndex},{dialogueKeyForAfterKillingGuards})
-        ->Close
+-mineLvl3ConvincedRekaAndPazman:
+removeFromParty({gasparIndex})
+setToFalse(mineLvl3GuardsInParty)
+enterCombat({halfGuardFightIndex},{dialogueKeyForAfterKillingGuards})
+    ->Close
         
 -else:
 
-    kill({rekaIndex})
-    kill({pazmanIndex})
-    kill({viragIndex})
-    kill({gasparIndex})
-    enterCombat({fullGuardFightIndex},{dialogueKeyForAfterKillingGuards})
-        ->Close
+setToFalse(mineLvl3GuardsInParty)
+enterCombat({fullGuardFightIndex},{dialogueKeyForAfterKillingGuards})
+    ->Close
 }
 
 
 === Close ===
 
 setToFalse(mineLvl3InRubbleConversation)
+
+fadeToBlack()
 
 deactivate({gasparIndex})
 deactivate({rekaIndex})
@@ -754,6 +814,9 @@ deactivate({pazmanIndex})
 deactivate({nandorIndex})
 deactivate({carterIndex})
 deactivate({marcosIndex})
+deactivate({weftIndex})
+
+fadeBackIn(60)
 
 close()
 

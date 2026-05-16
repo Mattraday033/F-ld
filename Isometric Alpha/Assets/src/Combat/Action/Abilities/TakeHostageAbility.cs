@@ -13,7 +13,7 @@ public class TakeHostageAbility : Ability
 
     }
 
-    public override int[] findFinalDamage(Stats target, bool isCrit)
+    public override int findFinalDamage(Stats target, bool isCrit)
     {
         int finalDamage = 0;
 
@@ -22,7 +22,7 @@ public class TakeHostageAbility : Ability
             finalDamage = target.currentHealth * 3;
         }
 
-        return new int[] { finalDamage };
+        return finalDamage;
     }
 
 

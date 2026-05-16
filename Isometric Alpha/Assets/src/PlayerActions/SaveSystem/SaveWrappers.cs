@@ -200,7 +200,10 @@ public struct QuestWrapper
         {
             steps[stepIndex].stepName = stepNameEdits(steps[stepIndex].stepName);
 
-            quest.steps[steps[stepIndex].stepName] = steps[stepIndex].unwrapQuestStep(quest.steps[steps[stepIndex].stepName]);
+            if(quest.steps.ContainsKey(steps[stepIndex].stepName))
+            {
+                quest.steps[steps[stepIndex].stepName] = steps[stepIndex].unwrapQuestStep(quest.steps[steps[stepIndex].stepName]);
+            }
         }
 
         for(int stepIndex = 0; stepIndex < quest.deathSteps.Count && stepIndex < deathSteps.Length; stepIndex++)

@@ -98,7 +98,7 @@ public class VolleyAbility : Ability
 			if(targetCombatant != null && !(targetCombatant is null) && targetCombatant.isAlive())
 			{
 				crit = DamageCalculator.isACrit(getCritFormula(), getName());
-				finalDamage = findFinalDamage(targetCombatant, crit)[0];
+				finalDamage = findFinalDamage(targetCombatant, crit);
 			
 				targetCombatant.modifyCurrentHealth(finalDamage, healsTarget());
 			} else

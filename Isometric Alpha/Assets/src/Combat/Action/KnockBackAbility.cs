@@ -54,11 +54,9 @@ public class KnockBackAbility : RepositionEnemyAbility
         return Math.Abs(getDestinationCoords().row - getTargetCoords().row);
     }
 
-    public override int[] findFinalDamage(Stats targetCombatant, bool isCrit)
+    public override int findFinalDamage(Stats targetCombatant, bool isCrit)
     {
-        return new int[] {
-                            ((int) ((double) base.findFinalDamage(targetCombatant, isCrit)[0] *  getTotalDamageMultiplier()))
-                         };
+        return (int) ((double) base.findFinalDamage(targetCombatant, isCrit) *  getTotalDamageMultiplier());
     }
 
     public override void queueingAction()

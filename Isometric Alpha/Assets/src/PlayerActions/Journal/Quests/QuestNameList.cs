@@ -217,6 +217,18 @@ public static class QuestNameList
     public const string muzsasSweetToothStepTitleFive = "Candy handed over.";
     public const string muzsasSweetToothStepTitleSix = "The way is clear.";
 
+    // No Good Deed
+    public const string noGoodDeedQuestTitle = "No Good Deed";
+
+    public const string noGoodDeedStepTitleZero = "Meet Tabor.";
+    public const string noGoodDeedStepTitleOne = "Go to the Director's office.";
+    public const string noGoodDeedStepTitleTwo = "Take time to think.";
+    public const string noGoodDeedStepTitleThree = "Make for the stockhouse.";
+    public const string noGoodDeedStepTitleFour = "Find the blasting jelly.";
+    public const string noGoodDeedStepTitleFive = "Look for survivors.";
+    public const string noGoodDeedStepTitleSix = "Make for the breach.";
+    public const string noGoodDeedStepTitleSeven = "Learn to use blasting jelly.";
+
     // Rescue Brush
     public const string rescueBrushQuestTitle = "Rescue Brush";
 
@@ -236,12 +248,11 @@ public static class QuestNameList
     public const string sealingTheBreachStepTitleTwo = "The Guards Are Dead.";
     public const string sealingTheBreachStepTitleThree = "The Jelly's Secrets.";
     public const string sealingTheBreachStepTitleFour = "Márcos Will Help.";
-    public const string sealingTheBreachStepTitleFive = "Sided With the Guards.";
+    public const string sealingTheBreachStepTitleFive = "Jelly acquired.";
     public const string sealingTheBreachStepTitleSix = "Sealed the Breach Myself.";
     public const string sealingTheBreachStepTitleSeven = "Márcos Sealed the Breach.";
-    public const string sealingTheBreachStepTitleEight = "Some Guards Surrendered.";
-    public const string sealingTheBreachStepTitleNine = "The Guards Are Dead.1";
-    public const string sealingTheBreachStepTitleTen = "The worms are free.";
+    public const string sealingTheBreachStepTitleEight = "The guards sealed the breach.";
+    public const string sealingTheBreachStepTitleNine = "The worms are free.";
 
     // Stockhouse Stash
     public const string stockhouseStashQuestTitle = "Stockhouse Stash";

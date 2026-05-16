@@ -19,17 +19,7 @@ public class HealingAbility : Ability
 
         base.applySettings(settings);
     }
-
-    public override int[] findFinalDamage(Stats targetCombatant, bool isCrit)
-	{
-		if(targetCombatant == null)
-		{
-			return new int[]{-1};
-		}
-		
-		return new int[]{targetCombatant.modifyIncomingHealing(getDamageFormulaTotal())};
-	}
-	
+    
 	public override bool healsTarget()
 	{
 		return true;

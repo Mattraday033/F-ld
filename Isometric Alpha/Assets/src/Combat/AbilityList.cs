@@ -510,7 +510,7 @@ public static class AbilityList
 
 		List<CombatAction> listOfGasparAbilities = new List<CombatAction>();
 
-        EstablishLinkAbility collectivePunishment = new EstablishLinkAbility(CombatActionSettings.build(StatSourceNameList.collectivePunishmentKey, DescriptionParams.build(StatSourceNameList.collectivePunishmentKey, "The caster decrees that pain should be shared, causing half of damage dealt to the caster to be dealt to an ally instead. Both the caster and the ally receive a boost to the damage they deal."), frequencyParams: FrequencyParams.build(oneSlotMax, eightRoundCooldown), appliedTrait: TraitList.collectivePunishment), TraitList.collectivePunishmentLinkTrait);
+        EstablishLinkAbility collectivePunishment = new EstablishLinkAbility(CombatActionSettings.build(StatSourceNameList.collectivePunishmentKey, DescriptionParams.build(StatSourceNameList.collectivePunishmentKey, "The caster motivates his allies through shared pain, causing half of damage dealt to the caster to be dealt to an ally instead. Both the caster and the ally receive a boost to the damage they deal."), frequencyParams: FrequencyParams.build(oneSlotMax, eightRoundCooldown), appliedTrait: TraitList.collectivePunishment), TraitList.collectivePunishmentLinkTrait);
         collectivePunishment.setStatRequirements(levelKeyChar + "-3");
         listOfGasparAbilities.Add(collectivePunishment);
         miscAbilityDictionary.Add(collectivePunishment.getKey(), collectivePunishment);

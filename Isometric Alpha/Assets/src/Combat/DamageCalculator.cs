@@ -495,7 +495,7 @@ public static class DamageCalculator
     }
 
 	/* idea for universal findFinalDamage, may not use
-    public static int[] findFinalDamage(Stats actor, Stats target, string damageFormula, bool isCrit)
+    public static int findFinalDamage(Stats actor, Stats target, string damageFormula, bool isCrit)
     {
         if (actor == null)
         {

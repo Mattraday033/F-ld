@@ -8,6 +8,10 @@ VAR carterIndex = 2
 VAR marcosIndex = 3
 VAR pazmanIndex = 4
 VAR rekaIndex = 5
+VAR viragIndex = 6
+VAR gasparIndex = 7
+VAR weftIndex = 8
+VAR thatchIndex = 9
 
 VAR deathFlagGuardMárcos = false
 VAR deathFlagGuardPázmán = false
@@ -31,15 +35,20 @@ VAR mineLvl3ConvincedRekaAndPazman = false
 VAR mineLvl3PromisedToProtectRekaAndPazman = false
 VAR mineLvl3ThreatenedRekaAndPazmanAsPrisoners = false
 
+VAR weftAddedToParty = false
+
 VAR smallCupPlacedOnBarrel = false
 VAR largeCupFilledWithWater = false
 VAR largeCupPlacedOnBarrel = false
-VAR agreedToFightGaspar = false
 
 VAR playerName = ""
 
-
-->4a
+{
+-mineLvl3RefusedToFightGaspar:
+    ->5a
+-else:
+    ->4a
+}
 
 === 4a ===
 
@@ -74,7 +83,6 @@ changeCamTarget({rekaIndex})
 
 Gáspár, you idiot. A stubborn ox to the last.
 
-finishQuest(Sealing the Breach, true, Some Guards Surrendered.)
 activateQuestStep(Finding Nándor, Return to the Surface.)
 
 changeCamTarget({pazmanIndex})
@@ -97,13 +105,6 @@ changeCamTarget({rekaIndex})
     changeCamTarget({nandorIndex})
 
     The guards are dead, and the breach is sealed. I have not felt like this in a long time... Relieved. Hopeful. All thanks to your efforts.
-
-    {
-    -not deathFlagGuardMárcos and mineLvl3MarcosAgreedToIgniteJelly:
-        finishQuest(Sealing the Breach, true, Sealed the Breach Myself.)
-    -else:
-        finishQuest(Sealing the Breach, true, The Guards Are Dead.1)
-    }
 
     activateQuestStep(Finding Nándor, Return to the Surface.)
     
@@ -229,15 +230,71 @@ setToTrue(mineLvl3SlavesBackToSurface)
     
 Of course. We will follow your lead.
     ->Close
-    
+
+=== 5a ===
+
+activate({pazmanIndex})
+activate({rekaIndex})
+activate({viragIndex})
+activate({gasparIndex})
+
+{
+-weftAddedToParty:
+activate({weftIndex})
+}
+
+changeCamTarget({gasparIndex})
+
+Damn. Two more branded, dead.
+
+setNPCFacing({pazmanIndex},NW)
+changeCamTarget({pazmanIndex})
+
+It wasn't like we were going to make our quota before, anyways. What's two more? Shame about Márcos, though.
+
+changeCamTarget({gasparIndex})
+
+\*Gáspár seems lost in thought.*
+
+changeCamTarget({pazmanIndex})
+
+Overseer? Your orders?
+
+changeCamTarget({gasparIndex})
+
+My orders are to return to the surface. We'll need to inform the Director of what happened here. After that, hot food and bed rest for each of us.
+
+    +You seem concerned, overseer. Your face wears empathy like the two are strangers.
+        setNPCFacing({pazmanIndex},SE)
+        ->5b
+    +That had better include me. I'm starving.
+        Rewards are not your place to decide. However, I'm certain Chief Tabor will wish to reward you once he hears of the loyalty you displayed just now.
+
+        But let us be gone from here. I wish to finally see the sun again.
+        ->Close
+
+=== 5b ===
+
+This is not empathy. Traitors deserve none. I'm merely concerned about the Director will think ab- *Gáspár cuts himself off in frustration* I need not explain myself to you, scum!
+
+    +Then forget I asked. Let us be gone from here.
+        ->Close
 
 === Close ===
+
+fadeToBlack()
 
 deactivate({nandorIndex})
 deactivate({carterIndex})
 deactivate({marcosIndex})
 deactivate({pazmanIndex})
 deactivate({rekaIndex})
+deactivate({viragIndex})
+deactivate({gasparIndex})
+deactivate({weftIndex})
+// deactivate({thatchIndex})
+
+fadeBackIn(60)
 
 close()
 

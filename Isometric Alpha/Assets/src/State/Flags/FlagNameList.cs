@@ -66,6 +66,9 @@ public static class FlagNameList
         public const string startedTaborLeadershipTutorial = "startedTaborLeadershipTutorial";
         public const string finishedTaborLeadershipTutorial = "finishedTaborLeadershipTutorial";
 
+        //gaspar flags
+        public const string gasparAddedToParty = "gasparAddedToParty";
+
         //body pile quest flags
         public const string orderedIntoBodyPile = "orderedIntoBodyPile";
         public const string givenBodyPileEntryQuestStep = "givenBodyPileEntryQuestStep";
