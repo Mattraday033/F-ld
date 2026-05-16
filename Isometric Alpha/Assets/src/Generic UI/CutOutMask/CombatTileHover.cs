@@ -187,9 +187,12 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
             SelectorManager.deselectAlly();
         }
 
-        SelectorManager.currentSelector.setToLocation(targetStats.position);
+        if (targetStats.positions.Count > 0)
+        {
+            SelectorManager.currentSelector.setToLocation(targetStats.positions[0]);
+        }
 
-        if (SelectorManager.currentSelector.getCoords().Equals(targetStats.position))
+        if (targetStats.positions.Contains(SelectorManager.currentSelector.getCoords()))
         {
             SelectorManager.handleAllySelection();
         }

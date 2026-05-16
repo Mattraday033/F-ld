@@ -49,7 +49,10 @@ public class ChargeUpAbility : Ability
             {
                 if(target != null)
                 {
-                    createEffectAnimation(target.position);
+                    foreach (GridCoords targetCoords in target.positions)
+                    {
+                        createEffectAnimation(targetCoords);
+                    }
                     target.addTrait(chargeUpTrait);
                 }
             }

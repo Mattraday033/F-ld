@@ -313,7 +313,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         if (mandatoryTarget != null && !loadedCombatAction.getSelector().hasAtLeastOneMandatoryTarget() && loadedCombatAction.getSelector().singleTile)
         {
-            GridCoords mandatoryTargetCoords = mandatoryTarget.position;
+            GridCoords mandatoryTargetCoords = mandatoryTarget.positions.Count > 0 ? mandatoryTarget.positions[0] : GridCoords.getDefaultCoords();
 
             loadedCombatAction.getSelector().setToClosestLegalLocation(new GridCoords(mandatoryTargetCoords.row,
                                                                     mandatoryTargetCoords.col));
@@ -325,7 +325,10 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         Stats closestTarget = (Stats)allAliveEnemies[allAliveEnemies.Count - 1];
 
-        loadedCombatAction.getSelector().setToClosestLegalLocation(closestTarget.position);
+        if (closestTarget.positions.Count > 0)
+        {
+            loadedCombatAction.getSelector().setToClosestLegalLocation(closestTarget.positions[0]);
+        }
 
         return action;
     }

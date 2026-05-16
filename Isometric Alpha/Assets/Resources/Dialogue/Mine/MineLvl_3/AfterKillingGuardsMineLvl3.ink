@@ -3,6 +3,7 @@ VAR dexterity = 0
 VAR wisdom = 0
 VAR charisma = 0
 
+VAR playerIndex = 0
 VAR nandorIndex = 1
 VAR carterIndex = 2
 VAR marcosIndex = 3
@@ -238,6 +239,8 @@ activate({rekaIndex})
 activate({viragIndex})
 activate({gasparIndex})
 
+playAnimation({playerIndex},OOC_Idle_Back)
+
 {
 -weftAddedToParty:
 activate({weftIndex})
@@ -264,11 +267,11 @@ changeCamTarget({gasparIndex})
 
 My orders are to return to the surface. We'll need to inform the Director of what happened here. After that, hot food and bed rest for each of us.
 
-    +You seem concerned, overseer. Your face wears empathy like the two are strangers.
+    +You look concerned, overseer. Your face wears empathy like the two are strangers.
         setNPCFacing({pazmanIndex},SE)
         ->5b
     +That had better include me. I'm starving.
-        Rewards are not your place to decide. However, I'm certain Chief Tabor will wish to reward you once he hears of the loyalty you displayed just now.
+        Rewards are not your place to decide. However, I'm certain Chief Tabor would like to reward you once he hears of the loyalty you displayed just now.
 
         But let us be gone from here. I wish to finally see the sun again.
         ->Close

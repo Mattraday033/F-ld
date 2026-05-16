@@ -832,11 +832,11 @@ public class AllyStats : Stats
 
     #region Miscellaneous
 
-    public override GridCoords findLocationToSpawn()
+    public override List<GridCoords> findLocationToSpawn()
     {
         GridCoords coords = Formation.findLocationOfStats(this);
 
-        return new GridCoords(coords.row + CombatGrid.allyRowUpperBounds, coords.col);
+        return new List<GridCoords> { new GridCoords(coords.row + CombatGrid.allyRowUpperBounds, coords.col) };
     }
 
     public override List<StatBoostSource> getAllStatBoosts()

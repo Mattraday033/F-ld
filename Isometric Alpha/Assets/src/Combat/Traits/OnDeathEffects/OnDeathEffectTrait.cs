@@ -41,7 +41,10 @@ public class OnDeathEffectTrait : Trait
 		if(actionOnDeath.isSelfTargeting())
 		{
 			actionOnDeath.setSelector(actionOnDeath.getTargetSelector());
-			actionOnDeath.getSelector().setToLocation(actor.position);
+			if (actor.positions.Count > 0)
+			{
+				actionOnDeath.getSelector().setToLocation(actor.positions[0]);
+			}
 			//actionOnDeath.setTargetCoords(actor.position);
 		} else
 		{

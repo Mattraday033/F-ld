@@ -7,7 +7,11 @@ public class SnapSelectorToPlayer : TutorialSequenceStepScript
 {
     public override void runScript(GameObject target = null)
     {
-        SelectorManager.currentSelector.setToLocation(PartyManager.getPlayerStats().position);
+        Stats playerStats = PartyManager.getPlayerStats();
+        if (playerStats != null && playerStats.positions.Count > 0)
+        {
+            SelectorManager.currentSelector.setToLocation(playerStats.positions[0]);
+        }
 
         SpawnHoverPanel.runInstanceOfScript();
 

@@ -191,7 +191,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     protected override GridCoords getTargetCoords()
     {
-        return linkedStats.position;
+        return linkedStats.positions.Count > 0 ? linkedStats.positions[0] : GridCoords.getDefaultCoords();
     }
 
     public void onReveal(bool toggleReveal)
@@ -212,7 +212,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     public Color getRevealColor()
     {
-        if (CombatGrid.positionIsOnAlliedSide(getTargetStats().position))
+        if (getTargetStats().positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
         {
             return ColorList.canBeInteractedWith;
         }

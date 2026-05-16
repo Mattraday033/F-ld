@@ -102,6 +102,22 @@ public static class CombatGrid
 
         combatantsDict[coords] = newCombatant;
 	}
+
+    public static void addCombatantToGrid(Stats combatant)
+    {
+        foreach(GridCoords coords in combatant.positions)
+        {
+            setCombatantAtCoords(coords, combatant);
+        }
+    }
+
+    public static void removeCombatantFromGrid(Stats combatant)
+    {
+        foreach(GridCoords coords in combatant.positions)
+        {
+            setCombatantAtCoords(coords, null);
+        }
+    }
 	
 	//null means no one is at given coords
 	public static Stats getCombatantAtCoords(int rowIndex, int colIndex)
@@ -207,32 +223,32 @@ public static class CombatGrid
 
 	public static List<Stats> getAllAliveSummonedEnemies()
 	{
-		return getAllCombatantsThatMeetCriteria(c => positionIsOnEnemySide(c.position) && c.isAlive() && c.isTargetable() && c.isPartOfVolley());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnEnemySide(p)) && c.isAlive() && c.isTargetable() && c.isPartOfVolley());
 	}
-	
+
 	public static List<Stats> getAllAliveNonsummonedEnemies()
 	{
-		return getAllCombatantsThatMeetCriteria(c => positionIsOnEnemySide(c.position) && c.isAlive() && c.isTargetable() &&  !c.isPartOfVolley());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnEnemySide(p)) && c.isAlive() && c.isTargetable() &&  !c.isPartOfVolley());
 	}
-	
+
 	public static List<Stats> getAllAliveSummonedAllies()
 	{
-		return getAllCombatantsThatMeetCriteria(c => positionIsOnAlliedSide(c.position) && c.isAlive() && c.isTargetable() && c.isSummon());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnAlliedSide(p)) && c.isAlive() && c.isTargetable() && c.isSummon());
 	}
 
 	public static List<Stats> getAllAliveNonsummonedAllies()
 	{
-		return getAllCombatantsThatMeetCriteria(c => positionIsOnAlliedSide(c.position) && c.isAlive() && c.isTargetable() && !c.isSummon());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnAlliedSide(p)) && c.isAlive() && c.isTargetable() && !c.isSummon());
 	}
 
 	public static List<Stats> getAllAliveAllyCombatants()
 	{
-		return getAllCombatantsThatMeetCriteria(c => positionIsOnAlliedSide(c.position) && c.isAlive() && c.isTargetable());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnAlliedSide(p)) && c.isAlive() && c.isTargetable());
 	}
 
 	public static List<Stats> getAllAliveEnemyCombatants()
 	{
-		return getAllCombatantsThatMeetCriteria(c => positionIsOnEnemySide(c.position) && c.isAlive() && c.isTargetable());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnEnemySide(p)) && c.isAlive() && c.isTargetable());
 	}
 
 	public static List<Stats> getAllAliveCombatants()
@@ -242,7 +258,7 @@ public static class CombatGrid
 
 	public static List<Stats> getAllAllyCombatants()
 	{
-		return getAllCombatantsThatMeetCriteria(c => positionIsOnAlliedSide(c.position) && c.isTargetable());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnAlliedSide(p)) && c.isTargetable());
 	}
 
 	public static bool selectableAllyAtLocation(GridCoords coords)
@@ -254,12 +270,12 @@ public static class CombatGrid
 
 	public static List<Stats> getAllNonsummonedAllyCombatants()
 	{
-		return getAllCombatantsThatMeetCriteria(c => positionIsOnAlliedSide(c.position) && c.isTargetable() && !c.isSummon());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnAlliedSide(p)) && c.isTargetable() && !c.isSummon());
 	}
 
 	public static List<Stats> getAllEnemyCombatants()
 	{
-		return getAllCombatantsThatMeetCriteria(c => positionIsOnEnemySide(c.position) && c.isTargetable());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnEnemySide(p)) && c.isTargetable());
 	}
 
     public static Stats findOriginalCombatant(Stats repositionClone)
@@ -292,7 +308,7 @@ public static class CombatGrid
 			return new List<Stats>();
 		}
 
-		return getAllCombatantsThatMeetCriteria(c => positionIsOnAlliedSide(c.position) && Math.Abs(c.position.row - coords.row) + Math.Abs(c.position.col - coords.col) == 1);
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnAlliedSide(p) && Math.Abs(p.row - coords.row) + Math.Abs(p.col - coords.col) == 1));
 	}
 	
 	public static GridCoords findRandomOpenSpace(int startRow, int endRow)
@@ -332,26 +348,22 @@ public static class CombatGrid
 
 	private static GridCoords[] getAllEmptySpacesInArea(int startRow, int endRow)
 	{
-		// GridCoords[] allEmptySpaces = new GridCoords[0];
+		List<GridCoords> allEmptySpaces = new List<GridCoords>();
 		
-		// for(int rowIndex = startRow; rowIndex <= endRow; rowIndex++)
-		// {
-        //     for(int colIndex = 0; colIndex <= colRightBounds; colIndex++)
-        //     {
+		for(int rowIndex = startRow; rowIndex <= endRow; rowIndex++)
+		{
+            for(int colIndex = 0; colIndex <= colRightBounds; colIndex++)
+            {
+                GridCoords coords = new GridCoords(rowIndex, colIndex);
 
-        //         foreach(Stats space in combatantsDict.Values)
-        //         {
-        //             if(space == null && space is null && !CombatStateManager.allQueuedSummonLocations.Contains(new GridCoords(rowIndex, colIndex)))
-        //             {
-        //                 allEmptySpaces = Helpers.appendArray(allEmptySpaces, new GridCoords(rowIndex, colIndex));
-        //             }
-                    
-        //             colIndex++;
-        //         }
-        //     }
-		// }
+                if(!combatantsDict.ContainsKey(coords))
+                {
+                    allEmptySpaces.Add(coords);
+                }
+            }
+		}
 		
-		return allEmptySpaces;
+		return allEmptySpaces.ToArray();
 	}
 
 	public static GridCoords[] getAllSpacesInAllyZone()
@@ -406,18 +418,18 @@ public static class CombatGrid
 	
 	public static void deleteDeadOnDeathEffectActors()
 	{
-		for (int rowIndex = 0; rowIndex < combatantStatsGrid.Length; rowIndex++)
-		{
-			for (int colIndex = 0; colIndex < combatantStatsGrid[rowIndex].row.Length; colIndex++)
-			{
-				Stats currentCombatant = getCombatantAtCoords(rowIndex, colIndex);
+        List<Stats> combatants = new List<Stats>(combatantsDict.Values);
 
-				if (currentCombatant != null && currentCombatant.isDead() &&
-					Helpers.hasQuality<Trait>(currentCombatant.traitContainer, t => t.deleteIfDead()))
-				{
-					setCombatantAtCoords(rowIndex, colIndex, null);
-				}
-			}
+		for (int index = 0; index < combatants.Count; index++)
+		{
+            Stats currentCombatant = combatants[index];
+
+            if (currentCombatant != null && currentCombatant.isDead() &&
+                Helpers.hasQuality<Trait>(currentCombatant.traitContainer, t => t.deleteIfDead()))
+            {
+
+                removeCombatantFromGrid(currentCombatant);
+            }
 		}
 	}
 	
@@ -435,8 +447,8 @@ public static class CombatGrid
 			for(int priorCombatantIndex = combatantIndex-1; priorCombatantIndex >= 0; priorCombatantIndex--)
 			{
 				Stats currentPriorCombatant = combatantList[priorCombatantIndex];
-				
-				if(currentCombatant.position.Equals(currentPriorCombatant.position))
+
+				if(currentCombatant.positions.Any(p => currentPriorCombatant.positions.Contains(p)))
 				{
 					combatantList.RemoveAt(combatantIndex);
 					combatantIndex--;

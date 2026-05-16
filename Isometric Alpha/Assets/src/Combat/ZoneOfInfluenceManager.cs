@@ -32,10 +32,14 @@ public class ZoneOfInfluenceManager: MonoBehaviour
 		
 		foreach(Stats ally in listOfAllies)
 		{
-			Trait[] zoiTraits = getAllZOITraitsAtCoords(ally.position);
-			
+			List<Trait> zoiTraits = new List<Trait>();
+			foreach (GridCoords allyCoords in ally.positions)
+			{
+				zoiTraits.AddRange(getAllZOITraitsAtCoords(allyCoords));
+			}
+
 			ally.removeAllZoneOfInfluenceTraits();
-			
+
 			ally.addTraits(zoiTraits);
 		}
 	}

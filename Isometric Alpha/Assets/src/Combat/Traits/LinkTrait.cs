@@ -30,14 +30,23 @@ public class LinkTrait : Trait
 
     public override void harmAllLinkedTargets(int incomingDamage)
     {
+        if(getTraitHolder() == null)
+        {
+            return;
+        }
+
         int projectileNumber = 0;
-        linkAction.setActorCoords(getTraitHolder().position);
+
+        if (getTraitHolder().positions.Count > 0)
+        {
+            linkAction.setActor(getTraitHolder());
+        }
 
         foreach (Stats target in linkedTargets)
         {
-            if(target != null && !target.isDead())
+            if(target != null && !target.isDead() && target.positions.Count > 0)
             {
-                projectileNumber += linkAction.sendProjectileAt(target.position, target, projectileNumber, getDamageToDeal(incomingDamage), false);
+                projectileNumber += linkAction.sendProjectileAt(target.positions[0], target, projectileNumber, getDamageToDeal(incomingDamage), false);
             }
         }
     }

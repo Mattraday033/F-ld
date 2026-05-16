@@ -43,6 +43,7 @@ VAR toldPazmanAboutSealingBreach = false
 VAR sentIntoMineByDirector = false
 VAR trainedByEmeseToUseBlasingJelly = false
 VAR mentionedDirectorGuardCrates = false
+VAR broughtMarcosToGaspar = false
 
 VAR formationScreenTutorialKey = "Formation Tutorial"
 
@@ -264,16 +265,20 @@ I will forgive them if they recognize my leadership. Are you willing to follow m
 === showDirectorsSeal_1e ===
 
 {
--mineLvl3CarterAndNandorInParty:
-    +I recruited some of the other survivors from this floor. They will help us defeat the worms.
-        ->lookForSurvivors_1b(->lookForSurvivors_1c)
--metBrandedSurvivors:
-    +I found some other survivors. Their camp is not far from here.
-        ->lookForSurvivors_1b(->lookForSurvivors_1ba)
--else:
-    +Are you the only group of survivors on this floor?
-        ->showDirectorsSeal_1ea
+-not broughtMarcosToGaspar:
+    {
+    -mineLvl3CarterAndNandorInParty:
+        +I recruited some of the other survivors from this floor. They will help us defeat the worms.
+            ->lookForSurvivors_1b(->lookForSurvivors_1c)
+    -metBrandedSurvivors:
+        +I found some other survivors. Their camp is not far from here.
+            ->lookForSurvivors_1b(->lookForSurvivors_1ba)
+    -else:
+        +Are you the only group of survivors on this floor?
+            ->showDirectorsSeal_1ea
+    }
 }
+
     +Whatever. I'm ready to move out when you lot are.
         ->2ea_MakeForBreach
 

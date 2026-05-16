@@ -97,7 +97,7 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
 
         combatSprite = combatSprites[spawnDetails.baseStatsPosition];
 
-        position = spawnDetails.baseStatsPosition;
+        positions = spawnDetails.allSpawnPositions.Select(p => p.clone()).ToList();
 
         setHealthBarToAverageWorldPosition();
 

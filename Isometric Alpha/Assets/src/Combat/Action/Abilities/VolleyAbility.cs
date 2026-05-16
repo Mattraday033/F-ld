@@ -71,7 +71,7 @@ public class VolleyAbility : Ability
 
     public override GridCoords getActorCoords()
     {
-        return getActorStats().position;
+        return getActorStats().positions.Count > 0 ? getActorStats().positions[0] : GridCoords.getDefaultCoords();
     }
 
     public override void performCombatAction() 
@@ -325,7 +325,7 @@ public class VolleyAbility : Ability
 	{
 		foreach(Stats actor in allActors)
 		{
-			Debug.LogError("Volley Actor at coords " + actor.position.ToString());
+			Debug.LogError("Volley Actor at coords " + string.Join(", ", actor.positions));
 		}
 	}
 

@@ -1413,6 +1413,7 @@ public class DialogueManager : MonoBehaviour
                 case "removefromparty":
 
                     int nameIndex2 = getArgumentInt(buffer, Constants.indexZero);
+                    bool preventInventoryLoss = getArgumentBool(buffer, Constants.indexOne);
 
                     partyMemberName = currentDialogue.names[nameIndex2];
 
@@ -1425,8 +1426,12 @@ public class DialogueManager : MonoBehaviour
                     }
 
                     partyMemberToRemove.canJoinParty = false;
-                    partyMemberToRemove.stats.equippedItems.unequipAllItems();
-                    partyMemberToRemove.stats.combatActionArray.unequipAllActions();
+
+                    if(!preventInventoryLoss)
+                    {
+                        partyMemberToRemove.stats.equippedItems.unequipAllItems();
+                        partyMemberToRemove.stats.combatActionArray.unequipAllActions();
+                    }
 
                     if (State.formation != null)
                     {

@@ -470,7 +470,13 @@ public static class DamageCalculator
 
 				Selector targetSelector = TraitList.chaotic.findTargetLocation(SelectorManager.getInstance().selectors[fear.getRangeIndex()].clone(), CombatGrid.getAllAliveEnemyCombatants());
 
-				fear.setActorCoords(currentStatSource.position);
+				if (currentStatSource.positions.Count > 0)
+				{
+					fear.setActor(currentStatSource);
+				} else
+                {
+                    return;
+                }
 				fear.setSelector(targetSelector);
 				//fear.setTargetCoords(targetSelector.getCoords());
 

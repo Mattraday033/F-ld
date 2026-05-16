@@ -67,7 +67,7 @@ public class TakeHostageAbility : Ability
 
                 EnemyStats conscript = (EnemyStats) EnemyStatsList.getEnemyStats(MonsterNameList.brandedConscript).clone();
 
-                CreatureSpawner.spawn(conscript, emptySpaces.OrderBy(a => Guid.NewGuid()).ToList()[0]);
+                CreatureSpawner.spawn(conscript, new List<GridCoords> { emptySpaces.OrderBy(a => Guid.NewGuid()).ToList()[0] });
             }
         }
     }

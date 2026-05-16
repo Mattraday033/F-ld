@@ -130,7 +130,10 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 				sourceItem.use(targetCombatant);
                 if(!inPreviewMode)
                 {
-                    CombatAnimationManager.loadInstantEffect(getEffectAnimationType(), targetCombatant.position, false, findFinalDamage(targetCombatant, false), healsTarget(), false, null, getActorCoords());
+                    foreach (GridCoords targetCoords in targetCombatant.positions)
+                    {
+                        CombatAnimationManager.loadInstantEffect(getEffectAnimationType(), targetCoords, false, findFinalDamage(targetCombatant, false), healsTarget(), false, null, getActorCoords());
+                    }
                 }
 			}
 		}

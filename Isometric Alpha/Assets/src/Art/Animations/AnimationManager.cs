@@ -129,7 +129,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             return;
         } 
 
-        bool isAlly = CombatGrid.positionIsOnAlliedSide(linkedStats.position);
+        bool isAlly = linkedStats.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p));
         bool containsSprites = IdleDictionary.idleDictContainsSprites(characterToAnimate, newIdle);
 
         if((newIdle == CharacterAnimationType.Secondary_Idle || newIdle == CharacterAnimationType.Death) &&
@@ -295,7 +295,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         if(CombatStateManager.inCombat)
         {
-            heartBeatRow = linkedStats.position.row;
+            heartBeatRow = linkedStats.positions.Count > 0 ? linkedStats.positions[0].row : 0;
         } else
         {
             heartBeatRow = UnityEngine.Random.Range(CombatGrid.enemyRowUpperBounds,CombatGrid.allyRowLowerBounds);
@@ -520,7 +520,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
         if(CombatStateManager.inCombat)
         {
-            if(CombatGrid.positionIsOnAlliedSide(linkedStats.position))
+            if(linkedStats.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
             {
                 attackAnimationType = CharacterAnimationType.Attack_Normal_Back;
             } else
@@ -608,7 +608,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
         if(CombatStateManager.inCombat)
         {
-            if(CombatGrid.positionIsOnAlliedSide(linkedStats.position))
+            if(linkedStats.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
             {
                 woundedAnimationType = CharacterAnimationType.Wounded_Back;
             } else
@@ -781,7 +781,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
         if(CombatStateManager.inCombat)
         {
-            if(CombatGrid.positionIsOnAlliedSide(linkedStats.position))
+            if(linkedStats.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
             {
                 deathAnimationType = CharacterAnimationType.Death_Back;
             } else
@@ -937,7 +937,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         }
         if(CombatStateManager.inCombat)
         {
-            if(CombatGrid.positionIsOnAlliedSide(linkedStats.position))
+            if(linkedStats.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
             {
                 newFacing = Facing.NorthEast;
             } else

@@ -70,7 +70,7 @@ public class EnemyStats : Stats
 
     #region Sprite and GameObject
 
-    public override GameObject instantiateCombatSprite(GridCoords coords)
+    public override GameObject instantiateCombatSprite(List<GridCoords> coords)
     {
         combatSprite = base.instantiateCombatSprite(coords);
 
@@ -87,11 +87,6 @@ public class EnemyStats : Stats
     public override Color getOutlineColor()
     {
         return ColorList.attacksOnSight;
-    }
-
-    public override GridCoords getPositionToHit(Selector selector, int skips)
-    {
-        return position.clone();
     }
 
     public override void setToDeadSprite()
@@ -150,7 +145,7 @@ public class EnemyStats : Stats
         }
 
         CombatAction combatActionClone = combatAction.clone();
-        combatActionClone.setActorCoords(position);
+        combatActionClone.setActor(combatAction.getActorStats());
 
         return combatActionClone;
     }
@@ -269,19 +264,19 @@ public class EnemyStats : Stats
         return animationSuffixes.OrderBy(a => Guid.NewGuid()).ToList()[0];
     }
 
-    public override GridCoords findLocationToSpawn()
+    public override List<GridCoords> findLocationToSpawn()
     {
         if(isFrontline())
         {
-            return CreatureSpawner.getNextFreeEnemyFrontLineSpace();
+            return new List<GridCoords>() { CreatureSpawner.getNextFreeEnemyFrontLineSpace()};
         }
 
         if(isBackline())
         {
-            return CreatureSpawner.getNextFreeEnemyBackLineSpace();
+            return new List<GridCoords>() { CreatureSpawner.getNextFreeEnemyBackLineSpace()};
         }
 
-        return CombatGrid.findRandomOpenSpaceInEnemyZone();
+        return new List<GridCoords>() { CombatGrid.findRandomOpenSpaceInEnemyZone() };
     }
 
     #endregion

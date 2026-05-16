@@ -1,6 +1,7 @@
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -41,7 +42,7 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
             {
                 if(highlightRow)
                 {
-                    if(CombatGrid.positionIsOnAlliedSide(actionBeingDescribed.getActorStats().position))
+                    if(actionBeingDescribed.getActorStats().positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
                     {
                         rowBackground.color = Color.green;
                     } else
@@ -85,9 +86,9 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 
 		CombatAction actionBeingDescribed = getCombatActionBeingDescribed();
 
-        if(actionBeingDescribed != null && 
-            actionBeingDescribed.getActorStats() != null && 
-            CombatGrid.positionIsOnAlliedSide(actionBeingDescribed.getActorStats().position))
+        if(actionBeingDescribed != null &&
+            actionBeingDescribed.getActorStats() != null &&
+            actionBeingDescribed.getActorStats().positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
         {
 		    rowBackground.color = Color.green;
         } else

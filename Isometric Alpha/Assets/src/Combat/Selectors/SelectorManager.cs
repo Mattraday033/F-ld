@@ -105,7 +105,11 @@ public class SelectorManager : MonoBehaviour
 		}
 
 		selectors[0].setToCurrentSelector();
-		selectors[0].setToLocation(PartyManager.getPlayerStats().position);
+		Stats playerStatsForSelector = PartyManager.getPlayerStats();
+		if (playerStatsForSelector != null && playerStatsForSelector.positions.Count > 0)
+		{
+			selectors[0].setToLocation(playerStatsForSelector.positions[0]);
+		}
 	}
 
 
@@ -350,7 +354,11 @@ public class SelectorManager : MonoBehaviour
 			}
 
 			resetAllSelectors();
-			selectors[0].setToLocation(loadedCombatAction.getActorStats().position);
+			Stats loadedActorStats = loadedCombatAction.getActorStats();
+			if (loadedActorStats != null && loadedActorStats.positions.Count > 0)
+			{
+				selectors[0].setToLocation(loadedActorStats.positions[0]);
+			}
 
 			CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
 			DamagePreviewManager.wipeAllDamagePreviews();
@@ -496,7 +504,7 @@ public class SelectorManager : MonoBehaviour
 
 			if (CombatStateManager.choosingRepositionTarget())
 			{
-				RepositionManager.currentSingleTargetRepositionCombatAction.setActorCoords(currentSelector.getCoords());
+				RepositionManager.currentSingleTargetRepositionCombatAction.setActor(CombatGrid.getCombatantAtCoords(currentSelector.getCoords()));
 				RepositionManager.currentRepositionActivity = CurrentRepositionActivity.ChoosingNewLocation;
 
 				selectors[1].setToCurrentSelector();
@@ -1069,7 +1077,8 @@ public class SelectorManager : MonoBehaviour
 
 	public static GridCoords findLegalCoordsContainingMandatoryTarget(Selector selector, Stats mandatoryTarget)
 	{
-		return findLegalCoordsContainingMandatoryTarget(selector, mandatoryTarget.position);
+		GridCoords targetCoords = mandatoryTarget.positions.Count > 0 ? mandatoryTarget.positions[0] : GridCoords.getDefaultCoords();
+		return findLegalCoordsContainingMandatoryTarget(selector, targetCoords);
 	}
 
 	//only use after already placing the selector at the target's position and then want to adjust it to be inside the combat zone

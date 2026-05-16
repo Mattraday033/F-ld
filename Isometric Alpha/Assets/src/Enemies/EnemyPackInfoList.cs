@@ -222,7 +222,7 @@ public static class EnemyPackInfoList
                                                                                                         DropTableList.lovashiGuardsDTKey,
                                                                                                         guaranteedDrops: new ItemListID[]  {new ItemListID(ItemList.questItemListIndex, ItemList.blastingJellyIndex)},
                                                                                                         xpDrop: 150, 
-                                                                                                        script: new KilledMineLvlThreeGuardsScript());
+                                                                                                        script: new KilledMineLvlThreeGuardsB4BreachScript());
 
     public readonly static EnemyPackInfo ml3GuardsWithoutBarricades = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.guardReka, 
@@ -233,21 +233,31 @@ public static class EnemyPackInfoList
                                                                                                         DropTableList.lovashiGuardsDTKey,
                                                                                                         guaranteedDrops: new ItemListID[]  {new ItemListID(ItemList.questItemListIndex, ItemList.blastingJellyIndex)},
                                                                                                         xpDrop: 150, 
-                                                                                                        script: new KilledMineLvlThreeGuardsScript());
+                                                                                                        script: new KilledMineLvlThreeGuardsB4BreachScript());
 
-    public readonly static EnemyPackInfo ml3GuardsNoSurrenders = new EnemyPackInfo(new CreatureAmount[] { 
+    public readonly static EnemyPackInfo ml3GuardsNoSurrenders = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.guardReka, 
                                                                                                         EnemyAmountList.guardPazman, 
                                                                                                         EnemyAmountList.overseerGaspar, 
                                                                                                         EnemyAmountList.guardVirag 
                                                                                                        },
-                                                                                                        DropTableList.lovashiGuardsDTKey);
+                                                                                                        DropTableList.lovashiGuardsDTKey,
+                                                                                                        script: new KilledMineLvlThreeGuardsAfterBreachScript());
 
-    public readonly static EnemyPackInfo ml3GuardsRekaPazmanSurrender = new EnemyPackInfo(new CreatureAmount[] { 
+    public readonly static EnemyPackInfo ml3GuardsRekaPazmanSurrender = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.overseerGaspar, 
                                                                                                         EnemyAmountList.guardVirag 
                                                                                                        },
-                                                                                                        DropTableList.lovashiGuardsDTKey);
+                                                                                                        DropTableList.lovashiGuardsDTKey,
+                                                                                                        script: new KilledMineLvlThreeGuardsAfterBreachScript());
+
+    public readonly static EnemyPackInfo ml3FightingNandorAndCarter = new BossPackInfo(new CreatureAmount[] { 
+                                                                                                        EnemyAmountList.overseerGaspar, 
+                                                                                                        EnemyAmountList.guardVirag, 
+                                                                                                        EnemyAmountList.guardPazman
+                                                                                                       },
+                                                                                                        DropTableList.lovashiGuardsDTKey,
+                                                                                                        script: new KilledNandorCarterAfterBreachScript());
 
     #endregion
 

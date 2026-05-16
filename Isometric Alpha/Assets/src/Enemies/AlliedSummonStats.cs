@@ -29,19 +29,19 @@ public class AlliedSummonStats : VolleyParticipantStats
         traitContainer.addTrait(TraitList.summoned);
     }
 
-    public override GridCoords findLocationToSpawn()
+    public override List<GridCoords> findLocationToSpawn()
     {
         if(isFrontline())
         {
-            return CreatureSpawner.getNextFreeAllyFrontLineSpace();
+            return new List<GridCoords> { CreatureSpawner.getNextFreeAllyFrontLineSpace() };
         }
 
         if(isBackline())
         {
-            return CreatureSpawner.getNextFreeAllyBackLineSpace();
+            return new List<GridCoords> { CreatureSpawner.getNextFreeAllyBackLineSpace() };
         }
 
-        return CombatGrid.findRandomOpenSpaceInAllyZone();
+        return new List<GridCoords> { CombatGrid.findRandomOpenSpaceInAllyZone() };
     }
 	
 	public override Color getOutlineColor()

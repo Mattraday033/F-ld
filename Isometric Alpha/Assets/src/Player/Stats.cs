@@ -33,17 +33,17 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public string characterName;
 
-    private GridCoords _Position;
+    private List<GridCoords> _Positions = new List<GridCoords>();
 
-    public GridCoords position
+    public List<GridCoords> positions
     {
         get
         {
-            return _Position;
+            return _Positions;
         }
         set
         {
-            _Position = value;
+            _Positions = value;
         }
     }
 
@@ -140,7 +140,23 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual GridCoords getPositionToHit(Selector selector, int skips)
     {
-        return position.clone();
+        GridCoords[] allSelectorCoords = selector.getAllSelectorCoords();
+        List<GridCoords> overlapping = new List<GridCoords>();
+
+        foreach (GridCoords coords in allSelectorCoords)
+        {
+            if (positions.Contains(coords))
+            {
+                overlapping.Add(coords);
+            }
+        }
+
+        if (overlapping.Count == 0 || skips >= overlapping.Count)
+        {
+            return positions.Count > 0 ? positions[0].clone() : GridCoords.getDefaultCoords();
+        }
+
+        return overlapping[skips];
     }
 
     public virtual string getCombatSpriteName()
@@ -148,18 +164,20 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return combatSpriteName;
     }
 
-    public virtual GameObject instantiateCombatSprite(GridCoords initialPosition)
+    public virtual GameObject instantiateCombatSprite(List<GridCoords> initialPositions)
     {
         combatSprite = Instantiate(Resources.Load<GameObject>(getCombatSpriteName()), CombatStateManager.getCreatureParent());
 
-        position = initialPosition.clone();
+        positions = initialPositions.Select(p => p.clone()).ToList();
 
         setUpComponents(combatSprite.GetComponent<ComponentList>());
 
-        moveTo(position);
+        moveTo(positions);
 
         return combatSprite;
     }
+
+
 
     public virtual void setUpComponents(ComponentList list)
     {
@@ -238,20 +256,23 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual void removeFromGrid()
     {
-        if(CombatGrid.getCombatantAtCoords(position) == this)
+        foreach (GridCoords coords in positions)
         {
-            CombatGrid.setCombatantAtCoords(position, null);
+            if (CombatGrid.getCombatantAtCoords(coords) == this)
+            {
+                CombatGrid.setCombatantAtCoords(coords, null);
+            }
         }
     }
 
     public virtual bool isInsideCoordinates(GridCoords coords)
     {
-        return coords.Equals(position);
+        return positions.Contains(coords);
     }
 
     public virtual bool isInsideCoordinates(GridCoords[] coords)
     {
-        return coords.Contains(position);
+        return positions.Any(p => coords.Contains(p));
     }
 
     #endregion
@@ -588,27 +609,20 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return false;
     }
 
-    public void moveTo(GridCoords newCoords, bool moveSprite = true)
+    public void moveTo(List<GridCoords> newCoords, bool moveSprite = true)
     {
-        GridCoords oldCoords = position.clone();
+        List<GridCoords> oldCoords = positions.Select(p => p.clone()).ToList();
 
-        //adjustCombatActionsActorCoords(oldCoords, newCoords);
+        CombatGrid.removeCombatantFromGrid(this);
 
-        if (CombatGrid.getCombatantAtCoords(oldCoords) == this)
+        positions = newCoords.Select(p => p.clone()).ToList();
+
+        CombatGrid.addCombatantToGrid(this);
+
+        if (moveSprite && positions.Count > 0)
         {
-            CombatGrid.setCombatantAtCoords(oldCoords, null);
+            CombatGrid.updateStatsSpritePosition(positions[0]);
         }
-
-        CombatGrid.setCombatantAtCoords(newCoords, this);
-
-        position = newCoords.clone();
-
-        if (moveSprite)
-        {
-            CombatGrid.updateStatsSpritePosition(newCoords);
-        }
-
-        // EnvironmentalCombatActionManager.getInstance().updateEnvironmentalCasterPosition(oldCoords, newCoords);
     }
 
     public abstract int getTotalArmorRating();
@@ -759,14 +773,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public bool shouldTargetEnemy()
     {
-        if (CombatGrid.positionIsOnAlliedSide(position))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return positions.Any(p => CombatGrid.positionIsOnAlliedSide(p));
     }
 
     public virtual CombatActionArray getActionArray()
@@ -923,14 +930,17 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
             if (CombatStateManager.whoseTurn == WhoseTurn.Resolving)
             {
-                DamageNumberPopup.create(position,
-                                         traitApplicationDamage,
-                                     CombatGrid.getPositionAt(position),
-                                     DamageNumberPopup.getDirectionByTargetCoords(position),
-                                     CombatAnimationManager.getInstance().damageNumberCanvas,
-                                     isNotACrit,
-                                     doesNotHealTarget,
-                                     traitApplicationDamageFrameDelay);
+                foreach (GridCoords coords in positions)
+                {
+                    DamageNumberPopup.create(coords,
+                                             traitApplicationDamage,
+                                         CombatGrid.getPositionAt(coords),
+                                         DamageNumberPopup.getDirectionByTargetCoords(coords),
+                                         CombatAnimationManager.getInstance().damageNumberCanvas,
+                                         isNotACrit,
+                                         doesNotHealTarget,
+                                         traitApplicationDamageFrameDelay);
+                }
             }
         }
     }
@@ -1109,7 +1119,12 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     #region Miscellaneous
 
-    public abstract GridCoords findLocationToSpawn();
+    public abstract List<GridCoords> findLocationToSpawn();
+
+    public bool isMultiTile()
+    {
+        return positions.Count > Constants.sizeOne;
+    }
 
     public void disablePolygonCollider()
     {
@@ -1145,7 +1160,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
         if(CombatStateManager.inCombat)
         {
-            return stats.position.Equals(position) && stats.getName().Equals(getName());
+            return stats.positions.Any(p => positions.Contains(p)) && stats.getName().Equals(getName());
         } else
         {
             return stats.getName().Equals(getName());
@@ -1230,7 +1245,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         Stats clone = (Stats)Clone();
 
         clone.repositionClone = null;
-        clone.position = position.clone();
+        clone.positions = positions.Select(p => p.clone()).ToList();
 
         clone.traitContainer = traitContainer.clone(clone);
 

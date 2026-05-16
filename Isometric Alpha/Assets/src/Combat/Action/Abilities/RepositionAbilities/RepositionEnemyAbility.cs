@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class RepositionEnemyAbility : RepositionAbility
@@ -33,9 +34,12 @@ public class RepositionEnemyAbility : RepositionAbility
 
     public override void unqueueingAction()
     {
-        if (getStatsClone() != null && !getCombatantToBeMoved().position.Equals(getStatsClone().position))
+        if (getStatsClone() != null && !getCombatantToBeMoved().positions.Any(p => getStatsClone().positions.Contains(p)))
         {
-            CombatGrid.setCombatantAtCoords(getStatsClone().position, null);
+            foreach (GridCoords cloneCoords in getStatsClone().positions)
+            {
+                CombatGrid.setCombatantAtCoords(cloneCoords, null);
+            }
         }
 
         setStatsClone(null);

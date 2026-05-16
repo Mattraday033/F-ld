@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using System;
 
@@ -150,8 +151,8 @@ public class Selector : ScriptableObject, ICloneable
 	}
 	
 	public bool containsTarget(Stats target)
-	{		
-		return containsTarget(target.position);
+	{
+		return target.positions.Any(p => containsTarget(p));
 	}
 	
 	public bool containsTarget(GridCoords target)

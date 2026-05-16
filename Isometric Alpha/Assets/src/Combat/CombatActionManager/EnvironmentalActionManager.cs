@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class EnvironmentalCombatActionManager : MonoBehaviour
@@ -86,7 +87,7 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
                 break;
             case NPCNameList.chiefTabor:
 
-                if(CombatGrid.positionIsOnAlliedSide(actorStats.position))
+                if(actorStats.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
                 {
                     envCombatAction = AbilityList.getAbility(actorStats, AbilityList.guardLashKey);
                     targetingTrait = TraitList.chaotic;
@@ -128,19 +129,6 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 
         envCombatAction.setActor(actorStats);
         environmentalCombatActions.Add(envCombatAction, targetingTrait);
-	}
-	
-	public void updateEnvironmentalCasterPosition(GridCoords oldPosition, GridCoords newPosition)
-	{
-		foreach(KeyValuePair<CombatAction,Trait> kvp in environmentalCombatActions)
-		{
-			CombatAction envCombatAction = kvp.Key;
-			
-			if(envCombatAction.getActorCoords().Equals(oldPosition))
-			{
-				envCombatAction.setActorCoords(newPosition.clone());
-			}
-		}
 	}
 	
 	public static void deleteAllEnvironmentalCombatActions()

@@ -83,24 +83,17 @@ searchInventoryFor(hasBlastingJelly,Blasting Jelly)
         {
         -mineLvl3MarcosTaughtHowToIgniteJelly or trainedByEmeseToUseBlasingJelly:
             +\*Make sure the tunnel is clear, then seal the breach yourself*.
-            finishQuest(Sealing the Breach, true, Sealed the Breach Myself.)
 
-            {
-            -sentIntoMineByDirector:
-                activateQuestStep(No Good Deed,Return to the Director's office.)
-            }
             setToTrue(playerSealedBreachThemself)
+            setToTrue(mineLvl3BreachSealed)
                 ->1d
         }
 
         {
         -not deathFlagGuardMárcos and mineLvl3MarcosAgreedToIgniteJelly:
             +Alright Márcos, you're up. Set the blasting jelly.
-            finishQuest(Sealing the Breach, true, Márcos Sealed the Breach.)
-            {
-            -sentIntoMineByDirector:
-                activateQuestStep(No Good Deed,Return to the Director's office.)
-            }
+            setToTrue(mineLvl3MarcosDiedSealingBreach)
+            setToTrue(mineLvl3BreachSealed)
                 ->6a
         }
     }
@@ -108,12 +101,8 @@ searchInventoryFor(hasBlastingJelly,Blasting Jelly)
     {
     -mineLvl3GuardsInParty:
         +Overseer, the way is clear. The breach can be sealed.
+        setToTrue(guardsSealedBreach)
         setToTrue(mineLvl3BreachSealed)
-        finishQuest(Sealing the Breach, true, The guards sealed the breach.)
-        {
-        -sentIntoMineByDirector:
-            activateQuestStep(No Good Deed,Return to the Director's office.)
-        }
             ->2a
     }
 }
@@ -625,7 +614,7 @@ changeCamTarget({nandorIndex})
 -toldCarterPassword:
 \*Nandor whispers in your ear.* What are you doing? They're isolated. Now is our best time to remove them without any witnesses.
 -else:
-\*Nandor whispers in your ear.* I don't have time to explain, but I have no intention of being made their prisoner. If we fight, will you join us?
+\*Nandor whispers in your ear.* I don't have time to explain, but I have no intention of being made their prisoner. We won't have another chance like this to gain our freedom without an entire camp of guards standing in our way. If we fight, will you join us?
 }
 
     +\ {not toldCarterPassword:Are you mad? }I'm not fighting some armed guards, even with you at my back.
@@ -638,7 +627,7 @@ changeCamTarget({nandorIndex})
 
 Carter and I will fight whether you're with us or not. If you treasure your freedom, you must make a stand!
 
-    +Very well. I'm with you.
+    +If you're so determined, then I'm with you.
         setToTrue(mineLvl3AgreedToFightGaspar)
         ->3c
     +You're going to get yourself killed. I'll have none of it.

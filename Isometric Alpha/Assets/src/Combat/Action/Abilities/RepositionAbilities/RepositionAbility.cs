@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class RepositionAbility : Ability, IJSONConvertable
@@ -38,7 +39,7 @@ public class RepositionAbility : Ability, IJSONConvertable
             yield return null;
         }
 
-        combatantToBeMoved.moveTo(getDestinationCoords());
+        combatantToBeMoved.moveTo(new List<GridCoords> { getDestinationCoords() });
 
         applyTrait(combatantToBeMoved);
 
@@ -59,18 +60,21 @@ public class RepositionAbility : Ability, IJSONConvertable
             return;
         }
 
-        if (!combatantToBeMoved.position.Equals(getDestinationCoords()))
+        if (!combatantToBeMoved.isInsideCoordinates(getDestinationCoords()))
         {
             setStatsClone(getCombatantToBeMoved().clone());
 
-            statsClone.position = getDestinationCoords().clone();
+            statsClone.positions = new List<GridCoords> { getDestinationCoords().clone() };
             statsClone.addTrait(TraitList.repositioningInvulnerability);
             statsClone.inPreviewMode = true;
             statsClone.addTrait(getAppliedTrait());
             statsClone.inPreviewMode = false;
             statsClone.addTrait(TraitList.untargetable);
 
-            CombatGrid.setCombatantAtCoords(statsClone.position, statsClone);
+            foreach (GridCoords cloneCoords in statsClone.positions)
+            {
+                CombatGrid.setCombatantAtCoords(cloneCoords, statsClone);
+            }
             combatantToBeMoved.repositionClone = statsClone;
 
             placeHolderObject = RepositionPlaceholderGenerator.generatePlaceholderObject(statsClone, getDestinationCoords());
@@ -90,7 +94,7 @@ public class RepositionAbility : Ability, IJSONConvertable
     {
         base.activatingAction();
 
-        if (getCombatantToBeMoved() != null && !getCombatantToBeMoved().position.Equals(getDestinationCoords()))
+        if (getCombatantToBeMoved() != null && !getCombatantToBeMoved().isInsideCoordinates(getDestinationCoords()))
         {
             CombatGrid.setCombatantAtCoords(getDestinationCoords(), null);
         }
@@ -102,9 +106,12 @@ public class RepositionAbility : Ability, IJSONConvertable
 
     public override void unqueueingAction()
     {
-        if (!statsClone.position.Equals(getCombatantToBeMoved().position))
+        if (!statsClone.positions.Any(p => getCombatantToBeMoved().positions.Contains(p)))
         {
-            CombatGrid.setCombatantAtCoords(statsClone.position, null);
+            foreach (GridCoords cloneCoords in statsClone.positions)
+            {
+                CombatGrid.setCombatantAtCoords(cloneCoords, null);
+            }
         }
 
         setStatsClone(null);
@@ -174,7 +181,7 @@ public class RepositionAbility : Ability, IJSONConvertable
         Stats combatantToBeMoved = getCombatantToBeMoved();
 
         if (combatantToBeMoved != null && combatantToBeMoved.repositionClone != null &&
-            combatantToBeMoved.repositionClone.position.Equals(combatantToBeMoved.position))
+            combatantToBeMoved.repositionClone.positions.Any(p => combatantToBeMoved.positions.Contains(p)))
         {
             combatantToBeMoved.repositionClone = combatantToBeMoved.repositionClone.repositionClone;
         }

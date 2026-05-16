@@ -1243,7 +1243,11 @@ public static class DialogueList
                                                                 NPCNameList.director+1,
                                                                 NPCNameList.chiefTabor,
                                                                 NPCNameList.weft,
-                                                                NPCNameList.captainAdela
+                                                                NPCNameList.captainAdela,
+                                                                NPCNameList.guard,
+                                                                NPCNameList.guard+1,
+                                                                NPCNameList.overseerGaspar,
+                                                                NPCNameList.chiefTabor+1
                                                             }, 
                                  Resources.Load<TextAsset>(DialogueNameList.prerevoltPagePathName)));
 

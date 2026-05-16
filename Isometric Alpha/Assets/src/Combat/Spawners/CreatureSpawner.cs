@@ -13,7 +13,6 @@ public interface ICreatureSpawnPackage : IEnumerable
 public static class CreatureSpawner
 {
 
-
     #region Spawn Specific Packages
 
     public static void spawnFormation()
@@ -25,6 +24,7 @@ public static class CreatureSpawner
     {
         spawn(State.enemyPackInfo);
     }
+
     public static void spawnAllyPackInfo()
     {
         spawn(State.allyPackInfo);
@@ -55,17 +55,24 @@ public static class CreatureSpawner
         spawn(stats, stats.findLocationToSpawn());
 	}
 
-	public static void spawn(Stats stats, GridCoords spawnCoords)
+	public static void spawn(Stats stats, List<GridCoords> spawnCoords)
 	{
-		if(stats == null || 
-            spawnCoords.Equals(GridCoords.getDefaultCoords()) || 
-            CombatGrid.getCombatantAtCoords(spawnCoords) != null)
+		if(stats == null || spawnCoords == null || spawnCoords.Count == 0)
 		{
 			return;
 		}
 
+		foreach (GridCoords coords in spawnCoords)
+		{
+			if (coords.Equals(GridCoords.getDefaultCoords()) ||
+				CombatGrid.getCombatantAtCoords(coords) != null)
+			{
+				return;
+			}
+		}
+
         stats.instantiateCombatSprite(spawnCoords);
-        
+
         if(CombatStateManager.whoseTurn == WhoseTurn.Start)
         {
             stats.instateEnvironmentalCombatAction();

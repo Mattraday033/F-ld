@@ -27,9 +27,9 @@ public class EnemyCombatActionManager : MonoBehaviour
 		{			
 			CombatAction enemyCombatAction = enemy.getCombatAction();
 
-			if(enemyCombatAction == null || 
-                Helpers.hasQuality<Trait>(enemy.traitContainer, t => t.isPacifist()) || 
-				containsCombatActionFromPosition(enemy.position) || enemy.isPartOfVolley())
+			if(enemyCombatAction == null ||
+                Helpers.hasQuality<Trait>(enemy.traitContainer, t => t.isPacifist()) ||
+				enemy.positions.Any(p => containsCombatActionFromPosition(p)) || enemy.isPartOfVolley())
 			{
 				continue; //if enemy failed to find a target, it shouldn't do anything
 			}
@@ -104,8 +104,11 @@ public class EnemyCombatActionManager : MonoBehaviour
 			{
                 int linkDamage = (int) ((double) enemy.getTotalHealth() * linkedPercentage);
 
-                DamageNumberPopup.create(enemy.position, linkDamage, enemy.combatSprite.transform.position, DamageNumberPopup.getDirectionByTargetCoords(enemy.position),
-                                        CombatAnimationManager.getInstance().damageNumberCanvas, false, false);
+                foreach (GridCoords enemyCoords in enemy.positions)
+                {
+                    DamageNumberPopup.create(enemyCoords, linkDamage, enemy.combatSprite.transform.position, DamageNumberPopup.getDirectionByTargetCoords(enemyCoords),
+                                            CombatAnimationManager.getInstance().damageNumberCanvas, false, false);
+                }
 				enemy.modifyCurrentHealth(linkDamage);
                 enemy.playAnimationOnDamage();
 			}

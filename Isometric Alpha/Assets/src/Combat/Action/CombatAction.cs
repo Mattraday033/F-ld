@@ -765,7 +765,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public virtual GridCoords getActorCoords()
     {
-        return actorStats.position.clone();
+        return actorStats.positions.Count > 0 ? actorStats.positions[0].clone() : GridCoords.getDefaultCoords();
     }
 
     public virtual Stats getActorStats()
@@ -816,21 +816,21 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         //{
         //    tertiarySelector.setToLocation(tertiaryCoords); 
         //}
-
+ 
         return tertiarySelector;
     }
 
-    public virtual void setActorCoords(GridCoords newPosition)
-    {
-        if (actorStats == null)
-        {
-            actorStats = CombatGrid.getCombatantAtCoords(newPosition);
-        }
-        else
-        {
-            actorStats.position = newPosition;
-        }
-    }
+    // public virtual void setActorCoords(GridCoords newPosition)
+    // {
+    //     if (actorStats == null)
+    //     {
+    //         actorStats = CombatGrid.getCombatantAtCoords(newPosition);
+    //     }
+    //     else
+    //     {
+    //         actorStats.positions = new List<GridCoords> { newPosition };
+    //     }
+    // }
 
     public virtual void setActor(Stats actor)
     {
@@ -890,7 +890,10 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
         if(checkForResistance(target, traitToApply))
         {
-            DamageNumberPopup.createResistPopUp(target.position, CombatGrid.getPositionAt(target.position), CombatAnimationManager.getInstance().damageNumberCanvas);
+            foreach (GridCoords targetCoords in target.positions)
+            {
+                DamageNumberPopup.createResistPopUp(targetCoords, CombatGrid.getPositionAt(targetCoords), CombatAnimationManager.getInstance().damageNumberCanvas);
+            }
             return;
         }
 
@@ -1048,7 +1051,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public bool actorIsAlly()
     {
-        return CombatGrid.positionIsOnAlliedSide(getActorStats().position);
+        return getActorStats().positions.Any(p => CombatGrid.positionIsOnAlliedSide(p));
     }
 
     public virtual bool healsTarget()

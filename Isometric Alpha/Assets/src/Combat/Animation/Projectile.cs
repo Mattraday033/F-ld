@@ -228,7 +228,7 @@ public class KnockBackOnLanding : ScriptOnLanding
 
         if(combatantToBeMoved != null)
         {
-            combatantToBeMoved.moveTo(moveToCoords);
+            combatantToBeMoved.moveTo(new List<GridCoords> { moveToCoords });
 
             if(!targetSnapshot.isDead())
             {

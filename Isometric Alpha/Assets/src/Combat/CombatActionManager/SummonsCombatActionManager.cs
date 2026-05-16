@@ -38,7 +38,12 @@ public class SummonsCombatActionManager : MonoBehaviour
 			}
 			
 			CombatAction summonCombatAction = summon.getCombatAction();
-			summonCombatAction.setActorCoords(summon.position);
+
+			if (summon.positions.Count > 0)
+			{
+				summonCombatAction.setActor(summon);
+			}
+
 			Selector selector = summonCombatAction.getTargetSelector();
 			
 			if(selector == null)

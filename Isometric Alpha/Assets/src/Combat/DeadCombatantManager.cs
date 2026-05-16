@@ -34,9 +34,6 @@ public class DeadCombatantManager : MonoBehaviour
 
             if (currentCombatant.isDead())
             {
-                int row = currentCombatant.position.row;
-                int col = currentCombatant.position.col;
-
                 deadCombatantList.Add(currentCombatant);
 
                 if (currentCombatant.isMinion())

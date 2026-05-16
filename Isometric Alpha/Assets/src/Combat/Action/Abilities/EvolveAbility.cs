@@ -109,7 +109,8 @@ public class EvolveAbility : Ability
 		
 		foreach(Stats targetCombatant in targets)
 		{
-			projectileNumber += sendProjectileAt(targetCombatant.position, targetCombatant, projectileNumber, false);
+			GridCoords evolveTargetCoords = targetCombatant.positions.Count > 0 ? targetCombatant.positions[0] : GridCoords.getDefaultCoords();
+			projectileNumber += sendProjectileAt(evolveTargetCoords, targetCombatant, projectileNumber, false);
 			
 			if(targetCombatant != null)
 			{

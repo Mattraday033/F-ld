@@ -272,21 +272,21 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 	
 	public static void selectSingleAllyToMove(GridCoords coordsOfAlly)
 	{
-		RepositionManager.currentSingleTargetRepositionCombatAction.setActorCoords(coordsOfAlly);
-		RepositionManager.currentRepositionActivity = CurrentRepositionActivity.ChoosingNewLocation;
+		// currentSingleTargetRepositionCombatAction.setActorCoords(coordsOfAlly);
+		currentRepositionActivity = CurrentRepositionActivity.ChoosingNewLocation;
 	}
 	
 	private static void deselectSingleAllyToMove()
 	{
-		RepositionManager.currentSingleTargetRepositionCombatAction.setActorCoords(GridCoords.getDefaultCoords());
-		RepositionManager.currentRepositionActivity = CurrentRepositionActivity.ChoosingRepositionTarget;
+		// currentSingleTargetRepositionCombatAction.setActorCoords(GridCoords.getDefaultCoords());
+		currentRepositionActivity = CurrentRepositionActivity.ChoosingRepositionTarget;
 	}
 	
 	public void performFormationReposition()
 	{		
 		foreach(RepositionDetails repositionDetails in repositionDetailsList)
 		{
-			repositionDetails.combatantToReposition.moveTo(repositionDetails.repositionDestination);
+			repositionDetails.combatantToReposition.moveTo(new List<GridCoords> { repositionDetails.repositionDestination });
 			GameObject.Destroy(repositionDetails.placeHolderObject);
 		}
 		

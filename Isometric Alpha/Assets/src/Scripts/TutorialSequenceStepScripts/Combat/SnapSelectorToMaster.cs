@@ -18,7 +18,10 @@ public class SnapSelectorToMaster : TutorialSequenceStepScript
             {
                 shieldedEnemy = enemy;
 
-                SelectorManager.currentSelector.setToLocation(shieldedEnemy.position);
+                if (shieldedEnemy.positions.Count > 0)
+                {
+                    SelectorManager.currentSelector.setToLocation(shieldedEnemy.positions[0]);
+                }
 
                 SelectorManager.declareSelectors();
 
@@ -45,7 +48,10 @@ public class SnapSelectorToMandatoryTarget : TutorialSequenceStepScript
             {
                 mandatoryTarget = enemy;
 
-                SelectorManager.currentSelector.setToLocation(mandatoryTarget.position);
+                if (mandatoryTarget.positions.Count > 0)
+                {
+                    SelectorManager.currentSelector.setToLocation(mandatoryTarget.positions[0]);
+                }
 
                 SelectorManager.declareSelectors();
 

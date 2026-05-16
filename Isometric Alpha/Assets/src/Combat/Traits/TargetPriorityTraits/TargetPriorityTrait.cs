@@ -42,7 +42,10 @@ public class TargetPriorityTrait : Trait
             return null;
         }
 
-		selectorOnTarget.setToLocation(mandatoryTarget.position);
+		if (mandatoryTarget.positions.Count > 0)
+		{
+			selectorOnTarget.setToLocation(mandatoryTarget.positions[0]);
+		}
 		
 		if(!selectorOnTarget.allTilesAreLegal() || !selectorOnTarget.containsTarget(mandatoryTarget))
 		{

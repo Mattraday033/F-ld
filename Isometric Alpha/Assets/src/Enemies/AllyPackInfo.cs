@@ -24,7 +24,8 @@ public class AllyPackInfo : EnemyPackInfo
 
         for(int index = 0; index < FoeTypes.Length; index++)
         {
-            if (Flags.getFlag(getFlagAtIndex(index)))
+            if (flagsToCheckForAllies.Length <= Constants.sizeZero|| 
+                Flags.getFlag(getFlagAtIndex(index)))
             {
                 relevantAllies.Add(FoeTypes[index]);
             }

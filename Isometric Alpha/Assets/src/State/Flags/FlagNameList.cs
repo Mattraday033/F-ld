@@ -336,6 +336,8 @@ public static class FlagNameList
         public const string mineLvl3MarcosAgreedToIgniteJelly = "mineLvl3MarcosAgreedToIgniteJelly";
         public const string mineLvl3MarcosTaughtHowToIgniteJelly = "mineLvl3MarcosTaughtHowToIgniteJelly";
         public const string mineLvl3MarcosDiedSealingBreach = "mineLvl3MarcosDiedSealingBreach";
+        public const string playerSealedBreachThemself = "playerSealedBreachThemself";
+        public const string guardsSealedBreach = "guardsSealedBreach";
         public const string mineLvl3BreachSealed = "mineLvl3BreachSealed";
         public const string mineLvl3RefusedToFightGaspar = "mineLvl3RefusedToFightGaspar";
         public const string mineLvl3DealtWithGaspar = "mineLvl3DealtWithGaspar"; //if you've killed gaspar and co after sealing the breach 

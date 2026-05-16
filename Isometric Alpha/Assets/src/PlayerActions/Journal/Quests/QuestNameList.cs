@@ -228,6 +228,7 @@ public static class QuestNameList
     public const string noGoodDeedStepTitleFive = "Look for survivors.";
     public const string noGoodDeedStepTitleSix = "Make for the breach.";
     public const string noGoodDeedStepTitleSeven = "Learn to use blasting jelly.";
+    public const string noGoodDeedStepTitleEight = "Return to the Director's office.";
 
     // Rescue Brush
     public const string rescueBrushQuestTitle = "Rescue Brush";

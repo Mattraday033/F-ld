@@ -84,7 +84,7 @@ public class SummonAbility: Ability
 
 			if(comboIndex < comboToSpawn.Count)
 			{
-				CreatureSpawner.spawn(comboToSpawn[comboIndex].clone(), coords);
+				CreatureSpawner.spawn(comboToSpawn[comboIndex].clone(), new List<GridCoords> { coords });
 			} else
 			{
 				break;

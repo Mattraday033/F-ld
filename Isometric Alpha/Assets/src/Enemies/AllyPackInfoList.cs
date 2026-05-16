@@ -13,7 +13,15 @@ public static class AllyPackInfoList
                                                                                                     }, 
                                                                             new string[]
                                                                                         {
-                                                                                            FlagNameList.mineLvl3GuardsInParty
+                                                                                        });
+
+    private readonly static AllyPackInfo mineLevel3GuardsWithoutGaspar = new AllyPackInfo(new CreatureAmount[]   { 
+                                                                                                        AllyAmountList.guardReka,
+                                                                                                        AllyAmountList.guardPazman,
+                                                                                                        AllyAmountList.guardVirag
+                                                                                                    }, 
+                                                                            new string[]
+                                                                                        {
                                                                                         });
 
     private readonly static AllyPackInfo campSlaveAllies = new AllyPackInfo(new CreatureAmount[]   { 
@@ -90,6 +98,22 @@ public static class AllyPackInfoList
                         return campSlaveAllies;
                 }
 
+            case ZoneKeyList.mineLvl3:
+
+                if(!Flags.getFlag(FlagNameList.mineLvl3BreachSealed) && 
+                    Flags.getFlag(FlagNameList.mineLvl3GuardsInParty) && 
+                    Flags.getFlag(FlagNameList.gasparAddedToParty))
+                {
+                    return mineLevel3GuardsWithoutGaspar;
+                } else if( !Flags.getFlag(FlagNameList.mineLvl3BreachSealed) && 
+                            Flags.getFlag(FlagNameList.mineLvl3GuardsInParty) && 
+                            !Flags.getFlag(FlagNameList.gasparAddedToParty))
+                {
+                    return mineLevel3Guards;
+                }
+
+                return null;
+
             case ZoneKeyList.manseFirstFloor:
             case ZoneKeyList.manseSecondFloor:
                 return campSlaveAllies;
@@ -127,16 +151,6 @@ public static class AllyPackInfoList
         list.Add(campSlaveAllies);
 
         allyPackInfoDict.Add(LocationNameList.guardHouseSouthWest, list);
-        #endregion
-
-        #region MineLvl_3-7
-        list = new List<AllyPackInfo>();
-
-        list.Add(mineLevel3Guards);
-        list.Add(mineLevel3Guards);
-        list.Add(mineLevel3Guards);
-
-        allyPackInfoDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section7, list);
         #endregion
 
     }

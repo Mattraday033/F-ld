@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -67,7 +68,7 @@ public class MultiStackTrait : Trait
 
     private void reapplySpecificStackableTrait(Stats actor, MultiStackProcType procType)
     {
-        if (CombatGrid.positionIsOnAlliedSide(actor.position))
+        if (actor.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
         {
             stackableTraits[(int)procType].reapply();
         }

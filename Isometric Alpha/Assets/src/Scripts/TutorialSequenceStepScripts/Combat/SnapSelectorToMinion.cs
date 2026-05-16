@@ -22,11 +22,13 @@ public class SnapSelectorToMinion : TutorialSequenceStepScript
 
         List<int> allDistancesFromPlayer = new List<int>();
 
-        GridCoords playerPosition = PartyManager.getPlayerStats().position;
-       
+        Stats playerStats = PartyManager.getPlayerStats();
+        GridCoords playerPosition = playerStats != null && playerStats.positions.Count > 0 ? playerStats.positions[0] : GridCoords.getDefaultCoords();
+
         foreach(Stats master in allMasterEnemies)
         {
-            allDistancesFromPlayer.Add(playerPosition.distanceTo(master.position));
+            int minDistance = master.positions.Count > 0 ? master.positions.Min(p => playerPosition.distanceTo(p)) : int.MaxValue;
+            allDistancesFromPlayer.Add(minDistance);
         }
 
         int closestDistance = 16;
@@ -41,7 +43,11 @@ public class SnapSelectorToMinion : TutorialSequenceStepScript
             }
         }
 
-        SelectorManager.currentSelector.setToLocation(allMasterEnemies[closestIndex].position);
+        Stats closestMaster = allMasterEnemies[closestIndex];
+        if (closestMaster.positions.Count > 0)
+        {
+            SelectorManager.currentSelector.setToLocation(closestMaster.positions[0]);
+        }
         
         SpawnHoverPanel.runInstanceOfScript();
     }

@@ -77,8 +77,8 @@ public static class DamagePreviewManager
 
 	private static bool improperTargetForAction(Stats actualTarget, CombatAction actionToPreview)
 	{
-		if ((actionToPreview.targetsAllySection() && CombatGrid.positionIsOnEnemySide(actualTarget.position)) ||
-            (!actionToPreview.targetsAllySection() && CombatGrid.positionIsOnAlliedSide(actualTarget.position)) ||
+		if ((actionToPreview.targetsAllySection() && actualTarget.positions.Any(p => CombatGrid.positionIsOnEnemySide(p))) ||
+            (!actionToPreview.targetsAllySection() && actualTarget.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p))) ||
                 actualTarget.queuedToMove())
 		{
 			return true;
@@ -213,15 +213,17 @@ public static class DamagePreviewManager
 			return;
 		}
 
-		if ((hasHoverPreviewAtCoords(actualTarget.position) && isHoverPreview) ||
-			(hasPreviewAtCoords(actualTarget.position) && !isHoverPreview))
+		GridCoords targetKey = actualTarget.positions.Count > 0 ? actualTarget.positions[0] : GridCoords.getDefaultCoords();
+
+		if ((hasHoverPreviewAtCoords(targetKey) && isHoverPreview) ||
+			(hasPreviewAtCoords(targetKey) && !isHoverPreview))
 		{
 			return;
 		}
 
-		if (hasHoverPreviewAtCoords(actualTarget.position) && !isHoverPreview)
+		if (hasHoverPreviewAtCoords(targetKey) && !isHoverPreview)
 		{
-			damagePreviewHealthBarContainer[actualTarget.position] = hoverDamagePreviewHealthBarContainer[actualTarget.position];
+			damagePreviewHealthBarContainer[targetKey] = hoverDamagePreviewHealthBarContainer[targetKey];
 			return;
 		}
 
@@ -232,13 +234,13 @@ public static class DamagePreviewManager
 			if (!actualTarget.hasHealthBarWithPreview())
 			{
 				healthBar.addPreviewHealth(actualTarget.currentHealth - cloneTarget.currentHealth);
-			} 
+			}
 			return;
 		}
 
 		if (healthBarAlreadyHasHoverPreview(healthBar) && !isHoverPreview)
 		{
-			damagePreviewHealthBarContainer[actualTarget.position] = healthBar;
+			damagePreviewHealthBarContainer[targetKey] = healthBar;
 			return;
 		}
 
@@ -251,11 +253,11 @@ public static class DamagePreviewManager
 
 		if (isHoverPreview)
 		{
-			hoverDamagePreviewHealthBarContainer[actualTarget.position] = healthBar;
+			hoverDamagePreviewHealthBarContainer[targetKey] = healthBar;
 		}
 		else
 		{
-			damagePreviewHealthBarContainer[actualTarget.position] = healthBar;
+			damagePreviewHealthBarContainer[targetKey] = healthBar;
 		}
 	}
 
@@ -332,8 +334,8 @@ public static class DamagePreviewManager
 	}
 	private static bool improperTargetForAction(Stats actualTarget)
 	{
-		if ((actionToPreview.targetsAllySection() && CombatGrid.positionIsOnEnemySide(actualTarget.position)) ||
-            (!actionToPreview.targetsAllySection() && CombatGrid.positionIsOnAlliedSide(actualTarget.position)) ||
+		if ((actionToPreview.targetsAllySection() && actualTarget.positions.Any(p => CombatGrid.positionIsOnEnemySide(p))) ||
+            (!actionToPreview.targetsAllySection() && actualTarget.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p))) ||
                 actualTarget.queuedToMove())
 		{
 			return true;

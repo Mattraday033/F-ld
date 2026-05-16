@@ -333,17 +333,20 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         {
             traitHolder.modifyCurrentHealth(getTickDownDamage());
 
-            if (CombatStateManager.whoseTurn == WhoseTurn.Resolving || 
+            if (CombatStateManager.whoseTurn == WhoseTurn.Resolving ||
                 CombatStateManager.whoseTurn == WhoseTurn.TickDown)
             {
-                DamageNumberPopup.create(traitHolder.position,
-                                         getTickDownDamage(),
-                                         CombatGrid.getPositionAt(traitHolder.position),
-                                         DamageNumberPopup.getDirectionByTargetCoords(traitHolder.position),
-                                         CombatAnimationManager.getInstance().damageNumberCanvas,
-                                         false,
-                                         false,
-                                         traitTickDownDamageFrameDelay);
+                foreach (GridCoords holderCoords in traitHolder.positions)
+                {
+                    DamageNumberPopup.create(holderCoords,
+                                             getTickDownDamage(),
+                                             CombatGrid.getPositionAt(holderCoords),
+                                             DamageNumberPopup.getDirectionByTargetCoords(holderCoords),
+                                             CombatAnimationManager.getInstance().damageNumberCanvas,
+                                             false,
+                                             false,
+                                             traitTickDownDamageFrameDelay);
+                }
             }
 
             return true;

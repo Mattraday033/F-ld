@@ -56,7 +56,8 @@ public class BombardmentTargetPriorityTrait: TargetPriorityTrait
 			
 			for(int targetIndex = 0; targetIndex < listOfTargets.Count; targetIndex++)
 			{
-				allPossibleTargets[targetIndex] = ((Stats) listOfTargets[targetIndex]).position.clone();
+				Stats listTarget = (Stats) listOfTargets[targetIndex];
+				allPossibleTargets[targetIndex] = listTarget.positions.Count > 0 ? listTarget.positions[0].clone() : GridCoords.getDefaultCoords();
 			}
 			
 			GridCoords[] nontargetedAllies = getAllNonTargetedSpaces(targetCoords, allPossibleTargets);
@@ -68,7 +69,7 @@ public class BombardmentTargetPriorityTrait: TargetPriorityTrait
 		
 		GridCoords[] nonGuaranteedHitSpaces;
 		
-		if(CombatGrid.positionIsOnAlliedSide(((Stats) listOfTargets[0]).position))
+		if(((Stats) listOfTargets[0]).positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
 		{
 			nonGuaranteedHitSpaces = CombatGrid.getAllSpacesInAllyZone();
 		} else

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class SwapAbility : Ability
@@ -20,13 +21,18 @@ public class SwapAbility : Ability
 
 	public override void performCombatAction(List<Stats> targets)
 	{
+        if(getActorStats().isMultiTile())
+        {
+            return;
+        }
+
 		GridCoords tempCoords = getActorCoords().clone();
 
 		Stats target = null;
 
         foreach(Stats stats in targets)
         {
-            if(stats != null)
+            if(stats != null && stats.positions.Count == Constants.sizeOne)
             {
                 target = stats;
                 break;
@@ -38,10 +44,10 @@ public class SwapAbility : Ability
 			return;
 		}
 
-		getActorStats().moveTo(target.position);
+		getActorStats().moveTo(target.positions.Select(p => p.clone()).ToList());
 		getActorStats().addTrait(getAppliedTrait());
 
-		target.moveTo(tempCoords);
+		target.moveTo(new List<GridCoords> { tempCoords });
 		target.addTrait(getAppliedTrait());
 
 		sendProjectileAt(getActorCoords(), getActorStats(), 0, getDamageFormulaTotal(), false);

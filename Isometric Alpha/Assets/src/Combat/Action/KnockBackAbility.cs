@@ -106,7 +106,7 @@ public class KnockBackAbility : RepositionEnemyAbility
 
         if (combatantToBeMoved != null)
         {
-            GridCoords projectileTargetCoords = combatantToBeMoved.position;
+            GridCoords projectileTargetCoords = combatantToBeMoved.positions.Count > 0 ? combatantToBeMoved.positions[0] : GridCoords.getDefaultCoords();
 
             applyTrait(combatantToBeMoved);
             // sendProjectileAt(combatantToBeMoved.position, combatantToBeMoved, 0);
@@ -116,7 +116,8 @@ public class KnockBackAbility : RepositionEnemyAbility
             {
 
                 applyTrait(combatantLandedOn);
-                sendProjectileAt(combatantLandedOn.position, combatantLandedOn, 1);
+                GridCoords landedOnCoords = combatantLandedOn.positions.Count > 0 ? combatantLandedOn.positions[0] : GridCoords.getDefaultCoords();
+                sendProjectileAt(landedOnCoords, combatantLandedOn, 1);
             }
             // projectileCount = 0;
         }

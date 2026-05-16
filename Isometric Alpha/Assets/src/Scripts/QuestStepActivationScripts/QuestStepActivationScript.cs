@@ -113,7 +113,7 @@ public class ThiefsBodyScript : QuestStepActivationScript
     }
 }
 
-public class KilledMineLvlThreeGuardsScript : QuestStepActivationScript
+public class KilledMineLvlThreeGuardsB4BreachScript : QuestStepActivationScript
 {
     public override void runScript(GameObject target = null)
     {
@@ -141,5 +141,50 @@ public class KilledMineLvlThreeGuardsScript : QuestStepActivationScript
         {
             QuestList.activateQuestStep(QuestNameList.sealingTheBreachQuestTitle, QuestNameList.sealingTheBreachStepTitleTwo);
         }
+    }
+}
+
+public abstract class AfterBreachScript : QuestStepActivationScript
+{
+    public override void runScript(GameObject target = null)
+    {
+        if(Flags.getFlag(FlagNameList.playerSealedBreachThemself))
+        {
+            QuestList.finishQuest(QuestNameList.sealingTheBreachQuestTitle, QuestNameList.sealingTheBreachStepTitleSix, true);
+
+        } else if(Flags.getFlag(FlagNameList.mineLvl3MarcosDiedSealingBreach))
+        {
+            QuestList.finishQuest(QuestNameList.sealingTheBreachQuestTitle, QuestNameList.sealingTheBreachStepTitleSeven, true);
+            
+        } else if(Flags.getFlag(FlagNameList.guardsSealedBreach))
+        {
+            QuestList.finishQuest(QuestNameList.sealingTheBreachQuestTitle, QuestNameList.sealingTheBreachStepTitleEight, true);
+        }
+    }
+}
+
+public class KilledMineLvlThreeGuardsAfterBreachScript : AfterBreachScript
+{
+    public override void runScript(GameObject target = null)
+    {
+        base.runScript(target);
+    }
+}
+
+public class KilledNandorCarterAfterBreachScript : AfterBreachScript
+{
+    public override void runScript(GameObject target = null)
+    {
+
+        if(Flags.getFlag(FlagNameList.sentIntoMineByDirector))
+        {
+            base.runScript(target);
+
+            if(Flags.getFlag(FlagNameList.sentIntoMineByDirector))
+            {
+                QuestList.activateQuestStep(QuestNameList.noGoodDeedQuestTitle, QuestNameList.noGoodDeedStepTitleEight);
+            } 
+        }
+
     }
 }

@@ -62,7 +62,7 @@ public class EvolutionaryEnemyStats : EnemyStats
 		
 		setToDeadSprite(willEvolveOrDevolve);
 		
-		CreatureSpawner.spawn(evolutionEnemyType.clone(), position);
+		CreatureSpawner.spawn(evolutionEnemyType.clone(), positions);
 	}
 
 	public override void devolve()
@@ -74,7 +74,7 @@ public class EvolutionaryEnemyStats : EnemyStats
 		
 		setToDeadSprite(willEvolveOrDevolve);
 		
-		CreatureSpawner.spawn(evolutionEnemyType.clone(), position);
+		CreatureSpawner.spawn(evolutionEnemyType.clone(), positions);
 	}
 
 	public override bool notResurrectable()

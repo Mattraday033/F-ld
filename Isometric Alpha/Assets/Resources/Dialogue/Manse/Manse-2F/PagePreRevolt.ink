@@ -9,6 +9,10 @@ VAR directorIndex = 2
 VAR taborIndex = 3
 VAR weftIndex = 4
 VAR adelaIndex = 5
+VAR leftGuardIndex = 6
+VAR rightGuardIndex = 7
+VAR gasparIndex = 8
+VAR taborBehindDeskIndex = 9
 
 VAR playerName = ""
 
@@ -29,7 +33,16 @@ VAR directorMentionedSurvivors = false
 
 VAR taborMentionedRewardForHostages = false
 
+VAR mineLvl3BreachSealed = false
+VAR deathFlagOverseerGáspár = false
+VAR gasparAddedToParty = false
+VAR mineLvl3GuardsInParty = false
+
+VAR returnedFromMine = false
+
 {
+-sentIntoMineByDirector and mineLvl3BreachSealed:
+    ->sealedBreach_1a
 -metDirectorAfterHostages and not sentIntoMineByDirector:
     ->alreadySpokeToDirector_1a
 -sentIntoMineByDirector:
@@ -45,11 +58,10 @@ changeCamTarget({pageIndex})
 Hello. Are you here to see the Director?
 
     +Yes, Chief Tabor said I was to report to his office?
-        ->1b
+        I see. You're expected, go on in.
+        ->enterDirectorsOffice(->1b)
 
-=== 1b ===
-
-I see. You're expected, go on in.
+=== enterDirectorsOffice(->divert) ===
 
 fadeToBlack(true, false)
 
@@ -59,13 +71,32 @@ movePlayer(-2,-1)
 setFacing(NE)
 setNPCFacing({directorIndex},NW)
 
-activate({taborIndex})
+changeCamTarget({directorIndex})
+
 activate({weftIndex})
 activate({adelaIndex})
 
-changeCamTarget({taborIndex})
+{
+-returnedFromMine:
+activate({taborBehindDeskIndex})
+-else:
+activate({taborIndex})
+}
+
+{
+-returnedFromMine and (gasparAddedToParty or mineLvl3GuardsInParty) and not deathFlagOverseerGáspár:
+activate({leftGuardIndex})
+activate({rightGuardIndex})
+activate({gasparIndex})
+}
 
 fadeBackIn(60)
+
+->divert
+
+=== 1b ===
+
+changeCamTarget({taborIndex})
 
 Director, sir, these are the two branded that Captain Adéla and I spoke of. The ones we used to negotiate for the hostages.
 
@@ -445,6 +476,144 @@ Then what is your decision?
     +I shall perform this task. How should I start?
         ->5a
 
+=== sealedBreach_1a ===
+
+changeCamTarget({pageIndex})
+
+\*Page looks at you in astonishment.* You've just returned from the mines, if the dust you're caked in is any indication. Did you actually manage to stop those beasts?
+
+    +I've been to the deepest tunnel and back. They are no more.
+        ->sealedBreach_1aa
+    +An easier task I've never been given. The Director should have given me something challenging if he wanted a fair exchange.
+        ->sealedBreach_1aa
+    +I'm here to see the Director, not answer your questions. 
+        ->sealedBreach_1ab
+
+=== sealedBreach_1aa ===
+
+Then you are quite the warrior, to have accomplished such a feat. I will inform the Director you are here. He will certainly wish to speak with you immediately.
+
+setToTrue(returnedFromMine)
+
+    ->enterDirectorsOffice(->sealedBreach_2a)
+
+=== sealedBreach_1ab ===
+
+Of course. I shall inform him that you are here to see him right away.
+
+setToTrue(returnedFromMine)
+
+->enterDirectorsOffice(->sealedBreach_2a)
+
+=== sealedBreach_2a ===
+
+setNPCFacing({directorIndex},SW)
+changeCamTarget({directorIndex})
+
+Page informs me that you were successful, but I would hear it from you. Were you able to secure the mines against these worm intruders?
+
+{
+-gasparAddedToParty or mineLvl3GuardsInParty:
+    ->dealingWithGaspar_1a
+}
+
+    +Sup
+        ->Close
+
+=== dealingWithGaspar_1a === 
+
++I was, but these extra guards of yours bode ill for your willingness to keep your side of our bargain.
+    Excellent! And I understand why you would feel that way. Worry not. If you will allow me to demonstrate their purpose, they will not feed your apprehension for longer than they must.
+    ->dealingWithGaspar_1b
++The fighting was fierce, but I managed to deal with the worms after a fashion. Any that remain are trapped, and you won't see new ones until you start digging again.
+    Masterfully done. If only my guards had shown similar tenacity. Then perhaps we would have never lost the mine to begin with. Now, before I bestow upon you your reward, I must quickly deal with another matter.
+    ->dealingWithGaspar_1b
+
+
+=== dealingWithGaspar_1b === 
+
+Overseer Gáspár, give your report on the state my mine. When will the camp be ready to resume our work?
+
+changeCamTarget({gasparIndex})
+
+Yes, Director. It is my opinion that once we've been sent replacements for the slain slaves, we will be able to resume work at our previous capacity rather quickly.
+
+changeCamTarget({directorIndex})
+
+I see. And if such a shipment should not be forthcoming?
+
+changeCamTarget({gasparIndex})
+
+Sir?
+
+changeCamTarget({directorIndex})
+
+I'm asking what of the branded that were placed under your supervision? Should work resume tomorrow, at what speed will your teams be working?
+
+changeCamTarget({gasparIndex})
+
+\*Gáspár pauses uncomfortably for a moment.* No branded escaped the worms, sir. The work cannot continue until they are replaced.
+
+changeCamTarget({directorIndex})
+
+And to conclude your report on our current situation, who ultimately is responsible for abandoning these branded to their fates once the worms appeared? Before you answer, bear in mind I've already heard the reports of your subordinates.
+
+changeCamTarget({gasparIndex})
+
+But sir, once the gate was closed to the bottom level, my first concern was the safety of the guards under my care. It was unclear how long we would be trapp-
+
+changeCamTarget({adelaIndex})
+
+The Director asked you a question, overseer. You will keep your tone level while you answer it.
+
+changeCamTarget({gasparIndex})
+
+Yes ma'am. *Gáspár inhales deeply, steadying himself before answering.* I am responsible for the deaths of the branded. They were given to me to protect, and I failed in that duty. 
+
+changeCamTarget({directorIndex})
+
+Yes, you have. Had even a fraction of their number survived, we may have been able to continue with some level of progression before the arrival of the next caravan. Now, we shall be force to wait for what could be weeks while the required hands are made ready.
+
+playAnimation({leftGuardIndex},Idle_Back)
+playAnimation({rightGuardIndex},Idle_Back)
+playAnimation({taborBehindDeskIndex},Idle_Front)
+playAnimation({adelaIndex},Idle_Front)
+
+Overseer Gáspár, for severe dereliction of duty and cowardice in the face of the enemy, I am placing you under arrest. Considering the importance of our mission here, your punishment shall be execution, to be carried out within the hour.
+
+changeCamTarget({gasparIndex})
+
+\*Gáspár says nothing. His face is sullen as he allows himself to be disarmed. The guards take him away without any resistance.*
+
+fadeToBlack(true,false)
+removeFromParty({gasparIndex},true)
+
+deactivate({gasparIndex})
+deactivate({leftGuardIndex})
+deactivate({rightGuardIndex})
+playAnimation({adelaIndex},OOC_Idle_Front)
+
+playAnimation({taborBehindDeskIndex},OOC_Idle_Front)
+playAnimation({adelaIndex},OOC_Idle_Front)
+
+fadeBackIn(60)
+
+I apologize for making you wait through that. This meeting should not be about admonishing the failures of cowards, but about rewarding you for your display of prowess.
+
+->dealingWithGaspar_1c
+
+=== dealingWithGaspar_1c === 
+
+{// Asterisk on purpose
+-wisdom >= 2: 
+    *Why make me watch all of that? You could have have handled that at any time, but instead you waited until I was present. <Wis {wisdom}/2>
+        ->dealingWithGaspar_1c
+}
+
+    +No apologies necessary. It was a treat to witness Gáspár get his comeuppance.
+        ->Close
+    +Let's just get on with it. I'm eager to be rid of this camp.
+        ->Close
 
 === deactivateExtras ===
 
@@ -466,6 +635,10 @@ fadeToBlack()
 deactivate({weftIndex})
 deactivate({taborIndex})
 deactivate({adelaIndex})
+
+deactivate({leftGuardIndex})
+deactivate({rightGuardIndex})
+deactivate({gasparIndex})
 
 movePlayerPos(-6,-2)
 setFacing(SW)

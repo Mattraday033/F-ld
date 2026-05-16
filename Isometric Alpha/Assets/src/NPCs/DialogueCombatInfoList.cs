@@ -47,7 +47,7 @@ public static class DialogueCombatInfoList
     public readonly static NPCCombatInfo breachRubbleCombatInfo = new NPCCombatInfo(new EnemyPackInfo[] { 
                                                                                                             EnemyPackInfoList.ml3GuardsNoSurrenders, 
                                                                                                             EnemyPackInfoList.ml3GuardsRekaPazmanSurrender,
-                                                                                                            EnemyPackInfoList.ml3GuardsRekaPazmanSurrender
+                                                                                                            EnemyPackInfoList.ml3FightingNandorAndCarter
                                                                                                         },
                                                                             new DeadNameList[] { 
                                                                                                     allMineGuardsDead,

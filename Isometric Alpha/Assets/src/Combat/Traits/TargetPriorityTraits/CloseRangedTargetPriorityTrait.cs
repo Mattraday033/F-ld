@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CloseRangedTargetPriorityTrait : TargetPriorityTrait
@@ -25,15 +26,15 @@ public class CloseRangedTargetPriorityTrait : TargetPriorityTrait
 			
 			foreach(Stats potentialTarget in listOfTargets)
 			{
-				if(mostForwardTarget == null || potentialTarget.position.row < mostForwardTarget.position.row)
+				if(mostForwardTarget == null || frontmostRow(potentialTarget) < frontmostRow(mostForwardTarget))
 				{
 					mostForwardTarget = potentialTarget;
 				}
 			}
-			
+
 			foreach(Stats potentialTarget in listOfTargets)
 			{
-				if(potentialTarget.position.row == mostForwardTarget.position.row)
+				if(frontmostRow(potentialTarget) == frontmostRow(mostForwardTarget))
 				{
 					mostForwardTargets.Add(potentialTarget);
 				}
@@ -45,5 +46,10 @@ public class CloseRangedTargetPriorityTrait : TargetPriorityTrait
 		} 
 		
 		return mandatoryTarget;
+	}
+
+	private static int frontmostRow(Stats stats)
+	{
+		return stats.positions.Count > 0 ? stats.positions.Min(p => p.row) : int.MaxValue;
 	}
 }
