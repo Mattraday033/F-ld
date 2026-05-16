@@ -74,13 +74,13 @@ setNPCFacing({directorIndex},NW)
 changeCamTarget({directorIndex})
 
 activate({weftIndex})
-activate({adelaIndex})
 
 {
 -returnedFromMine:
 activate({taborBehindDeskIndex})
 -else:
 activate({taborIndex})
+activate({adelaIndex})
 }
 
 {
@@ -88,6 +88,7 @@ activate({taborIndex})
 activate({leftGuardIndex})
 activate({rightGuardIndex})
 activate({gasparIndex})
+activate({adelaIndex})
 }
 
 fadeBackIn(60)
@@ -517,8 +518,7 @@ Page informs me that you were successful, but I would hear it from you. Were you
     ->dealingWithGaspar_1a
 }
 
-    +Sup
-        ->Close
+    ->sealedBreach_2b
 
 === dealingWithGaspar_1a === 
 
@@ -548,7 +548,7 @@ Sir?
 
 changeCamTarget({directorIndex})
 
-I'm asking what of the branded that were placed under your supervision? Should work resume tomorrow, at what speed will your teams be working?
+I'm asking what of the branded that were placed under your supervision. If work resumed tomorrow, at what speed will your teams be working?
 
 changeCamTarget({gasparIndex})
 
@@ -591,28 +591,69 @@ removeFromParty({gasparIndex},true)
 deactivate({gasparIndex})
 deactivate({leftGuardIndex})
 deactivate({rightGuardIndex})
-playAnimation({adelaIndex},OOC_Idle_Front)
+deactivate({adelaIndex})
 
 playAnimation({taborBehindDeskIndex},OOC_Idle_Front)
 playAnimation({adelaIndex},OOC_Idle_Front)
 
 fadeBackIn(60)
 
-I apologize for making you wait through that. This meeting should not be about admonishing the failures of cowards, but about rewarding you for your display of prowess.
+I apologize for making you wait through that. This meeting should not be about punishing the failures of cowards, but about rewarding you for your display of prowess.
 
 ->dealingWithGaspar_1c
 
 === dealingWithGaspar_1c === 
 
-{// Asterisk on purpose
--wisdom >= 2: 
+// {// Asterisk on purpose
+// -wisdom >= 2: 
     *Why make me watch all of that? You could have have handled that at any time, but instead you waited until I was present. <Wis {wisdom}/2>
+        Because, I have no doubt the conduct of the soldiers under my command has given you cause to distrust us. It is important to me that you are aware that some Lovashi still hold bravery, competence, and honor in high esteem.
         ->dealingWithGaspar_1c
-}
+// }
 
     +No apologies necessary. It was a treat to witness Gáspár get his comeuppance.
+        I expected you would enjoy that. Gáspár had some qualities that make for a fine soldier, but lacked many others required of a man of quality.
         ->Close
     +Let's just get on with it. I'm eager to be rid of this camp.
+        I understand. Let us not waste more of your time, then.
+        ->Close
+
+=== sealedBreach_2b === 
+
++The fighting was fierce, but I managed to deal with the worms after a fashion. Any that remain are trapped, and you won't see new ones until you start digging again.
+    ->sealedBreach_2ba
+
++You sent me down there to die, but instead I persevered. Now, hold to your end of the bargain and release me. 
+    ->sealedBreach_2ba
+
+=== sealedBreach_2ba === 
+
+Masterfully done. If only my guards had shown similar tenacity. Then perhaps we would have never lost the mine to begin with. Now for the logistics of your reward.
+
+prepItem()
+
+You are the first branded I have ever heard of to be granted a stay of execution. Do not fret, simply because something is unprecedented doesn't mean it is impossible. It will just take a little bit of doing, even for me.
+
+addXP(500)
+
+While it was never expected to be necessary, a pardon for a branded was conceived of in the case of exonerating evidence coming to light after a brand was applied. A special seal was devised with the count's mark placed upon it, which when shown would prove a branded innocent of the crime they were accused of.
+
+It's not much, but outside of a miracle there really is no way to heal the brand. I can have some of these seals sent for, and they would arrive within the next few weeks. You would be exempt from labor during that time, of course, and when it arrives you would be transported to the Kingdom of Masons, where you would be released. 
+
+    +Weeks? That is unacceptable!
+        Your frustration is warranted, but not even I can make this move any faster. I promised you a pardon, branded, not a speedy one.
+        ->sealedBreach_2c
+    +I have no choice but to accept. Thank you.
+        No, thank you. Your freedom may be valuable to you, but I am certainly the one who has come out of this deal the wealthier.
+        ->sealedBreach_2c
+
+=== sealedBreach_2c === 
+
+If you consider this deal to have been favorably concluded, then perhaps I could interest you in another? You have a new life ahead of you in the Kingdom of Masons, but likely one as a pauper unless you can find some means of employment. Why not start now, and make yourself a bit of coin to start your new life with?
+
+    +I'm through working for you. I will be going now.
+        ->Close
+    +I'll hear the job, but I make no promises towards accepting it.
         ->Close
 
 === deactivateExtras ===
