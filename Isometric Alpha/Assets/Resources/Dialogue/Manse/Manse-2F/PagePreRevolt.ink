@@ -30,8 +30,10 @@ VAR toldToAnswerQuestion = false
 VAR askedTheDirectorAQuestion = false
 VAR knowWhoTheDirectorIs = false
 VAR directorMentionedSurvivors = false
+VAR beamToldAboutWudra = false
 
 VAR taborMentionedRewardForHostages = false
+VAR gasparBroughtToExecution = false
 
 VAR mineLvl3BreachSealed = false
 VAR deathFlagOverseerGáspár = false
@@ -532,6 +534,8 @@ Page informs me that you were successful, but I would hear it from you. Were you
 
 === dealingWithGaspar_1b === 
 
+setToTrue(gasparBroughtToExecution)
+
 Overseer Gáspár, give your report on the state my mine. When will the camp be ready to resume our work?
 
 changeCamTarget({gasparIndex})
@@ -640,7 +644,7 @@ While it was never expected to be necessary, a pardon for a branded was conceive
 
 It's not much, but outside of a miracle there really is no way to heal the brand. I can have some of these seals sent for, and they would arrive within the next few weeks. You would be exempt from labor during that time, of course, and when it arrives you would be transported to the Kingdom of Masons, where you would be released. 
 
-    +Weeks? That is unacceptable!
+    +Weeks? That is outrageous!
         Your frustration is warranted, but not even I can make this move any faster. I promised you a pardon, branded, not a speedy one.
         ->sealedBreach_2c
     +I have no choice but to accept. Thank you.
@@ -649,12 +653,123 @@ It's not much, but outside of a miracle there really is no way to heal the brand
 
 === sealedBreach_2c === 
 
-If you consider this deal to have been favorably concluded, then perhaps I could interest you in another? You have a new life ahead of you in the Kingdom of Masons, but likely one as a pauper unless you can find some means of employment. Why not start now, and make yourself a bit of coin to start your new life with?
+If you consider this deal to have been favorably concluded, then perhaps I could interest you in another? You have a new life ahead of you in the Kingdom of Masons, but likely one as a pauper unless you can find some means of employment. Why not start now, and make yourself a bit of coin to enter your new life with?
 
+    ->sealedBreach_2ca
+
+=== sealedBreach_2ca === 
+
+    +Before I answer, I would know more about my potential employer.
+        If you have questions for me, ask them, but know I guard some pieces of information more closely than others.
+        ->sealedBreach_2cb
     +I'm through working for you. I will be going now.
-        ->Close
+        ->sealedBreach_3a
     +I'll hear the job, but I make no promises towards accepting it.
+        ->sealedBreach_3b
+
+=== sealedBreach_2cb === 
+
+    {
+    -true:
+    +You're a lord, but you run a mining camp? That seems somewhat beneath your station.
+        That is true. Or it normally would be. Everyone in this world has a master, branded. In having lost yours, I expect you will soon find another. But to give you an answer, my master needed a job done right, so he sent the man he most trusted to see it through.
+        ->sealedBreach_2cb 
+    +Your guards treat you with a lot of respect.
+        They are good soldiers, and I have been leading warriors for the Confederation for a long time. I am at the end of my eigth decade now. Their reverence for me is born of an acknowledgment of the battles I have won, lost, and survived.
+        ->sealedBreach_2cb 
+    +You mentioned the 'Emancipation Conflict' before. What is that?
+        The Emancipation Conflict is the name my people gave to the struggle between yours and mine: the Craft Folk, and the Lovashi. It was born of a grudge from the time of my father's generation, when the king of the Lovashi gave the child of his mount to a Craft Folk sovereign to take as his steed.
+
+        This horse, a prince to my tribe, was mistreated, and died soon after. For this insult, the Lovashi descended on the Craft Folk seeking revenge. In their efforts to keep us at bay, your ancestors stole foals from our camps and raised them as slave mounts. My people share a language with horses; we are kin, in a way. In your ignorance, you could not teach them this language, and in so doing raised them to be simple beasts of burden.
+
+        The horses that the Craft Folk rear are now but feral children, mute animals without sentience or culture. The Conflict is our attempt to right this wrong. The brand is our tool to teach you the weight of your folly... or so my nephew, the count, would claim. He is young, and has seen too little of history to know it's cycles.
+        ->sealedBreach_2cb
+    } 
+    {
+    -beamToldAboutWudra:
+    +A servant of yours said you fought the Masons at a place called Wudra.
+        Yes, that is true. Wudra is a city in the Kingdom of Masons, in the kingdom's western riverlands. There is a great river, named the Wandering Roil, and Wudra sits at it's mouth.
+
+        The Lovashi, over a decade ago, struck through the Masonic Gap with three great hordes. I was selected from my peers to lead the warriors meant to pacify the kingdom's western half. But it was at Wudra that we were turned back, unable to break it's walls or fjord the river it straddled.
+
+        We were a mane's hair from victory, but for a Mason host that releaved the city from seige at the worst moment. What was to be my opus became a trap I only escaped by the grace of the ficklest Gods. But They didn't let me leave without dealing me a wound for my hubris that still haunts my left leg.
+        ->sealedBreach_2cb 
+    }
+
+    +Your disposition is less violent than some of your subordinates.
+        Violence is a tool, branded. The soldiers you speak of have been taught to use that tool. I am old enough to have both taught them why they should use it, and forgotten why myself.
+        ->sealedBreach_2cb 
+
+    +I'm finished with my questions.
+        Then have you come to an answer?
+        ->sealedBreach_2ca
+
+=== sealedBreach_3a ===
+
+You have earned that right, but should you change your mind the offer stands until you leave this camp.
+
+->sealedBreach_Finished
+
+=== sealedBreach_3b ===
+
+Good. The work you've done so far has rendered me much profit. I'm glad to see you'll at least consider continuing it.
+
+    +We are not friends, Director. You repulse me to my core; I am simply in no place to turn down the coin.
+        ->sealedBreach_3ba
+    +And may it continue to be so, for the both of us.
+        ->sealedBreach_3ca
+    +The friendlier you act, the more likely I am to reject the job.
+        ->sealedBreach_3ba
+
+=== sealedBreach_3ba ===
+
+Yes, of course. I'll skip the pleasantries then.
+
+->sealedBreach_3ca
+
+=== sealedBreach_3ca ===
+
+I have written a letter to a comrade of mine. He has taken up residence in the town of Rice Hill, in the Kingdom of Mason's northern frontier. I thought that, since you will be going that way anyways, you could deliver it to him for me? For this task, I would give you a small commission up front, and then my friend would gladly pay you the amount of three hundred pieces of gold upon delivery. 
+
+    +What is your friend's name?
+
+        He has changed names many times while I have known him. He is unlikely to still be using the same one I used for him last. But he will know you as an associate if you call him by the title: 'Vidra'.
+
+        A new branded in town will be quite the novelty to him. Pay for a room at one of the local inns, spend some time around town. He certainly will find you.
+        ->sealedBreach_3c
+
+=== sealedBreach_3c ===
+
+    +Why all this secrecy? This hardly seems like the average messenger job.
+        As 
+        ->sealedBreach_3c
+    +I suspect the Masons would be interested in the correspondances of a Lovashi lord. What is stopping me from bringing this letter to the nearest sheriff once I'm on their land?
+        ->sealedBreach_3c
+    +Why not send one of your guards. They would get there quicker seeing as I cannot even set out for a few more weeks.
+        ->sealedBreach_3c
+    +The job seems simple. I'll do it.
         ->Close
+    +There's more going on here than I'm comfortable with. I'll pass.
+        ->Close
+
+=== sealedBreach_3cb ===
+
+        ->Close
+
+=== sealedBreach_Finished ===
+
+{
+-gasparBroughtToExecution:
+
+Because of how unorthodox a pardon is for one of the branded, I shall need to introduce you to the guards of the camp so that they understand you are not to be harrassed. It would be best for that to happen during Gáspár's execution, as much of the camp will be gathered for it. The execution will take place in the unfinished section in the camp's northwest. Until then, farewell.
+
+-else:
+
+Because of how unorthodox a pardon is for one of the branded, I shall need to introduce you to the guards of the camp so that they understand you are not to be harrassed. I will have the guards gathered for it. When you are ready, make your way to the northwest section of the camp. Until then, farewell.
+
+}
+
+->deactivateExtras
 
 === deactivateExtras ===
 

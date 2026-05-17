@@ -68,6 +68,7 @@ public static class FlagNameList
 
         //gaspar flags
         public const string gasparAddedToParty = "gasparAddedToParty";
+        public const string gasparBroughtToExecution = "gasparBroughtToExecution";
 
         //body pile quest flags
         public const string orderedIntoBodyPile = "orderedIntoBodyPile";
@@ -409,6 +410,7 @@ public static class FlagNameList
         public const string askedAboutMangledName = "askedAboutMangledName";
         public const string sworeToBurnCsalansBody = "sworeToBurnCsalansBody";
         public const string foughtHorsesInManse = "foughtHorsesInManse";
+        public const string beamToldAboutWudra = "beamToldAboutWudra";
 
         //Csalan Oath Flags
         public const string csalanLifeOathMade = "csalanLifeOathMade";

@@ -71,9 +71,11 @@ This? *The man shows you his work. The figurine is of a man astride a horse, wit
     
 === 1d ===
 
+setToTrue(beamToldAboutWudra)
+
 He's well known in the Confederation. He fought in the Emancipation Conflict between the Lovashi and the Craft kingdoms. His warriors cut deep into the western regions of the Kingdom of Masons, going so far as to set seige to the city of Wudra, on the Wandering Roil river.
 
-Another story I heard tells that at the end of the war, when things weren't going so well for us, his soldiers held out in a captured Craft Folk fort for many weeks against a much larger force. I've heard it said the Craft Folk made over a dozen attempts take the fort back, and each time they were turned away.
+Another story I heard tells that at the end of the war, when things weren't going so well for us, his soldiers held out in a captured Craft Folk fort for many weeks against a host ten times their number. I've heard it said the Craft Folk made over a dozen attempts take the fort back, and each time they were turned away.
     ->1da
 
 === 1da ===
