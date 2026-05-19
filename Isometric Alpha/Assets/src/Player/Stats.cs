@@ -1158,8 +1158,10 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
             return false;
         }
 
-        if(CombatStateManager.inCombat)
+        if(CombatStateManager.inCombat  && 
+            !(stats.positions.Count <= 0 && positions.Count <= 0))
         {
+
             return stats.positions.Any(p => positions.Contains(p)) && stats.getName().Equals(getName());
         } else
         {
@@ -1189,20 +1191,9 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         }
     }
 
-    public bool isInParty(Stats[][] positionGrid)
+    public bool isInParty(Formation formation)
     {
-        for (int row = 0; row < positionGrid.Length; row++)
-        {
-            for (int col = 0; col < positionGrid[row].Length; col++)
-            {
-                if (positionGrid[row][col] == this)
-                {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        return formation.isInParty(this);
     }
 
     private Sprite getHeadSprite()

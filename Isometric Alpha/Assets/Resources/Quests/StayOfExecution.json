@@ -1,0 +1,11 @@
+{
+	"title": "Stay Of Execution",
+	"steps":[	
+                {"stepName":"Meet the Director.","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"The Director has said he will announce my pardon to the camp at a gathering later today. <B>I must make my way down to the northwest section of the camp to be present for the Director's announcement.</B>"}
+            ],
+			
+	"deathSteps":
+			[
+			]
+	
+}

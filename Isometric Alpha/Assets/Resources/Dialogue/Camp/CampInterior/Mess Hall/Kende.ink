@@ -178,7 +178,7 @@ Oh, um... thanks.
 
 setToTrue(kendeWillSellToPlayer)
 
-Wait, you aren't ungrateful like the other slaves. I make a little money on the side selling stuff to the other guards. If you happen to "find" any coins lying around out there, I'll give you something for them.
+Wait, you aren't ungrateful like the other slaves. I make a little money on the side selling stuff to the other guards. If you happen to <i>find</i> any coins lying around out there, I'll give you something for them.
 
     +I have some money on me right now.
         ->shop

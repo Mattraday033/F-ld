@@ -1,7 +1,7 @@
 using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,47 +13,45 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
 
     public readonly static UnityEvent OnFormationChange = new UnityEvent();
 
-    private AllyStats[][] grid;
+    private Dictionary<GridCoords, AllyStats> grid = new Dictionary<GridCoords, AllyStats>();
 
     public Formation()
     {
-        setGrid(getDefaultGrid());
+        initializeDefaultGrid();
     }
 
     public Formation(StatsWrapper[] wrappers)
     {
-        setGrid(getDefaultGrid());
-
         foreach (StatsWrapper wrapper in wrappers)
         {
             GridCoords coords = wrapper.partyMemberFormationCoords;
 
             if (!coords.Equals(GridCoords.getDefaultCoords()))
             {
-                grid[coords.row][coords.col] = new AllyStats(wrapper);
+                grid[coords] = new AllyStats(wrapper);
             }
         }
+
+        if(!grid.ContainsValue(PartyManager.getPlayerStats()))
+        {
+            grid[new GridCoords(AllyStats.defaultStartingRow, AllyStats.defaultStartingCol)] = PartyManager.getPlayerStats();
+        }
+    }
+
+    private void initializeDefaultGrid()
+    {
+        grid = new Dictionary<GridCoords, AllyStats>();
+        grid[new GridCoords(AllyStats.defaultStartingRow, AllyStats.defaultStartingCol)] = PartyManager.getPlayerStats();
     }
 
     public AllyStats[][] getGrid()
     {
         if (grid == null)
         {
-            setGrid(getDefaultGrid());
+            initializeDefaultGrid();
         }
 
-        return grid;
-    }
-
-    public void setGrid(AllyStats[][] newGrid)
-    {
-        grid = newGrid;
-        // PartyMemberTrainManager.createPartyMemberTrain();
-    }
-
-    public void setCharacterAtCoords(AllyStats newStats, GridCoords coords)
-    {
-        setCharacterAtCoords(coords.row, coords.col, newStats);
+        return toJaggedArray();
     }
 
     public void setCharacterAtCoords(GridCoords coords, AllyStats newStats)
@@ -61,69 +59,103 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
         setCharacterAtCoords(coords.row, coords.col, newStats);
     }
 
-
-    public void setCharacterAtCoords(AllyStats newStats, int row, int col)
-    {
-        setCharacterAtCoords(row, col, newStats);
-    }
-
     public void setCharacterAtCoords(int row, int col, AllyStats newStats)
     {
-        if (row < 0 ||
+        if (newStats == null ||
+            row < 0 ||
             col < 0 ||
-            row >= grid.Length ||
-            col >= grid[row].Length ||
-            (grid[row][col] != null && 
-             grid[row][col].getName().Contains(PartyManager.playerMarker) && 
-             newStats != null))
+            row >= rowCount ||
+            col >= colCount)
         {
             return;
         }
 
-        grid[row][col] = newStats;
+        GridCoords coords = new GridCoords(row, col);
+
+        if(grid.ContainsKey(coords))
+        {
+            AllyStats existing = grid[coords];
+
+            if (existing != null &&
+            existing.getName().Contains(PartyManager.playerMarker))
+            {
+                return;
+            }
+        }
+
+        grid[coords] = newStats;
 
         OnFormationChange.Invoke();
     }
 
+    public void removeCharacterAtCoords(int row, int col)
+    {
+        removeCharacterAtCoords(new GridCoords(row, col));
+    }
+
+    public void removeCharacterAtCoords(GridCoords coords)
+    {
+        if(grid.ContainsKey(coords))
+        {
+            AllyStats existing = grid[coords];
+
+            if (existing != null &&
+            existing.getName().Contains(PartyManager.playerMarker))
+            {
+                return;
+            }
+
+            grid.Remove(coords);
+
+            OnFormationChange.Invoke();
+        }
+    }
+
     public bool isVacant()
     {
-        foreach(AllyStats stats in this)
+        return grid.Count <= 0;
+    }
+
+    public bool isInParty(Stats stats)
+    {
+        AllyStats allyStats = stats as AllyStats;
+
+        if(allyStats == null)
         {
-            if(stats != null)
-            {
-                return false;
-            }
+            return false;
         }
 
-        return true;
+        return grid.ContainsValue(allyStats);
     }
 
     public AllyStats getStatsAtCoords(int row, int col)
     {
-        return grid[row][col];
+        return getStatsAtCoords(new GridCoords(row, col));
     }
 
     public AllyStats getStatsAtCoords(GridCoords coords)
     {
-        return grid[coords.row][coords.col];
+        if (coords.row < 0 || coords.col < 0)
+        {
+            return null;
+        }
+
+        if (grid.ContainsKey(coords))
+        {
+            return grid[coords];
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public static GridCoords findLocationOfStats(AllyStats partyMember)
     {
-        GridCoords partyMemberLocation = new GridCoords(-1, -1);
-
-        for (int row = 0; row < State.formation.getGrid().Length; row++)
+        if(State.formation != null &&
+            State.formation.isInParty(partyMember))
         {
-            for (int col = 0; col < State.formation.getGrid()[row].Length; col++)
-            {
-                partyMemberLocation = new GridCoords(row, col);
-                AllyStats statsAtLocation = State.formation.getStatsAtCoords(partyMemberLocation);
-
-                if (statsAtLocation != null && partyMember != null && statsAtLocation.getName().Equals(partyMember.getName()))
-                {
-                    return partyMemberLocation;
-                }
-            }
+            return State.formation.grid.FirstOrDefault(x => x.Value.Equals(partyMember)).Key;
         }
 
         return new GridCoords(-1, -1);
@@ -131,7 +163,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
 
     public void implementGridFromCoordSet(StatsWrapper[] statsWrappers)
     {
-        grid = Formation.getEmptyGrid();
+        grid = new Dictionary<GridCoords, AllyStats>();
 
         for (int partyMemberIndex = 0; partyMemberIndex < statsWrappers.Length; partyMemberIndex++)
         {
@@ -148,69 +180,41 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
 
     public void removePartyMember(string partyMemberName)
     {
-        partyMemberName = DialogueList.scrubNameOfEndNumbers(partyMemberName);
-
-        for (int rowIndex = 0; rowIndex < grid.Length; rowIndex++)
-        {
-            for (int colIndex = 0; colIndex < grid[rowIndex].Length; colIndex++)
-            {
-                if (grid[rowIndex][colIndex] != null && grid[rowIndex][colIndex] != PartyManager.getPlayerStats() && grid[rowIndex][colIndex].getName().Equals(partyMemberName))
-                {
-                    setCharacterAtCoords(rowIndex, colIndex, null);
-                }
-            }
-        }
-
-        PartyMemberTrainManager.createPartyMemberTrain();
+        grid.Remove(State.formation.grid.FirstOrDefault(x => x.Value.getName().Equals(partyMemberName)).Key);
     }
 
     public void removeCharacter(AllyStats characterToRemove)
     {
-        for (int rowIndex = 0; rowIndex < getGrid().Length; rowIndex++)
+        if(grid.ContainsValue(characterToRemove))
         {
-            for (int colIndex = 0; colIndex < getGrid()[rowIndex].Length; colIndex++)
-            {
-                if (grid[rowIndex][colIndex] == characterToRemove)
-                {
-                    setCharacterAtCoords(rowIndex, colIndex, null);
-                    return;
-                }
-            }
+            grid.Remove(State.formation.grid.FirstOrDefault(x => x.Value.Equals(characterToRemove)).Key);
         }
     }
 
     public void removeAllPartyMembers()
     {
-        for (int rowIndex = 0; rowIndex < grid.Length; rowIndex++)
+        List<GridCoords> coordsToClear = new List<GridCoords>();
+
+        foreach (KeyValuePair<GridCoords, AllyStats> entry in grid)
         {
-            for (int colIndex = 0; colIndex < grid[rowIndex].Length; colIndex++)
+            if (entry.Value != null && entry.Value.removableFromFormation())
             {
-                if (grid[rowIndex][colIndex] != null && grid[rowIndex][colIndex].removableFromFormation())
-                {
-                    setCharacterAtCoords(rowIndex, colIndex, null);
-                }
+                coordsToClear.Add(entry.Key);
             }
+        }
+
+        foreach (GridCoords coords in coordsToClear)
+        {
+            setCharacterAtCoords(coords, null);
         }
 
         PartyMemberTrainManager.createPartyMemberTrain();
     }
 
-    public static AllyStats[][] getEmptyGrid()
-    {
-        AllyStats[][] emptyGrid = new AllyStats[rowCount][];
-
-        for (int rowIndex = 0; rowIndex < emptyGrid.Length; rowIndex++)
-        {
-            emptyGrid[rowIndex] = new AllyStats[colCount];
-        }
-
-        return emptyGrid;
-    }
-
-    public bool canWriteToSlot(int row, int col)
+    public bool canWriteToSlotWithoutOverride(int row, int col)
     {
         return !isFull() ||
-                getGrid()[row][col] != null;
+                getStatsAtCoords(row, col) != null;
     }
 
     public bool isFull()
@@ -233,40 +237,20 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
 
     public bool contains(AllyStats stats)
     {
-        foreach (AllyStats ally in this)
-        {
-            if(ally == stats)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public static AllyStats[][] getDefaultGrid()
-    {
-        AllyStats[][] defaultGrid = new AllyStats[rowCount][];
-
-        for (int rowIndex = 0; rowIndex < defaultGrid.Length; rowIndex++)
-        {
-            defaultGrid[rowIndex] = new AllyStats[colCount];
-        }
-
-        defaultGrid[AllyStats.defaultStartingRow][AllyStats.defaultStartingCol] = PartyManager.getPlayerStats();
-
-        return defaultGrid;
+        return grid.ContainsValue(stats);
     }
 
     public void addAllyInFirstOpenSpace(AllyStats allyToAdd)
     {
-        for (int rowIndex = 0; rowIndex < grid.Length; rowIndex++)
+        for (int rowIndex = 0; rowIndex < rowCount; rowIndex++)
         {
-            for (int colIndex = 0; colIndex < grid[rowIndex].Length; colIndex++)
+            for (int colIndex = 0; colIndex < colCount; colIndex++)
             {
-                if (grid[rowIndex][colIndex] == null)
+                GridCoords coords = new GridCoords(rowIndex, colIndex);
+
+                if (!grid.ContainsKey(coords))
                 {
-                    grid[rowIndex][colIndex] = allyToAdd;
+                    grid[coords] = allyToAdd;
                     return;
                 }
             }
@@ -277,14 +261,11 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
     {
         int sizeOfFormation = 0;
 
-        for (int rowIndex = 0; rowIndex < grid.Length; rowIndex++)
+        foreach (AllyStats stats in grid.Values)
         {
-            for (int colIndex = 0; colIndex < grid[rowIndex].Length; colIndex++)
+            if (stats != null)
             {
-                if (grid[rowIndex][colIndex] != null)
-                {
-                    sizeOfFormation++;
-                }
+                sizeOfFormation++;
             }
         }
 
@@ -300,22 +281,14 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
     {
         Formation clone = new Formation();
 
-        AllyStats[][] newGrid = new AllyStats[rowCount][];
+        Dictionary<GridCoords, AllyStats> newGrid = new Dictionary<GridCoords, AllyStats>();
 
-        for (int row = 0; row < rowCount; row++)
+        foreach (KeyValuePair<GridCoords, AllyStats> entry in grid)
         {
-            newGrid[row] = new AllyStats[4];
+            newGrid[entry.Key] = entry.Value;
         }
 
-        for (int row = 0; row < rowCount; row++)
-        {
-            for (int col = 0; col < colCount; col++)
-            {
-                newGrid[row][col] = grid[row][col];
-            }
-        }
-
-        clone.setGrid(newGrid);
+        clone.grid = newGrid;
 
         return clone;
     }
@@ -331,14 +304,11 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
     {
         int highest = 0;
 
-        foreach (AllyStats[] row in grid)
+        foreach (AllyStats ally in grid.Values)
         {
-            foreach (AllyStats ally in row)
+            if (ally != null && getStat(ally) > highest)
             {
-                if (ally != null && getStat(ally) > highest)
-                {
-                    highest = getStat(ally);
-                }
+                highest = getStat(ally);
             }
         }
 
@@ -347,27 +317,27 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
 
     public int getTotalStrength()
     {
-        return Helpers.sum(grid, t => t.getStrength());
+        return Helpers.sum<AllyStats>(grid.Values, t => t.getStrength());
     }
 
     public int getTotalDexterity()
     {
-        return Helpers.sum(grid, t => t.getDexterity());
+        return Helpers.sum<AllyStats>(grid.Values, t => t.getDexterity());
     }
 
     public int getTotalWisdom()
     {
-        return Helpers.sum(grid, t => t.getWisdom());
+        return Helpers.sum<AllyStats>(grid.Values, t => t.getWisdom());
     }
 
     public int getTotalCharisma()
     {
-        return Helpers.sum(grid, t => t.getCharisma());
+        return Helpers.sum<AllyStats>(grid.Values, t => t.getCharisma());
     }
 
     public int getTotalBonusVolleyAccuracy()
     {
-        return Helpers.sum(grid, t => t.getBonusVolleyAccuracy());
+        return Helpers.sum<AllyStats>(grid.Values, t => t.getBonusVolleyAccuracy());
     }
 
     public int getHighestLevel()
@@ -510,7 +480,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
         blocks.Add(DescriptionPanelBuildingBlock.getObservationBlock(PartyStats.getObservationLevel().ToString()));
         blocks.Add(DescriptionPanelBuildingBlock.getLeadershipBlock(PartyStats.getMaxPlacablePartyMembers().ToString()));
 
-        blocks.Add(DescriptionPanelBuildingBlock.getRegenBlock(PartyStats.getPartyRegenAmountForDisplay())); 
+        blocks.Add(DescriptionPanelBuildingBlock.getRegenBlock(PartyStats.getPartyRegenAmountForDisplay()));
 
         blocks.Add(DescriptionPanelBuildingBlock.getVolleyBlock(PartyStats.getVolleyAccuracy() + "%"));
 
@@ -540,13 +510,31 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
     }
     public IEnumerator GetEnumerator()
     {
-        foreach (AllyStats[] row in grid)
+        foreach (AllyStats stats in grid.Values)
         {
-            foreach (AllyStats stats in row)
+            yield return stats;
+        }
+    }
+
+    private AllyStats[][] toJaggedArray()
+    {
+        AllyStats[][] jaggedGrid = new AllyStats[rowCount][];
+
+        for (int rowIndex = 0; rowIndex < rowCount; rowIndex++)
+        {
+            jaggedGrid[rowIndex] = new AllyStats[colCount];
+        }
+
+        foreach (KeyValuePair<GridCoords, AllyStats> entry in grid)
+        {
+            if (entry.Key.row >= 0 && entry.Key.row < rowCount &&
+                entry.Key.col >= 0 && entry.Key.col < colCount)
             {
-                yield return stats;
+                jaggedGrid[entry.Key.row][entry.Key.col] = entry.Value;
             }
         }
+
+        return jaggedGrid;
     }
 
 }

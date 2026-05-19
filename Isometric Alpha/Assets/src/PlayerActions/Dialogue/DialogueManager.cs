@@ -1379,7 +1379,7 @@ public class DialogueManager : MonoBehaviour
 
                     Formation formation = State.formation;
 
-                    if (formation.getSizeOfFormation() < PartyStats.getPartySizeMaximum())
+                    if (!formation.isFull())
                     {
                         AllyStats partyMemberStats = PartyManager.getPartyMember(partyMemberName).stats;
 
@@ -1412,10 +1412,16 @@ public class DialogueManager : MonoBehaviour
 
                 case "removefromparty":
 
-                    int nameIndex2 = getArgumentInt(buffer, Constants.indexZero);
+                    int nameIndex = getArgumentInt(buffer, Constants.indexZero);
                     bool preventInventoryLoss = getArgumentBool(buffer, Constants.indexOne);
 
-                    partyMemberName = currentDialogue.names[nameIndex2];
+                    partyMemberName = currentDialogue.names[nameIndex];
+
+                    if(partyMemberName.Contains(NPCNameList.overseer) || 
+                        partyMemberName.Contains(NPCNameList.chief))
+                    {
+                        partyMemberName = partyMemberName.Split(" ")[1];
+                    }
 
                     PartyMember partyMemberToRemove = PartyManager.getPartyMember(partyMemberName);
 
@@ -2381,7 +2387,7 @@ public class Conversation
 	}
     public void addLeftPartyLine(string partyMemberName)
     {
-        addDialogueLine(partyMemberName + leftPartyMessage);
+        addDialogueLine(DialogueList.scrubNameOfEndNumbers(partyMemberName) + leftPartyMessage);
     }
 
     public void addEarnedLine(string contents)

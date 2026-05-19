@@ -1182,9 +1182,8 @@ public static class SpawnParamsList
                                         new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }), spawnWhileHostile: spawnWhileHostile, onlySpawnWhileHostile: onlySpawnWhileHostile));
         
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.director+1),
-                                        new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated}),spawnWhileHostile: doesNotSpawnWhileHostile));
+                                        new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.receivedDirectorsPardon}),spawnWhileHostile: doesNotSpawnWhileHostile));
         
-
         #endregion
 
         #endregion

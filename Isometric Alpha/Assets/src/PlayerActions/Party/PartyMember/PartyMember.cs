@@ -46,28 +46,8 @@ public class PartyMember : IDescribable, IDescribableInBlocks
 
     public bool isInParty()
     {
-        return stats.isInParty(State.formation.getGrid());
+        return stats.isInParty(State.formation);
     }
-
-	public bool isInParty(Stats[][] positionGrid)
-	{
-
-		return stats.isInParty(positionGrid);
-	}
-
-	public CombatActionArray getUnlockedCombatActions()
-	{
-		// CombatAction[] unlockedCombatActions = new CombatAction[PartyMemberStats.partyMemberActionWheelLength];
-
-		// unlockedCombatActions[0] = new Attack(PartyMemberEquipmentManager.getWeapon(stats.getName(), stats.getLevel()));
-
-		// for (int currentLevel = 2; currentLevel <= stats.getLevel() && currentLevel <= PartyMemberStats.partyMemberActionWheelLength; currentLevel++)
-		// {
-		// 	unlockedCombatActions[currentLevel - 1] = AbilityList.getCompanionAbility(stats.getName(), currentLevel - 2);
-		// }
-
-		return new CombatActionArray(stats);
-	}
 
 	public static int getNextUpgradeCost(int currentLevel)
 	{

@@ -52,9 +52,9 @@ public class FormationHandler : ScreenManager, IPartyEditor, ICounter
 
     public void addCharacterToFormation(AllyStats characterToAdd, int row, int col)
     {
-        if (State.formation.canWriteToSlot(row, col) && !State.formation.contains(characterToAdd))
+        if (State.formation.canWriteToSlotWithoutOverride(row, col) && !State.formation.contains(characterToAdd))
         {
-            State.formation.setCharacterAtCoords(characterToAdd, row, col);
+            State.formation.setCharacterAtCoords(row, col, characterToAdd);
             OnScreenInteriorUpdate.Invoke();
         }
     }

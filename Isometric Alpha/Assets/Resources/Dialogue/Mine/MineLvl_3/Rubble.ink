@@ -222,13 +222,11 @@ Fun's over, branded. Fall in line: we're heading back up to camp.
     {
     -goesWithBrushsPlan:
         +Things are afoot on the surface. There's only one way you make it out of this mine alive: if <i>you</i> surrender your weapons to <i>us</i> and come peacefully.
-            ~mineLvl3DealtWithGaspar = true
             setToTrue(mineLvl3DealtWithGaspar)
             ->3c
     }
 
     +There isn't going to be any more work, Gáspár. You're not going to make it back to the surface. <Combat>
-        ~mineLvl3DealtWithGaspar = true
         setToTrue(mineLvl3DealtWithGaspar)
         ->3b
     +Very well. I'm glad to be rid of this mine.
@@ -283,7 +281,7 @@ What's this? Insurrection? I'll die before any of you see the light of day.
 
     +Listen to her, Gáspár. Is it worth your life to keep us in bondage?
         ->3cb
-    +That same Director who gave the order to leave you down here? It doesn't seem like he deserves your loyalty.
+    +That same Director who gave the order to leave you down here? It doesn't sound like he deserves your loyalty.
         ->3cc
     +If you're so ready to die then I'm sick of trying to talk you out of it. <Combat>
         ->combatPrep
@@ -406,7 +404,7 @@ What's this? Insurrection? I'll die before any of you see the light of day.
     changeCamTarget({rekaIndex})
     setNPCFacing({rekaIndex},NE)
 
-    These slaves have given us no reason to suspect they would harm us. They fought with us to defeat the worms, despite the fact that the way to the surface was cleared. If they wanted us dead, why did they not leave us down here?
+    These slaves have given us no reason to suspect they would harm us. They fought with us to defeat the worms, instead of making for the surface. If they wanted us dead, why did they not leave us down here?
 
     changeCamTarget({gasparIndex})
     

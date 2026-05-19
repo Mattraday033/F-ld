@@ -13,6 +13,8 @@ VAR leftGuardIndex = 6
 VAR rightGuardIndex = 7
 VAR gasparIndex = 8
 VAR taborBehindDeskIndex = 9
+VAR nandorIndex = 10
+VAR carterIndex = 11
 
 VAR playerName = ""
 
@@ -39,12 +41,26 @@ VAR mineLvl3BreachSealed = false
 VAR deathFlagOverseerGáspár = false
 VAR gasparAddedToParty = false
 VAR mineLvl3GuardsInParty = false
+VAR mineLvl3CarterAndNandorInParty = false
+VAR learnedCampLocationFromCarter = false
+VAR nandorMentionedCampLocation = false
+VAR finishedBalintsTask = false
+VAR nandorSpokeToPlayerAboutDirectorBetrayal = false
+VAR acceptedDirectorVidraLetterJob = false
+VAR directorMentionedAnnouncement = false
 
 VAR askedAboutDirectorStuckInOffice = false
 
-VAR returnedFromMine = false
+VAR receivedDirectorsPardon = false
+
+VAR deathFlagNándor = false
+VAR deathFlagCarter = false
 
 {
+-receivedDirectorsPardon and not acceptedDirectorVidraLetterJob:
+    ->receivedDirectorsPardon_1b
+-receivedDirectorsPardon:
+    ->receivedDirectorsPardon_1a
 -sentIntoMineByDirector and mineLvl3BreachSealed:
     ->sealedBreach_1a
 -metDirectorAfterHostages and not sentIntoMineByDirector:
@@ -65,6 +81,12 @@ Hello. Are you here to see the Director?
         I see. You're expected, go on in.
         ->enterDirectorsOffice(->1b)
 
+=== enterDirectorsOfficeReturnedFromMine(->divert) ===
+
+setToTrue(receivedDirectorsPardon)
+
+->enterDirectorsOffice(divert)
+
 === enterDirectorsOffice(->divert) ===
 
 fadeToBlack(true, false)
@@ -73,25 +95,31 @@ setToTrue(metDirectorAfterHostages)
 
 movePlayer(-2,-1)
 setFacing(NE)
-setNPCFacing({directorIndex},NW)
-
 changeCamTarget({directorIndex})
 
 activate({weftIndex})
 
 {
--not returnedFromMine:
+-not receivedDirectorsPardon:
+setNPCFacing({directorIndex},NW)
 activate({taborIndex})
 activate({adelaIndex})
 }
 
 {
--returnedFromMine and (gasparAddedToParty or mineLvl3GuardsInParty) and not deathFlagOverseerGáspár:
+-receivedDirectorsPardon and (gasparAddedToParty or mineLvl3GuardsInParty) and not deathFlagOverseerGáspár and not directorMentionedAnnouncement:
 activate({leftGuardIndex})
 activate({rightGuardIndex})
 activate({gasparIndex})
 activate({adelaIndex})
 activate({taborBehindDeskIndex})
+setNPCFacing({directorIndex},SW)
+}
+
+{
+-directorMentionedAnnouncement and not acceptedDirectorVidraLetterJob:
+activate({directorIndex})
+setNPCFacing({directorIndex},SW)
 }
 
 fadeBackIn(60)
@@ -446,7 +474,7 @@ Yes? What is it?
 
 === alreadySpokeToDirector_1b ===
 
-I'll ask him if he is available to receive you.
+I will ask him if he is available to receive you.
 
 fadeToBlack(true, false)
 
@@ -484,9 +512,15 @@ Then what is your decision?
 
 changeCamTarget({pageIndex})
 
-\*Page looks at you in astonishment.* You've just returned from the mines, if the dust you're caked in is any indication. Did you actually manage to stop those beasts?
+{
+-nandorSpokeToPlayerAboutDirectorBetrayal:
+    ->sealedBreach_1ac
+-else:
+    \*Page looks at you in astonishment.* You've just returned from the mines, if the dust you're caked in is any indication. Did you actually manage to stop those beasts?
 
-    +I've been to the deepest tunnel and back. They are no more.
+}
+
+    +I've been to the deepest tunnel and back. They are no longer a problem.
         ->sealedBreach_1aa
     +An easier task I've never been given. The Director should have handed me something challenging if he wanted a fair exchange.
         ->sealedBreach_1aa
@@ -497,24 +531,146 @@ changeCamTarget({pageIndex})
 
 Then you are quite the warrior. I will inform the Director you are here.
 
-setToTrue(returnedFromMine)
+{
+-mineLvl3CarterAndNandorInParty:
+// and not deathFlagNándor and not deathFlagCarter:
+    ->nandorSpeaksUp_1a
+}
 
-    ->enterDirectorsOffice(->sealedBreach_2a)
+->enterDirectorsOfficeReturnedFromMine(->sealedBreach_2a)
 
 === sealedBreach_1ab ===
 
 Of course. I shall inform him that you are here to see him right away.
 
-setToTrue(returnedFromMine)
+->enterDirectorsOfficeReturnedFromMine(->sealedBreach_2a)
 
-->enterDirectorsOffice(->sealedBreach_2a)
+=== sealedBreach_1ac ===
+
+The Director will see you now. Are you ready?
+
+    +Yes I am.
+        ->enterDirectorsOfficeReturnedFromMine(->sealedBreach_2a)
+    +Not yet.
+        ->Close
+
+=== nandorSpeaksUp_1a ===
+
+fadeToBlack(true,false)
+
+setToTrue(nandorSpokeToPlayerAboutDirectorBetrayal)
+
+activate({nandorIndex})
+changeCamTarget({nandorIndex})
+
+fadeBackIn(60)
+
+Wait, I would speak with you before the Director does.
+
+    +Yes? What is it?
+        ->nandorSpeaksUp_2a
+    +I don't have time for this.
+        setFacing(SE)
+        ->nandorSpeaksUp_1b
+
+=== nandorSpeaksUp_1b ===
+
+This is important. If you wish to keep Carter and I as your companions you won't continue on to meet the Director.
+
+    +Fine, I will hear you out.
+        ->nandorSpeaksUp_2a
+    +Like I care. Begone with you.
+
+        fadeToBlack(true,false)
+
+        deactivate({nandorIndex})
+        changeCamTarget({pageIndex})
+        movePlayerPos(-7,1)
+        setNPCFacing({pageIndex},SW)
+        setFacing(NE)
+
+        fadeBackIn(60)
+
+        ->sealedBreach_1a
+
+=== nandorSpeaksUp_2a ===
+
+fadeToBlack(true,false)
+
+setNPCFacing({nandorIndex},SE)
+movePlayerPos(-6,-4)
+setFacing(NW)
+
+fadeBackIn(60)
+
+I don't know the full extent of your business with the Director, and that ignorance makes me nervous. I wish to know about everything that is going on between you.
+
+    +I have a deal for my freedom. He will give me a pardon, in exchange for having secured his mine for him.
+        ->nandorSpeaksUp_2b
+    +You aren't entitled to that information.
+        ->nandorSpeaksUp_2aa
+
+=== nandorSpeaksUp_2aa ===
+
+If you should speak with the Director, then I am going to assume the worst and Carter and I will leave your company. Tell me, so I know you aren't betraying our cause. 
+
+    +I have a deal for my freedom. He will give me a pardon, in exchange for having secured his mine for him.
+        ->nandorSpeaksUp_2b
+    +I am not going to do that.
+        The we've reached an impasse. My conditions are clear: follow through with this and we will consider you an enemy of the revolution.
+        ->deactivateExtras
+
+=== nandorSpeaksUp_2b ===
+
+That is ridiculous. The brand is a permanent scar. You can't pardon that, and even if you could, the Lovashi would never allow it. This is clearly a trap of some kind.
+
+    +The Director has been fair to me so far. I don't see any reason not to trust him.
+        ->nandorSpeaksUp_2ba
+    +You're right. I knew it was too good to be true. 
+        ->nandorSpeaksUp_3b
+
+=== nandorSpeaksUp_2ba ===
+
+~nandorMentionedCampLocation = true
+Even if he wanted to pardon you, <i>and</i> had some fantastical means of doing so, he still couldn't. This camp does not lie within the Confederation's borders. It is actually a secret, illegal colony erected within the Kingdom of Masons.
+
+So putting aside all of the other reasons he would not pardon you, he can't release you because you would put this camp at risk by simply knowing of its existence. There's just too much at stake. 
+
+    ->nandorSpeaksUp_2baa
+
+=== nandorSpeaksUp_2baa ===
+
+{
+-not finishedBalintsTask and not learnedCampLocationFromCarter:
+    +How do you know this?
+        It is not for me to say. Not until you've told me you aren't going to meet with the Director.
+        ->nandorSpeaksUp_2baa
+}
+    +You make a good point. Perhaps I shouldn't meet with him.
+        ->nandorSpeaksUp_3b
+    +I don't care. I'm going through with this.
+        ->nandorSpeaksUp_3a
+
+=== nandorSpeaksUp_3a ===
+
+You're making a foolish mistake, and I won't be a part of it. I hope beyond hope I am wrong, but I suspect this will be the last time we speak to each other in this life. Good luck, and farewell.
+
+->deactivateExtras
+
+=== nandorSpeaksUp_3b ===
+
+Thank you for hearing me out. Let's leave the Manse before the Director suspects something.
+->deactivateExtras
 
 === sealedBreach_2a ===
 
 setNPCFacing({directorIndex},SW)
 changeCamTarget({directorIndex})
 
-Page informs me that you were successful, but I would hear it from you. Were you able to secure the mines against these worm intruders?
+removeFromParty({carterIndex})
+removeFromParty({nandorIndex})
+
+Page has told me that you were successful, but I would hear it from you. Were you able to secure the mines against these worm intruders?
 
 {
 -gasparAddedToParty or mineLvl3GuardsInParty:
@@ -601,6 +757,7 @@ deactivate({taborBehindDeskIndex})
 
 // playAnimation({taborBehindDeskIndex},OOC_Idle_Front)
 playAnimation({adelaIndex},OOC_Idle_Front)
+changeCamTarget({directorIndex})
 
 fadeBackIn(60)
 
@@ -646,6 +803,8 @@ You are the first branded I have ever heard of to be granted a stay of execution
 
 addXP(500)
 
+finishQuest(No Good Deed, true, Pardon me?)
+
 While it was never expected to be necessary, a pardon for a branded was conceived of in the case of exonerating evidence coming to light after a brand was applied. A special seal was devised with the count's mark placed upon it, which when shown would prove a branded innocent of the crime they were accused of.
 
 It's not much, but outside of a miracle there really is no way to heal the brand. I can have some of these seals sent for, and they would arrive within the next few weeks. You would be exempt from labor during that time, of course, and when it arrives you would be transported to the Kingdom of Masons, where you would be released. 
@@ -666,69 +825,73 @@ If you consider this deal to have been favorably concluded, then perhaps I could
 === sealedBreach_2ca === 
 
     +Before I answer, I would know more about my potential employer.
-        If you have questions for me, ask them, but know I guard some pieces of information more closely than others.
-        ->sealedBreach_2cb
+        ->sealedBreach_2cba(->sealedBreach_2ca)
     +I'm through working for you. I will be going now.
         ->sealedBreach_3a
     +I'll hear the job, but I make no promises towards accepting it.
         ->sealedBreach_3b
 
-=== sealedBreach_2cb === 
+=== sealedBreach_2cba(->divert) === 
+
+If you have questions about me, ask them, but know I guard some pieces of information more closely than others.
+    ->sealedBreach_2cb(divert)
+
+=== sealedBreach_2cb(->divert) === 
 
     {
     -true:
     +You're a lord, but you administer a mining camp? That seems somewhat beneath your station.
         That is true. Or it normally would be. Everyone in this world has a master, branded. In having lost yours, I expect you will soon find another. But to give you an answer, my master needed a job done right, so he sent the man he most trusted to see it through.
-        ->sealedBreach_2cb 
+        ->sealedBreach_2cb(divert)
     +Your guards treat you with a lot of respect.
         They are good soldiers, and I have been leading warriors for the Confederation for a long time. I am at the end of my eigth decade now. Their reverence for me is born of an acknowledgment of the battles I have won, lost, and survived.
-        ->sealedBreach_2cb 
+        ->sealedBreach_2cb(divert)
     +You mentioned the 'Emancipation Conflict' before. What is that?
         The Emancipation Conflict is the name my people gave to the struggle between yours and mine: the Craft Folk, and the Lovashi. It was born of a grudge from the time of my father's generation, when the king of the Lovashi gave the child of his mount to a Craft Folk sovereign to take for a steed.
 
         This horse, a prince to my tribe, was mistreated, and died soon after. For this insult, the Lovashi descended on the Craft Folk seeking revenge. In their efforts to keep us at bay, your ancestors stole foals from our camps and raised them as slave mounts. My people share a language with horses; we are kin, in a way. In your ignorance, you could not teach them this language, and in so doing raised them to be simple beasts of burden.
 
         The horses that the Craft Folk rear are now but feral children, mute animals without sentience or culture. The Conflict is our attempt to right this wrong. The brand is our tool to teach you the weight of your folly... or so my nephew, the count, would claim. He is young, and has seen too little of history to know its cycles.
-        ->sealedBreach_2cb
+        ->sealedBreach_2cb(divert)
     +I've never seen you about camp. Why stay cloistered within this office?
         ~askedAboutDirectorStuckInOffice = true
         I grow tired easily in my old age. But even were I still young I would likely not wander idly. Many years ago I suffered a lance through my left leg during the seige of Wudra. It remains set on reminding me of the closest I've come to passing from this life.
-        ->sealedBreach_2cb 
+        ->sealedBreach_2cb(divert)
     } 
     {
     -beamToldAboutWudra:
     +A servant of yours said you fought the Masons at a place called Wudra.
         Ah, yes, I was there. I lead a Lovashi horde that lay seige to that city.
-        ->WudraAnswer_1a
+        ->WudraAnswer_1a(divert)
     -askedAboutDirectorStuckInOffice:
     +Wudra must have been some battle, then. I'd hear you speak of it, if you're willing.
         I like to fixate on it less than my countrymen do, but very well.
-        ->WudraAnswer_1b
+        ->WudraAnswer_1b(divert)
     }
 
     +Your disposition is less violent than some of your subordinates.
         Violence is a tool, branded. The soldiers you speak of have been taught to use that tool. I am old enough to have taught them why they should use it, and forgotten why myself.
-        ->sealedBreach_2cb 
+        ->sealedBreach_2cb(divert)
 
     +I'm finished with my questions.
         Then have you come to an answer?
-        ->sealedBreach_2ca
+        ->divert
 
-=== WudraAnswer_1a ===
+=== WudraAnswer_1a(->divert) ===
 
     +I've heard that many tales are told of your exploits there. Among the Lovashi, at least. Would you tell me what happened?
         combineDialogue()
 
         I can give my account, if you'd like. 
-        ->WudraAnswer_1b
+        ->WudraAnswer_1b(divert)
 
-=== WudraAnswer_1b ===
+=== WudraAnswer_1b(->divert) === 
         Wudra is a city in the Kingdom of Masons, in the kingdom's western riverlands. There is a great river, the Wandering Roil, that meanders through Mason land, and Wudra sits at it's mouth.
 
-        The Confederation, over a decade ago, struck through the Masonic Gap with three great hordes. I was selected from my peers to lead the warriors meant to pacify the kingdom's western half. I believe Wudra captures the imagination of the younger generations because it was the deepest our people have ever cut into Craft Folk territory. To them, what was in truth a bitter defeat has instead come a tale that serves as a metric of our achievements, and a call to surpass it.
+        The Confederation, over a decade ago, struck through the Masonic Gap with three great hordes. I was selected from my peers to lead the warriors meant to pacify the kingdom's western half. I believe Wudra captures the imagination of the younger generations because it was the deepest our people have ever cut into Craft Folk territory. To them, what was in truth a bitter defeat has instead become a tale that serves as a metric of our achievements, and a call to surpass them.
         
         It was at Wudra that we were turned back, just barely kept from breaking its walls by the river it straddled. We were a mane's hair from victory, until a Mason host releaved the city from seige at the worst moment. What was to be my opus became a trap I only escaped by the grace of the ficklest of Gods. But They didn't let me leave without dealing me a wound for my hubris that still haunts my left leg.
-        ->sealedBreach_2cb 
+        ->sealedBreach_2cb(divert)
 
 === sealedBreach_3a ===
 
@@ -753,51 +916,89 @@ Yes, of course. I'll skip the pleasantries then.
 
 ->sealedBreach_3ca
 
+
+=== sealedBreach_3caa ===
+
+You've returned. Have you come back to accept my proposal?
+    ->sealedBreach_3cab
+
+=== sealedBreach_3cab ===
+
+    +Can you remind me what the job was again?
+        ->sealedBreach_3ca
+    +Before I answer, I would know more about my potential employer.
+        ->sealedBreach_2cba(->sealedBreach_3cab)
+    +Yes. Hand over the letter; I will see it to your friend.
+        ->sealedBreach_3d
+    +There's more going on here than I'm comfortable with. I'll pass.
+        ->sealedBreach_3da
+
 === sealedBreach_3ca ===
 
 I have written a letter to a comrade of mine. He has taken up residence in the town of Rice Hill, in the Kingdom of Mason's northern frontier. I thought that, since you will be going that way anyways, you could deliver it to him for me? For this task, I would give you a small commission up front, and then my friend would gladly pay you the amount of three hundred pieces of gold upon delivery. 
 
     +What is your friend's name?
 
-        He has changed names many times while I have known him. He is unlikely to still be using the same one I used for him last. But he will know you as an associate if you call him by the title: 'Vidra'.
+        He has changed names many times while I have known him. He is unlikely to still be using the same one I used for him last. But he will know you as an associate if you call him by his title: 'Vidra'.
 
-        A new branded in town will be quite the novelty to him. Pay for a room at one of the local inns, spend some time around town. He certainly will find you.
+        A new branded in town will be quite the novelty to him. Pay for a room at one of the local inns, spend some time out in the open. He certainly will find you.
         ->sealedBreach_3c
 
 === sealedBreach_3c ===
 
+{
+-true:
     +Why all this secrecy? This hardly seems like your average messenger job.
-        My friend is not well liked by the kingdom. He is no friend to the Masons, but neither is he an enemy. Things are simply more convenient for him if discretion is used while attempting contact.
+        My friend is not well liked by the kingdom. He holds no love for the Masons, but neither is he their enemy. Things are simply more convenient for him if discretion is used while attempting contact.
 
         I can't explain more than that, it isn't my place to betray the secrets of a friend. But should you keep them as well, Vidra will be more inclined to give you answers. Think of it as a test; one on which further employment and rewards are contingent. 
         ->sealedBreach_3c
     +I suspect the Masons would be interested in the correspondences of a Lovashi lord. What is stopping me from bringing this letter to the nearest sheriff once I'm on their land, or reading it myself for that matter?
         Do so if you wish, but know that the letter is written in the horsetongue, and contrived via innuendo. I doubt it would mean much to anyone but my friend.
 
-        And think of the consequences of such a choice: a branded, recently exiled and trusted with one my personal letters, giving it up for personal gain? That would be highly suspect. They would see you as a traitor at best and a saboteur at worst. Hardly the best first impresson you could make to your new hosts.
+        And think of the consequences of such a choice: a branded, recently exiled and trusted with one of my personal letters, giving it up for personal gain? That would be highly suspect. They would see you as a traitor at best and a saboteur at worst. Hardly how one would want to ingratiate themself with their new hosts.
         ->sealedBreach_3c
-    +Why not send one of your guards? They would get there quicker seeing as I cannot even set out for a few more weeks.
-        My guards lack the subtlety necessary for such a task, even if they could make the journey quicker. The brand gives you a reason to make the journey that they would lack. Certainty of deliver outweighs haste in this matter.
+    +Why not send one of your guards? They would arrive faster, seeing as I cannot even set out for a few more weeks.
+        My guards lack the subtlety necessary for such a task, even if they could make the journey quicker. The brand gives you a reason to make the journey that they would lack. Certainty of delivery outweighs haste in this matter.
         ->sealedBreach_3c
+}
+{
+-directorMentionedAnnouncement:
+    +Before I answer, I would know more about my potential employer.
+        ->sealedBreach_2cba(->sealedBreach_3c)
+}
     +The job seems simple. I'll do it.
         ->sealedBreach_3d
     +There's more going on here than I'm comfortable with. I'll pass.
-
-        Unfortunate, but I understand. I will keep the letter ready, should you change your mind before you set out.
-        ->Close
+        ->sealedBreach_3da
 
 === sealedBreach_3d ===
 
+setToTrue(acceptedDirectorVidraLetterJob)
+
 prepItem()
 
-I'm glad you are so amenable. Here is what I promised upfront, I expect it will cover food and board on the road and then some.
+I'm glad you are so amenable. Here is what I promised up front. I expect it will cover food and board on the road and then some.
 
 giveCoins(100)&
 giveItem(3,11,1)
 
 ->sealedBreach_Finished
 
+=== sealedBreach_3da ===
+
+Unfortunate, but I understand. I will keep the letter ready, should you change your mind before you set out.
+    ->sealedBreach_Finished
+
 === sealedBreach_Finished ===
+
+{
+-directorMentionedAnnouncement:
+    ->deactivateExtras
+}
+
+setToTrue(directorMentionedAnnouncement)
+activateQuestStep(Stay Of Execution, Meet the Director.)
 
 {
 -gasparBroughtToExecution:
@@ -811,6 +1012,25 @@ Because of how unorthodox a pardon is for one of the branded, I will need to int
 }
 
 ->deactivateExtras
+
+=== receivedDirectorsPardon_1a ===
+
+changeCamTarget({pageIndex})
+
+I've been told the Director is no longer available to meet. You will need to come back another time.
+
+->Close
+
+=== receivedDirectorsPardon_1b ===
+
+changeCamTarget({pageIndex})
+
+The Director is busy, but told me to notify him if you wished to meet.
+
++Tell him I want to discuss the job we spoke about.
+    ->enterDirectorsOfficeReturnedFromMine(->sealedBreach_3caa)
++I must be going.
+    ->Close
 
 === deactivateExtras ===
 
@@ -837,6 +1057,14 @@ deactivate({leftGuardIndex})
 deactivate({rightGuardIndex})
 deactivate({gasparIndex})
 
+deactivate({carterIndex})
+deactivate({nandorIndex})
+
+{
+-receivedDirectorsPardon:
+deactivate({directorIndex})
+}
+
 movePlayerPos(-6,-2)
 setFacing(SW)
 
@@ -845,6 +1073,11 @@ fadeBackIn(60)
 ->Close
 
 === Close ===
+
+{
+-nandorMentionedCampLocation:
+setToTrue(learnedCampLocationFromCarter)
+}
 
 close()
 

@@ -1247,7 +1247,9 @@ public static class DialogueList
                                                                 NPCNameList.guard,
                                                                 NPCNameList.guard+1,
                                                                 NPCNameList.overseerGaspar,
-                                                                NPCNameList.chiefTabor+1
+                                                                NPCNameList.chiefTabor+1,
+                                                                NPCNameList.nandor+1,
+                                                                NPCNameList.carter+1
                                                             }, 
                                  Resources.Load<TextAsset>(DialogueNameList.prerevoltPagePathName)));
 

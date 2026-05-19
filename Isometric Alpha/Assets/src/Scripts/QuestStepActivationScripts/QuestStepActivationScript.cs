@@ -160,6 +160,11 @@ public abstract class AfterBreachScript : QuestStepActivationScript
         {
             QuestList.finishQuest(QuestNameList.sealingTheBreachQuestTitle, QuestNameList.sealingTheBreachStepTitleEight, true);
         }
+
+        if(Flags.getFlag(FlagNameList.sentIntoMineByDirector))
+        {
+            QuestList.activateQuestStep(QuestNameList.noGoodDeedQuestTitle, QuestNameList.noGoodDeedStepTitleEight);
+        } 
     }
 }
 
@@ -175,16 +180,7 @@ public class KilledNandorCarterAfterBreachScript : AfterBreachScript
 {
     public override void runScript(GameObject target = null)
     {
-
-        if(Flags.getFlag(FlagNameList.sentIntoMineByDirector))
-        {
-            base.runScript(target);
-
-            if(Flags.getFlag(FlagNameList.sentIntoMineByDirector))
-            {
-                QuestList.activateQuestStep(QuestNameList.noGoodDeedQuestTitle, QuestNameList.noGoodDeedStepTitleEight);
-            } 
-        }
+        base.runScript(target);
 
     }
 }

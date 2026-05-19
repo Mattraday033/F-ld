@@ -118,7 +118,7 @@ Kastor? From the surface? Perhaps you know which way the wind is blowing, then.
     +East, of course.
     
         setToTrue(mentionedKastorMinersCrates)
-        ~toldCarterPassword = true
+        setToTrue(toldCarterPassword)
         activateQuestStep(Finding Nándor, Nándor found.)
         \*Carter breaks out into laughter.* Forgive me, you're the first friendly face we've seen in days; I am simply overcome with relief. Nándor still breaths. Let me show you to him.
 
@@ -672,7 +672,6 @@ You're looking for survivors? You'll forgive me, but I find it a little odd you 
     +North?
         ->3ba
     +East, friend.
-        ~toldCarterPassword = true
         setToTrue(toldCarterPassword)
         keepDialogue()
         Incredible, you're the first friendly face we've seen in days, *and* you're one of us. You fought your way here from the surface?

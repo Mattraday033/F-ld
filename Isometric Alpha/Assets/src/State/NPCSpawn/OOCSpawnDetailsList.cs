@@ -1821,6 +1821,8 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.chiefTabor+1, new Vector3Int(2, -3), facing: Facing.SouthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(-2, 0), facing: Facing.NorthEast));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.captainAdela, new Vector3Int(2, 1), facing: Facing.SouthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.nandor+1, new Vector3Int(-6, -3), facing: Facing.NorthWest)); 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter+1, new Vector3Int(-5, -3), facing: Facing.NorthWest)); 
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard, new Vector3Int(-3, 0), animationName: MonsterNameList.lancer, facing: Facing.NorthEast));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+1, new Vector3Int(-3, -3), animationName: MonsterNameList.lancer, facing: Facing.NorthEast));

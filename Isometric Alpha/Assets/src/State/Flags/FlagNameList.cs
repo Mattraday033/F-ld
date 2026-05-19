@@ -101,6 +101,9 @@ public static class FlagNameList
         public const string sentIntoMineByDirector = "sentIntoMineByDirector"; //Accepted Director's task to enter mine 
         public const string knowWhoTheDirectorIs = "knowWhoTheDirectorIs"; //know the Director's name
         public const string taborMentionedRewardForHostages = "taborMentionedRewardForHostages";
+        public const string receivedDirectorsPardon = "receivedDirectorsPardon";
+        public const string acceptedDirectorVidraLetterJob = "acceptedDirectorVidraLetterJob";
+        public const string directorMentionedAnnouncement = "directorMentionedAnnouncement";
 
         //kastor convo flags
         public const string metKastor = "metKastor"; //if the player has spoken to Kastor before
@@ -172,6 +175,7 @@ public static class FlagNameList
         public const string afterNandorDecidesGuardPunishments = "afterNandorDecidesGuardPunishments";
         public const string executedAllPrisoners = "executedAllPrisoners";
         public const string nandorDispersedCrowd = "nandorDispersedCrowd";
+        public const string nandorSpokeToPlayerAboutDirectorBetrayal = "nandorSpokeToPlayerAboutDirectorBetrayal";
 
 
         //Temple Flags
