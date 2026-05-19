@@ -40,6 +40,8 @@ VAR deathFlagOverseerGáspár = false
 VAR gasparAddedToParty = false
 VAR mineLvl3GuardsInParty = false
 
+VAR askedAboutDirectorStuckInOffice = false
+
 VAR returnedFromMine = false
 
 {
@@ -78,9 +80,7 @@ changeCamTarget({directorIndex})
 activate({weftIndex})
 
 {
--returnedFromMine:
-activate({taborBehindDeskIndex})
--else:
+-not returnedFromMine:
 activate({taborIndex})
 activate({adelaIndex})
 }
@@ -91,6 +91,7 @@ activate({leftGuardIndex})
 activate({rightGuardIndex})
 activate({gasparIndex})
 activate({adelaIndex})
+activate({taborBehindDeskIndex})
 }
 
 fadeBackIn(60)
@@ -487,14 +488,14 @@ changeCamTarget({pageIndex})
 
     +I've been to the deepest tunnel and back. They are no more.
         ->sealedBreach_1aa
-    +An easier task I've never been given. The Director should have given me something challenging if he wanted a fair exchange.
+    +An easier task I've never been given. The Director should have handed me something challenging if he wanted a fair exchange.
         ->sealedBreach_1aa
     +I'm here to see the Director, not answer your questions. 
         ->sealedBreach_1ab
 
 === sealedBreach_1aa ===
 
-Then you are quite the warrior, to have accomplished such a feat. I will inform the Director you are here. He will certainly wish to speak with you immediately.
+Then you are quite the warrior. I will inform the Director you are here.
 
 setToTrue(returnedFromMine)
 
@@ -552,7 +553,7 @@ Sir?
 
 changeCamTarget({directorIndex})
 
-I'm asking what of the branded that were placed under your supervision. If work resumed tomorrow, at what speed will your teams be working?
+I'm asking what of the branded that were placed under your supervision. If work resumed tomorrow, at what speed would your teams be operating?
 
 changeCamTarget({gasparIndex})
 
@@ -576,7 +577,7 @@ Yes ma'am. *Gáspár inhales deeply, steadying himself before answering.* I am r
 
 changeCamTarget({directorIndex})
 
-Yes, you have. Had even a fraction of their number survived, we may have been able to continue with some level of progression before the arrival of the next caravan. Now, we shall be force to wait for what could be weeks while the required hands are made ready.
+Yes, you have. Had even a fraction of their number survived, we may have been able to continue with some level of progression before the arrival of the next caravan. Now, we shall be forced to wait for what could be weeks while the required hands are made ready.
 
 playAnimation({leftGuardIndex},Idle_Back)
 playAnimation({rightGuardIndex},Idle_Back)
@@ -596,8 +597,9 @@ deactivate({gasparIndex})
 deactivate({leftGuardIndex})
 deactivate({rightGuardIndex})
 deactivate({adelaIndex})
+deactivate({taborBehindDeskIndex})
 
-playAnimation({taborBehindDeskIndex},OOC_Idle_Front)
+// playAnimation({taborBehindDeskIndex},OOC_Idle_Front)
 playAnimation({adelaIndex},OOC_Idle_Front)
 
 fadeBackIn(60)
@@ -608,19 +610,19 @@ I apologize for making you wait through that. This meeting should not be about p
 
 === dealingWithGaspar_1c === 
 
-// {// Asterisk on purpose
-// -wisdom >= 2: 
+{// Asterisk on purpose
+-wisdom >= 2: 
     *Why make me watch all of that? You could have have handled that at any time, but instead you waited until I was present. <Wis {wisdom}/2>
         Because, I have no doubt the conduct of the soldiers under my command has given you cause to distrust us. It is important to me that you are aware that some Lovashi still hold bravery, competence, and honor in high esteem.
         ->dealingWithGaspar_1c
-// }
+}
 
     +No apologies necessary. It was a treat to witness Gáspár get his comeuppance.
-        I expected you would enjoy that. Gáspár had some qualities that make for a fine soldier, but lacked many others required of a man of quality.
-        ->Close
+        I expected you would enjoy that. Gáspár had some traits that make for a fine soldier, but lacked many others required of a man of quality.
+        ->sealedBreach_2bb
     +Let's just get on with it. I'm eager to be rid of this camp.
         I understand. Let us not waste more of your time, then.
-        ->Close
+        ->sealedBreach_2bb
 
 === sealedBreach_2b === 
 
@@ -633,6 +635,10 @@ I apologize for making you wait through that. This meeting should not be about p
 === sealedBreach_2ba === 
 
 Masterfully done. If only my guards had shown similar tenacity. Then perhaps we would have never lost the mine to begin with. Now for the logistics of your reward.
+
+    ->sealedBreach_2bb
+
+=== sealedBreach_2bb ===
 
 prepItem()
 
@@ -671,38 +677,58 @@ If you consider this deal to have been favorably concluded, then perhaps I could
 
     {
     -true:
-    +You're a lord, but you run a mining camp? That seems somewhat beneath your station.
+    +You're a lord, but you administer a mining camp? That seems somewhat beneath your station.
         That is true. Or it normally would be. Everyone in this world has a master, branded. In having lost yours, I expect you will soon find another. But to give you an answer, my master needed a job done right, so he sent the man he most trusted to see it through.
         ->sealedBreach_2cb 
     +Your guards treat you with a lot of respect.
         They are good soldiers, and I have been leading warriors for the Confederation for a long time. I am at the end of my eigth decade now. Their reverence for me is born of an acknowledgment of the battles I have won, lost, and survived.
         ->sealedBreach_2cb 
     +You mentioned the 'Emancipation Conflict' before. What is that?
-        The Emancipation Conflict is the name my people gave to the struggle between yours and mine: the Craft Folk, and the Lovashi. It was born of a grudge from the time of my father's generation, when the king of the Lovashi gave the child of his mount to a Craft Folk sovereign to take as his steed.
+        The Emancipation Conflict is the name my people gave to the struggle between yours and mine: the Craft Folk, and the Lovashi. It was born of a grudge from the time of my father's generation, when the king of the Lovashi gave the child of his mount to a Craft Folk sovereign to take for a steed.
 
         This horse, a prince to my tribe, was mistreated, and died soon after. For this insult, the Lovashi descended on the Craft Folk seeking revenge. In their efforts to keep us at bay, your ancestors stole foals from our camps and raised them as slave mounts. My people share a language with horses; we are kin, in a way. In your ignorance, you could not teach them this language, and in so doing raised them to be simple beasts of burden.
 
-        The horses that the Craft Folk rear are now but feral children, mute animals without sentience or culture. The Conflict is our attempt to right this wrong. The brand is our tool to teach you the weight of your folly... or so my nephew, the count, would claim. He is young, and has seen too little of history to know it's cycles.
+        The horses that the Craft Folk rear are now but feral children, mute animals without sentience or culture. The Conflict is our attempt to right this wrong. The brand is our tool to teach you the weight of your folly... or so my nephew, the count, would claim. He is young, and has seen too little of history to know its cycles.
         ->sealedBreach_2cb
+    +I've never seen you about camp. Why stay cloistered within this office?
+        ~askedAboutDirectorStuckInOffice = true
+        I grow tired easily in my old age. But even were I still young I would likely not wander idly. Many years ago I suffered a lance through my left leg during the seige of Wudra. It remains set on reminding me of the closest I've come to passing from this life.
+        ->sealedBreach_2cb 
     } 
     {
     -beamToldAboutWudra:
     +A servant of yours said you fought the Masons at a place called Wudra.
-        Yes, that is true. Wudra is a city in the Kingdom of Masons, in the kingdom's western riverlands. There is a great river, named the Wandering Roil, and Wudra sits at it's mouth.
-
-        The Lovashi, over a decade ago, struck through the Masonic Gap with three great hordes. I was selected from my peers to lead the warriors meant to pacify the kingdom's western half. But it was at Wudra that we were turned back, unable to break it's walls or fjord the river it straddled.
-
-        We were a mane's hair from victory, but for a Mason host that releaved the city from seige at the worst moment. What was to be my opus became a trap I only escaped by the grace of the ficklest Gods. But They didn't let me leave without dealing me a wound for my hubris that still haunts my left leg.
-        ->sealedBreach_2cb 
+        Ah, yes, I was there. I lead a Lovashi horde that lay seige to that city.
+        ->WudraAnswer_1a
+    -askedAboutDirectorStuckInOffice:
+    +Wudra must have been some battle, then. I'd hear you speak of it, if you're willing.
+        I like to fixate on it less than my countrymen do, but very well.
+        ->WudraAnswer_1b
     }
 
     +Your disposition is less violent than some of your subordinates.
-        Violence is a tool, branded. The soldiers you speak of have been taught to use that tool. I am old enough to have both taught them why they should use it, and forgotten why myself.
+        Violence is a tool, branded. The soldiers you speak of have been taught to use that tool. I am old enough to have taught them why they should use it, and forgotten why myself.
         ->sealedBreach_2cb 
 
     +I'm finished with my questions.
         Then have you come to an answer?
         ->sealedBreach_2ca
+
+=== WudraAnswer_1a ===
+
+    +I've heard that many tales are told of your exploits there. Among the Lovashi, at least. Would you tell me what happened?
+        combineDialogue()
+
+        I can give my account, if you'd like. 
+        ->WudraAnswer_1b
+
+=== WudraAnswer_1b ===
+        Wudra is a city in the Kingdom of Masons, in the kingdom's western riverlands. There is a great river, the Wandering Roil, that meanders through Mason land, and Wudra sits at it's mouth.
+
+        The Confederation, over a decade ago, struck through the Masonic Gap with three great hordes. I was selected from my peers to lead the warriors meant to pacify the kingdom's western half. I believe Wudra captures the imagination of the younger generations because it was the deepest our people have ever cut into Craft Folk territory. To them, what was in truth a bitter defeat has instead come a tale that serves as a metric of our achievements, and a call to surpass it.
+        
+        It was at Wudra that we were turned back, just barely kept from breaking its walls by the river it straddled. We were a mane's hair from victory, until a Mason host releaved the city from seige at the worst moment. What was to be my opus became a trap I only escaped by the grace of the ficklest of Gods. But They didn't let me leave without dealing me a wound for my hubris that still haunts my left leg.
+        ->sealedBreach_2cb 
 
 === sealedBreach_3a ===
 
@@ -712,7 +738,7 @@ You have earned that right, but should you change your mind the offer stands unt
 
 === sealedBreach_3b ===
 
-Good. The work you've done so far has rendered me much profit. I'm glad to see you'll at least consider continuing it.
+Good. The work you've done so far has rendered me much profit. I'm glad to see you will at least consider continuing it.
 
     +We are not friends, Director. You repulse me to my core; I am simply in no place to turn down the coin.
         ->sealedBreach_3ba
@@ -740,32 +766,47 @@ I have written a letter to a comrade of mine. He has taken up residence in the t
 
 === sealedBreach_3c ===
 
-    +Why all this secrecy? This hardly seems like the average messenger job.
-        As 
+    +Why all this secrecy? This hardly seems like your average messenger job.
+        My friend is not well liked by the kingdom. He is no friend to the Masons, but neither is he an enemy. Things are simply more convenient for him if discretion is used while attempting contact.
+
+        I can't explain more than that, it isn't my place to betray the secrets of a friend. But should you keep them as well, Vidra will be more inclined to give you answers. Think of it as a test; one on which further employment and rewards are contingent. 
         ->sealedBreach_3c
-    +I suspect the Masons would be interested in the correspondances of a Lovashi lord. What is stopping me from bringing this letter to the nearest sheriff once I'm on their land?
+    +I suspect the Masons would be interested in the correspondences of a Lovashi lord. What is stopping me from bringing this letter to the nearest sheriff once I'm on their land, or reading it myself for that matter?
+        Do so if you wish, but know that the letter is written in the horsetongue, and contrived via innuendo. I doubt it would mean much to anyone but my friend.
+
+        And think of the consequences of such a choice: a branded, recently exiled and trusted with one my personal letters, giving it up for personal gain? That would be highly suspect. They would see you as a traitor at best and a saboteur at worst. Hardly the best first impresson you could make to your new hosts.
         ->sealedBreach_3c
-    +Why not send one of your guards. They would get there quicker seeing as I cannot even set out for a few more weeks.
+    +Why not send one of your guards? They would get there quicker seeing as I cannot even set out for a few more weeks.
+        My guards lack the subtlety necessary for such a task, even if they could make the journey quicker. The brand gives you a reason to make the journey that they would lack. Certainty of deliver outweighs haste in this matter.
         ->sealedBreach_3c
     +The job seems simple. I'll do it.
-        ->Close
+        ->sealedBreach_3d
     +There's more going on here than I'm comfortable with. I'll pass.
+
+        Unfortunate, but I understand. I will keep the letter ready, should you change your mind before you set out.
         ->Close
 
-=== sealedBreach_3cb ===
+=== sealedBreach_3d ===
 
-        ->Close
+prepItem()
+
+I'm glad you are so amenable. Here is what I promised upfront, I expect it will cover food and board on the road and then some.
+
+giveCoins(100)&
+giveItem(3,11,1)
+
+->sealedBreach_Finished
 
 === sealedBreach_Finished ===
 
 {
 -gasparBroughtToExecution:
 
-Because of how unorthodox a pardon is for one of the branded, I shall need to introduce you to the guards of the camp so that they understand you are not to be harrassed. It would be best for that to happen during Gáspár's execution, as much of the camp will be gathered for it. The execution will take place in the unfinished section in the camp's northwest. Until then, farewell.
+Because of how unorthodox a pardon is for one of the branded, I will need to introduce you to the guards of the camp so they understand you are not to be given work duties, or harrassed. It would be best for that to happen during Gáspár's execution, as much of the camp will be gathered for it. The execution will take place in the unfinished section in the camp's northwest. When you are ready, make your way there. Until then, farewell.
 
 -else:
 
-Because of how unorthodox a pardon is for one of the branded, I shall need to introduce you to the guards of the camp so that they understand you are not to be harrassed. I will have the guards gathered for it. When you are ready, make your way to the northwest section of the camp. Until then, farewell.
+Because of how unorthodox a pardon is for one of the branded, I will need to introduce you to the guards of the camp so they understand you are not to be given work duties, or harrassed. I will have them gather in the camp's northwest so they can meet you. When you are ready, make your way there. Until then, farewell.
 
 }
 

@@ -145,6 +145,7 @@ public static class ItemList
 	public const int weftsRationsIndex = 8;
 	public const int directorsSealIndex = 9;
     public const int lovashiRingIndex = 10;
+    public const int vidrasLetterIndex = 11;
 	
 	public const int mineArmoryKeyIndex = 0;
 	public const int pitCellKeyIndex = 1;
@@ -344,8 +345,8 @@ public static class ItemList
 		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, laszloBadgeIndex), "Guard László's Badge", "This bronze badge is in the shape of a large coin, with the Lovashi symbol of a horse and it's rider etched into it.", laszloBadgeIndex));
 		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, weftsRationsIndex), "Weft's Rations", "These rations look much like all the others, except a little bit larger.", weftsRationsIndex));
 		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, directorsSealIndex), "Director's Seal", "A silver medallion, complete with chain. A lance, pointed sharply to the west, is engraved into it.", directorsSealIndex));
-		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, lovashiRingIndex), "Lovashi Ring", "An iron ring, adorned with silver filigree. The dull metal of the ring's band makes the argent wire appear all the more lusterous when held in sunlight.", directorsSealIndex));
-
+		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, lovashiRingIndex), "Lovashi Ring", "An iron ring, adorned with silver filigree. The dull metal of the ring's band makes the argent wire appear all the more lusterous when held in sunlight.", lovashiRingIndex));
+		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, vidrasLetterIndex), "Vidra's Letter", "A thin note wrapped in sheep's skin to keep water from the ink.", vidrasLetterIndex));
 
 		//Key(string key, string loreDescription, int ID)
 
