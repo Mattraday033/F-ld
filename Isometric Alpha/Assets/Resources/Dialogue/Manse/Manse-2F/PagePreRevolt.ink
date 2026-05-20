@@ -939,7 +939,7 @@ I have written a letter to a comrade of mine. He has taken up residence in the t
 
     +What is your friend's name?
 
-        He has changed names many times while I have known him. He is unlikely to still keep what I used for him last. But he will know you as an associate if you call him by his title: 'Vidra'.
+        He has changed names many times while I have known him. He is unlikely to have kept what I used for him last. But he will know you as an associate if you call him by his title: 'Vidra'.
 
         A new branded in town will be quite the novelty to him. Pay for a room at one of the local inns, spend some time out in the open. He certainly will find you.
         ->sealedBreach_3c

@@ -7,7 +7,7 @@ using Ink.Runtime;
 
 public static class Purse
 {
-	public const string moneySymbol = " g";
+	public const string moneySymbol = "gp";
 	
 	private static int coins = 0;
 
