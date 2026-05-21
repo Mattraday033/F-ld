@@ -23,8 +23,8 @@ public class WorldMapPopUpWindow : PopUpWindow, IEscapable
     private readonly static Vector3 farthestInZoomScale = new Vector3(150f, 150f, 1f);
 
     public ZoomLevel currentZoomLevel = ZoomLevel.FarthestIn;
-    public Button zoomInButton;
-    public Button zoomOutButton;
+    public ThreeRingButton zoomInButton;
+    public ThreeRingButton zoomOutButton;
     public RectTransform worldMapGridTransform;
 
     public Dictionary<string, WorldMapLandmark> landmarkDict = new Dictionary<string, WorldMapLandmark>();
@@ -58,6 +58,9 @@ public class WorldMapPopUpWindow : PopUpWindow, IEscapable
 
 		instance = this;
 		NotificationManager.OnDeleteAllNotifications.Invoke();
+
+        zoomInButton.lockInRestingPosition();
+        zoomOutButton.lockInRestingPosition();
 
         instantiateLandmarks();
         setZoomButtonInteractability();
@@ -124,16 +127,16 @@ public class WorldMapPopUpWindow : PopUpWindow, IEscapable
         switch(currentZoomLevel)
         {
             case ZoomLevel.FarthestOut:
-                zoomOutButton.interactable = false;
-                zoomInButton.interactable = true;
+                zoomOutButton.setInteractable(false);
+                zoomInButton.setInteractable(true);
                 return;
             case ZoomLevel.Middle:
-                zoomOutButton.interactable = true;
-                zoomInButton.interactable = true;
+                zoomOutButton.setInteractable(true);
+                zoomInButton.setInteractable(true);
                 return;
             case ZoomLevel.FarthestIn:
-                zoomOutButton.interactable = true;
-                zoomInButton.interactable = false;
+                zoomOutButton.setInteractable(true);
+                zoomInButton.setInteractable(false);
                 return;
         }
     }

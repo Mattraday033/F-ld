@@ -54,25 +54,6 @@ public static class GateSpawnInfoList
 
         #endregion
 
-        #region NWCamp
-
-        list = new List<GateSpawnInfo>();
-
-        list.Add(new GateSpawnInfo(Constants.indexZero,
-                                    NPCNameList.awkwardRubble,
-                                    LocationNameList.campNorthWest,
-                                    new Vector3Int(-1, 2),
-                                    PrefabNames.blockRubble,
-                                    Constants.sizeTwo,
-                                    Axis.DescendingX,
-                                    TutorialSequenceList.fallenBeamTargetHash,
-                                    useRubbleColor));
-
-        gateSpawnInfoDict.Add(LocationNameList.campNorthWest, list);
-
-        #endregion
-
-
         #region Guard House NE
 
         list = new List<GateSpawnInfo>();
@@ -88,7 +69,6 @@ public static class GateSpawnInfoList
         gateSpawnInfoDict.Add(LocationNameList.guardHouseNorthEast, list);
 
         #endregion
-
         #region Guard House SW
 
         list = new List<GateSpawnInfo>();
@@ -127,7 +107,6 @@ public static class GateSpawnInfoList
 
         #endregion
 
-
         #region CenterCamp
 
         list = new List<GateSpawnInfo>();
@@ -143,7 +122,6 @@ public static class GateSpawnInfoList
         gateSpawnInfoDict.Add(LocationNameList.campCenter, list);
 
         #endregion
-
         #region Camp Mine Entrance
 
         list = new List<GateSpawnInfo>();
@@ -151,7 +129,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexZero,
                                     NPCNameList.barracksGate,
                                     LocationNameList.campMineEntrance,
-                                    new Vector3Int(11, -14),
+                                    new Vector3Int(12, -14),
                                     PrefabNames.portcullis2x1Path,
                                     Constants.sizeTwo,
                                     Axis.DescendingY));
@@ -159,7 +137,6 @@ public static class GateSpawnInfoList
         gateSpawnInfoDict.Add(LocationNameList.campMineEntrance, list);
 
         #endregion
-
         #region ManseCamp
 
         list = new List<GateSpawnInfo>();
@@ -193,6 +170,24 @@ public static class GateSpawnInfoList
         gateSpawnInfoDict.Add(LocationNameList.campManse, list);
 
         #endregion
+        #region NWCamp
+
+        list = new List<GateSpawnInfo>();
+
+        list.Add(new GateSpawnInfo(Constants.indexZero,
+                                    NPCNameList.awkwardRubble,
+                                    LocationNameList.campNorthWest,
+                                    new Vector3Int(-1, 2),
+                                    PrefabNames.blockRubble,
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX,
+                                    TutorialSequenceList.fallenBeamTargetHash,
+                                    useRubbleColor));
+
+        gateSpawnInfoDict.Add(LocationNameList.campNorthWest, list);
+
+        #endregion
+
 
         #region Mine
 

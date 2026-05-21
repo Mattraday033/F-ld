@@ -123,7 +123,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3353413178038779768}
   - component: {fileID: 3463083924764755211}
-  - component: {fileID: 5317835432076295696}
   - component: {fileID: 2630351042119805528}
   - component: {fileID: 1178406071981503481}
   - component: {fileID: 8854415541263736127}
@@ -166,62 +165,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 27518518328403495}
   m_CullTransparentMesh: 1
---- !u!114 &5317835432076295696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27518518328403495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 701671425835580492}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2695691174781450946}
-        m_TargetAssemblyTypeName: CharacterCreationPopUpWindow, Assembly-CSharp
-        m_MethodName: incrementStat
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2630351042119805528}
-          m_ObjectArgumentAssemblyTypeName: EnumButtonPasser, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &2630351042119805528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,8 +210,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bf510fcece88d4290c883cafcd9982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 701671425835580492}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2695691174781450946}
+        m_TargetAssemblyTypeName: CharacterCreationPopUpWindow, Assembly-CSharp
+        m_MethodName: incrementStat
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2630351042119805528}
+          m_ObjectArgumentAssemblyTypeName: EnumButtonPasser, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   topRing: {fileID: 3353413178038779768}
   middleRing: {fileID: 458947025956581238}
+  midRingResting: {x: 0, y: 1, z: 0}
+  topRingResting: {x: 0, y: 1.5, z: 0}
 --- !u!114 &778326344933110412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   decisionType: 8
-  button: {fileID: 5317835432076295696}
+  button: {fileID: 0}
   attachedIconText: {fileID: 4566331278253314101}
 --- !u!1 &194148247259937091
 GameObject:
@@ -2365,7 +2354,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2372286531671114824}
   - component: {fileID: 2476308722772749389}
-  - component: {fileID: 1140157748210085563}
   - component: {fileID: 3430203048353082342}
   - component: {fileID: 760151402923887880}
   - component: {fileID: 496317666776199227}
@@ -2407,62 +2395,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519344214390589331}
   m_CullTransparentMesh: 1
---- !u!114 &1140157748210085563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1519344214390589331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 4103763452490051248}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2695691174781450946}
-        m_TargetAssemblyTypeName: CharacterCreationPopUpWindow, Assembly-CSharp
-        m_MethodName: decrementStat
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 3430203048353082342}
-          m_ObjectArgumentAssemblyTypeName: EnumButtonPasser, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &3430203048353082342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2488,8 +2420,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bf510fcece88d4290c883cafcd9982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2695691174781450946}
+        m_TargetAssemblyTypeName: CharacterCreationPopUpWindow, Assembly-CSharp
+        m_MethodName: decrementStat
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 3430203048353082342}
+          m_ObjectArgumentAssemblyTypeName: EnumButtonPasser, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   topRing: {fileID: 2372286531671114824}
   middleRing: {fileID: 656936972694653573}
+  midRingResting: {x: 0, y: 0, z: 0}
+  topRingResting: {x: 0, y: 0, z: 0}
 --- !u!114 &496317666776199227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2588,7 +2566,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3960454864805849321}
   - component: {fileID: 2914026083971830426}
-  - component: {fileID: 5887141589310089601}
   - component: {fileID: 4395242094349008329}
   - component: {fileID: 586982149832041576}
   - component: {fileID: 7106362686620568238}
@@ -2631,62 +2608,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1737871318525718966}
   m_CullTransparentMesh: 1
---- !u!114 &5887141589310089601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737871318525718966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1279934074095250397}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2695691174781450946}
-        m_TargetAssemblyTypeName: CharacterCreationPopUpWindow, Assembly-CSharp
-        m_MethodName: incrementStat
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 4395242094349008329}
-          m_ObjectArgumentAssemblyTypeName: EnumButtonPasser, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &4395242094349008329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2732,8 +2653,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bf510fcece88d4290c883cafcd9982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1279934074095250397}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2695691174781450946}
+        m_TargetAssemblyTypeName: CharacterCreationPopUpWindow, Assembly-CSharp
+        m_MethodName: incrementStat
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 4395242094349008329}
+          m_ObjectArgumentAssemblyTypeName: EnumButtonPasser, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   topRing: {fileID: 3960454864805849321}
   middleRing: {fileID: 2171133939362052327}
+  midRingResting: {x: 0, y: 1, z: 0}
+  topRingResting: {x: 0, y: 1.5, z: 0}
 --- !u!114 &1347351015434085661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2816,7 +2783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   decisionType: 8
-  button: {fileID: 5887141589310089601}
+  button: {fileID: 0}
   attachedIconText: {fileID: 2819593293475497892}
 --- !u!1 &1893900455140239851
 GameObject:
@@ -6506,7 +6473,6 @@ GameObject:
   m_Component:
   - component: {fileID: 718272281838715715}
   - component: {fileID: 812410949987265350}
-  - component: {fileID: 2794898856876861872}
   - component: {fileID: 468754389452909805}
   - component: {fileID: 2564597066696870403}
   - component: {fileID: 3456680477128193840}
@@ -6548,62 +6514,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4327419789530693784}
   m_CullTransparentMesh: 1
---- !u!114 &2794898856876861872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4327419789530693784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1290459154839022011}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2695691174781450946}
-        m_TargetAssemblyTypeName: CharacterCreationPopUpWindow, Assembly-CSharp
-        m_MethodName: decrementStat
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 468754389452909805}
-          m_ObjectArgumentAssemblyTypeName: EnumButtonPasser, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &468754389452909805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6629,8 +6539,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bf510fcece88d4290c883cafcd9982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2695691174781450946}
+        m_TargetAssemblyTypeName: CharacterCreationPopUpWindow, Assembly-CSharp
+        m_MethodName: decrementStat
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 468754389452909805}
+          m_ObjectArgumentAssemblyTypeName: EnumButtonPasser, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   topRing: {fileID: 718272281838715715}
   middleRing: {fileID: 2307591712060198286}
+  midRingResting: {x: 0, y: 0, z: 0}
+  topRingResting: {x: 0, y: 0, z: 0}
 --- !u!114 &3456680477128193840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7510,7 +7466,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7695699613553129329}
   - component: {fileID: 8379635375082343682}
-  - component: {fileID: 975476428424885785}
   - component: {fileID: 6973203713234936401}
   - component: {fileID: 6061743492205542384}
   - component: {fileID: 4513765193990640950}
@@ -7553,62 +7508,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4910307263053901358}
   m_CullTransparentMesh: 1
---- !u!114 &975476428424885785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4910307263053901358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 5618803431278130245}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2695691174781450946}
-        m_TargetAssemblyTypeName: CharacterCreationPopUpWindow, Assembly-CSharp
-        m_MethodName: incrementStat
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 6973203713234936401}
-          m_ObjectArgumentAssemblyTypeName: EnumButtonPasser, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &6973203713234936401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7654,8 +7553,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bf510fcece88d4290c883cafcd9982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 5618803431278130245}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2695691174781450946}
+        m_TargetAssemblyTypeName: CharacterCreationPopUpWindow, Assembly-CSharp
+        m_MethodName: incrementStat
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 6973203713234936401}
+          m_ObjectArgumentAssemblyTypeName: EnumButtonPasser, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   topRing: {fileID: 7695699613553129329}
   middleRing: {fileID: 4763586168546764671}
+  midRingResting: {x: 0, y: 1, z: 0}
+  topRingResting: {x: 0, y: 1.5, z: 0}
 --- !u!114 &5658775324372793989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7738,7 +7683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   decisionType: 8
-  button: {fileID: 975476428424885785}
+  button: {fileID: 0}
   attachedIconText: {fileID: 8870956125036992572}
 --- !u!1 &4941455763514210202
 GameObject:
@@ -11019,7 +10964,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6182618086391684315}
   - component: {fileID: 6304056262928200926}
-  - component: {fileID: 8859630513477121576}
   - component: {fileID: 6537989789972919157}
   - component: {fileID: 9200156677598369179}
   - component: {fileID: 8341328576196995240}
@@ -11061,62 +11005,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6932403151193546496}
   m_CullTransparentMesh: 1
---- !u!114 &8859630513477121576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6932403151193546496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 5607653829842384419}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2695691174781450946}
-        m_TargetAssemblyTypeName: CharacterCreationPopUpWindow, Assembly-CSharp
-        m_MethodName: decrementStat
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 6537989789972919157}
-          m_ObjectArgumentAssemblyTypeName: EnumButtonPasser, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &6537989789972919157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11142,8 +11030,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bf510fcece88d4290c883cafcd9982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2695691174781450946}
+        m_TargetAssemblyTypeName: CharacterCreationPopUpWindow, Assembly-CSharp
+        m_MethodName: decrementStat
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 6537989789972919157}
+          m_ObjectArgumentAssemblyTypeName: EnumButtonPasser, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   topRing: {fileID: 6182618086391684315}
   middleRing: {fileID: 8952299396539765270}
+  midRingResting: {x: 0, y: 0, z: 0}
+  topRingResting: {x: 0, y: 0, z: 0}
 --- !u!114 &8341328576196995240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12062,7 +11996,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4888447233252601978}
   - component: {fileID: 6724348289365723657}
-  - component: {fileID: 2635248416925085970}
   - component: {fileID: 5322714939264034138}
   - component: {fileID: 9008462917313543419}
   - component: {fileID: 1711301177991713341}
@@ -12105,62 +12038,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7872068592155224357}
   m_CullTransparentMesh: 1
---- !u!114 &2635248416925085970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7872068592155224357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 7269409233515770702}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2695691174781450946}
-        m_TargetAssemblyTypeName: CharacterCreationPopUpWindow, Assembly-CSharp
-        m_MethodName: incrementStat
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 5322714939264034138}
-          m_ObjectArgumentAssemblyTypeName: EnumButtonPasser, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &5322714939264034138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12206,8 +12083,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bf510fcece88d4290c883cafcd9982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 7269409233515770702}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2695691174781450946}
+        m_TargetAssemblyTypeName: CharacterCreationPopUpWindow, Assembly-CSharp
+        m_MethodName: incrementStat
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 5322714939264034138}
+          m_ObjectArgumentAssemblyTypeName: EnumButtonPasser, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   topRing: {fileID: 4888447233252601978}
   middleRing: {fileID: 7710293112211595380}
+  midRingResting: {x: 0, y: 1, z: 0}
+  topRingResting: {x: 0, y: 1.5, z: 0}
 --- !u!114 &7463551933959028110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12290,7 +12213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   decisionType: 8
-  button: {fileID: 2635248416925085970}
+  button: {fileID: 0}
   attachedIconText: {fileID: 5908768090666377015}
 --- !u!1 &7892643059477835921
 GameObject:
@@ -13066,7 +12989,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5598811440961882954}
   - component: {fileID: 5693511961544516431}
-  - component: {fileID: 7101138883951649209}
   - component: {fileID: 4811093588904666340}
   - component: {fileID: 7481163921199809034}
   - component: {fileID: 7763556043533877049}
@@ -13108,62 +13030,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8668088824352835729}
   m_CullTransparentMesh: 1
---- !u!114 &7101138883951649209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8668088824352835729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 6173740478773076402}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2695691174781450946}
-        m_TargetAssemblyTypeName: CharacterCreationPopUpWindow, Assembly-CSharp
-        m_MethodName: decrementStat
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 4811093588904666340}
-          m_ObjectArgumentAssemblyTypeName: EnumButtonPasser, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &4811093588904666340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13189,8 +13055,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bf510fcece88d4290c883cafcd9982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2695691174781450946}
+        m_TargetAssemblyTypeName: CharacterCreationPopUpWindow, Assembly-CSharp
+        m_MethodName: decrementStat
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 4811093588904666340}
+          m_ObjectArgumentAssemblyTypeName: EnumButtonPasser, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   topRing: {fileID: 5598811440961882954}
   middleRing: {fileID: 7224653331444483463}
+  midRingResting: {x: 0, y: 0, z: 0}
+  topRingResting: {x: 0, y: 0, z: 0}
 --- !u!114 &7763556043533877049
 MonoBehaviour:
   m_ObjectHideFlags: 0

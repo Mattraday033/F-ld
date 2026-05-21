@@ -296,7 +296,7 @@ public static class TransitionSpawnInfoList
 
         list = new List<TransitionSpawnInfo>();
 
-        list.Add(new TransitionSpawnInfo(LocationNameList.campMineEntrance, LocationNameList.guardHouseSouthWest, new Vector3Int(12, -14), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingY, outputMultiplier: twoSpaceMultiplier));
+        list.Add(new TransitionSpawnInfo(LocationNameList.campMineEntrance, LocationNameList.guardHouseSouthWest, new Vector3Int(13, -14), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingY, outputMultiplier: twoSpaceMultiplier));
 
         list.Add(new TransitionSpawnInfo(LocationNameList.campMineEntrance, LocationNameList.stockhouse, new Vector3Int(17, 6), Facing.NorthWest, Constants.sizeThree, Axis.DescendingX, outputMultiplier: twoSpaceMultiplier));
         list.Add(new TransitionSpawnInfoWithCorner(startingIndexThree, LocationNameList.campMineEntrance, LocationNameList.stockhouse, new Vector3Int(15, 4), Facing.SouthWest, Constants.sizeThree, Axis.DescendingY, outputMultiplier: twoSpaceMultiplier));
@@ -333,7 +333,6 @@ public static class TransitionSpawnInfoList
         transitionSpawnInfoDict.Add(LocationNameList.campManse, list);
 
         #endregion
-
         #region NWCamp
 
         list = new List<TransitionSpawnInfo>();
