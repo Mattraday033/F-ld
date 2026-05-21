@@ -172,7 +172,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     #region Damage/Crit/Armor
 
-    public virtual string getDamageTotalForDisplay()
+    public override string getDamageTotalForDisplay()
     {
         if (cannotDealDamage || getDamageFormulaTotal() <= 0)
         {
@@ -182,7 +182,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         return "" + getDamageFormulaTotal();
     }
 
-    public virtual string getDamageFormulaForDisplay()
+    public override string getDamageFormulaForDisplay()
     {
         if (cannotDealDamage || getDamageFormulaTotal() <= 0)
         {
@@ -192,12 +192,12 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         return getFinalDamageFormula();
     }
 
-    public virtual int getDamageFormulaTotal()
+    public override int getDamageFormulaTotal()
     {
         return DamageCalculator.calculateFormula(getFinalDamageFormula(), getActorStats());
     }
 
-    public virtual string getFinalDamageFormula()
+    public override string getFinalDamageFormula()
     {
 		if(cannotDealDamage)
 		{
@@ -207,7 +207,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         return gatherAllNonActionFormulas(a => a.getDamageFormula());
     }
 
-    public virtual string getFinalCritFormula()
+    public override string getFinalCritFormula()
     {
         string finalCritFormula = gatherAllNonActionFormulas(a => a.getCritFormula());
         //DamageCalculator.combineFormulas(getCritFormula(), );
@@ -223,14 +223,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         return finalCritFormula;
     }
 
-    protected virtual string gatherAllNonActionFormulas(FormulaDelegate<StatBoostSource> getFormula)
-    {
-        string allStats = getAllOfOneStatFormula<StatBoostSource>(getStatSource().getAllStatBoosts(), t => getFormula(t));
-
-        return DamageCalculator.combineFormulas(getFormula(this), allStats);
-    }
-
-    public virtual int getCritFormulaTotal()
+    public override int getCritFormulaTotal()
     {
         return DamageCalculator.calculateFormula(getFinalCritFormula(), getActorStats());
     }
@@ -245,7 +238,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         return getCritFormulaTotal() + "%";
     }
 
-    public virtual string getCritFormulaForDisplay()
+    public override string getCritFormulaForDisplay()
     {
         if (cannotDealDamage || getCritFormulaTotal() <= 0)
         {
@@ -253,6 +246,13 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         }
 
         return "(" + getFinalCritFormula() + ")%";
+    }
+
+    protected virtual string gatherAllNonActionFormulas(FormulaDelegate<StatBoostSource> getFormula)
+    {
+        string allStats = getAllOfOneStatFormula<StatBoostSource>(getStatSource().getAllStatBoosts(), t => getFormula(t));
+
+        return DamageCalculator.combineFormulas(getFormula(this), allStats);
     }
 
     #endregion

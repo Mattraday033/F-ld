@@ -31,8 +31,6 @@ public class KeyBindingSettingsManager : MonoBehaviour
 
     public Transform scrollableArea;
 
-    public Scrollbar scrollbar;
-
     public static KeyBind keybindToOverwrite = null;
 
     public GameObject unassignedKeybindsWarning;
@@ -96,7 +94,6 @@ public class KeyBindingSettingsManager : MonoBehaviour
 
     void Update()
     {
-        scrollbar.size = 0.1f;
         KeyPressManager.updateKeyBools();
 
         if(listeningForKeyBinding() && !KeyPressManager.handlingPrimaryKeyPress)

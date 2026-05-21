@@ -165,7 +165,7 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 
 	public string getLoreDescription()
 	{
-		return loreDescription;
+		return "<i>"+loreDescription+"</i>";
 	}
 
 	//only use for quest item save/load editting lore descriptions
@@ -498,11 +498,11 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 	{
 		describeSelfFull(panel);
 
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.inUI && 
-            AbilityGridSideTab.getDescribableListType() == DescribableList.MainHandWeaponsAsActions)
-        {
-            DescriptionPanel.disableText(panel.statText);
-        }
+        // if(PlayerOOCStateManager.currentActivity == OOCActivity.inUI && 
+        //     AbilityGridSideTab.getDescribableListType() == DescribableList.MainHandWeaponsAsActions)
+        // {
+        //     DescriptionPanel.disableText(panel.statText);
+        // }
 	}
 
 	public bool hasDescisionPanelType()

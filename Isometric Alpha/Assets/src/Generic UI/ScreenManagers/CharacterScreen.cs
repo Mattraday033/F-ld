@@ -13,6 +13,9 @@ public class CharacterScreen : ScreenManager, ICounter
 
     public GameObject slotsIconColHeader;
 
+    public GameObject damageIconColHeader;
+    public GameObject critIconColHeader;
+
     public GameObject amountIconColHeader;
     public GameObject lvlIconColHeader;
     public GameObject strIconColHeader;
@@ -92,7 +95,20 @@ public class CharacterScreen : ScreenManager, ICounter
 
         switch(currentList)
         {
+            case DescribableList.MainHandWeaponsAsActions:
+                damageIconColHeader.SetActive(true);
+                critIconColHeader.SetActive(true);
+                slotsIconColHeader.SetActive(false);
+                amountIconColHeader.SetActive(false);
+                lvlIconColHeader.SetActive(false);
+                strIconColHeader.SetActive(false);
+                dexIconColHeader.SetActive(false);
+                wisIconColHeader.SetActive(false);
+                chaIconColHeader.SetActive(false);
+                break;
             case DescribableList.CombatUsableItems:
+                damageIconColHeader.SetActive(false);
+                critIconColHeader.SetActive(false);
                 slotsIconColHeader.SetActive(true);
                 amountIconColHeader.SetActive(true);
                 lvlIconColHeader.SetActive(false);
@@ -102,6 +118,8 @@ public class CharacterScreen : ScreenManager, ICounter
                 chaIconColHeader.SetActive(false);
                 break;
             case DescribableList.CharacterSpecificAbilities:
+                damageIconColHeader.SetActive(false);
+                critIconColHeader.SetActive(false);
                 slotsIconColHeader.SetActive(true);
                 amountIconColHeader.SetActive(false);
                 lvlIconColHeader.SetActive(true);
@@ -111,6 +129,8 @@ public class CharacterScreen : ScreenManager, ICounter
                 chaIconColHeader.SetActive(false);
                 break;
             case DescribableList.Strength:
+                damageIconColHeader.SetActive(false);
+                critIconColHeader.SetActive(false);
                 slotsIconColHeader.SetActive(true);
                 amountIconColHeader.SetActive(false);
                 lvlIconColHeader.SetActive(false);
@@ -120,6 +140,8 @@ public class CharacterScreen : ScreenManager, ICounter
                 chaIconColHeader.SetActive(false);
                 break;
             case DescribableList.Dexterity:
+                damageIconColHeader.SetActive(false);
+                critIconColHeader.SetActive(false);
                 slotsIconColHeader.SetActive(true);
                 amountIconColHeader.SetActive(false);
                 lvlIconColHeader.SetActive(false);
@@ -129,6 +151,8 @@ public class CharacterScreen : ScreenManager, ICounter
                 chaIconColHeader.SetActive(false);
                 break;
             case DescribableList.Wisdom:
+                damageIconColHeader.SetActive(false);
+                critIconColHeader.SetActive(false);
                 slotsIconColHeader.SetActive(true);
                 amountIconColHeader.SetActive(false);
                 lvlIconColHeader.SetActive(false);
@@ -138,6 +162,8 @@ public class CharacterScreen : ScreenManager, ICounter
                 chaIconColHeader.SetActive(false);
                 break;
             case DescribableList.Charisma:
+                damageIconColHeader.SetActive(false);
+                critIconColHeader.SetActive(false);
                 slotsIconColHeader.SetActive(true);
                 amountIconColHeader.SetActive(false);
                 lvlIconColHeader.SetActive(false);
@@ -147,6 +173,8 @@ public class CharacterScreen : ScreenManager, ICounter
                 chaIconColHeader.SetActive(true);
                 break;
             default:
+                damageIconColHeader.SetActive(false);
+                critIconColHeader.SetActive(false);
                 slotsIconColHeader.SetActive(false);
                 amountIconColHeader.SetActive(false);
                 lvlIconColHeader.SetActive(false);

@@ -9,6 +9,50 @@ public abstract class StatBoostSource : INameSource
 
     public abstract Stats getStatSource();
 
+    #region For Display
+
+    public virtual string getDamageTotalForDisplay()
+    {
+        return "" + getDamageFormulaTotal();
+    }
+
+    public virtual string getDamageFormulaForDisplay()
+    {
+        return getFinalDamageFormula();
+    }
+
+    public virtual int getDamageFormulaTotal()
+    {
+        return 0;
+    }
+
+    public virtual string getFinalDamageFormula()
+    {
+        return "";
+    }
+
+    public virtual string getFinalCritFormula()
+    {
+        return "";
+    }
+
+    public virtual int getCritFormulaTotal()
+    {
+        return 0;
+    }
+
+    public string getCritTotalForDisplay()
+    {
+        return getCritFormulaTotal() + "%";
+    }
+
+    public virtual string getCritFormulaForDisplay()
+    {
+        return "(" + getFinalCritFormula() + ")%";
+    }
+
+    #endregion
+
     #region Generic Stats
 
     public virtual string getArmorFormula()

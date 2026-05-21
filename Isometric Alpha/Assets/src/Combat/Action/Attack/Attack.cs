@@ -284,11 +284,11 @@ public class Attack : CombatAction, IJSONConvertable
 		base.describeSelfFull(panel);
 		getSourceItem().describeSelfFull(panel);
 
-		if (CombatStateManager.inCombat) //will use the item classes damage/crit display methods if not in combat
-		{
-			DescriptionPanel.setText(panel.damageText, getDamageTotalForDisplay());
-			DescriptionPanel.setText(panel.critRatingText, getCritTotalForDisplay());
-		}
+		// if (CombatStateManager.inCombat) //will use the item classes damage/crit display methods if not in combat
+		// {
+        DescriptionPanel.setText(panel.damageText, getDamageTotalForDisplay());
+        DescriptionPanel.setText(panel.critRatingText, getCritTotalForDisplay());
+		// }
 
 		if (panel.amountText != null && !(panel.amountText is null))
 		{
@@ -306,6 +306,9 @@ public class Attack : CombatAction, IJSONConvertable
         {
             getActorStats().setHeadSprite(panel);
         }
+
+        DescriptionPanel.setText(panel.damageText, getDamageTotalForDisplay());
+        DescriptionPanel.setText(panel.critRatingText, getCritTotalForDisplay());
 
 		panel.setObjectBeingDescribed(this);
 	}

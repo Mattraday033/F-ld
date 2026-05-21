@@ -361,10 +361,10 @@ public static class HoverMessageList
 
     private const string invulnerableIconMessage = "Invulnerability provides a flat reduction to incoming damage per hit. Can only reduce incoming damage down to 1. Applied before the damage reduction from Armor Score.";
     private const string vulnerableIconMessage = "Extra damage that is applied when damage is taken. Applied before the damage reduction from Armor Score.";
-    private const string healingBoostIconMessage = "";
+    private const string healingBoostIconMessage = "Extra healing that is applied when a creature receives healing.";
 
     public const string bonusDamageKey = "Bonus Damage";
-    private const string bonusDamageMessage = "Bonus Damage is added to the damage of all of your Abilities. Your Bonus Damage is equal to the highest Base Damage of all of your equipped Weapons. For example, a weapon with a Damage Formula of '3S + 5' provides 5 Bonus Damage. Hold 'Alt' when viewing a Weapon's stats to reveal formulas.";
+    private const string bonusDamageMessage = "Bonus Damage is added to the damage of all of your Abilities. Your Bonus Damage is equal to the highest Base Damage of all of your equipped Weapons. For example, a Weapon with a Damage Formula of '3S + 5' provides 5 Bonus Damage. Hold 'Alt' when viewing a Weapon's stats to reveal formulas.";
 
     public const string weaponSlotKey = "Weapon Slots";
     private const string weaponSlotMessage = "The number of Main-Hand Weapons you can have equipped to your Action Wheel. The higher a Character's Wisdom, the more Weapon Slots that Character has.";

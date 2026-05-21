@@ -323,9 +323,9 @@ MonoBehaviour:
   rangeText: {fileID: 0}
   invulnerabilityText: {fileID: 0}
   armorRatingText: {fileID: 0}
-  damageText: {fileID: 0}
+  damageText: {fileID: 5305635936013051407}
   offHandDamageText: {fileID: 0}
-  critRatingText: {fileID: 0}
+  critRatingText: {fileID: 8887877163351969096}
   offHandCritRatingText: {fileID: 0}
   timerText: {fileID: 0}
   levelText: {fileID: 8887877163351969096}
@@ -336,6 +336,7 @@ MonoBehaviour:
   wisText: {fileID: 0}
   chaText: {fileID: 0}
   nestedDescriptionPanel: {fileID: 0}
+  inventoryGridRowButton: {fileID: 0}
   newAbilityText: {fileID: 4043053772543761242}
 --- !u!114 &2454175176693801855
 MonoBehaviour:

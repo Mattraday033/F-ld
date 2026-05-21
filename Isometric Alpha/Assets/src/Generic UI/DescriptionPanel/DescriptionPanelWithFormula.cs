@@ -35,8 +35,17 @@ public class DescriptionPanelWithFormula : DescriptionPanel
 
         if (formulaSource != null)
         {
-            damageFormula = formulaSource.getDamageFormula().Replace(" ", "");
-            critFormula = formulaSource.getCritFormula().Replace(" ", "");
+
+            if(formulaSource as Attack != null)
+            {
+                damageFormula = formulaSource.getDamageFormulaForDisplay().Replace(" ", "");
+                critFormula = formulaSource.getCritFormulaForDisplay().Replace(" ", "");
+            } else
+            {
+                damageFormula = formulaSource.getDamageFormula().Replace(" ", "");
+                critFormula = formulaSource.getCritFormula().Replace(" ", "");
+            }
+
             armorFormula = formulaSource.getArmorFormula().Replace(" ", "");
             invulnerabilityFormula = formulaSource.getInvulnerableFormula().Replace(" ", "");
 

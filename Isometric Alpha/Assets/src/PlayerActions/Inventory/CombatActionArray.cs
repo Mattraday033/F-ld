@@ -48,7 +48,7 @@ public class CombatActionArray : StatBoostSourceCombiner
         {
             if (combatActions[index] != null)
             {
-                equipCombatAction(index, combatActions[index]);
+                equipCombatAction(index, combatActions[index], removeItem: false);
             }
 
         }
@@ -231,12 +231,12 @@ public class CombatActionArray : StatBoostSourceCombiner
         equipCombatAction(newCombatAction, firstAvailableSlotIndex);
     }
 
-    public void equipCombatAction(int slotIndex, CombatAction newCombatAction)
+    public void equipCombatAction(int slotIndex, CombatAction newCombatAction, bool removeItem = true)
     {
-        equipCombatAction(newCombatAction, slotIndex);
+        equipCombatAction(newCombatAction, slotIndex, removeItem);
     }
 
-    public void equipCombatAction(CombatAction newCombatAction, int slotIndex)
+    public void equipCombatAction(CombatAction newCombatAction, int slotIndex, bool removeItem = true)
     {
         if (slotIndex >= combatActions.Length || slotIndex < 0)
         {
@@ -252,7 +252,7 @@ public class CombatActionArray : StatBoostSourceCombiner
         {
             Item newItem = newCombatAction.getSourceItem();
 
-            if (newItem != null && !newItem.usableInCombat() &&
+            if (removeItem && newItem != null && !newItem.usableInCombat() &&
                 !newItem.getKey().Equals(ItemList.getMainHandFist(actor as AllyStats).getKey()) &&
                 !newItem.getKey().Equals(ItemList.getOffHandFist().getKey()))
             {

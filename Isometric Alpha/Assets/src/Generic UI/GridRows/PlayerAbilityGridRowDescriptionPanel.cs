@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class PlayerAbilityGridRowDescriptionPanel : DescriptionPanel
+public class PlayerAbilityGridRowDescriptionPanel : DescriptionPanelWithFormula
 {
     public readonly static UnityEvent<Ability> AbilityNoLongerNew = new UnityEvent<Ability>();
 
