@@ -210,12 +210,12 @@ public class TransitionSpace : MonoBehaviour, ICounter
         effect.setAnimations(EffectAnimationType.TransitionIndicator);
     }
 
-    private void updateIndicatorVisibility(TerrainHiddenState terrainState)
+    private void updateIndicatorVisibility(bool revealed)
     {
-        if(terrainState == TerrainHiddenState.TerrainHidden && indicator == null)
+        if(revealed && indicator == null)
         {
             createIndicator();
-        } else if(terrainState != TerrainHiddenState.TerrainHidden && indicator != null)
+        } else if(!revealed && indicator != null)
         {
             indicatorSpriteRenderer = null;
             Destroy(indicator);
@@ -249,8 +249,10 @@ public class TransitionSpace : MonoBehaviour, ICounter
 
         if(shouldShowIndicator())
         {
-            TerrainVisibilityManager.OnTerrainVisibilityChange.AddListener(updateIndicatorVisibility);
+            RevealManager.OnReveal.AddListener(updateIndicatorVisibility);
             SecretDoorFlags.OnSecretDoorDiscovery.AddListener(updateIndicatorVisibility);
+
+            updateIndicatorVisibility(RevealManager.currentlyRevealed);
         }
     }
     public void removeListeners()
@@ -262,7 +264,7 @@ public class TransitionSpace : MonoBehaviour, ICounter
             unityEvent.RemoveListener(updateCounter);
         }
 
-        TerrainVisibilityManager.OnTerrainVisibilityChange.RemoveListener(updateIndicatorVisibility);
+        RevealManager.OnReveal.RemoveListener(updateIndicatorVisibility);
         SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(updateIndicatorVisibility);
     }
 

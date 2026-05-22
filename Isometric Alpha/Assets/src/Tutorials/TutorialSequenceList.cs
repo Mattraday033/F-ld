@@ -769,7 +769,7 @@ public static class TutorialSequenceList
 
         TutorialSequence itemTutorialSequence = new TutorialSequence(OOCActivity.inUI, doNoSkipCurrentActivityChange, equippableItemTutorialSeenFlag, new TutorialSequenceStep[] { itemStepOne, itemStepTwo, itemStepThree, itemStepFour });
 
-        itemTutorialSequence.endOfSequenceEvent = EquippedItems.OnEquipmentChange;
+        itemTutorialSequence.endOfSequenceEvent = CombatActionArray.OnCombatActionArrayChange;
 
         itemTutorialSequence.setSkipScript(new SkipEquippingItemsTutorialScript());
         tutorialSequenceDictionary.Add(itemTutorialSequenceKey, itemTutorialSequence);

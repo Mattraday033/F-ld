@@ -81,7 +81,7 @@ public static class OOCSpawnDetailsList
         list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchOne, locationName: LocationNameList.slaveShackSix, index: Constants.indexOne));
         list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchTwo, locationName: LocationNameList.slaveShackSix, index: Constants.indexTwo));
         
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.thatch, new Vector3Int(-1, 1), LocationNameList.slaveShackSix, facing: Facing.SouthEast, animationType: CharacterAnimationType.Death_Front));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.thatch, new Vector3Int(-1, 1), LocationNameList.slaveShackSix, facing: Facing.SouthEast, animationType: CharacterAnimationType.Death_Back_Weaponless, sleepingDialogueIntro: true));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slate, new Vector3Int(9, 1), LocationNameList.slaveShackSix, animationType: CharacterAnimationType.Death_Front_Weaponless));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardVazul, new Vector3Int(9, 0), LocationNameList.slaveShackSix, facing: Facing.NorthWest));
         list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble, new Vector3Int(-1, -3), PrefabNames.tutorialRubble));

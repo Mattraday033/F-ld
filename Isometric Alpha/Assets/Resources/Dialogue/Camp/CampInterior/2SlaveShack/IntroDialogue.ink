@@ -984,13 +984,13 @@ But enough about Brush. I'd prefer not to waste time thinking about his fate tha
 
 activateQuestStep(The Plan,Make contact with Kastor.)
 
-Now, you run as quick as you can to Kastor. He's the one that got Brush and I in on the escape plan; he should know others who are in on it. He's in a large hut in the southeastern part of the camp, along the southern wall. Just follow the road past the gate and you can't miss it.
+Now, you run as quick as you can to Kastor. He's the one that told Brush and I about the escape plan; he should know others who are in on it, too. He's in a large hut in the southeastern part of the camp, along the southern wall. Just follow the road past the gate and you can't miss it.
 
 setToTrue(knowRevolutionPassword)
     
 To identify yourself as an ally, ask him which way the wind is blowing.
 
-    +And which way *is* it blowing?
+    +And which way <i>is</i> it blowing?
         ->20b
 
 

@@ -440,7 +440,9 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             case CharacterAnimationType.Secondary_Idle:
             case CharacterAnimationType.Death:
             case CharacterAnimationType.Death_Back:
+            case CharacterAnimationType.Death_Back_Weaponless:
             case CharacterAnimationType.Death_Front:
+            case CharacterAnimationType.Death_Front_Weaponless:
                 return;
         }
 
@@ -935,6 +937,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             case CharacterAnimationType.Death_Back_Weaponless:
                 return;
         }
+        
         if(CombatStateManager.inCombat)
         {
             if(linkedStats.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))

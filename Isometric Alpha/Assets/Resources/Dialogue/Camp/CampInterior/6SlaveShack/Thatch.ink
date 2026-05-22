@@ -174,7 +174,7 @@ With the two of us together, we might be able to get to the back of the hut and 
     +I'll help you get to your friend.
         ->acceptedTutorial
     +I will need to think about it. I'll be back.
-        playAnimation({thatchIndex}, Death_Back)
+        playAnimation({thatchIndex}, Death_Back_Weaponless)
         setNPCFacing({thatchIndex},NW)
         ->Close
 }

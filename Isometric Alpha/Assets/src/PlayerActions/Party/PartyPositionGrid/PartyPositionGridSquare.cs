@@ -8,7 +8,6 @@ public class PartyPositionGridSquare : MonoBehaviour
 {
 
 	public IPartyEditor partyEditor;
-	// public TextMeshProUGUI characterNameText;
 	
 	public AllyStats characterInSquare;
 	
@@ -39,38 +38,8 @@ public class PartyPositionGridSquare : MonoBehaviour
 	{
 
         characterInSquare = character;
-
-		// if (character == null)
-		// {
-		// 	characterInSquare = null;
-		// 	// disableNameText();
-		// }
-		// else
-		// {
-
-		// 	enableNameText(characterInSquare.getName());
-		// }
-
 	}
 
-	// public void disableNameText()
-	// {
-	// 	if (characterInSquare != null)
-	// 	{
-	// 		characterNameText.enabled = false;
-	// 	}
-	// 	else if(characterInSquare == null)
-	// 	{
-	// 		enableNameText(defaultChar);
-	// 	}
-	// }
-
-	// public void enableNameText(string newNameText)
-	// {
-	// 	characterNameText.text = newNameText;
-	// 	characterNameText.enabled = true;
-	// }
-	
 	public virtual void handleButtonPress()
 	{
 		AllyStats selectedPartyMember = partyEditor.getSelectedPartyMember(); 
