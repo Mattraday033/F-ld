@@ -168,11 +168,6 @@ public class LoadSaveFile : IDecision
 
             FadeToBlackManager.setToMaxOpacity();
 
-            if (saveBlueprint.overworldSpriteSortingLayer != null && saveBlueprint.overworldSpriteSortingLayer.Length > 0)
-            {
-                SceneTransitionPosition.sortingLayer = saveBlueprint.overworldSpriteSortingLayer;
-            }
-
             skipTutorials();
 
             SpawnInfoManager.lastSaveBlueprint = saveBlueprint;

@@ -80,7 +80,7 @@ public class PartyPositionSpriteGridSquare : PartyPositionGridSquare, IPointerDo
         if (character != null)
         {
             enablePartyMemberSprite();
-            disableNameText();
+            // disableNameText();
         }
         else
         {

@@ -19,7 +19,8 @@ public enum EffectAnimationType
     Intimidate,
     BlastingJelly,
     FrontLvlUp,
-    BackLvlUp
+    BackLvlUp,
+    TransitionIndicator
 }
 
 
@@ -35,6 +36,8 @@ public class EffectAnimationManager : AnimationManager
     public bool healsTarget;
 
     float spawnDamageNumbersTime;
+
+    public bool loops = false;
 
     public void setAnimations(EffectAnimationType effectType)
     {
@@ -52,7 +55,13 @@ public class EffectAnimationManager : AnimationManager
 
         spawnDamageNumbersTime = animationClip.length * (3f/4f);
 
-        animancer.Play(createClipTransitionThenDelete(animationClip));
+        if(loops)
+        {
+            createClipTransitionThenLoop(animationClip);
+        } else
+        {
+            animancer.Play(createClipTransitionThenDelete(animationClip));
+        }
 
         if(waitBeforeSFX)
         {
@@ -140,6 +149,16 @@ public class EffectAnimationManager : AnimationManager
 
         return clipTransition;
     }
+
+    private void createClipTransitionThenLoop(AnimationClip clip)
+    {
+        ClipTransition clipTransition = new ClipTransition();
+        clipTransition.Clip = clip;
+        clipTransition.Events.OnEnd = () => createClipTransitionThenLoop(clip);
+
+        animancer.Play(clipTransition);
+    }
+
 
     public static EffectAnimationManager instantiatePrefab(Transform parent = null)
     {

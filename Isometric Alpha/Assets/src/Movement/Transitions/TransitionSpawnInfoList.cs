@@ -1139,10 +1139,65 @@ public static class TransitionSpawnInfoList
 
         #endregion
 
-
+        assignIndicatorFlagsForAdjacentSecretDoors();
     }
 
+    private const int adjacencyRange = 1;
 
+    private static void assignIndicatorFlagsForAdjacentSecretDoors()
+    {
+        foreach(KeyValuePair<string, List<TransitionSpawnInfo>> entry in transitionSpawnInfoDict)
+        {
+            List<SecretDoorSpawnInfo> secretDoorList = SecretDoorSpawnInfoList.getSecretDoorSpawnDetails(entry.Key);
+
+            if(secretDoorList.Count == 0)
+            {
+                continue;
+            }
+
+            foreach(TransitionSpawnInfo transitionInfo in entry.Value)
+            {
+                assignIndicatorFlagIfNearSecretDoor(transitionInfo, secretDoorList);
+            }
+        }
+    }
+
+    private static void assignIndicatorFlagIfNearSecretDoor(TransitionSpawnInfo transitionInfo, List<SecretDoorSpawnInfo> secretDoorList)
+    {
+        List<Transition> transitions = transitionInfo.getTransitions();
+
+        foreach(SecretDoorSpawnInfo secretDoor in secretDoorList)
+        {
+            string secretDoorKey = secretDoor.getPrimarySecretDoorKey();
+            if(secretDoorKey == null)
+            {
+                continue;
+            }
+
+            for(int doorIndex = 0; doorIndex < secretDoor.size; doorIndex++)
+            {
+                Vector3Int doorCell = secretDoor.startCell;
+                if(secretDoor.axis == Axis.DescendingX)
+                {
+                    doorCell.x -= doorIndex;
+                }
+                else if(secretDoor.axis == Axis.DescendingY)
+                {
+                    doorCell.y -= doorIndex;
+                }
+
+                foreach(Transition transition in transitions)
+                {
+                    if(Mathf.Abs(transition.cellCoords.x - doorCell.x) <= adjacencyRange
+                        && Mathf.Abs(transition.cellCoords.y - doorCell.y) <= adjacencyRange)
+                    {
+                        transitionInfo.indicatorFlag = secretDoorKey;
+                        return;
+                    }
+                }
+            }
+        }
+    }
 
 }
 
@@ -1161,7 +1216,8 @@ public class TransitionSpawnInfo
     protected bool destinationOnly;
 
     protected PlayerInteractionScript scriptOnTransition;
-    
+
+    public string indicatorFlag;
 
     public TransitionSpawnInfo(string currentArea, string destinationLocation, Vector3Int startCell, Facing playerSpawnDirection, int size = 1, Axis axis = Axis.DescendingX, int outputMultiplier = 1, bool destinationOnly = false, PlayerInteractionScript scriptOnTransition = null)
     {
@@ -1216,7 +1272,7 @@ public class TransitionSpawnInfo
                 currentCell.y -= index;
             }
 
-            list.Add(new Transition(currentArea, destinationLocation, currentCell, index + getStartIndex(), playerSpawnDirection, fastTravelCapable(), getOutputMultiplier(), scriptOnTransition, destinationOnly));
+            list.Add(new Transition(currentArea, destinationLocation, currentCell, index + getStartIndex(), playerSpawnDirection, fastTravelCapable(), getOutputMultiplier(), scriptOnTransition, destinationOnly, indicatorFlag: indicatorFlag));
         }
 
         return list;

@@ -232,6 +232,14 @@ public class KeyBindingDisplay : MonoBehaviour
         }
     }
 
+    private static string journalScreenKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.journalScreenKey.ToString() + ": Journal";
+        }
+    }
+
     private static string saveLoadKeyBinding
     {
         get
@@ -428,14 +436,6 @@ public class KeyBindingDisplay : MonoBehaviour
                 addSpace();
                 displayText.text += worldMapKeyBinding;
                 addSpace();
-                displayText.text += characterScreenKeyBinding;
-                addSpace();
-                displayText.text += inventoryScreenKeyBinding;
-                addSpace();
-                displayText.text += partyScreenKeyBinding;
-                addSpace();
-                displayText.text += saveLoadKeyBinding;
-                addSpace();
                 displayText.text += toggleTerrainKeyBinding;
                 addSpace();
                 displayText.text += transcriptKeyBinding;
@@ -455,6 +455,8 @@ public class KeyBindingDisplay : MonoBehaviour
                 displayText.text += inventoryScreenKeyBinding;
                 addSpace();
                 displayText.text += partyScreenKeyBinding;
+                addSpace();
+                displayText.text += journalScreenKeyBinding;
                 addSpace();
                 displayText.text += saveLoadKeyBinding;
                 addSpace();

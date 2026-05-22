@@ -131,6 +131,28 @@ public class KeyBind
                 return "Caps Lock";            
             case KeyCode.BackQuote:
                 return "`";
+            case KeyCode.Quote:
+                return "'";
+            case KeyCode.Semicolon:
+                return ";";
+            case KeyCode.Slash:
+                return "/";
+            case KeyCode.Backslash:
+                return "\\";
+            case KeyCode.LeftBracket:
+                return "[";
+            case KeyCode.RightBracket:
+                return "]";
+            case KeyCode.Period:
+                return ".";
+            case KeyCode.Comma:
+                return ",";
+            case KeyCode.Minus:
+                return "-";
+            case KeyCode.Equals:
+                return "=";
+            case KeyCode.Asterisk:
+                return "*";
             case KeyCode.Alpha0:
             case KeyCode.Alpha1:
             case KeyCode.Alpha2:

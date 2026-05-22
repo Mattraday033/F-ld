@@ -12,6 +12,8 @@ public class Transition
 
     public bool allowAutosave = false;
 
+    public string indicatorFlag;
+
     public int index;
     public string currentAreaName;
     public string destinationName;
@@ -42,7 +44,7 @@ public class Transition
         whichConstructor = "first";
     }
 
-    public Transition(string currentAreaName, string destinationName, Vector3Int cellCoords, int index, Facing playerSpawnDirection, bool usableForFastTravel, int outputMultiplier, PlayerInteractionScript scriptOnTransition, bool destinationOnly = false, bool allowAutosave = true)
+    public Transition(string currentAreaName, string destinationName, Vector3Int cellCoords, int index, Facing playerSpawnDirection, bool usableForFastTravel, int outputMultiplier, PlayerInteractionScript scriptOnTransition, bool destinationOnly = false, bool allowAutosave = true, string indicatorFlag = "")
     {
         this.currentAreaName = currentAreaName;
         this.destinationName = destinationName;
@@ -60,7 +62,14 @@ public class Transition
         this.destinationOnly = destinationOnly;
         this.allowAutosave = allowAutosave;
 
+        this.indicatorFlag = indicatorFlag;
+
         whichConstructor = "second";
+    }
+
+    public virtual bool preventIndicator()
+    {
+        return false;
     }
 
     public bool sharesHash(Transition transition)
@@ -126,6 +135,11 @@ public class LadderTransition : Transition
     {
         return multiplyCellCoords(Constants.sizeZero);
     }
+
+    public override bool preventIndicator()
+    {
+        return true;
+    }
 }
 
 public class TransitionSpace : MonoBehaviour, ICounter
@@ -134,9 +148,24 @@ public class TransitionSpace : MonoBehaviour, ICounter
     public string currentAreaName;
     public string destinationName;
 
+    public Transition m_Transition;
+
     [SerializeField]
-    public Transition transition;
+    public Transition transition
+    {
+        get { return m_Transition; }
+        set
+        {
+            m_Transition = value;
+            
+            removeListeners();
+            addListeners();
+        }
+    }
     public Collider2D collider;
+
+    private GameObject indicator;
+    private SpriteRenderer indicatorSpriteRenderer;
 
     public Transition getTransition()
     {
@@ -156,10 +185,52 @@ public class TransitionSpace : MonoBehaviour, ICounter
         }
     }
 
-
-    private void OnEnable()
+    private bool shouldShowIndicator()
     {
-        addListeners();
+        return transition != null && !transition.usableForFastTravel && !transition.preventIndicator();
+    }
+
+    private void createIndicator()
+    {
+        indicator = Instantiate(Resources.Load<GameObject>(PrefabNames.effect), transform);
+
+        indicator.transform.localPosition = new Vector3(0f, -.2f);
+        indicator.transform.localScale = new Vector3(.4f, .4f, .4f);
+
+        indicatorSpriteRenderer = indicator.GetComponent<SpriteRenderer>();
+        indicatorSpriteRenderer.sortingLayerName = LayerAndTagManager.sixthSortingLayerName;
+
+        if(transition.indicatorFlag != null && transition.indicatorFlag.Length > 0)
+        {
+            indicatorSpriteRenderer.enabled = SecretDoorFlags.secretDoorHasBeenDiscovered(transition.indicatorFlag);
+        }
+
+        EffectAnimationManager effect = indicator.GetComponent<EffectAnimationManager>();
+        effect.loops = true;
+        effect.setAnimations(EffectAnimationType.TransitionIndicator);
+    }
+
+    private void updateIndicatorVisibility(TerrainHiddenState terrainState)
+    {
+        if(terrainState == TerrainHiddenState.TerrainHidden && indicator == null)
+        {
+            createIndicator();
+        } else if(terrainState != TerrainHiddenState.TerrainHidden && indicator != null)
+        {
+            indicatorSpriteRenderer = null;
+            Destroy(indicator);
+        }
+    }
+
+    private void updateIndicatorVisibility(string secretDoorKey)
+    {
+        if(indicatorSpriteRenderer != null && 
+            transition.indicatorFlag != null && 
+            transition.indicatorFlag.Equals(secretDoorKey))
+
+        {
+            indicatorSpriteRenderer.enabled = SecretDoorFlags.secretDoorHasBeenDiscovered(transition.indicatorFlag);
+        }
     }
 
     private void OnDestroy()
@@ -175,6 +246,12 @@ public class TransitionSpace : MonoBehaviour, ICounter
         {
             unityEvent.AddListener(updateCounter);
         }
+
+        if(shouldShowIndicator())
+        {
+            TerrainVisibilityManager.OnTerrainVisibilityChange.AddListener(updateIndicatorVisibility);
+            SecretDoorFlags.OnSecretDoorDiscovery.AddListener(updateIndicatorVisibility);
+        }
     }
     public void removeListeners()
     {
@@ -184,6 +261,9 @@ public class TransitionSpace : MonoBehaviour, ICounter
         {
             unityEvent.RemoveListener(updateCounter);
         }
+
+        TerrainVisibilityManager.OnTerrainVisibilityChange.RemoveListener(updateIndicatorVisibility);
+        SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(updateIndicatorVisibility);
     }
 
     public void updateCounter()

@@ -517,9 +517,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1641711996319998061}
   - component: {fileID: 5390407025004096970}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: ManseTallWall_Pediment Second Portion
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -812,9 +812,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8909640196070368053}
   - component: {fileID: 7816907168409960038}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: ManseTallWall_Edited
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1513,9 +1513,9 @@ GameObject:
   m_Component:
   - component: {fileID: 167967215949327186}
   - component: {fileID: 7774150496406516290}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Roof_Big_Back_19.6_x_3_v2
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -8,6 +8,11 @@ public static class SecretDoorSpawnInfoList
 
     public static List<SecretDoorSpawnInfo> getSecretDoorSpawnDetails(string areaName)
     {
+        if(secretDoorSpawnDetailsDict == null)
+        {
+            initializeSpawnDetailsList();
+        }
+
         if (!secretDoorSpawnDetailsDict.ContainsKey(areaName))
         {
             return new List<SecretDoorSpawnInfo>();
@@ -19,6 +24,11 @@ public static class SecretDoorSpawnInfoList
     [RuntimeInitializeOnLoadMethod]
     private static void initializeSpawnDetailsList()
     {
+        if(secretDoorSpawnDetailsDict != null)
+        {
+            return;
+        }
+
         secretDoorSpawnDetailsDict = new Dictionary<string, List<SecretDoorSpawnInfo>>();
         List<SecretDoorSpawnInfo> list;
 
@@ -252,6 +262,16 @@ public class SecretDoorSpawnInfo : AxisSpawnInfo
     public override bool shouldSpawn()
     {
         return !secretDoorInfo.hasBeenDiscovered();
+    }
+
+    public string getPrimarySecretDoorKey()
+    {
+        if(secretDoorInfo == null || secretDoorInfo.secretDoorKeys.Count == 0)
+        {
+            return null;
+        }
+
+        return secretDoorInfo.secretDoorKeys[0];
     }
 
     public override List<OOCSpawnDetails> getSpawnDetails()

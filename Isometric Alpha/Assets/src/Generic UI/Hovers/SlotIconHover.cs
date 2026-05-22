@@ -229,6 +229,19 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         switch(hoverMessageKey)
         {
+
+            case HoverMessageList.characterScreenKey:
+                return HoverMessageList.characterScreenKey + " ["+KeyBindingList.characterScreenKey.ToString()+"]" ;
+            case HoverMessageList.inventoryScreenKey:
+                return HoverMessageList.inventoryScreenKey + " ["+KeyBindingList.inventoryScreenKey.ToString()+"]" ;
+            case HoverMessageList.partyScreenKey:
+                return HoverMessageList.partyScreenKey + " ["+KeyBindingList.partyScreenKey.ToString()+"]" ;
+            case HoverMessageList.journalScreenKey:
+                return HoverMessageList.journalScreenKey + " ["+KeyBindingList.journalScreenKey.ToString()+"]" ;
+            case HoverMessageList.saveAndLoadScreenKey:
+                return HoverMessageList.saveAndLoadScreenKey + " ["+KeyBindingList.loadScreenKey.ToString()+"]" ;
+            case HoverMessageList.settingsScreenKey:
+                return HoverMessageList.settingsScreenKey + " ["+KeyBindingList.settingsScreenKey.ToString()+"]" ;
             case HoverMessageList.retreatButtonKey:
                 return "Retreat";
             case IconList.surpriseIconName:
@@ -473,17 +486,16 @@ public static class HoverMessageList
     private const string questJournalTabKey = "Quest Tab";
     private const string glossaryJournalTabKey = "Glossary Tab";
 
-    private const string characterScreenKey = "Character Screen";
+    public const string characterScreenKey = "Character Screen";
     private const string characterScreenMessage = "Here you can check your Character's Stats, change equipped Abilities, and spend Exp to Level Up.";
-    private const string inventoryScreenKey = "Inventory Screen";
+    public const string inventoryScreenKey = "Inventory Screen";
     private const string inventoryScreenMessage = "Here you can see what Items you have picked up, or change your Character's Equipment";
-    private const string partyScreenKey = "Party Screen";
+    public const string partyScreenKey = "Party Screen";
     private const string partyScreenMessage = "Here you can see your Party's Stats and Skills, swap out Party Members, and change your Party's starting Formation.";
-    private const string journalScreenKey = "Journal Screen";
+    public const string journalScreenKey = "Journal Screen";
     private const string journalScreenMessage = "Here you can see what quests you have, and look up Terms in the Glossary.";
-    private const string saveAndLoadScreenKey = "Save/Load Screen";
-    private const string saveAndLoadScreenMessage = "Here you can save your game. Remember, you can also Quick Save with 'Q', and the game will take an Autosave whenever you enter an area. You can have up to three Autosaves at a time.";
-    private const string settingsScreenKey = "Settings Screen";
+    public const string saveAndLoadScreenKey = "Save/Load Screen";
+    public const string settingsScreenKey = "Settings Screen";
     private const string settingsScreenMessage = "Here you can change the Game's Settings, or Quit the Game.";
 
     private const string restPointMessage = "This location has a Rest Point. Rest Points will restore the Health of all Party Members, as well as any expended skill charges.";
@@ -728,7 +740,7 @@ public static class HoverMessageList
             case journalScreenKey:
                 return journalScreenMessage;
             case saveAndLoadScreenKey:
-                return saveAndLoadScreenMessage;
+                return "Here you can save your game. Remember, you can also Quick Save with <nobr>' " + KeyBindingList.quicksaveKey.ToString() + " '</nobr>, and the game will take an Autosave whenever you enter an area. You can have up to three Autosaves at a time.";
             case settingsScreenKey:
                 return settingsScreenMessage;
 

@@ -8,11 +8,11 @@ public class PartyPositionGridSquare : MonoBehaviour
 {
 
 	public IPartyEditor partyEditor;
-	public TextMeshProUGUI characterNameText;
+	// public TextMeshProUGUI characterNameText;
 	
 	public AllyStats characterInSquare;
 	
-	public string defaultChar;
+	public const string defaultChar = "";
 
 	public int row;
 	public int col;
@@ -37,37 +37,39 @@ public class PartyPositionGridSquare : MonoBehaviour
 
 	public virtual void populate(AllyStats character)
 	{
-		if (character == null)
-		{
-			characterInSquare = null;
-			disableNameText();
-		}
-		else
-		{
-			characterInSquare = character;
 
-			enableNameText(characterInSquare.getName());
-		}
+        characterInSquare = character;
+
+		// if (character == null)
+		// {
+		// 	characterInSquare = null;
+		// 	// disableNameText();
+		// }
+		// else
+		// {
+
+		// 	enableNameText(characterInSquare.getName());
+		// }
 
 	}
 
-	public void disableNameText()
-	{
-		if (defaultChar == null || defaultChar.Length <= 0 || characterInSquare != null)
-		{
-			characterNameText.enabled = false;
-		}
-		else if(characterInSquare == null)
-		{
-			enableNameText(defaultChar);
-		}
-	}
+	// public void disableNameText()
+	// {
+	// 	if (characterInSquare != null)
+	// 	{
+	// 		characterNameText.enabled = false;
+	// 	}
+	// 	else if(characterInSquare == null)
+	// 	{
+	// 		enableNameText(defaultChar);
+	// 	}
+	// }
 
-	public void enableNameText(string newNameText)
-	{
-		characterNameText.text = newNameText;
-		characterNameText.enabled = true;
-	}
+	// public void enableNameText(string newNameText)
+	// {
+	// 	characterNameText.text = newNameText;
+	// 	characterNameText.enabled = true;
+	// }
 	
 	public virtual void handleButtonPress()
 	{
