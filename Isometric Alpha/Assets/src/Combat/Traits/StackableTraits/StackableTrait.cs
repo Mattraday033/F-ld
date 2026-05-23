@@ -6,8 +6,41 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public delegate bool ReapplicationLogicDelegate<T>(T t);
-public enum ActionCostType { None = 1, Stance = 2, Bloodlust = 3, Predation = 4, 
-                             RedKnife = 5, BlueShield = 6, YellowThorn = 7, GreenLeaf = 8 }
+public enum ActionCostType { 
+                                None = 1, 
+                                Stance = 2, 
+                                Bloodlust = 3, 
+                                Predation = 4, 
+                                RedKnife = 5, 
+                                BlueShield = 6, 
+                                YellowThorn = 7, 
+                                GreenLeaf = 8 
+                            }
+
+public static class EnumDescriptionList
+{
+    public static string ToFriendlyString(this ActionCostType costType)
+    {
+        string name = costType.ToString();
+        string newName = "";
+
+        int index = 0;
+        foreach(char c in name)
+        {
+            if(Char.IsUpper(c) && index != 0)
+            {
+                newName += " " + c;
+            } else
+            {
+                newName += c;
+            }
+
+            index++;
+        }
+
+        return newName;
+    }
+}
 
 public class StackableTrait: Trait
 {

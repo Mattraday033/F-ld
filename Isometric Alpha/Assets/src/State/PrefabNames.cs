@@ -223,6 +223,9 @@ public static class PrefabNames
 
     public const string caveLoadingScreenArt = loadingScreenFolder + "Cave";
     public const string campLoadingScreenArt = loadingScreenFolder + "Camp";
+
+    public const string UIComponentsFolder = UIFolder + "Components/";
+    public const string costIcon = UIComponentsFolder + "Cost Icon";
     #endregion
 
     public const string playerPrefab = "PlayerOOC";
@@ -245,8 +248,6 @@ public static class PrefabNames
     public const string tutorialCollider = interactablesFolder + "Tutorial Collider";
     public const string cunningBlocker = interactablesFolder + "Cunning Blocker";
     public const string book = interactablesFolder + "Book";
-
-    public const string commonComponentsFolder = interactablesFolder + "CommonComponents/";
 
     #endregion
 

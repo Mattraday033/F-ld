@@ -1040,7 +1040,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ba64111dc0b075149b87ac4ee5cde6f9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 86678afcecb575244babef44743c944e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6974,6 +6974,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4536375725337132737, guid: 5e3fd68f997c64b4a9ad9706aef8ef29,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ac79cf6b28444284e81211f96770c68e,
+        type: 3}
     - target: {fileID: 4695641849108684989, guid: 5e3fd68f997c64b4a9ad9706aef8ef29,
         type: 3}
       propertyPath: m_Type
@@ -7230,17 +7236,17 @@ PrefabInstance:
     - target: {fileID: 9160983164529529933, guid: 5e3fd68f997c64b4a9ad9706aef8ef29,
         type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.09803922
       objectReference: {fileID: 0}
     - target: {fileID: 9160983164529529933, guid: 5e3fd68f997c64b4a9ad9706aef8ef29,
         type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.09803922
       objectReference: {fileID: 0}
     - target: {fileID: 9160983164529529933, guid: 5e3fd68f997c64b4a9ad9706aef8ef29,
         type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.09803922
       objectReference: {fileID: 0}
     - target: {fileID: 9160983164529529933, guid: 5e3fd68f997c64b4a9ad9706aef8ef29,
         type: 3}

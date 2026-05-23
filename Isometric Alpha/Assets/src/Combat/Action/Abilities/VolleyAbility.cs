@@ -61,13 +61,24 @@ public class VolleyAbility : Ability
 		//at this point all actors are either stunned, dead, or null
 		if (stunnedActors.Count > 0)
 		{
-			return (Stats)stunnedActors[0];
+			return stunnedActors[0];
 		}
 		else
 		{
 			return base.getActorStats();
 		}
 	}
+
+    public override bool actorIsPartOfAction(Stats actor)
+    {
+        if(allActors == null)
+        {
+            return false;
+        }
+
+        return allActors.Contains(actor);
+    }
+
 
     public override GridCoords getActorCoords()
     {

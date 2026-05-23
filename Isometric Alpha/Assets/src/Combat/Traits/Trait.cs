@@ -578,6 +578,11 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
             buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: IconList.mandatoryTargetIcon));
         }
 
+        if(traitType == TraitType.Stance)
+        {
+            buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: IconList.stanceIconName));
+        }
+
         return buildingBlocks;
     }
 
@@ -606,6 +611,7 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
                 return TraitType.Interaction.ToString();
             case TraitType.FoeType:
                 return "Foe Type";
+            case TraitType.Stance:
             case TraitType.EquippedPassive:
                 return "Equipped Passive";
             case TraitType.OnDeath:

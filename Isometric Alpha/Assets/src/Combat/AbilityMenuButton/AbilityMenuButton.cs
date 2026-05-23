@@ -22,10 +22,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
     public TextMeshProUGUI cooldownCostText;
 
-    public TextMeshProUGUI redKnifeCostText;
-    public TextMeshProUGUI blueShieldCostText;
-    public TextMeshProUGUI yellowThornCostText;
-    public TextMeshProUGUI greenLeafCostText;
+    public Transform costParent;
 
     public Button abilityMenuButton;
     public Image lockedIcon;
@@ -394,12 +391,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
                 }
                 else
                 {
-                    cooldownCostText.text = "";
-
-                    redKnifeCostText.text = "";
-                    blueShieldCostText.text = "";
-                    yellowThornCostText.text = "";
-                    greenLeafCostText.text = "";
+                    destroyAllCostIcons();
                 }
             }
             else
@@ -407,16 +399,25 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
                 cooldownCostText.color = ColorList.cooldownColor;
                 cooldownCostText.text = "" + loadedCombatAction.getCooldownRemaining();
 
-                redKnifeCostText.text = "";
-                blueShieldCostText.text = "";
-                yellowThornCostText.text = "";
-                greenLeafCostText.text = "";
+                destroyAllCostIcons();
             }
         }
     }
 
+    private void destroyAllCostIcons()
+    {
+        foreach(Transform child in costParent)
+        {
+            Destroy(child.gameObject);
+        }
+
+        costParent.gameObject.SetActive(false);
+    }
+
     private void setAllActionCosts(ActionCostType[] costTypes, int[] actionCosts)
     {
+        destroyAllCostIcons();
+
         for (int index = 0; index < costTypes.Length && index < actionCosts.Length; index++)
         {
             setActionCostText(costTypes[index], actionCosts[index]);
@@ -425,25 +426,32 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
     private void setActionCostText(ActionCostType costType, int actionCost)
     {
-        switch (costType)
-        {
-            case ActionCostType.RedKnife:
-                redKnifeCostText.text = "" + actionCost;
-                break;
-            case ActionCostType.BlueShield:
-                blueShieldCostText.text = "" + actionCost;
-                break;
-            case ActionCostType.YellowThorn:
-                yellowThornCostText.text = "" + actionCost;
-                break;
-            case ActionCostType.GreenLeaf:
-                greenLeafCostText.text = "" + actionCost;
-                break;
+        costParent.gameObject.SetActive(true);
 
-            default:
-                cooldownCostText.text = "" + actionCost;
-                return;
-        }
+        CostIcon costIcon = Instantiate(Resources.Load<GameObject>(PrefabNames.costIcon), costParent).GetComponent<CostIcon>();
+
+        costIcon.setCostType(costType);
+        costIcon.setCostText(actionCost.ToString());
+
+        // switch (costType)
+        // {
+        //     case ActionCostType.RedKnife:
+        //         redKnifeCostText.text = "" + actionCost;
+        //         break;
+        //     case ActionCostType.BlueShield:
+        //         blueShieldCostText.text = "" + actionCost;
+        //         break;
+        //     case ActionCostType.YellowThorn:
+        //         yellowThornCostText.text = "" + actionCost;
+        //         break;
+        //     case ActionCostType.GreenLeaf:
+        //         greenLeafCostText.text = "" + actionCost;
+        //         break;
+
+        //     default:
+        //         cooldownCostText.text = "" + actionCost;
+        //         return;
+        // }
     }
 
     public void setToLockedStatus()

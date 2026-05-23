@@ -72,7 +72,7 @@ public static class Charisma
 
 	public static CombatAction[] getStartingActions(AllyStats statSource)
 	{
-		return new CombatAction[] { new FistAttack(statSource), AbilityList.getAbility(statSource,"c-2-3"), AbilityList.getAbility(statSource,"c-2-3"), null, null, null, null, null, AbilityList.getAbility(statSource,"c-2-2"), null, null, null, };
+		return new CombatAction[] { new FistAttack(statSource), AbilityList.getAbility(statSource,"c-2-3"), AbilityList.getAbility(statSource,"c-2-3"), null, null, null, null, null, AbilityList.getAbility(statSource,"c-2-2"), null, null, null};
 	}
 	
 	public static int getPartyMemberCharismaAtLevel(string partyMemberName, int level)

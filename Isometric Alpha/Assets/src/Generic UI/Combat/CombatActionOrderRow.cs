@@ -16,6 +16,8 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 	private GameObject targetDisplaySelector;
 	private GameObject tertiaryDisplaySelector;
 	
+	public GameObject arrowIndicator;
+
 	public Image rowBackground;
     public Image[] panelSections;
 
@@ -31,29 +33,28 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 
     public void setRowHighlight(Stats actor, bool highlightRow)
     {
+        if(actor == null)
+        {
+            return;
+        }
+
         CombatAction actionBeingDescribed = getCombatActionBeingDescribed();
 
-        if(actionBeingDescribed != null)
+        if(highlightRow && actionBeingDescribed != null && actionBeingDescribed.actorIsPartOfAction(actor))
         {
-            Stats currentActor = actionBeingDescribed.getActorStats();
-
-            if(currentActor != null && 
-                currentActor.Equals(actor))
+            if(actor.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
             {
-                if(highlightRow)
-                {
-                    if(actionBeingDescribed.getActorStats().positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
-                    {
-                        rowBackground.color = Color.green;
-                    } else
-                    {
-                        rowBackground.color = Color.red;
-                    }
-                } else
-                {
-                    rowBackground.color = Color.white;
-                }
+                rowBackground.color = Color.green;
+            } else
+            {
+                rowBackground.color = Color.red;
             }
+
+            arrowIndicator.SetActive(true);
+        } else
+        {
+            rowBackground.color = Color.white;
+            arrowIndicator.SetActive(false);
         }
     }
 

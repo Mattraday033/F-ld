@@ -19,4 +19,13 @@ public class Stance: EquippedPassive
     {
         return !combatActionArray.alreadyHasStance();
     }
+
+    public override  List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
+    {
+        List<DescriptionPanelBuildingBlock> blocks = base.getDescriptionBuildingBlocks();
+
+        blocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: IconList.stanceIconName));
+
+        return blocks;
+    }
 }

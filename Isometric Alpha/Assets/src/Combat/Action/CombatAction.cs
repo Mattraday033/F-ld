@@ -1122,6 +1122,16 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     #region Miscellaneous
 
+    public virtual bool actorIsPartOfAction(Stats actor)
+    {
+        if(actor == null)
+        {
+            return false;
+        }
+
+        return actor.Equals(getActorStats());
+    }
+
     public virtual void playEquipSFX()
     {
         AudioManager.playAudioClipAsSingleton(AudioClipList.actionEquipSFX);

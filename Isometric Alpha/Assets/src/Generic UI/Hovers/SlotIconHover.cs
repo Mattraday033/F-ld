@@ -100,10 +100,15 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         if(inWorldSpace)
         {
-            scale = .36f;
+            scale = getInWorldSpaceScale();
         }
 
         MouseHoverManager.spawnHoverIcon(this, transform, scale);
+    }
+
+    protected virtual float getInWorldSpaceScale()
+    {
+        return .36f;
     }
 
     public void destroyHoverIcon()
@@ -215,7 +220,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         DescriptionPanel.setText(panel.useDescriptionText, hoverText);
     }
 
-    private string getHoverMessageKeyForDisplay()
+    protected virtual string getHoverMessageKeyForDisplay()
     {
         if(bonusDamageIcon)
         {
@@ -383,6 +388,10 @@ public static class HoverMessageList
     private const string weaponSlotMessage = "The number of Main-Hand Weapons you can have equipped to your Action Wheel. The higher a Character's Wisdom, the more Weapon Slots that Character has.";
 
     private const string stanceWeaponMessage = "Attacks made with Stance Weapons, such as fists and staffs, give the attacker additional stacks of their current Stance.";
+    private const string stanceMessage = "Stances are Equipped Passives that provide you a beneficial Trait with a stackable bonus. Only one Stance can be equipped at a time.\n\n" + stanceWeaponMessage;
+    private const string stanceCostKey = "Stance" + CostIcon.costSuffix;
+    private const string stanceCostMessage = "This Action costs Stance Stacks to use. " + stanceMessage;
+
 
     private const string levelMessage = "Leveling up a character costs 1000 Experience. Gaining a level will increase Maximum Health, return all missing health, and boost one Primary Stat. The highest level a character can reach is 20.";
     private const string healthMessage = "A Party Member reduced to 0 health is knocked unconscious, and needs special abilities or items to be awakened in combat. Normal healing items can awaken a Party Member out of combat. If your character loses all of their health, however, they will die and you will lose the game.";
@@ -461,11 +470,19 @@ public static class HoverMessageList
     private const string observationMessage = "This Skill allows you to find secret doors and hidden secrets. Determined by the highest Wisdom of all Party Members.";
     private const string leadershipMessage = "This Skill allows you to command your followers out of combat, telling them to stand on buttons or in doorways to block enemy movement. The number of Party Members you can command with Leadership is determined by the highest Charisma of all Party Members.";
 
-    private const string redKnifeMessage = "This shows the amount of the Red Knife exuberance your Party will gain at the start of Combat.\n\n" + AbilityList.redKnifeAcquisitionMethodExplanation;
-    private const string blueShieldMessage = "This shows the amount of the Blue Shield exuberance your Party will gain at the start of Combat.\n\n" + AbilityList.blueShieldAcquisitionMethodExplanation;
-    private const string yellowThornMessage = "This shows the amount of the Yellow Thorn exuberance your Party will gain at the start of Combat.\n\n" + AbilityList.yellowThornAcquisitionMethodExplanation;
-    private const string greenLeafMessage = "This shows the amount of the Grean Leaf exuberance your Party will gain at the start of Combat.\n\n" + AbilityList.greenLeafAcquisitionMethodExplanation;
+    private const string redKnifeMessage = "This shows the amount of the Red Knife Exuberance your Party will gain at the start of Combat.\n\n" + AbilityList.redKnifeAcquisitionMethodExplanation;
+    private const string blueShieldMessage = "This shows the amount of the Blue Shield Exuberance your Party will gain at the start of Combat.\n\n" + AbilityList.blueShieldAcquisitionMethodExplanation;
+    private const string yellowThornMessage = "This shows the amount of the Yellow Thorn Exuberance your Party will gain at the start of Combat.\n\n" + AbilityList.yellowThornAcquisitionMethodExplanation;
+    private const string greenLeafMessage = "This shows the amount of the Grean Leaf Exuberance your Party will gain at the start of Combat.\n\n" + AbilityList.greenLeafAcquisitionMethodExplanation;
     
+    private const string exuberanceCostMessage = "This Action costs Exuberances to use. Exuberances are resources you receive for completing certain feats in combat. There are four types of Exuberances: Red Knife, Blue Shield, Yellow Thorn, and Green Leaf.\n\n";
+    private const string redKnifeCostMessage = exuberanceCostMessage + AbilityList.redKnifeAcquisitionMethodExplanation;
+    private const string blueShieldCostMessage = exuberanceCostMessage + AbilityList.blueShieldAcquisitionMethodExplanation;
+    private const string yellowThornCostMessage = exuberanceCostMessage + AbilityList.yellowThornAcquisitionMethodExplanation;
+    private const string greenLeafCostMessage = exuberanceCostMessage + AbilityList.greenLeafAcquisitionMethodExplanation;
+    
+
+
 
     private const string regenMessage = "How much health each of your party members will heal after every combat. Determined by your Party's total Strength and Wisdom.";
     private const string surpriseRoundAmountMessage = "The number of rounds of extra Actions you will receive whenever you surprise an enemy. Determined by your Party's total Dexterity.";
@@ -598,6 +615,8 @@ public static class HoverMessageList
             case IconList.healingBoostIconName:
                 return healingBoostIconMessage;
 
+            case IconList.stanceIconName:
+                return stanceMessage;
             case IconList.stanceWeaponIconName:
                 return stanceWeaponMessage;
 
@@ -684,6 +703,18 @@ public static class HoverMessageList
                 return yellowThornMessage;
             case IconList.greenLeafIconName:
                 return greenLeafMessage;
+
+            case IconList.redKnifeIconName + CostIcon.costSuffix:
+                return redKnifeCostMessage;
+            case IconList.blueShieldIconName + CostIcon.costSuffix:
+                return blueShieldCostMessage;
+            case IconList.yellowThornIconName + CostIcon.costSuffix:
+                return yellowThornCostMessage;
+            case IconList.greenLeafIconName + CostIcon.costSuffix:
+                return greenLeafCostMessage;
+
+            case stanceCostKey:
+                return stanceCostMessage;
 
             case actionWheelKey:
                 return actionWheelMessage;

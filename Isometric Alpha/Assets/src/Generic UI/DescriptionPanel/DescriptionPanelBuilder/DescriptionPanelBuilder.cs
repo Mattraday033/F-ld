@@ -800,6 +800,7 @@ public static class IconList
     public const string slotsIconName = "Slots";
     public const string durationIconName = "Duration";
     public const string stanceWeaponIconName = "Stance Weapon";
+    public const string stanceIconName = "Stance";
 
     //Item Icons
     public const string armorScoreIconName = "Armor Score";
