@@ -35,6 +35,11 @@ public class TraitHoverMouseListener : GridRow, IPointerEnterHandler, IPointerEx
 
     public override void OnPointerExit(PointerEventData eventData)
     {
+        if(InspectNode.inspecting)
+        {
+            return;
+        }
+
         destroyAllDescriptionPanels();
 
         CurrentActionHoverPanelManager.showPanels();
@@ -42,11 +47,15 @@ public class TraitHoverMouseListener : GridRow, IPointerEnterHandler, IPointerEx
 
     public void destroyAllDescriptionPanels()
     {
+        if(InspectNode.inspecting)
+        {
+            return;
+        }
+
         if (traitHoverDescriptionPanel != null)
         {
             Destroy(traitHoverDescriptionPanel.gameObject);
         }
-
 
         foreach (DescriptionPanelBuilder panel in relatedDescriptionPanelBuilders)
         {
@@ -88,6 +97,18 @@ public class TraitHoverMouseListener : GridRow, IPointerEnterHandler, IPointerEx
         descriptionPanelBuilder.buildDescriptionPanel(describable);
 
         return descriptionPanelBuilder;
+    }
+
+    private void OnEnable()
+    {
+        MouseHoverManager.OnHoverPanelCreation.AddListener(destroyAllDescriptionPanels);
+        // InspectNode.OnInspect.AddListener(disableDestroyHoverOnPanelCreation);
+    }
+
+    private void OnDisable()
+    {
+        MouseHoverManager.OnHoverPanelCreation.RemoveListener(destroyAllDescriptionPanels);
+        // InspectNode.OnInspect.AddListener(disableDestroyHoverOnPanelCreation);
     }
 
 }

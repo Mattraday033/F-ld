@@ -416,17 +416,32 @@ public static class Helpers
             return null;
         }
 
-        if (spriteName.Equals(IconList.actionTypeIconName) ||
-            spriteName.Equals(IconList.traitTypeIconName) ||
-            spriteName.Equals(IconList.armorTypeIconName))
+        switch(spriteName)
         {
-            spriteName = IconList.typeIconName;
+            case HoverMessageList.actionTypePrefix + AbilityList.abilityActionTypeName:
+            case HoverMessageList.actionTypePrefix + AbilityList.attackActionTypeName:
+            case HoverMessageList.actionTypePrefix + AbilityList.itemActionTypeName:
+            case HoverMessageList.actionTypePrefix + AbilityList.passiveActionTypeName:
+            case HoverMessageList.actionTypePrefix + AbilityList.equippedPassiveActionTypeName:
+            case HoverMessageList.traitTypePrefix + TraitList.boostName:
+            case HoverMessageList.traitTypePrefix + TraitList.chargeName:
+            case HoverMessageList.traitTypePrefix + AbilityList.equippedPassiveActionTypeName:
+            case HoverMessageList.traitTypePrefix + TraitList.foeTypeName:
+            case HoverMessageList.traitTypePrefix + TraitList.influenceName:
+            case HoverMessageList.traitTypePrefix + TraitList.mentalName:
+            case HoverMessageList.traitTypePrefix + TraitList.onDeathName:
+            case HoverMessageList.traitTypePrefix + TraitList.protectionName:
+            case HoverMessageList.traitTypePrefix + TraitList.sizeName:
+            case HoverMessageList.traitTypePrefix + TraitList.targetPriorityName:
+            case HoverMessageList.traitTypePrefix + TraitList.woundName:
+            case IconList.actionTypeIconName:
+            case IconList.traitTypeIconName:
+            case IconList.armorTypeIconName:
+                spriteName = IconList.typeIconName;
+                break;
+            default:
+                break;
         }
-
-        // if(spriteName.Contains("Door"))
-        // {
-        //     Debug.LogError("spriteName = " + spriteName);
-        // }
 
         Sprite sprite = Resources.Load<Sprite>(spriteName);
 

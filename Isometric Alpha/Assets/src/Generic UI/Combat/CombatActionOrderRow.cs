@@ -24,11 +24,13 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
     private void Awake()
     {
         HighlightRow.AddListener(setRowHighlight);
+        MouseHoverManager.OnHoverPanelCreation.AddListener(removeHoverDataFromScreen);
     }
 
     private void OnDestroy()
     {
         HighlightRow.RemoveListener(setRowHighlight);
+        MouseHoverManager.OnHoverPanelCreation.RemoveListener(removeHoverDataFromScreen);
     }
 
     public void setRowHighlight(Stats actor, bool highlightRow)
@@ -123,7 +125,8 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
     public override void OnPointerExit(PointerEventData eventData)
     {
         if (CombatStateManager.currentActivity == CurrentActivity.Waiting ||
-			CombatStateManager.currentActivity == CurrentActivity.Retreating)
+			CombatStateManager.currentActivity == CurrentActivity.Retreating ||
+            InspectNode.inspecting)
         {
             return;
         }
@@ -133,6 +136,11 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 
 	public void removeHoverDataFromScreen()
 	{
+        if (InspectNode.inspecting)
+        {
+            return;
+        }
+
 		rowBackground.color = Color.white;
 		
 		CombatAction actionBeingDescribed = getCombatActionBeingDescribed();

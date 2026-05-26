@@ -419,18 +419,17 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
     {
         List<GlossaryEntry> allTraitTypesGlossaryEntries = new List<GlossaryEntry>();
 
-        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Boost", "Trait Types", "These traits provide offensive effects, like increasing speed or damage dealt."));
-        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Charge", "Trait Types", "These traits allow the creature to cast powerful abilities."));
-        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Creature Type", "Trait Types", "There are three types of creatures: Masters, Minions, and Summons. Master creatures are the leaders of a pack of creatures, and must be defeated to win in combat. Minion creatures are less powerful than Master creatures, and take orders from Master creatures. When the last Master creature falls, all Minion creatures will flee, and do not need to be defeated to win. Summons are creatures that were brought here by another creature, and like Minions, do not need to be defeated to win."));
-        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Equipped Passive", "Trait Types", "A trait that is provided by an Equipped Passive Ability. Permanent so long as the Ability that provides it is equipped to your Action Wheel."));
-        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Interaction", "Trait Types", "These traits explains how this creature interacts with certain types of Actions, granting immunities to certain effects or enabling others."));
-        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Mental", "Trait Types", "Mental traits are harmful effects applied to a creature. You and your allies have a chance to resist wounds with your Mental Resistance."));
-        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Positioning", "Trait Types", "Positioning traits determine where a creature will spawn at the beginning of battle. Creatures without a Positioning trait spawn randomly."));
-        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Protection", "Trait Types", "These traits provide defensive effects, like reducing incoming damage or preventing targeting."));
-        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Size", "Trait Types", "A Size trait means that a creature takes up multiple squares. Attacking more than one square the creature occupies will hurt that creature multiple times."));
-        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Stance", "Trait Types", "Stance traits are traits that give a stackable buff. Gain stacks of your stance by attacking with a Stance Weapon, such as your fists or a staff. Only one Stance can be equipped at a time."));
-        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Target Priority", "Trait Types", "These traits determine who and where a creature is allowed to attack, such as prioritizing closer targets, or attacking randomly."));
-        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Wound", "Trait Types", "Wound traits are harmful effects applied to a creature. You and your allies have a chance to resist wounds with your Wound Resistance."));
+        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Boost", "Trait Types", HoverMessageList.boostTraitTypeMessage));
+        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Charge", "Trait Types", HoverMessageList.chargeTraitTypeMessage));
+        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Foe Type", "Trait Types", HoverMessageList.foeTypeTraitTypeMessage));
+        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Equipped Passive", "Trait Types", HoverMessageList.equippedPassiveTraitTypeMessage));
+        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Interaction", "Trait Types", HoverMessageList.interactionTraitTypeMessage));
+        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Mental", "Trait Types", HoverMessageList.mentalTraitTypeMessage));
+        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("On Death", "Trait Types", HoverMessageList.onDeathTraitTypeMessage));
+        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Protection", "Trait Types", HoverMessageList.protectionTraitTypeMessage));
+        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Size", "Trait Types", HoverMessageList.sizeTraitTypeMessage));
+        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Target Priority", "Trait Types", HoverMessageList.targetPriorityTraitTypeMessage));
+        allTraitTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Wound", "Trait Types", HoverMessageList.woundTraitTypeMessage));
 
         return allTraitTypesGlossaryEntries;
     }
@@ -552,7 +551,7 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getTraitTypeBlock(getType()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getTraitTypeBlock(getType(), HoverMessageList.traitTypePrefix + getType()));
 
         buildingBlocks.AddRange(getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
 
@@ -608,16 +607,17 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         {
             case TraitType.InteractionBuff:
             case TraitType.InteractionDebuff:
-                return TraitType.Interaction.ToString();
+            case TraitType.Interaction:
+                return TraitList.interactionName;
             case TraitType.FoeType:
-                return "Foe Type";
+                return TraitList.foeTypeName;
             case TraitType.Stance:
             case TraitType.EquippedPassive:
-                return "Equipped Passive";
+                return TraitList.equippedPassiveName;
             case TraitType.OnDeath:
-                return "On Death";
+                return TraitList.onDeathName;
             case TraitType.TargetPriority:
-                return "Target Priority";
+                return TraitList.targetPriorityName;
             default:
                 return traitType.ToString();
         }

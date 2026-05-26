@@ -259,9 +259,14 @@ public class Ability: CombatAction, IJSONConvertable
 
 	public override string getDisplayType()
 	{
-		return "Ability";
+		return AbilityList.abilityActionTypeName;
 	}
-	
+
+	public override Item getSourceItem()
+	{
+		return null;
+	}
+
 	public override int getSaveType()
 	{
 		return (int) CombatActionSaveType.Ability;

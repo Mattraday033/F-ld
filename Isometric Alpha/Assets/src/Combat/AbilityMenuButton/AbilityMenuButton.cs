@@ -42,12 +42,16 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
             CombatStateManager.OnActivityChangeToTutorial.AddListener(disableButtonComponent);
             CombatStateManager.OnActivityChangeFromTutorial.AddListener(enableButtonComponent);
         }
+
+        InspectNode.OnInspect.AddListener(preventParentHoverOnInspect);
     }
 
     private void OnDestroy()
     {
         CombatStateManager.OnActivityChangeToTutorial.RemoveListener(disableButtonComponent);
         CombatStateManager.OnActivityChangeFromTutorial.RemoveListener(enableButtonComponent);
+
+        InspectNode.OnInspect.RemoveListener(preventParentHoverOnInspect);
     }
 
     public void handleCombatMouseClick()
@@ -492,9 +496,10 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
             return;
         }
 
+        hoveringOverAbilityMenuButton = true;
+
         if (CombatStateManager.inCombat)
         {
-            hoveringOverAbilityMenuButton = true;
             getDescriptionPanelSlot().setTempDescribable(loadedCombatAction);
         }
         else
@@ -515,18 +520,24 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         if (CombatStateManager.inCombat)
         {
-            hoveringOverAbilityMenuButton = false;
             getDescriptionPanelSlot().revertToPrimaryDescribable();
         }
         else
         {
             MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldDestroyHoverIcon));
 
-            if(parentHover != null)
+            if(parentHover != null && hoveringOverAbilityMenuButton)
             {
                 parentHover.OnPointerEnter(eventData);
             }
         }
+
+        hoveringOverAbilityMenuButton = false;
+    }
+
+    public void preventParentHoverOnInspect()
+    {
+        hoveringOverAbilityMenuButton = false;
     }
 
     public void spawnHoverIcon()

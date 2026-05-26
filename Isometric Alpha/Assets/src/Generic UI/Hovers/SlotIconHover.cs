@@ -58,6 +58,13 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
     }
 
+    public void setHoverMessage(string hoverMessageKey, string message)
+    {
+        this.hoverMessageKey = hoverMessageKey;
+
+        setHoverMessage(message);
+    }
+
     public void setHoverMessage(string message)
     {
         if (message == null || message.Length <= 0)
@@ -72,7 +79,6 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         hoverText = message;
     }
-
     public virtual void spawnHoverMessagePanel()
     {
         descriptionPanel = Instantiate(Resources.Load<GameObject>(PrefabNames.hoverIconDescriptionPanel), transform).GetComponent<HoverIconDescriptionPanel>();
@@ -227,14 +233,15 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             return "Bonus Damage";
         }
 
-        if(hoverMessageKey.Split("-").Length > Constants.sizeTwo)
+        string[] keySections = hoverMessageKey.Split("-");
+
+        if(keySections.Length > Constants.sizeTwo)
         {
-            hoverMessageKey = hoverMessageKey.Split("-")[1] + "-" + hoverMessageKey.Split("-")[2];
-        }
+            hoverMessageKey = keySections[1] + "-" + keySections[2];
+        } 
 
         switch(hoverMessageKey)
         {
-
             case HoverMessageList.characterScreenKey:
                 return HoverMessageList.characterScreenKey + " ["+KeyBindingList.characterScreenKey.ToString()+"]" ;
             case HoverMessageList.inventoryScreenKey:
@@ -360,12 +367,13 @@ public static class HoverMessageList
     private const string armorScoreKey = "Armor Score";
     private const string armorScoreMessage = "Armor Score reduces incoming damage by a percentage. A character's Armor Score cannot reduce incoming damage below 1. You gain Armor Score from the Items you have equipped, your Dexterity Stat, and some Traits/Abilities.";
 
-    private const string actionTypeIconMessage = "This Action's Type. A complete list of Action Types can be found in the Journal's Glossary.";
-    private const string traitTypeIconMessage = "This Trait's Type. A complete list of Trait Types can be found in the Journal's Glossary.";
+
+    public const string actionTypePrefix = "Action Type: ";
+    public const string traitTypePrefix = "Trait Type: ";
     public const string damageKey = "Damage";
-    private const string damageIconMessage = "The amount of damage this Action deals. Hold 'Alt' to see the Action's Damage Formula. A Damage Formula calculates an Action's damage based on your stats. For example: an Action with a Damage Formula of '3S + 5' deals 3 times your Strength, plus 5.";
+    private const string damageIconMessage = "The amount of damage this Action deals. Hold 'Alt' to see an Action's Damage Formula. A Damage Formula calculates an Action's damage based on your stats. For example: an Action with a Damage Formula of '3S + 5' deals 3 times your Strength, plus 5.";
     private const string critIconMessage = "The Critical Hit chance of this Action. Hold 'Alt' to see an Action's Crit Formula. A Crit Formula calculates an Action's Critical Hit chance based on your stats. For example: an Action with a Crit Formula of '3D + 5' has a Critical Hit chance of 3 times your Dexterity, plus 5.";
-    private const string rangeIconMessage = "The Range of this Action. An Action's Range determines how many spaces it affects, and in what shape. Hold 'Alt' or check the Glossary to see a Range's shape.";
+    private const string rangeIconMessage = "The Range of this Action. An Action's Range determines how many spaces it affects, and in what shape. Hold 'Alt' or check the Glossary to see a Range's size and shape.";
     private const string cooldownIconMessage = "The Action's Cooldown. Actions with a Cooldown period are unavailable for a number of rounds after use.";
     private const string slotsIconMessage = "The maximum amount of Action Wheel Slots this Action can take up. Each Slot has it's own Cooldown period: assigning an Action to multiple Slots lets you use it more often.";
     private const string durationIconMessage = "This Action has an effect that lasts multiple rounds, such as applying a Trait to it's target.";
@@ -481,8 +489,29 @@ public static class HoverMessageList
     private const string yellowThornCostMessage = exuberanceCostMessage + AbilityList.yellowThornAcquisitionMethodExplanation;
     private const string greenLeafCostMessage = exuberanceCostMessage + AbilityList.greenLeafAcquisitionMethodExplanation;
     
+    #region Action Type Messages
+    public const string abilityActionTypeMessage = "An Ability is a Combat Action that is gained by meeting certain level and/or stat requirements. Abilities often have cooldown periods after use, and may be able to take up multiple Slots on the Action Wheel.\n\n<b>Abilities are the only Action Type to benefit from Bonus Damage.</b>";
+    public const string attackActionTypeMessage = "Attacks are Combat Actions that are gained by equipping a Weapon. Attacks have no cooldown. Each Party Member can only have a certain number of Attacks equipped to their Action Wheel, determined by that Character's Wisdom.\n\nItems held in the Off Hand Slot add their Damage to Attacks provided by One Handed Weapons, but not Two Handed Weapons.";
+    public const string itemActionTypeMessage = "Item Actions are Actions provided by equipping Usable Items to the Action Wheel. Most Item Actions consume the equipped Item on use. Some Item Actions do not require a Party Action to use, allowing them to be used instantly.";
+    public const string passiveActionTypeMessage = "Passive Abilities are Abilities that are always on, and do not require being equipped to the Action Wheel to provide their benefits.";
+    public const string equippedPassiveActionTypeMessage = "Equipped Passives are Abilities that provide a Trait to a Character at the beginning of Combat. All Equipped Passives require that a Character equips them to the Action Wheel before that Character will begin to gain their benefits.";
 
+    #endregion
 
+    #region Trait Type Messages
+    public const string boostTraitTypeMessage = "Boost Traits provide offensive effects, like increasing speed or damage dealt.";
+    public const string chargeTraitTypeMessage = "Charge Traits allow a creature to cast more powerful Abilities.";
+    public const string equippedPassiveTraitTypeMessage = "An Equipped Passive Trait is a Trait provided by an Equipped Passive Ability. A Equipped Passive Trait is permanent so long as the Ability that provided the Trait is equipped to your Action Wheel.";
+    public const string foeTypeTraitTypeMessage = "There are three types of Creatures: Masters, Minions, and Summons. Master Creatures are the leaders of a pack of Enemies, and must be defeated to win in combat. Minion and Summon Creatures are typically less powerful than, and take orders, from Master Creatures. Minions and Summons do not need to be defeated to win.";
+    public const string influenceTraitTypeMessage = "Influence Traits are Traits provided by a Party Member's Zone of Influence. A Character's Zone of Influence is each tile directly adjacent to that Character. Moving out of a Character's Zone of Influence will remove that Character's Influence Trait.";
+    public const string interactionTraitTypeMessage = "These Traits explain how this creature interacts with certain types of Actions, granting immunities to certain effects or enabling others.";
+    public const string mentalTraitTypeMessage = "Mental Traits are harmful effects applied to a creature. You and your allies have a chance to resist Mental Traits with your Mental Resistance.";
+    public const string onDeathTraitTypeMessage = "On Death Traits are Traits that cause an Action to occur when the Trait holder is killed.";
+    public const string protectionTraitTypeMessage = "These traits provide defensive effects, like reducing incoming damage or preventing targeting.";
+    public const string sizeTraitTypeMessage = "A Size trait means that a Creature takes up multiple squares. Attacking more than one square the same Creature occupies will hurt that Creature multiple times.";
+    public const string targetPriorityTraitTypeMessage = "Target Priority Traits determine who and where a creature is allowed to attack, such as prioritizing closer targets, or attacking randomly.";
+    public const string woundTraitTypeMessage = "Wound Traits are harmful effects applied to a Creature. Party Members have a chance to resist Wound Traits with their Wound Resistance.";
+    #endregion
 
     private const string regenMessage = "How much health each of your party members will heal after every combat. Determined by your Party's total Strength and Wisdom.";
     private const string surpriseRoundAmountMessage = "The number of rounds of extra Actions you will receive whenever you surprise an enemy. Determined by your Party's total Dexterity.";
@@ -567,10 +596,51 @@ public static class HoverMessageList
             case Armor.typeIconName:
                 return armorSubtypeMessage;
 
-            case IconList.actionTypeIconName:
-                return actionTypeIconMessage;
-            case IconList.traitTypeIconName:
-                return traitTypeIconMessage;
+            #region Action Types
+            case actionTypePrefix + AbilityList.abilityActionTypeName:
+                return abilityActionTypeMessage;
+            case actionTypePrefix + AbilityList.attackActionTypeName:
+                return attackActionTypeMessage;
+            case actionTypePrefix + AbilityList.itemActionTypeName:
+                return itemActionTypeMessage;
+            case actionTypePrefix + AbilityList.passiveActionTypeName:
+                return passiveActionTypeMessage;
+            case actionTypePrefix + AbilityList.equippedPassiveActionTypeName:
+                return equippedPassiveActionTypeMessage;
+            #endregion
+
+            #region Trait Types
+
+            case traitTypePrefix + TraitList.boostName:
+                return boostTraitTypeMessage;
+            case traitTypePrefix + TraitList.chargeName:
+                return chargeTraitTypeMessage;
+            case traitTypePrefix + AbilityList.equippedPassiveActionTypeName:
+                return equippedPassiveTraitTypeMessage;
+            case traitTypePrefix + TraitList.foeTypeName:
+                return foeTypeTraitTypeMessage;
+            case traitTypePrefix + TraitList.influenceName:
+                return influenceTraitTypeMessage;
+            case traitTypePrefix + TraitList.mentalName:
+                return mentalResistMessage;
+            case traitTypePrefix + TraitList.onDeathName:
+                return onDeathTraitTypeMessage;
+            case traitTypePrefix + TraitList.protectionName:
+                return protectionTraitTypeMessage;
+            case traitTypePrefix + TraitList.sizeName:
+                return sizeTraitTypeMessage;
+            case traitTypePrefix + TraitList.targetPriorityName:
+                return targetPriorityTraitTypeMessage;
+            case traitTypePrefix + TraitList.woundName:
+                return woundTraitTypeMessage;
+            #endregion
+
+            // case IconList.actionTypeIconName:
+            //     return actionTypeIconMessage;
+            // case IconList.traitTypeIconName:
+            //     return traitTypeIconMessage;
+
+
             case IconList.critIconName:
                 return critIconMessage;
             case IconList.rangeIconName:

@@ -5,6 +5,16 @@ using UnityEngine;
 
 public static class AbilityList
 {
+    #region ActionType Names
+
+    public const string abilityActionTypeName = "Ability";
+    public const string attackActionTypeName = "Attack";
+    public const string itemActionTypeName = "Item";
+    public const string passiveActionTypeName = "Passive";
+    public const string equippedPassiveActionTypeName = "Equipped Passive";
+
+    #endregion
+
 	public const int lowestLevelForAbilities = 2;
 
 	public const int minimumNumberOfAbilitiesPerLevel = 1;

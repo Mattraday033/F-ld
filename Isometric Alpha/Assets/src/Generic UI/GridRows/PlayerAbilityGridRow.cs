@@ -119,7 +119,7 @@ public class PlayerAbilityGridRow : GridRow, IPointerDownHandler, IDragAndDropSo
         CombatAction combatAction = getObjectBeingDescribed() as CombatAction;
 
         if(combatAction == null || 
-            !combatAction.getDisplayType().Equals(PassiveAbility.passiveAbilityType) || 
+            !combatAction.getDisplayType().Equals(AbilityList.passiveActionTypeName) || 
             !combatAction.meetsStatRequirement())
         {
             base.setToIneligible();

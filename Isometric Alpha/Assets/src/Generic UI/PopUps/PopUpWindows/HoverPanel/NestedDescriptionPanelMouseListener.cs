@@ -15,6 +15,16 @@ public class NestedDescriptionPanelMouseListener : MonoBehaviour, IPointerEnterH
 	public List<DescriptionPanelBuilder> relatedDescriptionPanels;
 	private DescriptionPanelBuilder outputDescriptionPanel;
 	
+    private void Awake()
+    {
+        MouseHoverManager.OnHoverPanelCreation.AddListener(destroyAllDescriptionPanels);
+    }
+
+    private void OnDestroy()
+    {
+        MouseHoverManager.OnHoverPanelCreation.RemoveListener(destroyAllDescriptionPanels);
+    }
+
 	public Transform getDescriptionPanelParent()
 	{
 		switch(parentType)
@@ -46,7 +56,8 @@ public class NestedDescriptionPanelMouseListener : MonoBehaviour, IPointerEnterH
     public void OnPointerExit(PointerEventData eventData)
     {
         if (CombatStateManager.currentActivity == CurrentActivity.Waiting ||
-			CombatStateManager.currentActivity == CurrentActivity.Retreating)
+			CombatStateManager.currentActivity == CurrentActivity.Retreating || 
+            InspectNode.inspecting)
         {
             return;
         }
@@ -69,6 +80,11 @@ public class NestedDescriptionPanelMouseListener : MonoBehaviour, IPointerEnterH
  
 	public void destroyAllDescriptionPanels()
 	{
+        if (InspectNode.inspecting)
+        {
+            return;
+        }
+
 		if (outputDescriptionPanel != null)
 		{
 			Destroy(outputDescriptionPanel.gameObject);

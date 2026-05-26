@@ -162,7 +162,7 @@ public class Attack : CombatAction, IJSONConvertable
 
 	public override string getDisplayType()
 	{
-		return "Attack";
+		return AbilityList.attackActionTypeName;
 	}
 
 	public override int getMaximumSlots()
@@ -326,7 +326,7 @@ public class Attack : CombatAction, IJSONConvertable
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType(), HoverMessageList.actionTypePrefix + getType()));
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDamageBlock(getDamageTotalForDisplay(), getDamageFormulaForDisplay()));
 

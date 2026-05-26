@@ -29,6 +29,24 @@ public enum TraitType
 
 public static class TraitList
 {
+    #region TraitType Names
+
+    public const string boostName = "Boost";
+    public const string chargeName = "Charge";
+    public const string foeTypeName = "Foe Type";
+    public const string equippedPassiveName = "Equipped Passive";
+    public const string influenceName = "Influence";
+    public const string interactionName = "Interaction";
+    public const string mentalName = "Mental";
+    public const string onDeathName = "On Death";
+    public const string passiveName = "Passive";
+    public const string positioningName = "Positioning";
+    public const string protectionName = "Protection";
+    public const string sizeName = "Size";
+    public const string targetPriorityName = "Target Priority";
+    public const string woundName = "Wound";
+    #endregion
+
 	public readonly static GridCoords[] fourCornersEnemySide = new GridCoords[]
                                                                                 { 
                                                                                     new GridCoords(3,0),
@@ -121,8 +139,8 @@ public static class TraitList
 	public readonly static Trait wormBossFumesOnDeath = new OnDeathEffectTrait(StatSourceNameList.miasmicKey, "When this creature is killed, it releases a toxic gas as a final retribution against it's enemies.", "DeathFumes", AbilityList.bossWormFumesKey, specificCheckeredLeftAlliedSide);
 
 
-	public readonly static Trait mobLinked = new Trait(StatSourceNameList.weaklyLinkedKey, TraitType.Passive, "This creature takes a percentage of it's total health as damage when a minion dies.", "Chain");
-	public readonly static Trait bossLinked = new Trait(StatSourceNameList.powerLinkedKey, TraitType.Passive, "This creature takes a percentage of it's total health as damage when a minion dies.", "Chain");
+	public readonly static Trait mobLinked = new Trait(StatSourceNameList.weaklyLinkedKey, TraitType.Interaction, "This creature takes a percentage of it's total health as damage when a minion dies.", "Chain");
+	public readonly static Trait bossLinked = new Trait(StatSourceNameList.powerLinkedKey, TraitType.Interaction, "This creature takes a percentage of it's total health as damage when a minion dies.", "Chain");
 
 	//temporary buffs
 	public readonly static Trait daringSacrifice = new MandatoryTargetTrait(StatSourceNameList.daringSacrificeKey, TraitType.Protection, "Become invulnerable for one turn. All enemy attack patterns must include this creature when possible, even if they normally would not.", "DaringSacrifice", Constants.endOfRoundDuration, daringSacrificeDamageReduction);

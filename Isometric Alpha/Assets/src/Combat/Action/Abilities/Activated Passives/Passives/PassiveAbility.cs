@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PassiveAbility : EquippedPassive //passives are (currently) mostly used to explain to the player some mechanic that happens naturally,
 {                                              //like regeneration
-    public const string passiveAbilityType = "Passive";
-
     private MultiStackTrait multiStackTrait;
 
     public PassiveAbility(CombatActionSettings settings) :
@@ -162,7 +160,7 @@ public class PassiveAbility : EquippedPassive //passives are (currently) mostly 
     //ISortable Methods
     public override string getDisplayType()
     {
-        return passiveAbilityType;
+        return AbilityList.passiveActionTypeName;
     }
 
     public override string getType()

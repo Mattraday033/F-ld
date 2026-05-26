@@ -161,6 +161,17 @@ public class DescriptionPanelRow : MonoBehaviour
         DescriptionPanel.setImageColor(iconBackground, color);
     }
 
+    public void setIconHoverText(string hoverMessageKey, string text)
+    {
+        if (iconHover == null)
+        {
+            return;
+        }
+
+        iconHover.setHoverMessage(hoverMessageKey, text);
+    }
+
+
     public void setIconHoverText(string text)
     {
         if (iconHover == null)

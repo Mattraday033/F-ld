@@ -37,7 +37,7 @@ public class DamageOverTimeTrait : Trait
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getTraitTypeBlock(getType()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getTraitTypeBlock(getType(), HoverMessageList.traitTypePrefix + getType()));
 
 		if (damageFormula.Length <= 0)
 		{

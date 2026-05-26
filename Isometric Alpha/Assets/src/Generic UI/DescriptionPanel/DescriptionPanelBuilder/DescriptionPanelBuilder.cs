@@ -57,7 +57,7 @@ public interface IDescribableInBlocks : INameSource
 	}
 }
 
-public struct DescriptionPanelBuildingBlock
+public class DescriptionPanelBuildingBlock
 {
     public DescriptionPanelBuildingBlockType type;
     public string iconName;
@@ -95,7 +95,7 @@ public struct DescriptionPanelBuildingBlock
         this.symbolCharacter = null;
         this.item = item;
     }
-    public Sprite getIcon()
+    public virtual Sprite getIcon()
     {
         return Helpers.loadSpriteFromResources(iconName);
     }
@@ -105,9 +105,9 @@ public struct DescriptionPanelBuildingBlock
     {
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Name, text: text);
     }
-    public static DescriptionPanelBuildingBlock getActionTypeBlock(string text)
+    public static DescriptionPanelBuildingBlock getActionTypeBlock(string text, string iconName)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text: text, iconName: IconList.actionTypeIconName);
+        return new DescriptionPanelTypeBuildingBlock(text, iconName);
     }
 
     public static DescriptionPanelBuildingBlock getDamageBlock(string text, string formula)
@@ -187,9 +187,9 @@ public struct DescriptionPanelBuildingBlock
 
     //Trait Blocks
 
-    public static DescriptionPanelBuildingBlock getTraitTypeBlock(string text)
+    public static DescriptionPanelBuildingBlock getTraitTypeBlock(string text, string iconName)
     {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.traitTypeIconName);
+        return new DescriptionPanelTypeBuildingBlock(text, iconName);
     }
 
     //Item Blocks
@@ -476,6 +476,20 @@ public struct DescriptionPanelBuildingBlock
 
 }
 
+public class DescriptionPanelTypeBuildingBlock : DescriptionPanelBuildingBlock
+{
+
+    public DescriptionPanelTypeBuildingBlock(string text, string iconName) :
+    base(DescriptionPanelBuildingBlockType.Text, text: text, iconName: iconName)
+    {
+        
+    }
+
+    public override Sprite getIcon()
+    {
+        return Helpers.loadSpriteFromResources(iconName);
+    }
+}
 
 
 public class DescriptionPanelBuilder : MonoBehaviour
@@ -608,7 +622,7 @@ public class DescriptionPanelBuilder : MonoBehaviour
         {
             row.setIcon(block.getIcon());
 
-            row.setIconHoverText(HoverMessageList.getMessage(block.iconName));
+            row.setIconHoverText(block.iconName, HoverMessageList.getMessage(block.iconName));
         }
         else if (block.symbolCharacter != null)
         {

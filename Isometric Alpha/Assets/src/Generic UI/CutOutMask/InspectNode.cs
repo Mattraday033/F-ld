@@ -28,11 +28,11 @@ public class InspectNode : MonoBehaviour
 
     private void Awake()
     {
-        if(CombatStateManager.inCombat && CombatStateManager.whoseTurn != WhoseTurn.Won)
-        {
-            gameObject.SetActive(false);
-            return;
-        }
+        // if(CombatStateManager.inCombat && CombatStateManager.whoseTurn != WhoseTurn.Won)
+        // {
+        //     gameObject.SetActive(false);
+        //     return;
+        // }
 
         if(instance == null)
         {
@@ -89,4 +89,5 @@ public class InspectNode : MonoBehaviour
     {
         inspecting = false;
     }
+
 }

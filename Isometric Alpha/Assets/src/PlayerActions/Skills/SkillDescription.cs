@@ -155,7 +155,7 @@ public class SkillDescription : IDescribable, IDescribableInBlocks
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType(), HoverMessageList.actionTypePrefix + getType()));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRange()));
 

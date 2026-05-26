@@ -23,7 +23,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 
 	public override string getDisplayType()
 	{
-		return "Item";
+		return AbilityList.itemActionTypeName;
 	}
 
 	public override bool targetsAllySection()
@@ -282,7 +282,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType(), HoverMessageList.actionTypePrefix + getType()));
 
         if(!getDamageFormula().Equals(Constants.zeroRating))
         {

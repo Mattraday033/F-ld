@@ -1205,13 +1205,10 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public virtual void setSourceItem(Item sourceItem)
     {
-        throw new IOException("The base class version of setSourceItem() was called extraneously");
+
     }
 
-    public virtual string getDisplayType()
-    {
-        throw new IOException("The base class version of getDisplayType() was called extraneously");
-    }
+    public abstract string getDisplayType();
 
     public virtual int getMaximumSlots()
     {
@@ -1569,7 +1566,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType(), HoverMessageList.actionTypePrefix + getType()));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getDamageBlock(getDamageTotalForDisplay(), getDamageFormulaForDisplay()));
 

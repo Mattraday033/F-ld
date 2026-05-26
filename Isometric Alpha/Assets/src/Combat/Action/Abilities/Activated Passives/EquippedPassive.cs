@@ -9,8 +9,6 @@ public class EquippedPassive : Ability
 	private const int noCooldown = 1;
 	private const string personalRangeTitle = "Personal";
 
-	public const string displayType = "Equipped Passive";
-
 	private List<Trait> relatedTraits = new List<Trait>();
 
 	public EquippedPassive(CombatActionSettings settings) :
@@ -37,7 +35,7 @@ public class EquippedPassive : Ability
 
 	public override string getDisplayType()
 	{
-		return displayType;
+		return AbilityList.equippedPassiveActionTypeName;
 	}
 
 	public override string getRangeTitle()
@@ -123,7 +121,7 @@ public class EquippedPassive : Ability
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType(), HoverMessageList.actionTypePrefix + getType()));
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getUseDescription()));
 
