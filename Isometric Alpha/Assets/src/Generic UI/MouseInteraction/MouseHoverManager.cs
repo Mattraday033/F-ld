@@ -148,7 +148,7 @@ public static class MouseHoverManager
 
     public static void spawnHoverIcon(IHoverIconSource source, Transform parent, float scale = 1f)
     {
-        if (source.getObjectBeingDescribed() == null)
+        if (source.getObjectBeingDescribed() == null || parent == null)
         {
             return;
         }

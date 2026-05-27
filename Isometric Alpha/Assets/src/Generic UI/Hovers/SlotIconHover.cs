@@ -144,6 +144,8 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.LogError("gameObject.name = " + gameObject.name);
+
         if(ignoreHover || (eventData != null && eventData.used))
         {
             return;
@@ -295,7 +297,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     }
 
-	public List<IDescribable> getRelatedDescribables()
+	public virtual List<IDescribable> getRelatedDescribables()
     {
         List<IDescribable> relatedDescribables = new List<IDescribable>();
 
@@ -339,8 +341,8 @@ public static class HoverMessageList
     private const string mainHandWeaponSlotMessage = "You can equip Main-Hand Weapons from the Character and Inventory Screens.";
     private const string mainHandWeaponTabMessage = "Here you can find all the Main-Hand Weapons you have in your Inventory. " + mainHandWeaponMessage;
     private const string mainHandWeaponMessage = "Equipping a Main-Hand Weapon gives you a new Attack Action on your Action Wheel in Combat.";
-    private const string twoHandedWeaponMessage = "This weapon requires two hands to wield. Two-Handed Weapons have larger ranges and deal more damage than one handed ones, but don't benefit from the damage of your Off Hand. Using a Two-Handed Weapon forfeits the benefits from your Shield for the rest of the turn.";
-    private const string oneHandedWeaponMessage = "You only need one hand to wield this weapon. One-Handed Weapons have shorter ranges and deal less damage than Two-Handed ones, but add the damage of your Off-Hand Weapon to their damage.";
+    private const string twoHandedWeaponMessage = "This Weapon requires two hands to wield. Two-Handed Weapons have larger ranges and deal more damage than one handed ones, but don't benefit from the damage of your Off Hand. Using a Two-Handed Weapon forfeits the benefits from your Shield for the rest of the turn.";
+    private const string oneHandedWeaponMessage = "You only need one hand to wield this Weapon. One-Handed Weapons have shorter ranges and deal less damage than Two-Handed ones, but add the damage of your Off-Hand Weapon to their damage.";
 
     private const string offhandSlotMessage = "Off Hand Slot";
     private const string offhandSubMessage = "Off-Hand Weapons give you extra Damage and Crit Chance when you attack with a One-Handed Weapon. Shields give extra Armor as long as you haven't attacked with a Two-Handed Weapon this turn.";
@@ -365,7 +367,7 @@ public static class HoverMessageList
     private const string armorSubtypeMessage = "Wearing Armor provides Armor Score, which blocks a percentage of incoming damage. Some pieces of Armor also provide additional benefits.";
 
     private const string armorScoreKey = "Armor Score";
-    private const string armorScoreMessage = "Armor Score reduces incoming damage by a percentage. A character's Armor Score cannot reduce incoming damage below 1. You gain Armor Score from the Items you have equipped, your Dexterity Stat, and some Traits/Abilities.";
+    private const string armorScoreMessage = "Armor Score reduces incoming Damage by a percentage. A Character's Armor Score cannot reduce incoming Damage below 1. A Character gains Armor Score from the Items they have equipped, their Dexterity Stat, and some Traits/Abilities.";
 
 
     public const string actionTypePrefix = "Action Type: ";
@@ -385,25 +387,26 @@ public static class HoverMessageList
     private const string goldRewardKey = "Reward";
     private const string goldRewardMessage = "The amount of Gold your Party earned in Combat.";
 
-    private const string invulnerableIconMessage = "Invulnerability provides a flat reduction to incoming damage per hit. Can only reduce incoming damage down to 1. Applied before the damage reduction from Armor Score.";
+    private const string invulnerableIconMessage = "Invulnerability provides a flat reduction to incoming damage per hit. Invulnerability can only reduce incoming Damage down to 1. This reduction is applied before the Damage reduction from Armor Score.";
     private const string vulnerableIconMessage = "Extra damage that is applied when damage is taken. Applied before the damage reduction from Armor Score.";
     private const string healingBoostIconMessage = "Extra healing that is applied when a creature receives healing.";
 
     public const string bonusDamageKey = "Bonus Damage";
-    private const string bonusDamageMessage = "Bonus Damage is added to the damage of all of your Abilities. Your Bonus Damage is equal to the highest Base Damage of all of your equipped Weapons. For example, a Weapon with a Damage Formula of '3S + 5' provides 5 Bonus Damage. Hold 'Alt' when viewing a Weapon's stats to reveal formulas.";
+    private const string bonusDamageMessage = "A Character's Bonus Damage is added to the damage of all of their Abilities. Each Character's Bonus Damage is equal to the highest Base Damage of all of their equipped Weapons. For example, a Weapon with a Damage Formula of '3S + 5' provides 5 Bonus Damage. Hold 'Alt' when viewing a Weapon's Stats to reveal formulas.";
 
     public const string weaponSlotKey = "Weapon Slots";
-    private const string weaponSlotMessage = "The number of Main-Hand Weapons you can have equipped to your Action Wheel. The higher a Character's Wisdom, the more Weapon Slots that Character has.";
+    private const string weaponSlotMessage = "The number of Main-Hand Weapons a Character can have equipped to their Action Wheel. The higher a Character's Wisdom, the more Weapon Slots that Character has.";
 
     private const string stanceWeaponMessage = "Attacks made with Stance Weapons, such as fists and staffs, give the attacker additional stacks of their current Stance.";
-    private const string stanceMessage = "Stances are Equipped Passives that provide you a beneficial Trait with a stackable bonus. Only one Stance can be equipped at a time.\n\n" + stanceWeaponMessage;
+    private const string stanceMessage = "Stances are a type of Equipped Passive Ability that provide a beneficial Trait with a stackable bonus. Only one Stance can be equipped at a time.\n\n" + stanceWeaponMessage;
     private const string stanceCostKey = "Stance" + CostIcon.costSuffix;
     private const string stanceCostMessage = "This Action costs Stance Stacks to use. " + stanceMessage;
+    public const string traitCostKey = "Trait" + CostIcon.costSuffix;
+    private const string traitCostMessage = "This Action costs Trait Stacks to use. Certain Traits can be gained multiple times as 'Stacks'. Each Stackable Trait gains Stacks in a different way. See the Trait's description for details.";
 
-
-    private const string levelMessage = "Leveling up a character costs 1000 Experience. Gaining a level will increase Maximum Health, return all missing health, and boost one Primary Stat. The highest level a character can reach is 20.";
+    private const string levelMessage = "Leveling up a character costs 1000 Experience. Gaining a Level will increase Maximum Health, return all missing health, and boost one Primary Stat. The highest Level a character can reach is 20.";
     private const string healthMessage = "A Party Member reduced to 0 health is knocked unconscious, and needs special abilities or items to be awakened in combat. Normal healing items can awaken a Party Member out of combat. If your character loses all of their health, however, they will die and you will lose the game.";
-    private const string experienceMessage = "Your progress towards your next level up. Gain Experience from completing quests and defeating some boss monsters. For every 1000 Experience you gain, you can level up.";
+    private const string experienceMessage = "A Character's progress towards their next Level up. Gain Experience from completing quests and defeating some boss monsters. For every 1000 Experience gained, a Character can Level up once.";
     private const string experienceRewardKey = "Combat Experience";
     private const string experienceRewardMessage = "The amount of Experience each Party Member gained from this Combat, whether they participated in it or not. You will only earn Combat Experience if a fight is particularly challenging, or if it was related to a Quest.";
 
@@ -428,7 +431,7 @@ public static class HoverMessageList
     public const string zoiKey = "Zone of Influence";
 
     private const string characterAbilityKey = "Character Abilities";
-    private const string characterAbilityMessage = "Each Party Member gets a number of unique Abilities they unlock at certain levels.";
+    private const string characterAbilityMessage = "Each Party Member gets a number of unique Abilities they unlock at certain Levels.";
 
     private const string statPointKey = "Stat Points";
     private const string statPointMessage = "This shows how many times you can increase your Primary Stats. The four Primary Stats are Strength, Dexterity, Wisdom, and Charisma.";
@@ -439,10 +442,10 @@ public static class HoverMessageList
     private const string footingKey = "Footing";
     private const string footingMessage = "Some enemies will chase you when you get too close. These enemies only move half as fast as you. When the Left Foot is visibile, enemies chasing you will move the next time you take a step.";
 
-    private const string strengthMessage = "This Primary Stat bolsters a character's Maximum Health, Critical Hit Damage, and Wound Resistance. Strength also governs the Intimidate skill.";
-    private const string dexterityMessage = "This Primary Stat bolsters a character's Armor, Surprise Round Damage Modifier, and Armor Penetration. Dexterity also governs the Cunning skill.";
-    private const string wisdomMessage = "This Primary Stat bolsters a character's Mental Resistance. Wisdom also provides bonus Passive Slots, increases the number of Weapons you can have equipped, and governs the Observation skill.";
-    private const string charismaMessage = "This Primary Stat increases your Synergy, gives access to Exuberances, and boosts a character's Zone of Influence. Charisma also governs the Leadership skill.";
+    private const string strengthMessage = "This Primary Stat bolsters a character's Maximum Health, Critical Hit Damage, and Wound Resistance. Strength also governs the Intimidate Skill.";
+    private const string dexterityMessage = "This Primary Stat bolsters a character's Armor, Surprise Round Damage Modifier, and Armor Penetration. Dexterity also governs the Cunning Skill.";
+    private const string wisdomMessage = "This Primary Stat bolsters a character's Mental Resistance. Wisdom also provides bonus Passive Slots, increases the number of Weapons you can have equipped, and governs the Observation Skill.";
+    private const string charismaMessage = "This Primary Stat increases your Synergy, gives access to Exuberances, and boosts a character's Zone of Influence. Charisma also governs the Leadership Skill.";
 
     private const string usableItemInventoryTabMessage = "Usable Items Tab.";
     private const string usableItemOOCSubMessage = " Usable Items that can be activated out of combat can be found here." + howToUseItemMessage;
@@ -490,7 +493,7 @@ public static class HoverMessageList
     private const string greenLeafCostMessage = exuberanceCostMessage + AbilityList.greenLeafAcquisitionMethodExplanation;
     
     #region Action Type Messages
-    public const string abilityActionTypeMessage = "An Ability is a Combat Action that is gained by meeting certain level and/or stat requirements. Abilities often have cooldown periods after use, and may be able to take up multiple Slots on the Action Wheel.\n\n<b>Abilities are the only Action Type to benefit from Bonus Damage.</b>";
+    public const string abilityActionTypeMessage = "An Ability is a Combat Action that is gained by meeting certain Level and/or stat requirements. Abilities often have cooldown periods after use, and may be able to take up multiple Slots on the Action Wheel.\n\n<b>Abilities are the only Action Type to benefit from Bonus Damage.</b>";
     public const string attackActionTypeMessage = "Attacks are Combat Actions that are gained by equipping a Weapon. Attacks have no cooldown. Each Party Member can only have a certain number of Attacks equipped to their Action Wheel, determined by that Character's Wisdom.\n\nItems held in the Off Hand Slot add their Damage to Attacks provided by One Handed Weapons, but not Two Handed Weapons.";
     public const string itemActionTypeMessage = "Item Actions are Actions provided by equipping Usable Items to the Action Wheel. Most Item Actions consume the equipped Item on use. Some Item Actions do not require a Party Action to use, allowing them to be used instantly.";
     public const string passiveActionTypeMessage = "Passive Abilities are Abilities that are always on, and do not require being equipped to the Action Wheel to provide their benefits.";
@@ -518,13 +521,13 @@ public static class HoverMessageList
     private const string retreatChanceMessage = "Your chance to successfully retreat from combat. Determined by your Party's total Dexterity and Wisdom.";
     private const string volleyAccuracyMessage = "Extra accuracy applied whenever your party performs a Volley action. Determined by your Party's total Wisdom and Charisma.";
     private const string goldMultiplierMessage = "Extra Gold received from combat. Can be gained by equipping certain Items and Abilities.";
-    private const string partySlotsMessage = "The number of Party Members you can bring with you into combat. Determined by the highest level of any of your Party Members, as well as your Party's total Wisdom and Charisma.";
-    private const string partyActionsMessage = "The number of Actions your Party can perform each round in combat. Determined by the highest level of any of your Party Members, as well as your Party's total Dexterity and Charisma.";
+    private const string partySlotsMessage = "The number of Party Members your Party can bring into combat. Determined by the highest Level of any of your Party Members, as well as your Party's total Wisdom and Charisma.";
+    private const string partyActionsMessage = "The number of Actions your Party can perform each round in combat. Determined by the highest Level of any of your Party Members, as well as your Party's total Dexterity and Charisma.";
     public const string discountKey = "Discount";
     private const string discountMessage = "The total difference in an item's price, based on your Party's total Charisma. Sometimes merchants will give extra discounts or penalties based on what you've done for them or to them. A negative discount means the merchant is making their goods more expensive.";
 
     public const string retreatButtonKey = "Retreat Button";
-    private const string retreatButtonMessage = "Click here to Retreat. The percentage is your success chance. If you fail, the enemy will take their entire turn before you get to act again. Even if you succeed, the enemy will be fully restored when you return. Combat entered through dialogue cannot be retreated from. Be careful who you pick a fight with!";
+    private const string retreatButtonMessage = "Click here to Retreat. The percentage shown on the button is the chance Retreating will succeed. If the Party fails to Retreat, the enemy will take their entire turn before the Party gets to act again. Even if Retreating succeeds, the enemy will be fully restored when the Party returns. Combat entered through dialogue cannot be retreated from.\n\n<i>Be careful who you pick a fight with!</i>";
 
     private const string actionOrderKey = "Action Order";
     private const string actionOrderMessage = "Most Actions can only be performed between rounds, and will be added to the Action Order. Unless otherwise stated, the Action Order will alternate between Actions performed by your allies, and by your enemies. When you resolve the turn, all Actions in the Action Order will occur in the order they are displayed, starting at the top. To learn who is performing an Action in the Action Order, who it is targeting, and what it will do, hover your mouse over the Action's row.";
@@ -634,12 +637,6 @@ public static class HoverMessageList
             case traitTypePrefix + TraitList.woundName:
                 return woundTraitTypeMessage;
             #endregion
-
-            // case IconList.actionTypeIconName:
-            //     return actionTypeIconMessage;
-            // case IconList.traitTypeIconName:
-            //     return traitTypeIconMessage;
-
 
             case IconList.critIconName:
                 return critIconMessage;
@@ -785,6 +782,9 @@ public static class HoverMessageList
 
             case stanceCostKey:
                 return stanceCostMessage;
+
+            case traitCostKey:
+                return traitCostMessage;
 
             case actionWheelKey:
                 return actionWheelMessage;

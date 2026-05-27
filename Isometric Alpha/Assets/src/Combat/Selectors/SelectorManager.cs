@@ -586,6 +586,11 @@ public class SelectorManager : MonoBehaviour
                 return;
         }
 
+        if(InspectNode.inspecting)
+        {
+            return;
+        }
+
         if(heartBeatCount < heartBeatsToWait && !Input.GetKey(KeyBindingList.jumpMoveKey.getCurrentKeyCode()))
         {
             heartBeatCount++;

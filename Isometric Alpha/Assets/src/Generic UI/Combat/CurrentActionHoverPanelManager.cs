@@ -6,6 +6,11 @@ public class CurrentActionHoverPanelManager : DescriptionPanelSlot
 {
     private static CurrentActionHoverPanelManager instance;
 
+    public override bool allowInspectNodes()
+    {
+        return false;
+    }
+
     public static CurrentActionHoverPanelManager getInstance()
     {
         return instance;

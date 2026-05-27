@@ -282,6 +282,9 @@ public static class TraitList
 		
 		dictionaryOfTraits.Add(wearyHeart.getName(), wearyHeart);
 		dictionaryOfTraits.Add(stonewall.getName(), stonewall);
+        
+		dictionaryOfTraits.Add(bloodlust.getName(), bloodlust);
+		dictionaryOfTraits.Add(predation.getName(), predation);
 		
 		dictionaryOfHiddenTraits.Add(untargetable.getName(), untargetable);
 	}

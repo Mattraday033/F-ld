@@ -14,7 +14,6 @@ public class DescriptionPanelSlot : MonoBehaviour
     public bool addToScreenOnCreation;
     public bool handlesRelatedDescribables;
 
-
     public DescriptionPanelBuilder prebuiltBuilder;
     public DescriptionPanelBuilderType builderType;
     public List<DescriptionPanelBuildingBlockType> whiteList;
@@ -35,31 +34,7 @@ public class DescriptionPanelSlot : MonoBehaviour
     public ScrollableUIElement grid;
 
     private List<IDescribable> primaryDescribables;
-
     private List<IDescribable> tempDescribables;
-
-    // private IDescribable getMainPrimaryDescribable()
-    // {
-    //     return getFirstDescribableInList(primaryDescribables);
-    // }
-
-
-    // private IDescribable getMainTempDescribable()
-    // {
-    //     return getFirstDescribableInList(tempDescribables);
-    // }
-
-    // private static IDescribable getFirstDescribableInList(List<IDescribable> list)
-    // {
-    //     if (list == null || list.Count <= 0)
-    //     {
-    //         return null;
-    //     }
-    //     else
-    //     {
-    //         return list[0];
-    //     }
-    // }
 
     private static List<IDescribable> addRelatedDescribables(List<IDescribable> list, IDescribable describable)
     {
@@ -102,9 +77,7 @@ public class DescriptionPanelSlot : MonoBehaviour
             return;
         }
 
-        primaryDescribables = new List<IDescribable>();
-
-        primaryDescribables.Add(primaryDescribable);
+        primaryDescribables = new List<IDescribable>() { primaryDescribable };
 
         if (handlesRelatedDescribables)
         {
@@ -123,6 +96,35 @@ public class DescriptionPanelSlot : MonoBehaviour
         foreach (DescriptionPanelSlot slot in additionalSlots)
         {
             slot.setPrimaryDescribable(primaryDescribable);
+        }
+    }
+
+    public void setPrimaryDescribable(List<IDescribable> primaryDescribables)
+    {
+        if (primaryDescribables == null || primaryDescribables.Count <= 0)
+        {
+            return;
+        }
+
+        this.primaryDescribables = primaryDescribables;
+
+        if (handlesRelatedDescribables)
+        {
+            addRelatedDescribables(primaryDescribables, primaryDescribables[0]);
+        }
+
+        lastObjectToBeDescribed = primaryDescribables[0];
+
+        revealDescriptionPanelSet();
+
+        if (additionalSlots == null)
+        {
+            return;
+        }
+
+        foreach (DescriptionPanelSlot slot in additionalSlots)
+        {
+            slot.setPrimaryDescribable(primaryDescribables);
         }
     }
 
@@ -268,6 +270,8 @@ public class DescriptionPanelSlot : MonoBehaviour
             descriptionPanelBuilder.filter = new BuilderFilterWhiteList(whiteList);
         }
 
+        descriptionPanelBuilder.inspectNodesAllowed = allowInspectNodes();
+
         descriptionPanelBuilder.buildDescriptionPanel(describableInBlocks, BlockFormat.getBlockFormat(formatType));
 
         descriptionPanelComponent = null;
@@ -353,5 +357,10 @@ public class DescriptionPanelSlot : MonoBehaviour
             default:
                 return false;
         }
+    }
+
+    public virtual bool allowInspectNodes()
+    {
+        return true;
     }
 }

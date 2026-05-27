@@ -125,4 +125,12 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
         }
     }
 
+    public override void deactivateInspectNode()
+    {
+        if(inspectNode != null)
+        {
+            inspectNode.SetActive(false);
+        }
+    }
+    
 }

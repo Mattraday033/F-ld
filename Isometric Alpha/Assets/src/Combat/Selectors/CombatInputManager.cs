@@ -20,7 +20,7 @@ public class CombatInputManager : MonoBehaviour
     // Update is called once per frame
 	void Update()   //here for Key Input
 	{
-        if(KeyBindingSettingsManager.listeningForKeyBinding())
+        if(KeyBindingSettingsManager.listeningForKeyBinding() || InspectNode.inspecting)
         {
             return;
         }

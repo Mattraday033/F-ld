@@ -101,7 +101,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
     void Update() //here for Key Input
     {
-        if (displayOnly)
+        if (displayOnly || InspectNode.inspecting)
         {
             return;
         }

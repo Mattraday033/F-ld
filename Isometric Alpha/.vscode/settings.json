@@ -142,5 +142,6 @@
     "search.useIgnoreFiles": false,
     "omnisharp.enableCompletionItemCommitCharacters": false,
     "omnisharp.acceptSuggestionsOnCommitCharacter": false,
-    "editor.acceptSuggestionsOnCommitCharacter": false
+    "editor.acceptSuggestionsOnCommitCharacter": false,
+    "dotnet.debug.suppressInvalidDebugTypeWarning": true
 }

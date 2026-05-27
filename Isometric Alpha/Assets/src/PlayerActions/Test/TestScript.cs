@@ -21,10 +21,10 @@ public static class TestScript
 
         // PartyManager.getPlayerStats().setLevel(1);
         // PartyManager.getPlayerStats().currentHealth = 1;
-        PartyManager.getPlayerStats().strength = 5;
-        PartyManager.getPlayerStats().dexterity = 5;
-        PartyManager.getPlayerStats().wisdom = 5;
-        PartyManager.getPlayerStats().charisma = 5;
+        // PartyManager.getPlayerStats().strength = 5;
+        // PartyManager.getPlayerStats().dexterity = 5;
+        // PartyManager.getPlayerStats().wisdom = 5;
+        // PartyManager.getPlayerStats().charisma = 5;
 
         // PartyManager.addXP(1050);
 
@@ -35,7 +35,7 @@ public static class TestScript
         // Flags.flags["charismaBarricadePassUsed"] = false;
         // Flags.flags["andrasBarricadePassUsed"] = false;
 
-        PartyManager.getPlayerStats().combatActionArray = new CombatActionArray(PartyManager.getPlayerStats(), Wisdom.getStartingActions(PartyManager.getPlayerStats()));
+        // PartyManager.getPlayerStats().combatActionArray = new CombatActionArray(PartyManager.getPlayerStats(), Wisdom.getStartingActions(PartyManager.getPlayerStats()));
 
         // PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
 

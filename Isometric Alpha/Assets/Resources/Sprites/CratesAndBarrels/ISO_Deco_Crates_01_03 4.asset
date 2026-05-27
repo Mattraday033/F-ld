@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: ISO_Deco_Crates_01_03 4
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: d452635b0d1482841a7e03aec5230bdd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8e355353321399f458defd3ef1429cbe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

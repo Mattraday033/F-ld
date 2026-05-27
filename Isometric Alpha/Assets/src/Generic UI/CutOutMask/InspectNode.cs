@@ -28,18 +28,10 @@ public class InspectNode : MonoBehaviour
 
     private void Awake()
     {
-        // if(CombatStateManager.inCombat && CombatStateManager.whoseTurn != WhoseTurn.Won)
-        // {
-        //     gameObject.SetActive(false);
-        //     return;
-        // }
-
-        if(instance == null)
-        {
-            instance = this;
-        } else
+        if(CombatStateManager.inCombat && AbilityMenuButton.hoveringOverAbilityMenuButton)
         {
             gameObject.SetActive(false);
+            return;
         }
 
         keybindText.text = "[" + KeyBindingList.inspectKey.ToString() + "]";
@@ -88,6 +80,25 @@ public class InspectNode : MonoBehaviour
     private static void endInspectingOnStateChange()
     {
         inspecting = false;
+    }
+
+    private void OnEnable()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        } else
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if(instance == this)
+        {
+            instance = null;
+        }
     }
 
 }

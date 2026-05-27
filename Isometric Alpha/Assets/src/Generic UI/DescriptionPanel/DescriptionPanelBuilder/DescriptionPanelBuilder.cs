@@ -515,6 +515,8 @@ public class DescriptionPanelBuilder : MonoBehaviour
 
     public DescriptionPanelBuilder nextBuilder;
 
+    public bool inspectNodesAllowed = true;
+
     // public ScrollableUIElement scrollableUIElement;
 
     public void buildDescriptionPanel(IDescribableInBlocks blockOrigin)
@@ -559,7 +561,7 @@ public class DescriptionPanelBuilder : MonoBehaviour
             statGridLayout.constraintCount = maxRowCount;
         }
 
-        if(blockOrigin.requiresInspectNode())
+        if(blockOrigin.requiresInspectNode() && inspectNodesAllowed)
         {
             activateInspectNode();
             setFitterToPreferredSize();
@@ -567,6 +569,11 @@ public class DescriptionPanelBuilder : MonoBehaviour
         } else if(CombatStateManager.inCombat)
         {
             setFitterToPreferredSize();
+        }
+
+        if(!inspectNodesAllowed)
+        {
+            deactivateInspectNode();
         }
 
         rebuildLayouts();
@@ -728,6 +735,11 @@ public class DescriptionPanelBuilder : MonoBehaviour
     }
 
     public virtual void activateInspectNode()
+    {
+        //empty on purpose
+    }
+
+    public virtual void deactivateInspectNode()
     {
         //empty on purpose
     }

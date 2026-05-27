@@ -37,8 +37,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 127, y: -21.836668}
-  m_SizeDelta: {x: 0.01, y: 0}
+  m_AnchoredPosition: {x: 164.5, y: -23.336668}
+  m_SizeDelta: {x: 10.01, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &112795036689621167
 CanvasRenderer:
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 5, y: 3, z: 5, w: 3}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -210,8 +210,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 127, y: -56.170006}
-  m_SizeDelta: {x: 250, y: 0}
+  m_AnchoredPosition: {x: 164.5, y: -57.670006}
+  m_SizeDelta: {x: 325, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4517095536061283788
 CanvasRenderer:
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 5, y: 2.5, z: 5, w: 7.5}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 250
+  m_PreferredWidth: 325
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
@@ -383,8 +383,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 134, y: -40.333336}
-  m_SizeDelta: {x: 254, y: 0}
+  m_AnchoredPosition: {x: 171.5, y: -40.333336}
+  m_SizeDelta: {x: 329, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &372193960142470686
 CanvasRenderer:
@@ -580,7 +580,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 268, y: 0}
+  m_SizeDelta: {x: 343, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4583658078886558766
 CanvasRenderer:
@@ -715,8 +715,10 @@ MonoBehaviour:
   contentsText: {fileID: 0}
   worthText: {fileID: 0}
   slotText: {fileID: 0}
+  slotsUsedText: {fileID: 0}
   weaponNameText: {fileID: 0}
   rangeText: {fileID: 0}
+  invulnerabilityText: {fileID: 0}
   armorRatingText: {fileID: 0}
   damageText: {fileID: 0}
   offHandDamageText: {fileID: 0}
@@ -731,8 +733,6 @@ MonoBehaviour:
   wisText: {fileID: 0}
   chaText: {fileID: 0}
   nestedDescriptionPanel: {fileID: 0}
-  gameObjectDisplayCanvas: {fileID: 0}
-  displayAdjustmentCoords: 0000000000000000
 --- !u!114 &6349276623620914919
 MonoBehaviour:
   m_ObjectHideFlags: 0
