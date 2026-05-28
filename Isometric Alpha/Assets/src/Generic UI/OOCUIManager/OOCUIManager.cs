@@ -95,7 +95,7 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
             return;
         }
 
-        skillIconHover.iconImage.sprite = Resources.Load<Sprite>(State.currentSkillType.ToString());
+        skillIconHover.iconImage.sprite = Helpers.loadSpriteFromResources(State.currentSkillType.ToString());
 
         switch(State.currentSkillType)
         {

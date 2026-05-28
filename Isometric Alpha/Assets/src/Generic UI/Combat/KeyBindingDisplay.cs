@@ -140,6 +140,15 @@ public class KeyBindingDisplay : MonoBehaviour
         }
     }
 
+    private static string moreInfoKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.showFormulaKey.ToString() + ": More Info";
+        }
+    }
+
+
     #endregion
 
     #region Out Of Combat Constants
@@ -381,6 +390,8 @@ public class KeyBindingDisplay : MonoBehaviour
                 addSpace();                
                 displayText.text += nextTurnButtonPress;
                 addSpace();
+                displayText.text += moreInfoKeyBinding;
+                addSpace();
                 displayText.text += escapeMenuKeyBinding;
                 addSpace();
                 break;
@@ -391,6 +402,8 @@ public class KeyBindingDisplay : MonoBehaviour
                 addSpace();
                 displayText.text += deselectKeyBinding;
                 addSpace();
+                displayText.text += moreInfoKeyBinding;
+                addSpace();
                 break;
             case CurrentActivity.ChoosingLocation:
             case CurrentActivity.ChoosingTertiary:
@@ -400,9 +413,13 @@ public class KeyBindingDisplay : MonoBehaviour
                 addSpace();
                 displayText.text += deselectKeyBinding;
                 addSpace();
+                displayText.text += moreInfoKeyBinding;
+                addSpace();
                 break;
             case CurrentActivity.Finished:
                 displayText.text += removeAbilityKeyBinding;
+                addSpace();
+                displayText.text += moreInfoKeyBinding;
                 addSpace();
                 displayText.text += nextTurnButtonPress;
                 addSpace();

@@ -1001,7 +1001,7 @@ public class AllyStats : Stats
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusExuberancesBlock(getBonusExuberances().ToString()));
         if(getZoneOfInfluenceTrait() != null)
         {
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getZOIBlock(getZOIStat().ToString(), getZoneOfInfluenceTrait().getIconName()));
+            buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text: getZOIStat().ToString(), iconName: IconList.ZOIIconName, symbolChar: Charisma.symbolChar[0]));
         }
         // buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getZoneOfInfluenceTrait().getIconName()));
 

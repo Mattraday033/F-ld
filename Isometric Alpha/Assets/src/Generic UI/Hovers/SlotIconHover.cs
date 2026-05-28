@@ -144,8 +144,6 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.LogError("gameObject.name = " + gameObject.name);
-
         if(ignoreHover || (eventData != null && eventData.used))
         {
             return;
@@ -387,9 +385,9 @@ public static class HoverMessageList
     private const string goldRewardKey = "Reward";
     private const string goldRewardMessage = "The amount of Gold your Party earned in Combat.";
 
-    private const string invulnerableIconMessage = "Invulnerability provides a flat reduction to incoming damage per hit. Invulnerability can only reduce incoming Damage down to 1. This reduction is applied before the Damage reduction from Armor Score.";
-    private const string vulnerableIconMessage = "Extra damage that is applied when damage is taken. Applied before the damage reduction from Armor Score.";
-    private const string healingBoostIconMessage = "Extra healing that is applied when a creature receives healing.";
+    private const string invulnerableIconMessage = "Invulnerability provides a flat reduction to incoming Damage per hit. Invulnerability can only reduce incoming Damage down to 1. This reduction is applied before the Damage reduction from Armor Score.";
+    private const string vulnerableIconMessage = "Extra Damage that is applied when Damage is taken. Applied before the Damage reduction from Armor Score.";
+    private const string healingBoostIconMessage = "Extra Health recovery that is applied when a creature receives Healing.";
 
     public const string bonusDamageKey = "Bonus Damage";
     private const string bonusDamageMessage = "A Character's Bonus Damage is added to the damage of all of their Abilities. Each Character's Bonus Damage is equal to the highest Base Damage of all of their equipped Weapons. For example, a Weapon with a Damage Formula of '3S + 5' provides 5 Bonus Damage. Hold 'Alt' when viewing a Weapon's Stats to reveal formulas.";
@@ -417,7 +415,7 @@ public static class HoverMessageList
     private const string criticalHitDamageMessage = "How much extra damage is dealt whenever a critical hit is scored. Determined by a character's Strength.";
     private const string woundResistMessage = "Your chance to ignore a Wound Trait applied to you in Combat. Determined by a character's Strength.";
 
-    private const string extraArmorMessage = "Extra Armor, in addition to that gained from your equipment. Determined by a character's Dexterity.";
+    private const string extraArmorMessage = "Extra Armor, in addition to that gained from your equipment. Determined by a character's Dexterity.\n\n" + armorScoreMessage;
     private const string surpriseRoundDamageMultiplierMessage = "This is the percentage of extra damage dealt when in a surprise round. Determined by a character's Dexterity.";
     private const string armorPenetrationMessage = "The percentage of an enemy's armor your Actions will ignore. Determined by a character's Dexterity.";
 
@@ -426,7 +424,7 @@ public static class HoverMessageList
 
     private const string synergyMessage = "Party Members get to add their Synergy to the damage they deal, and subtract it from the damage they take, per Zone of Influence they are inside. Determined by a character's Charisma.";
     private const string bonusExuberancesMessage = "The number of Exuberances your Party has at the start of Combat. Having more Starting Exuberances allows you to use Abilities with Exuberance costs faster and more often. Determined by a character's Charisma.";
-    public const string zoiMessage = "A Zone of Influence is a bonus applied to all allies adjacent to this character in Combat. Each character's Zone of Influence is different, but the potency of that bonus is determined by a character's Charisma.";
+    public const string zoiMessage = "A Zone of Influence Trait is a Trait applied to all Allies adjacent to this Character in Combat. Each Character's Zone of Influence Trait is different, but the potency of that Trait is determined by a Character's Charisma.";
 
     public const string zoiKey = "Zone of Influence";
 
@@ -535,6 +533,9 @@ public static class HoverMessageList
     private const string questJournalTabKey = "Quest Tab";
     private const string glossaryJournalTabKey = "Glossary Tab";
 
+    public const string masterMessage = "Defeating this Creature moves the Party closer to Victory.";
+    public const string minionMessage = "When all Master Creatures are defeated, this Creature will flee. It does not need to be killed to achieve Victory.";
+
     public const string characterScreenKey = "Character Screen";
     private const string characterScreenMessage = "Here you can check your Character's Stats, change equipped Abilities, and spend Exp to Level Up.";
     public const string inventoryScreenKey = "Inventory Screen";
@@ -547,7 +548,7 @@ public static class HoverMessageList
     public const string settingsScreenKey = "Settings Screen";
     private const string settingsScreenMessage = "Here you can change the Game's Settings, or Quit the Game.";
 
-    private const string restPointMessage = "This location has a Rest Point. Rest Points will restore the Health of all Party Members, as well as any expended skill charges.";
+    private const string restPointMessage = "This location has a Rest Point. Rest Points will restore the Health of all Party Members, as well as any expended Skill charges.";
     private const string shopIconMessage = "This location has a Shop. Shops sell useful items or equipment and buy unwanted loot.";
 
     public static string getMessage(string iconName)
@@ -702,13 +703,21 @@ public static class HoverMessageList
                 return mandatoryTargetMessage;
             case IconList.stunnedIcon:
                 return stunnedTargetMessage;
+            case IconList.minionIcon:
+                return minionMessage;
+            case IconList.masterIcon:
+                return masterMessage;
 
+            case IconList.strengthIconName:
             case Strength.symbolChar:
                 return strengthMessage;
+            case IconList.dexterityIconName:
             case Dexterity.symbolChar:
                 return dexterityMessage;
+            case IconList.wisdomIconName:
             case Wisdom.symbolChar:
                 return wisdomMessage;
+            case IconList.charismaIconName:
             case Charisma.symbolChar:
                 return charismaMessage;
 

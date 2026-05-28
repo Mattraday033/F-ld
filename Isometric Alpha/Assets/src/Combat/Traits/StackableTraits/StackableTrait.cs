@@ -40,6 +40,19 @@ public static class EnumDescriptionList
 
         return newName;
     }
+
+    public static Trait getCostTrait(this ActionCostType costType)
+    {
+        switch(costType)
+        {
+            case ActionCostType.Bloodlust:
+                return TraitList.bloodlust.clone();
+            case ActionCostType.Predation:
+                return TraitList.predation.clone();
+            default:
+                return null;
+        }
+    }
 }
 
 public class StackableTrait: Trait

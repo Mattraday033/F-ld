@@ -92,15 +92,15 @@ public class StatusEffectDisplay : SlotIconHover
         switch(getStatusEffect())
         {
             case OOCStatusEffect.Intimidate:
-                iconImage.sprite = Resources.Load<Sprite>(IconList.intimidateIconName);
+                iconImage.sprite = Helpers.loadSpriteFromResources(IconList.intimidateIconName);
                 hoverMessageKey = IconList.intimidateIconName;
                 break;
             case OOCStatusEffect.Cunning:
-                iconImage.sprite = Resources.Load<Sprite>(IconList.cunningIconName);
+                iconImage.sprite = Helpers.loadSpriteFromResources(IconList.cunningIconName);
                 hoverMessageKey = IconList.cunningIconName;
                 break;
             case OOCStatusEffect.Retreat:
-                iconImage.sprite = Resources.Load<Sprite>(IconList.retreatChanceIconName);
+                iconImage.sprite = Helpers.loadSpriteFromResources(IconList.retreatChanceIconName);
                 hoverMessageKey = IconList.retreatChanceIconName;
                 break;
             default:

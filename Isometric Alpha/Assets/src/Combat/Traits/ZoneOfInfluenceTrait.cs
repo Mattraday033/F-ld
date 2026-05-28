@@ -6,7 +6,7 @@ public class ZoneOfInfluenceTrait : Trait
 {
 	
     public const string zoiTraitName = "'s Influence";
-    private const string zoiTraitDescription = "The benefits of a Zone of Influence are being applied to this creature.";
+    private const string zoiTraitDescription = "This Character's Zone of Influence provides no benefits... yet.";
 
 
 	public ZoneOfInfluenceTrait(AllyStats zoneOwner): 
@@ -20,15 +20,15 @@ public class ZoneOfInfluenceTrait : Trait
         switch (traitApplier.getName())
         {
             case NPCNameList.thatch:
-                return "Creature's in this companion's Zone of Influence gain extra armor.";
+                return "Allies in this Party Member's Zone of Influence gain extra Armor.";
             case NPCNameList.carter:
-                return "Creature's in this companion's Zone of Influence gain extra damage during a surprise round.";
+                return "Allies in this Party Member's Zone of Influence gain extra Damage during a Surprise Round.";
             case NPCNameList.nandor:
-                return "Creature's in this companion's Zone of Influence gain extra Mental Resistance.";
+                return "Allies in this Party Member's Zone of Influence gain extra Mental Resistance.";
             case NPCNameList.weft:
-                return "Creature's in this companion's Zone of Influence gain extra Healing.";
+                return "Allies in this Party Member's Zone of Influence gain extra Healing.";
             case NPCNameList.gaspar:
-                return "Creature's in this companion's Zone of Influence gain extra Wound Resistance.";
+                return "Allies in this Party Member's Zone of Influence gain extra Wound Resistance.";
             default:
                 return zoiTraitDescription;
         }
@@ -54,5 +54,14 @@ public class ZoneOfInfluenceTrait : Trait
             default:
                 return base.getIconName();
         }
+    }
+
+    public override List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
+    {
+        List<DescriptionPanelBuildingBlock> buildingBlocks = base.getDescriptionBuildingBlocks();
+
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: IconList.ZOIIconName));
+
+        return buildingBlocks;
     }
 }

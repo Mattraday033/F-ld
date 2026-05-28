@@ -35,7 +35,7 @@ public class FormationHandler : ScreenManager, IPartyEditor, ICounter
         {
             if(index >= partyMembers.Count)
             {
-                portraitPanels[index].iconPanel.sprite = Resources.Load<Sprite>(PrefabNames.blankTexture);
+                portraitPanels[index].iconPanel.sprite = Helpers.loadSpriteFromResources(PrefabNames.blankTexture);
                 portraitPanels[index].setObjectBeingDescribed(null);
             } else
             {

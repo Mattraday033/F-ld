@@ -219,7 +219,7 @@ public abstract class OOCSpawnDetails
 
     //     Tile tile = ScriptableObject.CreateInstance<Tile>();
 
-    //     tile.sprite = Resources.Load<Sprite>(spriteName);
+    //     tile.sprite = Helpers.loadSpriteFromResources(spriteName);
 
     //     npcMouseHover.SetTile(new Vector3Int(-1, -1), tile);
     // }
@@ -1801,9 +1801,9 @@ public class SingleSpriteChestSpawnDetails: ChestSpawnDetails
                 {
                     case Facing.NorthEast:
                     case Facing.NorthWest:
-                        return Resources.Load<Sprite>(folderPath + CharacterAnimationType.Death_Back_Weaponless);
+                        return Helpers.loadSpriteFromResources(folderPath + CharacterAnimationType.Death_Back_Weaponless);
                     default:
-                        return Resources.Load<Sprite>(folderPath + CharacterAnimationType.Death_Front_Weaponless);
+                        return Helpers.loadSpriteFromResources(folderPath + CharacterAnimationType.Death_Front_Weaponless);
                 }
             } else
             {
@@ -1829,7 +1829,7 @@ public class SingleSpriteChestSpawnDetails: ChestSpawnDetails
             }
         }
 
-        return Resources.Load<Sprite>(spriteName);
+        return Helpers.loadSpriteFromResources(spriteName);
     }
 
     public override void spawnActions(GameObject chestGameObject)

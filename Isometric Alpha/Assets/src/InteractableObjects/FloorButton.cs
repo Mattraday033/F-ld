@@ -108,7 +108,7 @@ public class FloorButton : MonoBehaviour, INameSource
                 AudioManager.playButtonOnSFX();
             }
 
-            spriteRenderer.sprite = Resources.Load<Sprite>(PrefabNames.buttonDownStoneFolderPath);            
+            spriteRenderer.sprite = Helpers.loadSpriteFromResources(PrefabNames.buttonDownStoneFolderPath);            
         } else
         {
             if(withSFX && isPressed() != previousIsPressed)
@@ -116,7 +116,7 @@ public class FloorButton : MonoBehaviour, INameSource
                 AudioManager.playButtonOffSFX();
             }
 
-            spriteRenderer.sprite = Resources.Load<Sprite>(PrefabNames.buttonUpStoneFolderPath);      
+            spriteRenderer.sprite = Helpers.loadSpriteFromResources(PrefabNames.buttonUpStoneFolderPath);      
         }
 
         previousIsPressed = isPressed();

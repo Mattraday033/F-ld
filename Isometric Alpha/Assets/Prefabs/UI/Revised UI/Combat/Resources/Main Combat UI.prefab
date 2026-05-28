@@ -6978,7 +6978,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ac79cf6b28444284e81211f96770c68e,
+      objectReference: {fileID: 21300000, guid: 2b124abbb72ce034296a8585fa097846,
         type: 3}
     - target: {fileID: 4695641849108684989, guid: 5e3fd68f997c64b4a9ad9706aef8ef29,
         type: 3}
@@ -7211,6 +7211,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039594411394690675, guid: 5e3fd68f997c64b4a9ad9706aef8ef29,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039594411394690675, guid: 5e3fd68f997c64b4a9ad9706aef8ef29,
+        type: 3}
+      propertyPath: m_margin.w
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039594411394690675, guid: 5e3fd68f997c64b4a9ad9706aef8ef29,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039594411394690675, guid: 5e3fd68f997c64b4a9ad9706aef8ef29,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8999555617756867167, guid: 5e3fd68f997c64b4a9ad9706aef8ef29,
         type: 3}

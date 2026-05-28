@@ -45,7 +45,7 @@ public class CostIcon : SlotIconHover
 
         } else
         {
-            iconImage.sprite = Resources.Load<Sprite>(costName);
+            iconImage.sprite = Helpers.loadSpriteFromResources(costName);
             hoverMessageKey = costName;
             setHoverMessage(HoverMessageList.getMessage(costName + costSuffix));
         }

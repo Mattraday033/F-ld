@@ -577,6 +577,16 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
             buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: IconList.mandatoryTargetIcon));
         }
 
+
+        // if(TraitList.minion.Equals(this))
+        // {
+        //     buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: IconList.minionIcon));
+        // }
+        // if(TraitList.master.Equals(this))
+        // {
+        //     buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: IconList.masterIcon));
+        // }
+
         if(traitType == TraitType.Stance)
         {
             buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: IconList.stanceIconName));

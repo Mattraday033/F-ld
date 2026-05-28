@@ -80,9 +80,9 @@ public static class TraitList
 
 
 	//permanent/mandatory monster traits
-	public readonly static Trait master = new Trait(StatSourceNameList.masterKey, TraitType.FoeType, "A creature that leads other creatures. All Master creatures must be dead to win.", "Crown"); 
-	public readonly static Trait minion = new Trait(StatSourceNameList.minionKey, TraitType.FoeType, "A creature that takes orders from a Master. Most die in one hit.", "Collar");
-	public readonly static Trait summoned = new Trait(StatSourceNameList.summonedKey, TraitType.FoeType, "A creature that is here at the behest of another, but cannot be controlled directly.", "Summoned");
+	public readonly static Trait master = new Trait(StatSourceNameList.masterKey, TraitType.FoeType, "A Creature that leads other Creatures. All Master Creatures must be defeated to win.", IconList.masterIcon); 
+	public readonly static Trait minion = new Trait(StatSourceNameList.minionKey, TraitType.FoeType, "A Creature that takes orders from a Master. Minions do not need to be defeated to win.", IconList.minionIcon);
+	public readonly static Trait summoned = new Trait(StatSourceNameList.summonedKey, TraitType.FoeType, "A Creature that is here at the behest of another, but cannot be controlled directly.", "Summoned");
 
 	public readonly static Trait frontLine = new PositioningTrait(StatSourceNameList.frontLineKey, TraitType.Positioning, "This creature always spawns at the front of the enemy field.", "Front Line", PositioningType.Frontline);
 	public readonly static Trait backLine = new PositioningTrait(StatSourceNameList.backLineKey, TraitType.Positioning, "This creature always spawns at the back of the enemy field.", "Back Line", PositioningType.Backline);
@@ -159,7 +159,7 @@ public static class TraitList
 	public readonly static Trait upsideTheHead = new CrowdControlTrait(StatSourceNameList.upsideTheHeadKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "UpsideTheHead", roundsLeft: Constants.oneRoundDuration);
 	public readonly static Trait tripped = new CrowdControlTrait(StatSourceNameList.tripKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Trip", roundsLeft: Constants.endOfRoundDuration);
 	public readonly static Trait aliveBarely = new CrowdControlTrait(StatSourceNameList.aliveBarelyKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Rip Apart", roundsLeft: Constants.endOfRoundDuration);
-	public readonly static Trait countered = new CrowdControlTrait(StatSourceNameList.counteredKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Trip", roundsLeft: Constants.endOfRoundDuration);
+	public readonly static Trait countered = new CrowdControlTrait(StatSourceNameList.counteredKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", AbilityList.throatJabName, roundsLeft: Constants.endOfRoundDuration);
 	public readonly static Trait acidVomit = new Trait(StatSourceNameList.acidVomitKey, TraitType.Wound, "This creature takes extra damage whenever it is hit", "Acid Vomit", roundsLeft: Constants.threeRoundDuration);
 	public readonly static Trait roasted = new StackableTrait(StatSourceNameList.roastedKey, TraitType.Wound, "Roasted to perfection. This creature takes an extra point of damage per stack", StatSourceNameList.roastedKey, startingStacks: Constants.oneStackAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication);
 	public readonly static Trait riled = new StackableTrait(StatSourceNameList.riledKey, TraitType.Boost, "Provoked and ready to do something about it. This creature deals increased damage.", AbilityList.rileKey, startingStacks: Constants.oneStackAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication);

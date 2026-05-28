@@ -270,7 +270,6 @@ public class DescriptionPanelBuildingBlock
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.experienceIconName);
     }
 
-
     public static DescriptionPanelBuildingBlock getCharBlock(string text, string symbolChar)
     {
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.PrimaryStat, text, symbolChar: symbolChar[0]);
@@ -288,7 +287,7 @@ public class DescriptionPanelBuildingBlock
 
     public static DescriptionPanelBuildingBlock getStrengthBlock(string text)
     {
-        return getCharBlock(text, Strength.symbolChar);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.PrimaryStat, text, iconName: IconList.strengthIconName);
     }
 
     public static DescriptionPanelBuildingBlock getBonusHealthBlock(string text)
@@ -312,7 +311,7 @@ public class DescriptionPanelBuildingBlock
 
     public static DescriptionPanelBuildingBlock getDexterityBlock(string text)
     {
-        return getCharBlock(text, Dexterity.symbolChar);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.PrimaryStat, text, iconName: IconList.dexterityIconName);
     }
 
     public static DescriptionPanelBuildingBlock getExtraArmorBlock(string text)
@@ -336,7 +335,7 @@ public class DescriptionPanelBuildingBlock
 
     public static DescriptionPanelBuildingBlock getWisdomBlock(string text)
     {
-        return getCharBlock(text, Wisdom.symbolChar);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.PrimaryStat, text, iconName: IconList.wisdomIconName);
     }
 
     public static DescriptionPanelBuildingBlock getMentalResistBlock(string text)
@@ -359,7 +358,7 @@ public class DescriptionPanelBuildingBlock
 
     public static DescriptionPanelBuildingBlock getCharismaBlock(string text)
     {
-        return getCharBlock(text, Charisma.symbolChar);
+        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.PrimaryStat, text, iconName: IconList.charismaIconName);
     }
 
     public static DescriptionPanelBuildingBlock getSynergyBlock(string text)
@@ -836,6 +835,11 @@ public static class IconList
     public const string junkIconName = "Junk";
 
     //Stats Icons
+    public const string strengthIconName = "Strength";
+    public const string dexterityIconName = "Dexterity";
+    public const string wisdomIconName = "Wisdom";
+    public const string charismaIconName = "Charisma";
+
     public const string healthIconName = "Health";
     public const string levelIconName = "Level";
     public const string affinityIconName = "Affinity";
@@ -867,6 +871,7 @@ public static class IconList
     public const string partySlotsIconName = "Party Slots";
     public const string partyActionsIconName = "Party Actions";
     public const string goldMultiplierIconName = "Gold Multiplier";
+    public const string ZOIIconName = "Zone of Influence";
 
 
     public const string allExuberancesIconName = "Starting Exuberances";
@@ -883,6 +888,9 @@ public static class IconList
     //Status Icons
     public const string mandatoryTargetIcon = "Mandatory Target";
     public const string stunnedIcon = "Stunned";
+
+    public const string masterIcon = "Master";
+    public const string minionIcon = "Minion";
 
     //Map Icons
     public const string restPointIcon = "Rest Point";

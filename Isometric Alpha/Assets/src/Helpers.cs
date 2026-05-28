@@ -439,6 +439,9 @@ public static class Helpers
             case IconList.armorTypeIconName:
                 spriteName = IconList.typeIconName;
                 break;
+            case IconList.bonusArmorIconName:
+                spriteName = IconList.armorScoreIconName;
+                break;
             default:
                 break;
         }

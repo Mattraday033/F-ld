@@ -106,11 +106,15 @@ public class DescriptionPanelRow : MonoBehaviour
         }
 
         iconObject.SetActive(true);
+        iconImage.gameObject.SetActive(true);
+        iconImage.enabled = true;
+
         iconImage.enabled = true;
         iconImage.sprite = sprite;
 
         if (iconSymbolText != null)
         {
+            iconSymbolText.gameObject.SetActive(false);
             iconSymbolText.enabled = false;
         }
     }
@@ -165,6 +169,19 @@ public class DescriptionPanelRow : MonoBehaviour
     {
         if (iconHover == null)
         {
+            return;
+        }
+
+        if(hoverMessageKey != null && hoverMessageKey.Length > 0 && 
+            text != null && text.Length <= 0)
+        {
+            string newText = HoverMessageList.getMessage(hoverMessageKey);
+
+            if(newText != null && newText.Length <= 0)
+            {
+                iconHover.setHoverMessage(hoverMessageKey, newText);
+            } 
+
             return;
         }
 

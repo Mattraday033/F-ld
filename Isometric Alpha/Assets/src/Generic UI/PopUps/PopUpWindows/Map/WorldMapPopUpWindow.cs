@@ -243,7 +243,7 @@ public class LandmarkSpawnDetails
 
     public Sprite getSprite()
     {
-        return Resources.Load<Sprite>(MapTileSpriteList.getSpriteFullPath(spriteName));
+        return Helpers.loadSpriteFromResources(MapTileSpriteList.getSpriteFullPath(spriteName));
     }
 
     public virtual int getSortPriority()

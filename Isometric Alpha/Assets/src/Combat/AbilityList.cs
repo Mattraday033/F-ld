@@ -334,11 +334,11 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(strengthKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Power Slam", "This potent attack hits an enormous area. Costs three stacks of 'Bloodlust'"), DamageParams.build("5S + 2D", "2S + D"), TargetParams.build(Range.horizontalFourIndex), FrequencyParams.build(oneSlotMax, sixRoundCooldown), CostParams.build(ActionCostType.Bloodlust, fourStackCastCost), AnimationParams.build(EffectAnimationType.Blunt))));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Power Slam", "This potent attack hits an enormous area. Costs four stacks of the 'Bloodlust' Trait."), DamageParams.build("5S + 2D", "2S + D"), TargetParams.build(Range.horizontalFourIndex), FrequencyParams.build(oneSlotMax, sixRoundCooldown), CostParams.build(ActionCostType.Bloodlust, fourStackCastCost), AnimationParams.build(EffectAnimationType.Blunt))));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(strengthKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Rip Apart", "Focus all of your fury into a single target. Deals massive damage. If the target survives, they cannot act until the next turn."), DamageParams.build("9S+D+W", "10S"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), CostParams.build(ActionCostType.Bloodlust, fiveStackCastCost), AnimationParams.build(EffectAnimationType.Slash), TraitList.aliveBarely)));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Rip Apart", "Focus all of your fury into a single target. Deals massive damage. If the target survives, they cannot act until the next turn. Costs five stacks of the Bloodlust Trait."), DamageParams.build("9S+D+W", "10S"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), CostParams.build(ActionCostType.Bloodlust, fiveStackCastCost), AnimationParams.build(EffectAnimationType.Slash), TraitList.aliveBarely)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         //start of Dex Abilities
@@ -367,7 +367,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(dexterityKeyChar);
-        statAbilityDictionary.Add(currentKey, new DoubleStrikeAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Twice Slice", "You perform a double slice, attacking across a wide swath of the battlefield."), DamageParams.build("4D + 2S", "3D"), TargetParams.build(Range.horizontalThreeIndex), FrequencyParams.build(oneSlotMax, fourRoundCooldown), CostParams.build(ActionCostType.Predation, threeStackCastCost)), Range.verticalThreeIndex));
+        statAbilityDictionary.Add(currentKey, new DoubleStrikeAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Twice Slice", "You perform a double slice, attacking across a wide swath of the battlefield. Costs three Stacks of the Predation Trait."), DamageParams.build("4D + 2S", "3D"), TargetParams.build(Range.horizontalThreeIndex), FrequencyParams.build(oneSlotMax, fourRoundCooldown), CostParams.build(ActionCostType.Predation, threeStackCastCost)), Range.verticalThreeIndex));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         //start of Wis Abilities
@@ -377,11 +377,11 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(wisdomKeyChar);
-        statAbilityDictionary.Add(currentKey, new RepositionEnemyAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Rolling Throw", "Throw an Enemy to a Tile of your choice. The enemy cannot act this turn. Costs two Stacks of any Stance.", "Trip"), DamageParams.build("W + D", "2W + 2D"), frequencyParams: FrequencyParams.build(twoSlotMax, threeRoundCooldown), costParams: CostParams.build(ActionCostType.Stance, twoStackCastCost), animationParams: AnimationParams.build(EffectAnimationType.Blunt), appliedTrait: TraitList.tripped)));
+        statAbilityDictionary.Add(currentKey, new RepositionEnemyAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Rolling Throw", "Throw an Enemy to a location of your choice, and apply the Tripped Trait to the target. Costs two Stacks of any Stance.", "Trip"), DamageParams.build("W + D", "2W + 2D"), frequencyParams: FrequencyParams.build(twoSlotMax, threeRoundCooldown), costParams: CostParams.build(ActionCostType.Stance, twoStackCastCost), animationParams: AnimationParams.build(EffectAnimationType.Blunt), appliedTrait: TraitList.tripped)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(wisdomKeyChar);
-        statAbilityDictionary.Add(currentKey, new InterruptAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(throatJabName, "A swift jab in the throat that interrupts the enemy's plans. Guaranteed to critically hit if used on an enemy with a '" + TraitType.Charge.ToString() + "' type trait. Removes 1 '" + TraitType.Charge.ToString() + "' type trait from the target."), DamageParams.build("4W + 2S + 2D"), frequencyParams: FrequencyParams.build(oneSlotMax, sixRoundCooldown), animationParams: AnimationParams.build(EffectAnimationType.Blunt)), TraitType.Charge));
+        statAbilityDictionary.Add(currentKey, new InterruptAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(throatJabName, "A swift jab to the throat that interrupts the enemy's plans. Guaranteed to critically hit if used on an enemy with a '" + TraitType.Charge.ToString() + "' type trait. Removes 1 '" + TraitType.Charge.ToString() + "' type trait from the target. If a Trait is removed in this way, the target has the Countered Trait applied to them."), DamageParams.build("4W + 2S + 2D"), frequencyParams: FrequencyParams.build(oneSlotMax, sixRoundCooldown), animationParams: AnimationParams.build(EffectAnimationType.Blunt)), TraitType.Charge));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(wisdomKeyChar);

@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class HealthBarManager : MonoBehaviour
 {
     
+    public GameObject masterSymbol;
+    public GameObject minionSymbol;
     public GameObject mandatoryTargetSymbol;
     public GameObject stunnedSymbol;
 
@@ -26,6 +28,7 @@ public class HealthBarManager : MonoBehaviour
         Trait.OnTraitApplication.AddListener(updateHealthBarColor);
         Trait.OnTraitRemoval.AddListener(updateHealthBarColor);
         LargeEnemyStats.OnLargeEnemySpawn.AddListener(cleanUpHiddenHealthBars);
+        DescriptionPanelBuilder.OnFormulaSwap.AddListener(updateCreatureTypeSymbols);
     }
 
     private void OnDestroy()
@@ -33,6 +36,21 @@ public class HealthBarManager : MonoBehaviour
         Trait.OnTraitApplication.RemoveListener(updateHealthBarColor);
         Trait.OnTraitRemoval.RemoveListener(updateHealthBarColor);
         LargeEnemyStats.OnLargeEnemySpawn.RemoveListener(cleanUpHiddenHealthBars);
+        DescriptionPanelBuilder.OnFormulaSwap.RemoveListener(updateCreatureTypeSymbols);
+    }
+
+    private void updateCreatureTypeSymbols()
+    {
+        if(OverallUIManager.showFormula && linkedStats != null)
+        {
+            masterSymbol.SetActive(linkedStats.isMaster());
+            minionSymbol.SetActive(linkedStats.isMinion());
+        }
+        else
+        {
+            masterSymbol.SetActive(false);
+            minionSymbol.SetActive(false);
+        }
     }
 
     public void updateHealthBarColor(Trait trait)
@@ -41,7 +59,6 @@ public class HealthBarManager : MonoBehaviour
         {
             return;
         }
-
 
         stunnedSymbol.SetActive(linkedStats.isStunned());
         mandatoryTargetSymbol.SetActive(linkedStats.isMandatoryTarget());

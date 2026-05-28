@@ -51,9 +51,9 @@ public static class LoadingScreenArtList
             case ZoneKeyList.lovashiCamp:
             case ZoneKeyList.manseFirstFloor:
             case ZoneKeyList.manseSecondFloor:
-                return Resources.Load<Sprite>(PrefabNames.campLoadingScreenArt);
+                return Helpers.loadSpriteFromResources(PrefabNames.campLoadingScreenArt);
             default:
-                return Resources.Load<Sprite>(PrefabNames.caveLoadingScreenArt);
+                return Helpers.loadSpriteFromResources(PrefabNames.caveLoadingScreenArt);
         }
     }
 }

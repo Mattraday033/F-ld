@@ -376,6 +376,24 @@ public class Ability: CombatAction, IJSONConvertable
         return getRequiredStatLevel() <= currentStat;
     }
 
+    public override List<IDescribable> getRelatedDescribables()
+    {
+        List<IDescribable> relatedDescribables = base.getRelatedDescribables();
+
+        foreach(ActionCostType costType in getActionCostTypes())
+        {
+            Trait costTrait = costType.getCostTrait();
+
+            if(costTrait != null)
+            {
+                costTrait.setTraitHolder(getStatSource());
+                relatedDescribables.Add(costTrait);
+            }
+        }
+
+        return relatedDescribables;
+    }
+
     //ISortable Methods
 
     public override int getLevel()

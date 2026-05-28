@@ -98,7 +98,7 @@ public class PartyMember : IDescribable, IDescribableInBlocks
             }
         }
 
-        Sprite portrait = Resources.Load<Sprite>(PrefabNames.portraitFolder + name);
+        Sprite portrait = Helpers.loadSpriteFromResources(PrefabNames.portraitFolder + name);
 
         if(allowNull)
         {
@@ -110,7 +110,7 @@ public class PartyMember : IDescribable, IDescribableInBlocks
             return portrait;
         } else
         {
-            return Resources.Load<Sprite>(PrefabNames.portraitFolder + NPCNameList.thatch);
+            return Helpers.loadSpriteFromResources(PrefabNames.portraitFolder + NPCNameList.thatch);
         }
     }
 

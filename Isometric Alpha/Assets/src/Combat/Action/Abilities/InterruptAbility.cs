@@ -102,6 +102,15 @@ public class InterruptAbility : Ability
         }
     }
 
+    public override List<IDescribable> getRelatedDescribables()
+    {
+        List<IDescribable> relatedDescribables = base.getRelatedDescribables();
+
+        relatedDescribables.Add(base.getAppliedTrait());
+
+        return relatedDescribables;
+    }
+
     private bool targetHasChargeTrait()
     {
         Stats target = CombatGrid.getCombatantAtCoords(getTargetCoords());

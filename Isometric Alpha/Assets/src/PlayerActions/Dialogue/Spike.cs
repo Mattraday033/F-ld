@@ -20,8 +20,8 @@ public class Spike : Obstacle
     [RuntimeInitializeOnLoadMethod]
     private static void initializeSpike()
     {
-        downSprite = Resources.Load<Sprite>(PrefabNames.spikesDown);
-        upSprite = Resources.Load<Sprite>(PrefabNames.spikesUp);
+        downSprite = Helpers.loadSpriteFromResources(PrefabNames.spikesDown);
+        upSprite = Helpers.loadSpriteFromResources(PrefabNames.spikesUp);
     }
 
     public override void setToDown()
