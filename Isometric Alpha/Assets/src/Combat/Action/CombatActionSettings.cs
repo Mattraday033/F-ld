@@ -6,6 +6,7 @@ public class DescriptionParams
 {
     public string name;
     public string useDescription;
+    public string loreDescription;
     public string iconName;
 
     public static DescriptionParams build()
@@ -13,17 +14,18 @@ public class DescriptionParams
         return build("", "", "");
     }
 
-    public static DescriptionParams build(string name, string useDescription)
+    public static DescriptionParams build(string name, string useDescription = "", string loreDescription = "")
     {
-        return build(name, useDescription, name);
+        return build(name, iconName: name, useDescription: useDescription, loreDescription: loreDescription);
     }
 
-    public static DescriptionParams build(string name, string useDescription, string iconName)
+    public static DescriptionParams build(string name, string iconName, string useDescription = "", string loreDescription = "")
     {
         DescriptionParams parameters = new DescriptionParams();
 
         parameters.name = name;
         parameters.useDescription = useDescription;
+        parameters.loreDescription = loreDescription;
         parameters.iconName = iconName;
 
         return parameters;

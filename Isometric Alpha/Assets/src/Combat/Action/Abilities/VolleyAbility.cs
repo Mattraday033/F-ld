@@ -13,7 +13,7 @@ public class VolleyAbility : Ability
 	public bool alliedSide;
 
     public VolleyAbility(bool alliedSide) :
-	base(CombatActionSettings.build(DescriptionParams.build(volleyName, volleyDescription)))
+	base(CombatActionSettings.build(DescriptionParams.build(volleyName, useDescription: volleyDescription)))
 	{
 		this.alliedSide = alliedSide;
 		findAllVolleyActorCoords(alliedSide);

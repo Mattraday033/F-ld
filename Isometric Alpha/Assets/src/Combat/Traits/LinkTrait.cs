@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LinkTrait : Trait
 {
-    private Ability linkAction = new Ability(CombatActionSettings.build(DescriptionParams.build("Link Trait", "Link Damage")));
+    private Ability linkAction = new Ability(CombatActionSettings.build(DescriptionParams.build("Link Trait", useDescription: "Link Damage")));
 
     private List<Stats> linkedTargets;
 

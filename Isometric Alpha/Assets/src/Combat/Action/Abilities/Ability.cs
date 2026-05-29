@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class Ability: CombatAction, IJSONConvertable
@@ -15,7 +16,9 @@ public class Ability: CombatAction, IJSONConvertable
 	
 	private string iconName;
 	
-	private string useDescription;
+	protected string useDescription;
+
+	private string loreDescription;
 	
 	private string damageFormula;
 	
@@ -62,6 +65,7 @@ public class Ability: CombatAction, IJSONConvertable
 		
 		name = settings.descriptionParams.name;
 		useDescription = settings.descriptionParams.useDescription;
+		loreDescription = settings.descriptionParams.loreDescription;
 		iconName = settings.descriptionParams.iconName;
 
 		damageFormula = settings.damageParams.damageFormula;
@@ -105,9 +109,31 @@ public class Ability: CombatAction, IJSONConvertable
 	
 	public override string getUseDescription()
 	{
-		return useDescription;
+        if(getAppliedTrait() != null)
+        {
+            if(useDescription.Length <= 0)
+            {
+                return getAppliedTrait().getApplicationDescription();
+            } else
+            {
+                return useDescription + " " + getAppliedTrait().getApplicationDescription();
+            }
+        } else
+        {
+		    return useDescription;
+        }
 	}
 	
+	public string getLoreDescription()
+	{
+        if(loreDescription.Length <= 0)
+        {
+            return "";
+        }
+
+		return "<i>" + loreDescription + "</i>";
+	}
+
 	public override void setCooldownToMax()
 	{
         setCooldownRemaining(getMaximumCooldown());
@@ -376,11 +402,28 @@ public class Ability: CombatAction, IJSONConvertable
         return getRequiredStatLevel() <= currentStat;
     }
 
+    public override List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
+    {
+        List<DescriptionPanelBuildingBlock> buildingBlocks = base.getDescriptionBuildingBlocks();
+
+        if(getCostDescription().Length > 0)
+        {
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getCostDescription()));
+        }
+
+        if (getLoreDescription().Length > 0)
+        {
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getLoreDescription()));
+        }
+
+        return buildingBlocks;
+    }
+
     public override List<IDescribable> getRelatedDescribables()
     {
         List<IDescribable> relatedDescribables = base.getRelatedDescribables();
 
-        foreach(ActionCostType costType in getActionCostTypes())
+        foreach(ActionCostType costType in costTypes)
         {
             Trait costTrait = costType.getCostTrait();
 
@@ -392,6 +435,28 @@ public class Ability: CombatAction, IJSONConvertable
         }
 
         return relatedDescribables;
+    }
+
+    public string getCostDescription()
+    {
+        string costDescription = "";
+
+        if(costTypes.Contains(ActionCostType.None))
+        {
+            return costDescription;
+        }
+
+        for(int i = 0; i < costTypes.Length; i++)
+        {
+            costDescription += costTypes[i].getCostDescription(actionCosts[i]);
+
+            if(i < costTypes.Length-1)
+            {
+                costDescription += "\n";
+            }
+        }
+
+        return costDescription;
     }
 
     //ISortable Methods

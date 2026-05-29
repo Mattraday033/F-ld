@@ -658,4 +658,10 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
 
         return other.getName().Equals(getName());
     }
+
+    public string getApplicationDescription()
+    {
+        return "Applies the " + getName() + " Trait to all targets.";
+    }
+
 }

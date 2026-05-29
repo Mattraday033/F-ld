@@ -21,7 +21,7 @@ public class EquippedPassive : Ability
 	{
 		if (settings.appliedTrait != null)
 		{
-			settings.descriptionParams = DescriptionParams.build(settings.appliedTrait.getName(), settings.appliedTrait.getDescription(), settings.appliedTrait.getIconName());
+			settings.descriptionParams = DescriptionParams.build(settings.appliedTrait.getName(), iconName: settings.appliedTrait.getIconName(), useDescription: settings.appliedTrait.getDescription());
 			settings.frequencyParams = FrequencyParams.build(mustBeUnique, noCooldown);
 		}
 
@@ -107,6 +107,11 @@ public class EquippedPassive : Ability
 		return DescriptionPanel.getDescriptionPanel(rowTypeName);
 	}
 
+	public override string getUseDescription()
+    {
+        return "Applies the " + getAppliedTrait().getName() + " Trait at the start of Combat to whoever equips this Ability to their Action Wheel.";
+    }
+
 	//ISortable Methods
 
 	public override string getType()
@@ -131,4 +136,16 @@ public class EquippedPassive : Ability
 
 		return buildingBlocks;
 	}
+
+    public override List<IDescribable> getRelatedDescribables()
+    {
+        List<IDescribable> relatedDescribables = base.getRelatedDescribables();
+
+        if(getAppliedTrait() != null)
+        {
+            relatedDescribables.Add(getAppliedTrait());
+        }
+
+        return relatedDescribables;
+    }
 }

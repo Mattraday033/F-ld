@@ -177,7 +177,7 @@ public class CombatActionManager : MonoBehaviour
 	public static bool finishedChoosingPartyMemberCombatActions()
 	{
 		return getNumberOfCurrentPartyCombatActions() >= PartyStats.getPartyMemberCombatActionSlots() || 
-				getNumberOfCurrentPartyCombatActions() >= (CombatGrid.getAllAliveNonsummonedAllies().Count-1);
+				getNumberOfCurrentPartyCombatActions() >= CombatGrid.getAllAliveNonsummonedAllies().Count;
 	}
 	
 	public void promptLaterCombatActionsToFindNewTarget()

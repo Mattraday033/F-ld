@@ -91,4 +91,15 @@ public static class SceneChange
         SceneManager.LoadScene(SceneNameList.OOCUserInterface, LoadSceneMode.Additive);
     }
 
+    [RuntimeInitializeOnLoadMethod]
+    private static void setSceneToStartMenu()
+    {
+        if(Application.isEditor && SceneManager.GetActiveScene().name.Equals(SceneNameList.startMenu))
+        {
+            return;
+        }
+
+        changeSceneToStartMenu();
+    }
+
 }

@@ -53,6 +53,22 @@ public static class EnumDescriptionList
                 return null;
         }
     }
+
+    public static string getCostDescription(this ActionCostType costType, int amount)
+    {
+        switch(costType)
+        {
+            case ActionCostType.RedKnife:
+            case ActionCostType.BlueShield:
+            case ActionCostType.YellowThorn:
+            case ActionCostType.GreenLeaf:
+                return "Costs " + amount + " Stacks of the " + costType.ToFriendlyString() + " Exuberance.";
+            case ActionCostType.Stance:
+                return "Costs " + amount + " Stacks of any Stance.";
+            default:
+                return "Costs " + amount + " Stacks of the " + costType.ToFriendlyString() + " Trait.";
+        }
+    }
 }
 
 public class StackableTrait: Trait

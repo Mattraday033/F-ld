@@ -1148,10 +1148,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         //empty on purpose
     }
 
-    public virtual string getUseDescription()
-    {
-        return "";
-    }
+    public abstract string getUseDescription();
 
     public virtual string getKey()
     {
@@ -1602,6 +1599,5 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
     }
 
     #endregion
-
 
 }

@@ -19,9 +19,14 @@ public class PassiveAbility : EquippedPassive //passives are (currently) mostly 
 
     //        statAbilityDictionary.Add(currentKey, new PassiveAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(TraitList.exitStrategy2Round.getName(), TraitList.exitStrategy2Round.getDescription(), TraitList.exitStrategy2Round.getIconName()), FrequencyParams.build(zeroSlotMax, noCooldown))));
     public PassiveAbility(string key, Trait trait) :
-    base(CombatActionSettings.build(key, DescriptionParams.build(trait.getName(), trait.getDescription(), trait.getIconName()), frequencyParams: FrequencyParams.build(AbilityList.zeroSlotMax, AbilityList.noCooldown)))
+    base(CombatActionSettings.build(key, DescriptionParams.build(trait.getName(), iconName: trait.getIconName(), useDescription: trait.getDescription()), frequencyParams: FrequencyParams.build(AbilityList.zeroSlotMax, AbilityList.noCooldown)))
     {
 
+    }
+
+	public override string getUseDescription()
+    {
+        return useDescription;
     }
 
     public override int getMaximumSlots()
@@ -175,7 +180,7 @@ public class ZoneOfInfluenceDescriptorAbility : PassiveAbility
     private ZoneOfInfluenceTrait zoiTrait;
 
     public ZoneOfInfluenceDescriptorAbility(string key, ZoneOfInfluenceTrait trait) :
-    base(CombatActionSettings.build(key, DescriptionParams.build(trait.getName(), trait.getDescription(), trait.getIconName()), frequencyParams: FrequencyParams.build(AbilityList.zeroSlotMax, AbilityList.noCooldown)))
+    base(CombatActionSettings.build(key, DescriptionParams.build(trait.getName(), iconName: trait.getIconName(), useDescription: trait.getDescription()), frequencyParams: FrequencyParams.build(AbilityList.zeroSlotMax, AbilityList.noCooldown)))
     {
         zoiTrait = trait;
     }

@@ -479,11 +479,16 @@ public static class HoverMessageList
     private const string observationMessage = "This Skill allows you to find secret doors and hidden secrets. Determined by the highest Wisdom of all Party Members.";
     private const string leadershipMessage = "This Skill allows you to command your followers out of combat, telling them to stand on buttons or in doorways to block enemy movement. The number of Party Members you can command with Leadership is determined by the highest Charisma of all Party Members.";
 
-    private const string redKnifeMessage = "This shows the amount of the Red Knife Exuberance your Party will gain at the start of Combat.\n\n" + AbilityList.redKnifeAcquisitionMethodExplanation;
-    private const string blueShieldMessage = "This shows the amount of the Blue Shield Exuberance your Party will gain at the start of Combat.\n\n" + AbilityList.blueShieldAcquisitionMethodExplanation;
-    private const string yellowThornMessage = "This shows the amount of the Yellow Thorn Exuberance your Party will gain at the start of Combat.\n\n" + AbilityList.yellowThornAcquisitionMethodExplanation;
-    private const string greenLeafMessage = "This shows the amount of the Grean Leaf Exuberance your Party will gain at the start of Combat.\n\n" + AbilityList.greenLeafAcquisitionMethodExplanation;
+    private const string startingRedKnifeMessage = "This shows the amount of the Red Knife Exuberance your Party will gain at the start of Combat. Exuberances are used to power certain Abilities, usually tied to the Charisma Stat.\n\n" + AbilityList.redKnifeAcquisitionMethodExplanation;
+    private const string redKnifeMessage = "This shows the amount of the Red Knife Exuberance your Party currently has. Exuberances are used to power certain Abilities, usually tied to the Charisma Stat.\n\n" + AbilityList.redKnifeAcquisitionMethodExplanation;
+    private const string startingBlueShieldMessage = "This shows the amount of the Blue Shield Exuberance your Party will gain at the start of Combat. Exuberances are used to power certain Abilities, usually tied to the Charisma Stat.\n\n" + AbilityList.blueShieldAcquisitionMethodExplanation;
+    private const string blueShieldMessage = "This shows the amount of the Blue Shield Exuberance your Party currently has. Exuberances are used to power certain Abilities, usually tied to the Charisma Stat.\n\n" + AbilityList.blueShieldAcquisitionMethodExplanation;
+    private const string startingYellowThornMessage = "This shows the amount of the Yellow Thorn Exuberance your Party will gain at the start of Combat. Exuberances are used to power certain Abilities, usually tied to the Charisma Stat.\n\n" + AbilityList.yellowThornAcquisitionMethodExplanation;
+    private const string yellowThornMessage = "This shows the amount of the Yellow Thorn Exuberance your Party currently has. Exuberances are used to power certain Abilities, usually tied to the Charisma Stat.\n\n" + AbilityList.yellowThornAcquisitionMethodExplanation;
+    private const string startingGreenLeafMessage = "This shows the amount of the Grean Leaf Exuberance your Party will gain at the start of Combat. Exuberances are used to power certain Abilities, usually tied to the Charisma Stat.\n\n" + AbilityList.greenLeafAcquisitionMethodExplanation;
+    private const string greenLeafMessage = "This shows the amount of the Grean Leaf Exuberance your Party currently has. Exuberances are used to power certain Abilities, usually tied to the Charisma Stat.\n\n" + AbilityList.greenLeafAcquisitionMethodExplanation;
     
+
     private const string exuberanceCostMessage = "This Action costs Exuberances to use. Exuberances are resources you receive for completing certain feats in combat. There are four types of Exuberances: Red Knife, Blue Shield, Yellow Thorn, and Green Leaf.\n\n";
     private const string redKnifeCostMessage = exuberanceCostMessage + AbilityList.redKnifeAcquisitionMethodExplanation;
     private const string blueShieldCostMessage = exuberanceCostMessage + AbilityList.blueShieldAcquisitionMethodExplanation;
@@ -772,13 +777,37 @@ public static class HoverMessageList
                 return goldMultiplierMessage;
 
             case IconList.redKnifeIconName:
-                return redKnifeMessage;
+                if(CombatStateManager.inCombat)
+                {
+                    return redKnifeMessage;
+                } else
+                {
+                    return startingRedKnifeMessage;
+                }
             case IconList.blueShieldIconName:
-                return blueShieldMessage;
+                if(CombatStateManager.inCombat)
+                {
+                    return blueShieldMessage;
+                } else
+                {
+                    return startingBlueShieldMessage;
+                }
             case IconList.yellowThornIconName:
-                return yellowThornMessage;
+                if(CombatStateManager.inCombat)
+                {
+                    return yellowThornMessage;
+                } else
+                {
+                    return startingYellowThornMessage;
+                }
             case IconList.greenLeafIconName:
-                return greenLeafMessage;
+                if(CombatStateManager.inCombat)
+                {
+                    return greenLeafMessage;
+                } else
+                {
+                    return startingGreenLeafMessage;
+                }
 
             case IconList.redKnifeIconName + CostIcon.costSuffix:
                 return redKnifeCostMessage;

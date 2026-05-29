@@ -96,7 +96,7 @@ public static class AbilityList
     public const string avertBlameName = "Avert Blame";
 
     public const string batClawName = "Bat Claw";
-	public readonly static DescriptionParams batClawDescription = DescriptionParams.build(batClawName, "The sharp talons of a bat", "Claw");
+	public readonly static DescriptionParams batClawDescription = DescriptionParams.build(batClawName, iconName: "Claw",loreDescription: "The sharp talons of a bat.");
     public const string swarmRushKey = "Swarm Rush";
 
     public const string harmlessKey = "Harmless";
@@ -163,7 +163,7 @@ public static class AbilityList
 	public const string stompKey = "Stomp";
 	public const string feedKey = "Feed";
 
-	public readonly static DescriptionParams boulderRollDescription = DescriptionParams.build(boulderRollKey, "A massive rock tumbling quickly towards you.", "BoulderRoll");
+	public readonly static DescriptionParams boulderRollDescription = DescriptionParams.build(boulderRollKey, useDescription: "A massive rock tumbling quickly towards you.", iconName: "BoulderRoll");
     public const string evolveKey = "Evolve";
 	public const string boulderRollKey = "Boulder Roll";
 	public const string lesserBoulderRollKey = "Lesser Boulder Roll";
@@ -171,10 +171,10 @@ public static class AbilityList
 	
 	public const string summonsWhipAttackKey = "Whip Attack";
 
-	public const string redKnifeAcquisitionMethodExplanation = "You will collect Red Knife Exuberance whenever a Party Member attacks with any weapon.";
-	public const string blueShieldAcquisitionMethodExplanation = "You will collect Blue Shield Exuberance whenever a Party Member applies a beneficial trait, as well as whenever a Party Member repositions themselves or an enemy.";
-	public const string yellowThornAcquisitionMethodExplanation = "You will collect Yellow Thorn Exuberance whenever a Party Member applies a harmful trait to a target, as well as whenever a Party Member performs a Critical Hit.";
-	public const string greenLeafAcquisitionMethodExplanation = "You will collect Green Leaf Exuberance whenever a Party Member heals or revives another Party Member.";
+	public const string redKnifeAcquisitionMethodExplanation = "You will collect the Red Knife Exuberance whenever a Party Member attacks with any Weapon.";
+	public const string blueShieldAcquisitionMethodExplanation = "You will collect the Blue Shield Exuberance whenever a Party Member applies a beneficial Trait, as well as whenever a Party Member repositions an Ally or an Enemy.";
+	public const string yellowThornAcquisitionMethodExplanation = "You will collect the Yellow Thorn Exuberance whenever a Party Member applies a harmful Trait to a target, as well as whenever a Party Member performs a Critical Hit.";
+	public const string greenLeafAcquisitionMethodExplanation = "You will collect the Green Leaf Exuberance whenever a Party Member heals or revives another Party Member.";
       
 
 	public const string wormFumesIndicatorName = "AcidPoolIndicator";
@@ -217,28 +217,28 @@ public static class AbilityList
 		enemyAbilityDictionary = new Dictionary<string,Ability>();
 
         //generic abilities
-        enemyAbilityDictionary.Add(harmlessKey, new Ability(CombatActionSettings.build(DescriptionParams.build(harmlessKey, "This creature takes no actions."), DamageParams.build("0", "0"), TargetParams.build(Range.singleTargetIndex))));
-		enemyAbilityDictionary.Add(punchKey, new Ability(CombatActionSettings.build(DescriptionParams.build(punchKey, "A punch. Not much to it.", "FistIcon"), DamageParams.build("3", "2"), TargetParams.build(Range.singleTargetIndex))));
+        enemyAbilityDictionary.Add(harmlessKey, new Ability(CombatActionSettings.build(DescriptionParams.build(harmlessKey, useDescription: "This creature takes no actions."), DamageParams.build("0", "0"), TargetParams.build(Range.singleTargetIndex))));
+		enemyAbilityDictionary.Add(punchKey, new Ability(CombatActionSettings.build(DescriptionParams.build(punchKey, iconName: "FistIcon", loreDescription: "A punch. Not much to it."), DamageParams.build("3", "2"), TargetParams.build(Range.singleTargetIndex))));
 		
         //branded abilities
-        enemyAbilityDictionary.Add(swapKey, new SwapAbility(CombatActionSettings.build(DescriptionParams.build(swapKey, "The creature swaps places with it's target. If successful, the creature heals itself.", swapKey), DamageParams.build("25"), animationParams: AnimationParams.build(EffectAnimationType.SmokeBomb))));
-        enemyAbilityDictionary.Add(gutKey, new Ability(CombatActionSettings.build(gutKey, DescriptionParams.build(gutKey, "A knife in the stomach that leaves lasting damage."), DamageParams.build("45", "15"), TargetParams.build(Range.singleTargetIndex), animationParams: AnimationParams.build(EffectAnimationType.Pierce), appliedTrait: TraitList.wounded)));
-        enemyAbilityDictionary.Add(rileKey, new Ability(CombatActionSettings.build(rileKey, DescriptionParams.build(rileKey, "Agitate your allies, increasing their furiosity."), targetParams: TargetParams.build(Range.boxThreeIndex), appliedTrait: TraitList.riled)));
-        enemyAbilityDictionary.Add(brandedVolleyKey, new Ability(CombatActionSettings.build(DescriptionParams.build(brandedVolleyKey, "The thrown projectiles of an angry mob."), DamageParams.build("25", "20"), TargetParams.build(Range.verticalOneIndex))));
+        enemyAbilityDictionary.Add(swapKey, new SwapAbility(CombatActionSettings.build(DescriptionParams.build(swapKey, iconName: swapKey, useDescription: "The creature swaps places with it's target. If successful, the creature heals itself."), DamageParams.build("25"), animationParams: AnimationParams.build(EffectAnimationType.SmokeBomb))));
+        enemyAbilityDictionary.Add(gutKey, new Ability(CombatActionSettings.build(gutKey, DescriptionParams.build(gutKey, loreDescription: "A knife in the stomach that leaves lasting damage."), DamageParams.build("45", "15"), TargetParams.build(Range.singleTargetIndex), animationParams: AnimationParams.build(EffectAnimationType.Pierce), appliedTrait: TraitList.wounded)));
+        enemyAbilityDictionary.Add(rileKey, new Ability(CombatActionSettings.build(rileKey, DescriptionParams.build(rileKey, loreDescription: "Agitate your allies, increasing their furiosity."), targetParams: TargetParams.build(Range.boxThreeIndex), appliedTrait: TraitList.riled)));
+        enemyAbilityDictionary.Add(brandedVolleyKey, new Ability(CombatActionSettings.build(DescriptionParams.build(brandedVolleyKey, loreDescription: "The thrown projectiles of an angry mob."), DamageParams.build("25", "20"), TargetParams.build(Range.verticalOneIndex))));
         
         
         string[] threeAngryBranded = new string[]{MonsterNameList.angryBranded, MonsterNameList.angryBranded, MonsterNameList.angryBranded};
-        enemyAbilityDictionary.Add(growMobKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(growMobKey, "More branded join the fight.")), threeAngryBranded));
+        enemyAbilityDictionary.Add(growMobKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(growMobKey, loreDescription: "More branded join the fight.")), threeAngryBranded));
         
 		//bat abilities
-		enemyAbilityDictionary.Add(flurryKey, new Ability(CombatActionSettings.build(DescriptionParams.build(flurryKey, "A devastating surge of claws and jaws."), DamageParams.build("18", "12"), TargetParams.build(Range.boxOneIndex), animationParams: AnimationParams.build(EffectAnimationType.BatSwarm))));
-        enemyAbilityDictionary.Add(screechKey, new Ability(CombatActionSettings.build(DescriptionParams.build(screechKey, "A howl so loud it draws blood.", StatSourceNameList.caveMadnessKey), DamageParams.build("15", "8"), TargetParams.build(Range.boxOneIndex), appliedTrait: TraitList.caveMadness)));
-        enemyAbilityDictionary.Add(spawnPupsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(spawnPupsKey, "The bat calls forth it's pups to fight for it.")), MonsterNameList.batSwarm));
-        enemyAbilityDictionary.Add(swarmRushKey, new Ability(CombatActionSettings.build(DescriptionParams.build(swarmRushKey, "The swarm flutters about their target, clawing and biting ferociously.", colonyCrushKey), DamageParams.build("8", "2"), animationParams: AnimationParams.build(EffectAnimationType.BatSwarm))));
+		enemyAbilityDictionary.Add(flurryKey, new Ability(CombatActionSettings.build(DescriptionParams.build(flurryKey, loreDescription: "A devastating surge of claws and jaws."), DamageParams.build("18", "12"), TargetParams.build(Range.boxOneIndex), animationParams: AnimationParams.build(EffectAnimationType.BatSwarm))));
+        enemyAbilityDictionary.Add(screechKey, new Ability(CombatActionSettings.build(DescriptionParams.build(screechKey, iconName: StatSourceNameList.caveMadnessKey, loreDescription: "A howl so loud it draws blood."), DamageParams.build("15", "8"), TargetParams.build(Range.boxOneIndex), appliedTrait: TraitList.caveMadness)));
+        enemyAbilityDictionary.Add(spawnPupsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(spawnPupsKey, loreDescription: "The bat calls forth its pups to fight for it.")), MonsterNameList.batSwarm));
+        enemyAbilityDictionary.Add(swarmRushKey, new Ability(CombatActionSettings.build(DescriptionParams.build(swarmRushKey, iconName: colonyCrushKey, loreDescription: "The swarm flutters about their target, clawing and biting ferociously."), DamageParams.build("8", "2"), animationParams: AnimationParams.build(EffectAnimationType.BatSwarm))));
         enemyAbilityDictionary.Add(batClawName, new Ability(CombatActionSettings.build(batClawName, batClawDescription, DamageParams.build("10", "8"), animationParams: AnimationParams.build(EffectAnimationType.Pierce))));
         enemyAbilityDictionary.Add(bossBatClawKey, new Ability(CombatActionSettings.build(batClawName, batClawDescription, DamageParams.build("12", "12"), animationParams: AnimationParams.build(EffectAnimationType.Pierce))));
-        enemyAbilityDictionary.Add(diveBombKey, new SuicideAbility(CombatActionSettings.build(DescriptionParams.build(diveBombKey, "The bat dives straight for an enemy at lightning speed and collides with it, spraying everyone close by with viscera and guano.", "DiveBomb"), DamageParams.build("5", "1"), TargetParams.build(Range.boxOneIndex))));
-        enemyAbilityDictionary.Add(rouseColonyKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(rouseColonyKey, "The Matron calls her children to war."), animationParams: AnimationParams.build(EffectAnimationType.Positive)), 
+        enemyAbilityDictionary.Add(diveBombKey, new SuicideAbility(CombatActionSettings.build(DescriptionParams.build(diveBombKey, iconName: "DiveBomb", loreDescription: "The bat dives straight for an enemy at lightning speed and collides with it, spraying everyone close by with viscera and guano."), DamageParams.build("5", "1"), TargetParams.build(Range.boxOneIndex))));
+        enemyAbilityDictionary.Add(rouseColonyKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(rouseColonyKey, useDescription: "The Cave Matron summons a random grouping of bats to fight for it, and then protects itself. Killing the Matron's children will make it vulnerable again.", loreDescription: "The Matron calls her children to war."), animationParams: AnimationParams.build(EffectAnimationType.Positive)), 
                                                                                                 new string[][]
                                                                                                             {
                                                                                                                 new string[]{MonsterNameList.armoredBat, MonsterNameList.screecher},
@@ -251,59 +251,59 @@ public static class AbilityList
         
         //worm abilities
 
-        enemyAbilityDictionary.Add(wallopKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wallopKey, "The worm drives forward, using the weight of its body and an intense bite to rip apart its foe."), DamageParams.build("17", "5"))));
-        enemyAbilityDictionary.Add(trampleKey, new Ability(CombatActionSettings.build(DescriptionParams.build(trampleKey, "The creature crashes into the target, using the size and weight of it's body to crush it's prey."), DamageParams.build("22", "10"), TargetParams.build(Range.verticalThreeIndex))));
-        enemyAbilityDictionary.Add(slamKey, new Ability(CombatActionSettings.build(DescriptionParams.build(slamKey, "The creature crashes into the target, using the size and weight of it's body to crush it's prey."), DamageParams.build("27", "15"), TargetParams.build(Range.boxOneIndex), animationParams: AnimationParams.build(EffectAnimationType.Blunt), appliedTrait: TraitList.wounded)));
-        enemyAbilityDictionary.Add(acidVomitKey, new Ability(CombatActionSettings.build(DescriptionParams.build(acidVomitKey, "The worm spits acidic bile at it's enemy, making them more vulnerable to attacks."), DamageParams.build("14", "0"), animationParams: AnimationParams.build(EffectAnimationType.Acid), appliedTrait: TraitList.acidVomit)));
-        enemyAbilityDictionary.Add(wormExplosionKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wormExplosionKey, "The worm explodes on death, spraying everything around it in burning guts.", "Volatile"), DamageParams.build("10", "0"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), animationParams: AnimationParams.build(EffectAnimationType.Acid, AnimationParams.useSpecialAttack), appliedTrait: TraitList.acidVomit)));
-        enemyAbilityDictionary.Add(wormBossExplosionKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wormBossExplosionKey, "The worm explodes on death, spraying everything around it in burning guts.", "Volatile"), DamageParams.build("35", "0"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), animationParams: AnimationParams.build(EffectAnimationType.Acid, AnimationParams.useSpecialAttack), appliedTrait: TraitList.acidVomit)));
-        enemyAbilityDictionary.Add(wormRestorativeKey, new ReviveAbility(CombatActionSettings.build(DescriptionParams.build(wormRestorativeKey, "The worm disolves into many smaller worms on death, which leave it's carcass in search of new corpses to inhabit.", "Restorative"), DamageParams.build("50"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), animationParams: AnimationParams.build(AnimationParams.useSpecialAttack))));
-        enemyAbilityDictionary.Add(wormBossRestorativeKey, new ReviveAbility(CombatActionSettings.build(DescriptionParams.build(wormBossRestorativeKey, "The worm disolves into many smaller worms on death, which leave it's carcass in search of new corpses to inhabit.", "Restorative"), DamageParams.build("100"), TargetParams.build(Range.boxTwoIndex), animationParams: AnimationParams.build(AnimationParams.useSpecialAttack))));
-        enemyAbilityDictionary.Add(wormAcidBarrageKey, new GroundEffectAbility(CombatActionSettings.build(DescriptionParams.build(wormAcidBarrageKey, "The worm belches toxic acid that gnaws at the skin of prey.", "DeathFumes"), animationParams: AnimationParams.build(EffectAnimationType.Acid)), wormFumesGroundEffect));
-        enemyAbilityDictionary.Add(bossWormFumesKey, new GroundEffectAbility(CombatActionSettings.build(DescriptionParams.build(bossWormFumesKey, "The worm belches toxic acid that gnaws at the skin of prey.", "DeathFumes"), animationParams: AnimationParams.build(EffectAnimationType.Acid)), bossWormFumesGroundEffect));
+        enemyAbilityDictionary.Add(wallopKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wallopKey, loreDescription: "The worm drives forward, using the weight of its body and an intense bite to rip apart its foe."), DamageParams.build("17", "5"))));
+        enemyAbilityDictionary.Add(trampleKey, new Ability(CombatActionSettings.build(DescriptionParams.build(trampleKey, loreDescription: "The creature crashes into the target, using the size and weight of it's body to crush it's prey."), DamageParams.build("22", "10"), TargetParams.build(Range.verticalThreeIndex))));
+        enemyAbilityDictionary.Add(slamKey, new Ability(CombatActionSettings.build(DescriptionParams.build(slamKey, loreDescription: "The creature crashes into the target, using the size and weight of it's body to crush it's prey."), DamageParams.build("27", "15"), TargetParams.build(Range.boxOneIndex), animationParams: AnimationParams.build(EffectAnimationType.Blunt), appliedTrait: TraitList.wounded)));
+        enemyAbilityDictionary.Add(acidVomitKey, new Ability(CombatActionSettings.build(DescriptionParams.build(acidVomitKey, loreDescription: "The worm spits acidic bile at it's enemy, making them more vulnerable to attacks."), DamageParams.build("14", "0"), animationParams: AnimationParams.build(EffectAnimationType.Acid), appliedTrait: TraitList.acidVomit)));
+        enemyAbilityDictionary.Add(wormExplosionKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wormExplosionKey, iconName: "Volatile", loreDescription: "The worm explodes on death, spraying everything around it in burning guts."), DamageParams.build("10", "0"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), animationParams: AnimationParams.build(EffectAnimationType.Acid, AnimationParams.useSpecialAttack), appliedTrait: TraitList.acidVomit)));
+        enemyAbilityDictionary.Add(wormBossExplosionKey, new Ability(CombatActionSettings.build(DescriptionParams.build(wormBossExplosionKey, iconName: "Volatile", loreDescription: "The worm explodes on death, spraying everything around it in burning guts."), DamageParams.build("35", "0"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), animationParams: AnimationParams.build(EffectAnimationType.Acid, AnimationParams.useSpecialAttack), appliedTrait: TraitList.acidVomit)));
+        enemyAbilityDictionary.Add(wormRestorativeKey, new ReviveAbility(CombatActionSettings.build(DescriptionParams.build(wormRestorativeKey, iconName: "Restorative", loreDescription: "The worm disolves into many smaller worms on death, which leave it's carcass in search of new corpses to inhabit."), DamageParams.build("50"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), animationParams: AnimationParams.build(AnimationParams.useSpecialAttack))));
+        enemyAbilityDictionary.Add(wormBossRestorativeKey, new ReviveAbility(CombatActionSettings.build(DescriptionParams.build(wormBossRestorativeKey, iconName: "Restorative", loreDescription: "The worm disolves into many smaller worms on death, which leave it's carcass in search of new corpses to inhabit."), DamageParams.build("100"), TargetParams.build(Range.boxTwoIndex), animationParams: AnimationParams.build(AnimationParams.useSpecialAttack))));
+        enemyAbilityDictionary.Add(wormAcidBarrageKey, new GroundEffectAbility(CombatActionSettings.build(DescriptionParams.build(wormAcidBarrageKey, iconName: "DeathFumes", loreDescription: "The worm belches toxic acid that gnaws at the skin of prey."), animationParams: AnimationParams.build(EffectAnimationType.Acid)), wormFumesGroundEffect));
+        enemyAbilityDictionary.Add(bossWormFumesKey, new GroundEffectAbility(CombatActionSettings.build(DescriptionParams.build(bossWormFumesKey, iconName: "DeathFumes", loreDescription: "The worm belches toxic acid that gnaws at the skin of prey."), animationParams: AnimationParams.build(EffectAnimationType.Acid)), bossWormFumesGroundEffect));
         
         string[] pairOfBroodlings = new string[]{MonsterNameList.broodling, MonsterNameList.broodling};
-        enemyAbilityDictionary.Add(splitSpawnWormsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(splitSpawnWormsKey, "The worm splits into two smaller worms."), animationParams: AnimationParams.build(AnimationParams.useSpecialAttack)), pairOfBroodlings));
-        enemyAbilityDictionary.Add(spawnBroodlingKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(spawnBroodlingKey, "The Herald summons broodlings to fight its battles.")), pairOfBroodlings));
+        enemyAbilityDictionary.Add(splitSpawnWormsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(splitSpawnWormsKey, useDescription: "The worm splits into two smaller worms."), animationParams: AnimationParams.build(AnimationParams.useSpecialAttack)), pairOfBroodlings));
+        enemyAbilityDictionary.Add(spawnBroodlingKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(spawnBroodlingKey, useDescription:"The Herald summons broodlings to fight its battles.")), pairOfBroodlings));
         string[] twoArmoredWorms = new string[]{MonsterNameList.armoredWorm, MonsterNameList.armoredWorm};
-        enemyAbilityDictionary.Add(splitBossSpawnWormsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(splitBossSpawnWormsKey, "The worm splits to spawn four smaller worms."), targetParams: TargetParams.build(Range.horizontalOneIndex), animationParams: AnimationParams.build(AnimationParams.useSpecialAttack)), twoArmoredWorms, activatesAfterDeath: true));
+        enemyAbilityDictionary.Add(splitBossSpawnWormsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(splitBossSpawnWormsKey, useDescription: "The worm splits to spawn two smaller worms."), targetParams: TargetParams.build(Range.horizontalOneIndex), animationParams: AnimationParams.build(AnimationParams.useSpecialAttack)), twoArmoredWorms, activatesAfterDeath: true));
 
         //guard abilities
-        enemyAbilityDictionary.Add(slashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(slashKey, "The bite of a sword swung quick."), DamageParams.build("8", "5"))));
-        enemyAbilityDictionary.Add(bladeBlitzKey, new Ability(CombatActionSettings.build(DescriptionParams.build(bladeBlitzKey, "Two axe strikes, lightning fast.", executeKey), DamageParams.build("25", "15"), TargetParams.build(Range.horizontalTwoIndex))));
-        enemyAbilityDictionary.Add(guardSpearKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardSpearKey, "A piercing blow capable of skewering multiple foes."), DamageParams.build("25", "15"), TargetParams.build(Range.verticalOneIndex), animationParams: AnimationParams.build(EffectAnimationType.Pierce))));
-        enemyAbilityDictionary.Add(guardAxeKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardAxeKey, "A wide sweep from a sharp axe."), DamageParams.build("23", "10"), TargetParams.build(Range.horizontalTwoIndex))));
-        enemyAbilityDictionary.Add(guardArrowBarrageKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardArrowBarrageKey, "A hail of deadly missles called from nearby arrow towers."), DamageParams.build("32", "15"))));
-        enemyAbilityDictionary.Add(guardJavelinKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardJavelinKey, "A missile aimed right at your heart."), DamageParams.build("17", "5"), TargetParams.build(Range.verticalOneIndex))));
-        enemyAbilityDictionary.Add(guardLashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardLashKey, "The bane of slaves everywhere.", "Lashings"), DamageParams.build("21", "40"), TargetParams.build(Range.verticalThreeIndex))));
-        enemyAbilityDictionary.Add(guardCoordinateKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardCoordinateKey, "A leader takes charge and directs their troops in battle, increasing their damage.", "Cohesion"), targetParams: TargetParams.build(Range.boxThreeIndex), appliedTrait: TraitList.cohesion)));
-        enemyAbilityDictionary.Add(guardSlingAttackKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardSlingAttackKey, "The slinger whips a bullet towards it's target."), DamageParams.build("6", "4"))));
-        enemyAbilityDictionary.Add(guardSlaveSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(guardSlaveSummonKey, "The slave driver calls forth more slaves to act as fodder.")), MonsterNameList.brandedConscript));
-        enemyAbilityDictionary.Add(guardWarriorSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(guardWarriorSummonKey, "The slave driver calls forth more slaves to act as fodder.")), new string[]{MonsterNameList.noBrandLoyalist, MonsterNameList.noBrandLoyalist}));
+        enemyAbilityDictionary.Add(slashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(slashKey, loreDescription: "The bite of a sword swung quick."), DamageParams.build("8", "5"))));
+        enemyAbilityDictionary.Add(bladeBlitzKey, new Ability(CombatActionSettings.build(DescriptionParams.build(bladeBlitzKey, iconName: executeKey, loreDescription: "Two axe strikes, lightning fast."), DamageParams.build("25", "15"), TargetParams.build(Range.horizontalTwoIndex))));
+        enemyAbilityDictionary.Add(guardSpearKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardSpearKey, loreDescription: "A piercing blow capable of skewering multiple foes."), DamageParams.build("25", "15"), TargetParams.build(Range.verticalOneIndex), animationParams: AnimationParams.build(EffectAnimationType.Pierce))));
+        enemyAbilityDictionary.Add(guardAxeKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardAxeKey, loreDescription: "A wide sweep from a sharp axe."), DamageParams.build("23", "10"), TargetParams.build(Range.horizontalTwoIndex))));
+        enemyAbilityDictionary.Add(guardArrowBarrageKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardArrowBarrageKey, loreDescription: "A hail of deadly missles called from nearby arrow towers."), DamageParams.build("32", "15"))));
+        enemyAbilityDictionary.Add(guardJavelinKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardJavelinKey, loreDescription: "A missile aimed right at your heart."), DamageParams.build("17", "5"), TargetParams.build(Range.verticalOneIndex))));
+        enemyAbilityDictionary.Add(guardLashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardLashKey, iconName: "Lashings", loreDescription: "The bane of slaves everywhere."), DamageParams.build("21", "40"), TargetParams.build(Range.verticalThreeIndex))));
+        enemyAbilityDictionary.Add(guardCoordinateKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardCoordinateKey, iconName: "Cohesion", loreDescription: "A leader takes charge and directs their troops in battle, increasing their damage."), targetParams: TargetParams.build(Range.boxThreeIndex), appliedTrait: TraitList.cohesion)));
+        enemyAbilityDictionary.Add(guardSlingAttackKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardSlingAttackKey, loreDescription:"The slinger whips a bullet towards it's target."), DamageParams.build("6", "4"))));
+        enemyAbilityDictionary.Add(guardSlaveSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(guardSlaveSummonKey, useDescription: "The slave driver calls forth Branded Conscripts, which force their enemies to attack them instead of their masters.")), MonsterNameList.brandedConscript));
+        enemyAbilityDictionary.Add(guardWarriorSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(guardWarriorSummonKey, useDescription: "The slave driver calls forth more slaves to act as fodder.")), new string[]{MonsterNameList.noBrandLoyalist, MonsterNameList.noBrandLoyalist}));
 
         //Honorguard abilities
-        enemyAbilityDictionary.Add(eviscerateKey, new BacklashAbility(CombatActionSettings.build(DescriptionParams.build(eviscerateKey, "A devastating cut capable of unseaming an enemy. This attack hurts the attacker as well as the target.", "MakeItBleed"), DamageParams.build("30", "5"), TargetParams.build(Range.boxOneIndex), appliedTrait: TraitList.wounded), oneHundredPercentBacklash));
-        enemyAbilityDictionary.Add(skullBashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(skullBashKey, "A blow to the temple that disorients the target.", "Upside the Head"), DamageParams.build("24", "10"), TargetParams.build(Range.verticalOneIndex), appliedTrait: TraitList.upsideTheHead)));
-        enemyAbilityDictionary.Add(squadStrikeKey, new SquadAbility(CombatActionSettings.build(DescriptionParams.build(squadStrikeKey, "An attack that utilizes the cooperation of other squad members. Deals more damage if the attacker is adjacent to one or more allies."), DamageParams.build("10", "5"), TargetParams.build(Range.boxOneIndex)), "31"));
-        enemyAbilityDictionary.Add(skewerKey, new Ability(CombatActionSettings.build(DescriptionParams.build(skewerKey, "The lancer pierces multiple targets in a row."), DamageParams.build("37", "10"), TargetParams.build(Range.verticalThreeIndex), animationParams: AnimationParams.build(EffectAnimationType.Pierce))));
-        enemyAbilityDictionary.Add(executeKey, new Ability(CombatActionSettings.build(DescriptionParams.build(executeKey, "A chop so quick, it may very well be the last thing you ever see."), DamageParams.build("28", "50"), TargetParams.build(Range.horizontalThreeIndex))));
-        enemyAbilityDictionary.Add(turnUpTheHeatKey, new Ability(CombatActionSettings.build(DescriptionParams.build(turnUpTheHeatKey, "Kende cooks his targets until they're seared on the outside but pink in the middle, making them delectable targets for his allies.", "Roasted"), DamageParams.build("12"), TargetParams.build(Range.boxThreeIndex), appliedTrait: TraitList.roasted)));
+        enemyAbilityDictionary.Add(eviscerateKey, new BacklashAbility(CombatActionSettings.build(DescriptionParams.build(eviscerateKey, iconName: "MakeItBleed", useDescription: "This attack hurts the attacker as well as the target.", loreDescription: "A devastating cut capable of unseaming an enemy."), DamageParams.build("30", "5"), TargetParams.build(Range.boxOneIndex), appliedTrait: TraitList.wounded), oneHundredPercentBacklash));
+        enemyAbilityDictionary.Add(skullBashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(skullBashKey, iconName: "Upside the Head", loreDescription: "A blow to the temple that disorients the target."), DamageParams.build("24", "10"), TargetParams.build(Range.verticalOneIndex), appliedTrait: TraitList.upsideTheHead)));
+        enemyAbilityDictionary.Add(squadStrikeKey, new SquadAbility(CombatActionSettings.build(DescriptionParams.build(squadStrikeKey, useDescription: "Deals more damage if the attacker is adjacent to one or more allies."), DamageParams.build("10", "5"), TargetParams.build(Range.boxOneIndex)), "31"));
+        enemyAbilityDictionary.Add(skewerKey, new Ability(CombatActionSettings.build(DescriptionParams.build(skewerKey, loreDescription: "The lancer pierces multiple targets in a row."), DamageParams.build("37", "10"), TargetParams.build(Range.verticalThreeIndex), animationParams: AnimationParams.build(EffectAnimationType.Pierce))));
+        enemyAbilityDictionary.Add(executeKey, new Ability(CombatActionSettings.build(DescriptionParams.build(executeKey, loreDescription: "A decapitating strike."), DamageParams.build("28", "50"), TargetParams.build(Range.horizontalThreeIndex))));
+        enemyAbilityDictionary.Add(turnUpTheHeatKey, new Ability(CombatActionSettings.build(DescriptionParams.build(turnUpTheHeatKey, iconName: "Roasted", loreDescription: "Kende cooks his targets until they're seared on the outside but pink in the middle, making them delectable targets for his allies."), DamageParams.build("12"), TargetParams.build(Range.boxThreeIndex), appliedTrait: TraitList.roasted)));
         // enemyAbilityDictionary.Add(shoreUpKey, new MissesArePunishedAbility(CombatActionSettings.build(DescriptionParams.build(shoreUpKey, "The Captain shores up the defenses of her subordinates. If she has a target, she will heal and protect them. If she has no target, she will hurt herself instead.", "Shielded"), DamageParams.build("10", "15"), TraitList.shoredUp)));
-        enemyAbilityDictionary.Add(shatterKey, new Ability(CombatActionSettings.build(DescriptionParams.build(shatterKey, "A destructive strike with an enormous area."), DamageParams.build("38", "5"), TargetParams.build(Range.boxTwoIndex), animationParams: AnimationParams.build(EffectAnimationType.Blunt))));
-        enemyAbilityDictionary.Add(frontHandKey, new Ability(CombatActionSettings.build(DescriptionParams.build(frontHandKey, "A torrent of blows that prevents its targets from attacking.", "Lashings"), DamageParams.build("35", "10"), TargetParams.build(Range.verticalThreeIndex), appliedTrait: TraitList.whiplash)));
-        enemyAbilityDictionary.Add(backHandKey, new Ability(CombatActionSettings.build(DescriptionParams.build(backHandKey, "A painful flurry of lashes.", "Lashings"), DamageParams.build("25", "50"), TargetParams.build(Range.horizontalThreeIndex), appliedTrait: TraitList.wounded)));
-        enemyAbilityDictionary.Add(takeHostageKey, new TakeHostageAbility(CombatActionSettings.build(DescriptionParams.build(takeHostageKey, "Tabor grabs one of his enemies and uses them as a shield", "Lashings"), DamageParams.build("60", "50"))));
+        enemyAbilityDictionary.Add(shatterKey, new Ability(CombatActionSettings.build(DescriptionParams.build(shatterKey, loreDescription: "A destructive strike with an enormous area."), DamageParams.build("38", "5"), TargetParams.build(Range.boxTwoIndex), animationParams: AnimationParams.build(EffectAnimationType.Blunt))));
+        enemyAbilityDictionary.Add(frontHandKey, new Ability(CombatActionSettings.build(DescriptionParams.build(frontHandKey, iconName: "Lashings", loreDescription: "A torrent of blows that prevents its targets from attacking."), DamageParams.build("35", "10"), TargetParams.build(Range.verticalThreeIndex), appliedTrait: TraitList.whiplash)));
+        enemyAbilityDictionary.Add(backHandKey, new Ability(CombatActionSettings.build(DescriptionParams.build(backHandKey, iconName: "Lashings", loreDescription: "A painful flurry of lashes."), DamageParams.build("25", "50"), TargetParams.build(Range.horizontalThreeIndex), appliedTrait: TraitList.wounded)));
+        enemyAbilityDictionary.Add(takeHostageKey, new TakeHostageAbility(CombatActionSettings.build(DescriptionParams.build(takeHostageKey, iconName: "Lashings", useDescription: "This Ability targets a single Minion Creature and kills it outright. The Attacker then summons a Hostage Minion to their side of the field which forces it's enemies to attack it instead of it's master."), DamageParams.build("60", "50"))));
 
 		//Horse Abilities
-		enemyAbilityDictionary.Add(chargeKey, new Ability(CombatActionSettings.build(DescriptionParams.build(chargeKey, "The creature rushes headlong at it's foe, crushing them underfoot."), DamageParams.build("26", "20"), TargetParams.build(Range.verticalThreeIndex), animationParams: AnimationParams.build(EffectAnimationType.Blunt))));
-		enemyAbilityDictionary.Add(stompKey, new Ability(CombatActionSettings.build(DescriptionParams.build(stompKey, "The creature stamps down on it's target, damaging and stunning it."), DamageParams.build("31", "5"), appliedTrait: TraitList.upsideTheHead)));
-		enemyAbilityDictionary.Add(feedKey, new HealingAbility(CombatActionSettings.build(DescriptionParams.build(feedKey, "The combatant provides sustenance to their allies, healing them."), DamageParams.build("22"))));
+		enemyAbilityDictionary.Add(chargeKey, new Ability(CombatActionSettings.build(DescriptionParams.build(chargeKey, loreDescription: "The creature rushes headlong at it's foe, crushing them underfoot."), DamageParams.build("26", "20"), TargetParams.build(Range.verticalThreeIndex), animationParams: AnimationParams.build(EffectAnimationType.Blunt))));
+		enemyAbilityDictionary.Add(stompKey, new Ability(CombatActionSettings.build(DescriptionParams.build(stompKey, loreDescription: "The creature stamps down on it's target, damaging and stunning it."), DamageParams.build("31", "5"), appliedTrait: TraitList.upsideTheHead)));
+		enemyAbilityDictionary.Add(feedKey, new HealingAbility(CombatActionSettings.build(DescriptionParams.build(feedKey, useDescription: "The combatant provides sustenance to their allies, healing them."), DamageParams.build("22"))));
 
 		//Saint Abilities
-		enemyAbilityDictionary.Add(boulderRollKey, new Ability(CombatActionSettings.build(DescriptionParams.build(boulderRollKey, "A massive rock tumbling quickly towards you.", "BoulderRoll"), DamageParams.build("31", "10"), TargetParams.build(Range.verticalThreeIndex), animationParams: AnimationParams.build(EffectAnimationType.Blunt))));
+		enemyAbilityDictionary.Add(boulderRollKey, new Ability(CombatActionSettings.build(DescriptionParams.build(boulderRollKey, iconName: "BoulderRoll", loreDescription: "A massive rock tumbling quickly towards you."), DamageParams.build("31", "10"), TargetParams.build(Range.verticalThreeIndex), animationParams: AnimationParams.build(EffectAnimationType.Blunt))));
         enemyAbilityDictionary.Add(lesserBoulderRollKey, new Ability(CombatActionSettings.build(lesserBoulderRollKey, boulderRollDescription, DamageParams.build("25", "10"), TargetParams.build(Range.verticalThreeIndex), animationParams: AnimationParams.build(EffectAnimationType.Blunt))));
-        enemyAbilityDictionary.Add(evolveKey, new EvolveAbility(CombatActionSettings.build(DescriptionParams.build(evolveKey, "Evolves targets into more powerful versions of themselves."), targetParams: TargetParams.build(Range.boxThreeIndex)), enemyAbilityDictionary[boulderRollKey]));
-        enemyAbilityDictionary.Add(stoneSaintMaterialsSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(stoneSaintMaterialsSummonKey, "The Saint wills more rocks to come to it's aid.")), 
+        enemyAbilityDictionary.Add(evolveKey, new EvolveAbility(CombatActionSettings.build(DescriptionParams.build(evolveKey, useDescription: "Evolves targets into more powerful versions of themselves."), targetParams: TargetParams.build(Range.boxThreeIndex)), enemyAbilityDictionary[boulderRollKey]));
+        enemyAbilityDictionary.Add(stoneSaintMaterialsSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(stoneSaintMaterialsSummonKey, useDescription: "The Saint summons rock Minions which do not attack but can be Evolved into more Stone Saints.")), 
                                                                                     new string[]{MonsterNameList.smallRock, MonsterNameList.smallRock}));
 	}
 	
@@ -314,7 +314,7 @@ public static class AbilityList
 
         //start of Str Abilities
         currentKey = generateAbilityKey(strengthKeyChar);
-        statAbilityDictionary.Add(currentKey, new KnockBackAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Send Flying", "Deliver a powerful blow which throws the target backwards into whatever is behind them. Extra damage is dealt depending on how far backwards they travel. If they collide with an enemy, the second enemy also takes damage.", "SendFlying"), DamageParams.build("3S", "D + S"), frequencyParams: FrequencyParams.build(twoSlotMax, fiveRoundCooldown)), thirtyPercentPerSquare));
+        statAbilityDictionary.Add(currentKey, new KnockBackAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Send Flying", iconName: "SendFlying", useDescription: "Deliver a powerful blow which throws the target backwards into whatever is behind them. Extra damage is dealt depending on how far backwards they travel. If they collide with an enemy, the second enemy also takes damage."), DamageParams.build("3S", "D + S"), frequencyParams: FrequencyParams.build(twoSlotMax, fiveRoundCooldown)), thirtyPercentPerSquare));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		currentKey = generateAbilityKey(strengthKeyChar);
@@ -326,7 +326,7 @@ public static class AbilityList
 		statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(strengthKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Make It Bleed", "You impale, bludgeon, or slash your enemy to the point of massive hemorrhaging. The enemy takes initial damage and every hit the enemy takes for the rest of combat deals additional damage.", "MakeItBleed"), DamageParams.build("3S + D", "D"), TargetParams.build(Range.boxOneIndex), FrequencyParams.build(twoSlotMax, fiveRoundCooldown), animationParams: AnimationParams.build(EffectAnimationType.Blunt), appliedTrait: TraitList.wounded)));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Make It Bleed", iconName: "MakeItBleed", useDescription: "The enemy takes initial damage and every hit the enemy takes for the rest of combat deals additional damage.", loreDescription: "You impale, bludgeon, or slash your enemy to the point of massive hemorrhaging."), DamageParams.build("3S + D", "D"), TargetParams.build(Range.boxOneIndex), FrequencyParams.build(twoSlotMax, fiveRoundCooldown), animationParams: AnimationParams.build(EffectAnimationType.Blunt), appliedTrait: TraitList.wounded)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(strengthKeyChar);
@@ -334,16 +334,16 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(strengthKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Power Slam", "This potent attack hits an enormous area. Costs four stacks of the 'Bloodlust' Trait."), DamageParams.build("5S + 2D", "2S + D"), TargetParams.build(Range.horizontalFourIndex), FrequencyParams.build(oneSlotMax, sixRoundCooldown), CostParams.build(ActionCostType.Bloodlust, fourStackCastCost), AnimationParams.build(EffectAnimationType.Blunt))));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Power Slam", loreDescription: "A potent assault that hits a wide area."), DamageParams.build("5S + 2D", "2S + D"), TargetParams.build(Range.horizontalFourIndex), FrequencyParams.build(oneSlotMax, sixRoundCooldown), CostParams.build(ActionCostType.Bloodlust, fourStackCastCost), AnimationParams.build(EffectAnimationType.Blunt))));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(strengthKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Rip Apart", "Focus all of your fury into a single target. Deals massive damage. If the target survives, they cannot act until the next turn. Costs five stacks of the Bloodlust Trait."), DamageParams.build("9S+D+W", "10S"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), CostParams.build(ActionCostType.Bloodlust, fiveStackCastCost), AnimationParams.build(EffectAnimationType.Slash), TraitList.aliveBarely)));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Rip Apart", useDescription: "Deals massive damage. If the target survives, they cannot act until the next turn."), DamageParams.build("9S+D+W", "10S"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), CostParams.build(ActionCostType.Bloodlust, fiveStackCastCost), AnimationParams.build(EffectAnimationType.Slash), TraitList.aliveBarely)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         //start of Dex Abilities
         currentKey = generateAbilityKey(dexterityKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build(waylayName, "You strike at the perfect moment, bypassing your opponent's unlevied defenses. Guaranteed to Crit in the Surprise Round. Waylay has a long Cooldown."), DamageParams.build("5D + S", "2D+5"), TargetParams.build(Range.verticalThreeIndex), FrequencyParams.build(oneSlotMax, nineRoundCooldown), animationParams: AnimationParams.build(EffectAnimationType.Pierce))));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build(waylayName, useDescription: "Guaranteed to Crit in the Surprise Round. Waylay has a long Cooldown.", loreDescription: "You strike at the perfect moment, bypassing your opponent's unlevied defenses."), DamageParams.build("5D + S", "2D+5"), TargetParams.build(Range.verticalThreeIndex), FrequencyParams.build(oneSlotMax, nineRoundCooldown), animationParams: AnimationParams.build(EffectAnimationType.Pierce))));
 		statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(dexterityKeyChar);
@@ -351,11 +351,11 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(dexterityKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build(crippleName, "Your attack leaves permanent damage. The target takes extra damage whenever it receives a debuff."), DamageParams.build("3D + W", "2D"), frequencyParams: FrequencyParams.build(twoSlotMax, fiveRoundCooldown), appliedTrait: TraitList.crippled)));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build(crippleName, loreDescription: "Your attack leaves permanent damage."), DamageParams.build("3D + W", "2D"), frequencyParams: FrequencyParams.build(twoSlotMax, fiveRoundCooldown), appliedTrait: TraitList.crippled)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 		
 		currentKey = generateAbilityKey(dexterityKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build(flenseName, "Deal initial damage to a target. That target takes additional damage at the end of each round for the rest of combat."), DamageParams.build("4D + 2S", "2D"), frequencyParams: FrequencyParams.build(twoSlotMax, fourRoundCooldown), appliedTrait: TraitList.flensed)));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build(flenseName), DamageParams.build("4D + 2S", "2D"), frequencyParams: FrequencyParams.build(twoSlotMax, fourRoundCooldown), appliedTrait: TraitList.flensed)));
 		statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = "d-"+Dexterity.exitStrategyLevel+"-3";
@@ -367,7 +367,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(dexterityKeyChar);
-        statAbilityDictionary.Add(currentKey, new DoubleStrikeAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Twice Slice", "You perform a double slice, attacking across a wide swath of the battlefield. Costs three Stacks of the Predation Trait."), DamageParams.build("4D + 2S", "3D"), TargetParams.build(Range.horizontalThreeIndex), FrequencyParams.build(oneSlotMax, fourRoundCooldown), CostParams.build(ActionCostType.Predation, threeStackCastCost)), Range.verticalThreeIndex));
+        statAbilityDictionary.Add(currentKey, new DoubleStrikeAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Twice Slice", useDescription: "You perform two attacks across a large area."), DamageParams.build("4D + 2S", "3D"), TargetParams.build(Range.horizontalThreeIndex), FrequencyParams.build(oneSlotMax, fourRoundCooldown), CostParams.build(ActionCostType.Predation, threeStackCastCost)), Range.verticalThreeIndex));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         //start of Wis Abilities
@@ -377,49 +377,49 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(wisdomKeyChar);
-        statAbilityDictionary.Add(currentKey, new RepositionEnemyAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Rolling Throw", "Throw an Enemy to a location of your choice, and apply the Tripped Trait to the target. Costs two Stacks of any Stance.", "Trip"), DamageParams.build("W + D", "2W + 2D"), frequencyParams: FrequencyParams.build(twoSlotMax, threeRoundCooldown), costParams: CostParams.build(ActionCostType.Stance, twoStackCastCost), animationParams: AnimationParams.build(EffectAnimationType.Blunt), appliedTrait: TraitList.tripped)));
+        statAbilityDictionary.Add(currentKey, new RepositionEnemyAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Rolling Throw", iconName: "Trip", useDescription: "Throw an Enemy to a location of your choice."), DamageParams.build("W + D", "2W + 2D"), frequencyParams: FrequencyParams.build(twoSlotMax, threeRoundCooldown), costParams: CostParams.build(ActionCostType.Stance, twoStackCastCost), animationParams: AnimationParams.build(EffectAnimationType.Blunt), appliedTrait: TraitList.tripped)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(wisdomKeyChar);
-        statAbilityDictionary.Add(currentKey, new InterruptAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(throatJabName, "A swift jab to the throat that interrupts the enemy's plans. Guaranteed to critically hit if used on an enemy with a '" + TraitType.Charge.ToString() + "' type trait. Removes 1 '" + TraitType.Charge.ToString() + "' type trait from the target. If a Trait is removed in this way, the target has the Countered Trait applied to them."), DamageParams.build("4W + 2S + 2D"), frequencyParams: FrequencyParams.build(oneSlotMax, sixRoundCooldown), animationParams: AnimationParams.build(EffectAnimationType.Blunt)), TraitType.Charge));
+        statAbilityDictionary.Add(currentKey, new InterruptAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(throatJabName, useDescription: "Guaranteed to critically hit if used on an enemy with a '" + TraitType.Charge.ToString() + "' type trait. Removes 1 '" + TraitType.Charge.ToString() + "' type trait from the target. If a Trait is removed in this way, the target has the Countered Trait applied to them.", loreDescription: "A swift jab to the throat that interrupts the enemy's plans."), DamageParams.build("4W + 2S + 2D"), frequencyParams: FrequencyParams.build(oneSlotMax, sixRoundCooldown), animationParams: AnimationParams.build(EffectAnimationType.Blunt)), TraitType.Charge));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(wisdomKeyChar);
-        statAbilityDictionary.Add(currentKey, new RepetitionAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(doubleStrikeName, "Two quick taps to the gut, one right after the other. Costs one Stack of any Stance."), DamageParams.build("3W"), frequencyParams: FrequencyParams.build(twoSlotMax, fourRoundCooldown), costParams: CostParams.build(ActionCostType.Stance, oneStackCastCost), animationParams: AnimationParams.build(EffectAnimationType.Blunt)), doubleStrikeRepetitions));
+        statAbilityDictionary.Add(currentKey, new RepetitionAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(doubleStrikeName, useDescription: "The Caster Damages their opponent twice.", loreDescription: "Two quick taps to the gut, one right after the other."), DamageParams.build("3W"), frequencyParams: FrequencyParams.build(twoSlotMax, fourRoundCooldown), costParams: CostParams.build(ActionCostType.Stance, oneStackCastCost), animationParams: AnimationParams.build(EffectAnimationType.Blunt)), doubleStrikeRepetitions));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = "w-3-3";
-        statAbilityDictionary.Add(currentKey, new FistUpgradePassiveAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(improvedStrikesName, "Your fist weapon is replaced with an improved version which deals more damage, crits more often, and hits a larger area than the previous version.", "ImprovedFistIcon"))));
+        statAbilityDictionary.Add(currentKey, new FistUpgradePassiveAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(improvedStrikesName, iconName: "ImprovedFistIcon", useDescription: "Your Fist weapon is replaced with an improved version which deals more damage, crits more often, and hits a larger area than the previous version."))));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		currentKey = generateAbilityKey(wisdomKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build(crushingBlowName, "A slam that shakes the enemy to their core, leaving them vulnerable. Until the end of the turn their Armor Score is reduced by 50. Costs five Stacks of any Stance."), DamageParams.build("4W + 2S", "W + D"), TargetParams.build(Range.horizontalTwoIndex), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), CostParams.build(ActionCostType.Stance, fiveStackCastCost), AnimationParams.build(EffectAnimationType.Blunt), TraitList.crushingBlow)));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build(crushingBlowName), DamageParams.build("4W + 2S", "W + D"), TargetParams.build(Range.horizontalTwoIndex), FrequencyParams.build(oneSlotMax, sevenRoundCooldown), CostParams.build(ActionCostType.Stance, fiveStackCastCost), AnimationParams.build(EffectAnimationType.Blunt), TraitList.crushingBlow)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(wisdomKeyChar);
-		statAbilityDictionary.Add(currentKey, new StanceReapplicationAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(battleMeditationName, "Your training has allowed you to realign your energies to immediate affect, healing yourself and your allies and spreading your stance to everyone within range."), DamageParams.build("W"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), FrequencyParams.build(oneSlotMax, eightRoundCooldown))));
+		statAbilityDictionary.Add(currentKey, new StanceReapplicationAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(battleMeditationName, useDescription: "Healing yourself and your allies, and spread your Stance to everyone within range."), DamageParams.build("W"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), FrequencyParams.build(oneSlotMax, eightRoundCooldown))));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         //start of Cha Abilities
 
         currentKey = generateAbilityKey(charismaKeyChar);
-        statAbilityDictionary.Add(currentKey, new PassiveAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(exuberanceName, "Use the energies accumulated by yourself and your allies to activate abilities in combat:\n\nRed Knife: "+redKnifeAcquisitionMethodExplanation+"\n\nBlue Shield: "+blueShieldAcquisitionMethodExplanation+"\n\nYellow Thorn: "+yellowThornAcquisitionMethodExplanation+"\n\nGreen Leaf: "+greenLeafAcquisitionMethodExplanation, IconList.allExuberancesIconName))));
+        statAbilityDictionary.Add(currentKey, new PassiveAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(exuberanceName, useDescription: "Use the energies accumulated by yourself and your allies to activate abilities in combat:\n\nRed Knife: "+redKnifeAcquisitionMethodExplanation+"\n\nBlue Shield: "+blueShieldAcquisitionMethodExplanation+"\n\nYellow Thorn: "+yellowThornAcquisitionMethodExplanation+"\n\nGreen Leaf: "+greenLeafAcquisitionMethodExplanation, iconName: IconList.allExuberancesIconName))));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(charismaKeyChar);
-        statAbilityDictionary.Add(currentKey, new ExuberanceEquippedPassive(CombatActionSettings.build(currentKey, DescriptionParams.build(unflinchingName, "You are fearless in battle, and your companions know it. Gain "+fourStackBonus+" stacks of the Red Knife Exuberance at the start of every combat.", "Red Knife")), MultiStackProcType.RedKnife, fourStackBonus));	
+        statAbilityDictionary.Add(currentKey, new ExuberanceEquippedPassive(CombatActionSettings.build(currentKey, DescriptionParams.build(unflinchingName, useDescription: "You are fearless in battle, and your companions know it. Gain "+fourStackBonus+" stacks of the Red Knife Exuberance at the start of every combat.", iconName: "Red Knife")), MultiStackProcType.RedKnife, fourStackBonus));	
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = "c-2-3";
-        statAbilityDictionary.Add(currentKey, new HealingAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(rallyName, "Encourage an ally to fight on, increasing their damage and healing them. Costs 3 Red Knife stacks."), DamageParams.build("2C"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(twoSlotMax, sixRoundCooldown), CostParams.build(ActionCostType.RedKnife, threeStackCastCost), appliedTrait: TraitList.rallied)));
+        statAbilityDictionary.Add(currentKey, new HealingAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(rallyName, useDescription: "Encourage an ally to fight on, increasing their damage and healing them."), DamageParams.build("2C"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(twoSlotMax, sixRoundCooldown), CostParams.build(ActionCostType.RedKnife, threeStackCastCost), appliedTrait: TraitList.rallied)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		currentKey = generateAbilityKey(charismaKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Victimize", "Your words ring out over the din of combat, alerting your allies to an exploitable weakness in an enemy. Affected targets will take more damage from allied attacks. Costs 2 Red Knife stack and 1 Blue Shield stack."), targetParams: TargetParams.build(Range.boxOneIndex), frequencyParams: FrequencyParams.build(oneSlotMax, threeRoundCooldown), costParams: CostParams.build(new ActionCostType[] { ActionCostType.RedKnife , ActionCostType.BlueShield }, new int[] { twoStackCastCost, oneStackCastCost }), appliedTrait: TraitList.insecure)));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Victimize", useDescription: "Affected targets will take more damage from allied attacks. Costs 2 Red Knife stack and 1 Blue Shield stack.", loreDescription: "Your words ring out over the din of combat, alerting your allies to exploitable weaknesses."), targetParams: TargetParams.build(Range.boxOneIndex), frequencyParams: FrequencyParams.build(oneSlotMax, threeRoundCooldown), costParams: CostParams.build(new ActionCostType[] { ActionCostType.RedKnife , ActionCostType.BlueShield }, new int[] { twoStackCastCost, oneStackCastCost }), appliedTrait: TraitList.insecure)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(charismaKeyChar);
-        statAbilityDictionary.Add(currentKey, new RepositionAllyAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Get Back!", "Order a companion to reposition, healing them in the process. Costs 1 Red Knife stack and 1 Yellow Thorn stack."), DamageParams.build("5C"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(oneSlotMax, fourRoundCooldown), CostParams.build(new ActionCostType[] { ActionCostType.RedKnife, ActionCostType.YellowThorn }, new int[] { oneStackCastCost, oneStackCastCost }))));
+        statAbilityDictionary.Add(currentKey, new RepositionAllyAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Get Back!", useDescription: "Order a Companion to reposition, healing them in the process."), DamageParams.build("5C"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(oneSlotMax, fourRoundCooldown), CostParams.build(new ActionCostType[] { ActionCostType.RedKnife, ActionCostType.YellowThorn }, new int[] { oneStackCastCost, oneStackCastCost }))));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		// currentKey = generateAbilityKey(charismaKeyChar);
@@ -427,15 +427,15 @@ public static class AbilityList
         // statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		currentKey = "c-3-3";
-        statAbilityDictionary.Add(currentKey, new ExuberanceEquippedPassive(CombatActionSettings.build(currentKey, DescriptionParams.build(versatileName, "Your companions have come to rely on you in a variety of situations. Gain "+oneStackBonus+" stack of each Exuberance type at the start of every combat.", "Blue Shield")), new MultiStackProcType[] { MultiStackProcType.RedKnife, MultiStackProcType.BlueShield, MultiStackProcType.YellowThorn, MultiStackProcType.GreenLeaf}, new int[]{oneStackCastCost,oneStackCastCost,oneStackCastCost,oneStackCastCost}));	
+        statAbilityDictionary.Add(currentKey, new ExuberanceEquippedPassive(CombatActionSettings.build(currentKey, DescriptionParams.build(versatileName, iconName: "Blue Shield", useDescription: "Your companions have come to rely on you in a variety of situations. Gain "+oneStackBonus+" stack of each Exuberance type at the start of every combat.")), new MultiStackProcType[] { MultiStackProcType.RedKnife, MultiStackProcType.BlueShield, MultiStackProcType.YellowThorn, MultiStackProcType.GreenLeaf}, new int[]{oneStackCastCost,oneStackCastCost,oneStackCastCost,oneStackCastCost}));	
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		currentKey = generateAbilityKey(charismaKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Demoralize", "Break the enemy's will to fight. All enemies take " + TraitList.demoralizeExtraDamage + " extra damage and act last in the action order."), targetParams: TargetParams.build(Range.boxThreeIndex), frequencyParams: FrequencyParams.build(oneSlotMax, sixRoundCooldown), costParams: CostParams.build(new ActionCostType[] { ActionCostType.RedKnife, ActionCostType.YellowThorn }, new int[] { twoStackCastCost, twoStackCastCost }), appliedTrait: TraitList.demoralized)));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Demoralize", useDescription: "Break the enemy's will to fight. All enemies take " + TraitList.demoralizeExtraDamage + " extra damage and act last in the action order."), targetParams: TargetParams.build(Range.boxThreeIndex), frequencyParams: FrequencyParams.build(oneSlotMax, sixRoundCooldown), costParams: CostParams.build(new ActionCostType[] { ActionCostType.RedKnife, ActionCostType.YellowThorn }, new int[] { twoStackCastCost, twoStackCastCost }), appliedTrait: TraitList.demoralized)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(charismaKeyChar);
-        statAbilityDictionary.Add(currentKey, new RepetitionPerCompanionAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Volley", "Order all companions to rain missiles on a single foe. Delivers an extra attack per companion on the battlefield. Costs Six Red Knife, 1 Blue Shield, 2 Yellow Thorn, and 1 Green Leaf stack."), DamageParams.build("4C", "2C + D"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(oneSlotMax, fourRoundCooldown), CostParams.build(new ActionCostType[] { ActionCostType.RedKnife, ActionCostType.BlueShield, ActionCostType.YellowThorn, ActionCostType.GreenLeaf }, new int[] { sixStackCastCost, oneStackCastCost, twoStackCastCost, oneStackCastCost }))));
+        statAbilityDictionary.Add(currentKey, new RepetitionPerCompanionAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Volley", useDescription: "Order all companions to rain missiles on a single foe. Delivers an extra attack per Companion on the battlefield."), DamageParams.build("4C", "2C + D"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(oneSlotMax, fourRoundCooldown), CostParams.build(new ActionCostType[] { ActionCostType.RedKnife, ActionCostType.BlueShield, ActionCostType.YellowThorn, ActionCostType.GreenLeaf }, new int[] { sixStackCastCost, oneStackCastCost, twoStackCastCost, oneStackCastCost }))));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey); 
     }
 	
@@ -454,7 +454,7 @@ public static class AbilityList
         // miscAbilityDictionary.Add(nandorRevive.getKey(), nandorRevive);
         // listOfNandorAbilities.Add(nandorRevive);
 
-        Ability standTogether = new Ability(CombatActionSettings.build(StatSourceNameList.standTogetherKey, DescriptionParams.build(StatSourceNameList.standTogetherKey, "The caster calls for all of his allies to act as one. Allies in the area deal extra damage for the rest of Combat"), targetParams: TargetParams.build(Range.boxThreeIndex, targetsOnlyAllies: true), frequencyParams: FrequencyParams.build(oneSlotMax, eightRoundCooldown), appliedTrait: TraitList.standTogether));
+        Ability standTogether = new Ability(CombatActionSettings.build(StatSourceNameList.standTogetherKey, DescriptionParams.build(StatSourceNameList.standTogetherKey, useDescription: "The caster calls for all of his allies to act as one. Allies in the area deal extra damage for the rest of Combat"), targetParams: TargetParams.build(Range.boxThreeIndex, targetsOnlyAllies: true), frequencyParams: FrequencyParams.build(oneSlotMax, eightRoundCooldown), appliedTrait: TraitList.standTogether));
         standTogether.setStatRequirements(levelKeyChar + "-3");
         listOfNandorAbilities.Add(standTogether);
         miscAbilityDictionary.Add(standTogether.getKey(), standTogether); // here for loading, if not here then this ability will be replaced with default fist ability on load
@@ -477,11 +477,11 @@ public static class AbilityList
         // miscAbilityDictionary.Add(thatchSacrifice.getKey(), thatchSacrifice);
         // listOfThatchAbilities.Add(thatchSacrifice);
 		
-        PassiveAbility influentialStrength = new PassiveAbility(CombatActionSettings.build(DescriptionParams.build("Influential Strength", "This Companion's Zone of Influence scales with either their Strength or Charisma, whichever is higher.")));
+        PassiveAbility influentialStrength = new PassiveAbility(CombatActionSettings.build(DescriptionParams.build("Influential Strength", useDescription: "This Companion's Zone of Influence scales with either their Strength or Charisma, whichever is higher.")));
         influentialStrength.setStatRequirements(levelKeyChar + "-1");
         listOfThatchAbilities.Add(influentialStrength);
 
-        EstablishLinkAbility chokehold = new EstablishLinkAbility(CombatActionSettings.build(chokeholdKey, DescriptionParams.build(chokeholdKey, "You grapple with the enemy, preventing both yourself and the target from acting. Whenever you take damage while stunned in this way, you only take half of that damage and the target takes the other half."), DamageParams.build("S", "D"), frequencyParams: FrequencyParams.build(oneSlotMax, eightRoundCooldown), appliedTrait: TraitList.chokehold), TraitList.chokeholdLinkTrait);
+        EstablishLinkAbility chokehold = new EstablishLinkAbility(CombatActionSettings.build(chokeholdKey, DescriptionParams.build(chokeholdKey, useDescription: "You grapple with the enemy, preventing both yourself and the target from acting. Whenever you take damage while stunned in this way, you only take half of that damage and the target takes the other half."), DamageParams.build("S", "D"), frequencyParams: FrequencyParams.build(oneSlotMax, eightRoundCooldown), appliedTrait: TraitList.chokehold), TraitList.chokeholdLinkTrait);
         chokehold.setStatRequirements(levelKeyChar + "-3");
         listOfThatchAbilities.Add(chokehold);
         miscAbilityDictionary.Add(chokehold.getKey(), chokehold); // here for loading, if not here then this ability will be replaced with default fist ability on load
@@ -500,7 +500,7 @@ public static class AbilityList
 
         // listOfCarterAbilities.Add(new EquippedPassive(CombatActionSettings.build(NPCNameList.carter, TraitList.cleverInfluence))); 
 
-        TraitBasedDamageAbility bouncingBlade = new TraitBasedDamageAbility(CombatActionSettings.build("Bouncing Blade", DescriptionParams.build("Bouncing Blade", "The caster throws their blade, striking multiple targets in a line and dealing extra damage per additional trait applied to the target.", "BouncingBlade"), DamageParams.build("6D+W+C", "4D"), TargetParams.build(Range.verticalThreeIndex), FrequencyParams.build(oneSlotMax, fiveRoundCooldown)), 0.25);
+        TraitBasedDamageAbility bouncingBlade = new TraitBasedDamageAbility(CombatActionSettings.build("Bouncing Blade", DescriptionParams.build("Bouncing Blade", useDescription: "The caster throws their blade, striking multiple targets in a line and dealing extra damage per additional trait applied to the target.", iconName: "BouncingBlade"), DamageParams.build("6D+W+C", "4D"), TargetParams.build(Range.verticalThreeIndex), FrequencyParams.build(oneSlotMax, fiveRoundCooldown)), 0.25);
         bouncingBlade.setStatRequirements(levelKeyChar + "-3");
         listOfCarterAbilities.Add(bouncingBlade);
         miscAbilityDictionary.Add(bouncingBlade.getKey(), bouncingBlade);
@@ -510,7 +510,7 @@ public static class AbilityList
 
 		List<CombatAction> listOfWeftAbilities = new List<CombatAction>();
 
-        HealingAbility avertBlame = new HealingAbility(CombatActionSettings.build(avertBlameName, DescriptionParams.build(avertBlameName, "The caster uses an ally as a shield, healing the ally and causing all Chaotic enemies to consider that ally a Mandatory Target.", avertBlameName), DamageParams.build("C", "0"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(oneSlotMax, fiveRoundCooldown)));
+        HealingAbility avertBlame = new HealingAbility(CombatActionSettings.build(avertBlameName, DescriptionParams.build(avertBlameName, useDescription: "The caster uses an ally as a shield, healing the ally and causing all Chaotic enemies to consider that ally a Mandatory Target."), DamageParams.build("C", "0"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(oneSlotMax, fiveRoundCooldown)));
         avertBlame.setStatRequirements(levelKeyChar + "-3");
         listOfWeftAbilities.Add(avertBlame);
         miscAbilityDictionary.Add(avertBlame.getKey(), avertBlame);
@@ -520,7 +520,7 @@ public static class AbilityList
 
 		List<CombatAction> listOfGasparAbilities = new List<CombatAction>();
 
-        EstablishLinkAbility collectivePunishment = new EstablishLinkAbility(CombatActionSettings.build(StatSourceNameList.collectivePunishmentKey, DescriptionParams.build(StatSourceNameList.collectivePunishmentKey, "The caster motivates his allies through shared pain, causing half of damage dealt to the caster to be dealt to an ally instead. Both the caster and the ally receive a boost to the damage they deal."), frequencyParams: FrequencyParams.build(oneSlotMax, eightRoundCooldown), appliedTrait: TraitList.collectivePunishment), TraitList.collectivePunishmentLinkTrait);
+        EstablishLinkAbility collectivePunishment = new EstablishLinkAbility(CombatActionSettings.build(StatSourceNameList.collectivePunishmentKey, DescriptionParams.build(StatSourceNameList.collectivePunishmentKey, useDescription: "The caster motivates his allies through shared pain, causing half of damage dealt to the caster to be dealt to an ally instead. Both the caster and the ally receive a boost to the damage they deal."), frequencyParams: FrequencyParams.build(oneSlotMax, eightRoundCooldown), appliedTrait: TraitList.collectivePunishment), TraitList.collectivePunishmentLinkTrait);
         collectivePunishment.setStatRequirements(levelKeyChar + "-3");
         listOfGasparAbilities.Add(collectivePunishment);
         miscAbilityDictionary.Add(collectivePunishment.getKey(), collectivePunishment);
@@ -532,16 +532,16 @@ public static class AbilityList
 	{
 		summonAbilityDictionary = new Dictionary<string,Ability>();
 
-        summonAbilityDictionary.Add(summonsWhipAttackKey, new Ability(CombatActionSettings.build(summonsWhipAttackKey, DescriptionParams.build("Punishment", "A brutal show of whipwork, displayed by someone who has extensive experience with the tool.", "Lashings"), DamageParams.build("2+6C", "12C"), TargetParams.build(Range.verticalThreeIndex))));
+        summonAbilityDictionary.Add(summonsWhipAttackKey, new Ability(CombatActionSettings.build(summonsWhipAttackKey, DescriptionParams.build("Punishment", useDescription: "A brutal show of whipwork, displayed by someone who has extensive experience with the tool.", iconName: "Lashings"), DamageParams.build("2+6C", "12C"), TargetParams.build(Range.verticalThreeIndex))));
 	}
 	
 	private static void instantiateMiscAbilities()
 	{
 		miscAbilityDictionary = new Dictionary<string,Ability>();
 
-        miscAbilityDictionary.Add(godSpellAbilityKey, new Ability(CombatActionSettings.build(godSpellAbilityKey, DescriptionParams.build("God Spell", "Kills everything on the enemy side of the board.", "Explosion"), DamageParams.build("99S + 99D + 99W + 99C + 1000", "100"), TargetParams.build(Range.boxThreeIndex), animationParams: AnimationParams.build(CombatAnimationType.Effect))));
-        miscAbilityDictionary.Add(moveAllyAbilityKey, new RepositionAllyAbility(CombatActionSettings.build(moveAllyAbilityKey, DescriptionParams.build("Move", "The character hoofs it to the desired space.", "HoofIt"), DamageParams.build("99S + 99D + 99W + 99C + 1000", "100"))));
-        miscAbilityDictionary.Add(fearName, new Ability(CombatActionSettings.build(DescriptionParams.build(fearName, "Puts the fear of the Gods in the target, setting their limbs to trembling and turning their bowels to ice water. This renders them stunned and vulnerable.", TraitList.afraid.getIconName()), appliedTrait: TraitList.afraid)));
+        miscAbilityDictionary.Add(godSpellAbilityKey, new Ability(CombatActionSettings.build(godSpellAbilityKey, DescriptionParams.build("God Spell", useDescription: "Kills everything on the enemy side of the board.", iconName: "Explosion"), DamageParams.build("99S + 99D + 99W + 99C + 1000", "100"), TargetParams.build(Range.boxThreeIndex), animationParams: AnimationParams.build(CombatAnimationType.Effect))));
+        miscAbilityDictionary.Add(moveAllyAbilityKey, new RepositionAllyAbility(CombatActionSettings.build(moveAllyAbilityKey, DescriptionParams.build("Move", useDescription: "The character hoofs it to the desired space.", iconName: "HoofIt"), DamageParams.build("99S + 99D + 99W + 99C + 1000", "100"))));
+        miscAbilityDictionary.Add(fearName, new Ability(CombatActionSettings.build(DescriptionParams.build(fearName, useDescription: "Puts the fear of the Gods in the target, setting their limbs to trembling and turning their bowels to ice water. This renders them stunned and vulnerable.", iconName: TraitList.afraid.getIconName()), appliedTrait: TraitList.afraid)));
 	}
 	
 	public static List<CombatAction> getCompanionAbilities(string name) 
