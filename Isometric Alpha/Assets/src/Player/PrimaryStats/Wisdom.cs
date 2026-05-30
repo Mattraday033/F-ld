@@ -48,7 +48,7 @@ public static class Wisdom
     // }
 
     public const string startingDescription = "Wisdom reflects a Character's knowledge, curiosity, and introspection. " +
-                                     "Wise characters have an inherent appetite for mystery which propels them to always be on the hunt for ways to better themselves. " +
+                                     "Wise characters have an inherent appetite for mystery. They crave understanding in all things, including understanding themselves. " +
                                      "This tendency for self betterment leads them to hone their bodies as well as the mind, keeping fit and ready for when conflict becomes inevitable. " +
                                      "Will you use your knowledge to better those around you? " +
                                      "Or will you teach the ignorant that they are right to fear the Wise?";

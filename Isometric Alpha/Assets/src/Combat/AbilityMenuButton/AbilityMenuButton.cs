@@ -20,6 +20,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
     [SerializeField]
     public AbilityMenuManager abilityMenuManager;
 
+    public GameObject cooldownParent;
     public TextMeshProUGUI cooldownCostText;
 
     public Transform costParent;
@@ -380,18 +381,20 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         {
             if (loadedCombatAction.getCooldownRemaining() == 0)
             {
+                cooldownParent.SetActive(false);
+
                 if (isSelected() && !loadedCombatAction.getActionCostTypes().Contains(ActionCostType.None))
                 {
                     setAllActionCosts(loadedCombatAction.getActionCostTypes(), loadedCombatAction.getActionCosts());
 
-                    if (casterCanPayActionCost())
-                    {
-                        cooldownCostText.color = ColorList.costPayableColor;
-                    }
-                    else
-                    {
-                        cooldownCostText.color = ColorList.costNotPayableColor;
-                    }
+                    // if (casterCanPayActionCost())
+                    // {
+                    //     cooldownCostText.color = ColorList.costPayableColor;
+                    // }
+                    // else
+                    // {
+                    //     cooldownCostText.color = ColorList.costNotPayableColor;
+                    // }
                 }
                 else
                 {
@@ -400,7 +403,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
             }
             else
             {
-                cooldownCostText.color = ColorList.cooldownColor;
+                cooldownParent.SetActive(true);
                 cooldownCostText.text = "" + loadedCombatAction.getCooldownRemaining();
 
                 destroyAllCostIcons();

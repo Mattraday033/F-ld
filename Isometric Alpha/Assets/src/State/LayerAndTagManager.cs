@@ -26,6 +26,7 @@ public static class LayerAndTagManager
 
 	public const string firstSortingLayerName = "First";
 	public const string thirdSortingLayerName = "Third";
+	public const string fourthSortingLayerName = "Fourth";
 	public const string sixthSortingLayerName = "Sixth";
     public const string mapSortingLayerName = "Map";
     public const string tutorialSequenceWindowSortingLayerName = "Tutorial Sequence Window";

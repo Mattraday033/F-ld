@@ -143,12 +143,12 @@ public static class TutorialMessageList
         tutorialDictionary.Add(combatTutorialMessagePrefix + 10, "When you are finished choosing your Actions, click the ' Resolve Turn ' button, or press ' " + resolveTurnKeyCodePlaceHolder + " '. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to end this tutorial.");
 
         tutorialDictionary.Add(exuberanceCostTutorialMessagePrefix + 1, "You have tried to activate an Ability that costs Exuberances, but you don't have the required amount.");
-        tutorialDictionary.Add(exuberanceCostTutorialMessagePrefix + 2, "The number of Exuberances your party has is shown here. Hover over each Icon to learn how to earn more of each type.");
+        tutorialDictionary.Add(exuberanceCostTutorialMessagePrefix + 2, "The number of Exuberances your party has is shown here. Hover over each Exuberance's Icon to learn how to earn more of that Exuberance.");
         tutorialDictionary.Add(exuberanceCostTutorialMessagePrefix + 3, "You can learn an Ability's Exuberance cost by reading it's description...");
         tutorialDictionary.Add(exuberanceCostTutorialMessagePrefix + 4, "... or by selecting it on the Action Wheel.");
 
         tutorialDictionary.Add(traitCostTutorialMessagePrefix + 1, "You have tried to activate an Ability that costs Stacks of a certain Trait, but you don't have the required amount.");
-        tutorialDictionary.Add(traitCostTutorialMessagePrefix + 2, "The number of Trait Stacks each character has is shown here. Hover over each Trait to learn how to earn more of each type.");
+        tutorialDictionary.Add(traitCostTutorialMessagePrefix + 2, "The number of Trait Stacks each Character has is shown here. Hover over a Trait's Icon to learn how to earn more Stacks. If a Trait has no number on it's Icon, it cannot be Stacked.");
         tutorialDictionary.Add(traitCostTutorialMessagePrefix + 3, "If you do not see the correct Icon in the Trait Display, you have not equipped the correct Equippable Passive to your Action Wheel.");
         tutorialDictionary.Add(traitCostTutorialMessagePrefix + 4, "You can learn an Ability's Trait cost by reading it's description.");
 

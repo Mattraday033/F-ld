@@ -20,13 +20,15 @@ public enum EffectAnimationType
     BlastingJelly,
     FrontLvlUp,
     BackLvlUp,
-    TransitionIndicator
+    TransitionIndicator,
+    Gem
 }
 
 
 public class EffectAnimationManager : AnimationManager
 {
     public bool waitBeforeSFX = true;
+    public bool playSFX = true;
     private const float timeToWaitBeforeSFX = .3f;
 
     public GridCoords targetCoords;
@@ -63,12 +65,15 @@ public class EffectAnimationManager : AnimationManager
             animancer.Play(createClipTransitionThenDelete(animationClip));
         }
 
-        if(waitBeforeSFX)
+        if(playSFX)
         {
-            StartCoroutine(waitThenPlaySFX(effectType));
-        } else
-        {
-            AudioManager.playEffectAnimationSFX(effectType);
+            if(waitBeforeSFX)
+            {
+                StartCoroutine(waitThenPlaySFX(effectType));
+            } else
+            {
+                AudioManager.playEffectAnimationSFX(effectType);
+            }
         }
     }
 

@@ -417,7 +417,8 @@ public static class HoverMessageList
 
     private const string extraArmorMessage = "Extra Armor, in addition to that gained from your equipment. Determined by a character's Dexterity.\n\n" + armorScoreMessage;
     private const string surpriseRoundDamageMultiplierMessage = "This is the percentage of extra damage dealt when in a surprise round. Determined by a character's Dexterity.";
-    private const string armorPenetrationMessage = "The percentage of an enemy's armor your Actions will ignore. Determined by a character's Dexterity.";
+    private const string armorPenetrationMessage = "The amount of an Enemy's Armor Score your Actions will ignore. Determined by a Character's Dexterity.";
+    private const string armorShredMessage = "A negative modifier to a Creature's Armor Score. Cannot reduce a Creature's Armor Score below 0%.";
 
     private const string mentalResistMessage = "Your chance to ignore a Mental Trait applied to you in combat. Determined by a character's Wisdom.";
     private const string passiveSlotsMessage = "Passive Slots are Action Slots that can only be occupied by Equipped Passives, Stances, and Weapons, saving you space on your Action Wheel for Actions you wish to activate. Actions equippable to Passive Slots can still be equipped to the Action Wheel if desired. Determined by a character's Wisdom.";
@@ -755,6 +756,8 @@ public static class HoverMessageList
                 return observationMessage;
             case IconList.armorPenetrationIconName:
                 return armorPenetrationMessage;
+            case IconList.armorShredIconName:
+                return armorShredMessage;
             case IconList.mentalResistIconName:
                 return mentalResistMessage;
             case IconList.retreatChanceIconName:

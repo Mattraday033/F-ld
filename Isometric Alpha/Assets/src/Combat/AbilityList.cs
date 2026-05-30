@@ -397,7 +397,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(wisdomKeyChar);
-		statAbilityDictionary.Add(currentKey, new StanceReapplicationAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(battleMeditationName, useDescription: "Healing yourself and your allies, and spread your Stance to everyone within range."), DamageParams.build("W"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), FrequencyParams.build(oneSlotMax, eightRoundCooldown))));
+		statAbilityDictionary.Add(currentKey, new StanceReapplicationAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(battleMeditationName, useDescription: "Heal yourself and your allies, and spread your Stance to everyone within range."), DamageParams.build("W"), TargetParams.build(Range.boxTwoIndex, isSelfTargeting), FrequencyParams.build(oneSlotMax, eightRoundCooldown))));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         //start of Cha Abilities
