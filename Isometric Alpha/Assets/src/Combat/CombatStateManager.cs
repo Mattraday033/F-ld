@@ -43,6 +43,7 @@ public interface INeedsUpdateOnStateChange
 
 public class CombatStateManager : MonoBehaviour
 {
+    private const float fastForwardTimeScale = 4f;
     private const float resolvingTurnTimeScale = 1.2f;
     private const float normalTimeScale = 1f;
 
@@ -808,5 +809,28 @@ public class CombatStateManager : MonoBehaviour
     public static Grid getCreatureGrid()
     {
         return instance.creatureGrid;
+    }
+
+    public static void setTimeScale()
+    {
+        switch(whoseTurn)
+        {
+            case WhoseTurn.Start:
+            case WhoseTurn.Player:
+            case WhoseTurn.Won:
+            case WhoseTurn.Lost:
+                Time.timeScale = normalTimeScale;
+                break;
+            case WhoseTurn.Resolving:
+                if(currentActivity == CurrentActivity.Waiting && 
+                    Input.GetKey(KeyBindingList.combatFastForwardAnimationKey.getCurrentKeyCode()))
+                {
+                    Time.timeScale = fastForwardTimeScale;
+                } else
+                {
+                    Time.timeScale = resolvingTurnTimeScale;
+                }
+                break;
+        }
     }
 }

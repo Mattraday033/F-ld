@@ -151,7 +151,11 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable
             equipmentOwner.checkStatsAfterEquipmentRemoval();
         }
 
-        item.playEquipSFX();
+        if(!Flags.isInNewGameMode() &&
+            PlayerOOCStateManager.currentActivity == OOCActivity.inUI)
+        {
+            item.playEquipSFX();
+        }
 
         OnEquipmentChange.Invoke();
     }

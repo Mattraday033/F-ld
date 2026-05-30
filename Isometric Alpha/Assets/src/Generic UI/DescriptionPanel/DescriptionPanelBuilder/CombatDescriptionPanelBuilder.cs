@@ -21,11 +21,20 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
     public Transform levelParent;
     public Transform descriptionParent;
 
+    public Image backgroundImage;
+    public Image interiorImage;
+
     public GameObject inspectNode;
     public GameObject moreInfoNode;
 
     private void Awake()
     {
+        if(CombatStateManager.inCombat && backgroundImage != null && interiorImage != null)
+        {
+            backgroundImage.color = ColorList.grey25Transparent;
+            interiorImage.enabled = false;
+        }
+
         // filter = new BuilderFilterBlackList(new List<DescriptionPanelBuildingBlockType>() { DescriptionPanelBuildingBlockType.PrimaryStat, DescriptionPanelBuildingBlockType.SecondaryStat });
     }
 

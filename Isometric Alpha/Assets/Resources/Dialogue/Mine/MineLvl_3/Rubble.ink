@@ -238,8 +238,9 @@ Fun's over, branded. Fall in line: we're heading back up to camp.
     }
 
 
-
 === 3b ===
+
+removeFromParty({gasparIndex})
 
 changeCamTarget({gasparIndex})
 playAnimation({gasparIndex},Idle_Front)

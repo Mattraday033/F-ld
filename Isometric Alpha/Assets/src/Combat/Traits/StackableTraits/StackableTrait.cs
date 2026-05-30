@@ -88,6 +88,7 @@ public class StackableTrait: Trait
 	public StackableTrait(string traitName, 
                           TraitType traitType, 
                           string traitDescription = "", 
+                          string loreDescription = "",
                           string iconName = "",
                           bool immobile = false, 
                           bool pacifistic = false,
@@ -106,7 +107,8 @@ public class StackableTrait: Trait
          immobile,
          pacifistic,
          permanent,
-         roundsLeft)
+         roundsLeft,
+         loreDescription: loreDescription)
 	{
         this.startingStacks = startingStacks;
         resetStacksToStartingAmount();

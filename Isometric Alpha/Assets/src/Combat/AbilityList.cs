@@ -435,7 +435,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(charismaKeyChar);
-        statAbilityDictionary.Add(currentKey, new RepetitionPerCompanionAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Volley", useDescription: "Order all companions to rain missiles on a single foe. Delivers an extra attack per Companion on the battlefield."), DamageParams.build("4C", "2C + D"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(oneSlotMax, fourRoundCooldown), CostParams.build(new ActionCostType[] { ActionCostType.RedKnife, ActionCostType.BlueShield, ActionCostType.YellowThorn, ActionCostType.GreenLeaf }, new int[] { sixStackCastCost, oneStackCastCost, twoStackCastCost, oneStackCastCost }))));
+        statAbilityDictionary.Add(currentKey, new RepetitionPerCompanionAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Barrage", useDescription: "Order all companions to rain missiles on a single foe. Delivers an extra attack per Companion on the battlefield."), DamageParams.build("4C", "2C + D"), TargetParams.build(Range.singleTargetIndex), FrequencyParams.build(oneSlotMax, fourRoundCooldown), CostParams.build(new ActionCostType[] { ActionCostType.RedKnife, ActionCostType.BlueShield, ActionCostType.YellowThorn, ActionCostType.GreenLeaf }, new int[] { sixStackCastCost, oneStackCastCost, twoStackCastCost, oneStackCastCost }))));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey); 
     }
 	

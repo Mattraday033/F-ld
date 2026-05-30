@@ -30,6 +30,10 @@ public class CombatInputManager : MonoBehaviour
 
 		if (KeyPressManager.handlingPrimaryKeyPress || (CombatStateManager.whoseTurn != WhoseTurn.Player && CombatStateManager.currentActivity != CurrentActivity.Tutorial))
 		{
+            if(CombatStateManager.whoseTurn == WhoseTurn.Resolving)
+            {
+                CombatStateManager.setTimeScale();
+            }
 			return;
 		}
 
@@ -44,9 +48,7 @@ public class CombatInputManager : MonoBehaviour
 		switch (CombatStateManager.currentActivity)
 		{
 			case CurrentActivity.Waiting:
-
-				return;
-
+                return;
 			case CurrentActivity.Finished:
 			case CurrentActivity.ChoosingActor:
 

@@ -218,7 +218,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         return false;
     }
 
-    public void describeSelfFull(DescriptionPanel panel)
+    public virtual void describeSelfFull(DescriptionPanel panel)
     {
         panel.setObjectBeingDescribed(this);
 

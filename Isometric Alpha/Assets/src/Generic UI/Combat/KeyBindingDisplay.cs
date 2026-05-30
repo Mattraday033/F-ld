@@ -148,6 +148,13 @@ public class KeyBindingDisplay : MonoBehaviour
         }
     }
 
+    private static string fastForwardKeyBinding
+    {
+        get
+        {
+            return KeyBindingList.combatFastForwardAnimationKey.ToString() + ": Fast Foward";
+        }
+    }
 
     #endregion
 
@@ -428,6 +435,10 @@ public class KeyBindingDisplay : MonoBehaviour
                 displayText.text += continueKeyBinding;
                 addSpace();
                 displayText.text += backOutOfPopUpKeyBinding;
+                addSpace();
+                break;
+            case CurrentActivity.Waiting:
+                displayText.text += fastForwardKeyBinding;
                 addSpace();
                 break;
         }

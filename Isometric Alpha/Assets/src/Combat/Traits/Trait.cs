@@ -44,6 +44,8 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
     private bool immobile = false;
 
     private string iconName;
+
+    private string loreDescription;
     #endregion
 
     #region Unity Events
@@ -58,11 +60,13 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
                  bool immobile = false, 
                  bool pacifistic = false,
                  bool permanent = true,
-                 int roundsLeft = Constants.oneRoundDuration)
+                 int roundsLeft = Constants.oneRoundDuration,
+                 string loreDescription = "")
     {
         this.traitName = traitName;
         this.traitType = traitType;
         this.traitDescription = traitDescription;
+        this.loreDescription = loreDescription;
         this.iconName = iconName;
 
         this.roundsLeft = roundsLeft;
@@ -82,6 +86,16 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
     public virtual string getDescription()
     {
         return traitDescription;
+    }
+
+    public string getLoreDescription()
+    {
+        return loreDescription;
+    }
+
+    public virtual bool hasLoreDescription()
+    {
+        return loreDescription != null && loreDescription.Length > 0;
     }
 
     public virtual bool deleteIfDead()

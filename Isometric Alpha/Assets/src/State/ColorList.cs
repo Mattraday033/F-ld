@@ -46,6 +46,9 @@ public static class ColorList
 
     #region UI Colors
 
+
+    public readonly static Color grey25Transparent = new Color32(25, 25, 25, 175);
+
     public readonly static Color questCounterCyan = new Color32(200,232,240,255);
     public readonly static Color lightUICyan = new Color32(160,183,188,255);
     public readonly static Color darkUICyan = new Color32(100,125,130,255);

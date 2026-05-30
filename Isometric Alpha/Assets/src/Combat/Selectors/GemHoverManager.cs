@@ -7,7 +7,7 @@ public static class GemHoverManager
         new Dictionary<GridCoords, EffectAnimationManager>();
 
     // Uniform vertical distance every gem sits above its tile's CombatGrid.getPositionAt(). Tunable.
-    private const float gemVerticalOffset = 1.2f;
+    private const float gemVerticalOffset = 1f;
 
     [RuntimeInitializeOnLoadMethod]
     private static void init()

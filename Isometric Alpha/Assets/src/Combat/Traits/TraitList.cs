@@ -80,16 +80,16 @@ public static class TraitList
 
 
 	//permanent/mandatory monster traits
-	public readonly static Trait master = new Trait(StatSourceNameList.masterKey, TraitType.FoeType, "A Creature that leads other Creatures. All Master Creatures must be defeated to win.", IconList.masterIcon); 
-	public readonly static Trait minion = new Trait(StatSourceNameList.minionKey, TraitType.FoeType, "A Creature that takes orders from a Master. Minions do not need to be defeated to win.", IconList.minionIcon);
-	public readonly static Trait summoned = new Trait(StatSourceNameList.summonedKey, TraitType.FoeType, "A Creature that is here at the behest of another, but cannot be controlled directly.", "Summoned");
+	public readonly static Trait master = new Trait(StatSourceNameList.masterKey, TraitType.FoeType, "A Creature that leads other Creatures. All Master Creatures must be defeated to win.", iconName: IconList.masterIcon); 
+	public readonly static Trait minion = new Trait(StatSourceNameList.minionKey, TraitType.FoeType, "A Creature that takes orders from a Master. Minions do not need to be defeated to win.", iconName: IconList.minionIcon);
+	public readonly static Trait summoned = new Trait(StatSourceNameList.summonedKey, TraitType.FoeType, "A Creature that is here at the behest of another, but cannot be controlled directly.", iconName: "Summoned");
 
 	public readonly static Trait frontLine = new PositioningTrait(StatSourceNameList.frontLineKey, TraitType.Positioning, "This creature always spawns at the front of the enemy field.", "Front Line", PositioningType.Frontline);
 	public readonly static Trait backLine = new PositioningTrait(StatSourceNameList.backLineKey, TraitType.Positioning, "This creature always spawns at the back of the enemy field.", "Back Line", PositioningType.Backline);
 
-	public readonly static Trait catalytic = new Trait(StatSourceNameList.catalyticKey, TraitType.Interaction, "Can be evolved into a better version of itself.", "Evolve");
-	public readonly static Trait immobile = new Trait(StatSourceNameList.immobileKey, TraitType.Interaction, "Takes no actions. Cannot be moved.", "Immobile", preventsMovementTrait, isPacifist);
-	public readonly static Trait large = new Trait(StatSourceNameList.largeKey, TraitType.Size, "And in charge. This creature takes up multiple spaces, and will take damage each time one of its spaces is hit by the same attack. Cannot be moved.", "Large", preventsMovementTrait);
+	public readonly static Trait catalytic = new Trait(StatSourceNameList.catalyticKey, TraitType.Interaction, "Can be evolved into a better version of itself.", iconName: "Evolve");
+	public readonly static Trait immobile = new Trait(StatSourceNameList.immobileKey, TraitType.Interaction, "Takes no actions. Cannot be moved.", iconName: "Immobile", preventsMovementTrait, isPacifist);
+	public readonly static Trait large = new Trait(StatSourceNameList.largeKey, TraitType.Size, "And in charge. This creature takes up multiple spaces, and will take damage each time one of its spaces is hit by the same attack. Cannot be moved.", iconName: "Large", preventsMovementTrait);
     public readonly static Trait indomitable = new PreventStunTrait(StatSourceNameList.indomitableKey, "This creature is immune to stuns. Traits that stun their targets can still be applied, but will not prevent this creature from acting.", StatSourceNameList.indomitableKey, permanent: true);
 
 
@@ -116,17 +116,17 @@ public static class TraitList
 	public readonly static Trait singleTargetBuffer = new BufferTargetPriorityTrait(new RandomEnemyBesidesSelfTargetPriorityTrait());
 	public readonly static Trait saintly = new CatalystTargetPriorityTrait(specificHexadecupleBoxEnemySide, new ChaoticTargetPriorityTrait());
 
-	public readonly static Trait spawner = new Trait(StatSourceNameList.spawnerKey, TraitType.Interaction, "This creature creates minions.", "Egg");
-	public readonly static Trait fodder = new Trait(StatSourceNameList.fodderKey, TraitType.Interaction, "This creature dies after it attacks", "Fodder");
+	public readonly static Trait spawner = new Trait(StatSourceNameList.spawnerKey, TraitType.Interaction, "This creature creates minions.", iconName: "Egg");
+	public readonly static Trait fodder = new Trait(StatSourceNameList.fodderKey, TraitType.Interaction, "This creature dies after it attacks", iconName: "Fodder");
 
     public readonly static HiddenTrait cannotSummon = new HiddenTrait(StatSourceNameList.cannotSummonKey, untargetable: false);
 
-	public readonly static Trait charged = new Trait(StatSourceNameList.chargedKey, TraitType.Charge, "This creature is capable of delivering a devastating attack.", "Charged", roundsLeft: Constants.oneRoundDuration, permanent: false);
+	public readonly static Trait charged = new Trait(StatSourceNameList.chargedKey, TraitType.Charge, "This creature is capable of delivering a devastating attack.", iconName: "Charged", roundsLeft: Constants.oneRoundDuration, permanent: false);
 	public readonly static Trait shielded = new ShieldTrait(StatSourceNameList.shieldedKey, TraitType.Charge, "This creature takes reduced damage.", StatSourceNameList.shieldedKey, roundsLeft: Constants.oneRoundDuration, permanent: false);
     public readonly static Trait extraShielded = new CaveMatronShieldTrait(StatSourceNameList.protectedKey, TraitType.Charge, "This creature takes a reduced damage. <B>It will lose this trait if it is the last enemy alive.</B>", StatSourceNameList.protectedKey, roundsLeft: Constants.oneRoundDuration);
-	public readonly static Trait signaling = new Trait(StatSourceNameList.signalingKey, TraitType.Charge, "This guard is going to call signal an arrow tower to fire upon their assailants.", "Signaling");
-	public readonly static Trait coordinated = new Trait(StatSourceNameList.coordinatedKey, TraitType.Charge, "This creature is taking part in a plan directed by another creature.", StatSourceNameList.coordinatedKey, roundsLeft: Constants.twoRoundDuration, permanent: false);
-    public readonly static Trait observing = new Trait(StatSourceNameList.observingKey, TraitType.Charge, "The creature is observing it's troops and developing a strategy.", "Observing"); 
+	public readonly static Trait signaling = new Trait(StatSourceNameList.signalingKey, TraitType.Charge, "This guard is going to call signal an arrow tower to fire upon their assailants.", iconName: "Signaling");
+	public readonly static Trait coordinated = new Trait(StatSourceNameList.coordinatedKey, TraitType.Charge, "This creature is taking part in a plan directed by another creature.", iconName: StatSourceNameList.coordinatedKey, roundsLeft: Constants.twoRoundDuration, permanent: false);
+    public readonly static Trait observing = new Trait(StatSourceNameList.observingKey, TraitType.Charge, "The creature is observing it's troops and developing a strategy.", iconName: "Observing"); 
 
 
 	//on Death Effects
@@ -139,14 +139,14 @@ public static class TraitList
 	public readonly static Trait wormBossFumesOnDeath = new OnDeathEffectTrait(StatSourceNameList.miasmicKey, "When this creature is killed, it releases a toxic gas as a final retribution against it's enemies.", "DeathFumes", AbilityList.bossWormFumesKey, specificCheckeredLeftAlliedSide);
 
 
-	public readonly static Trait mobLinked = new Trait(StatSourceNameList.weaklyLinkedKey, TraitType.Interaction, "This creature takes a percentage of it's total health as damage when a minion dies.", "Chain");
-	public readonly static Trait bossLinked = new Trait(StatSourceNameList.powerLinkedKey, TraitType.Interaction, "This creature takes a percentage of it's total health as damage when a minion dies.", "Chain");
+	public readonly static Trait mobLinked = new Trait(StatSourceNameList.weaklyLinkedKey, TraitType.Interaction, "This creature takes a percentage of it's total health as damage when a minion dies.", iconName: "Chain");
+	public readonly static Trait bossLinked = new Trait(StatSourceNameList.powerLinkedKey, TraitType.Interaction, "This creature takes a percentage of it's total health as damage when a minion dies.", iconName: "Chain");
 
 	//temporary buffs
 	public readonly static Trait daringSacrifice = new MandatoryTargetTrait(StatSourceNameList.daringSacrificeKey, TraitType.Protection, "Become invulnerable for one turn. All enemy attack patterns must include this creature when possible, even if they normally would not.", "DaringSacrifice", Constants.endOfRoundDuration, daringSacrificeDamageReduction);
 	public readonly static Trait cohesion = new DamageBoostTrait(StatSourceNameList.cohesionKey, iconName:  "Cohesion", roundsLeft: Constants.twoRoundDuration);
 	// public readonly static Trait shoredUp = new ShieldTrait(StatSourceNameList.shoredUpKey, TraitType.Boost, "This creature only takes half of any damage dealt to it.", "Shielded", roundsLeft: Constants.twoRoundDuration, shieldedDamageReduction);
-	public readonly static Trait exitStrategy = new Trait(StatSourceNameList.exitStrategyKey, TraitType.Protection, "This creature and all of it's allies take reduced damage until one round after the surprise round.", "ExitStrategy", roundsLeft: Constants.oneRoundDuration, permanent: false); //exception to round duration rule because it's applied at the top of the first round and thus doesn't need to compensate for the first tick down.
+	public readonly static Trait exitStrategy = new Trait(StatSourceNameList.exitStrategyKey, TraitType.Protection, "This creature and all of it's allies take reduced damage until one round after the surprise round.", iconName: "ExitStrategy", roundsLeft: Constants.oneRoundDuration, permanent: false); //exception to round duration rule because it's applied at the top of the first round and thus doesn't need to compensate for the first tick down.
 	public readonly static LinkTrait chokeholdLinkTrait = new LinkTrait(StatSourceNameList.chokeholdKey, "This creature deals half of all damage received to whoever it is linked to.", "Chokehold", Constants.twoRoundDuration, chokeholdDamagePercentage, stuns: true);
 	public readonly static Trait rallied = new DamageBoostTrait(StatSourceNameList.ralliedKey, iconName: "Rally", roundsLeft: Constants.fourRoundDuration, permanent: false);
 	public readonly static Trait chewBuzz = new DamageBoostTrait(StatSourceNameList.chewBuzzKey, iconName: StatSourceNameList.chewBuzzKey, roundsLeft: Constants.threeRoundDuration);
@@ -154,24 +154,24 @@ public static class TraitList
 
 
 	//temporary debuffs
-	public readonly static Trait wounded = new Trait(StatSourceNameList.woundedKey, TraitType.Wound, "This creature takes extra damage whenever it is hit", "MakeItBleed");
-	public readonly static Trait bristled = new Trait(StatSourceNameList.bristledKey, TraitType.Wound, "This creature takes extra damage whenever it is hit", "Bristled", roundsLeft: Constants.fourRoundDuration);
+	public readonly static Trait wounded = new Trait(StatSourceNameList.woundedKey, TraitType.Wound, "This creature takes extra damage whenever it is hit", iconName: "MakeItBleed");
+	public readonly static Trait bristled = new Trait(StatSourceNameList.bristledKey, TraitType.Wound, "This creature takes extra damage whenever it is hit", iconName: "Bristled", roundsLeft: Constants.fourRoundDuration);
 	public readonly static Trait upsideTheHead = new CrowdControlTrait(StatSourceNameList.upsideTheHeadKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "UpsideTheHead", roundsLeft: Constants.oneRoundDuration);
 	public readonly static Trait tripped = new CrowdControlTrait(StatSourceNameList.tripKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Trip", roundsLeft: Constants.endOfRoundDuration);
 	public readonly static Trait aliveBarely = new CrowdControlTrait(StatSourceNameList.aliveBarelyKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Rip Apart", roundsLeft: Constants.endOfRoundDuration);
 	public readonly static Trait countered = new CrowdControlTrait(StatSourceNameList.counteredKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", AbilityList.throatJabName, roundsLeft: Constants.endOfRoundDuration);
-	public readonly static Trait acidVomit = new Trait(StatSourceNameList.acidVomitKey, TraitType.Wound, "This creature takes extra damage whenever it is hit", "Acid Vomit", roundsLeft: Constants.threeRoundDuration);
-	public readonly static Trait roasted = new StackableTrait(StatSourceNameList.roastedKey, TraitType.Wound, "Roasted to perfection. This creature takes an extra point of damage per stack", StatSourceNameList.roastedKey, startingStacks: Constants.oneStackAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication);
+	public readonly static Trait acidVomit = new Trait(StatSourceNameList.acidVomitKey, TraitType.Wound, "This creature takes extra damage whenever it is hit", iconName: "Acid Vomit", roundsLeft: Constants.threeRoundDuration);
+	public readonly static Trait roasted = new StackableTrait(StatSourceNameList.roastedKey, TraitType.Wound, "This creature takes an extra point of damage per stack", loreDescription: "Roasted to perfection.", iconName: StatSourceNameList.roastedKey, startingStacks: Constants.oneStackAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication);
 	public readonly static Trait riled = new StackableTrait(StatSourceNameList.riledKey, TraitType.Boost, "Provoked and ready to do something about it. This creature deals increased damage.", AbilityList.rileKey, startingStacks: Constants.oneStackAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication);
-    public readonly static Trait crippled = new DamageOnFutureTraitApplicationTrait(StatSourceNameList.crippledKey, TraitType.Wound, "This creature has suffered a crippling blow and takes " + crippledDamageFormula + " whenever a debuff is applied to it.", "Cripple", crippledDamageFormula, TriggerType.Debuff);
+    public readonly static Trait crippled = new DamageOnFutureTraitApplicationTrait(StatSourceNameList.crippledKey, TraitType.Wound, "This creature takes " + crippledDamageFormula + " whenever a debuff is applied to it.", "Cripple", crippledDamageFormula, TriggerType.Debuff);
 	public readonly static Trait whiplash = new CrowdControlTrait(StatSourceNameList.whiplashKey, TraitType.Wound, "This creature is stunned until the end of the round", "Lashings", roundsLeft: Constants.oneRoundDuration);
 	public readonly static Trait afraid = new CrowdControlTrait(StatSourceNameList.afraidKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "Afraid", roundsLeft: Constants.oneRoundDuration);
-	public readonly static Trait crushingBlow = new Trait(AbilityList.crushingBlowName, TraitType.Wound, "The damage reduction offered by this creature's Armor is reduced.", AbilityList.crushingBlowName, roundsLeft: Constants.oneRoundDuration, permanent: false);
+	public readonly static Trait crushingBlow = new Trait(AbilityList.crushingBlowName, TraitType.Wound, "The damage reduction offered by this creature's Armor is reduced.", iconName: AbilityList.crushingBlowName, roundsLeft: Constants.oneRoundDuration, permanent: false);
 	public readonly static Trait chokehold = new CrowdControlTrait(StatSourceNameList.chokeholdKey, TraitType.InteractionDebuff, "This creature is stunned and receives half of all damage dealt to whoever stunned it.", "Chokehold", roundsLeft: Constants.twoRoundDuration);
-	public readonly static Trait insecure = new Trait(StatSourceNameList.insecureKey, TraitType.Mental, "This creature is no longer sure of it's own defenses. This creature takes extra damage whenever it is hit.", "Victimize");
-	public readonly static Trait demoralized = new SlowingTrait(StatSourceNameList.demoralizedKey, TraitType.Mental, "This creature is reluctant to fight. It takes extra damage and always attacks last in the action order.", "Demoralize", Constants.fourRoundDuration);
+	public readonly static Trait insecure = new Trait(StatSourceNameList.insecureKey, TraitType.Mental, "This creature takes extra damage whenever it is hit.", iconName: "Victimize");
+	public readonly static Trait demoralized = new SlowingTrait(StatSourceNameList.demoralizedKey, TraitType.Mental, "This creature takes extra damage and always attacks last in the Action Order.", "Demoralize", Constants.fourRoundDuration);
 	public readonly static Trait choking = new CrowdControlTrait(StatSourceNameList.chokingKey, TraitType.Wound, "This creature is stunned, and cannot complete any actions until this trait is removed.", "SmokeBomb", roundsLeft: Constants.oneRoundDuration);
-    public readonly static Trait caveMadness = new SlowingTrait(StatSourceNameList.caveMadnessKey, TraitType.Mental, "The ringing won't stop! The afflicted creature always moves last in the action order, and takes " + caveMadnessExtraDamage + " extra damage when struck.", StatSourceNameList.caveMadnessKey, Constants.twoRoundDuration);
+    public readonly static Trait caveMadness = new SlowingTrait(StatSourceNameList.caveMadnessKey, TraitType.Mental, "The afflicted creature always moves last in the action order, and takes " + caveMadnessExtraDamage + " extra damage when struck.", StatSourceNameList.caveMadnessKey, Constants.twoRoundDuration, loreDescription: "The ringing won't stop!");
 	
     public readonly static Trait collectivePunishment = new CrowdControlTrait(StatSourceNameList.collectivePunishmentKey, TraitType.InteractionBuff, "This creature receives half of all damage dealt to whoever it is linked to.", StatSourceNameList.collectivePunishmentKey, roundsLeft: Constants.sixRoundDuration);
 	public readonly static LinkTrait collectivePunishmentLinkTrait = new LinkTrait(StatSourceNameList.collectivePunishmentKey, "This creature deals half of all damage received to whoever it is linked to.", StatSourceNameList.collectivePunishmentKey, Constants.sixRoundDuration, chokeholdDamagePercentage);
@@ -182,11 +182,11 @@ public static class TraitList
 	public readonly static Trait isolated = new BreakableCrowdControlTrait(StatSourceNameList.isolatedKey, TraitType.Mental, "This creature has been removed from battle and cannot act until it is dealt damage.", "Isolate");
 
 	//EquippedPassiveBuffs
-	public readonly static Trait wearyHeart = new Trait(StatSourceNameList.wearyHeartKey, TraitType.EquippedPassive, "This creature's Armor is increased by 5 and your chance to successfully retreat is increased by 20%.", "WearyHeart");
+	public readonly static Trait wearyHeart = new Trait(StatSourceNameList.wearyHeartKey, TraitType.EquippedPassive, "This creature's Armor is increased by 5 and your chance to successfully retreat is increased by 20%.", iconName: "WearyHeart");
 	public readonly static Trait devastatingCriticals = new TraitWithRelatedTraits(StatSourceNameList.devastatingCriticalsKey, TraitType.EquippedPassive, new List<IDescribable>(){ afraid }, "This creature's critical hits deal D% of the victim's health as extra damage normally, and 2D% during a surprise round. Critical hits caused by single target actions can cause a random enemy to receive the '" + afraid.getName() + "' trait.", StatSourceNameList.devastatingCriticalsKey);
-	public readonly static Trait intimidatingPressence = new Trait(StatSourceNameList.intimidatingPressenceKey, TraitType.EquippedPassive, "Attacks by Territorial Enemies must include this creature when possible. Useful for preventing enemies from attacking weaker or hurt allies.", TerritorialTargetPriorityTrait.initialTraitIconName);
-    public readonly static Trait protectTheWeak = new Trait(StatSourceNameList.protectTheWeakKey, TraitType.EquippedPassive, "Attacks by Predatory Enemies must include this creature when possible. Useful for preventing enemies from attacking weaker or hurt allies.", PredatoryTargetPriorityTrait.initialTraitIconName);
-    public readonly static Trait avertBlame = new Trait(AbilityList.avertBlameName, TraitType.EquippedPassive, "Attacks by Chaotic Enemies must include this creature when possible. Useful for preventing enemies from attacking weaker or hurt allies.", AbilityList.avertBlameName);
+	public readonly static Trait intimidatingPressence = new Trait(StatSourceNameList.intimidatingPressenceKey, TraitType.EquippedPassive, "Attacks by Territorial Enemies must include this creature when possible. Useful for preventing enemies from attacking weaker or hurt allies.", iconName: TerritorialTargetPriorityTrait.initialTraitIconName);
+    public readonly static Trait protectTheWeak = new Trait(StatSourceNameList.protectTheWeakKey, TraitType.EquippedPassive, "Attacks by Predatory Enemies must include this creature when possible. Useful for preventing enemies from attacking weaker or hurt allies.", iconName: PredatoryTargetPriorityTrait.initialTraitIconName);
+    public readonly static Trait avertBlame = new Trait(AbilityList.avertBlameName, TraitType.EquippedPassive, "Attacks by Chaotic Enemies must include this creature when possible. Useful for preventing enemies from attacking weaker or hurt allies.", iconName: AbilityList.avertBlameName);
     public readonly static Trait bloodlust = new StackableTrait(StatSourceNameList.bloodlustKey, TraitType.EquippedPassive, "The red mist descends, causing the creature to deal more damage per stack. Gain a stack at the start of every turn, and whenever you slay a minion or summoned enemy. Maximum of " + bloodlustMaximumStacks + " stacks.", StatSourceNameList.bloodlustKey, startingStacks: Constants.oneStackAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication, costType: ActionCostType.Bloodlust, maximumStacks: bloodlustMaximumStacks, personalReapplicationEvents: new List<UnityEvent>() { EnemyStats.OnMinionSummonDeath }, impersonalReapplicationEvents: new List<UnityEvent>() { CombatStateManager.OnNewTurn });
     public readonly static Trait halfHandStance = new StackableTrait(StatSourceNameList.halfHandStanceKey, TraitType.Stance, "A balanced stance, increasing damage dealt by " + halfHandStanceExtraDamage + " and decreasing damage taken by " + halfHandStanceExtraDamage + " per stack. Starts with " + halfHandStanceStartingStacks + " stacks. Gain stacks by attacking with fists or staffs. Only one stance can be active at a time.", StatSourceNameList.halfHandStanceKey, startingStacks: Constants.fourStacksAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication, costType: ActionCostType.Stance, personalReapplicationEvents: new List<UnityEvent>() { Stance.OnStanceApplyingWeaponAttack });
     public readonly static Trait predation = new StackableTrait(StatSourceNameList.predationKey, TraitType.EquippedPassive, "Your brutal strikes reinvigorate you. Whenever you deal 100% or more of a Master enemy's total health in one hit, you heal for D/2 health and gain 10% Armor Penetration and 4 extra damage per attack. The enemy does not need to be at full health to activate Predation.", StatSourceNameList.predationKey, startingStacks: Constants.zeroStacksAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication, costType: ActionCostType.Predation, personalReapplicationEvents: new List<UnityEvent>(){ Stats.PredationProc });
@@ -206,7 +206,7 @@ public static class TraitList
 
     // private readonly static StackableTrait[] charismaPassiveStackableTraits = new StackableTrait[] { redKnife, blueShield, yellowThorn, greenLeaf };
 
-    private readonly static Trait charismaPassivesBaseTrait = new Trait(StatSourceNameList.exuberanceKey, TraitType.Charge, "The energies that draw others to you, and inspire them to follow your example.", "");
+    private readonly static Trait charismaPassivesBaseTrait = new Trait(StatSourceNameList.exuberanceKey, TraitType.Charge, "The energies that draw others to you, and inspire them to follow your example.", iconName: "");
     // public readonly static MultiStackTrait charismaPassives = new MultiStackTrait(charismaPassivesBaseTrait, charismaPassiveStackableTraits);
 
 	public readonly static Trait stonewall = new ShieldTrait(StatSourceNameList.stonewallKey, TraitType.Protection, "This creature will take 75% less damage until the following turn.", "Stonewall", Constants.twoRoundDuration, false);

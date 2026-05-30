@@ -13,12 +13,18 @@ public class SurpriseIcon : SlotIconHover
     private const string enemySurprisedMessage = "You have surprised the enemy! They will not get to attack during the surprise round.";
     private const string playerSurprisedMessage = "The enemy has surprised you! You will not get to attack during the surprise round.";
 
-    public GameObject backgroundOne;
-    public GameObject backgroundTwo;
+    public GameObject skullIcon;
+    public GameObject partyIcon;
+    public GameObject equalsIcon;
 
     public override void Awake()
     {
         CombatStateManager.OnNewTurn.AddListener(setSurpriseIcon);
+    }
+
+    private void Start()
+    {
+        setSurpriseIcon();
     }
 
     private void OnDestroy()
@@ -35,14 +41,10 @@ public class SurpriseIcon : SlotIconHover
 
                 if(CombatStateManager.turnNumber > Constants.sizeOne)
                 {
-                    iconImage.color = ColorList.surpriseIconGrey;
-                    backgroundOne.SetActive(false);
-                    backgroundTwo.SetActive(false);
+                    setToNoOneSurprised();
                 } else
                 {
-                    iconImage.color = ColorList.surpriseIconRed;
-                    backgroundOne.SetActive(true);
-                    backgroundTwo.SetActive(true);
+                    setToPlayerSurprised();
                 }
 
                 break;
@@ -50,21 +52,15 @@ public class SurpriseIcon : SlotIconHover
 
                 if(CombatStateManager.turnNumber > PartyStats.getPartySurpriseRounds())
                 {
-                    iconImage.color = ColorList.surpriseIconGrey;
-                    backgroundOne.SetActive(false);
-                    backgroundTwo.SetActive(false);
+                    setToNoOneSurprised();
                 } else
                 {
-                    iconImage.color = ColorList.surpriseIconGreen;
-                    backgroundOne.SetActive(true);
-                    backgroundTwo.SetActive(true);
+                    setToEnemySurprised();
                 }
 
                 break;
             default:
-                iconImage.color = ColorList.surpriseIconGrey;
-                backgroundOne.SetActive(false);
-                backgroundTwo.SetActive(false);
+                setToNoOneSurprised();
                 break;
         }
 
@@ -81,6 +77,66 @@ public class SurpriseIcon : SlotIconHover
                 return enemySurprisedMessage;
             default:
                 return noOneSurprisedMessage;
+        }
+    }
+
+    private void setToPlayerSurprised()
+    {
+        skullIcon.SetActive(false);
+        partyIcon.SetActive(true);
+        equalsIcon.SetActive(false);
+    }
+
+    private void setToEnemySurprised()
+    {
+        skullIcon.SetActive(true);
+        partyIcon.SetActive(false);        
+        equalsIcon.SetActive(false);
+    }
+
+    private void setToNoOneSurprised()
+    {
+        skullIcon.SetActive(false);
+        partyIcon.SetActive(false);
+        equalsIcon.SetActive(true);
+    }
+
+    public override void describeSelfFull(DescriptionPanel panel)
+    {
+        panel.setObjectBeingDescribed(this);
+
+        switch (CombatStateManager.whoIsSurprised)
+        {
+            case SurpriseState.PlayerSurprised:
+
+                if(CombatStateManager.turnNumber > Constants.sizeOne)
+                {
+                    DescriptionPanel.setText(panel.nameText, "No Surprise Round");
+                    DescriptionPanel.setText(panel.useDescriptionText, noOneSurprisedMessage);
+                } else
+                {
+                    DescriptionPanel.setText(panel.nameText, "Enemy Surprise Round");
+                    DescriptionPanel.setText(panel.useDescriptionText, playerSurprisedMessage);
+                }
+
+                break;
+            case SurpriseState.EnemySurprised:
+
+                if(CombatStateManager.turnNumber > PartyStats.getPartySurpriseRounds())
+                {
+                    DescriptionPanel.setText(panel.nameText, "No Surprise Round");
+                    DescriptionPanel.setText(panel.useDescriptionText, noOneSurprisedMessage);
+                } else
+                {
+                    DescriptionPanel.setText(panel.nameText, "Party Surprise Round");
+                    DescriptionPanel.setText(panel.useDescriptionText, enemySurprisedMessage);
+                }
+
+                break;
+            default:
+                DescriptionPanel.setText(panel.nameText, "No Surprise Round");
+                DescriptionPanel.setText(panel.useDescriptionText, noOneSurprisedMessage);
+                break;
         }
     }
 

@@ -289,6 +289,7 @@ public static class KeyBindingList
     public readonly static KeyBind resolveTurnKey = new KeyBind("Resolve Turn", KeyCode.Space, KeyBindType.Combat);
     public readonly static KeyBind jumpMoveKey = new KeyBind("Jump Move", KeyCode.LeftShift, KeyBindType.Combat);
     public readonly static KeyBind combatSettingsScreenKey = new KeyBind("Settings Menu", KeyCode.Escape, KeyBindType.Combat); 
+    public readonly static KeyBind combatFastForwardAnimationKey = new KeyBind("Fast Forward", KeyCode.Tab, KeyBindType.Combat); 
  
     public static List<KeyBind> getCombatKeybindSection()
     {

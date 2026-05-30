@@ -8,6 +8,7 @@ using UnityEngine.Events;
 
 public class SelectorManager : MonoBehaviour 
 {
+    public readonly static string[] selectableAllyTagCriteria = new string[]{ LayerAndTagManager.playerTag };
 	public readonly static string[] allyTagCriteria = new string[]{LayerAndTagManager.playerTag,
                                                                     LayerAndTagManager.npcTag};
 
@@ -226,7 +227,7 @@ public class SelectorManager : MonoBehaviour
 
 		GameObject sprite = target.combatSprite;
 
-		if (currentSelector.singleTile && Helpers.tagMatchesCriteria(sprite, allyTagCriteria))
+		if (currentSelector.singleTile && Helpers.tagMatchesCriteria(sprite, selectableAllyTagCriteria))
 		{
 			if (CombatStateManager.currentActivity == CurrentActivity.ChoosingActor)
 			{
