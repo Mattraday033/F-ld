@@ -460,10 +460,10 @@ public class KeyBindingDisplay : MonoBehaviour
                 addSpace();
                 displayText.text += quicksaveKeyBinding;
                 addSpace();
-                displayText.text += mapKeyBinding;
-                addSpace();
-                displayText.text += worldMapKeyBinding;
-                addSpace();
+                // displayText.text += mapKeyBinding;
+                // addSpace();
+                // displayText.text += worldMapKeyBinding;
+                // addSpace();
                 displayText.text += toggleTerrainKeyBinding;
                 addSpace();
                 displayText.text += transcriptKeyBinding;

@@ -69,6 +69,7 @@ public static class ColorList
 
     public readonly static Color surpriseIconGrey = blackFadeOut75;
     public readonly static Color surpriseIconGreen = new Color32(25,185,25,255);
+    public readonly static Color surpriseIconYellow = new Color32(255,230,30,255);
     public readonly static Color surpriseIconRed = new Color32(225,35,35,255);
 
     public readonly static Color skillButtonOutlineHighlight = Color.yellow;

@@ -20,11 +20,6 @@ public class AbilityGridSideTab : MonoBehaviour
 
     public readonly static UnityEvent OnSideTabChosen = new UnityEvent();
 
-    static AbilityGridSideTab()
-    {
-        LoadSaveFile.OnLoad.AddListener(initializeAbilityGridSideTab);
-    }
-
     private void Awake()
     {
         setToClosed();
@@ -104,9 +99,12 @@ public class AbilityGridSideTab : MonoBehaviour
     }
 
     [RuntimeInitializeOnLoadMethod]
-    private static void initializeAbilityGridSideTab()
+    private static void init()
     {
         currentTabDict = new Dictionary<ITabParent,DescribableList>();
+
+        LoadSaveFile.OnLoadResetData.RemoveListener(init);
+        LoadSaveFile.OnLoadResetData.AddListener(init);
     }
 
     public static void setCurrentTabDict(ITabParent tabParent, DescribableList newList)

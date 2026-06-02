@@ -171,7 +171,7 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
     {
         if (instance != null)
         {
-            throw new IOException("There is already an instance of OOCUIManager");
+            Destroy(instance);
         }
 
         instance = this;

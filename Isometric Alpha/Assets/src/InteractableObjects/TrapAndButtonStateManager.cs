@@ -37,6 +37,17 @@ public class TrapAndButtonStateManager : MonoBehaviour
         allActivatedTrapKeys = new Dictionary<string, bool>();
     }
 
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        resetTrapKeys(blueprint.currentActivatedTrapsAndButtons);
+    }
+
     public static void setTrapsAndButtons()
     {
         foreach (KeyValuePair<string, bool> kvp in allActivatedTrapKeys)

@@ -58,12 +58,6 @@ public static class SceneChange
         SceneManager.LoadScene(SceneNameList.endOfDemo);
     }
 
-    public static void changeSceneToLoadingScreen()
-    {
-        SceneManager.LoadScene(SceneNameList.loadingScreen);
-    }
-
-
     public static void changeSceneToOpeningMonologue()
     {
         SceneManager.LoadScene(SceneNameList.openingMonologue);
@@ -74,6 +68,18 @@ public static class SceneChange
         SceneManager.LoadScene(SceneNameList.overworld);
 
         addOOCUIScene();
+    }
+
+    public static void changeSceneToOverworldWithLoadingScreen()
+    {
+        changeSceneToOverworld();
+
+        SceneManager.LoadScene(SceneNameList.loadingScreen, LoadSceneMode.Additive);
+    }
+
+    public static void removeLoadingScreen()
+    {
+        SceneManager.UnloadSceneAsync(SceneNameList.loadingScreen);
     }
 
     public static void changeSceneToStartMenu()

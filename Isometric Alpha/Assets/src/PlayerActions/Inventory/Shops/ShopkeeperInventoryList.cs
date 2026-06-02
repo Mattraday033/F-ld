@@ -40,6 +40,20 @@ public static class ShopkeeperInventoryList
         buyBackInventories[NPCNameList.uros] = new Dictionary<string, Item>();
     }
 
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        Dictionary<string, Dictionary<string, Item>> newShopkeeperInventories = SaveBlueprint.extractShopkeeperInventoriesFromJson(blueprint.currentShopkeeperInventories);
+        Dictionary<string, Dictionary<string, Item>> newBuyBackInventories = SaveBlueprint.extractShopkeeperInventoriesFromJson(blueprint.currentBuyBackInventories);
+
+        setShopkeeperInventoryList(newShopkeeperInventories, newBuyBackInventories);
+    }
+
     public static void setShopkeeperInventoryList(Dictionary<string, Dictionary<string, Item>> newShopkeeperInventories,
                                                     Dictionary<string, Dictionary<string, Item>> newBuyBackInventories)
     {

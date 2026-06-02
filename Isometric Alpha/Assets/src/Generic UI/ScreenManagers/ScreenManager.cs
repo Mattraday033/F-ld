@@ -278,4 +278,15 @@ public abstract class ScreenManager : MonoBehaviour, ITabParent
 
     public abstract KeyCode getExitKeyCode();
 
+
+    public static void resetCurrentPartyMember()
+    {
+        currentPartyMember = null;
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        LoadSaveFile.OnLoadResetData.AddListener(resetCurrentPartyMember);
+    }
 }

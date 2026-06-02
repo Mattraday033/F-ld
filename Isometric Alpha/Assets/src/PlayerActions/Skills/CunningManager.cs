@@ -22,6 +22,13 @@ public class CunningManager : SkillManager
     private static void initializeCunningManager()
     {
         cunningsRemaining = -1;
+
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        setCunningsRemaining(blueprint.cunningsRemaining);
     }
 
     public static int getCunningsRemaining()

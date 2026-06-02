@@ -102,5 +102,12 @@ public static class NewPartyMemberManager
     private static void initializeNewPartyMemberManager()
     {
         newPartyMemberNames = new List<string>();
+
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        resetNewPartyMemberManager(blueprint.newPartyMemberNames);
     }
 }

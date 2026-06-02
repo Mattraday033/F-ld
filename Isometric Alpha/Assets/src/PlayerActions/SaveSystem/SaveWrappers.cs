@@ -127,6 +127,31 @@ public struct StatsWrapper
     public string[] currentEquipment;
     public string[] combatActions;
 
+    public StatsWrapper(PartyMember partyMember)
+    {
+        key = "" + partyMember.getName();
+
+        level = partyMember.stats.getLevel();
+        currentHealth = partyMember.stats.currentHealth;
+        totalHealth = partyMember.stats.getTotalHealth();
+        canJoinParty = partyMember.canJoinParty;
+
+        xp = partyMember.stats.xp;
+
+        strength = partyMember.stats.getStrengthWithoutBoosts();
+        dexterity = partyMember.stats.getDexterityWithoutBoosts();
+        wisdom = partyMember.stats.getWisdomWithoutBoosts();
+        charisma = partyMember.stats.getCharismaWithoutBoosts();
+
+        placed = partyMember.placed;
+
+        partyMemberPlacedPosition = partyMember.placedPosition.x + "_" + partyMember.placedPosition.y + "_" + partyMember.placedPosition.z;
+        partyMemberFormationCoords = Formation.findLocationOfStats(partyMember.stats);
+
+        currentEquipment = SaveBlueprint.convertToJson(partyMember.stats.getEquippedItems().equippedItems);
+        combatActions = SaveBlueprint.convertToJson(partyMember.stats.getActionArray().getActions());
+    }
+
     public List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
     {
         if (!canJoinParty)

@@ -19,6 +19,17 @@ public static class GateAndChestManager
         openedGatesAndChests = new Dictionary<string, bool>();
     }
 
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        resetGatesAndChests(FlagWrapper.convertFlagWrapperListToDictionary(blueprint.currentChestAndGateFlags));
+    }
+
     public static void resetGatesAndChests(Dictionary<string, bool> newDict)
     {
         openedGatesAndChests = newDict;

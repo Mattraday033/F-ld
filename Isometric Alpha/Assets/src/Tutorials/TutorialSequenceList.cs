@@ -93,6 +93,7 @@ public static class TutorialSequenceList
     public const string placedCharacterTargetHash = "Placed Character";
 
     public const string questCounterUIPanel = "OOCUI Quest Counter";
+    public const string mapButton = "Local Map Button";
     public const string mapPopUpWindow = "Map PopUp Window";
     public const string mapTileQuestCounter = "Map Tile Quest Counter";
     public const string mapQuestList = "Map Quest List";
@@ -195,6 +196,9 @@ public static class TutorialSequenceList
 
         initializeExuberanceCostTutorial();
         initializeTraitCostTutorial();
+
+        LoadSaveFile.OnLoadResetData.RemoveListener(initializeTutorials);
+        LoadSaveFile.OnLoadResetData.AddListener(initializeTutorials);
     }
 
     public static void initializeFirstHostilityTutorial()
@@ -217,7 +221,7 @@ public static class TutorialSequenceList
                                                                 scriptAtEnd: new UnhighlightTargetScript());
         TutorialSequenceStep stepThree = new TutorialSequenceStep(TutorialMessageList.hostileTargetTutorialMessagePrefix + 3, 
                                                                     hostilityUITargetHash, 
-                                                                    ArrowDirection.Left, 
+                                                                    ArrowDirection.BottomRight, 
                                                                     skipHighlight: skipHighlight, 
                                                                     skipUnhighlight: skipUnhighlight, 
                                                                     createPopUpScreenBlocker: createPopUpScreenBlocker);
@@ -262,13 +266,13 @@ public static class TutorialSequenceList
     {
         TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.hostilityBarsTutorialMessagePrefix + 1,
                                                                 hostilityUITargetHash,
-                                                                ArrowDirection.Left,
+                                                                ArrowDirection.BottomRight,
                                                                 skipHighlight: highlight,
                                                                 skipUnhighlight: skipUnhighlight,
                                                                 createPopUpScreenBlocker: createPopUpScreenBlocker);
         TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.hostilityBarsTutorialMessagePrefix + 2,
                                                                 hostilityUITargetHash,
-                                                                ArrowDirection.Left,
+                                                                ArrowDirection.BottomRight,
                                                                 skipHighlight: skipHighlight,
                                                                 skipUnhighlight: unhighlight,
                                                                 createPopUpScreenBlocker: createPopUpScreenBlocker);
@@ -612,33 +616,40 @@ public static class TutorialSequenceList
         TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.questCounterTutorialMessagePrefix + 1,
                                                                 playerSpriteOOCNoArrowTargetHash,
                                                                 ArrowDirection.Top,
+                                                                // KeyBindingList.mapKey,
+                                                                skipHighlight: skipHighlight,
+                                                                skipUnhighlight: skipUnhighlight,
+                                                                createPopUpScreenBlocker: createPopUpScreenBlocker);
+        TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.questCounterTutorialMessagePrefix + 2,
+                                                                mapButton,
+                                                                ArrowDirection.Left,
                                                                 KeyBindingList.mapKey,
                                                                 skipHighlight: skipHighlight,
                                                                 skipUnhighlight: skipUnhighlight,
                                                                 createPopUpScreenBlocker: createPopUpScreenBlocker,
                                                                 scriptAtEnd: new OpenMap());
-        TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.questCounterTutorialMessagePrefix + 2,
+        TutorialSequenceStep stepThree = new TutorialSequenceStep(TutorialMessageList.questCounterTutorialMessagePrefix + 3,
                                                                   mapPopUpWindow,
                                                                   ArrowDirection.Right,
                                                                   skipHighlight: skipHighlight,
                                                                   skipUnhighlight: skipUnhighlight,
                                                                   createPopUpScreenBlocker: createPopUpScreenBlocker);
         stepTwo.blockInternalRaycastsOnCutOutMask = true;
-        TutorialSequenceStep stepThree = new TutorialSequenceStep(TutorialMessageList.questCounterTutorialMessagePrefix + 3,
+        TutorialSequenceStep stepFour = new TutorialSequenceStep(TutorialMessageList.questCounterTutorialMessagePrefix + 4,
                                                                   mapTileQuestCounter,
                                                                   ArrowDirection.Top,
                                                                   skipHighlight: skipHighlight,
                                                                   skipUnhighlight: skipUnhighlight,
                                                                   createPopUpScreenBlocker: createPopUpScreenBlocker);
         stepThree.blockInternalRaycastsOnCutOutMask = true;
-        TutorialSequenceStep stepFour = new TutorialSequenceStep(TutorialMessageList.questCounterTutorialMessagePrefix + 4,
+        TutorialSequenceStep stepFive = new TutorialSequenceStep(TutorialMessageList.questCounterTutorialMessagePrefix + 5,
                                                                     mapQuestList,
                                                                     ArrowDirection.Center,
                                                                     skipHighlight: skipHighlight,
                                                                     skipUnhighlight: skipUnhighlight,
                                                                     createPopUpScreenBlocker: createPopUpScreenBlocker);
 
-        TutorialSequence questCounterTutorialSequence = new TutorialSequence(OOCActivity.inMap, doNoSkipCurrentActivityChange, questCounterTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree, stepFour});
+        TutorialSequence questCounterTutorialSequence = new TutorialSequence(OOCActivity.inMap, doNoSkipCurrentActivityChange, questCounterTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree, stepFour, stepFive});
 
         questCounterTutorialSequence.setSkipScript(new SkipMapTutorialScript());
         tutorialSequenceDictionary.Add(questCounterTutorialSequenceKey, questCounterTutorialSequence);

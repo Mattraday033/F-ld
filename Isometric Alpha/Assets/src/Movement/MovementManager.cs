@@ -56,6 +56,17 @@ public class MovementManager : MonoBehaviour
         allMovementTrackers = new List<MovementTracker>();
         currentMovements = new Dictionary<MovementTracker, Coroutine>();
         combatWait = null;
+
+        LoadSaveFile.OnLoadResetData.RemoveListener(initializeMovementManager);
+        LoadSaveFile.OnLoadResetData.AddListener(initializeMovementManager);
+
+        LoadSaveFile.OnLoadReadBlueprint.RemoveListener(readSaveBlueprint);
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        setFooting(blueprint.onLeftFoot);
     }
 
     public static Vector3Int getPlayerCell()

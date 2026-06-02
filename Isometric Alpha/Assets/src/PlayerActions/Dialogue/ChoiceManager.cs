@@ -31,4 +31,16 @@ public static class ChoiceManager
 	{
 		choices = new Dictionary<string, ChoiceKey>();
 	}
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        choices = blueprint.extractChoicesFromJson();
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        LoadSaveFile.OnLoadResetData.AddListener(resetChoices);
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+    }
 }

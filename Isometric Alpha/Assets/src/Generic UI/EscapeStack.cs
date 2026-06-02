@@ -20,6 +20,12 @@ public static class EscapeStack
         escapableObjects = new List<IEscapable>();
     }
 
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        LoadSaveFile.OnLoadResetData.AddListener(escapeAll);
+    }
+
 	public static void addEscapableObject(IEscapable newEscapableObject)
 	{
 		escapableObjects.Add(newEscapableObject);

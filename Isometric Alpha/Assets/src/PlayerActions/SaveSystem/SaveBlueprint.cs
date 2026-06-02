@@ -24,7 +24,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 
 	public string currentZone;
 	public string currentLocation;
-	public float[] playerPosition;
+	public Vector3Int playerCell;
 
 	public bool terrainHidden;
 
@@ -88,19 +88,16 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 
         saveBlueprint.gold = Purse.getCoinsInPurse();
 
-		saveBlueprint.playerPosition = new float[3];
-		saveBlueprint.playerPosition[0] = PlayerObject.getInstanceTransform().position.x; //player.transform.position.x;
-		saveBlueprint.playerPosition[1] = PlayerObject.getInstanceTransform().position.y;
-		saveBlueprint.playerPosition[2] = PlayerObject.getInstanceTransform().position.z;
+		saveBlueprint.playerCell = MovementManager.getPlayerCell();
 
 		saveBlueprint.playerFacing = (int) State.playerFacing.getFacing();
 
 		saveBlueprint.currentFlags = Flags.getFlagsForSave();
-		saveBlueprint.currentInventory = SaveBlueprint.convertToJson<Item>(State.inventory);
+		saveBlueprint.currentInventory = convertToJson<Item>(State.inventory);
 		saveBlueprint.currentJunk = convertToJson<Item>(State.junkPocket);
 		saveBlueprint.currentQuestList = QuestList.getQuestWrappers();
-		saveBlueprint.currentKnownMapData = SaveBlueprint.convertAllKnownMapDataToJson();
-		saveBlueprint.currentAreaHostilities = SaveBlueprint.convertAllAreaHostilitiesToJson();
+		saveBlueprint.currentKnownMapData = convertAllKnownMapDataToJson();
+		saveBlueprint.currentAreaHostilities = convertAllAreaHostilitiesToJson();
 		saveBlueprint.currentChoices = convertToJson<ChoiceKey>(ChoiceManager.choices);
 		saveBlueprint.currentDeathFlags = DeathFlagManager.deadNames.Keys.ToArray();
 		saveBlueprint.currentMetFlags = MetFlagManager.metNames.Keys.ToArray();
@@ -155,7 +152,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 
 		this.currentZone = GetFromJson.getElementFromJson(this.saveName, nameof(currentLocation), jsonDynamic, SaveDefaultValues.defaultZoneName);
 		this.currentLocation = GetFromJson.getElementFromJson(this.saveName, nameof(currentLocation), jsonDynamic, SaveDefaultValues.defaultLocationName);
-		this.playerPosition = GetFromJson.getElementFromJson(this.saveName, nameof(playerPosition), jsonDynamic, SaveDefaultValues.defaultPlayerPosition);
+		this.playerCell = GetFromJson.getElementFromJson(this.saveName, nameof(playerCell), jsonDynamic, SaveDefaultValues.defaultPlayerCell);
 		this.terrainHidden = GetFromJson.getElementFromJson(this.saveName, nameof(terrainHidden), jsonDynamic, SaveDefaultValues.defaultBoolFalse);
 
 		this.overworldSpriteSortingLayer = GetFromJson.getElementFromJson(this.saveName, nameof(overworldSpriteSortingLayer), jsonDynamic, SaveDefaultValues.defaultOverworldSpriteSortingLayer);
@@ -355,67 +352,10 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 
 		foreach (PartyMember partyMember in allPartyMembers)
 		{
-            StatsWrapper partyMemberStats = new StatsWrapper();    
-        
-			partyMemberStats.key = "" + partyMember.getName();
-
-            partyMemberStats.level = partyMember.stats.getLevel();
-            partyMemberStats.currentHealth = partyMember.stats.currentHealth;
-            partyMemberStats.totalHealth = partyMember.stats.getTotalHealth();
-            partyMemberStats.canJoinParty = partyMember.canJoinParty;
-
-            partyMemberStats.xp = partyMember.stats.xp;
-
-            partyMemberStats.strength = partyMember.stats.getStrengthWithoutBoosts();
-            partyMemberStats.dexterity = partyMember.stats.getDexterityWithoutBoosts();
-            partyMemberStats.wisdom = partyMember.stats.getWisdomWithoutBoosts();
-            partyMemberStats.charisma = partyMember.stats.getCharismaWithoutBoosts();
-
-            partyMemberStats.placed = partyMember.placed;
-
-			partyMemberStats.partyMemberPlacedPosition = partyMember.placedPosition.x + "_" + partyMember.placedPosition.y + "_" + partyMember.placedPosition.z;
-			partyMemberStats.partyMemberFormationCoords = Formation.findLocationOfStats(partyMember.stats);
-
-            partyMemberStats.currentEquipment = convertToJson(partyMember.stats.getEquippedItems().equippedItems);
-            partyMemberStats.combatActions = convertToJson(partyMember.stats.getActionArray().getActions());
-
-            this.partyMemberStats[partyMemberIndex] = partyMemberStats;
+            this.partyMemberStats[partyMemberIndex] = new StatsWrapper(partyMember);
 
             partyMemberIndex++;
 		}
-	}
-
-    public void extractPartyMemberDetails()
-    {
-        State.formation = new Formation();
-
-        Dictionary<string, PartyMember> partyMemberDict = new Dictionary<string, PartyMember>();
-
-        for (int partyMemberIndex = 0; partyMemberIndex < this.partyMemberStats.Length; partyMemberIndex++)
-        {
-            string partyMemberName = this.partyMemberStats[partyMemberIndex].key;
-            StatsWrapper partyMemberStatsWrapper = this.partyMemberStats[partyMemberIndex];
-
-            AllyStats partyMemberStats = new AllyStats(partyMemberStatsWrapper);
-            PartyMember partyMember = new PartyMember(partyMemberStats);
-
-            partyMemberStats.xp = partyMemberStatsWrapper.xp;
-            partyMember.canJoinParty = this.partyMemberStats[partyMemberIndex].canJoinParty;
-            partyMember.placed = this.partyMemberStats[partyMemberIndex].placed;
-
-            string[] placedPosition = this.partyMemberStats[partyMemberIndex].partyMemberPlacedPosition.Split("_");
-            partyMember.placedPosition = new Vector3(float.Parse(placedPosition[0]),
-                                                     float.Parse(placedPosition[1]),
-                                                     float.Parse(placedPosition[2]));
-
-            ((AllyStats)partyMember.stats).equippedItems = new EquippedItems(((AllyStats) partyMember.stats), extractEquippedItemsFromJson(partyMemberStatsWrapper.currentEquipment));
-
-            partyMemberDict.Add(partyMemberName, partyMember);
-
-            State.formation.setCharacterAtCoords(partyMemberStatsWrapper.partyMemberFormationCoords, partyMember.stats);
-        }
-
-        PartyManager.setPartyMemberDict(partyMemberDict);
 	}
 
 	public static string[] convertAllKnownMapDataToJson()

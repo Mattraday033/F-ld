@@ -291,4 +291,16 @@ public static class QuestList
             }
 		}
 	}
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        LoadSaveFile.OnLoadResetData.AddListener(buildQuestListFromScratch);
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        resetAndOverwriteQuestDictionary(blueprint.currentQuestList);
+    }
 }

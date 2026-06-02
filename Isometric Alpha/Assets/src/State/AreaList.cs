@@ -134,6 +134,17 @@ public static class AreaList
 	private const bool fastTravelContingentOnHostility = false;
 	
     [RuntimeInitializeOnLoadMethod]
+	private static void init()
+	{
+		LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+	}
+
+	private static void readSaveBlueprint(SaveBlueprint blueprint)
+	{
+		blueprint.extractAllAreaHostilitiesFromJson();
+	}
+
+    [RuntimeInitializeOnLoadMethod]
 	public static void resetAreaList()
 	{
         allAreas = new Dictionary<string, Area>();

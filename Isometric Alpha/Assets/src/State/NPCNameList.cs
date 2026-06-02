@@ -154,6 +154,12 @@ public static class NPCNameList
 
     #endregion
 
+    #region Place Names
+
+    public const string fold = "Föld";
+
+    #endregion
+
     #region Vaultable Object
 
     public const string vaultablePrefix = "Vaultable ";

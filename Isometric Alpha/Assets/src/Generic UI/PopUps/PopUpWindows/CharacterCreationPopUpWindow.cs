@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,8 +12,6 @@ public class CharacterCreationPopUpWindow : PopUpWindow
 {
     private static CharacterCreationPopUpWindow instance;
     public readonly static string[] portraitSpriteNameList = new string[]{ NPCNameList.protagPrefix+1, NPCNameList.protagPrefix+2 };
-
-    public static bool goToMonologue;
 
     public TMP_InputField nameField;
 
@@ -40,7 +39,6 @@ public class CharacterCreationPopUpWindow : PopUpWindow
     private static void intitializeCharacterCreationWindow()
     {
         instance = null;
-        goToMonologue = false;
     }
 
 
@@ -231,12 +229,11 @@ public class CharacterCreationPopUpWindow : PopUpWindow
 
     private IEnumerator fadeOutThenStartMonologue()
     {
-
-        if(Application.isEditor)
-        {
-            applyCharacterChoicesAndStartMonologue();
-            yield break;
-        }
+        // if(Application.isEditor)
+        // {
+        //     applyCharacterChoicesAndStartMonologue();
+        //     yield break;
+        // }
 
         FadeToBlackManager.StopFade(FadeType.Screen);
         FadeToBlackManager.StopFade(FadeType.Music);
@@ -267,28 +264,24 @@ public class CharacterCreationPopUpWindow : PopUpWindow
             name = SaveDefaultValues.defaultPlayerName;
         }
 
-        //here for loading screen animation
-        State.playerPortraitName = portraitSpriteNameList[portraitNameIndex];
-        State.playerSpriteName = portraitSpriteNameList[spriteNameIndex];
-
-        goToMonologue = !Application.isEditor;
-
-        LoadSaveFile.loadCleanSlateSaveFile();
-
-        AllyStats playerStats = new AllyStats(name + PartyManager.playerMarker, currentStats.getStrength(), currentStats.getDexterity(), currentStats.getWisdom(), currentStats.getCharisma());
-
-        playerStats.combatActionArray = new CombatActionArray(playerStats, getStartingActions(playerStats));
+        PartyMember player = new PartyMember(new AllyStats(name + PartyManager.playerMarker, currentStats.getStrength(), currentStats.getDexterity(), currentStats.getWisdom(), currentStats.getCharisma()));
+        player.canJoinParty = true;
+        player.stats.combatActionArray = new CombatActionArray(player.stats, getStartingActions(player.stats));
 
         PartyManager.resetPartyMembers();
-        PartyManager.addPlayerStatsToDict(playerStats);
+        PartyManager.addPlayerStatsToDict(player.stats);
 
-        State.formation = new Formation();
-        //reseting because gets wiped during loadCleanSlateSaveFile()
-        State.playerPortraitName = portraitSpriteNameList[portraitNameIndex];
-        State.playerSpriteName = portraitSpriteNameList[spriteNameIndex];
+        SaveBlueprint cleanSaveBlueprint = SaveHandler.getCleanSlateSave();
+        cleanSaveBlueprint.playerPortraitName = portraitSpriteNameList[portraitNameIndex];
+        cleanSaveBlueprint.playerSpriteName = portraitSpriteNameList[spriteNameIndex];
+        cleanSaveBlueprint.partyMemberStats = new StatsWrapper[]{ new StatsWrapper(player)};
 
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inDialogue);
-        OverallUIManager.resetScreenStates();
+        Dictionary<string, bool> startingFlags = new Dictionary<string, bool>();
+        startingFlags[Flags.getStatTutorialFlag(player.stats)] = true;
+        cleanSaveBlueprint.currentFlags = JsonConvert.SerializeObject(startingFlags, Formatting.Indented);
+
+        LoadSaveFile loadSaveFile = new LoadSaveFile(cleanSaveBlueprint, OOCActivity.inDialogue, showMonologueFirst: true);
+        loadSaveFile.execute();
     }
 
     public static CombatAction[] getStartingActions(AllyStats stats)

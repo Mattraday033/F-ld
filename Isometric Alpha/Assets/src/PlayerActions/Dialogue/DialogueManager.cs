@@ -2492,4 +2492,10 @@ public static class SpeechLog
 	{
 		allDialogues = new Conversation();
 	}
+
+	[RuntimeInitializeOnLoadMethod]
+	private static void init()
+	{
+		LoadSaveFile.OnLoadResetData.AddListener(cleanSpeechLog);
+	}
 }

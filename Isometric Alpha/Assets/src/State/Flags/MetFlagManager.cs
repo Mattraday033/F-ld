@@ -30,4 +30,15 @@ public static class MetFlagManager
             addName(metName);
         }
     }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        resetAllMetNpcs(blueprint.extractListOfStringsFromJson(blueprint.currentMetFlags));
+    }
 }

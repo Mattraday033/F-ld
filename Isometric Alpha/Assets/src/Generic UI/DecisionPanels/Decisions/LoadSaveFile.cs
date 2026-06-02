@@ -20,6 +20,7 @@ public interface IDecisionPanel
 	public string getDescribableRowKey();
 }
 
+public delegate void OutroLogic();
 
 public class LoadSaveFile : IDecision
 {
@@ -27,20 +28,21 @@ public class LoadSaveFile : IDecision
     private const string loadLostProgressMessageEnd = "'? Any unsaved progress will be lost.";
 
     public static bool midLoad = false;
+    public static bool beforeSecondStageLoad = false;
 
-    public readonly static UnityEvent OnLoad = new UnityEvent();
+    public readonly static UnityEvent OnLoadResetData = new UnityEvent();
+    public readonly static UnityEvent<SaveBlueprint> OnLoadReadBlueprint = new UnityEvent<SaveBlueprint>();
 
+    public OOCActivity exitActivity;
     public SaveBlueprint saveBlueprint;
+    public bool showMonologueFirst;
 
-
-    public LoadSaveFile()
-    {
-        this.saveBlueprint = null;
-    }
-
-    public LoadSaveFile(SaveBlueprint saveBlueprint)
+    public LoadSaveFile(SaveBlueprint saveBlueprint, OOCActivity exitActivity = OOCActivity.walking, bool showMonologueFirst = false)
     {
         this.saveBlueprint = saveBlueprint;
+
+        this.exitActivity = exitActivity;
+        this.showMonologueFirst = showMonologueFirst;
     }
 
     public string getMessage()
@@ -51,137 +53,40 @@ public class LoadSaveFile : IDecision
     public void execute()
     {
         midLoad = true;
+        beforeSecondStageLoad = true;
 
-        NotificationManager.purgeNotifications();
-        StepCountScriptManager.reset();
-        SaveHandler.createSavedGameList(true);
-        OverallUIManager.setCurrentScreenType(null);
-        TutorialSequenceList.initializeTutorials();
-        MovementManager.initializeMovementManager();
-        State.dialogueUponSceneLoadKey = null;
-        ScreenManager.currentPartyMember = null;
+        LoadingBarProgressTracker.loadSaveFile = this;
 
-        string currentSceneName = SceneManager.GetActiveScene().name;
-
-        if(!currentSceneName.Equals(SceneNameList.openingMonologue) && 
-            CharacterCreationPopUpWindow.goToMonologue)
+        if(showMonologueFirst)
         {
             SceneChange.changeSceneToOpeningMonologue();
-            CharacterCreationPopUpWindow.goToMonologue = false;
-            LoadingBarProgressTracker.loadSaveFile = this;
-            return;
-        } else if (!currentSceneName.Equals(SceneNameList.loadingScreen))
+        } else
         {
-            LoadingBarProgressTracker.loadSaveFile = this;
-            SceneChange.changeSceneToLoadingScreen();
+            SceneChange.changeSceneToOverworldWithLoadingScreen();
         }
-        else
-        {
-            ChoiceManager.resetChoices();
-            QuestList.buildQuestListFromScratch();
+    }
 
-            if (saveBlueprint == null)
-            {
-                saveBlueprint = SaveHandler.getCleanSlateSave();
-            }
-                
-            Flags.exitNewGameMode();
+    public void resetData()
+    {
+        OnLoadResetData.Invoke();
+    }
 
-            if (CombatStateManager.inCombat)
-            {
-                CombatStateManager.resetCombat();
-                CombatStateManager.inCombat = false;
-                TransitionManager.ChangeAreaMusic.Invoke(saveBlueprint.currentLocation);
-            } else
-            {
-                TransitionManager.ChangeAreaMusic.Invoke(saveBlueprint.currentLocation);
-            }
-            
-            Flags.resetAllFlags();
-            Flags.overwriteFlags(saveBlueprint.currentFlags);
-            // TutorialFlags.checkForTutorialFlagsInNormalFlags();
+    public void readFromSaveBlueprint()
+    {
+        OnLoadReadBlueprint.Invoke(saveBlueprint);
+    }
 
-            MovementManager.setFooting(saveBlueprint.onLeftFoot);
+    public void performOutro()
+    {
+        TestScript.addTestVariables();
 
-            State.playerFacing = new CharacterFacing();
-            State.playerFacing.setFacing((Facing)saveBlueprint.playerFacing);
+        FadeToBlackManager.setToMaxOpacity();
 
-            AreaManager.locationName = saveBlueprint.currentLocation;
+        PlayerOOCStateManager.setCurrentActivity(exitActivity);
 
-            State.terrainHidden = saveBlueprint.terrainHidden;
+        SceneChange.removeLoadingScreen();
 
-            if (!Flags.isInNewGameMode()) //if in newgame mode, this is handled in CharacterCreationPopUpWindow 
-            {
-                saveBlueprint.extractPartyMemberDetails();
-                State.formation.implementGridFromCoordSet(saveBlueprint.partyMemberStats);
-                AreaManager.saveBlueprint = saveBlueprint;
-                State.playerPortraitName = saveBlueprint.playerPortraitName;
-                State.playerSpriteName = saveBlueprint.playerSpriteName;
-            }
-            else
-            {
-                Flags.setStatTutorialFlag();
-                Flags.exitNewGameMode();
-            }
-
-            State.inventory = SaveBlueprint.extractInventoryItemsFromJson(saveBlueprint.currentInventory);
-            State.junkPocket = SaveBlueprint.extractInventoryItemsFromJson(saveBlueprint.currentJunk);
-
-            ChoiceManager.choices = saveBlueprint.extractChoicesFromJson();
-            DeathFlagManager.resetAllDeadNpcs(saveBlueprint.extractListOfStringsFromJson(saveBlueprint.currentDeathFlags));
-            MetFlagManager.resetAllMetNpcs(saveBlueprint.extractListOfStringsFromJson(saveBlueprint.currentMetFlags));
-            GateAndChestManager.resetGatesAndChests(FlagWrapper.convertFlagWrapperListToDictionary(saveBlueprint.currentChestAndGateFlags));
-            TrapAndButtonStateManager.resetTrapKeys(saveBlueprint.currentActivatedTrapsAndButtons);
-
-            IntimidateManager.setIntimidatesRemaining(saveBlueprint.intimidatesRemaining);
-            CunningManager.setCunningsRemaining(saveBlueprint.cunningsRemaining);
-
-            Dictionary<string, Dictionary<string, Item>> newShopkeeperInventories = SaveBlueprint.extractShopkeeperInventoriesFromJson(saveBlueprint.currentShopkeeperInventories);
-            Dictionary<string, Dictionary<string, Item>> newBuyBackInventories = SaveBlueprint.extractShopkeeperInventoriesFromJson(saveBlueprint.currentBuyBackInventories);
-
-            PuzzleFlags.currentPuzzleIndex = saveBlueprint.currentPuzzleIndex;
-
-            ShopkeeperInventoryList.setShopkeeperInventoryList(newShopkeeperInventories, newBuyBackInventories);
-
-            QuestList.resetAndOverwriteQuestDictionary(saveBlueprint.currentQuestList);
-            State.allKnownMapData = saveBlueprint.extractAllKnownMapDataFromJson();
-            saveBlueprint.extractAllAreaHostilitiesFromJson();
-
-            SecretDoorFlags.setFromSaveData(saveBlueprint.secretDoors);
-
-            Purse.setCoinsInPurse(saveBlueprint.gold);
-
-            MonsterDefeatKeysList.extractAllMonsterDefeatKeys(saveBlueprint);
-
-            NewAbilityManager.resetNewAbilityManager(saveBlueprint.newAbilityWrappers);  
-            NewPartyMemberManager.resetNewPartyMemberManager(saveBlueprint.newPartyMemberNames);    
-            
-            CombatStateManager.inCombat = false;
-
-            State.currentSkillType = SkillManager.getHighestSkillType(PartyManager.getPlayerStats());
-
-            SpeechLog.cleanSpeechLog();
-
-            TestScript.addTestVariables();
-
-            EscapeStack.escapeAll();
-
-            FadeToBlackManager.setToMaxOpacity();
-
-            skipTutorials();
-
-            SpawnInfoManager.lastSaveBlueprint = saveBlueprint;
-
-            CombatStateManager.whoseTurn = WhoseTurn.Start;
-
-			PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
-
-            OnLoad.Invoke();
-            
-            SceneChange.changeSceneToOverworld();
-
-            midLoad = false;
-        }
+        midLoad = false;
     }
 
     public string getPlayerSpriteNameInSave()
@@ -197,21 +102,5 @@ public class LoadSaveFile : IDecision
     public void backOut()
     {
 
-    }
-
-    public static void loadCleanSlateSaveFile()
-    {
-        LoadSaveFile loadCleanSlateSaveFile = new LoadSaveFile();
-
-        loadCleanSlateSaveFile.execute();
-    }
-
-    private void skipTutorials()
-    {
-        Flags.setFlag("seenAbilityWheelTutorial", true);
-
-        // Flags.flags[TutorialSequenceList.equippableItemTutorialSeenFlag] = true;
-        Flags.setFlag(TutorialSequenceList.formationTutorialSeenFlag, true);
-        // Flags.flags[TutorialSequenceList.addingAbilitiesTutorialSeenFlag] = true;
     }
 }

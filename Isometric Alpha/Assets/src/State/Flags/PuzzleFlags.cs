@@ -13,10 +13,16 @@ public static class PuzzleFlags
         currentPuzzleIndex = 0;
 
         TransitionManager.BeforeTransition.AddListener(resetPuzzleFlags);
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
     }
 
     private static void resetPuzzleFlags()
     {
         currentPuzzleIndex = 0;
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        currentPuzzleIndex = blueprint.currentPuzzleIndex;
     }
 }

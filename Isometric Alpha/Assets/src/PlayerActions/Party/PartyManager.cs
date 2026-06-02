@@ -16,7 +16,43 @@ public static class PartyManager
     {
         partyMemberDict = new Dictionary<string, PartyMember>();
         resetPartyMembers();
+
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
     }
+
+    public static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        State.formation = new Formation();
+        Dictionary<string, PartyMember> partyMemberDict = new Dictionary<string, PartyMember>();
+
+        for (int partyMemberIndex = 0; partyMemberIndex < blueprint.partyMemberStats.Length; partyMemberIndex++)
+        {
+            string partyMemberName = blueprint.partyMemberStats[partyMemberIndex].key;
+            StatsWrapper partyMemberStatsWrapper = blueprint.partyMemberStats[partyMemberIndex];
+
+            AllyStats partyMemberStats = new AllyStats(partyMemberStatsWrapper);
+            PartyMember partyMember = new PartyMember(partyMemberStats);
+
+            partyMemberStats.xp = partyMemberStatsWrapper.xp;
+            partyMember.canJoinParty = blueprint.partyMemberStats[partyMemberIndex].canJoinParty;
+            partyMember.placed = blueprint.partyMemberStats[partyMemberIndex].placed;
+
+            string[] placedPosition = blueprint.partyMemberStats[partyMemberIndex].partyMemberPlacedPosition.Split("_");
+            partyMember.placedPosition = new Vector3(float.Parse(placedPosition[0]),
+                                                     float.Parse(placedPosition[1]),
+                                                     float.Parse(placedPosition[2]));
+
+            partyMember.stats.equippedItems = new EquippedItems(partyMember.stats, SaveBlueprint.extractEquippedItemsFromJson(partyMemberStatsWrapper.currentEquipment));
+
+            partyMemberDict.Add(partyMemberName, partyMember);
+
+            State.formation.setCharacterAtCoords(partyMemberStatsWrapper.partyMemberFormationCoords, partyMember.stats);
+        }
+
+        setPartyMemberDict(partyMemberDict);
+        NewAbilityManager.resetNewAbilityManager(blueprint.newAbilityWrappers);
+        State.currentSkillType = SkillManager.getHighestSkillType(getPlayerStats());
+	}
 
     public static int getNumberOfPartyMembersTotal()
     {

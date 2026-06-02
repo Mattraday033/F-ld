@@ -171,10 +171,11 @@ public static class TutorialMessageList
         // tutorialDictionary.Add(questCounterTutorialMessagePrefix + 3, "This is your Map. It will only show you places you've been before. Nearby locations will be silhouetted in black.");
         // tutorialDictionary.Add(questCounterTutorialMessagePrefix + 4, "The Quest Symbol next to an area name means a quest wants you to go there. If you cannot find the Quest Objective it is indicating, try looking inside buildings in that area.");
 
-        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 1, "You have been given multiple Quest Objectives at once. You can view the Quests with Objectives in the current area on your Map. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to open your Map.");
-        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 2, "This is your Map. It will only show you places you've been before. Nearby locations will be silhouetted in black.");
-        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 3, "The Quest Symbol next to an area name means a quest wants you to go there.");
-        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 4, "You can see the names of your current Quests here. Hover over them to learn more about them.");
+        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 1, "You have been given multiple Quest Objectives at once.");
+        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 2, "You can view the Quests with Objectives in the current Zone on your Map. Click here, or press <nobr>' " + keyCodePlaceHolder + " '</nobr> to open your Map.");
+        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 3, "This is your Map. It will only show you places you've been before. Nearby locations will be silhouetted in black.");
+        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 4, "The Quest Symbol next to an area name means a quest wants you to go there.");
+        tutorialDictionary.Add(questCounterTutorialMessagePrefix + 5, "You can see the names of your current Quests here. Hover over them to learn more about them.");
 
         tutorialDictionary.Add(multiMemberObstacleTutorialMessagePrefix + 1, "Some obstacles require two or more Party Members to remove. Directing your Party Members requires the 'Leadership' Skill.");
         tutorialDictionary.Add(multiMemberObstacleTutorialMessagePrefix + 2, "You can only use the 'Leadership' skill if you have a Party Member with two or more Charisma. If you have a qualified Party Member, the 'Leadership' skill will appear as an option on your Skills bar. Click the Arrow Buttons to cycle through your available Skills.");

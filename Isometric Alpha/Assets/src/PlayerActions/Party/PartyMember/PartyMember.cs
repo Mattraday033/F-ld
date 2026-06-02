@@ -19,15 +19,19 @@ public class PartyMember : IDescribable, IDescribableInBlocks
         set
         {
             _CanJoinParty = value;
-            PartyManager.OnPartyChange.Invoke();
-            ScreenManager.currentPartyMember = null;
+            
+            if(!Flags.isInNewGameMode())
+            {
+                PartyManager.OnPartyChange.Invoke();
+                ScreenManager.currentPartyMember = null;
 
-            if(_CanJoinParty)
-            {
-                NewPartyMemberManager.setPartyMemberAsNew(getName());
-            } else
-            {
-                NewPartyMemberManager.removePartyMember(getName());
+                if(_CanJoinParty)
+                {
+                    NewPartyMemberManager.setPartyMemberAsNew(getName());
+                } else
+                {
+                    NewPartyMemberManager.removePartyMember(getName());
+                }
             }
         }
     }

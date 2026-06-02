@@ -23,6 +23,13 @@ public class IntimidateManager : CunningManager
         PlayerOOCStateManager.OnStateChangeToSkill.AddListener(noLongerHasTarget);
         PlayerOOCStateManager.OnStateChangeFromSkill.AddListener(noLongerHasTarget);
         OnSkillTargetFound.AddListener(incrementIntimidateTargets);
+
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        setIntimidatesRemaining(blueprint.intimidatesRemaining);
     }
 
     private static void incrementIntimidateTargets()

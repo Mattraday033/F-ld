@@ -13,6 +13,13 @@ public static class SecretDoorFlags
     private static void initializeSecretDoorFlags()
     {
         secretDoorFlags = new Dictionary<string, bool>();
+
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        setFromSaveData(blueprint.secretDoors);
     }
 
     public static void addSecretDoorFlag(string secretDoorKey)

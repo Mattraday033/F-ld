@@ -242,6 +242,28 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         switch(hoverMessageKey)
         {
+            case IconList.intimidateIconName:
+            case IconList.cunningIconName:
+            case IconList.observationIconName:
+            case IconList.leadershipIconName:
+
+                switch(PlayerOOCStateManager.currentActivity)
+                {
+                    case OOCActivity.walking:
+                    case OOCActivity.inChestUI:
+                    case OOCActivity.cunning:
+                    case OOCActivity.intimidating:
+                    case OOCActivity.observing:
+                    case OOCActivity.inFade:
+                        return hoverMessageKey  + " ["+KeyBindingList.skillKey.ToString()+"]" ;
+                    default:
+                        return hoverMessageKey;
+
+                }
+            case HoverMessageList.localMapKey:
+                return HoverMessageList.localMapKey + " ["+KeyBindingList.mapKey.ToString()+"]" ;
+            case HoverMessageList.worldMapKey:
+                return HoverMessageList.worldMapKey + " ["+KeyBindingList.worldMapKey.ToString()+"]" ;
             case HoverMessageList.characterScreenKey:
                 return HoverMessageList.characterScreenKey + " ["+KeyBindingList.characterScreenKey.ToString()+"]" ;
             case HoverMessageList.inventoryScreenKey:
@@ -553,6 +575,11 @@ public static class HoverMessageList
     public const string saveAndLoadScreenKey = "Save/Load Screen";
     public const string settingsScreenKey = "Settings Screen";
     private const string settingsScreenMessage = "Here you can change the Game's Settings, or Quit the Game.";
+
+    public const string localMapKey = "Local Map";
+    private const string localMapMessage = "Here you can see where you are in the current Zone, as well as what Quests you have for it.";
+    public const string worldMapKey = "World Map";
+    private const string worldMapMessage = "Here you can see where you are in the world of " + NPCNameList.fold;
 
     private const string restPointMessage = "This location has a Rest Point. Rest Points will restore the Health of all Party Members, as well as any expended Skill charges.";
     private const string shopIconMessage = "This location has a Shop. Shops sell useful items or equipment and buy unwanted loot.";
@@ -872,6 +899,11 @@ public static class HoverMessageList
             
             case actionOrderKey:
                 return actionOrderMessage;
+
+            case localMapKey:
+                return localMapMessage;
+            case worldMapKey:
+                return worldMapMessage;
 
             case characterScreenKey:
                 return characterScreenMessage;

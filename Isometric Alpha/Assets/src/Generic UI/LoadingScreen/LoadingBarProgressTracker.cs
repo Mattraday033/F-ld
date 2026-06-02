@@ -37,23 +37,18 @@ public class LoadingBarProgressTracker : MonoBehaviour
         }
     }
 
-	private static bool garbageCollectionHasOccured;
-
-	private static bool canChangeScene = false;
+	private bool canChangeScene = false;
 
 	private float elapsedTime = 0f;
 
-	private const float waitMin = .25f;
-    private const float waitMax = 1.5f;
-	private float waitInSeconds;
+	private float waitBeforeBarMovement = .25f;
+	private float waitFirstLoadStage = .75f;
+	private float waitSecondLoadStage = 1.25f;
+	private float waitThirdLoadStage = 1.75f;
+	private float continueMessageWait = 2.25f;
 
-    private float speed;
-	private const float speedMin = 800f;
-	private const float speedMax = 1000f;
-
-	private const float offsetMinimum = 0f;
-
-	private float endWait = -1f;
+	private const float offsetMinimum = -1575f;
+    private const float offsetMaximum = 500f;
 
     private static Sprite[] runFrontSprites;
 
@@ -65,8 +60,6 @@ public class LoadingBarProgressTracker : MonoBehaviour
         instance = null;
         _LoadSaveFile = null;
         loadSaveFile = null;
-        garbageCollectionHasOccured = false;
-        canChangeScene = false;
         runFrontSprites = null;
         skipNextHeartBeat = false;
     }
@@ -76,18 +69,10 @@ public class LoadingBarProgressTracker : MonoBehaviour
         instance = this;
     }
 
-	void Start()
-	{
-		waitInSeconds = getNewWait();
-
-        speed = UnityEngine.Random.Range(speedMin, speedMax);
-
-        if(CombatStateManager.inCombat)
-        {
-            CombatStateManager.resetCombat();
-            CombatStateManager.inCombat = false;
-        }
-	}
+    private void Start()
+    {
+        StartCoroutine(beforeBarWait());
+    }
 
     private void OnDestroy()
     {
@@ -98,61 +83,91 @@ public class LoadingBarProgressTracker : MonoBehaviour
 
 	void Update()
 	{
-		if((canChangeScene && (KeyBindingList.continueUIKeyIsPressed() || Input.GetKey(KeyCode.Mouse0))) || Application.isEditor)
+		if(canChangeScene && (KeyBindingList.continueUIKeyIsPressed() || Input.GetKey(KeyCode.Mouse0)))
 		{
-            garbageCollectionHasOccured = false;
-            canChangeScene = false;
-
-            loadSaveFile.execute();
+            loadSaveFile.performOutro();
             loadSaveFile = null;
-			return;
-        } else if(canChangeScene)
-		{
-			return;
-		}
+        } 
+    }
 
-		elapsedTime += Time.deltaTime;
+    private IEnumerator progressLoadBar()
+    {
+        while(elapsedTime < continueMessageWait)
+        {
+            yield return null;
+            
+            loadProgressBar.offsetMax = new Vector2(Mathf.Lerp(offsetMinimum, offsetMaximum, (elapsedTime-waitBeforeBarMovement)/continueMessageWait), loadProgressBar.offsetMax.y);
+        }
+    }
 
-		if (elapsedTime <= waitInSeconds)
-		{
-			return;
-		}
-
-		if(!garbageCollectionHasOccured)
-		{
-            GC.Collect();
-			garbageCollectionHasOccured = true;
+    private IEnumerator beforeBarWait()
+    {
+        while(elapsedTime < waitBeforeBarMovement)
+        {
+            yield return null;
+            elapsedTime += Time.deltaTime;
         }
 
-        if(loadProgressBar.offsetMax.x < offsetMinimum)
-		{
-            if ((loadProgressBar.offsetMax.x + (speed * Time.deltaTime)) > offsetMinimum)
-            {
-                loadProgressBar.offsetMax = new Vector2(offsetMinimum, loadProgressBar.offsetMax.y);
-            }
-            else
-            {
-                loadProgressBar.offsetMax = new Vector2(loadProgressBar.offsetMax.x + speed * Time.deltaTime, loadProgressBar.offsetMax.y);
-            }
+        StartCoroutine(progressLoadBar());
+        StartCoroutine(firstWait());
+    }
 
-            return;
-        } else if(endWait < 0)
-		{
-			endWait = elapsedTime + getNewWait();
-
+    private IEnumerator firstWait()
+    {
+        while(elapsedTime < waitFirstLoadStage)
+        {
+            yield return null;
+            elapsedTime += Time.deltaTime;
         }
 
-		if (elapsedTime < endWait)
-		{
-			return;
-		}
+        GC.Collect();
+        loadSaveFile.resetData();
+        loadSaveFile.readFromSaveBlueprint();
+
+        StartCoroutine(secondWait());
+    }
+
+    private IEnumerator secondWait()
+    {
+        while(elapsedTime < waitSecondLoadStage)
+        {
+            yield return null;
+            elapsedTime += Time.deltaTime;
+        }
+
+        LoadSaveFile.beforeSecondStageLoad = false;
+
+        AreaManager.getInstance().Awake();
+        BackgroundManager.getInstance().Start();
+
+        StartCoroutine(thirdWait());
+    }
+
+    private IEnumerator thirdWait()
+    {
+        while(elapsedTime < waitThirdLoadStage)
+        {
+            yield return null;
+            elapsedTime += Time.deltaTime;
+        }
+
+        GC.Collect();
+        OOCUIManager.getInstance().enableOOCUI();
+        OOCUIManager.updateOOCUI();
+
+        StartCoroutine(endWait());
+    }
+
+    private IEnumerator endWait()
+    {
+        while(elapsedTime < continueMessageWait)
+        {
+            yield return null;
+            elapsedTime += Time.deltaTime;
+        }
 
         canChangeScene = true;
 		pressAnyKeyMessage.SetActive(true);
-    }
-    private float getNewWait()
-	{
-		return UnityEngine.Random.Range(waitMin, waitMax);
     }
 
     private static void animateProtagRunSprite(int row)

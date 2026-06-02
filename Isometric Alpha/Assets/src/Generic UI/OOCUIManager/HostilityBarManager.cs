@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class HostilityBarManager : MonoBehaviour
 {
     public Image[] hostilityBars;
+
+    public GameObject[] flowerIcons;
+    public GameObject[] alertIcons;
+    public GameObject[] skullIcons;
     
     public void setUpHostilityBars()
     {
@@ -13,7 +17,10 @@ public class HostilityBarManager : MonoBehaviour
 
         if (lowestGreenIndex >= Area.hostilityThreshold)
         {
-            setAllHostilityBarsToRed();
+            for(int i = 0; i < hostilityBars.Length; i++)
+            {
+                setBarToHostile(i);
+            }
             return;
         }
         else
@@ -22,32 +29,51 @@ public class HostilityBarManager : MonoBehaviour
             {
                 if (barIndex < lowestGreenIndex)
                 {
-                    hostilityBars[barIndex].color = Color.yellow;
+                    setBarToAlerted(barIndex);
                 }
                 else
                 {
-                    hostilityBars[barIndex].color = getMainBarColor();
+                    if(defaultBarStateIsHostile())
+                    {
+                        setBarToHostile(barIndex);
+                    } else
+                    {
+                        setBarToPeaceful(barIndex);
+                    }
                 }
             }
         }
     }
 
-    private void setAllHostilityBarsToRed()
+    private void setBarToPeaceful(int i)
     {
-        foreach (Image bar in hostilityBars)
-        {
-            bar.color = Color.red;
-        }
+        hostilityBars[i].color = ColorList.surpriseIconGreen;
+
+        flowerIcons[i].SetActive(true);
+        alertIcons[i].SetActive(false);
+        skullIcons[i].SetActive(false);
     }
 
-    private Color getMainBarColor()
+    private void setBarToAlerted(int i)
     {
-        if (AreaList.locationAlwaysHostile(AreaManager.locationName))
-		{
-			return Color.red;
-		} else
-        {
-            return Color.green;
-        }
+        hostilityBars[i].color = ColorList.surpriseIconYellow;
+
+        flowerIcons[i].SetActive(false);
+        alertIcons[i].SetActive(true);
+        skullIcons[i].SetActive(false);
+    }
+
+    private void setBarToHostile(int i)
+    {
+        hostilityBars[i].color = ColorList.surpriseIconRed;
+
+        flowerIcons[i].SetActive(false);
+        alertIcons[i].SetActive(false);
+        skullIcons[i].SetActive(true);
+    }
+
+    private bool defaultBarStateIsHostile()
+    {
+        return AreaList.locationAlwaysHostile(AreaManager.locationName);
     }
 }

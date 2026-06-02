@@ -11,6 +11,13 @@ public static class MonsterDefeatKeysList
     private static void initializeMonsterDefeatKeysList()
     {
         monsterDefeatKeysDict = new Dictionary<string, bool>();
+
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        extractAllMonsterDefeatKeys(blueprint);
     }
 
     public static void setDefeatKey(string key, bool status)

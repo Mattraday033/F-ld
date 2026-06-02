@@ -137,7 +137,8 @@ public class CombatStateManager : MonoBehaviour
         retreatedFromIndex = -1;
 
         TransitionManager.BeforeTransition.AddListener(resetRetreatedFromIndex);
-        LoadSaveFile.OnLoad.AddListener(resetRetreatedFromIndex);
+        LoadSaveFile.OnLoadResetData.AddListener(resetRetreatedFromIndex);
+        LoadSaveFile.OnLoadResetData.AddListener(resetCombat);
     }
 
 	private void Awake()
@@ -629,17 +630,21 @@ public class CombatStateManager : MonoBehaviour
 
 		PartyManager.resetAllPartyMemberCooldowns();
 
+        currentActivity = CurrentActivity.ChoosingActor;
+        whoseTurn = WhoseTurn.Start;
+        
 		CombatAnimationManager.flushAnimations();
 
 		State.enteredCombatFromDialogue = false;
 		State.allyPackInfo = null;
 
-        if(AreaManager.locationName.Equals(LocationNameList.slaveShackSix))
+        if(LocationNameList.slaveShackSix.Equals(AreaManager.locationName))
         {
             CunningManager.resetCunningsRemaining();
         }
 
 		StepCountScriptManager.reset();
+        inCombat = false;
 	}
 
     public static int retreatedFromIndex = -1;

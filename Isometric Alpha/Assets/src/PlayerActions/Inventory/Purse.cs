@@ -58,6 +58,17 @@ public static class Purse
 		coins = newCoinsInPurse;
 	}
 
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        setCoinsInPurse(blueprint.gold);
+    }
+
 	public static Story addCoinsToStory(Story story)
 	{
         if (story.variablesState["coins"] != null)

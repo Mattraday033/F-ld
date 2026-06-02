@@ -85,7 +85,10 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
 
         grid[coords] = newStats;
 
-        OnFormationChange.Invoke();
+        if(!LoadSaveFile.midLoad)
+        {
+            OnFormationChange.Invoke();
+        }
     }
 
     public void removeCharacterAtCoords(int row, int col)
@@ -156,6 +159,9 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
             State.formation.isInParty(partyMember))
         {
             return State.formation.grid.FirstOrDefault(x => x.Value.Equals(partyMember)).Key;
+        } else if(partyMember.getName().Contains(PartyManager.playerMarker))
+        {
+            return new GridCoords(AllyStats.defaultStartingRow, AllyStats.defaultStartingCol);
         }
 
         return new GridCoords(-1, -1);

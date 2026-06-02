@@ -5,8 +5,8 @@ using UnityEngine;
 public static class StepCountScriptManager
 {
 
-    public static int stepCount = 0;
-    public static List<StepCountScript> stepCountScripts = new List<StepCountScript>();
+    public static int stepCount;
+    public static List<StepCountScript> stepCountScripts;
 
     public static void addStepCountScript(StepCountScript script)
     {
@@ -59,6 +59,15 @@ public static class StepCountScriptManager
     private static void resetStepCounter()
     {
         stepCount = 0;
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        stepCount = 0;
+        stepCountScripts = new List<StepCountScript>();
+        
+        LoadSaveFile.OnLoadResetData.AddListener(resetStepCounter);
     }
 
 }

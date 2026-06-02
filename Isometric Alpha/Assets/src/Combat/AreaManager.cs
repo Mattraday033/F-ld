@@ -38,8 +38,16 @@ public class AreaManager : MonoBehaviour
         locationName = null;
         instance = null;
         saveBlueprint = null;
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+        
     }
 
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        locationName = blueprint.currentLocation;
+        saveBlueprint = blueprint;
+    }
+    
     public static AreaManager getInstance()
     {
         return instance;
@@ -52,9 +60,15 @@ public class AreaManager : MonoBehaviour
         instance.Awake();
     }
 
-    private void Awake()
+    public void Awake()
     {
         instance = this;
+
+        if(LoadSaveFile.beforeSecondStageLoad)
+        {
+            return;
+        }
+
         notificationManager.Awake();
         
         foreach(HeartBeatManager heartBeatManager in heartBeatManagers)

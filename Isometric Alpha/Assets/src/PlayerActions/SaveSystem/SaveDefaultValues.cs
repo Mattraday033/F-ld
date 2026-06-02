@@ -33,7 +33,7 @@ public static class SaveDefaultValues
     public const string defaultCurrentFlags = "{\"newGame\": true}";
 
     public readonly static SkillType defaultSkillType = SkillType.Intimidate;
-    public readonly static float[] defaultPlayerPosition = new float[] { 3.46f, -1.48f, 0.5f };
+    public readonly static Vector3Int defaultPlayerCell = new Vector3Int(7,1,0);
     public readonly static string[] defaultEmptyStringArray = new string[0];
     public readonly static int[] defaultEmptyIntArray = new int[0];
     public readonly static bool[] defaultEmptyBoolArray = new bool[0];

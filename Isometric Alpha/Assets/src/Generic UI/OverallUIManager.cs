@@ -92,6 +92,11 @@ public static class OverallUIManager
         return currentScreenManager.getExitKeyCode();
     }
 
+    public static void removeCurrentScreenType()
+    {
+        setCurrentScreenType(null);
+    }
+
     public static void setCurrentScreenType(ScreenManager screenManager)
     {
         currentScreenManager = screenManager;
@@ -270,5 +275,12 @@ public static class OverallUIManager
         }
 
         return currentPartyMember.getEquippedItems();
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        LoadSaveFile.OnLoadResetData.AddListener(removeCurrentScreenType);
+        LoadSaveFile.OnLoadResetData.AddListener(resetScreenStates);
     }
 }

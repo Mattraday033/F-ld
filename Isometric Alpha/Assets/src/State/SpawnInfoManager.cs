@@ -17,6 +17,12 @@ public static class SpawnInfoManager
         allSpawnedObjects = null;
         AreaManager.OnAreaSpawn.AddListener(spawnDetails);
         SecretDoorFlags.OnSecretDoorDiscovery.AddListener(spawnHiddenTerrain);
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        lastSaveBlueprint = blueprint;
     }
 
     public static Vector3Int getDefaultCell()
@@ -131,8 +137,7 @@ public static class SpawnInfoManager
 
         if (AreaManager.saveBlueprint != null)
         {
-            float[] savePos = AreaManager.saveBlueprint.playerPosition;
-            player.position = new Vector3(savePos[0], savePos[1]);
+            player.position = AreaManager.getMasterGrid().GetCellCenterWorld(AreaManager.saveBlueprint.playerCell);
             AreaManager.saveBlueprint = null;
         }
         else

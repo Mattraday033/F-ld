@@ -38,7 +38,7 @@ public class OpeningMonologueManager : MonoBehaviour
 
         if(KeyBindingList.continueUIKeyIsPressed() || KeyBindingList.settingsScreenOrBackKeyPressed())
         {
-            SceneChange.changeSceneToLoadingScreen();
+            SceneChange.changeSceneToOverworldWithLoadingScreen();
             return;
         } 
 

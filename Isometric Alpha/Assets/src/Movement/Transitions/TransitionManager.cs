@@ -34,6 +34,13 @@ public class TransitionManager : MonoBehaviour
         fadeToBlackOnTransition = false;
         currentCoroutine = null;
         currentTransitions = new List<Transition>();
+
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        ChangeAreaMusic.Invoke(blueprint.currentLocation);
     }
 
     private void Awake()

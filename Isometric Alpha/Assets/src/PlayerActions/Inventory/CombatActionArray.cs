@@ -152,7 +152,7 @@ public class CombatActionArray : StatBoostSourceCombiner
             // EquippedItems.OnEquipmentChange.Invoke();
         }
 
-        if(!Flags.isInNewGameMode() &&
+        if(!Flags.isInNewGameMode() && !LoadSaveFile.midLoad && 
             PlayerOOCStateManager.currentActivity == OOCActivity.inUI)
         {
             combatActions[slotIndex].playUnequipSFX();
@@ -160,8 +160,11 @@ public class CombatActionArray : StatBoostSourceCombiner
 
         combatActions[slotIndex] = null;
 
-        MouseHoverManager.OnHoverPanelCreation.Invoke();
-        OnCombatActionArrayChange.Invoke();
+        if(!LoadSaveFile.midLoad)
+        {
+            MouseHoverManager.OnHoverPanelCreation.Invoke();
+            OnCombatActionArrayChange.Invoke();
+        }
     }
 
     public void unequipAllActions()
@@ -267,15 +270,18 @@ public class CombatActionArray : StatBoostSourceCombiner
             combatActions[slotIndex] = null;
         }
 
-        if(!Flags.isInNewGameMode() &&
-            PlayerOOCStateManager.currentActivity == OOCActivity.inUI && 
-            OverallUIManager.lastScreenType != ScreenType.SaveAndLoad)
+        if(!LoadSaveFile.midLoad)
         {
-            newCombatAction.playEquipSFX();
-        }
+            if(!Flags.isInNewGameMode() &&
+                PlayerOOCStateManager.currentActivity == OOCActivity.inUI && 
+                OverallUIManager.lastScreenType != ScreenType.SaveAndLoad)
+            {
+                newCombatAction.playEquipSFX();
+            }
 
-        MouseHoverManager.OnHoverPanelCreation.Invoke();
-        OnCombatActionArrayChange.Invoke();
+            MouseHoverManager.OnHoverPanelCreation.Invoke();
+            OnCombatActionArrayChange.Invoke();
+        }
     }
 
     public bool hasAvailableSlots(CombatAction newAction)

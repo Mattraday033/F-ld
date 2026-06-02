@@ -44,7 +44,20 @@ public static class State
 
 	public static EnemyPackInfo enemyPackInfo;
     public static AllyPackInfo allyPackInfo;
-	public static CharacterFacing playerFacing;
+	private static CharacterFacing _PlayerFacing;
+
+    public static CharacterFacing playerFacing
+    {
+        get
+        {
+            return _PlayerFacing;
+        }
+        set
+        {
+            _PlayerFacing = value;
+        }
+    }
+
 	public static bool onLeftFoot;
 
 	public static Dictionary<string, List<string>> allKnownMapData = new Dictionary<string, List<string>>();
@@ -56,4 +69,35 @@ public static class State
 	{
 		return dialogueUponSceneLoadKey != null && dialogueUponSceneLoadKey.Length > 0;
 	}
+
+    private static void resetStateOnLoad()
+    {
+        dialogueUponSceneLoadKey = null;
+        playerFacing = new CharacterFacing();
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        playerFacing.setFacing((Facing) blueprint.playerFacing);
+        terrainHidden = blueprint.terrainHidden;
+
+        inventory = SaveBlueprint.extractInventoryItemsFromJson(blueprint.currentInventory);
+        junkPocket = SaveBlueprint.extractInventoryItemsFromJson(blueprint.currentJunk);
+
+        allKnownMapData = blueprint.extractAllKnownMapDataFromJson();
+
+        playerPortraitName = blueprint.playerPortraitName;
+        playerSpriteName = blueprint.playerSpriteName;
+
+        formation = new Formation();
+        formation.implementGridFromCoordSet(blueprint.partyMemberStats);
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        LoadSaveFile.OnLoadResetData.AddListener(resetStateOnLoad);
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+    }
+
 }

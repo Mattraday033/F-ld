@@ -443,6 +443,9 @@ WallPatchTall
 
 public static class MapTileSpriteList
 {
+    public const string fastTravelIndicatorSprite = "Fast Travel Indicator";
+    public const string fastTravelBlockedSprite = "Fast Travel Blocked";
+
     public const string mapTilesFolder = PrefabNames.tilesFolder + "MapTiles/";
 
     public const string manMadeFolder = mapTilesFolder + "manmade/";

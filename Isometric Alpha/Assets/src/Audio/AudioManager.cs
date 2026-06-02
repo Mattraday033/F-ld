@@ -247,9 +247,7 @@ public class AudioManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if(mode == LoadSceneMode.Additive ||
-            scene.name.Equals(SceneNameList.loadingScreen) || 
-            scene.name.Equals(SceneNameList.endOfDemo) || 
-            scene.name.Equals(SceneNameList.openingMonologue))
+            LoadSaveFile.midLoad)
         {
             return;
         }
@@ -371,7 +369,8 @@ public class AudioManager : MonoBehaviour
 
     public static void playFootStep(int row)
     {
-        if(AreaManager.locationName == null || 
+        if(LoadSaveFile.midLoad || 
+            AreaManager.locationName == null || 
             AreaManager.locationName.Length <= 0 || 
             LoadingBarProgressTracker.loadingInProgress() ||
              CombatStateManager.inCombat || 

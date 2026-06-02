@@ -165,7 +165,8 @@ public class NotificationManager : MonoBehaviour
         ManualNotificationSpawn.AddListener(startSpawningNotifications);
         AreaManager.OnAreaSpawn.AddListener(spawnNotificationsOnAreaChange);
 
-        LoadSaveFile.OnLoad.AddListener(resetPreviousLocation);
+        LoadSaveFile.OnLoadResetData.AddListener(purgeNotifications);
+        LoadSaveFile.OnLoadResetData.AddListener(resetPreviousLocation);
 
         notificationQueue = new List<IDescribable>();
         

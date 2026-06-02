@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class BackgroundManager : MonoBehaviour
 {
+    private static BackgroundManager instance;
 
 	public List<Tilemap> backgroundTilemaps = new List<Tilemap>();
     private int currentBGPrefabIndex = 1;
@@ -22,9 +23,24 @@ public class BackgroundManager : MonoBehaviour
 
     private List<List<Tilemap>> tilemapPrefabs = new List<List<Tilemap>>();
 
-    private void Start()
+    private void Awake()
     {
+        instance = this;
+    }
+
+    public void Start()
+    {
+        if(LoadSaveFile.beforeSecondStageLoad)
+        {
+            return;
+        }        
+
         buildBackground();
+    }
+
+    public static BackgroundManager getInstance()
+    {
+        return instance;
     }
 
     private void buildBackground()
@@ -182,6 +198,12 @@ public class BackgroundManager : MonoBehaviour
             default:
                 return zoneKey;
         }
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        instance = null;
     }
 
 }

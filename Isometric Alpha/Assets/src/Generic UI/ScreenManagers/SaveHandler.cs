@@ -265,7 +265,7 @@ public class SaveHandler : ScreenManager, IEscapable
         Vector3 position = AreaManager.getMasterGrid().GetCellCenterWorld(cellCoords);
 		SaveBlueprint blueprint = SaveBlueprint.build(determineCurrentAutosaveName(), saveNumber);
 
-		blueprint.playerPosition = new float[] { position.x, position.y, position.z};
+		blueprint.playerCell = MovementManager.getPlayerCell();
         blueprint.playerFacing = (int) facing;
 
         createSave(blueprint);
@@ -452,6 +452,11 @@ public class SaveHandler : ScreenManager, IEscapable
         }
     }
 
+	public static void createSavedGameListSkipInvoke()
+	{
+        createSavedGameList(true);
+    }
+
 	public static void createSavedGameList(bool skipInvokeCall = false) //side effect: will update all saveblueprint.saveName's
 	{
         moveSaveFilesToSaveFolder();
@@ -575,11 +580,16 @@ public class SaveHandler : ScreenManager, IEscapable
     }
 
     [RuntimeInitializeOnLoadMethod]
-    private static void initializeSaveHandler()
+    private static void init()
     {
         if(!Directory.Exists(PrefabNames.savesFolder))
         {
             Directory.CreateDirectory(PrefabNames.savesFolder);
         }
+
+        saveGameList = new Dictionary<string, SaveBlueprint>();
+        instance = null;
+
+        LoadSaveFile.OnLoadResetData.AddListener(createSavedGameListSkipInvoke);
     }
 }

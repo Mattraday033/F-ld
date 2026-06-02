@@ -59,5 +59,15 @@ public static class DeathFlagManager
 
 		return story;
 	}
-	
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        resetAllDeadNpcs(blueprint.extractListOfStringsFromJson(blueprint.currentDeathFlags));
+    }
 }

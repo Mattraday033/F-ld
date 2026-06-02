@@ -79,7 +79,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     private void updateIdleAnimation(int rowToUpdate)
     {
-        if(linkedStats != null && linkedStats.isDead())
+        if(linkedStats != null && linkedStats.isDead() || LoadSaveFile.midLoad)
         {
             return;
         }

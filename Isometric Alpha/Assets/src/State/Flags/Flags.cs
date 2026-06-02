@@ -98,14 +98,12 @@ public static class Flags
 
 	public static string getFlagsForSave()
 	{
-
 		return JsonConvert.SerializeObject(flags, Formatting.Indented);
-
 	}
 
 	public static bool isInNewGameMode()
 	{
-		return flags[FlagNameList.newGameFlagName];
+		return getFlag(FlagNameList.newGameFlagName);
 	}
 
 	public static void exitNewGameMode()
@@ -135,25 +133,33 @@ public static class Flags
 		}
 	}
 	
-	public static void setStatTutorialFlag() //only use when starting new game
+	public static string getStatTutorialFlag(AllyStats playerStats) //only use when starting new game
     {
-        PrimaryStat chosenStat = PartyManager.getPlayerStats().getHighestPrimaryStats()[0];
+        PrimaryStat chosenStat = playerStats.getHighestPrimaryStats()[0];
 
         switch (chosenStat)
         {
             case PrimaryStat.Strength:
-		        Flags.flags["choseStrengthAtStart"] = true;
-                return;
+                return "choseStrengthAtStart";
             case PrimaryStat.Dexterity:
-            	Flags.flags["choseDexterityAtStart"] = true;
-                return;
+                return "choseDexterityAtStart";
             case PrimaryStat.Wisdom:
-                Flags.flags["choseWisdomAtStart"] = true;
-                return;
-            case PrimaryStat.Charisma:
-                Flags.flags["choseCharismaAtStart"] = true;
-                return;
+                return "choseWisdomAtStart";
+            default:
+                return "choseCharismaAtStart";
         }
+    }
+
+    private static void readSaveBlueprint(SaveBlueprint blueprint)
+    {
+        overwriteFlags(blueprint.currentFlags);
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        LoadSaveFile.OnLoadResetData.AddListener(resetAllFlags);
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
     }
 
 }

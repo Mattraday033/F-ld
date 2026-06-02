@@ -233,12 +233,12 @@ public static class IdleDictionary
     }
 
     [RuntimeInitializeOnLoadMethod]
-    private static void instantiateIdleDictionary()
+    private static void init()
     {
         idleDict = new Dictionary<KeyValuePair<string, CharacterAnimationType>, Sprite[]>();
 
         CombatStateManager.OnCombatStart.AddListener(purgeIdleDictionary);
-        LoadSaveFile.OnLoad.AddListener(purgeIdleDictionary);
+        LoadSaveFile.OnLoadResetData.AddListener(purgeIdleDictionary);
     }
 
     private static void purgeIdleDictionary()

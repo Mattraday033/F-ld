@@ -39,11 +39,27 @@ public class FadeToBlackManager : MonoBehaviour
         }
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
     }    
     
+    private void OnSceneUnloaded(Scene scene)
+    {
+        if(!scene.name.Equals(SceneNameList.loadingScreen))
+        {
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+        instance = this;
+
+        setCameras();
+
+        startOnSceneLoadOOCFade();
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(mode == LoadSceneMode.Additive || scene.name.Equals(SceneNameList.openingMonologue))
+        if(mode == LoadSceneMode.Additive || LoadSaveFile.midLoad)
         {
             return;
         }
@@ -59,14 +75,19 @@ public class FadeToBlackManager : MonoBehaviour
             createFade(new CircleTransitionReduce(mainCamera.transform, OOCActivity.walking));
         } else
         {
-            if(PlayerOOCStateManager.currentActivity == OOCActivity.walking && !Flags.isInNewGameMode())
-            {
-                PlayerOOCStateManager.setCurrentActivity(OOCActivity.inFade);
-            }
-
-            setToMaxOpacity();
-            StartCoroutine(waitTwoFramesThenStartFadeBackIn(new FadeBackInTransition()));
+            startOnSceneLoadOOCFade();
         }        
+    }
+
+    public void startOnSceneLoadOOCFade()
+    {
+        if(PlayerOOCStateManager.currentActivity == OOCActivity.walking && !Flags.isInNewGameMode())
+        {
+            PlayerOOCStateManager.setCurrentActivity(OOCActivity.inFade);
+        }
+
+        setToMaxOpacity();
+        StartCoroutine(waitTwoFramesThenStartFadeBackIn(new FadeBackInTransition()));
     }
 
     private IEnumerator waitTwoFramesThenStartFadeBackIn(ScreenFade fade)
@@ -85,6 +106,7 @@ public class FadeToBlackManager : MonoBehaviour
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
     }
 
 	public static FadeToBlackManager getInstance()
