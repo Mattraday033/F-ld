@@ -1197,6 +1197,9 @@ public class DialogueManager : MonoBehaviour
                         case "snoring":
                             audioClip = AudioClipList.snoringDialogueSFX;
                             break;
+                        case "tunnel_explosion":
+                            audioClip = AudioClipList.tunnelExplosionSFX;
+                            break;
                         default:
                             audioClip = npcSFXArgs;
                             break;

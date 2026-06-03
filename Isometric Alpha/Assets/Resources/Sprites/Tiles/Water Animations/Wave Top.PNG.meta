@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c56daed24cc72e646b0c4a20e6774c58
+guid: a90be69346d4e584c93cb01c14f669ae
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,85 +97,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_5175_0
+      name: Wave Top_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 150
+        width: 142
         height: 83
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.53, y: 0.52}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3df7326e6524344dacb358f2b5b9c62
-      internalID: 1273210201
+      spriteID: 0b2e1c532d36e0d46a48179d04e48b75
+      internalID: -2130306516
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_5175_1
+      name: Wave Top_1
       rect:
         serializedVersion: 2
         x: 150
         y: 0
-        width: 150
+        width: 142
         height: 83
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.53, y: 0.52}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1418ef94d18ed9a44a4e65187db8fc3b
-      internalID: -224437133
+      spriteID: 18870639633d0ea46bfa061156f3eddb
+      internalID: -845492272
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_5175_2
+      name: Wave Top_2
       rect:
         serializedVersion: 2
         x: 300
         y: 0
-        width: 150
+        width: 142
         height: 83
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.53, y: 0.52}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebef7780f61d9b6498d2c259d7ce6989
-      internalID: -27002255
+      spriteID: 8224f7506ac83e24dbece97fe1fc6759
+      internalID: -1887389711
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_5175_3
+      name: Wave Top_3
       rect:
         serializedVersion: 2
         x: 450
         y: 0
-        width: 150
+        width: 142
         height: 83
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.53, y: 0.52}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57b6bd22eaef727429923e5e8295f5c1
-      internalID: -1181653019
+      spriteID: 25f5954cf65c6b54785f0246d21519ae
+      internalID: 744720355
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      IMG_5175_0: 1273210201
-      IMG_5175_1: -224437133
-      IMG_5175_2: -27002255
-      IMG_5175_3: -1181653019
+      Wave Top_0: -2130306516
+      Wave Top_1: -845492272
+      Wave Top_2: -1887389711
+      Wave Top_3: 744720355
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

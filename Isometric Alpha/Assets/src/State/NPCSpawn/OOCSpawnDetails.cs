@@ -1214,12 +1214,12 @@ public class NPCOffGridSpawnDetails : NPCSpawnDetails
     }
 
     public NPCOffGridSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName, bool flipX, float offset, bool withScale = true) :
-    base(npcName, cellCoords, areaName, spriteName, flipX: flipX, offset :offset, withScale: withScale)
+    base(npcName, cellCoords, areaName, spriteName, flipX: flipX, offset: offset, withScale: withScale)
     {
     }
 
-    public NPCOffGridSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName, Vector3Int[] extraSpaces, bool withScale = true) :
-    base(npcName, cellCoords, areaName, spriteName, extraSpaces: extraSpaces, withScale: withScale)
+    public NPCOffGridSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName, Vector3Int[] extraSpaces, bool withScale = true, float offset = 0f) :
+    base(npcName, cellCoords, areaName, spriteName, extraSpaces: extraSpaces, withScale: withScale, offset: offset)
     {
     }
 }

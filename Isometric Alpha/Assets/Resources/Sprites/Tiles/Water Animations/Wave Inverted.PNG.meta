@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5033daabca84fcc4cb45f52d453eeade
+guid: 4acdbca7cba9bd44186f335ce77293a7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 0
   alignment: 9
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -95,7 +95,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Wave Inverted_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 142
+        height: 83
+      alignment: 9
+      pivot: {x: 0.51, y: 0.52}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a66bb9874234c34588d1b5cc03ad281
+      internalID: 797292482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wave Inverted_1
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 142
+        height: 83
+      alignment: 9
+      pivot: {x: 0.51, y: 0.52}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c0f41c1b0d4a564db627d774dbd9983
+      internalID: 1878775961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wave Inverted_2
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 142
+        height: 83
+      alignment: 9
+      pivot: {x: 0.51, y: 0.52}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb90240d6f92a3841bc8acfc3e97687a
+      internalID: -1483738940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wave Inverted_3
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 0
+        width: 142
+        height: 83
+      alignment: 9
+      pivot: {x: 0.51, y: 0.52}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03a065790efb1424ab45643ad922f181
+      internalID: -676247937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -106,7 +190,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Wave Inverted_0: 797292482
+      Wave Inverted_1: 1878775961
+      Wave Inverted_2: -1483738940
+      Wave Inverted_3: -676247937
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

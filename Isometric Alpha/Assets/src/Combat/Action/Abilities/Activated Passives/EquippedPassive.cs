@@ -109,6 +109,11 @@ public class EquippedPassive : Ability
 
 	public override string getUseDescription()
     {
+        if(getAppliedTrait() == null)
+        {
+            Debug.LogError("Null applied Trait in Equipped Passive: " + getName());
+        }
+
         return "Applies the " + getAppliedTrait().getName() + " Trait at the start of Combat to whoever equips this Ability to their Action Wheel.";
     }
 

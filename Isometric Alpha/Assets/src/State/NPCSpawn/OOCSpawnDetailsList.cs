@@ -555,19 +555,23 @@ public static class OOCSpawnDetailsList
 
         list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campSouthEast, Constants.indexZero));
 
+
+        float statueOffset = -.1f;
         list.Add(new NPCOffGridSpawnDetails(NPCNameList.statue, new Vector3Int(7, 3), LocationNameList.campSouthEast, PrefabNames.directorStatuePath, 
                                     new Vector3Int[] { 
                                                         new Vector3Int(7, 4),
                                                         new Vector3Int(8, 4),
                                                         new Vector3Int(8, 3)
-                                                     }));
+                                                     },
+                                                    offset: statueOffset));
 
         list.Add(new NPCOffGridSpawnDetails(NPCNameList.toppledStatue, new Vector3Int(7, 3), LocationNameList.campSouthEast, PrefabNames.brokenDirectorStatuePath, 
                                     new Vector3Int[] { 
                                                         new Vector3Int(7, 4),
                                                         new Vector3Int(8, 4),
                                                         new Vector3Int(8, 3)
-                                                     }));
+                                                     },
+                                                    offset: statueOffset));
 
         list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(2, 1), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));
         list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(1, 1), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero));

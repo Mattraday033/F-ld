@@ -375,7 +375,7 @@ I said back up against the walls, slaves, or I'm keeping your rations for myself
 
 === 4c ===
 
-He'll play crazy. Happens to some slaves, the guards won't bat an eye. Easy for him to play the part too, he's halfway there anyway. It's the only way he can seem uninvolved. Now get back, they're coming in.
+He'll play crazy. Happens to some slaves, the guards won't bat an eye. Easy for him to play the part too, he's halfway there anyway. It's the only way he can seem uninvolved. Now get ready, they're coming in.
 
 ->4b
 

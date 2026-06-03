@@ -155,6 +155,8 @@ fadeToBlack(true, false)
 
 addSecretDoorFlag({sealedPocketRubbleFlagName})
 
+playDelayedSFX(Tunnel_Explosion, 200)
+
 moveToPos(-7,4)
 
 {
@@ -189,6 +191,8 @@ activate({weftIndex})
         activate({marcosIndex})
     }
 }
+
+wait(4.5)
 
 fadeBackIn(60)
 

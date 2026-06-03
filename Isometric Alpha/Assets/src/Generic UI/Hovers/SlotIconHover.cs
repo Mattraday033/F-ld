@@ -468,6 +468,17 @@ public static class HoverMessageList
     private const string wisdomMessage = "This Primary Stat bolsters a character's Mental Resistance. Wisdom also provides bonus Passive Slots, increases the number of Weapons you can have equipped, and governs the Observation Skill.";
     private const string charismaMessage = "This Primary Stat increases your Synergy, gives access to Exuberances, and boosts a character's Zone of Influence. Charisma also governs the Leadership Skill.";
 
+    private const string tabSuffix = " Tab";
+    private const string strengthTabKey = IconList.strengthIconName + tabSuffix;
+    private const string dexterityTabKey = IconList.dexterityIconName + tabSuffix;
+    private const string wisdomTabKey = IconList.wisdomIconName + tabSuffix;
+    private const string charismaTabKey = IconList.charismaIconName + tabSuffix;
+    private const string strengthTabMessage = "Here you can see all Abilities a Character can learn by raising the Strength Stat when gaining a Level. Strength Abilities tend to be larger, flashier, and deal their damage on impact, rather than over time.";
+    private const string dexterityTabMessage = "Here you can see all Abilities a Character can learn by raising the Dexterity Stat when gaining a Level. Dexterity Abilities tend to be more selective with who they target, and provide debilitating effects along with their damage.";
+    private const string wisdomTabMessage = "Here you can see all Abilities a Character can learn by raising the Wisdom Stat when gaining a Level. Wisdom Abilities tend to be more tactically oriented, and can bolster your Party Members or hinder your enemies in equal measure.\n\nMost Wisdom Abilities require Stance Stacks to activate.";
+    private const string charismaTabMessage = "Here you can see all Abilities a Character can learn by raising the Charisma Stat when gaining a Level. Charisma Abilities tend to be more supportive in nature, healing Party Members or encouraging them to fight harder.\n\nMost Charisma Abilities require one or more Exuberances to activate.";
+
+
     private const string usableItemInventoryTabMessage = "Usable Items Tab.";
     private const string usableItemOOCSubMessage = " Usable Items that can be activated out of combat can be found here." + howToUseItemMessage;
     private const string howToUseItemMessage = " <B>To Use a Usable Item, drag the Item onto the Party Member you want to use it on while on the Inventory Screen.</B>";
@@ -753,6 +764,15 @@ public static class HoverMessageList
             case IconList.charismaIconName:
             case Charisma.symbolChar:
                 return charismaMessage;
+
+            case strengthTabKey:
+                return strengthTabMessage;
+            case dexterityTabKey:
+                return dexterityTabMessage;
+            case wisdomTabKey:
+                return wisdomTabMessage;
+            case charismaTabKey:
+                return charismaTabMessage;
 
             case compassKey:
                 return compassKey;

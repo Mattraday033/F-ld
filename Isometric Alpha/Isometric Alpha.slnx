@@ -37,6 +37,7 @@
   <Project Path="Unity.ProjectAuditor.Editor.Utils.csproj" />
   <Project Path="com.unity.cinemachine.editor.csproj" />
   <Project Path="PPv2URPConverters.csproj" />
+  <Project Path="Unity.2D.Tilemap.Extras.Editor.csproj" />
   <Project Path="Unity.ProjectAuditor.Editor.UI.Framework.csproj" />
   <Project Path="Unity.InternalAPIEditorBridge.001.csproj" />
   <Project Path="Kybernetik.Animancer.Editor.csproj" />
@@ -47,6 +48,7 @@
   <Project Path="Unity.2D.Animation.Runtime.csproj" />
   <Project Path="Unity.Burst.CodeGen.csproj" />
   <Project Path="Unity.RenderPipeline.Universal.ShaderLibrary.csproj" />
+  <Project Path="Unity.2D.Tilemap.Extras.csproj" />
   <Project Path="Unity.TextMeshPro.csproj" />
   <Project Path="InkEditor.csproj" />
   <Project Path="Kybernetik.Animancer.FSM.csproj" />

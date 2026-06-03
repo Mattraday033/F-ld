@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class PartyMemberSpritePanel : DescriptionPanel, ICounter
 {
+    public PartySpriteGridRow partySpriteGridRow;
+
     public GameObject newPartyMemberText;
     public GameObject levelUpSymbol;
     public AbilityMenuManagerWithPassives abilityMenuManager;
@@ -75,13 +77,28 @@ public class PartyMemberSpritePanel : DescriptionPanel, ICounter
             ScreenManager.currentPartyMember = partyMember.stats;
         } 
         
+        iconPanel.sprite = partyMember.stats.getSpriteIcon();
+        iconPanel.color = Color.white;
+
         if(ScreenManager.currentPartyMember.Equals(partyMember.stats))
         {
             partyMemberSpriteButton.onClick.Invoke();
             partyMemberSpriteButton.interactable = false;
+
+            if(partySpriteGridRow != null && 
+                partySpriteGridRow.imageOutline != null)
+            {
+                partySpriteGridRow.imageOutline.createOutline(ColorList.canBeInteractedWith);
+            }
         } else
         {
             partyMemberSpriteButton.interactable = true;
+
+            if(partySpriteGridRow != null && 
+                partySpriteGridRow.imageOutline != null)
+            {
+                partySpriteGridRow.imageOutline.removeOutline();
+            }
         }
 
         // if (iconPanel != null && !(iconPanel is null))
@@ -106,9 +123,6 @@ public class PartyMemberSpritePanel : DescriptionPanel, ICounter
             zoneOfInfluenceIcon.setObjectBeingDescribed(partyMember.stats.getZoneOfInfluenceTrait());
             partyMember.stats.getZoneOfInfluenceTrait().describeSelfFull(zoneOfInfluenceIcon);
         }
-
-        iconPanel.sprite = partyMember.stats.getSpriteIcon();
-        iconPanel.color = Color.white;
 
         updateCounter();
     }

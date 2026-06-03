@@ -16,6 +16,9 @@ public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSour
 
     public ImageOutline imageOutline;
 
+    private const float outlinePulseDuration = 2f;
+    private Coroutine outlinePulseCoroutine;
+
     public readonly static UnityEvent OnPartyMemberSelected = new UnityEvent();
 
     private void Awake()
@@ -28,11 +31,13 @@ public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSour
     private void OnEnable()
     {
         PartyGridSection.OnPortraitHover.AddListener(handlePortraitHover);
+        OnPartyMemberSelected.AddListener(removeOutlineOnPartyMemberSelection);
     }
 
     private void OnDestroy()
     {
         PartyGridSection.OnPortraitHover.RemoveListener(handlePortraitHover);
+        OnPartyMemberSelected.RemoveListener(removeOutlineOnPartyMemberSelection);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -65,6 +70,11 @@ public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSour
         ScreenManager.currentPartyMember = Stats.convertIDescribableToStats(getObjectBeingDescribed());
 
         OnPartyMemberSelected.Invoke();
+
+        if(imageOutline != null)
+        {
+            imageOutline.createOutline(ColorList.canBeInteractedWith);
+        }
     }
 
     public override void spawnHoverIcon()
@@ -76,17 +86,73 @@ public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSour
     {
         if(!highlight)
         {
+            stopOutlinePulse();
             imageOutline.removeOutline();
+
+            if(ScreenManager.currentPartyMember != null && 
+                ScreenManager.currentPartyMember.getName().Equals(descriptionPanel.getObjectBeingDescribed().getName()))
+            {
+                imageOutline.createOutline(ColorList.canBeInteractedWith);
+            } 
             return;
         }
 
         if(descriptionPanel.getObjectBeingDescribed().getName().Equals(allyName))
         {
             imageOutline.createOutline(ColorList.canBeInteractedWith);
-        } else
+            startOutlinePulse();
+        } 
+        // else 
+        // {
+        //     stopOutlinePulse();
+        //     imageOutline.removeOutline();
+        // }
+    }
+
+    private void startOutlinePulse()
+    {
+        stopOutlinePulse();
+        outlinePulseCoroutine = StartCoroutine(pulseOutline());
+    }
+
+    private void stopOutlinePulse()
+    {
+        if(outlinePulseCoroutine != null)
         {
-            imageOutline.removeOutline();
+            StopCoroutine(outlinePulseCoroutine);
+            outlinePulseCoroutine = null;
         }
+    }
+
+    private IEnumerator pulseOutline()
+    {
+        float halfDuration = outlinePulseDuration / 2f;
+
+        imageOutline.setOpacity(1f);
+
+        while(true)
+        {
+            float elapsed = 0f;
+            while(elapsed < halfDuration)
+            {
+                elapsed += Time.deltaTime;
+                imageOutline.setOpacity(Mathf.Lerp(1f, 0f, elapsed / halfDuration));
+                yield return null;
+            }
+
+            elapsed = 0f;
+            while(elapsed < halfDuration)
+            {
+                elapsed += Time.deltaTime;
+                imageOutline.setOpacity(Mathf.Lerp(0f, 1f, elapsed / halfDuration));
+                yield return null;
+            }
+        }
+    }
+
+    private void removeOutlineOnPartyMemberSelection()
+    {
+        imageOutline.removeOutline();
     }
 
 }

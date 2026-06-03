@@ -171,7 +171,6 @@ public class ImageOutline
 
         image.material = outlineMaterial;
 
-
         try
         {
             
@@ -181,10 +180,34 @@ public class ImageOutline
             float sizeMod = 4f; //amount of pixels
 
             setMaterialOutlineSize(image.material, sizeMod/width, sizeMod/height);
+            setOpacityToMax();
         } catch(Exception e)
         {
             Debug.LogError("Caught exception null sprite");
         }
+    }
+
+    public void setOpacityToMax()
+    {
+        setOpacity(1f);
+    }
+
+    public void setOpacity(float alpha)
+    {
+        if(image == null)
+        {
+            return;
+        }
+
+        Color color = outlineMaterial.color;
+        color.a = alpha;
+        outlineMaterial.color = color;
+
+        Color borderColor = outlineMaterial.GetColor(blackBorderColorVarName);
+        borderColor.a = alpha;
+        outlineMaterial.SetColor(blackBorderColorVarName, borderColor);
+
+        image.material = outlineMaterial;
     }
 
     private static void setMaterialOutlineSize(Material material, float sizeX, float sizeY)
@@ -206,7 +229,7 @@ public class ImageOutline
 
         outlineMaterial.color = Color.clear;
         outlineMaterial.SetColor(blackBorderColorVarName, Color.clear);
-        
+
         image.material = outlineMaterial;
     }
 
