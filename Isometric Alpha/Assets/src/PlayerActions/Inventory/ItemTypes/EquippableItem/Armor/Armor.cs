@@ -158,7 +158,7 @@ public abstract class Armor : EquippableItem, IJSONConvertable
 	{
 		base.describeSelfFull(panel);
 
-        DescriptionPanel.setText(panel.armorRatingText, getArmorRating());
+        DescriptionPanel.setText(panel.armorRatingText, getArmorRating() + "%");
         DescriptionPanel.setText(panel.invulnerabilityText, getInvulnerabilityForDisplay());
         DescriptionPanel.setText(panel.slotText, getSlotIDForDisplay());
         DescriptionPanel.setImage(panel.typeIconPanel, Helpers.loadSpriteFromResources(getTypeIconName()));

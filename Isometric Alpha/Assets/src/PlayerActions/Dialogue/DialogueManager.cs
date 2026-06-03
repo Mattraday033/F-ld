@@ -1194,6 +1194,9 @@ public class DialogueManager : MonoBehaviour
                         case "maledeath":
                             audioClip = AudioClipList.maleHumanDeathSound;
                             break;
+                        case "snoring":
+                            audioClip = AudioClipList.snoringDialogueSFX;
+                            break;
                         default:
                             audioClip = npcSFXArgs;
                             break;

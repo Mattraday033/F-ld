@@ -41,7 +41,7 @@ public static class TestScript
 
         // Inventory.addItem(ItemList.getItem(ItemList.usableItemListIndex, ItemList.bandagesIndex, 5));
 
-        // Inventory.addItem(ItemList.getItem(ItemList.treasureItemListIndex, ItemList.smallCoinPurseIndex));
+        Inventory.addItem(ItemList.getItem(ItemList.treasureItemListIndex, ItemList.smallCoinPurseIndex));
 
         // Inventory.addItem(ItemList.getItem(ItemList.weaponsListIndex, ItemList.shivIndex, 2));
         // Inventory.addItem(ItemList.getItem(ItemList.weaponsListIndex, ItemList.cudgelIndex));
@@ -53,7 +53,7 @@ public static class TestScript
 
         // Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.bronzeHelmetIndex));
 
-        // Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.salvagedGuardGlovesIndex));
+        Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.salvagedGuardGlovesIndex));
 
         // Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.clothGlovesIndex));
 

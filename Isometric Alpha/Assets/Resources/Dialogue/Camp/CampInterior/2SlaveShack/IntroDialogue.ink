@@ -23,7 +23,9 @@ VAR laszloVoiceIndex = 4
 VAR gézaSecondLocationIndex = 5
 VAR gézaPlayingCrazyIndex = 6
 
+duckMusic()
 playAnimation({playerIndex},death_back_weaponless)
+playDelayedSFX(snoring,100)
 setNPCFacing({brushIndex},SE)
 stopAllFades()
 disableDialogueUI()

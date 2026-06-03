@@ -970,7 +970,8 @@ public static class AudioClipList
                 {
                     if(AreaManager.locationName.Equals(LocationNameList.slaveShackTwo))
                     {
-                        AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(snoringDialogueSFX), VolumeType.Voice);
+                        return;
+                        // AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(snoringDialogueSFX), VolumeType.Voice);
                     } else
                     {
                         

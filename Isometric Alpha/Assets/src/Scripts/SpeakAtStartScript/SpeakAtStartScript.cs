@@ -19,8 +19,18 @@ public class BeginningConversationScript: SpeakAtStartScript //Brush + Géza in 
     {
         if (!Flags.getFlag(FlagNameList.finishedFirstDialogue))
         {
-            dialogueTrigger.triggerDialogue();
+            dialogueTrigger.StartCoroutine(waitForLoadingScreenFinished());
         }
+    }
+
+    private IEnumerator waitForLoadingScreenFinished()
+    {
+        while(LoadSaveFile.midLoad)
+        {
+            yield return null;
+        }
+
+        dialogueTrigger.triggerDialogue();
     }
 }
 

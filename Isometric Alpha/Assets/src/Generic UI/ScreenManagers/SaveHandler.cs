@@ -262,10 +262,38 @@ public class SaveHandler : ScreenManager, IEscapable
 
         saveNumber *= -1;
 
-        Vector3 position = AreaManager.getMasterGrid().GetCellCenterWorld(cellCoords);
 		SaveBlueprint blueprint = SaveBlueprint.build(determineCurrentAutosaveName(), saveNumber);
 
-		blueprint.playerCell = MovementManager.getPlayerCell();
+        Vector3Int currentTransitionCell = MovementManager.getPlayerCell();
+
+        switch(facing)
+        {
+            case Facing.NorthEast:
+                blueprint.playerCell = new Vector3Int(
+                                                        currentTransitionCell.x-1,
+                                                        currentTransitionCell.y
+                                                    );
+                break;
+            case Facing.NorthWest:
+                blueprint.playerCell = new Vector3Int(
+                                                        currentTransitionCell.x,
+                                                        currentTransitionCell.y-1
+                                                    );
+                break;
+            case Facing.SouthEast:
+                blueprint.playerCell = new Vector3Int(
+                                                        currentTransitionCell.x,
+                                                        currentTransitionCell.y+1
+                                                    );
+                break;
+            default: // SouthWest
+                blueprint.playerCell = new Vector3Int(
+                                                        currentTransitionCell.x+1,
+                                                        currentTransitionCell.y
+                                                    );
+                break;
+        }
+
         blueprint.playerFacing = (int) facing;
 
         createSave(blueprint);

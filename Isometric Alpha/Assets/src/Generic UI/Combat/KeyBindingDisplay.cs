@@ -343,7 +343,7 @@ public class KeyBindingDisplay : MonoBehaviour
 
     private void Awake()
     {
-        if(Flags.isInNewGameMode())
+        if(Flags.isInNewGameMode() && !LoadSaveFile.midLoad)
         {
             gameObject.SetActive(false);
             return;
@@ -443,7 +443,6 @@ public class KeyBindingDisplay : MonoBehaviour
                 break;
         }
     }
-
 
     private void setKeyBindingsDisplayOOC()
     {

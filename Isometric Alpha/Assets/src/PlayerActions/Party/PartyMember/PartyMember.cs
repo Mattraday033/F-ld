@@ -20,7 +20,7 @@ public class PartyMember : IDescribable, IDescribableInBlocks
         {
             _CanJoinParty = value;
             
-            if(!Flags.isInNewGameMode())
+            if(!Flags.isInNewGameMode() && !LoadSaveFile.midLoad)
             {
                 PartyManager.OnPartyChange.Invoke();
                 ScreenManager.currentPartyMember = null;
