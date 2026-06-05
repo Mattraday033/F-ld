@@ -18,22 +18,22 @@ public class AddStatPoint : IDecision
 
     public void execute()
     {
-        string currentStatSymbol = PrimaryStatIncreaseButton.currentButton.getStatSymbol();
+        string currentStatSymbol = PrimaryStatIncreaseButton.currentButton.getStatName();
 
         switch (currentStatSymbol)
         {
-            case Strength.symbolChar:
-                targetStats.incrementStrength();
-                break;
-            case Dexterity.symbolChar:
-                targetStats.incrementDexterity();
-                break;
-            case Wisdom.symbolChar:
-                targetStats.incrementWisdom();
-                break;
-            case Charisma.symbolChar:
-                targetStats.incrementCharisma();
-                break;
+                case IconList.strengthIconName:
+                    targetStats.incrementStrength();
+                    break;
+                case IconList.dexterityIconName:
+                    targetStats.incrementDexterity();
+                    break;
+                case IconList.wisdomIconName:
+                    targetStats.incrementWisdom();
+                    break;
+                case IconList.charismaIconName:
+                    targetStats.incrementCharisma();
+                    break;
         }
 
         targetStats.removeXPFromLevelUpOnce();

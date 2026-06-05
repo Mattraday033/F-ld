@@ -38,12 +38,10 @@ public class ThreeRingButton : Button, IPointerDownHandler, IPointerUpHandler
         setPositionByInteractability();
     }
 
-    public override void OnPointerClick(PointerEventData eventData)
-    {
-        setToPressed();
-
-        base.OnPointerClick(eventData);
-    }
+    // public override void OnPointerClick(PointerEventData eventData)
+    // {
+    //     base.OnPointerClick(eventData);
+    // }
 
     public override void OnPointerDown(PointerEventData eventData)
     {

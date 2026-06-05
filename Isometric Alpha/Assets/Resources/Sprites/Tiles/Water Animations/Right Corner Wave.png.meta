@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Test Wave Right_0
+      name: Right Corner Wave_0
       rect:
         serializedVersion: 2
         x: 0
@@ -105,20 +105,20 @@ TextureImporter:
         width: 148
         height: 164
       alignment: 9
-      pivot: {x: 0.5075, y: 0.445}
+      pivot: {x: 0.5075, y: 0.435}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 436480bad39498043b83a2ff317d09ba
-      internalID: -746993043
+      spriteID: 2250f9705a74cae4bbf082063e861faa
+      internalID: 1978948971
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Test Wave Right_1
+      name: Right Corner Wave_1
       rect:
         serializedVersion: 2
         x: 150
@@ -126,20 +126,20 @@ TextureImporter:
         width: 148
         height: 164
       alignment: 9
-      pivot: {x: 0.5075, y: 0.445}
+      pivot: {x: 0.5075, y: 0.435}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: edb8d9cb5204f1b44a3258cafaf3f8c0
-      internalID: 1508327144
+      spriteID: fae42b0128691d04b9924277f9b9a048
+      internalID: -1037208735
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Test Wave Right_2
+      name: Right Corner Wave_2
       rect:
         serializedVersion: 2
         x: 300
@@ -147,20 +147,20 @@ TextureImporter:
         width: 148
         height: 164
       alignment: 9
-      pivot: {x: 0.5075, y: 0.445}
+      pivot: {x: 0.5075, y: 0.435}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47bff5fdd5aed42409d519ed4b14c1c7
-      internalID: -480016955
+      spriteID: faa254af795151a44b8dde7a266a5a4d
+      internalID: -37861646
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Test Wave Right_3
+      name: Right Corner Wave_3
       rect:
         serializedVersion: 2
         x: 450
@@ -168,14 +168,14 @@ TextureImporter:
         width: 148
         height: 164
       alignment: 9
-      pivot: {x: 0.5075, y: 0.445}
+      pivot: {x: 0.5075, y: 0.435}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 021e2a50edf66584988f21e371d2d577
-      internalID: 1501046708
+      spriteID: 67120433608ecf04d8b22cdd0fab98a4
+      internalID: 1143000673
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Test Wave Right_0: -746993043
-      Test Wave Right_1: 1508327144
-      Test Wave Right_2: -480016955
-      Test Wave Right_3: 1501046708
+      Right Corner Wave_0: 1978948971
+      Right Corner Wave_1: -1037208735
+      Right Corner Wave_2: -37861646
+      Right Corner Wave_3: 1143000673
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -61,6 +61,8 @@ public class StatsDescriptionPanelBuilder : DescriptionPanelBuilder
             {
                 moreInfoNode.SetActive(true);
             }
+
+            revealExtraDescriptionPanels();
         }
     }
 

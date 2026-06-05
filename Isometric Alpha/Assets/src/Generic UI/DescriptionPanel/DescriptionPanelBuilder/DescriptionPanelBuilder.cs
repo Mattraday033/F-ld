@@ -895,4 +895,8 @@ public static class IconList
     //Map Icons
     public const string restPointIcon = "Rest Point";
     public const string shopIcon = "Shop";
+
+    //Hostility Icons
+    public const string flowerIcon = "Flower";
+    public const string hostileSkullIcon = "Skull";
 }

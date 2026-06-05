@@ -876,13 +876,11 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKey(KeyBindingList.showFormulaKey.getCurrentKeyCode()) && !OverallUIManager.showFormula)
         {
             OverallUIManager.showFormula = true;
-            DescriptionPanelBuilder.OnFormulaSwap.Invoke();
             KeyPressManager.handlingPrimaryKeyPress = true;
         }
         else if (!Input.GetKey(KeyBindingList.showFormulaKey.getCurrentKeyCode()) && OverallUIManager.showFormula)
         {
             OverallUIManager.showFormula = false;
-            DescriptionPanelBuilder.OnFormulaSwap.Invoke();
         }
     }
 }

@@ -7,11 +7,21 @@ public enum ScreenType {Character = 1, Inventory = 2, Party = 3, Journal = 4, Sa
 
 public static class OverallUIManager
 {
-    private static GameObject popUpScreenBlockerGameObject;
+    public static bool _ShowFormula;
+    public static bool showFormula
+    {
+        get
+        {
+            return _ShowFormula;
+        } 
+        set
+        {
+            _ShowFormula = value;
+            DescriptionPanelBuilder.OnFormulaSwap.Invoke();
+        }
+    }
 
-    public static bool showFormula = false;
-
-    public static ScreenType lastScreenType = ScreenType.Inventory;
+    public static ScreenType lastScreenType;
     public static ScreenManager currentScreenManager { get; set; }
 
     public static Transform screenBackground; //parent of everything described in a screen manager
@@ -22,11 +32,27 @@ public static class OverallUIManager
     public static LevelUpPopUpButton levelUpPopUpButton { get; private set; }
 
     public static Stats previousPartyMember;
-    public static Dictionary<ScreenType, ScreenState> screenStates = new Dictionary<ScreenType, ScreenState>();
+    public static Dictionary<ScreenType, ScreenState> screenStates;
 
     static OverallUIManager()
     {
         levelUpPopUpButton = new LevelUpPopUpButton();
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        previousPartyMember = null;
+        screenStates = new Dictionary<ScreenType, ScreenState>();
+        screenBackground = null;
+        partyMemberSelectionGrid = null;
+        UIParentPanel = null;
+        notificationParent = null;
+        lastScreenType = ScreenType.Inventory;
+        _ShowFormula = false;
+
+        LoadSaveFile.OnLoadResetData.AddListener(removeCurrentScreenType);
+        LoadSaveFile.OnLoadResetData.AddListener(resetScreenStates);
     }
 
     public static void leaveUI()
@@ -275,12 +301,5 @@ public static class OverallUIManager
         }
 
         return currentPartyMember.getEquippedItems();
-    }
-
-    [RuntimeInitializeOnLoadMethod]
-    private static void init()
-    {
-        LoadSaveFile.OnLoadResetData.AddListener(removeCurrentScreenType);
-        LoadSaveFile.OnLoadResetData.AddListener(resetScreenStates);
     }
 }

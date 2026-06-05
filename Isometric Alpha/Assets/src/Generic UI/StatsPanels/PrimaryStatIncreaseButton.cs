@@ -14,7 +14,7 @@ public class PrimaryStatIncreaseButton : BinaryPanelPopUpButton, IPointerEnterHa
     public static UnityEvent PrimaryStatsIncreaseButtonPressed = new UnityEvent();
 
     public Button button;
-    public TextMeshProUGUI attachedIconText;
+    public Image attachedIcon;
 
     private void Awake()
     {
@@ -55,39 +55,9 @@ public class PrimaryStatIncreaseButton : BinaryPanelPopUpButton, IPointerEnterHa
 
     public string getStatName()
     {
-        if (attachedIconText != null)
+        if (attachedIcon != null && attachedIcon.sprite != null)
         {
-            switch (attachedIconText.text)
-            {
-                case Strength.symbolChar:
-                    return "Strength";
-                case Dexterity.symbolChar:
-                    return "Dexterity";
-                case Wisdom.symbolChar:
-                    return "Wisdom";
-                case Charisma.symbolChar:
-                    return "Charisma";
-            }
-        }
-
-        return noAttachedIconMessage;
-    }
-
-    public string getStatSymbol()
-    {
-        if (attachedIconText != null)
-        {
-            switch (attachedIconText.text)
-            {
-                case Strength.symbolChar:
-                    return Strength.symbolChar;
-                case Dexterity.symbolChar:
-                    return Dexterity.symbolChar;
-                case Wisdom.symbolChar:
-                    return Wisdom.symbolChar;
-                case Charisma.symbolChar:
-                    return Charisma.symbolChar;
-            }
+            return attachedIcon.sprite.name;
         }
 
         return noAttachedIconMessage;
@@ -95,17 +65,17 @@ public class PrimaryStatIncreaseButton : BinaryPanelPopUpButton, IPointerEnterHa
 
     public PrimaryStat getPrimaryPrimaryStat()
     {
-        if (attachedIconText != null)
+        if (attachedIcon != null && attachedIcon.sprite != null)
         {
-            switch (attachedIconText.text)
+            switch (attachedIcon.sprite.name)
             {
-                case Strength.symbolChar:
+                case IconList.strengthIconName:
                     return PrimaryStat.Strength;
-                case Dexterity.symbolChar:
+                case IconList.dexterityIconName:
                     return PrimaryStat.Dexterity;
-                case Wisdom.symbolChar:
+                case IconList.wisdomIconName:
                     return PrimaryStat.Wisdom;
-                case Charisma.symbolChar:
+                case IconList.charismaIconName:
                     return PrimaryStat.Charisma;
             }
         }

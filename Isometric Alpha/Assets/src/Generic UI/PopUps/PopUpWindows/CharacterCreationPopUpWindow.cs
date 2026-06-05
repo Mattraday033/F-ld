@@ -80,13 +80,6 @@ public class CharacterCreationPopUpWindow : PopUpWindow
 
             handleESCPress();
         }
-
-        // if (Input.GetKey(KeyCode.Return) && !KeyPressManager.handlingPrimaryKeyPress && inNameInputField())
-        // {
-        //     KeyPressManager.handlingPrimaryKeyPress = true;
-
-        // 	handleESCPress();
-        // }
     }
 
     private void handleESCPress()

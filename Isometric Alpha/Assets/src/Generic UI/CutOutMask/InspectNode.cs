@@ -6,18 +6,31 @@ using TMPro;
 
 public class InspectNode : MonoBehaviour
 {
-    public static bool inspecting;
+    private static bool _Inspecting;
+    public static bool inspecting
+    {
+        get
+        {
+            return _Inspecting;
+        } 
+        set
+        {
+            _Inspecting = value;
+            OnInspect.Invoke();
+        }
+    }
 
-    public static InspectNode instance;
+    public static InspectNode instance; 
 
     public TextMeshProUGUI keybindText;
 
     public readonly static UnityEvent OnInspect = new UnityEvent();
 
     [RuntimeInitializeOnLoadMethod]
-    private static void instantiateInspectNode()
+    private static void init()
     {
-        inspecting = false;
+        instance = null;
+        _Inspecting = false;
         PlayerOOCStateManager.OnStateChangeFromInUI.AddListener(endInspectingOnStateChange);
         PlayerOOCStateManager.OnStateChangeFromInChestUI.AddListener(endInspectingOnStateChange);
         PlayerOOCStateManager.OnStateChangeToWalking.AddListener(endInspectingOnStateChange);
@@ -64,22 +77,21 @@ public class InspectNode : MonoBehaviour
     {
         inspecting = true;
 
-        OnInspect.Invoke();
         TutorialSequenceStepTargetUIObject.createCutOutMask(hover);
+
+
     }
 
     private void exitInspectingMode()
     {
         inspecting = false;
 
-        OnInspect.Invoke();
-
         MouseHoverManager.OnHoverPanelCreation.Invoke();
     }
 
     private static void endInspectingOnStateChange()
     {
-        inspecting = false;
+        _Inspecting = false;
     }
 
     private void OnEnable()

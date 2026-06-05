@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Right Corner Wave
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: -746993043, guid: 4e5270b88f8b9b244ad928b5815bbefb, type: 3}
-  - {fileID: 1508327144, guid: 4e5270b88f8b9b244ad928b5815bbefb, type: 3}
-  - {fileID: -480016955, guid: 4e5270b88f8b9b244ad928b5815bbefb, type: 3}
-  - {fileID: 1501046708, guid: 4e5270b88f8b9b244ad928b5815bbefb, type: 3}
+  - {fileID: 1978948971, guid: 4e5270b88f8b9b244ad928b5815bbefb, type: 3}
+  - {fileID: -1037208735, guid: 4e5270b88f8b9b244ad928b5815bbefb, type: 3}
+  - {fileID: -37861646, guid: 4e5270b88f8b9b244ad928b5815bbefb, type: 3}
+  - {fileID: 1143000673, guid: 4e5270b88f8b9b244ad928b5815bbefb, type: 3}
   m_MinSpeed: 2
   m_MaxSpeed: 2
   m_AnimationStartTime: 0
