@@ -458,8 +458,13 @@ public static class HoverMessageList
     private const string statPointMessage = "This shows how many times you can increase your Primary Stats. The four Primary Stats are Strength, Dexterity, Wisdom, and Charisma.";
 
     private const string compassKey = "Compass";
-    private const string hostilityKey = "Hostility";
-    private const string hostilityMessage = "If an Area's Hostility is green, that means that you cannot be attacked by random monsters. Areas with red Hostility may contain random Monsters. Yellow Hosility means you have committed a crime. When the bars of an area fill up with yellow, they will turn red and guards will be sent after you.";
+    private const string zoneHostilityKey = "Zone Hostility";
+    private const string zoneHostilityMessage = "This shows the current Zone's Hostility. Zones are groupings of Locations, shown on the Local Map.\n\nIf this symbol shows a flower, the Zone is not Hostile. If it shows a skull, the Zone is Hostile, and the Party can expect Enemies to attack them in most Locations within this Zone.";
+    private const string locationHostilityKey = "Location Hostility";
+    private const string locationHostilityMessage = "This shows the current Location's Hostility. Locations are spaces within a Zone, such as a specific room, building, or street. To see the Party's current Location, check the Local Map.\n\nIf this symbol shows a flower, the Location is not Hostile and the Party won't be attacked by wandering monsters while exploring it. If it shows a skull, the Location is Hostile, and the Party can be attacked here.\n\nIf the Party is in a non-Hostile Zone, and they enter a Hostile Location within that Zone, the rest of the Zone will <b>not</b> turn Hostile.";
+    private const string zoneAlertnessKey = "Zone Alertness";
+    private const string zoneAlertnessMessage = "The number of Exclamation Marks shows the current Zone's Alertness Level. The Alertness Level of a Zone can be raised by attacking NPC's, using Skills on certain NPC's and objects, and certain Dialogue Choices. Should the Party reach level 5 Alertness, the entire Zone will turn Hostile, and guards will be sent to after them. Turning a Zone Hostile can affect the outcome of Quests, and may be irreversible.\n\n<i>Be careful who you attack!</i>";
+
     private const string footingKey = "Footing";
     private const string footingMessage = "Some enemies will chase you when you get too close. These enemies only move half as fast as you. When the Left Foot is visibile, enemies chasing you will move the next time you take a step.";
 
@@ -776,8 +781,12 @@ public static class HoverMessageList
 
             case compassKey:
                 return compassKey;
-            case hostilityKey:
-                return hostilityMessage;
+            case zoneHostilityKey:
+                return zoneHostilityMessage;
+            case locationHostilityKey:
+                return locationHostilityMessage;
+            case zoneAlertnessKey:
+                return zoneAlertnessMessage;
             case footingKey:
                 return footingMessage;
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6324631800684066511}
   - component: {fileID: 5128146544749764379}
   m_Layer: 8
-  m_Name: Waves
+  m_Name: Waves High
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4808384533463990159}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0.79, z: 0}
+  m_LocalPosition: {x: 1.0075, y: 1.065, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -111,7 +111,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1759038587
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.08679688, y: 0.21109378, z: 0}
   m_MaxChunkCount: 16

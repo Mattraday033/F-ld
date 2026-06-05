@@ -35,7 +35,7 @@ public class HostilityBarManager : MonoBehaviour
 
     private bool zoneShowsAsHostile()
     {
-        return AreaList.areaIsHostile(AreaManager.locationName);
+        return AreaList.getCurrentAreaHostility() >= Area.hostilityThreshold;
     }
 
     private bool locationShowsAsHostile()

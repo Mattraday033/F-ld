@@ -266,15 +266,15 @@ public static class TutorialSequenceList
     {
         TutorialSequenceStep stepOne = new TutorialSequenceStep(TutorialMessageList.hostilityBarsTutorialMessagePrefix + 1,
                                                                 hostilityUITargetHash,
-                                                                ArrowDirection.BottomRight,
-                                                                skipHighlight: highlight,
+                                                                ArrowDirection.BottomLeft,
+                                                                skipHighlight: skipHighlight,
                                                                 skipUnhighlight: skipUnhighlight,
                                                                 createPopUpScreenBlocker: createPopUpScreenBlocker);
         TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.hostilityBarsTutorialMessagePrefix + 2,
                                                                 hostilityUITargetHash,
-                                                                ArrowDirection.BottomRight,
+                                                                ArrowDirection.BottomLeft,
                                                                 skipHighlight: skipHighlight,
-                                                                skipUnhighlight: unhighlight,
+                                                                skipUnhighlight: skipUnhighlight,
                                                                 createPopUpScreenBlocker: createPopUpScreenBlocker);
 
         TutorialSequence secondHostilityTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, secondHostilityTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo});
