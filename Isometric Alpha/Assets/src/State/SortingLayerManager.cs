@@ -13,10 +13,10 @@ public class SortingLayerInfo
         this.sortingLayerName = sortingLayerName;
     }
 
-    public void setSpriteRendererSortingLayer(SpriteRenderer spriteRenderer)
+    public void setRendererSortingLayer(Renderer renderer)
     {
-        spriteRenderer.sortingLayerName = sortingLayerName;
-        spriteRenderer.sortingOrder = layerPriority;
+        renderer.sortingLayerName = sortingLayerName;
+        renderer.sortingOrder = layerPriority;
     }
 }
 
@@ -27,6 +27,7 @@ public static class SortingLayerManager
     public const string secondSortLayerName = "Second";
 
     public readonly static SortingLayerInfo groundSortingLayerInfo = new SortingLayerInfo(groundSortLayerName, Constants.indexZero);
+    public readonly static SortingLayerInfo waveSortingLayerInfo = new SortingLayerInfo(groundSortLayerName, Constants.indexOne);
     public readonly static SortingLayerInfo buttonSortingLayerInfo = new SortingLayerInfo(groundSortLayerName, Constants.indexOne);
     public readonly static SortingLayerInfo firstSortingLayerInfo = new SortingLayerInfo(firstSortLayerName, Constants.indexOne);
     public readonly static SortingLayerInfo secondSortingLayerInfo = new SortingLayerInfo(secondSortLayerName, Constants.indexZero);

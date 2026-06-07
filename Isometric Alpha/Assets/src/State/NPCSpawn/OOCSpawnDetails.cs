@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 
 public abstract class OOCSpawnDetails
@@ -142,7 +143,7 @@ public abstract class OOCSpawnDetails
 
         if(sortingLayerInfo != null) 
         {
-            sortingLayerInfo.setSpriteRendererSortingLayer(spriteRenderer);
+            sortingLayerInfo.setRendererSortingLayer(spriteRenderer);
         }
 
     }
@@ -549,7 +550,7 @@ public class ObstacleSpawnDetails : OffSetSpawnDetails
 
         if(sortingLayerInfo != null)
         {
-            sortingLayerInfo.setSpriteRendererSortingLayer(spriteRenderer);
+            sortingLayerInfo.setRendererSortingLayer(spriteRenderer);
         }
     }
 
@@ -618,7 +619,7 @@ public class DeadBodySpawnDetails : ObstacleSpawnDetails
 
         if(sortingLayerInfo != null) 
         {
-            sortingLayerInfo.setSpriteRendererSortingLayer(spriteRenderer);
+            sortingLayerInfo.setRendererSortingLayer(spriteRenderer);
         }
 
         spriteRenderer.sprite = getSprite();
@@ -628,7 +629,7 @@ public class DeadBodySpawnDetails : ObstacleSpawnDetails
 public class ObstacleWithSecretDoorFlagSpawnDetails : ObstacleSpawnDetails
 {
 
-    private string secretDoorFlag;
+    protected string secretDoorFlag;
 
     public ObstacleWithSecretDoorFlagSpawnDetails(Vector3Int cellCoords, string secretDoorFlag, bool withScale = true) :
     base(NPCNameList.unseenBarrier, cellCoords, null, withScale: withScale)
@@ -654,7 +655,7 @@ public class ObstacleWithSecretDoorFlagSpawnDetails : ObstacleSpawnDetails
         this.secretDoorFlag = secretDoorFlag;
     }
 
-    private void setOffset(Transform transform)
+    protected void setOffset(Transform transform)
     {
         switch(spriteName)
         {
@@ -707,6 +708,49 @@ public class ObstacleWithSecretDoorFlagSpawnDetails : ObstacleSpawnDetails
         }
     }
 
+}
+
+
+public class Wave : ObstacleWithSecretDoorFlagSpawnDetails 
+{
+    public Wave(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo, string secretDoorFlag = "") :
+    base(npcName, cellCoords, spriteName: spriteName, sortingLayerInfo: sortingLayerInfo, secretDoorFlag: secretDoorFlag, withScale: true)
+    {
+    }
+
+    public override string getPrefabName()
+    {
+        return PrefabNames.wave;
+    }
+
+    public override void spawnActions(GameObject interactable)
+    {
+        ObstacleWithSecretDoorFlag obstacle = interactable.AddComponent<ObstacleWithSecretDoorFlag>();
+
+        obstacle.setObstacleName(npcName);
+        obstacle.secretDoorFlag = secretDoorFlag;
+
+        setOffset(interactable.transform);
+
+        spawnActions(interactable.GetComponent<Tilemap>());
+        spawnActions(interactable.GetComponent<TilemapRenderer>());
+    }
+
+    public virtual void spawnActions(Tilemap tilemap)
+    {
+        if(tilemap != null && spriteName != null)
+        {
+            AnimatedTile tile = Resources.Load<AnimatedTile>(spriteName);
+            tilemap.SetTile(Vector3Int.zero, tile);
+        }
+    }
+    public virtual void spawnActions(TilemapRenderer tilemapRenderer)
+    {
+        if(tilemapRenderer != null && sortingLayerInfo != null)
+        {
+            sortingLayerInfo.setRendererSortingLayer(tilemapRenderer);
+        }
+    }
 }
 
 public class SpikeSpawnDetails : ObstacleSpawnDetails

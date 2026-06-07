@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
-  m_Name: Wave Top
+  m_Name: Wave 3 Top
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 1789035298, guid: 56b432499e8288d43a5e739122685bf8, type: 3}
-  - {fileID: 1969956179, guid: 56b432499e8288d43a5e739122685bf8, type: 3}
-  - {fileID: -464673245, guid: 56b432499e8288d43a5e739122685bf8, type: 3}
-  - {fileID: 869899083, guid: 56b432499e8288d43a5e739122685bf8, type: 3}
+  - {fileID: -845419770, guid: df380cc6a7217d345ba2501dfd67ce69, type: 3}
+  - {fileID: 958498608, guid: df380cc6a7217d345ba2501dfd67ce69, type: 3}
+  - {fileID: 795978418, guid: df380cc6a7217d345ba2501dfd67ce69, type: 3}
+  - {fileID: -245178790, guid: df380cc6a7217d345ba2501dfd67ce69, type: 3}
   m_MinSpeed: 2
   m_MaxSpeed: 2
   m_AnimationStartTime: 0

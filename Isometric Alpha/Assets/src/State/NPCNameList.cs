@@ -136,6 +136,8 @@ public static class NPCNameList
     public const string unstablePillar = "Unstable Pillar";
     public const string unseenBarrier = "Unseen Barrier";
     public const string water = "Water";
+    public const string waveTop = "Wave Top";
+    public const string waveBottom = "Wave Bottom";
     public const string stalagmite = "Stalagmite";
     public const string obstacle = "Obstacle";
     public const string table = "Table";

@@ -1388,6 +1388,9 @@ public static class OOCSpawnDetailsList
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.water, new Vector3Int(-7, -3), PrefabNames.water, SortingLayerManager.groundSortingLayerInfo, SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain));
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.water, new Vector3Int(-7, -4), PrefabNames.water, SortingLayerManager.groundSortingLayerInfo, SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain));
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.water, new Vector3Int(-7, -5), PrefabNames.water, SortingLayerManager.groundSortingLayerInfo, SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain));
+        list.Add(new Wave(NPCNameList.waveTop, new Vector3Int(-7, -3), PrefabNames.waveTopAnimation, SortingLayerManager.waveSortingLayerInfo, SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain));
+        list.Add(new Wave(NPCNameList.waveBottom, new Vector3Int(-7, -5), PrefabNames.waveBottomAnimation, SortingLayerManager.waveSortingLayerInfo, SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain));
+
 
         list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain, areaName: ZoneKeyList.mineLvl3, sectionName: LocationNameList.section6a, index: Constants.indexOne));
 

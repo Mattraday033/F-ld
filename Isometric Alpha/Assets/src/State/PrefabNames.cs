@@ -251,6 +251,12 @@ public static class PrefabNames
 
     #endregion
 
+    #region Non-Interactable Game Objects
+    public const string nonInteractablesFolder = "Noninteractables/";
+    public const string wave = nonInteractablesFolder + "Wave";
+
+    #endregion
+
     #region Combat
 
     public const string combatFolder = "Combat/";
@@ -398,6 +404,10 @@ WallPatchTall
     public const string shackWallHalf = stoneHalfWallsFolder + "Shack Wall Half";
     public const string brickHalfWallsFolder = halfWallsFolder + "Brick/";
     public const string mineLvl2WallCunningObstacle = brickHalfWallsFolder + "Dark_Brick_Cunning_Obstacle";
+
+    public const string waterAnimationsFolder = tilesFolder + "Water Animations/";
+    public const string waveTopAnimation = waterAnimationsFolder + "Wave Top";
+    public const string waveBottomAnimation = waterAnimationsFolder + "Wave Bottom";
 
     public const string tallWallsFolder = tilesFolder + "Tall Walls/";
 

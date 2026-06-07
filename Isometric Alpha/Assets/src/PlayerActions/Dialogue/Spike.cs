@@ -28,14 +28,14 @@ public class Spike : Obstacle
     {
         movementBlockingCollider.enabled = false;
         spriteRenderer.sprite = downSprite;
-        SortingLayerManager.getSpikeSortingLayerInfo(down).setSpriteRendererSortingLayer(spriteRenderer);
+        SortingLayerManager.getSpikeSortingLayerInfo(down).setRendererSortingLayer(spriteRenderer);
     }
     
     public override void setToUp()
     {
         movementBlockingCollider.enabled = true;
         spriteRenderer.sprite = upSprite;
-        SortingLayerManager.getSpikeSortingLayerInfo(up).setSpriteRendererSortingLayer(spriteRenderer);
+        SortingLayerManager.getSpikeSortingLayerInfo(up).setRendererSortingLayer(spriteRenderer);
     }
 
 }

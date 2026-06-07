@@ -188,7 +188,6 @@ public static class GateSpawnInfoList
 
         #endregion
 
-
         #region Mine
 
         #region MineLvl_1-1b
@@ -549,7 +548,7 @@ public static class GateSpawnInfoList
         list.Add(new GateSpawnInfo(Constants.indexOne, 
                                     NPCNameList.ancientPortcullis,
                                     ZoneKeyList.mineLvl3 + LocationNameList.section4b,
-                                    new Vector3Int(-6, 1),
+                                    new Vector3Int(-7, 1),
                                     PrefabNames.portcullis2x1Path,
                                     Constants.sizeTwo,
                                     Axis.DescendingY));

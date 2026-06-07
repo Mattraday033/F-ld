@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4e5270b88f8b9b244ad928b5815bbefb
+guid: df380cc6a7217d345ba2501dfd67ce69
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Right Corner Wave_0
+      name: Wave 3 Top_0
       rect:
         serializedVersion: 2
         x: 0
@@ -105,20 +105,20 @@ TextureImporter:
         width: 150
         height: 164
       alignment: 9
-      pivot: {x: 0.48, y: 0.5025}
+      pivot: {x: 0.5, y: 0.5025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2250f9705a74cae4bbf082063e861faa
-      internalID: 1978948971
+      spriteID: c689c7d75beef0543b54e8fa84d2e9fd
+      internalID: -845419770
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Right Corner Wave_1
+      name: Wave 3 Top_1
       rect:
         serializedVersion: 2
         x: 150
@@ -126,20 +126,20 @@ TextureImporter:
         width: 150
         height: 164
       alignment: 9
-      pivot: {x: 0.48, y: 0.5025}
+      pivot: {x: 0.5, y: 0.5025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fae42b0128691d04b9924277f9b9a048
-      internalID: -1037208735
+      spriteID: 5d7154e75780a664497ba88907958624
+      internalID: 958498608
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Right Corner Wave_2
+      name: Wave 3 Top_2
       rect:
         serializedVersion: 2
         x: 300
@@ -147,20 +147,20 @@ TextureImporter:
         width: 150
         height: 164
       alignment: 9
-      pivot: {x: 0.48, y: 0.5025}
+      pivot: {x: 0.5, y: 0.5025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: faa254af795151a44b8dde7a266a5a4d
-      internalID: -37861646
+      spriteID: 84aa2449bc017cd4988de3294015334e
+      internalID: 795978418
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Right Corner Wave_3
+      name: Wave 3 Top_3
       rect:
         serializedVersion: 2
         x: 450
@@ -168,14 +168,14 @@ TextureImporter:
         width: 150
         height: 164
       alignment: 9
-      pivot: {x: 0.48, y: 0.5025}
+      pivot: {x: 0.5, y: 0.5025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67120433608ecf04d8b22cdd0fab98a4
-      internalID: 1143000673
+      spriteID: 69b5d7f54cde8ae44a5e731f4e5eabb2
+      internalID: -245178790
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Right Corner Wave_0: 1978948971
-      Right Corner Wave_1: -1037208735
-      Right Corner Wave_2: -37861646
-      Right Corner Wave_3: 1143000673
+      Wave 3 Top_0: -845419770
+      Wave 3 Top_1: 958498608
+      Wave 3 Top_2: 795978418
+      Wave 3 Top_3: -245178790
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

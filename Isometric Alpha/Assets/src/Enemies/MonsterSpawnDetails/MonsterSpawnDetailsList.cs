@@ -380,7 +380,7 @@ public static class MonsterSpawnDetailsList
 
         list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-4, -1), Facing.SouthWest, MonsterMovementType.Chases));
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-5, 0), Facing.SouthWest, MonsterMovementType.Chases));
 
         list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, 13), PrefabNames.pushableCrate));
 
