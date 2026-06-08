@@ -628,29 +628,10 @@ public class DeadBodySpawnDetails : ObstacleSpawnDetails
 
 public class ObstacleWithSecretDoorFlagSpawnDetails : ObstacleSpawnDetails
 {
-
     protected string secretDoorFlag;
 
-    public ObstacleWithSecretDoorFlagSpawnDetails(Vector3Int cellCoords, string secretDoorFlag, bool withScale = true) :
-    base(NPCNameList.unseenBarrier, cellCoords, null, withScale: withScale)
-    {
-        this.secretDoorFlag = secretDoorFlag;
-    }
-
-    public ObstacleWithSecretDoorFlagSpawnDetails(string npcName, Vector3Int cellCoords, string secretDoorFlag, bool withScale = true) :
-    base(npcName, cellCoords, null, withScale: withScale)
-    {
-        this.secretDoorFlag = secretDoorFlag;
-    }
-
-    public ObstacleWithSecretDoorFlagSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, string secretDoorFlag, bool withScale = true) :
-    base(npcName, cellCoords, spriteName, withScale: withScale)
-    {
-        this.secretDoorFlag = secretDoorFlag;
-    }
-
-    public ObstacleWithSecretDoorFlagSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo, string secretDoorFlag, bool withScale = true) :
-    base(npcName, cellCoords, spriteName, sortingLayerInfo, withScale: withScale)
+    public ObstacleWithSecretDoorFlagSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName = "", SortingLayerInfo sortingLayerInfo = null, string secretDoorFlag = "", bool withScale = true, float offset = 0f) :
+    base(npcName, cellCoords, spriteName: spriteName, sortingLayerInfo: sortingLayerInfo, withScale: withScale, offset: offset)
     {
         this.secretDoorFlag = secretDoorFlag;
     }
@@ -661,6 +642,9 @@ public class ObstacleWithSecretDoorFlagSpawnDetails : ObstacleSpawnDetails
         {
             case PrefabNames.water:
                 transform.position = new Vector3(transform.position.x, transform.position.y - Constants.onTableHeightOffset*2);
+                break;
+            case PrefabNames.waterShort:
+                transform.position = new Vector3(transform.position.x, transform.position.y - Constants.waterShortOffset);
                 break;
             default:
                 break;
@@ -713,8 +697,8 @@ public class ObstacleWithSecretDoorFlagSpawnDetails : ObstacleSpawnDetails
 
 public class Wave : ObstacleWithSecretDoorFlagSpawnDetails 
 {
-    public Wave(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo, string secretDoorFlag = "") :
-    base(npcName, cellCoords, spriteName: spriteName, sortingLayerInfo: sortingLayerInfo, secretDoorFlag: secretDoorFlag, withScale: true)
+    public Wave(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo, string secretDoorFlag = "", float offset = 0f) :
+    base(npcName, cellCoords, spriteName: spriteName, sortingLayerInfo: sortingLayerInfo, secretDoorFlag: secretDoorFlag, withScale: true, offset: offset)
     {
     }
 

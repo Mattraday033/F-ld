@@ -84,6 +84,7 @@ public static class Constants
 
     public const float onTableHeightOffset = 0.05f;
     public const float onGroundHeightOffset = 0.3f;
+    public const float waterShortOffset = 0.275f;
 
     public const string STRDesignator = "STR";
     public const string DEXDesignator = "DEX";

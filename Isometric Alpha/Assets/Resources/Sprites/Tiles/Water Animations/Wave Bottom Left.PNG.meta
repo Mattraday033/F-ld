@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 558abc4a022e5ee44a5e72888df3de5d
+guid: aa83bfa8d9f956648bbda3a31f37b20a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,85 +97,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Wave Bottom_0
+      name: Wave Bottom Left_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 122
+        width: 150
         height: 164
       alignment: 9
-      pivot: {x: 0.325, y: 0.635}
+      pivot: {x: 0.745, y: 0.5025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6989e9928a4af2e4e8cd98cb1ab378ed
-      internalID: 214717137
+      spriteID: 78f52ae9f36ca3548877f3c84b24ea49
+      internalID: -1697994408
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wave Bottom_1
+      name: Wave Bottom Left_1
       rect:
         serializedVersion: 2
         x: 150
         y: 0
-        width: 122
+        width: 150
         height: 164
       alignment: 9
-      pivot: {x: 0.325, y: 0.635}
+      pivot: {x: 0.745, y: 0.5025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1dd729f2d690dd4aa8e175512e50c70
-      internalID: 1101690883
+      spriteID: 887ac2d5292e4e249b5c9cfd0d4aa460
+      internalID: -1249846177
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wave Bottom_2
+      name: Wave Bottom Left_2
       rect:
         serializedVersion: 2
         x: 300
         y: 0
-        width: 122
+        width: 150
         height: 164
       alignment: 9
-      pivot: {x: 0.325, y: 0.635}
+      pivot: {x: 0.745, y: 0.5025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5b996d4681134748b01a2220cba4572
-      internalID: -246697396
+      spriteID: 5ea5366d2ea0c2d45aa6a186b4acef05
+      internalID: 1449275793
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wave Bottom_3
+      name: Wave Bottom Left_3
       rect:
         serializedVersion: 2
         x: 450
         y: 0
-        width: 122
+        width: 150
         height: 164
       alignment: 9
-      pivot: {x: 0.325, y: 0.635}
+      pivot: {x: 0.745, y: 0.5025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2467a77bac386f409c3a3bb61b19aed
-      internalID: 2138452387
+      spriteID: a780aa7086cae8c48b9c6602673c9d83
+      internalID: -2037238444
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Wave Bottom_0: 214717137
-      Wave Bottom_1: 1101690883
-      Wave Bottom_2: -246697396
-      Wave Bottom_3: 2138452387
+      Wave Bottom Left_0: -1697994408
+      Wave Bottom Left_1: -1249846177
+      Wave Bottom Left_2: 1449275793
+      Wave Bottom Left_3: -2037238444
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

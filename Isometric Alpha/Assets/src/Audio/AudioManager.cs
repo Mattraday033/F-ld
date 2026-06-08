@@ -212,7 +212,6 @@ public class AudioManager : MonoBehaviour
     }
 
     #endregion
-
     private static bool playSFXOnNextHeartBeat;
     private static AudioManager instance;
 

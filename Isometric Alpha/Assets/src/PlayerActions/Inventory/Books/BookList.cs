@@ -236,7 +236,26 @@ public static class BookList
 				return "The Pit's warden has been saying he's been hearing movement down in the Pit, and it's not the slaves. No one's seen anything, but we're all on edge after what happened in the mine. With the slaves rioting upstairs, the warden ordered this section sealed up incase the worms managed to break in. " +
 						"Not sure whats going on up there: I've been stuck down here watching for worms for a while, and no one's come to relieve me yet.";
 			case directorsJournalKey:
-				return "... the count's chose me for this task for my adherence to our cause. I know my Confederation requires this act of sacrifice should a new campaign against the Masons ever be renewed. The mountains act as better walls than they could ever build. A way beneath them would be nothing less than transformative in our war planning. " + 
+				return  "My inquiry into the branding rates of other counties has again born fruit: a letter arrived this morning with Count Laomedan's reply. She says she has only ordered the branding of less than a fourth the number of serfs as we have. I have visited her county recently; she does not have so dissimilar a number of rebels " + 
+                        "and criminals to bare out this difference. We are branding far beyond the norm. And my gut tells me it started recently. Perhaps as soon as Artúr died, and left County Kalnoeky to Béla. May my nephew lead us not to folly.\n\n" + 
+
+                        "I confronted Béla about his new 'austerity measures' he has put in place. He quoted my own words back to me: 'stockpile in peace what you require in war.' The quotas for grain he has instated go beyond even our harshest steps during the last eruption in the Emancipation Conflict. When I told him the other lords would chafe under such laws, " + 
+                        "he told me they had already embraced them. What is going on? Have my peers gone mad?\n\n" + 
+
+                        "The scheme has become plain: grain quotas are slave quotas. While I was traveling investigating the upsurge in brandings, Béla struck a deal with many of the lords of his generation. They would agree to supply the grain necessary to make war on the Masons a second time, so long as Béla could supply the branded required to meet those goals, and convince the other counts to follow suit. " +
+                        "Any discomfort in the short term will be made up for by the loot brought back from fighting the Craft Folk. To meet the labor demands of his supporters, my nephew is contriving new reasons for the brand, and no doubt targeting the serfs controlled by the lords that resist his plans. I expect the reason why none of them have approached me about this before " + 
+                        "now is they expect I'm actually supporting this madness.\n\n" +
+
+                        //End of exerpt 1
+
+                        "The counts have been summoned to County Kalnoeky, in secret. A meeting like this has not happened in eight years, and only a handful of times since our truce with the Masons. The secrecy will hopefully keep them from suspecting our preparations go beyond the superficial. My status as Commander of the Western Lance forced Béla to allow me a seat at the discussions, but " + 
+                        "not before he made plain I am to act as an ornament to his regime, and nothing more. I had hoped to speak sensible words to accepting ears at the gathering, but those who know the weariness I do have long since passed from this life. The counts that came after are but children unaccustomed to conflict. The babes we left behind to mind our thrones now sit atop them ready to follow the paths we strode before. " + 
+                        "They have not yet grown tall enough to see the cliff we found at it's end. \n\n" +
+
+                        "Days of bickering and nothing has come of it. Maybe less has changed than I thought it had. The only thing of note is Count "+
+                        ""+
+
+                        "The counts' chose me for this task for my adherence to our cause. I know my Confederation requires this act of sacrifice should a new campaign against the Masons ever be renewed. The mountains act as better walls than they could ever build. A way beneath them would be nothing less than transformative in our war planning. " + 
                         "However, I confess my thoughts turn yet again to what the Great Mother would think of this expedition. A camp so close to Trónszék? Is it not some variety of sacrilege? We don't seek her domain at the top of the mountain, meerly to travel beneath it along the roads the Delver's made, but that excuse feels more and more threadbare with each passing week. " + 
                         "I can feel Her eyes on us. Angyal knows why we are here and surely must disapprove. She expelled the Delvers of this mountain and took their home for it's remoteness, and yet here we are all the same. The worms that assaulted our dig teams can be nothing but a clear sign that we have ridden where we should not.\n\n" +
                         "My leg has been hurting again. This place... it feels all too familiar. This morning I smelled smoke as I awoke. I lept from my bed and meant to race to the door, shouting for the guard to be raised and for my mount to be sent for. Had my leg not given out before I could make it across the room, my household may well have seen me " +

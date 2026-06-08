@@ -39,10 +39,9 @@ public static class AllyPackInfoList
 //declaredHostagesDead
 
     private readonly static AllyPackInfo dezsoAlliesGuards = new AllyPackInfo(new CreatureAmount[]   { 
-                                                                                                        AllyAmountList.guardReka,
-                                                                                                        AllyAmountList.guardPazman,
-                                                                                                        AllyAmountList.overseerGaspar,
-                                                                                                        AllyAmountList.guardVirag
+                                                                                                        AllyAmountList.twoSpearmen,
+                                                                                                        AllyAmountList.oneAxeman,
+                                                                                                        AllyAmountList.oneJavelineer
                                                                                                     }, 
                                                                             new string[]
                                                                                         {

@@ -504,6 +504,12 @@ public static class AreaList
 			}
 		}
 
+		if (Flags.getFlag(FlagNameList.foundThiefsRing) &&
+            !Flags.getFlag(FlagNameList.enteredCampNorthWestAfterBodyPile))
+		{
+            return true;
+		}
+
 		return false;
 	}
 

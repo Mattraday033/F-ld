@@ -14,6 +14,10 @@ public static class AllyAmountList
     public readonly static CreatureAmount overseerGaspar = new CreatureAmount(Constants.oneCreature, AlliedSummonStatsList.getSummonStats(NPCNameList.overseerGaspar));
 
     public readonly static CreatureAmount chiefTabor = new CreatureAmount(Constants.oneCreature, AlliedSummonStatsList.getSummonStats(NPCNameList.chiefTabor));
+
+    public readonly static CreatureAmount twoSpearmen = new CreatureAmount(Constants.twoCreatures, AlliedSummonStatsList.getSummonStats(MonsterNameList.spearman));
+    public readonly static CreatureAmount oneAxeman = new CreatureAmount(Constants.oneCreature, AlliedSummonStatsList.getSummonStats(MonsterNameList.axeman));
+    public readonly static CreatureAmount oneJavelineer = new CreatureAmount(Constants.oneCreature, AlliedSummonStatsList.getSummonStats(MonsterNameList.javelineer));
     #endregion
 
     #endregion

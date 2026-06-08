@@ -226,6 +226,14 @@ public static class PrefabNames
 
     public const string UIComponentsFolder = UIFolder + "Components/";
     public const string costIcon = UIComponentsFolder + "Cost Icon";
+
+    public const string openingMonologueFolder = "";
+    public const string openingMonologueArt1 = "Art 1";
+    public const string openingMonologueArt2 = "Art 2";
+    public const string openingMonologueArt3 = "Art 3";
+    public const string openingMonologueArt4 = "Art 4";
+    public const string openingMonologueArt5 = "Art 5";
+
     #endregion
 
     public const string playerPrefab = "PlayerOOC";
@@ -367,6 +375,7 @@ public static class PrefabNames
 
     public const string waterFolder = spriteFolder + "Water/";
     public const string water = waterFolder + "Water";
+    public const string waterShort = waterFolder + "Water Short";
 
     public const string statueFolder = furnitureFolder + "Statues/";
     public const string directorStatueSpriteName = "DirectorStatue";
@@ -397,13 +406,17 @@ WallPatchTall
     public const string unstablePillar = miscFolder + NPCNameList.unstablePillar;
 
     public const string tilesFolder = spriteFolder + "Tiles/";
+    
     public const string halfWallsFolder = tilesFolder + "Half Walls/";
     public const string stoneHalfWallsFolder = halfWallsFolder + "Stone/";
     public const string lavaHalfWallsFolder = halfWallsFolder + "Lava/";
     public const string lavaVaultableGapHalf = lavaHalfWallsFolder + "Lava Vaultable Gap";
     public const string shackWallHalf = stoneHalfWallsFolder + "Shack Wall Half";
+
     public const string brickHalfWallsFolder = halfWallsFolder + "Brick/";
     public const string mineLvl2WallCunningObstacle = brickHalfWallsFolder + "Dark_Brick_Cunning_Obstacle";
+
+
 
     public const string waterAnimationsFolder = tilesFolder + "Water Animations/";
     public const string waveTopAnimation = waterAnimationsFolder + "Wave Top";
@@ -414,6 +427,9 @@ WallPatchTall
     public const string groundFolder = tilesFolder + "Ground/";
     public const string stoneGroundFolder = groundFolder + "Stone/";
     public const string stoneVaultableGap = stoneGroundFolder + "Stone Vaultable Gap";
+
+    public const string lavaGroundFolder = groundFolder + "Lava/";
+    public const string lavaStoneGround = lavaGroundFolder + "Lava Stone Ground";
 
     public const string rubbleFolder = spriteFolder + "Rubble/";
     public const string southDescendingRubble = rubbleFolder + "South Descending Rubble";
