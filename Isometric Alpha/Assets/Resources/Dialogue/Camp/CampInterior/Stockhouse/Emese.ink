@@ -123,7 +123,7 @@ To give you time to get away from the jelly before it goes off, you must use a w
 
 A water clock has two components: a big cup with a spout, and a little cup. First, place the small cup on top of the barrel. Then add water to the big cup, and tip it like so to keep the water from flowing out of the spout.
 
-Now, place the larger cup on the barrel, with the spout pouring into the small cup. Do not let the water spill into the barrel! This will ignite the jelly, and you'll just be a smear on the wall.
+Now, place the larger cup on the barrel, with the spout pouring into the small cup. Do not let the water spill into the barrel! This will ignite the jelly, and you'll just be a smear on the wall. Have the good send to place the barrel where you want it to go off before setting the timer, so that you don't spill the water while you move the barrel, and the worm problem will be solved if you make a mistake.
 
 If you did it right, you have until the water from the big cup fills the small cup to overflowing before the barrel will ignite, or about five minutes. Use that time to get somewhere safe. 
 

@@ -15,6 +15,7 @@ VAR gasparIndex = 8
 VAR taborBehindDeskIndex = 9
 VAR nandorIndex = 10
 VAR carterIndex = 11
+VAR weftOutsideIndex = 12
 
 VAR playerName = ""
 
@@ -48,6 +49,8 @@ VAR finishedBalintsTask = false
 VAR nandorSpokeToPlayerAboutDirectorBetrayal = false
 VAR acceptedDirectorVidraLetterJob = false
 VAR directorMentionedAnnouncement = false
+
+VAR discussedWithWeftAfterTookMineJob = false
 
 VAR askedAboutDirectorStuckInOffice = false
 
@@ -132,13 +135,17 @@ changeCamTarget({taborIndex})
 
 Director, sir, these are the two branded that Captain Adéla and I spoke of. The ones we used to negotiate for the hostages.
 
+    +Bye.
+
+    ->deactivateExtras
+/*
 {
 -hostagesDead:
     ->hostagesDead_2a
 -else:
     ->hostagesSaved_2a
 }
-
+*/
 === hostagesDead_2a ===
 
 changeCamTarget({adelaIndex})
@@ -1046,9 +1053,12 @@ activateQuestStep(Tabor's Reward,Meet with Quartermaster Emese)
 I have informed Quartermaster Emese that you are to be given the reward I promised you. You can find her in the stockhouse next to the mine entrance, in the southwest corner of the camp.
 
 }
-
-fadeToBlack()
-
+{
+-metDirectorAfterHostages and not discussedWithWeftAfterTookMineJob:
+    fadeToBlack(true, false)
+-else:
+    fadeToBlack()
+}
 deactivate({weftIndex})
 deactivate({taborIndex})
 deactivate({adelaIndex})
@@ -1065,12 +1075,38 @@ deactivate({nandorIndex})
 deactivate({directorIndex})
 }
 
+{
+-metDirectorAfterHostages and not discussedWithWeftAfterTookMineJob:
+setToTrue(discussedWithWeftAfterTookMineJob)
+
+movePlayerPos(-5,-1)
+setFacing(SE)
+changeCamTarget({weftOutsideIndex})
+activate({weftOutsideIndex})
+
+->discussWithWeft
+
+-else:
 movePlayerPos(-6,-2)
 setFacing(SW)
+}
 
 fadeBackIn(60)
 
 ->Close
+
+
+=== discussWithWeft ===
+
+fadeBackIn(60)
+
+I didn't think such a thing was possible. A branded, receiving a pardon? I've certainly never heard of it happening before now.
+
+    +I wouldn't get your hopes up. We have to survive the mine first.
+        ->Close
+    +They're just trying to motivate us to solve their problem without risking any of their guards. We're not getting out of here. Not alive.
+        ->Close
+    // +I'm 
 
 === Close ===
 

@@ -1993,6 +1993,15 @@ public class BookSpawnDetails : OffSetSpawnDetails
         WorldBookInfo bookInfo = interactable.GetComponent<WorldBookInfo>();
 
         bookInfo.bookIndex = bookIndex;
+
+        BookItem book = ItemList.getItem(ItemList.bookListIndex, bookIndex) as BookItem;
+
+        StopSpawningFlagList stopSpawningFlagList = new StopSpawningFlagList(book.flagsFlippedWhenRead);
+
+        if(book != null && stopSpawningFlagList.evaluateFlags())
+        {
+            interactable.SetActive(false);
+        }
     }
 }
 

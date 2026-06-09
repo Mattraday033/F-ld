@@ -205,7 +205,7 @@ public static class WorldMapLandmarkList
         allLandmarks = new List<LandmarkSpawnDetails>();
 
         allLandmarks.Add(new LandmarkSpawnDetails(new Vector3Int(5, 4), MapDisplayNameList.lovashiCamp, MapTileSpriteList.campWithManseMapTile, ZoneKeyList.lovashiCamp, 
-                                                    new string[]{ZoneKeyList.manseFirstFloor, ZoneKeyList.manseSecondFloor}));
+                                                    new string[]{ZoneKeyList.manseFirstFloor, ZoneKeyList.manseSecondFloor, ZoneKeyList.pit}));
         allLandmarks.Add(new HighSortPriortyLandmarkSpawnDetails(new Vector3Int(5, 5), MapDisplayNameList.lovashiMine, MapTileSpriteList.worldMapMineMapTile, 
                                                                   ZoneKeyList.mineLvl1, new string[]{ZoneKeyList.mineLvl2, ZoneKeyList.mineLvl3}));
 

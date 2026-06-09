@@ -410,7 +410,7 @@ Stone saints are nasty business. It probably gave the branded a good scare when 
 
 prepItem()
 
-Whatever the case, you two have earned a reward for a job well done. I can give you the rest of the extra rations I keep on me right now, and once I inform the Director of what has happened I will ask him to approve something extra.
+Whatever the case, you two have earned a reward for a job well done. I can give you the rest of the rations I keep on me right now, and once I inform the Director of what has happened I will ask him to approve something extra.
 
 giveItem(0,0,5)
 

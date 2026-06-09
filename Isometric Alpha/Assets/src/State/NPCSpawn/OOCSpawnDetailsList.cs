@@ -1634,6 +1634,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ShelfSpawnDetails(Constants.indexZero, new Vector3Int(2, 7), Facing.SouthEast));
         list.Add(new ShelfSpawnDetails(Constants.indexOne, new Vector3Int(3, 3), Facing.SouthEast));
         list.Add(new ShelfSpawnDetails(Constants.indexTwo, new Vector3Int(8, 3), Facing.SouthWest));
+        list.Add(new ShelfSpawnDetails(Constants.indexThree, new Vector3Int(5, 3), Facing.SouthEast));
 
         list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.secretBookShelfFlag, areaName: ZoneKeyList.manseFirstFloor, sectionName: LocationNameList.section3c, index: Constants.indexOne));
 
@@ -1685,7 +1686,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new BookSpawnDetails(NPCNameList.diary, new Vector3Int(6, -3), PrefabNames.note, ItemList.directorsJournalIndex));
+        list.Add(new BookSpawnDetails(NPCNameList.diary, new Vector3Int(6, -3), PrefabNames.note, ItemList.directorsJournalThreeIndex));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section1b, list);
 
@@ -1744,6 +1745,8 @@ public static class OOCSpawnDetailsList
 
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(0, 6), VaultableObject.diffThreeVaultableBarrelsOneTile));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-1, 6), VaultableObject.diffThreeVaultableBarrelsOneTile));
+
+        list.Add(new BookSpawnDetails(NPCNameList.diary, new Vector3Int(4, 5), PrefabNames.note, ItemList.directorsJournalTwoIndex, offset: Constants.onGroundHeightOffset));
 
         list.Add(new ChestSpawnDetails(Constants.indexFive, new Vector3Int(4, 4), Facing.SouthWest));
 
@@ -1816,6 +1819,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.captainAdela, new Vector3Int(2, 1), facing: Facing.SouthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.nandor+1, new Vector3Int(-6, -3), facing: Facing.NorthWest)); 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter+1, new Vector3Int(-5, -3), facing: Facing.NorthWest)); 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft+1, new Vector3Int(-5, -2), facing: Facing.NorthWest));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard, new Vector3Int(-3, 0), animationName: MonsterNameList.lancer, facing: Facing.NorthEast));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+1, new Vector3Int(-3, -3), animationName: MonsterNameList.lancer, facing: Facing.NorthEast));
@@ -1886,6 +1890,7 @@ public static class OOCSpawnDetailsList
         list = new List<OOCSpawnDetails>();
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(-6, 5), Facing.SouthEast));
+        list.Add(new BookSpawnDetails(NPCNameList.diary, new Vector3Int(-5, 2), PrefabNames.note, ItemList.directorsJournalFourIndex, offset: Constants.onGroundHeightOffset));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section2d, list);
 

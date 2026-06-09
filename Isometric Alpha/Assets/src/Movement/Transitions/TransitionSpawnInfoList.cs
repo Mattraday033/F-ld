@@ -709,25 +709,6 @@ public static class TransitionSpawnInfoList
 
         #region Pit
 
-        #region Pit-1a Old
-
-        // list = new List<TransitionSpawnInfo>();
-
-        // list.Add(new TransitionSpawnInfo(ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.stairsToPit, new Vector3Int(0, 4), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX));
-
-        // list.Add(new TransitionSpawnInfoMatrix(ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section1a, receivingMatrix, m1F2CToP1aCoords));
-
-        // List<Vector3Int> p1aToP1bCoords = new List<Vector3Int>() { new Vector3Int(3,3), new Vector3Int(2,3), new Vector3Int(-4,3), new Vector3Int(0,2), new Vector3Int(-2,2),
-        //                                                            new Vector3Int(-3,2), new Vector3Int(1,1), new Vector3Int(-1,1), new Vector3Int(-3,1), new Vector3Int(3,0),
-        //                                                            new Vector3Int(1,0), new Vector3Int(-4,0), new Vector3Int(3,-1), new Vector3Int(2,-1), new Vector3Int(0,-1),
-        //                                                            new Vector3Int(-4,-1), new Vector3Int(1,-2), new Vector3Int(-1,-2), new Vector3Int(-2,-2), new Vector3Int(-3,-2),
-        //                                                            new Vector3Int(0,-4), new Vector3Int(-2,-4), new Vector3Int(-3,-4)};
-
-        // list.Add(new TransitionSpawnInfoMatrix(ZoneKeyList.pit + LocationNameList.section1a, ZoneKeyList.pit + LocationNameList.section1b, sendingMatrix, p1aToP1bCoords));
-
-        // transitionSpawnInfoDict.Add(ZoneKeyList.pit + LocationNameList.section1a, list);
-
-        #endregion
         #region Pit-1a
 
         list = new List<TransitionSpawnInfo>();
@@ -754,6 +735,8 @@ public static class TransitionSpawnInfoList
         list.Add(new TransitionSpawnInfo(ZoneKeyList.pit + LocationNameList.section2a, ZoneKeyList.pit + LocationNameList.section2b, new Vector3Int(9, -5), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingY));
 
         list.Add(new TransitionSpawnInfo(ZoneKeyList.pit + LocationNameList.section2a, ZoneKeyList.pit + LocationNameList.section2c, new Vector3Int(6, 6), Facing.SouthEast, Constants.sizeTwo, Axis.DescendingX));
+
+        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(1, -2), Facing.NorthEast));
 
         transitionSpawnInfoDict.Add(ZoneKeyList.pit + LocationNameList.section2a, list);
 

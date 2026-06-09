@@ -51,6 +51,7 @@ public static class FlagNameList
         public const string gaveWeftCreditAfterHostages = "gaveWeftCreditAfterHostages";
         public const string tookBlameForHostageDeath = "tookBlameForHostageDeath";
         public const string blamedWeftForHostageDeath = "blamedWeftForHostageDeath";
+        public const string discussedWithWeftAfterTookMineJob = "discussedWithWeftAfterTookMineJob";
 
         //Tabor Skill Tutorial Flags
         public const string toldByTaborToBuildHouses = "toldByTaborToBuildHouses";

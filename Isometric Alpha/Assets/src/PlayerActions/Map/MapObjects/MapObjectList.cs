@@ -388,10 +388,8 @@ public static class MapObjectList
 		{
 			case LocationNameList.section1a:
 				return new MapLocation(ZoneKeyList.pit, ZoneKeyList.pit+LocationNameList.section1a, LocationNameList.section1a, notFastTravelAccessible, zeroInteriors, new string[]{ZoneKeyList.pit+LocationNameList.section2a}, new ZoneButtonInfo[]{new ZoneButtonInfo(ZoneKeyList.manseFirstFloor, MapPopUpWindow.westButtonIndex)});
-			// case LocationNameList.section1b:
-			// 	return new MapLocation(ZoneKeyList.pit, ZoneKeyList.pit+LocationNameList.section1b, LocationNameList.section1b, notFastTravelAccessible, zeroInteriors, new string[]{ZoneKeyList.pit+LocationNameList.section1a}, new ZoneButtonInfo[]{new ZoneButtonInfo(ZoneKeyList.manseFirstFloor, MapPopUpWindow.westNorthButtonIndex)});
 			case LocationNameList.section2a:
-				return new MapLocation(ZoneKeyList.pit, ZoneKeyList.pit+LocationNameList.section2a, LocationNameList.section2a, notFastTravelAccessible, zeroInteriors, new string[]{ZoneKeyList.pit+LocationNameList.section1a,ZoneKeyList.pit+LocationNameList.section2b,ZoneKeyList.pit+LocationNameList.section2c});
+				return new MapLocation(ZoneKeyList.pit, ZoneKeyList.pit+LocationNameList.section2a, LocationNameList.section2a, fastTravelAccessible, zeroInteriors, new string[]{ZoneKeyList.pit+LocationNameList.section1a,ZoneKeyList.pit+LocationNameList.section2b,ZoneKeyList.pit+LocationNameList.section2c});
 			case LocationNameList.section2b:
 				return new MapLocation(ZoneKeyList.pit, ZoneKeyList.pit+LocationNameList.section2b, LocationNameList.section2b, notFastTravelAccessible, oneInterior, new string[]{ZoneKeyList.pit+LocationNameList.section2a, ZoneKeyList.pit+LocationNameList.section2d});
 			case LocationNameList.section2c:

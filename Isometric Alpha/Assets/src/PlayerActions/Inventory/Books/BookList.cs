@@ -32,8 +32,16 @@ public static class BookList
 	public const string pitClosureNoteKey = "Pit Closure Note";
 	public const string pitClosureNoteReadFlag = "pitClosureNoteRead";
 
-	public const string directorsJournalKey = "Director's Journal";
-	public const string directorsJournalReadFlag = "directorJournalRead";
+	public const string directorsJournalOneKey = "Director's Journal 1";
+	public const string directorsJournalTwoKey = "Director's Journal 2";
+	public const string directorsJournalThreeKey = "Director's Journal 3";
+	public const string directorsJournalFourKey = "Director's Journal 4";
+	public const string directorsJournalOneReadFlag = "directorJournalOneRead";
+	public const string directorsJournalTwoReadFlag = "directorJournalTwoRead";
+	public const string directorsJournalThreeReadFlag = "directorJournalThreeRead";
+	public const string directorsJournalFourReadFlag = "directorJournalFourRead";
+
+    public const string directorsJournalDisclaimer = "<i>This is a section of the Director's journal. Certain passages stick out to you:</i>\n\n";
 
     public const string blastingJellyInstructionsKey = "Blasting Jelly Instructions";
 
@@ -210,12 +218,12 @@ public static class BookList
 						"the two combatants looked to be in motion; it is said that an onlooker had to continuously blink to realize the Artisan had not slain his prey before one's eyes.\n" +
 						"\tThe Sculptors would not relinquish the plaza while they still had life to defend it. Twice, the Lovashi crashed against their ranks, the second time even managing to break their formation down the middle, but again and again the defenders rallied. Only when the Riding Folk finally surrounded the plaza and " +
 						"set it alight did it's protector's fury wither. The plaza and it's statue were one of the final places to cease it's resistance, falling just before the capture of the last civilian shelters, and Lysop's throneroom. But when the Lovashi entered the Sculptor King's palace, they found no trace of him or his throne.\n" +
-						"\tNo story holds the truth of where the Sculptor King disappeared to, but the remnants of his people say he gave his life to his final masterpiece. They say only by bestowing his energy into the stone could he create such a beauty, and as his like will never grace Föld again, nor will another statue like it be born " +
+						"\tNo story holds the truth of where the Sculptor King disappeared to, but the remnants of his people say he gave his life to his final masterpiece. They say only by bestowing his energy into the stone of the plaza's statue could he create such a beauty, and as his like will never grace Föld again, nor will another statue like it be born " +
 						"from Föld's stones. As for the throne, a plan was hatched for it to be broken down into many pieces, and secreted away across Carnassus. When the embers of war cooled in that city, the pieces were to be carried to safety in one of the Craft Kingdoms yet to bow to the Lovashi. This plan would " +
 						"eventually succeed, despite the odds, and the Throne of Lysop now rests in Phesus, capitol of the Kingdom of Masons, where it serves as the seat of their ruler's consort. The Craft Folk still long for the day when it can be returned to Carnassus, and a new Sculptor King crowned.\n" +
 						"\tAfter Carnassus was truly conquered, the Lovashi grew incensed at the toll in blood the city had cost them. They bore witness to Lysop's last work, and fearing it's power over his subjects, took to dismantling it. So complete was their retribution, and so great was their malice, " +
 						"that after the statue had been reduced to rubble they began to spread through the city, toppling every statue of any prominence. The Lovashi took their revenge on Lysop's disciples as well, crushing them beneath their largest works. This moment of vengeance would later come " +
-						"to be called 'The Night of Empty Plinths', and indeed only every fifth statue was saved from the pillage. To this day, sculpting is a forbidden art within the Confederation, for the Lovashi still fear it's power to rally a people against them.";
+						"to be called 'The Night of Empty Plinths', and indeed only every fifth statue was saved from the pillage. To this day, sculpting is a restricted art within the Confederation, for the Lovashi still fear it's power to rally a people against them.";
 
 			case saintsAndSaintsKey:
 				return "The Gods, when they created the many Folks that live atop Föld, did so each time with a special purpose in mind. The Craft Folk are no exception, for their purpose was to learn the many crafts of civilization, and to teach them to the other Folks. Such are most of the Craft Kingdoms named for: " +
@@ -235,32 +243,71 @@ public static class BookList
 			case pitClosureNoteKey:
 				return "The Pit's warden has been saying he's been hearing movement down in the Pit, and it's not the slaves. No one's seen anything, but we're all on edge after what happened in the mine. With the slaves rioting upstairs, the warden ordered this section sealed up incase the worms managed to break in. " +
 						"Not sure whats going on up there: I've been stuck down here watching for worms for a while, and no one's come to relieve me yet.";
-			case directorsJournalKey:
-				return  "My inquiry into the branding rates of other counties has again born fruit: a letter arrived this morning with Count Laomedan's reply. She says she has only ordered the branding of less than a fourth the number of serfs as we have. I have visited her county recently; she does not have so dissimilar a number of rebels " + 
-                        "and criminals to bare out this difference. We are branding far beyond the norm. And my gut tells me it started recently. Perhaps as soon as Artúr died, and left County Kalnoeky to Béla. May my nephew lead us not to folly.\n\n" + 
+			case directorsJournalOneKey:
+				return  directorsJournalDisclaimer +
+                        "...but my inquiry into the branding rates of other counties has again borne fruit. A letter arrived this morning with Count Laomedan's reply. She says she has only ordered the branding of less than a fourth the number of serfs " + 
+                        "as we have. I have visited her county recently; she does not have so dissimilar a number of rebels and criminals to bare out this difference. We are branding far beyond the norm. And my gut tells me it started recently. " + 
+                        "Perhaps as soon as Artúr died, and left County Kalnoeky to Béla. May my nephew lead us not to folly...\n\n" + 
 
-                        "I confronted Béla about his new 'austerity measures' he has put in place. He quoted my own words back to me: 'stockpile in peace what you require in war.' The quotas for grain he has instated go beyond even our harshest steps during the last eruption in the Emancipation Conflict. When I told him the other lords would chafe under such laws, " + 
-                        "he told me they had already embraced them. What is going on? Have my peers gone mad?\n\n" + 
+                        "...I confronted Béla about his new 'austerity measures' he has put in place. He quoted my own words back to me: 'stockpile in peace what you require in war.' The quotas for grain he has instated go beyond even our harshest " + 
+                        "steps during the last eruption in the Emancipation Conflict. When I told him the other lords would chafe under such laws, he told me they had already embraced them. What is going on? Have my peers gone mad...\n\n" + 
 
-                        "The scheme has become plain: grain quotas are slave quotas. While I was traveling investigating the upsurge in brandings, Béla struck a deal with many of the lords of his generation. They would agree to supply the grain necessary to make war on the Masons a second time, so long as Béla could supply the branded required to meet those goals, and convince the other counts to follow suit. " +
-                        "Any discomfort in the short term will be made up for by the loot brought back from fighting the Craft Folk. To meet the labor demands of his supporters, my nephew is contriving new reasons for the brand, and no doubt targeting the serfs controlled by the lords that resist his plans. I expect the reason why none of them have approached me about this before " + 
-                        "now is they expect I'm actually supporting this madness.\n\n" +
+                        "...the scheme has become plain. The grain quotas <i>are</i> slave quotas. While I was traveling investigating the upsurge in brandings, Béla struck a deal with many of the lords of his generation. They would agree to supply " + 
+                        "the grain necessary to make war on the Masons a second time, so long as Béla could supply the branded required to meet those goals, and convince the other counts to follow suit. Any discomfort in the short term will be " + 
+                        "made up for by the loot brought back from fighting the Craft Folk. To meet the labor demands of his supporters, my nephew has contrived new reasons for the brand, and no doubt has targeted the serfs controlled by the lords " + 
+                        "that resist his plans. My own reputation as a hero of the last war has worked against me; I expect the reason why none of them have approached me about this before now is they believe I am actually supporting this madness...";
 
-                        //End of exerpt 1
+			case directorsJournalTwoKey:
+				return  directorsJournalDisclaimer +
+                        "...and now the counts have been summoned to County Kalnoeky, in secret. A meeting like this has happened only a handful of times since our truce with the Masons. The secrecy was abnormal, but necessary to keep the Masons from suspecting " + 
+                        "our preparations go beyond the superficial. My status as Commander of the Western Lance forced Béla to allow me a seat at the discussions, but not before he made plain I am to act as an ornament to his regime, and nothing " + 
+                        "more. I had hoped to speak sensible words to accepting ears at the gathering, but those who know the weariness I do have long since passed from this life. The counts that came after are but children unaccustomed to conflict. " + 
+                        "The babes we left behind to mind our thrones now sit atop them ready to follow the path we strode before. They have not yet grown tall enough to see the cliff we found at its end...\n\n" +
 
-                        "The counts have been summoned to County Kalnoeky, in secret. A meeting like this has not happened in eight years, and only a handful of times since our truce with the Masons. The secrecy will hopefully keep them from suspecting our preparations go beyond the superficial. My status as Commander of the Western Lance forced Béla to allow me a seat at the discussions, but " + 
-                        "not before he made plain I am to act as an ornament to his regime, and nothing more. I had hoped to speak sensible words to accepting ears at the gathering, but those who know the weariness I do have long since passed from this life. The counts that came after are but children unaccustomed to conflict. The babes we left behind to mind our thrones now sit atop them ready to follow the paths we strode before. " + 
-                        "They have not yet grown tall enough to see the cliff we found at it's end. \n\n" +
+                        "...days of bickering and nothing has come of it. Maybe less has changed than I thought it had. Everyone wants to avoid a repeat of the previous failures, but the geography of the Kingdom of Masons is formidable. Mountains along " + 
+                        "both flanks, rivers protecting their most vital southern lands. What's more, even these children were aware of the lessons learned by the last war: should the Craft Folk close the Masonic Gap, any hope of a lasting victory " + 
+                        "would be lost. Some of the counts have looked to me for insight on how to defeat the land itself, as if I was not its most famous victim. I had to walk a tight line to give helpful advice while not overstepping my " + 
+                        "place at Béla's side, who has been uncharacteristically quiet. My nephew simply lets our guests exhaust themselves bickering, and I'm surprised they haven't realized what a waste of time this is. Maybe Béla knows it too, he " + 
+                        "and Count Thököly have been meeting after the rest of the counts retire. For what purpose, I am not privy to...\n\n"+
+                        
+                        "...my nephew has learned much in the way of politics over his three decades. The other counts were in an uproar today; they tire of the lack of agreement in our war council. Even " + 
+                        "their anger they tire of: I've seen some of their passions turn to nihilism as the enormity of their task began to dawn on them. But as their fears gripped them, Béla put forth his first suggestion of the entire summit. I can " + 
+                        "see now why he waited: had it been revealed at the start, the others would have laughed in his face. Now it seems like a revelation from the Gods: heavensent intervention to break the deadlock. Béla revealed that Trónszék had " + 
+                        "been found. What's more, Béla planned to use the abandoned Delver city as a path into the Kingdom of Masons, bypassing the Waking Mountains entirely and giving us a second lifeline to fuel our campaigns against the Masons. " + 
+                        "Before the others could express their disbelief, Count Thököly explained that she had already sent her Vada to confirm this for herself. Even then, jokes were made that I am sure Béla will not forget. Once they realized he was " + 
+                        "serious, it took much of his political capital to keep the meeting from ending right there. In the end, an adjournment of some months had to be called, to allow the others to send their own agents to confirm what Béla claims " + 
+                        "was true. Not to mention to consult their priests on whether even considering the plan was blasphemy...";
 
-                        "Days of bickering and nothing has come of it. Maybe less has changed than I thought it had. The only thing of note is Count "+
-                        ""+
+			case directorsJournalThreeKey:
+				return  directorsJournalDisclaimer +
+                        "...the counts have returned to Pharos, and this time the atmosphere is one of hope. Potential. But even these fools won't volunteer their aid without some promise of victory, and some authority to keep them in line. Count Thököly " + 
+                        "arrived days earlier than the others, and she says she has already started the excavation of the Trónszék's entrance, but her team's progress is too slow. She expects without the support of the other counts, it will not be ready " + 
+                        "before their attempts are discovered by masonic agents. Béla has informed me that there will be a vote tonight for grand count, which I expected. The count's keep their own council on domestic matters, but it would take a someone " + 
+                        "elected to that office to steer each county along a single track in a time of war. Should he win that vote, there will be no saving us from that course...\n\n" +  
 
-                        "The counts' chose me for this task for my adherence to our cause. I know my Confederation requires this act of sacrifice should a new campaign against the Masons ever be renewed. The mountains act as better walls than they could ever build. A way beneath them would be nothing less than transformative in our war planning. " + 
-                        "However, I confess my thoughts turn yet again to what the Great Mother would think of this expedition. A camp so close to Trónszék? Is it not some variety of sacrilege? We don't seek her domain at the top of the mountain, meerly to travel beneath it along the roads the Delver's made, but that excuse feels more and more threadbare with each passing week. " + 
-                        "I can feel Her eyes on us. Angyal knows why we are here and surely must disapprove. She expelled the Delvers of this mountain and took their home for it's remoteness, and yet here we are all the same. The worms that assaulted our dig teams can be nothing but a clear sign that we have ridden where we should not.\n\n" +
-                        "My leg has been hurting again. This place... it feels all too familiar. This morning I smelled smoke as I awoke. I lept from my bed and meant to race to the door, shouting for the guard to be raised and for my mount to be sent for. Had my leg not given out before I could make it across the room, my household may well have seen me " +
-                        "race about the Manse, shrieking as if I was still at Wudra. I don't think the sentries outside my doors heard what I was saying, they seemed more confused than alarmed as I picked myself off the floor. Perhaps it would be better if I <I>was</I> still there. At least then I could retreat. Here I am stuck under the Great Mother's wrathful gaze.\n\n" + 
-                        "Trapped against giant walls. Again the defenders come forth. We are not welcome.";
+                        "...as foreseen, it was the priests who were Béla's greatest opposition. Most of them followed the orthodox posture, which I have always favored: Trónszék was abandoned by the Delvers as their cost for angering Angyal. She took the " + 
+                        "mountain as her home, and commanded the Delvers to never return. All of the scriptures speak at length about the efforts the Great Mother exerted to ensure she would not be disturbed there: wiping its location from all memory, " + 
+                        "sending earthquakes to bury its entrances, covering its peak with snow to prevent any human from climbing to its pinnacle. She even covered all other peaks with snow to further disguise its position. These are not the actions " +
+                        "of a Goddess who invites visitors. But Béla found some woodwitch hermit that he dressed up in a priest's gown and had him give the assenting opinion: the Goddess lives at the top of the mountain, and all we would do is travel " + 
+                        "under it. So long as we bowed our heads while we entered and left, She would accept our passing. The hermit's speech took less than two minutes. Then the council voted for Béla to become grand count unanimously, and with him, his plan. " + 
+                        "The entire affair would have been too ridiculous for a farce...\n\n";
+
+			case directorsJournalFourKey:
+				return  directorsJournalDisclaimer +
+                        "...I made a mistake, Gods preserve me. I gained an audience with Béla, and I argued with him for some time. It was like he was but a youth on the training field, and I was still his instructor. I listed my grievances, going " + 
+                        "as far back as my investigation into his expansion of our brandings. This setting was familiar to us both: a dressing down of a student by his uncle, as had happened so many times while his father was busy with the county's " + 
+                        "governance. But this time, I faltered in my delivery. A momentary stutter, as I described the immorality of what he had done, and we locked eyes. We both realized the lesson was different this time. I'm not " + 
+                        "certain if he understood why I tripped as I did; I hope I hid the shame of hypocrisy from my features well. But Béla exploited my weakness, and gave me a verbal lashing that perhaps I somewhat deserved. I fear now that he no longer " +
+                        "views me as simply a detractor, but a liability, and perhaps even a traitor.\n\n"+ 
+
+                        "The clearing of Trónszék's entrance still eludes our dig teams. Ever since Béla ascension to grand count, the other counts have looked for ways of speeding up the process. Alternate entrances to Trónszék's tunnel system have been " + 
+                        "a particular point of interest, and we believe we have found one. This time, the entrance was found on the southern side of the Waking Mountains, deep within Mason territory. Béla has kept his plans close to his chest " + 
+                        "argument, but I assume the Vada were used in it's location. I am still respected by many of the other counts, however, and much of Béla's own strategic reputation has come from his tutelage under me, so I am still accepted at the count's " + 
+                        "council meetings for the moment. A proposal was put forth to send an expedition into the Kingdom of Masons to settle a camp near the second entrance, and begin a dig to exploit it. The northern section of the Kingdom is mostly abandoned, " + 
+                        "save for bandits and horse smugglers on the frontier. A small company, moving at night, could make the journey unnoticed. I have put my name forward to lead it, which I expect to be accepted. This will give me an excuse to move my household out of " +
+                        "Pharos while I make preparations. It may even become necessary to bring them with me, should I be unable to find them a place they will be safe from become hostages for Béla. God's, how did things go so wrong that I prefer the " + 
+                        "Kingdom of Masons as a haven to my own home..."; 
+
             case blastingJellyInstructionsKey:
                 return  "Step 1: Place primed barrel of blasting jelly at intended ignition site.\n\n" + 
                         "Step 2: Place small cup from water clock on top of barrel.\n\n" +
@@ -274,3 +321,12 @@ public static class BookList
 	}
 
 }
+
+/*
+    "The counts' chose me for this task for my adherence to our cause. I know my Confederation requires this act of sacrifice should a new campaign against the Masons ever be renewed. The mountains act as better walls than they could ever build. A way beneath them would be nothing less than transformative in our war planning. " + 
+    "However, I confess my thoughts turn yet again to what the Great Mother would think of this expedition. A camp so close to Trónszék? Is it not some variety of sacrilege? We don't seek her domain at the top of the mountain, meerly to travel beneath it along the roads the Delver's made, but that excuse feels more and more threadbare with each passing week. " + 
+    "I can feel Her eyes on us. Angyal knows why we are here and surely must disapprove. She expelled the Delvers of this mountain and took their home for it's remoteness, and yet here we are all the same. The worms that assaulted our dig teams can be nothing but a clear sign that we have ridden where we should not.\n\n" +
+    "My leg has been hurting again. This place... it feels all too familiar. This morning I smelled smoke as I awoke. I lept from my bed and meant to race to the door, shouting for the guard to be raised and for my mount to be sent for. Had my leg not given out before I could make it across the room, my household may well have seen me " +
+    "race about the Manse, shrieking as if I was still at Wudra. I don't think the sentries outside my doors heard what I was saying, they seemed more confused than alarmed as I picked myself off the floor. Perhaps it would be better if I <I>was</I> still there. At least then I could retreat. Here I am stuck under the Great Mother's wrathful gaze.\n\n" + 
+    "Trapped against giant walls. Again the defenders come forth. We are not welcome.";
+*/

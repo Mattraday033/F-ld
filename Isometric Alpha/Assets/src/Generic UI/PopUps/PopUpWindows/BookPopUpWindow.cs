@@ -35,7 +35,14 @@ public class BookPopUpWindow : PopUpWindow
 
         instance = this;
 
+        AudioManager.duckMusicForDialogue();
+
         StartCoroutine(waitOneFrameThenShow());
+    }
+
+    private void OnDestroy()
+    {
+        AudioManager.unduckMusicAfterDialogue();
     }
 
     private IEnumerator waitOneFrameThenShow()

@@ -355,6 +355,7 @@ public static class ChestItemIDList
         list.Add(new ItemListID(ItemList.bookListIndex, ItemList.theInventionOfSinIndex));
         list.Add(new ItemListID(ItemList.bookListIndex, ItemList.nightOfEmptyPlinthsIndex));
         list.Add(new ItemListID(ItemList.bookListIndex, ItemList.saintsAndSaintsIndex));
+        list.Add(new ItemListID(ItemList.bookListIndex, ItemList.directorsJournalOneIndex));
 
         chestItemIDList.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3c, list);
 

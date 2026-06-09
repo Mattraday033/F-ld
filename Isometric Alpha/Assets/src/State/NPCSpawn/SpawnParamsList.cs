@@ -1155,7 +1155,7 @@ public static class SpawnParamsList
         #region Manse-2F-1b
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseSecondFloor + LocationNameList.section1b, NPCNameList.diary),
-                                        new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { BookList.directorsJournalReadFlag}),spawnWhileHostile: spawnWhileHostile));
+                                        new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { BookList.directorsJournalTwoReadFlag}),spawnWhileHostile: spawnWhileHostile));
 
         #endregion
         #region Manse-2F-1c

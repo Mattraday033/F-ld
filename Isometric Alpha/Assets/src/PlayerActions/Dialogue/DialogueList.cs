@@ -35,26 +35,6 @@ public static class DialogueList
     {
         dialogueList = new Dictionary<string, Dialogue>();
 
-        #region Dialogues not attached to NPC's
-        // addDialogueToList(DialogueNameList.afterKillingGuardsMineLvl3Key,
-        //                  new Dialogue(new string[] { "", "Nándor", "Carter", "Guard Márcos", "Guard Pázmán", "Guard Réka" }, new GameObject[6], Resources.Load<TextAsset>(DialogueNameList.afterKillingGuardsMineLvl3Key)));
-
-        // addDialogueToList(DialogueNameList.taborManse2F2BKey,
-        //                  new Dialogue(new string[] { "", "Chief Tabor" }, new GameObject[2], Resources.Load<TextAsset>(DialogueNameList.taborManse2F2BKey), new NPCCombatInfo(new EnemyPackInfo[] { EnemyPackInfoList.taborFight },
-        //                                                                                                                                                        new DeadNameList[] { new DeadNameList(new string[] { NPCNameList.chiefTabor }) })));
-
-        // addDialogueToList(DialogueNameList.guardPunishmentConvoKey,
-        //                  new Dialogue(new string[] { "", "Nándor", "Carter", "Kastor", "Janos", "Brush", "Géza", "Slave 1", "Slave 2", "Slave 3", "The Crowd", "Chief Tabor", "Guard Márcos", "Guard András", "Guard Réka", "Guard Pázmán", "Ervin", "Clay" }, new GameObject[18], Resources.Load<TextAsset>(DialogueNameList.guardPunishmentConvoKey)));
-
-
-        // addDialogueToList(DialogueNameList.afterKillingAndrasConvoKey, new Dialogue(new string[] { "", "Janos" }, new GameObject[2], Resources.Load<TextAsset>(DialogueNameList.afterKillingAndrasConvoKey)));
-
-        // addDialogueToList(DialogueNameList.vazulPath, new Dialogue(new string[] { "", NPCNameList.thatch + 1, NPCNameList.slate, NPCNameList.thatch + 1 }, Resources.Load<TextAsset>(DialogueNameList.vazulPath)));
-
-        // addDialogueToList(DialogueNameList.taborAfterClayFightKey, new Dialogue(new string[] { "", "Chief Tabor" }, new GameObject[2], Resources.Load<TextAsset>(DialogueNameList.taborAfterClayFightKey), new TextAsset[] { Resources.Load<TextAsset>(DialogueNameList.chiefTaborPunishmentDialogueKey) }));
-
-        #endregion
-
         #region Interactables
 
         addDialogueToList(NPCNameList.vaultableBarrels,
@@ -1249,7 +1229,8 @@ public static class DialogueList
                                                                 NPCNameList.overseerGaspar,
                                                                 NPCNameList.chiefTabor+1,
                                                                 NPCNameList.nandor+1,
-                                                                NPCNameList.carter+1
+                                                                NPCNameList.carter+1,
+                                                                NPCNameList.weft+1
                                                             }, 
                                  Resources.Load<TextAsset>(DialogueNameList.prerevoltPagePathName)));
 
