@@ -42,8 +42,6 @@ public class MapLocation : IMapObject
 	private string zoneKey;
 	public string locationName;
 	
-	private bool isFastTravelDestination;
-	
 	public int interiors { get; private set; }
 	
 	public string[] adjacentLocations;
@@ -51,13 +49,11 @@ public class MapLocation : IMapObject
 
 	public InteriorDisplayStatRequirements[] interiorDisplayStatRequirements;
 
-    public MapLocation(string zoneKey, string locationName, string displayName, bool isFastTravelDestination, int interiors, string[] adjacentLocations)
+    public MapLocation(string zoneKey, string locationName, string displayName, int interiors, string[] adjacentLocations)
     {
         this.zoneKey = zoneKey;
         this.locationName = locationName;
 		setDisplayName(displayName);
-
-        this.isFastTravelDestination = isFastTravelDestination;
 
         this.interiors = interiors;
 
@@ -67,13 +63,11 @@ public class MapLocation : IMapObject
 		this.interiorDisplayStatRequirements = new InteriorDisplayStatRequirements[0];
     }
 
-	public MapLocation(string zoneKey, string locationName, string displayName, bool isFastTravelDestination, int interiors, string[] adjacentLocations, ZoneButtonInfo[] zoneButtons)
+	public MapLocation(string zoneKey, string locationName, string displayName, int interiors, string[] adjacentLocations, ZoneButtonInfo[] zoneButtons)
 	{
 		this.zoneKey = zoneKey;
 		this.locationName = locationName;
 		setDisplayName(displayName);
-		
-		this.isFastTravelDestination = isFastTravelDestination;
 		
 		this.interiors = interiors;
 		
@@ -83,14 +77,12 @@ public class MapLocation : IMapObject
 		this.interiorDisplayStatRequirements = new InteriorDisplayStatRequirements[0];
 	} 
 
-	public MapLocation(string zoneKey, string locationName, string displayName, bool isFastTravelDestination, int interiors, string[] adjacentLocations, ZoneButtonInfo[] zoneButtons, InteriorDisplayStatRequirements[] interiorDisplayStatRequirements)
+	public MapLocation(string zoneKey, string locationName, string displayName, int interiors, string[] adjacentLocations, ZoneButtonInfo[] zoneButtons, InteriorDisplayStatRequirements[] interiorDisplayStatRequirements)
 	{
 		this.zoneKey = zoneKey;
 		this.locationName = locationName;
 		setDisplayName(displayName);
-		
-		this.isFastTravelDestination = isFastTravelDestination;
-		
+
 		this.interiors = interiors;
 		
 		this.adjacentLocations = adjacentLocations;
@@ -168,12 +160,7 @@ public class MapLocation : IMapObject
 	
 	public virtual bool getIsFastTravelDestination()
 	{
-		// if (State.debugDiscoverAllLocations)
-		// {
-		// 	return true;
-		// }
-
-		return isFastTravelDestination;
+        return Helpers.hasQuality<TransitionSpawnInfo>(TransitionSpawnInfoList.getTransitionSpawnInfo(locationName), t => t.fastTravelCapable());
 	}
 	
 	public virtual int getInteriors()

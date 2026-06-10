@@ -12,7 +12,7 @@ public class MapInterior : MapLocation
     private int interiorIndex;
 
     public MapInterior(string zoneKey, string locationName, string displayName, int interiorIndex, string exteriorLocationName) :
-    base(zoneKey, locationName, displayName, false, MapObjectList.zeroInteriors, new string[] { exteriorLocationName })
+    base(zoneKey, locationName, displayName, MapObjectList.zeroInteriors, new string[] { exteriorLocationName })
     {
         this.exteriorLocationName = exteriorLocationName;
         this.interiorIndex = interiorIndex;

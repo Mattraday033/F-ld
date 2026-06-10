@@ -362,6 +362,8 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(ZoneKeyList.manseFirstFloor + LocationNameList.section1a, ZoneKeyList.manseFirstFloor + LocationNameList.section3a, new Vector3Int(8, 1), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingY));
 
+        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(1, 0), Facing.NorthWest));
+
         transitionSpawnInfoDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section1a, list);
 
         #endregion

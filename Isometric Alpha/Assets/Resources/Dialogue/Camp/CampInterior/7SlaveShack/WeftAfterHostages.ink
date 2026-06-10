@@ -197,6 +197,7 @@ He's known me a lot longer. He'll take my side over yours!
 
 {
 -liedToWeftAboutHearingExtortion:
+setToTrue(weftKnowsYouLiedAboutHearingExtortion)
 So you did hear us talking! You lying sack of shit! If you tell that to anyone, the guards I have been useful to will find ways to make you pay.
 -else:
 I should have known you'd prove a backstabber. If you tell that to anyone, the guards I have been useful to will find ways to make you pay.

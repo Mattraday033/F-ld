@@ -563,7 +563,7 @@ public static class HoverMessageList
     private const string retreatChanceMessage = "Your chance to successfully retreat from combat. Determined by your Party's total Dexterity and Wisdom.";
     private const string volleyAccuracyMessage = "Extra accuracy applied whenever your party performs a Volley action. Determined by your Party's total Wisdom and Charisma.";
     private const string goldMultiplierMessage = "Extra Gold received from combat. Can be gained by equipping certain Items and Abilities.";
-    private const string partySlotsMessage = "The number of Party Members your Party can bring into combat. Determined by the highest Level of any of your Party Members, as well as your Party's total Wisdom and Charisma.";
+    private const string partySlotsMessage = "The number of Companions your Party can bring into combat. Determined by the highest Level of any of your Party Members, as well as your Party's total Wisdom and Charisma.";
     private const string partyActionsMessage = "The number of Actions your Party can perform each round in combat. Determined by the highest Level of any of your Party Members, as well as your Party's total Dexterity and Charisma.";
     public const string discountKey = "Discount";
     private const string discountMessage = "The total difference in an item's price, based on your Party's total Charisma. Sometimes merchants will give extra discounts or penalties based on what you've done for them or to them. A negative discount means the merchant is making their goods more expensive.";

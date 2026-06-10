@@ -133,6 +133,7 @@ public static class ItemList
     public const int signalTorchIndex = 28;
     public const int servantsClothesIndex = 29;
     public const int unsentLettersIndex = 30;
+	public const int pagesLetterOpenerIndex = 31; 
 
 	public const int leafSamplesIndex = 0;
 	public const int guardDiaryIndex = 1;
@@ -329,14 +330,15 @@ public static class ItemList
 		armor.Add(new Trinket(new ItemListID(armorListIndex, bronzeBadgeIndex), bronzeBadgeKey, "This bronze badge looks bruised and worn, as if it was just pulled from a fire."));
 		armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, plumedHelmetIndex), plumedHelmetKey, "A battered helmet, with a ragged plume made of hair from an unknown beast."));
 		armor.Add(new OffHandFist(new ItemListID(armorListIndex, offHandFistIndex), fistKey, "Good old fashioned meat bludgeons.", "S+D+W", "D+W"));
-        armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, bronzeDirkIndex), bronzeDirkKey, "A curved bronze blade, held in the off hand.", "S + D + 3", "D+2", "CurvedDagger"));
+        armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, bronzeDirkIndex), bronzeDirkKey, "A curved bronze blade, held in the off hand.", "S + D + 3", "D+2", ItemSpriteList.curvedDaggerSprite));
 		armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, ancientClawIndex), ancientClawKey, "This battered gauntlet has sharp spikes protruding from its knuckles, which immitate an animal's claw. Its main use is to catch and hold an opponent, helping to line up a strike from your other hand or an ally.", "2S + 2D + 3", "D+2", "Claw"));
-		armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, wickedKnifeIndex), wickedKnifeKey, "A barbed knife, meant for gouging.", "2D + 3", "2D + 1", "WickedKnife"));
+		armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, wickedKnifeIndex), wickedKnifeKey, "A barbed knife, meant for gouging.", "2D + 3", "2D + 1", ItemSpriteList.wickedKnifeSprite));
 		armor.Add(new TierOneBody(new ItemListID(armorListIndex, leatherArmorIndex), leatherArmorKey, "Leather pads of tanned oxhide that cover the torso."));
 		armor.Add(new Trinket(new ItemListID(armorListIndex, signalTorchIndex), signalTorchKey, "A large torch used to direct archers in combat."));
 		armor.Add(new TierZeroBody(new ItemListID(armorListIndex, servantsClothesIndex), servantsClothesKey, "A plain robe, bleached white and paired with a colored sash."));
-        armor.Add(new Trinket(new ItemListID(armorListIndex, unsentLettersIndex), unsentLettersKey, "A small trove of paper scraps, scribbled with charcoal. Each contains a journal entry, addressed from Dezso to someone named 'Teréz'. Scattered across these smudged and grimy pages are one man's affection, fear, and loneliness."));
-		
+        armor.Add(new Trinket(new ItemListID(armorListIndex, unsentLettersIndex), unsentLettersKey, "A small trove of paper scraps, scribbled with charcoal. Each contains a journal entry, addressed from Dezso to a woman named 'Teréz'. Scattered across these smudged and grimy pages are one man's affection, fear, and loneliness."));
+        armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, pagesLetterOpenerIndex), "Page's Letter Opener", "A sturdy little knife. Perfect for cutting the twine on a missive, or cleaning one's nails.", "D+C+2", "D+C", ItemSpriteList.letterOpenerSprite));
+
 		//QuestItem(string key, string loreDescription, int ID)
 
 		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, leafSamplesIndex), "Leaf Samples", "An array of green leaves of all shapes and sizes.", leafSamplesIndex));
@@ -535,6 +537,7 @@ public static class ItemSpriteList
     public const string cudgelSprite = "Cudgel";
     public const string curvedDaggerSprite = "CurvedDagger";
     public const string fryingPanSprite = "FryingPan";
+    public const string letterOpenerSprite = "Letter Opener";
     public const string malletSprite = "Mallet";
     public const string meatSprite = "Meat";
     public const string oneHandedPickSprite = "OneHandedPick";

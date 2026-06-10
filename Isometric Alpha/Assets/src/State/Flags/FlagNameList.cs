@@ -45,6 +45,7 @@ public static class FlagNameList
         public const string metWeft = "metWeft";
         public const string weftKnowsYouKnowHisSecret = "weftKnowsYouKnowHisSecret";
         public const string liedToWeftAboutHearingExtortion = "liedToWeftAboutHearingExtortion";
+        public const string weftKnowsYouLiedAboutHearingExtortion = "weftKnowsYouLiedAboutHearingExtortion";
         public const string weftAddedToParty = "weftAddedToParty";
         public const string spokeToWeftAfterHostageSituation = "spokeToWeftAfterHostageSituation";
         public const string insultedWeftAfterHostages = "insultedWeftAfterHostages";
@@ -380,6 +381,11 @@ public static class FlagNameList
         public const string toldPageRevengeFeltFantastic = "toldPageRevengeFeltFantastic";
         public const string spokeWithPageBeforePrisoners = "spokeWithPageBeforePrisoners"; //if you speak to page at the center of camp after director is defeated but b4 dealing with the prisoners at the mess hall
         public const string pageSaidReadyToLeave = "pageSaidReadyToLeave"; //disables debris at the gate after speaking with page
+        public const string pageGaveKnife = "pageGaveKnife";
+        public const string toldToFindCarterByPage = "toldToFindCarterByPage";
+        public const string acceptedFindCarterQuest = "acceptedFindCarterQuest";
+        public const string finishedFindCarterQuest = "finishedFindCarterQuest";
+        public const string mentionedPageToCarterOnFirstMeeting = "mentionedPageToCarterOnFirstMeeting";
 
         //boss kill flags
         public const string mineLvl2BatBossKilled = "mineLvl2BatBossKilled";

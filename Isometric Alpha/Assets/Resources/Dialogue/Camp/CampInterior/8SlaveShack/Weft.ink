@@ -215,6 +215,8 @@ After the others were punished, I got set up here with a larger portion for my r
 
 === 1cba ===
 
+setToTrue(weftKnowsYouLiedAboutHearingExtortion)
+
 So you did hear what we were talking about! As the Mother is my witness, if you tell anyone about that I will make you regret it.
 
     +Your secret is safe with me.

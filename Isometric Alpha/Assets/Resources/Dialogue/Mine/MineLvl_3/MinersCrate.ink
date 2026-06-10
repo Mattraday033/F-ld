@@ -26,6 +26,10 @@ VAR mentionedDirectorMinersCrates = false
 VAR askedWhoMarcosIsMinersCrates = false
 VAR metBrandedSurvivors = false
 
+VAR acceptedFindCarterQuest = false
+VAR finishedFindCarterQuest = false
+VAR mentionedPageToCarterOnFirstMeeting = false
+
 VAR gasparMentionedConflictBetweenHimAndMarcos = false
 
 VAR nandorSomethingToDiscuss = false
@@ -75,14 +79,14 @@ You there! Step into the light, with your hands where I can see them. *A branded
     -mineLvl3BreachSealed:
         ->sealedBreach_1a
     -else:
+
+        I have no idea who you are. You have the brand but you're not one of the slaves that normally works on this level. Did Gáspár send you?
         ->1b
     }
     +\*Leave.*
         ->Close
 
 === 1b ===
-
-I have no idea who you are. You have the brand but you're not one of the slaves that normally works on this level. Did Gáspár send you?
 
     {
     -mineLvl3ToldToFindMarcos:
@@ -108,7 +112,13 @@ I have no idea who you are. You have the brand but you're not one of the slaves 
         ->4a
     }
 
-    +I'm a new slave. I'm looking for any survivors.
+    {
+    -acceptedFindCarterQuest and not mentionedPageToCarterOnFirstMeeting:
+    +I was sent by a nobrand named Page. She has me looking for one of the branded named Carter who works on this floor.
+        ->sentByPage_1a
+    }
+
+    +I'm a new slave. I was just looking for any survivors.
         ->3a
 
 === 1ba ===
@@ -143,6 +153,18 @@ You are a capable fighter if you've made it this far. Let me show you to the oth
     +I don't have time for this. Just point me in the direction of the worm's tunnel and I'll be on my way.
         Very well. The worms came from the southern most shaft on this floor. Just take every opportunity to turn south and you can't miss it.
         ->Close
+
+=== sentByPage_1a ===
+
+setToTrue(mentionedPageToCarterOnFirstMeeting)
+
+\*Carter looks surprised.* Page sent you? She has an eye for talent if she picked you out of all the branded to come down here and rescue us.
+
+    +You know her? She said the two of you hadn't met face to face before.
+        Oh, of course not. She's the Director's aid, correct? Works up in the Manse? I've seen her before, but we've never spoken. 
+
+        So that's it? Some nobrand asks you to come find me, and you break into the mine to mount a rescue? Or is there more going on here than you're letting on.
+        ->1b
 
 === clearCrates(->divert) ===
 
@@ -853,6 +875,12 @@ Carter tells me you've ended the worm threat. I'm sure he's already thanked you,
 ->3c
 
 === Close ===
+
+{
+-acceptedFindCarterQuest and not finishedFindCarterQuest:
+setToTrue(finishedFindCarterQuest)
+finishQuest(Find Carter, true, Carter found.)
+}
 
 close()
 

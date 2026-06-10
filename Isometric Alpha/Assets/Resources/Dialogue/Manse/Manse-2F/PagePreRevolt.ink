@@ -21,11 +21,7 @@ VAR playerName = ""
 
 VAR hostagesDead = false
 VAR metDirectorAfterHostages = false
-VAR sentIntoMineByDirector = false
-
-VAR gaveWeftCreditAfterHostages = false
-VAR tookBlameForHostageDeath = false
-VAR blamedWeftForHostageDeath = false
+VAR sentIntoMineByDirector = false 
 
 VAR knowsAboutTheMine = false
 
@@ -49,6 +45,10 @@ VAR finishedBalintsTask = false
 VAR nandorSpokeToPlayerAboutDirectorBetrayal = false
 VAR acceptedDirectorVidraLetterJob = false
 VAR directorMentionedAnnouncement = false
+
+VAR toldToFindNandor = false
+VAR pageGaveKnife = false
+VAR toldToFindCarterByPage = false
 
 VAR discussedWithWeftAfterTookMineJob = false
 
@@ -135,17 +135,13 @@ changeCamTarget({taborIndex})
 
 Director, sir, these are the two branded that Captain Adéla and I spoke of. The ones we used to negotiate for the hostages.
 
-    +Bye.
-
-    ->deactivateExtras
-/*
 {
 -hostagesDead:
     ->hostagesDead_2a
 -else:
     ->hostagesSaved_2a
 }
-*/
+
 === hostagesDead_2a ===
 
 changeCamTarget({adelaIndex})
@@ -1059,6 +1055,7 @@ I have informed Quartermaster Emese that you are to be given the reward I promis
 -else:
     fadeToBlack()
 }
+
 deactivate({weftIndex})
 deactivate({taborIndex})
 deactivate({adelaIndex})
@@ -1076,7 +1073,7 @@ deactivate({directorIndex})
 }
 
 {
--metDirectorAfterHostages and not discussedWithWeftAfterTookMineJob:
+-metDirectorAfterHostages and not discussedWithWeftAfterTookMineJob and not mineLvl3BreachSealed:
 setToTrue(discussedWithWeftAfterTookMineJob)
 
 movePlayerPos(-5,-1)
@@ -1084,7 +1081,7 @@ setFacing(SE)
 changeCamTarget({weftOutsideIndex})
 activate({weftOutsideIndex})
 
-->discussWithWeft
+->discussWithWeft_1a
 
 -else:
 movePlayerPos(-6,-2)
@@ -1096,17 +1093,218 @@ fadeBackIn(60)
 ->Close
 
 
-=== discussWithWeft ===
+=== discussWithWeft_1a ===
+
+VAR beDamned = "We're likely to die down there, or up here when we return so the Lovashi can save face, promises of a pardon be damned."
 
 fadeBackIn(60)
 
 I didn't think such a thing was possible. A branded, receiving a pardon? I've certainly never heard of it happening before now.
 
     +I wouldn't get your hopes up. We have to survive the mine first.
-        ->Close
+        Too true. You're handy in a fight, but I don't expect we will get very far.
+        ->discussWithWeft_1b
     +They're just trying to motivate us to solve their problem without risking any of their guards. We're not getting out of here. Not alive.
-        ->Close
-    // +I'm 
+        I expect you're right. {beDamned}
+        ->discussWithWeft_1b
+    +I'm just glad to take any lifeline I'm given.
+        I'm not certain this <i>is</i> a lifeline. {beDamned}
+        ->discussWithWeft_1b
+    +If you found it so strange, why did you accept? Even the Director was surprised.
+        ->discussWithWeft_1ba
+
+=== discussWithWeft_1b ===
+
+    +Then why did you accept? Even the Director was surprised.
+        ->discussWithWeft_1ba
+
+=== discussWithWeft_1ba ===
+
+    {
+    -calculateWeftMood() > 0:
+        ->discussWithWeft_1c
+    -else:
+        ->discussWithWeft_1d
+    }
+
+=== discussWithWeft_1c ===
+
+\*Weft hesitates before speaking, keeping his voice low.* Because, either way our mission ends, it is an escape from this torturous betweenness I've woven for myself. 
+
+The guards use me as an example of the perfect branded, but my usefulness only earns me a calculating hesitation before their abuses begin. Even Tabor would see me dead after I've learned all I can. And the other branded sharpen knives in their minds when they see me approach.
+
+I did not realize the decisions that earned my bed would also reward me with too much worry to find any rest in it. Even as I reveal this to you I think 'does it matter?' Do they think this is some scheme to drop their guard so I can leave them when the worms are close?
+
+->discussWithWeft_1ca
+
+=== discussWithWeft_1ca ===
+
+    +And all that talk about taking pride in being chosen by the Lovashi? Was that just rubbish?
+        I had just met you. I knew not if you were friend, foe, or some test of the masters to keep me on my toes. I am still not entirely sure, but if we are to risk death in the mine together, I believe a revelation like this is warranted.
+        ->discussWithWeft_1ca
+    +I admit, the thought of a betrayal had crossed my mind.
+        I understand. I am not a fighter, but I will do what I can to earn my keep. By the end of this, you will know you can trust me at with your back.
+        ->discussWithWeft_DeactivateExtras
+    +I can sense the realness of your words. Stick close. We'll get through this together.
+        Truly? I am unsure whether you jest, but I will show you through my actions that I am worthy of such trust.
+        ->discussWithWeft_DeactivateExtras
+    +You sold out your friends, strut around like the lord of the camp, and then weep when you're hated for it? You'll not gain sympathy from me.
+        \*Weft shakes his head.* I should have expected such. I won't bother you with these thoughts again.
+        ->discussWithWeft_DeactivateExtras
+
+=== discussWithWeft_1d ===
+
+Because you are new, you have not yet learned the importance of maintaining your value to the Lovashi. Let us get on with it.
+
+->discussWithWeft_DeactivateExtras
+
+=== discussWithWeft_DeactivateExtras ===
+
+fadeToBlack()
+
+deactivate({weftOutsideIndex})
+
+{
+-not toldToFindNandor:
+->pageAsksToFindCarter_1a 
+-else:
+setFacing(SW)
+
+fadeBackIn(60)
+
+->Close
+}
+
+=== pageAsksToFindCarter_1a ===
+
+setToTrue(toldToFindCarterByPage)
+
+VAR concerned = "I've been very worried about a friend who I have not seen return from the mine. He's a branded like you. His name is Carter."
+
+changeCamTarget({pageIndex})
+setNPCFacing({pageIndex},SE)
+setFacing(NW)
+
+fadeBackIn(60)
+
+Excuse me, but could I speak to you for a moment? The Director informed me before you arrived that he would be asking you to enter the mine for him. I was wondering if you accepted?
+
+    +I have. Why does that interest you?
+        You must be very brave to accept going down there. {concerned}
+        ->pageAsksToFindCarter_1b
+    +That's no concern of yours.
+        If you'll forgive me, I know it isn't, but I have to ask. {concerned}
+        ->pageAsksToFindCarter_1b
+
+=== pageAsksToFindCarter_1b ===
+
+{
+-mineLvl3CarterAndNandorInParty:
+    ->pageAsksToFindCarter_1d
+}
+
+{
+-wisdom >= 2:
+    *I would expect the guards would frown on such a friendship. <Wis {wisdom}/2>
+        Ok, so we aren't exactly 'friends'. I've seen him work before, from a distance, and I've kept my... appreciation to myself. He probably isn't even aware I exist. But I would just feel terrible if I knew I could have helped him and I said nothing.
+        ->pageAsksToFindCarter_1b
+}
+    +And you want me to see if he's still alive?
+        Yes, exactly! If you'll be going down there anyways, I thought maybe you could look into what happened to him for me? It may be naive to hope he's still alive, but with no body we don't know his fate for certain.
+        ->pageAsksToFindCarter_1c
+
+=== pageAsksToFindCarter_1c ===
+
+    +I'm not about to do this for nothing.
+        setToTrue(pageGaveKnife)
+        I understand. I don't have much to give you, but I have a small knife I use to open documents with. I'm sure the Director wouldn't notice if I gave it to you. But only if you promise to bring back Carter! Or proof of what happened to him...
+        ->pageAsksToFindCarter_1c
+    +If I find his body, I will let you know.
+        ->pageAsksToFindCarter_1ca
+    +I am already risking my life, I'm not going to risk it further by wandering around in the dark.
+        ->pageAsksToFindCarter_DeactivateExtras
+    +I will see what became of him for you. 
+        ->pageAsksToFindCarter_1ca
+
+=== pageAsksToFindCarter_1ca ===
+
+activateQuestStep(Find Carter, Search the mine.)
+setToTrue(acceptedFindCarterQuest)
+
+{
+-pageGaveKnife:
+prepItem()
+}
+
+Thank you, branded. I'm Page, by the way. I will pray for the Gods to bring you and Carter back safe.
+
+{
+-pageGaveKnife:
+giveItem(2,31,1)
+}
+
+->pageAsksToFindCarter_DeactivateExtras
+
+=== pageAsksToFindCarter_1d ===
+
+    +Actually, Carter is alive. He is traveling with me now.
+        ->pageAsksToFindCarter_1da
+
+=== pageAsksToFindCarter_1da ===
+
+prepItem()
+
+\*Page looks at you in surprise, and then blushes shyly.* I did not realize. Then my concerns were over nothing. There is no need for us to speak, the guards would begin to get suspicious if we fraternized. I'll just have to introduce myself later.
+
+addXP(200)
+
+->pageAsksToFindCarter_DeactivateExtras
+
+=== pageAsksToFindCarter_DeactivateExtras ===
+
+fadeToBlack()
+
+setFacing(SW)
+setNPCFacing({pageIndex},SW)
+
+fadeBackIn(60)
+
+->Close
+
+VAR liedToWeftAboutHearingExtortion = false
+VAR weftKnowsYouLiedAboutHearingExtortion = false
+VAR insultedWeftAfterHostages = false
+VAR blamedWeftForHostageDeath = false
+VAR gaveWeftCreditAfterHostages = false
+VAR tookBlameForHostageDeath = false
+
+=== function calculateWeftMood() === 
+
+VAR mood = 0
+
+{
+-weftKnowsYouLiedAboutHearingExtortion: 
+    ~mood--
+-liedToWeftAboutHearingExtortion:
+    ~mood++
+}
+
+{
+-insultedWeftAfterHostages: 
+    ~mood--
+}
+
+{
+-blamedWeftForHostageDeath:
+    ~mood--
+}
+
+{
+-gaveWeftCreditAfterHostages or tookBlameForHostageDeath:
+    ~mood++
+}
+
+~return mood
 
 === Close ===
 

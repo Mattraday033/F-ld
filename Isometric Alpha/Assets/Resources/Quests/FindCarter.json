@@ -1,0 +1,14 @@
+{
+	"title": "Find Carter",
+	"steps":[
+				{"stepName":"Search the mine.","MapZone":"MineLvl_3","MapLocation":"MineLvl_3-MinerCamp","journalDescription":"Page has asked me to find a branded slave in the mine named Carter. <b>I should proceed to the third floor of the mine and look around to see if I can find Carter's body.</b>"},
+				{"stepName":"Carter found.","MapZone":"","MapLocation":"","journalDescription":"It turns out Carter was alive. Page is going to be overjoyed to hear this."}
+			],
+
+	"deathSteps":
+			[
+			],
+    "failureOnAreaHostility":
+			[
+			]
+}
