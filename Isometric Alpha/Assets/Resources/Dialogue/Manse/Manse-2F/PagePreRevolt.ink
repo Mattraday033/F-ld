@@ -1003,14 +1003,17 @@ Unfortunate, but I understand. I will keep the letter ready, should you change y
 setToTrue(directorMentionedAnnouncement)
 activateQuestStep(Stay Of Execution, Meet the Director.)
 
+VAR unorthodox = "Because of how unorthodox a pardon is for one of the branded, I will need to introduce you to the guards of the camp so they understand you are not to be given work duties, or harrassed."
+VAR ready = "When you are ready, make your way there. Until then, farewell."
+
 {
 -gasparBroughtToExecution:
 
-Because of how unorthodox a pardon is for one of the branded, I will need to introduce you to the guards of the camp so they understand you are not to be given work duties, or harrassed. It would be best for that to happen during Gáspár's execution, as much of the camp will be gathered for it. The execution will take place in the unfinished section in the camp's northwest. When you are ready, make your way there. Until then, farewell.
+{unorthodox} It would be best for that to happen during Gáspár's execution, as much of the camp will be gathered for it. The execution will take place in the unfinished section in the camp's northwest. {ready}
 
 -else:
 
-Because of how unorthodox a pardon is for one of the branded, I will need to introduce you to the guards of the camp so they understand you are not to be given work duties, or harrassed. I will have them gather in the camp's northwest so they can meet you. When you are ready, make your way there. Until then, farewell.
+{unorthodox} I will have them gather in the camp's northwest so they can meet you. {ready}
 
 }
 

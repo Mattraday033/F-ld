@@ -45,6 +45,11 @@ public class SliderScrollRectConnector : MonoBehaviour
             return;
         }
 
+        if(!gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
         StartCoroutine(waitThenCheckVisibility());
     }
     private IEnumerator waitThenCheckVisibility()
