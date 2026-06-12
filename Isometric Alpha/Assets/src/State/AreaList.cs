@@ -527,9 +527,10 @@ public static class AreaList
 		{
 			case LocationNameList.slaveShackSix:
 			case LocationNameList.guardHouseTopFloor:
-			case LocationNameList.campNorthWest:
             case LocationNameList.bodyPile:
 				return true;
+			case LocationNameList.campNorthWest:
+                return !Flags.getFlag(FlagNameList.skippedTutorialInNWCamp) && !Flags.getFlag(FlagNameList.finishedTaborIntimidateTutorial);
 			default:
 				return false;
 		}

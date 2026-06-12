@@ -793,7 +793,6 @@ public static class OOCSpawnDetailsList
 
         #region Exiting body pile
 
-
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft+1, new Vector3Int(-6, 14), facing: Facing.SouthEast));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.chiefTabor+5, new Vector3Int(-7, 12), facing: Facing.NorthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+1, new Vector3Int(-7, 8), animationName: MonsterNameList.axeman, facing: Facing.NorthWest));
@@ -865,6 +864,56 @@ public static class OOCSpawnDetailsList
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-3, 0), TutorialSequenceList.leadershipTutorialSequenceKey,
                                                                           TutorialSequenceList.leadershipTutorialSeenFlag,
                                                                           alwaysSpawn: true));
+
+        #endregion
+
+        #region Director Annoucement/Gaspar Execution
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.chiefTabor+6, new Vector3Int(-11, 0), facing: Facing.SouthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+2, new Vector3Int(-14, 0),  animationName: MonsterNameList.axeman, facing: Facing.SouthWest));
+
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.director, new Vector3Int(-7, 14), facing: Facing.SouthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.captainAdela, new Vector3Int(-2, 14), facing: Facing.SouthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.chiefTabor+7, new Vector3Int(-2, 13), facing: Facing.SouthWest));
+        
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-10, 10), animationName: MonsterNameList.lancer, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-9, 10), animationName: MonsterNameList.executioner, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-8, 10), animationName: MonsterNameList.linebreaker, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-7, 10), animationName: MonsterNameList.overseer, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-5, 10), animationName: MonsterNameList.lancer, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-4, 10), animationName: MonsterNameList.lieutenant, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-11, 9), animationName: MonsterNameList.executioner, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-10, 9), animationName: MonsterNameList.overseer, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-9, 9), animationName: NPCNameList.andras, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-8, 9), animationName: NPCNameList.quartermasterEmese, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-7, 9), animationName: MonsterNameList.lieutenant, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-6, 9), animationName: MonsterNameList.signaleer, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-5, 9), animationName: MonsterNameList.linebreaker, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-4, 9), animationName: MonsterNameList.disciplinarian, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-3, 9), animationName: NPCNameList.kende, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-10, 8), animationName: NPCNameList.guardMuzsa, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-8, 8), animationName: MonsterNameList.axeman, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-5, 8), animationName: MonsterNameList.spearman, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-4, 8), animationName: NPCNameList.guardLaszlo, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-3, 8), animationName: MonsterNameList.axeman, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-11, 7), animationName: NPCNameList.guardVazul, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-10, 7), animationName: MonsterNameList.disciplinarian, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-9, 7), animationName: NPCNameList.guardLaszlo, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-8, 7), animationName: NPCNameList.reka, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-7, 7), animationName: MonsterNameList.signaleer, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-6, 7), animationName: MonsterNameList.axeman, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-4, 7), animationName: NPCNameList.pazman, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-11, 6), animationName: NPCNameList.guardMuzsa, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-10, 6), animationName: MonsterNameList.spearman, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-9, 6), animationName: MonsterNameList.signaleer, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-8, 6), animationName: NPCNameList.guardVirag, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-7, 6), animationName: NPCNameList.quartermasterEmese, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-6, 6), animationName: MonsterNameList.disciplinarian, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-5, 6), animationName: MonsterNameList.axeman, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-4, 6), animationName: NPCNameList.guardMuzsa, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-9, 5), animationName: MonsterNameList.spearman, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-6, 5), animationName: MonsterNameList.spearman, facing: Facing.NorthWest));
+
 
         #endregion
 

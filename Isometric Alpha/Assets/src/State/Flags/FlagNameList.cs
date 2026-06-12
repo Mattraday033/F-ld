@@ -193,6 +193,7 @@ public static class FlagNameList
         public const string attackedTabor = "attackedTabor"; //faught Tabor in combat in Manse
         public const string acceptedTaborsSurrenderAfterDirectorFight = "acceptedTaborsSurrenderAfterDirectorFight"; //went back to get Tabor after defeating the Director and accepted his surrender
         public const string hadGuardWhoBlockedPathFlogged = "hadGuardWhoBlockedPathFlogged"; //flag for if player had guard at beginning of gaspar execution/director announcement scene flogged
+        public const string startedDirectorAnnouncement = "startedDirectorAnnouncement";
 
         //seb flags
         public const string spokeToSeb = "spokeToSeb"; //if the player has spoken to Seb.

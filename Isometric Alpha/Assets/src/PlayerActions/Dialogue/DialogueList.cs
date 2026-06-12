@@ -761,7 +761,21 @@ public static class DialogueList
                             new Dialogue(new string[] { 
                                                         NPCNameList.playerNamePlaceHolder,
                                                         NPCNameList.guard,
-                                                        NPCNameList.chiefTabor+1
+                                                        NPCNameList.chiefTabor+1,
+                                                        NPCNameList.chiefTabor+6
+                                                      },
+                            Resources.Load<TextAsset>(DialogueNameList.guardNWPath),
+                            new TextAsset[]
+                            {
+                                Resources.Load<TextAsset>(DialogueNameList.taborEndOfTutorialPath)
+                            }));
+
+        addDialogueToList(LocationNameList.campNorthWest, NPCNameList.guard+2,
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.guard+2,
+                                                        NPCNameList.chiefTabor+1,
+                                                        NPCNameList.chiefTabor+6
                                                       },
                             Resources.Load<TextAsset>(DialogueNameList.guardNWPath),
                             new TextAsset[]
