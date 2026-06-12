@@ -646,7 +646,7 @@ So putting aside all of the other reasons he would not pardon you, he can't rele
 {
 -not finishedBalintsTask and not learnedCampLocationFromCarter:
     +How do you know this?
-        It is not for me to say. Not until you've told me you aren't going to meet with the Director.
+        It is not for me to say. To tell you how I have learned where this camp lies would put a friend of mine in jeopardy. For now, you must ask yourself who you trust more: your fellow slave, or your owner.
         ->nandorSpeaksUp_2baa
 }
     +You make a good point. Perhaps I shouldn't meet with him.
@@ -959,10 +959,10 @@ I have written a letter to a comrade of mine. He has taken up residence in the t
     +I suspect the Masons would be interested in the correspondences of a Lovashi lord. What is stopping me from bringing this letter to the nearest sheriff once I'm on their land, or reading it myself for that matter?
         Do so if you wish, but know that the letter is written in the horsetongue, and contrived via innuendo. I doubt it would mean much to anyone but my friend.
 
-        And think of the consequences of such a choice: a branded, recently exiled and trusted with one of my personal letters, giving it up for personal gain? That would be highly suspect. They would see you as a traitor at best and a saboteur at worst. Hardly how one would want to ingratiate themself with their new hosts.
+        And think of the consequences of such a choice: a branded, recently exiled and trusted with a letter from me, giving it up for personal gain? That would be highly suspect. They would see you as a traitor at best and a saboteur at worst. Hardly how one would want to ingratiate themself with their new hosts.
         ->sealedBreach_3c
     +Why not send one of your guards? They would arrive faster, seeing as I cannot even set out for a few more weeks.
-        My guards lack the subtlety necessary for such a task, even if they could make the journey quicker. The brand gives you a reason to make the journey that they would lack. Certainty of delivery outweighs haste in this matter.
+        My guards lack the subtlety necessary for such a task, even if they could make the journey quicker. The brand gives you a reason for coming and going that they would lack. Certainty of delivery outweighs haste in this matter.
         ->sealedBreach_3c
 }
 {
@@ -1050,7 +1050,7 @@ I have informed Quartermaster Emese that you are to be given the reward I promis
 
 }
 {
--metDirectorAfterHostages and not discussedWithWeftAfterTookMineJob:
+-metDirectorAfterHostages and not discussedWithWeftAfterTookMineJob and not mineLvl3BreachSealed:
     fadeToBlack(true, false)
 -else:
     fadeToBlack()
