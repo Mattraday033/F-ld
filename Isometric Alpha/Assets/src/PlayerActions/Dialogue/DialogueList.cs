@@ -761,8 +761,7 @@ public static class DialogueList
                             new Dialogue(new string[] { 
                                                         NPCNameList.playerNamePlaceHolder,
                                                         NPCNameList.guard,
-                                                        NPCNameList.chiefTabor+1,
-                                                        NPCNameList.chiefTabor+6
+                                                        NPCNameList.chiefTabor+1
                                                       },
                             Resources.Load<TextAsset>(DialogueNameList.guardNWPath),
                             new TextAsset[]
@@ -774,14 +773,10 @@ public static class DialogueList
                             new Dialogue(new string[] { 
                                                         NPCNameList.playerNamePlaceHolder,
                                                         NPCNameList.guard+2,
-                                                        NPCNameList.chiefTabor+1,
-                                                        NPCNameList.chiefTabor+6
+                                                        NPCNameList.chiefTabor+6,
+                                                        NPCNameList.chiefTabor+7
                                                       },
-                            Resources.Load<TextAsset>(DialogueNameList.guardNWPath),
-                            new TextAsset[]
-                            {
-                                Resources.Load<TextAsset>(DialogueNameList.taborEndOfTutorialPath)
-                            }));
+                            Resources.Load<TextAsset>(DialogueNameList.guardNWPath)));
 
         addDialogueToList(LocationNameList.campNorthWest, NPCNameList.chiefTabor,
                             new Dialogue(new string[] { 

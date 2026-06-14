@@ -869,8 +869,8 @@ public static class OOCSpawnDetailsList
 
         #region Director Annoucement/Gaspar Execution
 
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+2, new Vector3Int(-14, 0),  LocationNameList.campNorthWest, animationName: MonsterNameList.axeman, facing: Facing.SouthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.chiefTabor+6, new Vector3Int(-11, 0), facing: Facing.SouthWest));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+2, new Vector3Int(-14, 0),  animationName: MonsterNameList.axeman, facing: Facing.SouthWest));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.director, new Vector3Int(-7, 14), facing: Facing.SouthEast));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.captainAdela, new Vector3Int(-2, 14), facing: Facing.SouthWest));

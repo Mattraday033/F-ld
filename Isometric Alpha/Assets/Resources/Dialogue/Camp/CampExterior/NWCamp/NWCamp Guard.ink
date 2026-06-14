@@ -6,6 +6,9 @@ VAR charisma = 0
 VAR guardIndex = 1
 VAR taborIndex = 2
 VAR taborAtAnnouncementIndex = 3
+VAR directorIndex = 4
+VAR adelaIndex = 5
+VAR crowdIndex = 6
 
 VAR skipTutorialIndex = 0
 VAR intimidateTutorialIndex = 1
@@ -135,9 +138,9 @@ And what if I don't?
 
 fadeToBlack(true, false)
 
-activate({taborAtAnnouncementIndex})
-changeCamTarget({taborAtAnnouncementIndex})
-playAnimation({taborAtAnnouncementIndex},Idle_Front)
+activate({taborIndex})
+changeCamTarget({taborIndex})
+playAnimation({taborIndex},Idle_Front)
 
 fadeBackIn(60)
 
@@ -148,7 +151,7 @@ setNPCFacing({guardIndex},NE)
 
 Chief! I uh... didn't see you there.
 
-changeCamTarget({taborAtAnnouncementIndex})
+changeCamTarget({taborIndex})
 
 So it would appear. {playerName}, was this man bothering you?
 
@@ -171,8 +174,8 @@ Yes, Chief.
 fadeToBlack(true, false)
 
 deactivate({guardIndex})
-playAnimation({taborAtAnnouncementIndex},OOC_Idle_Front)
-changeCamTarget({taborAtAnnouncementIndex})
+playAnimation({taborIndex},OOC_Idle_Front)
+changeCamTarget({taborIndex})
 
 fadeBackIn(60)
 
@@ -180,58 +183,95 @@ It is a confusing time for all of us. The Director has always been one to think 
 
 Whether I agree with the Director's decision or not, I will admit your service was exemplary. And so, because you are unlikely to hear it from anyone else today... thank you. Your work saved many of the guards' lives, even if they will never acknowledge it.
 
-    +I didn't do it for them. In fact, now that I you say that I almost wish I didn't.
+    +I didn't do it for them. In fact, now that you say that I almost wish I didn't.
         I know you didn't, but that doesn't diminish what you did for them. It's worth recognizing all the same.
         ->3d
     +Er... you're welcome?
-        \*Tabor chuckles.* It feels awkward for me as well, just so you know. But decorum is a virtue in of itself.
+        \*Tabor shifts uncomfortably.* This feels awkward for me as well, just so you know. But decorum is a virtue in of itself.
         ->3d
     +You're a strange one, Tabor. 
-        As are you. {puttingAside}
+        As are you. {doneGreatService}
+        {puttingAside}
         ->3e
 
-VAR puttingAside = "Putting aside your talents, you're certainly the first branded I've ever corrected that survived the ordeal. I want to understand you better. What did we do that reached you? How can we better teach the other branded?"
+VAR puttingAside = "You are certainly the first branded I've ever corrected that survived the ordeal. I want to understand you better. What did we do that reached you? How can we better teach the other branded?"
 
 === 3d ===
 
-    +Your mix of courtesy and sadism is certainly unique, Chief. Can't say I'll miss it.
-        I don't take pleasure in the pain I inflict. It is necessary for the instruction to be taken seriously, but none wish more than I that it was not so... not including the branded, of course.
+VAR doneGreatService = "You have done the Confederation a worthy service and for that the Director has pardoned you, but in a way, I see it as you've graduated from this camp."
+VAR thePain = "The pain I've inflicted was meant to help align the branded with the goals of the Confederation."
+
+    +Your mix of courtesy and sadism is certainly unique. Can't say I'll miss it.
+        I don't take pleasure in what I've done. {thePain} {doneGreatService}
+        {puttingAside}
         ->3e
-    +This charade is getting old. You expect me to believe your sincerity after I've seen how quickly you reach for your whip?
-        This is no charade. The whip is a tool of the teacher. Just as my father said 'spare the rod, spoil the child', would I spoil the branded if I did not wield it when necessary.
+    +This charade is getting old. It's hard to believe your sincerity after I've seen how quickly you reach for your whip.
+        And yet, I ask that you believe it anyways. {thePain} {doneGreatService}
+        {puttingAside}
         ->3e
     +It's bizarre to hear this from you, but I'll take whatever thanks I can get.
+        {doneGreatService}
         {puttingAside}
         ->3e
 
 === 3e ===
 
+    +You're a man adrift in your own little world, and I've stepped in shit that I respect more than you. Get out of my way.
+        \*Tabor stands aside without saying another word.*
+        ->proceedToDirectorSpeech
     +Do the other Lovashi even care to correct the branded? You're one of the few guards I've heard take that seriously.
         There was a time when it was a much revered nuance of the system. Now, it seems that the never-ending nature of our struggle has pushed many Lovashi towards apathy. They think it's all 'pissing in the wind', as Adéla puts it. But to me, it's what separates us from the Craft Folk.
 
-        I take pride that my people did not start this conflict. When we were forced to punish those who did, we did so to teach them the error of their ways. That's why, to me, to teach is a calling. I uplift all Lovashi by keeping this tradition alive.
-        ->3e
+        I take pride that my people did not start this conflict. When we were forced to punish those who did, it was to teach them the error of their ways. That's why, to me, to teach is a calling. I uplift all Lovashi by keeping this tradition alive.
+        ->keepingDirectorWaiting_1a
     +Your methods are barbaric. The Confederation will never reach an understanding with the other branded if it continues to send people like you to degrade and abuse them.
         \*Tabor thinks for a moment, then shakes his head.* I don't think I want to live in a world where people like me do not await people like them. That's what keeps the Confederation just.
-        ->3e
+        ->keepingDirectorWaiting_1a
     +I'm proof that the brand should not exist. If the branded were not consigned to die, they more easily reveal to you they are worthy of life.
         Perhaps that is true. I'm not convinced it doesn't have its purposes, but there are so many branded. Your unceasing numbers bode ill for the future of the Confederation.
-        ->3e
+        ->keepingDirectorWaiting_1a
     +I've been here for less than a day. You're awfully full of yourself to take credit for anything I've done.
         You have a point. The teacher could use his own lesson in humility, then.
-        ->3e
+        ->keepingDirectorWaiting_1a
     +I'm done with this conversation. Goodbye Tabor.
-        ->proceedToDirectorSpeech
+        ->keepingDirectorWaiting_1b
 
-=== proceedToDirectorSpeech ===
+=== keepingDirectorWaiting_1a ===
+
+But we are keeping the Director waiting. It would be best if we move along.
+
+->proceedToDirectorSpeech
+
+=== keepingDirectorWaiting_1b ===
 
 Farewell, {playerName}. I expect not to see your like again.
 
+->proceedToDirectorSpeech
+
+=== proceedToDirectorSpeech ===
+
 fadeToBlack(true, false)
 
-deactivate({taborAtAnnouncementIndex})
+deactivate({taborIndex})
+movePlayerPos(-9,14)
+setFacing(SE)
+changeCamTarget({directorIndex})
 
 fadeBackIn(60)
+
+\*The Director clears his throat.*
+
+changeCamTarget({adelaIndex})
+
+Listen up! The Director speaks!
+
+changeCamTarget({crowdIndex})
+
+\*The gathered guards quiet down.*
+
+changeCamTarget{directorIndex}
+
+
 
 ->Close
 
