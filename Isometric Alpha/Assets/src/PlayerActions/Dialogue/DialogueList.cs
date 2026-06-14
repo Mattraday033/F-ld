@@ -774,7 +774,12 @@ public static class DialogueList
                                                         NPCNameList.playerNamePlaceHolder,
                                                         NPCNameList.guard+2,
                                                         NPCNameList.chiefTabor+6,
-                                                        NPCNameList.chiefTabor+7
+                                                        NPCNameList.chiefTabor+7,
+                                                        NPCNameList.director,
+                                                        NPCNameList.captainAdela,
+                                                        NPCNameList.crowd,
+                                                        NPCNameList.weft+2,
+                                                        NPCNameList.thatch
                                                       },
                             Resources.Load<TextAsset>(DialogueNameList.guardNWPath)));
 

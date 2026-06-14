@@ -9,6 +9,11 @@ VAR taborAtAnnouncementIndex = 3
 VAR directorIndex = 4
 VAR adelaIndex = 5
 VAR crowdIndex = 6
+VAR weftIndex = 7
+VAR thatchIndex = 8
+
+VAR partyFlagWeft = false
+VAR partyFlagThatch = false
 
 VAR skipTutorialIndex = 0
 VAR intimidateTutorialIndex = 1
@@ -198,7 +203,7 @@ VAR puttingAside = "You are certainly the first branded I've ever corrected that
 
 === 3d ===
 
-VAR doneGreatService = "You have done the Confederation a worthy service and for that the Director has pardoned you, but in a way, I see it as you've graduated from this camp."
+VAR doneGreatService = "You have done the Confederation a worthy service and for that the Director has pardoned you. My term as your correctional officer is at an end: the way I see it, you've graduated from this camp."
 VAR thePain = "The pain I've inflicted was meant to help align the branded with the goals of the Confederation."
 
     +Your mix of courtesy and sadism is certainly unique. Can't say I'll miss it.
@@ -227,7 +232,7 @@ VAR thePain = "The pain I've inflicted was meant to help align the branded with 
     +Your methods are barbaric. The Confederation will never reach an understanding with the other branded if it continues to send people like you to degrade and abuse them.
         \*Tabor thinks for a moment, then shakes his head.* I don't think I want to live in a world where people like me do not await people like them. That's what keeps the Confederation just.
         ->keepingDirectorWaiting_1a
-    +I'm proof that the brand should not exist. If the branded were not consigned to die, they more easily reveal to you they are worthy of life.
+    +I'm proof that the brand should not exist. If the branded were not consigned to die, they would more easily reveal to you they are worthy of life.
         Perhaps that is true. I'm not convinced it doesn't have its purposes, but there are so many branded. Your unceasing numbers bode ill for the future of the Confederation.
         ->keepingDirectorWaiting_1a
     +I've been here for less than a day. You're awfully full of yourself to take credit for anything I've done.
@@ -238,13 +243,18 @@ VAR thePain = "The pain I've inflicted was meant to help align the branded with 
 
 === keepingDirectorWaiting_1a ===
 
-But we are keeping the Director waiting. It would be best if we move along.
+VAR farewell1 = "Farewell, "
+VAR farewell2 = ". I expect not to see your like again."
+VAR farewell = ""
+~farewell = farewell1 + playerName + farewell2
+
+But we are keeping the Director waiting. It would be best if we move along. {farewell}
 
 ->proceedToDirectorSpeech
 
 === keepingDirectorWaiting_1b ===
 
-Farewell, {playerName}. I expect not to see your like again.
+{farewell}
 
 ->proceedToDirectorSpeech
 
@@ -256,6 +266,16 @@ deactivate({taborIndex})
 movePlayerPos(-9,14)
 setFacing(SE)
 changeCamTarget({directorIndex})
+
+{
+-partyFlagWeft:
+activate({weftIndex})
+}
+
+{
+-partyFlagThatch:
+activate({thatchIndex})
+}
 
 fadeBackIn(60)
 
@@ -269,11 +289,31 @@ changeCamTarget({crowdIndex})
 
 \*The gathered guards quiet down.*
 
-changeCamTarget{directorIndex}
+changeCamTarget({directorIndex})
+
+Soldiers! For over four months, you have shouldered the duty of erecting this camp. You have executed your assigned tasks with a speed and sureness that does our confederation much credit. Where once stood untamed forest and crumbling structures, you have forged a bastion which I am proud to hold in the name of County Kálnoky!
+
+Many of you come from disparate backgrounds: the cream of every county stands before me. Spears from the shores of Lake Jawan, axes from the forests of County Thököly, even Kiln-breakers from my home of Pharos, and of course, my own household guard. Each of you came recommended highly, and your patrons will know no disappointment from me! I have met priests of Harmony who could not cooperate on the level you have while in my service.
+
+changeCamTarget({crowdIndex})
+
+\*The ranks of the Lovashi let out a cheer.*
+
+changeCamTarget({directorIndex})
+
+\*The Director waits for the cheer to fade before continuing.* I near the end of my eigth decade. In that time, I have ridden with names many of you only know from stories as we waged our war against the Craft Folk. I watched as the fires rose over Carnassus, and your fathers toppled the great statues of Saint Lysop. I beheld the death of our King Csaba at the hands of the King of Kilns, and the scouring of Pharos which followed. I lead our western lance against the Masons and layed seige to their jewel, Wudra; the furthest our hordes have ridden against our hated foes.
+
+Over this long life, I have witnessed our traditions of honor, loyalty, and strength earn us lands and trophies at great cost. Over the many cycles of war and peace, I have had cause to wonder if the cost we paid was not simply in blood and kin, but whether those very values we held in such regard were hidden within the final tally when the bill came due.
+
+createEffect(SmokeBomb,-7,14)
+
+\*The Director pauses for a moment in thought.*
+
+These lost virtues are not unrecoverable, however. Our hated enemies are not so fearsome that they cannot be overcome by our combined might. At the end of the last war the Confederation left their armies broken, and their lands torched and scarred. When the next war begins, our people will find them a pathetic, crippled foe unable to withstand the combined might of our glorious hordes!
 
 
-
-->Close
+    +Bye
+        ->Close
 
 === Close ===
 

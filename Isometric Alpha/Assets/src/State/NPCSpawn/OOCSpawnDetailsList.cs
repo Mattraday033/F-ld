@@ -876,6 +876,9 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.captainAdela, new Vector3Int(-2, 14), facing: Facing.SouthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.chiefTabor+7, new Vector3Int(-2, 13), facing: Facing.SouthWest));
         
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft+2, new Vector3Int(-10, 14), facing: Facing.SouthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(-11, 14), facing: Facing.SouthEast));
+        
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-10, 10), animationName: MonsterNameList.lancer, facing: Facing.NorthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-9, 10), animationName: MonsterNameList.executioner, facing: Facing.NorthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-8, 10), animationName: MonsterNameList.linebreaker, facing: Facing.NorthWest));
@@ -892,6 +895,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-4, 9), animationName: MonsterNameList.disciplinarian, facing: Facing.NorthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-3, 9), animationName: NPCNameList.kende, facing: Facing.NorthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-10, 8), animationName: NPCNameList.guardMuzsa, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.crowd, new Vector3Int(-10, 8), animationName: NPCNameList.guardMuzsa, facing: Facing.NorthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-8, 8), animationName: MonsterNameList.axeman, facing: Facing.NorthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-5, 8), animationName: MonsterNameList.spearman, facing: Facing.NorthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-4, 8), animationName: NPCNameList.guardLaszlo, facing: Facing.NorthWest));

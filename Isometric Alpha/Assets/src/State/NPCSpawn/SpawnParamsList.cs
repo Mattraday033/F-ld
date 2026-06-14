@@ -823,6 +823,14 @@ public static class SpawnParamsList
 
         #region Director Announcement Scene
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.crowd),
+                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] { 
+                                                                                                                         FlagNameList.directorMentionedAnnouncement
+                                                                                                                         }),
+                                                            stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                                                         FlagNameList.directorMentionedAnnouncement
+                                                                                                                         })));
+
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.guard+2),
                                new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] { 
                                                                                                                          FlagNameList.directorMentionedAnnouncement

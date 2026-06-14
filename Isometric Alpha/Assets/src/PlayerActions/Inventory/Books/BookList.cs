@@ -247,7 +247,7 @@ public static class BookList
 				return  directorsJournalDisclaimer +
                         "...but my inquiry into the branding rates of other counties has again borne fruit. A letter arrived this morning with Count Laomedan's reply. She says she has only ordered the branding of less than a fourth the number of serfs " + 
                         "as we have. I have visited her county recently; she does not have so dissimilar a number of rebels and criminals to bare out this difference. We are branding far beyond the norm. And my gut tells me it started recently. " + 
-                        "Perhaps as soon as Artúr died, and left County Kalnoeky to Béla. May my nephew lead us not to folly...\n\n" + 
+                        "Perhaps as soon as Artúr died, and left County Kálnoky to Béla. May my nephew lead us not to folly...\n\n" + 
 
                         "...I confronted Béla about his new 'austerity measures' he has put in place. He quoted my own words back to me: 'stockpile in peace what you require in war.' The quotas for grain he has instated go beyond even our harshest " + 
                         "steps during the last eruption in the Emancipation Conflict. When I told him the other lords would chafe under such laws, he told me they had already embraced them. What is going on? Have my peers gone mad...\n\n" + 
@@ -259,7 +259,7 @@ public static class BookList
 
 			case directorsJournalTwoKey:
 				return  directorsJournalDisclaimer +
-                        "...and now the counts have been summoned to County Kalnoeky, in secret. A meeting like this has happened only a handful of times since our truce with the Masons. The secrecy was abnormal, but necessary to keep the Masons from suspecting " + 
+                        "...and now the counts have been summoned to County Kálnoky, in secret. A meeting like this has happened only a handful of times since our truce with the Masons. The secrecy was abnormal, but necessary to keep the Masons from suspecting " + 
                         "our preparations go beyond the superficial. My status as Commander of the Western Lance forced Béla to allow me a seat at the discussions, but not before he made plain I am to act as an ornament to his regime, and nothing " + 
                         "more. I had hoped to speak sensible words to accepting ears at the gathering, but those who know the weariness I do have long since passed from this life. The counts that came after are but children unaccustomed to conflict. " + 
                         "The babes we left behind to mind our thrones now sit atop them ready to follow the path we strode before. They have not yet grown tall enough to see the cliff we found at its end...\n\n" +
