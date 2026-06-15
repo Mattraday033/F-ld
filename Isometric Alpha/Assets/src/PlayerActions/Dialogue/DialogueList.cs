@@ -779,9 +779,11 @@ public static class DialogueList
                                                         NPCNameList.captainAdela,
                                                         NPCNameList.crowd,
                                                         NPCNameList.weft+2,
-                                                        NPCNameList.thatch
+                                                        NPCNameList.thatch,
+                                                        NPCNameList.takacs
                                                       },
-                            Resources.Load<TextAsset>(DialogueNameList.guardNWPath)));
+                            Resources.Load<TextAsset>(DialogueNameList.guardNWPath),
+                            DialogueCombatInfoList.nwCampGuard2CombatInfo));
 
         addDialogueToList(LocationNameList.campNorthWest, NPCNameList.chiefTabor,
                             new Dialogue(new string[] { 

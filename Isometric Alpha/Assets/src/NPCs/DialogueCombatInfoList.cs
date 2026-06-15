@@ -18,6 +18,10 @@ public static class DialogueCombatInfoList
     public readonly static NPCCombatInfo muzsaCombatInfo = new NPCCombatInfo(new EnemyPackInfo[] { EnemyPackInfoList.muzsaFight },
                                                                             new DeadNameList[] { new DeadNameList(new string[] { NPCNameList.guardMuzsa }) });
 
+    //PLACEHOLDER: combat info for the NWCamp Guard 2 dialogue.
+    public readonly static NPCCombatInfo nwCampGuard2CombatInfo = new NPCCombatInfo(new EnemyPackInfo[] { EnemyPackInfoList.takacsPuppetFight },
+                                                                            new DeadNameList[] { new DeadNameList(new string[] {  }) });
+
     public readonly static DeadNameList allMineGuardsDead = new DeadNameList(new string[] { 
                                                                                             NPCNameList.guardPazman, 
                                                                                             NPCNameList.pazman, 

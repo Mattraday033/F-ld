@@ -77,6 +77,8 @@ public static class MonsterNameList
     public const string movableObject = "Movable Object";
     public const string noHostilityDialoguePackName = "No Hostility";
 
+    public const string puppetedPreffix = "Puppeted ";
+
     #endregion
 
     public static string getPackName(string enemyType)

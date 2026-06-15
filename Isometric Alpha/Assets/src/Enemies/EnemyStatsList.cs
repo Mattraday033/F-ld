@@ -34,6 +34,7 @@ public static class EnemyStatsList
         AlliedSummonStatsList.allyStatsDict = new Dictionary<string, AlliedSummonStats>();
 
         #region Named NPCs
+
         #region Lovashi Guards
         enemyStatsDict.Add(NPCNameList.guardVazul, new EnemyStats(NPCNameList.guardVazul,
                                                                                     Constants.twentyFiveArmor,
@@ -181,6 +182,54 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                     },
                                                                     animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
         #endregion
+        #endregion
+
+        #region Lovashi Puppets
+
+        enemyStatsDict.Add(MonsterNameList.puppetedPreffix + MonsterNameList.axeman, new MinionStats(MonsterNameList.puppetedPreffix + MonsterNameList.axeman,
+                                                                            Constants.fifteenArmor,
+                                                                                                45,
+                                            AbilityList.getAbility(null, AbilityList.guardAxeKey),
+                                                        new Trait[] { 
+                                                                      TraitList.minion,
+                                                                      TraitList.chaotic,
+                                                                      TraitList.frontLine
+                                                                    },
+                                                                    animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
+
+        enemyStatsDict.Add(MonsterNameList.puppetedPreffix + MonsterNameList.spearman, new MinionStats(MonsterNameList.puppetedPreffix + MonsterNameList.spearman,
+                                                                            Constants.fifteenArmor,
+                                                                                                55,
+                                            AbilityList.getAbility(null, AbilityList.guardSpearKey),
+                                                        new Trait[] { 
+                                                                      TraitList.minion,
+                                                                      TraitList.chaotic,
+                                                                      TraitList.frontLine
+                                                                    },
+                                                                    animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
+
+        enemyStatsDict.Add(MonsterNameList.puppetedPreffix + MonsterNameList.disciplinarian, new MinionStats(MonsterNameList.puppetedPreffix + MonsterNameList.disciplinarian,
+                                                                            Constants.fifteenArmor,
+                                                                                                55,
+                                            AbilityList.getAbility(null, AbilityList.guardLashKey),
+                                                        new Trait[] { 
+                                                                      TraitList.minion,
+                                                                      TraitList.chaotic,
+                                                                      TraitList.frontLine
+                                                                    },
+                                                                    animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
+
+        enemyStatsDict.Add(MonsterNameList.puppetedPreffix + MonsterNameList.javelineer, new MinionStats(MonsterNameList.puppetedPreffix + MonsterNameList.javelineer,
+                                                                            Constants.fifteenArmor,
+                                                                                                35,
+                                            AbilityList.getAbility(null, AbilityList.guardJavelinKey),
+                                                        new Trait[] { 
+                                                                      TraitList.minion,
+                                                                      TraitList.chaotic,
+                                                                      TraitList.frontLine
+                                                                    },
+                                                                    animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
+
         #endregion
 
         #region Lovashi Guards

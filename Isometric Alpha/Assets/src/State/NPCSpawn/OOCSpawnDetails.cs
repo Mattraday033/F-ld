@@ -1047,6 +1047,7 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
 
         animationManager.setAnimations(animationName);
         animationManager.setFacing(facing);
+        animationManager.npcName = npcName;
 
         if(animationType != CharacterAnimationType.None)
         {

@@ -212,6 +212,14 @@ public static class EnemyPackInfoList
                                                                                         DropTableList.lovashiGuardsDTKey,
                                                                                         new ItemListID[] { new ItemListID(ItemList.armorListIndex, ItemList.bronzeCuirassIndex)});
 
+    public readonly static EnemyPackInfo takacsPuppetFight = new EnemyPackInfo(new CreatureAmount[] {
+                                                                                        EnemyAmountList.axemanPuppets,
+                                                                                        EnemyAmountList.spearmanPuppets,
+                                                                                        EnemyAmountList.disciplinarianPuppets,
+                                                                                        EnemyAmountList.javelineerPuppets
+                                                                                    },
+                                                                                    DropTableList.lovashiGuardsDTKey);
+
     public readonly static EnemyPackInfo ml3GuardsWithBarricades = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.barricade, 
                                                                                                         EnemyAmountList.guardReka, 

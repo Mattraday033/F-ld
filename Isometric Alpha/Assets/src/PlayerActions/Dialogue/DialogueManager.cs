@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -1029,66 +1030,81 @@ public class DialogueManager : MonoBehaviour
 
                     targetAnimationManager = currentDialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
 
-                    if(targetAnimationManager != null)
+                    if(targetAnimationManager != null && Enum.TryParse(npcAnimationArgs, ignoreCase: true, out CharacterAnimationType animationType))
                     {
-                        switch (npcAnimationArgs.ToLower().Replace(" ",""))
+                        switch (animationType)
                         {
-                            case "attack_normal_front":
+                            case CharacterAnimationType.Attack_Normal:
+                            case CharacterAnimationType.Attack_Normal_Front:
                                 targetAnimationManager.playAttackFrontAnimation();
                                 break;
-                            case "attack_normal_back":
+                            case CharacterAnimationType.Attack_Normal_Back:
                                 targetAnimationManager.playAttackBackAnimation();
                                 break;
-                            case "idle_back":
+                            case CharacterAnimationType.Idle_Back:
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Idle_Back);
                                 break;
-                            case "idle_front":
+                            case CharacterAnimationType.Idle_Front:
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Idle_Front);
                                 break;
-                            case "ooc_idle_back":
+                            case CharacterAnimationType.OOC_Idle_Back:
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.OOC_Idle_Back);
                                 break;
-                            case "ooc_idle_front":
+                            case CharacterAnimationType.OOC_Idle_Front:
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.OOC_Idle_Front);
                                 break;
-                            case "secondary_idle":
+                            case CharacterAnimationType.Secondary_Idle:
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle);
                                 break;
-                            case "secondary_idle_back":
+                            case CharacterAnimationType.Secondary_Idle_Back:
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle_Back);
                                 break;
-                            case "secondary_idle_front":
+                            case CharacterAnimationType.Secondary_Idle_Front:
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle_Front);
                                 break;
-                            case "death_back":
+                            case CharacterAnimationType.Death_Back:
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Back);
                                 break;
-                            case "death_front":
+                            case CharacterAnimationType.Death_Front:
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Front);
                                 targetAnimationManager.playDeathAnimationThenHide();
                                 break;
-                            case "standup":
+                            case CharacterAnimationType.StandUp:
                                 targetAnimationManager.playAnimation(CharacterAnimationType.StandUp);
                                 break;
-                            case "death_front_weaponless":
+                            case CharacterAnimationType.Death_Front_Weaponless:
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Front_Weaponless);
                                 break;
-                            case "death_back_weaponless":
+                            case CharacterAnimationType.Death_Back_Weaponless:
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Back_Weaponless);
                                 break;
-                            case "wounded_back":
+                            case CharacterAnimationType.Wounded_Back:
                                 targetAnimationManager.playAnimation(CharacterAnimationType.Wounded_Back);
                                 break;
-                            case "wounded_front":
+                            case CharacterAnimationType.Wounded_Front:
                                 targetAnimationManager.playAnimation(CharacterAnimationType.Wounded_Front);
                                 break;
-                            case "ooc_wounded_back":
+                            case CharacterAnimationType.OOC_Wounded_Back:
                                 targetAnimationManager.playAnimation(CharacterAnimationType.OOC_Wounded_Back);
                                 break;
-                            case "ooc_wounded_front":
+                            case CharacterAnimationType.OOC_Wounded_Front:
                                 targetAnimationManager.playAnimation(CharacterAnimationType.OOC_Wounded_Front);
                                 break;
                         }
+                    }
+
+                    continueStory();
+
+                    break;
+
+                case "setidleofnpcsbyname":
+
+                    string npcName = getArgument(buffer, Constants.indexZero);
+                    string idleName = getArgument(buffer, Constants.indexOne);
+
+                    if(Enum.TryParse(idleName, ignoreCase: true, out CharacterAnimationType idleType))
+                    {
+                        AnimationManager.SetIdleByNPCName.Invoke(npcName, idleType);
                     }
 
                     continueStory();
@@ -1107,32 +1123,9 @@ public class DialogueManager : MonoBehaviour
 
                     targetAnimationManager = currentDialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
 
-                    if(targetAnimationManager != null)
+                    if(targetAnimationManager != null && 
+                        Enum.TryParse(animThenFadeArg, ignoreCase: true, out CharacterAnimationType animThenFadeType))
                     {
-                        CharacterAnimationType animThenFadeType = CharacterAnimationType.None;
-
-                        switch (animThenFadeArg.ToLower().Replace(" ",""))
-                        {
-                            case "attack_normal_front":
-                                animThenFadeType = CharacterAnimationType.Attack_Normal_Front;
-                                break;
-                            case "attack_normal":
-                                animThenFadeType = CharacterAnimationType.Attack_Normal;
-                                break;
-                            case "death_front":
-                                animThenFadeType = CharacterAnimationType.Death_Front;
-                                break;
-                            case "death_back":
-                                animThenFadeType = CharacterAnimationType.Death_Back;
-                                break;
-                            case "standup":
-                                animThenFadeType = CharacterAnimationType.StandUp;
-                                break;
-                            case "wounded":
-                                animThenFadeType = CharacterAnimationType.Wounded;
-                                break;
-                        }
-
                         if(animThenFadeType != CharacterAnimationType.None)
                         {
                             StartCoroutine(playAnimationThenFadeToBlack(targetAnimationManager, animThenFadeType));

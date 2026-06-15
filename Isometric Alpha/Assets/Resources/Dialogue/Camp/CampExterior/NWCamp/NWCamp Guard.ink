@@ -3,6 +3,9 @@ VAR dexterity = 0
 VAR wisdom = 0
 VAR charisma = 0
 
+VAR fightIndex = 0
+
+VAR playerIndex = 0
 VAR guardIndex = 1
 VAR taborIndex = 2
 VAR taborAtAnnouncementIndex = 3
@@ -11,6 +14,7 @@ VAR adelaIndex = 5
 VAR crowdIndex = 6
 VAR weftIndex = 7
 VAR thatchIndex = 8
+VAR takacsIndex = 9
 
 VAR partyFlagWeft = false
 VAR partyFlagThatch = false
@@ -98,6 +102,14 @@ getNewDialogueFromList(NWCampChief Tabor,true,skippedTutorialInNWCamp)
 === readyCheck_1b ===
 
 setToTrue(startedDirectorAnnouncement)
+
+fadeToBlack(true,false)
+
+movePlayerPos(-15,0)
+setFacing(NE)
+setNPCFacing({guardIndex},SW)
+
+fadeBackIn(60)
 
 Speak yer business, branded.
 
@@ -291,9 +303,13 @@ changeCamTarget({crowdIndex})
 
 changeCamTarget({directorIndex})
 
-Soldiers! For over four months, you have shouldered the duty of erecting this camp. You have executed your assigned tasks with a speed and sureness that does our confederation much credit. Where once stood untamed forest and crumbling structures, you have forged a bastion which I am proud to hold in the name of County Kálnoky!
+Soldiers! For over four months, you have shouldered the duty of erecting this camp. You have executed your assigned tasks with a speed and sureness that does our confederation much credit. 
 
-Many of you come from disparate backgrounds: the cream of every county stands before me. Spears from the shores of Lake Jawan, axes from the forests of County Thököly, even Kiln-breakers from my home of Pharos, and of course, my own household guard. Each of you came recommended highly, and your patrons will know no disappointment from me! I have met priests of Harmony who could not cooperate on the level you have while in my service.
+Where once stood untamed forest and crumbling structures, you have forged a bastion which I am proud to hold in the name of County Kálnoky!
+
+Many of you come from disparate backgrounds: the cream of every county stands before me. Spears from the shores of Lake Jawan, axes from the forests of County Thököly, even Kiln-breakers from my home of Pharos, and of course, my own household guard. 
+
+Each of you came recommended highly, and your patrons will know no disappointment from me! I have met priests of Harmony who could not cooperate on the level you have while in my service.
 
 changeCamTarget({crowdIndex})
 
@@ -301,7 +317,9 @@ changeCamTarget({crowdIndex})
 
 changeCamTarget({directorIndex})
 
-\*The Director waits for the cheer to fade before continuing.* I near the end of my eigth decade. In that time, I have ridden with names many of you only know from stories as we waged our war against the Craft Folk. I watched as the fires rose over Carnassus, and your fathers toppled the great statues of Saint Lysop. I beheld the death of our King Csaba at the hands of the King of Kilns, and the scouring of Pharos which followed. I lead our western lance against the Masons and layed seige to their jewel, Wudra; the furthest our hordes have ridden against our hated foes.
+\*The Director waits for the cheer to fade before continuing.* I near the end of my eigth decade. In that time, I have ridden with names many of you only know from stories as we waged our war against the Craft Folk. 
+
+I watched as the fires rose over Carnassus, and your fathers toppled the great statues of Saint Lysop. I beheld the death of our King Csaba at the hands of the King of Kilns, and the scouring of Pharos which followed. I lead our western lance against the Masons and layed seige to their jewel, Wudra; the furthest our hordes have ridden against our hated foes.
 
 Over this long life, I have witnessed our traditions of honor, loyalty, and strength earn us lands and trophies at great cost. Over the many cycles of war and peace, I have had cause to wonder if the cost we paid was not simply in blood and kin, but whether those very values we held in such regard were hidden within the final tally when the bill came due.
 
@@ -311,9 +329,70 @@ createEffect(SmokeBomb,-7,14)
 
 These lost virtues are not unrecoverable, however. Our hated enemies are not so fearsome that they cannot be overcome by our combined might. At the end of the last war the Confederation left their armies broken, and their lands torched and scarred. When the next war begins, our people will find them a pathetic, crippled foe unable to withstand the combined might of our glorious hordes!
 
+disableDialogueUI()
+createEffect(SmokeBomb,-6,14)
+wait(0.33)
+activate({takacsIndex})
+wait(1.8)
+enableDialogueUI()
+setPlayerFacing(NE)
+changeCamTarget({takacsIndex})
 
-    +Bye
+\*Takács's voice rings clear in every ear present, as if speaking from an inch away.* The Director is quite right to be proud of your progress, if we are kind enough to dismiss recent events. Count Kálnoky is pleased with all of you.
+
+changeCamTarget({adelaIndex})
+
+Vada... *Adéla shivers with discomfort.*
+
+changeCamTarget({takacsIndex})
+
+There is but one, insignificant detail that has been overlooked. A fly buzzes in this camp. A fat, happy, lazy fly, which you will help me catch for my supper.
+
+disableDialogueUI()
+createEffect(SmokeBomb,-9,10)
+wait(0.4)
+createEffect(SmokeBomb,-4,8)
+wait(0.4)
+createEffect(SmokeBomb,-7,6)
+wait(0.4)
+createEffect(SmokeBomb,-5,10)
+wait(0.4)
+createEffect(SmokeBomb,-10,6)
+wait(0.4)
+createEffect(SmokeBomb,-8,9)
+wait(0.4)
+createEffect(SmokeBomb,-6,8)
+wait(1.5)
+enableDialogueUI()
+
+The pardoned branded are a threat to the security of this camp: they cannot be allowed to leave with knowledge of its existance. 
+
+Soldiers of the Confederation! Eliminate the threat.
+
+changeCameraTarget({crowdIndex})
+
+setIdleOfNPCsByName(Guard3,Idle_Back)
+setIdleOfNPCsByName(Guard4,Idle_Front)
+playAnimation({adelaIndex},Idle_Front)
+
+\*The Lovashi draw their weapons and begin to move towards you with ill intent.*
+
+setFacing(SE)
+playAnimation({playerIndex},Idle_Front)
+changeCamTarget({weftIndex})
+
+Oh gods... what do we do?
+
+    +We fight. There's no other option. <Combat>
+        ->enterCombat
+    +We jump. Aim for the pool next to the body pile.
         ->Close
+
+=== enterCombat ===
+
+enterCombat({fightIndex})
+
+->Close
 
 === Close ===
 

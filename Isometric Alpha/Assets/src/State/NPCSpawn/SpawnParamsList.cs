@@ -844,6 +844,8 @@ public static class SpawnParamsList
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.guard+3),
                                         directorAnnouncementSceneSpawnParams);
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.guard+4),
+                                        directorAnnouncementSceneSpawnParams);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.director),
                                         directorAnnouncementSceneSpawnParams);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.captainAdela),

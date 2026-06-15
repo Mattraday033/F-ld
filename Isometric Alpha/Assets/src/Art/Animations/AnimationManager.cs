@@ -67,9 +67,28 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     private SpriteRenderer shadowSprite;
     public PolygonCollider2D polygonCollider2D;
     public HealthBarManager healthBarManager;
-    public Stats linkedStats;
-    public string characterToAnimate = "";
+    private Stats _LinkedStats;
+    public Stats linkedStats
+    {
+        get
+        {
+            return _LinkedStats;
+        }
+        set
+        {
+            _LinkedStats = value;
+
+            if(linkedStats != null)
+            {
+                npcName = linkedStats.getName();
+            }
+        }
+    }
+    public string npcName = ""; //name of specific character. i.e. : guard 1, guard 2. Used for differentiating different characters that use the same animations/sprites.
+    public string animationName = ""; //name of character sprites. i.e.: Spearman, Giant Bat. Sometimes same as npcName.
     public int heartBeatRow = 0;
+
+    public readonly static UnityEvent<string, CharacterAnimationType> SetIdleByNPCName = new UnityEvent<string, CharacterAnimationType>();
 
     public Dictionary<CharacterAnimationType, AnimationClip> animationDict;
 
@@ -105,7 +124,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     private void setSpriteToCurrentIdle()
     {
         spriteRenderer.sprite = IdleDictionary.getCurrentIdleSprite(heartBeatRow,
-                                                                    characterToAnimate, 
+                                                                    animationName, 
                                                                     currentIdle);
 
         Helpers.updatePolygonCollider(spriteRenderer, polygonCollider2D);
@@ -118,9 +137,17 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
                 (CombatStateManager.inCombat && !linkedStats.isDead()));
     }
 
+    public void setCurrentIdle(string npcName, CharacterAnimationType animationType)
+    {
+        if(this.npcName.Equals(npcName))
+        {
+            setCurrentIdle(animationType);            
+        }
+    }
+
     public void setCurrentIdle(CharacterAnimationType newIdle)
     {
-        newIdle = getFallBackIdleType(characterToAnimate, newIdle);
+        newIdle = getFallBackIdleType(animationName, newIdle);
 
         if(!CombatStateManager.inCombat)
         {
@@ -130,7 +157,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         } 
 
         bool isAlly = linkedStats.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p));
-        bool containsSprites = IdleDictionary.idleDictContainsSprites(characterToAnimate, newIdle);
+        bool containsSprites = IdleDictionary.idleDictContainsSprites(animationName, newIdle);
 
         if((newIdle == CharacterAnimationType.Secondary_Idle || newIdle == CharacterAnimationType.Death) &&
             containsSprites)
@@ -153,13 +180,14 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     private void OnDestroy()
     {
-        HeartBeatManager.getHeartBeat(characterToAnimate).RemoveListener(updateIdleAnimation);
+        HeartBeatManager.getHeartBeat(animationName).RemoveListener(updateIdleAnimation);
         CombatStateManager.OnActivityChangeToInEscapeMenu.RemoveListener(disablePolygonCollider);
         CombatStateManager.OnActivityChangeToResolveTurnWarning.RemoveListener(disablePolygonCollider);
         CombatStateManager.OnActivityChangeFromInEscapeMenu.RemoveListener(enablePolygonCollider);
         CombatStateManager.OnActivityChangeFromResolveTurnWarning.RemoveListener(enablePolygonCollider);
         CombatTraitColliderDisabler.OnCombatTraitHoverEnter.RemoveListener(disablePolygonCollider);
         CombatTraitColliderDisabler.OnCombatTraitHoverExit.RemoveListener(enablePolygonCollider);
+        SetIdleByNPCName.RemoveListener(setCurrentIdle);
     }
 
     private void disablePolygonCollider()
@@ -209,8 +237,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public virtual void setAnimations(string monsterName)
     {
-        characterToAnimate = monsterName;
-        string folderPath = EnemyTypeFolderPathList.getEnemyTypeFolderPath(characterToAnimate);
+        animationName = monsterName;
+        string folderPath = EnemyTypeFolderPathList.getEnemyTypeFolderPath(animationName);
 
         instantiateShadow();
 
@@ -227,24 +255,25 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
         animancer.Animations = getIdleAnimations(folderPath);
 
-        addIdleSprites(characterToAnimate, folderPath);
+        addIdleSprites(animationName, folderPath);
 
         setHeartBeatRow();
 
-        HeartBeatManager.getHeartBeat(characterToAnimate).AddListener(updateIdleAnimation);
+        HeartBeatManager.getHeartBeat(animationName).AddListener(updateIdleAnimation);
         CombatStateManager.OnActivityChangeToInEscapeMenu.AddListener(disablePolygonCollider);
         CombatStateManager.OnActivityChangeToResolveTurnWarning.AddListener(disablePolygonCollider);
         CombatStateManager.OnActivityChangeFromInEscapeMenu.AddListener(enablePolygonCollider);
         CombatStateManager.OnActivityChangeFromResolveTurnWarning.AddListener(enablePolygonCollider);
         CombatTraitColliderDisabler.OnCombatTraitHoverEnter.AddListener(disablePolygonCollider);
         CombatTraitColliderDisabler.OnCombatTraitHoverExit.AddListener(enablePolygonCollider);
+        SetIdleByNPCName.AddListener(setCurrentIdle);
 
         setToDefaultIdle();
     }
 
     private void instantiateShadow()
     {
-        GameObject shadow = Instantiate(Resources.Load<GameObject>(EnemyTypeFolderPathList.getShadowPrefabName(characterToAnimate)), transform);
+        GameObject shadow = Instantiate(Resources.Load<GameObject>(EnemyTypeFolderPathList.getShadowPrefabName(animationName)), transform);
         shadow.transform.SetAsFirstSibling();
         shadowSprite = shadow.GetComponent<SpriteRenderer>();
 
@@ -288,7 +317,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     private bool canChangeShadowFacing()
     {
-        return EnemyTypeFolderPathList.getShadowPrefabName(characterToAnimate).Equals(PrefabNames.shadow256x128);
+        return EnemyTypeFolderPathList.getShadowPrefabName(animationName).Equals(PrefabNames.shadow256x128);
     }
 
     private void setHeartBeatRow()
@@ -306,13 +335,13 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         if(CombatStateManager.inCombat)
         {
-            setCurrentIdle(getFallBackIdleType(characterToAnimate, CharacterAnimationType.Idle_Front));
+            setCurrentIdle(getFallBackIdleType(animationName, CharacterAnimationType.Idle_Front));
             haltAllAnimations();
 
             setSpriteToCurrentIdle();
         } else
         {
-            setCurrentIdle(getFallBackIdleType(characterToAnimate, CharacterAnimationType.OOC_Idle_Front));
+            setCurrentIdle(getFallBackIdleType(animationName, CharacterAnimationType.OOC_Idle_Front));
 
             playCurrentIdleAnimation();
         }
@@ -341,21 +370,21 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         return animationList.ToArray();
     }
 
-    private static void addIdleSprites(string characterToAnimate, string folderPath)
+    private static void addIdleSprites(string animationName, string folderPath)
     {
         foreach (CharacterAnimationType type in loopedAnimationTypes)
         {
-            addIdleSpritesOfType(characterToAnimate, folderPath, type);
+            addIdleSpritesOfType(animationName, folderPath, type);
         }
 
-        addIdleSpritesOfType(characterToAnimate, folderPath, CharacterAnimationType.Death);
-        addIdleSpritesOfType(characterToAnimate, folderPath, CharacterAnimationType.Death_Back);
-        addIdleSpritesOfType(characterToAnimate, folderPath, CharacterAnimationType.Death_Front);
+        addIdleSpritesOfType(animationName, folderPath, CharacterAnimationType.Death);
+        addIdleSpritesOfType(animationName, folderPath, CharacterAnimationType.Death_Back);
+        addIdleSpritesOfType(animationName, folderPath, CharacterAnimationType.Death_Front);
     }
 
-    private static void addIdleSpritesOfType(string characterToAnimate, string folderPath, CharacterAnimationType type)
+    private static void addIdleSpritesOfType(string animationName, string folderPath, CharacterAnimationType type)
     {
-        if(IdleDictionary.idleDictContainsSprites(characterToAnimate, type))
+        if(IdleDictionary.idleDictContainsSprites(animationName, type))
         {
             return;
         }
@@ -378,7 +407,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
                 break;
         }
 
-        IdleDictionary.addSpritesToIdleDict(characterToAnimate, type, sprites);
+        IdleDictionary.addSpritesToIdleDict(animationName, type, sprites);
     }
 
     private static Dictionary<CharacterAnimationType, AnimationClip> getTempAnimations(string folderPath)
@@ -446,7 +475,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
                 return;
         }
 
-        newIdle = getFallBackIdleType(characterToAnimate, newIdle);
+        newIdle = getFallBackIdleType(animationName, newIdle);
 
         enableExtras();
         removeAnimation();
@@ -848,7 +877,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         if(spriteSetByHeartBeat())
         {
-            animationType = getFallBackIdleType(characterToAnimate, animationType);
+            animationType = getFallBackIdleType(animationName, animationType);
         }
 
         switch(animationType)
@@ -1072,14 +1101,14 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         }
     }
 
-    public static CharacterAnimationType getFallBackIdleType(string characterToAnimate, CharacterAnimationType animationType)
+    public static CharacterAnimationType getFallBackIdleType(string animationName, CharacterAnimationType animationType)
     {
-        return getFallBackIdleType(characterToAnimate, animationType, false);
+        return getFallBackIdleType(animationName, animationType, false);
     }
 
-    private static CharacterAnimationType getFallBackIdleType(string characterToAnimate, CharacterAnimationType animationType, bool retry)
+    private static CharacterAnimationType getFallBackIdleType(string animationName, CharacterAnimationType animationType, bool retry)
     {
-        if(IdleDictionary.idleDictContainsSprites(characterToAnimate, animationType))
+        if(IdleDictionary.idleDictContainsSprites(animationName, animationType))
         {
             return animationType;
         } else if(retry)
@@ -1095,23 +1124,23 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             case CharacterAnimationType.Death_Front_Weaponless:
             case CharacterAnimationType.Death_Back:
             case CharacterAnimationType.Death_Back_Weaponless:
-                return getFallBackIdleType(characterToAnimate, CharacterAnimationType.Death, retry);
+                return getFallBackIdleType(animationName, CharacterAnimationType.Death, retry);
             case CharacterAnimationType.OOC_Idle_Front:
             case CharacterAnimationType.Secondary_Idle_Front:
-                return getFallBackIdleType(characterToAnimate, CharacterAnimationType.Idle_Front, retry);
+                return getFallBackIdleType(animationName, CharacterAnimationType.Idle_Front, retry);
             case CharacterAnimationType.OOC_Idle_Back:
             case CharacterAnimationType.Secondary_Idle_Back:
-                return getFallBackIdleType(characterToAnimate, CharacterAnimationType.Idle_Back, retry);
+                return getFallBackIdleType(animationName, CharacterAnimationType.Idle_Back, retry);
             case CharacterAnimationType.Idle_Front:
-                return getFallBackIdleType(characterToAnimate, CharacterAnimationType.OOC_Idle_Front, retry);
+                return getFallBackIdleType(animationName, CharacterAnimationType.OOC_Idle_Front, retry);
             case CharacterAnimationType.Idle_Back:
-                return getFallBackIdleType(characterToAnimate, CharacterAnimationType.OOC_Idle_Back, retry);
+                return getFallBackIdleType(animationName, CharacterAnimationType.OOC_Idle_Back, retry);
             case CharacterAnimationType.Run_Front:
-                return getFallBackIdleType(characterToAnimate, CharacterAnimationType.Idle_Front, retry);
+                return getFallBackIdleType(animationName, CharacterAnimationType.Idle_Front, retry);
             case CharacterAnimationType.Run_Back:
-                return getFallBackIdleType(characterToAnimate, CharacterAnimationType.Idle_Back, retry);
+                return getFallBackIdleType(animationName, CharacterAnimationType.Idle_Back, retry);
             case CharacterAnimationType.Secondary_Idle:
-                return getFallBackIdleType(characterToAnimate, CharacterAnimationType.Idle_Front, false);
+                return getFallBackIdleType(animationName, CharacterAnimationType.Idle_Front, false);
             default:
                 return animationType;
         }

@@ -64,6 +64,11 @@ public static class EnemyAmountList
     public readonly static CreatureAmount oneSpearman = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(MonsterNameList.spearman));
     public readonly static CreatureAmount twoSpearmen = new CreatureAmount(Constants.twoCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.spearman));
 
+    public readonly static CreatureAmount axemanPuppets = new CreatureAmount(Constants.fourCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.puppetedPreffix + MonsterNameList.axeman));
+    public readonly static CreatureAmount spearmanPuppets = new CreatureAmount(Constants.fourCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.puppetedPreffix + MonsterNameList.spearman));
+    public readonly static CreatureAmount disciplinarianPuppets = new CreatureAmount(Constants.fourCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.puppetedPreffix + MonsterNameList.disciplinarian));
+    public readonly static CreatureAmount javelineerPuppets = new CreatureAmount(Constants.fourCreatures, EnemyStatsList.getEnemyStats(MonsterNameList.puppetedPreffix + MonsterNameList.javelineer));
+
     #endregion
 
     #region NonBranded Slaves

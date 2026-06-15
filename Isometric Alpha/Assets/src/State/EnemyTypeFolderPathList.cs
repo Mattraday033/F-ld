@@ -10,17 +10,20 @@ public static class EnemyTypeFolderPathList
     private const string batsFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.bats + "/";
     private const string wormFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.worms + "/";
 
-    private const string brandedFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/Branded Slaves/";
-    private const string nonbrandedFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/Nonbranded Slaves/";
+    private const string humansFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/";
 
-    private const string lovashiFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/" + EnemyCategoryNameList.lovashi + "/";
+    private const string brandedFolderPath = humansFolderPath + "Branded Slaves/";
+    private const string nonbrandedFolderPath = humansFolderPath + "Nonbranded Slaves/";
+
+    private const string lovashiFolderPath = humansFolderPath + EnemyCategoryNameList.lovashi + "/";
+    private const string vadaFolderPath = humansFolderPath + EnemyCategoryNameList.vada + "/";
 
     private const string miscFolderPath = PrefabNames.charactersFolder + "Misc/";
     private const string horsesFolderPath = PrefabNames.charactersFolder + "Horses/";
 
     private const string saintsFolderPath = PrefabNames.charactersFolder + "Saints/";
 
-    private const string partyMembersFolderPath = PrefabNames.charactersFolder + EnemyCategoryNameList.humans + "/PartyMembers/";
+    private const string partyMembersFolderPath = humansFolderPath + "PartyMembers/";
 
     private static Dictionary<string, string> folderPathDict;
 
@@ -108,6 +111,12 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.guardReka, lovashiFolderPath + NPCNameList.guardReka+ "/");
         folderPathDict.Add(NPCNameList.guardVazul, lovashiFolderPath + MonsterNameList.spearman + "/");
         folderPathDict.Add(NPCNameList.guardVirag, lovashiFolderPath + NPCNameList.guardVirag+ "/");
+
+        //Puppets
+        folderPathDict.Add(MonsterNameList.puppetedPreffix + MonsterNameList.axeman, lovashiFolderPath + MonsterNameList.axeman + "/");
+        folderPathDict.Add(MonsterNameList.puppetedPreffix + MonsterNameList.disciplinarian, lovashiFolderPath + MonsterNameList.disciplinarian + "/");
+        folderPathDict.Add(MonsterNameList.puppetedPreffix + MonsterNameList.javelineer, lovashiFolderPath + MonsterNameList.javelineer + "/");
+        folderPathDict.Add(MonsterNameList.puppetedPreffix + MonsterNameList.spearman, lovashiFolderPath + MonsterNameList.spearman + "/");
         #endregion
 
         #region Slaves
@@ -180,7 +189,7 @@ public static class EnemyTypeFolderPathList
 
         #region Misc
     
-        folderPathDict.Add(NPCNameList.takacs,  partyMembersFolderPath + NPCNameList.protagPrefix+2 + "/");
+        folderPathDict.Add(NPCNameList.takacs,  vadaFolderPath + NPCNameList.takacs + "/");
         folderPathDict.Add(NPCNameList.barricade, miscFolderPath + NPCNameList.barricade + "/");
 
         #endregion

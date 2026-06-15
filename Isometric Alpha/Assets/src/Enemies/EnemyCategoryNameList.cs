@@ -11,6 +11,8 @@ public static class EnemyCategoryNameList
 
     public const string humans = "Humans";
 
+    public const string vada = "Vada";
+
     public const string lovashi = "Lovashi";
 
     public const string horses = "Horses";
