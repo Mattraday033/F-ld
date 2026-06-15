@@ -355,6 +355,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public void playAttackAnimation()
     {
+        if(animationManager == null)
+        {
+            return;
+        }
+
         animationManager.playAttackAnimation();
     }
 

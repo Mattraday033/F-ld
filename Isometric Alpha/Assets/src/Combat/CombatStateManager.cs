@@ -98,6 +98,8 @@ public class CombatStateManager : MonoBehaviour
 
 	public CombatActionManager combatActionManager;
 
+    public WinCondition currentWinCon;
+
 	public static SurpriseState whoIsSurprised;
 	public static WhoseTurn whoseTurn;
 	public static CurrentActivity currentActivity { get; private set; }
@@ -113,7 +115,7 @@ public class CombatStateManager : MonoBehaviour
 
 	public static CombatStateManager instance;
 
-	private GameOverPopUpButton gameOverPopUpButton;
+	public GameOverPopUpButton gameOverPopUpButton;
     private BinaryPanelPopUpButton binaryPanelPopUpButton;
 
 	private static bool resolvingTurnDuringTutorial;
@@ -165,6 +167,11 @@ public class CombatStateManager : MonoBehaviour
         CreatureSpawner.spawnEnemyPackInfo();
         CreatureSpawner.spawnAllyPackInfo();
 
+        foreach (BeforeCombatAction beforeCombatAction in State.enemyPackInfo.beforeCombatActions)
+        {
+            beforeCombatAction();
+        }
+
         EquippedPassiveTraitManager.ApplyAllEquippedPassiveTraits.Invoke();
 
         AudioManager.endAmbience();
@@ -205,6 +212,10 @@ public class CombatStateManager : MonoBehaviour
 
 		gameOverPopUpButton = new GameOverPopUpButton();
         binaryPanelPopUpButton = new BinaryPanelPopUpButton();
+
+        currentWinCon = State.enemyPackInfo.winCon;
+
+        OnNewTurn.AddListener(checkWinConditionOnNewTurn);
 
 		CombatUI.setCurrentActivityText(currentActivity);
         OnNewTurn.Invoke();
@@ -383,7 +394,7 @@ public class CombatStateManager : MonoBehaviour
 
 		if (whoseTurn == WhoseTurn.Lost)
 		{
-			getInstance().gameOverPopUpButton.spawnPopUp();
+			getInstance().currentWinCon.performLossBehaviour();
 		}
         
         SelectorManager.declareSelectors();
@@ -585,8 +596,15 @@ public class CombatStateManager : MonoBehaviour
 		{
 			updateTurnState(WhoseTurn.Lost);
 		}
-		else if (CombatGrid.getTotalAliveEnemyCount() == 0 ||
-			CombatGrid.getEnemyMasterCount() == 0)
+		else if (currentWinCon.playerHasWon())
+		{
+			setToWonState();
+		}
+	}
+
+	private void checkWinConditionOnNewTurn()
+	{
+		if (currentWinCon != null && currentWinCon.playerHasWon())
 		{
 			setToWonState();
 		}
@@ -645,6 +663,14 @@ public class CombatStateManager : MonoBehaviour
 
 		StepCountScriptManager.reset();
         inCombat = false;
+
+        if (State.enemyPackInfo != null)
+        {
+            foreach (AfterCombatAction afterCombatAction in State.enemyPackInfo.afterCombatActions)
+            {
+                afterCombatAction();
+            }
+        }
 	}
 
     public static int retreatedFromIndex = -1;

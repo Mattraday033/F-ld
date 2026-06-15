@@ -168,6 +168,11 @@ public static class AbilityList
 	public const string boulderRollKey = "Boulder Roll";
 	public const string lesserBoulderRollKey = "Lesser Boulder Roll";
 	public const string stoneSaintMaterialsSummonKey = "Scavenge Stones";
+
+	public const string summonAxemanPuppetsKey = "Summon Axeman Puppets";
+	public const string summonSpearmanPuppetsKey = "Summon Spearman Puppets";
+	public const string summonDisciplinarianPuppetsKey = "Summon Disciplinarian Puppets";
+	public const string summonJavelineerPuppetsKey = "Summon Javelineer Puppets";
 	
 	public const string summonsWhipAttackKey = "Whip Attack";
 
@@ -305,6 +310,21 @@ public static class AbilityList
         enemyAbilityDictionary.Add(evolveKey, new EvolveAbility(CombatActionSettings.build(DescriptionParams.build(evolveKey, useDescription: "Evolves targets into more powerful versions of themselves."), targetParams: TargetParams.build(Range.boxThreeIndex)), enemyAbilityDictionary[boulderRollKey]));
         enemyAbilityDictionary.Add(stoneSaintMaterialsSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(stoneSaintMaterialsSummonKey, useDescription: "The Saint summons rock Minions which do not attack but can be Evolved into more Stone Saints.")), 
                                                                                     new string[]{MonsterNameList.smallRock, MonsterNameList.smallRock}));
+
+        //Vada Abilities
+        string vadaSummonDescription = "The Vada calls forth more puppets.";
+        enemyAbilityDictionary.Add(summonAxemanPuppetsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(summonSpearmanPuppetsKey, useDescription: vadaSummonDescription)), 
+                                                                                    new string[]{MonsterNameList.puppetedPrefix + MonsterNameList.axeman, MonsterNameList.puppetedPrefix + MonsterNameList.axeman, 
+                                                                                                 MonsterNameList.puppetedPrefix + MonsterNameList.axeman, MonsterNameList.puppetedPrefix + MonsterNameList.axeman}));
+        enemyAbilityDictionary.Add(summonSpearmanPuppetsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(summonSpearmanPuppetsKey, useDescription: vadaSummonDescription)), 
+                                                                                    new string[]{MonsterNameList.puppetedPrefix + MonsterNameList.spearman, MonsterNameList.puppetedPrefix + MonsterNameList.spearman, 
+                                                                                                 MonsterNameList.puppetedPrefix + MonsterNameList.spearman, MonsterNameList.puppetedPrefix + MonsterNameList.spearman}));
+        enemyAbilityDictionary.Add(summonDisciplinarianPuppetsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(summonSpearmanPuppetsKey, useDescription: vadaSummonDescription)), 
+                                                                                    new string[]{MonsterNameList.puppetedPrefix + MonsterNameList.disciplinarian, MonsterNameList.puppetedPrefix + MonsterNameList.disciplinarian, 
+                                                                                                 MonsterNameList.puppetedPrefix + MonsterNameList.disciplinarian, MonsterNameList.puppetedPrefix + MonsterNameList.disciplinarian}));
+        enemyAbilityDictionary.Add(summonJavelineerPuppetsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(summonSpearmanPuppetsKey, useDescription: vadaSummonDescription)), 
+                                                                                    new string[]{MonsterNameList.puppetedPrefix + MonsterNameList.javelineer, MonsterNameList.puppetedPrefix + MonsterNameList.javelineer, 
+                                                                                                 MonsterNameList.puppetedPrefix + MonsterNameList.javelineer, MonsterNameList.puppetedPrefix + MonsterNameList.javelineer}));
 	}
 	
 	private static void instantiateStatAbilities()

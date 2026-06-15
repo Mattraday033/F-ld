@@ -113,10 +113,10 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.guardVirag, lovashiFolderPath + NPCNameList.guardVirag+ "/");
 
         //Puppets
-        folderPathDict.Add(MonsterNameList.puppetedPreffix + MonsterNameList.axeman, lovashiFolderPath + MonsterNameList.axeman + "/");
-        folderPathDict.Add(MonsterNameList.puppetedPreffix + MonsterNameList.disciplinarian, lovashiFolderPath + MonsterNameList.disciplinarian + "/");
-        folderPathDict.Add(MonsterNameList.puppetedPreffix + MonsterNameList.javelineer, lovashiFolderPath + MonsterNameList.javelineer + "/");
-        folderPathDict.Add(MonsterNameList.puppetedPreffix + MonsterNameList.spearman, lovashiFolderPath + MonsterNameList.spearman + "/");
+        folderPathDict.Add(MonsterNameList.puppetedPrefix + MonsterNameList.axeman, lovashiFolderPath + MonsterNameList.axeman + "/");
+        folderPathDict.Add(MonsterNameList.puppetedPrefix + MonsterNameList.disciplinarian, lovashiFolderPath + MonsterNameList.disciplinarian + "/");
+        folderPathDict.Add(MonsterNameList.puppetedPrefix + MonsterNameList.javelineer, lovashiFolderPath + MonsterNameList.javelineer + "/");
+        folderPathDict.Add(MonsterNameList.puppetedPrefix + MonsterNameList.spearman, lovashiFolderPath + MonsterNameList.spearman + "/");
         #endregion
 
         #region Slaves

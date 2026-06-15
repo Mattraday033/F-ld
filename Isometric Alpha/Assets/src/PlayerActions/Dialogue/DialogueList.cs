@@ -783,7 +783,7 @@ public static class DialogueList
                                                         NPCNameList.takacs
                                                       },
                             Resources.Load<TextAsset>(DialogueNameList.guardNWPath),
-                            DialogueCombatInfoList.nwCampGuard2CombatInfo));
+                            DialogueCombatInfoList.takacsPuppetCombatInfo));
 
         addDialogueToList(LocationNameList.campNorthWest, NPCNameList.chiefTabor,
                             new Dialogue(new string[] { 

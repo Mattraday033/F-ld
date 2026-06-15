@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public delegate bool CombatantSearchCriteria(Stats stats);
@@ -26,7 +27,7 @@ public static class CombatGrid
 	public const int maximumNumberOfSpaces = 16;
 	
     public static Dictionary<GridCoords,Stats> combatantsDict = new Dictionary<GridCoords,Stats>();
-
+    public readonly static UnityEvent LastEnemyKilled = new UnityEvent();
     
     [RuntimeInitializeOnLoadMethod]
     public static void cleanCombatGrid()
@@ -95,6 +96,11 @@ public static class CombatGrid
         if(newCombatant == null && combatantsDict.ContainsKey(coords))
         {
             combatantsDict.Remove(coords);
+
+            if(getTotalAliveEnemyCount() == 0)
+            {
+                LastEnemyKilled.Invoke();
+            }
         } else if(newCombatant == null)
         {
             return;

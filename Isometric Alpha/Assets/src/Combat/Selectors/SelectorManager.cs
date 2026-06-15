@@ -587,7 +587,7 @@ public class SelectorManager : MonoBehaviour
                 return;
         }
 
-        if(InspectNode.inspecting)
+        if(InspectNode.inspecting || CombatStateManager.whoseTurn != WhoseTurn.Player)
         {
             return;
         }

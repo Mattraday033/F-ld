@@ -17,6 +17,9 @@ public class CreatureAmount
     }
 }
 
+public delegate void BeforeCombatAction();
+public delegate void AfterCombatAction();
+
 //info about a pack of enemies on the overworld, such as how many of them there are and of what type. Stored in State
 public class EnemyPackInfo : IDescribableInBlocks, ICreatureSpawnPackage
 {
@@ -59,8 +62,19 @@ public class EnemyPackInfo : IDescribableInBlocks, ICreatureSpawnPackage
     public int numberOfDrops = 1; //number of rolls on their drop table
 
     public bool alwaysSurprised;
+    public WinCondition winCon;
+    public List<BeforeCombatAction> beforeCombatActions;
+    public List<AfterCombatAction> afterCombatActions;
 
-    public EnemyPackInfo(CreatureAmount[] FoeTypes, string dropTableName, ItemListID[] guaranteedDrops = null, string tutorialSequenceKey = "", List<SpawnDetails> spawnDetailsList = null, bool alwaysSurprised = false)
+    public EnemyPackInfo(CreatureAmount[] FoeTypes, 
+                            string dropTableName,
+                            ItemListID[] guaranteedDrops = null,
+                            string tutorialSequenceKey = "", 
+                            List<SpawnDetails> spawnDetailsList = null, 
+                            bool alwaysSurprised = false, 
+                            WinCondition winCon = null, 
+                            List<BeforeCombatAction> beforeCombatActions = null,
+                            List<AfterCombatAction> afterCombatActions = null)
     {
         this.FoeTypes = FoeTypes;
 
@@ -73,6 +87,10 @@ public class EnemyPackInfo : IDescribableInBlocks, ICreatureSpawnPackage
         this.spawnDetailsList = spawnDetailsList;
 
         this.alwaysSurprised = alwaysSurprised;
+
+        this.winCon = winCon ?? WinLoseConditionList.defeatAllEnemies;
+        this.beforeCombatActions = beforeCombatActions ?? new List<BeforeCombatAction>();
+        this.afterCombatActions = afterCombatActions ?? new List<AfterCombatAction>();
     }
 
     public virtual string getQuestStep()

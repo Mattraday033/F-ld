@@ -218,7 +218,14 @@ public static class EnemyPackInfoList
                                                                                         EnemyAmountList.disciplinarianPuppets,
                                                                                         EnemyAmountList.javelineerPuppets
                                                                                     },
-                                                                                    DropTableList.lovashiGuardsDTKey);
+                                                                                    DropTableList.lovashiGuardsDTKey,
+                                                                                    winCon: WinLoseConditionList.surival,
+                                                                                    beforeCombatActions: new List<BeforeCombatAction>() {
+                                                                                                                                            () => { CombatGrid.LastEnemyKilled.AddListener(EnvironmentalCombatActionList.addTakacsPuppetWaveSummon); }
+                                                                                                                                        },
+                                                                                    afterCombatActions: new List<AfterCombatAction>()   {
+                                                                                                                                            () => { CombatGrid.LastEnemyKilled.RemoveListener(EnvironmentalCombatActionList.addTakacsPuppetWaveSummon); }
+                                                                                                                                        });
 
     public readonly static EnemyPackInfo ml3GuardsWithBarricades = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.barricade, 

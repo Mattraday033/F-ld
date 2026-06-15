@@ -121,7 +121,6 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
                 targetingTrait = TraitList.buffer;
                 
                 environmentalCombatActions.Add(envCombatAction.clone(actorStats), targetingTrait.clone(actorStats));
-                
                 return;
             default:
                 return;
@@ -135,6 +134,33 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 	{
 		environmentalCombatActions = new Dictionary<CombatAction,Trait>();
 	}
-	
-    
+}
+
+public static class EnvironmentalCombatActionList
+{
+    public static void addTakacsPuppetWaveSummon()
+    {
+        if(CombatActionManager.critCombatActionQueue.Count > 1)
+        {
+            return;
+        }
+
+        CombatActionManager.addCritCombatAction(prepareSummonWaveAbility(AbilityList.summonAxemanPuppetsKey, 3));
+
+        CombatActionManager.addCritCombatAction(prepareSummonWaveAbility(AbilityList.summonSpearmanPuppetsKey, 2));
+        
+        CombatActionManager.addCritCombatAction(prepareSummonWaveAbility(AbilityList.summonDisciplinarianPuppetsKey, 1));
+        
+        CombatActionManager.addCritCombatAction(prepareSummonWaveAbility(AbilityList.summonJavelineerPuppetsKey, 0));
+    }
+
+    private static SummonAbility prepareSummonWaveAbility(string key, int row)
+    {
+        SummonAbility summonAbility = AbilityList.getAbility(EnemyStatsList.getEnemyStats(NPCNameList.takacs), key) as SummonAbility;
+        Selector summonSelector = SelectorManager.getInstance().selectors[Range.horizontalThreeIndex].clone();
+        summonSelector.setToLocation(new GridCoords(row,1));
+        summonAbility.setSelector(summonSelector);
+
+        return summonAbility;
+    }
 }

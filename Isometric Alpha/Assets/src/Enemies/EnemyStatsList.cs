@@ -184,11 +184,26 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         #endregion
         #endregion
 
+        #region Vada
+
+        enemyStatsDict.Add(NPCNameList.takacs, new EnemyStats(NPCNameList.takacs,
+                                                                            Constants.zeroArmor,
+                                                                                                5,
+                                            AbilityList.getAbility(null, AbilityList.guardAxeKey),
+                                                        new Trait[] { 
+                                                                      TraitList.master,
+                                                                      TraitList.chaotic,
+                                                                      TraitList.frontLine
+                                                                    },
+                                                                    animationAudioClipDictionary: AnimationSFXDictionaryList.femaleHumanAudioDictionary));
+
+        #endregion
+
         #region Lovashi Puppets
 
-        enemyStatsDict.Add(MonsterNameList.puppetedPreffix + MonsterNameList.axeman, new MinionStats(MonsterNameList.puppetedPreffix + MonsterNameList.axeman,
+        enemyStatsDict.Add(MonsterNameList.puppetedPrefix + MonsterNameList.axeman, new MinionStats(MonsterNameList.puppetedPrefix + MonsterNameList.axeman,
                                                                             Constants.fifteenArmor,
-                                                                                                45,
+                                                                                                50,
                                             AbilityList.getAbility(null, AbilityList.guardAxeKey),
                                                         new Trait[] { 
                                                                       TraitList.minion,
@@ -197,9 +212,9 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                     },
                                                                     animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
 
-        enemyStatsDict.Add(MonsterNameList.puppetedPreffix + MonsterNameList.spearman, new MinionStats(MonsterNameList.puppetedPreffix + MonsterNameList.spearman,
-                                                                            Constants.fifteenArmor,
-                                                                                                55,
+        enemyStatsDict.Add(MonsterNameList.puppetedPrefix + MonsterNameList.spearman, new MinionStats(MonsterNameList.puppetedPrefix + MonsterNameList.spearman,
+                                                                            Constants.tenArmor,
+                                                                                                35,
                                             AbilityList.getAbility(null, AbilityList.guardSpearKey),
                                                         new Trait[] { 
                                                                       TraitList.minion,
@@ -208,9 +223,9 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                     },
                                                                     animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
 
-        enemyStatsDict.Add(MonsterNameList.puppetedPreffix + MonsterNameList.disciplinarian, new MinionStats(MonsterNameList.puppetedPreffix + MonsterNameList.disciplinarian,
+        enemyStatsDict.Add(MonsterNameList.puppetedPrefix + MonsterNameList.disciplinarian, new MinionStats(MonsterNameList.puppetedPrefix + MonsterNameList.disciplinarian,
                                                                             Constants.fifteenArmor,
-                                                                                                55,
+                                                                                                45,
                                             AbilityList.getAbility(null, AbilityList.guardLashKey),
                                                         new Trait[] { 
                                                                       TraitList.minion,
@@ -219,9 +234,9 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                     },
                                                                     animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
 
-        enemyStatsDict.Add(MonsterNameList.puppetedPreffix + MonsterNameList.javelineer, new MinionStats(MonsterNameList.puppetedPreffix + MonsterNameList.javelineer,
-                                                                            Constants.fifteenArmor,
-                                                                                                35,
+        enemyStatsDict.Add(MonsterNameList.puppetedPrefix + MonsterNameList.javelineer, new MinionStats(MonsterNameList.puppetedPrefix + MonsterNameList.javelineer,
+                                                                            Constants.fiveArmor,
+                                                                                                20,
                                             AbilityList.getAbility(null, AbilityList.guardJavelinKey),
                                                         new Trait[] { 
                                                                       TraitList.minion,
