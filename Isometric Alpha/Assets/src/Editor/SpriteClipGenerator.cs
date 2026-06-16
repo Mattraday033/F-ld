@@ -312,6 +312,15 @@ public static class SpriteClipGenerator
                 continue;
             }
 
+            // A "Blank" sprite is an intentional gap in the preset (e.g. a hold on nothing).
+            // Keep the preset's own value untouched and don't let it consume a new-sprite slot,
+            // so it neither gets overridden nor shifts the remapping of the real frames.
+            if (presetKeyframe.value.name.IndexOf("Blank", System.StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                keyframes.Add(presetKeyframe);
+                continue;
+            }
+
             // First time we see a given preset sprite, it claims the next new-sprite slot;
             // a repeat of that preset sprite resolves to the same slot again.
             if (!slotByPresetSprite.TryGetValue(presetKeyframe.value, out int slot))

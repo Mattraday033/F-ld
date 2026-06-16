@@ -817,12 +817,18 @@ public class CombatStateManager : MonoBehaviour
 		allQueuedSummonLocations = new List<GridCoords>();
 	}
 
-	private static string getCombatTutorialKey()
+	private string getCombatTutorialKey()
 	{
 
 		if (!TutorialFlags.getFlag(TutorialSequenceList.combatTutorialSeenFlag))
 		{
 			return TutorialSequenceList.combatTutorialSeenFlag;
+		}
+
+		if (!TutorialFlags.getFlag(TutorialSequenceList.winConUITutorialSeenFlag) && 
+            currentWinCon != null && currentWinCon.showWinConTutorial())
+		{
+			return TutorialSequenceList.winConUITutorialSequenceKey;
 		}
 
 		EnemyPackInfo packInfo = State.enemyPackInfo;

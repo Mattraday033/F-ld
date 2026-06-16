@@ -95,7 +95,9 @@ getNewDialogueFromList(NWCampChief Tabor,true,skippedTutorialInNWCamp)
 \*Entering this area will progress the story. You may not be able to return to this location. Are you certain you wish to proceed?*
 
     +\*Continue.*
-        ->readyCheck_1b
+        setToTrue(startedDirectorAnnouncement)
+        ->proceedToDirectorSpeech
+        // ->readyCheck_1b
     +\*Leave.*
         ->Close
 

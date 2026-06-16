@@ -34,6 +34,38 @@ public class ExuberanceEquippedPassive : EquippedPassive
 		return false;
 	}
 
+	public override string getUseDescription()
+    {
+        string useDescription = "This Equipped Passive adds the following Exuberances to the Party's total at the beginning of Combat:\n\n";
+
+        if(getRedStacksAtStart() > 0)
+        {
+            useDescription += getRedStacksAtStart() + " Red Knife stack(s).\n";
+        }
+
+        if(getBlueStacksAtStart() > 0)
+        {
+            useDescription += getBlueStacksAtStart() + " Blue Shield stack(s).\n";
+        }
+
+        if(getYellowStacksAtStart() > 0)
+        {
+            useDescription += getYellowStacksAtStart() + " Yellow Thorn stack(s).\n";
+        }
+
+        if(getGreenStacksAtStart() > 0)
+        {
+            useDescription += getGreenStacksAtStart() + " Green Leaf stack(s).";
+        }
+
+        if(useDescription[useDescription.Length-1] == '\n')
+        {
+            useDescription = useDescription.Substring(0,useDescription.Length-1);
+        }
+
+        return useDescription;
+    }
+
     public override int getRedStacksAtStart()
     {
         if (numberOfFreeStacks == null || numberOfFreeStacks.Length <= redStackIndex)

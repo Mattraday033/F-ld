@@ -114,6 +114,7 @@ public static class TutorialSequenceList
     public const string traitMonsterTargetHash = "Trait Monster";
     public const string exuberancesParentTargetHash = "Exuberances Parent";
     public const string combatActionDescriptionPanelTargetHash = "Combat Action Description Panel";
+    public const string winConUITargetHash = "Win Con UI";
 
 
     public const string movableObjectTutorialSequenceKey = "Movable Object Tutorial";
@@ -150,6 +151,9 @@ public static class TutorialSequenceList
     public const string exuberanceCostTutorialSeenFlag = "exuberanceCostTutorialSequenceEntered";
     public const string traitCostTutorialSequenceKey = "Trait Cost Tutorial";
     public const string traitCostTutorialSeenFlag = "traitCostTutorialSequenceEntered";
+
+    public const string winConUITutorialSequenceKey = "Win Con UI Tutorial";
+    public const string winConUITutorialSeenFlag = "winConUITutorialSequenceEntered";
 
     #endregion
 
@@ -196,6 +200,8 @@ public static class TutorialSequenceList
 
         initializeExuberanceCostTutorial();
         initializeTraitCostTutorial();
+
+        initializeWinConUITutorial();
 
         LoadSaveFile.OnLoadResetData.RemoveListener(initializeTutorials);
         LoadSaveFile.OnLoadResetData.AddListener(initializeTutorials);
@@ -1110,6 +1116,28 @@ public static class TutorialSequenceList
         traitCostTutorialSequence.setSkipScript(new SkipCombatTutorialScript());
 
         tutorialSequenceDictionary.Add(traitCostTutorialSequenceKey, traitCostTutorialSequence);
+    }
+
+    public static void initializeWinConUITutorial()
+    {
+        List<TutorialSequenceStep> winConUITutorialSteps = new List<TutorialSequenceStep>();
+
+        TutorialSequenceStep winConUITutorialStepOne = new TutorialSequenceStep(TutorialMessageList.winConUITutorialMessagePrefix + 1,
+                                                                             winConUITargetHash,
+                                                                             ArrowDirection.BottomRight);
+        winConUITutorialSteps.Add(winConUITutorialStepOne);
+
+        TutorialSequenceStep winConUITutorialStepTwo = new TutorialSequenceStep(TutorialMessageList.winConUITutorialMessagePrefix + 2,
+                                                                             winConUITargetHash,
+                                                                             ArrowDirection.BottomRight);
+        winConUITutorialSteps.Add(winConUITutorialStepTwo);
+
+        TutorialSequence winConUITutorialSequence = new TutorialSequence(CurrentActivity.ChoosingActor, doNoSkipCurrentActivityChange, winConUITutorialSeenFlag, winConUITutorialSteps);
+        // winConUITutorialSequence.preventMouseHovers = true;
+
+        winConUITutorialSequence.setSkipScript(new SkipCombatTutorialScript());
+
+        tutorialSequenceDictionary.Add(winConUITutorialSequenceKey, winConUITutorialSequence);
     }
 
     public static TutorialSequence getTutorialSequence(string key)

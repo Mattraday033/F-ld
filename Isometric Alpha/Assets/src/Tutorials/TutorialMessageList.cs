@@ -47,6 +47,8 @@ public static class TutorialMessageList
     public const string exuberanceCostTutorialMessagePrefix = "Exuberance Cost Tutorial Message ";
     public const string traitCostTutorialMessagePrefix = "Trait Cost Tutorial Message ";
 
+    public const string winConUITutorialMessagePrefix = "Win Con UI Tutorial Message ";
+
 
     public const string movableObjectTutorialMessagePrefix = "Movable Object Tutorial Message ";
 
@@ -151,6 +153,9 @@ public static class TutorialMessageList
         tutorialDictionary.Add(traitCostTutorialMessagePrefix + 2, "The number of Trait Stacks each Character has is shown here. Hover over a Trait's Icon to learn how to earn more Stacks. If a Trait has no number on it's Icon, it cannot be Stacked.");
         tutorialDictionary.Add(traitCostTutorialMessagePrefix + 3, "If you do not see the correct Icon in the Trait Display, you have not equipped the correct Equippable Passive to your Action Wheel.");
         tutorialDictionary.Add(traitCostTutorialMessagePrefix + 4, "You can learn an Ability's Trait cost by reading it's description.");
+
+        tutorialDictionary.Add(winConUITutorialMessagePrefix + 1, "Some Combat encounters have alternate 'Win Conditions'. This means to achieve Victory, you may have to accomplish something other than defeating all Master Creatures.");
+        tutorialDictionary.Add(winConUITutorialMessagePrefix + 2, "To learn more about what this alternate Win Condition requires of you, hover over this icon.");
 
         tutorialDictionary.Add(combatTutorialRepositionMessagePrefix + 1, "Notice the indicator has turned yellow. This means the Action you've chosen allows you to choose a secondary target. Use the Movement keys to position the selector and choose the second location with <nobr>' " + keyCodePlaceHolder + " '</nobr>");
 

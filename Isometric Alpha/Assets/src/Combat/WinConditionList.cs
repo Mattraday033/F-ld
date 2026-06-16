@@ -16,7 +16,7 @@ public static class WinLoseConditionList
         CombatStateManager.getInstance().gameOverPopUpButton.spawnPopUp();
     };
 
-    public readonly static CombatEndBehaviour takascCutScene = () =>
+    public readonly static CombatEndBehaviour takacsCutScene = () =>
     {
         EndOfCombatCutSceneScript script = new EndOfCombatCutSceneScript();
 
@@ -30,22 +30,17 @@ public static class WinLoseConditionList
     public static readonly WinConditionCheck defeatAllEnemiesLogic =         
         () => CombatGrid.getTotalAliveEnemyCount() == 0 ||
               CombatGrid.getEnemyMasterCount() == 0;
-
-    public static readonly WinConditionCheck surviveFourRoundsLogic =  
-        () => {
-            return CombatStateManager.turnNumber >= Constants.sizeTwo;
-            // return CombatStateManager.turnNumber >= Constants.sizeFive;
-        };
-
-
-    public readonly static WinCondition defeatAllEnemies = new WinCondition(
+    public readonly static WinCondition defeatAllEnemies = new DefaultWinCondition(
+        "Defeat Master Creatures",
+        IconList.masterIcon,
         "Defeat all Master Creatures to Win. Minion/Summoned Creatures will flee after the last Master Creature is defeated."
     );
 
-    public readonly static WinCondition surival = new WinCondition(
-        "If the party is defeated, they will be moved to another location instead of dying. Survive for four rounds to receive a bonus reward at the end of combat.\n\n<i>The enemy is without end.</i>",
-        surviveFourRoundsLogic,
-        takascCutScene
+    public readonly static WavesWinCondition surival = new WavesWinCondition(
+        Constants.sizeThree,
+        IconList.waves,
+        winBehaviour: takacsCutScene,
+        lossBehaviour: takacsCutScene
     );
 
     #endregion

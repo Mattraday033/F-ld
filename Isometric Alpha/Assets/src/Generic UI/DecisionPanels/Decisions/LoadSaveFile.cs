@@ -22,7 +22,7 @@ public interface IDecisionPanel
 
 public delegate void OutroLogic();
 
-public class LoadSaveFile : IDecision
+public class LoadSaveFile: IDecision
 {
     private const string loadLostProgressMessageStart = "Are you sure you want to load '";
     private const string loadLostProgressMessageEnd = "'? Any unsaved progress will be lost.";

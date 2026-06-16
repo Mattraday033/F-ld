@@ -116,6 +116,15 @@ public class Area
             case LocationNameList.bodyPile:
                 prefabName = ZoneKeyList.mineLvl1;
                 break;
+            case LocationNameList.campNorthWest:
+                if (Flags.getFlag(FlagNameList.startedDirectorAnnouncement))
+                {
+                    prefabName = LocationNameList.campNorthWest;
+                } else
+                {
+                    prefabName = combatBackgroundName;
+                }
+                break;
             default:
                 prefabName = combatBackgroundName;
 		        break;

@@ -899,4 +899,7 @@ public static class IconList
     //Hostility Icons
     public const string flowerIcon = "Flower";
     public const string hostileSkullIcon = "Skull";
+
+    //Victory Conditions:
+    public const string waves = "Waves";
 }

@@ -145,6 +145,8 @@ public static class EnvironmentalCombatActionList
             return;
         }
 
+        WavesWinCondition.incrementWavesDefeated();
+
         CombatActionManager.addCritCombatAction(prepareSummonWaveAbility(AbilityList.summonAxemanPuppetsKey, 3));
 
         CombatActionManager.addCritCombatAction(prepareSummonWaveAbility(AbilityList.summonSpearmanPuppetsKey, 2));

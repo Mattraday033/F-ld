@@ -79,6 +79,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         hoverText = message;
     }
+
     public virtual void spawnHoverMessagePanel()
     {
         descriptionPanel = Instantiate(Resources.Load<GameObject>(PrefabNames.hoverIconDescriptionPanel), transform).GetComponent<HoverIconDescriptionPanel>();
@@ -152,7 +153,11 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (hoverText != null && hoverText.Length > 0)
         {
             MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldSpawnHoverIcon));
-            eventData.Use();
+
+            if(eventData != null)
+            {
+                eventData.Use();
+            }
         }
     }
 
