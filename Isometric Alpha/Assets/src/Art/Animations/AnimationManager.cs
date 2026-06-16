@@ -149,7 +149,9 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     {
         newIdle = getFallBackIdleType(animationName, newIdle);
 
-        if(!CombatStateManager.inCombat)
+        if(!CombatStateManager.inCombat || 
+            CombatStateManager.whoseTurn == WhoseTurn.Won || 
+            CombatStateManager.whoseTurn == WhoseTurn.Lost)
         {
             currentIdle = newIdle;
             setSpriteToCurrentIdle();

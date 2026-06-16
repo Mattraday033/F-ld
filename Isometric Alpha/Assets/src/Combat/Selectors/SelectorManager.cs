@@ -69,7 +69,12 @@ public class SelectorManager : MonoBehaviour
 
         CombatStateManager.OnActivityChangeToFinished.AddListener(deactivateCurrentSelector);
 
+        CombatStateManager.OnTurnChangeToWon.AddListener(deactivateCurrentSelector);
+        CombatStateManager.OnTurnChangeToWon.AddListener(destroyPressEPrompt);
+
         HeartBeatManager.FastHeartBeat.AddListener(moveCurrentSelector);
+
+        CombatUIModule.OnHideCombatUI.AddListener(hideCurrentHoverUI);
     }
 
     private void OnDestroy()
@@ -84,7 +89,12 @@ public class SelectorManager : MonoBehaviour
 
         CombatStateManager.OnActivityChangeToFinished.RemoveListener(deactivateCurrentSelector);
 
+        CombatStateManager.OnTurnChangeToWon.RemoveListener(deactivateCurrentSelector);
+        CombatStateManager.OnTurnChangeToWon.RemoveListener(destroyPressEPrompt);
+
         HeartBeatManager.FastHeartBeat.RemoveListener(moveCurrentSelector);
+
+        CombatUIModule.OnHideCombatUI.RemoveListener(hideCurrentHoverUI);
     }
 
     private void setFirstSelectorVisibility()
@@ -212,6 +222,11 @@ public class SelectorManager : MonoBehaviour
 
         instance.hoverPanelPopUpButton.spawnPopUp();
 	}
+
+    public static void hideCurrentHoverUI()
+    {
+        instance.hoverPanelPopUpButton.destroyPopUp();
+    }
 
 	public static void createPressEPrompt()
 	{

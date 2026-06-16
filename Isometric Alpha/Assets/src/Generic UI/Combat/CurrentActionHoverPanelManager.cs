@@ -51,6 +51,11 @@ public class CurrentActionHoverPanelManager : DescriptionPanelSlot
         getDescriptionPanelParent().gameObject.SetActive(true);
     }
 
+    public void hideUI()
+    {
+        gameObject.SetActive(false);
+    }
+
     private void Awake()
     {
         if (instance != null)
@@ -59,7 +64,13 @@ public class CurrentActionHoverPanelManager : DescriptionPanelSlot
         }
 
         instance = this;
+
+        CombatUIModule.OnHideCombatUI.AddListener(hideUI);
     }
 
+    private void OnDestroy()
+    {
+        CombatUIModule.OnHideCombatUI.RemoveListener(hideUI);
+    }
 
 }

@@ -6,14 +6,26 @@ public static class WinLoseConditionList
 {
     #region Loss Behaviour
 
-    public readonly static LossBehaviour gameOver = () =>
+    public readonly static CombatEndBehaviour showCombatResults = () =>
+    {
+		CombatUI.combatResultsPopUpButton.spawnPopUp();
+    };
+
+    public readonly static CombatEndBehaviour gameOver = () =>
     {
         CombatStateManager.getInstance().gameOverPopUpButton.spawnPopUp();
     };
 
+    public readonly static CombatEndBehaviour takascCutScene = () =>
+    {
+        EndOfCombatCutSceneScript script = new EndOfCombatCutSceneScript();
+
+        script.startCutScene();
+    };
+
     #endregion
 
-    #region Win Condition
+    #region Win Condition 
     
     public static readonly WinConditionCheck defeatAllEnemiesLogic =         
         () => CombatGrid.getTotalAliveEnemyCount() == 0 ||
@@ -21,7 +33,8 @@ public static class WinLoseConditionList
 
     public static readonly WinConditionCheck surviveFourRoundsLogic =  
         () => {
-            return CombatStateManager.turnNumber >= Constants.sizeFive;
+            return CombatStateManager.turnNumber >= Constants.sizeTwo;
+            // return CombatStateManager.turnNumber >= Constants.sizeFive;
         };
 
 
@@ -31,7 +44,8 @@ public static class WinLoseConditionList
 
     public readonly static WinCondition surival = new WinCondition(
         "If the party is defeated, they will be moved to another location instead of dying. Survive for four rounds to receive a bonus reward at the end of combat.\n\n<i>The enemy is without end.</i>",
-        surviveFourRoundsLogic
+        surviveFourRoundsLogic,
+        takascCutScene
     );
 
     #endregion

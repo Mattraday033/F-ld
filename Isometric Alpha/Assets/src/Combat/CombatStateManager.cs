@@ -345,7 +345,11 @@ public class CombatStateManager : MonoBehaviour
 	//updates turn state internally and sets UI to reflect that
 	public static void updateTurnState(WhoseTurn wT)
 	{
-		if (whoseTurn == WhoseTurn.Resolving && wT == WhoseTurn.Player &&
+        if (whoseTurn == WhoseTurn.Won || 
+            whoseTurn == WhoseTurn.Lost)
+        {
+            return;
+        } else if (whoseTurn == WhoseTurn.Resolving && wT == WhoseTurn.Player &&
 			getInstance() != null && getInstance().ticker != null)
 		{
             whoseTurn = WhoseTurn.TickDown;
@@ -386,8 +390,6 @@ public class CombatStateManager : MonoBehaviour
                 Debug.LogError("Unknown WhoseTurn State: " + wT.ToString());
                 break;
         }
-
-		// Debug.LogError("whoseTurn = " + whoseTurn.ToString());
 
 		CombatUI.setTurnInfoText(whoseTurn);
 		getInstance().updateAllObjectsAfterStateChange();
@@ -489,7 +491,13 @@ public class CombatStateManager : MonoBehaviour
 
 	public static void setCurrentActivity(CurrentActivity newActivity)
 	{
-        switch(currentActivity)
+        if (whoseTurn == WhoseTurn.Won || 
+            whoseTurn == WhoseTurn.Lost)
+        {
+            return;
+        }
+
+        switch (currentActivity)
         {
             case CurrentActivity.Waiting:
                 break;
@@ -620,7 +628,7 @@ public class CombatStateManager : MonoBehaviour
             PartyManager.addXP(State.enemyPackInfo.getXPDrops());
         }
 
-		CombatUI.combatResultsPopUpButton.spawnPopUp();
+		currentWinCon.performWinBehaviour();
 	}
 
 	public static void resetCombat()

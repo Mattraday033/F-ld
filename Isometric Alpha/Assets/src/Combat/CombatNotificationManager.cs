@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class CombatNotificationManager : MonoBehaviour
+public class CombatNotificationManager : CombatUIModule
 {
 
     public GameObject notificationPanel;
@@ -11,8 +11,10 @@ public class CombatNotificationManager : MonoBehaviour
 
     private static bool showingSurprisedMessage = false;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         // CombatStateManager.OnTurnChangeToPlayer.AddListener(OnTurnChangeToPlayer);
         CombatStateManager.OnTurnChangeToResolving.AddListener(OnTurnChangeToResolving);
         // CombatStateManager.OnTurnChangeToWon.AddListener(OnTurnChangeToWon);
@@ -33,8 +35,10 @@ public class CombatNotificationManager : MonoBehaviour
         CombatStateManager.OnNewTurn.AddListener(OnNewTurn);
     }
 
-    private void OnDisable()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
+
         // CombatStateManager.OnTurnChangeToPlayer.RemoveListener(OnTurnChangeToPlayer);
         CombatStateManager.OnTurnChangeToResolving.RemoveListener(OnTurnChangeToResolving);
         // CombatStateManager.OnTurnChangeToWon.RemoveListener(OnTurnChangeToWon);

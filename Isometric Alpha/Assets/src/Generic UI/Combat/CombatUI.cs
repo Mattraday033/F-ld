@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CombatUI : MonoBehaviour
+public class CombatUI : CombatUIModule
 {
 
 	//public GameObject stateInfoUIBackgroundPanel;
@@ -85,4 +85,14 @@ public class CombatUI : MonoBehaviour
 		instance = this;
 		combatResultsPopUpButton = new CombatResultsPopUpButton();
 	}
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+    }
 }

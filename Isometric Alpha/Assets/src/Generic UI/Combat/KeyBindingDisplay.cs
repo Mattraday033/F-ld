@@ -353,6 +353,8 @@ public class KeyBindingDisplay : MonoBehaviour
         CombatStateManager.OnCurrentActivityChange.AddListener(setKeyBindingDisplay);
         CombatInputManager.OnHideKeyBindingsList.AddListener(onHideKeyBindingsButtonPress);
 
+        CombatUIModule.OnHideCombatUI.AddListener(hideUI);
+
         setKeyBindingsListVisibility();    
     }
 
@@ -361,6 +363,12 @@ public class KeyBindingDisplay : MonoBehaviour
         PlayerOOCStateManager.OnStateChange.RemoveListener(setKeyBindingDisplay);
         CombatStateManager.OnCurrentActivityChange.RemoveListener(setKeyBindingDisplay);
         CombatInputManager.OnHideKeyBindingsList.RemoveListener(onHideKeyBindingsButtonPress);
+        CombatUIModule.OnHideCombatUI.RemoveListener(hideUI);
+    }
+
+    public void hideUI()
+    {
+        gameObject.SetActive(false);
     }
 
     private void setKeyBindingDisplay()

@@ -312,6 +312,12 @@ public class PlayerInput : MonoBehaviour
 
     private void handleDialogueStateKeyPresses()
     {
+        if(!DialogueManager.getInstance().dialogueUIVisible())
+        {
+            KeyPressManager.handlingPrimaryKeyPress = true;
+            return;
+        }
+
         if (KeyBindingList.continueStoryKeyIsPressed()
             && DialogueManager.getInstance().storyCanContinue() && 
                 !FadeToBlackManager.isMidScreenFade())

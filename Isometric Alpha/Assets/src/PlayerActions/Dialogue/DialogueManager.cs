@@ -125,7 +125,12 @@ public class DialogueManager : MonoBehaviour
 
 	public bool storyCanContinue()
 	{
-		return currentStory.canContinue && dialogueTrackerWindow != null && dialogueTrackerWindow.gameObject.activeSelf && dialogueTrackerWindow.gameObject.activeInHierarchy;
+		return currentStory.canContinue && dialogueUIVisible();
+	}
+
+	public bool dialogueUIVisible()
+	{
+		return dialogueTrackerWindow != null && dialogueTrackerWindow.gameObject.activeSelf && dialogueTrackerWindow.gameObject.activeInHierarchy;
 	}
 
 	public Dialogue getDialogue()
