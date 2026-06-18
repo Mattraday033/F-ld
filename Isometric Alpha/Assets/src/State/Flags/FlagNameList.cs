@@ -195,6 +195,10 @@ public static class FlagNameList
         public const string hadGuardWhoBlockedPathFlogged = "hadGuardWhoBlockedPathFlogged"; //flag for if player had guard at beginning of gaspar execution/director announcement scene flogged
         public const string startedDirectorAnnouncement = "startedDirectorAnnouncement";
 
+        //Post Takacs Fight Convo Flags
+        public const string hadAfterTakacsFightConvo = "hadAfterTakacsFightConvo";
+        
+
         //seb flags
         public const string spokeToSeb = "spokeToSeb"; //if the player has spoken to Seb.
         public const string gaveNoteToSeb = "gaveNoteToSeb"; //if the player has given Clay's Note to Seb's presence

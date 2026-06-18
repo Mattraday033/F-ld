@@ -4,7 +4,20 @@ using UnityEngine;
 
 public class CombatActionManager : MonoBehaviour
 {
-    public const float waitBetweenCombatActions = .5f;
+    public const float standardWaitBetweenCombatActions = .35f;
+
+    private static bool _SkipWaitBetweenCombatActions;
+    public static bool skipWaitBetweenCombatActions
+    {
+        get
+        {
+            return _SkipWaitBetweenCombatActions;
+        }
+        set
+        {
+            _SkipWaitBetweenCombatActions = value;
+        }
+    }
 
 	public static CombatActionManager instance;
 	
@@ -95,7 +108,7 @@ public class CombatActionManager : MonoBehaviour
 
         float timeElapsed = 0;
 
-        while(timeElapsed < waitBetweenCombatActions)
+        while(timeElapsed < getWaitBetweenCombatActions())
         {
             yield return null;
 
@@ -109,6 +122,16 @@ public class CombatActionManager : MonoBehaviour
 		{
 			resolveACombatAction();
 		}
+    }
+
+    public static float getWaitBetweenCombatActions()
+    {
+        if(skipWaitBetweenCombatActions)
+        {
+            return 0f;
+        }
+
+        return standardWaitBetweenCombatActions;
     }
 	
 	public void decideAndShowEnemyCombatActions()
@@ -217,12 +240,12 @@ public class CombatActionManager : MonoBehaviour
 	{
 		for (int index = PlayerCombatActionManager.playerCombatActionQueue.Count - 1; index < EnemyCombatActionManager.enemyCombatActionQueue.Count; index++)
 		{
-			setActionToPreviousTarget((CombatAction)EnemyCombatActionManager.enemyCombatActionQueue[index]);
+			setActionToPreviousTarget(EnemyCombatActionManager.enemyCombatActionQueue[index]);
 		}
 
 		for (int index = 0; index < EnemyCombatActionManager.slowedEnemyCombatActionQueue.Count; index++)
 		{
-			setActionToPreviousTarget((CombatAction)EnemyCombatActionManager.slowedEnemyCombatActionQueue[index]);
+			setActionToPreviousTarget(EnemyCombatActionManager.slowedEnemyCombatActionQueue[index]);
 		}
 	}
 
@@ -371,7 +394,12 @@ public class CombatActionManager : MonoBehaviour
 		
 		return false;
 	}
-	
+
+    private static void useWaitBetweenCombatActions()
+    {
+        skipWaitBetweenCombatActions = false;
+    }
+
 	private void Awake()
 	{
 		if(instance != null)
@@ -380,6 +408,8 @@ public class CombatActionManager : MonoBehaviour
 		}
 		
 		instance = this;
+        CombatStateManager.OnNewTurn.AddListener(useWaitBetweenCombatActions);
+        CombatStateManager.OnCombatEnd.AddListener(useWaitBetweenCombatActions);
 	}
 	
 }

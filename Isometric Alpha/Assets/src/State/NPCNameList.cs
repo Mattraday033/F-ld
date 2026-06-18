@@ -190,6 +190,13 @@ public static class NPCNameList
 
     #region Misc
 
+
+    public const string firstPrefix = "First ";
+    public const string secondPrefix = "Second ";
+
+    public const string hangedSuffix = " Hanged";
+    public const string hangman = "Hangman";
+
     public const string takacs = "Takács";
     public const string crowd = "The Crowd";
 

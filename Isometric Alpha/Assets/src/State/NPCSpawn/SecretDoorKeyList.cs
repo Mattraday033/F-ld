@@ -14,6 +14,12 @@ public static class SecretDoorKeyList
 
     #endregion
 
+    #region Body Pile
+
+    public const string bodyPilePool = ZoneKeyList.lovashiCamp + LocationNameList.bodyPile + NPCNameList.unseenBarrier;
+
+    #endregion
+
     #region CenterCamp
 
     public const string centerCampWallPatchOne = LocationNameList.campCenter + NPCNameList.wallPatch + "1";

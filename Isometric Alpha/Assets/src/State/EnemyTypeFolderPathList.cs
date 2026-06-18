@@ -34,6 +34,11 @@ public static class EnemyTypeFolderPathList
             enemyType = State.playerSpriteName;
         }
 
+        if(enemyTypeHasStateDependentFolderPath(enemyType, out string stateDependentFolderPath))
+        {
+            return stateDependentFolderPath;
+        }
+
         if(!folderPathDict.ContainsKey(enemyType))
         {
             enemyType = DialogueList.scrubNameOfEndNumbers(enemyType);
@@ -218,9 +223,6 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.tabor, partyMembersFolderPath + NPCNameList.tabor + "/");     
         folderPathDict.Add(NPCNameList.chiefTabor, partyMembersFolderPath + NPCNameList.tabor + "/");     
 
-        folderPathDict.Add(NPCNameList.gaspar, partyMembersFolderPath + NPCNameList.gaspar + "/");  
-        folderPathDict.Add(NPCNameList.overseerGaspar, partyMembersFolderPath + NPCNameList.gaspar + "/");         
-
         folderPathDict.Add(NPCNameList.protagPrefix+1, partyMembersFolderPath + NPCNameList.protagPrefix+1 + "/");  
         folderPathDict.Add(NPCNameList.protagPrefix+2, partyMembersFolderPath + NPCNameList.protagPrefix+2 + "/");
 
@@ -289,5 +291,26 @@ public static class EnemyTypeFolderPathList
         }
     }
 
+    public static bool enemyTypeHasStateDependentFolderPath(string key, out string stateDependentFolderPath)
+    {
+        switch(key)
+        {
+            case NPCNameList.gaspar:
+            case NPCNameList.overseerGaspar:
+
+                if(Flags.getFlag(FlagNameList.gasparBroughtToExecution))
+                {
+                    stateDependentFolderPath = partyMembersFolderPath + NPCNameList.gaspar + NPCNameList.hangedSuffix + "/";
+                } else
+                {
+                    stateDependentFolderPath = partyMembersFolderPath + NPCNameList.gaspar + "/";
+                }
+
+                return true;
+            default:
+                stateDependentFolderPath = null;
+                return false;
+        }
+    }
 
 }

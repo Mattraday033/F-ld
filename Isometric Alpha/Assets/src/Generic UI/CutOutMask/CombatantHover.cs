@@ -114,6 +114,9 @@ public class CombatantHover : CombatMouseHover, IRevealable
             createHoverTag();
 
             SelectorManager.updateAllDamagePreviews();
+            
+            CombatUIModule.OnHideCombatUI.RemoveListener(getTargetStats().removeOutline);
+            CombatUIModule.OnHideCombatUI.AddListener(getTargetStats().removeOutline);
         }
     }
 
@@ -306,6 +309,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
         CombatResultsUI.OnCombatResultsUICreation.RemoveListener(disableCollider);
         HighlightAllMandatoryTargets.RemoveListener(highlightMandatoryTarget);
         StopHighlightFadeMandatoryTarget.RemoveListener(stopHighlightAndFade);
+        CombatUIModule.OnHideCombatUI.RemoveListener(getTargetStats().removeOutline);
     }
 
     public void disableCollider()

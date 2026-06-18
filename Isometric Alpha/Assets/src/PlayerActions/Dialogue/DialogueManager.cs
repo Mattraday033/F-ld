@@ -1198,6 +1198,9 @@ public class DialogueManager : MonoBehaviour
                         case "tunnel_explosion":
                             audioClip = AudioClipList.tunnelExplosionSFX;
                             break;
+                        case "bat_howl":
+                            audioClip = AudioClipList.batHowlAttackSound;
+                            break;
                         default:
                             audioClip = npcSFXArgs;
                             break;
@@ -1604,6 +1607,17 @@ public class DialogueManager : MonoBehaviour
                             currentStory.variablesState[startingBoolName] = true;
                         }
                     }
+
+                    continueStory();
+
+                    return;
+                case "setdialogueuponsceneloadkey":
+
+                    dialogueKey = getArgument(buffer, Constants.indexZero);
+
+                    State.dialogueUponSceneLoadKey = dialogueKey;
+
+                    StartCoroutine(waitForNewLocationThenStartDialogueOnFadeIn());
 
                     continueStory();
 
@@ -2092,6 +2106,21 @@ public class DialogueManager : MonoBehaviour
 		setCameraToDefaultSpeed();
 		PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
 		SceneChange.changeSceneToCombat();
+	}
+
+	private IEnumerator waitForNewLocationThenStartDialogueOnFadeIn()
+	{
+		string locationBeforeTransition = AreaManager.locationName;
+
+		// Wait for the changeLocation transition to swap in the new area.
+		yield return new WaitUntil(() => AreaManager.locationName != locationBeforeTransition);
+
+		// The area swap happens while the screen is fully black; once the fade
+		// back in from that black screen begins, isBlack() flips false again.
+		yield return new WaitUntil(() => FadeToBlackManager.isBlack());
+		yield return new WaitUntil(() => !FadeToBlackManager.isBlack());
+
+		Start();
 	}
 
 	private IEnumerator handleDialogueUIDuringFadeOut(bool setDialogueUIActiveAfterFadeIn, bool continueAfterTransparent)

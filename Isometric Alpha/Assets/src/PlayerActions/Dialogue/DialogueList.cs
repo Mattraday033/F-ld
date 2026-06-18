@@ -297,6 +297,17 @@ public static class DialogueList
                                                      },
                             Resources.Load<TextAsset>(DialogueNameList.thiefsBodyPath)));
 
+        addDialogueToList(LocationNameList.bodyPile, DialogueNameList.afterTakacsFightKey,
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.playerNamePlaceHolder,
+                                                        NPCNameList.firstPrefix + NPCNameList.guard,
+                                                        NPCNameList.secondPrefix + NPCNameList.guard,
+                                                        NPCNameList.ladder,
+                                                        NPCNameList.weft+1,
+                                                        NPCNameList.thatch
+                                                     },
+                            Resources.Load<TextAsset>(DialogueNameList.afterTakacsFightPath)));
+
         #endregion
 
         #region NECamp
@@ -780,7 +791,9 @@ public static class DialogueList
                                                         NPCNameList.crowd,
                                                         NPCNameList.weft+2,
                                                         NPCNameList.thatch,
-                                                        NPCNameList.takacs
+                                                        NPCNameList.takacs,
+                                                        NPCNameList.gaspar,
+                                                        NPCNameList.hangman
                                                       },
                             Resources.Load<TextAsset>(DialogueNameList.guardNWPath),
                             DialogueCombatInfoList.takacsPuppetCombatInfo));

@@ -5,7 +5,23 @@ using UnityEngine;
 public class ObstacleWithSecretDoorFlag : Obstacle
 {
 
-    public string secretDoorFlag;
+    private string _SecretDoorFlag;
+    public string secretDoorFlag
+    {
+        get
+        {
+            return _SecretDoorFlag;
+        }
+        set
+        {
+            _SecretDoorFlag = value;
+
+            if(SecretDoorFlags.secretDoorHasBeenDiscovered(secretDoorFlag))
+            {
+                setToDown();
+            }
+        }
+    }
 
     private void OnEnable()
     {

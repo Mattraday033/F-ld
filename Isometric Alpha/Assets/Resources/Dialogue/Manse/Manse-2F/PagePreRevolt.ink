@@ -56,6 +56,7 @@ VAR askedAboutDirectorStuckInOffice = false
 
 VAR receivedDirectorsPardon = false
 
+VAR partyFlagNándor = false
 VAR deathFlagNándor = false
 VAR deathFlagCarter = false
 
@@ -535,8 +536,7 @@ changeCamTarget({pageIndex})
 Then you are quite the warrior. I will inform the Director you are here.
 
 {
--mineLvl3CarterAndNandorInParty:
-// and not deathFlagNándor and not deathFlagCarter:
+-mineLvl3CarterAndNandorInParty and not deathFlagNándor and not deathFlagCarter:
     ->nandorSpeaksUp_1a
 }
 

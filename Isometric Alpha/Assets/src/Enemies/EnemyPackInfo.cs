@@ -72,13 +72,16 @@ public class EnemyPackInfo : IDescribableInBlocks, ICreatureSpawnPackage
                             string tutorialSequenceKey = "", 
                             List<SpawnDetails> spawnDetailsList = null, 
                             bool alwaysSurprised = false, 
-                            WinCondition winCon = null, 
+                            WinCondition winCon = null,
                             List<BeforeCombatAction> beforeCombatActions = null,
-                            List<AfterCombatAction> afterCombatActions = null)
+                            List<AfterCombatAction> afterCombatActions = null,
+                            string dialogueUponSceneLoadKey = null)
     {
         this.FoeTypes = FoeTypes;
 
         this.dropTableName = dropTableName;
+
+        this.dialogueUponSceneLoadKey = dialogueUponSceneLoadKey;
 
         this.tutorialSequenceKey = tutorialSequenceKey;
 

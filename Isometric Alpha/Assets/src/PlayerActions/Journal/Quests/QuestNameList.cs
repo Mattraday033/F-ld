@@ -184,6 +184,12 @@ public static class QuestNameList
     public const string hiddenAwayStepTitleZero = "The Hidden Passage.";
     public const string hiddenAwayStepTitleOne = "Passage Found.";
 
+    // Leave the Body Pile
+    public const string leaveTheBodyPileQuestTitle = "Leave the Body Pile";
+
+    public const string leaveTheBodyPileStepTitleZero = "Enter the pool.";
+    public const string leaveTheBodyPileStepTitleOne = "Where are we?";
+
     // Leave the Camp
     public const string leaveTheCampQuestTitle = "Leave the Camp";
 

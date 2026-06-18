@@ -182,6 +182,21 @@ public static class TransitionSpawnInfoList
 
         #endregion
 
+        #region Body Pile
+
+        list = new List<TransitionSpawnInfo>();
+
+        list.Add(new TransitionSpawnInfo(LocationNameList.bodyPile, ZoneKeyList.forest, new Vector3Int(-2, 3), Facing.NorthEast, indicatorFlag: SecretDoorKeyList.bodyPilePool));
+        list.Add(new TransitionSpawnInfo(LocationNameList.bodyPile, ZoneKeyList.forest, new Vector3Int(-2, 2), Facing.NorthEast, indicatorFlag: SecretDoorKeyList.bodyPilePool));
+        list.Add(new TransitionSpawnInfo(LocationNameList.bodyPile, ZoneKeyList.forest, new Vector3Int(-3, 1), Facing.NorthEast, indicatorFlag: SecretDoorKeyList.bodyPilePool));
+        list.Add(new TransitionSpawnInfo(LocationNameList.bodyPile, ZoneKeyList.forest, new Vector3Int(-5, -1), Facing.SouthEast, indicatorFlag: SecretDoorKeyList.bodyPilePool));
+        list.Add(new TransitionSpawnInfo(LocationNameList.bodyPile, ZoneKeyList.forest, new Vector3Int(-6, -2), Facing.SouthEast, indicatorFlag: SecretDoorKeyList.bodyPilePool));
+        list.Add(new TransitionSpawnInfo(LocationNameList.bodyPile, ZoneKeyList.forest, new Vector3Int(-7, -3), Facing.SouthEast, indicatorFlag: SecretDoorKeyList.bodyPilePool));
+
+        transitionSpawnInfoDict.Add(LocationNameList.bodyPile, list);
+
+        #endregion
+
         #region GuardHouseNE
 
         list = new List<TransitionSpawnInfo>();
@@ -1149,6 +1164,11 @@ public static class TransitionSpawnInfoList
 
     private static void assignIndicatorFlagIfNearSecretDoor(TransitionSpawnInfo transitionInfo, List<SecretDoorSpawnInfo> secretDoorList)
     {
+        if(transitionInfo.indicatorFlag != null && transitionInfo.indicatorFlag.Length > 0)
+        {
+            return;
+        }
+
         List<Transition> transitions = transitionInfo.getTransitions();
 
         foreach(SecretDoorSpawnInfo secretDoor in secretDoorList)
@@ -1204,7 +1224,7 @@ public class TransitionSpawnInfo
 
     public string indicatorFlag;
 
-    public TransitionSpawnInfo(string currentArea, string destinationLocation, Vector3Int startCell, Facing playerSpawnDirection, int size = 1, Axis axis = Axis.DescendingX, int outputMultiplier = 1, bool destinationOnly = false, PlayerInteractionScript scriptOnTransition = null)
+    public TransitionSpawnInfo(string currentArea, string destinationLocation, Vector3Int startCell, Facing playerSpawnDirection, int size = 1, Axis axis = Axis.DescendingX, int outputMultiplier = 1, bool destinationOnly = false, PlayerInteractionScript scriptOnTransition = null, string indicatorFlag = "")
     {
         this.currentArea = currentArea;
         this.destinationLocation = destinationLocation;
@@ -1223,6 +1243,7 @@ public class TransitionSpawnInfo
         }
 
         this.scriptOnTransition = scriptOnTransition;
+        this.indicatorFlag = indicatorFlag;
     }
 
     public virtual int getStartIndex()

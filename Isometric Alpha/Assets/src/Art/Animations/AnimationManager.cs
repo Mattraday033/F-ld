@@ -89,6 +89,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     public int heartBeatRow = 0;
 
     public readonly static UnityEvent<string, CharacterAnimationType> SetIdleByNPCName = new UnityEvent<string, CharacterAnimationType>();
+    public readonly static UnityEvent<string, CharacterAnimationType> PlayAnimationByNPCName = new UnityEvent<string, CharacterAnimationType>();
 
     public Dictionary<CharacterAnimationType, AnimationClip> animationDict;
 
@@ -135,6 +136,19 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         return !CombatAnimationManager.trackerBeingTracked(this) && 
                 ((!CombatStateManager.inCombat && !PlayerMovement.getInstance().canPlayRunAnimation() && PlayerOOCStateManager.currentActivity != OOCActivity.Defeat) || 
                 (CombatStateManager.inCombat && !linkedStats.isDead()));
+    }
+
+    public void playAnimationByNPCName(string npcName, CharacterAnimationType animationType)
+    {
+        if(this.npcName.Equals(npcName))
+        {
+            switch(animationType)
+            {
+                case CharacterAnimationType.Attack_Normal_Front:
+                    playAttackFrontAnimation();
+                    break;
+            }     
+        }
     }
 
     public void setCurrentIdle(string npcName, CharacterAnimationType animationType)
@@ -190,6 +204,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         CombatTraitColliderDisabler.OnCombatTraitHoverEnter.RemoveListener(disablePolygonCollider);
         CombatTraitColliderDisabler.OnCombatTraitHoverExit.RemoveListener(enablePolygonCollider);
         SetIdleByNPCName.RemoveListener(setCurrentIdle);
+        PlayAnimationByNPCName.RemoveListener(playAnimationByNPCName);
     }
 
     private void disablePolygonCollider()
@@ -269,6 +284,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         CombatTraitColliderDisabler.OnCombatTraitHoverEnter.AddListener(disablePolygonCollider);
         CombatTraitColliderDisabler.OnCombatTraitHoverExit.AddListener(enablePolygonCollider);
         SetIdleByNPCName.AddListener(setCurrentIdle);
+        PlayAnimationByNPCName.AddListener(playAnimationByNPCName);
 
         setToDefaultIdle();
     }

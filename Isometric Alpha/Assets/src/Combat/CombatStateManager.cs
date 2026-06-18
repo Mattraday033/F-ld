@@ -438,7 +438,7 @@ public class CombatStateManager : MonoBehaviour
     {
         float timeElapsed = 0;
 
-        while (timeElapsed < CombatActionManager.waitBetweenCombatActions)
+        while (timeElapsed < CombatActionManager.standardWaitBetweenCombatActions)
         {
             yield return null;
 

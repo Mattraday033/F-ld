@@ -328,6 +328,9 @@ public static class SpawnParamsList
 
         #region Body Pile
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.bodyPile, NPCNameList.ladder),
+                                            new InteractableSpawnParams(onlySpawnWhileHostile: onlySpawnWhileHostile));
+
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.bodyPile, NPCNameList.slave),
                                             new InteractableSpawnParams(spawnWhileHostile: spawnWhileHostile));
 
@@ -851,6 +854,21 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.captainAdela),
                                         directorAnnouncementSceneSpawnParams);
 
+        InteractableSpawnParams gasparExecutionSpawnParams = new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] { 
+                                                                                                                         FlagNameList.gasparBroughtToExecution
+                                                                                                                         }),
+                                                            stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                                                         FlagNameList.revoltStarted,
+                                                                                                                         FlagNameList.directorDefeated, 
+                                                                                                                         FlagNameList.startedDirectorAnnouncement
+                                                                                                                         }),
+                                                            spawnWhileHostile: spawnWhileHostile);
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.gaspar),
+                                            gasparExecutionSpawnParams);
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.hangman),
+                                            gasparExecutionSpawnParams);
         #endregion
 
 

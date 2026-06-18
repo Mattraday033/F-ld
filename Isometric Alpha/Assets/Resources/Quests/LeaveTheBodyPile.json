@@ -1,0 +1,22 @@
+{
+	"title": "Leave the Body Pile",
+	"steps": [
+		{
+			"stepName": "Enter the pool.",
+            "MapZone":"Camp",
+            "MapLocation":"Body Pile",
+			"journalDescription": "<b>Walk into the pool in the Body Pile. (Leaving the camp will end this Demo)</B>"
+		},
+		{
+			"stepName": "Where are we?",
+            "MapZone":"",
+            "MapLocation":"",
+			"journalDescription": ""
+		}
+	],
+
+
+	"deathSteps":
+			[
+			]
+}

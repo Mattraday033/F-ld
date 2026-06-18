@@ -29,6 +29,13 @@ public class HealthBarManager : MonoBehaviour
         Trait.OnTraitRemoval.AddListener(updateHealthBarColor);
         LargeEnemyStats.OnLargeEnemySpawn.AddListener(cleanUpHiddenHealthBars);
         DescriptionPanelBuilder.OnFormulaSwap.AddListener(updateCreatureTypeSymbols);
+        CombatUIModule.OnHideCombatUI.AddListener(hide);
+
+        if(CombatStateManager.whoseTurn == WhoseTurn.Won || 
+                    CombatStateManager.whoseTurn == WhoseTurn.Lost)
+        {
+            hide();
+        }
     }
 
     private void OnDestroy()
@@ -37,6 +44,7 @@ public class HealthBarManager : MonoBehaviour
         Trait.OnTraitRemoval.RemoveListener(updateHealthBarColor);
         LargeEnemyStats.OnLargeEnemySpawn.RemoveListener(cleanUpHiddenHealthBars);
         DescriptionPanelBuilder.OnFormulaSwap.RemoveListener(updateCreatureTypeSymbols);
+        CombatUIModule.OnHideCombatUI.RemoveListener(hide);
     }
 
     private void updateCreatureTypeSymbols()
@@ -104,7 +112,9 @@ public class HealthBarManager : MonoBehaviour
 
     public void show()
     {
-        if(linkedStats == null || linkedStats.isDead())
+        if(linkedStats == null || linkedStats.isDead() || 
+            CombatStateManager.whoseTurn == WhoseTurn.Won || 
+                    CombatStateManager.whoseTurn == WhoseTurn.Lost)
         {
             return;
         }

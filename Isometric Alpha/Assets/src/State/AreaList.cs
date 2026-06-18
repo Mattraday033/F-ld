@@ -537,7 +537,7 @@ public static class AreaList
 			case LocationNameList.slaveShackSix:
 			case LocationNameList.guardHouseTopFloor:
             case LocationNameList.bodyPile:
-				return true;
+				return !Flags.getFlag(FlagNameList.startedDirectorAnnouncement);
 			case LocationNameList.campNorthWest:
                 return !Flags.getFlag(FlagNameList.skippedTutorialInNWCamp) && !Flags.getFlag(FlagNameList.finishedTaborIntimidateTutorial);
 			default:

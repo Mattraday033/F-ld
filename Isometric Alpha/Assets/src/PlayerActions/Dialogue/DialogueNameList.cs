@@ -136,6 +136,8 @@ public static class DialogueNameList
 
     #region Body Pile
     public const string thiefsBodyPath = campInteriorPathName + LocationNameList.bodyPile + Constants.seperatorChar + "ThiefBody";
+    public const string afterTakacsFightPath = campInteriorPathName + LocationNameList.bodyPile + Constants.seperatorChar + "AfterTakacsFight";
+    public const string afterTakacsFightKey = "afterTakacsFight";
     #endregion
 
     #region Camp North East

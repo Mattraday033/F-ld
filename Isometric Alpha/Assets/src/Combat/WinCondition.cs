@@ -204,6 +204,7 @@ public class WavesWinCondition : WinCondition
 public class EndOfCombatCutSceneScript
 {
     private const float waitBeforeResultsScreen = 5f;
+    private const float moveAlliesDownDuration = 1f;
 
     private static readonly string[] cutSceneSpriteNames = new string[]
     {
@@ -212,18 +213,96 @@ public class EndOfCombatCutSceneScript
 
     public void startCutScene()
     {
+        // SecretDoorFlags.addSecretDoorFlag(SecretDoorKeyList.bodyPilePool);
+        AreaManager.locationName = LocationNameList.bodyPile;
         CombatStateManager.instance.StartCoroutine(playCutScene());
     }
 
     private IEnumerator playCutScene()
     {
+        yield return new WaitForSeconds(.25f);
+        EnvironmentalCombatActionList.addTakacsPuppetWaveSummon();
+
+        CombatActionManager.getInstance().resolveACombatAction();
+        CombatActionManager.getInstance().resolveACombatAction();
+        CombatActionManager.getInstance().resolveACombatAction();
+        CombatActionManager.getInstance().resolveACombatAction();
+
+        yield return new WaitForSeconds(2.5f);
+        
         foreach (string spriteName in cutSceneSpriteNames)
         {
-            AnimationManager.SetIdleByNPCName.Invoke(MonsterNameList.puppetedPrefix + spriteName, CharacterAnimationType.OOC_Idle_Front);
+            AnimationManager.PlayAnimationByNPCName.Invoke(MonsterNameList.puppetedPrefix + spriteName, CharacterAnimationType.Attack_Normal_Front);
         }
 
-        yield return new WaitForSeconds(waitBeforeResultsScreen);
+        playBluntEffectOnAllAllies();
+
+        yield return new WaitForSeconds(52f/60f);
+
+        yield return CombatStateManager.instance.StartCoroutine(moveAllies());
+
+        yield return new WaitForSeconds(3f);
 
 		CombatUI.combatResultsPopUpButton.spawnPopUp();
+    }
+
+    private void playBluntEffectOnAllAllies()
+    {
+        foreach (Stats ally in CombatGrid.getAllAliveAllyCombatants())
+        {
+            foreach (GridCoords allyCoords in ally.positions)
+            {
+                CombatAnimationManager.loadInstantEffect(EffectAnimationType.Blunt.ToString(), allyCoords, false, 0, false, true);
+            }
+        }
+    }
+
+    private IEnumerator moveAllies()
+    {
+        List<Transform> spriteTransforms = new List<Transform>();
+        List<Vector3> startPositions = new List<Vector3>();
+        List<Vector3> endPositions = new List<Vector3>();
+
+        foreach (Stats ally in CombatGrid.getAllAliveAllyCombatants())
+        {
+            if (ally.combatSprite == null || ally.positions.Count == 0)
+            {
+                continue;
+            }
+
+            GridCoords currentCoords = ally.positions[0];
+
+            // World-space offset for moving one row south, computed from the grid so
+            // the no-man's-land gap is accounted for. The CombatGrid dictionary is left untouched.
+            Vector3 rowDownOffset = CombatGrid.getPositionAt(currentCoords.row + 15, currentCoords.col)
+                                  - CombatGrid.getPositionAt(currentCoords.row, currentCoords.col);
+
+            Transform spriteTransform = ally.combatSprite.transform;
+
+            spriteTransforms.Add(spriteTransform);
+            startPositions.Add(spriteTransform.position);
+            endPositions.Add(spriteTransform.position + rowDownOffset);
+        }
+
+        float timeElapsed = 0f;
+
+        while (timeElapsed < moveAlliesDownDuration)
+        {
+            float t = timeElapsed / moveAlliesDownDuration;
+
+            for (int i = 0; i < spriteTransforms.Count; i++)
+            {
+                spriteTransforms[i].position = Vector3.Lerp(startPositions[i], endPositions[i], t);
+            }
+
+            yield return null;
+
+            timeElapsed += Time.deltaTime;
+        }
+
+        for (int i = 0; i < spriteTransforms.Count; i++)
+        {
+            spriteTransforms[i].position = endPositions[i];
+        }
     }
 }

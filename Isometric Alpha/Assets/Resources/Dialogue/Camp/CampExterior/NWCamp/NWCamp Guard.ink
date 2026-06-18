@@ -138,7 +138,7 @@ You 'aven't been free a day and yer already talkin' like yer a count. Pardon or 
 
     +How about we both calm down and start over? There's no need to ruin the moment with violence.
         ->3b
-    +I've taken on worms five times your size. You'll apologize if you know what's good for you.
+    +I've slain worms five times your size. You'll apologize if you know what's good for you.
         ->3b
 
 
@@ -388,7 +388,22 @@ Oh gods... what do we do?
     +We fight. There's no other option. <Combat>
         ->enterCombat
     +We jump. Aim for the pool next to the body pile.
-        ->Close
+        ->jumpInPit
+
+=== jumpInPit ===
+
+disableDialogueUI()
+
+setFacing(NW)
+setNPCFacing({weftIndex},NW)
+
+wait(.35)
+
+setDialogueUponSceneLoadKey(afterTakacsFight)
+
+changeLocation(Body Pile)
+
+->Close
 
 === enterCombat ===
 

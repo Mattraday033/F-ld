@@ -225,7 +225,8 @@ public static class EnemyPackInfoList
                                                                                                                                         },
                                                                                     afterCombatActions: new List<AfterCombatAction>()   {
                                                                                                                                             () => { CombatGrid.LastEnemyKilled.RemoveListener(EnvironmentalCombatActionList.addTakacsPuppetWaveSummon); }
-                                                                                                                                        });
+                                                                                                                                        },
+                                                                                    dialogueUponSceneLoadKey: DialogueNameList.afterTakacsFightKey);
 
     public readonly static EnemyPackInfo ml3GuardsWithBarricades = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.barricade, 

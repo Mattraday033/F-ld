@@ -37,7 +37,7 @@ public static class WinLoseConditionList
     );
 
     public readonly static WavesWinCondition surival = new WavesWinCondition(
-        Constants.sizeThree,
+        Constants.sizeOne,
         IconList.waves,
         winBehaviour: takacsCutScene,
         lossBehaviour: takacsCutScene

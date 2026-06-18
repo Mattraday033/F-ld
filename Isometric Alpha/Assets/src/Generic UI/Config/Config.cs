@@ -41,6 +41,8 @@ public struct TutorialFlagWrapper
     public bool exuberanceCostTutorialSeen;
     public bool traitCostTutorialSeen;
 
+    public bool winConUITutorialSeen;
+
     public static TutorialFlagWrapper buildFromCurrentSettings()
     {
         return new TutorialFlagWrapper()
@@ -76,6 +78,8 @@ public struct TutorialFlagWrapper
 
             exuberanceCostTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.exuberanceCostTutorialSeenFlag),
             traitCostTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.traitCostTutorialSeenFlag),
+
+            winConUITutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.winConUITutorialSeenFlag),
         };
     }
 
@@ -114,7 +118,9 @@ public struct TutorialFlagWrapper
             [TutorialSequenceList.companionSpecificAbilitiesTutorialSeenFlag] = companionSpecificAbilitiesTutorialSeen,
 
             [TutorialSequenceList.exuberanceCostTutorialSeenFlag] = exuberanceCostTutorialSeen,
-            [TutorialSequenceList.traitCostTutorialSeenFlag] = traitCostTutorialSeen
+            [TutorialSequenceList.traitCostTutorialSeenFlag] = traitCostTutorialSeen,
+
+            [TutorialSequenceList.winConUITutorialSeenFlag] = winConUITutorialSeen
         };
 
         TutorialFlags.overwriteFlags(newTutorialFlags);
