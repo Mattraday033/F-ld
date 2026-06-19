@@ -894,7 +894,8 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(-11, 14), facing: Facing.SouthEast));
         
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.gaspar, new Vector3Int(-4, 16), facing: Facing.SouthEast));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.hangman, new Vector3Int(-4, 15), animationName: MonsterNameList.spearman, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.gaspar+1, new Vector3Int(-4, 16), animationName: NPCNameList.gaspar, sortingLayerInfo: SortingLayerManager.behindGroundSortingLayerInfo, facing: Facing.SouthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.hangman, new Vector3Int(-4, 15), animationName: MonsterNameList.spearman, animationType: CharacterAnimationType.Idle_Back, facing: Facing.NorthWest));
         
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-3, 6), animationName: MonsterNameList.javelineer, facing: Facing.NorthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-4, 6), animationName: MonsterNameList.javelineer, facing: Facing.NorthWest));

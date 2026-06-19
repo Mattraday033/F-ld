@@ -15,6 +15,9 @@ VAR crowdIndex = 6
 VAR weftIndex = 7
 VAR thatchIndex = 8
 VAR takacsIndex = 9
+VAR hangmanIndex = 10
+VAR gasparIndex = 11
+VAR gasparFallingIndex = 12
 
 VAR partyFlagWeft = false
 VAR partyFlagThatch = false
@@ -33,6 +36,7 @@ VAR startedDirectorAnnouncement = false
 VAR hadGuardWhoBlockedPathFlogged = false
 
 VAR playerName = ""
+
 {
 -directorMentionedAnnouncement:
     ->readyCheck_1a
@@ -314,18 +318,54 @@ changeCamTarget({directorIndex})
 
 === gasparExecution ===
 
-Before we set out from Pharos four months ago, each of you was told what you were to expect. That we were to venture into hostile lands; that you would be surrounded by enemies, far from home; that you may never again return to your native lands.
+Before we set out from Pharos four months ago, each of you was told what you were to expect. That we were to venture into hostile lands; that you would be surrounded by enemies, far from home; that you may never again return.
 
-Each of you volunteered for this mission, and took oaths that you would complete it or give your dying breath in the attempt. Oaths to me, oaths to each other, and oaths to the Confederation. Those that would prove their words empty are no longer your comrades, but cowards and traitors!
+Each of you volunteered for this mission, and took oaths against your lives that you would see it completed. Oaths to me, oaths to each other, and oaths to the Confederation. Those that would prove their words empty are no longer your comrades, but cowards and traitors!
 
-This is one such craven! Gáspár 
+disableDialogueUI()
+
+playAnimation({hangmanIndex},Idle_Back)
+changeCamTarget({hangmanIndex})
+
+setNPCFacing({directorIndex},NE)
+setNPCFacing({gasparIndex},NW)
+
+wait(1)
+
+playAnimation({hangmanIndex},Attack_Normal_Back)
+
+wait(.25)
+
+setNPCFacing({gasparIndex},NE)
+playAnimation({gasparIndex},Death)
+
+activate({gasparFallingIndex})
+setNPCFacing({gasparFallingIndex},NE)
+playAnimation({gasparFallingIndex},Death)
+
+wait(5)
+deactivate({gasparFallingIndex})
+
+changeCamTarget({directorIndex})
+
+setNPCFacing({directorIndex},SE)
+setNPCFacing({hangmanIndex},SE)
+
+wait(.25)
+
+enableDialogueUI()
+
+So dies one such craven! Gáspár of Gécz was charged with the protection of the mine's depths, and instead of carrying out that duty, consigned branded and guard alike to deaths by monsters and starvation rather than rise to their defense! 
+
+May his hanging remind each of us of what will become of our camp should we no longer cherish our words and bonds to eachother: a coward's death, at the hands of our betters.
+
 
 
 ->Close
 
 === directorSpeech ===
 
-Soldiers! For over four months, you have shouldered the duty of erecting this camp. You have executed your assigned tasks with a speed and sureness that does our confederation much credit. 
+For over four months, you have shouldered the duty of erecting this camp. You have executed your assigned tasks with a speed and sureness that does our confederation much credit. 
 
 Where once stood untamed forest and crumbling structures, you have forged a bastion which I am proud to hold in the name of County Kálnoky!
 

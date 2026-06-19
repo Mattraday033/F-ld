@@ -1067,6 +1067,10 @@ public class DialogueManager : MonoBehaviour
                             case CharacterAnimationType.Secondary_Idle_Front:
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle_Front);
                                 break;
+                          case CharacterAnimationType.Death:
+                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death);
+                                targetAnimationManager.playDeathAnimationThenHide();
+                                break;
                             case CharacterAnimationType.Death_Back:
                                 targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Back);
                                 break;

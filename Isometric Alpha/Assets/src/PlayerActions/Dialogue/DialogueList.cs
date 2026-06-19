@@ -792,8 +792,9 @@ public static class DialogueList
                                                         NPCNameList.weft+2,
                                                         NPCNameList.thatch,
                                                         NPCNameList.takacs,
+                                                        NPCNameList.hangman,
                                                         NPCNameList.gaspar,
-                                                        NPCNameList.hangman
+                                                        NPCNameList.gaspar+1
                                                       },
                             Resources.Load<TextAsset>(DialogueNameList.guardNWPath),
                             DialogueCombatInfoList.takacsPuppetCombatInfo));

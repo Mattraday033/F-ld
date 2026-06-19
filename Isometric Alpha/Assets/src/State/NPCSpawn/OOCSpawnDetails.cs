@@ -991,12 +991,13 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
                                          Facing facing = Facing.Random,
                                          Vector3Int[] extraSpaces = null,
                                          SpeakAtStartScript speakAtStartScript = null,
-                                         CharacterAnimationType animationType = CharacterAnimationType.None, 
+                                         CharacterAnimationType animationType = CharacterAnimationType.None,
                                          bool ignoresSecretDoors = true,
                                          float offset = 0f,
+                                         SortingLayerInfo sortingLayerInfo = null,
                                          bool sleepingDialogueIntro = false,
                                          bool withScale = false) :
-    base(npcName, cellCoords, areaName, extraSpaces: extraSpaces, speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors, offset: offset, sleepingDialogueIntro: sleepingDialogueIntro, withScale: withScale)
+    base(npcName, cellCoords, areaName, extraSpaces: extraSpaces, speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors, offset: offset, sortingLayerInfo: sortingLayerInfo, sleepingDialogueIntro: sleepingDialogueIntro, withScale: withScale)
     {
         if(animationName == null)
         {
@@ -1145,9 +1146,10 @@ public class NonDialogueNPCSpawnDetails : NPCWithAnimationsSpawnDetails
                                         string animationName = null,
                                         Facing facing = Facing.Random,
                                         bool ignoresSecretDoors = true,
-                                         CharacterAnimationType animationType = CharacterAnimationType.None,
-                                         bool withScale = false) :
-    base(npcName, cellCoords, "", animationName, facing, ignoresSecretDoors: ignoresSecretDoors, animationType: animationType, withScale: withScale)
+                                        CharacterAnimationType animationType = CharacterAnimationType.None,
+                                        SortingLayerInfo sortingLayerInfo = null,
+                                        bool withScale = false) :
+    base(npcName, cellCoords, "", animationName, facing, ignoresSecretDoors: ignoresSecretDoors, animationType: animationType, sortingLayerInfo: sortingLayerInfo, withScale: withScale)
     {
 
     }
