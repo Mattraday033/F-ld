@@ -435,7 +435,10 @@ TextureImporter:
       outline:
       - - {x: -88, y: 88}
         - {x: -88, y: -88}
-        - {x: 88, y: -88}
+        - {x: -69, y: -73}
+        - {x: -48, y: -65}
+        - {x: -23, y: -53}
+        - {x: 3, y: -31}
         - {x: 88, y: 88}
       physicsShape: []
       tessellationDetail: 0

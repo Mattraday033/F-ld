@@ -71,6 +71,7 @@ public static class FlagNameList
         //gaspar flags
         public const string gasparAddedToParty = "gasparAddedToParty";
         public const string gasparBroughtToExecution = "gasparBroughtToExecution";
+        public const string gasparSavedFromNoose = "gasparSavedFromNoose";
 
         //body pile quest flags
         public const string orderedIntoBodyPile = "orderedIntoBodyPile";

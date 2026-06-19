@@ -1106,6 +1106,33 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
+                case "disableextras":
+                case "hideextras":
+                case "removespriteextras":
+
+                    camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
+
+                    AnimationManager animationManager = currentDialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
+
+                    if(animationManager != null)
+                    {
+                        animationManager.disableExtras();
+                    }
+
+                    continueStory();
+
+                    break;
+
+                case "resetidledictentry":
+                case "resetidledictionaryentry":
+
+                    camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
+
+                    AnimationManager.resetIdleDictionaryEntry(currentDialogue.names[camTargetIndex]);
+
+                    continueStory();
+                    break;
+
                 case "setidleofnpcsbyname":
 
                     string npcName = getArgument(buffer, Constants.indexZero);

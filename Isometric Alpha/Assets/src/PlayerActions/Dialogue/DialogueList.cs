@@ -304,7 +304,10 @@ public static class DialogueList
                                                         NPCNameList.secondPrefix + NPCNameList.guard,
                                                         NPCNameList.ladder,
                                                         NPCNameList.weft+1,
-                                                        NPCNameList.thatch
+                                                        NPCNameList.thatch,
+                                                        NPCNameList.gaspar,
+                                                        NPCNameList.gaspar + NPCNameList.shadowSuffix,
+                                                        NPCNameList.gaspar+1
                                                      },
                             Resources.Load<TextAsset>(DialogueNameList.afterTakacsFightPath)));
 
@@ -793,8 +796,7 @@ public static class DialogueList
                                                         NPCNameList.thatch,
                                                         NPCNameList.takacs,
                                                         NPCNameList.hangman,
-                                                        NPCNameList.gaspar,
-                                                        NPCNameList.gaspar+1
+                                                        NPCNameList.gaspar
                                                       },
                             Resources.Load<TextAsset>(DialogueNameList.guardNWPath),
                             DialogueCombatInfoList.takacsPuppetCombatInfo));

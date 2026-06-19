@@ -62,6 +62,12 @@ public static class EnemyTypeFolderPathList
 
         folderPathDict = new Dictionary<string, string>();
 
+        #region Misc
+
+        folderPathDict.Add(NPCNameList.blank, PrefabNames.blankTexture);
+
+        #endregion
+
         #region Bats
         folderPathDict.Add(MonsterNameList.batSwarm, batsFolderPath + MonsterNameList.batSwarm + "/");
         folderPathDict.Add(MonsterNameList.giantBat, batsFolderPath + MonsterNameList.giantBat + "/");
@@ -298,7 +304,10 @@ public static class EnemyTypeFolderPathList
             case NPCNameList.gaspar:
             case NPCNameList.overseerGaspar:
 
-                if(Flags.getFlag(FlagNameList.gasparBroughtToExecution))
+                if(Flags.getFlag(FlagNameList.gasparSavedFromNoose))
+                {
+                    stateDependentFolderPath = partyMembersFolderPath + NPCNameList.gaspar + NPCNameList.freedSuffix + "/";
+                }else if(Flags.getFlag(FlagNameList.gasparBroughtToExecution))
                 {
                     stateDependentFolderPath = partyMembersFolderPath + NPCNameList.gaspar + NPCNameList.hangedSuffix + "/";
                 } else

@@ -333,6 +333,10 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft+1, new Vector3Int(0, 0), facing: Facing.SouthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(-1, -1), facing: Facing.NorthWest)); 
 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.gaspar, new Vector3Int(2, -5), animationType: CharacterAnimationType.Secondary_Idle, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.gaspar+1, new Vector3Int(-1, -1), animationName: NPCNameList.gaspar, facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.gaspar + NPCNameList.shadowSuffix, new Vector3Int(-2, -9), animationName: NPCNameList.blank, facing: Facing.NorthWest));
+
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.unseenBarrier, new Vector3Int(-2, 3), secretDoorFlag: SecretDoorKeyList.bodyPilePool));
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.unseenBarrier, new Vector3Int(-2, 2), secretDoorFlag: SecretDoorKeyList.bodyPilePool));
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.unseenBarrier, new Vector3Int(-3, 1), secretDoorFlag: SecretDoorKeyList.bodyPilePool));
@@ -894,7 +898,6 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(-11, 14), facing: Facing.SouthEast));
         
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.gaspar, new Vector3Int(-4, 16), facing: Facing.SouthEast));
-        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.gaspar+1, new Vector3Int(-4, 16), animationName: NPCNameList.gaspar, sortingLayerInfo: SortingLayerManager.behindGroundSortingLayerInfo, facing: Facing.SouthEast));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.hangman, new Vector3Int(-4, 15), animationName: MonsterNameList.spearman, animationType: CharacterAnimationType.Idle_Back, facing: Facing.NorthWest));
         
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guard+3, new Vector3Int(-3, 6), animationName: MonsterNameList.javelineer, facing: Facing.NorthWest));

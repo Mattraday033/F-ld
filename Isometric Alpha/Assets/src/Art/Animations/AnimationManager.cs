@@ -388,6 +388,11 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         return animationList.ToArray();
     }
 
+    public static void resetIdleDictionaryEntry(string animationName)
+    {
+        addIdleSprites(animationName, EnemyTypeFolderPathList.getEnemyTypeFolderPath(animationName));
+    }
+
     private static void addIdleSprites(string animationName, string folderPath)
     {
         foreach (CharacterAnimationType type in loopedAnimationTypes)
@@ -972,7 +977,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         }
     }
 
-    public void setFacing(Facing newFacing)
+    public void setFacing(Facing newFacing, bool enableSprite = true)
     {
         switch(currentIdle)
         {

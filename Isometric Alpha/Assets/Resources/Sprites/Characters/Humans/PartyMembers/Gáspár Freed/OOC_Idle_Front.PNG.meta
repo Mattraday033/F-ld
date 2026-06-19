@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 38be88f79f68f65468c9ba78c79ea8d1
+guid: 08f71c8f0f4b8b4418d0a779a82fe5fd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Secondary_Idle_0
+      name: OOC_Idle_Front_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 128
-        height: 158
+        height: 128
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b9d170576ac6b24ab35f8d5ab027f92
-      internalID: 716419209
+      spriteID: 4342d813dfa975544bdaddaa465a29d1
+      internalID: 484322841
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Secondary_Idle_1
+      name: OOC_Idle_Front_1
       rect:
         serializedVersion: 2
         x: 128
         y: 0
         width: 128
-        height: 158
+        height: 128
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd0d65079482552459426c92f4427a53
-      internalID: -1347757589
+      spriteID: a0f54b18c05a2c8409f8ae24deefd53b
+      internalID: -1811912829
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Secondary_Idle_2
+      name: OOC_Idle_Front_2
       rect:
         serializedVersion: 2
         x: 256
         y: 0
         width: 128
-        height: 158
+        height: 128
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91ec4bec8f209cf4ab7fa92452605c51
-      internalID: -708301982
+      spriteID: 28c115e9eaacc854eb6a802c895cd514
+      internalID: 1678576842
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Secondary_Idle_3
+      name: OOC_Idle_Front_3
       rect:
         serializedVersion: 2
         x: 384
         y: 0
         width: 128
-        height: 158
+        height: 128
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e9863b07e9dced4ea9cec8c07af018d
-      internalID: -1086163883
+      spriteID: ce48a148a63921342a396690e4ff08f6
+      internalID: -710003390
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Secondary_Idle_0: 716419209
-      Secondary_Idle_1: -1347757589
-      Secondary_Idle_2: -708301982
-      Secondary_Idle_3: -1086163883
+      OOC_Idle_Front_0: 484322841
+      OOC_Idle_Front_1: -1811912829
+      OOC_Idle_Front_2: 1678576842
+      OOC_Idle_Front_3: -710003390
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

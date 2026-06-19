@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 38be88f79f68f65468c9ba78c79ea8d1
+guid: e850356e48ac12248b7ea68ce1d31a56
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 9
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 105
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Secondary_Idle_0
+      name: Death_Back_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 128
-        height: 158
+        height: 128
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b9d170576ac6b24ab35f8d5ab027f92
-      internalID: 716419209
+      spriteID: 9d39c0d79c2db60468ae7eca516caf87
+      internalID: -1375420025
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Secondary_Idle_1
+      name: Death_Back_1
       rect:
         serializedVersion: 2
         x: 128
         y: 0
         width: 128
-        height: 158
+        height: 128
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd0d65079482552459426c92f4427a53
-      internalID: -1347757589
+      spriteID: 9363f65cf73592c438b9726ebf810819
+      internalID: 2041796326
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Secondary_Idle_2
+      name: Death_Back_2
       rect:
         serializedVersion: 2
         x: 256
         y: 0
         width: 128
-        height: 158
+        height: 128
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91ec4bec8f209cf4ab7fa92452605c51
-      internalID: -708301982
+      spriteID: 313d8ffa5b2cda749a24194bf94b47f3
+      internalID: -1359401272
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Secondary_Idle_3
+      name: Death_Back_3
       rect:
         serializedVersion: 2
         x: 384
         y: 0
         width: 128
-        height: 158
+        height: 128
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,8 +174,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e9863b07e9dced4ea9cec8c07af018d
-      internalID: -1086163883
+      spriteID: 4eb1731cb0aee3846ae59ae9f8aaaf6b
+      internalID: 889375422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_Back_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.26}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94f7b64656e07a44c8f70fd6e9d7414d
+      internalID: -1770134670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_Back_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18000f5dba03fa8489a56b714ec6c3c4
+      internalID: 1985317018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_Back_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9a8559400b04dd4380105fe202c8846
+      internalID: 166856850
       vertices: []
       indices: 
       edges: []
@@ -191,10 +254,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Secondary_Idle_0: 716419209
-      Secondary_Idle_1: -1347757589
-      Secondary_Idle_2: -708301982
-      Secondary_Idle_3: -1086163883
+      Death_Back_0: -1375420025
+      Death_Back_1: 2041796326
+      Death_Back_2: -1359401272
+      Death_Back_3: 889375422
+      Death_Back_4: -1770134670
+      Death_Back_5: 1985317018
+      Death_Back_6: 166856850
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

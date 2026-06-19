@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 38be88f79f68f65468c9ba78c79ea8d1
+guid: 408a1a05a8ba461429d4662ebcce52b5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 9
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 105
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Secondary_Idle_0
+      name: Death_Front_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 128
-        height: 158
+        height: 128
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b9d170576ac6b24ab35f8d5ab027f92
-      internalID: 716419209
+      spriteID: ba4119082b277bd41bbfa66620a60fe4
+      internalID: 1330070826
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Secondary_Idle_1
+      name: Death_Front_1
       rect:
         serializedVersion: 2
         x: 128
         y: 0
         width: 128
-        height: 158
+        height: 128
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd0d65079482552459426c92f4427a53
-      internalID: -1347757589
+      spriteID: c29f81265f8549f4eb0563d1f60a12e9
+      internalID: -326269600
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Secondary_Idle_2
+      name: Death_Front_2
       rect:
         serializedVersion: 2
         x: 256
         y: 0
         width: 128
-        height: 158
+        height: 128
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,29 +153,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91ec4bec8f209cf4ab7fa92452605c51
-      internalID: -708301982
+      spriteID: f7d705205b9440a4d8aff226d100d087
+      internalID: -1800649030
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Secondary_Idle_3
+      name: Death_Front_3
       rect:
         serializedVersion: 2
         x: 384
         y: 0
         width: 128
-        height: 158
+        height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.27}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e9863b07e9dced4ea9cec8c07af018d
-      internalID: -1086163883
+      spriteID: f93a80d5b3c218b4383f1c79476be392
+      internalID: -1442755205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_Front_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.29}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 777d0cb543a656d4295e37fa4261b89d
+      internalID: -1434237047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_Front_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.31}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69a64ff6b8cfbfb4aa2e04eba50cf548
+      internalID: 1202202405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death_Front_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.34}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c99a80f0cf85c534b81033bfaa5d0099
+      internalID: 330937781
       vertices: []
       indices: 
       edges: []
@@ -191,10 +254,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Secondary_Idle_0: 716419209
-      Secondary_Idle_1: -1347757589
-      Secondary_Idle_2: -708301982
-      Secondary_Idle_3: -1086163883
+      Death_Front_0: 1330070826
+      Death_Front_1: -326269600
+      Death_Front_2: -1800649030
+      Death_Front_3: -1442755205
+      Death_Front_4: -1434237047
+      Death_Front_5: 1202202405
+      Death_Front_6: 330937781
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

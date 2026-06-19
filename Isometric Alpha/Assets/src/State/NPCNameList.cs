@@ -193,8 +193,12 @@ public static class NPCNameList
 
     public const string firstPrefix = "First ";
     public const string secondPrefix = "Second ";
-
+    public const string shadowSuffix = " Shadow";
     public const string hangedSuffix = " Hanged";
+    public const string freedSuffix = " Freed";
+
+    public const string blank = "Blank";
+
     public const string hangman = "Hangman";
 
     public const string takacs = "Takács";
