@@ -305,6 +305,26 @@ changeCamTarget({crowdIndex})
 
 changeCamTarget({directorIndex})
 
+{
+-gasparBroughtToExecution:
+->gasparExecution
+-else:
+->directorSpeech
+}
+
+=== gasparExecution ===
+
+Before we set out from Pharos four months ago, each of you was told what you were to expect. That we were to venture into hostile lands; that you would be surrounded by enemies, far from home; that you may never again return to your native lands.
+
+Each of you volunteered for this mission, and took oaths that you would complete it or give your dying breath in the attempt. Oaths to me, oaths to each other, and oaths to the Confederation. Those that would prove their words empty are no longer your comrades, but cowards and traitors!
+
+This is one such craven! Gáspár 
+
+
+->Close
+
+=== directorSpeech ===
+
 Soldiers! For over four months, you have shouldered the duty of erecting this camp. You have executed your assigned tasks with a speed and sureness that does our confederation much credit. 
 
 Where once stood untamed forest and crumbling structures, you have forged a bastion which I am proud to hold in the name of County Kálnoky!
