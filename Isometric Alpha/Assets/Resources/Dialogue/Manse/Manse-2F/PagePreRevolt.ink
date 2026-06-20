@@ -50,11 +50,14 @@ VAR toldToFindNandor = false
 VAR pageGaveKnife = false
 VAR toldToFindCarterByPage = false
 
+VAR knowsCampLocation = false
+
 VAR discussedWithWeftAfterTookMineJob = false
 
 VAR askedAboutDirectorStuckInOffice = false
 
 VAR receivedDirectorsPardon = false
+VAR askedDirectorAboutCampLocationAndPardon = false
 
 VAR partyFlagNándor = false
 VAR deathFlagNándor = false
@@ -516,6 +519,8 @@ Then what is your decision?
 
 changeCamTarget({pageIndex})
 
+VAR thenYouAreQuiteTheWarrior = "Then you are quite the warrior. I will inform the Director you are here."
+
 {
 -nandorSpokeToPlayerAboutDirectorBetrayal:
     ->sealedBreach_1ac
@@ -525,26 +530,21 @@ changeCamTarget({pageIndex})
 }
 
     +I've been to the deepest tunnel and back. They are no longer a problem.
+        {thenYouAreQuiteTheWarrior}
         ->sealedBreach_1aa
     +An easier task I've never been given. The Director should have handed me something challenging if he wanted a fair exchange.
+        {thenYouAreQuiteTheWarrior}
         ->sealedBreach_1aa
     +I'm here to see the Director, not answer your questions. 
-        ->sealedBreach_1ab
+        Of course. I shall inform him that you are here to see him right away.
+        ->sealedBreach_1aa
 
 === sealedBreach_1aa ===
-
-Then you are quite the warrior. I will inform the Director you are here.
 
 {
 -mineLvl3CarterAndNandorInParty and not deathFlagNándor and not deathFlagCarter:
     ->nandorSpeaksUp_1a
 }
-
-->enterDirectorsOfficeReturnedFromMine(->sealedBreach_2a)
-
-=== sealedBreach_1ab ===
-
-Of course. I shall inform him that you are here to see him right away.
 
 ->enterDirectorsOfficeReturnedFromMine(->sealedBreach_2a)
 
@@ -826,12 +826,86 @@ If you consider this deal to have been favorably concluded, then could I interes
     ->sealedBreach_2ca
 
 === sealedBreach_2ca === 
-
+{
+    -true:
     +Before I answer, I would know more about my potential employer.
         ->sealedBreach_2cba(->sealedBreach_2ca)
+}
+{
+    -knowsCampLocation:
+    +Something has been bothering me about our deal. This camp lies on Mason land, and its existence is a secret I expect you dearly wish kept. Why release me if I have a chance of revealing it to your enemies?
+        ->answerAboutCampLocationAndPardon_1a
+}
     +I'm through working for you. I will be going now.
         ->sealedBreach_3a
     +I'll hear the job, but I make no promises towards accepting it.
+        ->sealedBreach_3b
+
+=== answerAboutCampLocationAndPardon_1a ===
+
+setToTrue(askedDirectorAboutCampLocationAndPardon)
+setNPCFacing({directorIndex},NW)
+
+I was not aware of your knowledge of this. *The Director thinks for a moment before speaking.* I shall do you the favor of not inquiring how you learned this. I suspect it would put you in an awkward position.
+
+My position is no less in jeopardy, I'm afraid. You are correct, this camp is far outside the boundaries of the Confederation. Should the Masons learn of its construction, they would surely destroy it. That is something my superiors cannot abide.
+
+But my superiors are not what they were. <i>We</i>, the Lovashi, are not what we were. This conflict has eroded us, and steeped us in a culture not our own. The proud riders of yester-age are now landed lords, ruling over serfs and slaves.
+
+setNPCFacing({directorIndex},SW)
+
+The last war between our peoples left the Masons burnt and broken; starving and scattered. But it did not leave us unhurt either. Surviving that fight has robbed me of any thirst for the next. Each contest between us leaves us more and more alike, learning the ways of the other to better defeat them at arms.
+
+As the cycle grinds on, I am worried that even were victory inevitable, we would be rendered unrecognizable from the steppe-folk we were, once. 
+
+{
+-wisdom >= 2:
+    +It sounds like you almost want me to give away your secret. <Wis {wisdom}/2>
+        Perhaps I do. The thought is not new to me. Should we be pushed from this camp, the lost progress the Lovashi would suffer would be considerable. And I have profited from gambling on your actions in the past. What is another wager? One which I bet little and could gain much.
+        ->answerAboutCampLocationAndPardon_1b
+-else:
+    +What does this have to do with my pardon? 
+        You ask why I would pardon you if it put my camp at risk? Perhaps I wish it so. Should we be pushed from this camp, the lost progress the Lovashi would suffer would be considerable. And it would slow our long decline to the mockery of our heritage that we are becoming.
+        ->answerAboutCampLocationAndPardon_1b
+}
+
+=== answerAboutCampLocationAndPardon_1b ===
+
+VAR askedWhyRiskPardon = false
+
+{
+-true:
+    +Why are you trusting me with this? You don't think I would betray you?
+        \*The Director looks at you with mild confusion.* To who would you betray me? Who would believe you, one of the branded, over me, a hero of the Confederation many times over? No. The only thing I trust is that you are not stupid enough to attempt it.
+        ->answerAboutCampLocationAndPardon_1b     
+    +You were the last Lovashi I expected to have turned to treason.
+        You are not alone in that. It would shame my younger self to no end. But it is only treason to a regime that has already betrayed us in turn. I do what I must to keep my people protected, even from those who wish the same in their hearts but not their actions.
+        ->answerAboutCampLocationAndPardon_1b
+    +Then why risk revealing yourself by writing your superiors for my pardon papers?
+        ~askedWhyRiskPardon = true
+        In truth, the pardon was but a facade, meant to explain your freedom to my soldiers and buy me time to approach you about this very topic. You will never be free, not truly, in the eyes of my nephew, Count Kálnoky. The less he knows of this entire affair, the better off the both of us will be.
+        ->answerAboutCampLocationAndPardon_1b
+}
+{
+-askedWhyRiskPardon:
+    +If the pardon is fake, how will you fulfill your promise that I be escorted to Mason territory?
+        I think you are confused. You are already on Mason ground. I had already brought you here before I even made the promise. Your next question should be how we will get you out of the camp without the guards noticing your absence.
+        
+        But that is a problem we will overcome in due course. I have soldiers I trust to smuggle you beyond the forest, but these things will take time to arrange. But my promise to you still stands: when the time is right, you will be set free.
+        ->answerAboutCampLocationAndPardon_1b   
+}
+    +This job you mentioned. Would its completion hurt the Confederation somehow?
+        Not immediately, but it runs counter to their interests. Why?
+        ->answerAboutCampLocationAndPardon_1c
+
+=== answerAboutCampLocationAndPardon_1c ===
+
+    +I am interested in any opportunity to stick my thumb in their eye.
+        These are still my countryman, branded. Do not expect me to revel with you in harming them.
+        ->sealedBreach_3ca
+    +I want to know the risks before I accept. Explain what you want me to do and I'll think on it.
+        keepDialogue()
+        Good. I'm glad to see you will at least consider it.
         ->sealedBreach_3b
 
 === sealedBreach_2cba(->divert) === 
@@ -847,7 +921,9 @@ If you have questions about me, ask them, but know I guard some pieces of inform
         That is true. Or it normally would be. Everyone in this world has a master, branded. In having lost yours, I expect you will soon find another. But to give you an answer, my master needed a job done right, so he sent the man he most trusted to see it through.
         ->sealedBreach_2cb(divert)
     +Your guards treat you with a lot of respect.
-        They are good soldiers, and I have been leading warriors for the Confederation for a long time. I am at the end of my eigth decade now. Their reverence for me is born of an acknowledgment of the battles I have won, lost, and survived.
+        They are good soldiers, and I have been leading warriors for the Confederation for a long time. I was the Commander of the Western Lance during our invasion of the Kingdom of Masons; during that time, I had entire hordes answer my commands. 
+        
+        Such a position makes me the highest ranked officer they are ever likely to meet. Their reverence for me is born of an acknowledgment of the battles I have won, lost, and survived.
         ->sealedBreach_2cb(divert)
     +You mentioned the 'Emancipation Conflict' before. What is that?
         The Emancipation Conflict is the name my people gave to the struggle between yours and mine: the Craft Folk, and the Lovashi. It was born of a grudge from the time of my father's generation, when the king of the Lovashi gave the child of his mount to a Craft Folk sovereign to take for a steed.
@@ -919,7 +995,6 @@ Yes, of course. I'll skip the pleasantries then.
 
 ->sealedBreach_3ca
 
-
 === sealedBreach_3caa ===
 
 You've returned. Have you come back to accept my proposal?
@@ -950,7 +1025,7 @@ I have written a letter to a comrade of mine. He has taken up residence in the t
 === sealedBreach_3c ===
 
 {
--true:
+-not askedDirectorAboutCampLocationAndPardon:
     +Why all this secrecy? This hardly seems like your average messenger job.
         My friend is not well liked by the kingdom. He holds no love for the Masons, but neither is he their enemy. Things are simply more convenient for him if discretion is used while attempting contact.
 
@@ -965,6 +1040,15 @@ I have written a letter to a comrade of mine. He has taken up residence in the t
         My guards lack the subtlety necessary for such a task, even if they could make the journey quicker. The brand gives you a reason for coming and going that they would lack. Certainty of delivery outweighs haste in this matter.
         ->sealedBreach_3c
 }
+
+    +What's the letter say?
+    {
+        -askedDirectorAboutCampLocationAndPardon:
+            ->sealedBreach_3c   
+        -else:
+            ->sealedBreach_3c
+    }
+
 {
 -directorMentionedAnnouncement:
     +Before I answer, I would know more about my potential employer.
@@ -981,7 +1065,7 @@ setToTrue(acceptedDirectorVidraLetterJob)
 
 prepItem()
 
-I'm glad you are so amenable. Here is what I promised up front. I expect it will cover food and board on the road and then some.
+It is well you are so amenable. Here is what I promised up front. I expect it will cover food and board on the road and then some.
 
 giveCoins(100)&
 giveItem(3,11,1)
@@ -990,7 +1074,7 @@ giveItem(3,11,1)
 
 === sealedBreach_3da ===
 
-Unfortunate, but I understand. I will keep the letter ready, should you change your mind before you set out.
+Unfortunate, but I understand. I will keep the letter ready, should you change your mind{askedDirectorAboutCampLocationAndPardon:.| before you set out.}
     ->sealedBreach_Finished
 
 === sealedBreach_Finished ===

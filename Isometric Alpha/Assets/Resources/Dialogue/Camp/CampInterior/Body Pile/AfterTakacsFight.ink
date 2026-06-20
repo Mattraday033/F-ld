@@ -219,7 +219,7 @@ changeCamTarget({weftIndex})
     +We should cut him down. Even if he still ends up dead, it would be a mercy. <Cut down Gáspár>
         Ok, come on. I'll boost you up to him.
         ->cutDownGaspar_1b
-    +Now you know how it feels, overseer! The brand was just like that! <Leave Gáspár>
+    +Now you know how it feels, overseer! My branding felt just like that! <Leave Gáspár>
         ->gasparDies
     +\*Say nothing, and watch him struggle.* <Leave Gáspár>
         ->gasparDies
@@ -238,9 +238,9 @@ setToTrue(gasparSavedFromNoose)
 resetIdleDictionaryEntry({gasparCutDownIndex})
 setFacing(NE)
 setNPCFacing({weftIndex},SW)
+playAnimation({gasparCutDownIndex},OOC_Idle_Back)
 setNPCFacing({gasparCutDownIndex},NW)
 
-playAnimation({gasparCutDownIndex},OOC_Idle_Front)
 changeCamTarget({gasparCutDownIndex})
 
 wait(1)
@@ -252,7 +252,7 @@ VAR gaveGasparNeckAdvice = false
 VAR askedIfItWasHorrible = false
 VAR andWorseForIt = false
 
-\*Gáspár coughs heavily. His entire body shivers, and he sways from side to side. More than once does he reach for his own neck, just to jerk his hand away upon touching the wound inflicted by the grinding rope.*
+\*Gáspár coughs heavily. His entire body shivers, and he sways from side to side. More than once does he reach for his own neck, just to jerk his hand away upon touching the wound there inflicted by the grinding rope.*
 
     +Some of the other branded showed me how to hold your neck so that it hurts less. See? Like this.
         ~gaveGasparNeckAdvice = true
@@ -262,15 +262,15 @@ VAR andWorseForIt = false
     +Was it as horrible to experience as it was to watch?
         ~askedIfItWasHorrible = true
         ->cutDownGaspar_1c
-    +You're a sturdy one, to survive something like that.
+    +You're a sturdy one, to survive something like that. How can you even stand right now?
         ~andWorseForIt = true
-        ->Close
+        ->cutDownGaspar_1c
 
 === cutDownGaspar_1c ===
 
 \*Gáspár tries to talk but can't manage to get words through his coughing. He resorts to taking long, pained breaths to force air into his lungs.*
 
-\*Eventually, he manages to get some words out as his breathing finds some pained caricature of normalcy.* {gaveGasparNeckAdvice:That helped a little. }{askedIfItWasHorrible:Your jokes are tasteless, branded. }{askedIfItWasHorrible:And all the worse for it. }Why did you cut me down? They'll kill you for that, pardon be damned.
+\*Eventually, he manages to get some words out as his breathing finds some pained caricature of normalcy.* {gaveGasparNeckAdvice:That helped a little. }{askedIfItWasHorrible:Your jokes are tasteless, branded. }{andWorseForIt:And all the worse for it. }Why did you cut me down? They'll kill you for that, pardon be damned.
 
     +The pardon was a ruse. Or it was canceled. I'm not sure, but either way, the Lovashi want us dead.
         ->cutDownGaspar_1d
@@ -348,7 +348,7 @@ VAR askedAboutVada = false
 }
 {
 -askedAboutVada or not gasparSavedFromNoose:
-    + What I don't understand is{gasparSaysDirectorDidNotBetrayPlayer:if the Director didn't betray us, then why not give us the pardon?| why would the Director betray us? He had plenty of opportunities to do it before now.}
+    + What I don't understand is {gasparSaysDirectorDidNotBetrayPlayer:if the Director didn't betray us, then why not give us the pardon?|why would the Director betray us? He had plenty of opportunities to do it before now.}
         {
             -gasparSavedFromNoose:
                 ->1eb
@@ -375,21 +375,27 @@ changeCamTarget({gasparCutDownIndex})
 
 What woman? A Vada? Here?
 
-    +After you were pushed into the ravine, the Director continued his speech. Before he announced our pardon, a woman with a headdress shaped like the head of a spider appeared and ordered the Lovashi to attack us. That's why we're down here. 
+    +After you were pushed into the ravine, the Director continued his speech. Before he announced our pardon, a woman with a headdress shaped like a spider's head appeared and ordered the Lovashi to attack us. That's why we're down here. 
         ->1cb
 
 === 1cb ===
 
 changeCamTarget({weftIndex})
+VAR doYouReallyNotKnow = "o you really not know? The Vada are spirits that the Lovashi use to terrorize the Craft Folk on their lands. They sew discord, foment chaos, keep the serfs from trusting each other too much to rebel."
+{
+-gasparSavedFromNoose:
+{playerName}, d{doYouReallyNotKnow}
+-else:
+D{doYouReallyNotKnow}
 
-Do you really not know? The Vada are spirits that the Lovashi use to terrorize the Craft Folk on their lands. Sew discord, foment chaos, keep the serfs from trusting each other too much to rebel.
+}
 
 Each one takes after a particular beast. That one must have been the Spider... Tawh-cache or something. 'The Weaver', they call her. I've heard she can take the form of other people, cast spells that make you unable to tell friend from foe, even curse you or your village just by being in her presence. Maybe all the Vada can. I don't know. 
 
 {
 -gasparSavedFromNoose:
 changeCamTarget({gasparCutDownIndex})
-Takács. She can do all of that and more besides. The Vada were Táltos. *Gáspás searches for the words to explain.* Religious leaders. Like priests, but gifted with abilities beyond what we would consider normal. 
+Takács. She can do all of that and more besides. The Vada were Táltos. *Gáspár searches for the words to explain.* Religious leaders. Like priests, but gifted with abilities beyond what we would consider normal. 
 
 }
 
@@ -478,10 +484,10 @@ Maybe he wanted to wait for the camp to be present? That way his guards could ov
 
 changeCamTarget({gasparCutDownIndex})
 
-A man like the Director has no need for lies. {gasparSaysDirectorDidNotBetrayPlayer: |He did not betray you. }If he wanted to kill you, he'd look you in the eye while he did it.
+\*Gáspár's face is stone serious.* He did not betray you.
 
-    +Then why not order his troops to stand down?
-        A Vada carries the weight of a count's authority with their words. Even the Director could not go against them without good reason. They must have opposed the decision, and ordered your death instead.
+    +So you keep saying. But then why not order his troops to stand down?
+        I'm not privy to his thoughts. All I can say is a Vada's words carry the weight of a count's authority. Even the Director could not go against them without very good reason. They must have opposed the decision, and ordered your death instead.
         ->1c
 
 === 1f ===
@@ -523,6 +529,7 @@ fadeToBlack()
 
 deactivate({weftIndex})
 deactivate({thatchIndex})
+deactivate({gasparCutDownIndex})
 
 fadeBackIn(60)
 

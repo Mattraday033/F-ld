@@ -383,6 +383,7 @@ public static class FlagNameList
         public const string directorSaidAbsurdityQuote = "directorSaidAbsurdityQuote";
         public const string directorConvoFinished = "directorConvoFinished";
         public const string keptDirectorAlive = "keptDirectorAlive";
+        public const string askedDirectorAboutCampLocationAndPardon = "askedDirectorAboutCampLocationAndPardon";
 
         //Page flags
         public const string toldPageRevengeFeltFantastic = "toldPageRevengeFeltFantastic";

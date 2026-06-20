@@ -390,24 +390,26 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public static void resetIdleDictionaryEntry(string animationName)
     {
-        addIdleSprites(animationName, EnemyTypeFolderPathList.getEnemyTypeFolderPath(animationName));
+        animationName = DialogueList.scrubNameOfEndNumbers(animationName);
+
+        addIdleSprites(animationName, EnemyTypeFolderPathList.getEnemyTypeFolderPath(animationName), true);
     }
 
-    private static void addIdleSprites(string animationName, string folderPath)
+    private static void addIdleSprites(string animationName, string folderPath, bool replaceOldSprites = false)
     {
         foreach (CharacterAnimationType type in loopedAnimationTypes)
         {
-            addIdleSpritesOfType(animationName, folderPath, type);
+            addIdleSpritesOfType(animationName, folderPath, type, replaceOldSprites);
         }
 
-        addIdleSpritesOfType(animationName, folderPath, CharacterAnimationType.Death);
-        addIdleSpritesOfType(animationName, folderPath, CharacterAnimationType.Death_Back);
-        addIdleSpritesOfType(animationName, folderPath, CharacterAnimationType.Death_Front);
+        addIdleSpritesOfType(animationName, folderPath, CharacterAnimationType.Death, replaceOldSprites);
+        addIdleSpritesOfType(animationName, folderPath, CharacterAnimationType.Death_Back, replaceOldSprites);
+        addIdleSpritesOfType(animationName, folderPath, CharacterAnimationType.Death_Front, replaceOldSprites);
     }
 
-    private static void addIdleSpritesOfType(string animationName, string folderPath, CharacterAnimationType type)
+    private static void addIdleSpritesOfType(string animationName, string folderPath, CharacterAnimationType type, bool replaceOldSprites = false)
     {
-        if(IdleDictionary.idleDictContainsSprites(animationName, type))
+        if(IdleDictionary.idleDictContainsSprites(animationName, type) && !replaceOldSprites)
         {
             return;
         }

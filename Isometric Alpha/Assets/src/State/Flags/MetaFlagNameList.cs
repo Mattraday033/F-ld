@@ -10,6 +10,10 @@ public static class MetaFlagNameList
 
     #endregion
 
+    #region Camp Flags
+
+    public const string knowsCampLocation = "knowsCampLocation";
+
     #region Guard Trial Flags
 
     #region Slave Crowd Spawn Group Flags
@@ -55,4 +59,7 @@ public static class MetaFlagNameList
     public const string failedToConvinceSlavesToHelpYou = "failedToConvinceSlavesToHelpYou"; // failed slavesAfterKillingOverseerCampNE conversation
 
     #endregion
+
+    #endregion
+
 }

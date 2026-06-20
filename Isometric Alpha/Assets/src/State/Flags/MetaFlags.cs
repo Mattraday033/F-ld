@@ -15,6 +15,8 @@ public static class MetaFlags
 
         metaFlags[MetaFlagNameList.inHostileArea] = AreaList.currentAreaIsHostile();
 
+        metaFlags[MetaFlagNameList.knowsCampLocation] = Flags.getFlag(FlagNameList.finishedBalintsTask) || Flags.getFlag(FlagNameList.learnedCampLocationFromCarter);
+
         //who is at Guard Punishment scene
         metaFlags[MetaFlagNameList.marcosIsAtTrial] = !DeathFlagManager.isDead(NPCNameList.guardMarcos);
         metaFlags[MetaFlagNameList.taborIsAtTrial] = !DeathFlagManager.isDead(NPCNameList.chiefTabor);

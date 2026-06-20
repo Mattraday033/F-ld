@@ -16,11 +16,6 @@ VAR wisdom = 0
 
 VAR playerName = ""
 
-//changeCamTarget(int targetIndex)
-//keepDialogue()
-//setToTrue(string flagName)
-//setToFalse(string flagName)
-
 {
 -spokeToBalint:
     ->1b
@@ -31,7 +26,6 @@ VAR playerName = ""
 === 1a ===
 
 setToTrue(spokeToBalint)
-~spokeToBalint = true
 
 Hello there. Has the lockdown been lifted?
 
@@ -63,7 +57,6 @@ What can I help you with?
 {
 -gotThePlanFromKastor and not gaveBalintThePassword:
     +Which way is the wind blowing?
-        ~gaveBalintThePassword = true
         setToTrue(gaveBalintThePassword)
         keepDialogue()
         East, friend.
@@ -192,8 +185,6 @@ You're the one who approached me and asked questions. If you're not willing to l
         ->Close
 
 === 2e ===
-
-~knowBalintIsFromCarnassus = true
 
 setToTrue(knowBalintIsFromCarnassus)
 
@@ -679,7 +670,6 @@ I have no clue, but it explains why the guards never speak of our location and n
 
 === 5l ===
 
-~finishedBalintsTask = true
 setToTrue(finishedBalintsTask)
 
 Yes, tell him my assessment. It should brighten his mood some.
