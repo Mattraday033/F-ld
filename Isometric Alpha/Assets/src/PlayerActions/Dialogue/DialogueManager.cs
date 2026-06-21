@@ -521,6 +521,21 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
+                case "revealnondefeatedenemies":
+                case "revealallnondefeatedenemies":
+
+                    if(AreaManager.getMonsterParent() != null && 
+                        AreaManager.getMonsterParent().childCount <= 0)
+                    {
+                        SpawnInfoManager.spawnAllMonsters();
+                    }
+
+                    EnemyMovement.RevealAllNonDefeatedEnemies.Invoke();
+
+                    continueStory();
+
+                    break;
+
                 case "activatequeststep":
 
                     string questTitle3 = getArgument(buffer);

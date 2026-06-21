@@ -31,6 +31,8 @@ public class SaveHandler : ScreenManager, IEscapable
     public Button saveButton;
     public BinaryPanelPopUpButton overwriteButton;
 
+    public GameObject redCloseButton;
+
     public SaveBlueprint currentSaveFile;
 
 	private static SaveHandler instance;
@@ -91,7 +93,6 @@ public class SaveHandler : ScreenManager, IEscapable
 			KeyPressManager.handlingPrimaryKeyPress = true;
 			saveButtonPress();
 		}
-
     }
 
 	public static bool saveNameFieldIsSelected()
@@ -590,6 +591,14 @@ public class SaveHandler : ScreenManager, IEscapable
     {
         base.removeListeners();
         GridRow.OnDescribableToDisplay.RemoveListener(setCurrentSaveFile);
+    }
+
+    private void OnDisable()
+    {
+        if(Flags.isInNewGameMode() && redCloseButton != null)
+        {
+            redCloseButton.SetActive(false);
+        }
     }
 
     public void setCurrentSaveFile(IDescribable describable)

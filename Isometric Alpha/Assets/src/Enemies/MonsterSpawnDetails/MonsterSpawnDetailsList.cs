@@ -87,6 +87,14 @@ public static class MonsterSpawnDetailsList
 
         #region Camp
 
+        #region 4SlaveShack
+        list = new List<MonsterSpawnDetails>();
+
+        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(5, 5), Facing.NorthEast, tutorialTargetHash: TutorialSequenceList.secondTutorialEnemyTargetHash));
+
+        monsterSpawnDetailsDict.Add(LocationNameList.slaveShackFour, list);
+        #endregion
+
         #region 6SlaveShack
         list = new List<MonsterSpawnDetails>();
 

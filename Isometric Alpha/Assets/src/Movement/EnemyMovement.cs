@@ -157,6 +157,8 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
     public readonly static UnityEvent OnOOCMonsterDefeat = new UnityEvent();
 
+    public readonly static UnityEvent RevealAllNonDefeatedEnemies = new UnityEvent();
+
     private MonsterMovementType _MovementType = MonsterMovementType.Random;
     public virtual MonsterMovementType movementType
     {
@@ -194,6 +196,14 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
             retreatStun();
             SkillManager.OnSkillUse.Invoke();
         }
+
+        RevealAllNonDefeatedEnemies.AddListener(revealIfNotDefeated);
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        RevealAllNonDefeatedEnemies.RemoveListener(revealIfNotDefeated);
     }
 
     private void disableIfDefeated()
@@ -201,6 +211,14 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         if(isDefeated())
         {
             gameObject.SetActive(false);
+        }
+    }
+
+    private void revealIfNotDefeated()
+    {
+        if(!isDefeated())
+        {
+            gameObject.SetActive(true);
         }
     }
 

@@ -10,6 +10,8 @@ using UnityEngine.EventSystems;
 
 public class CharacterCreationPopUpWindow : PopUpWindow
 {
+    private const string characterSpriteExampleName = "CharGen";
+
     private static CharacterCreationPopUpWindow instance;
     public readonly static string[] portraitSpriteNameList = new string[]{ NPCNameList.protagPrefix+1, NPCNameList.protagPrefix+2 };
 
@@ -367,9 +369,7 @@ public class CharacterCreationPopUpWindow : PopUpWindow
 
     private Sprite getSprite()
     {
-        Sprite[] sprites = Resources.LoadAll<Sprite>(EnemyTypeFolderPathList.getEnemyTypeFolderPath(portraitSpriteNameList[spriteNameIndex])+CharacterAnimationType.Idle_Front.ToString());
-
-        return sprites[Constants.indexZero];
+        return Helpers.loadSpriteFromResources(EnemyTypeFolderPathList.getEnemyTypeFolderPath(portraitSpriteNameList[spriteNameIndex])+characterSpriteExampleName);
     }
 
     private Sprite getPortrait()

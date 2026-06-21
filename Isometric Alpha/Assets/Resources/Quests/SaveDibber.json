@@ -1,0 +1,21 @@
+{
+	"title": "Save Dibber!",
+	"steps":[
+				{"stepName":"Follow Kastor.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"<B>Kastor has removed the first obstacle on the path to rescuing Dibber. I should speak to him again farther inside the rubble.</B>"},
+                {"stepName":"Kill the bats.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"<B>The path is blocked by some bats. I should approach and slay them to progress through the rubble</B>"},
+                {"stepName":"Return to Kastor.1","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"<B>I should speak to Kastor again farther inside the rubble.</B>"},
+                {"stepName":"Use the crank.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"<B>Use the Crank next to the unfinished shack in the northwest corner of the camp.</B>"},
+                {"stepName":"Return to Kastor.2","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"<B>I should speak to Kastor again farther inside the rubble.</B>"},
+                {"stepName":"Clear the rubble.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"<B>Have two Party Members stand on the two buttons clear the rubble.</B>"},
+                {"stepName":"Return to Kastor.3","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"<B>I should speak to Kastor again farther inside the rubble.</B>"},
+                {"stepName":"Remove the wall patch.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"<B>Remove the wall patch between Kastor and Dibber to progress further through the rubble.</B>"},
+                {"stepName":"Rescue Dibber.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"<B>I should speak to Dibber to let him know he is safe.</B>"},
+                {"stepName":"Dibber is safe.","MapZone":"","MapLocation":"","journalDescription":"I rescued Dibber, and he was very grateful."}
+            ],
+
+
+	"deathSteps":
+			[
+			]
+
+}

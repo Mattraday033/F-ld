@@ -135,13 +135,40 @@ public static class SpawnParamsList
                                                                                           FlagNameList.directorDefeated }), spawnWhileHostile: spawnWhileHostile);
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackFour, NPCNameList.kastor),
-                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.convincedSlavesToHelpYou,
-                                                                                          FlagNameList.directorDefeated }), spawnWhileHostile: spawnWhileHostile));
+                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                            FlagNameList.convincedSlavesToHelpYou,
+                                                                                            FlagNameList.directorDefeated,
+                                                                                            FlagNameList.duringKastorSkillTutorial }), spawnWhileHostile: spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackFour, NPCNameList.kastor+1),
+                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[]{ FlagNameList.startedKastorIntimidateTutorial}),
+                                                            stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                            FlagNameList.finishedKastorIntimidateTutorial,
+                                                                                            FlagNameList.directorDefeated,
+                                                                                            FlagNameList.revoltStarted }), spawnWhileHostile: spawnWhileHostile));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackFour, NPCNameList.nandor), carterAndNandorSS4);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackFour, NPCNameList.carter), carterAndNandorSS4);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackFour, NPCNameList.guardMarcos), marcosSS4);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackFour, NPCNameList.guardMarcos+1), marcosSleepingSS4);
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackFour, NPCNameList.rubble),
+                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                            FlagNameList.duringKastorSkillTutorial,
+                                                                                            FlagNameList.savedDibber }), spawnWhileHostile: spawnWhileHostile));
+                                                                                
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackFour, NPCNameList.dibber),
+                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                            FlagNameList.savedDibber,
+                                                                                            FlagNameList.convincedSlavesToHelpYou,
+                                                                                            FlagNameList.directorDefeated }), spawnWhileHostile: spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackFour, NPCNameList.dibber+1),
+                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[]{ FlagNameList.savedDibber}),
+                                                            stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                            FlagNameList.duringKastorSkillTutorial,
+                                                                                            FlagNameList.convincedSlavesToHelpYou,
+                                                                                            FlagNameList.directorDefeated}), spawnWhileHostile: spawnWhileHostile));
 
         #endregion
         #region Slave Shack 5

@@ -84,8 +84,42 @@ public static class DialogueList
         #region Slave Shack 4
 
         addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.kastor,
-                            new Dialogue(new string[] { NPCNameList.kastor, NPCNameList.nandor, NPCNameList.carter, NPCNameList.guardMarcos, NPCNameList.guardMarcos+1 },
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.kastor,
+                                                        NPCNameList.nandor, 
+                                                        NPCNameList.carter, 
+                                                        NPCNameList.guardMarcos, 
+                                                        NPCNameList.guardMarcos+1,
+                                                        NPCNameList.thatch,
+                                                        NPCNameList.kastor+1,
+                                                        NPCNameList.rubble
+                                                    },
                             Resources.Load<TextAsset>(DialogueNameList.kastorPlanPath)));
+
+        Dialogue kastorSkillTutorialDialogue = new Dialogue(new string[] { 
+                                                        NPCNameList.kastor,
+                                                        NPCNameList.kastor+1,
+                                                        NPCNameList.kastor+2,
+                                                        NPCNameList.kastor+3,
+                                                        NPCNameList.kastor+4
+                                                        },
+                            Resources.Load<TextAsset>(DialogueNameList.kastorSkillTutorialPath));
+
+        addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.kastor+1, kastorSkillTutorialDialogue);
+        addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.kastor+2, kastorSkillTutorialDialogue);
+        addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.kastor+3, kastorSkillTutorialDialogue);
+        addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.kastor+4, kastorSkillTutorialDialogue);
+
+        Dialogue dibberDialogue = new Dialogue(new string[] { 
+                                                        NPCNameList.dibber,
+                                                        NPCNameList.dibber+1,
+                                                        NPCNameList.kastor,
+                                                        NPCNameList.kastor+4
+                                                        },
+                            Resources.Load<TextAsset>(DialogueNameList.dibberPath));
+
+        addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.dibber, dibberDialogue);
+        addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.dibber+1, dibberDialogue);
 
         addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.guardMarcos,
                             new Dialogue(new string[] { NPCNameList.guardMarcos },

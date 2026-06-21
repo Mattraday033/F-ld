@@ -67,7 +67,7 @@ public static class TutorialMessageList
 
         tutorialDictionary.Add(hostileTargetTutorialMessagePrefix + 1, "There is a creature in your path. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to highlight it.");
         tutorialDictionary.Add(hostileTargetTutorialMessagePrefix + 2, "The creature is highlighted in red. This means it is a hostile creature. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> again to remove the highlight.");
-        tutorialDictionary.Add(hostileTargetTutorialMessagePrefix + 3, "The hostility tracker is red, so you can be attacked in this location. When you are safe, it will be green.");
+        tutorialDictionary.Add(hostileTargetTutorialMessagePrefix + 3, "The hostility tracker shows a red skull for this location, so you can be attacked here. When you are safe, it will show a green flower.");
         tutorialDictionary.Add(hostileTargetTutorialMessagePrefix + 4, "The enemy is facing away from you. If you move next to a creature while facing it's sides or back, you will surprise it and gain a free round of attacks.");
         tutorialDictionary.Add(hostileTargetTutorialMessagePrefix + 5, "Be careful how you approach creatures. Creatures can surprise you if they sneak up on you.");
         tutorialDictionary.Add(hostileTargetTutorialMessagePrefix + 6, "Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to move next to the creature and start combat.");

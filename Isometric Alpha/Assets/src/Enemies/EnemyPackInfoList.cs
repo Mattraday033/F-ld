@@ -461,7 +461,12 @@ public static class EnemyPackInfoList
                                                                                                             script: new TaborIntimidateTutorialScript()
                                                                                                           );
 
-
+    private readonly static EnemyPackInfo kastorIntimidateTutorialBatPack = new BossPackInfo(new CreatureAmount[] {  EnemyAmountList.oneGiantBat,
+                                                                                                            EnemyAmountList.twoBatSwarms
+                                                                                                            },
+                                                                                                            DropTableList.slaveMineDTKey,
+                                                                                                            script: new KastorIntimidateTutorialScript()
+                                                                                                          );
 
     private readonly static EnemyPackInfo twoGiantBatsThreeBatSwarmsOneArmoredBat = new EnemyPackInfo(new CreatureAmount[] {  
                                                                                                                             EnemyAmountList.oneArmoredBatShielded,
@@ -752,6 +757,14 @@ public static class EnemyPackInfoList
         enemyPackInfoDict = new Dictionary<string, List<EnemyPackInfo>>();
 
         #region Camp
+
+        #region Slave Shack Four
+        list = new List<EnemyPackInfo>();
+
+        list.Add(kastorIntimidateTutorialBatPack);
+
+        enemyPackInfoDict.Add(LocationNameList.slaveShackFour, list);
+        #endregion
 
         #region Slave Shack Six
         list = new List<EnemyPackInfo>();

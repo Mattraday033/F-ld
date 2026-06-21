@@ -281,7 +281,7 @@ You've been through it, haven't you. I would hear your story, when we have a mom
 === 4cd ===
 changeCamTarget({thatchIndex})
 
-And a whole camp's worth to go. Though, I expect none will be more vile than he was.
+And a whole camp's worth to go. And he wasn't even the most vile of them.
     
     +Who was Slate to you?
         ->4da

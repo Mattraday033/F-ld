@@ -26,6 +26,23 @@ public static class GateSpawnInfoList
         gateSpawnInfoDict = new Dictionary<string, List<GateSpawnInfo>>();
         List<GateSpawnInfo> list;
 
+        #region 4SlaveShack
+        list = new List<GateSpawnInfo>(); 
+
+        list.Add(new GateSpawnInfo(Constants.indexZero,
+                                    NPCNameList.awkwardRubble,
+                                    LocationNameList.slaveShackSix,
+                                    new Vector3Int(4, 11),
+                                    PrefabNames.blockRubble,
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX,
+                                    TutorialSequenceList.fallenBeamTargetHash,
+                                    useRubbleColor));
+
+        gateSpawnInfoDict.Add(LocationNameList.slaveShackFour, list);
+
+        #endregion
+
         #region 6SlaveShack
 
         list = new List<GateSpawnInfo>();
@@ -38,16 +55,6 @@ public static class GateSpawnInfoList
                                     Constants.sizeTwo,
                                     Axis.DescendingY,
                                     TutorialSequenceList.interactableRubbleTargetHash,
-                                    useRubbleColor));
-
-        list.Add(new GateSpawnInfo(Constants.indexZero,
-                                    NPCNameList.awkwardRubble,
-                                    LocationNameList.slaveShackSix,
-                                    new Vector3Int(6, -1),
-                                    PrefabNames.blockRubble,
-                                    Constants.sizeTwo,
-                                    Axis.DescendingY,
-                                    TutorialSequenceList.fallenBeamTargetHash,
                                     useRubbleColor));
 
         gateSpawnInfoDict.Add(LocationNameList.slaveShackSix, list);

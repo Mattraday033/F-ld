@@ -100,6 +100,9 @@ VAR nandorIndex = 2
 VAR carterIndex = 3
 VAR marcosIndex = 4
 VAR marcosSleepingIndex = 5
+VAR thatchIndex = 6
+VAR kastorStrTutorialIndex = 7
+VAR tutorialRubbleIndex = 8
 
 VAR itemTutorialKey = "Item Tutorial"
 VAR mapTutorialKey = "Quest Counter Tutorial"
@@ -795,12 +798,24 @@ Were you able to recruit Thatch?
 finishQuest(Look for Thatch, true, Kastor has been told.)
 setToTrue(toldKastorOfThatchsFate)
 
-Well done. What were the screams about? Is he hurt?
+fadeToBlack(true, false)
 
-    +No, he was on a work detail last night. The screams were from his hutmate, Slate.
+movePlayerPos(9,14)
+setFacing(NE)
+activate({thatchIndex})
+
+fadeBackIn(60)
+
+Well done. Welcome, Thatch. What were the screams about? Are you hurt?
+
+changeCamTarget({thatchIndex})
+
+I am weary, but otherwise I am fine. The screams were from my hutmate, Slate.
         ->T1f
 
 === T1f ===
+
+changeCamTarget({kastorIndex})
 
 What is Slate's condition?
 
@@ -809,9 +824,34 @@ What is Slate's condition?
 
 === T1g ===
 
-I see. May his hearth keep him warm, then. But we must mourn the lost in stride, there is too much to do before we are free.
+May his hearth keep him warm, then. But we must mourn the lost in stride, there is too much to do before we are free.
 
-->2f
+->T2a
+
+=== T2a ===
+
+setToTrue(duringKastorSkillTutorial)
+activateQuestStep(Save Dibber!,Follow Kastor.)
+
+You have succeeded in your first task, and that is promising. But I have another that will test your ability to work as a team. I need to know you can depend on each other before I trust you with the lives of our comrades.
+
+A storm struck the camp a few days ago, and its winds collapsed a portion of this hut. Before the lockdown the guards attempted to make repairs, but that was put on hold after the mine was shut down. 
+
+Last night, more of the hut crumbled and trapped my hutmate, Dibber, in the debris while he slept. He can still speak, so I know he is still alive, but his and my combined effort haven't been enough to free him.
+
+The guards during this morning's inspection found this more humorous than pressing, so it's up to us to get Dibber out of there. I will clear some of the debris, but you will have to finish the rest. And be careful. I have heard other noises among the rubble. Some bats may have been trapped by the collapse as well.
+
+fadeToBlack()
+
+deactivate({kastorIndex})
+deactivate({thatchIndex})
+deactivate({tutorialRubbleIndex})
+activate({kastorStrTutorialIndex})
+revealNonDefeatedEnemies()
+
+fadeBackIn(60)
+
+->Close
 
 === 2f ===
 ~explainingPlan = true

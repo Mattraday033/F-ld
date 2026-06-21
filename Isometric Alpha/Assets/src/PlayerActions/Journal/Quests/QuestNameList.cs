@@ -85,6 +85,20 @@ public static class QuestNameList
     public const string chiefTaborStepTitleTen = "Return to Tabor.4";
     public const string chiefTaborStepTitleEleven = "Work complete.";
 
+    // Save Dibber!
+    public const string saveDibberQuestTitle = "Save Dibber!";
+
+    public const string saveDibberStepTitleZero = "Follow Kastor.";
+    public const string saveDibberStepTitleOne = "Kill the bats.";
+    public const string saveDibberStepTitleTwo = "Return to Kastor.1";
+    public const string saveDibberStepTitleThree = "Use the crank.";
+    public const string saveDibberStepTitleFour = "Return to Kastor.2";
+    public const string saveDibberStepTitleFive = "Clear the rubble.";
+    public const string saveDibberStepTitleSix = "Return to Kastor.3";
+    public const string saveDibberStepTitleSeven = "Remove the wall patch.";
+    public const string saveDibberStepTitleEight = "Rescue Dibber.";
+    public const string saveDibberStepTitleNine = "Dibber is safe.";
+
     public const string aSituationBrewsQuestTitle = "A Situation Brews";
 
     public const string aSituationBrewsStepTitleOne = "Midday meal.";

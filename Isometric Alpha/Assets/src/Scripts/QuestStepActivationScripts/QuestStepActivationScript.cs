@@ -25,6 +25,8 @@ public class PreventTutorialsAfterBatsKilledScript : QuestStepActivationScript
     }
 }
 
+#region Tabor Tutorial Scripts
+
 public class TaborIntimidateTutorialScript : QuestStepActivationScript
 {
     public override void runScript(GameObject target = null)
@@ -86,6 +88,76 @@ public class TaborObservationTutorialScript : QuestStepActivationScript
         }
     }
 }
+
+#endregion
+
+
+#region Kastor Tutorial Scripts
+
+public class KastorIntimidateTutorialScript : QuestStepActivationScript
+{
+    public override void runScript(GameObject target = null)
+    {
+        Flags.setFlag(FlagNameList.finishedKastorIntimidateTutorial, true);
+        TutorialFlags.setFlag(TutorialSequenceList.intimidateTutorialSeenFlag, true);
+
+        QuestList.activateQuestStep(QuestNameList.saveDibberQuestTitle, QuestNameList.saveDibberStepTitleTwo);
+    }
+}
+
+public class KastorCunningTutorialScript : QuestStepActivationScript
+{
+    public override void runScript(GameObject target = null)
+    {
+        if(!Flags.getFlag(FlagNameList.finishedKastorCunningTutorial))
+        {
+            Flags.setFlag(FlagNameList.finishedKastorCunningTutorial, true);
+            TutorialFlags.setFlag(TutorialSequenceList.secondCunningTutorialSeenFlag, true);
+
+            QuestList.activateQuestStep(QuestNameList.chiefTaborQuestTitle, QuestNameList.chiefTaborStepTitleSix);
+            NotificationManager.ManualNotificationSpawn.Invoke();
+        }
+    }
+}
+
+public class KastorLeadershipTutorialScript : QuestStepActivationScript
+{
+    public override void runScript(GameObject target = null)
+    {
+        if(!Flags.getFlag(FlagNameList.finishedKastorLeadershipTutorial))
+        {
+            Flags.setFlag(FlagNameList.finishedKastorLeadershipTutorial, true);
+            TutorialFlags.setFlag(TutorialSequenceList.leadershipTutorialSeenFlag, true);
+
+            NotificationManager.preventSkipNextNotificationSpawn();
+
+            QuestList.activateQuestStep(QuestNameList.chiefTaborQuestTitle, QuestNameList.chiefTaborStepTitleEight);
+
+            NotificationManager.ManualNotificationSpawn.Invoke();
+        }
+    }
+}
+
+public class KastorObservationTutorialScript : QuestStepActivationScript
+{
+    public override void runScript(GameObject target = null)
+    {
+
+        if(!Flags.getFlag(FlagNameList.finishedKastorObservationTutorial))
+        {
+            Flags.setFlag(FlagNameList.finishedKastorObservationTutorial, true);
+            TutorialFlags.setFlag(TutorialSequenceList.observationTutorialSeenFlag, true);
+
+            NotificationManager.preventSkipNextNotificationSpawn();
+
+            QuestList.activateQuestStep(QuestNameList.chiefTaborQuestTitle, QuestNameList.chiefTaborStepTitleTen);
+            NotificationManager.ManualNotificationSpawn.Invoke();
+        }
+    }
+}
+
+#endregion
+
 
 public class ThiefsBodyScript : QuestStepActivationScript
 {

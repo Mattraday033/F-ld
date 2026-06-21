@@ -46,6 +46,8 @@ VAR nandorSpokeToPlayerAboutDirectorBetrayal = false
 VAR acceptedDirectorVidraLetterJob = false
 VAR directorMentionedAnnouncement = false
 
+VAR metBrandedSurvivors = false
+
 VAR toldToFindNandor = false
 VAR pageGaveKnife = false
 VAR toldToFindCarterByPage = false
@@ -520,26 +522,75 @@ Then what is your decision?
 changeCamTarget({pageIndex})
 
 VAR thenYouAreQuiteTheWarrior = "Then you are quite the warrior. I will inform the Director you are here."
+VAR returnedFromTheMines = "*Page looks at you in astonishment.* You must have just returned from the mines. You're filthy!"
 
 {
+-toldToFindCarterByPage and not nandorSpokeToPlayerAboutDirectorBetrayal:
+    {returnedFromTheMines}  Did you find Carter? Is he with you?
+        ->pageAskedIfFoundCarter_1a
 -nandorSpokeToPlayerAboutDirectorBetrayal:
     ->sealedBreach_1ac
 -else:
-    \*Page looks at you in astonishment.* You've just returned from the mines, if the dust you're caked in is any indication. Did you actually manage to stop those beasts?
-
+    {returnedFromTheMines} Did you actually manage to stop those beasts?
+        ->sealedBreach_1aa
 }
+
+=== sealedBreach_1aa ===
 
     +I've been to the deepest tunnel and back. They are no longer a problem.
         {thenYouAreQuiteTheWarrior}
-        ->sealedBreach_1aa
+        ->sealedBreach_1ab
     +An easier task I've never been given. The Director should have handed me something challenging if he wanted a fair exchange.
         {thenYouAreQuiteTheWarrior}
-        ->sealedBreach_1aa
+        ->sealedBreach_1ab
     +I'm here to see the Director, not answer your questions. 
         Of course. I shall inform him that you are here to see him right away.
-        ->sealedBreach_1aa
+        ->sealedBreach_1ab
 
-=== sealedBreach_1aa ===
+=== pageAskedIfFoundCarter_1a ===
+
+{
+    -mineLvl3CarterAndNandorInParty and deathFlagCarter:
+        +I did, but he did not endure long enough to escape the mine.
+            \*Page stays silent for a moment. She nods slowly.* Your mission was a dangerous one. I just hope it was a painless end.
+            ->pageAskedIfFoundCarter_1b
+        +I did, but he was a traitor. He forced me to put him down.
+            Carter? A traitor? *Shock, followed by resignation colors Page's face.* If what you say is true, then you did what you had to.
+
+            I will inform the Director of this; he awaits your return. Were you able to stop those beasts in the mine?
+            ->sealedBreach_1aa
+        +I wasn't able to find him. I'm sorry. <Lie>
+            setToTrue(liedToPageAboutFindingCarter)
+
+            ->pageAskedIfFoundCarter_1aa
+    -mineLvl3CarterAndNandorInParty and not deathFlagCarter:
+        +I did, and he is here with me. Would you like for me to introduce you?
+            \*Page's face reddens for a moment.* No! That's alright. He just survived such an ordeal, he wouldn't want to be bothered right now. There will be another time, I'm sure. Besides, you and I have other things we should be discussing.
+            ->pageAskedIfFoundCarter_1b
+    -metBrandedSurvivors:
+        +He is not with me now, but worry not. He is still very much alive.
+            What? You speak truly? You're a hero, branded. A champion! I am sorry that I have no more to give you than my gratitude, but thank you. Thank you!
+            
+            But I won't keep you any longer. Surely you are eager to be given your true reward by our master.
+            ->pageAskedIfFoundCarter_1b
+    -else:
+        +I found no trace of him.
+            ->pageAskedIfFoundCarter_1aa
+}
+
+=== pageAskedIfFoundCarter_1aa ===
+
+\*Page stays silent for a moment. She nods slowly.* It was stupid of me to think he could have survived. Thank you for looking, despite the danger.
+
+->pageAskedIfFoundCarter_1b
+
+=== pageAskedIfFoundCarter_1b ===
+
+The Director is waiting for your report. Were you able to stop those beasts in the mine?
+
+->sealedBreach_1aa
+
+=== sealedBreach_1ab ===
 
 {
 -mineLvl3CarterAndNandorInParty and not deathFlagNándor and not deathFlagCarter:

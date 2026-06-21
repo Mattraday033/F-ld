@@ -68,6 +68,18 @@ public static class FlagNameList
         public const string startedTaborLeadershipTutorial = "startedTaborLeadershipTutorial";
         public const string finishedTaborLeadershipTutorial = "finishedTaborLeadershipTutorial";
 
+        //Kastor Skill Tutorial Flags
+        public const string duringKastorSkillTutorial = "duringKastorSkillTutorial";
+        public const string startedKastorIntimidateTutorial = "startedKastorIntimidateTutorial";
+        public const string finishedKastorIntimidateTutorial = "finishedKastorIntimidateTutorial";
+        public const string startedKastorCunningTutorial = "startedKastorCunningTutorial";
+        public const string finishedKastorCunningTutorial = "finishedKastorCunningTutorial";
+        public const string startedKastorObservationTutorial = "startedKastorObservationTutorial";
+        public const string finishedKastorObservationTutorial = "finishedKastorObservationTutorial";
+        public const string startedKastorLeadershipTutorial = "startedKastorLeadershipTutorial";
+        public const string finishedKastorLeadershipTutorial = "finishedKastorLeadershipTutorial";
+        public const string savedDibber = "savedDibber";
+
         //gaspar flags
         public const string gasparAddedToParty = "gasparAddedToParty";
         public const string gasparBroughtToExecution = "gasparBroughtToExecution";
@@ -394,6 +406,7 @@ public static class FlagNameList
         public const string acceptedFindCarterQuest = "acceptedFindCarterQuest";
         public const string finishedFindCarterQuest = "finishedFindCarterQuest";
         public const string mentionedPageToCarterOnFirstMeeting = "mentionedPageToCarterOnFirstMeeting";
+        public const string liedToPageAboutFindingCarter = "liedToPageAboutFindingCarter"; //If you met Carter, killed him, then lied about it to Page
 
         //boss kill flags
         public const string mineLvl2BatBossKilled = "mineLvl2BatBossKilled";

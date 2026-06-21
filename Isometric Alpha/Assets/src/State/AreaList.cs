@@ -534,6 +534,8 @@ public static class AreaList
 	{
 		switch(locationName)
 		{
+            case LocationNameList.slaveShackFour:
+				return Flags.getFlag(FlagNameList.duringKastorSkillTutorial) && !Flags.getFlag(FlagNameList.finishedKastorIntimidateTutorial);
 			case LocationNameList.slaveShackSix:
 			case LocationNameList.guardHouseTopFloor:
             case LocationNameList.bodyPile:

@@ -291,6 +291,9 @@ public struct QuestWrapper
                 return QuestNameList.rescueBrushStepTitleFive;
             case "Broglin is Free.":
                 return QuestNameList.rescueBrushStepTitleSix;
+
+            case "Kill the bat.":
+                return QuestNameList.saveDibberStepTitleOne;
                 /*
                 
     public const string rescueBrushStepTitleFive = "Found Brush.";

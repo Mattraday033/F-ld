@@ -341,7 +341,7 @@ MonoBehaviour:
   type: 3
   decisionType: 8
   button: {fileID: 0}
-  attachedIconText: {fileID: 4566331278253314101}
+  attachedIcon: {fileID: 0}
 --- !u!1 &194148247259937091
 GameObject:
   m_ObjectHideFlags: 0
@@ -2784,7 +2784,7 @@ MonoBehaviour:
   type: 3
   decisionType: 8
   button: {fileID: 0}
-  attachedIconText: {fileID: 2819593293475497892}
+  attachedIcon: {fileID: 0}
 --- !u!1 &1893900455140239851
 GameObject:
   m_ObjectHideFlags: 0
@@ -7684,7 +7684,7 @@ MonoBehaviour:
   type: 3
   decisionType: 8
   button: {fileID: 0}
-  attachedIconText: {fileID: 8870956125036992572}
+  attachedIcon: {fileID: 0}
 --- !u!1 &4941455763514210202
 GameObject:
   m_ObjectHideFlags: 0
@@ -8101,7 +8101,7 @@ RectTransform:
   m_GameObject: {fileID: 5266935349668134603}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1255562577527387490}
@@ -12214,7 +12214,7 @@ MonoBehaviour:
   type: 3
   decisionType: 8
   button: {fileID: 0}
-  attachedIconText: {fileID: 5908768090666377015}
+  attachedIcon: {fileID: 0}
 --- !u!1 &7892643059477835921
 GameObject:
   m_ObjectHideFlags: 0

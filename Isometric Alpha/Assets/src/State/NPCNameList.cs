@@ -15,6 +15,7 @@ public static class NPCNameList
     public const string brush = "Brush";
     public const string clay = "Clay";
     public const string dezso = "Dezso"; 
+    public const string dibber = "Dibber";
     public const string ervin = "Ervin";
     public const string feher = "Feher";
     public const string géza = "Géza";

@@ -227,10 +227,9 @@ public static class TutorialSequenceList
                                                                 scriptAtEnd: new UnhighlightTargetScript());
         TutorialSequenceStep stepThree = new TutorialSequenceStep(TutorialMessageList.hostileTargetTutorialMessagePrefix + 3, 
                                                                     hostilityUITargetHash, 
-                                                                    ArrowDirection.BottomRight, 
+                                                                    ArrowDirection.BottomLeft, 
                                                                     skipHighlight: skipHighlight, 
-                                                                    skipUnhighlight: skipUnhighlight, 
-                                                                    createPopUpScreenBlocker: createPopUpScreenBlocker);
+                                                                    skipUnhighlight: skipUnhighlight);
         TutorialSequenceStep stepFour = new TutorialSequenceStep(TutorialMessageList.hostileTargetTutorialMessagePrefix + 4, 
                                                                   firstTutorialEnemyTargetHash, 
                                                                   ArrowDirection.Top, 
@@ -274,14 +273,12 @@ public static class TutorialSequenceList
                                                                 hostilityUITargetHash,
                                                                 ArrowDirection.BottomLeft,
                                                                 skipHighlight: skipHighlight,
-                                                                skipUnhighlight: skipUnhighlight,
-                                                                createPopUpScreenBlocker: createPopUpScreenBlocker);
+                                                                skipUnhighlight: skipUnhighlight);
         TutorialSequenceStep stepTwo = new TutorialSequenceStep(TutorialMessageList.hostilityBarsTutorialMessagePrefix + 2,
                                                                 hostilityUITargetHash,
                                                                 ArrowDirection.BottomLeft,
                                                                 skipHighlight: skipHighlight,
-                                                                skipUnhighlight: skipUnhighlight,
-                                                                createPopUpScreenBlocker: createPopUpScreenBlocker);
+                                                                skipUnhighlight: skipUnhighlight);
 
         TutorialSequence secondHostilityTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, secondHostilityTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo});
 

@@ -63,6 +63,59 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(10, 15), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.carter, new Vector3Int(11, 15), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMarcos+1, new Vector3Int(11, 17), LocationNameList.slaveShackFour, facing: Facing.SouthEast, animationType: CharacterAnimationType.Death_Back, offset: Constants.onTableHeightOffset*-2f));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(9, 12), facing: Facing.NorthEast));
+
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble, new Vector3Int(9, 4), PrefabNames.tutorialRubble));
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.dibber, new Vector3Int(7, 17), LocationNameList.slaveShackFour, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.dibber+1, new Vector3Int(11, 7), LocationNameList.slaveShackFour, facing: Facing.SouthWest));
+
+        #region Str Tutorial
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor+1, new Vector3Int(6, 2), LocationNameList.slaveShackFour, facing: Facing.NorthWest));
+
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(6, 4), TutorialSequenceList.intimidateTutorialSequenceKey,
+                                                                          TutorialSequenceList.intimidateTutorialSeenFlag));
+
+        #endregion
+        #region Dex Tutorial
+        
+        // list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor+2, new Vector3Int(4, 6), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
+
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(1, 6), TutorialSequenceList.secondCunningTutorialSequenceKey,
+                                                                          TutorialSequenceList.secondCunningTutorialSeenFlag,
+                                                                          alwaysSpawn: true));
+
+        list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(2, 7), Facing.SouthEast, CunningObjectSpriteCategory.Crank, endFacing: Facing.NorthWest, allBlockerSpawnDetails:
+                 new List<ObstacleSpawnDetails>()
+                 {
+                    new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator+1, new Vector3Int(2, 9), PrefabNames.tutorialRubble),
+                    new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator+1, new Vector3Int(1, 8), PrefabNames.tutorialRubble),
+                    new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator+1, new Vector3Int(2, 8), PrefabNames.tutorialRubble),
+                    new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator+1, new Vector3Int(1, 9), PrefabNames.tutorialRubble)
+                 },
+                 script: new TaborCunningTutorialScript(), //needs to change script
+                 tutorialTargetHash: TutorialSequenceList.tutorialCunningObjectTargetHash));
+
+        #endregion
+        #region Wis Tutorial
+
+        // list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor+4, new Vector3Int(1, 7), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
+
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(3, 17), TutorialSequenceList.observationTutorialSequenceKey,
+                                                                          TutorialSequenceList.observationTutorialSeenFlag));
+        #endregion
+        #region Cha Tutorial
+
+        // list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor+3, new Vector3Int(1, 10), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
+
+        list.Add(new ButtonSpawnDetails(new Vector3Int(2, 10), tutorialTargetHash: TutorialSequenceList.tutorialButtonOneTargetHash));
+        list.Add(new ButtonSpawnDetails(new Vector3Int(4, 10), tutorialTargetHash: TutorialSequenceList.tutorialButtonTwoTargetHash));
+
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(2, 9), TutorialSequenceList.leadershipTutorialSequenceKey,
+                                                                          TutorialSequenceList.leadershipTutorialSeenFlag,
+                                                                          alwaysSpawn: true));
+        #endregion
 
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackFour, list);
         #endregion

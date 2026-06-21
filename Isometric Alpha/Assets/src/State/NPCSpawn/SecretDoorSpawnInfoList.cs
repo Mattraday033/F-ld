@@ -32,6 +32,18 @@ public static class SecretDoorSpawnInfoList
         secretDoorSpawnDetailsDict = new Dictionary<string, List<SecretDoorSpawnInfo>>();
         List<SecretDoorSpawnInfo> list;
 
+        #region 4SlaveShack
+        list = new List<SecretDoorSpawnInfo>();
+
+        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackFour, NPCNameList.wallPatch, PrefabNames.wallPatch, new Vector3Int(5, 18),
+                                            new TutorialSecretDoorInfo(SecretDoorKeyList.wisTutorialSecretDoor,
+                                            new StartSpawningAllTrueFlagList(new string[] { FlagNameList.choseWisdomAtStart })),
+                                            Constants.sizeTwo, Axis.DescendingY,
+                                            TutorialSequenceList.secretDoorTargetHash));
+
+        secretDoorSpawnDetailsDict.Add(LocationNameList.slaveShackFour, list);
+        #endregion
+
         #region 5SlaveShack
         list = new List<SecretDoorSpawnInfo>();
 
@@ -48,12 +60,6 @@ public static class SecretDoorSpawnInfoList
 
         list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, PrefabNames.wallPatch, new Vector3Int(8, -6),
                                             new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchOne), Constants.sizeTwo, Axis.DescendingX));
-
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, PrefabNames.wallPatch, new Vector3Int(2, -4),
-                                            new TutorialSecretDoorInfo(SecretDoorKeyList.wisTutorialSecretDoor,
-                                            new StartSpawningAllTrueFlagList(new string[] { FlagNameList.choseWisdomAtStart })),
-                                            Constants.sizeTwo, Axis.DescendingY,
-                                            TutorialSequenceList.secretDoorTargetHash));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.slaveShackSix, list);
         #endregion

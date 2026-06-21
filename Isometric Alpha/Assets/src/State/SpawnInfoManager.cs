@@ -278,7 +278,7 @@ public static class SpawnInfoManager
         return spawnedObjects;
     }
 
-    private static void spawnAllMonsters()
+    public static void spawnAllMonsters()
     {
         if(!AreaList.currentAreaIsHostile())
         {
