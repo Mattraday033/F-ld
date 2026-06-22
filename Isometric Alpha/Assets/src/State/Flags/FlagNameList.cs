@@ -155,6 +155,7 @@ public static class FlagNameList
         public const string imreReadyToHelpPlayer = "imreReadyToHelpPlayer";
         public const string kastorExplainedWhereToFindAnotherKey = "kastorExplainedWhereToFindAnotherKey"; //kastor told player about the guardhouse armory key
         public const string kastorCalledPlayerMadReckless = "kastorCalledPlayerMadReckless"; //made camp hostile before meeting kastor and he said player was mad/reckless
+        public const string hadWeftTrustConvo = "hadWeftTrustConvo";
 
         //Revolt flags
         public const string revoltStarted = "revoltStarted"; //The camp is hostile

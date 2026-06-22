@@ -155,7 +155,7 @@ public abstract class OOCSpawnDetails
 
     public static void addTutorialTargetComponent(GameObject gameObject, SpriteRenderer spriteRenderer, string tutorialTargetHash, IRevealable revealable = null)
     {
-        if(gameObject == null)
+        if(gameObject == null || gameObject.transform == null)
         {
             return;
         }
@@ -165,7 +165,11 @@ public abstract class OOCSpawnDetails
             gameObject.AddComponent<RectTransform>();
         }
 
-        GameObject targetRect = GameObject.Instantiate(new GameObject("Target Rect"), gameObject.transform);
+        GameObject template = new GameObject("Target Rect");
+
+        GameObject targetRect = GameObject.Instantiate(template, gameObject.transform);
+
+        GameObject.Destroy(template);
 
         RectTransform rectTransform = targetRect.AddComponent<RectTransform>();
 
@@ -903,7 +907,7 @@ public class NPCSpawnDetails : OffSetSpawnDetails
 
     public virtual Dialogue getDialogue(string areaName)
     {
-        return DialogueList.getDialogue(npcName, areaName);
+        return DialogueList.getDialogue(areaName, npcName);
     }
 
     public virtual bool interactable()

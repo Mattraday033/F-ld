@@ -92,7 +92,10 @@ public static class DialogueList
                                                         NPCNameList.guardMarcos+1,
                                                         NPCNameList.thatch,
                                                         NPCNameList.kastor+1,
-                                                        NPCNameList.rubble
+                                                        NPCNameList.rubble,
+                                                        NPCNameList.dibber,
+                                                        NPCNameList.dibber+1,
+                                                        NPCNameList.weft
                                                     },
                             Resources.Load<TextAsset>(DialogueNameList.kastorPlanPath)));
 
@@ -114,7 +117,9 @@ public static class DialogueList
                                                         NPCNameList.dibber,
                                                         NPCNameList.dibber+1,
                                                         NPCNameList.kastor,
-                                                        NPCNameList.kastor+4
+                                                        NPCNameList.kastor+4,
+                                                        NPCNameList.kastor+5,
+                                                        NPCNameList.thatch
                                                         },
                             Resources.Load<TextAsset>(DialogueNameList.dibberPath));
 

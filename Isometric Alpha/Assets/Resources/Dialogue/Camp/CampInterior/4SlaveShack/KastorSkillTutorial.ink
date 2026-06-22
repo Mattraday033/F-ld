@@ -74,14 +74,7 @@ The next patch of rubble looks like we could get over it ourselves, but I don't 
 When the guards were trying to patch up this hut before the lockdown, they set up a crank towards the back wall. You should be able to use it to clear us a path while I clamber over the rubble and help from the other side.
 
     +Understood.
-
-    fadeToBlack()
-
-    deactivate({kastorDexIndex})
-    activate({kastorChaIndex})
-
-    fadeBackIn(60)
-        ->Close
+        ->activateDeactivate(kastorChaIndex,kastorDexIndex)
 
 === DEX_1b ===
 
@@ -98,10 +91,10 @@ This next bit of debris is going to be tricky. Trust me, after working in the mi
 
 The rubble in front of us is too large and bulky for the crank. You'll need to get on either side of it and work together to move it without hurting yourselves.
 
-Thatch is much bigger than I am, and you haven't worked a shift yet, so I'm going to 'supervise' while you two get to it. With the two of you working together it should be a breeze.
+Thatch is much bigger than I am, and you haven't worked a shift yet, so you two will do the brunt of the lifting from this side. I'll squeeze through and do what I can from the other.
 
     +On it.
-        ->Close
+        ->activateDeactivate(kastorWisIndex,kastorChaIndex)
 
 === CHA_1b ===
 
@@ -112,17 +105,31 @@ This is nothing compared to working in the mine. Just have each of you stand on 
 
 === WIS_1a ===
 
-WIS PH 1
+activateQuestStep({saveDibberQuestName},Remove the wall patch.)
 
-    +Neat
-        ->Close
+We're almost there. It looks like the collapse that trapped Dibber covers the entire entrance to his bedding. And as I feared, this debris pile is the only thing keeping the central supports from falling apart completely.
+
+To get him out of there, we will need to remove one of the wall patches we installed a few weeks ago. It's the boarded up section of the wall just past that chair, there. Temple is some sort of wizard with boards; he put them up so a smart individual could remove them safely and easily.
+
+->WIS_1b
 
 === WIS_1b ===
 
-WIS PH 2
+When the patch is down, assess how badly hurt Dibber is. I'll be right behind you.
 
-    +Neat
+    +Understood.
         ->Close
+
+=== activateDeactivate(onIndex, offIndex) ===
+
+fadeToBlack()
+
+activate({onIndex})
+deactivate({offIndex})
+
+fadeBackIn(60)
+
+->Close
 
 === Close ===
 

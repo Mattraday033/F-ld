@@ -23,10 +23,10 @@ public static class TestScript
 
         // PartyManager.getPlayerStats().setLevel(1);
         // PartyManager.getPlayerStats().currentHealth = 1;
-        // PartyManager.getPlayerStats().strength = 1;
-        // PartyManager.getPlayerStats().dexterity = 5;
-        // PartyManager.getPlayerStats().wisdom = 5;
-        // PartyManager.getPlayerStats().charisma = 5;
+        PartyManager.getPlayerStats().strength = 5;
+        PartyManager.getPlayerStats().dexterity = 5;
+        PartyManager.getPlayerStats().wisdom = 5;
+        PartyManager.getPlayerStats().charisma = 5;
 
         // PartyManager.addXP(1050);
 
@@ -55,7 +55,7 @@ public static class TestScript
 
         // Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.bronzeHelmetIndex));
 
-        Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.salvagedGuardGlovesIndex));
+        // Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.salvagedGuardGlovesIndex));
 
         // Inventory.addItem(ItemList.getItem(ItemList.armorListIndex, ItemList.clothGlovesIndex));
 

@@ -19,12 +19,14 @@ VAR hangmanIndex = 10
 VAR gasparIndex = 11
 VAR gasparFallingIndex = 12
 
-VAR partyFlagWeft = false
-VAR partyFlagThatch = false
-
 VAR skipTutorialIndex = 0
 VAR intimidateTutorialIndex = 1
 VAR cunningTutorialIndexIndex = 2
+
+VAR partyFlagWeft = false
+VAR partyFlagThatch = false
+
+VAR savedDibber = false
 
 VAR toldByTaborToBuildHouses = false
 VAR acceptedTaborSkillTutorial = false
@@ -62,12 +64,27 @@ You're not allowed in here. Head back the way you came.
 
 In that case, the Chief arrived a short bit ago. Go inside, he should be near the hut under construction directly behind me.
 
-\*This area will provide you with a tutorial on the different Skills your Party can use. If you are already familiar with these Skills, this section can be skipped.*
+\*This section will provide you with a tutorial on the different Skills your Party can use. If you are already familiar with these Skills, this section can be skipped.*
+
+{
+-savedDibber:
+
+\*This section will provide you with a tutorial on the different Skills your Party can use. Everything explained in this tutorial was already covered by a previous tutorial, which you already completed. Would you like to skip it?*
+
+    +\*Skip tutorial.*
+        ->1d
+    +\*Learn about skills.*
+        ->1c
+-else:
+
+\*This section will provide you with a tutorial on the different Skills your Party can use. If you are already familiar with these Skills, this section can be skipped.*
 
     +\*Learn about skills.*
         ->1c
     +\*Skip tutorial.* <Not recommended for first time players>
         ->1d
+
+}
 
 === 1c ===
 

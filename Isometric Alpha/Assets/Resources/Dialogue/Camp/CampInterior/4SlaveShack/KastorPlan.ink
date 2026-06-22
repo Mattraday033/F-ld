@@ -75,6 +75,13 @@ VAR mineLvl3BreachSealed = false
 VAR mineLvl3ToldToFindMarcos = false
 VAR broughtMarcosToGaspar = false
 
+VAR skippedTutorialInNWCamp = false
+VAR finishedTaborObservationTutorial = false
+
+VAR justSavedDibber = false
+
+VAR hadWeftTrustConvo = false
+
 VAR trainedByEmeseToUseBlasingJelly = false
 
 VAR explainingPlan = false
@@ -83,6 +90,9 @@ VAR backTo3c = false
 VAR aboutToStartRevolt = false
 
 VAR restAfterDeactivatingExtras = false
+
+VAR partyFlagWeft = false
+VAR partyFlagThatch = false
 
 VAR deathFlagBálint = false
 VAR deathFlagImre = false
@@ -103,6 +113,9 @@ VAR marcosSleepingIndex = 5
 VAR thatchIndex = 6
 VAR kastorStrTutorialIndex = 7
 VAR tutorialRubbleIndex = 8
+VAR dibberIndex = 9
+VAR dibberSavedIndex = 10
+VAR weftIndex = 11
 
 VAR itemTutorialKey = "Item Tutorial"
 VAR mapTutorialKey = "Quest Counter Tutorial"
@@ -134,6 +147,16 @@ searchInventoryFor(hasToolBundle,Tool Bundle)
 ->chooseConvoStart
 
 === chooseConvoStart ===
+
+{
+-partyFlagWeft and gaveKastorThePassword and not hadWeftTrustConvo:
+    ->weftTrustConvo_1a
+}
+
+{
+    -justSavedDibber:
+        ->T2b
+}
 
 {
 -!kastorStartedRevolt && kastorReactedToHostility:
@@ -197,6 +220,160 @@ searchInventoryFor(hasToolBundle,Tool Bundle)
     setToTrue(metKastor)
     ->1a
 }
+
+=== weftTrustConvo_1a ===
+
+fadeToBlack(true,false)
+
+setToTrue(hadWeftTrustConvo)
+
+movePlayerPos(9,14)
+setFacing(NE)
+setNPCFacing({kastorIndex},SW)
+activate({weftIndex})
+
+{
+-partyFlagThatch:
+activate({thatchIndex})
+}
+
+fadeBackIn(60)
+
+You're back. And you've brought... *Kastor regards Weft with a look of disgust* ... company.
+
+->weftTrustConvo_1aa
+
+=== weftTrustConvo_1aa ===
+
+*Kastor, this is Weft. Weft, Kastor. Or have you met?
+    changeCamTarget({weftIndex})
+    We are acquainted.
+    changeCamTarget({kastorIndex})
+    Unfortunately. Why did you bring him here?
+    ->weftTrustConvo_1aa
++He's my new hutmate. We work together now, so it would be suspicious if I was seen without him.
+    ->weftTrustConvo_1b
+
+=== weftTrustConvo_1b ===
+
+changeCamTarget({kastorIndex})
+
+I understand your logic, but this presents a problem. He can't be trusted. Even having this conversation in front of him without details is enough to put us at risk.
+
+changeCamTarget({weftIndex})
+
+Hold on a moment. What's going on? I didn't mean to intrude on something.
+
++What are you suggesting?
+    ->weftTrustConvo_1c
+
+=== weftTrustConvo_1c ===
+
+changeCamTarget({kastorIndex})
+
+He has to dealt with. He's seen too much.
+
+changeCamTarget({weftIndex})
+
+// setNPCFacing({weftIndex},NW)
+
+Wait, please! Can't we talk about this? I just followed {playerName} in here, I didn't know what they were meeting you for! I still don't and I never have to!
+
++Either of those options gives us less time to enact the plan. He's too well known and useful to the guards. They will come looking for him eventually.
+    ->weftTrustConvo_1d
+
+=== weftTrustConvo_1d ===
+
+changeCamTarget({kastorIndex})
+
+You're right, but we have to do something. He's the least trustworthy branded in this entire camp.
+
+changeCamTarget({weftIndex})
+setNPCFacing({weftIndex},NW)
+
+Would someone please tell me what's going on!
+
+->weftTrustConvo_1e
+
+=== weftTrustConvo_1e ===
+
+VAR silencedWeft = false
+
+{
+-partyFlagThatch and not silencedWeft:
+    *Thatch, shut him up. I can't think with him whining.
+        ~silencedWeft = true
+        changeCamTarget({thatchIndex})
+        setNPCFacing({thatchIndex},NW)
+        Are you going to be quiet or will I have to make you?
+        setNPCFacing({weftIndex},SE)
+        changeCamTarget({weftIndex})
+        \*Weft says nothing in mute terror.*
+        changeCamTarget({thatchIndex})
+        Good choice.
+        ->weftTrustConvo_1e
+-strength > 2 and not silencedWeft:
+    *\*Crack your knuckles.* Weft, if you don't let the adults talk you're gonna to be put down for a nap. <Str {strength}/2>
+        ~silencedWeft = true
+        \*Weft goes pale and stops talking.*
+        ->weftTrustConvo_1e
+}
+    +Couldn't we tie him up and keep him somewhere?
+        changeCamTarget({kastorIndex})
+        Where? A guard could walk in here at any moment and put me on a work detail, and then where would we be? No, it has to be a permanent solution.
+        ->weftTrustConvo_1e
+    +I'm not killing him. He has to follow me around, I'll keep an eye on him.
+        ->Close
+    +It's unfortunate, but the smart choice is to kill him.
+        ->weftTrustConvo_1f
+
+=== weftTrustConvo_1f ===
+
+setFacing(SE)
+changeCamTarget({weftIndex})
+setNPCFacing({weftIndex},NW)
+
+\*Tears begin to stream down Weft's face. He gets on his knees and grabs at your clothes pleadingly.* Please, please, don't kill me! Please, I can be helpful to you. I won't tell anyone about whatever this is about, I just want to live! Please!
+
+    +\*Look to Kastor.* My heart's not in it anymore. Maybe we should let him live?
+        ->weftTrustConvo_1fa
+    +Save your tears for the Gods, Weft. It'll make this easier for everyone.
+        ->killWeft
+
+=== weftTrustConvo_1fa ===
+
+setFacing(NE)
+changeCamTarget({kastorIndex})
+\*Kastor looks at Weft pityingly.* I'm not so heartless that I enjoy this. But think of the lives he puts in jeopary. We make this decision not for ourselves, but an entire camp full of branded.
+
+changeCamTarget({weftIndex})
+
+\*Weft continues to cling to you and sob.*
+
+    +I'm not killing a fellow branded. We'll just have to keep an eye on him.
+        ->Close
+    +You're right. I'm sorry, Weft.
+        ->killWeft
+
+=== killWeft ===
+
+Guards! Anyone! Help me!
+
+changeCamTarget({weftIndex})
+execute({weftIndex})
+
+changeCamTarget({kastorIndex})
+
+It was a hard choice, but the right one. We'll all be safer after what we've just done.
+
+fadeToBlack()
+
+removeFromParty({weftIndex})
+deactivate({thatchIndex})
+
+fadeBackIn()
+
+->Close
 
 === HR_BroughtNandorToKastor ===
 
@@ -830,9 +1007,6 @@ May his hearth keep him warm, then. But we must mourn the lost in stride, there 
 
 === T2a ===
 
-setToTrue(duringKastorSkillTutorial)
-activateQuestStep(Save Dibber!,Follow Kastor.)
-
 You have succeeded in your first task, and that is promising. But I have another that will test your ability to work as a team. I need to know you can depend on each other before I trust you with the lives of our comrades.
 
 A storm struck the camp a few days ago, and its winds collapsed a portion of this hut. Before the lockdown the guards attempted to make repairs, but that was put on hold after the mine was shut down. 
@@ -841,7 +1015,32 @@ Last night, more of the hut crumbled and trapped my hutmate, Dibber, in the debr
 
 The guards during this morning's inspection found this more humorous than pressing, so it's up to us to free Dibber. I will clear some of the debris, but you will have to finish the rest. And be careful. I have heard other noises among the rubble. Some bats may have been trapped by the collapse as well.
 
+{
+-finishedTaborObservationTutorial or skippedTutorialInNWCamp:
+
+\*This section will provide you with a tutorial on the different Skills your Party can use. Everything explained in this tutorial was already covered by a previous tutorial, which you already completed. Would you like to skip it?*
+
+    +\*Skip tutorial.*
+        ->skipTutorial
+    +\*Learn about skills.*
+        ->startTutorial
+-else:
+
+\*This section will provide you with a tutorial on the different Skills your Party can use. If you are already familiar with these Skills, this section can be skipped.*
+
+    +\*Learn about skills.*
+        ->startTutorial
+    +\*Skip tutorial.* <Not recommended for first time players>
+        ->skipTutorial
+
+}
+
+=== startTutorial ===
+
 fadeToBlack()
+
+setToTrue(duringKastorSkillTutorial)
+activateQuestStep(Save Dibber!,Follow Kastor.)
 
 deactivate({kastorIndex})
 deactivate({thatchIndex})
@@ -851,12 +1050,30 @@ revealNonDefeatedEnemies()
 
 fadeBackIn(60)
 
-->Close
+    ->Close
+
+=== skipTutorial ===
+
+fadeToBlack(true,false)
+
+setToTrue(savedDibber)
+
+deactivate({dibberIndex})
+activate({dibberSavedIndex})
+
+fadeBackIn(60)
+    ->T2b
+
+=== T2b ===
+
+The two of you appear capable enough as a team, and I am thankful to you both for helping me save Dibber. His faculties haven't returned to him yet, but I know he would express his gratitude to you if he could.
+
+    ->2f
 
 === 2f ===
 ~explainingPlan = true
 
-You performed well, and have earned my trust. You are now the lynchpin of the entire plan. Without you, the scattered pieces of our conspiracy cannot communicate. Take care not to bring attention to yourself, or else you will jeopardize everything.
+You performed well, and have earned my trust. You are now the lynchpin of the entire plan. Without you, the scattered pieces of our conspiracy cannot communicate. Take care not to bring attention to yourselves, or else you will jeopardize everything.
 
     +Understood.
         ->2h
@@ -1130,7 +1347,6 @@ For this, you'll need to speak to Ervin in the hut directly across the street fr
 
 The next thing we must do is arm ourselves. The guards protect the keys to their armory well, of course, but the mine's closing affords us a rare opportunity. There is another armory within the mine, and I doubt the guards had time to raid it before they evacuated.
 
-
 I gave the job of obtaining a key to the armory to Janos. He lives in the hut to the west of Brush's. Originally, he was supposed to acquire the key to the armory within the guardhouse. Inform him that the plan has changed and work with him to obtain the mine armory's key.
 
 {
@@ -1188,9 +1404,16 @@ activateQuestStep(The Plan, Help the cells.)
 ~gotThePlanFromKastor = true
 
 {
-- broughtNandorToKastor:
+-broughtNandorToKastor:
     ->deactivateExtras
 -else:
+
+fadeToBlack()
+
+deactivate({thatchIndex})
+
+fadeBackIn(60)
+
     ->Close
 }
 
@@ -1210,6 +1433,8 @@ You're back. Were you successful?
         ->keepDialogueB4HutSizeExplanation(->3a)
     +Tell me about what happened to the mine.
         ->mineExplanationDisclaimer(true,->3a)
+    +\*Leave.*
+        ->Close
 
 === 3b ===
 
@@ -2567,6 +2792,8 @@ deactivate({carterIndex})
     ~restAfterDeactivatingExtras = false
     restParty()
 }
+
+deactivate({thatchIndex})
 
 fadeBackIn(60,false)
 

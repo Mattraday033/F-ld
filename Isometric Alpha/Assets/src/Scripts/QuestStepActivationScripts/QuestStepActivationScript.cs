@@ -143,7 +143,6 @@ public class KastorObservationTutorialScript : QuestStepActivationScript
 {
     public override void runScript(GameObject target = null)
     {
-
         if(!Flags.getFlag(FlagNameList.finishedKastorObservationTutorial))
         {
             Flags.setFlag(FlagNameList.finishedKastorObservationTutorial, true);
@@ -151,7 +150,7 @@ public class KastorObservationTutorialScript : QuestStepActivationScript
 
             NotificationManager.preventSkipNextNotificationSpawn();
 
-            QuestList.activateQuestStep(QuestNameList.chiefTaborQuestTitle, QuestNameList.chiefTaborStepTitleTen);
+            QuestList.activateQuestStep(QuestNameList.saveDibberQuestTitle, QuestNameList.saveDibberStepTitleEight);
             NotificationManager.ManualNotificationSpawn.Invoke();
         }
     }

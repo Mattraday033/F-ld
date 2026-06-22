@@ -102,7 +102,7 @@ public static class TutorialMessageList
         tutorialDictionary.Add(leadershipTutorialMessagePrefix + 1, "Your path is blocked. Some obstacles can be removed by pressing buttons. If someone in your Party has put points in Charisma, then you can use the Leadership skill to tell Party Members to stand on buttons. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to move on to the button.");
         tutorialDictionary.Add(leadershipTutorialMessagePrefix + 3, "Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to place a follower.");
         tutorialDictionary.Add(leadershipTutorialMessagePrefix + 4, "You follower has been placed. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to move off of the button and reveal your follower.");
-        tutorialDictionary.Add(leadershipTutorialMessagePrefix + 5, "Your follower is now holding down the first button. You can't move through placed followers, but neither can enemies. Remove followers by pressing <nobr>' " + keyCodePlaceHolder + " '</nobr> while facing them.");
+        tutorialDictionary.Add(leadershipTutorialMessagePrefix + 5, "Your follower is now holding down the first button. You can't move through placed followers, but neither can enemies. Remove followers by pressing <nobr>' " + returnObjectKeyCodePlaceHolder + " '</nobr> while facing them.");
         tutorialDictionary.Add(leadershipTutorialMessagePrefix + 6, "Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to move to the second button.");
 
         tutorialDictionary.Add(equippableItemTutorialMessagePrefix + 1, "You have been given some equipment. Click the Inventory button, or press <nobr>' " + keyCodePlaceHolder + " '</nobr>");
@@ -203,6 +203,7 @@ public static class TutorialMessageList
 
         switch(key)
         {
+            case leadershipTutorialMessagePrefix + "5":
             case movableObjectTutorialMessagePrefix + "3":
                 message = message.Replace(returnObjectKeyCodePlaceHolder, KeyBindingList.removePlacedCompanionMovableObjectKey.ToString());
                 break;

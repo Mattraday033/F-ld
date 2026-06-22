@@ -1510,6 +1510,8 @@ public class DialogueManager : MonoBehaviour
 
                     currentConversation.addLeftPartyLine(partyMemberName);
 
+                    PartyMemberTrainManager.createPartyMemberTrain();
+
                     continueStory();
 
                     break;

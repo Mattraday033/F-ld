@@ -63,12 +63,16 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(10, 15), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.carter, new Vector3Int(11, 15), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMarcos+1, new Vector3Int(11, 17), LocationNameList.slaveShackFour, facing: Facing.SouthEast, animationType: CharacterAnimationType.Death_Back, offset: Constants.onTableHeightOffset*-2f));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.bed, new Vector3Int(11, 17), PrefabNames.slaveBed, offset: Constants.onTableHeightOffset*-3f, flipX: false, ignoresSecretDoors: false)); 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(9, 12), facing: Facing.NorthEast));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(9, 13), facing: Facing.NorthEast));
 
         list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble, new Vector3Int(9, 4), PrefabNames.tutorialRubble));
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.dibber, new Vector3Int(7, 17), LocationNameList.slaveShackFour, facing: Facing.SouthWest));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.dibber+1, new Vector3Int(11, 7), LocationNameList.slaveShackFour, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.dibber, new Vector3Int(7, 17), LocationNameList.slaveShackFour, animationType: CharacterAnimationType.Death_Back_Weaponless, facing: Facing.SouthWest));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.bed, new Vector3Int(11, 3), PrefabNames.slaveBed, offset: Constants.onTableHeightOffset*-3f, flipX: false, ignoresSecretDoors: false)); 
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.dibber+1, new Vector3Int(11, 3), LocationNameList.slaveShackFour, animationType: CharacterAnimationType.Death_Back_Weaponless, facing: Facing.SouthWest, offset: Constants.onTableHeightOffset*-2.1f, sleepingDialogueIntro: true));        
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.kastor+5, new Vector3Int(6, 17), facing: Facing.NorthEast));
 
         #region Str Tutorial
 
@@ -99,9 +103,9 @@ public static class OOCSpawnDetailsList
         #endregion
         #region Wis Tutorial
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor+4, new Vector3Int(1, 7), LocationNameList.slaveShackFour, facing: Facing.NorthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor+4, new Vector3Int(2, 12), LocationNameList.slaveShackFour, facing: Facing.NorthEast));
 
-        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(2, 12), TutorialSequenceList.observationTutorialSequenceKey,
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(2, 17), TutorialSequenceList.observationTutorialSequenceKey,
                                                                           TutorialSequenceList.observationTutorialSeenFlag));
         #endregion
         #region Cha Tutorial

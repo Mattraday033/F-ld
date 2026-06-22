@@ -36,7 +36,15 @@ public class SaveHandler : ScreenManager, IEscapable
     public SaveBlueprint currentSaveFile;
 
 	private static SaveHandler instance;
-	
+
+	private static void deselectCurrentGameObject(IDescribable blueprint)
+	{
+		if (EventSystem.current != null)
+		{
+			EventSystem.current.SetSelectedGameObject(null);
+		}
+	}
+
 	public static SaveHandler getInstance()
 	{
 		return instance;
@@ -628,5 +636,6 @@ public class SaveHandler : ScreenManager, IEscapable
         instance = null;
 
         LoadSaveFile.OnLoadResetData.AddListener(createSavedGameListSkipInvoke);
+		OnSaveCreated.AddListener(deselectCurrentGameObject);
     }
 }

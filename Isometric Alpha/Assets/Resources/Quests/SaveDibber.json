@@ -6,11 +6,11 @@
                 {"stepName":"Return to Kastor.1","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"<B>I should speak to Kastor again farther inside the rubble.</B>"},
                 {"stepName":"Use the crank.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"<B>Use the Crank next to the unfinished shack in the northwest corner of the camp.</B>"},
                 {"stepName":"Return to Kastor.2","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"<B>I should speak to Kastor again farther inside the rubble.</B>"},
-                {"stepName":"Clear the rubble.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"<B>Have two Party Members stand on the two buttons clear the rubble.</B>"},
+                {"stepName":"Clear the rubble.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"<B>Have two Party Members stand on each of the buttons to clear the rubble.</B>"},
                 {"stepName":"Return to Kastor.3","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"<B>I should speak to Kastor again farther inside the rubble.</B>"},
                 {"stepName":"Remove the wall patch.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"<B>Remove the wall patch between Kastor and Dibber to progress further through the rubble.</B>"},
                 {"stepName":"Rescue Dibber.","MapZone":"Camp","MapLocation":"4SlaveShack","journalDescription":"<B>I should speak to Dibber to let him know he is safe.</B>"},
-                {"stepName":"Dibber is safe.","MapZone":"","MapLocation":"","journalDescription":"I rescued Dibber, and he was very grateful."}
+                {"stepName":"Dibber is safe.","MapZone":"","MapLocation":"","journalDescription":"I rescued Dibber, but he's very hurt. It is yet to be seen if he will recover."}
             ],
 
 
