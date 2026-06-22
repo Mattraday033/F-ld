@@ -16,6 +16,7 @@ public static class PartyMemberTrainManager
         MovementManager.OnMoveStarted.AddListener(showPartyMemberTrain);
 
         PlayerOOCStateManager.OnStateChangeToInDialogue.AddListener(createPartyMemberTrain);
+        PlayerOOCStateManager.OnStateChangeFromInDialogue.AddListener(destroyPartyMemberTrainIfAreaIsHostile);
 
         PartyMemberPlacer.OnPartyMemberPlaced.AddListener(createPartyMemberTrain);
         PartyMemberPlacer.OnPartyMemberRemoved.AddListener(createPartyMemberTrain);
@@ -74,6 +75,14 @@ public static class PartyMemberTrainManager
         }
 
         hidePartyMemberTrain();
+    }
+
+    public static void destroyPartyMemberTrainIfAreaIsHostile()
+    {
+        if(AreaList.currentAreaIsHostile())
+        {
+            destroyPartyMemberTrain();
+        }
     }
 
     public static bool cannotCreateTrainInArea()

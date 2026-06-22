@@ -212,7 +212,6 @@ public class SkillButtonManager : MonoBehaviour
         }
     }
 
-
     private static void useIntimidate()
     {
         if(!hasSkill(SkillType.Intimidate))

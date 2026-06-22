@@ -55,6 +55,11 @@ public class NPCMouseHover : MonoBehaviour
 
     private void OnMouseExit()
     {
+        if(PlayerOOCStateManager.currentActivity == OOCActivity.inTutorialSequence)
+        {
+            return;            
+        }
+
         foreach(IRevealable revealable in revealables)
         {
             if(revealable == null)

@@ -141,9 +141,30 @@ public static class SpawnParamsList
                                                                                             FlagNameList.duringKastorSkillTutorial }), spawnWhileHostile: spawnWhileHostile));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackFour, NPCNameList.kastor+1),
-                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[]{ FlagNameList.startedKastorIntimidateTutorial}),
+                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[]{ FlagNameList.duringKastorSkillTutorial}),
                                                             stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
                                                                                             FlagNameList.finishedKastorIntimidateTutorial,
+                                                                                            FlagNameList.directorDefeated,
+                                                                                            FlagNameList.revoltStarted }), spawnWhileHostile: spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackFour, NPCNameList.kastor+2),
+                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[]{ FlagNameList.finishedKastorIntimidateTutorial}),
+                                                            stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                            FlagNameList.finishedKastorCunningTutorial,
+                                                                                            FlagNameList.directorDefeated,
+                                                                                            FlagNameList.revoltStarted }), spawnWhileHostile: spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackFour, NPCNameList.kastor+3),
+                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[]{ FlagNameList.finishedKastorCunningTutorial}),
+                                                            stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                            FlagNameList.finishedKastorLeadershipTutorial,
+                                                                                            FlagNameList.directorDefeated,
+                                                                                            FlagNameList.revoltStarted }), spawnWhileHostile: spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackFour, NPCNameList.kastor+4),
+                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[]{ FlagNameList.finishedKastorLeadershipTutorial}),
+                                                            stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                            FlagNameList.finishedKastorObservationTutorial,
                                                                                             FlagNameList.directorDefeated,
                                                                                             FlagNameList.revoltStarted }), spawnWhileHostile: spawnWhileHostile));
 

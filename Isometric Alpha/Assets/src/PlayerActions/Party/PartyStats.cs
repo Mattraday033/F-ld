@@ -296,7 +296,7 @@ public static class PartyStats
     #region Skills
 
     [RuntimeInitializeOnLoadMethod]
-    public static void OnStartUp()
+    public static void init()
     {
         TransitionManager.BeforeTransition.AddListener(resetAllSkills);
     }
@@ -305,16 +305,27 @@ public static class PartyStats
     {
         IntimidateManager.resetIntimidatesRemaining();
         CunningManager.resetCunningsRemaining();
+        PartyMemberPlacer.removeAllPlacedPartyMembers();
     }
 
     public static bool inTutorialArea()
     {
-        return AreaManager.locationName != null && 
-            AreaManager.locationName.Equals(LocationNameList.campNorthWest);
+        switch(AreaManager.locationName)
+        {
+            case LocationNameList.campNorthWest:
+            case LocationNameList.slaveShackFour:
+                return true;
+            default:
+                return false;
+        }
     }
 
     public static int getMaxIntimidateCount()
     {
+        if(allowSkillsForTutorial())
+        {
+            return 1;
+        }
 
         int playerStrength = getHighestStrength();
 
@@ -324,18 +335,13 @@ public static class PartyStats
         }
         else
         {          
-            if(inTutorialArea() && Flags.getFlag(FlagNameList.startedTaborIntimidateTutorial))
-            {
-                return 1;
-            }
-
             return 0;
         }
     }
 
     public static int getMaxCunningCount()
     {
-        if(inTutorialArea())
+        if(allowSkillsForTutorial())
         {
             return 2;
         }
@@ -379,15 +385,15 @@ public static class PartyStats
 
     public static int getObservationLevel()
     {
+        if(allowSkillsForTutorial())
+        {
+            return 2;
+        }
+
         int playerWisdom = getHighestWisdom();
 
         if (playerWisdom < 2)
         {
-            if(inTutorialArea() && Flags.getFlag(FlagNameList.startedTaborObservationTutorial))
-            {
-                return 2;
-            }
-
             return 0;
         }
         else
@@ -398,6 +404,11 @@ public static class PartyStats
 
     public static int getMaxPlacablePartyMembers()
     {
+
+        if(allowSkillsForTutorial())
+        {
+            return 1;
+        }
 
         int playerCharisma = getHighestCharisma();
         int skillLevelFromCharisma;
@@ -416,15 +427,17 @@ public static class PartyStats
         }
         else
         {
-            if(inTutorialArea() && Flags.getFlag(FlagNameList.startedTaborLeadershipTutorial))
-            {
-                return 1;
-            }
-
             return 0;
         }
 
         return skillLevelFromCharisma;
+    }
+
+    private static bool allowSkillsForTutorial()
+    {
+        return inTutorialArea() && 
+                ((Flags.getFlag(FlagNameList.acceptedTaborSkillTutorial) && !Flags.getFlag(FlagNameList.finishedTaborObservationTutorial)) || 
+                Flags.getFlag(FlagNameList.duringKastorSkillTutorial));
     }
 
     public static bool hasMoreThanOneSkill()

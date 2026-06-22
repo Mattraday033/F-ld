@@ -80,7 +80,7 @@ public static class OOCSpawnDetailsList
         #endregion
         #region Dex Tutorial
         
-        // list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor+2, new Vector3Int(4, 6), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor+2, new Vector3Int(4, 6), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(1, 6), TutorialSequenceList.secondCunningTutorialSequenceKey,
                                                                           TutorialSequenceList.secondCunningTutorialSeenFlag,
@@ -91,23 +91,22 @@ public static class OOCSpawnDetailsList
                  {
                     new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator+1, new Vector3Int(2, 9), PrefabNames.tutorialRubble),
                     new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator+1, new Vector3Int(1, 8), PrefabNames.tutorialRubble),
-                    new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator+1, new Vector3Int(2, 8), PrefabNames.tutorialRubble),
-                    new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator+1, new Vector3Int(1, 9), PrefabNames.tutorialRubble)
+                    new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator+1, new Vector3Int(2, 8), PrefabNames.tutorialRubble)
                  },
-                 script: new TaborCunningTutorialScript(), //needs to change script
+                 script: new KastorCunningTutorialScript(),
                  tutorialTargetHash: TutorialSequenceList.tutorialCunningObjectTargetHash));
 
         #endregion
         #region Wis Tutorial
 
-        // list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor+4, new Vector3Int(1, 7), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor+4, new Vector3Int(1, 7), LocationNameList.slaveShackFour, facing: Facing.NorthWest));
 
-        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(3, 17), TutorialSequenceList.observationTutorialSequenceKey,
+        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(2, 12), TutorialSequenceList.observationTutorialSequenceKey,
                                                                           TutorialSequenceList.observationTutorialSeenFlag));
         #endregion
         #region Cha Tutorial
 
-        // list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor+3, new Vector3Int(1, 10), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.kastor+3, new Vector3Int(1, 9), LocationNameList.slaveShackFour, facing: Facing.SouthEast));
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(2, 10), tutorialTargetHash: TutorialSequenceList.tutorialButtonOneTargetHash));
         list.Add(new ButtonSpawnDetails(new Vector3Int(4, 10), tutorialTargetHash: TutorialSequenceList.tutorialButtonTwoTargetHash));

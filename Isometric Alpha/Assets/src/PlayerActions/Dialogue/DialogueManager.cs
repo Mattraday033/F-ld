@@ -625,6 +625,17 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
+                case "replenishskills":
+                case "replenishallskills":
+                case "resetskills":
+                case "resetallskills":
+
+                    PartyStats.resetAllSkills();
+
+                    continueStory();
+
+                    break;
+
                 case "addsecretdoorflag":
 
                     string secretDoorKey = getArgument(buffer);

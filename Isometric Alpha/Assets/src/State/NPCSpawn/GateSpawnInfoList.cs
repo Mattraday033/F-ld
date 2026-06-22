@@ -31,7 +31,7 @@ public static class GateSpawnInfoList
 
         list.Add(new GateSpawnInfo(Constants.indexZero,
                                     NPCNameList.awkwardRubble,
-                                    LocationNameList.slaveShackSix,
+                                    LocationNameList.slaveShackFour,
                                     new Vector3Int(4, 11),
                                     PrefabNames.blockRubble,
                                     Constants.sizeTwo,

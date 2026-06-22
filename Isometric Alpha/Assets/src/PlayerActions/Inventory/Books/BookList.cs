@@ -241,7 +241,7 @@ public static class BookList
 			case pitSecondEntranceNoteKey:
 				return "With the riot going on, all work has ceased on this section of the Manse. We should bar the doors to this area, it's dangerous in here. Oszkár was up on the second floor when he slipped and fell. Someone found his body all the way down in the Pit: there wasn't much left of him to scrape off the stones.";
 			case pitClosureNoteKey:
-				return "The Pit's warden has been saying he's been hearing movement down in the Pit, and it's not the slaves. No one's seen anything, but we're all on edge after what happened in the mine. With the slaves rioting upstairs, the warden ordered this section sealed up incase the worms managed to break in. " +
+				return "The Pit's warden has been saying he's been hearing movement down in the Pit, and it's not the slaves. No one's seen anything, but we're all on edge after what happened in the mine. With the slaves rioting upstairs, the warden ordered this section sealed up in case the worms managed to break in. " +
 						"Not sure whats going on up there: I've been stuck down here watching for worms for a while, and no one's come to relieve me yet.";
 			case directorsJournalOneKey:
 				return  directorsJournalDisclaimer +

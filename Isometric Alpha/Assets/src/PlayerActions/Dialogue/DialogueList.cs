@@ -886,7 +886,7 @@ public static class DialogueList
                                 Resources.Load<TextAsset>(DialogueNameList.taborObservationTutorialPath)));
 
 
-        addDialogueToList(LocationNameList.campNorthWest, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
+        // addDialogueToList(LocationNameList.campNorthWest, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
         addDialogueToList(LocationNameList.campNorthWest, NPCNameList.wallPatch, wallPatchDialogue);
 
         addDialogueToList(LocationNameList.campNorthWest, NPCNameList.chiefTabor+5,
@@ -902,7 +902,7 @@ public static class DialogueList
 
         #region MineLvl_1
 
-        addDialogueToList(ZoneKeyList.mineLvl1 + LocationNameList.section1b, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
+        // addDialogueToList(ZoneKeyList.mineLvl1 + LocationNameList.section1b, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
 
         addDialogueToList(ZoneKeyList.mineLvl1 + LocationNameList.section1c, NPCNameList.liftableGate, liftableGateDialogue);
 
@@ -951,8 +951,8 @@ public static class DialogueList
                                                                                   new Dialogue(new string[] { NPCNameList.mineArmoryGate },
                                                                                   Resources.Load<TextAsset>(DialogueNameList.mineArmoryGatePath)));
 
-        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section3a, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
-        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section3a, NPCNameList.awkwardRubble + 1, awkwardRubbleDialogue);
+        // addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section3a, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
+        // addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section3a, NPCNameList.awkwardRubble + 1, awkwardRubbleDialogue);
 
         addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section3b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
         addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section3b, NPCNameList.liftableGate + 1, liftableGateDialogue);
@@ -964,7 +964,7 @@ public static class DialogueList
         addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section7a, NPCNameList.ancientPortcullis + 2, ancientPortcullisDialogue);
         addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section7a, NPCNameList.ancientPortcullis + 3, ancientPortcullisDialogue);
 
-        addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section7b, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
+        // addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section7b, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
         addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section7b, NPCNameList.ancientPortcullis + 1, ancientPortcullisDialogue);
         addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section7b, NPCNameList.liftableGate + 2, liftableGateDialogue);
 
@@ -1377,6 +1377,11 @@ public static class DialogueList
 
     public static Dialogue getDialogue(string areaName, string npcName)
     {
+        if(getDialogueBasedOffNPCName(npcName, out Dialogue nameSpecificDialogue))
+        {
+            return nameSpecificDialogue;
+        }
+
         string key = areaName + npcName;
         key = key.Replace(" ", "");
 
@@ -1396,6 +1401,19 @@ public static class DialogueList
         }
 
         return dialogue;
+    }
+
+    private static bool getDialogueBasedOffNPCName(string npcName, out Dialogue nameSpecificDialogue)
+    {
+        switch(scrubNameOfEndNumbers(npcName))
+        {
+            case NPCNameList.awkwardRubble:
+                nameSpecificDialogue = awkwardRubbleDialogue;
+                return true;
+            default:
+                nameSpecificDialogue = null;
+                return false;
+        }
     }
 
     public static Dialogue getDialogue(string key)

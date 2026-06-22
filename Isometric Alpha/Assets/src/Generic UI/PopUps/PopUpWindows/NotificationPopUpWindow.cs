@@ -19,7 +19,7 @@ public class NotificationPopUpWindow : PageReaderPopUpWindow
     {
         if (instance != null)
         {
-            DestroyImmediate(this);
+            DestroyImmediate(instance.gameObject);
         }
 
         instance = this;
@@ -54,10 +54,10 @@ public class NotificationPopUpWindow : PageReaderPopUpWindow
 
     private void OnDestroy()
     {
-        //if (popupProgenitor != null)
-        //{
-        NotificationManager.OnDeleteAllNotifications.RemoveListener(popupProgenitor.destroyPopUp);
-        //}
+        if (popupProgenitor != null)
+        {
+            NotificationManager.OnDeleteAllNotifications.RemoveListener(popupProgenitor.destroyPopUp);
+        }
     }
 
 	public override void closeButtonPress()

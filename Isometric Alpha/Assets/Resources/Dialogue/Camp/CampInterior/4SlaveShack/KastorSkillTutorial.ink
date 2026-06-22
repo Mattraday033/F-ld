@@ -47,6 +47,7 @@ VAR saveDibberQuestName = "Save Dibber!"
 
 === STR_1a ===
 
+setToTrue(startedKastorIntimidateTutorial)
 activateQuestStep({saveDibberQuestName},Kill the bats.)
 
 As I suspected, our path is blocked by a group of bats. I've fought a few during my time in the mines, they can be nasty in a scrap. But you'll have to face far worse before we are free.
@@ -57,35 +58,56 @@ As I suspected, our path is blocked by a group of bats. I've fought a few during
 
 When you're ready, approach the bats with caution. I will observe how you and Thatch handle this.
 
-    +Neat
+    +On it.
         ->Close
 
 === DEX_1a ===
 
-DEX PH 1
+resetAllSkills()
+setToTrue(startedKastorCunningTutorial)
+activateQuestStep({saveDibberQuestName},Use the crank.)
 
-    +Neat
+Good work with those bats. I'm glad to see you two can work together in a fight. 
+
+The next patch of rubble looks like we could get over it ourselves, but I don't know what state Dibber is in. We'll want this rubble moved in case we have to carry him out.
+
+When the guards were trying to patch up this hut before the lockdown, they set up a crank towards the back wall. You should be able to use it to clear us a path while I clamber over the rubble and help from the other side.
+
+    +Understood.
+
+    fadeToBlack()
+
+    deactivate({kastorDexIndex})
+    activate({kastorChaIndex})
+
+    fadeBackIn(60)
         ->Close
 
 === DEX_1b ===
 
-DEX PH 2
+Use the crank to clear the rubble out of the way so we can get Dibber out of there.
 
-    +Neat
-        ->Close
+    ->Close
 
 === CHA_1a ===
 
-CHA PH 1
+setToTrue(startedKastorLeadershipTutorial)
+activateQuestStep({saveDibberQuestName},Clear the rubble.)
 
-    +Neat
+This next bit of debris is going to be tricky. Trust me, after working in the mine for months you acquire a knack for these things.
+
+The rubble in front of us is too large and bulky for the crank. You'll need to get on either side of it and work together to move it without hurting yourselves.
+
+Thatch is much bigger than I am, and you haven't worked a shift yet, so I'm going to 'supervise' while you two get to it. With the two of you working together it should be a breeze.
+
+    +On it.
         ->Close
 
 === CHA_1b ===
 
-CHA PH 2
+This is nothing compared to working in the mine. Just have each of you stand on opposite sides of the rubble and take one chunk down at a time.
 
-    +Neat
+    +\*Leave*
         ->Close
 
 === WIS_1a ===

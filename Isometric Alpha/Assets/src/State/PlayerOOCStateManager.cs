@@ -22,7 +22,8 @@ public enum OOCActivity {
                             inWorldMap = 15,
                             inFade = 16,
                             preCombat = 17,
-                            Defeat = 18
+                            Defeat = 18,
+                            Loading = 19
 						};
 //class OOCPlayer
 public static class PlayerOOCStateManager
@@ -37,6 +38,7 @@ public static class PlayerOOCStateManager
 
     
     public readonly static UnityEvent OnStateChangeToInDialogue = new UnityEvent();
+    public readonly static UnityEvent OnStateChangeFromInDialogue = new UnityEvent();
 
     public readonly static UnityEvent OnStateChangeToInUI = new UnityEvent();
     public readonly static UnityEvent OnStateChangeFromInUI = new UnityEvent();
@@ -124,6 +126,7 @@ public static class PlayerOOCStateManager
                 OnStateChangeFromWalking.Invoke();
                 break;
             case OOCActivity.inDialogue:
+                OnStateChangeFromInDialogue.Invoke();
                 break;
             case OOCActivity.inUI:
                 OnStateChangeFromInUI.Invoke();
@@ -155,6 +158,8 @@ public static class PlayerOOCStateManager
             case OOCActivity.inWorldMap:
                 break;
             case OOCActivity.Defeat:
+                break;
+            case OOCActivity.Loading:
                 break;
         }
 
@@ -206,6 +211,8 @@ public static class PlayerOOCStateManager
                 OnStateChangeToInWorldMap.Invoke();
                 break;
             case OOCActivity.Defeat:
+                break;
+            case OOCActivity.Loading:
                 break;
         }
 

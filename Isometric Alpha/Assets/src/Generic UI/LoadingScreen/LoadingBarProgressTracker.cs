@@ -67,6 +67,7 @@ public class LoadingBarProgressTracker : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        PlayerOOCStateManager.setCurrentActivity(OOCActivity.Loading);
     }
 
     private void Start()
@@ -76,6 +77,7 @@ public class LoadingBarProgressTracker : MonoBehaviour
 
     private void OnDestroy()
     {
+        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
         HeartBeatManager.MediumHeartBeat.RemoveListener(animateProtagRunSprite);
         runFrontSprites = null;
         loadSaveFile = null;

@@ -24,6 +24,16 @@ public static class ButtonScriptList
         scriptDict = new Dictionary<string, List<ButtonLogicScript>>();
         List<ButtonLogicScript> list;
 
+        #region 4SlaveShack
+
+        list = new List<ButtonLogicScript>();
+
+        list.Add(new OpenGateButtonLogicScript(Constants.indexZero, Constants.sizeTwo, NPCNameList.awkwardRubble, new KastorLeadershipTutorialScript()));
+
+        scriptDict.Add(LocationNameList.slaveShackFour, list);
+
+        #endregion
+
         #region 6SlaveShack
 
         list = new List<ButtonLogicScript>();

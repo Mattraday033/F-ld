@@ -91,7 +91,6 @@ public class TaborObservationTutorialScript : QuestStepActivationScript
 
 #endregion
 
-
 #region Kastor Tutorial Scripts
 
 public class KastorIntimidateTutorialScript : QuestStepActivationScript
@@ -100,6 +99,8 @@ public class KastorIntimidateTutorialScript : QuestStepActivationScript
     {
         Flags.setFlag(FlagNameList.finishedKastorIntimidateTutorial, true);
         TutorialFlags.setFlag(TutorialSequenceList.intimidateTutorialSeenFlag, true);
+
+        PartyStats.resetAllSkills();
 
         QuestList.activateQuestStep(QuestNameList.saveDibberQuestTitle, QuestNameList.saveDibberStepTitleTwo);
     }
@@ -114,7 +115,7 @@ public class KastorCunningTutorialScript : QuestStepActivationScript
             Flags.setFlag(FlagNameList.finishedKastorCunningTutorial, true);
             TutorialFlags.setFlag(TutorialSequenceList.secondCunningTutorialSeenFlag, true);
 
-            QuestList.activateQuestStep(QuestNameList.chiefTaborQuestTitle, QuestNameList.chiefTaborStepTitleSix);
+            QuestList.activateQuestStep(QuestNameList.saveDibberQuestTitle, QuestNameList.saveDibberStepTitleFour);
             NotificationManager.ManualNotificationSpawn.Invoke();
         }
     }
@@ -131,7 +132,7 @@ public class KastorLeadershipTutorialScript : QuestStepActivationScript
 
             NotificationManager.preventSkipNextNotificationSpawn();
 
-            QuestList.activateQuestStep(QuestNameList.chiefTaborQuestTitle, QuestNameList.chiefTaborStepTitleEight);
+            QuestList.activateQuestStep(QuestNameList.saveDibberQuestTitle, QuestNameList.saveDibberStepTitleSix);
 
             NotificationManager.ManualNotificationSpawn.Invoke();
         }

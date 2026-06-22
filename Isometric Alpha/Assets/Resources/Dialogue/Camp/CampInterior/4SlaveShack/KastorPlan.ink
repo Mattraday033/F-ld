@@ -837,9 +837,9 @@ You have succeeded in your first task, and that is promising. But I have another
 
 A storm struck the camp a few days ago, and its winds collapsed a portion of this hut. Before the lockdown the guards attempted to make repairs, but that was put on hold after the mine was shut down. 
 
-Last night, more of the hut crumbled and trapped my hutmate, Dibber, in the debris while he slept. He can still speak, so I know he is still alive, but his and my combined effort haven't been enough to free him.
+Last night, more of the hut crumbled and trapped my hutmate, Dibber, in the debris while he slept. He can still speak, so I know he's' still alive, but he's not making any sense. I think he suffered a blow to the head during the collapse, and I can't get him out of there myself.
 
-The guards during this morning's inspection found this more humorous than pressing, so it's up to us to get Dibber out of there. I will clear some of the debris, but you will have to finish the rest. And be careful. I have heard other noises among the rubble. Some bats may have been trapped by the collapse as well.
+The guards during this morning's inspection found this more humorous than pressing, so it's up to us to free Dibber. I will clear some of the debris, but you will have to finish the rest. And be careful. I have heard other noises among the rubble. Some bats may have been trapped by the collapse as well.
 
 fadeToBlack()
 
