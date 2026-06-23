@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Ink.Runtime;
 using UnityEngine;
+using UnityEngine.Events;
 
 public static class DeathFlagManager
 {
+    public readonly static UnityEvent<string> OnDeathFlagCreated = new UnityEvent<string>();
 	public static Dictionary<string, bool> deadNames = new Dictionary<string, bool>();
 
-	public static void addName(string npcName)
+	public static void addName(string npcName, bool invokeOnDeathFlagCreated = true)
 	{
         string newKey = npcName.Replace(" ", "");
 
@@ -17,6 +19,11 @@ public static class DeathFlagManager
         }
 
 		deadNames.Add(newKey, true);
+
+        if(invokeOnDeathFlagCreated)
+        {
+            OnDeathFlagCreated.Invoke(newKey);
+        }
 	}
 	
 	public static bool isDead(string npcName)
@@ -35,7 +42,7 @@ public static class DeathFlagManager
 
         foreach(string deadName in newDeadNames)
         {
-            addName(deadName);
+            addName(deadName, invokeOnDeathFlagCreated: false);
         }
     }
 

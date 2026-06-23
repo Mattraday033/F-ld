@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 public class Quest: IDescribable, IJournalCategory
 {
     private const string failureOnAreaHostilityVarName = "failureOnAreaHostility";
+    private const string failureOnDeathVarName = "failureOnDeath";
 
 	public string title;
 	
@@ -24,12 +25,7 @@ public class Quest: IDescribable, IJournalCategory
 
     public Dictionary<int, QuestStep> activeQuestStepsDict = new Dictionary<int, QuestStep>();
 
-	public Quest()
-	{
-		AreaList.AreaBecameHostile.AddListener(checkFailState);
-	}
-
-	public Quest(string jsonString)
+    public Quest(string jsonString)
 	{
 		dynamic jsonDynamic = JsonConvert.DeserializeObject<dynamic>(jsonString);
 
@@ -53,13 +49,21 @@ public class Quest: IDescribable, IJournalCategory
             failureConditions.Add(new AreaHostilityFailureCondition(areaName));
         }
 
+        string[] npcDeathFailureConditions = GetFromJson.getElementFromJson<string[]>(InteriorDefaultValues.badString, failureOnDeathVarName, jsonDynamic, InteriorDefaultValues.defaultEmptyStringArray);
+
+        foreach(string characterName in npcDeathFailureConditions)
+        {
+            failureConditions.Add(new CharacterDeathFailureCondition(characterName));
+        }
+
 		AreaList.AreaBecameHostile.AddListener(checkFailState);
+        DeathFlagManager.OnDeathFlagCreated.AddListener(checkFailState);
 	}
 
 
     private void checkFailState(object o)
     {
-        if(finished || !active)
+        if(finished || !active || o == null)
         {
             return;
         }
@@ -76,6 +80,7 @@ public class Quest: IDescribable, IJournalCategory
     public void removeListeners()
     {
         AreaList.AreaBecameHostile.RemoveListener(checkFailState);  
+        DeathFlagManager.OnDeathFlagCreated.RemoveListener(checkFailState);
     }
 
     public List<IDescribable> getActiveQuestSteps()

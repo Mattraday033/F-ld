@@ -1,11 +1,18 @@
 {
 	"title": "Stay Of Execution",
 	"steps":[	
-                {"stepName":"Meet the Director.","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"The Director has said he will announce my pardon to the camp at a gathering later today. <B>I must make my way down to the northwest section of the camp to be present for the Director's announcement.</B>"}
+                {"stepName":"Meet the Director.","MapZone":"Camp","MapLocation":"NWCamp","journalDescription":"The Director has said he will announce my pardon to the camp at a gathering later today. <B>I must make my way down to the northwest section of the camp to be present for the Director's announcement.</B>"},
+                {"stepName":"Off a cliff.","MapZone":"","MapLocation":"","journalDescription":"I was forced off the edge of the ravine which holds the body pile by a horde of Lovashi guards. Where do I go from here?"}
+                
             ],
 			
 	"deathSteps":
 			[
-			]
+			],
+    "failureOnAreaHostility":
+            [
+                "CampExterior",
+                "CampInterior"
+            ]
 	
 }

@@ -9,26 +9,67 @@ public abstract class QuestFailureCondition
     public abstract string getFailureQuestStepName();
 }
 
-public class AreaHostilityFailureCondition : QuestFailureCondition
+public abstract class QuestFailureNameCheckCondition : QuestFailureCondition
 {
-    private const string areaHostileQuestStepName = "Area Hostile";
-    private string areaName;
+    protected string nameToCheck;
 
-    public AreaHostilityFailureCondition(string areaName)
+    public QuestFailureNameCheckCondition(string nameToCheck)
     {
-        this.areaName = areaName;
+        this.nameToCheck = nameToCheck;
     }
 
     public override bool causesFailure(object o)
     {
-        Area area = o as Area;
+        return nameToCheck.Equals(getNameOfCause(o));
+    }
 
-        if(area != null && area.areaKey.Equals(this.areaName))
+    protected abstract string getNameOfCause(object o);
+
+}
+
+public class AreaHostilityFailureCondition : QuestFailureNameCheckCondition
+{
+    private const string areaHostileQuestStepName = "Area Hostile";
+    public AreaHostilityFailureCondition(string areaName):
+    base(areaName)
+    {
+        
+    }
+
+    protected override string getNameOfCause(object o)
+    {
+        if(o as Area == null)
         {
-            return true;
+            return "";
         }
 
-        return false;
+        return (o as Area).areaKey;
+    }
+
+    public override string getFailureQuestStepName()
+    {
+        return areaHostileQuestStepName;
+    }
+}
+
+public class CharacterDeathFailureCondition : QuestFailureNameCheckCondition
+{
+    private const string areaHostileQuestStepName = "Character Death";
+
+    public CharacterDeathFailureCondition(string characterName):
+    base(characterName)
+    {
+        
+    }
+
+    protected override string getNameOfCause(object o)
+    {
+        if(o as string == null)
+        {
+            return "";
+        }
+
+        return o as string;
     }
 
     public override string getFailureQuestStepName()

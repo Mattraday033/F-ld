@@ -25,6 +25,7 @@ VAR allowedYourselfToBeTakenHostage = false
 VAR mentionedStoneMan = false
 VAR failedRushDezso = false
 
+VAR knowsWeftStartedFire = false
 VAR liedToWeftAboutHearingExtortion = false
 
 VAR hostageTakersStandardPunishment = false
@@ -188,8 +189,11 @@ We failed... oh by the Mother of All, our punishment for this is going to be hor
 
 He's known me a lot longer. He'll take my side over yours!
 
+{
+-knowsWeftStartedFire:
     +Not if he learns you instigated the mess hall heist.
         ->3d
+}
     +We'll see who he favors after he hears how useless you were.
         ->deactivateExtras
 

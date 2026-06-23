@@ -39,6 +39,7 @@ VAR mineLvl3ConvincedRekaAndPazman = false
 VAR mineLvl3PromisedToProtectRekaAndPazman = false
 VAR mineLvl3ThreatenedRekaAndPazmanAsPrisoners = false
 
+VAR kastorExecutedWeft = false
 VAR weftAddedToParty = false
 
 VAR smallCupPlacedOnBarrel = false
@@ -377,7 +378,7 @@ activate({gasparIndex})
 playAnimation({playerIndex},OOC_Idle_Back)
 
 {
--weftAddedToParty:
+-weftAddedToParty and not kastorExecutedWeft:
 activate({weftIndex})
 }
 

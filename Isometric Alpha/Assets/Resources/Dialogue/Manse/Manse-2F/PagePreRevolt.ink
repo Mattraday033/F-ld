@@ -46,6 +46,8 @@ VAR nandorSpokeToPlayerAboutDirectorBetrayal = false
 VAR acceptedDirectorVidraLetterJob = false
 VAR directorMentionedAnnouncement = false
 
+VAR kastorExecutedWeft = false
+
 VAR metBrandedSurvivors = false
 
 VAR toldToFindNandor = false
@@ -87,6 +89,13 @@ changeCamTarget({pageIndex})
 Hello. Are you here to see the Director?
 
     +Yes, Chief Tabor said I was to report to his office?
+
+        {
+            -kastorExecutedWeft:
+            I was told to expect two branded. Wasn't Weft supposed to arrive with you? The Director wants to see the both of you, so go find Weft before he gets angry.
+            ->Close
+        }
+
         I see. You're expected, go on in.
         ->enterDirectorsOffice(->1b)
 
@@ -106,7 +115,10 @@ movePlayer(-2,-1)
 setFacing(NE)
 changeCamTarget({directorIndex})
 
+{
+-not kastorExecutedWeft:
 activate({weftIndex})
+}
 
 {
 -not receivedDirectorsPardon:
@@ -437,7 +449,7 @@ changeCamTarget({directorIndex})
 
 === 3c ===
 
-activateQuestStep(No Good Deed,Take time to think.)
+activateQuestStep(The Director,Take time to think.)
 
 The two of you may take the rest of the day off to consider. If you should be brave enough to take my offer, I can have you sent in to the mine immediately. 
 
@@ -445,6 +457,7 @@ The two of you may take the rest of the day off to consider. If you should be br
 
 === 5a ===
 
+finishQuest(The Director,true,Job accepted.)
 activateQuestStep(No Good Deed,Make for the stockhouse.)
 
 setToTrue(sentIntoMineByDirector)
@@ -476,6 +489,11 @@ Yes? What is it?
     {
     -not sentIntoMineByDirector:
     +The Director told me I should come back when I had an answer for him.
+        {
+            -kastorExecutedWeft:
+            The Director is a busy man. He isn't interested in repeating himself. Go find Weft and bring him here before I interrupt the Director's work for you.
+            ->Close
+        }
         ->alreadySpokeToDirector_1b
     }
     +Nothing, I must be going.
@@ -724,7 +742,18 @@ changeCamTarget({directorIndex})
 removeFromParty({carterIndex})
 removeFromParty({nandorIndex})
 
+{
+-kastorExecutedWeft:
+Page has told me that you were successful, but I do not see Weft with you. What became of him?
+    +He did not make it. He was killed by the worms. <Lie>
+        That is unfortunate. He died a braver death than I'd have expected. But was what Page said true? Were you able to secure the mines against these worm intruders?
+        ->sealedBreach_2aa
+-else:
 Page has told me that you were successful, but I would hear it from you. Were you able to secure the mines against these worm intruders?
+    ->sealedBreach_2aa
+}
+
+=== sealedBreach_2aa ===
 
 {
 -gasparAddedToParty or mineLvl3GuardsInParty:

@@ -27,11 +27,15 @@ VAR hostagesDead = false
 VAR declaredHostagesDead = false
 VAR concludedHostageNegotiations = false
 
+VAR kastorExecutedWeft = false
+
 
 {
+-kastorExecutedWeft:
+    ->weftExecutedResponse
 -concludedHostageNegotiations:
 
-    activateQuestStep(No Good Deed,Go to the Director's office.)
+    activateQuestStep(The Director,Go to the Director's office.)
     
     openGateFromKey(Manse Front Door,true)
     {
@@ -102,6 +106,14 @@ deactivate({weftIndex})
 fadeBackIn(60)
 
 ->Close
+
+=== weftExecutedResponse ===
+
+Where is Weft? I expected him to arrive with you.
+
+    +I haven't seen him since I went on break. He didn't arrive before me?
+        No, and it is unlike him to be late. Go look for him, I will stay here in case he turns up.
+        ->Close
 
 === Close ===
 

@@ -14,6 +14,7 @@ VAR gotMessHallInstructionsFromKende = false
 VAR toldKendeTaborSentForMeal = false
 VAR weftKnowsYouKnowHisSecret = false
 VAR toldToGetMealByTabor = false
+VAR kastorExecutedWeft = false
 
 VAR weftActive = false
 
@@ -23,7 +24,7 @@ VAR weftIndex = 2
 VAR playerName = ""
 
 {
--toldToGetMealByTabor and not toldKendeTaborSentForMeal:
+-toldToGetMealByTabor and not toldKendeTaborSentForMeal and not kastorExecutedWeft:
     ->3aa
 -insultedKendesCooking:
 What is it, slime?

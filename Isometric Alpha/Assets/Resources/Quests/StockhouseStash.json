@@ -15,9 +15,12 @@
 				{"stepName":"The nugget stolen.","MapZone":"","MapLocation":"","journalDescription":"I showed the Iron Nugget to Uros, but decided to keep it for myself instead of returning it. He told me he would never forget this betrayal."},
 				{"stepName":"The nugget sold.","MapZone":"","MapLocation":"","journalDescription":"I sold the Iron Nugget. It was worth a tidy sum."}
 			],
-			
-	
 	"deathSteps":
 			[
-			]
+			],
+    "failureOnAreaHostility":
+            [
+                "CampExterior",
+                "CampInterior"
+            ]
 }

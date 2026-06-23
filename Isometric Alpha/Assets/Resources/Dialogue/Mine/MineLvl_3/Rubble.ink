@@ -42,6 +42,8 @@ VAR mineLvl3SlavesBackToSurface = false
 VAR mineLvl3ToldPazmanToEatShit = false
 VAR mineLvl3ThreatenedGaspar = false
 
+VAR kastorExecutedWeft = false
+
 VAR sentIntoMineByDirector = false
 VAR trainedByEmeseToUseBlasingJelly = false
 
@@ -160,7 +162,7 @@ playDelayedSFX(Tunnel_Explosion, 200)
 moveToPos(-7,4)
 
 {
--weftAddedToParty:
+-weftAddedToParty and not kastorExecutedWeft:
 activate({weftIndex})
 }
 

@@ -384,7 +384,12 @@ public static class SpawnParamsList
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.bodyPile, NPCNameList.body+1),
                                             new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.orderedIntoBodyPile }),
-                                                                        new StopSpawningFlagList(new string[]{ FlagNameList.revoltStarted, FlagNameList.directorDefeated }),
+                                                                        new StopSpawningFlagList(new string[]{ 
+                                                                                                                FlagNameList.revoltStarted, 
+                                                                                                                FlagNameList.directorDefeated,
+                                                                                                                FlagNameList.hadAfterTakacsFightConvo,
+                                                                                                                FlagNameList.kastorExecutedWeft
+                                                                                                             }),
                                                                         spawnWhileHostile: spawnWhileHostile));
         #endregion
 
@@ -938,7 +943,8 @@ public static class SpawnParamsList
                                                                                                                          FlagNameList.directorDefeated,  
                                                                                                                          FlagNameList.skippedTutorialInNWCamp,
                                                                                                                          FlagNameList.toldToGetMealByTabor,
-                                                                                                                         FlagNameList.orderedIntoBodyPile
+                                                                                                                         FlagNameList.orderedIntoBodyPile,
+                                                                                                                         FlagNameList.kastorExecutedWeft
                                                                                                                          }),
                                                             spawnWhileHostile: spawnWhileHostile));
 
@@ -950,7 +956,8 @@ public static class SpawnParamsList
                                                                                                                          FlagNameList.revoltStarted, 
                                                                                                                          FlagNameList.directorDefeated, 
                                                                                                                          FlagNameList.startedTaborIntimidateTutorial,
-                                                                                                                         FlagNameList.skippedTutorialInNWCamp
+                                                                                                                         FlagNameList.skippedTutorialInNWCamp,
+                                                                                                                         FlagNameList.kastorExecutedWeft
                                                                                                                          }),
                                                             spawnWhileHostile: spawnWhileHostile));
 
@@ -961,7 +968,8 @@ public static class SpawnParamsList
                                                             stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
                                                                                                                          FlagNameList.revoltStarted, 
                                                                                                                          FlagNameList.directorDefeated, 
-                                                                                                                         FlagNameList.startedTaborCunningTutorial
+                                                                                                                         FlagNameList.startedTaborCunningTutorial,
+                                                                                                                         FlagNameList.kastorExecutedWeft
                                                                                                                          }),
                                                             spawnWhileHostile: spawnWhileHostile));
 
@@ -972,7 +980,8 @@ public static class SpawnParamsList
                                                             stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
                                                                                                                          FlagNameList.revoltStarted, 
                                                                                                                          FlagNameList.directorDefeated, 
-                                                                                                                         FlagNameList.startedTaborLeadershipTutorial
+                                                                                                                         FlagNameList.startedTaborLeadershipTutorial,
+                                                                                                                         FlagNameList.kastorExecutedWeft
                                                                                                                          }),
                                                             spawnWhileHostile: spawnWhileHostile));
 
@@ -983,7 +992,8 @@ public static class SpawnParamsList
                                                             stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
                                                                                                                          FlagNameList.revoltStarted, 
                                                                                                                          FlagNameList.directorDefeated, 
-                                                                                                                         FlagNameList.startedTaborObservationTutorial
+                                                                                                                         FlagNameList.startedTaborObservationTutorial,
+                                                                                                                         FlagNameList.kastorExecutedWeft
                                                                                                                          }),
                                                             spawnWhileHostile: spawnWhileHostile));
 

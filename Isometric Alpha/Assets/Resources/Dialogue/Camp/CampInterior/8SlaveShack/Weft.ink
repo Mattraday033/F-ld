@@ -9,6 +9,7 @@ VAR overseerIndex = 2
 
 VAR heardTaborsLesson = false
 VAR weftAddedToParty = false
+VAR knowsWeftStartedFire = false
 VAR weftKnowsYouKnowHisSecret = false
 VAR liedToWeftAboutHearingExtortion = false
 
@@ -22,15 +23,24 @@ setToTrue(metWeft)
 {
 -weftAddedToParty:
     ->2a
+-wisdom >= 2:
+    ->startOverseerConvo(->1a)
 -else:
-    ->1a
+    ->startOverseerConvo(->didNotHearSecret)
 }
 
-=== 1a ===
+=== startOverseerConvo(->divert) ===
 
 deactivate({playerIndex})
 setNPCFacing({weftIndex},SE)
 activate({overseerIndex})
+
+->divert
+
+=== 1a ===
+
+setToTrue(knowsWeftStartedFire)
+
 changeCamTarget({overseerIndex})
 
 Did he give it to you?
@@ -49,7 +59,11 @@ This is getting out of hand. I'm sick of running errands for you. One of these d
 
 changeCamTarget({overseerIndex})
 
-Don't threaten me, scum. If it weren't for me, you'd have been done in for organizing that stunt you pulled with the mess hall. If the other guards found out you were the real leader and hid it from them, they'd make an example out of you in front of the whole camp.
+Don't threaten me, scum. If it weren't for me, you'd have been done in for organizing that stunt you pulled with the mess hall. That fire killed two guards before we were able to put it out. If the others found out you were behind it, they'd make an example out of you in front of the whole camp.
+
+->didNotHearSecret
+
+=== didNotHearSecret ===
 
 changeCamTarget({weftIndex})
 
@@ -84,6 +98,8 @@ changeCamTarget({weftIndex})
 \*The man before you has the same brand on his neck as the others you've seen, but wears much nicer clothing. He looks at you with a sour expression.* You didn't hear any of that before, did you?
 
 
+{
+-knowsWeftStartedFire:
     +I did, but your secret is safe with me. <Cha {charisma}/2>
         setToTrue(weftKnowsYouKnowHisSecret)
         {
@@ -92,12 +108,16 @@ changeCamTarget({weftIndex})
         -else:
             ->1ab
         }
-    +Hear what?
-        setToTrue(liedToWeftAboutHearingExtortion)
-        ->1ac
     +It sounds like you could get in a lot of trouble if the guards found out about your little secret.
         setToTrue(weftKnowsYouKnowHisSecret)
         ->1ad
+}
+    +Hear what?
+    {
+        -knowsWeftStartedFire:
+        setToTrue(liedToWeftAboutHearingExtortion)
+    }
+        ->1ac
 
 === 1aa ===
 
@@ -173,15 +193,15 @@ exchangeItemForXP(Weft's Rations,1,250)
 
 === 1cb ===
 
-When the camp was founded a few of us snuck out of our huts to grab some food from the mess hall. I didn't want to go, mind you, but my hutmate at the time said he'd kill me if I didn't come along.
+When the camp was founded, a few of us snuck out of our huts to steal some food from the mess hall. I didn't want to go, mind you, but my hutmate at the time said he'd kill me if I didn't come along.
 
-Of course, we were found out after the food was reported missing. The writing was on the wall for the other conspirators, so I told the Lovashi who was involved. Don't forget that the guards are sure to reward such behavior, if you ever find yourself in the same predicament.
+Unfortunately, while we were looting the mess for leftover scraps, a fire broke out. The conspirators scattered, and by the time it was put out, it had blazed through the southern quarters. There were only a handful of deaths, but the Director was eager to see heads roll for it.
 
-After the others were punished, I got set up here with a larger portion for my rations, and a nice warm bed instead of grimy straw. Completely worth it, if you ask me.
+The writing was on the wall for the other conspirators, so I told the Lovashi who was involved. I was rewarded with an upgrade in lifestyle, and the conspirators were rewarded with whippings and beheadings. No one was ever able to figure out how the fire started, though. That's still a mystery to this day.
 
 {
--wisdom >= 2:
-    +Ah, and the guards don't know you were really the ringleader of the group. That's how that overseer is blackmailing you.
+-knowsWeftStartedFire:
+    +A mystery to all except for you and the overseer. That's how that overseer is blackmailing you.
     setToTrue(weftKnowsYouKnowHisSecret)
     {
     -liedToWeftAboutHearingExtortion:
@@ -189,18 +209,9 @@ After the others were punished, I got set up here with a larger portion for my r
     -else:
         ->1cbb
     }
-    +Seems to me that the guards are using you. You're basically an advertisement for sedition. <Wis {wisdom}/2>
+    +Seems to me that the guards are using you. You're basically a walking advertisement for sedition. <Wis {wisdom}/2>
         The more useful I am, the less they can afford to get rid of me. That's how a branded clings to life. What did you do to make the Lovashi think you were useful?
         ->1cc
--else:
-    +Ah, and the guards don't know you were really the ringleader of the group. That's how that overseer is blackmailing you.
-    setToTrue(weftKnowsYouKnowHisSecret)
-    {
-    -liedToWeftAboutHearingExtortion:
-        ->1cba
-    -else:
-        ->1cbb
-    }
 }
 
     +And you're proud of this? You disgust me.
@@ -217,7 +228,7 @@ After the others were punished, I got set up here with a larger portion for my r
 
 setToTrue(weftKnowsYouLiedAboutHearingExtortion)
 
-So you did hear what we were talking about! As the Mother is my witness, if you tell anyone about that I will make you regret it.
+So you did hear what we were talking about! As the Mother is my witness, if you tell anyone about that I will make you regret it. And if I can't, the guards I've been useful to will find a way!
 
     +Your secret is safe with me.
         combineDialogue()

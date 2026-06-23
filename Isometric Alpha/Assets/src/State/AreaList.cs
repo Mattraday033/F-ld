@@ -519,6 +519,11 @@ public static class AreaList
             return true;
 		}
 
+		if (Flags.getFlag(FlagNameList.hadAfterTakacsFightConvo))
+		{
+            return true;
+		}
+
 		return false;
 	}
 

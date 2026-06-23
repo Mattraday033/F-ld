@@ -579,9 +579,13 @@ Please, leave me. I would like to be alone.
 
     A week or so after my arrival at this camp, myself and a few other branded snuck into the mess hall and stole some extra rations for ourselves. It was a foolish thing to do, but my life before my branding had ill-prepared me for the meager portions we are provided. The hunger in those first days was the hardest.
 
-    Once the theft was discovered, all of the thieves were quickly apprehended. One of our number, Weft, chose to give the rest of us up in exchange for special treatment. When the punishments were being handed down, András spoke up on my behalf. I was given half the lashes my compatriots received. 
+    Things went smoothly at first. We made our way into the mess hall while avoiding the guards, who in those days were more intent on enemies without than watching for slaves sneaking about within. We clambered about the mess, fighting over scraps like dogs, until someone knocked a pot of oil into the embers of one the cooking fires. 
 
-    While I was recovering, he visited me. The care he showed me then, and since, has revealed to me he has a sensitive soul. That is how I know he will help us.
+    I don't know whose fault the fire was, but it quickly ignited the mess hall. My fellows and I scattered in all directions, and many were able to make it back to our huts while the guards fought the blaze. We thought we were safe, but we were fools.
+
+    One of our number, Weft, chose to give the rest of us up in exchange for special treatment. When the punishments were being handed down, András spoke up on my behalf. I was saved from the headsman's block, and given the least lashes of all the conspirators, save Weft himself of course. 
+
+    While I was recovering, András visited me. The care he showed me then, and since, has revealed to me he has a sensitive soul. That is how I know he will help us.
 
     ->8aa
 

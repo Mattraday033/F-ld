@@ -33,6 +33,8 @@ VAR acceptedTaborSkillTutorial = false
 VAR skippedTutorialInNWCamp = false
 VAR gasparBroughtToExecution = false
 
+VAR kastorExecutedWeft = false
+
 VAR directorMentionedAnnouncement = false
 VAR startedDirectorAnnouncement = false
 VAR hadGuardWhoBlockedPathFlogged = false
@@ -55,7 +57,12 @@ You're not allowed in here. Head back the way you came.
 {
 -toldByTaborToBuildHouses and not (skippedTutorialInNWCamp or acceptedTaborSkillTutorial):
     +I'm under orders from Chief Tabor to report to this area.
-        ->1b
+    {
+        -kastorExecutedWeft:
+            ->1ba
+        -else:
+            ->1b
+    }
 }
     +\*Leave.*
         ->Close
@@ -69,7 +76,7 @@ In that case, the Chief arrived a short bit ago. Go inside, he should be near th
 {
 -savedDibber:
 
-\*This section will provide you with a tutorial on the different Skills your Party can use. Everything explained in this tutorial was already covered by a previous tutorial, which you already completed. Would you like to skip it?*
+\*This section will provide you with a tutorial on the different Skills your Party can use. Everything explained in this tutorial was covered by a previous tutorial, which you have already completed. Would you like to skip it?*
 
     +\*Skip tutorial.*
         ->1d
@@ -83,8 +90,15 @@ In that case, the Chief arrived a short bit ago. Go inside, he should be near th
         ->1c
     +\*Skip tutorial.* <Not recommended for first time players>
         ->1d
-
 }
+
+
+=== 1ba ===
+
+\*The guard looks you over.* I was told to expect you, but Weft was supposed to be with you. Go find him immediately and return here with him. Chief Tabor does not like to be kept waiting.
+
+    +Err... right. I'll find him at once.
+        ->Close
 
 === 1c ===
 
@@ -392,81 +406,83 @@ Better than he deserved. *Weft spits*
 
 === directorSpeech ===
 
-// changeCamTarget({directorIndex})
+finishQuest(Stay Of Execution,true,Off a cliff.)
 
-// For over four months, you have shouldered the duty of erecting this camp. You have executed your assigned tasks with a speed and sureness that does our confederation much credit. 
+changeCamTarget({directorIndex})
 
-// Where once stood untamed forest and crumbling structures, you have forged a bastion which I am proud to hold in the name of Count Kálnoky!
+For over four months, you have shouldered the duty of erecting this camp. You have executed your assigned tasks with a speed and sureness that does our confederation much credit. 
 
-// Many of you come from disparate backgrounds: the cream of every county stands before me. Spears from the shores of Lake Jawan, axes from the forests of County Thököly, even Kiln-breakers from my home of Pharos, and of course, my own household guard. 
+Where once stood untamed forest and crumbling structures, you have forged a bastion which I am proud to hold in the name of Count Kálnoky!
 
-// Each of you came recommended highly, and your patrons will know no disappointment from me! I have met priests of Harmony who could not cooperate on the level you have while in my service.
+Many of you come from disparate backgrounds: the cream of every county stands before me. Spears from the shores of Lake Jawan, axes from the forests of County Thököly, even Kiln-breakers from my home of Pharos, and of course, my own household guard. 
 
-// changeCamTarget({crowdIndex})
+Each of you came recommended highly, and your patrons will know no disappointment from me! I have met priests of Harmony who could not cooperate on the level you have while in my service.
 
-// \*The ranks of the Lovashi let out a cheer.*
+changeCamTarget({crowdIndex})
 
-// changeCamTarget({directorIndex})
+\*The ranks of the Lovashi let out a cheer.*
 
-// \*The Director waits for the cheer to fade before continuing.* I near the end of my eigth decade. In that time, I have ridden with names many of you only know from stories as we waged our war against the Craft Folk. 
+changeCamTarget({directorIndex})
 
-// I watched as the fires rose over Carnassus, and your fathers toppled the great statues of Saint Lysop. I beheld the death of our King Csaba at the hands of the King of Kilns, and the scouring of Pharos which followed. I lead our western lance against the Masons and layed seige to their jewel, Wudra; the furthest our hordes have ridden against our hated foes.
+\*The Director waits for the cheer to fade before continuing.* I near the end of my eigth decade. In that time, I have ridden with names many of you only know from stories as we waged our war against the Craft Folk. 
 
-// Over this long life, I have witnessed our traditions of honor, loyalty, and strength earn us lands and trophies at great cost. Over the many cycles of war and peace, I have had cause to wonder if the cost we paid was not simply in blood and kin, but whether those very values we held in such regard were hidden within the final tally when the bill came due.
+I watched as the fires rose over Carnassus, and your fathers toppled the great statues of Saint Lysop. I beheld the death of our King Csaba at the hands of the King of Kilns, and the scouring of Pharos which followed. I lead our western lance against the Masons and layed seige to their jewel, Wudra; the furthest our hordes have ridden against our hated foes.
 
-// createEffect(SmokeBomb,-7,14)
+Over this long life, I have witnessed our traditions of honor, loyalty, and strength earn us lands and trophies at great cost. Over the many cycles of war and peace, I have had cause to wonder if the cost we paid was not simply in blood and kin, but whether those very values we held in such regard were hidden within the final tally when the bill came due.
 
-// \*The Director pauses for a moment in thought.*
+createEffect(SmokeBomb,-7,14)
 
-// These lost virtues are not unrecoverable, however. Our hated enemies are not so fearsome that they cannot be overcome by our combined might. At the end of the last war the Confederation left their armies broken, and their lands torched and scarred. When the next war begins, our people will find them a pathetic, crippled foe unable to withstand the combined might of our glorious hordes!
+\*The Director pauses for a moment in thought.*
 
-// disableDialogueUI()
-// createEffect(SmokeBomb,-6,14)
-// wait(0.33)
-// activate({takacsIndex})
-// wait(1.8)
-// enableDialogueUI()
-// setPlayerFacing(NE)
-// changeCamTarget({takacsIndex})
+These lost virtues are not unrecoverable, however. Our hated enemies are not so fearsome that they cannot be overcome by our combined might. At the end of the last war the Confederation left their armies broken, and their lands torched and scarred. When the next war begins, our people will find them a pathetic, crippled foe unable to withstand the combined might of our glorious hordes!
 
-// \*Takács's voice rings clear in every ear present, as if speaking from an inch away.* The Director is quite right to be proud of your progress, if we are kind enough to dismiss recent events. Count Kálnoky is pleased with all of you.
+disableDialogueUI()
+createEffect(SmokeBomb,-6,14)
+wait(0.33)
+activate({takacsIndex})
+wait(1.8)
+enableDialogueUI()
+setPlayerFacing(NE)
+changeCamTarget({takacsIndex})
 
-// changeCamTarget({adelaIndex})
+\*Takács's voice rings clear in every ear present, as if speaking from an inch away.* The Director is quite right to be proud of your progress, if we are kind enough to dismiss recent events. Count Kálnoky is pleased with all of you.
 
-// Vada... *Adéla shivers with discomfort.*
+changeCamTarget({adelaIndex})
 
-// changeCamTarget({takacsIndex})
+Vada... *Adéla shivers with discomfort.*
 
-// There is but one, insignificant detail that has been overlooked. A fly buzzes in this camp. A fat, happy, lazy fly, which you will help me catch for my supper.
+changeCamTarget({takacsIndex})
 
-// disableDialogueUI()
-// createEffect(SmokeBomb,-9,10)
-// wait(0.4)
-// createEffect(SmokeBomb,-4,8)
-// wait(0.4)
-// createEffect(SmokeBomb,-7,6)
-// wait(0.4)
-// createEffect(SmokeBomb,-5,10)
-// wait(0.4)
-// createEffect(SmokeBomb,-10,6)
-// wait(0.4)
-// createEffect(SmokeBomb,-8,9)
-// wait(0.4)
-// createEffect(SmokeBomb,-6,8)
-// wait(1.5)
-// enableDialogueUI()
+There is but one, insignificant detail that has been overlooked. A fly buzzes in this camp. A fat, happy, lazy fly, which you will help me catch for my supper.
 
-// The pardoned branded are a threat to the security of this camp: they cannot be allowed to leave with knowledge of its existance. 
+disableDialogueUI()
+createEffect(SmokeBomb,-9,10)
+wait(0.4)
+createEffect(SmokeBomb,-4,8)
+wait(0.4)
+createEffect(SmokeBomb,-7,6)
+wait(0.4)
+createEffect(SmokeBomb,-5,10)
+wait(0.4)
+createEffect(SmokeBomb,-10,6)
+wait(0.4)
+createEffect(SmokeBomb,-8,9)
+wait(0.4)
+createEffect(SmokeBomb,-6,8)
+wait(1.5)
+enableDialogueUI()
 
-// Soldiers of the Confederation! Eliminate the threat.
+The pardoned branded are a threat to the security of this camp: they cannot be allowed to leave with knowledge of its existance. 
 
-// changeCameraTarget({crowdIndex})
+Soldiers of the Confederation! Eliminate the threat.
 
-// setIdleOfNPCsByName(Guard3,Idle_Back)
-// setIdleOfNPCsByName(Guard4,Idle_Front)
-// playAnimation({adelaIndex},Idle_Front)
+changeCameraTarget({crowdIndex})
 
-// \*The Lovashi draw their weapons and begin to move towards you with ill intent.*
+setIdleOfNPCsByName(Guard3,Idle_Back)
+setIdleOfNPCsByName(Guard4,Idle_Front)
+playAnimation({adelaIndex},Idle_Front)
+
+\*The Lovashi draw their weapons and begin to move towards you with ill intent.*
 
 setFacing(SE)
 playAnimation({playerIndex},Idle_Front)

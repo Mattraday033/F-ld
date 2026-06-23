@@ -8,6 +8,15 @@
 	
 	"deathSteps":
 			[
-			]
+			],
+    "failureOnDeath":
+            [
+                "Weft"
+            ],
+    "failureOnAreaHostility":
+            [
+                "CampExterior",
+                "CampInterior"
+            ]
 	
 }

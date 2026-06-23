@@ -43,6 +43,7 @@ public static class FlagNameList
 
         //weft flags
         public const string metWeft = "metWeft";
+        public const string knowsWeftStartedFire = "knowsWeftStartedFire";
         public const string weftKnowsYouKnowHisSecret = "weftKnowsYouKnowHisSecret";
         public const string liedToWeftAboutHearingExtortion = "liedToWeftAboutHearingExtortion";
         public const string weftKnowsYouLiedAboutHearingExtortion = "weftKnowsYouLiedAboutHearingExtortion";
@@ -53,6 +54,7 @@ public static class FlagNameList
         public const string tookBlameForHostageDeath = "tookBlameForHostageDeath";
         public const string blamedWeftForHostageDeath = "blamedWeftForHostageDeath";
         public const string discussedWithWeftAfterTookMineJob = "discussedWithWeftAfterTookMineJob";
+        public const string kastorExecutedWeft = "kastorExecutedWeft";
 
         //Tabor Skill Tutorial Flags
         public const string toldByTaborToBuildHouses = "toldByTaborToBuildHouses";

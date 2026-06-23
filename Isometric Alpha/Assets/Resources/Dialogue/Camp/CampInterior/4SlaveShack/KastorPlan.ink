@@ -81,6 +81,8 @@ VAR finishedTaborObservationTutorial = false
 VAR justSavedDibber = false
 
 VAR hadWeftTrustConvo = false
+VAR knowsWeftStartedFire = false
+VAR liedToWeftAboutHearingExtortion = false
 
 VAR trainedByEmeseToUseBlasingJelly = false
 
@@ -149,7 +151,7 @@ searchInventoryFor(hasToolBundle,Tool Bundle)
 === chooseConvoStart ===
 
 {
--partyFlagWeft and gaveKastorThePassword and not hadWeftTrustConvo:
+-partyFlagWeft and gaveKastorThePassword and toldKastorOfThatchsFate and not hadWeftTrustConvo:
     ->weftTrustConvo_1a
 }
 
@@ -275,12 +277,108 @@ He has to dealt with. He's seen too much.
 
 changeCamTarget({weftIndex})
 
-// setNPCFacing({weftIndex},NW)
+\*Weft looks from you to Kastor.* By the God's, what did I walk into? Can't we talk about this? I just followed {playerName} in here, I didn't know what they were meeting you for. I still don't and I never have to.
 
-Wait, please! Can't we talk about this? I just followed {playerName} in here, I didn't know what they were meeting you for! I still don't and I never have to!
+->weftTrustConvo_1caa
 
-+Either of those options gives us less time to enact the plan. He's too well known and useful to the guards. They will come looking for him eventually.
+=== weftTrustConvo_1caa ===
+
++If we kill him, any work I do for the guards without him would raise suspicion.
+changeCamTarget({kastorIndex})
+
+That is a risk we will have to take. After we dispose of his body, you should avoid the guards as much as possible.
+    ->weftTrustConvo_1caa
++You're overreacting. I'm not going to kill him just because he's seen us in the same room.
+    ->weftTrustConvo_1ca
++Killing him gives us less time to enact the plan. He's too well known and useful to the guards. They will come looking for him eventually.
     ->weftTrustConvo_1d
+
+=== weftTrustConvo_1ca ===
+
+changeCamTarget({weftIndex})
+setNPCFacing({weftIndex},NW)
+
+Thank you, {playerName}. It's a relief to hear it.
+
+changeCamTarget({kastorIndex})
+
+Something must be done. Weft is the Lovashi's chief snoop. He's given up information to them many times, and the entire camp is aware of it. Even if we could keep him from informing the guards, if the others saw us with him they would be hesitant to help us; they would think us mad, or working for the masters ourselves.
+
++I will be responsible for him. I can keep him from squealing.
+    ->weftTrustConvo_1cb
++I'm sorry Weft, but Kastor is making a persuasive argument. We can't risk it.
+    ->weftTrustConvo_1f
+
+=== weftTrustConvo_1cb ===
+
+\*Kastor looks doubtful.* Oh? And how are you going to accomplish that? Ask him nicely?
+
+{
+-knowsWeftStartedFire:
++I know a secret Weft would very much like kept. If he tells ours, I'll tell his.
+    ->weftTrustConvo_1cc
+}
+
++The guards know we would never trust him... unless he has been working for us the entire time. The more involved he seems, the less he can afford to let our secret out.
+    ->weftTrustConvo_1ce
+
+=== weftTrustConvo_1cc ===
+
+changeCamTarget({weftIndex})
+
+{
+-liedToWeftAboutHearingExtortion:
+You bastard! I should have known you were lying.
+-else:
+\*Weft simmers with resentment.* You treacherous snake.
+}
+
+changeCamTarget({kastorIndex})
+
+Oh ho! That's rich from you, Weft. What's the secret? 
+
+    +The fire a few months ago? Weft was responsible. Another guard was blackmailing over it, lest he meet the executioner's axe.
+        ->weftTrustConvo_1cd
+
+=== weftTrustConvo_1cd ===
+
+\*Kastor regards Weft with disgust.* Some good folk were killed by that fire. And then more were executed when the investigation was done.
+
+Alright. If you'll take responsibility for him, then keeping him silent is preferable to killing him and risking the guards coming looking for him later. But be careful around this one. He'll bite, if you let him.
+
+->exitWeftConvo
+
+=== weftTrustConvo_1ce ===
+
+changeCamTarget({weftIndex})
+
+\*Weft's face begins to show signs of worry.*
+
+changeCamTarget({kastorIndex})
+
+\*Kastor scratches his chin in thought.* I suppose that could work. And letting him live means we won't need to worry about the guards looking for him.
+
+But you'll need to keep him out of sight when meeting with anyone else in our group. You and I can swear up and down that Weft was involved from the start to the guards if we need to, but if the others learn he had a part in our plot they will begin to question if it will succeed.
+
+Looks like you get to breath a little longer, Weft. But don't think for a moment I've forgotten what you've done.
+
+changeCamTarget({weftIndex})
+setNPCFacing({weftIndex},NE)
+
+Fine. Now can one of you actually tell me what you've signed me up for?
+
+->exitWeftConvo
+
+=== exitWeftConvo ===
+
+fadeToBlack()
+
+deactivate({weftIndex})
+deactivate({thatchIndex})
+
+fadeBackIn()
+
+->Close
 
 === weftTrustConvo_1d ===
 
@@ -322,8 +420,8 @@ VAR silencedWeft = false
         changeCamTarget({kastorIndex})
         Where? A guard could walk in here at any moment and put me on a work detail, and then where would we be? No, it has to be a permanent solution.
         ->weftTrustConvo_1e
-    +I'm not killing him. He has to follow me around, I'll keep an eye on him.
-        ->Close
+    +I'm not killing him. He has to follow me around, I'll keep him from talking.
+        ->weftTrustConvo_1cb
     +It's unfortunate, but the smart choice is to kill him.
         ->weftTrustConvo_1f
 
@@ -350,8 +448,8 @@ changeCamTarget({weftIndex})
 
 \*Weft continues to cling to you and sob.*
 
-    +I'm not killing a fellow branded. We'll just have to keep an eye on him.
-        ->Close
+    +I'm not killing a fellow branded. I'll have to find another way to keep him from talking.
+        ->weftTrustConvo_1cb 
     +You're right. I'm sorry, Weft.
         ->killWeft
 
@@ -359,8 +457,11 @@ changeCamTarget({weftIndex})
 
 Guards! Anyone! Help me!
 
+setToTrue(kastorExecutedWeft)
 changeCamTarget({weftIndex})
 execute({weftIndex})
+
+setNPCFacing({thatchIndex},NE)
 
 changeCamTarget({kastorIndex})
 

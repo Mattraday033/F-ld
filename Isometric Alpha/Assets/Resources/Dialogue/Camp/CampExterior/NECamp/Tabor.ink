@@ -29,11 +29,16 @@ VAR hostagesDead = false
 VAR declaredHostagesDead = false
 VAR concludedHostageNegotiations = false
 
+VAR kastorExecutedWeft = false
 
 {
+-kastorExecutedWeft and concludedHostageNegotiations:
+    ->executedWeftResponse_1a
+-kastorExecutedWeft and not spokeToTaborAtBeginningOfSituation:
+    ->executedWeftResponse_2a
 -concludedHostageNegotiations:
 
-    activateQuestStep(No Good Deed,Meet Tabor.)
+    activateQuestStep(The Director,Meet Tabor.)
 
     {
     -hostagesDead:
@@ -252,6 +257,10 @@ What do you propose instead?
     changeCamTarget({taborIndex})
 
     ... to the front of the labor queue.
+
+    changeCamTarget({adelaIndex})
+
+    And there they shall stay, until their rebellious natures have be snuffed out.
 
     setToTrue(hostageTakersLaborPunishment)
 
@@ -620,6 +629,18 @@ updateNPCVisibility()
 deactivate({weftIndex})
 
 fadeBackIn(60)
+
+->Close
+
+=== executedWeftResponse_1a ===
+
+Gather Weft so that we may receive your report on what happened during the negotiations.
+
+->Close
+
+=== executedWeftResponse_2a ===
+
+Go find Weft so that I can explain what has transpired. I am not going to repeat myself. 
 
 ->Close
 

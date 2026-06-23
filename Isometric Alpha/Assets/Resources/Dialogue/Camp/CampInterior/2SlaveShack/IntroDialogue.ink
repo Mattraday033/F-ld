@@ -163,7 +163,7 @@ changeCamTarget({brushIndex})
 
     Every so often you get a slave that thinks they can carve out a little bit of power by dragging on his fellows. Weft is one of them. He got his start by singing to the guards when a group of us stole extra rations from the mess. And he's only gotten slimier from there.
 
-    -> 1fa
+    ->1fa
 
 +\*Shrug.* I only pick fights I can win. That just happens to be most of them.
     changeCamTarget({gézaIndex})

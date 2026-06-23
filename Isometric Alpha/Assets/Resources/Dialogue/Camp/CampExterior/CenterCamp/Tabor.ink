@@ -5,6 +5,7 @@ VAR charisma = 0
 
 VAR heardTaborsLesson = false
 VAR weftAddedToParty = false
+VAR kastorExecutedWeft = false
 
 VAR taborIndex = 1
 VAR feherIndex = 2
@@ -16,6 +17,8 @@ VAR weftIndex = 6
 VAR playerName = ""
 
 {
+-heardTaborsLesson and kastorExecutedWeft:
+->4a
 -heardTaborsLesson and weftAddedToParty:
 ->3a
 -heardTaborsLesson and not weftAddedToParty:
@@ -195,8 +198,10 @@ setToTrue(heardTaborsLesson)
 Feher is going to spend the rest of the day tied to this post unless, Gods forbid, one of you needs a lesson yourself. Now, Priest Rikard has asked me to remind you that his sermons are open to any volunteers. The Temple is behind you and on your right. Otherwise, stay with me and I will return you to your quarters. Dismissed!
 
 {
+-kastorExecutedWeft:
+    ->transitionToAfterLesson(->4aa)
 -weftAddedToParty:
-    ->3a
+    ->transitionToAfterLesson(->3a)
 -else:
     ->Close
 }
@@ -207,19 +212,27 @@ What are you doing here? Get back to work!
 
 ->Close
     
-=== 3a ===
+=== transitionToAfterLesson(->divert) ===
 
 fadeToBlack()
 
 movePlayer(2,4)
 setFacing(NE)
+
+{
+-not kastorExecutedWeft:
 activate({weftIndex})
+}
 
 deactivate({brandedIndex})
 deactivate({brandedOneIndex})
 deactivate({brandedTwoIndex})
 
 fadeBackIn(60)
+
+->divert
+
+=== 3a ===
 
 I'm familiar with Weft, of course, but what is your name, newling?
 
@@ -268,6 +281,28 @@ We'd best get a move on, before Tabor thinks we're slacking off.
         ->3ca
     +Yes, let's go.
         ->deactivateExtras
+
+=== 4a ===
+
+You've returned. Are you supposed to be here?
+
+    +I'm Weft's new hutmate. He said our hut was assigned to you for work today.
+        ->4b
+
+=== 4aa ===
+
+Now that the lesson is over, we can get to work. But I see Weft isn't with you. Where is he?
+
+    +I'm not sure, sir.
+        He's probably been dragged into some other guard and couldn't bring himself to say no. Go find him, and return here when you do so we can get started.
+        ->Close
+
+=== 4b ===
+
+That is true, but Weft has not arrived yet. Go find him, and bring him here so we can begin.
+
+    +Of course, sir. Right away, sir.
+        ->Close
 
 === deactivateExtras ===
 
