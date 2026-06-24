@@ -337,7 +337,7 @@ public static class SpawnParamsList
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.guardHouseSouthWest, NPCNameList.barracksArmoryGate+1), 
                                         new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.directorDefeated }),
-                                                                     spawnWhileHostile: spawnWhileHostile, onlySpawnWhileHostile: onlySpawnWhileHostile));
+                                                                     spawnWhileHostile: spawnWhileHostile));
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.guardHouseSouthWest, NPCNameList.barracksArmoryGate+2), 
                                         new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] { FlagNameList.directorDefeated }),
                                                                      spawnWhileHostile: spawnWhileHostile));
@@ -408,6 +408,11 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.guard+3), 
                                                                         new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.situationStartedInNECamp }),
                                                                                                     new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.concludedHostageNegotiations })));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.guard+4), 
+                                                                        new InteractableSpawnParams(new StartSpawningAllTrueFlagList(new string[]{ FlagNameList.situationStartedInNECamp, FlagNameList.kastorExecutedWeft }),
+                                                                                                    new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated})));
+
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.guard+1), situationCampNESpawnParams);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.honorguard+1), situationCampNESpawnParams);

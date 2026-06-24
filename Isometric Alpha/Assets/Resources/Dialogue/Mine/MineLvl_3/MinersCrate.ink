@@ -299,7 +299,7 @@ fadeBackIn(60)
 
 {
 -saidYouMustBeJoking:
-I wish I was. But I'm deathly serious: these worm-things are growing in number. They are coming through a breach in the latest shaft we were digging.
+I wish I was. I'm deathly serious, however: these worm-things are growing in number. They are coming through a breach in the latest shaft we were digging.
 -else:
 To keep it brief, these worm-things are growing in number. They are coming through a breach in the latest shaft we were digging.
 }
@@ -509,11 +509,11 @@ If we plan on getting out of this alive, the breach must be sealed.
 {
 -mentionedDirectorMinersCrates:
 changeCamTarget({marcosIndex})
-We do, but it will be tricky. Some of the guards are trained in the use of blasting jelly; we use it to clear rubble sometimes. I was not the only guard to be trapped on this level when the evacuation was sounded. Those guards that remain on this level are barricaded within the chamber we use to store the jelly and other provisions, to the southeast of here. We will need to convince them to help us.
+We do, but it will be tricky. Some of the guards are trained in the use of blasting jelly; we use it to clear rubble sometimes. I was not the only guard to be trapped on this level when the evacuation was sounded. Those guards that remain are barricaded within the chamber we use to store the jelly and other provisions, to the southeast of here. We will need to convince them to help us.
 
 -else:
 changeCamTarget({marcosIndex})
-We do, but it will be tricky. Some of the guards are trained in the use of blasting jelly; we use it to clear rubble sometimes. I was not the only guard to be trapped on this level when the evacuation was sounded. Those guards that remain on this level are barricaded within the chamber we use to store the jelly and other provisions, to the southeast of here. We will need to convince them to help us, or failing that, kill them and take the jelly for ourselves.
+We do, but it will be tricky. Some of the guards are trained in the use of blasting jelly; we use it to clear rubble sometimes. I was not the only guard to be trapped on this level when the evacuation was sounded. Those guards that remain are barricaded within the chamber we use to store the jelly and other provisions, to the southeast of here. We will need to convince them to help us, or failing that, kill them and take the jelly for ourselves.
 
 }
 

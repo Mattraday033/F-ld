@@ -141,7 +141,10 @@ public static class DialogueList
         #region Slave Shack 5
 
         addDialogueToList(LocationNameList.slaveShackFive, NPCNameList.ervin,
-                            new Dialogue(new string[] { NPCNameList.ervin },
+                            new Dialogue(new string[] { 
+                                                        NPCNameList.ervin
+                                                        // ,NPCNameList.thatch
+                                                        },
                             Resources.Load<TextAsset>(DialogueNameList.ervinPath)));
 
         addDialogueToList(LocationNameList.slaveShackFive, NPCNameList.wallPatch, wallPatchDialogue);
@@ -441,6 +444,10 @@ public static class DialogueList
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+3,
                             new SingleCharacterDialogue(NPCNameList.guard+3,
                             Resources.Load<TextAsset>(DialogueNameList.situationGuardPath)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+4,
+                            new SingleCharacterDialogue(NPCNameList.guard+4,
+                            Resources.Load<TextAsset>(DialogueNameList.situationGuardBlockerPath)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+1,
                             new SingleCharacterDialogue(NPCNameList.guard+1,
@@ -1130,8 +1137,8 @@ public static class DialogueList
                                                                                                             NPCNameList.nandor,
                                                                                                             NPCNameList.guardMarcos,
                                                                                                             NPCNameList.guardMarcos+1,
-                                                                                                            NPCNameList.weft//,
-                                                                                                            //NPCNameList.thatch
+                                                                                                            NPCNameList.weft,
+                                                                                                            NPCNameList.thatch
                                                                                                         },
                                                                                 Resources.Load<TextAsset>(DialogueNameList.pocketRubblePathML3),
                                                                                 DialogueCombatInfoList.breachRubbleCombatInfo));
@@ -1145,8 +1152,9 @@ public static class DialogueList
                                                                                                             NPCNameList.guardReka,
                                                                                                             NPCNameList.guardVirag,
                                                                                                             NPCNameList.overseerGaspar,
-                                                                                                            NPCNameList.weft+1//,
-                                                                                                            //NPCNameList.thatch+1
+                                                                                                            NPCNameList.weft+1,
+                                                                                                            NPCNameList.thatch+1,
+                                                                                                            NPCNameList.thatch+2
                                                                                                         },
                                                                                 Resources.Load<TextAsset>(DialogueNameList.afterKillingGuardsMineLvl3Path)));
 

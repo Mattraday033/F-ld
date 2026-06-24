@@ -128,6 +128,7 @@ public static class OOCSpawnDetailsList
         list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchThree, locationName: LocationNameList.slaveShackFive, index: Constants.indexOne));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.ervin, new Vector3Int(3, -2), LocationNameList.slaveShackFive, facing: Facing.SouthWest));
+        // list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(1, -3), facing: Facing.NorthEast)); 
 
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackFive, list);
         #endregion
@@ -414,6 +415,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+3, new Vector3Int(-4, -11), LocationNameList.campNorthEast, animationName: MonsterNameList.spearman, animationType: CharacterAnimationType.Idle_Back, facing: Facing.NorthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+2, new Vector3Int(-5, -12), LocationNameList.campNorthEast, animationName: MonsterNameList.javelineer, animationType: CharacterAnimationType.Idle_Back, facing: Facing.NorthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+4, new Vector3Int(-5, -12), LocationNameList.campNorthEast, animationName: MonsterNameList.javelineer, animationType: CharacterAnimationType.OOC_Idle_Front, facing: Facing.SouthWest));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+3, new Vector3Int(-4, -13), LocationNameList.campNorthEast, animationName: MonsterNameList.spearman, animationType: CharacterAnimationType.Idle_Back, facing: Facing.NorthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+3, new Vector3Int(-3, -14), LocationNameList.campNorthEast, animationName: MonsterNameList.axeman, animationType: CharacterAnimationType.Idle_Back, facing: Facing.NorthWest));
 
@@ -1562,10 +1564,12 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.overseerGaspar, new Vector3Int(-6, 8), facing: Facing.SouthEast));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(-10, 5), facing: Facing.NorthEast));
-        // list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(-5, 5), facing: Facing.SouthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(-5, 5), facing: Facing.SouthWest));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft+1, new Vector3Int(-8,4), facing: Facing.NorthWest));
-        // list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch+1, new Vector3Int(-6,4), facing: Facing.NorthWest));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch+1, new Vector3Int(-6,4), facing: Facing.NorthWest));
+        
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch+2, new Vector3Int(-7,2), facing: Facing.NorthWest));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.carter, new Vector3Int(-6, 3), facing: Facing.NorthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.nandor, new Vector3Int(-8, 2), facing: Facing.NorthWest));

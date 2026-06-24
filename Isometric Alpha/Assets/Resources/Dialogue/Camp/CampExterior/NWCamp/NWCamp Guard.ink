@@ -71,8 +71,6 @@ You're not allowed in here. Head back the way you came.
 
 In that case, the Chief arrived a short bit ago. Go inside, he should be near the hut under construction directly behind me.
 
-\*This section will provide you with a tutorial on the different Skills your Party can use. If you are already familiar with these Skills, this section can be skipped.*
-
 {
 -savedDibber:
 

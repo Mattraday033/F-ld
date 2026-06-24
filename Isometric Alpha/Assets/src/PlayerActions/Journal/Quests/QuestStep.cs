@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public interface IJournalSubcategory : IDescribable
 }
 
 [System.Serializable]
-public class QuestStep : IJournalSubcategory, IDescribableInBlocks, ISortable
+public class QuestStep : IJournalSubcategory, IDescribableInBlocks, ISortable, ICloneable
 {
 	private const string questCompletedPrefix = "Quest Complete: ";
 	private const string questFailedPrefix = "Quest Failed: ";
@@ -263,4 +264,14 @@ public class QuestStep : IJournalSubcategory, IDescribableInBlocks, ISortable
     }
 
     #endregion
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
+
+    public QuestStep clone()
+    {
+        return Clone() as QuestStep;
+    }
 }

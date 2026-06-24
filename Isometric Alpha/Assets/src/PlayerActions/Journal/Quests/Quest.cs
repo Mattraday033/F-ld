@@ -42,24 +42,34 @@ public class Quest: IDescribable, IJournalCategory
             steps.Add(questListStepWrapper.stepName, new QuestStep(this, questListStepWrapper));
         }
 
-        string[] areaHostilityFailureConditions = GetFromJson.getElementFromJson<string[]>(InteriorDefaultValues.badString, failureOnAreaHostilityVarName, jsonDynamic, InteriorDefaultValues.defaultEmptyStringArray);
+        addFailureConditions(failureOnAreaHostilityVarName, jsonDynamic, (Func<string, AreaHostilityFailureCondition>)(areaName => new AreaHostilityFailureCondition(areaName)));
 
-        foreach(string areaName in areaHostilityFailureConditions)
-        {
-            failureConditions.Add(new AreaHostilityFailureCondition(areaName));
-        }
-
-        string[] npcDeathFailureConditions = GetFromJson.getElementFromJson<string[]>(InteriorDefaultValues.badString, failureOnDeathVarName, jsonDynamic, InteriorDefaultValues.defaultEmptyStringArray);
-
-        foreach(string characterName in npcDeathFailureConditions)
-        {
-            failureConditions.Add(new CharacterDeathFailureCondition(characterName));
-        }
+        addFailureConditions(failureOnDeathVarName, jsonDynamic, (Func<string, CharacterDeathFailureCondition>)(characterName => new CharacterDeathFailureCondition(characterName)));
 
 		AreaList.AreaBecameHostile.AddListener(checkFailState);
         DeathFlagManager.OnDeathFlagCreated.AddListener(checkFailState);
 	}
 
+    private void addFailureConditions<T>(string failureVarName, dynamic jsonDynamic, Func<string, T> createCondition) where T : QuestFailureNameCheckCondition
+    {
+        string[] failureConditionNames = GetFromJson.getElementFromJson<string[]>(InteriorDefaultValues.badString, failureVarName, jsonDynamic, InteriorDefaultValues.defaultEmptyStringArray);
+
+        foreach(string name in failureConditionNames)
+        {
+            T questFailureCondition = createCondition(name);
+            failureConditions.Add(questFailureCondition);
+            addUniversalQuestStep(questFailureCondition);
+        }
+    }
+
+    private void addUniversalQuestStep(QuestFailureNameCheckCondition condition)
+    {
+        if(UniversalQuestStepList.getQuestStep(condition.getFailureQuestStepName(), out QuestStep questStep))
+        {
+            questStep.parentQuest = this;
+            steps[questStep.stepName] = questStep;
+        }
+    }
 
     private void checkFailState(object o)
     {

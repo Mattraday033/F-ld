@@ -253,14 +253,14 @@ You're back. And you've brought... *Kastor regards Weft with a look of disgust* 
     changeCamTarget({kastorIndex})
     Unfortunately. Why did you bring him here?
     ->weftTrustConvo_1aa
-+He's my new hutmate. We work together now, so it would be suspicious if I was seen without him.
++He's my new hutmate. We work together now, so I am forced to travel with him.
     ->weftTrustConvo_1b
 
 === weftTrustConvo_1b ===
 
 changeCamTarget({kastorIndex})
 
-I understand your logic, but this presents a problem. He can't be trusted. Even having this conversation in front of him without details is enough to put us at risk.
+A dilemma to be sure. He can't be trusted. Even having this conversation in front of him without details is enough to put us at risk.
 
 changeCamTarget({weftIndex})
 

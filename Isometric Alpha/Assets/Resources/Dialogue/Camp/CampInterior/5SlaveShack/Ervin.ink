@@ -12,8 +12,10 @@ VAR askedQuestion1 = 0
 VAR askedQuestion2 = 0
 VAR askedQuestion3 = 0
 
-
 VAR playerName = ""
+
+VAR ervinIndex = 1
+VAR thatchIndex = 2
 
 //changeCamTarget(int targetIndex)
 //keepDialogue()
@@ -36,46 +38,27 @@ setToTrue(spokeToErvin)
 
 === 1a ===
 
+
 \*The first thing you notice about this man is his brand. Unlike others you have seen, his is further down his neck, and his scars are thicker and more pronounced. This clearly causes him incredible discomfort. His voice is pained and raspy.* What you need?
     
 {
--gotThePlanFromKastor && askedErvinAboutBrand:
-    +I won't bother you.
-        ->Close
+-gotThePlanFromKastor:
+    +Which way is the wind blowing?
+        ->2a
+}
     +Your brand. What happened?
-        ->1ba
+        ->1b
+{
+-askedErvinAboutBrand:
     +What did you do before your brand?        
         ->1c
-    +Which way is the wind blowing?
-        ->2a
--gotThePlanFromKastor:
-    +I won't bother you.
-        ->Close
-    +Your brand. What happened?
-        ->1ba
-    +Which way is the wind blowing?
-        ->2a
--askedErvinAboutBrand:
-    +I won't bother you.
-        ->Close
-    +Your brand. What happened?
-        ->1ba
-    +What did you do before your brand?
-        ->1c
--else:
-    +I won't bother you.
-        ->Close
-    +Your brand. What happened?
-        ->1ba
 }
-
-=== 1ba ===
-~askedErvinAboutBrand = true
-setToTrue(askedErvinAboutBrand)
-    ->1b
+    +I won't bother you.
+        ->Close
 
 === 1b ===
 
+setToTrue(askedErvinAboutBrand)
 Before brand, I was slave. Guards didn't have tools to brand. Did it themselves. Sloppy.
     
     +What did you do to receive your branding?
@@ -218,24 +201,19 @@ Wait. There's chance you can't convince them. That happen, you be ready to kill.
 \*Ervin waits expectantly.*
 
 {
--askedErvinAboutBrand:
-    +I won't bother you.
-        ->Close
-    +Your brand. What happened?
-        ->1ba
+    -true:
+    +We need to talk about what you asked of me.
+        ->3b
     +What did you do before your brand?        
         ->1c
-    +We need to talk about what you asked of me.
-        ->3b
-
--else:
+}
+{
+-askedErvinAboutBrand:
+    +Your brand. What happened?
+        ->1b
+}
     +I won't bother you.
         ->Close
-    +Your brand. What happened?
-        ->1ba
-    +We need to talk about what you asked of me.
-        ->3b
-}
 
 === 3b ===
 
@@ -317,7 +295,7 @@ Return to Kastor. Tell him what happened.
     +I won't bother you.
         ->Close
     +Your brand. What happened?
-        ->1ba
+        ->1b
     +What did you do before your brand?        
         ->1c
 
@@ -325,7 +303,7 @@ Return to Kastor. Tell him what happened.
     +I won't bother you.
         ->Close
     +Your brand. What happened?
-        ->1ba
+        ->1b
 }
 
 

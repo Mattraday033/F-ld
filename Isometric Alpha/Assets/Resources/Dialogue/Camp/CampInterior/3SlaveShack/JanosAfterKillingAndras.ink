@@ -17,6 +17,9 @@ VAR playerName = ""
 setToTrue(andrasIsDead)
 setToTrue(obtainedMineArmoryKey)
 
+setNPCFacing({janosIndex},SW)
+setFacing(NE)
+
 ~andrasIsDead = true
 
 changeCamTarget({janosIndex})

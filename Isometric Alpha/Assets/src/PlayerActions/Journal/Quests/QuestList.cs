@@ -10,65 +10,15 @@ public static class QuestList
 {
 	private const string pathToQuestFolder = "Quests";
 
-    private const string titleVarName = "title";
-    public const string stepsVarName = "steps";
-    private const string deathStepsVarName = "deathSteps";
-    private const string succeedOnActivationVarName = "succeedOnActivation";
-    private const string stepNameVarName = "stepName";
-    private const string journalDescriptionVarName = "journalDescription";
-    private const string mapZoneVarName = "MapZone";
-    private const string mapLocationVarName = "MapLocation";
-    private const string failureOnAreaHostilityVarName = "failureOnAreaHostility";
-
 	private static Dictionary<string, Quest> questDict = new Dictionary<string, Quest>();
 
     static QuestList()
 	{
-		//Do not change quest add order. Would need to either write something to find the quest in the list as if it's not an ordered list (time consuming to write and run)
-		//or change back. Otherwise would break the save using the old order.
-
 		buildQuestListFromScratch();
 	}
  
 	public static Quest convertJsonTextAssetToQuest(TextAsset textAsset)
 	{
-
-
-
-		// string stepName;
-		// string journalDescription;
-
-		// //Debug.LogError("filePath = " + filePath);
-
-		// string jsonString = textAsset.ToString();
-
-        // //Debug.LogError("jsonString = " + jsonString);
-
-		// dynamic jsonDynamic = JsonConvert.DeserializeObject<dynamic>(jsonString); 
-		
-		// int stepNum = jsonDynamic[stepsVarName].Count;
-		
-		// Quest quest = new Quest();
-		
-		// quest.title = jsonDynamic[titleVarName];
-
-		// quest.steps = new Dictionary<string, QuestStep>();
-
-		// for (int i = 0; i < stepNum; i++)
-		// {
-		// 	stepName = jsonDynamic[stepsVarName][i][stepNameVarName];
-		// 	journalDescription = jsonDynamic[stepsVarName][i][journalDescriptionVarName];
-
-		// 	quest.steps[stepName] = new QuestStep(quest, false, stepName, journalDescription);
-
-		// 	if (jsonDynamic[stepsVarName][i][mapZoneVarName] != null && jsonDynamic[stepsVarName][i][mapLocationVarName] != null)
-		// 	{
-		// 		quest.steps[stepName].mapZone = jsonDynamic[stepsVarName][i][mapZoneVarName];
-		// 		quest.steps[stepName].mapLocation = jsonDynamic[stepsVarName][i][mapLocationVarName];
-		// 	}
-		// }
-		
-		// quest.deathSteps = new Dictionary<string, DeathStep>();
         string jsonString = textAsset.ToString();
         Quest quest = new Quest(jsonString);
 
@@ -302,5 +252,31 @@ public static class QuestList
     private static void readSaveBlueprint(SaveBlueprint blueprint)
     {
         resetAndOverwriteQuestDictionary(blueprint.currentQuestList);
+    }
+}
+
+public static class UniversalQuestStepList
+{
+    public readonly static Dictionary<string, QuestStep> questStepDict = new Dictionary<string, QuestStep>();
+
+    public static bool getQuestStep(string questStepName, out QuestStep questStep)
+    {
+        if(questStepDict.ContainsKey(questStepName))
+        {
+            questStep = questStepDict[questStepName].clone();
+            return true;
+        }
+
+        questStep = null;
+        return false;
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        questStepDict.Add(AreaHostilityFailureCondition.areaHostileQuestStepName, new QuestStep(null, false, AreaHostilityFailureCondition.areaHostileQuestStepName, "The Area is Hostile. This quest cannot be completed."));
+
+        questStepDict.Add(NPCNameList.weft + CharacterDeathFailureCondition.questStepNameSuffix, new QuestStep(null, false, NPCNameList.weft + CharacterDeathFailureCondition.questStepNameSuffix,
+                                                                                                                "With Weft's execution, interacting with the guards will become more difficult. I should avoid them if I don't want his disappearance to raise uncomfortable questions."));
     }
 }

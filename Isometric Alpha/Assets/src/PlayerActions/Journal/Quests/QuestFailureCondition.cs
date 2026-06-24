@@ -29,7 +29,7 @@ public abstract class QuestFailureNameCheckCondition : QuestFailureCondition
 
 public class AreaHostilityFailureCondition : QuestFailureNameCheckCondition
 {
-    private const string areaHostileQuestStepName = "Area Hostile";
+    public const string areaHostileQuestStepName = "Area Hostile";
     public AreaHostilityFailureCondition(string areaName):
     base(areaName)
     {
@@ -54,7 +54,7 @@ public class AreaHostilityFailureCondition : QuestFailureNameCheckCondition
 
 public class CharacterDeathFailureCondition : QuestFailureNameCheckCondition
 {
-    private const string areaHostileQuestStepName = "Character Death";
+    public const string questStepNameSuffix = " has died.";
 
     public CharacterDeathFailureCondition(string characterName):
     base(characterName)
@@ -74,6 +74,6 @@ public class CharacterDeathFailureCondition : QuestFailureNameCheckCondition
 
     public override string getFailureQuestStepName()
     {
-        return areaHostileQuestStepName;
+        return nameToCheck + questStepNameSuffix;
     }
 }

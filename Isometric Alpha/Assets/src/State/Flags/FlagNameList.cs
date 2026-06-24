@@ -55,6 +55,8 @@ public static class FlagNameList
         public const string blamedWeftForHostageDeath = "blamedWeftForHostageDeath";
         public const string discussedWithWeftAfterTookMineJob = "discussedWithWeftAfterTookMineJob";
         public const string kastorExecutedWeft = "kastorExecutedWeft";
+        public const string refusedToGiveOathForWeftsLife = "refusedToGiveOathForWeftsLife";
+        public const string gaveOathForWeftsLife = "gaveOathForWeftsLife";
 
         //Tabor Skill Tutorial Flags
         public const string toldByTaborToBuildHouses = "toldByTaborToBuildHouses";
@@ -278,6 +280,10 @@ public static class FlagNameList
         public const string toldThatchAboutSlate = "toldThatchAboutSlate";
         public const string thatchBeginsStranglingVazul = "thatchBeginsStranglingVazul";
         public const string angeredThatchInHisHut = "angeredThatchInHisHut";
+        public const string saidSorryForSlatesDeathToThatch = "saidSorryForSlatesDeathToThatch";
+
+        //Thatch flags
+        public const string sworeThatchWouldBeFree = "sworeThatchWouldBeFree";
 
         //Brush Flags
         public const string toldAboutCellKey = "toldAboutCellKey"; //Brush has explained where the cell key is

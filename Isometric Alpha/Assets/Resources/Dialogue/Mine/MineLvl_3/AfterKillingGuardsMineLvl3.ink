@@ -13,6 +13,7 @@ VAR viragIndex = 6
 VAR gasparIndex = 7
 VAR weftIndex = 8
 VAR thatchIndex = 9
+VAR thatchWithNandorIndex = 10
 
 VAR deathFlagGuardMárcos = false
 VAR deathFlagGuardPázmán = false
@@ -33,6 +34,10 @@ VAR mineLvl3GuardsBackToSurface = false
 VAR mineLvl3SlavesBackToSurface = false
 VAR mineLvl3ToldPazmanToEatShit = false
 VAR mineLvl3ThreatenedGaspar = false
+
+VAR partyFlagThatch = false
+
+VAR deathFlagGuardVazul = false
 
 VAR mineLvl3ConvincedRekaAndPazman = false
 //VAR mineLvl3ConvincedOnlyReka = false
@@ -59,6 +64,17 @@ VAR playerName = ""
 
 activate({nandorIndex})
 activate({carterIndex})
+
+{
+-partyFlagThatch:
+activate({thatchWithNandorIndex})
+}
+
+{
+-weftAddedToParty:
+activate({weftIndex})
+setNPCFacing({weftIndex},SE)
+}
 
 {
 -deathFlagGuardMárcos and mineLvl3MarcosAgreedToIgniteJelly:
@@ -247,8 +263,99 @@ changeCamTarget({nandorIndex})
 activateQuestStep(Finding Nándor, Return to the Surface.)
 setToTrue(mineLvl3SlavesBackToSurface)
     
-Of course. We will follow your lead.
-    ->Close
+    {
+        -weftAddedToParty:
+            ->weftHesitates_1a
+        -else:
+            ->Close
+    }
+    
+=== weftHesitates_1a ===
+
+fadeToBlack(true,false)
+
+deactivate({thatchWithNandorIndex})
+deactivate({marcosIndex})
+deactivate({carterIndex})
+deactivate({nandorIndex})
+changeCamTarget({weftIndex})
+
+movePlayerPos(-5,5)
+setFacing(SW)
+
+setNPCFacing({weftIndex}, NE)
+
+fadeBackIn(60)
+
+\*As the others move to leave, Weft hesitates.*
+
+    +Weft? Is something the matter?
+        ->weftHesitates_1b
+
+=== weftHesitates_1b ===
+
+It's nothing. I'm just weary from battle.
+
+    +You're normally better at lying than that. What is it?
+        ->weftHesitates_1c
+    +If you don't wish to discuss it, then we should keep moving.
+        ->Close
+
+=== weftHesitates_1c ===
+
+I have no love for the guards, but after having slain some... I am forced to wonder if the same fate awaits me at the end of this revolution.
+
+The other branded hold no love for me. They may hate me even more than they hate the guards. When this road ends, what fate awaits one such as I?
+
+    +They may hate you, but you haven't done anything to offend me yet. I can keep you safe from the others, if that remains so.
+        ->weftHesitates_1ea
+    +That will be resolved at a later time. There is no use worrying about it now.
+        ->weftHesitates_1eb
+    +You chose your fate when you turned against your fellow branded. 
+        ->weftHesitates_1d
+
+=== weftHesitates_1d ===
+
+And what fate is that? Beheading? Hanging from the neck? Worse?
+
+    +Nothing so dramatic. You'll be punished, but not with your ending. And after, you'll be free like the rest of us.
+        ->weftHesitates_1ea
+    +A quick death, without humiliation. That will be preferable to the fates of many of the guards, believe me.
+        \*Weft hangs his head.* If that is the case, I will begin making my peace with it.
+        ->Close
+    +I'm unable to say, but it won't be pleasant. Now keep up, we must be going.
+        \*Weft keeps his face a mask as he follows your lead.*
+        ->Close
+
+=== weftHesitates_1ea ===
+
+When the stakes are so high, the only way I can trust what you say is if I am given collateral. And the most binding form of such is with an oath before the Gods.
+
+->weftHesitates_1e
+
+=== weftHesitates_1eb ===
+
+No! This cannot wait. No question could be more pressing; I need it answered!
+
+    +If you showed such courage before the guards, you'd gain more respect. But if it will calm you, I don't plan to see you executed when this is over.
+        ->weftHesitates_1ea
+    +You are not in a place to make demands. Now, we must move before the others begin to worry.
+        \*Weft keeps his face a mask as he follows your lead.*
+        ->weftHesitates_1ea
+
+
+=== weftHesitates_1e ===
+
+Swear it. Swear before the Gods that when this is all over I will leave this revolution with my life, lest They take my revenge for me after my passing.
+
+    +I'm not going to do that. It isn't right to bother the Gods with a matter so trivial.
+        setToTrue(refusedToGiveOathForWeftsLife)
+        That response does not fill me with hope. Let's just get moving before the others start to worry.
+            ->Close
+    +Very well. I swear that your death will not come from punishment received from your fellow revolutionaries, or may the Gods conjure a punishment for me worthy of my failure.
+        setToTrue(gaveOathForWeftsLife)
+        \*Weft looks signifigantly relieved.* Thank you. Such an oath does much credit to your intentions. 
+            ->Close
 
 === 4d ===
 
@@ -378,13 +485,18 @@ activate({gasparIndex})
 playAnimation({playerIndex},OOC_Idle_Back)
 
 {
+-partyFlagThatch:
+activate({thatchIndex})
+}
+
+{
 -weftAddedToParty and not kastorExecutedWeft:
 activate({weftIndex})
 }
 
 changeCamTarget({gasparIndex})
 
-Damn. Two more branded, dead.
+Damn. More dead branded.
 
 setNPCFacing({pazmanIndex},NW)
 changeCamTarget({pazmanIndex})
@@ -431,7 +543,8 @@ deactivate({rekaIndex})
 deactivate({viragIndex})
 deactivate({gasparIndex})
 deactivate({weftIndex})
-// deactivate({thatchIndex})
+deactivate({thatchIndex})
+deactivate({thatchWithNandorIndex})
 
 fadeBackIn(60)
 

@@ -22,10 +22,12 @@ VAR toldToInvestigateScreamingInThatchsHut = false
 VAR kastorReactedToHostility = false
 VAR vazulMentionedSlatesFate = false
 
-VAR deathFlagGuardVazul = false
 VAR vazulFightIndex = 0
 VAR vazulAfterFightConvoKey = "Guard Vazul"
 
+VAR saidSorryForSlatesDeathToThatch = false
+
+VAR deathFlagGuardVazul = false
 
 VAR vazulIndex = 1
 VAR slateIndex = 2
@@ -259,7 +261,7 @@ giveItem(1,8,1)
 
     +If we're going to survive, we have to keep at least a little cheer. Otherwise, we might as well lay down and die.
         ->4za
-    +What's with the look? He didn't kill *my* friend.
+    +What's with the look? He didn't kill <i>my</i> friend.
         ->4cb
 
 === 4cb ===
@@ -306,6 +308,7 @@ I was a silversmith's apprentice before my branding. Slate was a tailor, before 
 I did not know him well. But in this camp, friends are rare. If you find one, cling to them hard, lest they be ripped from your grasp.
 
     +I'm sorry for your loss.
+        setToTrue(saidSorryForSlatesDeathToThatch)
         ->4ea
     +Time is short. Let us go.
         ->Close
@@ -473,7 +476,7 @@ changeCamTarget({thatchIndex})
 
     +If we're going to survive, we have to keep at least a little cheer. Otherwise, we might as well lay down and die.
         ->4za
-    +What's with the look? He didn't kill *my* friend.
+    +What's with the look? He didn't kill <i>my</i> friend.
         ->4cb
     +He's not the first man I've buried alive, and I expect the Gods won't let him be the last.
         ->4cc

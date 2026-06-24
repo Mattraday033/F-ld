@@ -14,7 +14,7 @@ VAR playerName = ""
 
 === 1a ===
 
-{description}
+\*{description}*
 
 {
 -dexDifficulty <= 1:

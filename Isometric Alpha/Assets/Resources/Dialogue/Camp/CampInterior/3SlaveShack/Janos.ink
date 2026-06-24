@@ -312,6 +312,7 @@ changeCamTarget({andrasIndex})
 
 setFacing(SE)
 setNPCFacing({janosIndex},SE)
+movePlayerPos(4,3)
 
 fadeBackIn(60)
 

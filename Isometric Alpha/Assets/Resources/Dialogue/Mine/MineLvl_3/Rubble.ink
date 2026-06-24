@@ -17,6 +17,11 @@ VAR rubbleMarcosIndex = 10
 VAR weftIndex = 11
 VAR thatchIndex = 12
 
+VAR nandorWillLeave = false
+VAR carterWillLeave = false
+VAR thatchWillLeave = false
+VAR weftWillLeave = false
+
 VAR fullGuardFightIndex = 0
 VAR halfGuardFightIndex = 1
 VAR nandorCarterFightIndex = 2
@@ -42,6 +47,10 @@ VAR mineLvl3SlavesBackToSurface = false
 VAR mineLvl3ToldPazmanToEatShit = false
 VAR mineLvl3ThreatenedGaspar = false
 
+VAR angeredThatchInHisHut = false
+VAR deathFlagGuardVazul = false
+VAR saidSorryForSlatesDeathToThatch = false
+
 VAR kastorExecutedWeft = false
 
 VAR sentIntoMineByDirector = false
@@ -61,7 +70,10 @@ VAR largeCupFilledWithWater = false
 VAR largeCupPlacedOnBarrel = false
 VAR mineLvl3AgreedToFightGaspar = false
 
+VAR refusedToGiveOathForWeftsLife = false
+
 VAR weftAddedToParty = false
+VAR partyFlagThatch = false
 
 VAR playerSealedBreachThemself = false
 
@@ -167,6 +179,11 @@ activate({weftIndex})
 }
 
 {
+-partyFlagThatch:
+activate({thatchIndex})
+}
+
+{
 -mineLvl3GuardsInParty:
     activate({gasparIndex})
     activate({rekaIndex})
@@ -245,6 +262,21 @@ Fun's over, branded. Fall in line: we're heading back up to camp.
 
 
 === 3b ===
+
+{
+-thatchWillLeave:
+removeFromParty({thatchIndex})
+}
+
+{
+-carterWillLeave:
+removeFromParty({carterIndex})
+}
+
+{
+-nandorWillLeave:
+removeFromParty({nandorIndex})
+}
 
 removeFromParty({gasparIndex})
 
@@ -640,8 +672,8 @@ Carter and I will fight whether you're with us or not. If you treasure your free
 
 === 3da ===
 
-removeFromParty({carterIndex})
-removeFromParty({nandorIndex})
+~carterWillLeave = true
+~nandorWillLeave = true
 
 playAnimation({nandorIndex},Idle_Back)
 playAnimation({carterIndex},Idle_Back)
@@ -651,7 +683,81 @@ setToTrue(mineLvl3RefusedToFightGaspar)
 Gáspár, we refuse! I don't care if I die here, I will no longer be a slave!
 
     +I'm not with them!
+
+    {
+    -partyFlagThatch:
+        ->convinceThatchToStay_1a
+    -else:
         ->3b
+    }
+
+=== convinceThatchToStay_1a ===
+
+playAnimation({thatchIndex},Idle_Front)
+changeCamTarget({thatchIndex})
+
+You will not fight? What kind of branded are you, choosing to cower rather than fight to break their chains?
+
+    +Thatch, lack of sleep clouds your judgement. I won't fight when death is certain.
+        ->convinceThatchToStay_2a
+    +What does it matter to you? Will you still fight even if I refuse?
+        ->convinceThatchToStay_2a
+
+=== convinceThatchToStay_2a ===
+
+I would. I have a tool in my hand and one of the masters to swing it at. If I die here, then I die with all of my wishes fulfilled.
+
+    +Perhaps Slate thought the same while spitting in the guards' eyes. Would you force me to mourn your broken body as we did his? {not angeredThatchInHisHut:<Cha {charisma}/{getThatchStayCharismaDiff()}>}
+    {
+        -angeredThatchInHisHut:
+            You lying cur. You didn't care for a split moment that Slate was dead, and now you try to use his corpse to manipulate me? I'm going to enjoy putting you down.
+            ~thatchWillLeave = true
+                ->3b
+        -charisma >= getThatchStayCharismaDiff():
+                ->convinceThatchToStay_2aa
+        -charisma < getThatchStayCharismaDiff():
+            I'm sorry, friend, but I cannot live as a slave any longer. My days as the property of another are over, one way or another.
+            ~thatchWillLeave = true
+                ->3b
+    }
+    +If you are so resolved, then I will say no more.
+            ~thatchWillLeave = true
+                ->3b
+
+
+=== convinceThatchToStay_2aa ===
+
+\*Thatch locks eyes with you, and then shakes his head violently, slapping his head in an effort to keep fatigue at bay.* 
+
+I feel as if I am on the verge of madness. I discern our waking world from nightmare soley by this pick's heft, for no dreams of mine are so surreal to grant hope of freedom by force.
+
+And now you ask me to abandon my last tether to a life free from this blurring? Perhaps I <i>am</i> still sane for you sound madder still.
+
+    +What could I offer you not to seek this death you are bent on?
+        ->convinceThatchToStay_2ab
+
+=== convinceThatchToStay_2ab ===
+
+Promise me you will see it end! Promise me I get to leave this blasted camp! See me gone from here or let me leave on my terms!
+
+    +One day, you will be free. I swear it.
+        setToTrue(sworeThatchWouldBeFree)
+        \*Thatch nods.* Then I am with you.
+            ->3b
+    +I'm sorry, Thatch. I cannot promise you what I'm unsure I can give.
+        \*Thatch grips his pick all the tighter.* Then I choose this fight. My only regret is that you will not join me in it.
+        ~thatchWillLeave = true
+            ->3b
+
+
+=== function getThatchStayCharismaDiff() ===
+
+{
+-deathFlagGuardVazul and saidSorryForSlatesDeathToThatch:
+~return 2
+-else:
+~return 3
+}
 
 === 4a ===
 
@@ -699,7 +805,8 @@ The breach is sealed and the worms are no longer a threat. I have not felt like 
     
     Of course. We will follow your lead.
         ->Close
-    
+
+
 === 4d ===
 
 changeCamTarget({gasparIndex})
