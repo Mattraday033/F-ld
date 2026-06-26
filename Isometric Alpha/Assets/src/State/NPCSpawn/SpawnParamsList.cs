@@ -367,7 +367,8 @@ public static class SpawnParamsList
         #region Stockhouse
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.stockhouse, NPCNameList.uros),
-                                new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.snitchedOnUros })));
+                                new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.snitchedOnUros }),
+                                                            spawnWhileHostile: false));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.stockhouse, NPCNameList.quartermasterEmese),
                                 new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning, spawnWhileHostile: false));
@@ -803,24 +804,30 @@ public static class SpawnParamsList
         #region Camp Mine Entrance
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.guard),
-                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.muzsaFought })));
+                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.muzsaFought }),
+                                                            spawnWhileHostile: false));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.guard+1),
-                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.muzsaFought })));
+                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.muzsaFought }),
+                                                            spawnWhileHostile: false));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.guardMuzsa),
-                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.mineCratesCleared, FlagNameList.muzsaFought })));
+                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.mineCratesCleared, FlagNameList.muzsaFought }),
+                                                            spawnWhileHostile: false));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.barricade),
-                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.mineCratesCleared, FlagNameList.muzsaFought })));
+                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.mineCratesCleared, FlagNameList.muzsaFought }),
+                                                            spawnWhileHostile: false));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.guardMuzsa + 1),
                                new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.mineCratesCleared }),
-                                            stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.muzsaFought })));
+                                            stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.muzsaFought }),
+                                                            spawnWhileHostile: false));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.uros),
                                 new InteractableSpawnParams(new StartSpawningFlagList(new string[] { FlagNameList.snitchedOnUros }),
-                                            stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.foughtMuzsaAfterSnitchedOnUros })));
+                                            stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.foughtMuzsaAfterSnitchedOnUros }),
+                                                spawnWhileHostile: false));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campMineEntrance, NPCNameList.barracksGate), barracksGateSpawnParams);
 

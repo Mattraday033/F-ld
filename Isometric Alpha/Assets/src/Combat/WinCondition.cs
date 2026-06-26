@@ -220,15 +220,21 @@ public class EndOfCombatCutSceneScript
 
     private IEnumerator playCutScene()
     {
-        yield return new WaitForSeconds(.25f);
-        EnvironmentalCombatActionList.addTakacsPuppetWaveSummon();
+        if(CombatStateManager.whoseTurn == WhoseTurn.Won)
+        {
+            yield return new WaitForSeconds(.25f);
+            EnvironmentalCombatActionList.addTakacsPuppetWaveSummon();
 
-        CombatActionManager.getInstance().resolveACombatAction();
-        CombatActionManager.getInstance().resolveACombatAction();
-        CombatActionManager.getInstance().resolveACombatAction();
-        CombatActionManager.getInstance().resolveACombatAction();
+            CombatActionManager.getInstance().resolveACombatAction();
+            CombatActionManager.getInstance().resolveACombatAction();
+            CombatActionManager.getInstance().resolveACombatAction();
+            CombatActionManager.getInstance().resolveACombatAction();
 
-        yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(2.5f);
+        } else
+        {
+            yield return new WaitForSeconds(.5f);
+        }
         
         foreach (string spriteName in cutSceneSpriteNames)
         {
@@ -248,7 +254,9 @@ public class EndOfCombatCutSceneScript
 
     private void playBluntEffectOnAllAllies()
     {
-        foreach (Stats ally in CombatGrid.getAllAliveAllyCombatants())
+        List<Stats> allies = CombatGrid.getAllAllyCombatants();
+
+        foreach (Stats ally in allies)
         {
             foreach (GridCoords allyCoords in ally.positions)
             {
@@ -263,7 +271,9 @@ public class EndOfCombatCutSceneScript
         List<Vector3> startPositions = new List<Vector3>();
         List<Vector3> endPositions = new List<Vector3>();
 
-        foreach (Stats ally in CombatGrid.getAllAliveAllyCombatants())
+        List<Stats> allies = CombatGrid.getAllAllyCombatants();
+
+        foreach (Stats ally in allies)
         {
             if (ally.combatSprite == null || ally.positions.Count == 0)
             {

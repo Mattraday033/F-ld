@@ -95,6 +95,11 @@ public static class CombatGrid
 	{
         if(newCombatant == null && combatantsDict.ContainsKey(coords))
         {
+            if(combatantsDict[coords].getName().Contains(PartyManager.playerMarker))
+            {
+                return;
+            }
+
             combatantsDict.Remove(coords);
 
             if(getTotalAliveEnemyCount() == 0)

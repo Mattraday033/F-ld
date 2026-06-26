@@ -151,7 +151,7 @@ searchInventoryFor(hasToolBundle,Tool Bundle)
 === chooseConvoStart ===
 
 {
--partyFlagWeft and gaveKastorThePassword and toldKastorOfThatchsFate and not hadWeftTrustConvo:
+-partyFlagWeft and gaveKastorThePassword and toldKastorOfThatchsFate and not hadWeftTrustConvo and not mineLvl3BreachSealed:
     ->weftTrustConvo_1a
 }
 

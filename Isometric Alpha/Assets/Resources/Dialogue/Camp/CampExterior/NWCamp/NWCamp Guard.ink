@@ -129,8 +129,7 @@ getNewDialogueFromList(NWCampChief Tabor,true,skippedTutorialInNWCamp)
 
     +\*Continue.*
         setToTrue(startedDirectorAnnouncement)
-        ->proceedToDirectorSpeech
-        // ->readyCheck_1b
+        ->readyCheck_1b
     +\*Leave.*
         ->Close
 
@@ -268,6 +267,11 @@ VAR thePain = "The pain I've inflicted was meant to help align the branded with 
 
 === 3e ===
 
+VAR farewell1 = "Farewell, "
+VAR farewell2 = ". I expect not to see your like again."
+VAR farewell = ""
+~farewell = farewell1 + playerName + farewell2
+
     +You're a man adrift in your own little world, and I've stepped in shit that I respect more than you. Get out of my way.
         \*Tabor stands aside without saying another word.*
         ->proceedToDirectorSpeech
@@ -289,11 +293,6 @@ VAR thePain = "The pain I've inflicted was meant to help align the branded with 
         ->keepingDirectorWaiting_1b
 
 === keepingDirectorWaiting_1a ===
-
-VAR farewell1 = "Farewell, "
-VAR farewell2 = ". I expect not to see your like again."
-VAR farewell = ""
-~farewell = farewell1 + playerName + farewell2
 
 But we are keeping the Director waiting. It would be best if we move along. {farewell}
 
@@ -325,8 +324,6 @@ activate({thatchIndex})
 }
 
 fadeBackIn(60)
-
-->directorSpeech
 
 \*The Director clears his throat.*
 

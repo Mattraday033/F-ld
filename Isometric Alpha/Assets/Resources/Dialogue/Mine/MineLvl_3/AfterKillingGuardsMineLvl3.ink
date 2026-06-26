@@ -305,7 +305,7 @@ It's nothing. I'm just weary from battle.
 
 I have no love for the guards, but after having slain some... I am forced to wonder if the same fate awaits me at the end of this revolution.
 
-The other branded hold no love for me. They may hate me even more than they hate the guards. When this road ends, what fate awaits one such as I?
+The other branded may hate me even more than they hate the guards. When this road ends, what awaits one such as I?
 
     +They may hate you, but you haven't done anything to offend me yet. I can keep you safe from the others, if that remains so.
         ->weftHesitates_1ea
@@ -354,7 +354,7 @@ Swear it. Swear before the Gods that when this is all over I will leave this rev
             ->Close
     +Very well. I swear that your death will not come from punishment received from your fellow revolutionaries, or may the Gods conjure a punishment for me worthy of my failure.
         setToTrue(gaveOathForWeftsLife)
-        \*Weft looks signifigantly relieved.* Thank you. Such an oath does much credit to your intentions. 
+        \*The worry fades from Weft's features.* Thank you. Such an oath does much credit to your intentions. 
             ->Close
 
 === 4d ===

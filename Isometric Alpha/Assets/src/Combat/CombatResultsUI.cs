@@ -17,6 +17,8 @@ public class CombatResultsUI : PopUpWindow
     public TextMeshProUGUI goldText;
 	public TextMeshProUGUI xpText;
 
+    public TextMeshProUGUI titleText;
+
 	private static CombatResultsUI instance;
 
 	public static CombatResultsUI getInstance()
@@ -36,6 +38,24 @@ public class CombatResultsUI : PopUpWindow
 
         AudioManager.playNoMusic();
         AudioManager.playAudioClipAsSingleton(AudioClipList.winMusic);
+
+        setTitleText();
+    }
+
+    private void setTitleText()
+    {
+        switch(CombatStateManager.whoseTurn)
+        {
+            case WhoseTurn.Won:
+                titleText.text = "Victory";
+                return;
+            case WhoseTurn.Lost:
+                titleText.text = "Defeat";
+                return;
+            default:
+                titleText.text = "";
+                return;
+        }
     }
 
 	void Update()

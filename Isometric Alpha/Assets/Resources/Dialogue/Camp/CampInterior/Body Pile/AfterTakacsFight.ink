@@ -324,8 +324,10 @@ wait(3)
 
 enableDialogueUI()
 
-setFacing(NW)
+setFacing(NE)
 setNPCFacing({weftIndex},SW)
+
+changeCamTarget({weftIndex})
 
 Gáspár's fate aside, I'm overjoyed to still be among the living... er, among the dead, but alive, I mean. 
 
