@@ -101,7 +101,7 @@ public class Shield : Armor
 
         DescriptionPanel.setText(panel.damageText, getDamageFormulaTotal());
         DescriptionPanel.setText(panel.critRatingText, getCritTotalForDisplay());
-        DescriptionPanel.setText(panel.amountText, getQuantityForDisplay());
+        DescriptionPanel.setText(panel.amountText, getQuantity());
         DescriptionPanel.setText(panel.worthText, getWorthForDisplay());
 
         if(PlayerOOCStateManager.currentActivity == OOCActivity.inUI && 

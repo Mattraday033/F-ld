@@ -24,9 +24,12 @@ public static class LayerAndTagManager
     public readonly static int UILayer = LayerMask.NameToLayer("UI");
 	public readonly static int observableLayer = LayerMask.NameToLayer("Observable");
 
-	public const string firstSortingLayerName = "First";
+	public const string groundSortingLayerName = "Ground";	
+    public const string firstSortingLayerName = "First";
+	public const string secondSortingLayerName = "Second";
 	public const string thirdSortingLayerName = "Third";
 	public const string fourthSortingLayerName = "Fourth";
+	public const string fifthSortingLayerName = "Fifth";
 	public const string sixthSortingLayerName = "Sixth";
     public const string mapSortingLayerName = "Map";
     public const string tutorialSequenceWindowSortingLayerName = "Tutorial Sequence Window";

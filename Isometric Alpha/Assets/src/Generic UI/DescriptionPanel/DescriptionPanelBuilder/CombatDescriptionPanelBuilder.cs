@@ -29,13 +29,36 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
 
     private void Awake()
     {
-        if(CombatStateManager.inCombat && backgroundImage != null && interiorImage != null)
+        if(CombatStateManager.inCombat)
+        {
+            setTransparency();
+            InspectNode.OnInspect.AddListener(setTransparency);
+        }
+
+        // filter = new BuilderFilterBlackList(new List<DescriptionPanelBuildingBlockType>() { DescriptionPanelBuildingBlockType.PrimaryStat, DescriptionPanelBuildingBlockType.SecondaryStat });
+    }
+
+    private void OnDestroy()
+    {
+        InspectNode.OnInspect.RemoveListener(setTransparency);
+    }
+    
+    private void setTransparency()
+    {
+        if(backgroundImage == null || interiorImage == null)
+        {
+            return;
+        }
+
+        if(InspectNode.inspecting)
+        {
+            backgroundImage.color = ColorList.grey25;
+            interiorImage.enabled = true;
+        } else
         {
             backgroundImage.color = ColorList.grey25Transparent;
             interiorImage.enabled = false;
         }
-
-        // filter = new BuilderFilterBlackList(new List<DescriptionPanelBuildingBlockType>() { DescriptionPanelBuildingBlockType.PrimaryStat, DescriptionPanelBuildingBlockType.SecondaryStat });
     }
 
     public override Transform getParent(DescriptionPanelBuildingBlock block)

@@ -24,6 +24,7 @@ public class Transition
 
     public int outputMultiplier;
     public bool usableForFastTravel;
+    public bool playScriptAfterTransition;
     public PlayerInteractionScript scriptOnTransition; 
 
     public string whichConstructor = "";
@@ -44,7 +45,18 @@ public class Transition
         whichConstructor = "first";
     }
 
-    public Transition(string currentAreaName, string destinationName, Vector3Int cellCoords, int index, Facing playerSpawnDirection, bool usableForFastTravel, int outputMultiplier, PlayerInteractionScript scriptOnTransition, bool destinationOnly = false, bool allowAutosave = true, string indicatorFlag = "")
+    public Transition(string currentAreaName, 
+                        string destinationName, 
+                        Vector3Int cellCoords, 
+                        int index, 
+                        Facing playerSpawnDirection, 
+                        bool usableForFastTravel, 
+                        int outputMultiplier, 
+                        PlayerInteractionScript scriptOnTransition, 
+                        bool destinationOnly = false, 
+                        bool allowAutosave = true, 
+                        string indicatorFlag = "", 
+                        bool playScriptAfterTransition = false)
     {
         this.currentAreaName = currentAreaName;
         this.destinationName = destinationName;
@@ -61,6 +73,7 @@ public class Transition
         this.scriptOnTransition = scriptOnTransition;
         this.destinationOnly = destinationOnly;
         this.allowAutosave = allowAutosave;
+        this.playScriptAfterTransition = playScriptAfterTransition;
 
         this.indicatorFlag = indicatorFlag;
 

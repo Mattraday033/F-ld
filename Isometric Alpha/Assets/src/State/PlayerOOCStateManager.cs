@@ -23,7 +23,8 @@ public enum OOCActivity {
                             inFade = 16,
                             preCombat = 17,
                             Defeat = 18,
-                            Loading = 19
+                            Loading = 19,
+                            InAnimation = 20
 						};
 //class OOCPlayer
 public static class PlayerOOCStateManager

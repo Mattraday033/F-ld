@@ -118,7 +118,10 @@ public class TransitionManager : MonoBehaviour
             SaveHandler.autosave(transition);
         }
 
-        transition.playScript();
+        if(!transition.playScriptAfterTransition)
+        {
+            transition.playScript();
+        }
 
         BeforeTransition.Invoke();
 
@@ -132,6 +135,11 @@ public class TransitionManager : MonoBehaviour
 
         AfterTransition.Invoke();
         
+        if(transition.playScriptAfterTransition)
+        {
+            transition.playScript();
+        }
+
         currentCoroutine = null;
     }
 

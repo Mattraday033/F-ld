@@ -395,4 +395,14 @@ public class PlayerObject : MonoBehaviour
         instance.gameOverPopUpButton.spawnPopUp();
     }
 
+    public static void setSpriteSortingLayer(SortingLayerInfo sortingLayerInfo)
+    {
+        if(instance == null || instance.playerSpriteRenderer == null)
+        {
+            return;
+        }
+
+        sortingLayerInfo.setRendererSortingLayer(instance.playerSpriteRenderer);
+    }
+
 }

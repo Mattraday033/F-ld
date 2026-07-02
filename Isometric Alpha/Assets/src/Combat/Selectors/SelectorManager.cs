@@ -460,90 +460,6 @@ public class SelectorManager : MonoBehaviour
 		DamagePreviewManager.wipeAllDamagePreviews();
 	}
 
-	//may extend to all party members or make another method to handle selecting friendly minions
-	// public void handlePlayerSelection()
-	// {
-	// 	Stats currentTarget = CombatGrid.getCombatantAtCoords(currentSelector.getCoords());
-
-	// 	if (currentTarget == null || combatActionManager.playerCombatActionChosen())
-	// 	{
-	// 		return;
-	// 	}
-
-	// 	if (currentTarget.combatSprite.tag.Equals(LayerAndTagManager.playerTag) &&
-	// 	   Input.GetKey(KeyBindingList.combatSelectKey) && !isMoving && !KeyPressManager.handlingPrimaryKeyPress)
-	// 	{
-	// 		if (CombatStateManager.choosingRepositionTarget())
-	// 		{
-	// 			RepositionManager.selectSingleAllyToMove(currentSelector.getCoords());
-
-	// 			selectors[1].setToCurrentSelector();
-	// 			currentSelector.setToLocation(selectors[0].getCoords());
-
-	// 			KeyPressManager.handlingPrimaryKeyPress = true;
-	// 		}
-	// 		else
-	// 		{
-	// 			currentAbilityManager = currentTarget.combatSprite.GetComponent<AbilityMenuManager>();
-
-	// 			if (!currentAbilityManager.enabled)
-	// 			{
-	// 				currentAbilityManager.enableAbilityButtonCanvas();
-
-	// 				CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingAbility);
-
-	// 				KeyPressManager.handlingPrimaryKeyPress = true;
-	// 			}
-	// 		}
-	// 	}
-	// }
-
-	public void handlePartyMemberSelection()
-	{
-		Stats currentTarget = CombatGrid.getCombatantAtCoords(currentSelector.getCoords());
-
-		if (currentTarget == null)
-		{
-			return;
-		}
-
-		if (currentTarget.combatSprite.tag.Equals(LayerAndTagManager.npcTag) &&
-		   Input.GetKey(KeyBindingList.combatSelectKey.getCurrentKeyCode()) && !isMoving && !KeyPressManager.handlingPrimaryKeyPress)
-		{
-
-			if (CombatActionManager.finishedChoosingPartyMemberCombatActions() ||
-				CombatActionManager.actorAlreadyHasCombatAction(currentSelector.getCoords()) ||
-					!CombatGrid.getCombatantAtCoords(currentSelector.getCoords()).isAlive())
-			{
-				return;
-			}
-
-			if (CombatStateManager.choosingRepositionTarget())
-			{
-				RepositionManager.currentSingleTargetRepositionCombatAction.setActor(CombatGrid.getCombatantAtCoords(currentSelector.getCoords()));
-				RepositionManager.currentRepositionActivity = CurrentRepositionActivity.ChoosingNewLocation;
-
-				selectors[1].setToCurrentSelector();
-				currentSelector.setToLocation(selectors[0].getCoords());
-
-				KeyPressManager.handlingPrimaryKeyPress = true;
-			}
-			else
-			{
-				currentAbilityManager = currentTarget.combatSprite.GetComponent<AbilityMenuManager>();
-
-				if (!currentAbilityManager.enabled)
-				{
-					currentAbilityManager.enableAbilityButtonCanvas();
-
-					CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingAbility);
-
-					KeyPressManager.handlingPrimaryKeyPress = true;
-				}
-			}
-		}
-	}
-
 	public static void handleAllySelection()
 	{
 		if (!SelectionInfo.selectedAllyCanAct(currentSelector.getCoords()))
@@ -560,19 +476,6 @@ public class SelectorManager : MonoBehaviour
 			currentAbilityManager.enableAbilityButtonCanvas();
 
 			CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingAbility);
-		}
-	}
-
-	//if statements listening for if the first selector should be deactivated or not.
-	public void autoAdjustSelectorAvailability()
-	{
-		if (CombatStateManager.whoseTurn == WhoseTurn.Player)
-		{
-			selectors[0].SetActive(true);
-		}
-		else
-		{
-			selectors[0].SetActive(false);
 		}
 	}
 
@@ -881,8 +784,10 @@ public class SelectorManager : MonoBehaviour
 			Stats combatantAtCoords = CombatGrid.getCombatantAtCoords(rowIndex, colIndex);
 			Stats mandatoryTarget = CombatGrid.enemyHasMandatoryTarget();
 
-			if (combatantAtCoords != null && combatantAtCoords.isAlive() && !Helpers.hasQuality<Trait>(combatantAtCoords.traitContainer, hT => hT.isUntargetable()) &&
-				(currentSelector == instance.selectors[0] || (mandatoryTarget == null || (mandatoryTarget != null && combatantAtCoords.isMandatoryTarget()))))
+			if (combatantAtCoords != null && combatantAtCoords.isAlive() && 
+                (!Helpers.hasQuality<Trait>(combatantAtCoords.traitContainer, hT => hT.isUntargetable()) || 
+                   (Helpers.hasQuality<Trait>(combatantAtCoords.traitContainer, hT => hT.isUntargetable()) && Helpers.hasQuality<Trait>(combatantAtCoords.traitContainer, hT => hT.Equals(TraitList.repositioningInvulnerability)))) &&
+				(currentSelector == instance.selectors[0] || mandatoryTarget == null || (mandatoryTarget != null && combatantAtCoords.isMandatoryTarget())))
 			{
 				return new GridCoords(rowIndex, colIndex);
 			}
@@ -909,8 +814,10 @@ public class SelectorManager : MonoBehaviour
 			Stats combatantAtCoords = CombatGrid.getCombatantAtCoords(rowIndex, colIndex);
 			Stats mandatoryTarget = CombatGrid.enemyHasMandatoryTarget();
 
-			if (combatantAtCoords != null && combatantAtCoords.isAlive() && !Helpers.hasQuality<Trait>(combatantAtCoords.traitContainer, hT => hT.isUntargetable()) &&
-				(currentSelector == instance.selectors[0] || (mandatoryTarget == null || (mandatoryTarget != null && combatantAtCoords.isMandatoryTarget()))))
+			if (combatantAtCoords != null && combatantAtCoords.isAlive() && 
+                (!Helpers.hasQuality<Trait>(combatantAtCoords.traitContainer, hT => hT.isUntargetable()) || 
+                   (Helpers.hasQuality<Trait>(combatantAtCoords.traitContainer, hT => hT.isUntargetable()) && Helpers.hasQuality<Trait>(combatantAtCoords.traitContainer, hT => hT.Equals(TraitList.repositioningInvulnerability)))) &&
+				(currentSelector == instance.selectors[0] || mandatoryTarget == null || (mandatoryTarget != null && combatantAtCoords.isMandatoryTarget())))
 			{
 				return new GridCoords(rowIndex, colIndex);
 			}

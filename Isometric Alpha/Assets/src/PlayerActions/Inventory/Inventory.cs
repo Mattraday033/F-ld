@@ -488,7 +488,7 @@ public static class Inventory
 
         for (int index = allArmor.Count - 1; index >= 0; index--)
         {
-            if (allArmor[index] as OffHandWeapon == null && allArmor[index] as Shield == null)
+            if (allArmor[index] as OffHandWeapon == null || allArmor[index] as Shield != null)
             {
                 allArmor.RemoveAt(index);
             }
@@ -503,7 +503,7 @@ public static class Inventory
 
         for (int index = allArmor.Count - 1; index >= 0; index--)
         {
-            if (allArmor[index] as OffHandWeapon != null || allArmor[index] as Shield != null)
+            if (allArmor[index] as OffHandWeapon != null && allArmor[index] as Shield == null)
             {
                 allArmor.RemoveAt(index);
             }

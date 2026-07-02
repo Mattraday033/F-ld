@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Tall walls Horizontal logs
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: e340a2bfcf8cd644cb5ffe7b8e9d2e1f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d170bafa34d6dd840bfc8cc393249bac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

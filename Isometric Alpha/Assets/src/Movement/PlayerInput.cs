@@ -12,9 +12,16 @@ public class PlayerInput : MonoBehaviour
 
     private KeyCode currentMovementKeyCode = KeyCode.None;
 
-    void Update() 
+    void Update()
     {
         if(KeyBindingSettingsManager.listeningForKeyBinding() || InspectNode.inspecting)
+        {
+            return;
+        }
+
+        //While a scripted animation is playing (e.g. a transition cutscene) no keyboard/mouse
+        //input should cause any behaviour, including walking onto other transitions.
+        if (PlayerOOCStateManager.currentActivity == OOCActivity.InAnimation)
         {
             return;
         }
@@ -102,6 +109,7 @@ public class PlayerInput : MonoBehaviour
                 case OOCActivity.preCombat:
                 case OOCActivity.Defeat:
                 case OOCActivity.Loading:
+                case OOCActivity.InAnimation:
                     return;
                 default:
                     Debug.LogError("Unrecognized OOCActivity: " + PlayerOOCStateManager.currentActivity.ToString());

@@ -504,8 +504,8 @@ MonoBehaviour:
   shadowSprite: {fileID: 0}
   polygonCollider2D: {fileID: 4620405134455580430}
   healthBarManager: {fileID: 0}
-  linkedStats: {fileID: 0}
-  characterToAnimate: 
+  npcName: 
+  animationName: 
   heartBeatRow: 0
   animancer: {fileID: 8916102299711102281}
   key: 0
@@ -1833,7 +1833,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 783193699
+  m_SortingLayerID: 510581953
   m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &2953599936428186530

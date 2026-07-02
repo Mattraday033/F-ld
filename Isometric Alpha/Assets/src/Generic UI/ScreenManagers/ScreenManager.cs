@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -198,7 +199,7 @@ public struct Tab
                 }
                 else
                 {
-                    return State.inventory.Values;
+                    return State.inventory.Values.Where(item => !item.getSubtype().Equals(QuestItem.subtype) && !item.getSubtype().Equals(Key.subtype));
                 }
             default:
 

@@ -483,7 +483,7 @@ public static class TransitionSpawnInfoList
                                                                      new Vector3Int(0,-2), new Vector3Int(-4,-2), new Vector3Int(0,-3), new Vector3Int(-2,-3), new Vector3Int(-3,-3), 
                                                                      new Vector3Int(-1,-4), new Vector3Int(-2,-4), new Vector3Int(-4,-4)};
 
-        list.Add(new TransitionSpawnInfoMatrix(ZoneKeyList.manseFirstFloor + LocationNameList.section2c, ZoneKeyList.manseFirstFloor + LocationNameList.stairsToPit, sendingMatrix, m1F2CToS2PCoords));
+        list.Add(new TransitionSpawnInfoMatrix(ZoneKeyList.manseFirstFloor + LocationNameList.section2c, ZoneKeyList.manseFirstFloor + LocationNameList.stairsToPit, sendingMatrix, m1F2CToS2PCoords, new DropInFromAboveTransitionScript(), playScriptAfterTransition: true));
 
         transitionSpawnInfoDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2c, list);
 
@@ -504,7 +504,7 @@ public static class TransitionSpawnInfoList
                                                                    new Vector3Int(-4,-1), new Vector3Int(1,-2), new Vector3Int(-1,-2), new Vector3Int(-2,-2), new Vector3Int(-3,-2),
                                                                    new Vector3Int(0,-4), new Vector3Int(-2,-4), new Vector3Int(-3,-4)};
 
-        list.Add(new TransitionSpawnInfoMatrix(ZoneKeyList.manseFirstFloor + LocationNameList.stairsToPit, ZoneKeyList.pit + LocationNameList.section1a, sendingMatrix, s2PToP1aCoords));
+        list.Add(new TransitionSpawnInfoMatrix(ZoneKeyList.manseFirstFloor + LocationNameList.stairsToPit, ZoneKeyList.pit + LocationNameList.section1a, sendingMatrix, s2PToP1aCoords, new DropInFromAboveTransitionScript(), playScriptAfterTransition: true));
 
         list.Add(new TransitionSpawnInfoWithCorner(23, ZoneKeyList.manseFirstFloor + LocationNameList.stairsToPit, ZoneKeyList.pit + LocationNameList.section1a, new Vector3Int(-10, 17), Facing.NorthWest, Constants.sizeTwo, Axis.DescendingX));
         
@@ -651,7 +651,7 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.section2b, ZoneKeyList.manseSecondFloor + LocationNameList.section3a, new Vector3Int(-5, 8), Facing.NorthEast, Constants.sizeTwo, Axis.DescendingY));
 
-        list.Add(new TransitionSpawnInfoMatrix(ZoneKeyList.manseSecondFloor + LocationNameList.section2b, ZoneKeyList.manseFirstFloor + LocationNameList.section2c, sendingMatrix, m2F2bToM1F2cCoords));
+        list.Add(new TransitionSpawnInfoMatrix(ZoneKeyList.manseSecondFloor + LocationNameList.section2b, ZoneKeyList.manseFirstFloor + LocationNameList.section2c, sendingMatrix, m2F2bToM1F2cCoords, new DropInFromAboveTransitionScript(), playScriptAfterTransition: true));
 
         transitionSpawnInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section2b, list);
 
@@ -1223,10 +1223,21 @@ public class TransitionSpawnInfo
     protected bool destinationOnly;
 
     protected PlayerInteractionScript scriptOnTransition;
+    protected bool playScriptAfterTransition;
 
     public string indicatorFlag;
 
-    public TransitionSpawnInfo(string currentArea, string destinationLocation, Vector3Int startCell, Facing playerSpawnDirection, int size = 1, Axis axis = Axis.DescendingX, int outputMultiplier = 1, bool destinationOnly = false, PlayerInteractionScript scriptOnTransition = null, string indicatorFlag = "")
+    public TransitionSpawnInfo(string currentArea,
+                                string destinationLocation,
+                                Vector3Int startCell, 
+                                Facing playerSpawnDirection, 
+                                int size = 1, 
+                                Axis axis = Axis.DescendingX, 
+                                int outputMultiplier = 1, 
+                                bool destinationOnly = false, 
+                                PlayerInteractionScript scriptOnTransition = null, 
+                                string indicatorFlag = "",
+                                bool playScriptAfterTransition = false)
     {
         this.currentArea = currentArea;
         this.destinationLocation = destinationLocation;
@@ -1245,6 +1256,7 @@ public class TransitionSpawnInfo
         }
 
         this.scriptOnTransition = scriptOnTransition;
+        this.playScriptAfterTransition = playScriptAfterTransition;
         this.indicatorFlag = indicatorFlag;
     }
 
@@ -1342,13 +1354,16 @@ public class TransitionSpawnInfoMatrix : TransitionSpawnInfo
                                string destinationLocation,
                                bool destinationOnly, 
                                List<Vector3Int> listOfCoords,
-                               PlayerInteractionScript scriptOnTransition = null):
+                               PlayerInteractionScript scriptOnTransition = null,
+                               bool playScriptAfterTransition = false):
     base(currentArea,
          destinationLocation,
          Vector3Int.zero, 
          Facing.SouthWest,
          outputMultiplier: Constants.sizeZero,
-         destinationOnly: destinationOnly)
+         destinationOnly: destinationOnly,
+         scriptOnTransition: scriptOnTransition,
+         playScriptAfterTransition: playScriptAfterTransition)
     {
         this.listOfCoords = listOfCoords;
     }
@@ -1361,7 +1376,7 @@ public class TransitionSpawnInfoMatrix : TransitionSpawnInfo
         int index = 0;
         foreach(Vector3Int coords in listOfCoords)
         {
-            list.Add(new Transition(currentArea, destinationLocation, coords, index + getStartIndex(), playerSpawnDirection, fastTravelCapable(), getOutputMultiplier(), scriptOnTransition, destinationOnly, allowAutosave: false));
+            list.Add(new Transition(currentArea, destinationLocation, coords, index + getStartIndex(), playerSpawnDirection, fastTravelCapable(), getOutputMultiplier(), scriptOnTransition, destinationOnly, allowAutosave: false, playScriptAfterTransition: playScriptAfterTransition));
             index++;
         }
 

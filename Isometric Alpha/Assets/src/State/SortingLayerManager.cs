@@ -22,16 +22,13 @@ public class SortingLayerInfo
 
 public static class SortingLayerManager
 {
-    public const string groundSortLayerName = "Ground";
-    public const string firstSortLayerName = "First";
-    public const string secondSortLayerName = "Second";
-
-    public readonly static SortingLayerInfo behindGroundSortingLayerInfo = new SortingLayerInfo(groundSortLayerName, -1);
-    public readonly static SortingLayerInfo groundSortingLayerInfo = new SortingLayerInfo(groundSortLayerName, Constants.indexZero);
-    public readonly static SortingLayerInfo waveSortingLayerInfo = new SortingLayerInfo(groundSortLayerName, Constants.indexOne);
-    public readonly static SortingLayerInfo buttonSortingLayerInfo = new SortingLayerInfo(groundSortLayerName, Constants.indexOne);
-    public readonly static SortingLayerInfo firstSortingLayerInfo = new SortingLayerInfo(firstSortLayerName, Constants.indexOne);
-    public readonly static SortingLayerInfo secondSortingLayerInfo = new SortingLayerInfo(secondSortLayerName, Constants.indexZero);
+    public readonly static SortingLayerInfo behindGroundSortingLayerInfo = new SortingLayerInfo(LayerAndTagManager.groundSortingLayerName, -1);
+    public readonly static SortingLayerInfo groundSortingLayerInfo = new SortingLayerInfo(LayerAndTagManager.groundSortingLayerName, Constants.indexZero);
+    public readonly static SortingLayerInfo waveSortingLayerInfo = new SortingLayerInfo(LayerAndTagManager.groundSortingLayerName, Constants.indexOne);
+    public readonly static SortingLayerInfo buttonSortingLayerInfo = new SortingLayerInfo(LayerAndTagManager.groundSortingLayerName, Constants.indexOne);
+    public readonly static SortingLayerInfo firstSortingLayerInfo = new SortingLayerInfo(LayerAndTagManager.firstSortingLayerName, Constants.indexOne);
+    public readonly static SortingLayerInfo secondSortingLayerInfo = new SortingLayerInfo(LayerAndTagManager.secondSortingLayerName, Constants.indexZero);
+    public readonly static SortingLayerInfo sixthSortingLayerInfo = new SortingLayerInfo(LayerAndTagManager.sixthSortingLayerName, Constants.indexZero);
 
     public static Dictionary<bool, SortingLayerInfo> spikeSortingLayers;
 
