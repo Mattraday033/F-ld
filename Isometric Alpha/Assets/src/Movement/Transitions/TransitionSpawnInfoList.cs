@@ -647,6 +647,8 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.section2b, ZoneKeyList.manseSecondFloor + LocationNameList.section2a, new Vector3Int(4, 8), Facing.SouthWest, Constants.sizeTwo, Axis.DescendingY));
 
+        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(0, 7), Facing.SouthEast));
+
         list.Add(new TransitionSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.section2b, ZoneKeyList.manseSecondFloor + LocationNameList.section3a, new Vector3Int(-5, 8), Facing.NorthEast, Constants.sizeTwo, Axis.DescendingY));
 
         list.Add(new TransitionSpawnInfoMatrix(ZoneKeyList.manseSecondFloor + LocationNameList.section2b, ZoneKeyList.manseFirstFloor + LocationNameList.section2c, sendingMatrix, m2F2bToM1F2cCoords));
