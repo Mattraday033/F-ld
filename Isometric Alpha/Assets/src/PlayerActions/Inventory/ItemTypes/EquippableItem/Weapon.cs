@@ -11,14 +11,14 @@ public class Weapon : EquippableItem, IJSONConvertable
 	public const string subtype = "Weapon";
 	public const int mainHandSlotIndex = 6;
 
-    private int rangeIndex;
+    private string rangeIndex;
     private string iconName;
     private bool isTwoHanded;
     private EffectAnimationType effectAnimationType;
 
     public Trait traitToApply;
 
-	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, int rangeIndex, int worth, bool isTwoHanded, EffectAnimationType effectAnimationType = EffectAnimationType.Slash, Trait traitToApply = null) :
+	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, string rangeIndex, int worth, bool isTwoHanded, EffectAnimationType effectAnimationType = EffectAnimationType.Slash, Trait traitToApply = null) :
     base(listId, key, loreDescription, damageFormula, critFormula, subtype, worth)
 	{
 		this.isTwoHanded = isTwoHanded;
@@ -61,10 +61,10 @@ public class Weapon : EquippableItem, IJSONConvertable
 
 	public string getRange()
 	{
-		return Range.getRangeTitle(getRangeIndex());
+		return getRangeIndex();
 	}
 
-	public int getRangeIndex()
+	public string getRangeIndex()
 	{
 		return rangeIndex;
 	}

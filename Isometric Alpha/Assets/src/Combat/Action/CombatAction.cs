@@ -24,6 +24,12 @@ public struct GridCoords
 	public int row;
 	public int col;
 
+	public GridCoords(float r, float c)
+	{
+		row = (int) r;
+		col = (int) c;
+	}
+
 	public GridCoords(int r, int c)
 	{
 		row = r;
@@ -147,6 +153,8 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
                                //for this action. The selector may change locations between choosing the target of
                                //this action and when the action is resolved, so be sure to use selector.clone() when
                                //instantiating an action.
+
+    private string selectorName;
 
     public int cooldownRemaining { get; private set; } = 0;
 
@@ -658,12 +666,12 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
         if (isSelfTargeting())
         {
-            Selector selector = selectorManager.selectors[getRangeIndex()].clone();
+            Selector selector = SelectorList.getByName(getRangeIndex());
             selector.setToLocation(getActorCoords());
             return selector;
         }
 
-        return actor.traitContainer.findTargetLocation(selectorManager.selectors[getRangeIndex()].clone(), listOfTargets);
+        return actor.traitContainer.findTargetLocation(SelectorList.getByName(getRangeIndex()), listOfTargets);
     }
 
     public void addPreviousTarget(GridCoords coords)
@@ -744,18 +752,26 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         throw new IOException("The base class version of setTertiaryCoords() was called extraneously");
     }
 
-    public abstract int getRangeIndex();
+    public virtual Selector getNewRange()
+    {
+        return SelectorList.getByName(getRangeIndex());
+    }
+
+    public virtual string getRangeIndex()
+    {
+        return SelectorList.singleName;
+    }
 
     public abstract string getRangeTitle();
 
     public GameObject getSelectorObject()
     {
-        if (selector == null)
-        {
+        // if (selector == null)
+        // {
             return null;
-        }
+        // }
 
-        return selector.getSelectorObject();
+        // return selector.getSelectorObject();
     }
 
     public virtual void setSelector(Selector selector)
@@ -810,7 +826,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public virtual Selector getTertiarySelector()
     {
-        Selector tertiarySelector = SelectorManager.getInstance().selectors[Range.singleTargetIndex];
+        Selector tertiarySelector = SelectorList.getByName(SelectorList.singleName);
 
         //if (!tertiaryCoords.Equals(GridCoords.getDefaultCoords()))
         //{

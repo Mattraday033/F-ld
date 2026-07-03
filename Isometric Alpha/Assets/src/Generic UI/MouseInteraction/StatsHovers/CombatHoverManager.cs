@@ -11,15 +11,15 @@ public static class CombatHoverManager
         {
             for (int col = CombatGrid.colLeftBounds; col <= CombatGrid.colRightBounds; col++)
             {
-                GameObject combatTileHoverGameObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.targetCombatTile), CombatHoverTileParent.getCombatHoverTileParent());
+                GameObject combatHoverTileGameObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.targetCombatTile), CombatHoverTileParent.getCombatHoverTileParent());
 
-                CombatTileHover combatTileHoverComponent = combatTileHoverGameObject.GetComponent<CombatTileHover>();
+                CombatHoverTile combatHoverTileComponent = combatHoverTileGameObject.GetComponent<CombatHoverTile>();
 
-                combatTileHoverComponent.setTargetCoords(row, col);
+                combatHoverTileComponent.setTargetCoords(row, col);
 
-                combatTileHoverGameObject.transform.localPosition = CombatGrid.getPositionAt(row, col);
+                combatHoverTileGameObject.transform.localPosition = CombatGrid.getPositionAt(row, col);
 
-                Helpers.updateGameObjectPosition(combatTileHoverGameObject);
+                Helpers.updateGameObjectPosition(combatHoverTileGameObject);
             }
         }
     }

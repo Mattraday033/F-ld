@@ -94,7 +94,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     }
 
-    public void OnMouseEnter()
+    public virtual void OnMouseEnter()
     {
         if(TutorialSequence.blockMouseHovers() || 
             AbilityMenuButton.hoveringOverAbilityMenuButton || 
@@ -120,7 +120,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
         }
     }
 
-    public void OnMouseExit()
+    public virtual void OnMouseExit()
     {
         revealPriorityHeld = false;
 

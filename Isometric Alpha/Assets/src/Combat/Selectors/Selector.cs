@@ -5,99 +5,108 @@ using UnityEngine;
 using System;
 
 [System.Serializable]
-public class Selector : ScriptableObject, ICloneable
+public class Selector : ICloneable
 {
 	private const bool shouldIncludeIllegalCoords = true;
 	
 	public string name;
 	
-    public static Color secondaryColor = Color.yellow;
+    public readonly static Color secondaryColor = Color.yellow;
 	private Color originalColor = Color.clear;
 	
 	public bool selfTargeting = false;
 	
-	public bool singleTile; //true if you don't want to look for anything beyond the initial tile
+    private GridCoords startingCoords;
+    private Rect rect;
 	
-	public int startUpperBounds;	
-	public int startRightBounds;
-	public int startLeftBounds;
-	public int startLowerBounds;
+	private bool[,] spaces;
 	
-	public int upperBounds;	
-	public int rightBounds;
-	public int leftBounds;
-	public int lowerBounds;
-	
-	public int startRow;
-	public int startCol;
-	
-	public int currentRow;
-	public int currentCol;
-	
-	public GridCoords[] childTileAdjustments; //should be empty if singleTile is true
-	
-	private GameObject selectorObject;
-	
-	void Start()
+    // public int startUpperBounds { private set{} get { return startingCoords.row; }}
+    // public int startLowerBounds { private set{} get { return startingCoords.row + (int) rect.height - 1; }}
+
+    // public int startLeftBounds { private set{} get { return startingCoords.col; }}
+    // public int startRightBounds { private set{} get { return startingCoords.col + (int) rect.width - 1; }}
+
+    public int upperBounds { private set{} get { return (int) rect.y; }}
+    public int lowerBounds { private set{} get { return (int) rect.y + (int) rect.height - 1; }}
+
+    public int leftBounds { private set{} get { return (int) rect.x; }}
+    public int rightBounds { private set{} get { return (int) rect.x + (int) rect.width - 1; }}
+
+    public int currentRow { private set{} get { return (int) rect.y; }}
+    public int currentCol { private set{} get { return (int) rect.x; }}
+
+	public Selector(
+		string name,
+        int width,
+        int height,
+		GridCoords startingCoords,
+		bool[,] spaces)
 	{
-		selectorObject = Resources.Load<GameObject>(name);
+		this.name = name;
+
+		this.startingCoords = startingCoords;
+
+        this.rect = new Rect(x: startingCoords.col, y: startingCoords.row, width: width, height: height);
+
+		this.spaces = spaces;
 	}
+
+    public bool singleTile()
+    {
+        return rect.width == 1 && rect.height == 1;
+    }
 	
-	public virtual GameObject getSelectorObject()
+	public GameObject getSelectorObject()
 	{
-		if(selectorObject == null)
-		{
-			selectorObject = Instantiate(Resources.Load<GameObject>(name), CombatGrid.getPositionAt(startRow, startCol), Quaternion.identity);
-		}
-		
-		return selectorObject;
+		return null;
 	}
+
+    // public virtual GridCoords[] getChildTileAdjustments()
+	// {
+	// 	return childTileAdjustments;
+	// }
 	
-	//usually only useful if a single target selector
+    // public List<GameObject> getAllTileChildren()
+    // {
+    //     List<GameObject> allTileChildren = new List<GameObject>();
+
+    //     for (int childIndex = 0; childIndex < getSelectorObject().transform.childCount; childIndex++)
+    //     {
+    //         allTileChildren.Add(getSelectorObject().transform.GetChild(childIndex).gameObject);
+    //     }
+
+    //     return allTileChildren;
+    // }
+
 	public GridCoords getCoords()
 	{
-		return new GridCoords(currentRow, currentCol);
+		return new GridCoords(rect.x, rect.y);
 	}
 	
-	public virtual GridCoords[] getChildTileAdjustments()
+	public GridCoords[] getAllSelectorCoords(bool includeIllegalCoords = false)
 	{
-		return childTileAdjustments;
-	}
-	
-	public GridCoords[] getAllSelectorCoords()
-	{
-		return getAllSelectorCoords(false);
-	}
-	
-	public GridCoords[] getAllSelectorCoords(bool includeIllegalCoords)
-	{
-		GridCoords[] allSelectorCoords = new GridCoords[0];
-		List<GridCoords> allTileAdjustments = new List<GridCoords>();
-		allTileAdjustments.Add(new GridCoords(0, 0)); //parent Selector Coord
+		List<GridCoords> allSelectorCoords = new List<GridCoords>();
 		
-		if(getChildTileAdjustments() != null)
+		for(int x = 0; x < spaces.GetLength(0); x++)
 		{
-			allTileAdjustments.AddRange(getChildTileAdjustments());
-		}
-		
-		foreach(GridCoords adjustment in allTileAdjustments)
-		{
-            GridCoords currentGridCoord = new GridCoords(currentRow + adjustment.row, currentCol + adjustment.col);
-			
-			if((getCoords().isWithinEnemySection() && !currentGridCoord.isWithinEnemySection()) || 
-				(getCoords().isWithinAllySection() && !currentGridCoord.isWithinAllySection()))
-			{
-				if(includeIllegalCoords)
-				{
-					allSelectorCoords = Helpers.appendArray<GridCoords>(allSelectorCoords, currentGridCoord);
-				} 
-			} else
-			{
-				allSelectorCoords = Helpers.appendArray<GridCoords>(allSelectorCoords, currentGridCoord);
-			}
+            for(int y = 0; y < spaces.GetLength(1); y++)
+            {
+                if(spaces[x,y])
+                {
+                    GridCoords currentGridCoord = new GridCoords(rect.x + x, rect.y + y);
+                
+                    if(includeIllegalCoords || 
+                        !((getCoords().isWithinEnemySection() && !currentGridCoord.isWithinEnemySection()) || 
+                        (getCoords().isWithinAllySection() && !currentGridCoord.isWithinAllySection())))
+                    {
+                        allSelectorCoords.Add(currentGridCoord);
+                    }
+                }
+            }
 		}
 
-		return allSelectorCoords;
+		return allSelectorCoords.ToArray();
 	}
 	
 	public override bool Equals(object obj)
@@ -112,6 +121,11 @@ public class Selector : ScriptableObject, ICloneable
 		return false;
 	}
 	
+	public override int GetHashCode()
+	{
+		return name.GetHashCode();
+	}
+
 	public virtual bool wasGenerated()
 	{
 		return false;
@@ -135,13 +149,13 @@ public class Selector : ScriptableObject, ICloneable
 	
 	private bool crossesBattlefieldDivide()
 	{
-		if(singleTile)
+		if(singleTile())
 		{
 			return false;
 		}
 		
-		if((currentRow <= CombatGrid.enemyRowLowerBounds && lowerBounds >= CombatGrid.allyRowUpperBounds) ||
-		   (currentRow >= CombatGrid.allyRowUpperBounds && upperBounds <= CombatGrid.enemyRowLowerBounds))
+		if((rect.x <= CombatGrid.enemyRowLowerBounds && lowerBounds >= CombatGrid.allyRowUpperBounds) ||
+		   (rect.y >= CombatGrid.allyRowUpperBounds && upperBounds <= CombatGrid.enemyRowLowerBounds))
 		{
 			return true;
 		} else
@@ -170,39 +184,9 @@ public class Selector : ScriptableObject, ICloneable
 		return false;
 	}
 	
-    public List<GameObject> getAllTileChildren()
-    {
-        List<GameObject> allTileChildren = new List<GameObject>();
-
-        for (int childIndex = 0; childIndex < getSelectorObject().transform.childCount; childIndex++)
-        {
-            allTileChildren.Add(getSelectorObject().transform.GetChild(childIndex).gameObject);
-        }
-
-        return allTileChildren;
-    }
-
 	public void setToStartLocation()
 	{
-		currentRow = startRow;
-		currentCol = startCol;
-
-		if (!singleTile)
-		{
-			upperBounds = startUpperBounds;
-			rightBounds = startRightBounds;
-			leftBounds = startLeftBounds;
-			lowerBounds = startLowerBounds;
-		}
-		else
-		{
-			upperBounds = startRow;
-			rightBounds = startCol;
-			leftBounds = startCol;
-			lowerBounds = startRow;
-		}
-
-		getSelectorObject().transform.position = CombatGrid.getPositionAt(currentRow, currentCol);
+        setToLocation(startingCoords);
 	}
 
 	public void setToClosestLegalLocation(GridCoords coords)
@@ -210,43 +194,19 @@ public class Selector : ScriptableObject, ICloneable
 		setToLocation(SelectorManager.findLegalCoordsContainingMandatoryTarget(this, coords));
 	}
 
-	public void setToLocation(GridCoords coords)
+	public void setToLocation(GridCoords coords, bool moveGameObject = true)
 	{
-		setToLocation(coords, true);
-	}
-	
-	public void setToLocation(GridCoords coords, bool moveGameObject)
-	{
-        int rowDifference = currentRow - coords.row;
-		int colDifference = currentCol - coords.col;
-		
-		currentRow -= rowDifference;
-		currentCol -= colDifference;
-	
-		if(!singleTile)
-		{
-			upperBounds -= rowDifference;
-			lowerBounds -= rowDifference;
-			
-			rightBounds -= colDifference;
-			leftBounds -= colDifference;
-			
-		} else
-		{
-			upperBounds = currentRow;	
-			rightBounds = currentCol;
-			leftBounds = currentCol;
-			lowerBounds = currentRow;
-		}
+        rect.x = coords.col;
+        rect.y = coords.row;
 
 		if (moveGameObject)
 		{
-			getSelectorObject().transform.position = CombatGrid.getPositionAt(currentRow, currentCol);
+			// getSelectorObject().transform.position = CombatGrid.getPositionAt(currentRow, currentCol);
 
-			if (this == SelectorManager.getCurrentSelector())
-			{
-				Helpers.updateColliderPosition(getSelectorObject());
-			}
+			// if (this == SelectorManager.getCurrentSelector())
+			// {
+			// 	Helpers.updateColliderPosition(getSelectorObject());
+			// }
 		}
 
         SelectorManager.declareSelectors();
@@ -262,20 +222,14 @@ public class Selector : ScriptableObject, ICloneable
 		return getCoords().isWithinAllySection();
 	}
 	
-	//always returns lowercase for easier comparisons
-	public string getTag()
-	{
-		return selectorObject.tag.ToLower();
-	}
-	
 	public void SetActive(bool active)
 	{
-		if(selectorObject == null)
-		{
-			selectorObject = Instantiate(Resources.Load<GameObject>(name), CombatGrid.getPositionAt(startRow, startCol),Quaternion.identity);
-		} 
+		// if(selectorObject == null)
+		// {
+		// 	selectorObject = Instantiate(Resources.Load<GameObject>(name), CombatGrid.getPositionAt(startRow, startCol),Quaternion.identity);
+		// } 
 		
-		selectorObject.SetActive(active);
+		// selectorObject.SetActive(active);
 	}
 	
 	public bool hasAtLeastOneTarget(string[] tagCriteria)
@@ -363,6 +317,21 @@ public class Selector : ScriptableObject, ICloneable
 		return false;
 	}
 	
+	public GridCoords getFirstCombatantCoords()
+	{
+		GridCoords[] allSelectorCoords = getAllSelectorCoords();
+
+		foreach (GridCoords coord in allSelectorCoords)
+		{
+			if (CombatGrid.getCombatantAtCoords(coord) != null)
+			{
+				return coord;
+			}
+		}
+
+		return getCoords();
+	}
+
 	public List<Stats> getAllTargets()
 	{
         GridCoords[] targetTileCoords = getAllSelectorCoords();
@@ -441,14 +410,7 @@ public class Selector : ScriptableObject, ICloneable
 	//currently only sets first/parent tile
 	public void setToSecondaryColor()
 	{
-        SpriteRenderer selectorSprite = selectorObject.GetComponent<SpriteRenderer>();
-        
-		if (!selectorSprite.color.Equals(secondaryColor))
-		{
-			originalColor = selectorSprite.color; 
-		}
-
-        setToColor(secondaryColor, selectorSprite);
+        setToColor(secondaryColor);
 	}
  	
 	//currently only sets first/parent tile
@@ -471,21 +433,20 @@ public class Selector : ScriptableObject, ICloneable
 
     private void setToColor(Color newColor, SpriteRenderer selectorSprite)
 	{
-		if(selectorSprite == null)
-		{
-            selectorSprite = selectorObject.GetComponent<SpriteRenderer>();
-        }
+		// if(selectorSprite == null)
+		// {
+        //     selectorSprite = selectorObject.GetComponent<SpriteRenderer>();
+        // }
         
-        selectorSprite.color = newColor;
+        // selectorSprite.color = newColor;
 
-		List<GameObject> listOfTileChildren = getAllTileChildren();
+		// List<GameObject> listOfTileChildren = getAllTileChildren();
 
-
-        foreach (GameObject gObject in listOfTileChildren)
-		{
-            selectorSprite = gObject.GetComponent<SpriteRenderer>();
-            selectorSprite.color = newColor;
-        }
+        // foreach (GameObject gObject in listOfTileChildren)
+		// {
+        //     selectorSprite = gObject.GetComponent<SpriteRenderer>();
+        //     selectorSprite.color = newColor;
+        // }
     }
 
 	public bool targetsImmobileTarget()
@@ -509,21 +470,12 @@ public class Selector : ScriptableObject, ICloneable
 		
 		return false;
 	}
-	public void deselectSelectorGameObject()
-	{
-		selectorObject = null;
-	}
 
 	public Selector clone()
 	{
-		Selector selectorClone = (Selector)Clone();
+		Selector selectorClone = (Selector) Clone();
 
-		selectorClone.childTileAdjustments = new GridCoords[childTileAdjustments.Length];
-
-		for(int index = 0; index < childTileAdjustments.Length; index++)
-		{
-			selectorClone.childTileAdjustments[index] = childTileAdjustments[index].clone();
-		}
+        selectorClone.startingCoords = startingCoords.clone();
 
 		return selectorClone;
 	}

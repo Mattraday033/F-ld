@@ -224,17 +224,15 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
                 Destroy(previewSelectorObject);
             }
 
-            Selector selectorClone = SelectorManager.getInstance().selectors[loadedCombatAction.getRangeIndex()].clone();
-            selectorClone.deselectSelectorGameObject();
+            Selector selectorClone = SelectorList.getByName(loadedCombatAction.getRangeIndex());
 
             selectorClone.SetActive(true);
 
-            previewSelectorObject = selectorClone.getSelectorObject();
+            // previewSelectorObject = selectorClone.getSelectorObject();
 
             if (loadedCombatAction.isSelfTargeting())
             {
-                selectorClone.setToLocation(new GridCoords(SelectorManager.getInstance().selectors[0].currentRow,
-                                                            SelectorManager.getInstance().selectors[0].currentCol));
+                selectorClone.setToLocation(SelectorList.playerCursor.getCoords());
             }
             else if (loadedCombatAction.targetsAllySection())
             {
@@ -255,13 +253,13 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
     {
         SelectorManager selectorManager = SelectorManager.getInstance();
 
-        loadedCombatAction.setSelector(selectorManager.selectors[loadedCombatAction.getRangeIndex()].clone());
+        loadedCombatAction.setSelector(SelectorList.getByName(loadedCombatAction.getRangeIndex()));
 
         SelectorManager.currentSelector = loadedCombatAction.getSelector();
         SelectorManager.updateCurrentSelectorPosition();
 
         loadedCombatAction = setCombatActionSelectorStartingPosition(loadedCombatAction);
-        loadedCombatAction.setActor(CombatGrid.getCombatantAtCoords(SelectorManager.getInstance().selectors[0].getCoords()));
+        loadedCombatAction.setActor(CombatGrid.getCombatantAtCoords(SelectorList.playerCursor.getCoords()));
 
         getDescriptionPanelSlot().revertToPrimaryDescribable();
         getDescriptionPanelSlot().setPrimaryDescribable(loadedCombatAction);
@@ -280,8 +278,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         if (loadedCombatAction.isSelfTargeting())
         {
-            loadedCombatAction.getSelector().setToLocation(new GridCoords(selectorManager.selectors[0].currentRow,
-                                                                    selectorManager.selectors[0].currentCol));
+            loadedCombatAction.getSelector().setToLocation(SelectorList.playerCursor.getCoords());
             loadedCombatAction.getSelector().selfTargeting = true;
             return action;
         }
@@ -290,19 +287,18 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         if (loadedCombatAction.targetsAllySection())
         {
-            if (loadedCombatAction.getRangeIndex() == Range.boxThreeIndex)
+            if (loadedCombatAction.getRangeIndex() == SelectorList.boxThreeName)
             {
                 loadedCombatAction.getSelector().setToLocation(Range.getRangeAllyStartingPosition(loadedCombatAction.getRangeIndex()));
             }
             else
             {
-                loadedCombatAction.getSelector().setToLocation(new GridCoords(selectorManager.selectors[0].currentRow,
-                                                                                selectorManager.selectors[0].currentCol));
+                loadedCombatAction.getSelector().setToLocation(SelectorList.playerCursor.getCoords());
             }
 
             return action;
         }
-        else if (!loadedCombatAction.targetsAllySection() && loadedCombatAction.getRangeIndex() == Range.boxThreeIndex)
+        else if (!loadedCombatAction.targetsAllySection() && loadedCombatAction.getRangeIndex() == SelectorList.boxThreeName)
         {
             loadedCombatAction.getSelector().setToLocation(Range.getRangeEnemyStartingPosition(loadedCombatAction.getRangeIndex()));
 
@@ -313,7 +309,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         Stats mandatoryTarget = CombatGrid.enemyHasMandatoryTarget();
 
-        if (mandatoryTarget != null && !loadedCombatAction.getSelector().hasAtLeastOneMandatoryTarget() && loadedCombatAction.getSelector().singleTile)
+        if (mandatoryTarget != null && !loadedCombatAction.getSelector().hasAtLeastOneMandatoryTarget() && loadedCombatAction.getSelector().singleTile())
         {
             GridCoords mandatoryTargetCoords = mandatoryTarget.positions.Count > 0 ? mandatoryTarget.positions[0] : GridCoords.getDefaultCoords();
 

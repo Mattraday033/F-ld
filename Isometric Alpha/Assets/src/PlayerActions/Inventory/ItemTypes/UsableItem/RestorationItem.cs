@@ -10,13 +10,13 @@ public class RestorationItem : CombatItem, IJSONConvertable
 
     private TraitType traitTypeToRemove;
 
-    public RestorationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int rangeIndex, TraitType traitTypeToRemove, PlaySFXLogic OOCOnUseSFX = null) : 
+    public RestorationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, string rangeIndex, TraitType traitTypeToRemove, PlaySFXLogic OOCOnUseSFX = null) :
     base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeIndex, useDoesNotRequireAnAction, OOCOnUseSFX: OOCOnUseSFX)
     {
         this.traitTypeToRemove = traitTypeToRemove;
     }
 
-    public RestorationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, int rangeIndex, TraitType traitTypeToRemove, int quantity, PlaySFXLogic OOCOnUseSFX = null) : 
+    public RestorationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, string rangeIndex, TraitType traitTypeToRemove, int quantity, PlaySFXLogic OOCOnUseSFX = null) :
      base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeIndex, useDoesNotRequireAnAction, quantity, OOCOnUseSFX: OOCOnUseSFX)
     {
         this.traitTypeToRemove = traitTypeToRemove;

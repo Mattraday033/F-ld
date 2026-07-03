@@ -193,7 +193,7 @@ Transform:
   m_GameObject: {fileID: 87898318}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.135, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1575, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -246,6 +246,7 @@ MonoBehaviour:
   creatureParent: {fileID: 1350236158}
   creatureGrid: {fileID: 698304145}
   ticker: {fileID: 957243829}
+  gameOverPopUpButton: {fileID: 0}
 --- !u!4 &131579872
 Transform:
   m_ObjectHideFlags: 0
@@ -911,26 +912,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectorParent: {fileID: 937399947}
-  selectors:
-  - {fileID: 11400000, guid: d6f74275229a678448c78835d1f42dbd, type: 2}
-  - {fileID: 11400000, guid: 41aaccabd727fad4bbca9667c408c722, type: 2}
-  - {fileID: 11400000, guid: f3e6f5d8943055e4c9d65e509607075c, type: 2}
-  - {fileID: 11400000, guid: 382bfff3ca2ba644fb1d55af95a680dd, type: 2}
-  - {fileID: 11400000, guid: 85e41f53eac876545a392070776fa021, type: 2}
-  - {fileID: 11400000, guid: 57b07b2a0fb439e43a89482af6704d16, type: 2}
-  - {fileID: 11400000, guid: da8167aca9afc234aaf7ecbb25513a9a, type: 2}
-  - {fileID: 11400000, guid: 2ba2b4e460f611d459412e05577d6e77, type: 2}
-  - {fileID: 11400000, guid: 8e16dcc76cc15d347902e44bcffce2a1, type: 2}
-  - {fileID: 11400000, guid: d7d8eed5d25d08c48b6132e6e22afddb, type: 2}
-  - {fileID: 11400000, guid: 6c57982d658ad1c44b9c6593bc208db6, type: 2}
-  - {fileID: 11400000, guid: fb662f430009ba2468ce7ffd43d9b127, type: 2}
-  - {fileID: 11400000, guid: bda4c955ebcd7ee408dd668503685c16, type: 2}
-  - {fileID: 11400000, guid: 4463ac8e38b46ba40a3f124f0c843b7e, type: 2}
-  - {fileID: 11400000, guid: 9bca87ebc7728724ba8dd26d38319419, type: 2}
-  - {fileID: 11400000, guid: 2e1f5b146d3fc6442a2651b24af217f5, type: 2}
-  - {fileID: 11400000, guid: 48d5a8b6409f54f4b9b1a7d67d17a802, type: 2}
-  - {fileID: 11400000, guid: b1b2022ef64605848b90fa6368725b69, type: 2}
-  - {fileID: 11400000, guid: c411cf09d9d420c45b301156f888e4dc, type: 2}
   playerCombatActionManager: {fileID: 1898927716}
   hoverPanelPopUpButton: {fileID: 0}
 --- !u!1 &956383623

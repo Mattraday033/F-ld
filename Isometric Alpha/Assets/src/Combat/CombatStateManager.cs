@@ -183,9 +183,11 @@ public class CombatStateManager : MonoBehaviour
 			RevealManager.toggleReveal();
 		}
 
+		SelectorManager.currentSelector = SelectorList.playerCursor;
+        CombatHoverTileManager.createCombatTileHoverGrid();
 		instantiateBackground();
 
-		selectorManager.instantiateAllSelectors();
+		// selectorManager.instantiateAllSelectors();
 
         if(State.enemyPackInfo.alwaysSurprised)
         {
@@ -314,7 +316,7 @@ public class CombatStateManager : MonoBehaviour
 
 		SelectorManager.currentSelector.SetActive(false);
 
-		SelectorManager.currentSelector = SelectorManager.getInstance().selectors[0];
+		SelectorManager.currentSelector = SelectorList.playerCursor;
 
 		SelectorManager.currentSelector.SetActive(true);
 

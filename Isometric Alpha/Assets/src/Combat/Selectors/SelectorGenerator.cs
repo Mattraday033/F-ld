@@ -3,90 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GeneratedSelector : Selector
-{
-	private GameObject selectorObject;
-	
-	public GeneratedSelector()
-	{
-		
-	}
-	
-	public override bool wasGenerated()
-	{
-		return true;
-	}
-	
-
-	
-	public void setSelectorObject(GameObject selectorObject)
-	{
-		this.selectorObject = selectorObject;
-	}
-	
-	public override GameObject getSelectorObject()
-	{
-		return selectorObject;
-	}
-	
-	public void setChildTileAdjustments(GridCoords[] childTileAdjustments)
-	{
-		this.childTileAdjustments = childTileAdjustments;
-	}
-	
-	public override GridCoords[] getChildTileAdjustments()
-	{
-		return this.childTileAdjustments;
-	}
-	
-	public GridCoords[] setChildTileAdjustments()
-	{
-		return childTileAdjustments;
-	}
-	
-	public void getPositionAndBoundsFromChildTileCoords(GridCoords[] allTileCoords)
-	{
-		startRow = allTileCoords[0].row;
-		currentRow = allTileCoords[0].row;
-		
-		startCol = allTileCoords[0].col;
-		currentCol = allTileCoords[0].col;
-		
-		//setting each bounds to just past their lowest/worst state so that
-		//they are properly set by the foreach loop
-		upperBounds = 9;
-		lowerBounds = -1;
-		leftBounds = 4;
-		rightBounds = -1;
-		
-		foreach(GridCoords coords in allTileCoords)
-		{
-			if(upperBounds > coords.row)
-			{
-				upperBounds = coords.row;
-			}
-			
-			if(lowerBounds < coords.row)
-			{
-				lowerBounds = coords.row;
-			}
-			
-			if(leftBounds > coords.col)
-			{
-				leftBounds = coords.col;  
-			}
-			
-			if(rightBounds < coords.col)
-			{
-				rightBounds = coords.col;
-			}
-		}
-	}
-}
-
 public static class SelectorGenerator
 {
-    private readonly static string singleTargetTitle = Range.getRangeTitle(Range.singleTargetIndex);
+    private readonly static string singleTargetTitle = SelectorList.singleName;
     private static int generatedSelectorCount;
 	private const string generatedSelectorName = "Generated Selector #";
 	private const string childTileName = "Child Tile #";
@@ -113,14 +32,15 @@ public static class SelectorGenerator
 			return null;
 		}
 		
-		GeneratedSelector generatedSelector = new GeneratedSelector();
+		// Selector generatedSelector = new Selector();
 		
-		generatedSelector.setSelectorObject(generateGameObject(allTileGridCoords));
-		generatedSelector.setChildTileAdjustments(generateAdjustments(allTileGridCoords));
+		// generatedSelector.setSelectorObject(generateGameObject(allTileGridCoords));
+		// generatedSelector.setChildTileAdjustments(generateAdjustments(allTileGridCoords));
 		
-		generatedSelector.getPositionAndBoundsFromChildTileCoords(allTileGridCoords);
+		// generatedSelector.getPositionAndBoundsFromChildTileCoords(allTileGridCoords);
 		
-		return (Selector) generatedSelector;
+		// return (Selector) generatedSelector;
+        return null;
 	}
 	
 	private static GridCoords[] compileSelectorChildTileCoords(Selector[] selectors)

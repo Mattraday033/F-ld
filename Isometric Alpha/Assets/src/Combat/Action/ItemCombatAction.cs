@@ -36,14 +36,14 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		return sourceItem.getKey();
 	}
 
-	public override int getRangeIndex()
+	public override string getRangeIndex()
 	{
 		return sourceItem.getRangeIndex();
 	}
 
 	public override string getRangeTitle()
 	{
-		return Range.getRangeTitle(getRangeIndex());
+		return getRangeIndex();
 	}
 
 	public override Item getSourceItem()

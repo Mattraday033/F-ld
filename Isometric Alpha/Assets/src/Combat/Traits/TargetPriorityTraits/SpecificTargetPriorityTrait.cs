@@ -24,7 +24,7 @@ public class SpecificTargetPriorityTrait : TargetPriorityTrait
 	{
 		Selector selectorOnTarget = selector.clone();
 
-		if(selectorOnTarget.singleTile && specificTargets.Length > 1)
+		if(selectorOnTarget.singleTile() && specificTargets.Length > 1)
 		{
 			selectorOnTarget = SelectorGenerator.generate(specificTargets);
 		} else

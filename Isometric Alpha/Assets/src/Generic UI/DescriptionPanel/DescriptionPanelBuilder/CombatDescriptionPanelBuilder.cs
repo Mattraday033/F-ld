@@ -29,7 +29,7 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
 
     private void Awake()
     {
-        if(CombatStateManager.inCombat)
+        if(CombatStateManager.inCombat && CombatStateManager.whoseTurn != WhoseTurn.Won && CombatStateManager.whoseTurn != WhoseTurn.Lost)
         {
             setTransparency();
             InspectNode.OnInspect.AddListener(setTransparency);

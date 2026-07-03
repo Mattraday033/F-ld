@@ -165,11 +165,6 @@ public class DescriptionPanelBuildingBlock
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Range, text, IconList.rangeIconName);
     }
 
-    public static DescriptionPanelBuildingBlock getRangeBlock(int rangeIndex)
-    {
-        return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Range, Range.getRangeTitle(rangeIndex), IconList.rangeIconName);
-    }
-
     public static DescriptionPanelBuildingBlock getCooldownBlock(string text)
     {
         return new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, text, IconList.cooldownIconName);

@@ -49,28 +49,28 @@ public class MissesArePunishedAbility : Ability
 
 	public override string getRangeTitle()
 	{
-		return Range.getRangeTitle(determineRangeIndex());
+		return determineRangeIndex();
 	}
-	
-	public override int getRangeIndex()
+
+	public override string getRangeIndex()
 	{
 		return determineRangeIndex();
 	}
 
-	private int determineRangeIndex()
+	private string determineRangeIndex()
 	{
 		if(CombatStateManager.turnNumber % 4 == 1)
 		{
-			return Range.reverseHookOneIndex; 	//northwest
+			return SelectorList.reverseHookOneName; 	//northwest
 		} else if(CombatStateManager.turnNumber % 4 == 2)
 		{
-			return Range.hookOneIndex; 			//northeast
+			return SelectorList.hookOneName; 			//northeast
 		} else if(CombatStateManager.turnNumber % 4 == 3)
 		{
-			return Range.reverseL_OneIndex; 	//southeast
+			return SelectorList.reverseL_OneName; 	//southeast
 		} else if(CombatStateManager.turnNumber % 4 == 0)
 		{
-			return Range.L_OneIndex; 				//southwest
+			return SelectorList.L_OneName; 				//southwest
 		} else
 		{
 			throw new IOException("Unexpected number : " + CombatStateManager.turnNumber);	//should never happen

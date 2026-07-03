@@ -104,7 +104,7 @@ public class Attack : CombatAction, IJSONConvertable
 		}
 	}
 
-	public override int getRangeIndex()
+	public override string getRangeIndex()
 	{
 		return getMainHandWeapon().getRangeIndex();
 	}

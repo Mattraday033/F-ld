@@ -143,6 +143,8 @@ public static class PrefabNames
     public const string npcNameTag = "NPC Name Tag";
     public const string oldNPCNameTag = "OLD NPC Name Tag";
 
+    public const string combatHoverTile = "Combat Hover Tile";
+
     public const string mapTileName = "Map Tile";
     public const string nonInteractableMapTileName = "NonInteractable Map Tile";
     public const string mapPopUpWindow = "Map PopUp Window";

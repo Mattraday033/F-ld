@@ -114,6 +114,115 @@ public static class CombatGrid
         combatantsDict[coords] = newCombatant;
 	}
 
+    public static GridCoords getNextAllyToJumpSelectorTo(GridCoords currentCoords)
+    {
+        return getNextCombatantToJumpSelectorTo(currentCoords, forward: true, ally: true);
+    }
+
+    public static GridCoords getPreviousAllyToJumpSelectorTo(GridCoords currentCoords)
+    {
+        return getNextCombatantToJumpSelectorTo(currentCoords, forward: false, ally: true);
+    }
+
+    public static GridCoords getNextEnemyToJumpSelectorTo(GridCoords currentCoords)
+    {
+        return getNextCombatantToJumpSelectorTo(currentCoords, forward: true, ally: false);
+    }
+
+    public static GridCoords getPreviousEnemyToJumpSelectorTo(GridCoords currentCoords)
+    {
+        return getNextCombatantToJumpSelectorTo(currentCoords, forward: false, ally: false);
+    }
+
+    private static GridCoords getNextCombatantToJumpSelectorTo(GridCoords currentCoords, bool forward, bool ally)
+    {
+        List<Stats> stats = new List<Stats>();
+
+        if(ally)
+        {
+            stats = new List<Stats>(combatantsDict.Values.Where(s => s.positions.Count > 0 && positionIsOnAlliedSide(s.positions[0])));
+        } else
+        {
+            stats = new List<Stats>(combatantsDict.Values.Where(s => s.positions.Count > 0 && positionIsOnEnemySide(s.positions[0])));
+        }
+
+        stats = stats.Distinct().ToList();
+
+        if(stats.Count <= 1)
+        {
+            return currentCoords;
+        } else if(getCombatantAtCoords(currentCoords) == null ||
+                (ally && positionIsOnEnemySide(SelectorManager.currentSelector.getCoords())) ||
+                (!ally && positionIsOnAlliedSide(SelectorManager.currentSelector.getCoords())))
+        {
+            return stats[0].positions[0];
+        }
+
+        Stats targetStats = null;
+
+        int i = 0;
+        foreach(Stats combatant in stats)
+        {
+            if(!getCombatantAtCoords(currentCoords).Equals(combatant))
+            {
+                i++;
+                continue;
+            }
+
+            if(forward)
+            {
+                if(i < stats.Count-1)
+                {
+                    targetStats = stats[i+1];
+                    break;
+                } else
+                {
+                    targetStats = stats[0];
+                    break;
+                }
+            } else
+            {
+                if(i > 0)
+                {
+                    targetStats = stats[i-1];
+                    break;
+                } else
+                {
+                    targetStats = stats[stats.Count-1];
+                    break;
+                }
+            }
+        }
+        
+
+        if(SelectorManager.currentSelector.singleTile() || targetStats.positions.Count <= 1)
+        {
+            return SelectorManager.findLegalCoordsContainingMandatoryTarget(SelectorManager.currentSelector, targetStats.positions[0]);
+        } else
+        {
+            List<int> overlappingTiles = new List<int>();
+            int indexWithHighestOverlap = 0;
+            int currentIndex = 0;
+            foreach(GridCoords position in targetStats.positions)
+            {
+                GridCoords legalPosition = SelectorManager.findLegalCoordsContainingMandatoryTarget(SelectorManager.currentSelector, targetStats.positions[0]);
+                Selector clone = SelectorManager.currentSelector.clone();
+                clone.setToLocation(legalPosition);
+
+                overlappingTiles.Add(targetStats.positions.Intersect(clone.getAllSelectorCoords().ToList()).Count());
+
+                if(overlappingTiles[currentIndex] > overlappingTiles[indexWithHighestOverlap])
+                {
+                    indexWithHighestOverlap = currentIndex;
+                }
+
+                currentIndex++;
+            }
+
+            return targetStats.positions[indexWithHighestOverlap];
+        }
+    }
+
     public static void addCombatantToGrid(Stats combatant)
     {
         foreach(GridCoords coords in combatant.positions)

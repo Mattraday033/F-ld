@@ -24,7 +24,7 @@ public class Ability: CombatAction, IJSONConvertable
 	
 	private string critFormula;
 	
-	private int rangeIndex;
+	private string rangeIndex;
 	
 	private int maximumSlots;
 	
@@ -146,7 +146,7 @@ public class Ability: CombatAction, IJSONConvertable
 	
 	public override string getRangeTitle()
 	{
-		return Range.getRangeTitle(rangeIndex);
+		return rangeIndex;
 	}
 
     public override int[] getActionCosts()
@@ -241,7 +241,7 @@ public class Ability: CombatAction, IJSONConvertable
         return critFormula;
 	}
 	
-	public override int getRangeIndex()
+	public override string getRangeIndex()
 	{
 		return rangeIndex;
 	}

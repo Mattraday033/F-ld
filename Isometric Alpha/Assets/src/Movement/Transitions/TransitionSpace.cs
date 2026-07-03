@@ -82,7 +82,7 @@ public class Transition
 
     public virtual bool preventIndicator()
     {
-        return false;
+        return destinationOnly;
     }
 
     public bool sharesHash(Transition transition)

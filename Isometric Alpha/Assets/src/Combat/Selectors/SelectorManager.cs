@@ -26,7 +26,7 @@ public class SelectorManager : MonoBehaviour
 	private GameObject pressEPrompt;
 
 	public Transform selectorParent;
-	public Selector[] selectors;
+	// public Selector[] selectors;
 
 	public PlayerCombatActionManager playerCombatActionManager;
 
@@ -39,11 +39,6 @@ public class SelectorManager : MonoBehaviour
 	public static AbilityMenuManager currentAbilityManager; //circle of circles that shows abilities
 
 	public HoverPanelPopUpButton hoverPanelPopUpButton;
-
-	private readonly static RowColumnChangeDelegate rowDecrement = (r => r - 1);
-	private readonly static RowColumnChangeDelegate rowIncrement = (r => r + 1);
-	private readonly static RowColumnChangeDelegate colDecrement = (c => c - 1);
-	private readonly static RowColumnChangeDelegate colIncrement = (c => c + 1);
 
 	private static bool verticalPriority = true;
 
@@ -99,30 +94,13 @@ public class SelectorManager : MonoBehaviour
 
     private void setFirstSelectorVisibility()
     {
-        selectors[Constants.indexZero].getSelectorObject().SetActive(CombatStateManager.whoseTurn == WhoseTurn.Player);
+        // SelectorList.playerCursor.getSelectorObject().SetActive(CombatStateManager.whoseTurn == WhoseTurn.Player);
     }
 
 	public static SelectorManager getInstance()
 	{
 		return instance;
 	}
-
-	public void instantiateAllSelectors()
-	{
-		foreach (Selector selector in selectors)
-		{
-			selector.getSelectorObject().transform.SetParent(selectorParent);
-			selector.setToStartLocation();
-		}
-
-		selectors[0].setToCurrentSelector();
-		Stats playerStatsForSelector = PartyManager.getPlayerStats();
-		if (playerStatsForSelector != null && playerStatsForSelector.positions.Count > 0)
-		{
-			selectors[0].setToLocation(playerStatsForSelector.positions[0]);
-		}
-	}
-
 
     public static void activateCurrentSelector()
     {
@@ -166,7 +144,7 @@ public class SelectorManager : MonoBehaviour
 
     public static void backOutOfAbilityMenu()
     {
-        setCurrentSelector(instance.selectors[0]);
+        setCurrentSelector(SelectorList.playerCursor);
 
         currentSelector.setToOriginalColor();
 
@@ -207,12 +185,14 @@ public class SelectorManager : MonoBehaviour
 		currentAbilityManager.disableAbilityButtonCanvas();
 		CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
 
-		setCurrentSelector(instance.selectors[0], false);
+		setCurrentSelector(SelectorList.playerCursor, false);
 	}
 
 	public static void displayCurrentHoverUI()
 	{
-		if (!currentSelector.singleTile ||
+        return;
+        
+		if (!currentSelector.singleTile() ||
 			(!TutorialFlags.getFlag(TutorialSequenceList.combatTutorialSeenFlag) &&
 			CombatStateManager.currentActivity != CurrentActivity.Tutorial))
 		{
@@ -242,7 +222,7 @@ public class SelectorManager : MonoBehaviour
 
 		GameObject sprite = target.combatSprite;
 
-		if (currentSelector.singleTile && Helpers.tagMatchesCriteria(sprite, selectableAllyTagCriteria))
+		if (currentSelector.singleTile() && Helpers.tagMatchesCriteria(sprite, selectableAllyTagCriteria))
 		{
 			if (CombatStateManager.currentActivity == CurrentActivity.ChoosingActor)
 			{
@@ -361,7 +341,7 @@ public class SelectorManager : MonoBehaviour
 		{
 			if (loadedCombatAction.requiresAnAction())
 			{
-				playerCombatActionManager.queueCombatAction(selectors[0], currentSelector, loadedCombatAction);
+				playerCombatActionManager.queueCombatAction(SelectorList.playerCursor, currentSelector, loadedCombatAction);
                 AudioManager.playChooseActorAbilityLocationSFX();
 			}
 			else
@@ -369,11 +349,11 @@ public class SelectorManager : MonoBehaviour
 				loadedCombatAction.performCombatAction();
 			}
 
-			resetAllSelectors();
+			SelectorList.resetAllSelectors();
 			Stats loadedActorStats = loadedCombatAction.getActorStats();
 			if (loadedActorStats != null && loadedActorStats.positions.Count > 0)
 			{
-				selectors[0].setToLocation(loadedActorStats.positions[0]);
+				SelectorList.playerCursor.setToLocation(loadedActorStats.positions[0]);
 			}
 
 			CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
@@ -447,9 +427,9 @@ public class SelectorManager : MonoBehaviour
 
 	public void finishChoosingTertiary(CombatAction loadedCombatAction)
 	{
-		playerCombatActionManager.queueCombatActionWithTertiary(selectors[0], currentSelector, loadedCombatAction);
+		playerCombatActionManager.queueCombatActionWithTertiary(SelectorList.playerCursor, currentSelector, loadedCombatAction);
 
-		resetAllSelectors();
+        SelectorList.resetAllSelectors();
 
 		currentSelector.setToLocation(loadedCombatAction.getActorCoords());
 
@@ -528,7 +508,7 @@ public class SelectorManager : MonoBehaviour
         isMoving = true;
 
 		if (Input.GetKey(KeyBindingList.jumpMoveKey.getCurrentKeyCode()) &&
-			currentSelector.singleTile &&
+			// currentSelector.singleTile() &&
 			CombatStateManager.snappingToTargetDuringReposition())
 		{
 			moveCurrentSelectorToNextSingleTileTarget();
@@ -613,11 +593,11 @@ public class SelectorManager : MonoBehaviour
             case CurrentActivity.ChoosingLocation:
                 break;
             default:
-                visibleSelectors.Add(selectorManager.selectors[Constants.indexZero]);
+                visibleSelectors.Add(SelectorList.playerCursor);
                 break;
         }
 
-        if(currentSelector != selectorManager.selectors[Constants.indexZero])
+        if(currentSelector != SelectorList.playerCursor)
         {
             visibleSelectors.Add(currentSelector);
         }
@@ -631,54 +611,38 @@ public class SelectorManager : MonoBehaviour
 		if (isMoving)
 		{
 			GridCoords targetPosition = GridCoords.getDefaultCoords();
-			bool dontWrap = true;
+            bool onAllySide = CombatGrid.positionIsOnAlliedSide(currentSelector.getCoords());
 
-			if (Input.GetKey(KeyBindingList.moveSouthKey.getCurrentKeyCode()))
+			if (Input.GetKey(KeyBindingList.moveWestKey.getCurrentKeyCode()))
 			{
-				verticalPriority = true;
-
-				targetPosition = searchColForCombatant(currentSelector.getCoords().col, currentSelector.getCoords().row + 1, rowIncrement, dontWrap);
-
-				if (targetPosition.Equals(GridCoords.getDefaultCoords()))
-				{
-					targetPosition = findNextSingleTileTarget(rowIncrement, colDecrement);
-				}
-
-			}
-			else if (Input.GetKey(KeyBindingList.moveWestKey.getCurrentKeyCode()))
-			{
-				verticalPriority = false;
-
-				targetPosition = searchRowForCombatant(currentSelector.getCoords().row, currentSelector.getCoords().col - 1, colDecrement, dontWrap);
-
-				if (targetPosition.Equals(GridCoords.getDefaultCoords()))
-				{
-					targetPosition = findNextSingleTileTarget(rowIncrement, colDecrement);
-				}
-
+                if(onAllySide)
+                {
+				    targetPosition = CombatGrid.getPreviousAllyToJumpSelectorTo(currentSelector.getFirstCombatantCoords());
+                } else
+                {
+				    targetPosition = CombatGrid.getPreviousEnemyToJumpSelectorTo(currentSelector.getFirstCombatantCoords());
+                }
 			}
 			else if (Input.GetKey(KeyBindingList.moveEastKey.getCurrentKeyCode()))
 			{
-				verticalPriority = false;
-
-				targetPosition = searchRowForCombatant(currentSelector.getCoords().row, currentSelector.getCoords().col + 1, colIncrement, dontWrap);
-
-				if (targetPosition.Equals(GridCoords.getDefaultCoords()))
-				{
-					targetPosition = findNextSingleTileTarget(rowDecrement, colIncrement);
-				}
-
+                if(onAllySide)
+                {
+				    targetPosition = CombatGrid.getNextAllyToJumpSelectorTo(currentSelector.getFirstCombatantCoords());
+                } else
+                {
+				    targetPosition = CombatGrid.getNextEnemyToJumpSelectorTo(currentSelector.getFirstCombatantCoords());
+                }
 			}
-			else
+			else if((Input.GetKey(KeyBindingList.moveNorthKey.getCurrentKeyCode()) || Input.GetKey(KeyBindingList.moveSouthKey.getCurrentKeyCode())) && 
+                    canJumpBetweenAllyEnemySections())
 			{
-				verticalPriority = true;
-
-				targetPosition = searchColForCombatant(currentSelector.getCoords().col, currentSelector.getCoords().row - 1, rowDecrement, dontWrap);
-
-				if (targetPosition.Equals(GridCoords.getDefaultCoords()))
-				{
-					targetPosition = findNextSingleTileTarget(rowDecrement, colIncrement);
-				}
+                if(onAllySide)
+                {
+				    targetPosition = CombatGrid.getNextEnemyToJumpSelectorTo(new GridCoords(0,0));
+                } else
+                {
+				    targetPosition = CombatGrid.getNextAllyToJumpSelectorTo(new GridCoords(3,0));
+                }
 			}
 
 			if (!targetPosition.Equals(GridCoords.getDefaultCoords()))
@@ -699,6 +663,20 @@ public class SelectorManager : MonoBehaviour
         isMoving = false;
 	}
 
+    public static bool canJumpBetweenAllyEnemySections()
+    {
+        switch(CombatStateManager.currentActivity)
+        {
+            case CurrentActivity.ChoosingActor:
+                return true;
+            // case CurrentActivity.ChoosingLocation:
+            //     AbilityMenuManager abilityMenuManager = AbilityMenuManager.getInstance();
+            //     return abilityMenuManager != null && abilityMenuManager.getCurrentlySelectedAction() != null && 
+            default: 
+                return false;
+        }
+    }
+
     public static void updateAllDamagePreviews()
     {
         DamagePreviewManager.wipeAllDamagePreviews();
@@ -708,182 +686,6 @@ public class SelectorManager : MonoBehaviour
             DamagePreviewManager.UpdateDamagePreviews.Invoke(AbilityMenuManager.getInstance().getCurrentlySelectedAction());
         } 
     }
-
-	private static GridCoords findNextSingleTileTarget(RowColumnChangeDelegate rowChange, RowColumnChangeDelegate colChange)
-	{
-		RowColumnChangeDelegate loopChange;
-		RowColumnChangeDelegate searchChange;
-		int loopIndex;
-		int searchStartIndex;
-
-		if (verticalPriority)
-		{
-			loopChange = rowChange;
-			searchChange = colChange;
-			loopIndex = currentSelector.currentRow;
-			searchStartIndex = currentSelector.currentCol;
-		}
-		else
-		{
-			loopChange = colChange;
-			searchChange = rowChange;
-			loopIndex = currentSelector.currentCol;
-			searchStartIndex = currentSelector.currentRow;
-		}
-
-		GridCoords targetPosition = GridCoords.getDefaultCoords();
-
-		int startIndex = loopIndex;
-		int searchesRan = 0;
-		bool wrap = false;
-
-		for (loopIndex = loopChange(loopIndex); searchesRan <= CombatGrid.colRightBounds; loopIndex = loopChange(loopIndex))
-		{
-			if (loopIndex == startIndex)
-			{
-				searchStartIndex++; //so that the place the currentSelector is at is the lowest priority
-			}
-
-			if (verticalPriority)
-			{
-				loopIndex = checkForWrapAroundRow(loopIndex);
-				targetPosition = searchRowForCombatant(loopIndex, searchStartIndex, searchChange, wrap);
-			}
-			else
-			{
-				loopIndex = checkForWrapAroundCol(loopIndex);
-				targetPosition = searchColForCombatant(loopIndex, searchStartIndex, searchChange, wrap);
-			}
-
-			if (!targetPosition.Equals(GridCoords.getDefaultCoords()))
-			{
-				return targetPosition;
-			}
-
-			searchesRan++;
-		}
-
-		return GridCoords.getDefaultCoords();
-	}
-
-	private delegate int RowColumnChangeDelegate(int rowOrColumn);
-
-	private static GridCoords searchRowForCombatant(int rowIndex, int startCol, RowColumnChangeDelegate colChange, bool dontWrap)
-	{
-		int columnsSearched = 0;
-		for (int colIndex = startCol; columnsSearched <= CombatGrid.colRightBounds; colIndex = colChange(colIndex))
-		{
-			int previousColIndex = colIndex;
-			colIndex = checkForWrapAroundCol(colIndex);
-
-			if (dontWrap && colIndex != previousColIndex)
-			{
-				return GridCoords.getDefaultCoords();
-			}
-
-			Stats combatantAtCoords = CombatGrid.getCombatantAtCoords(rowIndex, colIndex);
-			Stats mandatoryTarget = CombatGrid.enemyHasMandatoryTarget();
-
-			if (combatantAtCoords != null && combatantAtCoords.isAlive() && 
-                (!Helpers.hasQuality<Trait>(combatantAtCoords.traitContainer, hT => hT.isUntargetable()) || 
-                   (Helpers.hasQuality<Trait>(combatantAtCoords.traitContainer, hT => hT.isUntargetable()) && Helpers.hasQuality<Trait>(combatantAtCoords.traitContainer, hT => hT.Equals(TraitList.repositioningInvulnerability)))) &&
-				(currentSelector == instance.selectors[0] || mandatoryTarget == null || (mandatoryTarget != null && combatantAtCoords.isMandatoryTarget())))
-			{
-				return new GridCoords(rowIndex, colIndex);
-			}
-
-			columnsSearched++;
-		}
-
-		return GridCoords.getDefaultCoords();
-	}
-
-	private static GridCoords searchColForCombatant(int colIndex, int startRow, RowColumnChangeDelegate rowChange, bool dontWrap)
-	{
-		int rowsSearched = 0;
-		for (int rowIndex = startRow; rowsSearched <= CombatGrid.colRightBounds; rowIndex = rowChange(rowIndex))
-		{
-			int previousRowIndex = rowIndex;
-			rowIndex = checkForWrapAroundRow(rowIndex);
-
-			if (dontWrap && rowIndex != previousRowIndex)
-			{
-				return GridCoords.getDefaultCoords();
-			}
-
-			Stats combatantAtCoords = CombatGrid.getCombatantAtCoords(rowIndex, colIndex);
-			Stats mandatoryTarget = CombatGrid.enemyHasMandatoryTarget();
-
-			if (combatantAtCoords != null && combatantAtCoords.isAlive() && 
-                (!Helpers.hasQuality<Trait>(combatantAtCoords.traitContainer, hT => hT.isUntargetable()) || 
-                   (Helpers.hasQuality<Trait>(combatantAtCoords.traitContainer, hT => hT.isUntargetable()) && Helpers.hasQuality<Trait>(combatantAtCoords.traitContainer, hT => hT.Equals(TraitList.repositioningInvulnerability)))) &&
-				(currentSelector == instance.selectors[0] || mandatoryTarget == null || (mandatoryTarget != null && combatantAtCoords.isMandatoryTarget())))
-			{
-				return new GridCoords(rowIndex, colIndex);
-			}
-
-			rowsSearched++;
-		}
-
-		return GridCoords.getDefaultCoords();
-	}
-
-	private static int checkForWrapAroundCol(int colIndex)
-	{
-		if (colIndex < CombatGrid.colLeftBounds)
-		{
-			return CombatGrid.colRightBounds;
-		}
-		else if (colIndex > CombatGrid.colRightBounds)
-		{
-			return CombatGrid.colLeftBounds;
-		}
-
-		return colIndex;
-	}
-
-	private static int checkForWrapAroundRow(int rowIndex)
-	{
-		if (verticalPriority && currentSelector == instance.selectors[0])
-		{
-			if (rowIndex < CombatGrid.rowUpperBounds)
-			{
-				rowIndex = CombatGrid.rowLowerBounds;
-			}
-			else if (rowIndex > CombatGrid.rowLowerBounds)
-			{
-				rowIndex = CombatGrid.rowUpperBounds;
-			}
-		}
-		else
-		{
-			if (currentSelector.onEnemySide())
-			{
-				if (rowIndex < CombatGrid.enemyRowUpperBounds)
-				{
-					rowIndex = CombatGrid.enemyRowLowerBounds;
-				}
-				else if (rowIndex > CombatGrid.enemyRowLowerBounds)
-				{
-					rowIndex = CombatGrid.enemyRowUpperBounds;
-				}
-
-			}
-			else if (currentSelector.onAllySide())
-			{
-				if (rowIndex < CombatGrid.allyRowUpperBounds)
-				{
-					rowIndex = CombatGrid.allyRowLowerBounds;
-				}
-				else if (rowIndex > CombatGrid.allyRowLowerBounds)
-				{
-					rowIndex = CombatGrid.allyRowUpperBounds;
-				}
-			}
-		}
-
-		return rowIndex;
-	}
 
 	private static bool canMoveUp()
 	{
@@ -983,20 +785,6 @@ public class SelectorManager : MonoBehaviour
 		return !testSelector.hasAtLeastOneMandatoryTarget();
 	}
 
-	//puts all selectors back to their start positions, 
-	//and disables all of them and enables the first one (selectors[0])
-	//sets selectors[0] as currentSelector
-	public void resetAllSelectors()
-	{
-		foreach (Selector selector in selectors)
-		{
-			selector.setToStartLocation();
-			selector.SetActive(false);
-		}
-
-		selectors[0].setToCurrentSelector();
-	}
-
 	public static void updateCurrentSelectorPosition()
 	{
 		currentSelector.getSelectorObject().transform.position = CombatGrid.getPositionAt(currentSelector.currentRow, currentSelector.currentCol);
@@ -1062,7 +850,7 @@ public class SelectorManager : MonoBehaviour
 	public static void resetCurrentSelector()
 	{
 		currentSelector.SetActive(false);
-		currentSelector = getInstance().selectors[0];
+		currentSelector = SelectorList.playerCursor;
 	}
 
     [RuntimeInitializeOnLoadMethod]

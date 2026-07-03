@@ -13,7 +13,7 @@ public class ChargeUpAbility : Ability
 	public ChargeUpAbility(Trait chargeUpTrait, Ability actionWhenCharged) :
 		base(CombatActionSettings.build(actionWhenCharged.getKey(), DescriptionParams.build(actionWhenCharged.getName(), iconName: actionWhenCharged.getIconName(), useDescription: actionWhenCharged.getUseDescription(), loreDescription: actionWhenCharged.getLoreDescription()),
 																	DamageParams.build(actionWhenCharged.getDamageFormula(), actionWhenCharged.getCritFormula()),
-																	TargetParams.build(Range.singleTargetIndex, actionWhenCharged.selfTargeting),
+																	TargetParams.build(SelectorList.singleName, actionWhenCharged.selfTargeting),
 																	FrequencyParams.build(actionWhenCharged.getMaximumSlots(), actionWhenCharged.getMaximumCooldown()),
 																	costParams: CostParams.build(actionWhenCharged.getActionCostTypes(), actionWhenCharged.getActionCosts()),
 																	appliedTrait: actionWhenCharged.getAppliedTrait()) //Left off relatedTraits
@@ -89,7 +89,7 @@ public class ChargeUpAbility : Ability
 		}
 	}
 
-	public override int getRangeIndex()
+	public override string getRangeIndex()
 	{
 		if (isCharged())
 		{
@@ -105,11 +105,11 @@ public class ChargeUpAbility : Ability
 	{
 		if (isCharged())
 		{
-			return Range.getRangeTitle(actionWhenCharged.getRangeIndex());
+			return actionWhenCharged.getRangeIndex();
 		}
 		else
 		{
-			return Range.getRangeTitle(base.getRangeIndex());
+			return base.getRangeIndex();
 		}
 	}
 

@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPointerDownHandler
+public class CombatHoverTile : CombatMouseHover
 {
-
     public static GridCoords previousGridCoords;
 
     private bool onEnemySide;
@@ -22,25 +21,15 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
 
     }
 
-    public void createListeners()
-    {
+    // public override void createListeners()
+    // {
 
-    }
+    // }
 
-    public void destroyListeners()
-    {
+    // public override void destroyListeners()
+    // {
 
-    }
-
-    public override bool useExactCopyOfSprite()
-    {
-        return false;
-    }
-
-    public override bool alphaShouldDetermineRaycastTarget()
-    {
-        return true;
-    }
+    // }
 
     public void setTargetCoords(int row, int col)
     {
@@ -48,55 +37,36 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
         onEnemySide = CombatGrid.positionIsOnEnemySide(targetCoords);
     }
 
-    public SpriteOutline getSpriteOutline()
-    {
-        return getTargetStats().outline;
-    }
 
-    public void onReveal(bool toggleReveal)
-    {
-        if(toggleReveal)
-        {
-            getSpriteOutline().createOutline(getRevealColor());
-        } else
-        {
-            getSpriteOutline().removeOutline();
-        }
-    }
+    // public void onReveal(bool toggleReveal)
+    // {
+    //     if(toggleReveal)
+    //     {
+    //         getSpriteOutline().createOutline(getRevealColor());
+    //     } else
+    //     {
+    //         getSpriteOutline().removeOutline();
+    //     }
+    // }
 
-    public Color getRevealColor()
-    {
-        if (onEnemySide)
-        {
-            return ColorList.attacksOnSight;
-        }
-        else
-        {
-            return ColorList.canBeInteractedWith;
-        }
-    }
+    // public Color getRevealColor()
+    // {
+    //     if (onEnemySide)
+    //     {
+    //         return ColorList.attacksOnSight;
+    //     }
+    //     else
+    //     {
+    //         return ColorList.canBeInteractedWith;
+    //     }
+    // }
 
     protected override Stats getTargetStats()
     {
         return CombatGrid.getCombatantAtCoords(targetCoords);
     }
 
-    private bool tileHasTarget()
-    {
-        return CombatGrid.getCombatantAtCoords(targetCoords) != null;
-    }
-
-    private void preserveHoverCoords()
-    {
-        previousGridCoords = targetCoords.clone();
-    }
-
-    private void purgeHoverCoords()
-    {
-        previousGridCoords = GridCoords.getDefaultCoords();
-    }
-
-    public override void OnPointerEnter(PointerEventData eventData)
+    public void OnMouseEnter()
     {
         // if(CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
         // {
@@ -118,7 +88,7 @@ public class CombatTileHover : AlphaDeterminedRaycastTarget, IRevealable, IPoint
         // }
     }
 
-    public override void OnPointerExit(PointerEventData eventData) 
+    public void OnMouseExit() 
     {
         // if(CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
         // {

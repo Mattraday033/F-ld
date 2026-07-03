@@ -45,7 +45,7 @@ public class PlayerCombatActionManager : MonoBehaviour
 
 	public void queueCombatAction(Selector actorSelector, Selector targetSelector, CombatAction action)
 	{
-		action.setActor(CombatGrid.getCombatantAtCoords(actorSelector.currentRow, actorSelector.currentCol));
+		action.setActor(CombatGrid.getCombatantAtCoords(actorSelector.getCoords()));
 		
 		action.setSelector(targetSelector.clone());
 		
@@ -123,7 +123,7 @@ public class PlayerCombatActionManager : MonoBehaviour
 
 	public void queueCombatActionWithTertiary(Selector actorSelector, Selector tertiarySelector, CombatAction action)
 	{
-		action.setActor(CombatGrid.getCombatantAtCoords(actorSelector.currentRow, actorSelector.currentCol));
+		action.setActor(CombatGrid.getCombatantAtCoords(actorSelector.getCoords()));
 		
 		Selector targetSelector = action.getSelector().clone();
 		

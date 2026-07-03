@@ -13,10 +13,10 @@ public class CombatItem : UsableItem, IJSONConvertable
     private bool targetsEnemySection = false;
     protected bool healsTarget = false;
 
-	private int rangeIndex;
+	private string rangeIndex;
 	private bool itemUseRequiresAnAction;
 
-	public CombatItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth, int rangeIndex, bool useRequiresAnAction, bool targetsEnemySection = false, bool healsTarget = false, PlaySFXLogic OOCOnUseSFX = null) : 
+	public CombatItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth, string rangeIndex, bool useRequiresAnAction, bool targetsEnemySection = false, bool healsTarget = false, PlaySFXLogic OOCOnUseSFX = null) :
     base(listID, key, loreDescription, useDescription, subtype, iconName, worth, OOCOnUseSFX)
 	{
 		this.rangeIndex = rangeIndex;
@@ -25,7 +25,7 @@ public class CombatItem : UsableItem, IJSONConvertable
 		this.healsTarget = healsTarget;		
 	}
 
-	public CombatItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth, int rangeIndex, bool useRequiresAnAction, int quantity, bool targetsEnemySection = false, bool healsTarget = false, PlaySFXLogic OOCOnUseSFX = null) : 
+	public CombatItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth, string rangeIndex, bool useRequiresAnAction, int quantity, bool targetsEnemySection = false, bool healsTarget = false, PlaySFXLogic OOCOnUseSFX = null) :
     base(listID, key, loreDescription, useDescription, subtype, iconName, worth, quantity, OOCOnUseSFX)
 	{
 		this.rangeIndex = rangeIndex;
@@ -39,7 +39,7 @@ public class CombatItem : UsableItem, IJSONConvertable
         //Empty on purpose
     }
 
-	public override int getRangeIndex()
+	public override string getRangeIndex()
 	{
 		return rangeIndex;
 	}
