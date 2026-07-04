@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 
 public static class CombatHoverTileManager
 {
-    
+    private static Dictionary<GridCoords, CombatHoverTile> hoverTileDict;
+
     public static void createCombatTileHoverGrid()
     {
         Transform parent = CombatHoverTileParent.getCombatHoverTileParent();
@@ -20,10 +21,22 @@ public static class CombatHoverTileManager
                 tile.setTargetCoords(row, col);
                 tile.transform.position = CombatGrid.getPositionAt(row, col);
 
-                
+                hoverTileDict.Add(new GridCoords(row, col), tile);
             }
         }
     }
 
+    public static void resetHoverTileDict()
+    {
+        hoverTileDict = new Dictionary<GridCoords, CombatHoverTile>();
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        hoverTileDict = new Dictionary<GridCoords, CombatHoverTile>();
+
+        CombatStateManager.OnCombatEnd.AddListener(resetHoverTileDict);
+    }
 
 }
