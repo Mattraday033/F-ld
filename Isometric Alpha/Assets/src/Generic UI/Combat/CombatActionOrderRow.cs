@@ -81,57 +81,57 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 
 	public override void OnPointerEnter(PointerEventData eventData)
 	{
-		if (CombatStateManager.currentActivity == CurrentActivity.Waiting ||
-			CombatStateManager.currentActivity == CurrentActivity.Retreating)
-		{
-			return;
-		}
+		// if (CombatStateManager.currentActivity == CurrentActivity.Waiting ||
+		// 	CombatStateManager.currentActivity == CurrentActivity.Retreating)
+		// {
+		// 	return;
+		// }
 
-		CombatAction actionBeingDescribed = getCombatActionBeingDescribed();
+		// CombatAction actionBeingDescribed = getCombatActionBeingDescribed();
 
-        if(actionBeingDescribed != null &&
-            actionBeingDescribed.getActorStats() != null &&
-            actionBeingDescribed.getActorStats().positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
-        {
-		    rowBackground.color = Color.green;
-        } else
-        {
-		    rowBackground.color = Color.red;
-        }
+        // if(actionBeingDescribed != null &&
+        //     actionBeingDescribed.getActorStats() != null &&
+        //     actionBeingDescribed.getActorStats().positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
+        // {
+		//     rowBackground.color = Color.green;
+        // } else
+        // {
+		//     rowBackground.color = Color.red;
+        // }
 
-		actionBeingDescribed.highlightActorSprites();
+		// actionBeingDescribed.highlightActorSprites();
 
-		if (actionBeingDescribed.getRangeIndex() != null)
-		{
-			targetDisplaySelector = Instantiate(actionBeingDescribed.getSelector().getSelectorObject(), CombatUI.selectorParent);
+		// if (actionBeingDescribed.getRangeIndex() != null)
+		// {
+		// 	targetDisplaySelector = Instantiate(actionBeingDescribed.getSelector().getSelectorObject(), CombatUI.selectorParent);
 
-			targetDisplaySelector.transform.position = actionBeingDescribed.getTargetPosition();
+		// 	targetDisplaySelector.transform.position = actionBeingDescribed.getTargetPosition();
 
-			targetDisplaySelector.SetActive(true);
-		}
+		// 	targetDisplaySelector.SetActive(true);
+		// }
 
-		if (actionBeingDescribed.requiresTertiaryCoords())
-		{
-			tertiaryDisplaySelector = Instantiate(SelectorList.getByName(actionBeingDescribed.getRangeIndex()).getSelectorObject(), CombatUI.selectorParent);
+		// if (actionBeingDescribed.requiresTertiaryCoords())
+		// {
+		// 	tertiaryDisplaySelector = Instantiate(SelectorList.getByName(actionBeingDescribed.getRangeIndex()).getSelectorObject(), CombatUI.selectorParent);
 
-			tertiaryDisplaySelector.transform.position = actionBeingDescribed.getTertiaryPosition();
-			tertiaryDisplaySelector.GetComponent<SpriteRenderer>().color = Selector.secondaryColor;
+		// 	tertiaryDisplaySelector.transform.position = actionBeingDescribed.getTertiaryPosition();
+		// 	tertiaryDisplaySelector.GetComponent<SpriteRenderer>().color = Selector.secondaryColor;
 
-			tertiaryDisplaySelector.SetActive(true);
-		}
+		// 	tertiaryDisplaySelector.SetActive(true);
+		// }
 	}
  
  
     public override void OnPointerExit(PointerEventData eventData)
     {
-        if (CombatStateManager.currentActivity == CurrentActivity.Waiting ||
-			CombatStateManager.currentActivity == CurrentActivity.Retreating ||
-            InspectNode.inspecting)
-        {
-            return;
-        }
+        // if (CombatStateManager.currentActivity == CurrentActivity.Waiting ||
+		// 	CombatStateManager.currentActivity == CurrentActivity.Retreating ||
+        //     InspectNode.inspecting)
+        // {
+        //     return;
+        // }
 
-		removeHoverDataFromScreen();
+		// removeHoverDataFromScreen();
 	}
 
 	public void removeHoverDataFromScreen()

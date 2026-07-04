@@ -81,7 +81,7 @@ public class Selector : ICloneable
 
 	public GridCoords getCoords()
 	{
-		return new GridCoords(rect.x, rect.y);
+		return new GridCoords(rect.y, rect.x);
 	}
 	
 	public GridCoords[] getAllSelectorCoords(bool includeIllegalCoords = false)
@@ -94,7 +94,7 @@ public class Selector : ICloneable
             {
                 if(spaces[x,y])
                 {
-                    GridCoords currentGridCoord = new GridCoords(rect.x + x, rect.y + y);
+                    GridCoords currentGridCoord = new GridCoords(rect.y + y, rect.x + x);
                 
                     if(includeIllegalCoords || 
                         !((getCoords().isWithinEnemySection() && !currentGridCoord.isWithinEnemySection()) || 
@@ -133,35 +133,18 @@ public class Selector : ICloneable
 	
 	public bool allTilesAreLegal()
 	{
-		GridCoords[] allSelectorCoords = getAllSelectorCoords(shouldIncludeIllegalCoords);
-	
-		foreach(GridCoords selectorCoords in allSelectorCoords)
-		{
-			if(selectorCoords.row > CombatGrid.rowLowerBounds || selectorCoords.col < CombatGrid.colLeftBounds ||
-				selectorCoords.row < CombatGrid.rowUpperBounds || selectorCoords.col > CombatGrid.colRightBounds || crossesBattlefieldDivide())
-			{	
-				return false;
-			}
-		}
-		
-		return true;
+        return rect.y >= CombatGrid.rowUpperBounds && rect.y + rect.height-1 <= CombatGrid.allyRowLowerBounds && 
+                rect.x >= CombatGrid.colLeftBounds && rect.x + rect.width-1 <= CombatGrid.colRightBounds && !crossesBattlefieldDivide();
 	}
 	
 	private bool crossesBattlefieldDivide()
 	{
-		if(singleTile())
+		if(singleTile() || rect.height == 1)
 		{
 			return false;
 		}
 		
-		if((rect.x <= CombatGrid.enemyRowLowerBounds && lowerBounds >= CombatGrid.allyRowUpperBounds) ||
-		   (rect.y >= CombatGrid.allyRowUpperBounds && upperBounds <= CombatGrid.enemyRowLowerBounds))
-		{
-			return true;
-		} else
-		{
-			return false;
-		}
+        return CombatGrid.positionIsOnEnemySide(getCoords()) && rect.y + (rect.height-1) > CombatGrid.enemyRowLowerBounds;
 	}
 	
 	public bool containsTarget(Stats target)
