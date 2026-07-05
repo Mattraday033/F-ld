@@ -26,7 +26,7 @@ public class OnDeathEffectTrait : Trait
 		CombatAction actionOnDeath = AbilityList.enemyAbilityDictionary[abilityKey].clone();
 		actionOnDeath.setActor(actor);
         actor.inOnDeathEffect = true;
-		Selector actionSelector = SelectorList.getByName(actionOnDeath.getRangeIndex());
+		Selector actionSelector = SelectorList.getByName(actionOnDeath.getRangeName());
 		
 		List<Stats> listOfTargets;
 		

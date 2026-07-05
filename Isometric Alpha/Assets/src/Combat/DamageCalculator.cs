@@ -468,7 +468,7 @@ public static class DamageCalculator
 
 				CombatAction fear = AbilityList.getAbility(currentStatSource, AbilityList.fearName);
 
-				Selector targetSelector = TraitList.chaotic.findTargetLocation(SelectorList.getByName(fear.getRangeIndex()), CombatGrid.getAllAliveEnemyCombatants());
+				Selector targetSelector = TraitList.chaotic.findTargetLocation(SelectorList.getByName(fear.getRangeName()), CombatGrid.getAllAliveEnemyCombatants());
 
 				if (currentStatSource.positions.Count > 0)
 				{

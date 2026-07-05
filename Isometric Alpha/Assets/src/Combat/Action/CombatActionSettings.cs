@@ -72,7 +72,7 @@ public class TargetParams
 {
     private const bool notSelfTargeting = false;
 
-    public string rangeIndex;
+    public string rangeName;
     public bool selfTargeting;
     public bool targetsOnlyAllies;
 
@@ -81,11 +81,11 @@ public class TargetParams
         return build(SelectorList.singleName, notSelfTargeting);
     }
 
-    public static TargetParams build(string rangeIndex, bool selfTargeting = false, bool targetsOnlyAllies = false)
+    public static TargetParams build(string rangeName, bool selfTargeting = false, bool targetsOnlyAllies = false)
     {
         TargetParams parameters = new TargetParams();
 
-        parameters.rangeIndex = rangeIndex;
+        parameters.rangeName = rangeName;
         parameters.selfTargeting = selfTargeting;
         parameters.targetsOnlyAllies = targetsOnlyAllies;
 

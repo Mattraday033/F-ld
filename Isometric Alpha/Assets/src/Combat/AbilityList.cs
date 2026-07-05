@@ -206,6 +206,8 @@ public static class AbilityList
             return;
         }
 
+        SelectorList.init();
+
         instantiateStatAbilities();
 	
 		instantiateSummonAbilities();

@@ -64,14 +64,14 @@ public abstract class UsableItem : Item, IJSONConvertable
         return iconName;
     }
 
-    public virtual string getRangeIndex()
+    public virtual string getRangeName()
     {
         return SelectorList.singleName;
     }
 
     public virtual string getRangeTitle()
     {
-        return getRangeIndex();
+        return getRangeName();
     }
 
     public abstract void use(Stats target);

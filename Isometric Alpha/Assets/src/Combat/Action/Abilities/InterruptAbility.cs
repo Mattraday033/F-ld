@@ -23,7 +23,7 @@ public class InterruptAbility : Ability
 
     public override void applySettings(CombatActionSettings settings)
     {
-        settings.targetParams.rangeIndex = SelectorList.singleName;
+        settings.targetParams.rangeName = SelectorList.singleName;
 
         settings.appliedTrait = TraitList.countered;
 

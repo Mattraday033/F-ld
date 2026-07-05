@@ -13,14 +13,14 @@ public class EvolveAbility : Ability
 		this.actionWhenInAttackMode = actionWhenInAttackMode.clone();
 	}
 
-	public override string getRangeIndex()
+	public override string getRangeName()
 	{
 		if(inAttackMode())
 		{
-			return actionWhenInAttackMode.getRangeIndex();
+			return actionWhenInAttackMode.getRangeName();
 		} else
 		{
-			return base.getRangeIndex();
+			return base.getRangeName();
 		}
 	}
 
@@ -28,10 +28,10 @@ public class EvolveAbility : Ability
 	{
 		if(inAttackMode())
 		{
-			return actionWhenInAttackMode.getRangeIndex();
+			return actionWhenInAttackMode.getRangeName();
 		} else
 		{
-			return base.getRangeIndex();
+			return base.getRangeName();
 		}
 	}
 	

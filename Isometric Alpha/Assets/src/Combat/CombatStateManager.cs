@@ -94,6 +94,8 @@ public class CombatStateManager : MonoBehaviour
 	public readonly static UnityEvent OnCombatStart = new UnityEvent();
 	public readonly static UnityEvent OnCombatEnd = new UnityEvent();
 
+	public readonly static UnityEvent AfterCombatantsSpawn = new UnityEvent();
+
     #endregion
 
 	public CombatActionManager combatActionManager;
@@ -166,6 +168,8 @@ public class CombatStateManager : MonoBehaviour
         CreatureSpawner.spawnFormation();
         CreatureSpawner.spawnEnemyPackInfo();
         CreatureSpawner.spawnAllyPackInfo();
+        
+        AfterCombatantsSpawn.Invoke();
 
         foreach (BeforeCombatAction beforeCombatAction in State.enemyPackInfo.beforeCombatActions)
         {
@@ -312,13 +316,13 @@ public class CombatStateManager : MonoBehaviour
 
 	public static void skipCombatTutorial()
 	{
-		SelectorManager.currentSelector.setToOriginalColor();
+		// SelectorManager.currentSelector.setToOriginalColor();
 
-		SelectorManager.currentSelector.SetActive(false);
+		// SelectorManager.currentSelector.SetActive(false);
 
-		SelectorManager.currentSelector = SelectorList.playerCursor;
+		// SelectorManager.currentSelector = SelectorList.playerCursor;
 
-		SelectorManager.currentSelector.SetActive(true);
+		// SelectorManager.currentSelector.SetActive(true);
 
 		if (AbilityMenuManager.getInstance() != null)
 		{

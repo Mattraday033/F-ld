@@ -15,7 +15,7 @@ public class FadeToBlackManager : MonoBehaviour
     public readonly static UnityEvent OnFadeBackInFinished = new UnityEvent();
 
     public Camera mainCamera;
-    public CinemachineVirtualCamera mainCM;
+    public CinemachineVirtualCamera mainCM; 
 
     public Canvas fadeToBlackCanvas;
 

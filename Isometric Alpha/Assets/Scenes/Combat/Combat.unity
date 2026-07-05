@@ -193,7 +193,7 @@ Transform:
   m_GameObject: {fileID: 87898318}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1575, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -542,7 +542,6 @@ GameObject:
   m_Component:
   - component: {fileID: 698304144}
   - component: {fileID: 698304145}
-  - component: {fileID: 698304146}
   m_Layer: 9
   m_Name: Creature Grid
   m_TagString: Untagged
@@ -577,20 +576,6 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 3
   m_CellSwizzle: 0
---- !u!114 &698304146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 698304143}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a062e9d8c68b2be4aaa969f59530e438, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridToDebug: {fileID: 698304145}
-  radius: 25
 --- !u!1001 &846577266
 PrefabInstance:
   m_ObjectHideFlags: 0

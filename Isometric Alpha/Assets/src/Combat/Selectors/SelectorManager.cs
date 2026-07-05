@@ -40,8 +40,6 @@ public class SelectorManager : MonoBehaviour
 
 	public HoverPanelPopUpButton hoverPanelPopUpButton;
 
-	private static bool verticalPriority = true;
-
 	private static SelectorManager instance;
 
 	private void Awake()
@@ -57,19 +55,21 @@ public class SelectorManager : MonoBehaviour
         CombatStateManager.OnTurnChangeToResolving.AddListener(setFirstSelectorVisibility);
         CombatStateManager.OnTurnChangeToPlayer.AddListener(setFirstSelectorVisibility);
 
-        CombatStateManager.OnActivityChangeToChoosingActor.AddListener(activateCurrentSelector);
-        CombatStateManager.OnActivityChangeToChoosingAbility.AddListener(activateCurrentSelector);
-        CombatStateManager.OnActivityChangeToChoosingLocation.AddListener(activateCurrentSelector);
-        CombatStateManager.OnActivityChangeToChoosingTertiary.AddListener(activateCurrentSelector);
+        CombatStateManager.OnActivityChangeToChoosingActor.AddListener(declareSelectors);
+        CombatStateManager.OnActivityChangeToChoosingAbility.AddListener(declareSelectors);
+        CombatStateManager.OnActivityChangeToChoosingLocation.AddListener(declareSelectors);
+        CombatStateManager.OnActivityChangeToChoosingTertiary.AddListener(declareSelectors);
 
-        CombatStateManager.OnActivityChangeToFinished.AddListener(deactivateCurrentSelector);
+        CombatStateManager.OnActivityChangeToFinished.AddListener(declareSelectors);
 
-        CombatStateManager.OnTurnChangeToWon.AddListener(deactivateCurrentSelector);
+        CombatStateManager.OnTurnChangeToWon.AddListener(declareSelectors);
         CombatStateManager.OnTurnChangeToWon.AddListener(destroyPressEPrompt);
 
         HeartBeatManager.FastHeartBeat.AddListener(moveCurrentSelector);
 
         CombatUIModule.OnHideCombatUI.AddListener(hideCurrentHoverUI);
+
+        CombatStateManager.AfterCombatantsSpawn.AddListener(movePlayerCursorToPlayerCharacter);
     }
 
     private void OnDestroy()
@@ -77,19 +77,21 @@ public class SelectorManager : MonoBehaviour
         CombatStateManager.OnTurnChangeToResolving.RemoveListener(setFirstSelectorVisibility);
         CombatStateManager.OnTurnChangeToPlayer.RemoveListener(setFirstSelectorVisibility);
 
-        CombatStateManager.OnActivityChangeToChoosingActor.RemoveListener(activateCurrentSelector);
-        CombatStateManager.OnActivityChangeToChoosingAbility.RemoveListener(activateCurrentSelector);
-        CombatStateManager.OnActivityChangeToChoosingLocation.RemoveListener(activateCurrentSelector);
-        CombatStateManager.OnActivityChangeToChoosingTertiary.RemoveListener(activateCurrentSelector);
+        CombatStateManager.OnActivityChangeToChoosingActor.RemoveListener(declareSelectors);
+        CombatStateManager.OnActivityChangeToChoosingAbility.RemoveListener(declareSelectors);
+        CombatStateManager.OnActivityChangeToChoosingLocation.RemoveListener(declareSelectors);
+        CombatStateManager.OnActivityChangeToChoosingTertiary.RemoveListener(declareSelectors);
 
-        CombatStateManager.OnActivityChangeToFinished.RemoveListener(deactivateCurrentSelector);
+        CombatStateManager.OnActivityChangeToFinished.RemoveListener(declareSelectors);
 
-        CombatStateManager.OnTurnChangeToWon.RemoveListener(deactivateCurrentSelector);
+        CombatStateManager.OnTurnChangeToWon.RemoveListener(declareSelectors);
         CombatStateManager.OnTurnChangeToWon.RemoveListener(destroyPressEPrompt);
 
         HeartBeatManager.FastHeartBeat.RemoveListener(moveCurrentSelector);
 
         CombatUIModule.OnHideCombatUI.RemoveListener(hideCurrentHoverUI);
+
+        CombatStateManager.AfterCombatantsSpawn.RemoveListener(movePlayerCursorToPlayerCharacter);
     }
 
     private void setFirstSelectorVisibility()
@@ -101,26 +103,6 @@ public class SelectorManager : MonoBehaviour
 	{
 		return instance;
 	}
-
-    public static void activateCurrentSelector()
-    {
-        if(currentSelector == null)
-        {
-            return;
-        }
-
-        currentSelector.SetActive(true);
-    }
-
-    public static void deactivateCurrentSelector()
-    {
-        if(currentSelector == null)
-        {
-            return;
-        }
-
-        currentSelector.SetActive(false);
-    }
 
     public static bool hasCurrentAbilityManager()
     {
@@ -159,12 +141,10 @@ public class SelectorManager : MonoBehaviour
     public static void backOutOfTertiaryLocationSelection()
     {
         currentSelector.setToOriginalColor();
-        currentSelector.SetActive(false);
 
         CombatAction loadedCombatAction = currentAbilityManager.getCurrentlySelectedAction();
 
         currentSelector = loadedCombatAction.getSelector();
-        currentSelector.SetActive(true);
 
         if (loadedCombatAction.resetCoordsOnBackOutOfTertiary())
         {
@@ -185,7 +165,7 @@ public class SelectorManager : MonoBehaviour
 		currentAbilityManager.disableAbilityButtonCanvas();
 		CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
 
-		setCurrentSelector(SelectorList.playerCursor, false);
+		resetCurrentSelector();
 	}
 
 	public static void displayCurrentHoverUI()
@@ -547,8 +527,6 @@ public class SelectorManager : MonoBehaviour
 				moved = true;
 			}
 
-			updateCurrentSelectorPosition();
-			
 			if (moved)
 			{
 				destroyPressEPrompt();
@@ -576,24 +554,29 @@ public class SelectorManager : MonoBehaviour
 
     public static void declareSelectors()
     {
+        CombatHoverTileManager.hideAllTiles();
         List<Selector> visibleSelectors = new List<Selector>();
-        SelectorManager selectorManager = getInstance();
 
-        if(selectorManager == null)
+        if(CombatStateManager.whoseTurn != WhoseTurn.Player)
         {
-            return;
-        } else if(CombatStateManager.whoseTurn != WhoseTurn.Player)
-        {
-            SelectorMoved.Invoke(visibleSelectors);
+            SelectorMoved.Invoke(new List<Selector>());
             return;
         }
 
+        visibleSelectors.Add(SelectorList.playerCursor);
+
         switch(CombatStateManager.currentActivity)
         {
+            case CurrentActivity.ChoosingAbility:
             case CurrentActivity.ChoosingLocation:
+                if(AbilityMenuManager.getInstance() != null && 
+                    AbilityMenuManager.getInstance().getCurrentlySelectedAction() != null && 
+                    AbilityMenuManager.getInstance().getCurrentlySelectedAction().getSelector() != null)
+                {
+                    visibleSelectors.Add(AbilityMenuManager.getInstance().getCurrentlySelectedAction().getSelector());
+                }
                 break;
             default:
-                visibleSelectors.Add(SelectorList.playerCursor);
                 break;
         }
 
@@ -656,8 +639,6 @@ public class SelectorManager : MonoBehaviour
                 updateAllDamagePreviews();
                 declareSelectors();
 			}
-
-			updateCurrentSelectorPosition();
 		}
 
         isMoving = false;
@@ -675,6 +656,11 @@ public class SelectorManager : MonoBehaviour
             default: 
                 return false;
         }
+    }
+
+    public static void movePlayerCursorToPlayerCharacter()
+    {
+        SelectorList.playerCursor.setToLocation(PartyManager.getPlayerStats().positions[0]);
     }
 
     public static void updateAllDamagePreviews()
@@ -742,7 +728,6 @@ public class SelectorManager : MonoBehaviour
 	public bool moveWouldLeaveMandatoryTarget()
 	{
 		Selector testSelector = currentSelector.clone();
-		bool dontMoveGameObject = false;
 
 		if (Input.GetKey(KeyBindingList.moveNorthKey.getCurrentKeyCode()))
 		{
@@ -751,7 +736,7 @@ public class SelectorManager : MonoBehaviour
 				return true;
 			}
 
-			testSelector.setToLocation(new GridCoords(currentSelector.currentRow - 1, currentSelector.currentCol), dontMoveGameObject);
+			testSelector.setToLocation(new GridCoords(currentSelector.currentRow - 1, currentSelector.currentCol));
 		}
 		else if (Input.GetKey(KeyBindingList.moveWestKey.getCurrentKeyCode()))
 		{
@@ -760,7 +745,7 @@ public class SelectorManager : MonoBehaviour
 				return true;
 			}
 
-			testSelector.setToLocation(new GridCoords(currentSelector.currentRow, currentSelector.currentCol - 1), dontMoveGameObject);
+			testSelector.setToLocation(new GridCoords(currentSelector.currentRow, currentSelector.currentCol - 1));
 
 		}
 		else if (Input.GetKey(KeyBindingList.moveSouthKey.getCurrentKeyCode()))
@@ -770,7 +755,7 @@ public class SelectorManager : MonoBehaviour
 				return true;
 			}
 
-			testSelector.setToLocation(new GridCoords(currentSelector.currentRow + 1, currentSelector.currentCol), dontMoveGameObject);
+			testSelector.setToLocation(new GridCoords(currentSelector.currentRow + 1, currentSelector.currentCol));
 		}
 		else if (Input.GetKey(KeyBindingList.moveEastKey.getCurrentKeyCode()))
 		{
@@ -779,16 +764,10 @@ public class SelectorManager : MonoBehaviour
 				return true;
 			}
 
-			testSelector.setToLocation(new GridCoords(currentSelector.currentRow, currentSelector.currentCol + 1), dontMoveGameObject);
+			testSelector.setToLocation(new GridCoords(currentSelector.currentRow, currentSelector.currentCol + 1));
 		}
 
 		return !testSelector.hasAtLeastOneMandatoryTarget();
-	}
-
-	public static void updateCurrentSelectorPosition()
-	{
-		currentSelector.getSelectorObject().transform.position = CombatGrid.getPositionAt(currentSelector.currentRow, currentSelector.currentCol);
-		Helpers.updateGameObjectPosition(currentSelector.getSelectorObject());
 	}
 
 	public static GridCoords findLegalCoordsContainingMandatoryTarget(Selector selector, Stats mandatoryTarget)
@@ -837,20 +816,13 @@ public class SelectorManager : MonoBehaviour
 
 	public static void setCurrentSelector(Selector newSelector)
 	{
-		setCurrentSelector(newSelector, true);
-	}
-
-	public static void setCurrentSelector(Selector newSelector, bool deactivatePreviousSelector)
-	{
-		currentSelector.SetActive(!deactivatePreviousSelector);
 		currentSelector = newSelector;
-		currentSelector.SetActive(true);
+        declareSelectors();
 	}
 
 	public static void resetCurrentSelector()
 	{
-		currentSelector.SetActive(false);
-		currentSelector = SelectorList.playerCursor;
+		setCurrentSelector(SelectorList.playerCursor);
 	}
 
     [RuntimeInitializeOnLoadMethod]
@@ -859,7 +831,6 @@ public class SelectorManager : MonoBehaviour
         currentAbilityManager = null;
         currentSelector = null;
         instance = null;
-        verticalPriority = true;
         isMoving = false;
         heartBeatCount = 0;
     }

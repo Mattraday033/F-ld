@@ -26,6 +26,24 @@ public static class CombatHoverTileManager
         }
     }
 
+    public static void hideAllTiles()
+    {
+        foreach(CombatHoverTile tile in hoverTileDict.Values)
+        {
+            tile.hideTile();
+        }
+    }
+
+    public static void setTilesToColor(this Selector selector, Color color)
+    {
+        GridCoords[] allCoordsToColor = selector.getAllSelectorCoords();
+
+        foreach(GridCoords coords in allCoordsToColor)
+        {
+            hoverTileDict[coords].setCurrentColor(color);
+        }
+    }
+
     public static void resetHoverTileDict()
     {
         hoverTileDict = new Dictionary<GridCoords, CombatHoverTile>();
@@ -37,6 +55,7 @@ public static class CombatHoverTileManager
         hoverTileDict = new Dictionary<GridCoords, CombatHoverTile>();
 
         CombatStateManager.OnCombatEnd.AddListener(resetHoverTileDict);
+        LoadSaveFile.OnLoadResetData.AddListener(resetHoverTileDict);
     }
 
 }

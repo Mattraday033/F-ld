@@ -89,15 +89,15 @@ public class ChargeUpAbility : Ability
 		}
 	}
 
-	public override string getRangeIndex()
+	public override string getRangeName()
 	{
 		if (isCharged())
 		{
-			return actionWhenCharged.getRangeIndex();
+			return actionWhenCharged.getRangeName();
 		}
 		else
 		{
-			return base.getRangeIndex();
+			return base.getRangeName();
 		}
 	}
 
@@ -105,11 +105,11 @@ public class ChargeUpAbility : Ability
 	{
 		if (isCharged())
 		{
-			return actionWhenCharged.getRangeIndex();
+			return actionWhenCharged.getRangeName();
 		}
 		else
 		{
-			return base.getRangeIndex();
+			return base.getRangeName();
 		}
 	}
 

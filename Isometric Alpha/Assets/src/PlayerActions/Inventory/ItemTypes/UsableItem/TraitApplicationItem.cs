@@ -9,14 +9,14 @@ public class TraitApplicationItem : CombatItem, IJSONConvertable
 	private const string subtype = "TraitApplication";
 	private Trait traitToApply;
 
-	public TraitApplicationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, string rangeIndex, Trait traitToApply, bool useRequiresAnAction, bool targetsEnemySection = false, bool healsTarget = false) :
-    base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeIndex, useRequiresAnAction, targetsEnemySection, healsTarget)
+	public TraitApplicationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, string rangeName, Trait traitToApply, bool useRequiresAnAction, bool targetsEnemySection = false, bool healsTarget = false) :
+    base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeName, useRequiresAnAction, targetsEnemySection, healsTarget)
 	{
 		this.traitToApply = traitToApply;
 	}
 
-	public TraitApplicationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, string rangeIndex, Trait traitToApply, bool useRequiresAnAction, int quantity, bool targetsEnemySection = false, bool healsTarget = false) :
-    base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeIndex, useRequiresAnAction, quantity, targetsEnemySection, healsTarget)
+	public TraitApplicationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, string rangeName, Trait traitToApply, bool useRequiresAnAction, int quantity, bool targetsEnemySection = false, bool healsTarget = false) :
+    base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeName, useRequiresAnAction, quantity, targetsEnemySection, healsTarget)
 	{
 		this.traitToApply = traitToApply;
 	}

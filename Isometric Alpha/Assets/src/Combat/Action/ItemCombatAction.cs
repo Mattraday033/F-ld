@@ -8,14 +8,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 	private UsableItem sourceItem;
 
 	public ItemCombatAction(Stats actor, UsableItem sourceItem):
-    base(actor, null)
-	{
-		this.sourceItem = sourceItem.clone() as UsableItem;
-        this.sourceItem.equipTarget = actor;
-	}
-
-	public ItemCombatAction(Stats actor, Selector selector, UsableItem sourceItem) :
-	base(actor, selector)
+    base(actor, SelectorList.getByName(sourceItem.getRangeName()))
 	{
 		this.sourceItem = sourceItem.clone() as UsableItem;
         this.sourceItem.equipTarget = actor;
@@ -36,14 +29,14 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		return sourceItem.getKey();
 	}
 
-	public override string getRangeIndex()
+	public override string getRangeName()
 	{
-		return sourceItem.getRangeIndex();
+		return sourceItem.getRangeName();
 	}
 
 	public override string getRangeTitle()
 	{
-		return getRangeIndex();
+		return getRangeName();
 	}
 
 	public override Item getSourceItem()

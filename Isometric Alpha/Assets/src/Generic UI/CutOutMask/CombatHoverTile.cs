@@ -51,7 +51,7 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
     #region
     
-    private void setCurrentColor(Color color)
+    public void setCurrentColor(Color color)
     {
         currentColor = color;
         setToCurrentColor();
@@ -79,24 +79,30 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
                                          spriteRenderer.color.b - .25f);
     }
 
+    public void hideTile()
+    {
+        spriteRenderer.color = new Color(spriteRenderer.color.r, 
+                                        spriteRenderer.color.g, 
+                                        spriteRenderer.color.b,
+                                        0f);
+    }
+
     private void determineVisbility(List<Selector> visibleSelectors)
     {
         foreach(Selector selector in visibleSelectors)
         {
             if(selector.containsTarget(targetCoords))
             {
-                spriteRenderer.color = new Color(spriteRenderer.color.r, 
-                                                 spriteRenderer.color.g, 
-                                                 spriteRenderer.color.b,
+                setCurrentColor(selector.originalColor);
+                spriteRenderer.color = new Color(currentColor.r, 
+                                                 currentColor.g, 
+                                                 currentColor.b,
                                                  1f);
                 return;
             }
         }
 
-        spriteRenderer.color = new Color(spriteRenderer.color.r, 
-                                    spriteRenderer.color.g, 
-                                    spriteRenderer.color.b,
-                                    0f);
+        hideTile();
     }
 
     #endregion

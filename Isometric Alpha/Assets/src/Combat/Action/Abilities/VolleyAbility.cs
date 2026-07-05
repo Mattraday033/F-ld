@@ -184,7 +184,7 @@ public class VolleyAbility : Ability
 			listOfTargets = CombatGrid.getAllAliveAllyCombatants();
 		}
 		
-		selector = volleyTargetingPriority.findTargetLocation(SelectorList.getByName(getRangeIndex()), listOfTargets);
+		selector = volleyTargetingPriority.findTargetLocation(SelectorList.getByName(getRangeName()), listOfTargets);
 		
 		return selector;
 	}

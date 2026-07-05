@@ -44,7 +44,7 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 				listOfTargets = CombatGrid.getAllAliveAllyCombatants();
 			}
 			
-			Selector envCombatActionSelector = targetingTrait.findTargetLocation(SelectorList.getByName(envCombatAction.getRangeIndex()), listOfTargets);
+			Selector envCombatActionSelector = targetingTrait.findTargetLocation(SelectorList.getByName(envCombatAction.getRangeName()), listOfTargets);
 			
 			if(envCombatActionSelector == null)
 			{

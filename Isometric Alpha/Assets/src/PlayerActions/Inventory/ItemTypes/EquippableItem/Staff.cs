@@ -8,8 +8,8 @@ using Newtonsoft.Json;
 public class StanceWeapon : Weapon
 {
 
-	public StanceWeapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, string rangeIndex, int worth, bool isTwoHanded, EffectAnimationType effectAnimationType = EffectAnimationType.Slash)
-	: base(listId, key, loreDescription, damageFormula, critFormula, iconName, rangeIndex, worth, isTwoHanded, effectAnimationType)
+	public StanceWeapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, string rangeName, int worth, bool isTwoHanded, EffectAnimationType effectAnimationType = EffectAnimationType.Slash)
+	: base(listId, key, loreDescription, damageFormula, critFormula, iconName, rangeName, worth, isTwoHanded, effectAnimationType)
 	{
 
 	}
@@ -23,8 +23,8 @@ public class StanceWeapon : Weapon
 
 public class Fist : Weapon
 {
-	public Fist(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, string rangeIndex) :
-	base(listId, key, loreDescription, damageFormula, critFormula, iconName, rangeIndex, ItemList.itemHasNoWorth, false)
+	public Fist(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, string rangeName) :
+	base(listId, key, loreDescription, damageFormula, critFormula, iconName, rangeName, ItemList.itemHasNoWorth, false)
 	{
 
 	}
@@ -55,8 +55,8 @@ public class Fist : Weapon
 public class Staff : StanceWeapon
 {
 
-	public Staff(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, string rangeIndex, int worth, bool isTwoHanded)
-	: base(listId, key, loreDescription, damageFormula, critFormula, iconName, rangeIndex, worth, isTwoHanded, EffectAnimationType.Blunt)
+	public Staff(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, string rangeName, int worth, bool isTwoHanded)
+	: base(listId, key, loreDescription, damageFormula, critFormula, iconName, rangeName, worth, isTwoHanded, EffectAnimationType.Blunt)
 	{
 
 	}

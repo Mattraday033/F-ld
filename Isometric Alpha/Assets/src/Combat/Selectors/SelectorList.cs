@@ -43,7 +43,8 @@ public static class SelectorList
         width: 1,
         height: 1,
         startingCoords: new GridCoords(1, 1),
-        spaces: new bool[1, 1] { { true } });
+        spaces: new bool[1, 1] { { true } },
+        originalColor: Color.white);
     public static Selector playerCursor { private set{} get{ return _PlayerCursor; } }
 
     private static readonly Selector _Single = new Selector(
@@ -278,8 +279,13 @@ public static class SelectorList
     public readonly static Dictionary<string, Selector> selectorDict = new Dictionary<string, Selector>();
 
     [RuntimeInitializeOnLoadMethod]
-    private static void init()
+    public static void init()
     {
+        if(selectorDict.Count > 0)
+        {
+            return;
+        }
+
         selectorDict[playerCursorName]     = _PlayerCursor;
         selectorDict[singleName]           = _Single;
         selectorDict[horizontalOneName]    = _HorizontalOne;
@@ -317,7 +323,6 @@ public static class SelectorList
 		foreach (Selector selector in selectorDict.Values)
 		{
 			selector.setToStartLocation();
-			selector.SetActive(false);
 		}
 
 		playerCursor.setToCurrentSelector();

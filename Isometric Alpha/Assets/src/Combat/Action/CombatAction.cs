@@ -666,12 +666,12 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
         if (isSelfTargeting())
         {
-            Selector selector = SelectorList.getByName(getRangeIndex());
+            Selector selector = SelectorList.getByName(getRangeName());
             selector.setToLocation(getActorCoords());
             return selector;
         }
 
-        return actor.traitContainer.findTargetLocation(SelectorList.getByName(getRangeIndex()), listOfTargets);
+        return actor.traitContainer.findTargetLocation(SelectorList.getByName(getRangeName()), listOfTargets);
     }
 
     public void addPreviousTarget(GridCoords coords)
@@ -754,25 +754,15 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public virtual Selector getNewRange()
     {
-        return SelectorList.getByName(getRangeIndex());
+        return SelectorList.getByName(getRangeName());
     }
 
-    public virtual string getRangeIndex()
+    public virtual string getRangeName()
     {
         return SelectorList.singleName;
     }
 
     public abstract string getRangeTitle();
-
-    public GameObject getSelectorObject()
-    {
-        // if (selector == null)
-        // {
-            return null;
-        // }
-
-        // return selector.getSelectorObject();
-    }
 
     public virtual void setSelector(Selector selector)
     {

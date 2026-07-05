@@ -12,11 +12,22 @@ public class Selector : ICloneable
 	public string name;
 	
     public readonly static Color secondaryColor = Color.yellow;
-	private Color originalColor = Color.clear;
+	public Color originalColor = Color.red;
 	
 	public bool selfTargeting = false;
 	
-    private GridCoords startingCoords;
+    private GridCoords _StartingCoords;
+    public GridCoords startingCoords
+    {
+        private set
+        {
+            _StartingCoords = value.clone();
+        }
+        get
+        {
+            return _StartingCoords.clone();
+        }
+    }
     private Rect rect;
 	
 	private bool[,] spaces;
@@ -41,7 +52,8 @@ public class Selector : ICloneable
         int width,
         int height,
 		GridCoords startingCoords,
-		bool[,] spaces)
+		bool[,] spaces,
+        Color originalColor = default)
 	{
 		this.name = name;
 
@@ -50,34 +62,17 @@ public class Selector : ICloneable
         this.rect = new Rect(x: startingCoords.col, y: startingCoords.row, width: width, height: height);
 
 		this.spaces = spaces;
+
+        if(!originalColor.Equals(default))
+        {
+            this.originalColor = originalColor;
+        }
 	}
 
     public bool singleTile()
     {
         return rect.width == 1 && rect.height == 1;
     }
-	
-	public GameObject getSelectorObject()
-	{
-		return null;
-	}
-
-    // public virtual GridCoords[] getChildTileAdjustments()
-	// {
-	// 	return childTileAdjustments;
-	// }
-	
-    // public List<GameObject> getAllTileChildren()
-    // {
-    //     List<GameObject> allTileChildren = new List<GameObject>();
-
-    //     for (int childIndex = 0; childIndex < getSelectorObject().transform.childCount; childIndex++)
-    //     {
-    //         allTileChildren.Add(getSelectorObject().transform.GetChild(childIndex).gameObject);
-    //     }
-
-    //     return allTileChildren;
-    // }
 
 	public GridCoords getCoords()
 	{
@@ -88,13 +83,13 @@ public class Selector : ICloneable
 	{
 		List<GridCoords> allSelectorCoords = new List<GridCoords>();
 		
-		for(int x = 0; x < spaces.GetLength(0); x++)
+		for(int row = 0; row < spaces.GetLength(0); row++)
 		{
-            for(int y = 0; y < spaces.GetLength(1); y++)
+            for(int col = 0; col < spaces.GetLength(1); col++)
             {
-                if(spaces[x,y])
+                if(spaces[row,col])
                 {
-                    GridCoords currentGridCoord = new GridCoords(rect.y + y, rect.x + x);
+                    GridCoords currentGridCoord = new GridCoords(rect.y + row, rect.x + col);
                 
                     if(includeIllegalCoords || 
                         !((getCoords().isWithinEnemySection() && !currentGridCoord.isWithinEnemySection()) || 
@@ -177,20 +172,10 @@ public class Selector : ICloneable
 		setToLocation(SelectorManager.findLegalCoordsContainingMandatoryTarget(this, coords));
 	}
 
-	public void setToLocation(GridCoords coords, bool moveGameObject = true)
+	public void setToLocation(GridCoords coords)
 	{
         rect.x = coords.col;
         rect.y = coords.row;
-
-		if (moveGameObject)
-		{
-			// getSelectorObject().transform.position = CombatGrid.getPositionAt(currentRow, currentCol);
-
-			// if (this == SelectorManager.getCurrentSelector())
-			// {
-			// 	Helpers.updateColliderPosition(getSelectorObject());
-			// }
-		}
 
         SelectorManager.declareSelectors();
 	}
@@ -203,16 +188,6 @@ public class Selector : ICloneable
 	public bool onAllySide()
 	{
 		return getCoords().isWithinAllySection();
-	}
-	
-	public void SetActive(bool active)
-	{
-		// if(selectorObject == null)
-		// {
-		// 	selectorObject = Instantiate(Resources.Load<GameObject>(name), CombatGrid.getPositionAt(startRow, startCol),Quaternion.identity);
-		// } 
-		
-		// selectorObject.SetActive(active);
 	}
 	
 	public bool hasAtLeastOneTarget(string[] tagCriteria)
@@ -362,41 +337,15 @@ public class Selector : ICloneable
 
     public void setToCurrentSelector()
 	{
-		SetActive(true);
 		SelectorManager.currentSelector = this;
+        SelectorManager.declareSelectors();
 	}
 	
-	public void moveBoundsUp() //moves all bounds up
-	{
-		upperBounds--;
-		lowerBounds--;
-	}
-	
-	public void moveBoundsRight() //moves all bounds right
-	{
-		leftBounds++;
-		rightBounds++;
-	}
-	
-	public void moveBoundsLeft() //moves all bounds left
-	{
-		leftBounds--;
-		rightBounds--;
-	}
-	
-	public void moveBoundsDown() //moves all bounds down
-	{
-		upperBounds++;
-		lowerBounds++;
-	}
-	
-	//currently only sets first/parent tile
 	public void setToSecondaryColor()
 	{
         setToColor(secondaryColor);
 	}
  	
-	//currently only sets first/parent tile
 	public bool setToOriginalColor()
 	{
 		if(originalColor.Equals(Color.clear))
@@ -411,25 +360,7 @@ public class Selector : ICloneable
 
     private void setToColor(Color newColor)
     {
-		setToColor(newColor, null);
-    }
-
-    private void setToColor(Color newColor, SpriteRenderer selectorSprite)
-	{
-		// if(selectorSprite == null)
-		// {
-        //     selectorSprite = selectorObject.GetComponent<SpriteRenderer>();
-        // }
-        
-        // selectorSprite.color = newColor;
-
-		// List<GameObject> listOfTileChildren = getAllTileChildren();
-
-        // foreach (GameObject gObject in listOfTileChildren)
-		// {
-        //     selectorSprite = gObject.GetComponent<SpriteRenderer>();
-        //     selectorSprite.color = newColor;
-        // }
+		this.setTilesToColor(newColor);
     }
 
 	public bool targetsImmobileTarget()

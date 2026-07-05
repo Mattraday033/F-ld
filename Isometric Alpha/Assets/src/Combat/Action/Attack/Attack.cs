@@ -8,14 +8,8 @@ public class Attack : CombatAction, IJSONConvertable
 {
 	private Weapon mainHandWeapon;
 
-	public Attack():
-    base(null, null)
-	{
-
-	}
-
     public Attack(Stats actor, Weapon mainHandWeapon) :
-    base(actor, null)
+    base(actor, SelectorList.getByName(mainHandWeapon.getRangeName()))
     {
         this.mainHandWeapon = (Weapon) mainHandWeapon.clone();
         this.mainHandWeapon.setQuantity(1);
@@ -104,9 +98,9 @@ public class Attack : CombatAction, IJSONConvertable
 		}
 	}
 
-	public override string getRangeIndex()
+	public override string getRangeName()
 	{
-		return getMainHandWeapon().getRangeIndex();
+		return getMainHandWeapon().getRangeName();
 	}
 
 	public override string getRangeTitle()

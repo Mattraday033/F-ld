@@ -11,19 +11,19 @@ public class Weapon : EquippableItem, IJSONConvertable
 	public const string subtype = "Weapon";
 	public const int mainHandSlotIndex = 6;
 
-    private string rangeIndex;
+    private string rangeName;
     private string iconName;
     private bool isTwoHanded;
     private EffectAnimationType effectAnimationType;
 
     public Trait traitToApply;
 
-	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, string rangeIndex, int worth, bool isTwoHanded, EffectAnimationType effectAnimationType = EffectAnimationType.Slash, Trait traitToApply = null) :
+	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, string rangeName, int worth, bool isTwoHanded, EffectAnimationType effectAnimationType = EffectAnimationType.Slash, Trait traitToApply = null) :
     base(listId, key, loreDescription, damageFormula, critFormula, subtype, worth)
 	{
 		this.isTwoHanded = isTwoHanded;
 		this.iconName = iconName;
-		this.rangeIndex = rangeIndex;
+		this.rangeName = rangeName;
         this.effectAnimationType = effectAnimationType;
         this.traitToApply = traitToApply;
 	}
@@ -61,12 +61,12 @@ public class Weapon : EquippableItem, IJSONConvertable
 
 	public string getRange()
 	{
-		return getRangeIndex();
+		return getRangeName();
 	}
 
-	public string getRangeIndex()
+	public string getRangeName()
 	{
-		return rangeIndex;
+		return rangeName;
 	}
 
 	public override bool removeFromInventoryWhenCreatingCombatAction()
@@ -212,7 +212,7 @@ public class Weapon : EquippableItem, IJSONConvertable
 
         buildingBlocks.AddRange(getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRangeIndex()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRangeName()));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getWorthBlock(getWorthForDisplay()));
 

@@ -61,13 +61,14 @@ public static class CombatGrid
 
 	public static bool positionIsOnAlliedSide(GridCoords coords)
 	{
-		return (coords.row >= allyRowUpperBounds && coords.row <= allyRowLowerBounds);
+		return coords.row >= allyRowUpperBounds && coords.row <= allyRowLowerBounds;
 	}
 
     public static bool positionIsOnEnemySide(GridCoords coords)
     {
-        return (coords.row >= enemyRowUpperBounds && coords.row <= enemyRowLowerBounds);
+        return coords.row >= enemyRowUpperBounds && coords.row <= enemyRowLowerBounds;
     }
+    
     public static bool positionsAreOnSameSide(GridCoords firstCoords, GridCoords secondCoords)
     {
 		return (positionIsOnAlliedSide(firstCoords) && positionIsOnAlliedSide(secondCoords)) || (positionIsOnEnemySide(firstCoords) && positionIsOnEnemySide(secondCoords));

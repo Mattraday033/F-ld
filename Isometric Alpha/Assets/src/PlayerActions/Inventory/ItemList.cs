@@ -277,8 +277,8 @@ public static class ItemList
         usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, rockCakeIndex), "Rock Cake", "A brittle roll that looks like a grey stone. Surprisingly, it appears to still be edible.", ItemSpriteList.rockCakeSprite, 8, rockCakeHealingAmount, AudioClipList.playEatingRockCakeSFX));
         usableItems.Add(new HealingItem(new ItemListID(usableItemListIndex, horseFleshIndex), "Horse Flesh", "Strips of salted horsemeat. Chewier than beef, but no less nutritious.", ItemSpriteList.meatSprite, 10, horseFleshHealingAmount, AudioClipList.playEatingSFX));
 
-		//Weapon(string key, string loreDescription, string damageFormula, string critFormula, string iconName, string rangeIndex, int worth, int slotID)
-		//Weapon(string key, string loreDescription, string damageFormula, string critFormula, string iconName, string rangeIndex, int worth, int slotID, bool isTwoHanded)
+		//Weapon(string key, string loreDescription, string damageFormula, string critFormula, string iconName, string rangeName, int worth, int slotID)
+		//Weapon(string key, string loreDescription, string damageFormula, string critFormula, string iconName, string rangeName, int worth, int slotID, bool isTwoHanded)
 
 		weapons.Add(new Weapon(new WeaponListID(cudgelIndex), "Cudgel", "A wooden club made from a fallen tree branch.", "2S + 5", "S+D", ItemSpriteList.cudgelSprite, SelectorList.verticalOneName, 3, isOneHanded, EffectAnimationType.Blunt));
 		weapons.Add(new Weapon(new WeaponListID(shivIndex), "Shiv", "A weapon made from a bronze nail tied to a small piece of wood.", "2D + 7", "3D", ItemSpriteList.shivSprite, SelectorList.singleName, 3, isOneHanded, EffectAnimationType.Pierce));

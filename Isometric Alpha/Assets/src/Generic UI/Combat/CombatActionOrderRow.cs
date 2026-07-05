@@ -101,7 +101,7 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 
 		// actionBeingDescribed.highlightActorSprites();
 
-		// if (actionBeingDescribed.getRangeIndex() != null)
+		// if (actionBeingDescribed.getRangeName() != null)
 		// {
 		// 	targetDisplaySelector = Instantiate(actionBeingDescribed.getSelector().getSelectorObject(), CombatUI.selectorParent);
 
@@ -112,7 +112,7 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 
 		// if (actionBeingDescribed.requiresTertiaryCoords())
 		// {
-		// 	tertiaryDisplaySelector = Instantiate(SelectorList.getByName(actionBeingDescribed.getRangeIndex()).getSelectorObject(), CombatUI.selectorParent);
+		// 	tertiaryDisplaySelector = Instantiate(SelectorList.getByName(actionBeingDescribed.getRangeName()).getSelectorObject(), CombatUI.selectorParent);
 
 		// 	tertiaryDisplaySelector.transform.position = actionBeingDescribed.getTertiaryPosition();
 		// 	tertiaryDisplaySelector.GetComponent<SpriteRenderer>().color = Selector.secondaryColor;
@@ -147,7 +147,7 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 		
 		actionBeingDescribed.removeHighlightFromActorSprites();
 
-		if(actionBeingDescribed.getRangeIndex() != null)
+		if(actionBeingDescribed.getRangeName() != null)
 		{
 			destroySelectors();
 		}

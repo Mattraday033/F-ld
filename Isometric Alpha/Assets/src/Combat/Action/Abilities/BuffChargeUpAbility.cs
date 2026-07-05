@@ -17,11 +17,11 @@ public class BuffChargeUpAbility : ChargeUpAbility
         return false;
 	}
 
-	public override string getRangeIndex()
+	public override string getRangeName()
 	{
 		if (isCharged())
 		{
-			return actionWhenCharged.getRangeIndex();
+			return actionWhenCharged.getRangeName();
 		}
 		else
 		{
@@ -33,7 +33,7 @@ public class BuffChargeUpAbility : ChargeUpAbility
 	{
 		if (isCharged())
 		{
-			return actionWhenCharged.getRangeIndex();
+			return actionWhenCharged.getRangeName();
 		}
 		else
 		{
@@ -61,7 +61,7 @@ public class BuffChargeUpAbility : ChargeUpAbility
 
             newTraitContainer.addTrait(TraitList.specificHexadecupleBoxEnemySide);
 
-            return newTraitContainer.findTargetLocation(SelectorList.getByName(getRangeIndex()), new List<Stats>());
+            return newTraitContainer.findTargetLocation(SelectorList.getByName(getRangeName()), new List<Stats>());
         }
     }
 }

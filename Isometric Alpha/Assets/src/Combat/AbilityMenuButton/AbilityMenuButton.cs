@@ -224,9 +224,9 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
                 Destroy(previewSelectorObject);
             }
 
-            Selector selectorClone = SelectorList.getByName(loadedCombatAction.getRangeIndex());
+            Selector selectorClone = SelectorList.getByName(loadedCombatAction.getRangeName());
 
-            selectorClone.SetActive(true);
+            // selectorClone.SetActive(true);
 
             // previewSelectorObject = selectorClone.getSelectorObject();
 
@@ -236,11 +236,11 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
             }
             else if (loadedCombatAction.targetsAllySection())
             {
-                selectorClone.setToLocation(Range.getRangeAllyStartingPosition(loadedCombatAction.getRangeIndex()));
+                selectorClone.setToLocation(Range.getRangeAllyStartingPosition(loadedCombatAction.getRangeName()));
             }
             else
             {
-                selectorClone.setToLocation(Range.getRangeEnemyStartingPosition(loadedCombatAction.getRangeIndex()));
+                selectorClone.setToStartLocation();
             }
         }
         else
@@ -253,10 +253,9 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
     {
         SelectorManager selectorManager = SelectorManager.getInstance();
 
-        loadedCombatAction.setSelector(SelectorList.getByName(loadedCombatAction.getRangeIndex()));
+        loadedCombatAction.setSelector(SelectorList.getByName(loadedCombatAction.getRangeName()));
 
         SelectorManager.currentSelector = loadedCombatAction.getSelector();
-        SelectorManager.updateCurrentSelectorPosition();
 
         loadedCombatAction = setCombatActionSelectorStartingPosition(loadedCombatAction);
         loadedCombatAction.setActor(CombatGrid.getCombatantAtCoords(SelectorList.playerCursor.getCoords()));
@@ -266,7 +265,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         SelectorManager.updateAllDamagePreviews();
 
-        loadedCombatAction.getSelectorObject().SetActive(true);
+        // loadedCombatAction.getSelectorObject().SetActive(true);
 
         SelectorManager.displayCurrentHoverUI();
     }
@@ -287,9 +286,9 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         if (loadedCombatAction.targetsAllySection())
         {
-            if (loadedCombatAction.getRangeIndex() == SelectorList.boxThreeName)
+            if (loadedCombatAction.getRangeName() == SelectorList.boxThreeName)
             {
-                loadedCombatAction.getSelector().setToLocation(Range.getRangeAllyStartingPosition(loadedCombatAction.getRangeIndex()));
+                loadedCombatAction.getSelector().setToLocation(Range.getRangeAllyStartingPosition(loadedCombatAction.getRangeName()));
             }
             else
             {
@@ -298,9 +297,9 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
             return action;
         }
-        else if (!loadedCombatAction.targetsAllySection() && loadedCombatAction.getRangeIndex() == SelectorList.boxThreeName)
+        else if (!loadedCombatAction.targetsAllySection() && loadedCombatAction.getRangeName() == SelectorList.boxThreeName)
         {
-            loadedCombatAction.getSelector().setToLocation(Range.getRangeEnemyStartingPosition(loadedCombatAction.getRangeIndex()));
+            loadedCombatAction.getSelector().setToStartLocation();
 
             return action;
         }

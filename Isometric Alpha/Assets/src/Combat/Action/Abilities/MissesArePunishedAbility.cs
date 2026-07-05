@@ -52,7 +52,7 @@ public class MissesArePunishedAbility : Ability
 		return determineRangeIndex();
 	}
 
-	public override string getRangeIndex()
+	public override string getRangeName()
 	{
 		return determineRangeIndex();
 	}
