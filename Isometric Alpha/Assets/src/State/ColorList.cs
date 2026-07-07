@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class ColorList
 {
+    public const float hoverSelectorAlpha = .5f;
+
     #region Private Colors
 
     #region Rubble Colors

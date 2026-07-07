@@ -26,7 +26,6 @@ public class SelectorManager : MonoBehaviour
 	private GameObject pressEPrompt;
 
 	public Transform selectorParent;
-	// public Selector[] selectors;
 
 	public PlayerCombatActionManager playerCombatActionManager;
 
@@ -128,7 +127,7 @@ public class SelectorManager : MonoBehaviour
     {
         setCurrentSelector(SelectorList.playerCursor);
 
-        currentSelector.setToOriginalColor();
+        currentSelector.setToColor();
 
         currentAbilityManager.enableAbilityButtonCanvas();
         CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingAbility);
@@ -140,7 +139,7 @@ public class SelectorManager : MonoBehaviour
 
     public static void backOutOfTertiaryLocationSelection()
     {
-        currentSelector.setToOriginalColor();
+        currentSelector.setToColor();
 
         CombatAction loadedCombatAction = currentAbilityManager.getCurrentlySelectedAction();
 
@@ -170,8 +169,6 @@ public class SelectorManager : MonoBehaviour
 
 	public static void displayCurrentHoverUI()
 	{
-        return;
-        
 		if (!currentSelector.singleTile() ||
 			(!TutorialFlags.getFlag(TutorialSequenceList.combatTutorialSeenFlag) &&
 			CombatStateManager.currentActivity != CurrentActivity.Tutorial))
@@ -360,7 +357,7 @@ public class SelectorManager : MonoBehaviour
 
 			setCurrentSelector(tertiarySelector);
 
-			currentSelector.setToSecondaryColor();
+			currentSelector.setToColor();
 
 			CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingTertiary);
 		}
@@ -387,7 +384,7 @@ public class SelectorManager : MonoBehaviour
 		{
 			if (!currentSelector.hasAtLeastOneTarget(allyAndEnemyTagCriteria))
 			{
-				currentSelector.setToOriginalColor();
+				currentSelector.setToColor();
 
 				instance.finishChoosingTertiary(loadedCombatAction);
 			}
@@ -396,7 +393,7 @@ public class SelectorManager : MonoBehaviour
 		{
 			if (currentSelector.hasAtLeastOneTarget(enemyTagCriteria))
 			{
-				currentSelector.setToOriginalColor();
+				currentSelector.setToColor();
 
 				instance.finishChoosingTertiary(loadedCombatAction);
 			}
@@ -576,6 +573,17 @@ public class SelectorManager : MonoBehaviour
                     visibleSelectors.Add(AbilityMenuManager.getInstance().getCurrentlySelectedAction().getSelector());
                 }
                 break;
+            case CurrentActivity.ChoosingTertiary:
+
+                CombatAction currentAction = AbilityMenuManager.getInstance().getCurrentlySelectedAction();
+
+                Selector oldSelector = currentAction.getSelector().clone();
+
+                oldSelector.setToLocation(currentAction.getSecondaryCoords(), declareSelectors: false);
+                oldSelector.alwaysRed = true;
+
+                visibleSelectors.Add(oldSelector);
+                break;
             default:
                 break;
         }
@@ -583,6 +591,13 @@ public class SelectorManager : MonoBehaviour
         if(currentSelector != SelectorList.playerCursor)
         {
             visibleSelectors.Add(currentSelector);
+        }
+
+        Selector hoverSelector = CombatHoverTileManager.getHoverSelector();
+
+        if(hoverSelector != null)
+        {
+            visibleSelectors.Add(hoverSelector);
         }
 
         SelectorMoved.Invoke(visibleSelectors);
@@ -780,7 +795,7 @@ public class SelectorManager : MonoBehaviour
 	public static GridCoords findLegalCoordsContainingMandatoryTarget(Selector selector, GridCoords mandatoryPosition)
 	{
 		Selector cloneSelector = selector.clone();
-		cloneSelector.setToLocation(mandatoryPosition.clone());
+		cloneSelector.setToLocation(mandatoryPosition.clone(), declareSelectors: false);
 
 		if (cloneSelector.allTilesAreLegal() && cloneSelector.containsTarget(mandatoryPosition))
 		{

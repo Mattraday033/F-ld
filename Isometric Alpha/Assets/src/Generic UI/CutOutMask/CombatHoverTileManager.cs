@@ -4,8 +4,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
+public class SelectorContainer
+{
+    public Selector selector;
+}
+
 public static class CombatHoverTileManager
 {
+    public readonly static UnityEvent<SelectorContainer> GetHoverSelector = new UnityEvent<SelectorContainer>();
     private static Dictionary<GridCoords, CombatHoverTile> hoverTileDict;
 
     public static void createCombatTileHoverGrid()
@@ -40,8 +46,23 @@ public static class CombatHoverTileManager
 
         foreach(GridCoords coords in allCoordsToColor)
         {
-            hoverTileDict[coords].setCurrentColor(color);
+            hoverTileDict[coords].setColor(color);
         }
+    }
+
+    public static Selector getHoverSelector()
+    {
+        if(CombatStateManager.whoseTurn != WhoseTurn.Player || 
+            CombatStateManager.currentActivity == CurrentActivity.ChoosingAbility)
+        {
+            return null;
+        }
+
+        SelectorContainer container = new SelectorContainer();
+
+        GetHoverSelector.Invoke(container);
+
+        return container.selector;
     }
 
     public static void resetHoverTileDict()

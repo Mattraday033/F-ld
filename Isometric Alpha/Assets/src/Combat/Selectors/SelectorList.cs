@@ -44,7 +44,7 @@ public static class SelectorList
         height: 1,
         startingCoords: new GridCoords(1, 1),
         spaces: new bool[1, 1] { { true } },
-        originalColor: Color.white);
+        alwaysWhite: true);
     public static Selector playerCursor { private set{} get{ return _PlayerCursor; } }
 
     private static readonly Selector _Single = new Selector(

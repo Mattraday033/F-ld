@@ -13,7 +13,7 @@ public class SelectTertiaryTarget : TutorialSequenceStepScript
 
         loadedCombatAction.setTertiaryCoords(currentSelector.getCoords());
 
-        currentSelector.setToOriginalColor();
+        currentSelector.setToColor();
 
         SelectorManager.getInstance().finishChoosingTertiary(loadedCombatAction);
 

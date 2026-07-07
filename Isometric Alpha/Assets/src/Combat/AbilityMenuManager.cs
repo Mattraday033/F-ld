@@ -324,6 +324,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         {
             getCurrentlySelectedAbilityMenuButton().enableCombatActionSelectorPreview();
             CurrentActionHoverPanelManager.addPrimaryDescriptionPanel(getCurrentlySelectedAction());
+            getCurrentlySelectedAction().getSelector().setToStartLocation();
         }
     }
 

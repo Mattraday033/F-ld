@@ -8,7 +8,6 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 {
 
     public readonly static UnityEvent ReleaseAllMouseUpWaits = new UnityEvent();
-
     private bool onEnemySide;
     private GridCoords targetCoords;
 
@@ -16,7 +15,7 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
     public SpriteRenderer spriteRenderer;
 
-    private bool mouseOverTile = false;
+    private bool inVisibleSelector = false;
 
     private bool _WaitingOnMouseUp = false;
     private bool waitingOnMouseUp
@@ -51,24 +50,9 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
     #region
     
-    public void setCurrentColor(Color color)
+    public void setColor(Color color)
     {
         currentColor = color;
-        setToCurrentColor();
-    }
-
-    private void setToCurrentColor()
-    {
-        spriteRenderer.color = currentColor;
-        // determineVisbility();
-    }
-
-    private void setToHoverColor()
-    {
-        spriteRenderer.color = currentColor;
-        spriteRenderer.color = new Color(spriteRenderer.color.r - .1f, 
-                                         spriteRenderer.color.g - .1f, 
-                                         spriteRenderer.color.b - .1f);
     }
 
     private void setToPressedColor()
@@ -81,31 +65,49 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
     public void hideTile()
     {
-        spriteRenderer.color = new Color(spriteRenderer.color.r, 
-                                        spriteRenderer.color.g, 
-                                        spriteRenderer.color.b,
-                                        0f);
+        spriteRenderer.color = Color.clear;
+        inVisibleSelector = false;
     }
 
     private void determineVisbility(List<Selector> visibleSelectors)
     {
+        bool updated = false;
+
         foreach(Selector selector in visibleSelectors)
         {
             if(selector.containsTarget(targetCoords))
             {
-                setCurrentColor(selector.originalColor);
-                spriteRenderer.color = new Color(currentColor.r, 
-                                                 currentColor.g, 
-                                                 currentColor.b,
-                                                 1f);
-                return;
+                selector.setToColor();
+                spriteRenderer.color = currentColor;
+                inVisibleSelector = true;
+                updated = true;
             }
         }
 
-        hideTile();
+        if(!updated)
+        {
+            hideTile();
+        }
     }
 
     #endregion
+
+    public void getHoverSelector(SelectorContainer container)
+    {
+        Selector hoverSelector = SelectorManager.currentSelector.clone();
+
+        hoverSelector.hoverSelector = true;
+
+        hoverSelector.setToLocation(SelectorManager.findLegalCoordsContainingMandatoryTarget(hoverSelector, targetCoords), declareSelectors: false);
+
+        if(hoverSelector.getCoords().Equals(SelectorManager.getCurrentSelectorCoords()))
+        {
+            return;
+        }
+
+        container.selector = hoverSelector;
+    }
+
     private void releaseMouseUpWait()
     {
         waitingOnMouseUp = false;
@@ -113,12 +115,28 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
     public void OnMouseEnter()
     {
-        mouseOverTile = true;
+        if(AbilityMenuButton.hoveringOverAbilityMenuButton || 
+            CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+        {
+            return;
+        }
+
+        CombatHoverTileManager.GetHoverSelector.AddListener(getHoverSelector);
+
+        SelectorManager.declareSelectors();
     }
 
     public void OnMouseExit() 
     {
-        mouseOverTile = false;
+        if(AbilityMenuButton.hoveringOverAbilityMenuButton || 
+            CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+        {
+            return;
+        }
+
+        CombatHoverTileManager.GetHoverSelector.RemoveListener(getHoverSelector);
+
+        SelectorManager.declareSelectors();
     }
 
     public void OnPointerDown(PointerEventData eventData)

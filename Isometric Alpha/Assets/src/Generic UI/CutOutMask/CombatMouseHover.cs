@@ -29,7 +29,6 @@ public abstract class CombatMouseHover : MonoBehaviour
 
         if (CombatStateManager.whoseTurn == WhoseTurn.Player)
         {
-
             switch (CombatStateManager.currentActivity)
             {
                 case CurrentActivity.ChoosingActor:

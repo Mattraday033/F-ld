@@ -7,13 +7,12 @@ using System;
 [System.Serializable]
 public class Selector : ICloneable
 {
-	private const bool shouldIncludeIllegalCoords = true;
-	
 	public string name;
 	
-    public readonly static Color secondaryColor = Color.yellow;
-	public Color originalColor = Color.red;
-	
+	private bool alwaysWhite = false;
+	public bool alwaysRed = false;
+    public bool hoverSelector = false;
+
 	public bool selfTargeting = false;
 	
     private GridCoords _StartingCoords;
@@ -53,7 +52,7 @@ public class Selector : ICloneable
         int height,
 		GridCoords startingCoords,
 		bool[,] spaces,
-        Color originalColor = default)
+        bool alwaysWhite = false)
 	{
 		this.name = name;
 
@@ -63,10 +62,7 @@ public class Selector : ICloneable
 
 		this.spaces = spaces;
 
-        if(!originalColor.Equals(default))
-        {
-            this.originalColor = originalColor;
-        }
+        this.alwaysWhite = alwaysWhite;
 	}
 
     public bool singleTile()
@@ -172,12 +168,15 @@ public class Selector : ICloneable
 		setToLocation(SelectorManager.findLegalCoordsContainingMandatoryTarget(this, coords));
 	}
 
-	public void setToLocation(GridCoords coords)
+	public void setToLocation(GridCoords coords, bool declareSelectors = true)
 	{
         rect.x = coords.col;
         rect.y = coords.row;
 
-        SelectorManager.declareSelectors();
+        if(declareSelectors)
+        {
+            SelectorManager.declareSelectors();
+        }
 	}
 	
 	public bool onEnemySide()
@@ -341,26 +340,36 @@ public class Selector : ICloneable
         SelectorManager.declareSelectors();
 	}
 	
-	public void setToSecondaryColor()
-	{
-        setToColor(secondaryColor);
-	}
- 	
-	public bool setToOriginalColor()
-	{
-		if(originalColor.Equals(Color.clear))
-		{
-			return false;
-		}
-
-        setToColor(originalColor);
-
-		return true;
-	}
-
-    private void setToColor(Color newColor)
+    public void setToColor()
     {
-		this.setTilesToColor(newColor);
+        Color color = Color.white;
+
+        if(alwaysRed)
+        {
+		    color = Color.red;
+        } else if(alwaysWhite)
+        {
+		    color = Color.white;
+        } else
+        {
+            switch(CombatStateManager.currentActivity)
+            {
+                case CurrentActivity.ChoosingAbility:
+                case CurrentActivity.ChoosingLocation:
+                    color = Color.red;
+                    break;
+                case CurrentActivity.ChoosingTertiary:
+                    color = Color.yellow;
+                    break;
+            }
+        }
+
+        if(hoverSelector)
+        {
+            color = new Color(color.r, color.g, color.b, ColorList.hoverSelectorAlpha);
+        }
+
+        this.setTilesToColor(color);
     }
 
 	public bool targetsImmobileTarget()

@@ -19,7 +19,7 @@ public class CombatActionManager : MonoBehaviour
         }
     }
 
-	public static CombatActionManager instance;
+	public static CombatActionManager instance; 
 	
 	public EnemyCombatActionManager enemyCombatActionManager;
 	public PlayerCombatActionManager playerCombatActionManager;	
