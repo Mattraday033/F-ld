@@ -201,27 +201,32 @@ public static class CombatGrid
             return SelectorManager.findLegalCoordsContainingMandatoryTarget(SelectorManager.currentSelector, targetStats.positions[0]);
         } else
         {
-            List<int> overlappingTiles = new List<int>();
-            int indexWithHighestOverlap = 0;
-            int currentIndex = 0;
-            foreach(GridCoords position in targetStats.positions)
+            return getCoordsWithHighestCoverageOfTargetPositions(targetStats);
+        }
+    }
+
+    public static GridCoords getCoordsWithHighestCoverageOfTargetPositions(Stats targetStats)
+    {
+        List<int> overlappingTiles = new List<int>();
+        int indexWithHighestOverlap = 0;
+        int currentIndex = 0;
+        foreach(GridCoords position in targetStats.positions)
+        {
+            GridCoords legalPosition = SelectorManager.findLegalCoordsContainingMandatoryTarget(SelectorManager.currentSelector, targetStats.positions[0]);
+            Selector clone = SelectorManager.currentSelector.clone();
+            clone.setToLocation(legalPosition, declareSelectors: false);
+
+            overlappingTiles.Add(targetStats.positions.Intersect(clone.getAllSelectorCoords().ToList()).Count());
+
+            if(overlappingTiles[currentIndex] > overlappingTiles[indexWithHighestOverlap])
             {
-                GridCoords legalPosition = SelectorManager.findLegalCoordsContainingMandatoryTarget(SelectorManager.currentSelector, targetStats.positions[0]);
-                Selector clone = SelectorManager.currentSelector.clone();
-                clone.setToLocation(legalPosition);
-
-                overlappingTiles.Add(targetStats.positions.Intersect(clone.getAllSelectorCoords().ToList()).Count());
-
-                if(overlappingTiles[currentIndex] > overlappingTiles[indexWithHighestOverlap])
-                {
-                    indexWithHighestOverlap = currentIndex;
-                }
-
-                currentIndex++;
+                indexWithHighestOverlap = currentIndex;
             }
 
-            return targetStats.positions[indexWithHighestOverlap];
+            currentIndex++;
         }
+
+        return targetStats.positions[indexWithHighestOverlap];
     }
 
     public static void addCombatantToGrid(Stats combatant)

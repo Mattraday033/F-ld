@@ -751,6 +751,23 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         return combatAction.hasAvailableSlots(this);
     }
 
+    public static Selector getSelectorToShowWhileChoosingAbility()
+    {
+        if(CombatStateManager.currentActivity == CurrentActivity.ChoosingAbility &&
+            instance != null && 
+            instance.descriptionPanelSlot != null)
+        {
+            CombatAction action = instance.descriptionPanelSlot.getCurrentDescribables()[0] as CombatAction;
+
+            if(action != null)
+            {
+                return action.getSelector().clone();
+            }
+        } 
+     
+        return null;
+    }
+
     //ICounter
     private void OnEnable()
     {

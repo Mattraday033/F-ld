@@ -103,7 +103,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
             return;
         }
 
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !getTargetStats().isDead() && !useHoverTiles())
+        if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !getTargetStats().isDead())
         {
             revealPriorityHeld = true;
 
@@ -118,6 +118,10 @@ public class CombatantHover : CombatMouseHover, IRevealable
             CombatUIModule.OnHideCombatUI.RemoveListener(getTargetStats().removeOutline);
             CombatUIModule.OnHideCombatUI.AddListener(getTargetStats().removeOutline);
         }
+
+        CombatHoverTileManager.GetHoverSelector.AddListener(getHoverSelector);
+
+        SelectorManager.declareSelectors();
     }
 
     public virtual void OnMouseExit()
@@ -132,7 +136,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
         if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !getTargetStats().isDead())
         {
-            if (getTargetGameObject() != null && !useHoverTiles())
+            if (getTargetGameObject() != null)
             {
                 onReveal(insideSelectors());
             }
@@ -143,6 +147,9 @@ public class CombatantHover : CombatMouseHover, IRevealable
         }
 
         SelectorManager.updateAllDamagePreviews();
+        CombatHoverTileManager.GetHoverSelector.RemoveListener(getHoverSelector);
+
+        SelectorManager.declareSelectors();
     }
 
     public static bool expectedHoveringOverAbilityMenuButtonFlagState = false;
@@ -152,6 +159,22 @@ public class CombatantHover : CombatMouseHover, IRevealable
         expectedHoveringOverAbilityMenuButtonFlagState = AbilityMenuButton.hoveringOverAbilityMenuButton;
     }
 
+    public override void getHoverSelector(SelectorContainer container)
+    {
+        Selector hoverSelector = SelectorManager.currentSelector.clone();
+
+        hoverSelector.hoverSelector = true;
+
+        hoverSelector.setToLocation(CombatGrid.getCoordsWithHighestCoverageOfTargetPositions(linkedStats), declareSelectors: false);
+
+        if(hoverSelector.getCoords().Equals(SelectorManager.getCurrentSelectorCoords()))
+        {
+            return;
+        }
+
+        container.selector = hoverSelector;
+    }
+    
     public void OnMouseOver()
     {
         if(TutorialSequence.blockMouseHovers() || 

@@ -52,8 +52,7 @@ public static class CombatHoverTileManager
 
     public static Selector getHoverSelector()
     {
-        if(CombatStateManager.whoseTurn != WhoseTurn.Player || 
-            CombatStateManager.currentActivity == CurrentActivity.ChoosingAbility)
+        if(CombatStateManager.whoseTurn != WhoseTurn.Player)
         {
             return null;
         }
@@ -61,6 +60,8 @@ public static class CombatHoverTileManager
         SelectorContainer container = new SelectorContainer();
 
         GetHoverSelector.Invoke(container);
+
+        GetHoverSelector.RemoveAllListeners();
 
         return container.selector;
     }

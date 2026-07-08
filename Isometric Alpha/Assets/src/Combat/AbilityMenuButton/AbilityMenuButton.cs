@@ -499,6 +499,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         if (CombatStateManager.inCombat)
         {
             getDescriptionPanelSlot().setTempDescribable(loadedCombatAction);
+            SelectorManager.declareSelectors();
         }
         else
         {
@@ -519,6 +520,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         if (CombatStateManager.inCombat)
         {
             getDescriptionPanelSlot().revertToPrimaryDescribable();
+            SelectorManager.declareSelectors();
         }
         else
         {

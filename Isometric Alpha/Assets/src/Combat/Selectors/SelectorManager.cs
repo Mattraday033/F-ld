@@ -570,7 +570,11 @@ public class SelectorManager : MonoBehaviour
                     AbilityMenuManager.getInstance().getCurrentlySelectedAction() != null && 
                     AbilityMenuManager.getInstance().getCurrentlySelectedAction().getSelector() != null)
                 {
-                    visibleSelectors.Add(AbilityMenuManager.getInstance().getCurrentlySelectedAction().getSelector());
+                    Selector abilitySelector = AbilityMenuManager.getSelectorToShowWhileChoosingAbility();
+                    if(abilitySelector != null)
+                    {
+                        visibleSelectors.Add(abilitySelector);
+                    }
                 }
                 break;
             case CurrentActivity.ChoosingTertiary:

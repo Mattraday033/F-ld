@@ -92,7 +92,7 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
     #endregion
 
-    public void getHoverSelector(SelectorContainer container)
+    public override void getHoverSelector(SelectorContainer container)
     {
         Selector hoverSelector = SelectorManager.currentSelector.clone();
 

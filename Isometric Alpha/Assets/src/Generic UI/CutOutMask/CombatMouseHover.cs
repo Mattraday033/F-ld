@@ -83,14 +83,10 @@ public abstract class CombatMouseHover : MonoBehaviour
         }
     }
 
-    protected bool useHoverTiles()
-    {
-        return CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation && 
-            AbilityMenuManager.getInstance().getCurrentlySelectedAction().targetsOnlyEmptySpace();
-    }
-
     protected abstract Stats getTargetStats();
     protected abstract GridCoords getTargetCoords();
+
+    public abstract void getHoverSelector(SelectorContainer container);
 
     protected bool canMoveToLocation(CombatAction combatAction)
     {
