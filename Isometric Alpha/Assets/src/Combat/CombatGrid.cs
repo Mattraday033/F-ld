@@ -207,26 +207,25 @@ public static class CombatGrid
 
     public static GridCoords getCoordsWithHighestCoverageOfTargetPositions(Stats targetStats)
     {
-        List<int> overlappingTiles = new List<int>();
-        int indexWithHighestOverlap = 0;
-        int currentIndex = 0;
-        foreach(GridCoords position in targetStats.positions)
+        int bestOverlap = 0;
+        GridCoords coordsWithHighestCoveragee = SelectorManager.findLegalCoordsContainingMandatoryTarget(SelectorManager.currentSelector, targetStats.positions[0]);
+
+        for(int i = 0; i < targetStats.positions.Count; i++)
         {
-            GridCoords legalPosition = SelectorManager.findLegalCoordsContainingMandatoryTarget(SelectorManager.currentSelector, targetStats.positions[0]);
+            GridCoords legalPosition = SelectorManager.findLegalCoordsContainingMandatoryTarget(SelectorManager.currentSelector, targetStats.positions[i]);
             Selector clone = SelectorManager.currentSelector.clone();
             clone.setToLocation(legalPosition, declareSelectors: false);
 
-            overlappingTiles.Add(targetStats.positions.Intersect(clone.getAllSelectorCoords().ToList()).Count());
+            int currentOverlap = targetStats.positions.Intersect(clone.getAllSelectorCoords().ToList()).Count();
 
-            if(overlappingTiles[currentIndex] > overlappingTiles[indexWithHighestOverlap])
+            if(bestOverlap < currentOverlap)
             {
-                indexWithHighestOverlap = currentIndex;
+                bestOverlap = currentOverlap;
+                coordsWithHighestCoveragee = legalPosition;
             }
-
-            currentIndex++;
         }
 
-        return targetStats.positions[indexWithHighestOverlap];
+        return coordsWithHighestCoveragee;
     }
 
     public static void addCombatantToGrid(Stats combatant)

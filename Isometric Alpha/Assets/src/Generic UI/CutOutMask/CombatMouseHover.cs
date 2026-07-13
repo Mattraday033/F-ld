@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class CombatMouseHover : MonoBehaviour
 {
+
+    public bool revealPriorityHeld = false;
+
     public void createHoverTag()
     {
         // SelectorManager.displayHoverUI(getTargetStats());
@@ -49,31 +52,36 @@ public abstract class CombatMouseHover : MonoBehaviour
                     break;
                 case CurrentActivity.ChoosingLocation:
 
-                    if (currentSelectorContainsTarget())
-                    {
-                        SelectorManager.handleChoosingLocation();
-                    }
-                    else
-                    {
-                        if (canMoveToLocation(AbilityMenuManager.getInstance().getCurrentlySelectedAction()))
-                        {
-                            moveSelectorToTarget();
-                        }
-                    }
+                    // if (currentSelectorContainsTarget())
+                    // {
+                    //     SelectorManager.handleChoosingLocation();
+                    // }
+                    // else
+                    // {
+                    //     if (canMoveToLocation(AbilityMenuManager.getInstance().getCurrentlySelectedAction()))
+                    //     {
+                    //         moveSelectorToTarget();
+                    //     }
+                    // }
+
+                    moveSelectorToTarget();
+                    SelectorManager.handleChoosingLocation();
                     break;
                 case CurrentActivity.ChoosingTertiary:
 
-                    if (currentSelectorContainsTarget())
-                    {
-                        SelectorManager.handleChoosingTertiary();
-                    }
-                    else
-                    {
-                        if (canMoveToLocation(AbilityMenuManager.getInstance().getCurrentlySelectedAction()))
-                        {
-                            moveSelectorToTarget();
-                        }
-                    }
+                    // if (currentSelectorContainsTarget())
+                    // {
+                    //     SelectorManager.handleChoosingTertiary();
+                    // }
+                    // else
+                    // {
+                    //     if (canMoveToLocation(AbilityMenuManager.getInstance().getCurrentlySelectedAction()))
+                    //     {
+                    //         moveSelectorToTarget();
+                    //     }
+                    // }
+                    moveSelectorToTarget();
+                    SelectorManager.handleChoosingLocation();
                     break;
                 default:
                     break;
@@ -122,6 +130,14 @@ public abstract class CombatMouseHover : MonoBehaviour
         else
         {
             return null;
+        }
+    }
+
+    protected void answerCurrentCombatantPriorityRequest()
+    {
+        if(revealPriorityHeld)
+        {
+            HoverPanelPopUpButton.currentCombatantWithPriority = getTargetStats();
         }
     }
 

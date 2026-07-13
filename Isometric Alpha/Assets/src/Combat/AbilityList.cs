@@ -278,7 +278,7 @@ public static class AbilityList
         //guard abilities
         enemyAbilityDictionary.Add(slashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(slashKey, loreDescription: "The bite of a sword swung quick."), DamageParams.build("8", "5"))));
         enemyAbilityDictionary.Add(bladeBlitzKey, new Ability(CombatActionSettings.build(DescriptionParams.build(bladeBlitzKey, iconName: executeKey, loreDescription: "Two axe strikes, lightning fast."), DamageParams.build("25", "15"), TargetParams.build(SelectorList.horizontalTwoName))));
-        enemyAbilityDictionary.Add(guardSpearKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardSpearKey, loreDescription: "A piercing blow capable of skewering multiple foes."), DamageParams.build("25", "15"), TargetParams.build(SelectorList.verticalOneName), animationParams: AnimationParams.build(EffectAnimationType.Pierce))));
+        enemyAbilityDictionary.Add(guardSpearKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardSpearKey, loreDescription: "A piercing blow capable of skewering multiple targets."), DamageParams.build("25", "15"), TargetParams.build(SelectorList.verticalOneName), animationParams: AnimationParams.build(EffectAnimationType.Pierce))));
         enemyAbilityDictionary.Add(guardAxeKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardAxeKey, loreDescription: "A wide sweep from a sharp axe."), DamageParams.build("23", "10"), TargetParams.build(SelectorList.horizontalTwoName))));
         enemyAbilityDictionary.Add(guardArrowBarrageKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardArrowBarrageKey, loreDescription: "A hail of deadly missles called from nearby arrow towers."), DamageParams.build("32", "15"))));
         enemyAbilityDictionary.Add(guardJavelinKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardJavelinKey, loreDescription: "A missile aimed right at your heart."), DamageParams.build("17", "5"), TargetParams.build(SelectorList.verticalOneName))));
@@ -348,7 +348,7 @@ public static class AbilityList
 		statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(strengthKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Make It Bleed", iconName: "MakeItBleed", useDescription: "The enemy takes initial damage and every hit the enemy takes for the rest of combat deals additional damage.", loreDescription: "You impale, bludgeon, or slash your enemy to the point of massive hemorrhaging."), DamageParams.build("3S + D", "D"), TargetParams.build(SelectorList.boxOneName), FrequencyParams.build(twoSlotMax, fiveRoundCooldown), animationParams: AnimationParams.build(EffectAnimationType.Blunt), appliedTrait: TraitList.wounded)));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Make It Bleed", iconName: "MakeItBleed", useDescription: "The enemy takes initial damage and every hit the enemy takes for the rest of Combat deals additional damage.", loreDescription: "You impale, bludgeon, or slash your enemy to the point of massive hemorrhaging."), DamageParams.build("3S + D", "D"), TargetParams.build(SelectorList.boxOneName), FrequencyParams.build(twoSlotMax, fiveRoundCooldown), animationParams: AnimationParams.build(EffectAnimationType.Blunt), appliedTrait: TraitList.wounded)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(strengthKeyChar);
@@ -425,11 +425,11 @@ public static class AbilityList
         //start of Cha Abilities
 
         currentKey = generateAbilityKey(charismaKeyChar);
-        statAbilityDictionary.Add(currentKey, new PassiveAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(exuberanceName, useDescription: "Use the energies accumulated by yourself and your allies to activate abilities in combat:\n\nRed Knife: "+redKnifeAcquisitionMethodExplanation+"\n\nBlue Shield: "+blueShieldAcquisitionMethodExplanation+"\n\nYellow Thorn: "+yellowThornAcquisitionMethodExplanation+"\n\nGreen Leaf: "+greenLeafAcquisitionMethodExplanation, iconName: IconList.allExuberancesIconName))));
+        statAbilityDictionary.Add(currentKey, new PassiveAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(exuberanceName, useDescription: "Use the energies accumulated by yourself and your allies to activate abilities in Combat:\n\nRed Knife: "+redKnifeAcquisitionMethodExplanation+"\n\nBlue Shield: "+blueShieldAcquisitionMethodExplanation+"\n\nYellow Thorn: "+yellowThornAcquisitionMethodExplanation+"\n\nGreen Leaf: "+greenLeafAcquisitionMethodExplanation, iconName: IconList.allExuberancesIconName))));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(charismaKeyChar);
-        statAbilityDictionary.Add(currentKey, new ExuberanceEquippedPassive(CombatActionSettings.build(currentKey, DescriptionParams.build(unflinchingName, useDescription: "You are fearless in battle, and your companions know it. Gain "+fourStackBonus+" stacks of the Red Knife Exuberance at the start of every combat.", iconName: "Red Knife")), MultiStackProcType.RedKnife, fourStackBonus));	
+        statAbilityDictionary.Add(currentKey, new ExuberanceEquippedPassive(CombatActionSettings.build(currentKey, DescriptionParams.build(unflinchingName, useDescription: "You are fearless in battle, and your companions know it. Gain "+fourStackBonus+" stacks of the Red Knife Exuberance at the start of every Combat.", iconName: "Red Knife")), MultiStackProcType.RedKnife, fourStackBonus));	
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = "c-2-3";
@@ -437,7 +437,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		currentKey = generateAbilityKey(charismaKeyChar);
-        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Victimize", useDescription: "Affected targets will take more damage from allied attacks. Costs 2 Red Knife stack and 1 Blue Shield stack.", loreDescription: "Your words ring out over the din of combat, alerting your allies to exploitable weaknesses."), targetParams: TargetParams.build(SelectorList.boxOneName), frequencyParams: FrequencyParams.build(oneSlotMax, threeRoundCooldown), costParams: CostParams.build(new ActionCostType[] { ActionCostType.RedKnife , ActionCostType.BlueShield }, new int[] { twoStackCastCost, oneStackCastCost }), appliedTrait: TraitList.insecure)));
+        statAbilityDictionary.Add(currentKey, new Ability(CombatActionSettings.build(currentKey, DescriptionParams.build("Victimize", useDescription: "Affected targets will take more damage from allied attacks. Costs 2 Red Knife stack and 1 Blue Shield stack.", loreDescription: "Your words ring out over the din of Combat, alerting your allies to exploitable weaknesses."), targetParams: TargetParams.build(SelectorList.boxOneName), frequencyParams: FrequencyParams.build(oneSlotMax, threeRoundCooldown), costParams: CostParams.build(new ActionCostType[] { ActionCostType.RedKnife , ActionCostType.BlueShield }, new int[] { twoStackCastCost, oneStackCastCost }), appliedTrait: TraitList.insecure)));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(charismaKeyChar);
@@ -449,7 +449,7 @@ public static class AbilityList
         // statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		currentKey = "c-3-3";
-        statAbilityDictionary.Add(currentKey, new ExuberanceEquippedPassive(CombatActionSettings.build(currentKey, DescriptionParams.build(versatileName, iconName: "Blue Shield", useDescription: "Your companions have come to rely on you in a variety of situations. Gain "+oneStackBonus+" stack of each Exuberance type at the start of every combat.")), new MultiStackProcType[] { MultiStackProcType.RedKnife, MultiStackProcType.BlueShield, MultiStackProcType.YellowThorn, MultiStackProcType.GreenLeaf}, new int[]{oneStackCastCost,oneStackCastCost,oneStackCastCost,oneStackCastCost}));	
+        statAbilityDictionary.Add(currentKey, new ExuberanceEquippedPassive(CombatActionSettings.build(currentKey, DescriptionParams.build(versatileName, iconName: "Blue Shield", useDescription: "Your companions have come to rely on you in a variety of situations. Gain "+oneStackBonus+" stack of each Exuberance type at the start of every Combat.")), new MultiStackProcType[] { MultiStackProcType.RedKnife, MultiStackProcType.BlueShield, MultiStackProcType.YellowThorn, MultiStackProcType.GreenLeaf}, new int[]{oneStackCastCost,oneStackCastCost,oneStackCastCost,oneStackCastCost}));	
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		currentKey = generateAbilityKey(charismaKeyChar);

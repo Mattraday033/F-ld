@@ -81,58 +81,58 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 
 	public override void OnPointerEnter(PointerEventData eventData)
 	{
-		// if (CombatStateManager.currentActivity == CurrentActivity.Waiting ||
-		// 	CombatStateManager.currentActivity == CurrentActivity.Retreating)
-		// {
-		// 	return;
-		// }
+		if (CombatStateManager.currentActivity == CurrentActivity.Waiting ||
+			CombatStateManager.currentActivity == CurrentActivity.Retreating)
+		{
+			return;
+		}
 
-		// CombatAction actionBeingDescribed = getCombatActionBeingDescribed();
+		CombatAction actionBeingDescribed = getCombatActionBeingDescribed();
 
-        // if(actionBeingDescribed != null &&
-        //     actionBeingDescribed.getActorStats() != null &&
-        //     actionBeingDescribed.getActorStats().positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
-        // {
-		//     rowBackground.color = Color.green;
-        // } else
-        // {
-		//     rowBackground.color = Color.red;
-        // }
+        if(actionBeingDescribed != null &&
+            actionBeingDescribed.getActorStats() != null &&
+            actionBeingDescribed.getActorStats().positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
+        {
+		    rowBackground.color = Color.green;
+        } else
+        {
+		    rowBackground.color = Color.red;
+        }
 
-		// actionBeingDescribed.highlightActorSprites();
-
-		// if (actionBeingDescribed.getRangeName() != null)
-		// {
-		// 	targetDisplaySelector = Instantiate(actionBeingDescribed.getSelector().getSelectorObject(), CombatUI.selectorParent);
-
-		// 	targetDisplaySelector.transform.position = actionBeingDescribed.getTargetPosition();
-
-		// 	targetDisplaySelector.SetActive(true);
-		// }
-
-		// if (actionBeingDescribed.requiresTertiaryCoords())
-		// {
-		// 	tertiaryDisplaySelector = Instantiate(SelectorList.getByName(actionBeingDescribed.getRangeName()).getSelectorObject(), CombatUI.selectorParent);
-
-		// 	tertiaryDisplaySelector.transform.position = actionBeingDescribed.getTertiaryPosition();
-		// 	tertiaryDisplaySelector.GetComponent<SpriteRenderer>().color = Selector.secondaryColor;
-
-		// 	tertiaryDisplaySelector.SetActive(true);
-		// }
+        CombatHoverTileManager.GetHoverSelector.AddListener(getHoverSelector);
+        SelectorManager.declareSelectors();
+        
+		actionBeingDescribed.highlightActorSprites();
 	}
  
  
     public override void OnPointerExit(PointerEventData eventData)
     {
-        // if (CombatStateManager.currentActivity == CurrentActivity.Waiting ||
-		// 	CombatStateManager.currentActivity == CurrentActivity.Retreating ||
-        //     InspectNode.inspecting)
-        // {
-        //     return;
-        // }
+        if (CombatStateManager.currentActivity == CurrentActivity.Waiting ||
+			CombatStateManager.currentActivity == CurrentActivity.Retreating ||
+            InspectNode.inspecting)
+        {
+            return;
+        }
 
-		// removeHoverDataFromScreen();
+		removeHoverDataFromScreen();
 	}
+
+    public void getHoverSelector(SelectorContainer container)
+    {
+        CombatAction combatAction = getCombatActionBeingDescribed();
+
+        if(combatAction == null)
+        {
+            return;
+        }
+
+        Selector hoverSelector = combatAction.getSelector().clone();
+
+        hoverSelector.alwaysRed = true;
+
+        container.selector = hoverSelector;
+    }
 
 	public void removeHoverDataFromScreen()
 	{
@@ -147,24 +147,7 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 		
 		actionBeingDescribed.removeHighlightFromActorSprites();
 
-		if(actionBeingDescribed.getRangeName() != null)
-		{
-			destroySelectors();
-		}
-	}
-
-	public void destroySelectors()
-	{
-		if (targetDisplaySelector != null)
-		{
-			GameObject.Destroy(targetDisplaySelector);
-			targetDisplaySelector = null;
-		}
-
-		if (tertiaryDisplaySelector != null)
-		{
-			GameObject.Destroy(tertiaryDisplaySelector);
-			tertiaryDisplaySelector = null;
-		}
+        CombatHoverTileManager.GetHoverSelector.RemoveListener(getHoverSelector);
+        SelectorManager.declareSelectors();
 	}
 }

@@ -67,7 +67,7 @@ public class GlossaryCategory: IDescribable, IJournalCategory
 		DescriptionPanel.setText(panel.nameText, getName());
 	}
 
-	public void describeSelfRow(DescriptionPanel panel)
+	public virtual void describeSelfRow(DescriptionPanel panel)
 	{
 		panel.setObjectBeingDescribed(this);
 

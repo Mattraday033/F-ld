@@ -61,8 +61,6 @@ public static class CombatHoverTileManager
 
         GetHoverSelector.Invoke(container);
 
-        GetHoverSelector.RemoveAllListeners();
-
         return container.selector;
     }
 

@@ -1283,11 +1283,11 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         switch (saveType)
         {
             case (int)CombatActionSaveType.Attack:
-                return (CombatAction)new Attack(statsSource, (Weapon)SaveBlueprint.convertJsonToItem(json));
+                return new Attack(statsSource, (Weapon)SaveBlueprint.convertJsonToItem(json));
             case (int)CombatActionSaveType.Ability:
                 return AbilityList.getAbility(statsSource, kvps[0].Split(":")[1]);
             case (int)CombatActionSaveType.ItemCombatAction:
-                return (CombatAction)new ItemCombatAction(statsSource, (UsableItem)SaveBlueprint.convertJsonToItem(json));
+                return new ItemCombatAction(statsSource, (UsableItem)SaveBlueprint.convertJsonToItem(json));
             default:
                 return null;
         }
@@ -1296,14 +1296,15 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
     public static List<GlossaryEntry> getAllActionTypeGlossaryEntries()
     {
         List<GlossaryEntry> allActionTypesGlossaryEntries = new List<GlossaryEntry>();
-
-        allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Ability", "Action Types", "An Action gained through leveling up. Abilities are the only type of Action that benefits from your Bonus Damage. Every time you level up and raise your Primary Stats, you will gain at least two new Abilities. Remember to add your new Abilities to your Action Wheel, or else you won't be able to use them in Combat."));
-        allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Attack", "Action Types", "Attacks are gained by equipping Weapons to the Action Wheel. Attacks never have a cooldown, and the amount of Action Wheel Slots you can use for Attacks is determined by your Wisdom. An Attack acquired from a one handed weapon will add your off hand weapon's damage to it's damage. Using an Attack from a two handed weapon will not add your off hand weapon's damage, and will remove your shield's armor bonus for the rest of the turn."));
-        allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Item", "Action Types", "Item Actions are gained by equipping Usable Items to the Action Wheel. Some Item Actions can be performed before the end of a Round, such as Bandages, allowing you to use them and still use another Action that turn. Most Item Actions destroy the Item after use. Item's rarely have a cooldown, but some do."));
-        allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Passive", "Action Types", "Passive Abilities are Abilities that provide a constant effect without requiring activation. Unlike all other Action Types, Passives do not need to be equipped to the Action Wheel to be benefited from."));
-        allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Equipped Passive", "Action Types", "An Equipped Passive is an Ability that generates a unique Trait at the start of Combat. Unlike normal Passive Abilities, Equipped Passives must be added to your Action Wheel to benefit from them. The Traits Equipped Passives generate are permanent, so long as the Equipped Passive remains on your Action Wheel."));
-        allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Skill", "Action Types", "Skills are Actions that are used out of combat. They cannot be added to the Action Wheel, but instead are activated using the 1-4 keys while moving around the overworld. Their ranges are measured in tiles away from the player, and they often have a limited number of uses per area."));
-
+        
+        allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("What is an Action?", "Action Types", "Actions are maneuvers your Character can perform, usually during Combat. An Action must be placed on the Action Wheel for it to be available for use during Combat. The Action Wheel can be found on the Character Screen. Many Actions cannot be used each turn, and take time to cool down before they can be used again. Some Actions can be placed on the Action Wheel multiple times, with separate cool down periods for each slot. A Character can learn new Actions by leveling up, increasing their Primary Stats, equipping Weapons and Items, and by completing certain Quests."));
+        
+        allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Ability", "Action Types", "Abilities are Actions a Character can learn by reaching certain Character Level or Primary Stat thresholds.\n\nAbilities are the only type of Action that benefits from your Bonus Damage.\n\nEvery time you level up and raise your Primary Stats, you will gain at least two new Abilities.\n\nRemember to add your new Abilities to your Action Wheel after leveling up, or else you won't be able to use them in Combat."));
+        allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Attack", "Action Types", "Attacks are gained by equipping Weapons to the Action Wheel.\n\nAttacks never have a cooldown, and the amount of Action Wheel Slots a Character can fill with Attacks is determined by their Wisdom.\n\nAn Attack acquired from a One-Handed Weapon will add any equipped Off-Hand Weapon's damage to its damage.\n\nUsing an Attack from a Two-Handed Weapon will not add a Character's Off-Hand Weapon's damage, and will remove any benefits gained from an Item held in the Off-Hand for the rest of the turn."));
+        allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Item", "Action Types", "Item Actions are gained by equipping Usable Items to the Action Wheel.\n\nSome Item Actions can be performed before the end of a Round, such as Bandages, allowing you to use them and still use another Action that turn.\n\nMost Item Actions destroy the Item after use.\n\nItem Actions rarely have a cooldown, but some do."));
+        allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Passive", "Action Types", "Passive Abilities are Abilities that provide a constant effect without requiring activation.\n\nUnlike all other Action Types, Passive Abilities do not need to be equipped to the Action Wheel for a Character to receive their benefits."));
+        allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Equipped Passive", "Action Types", "An Equipped Passive is an Ability that generates a unique Trait at the start of Combat.\n\nUnlike normal Passive Abilities, Equipped Passives must be added to your Action Wheel to benefit from them.\n\nThe Traits Equipped Passives generate are permanent, so long as the Equipped Passive remains on your Action Wheel."));
+        allActionTypesGlossaryEntries.Add(new WrittenGlossaryEntry("Skill", "Action Types", "Skills are Actions that are used out of combat.\n\nThey cannot be added to the Action Wheel, but instead can be activated while moving around the overworld.\n\nA Skill's Range is measured in tiles away from your Character, and Skills often have a limited number of uses."));
 
         return allActionTypesGlossaryEntries;
     }

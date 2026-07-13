@@ -20,7 +20,7 @@ public class MouseHoverBase : MonoBehaviour
     {
         Vector3 mousePos = Input.mousePosition;
 
-        baseRectTransform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
+        baseRectTransform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane+1f));
     }
 
     public static IEnumerator revealWhenReady(CanvasGroup canvasGroup)

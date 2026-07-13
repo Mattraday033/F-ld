@@ -37,7 +37,7 @@ public static class Range
 
 		foreach(Selector selector in SelectorList.selectorDict.Values)
 		{
-            if(selector.name.Equals(SelectorList.playerCursor))
+            if(selector.name.Equals(SelectorList.playerCursor.name))
             {
                 continue;
             }

@@ -17,6 +17,8 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
     private bool inVisibleSelector = false;
 
+    private bool queueMouseOver = false;
+
     private bool _WaitingOnMouseUp = false;
     private bool waitingOnMouseUp
     {
@@ -41,11 +43,13 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
     private void OnEnable()
     {
         SelectorManager.SelectorMoved.AddListener(determineVisbility);
+        HoverPanelPopUpButton.HoverPriorityRequest.AddListener(answerCurrentCombatantPriorityRequest);
     }
 
     private void OnDisable()
     {
         SelectorManager.SelectorMoved.RemoveListener(determineVisbility);
+        HoverPanelPopUpButton.HoverPriorityRequest.RemoveListener(answerCurrentCombatantPriorityRequest);
     }
 
     #region
@@ -123,6 +127,15 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
         CombatHoverTileManager.GetHoverSelector.AddListener(getHoverSelector);
 
+        SelectorManager.updateAllDamagePreviews();
+
+        if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !getTargetStats().isDead())
+        {
+            revealPriorityHeld = true;
+            createHoverTag();
+            CombatActionOrderRow.HighlightRow.Invoke(getTargetStats(), true);
+        }
+
         SelectorManager.declareSelectors();
     }
 
@@ -136,7 +149,33 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
         CombatHoverTileManager.GetHoverSelector.RemoveListener(getHoverSelector);
 
+        SelectorManager.updateAllDamagePreviews();
+        
+        if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !getTargetStats().isDead())
+        {
+            revealPriorityHeld = false;
+            SelectorManager.displayCurrentHoverUI();
+            CombatActionOrderRow.HighlightRow.Invoke(getTargetStats(), false);
+        }
+
         SelectorManager.declareSelectors();
+    }
+
+    public void OnMouseOver() 
+    {
+        if(CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+        {
+            return;
+        } else if(AbilityMenuButton.hoveringOverAbilityMenuButton)
+        {
+            queueMouseOver = true;
+        }
+
+        if(queueMouseOver && !AbilityMenuButton.hoveringOverAbilityMenuButton)
+        {
+            queueMouseOver = false;
+            OnMouseEnter();
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)

@@ -39,7 +39,7 @@ public static class SelectorList
     #region Selectors
 
     private static readonly Selector _PlayerCursor = new Selector(
-        name: singleName,
+        name: playerCursorName,
         width: 1,
         height: 1,
         startingCoords: new GridCoords(1, 1),

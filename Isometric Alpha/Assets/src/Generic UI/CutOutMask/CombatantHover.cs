@@ -12,7 +12,6 @@ public class CombatantHover : CombatMouseHover, IRevealable
     private const float timeToWaitFull = .5f;
     private const float timeToWaitFade = 1f;
 
-    public bool revealPriorityHeld = false;
     public Stats linkedStats;
     private List<Selector> selectors = new List<Selector>();
 
@@ -286,14 +285,6 @@ public class CombatantHover : CombatMouseHover, IRevealable
         if(revealPriorityHeld || linkedStats.isInsideCoordinates(combatAction.getSelector().getAllSelectorCoords()))
         {
             DamagePreviewManager.addDamagePreview(linkedStats, linkedStats.healthBarManager, combatAction);
-        }
-    }
-
-    private void answerCurrentCombatantPriorityRequest()
-    {
-        if(revealPriorityHeld)
-        {
-            HoverPanelPopUpButton.currentCombatantWithPriority = linkedStats;
         }
     }
 

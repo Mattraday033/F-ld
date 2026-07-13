@@ -381,15 +381,6 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
                 if (isSelected() && !loadedCombatAction.getActionCostTypes().Contains(ActionCostType.None))
                 {
                     setAllActionCosts(loadedCombatAction.getActionCostTypes(), loadedCombatAction.getActionCosts());
-
-                    // if (casterCanPayActionCost())
-                    // {
-                    //     cooldownCostText.color = ColorList.costPayableColor;
-                    // }
-                    // else
-                    // {
-                    //     cooldownCostText.color = ColorList.costNotPayableColor;
-                    // }
                 }
                 else
                 {
@@ -499,6 +490,13 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         if (CombatStateManager.inCombat)
         {
             getDescriptionPanelSlot().setTempDescribable(loadedCombatAction);
+
+            if (!loadedCombatAction.getActionCostTypes().Contains(ActionCostType.None))
+            {
+                setAllActionCosts(loadedCombatAction.getActionCostTypes(), loadedCombatAction.getActionCosts());
+            }
+
+            CombatHoverTileManager.GetHoverSelector.RemoveAllListeners();
             SelectorManager.declareSelectors();
         }
         else
@@ -520,6 +518,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         if (CombatStateManager.inCombat)
         {
             getDescriptionPanelSlot().revertToPrimaryDescribable();
+            destroyAllCostIcons();
             SelectorManager.declareSelectors();
         }
         else

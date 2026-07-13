@@ -689,6 +689,16 @@ public class SelectorManager : MonoBehaviour
         if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation && AbilityMenuManager.getInstance() != null)
         {
             DamagePreviewManager.UpdateDamagePreviews.Invoke(AbilityMenuManager.getInstance().getCurrentlySelectedAction());
+
+            Selector hoverSelector = CombatHoverTileManager.getHoverSelector();
+
+            if(hoverSelector != null)
+            {
+                CombatAction actionClone = AbilityMenuManager.getInstance().getCurrentlySelectedAction().clone();
+                actionClone.setSelector(hoverSelector);
+
+                DamagePreviewManager.UpdateDamagePreviews.Invoke(actionClone);
+            }
         } 
     }
 
@@ -812,7 +822,7 @@ public class SelectorManager : MonoBehaviour
 		{
 			for (int colIndex = 0; colIndex <= CombatGrid.colRightBounds; colIndex++)
 			{
-				cloneSelector.setToLocation(new GridCoords(rowIndex, colIndex));
+				cloneSelector.setToLocation(new GridCoords(rowIndex, colIndex), declareSelectors: false);
 
 				if (cloneSelector.allTilesAreLegal() && cloneSelector.containsTarget(mandatoryPosition))
 				{

@@ -13,6 +13,19 @@ public class Selector : ICloneable
 	public bool alwaysRed = false;
     public bool hoverSelector = false;
 
+    private bool _Visible = true;
+    public bool visible
+    {
+        private set
+        {
+            _Visible = value;
+        }
+        get
+        {
+            return _Visible;
+        }
+    }
+
 	public bool selfTargeting = false;
 	
     private GridCoords _StartingCoords;
@@ -173,9 +186,10 @@ public class Selector : ICloneable
         rect.x = coords.col;
         rect.y = coords.row;
 
-        if(declareSelectors)
+        if(declareSelectors && visible)
         {
             SelectorManager.declareSelectors();
+            // CombatHoverTileManager.GetHoverSelector.RemoveAllListeners();
         }
 	}
 	
@@ -399,6 +413,7 @@ public class Selector : ICloneable
 		Selector selectorClone = (Selector) Clone();
 
         selectorClone.startingCoords = startingCoords.clone();
+        selectorClone.visible = false;
 
 		return selectorClone;
 	}

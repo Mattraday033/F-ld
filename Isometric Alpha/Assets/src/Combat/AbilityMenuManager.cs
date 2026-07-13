@@ -73,7 +73,6 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
     public virtual void Awake()
     {
-
         foreach (AbilityMenuButton button in abilityButtons)
         {
             button.setAbilityMenuManager(this);
@@ -325,6 +324,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
             getCurrentlySelectedAbilityMenuButton().enableCombatActionSelectorPreview();
             CurrentActionHoverPanelManager.addPrimaryDescriptionPanel(getCurrentlySelectedAction());
             getCurrentlySelectedAction().getSelector().setToStartLocation();
+            SelectorManager.declareSelectors();
         }
     }
 
@@ -755,7 +755,8 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
     {
         if(CombatStateManager.currentActivity == CurrentActivity.ChoosingAbility &&
             instance != null && 
-            instance.descriptionPanelSlot != null)
+            instance.descriptionPanelSlot != null && 
+            instance.descriptionPanelSlot.getCurrentDescribables() != null)
         {
             CombatAction action = instance.descriptionPanelSlot.getCurrentDescribables()[0] as CombatAction;
 
@@ -766,6 +767,21 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         } 
      
         return null;
+    }
+
+    private void hideMenuDuringEscape()
+    {
+        if(enabled)
+        {
+            CombatStateManager.OnActivityChangeFromInEscapeMenu.AddListener(showMenuAfterEscape);
+            abilityButtonCanvas.SetActive(false);
+        }
+    }
+
+    private void showMenuAfterEscape()
+    {
+        abilityButtonCanvas.SetActive(true);
+        CombatStateManager.OnActivityChangeFromInEscapeMenu.RemoveAllListeners();
     }
 
     //ICounter
@@ -816,6 +832,11 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         {
             unityEvent.AddListener(updateCounter);
         }
+
+        if(CombatStateManager.inCombat)
+        {
+            CombatStateManager.OnActivityChangeToInEscapeMenu.AddListener(hideMenuDuringEscape);
+        }
     }
     public void removeListeners()
     {
@@ -824,6 +845,11 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         foreach(UnityEvent unityEvent in listOfEvents)
         {
             unityEvent.RemoveListener(updateCounter);
+        }
+
+        if(CombatStateManager.inCombat)
+        {
+            CombatStateManager.OnActivityChangeToInEscapeMenu.RemoveListener(hideMenuDuringEscape);
         }
     }
 

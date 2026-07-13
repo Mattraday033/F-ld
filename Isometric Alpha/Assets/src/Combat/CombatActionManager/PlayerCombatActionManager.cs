@@ -127,7 +127,7 @@ public class PlayerCombatActionManager : MonoBehaviour
 		
 		Selector targetSelector = action.getSelector().clone();
 		
-		targetSelector.setToLocation(action.getTargetCoords());
+		targetSelector.setToLocation(action.getTargetCoords(), declareSelectors: false);
 		
 		action.setSelector((Selector) targetSelector.Clone());
 		
